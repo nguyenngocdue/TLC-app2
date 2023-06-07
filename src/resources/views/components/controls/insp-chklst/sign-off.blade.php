@@ -18,60 +18,66 @@
         </div>
         
     </x-renderer.card>
-    <div class="flex justify-center">
-        <div class="p-4">
-            @php $index = 0; @endphp
-            @foreach($signatures as $signature)
-                {{-- @dump($signature) --}}
-                {{$debug?"signatures[$index][id]":""}}
-                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]" value="{{$signature['id']}}">
-                {{-- {{$debug?"signatures[$index][owner_id]":""}}
-                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$signature['owner_id']}}"> --}}
-                {{$debug?"signatures[$index][qaqc_insp_chklst_sht_id]":""}}
-                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
-                <div class="text-right">
-                    <div class="w-[340px] h-36">
-                        <x-controls.signature2 
-                            name="signatures[{{$index}}][value]"
-                            value="{{$signature['value']}}"
-                            signedPersonId="{{$signature['owner_id']}}"
-                            updatable="{{$signature['updatable']}}"
-                        />
-                    </div>
-                    <div>
-                        <x-controls.insp-chklst.name-position :user="$signature['user']" />                        
-                    </div>
-                </div>
-            @php $index ++; @endphp
-            @endforeach
-            @if($isRequestedToSign0)
-                @if(!$alreadySigned)
-                    <div class="text-right p-2 rounded bg-lime-50">
-                        {{$debug?"signatures[$index][id]":""}}
-                        <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]">
-                        {{-- {{$debug?"signatures[$index][owner_id]":""}} --}}
-                        {{-- <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$currentUser['id']}}"> --}}
-                        {{$debug?"signatures[$index][qaqc_insp_chklst_sht_id]":""}}
-                        <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
-                        <div class="w-[340px] h-36">
-                            <x-controls.signature2 
-                                name="signatures[{{$index}}][value]"
-                                ownerIdColumnName="signatures[{{$index}}][owner_id]"
-                                value=""
-                                signedPersonId=""
-                            />
-                        </div>
-                        <div>
-                            <x-controls.insp-chklst.name-position :user="$currentUser" />                        
-                    </div>
-                @else
-                    <x-feedback.alert type="success" titleless=1 message="You have signed off this document." />
-                @endif
-            @else 
-                <x-feedback.alert type="info" titleless=1 message="You are not requested to sign off this document." />
-            @endif
+    @php $index = 0; @endphp
+    @foreach($signatures as $signature)
+    {{-- @dump($signature) --}}
+    <div class="w-full bg-lime-100 flex justify-center my-2">
+        <div class="text-right p-2 rounded w-1/2">
+            {{$debug?"signatures[$index][id]":""}}
+            <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]" value="{{$signature['id']}}">
+            {{$debug?"signatures[$index][qaqc_insp_chklst_sht_id]":""}}
+            <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
+            <div class="w-[340px] h-36">
+                <x-controls.signature2 
+                    name="signatures[{{$index}}][value]"
+                    value="{{$signature['value']}}"
+                    signedPersonId="{{$signature['owner_id']}}"
+                    updatable="{{$signature['updatable']}}"
+                />
+            </div>
+            <div>
+                <x-controls.insp-chklst.name-position :user="$signature['user']" subText="Signed at {{$signature['user']['timestamp']}}"/>                        
+            </div>
         </div>
     </div>
+    @php $index ++; @endphp
+    @endforeach
+    {{-- Awaiting for sign off --}}
+    @foreach($remindList as $user)
+    <div class="w-full bg-red-100 flex justify-center my-1">
+        <div class="text-right p-2 rounded w-1/2">
+                <div class="my-2">
+                    <x-controls.insp-chklst.name-position :user="$user['full']" subText="Has not signed yet"/>  
+                </div>
+            </div>
+        </div>
+            @endforeach
+    @if($isRequestedToSign0)
+        @if(!$alreadySigned)
+        <div class="w-full bg-blue-100 flex justify-center my-2">
+            <div class="text-right p-2 rounded w-1/2">
+                {{$debug?"signatures[$index][id]":""}}
+                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]" value="">
+                {{$debug?"signatures[$index][qaqc_insp_chklst_sht_id]":""}}
+                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
+                <div class="w-[340px] h-36">
+                    <x-controls.signature2 
+                        name="signatures[{{$index}}][value]"
+                        ownerIdColumnName="signatures[{{$index}}][owner_id]"
+                        value=""
+                        signedPersonId=""
+                    />
+                </div>
+                <div>
+                    <x-controls.insp-chklst.name-position :user="$currentUser" subText="Current timestamp will be applied"/>                        
+            </div>
+        </div>
+        @else
+            {{-- <x-feedback.alert type="success" titleless=1 message="You have signed off this document." /> --}}
+        @endif
+    @else 
+        {{-- <x-feedback.alert type="info" titleless=1 message="You are not requested to sign off this document." /> --}}
+    @endif
 </x-renderer.card>
 
 <script>

@@ -41,10 +41,12 @@ class SignOff extends Component
         $signed = $signatures->map(fn ($s) => $s['owner_id']);
         // dump($signed);
         $signedArr =  $signed->toArray();
-        $unsigned = $nominatedApprovers->filter(fn ($item) => !in_array($item->id, $signedArr));
+        $notYetSigned = $nominatedApprovers->filter(fn ($item) => !in_array($item->id, $signedArr));
         $result = [];
-        foreach ($unsigned as $person) {
-            $result[$person->id] = $person->name . " - " . $person->email;
+        foreach ($notYetSigned as $person) {
+            $result[$person->id]['short'] = $person->name . " - " . $person->email;
+            $person->avatar = $person->getAvatarThumbnailUrl();
+            $result[$person->id]['full'] = $person;
         }
 
         return $result;
@@ -82,7 +84,7 @@ class SignOff extends Component
                 'position_rendered' => $user['position_rendered'],
                 'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $signature['created_at']),
             ];
-            $signature['updatable'] = $user['id'] == $currentUser->id;
+            $signature['updatable'] = ($user['id'] == $currentUser->id);
         }
         $currentUserObject = [
             'id' => $currentUser->id,
@@ -95,12 +97,12 @@ class SignOff extends Component
         ];
         // dd($currentUser);
         $remindList = $this->getRemindList($nominatedApprovers, $signatures);
-        // dump($remindList);
         $people = [];
         $index = 0;
         foreach ($remindList as $person) {
-            $people[] = (++$index) . ". " . $person;
+            $people[] = (++$index) . ". " . $person['short'];
         }
+        // dd($people);
 
         $alreadySigned = $this->alreadySigned($signatures, $currentUser);
         $isRequestedToSign0 = $this->isRequestedToSign($nominatedApprovers, $currentUser);
