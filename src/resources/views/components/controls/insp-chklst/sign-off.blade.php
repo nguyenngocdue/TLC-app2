@@ -2,7 +2,7 @@
     <div class="bg-amber-300 rounded-t p-2">
         <p>Third Party Sign Off</p>
     </div>
-    <x-renderer.card title="Nominated Approvers" class='border mx-4'>
+    <x-renderer.card title="Nominated Approvers" class='border1 mx-4'>
         <div class="grid grid-cols-12 gap-1">
             <div class="col-span-12 md:col-span-9">
                 <x-controls.has-data-source.dropdown2 type={{$type}} name='getSignOff()' :selected="$selected" multiple={{true}}  />
@@ -23,8 +23,11 @@
             @php $index = 0; @endphp
             @foreach($signatures as $signature)
                 {{-- @dump($signature) --}}
+                {{$debug?"signatures[$index][id]":""}}
                 <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]" value="{{$signature['id']}}">
-                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$signature['owner_id']}}">
+                {{-- {{$debug?"signatures[$index][owner_id]":""}}
+                <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$signature['owner_id']}}"> --}}
+                {{$debug?"signatures[$index][qaqc_insp_chklst_sht_id]":""}}
                 <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
                 <div class="text-right">
                     <div class="w-96 h-36">
@@ -43,12 +46,16 @@
             @if($isRequestedToSign0)
                 @if(!$alreadySigned)
                     <div class="text-right p-2 rounded bg-lime-50">
+                        {{$debug?"signatures[$index][id]":""}}
                         <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]">
-                        <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$currentUser['id']}}">
+                        {{-- {{$debug?"signatures[$index][owner_id]":""}} --}}
+                        {{-- <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$currentUser['id']}}"> --}}
+                        {{$debug?"signatures[$index][qaqc_insp_chklst_sht_id]":""}}
                         <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
                         <div class="w-96 h-36">
                             <x-controls.signature2 
                                 name="signatures[{{$index}}][value]"
+                                ownerIdColumnName="signatures[{{$index}}][owner_id]"
                                 value=""
                             />
                         </div>

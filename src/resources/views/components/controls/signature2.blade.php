@@ -22,18 +22,23 @@
          style="touch-action: none; user-select: none;" >
         </canvas>
     </div>
-    <input name="{{$name}}" id="{{$name}}" value='{!! $value !!}' class="border w-full" type="{{$input_or_hidden}}">
+    {{$debug ? $name : ""}}
+    <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$name}}" id="{{$name}}" value='{!! $value !!}' />
+    
+    {{$debug ? $ownerIdColumnName : ""}}
+    <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$ownerIdColumnName}}" id="{{$ownerIdColumnName}}" />
 </div>
 
 @once
 <script>
-function registerSignature(name, count){
+function registerSignature(name, count, ownerIdColumnName, cuid){
     const signaturePad = new SignaturePad(getEById("canvas_"+name)[0])
     $("#btnReset1_" + count).click(function(){
         // console.log("Reset 1 clicked")
         getEById('div2'+name).show()
         getEById('div1'+name).hide()
         getEById(name).val('')
+        getEById(ownerIdColumnName).val('')
         // $('#div2'+name).show()
         // $('#div1'+name).hide()
         // $("#"+name).val('')
@@ -42,6 +47,7 @@ function registerSignature(name, count){
         // console.log("Reset 2 clicked")
         signaturePad.clear()
         getEById(name).val('')
+        getEById(ownerIdColumnName).val('')
         // $("#"+name).val('')
 
     })
@@ -55,6 +61,7 @@ function registerSignature(name, count){
             const svg = signaturePad._toSVG()
             // console.log(svg)
             getEById(name).val(svg)
+            getEById(ownerIdColumnName).val(cuid)
             // $("#"+name).val(svg)
         // }
     });
@@ -63,5 +70,5 @@ function registerSignature(name, count){
 @endonce
 
 <script>
-    registerSignature("{{$name}}", "{{$count}}")
+    registerSignature("{{$name}}", "{{$count}}", "{{$ownerIdColumnName}}", "{{$cuid}}")
 </script>
