@@ -32,7 +32,11 @@ class SidebarFilterLod extends Component
     private function getDataSource()
     {
         $field_id = FieldSeeder::getIdFromFieldName('getLods');
-        $dataSource = Term::select('id', 'name', 'description')->where('field_id', $field_id)->get();
+        $dataSource = Term::select('id', 'name', 'description')
+            ->where('field_id', $field_id)
+            ->whereNotIn('id', [221, 222])
+            ->orderBy('name')
+            ->get();
         return $dataSource;
     }
 
