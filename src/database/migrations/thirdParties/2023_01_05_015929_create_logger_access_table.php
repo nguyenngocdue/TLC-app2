@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('entity_id')->nullable();
             $table->string('env');
             $table->unsignedInteger('took');
+            $table->float('memory_in_mb');
             $table->string('url');
 
             $table->timestamp('created_at')->useCurrent();

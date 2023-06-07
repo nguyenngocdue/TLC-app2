@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Utils\Support\CurrentUser;
+use App\Utils\System\Memory;
 use App\Utils\System\Timer;
 use Illuminate\View\Component;
 
@@ -39,14 +40,14 @@ class Elapse extends Component
         }
 
         if ($this->duration) {
-            $value = $this->duration;
+            $value = $this->duration . "ms";
         } else {
             if ($this->total) {
-                $value =  "Total: " . Timer::getTimeElapse();
+                $value =  "Total: " . Timer::getTimeElapse() . "ms" . " - " . Memory::getMemoryElapse() . "MBs";
             } else {
-                $value = Timer::getTimeElapseFromLastAccess();
+                $value = Timer::getTimeElapseFromLastAccess() . "ms";
             }
         }
-        return '<div class="w-full py-1 m-1 rounded text-center bg-orange-300"><i class="fa-duotone fa-clock"></i> ' . $this->title .  $value . "ms</div>";
+        return '<div class="w-full py-1 m-1 rounded text-center bg-orange-300"><i class="fa-duotone fa-clock"></i> ' . $this->title .  $value . "</div>";
     }
 }
