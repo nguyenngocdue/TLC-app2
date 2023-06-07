@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command;
+use Illuminate\Console\Concerns\InteractsWithIO;
 
 class UpdateChklstProgressFromSheetListener implements ShouldQueue
 {
@@ -67,28 +68,11 @@ class UpdateChklstProgressFromSheetListener implements ShouldQueue
             }
         }
         return $result;
-        // $sql = "SELECT
-        // -- sp.id AS sub_project_id
-        // -- ,po.id AS prod_order_id
-        // -- ,po.name AS prod_order_name
-        // chlst.id AS chlst_id
-        // FROM  sub_projects sp, prod_orders po, qaqc_insp_chklsts chlst
-        // WHERE 1 = 1
-        // AND po.sub_project_id = sp.id        
-        // AND chlst.prod_order_id = po.id
-        // AND sp.id = " . $subProjectId;
-        // $sqlData = DB::select(DB::raw($sql));
-        // return collect($sqlData);
     }
 
     public function handle(UpdateChklstProgressEvent $event)
     {
-        // $event->subProjectId
         $ids = $this->getIdChklst($event->subProjectId);
-        // dump($ids);
-        // $ids = $this->getIdChklst($event->subProjectId)->toArray();
-        // $idChklsts = array_column($ids, 'chlst_id');
-        // dd($idChklsts);
         $success = 0;
         foreach ($ids as $idChklst) {
             $chklst = Qaqc_insp_chklst::find($idChklst);
@@ -97,6 +81,7 @@ class UpdateChklstProgressFromSheetListener implements ShouldQueue
             if ($chklst->update(['progress' => $newProgress])) $success++;
         }
         $count = count($ids);
-        return [$success, $count];
+        $result = $success . "/" . $count;
+        if ($success or $count) echo("The progress of Inspection Checklists have been successfully updated: $result \n");
     }
 }
