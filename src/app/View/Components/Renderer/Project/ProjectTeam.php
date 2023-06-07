@@ -28,7 +28,12 @@ class ProjectTeam extends Component
                 'renderer' => 'thumbnail'
             ],
             ['dataIndex' => 'name',],
-            ['dataIndex' => 'company'],
+            [
+                'dataIndex' => 'getUserCompany',
+                'title' => 'Company',
+                'renderer' => 'column',
+                'rendererParam' => 'name',
+            ],
             [
                 'dataIndex' => 'position_rendered',
                 'title' => 'Position',
