@@ -42,6 +42,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ,chklst_shts.name AS chklst_shts_name
         ,chklst.id AS chklst_id
         ,chklst.progress AS chklst_progress
+        ,chklst_shts.progress AS chklst_shts_progress
         ,chklst_shts.status AS chklst_shts_status
 
         FROM (SELECT
@@ -202,7 +203,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 $sheetNameKey = Report::slugName($item->chklst_shts_name);
                 return (array)$item + [$sheetNameKey => [
                     'status' => $item->chklst_shts_status,
-                    'chklst_shts_id' => $item->chklst_shts_id
+                    'chklst_shts_id' => $item->chklst_shts_id,
+                    'chklst_shts_progress' => $item->chklst_shts_progress
                 ]];
             }
             return (array)$item;
@@ -243,7 +245,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                     $value[$col] = (object)[
                         'value' =>  $status["icon"] ?? '<i class="fa-duotone fa-square-question"></i>',
                         'cell_class' => "$bgColor $textColor",
-                        'cell_title' => $status['title'],
+                        'cell_title' => $status['title'].'('.$valCol['chklst_shts_progress'].'%)',
                         'cell_href' =>  route($plural . '.edit',  $valCol['chklst_shts_id']),
                     ];
                 } else {
