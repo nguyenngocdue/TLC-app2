@@ -39,7 +39,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ,tmpl.id AS tmpl_chklst_id
         ,chklst_shts.id AS chklst_shts_id
         ,chklst_shts.qaqc_insp_chklst_id AS chklst_shts_chklst_id
-        ,chklst_shts.description AS chklst_shts_desc
+        ,chklst_shts.name AS chklst_shts_name
         ,chklst.id AS chklst_id
         ,chklst.progress AS chklst_progress
         ,chklst_shts.status AS chklst_shts_status
@@ -198,8 +198,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
         $sheetsDesc = $this->transformSheetsDesc($modeParams);
         $transformData = array_map(function ($item) {
-            if (!is_null($item->chklst_shts_desc)) {
-                $sheetNameKey = Report::slugName($item->chklst_shts_desc);
+            if (!is_null($item->chklst_shts_name)) {
+                $sheetNameKey = Report::slugName($item->chklst_shts_name);
                 return (array)$item + [$sheetNameKey => [
                     'status' => $item->chklst_shts_status,
                     'chklst_shts_id' => $item->chklst_shts_id
@@ -207,11 +207,14 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             }
             return (array)$item;
         }, $items);
+        // dd($sheetsDesc);
+
         $groupedArray = Report::groupArrayByKey($transformData, 'prod_order_id');
         $dataSource = Report::mergeArrayValues($groupedArray);
+        // dd($groupedArray[223]);
 
         array_walk($dataSource, function ($item, $key) use (&$dataSource, $sheetsDesc) {
-            if (!is_null($item['chklst_shts_desc'])) {
+            if (!is_null($item['chklst_shts_name'])) {
                 $itemHasNotShts = array_diff_key($sheetsDesc, $item);
                 $dataSource[$key] = $item + $itemHasNotShts;
             }
