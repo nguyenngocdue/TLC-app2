@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class Signature2 extends Component
@@ -14,7 +15,9 @@ class Signature2 extends Component
      */
     public function __construct(
         private $name,
+        private $ownerIdColumnName = null,
         private $value = null,
+        private $signedPersonId = null,
         private $debug = false,
         private $updatable = true,
     ) {
@@ -29,6 +32,7 @@ class Signature2 extends Component
      */
     public function render()
     {
+        // $this->debug = true;
         $value_decoded = (htmlspecialchars_decode($this->value));
         return view(
             'components.controls.signature2',
@@ -39,6 +43,10 @@ class Signature2 extends Component
                 'count' => static::$count,
                 'input_or_hidden' => $this->debug ? "text" : "hidden",
                 'updatable' => $this->updatable,
+                'debug' => $this->debug,
+                'ownerIdColumnName' => $this->ownerIdColumnName,
+                'signedPersonId' => $this->signedPersonId,
+                'cuid' => CurrentUser::id(),
             ]
         );
     }

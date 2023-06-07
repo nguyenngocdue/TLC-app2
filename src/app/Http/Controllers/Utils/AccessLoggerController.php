@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Utils;
 use App\Http\Controllers\Controller;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use App\Utils\System\Memory;
 use App\Utils\System\Timer;
 use Illuminate\Support\Facades\DB;
 
@@ -20,10 +21,12 @@ class AccessLoggerController extends Controller
         $entityName = CurrentRoute::getTypeSingular();
         $entityId = CurrentRoute::getEntityId($entityName);
         $took = Timer::getTimeElapse();
+        $memory = Memory::getMemoryElapse();
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         DB::connection($connection)->table('logger_access')->insert([
             'owner_id' => $cuId,
             'took' => $took,
+            'memory_in_mb' => $memory,
             'route_name' => $routeName,
             'url' => url()->current(),
             'env' => env('APP_ENV'),

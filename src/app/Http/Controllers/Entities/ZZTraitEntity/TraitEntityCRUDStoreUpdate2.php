@@ -157,7 +157,7 @@ trait TraitEntityCRUDStoreUpdate2
 				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
 			}
 			//Fire the event "Send Mail give Monitors No and Comment"
-			$this->eventInspChklst($request, $id);
+			$this->fireEventInspChklst($request, $id);
 			$this->processComments($request);
 			$this->processSignatures($request);
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);

@@ -1,7 +1,7 @@
 {{-- https://github.com/szimek/signature_pad --}}
 @php $w=340; $h=140; /* ORI 220 x 90*/ @endphp 
 @if($value_decoded !== '')
-    <div id="div1{{$name}}" class="relative border border-gray-300 rounded-md w-[340px] h-[140px]">
+    <div id="div1{{$name}}" class="relative border rounded-md border-gray-300 w-[340px] h-[140px]">
         @if($updatable)
             <button type="button" id="btnReset1_{{$count}}" class="no-print w-10 h-10 top-1 right-2 absolute">
                 <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
@@ -12,7 +12,7 @@
 @endif
 
 <div id="div2{{$name}}" class="{{$value_decoded == '' ? "" : "hidden"}} signature-pad--body">
-    <div class="relative border rounded-md border-gray-300">
+    <div class="relative border rounded-md border-gray-300 w-[340px] h-[140px]">
         @if($updatable)
             <button type="button" id="btnReset2_{{$count}}" class="w-10 h-10 top-1 right-2 absolute">
                 <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
@@ -22,18 +22,23 @@
          style="touch-action: none; user-select: none;" >
         </canvas>
     </div>
-    <input name="{{$name}}" id="{{$name}}" value='{!! $value !!}' class="border w-full" type="{{$input_or_hidden}}">
+    {{$debug ? $name : ""}}
+    <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$name}}" id="{{$name}}" value='{!! $value !!}' />
+    
+    {{$debug ? $ownerIdColumnName : ""}}
+    <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$ownerIdColumnName}}" id="{{$ownerIdColumnName}}" value='{!! $signedPersonId !!}'/>
 </div>
 
 @once
 <script>
-function registerSignature(name, count){
+function registerSignature(name, count, ownerIdColumnName, cuid){
     const signaturePad = new SignaturePad(getEById("canvas_"+name)[0])
     $("#btnReset1_" + count).click(function(){
         // console.log("Reset 1 clicked")
         getEById('div2'+name).show()
         getEById('div1'+name).hide()
         getEById(name).val('')
+        getEById(ownerIdColumnName).val('')
         // $('#div2'+name).show()
         // $('#div1'+name).hide()
         // $("#"+name).val('')
@@ -42,6 +47,7 @@ function registerSignature(name, count){
         // console.log("Reset 2 clicked")
         signaturePad.clear()
         getEById(name).val('')
+        getEById(ownerIdColumnName).val('')
         // $("#"+name).val('')
 
     })
@@ -55,6 +61,7 @@ function registerSignature(name, count){
             const svg = signaturePad._toSVG()
             // console.log(svg)
             getEById(name).val(svg)
+            getEById(ownerIdColumnName).val(cuid)
             // $("#"+name).val(svg)
         // }
     });
@@ -63,5 +70,5 @@ function registerSignature(name, count){
 @endonce
 
 <script>
-    registerSignature("{{$name}}", "{{$count}}")
+    registerSignature("{{$name}}", "{{$count}}", "{{$ownerIdColumnName}}", "{{$cuid}}")
 </script>
