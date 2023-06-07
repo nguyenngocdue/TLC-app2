@@ -87,10 +87,10 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     {
         return [
             ['dataIndex' => 'id',],
-            ['dataIndex' => 'name'],
-            ['dataIndex' => 'description'],
+            // ['dataIndex' => 'description'],
             ['dataIndex' => 'qaqc_insp_chklst_id'],
-            ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'rendererParam' => 'description'],
+            ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'rendererParam' => 'name'],
+            ['dataIndex' => 'name'],
             ['dataIndex' => 'progress'],
             ['dataIndex' => 'status'],
         ];

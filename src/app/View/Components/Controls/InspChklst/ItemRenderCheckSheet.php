@@ -37,7 +37,7 @@ class ItemRenderCheckSheet extends Component
         $project = is_null($subProject) ? null : $subProject->getProject;
         // dump($chklst);
         $signatures = $this->item->getShtSigs;
-        $status = $this->item->status ? $this->item->status : 'in_progress';
+        $status = $this->item->status ? $this->item->status : 'new';
         return view(
             'components.controls.insp-chklst.item-render-check-sheet',
             [

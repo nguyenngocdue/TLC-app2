@@ -5,7 +5,7 @@
     <input type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[id][{{$rowIndex}}]" value="{{$line->id}}" >
 
     <div class="p-4">
-        <div class="flex justify-center">
+        <div class="flex justify-center mb-2">
             @switch($line->control_type_id)
                 @case (1)  {{-- 1 => "text" --}}
                     <x-controls.insp_chklst.check-point-text :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
