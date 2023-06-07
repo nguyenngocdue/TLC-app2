@@ -30,10 +30,11 @@
                 {{$debug?"signatures[$index][qaqc_insp_chklst_sht_id]":""}}
                 <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
                 <div class="text-right">
-                    <div class="w-96 h-36">
+                    <div class="w-[340px] h-36">
                         <x-controls.signature2 
                             name="signatures[{{$index}}][value]"
                             value="{{$signature['value']}}"
+                            signedPersonId="{{$signature['owner_id']}}"
                             updatable="{{$signature['updatable']}}"
                         />
                     </div>
@@ -52,11 +53,12 @@
                         {{-- <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][owner_id]" value="{{$currentUser['id']}}"> --}}
                         {{$debug?"signatures[$index][qaqc_insp_chklst_sht_id]":""}}
                         <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
-                        <div class="w-96 h-36">
+                        <div class="w-[340px] h-36">
                             <x-controls.signature2 
                                 name="signatures[{{$index}}][value]"
                                 ownerIdColumnName="signatures[{{$index}}][owner_id]"
                                 value=""
+                                signedPersonId=""
                             />
                         </div>
                         <div>

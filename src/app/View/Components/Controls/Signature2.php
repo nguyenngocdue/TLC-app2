@@ -15,10 +15,11 @@ class Signature2 extends Component
      */
     public function __construct(
         private $name,
+        private $ownerIdColumnName = null,
         private $value = null,
+        private $signedPersonId = null,
         private $debug = false,
         private $updatable = true,
-        private $ownerIdColumnName = 'usually_table[owner_id][index]',
     ) {
         //
         static::$count++;
@@ -44,6 +45,7 @@ class Signature2 extends Component
                 'updatable' => $this->updatable,
                 'debug' => $this->debug,
                 'ownerIdColumnName' => $this->ownerIdColumnName,
+                'signedPersonId' => $this->signedPersonId,
                 'cuid' => CurrentUser::id(),
             ]
         );
