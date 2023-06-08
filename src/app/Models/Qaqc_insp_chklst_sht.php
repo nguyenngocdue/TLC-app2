@@ -8,12 +8,11 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "slug", "qaqc_insp_chklst_id", "qaqc_insp_tmpl_sht_id", "owner_id",
-        'progress', 'status',
+        'progress', 'status', 'order_no'
     ];
     protected $table = "qaqc_insp_chklst_shts";
 
     public $eloquentParams = [
-        // "getRuns" => ["hasMany", Qaqc_insp_chklst_run::class, "qaqc_insp_chklst_sht_id"], // version 1
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
         "getTmplSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
 
@@ -26,22 +25,11 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         "getSignOff()" => ["getCheckedByField", User::class],
     ];
 
-    // public function getRuns()
-    // {
-    //     $p = $this->eloquentParams[__FUNCTION__];
-    //     $relation = $this->{$p[0]}($p[1], $p[2]);
-    //     $relation
-    //         ->getQuery()
-    //         ->orderBy('created_at', 'DESC')
-    //         ->toSql();
-    //     return $relation;
-    // } // version 1
-
     public function getLines()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
-    } // version 2
+    }
     public function getShtSigs()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -86,11 +74,12 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     public function getManyLineParams()
     {
         return [
+            ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
             ['dataIndex' => 'id',],
             // ['dataIndex' => 'description'],
-            ['dataIndex' => 'qaqc_insp_chklst_id'],
-            ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'rendererParam' => 'name'],
             ['dataIndex' => 'name'],
+            ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'rendererParam' => 'name'],
+            ['dataIndex' => 'qaqc_insp_chklst_id'],
             ['dataIndex' => 'progress'],
             ['dataIndex' => 'status'],
         ];

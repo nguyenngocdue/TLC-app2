@@ -1,15 +1,26 @@
+@php 
+$tmpl = $item->getChklst->getQaqcInspTmpl;
+$prodOrder = $item->getChklst->getProdOrder;
+$prodRouting = $prodOrder->getProdRouting;
+@endphp
 <div class="px-4 flex justify-center ">
     <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
+        <x-renderer.heading level=4 xalign="center">
+            {{$prodOrder->production_name . " / " . $prodOrder->compliance_name}}
+        </x-renderer.heading>
+        @if($project)
+        <span title="Project #{{$project->id}}">{{$project->name}}</span>
+        <i class="fa-solid fa-chevrons-right"></i>
+        <span title="Sub-project #{{$subProject->id}}">{{$subProject->name}}</span>
+        <i class="fa-solid fa-chevrons-right"></i>
+        <span title="ID: #{{$chklst->id}}
+Template: {{$tmpl->name}} (#{{$tmpl->id}})
+ProdRouting: {{$prodRouting->name}} (#{{$prodRouting->id}})
+ProdOrder: {{$prodOrder->name}} (#{{$prodOrder->id}})">{{$chklst->name}}</span>
+        @endif
         <x-renderer.heading level=5>
             <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{$item->name}}</span>
         </x-renderer.heading>
-        @if($project)
-            <span title="Project #{{$project->id}}">{{$project->name}}</span>
-            <i class="fa-solid fa-chevrons-right"></i>
-            <span title="Sub-project #{{$subProject->id}}">{{$subProject->name}}</span>
-            <i class="fa-solid fa-chevrons-right"></i>
-            <span title="Checklist #{{$chklst->id}}">{{$chklst->name}}</span>
-        @endif
 
         @foreach($lines as $rowIndex => $line)
             <x-controls.insp-chklst.check-point :line="$line" table01Name="table01" :rowIndex="$rowIndex" />

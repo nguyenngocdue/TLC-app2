@@ -87,4 +87,16 @@ abstract class TimesheetController extends Controller
             );
         }
     }
+
+    public function duplicate($id)
+    {
+        try {
+            $timesheetLine = $this->timesheetLineService->duplicate($id);
+            return new TimesheetLineResource($timesheetLine);
+        } catch (\Throwable $th) {
+            return ResponseObject::responseFail(
+                $th->getMessage(),
+            );
+        }
+    }
 }

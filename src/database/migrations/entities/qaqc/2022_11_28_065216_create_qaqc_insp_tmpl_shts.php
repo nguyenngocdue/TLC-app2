@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->unsignedBigInteger('qaqc_insp_tmpl_id');
+            $table->orderable();
             $table->appendCommonFields();
         });
         // Schema::create('qaqc_insp_tmpl_shts', function (Blueprint $table) {

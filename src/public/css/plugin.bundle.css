@@ -73,7 +73,7 @@ body {
     color: var(--kt-gray-900);
 }
 .fc .fc-button-primary:not(:disabled).fc-button-active {
-    color: var(--kt-gray-900);
+    //color: var(--kt-gray-900);
 }
 .fc .fc-button-primary:not(:disabled).fc-button-active .fc-icon {
     color: var(--kt-gray-900);
@@ -137,12 +137,12 @@ body {
     margin-left: 0.5rem;
     margin-right: 0.1rem;
 }
-.fc .fc-popover {
+/* .fc .fc-popover {
     border: 0 !important;
     background-color: var(--kt-tooltip-bg);
     box-shadow: var(--kt-dropdown-box-shadow);
     border-radius: 0.95rem;
-}
+} */
 .fc .fc-popover .fc-popover-header {
     border-top-left-radius: 0.95rem;
     border-top-right-radius: 0.95rem;

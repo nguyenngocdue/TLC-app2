@@ -11,7 +11,7 @@
           </div>
           {{-- When user hasnt signed yet --}}
           @if($user) 
-               <x-controls.insp-chklst.name-position :user="$user" />
+               <x-controls.insp-chklst.name-position :user="$user" subText="Signed at {{$user['timestamp']}}"/>
           @endif
      </div>
 </div>

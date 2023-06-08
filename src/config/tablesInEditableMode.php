@@ -1,9 +1,15 @@
 <?php
 
 return [
+    'qaqc_insp_tmpls' => [
+        'qaqc_insp_tmpl_shts' => [],
+    ],
     'qaqc_insp_tmpl_shts' => [
         'qaqc_insp_tmpl_lines' => [],
     ],
+    // 'qaqc_insp_chklsts' => [
+    //     'qaqc_insp_chklst_shts' => [],
+    // ],
     'qaqc_insp_chklst_shts' => [
         'qaqc_insp_chklst_lines' => [],
     ],

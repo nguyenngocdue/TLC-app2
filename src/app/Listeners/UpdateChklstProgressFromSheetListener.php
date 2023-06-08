@@ -80,8 +80,9 @@ class UpdateChklstProgressFromSheetListener implements ShouldQueue
             $newProgress = $sqlData->toArray()[0]->progress_chklst;
             if ($chklst->update(['progress' => $newProgress])) $success++;
         }
-        $count = count($ids);
-        $result = $success . "/" . $count;
-        if ($success or $count) echo("The progress of Inspection Checklists have been successfully updated: $result \n");
+        //<<This will also output on the web, not only the command
+        // $count = count($ids);
+        // $result = $success . "/" . $count;
+        // if ($success || $count) echo ("The progress of Inspection Checklists have been successfully updated: $result \n");
     }
 }

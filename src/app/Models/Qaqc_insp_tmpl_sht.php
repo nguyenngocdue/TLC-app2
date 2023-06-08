@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_insp_tmpl_sht extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_tmpl_id", "owner_id"];
+    protected $fillable = ["id", "name", "description", "slug", "qaqc_insp_tmpl_id", "owner_id", 'order_no'];
     protected $table = "qaqc_insp_tmpl_shts";
     protected static $statusless = true;
 
@@ -40,11 +40,12 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
     public function getManyLineParams()
     {
         return [
+            ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
             ['dataIndex' => 'id'],
             ['dataIndex' => 'qaqc_insp_tmpl_id'],
             ['dataIndex' => 'name'],
-            ['dataIndex' => 'description'],
-            ['dataIndex' => 'getLines', 'rendererParam' => 'description'],
+            // ['dataIndex' => 'description'],
+            // ['dataIndex' => 'getLines', 'rendererParam' => 'description'],
         ];
     }
 }

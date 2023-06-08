@@ -3,8 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Pj_task;
-use App\Utils\Constant;
-use App\Utils\Support\Calculator;
+use App\Utils\Support\Calendar;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -21,10 +20,12 @@ class HrTsLineCollection extends ResourceCollection
         return [
             'data' => $this->collection->map(function ($item) {
                 return [
-                    'title' => Pj_task::findOrFail($item->task_id)->name,
+                    'title' => Calendar::renderTitle($item),
+                    'title_default' => Pj_task::findOrFail($item->task_id)->name,
+                    'tag_sub_project' => Calendar::renderTagSubProject($item),
                     'start' => $item->start_time ? DateTimeConcern::formatTimestampFromDBtoJS($item->start_time) : null,
                     'end' => $item->start_time ? DateTimeConcern::calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min) : null,
-                    'allDay' => ($item->duration_in_min >= Constant::TIME_DEFAULT_ALLDAY) ? true : false,
+                    // 'allDay' => ($item->duration_in_min >= Constant::TIME_DEFAULT_ALLDAY) ? true : false,
                     'id' => $item->id,
                     'user_id' => $item->user_id,
                     'project_id' => $item->project_id,
@@ -35,6 +36,7 @@ class HrTsLineCollection extends ResourceCollection
                     'task_id' => $item->task_id,
                     'sub_task_id' => $item->sub_task_id,
                     'work_mode_id' => $item->work_mode_id,
+                    'color' => Calendar::setColorByWorkModeId($item->work_mode_id),
                     'remark' => $item->remark,
                     'owner_id' => $item->owner_id,
                     'status' => $item->status,

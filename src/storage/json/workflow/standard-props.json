@@ -8,8 +8,7 @@
         "control": "picker_datetime",
         "align": null,
         "col_span": "6",
-        "width": "100",
-        "hidden_view_all": "true",
+        "width": "170",
         "hidden_edit": "true",
         "hidden_filter": "true"
     },
@@ -22,10 +21,10 @@
         "control": "picker_datetime",
         "align": null,
         "col_span": "6",
-        "width": "100",
-        "hidden_view_all": "true",
+        "width": "170",
         "hidden_edit": "true",
         "hidden_filter": "true",
+        "hidden_view_all": "true",
         "hidden_print": "true"
     },
     "_deleted_by": {
@@ -38,9 +37,9 @@
         "align": null,
         "col_span": "6",
         "width": "100",
-        "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_filter": "true",
+        "hidden_view_all": "true",
         "hidden_print": "true"
     },
     "_id": {
@@ -66,9 +65,9 @@
         "align": null,
         "col_span": "12",
         "width": "20",
-        "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_filter": "true",
+        "hidden_view_all": "true",
         "hidden_print": "true"
     },
     "_status": {
@@ -80,7 +79,7 @@
         "control": "status",
         "align": null,
         "col_span": "6",
-        "width": "100",
+        "width": "150",
         "hidden_edit": "true"
     },
     "_updated_at": {
@@ -92,10 +91,10 @@
         "control": "picker_datetime",
         "align": null,
         "col_span": "6",
-        "width": "100",
-        "hidden_view_all": "true",
+        "width": "170",
         "hidden_edit": "true",
         "hidden_filter": "true",
+        "hidden_view_all": "true",
         "hidden_print": "true"
     }
 }

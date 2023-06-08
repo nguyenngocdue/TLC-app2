@@ -23,7 +23,6 @@
     let events = [];
     $(document).click(function(event) {
         var target = $(event.target);
-        console.log(target);
         if (!target.is("#modal-click-right")) {
             modalClickRight.addClass("hidden");
         }
@@ -56,14 +55,20 @@
                         center: 'title',
                         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                         },
+                        views:{
+                            week:{
+                                allDaySlot: false,
+                            }
+                        },
                         // initialDate: '2023-06-15',
                         height: 850,
                         contentHeight: 830,
-                        aspectRatio: 1.5,
+                        aspectRatio: 2,
                         initialView: 'timeGridWeek',
                         locale: 'en',
                         firstDay: 1,
                         theme: 'sandstone',
+                        dayMaxEvents: true,
                         weekNumbers: true,
                         editable: true,
                         droppable: true,
@@ -83,7 +88,7 @@
                             var workModeId =    extendedProps.work_mode_id;
                             var remarkValue = extendedProps.remark;
                             //render modal trigger
-                            modalTitleTaskValue.text(`Task: ${info.event.title}`);
+                            modalTitleTaskValue.text(`Task: ${extendedProps.title_default}`);
                             modalTask.val(taskId)
                             modalTask.trigger('change');
                             modalSubTask.val(subTaskId);
@@ -109,17 +114,8 @@
                             var taskId = draggedElDiv.children[0].getAttribute('id');
                             switch (info.view.type) {
                                 case 'dayGridMonth':
-                                    var data = {
-                                    "project_id" : projectId,
-                                    "sub_project_id": subProjectId,
-                                    "lod_id": lodId,
-                                    "discipline_id": disciplineId,
-                                    "task_id": taskId,
-                                    "date_time": dateTime,
-                                    "all_day": true,
-                                    "timesheetable_type": timesheetableType,
-                                    "timesheetable_id": timesheetableId
-                                }
+                                    info.event.remove();
+                                    toastr.warning(`Can't create new timesheet line by Month view, please use Week or Day view instead.`);
                                     break;
                                 default:
                                 var data = {
@@ -129,19 +125,20 @@
                                 "discipline_id": disciplineId,
                                 "task_id": taskId,
                                 "date_time": dateTime,
-                                "all_day": null,
+                                // "all_day": null,
                                 "timesheetable_type": timesheetableType,
                                 "timesheetable_id": timesheetableId
                             }
+                                callApi('post',url,data,info,function(info,calendar,response){
+                                    if(response.data){
+                                    info.event.remove();
+                                    calendar.addEvent(response.data)
+                                    toastr.success('Created new timesheet line successfully!');
+                                    }
+                                },calendar);
                                     break;
                             }
-                            callApi('post',url,data,info,function(info,calendar,response){
-                                if(response.data){
-                                info.event.remove();
-                                calendar.addEvent(response.data)
-                                toastr.success('Created new timesheet line successfully!');
-                                }
-                            },calendar);
+                            
                         },
                         eventDrop: function(info) {
                             eventUpdateCalendar(info);
@@ -149,6 +146,13 @@
                         eventResize: function(info) {
                             eventUpdateCalendar(info);
                         },
+                        eventContent: function(info) {
+                        var timeText = info.timeText;
+                        var eventTitle = info.event.title;
+                        var tagSubProject = info.event.extendedProps.tag_sub_project;
+                        var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between"><div>' + timeText +'</div>'+tagSubProject+'</div>' + eventTitle +'</div>';
+                        return { html: eventTitleHTML };
+                        }
                     })
                     calendar.render();
                 }
@@ -162,7 +166,13 @@
         var y = rect.left + 200;
         modalClickRight.css({ top: x, left: y }).removeClass('hidden');
         var deleteButton = modalClickRight.find('.delete-button');
+        var duplicateButton = modalClickRight.find('.duplicate-button');
+        var setMorningButton = modalClickRight.find('.set-morning-button');
+        var setAfternoonButton = modalClickRight.find('.set-afternoon-button');
         deleteButton.attr('value', info.event.id);
+        duplicateButton.attr('value', info.event.id);
+        setMorningButton.attr('value', info.event.id);
+        setAfternoonButton.attr('value', info.event.id);
     }
     function closeModalEvent(){
         modal.addClass('hidden');
@@ -185,9 +195,44 @@
                 event.setExtendedProp('work_mode_id',response.data.work_mode_id);
                 event.setExtendedProp('remark',response.data.remark);
                 event.setExtendedProp('sub_task_id',response.data.sub_task_id);
+                event.setProp('backgroundColor',response.data.color);
+                event.setProp('title',response.data.title);
                 toastr.success('Update data timesheet line successfully!');
                 modal.addClass('hidden')
         }, null, event,modal);
+        }else{
+            toastr.warning(`Please check Timesheet line ID in the modal is nullable or empty`);
+        }
+    }
+    function setTimeEvent(button,type){
+        var timesheetLineId = button.value;
+        const url = `${apiUrl}/${timesheetLineId}`;
+        if(timesheetLineId){
+            var event = calendar.getEventById(timesheetLineId);
+            switch (type) {
+                case 'morning':
+                    data = {
+                        'start_time': event.startStr,
+                        'time_type' : 'morning',
+                    }
+                    break;
+                case 'afternoon':
+                    data = {
+                        'start_time': event.startStr,
+                        'time_type' : 'afternoon',
+                    }
+                    break;
+                default:
+                    break;
+            }
+            callApi('patch',url,data, event,function(info,calendar,response){
+                if(response.data){
+                    event.remove();
+                    calendar.addEvent(response.data)
+                    toastr.success('Set time for timesheet line successfully!');
+                    modalClickRight.addClass('hidden')
+                }
+        }, calendar, null,modalClickRight);
         }else{
             toastr.warning(`Please check Timesheet line ID in the modal is nullable or empty`);
         }
@@ -201,6 +246,15 @@
             event.remove();
             modalClickRight.addClass('hidden');
         },null, event,modalClickRight);
+    }
+    function duplicateEvent(button){
+        var timesheetLineId = button.value;
+        var url = `${apiUrl}_duplicate/${timesheetLineId}`;
+        callApi('get',url,null,null,function(calendar,response){
+            toastr.success('Duplicated timesheet line successfully!');
+            calendar.addEvent(response.data);
+            modalClickRight.addClass('hidden');
+        },null, calendar,modalClickRight);
     }
     function callApi(type = 'get', url ,data = [] ,info = null, callback= null,
     calendar = null,event = null,modal =null){

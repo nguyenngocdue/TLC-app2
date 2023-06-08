@@ -4,6 +4,7 @@ namespace App\Services\Hr_timesheet_line;
 
 use App\Repositories\Hr_timesheet_line\Hr_timesheet_lineRepositoryInterface;
 use App\Services\BaseService;
+use Carbon\Carbon;
 
 class Hr_timesheet_lineService extends BaseService implements Hr_timesheet_lineServiceInterface
 {
@@ -27,5 +28,20 @@ class Hr_timesheet_lineService extends BaseService implements Hr_timesheet_lineS
     public function delete($id)
     {
         return $this->hrTimesheetLineRepository->delete($id);
+    }
+    public function duplicate($id)
+    {
+        $model = $this->find($id);
+        $startTimeOld = $model->start_time;
+        $newModel = $model->replicate();
+        $newModel->start_time = $this->addDay($startTimeOld);
+        $newModel->save();
+        return $newModel;
+    }
+    private function addDay($startTime)
+    {
+        $dateTime = Carbon::parse($startTime);
+        $dateTime->addDay();
+        return $dateTime->toDateTimeString();
     }
 }
