@@ -119,7 +119,7 @@ class SignOff extends Component
 
             'remindList' => $remindList,
             // 'people' => count($remindList) . " " . Str::plural("person"),
-            'title' => "Send a friendly email to remind:\n" . join("\n", $people),
+            'title' => "Send a friendly email to:\n" . join("\n", $people),
         ]);
     }
 }

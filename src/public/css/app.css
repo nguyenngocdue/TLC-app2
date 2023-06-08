@@ -1197,6 +1197,9 @@ video {
 .w-3\.5 {
   width: 0.875rem;
 }
+.w-3\/4 {
+  width: 75%;
+}
 .w-32 {
   width: 8rem;
 }
@@ -7696,10 +7699,6 @@ video {
 
   .md\:col-span-5 {
     grid-column: span 5 / span 5;
-  }
-
-  .md\:col-span-9 {
-    grid-column: span 9 / span 9;
   }
 
   .md\:col-start-2 {

@@ -3,20 +3,7 @@
         <p>Third Party Sign Off</p>
     </div>
     <x-renderer.card title="Nominated Approvers" class='border1 m-4'>
-        <div class="grid grid-cols-12 gap-1">
-            <div class="col-span-12 md:col-span-9">
-                <x-controls.has-data-source.dropdown2 type={{$type}} name='getSignOff()' :selected="$selected" multiple={{true}}  />
-            </div>
-            <div class="col-span-12 md:col-span-3">
-                <x-renderer.button 
-                    title='{{$title}}' 
-                    icon="fa-duotone fa-paper-plane" 
-                    class="w-full h-full bg-lime-200"
-                    onClick="sendRemindToPeople([{{join(',', array_keys( $remindList))}}], '{{$type}}', {{$signableId}})"
-                    >Request to sign off</x-renderer.button>
-            </div>
-        </div>
-        
+        <x-controls.has-data-source.dropdown2 type={{$type}} name='getSignOff()' :selected="$selected" multiple={{true}}  />
     </x-renderer.card>
     @php $index = 0; @endphp
     @foreach($signatures as $signature)
@@ -27,7 +14,7 @@
             <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]" value="{{$signature['id']}}">
             {{$debug?"signatures[$index][qaqc_insp_chklst_sht_id]":""}}
             <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
-            <div class="w-[340px] h-36">
+            <div class="w-[340px] h-36 mx-auto">
                 <x-controls.signature2 
                     name="signatures[{{$index}}][value]"
                     value="{{$signature['value']}}"
@@ -46,12 +33,20 @@
     @foreach($remindList as $user)
     <div class="w-full bg-red-100 flex justify-center my-1">
         <div class="text-right p-2 rounded w-1/2">
-                <div class="my-2">
-                    <x-controls.insp-chklst.name-position :user="$user['full']" subText="Has not signed yet"/>  
-                </div>
+            <div class="my-2">
+                <x-controls.insp-chklst.name-position :user="$user['full']" subText="Has not signed yet"/>  
             </div>
         </div>
-            @endforeach
+    </div>
+    @endforeach
+    <div class="flex justify-center w-full">
+        <x-renderer.button 
+        title='{{$title}}' 
+        icon="fa-duotone fa-paper-plane" 
+        class="w-3/4 h-full bg-lime-200 mb-2"
+        onClick="sendRemindToPeople([{{join(',', array_keys( $remindList))}}], '{{$type}}', {{$signableId}})"
+        >Request to sign off</x-renderer.button>
+    </div>
     @if($isRequestedToSign0)
         @if(!$alreadySigned)
         <div class="w-full bg-blue-100 flex justify-center my-2">
@@ -60,7 +55,7 @@
                 <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][id]" value="">
                 {{$debug?"signatures[$index][qaqc_insp_chklst_sht_id]":""}}
                 <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$index}}][qaqc_insp_chklst_sht_id]" value="{{$signableId}}">
-                <div class="w-[340px] h-36">
+                <div class="w-[340px] h-36 mx-auto">
                     <x-controls.signature2 
                         name="signatures[{{$index}}][value]"
                         ownerIdColumnName="signatures[{{$index}}][owner_id]"
