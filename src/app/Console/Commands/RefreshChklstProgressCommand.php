@@ -37,6 +37,7 @@ class RefreshChklstProgressCommand extends Command
                 return Command::FAILURE;
             }
             event(new UpdateChklstProgressEvent($subProjectId));
+            $this->info("Program event fired, and listeners are executed.");
             return Command::SUCCESS;
         } catch (\Exception $e) {
             $this->error($e->getMessage());

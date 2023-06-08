@@ -14,6 +14,6 @@ class RemindSignOffController extends Controller
         $doc = $request->input('doc');
         // dump($doc);
         event(new BroadcastRemindSignOffEvent($ids, $doc));
-        return ['code' => 200, 'message' => 'Reminder emails have been sent successfully.'];
+        return ['code' => 200, 'message' => 'Request emails have been sent successfully.'];
     }
 }

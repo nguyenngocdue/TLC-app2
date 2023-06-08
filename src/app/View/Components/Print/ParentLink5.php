@@ -24,17 +24,19 @@ class ParentLink5 extends Component
     public function render()
     {
         $dataSource = $this->dataSource;
-        if (method_exists($dataSource, 'getTable')) {
-            $table = $dataSource->getTable();
-            $id = $dataSource->id;
-            $name = $dataSource->name ?? "Nameless #$id";
-            $href = route($table . ".edit", $id);
-            $idStr = Str::makeId($id);
-            return "<a class='text-blue-500' href='$href' title='$idStr ($table)'>$name ($table)</a>";
-        } else {
-            dump("This item doesn't have getTable method.");
-            dump($dataSource);
-            return;
+        if (!is_null($dataSource)) {
+            if (method_exists($dataSource, 'getTable')) {
+                $table = $dataSource->getTable();
+                $id = $dataSource->id;
+                $name = $dataSource->name ?? "Nameless #$id";
+                $href = route($table . ".edit", $id);
+                $idStr = Str::makeId($id);
+                return "<a class='text-blue-500' href='$href' title='$idStr ($table)'>$name ($table)</a>";
+            } else {
+                dump("This item doesn't have getTable method.");
+                dump($dataSource);
+                return;
+            }
         }
         return "NO LINK FOUND";
     }

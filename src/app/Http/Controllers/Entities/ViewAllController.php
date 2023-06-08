@@ -166,6 +166,7 @@ class ViewAllController extends Controller
                     'label' => "Deleted At",
                     'column_name' => 'deleted_at',
                     'control' => 'picker_datetime',
+                    'width' => 170,
                 ]
             ] : [];
             $actionColumn = $trash ? [
