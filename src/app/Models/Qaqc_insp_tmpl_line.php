@@ -53,7 +53,7 @@ class Qaqc_insp_tmpl_line extends ModelExtended
             ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'qaqc_insp_group_id',],
             ['dataIndex' => 'name'],
-            ['dataIndex' => 'description'],
+            // ['dataIndex' => 'description'],
             ['dataIndex' => 'control_type_id',],
             ['dataIndex' => 'qaqc_insp_control_group_id',],
         ];

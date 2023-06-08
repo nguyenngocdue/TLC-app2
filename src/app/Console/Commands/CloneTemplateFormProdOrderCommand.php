@@ -10,6 +10,7 @@ use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst_line;
 use App\View\Components\Formula\All_SlugifyByName;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class CloneTemplateFormProdOrderCommand extends Command
 {
@@ -84,6 +85,8 @@ class CloneTemplateFormProdOrderCommand extends Command
                         'progress' => 0,
                         'order_no' => $qaqcInspTmplSheet->order_no,
                     ]);
+                    $thirdPartyList = $qaqcInspTmplSheet->getMonitors1();
+                    $qaqcInspChklstSht->syncCheck("getSignOff", "App\Models\User", $thirdPartyList->pluck('id')->toArray());
                     foreach ($qaqcInspTmplSheet->getLines as $qaqcInspTmplLine) {
                         Qaqc_insp_chklst_line::create([
                             'name' => $qaqcInspTmplLine->name,
@@ -102,7 +105,7 @@ class CloneTemplateFormProdOrderCommand extends Command
             return Command::SUCCESS;
         } catch (\Throwable $th) {
 
-            $this->error($th->getPrevious()->getMessage());
+            $this->error($th->getMessage());
             // $this->error($th->getMessage());
             return Command::FAILURE;
         }
