@@ -20,8 +20,9 @@ class HrTsLineCollection extends ResourceCollection
         return [
             'data' => $this->collection->map(function ($item) {
                 return [
-                    'title' => Pj_task::findOrFail($item->task_id)->name,
-                    'title_custom' => Calendar::renderTitle($item),
+                    'title' => Calendar::renderTitle($item),
+                    'title_default' => Pj_task::findOrFail($item->task_id)->name,
+                    'tag_sub_project' => Calendar::renderTagSubProject($item),
                     'start' => $item->start_time ? DateTimeConcern::formatTimestampFromDBtoJS($item->start_time) : null,
                     'end' => $item->start_time ? DateTimeConcern::calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min) : null,
                     // 'allDay' => ($item->duration_in_min >= Constant::TIME_DEFAULT_ALLDAY) ? true : false,

@@ -25,6 +25,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('def_assignee')->nullable();
             $table->float('standard_working_hour')->nullable();
+            $table->dateTime('start_time_working')->nullable();
+            $table->dateTime('start_time_lunch_break')->nullable();
+            $table->float('duration_lunch_break')->nullable();
             $table->string('slug')->unique();
             $table->appendCommonFields();
         });

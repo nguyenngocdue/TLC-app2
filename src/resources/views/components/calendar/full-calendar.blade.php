@@ -63,11 +63,12 @@
                         // initialDate: '2023-06-15',
                         height: 850,
                         contentHeight: 830,
-                        aspectRatio: 1.5,
+                        aspectRatio: 2,
                         initialView: 'timeGridWeek',
                         locale: 'en',
                         firstDay: 1,
                         theme: 'sandstone',
+                        dayMaxEvents: true,
                         weekNumbers: true,
                         editable: true,
                         droppable: true,
@@ -87,7 +88,7 @@
                             var workModeId =    extendedProps.work_mode_id;
                             var remarkValue = extendedProps.remark;
                             //render modal trigger
-                            modalTitleTaskValue.text(`Task: ${info.event.title}`);
+                            modalTitleTaskValue.text(`Task: ${extendedProps.title_default}`);
                             modalTask.val(taskId)
                             modalTask.trigger('change');
                             modalSubTask.val(subTaskId);
@@ -145,15 +146,13 @@
                         eventResize: function(info) {
                             eventUpdateCalendar(info);
                         },
-                        // eventContent: function(info) {
-                        //     console.log(info);
-                        // var timeText = info.timeText;
-                        // var eventTitle = info.event.title;
-                        // // Tạo một thẻ div bao quanh tiêu đề sự kiện
-                        // var eventTitleHTML = '<div class="event-title"><div>' + timeText +'</div>' + eventTitle + '</div>';
-                        // // Trả về nội dung HTML của sự kiện
-                        // return { html: eventTitleHTML };
-                        // }
+                        eventContent: function(info) {
+                        var timeText = info.timeText;
+                        var eventTitle = info.event.title;
+                        var tagSubProject = info.event.extendedProps.tag_sub_project;
+                        var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between"><div>' + timeText +'</div>'+tagSubProject+'</div>' + eventTitle +'</div>';
+                        return { html: eventTitleHTML };
+                        }
                     })
                     calendar.render();
                 }
@@ -193,11 +192,11 @@
         if(timesheetLineId){
             var event = calendar.getEventById(timesheetLineId);
             callApi('patch',url,data,null,function(event,response){
-
                 event.setExtendedProp('work_mode_id',response.data.work_mode_id);
                 event.setExtendedProp('remark',response.data.remark);
                 event.setExtendedProp('sub_task_id',response.data.sub_task_id);
                 event.setProp('backgroundColor',response.data.color);
+                event.setProp('title',response.data.title);
                 toastr.success('Update data timesheet line successfully!');
                 modal.addClass('hidden')
         }, null, event,modal);
