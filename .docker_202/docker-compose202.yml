@@ -55,6 +55,8 @@ services:
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
       UPLOAD_LIMIT: 104857600
+      MEMORY_LIMIT: 2G
+      # MAX_EXECUTION_TIME: 600
     ports:
       - "28102:80"
     networks:
