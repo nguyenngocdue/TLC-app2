@@ -245,7 +245,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                     $value[$col] = (object)[
                         'value' =>  $status["icon"] ?? '<i class="fa-duotone fa-square-question"></i>',
                         'cell_class' => "$bgColor $textColor",
-                        'cell_title' => $status['title'].'('.$valCol['chklst_shts_progress'].'%)',
+                        'cell_title' => $status['title'] . ' (' . $valCol['chklst_shts_progress'] . '%)',
                         'cell_href' =>  route($plural . '.edit',  $valCol['chklst_shts_id']),
                     ];
                 } else {
@@ -263,7 +263,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
                 $items[$key]['check_list'] = (object)[
                     'value' => '<i class="fa-regular fa-circle-plus text-green-800"></i> ',
-                    'cell_href' => 'javascript:create(' . $inspTmplId . ',' . $prodOrder . ',' . $cuid . ',"' . $tmplName . '");',
+                    'cell_href' => 'javascript:create(' . $inspTmplId . ',' . $prodOrder . ',' . $cuid . ');',
                 ];
             } else {
                 $items[$key]['check_list'] = (object)[
@@ -309,8 +309,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                         toastr.success('Created successfully. Opening the new document...')
                         location.href = href
                     },
-                    error: ()=> {
-                        console.log('Failed')
+                    error: (response)=> {
+                        console.log('Failed', response)
                     },
                 })
         }</script>";
