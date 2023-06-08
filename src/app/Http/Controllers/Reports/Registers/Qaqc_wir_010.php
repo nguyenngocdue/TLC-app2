@@ -186,11 +186,11 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             // modify html sub_project_name + prod_order_name
             $item['sub_project_name'] = (object) [
                 'value' => $item['sub_project_name'],
-                'cell_title' => $item['sub_project_id'],
+                'cell_title' =>'ID: '. $item['sub_project_id'],
             ];
             $item['prod_order_name'] = (object) [
                 'value' => $item['prod_order_name'],
-                'cell_title' => $item['prod_order_id'],
+                'cell_title' =>'ID: '. $item['prod_order_id'],
             ];
             $wirDescName =  is_null($item['wir_description_name']) ? [] : [Report::slugName($item['wir_description_name']) => $htmlRender];
             return (array)$item + $wirDescName;

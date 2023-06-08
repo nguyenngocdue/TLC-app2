@@ -34,7 +34,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         // dd($modeParams);
         $sql = "SELECT 
         po_tb.*
-        ,tmplsh.description AS tmplsh_desc
+        ,tmplsh.description AS tmplsh_des
+        ,tmplsh.order_no AS tmplsh_order_no
         ,tmpl.description AS tmpl_chklst_desc
         ,tmpl.id AS tmpl_chklst_id
         ,chklst_shts.id AS chklst_shts_id
@@ -77,7 +78,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $sql .= "\n LEFT JOIN qaqc_insp_chklst_shts chklst_shts ON chklst.id = chklst_shts.qaqc_insp_chklst_id
               LEFT JOIN qaqc_insp_tmpls tmpl ON tmpl.id = chklst.qaqc_insp_tmpl_id
               LEFT JOIN qaqc_insp_tmpl_shts tmplsh ON tmplsh.id =  chklst_shts.qaqc_insp_tmpl_sht_id AND tmpl.id = tmplsh.qaqc_insp_tmpl_id
-              ORDER BY prod_order_name";
+              ORDER BY prod_order_name ";
 
         // dd($sql);
         return $sql;
@@ -127,7 +128,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             ];
         }
         $dataColumn = array_merge($dataColumn1, $dataColumn2);
-        // dd($dataColumn);
         return $dataColumn;
     }
 
@@ -172,8 +172,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
     protected function filterSheetFromProdRouting($modeParams)
     {
         $checksheet_type_id = $modeParams['checksheet_type_id'] ?? $this->checksheet_type_id;
-        $sheets = Qaqc_insp_tmpl::find($checksheet_type_id)->getSheets->pluck('name', 'id')->ToArray();
-        return $sheets;
+        $sheets = Qaqc_insp_tmpl::find($checksheet_type_id)->getSheets;
+        return $sheets->sortBy('order_no')->pluck('name', 'id')->toArray();
     }
 
     private function transformSheetsDesc($modeParams)
@@ -257,7 +257,14 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
                 };
             }
             $items[$key] = $value;
-            $items[$key]['prod_order_name'] = (object)['value' => $value['prod_order_name'], 'cell_title' => 'ID: ' . $value['prod_order_id']];
+            $items[$key]['sub_project_name'] = (object)[
+                'value' => $value['sub_project_name'], 
+                'cell_title' => 'ID: ' . $value['sub_project_id']
+            ];
+            $items[$key]['prod_order_name'] = (object)[
+                'value' => $value['prod_order_name'], 
+                'cell_title' => 'ID: ' . $value['prod_order_id']
+            ];
             if (is_null($value['chklst_shts_id'])) {
                 $prodOrder = $value['prod_order_id'];
 
