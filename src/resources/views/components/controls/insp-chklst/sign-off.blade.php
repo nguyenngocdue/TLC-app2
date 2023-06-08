@@ -2,7 +2,7 @@
     <div class="bg-amber-300 rounded-t p-2">
         <p>Third Party Sign Off</p>
     </div>
-    <x-renderer.card title="Nominated Approvers" class='border1 mx-4'>
+    <x-renderer.card title="Nominated Approvers" class='border1 m-4'>
         <div class="grid grid-cols-12 gap-1">
             <div class="col-span-12 md:col-span-9">
                 <x-controls.has-data-source.dropdown2 type={{$type}} name='getSignOff()' :selected="$selected" multiple={{true}}  />

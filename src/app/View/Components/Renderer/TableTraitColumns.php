@@ -58,7 +58,7 @@ trait TableTraitColumns
         $styleStr = $this->getStyleStr($column);
         $iconJson = $columnType === 'json' ? '<br/><i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
         if ($columnType === 'json') $title .= $iconJson;
-        if (env('SHOW_ELAPSE') || (in_array(CurrentUser::id(), [35, 38]))) $title .= "<br/><span title='Elapse time'>({$elapse}ms)</span>";
+        if ((env('SHOW_ELAPSE') && !app()->isProduction()) || (in_array(CurrentUser::id(), [35, 38]))) $title .= "<br/><span title='Elapse time'>({$elapse}ms)</span>";
         $rotate45Width = $this->rotate45Width;
         $rotate45Height = ($this->rotate45Width) ? $rotate45Width - 100 : false;
         $classTh = ($this->rotate45Width) ? "rotated-title-th h-[{$rotate45Height}px]" : "";
