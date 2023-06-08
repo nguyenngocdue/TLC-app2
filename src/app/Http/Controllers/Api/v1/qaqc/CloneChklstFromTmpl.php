@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1\qaqc;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 
 class CloneChklstFromTmpl extends Controller
 {
@@ -27,7 +28,6 @@ class CloneChklstFromTmpl extends Controller
             $response['message'] = Artisan::output();
         } else {
             $id = trim(Artisan::output());
-            // $response['insertedId'] = $id;
             $response['href'] = route("qaqc_insp_chklsts.edit", $id);
             $response['message'] = "Cloned successfully.";
         }

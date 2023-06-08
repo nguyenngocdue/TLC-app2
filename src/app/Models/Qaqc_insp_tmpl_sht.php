@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
+use Illuminate\Support\Str;
 
 class Qaqc_insp_tmpl_sht extends ModelExtended
 {
@@ -41,11 +42,12 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
     {
         return [
             ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
-            ['dataIndex' => 'id'],
+            ['dataIndex' => 'id',],
             ['dataIndex' => 'qaqc_insp_tmpl_id'],
             ['dataIndex' => 'name'],
             // ['dataIndex' => 'description'],
-            // ['dataIndex' => 'getLines', 'rendererParam' => 'description'],
+            ['dataIndex' => 'getLines', /*'rendererParam' => 'description'*/],
+            ['dataIndex' => 'getMonitors1()', 'renderer' => 'agg_count'],
         ];
     }
 }

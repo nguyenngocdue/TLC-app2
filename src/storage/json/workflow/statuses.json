@@ -151,7 +151,7 @@
         "title": "New",
         "color": "blue",
         "color_index": "200",
-        "icon": "<i class=\"fa-solid fa-folder-open\"><\/i>"
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>"
     },
     "not_applicable": {
         "name": "not_applicable",
