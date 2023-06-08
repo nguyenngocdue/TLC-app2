@@ -70,7 +70,7 @@ class CloneTemplateFormProdOrderCommand extends Command
                 'progress' => 0,
             ]);
             $insertedId = $insertedItem->id;
-            $qaqcInspTmplSheets = $qaqcInspTmpl->getSheets;
+            $qaqcInspTmplSheets = $qaqcInspTmpl->getSheets()->orderBy('order_no')->get();
             if (count($qaqcInspTmplSheets) > 0) {
                 foreach ($qaqcInspTmplSheets as $qaqcInspTmplSheet) {
                     $qaqcInspChklstSht = Qaqc_insp_chklst_sht::create([
@@ -82,6 +82,7 @@ class CloneTemplateFormProdOrderCommand extends Command
                         'owner_id' => $ownerId,
                         'status' => 'new',
                         'progress' => 0,
+                        'order_no' => $qaqcInspTmplSheet->order_no,
                     ]);
                     foreach ($qaqcInspTmplSheet->getLines as $qaqcInspTmplLine) {
                         Qaqc_insp_chklst_line::create([

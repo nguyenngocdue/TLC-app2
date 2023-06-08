@@ -8,7 +8,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "slug", "qaqc_insp_chklst_id", "qaqc_insp_tmpl_sht_id", "owner_id",
-        'progress', 'status',
+        'progress', 'status', 'order_no'
     ];
     protected $table = "qaqc_insp_chklst_shts";
 
@@ -74,6 +74,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     public function getManyLineParams()
     {
         return [
+            ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
             ['dataIndex' => 'id',],
             // ['dataIndex' => 'description'],
             ['dataIndex' => 'name'],

@@ -40,10 +40,11 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
     public function getManyLineParams()
     {
         return [
+            ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
             ['dataIndex' => 'id'],
             ['dataIndex' => 'qaqc_insp_tmpl_id'],
             ['dataIndex' => 'name'],
-            ['dataIndex' => 'description'],
+            // ['dataIndex' => 'description'],
             // ['dataIndex' => 'getLines', 'rendererParam' => 'description'],
         ];
     }
