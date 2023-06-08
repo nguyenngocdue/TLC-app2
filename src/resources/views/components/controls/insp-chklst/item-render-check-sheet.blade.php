@@ -5,7 +5,7 @@ $prodRouting = $prodOrder->getProdRouting;
 @endphp
 <div class="px-4 flex justify-center ">
     <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
-        <x-renderer.heading level=4 align="center">
+        <x-renderer.heading level=4 xalign="center">
             {{$prodOrder->production_name . " / " . $prodOrder->compliance_name}}
         </x-renderer.heading>
         @if($project)
