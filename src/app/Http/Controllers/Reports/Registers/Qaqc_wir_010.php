@@ -119,7 +119,6 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
 
     protected function filterWirDescriptionsFromProdRouting($modeParams)
     {
-
         $sql = "SELECT wd.id as wir_description_id, wd.name AS wir_description_name
         FROM many_to_many m2m, wir_descriptions wd
         WHERE 1 =1
@@ -218,8 +217,6 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
             $itemHasWirDesc = array_slice($prodOrder, $idx + 1, count($prodOrder) - $idx, true);
             $itemHasNotWirDesc = array_diff_key($keyNameWirDesc, $itemHasWirDesc);
             // dd($prodOrder);
-
-
             $param1 = '/?project_id=' . $prodOrder['project_id'];
             $param2 = 'sub_project_id=' . $prodOrder['sub_project_id'];
             $param3 = 'prod_routing_id=' . $prodOrder['prod_routing_id'];

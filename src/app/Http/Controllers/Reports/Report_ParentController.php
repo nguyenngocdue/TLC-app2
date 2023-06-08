@@ -140,6 +140,10 @@ abstract class Report_ParentController extends Controller
         return redirect($request->getPathInfo());
     }
 
+    protected function tableDataHeader($modeParams) {
+        return [];
+    }
+
     public function index(Request $request)
     {
 
@@ -176,6 +180,7 @@ abstract class Report_ParentController extends Controller
         $viewName = CurrentPathInfo::getViewName($request);
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
         // dd($dataModeControl);
+        $tableDataHeader = $this->tableDataHeader($modeParams);
 
         echo $this->getJS();
 
@@ -193,6 +198,7 @@ abstract class Report_ParentController extends Controller
             'currentUserId' => $currentUserId,
             'groupBy' => $this->groupBy,
             'modeOptions' => $this->$entity(),
+            'tableDataHeader' => $tableDataHeader,
             'rotate45Width' => $this->rotate45Width,
             'groupByLength' => $this->groupByLength,
             'topTitle' => $this->getMenuTitle(),

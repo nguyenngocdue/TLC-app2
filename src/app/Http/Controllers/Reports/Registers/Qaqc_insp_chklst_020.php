@@ -11,6 +11,7 @@ use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_tmpl;
+use App\Models\Qaqc_insp_tmpl_sht;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use PhpParser\Node\Expr\Cast\Object_;
@@ -157,6 +158,19 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ];
     }
 
+    protected function tableDataHeader($modeParams) {
+        $sheets = $this->transformSheetsDesc($modeParams);
+        $data = [];
+        foreach ($sheets as $key => $id) {
+            $users = Qaqc_insp_tmpl_sht::find($id)->getMonitors1()->pluck('name', 'id')->toArray();
+            $lenUsers = count($users);
+            $icons = $lenUsers ? str_repeat("<i class='fa-duotone fa-user'></i>",$lenUsers):"";
+            $data[$key] = $icons;
+        }
+        // dd($data);
+        return $data;
+    }
+
     protected function getColorLegends()
     {
         $plural = 'qaqc_insp_chklst_shts';
@@ -179,7 +193,11 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
     private function transformSheetsDesc($modeParams)
     {
         $sheets = $this->filterSheetFromProdRouting($modeParams);
-        $sheetsDesc = array_merge(...array_map(fn ($item) => [Report::slugName($item) => null], $sheets));
+        // $sheetsDesc = array_merge(...array_map(fn ($item) => [Report::slugName($item) => null], $sheets));
+        $sheetsDesc = [];
+        foreach ($sheets as $key => $name) {
+            $sheetsDesc[Report::slugName($name)] = $key;
+        }
         return $sheetsDesc;
     }
 
