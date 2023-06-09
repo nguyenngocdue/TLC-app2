@@ -36,6 +36,14 @@ class CurrentUser
         }
         return $userAuth;
     }
+    public static function hasPermissionTo($permission)
+    {
+        $userAuth = static::checkAuth();
+        if (isset($userAuth->roleSets[0])) {
+            return $userAuth->roleSets[0]->hasPermissionTo($permission);
+        }
+        return false;
+    }
 
     public static function isAdmin()
     {
