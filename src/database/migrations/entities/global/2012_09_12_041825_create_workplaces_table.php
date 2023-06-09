@@ -24,10 +24,10 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('def_assignee')->nullable();
-            $table->float('standard_working_hour')->nullable();
-            $table->dateTime('start_time_working')->nullable();
-            $table->dateTime('start_time_lunch_break')->nullable();
-            $table->float('duration_lunch_break')->nullable();
+            $table->float('standard_working_min')->nullable();
+            $table->time('standard_start_time')->nullable();
+            $table->time('standard_start_break')->nullable();
+            $table->float('break_duration_in_min')->nullable();
             $table->string('slug')->unique();
             $table->appendCommonFields();
         });

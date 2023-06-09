@@ -214,12 +214,14 @@
                     data = {
                         'start_time': event.startStr,
                         'time_type' : 'morning',
+                        'user_id' : event.extendedProps.user_id,
                     }
                     break;
                 case 'afternoon':
                     data = {
                         'start_time': event.startStr,
                         'time_type' : 'afternoon',
+                        'user_id' : event.extendedProps.user_id,
                     }
                     break;
                 default:
