@@ -16,12 +16,12 @@
     },
     "passed": {
         "name": "passed",
-        "label": "Ready for TLC Sign Off",
+        "label": "Ready for Internal Sign Off",
         "tooltip": ""
     },
     "inspected": {
         "name": "inspected",
-        "label": "Finish TLC Sign Off",
+        "label": "Finish Internal Sign Off",
         "tooltip": ""
     },
     "pending_approval": {

@@ -174,7 +174,7 @@
         "name": "_getSignOff()",
         "column_name": "getSignOff()",
         "column_type": "oracy_prop",
-        "label": "Norminated Approvers",
+        "label": "Designated Approvers",
         "control": "dropdown_multi",
         "align": "",
         "col_span": "",

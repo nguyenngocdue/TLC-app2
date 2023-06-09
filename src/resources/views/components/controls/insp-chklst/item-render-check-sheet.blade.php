@@ -9,11 +9,11 @@ $prodRouting = $prodOrder->getProdRouting;
             {{$prodOrder->production_name . " / " . $prodOrder->compliance_name}}
         </x-renderer.heading>
         @if($project)
-        <span title="Project #{{$project->id}}">{{$project->name}}</span>
-        <i class="fa-solid fa-chevrons-right"></i>
-        <span title="Sub-project #{{$subProject->id}}">{{$subProject->name}}</span>
-        <i class="fa-solid fa-chevrons-right"></i>
-        <span title="ID: #{{$chklst->id}}
+            <span title="Project #{{$project->id}}">{{$project->name}}</span>
+            <i class="fa-solid fa-chevrons-right"></i>
+            <span title="Sub-project #{{$subProject->id}}">{{$subProject->name}}</span>
+            <i class="fa-solid fa-chevrons-right"></i>
+            <span title="ID: #{{$chklst->id}}
 Template: {{$tmpl->name}} (#{{$tmpl->id}})
 ProdRouting: {{$prodRouting->name}} (#{{$prodRouting->id}})
 ProdOrder: {{$prodOrder->name}} (#{{$prodOrder->id}})">{{$chklst->name}}</span>
