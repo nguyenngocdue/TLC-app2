@@ -160,15 +160,14 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
 
     protected function tableDataHeader($modeParams) {
         $sheets = $this->transformSheetsDesc($modeParams);
-        $data = [];
+        $dataHeader = [];
         foreach ($sheets as $key => $id) {
             $users = Qaqc_insp_tmpl_sht::find($id)->getMonitors1()->pluck('name', 'id')->toArray();
             $lenUsers = count($users);
             $icons = $lenUsers ? str_repeat("<i class='fa-duotone fa-user'></i>",$lenUsers):"";
-            $data[$key] = $icons;
+            $dataHeader[$key] = $icons;
         }
-        // dd($data);
-        return $data;
+        return $dataHeader;
     }
 
     protected function getColorLegends()
