@@ -1,3 +1,4 @@
+let calendarContainer = null
 let modalContainer = null
 let dataContainer = null
 let dataTopDrawer = null

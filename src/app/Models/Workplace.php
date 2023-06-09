@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
+use Carbon\Carbon;
 
 class Workplace extends ModelExtended
 {
-    protected $fillable = ["name", "description", "standard_working_hour", "def_assignee", "slug"];
+    protected $fillable = ["name", "description", "standard_working_hour", "standard_start_time", "standard_start_break", "break_duration_in_min", "def_assignee", "slug"];
 
     protected $table = 'workplaces';
     protected static $statusless = true;
@@ -47,5 +48,21 @@ class Workplace extends ModelExtended
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function getDurationMorning()
+    {
+        $startTime =  Carbon::parse($this->standard_start_time);
+        $startBreakTime =  Carbon::parse($this->standard_start_break);
+        return $startBreakTime->diffInMinutes($startTime);
+    }
+    public function getDurationAfternoon()
+    {
+        return ($this->standard_working_min) - ($this->getDurationMorning());
+    }
+    public function getStandardStartTimeAfternoon()
+    {
+        $startBreakTime = Carbon::parse($this->standard_start_break);
+        $endBreakTime = $startBreakTime->addMinute($this->break_duration_in_min);
+        return $endBreakTime->format('H:i:s');
     }
 }
