@@ -2,7 +2,7 @@
     <div class="bg-amber-300 rounded-t p-2">
         <p>Third Party Sign Off</p>
     </div>
-    <x-renderer.card title="Nominated Approvers" class='border1 m-4'>
+    <x-renderer.card title="Designated Approvers" class='border1 m-4'>
         <x-controls.has-data-source.dropdown2 type={{$type}} name='getSignOff()' :selected="$selected" multiple={{true}}  />
     </x-renderer.card>
     @php $index = 0; @endphp
@@ -95,7 +95,7 @@
             }
         })
     } else {
-        toastr.warning("There is no nominated approver, nothing sent. Maybe you forgot to save the form after inputing some names.")
+        toastr.warning("There is no desinated approver, nothing sent. Maybe you forgot to save the form after inputing some names.")
     }
 }
 </script>

@@ -36,12 +36,12 @@ class SignOff extends Component
         return false;
     }
 
-    function getRemindList($nominatedApprovers, $signatures)
+    function getRemindList($designatedApprovers, $signatures)
     {
         $signed = $signatures->map(fn ($s) => $s['owner_id']);
         // dump($signed);
         $signedArr =  $signed->toArray();
-        $notYetSigned = $nominatedApprovers->filter(fn ($item) => !in_array($item->id, $signedArr));
+        $notYetSigned = $designatedApprovers->filter(fn ($item) => !in_array($item->id, $signedArr));
         $result = [];
         foreach ($notYetSigned as $person) {
             $result[$person->id]['short'] = $person->name . " - " . $person->email;
@@ -52,10 +52,10 @@ class SignOff extends Component
         return $result;
     }
 
-    function isRequestedToSign($nominatedApprovers, $currentUser)
+    function isRequestedToSign($designatedApprovers, $currentUser)
     {
-        // dump($nominatedApprovers);
-        foreach ($nominatedApprovers as $approver) {
+        // dump($designatedApprovers);
+        foreach ($designatedApprovers as $approver) {
             if ($approver->id == $currentUser->id) return true;
         }
         return false;
@@ -68,8 +68,8 @@ class SignOff extends Component
      */
     public function render()
     {
-        $nominatedApprovers = $this->item->getSignOff();
-        $selectedStr = "[" . join(",", $nominatedApprovers->pluck('id')->toArray()) . ']';
+        $designatedApprovers = $this->item->getSignOff();
+        $selectedStr = "[" . join(",", $designatedApprovers->pluck('id')->toArray()) . ']';
         $signatures = $this->signatures;
         // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $currentUser = CurrentUser::get();
@@ -96,7 +96,7 @@ class SignOff extends Component
             'timestamp' => null,
         ];
         // dd($currentUser);
-        $remindList = $this->getRemindList($nominatedApprovers, $signatures);
+        $remindList = $this->getRemindList($designatedApprovers, $signatures);
         $people = [];
         $index = 0;
         foreach ($remindList as $person) {
@@ -105,7 +105,7 @@ class SignOff extends Component
         // dd($people);
 
         $alreadySigned = $this->alreadySigned($signatures, $currentUser);
-        $isRequestedToSign0 = $this->isRequestedToSign($nominatedApprovers, $currentUser);
+        $isRequestedToSign0 = $this->isRequestedToSign($designatedApprovers, $currentUser);
         return view('components.controls.insp-chklst.sign-off', [
             'signatures' => $this->signatures,
             'type' => $this->type,
