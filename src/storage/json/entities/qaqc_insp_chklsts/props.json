@@ -98,7 +98,7 @@
         "name": "_qaqc_insp_tmpl_id",
         "column_name": "qaqc_insp_tmpl_id",
         "column_type": "bigint",
-        "label": "Template Type",
+        "label": "Checklist Type",
         "control": "dropdown",
         "align": "",
         "col_span": "6",
