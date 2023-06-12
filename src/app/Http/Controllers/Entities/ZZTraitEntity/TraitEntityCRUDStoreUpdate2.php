@@ -53,7 +53,6 @@ trait TraitEntityCRUDStoreUpdate2
 			$rules = $this->getValidationRules($oldStatus, $newStatus, __FUNCTION__);
 
 			$this->makeUpCommentFieldForRequired($request);
-
 			$request->validate($rules, ["date_format" => "The :attribute must be correct datetime format."]);
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {

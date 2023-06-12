@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class TimeSheetWorkerController extends TimesheetController
 {
+    protected $type = 'hr_timesheet_workers';
+    protected $model = Hr_timesheet_worker::class;
     public function show(Request $request, $id)
     {
         $hrTsLines =  Hr_timesheet_worker::findOrFail($id)->getHrTsLines;

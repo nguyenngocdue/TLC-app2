@@ -96,6 +96,7 @@ class DateTimeConcern
     }
     public static function convertForSaving($control, $value)
     {
+        $formatFrom = '';
         if (!$value) return null;
         try {
             switch ($control) {
@@ -111,6 +112,7 @@ class DateTimeConcern
                     break;
                 case "picker_week":
                     $formatTo = Constant::FORMAT_DATE_MYSQL;
+                    // dd($formatTo);
                     $value = self::formatWeekForSaving($value, $formatTo);
                     break;
                 case "picker_quarter":

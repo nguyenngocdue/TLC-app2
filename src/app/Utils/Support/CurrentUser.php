@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use App\Models\User;
+use App\Utils\System\GetSetCookie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Ndc\SpatieCustom\Exceptions\UnauthorizedException;
@@ -20,6 +21,14 @@ class CurrentUser
     public static function getSettings()
     {
         return Auth::user()->settings;
+    }
+    public static function getTokenForApi()
+    {
+        $token = '';
+        if (GetSetCookie::hasCookie('tlc_token')) {
+            $token = GetSetCookie::getCookie('tlc_token');
+        }
+        return $token;
     }
     private static function checkAuth()
     {

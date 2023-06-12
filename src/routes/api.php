@@ -106,9 +106,9 @@ Route::group([
     'prefix' => 'v1/hr',
     'middleware' => ['auth:sanctum', 'throttle:600,1'],
 ], function () {
-    Route::resource('timesheet_staff', App\Http\Controllers\Api\v1\HR\TimeSheetOfficerController::class);
-    Route::get('timesheet_staff_duplicate/{id}', [App\Http\Controllers\Api\v1\HR\TimeSheetOfficerController::class, 'duplicate']);
-    Route::resource('timesheet_worker', App\Http\Controllers\Api\v1\HR\TimeSheetWorkerController::class);
+    Route::resource('timesheet_officers', App\Http\Controllers\Api\v1\HR\TimeSheetOfficerController::class);
+    Route::get('timesheet_officers_duplicate/{id}', [App\Http\Controllers\Api\v1\HR\TimeSheetOfficerController::class, 'duplicate']);
+    Route::resource('timesheet_workers', App\Http\Controllers\Api\v1\HR\TimeSheetWorkerController::class);
 });
 Route::group([
     'prefix' => 'v1/hr',

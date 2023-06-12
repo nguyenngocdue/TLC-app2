@@ -197,6 +197,16 @@ class RelationshipRenderer2 extends Component
         $isOrderable = $row ? $this->isTableOrderable($row, $colName, $columns) : false;
         $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
+            case "calendar_grid":
+                $index = strpos($type, "_");
+                $type = substr($type, $index + 1);
+                $apiUrl = route($type . '.index');
+                $token = CurrentUser::getTokenForApi();
+                return view('components.calendar.calendar-grid', [
+                    'timesheetableType' => $modelPath,
+                    'timesheetableId' => $id,
+                    'apiUrl' => $apiUrl,
+                ]);
             case "many_icons":
                 $colSpan =  Helper::getColSpan($colName, $type);
                 foreach ($dataSource as &$item) {

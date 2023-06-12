@@ -10,9 +10,9 @@
     "_week": {
         "name": "_week",
         "column_name": "week",
-        "new": "",
+        "new": "true",
         "pending_approval": "true",
-        "rejected": "",
+        "rejected": "true",
         "approved": "true"
     },
     "_team_id": {

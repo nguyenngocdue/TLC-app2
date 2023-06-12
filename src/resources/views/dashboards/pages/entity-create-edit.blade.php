@@ -74,7 +74,7 @@
     </div>
     @endif
     
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         userCurrent = @json($user);
         window.Echo.channel('edit.'+'{{$type}}' +'-'+ '{{$id}}')
             .listen('.BroadcastUpdateEvent.' + '{{$type}}' + '-'+ '{{$id}}', (data) => {
@@ -87,5 +87,5 @@
                     }, 5);
                 }
             });
-    </script>
+    </script> --}}
 @endsection

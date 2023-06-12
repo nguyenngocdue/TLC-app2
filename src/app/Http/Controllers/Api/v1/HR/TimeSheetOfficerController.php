@@ -8,9 +8,13 @@ use Illuminate\Http\Request;
 
 class TimeSheetOfficerController extends TimesheetController
 {
+    protected $type = 'hr_timesheet_officers';
+    protected $model = Hr_timesheet_officer::class;
     public function show(Request $request, $id)
     {
-        $hrTsLines = Hr_timesheet_officer::findOrFail($id)->getHrTsLines;
-        return new HrTsLineCollection($hrTsLines);
+        $hrTimesheetOfficer = Hr_timesheet_officer::findOrFail($id);
+        $hrTsLines = $hrTimesheetOfficer->getHrTsLines;
+        $initialDate = $hrTimesheetOfficer->week;
+        return ['hits' => new HrTsLineCollection($hrTsLines), 'meta' => $initialDate];
     }
 }

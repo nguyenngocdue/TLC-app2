@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 
 Route::resource('welcome-canh', WelcomeCanhController::class)->only('index');
+Route::get('welcome-canh-all', [WelcomeCanhController::class, 'indexAll'])->name('welcome-canh-all.index');
 Route::resource('welcome-due', WelcomeDueController::class)->only('index');
 Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 
