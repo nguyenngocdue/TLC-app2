@@ -36,6 +36,14 @@ class CurrentUser
         }
         return $userAuth;
     }
+    public static function hasPermissionTo($permission)
+    {
+        $userAuth = static::checkAuth();
+        if (isset($userAuth->roleSets[0])) {
+            return $userAuth->roleSets[0]->hasPermissionTo($permission);
+        }
+        return false;
+    }
 
     public static function isAdmin()
     {
@@ -103,5 +111,25 @@ class CurrentUser
         $settings = self::getSettings();
         $bookmarkSettings = $settings['bookmark_search'] ?? [];
         return $bookmarkSettings;
+    }
+
+    public static function getViewSuffix()
+    {
+        $db = [
+            '-thirdparty' => [138],
+            '-vendor' => [],
+            '-client' => [],
+            '-subcontractor' => [],
+        ];
+        $cu = CurrentUser::get();
+        $discipline = $cu->discipline;
+        $viewSuffix = "";
+        foreach ($db as $key => $arrayValue) {
+            if (in_array($discipline, $arrayValue)) {
+                $viewSuffix = $key;
+                break;
+            }
+        }
+        return $viewSuffix;
     }
 }

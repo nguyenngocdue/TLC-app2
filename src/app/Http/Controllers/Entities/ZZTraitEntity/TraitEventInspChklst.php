@@ -12,7 +12,7 @@ trait TraitEventInspChklst
 {
     private function fireEventInspChklst(Request $request, $id)
     {
-        $signOffIds = $request->input('getSignOff()');
+        $signOffIds = $request->input('getMonitors1()');
         if ($this->data === Qaqc_insp_chklst_sht::class && $signOffIds) {
             $dataTable = $request->input('table01');
             $failIds = array_filter($dataTable['control_fail_current_session_ids'], function ($item) {

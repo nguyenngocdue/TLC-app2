@@ -100,14 +100,24 @@ trait HasCheckbox
         return $result;
     }
 
+    private static $singleton12 = [];
+    private static function executeQuery($leftType, $thisClass)
+    {
+        $key = "{$leftType}_{$thisClass}";
+        if (!isset(static::$singleton12[$key])) {
+            $sql = DB::table('many_to_many')->where($leftType, $thisClass);
+            static::$singleton12[$key] = $sql->get();
+        }
+        return static::$singleton12[$key];
+    }
+
     private static $singleton02 = [];
     private static $count = 0;
     private static function getManyToMany($leftType, $thisClass, $leftId, $thisId)
     {
         $key = $leftType . "_" . $thisClass;
         if (!isset(static::$singleton02[$key])) {
-            $sql = DB::table('many_to_many')->where($leftType, $thisClass);
-            $result0 = $sql->get();
+            $result0 = static::executeQuery($leftType, $thisClass);
             // Log::info($sql->toSql());
             foreach ($result0 as $line) {
                 $subKey_i = $leftId . "_" . $line->{$leftId};

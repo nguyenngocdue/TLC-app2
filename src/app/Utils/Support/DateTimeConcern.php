@@ -2,6 +2,7 @@
 
 namespace App\Utils\Support;
 
+use App\Models\User;
 use App\Utils\Constant;
 use Carbon\Carbon;
 use DateTime;
@@ -241,11 +242,13 @@ class DateTimeConcern
      * @param mixed $timestamp
      * @return string
      */
-    public static function formatTimestampStartForMorning($timestamp)
+    public static function formatTimestampStartForMorning($timestamp, $userId)
     {
         $dateTime = new DateTime($timestamp);
-        $dateTime->setTime(8, 0, 0);
-        return self::formatTimestampFromJStoDB($dateTime->format("Y-m-d\TH:i:sP"));
+        $timeStart = self::getStandardStartTimeMorningOfUser($userId);
+        $explodeTimeStart = explode(":", $timeStart);
+        $dateTime->setTime($explodeTimeStart[0], $explodeTimeStart[1], $explodeTimeStart[2]);
+        return $dateTime->format("Y-m-d H:i:s");
     }
     /**
      * Convert timestamps from javascript format (Full Calendar) to database format
@@ -253,11 +256,13 @@ class DateTimeConcern
      * @param mixed $timestamp
      * @return string
      */
-    public static function formatTimestampStartForAfternoon($timestamp)
+    public static function formatTimestampStartForAfternoon($timestamp, $userId)
     {
         $dateTime = new DateTime($timestamp);
-        $dateTime->setTime(13, 0, 0);
-        return self::formatTimestampFromJStoDB($dateTime->format("Y-m-d\TH:i:sP"));
+        $timeStart = self::getStandardStartTimeAfternoonOfUser($userId);
+        $explodeTimeStart = explode(":", $timeStart);
+        $dateTime->setTime($explodeTimeStart[0], $explodeTimeStart[1], $explodeTimeStart[2]);
+        return $dateTime->format("Y-m-d H:i:s");
     }
     /**
      * Calculate duration based on start time and end time  
@@ -297,26 +302,42 @@ class DateTimeConcern
         return date_create_from_format("Y-m-d\TH:i:sP", $timestamp);
     }
 
-    public static function setTime($timeType, $startTime)
+    public static function setTime($timeType, $startTime, $userId)
     {
         switch ($timeType) {
             case 'morning':
-                return self::formatTimestampStartForMorning($startTime);
+                return self::formatTimestampStartForMorning($startTime, $userId);
             case 'afternoon':
-                return self::formatTimestampStartForAfternoon($startTime);
+                return self::formatTimestampStartForAfternoon($startTime, $userId);
             default:
                 return self::formatTimestampFromJStoDB($startTime);
         }
     }
-    public static function setDuration($timeType)
+    public static function setDuration($timeType, $userId)
     {
         switch ($timeType) {
             case 'morning':
-                return Constant::TIME_DEFAULT_MORNING;
+                return self::getDurationMorningOfUser($userId);
             case 'afternoon':
-                return Constant::TIME_DEFAULT_AFTERNOON;
+                return self::getDurationAfternoonOfUser($userId);
             default:
                 return 60;
         }
+    }
+    public static function getStandardStartTimeMorningOfUser($id)
+    {
+        return User::findOrFail($id)->getWorkplace->standard_start_time;
+    }
+    public static function getStandardStartTimeAfternoonOfUser($id)
+    {
+        return User::findOrFail($id)->getWorkplace->getStandardStartTimeAfternoon();
+    }
+    public static function getDurationMorningOfUser($id)
+    {
+        return User::findOrFail($id)->getWorkplace->getDurationMorning();
+    }
+    public static function getDurationAfternoonOfUser($id)
+    {
+        return User::findOrFail($id)->getWorkplace->getDurationAfternoon();
     }
 }

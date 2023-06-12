@@ -7,6 +7,7 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperDefinitions;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\JsonControls;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -74,12 +75,46 @@ class MyView extends Component
         return $result;
     }
 
-    private function makeDataSource($viewType)
+    private function monitored_by_me($appKey, $app, $openingDocs, $uid, $statuses)
     {
-        $apps = LibApps::getAll();
-        $apps = array_filter($apps, fn ($app) => $app['show_in_my_view'] ?? false);
-        $uid = CurrentUser::get()->id;
+        $docs = $openingDocs->get();
         $result = [];
+        // dump("monitored_by_me");
+        // dump($docs->count());
+        foreach ($docs as $doc) {
+            if (isset($statuses[$doc->status])) {
+                $status = $statuses[$doc->status];
+                // $assignee = $status['ball-in-courts']['ball-in-court-assignee'];
+                $monitors_1_to_9 = $status['ball-in-courts']['ball-in-court-monitors'];
+                $monitors_1_to_9 = $monitors_1_to_9 ? $monitors_1_to_9 : "getMonitors1()";
+                // dump($doc->id, $monitors_1_to_9);
+                if (strlen($monitors_1_to_9) > 0) {
+                    $fn = substr($monitors_1_to_9, 0, strlen($monitors_1_to_9) - 2);
+                    // dump($fn);
+                    if (method_exists($doc, $fn)) {
+                        // dump("$doc->id $fn");
+                        $monitors = $doc->$fn()->pluck('id')->toArray();
+                        // dump($monitors);
+                        // dump($doc->id . ": ($fn) " . $uid . " in [" . join(", ", $monitors) . "]");
+
+                        if (in_array($uid, $monitors)) $result[] = $doc;
+                    } else {
+                        // dump("$appKey -> $fn does not exist.");
+                        Debugbar::info("$appKey -> $fn does not exist.");
+                        break;
+                    }
+                }
+            } else {
+                dump("Status " . $doc->status . " of $appKey#" . $doc->id . " is not in the available statuses.");
+            }
+        }
+        return $result;
+    }
+
+    private function getItems($apps, $viewType)
+    {
+        $result = [];
+        $uid = CurrentUser::get()->id;
         foreach ($apps as $appKey => $app) {
             $sp = SuperProps::getFor($appKey);
             $closed = SuperDefinitions::getClosedOf($appKey);
@@ -96,6 +131,7 @@ class MyView extends Component
                     continue;
                 }
             }
+            // dump($viewType);
             // dump($appKey . " - " . $openingDocs->count());
             $statuses = $sp['statuses'];
             switch ($viewType) {
@@ -105,6 +141,9 @@ class MyView extends Component
                 case "created_by_me":
                     $items =  $this->created_by_me($appKey, $app, $openingDocs, $uid,);
                     break;
+                case "monitored_by_me":
+                    $items =  $this->monitored_by_me($appKey, $app, $openingDocs, $uid, $statuses);
+                    break;
                 default:
                     dd("Unknown how to render $viewType");
                     break;
@@ -113,6 +152,21 @@ class MyView extends Component
             // dump($appKey, $closed);
             $result = [...$result, ...$items];
         }
+        return $result;
+    }
+
+    private function makeDataSource($viewType)
+    {
+        $apps = LibApps::getAll();
+        if (in_array($viewType, ['assigned_to_me', 'created_by_me'])) {
+            $apps = array_filter($apps, fn ($app) => $app['show_in_my_view'] ?? false);
+        } elseif (in_array($viewType, ['monitored_by_me'])) {
+            $apps = array_filter($apps, fn ($app) => $app['show_in_monitored_by_me'] ?? false);
+        }
+        $apps = array_filter($apps, fn ($app) => CurrentUser::hasPermissionTo("read-" . Str::plural($app['name'])));
+
+        $result = $this->getItems($apps, $viewType);
+
         // dd($result);
         return $result;
     }
@@ -165,8 +219,10 @@ class MyView extends Component
         $dataSource = $this->makeDataSource($this->viewType);
         // if (isset($dataSource[0])) dump($dataSource[0]);
 
+        $icon = "fa-duotone fa-question";
         if ($this->viewType === "assigned_to_me") $icon = "fa-duotone fa-inbox-in";
         if ($this->viewType === "created_by_me") $icon = "fa-duotone fa-inbox-out";
+        if ($this->viewType === "monitored_by_me") $icon = "fa-duotone fa-eye";
 
         return view('components.dashboards.my-view', [
             'title' => $this->title,

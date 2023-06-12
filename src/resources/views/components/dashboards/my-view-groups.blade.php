@@ -6,4 +6,7 @@
     <div class="col-span-12 lg:col-span-6">
         <x-dashboards.my-view title="Assigned to Me" viewType="assigned_to_me" table="{{$table}}" projectId="{{$projectId}}" />
     </div>
+    {{-- <div class="col-span-12 lg:col-span-6">
+        <x-dashboards.my-view title="Monitored by Me" viewType="monitored_by_me" table="{{$table}}" projectId="{{$projectId}}" />
+    </div> --}}
 </div>

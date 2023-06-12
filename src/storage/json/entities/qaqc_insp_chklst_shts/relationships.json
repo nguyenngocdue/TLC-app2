@@ -55,10 +55,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getSignOff()": {
-        "name": "_getSignOff()",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
         "relationship": "getCheckedByField",
-        "control_name": "getSignOff()",
+        "control_name": "getMonitors1()",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "person",

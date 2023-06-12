@@ -2,9 +2,10 @@
 @section('topTitle', 'Welcome')
 @section('title', '')
 @section('content')
-
-
-<div class="px-5 bg-white" id="app">
+<div class="mt-5">
+  <x-renderer.calendar-view-all />
+</div>
+<div class="px-5 bg-white" >
   <div class="grid grid-cols-6">
     <div class="col-span-1">
       <x-calendar.sidebar-calendar></x-calendar.sidebar-calendar>
