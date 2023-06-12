@@ -22,7 +22,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     ];
 
     public $oracyParams = [
-        "getSignOff()" => ["getCheckedByField", User::class],
+        "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
     public function getLines()
@@ -65,7 +65,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $relation = $tmp->belongsTo(Prod_order::class, 'prod_order_id');
         return $relation;
     }
-    public function getSignOff()
+    public function getMonitors1()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
@@ -80,7 +80,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
             ['dataIndex' => 'name'],
             ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'rendererParam' => 'name'],
             ['dataIndex' => 'qaqc_insp_chklst_id'],
-            ['dataIndex' => 'getSignOff()', 'renderer' => 'agg_count'],
+            ['dataIndex' => 'getMonitors1()', 'renderer' => 'agg_count'],
             ['dataIndex' => 'progress'],
             ['dataIndex' => 'status'],
         ];

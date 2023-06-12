@@ -68,7 +68,7 @@ class SignOff extends Component
      */
     public function render()
     {
-        $designatedApprovers = $this->item->getSignOff();
+        $designatedApprovers = $this->item->getMonitors1();
         $selectedStr = "[" . join(",", $designatedApprovers->pluck('id')->toArray()) . ']';
         $signatures = $this->signatures;
         // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
