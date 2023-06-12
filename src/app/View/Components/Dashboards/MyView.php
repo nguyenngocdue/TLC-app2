@@ -97,7 +97,10 @@ class MyView extends Component
                         // dump($monitors);
                         // dump($doc->id . ": ($fn) " . $uid . " in [" . join(", ", $monitors) . "]");
 
-                        if (in_array($uid, $monitors)) $result[] = $doc;
+                        if (in_array($uid, $monitors)) {
+                            $this->makeUpLinks($app, $doc);
+                            $result[] = $doc;
+                        }
                     } else {
                         // dump("$appKey -> $fn does not exist.");
                         Debugbar::info("$appKey -> $fn does not exist.");
@@ -111,13 +114,10 @@ class MyView extends Component
         return $result;
     }
 
-    private function makeDataSource($viewType)
+    private function getItems($apps, $viewType)
     {
-        $apps = LibApps::getAll();
-        $apps = array_filter($apps, fn ($app) => $app['show_in_my_view'] ?? false);
-        $apps = array_filter($apps, fn ($app) => CurrentUser::hasPermissionTo("read-" . Str::plural($app['name'])));
-        $uid = CurrentUser::get()->id;
         $result = [];
+        $uid = CurrentUser::get()->id;
         foreach ($apps as $appKey => $app) {
             $sp = SuperProps::getFor($appKey);
             $closed = SuperDefinitions::getClosedOf($appKey);
@@ -134,6 +134,7 @@ class MyView extends Component
                     continue;
                 }
             }
+            // dump($viewType);
             // dump($appKey . " - " . $openingDocs->count());
             $statuses = $sp['statuses'];
             switch ($viewType) {
@@ -154,6 +155,21 @@ class MyView extends Component
             // dump($appKey, $closed);
             $result = [...$result, ...$items];
         }
+        return $result;
+    }
+
+    private function makeDataSource($viewType)
+    {
+        $apps = LibApps::getAll();
+        if (in_array($viewType, ['assigned_to_me', 'created_by_me'])) {
+            $apps = array_filter($apps, fn ($app) => $app['show_in_my_view'] ?? false);
+        } elseif (in_array($viewType, ['monitored_by_me'])) {
+            $apps = array_filter($apps, fn ($app) => $app['show_in_monitored_by_me'] ?? false);
+        }
+        $apps = array_filter($apps, fn ($app) => CurrentUser::hasPermissionTo("read-" . Str::plural($app['name'])));
+
+        $result = $this->getItems($apps, $viewType);
+
         // dd($result);
         return $result;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Utils\Support;
 
+use DateTime;
 
 class Report
 {
@@ -23,6 +24,7 @@ class Report
         // dd($groupedArray, $dataSource);
         return $groupedArray;
     }
+
 
     public static function groupArrayByKey2($dataSource, $key, $returnKey, $returnValue)
     {
@@ -55,7 +57,7 @@ class Report
     public static function slugName($string)
     {
         $strLower = strtolower($string);
-        return preg_replace('/[[:space:]]+/', "_", $strLower);
+        return preg_replace('/[[:space:]-]+/', "_", $strLower);
     }
     public static function makeTitle($string)
     {
@@ -85,4 +87,34 @@ class Report
     {
         return 'param-' . str_replace('_', '-', $str);
     }
+    public static function transferValueOfKey($array, $key, $value)
+    {
+        $newArray = array_map(function ($item) use ($key, $value) {
+            $date = DateTime::createFromFormat('Y-m-d', $item[$key]);
+            $reversedDate = $date->format('d-m-Y');
+            $strDate = str_replace('-', '_', $reversedDate);
+            $item[$strDate] = $item['time_sheet_hours'];
+            return $item;
+        }, $array);
+        return $newArray;
+    }
+
+    public static function explodePickerDate($pickerDate)
+    {
+        $pickerDate = array_map(fn ($item) => trim($item), explode('-', $pickerDate));
+        $startDate = $pickerDate[0] ?? '01/01/2021';
+        $endDate = $pickerDate[1] ?? '01/02/2021';
+        return [$startDate, $endDate];
+    }
+
+    public static function formatStringDate($stringDate, $typeFormat = 'Y-m-d')
+    {
+        return DateTime::createFromFormat('d/m/Y', $stringDate)->format($typeFormat);
+    }
+
+    public static function retrieveDataByKeyIndex($array,$key){
+        $idx = array_search($key, array_keys($array));
+        return array_slice($array, $idx + 1, count($array) - $idx);
+    }
+
 }

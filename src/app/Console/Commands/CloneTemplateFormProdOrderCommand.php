@@ -86,7 +86,7 @@ class CloneTemplateFormProdOrderCommand extends Command
                         'order_no' => $qaqcInspTmplSheet->order_no,
                     ]);
                     $thirdPartyList = $qaqcInspTmplSheet->getMonitors1();
-                    $qaqcInspChklstSht->syncCheck("getSignOff", "App\Models\User", $thirdPartyList->pluck('id')->toArray());
+                    $qaqcInspChklstSht->syncCheck("getMonitors1", "App\Models\User", $thirdPartyList->pluck('id')->toArray());
                     foreach ($qaqcInspTmplSheet->getLines as $qaqcInspTmplLine) {
                         Qaqc_insp_chklst_line::create([
                             'name' => $qaqcInspTmplLine->name,

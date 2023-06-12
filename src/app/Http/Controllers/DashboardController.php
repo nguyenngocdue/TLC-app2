@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Utils\Support\CurrentUser;
+
 class DashboardController extends Controller
 {
     /**
@@ -25,6 +27,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboards.dashboard',);
+        $view = "dashboard" . CurrentUser::getViewSuffix();
+        return view('dashboards.' . $view,);
     }
 }

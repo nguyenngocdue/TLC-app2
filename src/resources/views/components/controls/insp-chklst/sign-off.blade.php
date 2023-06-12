@@ -3,7 +3,7 @@
         <p>Third Party Sign Off</p>
     </div>
     <x-renderer.card title="Designated Approvers" class='border1 m-4'>
-        <x-controls.has-data-source.dropdown2 type={{$type}} name='getSignOff()' :selected="$selected" multiple={{true}}  />
+        <x-controls.has-data-source.dropdown2 type={{$type}} name='getMonitors1()' :selected="$selected" multiple={{true}}  />
     </x-renderer.card>
     @php $index = 0; @endphp
     @foreach($signatures as $signature)
@@ -39,14 +39,16 @@
         </div>
     </div>
     @endforeach
-    <div class="flex justify-center w-full">
-        <x-renderer.button 
-        title='{{$title}}' 
-        icon="fa-duotone fa-paper-plane" 
-        class="w-3/4 h-full bg-lime-200 mb-2"
-        onClick="sendRemindToPeople([{{join(',', array_keys( $remindList))}}], '{{$type}}', {{$signableId}})"
-        >Request to sign off</x-renderer.button>
-    </div>
+    @if(!empty($remindList))
+        <div class="flex justify-center w-full">
+            <x-renderer.button 
+            title='{{$title}}' 
+            icon="fa-duotone fa-paper-plane" 
+            class="w-3/4 h-full bg-lime-200 mb-2"
+            onClick="sendRemindToPeople([{{join(',', array_keys( $remindList))}}], '{{$type}}', {{$signableId}})"
+            >Request to sign off</x-renderer.button>
+        </div>
+    @endif 
     @if($isRequestedToSign0)
         @if(!$alreadySigned)
         <div class="w-full bg-blue-100 flex justify-center my-2">

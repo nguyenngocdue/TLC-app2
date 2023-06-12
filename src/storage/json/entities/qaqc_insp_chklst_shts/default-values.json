@@ -143,9 +143,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getSignOff()": {
-        "name": "_getSignOff()",
-        "column_name": "getSignOff()",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
         "label": "",
         "validation": "",
         "validation_regex": "",

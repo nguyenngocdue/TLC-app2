@@ -48,8 +48,8 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ,chklst_shts.status AS chklst_shts_status
 
         FROM (SELECT
-        pr.id AS project_id
-        ,pr.name AS project_name
+        pj.id AS project_id
+        ,pj.name AS project_name
         ,sp.id AS sub_project_id
         ,sp.name AS sub_project_name
         ,po.id AS prod_order_id

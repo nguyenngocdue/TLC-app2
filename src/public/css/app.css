@@ -701,6 +701,12 @@ video {
 .col-start-1 {
   grid-column-start: 1;
 }
+.col-start-3 {
+  grid-column-start: 3;
+}
+.col-start-4 {
+  grid-column-start: 4;
+}
 .float-right {
   float: right;
 }
@@ -1154,6 +1160,9 @@ video {
 }
 .min-h-\[150px\] {
   min-height: 150px;
+}
+.min-h-screen {
+  min-height: 100vh;
 }
 .w-1 {
   width: 0.25rem;

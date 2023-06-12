@@ -121,4 +121,24 @@ class CurrentUser
         $bookmarkSettings = $settings['bookmark_search'] ?? [];
         return $bookmarkSettings;
     }
+
+    public static function getViewSuffix()
+    {
+        $db = [
+            '-thirdparty' => [138],
+            '-vendor' => [],
+            '-client' => [],
+            '-subcontractor' => [],
+        ];
+        $cu = CurrentUser::get();
+        $discipline = $cu->discipline;
+        $viewSuffix = "";
+        foreach ($db as $key => $arrayValue) {
+            if (in_array($discipline, $arrayValue)) {
+                $viewSuffix = $key;
+                break;
+            }
+        }
+        return $viewSuffix;
+    }
 }

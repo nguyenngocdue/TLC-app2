@@ -26,4 +26,9 @@ trait TraitDataModesReport
             '050' => 'Model 050 (updating)',
         ]];
     }
+    public function hr_timesheet_lines(){
+        return ['mode_option' =>[
+            '010' => 'Project/Date',
+        ]];
+    }
 }
