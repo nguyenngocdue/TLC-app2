@@ -3,6 +3,9 @@
 <x-calendar.modal-click-right />
 <script type="text/javascript">
     const modalId = @json($modalId);
+    const readOnly = @json($readOnly);
+    const arrHidden = @json($arrHidden);
+    console.log(arrHidden);
     const modal = $(`#`+modalId);
     const containerEl = document.getElementById('task_id');
     const calendarEl = document.getElementById('calendar');
@@ -50,7 +53,7 @@
                     });
                     calendar = new Calendar(calendarEl, {
                         headerToolbar: {
-                        left:'today',     //'prev,next today',
+                        left:'',     //'prev,next today',
                         center: 'title',
                         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                         },
@@ -69,88 +72,101 @@
                         theme: 'sandstone',
                         dayMaxEvents: true,
                         weekNumbers: true,
-                        editable: true,
-                        droppable: true,
+                        editable: !readOnly,
+                        droppable: !readOnly,
                         events: events,
+                        hiddenDays: arrHidden,
                         eventClick: function(info){
-                            //indentify location modal
-                            var {clientX , clientY} = info.jsEvent;
-                            var modalTop = clientY / 2;
-                            var modalLeft = clientX;
-                            modal.css({ top: modalTop, left: modalLeft }).removeClass('hidden');
-                            //handle modal
-                            handleUpdateModalEvent(info);
-                            //extended value render modal
-                            var extendedProps = info.event._def.extendedProps;
-                            var taskId = extendedProps.task_id;
-                            var subTaskId = extendedProps.sub_task_id;
-                            var workModeId =    extendedProps.work_mode_id;
-                            var remarkValue = extendedProps.remark;
-                            //render modal trigger
-                            modalTitleTaskValue.text(`Task: ${extendedProps.title_default}`);
-                            modalTask.val(taskId)
-                            modalTask.trigger('change');
-                            modalSubTask.val(subTaskId);
-                            modalSubTask.trigger('change');
-                            modalWorkMode.val(workModeId);
-                            modalWorkMode.trigger('change');
-                            modalRemark.val(remarkValue);
+                            if(!readOnly){
+                                //indentify location modal
+                                var {clientX , clientY} = info.jsEvent;
+                                var modalTop = clientY / 2;
+                                var modalLeft = clientX;
+                                modal.css({ top: modalTop, left: modalLeft }).removeClass('hidden');
+                                //handle modal
+                                handleUpdateModalEvent(info);
+                                //extended value render modal
+                                var extendedProps = info.event._def.extendedProps;
+                                var taskId = extendedProps.task_id;
+                                var subTaskId = extendedProps.sub_task_id;
+                                var workModeId =    extendedProps.work_mode_id;
+                                var remarkValue = extendedProps.remark;
+                                //render modal trigger
+                                modalTitleTaskValue.text(`Task: ${extendedProps.title_default}`);
+                                modalTask.val(taskId)
+                                modalTask.trigger('change');
+                                modalSubTask.val(subTaskId);
+                                modalSubTask.trigger('change');
+                                modalWorkMode.val(workModeId);
+                                modalWorkMode.trigger('change');
+                                modalRemark.val(remarkValue);
+                            }
                         },
                         eventDidMount: function(info) {
+                            if(!readOnly){
                             //handle click mouse right
                             info.el.addEventListener('contextmenu', function(e) {
                             e.preventDefault();
                             handleContextMenu(info);
                             });
-                        },
-                        eventReceive: function(info) {
-                            var projectId = document.getElementById('project_id').value;
-                            var subProjectId = document.getElementById('sub_project_id').value;
-                            var lodId = document.getElementById('lod_id').value;
-                            var disciplineId = document.getElementById('discipline_id').value;
-                            var dateTime = info.event.startStr;
-                            var draggedElDiv = info.draggedEl;
-                            var taskId = draggedElDiv.children[0].getAttribute('id');
-                            switch (info.view.type) {
-                                case 'dayGridMonth':
-                                    info.event.remove();
-                                    toastr.warning(`Can't create new timesheet line by Month view, please use Week or Day view instead.`);
-                                    break;
-                                default:
-                                var data = {
-                                "project_id" : projectId,
-                                "sub_project_id": subProjectId,
-                                "lod_id": lodId,
-                                "discipline_id": disciplineId,
-                                "task_id": taskId,
-                                "date_time": dateTime,
-                                // "all_day": null,
-                                "timesheetable_type": timesheetableType,
-                                "timesheetable_id": timesheetableId
-                            }
-                                callApi('post',url,data,info,function(info,calendar,response){
-                                    if(response.data){
-                                    info.event.remove();
-                                    calendar.addEvent(response.data)
-                                    toastr.success('Created new timesheet line successfully!');
-                                    }
-                                },calendar);
-                                    break;
                             }
                             
                         },
+                        eventReceive: function(info) {
+                            if(!readOnly){
+                                var projectId = document.getElementById('project_id').value;
+                                var subProjectId = document.getElementById('sub_project_id').value;
+                                var lodId = document.getElementById('lod_id').value;
+                                var disciplineId = document.getElementById('discipline_id').value;
+                                var dateTime = info.event.startStr;
+                                var draggedElDiv = info.draggedEl;
+                                var taskId = draggedElDiv.children[0].getAttribute('id');
+                                switch (info.view.type) {
+                                    case 'dayGridMonth':
+                                        info.event.remove();
+                                        toastr.warning(`Can't create new timesheet line by Month view, please use Week or Day view instead.`);
+                                        break;
+                                    default:
+                                    var data = {
+                                    "project_id" : projectId,
+                                    "sub_project_id": subProjectId,
+                                    "lod_id": lodId,
+                                    "discipline_id": disciplineId,
+                                    "task_id": taskId,
+                                    "date_time": dateTime,
+                                    // "all_day": null,
+                                    "timesheetable_type": timesheetableType,
+                                    "timesheetable_id": timesheetableId
+                                }
+                                    callApi('post',url,data,info,function(info,calendar,response){
+                                        if(response.data){
+                                        info.event.remove();
+                                        calendar.addEvent(response.data)
+                                        toastr.success('Created new timesheet line successfully!');
+                                        }
+                                    },calendar);
+                                        break;
+                                }
+                            }else{
+                                info.event.remove();
+                            }
+                        },
                         eventDrop: function(info) {
-                            eventUpdateCalendar(info);
+                            if(!readOnly){
+                                eventUpdateCalendar(info);
+                            }
                         },
                         eventResize: function(info) {
-                            eventUpdateCalendar(info);
+                            if(!readOnly){
+                                eventUpdateCalendar(info);
+                            }
                         },
                         eventContent: function(info) {
-                        var timeText = info.timeText;
-                        var eventTitle = info.event.title;
-                        var tagSubProject = info.event.extendedProps.tag_sub_project;
-                        var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between"><div>' + timeText +'</div>'+tagSubProject+'</div>' + eventTitle +'</div>';
-                        return { html: eventTitleHTML };
+                                var timeText = info.timeText;
+                                var eventTitle = info.event.title;
+                                var tagSubProject = info.event.extendedProps.tag_sub_project;
+                                var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between"><div>' + timeText +'</div>'+tagSubProject+'</div>' + eventTitle +'</div>';
+                                return { html: eventTitleHTML };
                         }
                     })
                     calendar.render();

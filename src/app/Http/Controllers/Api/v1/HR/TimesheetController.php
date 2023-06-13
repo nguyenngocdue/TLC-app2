@@ -40,6 +40,7 @@ abstract class TimesheetController extends Controller
         try {
             if ($week) {
                 $date = Carbon::parse($week);
+                $dateStartOfWeek = Carbon::parse($week)->startOfWeek()->format('Y-m-d');
                 $currentUser = CurrentUser::get();
                 $teamId = $currentUser->category;
                 $userDisciplineId = $currentUser->discipline;
@@ -47,7 +48,7 @@ abstract class TimesheetController extends Controller
                 $definitions = Definitions::getAllOf($this->type)['new'] ?? ['name' => '', 'new' => true];
                 array_shift($definitions);
                 $statuses = array_keys(array_filter($definitions, fn ($item) => $item));
-                if ($date->startOfWeek()->format('Y-m-d') == $week) {
+                if ($dateStartOfWeek == $week) {
                     $timesheet = ($this->model)::create([
                         'week' => $week,
                         'team_id' => $teamId,
