@@ -47,7 +47,7 @@
     "prod_order_status": {
         "name": "prod_order_status",
         "hidden": null,
-        "chart_type": "doughnut",
+        "chart_type": "bar",
         "fn": "SqlForeignKeyWidget01",
         "section_title": "Production Orders",
         "widget_title": "by Status",
