@@ -41,7 +41,8 @@ class DisallowedDirectCreationChecker extends Component
         $disallowed_direct_creation = static::check($type);
         if ($disallowed_direct_creation) {
             $appCreation = LibAppCreations::getFor($type);
-            $requiredParams = explode(",", $appCreation['required_params']);
+            $requiredParams = $appCreation['required_params'] ?? "";
+            $requiredParams = explode(",", $requiredParams);
             $requiredParams = array_map(fn ($item) => trim($item), $requiredParams);
 
             // dump($appCreation);

@@ -3,7 +3,6 @@
 <x-calendar.modal-click-right />
 <script type="text/javascript">
     const modalId = @json($modalId);
-    const id = 1;
     const modal = $(`#`+modalId);
     const containerEl = document.getElementById('task_id');
     const calendarEl = document.getElementById('calendar');
@@ -27,7 +26,7 @@
             modalClickRight.addClass("hidden");
         }
     });
-    callApiGetEvents(id,apiUrl);
+    callApiGetEvents(timesheetableId,apiUrl);
     function callApiGetEvents(id,url){
             $.ajax({
             type: 'get',
@@ -38,7 +37,7 @@
             },
             success: function (response) {
                 if(response){
-                    events = response.data
+                    events = response.hits.data
                     var Calendar = FullCalendar.Calendar;
                     var Draggable = FullCalendar.Interaction.Draggable;
                     new Draggable(containerEl, {
@@ -60,7 +59,7 @@
                                 allDaySlot: false,
                             }
                         },
-                        // initialDate: '2023-06-15',
+                        initialDate: response.meta,
                         height: 850,
                         contentHeight: 830,
                         aspectRatio: 2,

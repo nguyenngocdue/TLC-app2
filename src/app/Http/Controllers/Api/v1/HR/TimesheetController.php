@@ -6,13 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\HrTsLineStoreResource;
 use App\Http\Resources\HrTsLineUpdateResource;
 use App\Http\Resources\TimesheetLineResource;
-use App\Models\Hr_timesheet_line;
+use App\Models\Hr_timesheet_officer;
+use App\Models\User_discipline;
 use App\Services\Hr_timesheet_line\Hr_timesheet_lineServiceInterface;
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Json\Definitions;
 use App\Utils\System\Api\ResponseObject;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 abstract class TimesheetController extends Controller
 {
+    protected $type;
+    protected $model;
     public $timesheetLineService;
     public function __construct(Hr_timesheet_lineServiceInterface $timesheetLineService)
     {
@@ -26,6 +32,58 @@ abstract class TimesheetController extends Controller
      * @return void
      */
     abstract protected function show(Request $request, $id);
+
+
+    public function create(Request $request)
+    {
+        $week = $request->input('week');
+        try {
+            if ($week) {
+                $date = Carbon::parse($week);
+                $currentUser = CurrentUser::get();
+                $teamId = $currentUser->category;
+                $userDisciplineId = $currentUser->discipline;
+                $assignee = User_discipline::findOrFail($userDisciplineId)->def_assignee;
+                $definitions = Definitions::getAllOf($this->type)['new'] ?? ['name' => '', 'new' => true];
+                array_shift($definitions);
+                $statuses = array_keys(array_filter($definitions, fn ($item) => $item));
+                if ($date->startOfWeek()->format('Y-m-d') == $week) {
+                    $timesheet = ($this->model)::create([
+                        'week' => $week,
+                        'team_id' => $teamId,
+                        'assignee_1' => $assignee,
+                        'owner_id' => CurrentUser::id(),
+                        'status' => $statuses[0] ?? 'new',
+                    ]);
+                } else {
+                    if ($date->day == 26) {
+                        $timesheet = ($this->model)::create([
+                            'week' => $week,
+                            'team_id' => $teamId,
+                            'assignee' => $assignee,
+                            'owner_id' => CurrentUser::id(),
+                            'status' => $statuses[0] ?? 'new',
+                        ]);
+                    } else {
+                        return ResponseObject::responseFail(
+                            'Invalid format Datetime please enter correct format',
+                        );
+                    }
+                }
+                $url = route($this->type . '.edit', $timesheet->id);
+                return ResponseObject::responseSuccess(
+                    $url,
+                    [],
+                    'Created Timesheet successfully!'
+                );
+            }
+        } catch (\Throwable $th) {
+            return ResponseObject::responseFail(
+                $th->getMessage(),
+            );
+        }
+    }
+
     /**
      * Create new Timesheet Line document
      *

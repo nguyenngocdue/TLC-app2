@@ -9,6 +9,7 @@ use App\Models\Hr_timesheet_officer;
 use App\Models\Hr_timesheet_worker;
 use App\Models\Zunit_test_03;
 use App\Utils\Support\DateTimeConcern;
+use Illuminate\Http\Request;
 
 class WelcomeCanhController extends Controller
 {
@@ -16,22 +17,25 @@ class WelcomeCanhController extends Controller
     {
         return "dashboard";
     }
-    public function index()
+    public function index(Request $request)
     {
         // dump(ini_get("curl.cainfo"));
         // dump(Storage::disk('s3')->put('dinhcanh.txt', 'NgoDinhCanh', 'public'));
+        $timesheetableType = $request->input('timesheetableType');
+        $timesheetableId = $request->input('timesheetableId');
         return view(
             'welcome-canh',
             [
-                'timesheetableType' => Hr_timesheet_officer::class,
-                'timesheetableId' => 1,
-                'apiUrl' => 'https://dev2.tlcmodular.com/api/v1/hr/timesheet_staff'
+                'timesheetableType' => $timesheetableType,
+                'timesheetableId' => $timesheetableId,
+                'apiUrl' => 'https://127.0.0.1:38002/api/v1/hr/timesheet_officers',
             ]
-            // [
-            //     'timesheetableType' => Hr_timesheet_worker::class,
-            //     'timesheetableId' => 1,
-            //     'apiUrl' => 'https://dev2.tlcmodular.com/api/v1/hr/timesheet_worker',
-            // ]
+        );
+    }
+    public function indexAll()
+    {
+        return view(
+            'welcome-canh-all',
         );
     }
 }

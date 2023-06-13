@@ -4,14 +4,14 @@ namespace App\View\Components\Calendar;
 
 use Illuminate\View\Component;
 
-class SidebarCalendar extends Component
+class CalendarGrid extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(private $id = null, private $model = null)
+    public function __construct()
     {
         //
     }
@@ -23,9 +23,6 @@ class SidebarCalendar extends Component
      */
     public function render()
     {
-        return view('components.calendar.sidebar-calendar', [
-            'id' => $this->id,
-            'model' => $this->model,
-        ]);
+        return view('components.calendar.calendar-grid');
     }
 }

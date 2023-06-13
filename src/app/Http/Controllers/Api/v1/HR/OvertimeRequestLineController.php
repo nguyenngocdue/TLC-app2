@@ -32,7 +32,7 @@ class OvertimeRequestLineController extends Controller
             [$begin_date_of_month, $end_date_of_month] = DateTimeConcern::getMonthBeginAndEndDate0($ot_date);
             [$begin_date_of_year, $end_date_of_year] = DateTimeConcern::getYearBeginAndEndDate0($ot_date);
             // $idCmp = is_numeric($otrl_id) ? "AND id < $otrl_id" : ""; //<< id="to be generated" 
-            $idCmp = "AND concat(ot_date,id) < concat('$ot_date',$otrl_id)";
+            $idCmp = "AND concat(ot_date, otrl.id) < concat('$ot_date',$otrl_id)";
             // dump($idCmp);
 
             $sql = "SELECT * FROM 
@@ -42,12 +42,13 @@ class OvertimeRequestLineController extends Controller
                     -- get_hr_year_from_date(ot_date),
                     user_id, 
                     round(200 - sum(total_time),2) AS `year_remaining_hours`
-                FROM `hr_overtime_request_lines`
+                FROM `hr_overtime_request_lines` otrl, `hr_overtime_requests` otr
                 WHERE 1=1
                     AND user_id=$user_id
-                    -- AND substr(ot_date, 1, 4)='$year0'
+                    AND otr.id=otrl.hr_overtime_request_id
+                    AND otr.deleted_at IS NULL
                     AND ot_date BETWEEN '$begin_date_of_year' AND '$end_date_of_year'
-                    AND deleted_at IS NULL
+                    AND otrl.deleted_at IS NULL
                     $idCmp
                 GROUP BY user_id, year0) AS year0
                 LEFT JOIN
@@ -56,12 +57,13 @@ class OvertimeRequestLineController extends Controller
                     if(day(ot_date) BETWEEN 1 AND $hr_month_ending_date, substr(ot_date, 1,7), substr(DATE_ADD(ot_date, INTERVAL 1 MONTH),1,7)) AS `year_month0`,
                     user_id, 
                     round(40 - sum(total_time),2) AS `month_remaining_hours`
-                FROM `hr_overtime_request_lines`
+                FROM `hr_overtime_request_lines` otrl, `hr_overtime_requests` otr
                 WHERE 1=1
                     AND user_id=$user_id
-                    -- AND substr(ot_date, 1, 7)='$year_month0'
+                    AND otr.id=otrl.hr_overtime_request_id
+                    AND otr.deleted_at IS NULL
                     AND ot_date BETWEEN '$begin_date_of_month' AND '$end_date_of_month'
-                    AND deleted_at IS NULL
+                    AND otrl.deleted_at IS NULL
                     $idCmp
                 GROUP BY user_id, year_month0) AS month0
                 ON (month0.user_id = year0.user_id)

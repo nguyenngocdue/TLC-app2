@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Renderer;
 
-use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class ItemRenderProps extends Component
@@ -14,10 +13,10 @@ class ItemRenderProps extends Component
      */
     public function __construct(
         private $dataSource,
-        private $status = null,
         private $action,
         private $type,
         private $modelPath,
+        private $status = null,
         private $id = null,
         private $item = null,
     ) {
@@ -31,7 +30,7 @@ class ItemRenderProps extends Component
      */
     public function render()
     {
-        return view('components.renderer.item-render-props', [
+        $params =  [
             'dataSource' => $this->dataSource,
             'status' => $this->status,
             'action' => $this->action,
@@ -39,6 +38,7 @@ class ItemRenderProps extends Component
             'modelPath' => $this->modelPath,
             'id' => $this->id,
             'item' => $this->item,
-        ]);
+        ];
+        return view('components.renderer.item-render-props', $params);
     }
 }

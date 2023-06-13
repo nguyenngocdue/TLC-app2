@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Utils\Support\CurrentUser;
 use App\Utils\System\GetSetCookie;
 use Illuminate\View\Component;
 
@@ -27,10 +28,7 @@ class FullCalendar extends Component
      */
     public function render()
     {
-        $token = '';
-        if (GetSetCookie::hasCookie('tlc_token')) {
-            $token = GetSetCookie::getCookie('tlc_token');
-        }
+        $token = CurrentUser::getTokenForApi();
         return view('components.calendar.full-calendar', [
             'modalId' => 'calendar001',
             'timesheetableType' => $this->timesheetableType,

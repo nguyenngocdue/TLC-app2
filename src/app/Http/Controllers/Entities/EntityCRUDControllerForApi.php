@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitSupportEntityCRUDCreateEdit2;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
@@ -15,6 +16,7 @@ class EntityCRUDControllerForApi extends Controller
 {
 	use TraitEntityDynamicType;
 	use TraitEntityFormula;
+	use TraitSupportEntityCRUDCreateEdit2;
 
 	protected $type;
 	protected $modelPath;
@@ -39,16 +41,24 @@ class EntityCRUDControllerForApi extends Controller
 
 	public function storeEmpty(Request $request)
 	{
+		$sp = SuperProps::getFor($this->type);
+		$props = $sp['props'];
 		$lines = $request->get('lines');
 		$theRows = [];
-		foreach ($lines as $input) {
-			if (isset($input['ot_date'])) $input['ot_date'] = DateTimeConcern::convertForSaving('picker_date', $input['ot_date']);
-			$input = $this->applyFormula($input, 'store');
-			$theRows[] = $this->modelPath::create($input);
+		$defaultValue = $this->getDefaultValue($props);
+		foreach ($lines as $item) {
+			foreach ($defaultValue as $key => $value) {
+				if (!isset($item[$key])) $item[$key]  = $value;
+			}
+			if (isset($item['ot_date'])) {
+				$item['ot_date'] = DateTimeConcern::convertForSaving('picker_date', $item['ot_date']);
+			}
+			$item = $this->applyFormula($item, 'store');
+			$theRows[] = $this->modelPath::create($item);
 		}
 		return ResponseObject::responseSuccess(
 			$theRows,
-			[],
+			['defaultValue' => $defaultValue],
 			"Created " . sizeof($theRows) . " lines",
 		);
 	}

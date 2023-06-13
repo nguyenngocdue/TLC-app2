@@ -6,10 +6,12 @@
 </div>
 <script>
     calendarContainer = document.querySelector("[calendar-container]");
-    const month_names = ['October','November','December','January','February','March','April','May','June','July','August','September','October','November','December'];
+    const month_names = ['10','11','12','01','02','03','04','05','06','07','08','09','10','11','12'];
     const day_names = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];  
     let year = '';
-    allTimesheet = @json($allTimesheet);
+    const allTimesheet = @json($allTimesheet);
+    const routeCreate = @json($routeCreate);
+    const token = @json($token);
     renderHtmlCalendar()
     function days_of_month(){
             all = (year) => {return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0)};
@@ -133,53 +135,56 @@
                     firstPart.forEach(day => {
                         html_array_1 += `<p>${day}</p>`
                     });
-                    valueFirst = checkTimeSheet(allTimesheet,firstPart,getIndexMonth(i),yearCurrent);
-                    firstHtml =  valueFirst
-                    ? `<a href="${valueFirst}" class="col-span-${lengthFirst} focus:outline-none text-white bg-red-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <div class="grid grid-cols-${lengthFirst} gap-1 font-semibold text-center text-gray-800">
+                    urlCreate = genUrlCreate(routeCreate,firstPart,yearCurrent,getIndexMonth(i));
+                    [url,classHover,id,bg_color,text_color] = checkTimeSheet(allTimesheet,firstPart,getIndexMonth(i),yearCurrent,routeCreate);
+                    firstHtml =  url
+                    ? `<a href="${url}" title="#${id}" class="${classHover} col-span-${lengthFirst} focus:outline-none text-white bg-${bg_color} hover:bg-${text_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <div class="grid grid-cols-${lengthFirst} gap-1 font-semibold text-center text-${text_color} hover:text-${bg_color}">
                                 ${html_array_1}
                             </div>
-                        </a>` : `<div class="col-span-${lengthFirst} focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <div class="grid grid-cols-${lengthFirst} gap-1 font-semibold text-center text-gray-800">
-                                ${html_array_1}
-                            </div>
+                        </a>` : `<div title="Create new timesheet"  class="${classHover} col-span-${lengthFirst} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <button  onclick="callApiCreateTimesheet('${urlCreate}')" class="w-full grid grid-cols-${lengthFirst} gap-1 font-semibold text-center text-gray-800">
+                                    ${html_array_1}
+                            </button>
                         </div>`;
                     html_array_2 = '';
                     secondPart.forEach(day => {
                         html_array_2 += `<p>${day}</p>`
                     });
-                    valueSecond = checkTimeSheet(allTimesheet,secondPart,getIndexMonth(i),yearCurrent);
-                    sencondHtml =  valueSecond
-                    ? `<a href="${valueSecond}" class="col-span-${lengthSecond} focus:outline-none text-white bg-red-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <div class="grid grid-cols-${lengthSecond} gap-1 font-semibold text-center text-gray-800">
+                    urlCreate = genUrlCreate(routeCreate,secondPart,yearCurrent,getIndexMonth(i));
+                    [url,classHover,id,bg_color,text_color] = checkTimeSheet(allTimesheet,secondPart,getIndexMonth(i),yearCurrent,routeCreate);
+                    sencondHtml =  url
+                    ? `<a href="${url}" title="#${id}" class="${classHover} col-span-${lengthSecond} focus:outline-none text-white bg-${bg_color} hover:bg-${text_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <div class="grid grid-cols-${lengthSecond} gap-1 font-semibold text-center text-${text_color} hover:text-${bg_color}">
                                 ${html_array_2}
                             </div>
-                        </a>` : `<div class="col-span-${lengthSecond} focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <div class="grid grid-cols-${lengthSecond} gap-1 font-semibold text-center text-gray-800">
-                                ${html_array_2}
-                            </div>
+                        </a>` : `<div title="Create new timesheet" class="${classHover} col-span-${lengthSecond} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <button onclick="callApiCreateTimesheet('${urlCreate}')" class="w-full grid grid-cols-${lengthSecond} gap-1 font-semibold text-center text-gray-800">
+                                    ${html_array_2}
+                            </button>
                         </div>`;
-                    html += `<div class="grid grid-cols-7 gap-0 font-semibold text-center text-gray-800">
+                    html += `<div class="grid grid-cols-7 gap-0 font-semibold">
                                 ${firstHtml}
                                 ${sencondHtml}
                             </div>`
                 }else{
                     dayHtml = '';
-                    valueCheck = checkTimeSheet(allTimesheet,weeksDivide,getIndexMonth(i),yearCurrent);
+                    urlCreate = genUrlCreate(routeCreate,weeksDivide,yearCurrent,getIndexMonth(i));
+                    [url,classHover,id,bg_color,text_color] = checkTimeSheet(allTimesheet,weeksDivide,getIndexMonth(i),yearCurrent,routeCreate);
                     weeksDivide.forEach(day => {
                         dayHtml += `<p>${day}</p>`
                     });
-                    html += valueCheck ? `<div class="grid grid-cols-7 gap-0 font-semibold text-center text-gray-800">
-                                                <a href="${valueCheck}" class="col-span-7 focus:outline-none text-white bg-red-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                                    <div class="grid grid-cols-7 gap-1 font-semibold text-center text-gray-800">
+                    html += url ? `<div class="grid grid-cols-7 gap-0 font-semibold">
+                                                <a href="${url}" title="#${id}" class="${classHover} col-span-7 focus:outline-none bg-${bg_color} hover:bg-${text_color} text-${text_color} hover:text-${bg_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                                    <div class="grid grid-cols-7 gap-1 font-semibold text-center ">
                                                         ${dayHtml}
                                                     </div>
                                                 </a>
                                             </div>` 
-                                            : `<div class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                            <div class="grid grid-cols-7 gap-1 font-semibold text-center text-gray-800">
-                                                ${dayHtml}
-                                            </div>
+                                            : `<div title="Create new timesheet"  class="focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                                    <button onclick="callApiCreateTimesheet('${urlCreate}')" class="${classHover} w-full grid grid-cols-7 gap-1 font-semibold text-center text-gray-800">
+                                                            ${dayHtml}
+                                                    </button>
                                             </div>`
                 }
                 result += html
@@ -190,7 +195,9 @@
                                     <div class="grid grid-cols-7 font-semibold text-gray-500 border-b-2">
                                     ${titleDayHtml}
                                     </div>
-                                    ${result}
+                                    <div class='mt-2'>
+                                        ${result}
+                                    </div>
                                 </div>
                             </div>`
             calendarContainer.innerHTML += htmlRender;
@@ -200,38 +207,90 @@
     function getIndexMonth(i){
         return (i<= 2) ? (i+10):(i-2);
     }
-    function checkTimeSheet(allTimesheet,days,month,yearCurrent){
+    function genUrlCreate(routeCreate,weeksDivide,yearCurrent,month){
+        if(typeof weeksDivide[0] == 'number'){
+            month = padNumber(month);
+            day = padNumber(weeksDivide[0]);
+            urlCreate = `${routeCreate}?week=${yearCurrent}-${month}-${day}`
+        }
+        else{
+            for (let day of weeksDivide) {
+                if(typeof day == 'number'){
+                    dayIsoWeek = moment(`${yearCurrent}-${month}-${day}`).startOf('isoWeek').format('YYYY-MM-DD');
+                    urlCreate = `${routeCreate}?week=${dayIsoWeek}`;
+                }
+            }
+        }
+        return urlCreate;
+    }
+    function checkTimeSheet(allTimesheet,days,month,yearCurrent,routeCreate){
         if(allTimesheet[yearCurrent]){
             for (let timesheet of allTimesheet[yearCurrent]) {
                 if(typeof days[0] == 'number'){
-                    isTrue = getValueUrlByDay(timesheet,yearCurrent,month,days[0]);
-                    if(isTrue){
-                        console.log(isTrue);
-                        return isTrue;
+                    value = getValueUrlByDay(timesheet,yearCurrent,month,days[0],routeCreate);
+                    if(value){
+                        if(value[0] || value[0] === false){
+                                return value;
+                            }
                     }
                 }
                 for (let day of days) {
                     if(typeof day == 'number' ){
-                        return getValueUrlByDay(timesheet,yearCurrent,month,day);
-                        if(isTrue){
-                            return isTrue;
+                        value = getValueUrlByDay(timesheet,yearCurrent,month,day,routeCreate);
+                        if(value){
+                            if(value[0] || value[0] === false){
+                                return value;
+                            }
                         }
                     }
                 }
             }
         }
-        return false;
+        return [false,'','','',''];
+    }
+    function padNumber(number) {
+        return number.toString().padStart(2, '0');
     }
     function getValueUrlByDay(timesheet,yearCurrent,month,day){
-                week = moment(`${yearCurrent}-${month}-${day}`).isoWeek();
+                month = padNumber(month);
+                day = padNumber(day);
+                dateTime = `${yearCurrent}-${month}-${day}`;
+                week = moment(dateTime).isoWeek();
                 if(week == timesheet.week_value){
-                    
+                    classHover = `hover-${week}-${yearCurrent}`;
                     if(day == 26){
-                        if(sunday(day,month,yearCurrent)) return timesheet.url;
-                        return false;
+                        if(sunday(day,month,yearCurrent)){
+                            return [false,classHover,'','',''];
+                        }
+                        if(dateTime == timesheet.week){
+                            return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color];
+                        }else{
+                            return null;
+                        }
                     }
-                    return timesheet.url;
+                    return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color];
                 }
-                return 
+    }
+    function callApiCreateTimesheet(url){
+        $.ajax({
+            type: 'get',
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            success: function (response) {
+                if(response.success){
+                    toastr.success(response.message);
+                    window.location.replace(response.hits);
+                }
+                else{
+                    toastr.warning(response.message);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                toastr.error(jqXHR.responseJSON.message);
+            },
+        })
     }
 </script>

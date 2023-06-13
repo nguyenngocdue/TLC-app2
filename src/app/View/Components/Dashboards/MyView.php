@@ -97,7 +97,10 @@ class MyView extends Component
                         // dump($monitors);
                         // dump($doc->id . ": ($fn) " . $uid . " in [" . join(", ", $monitors) . "]");
 
-                        if (in_array($uid, $monitors)) $result[] = $doc;
+                        if (in_array($uid, $monitors)) {
+                            $this->makeUpLinks($app, $doc);
+                            $result[] = $doc;
+                        }
                     } else {
                         // dump("$appKey -> $fn does not exist.");
                         Debugbar::info("$appKey -> $fn does not exist.");
