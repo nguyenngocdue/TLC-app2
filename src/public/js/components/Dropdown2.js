@@ -656,11 +656,12 @@ const reloadDataToDropdown2 = (
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
+            classEvent = readOnly ? '' : 'fc-event'
             // console.log(item)
             const title = item['description'] + ' (#' + itemId + ')'
             const bgColor = item['bgColor'] || ''
             option =
-                '<div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event cursor-pointer my-1 px-2 py-0.5' +
+                `<div class="${classEvent} fc-h-event fc-daygrid-event fc-daygrid-block-event cursor-pointer my-1 px-2 py-0.5` +
                 bgColor +
                 ' ' +
                 colSpan +

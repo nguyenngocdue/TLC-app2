@@ -175,5 +175,6 @@
         "qaqc_wir",
         "zunit_test_09"
     ],
+    "apps_have_view_all_calendar": ["hr_timesheet_officers"],
     "view_all_tab_taxonomy": "status"
 }

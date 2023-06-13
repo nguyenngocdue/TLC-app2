@@ -1,22 +1,37 @@
 <div class="w-full p-2 m-2 bg-gray-100 rounded-lg shadow">
+    <button type="button" onclick="decrease(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+        <i class="w-5 h-full fa-regular fa-arrow-up"></i>
+    </button>
     <div class = "flex flex-wrap justify-center">
-        <div class="grid grid-cols-3 font-semibold" calendar-container>
+        <div class="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 gap-3 grid-cols-1 font-semibold" calendar-container>
         </div> 
     </div>
+    <button type="button" onclick="increase(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+        <i class="w-5 h-full fa-regular fa-arrow-down"></i>
+    </button>
 </div>
 <script>
     calendarContainer = document.querySelector("[calendar-container]");
-    const month_names = ['10','11','12','01','02','03','04','05','06','07','08','09','10','11','12'];
-    const day_names = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];  
-    let year = '';
+    const month_names = ['9','10','11','12','01','02','03','04','05','06','07','08','09','10','11','12'];
+    const day_names = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    let year = '';  
     const allTimesheet = @json($allTimesheet);
     const routeCreate = @json($routeCreate);
     const token = @json($token);
-    renderHtmlCalendar()
+    yearNow();
+    renderHtmlCalendar();
+    function increase(num){
+        year += num;
+        renderHtmlCalendar()
+    }
+    function decrease(num){
+        year -= num;
+        renderHtmlCalendar()
+    }
     function days_of_month(){
             all = (year) => {return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0)};
             feb = (year) => {return all(year) ? 29 : 28};
-            return [31, 30, 31 ,31, feb(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            return [30, 31, 30, 31 ,31, feb(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     }
     function day_of_week(year,month) { 
         let day =  new Date(year,month).getDay();
@@ -53,9 +68,9 @@
         const dayOfMonth = days_of_month();
         for (let k = 0; k < dayOfMonth.length; k++) {
             days.push([]);
-            if(k <= 2){
+            if(k <= 3){
                 for (let i = 1; i <= dayOfMonth[k]; i++) {
-                if(days[k].length < day_of_week(year -1,k + 9)) {
+                if(days[k].length < day_of_week(year -1,k + 8)) {
                     i-=i;
                     days[k].push('');
                     continue; 
@@ -64,7 +79,7 @@
             } 
             }else{
                 for (let i = 1; i <= dayOfMonth[k]; i++) {
-                if(days[k].length < day_of_week(year,k - 3)) {
+                if(days[k].length < day_of_week(year,k - 4)) {
                     i-=i;
                     days[k].push('');
                     continue; 
@@ -99,15 +114,19 @@
     function sunday(day,month,year) {
         return moment(`${year}-${month}-${day}`).isoWeekday() === 7;
     }
-    
+    function dayNow(day, month) {
+        var today = moment().format('YYYY-MM-DD');
+        var specificDate = `${year}-${month}-${day}`; 
+        return moment(today).isSame(specificDate)
+    }
     function renderHtmlCalendar(){
         calendarContainer.innerHTML = '';
-        yearNow();
         weeks = weeksGenerater();
         htmlRender = '';
         for (let i = 0; i < month_names.length; i++) {
-            yearCurrent = (i <= 2) ? year - 1 : year;
+            yearCurrent = (i <= 3) ? year - 1 : year;
             const month_name = month_names[i];
+            month = getIndexMonth(i);
             titleDayHtml = ''
             day_names.forEach(day => {
                 var color ='';
@@ -119,7 +138,6 @@
                 titleDayHtml += `<div class="${classCss}">
                                     <p >${day}</p>
                                 </div>`
-                
             });
             result = '';
             for (let j = 0; j < weeks[i].length; j++) {
@@ -129,40 +147,8 @@
                     let index = weeksDivide.indexOf(25);
                     let firstPart = weeksDivide.slice(0, index + 1);
                     let secondPart = weeksDivide.slice(index + 1);
-                    var lengthFirst = firstPart.length;
-                    var lengthSecond = secondPart.length;
-                    html_array_1 = '';
-                    firstPart.forEach(day => {
-                        html_array_1 += `<p>${day}</p>`
-                    });
-                    urlCreate = genUrlCreate(routeCreate,firstPart,yearCurrent,getIndexMonth(i));
-                    [url,classHover,id,bg_color,text_color] = checkTimeSheet(allTimesheet,firstPart,getIndexMonth(i),yearCurrent,routeCreate);
-                    firstHtml =  url
-                    ? `<a href="${url}" title="#${id}" class="${classHover} col-span-${lengthFirst} focus:outline-none text-white bg-${bg_color} hover:bg-${text_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <div class="grid grid-cols-${lengthFirst} gap-1 font-semibold text-center text-${text_color} hover:text-${bg_color}">
-                                ${html_array_1}
-                            </div>
-                        </a>` : `<div title="Create new timesheet"  class="${classHover} col-span-${lengthFirst} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <button  onclick="callApiCreateTimesheet('${urlCreate}')" class="w-full grid grid-cols-${lengthFirst} gap-1 font-semibold text-center text-gray-800">
-                                    ${html_array_1}
-                            </button>
-                        </div>`;
-                    html_array_2 = '';
-                    secondPart.forEach(day => {
-                        html_array_2 += `<p>${day}</p>`
-                    });
-                    urlCreate = genUrlCreate(routeCreate,secondPart,yearCurrent,getIndexMonth(i));
-                    [url,classHover,id,bg_color,text_color] = checkTimeSheet(allTimesheet,secondPart,getIndexMonth(i),yearCurrent,routeCreate);
-                    sencondHtml =  url
-                    ? `<a href="${url}" title="#${id}" class="${classHover} col-span-${lengthSecond} focus:outline-none text-white bg-${bg_color} hover:bg-${text_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <div class="grid grid-cols-${lengthSecond} gap-1 font-semibold text-center text-${text_color} hover:text-${bg_color}">
-                                ${html_array_2}
-                            </div>
-                        </a>` : `<div title="Create new timesheet" class="${classHover} col-span-${lengthSecond} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <button onclick="callApiCreateTimesheet('${urlCreate}')" class="w-full grid grid-cols-${lengthSecond} gap-1 font-semibold text-center text-gray-800">
-                                    ${html_array_2}
-                            </button>
-                        </div>`;
+                    firstHtml = renderHtmlDaysForArrayDivide(firstPart,month,yearCurrent,routeCreate,allTimesheet);
+                    sencondHtml = renderHtmlDaysForArrayDivide(secondPart,month,yearCurrent,routeCreate,allTimesheet);
                     html += `<div class="grid grid-cols-7 gap-0 font-semibold">
                                 ${firstHtml}
                                 ${sencondHtml}
@@ -171,9 +157,7 @@
                     dayHtml = '';
                     urlCreate = genUrlCreate(routeCreate,weeksDivide,yearCurrent,getIndexMonth(i));
                     [url,classHover,id,bg_color,text_color] = checkTimeSheet(allTimesheet,weeksDivide,getIndexMonth(i),yearCurrent,routeCreate);
-                    weeksDivide.forEach(day => {
-                        dayHtml += `<p>${day}</p>`
-                    });
+                    dayHtml = renderHtmlDays(dayHtml,weeksDivide,getIndexMonth(i));
                     html += url ? `<div class="grid grid-cols-7 gap-0 font-semibold">
                                                 <a href="${url}" title="#${id}" class="${classHover} col-span-7 focus:outline-none bg-${bg_color} hover:bg-${text_color} text-${text_color} hover:text-${bg_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                                     <div class="grid grid-cols-7 gap-1 font-semibold text-center ">
@@ -204,8 +188,33 @@
         }
         
     }
+    function renderHtmlDaysForArrayDivide(array,month,year,routeCreate,allTimesheet) {
+        const lengthArr = array.length;
+        let htmlDays = '';
+        htmlDays = renderHtmlDays(htmlDays,array,month);
+        let urlCreate = genUrlCreate(routeCreate,array,year,month);
+        [url,classHover,id,bg_color,text_color] = checkTimeSheet(allTimesheet,array,month,year,routeCreate);
+        let result =  url
+                    ? `<a href="${url}" title="#${id}" class="${classHover} col-span-${lengthArr} focus:outline-none text-white bg-${bg_color} hover:bg-${text_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <div class="grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-${text_color} hover:text-${bg_color}">
+                                ${htmlDays}
+                            </div>
+                        </a>` : `<div title="Create new timesheet"  class="${classHover} col-span-${lengthArr} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <button  onclick="callApiCreateTimesheet('${urlCreate}')" class="w-full grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-gray-800">
+                                    ${htmlDays}
+                            </button>
+                        </div>`;
+        return result;
+    }
+    function renderHtmlDays(html,array,month){
+        array.forEach(day => {
+            isToday = dayNow(day,month);
+            html += isToday ? `<p class='text-red-600 rounded-full h-5 bg-rose-300 items-center justify-center'>${day}</p>` : `<p>${day}</p>`;
+        });
+        return html;
+    }
     function getIndexMonth(i){
-        return (i<= 2) ? (i+10):(i-2);
+        return (i<= 3) ? (i+9):(i-3);
     }
     function genUrlCreate(routeCreate,weeksDivide,yearCurrent,month){
         if(typeof weeksDivide[0] == 'number'){
@@ -233,17 +242,19 @@
                                 return value;
                             }
                     }
-                }
-                for (let day of days) {
-                    if(typeof day == 'number' ){
-                        value = getValueUrlByDay(timesheet,yearCurrent,month,day,routeCreate);
-                        if(value){
-                            if(value[0] || value[0] === false){
-                                return value;
+                }else{
+                    for (let day of days) {
+                        if(typeof day == 'number' ){
+                            value = getValueUrlByDay(timesheet,yearCurrent,month,day,routeCreate);
+                            if(value){
+                                if(value[0] || value[0] === false){
+                                    return value;
+                                }
                             }
                         }
                     }
                 }
+                
             }
         }
         return [false,'','','',''];
@@ -259,9 +270,6 @@
                 if(week == timesheet.week_value){
                     classHover = `hover-${week}-${yearCurrent}`;
                     if(day == 26){
-                        if(sunday(day,month,yearCurrent)){
-                            return [false,classHover,'','',''];
-                        }
                         if(dateTime == timesheet.week){
                             return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color];
                         }else{

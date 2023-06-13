@@ -5,11 +5,13 @@ namespace App\View\Components\Controls;
 use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable2ndThead;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnRO;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableEditableDataSourceWithOld;
+use Carbon\Carbon;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -198,6 +200,21 @@ class RelationshipRenderer2 extends Component
         $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
             case "calendar_grid":
+                $arrHidden = [];
+                $dateTime = Carbon::parse($row->week);
+                $weekNumber = $dateTime->weekOfYear;
+                if ($dateTime->day == 26) {
+                    $dayOfWeek = $dateTime->dayOfWeek;
+                    $arrHidden = DateTimeConcern::getDayHiddenForDayIndexWeek($dayOfWeek);
+                } else {
+                    $dateTimeDay25 = Carbon::createFromDate($dateTime->year, $dateTime->month, 25);
+                    $weekOfDay25 = $dateTimeDay25->weekOfYear;
+                    if ($weekOfDay25 == $weekNumber) {
+                        $dayOfWeekStart = $dateTime->dayOfWeek;
+                        $dayOfWeekEnd = $dateTimeDay25->dayOfWeek;
+                        $arrHidden = DateTimeConcern::getDayHiddenForDayIndexWeek($dayOfWeekStart, $dayOfWeekEnd);
+                    }
+                }
                 $index = strpos($type, "_");
                 $type = substr($type, $index + 1);
                 $apiUrl = route($type . '.index');
@@ -206,6 +223,8 @@ class RelationshipRenderer2 extends Component
                     'timesheetableType' => $modelPath,
                     'timesheetableId' => $id,
                     'apiUrl' => $apiUrl,
+                    'readOnly' => $this->readOnly,
+                    'arrHidden' => $arrHidden,
                 ]);
             case "many_icons":
                 $colSpan =  Helper::getColSpan($colName, $type);
@@ -215,6 +234,7 @@ class RelationshipRenderer2 extends Component
                 }
                 $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array
                 return view('components.controls.many-icon-params')->with(compact('dataSource', 'colSpan'));
+                // case "calendar_grid":
             case "many_lines":
                 $sp = SuperProps::getFor($tableName);
                 $dataSourceWithOld = $this->convertOldToDataSource($this->table01Name, $dataSource, $lineModelPath);
@@ -237,7 +257,6 @@ class RelationshipRenderer2 extends Component
                     $itemOriginal = $this->item->getOriginal();
                     $href = $this->createHref($this->item, $createSettings, $tableName);
                 }
-                // dump($itemOriginal);
                 $view = $editable ? 'many-line-params-editable' : 'many-line-params-ro';
                 $dataSource2ndThead = $this->readOnly ? null : $this->makeEditable2ndThead($editableColumns, $this->table01Name);
                 if ($this->readOnly) {
@@ -246,6 +265,7 @@ class RelationshipRenderer2 extends Component
                         $column['properties']['readOnly'] = true;
                     }
                 }
+
                 return view('components.controls.' . $view, [
                     'readOnly' => $this->readOnly,
                     'table01ROName' => $this->table01Name . "RO",

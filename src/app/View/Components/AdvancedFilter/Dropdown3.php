@@ -11,7 +11,7 @@ class Dropdown3 extends Component
     static function singletonCache()
     {
         if (is_null(static::$singleton)) {
-            static::$singleton = User::all();
+            static::$singleton = User::where('show_on_beta', 0)->get();
         }
         return static::$singleton;
     }

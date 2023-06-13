@@ -11,8 +11,9 @@ class CalendarGrid extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $readOnly = true,
+    ) {
         //
     }
 
@@ -23,6 +24,8 @@ class CalendarGrid extends Component
      */
     public function render()
     {
-        return view('components.calendar.calendar-grid');
+        return view('components.calendar.calendar-grid', [
+            'readOnly' => $this->readOnly,
+        ]);
     }
 }

@@ -234,8 +234,7 @@
         "show_renderer": "props-renderer",
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
         "apply_approval_tree": "true",
-        "show_in_my_view": "true",
-        "disallowed_direct_creation": "true"
+        "show_in_my_view": "true"
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",

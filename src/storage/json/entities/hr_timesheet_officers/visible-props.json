@@ -10,14 +10,22 @@
     "_week": {
         "name": "_week",
         "column_name": "week",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_team_id": {
+        "name": "_team_id",
+        "column_name": "team_id",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
         "approved": "true"
     },
-    "_team_id": {
-        "name": "_team_id",
-        "column_name": "team_id",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -31,9 +39,9 @@
         "rejected": "true",
         "approved": "true"
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_getHrTsLines": {
+        "name": "_getHrTsLines",
+        "column_name": "getHrTsLines",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -74,14 +82,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
-    },
-    "_getHrTsLines": {
-        "name": "_getHrTsLines",
-        "column_name": "getHrTsLines",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",

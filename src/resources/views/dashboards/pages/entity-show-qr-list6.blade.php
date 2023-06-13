@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', "Show List QR Code" )
+@section('title', "Show QR Code List" )
 
 @section('content')
 {{-- @dd($dataSource) --}}

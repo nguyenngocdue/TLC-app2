@@ -12,8 +12,9 @@ class SidebarFilter extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $readOnly = false,
+    ) {
         //
     }
 
@@ -28,6 +29,7 @@ class SidebarFilter extends Component
         $discipline = ($user) ? $user->discipline : null;
         return view('components.calendar.sidebar-filter', [
             'discipline' => $discipline,
+            'readOnly' => $this->readOnly,
         ]);
     }
 }

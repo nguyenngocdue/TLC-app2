@@ -4,6 +4,7 @@ namespace App\View\Components\Print;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Constant;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\View\Component;
 
@@ -34,7 +35,7 @@ class Description5 extends Component
         $prop = $this->prop;
         $columnName = $prop['column_name'];
         $content = $dataSource[$columnName];
-        $id = $dataSource['id'] ?? '';
+        $id = $dataSource['id'] ?? CurrentRoute::getEntityId($this->type);
         $label = $prop['label'] ?? '';
         $control = $prop['control'] ?? '';
         switch ($control) {
