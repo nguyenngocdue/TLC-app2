@@ -342,4 +342,16 @@ class DateTimeConcern
     {
         return User::findOrFail($id)->getWorkplace->getDurationAfternoon();
     }
+
+    public static function getDayHiddenForDayIndexWeek($start, $end = 7)
+    {
+        $value = [1, 2, 3, 4, 5, 6, 7];
+        $input = range($start, $end);
+        $result = array_diff($value, $input);
+        $hasValue7 = array_search(7, $result);
+        if ($hasValue7) {
+            $result[$hasValue7] = 0;
+        }
+        return array_values($result);
+    }
 }

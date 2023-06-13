@@ -32,8 +32,7 @@
                 bottomRightControl="{!! $perPage !!}"
                 tableTrueWidth={{$tableTrueWidth}}
                 />
-                <x-elapse title="Table overhead (without columns): "/>
-                <x-elapse total=1/>
+            <x-elapse total=1/>
         </div>
     </x-renderer.tab-pane>
 </div>

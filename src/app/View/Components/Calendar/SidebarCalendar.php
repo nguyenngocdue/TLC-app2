@@ -11,7 +11,7 @@ class SidebarCalendar extends Component
      *
      * @return void
      */
-    public function __construct(private $id = null, private $model = null)
+    public function __construct(private $id = null, private $model = null, private $readOnly = false)
     {
         //
     }
@@ -26,6 +26,7 @@ class SidebarCalendar extends Component
         return view('components.calendar.sidebar-calendar', [
             'id' => $this->id,
             'model' => $this->model,
+            'readOnly' => $this->readOnly,
         ]);
     }
 }

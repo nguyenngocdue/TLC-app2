@@ -17,6 +17,8 @@ class FullCalendar extends Component
         private $timesheetableType,
         private $timesheetableId,
         private $apiUrl,
+        private $readOnly = false,
+        private $arrHidden = [],
     ) {
         //
     }
@@ -35,6 +37,8 @@ class FullCalendar extends Component
             'timesheetableId' => $this->timesheetableId,
             'apiUrl' => $this->apiUrl,
             'token' => $token,
+            'readOnly' => $this->readOnly,
+            'arrHidden' => $this->arrHidden,
         ]);
     }
 }
