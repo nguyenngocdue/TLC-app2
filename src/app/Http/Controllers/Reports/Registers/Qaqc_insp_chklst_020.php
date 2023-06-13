@@ -249,7 +249,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $items = $dataSource->toArray();
         $cuid = CurrentUser::id();
         $inspTmplId = $modeParams['checksheet_type_id'];
-        $tmplName = Qaqc_insp_tmpl::where('id', $inspTmplId)->pluck('name')->first();
 
         foreach ($items as $key => $value) {
             $idx = array_search("chklst_shts_status", array_keys($value)); //  specify start point to render items

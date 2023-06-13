@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Reports\Reports;
 use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Models\User;
 use App\Utils\Support\Report;
 use DateInterval;
 use DatePeriod;
 use DateTime;
+use Illuminate\Support\Str;
 
 class Hr_timesheet_line_010 extends Report_ParentReportController
 
@@ -16,73 +18,45 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
 
-    protected  $picker_date = "01/01/2023 - 01/02/2023";
     protected $maxH = 50;
     protected $rotate45Width = 300;
     protected $tableTrueWidth = true;
 
     public function getSqlStr($modeParams)
     {
-        $pickerDate = $modeParams['picker_date'];
+        $pickerDate = $modeParams['picker_date'] ?? self::defaultPickerDate();
         [$startDate, $endDate] = Report::explodePickerDate($pickerDate);
         $startDate = Report::formatStringDate($startDate, 'Y-m-d');
         $endDate = Report::formatStringDate($endDate, 'Y-m-d');
         $sql = "SELECT
-        -- tsl.id AS time_sheet_id,
-        tsl.project_id AS project_id,
-        DATE(tsl.start_time) AS time_sheet_start_time,
-        SUM(tsl.ts_hour) AS time_sheet_hours,
-        SUM(tsl.duration_in_min) AS time_sheet_durations,
-        tsl.sub_project_id AS sub_project_id,
-        sp.name AS sub_project_name,
-        term.name AS time_sheet_lod_name,
-        dep.name AS user_department_name,
-        us.employeeid AS staff_id,
-        tsl.user_id AS user_id,
-        us.name AS user_name,
-        us.workplace AS workplace_id,
-        wp.name AS workplace_name,
-        #ucate.id AS user_category_id,
-        ucate.name AS user_category_name,
-        ust.id AS user_type_id,
-        ust.name AS user_type_name,
-        #us.id AS user_discipline_id,
-        udl.name AS user_discipline_name,
-        pr.name AS project_name,
-        tsl.task_id AS pj_task_id,
-        pjtk.name AS pj_task_name
-        FROM 
-            hr_timesheet_lines tsl,
-            projects pr,
-            sub_projects sp,
-            users  us,
-            terms term,
-            departments dep,
-            workplaces wp, 
-            user_categories ucate, 
-            user_disciplines udl,
-            user_types ust,
-            pj_tasks pjtk
-            WHERE 1 = 1
-            AND us.id = tsl.user_id
-            AND sp.project_id = pr.id
-            AND wp.id = us.workplace
-            AND us.category = ucate.id 
-            AND us.user_type = ust.id 
-            AND us.discipline = udl.id
-            AND pjtk.id = tsl.task_id
-            AND pr.id = tsl.project_id
-            AND term.id = tsl.lod_id
-            AND dep.id = us.department
-            AND DATE(tsl.start_time) BETWEEN '$startDate' AND '$endDate'";
-        if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
-        if (isset($modeParams['workplace_id'])) $sql .= "\n AND wp.id = '{{workplace_id}}'";
-        if (isset($modeParams['department_id'])) $sql .= "\n AND dep.id = '{{department_id}}'";
-
-        $sql .= "\n GROUP BY time_sheet_start_time, pj_task_name, project_name,project_id,sub_project_id,sub_project_name, user_id, user_name, pj_task_id, time_sheet_lod_name
-            ORDER BY user_name;";
+                    tsl.project_id AS project_id,
+                    DATE(tsl.start_time) AS time_sheet_start_time,
+                    SUM(tsl.ts_hour) AS time_sheet_hours,
+                    SUM(tsl.duration_in_min) AS time_sheet_durations,
+                    tsl.sub_project_id AS sub_project_id,
+                    tsl.user_id AS user_id,
+                    tsl.discipline_id AS discipline_id,
+                    tsl.lod_id AS lod_id,
+                    tsl.task_id AS pj_task_id
+                    FROM 
+                        hr_timesheet_lines tsl
+                        WHERE 1 = 1
+                        AND DATE(tsl.start_time) BETWEEN '$startDate' AND '$endDate'";
+                    if (isset($modeParams['user_id'])) $sql .= "\n AND tsl.user_id = '{{user_id}}'";
+                    if (isset($modeParams['sub_project_id'])) $sql .= "\n AND tsl.sub_project_id = '{{sub_project_id}}'";
+                    // if (isset($modeParams['workplace_id'])) $sql .= "\n AND wp.id = '{{workplace_id}}'";
+                    // if (isset($modeParams['department_id'])) $sql .= "\n AND dep.id = '{{department_id}}'";
+                        $sql .="\n GROUP BY time_sheet_start_time, pj_task_id, project_id, sub_project_id, user_id, discipline_id, lod_id, pj_task_id
+                        ORDER BY user_id";
         return $sql;
+    }
+
+    private function defaultPickerDate(){
+        $currentDate = new DateTime();
+        $targetDate = clone $currentDate;
+        $targetDate->modify('-6 months');
+        $targetDate->modify('-1 day');
+        return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
     }
 
     function getDatesBetween($startDate, $endDate)
@@ -129,7 +103,7 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
             ],
             [
                 "title" => "Department",
-                "dataIndex" => "user_department_name",
+                "dataIndex" => "department_name",
                 "align" => 'left',
                 "width" => 180,
             ],
@@ -153,19 +127,19 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
             ],
             [
                 "title" => "Category",
-                "dataIndex" => "user_category_name",
+                "dataIndex" => "category_name",
                 "align" => 'left',
                 "width" => 80,
             ],
             [
                 "title" => "Type",
-                "dataIndex" => "user_type_name",
+                "dataIndex" => "type_name",
                 "align" => 'left',
                 "width" => 80,
             ],
             [
                 "title" => "Discipline",
-                "dataIndex" => "user_discipline_name",
+                "dataIndex" => "discipline_name",
                 "align" => 'left',
                 "width" => 220,
             ],
@@ -210,16 +184,16 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
                 'dataIndex' => 'sub_project_id',
                 'allowClear' => true,
             ],
-            [
-                'title' => 'Workplace',
-                'dataIndex' => 'workplace_id',
-                'allowClear' => true,
-            ],
-            [
-                'title' => 'Department',
-                'dataIndex' => 'department_id',
-                'allowClear' => true,
-            ],
+            // [
+            //     'title' => 'Workplace',
+            //     'dataIndex' => 'workplace_id',
+            //     'allowClear' => true,
+            // ],
+            // [
+            //     'title' => 'Department',
+            //     'dataIndex' => 'department_id',
+            //     'allowClear' => true,
+            // ],
             [
                 'title' => 'User',
                 'dataIndex' => 'user_id',
@@ -228,54 +202,97 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
         ];
     }
 
+    private function addInfoHeadUsers($infoHeadUsers, $dataWaitingFor)
+    {
+        $users = $dataWaitingFor['users'];
+        $infoHeadUsers['user_name'] = $users[$infoHeadUsers['user_id']]['name'];
+        $infoHeadUsers['staff_id'] =  $users[$infoHeadUsers['user_id']]['employeeid'];
+        $infoHeadUsers['workplace_id'] =$users[$infoHeadUsers['user_id']]['workplace'];
+        $infoHeadUsers['type_id'] = $users[$infoHeadUsers['user_id']]['user_type'];
+        $infoHeadUsers['department_id'] = $users[$infoHeadUsers['user_id']]['department'];
+        $infoHeadUsers['category_id'] = $users[$infoHeadUsers['user_id']]['category'];
+        
+        $infoHeadUsers['project_name'] = $dataWaitingFor['projects'][$infoHeadUsers['project_id']];
+        $infoHeadUsers['sub_project_name'] = $dataWaitingFor['sub_projects'][$infoHeadUsers['sub_project_id']];
+        $infoHeadUsers['time_sheet_lod_name'] = $dataWaitingFor['terms'][$infoHeadUsers['lod_id']];
+        $infoHeadUsers['discipline_name'] = $dataWaitingFor['user_disciplines'][$infoHeadUsers['discipline_id']];
+        $infoHeadUsers['pj_task_name'] = $dataWaitingFor['pj_tasks'][$infoHeadUsers['pj_task_id']];
+        
+        $infoHeadUsers['type_name'] = $dataWaitingFor['terms'][$infoHeadUsers['type_id']];
+        $infoHeadUsers['workplace_name'] = $dataWaitingFor['workplaces'][$infoHeadUsers['workplace_id']];
+        $infoHeadUsers['category_name'] =  $dataWaitingFor['user_categories'][$infoHeadUsers['category_id']];
+        $infoHeadUsers['department_name'] =$dataWaitingFor['departments'][$infoHeadUsers['department_id']];
+
+        // dd($infoHeadUsers, $dataWaitingFor);
+        return $infoHeadUsers;
+    }
+    private function dataWaitingForLooking()
+    {
+        $arrayModelNames = ['Project', 'Sub_project', 'Term', 'User_discipline','Workplace', 'Pj_task', 'User_category', 'Department'];
+        $dataModels = array_map(function($modelName) {
+            $key = Str::plural(strtolower($modelName));
+            $value = array_column(Str::modelPathFrom($modelName)::select('id', 'name')->get()->toArray(), 'name', 'id');
+            return [$key => $value];
+        } 
+        , $arrayModelNames);
+        $dataModels = array_merge(...$dataModels);
+        $users = User::select('id', 'name', 'employeeid', 'user_type', 'workplace', 'category', 'department')->get()->toArray();;
+        $users =  array_map(fn($item)  => $item[0],Report::groupArrayByKey($users, 'id'));
+        return ['users'=> $users] + $dataModels;
+    }
+
 
     protected function transformDataSource($dataSource, $modeParams)
     {
         $data = array_slice($dataSource->toArray(), 0, 1000000);
         // dd($data);
-        $groupUsers = Report::groupArrayByKey($data, 'user_id');
-        // dd($groupUsers);
-        $groupTaskNames = array_map(fn ($item) => Report::groupArrayByKey($item, 'pj_task_name'), $groupUsers);
-
-        $valueUser = array_values($groupTaskNames);
+        $dataWaitingFor = $this->dataWaitingForLooking();
+        $groupUserIds = Report::groupArrayByKey($data, 'user_id');
+        // dd($groupUserIds);
+        $groupTaskIds = array_map(fn ($item) => Report::groupArrayByKey($item, 'pj_task_id'), $groupUserIds);
+        $groupTaskIds = array_values($groupTaskIds);
+        // dd($groupTaskIds);
         $datesData =  array_map(function ($items) {
             $dates = [];
             foreach (array_values($items) as $value) {
-                $groupProjectName = Report::groupArrayByKey($value, 'project_name');
-                $timeTransfer = array_map(fn ($array) => Report::transferValueOfKey($array, 'time_sheet_start_time', 'time_sheet_hours'), $groupProjectName);
+                $groupSubProjectId = Report::groupArrayByKey($value, 'sub_project_id');
+                // dd($groupSubProjectId);
+                $timeTransfer = array_map(fn ($array) => Report::transferValueOfKey($array, 'time_sheet_start_time', 'time_sheet_hours'), $groupSubProjectId);
                 $timeTransfer = Report::mergeArrayValues($timeTransfer);
-                $dates += $timeTransfer;
+                $dates = array_merge($dates,$timeTransfer);
             }
             return $dates;
-        }, $valueUser);
+        }, $groupTaskIds);
         $dataSource =  array_merge(...$datesData);
+        // dd($datesData);
         $strDates = $this->getStringDates($modeParams);
-        array_walk($dataSource, function ($value, $key) use ($strDates, &$dataSource) {
-            $datesHaveValue = Report::retrieveDataByKeyIndex($value, 'pj_task_name');
+        array_walk($dataSource, function ($value, $key) use ($strDates, &$dataSource, $dataWaitingFor) {
+            $datesHaveValue = Report::retrieveDataByKeyIndex($value,'pj_task_id');
+            $infoHeadUsers = Report::retrieveDataByKeyIndex($value, 'pj_task_id', true);
+            $dataHeadUsers = $this->addInfoHeadUsers($infoHeadUsers, $dataWaitingFor);
             $totalTime = array_sum($datesHaveValue);
             $diffArray = array_diff(array_values($strDates), array_keys($datesHaveValue));
-            $diffArray = ['total_time' => $totalTime] + array_fill_keys(array_values($diffArray), '');
-            $dataSource[$key] = $value + $diffArray;
+            $diffArray =  array_fill_keys(array_values($diffArray), '');
+            $dataSource[$key] = ['total_time' => $totalTime] + $dataHeadUsers +$datesHaveValue + $diffArray;
+            // dd($dataSource);
         });
-        // dd($dataSource);
-        return collect($dataSource);
+        return collect($dataSource)->sortBy('user_name');
     }
 
     private function isSaturdayOrSunday($dateString)
     {
         $date = DateTime::createFromFormat("d/m/Y", $dateString);
-        if ($date === false) return dd($dateString);
+        // dump($dateString);
+        if ($date === false) return dump($dateString);
         $dayOfWeek = $date->format("N"); // Retrieve the day of the week as a string
         if ($dayOfWeek >= 6) return true;
         return false;
     }
 
-
-
     protected function changeValueData($dataSource, $modeParams)
     {
         foreach ($dataSource as $key => $values) {
-            $dateStrings = Report::retrieveDataByKeyIndex($values, 'total_time');
+            $dateStrings = Report::retrieveDataByKeyIndex($values, 'department_name');
             foreach ($dateStrings as $dateString => $value) {
                 $_dateString = str_replace('_', '/', $dateString);
                 $isSaturdayOrSunday = $this->isSaturdayOrSunday($_dateString);
@@ -284,6 +301,8 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
                         'value' => $value,
                         'cell_class' => 'bg-gray-100',
                     ];
+                } else {
+                    // dd($values);
                 }
             }
             // dd($dateStrings);
@@ -304,12 +323,13 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
                 'cell_title' => 'ID: ' . $values['workplace_id'],
             ];
             $values['user_type_name'] = (object) [
-                'value' => $values['user_type_name'],
-                'cell_title' => 'ID: ' . $values['user_type_id'],
+                'value' => $values['type_name'],
+                'cell_title' => 'ID: ' . $values['type_id'],
             ];
 
             $dataSource[$key] = array_merge($values, $dateStrings);
         }
+        // dd($dataSource);
         return $dataSource;
     }
 
@@ -320,7 +340,7 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
         $pickerDate = 'picker_date';
         $isNullModeParams = Report::isNullModeParams($modeParams);
         if ($isNullModeParams) {
-            $modeParams[$pickerDate] = $this->picker_date;
+            $modeParams[$pickerDate] = self::defaultPickerDate();
         }
         return $modeParams;
     }

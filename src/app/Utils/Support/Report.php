@@ -112,8 +112,9 @@ class Report
         return DateTime::createFromFormat('d/m/Y', $stringDate)->format($typeFormat);
     }
 
-    public static function retrieveDataByKeyIndex($array,$key){
+    public static function retrieveDataByKeyIndex($array,$key, $reverse = false){
         $idx = array_search($key, array_keys($array));
+        if ($reverse) return array_slice($array, 0, $idx+1);
         return array_slice($array, $idx + 1, count($array) - $idx);
     }
 
