@@ -56,6 +56,25 @@
         "duplicatable": "",
         "new_line": ""
     },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "column_type": "bigint",
+        "label": "Creator",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "",
+        "width": "400",
+        "hidden_view_all": "",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -75,24 +94,24 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "column_type": "bigint",
-        "label": "Creator",
-        "control": "dropdown",
+    "_getHrTsLines": {
+        "name": "_getHrTsLines",
+        "column_name": "getHrTsLines",
+        "column_type": "eloquent_prop",
+        "label": "Timesheet Lines",
+        "control": "relationship_renderer",
         "align": "",
         "col_span": "",
-        "width": "400",
+        "width": "150",
         "hidden_view_all": "",
-        "hidden_edit": "true",
+        "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "true"
     },
     "_status": {
         "name": "_status",
@@ -188,25 +207,6 @@
         "save_on_change": "",
         "duplicatable": "",
         "new_line": ""
-    },
-    "_getHrTsLines": {
-        "name": "_getHrTsLines",
-        "column_name": "getHrTsLines",
-        "column_type": "eloquent_prop",
-        "label": "Timesheet Lines",
-        "control": "relationship_renderer",
-        "align": "",
-        "col_span": "",
-        "width": "150",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "true",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": "true"
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",

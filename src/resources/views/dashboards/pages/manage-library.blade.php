@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="px-4">
+    <x-elapse title="Bootraping: "/>
     <form action="{{$route}}" method="post">
         @csrf
         <button class="hidden" title="This button is to avoid a bug when change label and press enter."></button>

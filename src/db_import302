@@ -1,0 +1,5 @@
+# How to use this script:
+# Extract the database file to laravel.sql in src folder, it is ignored from git
+# Drop all tables in the database
+# execute this script
+cat laravel.sql | docker exec -i laravel302_mysql /usr/bin/mysql -u tlc_app_2 --password=DLTedTfrVzYbrYv9 laravel

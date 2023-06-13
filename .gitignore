@@ -3,6 +3,10 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+src/db_export102
+src/db_import202
+src/laravel.sql
+
 # Laravel 4 specific
 bootstrap/compiled.php
 app/storage/

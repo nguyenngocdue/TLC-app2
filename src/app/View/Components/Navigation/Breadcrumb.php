@@ -39,6 +39,7 @@ class Breadcrumb extends Component
             'dashboard',
             'admin_permission',
             'manageApp',
+            'manageApi',
             'manageAppCreation',
             'manageStandardProp',
             'manageStandardDefaultValue',

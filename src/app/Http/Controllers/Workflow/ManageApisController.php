@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers\Workflow;
+
+class ManageApisController extends AbstractManageLibController
+{
+    protected $title = "Manage Apis";
+    protected $libraryClass = LibApis::class;
+    protected $route = "manageApis";
+
+    protected function getColumns()
+    {
+        return [
+            [
+                "dataIndex" => "action",
+                "align" => "center",
+            ],
+            [
+                'dataIndex' => "name",
+                "renderer"  => 'read-only-text4',
+                'editable' => true,
+            ],
+            [
+                'dataIndex' => 'storeEmpty_and_updateShort',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+            [
+                'dataIndex' => 'renderTableForPopupModals',
+                'title' => 'Render Table for popup modals',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+        ];
+    }
+}

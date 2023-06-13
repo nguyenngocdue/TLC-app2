@@ -1,0 +1,278 @@
+{
+    "attachments": {
+        "name": "attachments"
+    },
+    "comments": {
+        "name": "comments"
+    },
+    "control_types": {
+        "name": "control_types"
+    },
+    "departments": {
+        "name": "departments"
+    },
+    "erp_routing_links": {
+        "name": "erp_routing_links"
+    },
+    "fields": {
+        "name": "fields"
+    },
+    "ghg_lines": {
+        "name": "ghg_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "ghg_metric_type_1s": {
+        "name": "ghg_metric_type_1s"
+    },
+    "ghg_metric_type_2s": {
+        "name": "ghg_metric_type_2s"
+    },
+    "ghg_metric_types": {
+        "name": "ghg_metric_types"
+    },
+    "ghg_sheets": {
+        "name": "ghg_sheets"
+    },
+    "hr_overtime_request_lines": {
+        "name": "hr_overtime_request_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "hr_overtime_requests": {
+        "name": "hr_overtime_requests"
+    },
+    "hr_timesheet_lines": {
+        "name": "hr_timesheet_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "hr_timesheet_officers": {
+        "name": "hr_timesheet_officers"
+    },
+    "hr_timesheet_workers": {
+        "name": "hr_timesheet_workers"
+    },
+    "hse_corrective_actions": {
+        "name": "hse_corrective_actions",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "hse_incident_reports": {
+        "name": "hse_incident_reports"
+    },
+    "loggers": {
+        "name": "loggers"
+    },
+    "pj_modules": {
+        "name": "pj_modules"
+    },
+    "pj_pods": {
+        "name": "pj_pods"
+    },
+    "pj_shipments": {
+        "name": "pj_shipments"
+    },
+    "pj_staircases": {
+        "name": "pj_staircases"
+    },
+    "pj_sub_tasks": {
+        "name": "pj_sub_tasks"
+    },
+    "pj_tasks": {
+        "name": "pj_tasks"
+    },
+    "pj_units": {
+        "name": "pj_units"
+    },
+    "posts": {
+        "name": "posts"
+    },
+    "priorities": {
+        "name": "priorities"
+    },
+    "prod_discipline_1s": {
+        "name": "prod_discipline_1s"
+    },
+    "prod_discipline_2s": {
+        "name": "prod_discipline_2s"
+    },
+    "prod_disciplines": {
+        "name": "prod_disciplines"
+    },
+    "prod_orders": {
+        "name": "prod_orders"
+    },
+    "prod_routing_details": {
+        "name": "prod_routing_details"
+    },
+    "prod_routing_links": {
+        "name": "prod_routing_links"
+    },
+    "prod_routings": {
+        "name": "prod_routings"
+    },
+    "prod_runs": {
+        "name": "prod_runs"
+    },
+    "prod_sequences": {
+        "name": "prod_sequences"
+    },
+    "projects": {
+        "name": "projects"
+    },
+    "public_holidays": {
+        "name": "public_holidays"
+    },
+    "qaqc_cars": {
+        "name": "qaqc_cars",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "qaqc_insp_chklst_lines": {
+        "name": "qaqc_insp_chklst_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "qaqc_insp_chklst_sht_sigs": {
+        "name": "qaqc_insp_chklst_sht_sigs"
+    },
+    "qaqc_insp_chklst_shts": {
+        "name": "qaqc_insp_chklst_shts"
+    },
+    "qaqc_insp_chklsts": {
+        "name": "qaqc_insp_chklsts"
+    },
+    "qaqc_insp_control_groups": {
+        "name": "qaqc_insp_control_groups"
+    },
+    "qaqc_insp_control_values": {
+        "name": "qaqc_insp_control_values"
+    },
+    "qaqc_insp_groups": {
+        "name": "qaqc_insp_groups"
+    },
+    "qaqc_insp_tmpl_lines": {
+        "name": "qaqc_insp_tmpl_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "qaqc_insp_tmpl_shts": {
+        "name": "qaqc_insp_tmpl_shts"
+    },
+    "qaqc_insp_tmpls": {
+        "name": "qaqc_insp_tmpls"
+    },
+    "qaqc_insp_values": {
+        "name": "qaqc_insp_values"
+    },
+    "qaqc_mirs": {
+        "name": "qaqc_mirs",
+        "renderTableForPopupModals": "true"
+    },
+    "qaqc_ncrs": {
+        "name": "qaqc_ncrs",
+        "renderTableForPopupModals": "true"
+    },
+    "qaqc_wirs": {
+        "name": "qaqc_wirs",
+        "renderTableForPopupModals": "true"
+    },
+    "sub_projects": {
+        "name": "sub_projects"
+    },
+    "terms": {
+        "name": "terms"
+    },
+    "user_categories": {
+        "name": "user_categories"
+    },
+    "user_companies": {
+        "name": "user_companies"
+    },
+    "user_disciplines": {
+        "name": "user_disciplines"
+    },
+    "user_position1s": {
+        "name": "user_position1s"
+    },
+    "user_position2s": {
+        "name": "user_position2s"
+    },
+    "user_position3s": {
+        "name": "user_position3s"
+    },
+    "user_position_pres": {
+        "name": "user_position_pres"
+    },
+    "user_team_ots": {
+        "name": "user_team_ots"
+    },
+    "user_teams": {
+        "name": "user_teams"
+    },
+    "user_time_keep_types": {
+        "name": "user_time_keep_types"
+    },
+    "user_types": {
+        "name": "user_types"
+    },
+    "users": {
+        "name": "users"
+    },
+    "wir_descriptions": {
+        "name": "wir_descriptions"
+    },
+    "work_areas": {
+        "name": "work_areas"
+    },
+    "work_modes": {
+        "name": "work_modes"
+    },
+    "workplaces": {
+        "name": "workplaces"
+    },
+    "zunit_test_01s": {
+        "name": "zunit_test_01s",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "zunit_test_02s": {
+        "name": "zunit_test_02s",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "zunit_test_03s": {
+        "name": "zunit_test_03s",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "zunit_test_04s": {
+        "name": "zunit_test_04s"
+    },
+    "zunit_test_05s": {
+        "name": "zunit_test_05s",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "zunit_test_06s": {
+        "name": "zunit_test_06s"
+    },
+    "zunit_test_07s": {
+        "name": "zunit_test_07s"
+    },
+    "zunit_test_08s": {
+        "name": "zunit_test_08s"
+    },
+    "zunit_test_09s": {
+        "name": "zunit_test_09s",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "zunit_test_10s": {
+        "name": "zunit_test_10s"
+    },
+    "zunit_test_11s": {
+        "name": "zunit_test_11s"
+    },
+    "zunit_test_12s": {
+        "name": "zunit_test_12s"
+    },
+    "zunit_test_13s": {
+        "name": "zunit_test_13s"
+    },
+    "zunit_test_15s": {
+        "name": "zunit_test_15s"
+    },
+    "zunit_test_19s": {
+        "name": "zunit_test_19s"
+    }
+}

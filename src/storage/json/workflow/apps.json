@@ -263,6 +263,20 @@
         "icon": "<i class=\"fa-solid fa-user-injured\"><\/i>",
         "show_in_my_view": "true"
     },
+    "manageApis": {
+        "name": "manageApis",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage APIs",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>"
+    },
     "manageAppCreations": {
         "name": "manageAppCreations",
         "package": "system",
