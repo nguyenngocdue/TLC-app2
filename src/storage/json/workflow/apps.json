@@ -196,7 +196,7 @@
         "name": "hr_timesheet_line",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
-        "title": "Hr Timesheet Line",
+        "title": "HR Timesheet Line",
         "nickname": "tsl",
         "doc_id_format_column": null,
         "status": null,
