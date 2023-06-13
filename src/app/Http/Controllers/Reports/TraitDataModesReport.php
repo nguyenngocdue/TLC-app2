@@ -29,6 +29,7 @@ trait TraitDataModesReport
     public function hr_timesheet_lines(){
         return ['mode_option' =>[
             '010' => 'Project/Date',
+            '020' => 'Test',
         ]];
     }
 }
