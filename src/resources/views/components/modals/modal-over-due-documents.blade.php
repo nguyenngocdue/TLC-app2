@@ -2,8 +2,8 @@
 <script>
     function loadDocs(data){
         // console.log("Loading",data)        
-        const {docType} = data
-        const url = "/api/v1/entity/"+docType+"_renderTable"
+        const {tableName} = data
+        const url = "/api/v1/entity/"+tableName+"_renderTable"
         $.ajax({
             type:'POST',
             url,
@@ -27,7 +27,7 @@
 
 @section($modalId.'-body')
 <input id="textToBeLoadedIds" type="hidden" x-bind:value="modalParams['{{$modalId}}']['ids']">
-<input id="textToBeLoadedType" type="hidden" x-bind:value="modalParams['{{$modalId}}']['docType']">
+<input id="textToBeLoadedTableName" type="hidden" x-bind:value="modalParams['{{$modalId}}']['tableName']">
 <div id="divMain" class="m-2 text-center">
     <div class="my-60">
         <i class="fa-duotone fa-spinner fa-spin text-green-500 mx-2"></i>Loading <span x-html="modalParams['{{$modalId}}']['count']"></span> item(s)...
@@ -42,9 +42,9 @@
 <script>
     setTimeout(()=>{
         const ids = $("#textToBeLoadedIds").val()
-        const docType = $("#textToBeLoadedType").val()
+        const tableName = $("#textToBeLoadedTableName").val()
 
-        loadDocs({ids, docType})
+        loadDocs({ids, tableName})
     }, 100)
 </script>
 @endsection

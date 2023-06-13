@@ -33,20 +33,20 @@ class EntityCRUDControllerForApiRenderer extends Controller
 
 	public function renderTable(Request $request)
 	{
-		$docType = $request->input('docType');
+		$tableName = $request->input('tableName');
 		$ids = $request->input('ids');
 		if ($ids) $ids = explode(",", $ids);
 
 		$columns = [
-			['dataIndex' => 'id', 'renderer' => 'id', 'type' => Str::plural($docType), /*'align' => 'center',*/ 'width' => 100],
-			['dataIndex' => 'id', 'renderer' => 'qr-code', 'title' => 'QR Code', 'type' => Str::plural($docType), 'align' => 'center', 'width' => 60,],
+			['dataIndex' => 'id', 'renderer' => 'id', 'type' => $tableName, /*'align' => 'center',*/ 'width' => 100],
+			['dataIndex' => 'id', 'renderer' => 'qr-code', 'title' => 'QR Code', 'type' => $tableName, 'align' => 'center', 'width' => 60,],
 			['dataIndex' => 'name', 'title' => 'Title', 'width' => 500, 'align' => 'left'],
 			['dataIndex' => 'ball_in_court', 'width' => 200, 'align' => 'left'],
 			['dataIndex' => 'status', 'renderer' => 'status', 'align' => 'center', 'width' => 150],
 			['dataIndex' => 'due_date', 'renderer' => 'date_time', 'width' => 170],
 		];
 
-		$model = Str::modelPathFrom($docType);
+		$model = Str::modelPathFrom($tableName);
 		$dataSource = $model::whereIn('id', $ids)
 			->orderBy('due_date', 'desc')
 			->get();

@@ -114,6 +114,7 @@ class ProjectOverview extends Component
             $item =   [
                 'doc_type' => "<a class='text-blue-700 cursor-pointer' title='" . $app['title'] . "' href='{$app['href']}'>" . Str::upper($app['nickname']) . "</a>",
                 'progress' => $dataSource,
+                'table_name' => Str::plural($appKey),
                 'total_open' => $size,
             ];
             $result[$appKey] = $item;
@@ -134,6 +135,7 @@ class ProjectOverview extends Component
                 $result[] = [
                     'docType' => $docType,
                     'dueType' => $dueType,
+                    'tableName' => $docTypeArray['table_name'],
                     'ids' => $ids,
                     'count' => count($ids),
                 ];

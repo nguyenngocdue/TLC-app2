@@ -21,10 +21,10 @@ use App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController;
 
 use App\Http\Controllers\Entities\EntityCRUDControllerForApi;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApiRenderer;
-
+use App\Http\Controllers\Workflow\LibApis;
 use App\Utils\System\Memory;
 use App\Utils\System\Timer;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -135,21 +135,8 @@ Route::group([
     'prefix' => 'v1/entity',
     'middleware' => 'throttle:600,1'
 ], function () {
-    foreach ([
-        'Qaqc_car',
-        'Qaqc_insp_chklst_line',
-        'Qaqc_insp_tmpl_line',
-        'Hr_overtime_request_line',
-        'Hr_timesheet_line',
-        'Hse_corrective_action',
-        'Ghg_line',
-        'Zunit_test_01',
-        'Zunit_test_02',
-        'Zunit_test_03',
-        'Zunit_test_05',
-        'Zunit_test_09',
-    ] as $entityName) {
-        $tableName = Str::plural(lcfirst($entityName));
+    $apps = LibApis::getFor('storeEmpty_and_updateShort');
+    foreach ($apps as $tableName) {
         Route::post("{$tableName}_storeEmpty", [EntityCRUDControllerForApi::class, 'storeEmpty'])->name($tableName . ".storeEmpty");
         Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
     }
@@ -158,12 +145,8 @@ Route::group([
     'prefix' => 'v1/entity',
     'middleware' => 'throttle:600,1'
 ], function () {
-    foreach ([
-        'Qaqc_mir',
-        'Qaqc_ncr',
-        'Qaqc_wir',
-    ] as $entityName) {
-        $tableName = Str::plural(lcfirst($entityName), 1);
+    $apps = LibApis::getFor('renderTableForPopupModals');
+    foreach ($apps as $tableName) {
         Route::post("{$tableName}_renderTable", [EntityCRUDControllerForApiRenderer::class, 'renderTable'])->name($tableName . ".renderTable");
     }
 });
