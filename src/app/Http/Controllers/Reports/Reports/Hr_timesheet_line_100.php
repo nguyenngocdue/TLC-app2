@@ -20,7 +20,6 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
     protected $maxH = 50;
     protected $mode = '100';
     protected $rotate45Width = 300;
-    protected $tableTrueWidth = true;
 
     public function getSqlStr($modeParams)
     {
@@ -154,21 +153,19 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                 "width" => 280,
             ],
             [
-                "title" => "Total",
-                "dataIndex" => "total_time",
+                "title" => "Date",
+                "dataIndex" => "time_sheet_start_time",
+                "align" => 'left',
+                "width" => 200,
+            ],
+            [
+                "title" => "Hours",
+                "dataIndex" => "time_sheet_hours",
                 "align" => 'right',
                 "width" => 50,
             ]
         ];
-        $dataColumn2 = array_map(fn ($item) => [
-            "title" => str_replace('_', '/', $item),
-            "dataIndex" => $item,
-            "align" => 'center',
-            "width" => 40,
-        ], $strDates);
-
-        $data = array_merge($dataColumn1, $dataColumn2);
-        return $data;
+        return $dataColumn1;
     }
 
     protected function getParamColumns()
@@ -184,16 +181,6 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                 'dataIndex' => 'sub_project_id',
                 'allowClear' => true,
             ],
-            // [
-            //     'title' => 'Workplace',
-            //     'dataIndex' => 'workplace_id',
-            //     'allowClear' => true,
-            // ],
-            // [
-            //     'title' => 'Department',
-            //     'dataIndex' => 'department_id',
-            //     'allowClear' => true,
-            // ],
             [
                 'title' => 'User',
                 'dataIndex' => 'user_id',
@@ -244,28 +231,17 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
 
     protected function transformDataSource($dataSource, $modeParams)
     {
-        $data = array_slice($dataSource->toArray(), 0, 100);
-
-
-        array_walk($data, function($value, $key) use(&$data){
-            $strDate = str_replace('-', '_',Report::formatDateString($value->time_sheet_start_time, 'd-m-Y'));
-            $value->$strDate = $value->time_sheet_hours;
-            $data[$key] = $value;
-        });
+        $data = array_slice($dataSource->toArray(), 0, 1000000);
         $dataWaitingFor = $this->dataWaitingForLooking();
         $dataSource = array_map(fn($item) => (Array)$item, $data);
-
-        // dd($data);
         array_walk($dataSource, function ($value, $key) use (&$dataSource, $dataWaitingFor) {
             $datesHaveValue = Report::retrieveDataByKeyIndex($value,'pj_task_id');
             $infoHeadUsers = Report::retrieveDataByKeyIndex($value, 'pj_task_id', true);
             $dataHeadUsers = $this->addInfoHeadUsers($infoHeadUsers, $dataWaitingFor);
-            $totalTime = array_sum($datesHaveValue);
-            $dataSource[$key] = ['total_time' => $totalTime] + $dataHeadUsers +$datesHaveValue;
-            // dd($dataSource);
+            $dataSource[$key] =  $dataHeadUsers +$datesHaveValue;
         });
-        // dd($dataSource);
-        return collect($dataSource)->sortBy('user_name');
+
+        return collect($dataSource);
     }
 
     private function isSaturdayOrSunday($dateString)
