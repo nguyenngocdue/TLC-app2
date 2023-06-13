@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('topTitle', $topTitle)
-@section('title', Str::ucfirst($typeReport))
+@section('title', $modeReport)
 @section('content')
 @php
 // dd($tableDataSource);

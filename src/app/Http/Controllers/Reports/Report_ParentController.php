@@ -20,9 +20,7 @@ abstract class Report_ParentController extends Controller
 {
     use TraitMenuTitle;
     use TraitModeParamsReport;
-
     use TraitDataModesReport;
-
     use TraitFunctionsReport;
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($dataSource, $modeParams);
@@ -120,7 +118,7 @@ abstract class Report_ParentController extends Controller
         return [];
     }
 
-    protected function modeColumns()
+    protected function modeColumns()        // dd($dataModeControl);
     {
         return [
             'title' => 'Mode',
@@ -144,12 +142,17 @@ abstract class Report_ParentController extends Controller
         return [];
     }
 
+    private function makeModeReport(){
+        [$dataSource, $titles] = ReportIndexController::getDataSource();
+        $dataType = $dataSource[$this->getType()];
+        $title = array_merge(...array_values($dataType))[$this->mode]['title'];
+        return $title;
+    }
+
     public function index(Request $request)
     {
 
         $input = $request->input();
-        // dd($input);
-        // Log::info($input);
         $typeReport = CurrentPathInfo::getTypeReport($request);
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
@@ -157,14 +160,11 @@ abstract class Report_ParentController extends Controller
         $currentUserId = Auth::id();
         $modeParams = $this->getModeParams($request);
         $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
-        // dump($modeParams);
 
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $modeParams);
         }
         $dataSource = $this->getDataSource($modeParams);
-        // dd($dataSource);
-
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
         $start = microtime(true);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
@@ -173,21 +173,16 @@ abstract class Report_ParentController extends Controller
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
 
-        // dd($dataSource);
-        // Execute the query
-        $time = microtime(true) - $start;
-        // dump($time);
         $viewName = CurrentPathInfo::getViewName($request);
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
-        // dd($dataModeControl);
         $tableDataHeader = $this->tableDataHeader($modeParams);
-
         echo $this->getJS();
 
         return view('reports.' . $viewName, [
             'maxH' => $this->maxH,
             'entity' => $entity,
             'sheets' =>  $sheet,
+            'mode' => $this->mode,
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
             'modeParams' => $modeParams,
@@ -203,6 +198,7 @@ abstract class Report_ParentController extends Controller
             'groupByLength' => $this->groupByLength,
             'topTitle' => $this->getMenuTitle(),
             'modeColumns' => $this->modeColumns(),
+            'modeReport' => $this->makeModeReport(),
             'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),
             'tableTrueWidth' => $this->tableTrueWidth,

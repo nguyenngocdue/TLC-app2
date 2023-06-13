@@ -50,7 +50,7 @@ class ReportIndexController extends Controller
         return $result;
     }
 
-    private function getDataSource()
+    public static function getDataSource()
     {
         $entities = Entities::getAll();
         $result = [];
@@ -72,7 +72,6 @@ class ReportIndexController extends Controller
     {
         [$dataSource, $titles] = $this->getDataSource();
         // dump($dataSource);
-
         return view("reports.report-index", [
             'dataSource' => $dataSource,
             'titles' => $titles,
