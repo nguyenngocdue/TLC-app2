@@ -19,6 +19,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_sht_id"],
         "getShtSigs" => ["hasMany", Qaqc_insp_chklst_sht_sig::class, "qaqc_insp_chklst_sht_id"],
 
+        "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
 
     public $oracyParams = [
@@ -69,6 +70,13 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function comment_rejected_reason()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 
     public function getManyLineParams()
