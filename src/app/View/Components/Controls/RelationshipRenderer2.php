@@ -234,6 +234,7 @@ class RelationshipRenderer2 extends Component
                 }
                 $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array
                 return view('components.controls.many-icon-params')->with(compact('dataSource', 'colSpan'));
+                // case "calendar_grid":
             case "many_lines":
                 $sp = SuperProps::getFor($tableName);
                 $dataSourceWithOld = $this->convertOldToDataSource($this->table01Name, $dataSource, $lineModelPath);
