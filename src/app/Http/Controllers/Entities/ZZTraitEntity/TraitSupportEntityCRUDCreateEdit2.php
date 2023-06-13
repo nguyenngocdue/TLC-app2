@@ -38,7 +38,7 @@ trait TraitSupportEntityCRUDCreateEdit2
         $result = [];
         foreach ($props as $prop) {
             $dv = $prop['default-values']['default_value'] ?? false;
-            $result[$prop['column_name']] = $dv;
+            if ($dv !== "") $result[$prop['column_name']] = $dv;
         }
         return $result;
     }
