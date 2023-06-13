@@ -142,7 +142,7 @@ abstract class Report_ParentController extends Controller
         return [];
     }
 
-    private function makeModeReport(){
+    private function makeModeTitleReport(){
         [$dataSource, $titles] = ReportIndexController::getDataSource();
         $dataType = $dataSource[$this->getType()];
         $title = array_merge(...array_values($dataType))[$this->mode]['title'];
@@ -198,7 +198,7 @@ abstract class Report_ParentController extends Controller
             'groupByLength' => $this->groupByLength,
             'topTitle' => $this->getMenuTitle(),
             'modeColumns' => $this->modeColumns(),
-            'modeReport' => $this->makeModeReport(),
+            'modeReport' => $this->makeModeTitleReport(),
             'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),
             'tableTrueWidth' => $this->tableTrueWidth,
