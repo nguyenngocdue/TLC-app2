@@ -19,10 +19,10 @@ class CommentGroup2a extends Component
      * @return void
      */
     public function __construct(
-        private $readOnly = false,
         private $commentableType,
-        private $commentableId = '',
         private $category,
+        private $readOnly = false,
+        private $commentableId = '',
         private $debug = false,
 
 
