@@ -257,7 +257,6 @@ class RelationshipRenderer2 extends Component
                     $itemOriginal = $this->item->getOriginal();
                     $href = $this->createHref($this->item, $createSettings, $tableName);
                 }
-                // dump($itemOriginal);
                 $view = $editable ? 'many-line-params-editable' : 'many-line-params-ro';
                 $dataSource2ndThead = $this->readOnly ? null : $this->makeEditable2ndThead($editableColumns, $this->table01Name);
                 if ($this->readOnly) {
@@ -266,6 +265,7 @@ class RelationshipRenderer2 extends Component
                         $column['properties']['readOnly'] = true;
                     }
                 }
+
                 return view('components.controls.' . $view, [
                     'readOnly' => $this->readOnly,
                     'table01ROName' => $this->table01Name . "RO",

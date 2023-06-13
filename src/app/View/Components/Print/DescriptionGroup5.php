@@ -27,7 +27,6 @@ class DescriptionGroup5 extends Component
      */
     public function render()
     {
-
         return view('components.print.description-group5', [
             'propTree' => $this->propTree,
             'dataSource' => $this->dataSource,
