@@ -3,6 +3,7 @@
 namespace App\View\Components\Navigation;
 
 use App\Http\Controllers\Reports\ReportIndexController;
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Controls\DisallowedDirectCreationChecker;
@@ -30,6 +31,33 @@ class Breadcrumb extends Component
             }
         }
         return $result;
+    }
+    private function getTitleAndIconForPrintButton($show_renderer)
+    {
+        switch ($show_renderer) {
+            case "props-renderer":
+                $title = 'Print Mode';
+                $icon = "fa-duotone fa-print";
+                break;
+            case "project-renderer":
+                $title = 'Project Mode';
+                $icon = "fa-duotone fa-city";
+                break;
+            case "checklist-renderer":
+            case "checklist-sheet-renderer":
+                $title = 'Print Mode';
+                $icon = "fa-duotone fa-check-to-slot";
+                break;
+            case "qr-app-renderer":
+                $title = 'Application Mode';
+                $icon = "fa-duotone fa-browser";
+                break;
+            default:
+                $title = "Show Mode";
+                $icon = "fa-duotone fa-question";
+                break;
+        }
+        return [$title, $icon];
     }
     public function render()
     {
@@ -108,7 +136,9 @@ class Breadcrumb extends Component
                 $links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
             case 'edit':
-                $links[] = ['href' => route($type . '.show', $id), 'title' => 'View Mode', 'icon' => '<i class="fa-duotone fa-browser"></i>'];
+                $app = LibApps::getFor($type);
+                [$title, $icon] = $this->getTitleAndIconForPrintButton($app['show_renderer']);
+                $links[] = ['href' => route($type . '.show', $id), 'title' => $title, 'icon' => "<i class='$icon'></i>"];
                 break;
             default:
                 break;
