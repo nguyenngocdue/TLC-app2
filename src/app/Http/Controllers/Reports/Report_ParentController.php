@@ -145,7 +145,7 @@ abstract class Report_ParentController extends Controller
     private function makeModeTitleReport(){
         [$dataSource, $titles] = ReportIndexController::getDataSource();
         $dataType = $dataSource[$this->getType()];
-        $title = array_merge(...array_values($dataType))[$this->mode]['title'];
+        $title = array_merge(...array_values($dataType))[$this->mode]['title'] ??'Empty Value';
         return $title;
     }
 

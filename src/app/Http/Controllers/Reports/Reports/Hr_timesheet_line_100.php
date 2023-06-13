@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentReportController;
+use App\Http\Controllers\Reports\TraitDataModesReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
-use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Models\User;
 use App\Utils\Support\Report;
 use DateInterval;
@@ -12,13 +12,14 @@ use DatePeriod;
 use DateTime;
 use Illuminate\Support\Str;
 
-class Hr_timesheet_line_010 extends Report_ParentReportController
+class Hr_timesheet_line_100 extends Report_ParentReportController
 
 {
     use TraitDynamicColumnsTableReport;
+    use TraitDataModesReport;
     protected $maxH = 50;
+    protected $mode = '100';
     protected $rotate45Width = 300;
-    protected $tableTrueWidth = true;
 
     public function getSqlStr($modeParams)
     {
@@ -152,21 +153,19 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
                 "width" => 280,
             ],
             [
-                "title" => "Total",
-                "dataIndex" => "total_time",
+                "title" => "Date",
+                "dataIndex" => "time_sheet_start_time",
+                "align" => 'left',
+                "width" => 200,
+            ],
+            [
+                "title" => "Hours",
+                "dataIndex" => "time_sheet_hours",
                 "align" => 'right',
                 "width" => 50,
             ]
         ];
-        $dataColumn2 = array_map(fn ($item) => [
-            "title" => str_replace('_', '/', $item),
-            "dataIndex" => $item,
-            "align" => 'center',
-            "width" => 40,
-        ], $strDates);
-
-        $data = array_merge($dataColumn1, $dataColumn2);
-        return $data;
+        return $dataColumn1;
     }
 
     protected function getParamColumns()
@@ -182,16 +181,6 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
                 'dataIndex' => 'sub_project_id',
                 'allowClear' => true,
             ],
-            // [
-            //     'title' => 'Workplace',
-            //     'dataIndex' => 'workplace_id',
-            //     'allowClear' => true,
-            // ],
-            // [
-            //     'title' => 'Department',
-            //     'dataIndex' => 'department_id',
-            //     'allowClear' => true,
-            // ],
             [
                 'title' => 'User',
                 'dataIndex' => 'user_id',
@@ -243,38 +232,16 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
     protected function transformDataSource($dataSource, $modeParams)
     {
         $data = array_slice($dataSource->toArray(), 0, 1000000);
-        // dd($data);
         $dataWaitingFor = $this->dataWaitingForLooking();
-        $groupUserIds = Report::groupArrayByKey($data, 'user_id');
-        // dd($groupUserIds);
-        $groupTaskIds = array_map(fn ($item) => Report::groupArrayByKey($item, 'pj_task_id'), $groupUserIds);
-        $groupTaskIds = array_values($groupTaskIds);
-        // dd($groupTaskIds);
-        $datesData =  array_map(function ($items) {
-            $dates = [];
-            foreach (array_values($items) as $value) {
-                $groupSubProjectId = Report::groupArrayByKey($value, 'sub_project_id');
-                // dd($groupSubProjectId);
-                $timeTransfer = array_map(fn ($array) => Report::transferValueOfKey($array, 'time_sheet_start_time', 'time_sheet_hours'), $groupSubProjectId);
-                $timeTransfer = Report::mergeArrayValues($timeTransfer);
-                $dates = array_merge($dates,$timeTransfer);
-            }
-            return $dates;
-        }, $groupTaskIds);
-        $dataSource =  array_merge(...$datesData);
-        // dd($dataSource);
-        $strDates = $this->getStringDates($modeParams);
-        array_walk($dataSource, function ($value, $key) use ($strDates, &$dataSource, $dataWaitingFor) {
+        $dataSource = array_map(fn($item) => (Array)$item, $data);
+        array_walk($dataSource, function ($value, $key) use (&$dataSource, $dataWaitingFor) {
             $datesHaveValue = Report::retrieveDataByKeyIndex($value,'pj_task_id');
             $infoHeadUsers = Report::retrieveDataByKeyIndex($value, 'pj_task_id', true);
             $dataHeadUsers = $this->addInfoHeadUsers($infoHeadUsers, $dataWaitingFor);
-            $totalTime = array_sum($datesHaveValue);
-            $diffArray = array_diff(array_values($strDates), array_keys($datesHaveValue));
-            $diffArray =  array_fill_keys(array_values($diffArray), '');
-            $dataSource[$key] = ['total_time' => $totalTime] + $dataHeadUsers +$datesHaveValue + $diffArray;
-            // dd($dataSource);
+            $dataSource[$key] =  $dataHeadUsers +$datesHaveValue;
         });
-        return collect($dataSource)->sortBy('user_name');
+
+        return collect($dataSource);
     }
 
     private function isSaturdayOrSunday($dateString)

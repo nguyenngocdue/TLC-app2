@@ -107,15 +107,20 @@ class Report
         return [$startDate, $endDate];
     }
 
-    public static function formatStringDate($stringDate, $typeFormat = 'Y-m-d')
+    public static function formatDateString($strDate, $typeFormat = 'Y-m-d')
     {
-        return DateTime::createFromFormat('d/m/Y', $stringDate)->format($typeFormat);
+        $strDate = str_replace('-', '/', $strDate);
+        $dateTime = DateTime::createFromFormat('d/m/Y', $strDate);
+        if($dateTime){
+            return $dateTime->format($typeFormat);
+        }
+        return DateTime::createFromFormat('Y/m/d', $strDate)->format($typeFormat);
     }
 
-    public static function retrieveDataByKeyIndex($array,$key, $reverse = false){
+    public static function retrieveDataByKeyIndex($array, $key, $reverse = false)
+    {
         $idx = array_search($key, array_keys($array));
-        if ($reverse) return array_slice($array, 0, $idx+1);
+        if ($reverse) return array_slice($array, 0, $idx + 1);
         return array_slice($array, $idx + 1, count($array) - $idx);
     }
-
 }

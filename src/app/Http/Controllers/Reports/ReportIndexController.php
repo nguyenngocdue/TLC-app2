@@ -28,13 +28,10 @@ class ReportIndexController extends Controller
 
         $conditions = ['report' => 'Reports', 'register' => 'Registers', 'document' => 'Documents'];
         foreach ($conditions as $key => $value) {
-            for ($i = 10; $i <= 50; $i += 10) {
+            for ($i = 10; $i <= 100; $i += 10) {
                 $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
                 $path = "$key-{$singular}_$mode";
-                // dump($path);
                 $controller = "App\\Http\\Controllers\\Reports\\$value\\{$ucfirstName}_$mode";
-                // dump($path);
-                // dump($controller);
                 $class_exists = class_exists($controller);
                 if (Route::has($path) && $class_exists) {
                     $title = (new ($controller))->{$tableName}()['mode_option']; //[$mode];
