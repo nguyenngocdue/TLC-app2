@@ -20,7 +20,8 @@ class Memory
 
     public static function getMemoryElapse()
     {
-        self::$memoryLast = round((memory_get_usage() /*- self::getMemory()*/) * 0.000001, 2);
+        self::$memoryLast = round((memory_get_peak_usage()) * 0.000001, 2);
+        // self::$memoryLast = round((memory_get_usage()) * 0.000001, 2);
         return self::$memoryLast;
     }
 
