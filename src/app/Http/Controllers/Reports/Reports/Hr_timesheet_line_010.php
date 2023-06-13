@@ -218,7 +218,7 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
         $infoHeadUsers['discipline_name'] = $dataWaitingFor['user_disciplines'][$infoHeadUsers['discipline_id']];
         $infoHeadUsers['pj_task_name'] = $dataWaitingFor['pj_tasks'][$infoHeadUsers['pj_task_id']];
         
-        $infoHeadUsers['type_name'] = $dataWaitingFor['terms'][$infoHeadUsers['type_id']];
+        $infoHeadUsers['type_name'] = $dataWaitingFor['user_types'][$infoHeadUsers['type_id']];
         $infoHeadUsers['workplace_name'] = $dataWaitingFor['workplaces'][$infoHeadUsers['workplace_id']];
         $infoHeadUsers['category_name'] =  $dataWaitingFor['user_categories'][$infoHeadUsers['category_id']];
         $infoHeadUsers['department_name'] =$dataWaitingFor['departments'][$infoHeadUsers['department_id']];
@@ -228,7 +228,7 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
     }
     private function dataWaitingForLooking()
     {
-        $arrayModelNames = ['Project', 'Sub_project', 'Term', 'User_discipline','Workplace', 'Pj_task', 'User_category', 'Department'];
+        $arrayModelNames = ['Project', 'Sub_project', 'Term','User_Type', 'User_discipline','Workplace', 'Pj_task', 'User_category', 'Department'];
         $dataModels = array_map(function($modelName) {
             $key = Str::plural(strtolower($modelName));
             $value = array_column(Str::modelPathFrom($modelName)::select('id', 'name')->get()->toArray(), 'name', 'id');
