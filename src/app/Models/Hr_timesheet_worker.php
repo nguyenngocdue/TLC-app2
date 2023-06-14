@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Hr_timesheet_worker extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'week', 'team_id', 'assignee_1',  'owner_id', 'status'];
+    protected $fillable = ['id', 'name', 'ts_date', 'team_id', 'assignee_1',  'owner_id', 'status'];
     public $nameless = true;
 
     public $eloquentParams = [

@@ -63,7 +63,7 @@
         "name": "_start_time",
         "column_name": "start_time",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
