@@ -20,9 +20,9 @@ class WelcomeFortuneController extends Controller
         // $db = (new EntityNameClickCount)(560);
         // dump($db);
 
-        $out = Carbon::createFromFormat(Constant::FORMAT_DATETIME_MYSQL, "2022-01-31 00:00:00", "7");
-        dump($out);
-        $out = $out->setTimezone('10');
+        $out = Carbon::createFromFormat(Constant::FORMAT_DATETIME_MYSQL, "2022-01-31 00:00:00");
+
+        $out = $out->setTimezone(7)->format(Constant::FORMAT_DATETIME_ASIAN);
         dump($out);
 
         $dataSource = [];
