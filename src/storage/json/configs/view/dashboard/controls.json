@@ -58,7 +58,13 @@
         "parent_link",
         "thumbnails"
     ],
-    "renderer_edit": ["", "many_icons", "many_lines", "calendar_grid"],
+    "renderer_edit": [
+        "",
+        "many_icons",
+        "many_lines",
+        "calendar_grid",
+        "same_as_view_all"
+    ],
     "manage_prop_eloquents": [
         "belongsToMany",
         "hasMany",
@@ -79,8 +85,12 @@
         "belongsTo",
         "morphToMany"
     ],
-    "manage_prop_oracies": ["getCheckedByField"],
-    "view_all_oracies": ["getCheckedByField"],
+    "manage_prop_oracies": [
+        "getCheckedByField"
+    ],
+    "view_all_oracies": [
+        "getCheckedByField"
+    ],
     "packages": [
         "",
         "hr_&_admin",
@@ -175,6 +185,8 @@
         "qaqc_wir",
         "zunit_test_09"
     ],
-    "apps_have_view_all_calendar": ["hr_timesheet_officers"],
+    "apps_have_view_all_calendar": [
+        "hr_timesheet_officers"
+    ],
     "view_all_tab_taxonomy": "status"
 }

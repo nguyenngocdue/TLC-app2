@@ -692,7 +692,6 @@
         "status": null,
         "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "checklist-sheet-renderer",
-        "hidden_navbar": "true",
         "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>",
         "show_in_monitored_by_me": "true"
     },

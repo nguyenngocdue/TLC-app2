@@ -12,6 +12,7 @@ use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable2n
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnRO;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableEditableDataSourceWithOld;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -199,6 +200,14 @@ class RelationshipRenderer2 extends Component
         $isOrderable = $row ? $this->isTableOrderable($row, $colName, $columns) : false;
         $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
+            case "same_as_view_all":
+                $renderer_view_all = $props['relationships']['renderer_view_all'];
+                $renderer_view_all_param = $props['relationships']['renderer_view_all_param'];
+                $renderer_view_all_unit = $props['relationships']['renderer_view_all_unit'];
+                $slot = json_encode($dataSource->all());
+                $tag = "x-renderer.$renderer_view_all";
+                $output = "<$tag renderRaw=1 rendererParam='$renderer_view_all_param' rendererUnit='$renderer_view_all_unit'>$slot</$tag>";
+                return Blade::render($output);
             case "calendar_grid":
                 $arrHidden = [];
                 $dateTime = Carbon::parse($row->week);

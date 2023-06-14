@@ -89,21 +89,30 @@ trait TraitEntityExportCSV
                     switch ($relationships['relationship']) {
                         case 'hasMany':
                         case 'morphMany':
-                            switch ($relationships['renderer_view_all']) {
-                                case 'agg_date_range':
-                                    $collection = $dataLine->{$relationships['control_name_function']};
-                                    $maxDate = $collection->max($relationships['renderer_view_all_param']);
-                                    $minDate = $collection->min($relationships['renderer_view_all_param']);
-                                    if ($maxDate === $minDate) $result[] = $maxDate;
-                                    else $result[] = $minDate . ' to ' . $maxDate;
-                                    break;
-                                case 'agg_sum':
-                                    $result[] = $dataLine->sum($relationships['renderer_view_all_param']);
-                                case 'agg_count':
-                                default:
-                                    $result[] = count($dataLine[$column['column_name']]);
-                                    break;
-                            }
+                            $collection = $dataLine->{$relationships['control_name_function']};
+                            $renderer_view_all = $relationships['renderer_view_all'];
+                            $renderer_view_all_param = $relationships['renderer_view_all_param'];
+                            $renderer_view_all_unit = $relationships['renderer_view_all_unit'];
+                            $tag = "x-renderer.$renderer_view_all";
+                            $slot =  json_encode($collection->toArray());
+                            $output = "<$tag renderRaw=1 rendererParam='$renderer_view_all_param' rendererUnit='$renderer_view_all_unit'>$slot</$tag>";
+                            $result[] = Blade::render($output);
+
+                            // switch ($relationships['renderer_view_all']) {
+                            //     case 'agg_date_range':
+                            //         $collection = $dataLine->{$relationships['control_name_function']};
+                            //         $maxDate = $collection->max($relationships['renderer_view_all_param']);
+                            //         $minDate = $collection->min($relationships['renderer_view_all_param']);
+                            //         if ($maxDate === $minDate) $result[] = $maxDate;
+                            //         else $result[] = $minDate . ' to ' . $maxDate;
+                            //         break;
+                            //     case 'agg_sum':
+                            //         $result[] = $dataLine->sum($relationships['renderer_view_all_param']);
+                            //     case 'agg_count':
+                            //     default:
+                            //         $result[] = count($dataLine[$column['column_name']]);
+                            //         break;
+                            // }
                             break;
                         default:
                             break;
