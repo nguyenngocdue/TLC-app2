@@ -121,4 +121,11 @@ class DateTimeTest extends TestCase
         $result = DateTimeConcern::convertForSaving("picker_year", $a);
         $this->assertEquals(substr($result, 0, 4), $a);
     }
+
+    public function test_date_time_concern_convertForLoading_with_timezone()
+    {
+        $a = "2022-01-31 00:11:00";
+        $result = DateTimeConcern::convertForSaving("picker_datetime", $a);
+        $this->assertEquals($result, $a);
+    }
 }
