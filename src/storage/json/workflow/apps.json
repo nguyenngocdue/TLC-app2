@@ -304,6 +304,20 @@
         "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
+    "managePivotTables": {
+        "name": "managePivotTables",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Pivot Tables",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
+    },
     "manageStandardDefaultValues": {
         "name": "manageStandardDefaultValues",
         "package": "system",
