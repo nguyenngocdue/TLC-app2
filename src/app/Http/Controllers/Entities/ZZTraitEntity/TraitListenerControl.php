@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\ClassList;
+use Illuminate\Support\Facades\Log;
 
 trait TraitListenerControl
 {
@@ -24,7 +25,9 @@ trait TraitListenerControl
     private function getListenersOfDropdown2()
     {
         $a = $this->getListeners2($this->typeToLoadListener);
-        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $this->name));
+        $columnName = $this->id ?? $this->name;
+        Log::info($columnName);
+        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $columnName));
         $listenersOfDropdown2 = [$a[0]];
         return $listenersOfDropdown2;
     }
@@ -57,8 +60,8 @@ trait TraitListenerControl
                 break;
         }
         return  [
+            'id' => $this->id ?? $this->name,
             'name' => $this->name,
-            'id' => $this->name,
             'selected' => $this->selected,
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $this->tableName,
