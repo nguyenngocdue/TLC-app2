@@ -15,7 +15,7 @@ trait TraitDataModesRegister
     {
         return ['mode_option' => [
             // '010' => 'Inspection Matrix 01',
-            '020' => 'Inspection Matrix 02',
+            '020' => 'Inspection Matrix',
         ]];
     }
     public function qaqc_wirs()
