@@ -106,7 +106,7 @@ class DateTimeConcern
                 case "picker_time":
                     $formatFrom = Constant::FORMAT_TIME_MYSQL;
                     $formatTo = Constant::FORMAT_TIME;
-                    $value = self::formatForLoading($value, $formatFrom, $formatTo);
+                    $value = self::formatNoTimezone($value, $formatFrom, $formatTo);
                     break;
             }
         } catch (\Carbon\Exceptions\InvalidFormatException $e) {
@@ -152,7 +152,7 @@ class DateTimeConcern
                 case "picker_time":
                     $formatFrom = Constant::FORMAT_TIME;
                     $formatTo = Constant::FORMAT_TIME_MYSQL;
-                    $value = self::formatForSaving($value, $formatFrom, $formatTo);
+                    $value = self::formatNoTimezone($value, $formatFrom, $formatTo);
                     break;
             }
         } catch (\Carbon\Exceptions\InvalidFormatException $e) {

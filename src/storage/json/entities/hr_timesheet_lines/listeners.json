@@ -13,6 +13,20 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_discipline_id": {
+        "name": "_discipline_id",
+        "column_name": "discipline_id",
+        "listen_action": "dot",
+        "triggers": "user_id",
+        "listen_to_fields": "user_id",
+        "listen_to_attrs": "discipline",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
@@ -45,9 +59,9 @@
         "name": "_task_id",
         "column_name": "task_id",
         "listen_action": "reduce",
-        "triggers": "lod_id, discipline_id",
-        "listen_to_fields": "task_id, task_id",
-        "listen_to_attrs": "getLods(), getDisciplines()",
+        "triggers": "lod_id,discipline_id",
+        "listen_to_fields": "task_id,task_id",
+        "listen_to_attrs": "getLods(),getDisciplines()",
         "attrs_to_compare": "id",
         "expression": "",
         "ajax_response_attribute": "",
@@ -139,6 +153,34 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_start_time": {
+        "name": "_start_time",
+        "column_name": "start_time",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_duration_in_min": {
+        "name": "_duration_in_min",
+        "column_name": "duration_in_min",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_ts_date": {
         "name": "_ts_date",
         "column_name": "ts_date",
@@ -181,20 +223,6 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_discipline_id": {
-        "name": "_discipline_id",
-        "column_name": "discipline_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_work_mode_id": {
         "name": "_work_mode_id",
         "column_name": "work_mode_id",
@@ -223,9 +251,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -237,9 +265,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

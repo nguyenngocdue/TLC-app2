@@ -24,15 +24,25 @@
         "column_name": "user_id",
         "new": "true"
     },
+    "_start_time": {
+        "name": "_start_time",
+        "column_name": "start_time",
+        "new": "true"
+    },
+    "_duration_in_min": {
+        "name": "_duration_in_min",
+        "column_name": "duration_in_min",
+        "new": "true"
+    },
     "_ts_date": {
         "name": "_ts_date",
         "column_name": "ts_date",
-        "new": "true"
+        "new": ""
     },
     "_ts_hour": {
         "name": "_ts_hour",
         "column_name": "ts_hour",
-        "new": "true"
+        "new": ""
     },
     "_project_id": {
         "name": "_project_id",
@@ -79,14 +89,14 @@
         "column_name": "remark",
         "new": "true"
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
-        "new": "true"
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "new": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "new": "true"
     },
     "_status": {

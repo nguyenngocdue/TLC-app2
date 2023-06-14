@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true"
+        "new": ""
     },
     "_ts_date": {
         "name": "_ts_date",
@@ -22,41 +22,41 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "true"
+        "new": ""
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true"
+        "new": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true"
+        "new": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true"
+        "new": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true"
+        "new": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true"
+        "new": ""
     },
     "_getHrTsLines": {
         "name": "_getHrTsLines",
         "column_name": "getHrTsLines",
-        "new": "true"
+        "new": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "new": "true"
+        "new": ""
     }
 }
