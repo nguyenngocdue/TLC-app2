@@ -1,6 +1,8 @@
-<div class="grid grid-cols-7">
-    <x-calendar.sidebar-calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}"/>
-    <div class="w-full p-2 m-2 bg-gray-100 rounded-lg shadow col-span-6">
+<div class="grid grid-cols-12">
+    <div class="col-span-2">
+        <x-calendar.sidebar-calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}"/>
+    </div>
+    <div class="w-full p-2 m-2 bg-gray-100 rounded-lg shadow col-span-10">
         <div class="grid grid-cols-12">
             <div class="col-span-11">
                 <div class = "flex flex-wrap justify-center">
@@ -28,7 +30,6 @@
         </div>
     </div>
 </div>
-
 <script>
     calendarContainer = document.querySelector("[calendar-container]");
     // const month_names = ['9','10','11','12','01','02','03','04','05','06','07','08','09','10','11','12'];

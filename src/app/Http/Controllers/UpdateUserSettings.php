@@ -35,21 +35,31 @@ class UpdateUserSettings extends Controller
     }
     private function getDurationForFilterCalendar($year)
     {
-        $start = DateTimeConcern::getWeekOfYear(($year - 1) . '-' . '09' . '-' . '01');
-        $end = DateTimeConcern::getWeekOfYear($year . '-' . '12' . '-' . '31');
-        return DateTimeConcern::formatWeekYear($start, ($year - 1), $end, $year);
+        // $start = DateTimeConcern::getWeekOfYear(($year) . '-' . '01' . '-' . '01');
+        // $end = DateTimeConcern::getWeekOfYear($year . '-' . '12' . '-' . '31');
+        // return DateTimeConcern::formatWeekYear(1, $year, $end, $year);
+        return [$year . '-' . '01-01', $year . '-' . '12-31'];
     }
-    private function updateViewAllCalendar($request, $settings)
+    private function updateViewAllCalendar($request, &$settings)
     {
         $type = $request->input("_entity");
         $year = $request->input("year");
         $ownerId = $request->input("owner_id");
-        $valueWeek = $this->getStartAndEndFilterByYear($year);
+        [$start, $end] = $this->getStartAndEndFilterByYear($year);
         $data = [
-            'week' => $valueWeek,
+            'start_date' => $start,
+            'end_date' => $end,
             'owner_id' => $ownerId ?? [CurrentUser::id()],
         ];
         $settings[$type][Constant::VIEW_ALL]['calendar'] = $data;
+        return $settings;
+    }
+    private function updateViewAllMode($request, $settings)
+    {
+        $type = $request->input("_entity");
+        $value = $request->input("view_type");
+        $this->updateViewAllCalendar($request, $settings);
+        $settings[$type][Constant::VIEW_ALL]['view_all_mode'] = $value;
         return $settings;
     }
 
@@ -248,6 +258,9 @@ class UpdateUserSettings extends Controller
         $user = User::find(Auth::id());
         $settings = $user->settings;
         switch ($action) {
+            case 'updateViewAllMode':
+                $settings = $this->updateViewAllMode($request, $settings);
+                break;
             case 'updateViewAllCalendar':
                 $settings = $this->updateViewAllCalendar($request, $settings);
                 break;

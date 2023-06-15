@@ -32,11 +32,8 @@ class CalendarViewAll extends Component
     {
         $dataSource = $this->dataSource;
         $token = CurrentUser::getTokenForApi();
-        // dd($dataSource->get());
         $allTimesheet = $dataSource->get()->map(function ($item) {
-            // $item['day_value'] = $this->getWeekByDay($item->week)[0];
             $item['week_value'] = $this->getWeekByDay($item->week)[1];
-            // $item['month_value'] = $this->getWeekByDay($item->week)[2];
             $item['year_value'] = $this->getWeekByDay($item->week)[3];
             $item['url'] = route($item->getTable() . '.edit', $item->id);
             $item['bg_color'] = $this->getColorForStatus($item->status)[0];

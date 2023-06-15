@@ -5,6 +5,9 @@ namespace App\View\Components\Calendar;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Models\User;
 use App\Providers\Support\TraitSupportPermissionGate;
+use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class SidebarCalendarViewAll extends Component
@@ -16,6 +19,8 @@ class SidebarCalendarViewAll extends Component
      *
      * @return void
      */
+    const TIME_KEEPING_TYPE_TSO = 2;
+    const TIME_KEEPING_TYPE_NONE = 3;
     public function __construct(
         private $type,
         private $typeModel,
@@ -30,32 +35,136 @@ class SidebarCalendarViewAll extends Component
      */
     public function render()
     {
+
         $type = $this->type;
-        $treeIds = $this->getTreeOwnerIds(auth()->user());
-        $ids = $this->getListOwnerIds(auth()->user());
-        $users = User::whereIn('id', $ids)->where('show_on_beta', 0)->where('resigned', 0);
+        $user = CurrentUser::get();
+        // $user = User::find(95);
+        $userId = $user->id;
+        [,,,,,,,,, $filterViewAllCalendar, $viewAllCalendarShowAllChildren] = $this->getUserSettings();
+        $idsRenderCalendar = $filterViewAllCalendar['owner_id'] ?? [$userId];
+
+        $tree = $this->getTreeOwnerIds($user);
+        $ids = $this->getListOwnerIds($user);
+        $idsFormatQuery = join(',', $ids);
+        $dataCountQuerySql = $this->queryTotalPendingApprovalBySql($idsFormatQuery);
+        $dataUserCurrent = $this->setDataForUser($user, $type, $idsRenderCalendar, $this->typeModel, $dataCountQuerySql);
+        $users = User::whereIn('id', $ids)->where('show_on_beta', 0)->whereIn('time_keeping_type', [$this::TIME_KEEPING_TYPE_TSO, $this::TIME_KEEPING_TYPE_NONE])->where('resigned', 0)->get();
         $ids = $users->pluck('id')->toArray();
-        $dataSource = ($this->typeModel)::where('owner_id', $ids)->get();
-        $result = [];
+        $users = $this->transformUserData($users->toArray());
+        // $dataSource = ($this->typeModel)::whereIn('owner_id', $ids)->get();
+        $dataSource = $this->treeDataSource($tree, $type, $idsRenderCalendar, $dataCountQuerySql);
+        $htmlRenderTree = $this->renderHtmlByTreeDataSource($dataSource, $users, $viewAllCalendarShowAllChildren);
         return view('components.calendar.sidebar-calendar-view-all', [
-            'users' => $users->get(),
-            'dataSource' => $result,
+            'htmlRenderCurrentUser' => $this->renderHtml($dataUserCurrent, $users),
+            'htmlRenderTree' => $htmlRenderTree,
+            'url' => route('updateUserSettingsApi'),
+            'type' => $type,
+            'isChecked' => $viewAllCalendarShowAllChildren,
         ]);
     }
-    private function treeDataSource($tree, $dataSource, $type)
+    private function queryTotalPendingApprovalBySql($idsFormatQuery)
     {
-        dd($tree);
+        $dataCountQuerySql = DB::select("SELECT owner_id, count(*) as total 
+        FROM $this->type 
+        WHERE 
+        status ='pending_approval'
+        AND owner_id IN  ($idsFormatQuery)
+        AND deleted_at IS NULL
+        GROUP BY owner_id
+        ");
+        $data = [];
+        foreach ($dataCountQuerySql as $value) {
+            $data[$value->owner_id] = $value;
+        }
+        return $data;
+    }
+    private function transformUserData($users)
+    {
+        $arr = [];
+        foreach ($users as $value) {
+            $arr[$value['id']] = $value;
+        }
+        return $arr;
+    }
+    private function treeDataSource($tree, $type, $idsRenderCalendar, $dataCountQuerySql)
+    {
+        $result = [];
         foreach ($tree as $value) {
-            dump($value);
-            if (isset($value->children)) {
-                dd(123);
-                $result = $this->treeDataSource($value->children, $dataSource, $type);
-            } else {
-                $result[$value->id]['id'] = $value->id;
-                $result[$value->id]['total_pending_approval'] = $dataSource->where('owner_id', $value->id)->where('status', 'pending_approval')->count();
-                $result[$value->id]['href'] = "?view_type=calendar&action=updateViewAllCalendar&_entity=$type&owner_id%5B%5D=$value->id";
+            $id = $value->id;
+            if ($value->show_on_beta == 0 && $value->resigned == 0 && in_array($value->time_keeping_type, [$this::TIME_KEEPING_TYPE_TSO, $this::TIME_KEEPING_TYPE_NONE])) {
+                $result[$id] = $this->setDataForUser($value, $type, $idsRenderCalendar, $this->typeModel, $dataCountQuerySql);
+                if (isset($value->children)) {
+                    $data = $this->treeDataSource($value->children, $type, $idsRenderCalendar, $dataCountQuerySql);
+                    if ($data) {
+                        $result[$id]['children'] = $data;
+                    }
+                } else {
+                    if ($value->show_on_beta == 0 && $value->resigned == 0 && in_array($value->time_keeping_type, [$this::TIME_KEEPING_TYPE_TSO, $this::TIME_KEEPING_TYPE_NONE])) {
+                        $result[$id] = $this->setDataForUser($value, $type, $idsRenderCalendar, $this->typeModel, $dataCountQuerySql);
+                    }
+                }
             }
         }
         return $result;
+    }
+    private function setDataForUser($user, $type, $idsRenderCalendar, $typeModel, $dataCountQuerySql)
+    {
+        $userId = $user->id;
+        if ($typeModel) {
+            $totalPendingApproval = isset($dataCountQuerySql[$userId]) ? $dataCountQuerySql[$userId]->total : 0;
+        } else {
+            $totalPendingApproval = isset($dataCountQuerySql[$userId]) ? $dataCountQuerySql[$userId]->total : 0;
+        }
+        return [
+            'id' => $userId,
+            'href' => "?view_type=calendar&action=updateViewAllCalendar&_entity=$type&owner_id%5B%5D=$userId",
+            'total_pending_approval' => $totalPendingApproval,
+            'disable' => $this->isTimeKeepingTypeTSO($user),
+            'active' => in_array($userId, $idsRenderCalendar) ? true : false,
+
+        ];
+    }
+    private function isTimeKeepingTypeTSO($user)
+    {
+        return ($user->time_keeping_type == $this::TIME_KEEPING_TYPE_TSO) ? false : true;
+    }
+    private function renderHtmlByTreeDataSource($treeData, $users, $viewAllCalendarShowAllChildren)
+    {
+        $classShowAllChildren = $viewAllCalendarShowAllChildren ? "" : "style='display: none;'";
+        $html = '';
+        foreach ($treeData as $value) {
+            if (isset($value['children'])) {
+                $htmlRender = $this->renderHtmlByTreeDataSource($value['children'], $users, $viewAllCalendarShowAllChildren);
+                if ($htmlRender) {
+                    $html .= $this->renderHtml($value, $users);
+                    $html .= "<div class='ml-10 none_only_direct_children' $classShowAllChildren>$htmlRender</div>";
+                }
+            } else {
+                $html .= $this->renderHtml($value, $users);
+            }
+        }
+        return $html;
+    }
+    private function renderHtml($value, $users)
+    {
+        $html = '';
+        $user = $users[$value['id']];
+        $href = $value['href'];
+        $disable = $value['disable'];
+        $active = $value['active'];
+        $totalPendingApproval = $value['total_pending_approval'];
+        $userStr = json_encode($user);
+        $userAvatarRender = Blade::render("<x-renderer.avatar-user>$userStr</x-renderer.avatar-user>");
+        $badge = '';
+        if ($totalPendingApproval > 0) {
+            $badge = Blade::render("<x-renderer.badge>$totalPendingApproval</x-renderer.badge>");
+        }
+        $htmlHref = $disable ? "<div class='flex'>$userAvatarRender" . "$badge</div>" : "<a href='$href' class='flex'>$userAvatarRender" . "$badge</a>";
+        $bgAndHover = $disable ? "bg-gray-400" : "bg-gray-200 hover:bg-gray-300 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800";
+        $activeClass = $active ? "border-blue-600" : "";
+        $html .= "<li class='relative $bgAndHover $activeClass border my-1 p-1 focus:ring-4 font-medium rounded-lg text-sm'>
+                    $htmlHref
+                  </li>";
+        return $html;
     }
 }
