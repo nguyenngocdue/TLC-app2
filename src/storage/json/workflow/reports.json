@@ -55,6 +55,13 @@
         "sub_package": "hr",
         "title": "Project\/Date"
     },
+    "report-hr_timesheet_line\/020": {
+        "name": "report-hr_timesheet_line\/020",
+        "package_tab": "report",
+        "package": null,
+        "sub_package": null,
+        "title": "Line Data Test"
+    },
     "report-hr_timesheet_line\/100": {
         "name": "report-hr_timesheet_line\/100",
         "package_tab": "report",

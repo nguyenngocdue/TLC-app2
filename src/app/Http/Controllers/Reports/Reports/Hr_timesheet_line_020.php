@@ -8,6 +8,7 @@ use App\Http\Controllers\Workflow\LibPivotTables;
 class Hr_timesheet_line_020 extends Hr_timesheet_line_100
 {
     protected $libPivotFilters;
+    protected $mode = '020';
     
     public function __construct()
     {

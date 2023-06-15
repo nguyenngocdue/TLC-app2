@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports;
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Http\Controllers\Workflow\LibReports;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
@@ -14,6 +15,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 abstract class Report_ParentController extends Controller
@@ -142,21 +144,20 @@ abstract class Report_ParentController extends Controller
         return [];
     }
 
-    private function makeModeTitleReport(){
-        [$dataSource, $titles] = ReportIndexController::getDataSource();
-        $dataType = $dataSource[$this->getType()];
-        $title = array_merge(...array_values($dataType))[$this->mode]['title'] ??'Empty Value';
-        return $title;
+    private function makeModeTitleReport($routeName){
+        $lib = LibReports::getAll();
+        $index = strrpos($routeName, '_');
+        $keyLib = substr_replace($routeName, '/', $index). $this->mode;
+        $title = $lib[$keyLib]['title'];
+        return $title ?? 'Empty Title Report';
     }
 
     public function index(Request $request)
     {
-
         $input = $request->input();
         $typeReport = CurrentPathInfo::getTypeReport($request);
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
-
         $currentUserId = Auth::id();
         $modeParams = $this->getModeParams($request);
         $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
@@ -166,7 +167,6 @@ abstract class Report_ParentController extends Controller
         }
         $dataSource = $this->getDataSource($modeParams);
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        $start = microtime(true);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
         $dataSource = $this->changeValueData($dataSource, $modeParams);
         $sheet = $this->getSheets($dataSource);
@@ -177,6 +177,7 @@ abstract class Report_ParentController extends Controller
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
         $tableDataHeader = $this->tableDataHeader($modeParams);
         echo $this->getJS();
+        $modeReport = $this->makeModeTitleReport($routeName);
 
         return view('reports.' . $viewName, [
             'maxH' => $this->maxH,
@@ -185,6 +186,7 @@ abstract class Report_ParentController extends Controller
             'mode' => $this->mode,
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
+            'modeReport' => $modeReport,
             'modeParams' => $modeParams,
             'typeReport' => $typeReport,
             'currentMode' =>  $this->mode,
@@ -198,7 +200,6 @@ abstract class Report_ParentController extends Controller
             'groupByLength' => $this->groupByLength,
             'topTitle' => $this->getMenuTitle(),
             'modeColumns' => $this->modeColumns(),
-            'modeReport' => $this->makeModeTitleReport(),
             'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),
             'tableTrueWidth' => $this->tableTrueWidth,
