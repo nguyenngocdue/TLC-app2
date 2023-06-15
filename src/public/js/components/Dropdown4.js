@@ -1,7 +1,7 @@
 let runOnce = {}
 const showErrorMessage = (response) => {
-    const { message } = response.responseJSON
-    toastr.error("The server can't handle with your speed. Please slowdown.", message)
+    const { message, exception } = response.responseJSON
+    toastr.error(message, exception)
     console.log(response)
 }
 //Similar to includes, this will be checking both numbers and strings

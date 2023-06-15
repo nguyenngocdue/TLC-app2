@@ -3,6 +3,7 @@
 use App\Http\Controllers\Workflow\ManageApisController;
 use App\Http\Controllers\Workflow\ManageAppCreationsController;
 use App\Http\Controllers\Workflow\ManageAppsController;
+use App\Http\Controllers\Workflow\ManagePivotTablesController;
 use App\Http\Controllers\Workflow\ManageStandardDefaultValuesController;
 use App\Http\Controllers\Workflow\ManageStandardPropsController;
 use App\Http\Controllers\Workflow\ManageStatusesController;
@@ -15,6 +16,7 @@ Route::group([
 ], function () {
     Route::resource('manageStatuses', ManageStatusesController::class)->only('index', 'store', 'create');
     Route::resource('manageWidgets', ManageWidgetsController::class)->only('index', 'store', 'create');
+    Route::resource('managePivotTables', ManagePivotTablesController::class)->only('index', 'store', 'create');
     Route::resource('manageApps', ManageAppsController::class)->only('index', 'store', 'create');
     Route::resource('manageApis', ManageApisController::class)->only('index', 'store', 'create');
     Route::resource('manageAppCreations', ManageAppCreationsController::class)->only('index', 'store');

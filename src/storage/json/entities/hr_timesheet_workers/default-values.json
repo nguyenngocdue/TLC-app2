@@ -11,11 +11,11 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_week": {
-        "name": "_week",
-        "column_name": "week",
+    "_ts_date": {
+        "name": "_ts_date",
+        "column_name": "ts_date",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",

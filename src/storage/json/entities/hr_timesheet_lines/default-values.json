@@ -47,11 +47,47 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_start_time": {
+        "name": "_start_time",
+        "column_name": "start_time",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_duration_in_min": {
+        "name": "_duration_in_min",
+        "column_name": "duration_in_min",
+        "label": "",
+        "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "480",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_ts_date": {
         "name": "_ts_date",
         "column_name": "ts_date",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -63,7 +99,7 @@
         "name": "_ts_hour",
         "column_name": "ts_hour",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -162,7 +198,7 @@
         "validation": "required",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "2",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -179,9 +215,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -191,9 +227,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",

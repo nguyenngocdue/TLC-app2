@@ -16,6 +16,7 @@ class SidebarFilterSubProject extends Component
      * @return void
      */
     public function __construct(
+        private $id,
         private $name,
         private $tableName,
         private $selected = "",

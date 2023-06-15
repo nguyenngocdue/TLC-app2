@@ -1,0 +1,16 @@
+{
+    "hr_timesheet_project_date": {
+        "name": "hr_timesheet_project_date",
+        "filters": "a,b,c",
+        "column_fields": "d,e,f",
+        "row_fields": "g,h,i",
+        "data_fields": "j,k,l"
+    },
+    "hr_timesheet_team_date": {
+        "name": "hr_timesheet_team_date",
+        "filters": "a,a,a",
+        "column_fields": "b,b,b",
+        "row_fields": "c,c,c",
+        "data_fields": "d,d,d"
+    }
+}

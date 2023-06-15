@@ -9,11 +9,29 @@ use DateTime;
 
 class DateTimeConcern
 {
-    public static function format($value, $formatFrom, $formatTo)
+    private static function getTz()
+    {
+        return CurrentUser::get()->timezone ??  7;
+    }
+
+    public static function formatNoTimezone($value, $formatFrom, $formatTo)
     {
         //Deal with old()
         if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
         return Carbon::createFromFormat($formatFrom, $value)->format($formatTo);
+    }
+    public static function formatForLoading($value, $formatFrom, $formatTo)
+    {
+        //Deal with old()
+        if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
+        return Carbon::createFromFormat($formatFrom, $value)->setTimezone(static::getTz())->format($formatTo);
+    }
+
+    public static function formatForSaving($value, $formatFrom, $formatTo)
+    {
+        //Deal with old()
+        if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
+        return Carbon::createFromFormat($formatFrom, $value)->setTimezone(-static::getTz())->format($formatTo);
     }
     public static function formatQuarterForLoading($value, $formatFrom, $formatTo)
     {
@@ -36,6 +54,7 @@ class DateTimeConcern
     }
     public static function formatQuarterForSaving($value, $formatTo)
     {
+        if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
         $value = substr($value, 1);
         [$quarter, $year] = explode('/', $value);
         $result = Carbon::createFromDate($year, (($quarter - 1) * 3) + 1, 1)->startOfQuarter();
@@ -43,6 +62,7 @@ class DateTimeConcern
     }
     public static function formatWeekForSaving($value, $formatTo)
     {
+        if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
         $value = substr($value, 1);
         [$week, $year] = explode('/', $value);
         $result = Carbon::parse("{$year}-W{$week}-1")->startOfWeek();
@@ -64,12 +84,12 @@ class DateTimeConcern
                 case "picker_date":
                     $formatFrom = Constant::FORMAT_DATE_MYSQL;
                     $formatTo = Constant::FORMAT_DATE_ASIAN;
-                    $value = self::format($value, $formatFrom, $formatTo);
+                    $value = self::formatNoTimezone($value, $formatFrom, $formatTo);
                     break;
                 case "picker_month":
                     $formatFrom = Constant::FORMAT_DATE_MYSQL;
                     $formatTo = Constant::FORMAT_MONTH;
-                    $value = self::format($value, $formatFrom, $formatTo);
+                    $value = self::formatNoTimezone($value, $formatFrom, $formatTo);
                     break;
                 case "picker_week":
                     $formatFrom = Constant::FORMAT_DATE_MYSQL;
@@ -84,17 +104,17 @@ class DateTimeConcern
                 case "picker_year":
                     $formatFrom = Constant::FORMAT_DATE_MYSQL;
                     $formatTo = Constant::FORMAT_YEAR;
-                    $value = self::format($value, $formatFrom, $formatTo);
+                    $value = self::formatNoTimezone($value, $formatFrom, $formatTo);
                     break;
                 case 'picker_datetime':
                     $formatFrom = Constant::FORMAT_DATETIME_MYSQL;
                     $formatTo = Constant::FORMAT_DATETIME_ASIAN;
-                    $value = self::format($value, $formatFrom, $formatTo);
+                    $value = self::formatForLoading($value, $formatFrom, $formatTo);
                     break;
                 case "picker_time":
                     $formatFrom = Constant::FORMAT_TIME_MYSQL;
                     $formatTo = Constant::FORMAT_TIME;
-                    $value = self::format($value, $formatFrom, $formatTo);
+                    $value = self::formatNoTimezone($value, $formatFrom, $formatTo);
                     break;
             }
         } catch (\Carbon\Exceptions\InvalidFormatException $e) {
@@ -111,12 +131,12 @@ class DateTimeConcern
                 case "picker_date":
                     $formatFrom = Constant::FORMAT_DATE_ASIAN;
                     $formatTo = Constant::FORMAT_DATE_MYSQL;
-                    $value = self::format($value, $formatFrom, $formatTo);
+                    $value = self::formatNoTimezone($value, $formatFrom, $formatTo);
                     break;
                 case "picker_month":
                     $formatFrom = Constant::FORMAT_MONTH;
                     $formatTo = Constant::FORMAT_DATE_MYSQL;
-                    $value = self::format($value, $formatFrom, $formatTo);
+                    $value = self::formatNoTimezone($value, $formatFrom, $formatTo);
                     break;
                 case "picker_week":
                     $formatTo = Constant::FORMAT_DATE_MYSQL;
@@ -130,17 +150,17 @@ class DateTimeConcern
                 case "picker_year":
                     $formatFrom = Constant::FORMAT_YEAR;
                     $formatTo = Constant::FORMAT_DATE_MYSQL;
-                    $value = self::format($value, $formatFrom, $formatTo);
+                    $value = self::formatNoTimezone($value, $formatFrom, $formatTo);
                     break;
                 case "picker_datetime":
                     $formatFrom = Constant::FORMAT_DATETIME_ASIAN;
                     $formatTo = Constant::FORMAT_DATETIME_MYSQL;
-                    $value = self::format($value, $formatFrom, $formatTo);
+                    $value = self::formatForSaving($value, $formatFrom, $formatTo);
                     break;
                 case "picker_time":
                     $formatFrom = Constant::FORMAT_TIME;
                     $formatTo = Constant::FORMAT_TIME_MYSQL;
-                    $value = self::format($value, $formatFrom, $formatTo);
+                    $value = self::formatNoTimezone($value, $formatFrom, $formatTo);
                     break;
             }
         } catch (\Carbon\Exceptions\InvalidFormatException $e) {

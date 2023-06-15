@@ -23,10 +23,7 @@ class OvertimeRequestLineController extends Controller
         foreach ($lines as $line) {
             $user_id = $line['user_id'];
             $ot_date = $line['ot_date'];
-
             $otrl_id = $line['id'];
-            $year_month0 = Carbon::createFromFormat(Constant::FORMAT_DATE_ASIAN, $ot_date)->format(Constant::FORMAT_YEAR_MONTH0);
-            $year0 = substr($year_month0, 0, 4);
 
             $ot_date = DateTimeConcern::convertForSaving('picker_date', $ot_date);
             [$begin_date_of_month, $end_date_of_month] = DateTimeConcern::getMonthBeginAndEndDate0($ot_date);
@@ -37,9 +34,7 @@ class OvertimeRequestLineController extends Controller
 
             $sql = "SELECT * FROM 
                 (SELECT 
-                    -- substr(ot_date, 1, 4) AS `year0`, 
                     if(ot_date BETWEEN concat(year(ot_date),'-12-$hr_month_starting_date') AND concat(year(ot_date),'-12-31'), year(ot_date)+1, year(ot_date)) AS `year0`, 
-                    -- get_hr_year_from_date(ot_date),
                     user_id, 
                     round(200 - sum(total_time),2) AS `year_remaining_hours`
                 FROM `hr_overtime_request_lines` otrl, `hr_overtime_requests` otr
@@ -53,7 +48,6 @@ class OvertimeRequestLineController extends Controller
                 GROUP BY user_id, year0) AS year0
                 LEFT JOIN
                 (SELECT 
-                    -- substr(ot_date, 1, 7) AS `year_month0`, 
                     if(day(ot_date) BETWEEN 1 AND $hr_month_ending_date, substr(ot_date, 1,7), substr(DATE_ADD(ot_date, INTERVAL 1 MONTH),1,7)) AS `year_month0`,
                     user_id, 
                     round(40 - sum(total_time),2) AS `month_remaining_hours`

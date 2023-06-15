@@ -14,6 +14,7 @@ class AggDateRange extends Component
      */
     public function __construct(
         private $rendererParam = '',
+        private $renderRaw = false,
     ) {
         //
     }
@@ -33,6 +34,7 @@ class AggDateRange extends Component
                 $min = DateTimeConcern::convertForLoading('picker_date', min($dates));
                 $max  = DateTimeConcern::convertForLoading('picker_date', max($dates));
                 $result = ($min == $max) ? $min : "$min to $max";
+                if ($this->renderRaw) return $result;
                 return "<p class='p-2'>$result</p>";
             }
         };

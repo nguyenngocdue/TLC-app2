@@ -15,6 +15,7 @@ class AggSum extends Component
     public function __construct(
         private $rendererParam = '',
         private $rendererUnit = '',
+        private $renderRaw = false,
     ) {
     }
 
@@ -34,7 +35,8 @@ class AggSum extends Component
             $sum = 0;
             foreach ($json as $line) {
                 if (!isset($line->$column)) {
-                    return "<div class='text-center'><x-renderer.tag title='Column not found' color='red'>" . $column . "</x-renderer.tag></div>";
+                    if ($this->renderRaw) return $column;
+                    else return "<div class='text-center'><x-renderer.tag title='Column not found' color='red'>" . $column . "</x-renderer.tag></div>";
                 } else {
                     $sum += $line->$column;
                 }
@@ -44,7 +46,9 @@ class AggSum extends Component
             if ($count === 0) return "";
             $avg = round($sum / $count, 2);
             $unit = Str::plural($unit, round($sum));
-            return "<div class='text-center'><x-renderer.tag title='Count: $count\nAVG: $avg'>$sum $unit</x-renderer.tag></div>";
+            $tooltip = "Count: $count\nAVG: $avg";
+            if ($this->renderRaw) return "$sum $unit";
+            return "<div class='text-center'><x-renderer.tag title='$tooltip'>$sum $unit</x-renderer.tag></div>";
         };
     }
 }

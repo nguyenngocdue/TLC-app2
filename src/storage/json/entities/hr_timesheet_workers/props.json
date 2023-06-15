@@ -18,12 +18,12 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_week": {
-        "name": "_week",
-        "column_name": "week",
+    "_ts_date": {
+        "name": "_ts_date",
+        "column_name": "ts_date",
         "column_type": "date",
-        "label": "Week",
-        "control": "picker_week",
+        "label": "Date",
+        "control": "picker_date",
         "align": "",
         "col_span": "",
         "width": "",

@@ -36,7 +36,7 @@ class Elapse extends Component
         if (!env("SHOW_ELAPSE")) {
             // 35: Vo Van Thuc - Software Tester
             // 38: Fortune Truong - Project Manager
-            if (!in_array(CurrentUser::id(), [35, 38])) return;
+            // if (!in_array(CurrentUser::id(), [35, 38])) return;
         }
 
         if ($this->duration) {

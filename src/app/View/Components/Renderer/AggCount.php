@@ -14,6 +14,7 @@ class AggCount extends Component
      */
     public function __construct(
         private $rendererUnit = '',
+        private $renderRaw = false,
     ) {
         //
     }
@@ -39,6 +40,7 @@ class AggCount extends Component
                 $names[] = (1 + $index) . ". " . $name;
             }
             $title = join("\n", $names);
+            if ($this->renderRaw) return $str;
             return "<div class='text-center' title='$title'><x-renderer.tag>$str</x-renderer.tag></div>";
         };
     }
