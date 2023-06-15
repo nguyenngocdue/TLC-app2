@@ -107,7 +107,8 @@ class BuildTree
             if (isset($node->children)) {
                 $value = static::flatten($node->children);
                 $flatArray = array_merge($flatArray, $value);
-                unset($node->children);
+                //<< cause unexpected behavior when get flattened and un-flattened in a same scope of function 
+                // unset($node->children); 
             }
             $flatArray[] = $node;
         }

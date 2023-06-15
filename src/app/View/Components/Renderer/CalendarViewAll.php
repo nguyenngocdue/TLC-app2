@@ -15,8 +15,11 @@ class CalendarViewAll extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $dataSource = null,
+        private $type,
+        private $typeModel,
+    ) {
         //
     }
 
@@ -27,8 +30,10 @@ class CalendarViewAll extends Component
      */
     public function render()
     {
+        $dataSource = $this->dataSource;
         $token = CurrentUser::getTokenForApi();
-        $allTimesheet = Hr_timesheet_officer::query()->where('owner_id', CurrentUser::id())->get()->map(function ($item) {
+        // dd($dataSource->get());
+        $allTimesheet = $dataSource->get()->map(function ($item) {
             // $item['day_value'] = $this->getWeekByDay($item->week)[0];
             $item['week_value'] = $this->getWeekByDay($item->week)[1];
             // $item['month_value'] = $this->getWeekByDay($item->week)[2];
@@ -42,6 +47,8 @@ class CalendarViewAll extends Component
             'allTimesheet' => $allTimesheet,
             'routeCreate' => route('timesheet_officers.create'),
             'token' => $token,
+            'type' => $this->type,
+            'typeModel' => $this->typeModel,
         ]);
     }
 

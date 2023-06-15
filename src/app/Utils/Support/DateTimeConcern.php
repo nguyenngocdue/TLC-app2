@@ -68,6 +68,14 @@ class DateTimeConcern
         $result = Carbon::parse("{$year}-W{$week}-1")->startOfWeek();
         return $result->format($formatTo);
     }
+    public static function getWeekOfYear($timestamp)
+    {
+        return Carbon::parse($timestamp)->weekOfYear;
+    }
+    public static function formatWeekYear($start, $yearStart, $end, $yearEnd)
+    {
+        return 'W' . $start . '/' . $yearStart . ' - ' . 'W' . $end . '/' . $yearEnd;
+    }
     public static function convertForLoading($control, $value)
     {
         if (!$value) return null;

@@ -671,6 +671,9 @@ video {
 .col-span-10 {
   grid-column: span 10 / span 10;
 }
+.col-span-11 {
+  grid-column: span 11 / span 11;
+}
 .col-span-12 {
   grid-column: span 12 / span 12;
 }
@@ -1088,9 +1091,6 @@ video {
 }
 .h-screen {
   height: 100vh;
-}
-.h-\[650px\] {
-  height: 650px;
 }
 .max-h-0 {
   max-height: 0px;
@@ -8124,8 +8124,8 @@ video {
     grid-template-columns: repeat(10, minmax(0, 1fr));
   }
 
-  .\32xl\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .\32xl\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .\32xl\:grid-cols-5 {

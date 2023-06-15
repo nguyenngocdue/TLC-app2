@@ -42,7 +42,8 @@ class EntityCRUDController extends Controller
 	public function __construct()
 	{
 		$this->assignDynamicTypeCreateEdit();
-		$this->middleware("permission:{$this->permissionMiddleware['read']}")->only('show');
+		if (!in_array($this->type, qr_apps_renderer()))
+			$this->middleware("permission:{$this->permissionMiddleware['read']}")->only('show');
 		$this->middleware("permission:{$this->permissionMiddleware['create']}")->only('create');
 		$this->middleware("permission:{$this->permissionMiddleware['edit']}")->only('edit', 'store', 'update');
 		$this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('destroy', 'destroyMultiple');
