@@ -1,0 +1,114 @@
+{
+    "document-qaqc_insp_chklst\/010": {
+        "name": "document-qaqc_insp_chklst\/010",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "sub_package": "production",
+        "title": "Document"
+    },
+    "register-hr_overtime_request\/010": {
+        "name": "register-hr_overtime_request\/010",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "sub_package": "hr",
+        "title": "Overtime Summary"
+    },
+    "register-hr_overtime_request\/020": {
+        "name": "register-hr_overtime_request\/020",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "sub_package": "hr",
+        "title": "Overtime User Line"
+    },
+    "register-qaqc_insp_chklst\/010": {
+        "name": "register-qaqc_insp_chklst\/010",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "quality_control",
+        "title": "???"
+    },
+    "register-qaqc_insp_chklst\/020": {
+        "name": "register-qaqc_insp_chklst\/020",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "quality_control",
+        "title": "Inspection Matrix"
+    },
+    "register-qaqc_wir\/010": {
+        "name": "register-qaqc_wir\/010",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "quality_control",
+        "title": "WIR Register"
+    },
+    "register-qaqc_wir\/020": {
+        "name": "register-qaqc_wir\/020",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "quality_control",
+        "title": "WIR Detail Progress"
+    },
+    "report-hr_timesheet_line\/010": {
+        "name": "report-hr_timesheet_line\/010",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "sub_package": "hr",
+        "title": "Project\/Date"
+    },
+    "report-hr_timesheet_line\/100": {
+        "name": "report-hr_timesheet_line\/100",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "sub_package": "hr",
+        "title": "Line Data"
+    },
+    "report-prod_order\/010": {
+        "name": "report-prod_order\/010",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Total VS Target (Hour\/Man-hour)"
+    },
+    "report-prod_run\/010": {
+        "name": "report-prod_run\/010",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Daily Timesheet"
+    },
+    "report-prod_sequence\/010": {
+        "name": "report-prod_sequence\/010",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Worker number"
+    },
+    "report-prod_sequence\/020": {
+        "name": "report-prod_sequence\/020",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Total man-hours"
+    },
+    "report-prod_sequence\/030": {
+        "name": "report-prod_sequence\/030",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Work Amount"
+    },
+    "report-prod_sequence\/040": {
+        "name": "report-prod_sequence\/040",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "min\/UoM"
+    },
+    "report-prod_sequence\/050": {
+        "name": "report-prod_sequence\/050",
+        "package_tab": "report",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Model 050 (updating)"
+    }
+}

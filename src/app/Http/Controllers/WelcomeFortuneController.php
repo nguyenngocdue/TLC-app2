@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Workflow\LibReports;
 use App\Utils\Constant;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,6 +25,9 @@ class WelcomeFortuneController extends Controller
 
         $out = $out->setTimezone(7)->format(Constant::FORMAT_DATETIME_ASIAN);
         dump($out);
+
+        $a = LibReports::getAll();
+        dump($a);
 
         $dataSource = [];
 

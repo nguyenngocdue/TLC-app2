@@ -15,6 +15,7 @@ abstract class AbstractManageLibController extends Controller
     protected $libraryClass = AbstractLib::class;
     protected $route = "manage{Library}";
     protected $allowedCreateNew = true;
+    protected $groupByLength = 1;
 
     public function getType()
     {
@@ -60,6 +61,7 @@ abstract class AbstractManageLibController extends Controller
             'topTitle' => $this->title,
             'type' => 'Workflow',
             'allowedCreateNew' => $this->allowedCreateNew,
+            'groupByLength' => $this->groupByLength,
         ]);
     }
 

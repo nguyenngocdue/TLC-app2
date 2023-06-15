@@ -3,9 +3,44 @@
 namespace App\Utils\Support;
 
 use DateTime;
+use Illuminate\Support\Str;
 
 class Report
 {
+    private static function actionCreator($reportType, $path, $singular, $mode)
+    {
+        return [
+            'singular' => $singular,
+            'mode' => $mode,
+            'reportType' => $reportType,
+            'path' => $path,
+            'routeName' => $reportType . '-' . $singular . "_" . $mode,
+            'name' => $reportType . '-' . $singular . "/$mode",
+        ];
+    }
+
+    public static function getAllRoutes()
+    {
+        $entities = Entities::getAll();
+
+        $result = [];
+        foreach ($entities as $entity) {
+            $entityName = Str::getEntityName($entity);
+            $singular = Str::singular($entityName);
+            $ucfirstName = Str::ucfirst($singular);
+
+            for ($i = 10; $i <= 100; $i += 10) {
+                $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
+                $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}_$mode";
+                if (class_exists($path)) $result[] = static::actionCreator('report', $path, $singular, $mode);
+                $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}_$mode";
+                if (class_exists($path)) $result[] = static::actionCreator('register', $path, $singular, $mode);
+                $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}_$mode";
+                if (class_exists($path)) $result[] = static::actionCreator('document', $path, $singular, $mode);
+            }
+        }
+        return $result;
+    }
     public static function getFirstItemFromChildrenArray($dataSource)
     {
         foreach ($dataSource as $key => $values) {
@@ -111,7 +146,7 @@ class Report
     {
         $strDate = str_replace('-', '/', $strDate);
         $dateTime = DateTime::createFromFormat('d/m/Y', $strDate);
-        if($dateTime){
+        if ($dateTime) {
             return $dateTime->format($typeFormat);
         }
         return DateTime::createFromFormat('Y/m/d', $strDate)->format($typeFormat);

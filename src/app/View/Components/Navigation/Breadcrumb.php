@@ -69,6 +69,7 @@ class Breadcrumb extends Component
             'manageApp',
             'manageApi',
             'managePivotTable',
+            'manageReport',
             'manageAppCreation',
             'manageStandardProp',
             'manageStandardDefaultValue',
