@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Workflow\LibReports;
-use App\Utils\Constant;
-use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class WelcomeFortuneController extends Controller
@@ -16,18 +14,14 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        // $db = (new EntityIdClickCount)('project');
-        // dump($db);
-        // $db = (new EntityNameClickCount)(560);
-        // dump($db);
 
-        $out = Carbon::createFromFormat(Constant::FORMAT_DATETIME_MYSQL, "2022-01-31 00:00:00");
+        $collect = User::getCollection()->whereIn('id', [1, 2, 5]);
+        dump($collect);
 
-        $out = $out->setTimezone(7)->format(Constant::FORMAT_DATETIME_ASIAN);
-        dump($out);
-
-        $a = LibReports::getAll();
-        dump($a);
+        $u = User::findFromCache(1);
+        dump($u);
+        // $u = User::findFromCache1(38);
+        // dump($u);
 
         $dataSource = [];
 

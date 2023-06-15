@@ -269,14 +269,40 @@ class User extends Authenticatable implements LdapAuthenticatable
         ];
     }
 
-    static $userDbSingleton = [];
-    //Override Model find
+    // Override Model find
+
+    // static $userDbSingleton = [];
+    // public static function findFromCache($id)
+    // {
+    //     // return parent::find($id);
+    //     if (!isset(static::$userDbSingleton[$id])) {
+    //         static::$userDbSingleton[$id] = static::find($id);
+    //     }
+    //     return static::$userDbSingleton[$id];
+    // }
+
+    private static function queryAndCacheToRam()
+    {
+        $all = static::all();
+        foreach ($all as $item) {
+            static::$singletonDbUsers[$item->id] = $item;
+        }
+    }
+
+    static $singletonDbUsers = null;
     public static function findFromCache($id)
     {
-        // return parent::find($id);
-        if (!isset(static::$userDbSingleton[$id])) {
-            static::$userDbSingleton[$id] = static::find($id);
+        if (!isset(static::$singletonDbUsers[$id])) static::queryAndCacheToRam();
+        return static::$singletonDbUsers[$id];
+    }
+
+    static $singletonDbUserCollection = null;
+    public static function getCollection()
+    {
+        if (!isset(static::$singletonDbUserCollection)) {
+            static::queryAndCacheToRam();
+            static::$singletonDbUserCollection = collect(static::$singletonDbUsers);
         }
-        return static::$userDbSingleton[$id];
+        return static::$singletonDbUserCollection;
     }
 }
