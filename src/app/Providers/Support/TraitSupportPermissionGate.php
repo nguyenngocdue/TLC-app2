@@ -15,20 +15,20 @@ trait TraitSupportPermissionGate
         $type = Str::singular($model->getTable());
         return LibApps::getFor($type)['apply_approval_tree'] ?? false;
     }
-    private function treeCompany($user, $flatten = true)
+    private function getCompanyTree($user, $flatten = true)
     {
         return BuildTree::getTreeByOptions($user->id, $user->viewport_uids, $user->leaf_uids, false, $flatten);
     }
     private function getListOwnerIds($user)
     {
-        $value = $this->treeCompany($user);
+        $value = $this->getCompanyTree($user);
         $result = array_map(fn ($item) => $item->id, $value);
         $result[] = $user->id;
         return array_unique($result) ?? [];
     }
     private function getTreeOwnerIds($user)
     {
-        $value = $this->treeCompany($user, false);
+        $value = $this->getCompanyTree($user, false);
         return $value;
     }
     private function isUseTree($type)
@@ -61,7 +61,7 @@ trait TraitSupportPermissionGate
     }
     private function checkTree($model)
     {
-        foreach ($this->treeCompany(CurrentUser::get()) as $value) {
+        foreach ($this->getCompanyTree(CurrentUser::get()) as $value) {
             if ($model->owner_id == $value->id) {
                 return true;
             }
