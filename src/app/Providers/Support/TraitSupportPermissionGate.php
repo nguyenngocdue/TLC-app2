@@ -15,9 +15,9 @@ trait TraitSupportPermissionGate
         $type = Str::singular($model->getTable());
         return LibApps::getFor($type)['apply_approval_tree'] ?? false;
     }
-    private function treeCompany($user)
+    private function treeCompany($user, $flatten = true)
     {
-        return BuildTree::getTreeByOptions($user->id, $user->viewport_uids, $user->leaf_uids, false, true);
+        return BuildTree::getTreeByOptions($user->id, $user->viewport_uids, $user->leaf_uids, false, $flatten);
     }
     private function getListOwnerIds($user)
     {
@@ -25,6 +25,11 @@ trait TraitSupportPermissionGate
         $result = array_map(fn ($item) => $item->id, $value);
         $result[] = $user->id;
         return array_unique($result) ?? [];
+    }
+    private function getTreeOwnerIds($user)
+    {
+        $value = $this->treeCompany($user, false);
+        return $value;
     }
     private function isUseTree($type)
     {

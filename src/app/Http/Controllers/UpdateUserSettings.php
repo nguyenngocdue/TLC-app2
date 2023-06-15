@@ -6,7 +6,9 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Models\User;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateTimeConcern;
 use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +22,34 @@ class UpdateUserSettings extends Controller
         $perPage = $request->input('per_page');
         $type = $request->input("_entity");
         $settings[$type][Constant::VIEW_ALL]['per_page'] = $perPage;
+        return $settings;
+    }
+    private function getStartAndEndFilterByYear($year)
+    {
+        if ($year) {
+            return $this->getDurationForFilterCalendar($year);
+        } else {
+            $year = Carbon::now()->year;
+            return $this->getDurationForFilterCalendar($year);
+        }
+    }
+    private function getDurationForFilterCalendar($year)
+    {
+        $start = DateTimeConcern::getWeekOfYear(($year - 1) . '-' . '09' . '-' . '01');
+        $end = DateTimeConcern::getWeekOfYear($year . '-' . '12' . '-' . '31');
+        return DateTimeConcern::formatWeekYear($start, ($year - 1), $end, $year);
+    }
+    private function updateViewAllCalendar($request, $settings)
+    {
+        $type = $request->input("_entity");
+        $year = $request->input("year");
+        $ownerId = $request->input("owner_id");
+        $valueWeek = $this->getStartAndEndFilterByYear($year);
+        $data = [
+            'week' => $valueWeek,
+            'owner_id' => $ownerId ?? [CurrentUser::id()],
+        ];
+        $settings[$type][Constant::VIEW_ALL]['calendar'] = $data;
         return $settings;
     }
 
@@ -214,11 +244,13 @@ class UpdateUserSettings extends Controller
 
     public function __invoke(Request $request, $redirectTo = null)
     {
-        // dd($request->input());
         $action = $request->input('action');
         $user = User::find(Auth::id());
         $settings = $user->settings;
         switch ($action) {
+            case 'updateViewAllCalendar':
+                $settings = $this->updateViewAllCalendar($request, $settings);
+                break;
             case 'updatePerPage':
                 $settings = $this->updatePerPage($request, $settings);
                 break;

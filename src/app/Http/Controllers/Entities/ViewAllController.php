@@ -283,8 +283,29 @@ class ViewAllController extends Controller
         }
         return $dataSource;
     }
-
-    public function index(Request $request, $trashed = false)
+    private function getTabs()
+    {
+        $tabs = [];
+        $tableName = Str::plural($this->type);
+        if (in_array($tableName, JsonControls::getAppsHaveViewAllCalendar())) {
+            $tabs = [
+                'home' => [
+                    'href' => route($tableName . '.index'),
+                    'title' => "View All Table",
+                    'icon' => 'fa-solid fa-house',
+                    'active' => true,
+                ],
+                'calendar' => [
+                    'href' => "?view_type=calendar&action=updateViewAllCalendar&_entity=$tableName",
+                    'title' => "View All Calendar",
+                    'icon' => 'fa-regular fa-calendar',
+                    'active' => false,
+                ]
+            ];
+        };
+        return $tabs;
+    }
+    private function renderViewAllTable($request, $trashed)
     {
         $basicFilter = $request->input('basic_filter');
         if ($basicFilter || !empty($basicFilter)) {
@@ -316,12 +337,45 @@ class ViewAllController extends Controller
             'columns' => $columns,
             'dataSource' => $dataSource,
             'currentFilter' => $currentFilter,
+            'tabs' => $this->getTabs(),
             // 'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
             'tableTrueWidth' => $tableTrueWidth,
             'frameworkTook' => $this->frameworkTook,
             'trashed' => $trashed,
             'tabPane' => $this->getTabPane($advanceFilters),
         ]);
+    }
+    private function renderViewAllCalendar($request)
+    {
+        if ($request->input('view_type')) {
+            (new UpdateUserSettings())($request);
+            // return redirect($request->getPathInfo());
+        }
+        [,,,,,,,, $filterViewAllCalendar] = $this->getUserSettings();
+        $dataSource = $this->getDataSource($filterViewAllCalendar);
+        return view('dashboards.pages.entity-view-all', [
+            'topTitle' => CurrentRoute::getTitleOf($this->type),
+            'title' => 'View All Calendar',
+            'valueAdvanceFilters' => $filterViewAllCalendar,
+            'type' => Str::plural($this->type),
+            'typeModel' => $this->typeModel,
+            'dataSource' => $dataSource,
+            'trashed' => false,
+            'tabs' => $this->getTabs(),
+            // 'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
+            'frameworkTook' => $this->frameworkTook,
+        ]);
+    }
+    public function index(Request $request, $trashed = false)
+    {
+        switch ($request->input('view_type')) {
+            case 'calendar':
+                return $this->renderViewAllCalendar($request);
+                break;
+            default:
+                return $this->renderViewAllTable($request, $trashed);
+                break;
+        }
     }
     public function indexTrashed(Request $request)
     {

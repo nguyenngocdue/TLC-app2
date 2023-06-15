@@ -101,7 +101,7 @@ trait TraitEntityCRUDStoreUpdate2
 	{
 		// dd(SuperProps::getFor($this->type));
 		// dump($this->type);
-		dd($request->input());
+		// dd($request->input());
 		// dump($request->files);
 		// dd();
 		// if ($request['tableNames'] == 'fakeRequest') {

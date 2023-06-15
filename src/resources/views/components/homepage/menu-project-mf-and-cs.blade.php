@@ -1,6 +1,8 @@
+@if($isRender)
 <button class="focus:shadow-outline-purple rounded-md focus:outline-none" @click="toggleProjectMenu" @keydown.escape="closeProjectMenu">
     <i class="fa-solid fa-city"></i>
 </button>
+@endif
 <template x-if="isProjectMenuOpen">
     <ul x-transition:leave="transition ease-in duration-150" 
         x-transition:leave-start="opacity-100" 

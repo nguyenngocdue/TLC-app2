@@ -6,9 +6,23 @@
 @section('content')
 <div class="px-4 mt-2">
     <x-elapse title="Bootrap: " duration="{{$frameworkTook}}"/>   
-    <x-elapse title="ViewAllController: "/>   
+    <x-elapse title="ViewAllController: "/> 
+    @if(isset($columns)) 
     <x-renderer.advanced-filter trashed="{{$trashed}}" currentFilter="{{$currentFilter}}" type="{{$type}}" typeModel="{{$typeModel}}" :valueAdvanceFilters="$valueAdvanceFilters"/>
+    @endif
     <x-elapse title="Advanced filter: "/>
+    @forelse($tabs as $key => $value)
+        @php
+            $isActive = $value['active'];
+            $render = $isActive ? 'type="secondary"' : 'type="secondary" outline=true';
+        @endphp
+        <x-renderer.button class="mr-1" href="{!!$value['href']!!}" target="_blank" title="Export this list to CSV">
+            <i class="{{$value['icon']}}"></i>
+        </x-renderer.button>
+    @empty
+        
+    @endforelse
+    @if(isset($columns))
     <x-renderer.tab-pane :tabs="$tabPane">
         @php 
         // $abt = "<x-form.action-button-group type='$type' />"; 
@@ -35,6 +49,9 @@
             <x-elapse total=1/>
         </div>
     </x-renderer.tab-pane>
+    @else
+        <x-renderer.calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}" :dataSource="$dataSource"/>
+    @endif
 </div>
 <br class=":" />
 <script src="{{ asset('js/renderprop.js') }}"></script>

@@ -3,20 +3,26 @@
 use App\Http\Controllers\Entities\EntityCRUDController;
 use App\Http\Controllers\Entities\ViewAllController;
 use App\Http\Controllers\Entities\ViewAllInvokerController;
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-Route::group([
-    'middleware' => ['auth', 'impersonate',]
-], function () {
-    Route::group([
-        'prefix' => 'dashboard'
-    ], function () {
-        $entities = Entities::getAll();
-        foreach ($entities as $entity) {
-            $entityName = Str::getEntityName($entity);
-            $entitySingular = Str::singular($entityName);
+Route::group([], function () {
+    $entities = Entities::getAll();
+    foreach ($entities as $entity) {
+        $entityName = Str::getEntityName($entity);
+        $entitySingular = Str::singular($entityName);
+        if (in_array($entitySingular, qr_apps_renderer())) {
+            $middleware = [];
+        } else {
+            $middleware = ['auth', 'impersonate'];
+        }
+        Route::group([
+            'prefix' => 'dashboard',
+            'middleware' => $middleware,
+        ], function () use ($entityName, $entitySingular) {
+
             Route::resource("{$entityName}", ViewAllController::class)->only('index');
             Route::get("{$entityName}_trashed", [ViewAllController::class, 'indexTrashed'])->name("{$entityName}.trashed");
             Route::get("{$entityName}_trashed/{{$entitySingular}}", [EntityCRUDController::class, 'showTrashed'])->name("{$entityName}.showTrashed");
@@ -28,6 +34,6 @@ Route::group([
             Route::post("{$entityName}_dp", [ViewAllInvokerController::class, "duplicateMultiple"])->name("{$entityName}_dp.duplicateMultiple");
             Route::get("{$entityName}_ep", [ViewAllInvokerController::class, "exportCSV"])->name("{$entityName}_ep.exportCSV");
             Route::get("{$entityName}_qr", [ViewAllInvokerController::class, "showQRList6"])->name("{$entityName}_qr.showQRList6");
-        }
-    });
+        });
+    }
 });
