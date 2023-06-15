@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 trait TraitEntityAdvancedFilter
 {
+    private function convertDateTime($time)
+    {
+        return date('Y-m-d', strtotime(str_replace('/', '-', $time)));
+    }
+
     private function advanceFilter($type = null)
     {
         $blackList = ['attachment', 'comment', 'relationship_renderer', 'thumbnail', 'parent_link'];
@@ -24,6 +29,7 @@ trait TraitEntityAdvancedFilter
         // dump($propsFilters);
         return $propsFilters;
     }
+
     private function propsFilterCheckStatusless()
     {
         $propsFilters = $this->advanceFilter();

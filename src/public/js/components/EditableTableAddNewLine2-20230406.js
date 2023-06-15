@@ -80,6 +80,11 @@ const addANewLine = (params) => {
                 getEById(btnAddANewLineId).show()
                 getEById(btnAddFromAListId).show()
                 getEById(spinId).hide()
+            },
+            error: (response) => {
+                const { exception, message } = response.responseJSON
+                toastr.error(message, exception)
+                console.error(response)
             }
         })
     }

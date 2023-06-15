@@ -26,7 +26,7 @@ trait TraitListenerControl
     {
         $a = $this->getListeners2($this->typeToLoadListener);
         $columnName = $this->id ?? $this->name;
-        Log::info($columnName);
+        // Log::info($columnName);
         $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $columnName));
         $listenersOfDropdown2 = [$a[0]];
         return $listenersOfDropdown2;

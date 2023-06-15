@@ -8,8 +8,10 @@ use App\Models\Comment;
 use App\Models\Hr_timesheet_officer;
 use App\Models\Hr_timesheet_worker;
 use App\Models\Zunit_test_03;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WelcomeCanhController extends Controller
 {
@@ -23,6 +25,7 @@ class WelcomeCanhController extends Controller
         // dump(Storage::disk('s3')->put('dinhcanh.txt', 'NgoDinhCanh', 'public'));
         $timesheetableType = $request->input('timesheetableType');
         $timesheetableId = $request->input('timesheetableId');
+
         return view(
             'welcome-canh',
             [

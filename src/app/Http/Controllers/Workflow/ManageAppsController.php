@@ -26,6 +26,14 @@ class ManageAppsController extends AbstractManageLibController
             ],
 
             [
+                'dataIndex' => "package_tab",
+                'renderer' => 'dropdown',
+                'editable' => true,
+                "cbbDataSource" => ['', 'application', 'manage_admin',],
+                // "sortBy" => "value",
+                // "properties" => ["strFn" => "appTitle"],
+            ],
+            [
                 'dataIndex' => "package",
                 'renderer' => 'dropdown',
                 'editable' => true,

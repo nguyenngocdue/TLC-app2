@@ -1,6 +1,7 @@
 {
     "attachment": {
         "name": "attachment",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Attachments",
@@ -9,12 +10,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-regular fa-paperclip\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-regular fa-paperclip\"><\/i>"
+        "hidden_navbar": "true"
     },
     "comment": {
         "name": "comment",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Comments",
@@ -23,12 +25,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-duotone fa-comments\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-duotone fa-comments\"><\/i>"
+        "hidden_navbar": "true"
     },
     "control_type": {
         "name": "control_type",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "dev_admin",
         "title": "Control Types",
@@ -37,12 +40,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "dashboard": {
         "name": "dashboard",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "dashboard",
         "title": "Dashboard",
@@ -51,11 +55,12 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-gauge-high\"><\/i>"
+        "icon": "<i class=\"fa-solid fa-gauge-high\"><\/i>",
+        "hidden_navbar": "true"
     },
     "department": {
         "name": "department",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Departments",
@@ -64,12 +69,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>"
+        "hidden_navbar": "true"
     },
     "erp_routing_link": {
         "name": "erp_routing_link",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "ERP Routing Links",
@@ -78,11 +84,12 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-conveyor-belt-boxes\"><\/i>"
+        "icon": "<i class=\"fa-solid fa-conveyor-belt-boxes\"><\/i>",
+        "hidden_navbar": "true"
     },
     "field": {
         "name": "field",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "dev_admin",
         "title": "Fields",
@@ -91,12 +98,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "ghg_line": {
         "name": "ghg_line",
+        "package_tab": "application",
         "package": "compliance",
         "sub_package": "esg",
         "title": "GHG Line",
@@ -105,12 +113,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "ghg_metric_type": {
         "name": "ghg_metric_type",
+        "package_tab": "application",
         "package": "compliance",
         "sub_package": "esg",
         "title": "GHG Metric Type",
@@ -119,12 +128,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "ghg_metric_type_1": {
         "name": "ghg_metric_type_1",
+        "package_tab": "application",
         "package": "compliance",
         "sub_package": "esg",
         "title": "GHG Metric Type 1",
@@ -133,12 +143,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "ghg_metric_type_2": {
         "name": "ghg_metric_type_2",
+        "package_tab": "application",
         "package": "compliance",
         "sub_package": "esg",
         "title": "GHG Metric Type 2",
@@ -147,12 +158,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "ghg_sheet": {
         "name": "ghg_sheet",
+        "package_tab": "application",
         "package": "compliance",
         "sub_package": "esg",
         "title": "GHG Sheet",
@@ -165,6 +177,7 @@
     },
     "hr_overtime_request": {
         "name": "hr_overtime_request",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "HR Overtime Requests",
@@ -179,6 +192,7 @@
     },
     "hr_overtime_request_line": {
         "name": "hr_overtime_request_line",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "HR Overtime Request Lines",
@@ -187,13 +201,14 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
-        "icon": null,
         "apply_approval_tree": "true"
     },
     "hr_timesheet_line": {
         "name": "hr_timesheet_line",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "HR Timesheet Line",
@@ -202,13 +217,14 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
-        "icon": null,
         "apply_approval_tree": "true"
     },
     "hr_timesheet_officer": {
         "name": "hr_timesheet_officer",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "Timesheet Office Staff",
@@ -224,6 +240,7 @@
     },
     "hr_timesheet_worker": {
         "name": "hr_timesheet_worker",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "Timesheet Workers",
@@ -238,6 +255,7 @@
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
+        "package_tab": "application",
         "package": "compliance",
         "sub_package": "hse",
         "title": "HSE Corrective Actions",
@@ -251,6 +269,7 @@
     },
     "hse_incident_report": {
         "name": "hse_incident_report",
+        "package_tab": "application",
         "package": "compliance",
         "sub_package": "hse",
         "title": "HSE Incident Reports",
@@ -264,6 +283,7 @@
     },
     "manageApis": {
         "name": "manageApis",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage APIs",
@@ -272,12 +292,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>"
+        "hidden_navbar": "true"
     },
     "manageAppCreations": {
         "name": "manageAppCreations",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage App Creations",
@@ -286,12 +307,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>"
+        "hidden_navbar": "true"
     },
     "manageApps": {
         "name": "manageApps",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Apps",
@@ -300,12 +322,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
+        "hidden_navbar": "true"
     },
     "managePivotTables": {
         "name": "managePivotTables",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Pivot Tables",
@@ -314,12 +337,28 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
+        "hidden_navbar": "true"
+    },
+    "manageReports": {
+        "name": "manageReports",
+        "package_tab": "application",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Reports",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
+        "hidden": "true",
+        "hidden_navbar": "true"
     },
     "manageStandardDefaultValues": {
         "name": "manageStandardDefaultValues",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Standard Default Values",
@@ -328,12 +367,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
+        "hidden_navbar": "true"
     },
     "manageStandardProps": {
         "name": "manageStandardProps",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Standard Props",
@@ -342,12 +382,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
+        "hidden_navbar": "true"
     },
     "manageStatuses": {
         "name": "manageStatuses",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Statuses",
@@ -356,12 +397,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-regular fa-bars-progress\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-regular fa-bars-progress\"><\/i>"
+        "hidden_navbar": "true"
     },
     "manageWidgets": {
         "name": "manageWidgets",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Widgets",
@@ -370,12 +412,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
+        "hidden_navbar": "true"
     },
     "permissions": {
         "name": "permissions",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Permissions",
@@ -384,12 +427,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "pj_module": {
         "name": "pj_module",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Modules",
@@ -402,6 +446,7 @@
     },
     "pj_pod": {
         "name": "pj_pod",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "PODs",
@@ -410,11 +455,12 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-sink\"><\/i>"
+        "icon": "<i class=\"fa-solid fa-sink\"><\/i>",
+        "hidden_navbar": "true"
     },
     "pj_shipment": {
         "name": "pj_shipment",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Shipments",
@@ -423,11 +469,12 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-ship\"><\/i>"
+        "icon": "<i class=\"fa-solid fa-ship\"><\/i>",
+        "hidden_navbar": "true"
     },
     "pj_staircase": {
         "name": "pj_staircase",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Staircases",
@@ -436,11 +483,12 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-regular fa-circle-sort-up\"><\/i>"
+        "icon": "<i class=\"fa-regular fa-circle-sort-up\"><\/i>",
+        "hidden_navbar": "true"
     },
     "pj_sub_task": {
         "name": "pj_sub_task",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "project_management",
         "title": "Sub Tasks",
@@ -449,12 +497,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "pj_task": {
         "name": "pj_task",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "project_management",
         "title": "Tasks",
@@ -463,12 +512,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "pj_unit": {
         "name": "pj_unit",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Units",
@@ -477,11 +527,12 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-house\"><\/i>"
+        "icon": "<i class=\"fa-solid fa-house\"><\/i>",
+        "hidden_navbar": "true"
     },
     "post": {
         "name": "post",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "dev_admin",
         "title": "Posts",
@@ -490,12 +541,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "priority": {
         "name": "priority",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Priorities",
@@ -504,12 +556,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "prod_discipline": {
         "name": "prod_discipline",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "production",
         "title": "Production Disciplines",
@@ -518,12 +571,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "prod_discipline_1": {
         "name": "prod_discipline_1",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Discipline 1",
@@ -532,12 +586,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "prod_discipline_2": {
         "name": "prod_discipline_2",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Discipline 2",
@@ -546,12 +601,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "prod_order": {
         "name": "prod_order",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Orders",
@@ -564,6 +620,7 @@
     },
     "prod_routing": {
         "name": "prod_routing",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Routings",
@@ -572,12 +629,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "prod_routing_detail": {
         "name": "prod_routing_detail",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Routing Details",
@@ -586,12 +644,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "prod_routing_link": {
         "name": "prod_routing_link",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Routing Links",
@@ -600,12 +659,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "prod_run": {
         "name": "prod_run",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Runs",
@@ -614,12 +674,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "prod_sequence": {
         "name": "prod_sequence",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Sequences",
@@ -632,6 +693,7 @@
     },
     "project": {
         "name": "project",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "project_management",
         "title": "Projects",
@@ -644,6 +706,7 @@
     },
     "public_holiday": {
         "name": "public_holiday",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "Public Holidays",
@@ -652,12 +715,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "qaqc_car": {
         "name": "qaqc_car",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Corrective Action Registers",
@@ -671,6 +735,7 @@
     },
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Checklists",
@@ -684,6 +749,7 @@
     },
     "qaqc_insp_chklst_line": {
         "name": "qaqc_insp_chklst_line",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Checklist Lines",
@@ -692,12 +758,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "qaqc_insp_chklst_sht": {
         "name": "qaqc_insp_chklst_sht",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Checklist Sheets",
@@ -711,6 +778,7 @@
     },
     "qaqc_insp_control_group": {
         "name": "qaqc_insp_control_group",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "QAQC Insp Control Groups",
@@ -719,12 +787,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "qaqc_insp_control_value": {
         "name": "qaqc_insp_control_value",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "QAQC Insp Control Values",
@@ -733,12 +802,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "qaqc_insp_group": {
         "name": "qaqc_insp_group",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "QAQC Insp Groups",
@@ -747,12 +817,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "qaqc_insp_tmpl": {
         "name": "qaqc_insp_tmpl",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Templates",
@@ -761,11 +832,12 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-renderer",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-list-ul\"><\/i>"
+        "icon": "<i class=\"fa-solid fa-list-ul\"><\/i>",
+        "hidden_navbar": "true"
     },
     "qaqc_insp_tmpl_line": {
         "name": "qaqc_insp_tmpl_line",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Template Lines",
@@ -774,12 +846,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "qaqc_insp_tmpl_sht": {
         "name": "qaqc_insp_tmpl_sht",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Template Sheets",
@@ -788,11 +861,12 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-sheet-renderer",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>"
+        "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
+        "hidden_navbar": "true"
     },
     "qaqc_insp_value": {
         "name": "qaqc_insp_value",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "QAQC Insp Values",
@@ -801,12 +875,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "qaqc_mir": {
         "name": "qaqc_mir",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "warehouse",
         "title": "Material Inspection Requests",
@@ -820,6 +895,7 @@
     },
     "qaqc_ncr": {
         "name": "qaqc_ncr",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Non Conformance Reports",
@@ -834,6 +910,7 @@
     },
     "qaqc_wir": {
         "name": "qaqc_wir",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Work Inspection Requests",
@@ -848,6 +925,7 @@
     },
     "reportIndex": {
         "name": "reportIndex",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "dashboard",
         "title": "Report Index",
@@ -856,11 +934,12 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-sharp fa-solid fa-file-chart-pie\"><\/i>"
+        "icon": "<i class=\"fa-sharp fa-solid fa-file-chart-pie\"><\/i>",
+        "hidden_navbar": "true"
     },
     "role_sets": {
         "name": "role_sets",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Role Sets",
@@ -869,12 +948,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "roles": {
         "name": "roles",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Roles",
@@ -883,12 +963,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "setpermissions": {
         "name": "setpermissions",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Setpermissions",
@@ -897,12 +978,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "setroles": {
         "name": "setroles",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Setroles",
@@ -911,12 +993,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "setrolesets": {
         "name": "setrolesets",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Setrolesets",
@@ -925,12 +1008,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "sub_project": {
         "name": "sub_project",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "project_management",
         "title": "Sub Projects",
@@ -943,6 +1027,7 @@
     },
     "term": {
         "name": "term",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Terms",
@@ -951,12 +1036,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user": {
         "name": "user",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "user",
         "title": "Users",
@@ -965,11 +1051,12 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "hidden": "true",
-        "icon": null
+        "icon": null,
+        "hidden": "true"
     },
     "user_category": {
         "name": "user_category",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Categories",
@@ -978,12 +1065,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user_company": {
         "name": "user_company",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Companies",
@@ -992,12 +1080,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user_discipline": {
         "name": "user_discipline",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Disciplines",
@@ -1006,12 +1095,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user_position1": {
         "name": "user_position1",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Position1",
@@ -1020,12 +1110,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user_position2": {
         "name": "user_position2",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Position2",
@@ -1034,12 +1125,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user_position3": {
         "name": "user_position3",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Position3",
@@ -1048,12 +1140,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user_position_pre": {
         "name": "user_position_pre",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Position Pre",
@@ -1062,12 +1155,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user_team": {
         "name": "user_team",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Teams",
@@ -1076,12 +1170,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user_team_ot": {
         "name": "user_team_ot",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "hr_admin",
         "title": "User Team OT",
@@ -1090,12 +1185,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user_time_keep_type": {
         "name": "user_time_keep_type",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Time Keep Types",
@@ -1104,12 +1200,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "user_type": {
         "name": "user_type",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Types",
@@ -1118,12 +1215,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "wir_description": {
         "name": "wir_description",
+        "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "WIR Descriptions",
@@ -1132,12 +1230,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "work_area": {
         "name": "work_area",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Work Areas",
@@ -1146,12 +1245,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "work_mode": {
         "name": "work_mode",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Work Modes",
@@ -1160,12 +1260,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "workplace": {
         "name": "workplace",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Workplaces",
@@ -1174,12 +1275,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_01": {
         "name": "zunit_test_01",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT01 (Basic Controls)",
@@ -1188,12 +1290,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_02": {
         "name": "zunit_test_02",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT02 (Dropdown\/Checkbox)",
@@ -1202,12 +1305,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_03": {
         "name": "zunit_test_03",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT03 (DateTime Controls)",
@@ -1216,12 +1320,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_04": {
         "name": "zunit_test_04",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT04 (Static Typography)",
@@ -1230,12 +1335,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_05": {
         "name": "zunit_test_05",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT05 (Attachments)",
@@ -1244,12 +1350,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_06": {
         "name": "zunit_test_06",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT06 (Comments)",
@@ -1258,12 +1365,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_07": {
         "name": "zunit_test_07",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT07 (Workflow - without Approval Tree)",
@@ -1272,12 +1380,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_08": {
         "name": "zunit_test_08",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT08 (Workflow - with Approval Tree)",
@@ -1286,13 +1395,14 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
-        "icon": null,
         "apply_approval_tree": "true"
     },
     "zunit_test_09": {
         "name": "zunit_test_09",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT09 (Form Event Listeners)",
@@ -1301,12 +1411,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_10": {
         "name": "zunit_test_10",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT10 (Editable Table)",
@@ -1315,12 +1426,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_11": {
         "name": "zunit_test_11",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT11 (Basic Controls in Table)",
@@ -1329,12 +1441,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_12": {
         "name": "zunit_test_12",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT12 (Dropdown\/Checkbox in Table)",
@@ -1343,12 +1456,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_13": {
         "name": "zunit_test_13",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT13 (DateTime in Table)",
@@ -1357,12 +1471,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_15": {
         "name": "zunit_test_15",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT15 (Attachments in Table)",
@@ -1371,12 +1486,13 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     },
     "zunit_test_19": {
         "name": "zunit_test_19",
+        "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT19 (Listen in Table)",
@@ -1385,8 +1501,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
+        "hidden_navbar": "true"
     }
 }

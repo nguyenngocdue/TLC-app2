@@ -1,18 +1,38 @@
-<div class="w-full p-2 m-2 bg-gray-100 rounded-lg shadow">
-    <button type="button" onclick="decrease(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
-        <i class="w-5 h-full fa-regular fa-arrow-up"></i>
-    </button>
-    <div class = "flex flex-wrap justify-center">
-        <div class="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 gap-3 grid-cols-1 font-semibold" calendar-container>
-        </div> 
+<div class="grid grid-cols-7">
+    <x-calendar.sidebar-calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}"/>
+    <div class="w-full p-2 m-2 bg-gray-100 rounded-lg shadow col-span-6">
+        <div class="grid grid-cols-12">
+            <div class="col-span-11">
+                <div class = "flex flex-wrap justify-center">
+                    <div class="grid 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 gap-2 grid-cols-1 font-semibold" calendar-container>
+                    </div> 
+                </div>
+            </div>
+            <div class="col-span-1">
+                <div class="grid grid-cols-12 h-full">
+                    <div class="col-span-6">
+
+                    </div>
+                    <div class="flex-col justify-between">
+                        <button type="button" onclick="decrease(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                            <i class="w-5 h-full fa-regular fa-arrow-up"></i>
+                        </button>
+                        <button type="button" onclick="increase(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                            <i class="w-5 h-full fa-regular fa-arrow-down"></i>
+                        </button>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
     </div>
-    <button type="button" onclick="increase(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
-        <i class="w-5 h-full fa-regular fa-arrow-down"></i>
-    </button>
 </div>
+
 <script>
     calendarContainer = document.querySelector("[calendar-container]");
-    const month_names = ['9','10','11','12','01','02','03','04','05','06','07','08','09','10','11','12'];
+    // const month_names = ['9','10','11','12','01','02','03','04','05','06','07','08','09','10','11','12'];
+    const month_names = ['01','02','03','04','05','06','07','08','09','10','11','12'];
     const day_names = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
     let year = '';  
     const allTimesheet = @json($allTimesheet);
@@ -31,7 +51,8 @@
     function days_of_month(){
             all = (year) => {return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0)};
             feb = (year) => {return all(year) ? 29 : 28};
-            return [30, 31, 30, 31 ,31, feb(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            // return [30, 31, 30, 31 ,31, feb(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            return [31, feb(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     }
     function day_of_week(year,month) { 
         let day =  new Date(year,month).getDay();
@@ -68,25 +89,14 @@
         const dayOfMonth = days_of_month();
         for (let k = 0; k < dayOfMonth.length; k++) {
             days.push([]);
-            if(k <= 3){
-                for (let i = 1; i <= dayOfMonth[k]; i++) {
-                if(days[k].length < day_of_week(year -1,k + 8)) {
+            for (let i = 1; i <= dayOfMonth[k]; i++) {
+                if(days[k].length < day_of_week(year,k)) {
                     i-=i;
                     days[k].push('');
                     continue; 
                 };
-                days[k].push(i);
-            } 
-            }else{
-                for (let i = 1; i <= dayOfMonth[k]; i++) {
-                if(days[k].length < day_of_week(year,k - 4)) {
-                    i-=i;
-                    days[k].push('');
-                    continue; 
-                };
-                days[k].push(i);
-            }}
-            
+            days[k].push(i);
+            }
         }
         return days;
     }
@@ -124,7 +134,8 @@
         weeks = weeksGenerater();
         htmlRender = '';
         for (let i = 0; i < month_names.length; i++) {
-            yearCurrent = (i <= 3) ? year - 1 : year;
+            // yearCurrent = (i <= 3) ? year - 1 : year;
+            yearCurrent = year;
             const month_name = month_names[i];
             month = getIndexMonth(i);
             titleDayHtml = ''
@@ -214,7 +225,8 @@
         return html;
     }
     function getIndexMonth(i){
-        return (i<= 3) ? (i+9):(i-3);
+        // return (i<= 3) ? (i+9):(i-3);
+        return i + 1;
     }
     function genUrlCreate(routeCreate,weeksDivide,yearCurrent,month){
         if(typeof weeksDivide[0] == 'number'){

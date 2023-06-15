@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Workflow;
 
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -25,16 +26,36 @@ class LibApps extends AbstractLib
                 if (CurrentUser::isAdmin() || static::checkEntityHasPermission('read', $key, $permissions)) {
                     $app['package_rendered'] = isset($app['package']) ? Str::appTitle($app['package']) : "unknown package";
                     $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
+
                     $route = Str::plural($app['name']) . ".index";
-                    $routeCreate = Str::plural($app['name']) . ".create";
                     $app['href'] = Route::has($route) ? route($route) : "#RouteNotFound:$route";
+
+                    $routeCreate = Str::plural($app['name']) . ".create";
                     if (static::checkEntityHasPermission('create', $key, $permissions)) {
                         $app['href_create'] = Route::has($routeCreate) ? route($routeCreate) : "#RouteNotFound:$routeCreate";
                     }
                     $result[$key] = $app;
                 }
             }
+            $reportRoutes = Report::getAllRoutes();
+            $libReport = LibReports::getAll();
+            // dd($libReport);
+            foreach ($reportRoutes as $route) {
+                $name = $route['name'];
+                $lib = $libReport[$name];
+                $reportType = ucfirst(substr($lib['name'], 0, strpos($lib['name'], "-")));
+                $item = [
+                    'package_rendered' => isset($lib['package']) ? Str::appTitle($lib['package']) : "unknown package",
+                    'sub_package_rendered' => isset($lib['sub_package']) ? Str::appTitle($lib['sub_package']) : "unknown sub_package",
+                    'title' =>  $reportType . ": " . $lib['title'],
+                    'href' => route($route['routeName']),
+                    'icon' => '<i class="fa-duotone fa-file-chart-column"></i>',
+                    'name' => $name,
+                ];
+                $result[$name] = $item;
+            }
             static::$singleton_permission = $result;
+            // dump($result);
         }
         return static::$singleton_permission;
     }
@@ -95,7 +116,7 @@ class LibApps extends AbstractLib
         $apps = static::getAll();
         $result = [];
         foreach ($apps as $key => $app) {
-            if ($app['show_renderer'] == $renderer) $result[] = $key;
+            if (isset($app['show_renderer']) && $app['show_renderer'] == $renderer) $result[] = $key;
         }
         return $result;
     }

@@ -11,6 +11,9 @@ if($prodOrder->compliance_name) {
 }
 
 $bigTitle = join(" / ", $a);
+if($project){
+    $href = route("qaqc_insp_chklsts.edit", $chklst->id);
+}
 @endphp
 <div class="px-4 flex justify-center ">
     <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
@@ -22,10 +25,10 @@ $bigTitle = join(" / ", $a);
             <i class="fa-solid fa-chevrons-right"></i>
             <span title="Sub-project #{{$subProject->id}}">{{$subProject->name}}</span>
             <i class="fa-solid fa-chevrons-right"></i>
-            <span title="Checklist ID: #{{$chklst->id}}
+            <a href="{{$href}}" class="text-blue-500" title="Checklist ID: #{{$chklst->id}}
 Template: {{$tmpl->name}} (#{{$tmpl->id}})
 ProdRouting: {{$prodRouting->name}} (#{{$prodRouting->id}})
-ProdOrder: {{$prodOrder->name}} (#{{$prodOrder->id}})">{{$chklst->name}}</span>
+ProdOrder: {{$prodOrder->name}} (#{{$prodOrder->id}})">{{$chklst->name}}</a>
         @endif
         <hr/>
         <x-renderer.heading level=5>
