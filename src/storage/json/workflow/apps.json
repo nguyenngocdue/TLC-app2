@@ -1,6 +1,7 @@
 {
     "attachment": {
         "name": "attachment",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Attachments",
@@ -15,6 +16,7 @@
     },
     "comment": {
         "name": "comment",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Comments",
@@ -29,6 +31,7 @@
     },
     "control_type": {
         "name": "control_type",
+        "package_group": "application",
         "package": "system",
         "sub_package": "dev_admin",
         "title": "Control Types",
@@ -43,6 +46,7 @@
     },
     "dashboard": {
         "name": "dashboard",
+        "package_group": "application",
         "package": "system",
         "sub_package": "dashboard",
         "title": "Dashboard",
@@ -56,6 +60,7 @@
     },
     "department": {
         "name": "department",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Departments",
@@ -70,6 +75,7 @@
     },
     "erp_routing_link": {
         "name": "erp_routing_link",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "ERP Routing Links",
@@ -83,6 +89,7 @@
     },
     "field": {
         "name": "field",
+        "package_group": "application",
         "package": "system",
         "sub_package": "dev_admin",
         "title": "Fields",
@@ -97,6 +104,7 @@
     },
     "ghg_line": {
         "name": "ghg_line",
+        "package_group": "application",
         "package": "compliance",
         "sub_package": "esg",
         "title": "GHG Line",
@@ -111,6 +119,7 @@
     },
     "ghg_metric_type": {
         "name": "ghg_metric_type",
+        "package_group": "application",
         "package": "compliance",
         "sub_package": "esg",
         "title": "GHG Metric Type",
@@ -125,6 +134,7 @@
     },
     "ghg_metric_type_1": {
         "name": "ghg_metric_type_1",
+        "package_group": "application",
         "package": "compliance",
         "sub_package": "esg",
         "title": "GHG Metric Type 1",
@@ -139,6 +149,7 @@
     },
     "ghg_metric_type_2": {
         "name": "ghg_metric_type_2",
+        "package_group": "application",
         "package": "compliance",
         "sub_package": "esg",
         "title": "GHG Metric Type 2",
@@ -153,6 +164,7 @@
     },
     "ghg_sheet": {
         "name": "ghg_sheet",
+        "package_group": "application",
         "package": "compliance",
         "sub_package": "esg",
         "title": "GHG Sheet",
@@ -165,6 +177,7 @@
     },
     "hr_overtime_request": {
         "name": "hr_overtime_request",
+        "package_group": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "HR Overtime Requests",
@@ -179,6 +192,7 @@
     },
     "hr_overtime_request_line": {
         "name": "hr_overtime_request_line",
+        "package_group": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "HR Overtime Request Lines",
@@ -194,6 +208,7 @@
     },
     "hr_timesheet_line": {
         "name": "hr_timesheet_line",
+        "package_group": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "HR Timesheet Line",
@@ -209,6 +224,7 @@
     },
     "hr_timesheet_officer": {
         "name": "hr_timesheet_officer",
+        "package_group": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "Timesheet Office Staff",
@@ -224,6 +240,7 @@
     },
     "hr_timesheet_worker": {
         "name": "hr_timesheet_worker",
+        "package_group": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "Timesheet Workers",
@@ -238,6 +255,7 @@
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
+        "package_group": "application",
         "package": "compliance",
         "sub_package": "hse",
         "title": "HSE Corrective Actions",
@@ -251,6 +269,7 @@
     },
     "hse_incident_report": {
         "name": "hse_incident_report",
+        "package_group": "application",
         "package": "compliance",
         "sub_package": "hse",
         "title": "HSE Incident Reports",
@@ -264,6 +283,7 @@
     },
     "manageApis": {
         "name": "manageApis",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage APIs",
@@ -278,6 +298,7 @@
     },
     "manageAppCreations": {
         "name": "manageAppCreations",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage App Creations",
@@ -292,6 +313,7 @@
     },
     "manageApps": {
         "name": "manageApps",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Apps",
@@ -306,6 +328,7 @@
     },
     "managePivotTables": {
         "name": "managePivotTables",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Pivot Tables",
@@ -320,6 +343,7 @@
     },
     "manageStandardDefaultValues": {
         "name": "manageStandardDefaultValues",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Standard Default Values",
@@ -334,6 +358,7 @@
     },
     "manageStandardProps": {
         "name": "manageStandardProps",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Standard Props",
@@ -348,6 +373,7 @@
     },
     "manageStatuses": {
         "name": "manageStatuses",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Statuses",
@@ -362,6 +388,7 @@
     },
     "manageWidgets": {
         "name": "manageWidgets",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Widgets",
@@ -376,6 +403,7 @@
     },
     "permissions": {
         "name": "permissions",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Permissions",
@@ -390,6 +418,7 @@
     },
     "pj_module": {
         "name": "pj_module",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Modules",
@@ -402,6 +431,7 @@
     },
     "pj_pod": {
         "name": "pj_pod",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "PODs",
@@ -415,6 +445,7 @@
     },
     "pj_shipment": {
         "name": "pj_shipment",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Shipments",
@@ -428,6 +459,7 @@
     },
     "pj_staircase": {
         "name": "pj_staircase",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Staircases",
@@ -441,6 +473,7 @@
     },
     "pj_sub_task": {
         "name": "pj_sub_task",
+        "package_group": "application",
         "package": "hr_&_admin",
         "sub_package": "project_management",
         "title": "Sub Tasks",
@@ -455,6 +488,7 @@
     },
     "pj_task": {
         "name": "pj_task",
+        "package_group": "application",
         "package": "hr_&_admin",
         "sub_package": "project_management",
         "title": "Tasks",
@@ -469,6 +503,7 @@
     },
     "pj_unit": {
         "name": "pj_unit",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Units",
@@ -482,6 +517,7 @@
     },
     "post": {
         "name": "post",
+        "package_group": "application",
         "package": "system",
         "sub_package": "dev_admin",
         "title": "Posts",
@@ -496,6 +532,7 @@
     },
     "priority": {
         "name": "priority",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Priorities",
@@ -510,6 +547,7 @@
     },
     "prod_discipline": {
         "name": "prod_discipline",
+        "package_group": "application",
         "package": "system",
         "sub_package": "production",
         "title": "Production Disciplines",
@@ -524,6 +562,7 @@
     },
     "prod_discipline_1": {
         "name": "prod_discipline_1",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Discipline 1",
@@ -538,6 +577,7 @@
     },
     "prod_discipline_2": {
         "name": "prod_discipline_2",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Discipline 2",
@@ -552,6 +592,7 @@
     },
     "prod_order": {
         "name": "prod_order",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Orders",
@@ -564,6 +605,7 @@
     },
     "prod_routing": {
         "name": "prod_routing",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Routings",
@@ -578,6 +620,7 @@
     },
     "prod_routing_detail": {
         "name": "prod_routing_detail",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Routing Details",
@@ -592,6 +635,7 @@
     },
     "prod_routing_link": {
         "name": "prod_routing_link",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Routing Links",
@@ -606,6 +650,7 @@
     },
     "prod_run": {
         "name": "prod_run",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Runs",
@@ -620,6 +665,7 @@
     },
     "prod_sequence": {
         "name": "prod_sequence",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Production Sequences",
@@ -632,6 +678,7 @@
     },
     "project": {
         "name": "project",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "project_management",
         "title": "Projects",
@@ -644,6 +691,7 @@
     },
     "public_holiday": {
         "name": "public_holiday",
+        "package_group": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "Public Holidays",
@@ -658,6 +706,7 @@
     },
     "qaqc_car": {
         "name": "qaqc_car",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Corrective Action Registers",
@@ -671,6 +720,7 @@
     },
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Checklists",
@@ -684,6 +734,7 @@
     },
     "qaqc_insp_chklst_line": {
         "name": "qaqc_insp_chklst_line",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Checklist Lines",
@@ -698,6 +749,7 @@
     },
     "qaqc_insp_chklst_sht": {
         "name": "qaqc_insp_chklst_sht",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Checklist Sheets",
@@ -711,6 +763,7 @@
     },
     "qaqc_insp_control_group": {
         "name": "qaqc_insp_control_group",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "QAQC Insp Control Groups",
@@ -725,6 +778,7 @@
     },
     "qaqc_insp_control_value": {
         "name": "qaqc_insp_control_value",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "QAQC Insp Control Values",
@@ -739,6 +793,7 @@
     },
     "qaqc_insp_group": {
         "name": "qaqc_insp_group",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "QAQC Insp Groups",
@@ -753,6 +808,7 @@
     },
     "qaqc_insp_tmpl": {
         "name": "qaqc_insp_tmpl",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Templates",
@@ -766,6 +822,7 @@
     },
     "qaqc_insp_tmpl_line": {
         "name": "qaqc_insp_tmpl_line",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Template Lines",
@@ -780,6 +837,7 @@
     },
     "qaqc_insp_tmpl_sht": {
         "name": "qaqc_insp_tmpl_sht",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Template Sheets",
@@ -793,6 +851,7 @@
     },
     "qaqc_insp_value": {
         "name": "qaqc_insp_value",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "QAQC Insp Values",
@@ -807,6 +866,7 @@
     },
     "qaqc_mir": {
         "name": "qaqc_mir",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "warehouse",
         "title": "Material Inspection Requests",
@@ -820,6 +880,7 @@
     },
     "qaqc_ncr": {
         "name": "qaqc_ncr",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Non Conformance Reports",
@@ -834,6 +895,7 @@
     },
     "qaqc_wir": {
         "name": "qaqc_wir",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "Work Inspection Requests",
@@ -848,6 +910,7 @@
     },
     "reportIndex": {
         "name": "reportIndex",
+        "package_group": "application",
         "package": "system",
         "sub_package": "dashboard",
         "title": "Report Index",
@@ -861,6 +924,7 @@
     },
     "role_sets": {
         "name": "role_sets",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Role Sets",
@@ -875,6 +939,7 @@
     },
     "roles": {
         "name": "roles",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Roles",
@@ -889,6 +954,7 @@
     },
     "setpermissions": {
         "name": "setpermissions",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Setpermissions",
@@ -903,6 +969,7 @@
     },
     "setroles": {
         "name": "setroles",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Setroles",
@@ -917,6 +984,7 @@
     },
     "setrolesets": {
         "name": "setrolesets",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_permission",
         "title": "Setrolesets",
@@ -931,6 +999,7 @@
     },
     "sub_project": {
         "name": "sub_project",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "project_management",
         "title": "Sub Projects",
@@ -943,6 +1012,7 @@
     },
     "term": {
         "name": "term",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Terms",
@@ -957,6 +1027,7 @@
     },
     "user": {
         "name": "user",
+        "package_group": "application",
         "package": "hr_&_admin",
         "sub_package": "user",
         "title": "Users",
@@ -970,6 +1041,7 @@
     },
     "user_category": {
         "name": "user_category",
+        "package_group": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Categories",
@@ -984,6 +1056,7 @@
     },
     "user_company": {
         "name": "user_company",
+        "package_group": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Companies",
@@ -998,6 +1071,7 @@
     },
     "user_discipline": {
         "name": "user_discipline",
+        "package_group": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Disciplines",
@@ -1012,6 +1086,7 @@
     },
     "user_position1": {
         "name": "user_position1",
+        "package_group": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Position1",
@@ -1026,6 +1101,7 @@
     },
     "user_position2": {
         "name": "user_position2",
+        "package_group": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Position2",
@@ -1040,6 +1116,7 @@
     },
     "user_position3": {
         "name": "user_position3",
+        "package_group": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Position3",
@@ -1054,6 +1131,7 @@
     },
     "user_position_pre": {
         "name": "user_position_pre",
+        "package_group": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Position Pre",
@@ -1068,6 +1146,7 @@
     },
     "user_team": {
         "name": "user_team",
+        "package_group": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Teams",
@@ -1082,6 +1161,7 @@
     },
     "user_team_ot": {
         "name": "user_team_ot",
+        "package_group": "application",
         "package": "system",
         "sub_package": "hr_admin",
         "title": "User Team OT",
@@ -1096,6 +1176,7 @@
     },
     "user_time_keep_type": {
         "name": "user_time_keep_type",
+        "package_group": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Time Keep Types",
@@ -1110,6 +1191,7 @@
     },
     "user_type": {
         "name": "user_type",
+        "package_group": "application",
         "package": "system",
         "sub_package": "user",
         "title": "User Types",
@@ -1124,6 +1206,7 @@
     },
     "wir_description": {
         "name": "wir_description",
+        "package_group": "application",
         "package": "project_management",
         "sub_package": "production",
         "title": "WIR Descriptions",
@@ -1138,6 +1221,7 @@
     },
     "work_area": {
         "name": "work_area",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Work Areas",
@@ -1152,6 +1236,7 @@
     },
     "work_mode": {
         "name": "work_mode",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Work Modes",
@@ -1166,6 +1251,7 @@
     },
     "workplace": {
         "name": "workplace",
+        "package_group": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Workplaces",
@@ -1180,6 +1266,7 @@
     },
     "zunit_test_01": {
         "name": "zunit_test_01",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT01 (Basic Controls)",
@@ -1194,6 +1281,7 @@
     },
     "zunit_test_02": {
         "name": "zunit_test_02",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT02 (Dropdown\/Checkbox)",
@@ -1208,6 +1296,7 @@
     },
     "zunit_test_03": {
         "name": "zunit_test_03",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT03 (DateTime Controls)",
@@ -1222,6 +1311,7 @@
     },
     "zunit_test_04": {
         "name": "zunit_test_04",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT04 (Static Typography)",
@@ -1236,6 +1326,7 @@
     },
     "zunit_test_05": {
         "name": "zunit_test_05",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT05 (Attachments)",
@@ -1250,6 +1341,7 @@
     },
     "zunit_test_06": {
         "name": "zunit_test_06",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT06 (Comments)",
@@ -1264,6 +1356,7 @@
     },
     "zunit_test_07": {
         "name": "zunit_test_07",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT07 (Workflow - without Approval Tree)",
@@ -1278,6 +1371,7 @@
     },
     "zunit_test_08": {
         "name": "zunit_test_08",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT08 (Workflow - with Approval Tree)",
@@ -1293,6 +1387,7 @@
     },
     "zunit_test_09": {
         "name": "zunit_test_09",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT09 (Form Event Listeners)",
@@ -1307,6 +1402,7 @@
     },
     "zunit_test_10": {
         "name": "zunit_test_10",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT10 (Editable Table)",
@@ -1321,6 +1417,7 @@
     },
     "zunit_test_11": {
         "name": "zunit_test_11",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT11 (Basic Controls in Table)",
@@ -1335,6 +1432,7 @@
     },
     "zunit_test_12": {
         "name": "zunit_test_12",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT12 (Dropdown\/Checkbox in Table)",
@@ -1349,6 +1447,7 @@
     },
     "zunit_test_13": {
         "name": "zunit_test_13",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT13 (DateTime in Table)",
@@ -1363,6 +1462,7 @@
     },
     "zunit_test_15": {
         "name": "zunit_test_15",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT15 (Attachments in Table)",
@@ -1377,6 +1477,7 @@
     },
     "zunit_test_19": {
         "name": "zunit_test_19",
+        "package_group": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
         "title": "UT19 (Listen in Table)",
