@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Workflow\LibApps;
 use App\Models\User;
+use App\Utils\Support\CurrentUser;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class BookmarkController extends Controller
     {
         $entity = $request->input('entity');
         if ($entity) {
-            $user = User::find(Auth::id());
+            $user = CurrentUser::get();
             $dataEntity = LibApps::getAllShowBookmark()[$entity];
             $settings = $user->settings;
             if (!isset($settings['bookmark_search'])) {

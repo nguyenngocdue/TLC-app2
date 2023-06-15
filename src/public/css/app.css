@@ -647,6 +647,12 @@ video {
 .top-\[50\%\] {
   top: 50%;
 }
+.-right-2 {
+  right: -0.5rem;
+}
+.-top-2 {
+  top: -0.5rem;
+}
 .z-0 {
   z-index: 0;
 }
@@ -7319,6 +7325,10 @@ video {
 :is(.dark .dark\:border-gray-800) {
   --tw-border-opacity: 1;
   border-color: rgb(31 41 55 / var(--tw-border-opacity));
+}
+:is(.dark .dark\:border-gray-900) {
+  --tw-border-opacity: 1;
+  border-color: rgb(17 24 39 / var(--tw-border-opacity));
 }
 :is(.dark .dark\:bg-blue-200) {
   --tw-bg-opacity: 1;

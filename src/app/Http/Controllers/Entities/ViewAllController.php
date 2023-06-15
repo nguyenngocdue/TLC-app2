@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllTable;
+use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\JsonControls;
 use App\Utils\System\Timer;
 use Illuminate\Http\Request;
@@ -47,13 +48,13 @@ class ViewAllController extends Controller
         if (in_array($tableName, JsonControls::getAppsHaveViewAllCalendar())) {
             $tabs = [
                 'home' => [
-                    'href' => route($tableName . '.index'),
+                    'href' => "?view_type=table&action=updateViewAllMode&_entity=$tableName",
                     'title' => "View All Table",
                     'icon' => 'fa-solid fa-house',
                     'active' => true,
                 ],
                 'calendar' => [
-                    'href' => "?view_type=calendar&action=updateViewAllCalendar&_entity=$tableName",
+                    'href' => "?view_type=calendar&action=updateViewAllMode&_entity=$tableName",
                     'title' => "View All Calendar",
                     'icon' => 'fa-regular fa-calendar',
                     'active' => false,
@@ -65,10 +66,16 @@ class ViewAllController extends Controller
 
     public function index(Request $request, $trashed = false)
     {
-        switch ($request->input('view_type')) {
+        if ($request->input('view_type')) {
+            (new UpdateUserSettings())($request);
+            return redirect($request->getPathInfo());
+        }
+        [,,,,,,,, $viewAllModel] = $this->getUserSettings();
+        switch ($viewAllModel) {
             case 'calendar':
                 return $this->indexViewAllCalendar($request);
                 break;
+            case 'table':
             default:
                 return $this->indexViewAllTable($request, $trashed);
                 break;

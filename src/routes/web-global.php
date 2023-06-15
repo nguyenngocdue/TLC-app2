@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Http\Controllers\UpdateUserSettingsApi;
 use App\Http\Controllers\Utils\MyCompanyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ Route::group([
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::put('updateBookmark', [BookmarkController::class, 'updateBookmark'])->name('updateBookmark');
+    Route::put('updateUserSettingsApi', [UpdateUserSettingsApi::class, 'updateUserSettingsApi'])->name('updateUserSettingsApi');
     Route::get('impersonate/user/{id}', [AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
     // Route::get('app-menu', [AppMenuController::class, 'index']);
     Route::get('my-company', [MyCompanyController::class, 'index'])->name("my-company.index");

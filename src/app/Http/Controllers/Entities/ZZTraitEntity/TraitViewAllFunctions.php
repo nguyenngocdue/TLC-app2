@@ -8,7 +8,9 @@ use App\Models\Qaqc_mir;
 use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateTimeConcern;
 use App\View\Components\Controls\TraitMorphTo;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -33,7 +35,9 @@ trait TraitViewAllFunctions
         $refreshPage = $settings[$type][Constant::VIEW_ALL]['refresh_page'] ?? null;
         $optionPrint = $settings[$type][Constant::VIEW_ALL]['option_print_layout'] ?? null;
         $filterViewAllCalendar = $settings[$type][Constant::VIEW_ALL]['calendar'] ?? null;
-        return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter, $optionPrint, $filterViewAllCalendar];
+        $viewAllMode = $settings[$type][Constant::VIEW_ALL]['view_all_mode'] ?? null;
+        $viewAllCalendarShowAllChildren = $settings[$type][Constant::VIEW_ALL]['calendar']['show_all_children'] ?? null;
+        return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter, $optionPrint, $viewAllMode, $filterViewAllCalendar, $viewAllCalendarShowAllChildren];
     }
 
     private function getEagerLoadParams($eloquentParams)
@@ -66,6 +70,11 @@ trait TraitViewAllFunctions
         // dump($eagerLoadParams);
 
         return $eagerLoadParams;
+    }
+    private function getDataSourceForViewCalendar($filter)
+    {
+        return ($this->typeModel)::whereIn('owner_id', $filter['owner_id'])->whereDate('week', '>=', $filter['start_date'])
+            ->whereDate('week', '<=',  $filter['end_date']);
     }
 
     private function getDataSource($advanceFilters = null, $trash = false)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentRoute;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -14,12 +15,9 @@ trait TraitViewAllCalendarController
 
     private function indexViewAllCalendar($request)
     {
-        if ($request->input('view_type')) {
-            (new UpdateUserSettings())($request);
-            // return redirect($request->getPathInfo());
-        }
-        [,,,,,,,, $filterViewAllCalendar] = $this->getUserSettings();
-        $dataSource = $this->getDataSource($filterViewAllCalendar);
+
+        [,,,,,,,,, $filterViewAllCalendar] = $this->getUserSettings();
+        $dataSource = $this->getDataSourceForViewCalendar($filterViewAllCalendar);
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'title' => 'View All Calendar',
