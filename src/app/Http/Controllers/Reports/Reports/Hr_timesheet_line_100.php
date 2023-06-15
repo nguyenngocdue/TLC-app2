@@ -20,6 +20,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
     protected $maxH = 50;
     protected $mode = '100';
     protected $rotate45Width = 300;
+    protected $libPivotFilters;
 
     public function getSqlStr($modeParams)
     {
@@ -49,6 +50,15 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                         ORDER BY user_id";
         return $sql;
     }
+    protected function getDefaultValueModeParams($modeParams, $request)
+    {
+        $pickerDate = 'picker_date';
+        $isNullModeParams = Report::isNullModeParams($modeParams);
+        if ($isNullModeParams) {
+            $modeParams[$pickerDate] = self::defaultPickerDate();
+        }
+        return $modeParams;
+    }
 
     private function defaultPickerDate(){
         $currentDate = new DateTime();
@@ -58,7 +68,17 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
     }
 
-    function getDatesBetween($startDate, $endDate)
+    private function isSaturdayOrSunday($dateString)
+    {
+        $date = DateTime::createFromFormat("d/m/Y", $dateString);
+        // dump($dateString);
+        if ($date === false) return dump($dateString);
+        $dayOfWeek = $date->format("N"); // Retrieve the day of the week as a string
+        if ($dayOfWeek >= 6) return true;
+        return false;
+    }
+
+    private function getDatesBetween($startDate, $endDate)
     {
         $dateList = array();
         // Convert start and end dates to DateTime objects
@@ -84,7 +104,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         return $strDates;
     }
 
-    public function getTableColumns($dataSource, $modeParams)
+    protected function getTableColumns($dataSource, $modeParams)
     {
         $strDates = $this->getStringDates($modeParams);
         $dataColumn1 = [
@@ -96,7 +116,13 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
             ],
             [
                 'title' => "LOD",
-                "dataIndex" => "time_sheet_lod_name",
+                "dataIndex" => "lod_name",
+                "align" => 'left',
+                "width" => 130,
+            ],
+            [
+                'title' => "LOD",
+                "dataIndex" => "lod_id",
                 "align" => 'left',
                 "width" => 130,
             ],
@@ -107,11 +133,17 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                 "width" => 180,
             ],
             [
+                "dataIndex" => "department_id",
+                "align" => 'left',
+                "width" => 180,
+            ],
+            [
                 "title" => "Staff ID",
                 "dataIndex" => "staff_id",
                 "align" => 'left',
                 "width" => 120,
             ],
+
             [
                 "title" => "User",
                 "dataIndex" => "user_name",
@@ -125,8 +157,18 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                 "width" => 80,
             ],
             [
+                "dataIndex" => "workplace_id",
+                "align" => 'left',
+                "width" => 80,
+            ],
+            [
                 "title" => "Category",
                 "dataIndex" => "category_name",
+                "align" => 'left',
+                "width" => 80,
+            ],
+            [
+                "dataIndex" => "category_id",
                 "align" => 'left',
                 "width" => 80,
             ],
@@ -137,18 +179,29 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                 "width" => 80,
             ],
             [
+                "dataIndex" => "type_id",
+                "align" => 'left',
+                "width" => 120,
+            ],
+            [
                 "title" => "Discipline",
                 "dataIndex" => "discipline_name",
                 "align" => 'left',
                 "width" => 220,
             ],
-            // [
-            //     "dataIndex" => "time_sheet_start_time",
-            //     "align" => "center",
-            // ],
+            [
+                "dataIndex" => "discipline_id",
+                "align" => 'left',
+                "width" => 220,
+            ],
             [
                 "title" => "Task",
                 "dataIndex" => "pj_task_name",
+                "align" => 'left',
+                "width" => 280,
+            ],
+            [
+                "dataIndex" => "pj_task_id",
                 "align" => 'left',
                 "width" => 280,
             ],
@@ -201,7 +254,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         
         $infoHeadUsers['project_name'] = $dataWaitingFor['projects'][$infoHeadUsers['project_id']];
         $infoHeadUsers['sub_project_name'] = $dataWaitingFor['sub_projects'][$infoHeadUsers['sub_project_id']];
-        $infoHeadUsers['time_sheet_lod_name'] = $dataWaitingFor['terms'][$infoHeadUsers['lod_id']];
+        $infoHeadUsers['lod_name'] = $dataWaitingFor['terms'][$infoHeadUsers['lod_id']];
         $infoHeadUsers['discipline_name'] = $dataWaitingFor['user_disciplines'][$infoHeadUsers['discipline_id']];
         $infoHeadUsers['pj_task_name'] = $dataWaitingFor['pj_tasks'][$infoHeadUsers['pj_task_id']];
         
@@ -231,7 +284,8 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
 
     protected function transformDataSource($dataSource, $modeParams)
     {
-        $data = array_slice($dataSource->toArray(), 0, 1000000);
+        // dd($this->a);
+        $data = array_slice($dataSource->toArray(), 0, 100);
         $dataWaitingFor = $this->dataWaitingForLooking();
         $dataSource = array_map(fn($item) => (Array)$item, $data);
         array_walk($dataSource, function ($value, $key) use (&$dataSource, $dataWaitingFor) {
@@ -240,18 +294,44 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
             $dataHeadUsers = $this->addInfoHeadUsers($infoHeadUsers, $dataWaitingFor);
             $dataSource[$key] =  $dataHeadUsers +$datesHaveValue;
         });
-
+        // $this->hr_timesheet_line_020($dataSource);
         return collect($dataSource);
     }
 
-    private function isSaturdayOrSunday($dateString)
-    {
-        $date = DateTime::createFromFormat("d/m/Y", $dateString);
-        // dump($dateString);
-        if ($date === false) return dump($dateString);
-        $dayOfWeek = $date->format("N"); // Retrieve the day of the week as a string
-        if ($dayOfWeek >= 6) return true;
-        return false;
+    private function hr_timesheet_line_020($dataSource) {
+        $libPivotFilters = $this->libPivotFilters;
+        $rowFields = $libPivotFilters['row_fields'];
+
+        $data = [];
+        dd($dataSource);
+
+        foreach ($rowFields as $keyCol => $nameCol) {
+            $dataGroup1 = Report::groupArrayByKey($dataSource, $nameCol . '_name');
+            dd($dataGroup1);
+            ++$keyCol;
+            $data = [];
+            if ($keyCol < count($rowFields) ) {
+                foreach ($dataGroup1 as $k1 => $g1) {
+                    $dataGroup1 = Report::groupArrayByKey($g1, $rowFields[$keyCol] . '_name');
+                    ++$keyCol;
+                    foreach($dataGroup1 as $k2 => $g2) {
+                        $dataGroup2 = Report::groupArrayByKey($g2, $rowFields[$keyCol] . '_name');
+                        ++$keyCol;
+                        if ($keyCol < count($rowFields) ) {
+                            foreach($dataGroup2 as $k3 => $g3) {
+                                $dataGroup3 = Report::groupArrayByKey($g3, $rowFields[$keyCol] . '_name');
+                                $data[$k1][$k2][$k3] = $dataGroup3;
+                                dd($data);
+                            }
+
+                        }
+
+                    }
+                }
+                ++$keyCol;
+            }
+        }
+        dd($libPivotFilters);
     }
 
     protected function changeValueData($dataSource, $modeParams)
@@ -296,17 +376,5 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         }
         // dd($dataSource);
         return $dataSource;
-    }
-
-
-
-    protected function getDefaultValueModeParams($modeParams, $request)
-    {
-        $pickerDate = 'picker_date';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$pickerDate] = self::defaultPickerDate();
-        }
-        return $modeParams;
     }
 }

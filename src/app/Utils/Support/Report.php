@@ -123,4 +123,11 @@ class Report
         if ($reverse) return array_slice($array, 0, $idx + 1);
         return array_slice($array, $idx + 1, count($array) - $idx);
     }
+
+    public static function dataWithoutNull($data){
+        return array_filter($data, function($value) {
+            return $value !== null;
+        });
+    }
+    
 }

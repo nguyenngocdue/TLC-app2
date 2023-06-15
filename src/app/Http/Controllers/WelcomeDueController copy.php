@@ -24,8 +24,8 @@ class WelcomeDueController extends Controller
         $dataSource = [
             [
                 "time_sheet_start_time" => "2022-10-18",
-                "time_sheet_hours" => 10,
-                "time_sheet_mins" => 600,
+                "time_sheet_hours" => 8.0,
+                "time_sheet_mins" => 480,
                 "sub_project_id" => 82,
                 "user_id" => 26,
                 "discipline_id" => 45,
@@ -268,9 +268,8 @@ class WelcomeDueController extends Controller
 
     function processData($lineData, $rowFields, $dataFields) {
         $dataOutput = [];
-    
         foreach ($lineData as $line) {
-            // Get the values of fields in $rowFields
+            // get value of lines
             $params = [];
             foreach ($rowFields as $param) {
                 if (isset($line[$param])) {
@@ -279,35 +278,26 @@ class WelcomeDueController extends Controller
                     $params[$param] = null;
                 }
             }
-            // Get the values of fields in $dataFields
             $valueDataFields = [];
             foreach ($dataFields as $field) {
-                $valueDataFields[$field] = isset($line[$field]) ? $line[$field] : [];
+                $valueDataFields[$field] = isset($line[$field]) ? $line[$field] : 0;
                 unset($params[$field]);
             }
-    
             $nestedArray = &$dataOutput;
             foreach ($params as $paramValue) {
-                // Create nested arrays in $dataOutput based on the values of fields in $rowFields
                 if (!isset($nestedArray[$paramValue])) {
                     $nestedArray[$paramValue] = [];
                 }
                 $nestedArray = &$nestedArray[$paramValue];
             }
             foreach ($valueDataFields as $field => $valueField) {
-                // Create nested arrays in $dataOutput based on the values of fields in $dataFields
-                $endLines = [];
                 if (!isset($nestedArray[$field])) {
                     $nestedArray[$field] = 0;
-
                 }
-                $endLines[] = $valueField;
-                // dump($valueField);
                 $nestedArray[$field] += $valueField;
             }
-            // dd(132);
         }
-    
+        // dd($dataOutput);
         return $dataOutput;
     }
 
