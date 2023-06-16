@@ -8,7 +8,7 @@ use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
 use Illuminate\View\Component;
 
-class CalendarViewAll extends Component
+class ViewAllTypeCalendar extends Component
 {
     use TraitViewAllFunctions;
     /**
@@ -42,7 +42,7 @@ class CalendarViewAll extends Component
             $item['text_color'] = $this->getColorForStatus($item->status)[1];
             return $item;
         })->groupBy('year_value');
-        return view('components.renderer.calendar-view-all', [
+        return view('components.renderer.view-all-type-calendar', [
             'allTimesheet' => $allTimesheet,
             'routeCreate' => route('timesheet_officers.create'),
             'token' => $token,
