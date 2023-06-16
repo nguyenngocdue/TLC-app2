@@ -1,4 +1,7 @@
-@extends('layouts.applearn')
-
+@extends('layouts.app')
 @section('content')
-@endsection
+
+    <x-renderer.table 
+        showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource"  />
+    @endsection
+</div>
