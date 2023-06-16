@@ -29,7 +29,7 @@ class ReportIndexController extends Controller
         $result = [];
         foreach ($routes as $route) {
             $result[$route['reportType']][$route['mode']] = [
-                "path" => $route['routeName'],
+                "path" => $route['name'],
                 "title" => $lib[$route['name']]['title'],
             ];
         }

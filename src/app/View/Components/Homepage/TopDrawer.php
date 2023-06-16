@@ -3,10 +3,7 @@
 namespace App\View\Components\Homepage;
 
 use App\Http\Controllers\Workflow\LibApps;
-use App\Utils\AccessLogger\EntityIdClickCount;
-use App\Utils\AccessLogger\EntityNameClickCount;
 use App\Utils\BookmarkTraits\TraitFormatBookmarkEntities;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class TopDrawer extends Component

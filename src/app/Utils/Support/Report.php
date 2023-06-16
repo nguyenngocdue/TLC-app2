@@ -14,8 +14,8 @@ class Report
             'mode' => $mode,
             'reportType' => $reportType,
             'path' => $path,
-            'routeName' => $reportType . '-' . $singular . "_" . $mode,
-            'name' => $reportType . '-' . $singular . "/$mode",
+            // 'routeName' => $reportType . '-' . $singular . "_" . $mode,
+            'name' => $reportType . '-' . $singular . "_" . $mode,
         ];
     }
 
@@ -43,6 +43,7 @@ class Report
         foreach ($result0 as $line) {
             $result1[$line['name']] = $line;
         }
+        // dump($result1);
         return $result1;
     }
     public static function getFirstItemFromChildrenArray($dataSource)

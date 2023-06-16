@@ -18,9 +18,9 @@ Route::group([
             // 'middleware' => "role:READ-WRITE-DATA-" . Str::upper($entityName) . "|ADMIN-DATA-" . Str::upper($entityName),
         ], function () use ($routes) {
             foreach ($routes as $route) {
-                ['path' => $path, 'name' => $name, 'routeName' => $routeName,] = $route;
-                Route::get($name, [$path, 'index'])->name($routeName);
-                Route::get("{$routeName}_ep", [$path, "exportCSV"])->name("{$routeName}_ep.exportCSV");
+                ['path' => $path, 'name' => $name,] = $route;
+                Route::get($name, [$path, 'index'])->name($name);
+                Route::get("{$name}_ep", [$path, "exportCSV"])->name("{$name}_ep.exportCSV");
             }
         });
     });
