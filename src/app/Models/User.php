@@ -281,28 +281,19 @@ class User extends Authenticatable implements LdapAuthenticatable
     //     return static::$userDbSingleton[$id];
     // }
 
-    private static function queryAndCacheToRam()
-    {
-        $all = static::all();
-        foreach ($all as $item) {
-            static::$singletonDbUsers[$item->id] = $item;
-        }
-    }
-
-    static $singletonDbUsers = null;
-    public static function findFromCache($id)
-    {
-        if (!isset(static::$singletonDbUsers[$id])) static::queryAndCacheToRam();
-        return static::$singletonDbUsers[$id];
-    }
-
     static $singletonDbUserCollection = null;
     public static function getCollection()
     {
         if (!isset(static::$singletonDbUserCollection)) {
-            static::queryAndCacheToRam();
-            static::$singletonDbUserCollection = collect(static::$singletonDbUsers);
+            $all = static::all();
+            foreach ($all as $item) $indexed[$item->id] = $item;
+            static::$singletonDbUserCollection = collect($indexed);
         }
         return static::$singletonDbUserCollection;
+    }
+
+    public static function findFromCache($id)
+    {
+        return static::getCollection()[$id];
     }
 }

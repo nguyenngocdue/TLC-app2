@@ -14,8 +14,8 @@ class Report
             'mode' => $mode,
             'reportType' => $reportType,
             'path' => $path,
-            'routeName' => $reportType . '-' . $singular . "_" . $mode,
-            'name' => $reportType . '-' . $singular . "/$mode",
+            // 'routeName' => $reportType . '-' . $singular . "_" . $mode,
+            'name' => $reportType . '-' . $singular . "_" . $mode,
         ];
     }
 
@@ -23,7 +23,7 @@ class Report
     {
         $entities = Entities::getAll();
 
-        $result = [];
+        $result0 = [];
         foreach ($entities as $entity) {
             $entityName = Str::getEntityName($entity);
             $singular = Str::singular($entityName);
@@ -32,14 +32,19 @@ class Report
             for ($i = 10; $i <= 100; $i += 10) {
                 $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
                 $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}_$mode";
-                if (class_exists($path)) $result[] = static::actionCreator('report', $path, $singular, $mode);
+                if (class_exists($path)) $result0[] = static::actionCreator('report', $path, $singular, $mode);
                 $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}_$mode";
-                if (class_exists($path)) $result[] = static::actionCreator('register', $path, $singular, $mode);
+                if (class_exists($path)) $result0[] = static::actionCreator('register', $path, $singular, $mode);
                 $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}_$mode";
-                if (class_exists($path)) $result[] = static::actionCreator('document', $path, $singular, $mode);
+                if (class_exists($path)) $result0[] = static::actionCreator('document', $path, $singular, $mode);
             }
         }
-        return $result;
+        $result1 = [];
+        foreach ($result0 as $line) {
+            $result1[$line['name']] = $line;
+        }
+        // dump($result1);
+        return $result1;
     }
     public static function getFirstItemFromChildrenArray($dataSource)
     {
@@ -159,10 +164,10 @@ class Report
         return array_slice($array, $idx + 1, count($array) - $idx);
     }
 
-    public static function dataWithoutNull($data){
-        return array_filter($data, function($value) {
+    public static function dataWithoutNull($data)
+    {
+        return array_filter($data, function ($value) {
             return $value !== null;
         });
     }
-    
 }

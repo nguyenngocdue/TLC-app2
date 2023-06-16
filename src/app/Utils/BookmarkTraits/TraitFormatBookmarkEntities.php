@@ -4,6 +4,7 @@ namespace App\Utils\BookmarkTraits;
 
 use App\Utils\AccessLogger\EntityNameClickCount;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 trait TraitFormatBookmarkEntities
 {
@@ -12,6 +13,8 @@ trait TraitFormatBookmarkEntities
         $data = (new EntityNameClickCount)(Auth::id());
         $entitiesName = collect($data)->pluck('entity_name')->toArray();
         $entities = $this->convertData($data);
+        // dd($entities);
+        // Log::info($allApps);
         if (!empty($data)) {
             array_walk($allApps, function (&$value, $key) use ($entities) {
                 if (($entities[$key] ?? null) && app()->present()) {

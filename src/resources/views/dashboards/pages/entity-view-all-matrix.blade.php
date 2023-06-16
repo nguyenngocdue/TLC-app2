@@ -1,0 +1,15 @@
+@extends('layouts.app')
+
+@section('topTitle', $topTitle)
+@section('title' ) View All <sub>{!! $title !!}</sub> @endsection
+
+@section('content')
+<div class="px-4 mt-2">
+    <x-elapse title="Bootrap: " duration="{{$frameworkTook}}"/>   
+    <x-elapse title="ViewAllController: "/> 
+    <x-renderer.view-all-type-selector type="{{$type}}" />
+    Matrix here
+    {{-- <x-renderer.calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}" :dataSource="$dataSource"/> --}}
+</div>
+{{-- <script src="{{ asset('js/renderprop.js') }}"></script> --}}
+@endsection

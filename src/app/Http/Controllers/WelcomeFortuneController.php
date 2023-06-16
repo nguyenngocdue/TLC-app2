@@ -20,8 +20,8 @@ class WelcomeFortuneController extends Controller
 
         $u = User::findFromCache(1);
         dump($u);
-        // $u = User::findFromCache1(38);
-        // dump($u);
+        $u = User::findFromCache(38);
+        dump($u);
 
         $dataSource = [];
 

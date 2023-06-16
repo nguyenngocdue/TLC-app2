@@ -3,6 +3,7 @@
 namespace App\Utils\AccessLogger;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class EntityNameClickCount
 {
@@ -15,7 +16,13 @@ class EntityNameClickCount
             FROM view_logger_access_entity_name 
             WHERE 
                 owner_id ='$owner_id'
+                UNION ALL
+                SELECT * 
+            FROM view_logger_access_route_name 
+            WHERE 
+                owner_id ='$owner_id'
             ");
+        // Log::info($data);
         if (!app()->isLocal()) {
             $allClick = 0;
             foreach ($data as $line) $allClick += $line->click_count;

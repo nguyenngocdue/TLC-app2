@@ -13,7 +13,6 @@
     <x-elapse title="My View: "/>
     <x-dashboards.widget-groups />
     <x-elapse title="Widget group: "/>
-    <x-elapse total=1/>
 </div>
 
 @endsection

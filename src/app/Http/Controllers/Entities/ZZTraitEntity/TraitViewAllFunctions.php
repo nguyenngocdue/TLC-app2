@@ -43,34 +43,9 @@ trait TraitViewAllFunctions
     private function getEagerLoadParams($eloquentParams)
     {
         $eagerLoadParams = array_keys(array_filter($eloquentParams, fn ($item) => in_array($item[0], ['belongsTo', 'hasMany', 'morphMany', 'morphTo'])));
-        // dump($eagerLoadParams);
-
-        // $x = $this->getAllTypeMorphMany();
-        // dump($x);
-        // $morphManyArray = array_map(fn ($item) => [$item['id'] => [$item['fn']]], $x);
-        // dump($morphManyArray);
-
-        // $paramsOfMorph = array_filter($eloquentParams, fn ($item) => in_array($item[0], ['morphTo']));
-        // // dump($paramsOfMorph);
-        // $keys = array_keys($paramsOfMorph);
-        // dump($keys);
-        // foreach ($keys as $key) {
-        //     $eagerLoadParams[$key] = function (MorphTo $morphTo) use ($morphManyArray) {
-        //         $morphTo->morphWith($morphManyArray);
-        //     };
-        // }
-
-        // $eagerLoadParams['getParent'] = function (MorphTo $morphTo) {
-        //     $morphTo->morphWith([
-        //         Qaqc_wir::class => ['getNcrs'],
-        //         Qaqc_mir::class => ['getNcrs'],
-        //         Qaqc_insp_chklst_line::class => ['getNcrs'],
-        //     ]);
-        // };
-        // dump($eagerLoadParams);
-
         return $eagerLoadParams;
     }
+
     private function getDataSourceForViewCalendar($filter)
     {
         return ($this->typeModel)::whereIn('owner_id', $filter['owner_id'])->whereDate('week', '>=', $filter['start_date'])
