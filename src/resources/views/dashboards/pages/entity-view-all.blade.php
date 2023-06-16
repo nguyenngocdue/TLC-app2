@@ -46,7 +46,6 @@
                 bottomRightControl="{!! $perPage !!}"
                 tableTrueWidth={{$tableTrueWidth}}
                 />
-            <x-elapse total=1/>
         </div>
     </x-renderer.tab-pane>
     @else
