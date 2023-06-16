@@ -1,0 +1,55 @@
+<?php
+
+namespace App\View\Components\Renderer;
+
+use Illuminate\View\Component;
+
+class ViewAllTypeList extends Component
+{
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct(
+        private $tabPane,
+        private $type,
+        private $perPage,
+        private $refreshPage,
+        private $trashed,
+        private $columns,
+        private $dataSource,
+        private $tableTrueWidth,
+    ) {
+        //
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
+    public function render()
+    {
+        $route = route('updateUserSettings');
+        $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$this->perPage'/>";
+        $actionButtonGroup = "<div class='flex'>
+                    <x-form.refresh type='$this->type' route='$route' valueRefresh='$this->refreshPage'/>
+                    <x-form.action-button-group type='$this->type' />
+                </div>";
+        $actionMultipleGroup = $this->trashed ? "<x-form.action-multiple type='$this->type' restore='true'/>" : "<x-form.action-multiple type='$this->type'/>";
+        return view(
+            'components.renderer.view-all-type-list',
+            [
+                'tabPane' => $this->tabPane,
+                'columns' => $this->columns,
+                'dataSource' => $this->dataSource,
+                'tableTrueWidth' => $this->tableTrueWidth,
+
+                'perPage' => $perPage,
+                'actionButtonGroup' => $actionButtonGroup,
+                'actionMultipleGroup' => $actionMultipleGroup,
+            ]
+        );
+    }
+}
