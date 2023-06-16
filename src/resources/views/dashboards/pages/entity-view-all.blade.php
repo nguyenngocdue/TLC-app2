@@ -7,12 +7,8 @@
 <div class="px-4 mt-2">
     <x-elapse title="Bootrap: " duration="{{$frameworkTook}}"/>   
     <x-elapse title="ViewAllController: "/> 
-    @if(isset($columns)) 
     <x-renderer.advanced-filter trashed="{{$trashed}}" currentFilter="{{$currentFilter}}" type="{{$type}}" typeModel="{{$typeModel}}" :valueAdvanceFilters="$valueAdvanceFilters"/>
-    @endif
-    <x-elapse title="Advanced filter: "/>
     <x-renderer.view-all-type-selector type="{{$type}}" />
-    @if(isset($columns))
     <x-renderer.tab-pane :tabs="$tabPane">
         @php 
         // $abt = "<x-form.action-button-group type='$type' />"; 
@@ -38,10 +34,6 @@
                 />
         </div>
     </x-renderer.tab-pane>
-    @else
-        <x-renderer.calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}" :dataSource="$dataSource"/>
-    @endif
 </div>
-<br class=":" />
-<script src="{{ asset('js/renderprop.js') }}"></script>
+{{-- <script src="{{ asset('js/renderprop.js') }}"></script> --}}
 @endsection

@@ -18,7 +18,7 @@ trait TraitViewAllCalendarController
 
         [,,,,,,,,, $filterViewAllCalendar] = $this->getUserSettings();
         $dataSource = $this->getDataSourceForViewCalendar($filterViewAllCalendar);
-        return view('dashboards.pages.entity-view-all', [
+        return view('dashboards.pages.entity-view-all-calendar', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'title' => 'View All Calendar',
             'valueAdvanceFilters' => $filterViewAllCalendar,
