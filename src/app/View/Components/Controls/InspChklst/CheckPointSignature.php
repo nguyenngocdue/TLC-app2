@@ -29,9 +29,11 @@ class CheckPointSignature extends Component
     public function render()
     {
         $uid = $this->line->inspector_id;
-        $user = User::findFromCache($uid);
-        // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
-        if ($user) {
+        $user = null;
+        if ($uid) {
+            $user = User::findFromCache($uid);
+            // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+            // dd($user);
             $user = [
                 'id' => $user->id,
                 'full_name' => $user->full_name,

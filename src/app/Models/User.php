@@ -294,6 +294,7 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     public static function findFromCache($id)
     {
-        return static::getCollection()[$id];
+        // if(!isset(static::getCollection()[$id])) 
+        return static::getCollection()[$id] ?? null;
     }
 }
