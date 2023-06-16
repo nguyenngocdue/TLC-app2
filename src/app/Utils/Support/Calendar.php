@@ -28,7 +28,7 @@ class Calendar
             $nameSubTask = Pj_sub_task::findOrFail($item->sub_task_id)->name ?? '';
         }
         if ($item->owner_id) {
-            $user = User::findOrFail($item->owner_id);
+            $user = User::findFromCache($item->owner_id);
             $avatar = Blade::render("<div class='mb-2'><x-renderer.avatar-user>$user</x-renderer.avatar-user></div>");
         }
         $remark = $item->remark ?? '';

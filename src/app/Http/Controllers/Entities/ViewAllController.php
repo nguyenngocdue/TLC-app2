@@ -66,9 +66,16 @@ class ViewAllController extends Controller
 
     public function index(Request $request, $trashed = false)
     {
-        if ($request->input('view_type')) {
+        if ($viewType = $request->input('view_type')) {
             (new UpdateUserSettings())($request);
-            return redirect($request->getPathInfo());
+            switch ($viewType) {
+                case 'calendar':
+                    return redirect($request->getPathInfo() . '#scroll-to-month');
+                    break;
+                default:
+                    return redirect($request->getPathInfo());
+                    break;
+            }
         }
         [,,,,,,,, $viewAllModel] = $this->getUserSettings();
         switch ($viewAllModel) {

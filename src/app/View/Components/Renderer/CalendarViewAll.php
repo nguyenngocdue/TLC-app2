@@ -2,14 +2,15 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Models\Hr_timesheet_officer;
 use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
 use Illuminate\View\Component;
 
 class CalendarViewAll extends Component
 {
+    use TraitViewAllFunctions;
     /**
      * Create a new component instance.
      *
@@ -32,6 +33,7 @@ class CalendarViewAll extends Component
     {
         $dataSource = $this->dataSource;
         $token = CurrentUser::getTokenForApi();
+        [,,,,,,,,, $filterViewAllCalendar] = $this->getUserSettings();
         $allTimesheet = $dataSource->get()->map(function ($item) {
             $item['week_value'] = $this->getWeekByDay($item->week)[1];
             $item['year_value'] = $this->getWeekByDay($item->week)[3];
@@ -46,6 +48,7 @@ class CalendarViewAll extends Component
             'token' => $token,
             'type' => $this->type,
             'typeModel' => $this->typeModel,
+            'year' => $filterViewAllCalendar['year'] ?? '',
         ]);
     }
 

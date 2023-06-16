@@ -36,7 +36,7 @@ trait TraitViewAllFunctions
         $optionPrint = $settings[$type][Constant::VIEW_ALL]['option_print_layout'] ?? null;
         $filterViewAllCalendar = $settings[$type][Constant::VIEW_ALL]['calendar'] ?? null;
         $viewAllMode = $settings[$type][Constant::VIEW_ALL]['view_all_mode'] ?? null;
-        $viewAllCalendarShowAllChildren = $settings[$type][Constant::VIEW_ALL]['calendar']['show_all_children'] ?? null;
+        $viewAllCalendarShowAllChildren = $settings[$type][Constant::VIEW_ALL]['calendar_options']['show_all_children'] ?? null;
         return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter, $optionPrint, $viewAllMode, $filterViewAllCalendar, $viewAllCalendarShowAllChildren];
     }
 

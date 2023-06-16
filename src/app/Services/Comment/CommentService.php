@@ -18,7 +18,7 @@ class CommentService extends BaseService implements CommentServiceInterface
     {
         $content = $request->content;
         $ownerId = $request->owner_id;
-        $user = User::findOrFail($ownerId);
+        $user = User::findFromCache($ownerId);
         $positionRendered = $user->position_rendered ?? '';
         $commentTableType = Qaqc_insp_chklst_line::class;
         return $this->commentRepository->create([

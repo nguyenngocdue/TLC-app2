@@ -1,10 +1,10 @@
 <div class="grid grid-cols-12">
-    <div class="col-span-2">
+    <div class="col-span-3 overflow-y-auto overflow-x-hidden h-screen px-2">
         <x-calendar.sidebar-calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}"/>
     </div>
-    <div class="w-full p-2 m-2 bg-gray-100 rounded-lg shadow col-span-10">
+    <div class="w-full p-2 m-2 bg-gray-100 rounded-lg shadow col-span-9">
         <div class="grid grid-cols-12">
-            <div class="col-span-11">
+            <div class="col-span-11 overflow-y-auto overflow-x-hidden h-screen">
                 <div class = "flex flex-wrap justify-center">
                     <div class="grid 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 gap-2 grid-cols-1 font-semibold" calendar-container>
                     </div> 
@@ -35,19 +35,22 @@
     // const month_names = ['9','10','11','12','01','02','03','04','05','06','07','08','09','10','11','12'];
     const month_names = ['01','02','03','04','05','06','07','08','09','10','11','12'];
     const day_names = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    let year = '';  
+    let year = @json($year) * 1;  
     const allTimesheet = @json($allTimesheet);
     const routeCreate = @json($routeCreate);
     const token = @json($token);
-    yearNow();
+    const typeEntity = @json($type);
+    if(!year){
+        yearNow();
+    }
     renderHtmlCalendar();
     function increase(num){
         year += num;
-        renderHtmlCalendar()
+        window.location.replace(`?view_type=calendar&action=updateViewAllCalendar&_entity=${typeEntity}&year=${year}`);
     }
     function decrease(num){
         year -= num;
-        renderHtmlCalendar()
+        window.location.replace(`?view_type=calendar&action=updateViewAllCalendar&_entity=${typeEntity}&year=${year}`);
     }
     function days_of_month(){
             all = (year) => {return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0)};
@@ -130,6 +133,12 @@
         var specificDate = `${year}-${month}-${day}`; 
         return moment(today).isSame(specificDate)
     }
+    function monthNow(month){
+        month = padNumber(month);
+        var monthCurrent = moment().format('YYYY-MM'); 
+        var dateTimeCurrent = `${year}-${month}`;
+        return moment(monthCurrent).isSame(dateTimeCurrent);
+    }
     function renderHtmlCalendar(){
         calendarContainer.innerHTML = '';
         weeks = weeksGenerater();
@@ -185,7 +194,9 @@
                 }
                 result += html
             }
-            htmlRender = `  <div class="p-1 m-1 font-sans bg-white rounded shadow-md w-96 bg-blend-luminosity bg-gradient-to-b from-green-50 via-white to-green-50">
+            var tagMonthNow = monthNow(month) ? 'id="scroll-to-month"' : "";
+            var offset = monthNow(month) ? 'scroll-to-month' : "";
+            htmlRender = `  <div ${tagMonthNow} class="${offset} p-1 m-1 font-sans bg-white rounded shadow-md w-96 bg-blend-luminosity bg-gradient-to-b from-green-50 via-white to-green-50">
                                 <p class="p-1 text-xl font-semibold text-center text-gray-800">${month_name}/${yearCurrent}</p>
                                 <div class="p-1 m-1">
                                     <div class="grid grid-cols-7 font-semibold text-gray-500 border-b-2">

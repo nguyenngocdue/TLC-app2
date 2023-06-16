@@ -55,7 +55,7 @@ trait TraitSupportEntityShow
                     $inspectorId = isset($item->getControlType->name) ? $item->inspector_id : $item->owner_id;
                     $inspectorName = null;
                     if ($inspectorId) {
-                        $inspectorName = User::findOrFail($inspectorId)->full_name;
+                        $inspectorName = User::findFromCache($inspectorId)->full_name;
                     }
                     $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $item->updated_at);
                     $str = Blade::render(

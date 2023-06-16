@@ -48,10 +48,8 @@ class SidebarCalendarViewAll extends Component
         $idsFormatQuery = join(',', $ids);
         $dataCountQuerySql = $this->queryTotalPendingApprovalBySql($idsFormatQuery);
         $dataUserCurrent = $this->setDataForUser($user, $type, $idsRenderCalendar, $this->typeModel, $dataCountQuerySql);
-        $users = User::whereIn('id', $ids)->where('show_on_beta', 0)->whereIn('time_keeping_type', [$this::TIME_KEEPING_TYPE_TSO, $this::TIME_KEEPING_TYPE_NONE])->where('resigned', 0)->get();
-        $ids = $users->pluck('id')->toArray();
-        $users = $this->transformUserData($users->toArray());
-        // $dataSource = ($this->typeModel)::whereIn('owner_id', $ids)->get();
+        $users = $this->queryUsersSql($ids);
+        $users = $this->transformUserData($users);
         $dataSource = $this->treeDataSource($tree, $type, $idsRenderCalendar, $dataCountQuerySql);
         $htmlRenderTree = $this->renderHtmlByTreeDataSource($dataSource, $users, $viewAllCalendarShowAllChildren);
         return view('components.calendar.sidebar-calendar-view-all', [
@@ -59,8 +57,26 @@ class SidebarCalendarViewAll extends Component
             'htmlRenderTree' => $htmlRenderTree,
             'url' => route('updateUserSettingsApi'),
             'type' => $type,
-            'isChecked' => $viewAllCalendarShowAllChildren,
+            'isChecked' => $viewAllCalendarShowAllChildren == "true",
         ]);
+    }
+    private function queryUsersSql($ids)
+    {
+        $ids = join(',', $ids);
+        $timeKeepingTypeTSO = $this::TIME_KEEPING_TYPE_TSO;
+        $timeKeepingTypeNONE = $this::TIME_KEEPING_TYPE_NONE;
+        $id = CurrentUser::id();
+        $dataUserQuerySql = DB::select(
+            "SELECT * FROM users 
+            WHERE ((id IN ($ids) 
+            AND time_keeping_type IN ($timeKeepingTypeTSO,$timeKeepingTypeNONE)
+            AND show_on_beta = 0
+            AND resigned = 0)
+            OR (id = $id))
+            AND deleted_at IS NULL
+            "
+        );
+        return $dataUserQuerySql;
     }
     private function queryTotalPendingApprovalBySql($idsFormatQuery)
     {
@@ -82,7 +98,7 @@ class SidebarCalendarViewAll extends Component
     {
         $arr = [];
         foreach ($users as $value) {
-            $arr[$value['id']] = $value;
+            $arr[$value->id] = $value;
         }
         return $arr;
     }
@@ -130,7 +146,7 @@ class SidebarCalendarViewAll extends Component
     }
     private function renderHtmlByTreeDataSource($treeData, $users, $viewAllCalendarShowAllChildren)
     {
-        $classShowAllChildren = $viewAllCalendarShowAllChildren ? "" : "style='display: none;'";
+        $classShowAllChildren = $viewAllCalendarShowAllChildren == "true" ? "" : "style='display: none;'";
         $html = '';
         foreach ($treeData as $value) {
             if (isset($value['children'])) {
@@ -148,7 +164,7 @@ class SidebarCalendarViewAll extends Component
     private function renderHtml($value, $users)
     {
         $html = '';
-        $user = $users[$value['id']];
+        $user = $users[$value['id']] ?? '';
         $href = $value['href'];
         $disable = $value['disable'];
         $active = $value['active'];
