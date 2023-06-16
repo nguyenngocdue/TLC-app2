@@ -19,7 +19,7 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('user_teams', function (BlueprintExtended $table) {
+        $schema->create('user_team_ncrs', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
@@ -44,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_teams');
+        Schema::dropIfExists('user_team_ncrs');
     }
 };
