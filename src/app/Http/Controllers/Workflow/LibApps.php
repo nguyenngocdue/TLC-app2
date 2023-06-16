@@ -39,18 +39,18 @@ class LibApps extends AbstractLib
             }
             $reportRoutes = Report::getAllRoutes();
             $libReport = LibReports::getAll();
-            // dd($libReport);
             foreach ($reportRoutes as $route) {
                 $name = $route['name'];
                 $lib = $libReport[$name];
                 $reportType = ucfirst(substr($lib['name'], 0, strpos($lib['name'], "-")));
                 $item = [
+                    'name' => $name,
+                    'package_tab' => isset($lib['package_tab']) ? Str::appTitle($lib['package_tab']) : "unknown package",
                     'package_rendered' => isset($lib['package']) ? Str::appTitle($lib['package']) : "unknown package",
                     'sub_package_rendered' => isset($lib['sub_package']) ? Str::appTitle($lib['sub_package']) : "unknown sub_package",
                     'title' =>  $reportType . ": " . ($lib['title'] ?? "Untitled"),
-                    'href' => route($route['routeName']),
+                    'href' => route($route['name']),
                     'icon' => '<i class="fa-duotone fa-file-chart-column"></i>',
-                    'name' => $name,
                 ];
                 $result[$name] = $item;
             }

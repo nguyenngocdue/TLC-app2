@@ -35,7 +35,7 @@ class ChooseBasicFilter3 extends Component
      */
     public function render()
     {
-        [,,,,, $basicFilter, $chooseBasicFilter] = $this->getUserSettings();
+        [,,,,, $basicFilter, $chooseBasicFilter] = $this->getUserSettingsViewAll();
         $dataSource = $basicFilter ? array_keys($basicFilter) : [];
         array_unshift($dataSource, '');
         return view(

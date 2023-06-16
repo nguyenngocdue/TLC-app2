@@ -103,6 +103,10 @@ class JsonControls
     {
         return self::getAll()['apps_have_view_all_calendar'];
     }
+    public static function getAppsHaveViewAllMatrix()
+    {
+        return self::getAll()['apps_have_view_all_matrix'];
+    }
     public static function getViewAllTabTaxonomy()
     {
         return self::getAll()['view_all_tab_taxonomy'];

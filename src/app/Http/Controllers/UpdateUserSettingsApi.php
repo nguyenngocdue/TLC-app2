@@ -17,7 +17,7 @@ class UpdateUserSettingsApi extends Controller
             if ($entity) {
                 $user = CurrentUser::get();
                 $settings = $user->settings;
-                $settings[$entity][Constant::VIEW_ALL]['calendar']['show_all_children'] = $value;
+                $settings[$entity][Constant::VIEW_ALL]['calendar_options']['show_all_children'] = $value;
                 $user->settings = $settings;
                 $user->update();
                 return ResponseObject::responseSuccess(

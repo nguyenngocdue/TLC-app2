@@ -34,7 +34,7 @@ class SendMailForInspectorListener
     {
         try {
             $id = $event->{'id'};
-            $user = User::findOrFail($id);
+            $user = User::findFromCache($id);
             $fields = $event->{'fields'};
             Mail::to($user)
                 ->bcc($this->getMailBcc())

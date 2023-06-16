@@ -17,6 +17,9 @@ trait TraitSupportPermissionGate
     }
     private function getCompanyTree($user, $flatten = true)
     {
+        if (!$user->viewport_uids && !$user->leaf_uids && userIsAdmin($user)) {
+            return BuildTree::getTree($flatten);
+        }
         return BuildTree::getTreeByOptions($user->id, $user->viewport_uids, $user->leaf_uids, false, $flatten);
     }
     private function getListOwnerIds($user)

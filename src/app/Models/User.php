@@ -269,14 +269,32 @@ class User extends Authenticatable implements LdapAuthenticatable
         ];
     }
 
-    static $userDbSingleton = [];
-    //Override Model find
+    // Override Model find
+
+    // static $userDbSingleton = [];
+    // public static function findFromCache($id)
+    // {
+    //     // return parent::find($id);
+    //     if (!isset(static::$userDbSingleton[$id])) {
+    //         static::$userDbSingleton[$id] = static::find($id);
+    //     }
+    //     return static::$userDbSingleton[$id];
+    // }
+
+    static $singletonDbUserCollection = null;
+    public static function getCollection()
+    {
+        if (!isset(static::$singletonDbUserCollection)) {
+            $all = static::all();
+            foreach ($all as $item) $indexed[$item->id] = $item;
+            static::$singletonDbUserCollection = collect($indexed);
+        }
+        return static::$singletonDbUserCollection;
+    }
+
     public static function findFromCache($id)
     {
-        // return parent::find($id);
-        if (!isset(static::$userDbSingleton[$id])) {
-            static::$userDbSingleton[$id] = static::find($id);
-        }
-        return static::$userDbSingleton[$id];
+        // if(!isset(static::getCollection()[$id])) 
+        return static::getCollection()[$id] ?? null;
     }
 }

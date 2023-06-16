@@ -185,6 +185,7 @@
                     </div>
                 </div>
             </div>
+            <x-elapse title="Advanced filter: "/>
         </div>
     </form>
     <script>

@@ -22,6 +22,7 @@ class ViewAllController extends Controller
 
     use TraitViewAllTableController;
     use TraitViewAllCalendarController;
+    use TraitViewAllMatrixController;
 
     protected $type = "";
     protected $typeModel = '';
@@ -41,44 +42,28 @@ class ViewAllController extends Controller
         return $this->type;
     }
 
-    private function getTabs()
-    {
-        $tabs = [];
-        $tableName = Str::plural($this->type);
-        if (in_array($tableName, JsonControls::getAppsHaveViewAllCalendar())) {
-            $tabs = [
-                'home' => [
-                    'href' => "?view_type=table&action=updateViewAllMode&_entity=$tableName",
-                    'title' => "View All Table",
-                    'icon' => 'fa-solid fa-house',
-                    'active' => true,
-                ],
-                'calendar' => [
-                    'href' => "?view_type=calendar&action=updateViewAllMode&_entity=$tableName",
-                    'title' => "View All Calendar",
-                    'icon' => 'fa-regular fa-calendar',
-                    'active' => false,
-                ]
-            ];
-        };
-        return $tabs;
-    }
-
     public function index(Request $request, $trashed = false)
     {
-        if ($request->input('view_type')) {
+        if ($viewType = $request->input('view_type')) {
             (new UpdateUserSettings())($request);
-            return redirect($request->getPathInfo());
+            switch ($viewType) {
+                case 'calendar':
+                    return redirect($request->getPathInfo() . '#scroll-to-month');
+                    break;
+                default:
+                    return redirect($request->getPathInfo());
+                    break;
+            }
         }
-        [,,,,,,,, $viewAllModel] = $this->getUserSettings();
+        [,,,,,,,, $viewAllModel] = $this->getUserSettingsViewAll();
         switch ($viewAllModel) {
             case 'calendar':
                 return $this->indexViewAllCalendar($request);
-                break;
+            case 'matrix':
+                return $this->indexViewAllMatrix($request);
             case 'table':
             default:
                 return $this->indexViewAllTable($request, $trashed);
-                break;
         }
     }
     public function indexTrashed(Request $request)

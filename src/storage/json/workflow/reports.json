@@ -1,118 +1,118 @@
 {
-    "document-qaqc_insp_chklst\/010": {
-        "name": "document-qaqc_insp_chklst\/010",
+    "document-qaqc_insp_chklst_010": {
+        "name": "document-qaqc_insp_chklst_010",
         "package_tab": "report",
         "package": "hr_&_admin",
         "sub_package": "production",
         "title": "Document"
     },
-    "register-hr_overtime_request\/010": {
-        "name": "register-hr_overtime_request\/010",
+    "register-hr_overtime_request_010": {
+        "name": "register-hr_overtime_request_010",
         "package_tab": "report",
         "package": "hr_&_admin",
         "sub_package": "hr",
         "title": "Overtime Summary"
     },
-    "register-hr_overtime_request\/020": {
-        "name": "register-hr_overtime_request\/020",
+    "register-hr_overtime_request_020": {
+        "name": "register-hr_overtime_request_020",
         "package_tab": "report",
         "package": "hr_&_admin",
         "sub_package": "hr",
         "title": "Overtime User Line"
     },
-    "register-qaqc_insp_chklst\/010": {
-        "name": "register-qaqc_insp_chklst\/010",
+    "register-qaqc_insp_chklst_010": {
+        "name": "register-qaqc_insp_chklst_010",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "???"
     },
-    "register-qaqc_insp_chklst\/020": {
-        "name": "register-qaqc_insp_chklst\/020",
+    "register-qaqc_insp_chklst_020": {
+        "name": "register-qaqc_insp_chklst_020",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Matrix"
     },
-    "register-qaqc_wir\/010": {
-        "name": "register-qaqc_wir\/010",
+    "register-qaqc_wir_010": {
+        "name": "register-qaqc_wir_010",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "WIR Register"
     },
-    "register-qaqc_wir\/020": {
-        "name": "register-qaqc_wir\/020",
+    "register-qaqc_wir_020": {
+        "name": "register-qaqc_wir_020",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "WIR Detail Progress"
     },
-    "report-hr_timesheet_line\/010": {
-        "name": "report-hr_timesheet_line\/010",
+    "report-hr_timesheet_line_010": {
+        "name": "report-hr_timesheet_line_010",
         "package_tab": "report",
         "package": "hr_&_admin",
         "sub_package": "hr",
-        "title": "Project\/Date"
+        "title": "Project_Date"
     },
-    "report-hr_timesheet_line\/020": {
-        "name": "report-hr_timesheet_line\/020",
+    "report-hr_timesheet_line_020": {
+        "name": "report-hr_timesheet_line_020",
         "package_tab": "report",
         "package": null,
         "sub_package": null,
         "title": "Line Data Test"
     },
-    "report-hr_timesheet_line\/100": {
-        "name": "report-hr_timesheet_line\/100",
+    "report-hr_timesheet_line_100": {
+        "name": "report-hr_timesheet_line_100",
         "package_tab": "report",
         "package": "hr_&_admin",
         "sub_package": "hr",
         "title": "Line Data"
     },
-    "report-prod_order\/010": {
-        "name": "report-prod_order\/010",
+    "report-prod_order_010": {
+        "name": "report-prod_order_010",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "production",
-        "title": "Total VS Target (Hour\/Man-hour)"
+        "title": "Total VS Target (Hour_Man-hour)"
     },
-    "report-prod_run\/010": {
-        "name": "report-prod_run\/010",
+    "report-prod_run_010": {
+        "name": "report-prod_run_010",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "production",
         "title": "Daily Timesheet"
     },
-    "report-prod_sequence\/010": {
-        "name": "report-prod_sequence\/010",
+    "report-prod_sequence_010": {
+        "name": "report-prod_sequence_010",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "production",
         "title": "Worker number"
     },
-    "report-prod_sequence\/020": {
-        "name": "report-prod_sequence\/020",
+    "report-prod_sequence_020": {
+        "name": "report-prod_sequence_020",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "production",
         "title": "Total man-hours"
     },
-    "report-prod_sequence\/030": {
-        "name": "report-prod_sequence\/030",
+    "report-prod_sequence_030": {
+        "name": "report-prod_sequence_030",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "production",
         "title": "Work Amount"
     },
-    "report-prod_sequence\/040": {
-        "name": "report-prod_sequence\/040",
+    "report-prod_sequence_040": {
+        "name": "report-prod_sequence_040",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "production",
-        "title": "min\/UoM"
+        "title": "min_UoM"
     },
-    "report-prod_sequence\/050": {
-        "name": "report-prod_sequence\/050",
+    "report-prod_sequence_050": {
+        "name": "report-prod_sequence_050",
         "package_tab": "report",
         "package": "project_management",
         "sub_package": "production",

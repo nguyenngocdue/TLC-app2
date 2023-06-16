@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Reports;
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Workflow\LibApps;
+use App\Http\Controllers\Workflow\LibReports;
 use App\Utils\Support\Entities;
+use App\Utils\Support\Report;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class ReportIndexController extends Controller
@@ -21,28 +22,16 @@ class ReportIndexController extends Controller
 
     public static function getReportOf($tableName)
     {
-        $result = [];
-
+        $lib = LibReports::getAll();
+        $reports = Report::getAllRoutes();
         $singular = Str::singular($tableName);
-        $ucfirstName = Str::ucfirst($singular);
-
-        $conditions = ['report' => 'Reports', 'register' => 'Registers', 'document' => 'Documents'];
-        foreach ($conditions as $key => $value) {
-            for ($i = 10; $i <= 100; $i += 10) {
-                $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
-                $path = "$key-{$singular}_$mode";
-                $controller = "App\\Http\\Controllers\\Reports\\$value\\{$ucfirstName}_$mode";
-                $class_exists = class_exists($controller);
-                if (Route::has($path) && $class_exists) {
-                    $title = (new ($controller))->{$tableName}()['mode_option']; //[$mode];
-                    if (isset($title[$mode])) {
-                        $result[$value][$mode] = [
-                            'path' => $path,
-                            'title' => $title[$mode],
-                        ];
-                    }
-                }
-            }
+        $routes = array_filter($reports, fn ($i) => $i['singular'] == $singular);
+        $result = [];
+        foreach ($routes as $route) {
+            $result[$route['reportType']][$route['mode']] = [
+                "path" => $route['name'],
+                "title" => $lib[$route['name']]['title'],
+            ];
         }
         return $result;
     }

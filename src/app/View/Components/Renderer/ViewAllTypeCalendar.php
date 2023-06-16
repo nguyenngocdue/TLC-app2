@@ -2,14 +2,16 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Models\Hr_timesheet_officer;
+use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
 use Illuminate\View\Component;
 
-class CalendarViewAll extends Component
+class ViewAllTypeCalendar extends Component
 {
+    use TraitViewAllFunctions;
     /**
      * Create a new component instance.
      *
@@ -32,6 +34,9 @@ class CalendarViewAll extends Component
     {
         $dataSource = $this->dataSource;
         $token = CurrentUser::getTokenForApi();
+        [, $filterViewAllCalendar] = $this->getUserSettingsViewAllCalendar();
+        $ownerId = isset($filterViewAllCalendar['owner_id']) ? $filterViewAllCalendar['owner_id'][0] : CurrentUser::id();
+        $userCurrentCalendar = User::findFromCache($ownerId);
         $allTimesheet = $dataSource->get()->map(function ($item) {
             $item['week_value'] = $this->getWeekByDay($item->week)[1];
             $item['year_value'] = $this->getWeekByDay($item->week)[3];
@@ -40,13 +45,24 @@ class CalendarViewAll extends Component
             $item['text_color'] = $this->getColorForStatus($item->status)[1];
             return $item;
         })->groupBy('year_value');
-        return view('components.renderer.calendar-view-all', [
+        return view('components.renderer.view-all-type-calendar', [
             'allTimesheet' => $allTimesheet,
             'routeCreate' => route('timesheet_officers.create'),
             'token' => $token,
             'type' => $this->type,
             'typeModel' => $this->typeModel,
+            'year' => $filterViewAllCalendar['year'] ?? '',
+            'userCurrentCalendar' => $userCurrentCalendar,
+            'dataSourceLegend' => $this->dataSourceLegend(),
+            'titleLegend' => 'Legend',
+
+
+
         ]);
+    }
+    private function dataSourceLegend()
+    {
+        return LibStatuses::getFor($this->type);
     }
 
     private function getWeekByDay($day)

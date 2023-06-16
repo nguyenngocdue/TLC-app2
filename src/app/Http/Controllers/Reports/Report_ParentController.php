@@ -11,11 +11,9 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 abstract class Report_ParentController extends Controller
@@ -140,16 +138,16 @@ abstract class Report_ParentController extends Controller
         return redirect($request->getPathInfo());
     }
 
-    protected function tableDataHeader($modeParams) {
+    protected function tableDataHeader($modeParams)
+    {
         return [];
     }
 
-    private function makeModeTitleReport($routeName){
+    private function makeModeTitleReport($routeName)
+    {
         $lib = LibReports::getAll();
-        $index = strrpos($routeName, '_');
-        $keyLib = substr_replace($routeName, '/', $index). $this->mode;
-        $title = $lib[$keyLib]['title'];
-        return $title ?? 'Empty Title Report';
+        $title = $lib[$routeName]['title'];
+        return $title ?? 'Untitled';
     }
 
     public function index(Request $request)

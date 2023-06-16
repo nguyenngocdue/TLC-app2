@@ -25,7 +25,7 @@ class Qaqc_ncr extends ModelExtended
         "getDiscipline" => ['belongsTo', Prod_discipline::class, "prod_discipline_id"],
         "getDiscipline1" => ['belongsTo', Prod_discipline_1::class, "prod_discipline_1_id"],
         "getDiscipline2" => ['belongsTo', Prod_discipline_2::class, "prod_discipline_2_id"],
-        "getUserTeam" => ['belongsTo', User_team::class, "user_team_id"],
+        "getUserTeam" => ['belongsTo', User_team_ncr::class, "user_team_id"],
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
         'getAssignee2' => ["belongsTo", User::class, 'assignee_2'],

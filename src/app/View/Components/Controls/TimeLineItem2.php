@@ -35,12 +35,12 @@ class TimeLineItem2 extends Component
             $contentComment = Str::limitWords($dataSource->content, 7, 40);
             $contentTitle = $dataSource->content;
             $nameComment = $this->props['_' . $field]['label'] ?? '';
-            $userComment = User::findOrFail($dataSource->owner_id);
+            $userComment = User::findFromCache($dataSource->owner_id);
         } else {
             $statusOld = $dataSource->old_value;
             $statusNew = $dataSource->new_value;
             $userId = $dataSource->user_id;
-            $user = User::findOrFail($userId);
+            $user = User::findFromCache($userId);
             $lastName = $user->last_name;
             $positionRendered = $user->position_rendered;
             $nameRender = $lastName . '(' . $positionRendered . ')';

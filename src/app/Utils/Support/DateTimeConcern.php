@@ -277,6 +277,7 @@ class DateTimeConcern
         $dateTime = new DateTime($timestamp);
         $timeStart = self::getStandardStartTimeMorningOfUser($userId);
         $explodeTimeStart = explode(":", $timeStart);
+        dd($explodeTimeStart);
         $dateTime->setTime($explodeTimeStart[0], $explodeTimeStart[1], $explodeTimeStart[2]);
         return $dateTime->format("Y-m-d H:i:s");
     }
@@ -356,19 +357,19 @@ class DateTimeConcern
     }
     public static function getStandardStartTimeMorningOfUser($id)
     {
-        return User::findOrFail($id)->getWorkplace->standard_start_time;
+        return User::findFromCache($id)->getWorkplace->standard_start_time;
     }
     public static function getStandardStartTimeAfternoonOfUser($id)
     {
-        return User::findOrFail($id)->getWorkplace->getStandardStartTimeAfternoon();
+        return User::findFromCache($id)->getWorkplace->getStandardStartTimeAfternoon();
     }
     public static function getDurationMorningOfUser($id)
     {
-        return User::findOrFail($id)->getWorkplace->getDurationMorning();
+        return User::findFromCache($id)->getWorkplace->getDurationMorning();
     }
     public static function getDurationAfternoonOfUser($id)
     {
-        return User::findOrFail($id)->getWorkplace->getDurationAfternoon();
+        return User::findFromCache($id)->getWorkplace->getDurationAfternoon();
     }
 
     public static function getDayHiddenForDayIndexWeek($start, $end = 7)

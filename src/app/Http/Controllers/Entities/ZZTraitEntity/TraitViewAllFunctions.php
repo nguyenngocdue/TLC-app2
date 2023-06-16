@@ -22,7 +22,7 @@ trait TraitViewAllFunctions
     use TraitSupportPermissionGate;
     use TraitMorphTo;
 
-    private function getUserSettings()
+    private function getUserSettingsViewAll()
     {
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
@@ -34,43 +34,25 @@ trait TraitViewAllFunctions
         $currentFilter = $settings[$type][Constant::VIEW_ALL]['current_filter'] ?? null;
         $refreshPage = $settings[$type][Constant::VIEW_ALL]['refresh_page'] ?? null;
         $optionPrint = $settings[$type][Constant::VIEW_ALL]['option_print_layout'] ?? null;
-        $filterViewAllCalendar = $settings[$type][Constant::VIEW_ALL]['calendar'] ?? null;
         $viewAllMode = $settings[$type][Constant::VIEW_ALL]['view_all_mode'] ?? null;
-        $viewAllCalendarShowAllChildren = $settings[$type][Constant::VIEW_ALL]['calendar']['show_all_children'] ?? null;
-        return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter, $optionPrint, $viewAllMode, $filterViewAllCalendar, $viewAllCalendarShowAllChildren];
+        return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter, $optionPrint, $viewAllMode];
+    }
+    private function getUserSettingsViewAllCalendar()
+    {
+        $type = Str::plural($this->type);
+        $settings = CurrentUser::getSettings();
+        $filterViewAllCalendar = $settings[$type][Constant::VIEW_ALL]['calendar'] ?? null;
+        $viewAllCalendarShowAllChildren = $settings[$type][Constant::VIEW_ALL]['calendar_options']['show_all_children'] ?? null;
+        $viewAllMode = $settings[$type][Constant::VIEW_ALL]['view_all_mode'] ?? null;
+        return [$viewAllMode, $filterViewAllCalendar, $viewAllCalendarShowAllChildren];
     }
 
     private function getEagerLoadParams($eloquentParams)
     {
         $eagerLoadParams = array_keys(array_filter($eloquentParams, fn ($item) => in_array($item[0], ['belongsTo', 'hasMany', 'morphMany', 'morphTo'])));
-        // dump($eagerLoadParams);
-
-        // $x = $this->getAllTypeMorphMany();
-        // dump($x);
-        // $morphManyArray = array_map(fn ($item) => [$item['id'] => [$item['fn']]], $x);
-        // dump($morphManyArray);
-
-        // $paramsOfMorph = array_filter($eloquentParams, fn ($item) => in_array($item[0], ['morphTo']));
-        // // dump($paramsOfMorph);
-        // $keys = array_keys($paramsOfMorph);
-        // dump($keys);
-        // foreach ($keys as $key) {
-        //     $eagerLoadParams[$key] = function (MorphTo $morphTo) use ($morphManyArray) {
-        //         $morphTo->morphWith($morphManyArray);
-        //     };
-        // }
-
-        // $eagerLoadParams['getParent'] = function (MorphTo $morphTo) {
-        //     $morphTo->morphWith([
-        //         Qaqc_wir::class => ['getNcrs'],
-        //         Qaqc_mir::class => ['getNcrs'],
-        //         Qaqc_insp_chklst_line::class => ['getNcrs'],
-        //     ]);
-        // };
-        // dump($eagerLoadParams);
-
         return $eagerLoadParams;
     }
+
     private function getDataSourceForViewCalendar($filter)
     {
         return ($this->typeModel)::whereIn('owner_id', $filter['owner_id'])->whereDate('week', '>=', $filter['start_date'])

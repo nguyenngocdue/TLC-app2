@@ -16,7 +16,6 @@
             <x-dashboards.my-view title="Monitored by Me" viewType="monitored_by_me"  />
         </div>
     </div>
-    <x-elapse total=1/>
 </div>
 
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Utils\Support\Tree;
 
 use App\Utils\CacheToRamForThisSection;
+use App\Utils\Support\CurrentUser;
 use App\Utils\System\Timer;
 use Illuminate\Support\Facades\DB;
 
@@ -123,6 +124,14 @@ class BuildTree
     {
         $key = static::$key . '_of_the_app';
         return CacheToRamForThisSection::get($key, fn () => static::createTreeExpensive());
+    }
+    public static function getTree($flatten = false)
+    {
+        $result = static::getAll();
+        if ($flatten) {
+            return static::flatten($result);
+        }
+        return $result;
     }
     public static function getTreeByOptions($currentId = null, $arrUIdViewPort = null, $arrUIdLeaf = null, $onlyDirectChildren = false, $flatten = false)
     {

@@ -554,11 +554,14 @@ video {
 .-left-\[7px\] {
   left: -7px;
 }
+.-right-2 {
+  right: -0.5rem;
+}
 .-top-1 {
   top: -0.25rem;
 }
-.bottom-0 {
-  bottom: 0px;
+.-top-2 {
+  top: -0.5rem;
 }
 .bottom-\[10\%\] {
   bottom: 10%;
@@ -647,12 +650,6 @@ video {
 .top-\[50\%\] {
   top: 50%;
 }
-.-right-2 {
-  right: -0.5rem;
-}
-.-top-2 {
-  top: -0.5rem;
-}
 .z-0 {
   z-index: 0;
 }
@@ -737,10 +734,6 @@ video {
 .m-auto {
   margin: auto;
 }
-.-mx-1 {
-  margin-left: -0.25rem;
-  margin-right: -0.25rem;
-}
 .-mx-6 {
   margin-left: -1.5rem;
   margin-right: -1.5rem;
@@ -824,9 +817,6 @@ video {
 .my-60 {
   margin-top: 15rem;
   margin-bottom: 15rem;
-}
-.-mb-1 {
-  margin-bottom: -0.25rem;
 }
 .-mb-4 {
   margin-bottom: -1rem;
@@ -938,9 +928,6 @@ video {
 }
 .mt-2 {
   margin-top: 0.5rem;
-}
-.mt-24 {
-  margin-top: 6rem;
 }
 .mt-4 {
   margin-top: 1rem;
@@ -1430,11 +1417,6 @@ video {
 .list-none {
   list-style-type: none;
 }
-.appearance-none {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-}
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -1587,9 +1569,6 @@ video {
 }
 .overflow-x-hidden {
   overflow-x: hidden;
-}
-.overflow-y-hidden {
-  overflow-y: hidden;
 }
 .overflow-y-scroll {
   overflow-y: scroll;
@@ -3358,9 +3337,6 @@ video {
 .to-green-50 {
   --tw-gradient-to: #f0fdf4 var(--tw-gradient-to-position);
 }
-.fill-current {
-  fill: currentColor;
-}
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -3519,9 +3495,6 @@ video {
 }
 .pr-4 {
   padding-right: 1rem;
-}
-.pr-8 {
-  padding-right: 2rem;
 }
 .pt-1 {
   padding-top: 0.25rem;
@@ -4459,10 +4432,6 @@ video {
 .line-through {
   text-decoration-line: line-through;
 }
-.antialiased {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 .placeholder-gray-600::-moz-placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(75 85 99 / var(--tw-placeholder-opacity));
@@ -4550,9 +4519,6 @@ video {
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-}
-.duration-100 {
-  transition-duration: 100ms;
 }
 .duration-150 {
   transition-duration: 150ms;
@@ -7895,11 +7861,6 @@ video {
   .md\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
-  }
-
-  .md\:py-24 {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
   }
 
   .md\:text-2xl {

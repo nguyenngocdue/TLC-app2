@@ -45,7 +45,7 @@ class InspChklstListener
         $inspChklstSht = Qaqc_insp_chklst_sht::findOrFail($inspChklstShtId);
         $internalIds = $inspChklstSht->getLines->where('control_type_id', 7)->pluck('owner_id');
         $users = User::whereIn('id', $internalIds)->get();
-        $owner = User::findOrFail($ownerId);
+        $owner = User::findFromCache($ownerId);
         $monitors = $inspChklstSht->getTmplSheet->getMonitors1()->pluck('email')->toArray();
         Notification::send($users, new InspChklstNotification(
             $owner,

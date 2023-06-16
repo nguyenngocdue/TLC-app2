@@ -53,7 +53,6 @@
                 @break
             @endswitch
             <x-elapse />
-            <x-elapse total=1/>
             @foreach($propsIntermediate as $key => $props)
                 @php $propsOfIntermediatePage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues, $status, $type); @endphp
                 <x-renderer.editable.modal-intermediate key={{$key}} action={{$action}} type={{$type}} status={{$status}} id={{$id}} modelPath={{$modelPath}} :actionButtons="$actionButtons" :props="$props" :item="$item" :dataSource="$propsOfIntermediatePage"  />

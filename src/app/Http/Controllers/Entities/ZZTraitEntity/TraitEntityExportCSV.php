@@ -142,7 +142,7 @@ trait TraitEntityExportCSV
     }
     private function normalizeDataSourceAndColumnsFollowAdvanceFilter()
     {
-        [,, $advanceFilters] = $this->getUserSettings();
+        [,, $advanceFilters] = $this->getUserSettingsViewAll();
         $type = Str::plural($this->type);
         $columns = $this->getColumnsExportCSV($type);
         $columns = $this->makeNoColumn($columns);

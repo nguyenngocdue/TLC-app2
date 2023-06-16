@@ -4,25 +4,23 @@ namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\UpdateUserSettings;
-use App\Http\Controllers\Workflow\LibStatuses;
-use App\Models\User;
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-trait TraitViewAllCalendarController
+trait TraitViewAllMatrixController
 {
     use TraitViewAllFunctions;
 
-    private function indexViewAllCalendar($request)
+    private function indexViewAllMatrix($request)
     {
+
         [, $filterViewAllCalendar] = $this->getUserSettingsViewAllCalendar();
         $dataSource = $this->getDataSourceForViewCalendar($filterViewAllCalendar);
-        return view('dashboards.pages.entity-view-all-calendar', [
+        return view('dashboards.pages.entity-view-all-matrix', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
-            'title' => '(Calendar)',
+            'title' => '(Matrix)',
             'valueAdvanceFilters' => $filterViewAllCalendar,
             'type' => Str::plural($this->type),
             'typeModel' => $this->typeModel,

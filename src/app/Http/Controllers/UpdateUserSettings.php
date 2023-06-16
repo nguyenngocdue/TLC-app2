@@ -38,18 +38,26 @@ class UpdateUserSettings extends Controller
         // $start = DateTimeConcern::getWeekOfYear(($year) . '-' . '01' . '-' . '01');
         // $end = DateTimeConcern::getWeekOfYear($year . '-' . '12' . '-' . '31');
         // return DateTimeConcern::formatWeekYear(1, $year, $end, $year);
-        return [$year . '-' . '01-01', $year . '-' . '12-31'];
+        return [$year . '-' . '01-01', $year . '-' . '12-31', $year];
     }
     private function updateViewAllCalendar($request, &$settings)
     {
         $type = $request->input("_entity");
         $year = $request->input("year");
         $ownerId = $request->input("owner_id");
-        [$start, $end] = $this->getStartAndEndFilterByYear($year);
+        $settingCalendar = $settings[$type][Constant::VIEW_ALL]['calendar'] ?? null;
+        if (!$ownerId) {
+            $ownerId = isset($settingCalendar['owner_id']) ? $settingCalendar['owner_id'] : [CurrentUser::id()];
+        }
+        if (!$year) {
+            $year = isset($settingCalendar['year']) ? $settingCalendar['year'] : null;
+        }
+        [$start, $end, $year] = $this->getStartAndEndFilterByYear($year);
         $data = [
             'start_date' => $start,
             'end_date' => $end,
-            'owner_id' => $ownerId ?? [CurrentUser::id()],
+            'owner_id' => $ownerId,
+            'year' => $year,
         ];
         $settings[$type][Constant::VIEW_ALL]['calendar'] = $data;
         return $settings;

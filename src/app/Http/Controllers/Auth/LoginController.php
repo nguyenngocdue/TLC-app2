@@ -87,10 +87,8 @@ class LoginController extends Controller
                 $request->session()->put('auth.password_confirmed_at', time());
             }
             if (Auth::user()) {
-                $timezone = Auth::user()->time_zone;
-                GetSetCookie::setCookieForever('time_zone', $timezone);
-                $token = Auth::user()->createToken('tlc_token')->plainTextToken;
-                GetSetCookie::setCookieForever('tlc_token', $token);
+                PostLoggedInActions::setTimeZoneWhenLogged($request);
+                // PostLoggedInActions::setTokenWhenLoggedForCookie();
             }
             return $this->sendLoginResponse($request);
         }

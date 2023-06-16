@@ -51,6 +51,7 @@
                                     <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
                                 </div>
                             </div>
+                            <input type="hidden" id="time_zone" name="time_zone">
                             @if (Route::has('password.request'))
                                 <a href="{{ route('password.request') }}"
                                     class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot
@@ -87,4 +88,8 @@
             </div>
         </div>
     </section>
+    <script>
+        var timezone = -(new Date().getTimezoneOffset()/60);
+        document.getElementById('time_zone').value = timezone
+    </script>
 @endsection

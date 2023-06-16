@@ -19,6 +19,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitValidation;
 	use TraitSendNotificationAndMail;
 	use TraitEventInspChklst;
+	use TraitEntityUpdateUserSettings;
 
 	private $debugForStoreUpdate = false;
 
@@ -107,6 +108,7 @@ trait TraitEntityCRUDStoreUpdate2
 		// if ($request['tableNames'] == 'fakeRequest') {
 		// 	dump($request->input());
 		// }
+		$this->updateUserSettings($request);
 		$this->reArrangeComments($request);
 
 		$isFakeRequest = $request['tableNames'] == 'fakeRequest';

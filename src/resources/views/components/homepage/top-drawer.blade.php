@@ -8,7 +8,7 @@
         @click.away="closeTopDrawer" 
         @keydown.escape="closeTopDrawer" 
         class="absolute left-0 top-16 p-1 spa1ce-y-2 max-h-[40rem] w-full text-gray-600 bg-white border-b border-gray-100 rounded-md shadow-md dark:border-gray-600 dark:text-gray-300 dark:bg-gray-700" aria-label="submenu">
-        <div class="flex px-6 overflow-y-hidden h-[300px] md:h-[500px]" data-top-drawer >
+        <div class="px-6 h-[300px] md:h-[500px] overflow-y-auto" data-top-drawer >
                     
         </div>
         <!-- Modal footer -->

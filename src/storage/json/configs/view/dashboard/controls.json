@@ -188,5 +188,8 @@
     "apps_have_view_all_calendar": [
         "hr_timesheet_officers"
     ],
+    "apps_have_view_all_matrix": [
+        "hr_timesheet_workers"
+    ],
     "view_all_tab_taxonomy": "status"
 }
