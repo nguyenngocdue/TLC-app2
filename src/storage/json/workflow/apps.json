@@ -1159,12 +1159,12 @@
         "hidden_navbar": "true",
         "icon": null
     },
-    "user_team": {
-        "name": "user_team",
+    "user_team_ncr": {
+        "name": "user_team_ncr",
         "package_tab": "application",
         "package": "system",
         "sub_package": "user",
-        "title": "User Teams",
+        "title": "User Team NCR",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
