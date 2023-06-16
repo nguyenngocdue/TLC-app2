@@ -23,7 +23,7 @@ trait TraitViewAllTableController
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
-        [$perPage, $columnLimit, $advanceFilters, $currentFilter, $refreshPage] = $this->getUserSettings();
+        [$perPage, $columnLimit, $advanceFilters, $currentFilter, $refreshPage] = $this->getUserSettingsViewAll();
         // Log::info($columnLimit);
         $type = Str::plural($this->type);
         $columns = $this->getColumns($type, $columnLimit, $trashed);

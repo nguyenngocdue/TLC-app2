@@ -40,7 +40,7 @@ class SidebarCalendarViewAll extends Component
         $user = CurrentUser::get();
         // $user = User::find(95);
         $userId = $user->id;
-        [,,,,,,,,, $filterViewAllCalendar, $viewAllCalendarShowAllChildren] = $this->getUserSettings();
+        [, $filterViewAllCalendar, $viewAllCalendarShowAllChildren] = $this->getUserSettingsViewAllCalendar();
         $idsRenderCalendar = $filterViewAllCalendar['owner_id'] ?? [$userId];
 
         $tree = $this->getTreeOwnerIds($user);

@@ -34,7 +34,7 @@ class AdvancedFilter extends Component
     public function render()
     {
         $propsFilters = $this->propsFilterCheckStatusless();
-        [,,,,, $basicFilter, $chooseBasicFilter] = $this->getUserSettings();
+        [,,,,, $basicFilter, $chooseBasicFilter] = $this->getUserSettingsViewAll();
         $count = count($propsFilters) ?? 0;
         $maxH = round($count / 4) * 3.7 . 'rem';
         $route = $this->trashed ? route($this->type . '.trashed') : route($this->type . '.index');

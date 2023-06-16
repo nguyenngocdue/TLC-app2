@@ -225,8 +225,8 @@ class RelationshipRenderer2 extends Component
                     }
                 }
                 $index = strpos($type, "_");
-                $type = substr($type, $index + 1);
-                $apiUrl = route($type . '.index');
+                $typeEdit = substr($type, $index + 1);
+                $apiUrl = route($typeEdit . '.index');
                 $token = CurrentUser::getTokenForApi();
                 return view('components.calendar.calendar-grid', [
                     'timesheetableType' => $modelPath,
@@ -234,6 +234,7 @@ class RelationshipRenderer2 extends Component
                     'apiUrl' => $apiUrl,
                     'readOnly' => $this->readOnly,
                     'arrHidden' => $arrHidden,
+                    'type' => $type,
                 ]);
             case "many_icons":
                 $colSpan =  Helper::getColSpan($colName, $type);

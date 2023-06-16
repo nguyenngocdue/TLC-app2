@@ -2,8 +2,18 @@
     <div class="col-span-3 overflow-y-auto overflow-x-hidden h-screen px-2">
         <x-calendar.sidebar-calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}"/>
     </div>
-    <div class="w-full p-2 m-2 bg-gray-100 rounded-lg shadow col-span-9">
-        <div class="grid grid-cols-12">
+    <div class="w-full px-1 bg-gray-100 rounded-lg shadow col-span-9">
+        <div class="grid grid-cols-12 gap-2 mx-2">
+            <div class="col-span-4 flex">
+                    <x-renderer.card class="w-full border bg-white p-2" title="Current view">
+                    <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
+                    </x-renderer.card>
+                    </div>
+            <div class="col-span-8">
+                <x-renderer.legend :dataSource="$dataSourceLegend" title="{{$titleLegend}}" />
+            </div>
+        </div>
+        <div class="mt-2 grid grid-cols-12">
             <div class="col-span-11 overflow-y-auto overflow-x-hidden h-screen">
                 <div class = "flex flex-wrap justify-center">
                     <div class="grid 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 gap-2 grid-cols-1 font-semibold" calendar-container>

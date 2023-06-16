@@ -55,7 +55,7 @@ class ViewAllController extends Controller
                     break;
             }
         }
-        [,,,,,,,, $viewAllModel] = $this->getUserSettings();
+        [,,,,,,,, $viewAllModel] = $this->getUserSettingsViewAll();
         switch ($viewAllModel) {
             case 'calendar':
                 return $this->indexViewAllCalendar($request);

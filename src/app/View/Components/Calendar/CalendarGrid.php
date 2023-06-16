@@ -13,6 +13,11 @@ class CalendarGrid extends Component
      */
     public function __construct(
         private $readOnly = true,
+        private $timesheetableType = null,
+        private $timesheetableId = null,
+        private $apiUrl = null,
+        private $arrHidden = null,
+        private $type = null,
     ) {
         //
     }
@@ -26,6 +31,11 @@ class CalendarGrid extends Component
     {
         return view('components.calendar.calendar-grid', [
             'readOnly' => $this->readOnly,
+            'timesheetableType' => $this->timesheetableType,
+            'timesheetableId' => $this->timesheetableId,
+            'apiUrl' => $this->apiUrl,
+            'arrHidden' => $this->arrHidden,
+            'type' => $this->type,
         ]);
     }
 }

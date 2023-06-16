@@ -34,6 +34,8 @@ class Constant
 
     const VIEW_ALL = 'view_all';
 
+    const VIEW_EDIT = 'view_edit';
+
     const NAME_LOCK_COLUMN = 'lock_version';
 
     const NAME_LOCK_COLUMN_DEFAULT = 'updated_at';

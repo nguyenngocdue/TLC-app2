@@ -16,7 +16,7 @@ trait TraitViewAllMatrixController
     private function indexViewAllMatrix($request)
     {
 
-        [,,,,,,,,, $filterViewAllCalendar] = $this->getUserSettings();
+        [, $filterViewAllCalendar] = $this->getUserSettingsViewAllCalendar();
         $dataSource = $this->getDataSourceForViewCalendar($filterViewAllCalendar);
         return view('dashboards.pages.entity-view-all-matrix', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),

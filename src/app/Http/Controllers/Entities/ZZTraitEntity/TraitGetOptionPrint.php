@@ -8,7 +8,7 @@ trait TraitGetOptionPrint
 
     public function getValueOptionPrint()
     {
-        [,,,,,,, $optionPrint] = $this->getUserSettings();
+        [,,,,,,, $optionPrint] = $this->getUserSettingsViewAll();
         return $optionPrint;
     }
     public function getLayoutPrint($valueOptionPrint, $view = 'props')

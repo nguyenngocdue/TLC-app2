@@ -22,7 +22,7 @@ trait TraitViewAllFunctions
     use TraitSupportPermissionGate;
     use TraitMorphTo;
 
-    private function getUserSettings()
+    private function getUserSettingsViewAll()
     {
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
@@ -34,10 +34,17 @@ trait TraitViewAllFunctions
         $currentFilter = $settings[$type][Constant::VIEW_ALL]['current_filter'] ?? null;
         $refreshPage = $settings[$type][Constant::VIEW_ALL]['refresh_page'] ?? null;
         $optionPrint = $settings[$type][Constant::VIEW_ALL]['option_print_layout'] ?? null;
-        $filterViewAllCalendar = $settings[$type][Constant::VIEW_ALL]['calendar'] ?? null;
         $viewAllMode = $settings[$type][Constant::VIEW_ALL]['view_all_mode'] ?? null;
+        return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter, $optionPrint, $viewAllMode];
+    }
+    private function getUserSettingsViewAllCalendar()
+    {
+        $type = Str::plural($this->type);
+        $settings = CurrentUser::getSettings();
+        $filterViewAllCalendar = $settings[$type][Constant::VIEW_ALL]['calendar'] ?? null;
         $viewAllCalendarShowAllChildren = $settings[$type][Constant::VIEW_ALL]['calendar_options']['show_all_children'] ?? null;
-        return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter, $optionPrint, $viewAllMode, $filterViewAllCalendar, $viewAllCalendarShowAllChildren];
+        $viewAllMode = $settings[$type][Constant::VIEW_ALL]['view_all_mode'] ?? null;
+        return [$viewAllMode, $filterViewAllCalendar, $viewAllCalendarShowAllChildren];
     }
 
     private function getEagerLoadParams($eloquentParams)

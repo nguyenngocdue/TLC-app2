@@ -9,83 +9,97 @@ let currentUserIsAdmin = null
 let apps = []
 let appsTopDrawer = []
 
-const renderHtml = (apps, url, topDrawer) => {
+const renderHtml = (appsRender, url, topDrawer) => {
     if (topDrawer) {
         dataTopDrawer.innerHTML = ``
         let resultHtmlTopDrawer = ``
-        for (const property in apps) {
-            let totalPackage = 0
-            const package = property
-            let html = ``
-            for (const value in apps[property]) {
-                let htmlTopDrawer = ``
-                const sub_package = value
-                let total = 0
-                apps[property][value].forEach((app) => {
-                    total += app.click_count ? app.click_count : 0
-                    const status = capitalize(app.status ?? '')
-                    const isBookmark = app.bookmark
-                        ? 'text-blue-500'
-                        : 'text-gray-300'
-                    const isCreate = app.href_create
-                        ? `<a href="${app.href_create}" class="flex flex-1 items-center text-orange-400">
-                        <i class="fa-light fa-circle-plus"></i>
-                    </a>`
+        for (const app_index in appsRender) {
+            let resultHtml = ``
+            const nameApp = capitalize(app_index ?? '')
+            const apps = appsRender[app_index]
+            for (const property in apps) {
+                let totalPackage = 0
+                const package = property
+                let html = ``
+                for (const value in apps[property]) {
+                    let htmlTopDrawer = ``
+                    const sub_package = value
+                    let total = 0
+                    apps[property][value].forEach((app) => {
+                        total += app.click_count ? app.click_count : 0
+                        const status = capitalize(app.status ?? '')
+                        const isBookmark = app.bookmark
+                            ? 'text-blue-500'
+                            : 'text-gray-300'
+                        const isCreate = app.href_create
+                            ? `<a href="${app.href_create}" class="flex flex-1 items-center text-orange-400">
+                            <i class="fa-light fa-circle-plus"></i>
+                        </a>`
+                            : ''
+                        const count = app.click_count
+                            ? `<span class="inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${app.click_count}</span>`
+                            : ''
+                        const statusHtml = status
+                            ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
+                            : ''
+                        htmlTopDrawer += `
+                        <li>
+                            <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
+                                <button tabIndex=-1 id='bookmark_${
+                                    app.name
+                                }' onclick="bookmarkSearchModal('${
+                            app.name
+                        }','${url}')" class='px-2 text-base ${isBookmark}'>
+                        <i class="fa-solid fa-bookmark"></i></button>
+                                <a href="${
+                                    app.href
+                                }" class="flex flex-1 px-2 items-center ">
+                                    ${
+                                        app.icon ??
+                                        "<i class='fa-light fa-file'></i>"
+                                    }
+                                        <span class="flex-1 ml-3 whitespace-nowrap">${
+                                            app.title
+                                        }</span>
+                                        ${statusHtml}
+                                </a>
+                                ${count}
+                                ${isCreate}
+                                
+                            </div>
+                        </li>`
+                    })
+                    totalPackage += total
+                    const totalHtml = total
+                        ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${total}</span>`
                         : ''
-                    const count = app.click_count
-                        ? `<span class="inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${app.click_count}</span>`
-                        : ''
-                    const statusHtml = status
-                        ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
-                        : ''
-                    htmlTopDrawer += `
-                    <li>
-                        <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
-                            <button tabIndex=-1 id='bookmark_${
-                                app.name
-                            }' onclick="bookmarkSearchModal('${
-                        app.name
-                    }','${url}')" class='px-2 text-base ${isBookmark}'>
-                    <i class="fa-solid fa-bookmark"></i></button>
-                            <a href="${
-                                app.href
-                            }" class="flex flex-1 px-2 items-center ">
-                                ${
-                                    app.icon ??
-                                    "<i class='fa-light fa-file'></i>"
-                                }
-                                    <span class="flex-1 ml-3 whitespace-nowrap">${
-                                        app.title
-                                    }</span>
-                                    ${statusHtml}
-                            </a>
-                            ${count}
-                            ${isCreate}
-                            
-                        </div>
-                    </li>`
-                })
-                totalPackage += total
-                const totalHtml = total
-                    ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${total}</span>`
+                    html += `<li class='px-2'>
+                                    <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${sub_package} ${totalHtml}</p>
+                                        <ul class="space-y-1">
+                                           ${htmlTopDrawer}
+                                        </ul>
+                                    </li>`
+                }
+                const totalPackageHtml = totalPackage
+                    ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${totalPackage}</span>`
                     : ''
-                html += `<li class='px-2'>
-                                <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${sub_package} ${totalHtml}</p>
-                                    <ul class="space-y-1">
-                                       ${htmlTopDrawer}
-                                    </ul>
-                                </li>`
+                resultHtml += `<div class='px-2'>
+                                        <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${package} ${totalPackageHtml}</p>
+                                            <ul class="grid grid-rows-2 grid-flow-col">
+                                            ${html}
+                                            </ul>
+                                    </div>`
             }
-            const totalPackageHtml = totalPackage
-                ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${totalPackage}</span>`
-                : ''
-            resultHtmlTopDrawer += `<div class='px-2'>
-                                    <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${package} ${totalPackageHtml}</p>
-                                    <ul class="grid grid-rows-2 grid-flow-col">
-                                       ${html}
-                                    </ul>
-                                </div>`
+            resultHtmlTopDrawer += `<div class="px-2 border-b">
+                                        <p class="p-1 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            ${nameApp}
+                                        </p>
+                                        <div class="grid grid-rows-auto grid-flow-col">
+                                            <div class='flex'>${resultHtml}</div>
+                                        </div>
+                                    </div>`
         }
+
         dataTopDrawer.innerHTML += resultHtmlTopDrawer
     } else {
         dataContainer.innerHTML = ``
@@ -130,7 +144,7 @@ const renderHtml = (apps, url, topDrawer) => {
                                 </div>
                             </li>`
             })
-            resultHtml += `<div>
+            resultHtml += `<div >
                                 <p class="py-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
                                     <ul class="space-y-1">
                                         ${html}
@@ -158,17 +172,21 @@ function groupByFil(arr, filGroup) {
     }, {})
     return result
 }
-function groupByFilHasSubFill(arr, filGroup, subFilGroup) {
-    const result = arr.reduce((group, product) => {
-        const groupKey = product[filGroup]
-        const subGroupKey = product[subFilGroup]
-        if (!group[groupKey]) {
-            group[groupKey] = []
+function groupByFilHasSubFill(arr, tabGroup, filGroup, subFilGroup) {
+    const result = arr.reduce((group, item) => {
+        const groupTab = item[tabGroup]
+        const groupKey = item[filGroup]
+        const subGroupKey = item[subFilGroup]
+        if (!group[groupTab]) {
+            group[groupTab] = []
         }
-        if (!group[groupKey][subGroupKey]) {
-            group[groupKey][subGroupKey] = []
+        if (!group[groupTab][groupKey]) {
+            group[groupTab][groupKey] = []
         }
-        group[groupKey][subGroupKey].push(product)
+        if (!group[groupTab][groupKey][subGroupKey]) {
+            group[groupTab][groupKey][subGroupKey] = []
+        }
+        group[groupTab][groupKey][subGroupKey].push(item)
         return group
     }, {})
     return result
@@ -188,6 +206,7 @@ function render(value, url) {
 function renderTopDrawer(value, url) {
     appsTopDrawer = groupByFilHasSubFill(
         value,
+        'package_tab',
         'package_rendered',
         'sub_package_rendered'
     )
