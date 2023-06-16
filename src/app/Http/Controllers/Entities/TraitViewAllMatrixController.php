@@ -9,18 +9,18 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-trait TraitViewAllCalendarController
+trait TraitViewAllMatrixController
 {
     use TraitViewAllFunctions;
 
-    private function indexViewAllCalendar($request)
+    private function indexViewAllMatrix($request)
     {
 
         [,,,,,,,,, $filterViewAllCalendar] = $this->getUserSettings();
         $dataSource = $this->getDataSourceForViewCalendar($filterViewAllCalendar);
-        return view('dashboards.pages.entity-view-all-calendar', [
+        return view('dashboards.pages.entity-view-all-matrix', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
-            'title' => '(Calendar)',
+            'title' => '(Matrix)',
             'valueAdvanceFilters' => $filterViewAllCalendar,
             'type' => Str::plural($this->type),
             'typeModel' => $this->typeModel,

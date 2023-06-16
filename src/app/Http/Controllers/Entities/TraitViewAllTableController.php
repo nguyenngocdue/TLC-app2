@@ -36,7 +36,7 @@ trait TraitViewAllTableController
         if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
-            'title' => $trashed ? 'View Trash' : 'View All',
+            'title' => $trashed ? '(Trash)' : '',
             'perPage' => $perPage,
             'valueAdvanceFilters' => $advanceFilters,
             'refreshPage' => $refreshPage,
@@ -45,8 +45,6 @@ trait TraitViewAllTableController
             'columns' => $columns,
             'dataSource' => $dataSource,
             'currentFilter' => $currentFilter,
-            'tabs' => $this->getTabs(),
-            // 'searchTitle' => "Search by " . join(", ", array_keys($searchableArray)),
             'tableTrueWidth' => $tableTrueWidth,
             'frameworkTook' => $this->frameworkTook,
             'trashed' => $trashed,

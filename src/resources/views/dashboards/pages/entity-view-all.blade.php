@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', $title )
+@section('title' ) View All <sub>{!! $title !!}</sub> @endsection
 
 @section('content')
 <div class="px-4 mt-2">
