@@ -69,8 +69,8 @@ class ViewAllTypeMatrix extends Component
         foreach ($yAxis as $y) {
             $yId = $y->id;
             $line['name'] = $y->name;
-            $line['count'] = -11111111;
-            // $line['count'] = count($y->getOtMembers());
+            // $line['count'] = -11111111;
+            $line['count'] = count($y->getOtMembers());
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 $line[$xId] = (object)[
