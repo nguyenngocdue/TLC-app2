@@ -30,7 +30,7 @@ services:
     networks:
       - ws
   soketi:
-    image: "quay.io/soketi/soketi:latest-16-alpine"
+    image: "quay.io/soketi/soketi:1.4-16-debian"
     container_name: websockets_soketi
     environment:
       SOKETI_DEBUG: "1"
