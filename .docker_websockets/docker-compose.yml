@@ -7,8 +7,8 @@ services:
   nginx:
     image: nginx:alpine
     container_name: websockets_nginx
-    restart: unless-stopped
-    tty: true
+    # restart: unless-stopped
+    # tty: true
     environment:
       - NGINX_WEBSOCKET_HOST=${WEBSOCKET_DOMAIN_NAME}
     ports:
@@ -18,19 +18,19 @@ services:
       - ../.docker_configs/certs:/etc/nginx/certs
     networks:
       - ws
-  redis:
-    image: redis
-    container_name: websockets_redis
-    restart: unless-stopped
-    environment:
-      - REDIS_PASSWORD=password
-      - REDIS_REPLICATION_mode=master
-    ports:
-      - "6379:6379"
-    networks:
-      - ws
+  # redis:
+  #   image: redis
+  #   container_name: websockets_redis
+  #   # restart: unless-stopped
+  #   environment:
+  #     - REDIS_PASSWORD=password
+  #     - REDIS_REPLICATION_mode=master
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - ws
   soketi:
-    image: "quay.io/soketi/soketi:1.4-16-debian"
+    image: "quay.io/soketi/soketi:latest-16-alpine"
     container_name: websockets_soketi
     environment:
       SOKETI_DEBUG: "1"
