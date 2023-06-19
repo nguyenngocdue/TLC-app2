@@ -69,23 +69,37 @@ trait TableTraitRows
                         $rawData = $dataLineObj->$dataIndex ?? "";
                     }
                     // $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
+                    $isArrayOfValueObject = false;
                     if (is_array($rawData)) {
-                        // count($rawData) . " items";
-                        $output = "";
+                        $isArrayOfValueObject = true;
                         foreach ($rawData as $item) {
-                            $obj = $this->parseCellObject($item);
-                            [$cellClassList, $cellTitle, $cellHref, $value] = $obj;
-                            $div = "<span class='$cellClassList mx-0.5 px-1 py-1 rounded' title='$cellTitle'>" . $value . "</span>";
-                            if ($cellHref) $div = "<a href='$cellHref'>" . $div . "</a>";
-                            $output .= $div;
+                            if (!isset($item->value)) {
+                                $isArrayOfValueObject = false;
+                                break;
+                            }
                         }
-                        $rawData = $output;
+                        if ($isArrayOfValueObject) {
+                            $output = "";
+                            foreach ($rawData as $item) {
+                                $obj = $this->parseCellObject($item);
+                                [$cellClassList, $cellTitle, $cellHref, $value] = $obj;
+                                $div = "<span class='$cellClassList mx-0.5 px-2 py-1 rounded' title='$cellTitle'>" . $value . "</span>";
+                                if ($cellHref) $div = "<a href='$cellHref'>" . $div . "</a>";
+                                $output .= $div;
+                            }
+                            $rawData = $output;
+                        } else {
+                            $rawData = count($rawData) . " items";
+                        }
                     }
                     $valueOfRawData = (is_object($rawData) && isset($rawData->value)) ? $rawData->value : $rawData;
 
                     $cellDivClass = '';
                     if (is_object($rawData)) {
                         if (isset($rawData->cell_div_class)) $cellDivClass = $rawData->cell_div_class;
+                    }
+                    if ($isArrayOfValueObject) {
+                        $cellDivClass = "flex justify-evenly";
                     }
                     $rendered = $renderer
                         // ? "A" 

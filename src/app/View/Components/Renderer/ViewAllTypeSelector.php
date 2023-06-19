@@ -15,6 +15,7 @@ class ViewAllTypeSelector extends Component
      */
     public function __construct(
         private $type,
+        private $viewType,
     ) {
         //
     }
@@ -25,18 +26,18 @@ class ViewAllTypeSelector extends Component
         $tableName = Str::plural($this->type);
         $home = [
             'href' => "?view_type=table&action=updateViewAllMode&_entity=$tableName",
-            'title' => "View All Table",
-            'icon' => 'fa-solid fa-house',
-            'active' => true,
+            'title' => "List View",
+            'icon' => 'fa-duotone fa-list',
+            'active' => $this->viewType == 'list-view',
         ];
         if (in_array($tableName, JsonControls::getAppsHaveViewAllCalendar())) {
             $tabs = [
                 'home' => $home,
                 'calendar' => [
                     'href' => "?view_type=calendar&action=updateViewAllMode&_entity=$tableName",
-                    'title' => "View All Calendar",
-                    'icon' => 'fa-regular fa-calendar',
-                    'active' => false,
+                    'title' => "Calendar All",
+                    'icon' => 'fa-duotone fa-calendar',
+                    'active' => $this->viewType == 'calendar-view',
                 ]
             ];
         };
@@ -45,9 +46,9 @@ class ViewAllTypeSelector extends Component
                 'home' => $home,
                 'calendar' => [
                     'href' => "?view_type=matrix&action=updateViewAllMode&_entity=$tableName",
-                    'title' => "View All Matrix",
-                    'icon' => 'fa-regular fa-table',
-                    'active' => false,
+                    'title' => "Matrix View",
+                    'icon' => 'fa-duotone fa-table',
+                    'active' => $this->viewType == 'matrix-view',
                 ]
             ];
         };
@@ -63,7 +64,9 @@ class ViewAllTypeSelector extends Component
     {
         return view(
             'components.renderer.view-all-type-selector',
-            ['tabs' => $this->getTabs()]
+            [
+                'tabs' => $this->getTabs(),
+            ]
         );
     }
 }

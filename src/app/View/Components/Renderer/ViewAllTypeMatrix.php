@@ -41,6 +41,7 @@ class ViewAllTypeMatrix extends Component
         $xAxis = array_map(fn ($c) => [
             'dataIndex' => $c,
             'title' => date(Constant::FORMAT_DATE_ASIAN, strtotime($c)) . "<br>" . date(Constant::FORMAT_WEEKDAY_SHORT, strtotime($c)),
+            'column_class' => ("Sun" == date(Constant::FORMAT_WEEKDAY_SHORT, strtotime($c))) ? "bg-pink-200" : (($c == date(Constant::FORMAT_DATE_MYSQL)) ? "bg-blue-200" : ""),
         ], $xAxis);
         return $xAxis;
     }
@@ -73,7 +74,7 @@ class ViewAllTypeMatrix extends Component
             // dump($statuses[$status]);
             $result[] = (object)[
                 'value' => $document->id,
-                // 'cell_title' => 'Open',
+                'cell_title' => 'Open this document',
                 $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'],
                 $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']),
                 'cell_class' => "$bgColor $textColor",
@@ -104,10 +105,11 @@ class ViewAllTypeMatrix extends Component
             $line['count'] = count($y->getOtMembers());
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
+                $xClass = $x['column_class'];
                 $line[$xId] = (object)[
                     'value' => '<i class="fa-duotone fa-circle-plus"></i>',
                     'cell_href' => route($this->type . ".create"),
-                    'cell_class' => "text-center text-green-800",
+                    'cell_class' => "text-center text-green-800 $xClass",
                     'cell_title' => "Create a new document",
                 ];
             }
@@ -131,6 +133,7 @@ class ViewAllTypeMatrix extends Component
     public function render()
     {
         $xAxis = $this->getXAxis();
+        // dump($xAxis);
         $yAxis = $this->getYAxis();
         $dataSource = $this->getDataSource($xAxis);
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $dataSource);

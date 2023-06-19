@@ -7,7 +7,7 @@
 <div class="px-4 mt-2">
     <x-elapse title="Bootrap: " duration="{{$frameworkTook}}"/>   
     <x-elapse title="ViewAllController: "/> 
-    <x-renderer.view-all-type-selector type="{{$type}}" />
+    <x-renderer.view-all-type-selector type="{{$type}}" viewType="matrix-view" />
     <x-renderer.view-all-type-matrix type="{{$type}}" typeModel="{{$typeModel}}" :dataSource="$dataSource"/>
 </div>
 {{-- <script src="{{ asset('js/renderprop.js') }}"></script> --}}

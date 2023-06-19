@@ -8,7 +8,7 @@
     <x-elapse title="Bootrap: " duration="{{$frameworkTook}}"/>   
     <x-elapse title="ViewAllController: "/> 
     <x-renderer.advanced-filter trashed="{{$trashed}}" currentFilter="{{$currentFilter}}" type="{{$type}}" typeModel="{{$typeModel}}" :valueAdvanceFilters="$valueAdvanceFilters"/>
-    <x-renderer.view-all-type-selector type="{{$type}}" />
+    <x-renderer.view-all-type-selector type="{{$type}}" viewType="list-view" />
     <x-renderer.view-all-type-list 
         :tabPane="$tabPane" 
         type="{{$type}}" 
