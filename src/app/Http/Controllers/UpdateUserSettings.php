@@ -40,6 +40,15 @@ class UpdateUserSettings extends Controller
         // return DateTimeConcern::formatWeekYear(1, $year, $end, $year);
         return [$year . '-' . '01-01', $year . '-' . '12-31', $year];
     }
+
+    private function updateViewAllMatrix($request, &$settings)
+    {
+        $type = $request->input("_entity");
+        $viewportDate = $request->input("viewportDate");
+        $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] = $viewportDate;
+        return $settings;
+    }
+
     private function updateViewAllCalendar($request, &$settings)
     {
         $type = $request->input("_entity");
@@ -271,6 +280,9 @@ class UpdateUserSettings extends Controller
                 break;
             case 'updateViewAllCalendar':
                 $settings = $this->updateViewAllCalendar($request, $settings);
+                break;
+            case 'updateViewAllMatrix':
+                $settings = $this->updateViewAllMatrix($request, $settings);
                 break;
             case 'updatePerPage':
                 $settings = $this->updatePerPage($request, $settings);

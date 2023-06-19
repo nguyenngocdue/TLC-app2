@@ -2,6 +2,7 @@
 
 namespace App\Utils\BookmarkTraits;
 
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\AccessLogger\EntityNameClickCount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -67,5 +68,12 @@ trait TraitFormatBookmarkEntities
             return array_merge($carry, $item);
         }, []);
         return $result;
+    }
+    public function getAllAppsOfSearchModalAndTopDrawer()
+    {
+        $allApps = $this->getDataSource(LibApps::getAllShowBookmark());
+        $allAppsTopDrawer = $this->getDataSource(LibApps::getAllNavbarBookmark());
+        $allAppsTopDrawer = $this->formatDataSource($allAppsTopDrawer);
+        return [array_values($allApps), array_values($allAppsTopDrawer)];
     }
 }

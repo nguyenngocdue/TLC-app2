@@ -7,6 +7,7 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class ViewAllTypeCalendar extends Component
@@ -37,7 +38,9 @@ class ViewAllTypeCalendar extends Component
         [, $filterViewAllCalendar] = $this->getUserSettingsViewAllCalendar();
         $ownerId = isset($filterViewAllCalendar['owner_id']) ? $filterViewAllCalendar['owner_id'][0] : CurrentUser::id();
         $userCurrentCalendar = User::findFromCache($ownerId);
-        $allTimesheet = $dataSource->get()->map(function ($item) {
+        $dataCountWeek = $this->getDataCountOfWeek($ownerId);
+        $allTimesheet = $dataSource->get()->map(function ($item) use ($dataCountWeek) {
+            $item['count_duplicate'] = $dataCountWeek[$item->week]->count_duplicate;
             $item['week_value'] = $this->getWeekByDay($item->week)[1];
             $item['year_value'] = $this->getWeekByDay($item->week)[3];
             $item['url'] = route($item->getTable() . '.edit', $item->id);
@@ -55,16 +58,26 @@ class ViewAllTypeCalendar extends Component
             'userCurrentCalendar' => $userCurrentCalendar,
             'dataSourceLegend' => $this->dataSourceLegend(),
             'titleLegend' => 'Legend',
-
-
-
         ]);
+    }
+    private function getDataCountOfWeek($ownerId)
+    {
+        $dataQuery = DB::select("SELECT week , count(*) as count_duplicate
+        FROM $this->type 
+        WHERE owner_id = $ownerId
+        AND deleted_at is null
+        GROUP BY week
+        ");
+        $result = [];
+        foreach ($dataQuery as $value) {
+            $result[$value->week] = $value;
+        }
+        return $result;
     }
     private function dataSourceLegend()
     {
         return LibStatuses::getFor($this->type);
     }
-
     private function getWeekByDay($day)
     {
         $date = Carbon::parse($day);

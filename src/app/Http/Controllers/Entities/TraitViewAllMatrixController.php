@@ -15,16 +15,20 @@ trait TraitViewAllMatrixController
 
     private function indexViewAllMatrix($request)
     {
-
-        [, $filterViewAllCalendar] = $this->getUserSettingsViewAllCalendar();
-        $dataSource = $this->getDataSourceForViewCalendar($filterViewAllCalendar);
+        if (!empty($request->input())) {
+            (new UpdateUserSettings())($request);
+            return redirect($request->getPathInfo());
+        }
+        [$viewportDate] = $this->getUserSettingsViewAllMatrix();
+        // $dataSource = $this->getDataSourceForViewCalendar($filterViewAllCalendar);
         return view('dashboards.pages.entity-view-all-matrix', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'title' => '(Matrix)',
-            'valueAdvanceFilters' => $filterViewAllCalendar,
+            'viewportDate' => $viewportDate,
+            // 'valueAdvanceFilters' => $filterViewAllCalendar,
             'type' => Str::plural($this->type),
             'typeModel' => $this->typeModel,
-            'dataSource' => $dataSource,
+            // 'dataSource' => $dataSource,
             'trashed' => false,
             'frameworkTook' => $this->frameworkTook,
         ]);

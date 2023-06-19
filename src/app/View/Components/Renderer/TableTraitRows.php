@@ -29,6 +29,21 @@ trait TableTraitRows
         return $dataSource->items();
     }
 
+    private function parseCellObject($rawData)
+    {
+        $cellClassList = '';
+        $cellTitle = '';
+        $cellHref = '';
+        $value = '';
+        if (is_object($rawData)) {
+            if (isset($rawData->cell_class)) $cellClassList = $rawData->cell_class;
+            if (isset($rawData->cell_title)) $cellTitle = $rawData->cell_title;
+            if (isset($rawData->cell_href)) $cellHref = $rawData->cell_href;
+            if (isset($rawData->value)) $value = $rawData->value;
+        }
+        return [$cellClassList, $cellTitle, $cellHref, $value];
+    }
+
     private function makeTd($columns, $dataLineObj, $no, $dataLineIndex, $tableDebug)
     {
         $tds = [];
@@ -53,12 +68,38 @@ trait TableTraitRows
                     } else {
                         $rawData = $dataLineObj->$dataIndex ?? "";
                     }
-                    $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
+                    // $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
+                    $isArrayOfValueObject = false;
+                    if (is_array($rawData)) {
+                        $isArrayOfValueObject = true;
+                        foreach ($rawData as $item) {
+                            if (!isset($item->value)) {
+                                $isArrayOfValueObject = false;
+                                break;
+                            }
+                        }
+                        if ($isArrayOfValueObject) {
+                            $output = "";
+                            foreach ($rawData as $item) {
+                                $obj = $this->parseCellObject($item);
+                                [$cellClassList, $cellTitle, $cellHref, $value] = $obj;
+                                $div = "<span class='$cellClassList mx-0.5 px-2 py-1 rounded' title='$cellTitle'>" . $value . "</span>";
+                                if ($cellHref) $div = "<a href='$cellHref'>" . $div . "</a>";
+                                $output .= $div;
+                            }
+                            $rawData = $output;
+                        } else {
+                            $rawData = count($rawData) . " items";
+                        }
+                    }
                     $valueOfRawData = (is_object($rawData) && isset($rawData->value)) ? $rawData->value : $rawData;
 
                     $cellDivClass = '';
                     if (is_object($rawData)) {
                         if (isset($rawData->cell_div_class)) $cellDivClass = $rawData->cell_div_class;
+                    }
+                    if ($isArrayOfValueObject) {
+                        $cellDivClass = "flex justify-evenly";
                     }
                     $rendered = $renderer
                         // ? "A" 
@@ -75,14 +116,7 @@ trait TableTraitRows
             $styleStr = $this->getStyleStr($column);
             $rendered = ($tableDebug && ($renderer != 'no.') ? $name : "") . $rendered;
 
-            $cellClassList = '';
-            $cellTitle = '';
-            $cellHref = '';
-            if (is_object($rawData)) {
-                if (isset($rawData->cell_class)) $cellClassList = $rawData->cell_class;
-                if (isset($rawData->cell_title)) $cellTitle = $rawData->cell_title;
-                if (isset($rawData->cell_href)) $cellHref = $rawData->cell_href;
-            }
+            [$cellClassList, $cellTitle, $cellHref] = $this->parseCellObject($rawData);
             $breakWords = $this->noCss ? "break-all" : "";
             $tinyText = $this->noCss ? "text-xs" : "";
             $borderGray = $this->noCss ? "border-gray-400" : "";

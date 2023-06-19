@@ -35,14 +35,11 @@ class SidebarCalendarViewAll extends Component
      */
     public function render()
     {
-
         $type = $this->type;
         $user = CurrentUser::get();
-        // $user = User::find(95);
         $userId = $user->id;
         [, $filterViewAllCalendar, $viewAllCalendarShowAllChildren] = $this->getUserSettingsViewAllCalendar();
         $idsRenderCalendar = $filterViewAllCalendar['owner_id'] ?? [$userId];
-
         $tree = $this->getTreeOwnerIds($user);
         $ids = $this->getListOwnerIds($user);
         $idsFormatQuery = join(',', $ids);
@@ -66,7 +63,7 @@ class SidebarCalendarViewAll extends Component
         $timeKeepingTypeTSO = $this::TIME_KEEPING_TYPE_TSO;
         $timeKeepingTypeNONE = $this::TIME_KEEPING_TYPE_NONE;
         $id = CurrentUser::id();
-        $dataUserQuerySql = DB::select(
+        return DB::select(
             "SELECT * FROM users 
             WHERE ((id IN ($ids) 
             AND time_keeping_type IN ($timeKeepingTypeTSO,$timeKeepingTypeNONE)
@@ -76,7 +73,6 @@ class SidebarCalendarViewAll extends Component
             AND deleted_at IS NULL
             "
         );
-        return $dataUserQuerySql;
     }
     private function queryTotalPendingApprovalBySql($idsFormatQuery)
     {

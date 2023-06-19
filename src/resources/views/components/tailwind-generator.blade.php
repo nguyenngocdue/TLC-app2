@@ -158,3 +158,6 @@
 <span class="text-blue-700 border-blue-300 bg-blue-50 dark:bg-blue-200"></span>
 <span class="text-red-700 border-red-300 bg-red-50 dark:bg-red-200"></span>
 <span class="text-yellow-700 border-yellow-300 bg-yellow-50 dark:bg-yellow-200"></span>
+
+<!-- gloabl -->
+<div class="justify-evenly" ></div>

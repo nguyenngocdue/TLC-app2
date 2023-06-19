@@ -30,12 +30,10 @@ class SearchModal extends Component
      */
     public function render()
     {
-        $allApps = $this->getDataSource(LibApps::getAllShowBookmark());
-        $allAppsTopDrawer = $this->getDataSource(LibApps::getAllNavbarBookmark());
-        $allAppsTopDrawer = $this->formatDataSource($allApps);
+        [$allApps, $allAppsTopDrawer] = $this->getAllAppsOfSearchModalAndTopDrawer();
         return view('components.homepage.search-modal', [
-            'allApps' => array_values($allApps),
-            'allAppsTopDrawer' => array_values($allAppsTopDrawer),
+            'allApps' => $allApps,
+            'allAppsTopDrawer' => $allAppsTopDrawer,
             'currentUserIsAdmin' => CurrentUser::isAdmin(),
             'route' => route('updateBookmark'),
             'modalId' => $this->modalId,

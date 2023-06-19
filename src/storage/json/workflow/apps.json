@@ -1,7 +1,7 @@
 {
     "attachment": {
         "name": "attachment",
-        "package_tab": "manage_admin",
+        "package_tab": "application",
         "package": "system",
         "sub_package": "system_admin",
         "title": "Attachments",
@@ -224,7 +224,7 @@
     },
     "hr_timesheet_officer": {
         "name": "hr_timesheet_officer",
-        "package_tab": "manage_admin",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "Timesheet Office Staff",
@@ -240,7 +240,7 @@
     },
     "hr_timesheet_worker": {
         "name": "hr_timesheet_worker",
-        "package_tab": "manage_admin",
+        "package_tab": "application",
         "package": "hr_&_admin",
         "sub_package": "hr_admin",
         "title": "Timesheet Workers",
