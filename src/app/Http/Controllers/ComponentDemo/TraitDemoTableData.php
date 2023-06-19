@@ -163,7 +163,7 @@ trait TraitDemoTableData
     {
         return [
             [
-                'name' => 'a',
+                'name' => 'aaa111',
                 'create' => (object)[
                     'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
                     'cell_href' => 'https://www.google.com',
@@ -176,6 +176,30 @@ trait TraitDemoTableData
                     'cell_title' => 'Hover on me',
                     'cell_class' => 'bg-yellow-300 text-white font-bold',
                     'cell_href' => 'https://www.google.com',
+                ],
+            ],
+            [
+                'name' => 'bbb222',
+                'create' => (object)[
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'w-11',
+                ],
+                'value' => [
+                    (object)[
+                        'value' => 123,
+                        'cell_title' => 'Hover on me',
+                        'cell_class' => 'bg-blue-300 text-white font-bold',
+                        'cell_href' => 'https://www.google.com',
+                    ],
+                    (object)[
+                        'value' => 789,
+                        'cell_title' => 'Hover on me',
+                        'cell_class' => 'bg-green-300 text-white font-bold',
+                        'cell_href' => 'https://www.google.com',
+                    ]
                 ],
             ],
         ];

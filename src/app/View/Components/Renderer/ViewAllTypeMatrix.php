@@ -28,14 +28,25 @@ class ViewAllTypeMatrix extends Component
 
     function getXAxis()
     {
-        $xAxis = ['2023-06-12', '2023-06-13', '2023-06-14', '2023-06-15', '2023-06-16', '2023-06-17', '2023-06-18',];
+        $xAxis = [];
+        $date0 = date(Constant::FORMAT_DATE_MYSQL); //today date
+        for ($i = -7; $i < 3; $i++) {
+            $date = date(Constant::FORMAT_DATE_MYSQL, strtotime("+$i day", strtotime($date0)));
+            $xAxis[] = date(Constant::FORMAT_DATE_MYSQL, strtotime($date));
+        }
+        // dump($xAxis);
+
+        // $xAxis = ['2023-06-12', '2023-06-13', '2023-06-14', '2023-06-15', '2023-06-16', '2023-06-17', '2023-06-18',];
         $xAxis = array_map(fn ($c) => ['dataIndex' => $c, 'title' => date(Constant::FORMAT_DATE_ASIAN, strtotime($c))], $xAxis);
         return $xAxis;
     }
 
-    function getDataSource()
+    function getDataSource($xAxis)
     {
-        $lines = Hr_timesheet_worker::whereBetween('ts_date', ['2023-06-12', '2023-06-18'])->get();
+        // dump($xAxis);
+        $firstDay = $xAxis[0]['dataIndex'];
+        $lastDay =  $xAxis[sizeof($xAxis) - 1]['dataIndex'];
+        $lines = Hr_timesheet_worker::whereBetween('ts_date', [$firstDay, $lastDay])->get();
         return $lines;
     }
 
@@ -51,15 +62,19 @@ class ViewAllTypeMatrix extends Component
     function cellRenderer($cell)
     {
         // return ($cell);
-        // foreach($cell as $document){
-
-        // }
-        return (object)[
-            'value' => $cell[0]->id,
-            // 'cell_title' => 'Open',
-            'cell_class' => 'bg-yellow-300',
-            'cell_href' => route($this->type . ".edit", $cell[0]->id),
-        ];
+        $result = [];
+        foreach ($cell as $document) {
+            $result[] = (object)[
+                'value' => $document->id,
+                // 'cell_title' => 'Open',
+                'cell_class' => 'bg-yellow-300',
+                'cell_href' => route($this->type . ".edit", $document->id),
+            ];
+        }
+        // dump($result);
+        if (sizeof($result) == 1) return $result[0];
+        return $result;
+        // return [1, 2];
     }
 
     function mergeDataSource($xAxis, $yAxis, $dataSource)
@@ -99,7 +114,7 @@ class ViewAllTypeMatrix extends Component
     {
         $xAxis = $this->getXAxis();
         $yAxis = $this->getYAxis();
-        $dataSource = $this->getDataSource();
+        $dataSource = $this->getDataSource($xAxis);
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $dataSource);
         $columns = [
             ['dataIndex' => 'name'],
