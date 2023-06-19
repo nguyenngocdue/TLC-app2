@@ -86,8 +86,14 @@
                 <div class="mt-8 no-print"></div>
             </div> 
         </div>
-    
+        
         {!! Toastr::message() !!}
+        <script>
+            window.Echo.channel('test')
+                .listen('.Test', (e) => {
+                    console.log(e);
+                })
+        </script>
 </body>
 </html>
 

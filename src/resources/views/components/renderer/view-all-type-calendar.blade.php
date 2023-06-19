@@ -187,16 +187,18 @@
                 }else{
                     dayHtml = '';
                     urlCreate = genUrlCreate(routeCreate,weeksDivide,yearCurrent,getIndexMonth(i));
-                    [url,classHover,id,bg_color,text_color] = checkTimeSheet(allTimesheet,weeksDivide,getIndexMonth(i),yearCurrent,routeCreate);
+                    [url,classHover,id,bg_color,text_color,count_duplicate] = checkTimeSheet(allTimesheet,weeksDivide,getIndexMonth(i),yearCurrent,routeCreate);
                     dayHtml = renderHtmlDays(dayHtml,weeksDivide,getIndexMonth(i));
+                    var htmlCountDuplicate = count_duplicate > 1 ? `<x-renderer.badge>${count_duplicate}</x-renderer.badge>` : '';
                     html += url ? `<div class="grid grid-cols-7 gap-0 font-semibold">
-                                                <a href="${url}" title="#${id}" class="${classHover} col-span-7 focus:outline-none bg-${bg_color} hover:bg-${text_color} text-${text_color} hover:text-${bg_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                                <a href="${url}" title="#${id}" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')" class="relative ${classHover} col-span-7 focus:outline-none bg-${bg_color} hover:bg-${text_color} text-${text_color} hover:text-${bg_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                                     <div class="grid grid-cols-7 gap-1 font-semibold text-center ">
                                                         ${dayHtml}
                                                     </div>
+                                                    ${htmlCountDuplicate}
                                                 </a>
                                             </div>` 
-                                            : `<div title="Create new timesheet"  class="focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                            : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                                     <button onclick="callApiCreateTimesheet('${urlCreate}')" class="${classHover} w-full grid grid-cols-7 gap-1 font-semibold text-center text-gray-800">
                                                             ${dayHtml}
                                                     </button>
@@ -226,13 +228,16 @@
         let htmlDays = '';
         htmlDays = renderHtmlDays(htmlDays,array,month);
         let urlCreate = genUrlCreate(routeCreate,array,year,month);
-        [url,classHover,id,bg_color,text_color] = checkTimeSheet(allTimesheet,array,month,year,routeCreate);
+        [url,classHover,id,bg_color,text_color,count_duplicate] = checkTimeSheet(allTimesheet,array,month,year,routeCreate);
+        var htmlCountDuplicate = count_duplicate > 1 ? `<x-renderer.badge>${count_duplicate}</x-renderer.badge>` : '';
         let result =  url
-                    ? `<a href="${url}" title="#${id}" class="${classHover} col-span-${lengthArr} focus:outline-none text-white bg-${bg_color} hover:bg-${text_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <div class="grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-${text_color} hover:text-${bg_color}">
+                    ? `<a href="${url}" title="#${id}" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')" class="relative ${classHover} col-span-${lengthArr} focus:outline-none text-${text_color} hover:text-${bg_color} bg-${bg_color} hover:bg-${text_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <div class="grid grid-cols-${lengthArr} gap-1 font-semibold text-center ">
                                 ${htmlDays}
                             </div>
-                        </a>` : `<div title="Create new timesheet"  class="${classHover} col-span-${lengthArr} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            ${htmlCountDuplicate}
+                        </a>
+                        ` : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="${classHover} col-span-${lengthArr} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                             <button  onclick="callApiCreateTimesheet('${urlCreate}')" class="w-full grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-gray-800">
                                     ${htmlDays}
                             </button>
@@ -305,12 +310,12 @@
                     classHover = `hover-${week}-${yearCurrent}`;
                     if(day == 26){
                         if(dateTime == timesheet.week){
-                            return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color];
+                            return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
                         }else{
                             return null;
                         }
                     }
-                    return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color];
+                    return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
                 }
     }
     function callApiCreateTimesheet(url){
@@ -334,5 +339,14 @@
                 toastr.error(jqXHR.responseJSON.message);
             },
         })
+    }
+    function onHover(classHover,bgColor,textColor){
+        if(classHover){
+        $(`.${classHover}`).hover(function() {
+            $(`.${classHover}`).addClass(`bg-${textColor} text-${bgColor}`);
+            }, function() {
+            $(`.${classHover}`).removeClass(`bg-${textColor} text-${bgColor}`);
+            });
+        }
     }
 </script>

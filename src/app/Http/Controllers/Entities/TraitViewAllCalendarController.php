@@ -3,13 +3,7 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
-use App\Http\Controllers\UpdateUserSettings;
-use App\Http\Controllers\Workflow\LibStatuses;
-use App\Models\User;
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\CurrentUser;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TraitViewAllCalendarController
