@@ -10,19 +10,16 @@ class ReportPivotDataFields
     private static function addResultIntoData($data, $result, $fieldName, $method)
     {
         return array_map(function ($item) use ($result, $fieldName, $method) {
-            return array_merge($item, [$method . '_' . $fieldName => $result]);
+            return array_merge( [$method . '_' . $fieldName => $result], $item);
         }, $data);
     }
 
-    public static function executeFunctions($fieldNames, $data)
+    public static function executeFunctions($dataAggregations, $data)
     {
-        foreach ($fieldNames as $fieldName) {
-            $parts = explode('-', $fieldName, 2);
-            $method = $parts[0];
-            $field = $parts[1] ?? '';
+        foreach ($dataAggregations as $field => $fn) {
             foreach ($data as &$items) {
                 $result = null;
-                switch ($method) {
+                switch ($fn) {
                     case 'sum':
                         $result = array_sum(array_column($items, $field));
                         break;
@@ -32,11 +29,10 @@ class ReportPivotDataFields
                     default:
                         break;
                 }
-                $items = self::addResultIntoData($items, $result, $field, $method);
+                $items = self::addResultIntoData($items, $result, $field, $fn);
             }
 
         }
-        // dd($data);
         return $data;
     }
 }

@@ -12,9 +12,17 @@ class ReportPivot
         $newArray = array_map(function ($item) use ($columnFields) {
             foreach ($columnFields as $value) {
                 $date = DateTime::createFromFormat('Y-m-d', $item[$value['fieldIndex']]);
-                $reversedDate = $date->format('d-m-Y');
-                $strDate = str_replace('-', '_', $reversedDate).'_'.$value['title'];
-                $item[$strDate] = $item[$value['valueFieldIndex']];
+                if ($date) {
+                    $reversedDate = $date->format('d-m-Y');
+                    $strDate = str_replace('-', '_', $reversedDate);
+                    $_strDate = isset($value['title']) ? str_replace('-', '_', $reversedDate).'_'.$value['title'] : $strDate;
+                    // $item[$strDate] = $item[$value['valueFieldIndex']];
+                    $item[$_strDate] = $item[$value['valueFieldIndex']];
+                } else {
+                    $key = str_replace(' ','_',strtolower($item[$value['fieldIndex']]). '_'. $item['time_sheet_start_time']);
+                    $item[$key] = $item[$value['valueFieldIndex']];
+                }
+                // dd($item);
             }
             return $item;
         }, $data);
@@ -42,4 +50,39 @@ class ReportPivot
         }
         return $data; 
     }
+    public static function isValidDate($dateString, $dateFormat = 'Y-m-d') {
+        $date = DateTime::createFromFormat($dateFormat, $dateString);
+        
+        return ($date && $date->format($dateFormat) === $dateString);
+    }
+
+    public static function sortItems($data, $arrayStr) {
+        $groups = [];
+        // dd($data);
+        foreach ($data as $value) {
+                foreach ($arrayStr as $item) {
+                    if (str_contains($value, $item)) {
+                        $groups[$item][] = $value;
+                        break;
+                    }
+                }
+            // $groups['_'][] = $value;
+        }
+
+        $group1 = array_merge(...array_values($groups));
+        $group2 = array_diff($data, $group1);
+        return array_merge($group2, $group1);
+    }
+
+    public static function combineArrays($keys, $values) {
+        $combined_array = [];
+        $count = min(count($keys), count($values));
+    
+        for ($i = 0; $i < $count; $i++) {
+            $combined_array[$keys[$i]] = $values[$i];
+        }
+
+        return $combined_array;
+    }
+    
 }

@@ -289,8 +289,8 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         $dataWaitingFor = $this->dataWaitingForLooking();
         $dataSource = array_map(fn($item) => (Array)$item, $data);
         array_walk($dataSource, function ($value, $key) use (&$dataSource, $dataWaitingFor) {
-            $datesHaveValue = Report::retrieveDataByKeyIndex($value,'pj_task_id');
-            $infoHeadUsers = Report::retrieveDataByKeyIndex($value, 'pj_task_id', true);
+            $datesHaveValue = Report::retrieveDataByIndex($value,'pj_task_id');
+            $infoHeadUsers = Report::retrieveDataByIndex($value, 'pj_task_id', true);
             $dataHeadUsers = $this->addInfoHeadUsers($infoHeadUsers, $dataWaitingFor);
             $dataSource[$key] =  $dataHeadUsers +$datesHaveValue;
         });
@@ -337,7 +337,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
     protected function changeValueData($dataSource, $modeParams)
     {
         foreach ($dataSource as $key => $values) {
-            $dateStrings = Report::retrieveDataByKeyIndex($values, 'department_name');
+            $dateStrings = Report::retrieveDataByIndex($values, 'department_name');
             foreach ($dateStrings as $dateString => $value) {
                 $_dateString = str_replace('_', '/', $dateString);
                 $isSaturdayOrSunday = $this->isSaturdayOrSunday($_dateString);

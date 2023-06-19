@@ -44,6 +44,12 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'editable' => true,
                 'align' => 'center',
             ],
+            [
+                'dataIndex' => 'data_aggregations',
+                'renderer' => 'text4',
+                'editable' => true,
+                'align' => 'center',
+            ],
         ];
     }
 }

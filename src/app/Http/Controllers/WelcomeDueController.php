@@ -6,22 +6,22 @@ use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\Report;
 use App\Utils\Support\ReportPivot;
 use App\Utils\Support\ReportPivotDataFields;
-use App\Utils\Support\Tree\BuildTree;
-use AWS\CRT\HTTP\Message;
+use DateInterval;
+use DatePeriod;
+use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+
 
 class WelcomeDueController extends Controller
 {
+    protected $modeType = '';
     public function getType()
     {
         return "dashboard";
     }
 
 
-    public function getDataSource()
+    private function getDataSource()
     {
         $dataSource = [
             [
@@ -88,34 +88,6 @@ class WelcomeDueController extends Controller
                 "time_sheet_hours_otr" => 2,
                 "time_sheet_hours_wfh" => 7,
                 "time_sheet_mins" => 480,
-                "sub_project_id" => 21,
-                "user_id" => 26,
-                "discipline_id" => 45,
-                "lod_id" => 228,
-                "pj_task_id" => 57,
-                "workplace_id" => 4,
-                "type_id" => 2,
-                "department_id" => 7,
-                "category_id" => 3,
-                "sub_project_name" => "HLC N17",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QA/QC",
-                "staff_id" => "TLCM01071",
-                "user_name" => "Binh Nguyen Nu Thien",
-                "workplace_name" => "VN-TF3",
-                "category_name" => "CMP",
-                "type_name" => "Local",
-                "discipline_name" => "Document Control (QA/QC)",
-                "pj_task_name" => "QA/QC Documentation"
-            ],
-            [
-                "time_sheet_start_time" => "2022-10-03",
-                "time_sheet_start_time_otr" => "2022-10-03",
-                "time_sheet_start_time_wfh" => "2022-10-03",
-                "time_sheet_hours" => 8.0,
-                "time_sheet_hours_otr" => 3,
-                "time_sheet_hours_wfh" => 5,
-                "time_sheet_mins" => 480,
                 "sub_project_id" => 82,
                 "user_id" => 26,
                 "discipline_id" => 45,
@@ -137,11 +109,39 @@ class WelcomeDueController extends Controller
                 "pj_task_name" => "QA/QC Documentation"
             ],
             [
+                "time_sheet_start_time" => "2022-10-03",
+                "time_sheet_start_time_otr" => "2022-10-03",
+                "time_sheet_start_time_wfh" => "2022-10-03",
+                "time_sheet_hours" => 8.0,
+                "time_sheet_hours_otr" => 3,
+                "time_sheet_hours_wfh" => 5,
+                "time_sheet_mins" => 480,
+                "sub_project_id" => 21,
+                "user_id" => 26,
+                "discipline_id" => 45,
+                "lod_id" => 228,
+                "pj_task_id" => 57,
+                "workplace_id" => 4,
+                "type_id" => 2,
+                "department_id" => 7,
+                "category_id" => 3,
+                "sub_project_name" => "HLC N17",
+                "time_sheet_lod_name" => "LOD400",
+                "department_name" => "QA/QC",
+                "staff_id" => "TLCM01071",
+                "user_name" => "Binh Nguyen Nu Thien",
+                "workplace_name" => "VN-TF3",
+                "category_name" => "CMP",
+                "type_name" => "Local",
+                "discipline_name" => "Document Control (QA/QC)",
+                "pj_task_name" => "QA/QC Documentation"
+            ],
+            [
                 "time_sheet_start_time" => "2022-11-28",
                 "time_sheet_start_time_otr" => "2022-11-28",
                 "time_sheet_start_time_wfh" => "2022-11-28",
                 "time_sheet_hours" => 7.5,
-                "time_sheet_hours_otr" => 7.5,
+                "time_sheet_hours_otr" => 6,
                 "time_sheet_hours_wfh" => 7.5,
                 "time_sheet_mins" => 450,
                 "sub_project_id" => 82,
@@ -169,8 +169,8 @@ class WelcomeDueController extends Controller
                 "time_sheet_start_time_otr" => "2022-11-29",
                 "time_sheet_start_time_wfh" => "2022-11-29",
                 "time_sheet_hours" => 8.5,
-                "time_sheet_hours_otr" => 8.5,
-                "time_sheet_hours_wfh" => 8.5,
+                "time_sheet_hours_otr" => 1.5,
+                "time_sheet_hours_wfh" => 5,
                 "time_sheet_mins" => 510,
                 "sub_project_id" => 82,
                 "user_id" => 49,
@@ -234,7 +234,7 @@ class WelcomeDueController extends Controller
                 "lod_id" => 228,
                 "pj_task_id" => 61,
                 "workplace_id" => 4,
-                "type_id" => 2,
+                "type_id" => 1,
                 "department_id" => 7,
                 "category_id" => 3,
                 "sub_project_name" => "HLC N18",
@@ -262,7 +262,7 @@ class WelcomeDueController extends Controller
                 "lod_id" => 228,
                 "pj_task_id" => 61,
                 "workplace_id" => 4,
-                "type_id" => 2,
+                "type_id" => 1,
                 "department_id" => 7,
                 "category_id" => 3,
                 "sub_project_name" => "HLC N18",
@@ -290,7 +290,7 @@ class WelcomeDueController extends Controller
                 "lod_id" => 228,
                 "pj_task_id" => 61,
                 "workplace_id" => 4,
-                "type_id" => 2,
+                "type_id" => 1,
                 "department_id" => 7,
                 "category_id" => 3,
                 "sub_project_name" => "HLC N18",
@@ -309,7 +309,7 @@ class WelcomeDueController extends Controller
     }
 
 
-    function processData($lineData, $rowFields)
+    private function processData($lineData, $rowFields)
     {
         $dataOutput = [];
         foreach ($lineData as $line) {
@@ -318,9 +318,7 @@ class WelcomeDueController extends Controller
             foreach ($rowFields as $param) {
                 if (isset($line[$param])) {
                     $params[$param] = $line[$param];
-                } else {
-                    $params[$param] = null;
-                }
+                } else $params[$param] = null;
             }
             $nestedArray = &$dataOutput;
             foreach ($params as $paramValue) {
@@ -336,7 +334,7 @@ class WelcomeDueController extends Controller
         return $dataOutput;
     }
 
-    function checkConditions($data, $conditions)
+    private function checkConditions($data, $conditions)
     {
         foreach ($conditions as $field => $values) {
             if (!isset($data[$field])) return false;
@@ -344,7 +342,8 @@ class WelcomeDueController extends Controller
         }
         return true;
     }
-    function reduceData($linesData, $conditions)
+    
+    private function reduceData($linesData, $conditions)
     {
         $conditions = Report::dataWithoutNull($conditions);
         $result = array_filter($linesData, function ($data) use ($conditions) {
@@ -352,7 +351,6 @@ class WelcomeDueController extends Controller
         });
         return $result;
     }
-
 
     private function transferData($dataSource, $columnFields)
     {
@@ -363,139 +361,116 @@ class WelcomeDueController extends Controller
         );
     }
 
-
-    public function index(Request $request)
+    private function getDatesBetween($startDate, $endDate)
     {
-        $lib = LibPivotTables::getFor("hr_timesheet_project_date");
-        // dd($lib);
-        $rowFields = $lib['row_fields'];
+        $dateList = array();
+        $start = DateTime::createFromFormat('d/m/Y', $startDate);
+        $end = DateTime::createFromFormat('d/m/Y', $endDate);
+        $end = $end->modify('+1 day');
+        $interval = new DateInterval('P1D');
+        $dateRange = new DatePeriod($start, $interval, $end);
+        foreach ($dateRange as $date) {
+            $dateList[] = $date->format('d/m/Y');
+        }
+        return $dateList;
+    }
+
+    private function getStringDates($modeParams)
+    {
+        $pickerDate = $modeParams['picker_date'] ?? '13/11/2022-01/12/2022';
+        [$startDate, $endDate] = Report::explodePickerDate($pickerDate);
+        $dates = self::getDatesBetween($startDate, $endDate);
+        $strDates = array_map(fn ($item) => str_replace('/', '_', $item), $dates);
+        return $strDates;
+    }
+
+    protected function makeHeadColumn(){
+        return [[]];
+    }
+    protected function makeColumnFields(){
+        return [[]];
+    }
+
+
+    private function makeColumns( $dataOutput, $columnFields)
+    {
+        // Create Column Render
+        $column1 = $this->makeHeadColumn();
+        $col = [];
+        foreach ($dataOutput as $value) $col = array_unique(array_merge($col, array_keys($value)));
+        $fieldDates = Report::retrieveDataByIndex($col, 'pj_task_name', false, 'value');
+        $titles = array_column($columnFields, 'title');
+        $data =  ReportPivot::sortItems($fieldDates, $titles);
+
+        $column2 = array_map(fn ($item) => [
+            'title' => str_replace('_', '/', $item),
+            'dataIndex' => $item,
+            'align' => 'center',
+            'width' => 40
+        ], $data);
+
+        [$rowFields,$filters, $dataAggregations] =  $this->getDataFields();
+        $column3 = [];
+        foreach ($dataAggregations as $filed => $fn) {
+            $column3[] = [
+            'dataIndex' => $fn.'_'.$filed,
+            'align' => 'right',
+            'width' => 40
+            ];
+        };
+        $tableColumns = array_merge($column1, $column2, $column3);
+        return $tableColumns;
+    }
+
+
+    private function getDataFields(){
+        $lib = LibPivotTables::getFor($this->modeType);
         $dataFields = $lib['data_fields'];
+        $rowFields = $lib['row_fields'];
         $filters = $lib['filters'];
-        $columnFields = $lib['column_fields'];
-        // dd($filters, $linesData);
+        $dataAggregations =ReportPivot::combineArrays($dataFields, $lib['data_aggregations']);
+        return [$rowFields,$filters, $dataAggregations];
+    }
+
+    protected function makeDataOutput($columnFields)
+    {
+        [$rowFields,$filters, $dataAggregations] =  $this->getDataFields();
         $valueFilters = array_combine($filters, [[1, 4], [7, 8]]);
-
-        $columnFields = [
-            [
-                'title' => 'time',
-                'fieldIndex' => 'time_sheet_start_time',
-                'valueFieldIndex' => 'time_sheet_hours'
-            ],
-            [
-                'title' => 'otr',
-                'fieldIndex' => 'time_sheet_start_time_otr',
-                'valueFieldIndex' => 'time_sheet_hours_otr'
-            ],
-            [
-                'title' => 'wfh',
-                'fieldIndex' => 'time_sheet_start_time_wfh',
-                'valueFieldIndex' => 'time_sheet_hours_wfh'
-            ],
-        ];
-
         // Step 1: reduce data from Filters columns
         $linesData = $this->getDataSource();
         $dataReduce = self::reduceData($linesData, $valueFilters);
+        // dd($valueFilters, $dataReduce);
 
         // Step 2: group data from Row Fields columns
         $dataProcess = self::processData($dataReduce, $rowFields);
         $dataProcess = array_values(array_map(fn ($item) => ReportPivot::getLastArray($item), $dataProcess));
-
+        // dd($dataProcess);
+        
         // Step 3: transfer data from Column Fields columns
         $transferData = $this->transferData($dataProcess, $columnFields);
 
         //Step 4: Calculate data from Data Fields columns
-        $dataOutput = array_map(fn($items) => ReportPivotDataFields::executeFunctions($dataFields, $items), $transferData);
-        $dataRender = ReportPivot::mergeChildrenValue($dataOutput);
+        $dataCalculation = array_map(fn ($items) => ReportPivotDataFields::executeFunctions($dataAggregations, $items), $transferData);
+        $dataOutput = ReportPivot::mergeChildrenValue($dataCalculation);
 
-        // dd($transferData, $dataRender);
-
-  
-        $column1 = [
-            [
-                "title" => "Sub Project",
-                "dataIndex" => "sub_project_name",
-                "align" => 'left',
-                "width" => 130,
-            ],
-            [
-                'title' => "LOD",
-                "dataIndex" => "time_sheet_lod_name",
-                "align" => 'left',
-                "width" => 130,
-            ],
-            [
-                "title" => "Department",
-                "dataIndex" => "department_name",
-                "align" => 'left',
-                "width" => 180,
-            ],
-            [
-                "title" => "Staff ID",
-                "dataIndex" => "staff_id",
-                "align" => 'left',
-                "width" => 120,
-            ],
-            [
-                "title" => "User",
-                "dataIndex" => "user_name",
-                "align" => 'left',
-                "width" => 200,
-            ],
-            [
-                "title" => "Workplace",
-                "dataIndex" => "workplace_name",
-                "align" => 'left',
-                "width" => 80,
-            ],
-            [
-                "title" => "Category",
-                "dataIndex" => "category_name",
-                "align" => 'left',
-                "width" => 80,
-            ],
-            [
-                "title" => "Type",
-                "dataIndex" => "type_name",
-                "align" => 'left',
-                "width" => 80,
-            ],
-            [
-                "title" => "Discipline",
-                "dataIndex" => "discipline_name",
-                "align" => 'left',
-                "width" => 220,
-            ],
-            [
-                "title" => "Task",
-                "dataIndex" => "pj_task_name",
-                "align" => 'left',
-                "width" => 280,
-            ],
-        
-        ];
-        
-
-        $col = [];
-        foreach ($dataRender as $key => $value ) {
-            // dd($value);
-            $col = array_unique(array_merge($col, array_keys($value)));
+        $group = Report::groupArrayByKey($dataOutput, $rowFields[0]);
+        ksort($group);
+        $dataSource = [];
+        foreach ($group as $value ){
+           $dataSource = array_merge($dataSource,collect($value)->sortBy($rowFields[1])->toArray());
         }
-        $col = array_slice($col, 26, 1000);
-        sort($col);
+        return collect($dataSource);
+    }
 
-        $column2 = array_map(fn($item) => [
-            'dataIndex' => $item,
-            'align' => 'center',
-            'width' => 50
-        ], $col);
-
-        $tableColumns = $column1 + $column2;
-
+    public function index(Request $request)
+    {
+        $columnFields = $this->makeColumnFields();
+        $dataOutput = $this->makeDataOutput($columnFields);
+        // dd($dataOutput);
+        $tableColumns = $this->makeColumns($dataOutput, $columnFields);
         return view("welcome-due", [
-            'tableDataSource' => $dataRender,
+            'tableDataSource' => $dataOutput,
             'tableColumns' => $tableColumns
         ]);
     }
-
 }

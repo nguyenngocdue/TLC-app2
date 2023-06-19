@@ -57,7 +57,7 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
         return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
     }
 
-    function getDatesBetween($startDate, $endDate)
+    private function getDatesBetween($startDate, $endDate)
     {
         $dateList = array();
         // Convert start and end dates to DateTime objects
@@ -265,8 +265,8 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
         // dd($dataSource);
         $strDates = $this->getStringDates($modeParams);
         array_walk($dataSource, function ($value, $key) use ($strDates, &$dataSource, $dataWaitingFor) {
-            $datesHaveValue = Report::retrieveDataByKeyIndex($value,'pj_task_id');
-            $infoHeadUsers = Report::retrieveDataByKeyIndex($value, 'pj_task_id', true);
+            $datesHaveValue = Report::retrieveDataByIndex($value,'pj_task_id');
+            $infoHeadUsers = Report::retrieveDataByIndex($value, 'pj_task_id', true);
             $dataHeadUsers = $this->addInfoHeadUsers($infoHeadUsers, $dataWaitingFor);
             $totalTime = array_sum($datesHaveValue);
             $diffArray = array_diff(array_values($strDates), array_keys($datesHaveValue));
@@ -290,7 +290,7 @@ class Hr_timesheet_line_010 extends Report_ParentReportController
     protected function changeValueData($dataSource, $modeParams)
     {
         foreach ($dataSource as $key => $values) {
-            $dateStrings = Report::retrieveDataByKeyIndex($values, 'department_name');
+            $dateStrings = Report::retrieveDataByIndex($values, 'department_name');
             foreach ($dateStrings as $dateString => $value) {
                 $_dateString = str_replace('_', '/', $dateString);
                 $isSaturdayOrSunday = $this->isSaturdayOrSunday($_dateString);

@@ -157,11 +157,16 @@ class Report
         return DateTime::createFromFormat('Y/m/d', $strDate)->format($typeFormat);
     }
 
-    public static function retrieveDataByKeyIndex($array, $key, $reverse = false)
+    public static function retrieveDataByIndex($array, $key, $reverse = false, $type='key')
     {
-        $idx = array_search($key, array_keys($array));
+        $idx = array_search($key, array_values($array));
+        if ($type == 'key') {
+            $idx = array_search($key, array_keys($array));
+        }
         if ($reverse) return array_slice($array, 0, $idx + 1);
-        return array_slice($array, $idx + 1, count($array) - $idx);
+        $data = array_slice($array, $idx + 1, count($array) - $idx);
+        sort($data);
+        return $data;
     }
 
     public static function dataWithoutNull($data)
