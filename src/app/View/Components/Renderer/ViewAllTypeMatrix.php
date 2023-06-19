@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Hr_timesheet_worker;
 use App\Models\User_team_ot;
 use App\Utils\Constant;
@@ -16,13 +17,14 @@ class ViewAllTypeMatrix extends Component
      */
     public function __construct(
         private $type,
+        private $yAxis = User_team_ot::class,
     ) {
         //
     }
 
     function getYAxis()
     {
-        $yAxis = User_team_ot::get();
+        $yAxis = $this->yAxis::orderBy('name')->get();
         return $yAxis;
     }
 
@@ -30,14 +32,16 @@ class ViewAllTypeMatrix extends Component
     {
         $xAxis = [];
         $date0 = date(Constant::FORMAT_DATE_MYSQL); //today date
-        for ($i = -7; $i < 3; $i++) {
+        for ($i = -7; $i < 2; $i++) {
             $date = date(Constant::FORMAT_DATE_MYSQL, strtotime("+$i day", strtotime($date0)));
             $xAxis[] = date(Constant::FORMAT_DATE_MYSQL, strtotime($date));
         }
         // dump($xAxis);
 
-        // $xAxis = ['2023-06-12', '2023-06-13', '2023-06-14', '2023-06-15', '2023-06-16', '2023-06-17', '2023-06-18',];
-        $xAxis = array_map(fn ($c) => ['dataIndex' => $c, 'title' => date(Constant::FORMAT_DATE_ASIAN, strtotime($c))], $xAxis);
+        $xAxis = array_map(fn ($c) => [
+            'dataIndex' => $c,
+            'title' => date(Constant::FORMAT_DATE_ASIAN, strtotime($c)) . "<br>" . date(Constant::FORMAT_WEEKDAY_SHORT, strtotime($c)),
+        ], $xAxis);
         return $xAxis;
     }
 
@@ -63,11 +67,16 @@ class ViewAllTypeMatrix extends Component
     {
         // return ($cell);
         $result = [];
+        $statuses = LibStatuses::getFor($this->type);
         foreach ($cell as $document) {
+            $status = $statuses[$document->status];
+            // dump($statuses[$status]);
             $result[] = (object)[
                 'value' => $document->id,
                 // 'cell_title' => 'Open',
-                'cell_class' => 'bg-yellow-300',
+                $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'],
+                $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']),
+                'cell_class' => "$bgColor $textColor",
                 'cell_href' => route($this->type . ".edit", $document->id),
             ];
         }
@@ -81,16 +90,25 @@ class ViewAllTypeMatrix extends Component
     {
         $dataSource = $this->reIndexDataSource($dataSource, 'ts_date', 'team_id',);
         $result = [];
+        $tableName = (new $this->yAxis)->getTableName();
         foreach ($yAxis as $y) {
             $yId = $y->id;
-            $line['name'] = $y->name;
-            // $line['count'] = -11111111;
+            $line['name_for_group_by'] = $y->name;
+
+            $line['name'] = (object)[
+                'value' => $y->name,
+                'cell_title' => "(#" . $y->id . ")",
+                'cell_class' => "text-blue-800",
+                'cell_href' => route($tableName . ".edit", $y->id),
+            ];
             $line['count'] = count($y->getOtMembers());
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 $line[$xId] = (object)[
-                    'value' =>    "Create New",
+                    'value' => '<i class="fa-duotone fa-circle-plus"></i>',
                     'cell_href' => route($this->type . ".create"),
+                    'cell_class' => "text-center text-green-800",
+                    'cell_title' => "Create a new document",
                 ];
             }
             foreach ($xAxis as $x) {
@@ -117,7 +135,8 @@ class ViewAllTypeMatrix extends Component
         $dataSource = $this->getDataSource($xAxis);
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $dataSource);
         $columns = [
-            ['dataIndex' => 'name'],
+            ['dataIndex' => 'name_for_group_by', 'hidden' => true],
+            ['dataIndex' => 'name',],
             ['dataIndex' => 'count', 'align' => 'center'],
             ...$xAxis,
         ];
