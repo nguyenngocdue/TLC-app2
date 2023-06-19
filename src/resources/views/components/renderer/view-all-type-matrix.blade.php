@@ -1,4 +1,4 @@
-<div class="bg-white w-full my-2 flex justify-between items-center">
+<div class="bg-white w-full my-2 p-1 rounded flex justify-between items-center">
      <div>
           {{-- <i class="w-5 h-full fa-regular fa-arrow-left"></i>  --}}
           <x-renderer.button class="border border-blue-700" href="{!! $href[0] !!}">
