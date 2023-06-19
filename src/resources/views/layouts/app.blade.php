@@ -88,12 +88,12 @@
         </div>
         
         {!! Toastr::message() !!}
-        <script>
+        {{-- <script>
             window.Echo.channel('test')
                 .listen('.Test', (e) => {
                     console.log(e);
                 })
-        </script>
+        </script> --}}
 </body>
 </html>
 

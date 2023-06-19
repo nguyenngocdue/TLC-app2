@@ -26,12 +26,10 @@ class TopDrawer extends Component
      */
     public function render()
     {
-        $allApps = $this->getDataSource(LibApps::getAllShowBookmark());
-        $allAppsTopDrawer = $this->getDataSource(LibApps::getAllNavbarBookmark());
-        $allAppsTopDrawer = $this->formatDataSource($allAppsTopDrawer);
+        [$allApps, $allAppsTopDrawer] = $this->getAllAppsOfSearchModalAndTopDrawer();
         return view('components.homepage.top-drawer', [
-            'allApps' => array_values($allApps),
-            'allAppsTopDrawer' => array_values($allAppsTopDrawer),
+            'allApps' => $allApps,
+            'allAppsTopDrawer' => $allAppsTopDrawer,
             'route' => route('updateBookmark'),
         ]);
     }

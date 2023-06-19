@@ -2,8 +2,7 @@
 
 namespace App\View\Components\Homepage;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class MenuNotification extends Component
@@ -25,8 +24,9 @@ class MenuNotification extends Component
      */
     public function render()
     {
-        $notifications = auth()->user()->notifications->toArray();
-        $unreadNotifications = auth()->user()->unreadNotifications->toArray();
+        $user = CurrentUser::get();
+        $notifications = $user->notifications->toArray();
+        $unreadNotifications = $user->unreadNotifications->toArray();
         return view('components.homepage.menu-notification', [
             'notifications' => $notifications,
             'unreadNotifications' => $unreadNotifications,
