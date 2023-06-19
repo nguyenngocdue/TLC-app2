@@ -18,8 +18,10 @@ class ViewAllTypeMatrix extends Component
     public function __construct(
         private $type,
         private $yAxis = User_team_ot::class,
+        private $viewportDate = null,
     ) {
-        //
+        // dump($this->viewportDate);
+        $this->viewportDate = strtotime($this->viewportDate);
     }
 
     function getYAxis()
@@ -31,7 +33,7 @@ class ViewAllTypeMatrix extends Component
     function getXAxis()
     {
         $xAxis = [];
-        $date0 = date(Constant::FORMAT_DATE_MYSQL); //today date
+        $date0 = date(Constant::FORMAT_DATE_MYSQL, $this->viewportDate); //today date
         for ($i = -7; $i < 2; $i++) {
             $date = date(Constant::FORMAT_DATE_MYSQL, strtotime("+$i day", strtotime($date0)));
             $xAxis[] = date(Constant::FORMAT_DATE_MYSQL, strtotime($date));
@@ -125,6 +127,27 @@ class ViewAllTypeMatrix extends Component
         return $result;
     }
 
+    private function getHrefArray()
+    {
+        $minus1year = date(Constant::FORMAT_DATE_MYSQL, strtotime("-1 year", $this->viewportDate));
+        $minus1month = date(Constant::FORMAT_DATE_MYSQL, strtotime("-1 month", $this->viewportDate));
+        $minus1week = date(Constant::FORMAT_DATE_MYSQL, strtotime("-1 week", $this->viewportDate));
+        $today = date(Constant::FORMAT_DATE_MYSQL);
+        $plus1week = date(Constant::FORMAT_DATE_MYSQL, strtotime("+1 week", $this->viewportDate));
+        $plus1month = date(Constant::FORMAT_DATE_MYSQL, strtotime("+1 month", $this->viewportDate));
+        $plus1year = date(Constant::FORMAT_DATE_MYSQL, strtotime("+1 year", $this->viewportDate));
+
+        return [
+            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1year",
+            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1month",
+            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1week",
+            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$today",
+            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1week",
+            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1month",
+            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1year",
+        ];
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -147,7 +170,9 @@ class ViewAllTypeMatrix extends Component
             'components.renderer.view-all-type-matrix',
             [
                 'columns' => $columns,
-                'dataSource' => $dataSource
+                'dataSource' => $dataSource,
+                'type' => $this->type,
+                'href' => $this->getHrefArray(),
             ],
         );
     }

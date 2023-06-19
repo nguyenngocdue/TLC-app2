@@ -37,6 +37,7 @@ trait TraitViewAllFunctions
         $viewAllMode = $settings[$type][Constant::VIEW_ALL]['view_all_mode'] ?? null;
         return [$perPage, $columnLimit, $advancedFilter, $currentFilter, $refreshPage, $basicFilter, $chooseBasicFilter, $optionPrint, $viewAllMode];
     }
+
     private function getUserSettingsViewAllCalendar()
     {
         $type = Str::plural($this->type);
@@ -45,6 +46,14 @@ trait TraitViewAllFunctions
         $viewAllCalendarShowAllChildren = $settings[$type][Constant::VIEW_ALL]['calendar_options']['show_all_children'] ?? null;
         $viewAllMode = $settings[$type][Constant::VIEW_ALL]['view_all_mode'] ?? null;
         return [$viewAllMode, $filterViewAllCalendar, $viewAllCalendarShowAllChildren];
+    }
+
+    private function getUserSettingsViewAllMatrix()
+    {
+        $type = Str::plural($this->type);
+        $settings = CurrentUser::getSettings();
+        $viewportDate = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] ?? null;
+        return [$viewportDate];
     }
 
     private function getEagerLoadParams($eloquentParams)
