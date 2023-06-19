@@ -66,20 +66,29 @@ const setCellValueByName = (tableId, columnName, rowIndex, value) => {
     setValueOfTrByName(rows[rowIndex], columnName, value)
 }
 
-const reRenderTableBaseOnNewOrder = (tableId) => {
-    // const debugEditable = true
-    const rows = getAllRows(tableId)
-    if (debugEditable) console.log("rows", rows)
-    const newTable = []
-    for (let item of rows) newTable.push(item)
-    const sortedTable = newTable.sort((a, b) => {
-        const aValue = getValueOfTrByName(a, '[order_no]') * 1
-        const bValue = getValueOfTrByName(b, '[order_no]') * 1
-        return aValue - bValue
-    })
 
-    $("#" + tableId + ' > tbody').html(sortedTable)
-    if (debugEditable) console.log("Re-render completed", tableId, sortedTable)
+const reRenderQueue = {}
+const reRenderTableBaseOnNewOrder = (tableId, batchLength = 1) => {
+    // const debugEditable = true
+    // console.log(batchLength)
+    if (reRenderQueue[tableId] === undefined) reRenderQueue[tableId] = 0
+    if (reRenderQueue[tableId] < batchLength) {
+        reRenderQueue[tableId]++;
+    } else {
+        delete reRenderQueue[tableId]
+        const rows = getAllRows(tableId)
+        if (debugEditable) console.log("rows", rows)
+        const newTable = []
+        for (let item of rows) newTable.push(item)
+        const sortedTable = newTable.sort((a, b) => {
+            const aValue = getValueOfTrByName(a, '[order_no]') * 1
+            const bValue = getValueOfTrByName(b, '[order_no]') * 1
+            return aValue - bValue
+        })
+
+        $("#" + tableId + ' > tbody').html(sortedTable)
+        if (debugEditable) console.log("Re-render completed", tableId, sortedTable)
+    }
 }
 
 const getIndexFromFingerPrint = (tableId, fingerPrint) => {
@@ -204,7 +213,7 @@ const trashEditableTable = (params) => {
     const isDeleted = !value;
     setCellValueByName(tableId, '[DESTROY_THIS_LINE]', rowIndex, isDeleted)
     const icon_i_tag = button.firstChild
-    console.log(button, icon_i_tag)
+    // console.log(button, icon_i_tag)
     if (isDeleted) {
         tr.classList.add('bg-pink-400')
         icon_i_tag.classList.remove('fa-trash')

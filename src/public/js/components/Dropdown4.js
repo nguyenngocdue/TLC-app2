@@ -385,11 +385,14 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
             const rowIndexes = ajaxQueueUpdate[url][fieldName]['rowIndex']
             // console.log("Sending AjaxRequest Update ", fieldName, " with data:", data, url, batchLength)
             delete (ajaxQueueUpdate[url][fieldName])
+            // console.log("Send request", url)
             $.ajax({
                 type: 'POST',
-                url, data: { lines: data },
+                url,
+                data: { lines: data },
                 success: (response) => {
                     if (debugListener) console.log("Response", response)
+                    // console.log("Returned from server, batchLength", batchLength)
                     // console.log("Execute listeners")
                     // const hits = response['hits']
                     for (let i = 0; i < rowIndexes.length; i++) {

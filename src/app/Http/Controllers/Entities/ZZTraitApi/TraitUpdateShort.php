@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\System\Api\ResponseObject;
+use App\Utils\System\Timer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -14,6 +15,8 @@ trait TraitUpdateShort
 		$lines = $request->input('lines');
 		// dump($lines);
 		$result = [];
+		// Log::info("Before loop UpdateShort" . Timer::getTimeElapseFromLastAccess());
+		if (!isset($lines)) return ResponseObject::responseFail("Lines not found");
 		foreach ($lines as $input) {
 			$id = $input['id'];
 			$fieldName = $input['fieldName'];
@@ -24,10 +27,14 @@ trait TraitUpdateShort
 			$theRow->fill([$fieldName => $value]);
 			$result[$id] = $theRow->save();
 		}
-		return ResponseObject::responseSuccess(
+		$response = ResponseObject::responseSuccess(
 			$result,
 			$lines,
 			"Updated " . sizeof($result) . " lines",
 		);
+		// session_write_close();
+		// Log::info("After loop UpdateShort" . Timer::getTimeElapseFromLastAccess());
+		// Log::info($response);
+		return $response;
 	}
 }

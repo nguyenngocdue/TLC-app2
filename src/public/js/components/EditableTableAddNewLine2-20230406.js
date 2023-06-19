@@ -69,12 +69,13 @@ const addANewLine = (params) => {
             url,
             data: { lines: data },
             success: (response) => {
+                // console.log(url, "is done")
                 // console.log(response)
                 for (let i = 0; i < batchLength; i++) {
                     const valuesOfOrigin = response['hits'][i]
                     // valuesOfOrigin['id'] = line.id
                     valuesOfOrigin['ot_date'] = moment(valuesOfOrigin['ot_date']).format('DD/MM/YYYY')
-                    // console.log(valuesOfOrigin)
+                    // console.log("Add line to table", valuesOfOrigin)
                     addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList, batchLength })
                 }
                 getEById(btnAddANewLineId).show()
@@ -116,8 +117,10 @@ const addANewLineFull = (params) => {
     const toDoAfterAddedDropdown4ReadOnly = []
     const newRowIndex = getAllRows(tableId).length - 1 //exclude itself
     // console.log("newRowIndex", newRowIndex, getAllRows(tableId))
+    // console.log("Start the column")
     columns.forEach((column) => {
         if (column['hidden'] == true) return
+        // console.log(column['dataIndex'])
         let renderer = 'newCell'
         let orderNoValue = 0
         if (column['properties']) {
@@ -224,7 +227,7 @@ const addANewLineFull = (params) => {
                     renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? " readonly" : "") + " class='" + column['classList'] + "' type=number step=any />";
                     if (column['dataIndex'] === 'order_no') {
                         orderNoValue = getMaxValueOfAColumn(tableId, "[order_no]") + 10
-                        const reRenderFn = "reRenderTableBaseOnNewOrder(\"" + tableId + "\")"
+                        const reRenderFn = "reRenderTableBaseOnNewOrder(\"" + tableId + "\", batchLength)"
                         renderer += "<script>" + makeOnChangeAdvanced(reRenderFn) + "</script>"
 
                     } else {
