@@ -191,6 +191,7 @@ class MyView extends Component
             ],
             [
                 'dataIndex' => 'doc_type',
+                'align' => 'center',
                 'width' => 100,
             ],
             [
