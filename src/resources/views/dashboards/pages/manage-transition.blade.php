@@ -14,5 +14,6 @@
     <br />
     <hr />
     {{-- <x-form.create-new action="{{$route}}/create"/> --}}
+    <x-workflow-transition-diagram :dataSource="$dataSource" />
 </div>
 @endsection
