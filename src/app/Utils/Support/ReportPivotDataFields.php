@@ -7,32 +7,28 @@ use DateTime;
 
 class ReportPivotDataFields
 {
-    private static function addResultIntoData($data, $result, $fieldName, $method)
-    {
-        return array_map(function ($item) use ($result, $fieldName, $method) {
-            return array_merge( [$method . '_' . $fieldName => $result], $item);
-        }, $data);
-    }
 
-    public static function executeFunctions($dataAggregations, $data)
+    public static function executeOperations($dataAggregations, $data)
     {
-        foreach ($dataAggregations as $field => $fn) {
-            foreach ($data as &$items) {
-                $result = null;
-                switch ($fn) {
+        $newData = [];
+        foreach ($dataAggregations as $field => $operator) {
+            $result = null;
+            foreach ($data as $key => $items) {
+                switch ($operator) {
                     case 'sum':
                         $result = array_sum(array_column($items, $field));
                         break;
                     case 'concat':
-                        $result = implode('', array_column($items, $field));
+                        $source = array_unique(array_column($items, $field));
+                        $result = implode(', ', $source);
                         break;
                     default:
+                    $result = "Unknown operator '" . $operator . "'";
                         break;
                 }
-                $items = self::addResultIntoData($items, $result, $field, $fn);
+                $newData[$key][$operator . '_' . $field] = $result;
             }
-
         }
-        return $data;
+        return $newData;
     }
 }

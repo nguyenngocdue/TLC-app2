@@ -41,16 +41,7 @@ class WelcomeDueController extends Controller
                 "type_id" => 2,
                 "department_id" => 7,
                 "category_id" => 3,
-                "sub_project_name" => "HLC N18",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QA/QC",
                 "staff_id" => "TLCM01071",
-                "user_name" => "Binh Nguyen Nu Thien",
-                "workplace_name" => "VN-TF3",
-                "category_name" => "CMP",
-                "type_name" => "Local",
-                "discipline_name" => "Document Control (QA/QC)",
-                "pj_task_name" => "QA/QC Documentation"
             ],
             [
                 "time_sheet_start_time" => "2022-10-19",
@@ -69,16 +60,7 @@ class WelcomeDueController extends Controller
                 "type_id" => 2,
                 "department_id" => 7,
                 "category_id" => 3,
-                "sub_project_name" => "HLC N17",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QA/QC",
                 "staff_id" => "TLCM01071",
-                "user_name" => "Binh Nguyen Nu Thien",
-                "workplace_name" => "VN-TF3",
-                "category_name" => "CMP",
-                "type_name" => "Local",
-                "discipline_name" => "Document Control (QA/QC)",
-                "pj_task_name" => "QA/QC Documentation"
             ],
             [
                 "time_sheet_start_time" => "2022-10-20",
@@ -97,16 +79,7 @@ class WelcomeDueController extends Controller
                 "type_id" => 2,
                 "department_id" => 7,
                 "category_id" => 3,
-                "sub_project_name" => "HLC N18",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QA/QC",
                 "staff_id" => "TLCM01071",
-                "user_name" => "Binh Nguyen Nu Thien",
-                "workplace_name" => "VN-TF3",
-                "category_name" => "CMP",
-                "type_name" => "Local",
-                "discipline_name" => "Document Control (QA/QC)",
-                "pj_task_name" => "QA/QC Documentation"
             ],
             [
                 "time_sheet_start_time" => "2022-10-03",
@@ -125,16 +98,7 @@ class WelcomeDueController extends Controller
                 "type_id" => 2,
                 "department_id" => 7,
                 "category_id" => 3,
-                "sub_project_name" => "HLC N17",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QA/QC",
                 "staff_id" => "TLCM01071",
-                "user_name" => "Binh Nguyen Nu Thien",
-                "workplace_name" => "VN-TF3",
-                "category_name" => "CMP",
-                "type_name" => "Local",
-                "discipline_name" => "Document Control (QA/QC)",
-                "pj_task_name" => "QA/QC Documentation"
             ],
             [
                 "time_sheet_start_time" => "2022-11-28",
@@ -153,16 +117,7 @@ class WelcomeDueController extends Controller
                 "type_id" => 2,
                 "department_id" => 8,
                 "category_id" => 24,
-                "sub_project_name" => "HLC N18",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QS",
                 "staff_id" => "TLCM01060",
-                "user_name" => "Anh Ha Hoang Tuan",
-                "workplace_name" => "VN-HO",
-                "category_name" => "QST",
-                "type_name" => "Local",
-                "discipline_name" => "QS",
-                "pj_task_name" => "Detail BOM"
             ],
             [
                 "time_sheet_start_time" => "2022-11-29",
@@ -181,16 +136,7 @@ class WelcomeDueController extends Controller
                 "type_id" => 2,
                 "department_id" => 8,
                 "category_id" => 24,
-                "sub_project_name" => "HLC N18",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QS",
                 "staff_id" => "TLCM01060",
-                "user_name" => "Anh Ha Hoang Tuan",
-                "workplace_name" => "VN-HO",
-                "category_name" => "QST",
-                "type_name" => "Local",
-                "discipline_name" => "QS",
-                "pj_task_name" => "Detail BOM"
             ],
             [
                 "time_sheet_start_time" => "2022-11-30",
@@ -208,17 +154,8 @@ class WelcomeDueController extends Controller
                 "workplace_id" => 1,
                 "type_id" => 2,
                 "department_id" => 8,
-                "category_id" => 24,
-                "sub_project_name" => "HLC N18",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QS",
+                "category_id" => 42,
                 "staff_id" => "TLCM01060",
-                "user_name" => "Anh Ha Hoang Tuan",
-                "workplace_name" => "VN-HO",
-                "category_name" => "QST",
-                "type_name" => "Local",
-                "discipline_name" => "QS",
-                "pj_task_name" => "Detail BOM2"
             ],
             [
                 "time_sheet_start_time" => "2022-11-14",
@@ -237,16 +174,7 @@ class WelcomeDueController extends Controller
                 "type_id" => 1,
                 "department_id" => 7,
                 "category_id" => 3,
-                "sub_project_name" => "HLC N18",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QA/QC",
                 "staff_id" => "TLCM01219",
-                "user_name" => "Diep Pham Dinh",
-                "workplace_name" => "VN-TF3",
-                "category_name" => "CMP",
-                "type_name" => "Expat",
-                "discipline_name" => "QA/QC",
-                "pj_task_name" => "Work Inspection"
             ],
             [
                 "time_sheet_start_time" => "2022-11-15",
@@ -265,16 +193,7 @@ class WelcomeDueController extends Controller
                 "type_id" => 1,
                 "department_id" => 7,
                 "category_id" => 3,
-                "sub_project_name" => "HLC N18",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QA/QC",
                 "staff_id" => "TLCM01219",
-                "user_name" => "Diep Pham Dinh",
-                "workplace_name" => "VN-TF3",
-                "category_name" => "CMP",
-                "type_name" => "Expat",
-                "discipline_name" => "QA/QC",
-                "pj_task_name" => "Work Inspection"
             ],
             [
                 "time_sheet_start_time" => "2022-11-16",
@@ -293,32 +212,22 @@ class WelcomeDueController extends Controller
                 "type_id" => 1,
                 "department_id" => 7,
                 "category_id" => 3,
-                "sub_project_name" => "HLC N18",
-                "time_sheet_lod_name" => "LOD400",
-                "department_name" => "QA/QC",
                 "staff_id" => "TLCM01219",
-                "user_name" => "Diep Pham Dinh",
-                "workplace_name" => "VN-TF3",
-                "category_name" => "CMP",
-                "type_name" => "Expat",
-                "discipline_name" => "QA/QC",
-                "pj_task_name" => "Work Inspection2"
             ]
         ];
         return $dataSource;
     }
 
 
-    private function processData($lineData, $rowFields)
+    private function groupBy($lineData, $rowFields)
     {
         $dataOutput = [];
         foreach ($lineData as $line) {
             // Get the values of fields in $rowFields
             $params = [];
             foreach ($rowFields as $param) {
-                if (isset($line[$param])) {
-                    $params[$param] = $line[$param];
-                } else $params[$param] = null;
+                if (isset($line[$param])) $params[$param] = $line[$param];
+                else $params[$param] = null;
             }
             $nestedArray = &$dataOutput;
             foreach ($params as $paramValue) {
@@ -328,8 +237,8 @@ class WelcomeDueController extends Controller
                 }
                 $nestedArray = &$nestedArray[$paramValue];
             }
-            if (!isset($nestedArray['output'])) $nestedArray['output'] = [];
-            $nestedArray['output'][] = $line;
+            if (!isset($nestedArray['items'])) $nestedArray['items'] = [];
+            $nestedArray['items'][] = $line;
         }
         return $dataOutput;
     }
@@ -342,7 +251,7 @@ class WelcomeDueController extends Controller
         }
         return true;
     }
-    
+
     private function reduceData($linesData, $conditions)
     {
         $conditions = Report::dataWithoutNull($conditions);
@@ -354,11 +263,15 @@ class WelcomeDueController extends Controller
 
     private function transferData($dataSource, $columnFields)
     {
-        return array_map(
-            fn ($items) => array_map(fn ($array) =>
-            ReportPivot::transferValueOfKeys($array, $columnFields), $items),
+        $data = array_map(
+            fn ($items) => array_map(
+                fn ($array) =>
+                ReportPivot::transferValueOfKeys($array, $columnFields),
+                $items
+            ),
             $dataSource
         );
+        return $data;
     }
 
     private function getDatesBetween($startDate, $endDate)
@@ -384,90 +297,116 @@ class WelcomeDueController extends Controller
         return $strDates;
     }
 
-    protected function makeHeadColumn(){
-        return [[]];
-    }
-    protected function makeColumnFields(){
-        return [[]];
-    }
-
-
-    private function makeColumns( $dataOutput, $columnFields)
+    private function makeHeadColumn($rowFields)
     {
-        // Create Column Render
-        $column1 = $this->makeHeadColumn();
+        return array_map(fn ($item) => [
+            'dataIndex' => $item,
+            'width' => 150,
+        ], $rowFields);
+    }
+    protected function makeColumnFields()
+    {
+        return [[]];
+    }
+
+
+    private function makeColumns($dataOutput)
+    {
+
+        [$rowFields,,, $dataAggregations] =  $this->getDataFields();
+        $columnsOfRowFields = $this->makeHeadColumn($rowFields);
         $col = [];
         foreach ($dataOutput as $value) $col = array_unique(array_merge($col, array_keys($value)));
-        $fieldDates = Report::retrieveDataByIndex($col, 'pj_task_name', false, 'value');
-        $titles = array_column($columnFields, 'title');
-        $data =  ReportPivot::sortItems($fieldDates, $titles);
 
-        $column2 = array_map(fn ($item) => [
-            'title' => str_replace('_', '/', $item),
+        $lastItemDataSource = key(array_slice($this->getDataSource()[0] ?? [],-1)) ;
+        $fieldDates = Report::retrieveDataByIndex($col, $lastItemDataSource, false,'value');
+        $columnsOfColumnFields = array_map(fn ($item) => [
             'dataIndex' => $item,
             'align' => 'center',
             'width' => 40
-        ], $data);
+        ], $fieldDates);
 
-        [$rowFields,$filters, $dataAggregations] =  $this->getDataFields();
-        $column3 = [];
+        $columnsOfAgg = [];
         foreach ($dataAggregations as $filed => $fn) {
-            $column3[] = [
-            'dataIndex' => $fn.'_'.$filed,
-            'align' => 'right',
-            'width' => 40
+            $columnsOfAgg[] = [
+                'dataIndex' => $fn . '_' . $filed,
+                'align' => 'right',
+                'width' => 40
             ];
         };
-        $tableColumns = array_merge($column1, $column2, $column3);
+        $tableColumns = array_merge($columnsOfRowFields, $columnsOfColumnFields, $columnsOfAgg);
         return $tableColumns;
     }
 
-
-    private function getDataFields(){
+    private function getDataFields()
+    {
         $lib = LibPivotTables::getFor($this->modeType);
         $dataFields = $lib['data_fields'];
         $rowFields = $lib['row_fields'];
+        $valueIndexFields = $lib['value_index_fields'];
+
+        //Map Column Fields & Value Index Fields
         $filters = $lib['filters'];
-        $dataAggregations =ReportPivot::combineArrays($dataFields, $lib['data_aggregations']);
-        return [$rowFields,$filters, $dataAggregations];
+        $_columnFields = $lib['column_fields'];
+        $columnFields = [];
+        foreach ($_columnFields as $key => $filed) {
+            $columnFields[] = [
+                'fieldIndex' => $filed,
+                'valueFieldIndex' => $valueIndexFields[$key] ?? dd('Empty Value Index Fields')
+            ];
+        }
+
+        $dataAggregations = ReportPivot::combineArrays($dataFields, $lib['data_aggregations']);
+        return [$rowFields, $filters, $columnFields, $dataAggregations];
     }
 
-    protected function makeDataOutput($columnFields)
+private function attachToDataSource($processedData, $calculatedData, $transferredData){
+    $dataOutput = [];
+    foreach ($processedData as $k1 => $items) {
+        foreach ($items as $k2 => $item) $dataOutput[] = $calculatedData[$k1][$k2] + reset($item)+ $transferredData[$k1][$k2];
+    }
+    return $dataOutput;
+}
+
+    protected function makeDataOutput()
     {
-        [$rowFields,$filters, $dataAggregations] =  $this->getDataFields();
+        [$rowFields, $filters, $columnFields, $dataAggregations] =  $this->getDataFields();
         $valueFilters = array_combine($filters, [[1, 4], [7, 8]]);
-        // Step 1: reduce data from Filters columns
+        // Step 1: reduce lines from Filters array
         $linesData = $this->getDataSource();
         $dataReduce = self::reduceData($linesData, $valueFilters);
         // dd($valueFilters, $dataReduce);
 
-        // Step 2: group data from Row Fields columns
-        $dataProcess = self::processData($dataReduce, $rowFields);
-        $dataProcess = array_values(array_map(fn ($item) => ReportPivot::getLastArray($item), $dataProcess));
-        // dd($dataProcess);
-        
-        // Step 3: transfer data from Column Fields columns
-        $transferData = $this->transferData($dataProcess, $columnFields);
+        // Step 2: group lines by Row_Fields array
+        $processedData = self::groupBy($dataReduce, $rowFields);
+        //Remove all array keys by looping through all elements
+        $processedData = array_values(array_map(fn ($item) => ReportPivot::getLastArray($item), $processedData));
+        // dd($processedData);
+
+        // Step 3: transfer data from lines to columns by
+        // Column_Fields and Value_Index_Fields array 
+        $transferredData = $this->transferData($processedData, $columnFields);
+        // dd($transferData);
 
         //Step 4: Calculate data from Data Fields columns
-        $dataCalculation = array_map(fn ($items) => ReportPivotDataFields::executeFunctions($dataAggregations, $items), $transferData);
-        $dataOutput = ReportPivot::mergeChildrenValue($dataCalculation);
+        //The aggregated data are at the end of the items
+        $calculatedData = array_map(fn ($items) => ReportPivotDataFields::executeOperations($dataAggregations, $items), $processedData);
+
+        $dataOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData);
 
         $group = Report::groupArrayByKey($dataOutput, $rowFields[0]);
         ksort($group);
         $dataSource = [];
-        foreach ($group as $value ){
-           $dataSource = array_merge($dataSource,collect($value)->sortBy($rowFields[1])->toArray());
+        foreach ($group as $value) {
+            $dataSource = array_merge($dataSource, collect($value)->sortBy($rowFields[1])->toArray());
         }
         return collect($dataSource);
     }
 
     public function index(Request $request)
     {
-        $columnFields = $this->makeColumnFields();
-        $dataOutput = $this->makeDataOutput($columnFields);
-        // dd($dataOutput);
-        $tableColumns = $this->makeColumns($dataOutput, $columnFields);
+        $dataOutput = $this->makeDataOutput();
+        $tableColumns = $this->makeColumns($dataOutput);
         return view("welcome-due", [
             'tableDataSource' => $dataOutput,
             'tableColumns' => $tableColumns

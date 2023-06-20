@@ -10,29 +10,37 @@ class ReportPivot
     public static function transferValueOfKeys($data, $columnFields)
     {
         $newArray = array_map(function ($item) use ($columnFields) {
+            $dateItems = [];
             foreach ($columnFields as $value) {
                 $date = DateTime::createFromFormat('Y-m-d', $item[$value['fieldIndex']]);
-                if ($date) {
-                    $reversedDate = $date->format('d-m-Y');
-                    $strDate = str_replace('-', '_', $reversedDate);
-                    $_strDate = isset($value['title']) ? str_replace('-', '_', $reversedDate).'_'.$value['title'] : $strDate;
-                    // $item[$strDate] = $item[$value['valueFieldIndex']];
-                    $item[$_strDate] = $item[$value['valueFieldIndex']];
-                } else {
-                    $key = str_replace(' ','_',strtolower($item[$value['fieldIndex']]). '_'. $item['time_sheet_start_time']);
-                    $item[$key] = $item[$value['valueFieldIndex']];
+                $type = 'unknown';
+
+                if($date) $type = 'date';
+                switch($type){
+                    case 'date':
+                        $reversedDate = $date->format('d-m-Y');
+                        $_strDate = str_replace('-', '_', $reversedDate).'_'.$value['fieldIndex'];
+                        // $item[$_strDate] = $item[$value['valueFieldIndex']];
+                        $dateItems[$_strDate] =  $item[$value['valueFieldIndex']];
+
+                        break;
+                    default:
+                        $key = str_replace(' ','_',strtolower($item[$value['fieldIndex']]). '_'. $item['time_sheet_start_time']);
+                        // $item[$key] = $item[$value['valueFieldIndex']];
+                        $dateItems[$key] =  $item[$value['valueFieldIndex']];
+                        break;
                 }
                 // dd($item);
             }
-            return $item;
+            return $dateItems;
         }, $data);
-        return $newArray;
+        return array_merge(...$newArray);
     }
     public static function getLastArray($data)
     {
         $outputArrays = [];
         foreach ($data as $key => $value) {
-            if ($key === "output" && is_array($value)) {
+            if ($key === "items" && is_array($value)) {
                 $outputArrays[] = $value;
             } elseif (is_array($value)) {
                 $nestedOutputArrays = self::getLastArray($value);

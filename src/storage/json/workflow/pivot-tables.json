@@ -1,26 +1,29 @@
 {
     "hr_timesheet_employee_date": {
         "name": "hr_timesheet_employee_date",
-        "filters": "workplace_id,department_id",
-        "column_fields": "time_sheet_start_time,time_sheet_start_time_otr",
-        "row_fields": "staff_id,user_name, workplace_name, category_name,type_name, department_name",
-        "data_fields": "time_sheet_hours,time_sheet_hours_otr,time_sheet_hours_wfh,category_name",
+        "filters": "workplace_id, department_id",
+        "row_fields": "staff_id, \r\nuser_id, \r\nworkplace_id, \r\ntype_id,\r\ndepartment_id,\r\ncategory_id",
+        "column_fields": "time_sheet_start_time,time_sheet_start_time_otr, time_sheet_start_time_wfh",
+        "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
+        "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, workplace_id",
         "data_aggregations": "sum,sum,sum,concat"
     },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",
-        "filters": "workplace_id,department_id",
-        "column_fields": "time_sheet_start_time,time_sheet_start_time_otr",
-        "row_fields": "sub_project_id,user_id, type_id,pj_task_id",
-        "data_fields": "time_sheet_hours,time_sheet_hours_otr,time_sheet_hours_wfh,category_name",
+        "filters": "workplace_id, department_id",
+        "row_fields": "sub_project_id,\r\nuser_id, \r\ntype_id,\r\npj_task_id",
+        "column_fields": "time_sheet_start_time_otr, time_sheet_start_time_wfh",
+        "value_index_fields": "time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
+        "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
         "data_aggregations": "sum,sum,sum"
     },
     "hr_timesheet_team_date": {
         "name": "hr_timesheet_team_date",
-        "filters": "workplace_id,department_id",
-        "column_fields": "sub_project_name",
-        "row_fields": "workplace_name,category_name, type_name",
-        "data_fields": "time_sheet_hours,time_sheet_hours_otr,time_sheet_hours_wfh,category_name",
+        "filters": "workplace_id, department_id",
+        "row_fields": "workplace_id, \r\ncategory_id, \r\ntype_id",
+        "column_fields": "time_sheet_start_time, time_sheet_start_time_otr, time_sheet_start_time_wfh",
+        "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
+        "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
         "data_aggregations": "sum,sum,sum"
     }
 }

@@ -18,9 +18,9 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 Route::resource('welcome-canh', WelcomeCanhController::class)->only('index');
 Route::get('welcome-canh-all', [WelcomeCanhController::class, 'indexAll'])->name('welcome-canh-all.index');
 Route::resource('welcome-due', WelcomeDueController::class)->only('index');
+Route::resource('welcome-project_date', WelcomeDueController_hr_timesheet_project_date::class)->only('index');
 Route::resource('welcome-team_date', WelcomeDueController_hr_timesheet_team_date::class)->only('index');
 Route::resource('welcome-employee_date', WelcomeDueController_hr_timesheet_employee_date::class)->only('index');
-Route::resource('welcome-project_date', WelcomeDueController_hr_timesheet_project_date::class)->only('index');
 Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 
 Route::resource('utils/parser', ParserController::class)->only('index', 'store');
