@@ -70,9 +70,9 @@ trait TraitEntityFormula
                 case "All_DuplicateStatus":
                     $value = (new All_DuplicateStatus())($type);
                     break;
-                case "Wir_NameRendered":
-                    $value = (new Wir_NameRendered())($item);
-                    break;
+                    // case "Wir_NameRendered":
+                    //     $value = (new Wir_NameRendered())($item);
+                    //     break;
                 case "NCR_Report_Type":
                     $value = (new NCR_Report_Type())($item);
                     break;

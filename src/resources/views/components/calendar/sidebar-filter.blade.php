@@ -1,7 +1,7 @@
 @php
-    $projectId = $valueFiltersTask['project_id'];
-    $subProjectId = $valueFiltersTask['sub_project_id'];
-    $lodId = $valueFiltersTask['lod_id'];
+    $projectId = $valueFiltersTask['project_id'] ?? 1;
+    $subProjectId = $valueFiltersTask['sub_project_id'] ?? 1;
+    $lodId = $valueFiltersTask['lod_id'] ?? 219; //HOF:219
     $disciplineId = $valueFiltersTask['discipline_id'] ?? $discipline;
 @endphp
 <x-renderer.card title="Filters">

@@ -35,6 +35,7 @@ class MyView extends Component
         $idText = Str::makeId($doc->id);
         $idHref = route(Str::plural($app['name']) . ".edit", $doc->id);
         $doc->id_link = "<a class='text-blue-700' href='$idHref'>$idText</a>";
+        $doc->name = $doc->getName();
         return $doc;
     }
 
@@ -190,6 +191,7 @@ class MyView extends Component
             ],
             [
                 'dataIndex' => 'doc_type',
+                'align' => 'center',
                 'width' => 100,
             ],
             [
@@ -207,7 +209,7 @@ class MyView extends Component
                 'dataIndex' => 'due_date',
                 'renderer' => 'date-time',
                 'align' => 'center',
-                'width' => 100,
+                'width' => 170,
             ],
         ];
         // if (CurrentUser::isAdmin()) {
