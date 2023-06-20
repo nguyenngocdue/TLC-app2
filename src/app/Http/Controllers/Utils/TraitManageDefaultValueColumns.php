@@ -48,7 +48,7 @@ trait TraitManageDefaultValueColumns
                     'All_OwnerId',
                     'All_SlugifyByName',
                     'User_PositionRendered',
-                    'Wir_NameRendered',
+                    // 'Wir_NameRendered',
                     'NCR_Report_Type',
                     '(not-yet)format_production',
                     '(not-yet)format_compliance',

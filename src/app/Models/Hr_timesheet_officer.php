@@ -3,11 +3,17 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
+use App\Utils\Constant;
 
 class Hr_timesheet_officer extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'week', 'team_id', 'assignee_1',  'owner_id', 'status'];
     public $nameless = true;
+    public function getName()
+    {
+        $week = "W" . date(Constant::FORMAT_WEEK, strtotime($this->week));
+        return "[" . $week . "] - " . User::findFromCache($this->owner_id)->name;
+    }
 
     public $eloquentParams = [
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],

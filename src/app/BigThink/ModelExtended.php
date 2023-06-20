@@ -104,4 +104,10 @@ abstract class ModelExtended extends Model
         }
         return $result;
     }
+
+    public function getName()
+    {
+        if ($this->nameless) return "#" . $this->id;
+        else return $this->name;
+    }
 }
