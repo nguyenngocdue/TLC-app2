@@ -158,7 +158,7 @@
         "title": "Not Applicable",
         "color": "gray",
         "color_index": "200",
-        "icon": "N\/A"
+        "icon": "<i class=\"fa-duotone fa-forward\"><\/i>"
     },
     "obsolete": {
         "name": "obsolete",
