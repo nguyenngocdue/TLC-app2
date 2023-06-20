@@ -3,10 +3,19 @@
         "name": "hr_timesheet_employee_date",
         "filters": "workplace_id, department_id",
         "row_fields": "staff_id, \r\nuser_id, \r\nworkplace_id, \r\ntype_id,\r\ndepartment_id,\r\ncategory_id",
-        "column_fields": "time_sheet_start_time,time_sheet_start_time_otr, time_sheet_start_time_wfh",
+        "column_fields": "time_sheet_start_time, time_sheet_start_time_otr, time_sheet_start_time_wfh",
         "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, workplace_id",
         "data_aggregations": "sum,sum,sum,concat"
+    },
+    "hr_timesheet_employee_project": {
+        "name": "hr_timesheet_employee_project",
+        "filters": "workplace_id, department_id",
+        "row_fields": "staff_id, \r\nuser_id, \r\nworkplace_id, \r\ntype_id,\r\ndepartment_id,\r\ncategory_id",
+        "column_fields": "sub_project_id",
+        "value_index_fields": "time_sheet_hours",
+        "data_fields": "time_sheet_hours",
+        "data_aggregations": "sum"
     },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",

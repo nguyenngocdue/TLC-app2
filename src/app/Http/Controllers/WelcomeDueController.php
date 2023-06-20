@@ -318,8 +318,8 @@ class WelcomeDueController extends Controller
         $col = [];
         foreach ($dataOutput as $value) $col = array_unique(array_merge($col, array_keys($value)));
 
-        $lastItemDataSource = key(array_slice($this->getDataSource()[0] ?? [],-1)) ;
-        $fieldDates = Report::retrieveDataByIndex($col, $lastItemDataSource, false,'value');
+        $lastItemDataSource = key(array_slice($this->getDataSource()[0] ?? [], -1));
+        $fieldDates = Report::retrieveDataByIndex($col, $lastItemDataSource, false, 'value');
         $columnsOfColumnFields = array_map(fn ($item) => [
             'dataIndex' => $item,
             'align' => 'center',
@@ -360,13 +360,14 @@ class WelcomeDueController extends Controller
         return [$rowFields, $filters, $columnFields, $dataAggregations];
     }
 
-private function attachToDataSource($processedData, $calculatedData, $transferredData){
-    $dataOutput = [];
-    foreach ($processedData as $k1 => $items) {
-        foreach ($items as $k2 => $item) $dataOutput[] = $calculatedData[$k1][$k2] + reset($item)+ $transferredData[$k1][$k2];
+    private function attachToDataSource($processedData, $calculatedData, $transferredData)
+    {
+        $dataOutput = [];
+        foreach ($processedData as $k1 => $items) {
+            foreach ($items as $k2 => $item) $dataOutput[] = $calculatedData[$k1][$k2] + reset($item) + $transferredData[$k1][$k2];
+        }
+        return $dataOutput;
     }
-    return $dataOutput;
-}
 
     protected function makeDataOutput()
     {
@@ -393,6 +394,7 @@ private function attachToDataSource($processedData, $calculatedData, $transferre
         $calculatedData = array_map(fn ($items) => ReportPivotDataFields::executeOperations($dataAggregations, $items), $processedData);
 
         $dataOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData);
+        // return collect($dataOutput);
 
         $group = Report::groupArrayByKey($dataOutput, $rowFields[0]);
         ksort($group);

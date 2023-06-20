@@ -8,6 +8,7 @@ use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeCanhController;
 use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_date;
+use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_project;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_project_date;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_team_date;
 use App\Http\Controllers\WelcomeFortuneController;
@@ -18,9 +19,12 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 Route::resource('welcome-canh', WelcomeCanhController::class)->only('index');
 Route::get('welcome-canh-all', [WelcomeCanhController::class, 'indexAll'])->name('welcome-canh-all.index');
 Route::resource('welcome-due', WelcomeDueController::class)->only('index');
-Route::resource('welcome-project_date', WelcomeDueController_hr_timesheet_project_date::class)->only('index');
-Route::resource('welcome-team_date', WelcomeDueController_hr_timesheet_team_date::class)->only('index');
-Route::resource('welcome-employee_date', WelcomeDueController_hr_timesheet_employee_date::class)->only('index');
+
+Route::resource('welcome-due-employee_date', WelcomeDueController_hr_timesheet_employee_date::class)->only('index');
+Route::resource('welcome-due-employee_project', WelcomeDueController_hr_timesheet_employee_project::class)->only('index');
+Route::resource('welcome-due-project_date', WelcomeDueController_hr_timesheet_project_date::class)->only('index');
+Route::resource('welcome-due-team_date', WelcomeDueController_hr_timesheet_team_date::class)->only('index');
+
 Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 
 Route::resource('utils/parser', ParserController::class)->only('index', 'store');
