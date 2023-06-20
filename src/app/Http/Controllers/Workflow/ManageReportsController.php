@@ -14,7 +14,8 @@ class ManageReportsController extends AbstractManageLibController
     protected function getColumns()
     {
         $packages = JsonControls::getPackages();
-        $subPackages = JsonControls::getSubPackages();
+        // $subPackages = JsonControls::getSubPackages();
+        // $subPackages = Entities::getAllPluralNames();
         return   [
             [
                 "dataIndex" => "action",
@@ -41,14 +42,14 @@ class ManageReportsController extends AbstractManageLibController
                 // "sortBy" => "value",
                 "properties" => ["strFn" => "appTitle"],
             ],
-            [
-                'dataIndex' => "sub_package",
-                'renderer' => 'dropdown',
-                'editable' => true,
-                "cbbDataSource" => $subPackages,
-                "sortBy" => "value",
-                "properties" => ["strFn" => "appTitle"],
-            ],
+            // [
+            //     'dataIndex' => "sub_package",
+            //     'renderer' => 'dropdown',
+            //     'editable' => true,
+            //     "cbbDataSource" => $subPackages,
+            //     "sortBy" => "value",
+            //     "properties" => ["strFn" => "appTitle"],
+            // ],
             [
                 'dataIndex' => 'title',
                 'renderer' => 'text4',
