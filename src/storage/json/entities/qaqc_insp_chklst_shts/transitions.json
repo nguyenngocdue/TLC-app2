@@ -1,6 +1,7 @@
 {
     "new": {
         "name": "new",
+        "location": "0 0",
         "new": "",
         "in_progress": "true",
         "not_applicable": "true",
@@ -12,6 +13,7 @@
     },
     "in_progress": {
         "name": "in_progress",
+        "location": "100 0",
         "new": "",
         "in_progress": "",
         "not_applicable": "",
@@ -23,6 +25,7 @@
     },
     "not_applicable": {
         "name": "not_applicable",
+        "location": "0 -100",
         "new": "true",
         "in_progress": "",
         "not_applicable": "",
@@ -34,6 +37,7 @@
     },
     "passed": {
         "name": "passed",
+        "location": "200 0",
         "new": "",
         "in_progress": "true",
         "not_applicable": "",
@@ -45,6 +49,7 @@
     },
     "inspected": {
         "name": "inspected",
+        "location": "300 0",
         "new": "",
         "in_progress": "",
         "not_applicable": "",
@@ -56,6 +61,7 @@
     },
     "pending_approval": {
         "name": "pending_approval",
+        "location": "450 0",
         "new": "",
         "in_progress": "",
         "not_applicable": "",
@@ -67,6 +73,7 @@
     },
     "rejected": {
         "name": "rejected",
+        "location": "300 -100",
         "new": "",
         "in_progress": "",
         "not_applicable": "",
@@ -78,6 +85,7 @@
     },
     "approved": {
         "name": "approved",
+        "location": "600 0",
         "new": "",
         "in_progress": "",
         "not_applicable": "",

@@ -28,16 +28,22 @@ class WorkflowTransitionDiagram extends Component
         $blocks = [];
         $allStatus = LibStatuses::getAllWithHex();
         // dump($allStatus);
+        // dump($this->dataSource);
         foreach ($this->dataSource as $value) {
             $statusKey = $value['name'];
             $status = $allStatus[$statusKey];
-            $blocks[] = [
+            $block = [
                 'key' => $statusKey,
                 'title' => $status['title'],
                 'color' => $status['bg_color_hex'] ?? "red",
                 'bg-color' => $status['text_color_hex'] ?? "red",
             ];
+            if (isset($value['location'])) {
+                $block['location'] = $value['location'];
+            }
+            $blocks[] = $block;
         }
+        // dump($blocks);
         $links = [];
         foreach ($this->dataSource as $value0) {
             foreach ($value0 as $key => $value) {
