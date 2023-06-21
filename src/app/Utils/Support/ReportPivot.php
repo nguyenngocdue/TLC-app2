@@ -9,11 +9,11 @@ class ReportPivot
 {
     public static function transferValueOfKeys($data, $columnFields)
     {
-        $type = 'unknown';
-        $newArray = array_map(function ($item) use ($columnFields, $type) {
+        $newArray = array_map(function ($item) use ($columnFields) {
             $dateItems = [];
             foreach ($columnFields as $value) {
                 $date = DateTime::createFromFormat('Y-m-d', $item[$value['fieldIndex']]);
+                $type = 'unknown';
                 if ($date) $type = 'date';
                 // dump($type, $value);
                 switch ($type) {
