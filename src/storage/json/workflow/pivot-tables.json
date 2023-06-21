@@ -12,10 +12,10 @@
         "name": "hr_timesheet_employee_project",
         "filters": "workplace_id, department_id",
         "row_fields": "staff_id, \r\nuser_id, \r\nworkplace_id, \r\ntype_id,\r\ndepartment_id,\r\ncategory_id",
-        "column_fields": "sub_project_id",
-        "value_index_fields": "time_sheet_hours",
-        "data_fields": "time_sheet_hours",
-        "data_aggregations": "sum"
+        "column_fields": "sub_project_id,\r\nworkplace_id",
+        "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours_wfh",
+        "data_fields": "time_sheet_hours,\r\ntime_sheet_hours_wfh",
+        "data_aggregations": "sum, sum"
     },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",

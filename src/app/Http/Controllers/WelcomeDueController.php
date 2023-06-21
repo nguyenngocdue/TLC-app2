@@ -304,10 +304,6 @@ class WelcomeDueController extends Controller
             'width' => 150,
         ], $rowFields);
     }
-    protected function makeColumnFields()
-    {
-        return [[]];
-    }
 
 
     private function makeColumns($dataOutput)
@@ -389,11 +385,12 @@ class WelcomeDueController extends Controller
         $transferredData = $this->transferData($processedData, $columnFields);
         // dd($transferData);
 
-        //Step 4: Calculate data from Data Fields columns
+        //Step 4: Calculate data from Data Fields columnsp
         //The aggregated data are at the end of the items
         $calculatedData = array_map(fn ($items) => ReportPivotDataFields::executeOperations($dataAggregations, $items), $processedData);
 
         $dataOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData);
+        // dd($dataOutput);
         // return collect($dataOutput);
 
         $group = Report::groupArrayByKey($dataOutput, $rowFields[0]);
