@@ -6,7 +6,8 @@
         "column_fields": "time_sheet_start_time, time_sheet_start_time_otr, time_sheet_start_time_wfh",
         "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, workplace_id",
-        "data_aggregations": "sum,sum,sum,concat"
+        "data_aggregations": "sum,sum,sum,concat",
+        "lookup_tables": "sub_projects,\r\nterms,\r\nusers,\r\nuser_types"
     },
     "hr_timesheet_employee_project": {
         "name": "hr_timesheet_employee_project",
@@ -15,7 +16,8 @@
         "column_fields": "sub_project_id,\r\ntime_sheet_start_time,\r\nworkplace_id",
         "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
-        "data_aggregations": "sum,\r\nsum,\r\nsum"
+        "data_aggregations": "sum,\r\nsum,\r\nsum",
+        "lookup_tables": null
     },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",
@@ -24,7 +26,8 @@
         "column_fields": "time_sheet_start_time_otr, time_sheet_start_time_wfh",
         "value_index_fields": "time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
-        "data_aggregations": "sum,sum,sum"
+        "data_aggregations": "sum,sum,sum",
+        "lookup_tables": null
     },
     "hr_timesheet_team_date": {
         "name": "hr_timesheet_team_date",
@@ -33,6 +36,7 @@
         "column_fields": "time_sheet_start_time, time_sheet_start_time_otr, time_sheet_start_time_wfh",
         "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
-        "data_aggregations": "sum,sum,sum"
+        "data_aggregations": "sum,sum,sum",
+        "lookup_tables": null
     }
 }
