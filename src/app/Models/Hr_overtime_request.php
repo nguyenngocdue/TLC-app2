@@ -9,6 +9,10 @@ class Hr_overtime_request extends ModelExtended
     protected $fillable = ['id', 'name', 'workplace_id', 'assignee_1',  'owner_id', 'status'];
     protected $table = "hr_overtime_requests";
     public $nameless = true;
+    public function getName()
+    {
+        return "[OTR#" . $this->id . "] - " . User::findFromCache($this->owner_id)->name;
+    }
 
     public $eloquentParams = [
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
