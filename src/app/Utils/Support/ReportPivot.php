@@ -10,11 +10,12 @@ class ReportPivot
     public static function transferValueOfKeys($data, $columnFields)
     {
         $type = 'unknown';
-        $newArray = array_map(function ($item) use ($columnFields, &$type) {
+        $newArray = array_map(function ($item) use ($columnFields, $type) {
             $dateItems = [];
             foreach ($columnFields as $value) {
                 $date = DateTime::createFromFormat('Y-m-d', $item[$value['fieldIndex']]);
                 if ($date) $type = 'date';
+                // dump($type, $value);
                 switch ($type) {
                     case 'date':
                         $reversedDate = $date->format('d-m-Y');
@@ -31,7 +32,8 @@ class ReportPivot
             }
             return $dateItems;
         }, $data);
-        if ($type === 'date') return array_merge(...$newArray);
+        // dd($newArray);
+        // if ($type === 'date') return array_merge(...$newArray);
         $newArray = self::sumItemsInArray($newArray);
         return $newArray;
     }
