@@ -24,7 +24,6 @@ class TimesheetLineResource extends JsonResource
             'tag_sub_project' => Calendar::renderTagSubProject($this),
             'start' => $this->start_time ? DateTimeConcern::formatTimestampFromDBtoJS($this->start_time) : null,
             'end' => $this->start_time ? DateTimeConcern::calTimestampEndFromStartTimeAndDuration($this->start_time, $this->duration_in_min) : null,
-            // 'allDay' => ($this->duration_in_min >= Constant::TIME_DEFAULT_ALLDAY) ? true : false,
             'id' => $this->id,
             'user_id' => $this->user_id,
             'project_id' => $this->project_id,

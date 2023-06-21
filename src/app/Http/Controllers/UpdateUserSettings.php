@@ -75,7 +75,9 @@ class UpdateUserSettings extends Controller
     {
         $type = $request->input("_entity");
         $value = $request->input("view_type");
-        $this->updateViewAllCalendar($request, $settings);
+        if ($value == 'calendar') {
+            $this->updateViewAllCalendar($request, $settings);
+        }
         $settings[$type][Constant::VIEW_ALL]['view_all_mode'] = $value;
         return $settings;
     }

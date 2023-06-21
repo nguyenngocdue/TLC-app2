@@ -7,10 +7,11 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Formula\All_ClosedAt;
 use App\View\Components\Formula\All_ConcatNameWith123;
+use App\View\Components\Formula\All_DefinitionOfNew;
 use App\View\Components\Formula\All_DocId;
 use App\View\Components\Formula\All_SlugifyByName;
-use App\View\Components\Formula\All_DuplicateStatus;
 use App\View\Components\Formula\NCR_Report_Type;
+use App\View\Components\Formula\TSO_GetAssignee1;
 use App\View\Components\Formula\User_PositionRendered;
 use App\View\Components\Formula\Wir_NameRendered;
 
@@ -67,12 +68,15 @@ trait TraitEntityFormula
                 case "All_ClosedAt":
                     $value = (new All_ClosedAt())($status, $type);
                     break;
-                case "All_DuplicateStatus":
-                    $value = (new All_DuplicateStatus())($type);
+                case "All_DefinitionOfNew":
+                    $value = (new All_DefinitionOfNew())($type);
                     break;
                     // case "Wir_NameRendered":
                     //     $value = (new Wir_NameRendered())($item);
                     //     break;
+                case "TSO_GetAssignee1":
+                    $value = (new TSO_GetAssignee1())();
+                    break;
                 case "NCR_Report_Type":
                     $value = (new NCR_Report_Type())($item);
                     break;

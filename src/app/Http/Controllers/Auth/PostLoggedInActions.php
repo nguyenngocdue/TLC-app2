@@ -11,8 +11,8 @@ class PostLoggedInActions
     public static function setTokenWhenLoggedForCookie()
     {
         $user = CurrentUser::get();
-        $timezone = $user->time_zone;
-        GetSetCookie::setCookieForever('time_zone', $timezone);
+        // $timezone = $user->time_zone;
+        // GetSetCookie::setCookieForever('time_zone', $timezone);
         $token = $user->createToken('tlc_token')->plainTextToken;
         GetSetCookie::setCookieForever('tlc_token', $token);
     }

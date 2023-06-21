@@ -50,7 +50,7 @@ class ViewAllTypeCalendar extends Component
         })->groupBy('year_value');
         return view('components.renderer.view-all-type-calendar', [
             'allTimesheet' => $allTimesheet,
-            'routeCreate' => route('timesheet_officers.create'),
+            'routeCreate' => route($this->type . '.storeEmpty'),
             'token' => $token,
             'type' => $this->type,
             'typeModel' => $this->typeModel,
@@ -58,6 +58,7 @@ class ViewAllTypeCalendar extends Component
             'userCurrentCalendar' => $userCurrentCalendar,
             'dataSourceLegend' => $this->dataSourceLegend(),
             'titleLegend' => 'Legend',
+            'ownerId' => $ownerId,
         ]);
     }
     private function getDataCountOfWeek($ownerId)

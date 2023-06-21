@@ -42,6 +42,7 @@
 </div>
 <script>
     calendarContainer = document.querySelector("[calendar-container]");
+    let count = 0;
     // const month_names = ['9','10','11','12','01','02','03','04','05','06','07','08','09','10','11','12'];
     const month_names = ['01','02','03','04','05','06','07','08','09','10','11','12'];
     const day_names = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -50,6 +51,7 @@
     const routeCreate = @json($routeCreate);
     const token = @json($token);
     const typeEntity = @json($type);
+    const ownerId = @json($ownerId);
     if(!year){
         yearNow();
     }
@@ -181,7 +183,7 @@
                                             </div>`
                 }else{
                     htmlContentWeek = '';
-                    urlCreate = genUrlCreate(routeCreate,valueWeek,yearCurrent,getIndexMonth(i));
+                    var dataCreate = genDataCreate(valueWeek,yearCurrent,getIndexMonth(i));
                     [url,classHover,id,bg_color,text_color,count_duplicate] = transformDataByTimeSheet(allTimesheet,valueWeek,getIndexMonth(i),yearCurrent,routeCreate);
                     htmlContentWeek = renderHtmlContentWeek(htmlContentWeek,valueWeek,getIndexMonth(i));
                     var htmlCountDuplicate = count_duplicate > 1 ? `<x-renderer.badge>${count_duplicate}</x-renderer.badge>` : '';
@@ -194,7 +196,7 @@
                                                     </a>
                                                 </div>` 
                                             : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                                    <button onclick="callApiCreateTimesheet('${urlCreate}')" class="${classHover} w-full grid grid-cols-7 gap-1 font-semibold text-center text-gray-800">
+                                                    <button onclick="callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:'${ownerId}'}])" class="${classHover} w-full grid grid-cols-7 gap-1 font-semibold text-center text-gray-800">
                                                             ${htmlContentWeek}
                                                     </button>
                                                 </div>`
@@ -222,7 +224,7 @@
         const lengthArr = array.length;
         let htmlDays = '';
         htmlDays = renderHtmlContentWeek(htmlDays,array,month);
-        let urlCreate = genUrlCreate(routeCreate,array,year,month);
+        var dataCreate = genDataCreate(array,year,month);
         [url,classHover,id,bg_color,text_color,count_duplicate] = transformDataByTimeSheet(allTimesheet,array,month,year,routeCreate);
         var htmlCountDuplicate = count_duplicate > 1 ? `<x-renderer.badge>${count_duplicate}</x-renderer.badge>` : '';
         let result =  url
@@ -233,7 +235,7 @@
                             ${htmlCountDuplicate}
                         </a>
                         ` : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="${classHover} col-span-${lengthArr} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                <button  onclick="callApiCreateTimesheet('${urlCreate}')" class="w-full grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-gray-800">
+                                <button  onclick="callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:'${ownerId}'}])" class="w-full grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-gray-800">
                                         ${htmlDays}
                                 </button>
                             </div>`;
@@ -256,21 +258,21 @@
         // return (i<= 3) ? (i+9):(i-3);
         return i + 1;
     }
-    function genUrlCreate(routeCreate,valueWeek,yearCurrent,month){
+    function genDataCreate(valueWeek,yearCurrent,month){
         if(typeof valueWeek[0] == 'number'){
             month = padNumber(month);
             day = padNumber(valueWeek[0]);
-            urlCreate = `${routeCreate}?week=${yearCurrent}-${month}-${day}`
+            data = `${yearCurrent}-${month}-${day}`;
         }
         else{
             for (let day of valueWeek) {
                 if(typeof day == 'number'){
                     dayIsoWeek = moment(`${yearCurrent}-${month}-${day}`).startOf('isoWeek').format('YYYY-MM-DD');
-                    urlCreate = `${routeCreate}?week=${dayIsoWeek}`;
+                    data = dayIsoWeek;
                 }
             }
         }
-        return urlCreate;
+        return data;
     }
     function transformDataByTimeSheet(allTimesheet,days,month,yearCurrent,routeCreate){
         if(allTimesheet[yearCurrent]){
@@ -319,21 +321,25 @@
                     return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
                 }
     }
-    function callApiCreateTimesheet(url){
+    function callApiStoreEmpty(url,data,callback = null){
         $.ajax({
-            type: 'get',
+            type: 'post',
             url: url,
+            data: { lines: data },
             headers: {
                 'Authorization': 'Bearer ' + token,
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
             success: function (response) {
-                if(response.success){
+                if(callback){
+                    callback();
+                }else{
+                    if(response.success){
                     toastr.success(response.message);
-                    window.location.replace(response.hits);
-                }
-                else{
-                    toastr.warning(response.message);
+                    window.location.replace(response.hits[0]['redirect_edit_href']);
+                    }
+                    else{
+                        toastr.warning(response.message);
+                    }
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

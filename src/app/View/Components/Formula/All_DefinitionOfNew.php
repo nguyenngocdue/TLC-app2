@@ -4,7 +4,7 @@ namespace App\View\Components\Formula;
 
 use App\Utils\Support\Json\SuperDefinitions;
 
-class All_DuplicateStatus
+class All_DefinitionOfNew
 {
     public function __invoke($type)
     {

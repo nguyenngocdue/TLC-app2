@@ -5,34 +5,50 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TraitStoreEmpty
 {
-	public function tso_week_validate()
+	public function tso_week_validate($lines)
 	{
-		return false;
+		foreach ($lines as $value) {
+			if ($week = $value['week']) {
+				if ($week) {
+					$date = Carbon::parse($week);
+					$dateStartOfWeek = Carbon::parse($week)->startOfWeek()->format('Y-m-d');
+					if ($dateStartOfWeek == $week) {
+						return true;
+					} else {
+						if ($date->day == 26) {
+							return true;
+						} else {
+							return false;
+						}
+					}
+				}
+				return false;
+			}
+		}
 	}
 
 	public function storeEmpty(Request $request)
 	{
 		$sp = SuperProps::getFor($this->type);
-
+		$props = $sp['props'];
+		$lines = $request->get('lines');
 		$validation = true;
 		switch ($this->type) {
 			case 'hr_timesheet_officer':
-				$validation = $this->tso_week_validate();
+				$validation = $this->tso_week_validate($lines);
 				break;
 			default:
 				break;
 		}
 
 		if ($validation === false) return ResponseObject::responseFail();
-
-		$props = $sp['props'];
-		$lines = $request->get('lines');
 		$theRows = [];
 		$defaultValue = $this->getDefaultValue($props);
 		foreach ($lines as $item) {
