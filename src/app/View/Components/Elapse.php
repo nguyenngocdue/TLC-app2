@@ -29,6 +29,7 @@ class Elapse extends Component
      */
     public function render()
     {
+        if (!CurrentUser::get()) return;
         $isAdmin  = CurrentUser::isAdmin();
         if (!$isAdmin) return "";
         $value = "";

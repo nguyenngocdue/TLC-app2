@@ -44,20 +44,6 @@
         "hidden_navbar": "true",
         "icon": null
     },
-    "dashboard": {
-        "name": "dashboard",
-        "package_tab": "application",
-        "package": "system",
-        "sub_package": "dashboard",
-        "title": "Dashboard",
-        "nickname": "db",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-solid fa-gauge-high\"><\/i>"
-    },
     "department": {
         "name": "department",
         "package_tab": "application",

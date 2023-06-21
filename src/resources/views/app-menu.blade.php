@@ -11,7 +11,7 @@
     @foreach($app['children'] as $config)
    <li>
       <a href="{{$config['href']}}">{{($config['title'])}}</a>
-       - ({{$config['hidden']}})
+       - ({{$config['hidden'] ?? ""}})
        - {{($config['package'])}}
        - {{($config['sub_package'])}}
     </li>
