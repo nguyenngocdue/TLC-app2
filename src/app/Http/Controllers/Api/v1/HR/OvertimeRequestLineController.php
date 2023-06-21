@@ -20,6 +20,7 @@ class OvertimeRequestLineController extends Controller
 
         $lines = $request->input('lines');
         $result = [];
+        $allowExtra = config("hr.allow_extra_ot_hour"); //$this->allowExtra();
         foreach ($lines as $line) {
             $user_id = $line['user_id'];
             $ot_date = $line['ot_date'];
@@ -36,7 +37,7 @@ class OvertimeRequestLineController extends Controller
                 (SELECT 
                     if(ot_date BETWEEN concat(year(ot_date),'-12-$hr_month_starting_date') AND concat(year(ot_date),'-12-31'), year(ot_date)+1, year(ot_date)) AS `year0`, 
                     user_id, 
-                    round(200 - sum(total_time),2) AS `year_remaining_hours`
+                    round(400 - sum(total_time),2) AS `year_remaining_hours`
                 FROM `hr_overtime_request_lines` otrl, `hr_overtime_requests` otr
                 WHERE 1=1
                     AND user_id=$user_id
@@ -65,6 +66,17 @@ class OvertimeRequestLineController extends Controller
             // Log::info($sql);
             $resultLine = DB::select($sql);
             $resultLine_0 = $resultLine[0] ?? [];
+
+            $allowExtraHour = isset($allowExtra[$resultLine_0->year0][$resultLine_0->user_id]);
+            $lineInNotEmpty = isset($resultLine_0->month_remaining_hours);
+            if ($allowExtraHour && $lineInNotEmpty) {
+                $resultLine_0->allowExtraMonth = $allowExtra[$resultLine_0->year0][$resultLine_0->user_id]['month'];
+                $resultLine_0->month_remaining_hours += $resultLine_0->allowExtraMonth;
+
+                $resultLine_0->allowExtraYear = $allowExtra[$resultLine_0->year0][$resultLine_0->user_id]['year'];
+                $resultLine_0->year_remaining_hours += $resultLine_0->allowExtraYear;
+            }
+            // dump($resultLine_0);
             $result[] = $resultLine_0;
         }
         // dump($result);
