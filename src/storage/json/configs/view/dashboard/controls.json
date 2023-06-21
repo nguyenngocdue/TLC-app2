@@ -191,5 +191,10 @@
     "apps_have_view_all_matrix": [
         "hr_timesheet_workers"
     ],
+    "apps_have_qr_app": [
+        "pj_module",
+        "pj_shipment",
+        "pj_unit"
+    ],
     "view_all_tab_taxonomy": "status"
 }

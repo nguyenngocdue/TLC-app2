@@ -1,0 +1,44 @@
+{
+    "_getOwner": {
+        "name": "_getOwner",
+        "relationship": "belongsTo",
+        "control_name": "owner_id",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getDeletedBy": {
+        "name": "_getDeletedBy",
+        "relationship": "belongsTo",
+        "control_name": "deleted_by",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getTshtMembers()": {
+        "name": "_getTshtMembers()",
+        "relationship": "getCheckedByField",
+        "control_name": "getTshtMembers()",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "person",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    }
+}

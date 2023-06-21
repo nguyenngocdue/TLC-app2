@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Workflow;
 
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -28,11 +29,11 @@ class LibApps extends AbstractLib
                     $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
 
                     $route = Str::plural($app['name']) . ".index";
-                    $app['href'] = Route::has($route) ? route($route) : "#RouteNotFound:$route";
+                    $app['href'] = Route::has($route) ? route($route) : "#RouteNotFound1:$route";
 
                     $routeCreate = Str::plural($app['name']) . ".create";
                     if (static::checkEntityHasPermission('create', $key, $permissions)) {
-                        $app['href_create'] = Route::has($routeCreate) ? route($routeCreate) : "#RouteNotFound:$routeCreate";
+                        $app['href_create'] = Route::has($routeCreate) ? route($routeCreate) : "#RouteNotFound2:$routeCreate";
                     }
                     $result[$key] = $app;
                 }
@@ -67,7 +68,13 @@ class LibApps extends AbstractLib
                 $app['package_rendered'] = isset($app['package']) ? Str::appTitle($app['package']) : "unknown package";
                 $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
                 $route = Str::plural($app['name']) . ".index";
-                $app['href'] = Route::has($route) ? route($route) /*. "#Found:" . $route*/ : "#RouteNotFound:$route";
+                $hasRoute = Route::has($route);
+                if ($hasRoute) {
+                    $app['href'] = route($route);
+                } else {
+                    $app['nickname'] = $app['nickname'] . " ?";
+                    $app['href'] = "#RouteNotFound3:$route";
+                }
             }
             static::$singleton = $result;
         }

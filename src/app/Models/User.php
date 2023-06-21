@@ -120,9 +120,16 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     public $oracyParams = [
         "getOtTeams()" => ["getCheckedByField", User_team_ot::class],
+        "getTshtTeams()" => ["getCheckedByField", User_team_ts::class],
     ];
 
     public function getOtTeams()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getTshtTeams()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

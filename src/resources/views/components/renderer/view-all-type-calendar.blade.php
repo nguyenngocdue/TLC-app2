@@ -331,18 +331,13 @@
             },
             success: function (response) {
                 if(callback){
-                    callback();
+                    callback(response);
                 }else{
-                    if(response.success){
                     toastr.success(response.message);
                     window.location.replace(response.hits[0]['redirect_edit_href']);
-                    }
-                    else{
-                        toastr.warning(response.message);
-                    }
                 }
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR) {
                 toastr.error(jqXHR.responseJSON.message);
             },
         })
