@@ -67,14 +67,16 @@ class OvertimeRequestLineController extends Controller
             $resultLine = DB::select($sql);
             $resultLine_0 = $resultLine[0] ?? [];
 
-            $allowExtraHour = isset($allowExtra[$resultLine_0->year0][$resultLine_0->user_id]);
-            $lineInNotEmpty = isset($resultLine_0->month_remaining_hours);
-            if ($allowExtraHour && $lineInNotEmpty) {
-                $resultLine_0->allowExtraMonth = $allowExtra[$resultLine_0->year0][$resultLine_0->user_id]['month'];
-                $resultLine_0->month_remaining_hours += $resultLine_0->allowExtraMonth;
+            if (isset($resultLine_0->year0)) {
+                $allowExtraHour = isset($allowExtra[$resultLine_0->year0][$resultLine_0->user_id]);
+                $lineInNotEmpty = isset($resultLine_0->month_remaining_hours);
+                if ($allowExtraHour && $lineInNotEmpty) {
+                    $resultLine_0->allowExtraMonth = $allowExtra[$resultLine_0->year0][$resultLine_0->user_id]['month'];
+                    $resultLine_0->month_remaining_hours += $resultLine_0->allowExtraMonth;
 
-                $resultLine_0->allowExtraYear = $allowExtra[$resultLine_0->year0][$resultLine_0->user_id]['year'];
-                $resultLine_0->year_remaining_hours += $resultLine_0->allowExtraYear;
+                    $resultLine_0->allowExtraYear = $allowExtra[$resultLine_0->year0][$resultLine_0->user_id]['year'];
+                    $resultLine_0->year_remaining_hours += $resultLine_0->allowExtraYear;
+                }
             }
             // dump($resultLine_0);
             $result[] = $resultLine_0;
