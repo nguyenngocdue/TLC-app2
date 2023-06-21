@@ -28,6 +28,13 @@ class ManageTransitions extends Manage_Parent
                 'align' => 'center',
                 'title' => 'Key',
             ],
+            [
+                "dataIndex" => 'location',
+                'renderer' => 'text4',
+                'editable' => true,
+                // 'align' => 'center',
+                // 'title' => 'Key',
+            ],
         ];
 
         $allStatuses = LibStatuses::getFor($this->type);

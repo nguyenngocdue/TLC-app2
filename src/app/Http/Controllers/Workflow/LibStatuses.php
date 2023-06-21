@@ -8,6 +8,15 @@ class LibStatuses extends AbstractLibForForm
 {
     protected static $key = "statuses";
 
+    // public static function getAll()
+    // {
+    //     $data = parent::getAll();
+    //     foreach ($data as &$status) {
+    //         unset($status['location']);
+    //     }
+    //     return $data;
+    // }
+
     public static function getAllWithHex()
     {
         $data = parent::getAll();
