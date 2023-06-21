@@ -1,6 +1,7 @@
 {
     "new": {
         "name": "new",
+        "location": "-200.00 0.00",
         "new": "",
         "pending_approval": "true",
         "rejected": "",
@@ -8,6 +9,7 @@
     },
     "pending_approval": {
         "name": "pending_approval",
+        "location": "-40.00 0.00",
         "new": "",
         "pending_approval": "",
         "rejected": "true",
@@ -15,6 +17,7 @@
     },
     "rejected": {
         "name": "rejected",
+        "location": "-200.00 100.00",
         "new": "",
         "pending_approval": "true",
         "rejected": "",
@@ -22,6 +25,7 @@
     },
     "approved": {
         "name": "approved",
+        "location": "120.00 0.00",
         "new": "",
         "pending_approval": "",
         "rejected": "",

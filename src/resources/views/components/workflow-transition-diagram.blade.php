@@ -27,10 +27,10 @@
 
   const showPoint = (e, obj)=>{
     const location =obj.part.location
-
+    const index =  obj.qb.index
+    const id = "table01[location]["+index+"]";
     const locStr = location.x.toFixed(2) + " " + location.y.toFixed(2)
-    console.log(obj, obj.part, locStr)
-    // console.log(location.x.toFixed(2), location.y.toFixed(2));
+    document.querySelector('[id="'+id+'"]').value=locStr
   }
   
   myDiagram1.nodeTemplate =
