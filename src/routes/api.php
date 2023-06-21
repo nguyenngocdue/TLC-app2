@@ -133,8 +133,8 @@ Route::group([
 });
 Route::group([
     'prefix' => 'v1/entity',
-    'middleware' => ['throttle:600,1'],
-    // 'middleware' => ['auth:sanctum', 'throttle:600,1'],
+    // 'middleware' => ['throttle:600,1'],
+    'middleware' => ['auth:sanctum', 'throttle:600,1'],
 ], function () {
     $apps = LibApis::getFor('storeEmpty_and_updateShort');
     foreach ($apps as $tableName) {

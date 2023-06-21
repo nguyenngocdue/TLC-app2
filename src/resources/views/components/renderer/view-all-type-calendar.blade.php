@@ -326,9 +326,9 @@
             type: 'post',
             url: url,
             data: { lines: data },
-            headers: {
-                'Authorization': 'Bearer ' + token,
-            },
+            // headers: {
+            //     'Authorization': 'Bearer ' + token,
+            // },
             success: function (response) {
                 if(callback){
                     callback(response);

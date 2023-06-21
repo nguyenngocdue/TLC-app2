@@ -20,7 +20,7 @@ class VerifyToken
     public function handle(Request $request, Closure $next)
     {
         if ($request->hasCookie('tlc_token')) {
-            $token = $request->cookie('tlc_token');
+            // $token = $request->cookie('tlc_token');
             $request->headers->add([
                 'Authorization' => 'Bearer ' . GetSetCookie::getCookie('tlc_token'),
             ]);
