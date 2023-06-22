@@ -104,7 +104,7 @@ class ViewAllTypeMatrix extends Component
                 'cell_class' => "text-blue-800",
                 'cell_href' => route($tableName . ".edit", $y->id),
             ];
-            $line['count'] = count($y->getOtMembers());
+            $line['count'] = count($y->getTshtMembers());
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 $xClass = $x['column_class'];
