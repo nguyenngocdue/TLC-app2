@@ -117,6 +117,12 @@ const renderHtml = (appsRender, url, topDrawer) => {
                                          </ul>`
                         break
                     case 3:
+                    case 4:
+                        htmlGroup = `<ul class="grid grid-cols-2">
+                                                ${htmlFlexCol}
+                                    </ul>`
+                        break
+                    case 5:
                     default:
                         htmlGroup = `<ul class="grid grid-cols-3">
                                                 ${htmlFlexCol}
