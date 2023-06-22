@@ -4,7 +4,7 @@ namespace App\View\Components\Renderer;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Hr_timesheet_worker;
-use App\Models\User_team_ot;
+use App\Models\User_team_tsht;
 use App\Utils\Constant;
 use Illuminate\View\Component;
 
@@ -17,7 +17,7 @@ class ViewAllTypeMatrix extends Component
      */
     public function __construct(
         private $type,
-        private $yAxis = User_team_ot::class,
+        private $yAxis = User_team_tsht::class,
         private $viewportDate = null,
     ) {
         // dump($this->viewportDate);
