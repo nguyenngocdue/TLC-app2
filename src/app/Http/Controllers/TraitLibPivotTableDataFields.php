@@ -19,9 +19,11 @@ trait TraitLibPivotTableDataFields
                 $array['biding_fields'][$field] =  array_combine(['table_name', 'attribute_name'], explode('.', $bindingName));
             } else {
                 $array['fields'][] = $value;
+                $array['biding_fields'][$value] =  [];
+
             }
         }
-        // dump($array);
+        // dd($array);
         return $array;
     }
 
@@ -42,12 +44,19 @@ trait TraitLibPivotTableDataFields
         $lib = LibPivotTables::getFor($this->modeType);
         $dataFields = $lib['data_fields'];
         $fields = $this->separateFields($lib['row_fields']);
-        $rowFields = $fields['fields'] ?? [];
-        $bidingFields = $fields['biding_fields'] ?? [];
+        $rowFieldsHasAttr = $fields['fields'] ?? [];
+        $bidingRowFields = $fields['biding_fields'] ?? [];
 
         $dataIndex = array_values(array_map(function ($item) {
-            return Str::singular($item['table_name']) . '_' . $item['attribute_name'];
-        }, $bidingFields));
+            // dd($item);
+            if (str_contains($item, '(')) {
+                [$posBracket,$posDot]  = [strpos($item, '('), strpos($item, '.', )];
+                $name = Str::singular(substr($item,$posBracket+1, $posDot - $posBracket - 1));
+                $attr = substr($item, $posDot+1, strlen($item)- $posDot - 2);
+                return $name .'_'.$attr;
+            }
+            return $item;
+        }, $lib['row_fields']));
 
         $valueIndexFields = $lib['value_index_fields'];
         $filters = $lib['filters'];
@@ -59,6 +68,6 @@ trait TraitLibPivotTableDataFields
         $bidingColumnFields = $fields['biding_fields'] ?? [];
         $dataAggregations = ReportPivot::combineArrays($dataFields, $lib['data_aggregations']);
 
-        return [$rowFields, $bidingFields, $filters, $columnFields, $bidingColumnFields, $dataAggregations, $dataIndex];
+        return [$rowFieldsHasAttr, $bidingRowFields, $filters, $columnFields, $bidingColumnFields, $dataAggregations, $dataIndex];
     }
 }

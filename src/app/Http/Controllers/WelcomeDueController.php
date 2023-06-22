@@ -307,18 +307,26 @@ abstract class WelcomeDueController extends Controller
         return $strDates;
     }
 
-    private function makeHeadColumn($bidingFields)
+    private function makeHeadColumn($bidingRowFields)
     {
         $columnsData = [];
-        foreach ($bidingFields as $key => $value) {
-            $dataIndex = Str::singular($value['table_name']) . '_' . $value['attribute_name'];
-            $title = ucwords(str_replace('_', ' ', substr($key, 0, strrpos($key, '_'))));
-            $columnsData[] = [
-                'title' => $title,
-                'dataIndex' => $dataIndex,
-                'width' => 250,
-            ];
-        };
+        foreach ($bidingRowFields as $key => $value) {
+            if (count($value) and is_array($value)) {
+                $dataIndex = Str::singular($value['table_name']) . '_' . $value['attribute_name'];
+                $title = ucwords(str_replace('_', ' ', substr($key, 0, strrpos($key, '_'))));
+                $columnsData[] = [
+                    'title' => $title,
+                    'dataIndex' => $dataIndex,
+                    'width' => 250,
+                ];
+            } else {
+                $columnsData[] = [
+                    'dataIndex' => $key,
+                    'width' => 250,
+                ];
+            }
+        }
+        // dd($columnsData);
         return $columnsData;
     }
 
@@ -362,13 +370,12 @@ abstract class WelcomeDueController extends Controller
 
     private function makeColumns($dataOutput)
     {
-        [, $bindingFields,,,, $dataAggregations, $dataIndex] =  $this->getDataFields();
-
-        $columnsOfRowFields = $this->makeHeadColumn($bindingFields);
+        [,$bidingRowFields,,,, $dataAggregations, $dataIndex] =  $this->getDataFields();
+        // dd($bidingRowFields, $rowFields);
+        $columnsOfRowFields = $this->makeHeadColumn($bidingRowFields);
         $allColumns = [];
         foreach ($dataOutput as $value) $allColumns = array_unique(array_merge($allColumns, array_keys($value)));
         $columnsOfColumnFields = $this->makeColumnsOfColumnFields($allColumns, $dataIndex);
-
         $columnsOfAgg = [];
         foreach ($dataAggregations as $filed => $fn) {
             $columnsOfAgg[] = [
@@ -392,11 +399,10 @@ abstract class WelcomeDueController extends Controller
     }
     private function attachInfoToDataSource($tables, $processedData)
     {
-        [$rowFields, $bindingFields,,, $bidingColumnFields,,] =  $this->getDataFields();
-        // dd($bidingColumnFields);
+        [$rowFieldsHasAttr, $bindingFields,,, $bidingColumnFields,,] =  $this->getDataFields();
         foreach ($processedData as &$items) {
             foreach ($items as $key => $id) {
-                if (in_array($key, $rowFields)) {
+                if (in_array($key, $rowFieldsHasAttr)) {
                     try {
                         $infoAttr = $bindingFields[$key];
                         $tableName = $infoAttr['table_name'];
@@ -440,13 +446,13 @@ abstract class WelcomeDueController extends Controller
                 return [$name => $array];
             }
         }, $tableNames));
+        // dump($tableNames);
         return $dataTables;
     }
 
     private function sortLinesData($dataOutput)
     {
         [,,,,,, $dataIndex] =  $this->getDataFields();
-        // $dataIndex = array_splice($dataIndex, 0, 2);
         usort($dataOutput, function ($item1, $item2) use ($dataIndex) {
             foreach ($dataIndex as $field) {
                 $comparison = $item1[$field] <=> $item2[$field];
@@ -461,8 +467,8 @@ abstract class WelcomeDueController extends Controller
 
     protected function makeDataOutput()
     {
-        [$rowFields,, $filters, $columnFields,, $dataAggregations,] =  $this->getDataFields();
-        // dd($bidingFields);
+        [$rowFieldsHasAttr,, $filters, $columnFields,, $dataAggregations,] =  $this->getDataFields();
+        // dd($bidingRowFields);
         $valueFilters = array_combine($filters, [[1, 4], [7, 8]]);
         // Step 1: reduce lines from Filters array
         $linesData = $this->getDataSource1();
@@ -470,7 +476,7 @@ abstract class WelcomeDueController extends Controller
         // dd($valueFilters, $dataReduce);
 
         // Step 2: group lines by Row_Fields array
-        $processedData = self::groupBy($dataReduce, $rowFields);
+        $processedData = self::groupBy($dataReduce, $rowFieldsHasAttr);
         //Remove all array keys by looping through all elements
         $processedData = array_values(array_map(fn ($item) => ReportPivot::getLastArray($item), $processedData));
         // dd($processedData);
@@ -489,6 +495,8 @@ abstract class WelcomeDueController extends Controller
 
         $tables = $this->getDataFromTables();
         $dataOutput = $this->attachInfoToDataSource($tables, $dataOutput);
+        // dd($dataOutput, $tables);
+
         return $dataOutput;
     }
 
