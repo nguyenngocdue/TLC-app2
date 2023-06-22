@@ -53,7 +53,8 @@ trait TraitViewAllFunctions
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
         $viewportDate = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] ?? null;
-        return [$viewportDate];
+        $viewportMode = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_mode'] ?? null;
+        return [$viewportDate, $viewportMode];
     }
 
     private function getEagerLoadParams($eloquentParams)

@@ -42,6 +42,19 @@ class ViewAllController extends Controller
         return $this->type;
     }
 
+    private function getDefaultViewType()
+    {
+        // dump($this->type);
+        switch ($this->type) {
+            case "hr_timesheet_worker":
+                return 'matrix';
+            case "hr_timesheet_officer":
+                return 'calendar';
+            default:
+                return null;
+        }
+    }
+
     public function index(Request $request, $trashed = false)
     {
         if ($viewType = $request->input('view_type')) {
@@ -56,6 +69,7 @@ class ViewAllController extends Controller
             }
         }
         [,,,,,,,, $viewAllModel] = $this->getUserSettingsViewAll();
+        $viewAllModel = $viewAllModel ? $viewAllModel : $this->getDefaultViewType();
         switch ($viewAllModel) {
             case 'calendar':
                 return $this->indexViewAllCalendar($request);

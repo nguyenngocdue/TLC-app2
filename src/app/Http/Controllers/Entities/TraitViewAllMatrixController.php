@@ -19,12 +19,13 @@ trait TraitViewAllMatrixController
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }
-        [$viewportDate] = $this->getUserSettingsViewAllMatrix();
+        [$viewportDate, $viewportMode] = $this->getUserSettingsViewAllMatrix();
         // $dataSource = $this->getDataSourceForViewCalendar($filterViewAllCalendar);
         return view('dashboards.pages.entity-view-all-matrix', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'title' => '(Matrix)',
             'viewportDate' => $viewportDate,
+            'viewportMode' => $viewportMode,
             // 'valueAdvanceFilters' => $filterViewAllCalendar,
             'type' => Str::plural($this->type),
             'typeModel' => $this->typeModel,
