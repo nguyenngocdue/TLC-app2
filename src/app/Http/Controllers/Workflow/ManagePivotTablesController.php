@@ -77,7 +77,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 170,
+                'width' => 300,
             ],
         ];
     }

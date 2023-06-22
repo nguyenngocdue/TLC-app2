@@ -7,7 +7,8 @@
         "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, workplace_id",
         "data_aggregations": "sum,sum,sum,concat",
-        "lookup_tables": "sub_projects,\r\nterms,\r\nusers,\r\nuser_types,\r\nworkplaces"
+        "lookup_tables": "sub_projects,\r\nterms,\r\nusers,\r\nuser_types,\r\nworkplaces",
+        "sort_by": "staff_id(desc),\r\ntype_id(asc)"
     },
     "hr_timesheet_employee_project": {
         "name": "hr_timesheet_employee_project",
@@ -17,7 +18,8 @@
         "value_index_fields": "time_sheet_hours_otr,\r\ntime_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh,",
         "data_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_aggregations": "sum,\r\nsum,\r\nsum",
-        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects"
+        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects",
+        "sort_by": "users.name(desc),\r\nstaff_id,\r\nworkplaces.name(desc),\r\ndepartments.id,"
     },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",
@@ -27,7 +29,8 @@
         "value_index_fields": "time_sheet_hours_otr,\r\ntime_sheet_hours_wfh,\r\ntime_sheet_hours",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
         "data_aggregations": "sum,sum,sum",
-        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\npj_tasks"
+        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\npj_tasks",
+        "sort_by": "pj_tasks.name(desc),\r\nsub_projects.name"
     },
     "hr_timesheet_team_date": {
         "name": "hr_timesheet_team_date",
@@ -37,6 +40,7 @@
         "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
         "data_aggregations": "sum,sum,sum",
-        "lookup_tables": "users,\r\nworkplaces,\r\nuser_categories,\r\nuser_types,\r\nsub_projects"
+        "lookup_tables": "users,\r\nworkplaces,\r\nuser_categories,\r\nuser_types,\r\nsub_projects",
+        "sort_by": null
     }
 }

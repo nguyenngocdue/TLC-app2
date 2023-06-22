@@ -31,23 +31,45 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         $sql = "SELECT
                     tsl.project_id AS project_id,
                     DATE(tsl.start_time) AS time_sheet_start_time,
-                    SUM(tsl.ts_hour) AS time_sheet_hours,
+                    DATE(tsl.start_time) AS time_sheet_start_time_otr,
+                    DATE(tsl.start_time) AS time_sheet_start_time_wfh,
                     SUM(tsl.duration_in_min) AS time_sheet_durations,
+                    SUM(tsl.ts_hour) AS time_sheet_hours_otr,
+                    SUM(tsl.ts_hour) AS time_sheet_hours_wfh,
+                    SUM(tsl.ts_hour) AS time_sheet_hours,
+
                     tsl.sub_project_id AS sub_project_id,
                     tsl.user_id AS user_id,
                     tsl.discipline_id AS discipline_id,
                     tsl.lod_id AS lod_id,
-                    tsl.task_id AS pj_task_id
-                    FROM 
-                        hr_timesheet_lines tsl
-                        WHERE 1 = 1
-                        AND DATE(tsl.start_time) BETWEEN '$startDate' AND '$endDate'";
-                    if (isset($modeParams['user_id'])) $sql .= "\n AND tsl.user_id = '{{user_id}}'";
-                    if (isset($modeParams['sub_project_id'])) $sql .= "\n AND tsl.sub_project_id = '{{sub_project_id}}'";
-                    // if (isset($modeParams['workplace_id'])) $sql .= "\n AND wp.id = '{{workplace_id}}'";
-                    // if (isset($modeParams['department_id'])) $sql .= "\n AND dep.id = '{{department_id}}'";
-                        $sql .="\n GROUP BY time_sheet_start_time, pj_task_id, project_id, sub_project_id, user_id, discipline_id, lod_id, pj_task_id
-                        ORDER BY user_id";
+                    tsl.task_id AS pj_task_id,
+                    us.department AS department_id,
+                    us.user_type AS type_id,
+                    us.category AS category_id,
+                    us.employeeid AS staff_id,
+                    us.workplace AS workplace_id
+
+                FROM
+                    hr_timesheet_lines tsl
+                INNER JOIN
+                    users us ON tsl.user_id = us.id
+                WHERE
+                    DATE(tsl.start_time) BETWEEN '2022-10-14' AND '2023-01-14'
+                GROUP BY
+                    time_sheet_start_time,
+                    pj_task_id,
+                    project_id,
+                    sub_project_id,
+                    user_id,
+                    discipline_id,
+                    lod_id,
+                    department_id,
+                    type_id,
+                    category_id,
+                    staff_id,
+                    workplace_id
+                ORDER BY
+                    user_id";
         return $sql;
     }
     protected function getDefaultValueModeParams($modeParams, $request)
@@ -72,7 +94,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
     {
         $date = DateTime::createFromFormat("d/m/Y", $dateString);
         // dump($dateString);
-        if ($date === false) return dump($dateString);
+        if ($date === false) return '';
         $dayOfWeek = $date->format("N"); // Retrieve the day of the week as a string
         if ($dayOfWeek >= 6) return true;
         return false;
