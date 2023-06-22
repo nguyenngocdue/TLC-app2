@@ -160,4 +160,4 @@
 <span class="text-yellow-700 border-yellow-300 bg-yellow-50 dark:bg-yellow-200"></span>
 
 <!-- gloabl -->
-<div class="justify-evenly" ></div>
+<div class="justify-evenly animate-pulse animate-bounce " ></div>

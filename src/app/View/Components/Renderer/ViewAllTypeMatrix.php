@@ -74,7 +74,7 @@ class ViewAllTypeMatrix extends Component
         $xAxis = array_map(fn ($c) => [
             'dataIndex' => $c,
             'title' => $this->getColumnTitleFromViewMode($c),
-            'column_class' => ("Sun" == date(Constant::FORMAT_WEEKDAY_SHORT, strtotime($c))) ? "bg-pink-200" : (($c == date(Constant::FORMAT_DATE_MYSQL)) ? "bg-blue-200" : ""),
+            'column_class' => ("Sun" == date(Constant::FORMAT_WEEKDAY_SHORT, strtotime($c))) ? "bg-gray-300" : (($c == date(Constant::FORMAT_DATE_MYSQL)) ? "bg-red-200 animate-pulse animate-bounce1" : ""),
             'width' => 10,
             'align' => 'center',
         ], $xAxis);
@@ -147,7 +147,7 @@ class ViewAllTypeMatrix extends Component
                 $line[$xId] = (object)[
                     'value' => '<i class="fa-duotone fa-circle-plus"></i>',
                     'cell_href' => route($this->type . ".create"),
-                    'cell_class' => "text-center text-green-800 $xClass",
+                    'cell_class' => "text-center text-blue-800 $xClass",
                     'cell_title' => "Create a new document",
                 ];
             }
@@ -218,7 +218,7 @@ class ViewAllTypeMatrix extends Component
                 'dataSource' => $dataSource,
                 'type' => $this->type,
                 'href' => $this->getHrefArray(),
-                // 'viewportMode' => $this->viewportMode,
+                'viewportMode' => $this->viewportMode,
             ],
         );
     }

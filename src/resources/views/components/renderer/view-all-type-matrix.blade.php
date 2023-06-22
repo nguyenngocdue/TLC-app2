@@ -7,9 +7,11 @@
           <x-renderer.button class="border border-blue-700" href="{!! $href['-1month'] !!}">
           -1 Month
           </x-renderer.button>
-          <x-renderer.button class="border border-blue-700" href="{!! $href['-1week'] !!}">
-          -1 Week
-          </x-renderer.button>
+          @if($viewportMode == 'week')
+               <x-renderer.button class="border border-blue-700" href="{!! $href['-1week'] !!}">
+               -1 Week
+               </x-renderer.button>
+          @endif
      </div>
      <div>
           <x-renderer.button class="border border-blue-700" href="{!! $href['today'] !!}" icon="fa-duotone fa-calendar-day">
@@ -26,9 +28,11 @@
           {{-- @endif --}}
      </div>
      <div>
-          <x-renderer.button class="border border-blue-700" href="{!! $href['+1week'] !!}">
-               +1 Week
-          </x-renderer.button>
+          @if($viewportMode == 'week')
+               <x-renderer.button class="border border-blue-700" href="{!! $href['+1week'] !!}">
+                    +1 Week
+               </x-renderer.button>
+          @endif
           <x-renderer.button class="border border-blue-700" href="{!! $href['+1month'] !!}">
                +1 Month 
           </x-renderer.button>
