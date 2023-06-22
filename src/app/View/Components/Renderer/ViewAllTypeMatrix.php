@@ -21,7 +21,8 @@ class ViewAllTypeMatrix extends Component
         private $viewportDate = null,
     ) {
         // dump($this->viewportDate);
-        $this->viewportDate = strtotime($this->viewportDate);
+        $this->viewportDate = strtotime($this->viewportDate ? $this->viewportDate : now());
+        // dump($this->viewportDate);
     }
 
     function getYAxis()
