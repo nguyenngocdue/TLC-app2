@@ -7,6 +7,8 @@ use App\Models\Hr_timesheet_worker;
 use App\Models\User;
 use App\Models\User_team_tsht;
 use App\Utils\Constant;
+use App\Utils\Support\DateTimeConcern;
+use Carbon\Carbon;
 use Illuminate\View\Component;
 
 class ViewAllTypeMatrix extends Component
@@ -33,14 +35,17 @@ class ViewAllTypeMatrix extends Component
         return $yAxis;
     }
 
-    function getBeginEndFromViewMode()
+    function getBeginEndFromViewMode($date)
     {
         switch ($this->viewportMode) {
             case 'month':
-                return [-31, 2];
+                [$begin, $end] = DateTimeConcern::getMonthBeginAndEndDate0($date);
+                $begin = Carbon::createFromDate($begin)->diffInDays($date);
+                $end = Carbon::createFromDate($end)->diffInDays($date);
+                return [-$begin, $end + 1];
             case 'week':
             default:
-                return [-7, 2];
+                return [-7, 1];
         }
     }
 
@@ -48,7 +53,7 @@ class ViewAllTypeMatrix extends Component
     {
         switch ($this->viewportMode) {
             case 'month':
-                return date('d', strtotime($c));
+                return date('d', strtotime($c)) . "<br/>" . date('m', strtotime($c)) . "<br/>" . date('y', strtotime($c));
             case 'week':
             default:
                 return date(Constant::FORMAT_DATE_ASIAN, strtotime($c)) . "<br>" . date(Constant::FORMAT_WEEKDAY_SHORT, strtotime($c));
@@ -59,7 +64,7 @@ class ViewAllTypeMatrix extends Component
     {
         $xAxis = [];
         $date0 = date(Constant::FORMAT_DATE_MYSQL, $this->viewportDate); //today date
-        [$begin, $end] = $this->getBeginEndFromViewMode();
+        [$begin, $end] = $this->getBeginEndFromViewMode($date0);
         for ($i = $begin; $i < $end; $i++) {
             $date = date(Constant::FORMAT_DATE_MYSQL, strtotime("+$i day", strtotime($date0)));
             $xAxis[] = date(Constant::FORMAT_DATE_MYSQL, strtotime($date));
