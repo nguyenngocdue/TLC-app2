@@ -114,7 +114,7 @@ const renderHtml = (appsRender, url, topDrawer) => {
                     case 2:
                         htmlGroup = `<ul class="grid grid-cols-1">
                                             ${htmlFlexCol}
-                                         </ul>`
+                                    </ul>`
                         break
                     case 3:
                     case 4:
