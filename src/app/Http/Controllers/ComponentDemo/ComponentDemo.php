@@ -22,13 +22,13 @@ class ComponentDemo
     {
         return [
             'static' => ['href' => "#static", 'title' => "Static", 'active' => false,],
-            'data_display' => ['href' => "#data_display", 'title' => "Data Display", 'active' => false,],
+            'data_display' => ['href' => "#data_display", 'title' => "Data Display", 'active' => true,],
             'data_entry' => ['href' => "#data_entry", 'title' => "Data Entry", 'active' => false,],
             'attachments' => ['href' => "#attachments", 'title' => "Attachments", 'active' => false,],
             'editable_tables' => ['href' => "#editable_tables", 'title' => "Editable Tables", 'active' => false,],
             'navigation' => ['href' => "#navigation", 'title' => "Navigation", 'active' => false,],
             'feedbacks' => ['href' => "#feedbacks", 'title' => "Feedback", 'active' => false,],
-            'listeners' => ['href' => "#listeners", 'title' => "Listeners", 'active' => true,],
+            'listeners' => ['href' => "#listeners", 'title' => "Listeners", 'active' => false,],
             'modecontrols' => ['href' => "#modecontrols", 'title' => "Mode Controls", 'active' => false,],
         ];
     }

@@ -370,7 +370,7 @@ abstract class WelcomeDueController extends Controller
 
     private function makeColumns($dataOutput)
     {
-        [,$bidingRowFields,,,, $dataAggregations, $dataIndex] =  $this->getDataFields();
+        [, $bidingRowFields,,,, $dataAggregations, $dataIndex] =  $this->getDataFields();
         // dd($bidingRowFields, $rowFields);
         $columnsOfRowFields = $this->makeHeadColumn($bidingRowFields);
         $allColumns = [];
@@ -455,10 +455,10 @@ abstract class WelcomeDueController extends Controller
         [,,,,,, $dataIndex] =  $this->getDataFields();
         usort($dataOutput, function ($item1, $item2) use ($dataIndex) {
             foreach ($dataIndex as $field) {
-                $comparison = $item1[$field] <=> $item2[$field];
-                if ($comparison !== 0) {
-                    return $comparison;
-                }
+                return $item1[$field] <=> $item2[$field];
+                // if ($comparison !== 0) {
+                //     return $comparison;
+                // }
             }
             return 0;
         });
