@@ -213,7 +213,7 @@ class ViewAllTypeMatrix extends Component
                 'dataSource' => $dataSource,
                 'type' => $this->type,
                 'href' => $this->getHrefArray(),
-                'viewportMode' => $this->viewportMode,
+                // 'viewportMode' => $this->viewportMode,
             ],
         );
     }
