@@ -53,7 +53,8 @@ trait TraitViewAllFunctions
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
         $viewportDate = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] ?? null;
-        return [$viewportDate];
+        $viewportMode = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_mode'] ?? null;
+        return [$viewportDate, $viewportMode];
     }
 
     private function getEagerLoadParams($eloquentParams)
@@ -64,8 +65,14 @@ trait TraitViewAllFunctions
 
     private function getDataSourceForViewCalendar($filter)
     {
-        return ($this->typeModel)::whereIn('owner_id', $filter['owner_id'])->whereDate('week', '>=', $filter['start_date'])
-            ->whereDate('week', '<=',  $filter['end_date']);
+        if ($filter) {
+            return ($this->typeModel)::whereIn('owner_id', $filter['owner_id'])->whereDate('week', '>=', $filter['start_date'])
+                ->whereDate('week', '<=',  $filter['end_date']);
+        }
+        $startDate = Carbon::now()->startOfYear()->toDateString();
+        $endDate = Carbon::now()->endOfYear()->toDateString();
+        return ($this->typeModel)::whereIn('owner_id', [CurrentUser::id()])->whereDate('week', '>=', $startDate)
+            ->whereDate('week', '<=',  $endDate);
     }
 
     private function getDataSource($advanceFilters = null, $trash = false)

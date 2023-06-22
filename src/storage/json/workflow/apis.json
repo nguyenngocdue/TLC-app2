@@ -45,7 +45,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "hr_timesheet_officers": {
-        "name": "hr_timesheet_officers"
+        "name": "hr_timesheet_officers",
+        "storeEmpty_and_updateShort": "true"
     },
     "hr_timesheet_workers": {
         "name": "hr_timesheet_workers"
@@ -198,11 +199,11 @@
     "user_position_pres": {
         "name": "user_position_pres"
     },
+    "user_team_ncrs": {
+        "name": "user_team_ncrs"
+    },
     "user_team_ots": {
         "name": "user_team_ots"
-    },
-    "user_teams": {
-        "name": "user_teams"
     },
     "user_time_keep_types": {
         "name": "user_time_keep_types"

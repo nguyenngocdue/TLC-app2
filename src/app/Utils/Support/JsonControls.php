@@ -99,6 +99,10 @@ class JsonControls
     {
         return self::getAll()['apps_have_due_date_column'];
     }
+    public static function getAppsHaveQrApp()
+    {
+        return self::getAll()['apps_have_qr_app'];
+    }
     public static function getAppsHaveViewAllCalendar()
     {
         return self::getAll()['apps_have_view_all_calendar'];

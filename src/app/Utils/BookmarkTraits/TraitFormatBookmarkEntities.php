@@ -41,27 +41,35 @@ trait TraitFormatBookmarkEntities
         $array = [];
         foreach ($allApps as $key => $value) {
             $clickCount = $value['click_count'] ?? 0;
+            $packageTabRender = $value['package_tab'];
             $packageRender = $value['package_rendered'];
             $subPackageRender = $value['sub_package_rendered'];
-            $array[$packageRender]['items'][$subPackageRender]['items'][$key] = $value;
-            if (isset($array[$packageRender]['total'])) {
-                $array[$packageRender]['total'] += $clickCount;
+            $array[$packageTabRender][$packageRender]['items'][$subPackageRender]['items'][$key] = $value;
+            if (isset($array[$packageTabRender][$packageRender]['total'])) {
+                $array[$packageTabRender][$packageRender]['total'] += $clickCount;
             } else {
-                $array[$packageRender]['total'] = $clickCount;
+                $array[$packageTabRender][$packageRender]['total'] = $clickCount;
             }
-            if (isset($array[$packageRender]['items'][$subPackageRender]['total'])) {
-                $array[$packageRender]['items'][$subPackageRender]['total'] += $clickCount;
+            if (isset($array[$packageTabRender][$packageRender]['items'][$subPackageRender]['total'])) {
+                $array[$packageTabRender][$packageRender]['items'][$subPackageRender]['total'] += $clickCount;
             } else {
-                $array[$packageRender]['items'][$subPackageRender]['total'] = $clickCount;
+                $array[$packageTabRender][$packageRender]['items'][$subPackageRender]['total'] = $clickCount;
             }
         }
         usort($array, function ($a, $b) {
-            return $b['total'] - $a['total'];
+            usort($a, function ($c, $d) {
+                return $c['total'] - $d['total'];
+            });
+            usort($b, function ($c, $d) {
+                return $c['total'] - $d['total'];
+            });
         });
         $result = [];
-        foreach ($array as $key => $value) {
-            foreach ($value['items'] as $key => $value2) {
-                $result[] = $value2['items'];
+        foreach ($array as $value) {
+            foreach ($value as $key => $value) {
+                foreach ($value['items'] as $key => $value2) {
+                    $result[] = $value2['items'];
+                }
             }
         }
         $result = array_reduce($result, function ($carry, $item) {

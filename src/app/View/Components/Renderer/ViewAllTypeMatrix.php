@@ -4,8 +4,11 @@ namespace App\View\Components\Renderer;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Hr_timesheet_worker;
-use App\Models\User_team_ot;
+use App\Models\User;
+use App\Models\User_team_tsht;
 use App\Utils\Constant;
+use App\Utils\Support\DateTimeConcern;
+use Carbon\Carbon;
 use Illuminate\View\Component;
 
 class ViewAllTypeMatrix extends Component
@@ -17,11 +20,13 @@ class ViewAllTypeMatrix extends Component
      */
     public function __construct(
         private $type,
-        private $yAxis = User_team_ot::class,
+        private $yAxis = User_team_tsht::class,
         private $viewportDate = null,
+        private $viewportMode = 'week',
     ) {
         // dump($this->viewportDate);
-        $this->viewportDate = strtotime($this->viewportDate);
+        $this->viewportDate = strtotime($this->viewportDate ? $this->viewportDate : now());
+        // dump($this->viewportMode);
     }
 
     function getYAxis()
@@ -30,11 +35,37 @@ class ViewAllTypeMatrix extends Component
         return $yAxis;
     }
 
+    function getBeginEndFromViewMode($date)
+    {
+        switch ($this->viewportMode) {
+            case 'month':
+                [$begin, $end] = DateTimeConcern::getMonthBeginAndEndDate0($date);
+                $begin = Carbon::createFromDate($begin)->diffInDays($date);
+                $end = Carbon::createFromDate($end)->diffInDays($date);
+                return [-$begin, $end + 1];
+            case 'week':
+            default:
+                return [-7, 1];
+        }
+    }
+
+    function getColumnTitleFromViewMode($c)
+    {
+        switch ($this->viewportMode) {
+            case 'month':
+                return date('d', strtotime($c)) . "<br/>" . date('m', strtotime($c)) . "<br/>" . date('y', strtotime($c));
+            case 'week':
+            default:
+                return date(Constant::FORMAT_DATE_ASIAN, strtotime($c)) . "<br>" . date(Constant::FORMAT_WEEKDAY_SHORT, strtotime($c));
+        }
+    }
+
     function getXAxis()
     {
         $xAxis = [];
         $date0 = date(Constant::FORMAT_DATE_MYSQL, $this->viewportDate); //today date
-        for ($i = -7; $i < 2; $i++) {
+        [$begin, $end] = $this->getBeginEndFromViewMode($date0);
+        for ($i = $begin; $i < $end; $i++) {
             $date = date(Constant::FORMAT_DATE_MYSQL, strtotime("+$i day", strtotime($date0)));
             $xAxis[] = date(Constant::FORMAT_DATE_MYSQL, strtotime($date));
         }
@@ -42,8 +73,10 @@ class ViewAllTypeMatrix extends Component
 
         $xAxis = array_map(fn ($c) => [
             'dataIndex' => $c,
-            'title' => date(Constant::FORMAT_DATE_ASIAN, strtotime($c)) . "<br>" . date(Constant::FORMAT_WEEKDAY_SHORT, strtotime($c)),
-            'column_class' => ("Sun" == date(Constant::FORMAT_WEEKDAY_SHORT, strtotime($c))) ? "bg-pink-200" : (($c == date(Constant::FORMAT_DATE_MYSQL)) ? "bg-blue-200" : ""),
+            'title' => $this->getColumnTitleFromViewMode($c),
+            'column_class' => ("Sun" == date(Constant::FORMAT_WEEKDAY_SHORT, strtotime($c))) ? "bg-gray-300" : (($c == date(Constant::FORMAT_DATE_MYSQL)) ? "bg-red-200 animate-pulse animate-bounce1" : ""),
+            'width' => 10,
+            'align' => 'center',
         ], $xAxis);
         return $xAxis;
     }
@@ -71,11 +104,11 @@ class ViewAllTypeMatrix extends Component
         // return ($cell);
         $result = [];
         $statuses = LibStatuses::getFor($this->type);
+        // dump($statuses);
         foreach ($cell as $document) {
             $status = $statuses[$document->status];
-            // dump($statuses[$status]);
             $result[] = (object)[
-                'value' => $document->id,
+                'value' => $status['icon'],
                 'cell_title' => 'Open this document',
                 $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'],
                 $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']),
@@ -104,14 +137,17 @@ class ViewAllTypeMatrix extends Component
                 'cell_class' => "text-blue-800",
                 'cell_href' => route($tableName . ".edit", $y->id),
             ];
-            $line['count'] = count($y->getOtMembers());
+            $line['meta01'] = (object) [
+                'value' => User::findFromCache($y->owner_id)->name,
+            ];
+            $line['count'] = count($y->getTshtMembers());
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 $xClass = $x['column_class'];
                 $line[$xId] = (object)[
                     'value' => '<i class="fa-duotone fa-circle-plus"></i>',
                     'cell_href' => route($this->type . ".create"),
-                    'cell_class' => "text-center text-green-800 $xClass",
+                    'cell_class' => "text-center text-blue-800 $xClass",
                     'cell_title' => "Create a new document",
                 ];
             }
@@ -138,14 +174,28 @@ class ViewAllTypeMatrix extends Component
         $plus1year = date(Constant::FORMAT_DATE_MYSQL, strtotime("+1 year", $this->viewportDate));
 
         return [
-            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1year",
-            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1month",
-            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1week",
-            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$today",
-            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1week",
-            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1month",
-            "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1year",
+            '-1year' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1year",
+            '-1month' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1month",
+            '-1week' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1week",
+            'today' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$today",
+            '+1week' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1week",
+            '+1month' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1month",
+            '+1year' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1year",
+
+            'weekView' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportMode=week",
+            'monthView' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportMode=month",
         ];
+    }
+
+    private function getColumns($extraColumns)
+    {
+        return  [
+            ['dataIndex' => 'name_for_group_by', 'hidden' => true],
+            ['dataIndex' => 'name', 'width' => 250,],
+            ['dataIndex' => 'meta01', 'title' => 'Owner', 'width' => 150,],
+            ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
+            ...$extraColumns,
+        ];;
     }
 
     /**
@@ -160,12 +210,7 @@ class ViewAllTypeMatrix extends Component
         $yAxis = $this->getYAxis();
         $dataSource = $this->getDataSource($xAxis);
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $dataSource);
-        $columns = [
-            ['dataIndex' => 'name_for_group_by', 'hidden' => true],
-            ['dataIndex' => 'name',],
-            ['dataIndex' => 'count', 'align' => 'center'],
-            ...$xAxis,
-        ];
+        $columns = $this->getColumns($xAxis);
         return view(
             'components.renderer.view-all-type-matrix',
             [
@@ -173,6 +218,7 @@ class ViewAllTypeMatrix extends Component
                 'dataSource' => $dataSource,
                 'type' => $this->type,
                 'href' => $this->getHrefArray(),
+                'viewportMode' => $this->viewportMode,
             ],
         );
     }

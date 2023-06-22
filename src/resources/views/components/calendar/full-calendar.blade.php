@@ -5,7 +5,6 @@
     const modalId = @json($modalId);
     const readOnly = @json($readOnly);
     const arrHidden = @json($arrHidden);
-    console.log(arrHidden);
     const modal = $(`#`+modalId);
     const containerEl = document.getElementById('task_id');
     const calendarEl = document.getElementById('calendar');

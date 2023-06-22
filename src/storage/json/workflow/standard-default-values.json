@@ -48,7 +48,7 @@
         "column_name": "status",
         "validation": null,
         "validation_regex": null,
-        "formula": "All_DuplicateStatus",
+        "formula": "All_DefinitionOfNew",
         "default_value": null,
         "label_extra": null,
         "placeholder": null,

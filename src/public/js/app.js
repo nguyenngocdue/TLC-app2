@@ -70,7 +70,8 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "tlc-key",
-  wsHost: "websockets.tlcmodular.com",
+  // wsHost: process.env.MIX_PUSHER_HOST,
+  wsHost: window.location.hostname,
   wsPort: "443",
   wssPort: "443",
   encrypted: true,

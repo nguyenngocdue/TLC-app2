@@ -11,9 +11,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_workplace_id": {
-        "name": "_workplace_id",
-        "column_name": "workplace_id",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "label": "",
         "validation": "required",
         "validation_regex": "",
@@ -23,9 +23,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -35,13 +35,13 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getHrOtrLines": {
-        "name": "_getHrOtrLines",
-        "column_name": "getHrOtrLines",
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
-        "formula": "",
+        "formula": "All_SlugifyByName",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -59,21 +59,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
-        "label": "",
-        "validation": "required",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getTshtMembers()": {
+        "name": "_getTshtMembers()",
+        "column_name": "getTshtMembers()",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -89,7 +77,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "All_DefinitionOfNew",
+        "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -110,6 +98,30 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
         "label": "",
         "validation": "",
         "validation_regex": "",

@@ -88,7 +88,7 @@ class LoginController extends Controller
             }
             if (Auth::user()) {
                 PostLoggedInActions::setTimeZoneWhenLogged($request);
-                // PostLoggedInActions::setTokenWhenLoggedForCookie();
+                PostLoggedInActions::setTokenWhenLoggedForCookie();
             }
             return $this->sendLoginResponse($request);
         }

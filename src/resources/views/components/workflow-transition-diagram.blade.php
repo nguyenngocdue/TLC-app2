@@ -20,13 +20,27 @@
     //  layout: $(go.GridLayout,{ comparer: go.GridLayout.smartComparer })
     //  layout:  $(go.TreeLayout,{ angle: 90, nodeSpacing: 10, layerSpacing: 30 })
   });
+
+  myDiagram1.grid.visible = true;
+  myDiagram1.toolManager.draggingTool.isGridSnapEnabled = true;
+  myDiagram1.toolManager.resizingTool.isGridSnapEnabled = true;
+
+  const showPoint = (e, obj)=>{
+    const location =obj.part.location
+    const index =  obj.qb.index
+    const id = "table01[location]["+index+"]";
+    const locStr = location.x.toFixed(2) + " " + location.y.toFixed(2)
+    document.querySelector('[id="'+id+'"]').value=locStr
+  }
   
   myDiagram1.nodeTemplate =
   $(go.Node, 
-    {
-      locationSpot: go.Spot.Center, 
-    },
+    {locationSpot: go.Spot.Center, },
     "Auto",
+    {
+      mouseLeave: (e, obj) => showPoint(e, obj),
+      // click: (e, obj) => showPoint(obj.part.location),
+    },
     new go.Binding("location", "location", go.Point.parse),
     $(go.Shape, 
       "RoundedRectangle", 
@@ -37,6 +51,7 @@
       { margin: 5 },
       new go.Binding("text", "title"),
       new go.Binding("stroke", "color"),
+      new go.Binding("index", "color"),
       )
   );
   myDiagram1.linkTemplate =

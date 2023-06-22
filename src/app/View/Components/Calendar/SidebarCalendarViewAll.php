@@ -50,7 +50,7 @@ class SidebarCalendarViewAll extends Component
         $dataSource = $this->treeDataSource($tree, $type, $idsRenderCalendar, $dataCountQuerySql);
         $htmlRenderTree = $this->renderHtmlByTreeDataSource($dataSource, $users, $viewAllCalendarShowAllChildren);
         return view('components.calendar.sidebar-calendar-view-all', [
-            'htmlRenderCurrentUser' => $this->renderHtml($dataUserCurrent, $users),
+            'htmlRenderCurrentUser' => $this->renderHtml($dataUserCurrent, $users, true),
             'htmlRenderTree' => $htmlRenderTree,
             'url' => route('updateUserSettingsApi'),
             'type' => $type,
@@ -157,7 +157,7 @@ class SidebarCalendarViewAll extends Component
         }
         return $html;
     }
-    private function renderHtml($value, $users)
+    private function renderHtml($value, $users, $isCurrentUser = false)
     {
         $html = '';
         $user = $users[$value['id']] ?? '';
@@ -171,8 +171,13 @@ class SidebarCalendarViewAll extends Component
         if ($totalPendingApproval > 0) {
             $badge = Blade::render("<x-renderer.badge>$totalPendingApproval</x-renderer.badge>");
         }
-        $htmlHref = $disable ? "<div class='flex'>$userAvatarRender" . "$badge</div>" : "<a href='$href' class='flex'>$userAvatarRender" . "$badge</a>";
-        $bgAndHover = $disable ? "bg-gray-400" : "bg-gray-200 hover:bg-gray-300 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800";
+        if ($isCurrentUser) {
+            $htmlHref = "<a href='$href' class='flex'>$userAvatarRender" . "$badge</a>";
+            $bgAndHover = $disable ? "bg-gray-300" : "bg-gray-200 hover:bg-gray-300 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800";
+        } else {
+            $htmlHref = $disable ? "<div class='flex'>$userAvatarRender" . "$badge</div>" : "<a href='$href' class='flex'>$userAvatarRender" . "$badge</a>";
+            $bgAndHover = $disable ? "bg-gray-400" : "bg-gray-200 hover:bg-gray-300 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800";
+        }
         $activeClass = $active ? "border-blue-600" : "";
         $html .= "<li class='relative $bgAndHover $activeClass border my-1 p-1 focus:ring-4 font-medium rounded-lg text-sm'>
                     $htmlHref

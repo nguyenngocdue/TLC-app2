@@ -45,7 +45,14 @@ class UpdateUserSettings extends Controller
     {
         $type = $request->input("_entity");
         $viewportDate = $request->input("viewportDate");
-        $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] = $viewportDate;
+        if ($viewportDate) {
+            $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] = $viewportDate;
+        }
+        $viewportMode = $request->input("viewportMode");
+        if ($viewportMode) {
+            $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_mode'] = $viewportMode;
+        }
+
         return $settings;
     }
 
@@ -75,7 +82,9 @@ class UpdateUserSettings extends Controller
     {
         $type = $request->input("_entity");
         $value = $request->input("view_type");
-        $this->updateViewAllCalendar($request, $settings);
+        if ($value == 'calendar') {
+            $this->updateViewAllCalendar($request, $settings);
+        }
         $settings[$type][Constant::VIEW_ALL]['view_all_mode'] = $value;
         return $settings;
     }

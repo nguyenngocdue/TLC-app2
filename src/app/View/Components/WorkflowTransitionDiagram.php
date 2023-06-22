@@ -29,7 +29,7 @@ class WorkflowTransitionDiagram extends Component
         $allStatus = LibStatuses::getAllWithHex();
         // dump($allStatus);
         // dump($this->dataSource);
-        foreach ($this->dataSource as $value) {
+        foreach ($this->dataSource as $index => $value) {
             $statusKey = $value['name'];
             $status = $allStatus[$statusKey];
             $block = [
@@ -37,6 +37,7 @@ class WorkflowTransitionDiagram extends Component
                 'title' => $status['title'],
                 'color' => $status['bg_color_hex'] ?? "red",
                 'bg-color' => $status['text_color_hex'] ?? "red",
+                'index' => $index,
             ];
             if (isset($value['location'])) {
                 $block['location'] = $value['location'];

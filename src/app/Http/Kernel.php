@@ -41,6 +41,7 @@ class Kernel extends HttpKernel
         ],
 
         "api" => [
+            \App\Http\Middleware\VerifyToken::class,
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             "throttle:api",
             // "throttle:600,1",
