@@ -47,12 +47,14 @@ trait TableTraitColumns
         $columnName = $column['column_name'] ?? $dataIndex;
         $columnType = $column['column_type'] ?? "";
         $width = $column['width'] ?? "";
+        $colspan = $column['colspan'] ?? 1;
         $title = $column['title'] ?? Str::headline($column['dataIndex']);
         $tooltip = "Column details:\n";
         $tooltip .= "+ DataIndex: $dataIndex\n";
         $tooltip .= "+ ColumnName: $columnName\n";
         $tooltip .= "+ Renderer: $renderer\n";
         $tooltip .= "+ Width: $width\n";
+        $tooltip .= "+ Colspan: $colspan\n";
         $tooltip .= "+ Took: {$elapse}ms";
 
         $styleStr = $this->getStyleStr($column);
@@ -66,8 +68,9 @@ trait TableTraitColumns
         $borderRight = $isLastColumn ? "" : "border1 border-r";
         $borderRight = ($this->rotate45Width) ? "" : $borderRight;
         $tinyText = $this->noCss ? "text-xs" : "";
+        $colspanStr = ($colspan > 1) ? "colspan=$colspan" : "";
         $th = "";
-        $th .= "<th class='px-4 py-3 $borderRight $classTh' $styleStr title='$tooltip'>";
+        $th .= "<th $colspanStr class='px-4 py-3 border-b $borderRight $classTh' $styleStr title='$tooltip'>";
         $th .= "<div class='$classDiv $tinyText text-gray-700 dark:text-gray-300'>";
         $th .= "<span>" . $title . "</span>";
         $th .= "</div>";
@@ -76,11 +79,30 @@ trait TableTraitColumns
         return $th;
     }
 
+    private function getSkippedDueToColspan($columns)
+    {
+        $skippedDueToColspan = array_fill(0, count($columns), false);
+        $columns = array_values($columns);
+        foreach ($columns as $key => $column) {
+            if ($skippedDueToColspan[$key]) continue;
+            $colspan = $column['colspan'] ?? 1;
+            if ($colspan > 1) {
+                for ($i = 1; $i < $colspan; $i++) {
+                    $skippedDueToColspan[$i + $key] = true;
+                }
+            }
+        }
+        return $skippedDueToColspan;
+    }
+
     private function getColumnRendered($columns, $timeElapse)
     {
         $columnsRendered = [];
+        $skippedDueToColspan = $this->getSkippedDueToColspan($columns);
+        $columns = array_values($columns);
         foreach ($columns as $key => $column) {
             if (empty($column)) continue;
+            if ($skippedDueToColspan[$key]) continue;
             if (!$this->isInvisible($column)) {
                 $dataIndex = $column['dataIndex'];
                 $elapse = $timeElapse[$dataIndex] ?? 0;
@@ -109,8 +131,11 @@ trait TableTraitColumns
             if ($this->isInvisible($column)) continue;
             $styleStr = $this->getStyleStr($column);
             $dataIndex = $column['dataIndex'];
-            if (isset($dataHeader[$dataIndex])) $th[] = "<th class='py-1' $styleStr>" . $dataHeader[$dataIndex] . "</th>";
-            else $th[] = "<th $styleStr dataIndex='" . $dataIndex . "'></th>";
+            if (isset($dataHeader[$dataIndex])) {
+                $th[] = "<th $styleStr class='py-1 border-r border-b'>" . $dataHeader[$dataIndex] . "</th>";
+            } else {
+                $th[] = "<th $styleStr class='py-1 border-r border-b' dataIndex='" . $dataIndex . "'></th>";
+            }
         }
         $result = join($th);
         return $result;

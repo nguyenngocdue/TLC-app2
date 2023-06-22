@@ -19,7 +19,8 @@ trait TraitDemoTableData
                 "title" => 'Client',
                 "dataIndex" => "client",
                 "renderer" => "avatar-item",
-                "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar', 'gray' => 'disabled']
+                "attributes" => ['title' => 'client', 'description' => 'amount', 'avatar' => 'avatar', 'gray' => 'disabled'],
+                "colspan" => 2,
             ],
             [
                 "title" => 'Logged In',
@@ -61,6 +62,7 @@ trait TraitDemoTableData
                 "renderer" => "dropdown",
                 "editable" => true,
                 "cbbDataSource" => ["", "Hans", "Helen", "sarah", "Sandy", "Eva", "Travis"],
+                "colspan" => 2,
             ],
             [
                 "title" => 'Logged In',
@@ -97,6 +99,7 @@ trait TraitDemoTableData
         $button = "<x-renderer.button size='xs' value='xxx' onClick='$onClick'>Hello in console</x-renderer.button>";
         return [
             'client' => Blade::render($button),
+            'loggedIn' => "01<br/>01<br/>23"
         ];
     }
 
