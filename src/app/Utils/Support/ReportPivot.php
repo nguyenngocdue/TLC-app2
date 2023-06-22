@@ -20,21 +20,20 @@ class ReportPivot
                     case 'date':
                         $reversedDate = $date->format('d-m-Y');
                         $_strDate = str_replace('-', '_', $reversedDate) . '_' . $value['fieldIndex'];
-                        // $item[$_strDate] = $item[$value['valueFieldIndex']];
-                        $dateItems[$_strDate] =  $item[$value['valueFieldIndex']];
+                        // $item[$_strDate] = $item[$value['valueIndexField']];
+                        $dateItems[$_strDate] =  $item[$value['valueIndexField']];
 
                         break;
                     default:
                         $key = str_replace(' ', '_', strtolower($item[$value['fieldIndex']]));
-                        $dateItems[$key] =  $item[$value['valueFieldIndex']];
+                        $dateItems[$value['fieldIndex'].'_'.$key] =  $item[$value['valueIndexField']];
                         break;
                 }
             }
             return $dateItems;
         }, $data);
-        // dd($newArray);
-        // if ($type === 'date') return array_merge(...$newArray);
         $newArray = self::sumItemsInArray($newArray);
+        // dump($newArray);
         return $newArray;
     }
     public static function getLastArray($data)
