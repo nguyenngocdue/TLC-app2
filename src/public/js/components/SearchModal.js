@@ -18,9 +18,14 @@ const renderHtml = (appsRender, url, topDrawer) => {
             const nameApp = capitalize(app_index ?? '')
             const apps = appsRender[app_index]
             for (const property in apps) {
+                const lengthGroup = Object.keys(apps[property]).length
                 let totalPackage = 0
                 const package = property
                 let html = ``
+                let htmlGroup = ``
+                let htmlFlexCol = ``
+                let count = 1
+                let countDivision = 0
                 for (const value in apps[property]) {
                     let htmlTopDrawer = ``
                     const sub_package = value
@@ -36,7 +41,7 @@ const renderHtml = (appsRender, url, topDrawer) => {
                             <i class="fa-light fa-circle-plus"></i>
                         </a>`
                             : ''
-                        const count = app.click_count
+                        const click_count = app.click_count
                             ? `<span class="inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${app.click_count}</span>`
                             : ''
                         const statusHtml = status
@@ -63,7 +68,7 @@ const renderHtml = (appsRender, url, topDrawer) => {
                                         }</span>
                                         ${statusHtml}
                                 </a>
-                                ${count}
+                                ${click_count}
                                 ${isCreate}
                                 
                             </div>
@@ -78,17 +83,50 @@ const renderHtml = (appsRender, url, topDrawer) => {
                                         <ul class="space-y-1">
                                            ${htmlTopDrawer}
                                         </ul>
-                                    </li>`
+                            </li>`
+                    if (lengthGroup >= 2) {
+                        const divisionPra = Math.ceil(lengthGroup / 2)
+                        if (count % 2 === 0) {
+                            htmlFlexCol += `<ul class="flex flex-col">
+                                            ${html}
+                                            </ul>`
+                            html = ``
+                            countDivision++
+                        } else {
+                            if (count === lengthGroup) {
+                                htmlFlexCol += `<ul class="flex flex-col">
+                                            ${html}
+                                            </ul>`
+                                html = ``
+                                countDivision++
+                            }
+                        }
+                    } else {
+                        htmlFlexCol = html
+                    }
+                    count++
                 }
                 const totalPackageHtml = totalPackage
                     ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${totalPackage}</span>`
                     : ''
+                switch (lengthGroup) {
+                    case 1:
+                    case 2:
+                        htmlGroup = `<ul class="grid grid-cols-1">
+                                            ${htmlFlexCol}
+                                         </ul>`
+                        break
+                    case 3:
+                    default:
+                        htmlGroup = `<ul class="grid grid-cols-3">
+                                                ${htmlFlexCol}
+                                    </ul>`
+                        break
+                }
                 resultHtml += `<div class='px-2'>
                                         <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${package} ${totalPackageHtml}</p>
-                                            <ul class="flex flex-col">
-                                            ${html}
-                                            </ul>
-                                    </div>`
+                                            ${htmlGroup}
+                                </div>`
                 // <ul class="grid grid-rows-2 grid-flow-col">
             }
             resultHtmlTopDrawer += `<div class="px-2 border-b border-gray-700 py-5">
