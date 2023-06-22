@@ -47,6 +47,7 @@
             <x-renderer.button outline=true type="warning">warning</x-renderer.button>
             <x-renderer.button outline=true type="info">info</x-renderer.button>
             <x-renderer.button outline=true type="dark">dark</x-renderer.button>
+            <x-renderer.button outline=true type="link">link</x-renderer.button>
             <x-renderer.button outline=true type="default">default</x-renderer.button>
             <br />
             <br />
@@ -68,6 +69,7 @@
             <x-renderer.button size="xs" outline=true type="warning">warning</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="info">info</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="dark">dark</x-renderer.button>
+            <x-renderer.button size="xs" outline=true type="link">link</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="default">default</x-renderer.button>
     </x-renderer.card>
     <x-renderer.card title="Statuses">

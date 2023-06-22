@@ -18,11 +18,11 @@
                Today
           </x-renderer.button>
           {{-- @if($viewportMode == 'month') --}}
-          <x-renderer.button class="border border-blue-700" href="{!! $href['weekView'] !!}" icon="fa-duotone fa-calendar-week">
+          <x-renderer.button type="light" outline="{{$viewportMode !== 'week'}}" class="border border-blue-700" href="{!! $href['weekView'] !!}" icon="fa-duotone fa-calendar-week">
                Week View
           </x-renderer.button>
           {{-- @else --}}
-          <x-renderer.button class="border border-blue-700" href="{!! $href['monthView'] !!}" icon="fa-duotone fa-calendar-days">
+          <x-renderer.button type="light" outline="{{$viewportMode !== 'month'}}" class="border border-blue-700" href="{!! $href['monthView'] !!}" icon="fa-duotone fa-calendar-days">
                Month View
           </x-renderer.button>
           {{-- @endif --}}
