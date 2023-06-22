@@ -127,14 +127,16 @@ trait TableTraitColumns
         if (empty($dataHeader)) return "";
         // dump($dataHeader);
         $th = [];
-        foreach ($columns as $column) {
+        $columns = array_values($columns);
+        foreach ($columns as $key => $column) {
             if ($this->isInvisible($column)) continue;
             $styleStr = $this->getStyleStr($column);
             $dataIndex = $column['dataIndex'];
+            $borderR = $key < (sizeof($columns) - 1) ? 'border-r' : "";
             if (isset($dataHeader[$dataIndex])) {
-                $th[] = "<th $styleStr class='py-1 border-r border-b'>" . $dataHeader[$dataIndex] . "</th>";
+                $th[] = "<th $styleStr class='py-1 $borderR border-b'>" . $dataHeader[$dataIndex] . "</th>";
             } else {
-                $th[] = "<th $styleStr class='py-1 border-r border-b' dataIndex='" . $dataIndex . "'></th>";
+                $th[] = "<th $styleStr class='py-1 $borderR border-b' dataIndex='" . $dataIndex . "'></th>";
             }
         }
         $result = join($th);
