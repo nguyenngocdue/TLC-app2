@@ -10,6 +10,7 @@
             bottomLeftControl="{!! $actionMultipleGroup !!}"
             bottomRightControl="{!! $perPage !!}"
             tableTrueWidth={{$tableTrueWidth}}
+            maxH="41"
             />
     </div>
 </x-renderer.tab-pane>

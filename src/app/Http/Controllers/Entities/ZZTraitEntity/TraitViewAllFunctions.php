@@ -26,7 +26,7 @@ trait TraitViewAllFunctions
     {
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
-        $perPage = $settings[$type][Constant::VIEW_ALL]['per_page'] ?? 20;
+        $perPage = $settings[$type][Constant::VIEW_ALL]['per_page'] ?? 15;
         $columnLimit = $settings[$type][Constant::VIEW_ALL]['columns'] ?? null;
         $advancedFilter = $settings[$type][Constant::VIEW_ALL]['advanced_filters'] ?? null;
         $basicFilter = $settings[$type][Constant::VIEW_ALL]['basic_filters'] ?? [];

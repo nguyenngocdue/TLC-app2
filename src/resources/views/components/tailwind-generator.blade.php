@@ -156,6 +156,7 @@
 <span class="max-h-[37rem] "></span>
 <span class="max-h-[38rem] "></span>
 <span class="max-h-[40rem] "></span>
+<span class="max-h-[41rem] "></span>  {{-- Perfect for View all table 15 perpage--}}
 <span class="max-h-[45rem] "></span>
 <span class="max-h-[50rem] "></span>
 <span class="max-h-[55rem] "></span>
