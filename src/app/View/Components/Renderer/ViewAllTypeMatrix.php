@@ -192,7 +192,7 @@ class ViewAllTypeMatrix extends Component
         return  [
             ['dataIndex' => 'name_for_group_by', 'hidden' => true],
             ['dataIndex' => 'name', 'width' => 250,],
-            ['dataIndex' => 'meta01', 'width' => 150,],
+            ['dataIndex' => 'meta01', 'title' => 'Owner', 'width' => 150,],
             ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
             ...$extraColumns,
         ];;
