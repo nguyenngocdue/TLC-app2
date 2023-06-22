@@ -120,7 +120,7 @@ trait TableTraitRows
             $breakWords = $this->noCss ? "break-all" : "";
             $tinyText = $this->noCss ? "text-xs" : "";
             $borderGray = $this->noCss ? "border-gray-400" : "";
-            $td = "<td class='dark:border-gray-600 $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align'";
+            $td = "<td class='dark:border-gray-600 border-b $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align'";
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";
             $td .= ">";
@@ -170,7 +170,7 @@ trait TableTraitRows
                 $index = isset($dataLineObj->{$groupBy}[0]) ? strtoupper(substr($dataLineObj->{$groupBy}, 0, $this->groupByLength)) : "(EMPTY)";
                 if ($index !== $lastIndex) {
                     $lastIndex = $index;
-                    $trs[] = "<tr class='bg-gray-100 dark:bg-gray-800'><td class='p-2 text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td></tr>";
+                    $trs[] = "<tr class='bg-gray-100 dark:bg-gray-800'><td class='p-2 border-b text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td></tr>";
                 }
             }
             $bgClass = ($dataLineObj->row_color ?? false) ? "bg-" . $dataLineObj->row_color . "-400" : "";
@@ -182,8 +182,9 @@ trait TableTraitRows
 
             if (isset($dataLineObj->rowDescription)) {
                 $colspan_minus_1 = $colspan - 1;
-                $td = "<td class='p-2 text-xs dark:text-gray-300 text-gray-600' colspan=$colspan_minus_1>{$dataLineObj->rowDescription}</td>";
-                $trs[] = "<tr component='rowDescription' class='dark:bg-gray-600  bg-gray-100 '><td></td>$td</tr>";
+
+                $td = "<td class='p-2 border-b text-xs dark:text-gray-300 text-gray-600' colspan=$colspan_minus_1>{$dataLineObj->rowDescription}</td>";
+                $trs[] = "<tr component='rowDescription' class='dark:bg-gray-600  bg-gray-100 '><td class='border-b'></td>$td</tr>";
             }
         }
         $tr_td = join("", $trs);

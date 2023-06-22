@@ -140,6 +140,11 @@
 <span class="top-36"></span>
 <span class="top-40"></span>
 
+<span class="max-h-[10rem] "></span>
+<span class="max-h-[12rem] "></span>
+<span class="max-h-[14rem] "></span>
+<span class="max-h-[16rem] "></span>
+<span class="max-h-[18rem] "></span>
 <span class="max-h-[20rem] "></span>
 <span class="max-h-[30rem] "></span>
 <span class="max-h-[31rem] "></span>
@@ -151,8 +156,11 @@
 <span class="max-h-[37rem] "></span>
 <span class="max-h-[38rem] "></span>
 <span class="max-h-[40rem] "></span>
+<span class="max-h-[41rem] "></span>  {{-- Perfect for View all table 15 perpage--}}
 <span class="max-h-[45rem] "></span>
 <span class="max-h-[50rem] "></span>
+<span class="max-h-[55rem] "></span>
+<span class="max-h-[60rem] "></span>
 <!-- FOR ALERT -->
 <span class="text-green-700 border-green-300 bg-green-50 dark:bg-green-200"></span>
 <span class="text-blue-700 border-blue-300 bg-blue-50 dark:bg-blue-200"></span>
