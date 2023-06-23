@@ -14,22 +14,22 @@
                             @case('z_page_break')
                             <x-renderer.page-break />
                             @case('z_h1')
-                            <x-renderer.heading title="{{$title}}" level=1 xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" level=1 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_h2')
-                            <x-renderer.heading title="{{$title}}" level=2 xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" level=2 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_h3')
-                            <x-renderer.heading title="{{$title}}" level=3 xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" level=3 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_h4')
-                            <x-renderer.heading title="{{$title}}" level=4 xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" level=4 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_h5')
-                            <x-renderer.heading title="{{$title}}" level=5 xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" level=5 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_h6_base')
-                            <x-renderer.heading title="{{$title}}" xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_divider')
                             <x-renderer.divider />

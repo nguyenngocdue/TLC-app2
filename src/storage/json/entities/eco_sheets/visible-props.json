@@ -1,0 +1,232 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "__h1a": {
+        "name": "__h1a",
+        "column_name": "_h1a",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true"
+    },
+    "_revision_no": {
+        "name": "_revision_no",
+        "column_name": "revision_no",
+        "new": "true"
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "new": "true"
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "new": "true"
+    },
+    "_getSubProject()": {
+        "name": "_getSubProject()",
+        "column_name": "getSubProject()",
+        "new": "true"
+    },
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
+        "new": "true"
+    },
+    "_due_date": {
+        "name": "_due_date",
+        "column_name": "due_date",
+        "new": "true"
+    },
+    "_getEffectivenessLines": {
+        "name": "_getEffectivenessLines",
+        "column_name": "getEffectivenessLines",
+        "new": "true"
+    },
+    "_divider1": {
+        "name": "_divider1",
+        "column_name": "divider1",
+        "new": "true"
+    },
+    "_h1b": {
+        "name": "_h1b",
+        "column_name": "h1b",
+        "new": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
+    "_attachment_eco_sht": {
+        "name": "_attachment_eco_sht",
+        "column_name": "attachment_eco_sht",
+        "new": "true"
+    },
+    "_divider2": {
+        "name": "_divider2",
+        "column_name": "divider2",
+        "new": "true"
+    },
+    "_h2a": {
+        "name": "_h2a",
+        "column_name": "h2a",
+        "new": "true"
+    },
+    "_getTakenActions": {
+        "name": "_getTakenActions",
+        "column_name": "getTakenActions",
+        "new": "true"
+    },
+    "_divider3": {
+        "name": "_divider3",
+        "column_name": "divider3",
+        "new": "true"
+    },
+    "_h2b": {
+        "name": "_h2b",
+        "column_name": "h2b",
+        "new": "true"
+    },
+    "_getLaborImpacts": {
+        "name": "_getLaborImpacts",
+        "column_name": "getLaborImpacts",
+        "new": "true"
+    },
+    "_total_labor_cost": {
+        "name": "_total_labor_cost",
+        "column_name": "total_labor_cost",
+        "new": "true"
+    },
+    "_currency_1": {
+        "name": "_currency_1",
+        "column_name": "currency_1",
+        "new": "true"
+    },
+    "_getMaterialImpactAdds": {
+        "name": "_getMaterialImpactAdds",
+        "column_name": "getMaterialImpactAdds",
+        "new": "true"
+    },
+    "_getMaterialImpactRemoves": {
+        "name": "_getMaterialImpactRemoves",
+        "column_name": "getMaterialImpactRemoves",
+        "new": "true"
+    },
+    "_total_add_cost": {
+        "name": "_total_add_cost",
+        "column_name": "total_add_cost",
+        "new": "true"
+    },
+    "_total_remove_cost": {
+        "name": "_total_remove_cost",
+        "column_name": "total_remove_cost",
+        "new": "true"
+    },
+    "_total_material_cost": {
+        "name": "_total_material_cost",
+        "column_name": "total_material_cost",
+        "new": "true"
+    },
+    "_currency_2": {
+        "name": "_currency_2",
+        "column_name": "currency_2",
+        "new": "true"
+    },
+    "_divider4": {
+        "name": "_divider4",
+        "column_name": "divider4",
+        "new": "true"
+    },
+    "_h3a": {
+        "name": "_h3a",
+        "column_name": "h3a",
+        "new": "true"
+    },
+    "_getSignatures1": {
+        "name": "_getSignatures1",
+        "column_name": "getSignatures1",
+        "new": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true"
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "new": "true"
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "true"
+    },
+    "_divider5": {
+        "name": "_divider5",
+        "column_name": "divider5",
+        "new": "true"
+    },
+    "_h3b": {
+        "name": "_h3b",
+        "column_name": "h3b",
+        "new": "true"
+    },
+    "_getSignatures2": {
+        "name": "_getSignatures2",
+        "column_name": "getSignatures2",
+        "new": "true"
+    },
+    "_assignee_3": {
+        "name": "_assignee_3",
+        "column_name": "assignee_3",
+        "new": "true"
+    },
+    "_getMonitors2()": {
+        "name": "_getMonitors2()",
+        "column_name": "getMonitors2()",
+        "new": "true"
+    },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": ""
+    }
+}

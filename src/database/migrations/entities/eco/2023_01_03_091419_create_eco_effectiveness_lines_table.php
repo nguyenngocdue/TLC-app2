@@ -24,7 +24,7 @@ return new class extends Migration
             // $table->string('name')->nullable();
             $table->text('description')->nullable(); //Remark
             $table->unsignedBigInteger('eco_sheet_id');
-            $table->unsignedBigInteger('term_id');
+            $table->unsignedBigInteger('change_effectiveness_id')->nullable();
             $table->orderable();
             $table->appendCommonFields();
         });

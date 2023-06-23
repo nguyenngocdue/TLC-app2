@@ -8,7 +8,9 @@ class Eco_sheet extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "slug", "revision_no", "priority_id", "project_id",
-        "assignee_1", "assignee_2", "assignee_3", "opened_date", "closed_at", "status", "unsafe_action_type_id", "order_no", "owner_id"
+        "assignee_1", "assignee_2", "assignee_3", "total_labor_cost", "currency_1", "currency_2",
+        "total_add_cost", "total_remove_cost", "total_material_cost", "due_date", "closed_at", "status",
+        "order_no", "owner_id"
     ];
     protected $table = "eco_sheets";
 
@@ -20,14 +22,41 @@ class Eco_sheet extends ModelExtended
         'getAssignee3' => ['belongsTo', User::class, 'assignee_3'],
         'getCurrency1' => ['belongsTo', Currency::class, 'currency_1'],
         'getCurrency2' => ['belongsTo', Currency::class, 'currency_2'],
+        'getEffectivenessLines' => ['hasMany', Eco_effectiveness_line::class, 'eco_sheet_id'],
+        'getTakenActions' => ['hasMany', Eco_taken_action::class, 'eco_sheet_id'],
+        'getLaborImpacts' => ['hasMany', Eco_labor_impact::class, 'eco_sheet_id'],
+        'getMaterialImpactAdds' => ['hasMany', Eco_material_impact_add::class, 'eco_sheet_id'],
+        'getMaterialImpactRemoves' => ['hasMany', Eco_material_impact_remove::class, 'eco_sheet_id'],
         "attachment_eco_sht" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "getSignatures1" => ["hasMany", Eco_signature::class, "eco_sheet_id"],
+        "getSignatures2" => ["hasMany", Eco_signature::class, "eco_sheet_id"],
     ];
 
     public $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
         "getMonitors2()" => ["getCheckedByField", User::class],
-        // subproject
+        "getSubProject()" => ["getCheckedByField", Sub_project::class],
     ];
+    public function getSignatures1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getSignatures2()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getMaterialImpactAdds()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getMaterialImpactRemoves()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function attachment_eco_sht()
     {
         $p = $this->eloquentParams[__FUNCTION__];
@@ -41,6 +70,21 @@ class Eco_sheet extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getAssignee1()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getEffectivenessLines()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getTakenActions()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getLaborImpacts()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -81,38 +125,9 @@ class Eco_sheet extends ModelExtended
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-
-    public function getManyLineParams()
+    public function getSubProject()
     {
-        return [
-            ['dataIndex' => 'order_no', 'invisible' => true],
-            ['dataIndex' => 'id', 'invisible' => true],
-            ['dataIndex' => 'hse_incident_report_id', 'invisible' => true, 'value_as_parent_id' => true],
-            ['dataIndex' => 'name',],
-            ['dataIndex' => 'priority_id',],
-            ['dataIndex' => 'work_area_id'],
-            ['dataIndex' => 'description'],
-            ['dataIndex' => 'assignee_1'],
-            ['dataIndex' => 'opened_date'],
-            ['dataIndex' => 'closed_at'],
-            ['dataIndex' => 'status',],
-            ['dataIndex' => 'unsafe_action_type_id',],
-        ];
-    }
-
-    public function getManyLineParams1()
-    {
-        return [
-            ['dataIndex' => 'order_no', 'invisible' => true],
-            ['dataIndex' => 'id', 'invisible' => true],
-            ['dataIndex' => 'hse_incident_report_id', 'invisible' => true, 'value_as_parent_id' => true],
-            ['dataIndex' => 'name', 'cloneable' => true],
-            ['dataIndex' => 'work_area_id', 'hidden' => !true, 'cloneable' => true],
-            ['dataIndex' => 'assignee_1', 'cloneable' => true],
-            ['dataIndex' => 'opened_date', 'cloneable' => true],
-            ['dataIndex' => 'status', 'cloneable' => true],
-            ['dataIndex' => 'priority_id', 'cloneable' => true],
-            ['dataIndex' => 'unsafe_action_type_id', 'cloneable' => true],
-        ];
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

@@ -21,7 +21,6 @@ class Eco_signature extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-
     public function getManyLineParams()
     {
         return [

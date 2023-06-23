@@ -7,25 +7,37 @@ use App\BigThink\ModelExtended;
 class Eco_effectiveness_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "remark", "eco_sheet_id", "term_id"
+        "id", "description", "remark", "eco_sheet_id", "change_effectiveness_id", "order_no", "owner_id"
     ];
     protected $table = "eco_effectiveness_lines";
     protected static $statusless = true;
+    public $nameless = true;
 
-    public $eloquentParams = [];
+    public $eloquentParams = [
+        "getEcoSheet" => ['belongsTo', Eco_sheet::class, 'eco_sheet_id'],
+        "getChangeEffectiveness" => ['belongsTo', Term::class, 'change_effectiveness_id']
+    ];
 
     public $oracyParams = [];
-
+    public function getEcoSheet()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getChangeEffectiveness()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id',],
-            ['dataIndex' => 'name'],
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'eco_sheet_id', 'value_as_parent_id' => true, 'invisible' => true,],
+            ['dataIndex' => 'change_effectiveness_id'],
             ['dataIndex' => 'description'],
-            ['dataIndex' => 'remark',],
-            ['dataIndex' => 'eco_sheet_id',],
-            ['dataIndex' => 'term_id',],
         ];
     }
 }
