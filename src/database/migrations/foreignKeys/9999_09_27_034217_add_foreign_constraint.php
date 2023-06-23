@@ -182,6 +182,32 @@ return new class extends Migration
         Schema::table('qaqc_insp_chklst_sht_sigs', function (Blueprint $table) {
             $table->foreign('qaqc_insp_chklst_sht_id')->references('id')->on('qaqc_insp_chklst_shts');
         });
+
+        // // ***** */
+        Schema::table('hse_insp_chklst_shts', function (Blueprint $table) {
+            $table->foreign('hse_insp_tmpl_sht_id')->references('id')->on('hse_insp_tmpl_shts')->cascadeOnDelete()->cascadeOnUpdate();
+        });
+        Schema::table('hse_insp_tmpl_lines', function (Blueprint $table) {
+            $table->foreign('hse_insp_tmpl_sht_id')->references('id')->on('hse_insp_tmpl_shts')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('hse_insp_group_id')->references('id')->on('hse_insp_groups');
+            $table->foreign('hse_insp_control_group_id')->references('id')->on('hse_insp_control_groups');
+            $table->foreign('control_type_id')->references('id')->on('control_types');
+        });
+        Schema::table('hse_insp_chklst_lines', function (Blueprint $table) {
+            $table->foreign('hse_insp_chklst_sht_id')->references('id')->on('hse_insp_chklst_shts'); // version 2
+            $table->foreign('hse_insp_group_id')->references('id')->on('hse_insp_groups');
+            $table->foreign('hse_insp_control_group_id')->references('id')->on('hse_insp_control_groups');
+            $table->foreign('hse_insp_control_value_id')->references('id')->on('hse_insp_control_values');
+            $table->foreign('control_type_id')->references('id')->on('control_types');
+            $table->foreign('owner_id')->references('id')->on('users');
+        });
+        Schema::table('hse_insp_values', function (Blueprint $table) {
+            $table->foreign('hse_insp_control_value_id')->references('id')->on('hse_insp_control_values');
+        });
+        Schema::table('hse_insp_control_values', function (Blueprint $table) {
+            $table->foreign('hse_insp_control_group_id')->references('id')->on('hse_insp_control_groups');
+        });
+
         Schema::table('qaqc_mirs', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('sub_project_id')->references('id')->on('sub_projects');
@@ -208,7 +234,7 @@ return new class extends Migration
             $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
             $table->foreign('prod_discipline_1_id')->references('id')->on('prod_discipline_1s');
             $table->foreign('prod_discipline_2_id')->references('id')->on('prod_discipline_2s');
-            $table->foreign('user_team_id')->references('id')->on('user_teams');
+            $table->foreign('user_team_id')->references('id')->on('user_team_ncrs');
             $table->foreign('priority_id')->references('id')->on('priorities');
             $table->foreign('assignee_1')->references('id')->on('users');
         });
@@ -229,6 +255,22 @@ return new class extends Migration
             $table->foreign('ghg_metric_type_id')->references('id')->on('ghg_metric_types');
             $table->foreign('ghg_sheet_id')->references('id')->on('ghg_sheets');
             $table->foreign('unit')->references('id')->on('terms');
+        });
+
+        Schema::table('eco_signatures', function (Blueprint $table) {
+            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
+        });
+        Schema::table('eco_effectiveness_lines', function (Blueprint $table) {
+            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
+        });
+        Schema::table('eco_labor_impacts', function (Blueprint $table) {
+            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
+        });
+        Schema::table('eco_material_impact_adds', function (Blueprint $table) {
+            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
+        });
+        Schema::table('eco_material_impact_removes', function (Blueprint $table) {
+            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
         });
     }
 
