@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -21,7 +21,7 @@
     "_department_id": {
         "name": "_department_id",
         "column_name": "department_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Departments",
         "control": "dropdown",
         "align": "",
@@ -40,7 +40,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Actions",
         "control": "text",
         "align": "",
@@ -78,7 +78,7 @@
     "_eco_sheet_id": {
         "name": "_eco_sheet_id",
         "column_name": "eco_sheet_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Eco Sheet",
         "control": "dropdown",
         "align": "",
@@ -97,7 +97,7 @@
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
-        "column_type": "integer",
+        "column_type": "int unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -116,7 +116,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -135,7 +135,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "",
         "control": "",
         "align": "",
@@ -154,7 +154,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -173,7 +173,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -192,7 +192,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -211,7 +211,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",

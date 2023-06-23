@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -40,7 +40,7 @@
     "_email": {
         "name": "_email",
         "column_name": "email",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Email",
         "control": "text",
         "align": "",
@@ -59,7 +59,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Name Rendered",
         "control": "text",
         "align": "",
@@ -78,7 +78,7 @@
     "_full_name": {
         "name": "_full_name",
         "column_name": "full_name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Full Name",
         "control": "text",
         "align": "",
@@ -97,7 +97,7 @@
     "_name_suffix": {
         "name": "_name_suffix",
         "column_name": "name_suffix",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Name Suffix",
         "control": "text",
         "align": "",
@@ -116,7 +116,7 @@
     "_employeeid": {
         "name": "_employeeid",
         "column_name": "employeeid",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Employee ID",
         "control": "text",
         "align": "",
@@ -135,7 +135,7 @@
     "_first_name": {
         "name": "_first_name",
         "column_name": "first_name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "First Name",
         "control": "text",
         "align": "",
@@ -154,7 +154,7 @@
     "_last_name": {
         "name": "_last_name",
         "column_name": "last_name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Last Name",
         "control": "text",
         "align": "",
@@ -173,7 +173,7 @@
     "_address": {
         "name": "_address",
         "column_name": "address",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Address",
         "control": "text",
         "align": "",
@@ -192,7 +192,7 @@
     "_company": {
         "name": "_company",
         "column_name": "company",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Company",
         "control": "dropdown",
         "align": "",
@@ -211,7 +211,7 @@
     "_phone": {
         "name": "_phone",
         "column_name": "phone",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Phone",
         "control": "text",
         "align": "",
@@ -249,7 +249,7 @@
     "_time_keeping_type": {
         "name": "_time_keeping_type",
         "column_name": "time_keeping_type",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Time Keeping Type",
         "control": "dropdown",
         "align": "",
@@ -268,7 +268,7 @@
     "_user_type": {
         "name": "_user_type",
         "column_name": "user_type",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "User Type",
         "control": "dropdown",
         "align": "",
@@ -287,7 +287,7 @@
     "_workplace": {
         "name": "_workplace",
         "column_name": "workplace",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Workplace",
         "control": "dropdown",
         "align": "",
@@ -306,7 +306,7 @@
     "_category": {
         "name": "_category",
         "column_name": "category",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Category",
         "control": "dropdown",
         "align": "",
@@ -344,7 +344,7 @@
     "_title": {
         "name": "_title",
         "column_name": "title",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Title",
         "control": "text",
         "align": "",
@@ -401,7 +401,7 @@
     "_position_prefix": {
         "name": "_position_prefix",
         "column_name": "position_prefix",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Position Prefix",
         "control": "dropdown",
         "align": "",
@@ -420,7 +420,7 @@
     "_position_1": {
         "name": "_position_1",
         "column_name": "position_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Position 1",
         "control": "dropdown",
         "align": "",
@@ -439,7 +439,7 @@
     "_position_2": {
         "name": "_position_2",
         "column_name": "position_2",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Position 2",
         "control": "dropdown",
         "align": "",
@@ -458,7 +458,7 @@
     "_position_3": {
         "name": "_position_3",
         "column_name": "position_3",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Position 3",
         "control": "dropdown",
         "align": "",
@@ -477,7 +477,7 @@
     "_position_rendered": {
         "name": "_position_rendered",
         "column_name": "position_rendered",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Position Rendered",
         "control": "text",
         "align": "",
@@ -496,7 +496,7 @@
     "_discipline": {
         "name": "_discipline",
         "column_name": "discipline",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Discipline",
         "control": "dropdown",
         "align": "",
@@ -515,7 +515,7 @@
     "_department": {
         "name": "_department",
         "column_name": "department",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Department",
         "control": "dropdown",
         "align": "",
@@ -534,7 +534,7 @@
     "_show_on_beta": {
         "name": "_show_on_beta",
         "column_name": "show_on_beta",
-        "column_type": "boolean",
+        "column_type": "tinyint(1)",
         "label": "Show On Beta",
         "control": "toggle",
         "align": "",
@@ -553,7 +553,7 @@
     "_resigned": {
         "name": "_resigned",
         "column_name": "resigned",
-        "column_type": "boolean",
+        "column_type": "tinyint(1)",
         "label": "Resigned",
         "control": "toggle",
         "align": "",
@@ -572,7 +572,7 @@
     "_viewport_uids": {
         "name": "_viewport_uids",
         "column_name": "viewport_uids",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Viewport Uids",
         "control": "text",
         "align": "",
@@ -591,7 +591,7 @@
     "_leaf_uids": {
         "name": "_leaf_uids",
         "column_name": "leaf_uids",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Leaf Uids",
         "control": "text",
         "align": "",
@@ -610,7 +610,7 @@
     "_user_id_passport": {
         "name": "_user_id_passport",
         "column_name": "user_id_passport",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "User Id\/Passport",
         "control": "text",
         "align": "",
@@ -629,7 +629,7 @@
     "_password": {
         "name": "_password",
         "column_name": "password",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Password",
         "control": "text",
         "align": "",
@@ -648,7 +648,7 @@
     "_user_pin": {
         "name": "_user_pin",
         "column_name": "user_pin",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "User Pin",
         "control": "text",
         "align": "",
@@ -667,7 +667,7 @@
     "_email_verified_at": {
         "name": "_email_verified_at",
         "column_name": "email_verified_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "Email Verified At",
         "control": "picker_datetime",
         "align": "",
@@ -705,7 +705,7 @@
     "_provider": {
         "name": "_provider",
         "column_name": "provider",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Provider",
         "control": "text",
         "align": "",
@@ -724,7 +724,7 @@
     "_time_zone": {
         "name": "_time_zone",
         "column_name": "time_zone",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Time Zone",
         "control": "text",
         "align": "",
@@ -762,7 +762,7 @@
     "_remember_token": {
         "name": "_remember_token",
         "column_name": "remember_token",
-        "column_type": "string",
+        "column_type": "varchar(100)",
         "label": "Remember Token",
         "control": "text",
         "align": "",
@@ -781,7 +781,7 @@
     "_guid": {
         "name": "_guid",
         "column_name": "guid",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Guid",
         "control": "text",
         "align": "",
@@ -800,7 +800,7 @@
     "_domain": {
         "name": "_domain",
         "column_name": "domain",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Domain",
         "control": "text",
         "align": "",
@@ -876,7 +876,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -895,7 +895,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -914,7 +914,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -933,7 +933,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -952,7 +952,26 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_getTshtTeams()": {
+        "name": "_getTshtTeams()",
+        "column_name": "getTshtTeams()",
+        "column_type": "oracy_prop",
         "label": "",
         "control": "",
         "align": "",

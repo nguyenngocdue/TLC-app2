@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -21,7 +21,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Name",
         "control": "text",
         "align": "",
@@ -59,7 +59,7 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Slug",
         "control": "text",
         "align": "",
@@ -78,7 +78,7 @@
     "_prod_order_id": {
         "name": "_prod_order_id",
         "column_name": "prod_order_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Prod Order",
         "control": "dropdown",
         "align": "",
@@ -97,7 +97,7 @@
     "_qaqc_insp_tmpl_id": {
         "name": "_qaqc_insp_tmpl_id",
         "column_name": "qaqc_insp_tmpl_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Checklist Type",
         "control": "dropdown",
         "align": "",
@@ -135,7 +135,7 @@
     "_progress": {
         "name": "_progress",
         "column_name": "progress",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Progress (%)",
         "control": "number",
         "align": "",
@@ -154,7 +154,7 @@
     "_consent_number": {
         "name": "_consent_number",
         "column_name": "consent_number",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Consent Number",
         "control": "text",
         "align": "",
@@ -173,7 +173,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -192,7 +192,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "",
         "control": "",
         "align": "",
@@ -211,7 +211,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -230,7 +230,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -249,7 +249,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -268,7 +268,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",

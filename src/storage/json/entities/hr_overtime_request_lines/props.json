@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -21,7 +21,7 @@
     "_hr_overtime_request_id": {
         "name": "_hr_overtime_request_id",
         "column_name": "hr_overtime_request_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Parent OT ID",
         "control": "dropdown",
         "align": "",
@@ -40,7 +40,7 @@
     "_user_id": {
         "name": "_user_id",
         "column_name": "user_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Full Name",
         "control": "dropdown",
         "align": "",
@@ -59,7 +59,7 @@
     "_employeeid": {
         "name": "_employeeid",
         "column_name": "employeeid",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Employee ID",
         "control": "text",
         "align": "",
@@ -78,7 +78,7 @@
     "_position_rendered": {
         "name": "_position_rendered",
         "column_name": "position_rendered",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Position",
         "control": "text",
         "align": "",
@@ -116,7 +116,7 @@
     "_month_allowed_hours": {
         "name": "_month_allowed_hours",
         "column_name": "month_allowed_hours",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Month Allowed Hours",
         "control": "number",
         "align": "",
@@ -135,7 +135,7 @@
     "_year_allowed_hours": {
         "name": "_year_allowed_hours",
         "column_name": "year_allowed_hours",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Year Allowed Hours",
         "control": "number",
         "align": "",
@@ -192,7 +192,7 @@
     "_break_time": {
         "name": "_break_time",
         "column_name": "break_time",
-        "column_type": "float",
+        "column_type": "double",
         "label": "Break Time (Mins)",
         "control": "number",
         "align": "",
@@ -211,7 +211,7 @@
     "_total_time": {
         "name": "_total_time",
         "column_name": "total_time",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Total Time (Hours)",
         "control": "number",
         "align": "",
@@ -230,7 +230,7 @@
     "_month_remaining_hours": {
         "name": "_month_remaining_hours",
         "column_name": "month_remaining_hours",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Month Remain-ing Hours",
         "control": "number",
         "align": "",
@@ -249,7 +249,7 @@
     "_year_remaining_hours": {
         "name": "_year_remaining_hours",
         "column_name": "year_remaining_hours",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Year Remain-ing Hours",
         "control": "number",
         "align": "",
@@ -268,7 +268,7 @@
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Projects",
         "control": "dropdown",
         "align": "",
@@ -287,7 +287,7 @@
     "_work_mode_id": {
         "name": "_work_mode_id",
         "column_name": "work_mode_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Work Mode",
         "control": "dropdown",
         "align": "",
@@ -325,7 +325,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -344,7 +344,7 @@
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
-        "column_type": "integer",
+        "column_type": "int unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -363,7 +363,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "",
         "control": "",
         "align": "",
@@ -382,7 +382,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -401,7 +401,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -420,7 +420,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -439,7 +439,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
