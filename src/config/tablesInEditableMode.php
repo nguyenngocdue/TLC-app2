@@ -1,9 +1,21 @@
 <?php
 
 return [
-    // 'qaqc_insp_tmpls' => [
-    //     'qaqc_insp_tmpl_shts' => [],
-    // ],
+    'eco_sheets' => [
+        'eco_effectiveness_lines' => [],
+        'eco_taken_actions' => [],
+        'eco_labor_impacts' => [],
+        'eco_material_impact_adds' => [],
+        'eco_material_impact_removes' => [],
+    ],
+    'hse_insp_tmpl_shts' => [
+        'hse_insp_tmpl_lines' => [],
+    ],
+
+    'hse_insp_chklst_shts' => [
+        'hse_insp_chklst_lines' => [],
+    ],
+
     'qaqc_insp_tmpl_shts' => [
         'qaqc_insp_tmpl_lines' => [],
     ],

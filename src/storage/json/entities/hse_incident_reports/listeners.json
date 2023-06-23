@@ -161,7 +161,7 @@
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "attrs_to_compare": "",
-        "expression": "Math.round(100*(issue_datetime - first_date)\/(60*60*24*365.25))\/100",
+        "expression": "((issue_datetime - first_date)\/(60*60*24*365.25)).toFixed(2)",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
         "ajax_item_attributes": "",

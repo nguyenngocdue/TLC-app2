@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -21,7 +21,7 @@
     "_doc_id": {
         "name": "_doc_id",
         "column_name": "doc_id",
-        "column_type": "integer",
+        "column_type": "int unsigned",
         "label": "Doc ID",
         "control": "doc_id",
         "align": "",
@@ -59,7 +59,7 @@
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Project",
         "control": "dropdown",
         "align": "",
@@ -78,7 +78,7 @@
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Sub Project",
         "control": "dropdown",
         "align": "",
@@ -97,7 +97,7 @@
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
         "column_name": "prod_discipline_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Discipline",
         "control": "dropdown",
         "align": "",
@@ -116,7 +116,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "PO Number",
         "control": "text",
         "align": "",
@@ -154,7 +154,7 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Slug",
         "control": "text",
         "align": "",
@@ -173,7 +173,7 @@
     "_priority_id": {
         "name": "_priority_id",
         "column_name": "priority_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Priority",
         "control": "dropdown",
         "align": "",
@@ -496,7 +496,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -515,7 +515,7 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Assignee",
         "control": "dropdown",
         "align": "",
@@ -534,7 +534,7 @@
     "_inspected_by": {
         "name": "_inspected_by",
         "column_name": "inspected_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Inspected By",
         "control": "dropdown",
         "align": "",
@@ -629,7 +629,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "",
         "control": "",
         "align": "",
@@ -648,7 +648,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -667,7 +667,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -686,7 +686,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -705,7 +705,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",

@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -21,7 +21,7 @@
     "_timesheetable_type": {
         "name": "_timesheetable_type",
         "column_name": "timesheetable_type",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Timesheet Type",
         "control": "parent_type",
         "align": "",
@@ -40,7 +40,7 @@
     "_timesheetable_id": {
         "name": "_timesheetable_id",
         "column_name": "timesheetable_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Timesheet ID",
         "control": "text",
         "align": "",
@@ -78,7 +78,7 @@
     "_user_id": {
         "name": "_user_id",
         "column_name": "user_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Full Name",
         "control": "dropdown",
         "align": "",
@@ -116,7 +116,7 @@
     "_duration_in_min": {
         "name": "_duration_in_min",
         "column_name": "duration_in_min",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Duration (min)",
         "control": "number",
         "align": "",
@@ -154,7 +154,7 @@
     "_ts_hour": {
         "name": "_ts_hour",
         "column_name": "ts_hour",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Hours",
         "control": "number",
         "align": "",
@@ -173,7 +173,7 @@
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Project",
         "control": "dropdown",
         "align": "",
@@ -192,7 +192,7 @@
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Sub Project",
         "control": "dropdown",
         "align": "",
@@ -211,7 +211,7 @@
     "_prod_routing_id": {
         "name": "_prod_routing_id",
         "column_name": "prod_routing_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Routing",
         "control": "dropdown",
         "align": "",
@@ -230,7 +230,7 @@
     "_lod_id": {
         "name": "_lod_id",
         "column_name": "lod_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "LOD",
         "control": "dropdown",
         "align": "",
@@ -249,7 +249,7 @@
     "_discipline_id": {
         "name": "_discipline_id",
         "column_name": "discipline_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Discipline",
         "control": "dropdown",
         "align": "",
@@ -268,7 +268,7 @@
     "_task_id": {
         "name": "_task_id",
         "column_name": "task_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Task",
         "control": "dropdown",
         "align": "",
@@ -287,7 +287,7 @@
     "_sub_task_id": {
         "name": "_sub_task_id",
         "column_name": "sub_task_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Sub Task",
         "control": "dropdown",
         "align": "",
@@ -306,7 +306,7 @@
     "_work_mode_id": {
         "name": "_work_mode_id",
         "column_name": "work_mode_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Work Mode",
         "control": "dropdown",
         "align": "",
@@ -344,7 +344,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -363,7 +363,7 @@
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
-        "column_type": "integer",
+        "column_type": "int unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -382,7 +382,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "",
         "control": "",
         "align": "",
@@ -401,7 +401,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -420,7 +420,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -439,7 +439,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -458,7 +458,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",

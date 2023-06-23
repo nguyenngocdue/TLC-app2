@@ -38,6 +38,7 @@ class AdvancedFilter extends Component
         $count = count($propsFilters) ?? 0;
         $maxH = round($count / 4) * 3.7 . 'rem';
         $route = $this->trashed ? route($this->type . '.trashed') : route($this->type . '.index');
+
         return view('components.renderer.advanced-filter', [
             'type' => $this->type,
             'props' => $propsFilters,

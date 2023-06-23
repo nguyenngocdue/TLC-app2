@@ -39,16 +39,17 @@
                         </thead>
                         @isset($headerRendered)
                         <thead class="sticky z-10 top-{{ $headerTop }}">
-                            <tr class="{{$trClassList}}">
-                                {!! $headerRendered !!}
-                            </tr>
+                            <tr class="{{$trClassList}}">{!! $headerRendered !!}</tr>
                         </thead>
                         @endisset
                         <tbody class='divide-y bg-white dark:divide-gray-700 dark:bg-gray-800'>
                             {!! $tr_td !!}
                         </tbody>
+                        @isset($footerRendered)
                         <tfoot>
+                            <tr class="{{$trClassList}}">{!! $footerRendered !!}</tr>
                         </tfoot>
+                        @endif
                     </table>
                 </div>
                 @if($showPaginationBottom)

@@ -41,7 +41,7 @@ trait TraitFormatBookmarkEntities
         $array = [];
         foreach ($allApps as $key => $value) {
             $clickCount = $value['click_count'] ?? 0;
-            $packageTabRender = $value['package_tab'];
+            $packageTabRender = $value['package_tab'] ?? '';
             $packageRender = $value['package_rendered'];
             $subPackageRender = $value['sub_package_rendered'];
             $array[$packageTabRender][$packageRender]['items'][$subPackageRender]['items'][$key] = $value;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Renderer\Table;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Blade;

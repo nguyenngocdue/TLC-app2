@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -21,7 +21,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Name",
         "control": "text",
         "align": "",
@@ -59,7 +59,7 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Slug",
         "control": "text",
         "align": "",
@@ -78,7 +78,7 @@
     "_pj_building_id": {
         "name": "_pj_building_id",
         "column_name": "pj_building_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Building",
         "control": "dropdown",
         "align": "",
@@ -97,7 +97,7 @@
     "_pj_level_id": {
         "name": "_pj_level_id",
         "column_name": "pj_level_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Module Level",
         "control": "dropdown",
         "align": "",
@@ -116,7 +116,7 @@
     "_pj_module_type_id": {
         "name": "_pj_module_type_id",
         "column_name": "pj_module_type_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Module Type",
         "control": "dropdown",
         "align": "",
@@ -135,7 +135,7 @@
     "_pj_name_id": {
         "name": "_pj_name_id",
         "column_name": "pj_name_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Module Name",
         "control": "dropdown",
         "align": "",
@@ -154,7 +154,7 @@
     "_pj_character_id": {
         "name": "_pj_character_id",
         "column_name": "pj_character_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Module Character",
         "control": "dropdown",
         "align": "",
@@ -173,7 +173,7 @@
     "_pj_shipment_id": {
         "name": "_pj_shipment_id",
         "column_name": "pj_shipment_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Project Shipment",
         "control": "dropdown",
         "align": "",
@@ -192,7 +192,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -230,7 +230,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -249,7 +249,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -268,7 +268,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -287,7 +287,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",

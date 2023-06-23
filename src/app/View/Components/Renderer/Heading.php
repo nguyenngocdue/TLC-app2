@@ -16,6 +16,7 @@ class Heading extends Component
         private $title = '',
         private $xalign = 'left',
         private $class = '',
+        private $labelExtra = '',
     ) {
         //
     }
@@ -31,6 +32,7 @@ class Heading extends Component
             $font = "";
             $size = 6 - $this->level;
             $h = "h" . $this->level;
+            $labelExtra = $this->labelExtra;
             $textSize = $size . "xl";
             if ($size === 1) $textSize = "xl";
             if ($size === 0) {
@@ -41,7 +43,7 @@ class Heading extends Component
 
             $theClass = "{$this->class} $font leading-tight text-{$textSize} text-black my-2 text-{$this->xalign} dark:text-gray-300";
             $slot = $data['slot'];
-            return "<$h class='$theClass' title='$this->title'>$slot</$h>";
+            return "<$h class='$theClass' title='$this->title'>$slot <p class='text-sm font-light italic'>$labelExtra</p></$h>";
         };
         // return view('components.renderer.heading');
     }

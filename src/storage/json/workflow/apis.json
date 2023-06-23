@@ -8,8 +8,38 @@
     "control_types": {
         "name": "control_types"
     },
+    "currencies": {
+        "name": "currencies"
+    },
     "departments": {
         "name": "departments"
+    },
+    "eco_effectiveness_lines": {
+        "name": "eco_effectiveness_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "eco_labor_impacts": {
+        "name": "eco_labor_impacts",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "eco_material_impact_adds": {
+        "name": "eco_material_impact_adds",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "eco_material_impact_removes": {
+        "name": "eco_material_impact_removes",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "eco_sheets": {
+        "name": "eco_sheets"
+    },
+    "eco_signatures": {
+        "name": "eco_signatures",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "eco_taken_actions": {
+        "name": "eco_taken_actions",
+        "storeEmpty_and_updateShort": "true"
     },
     "erp_routing_links": {
         "name": "erp_routing_links"
@@ -57,6 +87,32 @@
     },
     "hse_incident_reports": {
         "name": "hse_incident_reports"
+    },
+    "hse_insp_chklst_lines": {
+        "name": "hse_insp_chklst_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "hse_insp_chklst_shts": {
+        "name": "hse_insp_chklst_shts"
+    },
+    "hse_insp_control_groups": {
+        "name": "hse_insp_control_groups"
+    },
+    "hse_insp_control_values": {
+        "name": "hse_insp_control_values"
+    },
+    "hse_insp_groups": {
+        "name": "hse_insp_groups"
+    },
+    "hse_insp_tmpl_lines": {
+        "name": "hse_insp_tmpl_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "hse_insp_tmpl_shts": {
+        "name": "hse_insp_tmpl_shts"
+    },
+    "hse_insp_values": {
+        "name": "hse_insp_values"
     },
     "loggers": {
         "name": "loggers"
@@ -204,6 +260,9 @@
     },
     "user_team_ots": {
         "name": "user_team_ots"
+    },
+    "user_team_tshts": {
+        "name": "user_team_tshts"
     },
     "user_time_keep_types": {
         "name": "user_time_keep_types"

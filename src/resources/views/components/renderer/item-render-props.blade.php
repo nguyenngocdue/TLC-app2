@@ -1,7 +1,6 @@
 <div class=" grid grid-cols-12 px-4 bg-white dark:bg-gray-800 rounded-lg">
     @foreach($dataSource as $prop)
         @php
-        if ($action === "create" && $prop['control'] === 'relationship_renderer') continue;
         $prop ? extract($prop) : null;
         @endphp
         @if($prop)
@@ -14,22 +13,22 @@
                             @case('z_page_break')
                             <x-renderer.page-break />
                             @case('z_h1')
-                            <x-renderer.heading title="{{$title}}" level=1 xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" level=1 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_h2')
-                            <x-renderer.heading title="{{$title}}" level=2 xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" level=2 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_h3')
-                            <x-renderer.heading title="{{$title}}" level=3 xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" level=3 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_h4')
-                            <x-renderer.heading title="{{$title}}" level=4 xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" level=4 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_h5')
-                            <x-renderer.heading title="{{$title}}" level=5 xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" level=5 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_h6_base')
-                            <x-renderer.heading title="{{$title}}" xalign="{{$align}}">{{$label}}</x-renderer.heading>
+                            <x-renderer.heading title="{{$title}}" xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
                             @break
                             @case('z_divider')
                             <x-renderer.divider />
@@ -45,16 +44,18 @@
                         @if(!$hiddenLabel)
                         <label class='text-gray-700 dark:text-gray-300  px-3 block text-base' title='{{$title}}'>
                             @if($control == 'relationship_renderer') 
+                                @if($action !== 'create')
                                 @php
                                     $subModel = ($item->eloquentParams[$prop['columnName']][1]);
                                     $subTable = (new($subModel))->getTable();
                                     $href = "/dashboard/$subTable";
                                 @endphp
-                                <a href="{{$href}}">
-                            @endif
+                                <a href="{{$href}}">{{$label}}</a>
+                                @else
+                                {{-- Hide the label --}}
+                                @endif
+                            @else 
                             {{$label}}
-                            @if($control == 'relationship_renderer') 
-                                </a>
                             @endif
                         @endif
                         {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
@@ -172,8 +173,14 @@
                             @break
 
                             @case('relationship_renderer')
+                            @if($action === "create")
+                                <div title="[{{$prop['label']}}] table will appear after this document is created">
+                                    <i class="fa-duotone fa-square-question text-yellow-800"></i>
+                                </div>
+                            @else
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} readOnly={{$readOnly}} :item="$item"/>
+                            @endif
                             @break
 
                             @case('parent_type')

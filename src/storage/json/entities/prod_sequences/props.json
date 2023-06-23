@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -21,7 +21,7 @@
     "_prod_order_id": {
         "name": "_prod_order_id",
         "column_name": "prod_order_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Prod Order Id",
         "control": "dropdown",
         "align": "",
@@ -40,7 +40,7 @@
     "_prod_routing_link_id": {
         "name": "_prod_routing_link_id",
         "column_name": "prod_routing_link_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Prod Routing Link Id",
         "control": "dropdown",
         "align": "",
@@ -59,7 +59,7 @@
     "_total_hours": {
         "name": "_total_hours",
         "column_name": "total_hours",
-        "column_type": "float",
+        "column_type": "double",
         "label": "Total Hours",
         "control": "number",
         "align": "",
@@ -78,7 +78,7 @@
     "_total_man_hours": {
         "name": "_total_man_hours",
         "column_name": "total_man_hours",
-        "column_type": "float",
+        "column_type": "double",
         "label": "Total Man Hours",
         "control": "number",
         "align": "",
@@ -97,7 +97,7 @@
     "_priority": {
         "name": "_priority",
         "column_name": "priority",
-        "column_type": "integer",
+        "column_type": "int",
         "label": "Priority",
         "control": "number",
         "align": "",
@@ -154,7 +154,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -211,7 +211,7 @@
     "_total_uom": {
         "name": "_total_uom",
         "column_name": "total_uom",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Total UOM",
         "control": "number",
         "align": "",
@@ -230,7 +230,7 @@
     "_uom_id": {
         "name": "_uom_id",
         "column_name": "uom_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "UOM",
         "control": "dropdown",
         "align": "",
@@ -249,7 +249,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "",
         "control": "",
         "align": "",
@@ -268,7 +268,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -287,7 +287,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -306,7 +306,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -325,7 +325,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",

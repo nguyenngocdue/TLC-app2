@@ -149,8 +149,9 @@ class Report
 
     public static function formatDateString($strDate, $typeFormat = 'Y-m-d')
     {
-        $strDate = str_replace('-', '/', $strDate);
+        $strDate = str_replace(['-', '_'], '/', $strDate);
         $dateTime = DateTime::createFromFormat('d/m/Y', $strDate);
+        if(!$dateTime) return false;
         if ($dateTime) {
             return $dateTime->format($typeFormat);
         }

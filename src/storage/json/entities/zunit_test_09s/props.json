@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -21,7 +21,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Name",
         "control": "text",
         "align": "",
@@ -40,7 +40,7 @@
     "_parent_id": {
         "name": "_parent_id",
         "column_name": "parent_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Parent ID",
         "control": "number",
         "align": "",
@@ -97,7 +97,7 @@
     "_department_2": {
         "name": "_department_2",
         "column_name": "department_2",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Department 2",
         "control": "dropdown",
         "align": "",
@@ -116,7 +116,7 @@
     "_user_2": {
         "name": "_user_2",
         "column_name": "user_2",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "User 2",
         "control": "dropdown",
         "align": "",
@@ -135,7 +135,7 @@
     "_category_id": {
         "name": "_category_id",
         "column_name": "category_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Category",
         "control": "dropdown",
         "align": "",
@@ -154,7 +154,7 @@
     "_user_3": {
         "name": "_user_3",
         "column_name": "user_3",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "User 3",
         "control": "dropdown",
         "align": "",
@@ -211,7 +211,7 @@
     "_project_1": {
         "name": "_project_1",
         "column_name": "project_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Project",
         "control": "dropdown",
         "align": "",
@@ -230,7 +230,7 @@
     "_sub_project_1": {
         "name": "_sub_project_1",
         "column_name": "sub_project_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Sub-Project",
         "control": "dropdown",
         "align": "",
@@ -249,7 +249,7 @@
     "_prod_routing_1": {
         "name": "_prod_routing_1",
         "column_name": "prod_routing_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Prod Routing",
         "control": "dropdown",
         "align": "",
@@ -268,7 +268,7 @@
     "_prod_order_1": {
         "name": "_prod_order_1",
         "column_name": "prod_order_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Production Order",
         "control": "dropdown",
         "align": "",
@@ -325,7 +325,7 @@
     "_prod_discipline_1": {
         "name": "_prod_discipline_1",
         "column_name": "prod_discipline_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Prod Discipline",
         "control": "radio",
         "align": "",
@@ -344,7 +344,7 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Assignee",
         "control": "dropdown",
         "align": "",
@@ -420,7 +420,7 @@
     "_department_1": {
         "name": "_department_1",
         "column_name": "department_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Department 1",
         "control": "radio",
         "align": "",
@@ -439,7 +439,7 @@
     "_user_1": {
         "name": "_user_1",
         "column_name": "user_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "User 1 (HOD)",
         "control": "dropdown",
         "align": "",
@@ -458,7 +458,7 @@
     "_user_4": {
         "name": "_user_4",
         "column_name": "user_4",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "User 4",
         "control": "dropdown",
         "align": "",
@@ -477,7 +477,7 @@
     "_user_position_1": {
         "name": "_user_position_1",
         "column_name": "user_position_1",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Position Rendered",
         "control": "text",
         "align": "",
@@ -534,7 +534,7 @@
     "_priority_id": {
         "name": "_priority_id",
         "column_name": "priority_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Priority",
         "control": "radio",
         "align": "",
@@ -610,7 +610,7 @@
     "_total": {
         "name": "_total",
         "column_name": "total",
-        "column_type": "integer",
+        "column_type": "int",
         "label": "Total",
         "control": "number",
         "align": "",
@@ -629,7 +629,7 @@
     "_accepted": {
         "name": "_accepted",
         "column_name": "accepted",
-        "column_type": "integer",
+        "column_type": "int",
         "label": "Accepted",
         "control": "number",
         "align": "",
@@ -648,7 +648,7 @@
     "_rejected": {
         "name": "_rejected",
         "column_name": "rejected",
-        "column_type": "integer",
+        "column_type": "int",
         "label": "Rejected",
         "control": "number",
         "align": "",
@@ -667,7 +667,7 @@
     "_remaining": {
         "name": "_remaining",
         "column_name": "remaining",
-        "column_type": "integer",
+        "column_type": "int",
         "label": "Remaining",
         "control": "number",
         "align": "",
@@ -914,7 +914,7 @@
     "_remaining_hours": {
         "name": "_remaining_hours",
         "column_name": "remaining_hours",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Remaining Hours",
         "control": "number",
         "align": "",
@@ -933,7 +933,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -952,7 +952,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -971,7 +971,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -990,7 +990,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -1009,7 +1009,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -1028,7 +1028,7 @@
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
-        "column_type": "integer",
+        "column_type": "int unsigned",
         "label": "",
         "control": "",
         "align": "",

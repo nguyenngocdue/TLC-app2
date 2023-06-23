@@ -35,7 +35,7 @@
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "attrs_to_compare": "",
-        "expression": "Math.round(100*(m01+m02+m03+m04+m05+m06+m07+m08+m09+m10+m11+m12)*factor)\/100",
+        "expression": "((m01+m02+m03+m04+m05+m06+m07+m08+m09+m10+m11+m12)*factor).toFixed(2)",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
         "ajax_item_attributes": "",

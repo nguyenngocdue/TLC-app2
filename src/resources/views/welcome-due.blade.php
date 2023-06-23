@@ -1,7 +1,5 @@
 @extends('layouts.app')
 @section('content')
+    <x-renderer.report.pivot-table key="{{$key}}" :dataSource="$dataSource"/>
+@endsection
 
-    <x-renderer.table 
-        showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource"  rotate45Width={{300}} />
-    @endsection
-</div>
