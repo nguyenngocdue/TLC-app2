@@ -193,7 +193,7 @@
         "name": "_insp_photos",
         "column_name": "insp_photos",
         "column_type": "eloquent_prop",
-        "label": "nspection Photos",
+        "label": "Inspection Photos",
         "control": "attachment",
         "align": "",
         "col_span": "",

@@ -89,7 +89,8 @@
         "name": "hse_incident_reports"
     },
     "hse_insp_chklst_lines": {
-        "name": "hse_insp_chklst_lines"
+        "name": "hse_insp_chklst_lines",
+        "storeEmpty_and_updateShort": "true"
     },
     "hse_insp_chklst_shts": {
         "name": "hse_insp_chklst_shts"
@@ -104,7 +105,8 @@
         "name": "hse_insp_groups"
     },
     "hse_insp_tmpl_lines": {
-        "name": "hse_insp_tmpl_lines"
+        "name": "hse_insp_tmpl_lines",
+        "storeEmpty_and_updateShort": "true"
     },
     "hse_insp_tmpl_shts": {
         "name": "hse_insp_tmpl_shts"
