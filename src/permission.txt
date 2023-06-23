@@ -1,0 +1,7 @@
+php artisan ndc:permission eco_sheets
+php artisan ndc:permission eco_effectiveness_lines
+php artisan ndc:permission eco_labor_impacts
+php artisan ndc:permission eco_material_impact_adds
+php artisan ndc:permission eco_material_impact_removes
+php artisan ndc:permission eco_signatures
+php artisan ndc:permission eco_taken_actions
