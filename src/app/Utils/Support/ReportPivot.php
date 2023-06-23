@@ -20,7 +20,7 @@ class ReportPivot
                     // dump($type, $value);
                     switch ($type) {
                         case 'date':
-                            $reversedDate = $date->format('d-m-Y');
+                            $reversedDate = $date->format('d-m-y');
                             $_strDate = str_replace('-', '_', $reversedDate) . '_' . $value['fieldIndex'];
                             // $item[$_strDate] = $item[$value['valueIndexField']];
                             $dateItems[$_strDate] =  $item[$value['valueIndexField']];
@@ -164,4 +164,26 @@ class ReportPivot
         return $data;
     }
     
+    public static function isSaturdayOrSunday($dateString)
+    {
+        $date = DateTime::createFromFormat("d/m/Y", $dateString);
+        // dump($dateString);
+        if ($date === false) return '';
+        $dayOfWeek = $date->format("N"); // Retrieve the day of the week as a string
+        if ($dayOfWeek >= 6) return true;
+        return false;
+    }
+    public static function findPosition($string, $searchStr, $positionNumber) {
+        $position = 0;
+        $count = 0;
+        while (($position = strpos($string, $searchStr, $position))) {
+            $position++;
+            $count++;
+            if ($count === $positionNumber) {
+                return $position;
+            }
+        }
+        return -1;
+    }
+
 }

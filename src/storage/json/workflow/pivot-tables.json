@@ -19,7 +19,7 @@
         "data_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_aggregations": "sum,\r\nsum,\r\nsum",
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects",
-        "sort_by": "users.name(desc),\r\nstaff_id,\r\nworkplaces.name(desc),\r\ndepartments.id,"
+        "sort_by": "users.name(desc),\r\nstaff_id,"
     },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",
