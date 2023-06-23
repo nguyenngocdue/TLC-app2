@@ -18,7 +18,10 @@ class DBTable
 
     public static function getAll()
     {
-        return DB::select("SHOW tables;");
+        $tables = [];
+        $tableNames =  DB::select("SHOW tables;");
+        foreach ($tableNames as $tableNameObj) $tables[] = $tableNameObj->Tables_in_laravel;
+        return $tables;
     }
 
     public static function getAllColumns($tableName, $keepSingularIfNeeded = false)

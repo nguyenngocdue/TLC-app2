@@ -13,13 +13,41 @@ class DatabaseDiagramsController extends Controller
         return "dashboard";
     }
 
+    function getNodeDataArray($tables)
+    {
+        $nodeDataArray = [];
+        foreach ($tables as $tableName => $table) {
+            $item['key'] = $tableName;
+            $item['loc'] = "";
+            foreach ($table as $field) {
+                $item['field'][] = [
+                    'name' => $field['Field'],
+                ];
+            }
+            $nodeDataArray[] = $item;
+            if (sizeof($nodeDataArray) > 10) break;
+        }
+        // $nodeDataArray = [
+        //     [
+        //         'key' => "Record2",
+        //         'fields' => [
+        //             ['name' => "fieldA", 'info' => "", 'color' => "#FFB900", 'figure' => "Diamond"],
+        //             ['name' => "fieldB", 'info' => "", 'color' => "#F25022", 'figure' => "Rectangle"],
+        //             ['name' => "fieldC", 'info' => "", 'color' => "#7FBA00", 'figure' => "Diamond"],
+        //             ['name' => "fieldD", 'info' => "fourth", 'color' => "#00BCF2", 'figure' => "Rectangle"],
+        //         ],
+        //         'loc' => "280 100"
+        //     ]
+        // ];
+        // dd($nodeDataArray);
+        return $nodeDataArray;
+    }
+
     function index(Request $request)
     {
         $tables = [];
         $tableNames = DBTable::getAll();
-        // dump($tableNames);
-        foreach ($tableNames as $tableNameObj) {
-            $tableName = $tableNameObj->Tables_in_laravel;
+        foreach ($tableNames as $tableName) {
             $tables[$tableName] = DBTable::getAllColumns($tableName, true);
         }
         // dump($tables);
@@ -31,9 +59,11 @@ class DatabaseDiagramsController extends Controller
             ['dataIndex' => 'Default'],
             ['dataIndex' => 'Extra'],
         ];
+
         return view("dev.database-diagrams", [
             'columns' => $columns,
             'tables' => $tables,
+            'nodeDataArray' => $this->getNodeDataArray($tables),
         ]);
     }
 }
