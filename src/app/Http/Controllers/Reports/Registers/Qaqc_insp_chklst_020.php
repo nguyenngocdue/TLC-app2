@@ -167,6 +167,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             $icons = $lenUsers ? str_repeat("<i class='fa-duotone fa-user'></i>",$lenUsers):"";
             $dataHeader[$key] = $icons;
         }
+        // dump($dataHeader);
         return $dataHeader;
     }
 
