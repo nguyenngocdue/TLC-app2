@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -40,7 +40,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Title",
         "control": "text",
         "align": "",
@@ -59,7 +59,7 @@
     "_revision_no": {
         "name": "_revision_no",
         "column_name": "revision_no",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Revision No",
         "control": "text",
         "align": "",
@@ -78,7 +78,7 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Slug",
         "control": "text",
         "align": "",
@@ -97,7 +97,7 @@
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Project",
         "control": "dropdown",
         "align": "",
@@ -135,7 +135,7 @@
     "_priority_id": {
         "name": "_priority_id",
         "column_name": "priority_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Priority",
         "control": "dropdown",
         "align": "",
@@ -382,7 +382,7 @@
     "_total_labor_cost": {
         "name": "_total_labor_cost",
         "column_name": "total_labor_cost",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Total Labor Cost",
         "control": "number",
         "align": "",
@@ -401,7 +401,7 @@
     "_currency_1": {
         "name": "_currency_1",
         "column_name": "currency_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Currency",
         "control": "dropdown",
         "align": "",
@@ -458,7 +458,7 @@
     "_total_add_cost": {
         "name": "_total_add_cost",
         "column_name": "total_add_cost",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Total Added Cost",
         "control": "number",
         "align": "",
@@ -477,7 +477,7 @@
     "_total_remove_cost": {
         "name": "_total_remove_cost",
         "column_name": "total_remove_cost",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Total Removed Cost",
         "control": "number",
         "align": "",
@@ -496,7 +496,7 @@
     "_total_material_cost": {
         "name": "_total_material_cost",
         "column_name": "total_material_cost",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Net Material Cost",
         "control": "number",
         "align": "",
@@ -515,7 +515,7 @@
     "_currency_2": {
         "name": "_currency_2",
         "column_name": "currency_2",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Currency",
         "control": "dropdown",
         "align": "",
@@ -591,7 +591,7 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Line Project Manager",
         "control": "dropdown",
         "align": "",
@@ -610,7 +610,7 @@
     "_assignee_2": {
         "name": "_assignee_2",
         "column_name": "assignee_2",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Project Admin",
         "control": "dropdown",
         "align": "",
@@ -705,7 +705,7 @@
     "_assignee_3": {
         "name": "_assignee_3",
         "column_name": "assignee_3",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "DC Manager",
         "control": "dropdown",
         "align": "",
@@ -743,7 +743,7 @@
     "_closed_at": {
         "name": "_closed_at",
         "column_name": "closed_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "Closed Date",
         "control": "picker_datetime",
         "align": "",
@@ -762,7 +762,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -781,7 +781,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "",
         "control": "",
         "align": "",
@@ -800,7 +800,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -819,7 +819,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -838,7 +838,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -857,7 +857,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",

@@ -76,7 +76,7 @@ class Table extends Component
       'columns' => $columns,
       'dataSource' => $dataSource,
       'headerRendered' => $this->makeTable2ndThead($columns, $this->dataHeader),
-      'footerRendered' => $this->makeFooter($columns, $dataSource),
+      'footerRendered' => $this->makeFooter($columns, $this->tableName),
       'headerTop' => $this->headerTop,
       'columnsRendered' => $this->getColumnRendered($columns, $this->timeElapse),
       'tr_td' => $tr_td,

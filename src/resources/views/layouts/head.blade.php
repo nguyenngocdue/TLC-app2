@@ -41,6 +41,7 @@
     <script src="{{ asset('js/components/EditableTable2-20230411.js') }}"></script>
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20230406.js') }}"></script>
     <script src="{{ asset('js/components/Number4.js') }}"></script>
+    <script src="{{ asset('js/components/Footer4.js') }}"></script>
     {{-- <script src="{{ asset('js/components/EditableTable.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/components/EditableTableAddNewLine.js') }}"></script> --}}
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>

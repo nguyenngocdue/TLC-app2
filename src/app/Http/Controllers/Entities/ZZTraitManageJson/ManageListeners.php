@@ -34,7 +34,7 @@ class ManageListeners extends Manage_Parent
                 "dataIndex" => "listen_action",
                 "renderer" => "dropdown",
                 "editable" => true,
-                "cbbDataSource" => ['', 'reduce', 'assign', 'dot', 'aggregate(not-yet)', 'expression', 'date_offset', 'number_to_words(not-yet)', 'ajax_request_scalar', /*'trigger_change_same_line', 'trigger_change_some_lines', */ 'trigger_change_all_lines'],
+                "cbbDataSource" => ['', 'reduce', 'assign', 'dot', 'aggregate_from_table', 'expression', 'date_offset', 'number_to_words(not-yet)', 'ajax_request_scalar', /*'trigger_change_same_line', 'trigger_change_some_lines', */ 'trigger_change_all_lines'],
                 "sortBy" => 'value',
                 "properties" => ["strFn" => 'same'],
             ],

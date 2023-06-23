@@ -6,12 +6,15 @@ use Illuminate\Support\Facades\Blade;
 
 trait TableTraitFooter
 {
-    function makeOneFooter($column, $dataSource)
+    function makeOneFooter($column, $tableName)
     {
-        return "A";
+        $fieldName = $column['dataIndex'];
+        $class = "focus:border-0 border-0 bg-transparent w-full h-10 block text-right pr-6 py-0";
+        $id = "{$tableName}[footer][{$fieldName}]";
+        return "<input id='$id' readonly class='$class' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
     }
 
-    function makeFooter($columns, $dataSource)
+    function makeFooter($columns, $tableName)
     {
         $result0 = [];
         $hasFooter = false;
@@ -19,7 +22,7 @@ trait TableTraitFooter
             if (isset($column['invisible'])) continue;
             if (isset($column['footer'])) {
                 $hasFooter = true;
-                $result0[$column['dataIndex']] = $this->makeOneFooter($column, $dataSource);
+                $result0[$column['dataIndex']] = $this->makeOneFooter($column, $tableName);
             } else {
                 $result0[$column['dataIndex']] = "";
             }
