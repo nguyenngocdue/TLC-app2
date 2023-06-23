@@ -5,75 +5,52 @@ namespace App\Utils\Support;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class DBTable
 {
-    private static $singletonNames = [];
-    private static $singletonTypes = [];
-
+    private static $singletonColumns = [];
 
     public static function fromNameToModel($tableName): Model
     {
         return App::make(Str::modelPathFrom($tableName));
     }
 
-    public static function getColumnTypes($tableName)
+    public static function getAll()
     {
-        if (!isset(static::$singletonTypes[$tableName]) || !static::$singletonTypes[$tableName]) {
-            static::$singletonTypes[$tableName] = static::getColumnTypesExpensive($tableName);
-        }
-        return static::$singletonTypes[$tableName];
+        $tables = [];
+        $tableNames =  DB::select("SHOW tables;");
+        foreach ($tableNames as $tableNameObj) $tables[] = $tableNameObj->Tables_in_laravel;
+        return $tables;
     }
 
-    private static function getColumnTypesExpensive($tableName)
+    public static function getAllColumns($tableName, $keepSingularIfNeeded = false)
     {
-        $columnNames = self::getColumnNames($tableName);
-
-        $columnTypes = [];
-        foreach ($columnNames as $columnName) {
-            $typeColumn = Schema::getColumnType(Str::plural($tableName), $columnName);
-            $columnTypes[] = $typeColumn;
+        if (!isset(static::$singletonColumns[$tableName]) /*|| !static::$singletonColumns[$tableName]*/) {
+            static::$singletonColumns[$tableName] = static::getColumnsExpensive($tableName, $keepSingularIfNeeded);
         }
-        return $columnTypes;
+        return static::$singletonColumns[$tableName];
+    }
+
+    private static function getColumnsExpensive($tableName)
+    {
+        $temp =  DB::select("SHOW COLUMNS FROM $tableName");
+        $result = [];
+        foreach ($temp as $column) {
+            $result[$column->Field] = (array) $column;
+        }
+        return $result;
     }
 
     public static function getColumnNames($tableName)
     {
-        if (!isset(static::$singletonNames[$tableName]) /*|| !static::$singletonNames[$tableName]*/) {
-            static::$singletonNames[$tableName] = static::getColumnNamesExpensive($tableName);
-        }
-        return static::$singletonNames[$tableName];
+        $table = static::getAllColumns($tableName);
+        return array_map(fn ($c) => $c['Field'], $table);
     }
 
-    private static function getColumnNamesExpensive($tableName)
+    public static function getColumnTypes($tableName)
     {
-        $tableName = Str::plural($tableName);
-        $columns = DB::select("SHOW COLUMNS FROM $tableName");
-        // dump($columns);
-        $names = array_map(fn ($c) => $c->Field, $columns);
-        return $names;
+        $table = static::getAllColumns($tableName);
+        return array_map(fn ($c) => $c['Type'], $table);
     }
-
-    // private static function getColumnTypesExpensive($tableName)
-    // {
-    //     $tableName = Str::plural($tableName);
-    //     $columns = DB::select("SHOW COLUMNS FROM $tableName");
-    //     // dump($columns);
-    //     $names = array_map(fn ($c) => $c->Type, $columns);
-    //     return $names;
-    // }
-
-    // private static function getColumnNamesExpensiveOLD($tableName)
-    // {
-    //     $tableName = Str::plural($tableName);
-    //     $data = DB::select("Select COLUMN_NAME from information_schema.COLUMNS where TABLE_SCHEMA = '" . env('DB_DATABASE', "laravel") . "' and TABLE_NAME = '" . $tableName . "' ORDER BY ORDINAL_POSITION ASC");
-    //     $result = [];
-    //     foreach ($data as $value) {
-    //         $var = array_values((array)$value);
-    //         array_push($result, ...$var);
-    //     }
-    //     return $result;
-    // }
 }

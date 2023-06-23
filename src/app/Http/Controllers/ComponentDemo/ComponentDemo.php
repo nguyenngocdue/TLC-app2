@@ -11,7 +11,8 @@ class ComponentDemo
     use TraitDemoTagData;
     use TraitDemoTabData;
     use TraitDemoProgressBar;
-    use TraitDemoModeControl;
+    // use TraitDemoModeControl;
+    use TraitDemoPivotTable;
 
     function getType()
     {
@@ -22,14 +23,15 @@ class ComponentDemo
     {
         return [
             'static' => ['href' => "#static", 'title' => "Static", 'active' => false,],
-            'data_display' => ['href' => "#data_display", 'title' => "Data Display", 'active' => true,],
+            'data_display' => ['href' => "#data_display", 'title' => "Data Display", 'active' => false,],
             'data_entry' => ['href' => "#data_entry", 'title' => "Data Entry", 'active' => false,],
             'attachments' => ['href' => "#attachments", 'title' => "Attachments", 'active' => false,],
             'editable_tables' => ['href' => "#editable_tables", 'title' => "Editable Tables", 'active' => false,],
             'navigation' => ['href' => "#navigation", 'title' => "Navigation", 'active' => false,],
             'feedbacks' => ['href' => "#feedbacks", 'title' => "Feedback", 'active' => false,],
             'listeners' => ['href' => "#listeners", 'title' => "Listeners", 'active' => false,],
-            'modecontrols' => ['href' => "#modecontrols", 'title' => "Mode Controls", 'active' => false,],
+            'pivot_tables' => ['href' => "#pivot_tables", 'title' => "Pivot Tables", 'active' => true,],
+            // 'modecontrols' => ['href' => "#modecontrols", 'title' => "Mode Controls", 'active' => false,],
         ];
     }
 
@@ -51,8 +53,10 @@ class ComponentDemo
             'tagDataSource' => $this->getTagDataSource(),
             'tabData1' => $this->getTab1(),
             'tabData2' => $this->getTab2(),
-            'dataSource' => $this->getDataSource(),
-            'itemsSelected' => $this->getItemsSelected(),
+            // 'listenerDataSource' => $this->getDataSource(), //??
+            // 'itemsSelected' => $this->getItemsSelected(), //??
+            'pivotTableColumns' => $this->getPivotTableColumns1(),
+            'pivotTableDataSource' => $this->getPivotTableDataSource1(),
             'tableDataSourceForRegister' => $this->getDataSourceForRegister(),
             'tableColumnsForRegister' => $this->getColumnsForRegister(),
             'dataSourceProgressBar' => $this->getDataSourceProgressBar(),
