@@ -44,7 +44,7 @@ trait TraitLibPivotTableDataFields
         $lib = LibPivotTables::getFor($this->key);
         $dataFields = $lib['data_fields'];
         $fields = $this->separateFields($lib['row_fields']);
-        $rowFieldsHasAttr = $fields['fields'] ?? [];
+        $rowFields = $fields['fields'] ?? [];
         $bidingRowFields = $fields['biding_fields'] ?? [];
 
         $dataIndex = array_values(array_map(function ($item) {
@@ -69,6 +69,7 @@ trait TraitLibPivotTableDataFields
         $dataAggregations = ReportPivot::combineArrays($dataFields, $lib['data_aggregations']);
 
         $sortBy = $lib['sort_by'];
-        return [$rowFieldsHasAttr, $bidingRowFields, $filters, $columnFields, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy];
+        // dd($rowFields);
+        return [$rowFields, $bidingRowFields, $filters, $columnFields, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy];
     }
 }

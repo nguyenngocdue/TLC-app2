@@ -1,5 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    <x-renderer.table showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource"  rotate45Width={{300}} />
+    <x-renderer.table showNo={{true}} :dataHeader="$tableDataHeader" :columns="$tableColumns" :dataSource="$tableDataSource"   />
 @endsection
 
