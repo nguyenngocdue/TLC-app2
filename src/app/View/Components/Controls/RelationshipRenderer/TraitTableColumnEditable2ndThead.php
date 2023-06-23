@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Controls\RelationshipRenderer;
 
-use App\View\Components\Renderer\TableTraitCommon;
+use App\View\Components\Renderer\Table\TableTraitCommon;
 use Illuminate\Support\Facades\Blade;
 
 trait TraitTableColumnEditable2ndThead

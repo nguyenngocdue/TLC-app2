@@ -41,7 +41,7 @@ class Eco_labor_impact extends ModelExtended
             ['dataIndex' => 'name'],
             ['dataIndex' => 'head_count',],
             ['dataIndex' => 'man_day',],
-            ['dataIndex' => 'labor_cost',],
+            ['dataIndex' => 'labor_cost', 'footer' => 'agg_sum'],
             ['dataIndex' => 'total_cost',],
             ['dataIndex' => 'description'],
         ];

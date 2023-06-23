@@ -2,6 +2,10 @@
 
 namespace App\View\Components\Renderer;
 
+use App\View\Components\Renderer\Table\TableTraitColumns;
+use App\View\Components\Renderer\Table\TableTraitCommon;
+use App\View\Components\Renderer\Table\TableTraitFooter;
+use App\View\Components\Renderer\Table\TableTraitRows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
@@ -12,6 +16,7 @@ class Table extends Component
   use TableTraitCommon;
   use TableTraitColumns;
   use TableTraitRows;
+  use TableTraitFooter;
 
   public function __construct(
     private Request $request,
@@ -44,6 +49,7 @@ class Table extends Component
     private $bottomCenterControl = null,
     private $bottomRightControl = null,
     private $tableTrueWidth = false,
+    private $editable = false,
   ) {
   }
 
@@ -70,10 +76,11 @@ class Table extends Component
       'columns' => $columns,
       'dataSource' => $dataSource,
       'headerRendered' => $this->makeTable2ndThead($columns, $this->dataHeader),
+      'footerRendered' => $this->makeFooter($columns, $dataSource),
       'headerTop' => $this->headerTop,
       'columnsRendered' => $this->getColumnRendered($columns, $this->timeElapse),
       'tr_td' => $tr_td,
-      'showing' => $hasPaging ? $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing') : "",
+      'showing' => ($hasPaging && !$this->editable) ? $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing') : "",
       'pagination' => $hasPaging ? $dataSource->links('dashboards.pagination.pagination') : "",
       'header' => $this->header,
       'footer' => $this->footer,
