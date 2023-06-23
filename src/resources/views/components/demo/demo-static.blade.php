@@ -47,6 +47,7 @@
             <x-renderer.button outline=true type="warning">warning</x-renderer.button>
             <x-renderer.button outline=true type="info">info</x-renderer.button>
             <x-renderer.button outline=true type="dark">dark</x-renderer.button>
+            <x-renderer.button outline=true type="link">link</x-renderer.button>
             <x-renderer.button outline=true type="default">default</x-renderer.button>
             <br />
             <br />
@@ -68,6 +69,7 @@
             <x-renderer.button size="xs" outline=true type="warning">warning</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="info">info</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="dark">dark</x-renderer.button>
+            <x-renderer.button size="xs" outline=true type="link">link</x-renderer.button>
             <x-renderer.button size="xs" outline=true type="default">default</x-renderer.button>
     </x-renderer.card>
     <x-renderer.card title="Statuses">
@@ -89,7 +91,7 @@
         <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-user" groupBy="name"></x-renderer.grid>
     </x-renderer.card>
     <x-renderer.card title="Tags">
-        <x-renderer.table showNo=true :columns="$tagColumns" :dataSource="$tagDataSource" maxH=45/>
+        <x-renderer.table showNo=true :columns="$tagColumns" :dataSource="$tagDataSource" maxH=60/>
 
             <x-renderer.tag color="slate" colorIndex=900>slate</x-renderer.tag>
             <x-renderer.tag color="zinc">zinc</x-renderer.tag>

@@ -17,7 +17,7 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <div id="static" class="bg-white p-4 hidden">
             <x-demo.demo-static :tagColumns="$tagColumns" :tagDataSource="$tagDataSource" :gridDataSource="$gridDataSource" />
         </div>
-        <div id="data_display" class="bg-white p-4 hidden">
+        <div id="data_display" class="bg-white p-4 hidden1">
             <x-demo.demo-data-display 
                     :tableColumns="$tableColumns" 
                     :tableDataSource="$tableDataSource" 
@@ -41,7 +41,7 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <div id="feedbacks" class="bg-white p-4 hidden ">
             <x-demo.demo-feedback :dataSourceProgressBar="$dataSourceProgressBar"/>
         </div>
-        <div id="listeners" class="bg-white p-4 hidden1">
+        <div id="listeners" class="bg-white p-4 hidden">
             <x-demo.demo-listener :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
         </div>
         <div id="modecontrols" class="bg-white p-4 hidden">

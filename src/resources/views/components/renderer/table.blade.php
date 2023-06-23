@@ -28,7 +28,7 @@
                 </div>
                 @endif
                 <div class="table-wrp block {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t":"rounded-t-lg"}}">
-                    <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm' style="table-layout: auto; {{$tableWidth}}">
+                    <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm border-separate border-spacing-0' style="table-layout: auto; {{$tableWidth}}">
                         <colgroup>
                             {!! $colgroup !!}
                         </colgroup>
@@ -52,7 +52,7 @@
                     </table>
                 </div>
                 @if($showPaginationBottom)
-                <div class='w-full grid grid-cols-12 border-t border-gray-300 rounded-b-lg bg-gray-100 px-4 py-1.5 text-xs font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
+                <div class='w-full grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 px-4 py-1.5 text-xs font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
                     <span class='lg:col-span-4 md:col-span-12 flex gap-1'>{!! Blade::render($bottomLeftControl) !!}</span>
                     <span class="lg:col-span-4 md:col-span-12 flex gap-1 justify-center">{!! Blade::render($bottomCenterControl) !!}</span>
                     <div class="lg:col-span-4 md:col-span-12 flex gap-1 justify-end">

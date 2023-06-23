@@ -54,7 +54,7 @@ abstract class Report_ParentController extends Controller
         return $sqlStr;
     }
 
-    protected function getDataSource($modeParams)
+    public function getDataSource($modeParams)
     {
         $sql = $this->getSql($modeParams);
         if (is_null($sql) || !$sql) return collect();

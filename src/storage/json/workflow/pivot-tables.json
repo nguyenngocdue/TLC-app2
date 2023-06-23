@@ -2,41 +2,45 @@
     "hr_timesheet_employee_date": {
         "name": "hr_timesheet_employee_date",
         "filters": "workplace_id, department_id",
-        "row_fields": "staff_id, \r\nuser_id, \r\nworkplace_id, \r\ntype_id,\r\ndepartment_id,\r\ncategory_id",
+        "row_fields": "user_id(users.name), \r\nstaff_id, \r\nworkplace_id(workplaces.name), \r\ntype_id,\r\ndepartment_id(departments.name),\r\ncategory_id",
         "column_fields": "time_sheet_start_time, time_sheet_start_time_otr, time_sheet_start_time_wfh",
         "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, workplace_id",
         "data_aggregations": "sum,sum,sum,concat",
-        "lookup_tables": "sub_projects,\r\nterms,\r\nusers,\r\nuser_types"
+        "lookup_tables": "sub_projects,\r\nterms,\r\nusers,\r\nuser_types,\r\nworkplaces",
+        "sort_by": "staff_id(desc),\r\ntype_id(asc)"
     },
     "hr_timesheet_employee_project": {
         "name": "hr_timesheet_employee_project",
         "filters": "workplace_id, department_id",
-        "row_fields": "staff_id, \r\nuser_id, \r\nworkplace_id, \r\ntype_id,\r\ndepartment_id,\r\ncategory_id",
-        "column_fields": "sub_project_id,\r\ntime_sheet_start_time,\r\nworkplace_id",
-        "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours,\r\ntime_sheet_hours_wfh",
+        "row_fields": "staff_id,\r\nuser_id(users.name), \r\nworkplace_id(workplaces.name), \r\ntype_id(user_types.name),\r\ndepartment_id(departments.name),\r\ncategory_id(user_categories.name)",
+        "column_fields": "sub_project_id(sub_projects.name),\r\ntime_sheet_start_time_otr,\r\ntime_sheet_start_time,\r\ntime_sheet_start_time_wfh",
+        "value_index_fields": "time_sheet_hours_otr,\r\ntime_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh,",
         "data_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_aggregations": "sum,\r\nsum,\r\nsum",
-        "lookup_tables": null
+        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects",
+        "sort_by": "users.name(desc),\r\nstaff_id,\r\nworkplaces.name(desc),\r\ndepartments.id,"
     },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",
         "filters": "workplace_id, department_id",
-        "row_fields": "sub_project_id,\r\nuser_id, \r\ntype_id,\r\npj_task_id",
-        "column_fields": "time_sheet_start_time_otr, time_sheet_start_time_wfh",
-        "value_index_fields": "time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
+        "row_fields": "sub_project_id(sub_projects.name),\r\nuser_id(users.name), \r\ntype_id(user_types.name),\r\npj_task_id(pj_tasks.name)",
+        "column_fields": "time_sheet_start_time_otr, time_sheet_start_time_wfh,\r\ntime_sheet_start_time",
+        "value_index_fields": "time_sheet_hours_otr,\r\ntime_sheet_hours_wfh,\r\ntime_sheet_hours",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
         "data_aggregations": "sum,sum,sum",
-        "lookup_tables": null
+        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\npj_tasks",
+        "sort_by": "pj_tasks.name(desc),\r\nsub_projects.name"
     },
     "hr_timesheet_team_date": {
         "name": "hr_timesheet_team_date",
         "filters": "workplace_id, department_id",
-        "row_fields": "workplace_id, \r\ncategory_id, \r\ntype_id",
+        "row_fields": "workplace_id(workplaces.name), \r\ncategory_id(user_categories.name), \r\ntype_id(user_types.name)",
         "column_fields": "time_sheet_start_time, time_sheet_start_time_otr, time_sheet_start_time_wfh",
         "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
         "data_aggregations": "sum,sum,sum",
-        "lookup_tables": null
+        "lookup_tables": "users,\r\nworkplaces,\r\nuser_categories,\r\nuser_types,\r\nsub_projects",
+        "sort_by": null
     }
 }

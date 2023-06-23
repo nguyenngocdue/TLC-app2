@@ -60,7 +60,7 @@ class Button extends Component
             case "refresh":
                 return $defaultClass . "border-blue-600 bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg focus:bg-blue-600 focus:shadow-lg active:bg-gray-600 active:shadow-lg";
             default:
-                return $defaultClass . "border-gray-200 bg-gray-200 text-gray-700 hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg active:bg-gray-400 active:shadow-lg";
+                return $defaultClass . "border-gray-200 bg-gray-200 text-gray-800 hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg active:bg-gray-400 active:shadow-lg";
         }
     }
 
@@ -85,8 +85,10 @@ class Button extends Component
                 return $defaultClass . "border-gray-800 text-gray-800";
             case "refresh":
                 return $defaultClass . "border-gray-200 text-gray-200";
+            case "link":
+                return $defaultClass . "border-gray-200 text-blue-600";
             default:
-                return $defaultClass . "border-gray-200 text-gray-200";
+                return $defaultClass . "border-gray-200 text-gray-800";
         }
     }
 
