@@ -1,83 +1,13 @@
 {
-    "_month_allowed_hours": {
-        "name": "_month_allowed_hours",
-        "column_name": "month_allowed_hours",
-        "listen_action": "ajax_request_scalar",
-        "triggers": "user_id,ot_date,id",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "\/api\/v1\/hr\/overtime_request_line2",
-        "ajax_response_attribute": "hits",
-        "ajax_form_attributes": "year_allowed_hours, month_allowed_hours",
-        "ajax_item_attributes": "year_remaining_hours, month_remaining_hours",
-        "ajax_default_values": "200,40"
-    },
-    "_employeeid": {
-        "name": "_employeeid",
-        "column_name": "employeeid",
-        "listen_action": "dot",
-        "triggers": "user_id",
-        "listen_to_fields": "user_id",
-        "listen_to_attrs": "employeeid",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_position_rendered": {
-        "name": "_position_rendered",
-        "column_name": "position_rendered",
-        "listen_action": "dot",
-        "triggers": "user_id",
-        "listen_to_fields": "user_id",
-        "listen_to_attrs": "position_rendered",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_total_time": {
-        "name": "_total_time",
-        "column_name": "total_time",
+    "_amount": {
+        "name": "_amount",
+        "column_name": "amount",
         "listen_action": "expression",
-        "triggers": "from_time,to_time,break_time",
+        "triggers": "unit_price, quantity",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "attrs_to_compare": "",
-        "expression": "((to_time - from_time - break_time * 60)\/3600).toFixed(2)",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_month_remaining_hours": {
-        "name": "_month_remaining_hours",
-        "column_name": "month_remaining_hours",
-        "listen_action": "expression",
-        "triggers": "month_allowed_hours,total_time",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "(month_allowed_hours - total_time).toFixed(2)",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_year_remaining_hours": {
-        "name": "_year_remaining_hours",
-        "column_name": "year_remaining_hours",
-        "listen_action": "expression",
-        "triggers": "year_allowed_hours,total_time",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "(year_allowed_hours - total_time).toFixed(2)",
+        "expression": "(unit_price * quantity).toFixed(2)",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
         "ajax_item_attributes": "",
@@ -86,20 +16,6 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "listen_action": "trigger_change_all_lines",
-        "triggers": "total_time",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_ot_date": {
-        "name": "_ot_date",
-        "column_name": "ot_date",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -111,9 +27,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_hr_overtime_request_id": {
-        "name": "_hr_overtime_request_id",
-        "column_name": "hr_overtime_request_id",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -125,9 +41,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_user_id": {
-        "name": "_user_id",
-        "column_name": "user_id",
+    "_unit_price": {
+        "name": "_unit_price",
+        "column_name": "unit_price",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -139,9 +55,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_year_allowed_hours": {
-        "name": "_year_allowed_hours",
-        "column_name": "year_allowed_hours",
+    "_quantity": {
+        "name": "_quantity",
+        "column_name": "quantity",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -153,9 +69,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_from_time": {
-        "name": "_from_time",
-        "column_name": "from_time",
+    "_unit_id": {
+        "name": "_unit_id",
+        "column_name": "unit_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -167,9 +83,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_to_time": {
-        "name": "_to_time",
-        "column_name": "to_time",
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -181,9 +97,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_break_time": {
-        "name": "_break_time",
-        "column_name": "break_time",
+    "_eco_sheet_id": {
+        "name": "_eco_sheet_id",
+        "column_name": "eco_sheet_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -195,37 +111,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_sub_project_id": {
-        "name": "_sub_project_id",
-        "column_name": "sub_project_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_work_mode_id": {
-        "name": "_work_mode_id",
-        "column_name": "work_mode_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_remark": {
-        "name": "_remark",
-        "column_name": "remark",
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -240,6 +128,20 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -279,9 +181,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -293,9 +195,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

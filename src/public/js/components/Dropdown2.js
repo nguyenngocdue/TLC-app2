@@ -9,16 +9,11 @@ const makeIdForNumber = (n) =>
     '.' +
     String(n).padStart(6, '0').substring(3)
 const makeId = (n) => (isNaN(n) ? '' : makeIdForNumber(n))
-const select2FormatState = (state) =>
-    !state.id
-        ? state.text
-        : $(
-              `<div class="flex justify-between px-1"><span>${
-                  state.text
-              }</span><pre>   </pre><span>${
-                  isNaN(state.id) ? state.id : makeId(state.id)
-              }</span></div>`
-          )
+const select2FormatState = (state) => !state.id ? state.text : $(
+    `<div class="flex justify-between px-1"><span>${state.text
+    }</span><pre>   </pre><span>${isNaN(state.id) ? state.id : makeId(state.id)
+    }</span></div>`
+)
 const getEById = (id) => $("[id='" + id + "']")
 const dumbIncludes2 = (array, item) => {
     for (let i = 0; i < array.length; i++) {
@@ -317,7 +312,7 @@ const onChangeDropdown2Expression = (listener) => {
     for (let i = 0; i < vars.length; i++) {
         const varName = vars[i]
         if (
-            ['Math', 'round', 'ceil', 'trunc', 'toDateString'].includes(varName)
+            ['Math', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed'].includes(varName)
         )
             continue
         let varValue = getEById(varName).val() || 0
@@ -511,8 +506,8 @@ const reloadDataToDropdown2 = (
                 dataSource.length === 1
                     ? 'selected'
                     : dumbIncludes2(selected, item.id)
-                    ? 'selected'
-                    : ''
+                        ? 'selected'
+                        : ''
             // console.log(id, selected, item.id, selectedStr)
             const title =
                 item.description || (isNaN(item.id) ? item.id : makeId(item.id))
@@ -563,8 +558,8 @@ const reloadDataToDropdown2 = (
                 dataSource.length === 1
                     ? 'checked'
                     : dumbIncludes2(selected, itemId)
-                    ? 'checked'
-                    : ''
+                        ? 'checked'
+                        : ''
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
@@ -651,8 +646,8 @@ const reloadDataToDropdown2 = (
                 dataSource.length === 1
                     ? 'checked'
                     : dumbIncludes2(selected, itemId)
-                    ? 'checked'
-                    : ''
+                        ? 'checked'
+                        : ''
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''

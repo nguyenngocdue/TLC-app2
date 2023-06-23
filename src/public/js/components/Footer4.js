@@ -7,6 +7,7 @@ function onChangeDropdown4AggregateFromTable(id, value) {
         if (triggers.includes(id)) {
             const targetName = listener['column_name']
             getEById(targetName).val(value)
+            getEById(targetName).trigger('change')
             // console.log(listener)
         }
     }
@@ -28,7 +29,7 @@ function calculateFooterValue(operator, tableId, fieldName) {
         }
     }
     const footerName = tableId + "[footer][" + fieldName + "]"
-    getEById(footerName).val(result)
+    getEById(footerName).val(result.toFixed(2))
     getEById(footerName).trigger('change')
 }
 

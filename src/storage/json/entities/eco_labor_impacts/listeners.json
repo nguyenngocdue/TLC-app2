@@ -7,7 +7,7 @@
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "attrs_to_compare": "",
-        "expression": "Math.round(head_count * man_day *labor_cost *100) \/ 100",
+        "expression": "(head_count * man_day *labor_cost).toFixed(2)",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
         "ajax_item_attributes": "",
