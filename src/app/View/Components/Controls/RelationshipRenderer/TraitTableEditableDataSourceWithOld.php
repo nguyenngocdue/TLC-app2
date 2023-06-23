@@ -109,6 +109,7 @@ trait TraitTableEditableDataSourceWithOld
         $columns = array_values(array_map(fn ($column) => $column['dataIndex'], $columns));
         // dump($editableColumns);
         // dump($columns);
+        $columns[] = 'owner_id';
         $fillable = $instance->getFillable();
         $diff = array_diff($columns, $fillable);
         if (!empty($diff)) {

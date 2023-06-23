@@ -1,6 +1,14 @@
 <?php
 
 return [
+    'eco_sheets' => [
+        'eco_effectiveness_lines' => [],
+        'eco_taken_actions' => [],
+        'eco_labor_impacts' => [],
+        'eco_material_impact_adds' => [],
+        'eco_material_impact_removes' => [],
+    ],
+
     // 'qaqc_insp_tmpls' => [
     //     'qaqc_insp_tmpl_shts' => [],
     // ],
