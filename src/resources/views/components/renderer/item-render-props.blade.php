@@ -44,16 +44,18 @@
                         @if(!$hiddenLabel)
                         <label class='text-gray-700 dark:text-gray-300  px-3 block text-base' title='{{$title}}'>
                             @if($control == 'relationship_renderer') 
+                                @if($action !== 'create')
                                 @php
                                     $subModel = ($item->eloquentParams[$prop['columnName']][1]);
                                     $subTable = (new($subModel))->getTable();
                                     $href = "/dashboard/$subTable";
                                 @endphp
-                                <a href="{{$href}}">
-                            @endif
+                                <a href="{{$href}}">{{$label}}</a>
+                                @else
+                                {{-- Hide the label --}}
+                                @endif
+                            @else 
                             {{$label}}
-                            @if($control == 'relationship_renderer') 
-                                </a>
                             @endif
                         @endif
                         {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
@@ -172,7 +174,9 @@
 
                             @case('relationship_renderer')
                             @if($action === "create")
-                            <i>[{{$prop['label']}}] table will appear after this document is created</i>
+                                <div title="[{{$prop['label']}}] table will appear after this document is created">
+                                    <i class="fa-duotone fa-square-question text-yellow-800"></i>
+                                </div>
                             @else
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} readOnly={{$readOnly}} :item="$item"/>
