@@ -22,7 +22,18 @@ class DatabaseDiagramsController extends Controller
             $tableName = $tableNameObj->Tables_in_laravel;
             $tables[$tableName] = DBTable::getAllColumns($tableName, true);
         }
-        dump($tables);
-        return view("dev.database-diagrams", []);
+        // dump($tables);
+        $columns = [
+            ['dataIndex' => 'Field'],
+            ['dataIndex' => 'Type'],
+            ['dataIndex' => 'Null'],
+            ['dataIndex' => 'Key'],
+            ['dataIndex' => 'Default'],
+            ['dataIndex' => 'Extra'],
+        ];
+        return view("dev.database-diagrams", [
+            'columns' => $columns,
+            'tables' => $tables,
+        ]);
     }
 }

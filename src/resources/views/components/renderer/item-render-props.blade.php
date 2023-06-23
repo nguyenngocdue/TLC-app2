@@ -1,7 +1,6 @@
 <div class=" grid grid-cols-12 px-4 bg-white dark:bg-gray-800 rounded-lg">
     @foreach($dataSource as $prop)
         @php
-        if ($action === "create" && $prop['control'] === 'relationship_renderer') continue;
         $prop ? extract($prop) : null;
         @endphp
         @if($prop)
@@ -172,8 +171,12 @@
                             @break
 
                             @case('relationship_renderer')
+                            @if($action === "create")
+                            <i>[{{$prop['label']}}] table will appear after this document is created</i>
+                            @else
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} readOnly={{$readOnly}} :item="$item"/>
+                            @endif
                             @break
 
                             @case('parent_type')

@@ -34,7 +34,7 @@ class DBTable
         $temp =  DB::select("SHOW COLUMNS FROM $tableName");
         $result = [];
         foreach ($temp as $column) {
-            $result[$column->Field] = $column;
+            $result[$column->Field] = (array) $column;
         }
         return $result;
     }
@@ -42,12 +42,12 @@ class DBTable
     public static function getColumnNames($tableName)
     {
         $table = static::getAllColumns($tableName);
-        return array_map(fn ($c) => $c->Field, $table);
+        return array_map(fn ($c) => $c['Field'], $table);
     }
 
     public static function getColumnTypes($tableName)
     {
         $table = static::getAllColumns($tableName);
-        return array_map(fn ($c) => $c->Type, $table);
+        return array_map(fn ($c) => $c['Type'], $table);
     }
 }
