@@ -153,6 +153,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getMonitors3()": {
+        "name": "_getMonitors3()",
+        "relationship": "getCheckedByField",
+        "control_name": "getMonitors3()",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getSubProject()": {
         "name": "_getSubProject()",
         "relationship": "getCheckedByField",
@@ -237,34 +251,6 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getSignatures1": {
-        "name": "_getSignatures1",
-        "relationship": "hasMany",
-        "control_name": "getSignatures1",
-        "renderer_view_all": "agg_count",
-        "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
-        "control": "relationship_renderer",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_getSignatures2": {
-        "name": "_getSignatures2",
-        "relationship": "hasMany",
-        "control_name": "getSignatures2",
-        "renderer_view_all": "agg_count",
-        "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
-        "control": "relationship_renderer",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_attachment_eco_sht": {
         "name": "_attachment_eco_sht",
         "relationship": "morphMany",
@@ -275,6 +261,34 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "attachment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_signature_eco_peers": {
+        "name": "_signature_eco_peers",
+        "relationship": "morphMany",
+        "control_name": "signature_eco_peers",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "getMonitors1",
+        "control": "signature_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_signature_eco_managers": {
+        "name": "_signature_eco_managers",
+        "relationship": "morphMany",
+        "control_name": "signature_eco_managers",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "getMonitors2",
+        "control": "signature_multi",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

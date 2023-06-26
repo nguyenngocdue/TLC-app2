@@ -6,7 +6,7 @@
         <x-controls.has-data-source.dropdown2 type={{$type}} name='{{$approverFn}}()' :selected="$selected" multiple={{true}}  />
     </x-renderer.card> --}}
     @php $index = 0; @endphp
-    @if(sizeof($signatures) == 0) 
+    @if(sizeof($designatedApprovers) == 0) 
     <div class="text-sm text-center p-2">Not found nominated approvers for this step. Please fill them in <b>{{$labelOfApproverFn}}</b>.</div>
     @endif
     @foreach($signatures as $signature)
@@ -38,10 +38,10 @@
     @endforeach
     {{-- Awaiting for sign off --}}
     @foreach($remainingList as $user)
-    <div class="w-full bg-red-100 flex justify-center my-1">
+    <div class="w-full {{$user['valid_email'] ? 'bg-red-100' : 'bg-rose-300'}} flex justify-center my-1">
         <div class="text-right p-2 rounded w-1/2">
             <div class="my-2">
-                <x-controls.insp-chklst.name-position :user="$user['full']" subText="Has not signed yet"/>  
+                <x-controls.insp-chklst.name-position :user="$user['full']" subText="{{$user['valid_email'] ? 'Has not signed yet' : 'Email address is invalid'}}"/>  
             </div>
         </div>
     </div>

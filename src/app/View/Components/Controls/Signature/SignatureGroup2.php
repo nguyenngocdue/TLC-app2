@@ -135,6 +135,7 @@ class SignatureGroup2 extends Component
             'debug' => $this->debug,
             'alreadySigned' => $alreadySigned,
             'isRequestedToSign0' => $isRequestedToSign0,
+            'designatedApprovers' => $designatedApprovers,
 
             'remainingList' => $remainingList,
             'remindList' => $remindList,

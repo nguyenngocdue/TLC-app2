@@ -9,9 +9,9 @@ trait TableTraitFooter
     function makeOneFooter($column, $tableName)
     {
         $fieldName = $column['dataIndex'];
-        $class = "focus:border-0 border-0 bg-transparent w-full h-10 block text-right pr-6 py-0";
+        $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr-6 py-0";
         $id = "{$tableName}[footer][{$fieldName}]";
-        return "<input id='$id' readonly class='$class' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
+        return "<input id='$id' component='TraitFooter' readonly class='$class' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
     }
 
     function makeFooter($columns, $tableName)
