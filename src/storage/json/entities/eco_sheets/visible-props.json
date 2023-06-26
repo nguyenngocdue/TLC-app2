@@ -29,9 +29,9 @@
         "column_name": "project_id",
         "new": "true"
     },
-    "_getSubProject()": {
-        "name": "_getSubProject()",
-        "column_name": "getSubProject()",
+    "_getSubProjectsOfEco()": {
+        "name": "_getSubProjectsOfEco()",
+        "column_name": "getSubProjectsOfEco()",
         "new": "true"
     },
     "_priority_id": {
