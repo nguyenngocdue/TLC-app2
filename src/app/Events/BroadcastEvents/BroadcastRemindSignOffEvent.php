@@ -2,10 +2,7 @@
 
 namespace App\Events\BroadcastEvents;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -32,6 +29,7 @@ class BroadcastRemindSignOffEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        //<<This will yield an error if web socket is not available
+        // return new PrivateChannel('channel-name');
     }
 }

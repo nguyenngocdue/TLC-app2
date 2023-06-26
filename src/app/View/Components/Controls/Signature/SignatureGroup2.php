@@ -41,7 +41,7 @@ class SignatureGroup2 extends Component
         return false;
     }
 
-    function getRemindList($designatedApprovers, $signatures)
+    function getRemainingList($designatedApprovers, $signatures)
     {
         $signed = $signatures->map(fn ($s) => $s['owner_id']);
         // dump($signed);
@@ -52,6 +52,7 @@ class SignatureGroup2 extends Component
             $result[$person->id]['short'] = $person->name . " - " . $person->email;
             $person->avatar = $person->getAvatarThumbnailUrl();
             $result[$person->id]['full'] = $person;
+            $result[$person->id]['valid_email'] =  str_contains($person->email, '@');
         }
 
         return $result;
@@ -79,6 +80,7 @@ class SignatureGroup2 extends Component
         $approverFn = SuperProps::getFor($this->signableType)['props']["_" . $this->category]['relationships']['renderer_edit_param'];
 
         if (!$approverFn) return "<i class='text-xs font-light'>Please insert approverFn (like getMonitors1) into Manage Relationship.renderer_edit_param</i>";
+        $labelOfApproverFn = SuperProps::getFor($this->signableType)['props']["_" . $approverFn . "()"]['label'];
         $designatedApprovers = $this->item->{$approverFn}();
 
         $selectedStr = "[" . join(",", $designatedApprovers->pluck('id')->toArray()) . ']';
@@ -107,11 +109,15 @@ class SignatureGroup2 extends Component
             'timestamp' => null,
         ];
         // dd($currentUser);
-        $remindList = $this->getRemindList($designatedApprovers, $signatures);
+        $remainingList = $this->getRemainingList($designatedApprovers, $signatures);
         $people = [];
+        $remindList = [];
         $index = 0;
-        foreach ($remindList as $person) {
-            $people[] = (++$index) . ". " . $person['short'];
+        foreach ($remainingList as $person) {
+            if ($person['valid_email']) {
+                $people[] = (++$index) . ". " . $person['short'];
+                $remindList[] = $person['full']->id;
+            }
         }
         // dd($people);
         // dump($signatures);
@@ -130,10 +136,12 @@ class SignatureGroup2 extends Component
             'alreadySigned' => $alreadySigned,
             'isRequestedToSign0' => $isRequestedToSign0,
 
+            'remainingList' => $remainingList,
             'remindList' => $remindList,
-            'requestButtonTitle' => "Send a friendly request email to:\n" . join("\n", $people),
+            'requestButtonTitle' => "Send a friendly request email to:\n" . join("\n", $people) . "\n(If any email address is invalid, those users will be ignored)",
             'approverFn' => $approverFn,
             'title' => $this->title,
+            'labelOfApproverFn' => $labelOfApproverFn,
         ];
         // dump($params);
         return view('components.controls.signature.signature-group2', $params);
