@@ -15,14 +15,15 @@ trait  ColumnsPivotReport
     use TraitLibPivotTableDataFields;
     private function makeHeadColumn($bidingRowFields)
     {
+        // dd($bidingRowFields);
         $columnsData = [];
         foreach ($bidingRowFields as $key => $value) {
             if (count($value) and is_array($value)) {
-                $dataIndex = Str::singular($value['table_name']) . '_' . $value['attribute_name'];
+                $dataIndex = $value['table_name'] . '_' . $value['attribute_name'];
                 $title = ucwords(str_replace('_', ' ', substr($key, 0, strrpos($key, '_'))));
                 $columnsData[] = [
                     'title' => $title,
-                    'dataIndex' => $dataIndex,
+                    'dataIndex' => $key.'_'.$dataIndex,
                     'width' => 250,
                 ];
             } else {
@@ -63,7 +64,7 @@ trait  ColumnsPivotReport
             foreach ($a as $item) {
                 $thirdUnderscore = ReportPivot::findPosition($item, '_', 3);
                 if (substr($item, $thirdUnderscore) === $value) {
-                    $result[substr($item, 9)][] = $item;
+                    $result[substr($item, $thirdUnderscore)][] = $item;
                 }
             }
             // $result[] = $group;

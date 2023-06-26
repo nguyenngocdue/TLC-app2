@@ -149,11 +149,6 @@
         "column_name": "h3a",
         "new": "true"
     },
-    "_getSignatures1": {
-        "name": "_getSignatures1",
-        "column_name": "getSignatures1",
-        "new": "true"
-    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -169,6 +164,11 @@
         "column_name": "getMonitors1()",
         "new": "true"
     },
+    "_signature_eco_peers": {
+        "name": "_signature_eco_peers",
+        "column_name": "signature_eco_peers",
+        "new": "true"
+    },
     "_divider5": {
         "name": "_divider5",
         "column_name": "divider5",
@@ -179,9 +179,14 @@
         "column_name": "h3b",
         "new": "true"
     },
-    "_getSignatures2": {
-        "name": "_getSignatures2",
-        "column_name": "getSignatures2",
+    "_getMonitors2()": {
+        "name": "_getMonitors2()",
+        "column_name": "getMonitors2()",
+        "new": "true"
+    },
+    "_signature_eco_managers": {
+        "name": "_signature_eco_managers",
+        "column_name": "signature_eco_managers",
         "new": "true"
     },
     "_assignee_3": {
@@ -189,9 +194,9 @@
         "column_name": "assignee_3",
         "new": "true"
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors3()": {
+        "name": "_getMonitors3()",
+        "column_name": "getMonitors3()",
         "new": "true"
     },
     "_closed_at": {

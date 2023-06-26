@@ -169,3 +169,6 @@
 
 <!-- gloabl -->
 <div class="justify-evenly animate-pulse animate-bounce " ></div>
+
+{{-- Table footer aggregate --}}
+<div class="pr-6 focus:outline-none"></div>

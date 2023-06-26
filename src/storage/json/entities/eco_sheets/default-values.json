@@ -359,9 +359,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getSignatures1": {
-        "name": "_getSignatures1",
-        "column_name": "getSignatures1",
+    "_signature_eco_peers": {
+        "name": "_signature_eco_peers",
+        "column_name": "signature_eco_peers",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -419,6 +419,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_signature_eco_managers": {
+        "name": "_signature_eco_managers",
+        "column_name": "signature_eco_managers",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_h3b": {
         "name": "_h3b",
         "column_name": "h3b",
@@ -428,18 +440,6 @@
         "formula": "",
         "default_value": "",
         "label_extra": "Completed by PMs or Contractor",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getSignatures2": {
-        "name": "_getSignatures2",
-        "column_name": "getSignatures2",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },

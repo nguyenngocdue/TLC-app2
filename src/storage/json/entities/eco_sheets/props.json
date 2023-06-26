@@ -569,25 +569,6 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_getSignatures1": {
-        "name": "_getSignatures1",
-        "column_name": "getSignatures1",
-        "column_type": "eloquent_prop",
-        "label": "Peer Manager Decisions",
-        "control": "relationship_renderer",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": "true"
-    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -645,6 +626,25 @@
         "duplicatable": "",
         "new_line": ""
     },
+    "_signature_eco_peers": {
+        "name": "_signature_eco_peers",
+        "column_name": "signature_eco_peers",
+        "column_type": "eloquent_prop",
+        "label": "Peer Manager Decisions",
+        "control": "signature_multi",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "true"
+    },
     "_divider5": {
         "name": "_divider5",
         "column_name": "divider5",
@@ -683,12 +683,31 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_getSignatures2": {
-        "name": "_getSignatures2",
-        "column_name": "getSignatures2",
+    "_getMonitors2()": {
+        "name": "_getMonitors2()",
+        "column_name": "getMonitors2()",
+        "column_type": "oracy_prop",
+        "label": "Manager To Sign",
+        "control": "dropdown_multi",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_signature_eco_managers": {
+        "name": "_signature_eco_managers",
+        "column_name": "signature_eco_managers",
         "column_type": "eloquent_prop",
         "label": "Manager Decision",
-        "control": "relationship_renderer",
+        "control": "signature_multi",
         "align": "",
         "col_span": "",
         "width": "",
@@ -721,9 +740,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors3()": {
+        "name": "_getMonitors3()",
+        "column_name": "getMonitors3()",
         "column_type": "oracy_prop",
         "label": "DC Members",
         "control": "dropdown_multi",

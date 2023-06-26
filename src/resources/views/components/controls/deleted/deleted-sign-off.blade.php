@@ -69,14 +69,11 @@
                     <x-controls.insp-chklst.name-position :user="$currentUser" subText="Current timestamp will be applied"/>                        
             </div>
         </div>
-        @else
-            {{-- <x-feedback.alert type="success" titleless=1 message="You have signed off this document." /> --}}
         @endif
-    @else 
-        {{-- <x-feedback.alert type="info" titleless=1 message="You are not requested to sign off this document." /> --}}
     @endif
 </x-renderer.card>
 
+@once
 <script>
     function sendRemindToPeople(uids, signable_type, signable_id, cu) {
     const requester = @json($currentUser);
@@ -101,3 +98,4 @@
     }
 }
 </script>
+@endonce
