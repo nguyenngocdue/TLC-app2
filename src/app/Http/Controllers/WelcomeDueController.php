@@ -63,8 +63,8 @@ class WelcomeDueController extends Controller
                 // "position_1" => null,
                 // "position_2" => 51,
                 // "position_3" => 20,
-                'assignee_1_id' =>21,
-                'assignee_id' =>2,
+                'assignee_1_id' =>20,
+                'assignee_id' =>1,
                 "staff_id" => "TLCM01071",
             ],
             [
@@ -159,8 +159,8 @@ class WelcomeDueController extends Controller
                 // "position_1" => null,
                 // "position_2" => 51,
                 // "position_3" => null,
-                'assignee_1_id' =>61,
-                'assignee_id' =>6,
+                'assignee_1_id' =>20,
+                'assignee_id' =>01,
                 "staff_id" => "TLCM01067",
             ],
             [
@@ -207,8 +207,8 @@ class WelcomeDueController extends Controller
                 // "position_1" => null,
                 // "position_2" => 51,
                 // "position_3" => null,
-                'assignee_1_id' =>81,
-                'assignee_id' =>8,
+                'assignee_1_id' =>51,
+                'assignee_id' =>1,
                 "staff_id" => "TLCM01060",
             ],
             [
@@ -255,8 +255,8 @@ class WelcomeDueController extends Controller
                 // "position_1" => 57,
                 // "position_2" => 50,
                 // "position_3" => null,
-                'assignee_1_id' =>10,
-                'assignee_id' =>10,
+                'assignee_1_id' =>1,
+                'assignee_id' =>1,
                 "staff_id" => "TLCM01219",
             ],
             [
@@ -279,8 +279,8 @@ class WelcomeDueController extends Controller
                 // "position_1" => 57,
                 // "position_2" => 50,
                 // "position_3" => null,
-                'assignee_1_id' =>11,
-                'assignee_id' =>11,
+                'assignee_1_id' =>20,
+                'assignee_id' =>1,
                 "staff_id" => "TLCM01219",
             ],
             [
@@ -303,8 +303,8 @@ class WelcomeDueController extends Controller
                 // "position_1" => 57,
                 // "position_2" => 50,
                 // "position_3" => null,
-                'assignee_1_id' =>12,
-                'assignee_id' =>12,
+                'assignee_1_id' =>20,
+                'assignee_id' =>1,
                 "staff_id" => "TLCM01219",
             ],
             [
@@ -327,8 +327,8 @@ class WelcomeDueController extends Controller
                 // "position_1" => 57,
                 // "position_2" => 50,
                 // "position_3" => null,
-                'assignee_1_id' =>13,
-                'assignee_id' =>13,
+                'assignee_1_id' =>20,
+                'assignee_id' =>1,
                 "staff_id" => "TLCM01219",
             ]
         ];

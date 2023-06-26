@@ -144,6 +144,7 @@ class PivotTable extends Component
         $sortOrders = $this->sortByData($sortBy);
         uasort($dataOutput, function ($item1, $item2) use ($sortOrders) {
             foreach ($sortOrders as $field => $sortOrder) {
+                if (!$field) continue;
                 try {
                     $comparison = $item1[$field] <=> $item2[$field];
                     if ($comparison) {
