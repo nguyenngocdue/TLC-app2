@@ -2,24 +2,24 @@
     "hr_timesheet_employee_date": {
         "name": "hr_timesheet_employee_date",
         "filters": "workplace_id, department_id",
-        "row_fields": "user_id(users.name),\r\nassignee_id(users.name),\r\nstaff_id,\r\nassignee_1_id(users.name),\r\ndiscipline_id(users.name), \r\nworkplace_id(workplaces.name), \r\ntype_id(user_types.name),\r\ndepartment_id(departments.name),\r\ncategory_id(user_categories.name),\r\nsub_project_id(sub_projects.name)",
+        "row_fields": "staff_id,\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name), \r\ntype_id(user_types.name),\r\ndepartment_id(departments.name),\r\ncategory_id(user_categories.name)",
         "column_fields": "time_sheet_start_time, time_sheet_start_time_otr, time_sheet_start_time_wfh",
         "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, workplace_id",
         "data_aggregations": "sum,sum,sum,concat",
         "lookup_tables": "sub_projects,\r\nterms,\r\nusers,\r\nuser_types,\r\nworkplaces,\r\ndepartments,\r\nuser_categories",
-        "sort_by": "assignee_id(users.name),\r\nstaff_id,\r\nassignee_1_id(users.name):desc,"
+        "sort_by": "staff_id,\r\nworkplace_id(workplaces.name),"
     },
     "hr_timesheet_employee_project": {
         "name": "hr_timesheet_employee_project",
         "filters": "workplace_id, department_id",
-        "row_fields": "sub_project_id(sub_projects.name),\r\nuser_id(users.name),\r\ndiscipline_id(users.name), \r\nstaff_id, \r\nworkplace_id(workplaces.name), \r\ntype_id(user_types.name),\r\ndepartment_id(departments.name),\r\ncategory_id(user_categories.name),",
-        "column_fields": "sub_project_id(sub_projects.name),\r\ntime_sheet_start_time_otr,\r\ntime_sheet_start_time,\r\ntime_sheet_start_time_wfh,",
-        "value_index_fields": "time_sheet_hours_otr,\r\ntime_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh,",
+        "row_fields": "sub_project_id(sub_projects.name),\r\nuser_id(users.name),\r\ntype_id(user_types.name),\r\ntask_id(pj_tasks.name),",
+        "column_fields": "sub_project_id(sub_projects.name)",
+        "value_index_fields": "time_sheet_hours_otr",
         "data_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_aggregations": "sum,\r\nsum,\r\nsum",
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms",
-        "sort_by": "staff_id:desc"
+        "sort_by": "staff_id:desc,\r\ntask_id(pj_tasks.name)"
     },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",

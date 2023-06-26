@@ -151,7 +151,7 @@ class PivotTable extends Component
                         return ($sortOrder === 'asc') ? $comparison : -$comparison;
                     }
                 } catch (\Exception $e) {
-                    dd($e->getMessage() . ' in "Row_Fields" column');
+                    // dd($e->getMessage() . ' in "Row_Fields" column');
                 }
             }
             return 0;
