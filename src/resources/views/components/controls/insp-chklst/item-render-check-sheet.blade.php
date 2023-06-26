@@ -3,17 +3,13 @@ $tmpl = $item->getChklst->getQaqcInspTmpl;
 $prodOrder = $item->getChklst->getProdOrder;
 $prodRouting = $prodOrder->getProdRouting;
 
-if($prodOrder->production_name) {
-    $a[] = "<span title='Production Name'>".$prodOrder->production_name."</span>";
-}
-if($prodOrder->compliance_name) {
-    $a[] = "<span title='Compliance Name'>".$prodOrder->compliance_name."</span>";
-}
+if($prodOrder->production_name) $a[] = "<span title='Production Name'>".$prodOrder->production_name."</span>";
+if($prodOrder->compliance_name) $a[] = "<span title='Compliance Name'>".$prodOrder->compliance_name."</span>";
 
 $bigTitle = join(" / ", $a);
-if($project){
-    $href = route("qaqc_insp_chklsts.edit", $chklst->id);
-}
+if($project) $href = route("qaqc_insp_chklsts.edit", $chklst->id);
+$selectedMonitors1 = $item->getMonitors1()->pluck('id')->toArray();
+$selectedMonitors1 = "[". join(",",$selectedMonitors1)."]";
 @endphp
 <div class="px-4 flex justify-center ">
     <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
@@ -39,7 +35,17 @@ ProdOrder: {{$prodOrder->name}} (#{{$prodOrder->id}})">{{$chklst->name}}</a>
             <x-controls.insp-chklst.check-point :line="$line" table01Name="table01" :rowIndex="$rowIndex" />
         @endforeach
 
-        <x-controls.insp-chklst.sign-off :signatures="$signatures" :type="$type" :item="$item"/>
+        <x-renderer.card title="Nominated Third Party:">
+            <x-controls.has-data-source.dropdown2 type={{$type}} name='getMonitors1()' :selected="$selectedMonitors1" multiple={{true}}  />
+        </x-renderer.card>
+
+        <x-controls.signature.signature-group2 
+                title="Third Party Sign Off"
+                category="signature_qaqc_chklst_3rd_party" 
+                signableType='qaqc_insp_chklst_shts'
+                :type="$type" 
+                :item="$item"
+                />
         <input type="hidden" name="tableNames[table01]" value="qaqc_insp_chklst_lines">
 
         {{-- Those are for main body, not the table --}}

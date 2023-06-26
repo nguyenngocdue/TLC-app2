@@ -1,6 +1,6 @@
 <x-renderer.card class="border my-1 bg-white mt-2 p-0">
     <div class="bg-amber-300 rounded-t p-2">
-        <p> Sign Off</p>
+        <p>{{$title}}</p>
     </div>
     {{-- <x-renderer.card title="Designated Approvers" class='border1 m-4'>
         <x-controls.has-data-source.dropdown2 type={{$type}} name='{{$approverFn}}()' :selected="$selected" multiple={{true}}  />
@@ -46,7 +46,7 @@
     @if(!empty($remindList))
         <div class="flex justify-center w-full">
             <x-renderer.button 
-            title='{{$title}}' 
+            title='{{$requestButtonTitle}}' 
             icon="fa-duotone fa-paper-plane" 
             class="w-3/4 h-full bg-lime-200 mb-2"
             onClick="sendRemindToPeople([{{join(',', array_keys( $remindList))}}], '{{$type}}', {{$signableId}})"

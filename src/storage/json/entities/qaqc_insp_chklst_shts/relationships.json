@@ -83,16 +83,30 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getShtSigs": {
-        "name": "_getShtSigs",
-        "relationship": "hasMany",
-        "control_name": "getShtSigs",
+    "_signature_qaqc_chklst_3rd_party": {
+        "name": "_signature_qaqc_chklst_3rd_party",
+        "relationship": "morphMany",
+        "control_name": "signature_qaqc_chklst_3rd_party",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
-        "renderer_view_all_unit": "signature",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
-        "control": "relationship_renderer",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "getMonitors1",
+        "control": "signature_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "relationship": "morphMany",
+        "control_name": "comment_rejected_reason",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "comment",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

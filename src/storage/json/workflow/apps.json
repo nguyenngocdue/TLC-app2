@@ -978,6 +978,7 @@
         "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "checklist-sheet-renderer",
         "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>",
+        "disallowed_direct_creation": "true",
         "show_in_monitored_by_me": "true"
     },
     "qaqc_insp_control_group": {

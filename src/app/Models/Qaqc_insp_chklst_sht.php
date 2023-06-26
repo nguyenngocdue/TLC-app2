@@ -17,7 +17,9 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         "getTmplSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
 
         "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_sht_id"],
-        "getShtSigs" => ["hasMany", Qaqc_insp_chklst_sht_sig::class, "qaqc_insp_chklst_sht_id"],
+        // "getShtSigs" => ["hasMany", Qaqc_insp_chklst_sht_sig::class, "qaqc_insp_chklst_sht_id"],
+
+        'signature_qaqc_chklst_3rd_party' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
 
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
@@ -31,11 +33,17 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getShtSigs()
+    public function signature_qaqc_chklst_3rd_party()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
+    // public function getShtSigs()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
     public function getChklst()
     {
         $p = $this->eloquentParams[__FUNCTION__];

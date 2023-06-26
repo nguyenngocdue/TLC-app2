@@ -18,15 +18,15 @@ class SignatureGroup2 extends Component
      * @return void
      */
     public function __construct(
-        // private $signatures,
         private $category,
         private $signableType,
-        private $signableId,
         private $item,
-        private $readOnly,
+        private $readOnly = false,
         private $debug = false,
+        private $title = "Sign Off",
     ) {
-        //
+        // dump($item);
+        // dump($category);
     }
 
     private function alreadySigned($signatures, $user)
@@ -73,11 +73,12 @@ class SignatureGroup2 extends Component
      */
     public function render()
     {
-        if (!isset($this->item->{$this->category})) return "<i class='text-xs font-light'>Please create this document before signing off.</i>";
+        if (!isset($this->item->{$this->category})) return "<i class='text-xs font-light' title='Category: $this->category'>Please create this document before signing off.</i>";
         $signatures = $this->item->{$this->category};
 
         $approverFn = SuperProps::getFor($this->signableType)['props']["_" . $this->category]['relationships']['renderer_edit_param'];
 
+        if (!$approverFn) return "<i class='text-xs font-light'>Please insert approverFn (like getMonitors1) into Manage Relationship.renderer_edit_param</i>";
         $designatedApprovers = $this->item->{$approverFn}();
 
         $selectedStr = "[" . join(",", $designatedApprovers->pluck('id')->toArray()) . ']';
@@ -130,8 +131,9 @@ class SignatureGroup2 extends Component
             'isRequestedToSign0' => $isRequestedToSign0,
 
             'remindList' => $remindList,
-            'title' => "Send a friendly request email to:\n" . join("\n", $people),
+            'requestButtonTitle' => "Send a friendly request email to:\n" . join("\n", $people),
             'approverFn' => $approverFn,
+            'title' => $this->title,
         ];
         // dump($params);
         return view('components.controls.signature.signature-group2', $params);
