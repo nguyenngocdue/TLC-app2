@@ -32,6 +32,7 @@
         "relationship_renderer",
         "toggle",
         "signature",
+        "signature_multi",
         "status",
         "text",
         "textarea",
@@ -85,8 +86,12 @@
         "belongsTo",
         "morphToMany"
     ],
-    "manage_prop_oracies": ["getCheckedByField"],
-    "view_all_oracies": ["getCheckedByField"],
+    "manage_prop_oracies": [
+        "getCheckedByField"
+    ],
+    "view_all_oracies": [
+        "getCheckedByField"
+    ],
     "packages": [
         "",
         "hr_&_admin",
@@ -182,8 +187,16 @@
         "qaqc_wir",
         "zunit_test_09"
     ],
-    "apps_have_view_all_calendar": ["hr_timesheet_officers"],
-    "apps_have_view_all_matrix": ["hr_timesheet_workers"],
-    "apps_have_qr_app": ["pj_module", "pj_shipment", "pj_unit"],
+    "apps_have_view_all_calendar": [
+        "hr_timesheet_officers"
+    ],
+    "apps_have_view_all_matrix": [
+        "hr_timesheet_workers"
+    ],
+    "apps_have_qr_app": [
+        "pj_module",
+        "pj_shipment",
+        "pj_unit"
+    ],
     "view_all_tab_taxonomy": "status"
 }

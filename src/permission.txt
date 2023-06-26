@@ -15,3 +15,4 @@ php artisan ndc:permission hse_insp_groups
 php artisan ndc:permission hse_insp_tmpl_lines
 php artisan ndc:permission hse_insp_tmpl_shts
 php artisan ndc:permission hse_insp_values
+php artisan ndc:permission signature

@@ -1216,6 +1216,21 @@
         "hidden_navbar": "true",
         "icon": null
     },
+    "signature": {
+        "name": "signature",
+        "package_tab": "application",
+        "package": "system",
+        "sub_package": "system_admin",
+        "title": "Signature",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": null
+    },
     "sub_project": {
         "name": "sub_project",
         "package_tab": "application",
@@ -1578,7 +1593,7 @@
         "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT06 (Comments)",
+        "title": "UT06 (Comments & Signatures)",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,

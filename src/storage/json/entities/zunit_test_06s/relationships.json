@@ -27,20 +27,6 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getDiscipline1": {
-        "name": "_getDiscipline1",
-        "relationship": "hasMany",
-        "control_name": "getDiscipline1",
-        "renderer_view_all": "agg_count",
-        "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
-        "control": "relationship_renderer",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_attachment_1": {
         "name": "_attachment_1",
         "relationship": "morphMany",
@@ -107,6 +93,34 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "comment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_signature_eco_peers": {
+        "name": "_signature_eco_peers",
+        "relationship": "morphMany",
+        "control_name": "signature_eco_peers",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "signature_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_signature_eco_managers": {
+        "name": "_signature_eco_managers",
+        "relationship": "morphMany",
+        "control_name": "signature_eco_managers",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "signature_multi",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

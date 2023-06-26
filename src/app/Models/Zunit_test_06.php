@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Zunit_test_06 extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'parent_id', 'order_no', 'owner_id',];
+    protected $fillable = ['id', 'name', 'parent_id', 'order_no', 'owner_id'];
     protected $table = "zunit_test_06s";
     protected static $statusless = true;
 
@@ -18,7 +18,8 @@ class Zunit_test_06 extends ModelExtended
         "comment_4" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         // "comment_5" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
 
-        "getDiscipline1" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],
+        "signature_eco_peers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
+        "signature_eco_managers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
     ];
     public function attachment_1()
     {
@@ -27,10 +28,18 @@ class Zunit_test_06 extends ModelExtended
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 
-    public function getDiscipline1()
+    public function signature_eco_peers()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function signature_eco_managers()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 
     public function comment_1()
@@ -57,10 +66,10 @@ class Zunit_test_06 extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function comment_5()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
-    }
+    // public function comment_5()
+    // {
+    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+    //     return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    // }
 }
