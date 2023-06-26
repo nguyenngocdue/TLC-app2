@@ -4,10 +4,8 @@ namespace App\View\Components\Renderer\Report;
 
 use App\Http\Controllers\TraitLibPivotTableDataFields;
 use App\Http\Controllers\Workflow\LibPivotTables;
-use App\Utils\Support\Report;
 use App\Utils\Support\ReportPivot;
 use App\Utils\Support\ReportPivotDataFields;
-use DateTime;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -93,6 +91,7 @@ class PivotTable extends Component
     {
 
         [$rowFieldsHasAttr, $bindingFields,,, $bidingColumnFields,, $dataIndex,] =  $this->getDataFields();
+        // dump($rowFieldsHasAttr, $bindingFields);
         foreach ($processedData as &$items) {
             foreach ($items as $key => $id) {
                 if (in_array($key, $rowFieldsHasAttr)) {
@@ -100,9 +99,10 @@ class PivotTable extends Component
                         $infoAttr = $bindingFields[$key];
                         $tableName = $infoAttr['table_name'];
                         $attributeName = $infoAttr['attribute_name'];
-                        $fieldName = Str::singular($tableName) . '_' . $attributeName;
+                        $fieldName = $key . '_' .$tableName . '_' . $attributeName;
                         $items[$fieldName] = $tables[$tableName][$id]->$attributeName;
                     } catch (Exception $e) {
+                        $items[$key] = $id;
                         // dump($e->getMessage());
                     }
                 } else {
@@ -119,50 +119,44 @@ class PivotTable extends Component
                 }
             }
         }
+        // dd($processedData);
         return $processedData;
     }
 
     private function sortByData($sortByColumn)
     {
-        $rules = [];
-        array_map(function ($item) use (&$rules) {
-            [$posBracket, $posDot]  = [strpos($item, '('), strpos($item, '.',)];
-            $field = Str::singular(substr($item, 0, $posDot)) . '_' . substr($item, $posDot + 1, $posBracket - $posDot - 1);
-            $rule = substr($item, $posBracket + 1, strlen($item) - $posBracket - 2);
-            // dump($field, $rule);
-            if ($posBracket && $posDot) return $rules[$field] = $rule;
-            if (!$posBracket && $posDot) {
-                $field = Str::singular(substr($item, 0, $posDot)) . '_' . substr($item, $posDot + 1, strlen($item));
-                $rules[$field] = 'asc';
-            }
-            if (!$posDot && $posBracket) {
-                $field = substr($item, 0, $posBracket);
-                return $rules[$field] = $rule;
-            }
-            if (!$posDot && !$posBracket) {
-                return $rules[$item] = 'asc';
-            }
+        $orders = [];
+        array_map(function ($item) use (&$orders) {
+            $ex = explode(':', $item);
+            $key = $ex[0];
+            $strKey = trim(str_replace(['(','.'],'_', $key), ')');
+            $order = isset($ex[1]) ? strtolower($ex[1]) : 'asc';
+            $orders[$strKey] = $order;
         }, $sortByColumn);
-        return $rules;
+        // dd($orders);
+        return $orders;
     }
 
     private function sortLinesData($dataOutput)
     {
         [,,,,,,, $sortBy] =  $this->getDataFields();
+
         $sortOrders = $this->sortByData($sortBy);
-        usort($dataOutput, function ($item1, $item2) use ($sortOrders) {
+        uasort($dataOutput, function ($item1, $item2) use ($sortOrders) {
             foreach ($sortOrders as $field => $sortOrder) {
-                if (!array_key_exists($field, $item1) || !array_key_exists($field, $item2)) {
-                    continue;
+                if (!$field) continue;
+                try {
+                    $comparison = $item1[$field] <=> $item2[$field];
+                    if ($comparison) {
+                        return ($sortOrder === 'asc') ? $comparison : -$comparison;
+                    }
+                } catch (\Exception $e) {
+                    // dd($e->getMessage() . ' in "Row_Fields" column');
                 }
-                $comparison =  $item1[$field] <=> $item2[$field];
-                if (strtolower($sortOrder) === 'desc') {
-                    return $comparison *= -1;
-                }
-                return $comparison;
             }
             return 0;
         });
+        // dd($dataOutput);
         return collect($dataOutput);
     }
 
@@ -171,14 +165,15 @@ class PivotTable extends Component
         $dataSource = array_slice($dataSource->toArray(), 0, 10000000);
         [$rowFields,,,,,, $dataIndex,] =  $this->getDataFields();
         $allRowFields = array_unique(array_merge($rowFields, $dataIndex));
-        // dd($allRowFields);
+        // dd($dataSource);
         foreach ($dataSource as $key => $values) {
+            // dd($values);
             foreach ($allRowFields as $field) {
-                $attrName = str_replace('id', 'name', $field);
-                if (isset($values[$attrName])) {
-                    Log::info($attrName);
+                // $attrName = str_replace('id', 'name', $field);
+                if (isset($values[$field])) {
+                    Log::info($field);
                     $values[$field] = (object) [
-                        'value' => $values[$attrName],
+                        'value' => $values[$field],
                         // 'cell_title' => $tooltip,
                     ];
                 }
@@ -195,7 +190,6 @@ class PivotTable extends Component
         [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput);
         $dataOutput = $this->sortLinesData($dataOutput);
         $dataOutput = $this->changeValueData($dataOutput);
-        // dd($dataOutput);
         return view('components.renderer.report.pivot-table', [
             'tableDataSource' => $dataOutput,
             'tableColumns' => $tableColumns,

@@ -40,7 +40,11 @@ class FieldSeeder extends Seeder
     {
         try {
             $line = static::getFieldBy('name', $fieldName);
-            if (!$line) Log::info("$fieldName is not found in Field Table.");
+            if (!$line) {
+                $msg = "$fieldName is not found in Field Table.";
+                // Log::info($msg);
+                dump($msg);
+            }
             return $line ? $line->id : null;
             // return Field::where('name', $fieldName)->firstOrFail()->id;
         } catch (\Exception $e) {
@@ -52,7 +56,11 @@ class FieldSeeder extends Seeder
     {
         try {
             $line = static::getFieldBy('id', $fieldId);
-            if (!$line) Log::info("#$fieldId is not found in Field Table.");
+            if (!$line) {
+                $msg = "#$fieldId is not found in Field Table.";
+                // Log::info($msg);
+                dump($msg);
+            }
             return $line ? $line->id : null;
             // return Field::where('id', $fieldId)->firstOrFail()->name;
         } catch (\Exception $e) {

@@ -10,9 +10,11 @@ class ReportPivot
 {
     private static function transferValueOfKeys($data, $columnFields)
     {
+        // dd($columnFields);
         $newArray = array_map(function ($item) use ($columnFields) {
             $dateItems = [];
             foreach ($columnFields as $value) {
+                if (!$value['fieldIndex'] || !$value['valueIndexField']) continue;
                 try {
                     $date = DateTime::createFromFormat('Y-m-d', $item[$value['fieldIndex']]);
                     $type = 'unknown';
@@ -32,13 +34,12 @@ class ReportPivot
                             break;
                     }
                 } catch (Exception $e) {
-                    dd($e->getMessage());
+                    dd($e->getMessage(), $value);
                 }
             }
             return $dateItems;
         }, $data);
         $newArray = self::sumItemsInArray($newArray);
-        // dump($newArray);
         return $newArray;
     }
     public static function getLastArray($data)

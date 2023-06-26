@@ -6,6 +6,9 @@
         <x-controls.has-data-source.dropdown2 type={{$type}} name='{{$approverFn}}()' :selected="$selected" multiple={{true}}  />
     </x-renderer.card> --}}
     @php $index = 0; @endphp
+    @if(sizeof($designatedApprovers) == 0) 
+    <div class="text-sm text-center p-2">Not found nominated approvers for this step. Please fill them in <b>{{$labelOfApproverFn}}</b>.</div>
+    @endif
     @foreach($signatures as $signature)
     {{-- @dump($signature) --}}
     <div class="w-full bg-lime-100 flex justify-center my-2">
@@ -34,27 +37,26 @@
     @php $index ++; @endphp
     @endforeach
     {{-- Awaiting for sign off --}}
-    @foreach($remindList as $user)
-    <div class="w-full bg-red-100 flex justify-center my-1">
+    @foreach($remainingList as $user)
+    <div class="w-full {{$user['valid_email'] ? 'bg-red-100' : 'bg-rose-300'}} flex justify-center my-1">
         <div class="text-right p-2 rounded w-1/2">
             <div class="my-2">
-                <x-controls.insp-chklst.name-position :user="$user['full']" subText="Has not signed yet"/>  
+                <x-controls.insp-chklst.name-position :user="$user['full']" subText="{{$user['valid_email'] ? 'Has not signed yet' : 'Email address is invalid'}}"/>  
             </div>
         </div>
     </div>
     @endforeach
-    @if(!empty($remindList))
+    @if(!empty($remainingList))
         <div class="flex justify-center w-full">
             <x-renderer.button 
             title='{{$requestButtonTitle}}' 
             icon="fa-duotone fa-paper-plane" 
             class="w-3/4 h-full bg-lime-200 mb-2"
-            onClick="sendRemindToPeople([{{join(',', array_keys( $remindList))}}], '{{$type}}', {{$signableId}})"
+            onClick="sendRemindToPeople([{{join(',', $remindList)}}], '{{$type}}', {{$signableId}})"
             >Request to sign off</x-renderer.button>
         </div>
     @endif 
-    @if($isRequestedToSign0)
-        @if(!$alreadySigned)
+    @if($isRequestedToSign0 && !$alreadySigned)
         <div class="w-full bg-blue-100 flex justify-center my-2">
             <div class="text-right p-2 rounded w-1/2">
                 {{$debug?"signatures[$index][id]":""}}
@@ -75,16 +77,13 @@
                 </div>
                 <div>
                     <x-controls.insp-chklst.name-position :user="$currentUser" subText="Current timestamp will be applied"/>                        
+                </div>
             </div>
         </div>
-        @else
-            {{-- <x-feedback.alert type="success" titleless=1 message="You have signed off this document." /> --}}
-        @endif
-    @else 
-        {{-- <x-feedback.alert type="info" titleless=1 message="You are not requested to sign off this document." /> --}}
     @endif
 </x-renderer.card>
 
+@once
 <script>
     function sendRemindToPeople(uids, signable_type, signable_id, cu) {
     const requester = @json($currentUser);
@@ -109,3 +108,4 @@
     }
 }
 </script>
+@endonce
