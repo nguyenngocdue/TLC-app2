@@ -1181,18 +1181,15 @@ video {
 .min-h-\[150px\] {
   min-height: 150px;
 }
-.min-h-\[800px\] {
-  min-height: 800px;
-}
-.min-h-screen {
-  min-height: 100vh;
-}
 .min-h-\[700px\] {
   min-height: 700px;
 }
 .min-h-fit {
   min-height: -moz-fit-content;
   min-height: fit-content;
+}
+.min-h-screen {
+  min-height: 100vh;
 }
 .w-1 {
   width: 0.25rem;
@@ -8115,6 +8112,10 @@ video {
   .xl\:mx-80 {
     margin-left: 20rem;
     margin-right: 20rem;
+  }
+
+  .xl\:flex {
+    display: flex;
   }
 
   .xl\:w-1\/2 {
