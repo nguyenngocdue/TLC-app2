@@ -28,24 +28,29 @@ class Eco_sheet extends ModelExtended
         'getMaterialImpactAdds' => ['hasMany', Eco_material_impact_add::class, 'eco_sheet_id'],
         'getMaterialImpactRemoves' => ['hasMany', Eco_material_impact_remove::class, 'eco_sheet_id'],
         "attachment_eco_sht" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
-        "getSignatures1" => ["hasMany", Eco_signature::class, "eco_sheet_id"],
-        "getSignatures2" => ["hasMany", Eco_signature::class, "eco_sheet_id"],
+
+        "signature_eco_peers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
+        "signature_eco_managers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
     ];
 
     public $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
         "getMonitors2()" => ["getCheckedByField", User::class],
+        "getMonitors3()" => ["getCheckedByField", User::class],
         "getSubProject()" => ["getCheckedByField", Sub_project::class],
     ];
-    public function getSignatures1()
+    public function signature_eco_peers()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function getSignatures2()
+
+    public function signature_eco_managers()
     {
         $p = $this->eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
     public function getMaterialImpactAdds()
     {
@@ -121,6 +126,11 @@ class Eco_sheet extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function getMonitors2()
+    {
+        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function getMonitors3()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
