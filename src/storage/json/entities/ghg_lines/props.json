@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -21,7 +21,7 @@
     "_ghg_sheet_id": {
         "name": "_ghg_sheet_id",
         "column_name": "ghg_sheet_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Sheet",
         "control": "dropdown",
         "align": "",
@@ -40,7 +40,7 @@
     "_ghg_metric_type_id": {
         "name": "_ghg_metric_type_id",
         "column_name": "ghg_metric_type_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Type",
         "control": "dropdown",
         "align": "",
@@ -59,7 +59,7 @@
     "_ghg_metric_type_1_id": {
         "name": "_ghg_metric_type_1_id",
         "column_name": "ghg_metric_type_1_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Type 1",
         "control": "dropdown",
         "align": "",
@@ -78,7 +78,7 @@
     "_ghg_metric_type_2_id": {
         "name": "_ghg_metric_type_2_id",
         "column_name": "ghg_metric_type_2_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Type 2",
         "control": "dropdown",
         "align": "",
@@ -97,7 +97,7 @@
     "_unit": {
         "name": "_unit",
         "column_name": "unit",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Unit",
         "control": "dropdown",
         "align": "",
@@ -116,7 +116,7 @@
     "_factor": {
         "name": "_factor",
         "column_name": "factor",
-        "column_type": "float",
+        "column_type": "decimal(10,4)",
         "label": "Factor",
         "control": "number",
         "align": "",
@@ -135,7 +135,7 @@
     "_m01": {
         "name": "_m01",
         "column_name": "m01",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "01",
         "control": "number",
         "align": "",
@@ -154,7 +154,7 @@
     "_m02": {
         "name": "_m02",
         "column_name": "m02",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "02",
         "control": "number",
         "align": "",
@@ -173,7 +173,7 @@
     "_m03": {
         "name": "_m03",
         "column_name": "m03",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "03",
         "control": "number",
         "align": "",
@@ -192,7 +192,7 @@
     "_m04": {
         "name": "_m04",
         "column_name": "m04",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "04",
         "control": "number",
         "align": "",
@@ -211,7 +211,7 @@
     "_m05": {
         "name": "_m05",
         "column_name": "m05",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "05",
         "control": "number",
         "align": "",
@@ -230,7 +230,7 @@
     "_m06": {
         "name": "_m06",
         "column_name": "m06",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "06",
         "control": "number",
         "align": "",
@@ -249,7 +249,7 @@
     "_m07": {
         "name": "_m07",
         "column_name": "m07",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "07",
         "control": "number",
         "align": "",
@@ -268,7 +268,7 @@
     "_m08": {
         "name": "_m08",
         "column_name": "m08",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "08",
         "control": "number",
         "align": "",
@@ -287,7 +287,7 @@
     "_m09": {
         "name": "_m09",
         "column_name": "m09",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "09",
         "control": "number",
         "align": "",
@@ -306,7 +306,7 @@
     "_m10": {
         "name": "_m10",
         "column_name": "m10",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "10",
         "control": "number",
         "align": "",
@@ -325,7 +325,7 @@
     "_m11": {
         "name": "_m11",
         "column_name": "m11",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "11",
         "control": "number",
         "align": "",
@@ -344,7 +344,7 @@
     "_m12": {
         "name": "_m12",
         "column_name": "m12",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "12",
         "control": "number",
         "align": "",
@@ -363,7 +363,7 @@
     "_ytd": {
         "name": "_ytd",
         "column_name": "ytd",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "YTD",
         "control": "number",
         "align": "",
@@ -401,7 +401,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Creator",
         "control": "dropdown",
         "align": "",
@@ -420,7 +420,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "",
         "control": "",
         "align": "",
@@ -439,7 +439,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -458,7 +458,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -477,7 +477,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -496,7 +496,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -515,7 +515,7 @@
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
-        "column_type": "integer",
+        "column_type": "int unsigned",
         "label": "",
         "control": "",
         "align": "",

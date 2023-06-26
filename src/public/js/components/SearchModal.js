@@ -118,13 +118,13 @@ const renderHtml = (appsRender, url, topDrawer) => {
                         break
                     case 3:
                     case 4:
-                        htmlGroup = `<ul class="grid grid-cols-2">
+                        htmlGroup = `<ul class="grid grid-cols-1 md:grid-cols-2">
                                                 ${htmlFlexCol}
                                     </ul>`
                         break
                     case 5:
                     default:
-                        htmlGroup = `<ul class="grid grid-cols-3">
+                        htmlGroup = `<ul class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
                                                 ${htmlFlexCol}
                                     </ul>`
                         break
@@ -140,7 +140,7 @@ const renderHtml = (appsRender, url, topDrawer) => {
                                             ${nameApp}
                                         </p>
                                         <div class="grid grid-rows-auto grid-flow-col">
-                                            <div class='flex'>${resultHtml}</div>
+                                            <div class='xl:flex'>${resultHtml}</div>
                                         </div>
                                     </div>`
         }

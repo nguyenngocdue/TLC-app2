@@ -20,6 +20,10 @@ class Signature2 extends Component
         private $signedPersonId = null,
         private $debug = false,
         private $updatable = true,
+        private $categoryColumnName = null,
+        private $category = null,
+        private $signableTypeColumnName = null,
+        private $signableType = null,
     ) {
         //
         static::$count++;
@@ -47,6 +51,10 @@ class Signature2 extends Component
                 'ownerIdColumnName' => $this->ownerIdColumnName,
                 'signedPersonId' => $this->signedPersonId,
                 'cuid' => CurrentUser::id(),
+                'categoryColumnName' => $this->categoryColumnName,
+                'category' => $this->category,
+                'signableTypeColumnName' => $this->signableTypeColumnName,
+                'signableType' => $this->signableType,
             ]
         );
     }

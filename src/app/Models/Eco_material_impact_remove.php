@@ -41,7 +41,7 @@ class Eco_material_impact_remove extends ModelExtended
             ['dataIndex' => 'unit_price',],
             ['dataIndex' => 'quantity',],
             ['dataIndex' => 'unit_id'],
-            ['dataIndex' => 'amount',],
+            ['dataIndex' => 'amount', 'footer' => 'agg_sum'],
             ['dataIndex' => 'description'],
         ];
     }

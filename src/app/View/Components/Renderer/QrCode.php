@@ -60,7 +60,29 @@ class QrCode extends Component
         $routeName = CurrentRoute::getCurrentIsTrashed() ? "{$type}.showTrashed" : "{$type}.show";
         $routeExits =  (Route::has($routeName));
         $href =  $routeExits ? route($routeName, $params) : "#";
+        $href = $this->transformHref($type, $href);
         return [$routeExits, $href];
+    }
+    private function transformHref($type, $href)
+    {
+        switch ($type) {
+            case 'pj_modules':
+                $href = $this->replaceHref($type, $href, 'modular');
+                break;
+            case 'pj_units':
+                $href = $this->replaceHref($type, $href, 'unit');
+                break;
+            case 'pj_shipments':
+                $href = $this->replaceHref($type, $href, 'shipment');
+                break;
+            default:
+                break;
+        }
+        return $href;
+    }
+    private function replaceHref($type, $href, $replace)
+    {
+        return str_replace('dashboard/' . $type, $replace, $href);
     }
     private function contentPopover($id, $href, $count)
     {

@@ -13,16 +13,30 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getSheet": {
-        "name": "_getSheet",
+    "_getDeletedBy": {
+        "name": "_getDeletedBy",
         "relationship": "belongsTo",
-        "control_name": "qaqc_insp_chklst_sht_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "control_name": "deleted_by",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown",
+        "control": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "relationship": "hasMany",
+        "control_name": "getLines",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

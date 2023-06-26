@@ -25,6 +25,7 @@
             batchLength,
         })
         changeBgColor(this,'{{$table01Name}}')
+        changeFooterValue(this,'{{$table01Name}}')
         @endif
     })
 </script>

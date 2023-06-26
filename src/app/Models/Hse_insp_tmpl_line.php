@@ -53,7 +53,7 @@ class Hse_insp_tmpl_line extends ModelExtended
             ['dataIndex' => 'hse_insp_tmpl_sht_id', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'hse_insp_group_id',],
             ['dataIndex' => 'name'],
-            // ['dataIndex' => 'description'],
+            ['dataIndex' => 'description'],
             ['dataIndex' => 'control_type_id',],
             ['dataIndex' => 'hse_insp_control_group_id',],
         ];

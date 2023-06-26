@@ -125,7 +125,10 @@ const addANewLineFull = (params) => {
     // console.log("ADD LINE TO", params, tableDebugJs, isOrderable)
 
     const table = document.getElementById(tableId)
-    const row = table.insertRow()
+    // console.log(table)
+    const row = table.insertRow(-1)
+    const tbody = table.getElementsByTagName("tbody")[0]
+    tbody.appendChild(row) //<<Make sure the newly inserted row will be above the tfoot
     removeEmptinessLine(tableId) //<< Must remove after insertRow, otherwise it will insert into 2nd thead
     const newRowNo = getAllRows(tableId).length
 
@@ -385,14 +388,9 @@ const addANewLineFull = (params) => {
                             '</script>'
                     } else {
                         // onChange = "onChangeDropdown4(" + onChangeParams + ");changeBgColor(this,\"" + tableId + "\")"
-                        const changeBgColorFn =
-                            'changeBgColor(this,"' + tableId + '");'
-                        renderer +=
-                            '<script>' +
-                            makeOnChangeAdvanced(
-                                onChangeDropdown4Fn + changeBgColorFn
-                            ) +
-                            '</script>'
+                        const changeBgColorFn = 'changeBgColor(this,"' + tableId + '");'
+                        const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
+                        renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeBgColorFn + changeFooterValue) + '</script>'
                     }
                     break
                 case 'text4':

@@ -5,3 +5,14 @@ php artisan ndc:permission eco_material_impact_adds
 php artisan ndc:permission eco_material_impact_removes
 php artisan ndc:permission eco_signatures
 php artisan ndc:permission eco_taken_actions
+php artisan ndc:permission user_team_ncrs
+php artisan ndc:permission currencies
+php artisan ndc:permission hse_insp_chklst_lines
+php artisan ndc:permission hse_insp_chklst_shts
+php artisan ndc:permission hse_insp_control_groups
+php artisan ndc:permission hse_insp_control_values 
+php artisan ndc:permission hse_insp_groups 
+php artisan ndc:permission hse_insp_tmpl_lines
+php artisan ndc:permission hse_insp_tmpl_shts
+php artisan ndc:permission hse_insp_values
+php artisan ndc:permission signature

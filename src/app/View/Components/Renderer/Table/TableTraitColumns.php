@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Renderer\Table;
 
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Str;

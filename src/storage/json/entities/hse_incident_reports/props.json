@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -40,7 +40,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Issue Title",
         "control": "text",
         "align": "",
@@ -59,7 +59,7 @@
     "_work_area_id": {
         "name": "_work_area_id",
         "column_name": "work_area_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Issue Location",
         "control": "dropdown",
         "align": "",
@@ -97,7 +97,7 @@
     "_injured_person": {
         "name": "_injured_person",
         "column_name": "injured_person",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Name of Injured Person",
         "control": "dropdown",
         "align": "",
@@ -116,7 +116,7 @@
     "_injured_staff_id": {
         "name": "_injured_staff_id",
         "column_name": "injured_staff_id",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Staff ID",
         "control": "text",
         "align": "",
@@ -135,7 +135,7 @@
     "_injured_staff_position": {
         "name": "_injured_staff_position",
         "column_name": "injured_staff_position",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Staff Position",
         "control": "text",
         "align": "",
@@ -154,7 +154,7 @@
     "_injured_staff_cat": {
         "name": "_injured_staff_cat",
         "column_name": "injured_staff_cat",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Staff Cat",
         "control": "dropdown",
         "align": "",
@@ -192,7 +192,7 @@
     "_injured_staff_cat_desc": {
         "name": "_injured_staff_cat_desc",
         "column_name": "injured_staff_cat_desc",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Staff Department",
         "control": "text",
         "align": "",
@@ -211,7 +211,7 @@
     "_employed_duration_in_year": {
         "name": "_employed_duration_in_year",
         "column_name": "employed_duration_in_year",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Working Duration (Year)",
         "control": "number",
         "align": "",
@@ -268,7 +268,7 @@
     "_manager_staff_id": {
         "name": "_manager_staff_id",
         "column_name": "manager_staff_id",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Staff ID",
         "control": "text",
         "align": "",
@@ -287,7 +287,7 @@
     "_manager_staff_position": {
         "name": "_manager_staff_position",
         "column_name": "manager_staff_position",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Staff Position",
         "control": "text",
         "align": "",
@@ -306,7 +306,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Name of Person Initiating Report",
         "control": "dropdown",
         "align": "",
@@ -325,7 +325,7 @@
     "_owner_staff_id": {
         "name": "_owner_staff_id",
         "column_name": "owner_staff_id",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Staff ID",
         "control": "text",
         "align": "",
@@ -344,7 +344,7 @@
     "_owner_staff_position": {
         "name": "_owner_staff_position",
         "column_name": "owner_staff_position",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Staff Position",
         "control": "text",
         "align": "",
@@ -363,7 +363,7 @@
     "_incident_doc_type_id": {
         "name": "_incident_doc_type_id",
         "column_name": "incident_doc_type_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Issue Category",
         "control": "dropdown",
         "align": "",
@@ -382,7 +382,7 @@
     "_incident_doc_sub_type_id": {
         "name": "_incident_doc_sub_type_id",
         "column_name": "incident_doc_sub_type_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Issue Sub-Category",
         "control": "dropdown",
         "align": "",
@@ -401,7 +401,7 @@
     "_loss_value": {
         "name": "_loss_value",
         "column_name": "loss_value",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "Lost Value",
         "control": "text",
         "align": "",
@@ -420,7 +420,7 @@
     "_number_injured_person": {
         "name": "_number_injured_person",
         "column_name": "number_injured_person",
-        "column_type": "float",
+        "column_type": "double",
         "label": "No. Persons Injured",
         "control": "number",
         "align": "",
@@ -439,7 +439,7 @@
     "_number_involved_person": {
         "name": "_number_involved_person",
         "column_name": "number_involved_person",
-        "column_type": "float",
+        "column_type": "double",
         "label": "No. Persons Involved",
         "control": "number",
         "align": "",
@@ -591,7 +591,7 @@
     "_accident_book_entry": {
         "name": "_accident_book_entry",
         "column_name": "accident_book_entry",
-        "column_type": "boolean",
+        "column_type": "tinyint(1)",
         "label": "Accident Book Entry",
         "control": "toggle",
         "align": "",
@@ -610,7 +610,7 @@
     "_lost_days": {
         "name": "_lost_days",
         "column_name": "lost_days",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Lost Days",
         "control": "number",
         "align": "",
@@ -667,7 +667,7 @@
     "_need_to_transfer_position": {
         "name": "_need_to_transfer_position",
         "column_name": "need_to_transfer_position",
-        "column_type": "boolean",
+        "column_type": "tinyint(1)",
         "label": "Transfer Position",
         "control": "toggle",
         "align": "",
@@ -1332,7 +1332,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "column_type": "string",
+        "column_type": "varchar(255)",
         "label": "",
         "control": "",
         "align": "",
@@ -1351,7 +1351,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -1370,7 +1370,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",
@@ -1389,7 +1389,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "",
         "control": "",
         "align": "",
@@ -1408,7 +1408,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "column_type": "datetime",
+        "column_type": "timestamp",
         "label": "",
         "control": "",
         "align": "",

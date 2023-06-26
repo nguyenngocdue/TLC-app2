@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Models\Qaqc_insp_chklst_sht_sig;
+use App\Models\Signature;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -21,13 +21,11 @@ trait TraitEntityEditableSignature
             // dump($line);
             if (is_null($line['id'])) {
                 //Insert
-                if (is_null($line['qaqc_insp_chklst_sht_id'])) {
-                    $line['qaqc_insp_chklst_sht_id'] = $signableId;
-                }
-                $newId = Qaqc_insp_chklst_sht_sig::create($line);
+                if (is_null($line['signable_id'])) $line['signable_id'] = $signableId;
+                $newId = Signature::create($line);
                 // Log::info("Created " . $newId);
             } else { //Update or Delete
-                $signature = Qaqc_insp_chklst_sht_sig::find($line['id']);
+                $signature = Signature::find($line['id']);
                 // dump($line);
                 if ($signature && $signature['owner_id'] == $currentUser->id) {
                     if (is_null($line['value'])) {
