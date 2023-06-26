@@ -13,9 +13,11 @@ use App\Models\Hse_insp_tmpl;
 use App\Models\Hse_insp_tmpl_sht;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst_line;
+use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Formula\All_SlugifyByName;
 use App\View\Components\Formula\TSO_GetAssignee1;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class CloneTemplateHseCommand extends Command
 {
@@ -58,13 +60,14 @@ class CloneTemplateHseCommand extends Command
             return Command::FAILURE;
         }
         try {
+            $valueDefaultAssignee1 = $this->getDefaultValues('assignee_1');
             $hseInspChklstSht = Hse_insp_chklst_sht::create([
                 'name' => $hseInspTmplSht->name,
                 'description' => $hseInspTmplSht->description,
                 'slug' => (new All_SlugifyByName())($hseInspTmplSht->slug, 'hse_insp_chklst_sht', ''),
                 'hse_insp_tmpl_sht_id' => $hseInspTmplSht->id,
                 'owner_id' => $ownerId,
-                'assignee_1' => (new TSO_GetAssignee1())($ownerId),
+                'assignee_1' => $valueDefaultAssignee1,
                 'status' => 'new',
                 'progress' => 0,
                 'order_no' => $hseInspTmplSht->order_no,
@@ -80,7 +83,7 @@ class CloneTemplateHseCommand extends Command
                     'owner_id' => $ownerId,
                 ]);
             }
-            //<<This id will be use to redirect, please don't add more text into it.
+            // <<This id will be use to redirect, please don't add more text into it.
             $this->info($hseInspChklstSht->id);
             return Command::SUCCESS;
         } catch (\Throwable $th) {
@@ -89,5 +92,11 @@ class CloneTemplateHseCommand extends Command
             // $this->error($th->getMessage());
             return Command::FAILURE;
         }
+    }
+    private function getDefaultValues($column)
+    {
+        $props = SuperProps::getFor('hse_insp_chklst_sht')['props'] ?? [];
+        $defaultValue = $props['_' . $column]['default-values']['default_value'];
+        return $defaultValue ? $defaultValue : null;
     }
 }

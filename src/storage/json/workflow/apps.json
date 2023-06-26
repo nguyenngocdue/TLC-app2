@@ -403,7 +403,7 @@
         "nickname": "hics",
         "doc_id_format_column": null,
         "status": null,
-        "edit_renderer": "props-renderer",
+        "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "props-renderer",
         "icon": null
     },

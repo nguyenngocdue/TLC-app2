@@ -15,7 +15,7 @@ class Hse_insp_chklst_sht extends ModelExtended
     public $eloquentParams = [
         "getTmplSheet" => ["belongsTo", Hse_insp_tmpl_sht::class, 'hse_insp_tmpl_sht_id'],
         "getLines" => ["hasMany", Hse_insp_chklst_line::class, "hse_insp_chklst_sht_id"],
-        "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
     ];
 
     public $oracyParams = [
@@ -23,6 +23,11 @@ class Hse_insp_chklst_sht extends ModelExtended
     ];
 
     public function getLines()
+    {
+        $p = $this->eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getAssignee1()
     {
         $p = $this->eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -38,13 +43,6 @@ class Hse_insp_chklst_sht extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function comment_rejected_reason()
-    {
-        $p = $this->eloquentParams[__FUNCTION__];
-        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
-    }
-
     public function getManyLineParams()
     {
         return [
@@ -53,7 +51,6 @@ class Hse_insp_chklst_sht extends ModelExtended
             // ['dataIndex' => 'description'],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'hse_insp_tmpl_sht_id', 'rendererParam' => 'name'],
-            ['dataIndex' => 'hse_insp_chklst_id'],
             ['dataIndex' => 'getMonitors1()', 'renderer' => 'agg_count'],
             ['dataIndex' => 'progress'],
             ['dataIndex' => 'status'],

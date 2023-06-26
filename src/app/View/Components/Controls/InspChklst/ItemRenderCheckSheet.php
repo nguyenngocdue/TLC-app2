@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls\InspChklst;
 
+use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
 class ItemRenderCheckSheet extends Component
@@ -12,9 +13,13 @@ class ItemRenderCheckSheet extends Component
      * @return void
      */
     public function __construct(
-        private $id,
-        private $item,
+        private $dataSource,
+        private $action,
         private $type,
+        private $modelPath,
+        private $status = null,
+        private $id = null,
+        private $item = null,
     ) {
         // dump($item);
 
@@ -27,19 +32,21 @@ class ItemRenderCheckSheet extends Component
      */
     public function render()
     {
-        // getRun->getSheet->getChklst->getProdOrder->getSubProject
         $lines = $this->item->getLines;
-        // $lines = $this->item->getRuns[0]->getLines;
         $chklst = $this->item->getChklst;
 
         $prodOrder = is_null($chklst) ? null : $chklst->getProdOrder;
         $subProject = is_null($prodOrder) ? null : $prodOrder->getSubProject;
         $project = is_null($subProject) ? null : $subProject->getProject;
-        // dump($chklst);
         $status = $this->item->status ? $this->item->status : 'new';
+        $props = SuperProps::getFor($this->type)['props'] ?? [];
         return view(
             'components.controls.insp-chklst.item-render-check-sheet',
             [
+                'dataSource' => $this->dataSource,
+                'action' => $this->action,
+                'modelPath' => $this->modelPath,
+                'id' => $this->id,
                 'chklst' => $chklst,
                 'item' => $this->item,
                 'lines' => $lines,
@@ -47,6 +54,7 @@ class ItemRenderCheckSheet extends Component
                 'project' => $project,
                 'status' => $status,
                 'type' => $this->type,
+                'props' => $props,
             ]
         );
     }

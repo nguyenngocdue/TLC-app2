@@ -28,9 +28,15 @@ class CheckPointOption extends Component
      */
     public function render()
     {
-        $controlGroup = $this->line->getControlGroup;
+        $line = $this->line;
+        $controlGroup = $line->getControlGroup;
         if ($controlGroup) {
-            $options = Qaqc_insp_control_value::where('qaqc_insp_control_group_id', $controlGroup->id)->get();
+            $eloquentParamsControlGroup = $line->eloquentParams['getControlGroup'];
+            $eloquentParamsControlValue = $line->eloquentParams['getControlValue'];
+            $modelPath = $eloquentParamsControlValue[1];
+            $keyIdModelControlValue = $eloquentParamsControlValue[2];
+            $keyIdModelControlGroup = $eloquentParamsControlGroup[2];
+            $options = $modelPath::where($keyIdModelControlGroup, $controlGroup->id)->get();
             $options = $options->pluck('name', 'id',);
         } else {
             return "CONTROL GROUP ID IS NULL";
@@ -55,6 +61,7 @@ class CheckPointOption extends Component
                 'table01Name' => $this->table01Name,
                 'rowIndex' => $this->rowIndex,
                 'class' => $class,
+                'keyIdModelControlValue' => $keyIdModelControlValue ?? '',
             ]
         );
     }

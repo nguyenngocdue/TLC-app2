@@ -46,15 +46,17 @@ function registerListen(lineId, id){
     }
 </script>
 @endonce
-
-<div class="grid w-full grid-cols-4 space-x-2 rounded-xl bg-gray-200 p-2">
+@php
+    $gridCols = isset($options) ? count($options) : 1;
+@endphp
+<div class="grid w-full grid-cols-{{$gridCols}} space-x-2 rounded-xl bg-gray-200 p-2">
     @foreach($options as $id => $option)
         <div>
             <input type="radio" 
-                    name="{{$table01Name}}[qaqc_insp_control_value_id][{{$rowIndex}}]" 
+                    name="{{$table01Name}}[{{$keyIdModelControlValue}}][{{$rowIndex}}]" 
                     id="radio_{{$line->id}}_{{$id}}" 
                     class="peer hidden" 
-                    @checked($line->{"qaqc_insp_control_value_id"}==$id)  
+                    @checked($line->{$keyIdModelControlValue}==$id)  
                     value="{{$id}}"
                     />
                     @if(in_array($option, ['No','Fail']))

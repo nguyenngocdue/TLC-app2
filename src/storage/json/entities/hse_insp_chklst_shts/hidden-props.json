@@ -1,0 +1,116 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "",
+        "active": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "",
+        "active": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "",
+        "active": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "new": "",
+        "active": ""
+    },
+    "_hse_insp_tmpl_sht_id": {
+        "name": "_hse_insp_tmpl_sht_id",
+        "column_name": "hse_insp_tmpl_sht_id",
+        "new": "",
+        "active": ""
+    },
+    "_location_project": {
+        "name": "_location_project",
+        "column_name": "location_project",
+        "new": "",
+        "active": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "",
+        "active": ""
+    },
+    "_start_time": {
+        "name": "_start_time",
+        "column_name": "start_time",
+        "new": "",
+        "active": ""
+    },
+    "_finish_time": {
+        "name": "_finish_time",
+        "column_name": "finish_time",
+        "new": "",
+        "active": ""
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "",
+        "active": ""
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "",
+        "active": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "",
+        "active": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "active": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "active": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "active": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "active": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "active": ""
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "new": "",
+        "active": ""
+    },
+    "_progress": {
+        "name": "_progress",
+        "column_name": "progress",
+        "new": "",
+        "active": ""
+    }
+}

@@ -43,7 +43,7 @@
                 <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
                 @break
                 @case ('checklist-sheet-renderer')
-                    <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type"/>
+                    <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
                 @break
                 @case ('ghg-sheet-renderer')
                     <x-feedback.alert type="warning" message="{{$app['edit_renderer']}} in entity-create-edit need to be implemented." />

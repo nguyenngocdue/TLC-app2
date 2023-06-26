@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hse_insp_tmpl_sht');
+        Schema::dropIfExists('hse_insp_tmpl_shts');
     }
 };

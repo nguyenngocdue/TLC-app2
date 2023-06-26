@@ -14,6 +14,7 @@ class CheckPoint extends Component
      */
     public function __construct(
         private $line,
+        private $type,
         private $table01Name,
         private $rowIndex,
         private $debug = false,
@@ -39,6 +40,7 @@ class CheckPoint extends Component
             'rowIndex' => $this->rowIndex,
             'attachments' => $attachments,
             'debug' => $this->debug,
+            'type' => $this->type,
         ]);
     }
 }

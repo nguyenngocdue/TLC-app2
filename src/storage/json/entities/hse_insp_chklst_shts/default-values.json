@@ -203,9 +203,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_comment_rejected_reason": {
-        "name": "_comment_rejected_reason",
-        "column_name": "comment_rejected_reason",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -215,9 +215,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_progress": {
+        "name": "_progress",
+        "column_name": "progress",
         "label": "",
         "validation": "",
         "validation_regex": "",

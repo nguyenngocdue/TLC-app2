@@ -27,6 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('hse_insp_tmpl_sht_id');
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->text('location_project')->nullable();
+            $table->float('progress')->nullable(); //version 2
             $table->dateTime('start_time')->nullable();
             $table->dateTime('finish_time')->nullable();
             $table->orderable();
@@ -41,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hse_insp_chklst_sht');
+        Schema::dropIfExists('hse_insp_chklst_shts');
     }
 };
