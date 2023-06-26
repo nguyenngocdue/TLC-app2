@@ -23,8 +23,8 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",
-        "filter_columns": "",
-        "filter_values": "",
+        "filter_columns": "field_id",
+        "filter_values": "135",
         "radio_checkbox_colspan": ""
     },
     "_getAssignee1": {
