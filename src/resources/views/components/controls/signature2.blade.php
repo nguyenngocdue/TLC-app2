@@ -25,6 +25,12 @@
     {{$debug ? $name : ""}}
     <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$name}}" id="{{$name}}" value='{!! $value !!}' />
     
+    {{$debug ? $categoryColumnName : ""}}
+    <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$categoryColumnName}}" id="{{$categoryColumnName}}" value='{!! $category !!}' />
+    
+    {{$debug ? $signableTypeColumnName : ""}}
+    <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$signableTypeColumnName}}" id="{{$signableTypeColumnName}}" value='{!! $signableType !!}' />
+    
     {{$debug ? $ownerIdColumnName : ""}}
     <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$ownerIdColumnName}}" id="{{$ownerIdColumnName}}" value='{!! $signedPersonId !!}'/>
 </div>

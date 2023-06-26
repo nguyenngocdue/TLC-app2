@@ -171,6 +171,10 @@
                             <x-controls.comment.comment-group2a commentableId={{$id}} commentableType="{{$type}}" category="{{$columnName}}" readOnly={{$readOnly}} />
                             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                             @break
+                            @case('signature_multi')
+                            <x-controls.signature.signature-group2 :item="$item" signableId={{$id}} signableType="{{$type}}" category="{{$columnName}}" readOnly={{$readOnly}}/>
+                            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+                            @break
 
                             @case('relationship_renderer')
                             @if($action === "create")

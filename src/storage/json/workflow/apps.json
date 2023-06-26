@@ -978,6 +978,7 @@
         "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "checklist-sheet-renderer",
         "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>",
+        "disallowed_direct_creation": "true",
         "show_in_monitored_by_me": "true"
     },
     "qaqc_insp_control_group": {
@@ -1207,6 +1208,21 @@
         "package": "system",
         "sub_package": "system_permission",
         "title": "Setrolesets",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": null
+    },
+    "signature": {
+        "name": "signature",
+        "package_tab": "application",
+        "package": "system",
+        "sub_package": "system_admin",
+        "title": "Signature",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
@@ -1578,7 +1594,7 @@
         "package_tab": "application",
         "package": "unit_test",
         "sub_package": "unit_test",
-        "title": "UT06 (Comments)",
+        "title": "UT06 (Comments & Signatures)",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
