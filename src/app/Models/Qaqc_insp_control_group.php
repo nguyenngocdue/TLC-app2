@@ -10,13 +10,13 @@ class Qaqc_insp_control_group extends ModelExtended
     protected $table = "qaqc_insp_control_groups";
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getControlValues" => ["hasMany", Qaqc_insp_control_value::class, "qaqc_insp_control_group_id"],
     ];
 
     public function getControlValues()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

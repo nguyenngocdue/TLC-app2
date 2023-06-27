@@ -11,35 +11,35 @@ class Prod_discipline_1 extends ModelExtended
     protected $table = 'prod_discipline_1s';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
 
         "getDiscipline2" => ['hasMany', Prod_discipline_2::class, 'prod_discipline_1_id'],
     ];
 
-    public $oracyParams = [
+    public static $oracyParams = [
         "getDefMonitors1()" => ["getCheckedByField", User::class],
     ];
 
     public function getDiscipline2()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getDefAssignee()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getDiscipline()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getDefMonitors1()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function getManyLineParams()

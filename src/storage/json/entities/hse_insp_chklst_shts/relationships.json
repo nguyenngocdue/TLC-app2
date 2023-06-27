@@ -13,6 +13,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getAssignee1": {
+        "name": "_getAssignee1",
+        "relationship": "belongsTo",
+        "control_name": "assignee_1",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",
@@ -65,20 +79,6 @@
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_comment_rejected_reason": {
-        "name": "_comment_rejected_reason",
-        "relationship": "morphMany",
-        "control_name": "comment_rejected_reason",
-        "renderer_view_all": "agg_count",
-        "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "comment",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

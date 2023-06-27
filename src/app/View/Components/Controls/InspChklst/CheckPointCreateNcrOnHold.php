@@ -28,8 +28,32 @@ class CheckPointCreateNcrOnHold extends Component
      */
     public function render()
     {
+        $type = $this->line->getTable();
+        switch ($type) {
+            case 'qaqc_insp_chklst_lines':
+                [$syntax, $href, $nameButton, $relatedEntities, $nameShow] = $this->getHrefCreateNCR();
+                break;
+            case 'hse_insp_chklst_lines':
+                [$syntax, $href, $nameButton, $relatedEntities, $nameShow] = $this->getHrefHseCreateCAR();
+                break;
+            default:
+                break;
+        }
+        return view('components.controls.insp-chklst.check-point-create-ncr-on-hold', [
+            'line' => $this->line,
+            'href' => $href,
+            'table01Name' => $this->table01Name,
+            'rowIndex' => $this->rowIndex,
+            'relatedEntities' => $relatedEntities,
+            'nameButton' => $nameButton,
+            'nameShow' => $nameShow,
+            'syntax' => $syntax,
+        ]);
+    }
+    private function getHrefCreateNCR()
+    {
         $params = [
-            'parent_type' => Str::modelPathFrom($this->line->getTable()),
+            'correctable_type' => Str::modelPathFrom($this->line->getTable()),
             'parent_id' => $this->line->id,
             'description' => "During " . $this->line->description . ", ",
         ];
@@ -37,15 +61,16 @@ class CheckPointCreateNcrOnHold extends Component
         if ($this->line->getSubProject) $params['sub_project_id'] = $this->line->getSubProject->id;
         if ($this->line->getProdRouting) $params['prod_routing_id'] = $this->line->getProdRouting->id;
         if ($this->line->getProdOrder) $params['prod_order_id'] = $this->line->getProdOrder->id;
-        // 'prod_discipline_id' => '',
-
         $href = route('qaqc_ncrs.create', $params);
-        return view('components.controls.insp-chklst.check-point-create-ncr-on-hold', [
-            'line' => $this->line,
-            'href' => $href,
-            'table01Name' => $this->table01Name,
-            'rowIndex' => $this->rowIndex,
-            'relatedNcrs' => $this->line->getNcrs,
-        ]);
+        return ['NCR', $href, 'Create a new NCR', $this->line->getNcrs, 'qaqc_ncrs.show'];
+    }
+    private function getHrefHseCreateCAR()
+    {
+        $params = [
+            'correctable_type' => Str::modelPathFrom($this->line->getTable()),
+            'correctable_id' => $this->line->id,
+        ];
+        $href = route('hse_corrective_actions.create', $params);
+        return ['CAR', $href, 'Create a new Hse Corrective Action', $this->line->getCorrectiveActions, 'hse_corrective_actions.show'];
     }
 }

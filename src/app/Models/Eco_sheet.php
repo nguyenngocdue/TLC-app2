@@ -14,7 +14,7 @@ class Eco_sheet extends ModelExtended
     ];
     protected $table = "eco_sheets";
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         'getProject' => ['belongsTo', Project::class, 'project_id'],
         'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
@@ -33,109 +33,115 @@ class Eco_sheet extends ModelExtended
         "signature_eco_managers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
     ];
 
-    public $oracyParams = [
+    public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
         "getMonitors2()" => ["getCheckedByField", User::class],
         "getMonitors3()" => ["getCheckedByField", User::class],
-        "getSubProject()" => ["getCheckedByField", Sub_project::class],
+        "getSubProjectsOfEco()" => ["getCheckedByField", Sub_project::class],
+        "getTypesOfChangeOfEco()" => ["getCheckedByField", Term::class],
     ];
     public function signature_eco_peers()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 
     public function signature_eco_managers()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
     public function getMaterialImpactAdds()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getMaterialImpactRemoves()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function attachment_eco_sht()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 
     public function getProject()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getAssignee1()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getEffectivenessLines()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getTakenActions()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getLaborImpacts()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getAssignee2()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getAssignee3()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getPriority()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getCurrency1()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getCurrency2()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getMonitors1()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function getMonitors2()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function getMonitors3()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function getSubProject()
+    public function getSubProjectsOfEco()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function getTypesOfChangeOfEco()
     {
         $p = $this->oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

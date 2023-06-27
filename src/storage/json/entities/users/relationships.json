@@ -195,6 +195,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getTshtTeams()": {
+        "name": "_getTshtTeams()",
+        "relationship": "getCheckedByField",
+        "control_name": "getTshtTeams()",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "team",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getPosts": {
         "name": "_getPosts",
         "relationship": "hasMany",

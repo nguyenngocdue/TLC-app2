@@ -11,7 +11,7 @@ class Prod_discipline extends ModelExtended
     protected $table = 'prod_disciplines';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
 
         "getProdRoutingLink" => ['hasMany', Prod_routing_link::class, 'prod_discipline_id'],
@@ -20,38 +20,38 @@ class Prod_discipline extends ModelExtended
         "getWirDescriptions" => ['hasMany', Wir_description::class, 'prod_discipline_id'],
     ];
 
-    public $oracyParams = [
+    public static $oracyParams = [
         "getDefMonitors1()" => ["getCheckedByField", User::class],
     ];
 
     public function getProdRoutingLink()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getDiscipline1s()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getDefAssignee()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getDefMonitors1()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function getErpRoutingLinks()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getWirDescriptions()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

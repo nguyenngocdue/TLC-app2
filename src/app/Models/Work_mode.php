@@ -11,5 +11,5 @@ class Work_mode extends ModelExtended
     protected $table = 'work_modes';
     protected static $statusless = true;
 
-    public $eloquentParams = [];
+    public static $eloquentParams = [];
 }

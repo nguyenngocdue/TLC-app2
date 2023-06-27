@@ -14,7 +14,7 @@ class Project extends ModelExtended
 
     protected $table = 'projects';
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
 
         "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
@@ -22,25 +22,25 @@ class Project extends ModelExtended
         "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
     ];
 
-    public $oracyParams = [
+    public static $oracyParams = [
         "getProjectMembers()" => ['getCheckedByField', User::class],
     ];
 
     public function getAvatar()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->latestOfMany();
     }
 
     public function getProjectMembers()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
     public function getSubProjects()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
@@ -50,7 +50,7 @@ class Project extends ModelExtended
     }
     public function featured_image()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }

@@ -13,30 +13,30 @@ class Qaqc_car extends ModelExtended
     protected $table = "qaqc_cars";
     public $nameless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getQaqcNcr" => ['belongsTo', Qaqc_ncr::class, 'qaqc_ncr_id'],
         "getResponsiblePerson" => ['belongsTo', User::class, 'responsible_person'],
     ];
 
-    public $oracyParams = [
+    public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
     public function getQaqcNcr()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getResponsiblePerson()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getMonitors1()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 

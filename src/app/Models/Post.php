@@ -10,5 +10,5 @@ class Post extends ModelExtended
 
     protected $table = 'posts';
 
-    public $eloquentParams = [];
+    public static $eloquentParams = [];
 }

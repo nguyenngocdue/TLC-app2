@@ -26,15 +26,6 @@
         "on_hold": "true",
         "closed": "true"
     },
-    "_hse_incident_report_id": {
-        "name": "_hse_incident_report_id",
-        "column_name": "hse_incident_report_id",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
     "_priority_id": {
         "name": "_priority_id",
         "column_name": "priority_id",
@@ -98,18 +89,36 @@
         "on_hold": "true",
         "closed": "true"
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
+    "_unsafe_action_type_id": {
+        "name": "_unsafe_action_type_id",
+        "column_name": "unsafe_action_type_id",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
         "closed": "true"
     },
-    "_unsafe_action_type_id": {
-        "name": "_unsafe_action_type_id",
-        "column_name": "unsafe_action_type_id",
+    "_attachment_hse_car": {
+        "name": "_attachment_hse_car",
+        "column_name": "attachment_hse_car",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
@@ -143,9 +152,45 @@
         "on_hold": "true",
         "closed": "true"
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_correctable_type": {
+        "name": "_correctable_type",
+        "column_name": "correctable_type",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_correctable": {
+        "name": "_correctable",
+        "column_name": "correctable",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_correctable_id": {
+        "name": "_correctable_id",
+        "column_name": "correctable_id",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",

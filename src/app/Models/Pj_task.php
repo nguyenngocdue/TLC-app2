@@ -10,22 +10,22 @@ class Pj_task extends ModelExtended
 
     protected static $statusless = true;
 
-    public $eloquentParams = [];
+    public static $eloquentParams = [];
 
-    public $oracyParams = [
+    public static $oracyParams = [
         "getDisciplines()" => ["getCheckedByField", User_discipline::class],
         "getLods()" => ["getCheckedByField", Term::class],
     ];
 
     public function getDisciplines()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
     public function getLods()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

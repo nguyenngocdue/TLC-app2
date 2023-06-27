@@ -59,7 +59,7 @@ class RelationshipRenderer2 extends Component
 
     private function isTableOrderable($row, $colName, $columns)
     {
-        $eloquentParam = $row->eloquentParams[$colName];
+        $eloquentParam = $row::$eloquentParams[$colName];
         //TODO: This is to prevent from a crash
         if ($eloquentParam[0] === 'morphToMany') return [];
 
@@ -78,13 +78,13 @@ class RelationshipRenderer2 extends Component
 
     private function getPaginatedDataSource($row, $colName, $isOrderable, $showAll = false)
     {
-        if (!isset($row->eloquentParams[$colName])) {
+        if (!isset($row::$eloquentParams[$colName])) {
             //TODO: 
             dump("Not found $colName, maybe change to dropdown?");
-            dump($row->eloquentParams);
+            dump($row::$eloquentParams);
             return [];
         } else {
-            $eloquentParam = $row->eloquentParams[$colName];
+            $eloquentParam = $row::$eloquentParams[$colName];
             //TODO: This is to prevent from a crash
             if ($eloquentParam[0] === 'morphToMany') return [];
 

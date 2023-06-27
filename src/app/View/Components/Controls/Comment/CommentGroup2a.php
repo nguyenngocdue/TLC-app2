@@ -116,8 +116,9 @@ class CommentGroup2a extends Component
         $category_id = FieldSeeder::getIdFromFieldName($this->category);
         $commentableTypePath = Str::modelPathFrom($this->commentableType);
         $comments = [];
+        $commentableItem = new ($commentableTypePath); //::find($this->commentableId);
         if ('' !== $this->commentableId) {
-            $commentableItem = $commentableTypePath::find($this->commentableId);
+            $commentableItem->id = $this->commentableId;
             $comments = $commentableItem->{$this->category};
         }
         if ($this->debug) dump("Type: $this->commentableType($commentableTypePath) - ID: $this->commentableId - Category: $this->category #$category_id - Count: " . sizeof($comments));

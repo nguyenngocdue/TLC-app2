@@ -12,7 +12,7 @@ class Pj_shipment extends ModelExtended
     protected $table = 'pj_shipments';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getProject" => ['belongsTo', Project::class, "project_id"],
         "getSubProject" => ['belongsTo', Sub_project::class, "sub_project_id"],
 
@@ -21,17 +21,17 @@ class Pj_shipment extends ModelExtended
 
     public function getPjModules()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getProject()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getSubProject()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

@@ -14,7 +14,7 @@ class Hr_overtime_request extends ModelExtended
         return "[OTR#" . $this->id . "] - " . User::findFromCache($this->owner_id)->name;
     }
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],
         'getHrOtrLines' => ['hasMany', Hr_overtime_request_line::class, 'hr_overtime_request_id'],
@@ -23,43 +23,43 @@ class Hr_overtime_request extends ModelExtended
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
 
-    public $oracyParams = [
+    public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
     public function getWorkplace()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getAssignee1()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getHrOtrLines()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getHrOtrLines1()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getMonitors1()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
     public function comment_rejected_reason()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }

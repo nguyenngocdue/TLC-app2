@@ -65,7 +65,8 @@ trait TraitEntityFieldHandler2
             }
         }
         //This is for Inspection Checklist Sheet screen
-        if ($this->superProps['type'] == 'qaqc_insp_chklst_sht') {
+        $arrayCheck = ['qaqc_insp_chklst_sht', 'hse_insp_chklst_sht'];
+        if (in_array($this->superProps['type'], $arrayCheck)) {
             $result['editable_table'] = [
                 'table01' => '_getLines',
             ];

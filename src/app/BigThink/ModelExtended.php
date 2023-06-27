@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use App\Utils\Support\Json\SuperProps;
+use Database\Seeders\FieldSeeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,8 +33,8 @@ abstract class ModelExtended extends Model
     use TraitModelExtended;
     use SoftDeletesWithDeletedBy;
 
-    public $eloquentParams = [];
-    public $oracyParams = [];
+    public static $eloquentParams = [];
+    public static $oracyParams = [];
     protected static $statusless = false;
 
     public static function isStatusless()
@@ -44,8 +45,8 @@ abstract class ModelExtended extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->eloquentParams['getOwner'] =  ["belongsTo", User::class, "owner_id"];
-        $this->eloquentParams['getDeletedBy'] =  ["belongsTo", User::class, "deleted_by"];
+        static::$eloquentParams['getOwner'] =  ["belongsTo", User::class, "owner_id"];
+        static::$eloquentParams['getDeletedBy'] =  ["belongsTo", User::class, "deleted_by"];
     }
 
     public function toSearchableArray()
@@ -60,13 +61,13 @@ abstract class ModelExtended extends Model
 
     function getOwner()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     function getDeletedBy()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
@@ -109,5 +110,45 @@ abstract class ModelExtended extends Model
     {
         if ($this->nameless) return "#" . $this->id;
         else return $this->name;
+    }
+    static $singletonDbUserCollection = null;
+    public static function getCollection()
+    {
+        if (!isset(static::$singletonDbUserCollection)) {
+            $all = static::all();
+            foreach ($all as $item) $indexed[$item->id] = $item;
+            static::$singletonDbUserCollection = collect($indexed);
+        }
+        return static::$singletonDbUserCollection;
+    }
+
+    public static function findFromCache($id)
+    {
+        // if(!isset(static::getCollection()[$id])) 
+        return static::getCollection()[$id] ?? null;
+    }
+    private static $singletonMorphMany = null;
+
+    public static function getCollectionMorphMany($ids, $fieldNameCategory, $modelName, $keyType, $keyId)
+    {
+        if (!isset(static::$singletonMorphMany)) {
+            static::$singletonMorphMany = $modelName::query()->where($keyType, static::class)->whereIn($keyId, $ids)
+                ->where('category', FieldSeeder::getIdFromFieldName($fieldNameCategory))->get()->groupBy($keyId);
+        }
+    }
+    /**
+     * Undocumented function
+     *
+     * @param array $ids
+     * @param string $fieldNameCategory Field name category same eloquent params function
+     * @return mixed|array value MorphMany
+     */
+    public function getMorphManyByIds($ids = [], $fieldNameCategory)
+    {
+        if ($fieldNameCategory) {
+            $eloquentParams = static::$eloquentParams[$fieldNameCategory] ?? [];
+            static::getCollectionMorphMany($ids, $fieldNameCategory, $eloquentParams[1], $eloquentParams[3], $eloquentParams[4]);
+        }
+        return static::$singletonMorphMany[$this->id] ?? [];
     }
 }

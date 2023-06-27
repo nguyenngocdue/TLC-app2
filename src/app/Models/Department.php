@@ -11,7 +11,7 @@ class Department extends ModelExtended
     protected $table = 'departments';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getHOD" => ['belongsTo', User::class, 'head_of_department'],
         "getMembers" => ['hasMany', User::class, 'department'],
         "getMembers2" => ['hasMany', User::class, 'department'],
@@ -19,19 +19,19 @@ class Department extends ModelExtended
 
     public function getHOD()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getMembers()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getMembers2()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

@@ -10,38 +10,38 @@ class Qaqc_insp_tmpl extends ModelExtended
     protected $table = "qaqc_insp_tmpls";
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         // "getProdRouting" => ["belongsTo", Prod_routing::class, "prod_routing_id"],
 
         "getSheets" => ["hasMany", Qaqc_insp_tmpl_sht::class, "qaqc_insp_tmpl_id"],
         "getQaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'qaqc_insp_tmpl_id'],
     ];
 
-    public $oracyParams = [
+    public static $oracyParams = [
         "getProdRoutingsOfInspTmpl()" => ["getCheckedByField", Prod_routing::class],
     ];
 
     public function getSheets()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     // public function getProdRouting()
     // {
-    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     $p = static::$eloquentParams[__FUNCTION__];
     //     return $this->{$p[0]}($p[1], $p[2]);
     // }
 
     public function getQaqcInspChklsts()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getProdRoutingsOfInspTmpl()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

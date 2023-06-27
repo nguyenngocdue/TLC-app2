@@ -25,20 +25,20 @@ class Attachment extends ModelExtended
     public $nameless = true;
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],
         "attachable" => ['morphTo', Attachment::class, 'object_type', 'object_id'],
     ];
 
     public function getCategory()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function attachable()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
 

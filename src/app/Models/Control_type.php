@@ -10,5 +10,5 @@ class Control_type extends ModelExtended
     protected $table = "control_types";
     protected static $statusless = true;
 
-    public $eloquentParams = [];
+    public static $eloquentParams = [];
 }

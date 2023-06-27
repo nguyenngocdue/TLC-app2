@@ -13,21 +13,21 @@ class Eco_material_impact_remove extends ModelExtended
     protected $table = "eco_material_impact_removes";
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getEcoSheet" => ['belongsTo', Eco_sheet::class, 'eco_sheet_id'],
         "getUnit" => ['belongsTo', Term::class, 'unit_id']
     ];
 
-    public $oracyParams = [];
+    public static $oracyParams = [];
 
     public function getEcoSheet()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getUnit()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 

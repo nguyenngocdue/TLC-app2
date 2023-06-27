@@ -11,13 +11,13 @@ class Zunit_test_12 extends ModelExtended
     protected $table = 'zunit_test_12s';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getUT2" => ['hasMany', Zunit_test_02::class, 'parent_id'],
     ];
 
     public function getUT2()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

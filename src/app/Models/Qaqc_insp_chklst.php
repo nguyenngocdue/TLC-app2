@@ -13,7 +13,7 @@ class Qaqc_insp_chklst extends ModelExtended
     ];
     protected $table = "qaqc_insp_chklsts";
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getProdOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
         "getQaqcInspTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, "qaqc_insp_tmpl_id"],
 
@@ -22,19 +22,19 @@ class Qaqc_insp_chklst extends ModelExtended
 
     public function getProdOrder()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getQaqcInspTmpl()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getSheets()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 

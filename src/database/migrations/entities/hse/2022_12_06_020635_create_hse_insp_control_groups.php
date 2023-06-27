@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hse_insp_sheets');
+        Schema::dropIfExists('hse_insp_control_groups');
     }
 };

@@ -17,7 +17,7 @@ class Prod_sequence extends ModelExtended
     protected $table = 'prod_sequences';
     public $nameless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getProdOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],
         "getProdRoutingLinks" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
         "getUomId" => ["belongsTo", Term::class, 'uom_id'],
@@ -28,37 +28,37 @@ class Prod_sequence extends ModelExtended
 
     public function getProdOrder()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getProdRoutingLinks()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getUomId()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getProdRuns()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     // public function getProdRoutingDetails()
     // {
-    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     $p = static::$eloquentParams[__FUNCTION__];
     //     return $this->{$p[0]}($p[1], $p[2], $p[3]);
     // }
 
     public function getProdRoutingDetails()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3]);
         $prodOrder = $this->getProdOrder;
         if ($prodOrder) {

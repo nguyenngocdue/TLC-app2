@@ -1,6 +1,7 @@
 <x-renderer.card class="border my-1 mt-2 bg-white p-0">
     <div class="bg-gray-300 rounded-t p-2">
-        <p title="{{$line->description}} - #{{$line->id}}">{{$line->name}}</p>
+        <p title="#{{$line->id}}">{{$line->name}}</p>
+        <p title="Vietnamese"><i>{{$line->description}}</i></p>
     </div>
     <input type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[id][{{$rowIndex}}]" value="{{$line->id}}" >
 
@@ -31,6 +32,6 @@
                 /> --}}
         <x-renderer.attachment2 name="table01[insp_photos][{{$rowIndex}}]" :value="$attachments"/>
         <br/>
-        <x-controls.comment.comment-group2a category="insp_comments" commentableType="qaqc_insp_chklst_line" commentableId="{{$line->id}}" />
+        <x-controls.comment.comment-group2a category="insp_comments" commentableType="{{$type}}_line" commentableId="{{$line->id}}" />
     </div>
 </x-renderer.card>

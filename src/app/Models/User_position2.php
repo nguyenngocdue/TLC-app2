@@ -11,13 +11,13 @@ class User_position2 extends ModelExtended
     protected $table = 'user_position2s';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getUsers" => ['hasMany', User::class, 'position_2', 'id'],
     ];
 
     public function getUsers()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

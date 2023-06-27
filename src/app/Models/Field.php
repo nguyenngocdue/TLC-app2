@@ -10,5 +10,5 @@ class Field extends ModelExtended
     protected $table = "fields";
     protected static $statusless = true;
 
-    public $eloquentParams = [];
+    public static $eloquentParams = [];
 }

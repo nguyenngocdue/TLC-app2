@@ -26,7 +26,7 @@ class SuperProps
             $rls['control_name_function'] = substr($key, 1); //remove first "_";
 
             if ($dummyInstance) {
-                foreach ($dummyInstance->eloquentParams as $key2 => $params) {
+                foreach ($modelPath::$eloquentParams as $key2 => $params) {
                     if ("_" . $key2 === $key) {
                         $rls['eloquentParams'] = $params;
                         $rls['table'] = (new $params[1])->getTable();
@@ -34,7 +34,7 @@ class SuperProps
                         break;
                     }
                 }
-                foreach ($dummyInstance->oracyParams as $key2 => $params) {
+                foreach ($modelPath::$oracyParams as $key2 => $params) {
                     if ("_" . $key2 === $key) {
                         $rls['oracyParams'] = $params;
                         $rls['table'] = (new $params[1])->getTable();

@@ -167,10 +167,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getSubProject()": {
-        "name": "_getSubProject()",
+    "_getSubProjectsOfEco()": {
+        "name": "_getSubProjectsOfEco()",
         "relationship": "getCheckedByField",
-        "control_name": "getSubProject()",
+        "control_name": "getSubProjectsOfEco()",
         "renderer_view_all": "agg_sum",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
@@ -179,6 +179,20 @@
         "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getTypesOfChangeOfEco()": {
+        "name": "_getTypesOfChangeOfEco()",
+        "relationship": "getCheckedByField",
+        "control_name": "getTypesOfChangeOfEco()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "field_id",
+        "filter_values": "162",
         "radio_checkbox_colspan": ""
     },
     "_getEffectivenessLines": {

@@ -7,6 +7,8 @@ use Illuminate\View\Component;
 
 class CheckPointOption extends Component
 {
+    private static $singletonControlGroup = null;
+    private static $singletonOptions = null;
     /**
      * Create a new component instance.
      *
@@ -28,10 +30,20 @@ class CheckPointOption extends Component
      */
     public function render()
     {
-        $controlGroup = $this->line->getControlGroup;
-        if ($controlGroup) {
-            $options = Qaqc_insp_control_value::where('qaqc_insp_control_group_id', $controlGroup->id)->get();
-            $options = $options->pluck('name', 'id',);
+        $line = $this->line;
+        if (!isset(static::$singletonControlGroup)) {
+            static::$singletonControlGroup = $line->getControlGroup;
+        }
+        if (static::$singletonControlGroup) {
+            $eloquentParamsControlGroup = $line::$eloquentParams['getControlGroup'];
+            $eloquentParamsControlValue = $line::$eloquentParams['getControlValue'];
+            $modelPath = $eloquentParamsControlValue[1];
+            $keyIdModelControlValue = $eloquentParamsControlValue[2];
+            $keyIdModelControlGroup = $eloquentParamsControlGroup[2];
+            if (!isset(static::$singletonOptions)) {
+                static::$singletonOptions = $modelPath::where($keyIdModelControlGroup, static::$singletonControlGroup->id)->get();
+            }
+            $options = static::$singletonOptions->pluck('name', 'id',);
         } else {
             return "CONTROL GROUP ID IS NULL";
         }
@@ -55,6 +67,7 @@ class CheckPointOption extends Component
                 'table01Name' => $this->table01Name,
                 'rowIndex' => $this->rowIndex,
                 'class' => $class,
+                'keyIdModelControlValue' => $keyIdModelControlValue ?? '',
             ]
         );
     }

@@ -10,7 +10,7 @@ class Zunit_test_06 extends ModelExtended
     protected $table = "zunit_test_06s";
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "comment_1" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_2" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
@@ -21,69 +21,69 @@ class Zunit_test_06 extends ModelExtended
         "signature_eco_peers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
         "signature_eco_managers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
     ];
-    public $oracyParams = [
+    public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
         "getMonitors2()" => ["getCheckedByField", User::class],
     ];
     public function attachment_1()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 
     public function signature_eco_peers()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 
     public function signature_eco_managers()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 
     public function comment_1()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
     public function comment_2()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
     public function comment_3()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
     public function comment_4()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
     // public function comment_5()
     // {
-    //     $p = $this->eloquentParams[__FUNCTION__];
+    //     $p = static::$eloquentParams[__FUNCTION__];
     //     $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     //     return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     // }
     public function getMonitors1()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function getMonitors2()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

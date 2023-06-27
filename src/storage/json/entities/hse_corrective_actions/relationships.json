@@ -1,18 +1,4 @@
 {
-    "_getHseIncidentReport": {
-        "name": "_getHseIncidentReport",
-        "relationship": "belongsTo",
-        "control_name": "hse_incident_report_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_getWorkArea": {
         "name": "_getWorkArea",
         "relationship": "belongsTo",
@@ -121,6 +107,20 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "attachment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_correctable": {
+        "name": "_correctable",
+        "relationship": "morphTo",
+        "control_name": "correctable",
+        "renderer_view_all": "parent_link",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

@@ -14,7 +14,7 @@ class Prod_routing_detail extends ModelExtended
     public $nameless = true;
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getProdRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
         "getProdRoutingLink" => ['belongsTo', Prod_routing_link::class, 'prod_routing_link_id'],
         "getErpRoutingLink" => ['belongsTo', Erp_routing_link::class, 'erp_routing_link_id'],
@@ -23,25 +23,25 @@ class Prod_routing_detail extends ModelExtended
 
     public function getProdRouting()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getProdRoutingLink()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getErpRoutingLink()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getWirDescription()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 

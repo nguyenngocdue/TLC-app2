@@ -22,7 +22,7 @@ class CloneChklstFromTmpl extends Controller
         ];
         // dump($params);
 
-        $result = Artisan::call("ndc:createAndClone", $params);
+        $result = Artisan::call("ndc:cloneQaqc", $params);
         $response = ['code' => $result ? 404 : 200];
         if ($result) {
             $response['message'] = Artisan::output();

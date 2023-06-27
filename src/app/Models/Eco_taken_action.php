@@ -12,21 +12,21 @@ class Eco_taken_action extends ModelExtended
     protected $table = "eco_taken_actions";
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getEcoSheet" => ['belongsTo', Eco_sheet::class, 'eco_sheet_id'],
         "getDepartment" => ['belongsTo', Department::class, 'department_id']
     ];
 
-    public $oracyParams = [];
+    public static $oracyParams = [];
 
     public function getEcoSheet()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getDepartment()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getManyLineParams()

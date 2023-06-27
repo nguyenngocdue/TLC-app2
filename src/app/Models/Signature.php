@@ -12,20 +12,20 @@ class Signature extends ModelExtended
     public $nameless = true;
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],
         "signable" => ['morphTo', Comment::class, 'commentable_type', 'commentable_id'],
     ];
 
     public function getCategory()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function signable()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
 }

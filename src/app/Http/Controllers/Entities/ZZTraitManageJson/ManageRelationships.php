@@ -19,9 +19,8 @@ class ManageRelationships extends Manage_Parent
 
     private function makeBlankDefaultObject()
     {
-        $model = App::make($this->typeModel);
-        $eloquentParams = $model->eloquentParams;
-        $oracyParams = $model->oracyParams;
+        $eloquentParams = $this->typeModel::$eloquentParams;
+        $oracyParams = $this->typeModel::$oracyParams;
         $columnParams = $eloquentParams + $oracyParams;
 
         $allProps = Props::getAllOf($this->type);

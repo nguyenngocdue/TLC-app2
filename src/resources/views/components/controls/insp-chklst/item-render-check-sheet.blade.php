@@ -1,56 +1,57 @@
-@php 
-$tmpl = $item->getChklst->getQaqcInspTmpl;
-$prodOrder = $item->getChklst->getProdOrder;
-$prodRouting = $prodOrder->getProdRouting;
-
-if($prodOrder->production_name) $a[] = "<span title='Production Name'>".$prodOrder->production_name."</span>";
-if($prodOrder->compliance_name) $a[] = "<span title='Compliance Name'>".$prodOrder->compliance_name."</span>";
-
-$bigTitle = join(" / ", $a);
-if($project) $href = route("qaqc_insp_chklsts.edit", $chklst->id);
-$selectedMonitors1 = $item->getMonitors1()->pluck('id')->toArray();
-$selectedMonitors1 = "[". join(",",$selectedMonitors1)."]";
-@endphp
 <div class="px-4 flex justify-center ">
     <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
-        <x-renderer.heading level=4 xalign="center">
-            {!! $bigTitle !!}
-        </x-renderer.heading>
-        @if($project)
-            <span title="Project #{{$project->id}}">{{$project->name}}</span>
-            <i class="fa-solid fa-chevrons-right"></i>
-            <span title="Sub-project #{{$subProject->id}}">{{$subProject->name}}</span>
-            <i class="fa-solid fa-chevrons-right"></i>
-            <a href="{{$href}}" class="text-blue-500" title="Checklist ID: #{{$chklst->id}}
-Template: {{$tmpl->name}} (#{{$tmpl->id}})
-ProdRouting: {{$prodRouting->name}} (#{{$prodRouting->id}})
-ProdOrder: {{$prodOrder->name}} (#{{$prodOrder->id}})">{{$chklst->name}}</a>
-        @endif
+        {{-- <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} /> --}}
+        {{-- <x-controls.insp-chklst.header-check-sheet :item="$item" :chklst="$chklst" :project="$project" :subProject="$subProject"/> --}}
         <hr/>
         <x-renderer.heading level=5>
             <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{$item->name}}</span>
         </x-renderer.heading>
-
-        @foreach($lines as $rowIndex => $line)
-            <x-controls.insp-chklst.check-point :line="$line" table01Name="table01" :rowIndex="$rowIndex" />
+        @php
+            $typeLine = str_replace('_shts','',$type);
+            $idName = $typeLine.'_id';
+            $value = $item->$idName;
+            $attachmentIds = $lines->pluck('id');
+            $lineIds = $lines->pluck('id');
+            // dump($lineIds);
+            
+            $groupedLines = $lines->groupBy($groupColumn);
+            // dump($groupedLines);
+        @endphp
+        @foreach($groupedLines as $groupId => $lines)
+            <x-renderer.card tooltip="#{{$groupId}}" titleClass="text-lg" title="{{$groupNames[$groupId]}}">
+            @foreach($lines as $rowIndex => $line)
+                <x-controls.insp-chklst.check-point :line="$line" :attachmentIds="$attachmentIds" table01Name="table01" :rowIndex="$rowIndex" type="{{$typeLine}}" />
+            @endforeach
+            </x-renderer.card>
         @endforeach
-
-        <x-renderer.card title="Nominated Third Party:">
-            <x-controls.has-data-source.dropdown2 type={{$type}} name='getMonitors1()' :selected="$selectedMonitors1" multiple={{true}}  />
-        </x-renderer.card>
-
-        <x-controls.signature.signature-group2 
-                title="Third Party Sign Off"
-                category="signature_qaqc_chklst_3rd_party" 
-                signableType='qaqc_insp_chklst_shts'
-                :type="$type" 
-                :item="$item"
-                />
-        <input type="hidden" name="tableNames[table01]" value="qaqc_insp_chklst_lines">
-
+        @php
+            $propGetMonitors1 = $props['_getMonitors1()'] ?? [];
+            $propSignature = $props['_getSignature'] ?? [];
+            $hasMonitors = $propGetMonitors1['hidden_edit'] ?? null;
+            $hasSignature = $propSignature['hidden_edit'] ?? null;
+        @endphp
+        @if($hasMonitors)
+            <x-renderer.card title="Nominated Third Party:">
+                @php
+                    $selectedMonitors1 = $item->getMonitors1()->pluck('id')->toArray();
+                    $selectedMonitors1 = "[". join(",",$selectedMonitors1)."]";
+                @endphp
+                <x-controls.has-data-source.dropdown2 type={{$type}} name='getMonitors1()' :selected="$selectedMonitors1" multiple={{true}}  />
+            </x-renderer.card>
+        @endif
+        @if($hasSignature)
+            <x-controls.signature.signature-group2 
+            title="Third Party Sign Off"
+            category="signature_qaqc_chklst_3rd_party" 
+            signableType='{{$type}}'
+            :type="$type" 
+            :item="$item"
+            />
+        @endif
+        <input type="hidden" name="tableNames[table01]" value="{{$typeLine}}_lines">
         {{-- Those are for main body, not the table --}}
         <input type="hidden" name="name" value="{{$item->name}}">
-        <input type="hidden" name="qaqc_insp_chklst_id" value="{{$item->qaqc_insp_chklst_id}}">
+        <input type="hidden" name="{{$idName}}" value="{{$value}}">
         {{-- status id is for change status submit button --}}
         <input type="hidden" name="status" id='status' value="{{$status}}"> 
         {{-- <input type="hidden" name="id" value="{{$item->id}}"> --}}

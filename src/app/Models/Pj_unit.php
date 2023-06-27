@@ -12,7 +12,7 @@ class Pj_unit extends ModelExtended
     protected $table = 'pj_units';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         'getPjSellType' => ['belongsTo', Term::class, 'pj_sell_type_id'],
 
         "getPjModules" => ['hasMany', Pj_module::class, "pj_unit_id"],
@@ -20,12 +20,12 @@ class Pj_unit extends ModelExtended
 
     public function getPjSellType()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getPjModules()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

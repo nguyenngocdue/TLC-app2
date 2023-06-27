@@ -11,18 +11,18 @@ class Logger extends ModelExtended
     protected $table = 'loggers';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getUser" => ['belongsTo', User::class, 'user_id'],
         "loggable" => ['morphTo', Logger::class, 'loggable_type', 'loggable_id'],
     ];
     public function getUser()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function loggable()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
 }
