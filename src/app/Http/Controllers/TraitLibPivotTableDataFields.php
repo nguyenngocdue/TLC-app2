@@ -69,7 +69,6 @@ trait TraitLibPivotTableDataFields
         $dataAggregations = ReportPivot::combineArrays($dataFields, $lib['data_aggregations']);
 
         $sortBy = $lib['sort_by'];
-        // dd($lib);
-        return [$rowFields, $bidingRowFields, $filters, $columnFields, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy];
+        return [$rowFields, $bidingRowFields, $filters, $columnFields, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields];
     }
 }

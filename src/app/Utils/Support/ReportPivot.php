@@ -2,16 +2,17 @@
 
 namespace App\Utils\Support;
 
+use App\Http\Controllers\Workflow\LibPivotTables;
 use Illuminate\Support\Str;
 use DateTime;
 use Exception;
 
 class ReportPivot
 {
-    private static function transferValueOfKeys($data, $columnFields)
+    private static function transferValueOfKeys($data, $columnFields, $valueIndexFields)
     {
-        // dd($columnFields);
-        $newArray = array_map(function ($item) use ($columnFields) {
+        // dd($columnFields, $data);
+        $newArray = array_map(function ($item) use ($columnFields, $valueIndexFields) {
             $dateItems = [];
             foreach ($columnFields as $value) {
                 if (!$value['fieldIndex'] || !$value['valueIndexField']) continue;
@@ -24,13 +25,16 @@ class ReportPivot
                         case 'date':
                             $reversedDate = $date->format('d-m-y');
                             $_strDate = str_replace('-', '_', $reversedDate) . '_' . $value['fieldIndex'];
-                            // $item[$_strDate] = $item[$value['valueIndexField']];
                             $dateItems[$_strDate] =  $item[$value['valueIndexField']];
-
                             break;
                         default:
                             $key = str_replace(' ', '_', strtolower($item[$value['fieldIndex']]));
-                            $dateItems[$value['fieldIndex'] . '_' . $key] =  $item[$value['valueIndexField']];
+                            $array = [];
+                            foreach ($valueIndexFields as $field) {
+                                if(!$field) continue;
+                                $array[$field] = $item[$field];
+                            }
+                            $dateItems[$value['fieldIndex'] . '_' . $key] = $array;
                             break;
                     }
                 } catch (Exception $e) {
@@ -39,7 +43,10 @@ class ReportPivot
             }
             return $dateItems;
         }, $data);
+        // $newArray = self::sumItemsInArray01($newArray);
         $newArray = self::sumItemsInArray($newArray);
+        $newArray = self::concatKeyAndValueOfArray($newArray);
+        // dd($newArray);
         return $newArray;
     }
     public static function getLastArray($data)
@@ -101,7 +108,7 @@ class ReportPivot
 
         return $combined_array;
     }
-    private static function sumItemsInArray($newArray)
+    private static function sumItemsInArray01($newArray)
     {
         $data = [];
         foreach ($newArray as $item) {
@@ -115,6 +122,51 @@ class ReportPivot
         }
         return $data;
     }
+
+
+    private static function sumArrays($array1, $array2)
+    {
+        $result = [];
+        foreach ($array1 as $key => $value) {
+            if (isset($array2[$key])) {
+                $result[$key] = $value + $array2[$key];
+            }
+        }
+        return $result;
+    }
+
+    private static function sumItemsInArray($newArray)
+    {
+        $data = [];
+        // dump($newArray);
+        foreach ($newArray as $item) {
+            foreach ($item as $key => $value) {
+                // dd($key);
+                if (isset($data[$key])) {
+                    $data[$key] = self::sumArrays($data[$key], $value);
+                } else {
+                    // dd($value);
+                    $data[$key] = $value;
+                }
+            }
+        }
+        // dd($data);
+        return $data;
+    }
+
+    private static function concatKeyAndValueOfArray($newArray)
+    {
+        $data = [];
+        foreach ($newArray as $k1 =>  $item) {
+            if (!is_array($item))  return $newArray;
+            foreach ($item as $k2 => $value) {
+                $data[$k1 . '_' . $k2] = $value;
+            }
+        }
+        return $data;
+    }
+
+
     public static function reduceDataByFilterColumn($linesData, $conditions)
     {
         $conditions = Report::dataWithoutNull($conditions);
@@ -152,19 +204,19 @@ class ReportPivot
         return $dataOutput;
     }
 
-    public static function transferData($dataSource, $columnFields)
+    public static function transferData($dataSource, $columnFields, $valueIndexFields)
     {
         $data = array_map(
             fn ($items) => array_map(
                 fn ($array) =>
-                self::transferValueOfKeys($array, $columnFields),
+                self::transferValueOfKeys($array, $columnFields, $valueIndexFields),
                 $items
             ),
             $dataSource
         );
         return $data;
     }
-    
+
     public static function isSaturdayOrSunday($dateString)
     {
         $date = DateTime::createFromFormat("d/m/Y", $dateString);
@@ -174,7 +226,8 @@ class ReportPivot
         if ($dayOfWeek >= 6) return true;
         return false;
     }
-    public static function findPosition($string, $searchStr, $positionNumber) {
+    public static function findPosition($string, $searchStr, $positionNumber)
+    {
         $position = 0;
         $count = 0;
         while (($position = strpos($string, $searchStr, $position))) {
@@ -186,5 +239,13 @@ class ReportPivot
         }
         return -1;
     }
-
+    public static function isStringInItemsOfArray($data, $value){
+        foreach ($data as $field) {
+            if(!$field) continue;
+            if (str_contains($value, $field)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

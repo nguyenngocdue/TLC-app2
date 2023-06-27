@@ -166,7 +166,7 @@ class Report
         }
         if ($reverse) return array_slice($array, 0, $idx + 1);
         $data = array_slice($array, $idx + 1, count($array) - $idx);
-        sort($data);
+        // sort($data);
         return $data;
     }
 

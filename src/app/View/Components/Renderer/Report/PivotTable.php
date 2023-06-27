@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\Report;
 
 use App\Http\Controllers\TraitLibPivotTableDataFields;
 use App\Http\Controllers\Workflow\LibPivotTables;
+use App\Utils\Support\Report;
 use App\Utils\Support\ReportPivot;
 use App\Utils\Support\ReportPivotDataFields;
 use Exception;
@@ -55,7 +56,7 @@ class PivotTable extends Component
 
     private function makeDataRenderer($primaryData)
     {
-        [$rowFieldsHasAttr,, $filters, $columnFields,, $dataAggregations,,] =  $this->getDataFields();
+        [$rowFieldsHasAttr,, $filters, $columnFields,, $dataAggregations,,,$valueIndexFields] =  $this->getDataFields();
         // dd($bidingRowFields);
         $valueFilters = array_combine($filters, [[1, 4], [7, 8]]);
         // Step 1: reduce lines from Filters array
@@ -71,19 +72,19 @@ class PivotTable extends Component
 
         // Step 3: transfer data from lines to columns by
         // Column_Fields and Value_Index_Fields array 
-        $transferredData = ReportPivot::transferData($processedData, $columnFields);
+        $transferredData = ReportPivot::transferData($processedData, $columnFields, $valueIndexFields);
         // dd($transferredData);
 
         //Step 4: Calculate data from Data Fields columns
         //The aggregated data are at the end of the items
         $calculatedData = array_map(fn ($items) => ReportPivotDataFields::executeOperations($dataAggregations, $items), $processedData);
-
-        $dataOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData);
-        // dd($dataOutput);
+        // dd($calculatedData);
+        $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData);
+        // dd($processedData, $calculatedData, $dataIdsOutput);
 
         $tables = $this->getDataFromTables();
-        $dataOutput = $this->attachInfoToDataSource($tables, $dataOutput);
-        // dd($dataOutput, $tables);
+        $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput);
+        // dd($dataIdsOutput[0], $dataOutput[0]);
         return $dataOutput;
     }
 
@@ -91,7 +92,7 @@ class PivotTable extends Component
     {
 
         [$rowFieldsHasAttr, $bindingFields,,, $bidingColumnFields,, $dataIndex,] =  $this->getDataFields();
-        // dump($rowFieldsHasAttr, $bindingFields);
+        // dump($processedData, $bindingFields);
         foreach ($processedData as &$items) {
             foreach ($items as $key => $id) {
                 if (in_array($key, $rowFieldsHasAttr)) {
@@ -106,15 +107,16 @@ class PivotTable extends Component
                         // dump($e->getMessage());
                     }
                 } else {
-                    $lastUnderscoreIndex = strrpos($key, '_');
-                    $id = substr($key, $lastUnderscoreIndex + 1);
+                    $lastUnderscoreIndex = strrpos($key, '_id_');
+                    $id = substr($key, $lastUnderscoreIndex + 4, 2);
                     if (is_numeric($id)) {
-                        $attr = substr($key, 0, $lastUnderscoreIndex);
+                        // dump($key, $id);
+                        $attr = substr($key, 0, $lastUnderscoreIndex + 3);
                         $infoAttr = $bidingColumnFields[$attr];
                         $tableName = $infoAttr['table_name'];
                         $attributeName = $infoAttr['attribute_name'];
-                        $n = $tables[$tableName][$id]->$attributeName;
-                        $items[$n] = $items[$key];
+                        $name = $tables[$tableName][$id]->$attributeName;
+                        $items['top_title_column'][$key] = $name;
                     }
                 }
             }
@@ -187,6 +189,7 @@ class PivotTable extends Component
     {
         $primaryData = $this->dataSource;
         $dataOutput = $this->makeDataRenderer($primaryData);
+        // dump($dataOutput);
         [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput);
         $dataOutput = $this->sortLinesData($dataOutput);
         $dataOutput = $this->changeValueData($dataOutput);
