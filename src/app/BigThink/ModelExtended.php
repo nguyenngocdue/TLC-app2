@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use App\Utils\Support\Json\SuperProps;
+use Database\Seeders\FieldSeeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -125,5 +126,29 @@ abstract class ModelExtended extends Model
     {
         // if(!isset(static::getCollection()[$id])) 
         return static::getCollection()[$id] ?? null;
+    }
+    private static $singletonMorphMany = null;
+
+    public static function getCollectionMorphMany($ids, $fieldNameCategory, $modelName, $keyType, $keyId)
+    {
+        if (!isset(static::$singletonMorphMany)) {
+            static::$singletonMorphMany = $modelName::query()->where($keyType, static::class)->whereIn($keyId, $ids)
+                ->where('category', FieldSeeder::getIdFromFieldName($fieldNameCategory))->get()->groupBy($keyId);
+        }
+    }
+    /**
+     * Undocumented function
+     *
+     * @param array $ids
+     * @param string $fieldNameCategory Field name category same eloquent params function
+     * @return mixed|array value MorphMany
+     */
+    public function getMorphManyByIds($ids = [], $fieldNameCategory)
+    {
+        if ($fieldNameCategory) {
+            $eloquentParams = $this->eloquentParams[$fieldNameCategory] ?? [];
+            static::getCollectionMorphMany($ids, $fieldNameCategory, $eloquentParams[1], $eloquentParams[3], $eloquentParams[4]);
+        }
+        return static::$singletonMorphMany[$this->id] ?? [];
     }
 }
