@@ -2,6 +2,8 @@
 
 namespace App\View\Components\Controls\InspChklst;
 
+use App\Models\Hse_insp_group;
+use App\Models\Qaqc_insp_group;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
@@ -25,6 +27,28 @@ class ItemRenderCheckSheet extends Component
 
     }
 
+    private function getGroups($lines)
+    {
+        $groupColumn = '';
+        $groupNames = [];
+        switch ($this->type) {
+            case 'qaqc_insp_chklst_shts':
+                $groupColumn =  'qaqc_insp_group_id';
+                $groupIds = $lines->pluck($groupColumn)->unique();
+                $groupNames = Qaqc_insp_group::whereIn('id', $groupIds)->get()->pluck('name', 'id');
+                break;
+            case 'hse_insp_chklst_shts':
+                $groupColumn = 'hse_insp_group_id';
+                $groupIds = $lines->pluck($groupColumn)->unique();
+                $groupNames = Hse_insp_group::whereIn('id', $groupIds)->get()->pluck('name', 'id');
+                break;
+            default:
+                dump("Error: Unknown group column of type $this->type");
+                break;
+        }
+        return [$groupColumn, $groupNames];
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -40,6 +64,8 @@ class ItemRenderCheckSheet extends Component
         $project = is_null($subProject) ? null : $subProject->getProject;
         $status = $this->item->status ? $this->item->status : 'new';
         $props = SuperProps::getFor($this->type)['props'] ?? [];
+        [$groupColumn, $groupNames] = $this->getGroups($lines);
+        // dump($groupNames);
         return view(
             'components.controls.insp-chklst.item-render-check-sheet',
             [
@@ -55,6 +81,8 @@ class ItemRenderCheckSheet extends Component
                 'status' => $status,
                 'type' => $this->type,
                 'props' => $props,
+                'groupColumn' => $groupColumn,
+                'groupNames' => $groupNames,
             ]
         );
     }

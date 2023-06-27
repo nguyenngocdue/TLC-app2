@@ -44,6 +44,11 @@
         "column_name": "due_date",
         "new": "true"
     },
+    "_getTypesOfChangeOfEco()": {
+        "name": "_getTypesOfChangeOfEco()",
+        "column_name": "getTypesOfChangeOfEco()",
+        "new": "true"
+    },
     "_getEffectivenessLines": {
         "name": "_getEffectivenessLines",
         "column_name": "getEffectivenessLines",

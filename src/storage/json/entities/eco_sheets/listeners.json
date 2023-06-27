@@ -167,6 +167,20 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_getTypesOfChangeOfEco()": {
+        "name": "_getTypesOfChangeOfEco()",
+        "column_name": "getTypesOfChangeOfEco()",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_getEffectivenessLines": {
         "name": "_getEffectivenessLines",
         "column_name": "getEffectivenessLines",
@@ -293,20 +307,6 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getSignatures1": {
-        "name": "_getSignatures1",
-        "column_name": "getSignatures1",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -349,9 +349,37 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getSignatures2": {
-        "name": "_getSignatures2",
-        "column_name": "getSignatures2",
+    "_signature_eco_peers": {
+        "name": "_signature_eco_peers",
+        "column_name": "signature_eco_peers",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_getMonitors2()": {
+        "name": "_getMonitors2()",
+        "column_name": "getMonitors2()",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_signature_eco_managers": {
+        "name": "_signature_eco_managers",
+        "column_name": "signature_eco_managers",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -377,9 +405,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors3()": {
+        "name": "_getMonitors3()",
+        "column_name": "getMonitors3()",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
