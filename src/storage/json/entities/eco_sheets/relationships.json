@@ -167,10 +167,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getSubProject()": {
-        "name": "_getSubProject()",
+    "_getSubProjectsOfEco()": {
+        "name": "_getSubProjectsOfEco()",
         "relationship": "getCheckedByField",
-        "control_name": "getSubProject()",
+        "control_name": "getSubProjectsOfEco()",
         "renderer_view_all": "agg_sum",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

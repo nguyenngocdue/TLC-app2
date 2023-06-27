@@ -205,35 +205,45 @@ class DateTimeConcern
     //     dump(DateTimeConcern::getMonthBeginAndEndDate0('2024-01-01'));
     public static function getMonthBeginAndEndDate0($date)
     {
-        // $year0 = substr($date, 0, 4);
-        // $month0 = substr($date, 5, 2);
-        // $date0 = substr($date, 8, 2);
+        $year0 = substr($date, 0, 4);
+        $month0 = substr($date, 5, 2);
+        $date0 = substr($date, 8, 2);
 
-        // $previousMonth0 = (($month0 * 1 - 1) % 12);
-        // $previousMonth0 = $previousMonth0 == 0 ? 12 : $previousMonth0;
-        // $nextMonth0 = ($month0 * 1 + 1) % 12;
+        $previousMonth0 = (($month0 * 1 - 1) % 12);
+        $previousMonth0 = $previousMonth0 == 0 ? 12 : $previousMonth0;
+        $nextMonth0 = ($month0 * 1 + 1) % 12;
 
-        // $previousMonth0 = str_pad($previousMonth0, 2, 0, STR_PAD_LEFT);
-        // $nextMonth0 = str_pad($nextMonth0, 2, 0, STR_PAD_LEFT);
+        $previousMonth0 = str_pad($previousMonth0, 2, 0, STR_PAD_LEFT);
+        $nextMonth0 = str_pad($nextMonth0, 2, 0, STR_PAD_LEFT);
 
-        // $starting = config()->get('hr.month_starting_date', 26);
-        // $ending = config()->get('hr.month_ending_date', 25);
+        $starting = config()->get('hr.month_starting_date', 26);
+        $ending = config()->get('hr.month_ending_date', 25);
 
-        // if ($date0 <= $ending) {
-        //     // echo "Smaller than ending, return previous month";
-        //     $previousYear0 = (1 * $month0 == 1) ? $year0 - 1 : $year0;
-        //     $begin = "$previousYear0-$previousMonth0-$starting";
-        //     $end = "$year0-$month0-$ending";
-        // } else {
-        //     // echo "Greater than ending, return next month";
-        //     $nextYear0 = ($month0 == 12) ? $year0 + 1 : $year0;
-        //     $begin = "$year0-$month0-$starting";
-        //     $end = "$nextYear0-$nextMonth0-$ending";
-        // }
+        if ($date0 <= $ending) {
+            // echo "Smaller than ending, return previous month";
+            $previousYear0 = (1 * $month0 == 1) ? $year0 - 1 : $year0;
+            $begin = "$previousYear0-$previousMonth0-$starting";
+            $end = "$year0-$month0-$ending";
+        } else {
+            // echo "Greater than ending, return next month";
+            $nextYear0 = ($month0 == 12) ? $year0 + 1 : $year0;
+            $begin = "$year0-$month0-$starting";
+            $end = "$nextYear0-$nextMonth0-$ending";
+        }
         // // dump("$year0 - $month0 - $date0        $begin - $end");
-        $previousMonth = Carbon::createFromDate($date)->subMonth()->format(Constant::FORMAT_DATE_MYSQL);
-        $begin = substr($previousMonth, 0, 8) . config("hr.month_starting_date");
-        $end = substr($date, 0, 8) . config("hr.month_ending_date");
+        // $date00 = substr($date, 8, 2);
+        // $ending_date = config("hr.month_ending_date");
+        // $starting_date = config("hr.month_starting_date");
+
+        // if ($date00 <= $ending_date) {
+        //     $previousMonth = Carbon::createFromDate($date)->subMonth()->format(Constant::FORMAT_DATE_MYSQL);
+        //     $begin = substr($previousMonth, 0, 8) . $starting_date;
+        //     $end = substr($date, 0, 8) . $ending_date;
+        // } else {
+        //     $nextMonth = Carbon::createFromDate($date)->addMonth()->format(Constant::FORMAT_DATE_MYSQL);
+        //     $begin = substr($date, 0, 8) . $starting_date;
+        //     $end = substr($nextMonth, 0, 8) . $ending_date;
+        // }
         return [$begin, $end];
     }
 

@@ -113,11 +113,11 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_getSubProject()": {
-        "name": "_getSubProject()",
-        "column_name": "getSubProject()",
+    "_getSubProjectsOfEco()": {
+        "name": "_getSubProjectsOfEco()",
+        "column_name": "getSubProjectsOfEco()",
         "column_type": "oracy_prop",
-        "label": "Sub Project",
+        "label": "Sub Projects",
         "control": "dropdown_multi",
         "align": "",
         "col_span": "6",

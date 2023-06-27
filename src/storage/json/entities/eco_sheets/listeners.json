@@ -69,12 +69,12 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getSubProject()": {
-        "name": "_getSubProject()",
-        "column_name": "getSubProject()",
+    "_getSubProjectsOfEco()": {
+        "name": "_getSubProjectsOfEco()",
+        "column_name": "getSubProjectsOfEco()",
         "listen_action": "reduce",
         "triggers": "project_id",
-        "listen_to_fields": "getSubProject()",
+        "listen_to_fields": "getSubProjectsOfEco()",
         "listen_to_attrs": "project_id",
         "attrs_to_compare": "id",
         "expression": "",
