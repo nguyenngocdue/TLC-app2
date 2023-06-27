@@ -159,7 +159,7 @@
         "name": "_time_keeping_type",
         "column_name": "time_keeping_type",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -602,6 +602,18 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getTshtTeams()": {
+        "name": "_getTshtTeams()",
+        "column_name": "getTshtTeams()",
         "label": "",
         "validation": "",
         "validation_regex": "",
