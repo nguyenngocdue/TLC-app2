@@ -192,7 +192,7 @@
         "renderer_edit_param": "",
         "control": "dropdown_multi",
         "filter_columns": "field_id",
-        "filter_values": "160",
+        "filter_values": "161",
         "radio_checkbox_colspan": ""
     },
     "_getEffectivenessLines": {
