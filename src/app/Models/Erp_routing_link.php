@@ -10,20 +10,20 @@ class Erp_routing_link extends ModelExtended
     protected $table = "erp_routing_links";
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
         "getProdRoutingDetails" => ["hasMany", Prod_routing_detail::class, "erp_routing_link_id"],
     ];
 
     public function getProdRoutingDetails()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getProdDiscipline()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

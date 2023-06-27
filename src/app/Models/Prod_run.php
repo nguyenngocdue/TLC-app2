@@ -12,20 +12,20 @@ class Prod_run extends ModelExtended
     public $nameless = true;
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getProdSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],
         "getUsers" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_id', 'user_id'],
     ];
 
     public function getUsers()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
     }
 
     public function getProdSequence()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 

@@ -41,9 +41,8 @@ class ManageProps extends Manage_Parent
 
     private function getRenderableRelationships()
     {
-        $model = App::make($this->typeModel);
-        $eloquentParams = $model->eloquentParams;
-        $oracyParams = $model->oracyParams;
+        $eloquentParams = $this->typeModel::$eloquentParams;
+        $oracyParams = $this->typeModel::$oracyParams;
         $columnParams = $eloquentParams + $oracyParams;
         // Log::info($columnParams);
 
@@ -72,9 +71,7 @@ class ManageProps extends Manage_Parent
     {
         $relationships = Relationships::getAllOf($this->type);
         // dump($relationships);
-        $dummyEntity = new $this->typeModel();
-        $eloquentParams = $dummyEntity->eloquentParams;
-        // dump($dummyEntity);
+        $eloquentParams = $this->typeModel::$eloquentParams;
         $result = [];
         foreach ($relationships as $name => $relationship) {
             if ($relationship['relationship'] == 'morphTo') {

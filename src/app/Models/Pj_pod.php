@@ -12,7 +12,7 @@ class Pj_pod extends ModelExtended
     protected $table = 'pj_pods';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         'getPjModule' => ['belongsTo', Pj_module::class, 'pj_module_id'],
         'getPjPodType' => ['belongsTo', Term::class, 'pj_pod_type_id'],
         'getPjShipment' => ['belongsTo', Pj_shipment::class, 'pj_shipment_id'],
@@ -22,22 +22,22 @@ class Pj_pod extends ModelExtended
 
     public function getPjModule()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getPjPodType()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getProdOrders()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
     public function getPjShipment()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

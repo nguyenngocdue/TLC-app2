@@ -10,15 +10,15 @@ class Hse_insp_tmpl_sht extends ModelExtended
     protected $table = "hse_insp_tmpl_shts";
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getLines" => ["hasMany", Hse_insp_tmpl_line::class, "hse_insp_tmpl_sht_id"],
     ];
 
-    public $oracyParams = [];
+    public static $oracyParams = [];
 
     public function getLines()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 

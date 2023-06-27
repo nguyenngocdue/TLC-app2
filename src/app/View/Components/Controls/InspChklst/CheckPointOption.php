@@ -35,8 +35,8 @@ class CheckPointOption extends Component
             static::$singletonControlGroup = $line->getControlGroup;
         }
         if (static::$singletonControlGroup) {
-            $eloquentParamsControlGroup = $line->eloquentParams['getControlGroup'];
-            $eloquentParamsControlValue = $line->eloquentParams['getControlValue'];
+            $eloquentParamsControlGroup = $line::$eloquentParams['getControlGroup'];
+            $eloquentParamsControlValue = $line::$eloquentParams['getControlValue'];
             $modelPath = $eloquentParamsControlValue[1];
             $keyIdModelControlValue = $eloquentParamsControlValue[2];
             $keyIdModelControlGroup = $eloquentParamsControlGroup[2];

@@ -16,7 +16,7 @@ class Hr_overtime_request_line extends ModelExtended
     protected $table = "hr_overtime_request_lines";
     public $nameless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getHrOtr" => ['belongsTo', Hr_overtime_request::class, 'hr_overtime_request_id'],
         "getUser" => ['belongsTo', User::class, 'user_id'],
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
@@ -25,25 +25,25 @@ class Hr_overtime_request_line extends ModelExtended
 
     public function getHrOtr()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getUser()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getSubProject()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getWorkMode()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 

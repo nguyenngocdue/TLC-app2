@@ -10,13 +10,13 @@ class Public_holiday extends ModelExtended
     protected $table = "public_holidays";
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
     ];
 
     public function getWorkplace()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 

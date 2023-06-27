@@ -267,7 +267,7 @@
     },
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
-        "relationship": "hasMany",
+        "relationship": "morphMany",
         "control_name": "getCorrectiveActions",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",

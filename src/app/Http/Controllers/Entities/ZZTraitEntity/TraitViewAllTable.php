@@ -155,9 +155,8 @@ trait TraitViewAllTable
     {
         // Log::info($columns);
         // Log::info($rawDataSource);
-        $model = App::make($this->typeModel);
-        $eloquentParams = $model->eloquentParams;
-        $oracyParams = $model->oracyParams;
+        $eloquentParams = $this->typeModel::$eloquentParams;
+        $oracyParams = $this->typeModel::$oracyParams;
         // Log::info($eloquentParams);
 
         $json = Relationships::getAllOf($this->type);
@@ -191,7 +190,7 @@ trait TraitViewAllTable
 
     private function attachEloquentNameIntoColumn(&$columns)
     {
-        $eloquentParams = App::make($this->typeModel)->eloquentParams;
+        $eloquentParams = $this->typeModel::$eloquentParams;
         $eloquent = [];
         foreach ($eloquentParams as $key => $eloquentParam) {
             if (in_array($eloquentParam[0], ['belongsTo'])) {

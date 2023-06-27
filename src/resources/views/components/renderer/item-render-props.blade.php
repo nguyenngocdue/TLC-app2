@@ -46,7 +46,7 @@
                             @if($control == 'relationship_renderer') 
                                 @if($action !== 'create')
                                 @php
-                                    $subModel = ($item->eloquentParams[$prop['columnName']][1]);
+                                    $subModel = ($item::$eloquentParams[$prop['columnName']][1]);
                                     $subTable = (new($subModel))->getTable();
                                     $href = "/dashboard/$subTable";
                                 @endphp

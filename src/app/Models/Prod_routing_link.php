@@ -11,7 +11,7 @@ class Prod_routing_link extends ModelExtended
     protected $table = 'prod_routing_links';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
 
         "getProdSequences" => ['hasMany', Prod_sequence::class, 'prod_routing_link_id'],
@@ -21,19 +21,19 @@ class Prod_routing_link extends ModelExtended
 
     public function getProdRoutings()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('target_hours', 'target_man_hours');
     }
 
     public function getProdSequences()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getDiscipline()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 

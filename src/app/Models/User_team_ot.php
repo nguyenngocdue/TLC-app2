@@ -10,15 +10,15 @@ class User_team_ot extends ModelExtended
 
     protected $table = 'user_team_ots';
 
-    public $eloquentParams = [];
+    public static $eloquentParams = [];
 
-    public $oracyParams = [
+    public static $oracyParams = [
         "getOtMembers()" => ["getCheckedByField", User::class],
     ];
 
     public function getOtMembers()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

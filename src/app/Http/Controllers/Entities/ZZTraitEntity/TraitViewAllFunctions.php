@@ -82,9 +82,8 @@ trait TraitViewAllFunctions
         $model = $this->typeModel;
         $search = request('search');
         $instance = App::make($model);
-        $eloquentParams = $instance->eloquentParams;
+        $eloquentParams = $model::$eloquentParams;
         $eagerLoadParams = $this->getEagerLoadParams($eloquentParams);
-
         $relation = $instance->search($search);
         if (!CurrentUser::isAdmin()) {
             $isUseTree = $this->isUseTree($this->type);

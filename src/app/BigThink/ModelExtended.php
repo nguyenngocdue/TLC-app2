@@ -33,8 +33,8 @@ abstract class ModelExtended extends Model
     use TraitModelExtended;
     use SoftDeletesWithDeletedBy;
 
-    public $eloquentParams = [];
-    public $oracyParams = [];
+    public static $eloquentParams = [];
+    public static $oracyParams = [];
     protected static $statusless = false;
 
     public static function isStatusless()
@@ -45,8 +45,8 @@ abstract class ModelExtended extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->eloquentParams['getOwner'] =  ["belongsTo", User::class, "owner_id"];
-        $this->eloquentParams['getDeletedBy'] =  ["belongsTo", User::class, "deleted_by"];
+        static::$eloquentParams['getOwner'] =  ["belongsTo", User::class, "owner_id"];
+        static::$eloquentParams['getDeletedBy'] =  ["belongsTo", User::class, "deleted_by"];
     }
 
     public function toSearchableArray()
@@ -61,13 +61,13 @@ abstract class ModelExtended extends Model
 
     function getOwner()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     function getDeletedBy()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
@@ -146,7 +146,7 @@ abstract class ModelExtended extends Model
     public function getMorphManyByIds($ids = [], $fieldNameCategory)
     {
         if ($fieldNameCategory) {
-            $eloquentParams = $this->eloquentParams[$fieldNameCategory] ?? [];
+            $eloquentParams = static::$eloquentParams[$fieldNameCategory] ?? [];
             static::getCollectionMorphMany($ids, $fieldNameCategory, $eloquentParams[1], $eloquentParams[3], $eloquentParams[4]);
         }
         return static::$singletonMorphMany[$this->id] ?? [];

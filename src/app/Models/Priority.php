@@ -11,13 +11,13 @@ class Priority extends ModelExtended
     protected $table = 'priorities';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getField" => ['belongsTo', Field::class, 'field_id'],
     ];
 
     public function getField()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

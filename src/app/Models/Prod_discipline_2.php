@@ -11,13 +11,13 @@ class Prod_discipline_2 extends ModelExtended
     protected $table = 'prod_discipline_2s';
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getDiscipline1" => ['belongsTo', Prod_discipline_1::class, 'prod_discipline_1_id'],
     ];
 
     public function getDiscipline1()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 }

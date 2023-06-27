@@ -23,7 +23,11 @@
                 <form action="{{ route('setroles.store2') }}" method="POST">
                     @csrf
                     @foreach ($lastRoleNames as $value)
-                    <x-renderer.card title="{{ $value }}">
+                    @php
+                        $invalidEntity = !in_array($value, $entities);
+                        $classBg = $invalidEntity ? 'bg-red-200 border p-4' : 'bg-white border p-4';
+                    @endphp
+                    <x-renderer.card title="{{ $value }}" class="{{$classBg}}">
                         {{-- <span class="my-4 rounded-full bg-green-100 px-2 py-1 text-base font-medium leading-tight text-green-700 dark:bg-green-700 dark:text-green-100"></span> --}}
                         <div class="grid grid-cols-3">
                             @foreach ($roles as $role)

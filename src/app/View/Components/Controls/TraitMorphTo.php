@@ -12,8 +12,7 @@ trait TraitMorphTo
     {
         // $result = [];
         $relationships = Relationships::getAllOf($this->type);
-        $dummyInstance = new (Str::modelPathFrom($this->type));
-        $elq = $dummyInstance->eloquentParams;
+        $elq = Str::modelPathFrom($this->type)::$eloquentParams;
 
         foreach ($relationships as $relationship) {
             if ($relationship['relationship'] === 'morphTo') {
@@ -32,9 +31,7 @@ trait TraitMorphTo
         $result = [];
         foreach ($allEntities as $entity) {
             $modelPath = Str::modelPathFrom($entity);
-            $dummy = new ($modelPath);
-            // dump($modelPath);
-            foreach ($dummy->eloquentParams as $key => $params) {
+            foreach ($$modelPath::$eloquentParams as $key => $params) {
                 if ($params[0] === 'morphMany' && $params[1] == $myModelPath) {
                     $result[$entity] = [
                         'id' => $modelPath,

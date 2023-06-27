@@ -15,7 +15,7 @@ class Hr_timesheet_officer extends ModelExtended
         return "[" . $week . "] - " . User::findFromCache($this->owner_id)->name;
     }
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],
         'getUserTeam' => ['belongsTo', User_team_ot::class, 'team_id'],
         'getHrTsLines' => ['morphMany', Hr_timesheet_line::class, 'timesheetable', 'timesheetable_type', 'timesheetable_id'],
@@ -25,25 +25,25 @@ class Hr_timesheet_officer extends ModelExtended
 
     public function getUserTeam()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getAssignee1()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getHrTsLines()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function comment_rejected_reason()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }

@@ -13,20 +13,20 @@ class Eco_effectiveness_line extends ModelExtended
     protected static $statusless = true;
     public $nameless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getEcoSheet" => ['belongsTo', Eco_sheet::class, 'eco_sheet_id'],
         "getChangeEffectiveness" => ['belongsTo', Term::class, 'change_effectiveness_id']
     ];
 
-    public $oracyParams = [];
+    public static $oracyParams = [];
     public function getEcoSheet()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getChangeEffectiveness()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 

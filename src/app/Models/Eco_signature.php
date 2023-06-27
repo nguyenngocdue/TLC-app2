@@ -12,12 +12,12 @@ class Eco_signature extends ModelExtended
     public $nameless = true;
     protected static $statusless = true;
 
-    public $eloquentParams = [
+    public static $eloquentParams = [
         "getSheet" => ["belongsTo", Eco_sheet::class, "eco_sheet_id"],
     ];
     public function getSheet()
     {
-        $p = $this->eloquentParams[__FUNCTION__];
+        $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
 

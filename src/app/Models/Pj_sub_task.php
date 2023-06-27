@@ -10,13 +10,13 @@ class Pj_sub_task extends ModelExtended
 
     protected static $statusless = true;
 
-    public $oracyParams = [
+    public static $oracyParams = [
         "getParentTasks()" => ["getCheckedByField", Pj_task::class],
     ];
 
     public function getParentTasks()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

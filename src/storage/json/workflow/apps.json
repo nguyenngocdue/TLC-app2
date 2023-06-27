@@ -404,7 +404,7 @@
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "checklist-sheet-renderer",
-        "show_renderer": "props-renderer",
+        "show_renderer": "checklist-sheet-renderer",
         "icon": null
     },
     "hse_insp_control_group": {
