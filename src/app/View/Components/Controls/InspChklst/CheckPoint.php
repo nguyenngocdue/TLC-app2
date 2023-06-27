@@ -33,13 +33,8 @@ class CheckPoint extends Component
      */
     public function render()
     {
-        $line = $this->line;
-        $className = get_class($line);
-        if (!isset(static::$singletonAttachments)) {
-            static::$singletonAttachments = $this->getCollectionAttachments($className);
-        }
         $controlType = Control_type::getCollection()->pluck('name', 'id',) ?? Control_type::get()->pluck('name', 'id');
-        $attachments = static::$singletonAttachments[$line->id] ?? [];
+        $attachments = $this->line->getMorphManyById($this->attachmentIds, 'insp_photos');
         return view('components.controls.insp-chklst.check-point', [
             'line' => $this->line,
             'controlType' => $controlType,
@@ -49,10 +44,5 @@ class CheckPoint extends Component
             'debug' => $this->debug,
             'type' => $this->type,
         ]);
-    }
-    private function getCollectionAttachments($className)
-    {
-        return DB::table('attachments')->where('object_type', $className)->whereIn('object_id', $this->attachmentIds)
-            ->where('category', FieldSeeder::getIdFromFieldName('insp_photos'))->get()->groupBy('object_id');
     }
 }

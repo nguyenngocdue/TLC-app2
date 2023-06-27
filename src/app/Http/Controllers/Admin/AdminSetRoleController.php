@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\Role_set;
+use App\Utils\Support\Entities;
 use Illuminate\Http\Request;
 
 class AdminSetRoleController extends Controller
@@ -22,8 +23,16 @@ class AdminSetRoleController extends Controller
     {
         $roleSetSelected = Role_set::first();
         $selected = $roleSetSelected->id;
-        [$roles, $lastRoleNames, $roleSets, $roleUsing] = $this->getRoleSetRole($roleSetSelected);
-        return view('admin.renderset.roles.index')->with(compact('roles', 'selected', 'lastRoleNames', 'roleSetSelected', 'roleSets', 'roleUsing'));
+        [$roles, $lastRoleNames, $roleSets, $roleUsing, $entities] = $this->getRoleSetRole($roleSetSelected);
+        return view('admin.renderset.roles.index', [
+            'roles' => $roles,
+            'lastRoleNames' => $lastRoleNames,
+            'selected' => $selected,
+            'roleSetSelected' => $roleSetSelected,
+            'roleSets' => $roleSets,
+            'roleUsing' => $roleUsing,
+            'entities' => $entities
+        ]);
     }
 
     /**
@@ -46,9 +55,16 @@ class AdminSetRoleController extends Controller
     {
         $selected = $request->input('roleSet_id');
         $roleSetSelected = Role_set::findById($selected);
-        [$roles, $lastRoleNames, $roleSets, $roleUsing] = $this->getRoleSetRole($roleSetSelected);
-
-        return view('admin.renderset.roles.index')->with(compact('roles', 'lastRoleNames', 'selected', 'roleSetSelected', 'roleSets', 'roleUsing'));
+        [$roles, $lastRoleNames, $roleSets, $roleUsing, $entities] = $this->getRoleSetRole($roleSetSelected);
+        return view('admin.renderset.roles.index', [
+            'roles' => $roles,
+            'lastRoleNames' => $lastRoleNames,
+            'selected' => $selected,
+            'roleSetSelected' => $roleSetSelected,
+            'roleSets' => $roleSets,
+            'roleUsing' => $roleUsing,
+            'entities' => $entities
+        ]);
     }
 
     /**
@@ -90,8 +106,16 @@ class AdminSetRoleController extends Controller
     private function redirectBack($selected)
     {
         $roleSetSelected = Role_set::findById($selected);
-        [$roles, $lastRoleNames, $roleSets, $roleUsing] = $this->getRoleSetRole($roleSetSelected);
-        return view('admin.renderset.roles.index')->with(compact('roles', 'lastRoleNames', 'selected', 'roleSetSelected', 'roleSets', 'roleUsing'));
+        [$roles, $lastRoleNames, $roleSets, $roleUsing, $entities] = $this->getRoleSetRole($roleSetSelected);
+        return view('admin.renderset.roles.index', [
+            'roles' => $roles,
+            'lastRoleNames' => $lastRoleNames,
+            'selected' => $selected,
+            'roleSetSelected' => $roleSetSelected,
+            'roleSets' => $roleSets,
+            'roleUsing' => $roleUsing,
+            'entities' => $entities
+        ]);
     }
     /**
      * Update the specified resource in storage.
@@ -125,7 +149,10 @@ class AdminSetRoleController extends Controller
             $lastRoleName = end($arrayRoleName);
             array_push($lastRoleNames, $lastRoleName);
         }
+        $entities = array_map(function ($entity) {
+            return strtoupper($entity->getTable());
+        }, Entities::getAll());
         $lastRoleNames = array_unique($lastRoleNames);
-        return [$roles, $lastRoleNames, $roleSets, $roleUsing];
+        return [$roles, $lastRoleNames, $roleSets, $roleUsing, $entities];
     }
 }
