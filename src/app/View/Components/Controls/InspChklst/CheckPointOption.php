@@ -7,6 +7,8 @@ use Illuminate\View\Component;
 
 class CheckPointOption extends Component
 {
+    private static $singletonControlGroup = null;
+    private static $singletonOptions = null;
     /**
      * Create a new component instance.
      *
@@ -29,15 +31,19 @@ class CheckPointOption extends Component
     public function render()
     {
         $line = $this->line;
-        $controlGroup = $line->getControlGroup;
-        if ($controlGroup) {
+        if (!isset(static::$singletonControlGroup)) {
+            static::$singletonControlGroup = $line->getControlGroup;
+        }
+        if (static::$singletonControlGroup) {
             $eloquentParamsControlGroup = $line->eloquentParams['getControlGroup'];
             $eloquentParamsControlValue = $line->eloquentParams['getControlValue'];
             $modelPath = $eloquentParamsControlValue[1];
             $keyIdModelControlValue = $eloquentParamsControlValue[2];
             $keyIdModelControlGroup = $eloquentParamsControlGroup[2];
-            $options = $modelPath::where($keyIdModelControlGroup, $controlGroup->id)->get();
-            $options = $options->pluck('name', 'id',);
+            if (!isset(static::$singletonOptions)) {
+                static::$singletonOptions = $modelPath::where($keyIdModelControlGroup, static::$singletonControlGroup->id)->get();
+            }
+            $options = static::$singletonOptions->pluck('name', 'id',);
         } else {
             return "CONTROL GROUP ID IS NULL";
         }

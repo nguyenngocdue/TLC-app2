@@ -11,8 +11,11 @@
             $idName = $typeLine.'_id';
             $value = $item->$idName;
         @endphp
+        @php
+            $attachmentIds = $lines->pluck('id');
+        @endphp
         @foreach($lines as $rowIndex => $line)
-            <x-controls.insp-chklst.check-point :line="$line" table01Name="table01" :rowIndex="$rowIndex" type="{{$typeLine}}" />
+            <x-controls.insp-chklst.check-point :line="$line" :attachmentIds="$attachmentIds" table01Name="table01" :rowIndex="$rowIndex" type="{{$typeLine}}" />
         @endforeach
         @php
             $propGetMonitors1 = $props['_getMonitors1()'] ?? [];

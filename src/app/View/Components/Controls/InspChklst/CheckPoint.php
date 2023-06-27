@@ -3,10 +3,13 @@
 namespace App\View\Components\Controls\InspChklst;
 
 use App\Models\Control_type;
+use Database\Seeders\FieldSeeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class CheckPoint extends Component
 {
+    private static $singletonAttachments = null;
     /**
      * Create a new component instance.
      *
@@ -18,6 +21,7 @@ class CheckPoint extends Component
         private $table01Name,
         private $rowIndex,
         private $debug = false,
+        private $attachmentIds,
     ) {
         //
     }
@@ -29,10 +33,13 @@ class CheckPoint extends Component
      */
     public function render()
     {
-        // dump($this->line);
-        $controlType = Control_type::get()->pluck('name', 'id',);
-        $attachments = $this->line->insp_photos;
-
+        $line = $this->line;
+        $className = get_class($line);
+        if (!isset(static::$singletonAttachments)) {
+            static::$singletonAttachments = $this->getCollectionAttachments($className);
+        }
+        $controlType = Control_type::getCollection()->pluck('name', 'id',) ?? Control_type::get()->pluck('name', 'id');
+        $attachments = static::$singletonAttachments[$line->id] ?? [];
         return view('components.controls.insp-chklst.check-point', [
             'line' => $this->line,
             'controlType' => $controlType,
@@ -42,5 +49,10 @@ class CheckPoint extends Component
             'debug' => $this->debug,
             'type' => $this->type,
         ]);
+    }
+    private function getCollectionAttachments($className)
+    {
+        return DB::table('attachments')->where('object_type', $className)->whereIn('object_id', $this->attachmentIds)
+            ->where('category', FieldSeeder::getIdFromFieldName('insp_photos'))->get()->groupBy('object_id');
     }
 }
