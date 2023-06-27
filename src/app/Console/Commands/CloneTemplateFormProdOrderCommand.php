@@ -23,7 +23,7 @@ class CloneTemplateFormProdOrderCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'ndc:createAndClone 
+    protected $signature = 'ndc:cloneQaqc 
     {--ownerId= : ID of current user}
     {--prodOrderId= : ID production order }
     {--inspTmplId= : ID template Qaqc_insp_tmpls}';
