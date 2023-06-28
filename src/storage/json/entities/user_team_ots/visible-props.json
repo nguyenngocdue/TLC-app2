@@ -23,9 +23,9 @@
         "new": "true",
         "active": "true"
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
+    "_def_assignee": {
+        "name": "_def_assignee",
+        "column_name": "def_assignee",
         "new": "true",
         "active": "true"
     },
@@ -41,6 +41,12 @@
         "new": "true",
         "active": "true"
     },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "active": "true"
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -52,5 +58,17 @@
         "column_name": "updated_at",
         "new": "true",
         "active": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "active": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "active": ""
     }
 }

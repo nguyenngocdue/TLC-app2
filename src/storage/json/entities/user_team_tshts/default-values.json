@@ -47,6 +47,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_def_assignee": {
+        "name": "_def_assignee",
+        "column_name": "def_assignee",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

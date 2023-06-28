@@ -1,4 +1,18 @@
 {
+    "_getDefAssignee": {
+        "name": "_getDefAssignee",
+        "relationship": "belongsTo",
+        "control_name": "def_assignee",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",
