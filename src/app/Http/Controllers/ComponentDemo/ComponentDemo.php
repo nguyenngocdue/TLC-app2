@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\ComponentDemo;
 
+use App\Http\Controllers\ComponentDemo\DataSource\CsvLoader;
+
 class ComponentDemo
 {
     use TraitDemoAttachmentData;
@@ -12,7 +14,7 @@ class ComponentDemo
     use TraitDemoTabData;
     use TraitDemoProgressBar;
     // use TraitDemoModeControl;
-    use TraitDemoPivotTable;
+    // use TraitDemoPivotTable;
 
     function getType()
     {
@@ -39,6 +41,10 @@ class ComponentDemo
     public function index()
     {
         $tableDataSource = $this->getTableDataSource();
+
+        [$pivot1Columns, $pivot1Data] = CsvLoader::getFromFile("timesheet_lines.csv");
+        [$pivot2Columns, $pivot2Data] = CsvLoader::getFromFile("apple_products.csv");
+
         return view('component-demo', [
             'tabPaneDataSource' => $this->getTabPaneDataSource(),
             'dropdownCell' => ["value" => "b", "cbbDS" => ["", "a", "b", "c"]],
@@ -56,10 +62,10 @@ class ComponentDemo
             'tabData2' => $this->getTab2(),
             // 'listenerDataSource' => $this->getDataSource(), //??
             // 'itemsSelected' => $this->getItemsSelected(), //??
-            'pivotTableColumns' => $this->getPivotTableColumns1(),
-            'pivotTableDataSource' => $this->getPivotTableDataSource1(),
-            'pivotTableColumns2' => $this->getPivotTableColumns2(),
-            'pivotTableDataSource2' => $this->getPivotTableDataSource2(),
+            'pivotTableColumns' => $pivot1Columns,
+            'pivotTableDataSource' => $pivot1Data,
+            'pivotTableColumns2' => $pivot2Columns,
+            'pivotTableDataSource2' => $pivot2Data,
             'tableDataSourceForRegister' => $this->getDataSourceForRegister(),
             'tableColumnsForRegister' => $this->getColumnsForRegister(),
             'dataSourceProgressBar' => $this->getDataSourceProgressBar(),
