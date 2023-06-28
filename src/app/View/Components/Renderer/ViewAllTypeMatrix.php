@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Hr_timesheet_worker;
 use App\Models\User;
@@ -122,11 +123,11 @@ class ViewAllTypeMatrix extends Component
         // return [1, 2];
     }
 
-    function mergeDataSource($xAxis, $yAxis, $dataSource)
+    function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource)
     {
         $dataSource = $this->reIndexDataSource($dataSource, 'ts_date', 'team_id',);
         $result = [];
-        $tableName = (new $this->yAxis)->getTableName();
+
         foreach ($yAxis as $y) {
             $yId = $y->id;
             $line['name_for_group_by'] = $y->name;
@@ -135,7 +136,7 @@ class ViewAllTypeMatrix extends Component
                 'value' => $y->name,
                 'cell_title' => "(#" . $y->id . ")",
                 'cell_class' => "text-blue-800",
-                'cell_href' => route($tableName . ".edit", $y->id),
+                'cell_href' => route($yAxisTableName . ".edit", $y->id),
             ];
             $line['meta01'] = (object) [
                 'value' => User::findFromCache($y->owner_id)->name,
@@ -208,9 +209,15 @@ class ViewAllTypeMatrix extends Component
         $xAxis = $this->getXAxis();
         // dump($xAxis);
         $yAxis = $this->getYAxis();
+        $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getDataSource($xAxis);
-        $dataSource = $this->mergeDataSource($xAxis, $yAxis, $dataSource);
+        $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource);
         $columns = $this->getColumns($xAxis);
+
+        $yAxisRoute = route($yAxisTableName . ".index");
+        $app = LibApps::getFor($yAxisTableName);
+        $footer = "<a target='_blank' href='$yAxisRoute'>" . $app['title'] . "</a>";
+
         return view(
             'components.renderer.view-all-type-matrix',
             [
@@ -219,6 +226,7 @@ class ViewAllTypeMatrix extends Component
                 'type' => $this->type,
                 'href' => $this->getHrefArray(),
                 'viewportMode' => $this->viewportMode,
+                'footer' => $footer,
             ],
         );
     }
