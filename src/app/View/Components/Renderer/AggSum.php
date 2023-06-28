@@ -38,7 +38,11 @@ class AggSum extends Component
                     if ($this->renderRaw) return $column;
                     else return "<div class='text-center'><x-renderer.tag title='Column not found' color='red'>" . $column . "</x-renderer.tag></div>";
                 } else {
-                    $sum += $line->$column;
+                    if (is_numeric($line->$column)) {
+                        $sum += $line->$column;
+                    } else {
+                        return "Can't sum text. (e.g: {$line->$column})";
+                    }
                 }
             }
             $sum = round($sum, 2);
