@@ -20,6 +20,8 @@ class AvatarItem extends Component
         private $verticalLayout = false,
         private $tooltip = '',
         private $flipped = false,
+        private $class = null,
+        private $shape = null,
     ) {
         //
     }
@@ -40,6 +42,8 @@ class AvatarItem extends Component
             'verticalLayout' => $this->verticalLayout,
             'tooltip' => $this->tooltip,
             'flipped' => $this->flipped,
+            'class' => $this->class,
+            'shape' => $this->shape == 'square' ? "rounded" : "rounded-full",
         ]);
     }
 }
