@@ -33,10 +33,6 @@
     "eco_sheets": {
         "name": "eco_sheets"
     },
-    "eco_signatures": {
-        "name": "eco_signatures",
-        "storeEmpty_and_updateShort": "true"
-    },
     "eco_taken_actions": {
         "name": "eco_taken_actions",
         "storeEmpty_and_updateShort": "true"

@@ -257,9 +257,9 @@ return new class extends Migration
             $table->foreign('unit')->references('id')->on('terms');
         });
         //************** ECO **************/
-        Schema::table('eco_signatures', function (Blueprint $table) {
-            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
-        });
+        // Schema::table('eco_signatures', function (Blueprint $table) {
+        //     $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
+        // });
         Schema::table('eco_effectiveness_lines', function (Blueprint $table) {
             $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
         });
