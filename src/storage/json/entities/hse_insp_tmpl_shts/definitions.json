@@ -1,0 +1,22 @@
+{
+    "new": {
+        "name": "new",
+        "new": "true"
+    },
+    "read-only": {
+        "name": "read-only",
+        "new": ""
+    },
+    "hide-save-btn": {
+        "name": "hide-save-btn",
+        "new": ""
+    },
+    "closed": {
+        "name": "closed",
+        "new": ""
+    },
+    "post-closed": {
+        "name": "post-closed",
+        "new": ""
+    }
+}
