@@ -41,7 +41,7 @@ trait TraitDemoPivotTable
             ['dataIndex' => "time_sheet_hours"],
             ['dataIndex' => "time_sheet_hours_otr"],
             ['dataIndex' => "time_sheet_hours_wfh"],
-            ['dataIndex' => "time_sheet_mins"],
+            // ['dataIndex' => "time_sheet_mins"],
             ['dataIndex' => "sub_project_id"],
             ['dataIndex' => "user_id"],
             ['dataIndex' => "discipline_id"],
