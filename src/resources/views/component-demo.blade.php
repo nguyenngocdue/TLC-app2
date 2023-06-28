@@ -47,8 +47,11 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         {{-- <div id="modecontrols" class="bg-white p-4 hidden">
             <x-demo.demo-modes-control :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
         </div> --}}
-        <div id="pivot_tables" class="bg-white p-4 hidden1">
+        <div id="pivot_tables" class="bg-white p-4 hidden">
             <x-demo.demo-pivot-table :columns="$pivotTableColumns" :dataSource="$pivotTableDataSource" />
+        </div>
+        <div id="pivot_tables2" class="bg-white p-4 hidden1">
+            <x-demo.demo-pivot-table2 :columns="$pivotTableColumns2" :dataSource="$pivotTableDataSource2" />
         </div>
     </div>
 </x-renderer.tab-pane>

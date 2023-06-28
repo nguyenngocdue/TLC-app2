@@ -30,7 +30,8 @@ class ComponentDemo
             'navigation' => ['href' => "#navigation", 'title' => "Navigation", 'active' => false,],
             'feedbacks' => ['href' => "#feedbacks", 'title' => "Feedback", 'active' => false,],
             'listeners' => ['href' => "#listeners", 'title' => "Listeners", 'active' => false,],
-            'pivot_tables' => ['href' => "#pivot_tables", 'title' => "Pivot Tables", 'active' => true,],
+            'pivot_tables' => ['href' => "#pivot_tables", 'title' => "Pivot Tables", 'active' => false,],
+            'pivot_tables2' => ['href' => "#pivot_tables2", 'title' => "Pivot Tables 2", 'active' => true,],
             // 'modecontrols' => ['href' => "#modecontrols", 'title' => "Mode Controls", 'active' => false,],
         ];
     }
@@ -57,6 +58,8 @@ class ComponentDemo
             // 'itemsSelected' => $this->getItemsSelected(), //??
             'pivotTableColumns' => $this->getPivotTableColumns1(),
             'pivotTableDataSource' => $this->getPivotTableDataSource1(),
+            'pivotTableColumns2' => $this->getPivotTableColumns2(),
+            'pivotTableDataSource2' => $this->getPivotTableDataSource2(),
             'tableDataSourceForRegister' => $this->getDataSourceForRegister(),
             'tableColumnsForRegister' => $this->getColumnsForRegister(),
             'dataSourceProgressBar' => $this->getDataSourceProgressBar(),

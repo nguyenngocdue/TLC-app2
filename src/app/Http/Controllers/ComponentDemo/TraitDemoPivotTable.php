@@ -23,6 +23,7 @@ trait TraitDemoPivotTable
             ["category" => "computer", "product" => "iMac", "date" => "2024-01-01", "price" => 2500, "discount" => 25, "amount" => 2475],
             ["category" => "phone", "product" => "iPhone", "date" => "2024-01-01", "price" => 1200, "discount" => 12, "amount" => 1188],
             ["category" => "phone", "product" => "iPad", "date" => "2024-01-01", "price" => 1000, "discount" => 10, "amount" => 990],
+            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06", "price" => 1000, "discount" => 10, "amount" => 990],
             ["category" => "computer", "product" => "MacMini", "date" => "2024-01-02", "price" => 1000, "discount" => 0, "amount" => 1000],
             ["category" => "computer", "product" => "MacBook", "date" => "2024-01-03", "price" => 2000, "discount" => 0, "amount" => 2000],
             ["category" => "computer", "product" => "iMac", "date" => "2024-01-04", "price" => 2500, "discount" => 0, "amount" => 2500],
