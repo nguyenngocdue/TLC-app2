@@ -4,6 +4,15 @@
 @section('title', "Show" )
 
 @section('content')
+<script>
+    k = @json($listenerDataSource);
+
+    listenersOfDropdown2 = @json($listeners2);
+    filtersOfDropdown2 = @json($filters2);
+
+    listenersOfDropdown4s = @json($listeners4);
+    filtersOfDropdown4s = @json($filters4);
+</script>
 <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/>
 @php
         switch ($valueOptionPrint) {
@@ -22,7 +31,20 @@
         @foreach($propsTree as $propTree)
         <x-print.description-group5 type={{$type}} modelPath={{$modelPath}} :propTree="$propTree" :dataSource="$dataSource" />
         @endforeach
-
+        <div class="fixed top-52 right-0">
+            <x-controls.action-buttons isFixed="true" :buttonSave="$buttonSave" action="edit" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
+        </div>
+        
     </div>
 </div>
+<form action="{{$routeUpdate}}" id="form-upload" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
+    <input type="hidden" name="status" id="status" value="{{$status}}">
+    @foreach($propsIntermediate as $key => $props)
+            @php $propsOfIntermediatePage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues, $status, $type); @endphp
+            <x-renderer.editable.modal-intermediate key={{$key}} action="edit" type={{$typePlural}} status={{$status}} id={{$showId}} modelPath={{$modelPath}} :actionButtons="$actionButtons" :props="$props" :item="$item" :dataSource="$propsOfIntermediatePage"  />
+    @endforeach
+</form>
 @endsection

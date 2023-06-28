@@ -16,6 +16,7 @@ class ActionButtons extends Component
         private $action,
         private $actionButtons,
         private $propsIntermediate,
+        private $isFixed = false,
     ) {
         //
     }
@@ -32,6 +33,7 @@ class ActionButtons extends Component
             'action' => $this->action,
             'actionButtons' => $this->actionButtons,
             'propsIntermediate' => $this->propsIntermediate,
+            'isFixed' => $this->isFixed,
         ]);
     }
 }

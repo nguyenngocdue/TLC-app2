@@ -37,7 +37,7 @@ class Card extends Component
             $class = $this->class;
             $titleClass = $this->titleClass;
             $result = "<fieldset id='$this->idHtml' component='renderer/card' 
-                class='$class break-normal min-w-0 dark:bg-gray-800 dark:border-gray-600 rounded shadow-xs'>";
+                class='$class break-normal min-w-0 dark:bg-gray-800 dark:border-gray-600 rounded shadow-xs' style='scroll-margin-top: 80px;'> ";
             if ($title) {
                 $result .= "<legend title='$this->tooltip'>";
                 $result .=  "<h4 class='px-2 font-medium text-gray-600 dark:text-gray-300 $titleClass'>";

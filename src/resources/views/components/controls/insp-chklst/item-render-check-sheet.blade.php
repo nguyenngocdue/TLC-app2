@@ -12,12 +12,10 @@
             $attachmentIds = $lines->pluck('id');
             $lineIds = $lines->pluck('id');
             // dump($lineIds);
-            
             $groupedLines = $lines->groupBy($groupColumn);
-            // dump($groupedLines);
         @endphp
         @foreach($groupedLines as $groupId => $lines)
-            <x-renderer.card tooltip="#{{$groupId}}" titleClass="text-lg" title="{{$groupNames[$groupId]}}">
+            <x-renderer.card tooltip="#{{$groupId}}" idHtml="{{$groupColumn}}_{{$groupId}}_{{Str::slug($groupNames[$groupId])}}" titleClass="text-lg" title="{{$groupNames[$groupId]}}">
             @foreach($lines as $rowIndex => $line)
                 <x-controls.insp-chklst.check-point :line="$line" :attachmentIds="$attachmentIds" table01Name="table01" :rowIndex="$rowIndex" type="{{$typeLine}}" />
             @endforeach
