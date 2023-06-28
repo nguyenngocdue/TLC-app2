@@ -65,6 +65,11 @@ return new class extends Migration
         });
         Schema::table('user_team_ots', function (Blueprint $table) {
             $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('def_assignee')->references('id')->on('users');
+        });
+        Schema::table('user_team_tshts', function (Blueprint $table) {
+            $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('def_assignee')->references('id')->on('users');
         });
         // Schema::table('ts_tasks', function (Blueprint $table) {
         //     $table->foreign('owner_id')->references('id')->on('users');
