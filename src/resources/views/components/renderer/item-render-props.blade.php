@@ -1,4 +1,4 @@
-<div class=" grid grid-cols-12 px-4 bg-white dark:bg-gray-800 rounded-lg">
+<div class="p-4 w-full md:w-3/4 xl:w-3/4 grid grid-cols-12 px-4 bg-white dark:bg-gray-800 rounded-lg">
     @foreach($dataSource as $prop)
         @php
         $prop ? extract($prop) : null;

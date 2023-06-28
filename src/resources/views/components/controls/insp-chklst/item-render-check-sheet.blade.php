@@ -1,4 +1,3 @@
-<div class="px-4 flex justify-center ">
     <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
         {{-- <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} /> --}}
         {{-- <x-controls.insp-chklst.header-check-sheet :item="$item" :chklst="$chklst" :project="$project" :subProject="$subProject"/> --}}
@@ -56,4 +55,3 @@
         <input type="hidden" name="status" id='status' value="{{$status}}"> 
         {{-- <input type="hidden" name="id" value="{{$item->id}}"> --}}
     </div>
-</div>
