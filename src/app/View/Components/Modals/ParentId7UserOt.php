@@ -75,6 +75,9 @@ class ParentId7UserOt extends Component
         // Log::info($sql);
         $result = DB::select($sql);
 
+        $standard_month_hours = config("hr.standard_ot_hour_per_month");
+        $standard_year_hours = config("hr.standard_ot_hour_per_year");
+
         foreach ($result as &$row) {
             if ($row->avatar) {
                 $row->avatar  = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $row->avatar;
@@ -82,15 +85,15 @@ class ParentId7UserOt extends Component
                 $row->avatar = "/images/avatar.jpg";
             }
             if (!$row->month_remaining_hours) {
-                $row->month_remaining_hours = 40;
+                $row->month_remaining_hours = $standard_month_hours;
             }
             if (!$row->year_remaining_hours) {
-                $row->year_remaining_hours = 200;
+                $row->year_remaining_hours = $standard_year_hours;
             }
             $row->disabled = ($row->month_remaining_hours <= 0) || ($row->year_remaining_hours <= 0);
 
-            $monthColor = ColorList::getBgColorForRemainingOTHours($row->month_remaining_hours, 40);
-            $yearColor = ColorList::getBgColorForRemainingOTHours($row->year_remaining_hours, 200);
+            $monthColor = ColorList::getBgColorForRemainingOTHours($row->month_remaining_hours, $standard_month_hours);
+            $yearColor = ColorList::getBgColorForRemainingOTHours($row->year_remaining_hours, $standard_year_hours);
             $row->subtitle = "";
             $row->subtitle .= "Remaining: ";
             $row->subtitle .=  "<span class='$monthColor mx-1 p-0.5 rounded' title='Remaining OT hours of month $year_month0'>" . $row->month_remaining_hours . "h</span>";
