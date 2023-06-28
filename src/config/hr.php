@@ -5,15 +5,6 @@ return [
     "month_starting_date" => "26",
     "month_ending_date" => "25",
 
-    "allow_extra_ot_hour" => [
-        2023 => [
-            'group_100_20' => [
-                'uids' => [200, 359, 409, 440, 264, 254, 332, 274, 228, 233, 348, 217, 320],
-                'config' => [
-                    'year' =>  100,
-                    'month' => 20,
-                ],
-            ],
-        ],
-    ],
+    "standard_ot_hour_per_month" => 40,
+    "standard_ot_hour_per_year" => 200,
 ];
