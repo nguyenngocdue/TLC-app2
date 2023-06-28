@@ -31,7 +31,7 @@ class ReportPivot
                             $key = str_replace(' ', '_', strtolower($item[$value['fieldIndex']]));
                             $array = [];
                             foreach ($valueIndexFields as $field) {
-                                if(!$field) continue;
+                                if (!$field) continue;
                                 $array[$field] = $item[$field];
                             }
                             $dateItems[$value['fieldIndex'] . '_' . $key] = $array;
@@ -138,11 +138,9 @@ class ReportPivot
     private static function sumItemsInArray($newArray)
     {
         $data = [];
-        // dump($newArray);
         foreach ($newArray as $item) {
             foreach ($item as $key => $value) {
-                // dd($key);
-                if (isset($data[$key])) {
+                if (isset($data[$key]) && is_array($value)) {
                     $data[$key] = self::sumArrays($data[$key], $value);
                 } else {
                     // dd($value);
@@ -239,9 +237,10 @@ class ReportPivot
         }
         return -1;
     }
-    public static function isStringInItemsOfArray($data, $value){
+    public static function isStringInItemsOfArray($data, $value)
+    {
         foreach ($data as $field) {
-            if(!$field) continue;
+            if (!$field) continue;
             if (str_contains($value, $field)) {
                 return true;
             }
