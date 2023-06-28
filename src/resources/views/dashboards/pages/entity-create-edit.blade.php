@@ -17,61 +17,72 @@
 @section('status', $action === "edit" ? $status : null)
 @section('docId', $docId)
 @section('content')
-    <script>
-        k = @json($listenerDataSource);
-
-        listenersOfDropdown2 = @json($listeners2);
-        filtersOfDropdown2 = @json($filters2);
-
-        listenersOfDropdown4s = @json($listeners4);
-        filtersOfDropdown4s = @json($filters4);
-    </script>
-    <div class="px-4 mt-2">
-        <x-elapse />
-        <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" />
-        <x-controls.header-alert-validation :strProps="$allProps" />
-        <x-renderer.test-status-and-accessible :item="$item" type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :dryRunToken="$dryRunToken" :statuses="$statuses" />
-        <x-controls.status-visibility-checker :propsOfMainPage="$propsOfMainPage" :allProps="$allProps"/>
-        <x-elapse />
-        <form class="w-full mb-8 mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
-            @csrf
-            <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
-            @method($action === "create" ? 'POST' : 'PUT')
-
-            @switch($app['edit_renderer'])
-                @case ('props-renderer')
-                <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
-                @break
-                @case ('checklist-sheet-renderer')
-                    <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
-                @break
-                @case ('ghg-sheet-renderer')
-                    <x-feedback.alert type="warning" message="{{$app['edit_renderer']}} in entity-create-edit need to be implemented." />
-                @break
-                @default
-                    <x-feedback.alert type="error" message="Unknown how to render [{{$app['edit_renderer']}}] in entity-create-edit." />
-                @break
-            @endswitch
+        <script>
+            k = @json($listenerDataSource);
+    
+            listenersOfDropdown2 = @json($listeners2);
+            filtersOfDropdown2 = @json($filters2);
+    
+            listenersOfDropdown4s = @json($listeners4);
+            filtersOfDropdown4s = @json($filters4);
+        </script>
+        <div class="px-4 mt-2">
             <x-elapse />
-            @foreach($propsIntermediate as $key => $props)
-                @php $propsOfIntermediatePage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues, $status, $type); @endphp
-                <x-renderer.editable.modal-intermediate key={{$key}} action={{$action}} type={{$type}} status={{$status}} id={{$id}} modelPath={{$modelPath}} :actionButtons="$actionButtons" :props="$props" :item="$item" :dataSource="$propsOfIntermediatePage"  />
-            @endforeach
-            <div class="bg-white rounded-lg mt-2">
-                <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
-            </div>
-        </form>
-    </div>
-    <x-renderer.editable.modal-broadcast-notification />
-    @if($action == 'edit')
-    <div class="px-4">
-        <div class="w-full p-2 bg-white rounded-lg  dark:bg-gray-800">
-            <x-renderer.card title="Timeline">
-                <x-controls.time-line2 id={{$id}} modelPath={{$modelPath}} :props="$props" />
-            </x-renderer.card>
+            <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" />
+            <x-controls.header-alert-validation :strProps="$allProps" />
+            <x-renderer.test-status-and-accessible :item="$item" type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :dryRunToken="$dryRunToken" :statuses="$statuses" />
+            <x-controls.status-visibility-checker :propsOfMainPage="$propsOfMainPage" :allProps="$allProps"/>
+            <x-elapse />
+            <form class="w-full mb-8 mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
+                @csrf
+                <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
+                @method($action === "create" ? 'POST' : 'PUT')
+                        @switch($app['edit_renderer'])
+                        @case ('props-renderer')
+                        <div class="px-2 flex justify-center ">
+                        <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
+                            <div class="fixed right-0">
+                                <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
+                            </div>
+                        </div>
+                        @break
+                        @case ('checklist-sheet-renderer')
+                        <div class="px-2 flex justify-center">
+                            <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
+                            <div class="fixed right-0">
+                                <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
+                            </div>
+                        </div>
+                        @break
+                        @case ('ghg-sheet-renderer')
+                            <x-feedback.alert type="warning" message="{{$app['edit_renderer']}} in entity-create-edit need to be implemented." />
+                        @break
+                        @default
+                            <x-feedback.alert type="error" message="Unknown how to render [{{$app['edit_renderer']}}] in entity-create-edit." />
+                        @break
+                        @endswitch
+                <x-elapse />
+                @foreach($propsIntermediate as $key => $props)
+                    @php $propsOfIntermediatePage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues, $status, $type); @endphp
+                    <x-renderer.editable.modal-intermediate key={{$key}} action={{$action}} type={{$type}} status={{$status}} id={{$id}} modelPath={{$modelPath}} :actionButtons="$actionButtons" :props="$props" :item="$item" :dataSource="$propsOfIntermediatePage"  />
+                @endforeach
+                <div class="bg-white rounded-lg mt-2">
+                    <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
+                </div>
+            </form>
         </div>
-    </div>
-    @endif
+        <x-renderer.editable.modal-broadcast-notification />
+        @if($action == 'edit')
+        <div class="px-4">
+            <div class="w-full p-2 bg-white rounded-lg  dark:bg-gray-800">
+                <x-renderer.card title="Timeline">
+                    <x-controls.time-line2 id={{$id}} modelPath={{$modelPath}} :props="$props" />
+                </x-renderer.card>
+            </div>
+        </div>
+        @endif
+        {{-- <x-homepage.right-drawer /> --}}
+    
     
     {{-- <script type="text/javascript">
         userCurrent = @json($user);

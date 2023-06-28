@@ -172,3 +172,6 @@
 
 {{-- Table footer aggregate --}}
 <div class="pr-6 focus:outline-none"></div>
+
+{{-- Top drawer --}}
+<div class="xl:flex"></div>

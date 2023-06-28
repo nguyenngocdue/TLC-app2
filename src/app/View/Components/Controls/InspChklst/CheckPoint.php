@@ -21,7 +21,7 @@ class CheckPoint extends Component
         private $table01Name,
         private $rowIndex,
         private $debug = false,
-        private $attachmentIds,
+        private $attachmentIds = [],
     ) {
         //
     }

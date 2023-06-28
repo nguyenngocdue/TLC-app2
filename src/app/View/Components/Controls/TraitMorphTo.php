@@ -31,7 +31,7 @@ trait TraitMorphTo
         $result = [];
         foreach ($allEntities as $entity) {
             $modelPath = Str::modelPathFrom($entity);
-            foreach ($$modelPath::$eloquentParams as $key => $params) {
+            foreach ($modelPath::$eloquentParams as $key => $params) {
                 if ($params[0] === 'morphMany' && $params[1] == $myModelPath) {
                     $result[$entity] = [
                         'id' => $modelPath,
