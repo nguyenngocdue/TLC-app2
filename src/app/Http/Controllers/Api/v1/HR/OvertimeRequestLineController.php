@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1\HR;
 
+use App\BigThink\Options;
 use App\Http\Controllers\Controller;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\System\Api\ResponseObject;
@@ -13,13 +14,13 @@ class OvertimeRequestLineController extends Controller
 {
     function addExtraOtHour($resultLine_0)
     {
-        $allowExtra = config("hr.allow_extra_ot_hour"); //$this->allowExtra();
-        $hasYearConfig = isset($allowExtra[$resultLine_0->year0]);
-        if ($hasYearConfig) {
-            foreach ($allowExtra[$resultLine_0->year0] as $config0) {
-                ['uids' => $uids, 'config' => $config] = $config0;
-                ['year' => $addYear, 'month' => $addMonth] = $config;
-                // Log::info($uids, $config);
+        $allow_extra_ot_hour = Options::get("hr.allow_extra_ot_hour." . $resultLine_0->year0);
+        if ($allow_extra_ot_hour) {
+            foreach ($allow_extra_ot_hour as $line) {
+                // dump($line);
+                $addMonth = $line->config->month;
+                $addYear = $line->config->year;
+                $uids = $line->uids;
                 $lineInNotEmpty = isset($resultLine_0->month_remaining_hours);
                 $isUserAllowExtraHour = in_array($resultLine_0->user_id, $uids);
                 if ($lineInNotEmpty && $isUserAllowExtraHour) {
@@ -41,6 +42,9 @@ class OvertimeRequestLineController extends Controller
         $lines = $request->input('lines');
         $result = [];
 
+        $standard_month_hours = config("hr.standard_ot_hour_per_month");
+        $standard_year_hours = config("hr.standard_ot_hour_per_year");
+
         foreach ($lines as $line) {
             $user_id = $line['user_id'];
             $ot_date = $line['ot_date'];
@@ -57,7 +61,7 @@ class OvertimeRequestLineController extends Controller
                 (SELECT 
                     if(ot_date BETWEEN concat(year(ot_date),'-12-$hr_month_starting_date') AND concat(year(ot_date),'-12-31'), year(ot_date)+1, year(ot_date)) AS `year0`, 
                     user_id, 
-                    round(200 - sum(total_time),2) AS `year_remaining_hours`
+                    round($standard_year_hours - sum(total_time),2) AS `year_remaining_hours`
                 FROM `hr_overtime_request_lines` otrl, `hr_overtime_requests` otr
                 WHERE 1=1
                     AND user_id=$user_id
@@ -71,7 +75,7 @@ class OvertimeRequestLineController extends Controller
                 (SELECT 
                     if(day(ot_date) BETWEEN 1 AND $hr_month_ending_date, substr(ot_date, 1,7), substr(DATE_ADD(ot_date, INTERVAL 1 MONTH),1,7)) AS `year_month0`,
                     user_id, 
-                    round(40 - sum(total_time),2) AS `month_remaining_hours`
+                    round($standard_month_hours - sum(total_time),2) AS `month_remaining_hours`
                 FROM `hr_overtime_request_lines` otrl, `hr_overtime_requests` otr
                 WHERE 1=1
                     AND user_id=$user_id

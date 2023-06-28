@@ -356,7 +356,7 @@
     "hse_corrective_action": {
         "name": "hse_corrective_action",
         "package_tab": "application",
-        "package": "compliance",
+        "package": "operation",
         "sub_package": "hse",
         "title": "HSE Corrective Actions",
         "nickname": "hca",
@@ -370,7 +370,7 @@
     "hse_incident_report": {
         "name": "hse_incident_report",
         "package_tab": "application",
-        "package": "compliance",
+        "package": "operation",
         "sub_package": "hse",
         "title": "HSE Incident Reports",
         "nickname": "hir",
@@ -392,6 +392,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "hse_insp_chklst_sht": {
@@ -418,6 +420,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "hse_insp_control_value": {
@@ -431,6 +435,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "hse_insp_group": {
@@ -444,6 +450,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "hse_insp_tmpl_line": {
@@ -457,6 +465,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "hse_insp_tmpl_sht": {
@@ -483,6 +493,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "manageApis": {
