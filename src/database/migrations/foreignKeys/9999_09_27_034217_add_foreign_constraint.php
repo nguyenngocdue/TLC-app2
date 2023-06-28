@@ -65,6 +65,11 @@ return new class extends Migration
         });
         Schema::table('user_team_ots', function (Blueprint $table) {
             $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('def_assignee')->references('id')->on('users');
+        });
+        Schema::table('user_team_tshts', function (Blueprint $table) {
+            $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('def_assignee')->references('id')->on('users');
         });
         // Schema::table('ts_tasks', function (Blueprint $table) {
         //     $table->foreign('owner_id')->references('id')->on('users');
@@ -257,9 +262,9 @@ return new class extends Migration
             $table->foreign('unit')->references('id')->on('terms');
         });
         //************** ECO **************/
-        Schema::table('eco_signatures', function (Blueprint $table) {
-            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
-        });
+        // Schema::table('eco_signatures', function (Blueprint $table) {
+        //     $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
+        // });
         Schema::table('eco_effectiveness_lines', function (Blueprint $table) {
             $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
         });

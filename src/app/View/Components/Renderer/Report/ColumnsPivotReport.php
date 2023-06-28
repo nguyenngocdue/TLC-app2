@@ -7,6 +7,7 @@ use App\Http\Controllers\TraitLibPivotTableDataFields;
 use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\Report;
 use App\Utils\Support\ReportPivot;
+use DateTime;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -79,8 +80,17 @@ trait  ColumnsPivotReport
                 }
             }
             // $result[] = $group;
+        };
+        foreach ($result as &$value) {
+            usort($value, function($date1, $date2) {
+                $thirdUnderscore = ReportPivot::findPosition($date1, '_', 3);
+                $dateTime1 = DateTime::createFromFormat('d_m_y', substr($date1, 0, $thirdUnderscore-1));
+                $dateTime2 = DateTime::createFromFormat('d_m_y', substr($date2, 0, $thirdUnderscore-1));
+                return $dateTime1 <=> $dateTime2;
+            });
         }
         $otherItems = array_diff($a, array_merge(...array_values($result)));
+        // dd($result);
         $result['other'] = $otherItems;
         return  $result;
     }
@@ -98,8 +108,9 @@ trait  ColumnsPivotReport
         $endArray = Report::retrieveDataByIndex($allColumns, $lastItemDataSource, false, 'value');
         $diffFields = array_diff($endArray, $dataIndex);
         $fields = $this->sortDates($diffFields);
-
+        // dd($fields);
         $topTitleColumns = array_merge(...array_column($dataOutput, 'top_title_column'));
+        // dd($allColumns, $fields, $dataOutput, $topTitleColumns);
         $columnsOfColumnFields = [];
         array_walk(
             $fields,
@@ -108,6 +119,7 @@ trait  ColumnsPivotReport
                     foreach ($items as $value) {
                         $checkFiled =  ReportPivot::isStringInItemsOfArray($valueIndexFields, $value);
                         if ($checkFiled) {
+                            // dd($topTitleColumns);
                             $columnsOfColumnFields[] = [
                                 'title' => $topTitleColumns[$value],
                                 'dataIndex' => $value,

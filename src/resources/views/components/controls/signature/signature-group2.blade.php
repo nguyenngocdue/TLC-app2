@@ -30,7 +30,7 @@
                 />
             </div>
             <div>
-                <x-controls.insp-chklst.name-position :user="$signature['user']" subText="Signed at {{$signature['user']['timestamp']}}"/>                        
+                <x-renderer.avatar-user size="xlarge" uid="{{$signature['owner_id']}}" flipped=1 content="Signed at {{$signature['user']['timestamp']}}"></x-renderer.avatar-user> 
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
     <div class="w-full {{$user['valid_email'] ? 'bg-red-100' : 'bg-rose-300'}} flex justify-center my-1">
         <div class="text-right p-2 rounded w-1/2">
             <div class="my-2">
-                <x-controls.insp-chklst.name-position :user="$user['full']" subText="{{$user['valid_email'] ? 'Has not signed yet' : 'Email address is invalid'}}"/>  
+                <x-renderer.avatar-user size="xlarge" uid="{{$user['full']->id}}" flipped=1 content="{{$user['valid_email'] ? 'Has not signed yet' : 'Email address is invalid'}}"/>
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
                     />
                 </div>
                 <div>
-                    <x-controls.insp-chklst.name-position :user="$currentUser" subText="Current timestamp will be applied"/>                        
+                    <x-renderer.avatar-user size="xlarge" uid="{{$currentUser['id']}}" flipped=1 content="Current timestamp will be applied"/>
                 </div>
             </div>
         </div>

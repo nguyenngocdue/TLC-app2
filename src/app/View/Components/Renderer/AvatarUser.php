@@ -13,8 +13,11 @@ class AvatarUser extends Component
      *
      * @return void
      */
-    public function __construct(private $verticalLayout = false)
-    {
+    public function __construct(
+        private $verticalLayout = false,
+        private $flipped = false,
+        private $uid = null,
+    ) {
         //
     }
 
@@ -26,22 +29,32 @@ class AvatarUser extends Component
     public function render()
     {
         return function (array $data) {
-            $slot =  json_decode($data['slot']);
-            $avatar = null;
-            $cuId = CurrentUser::id();
-            $user = null;
-            if (isset($slot->{'id'})) {
-                $user = ($cuId == $slot->{'id'}) ? CurrentUser::get() : User::findFromCache($slot->{'id'});
+            $slot = json_decode($data['slot']);
+
+            if (is_null($this->uid)) {
+                $avatar = null;
+                $user = null;
+                if (isset($slot->{'id'})) {
+                    $user = User::findFromCache($slot->{'id'});
+                    $avatar = $user->getAvatarThumbnailUrl();
+                }
+                if (is_null($user)) return "";
+
+                $title = $slot->{'name'} ?? '';
+                $description = $slot->{'position_rendered'} ?? '';
+                $gray = $slot->{'resigned'} ?? '';
+            } else {
+                $user = User::findFromCache($this->uid);
+                $title = $user->full_name;
+                $description = $user->position_rendered;
+                $gray = $user->resigned;
                 $avatar = $user->getAvatarThumbnailUrl();
             }
-            if (is_null($user)) return "";
-            $title = $slot->{'name'} ?? '';
-            $description = $slot->{'position_rendered'} ?? '';
+
             $href = $slot->{'href'} ?? '';
-            $gray = $slot->{'resigned'} ?? '';
             $verticalLayout = $this->verticalLayout;
             $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") . " (#$user->id)" : "";
-            return "<x-renderer.avatar-item tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
+            return "<x-renderer.avatar-item flipped='$this->flipped' tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
         };
     }
 }

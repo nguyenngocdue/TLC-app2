@@ -175,3 +175,9 @@
 
 {{-- Top drawer --}}
 <div class="xl:flex"></div>
+
+{{-- avatar size --}}
+<div class="w-6 h-6"></div>
+<div class="w-8 h-8"></div>
+<div class="w-10 h-10"></div>
+<div class="w-14 h-14"></div>

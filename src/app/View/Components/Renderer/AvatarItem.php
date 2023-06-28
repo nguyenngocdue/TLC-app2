@@ -19,6 +19,11 @@ class AvatarItem extends Component
         private $gray = false,
         private $verticalLayout = false,
         private $tooltip = '',
+        private $flipped = false,
+        private $class = null,
+        private $shape = null,
+        private $size = null,
+        private $content = null,
     ) {
         //
     }
@@ -30,6 +35,22 @@ class AvatarItem extends Component
      */
     public function render()
     {
+        if (is_numeric($this->size)) {
+            $sizeStr = "w-$this->size h-$this->size";
+        } else switch ($this->size) {
+            case 'small':
+                $sizeStr = "w-6 h-6";
+                break;
+            case 'large':
+                $sizeStr = "w-10 h-10";
+                break;
+            case 'xlarge':
+                $sizeStr = "w-14 h-14";
+                break;
+            default:
+                $sizeStr = "w-8 h-8";
+                break;
+        }
         return view('components.renderer.avatar-item', [
             'title' => $this->title,
             'description' => $this->description,
@@ -38,6 +59,11 @@ class AvatarItem extends Component
             'gray' => $this->gray,
             'verticalLayout' => $this->verticalLayout,
             'tooltip' => $this->tooltip,
+            'flipped' => $this->flipped,
+            'class' => $this->class,
+            'sizeStr' => $sizeStr,
+            'shape' => $this->shape == 'square' ? "rounded" : "rounded-full",
+            'content' => $this->content,
         ]);
     }
 }

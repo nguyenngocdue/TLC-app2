@@ -11,7 +11,7 @@ class ReportPivot
 {
     private static function transferValueOfKeys($data, $columnFields, $valueIndexFields)
     {
-        // dd($columnFields, $data);
+        // dd(array_column($data, 'sub_project_id'));
         $newArray = array_map(function ($item) use ($columnFields, $valueIndexFields) {
             $dateItems = [];
             foreach ($columnFields as $value) {
@@ -29,6 +29,7 @@ class ReportPivot
                             break;
                         default:
                             $key = str_replace(' ', '_', strtolower($item[$value['fieldIndex']]));
+                            // if ( $key == 4) dd($item);
                             $array = [];
                             foreach ($valueIndexFields as $field) {
                                 if (!$field) continue;
@@ -44,9 +45,9 @@ class ReportPivot
             return $dateItems;
         }, $data);
         // $newArray = self::sumItemsInArray01($newArray);
+        // dump($newArray);
         $newArray = self::sumItemsInArray($newArray);
         $newArray = self::concatKeyAndValueOfArray($newArray);
-        // dd($newArray);
         return $newArray;
     }
     public static function getLastArray($data)
@@ -137,18 +138,17 @@ class ReportPivot
 
     private static function sumItemsInArray($newArray)
     {
+        // dump($newArray);
         $data = [];
         foreach ($newArray as $item) {
             foreach ($item as $key => $value) {
                 if (isset($data[$key]) && is_array($value)) {
                     $data[$key] = self::sumArrays($data[$key], $value);
                 } else {
-                    // dd($value);
                     $data[$key] = $value;
                 }
             }
         }
-        // dd($data);
         return $data;
     }
 
@@ -156,6 +156,7 @@ class ReportPivot
     {
         $data = [];
         foreach ($newArray as $k1 =>  $item) {
+            // dump($k1);
             if (!is_array($item))  return $newArray;
             foreach ($item as $k2 => $value) {
                 $data[$k1 . '_' . $k2] = $value;

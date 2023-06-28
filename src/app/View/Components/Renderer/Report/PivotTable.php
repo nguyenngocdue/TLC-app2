@@ -56,11 +56,13 @@ class PivotTable extends Component
 
     private function makeDataRenderer($primaryData)
     {
-        [$rowFieldsHasAttr,, $filters, $columnFields,, $dataAggregations,,,$valueIndexFields] =  $this->getDataFields();
+        [$rowFieldsHasAttr,, $filters, $columnFields,, $dataAggregations,,, $valueIndexFields] =  $this->getDataFields();
         // dd($bidingRowFields);
         $valueFilters = array_combine($filters, [[1, 4], [7, 8]]);
         // Step 1: reduce lines from Filters array
         $linesData = $primaryData;
+        // $a = array_column($linesData, 'sub_project_id');
+        // dd($linesData[487]);
         $dataReduce = ReportPivot::reduceDataByFilterColumn($linesData, $valueFilters);
         // dd($valueFilters, $dataReduce);
 
@@ -80,11 +82,9 @@ class PivotTable extends Component
         $calculatedData = array_map(fn ($items) => ReportPivotDataFields::executeOperations($dataAggregations, $items), $processedData);
         // dd($calculatedData);
         $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData);
-        // dd($processedData, $calculatedData, $dataIdsOutput);
 
         $tables = $this->getDataFromTables();
         $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput);
-        // dd($dataIdsOutput[0], $dataOutput[0]);
         return $dataOutput;
     }
 
@@ -95,23 +95,28 @@ class PivotTable extends Component
         // dump($processedData, $bindingFields);
         foreach ($processedData as &$items) {
             foreach ($items as $key => $id) {
+
                 if (in_array($key, $rowFieldsHasAttr)) {
                     try {
                         $infoAttr = $bindingFields[$key];
                         $tableName = $infoAttr['table_name'];
                         $attributeName = $infoAttr['attribute_name'];
-                        $fieldName = $key . '_' .$tableName . '_' . $attributeName;
+                        $fieldName = $key . '_' . $tableName . '_' . $attributeName;
                         $items[$fieldName] = $tables[$tableName][$id]->$attributeName;
                     } catch (Exception $e) {
                         $items[$key] = $id;
                         // dump($e->getMessage());
                     }
                 } else {
+                    if (!str_contains($key, '_id_')) continue;
                     $lastUnderscoreIndex = strrpos($key, '_id_');
-                    $id = substr($key, $lastUnderscoreIndex + 4, 2);
-                    if (is_numeric($id)) {
-                        // dump($key, $id);
+                    $p1 = strpos($key, '_', $lastUnderscoreIndex + 4);
+                    $str1 = substr($key, 0, $lastUnderscoreIndex + 4);
+                    $str2 = substr($key, $p1, strlen($key));
+                    $id = str_replace([$str1, $str2], '', $key);
+                    if (is_numeric($id) && $id) {
                         $attr = substr($key, 0, $lastUnderscoreIndex + 3);
+                        // if ($key === 'sub_project_id_4_time_sheet_hours') dd($id);
                         $infoAttr = $bidingColumnFields[$attr];
                         $tableName = $infoAttr['table_name'];
                         $attributeName = $infoAttr['attribute_name'];
@@ -131,7 +136,7 @@ class PivotTable extends Component
         array_map(function ($item) use (&$orders) {
             $ex = explode(':', $item);
             $key = $ex[0];
-            $strKey = trim(str_replace(['(','.'],'_', $key), ')');
+            $strKey = trim(str_replace(['(', '.'], '_', $key), ')');
             $order = isset($ex[1]) ? strtolower($ex[1]) : 'asc';
             $orders[$strKey] = $order;
         }, $sortByColumn);

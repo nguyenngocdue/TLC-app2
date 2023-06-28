@@ -23,6 +23,12 @@
         "new": "true",
         "active": "true"
     },
+    "_def_assignee": {
+        "name": "_def_assignee",
+        "column_name": "def_assignee",
+        "new": "true",
+        "active": "true"
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

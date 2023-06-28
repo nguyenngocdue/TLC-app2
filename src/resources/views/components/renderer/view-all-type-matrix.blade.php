@@ -47,5 +47,6 @@
           :dataSource="$dataSource"
           groupBy="name_for_group_by"
           groupByLength=2
+          footer="{!! $footer !!}"
           {{-- tableTrueWidth="{{true}}" --}}
           />

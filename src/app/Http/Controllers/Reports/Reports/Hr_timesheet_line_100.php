@@ -34,8 +34,8 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                     DATE(tsl.start_time) AS time_sheet_start_time_otr,
                     DATE(tsl.start_time) AS time_sheet_start_time_wfh,
                     SUM(tsl.duration_in_min) AS time_sheet_durations,
-                    SUM(tsl.ts_hour) AS time_sheet_hours_otr,
-                    SUM(tsl.ts_hour) AS time_sheet_hours_wfh,
+                    SUM(0) AS time_sheet_hours_otr,
+                    SUM(0) AS time_sheet_hours_wfh,
                     SUM(tsl.ts_hour) AS time_sheet_hours,
 
                     tsl.sub_project_id AS sub_project_id,

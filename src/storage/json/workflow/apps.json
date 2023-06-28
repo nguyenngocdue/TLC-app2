@@ -145,21 +145,6 @@
         "show_renderer": "props-renderer",
         "icon": null
     },
-    "eco_signature": {
-        "name": "eco_signature",
-        "package_tab": "application",
-        "package": "project_management",
-        "sub_package": "project_management",
-        "title": "ECO Signatures",
-        "nickname": null,
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": null
-    },
     "eco_taken_action": {
         "name": "eco_taken_action",
         "package_tab": "application",

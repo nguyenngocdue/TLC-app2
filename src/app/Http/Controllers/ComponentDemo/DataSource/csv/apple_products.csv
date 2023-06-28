@@ -1,0 +1,12 @@
+category,product,date,price,discount,amount
+computer,MacMini,2024-01-01,1000,10,990
+computer,MacBook,2024-01-01,2000,20,1980
+computer,iMac,2024-01-01,2500,25,2475
+phone,iPhone,2024-01-01,1200,12,1188
+phone,iPad,2024-01-01,1000,10,990
+computer,MacMini,2024-01-02,1000,0,1000
+computer,MacBook,2024-01-03,2000,0,2000
+computer,iMac,2024-01-04,2500,0,2500
+phone,iPhone,2024-01-05,1200,0,1200
+phone,iPad,2024-01-06,1000,0,1000
+phone,iPad,2024-01-06,1000,10,990
