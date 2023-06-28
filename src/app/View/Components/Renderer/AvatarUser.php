@@ -13,8 +13,10 @@ class AvatarUser extends Component
      *
      * @return void
      */
-    public function __construct(private $verticalLayout = false)
-    {
+    public function __construct(
+        private $verticalLayout = false,
+        private $flipped = false,
+    ) {
         //
     }
 
@@ -41,7 +43,7 @@ class AvatarUser extends Component
             $gray = $slot->{'resigned'} ?? '';
             $verticalLayout = $this->verticalLayout;
             $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") . " (#$user->id)" : "";
-            return "<x-renderer.avatar-item tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
+            return "<x-renderer.avatar-item flipped='$this->flipped' tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
         };
     }
 }

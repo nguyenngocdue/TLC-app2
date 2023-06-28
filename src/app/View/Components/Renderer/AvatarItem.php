@@ -19,6 +19,7 @@ class AvatarItem extends Component
         private $gray = false,
         private $verticalLayout = false,
         private $tooltip = '',
+        private $flipped = false,
     ) {
         //
     }
@@ -38,6 +39,7 @@ class AvatarItem extends Component
             'gray' => $this->gray,
             'verticalLayout' => $this->verticalLayout,
             'tooltip' => $this->tooltip,
+            'flipped' => $this->flipped,
         ]);
     }
 }
