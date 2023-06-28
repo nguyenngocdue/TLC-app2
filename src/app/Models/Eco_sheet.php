@@ -143,7 +143,7 @@ class Eco_sheet extends ModelExtended
     }
     public function getTypesOfChangeOfEco()
     {
-        $p = $this->oracyParams[__FUNCTION__ . '()'];
+        $p = $this::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

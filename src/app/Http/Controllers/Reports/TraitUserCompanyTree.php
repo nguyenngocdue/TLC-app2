@@ -19,7 +19,7 @@ trait TraitUserCompanyTree
             $currentUser = CurrentUser::get();
             [$viewport_uids, $leaf_uids] = [$currentUser['viewport_uids'], $currentUser['leaf_uids']];
         }
-        $treeData = BuildTree::getTreeByOptions($uid, $viewport_uids, 35, false, true);
+        $treeData = BuildTree::getTreeByOptions($uid, $viewport_uids, $leaf_uids, false, true);
 
         $data = [];
         if (app()->isProduction()) {
