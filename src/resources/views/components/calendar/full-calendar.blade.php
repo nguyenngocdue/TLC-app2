@@ -61,6 +61,7 @@
                                 allDaySlot: false,
                             }
                         },
+                        timeZone: 'local',
                         initialDate: response.meta,
                         height: 850,
                         contentHeight: 830,
@@ -68,7 +69,6 @@
                         initialView: 'timeGridWeek',
                         locale: 'en',
                         firstDay: 1,
-                        theme: 'sandstone',
                         dayMaxEvents: true,
                         weekNumbers: true,
                         editable: !readOnly,

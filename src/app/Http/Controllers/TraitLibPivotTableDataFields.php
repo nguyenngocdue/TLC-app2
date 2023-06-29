@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Workflow\LibPivotTables;
@@ -20,28 +21,39 @@ trait TraitLibPivotTableDataFields
             } else {
                 $array['fields'][] = $value;
                 $array['biding_fields'][$value] =  [];
-
             }
         }
         // dd($array);
         return $array;
     }
 
-    private function mapValueIndexColumnFields ($_columnFields,$valueIndexFields){
+    private function mapValueIndexColumnFields($_columnFields, $valueIndexFields)
+    {
         $columnFields = [];
         foreach ($_columnFields as $key => $field) {
             $columnFields[] = [
                 'fieldIndex' => $field,
-                'valueIndexField' => $valueIndexFields[$key] ?? dd('Empty Value Index Fields')
+                'valueIndexField' => $valueIndexFields[$key] ?? null,
+                'aggregation' => 'sum'
             ];
         }
+        // dd($columnFields);
         return $columnFields;
     }
 
-    
+    private function checkCreateManagePivotReport($lib)
+    {
+        if (count($lib) !== 2) return true;
+        return false;
+    }
+
+
     public function getDataFields()
     {
         $lib = LibPivotTables::getFor($this->key);
+        $this->checkCreateManagePivotReport($lib) ? : dd('Please update the Pivot Report Management feature.');
+        // dd($lib);
+
         $filters = $lib['filters'] ?? [];
         $row_fields = $lib['row_fields'] ?? [];
         $fields = $this->separateFields($row_fields);
@@ -49,12 +61,11 @@ trait TraitLibPivotTableDataFields
         $bidingRowFields = $fields['biding_fields'] ?? [];
 
         $dataIndex = array_values(array_map(function ($item) {
-            // dd($item);
             if (str_contains($item, '(')) {
-                [$posBracket,$posDot]  = [strpos($item, '('), strpos($item, '.', )];
-                $name = Str::singular(substr($item,$posBracket+1, $posDot - $posBracket - 1));
-                $attr = substr($item, $posDot+1, strlen($item)- $posDot - 2);
-                return $name .'_'.$attr;
+                [$posBracket, $posDot]  = [strpos($item, '('), strpos($item, '.',)];
+                $name = Str::singular(substr($item, $posBracket + 1, $posDot - $posBracket - 1));
+                $attr = substr($item, $posDot + 1, strlen($item) - $posDot - 2);
+                return $name . '_' . $attr;
             }
             return $item;
         }, $row_fields));
@@ -63,14 +74,14 @@ trait TraitLibPivotTableDataFields
         $fields = $this->separateFields($columnFields);
         $columnFields = $fields['fields'] ?? [];
         $valueIndexFields = $lib['value_index_fields'] ?? [];
-        $columnFields =   $this->mapValueIndexColumnFields($columnFields, $valueIndexFields);
-        
-        $bidingColumnFields = $fields['biding_fields'] ?? [];
-        
-        $dataFields = $lib['data_fields'] ?? [];
         $dataAggregation = $lib['data_aggregations'] ?? [];
-        $dataAggregations = ReportPivot::combineArrays($dataFields,$dataAggregation );
-        
+        $columnFields = $this->mapValueIndexColumnFields($columnFields, $valueIndexFields);
+
+        $bidingColumnFields = $fields['biding_fields'] ?? [];
+
+        $dataFields = $lib['data_fields'] ?? [];
+        $dataAggregations = ReportPivot::combineArrays($dataFields, $dataAggregation);
+
         $sortBy = $lib['sort_by'] ?? [];
         return [$rowFields, $bidingRowFields, $filters, $columnFields, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields];
     }

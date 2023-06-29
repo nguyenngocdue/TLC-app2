@@ -7,7 +7,9 @@ use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeCanhController;
 use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\WelcomeDueController_apple_store_category_per_date;
+use App\Http\Controllers\WelcomeDueController_apple_store_draw_row_field;
 use App\Http\Controllers\WelcomeDueController_apple_store_product_per_date;
+use App\Http\Controllers\WelcomeDueController_apple_store_test_display;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_date;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_project;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_project_date;
@@ -27,6 +29,8 @@ Route::resource('welcome-due-project_date', WelcomeDueController_hr_timesheet_pr
 Route::resource('welcome-due-team_date', WelcomeDueController_hr_timesheet_team_date::class)->only('index');
 Route::resource('welcome-due-product_date', WelcomeDueController_apple_store_product_per_date::class)->only('index');
 Route::resource('welcome-due-category_date', WelcomeDueController_apple_store_category_per_date::class)->only('index');
+Route::resource('welcome-due-apple_store_draw_row_field', WelcomeDueController_apple_store_draw_row_field::class)->only('index');
+Route::resource('welcome-due-apple_store_test_display', WelcomeDueController_apple_store_test_display::class)->only('index');
 
 Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 
