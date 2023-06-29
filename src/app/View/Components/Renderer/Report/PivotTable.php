@@ -61,8 +61,8 @@ class PivotTable extends Component
 
     private function makeDataRenderer($primaryData)
     {
-        [$rowFieldsHasAttr,, $filters, $columnFields,, $dataAggregations,,, $valueIndexFields] =  $this->getDataFields();
-        // dd($bidingRowFields);
+        [$rowFields,, $filters, $columnFields,, $dataAggregations,,, $valueIndexFields] =  $this->getDataFields();
+        // dd($columnFields);
         $valueFilters = count($filters) ? array_combine($filters, [[1, 4], [7, 8]]) : [];
         // Step 1: reduce lines from Filters array
         $linesData = $primaryData;
@@ -71,12 +71,11 @@ class PivotTable extends Component
         // dd($valueFilters, $dataReduce);
 
         // Step 2: group lines by Row_Fields array
-        $processedData = ReportPivot::groupBy($dataReduce, $rowFieldsHasAttr);
-        //Summarize the results of Value_Index_Fields that has the same value in a field
-        $processedData = ReportPivot::groupBy2($processedData, $columnFields);
+        $processedData = ReportPivot::groupBy($dataReduce, $rowFields);
+        // dd($processedData);
 
         //Remove all array keys by looping through all elements
-        $processedData = array_values(array_map(fn ($item) => ReportPivot::getLastArray($item), $processedData));
+        $processedData = array_values(array_map(fn ($item) => ReportPivot::getLastArray($item, $columnFields), $processedData));
         // dd($processedData);
 
         // Step 3: transfer data from lines to columns by
@@ -88,7 +87,9 @@ class PivotTable extends Component
         //The aggregated data are at the end of the items
         $calculatedData = array_map(fn ($items) => ReportPivotDataFields::executeOperations($dataAggregations, $items), $processedData);
         // dd($calculatedData);
+
         $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData);
+        // dd($dataIdsOutput);
 
         $tables = $this->getDataFromTables();
         $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput);

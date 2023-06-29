@@ -15,12 +15,11 @@ class ReportPivot
         $newArray = array_map(function ($item) use ($columnFields, $valueIndexFields) {
             $dateItems = [];
             foreach ($columnFields as $value) {
-                if (!$value['fieldIndex'] || !$value['valueIndexField']) continue;
+                if (!isset($value['fieldIndex']) || !isset($value['valueIndexField']) || !isset($item[$value['fieldIndex']])) continue;
                 try {
                     $date = DateTime::createFromFormat('Y-m-d', $item[$value['fieldIndex']]);
                     $type = 'unknown';
                     if ($date) $type = 'date';
-                    // dump($type, $value);
                     switch ($type) {
                         case 'date':
                             $reversedDate = $date->format('d-m-y');
@@ -29,7 +28,6 @@ class ReportPivot
                             break;
                         default:
                             $key = str_replace(' ', '_', strtolower($item[$value['fieldIndex']]));
-                            // if ( $key == 4) dd($item);
                             $array = [];
                             foreach ($valueIndexFields as $field) {
                                 if (!$field) continue;
@@ -50,14 +48,16 @@ class ReportPivot
         $newArray = self::concatKeyAndValueOfArray($newArray);
         return $newArray;
     }
-    public static function getLastArray($data)
+    public static function getLastArray($data, $columnFields)
     {
+        // if (empty($columnFields)) return $data;
         $outputArrays = [];
         foreach ($data as $key => $value) {
             if ($key === "items" && is_array($value)) {
-                $outputArrays[] = $value;
+                //Summarize the results of Value_Index_Fields that has the same value in a field
+                $outputArrays[] = self::sumFieldsHaveTheSameValue($value, $columnFields);
             } elseif (is_array($value)) {
-                $nestedOutputArrays = self::getLastArray($value);
+                $nestedOutputArrays = self::getLastArray($value, $columnFields);
                 $outputArrays = array_merge($outputArrays, $nestedOutputArrays);
             }
         }
@@ -181,6 +181,7 @@ class ReportPivot
     }
     public static function groupBy($lineData, $rowFields)
     {
+        if (empty($rowFields)) return $lineData;
         $dataOutput = [];
         foreach ($lineData as $line) {
             // Get the values of fields in $rowFields
@@ -204,52 +205,56 @@ class ReportPivot
         return $dataOutput;
     }
 
-    public static function reduceItemsRecursive(&$array, $columnFields)
-    {
-        foreach ($array as $key => &$value) {
-            if ($key === 'items' && is_array($value)) {
-                $array[$key] = self::sumFieldHasTheSameValue($value, $columnFields);
-            } elseif (is_array($value)) {
-                self::reduceItemsRecursive($value, $columnFields);
-            }
-        }
-    }
+    // public static function reduceItemsRecursive(&$array, $columnFields)
+    // {
+    //     foreach ($array as $key => &$value) {
+    //         if ($key === 'items' && is_array($value)) {
+    //             $array[$key] = self::sumFieldsHaveTheSameValue($value, $columnFields);
+    //         } elseif (is_array($value)) {
+    //             self::reduceItemsRecursive($value, $columnFields);
+    //         }
+    //     }
+    // }
 
-    private static function sumFieldHasTheSameValue($data, $columnFields)
+    private static function sumFieldsHaveTheSameValue($data, $conditions)
     {
-        $fieldOperator = $columnFields[0]['fieldIndex'] ;
-        $indexValueOperator = $columnFields[0]['valueIndexField'];
         $array = [];
-        $check = '';
-
-        
-
-
-        foreach ($data as $k => $item) {
-            if (!count($array))  $array[] = $item;
-            else {
-                foreach ($array as $key => $value) {
-                    if ($value[$fieldOperator] === $item[$fieldOperator]) {
-                        $array[$key][$indexValueOperator] =  $value[$indexValueOperator] + $item[$indexValueOperator];
-                        $check = $item[$fieldOperator];
+        foreach ($data as $item) {
+            $found = false;
+            foreach ($conditions as $cond) {
+                $fieldIndex = $cond["fieldIndex"];
+                $valueIndexField = $cond["valueIndexField"];
+                $aggregation = $cond["aggregation"];
+                foreach ($array as  &$value) {
+                    if (!isset($value[$fieldIndex]) && !isset($item[$fieldIndex]) ) continue;
+                    if ($value[$fieldIndex] === $item[$fieldIndex]) {
+                        $found = true;
+                        if ($aggregation === 'sum') {
+                            $value[$valueIndexField] += $item[$valueIndexField];
+                        }
+                        break;
                     }
+
                 }
-                if ($data[$k][$fieldOperator] !== $check) $array[] = $item;
+                
             }
+            if (!$found) $array[] = $item;
         }
+        // dd($array);
         return $array;
     }
 
-
-    public static function groupBy2($processedData, $columnFields)
-    {
-        self::reduceItemsRecursive($processedData, $columnFields);
-        return $processedData;
-    }
+    // public static function groupBy2($processedData, $columnFields)
+    // {
+    //     if (empty($columnFields)) return $processedData;
+    //     self::reduceItemsRecursive($processedData, $columnFields);
+    //     return $processedData;
+    // }
 
 
     public static function transferData($dataSource, $columnFields, $valueIndexFields)
     {
+        if (empty($columnFields) || empty($valueIndexFields)) return $dataSource;
         $data = array_map(
             fn ($items) => array_map(
                 fn ($array) =>

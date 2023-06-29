@@ -5,6 +5,17 @@
         "row_fields": "category",
         "column_fields": "date",
         "value_index_fields": "amount",
+        "data_fields": "amount",
+        "data_aggregations": "sum",
+        "lookup_tables": null,
+        "sort_by": null
+    },
+    "apple_store_draw_row_field": {
+        "name": "apple_store_draw_row_field",
+        "filters": null,
+        "row_fields": "category,\r\nproduct,\r\ndate,\r\ndate_discount,\r\nprice,\r\ndiscount,\r\namount",
+        "column_fields": null,
+        "value_index_fields": null,
         "data_fields": null,
         "data_aggregations": null,
         "lookup_tables": null,
@@ -18,6 +29,17 @@
         "value_index_fields": "amount,\r\ndiscount",
         "data_fields": "amount,\r\ndiscount",
         "data_aggregations": "sum,\r\nsum,",
+        "lookup_tables": null,
+        "sort_by": null
+    },
+    "apple_store_test_display": {
+        "name": "apple_store_test_display",
+        "filters": null,
+        "row_fields": null,
+        "column_fields": "category",
+        "value_index_fields": null,
+        "data_fields": null,
+        "data_aggregations": null,
         "lookup_tables": null,
         "sort_by": null
     },

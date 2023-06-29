@@ -336,18 +336,18 @@ class WelcomeDueController extends Controller
         // dump($primaryData);
 
         $primaryData = [
-            ["category" => "phone", "product" => "iPad", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 1000, "discount" => 10,"amount" => 990],
-            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06","date_discount" => "2024-01-06", "price" => 1000, "discount" => 10,"amount" => 990],
-            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06","date_discount" => "2024-01-06", "price" => 1000, "discount" => 30,"amount" => 1000],
-            ["category" => "phone", "product" => "iPhone", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 1200, "discount" => 12,"amount" => 1188],
-            ["category" => "phone", "product" => "iPhone", "date" => "2024-01-05","date_discount" => "2024-01-05", "price" => 1200, "discount" => 0,"amount" => 1200],
-            ["category" => "computer", "product" => "MacMini", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 1000, "discount" => 10,"amount" => 990],
-            ["category" => "computer", "product" => "MacBook", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 2000, "discount" => 20,"amount" => 1980],
-            ["category" => "computer", "product" => "iMac", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 2500, "discount" => 25,"amount" => 2475],
-            ["category" => "computer", "product" => "iPad", "date" => "2024-01-06","date_discount" => "2024-01-06", "price" => 1000, "discount" => 50,"amount" => 800],
-            ["category" => "computer", "product" => "MacMini", "date" => "2024-01-02","date_discount" => "2024-01-02", "price" => 1000, "discount" => 0,"amount" => 1000],
-            ["category" => "computer", "product" => "MacBook", "date" => "2024-01-03","date_discount" => "2024-01-03", "price" => 2000, "discount" => 0,"amount" => 2000],
-            ["category" => "computer", "product" => "iMac", "date" => "2024-01-04","date_discount" => "2024-01-04", "price" => 2500, "discount" => 0,"amount" => 2500],
+            ["category" => "phone", "product" => "iPad", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 1000, "discount" => 10,"amount" => 990, 'sale_price' => 900],
+            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06","date_discount" => "2024-01-06", "price" => 1000, "discount" => 10,"amount" => 990, 'sale_price' => 800],
+            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06","date_discount" => "2024-01-06", "price" => 1000, "discount" => 30,"amount" => 1000, 'sale_price' => 1000],
+            ["category" => "phone", "product" => "iPhone", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 1200, "discount" => 12,"amount" => 1188, 'sale_price' => 1056],
+            ["category" => "phone", "product" => "iPhone", "date" => "2024-01-05","date_discount" => "2024-01-05", "price" => 1200, "discount" => 0,"amount" => 1200, 'sale_price' => 1200],
+            ["category" => "computer", "product" => "MacMini", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 1000, "discount" => 10,"amount" => 990, 'sale_price' => 900],
+            ["category" => "computer", "product" => "MacBook", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 2000, "discount" => 20,"amount" => 1980, 'sale_price' => 1600],
+            ["category" => "computer", "product" => "iMac", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 2500, "discount" => 25,"amount" => 2475, 'sale_price' => 1875],
+            ["category" => "computer", "product" => "iPad", "date" => "2024-01-06","date_discount" => "2024-01-06", "price" => 1000, "discount" => 50,"amount" => 800, 'sale_price' => 1000],
+            ["category" => "computer", "product" => "MacMini", "date" => "2024-01-02","date_discount" => "2024-01-02", "price" => 1000, "discount" => 0,"amount" => 1000, 'sale_price' => 1000],
+            ["category" => "computer", "product" => "MacBook", "date" => "2024-01-03","date_discount" => "2024-01-03", "price" => 2000, "discount" => 0,"amount" => 2000, 'sale_price' => 2000],
+            ["category" => "computer", "product" => "iMac", "date" => "2024-01-04","date_discount" => "2024-01-04", "price" => 2500, "discount" => 0,"amount" => 2500, 'sale_price' => 2500],
 
         ];
         return $primaryData;
