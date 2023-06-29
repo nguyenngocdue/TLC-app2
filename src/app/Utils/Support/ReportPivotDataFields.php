@@ -11,6 +11,7 @@ class ReportPivotDataFields
     public static function executeOperations($dataAggregations, $data)
     {
         $newData = [];
+        if (!count($dataAggregations)) return [];
         foreach ($dataAggregations as $field => $operator) {
             $result = null;
             foreach ($data as $key => $items) {

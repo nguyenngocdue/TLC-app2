@@ -7,6 +7,7 @@ use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Controls\DisallowedDirectCreationChecker;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -147,15 +148,30 @@ class Breadcrumb extends Component
         }
         $links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
         if (!$disallowedDirectCreationChecker) $links[] = ['href' => route($type . '.create'), 'title' => 'Add New', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
+        $classList = 'px-2 py-1 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-1 my-2';
+        
         if (!empty($allReports)) $links[] = ['type' => 'report', 'title' => 'View Report', 'dataSource' => $allReports, 'icon' => '<i class="fa-regular fa-file-chart-column"></i>'];
         if ($isAdmin) {
             if ($action == 'index') $links[] = ['href' => route($type . '.trashed'), 'title' => 'View Trash', 'icon' => '<i class="fa-solid fa-trash"></i>'];
             $links[] = ['href' => route($singular . '_prp.index'), 'title' => 'Workflows', 'icon' => '<i class="fa-duotone fa-sitemap"></i>'];
         }
+        if($type == 'hse_insp_chklst_shts'){
+            $id = 'clone_hse_insp_chklst_shts';
+            $buttonClone = "<div class='$classList'>
+                                <button class='text-lg text-blue-500 hover:text-gray-400' @click='toggleModal(\"$id\")'>
+                                    <i class='fa-light fa-clone'></i>
+                                    <span class='flex text-xs font-normal'>Create New</span>
+                                </button>
+                            </div>";
+            $modalClone = Blade::render("<x-modals.modal-clone  modalId='$id'/>");
+        }
         return view('components.navigation.breadcrumb', [
             'links' => $links,
             'type' => $type,
-            'classList' => 'px-2 py-1 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-1 my-2',
+            'classList' => $classList,
+            'buttonClone' => $buttonClone ?? '',
+            'modalClone' => $modalClone ?? '',
         ]);
+        
     }
 }

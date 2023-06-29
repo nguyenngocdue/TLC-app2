@@ -4,6 +4,12 @@
 {{-- <x-renderer.heading level=5>Pivot by apple_store_product_per_date</x-renderer.heading>
 <x-renderer.report.pivot-table key="apple_store_product_per_date" :dataSource="$dataSource"/> --}}
 
+<x-renderer.heading level=5>Pivot by apple_store_product_per_date</x-renderer.heading>
+<x-renderer.report.pivot-table key="apple_store_product_per_date" :dataSource="$dataSource"/>
+
+<x-renderer.heading level=5>Pivot by apple_store_category_per_date</x-renderer.heading>
+<x-renderer.report.pivot-table key="apple_store_category_per_date" :dataSource="$dataSource"/>
+
 <x-renderer.heading level=5>Pivot by hr_timesheet_employee_date</x-renderer.heading>
 <x-renderer.report.pivot-table key="hr_timesheet_employee_date" :dataSource="$dataSource"/>
 

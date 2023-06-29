@@ -18,7 +18,7 @@ use App\Http\Controllers\Api\v1\qaqc\CloneChklstFromTmpl;
 use App\Http\Controllers\Api\v1\HR\TimeSheetOfficerController;
 use App\Http\Controllers\Api\v1\HR\TimeSheetWorkerController;
 use App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController;
-
+use App\Http\Controllers\Api\v1\Hse\CloneTemplateHseController;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApi;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApiRenderer;
 use App\Http\Controllers\Workflow\LibApis;
@@ -72,6 +72,12 @@ Route::group([
         // Route::get("prod_run_line/duplicate/{id}", [App\Http\Controllers\Api\v1\Production\ProductionRunLineController::class, 'duplicate'])->name('prod_run_line.duplicate');
         // Route::get("prod_run_line/{sub_project_id}/{prod_order_id}/{prod_routing_link_id}", [App\Http\Controllers\Api\v1\Production\ProductionRunLineController::class, 'prodLine'])->name('prod_run.live');
     });
+});
+Route::group([
+    'prefix' => 'v1/hse',
+    'middleware' => ['auth:sanctum', 'throttle:600,1'],
+],function(){
+    Route::post('clone_template_hse', [CloneTemplateHseController::class, 'cloneTemplateHse'])->name('cloneTemplateHse');
 });
 Route::group([
     'prefix' => 'v1/qaqc',
