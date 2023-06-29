@@ -7,7 +7,7 @@
     <i class="fa-solid fa-magnifying-glass"></i>
 </button>
 
-@extends('modals.modal-big')
+@extends('modals.modal-large')
 @section($modalId.'-header')
 <h3 class="text-sm font-medium text-gray-900 dark:text-white">Tell me what you want to do</h3>
 @endsection
