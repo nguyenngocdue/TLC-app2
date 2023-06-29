@@ -17,7 +17,7 @@
             <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$category}}_{{$index}}][id]" value="{{$signature['id']}}">
             {{$debug?"signatures[$index][signable_id]":""}}
             <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$category}}_{{$index}}][signable_id]" value="{{$signableId}}">
-            <div class="w-[340px] h-36 mx-auto">
+            <div class="w-[340px] mx-auto">
                 <x-controls.signature2 
                     name="signatures[{{$category}}_{{$index}}][value]"
                     signableTypeColumnName="signatures[{{$category}}_{{$index}}][signable_type]"
@@ -25,12 +25,14 @@
                     categoryColumnName="signatures[{{$category}}_{{$index}}][category]"
                     category="{{$category}}"
                     value="{{$signature['value']}}"
+                    signatureComment="{{$signature['signature_comment']}}"
+                    signatureCommentColumnName="signatures[{{$category}}_{{$index}}][signature_comment]"
                     signedPersonId="{{$signature['owner_id']}}"
                     updatable="{{$signature['updatable']}}"
                 />
+                <x-renderer.avatar-user size="xlarge" uid="{{$signature['owner_id']}}" flipped=1 content="Signed at {{$signature['user']['timestamp']}}"></x-renderer.avatar-user> 
             </div>
             <div>
-                <x-controls.insp-chklst.name-position :user="$signature['user']" subText="Signed at {{$signature['user']['timestamp']}}"/>                        
             </div>
         </div>
     </div>
@@ -40,8 +42,8 @@
     @foreach($remainingList as $user)
     <div class="w-full {{$user['valid_email'] ? 'bg-red-100' : 'bg-rose-300'}} flex justify-center my-1">
         <div class="text-right p-2 rounded w-1/2">
-            <div class="my-2">
-                <x-controls.insp-chklst.name-position :user="$user['full']" subText="{{$user['valid_email'] ? 'Has not signed yet' : 'Email address is invalid'}}"/>  
+            <div class="w-[340px] mx-auto my-2">
+                <x-renderer.avatar-user size="xlarge" uid="{{$user['full']->id}}" flipped=1 content="{{$user['valid_email'] ? 'Has not signed yet' : 'Email address is invalid'}}"/>
             </div>
         </div>
     </div>
@@ -63,7 +65,7 @@
                 <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$category}}_{{$index}}][id]" value="">
                 {{$debug?"signatures[$index][signable_id]":""}}
                 <input class="w-1/4" type="{{$input_or_hidden}}" name="signatures[{{$category}}_{{$index}}][signable_id]" value="{{$signableId}}">
-                <div class="w-[340px] h-36 mx-auto">
+                <div class="w-[340px] mx-auto">
                     <x-controls.signature2 
                         name="signatures[{{$category}}_{{$index}}][value]"
                         signableTypeColumnName="signatures[{{$category}}_{{$index}}][signable_type]"
@@ -72,11 +74,13 @@
                         category="{{$category}}"
                         ownerIdColumnName="signatures[{{$category}}_{{$index}}][owner_id]"
                         value=""
+                        signatureComment="Reviewed and confirmed."
+                        signatureCommentColumnName="signatures[{{$category}}_{{$index}}][signature_comment]"
                         signedPersonId=""
                     />
+                    <x-renderer.avatar-user size="xlarge" uid="{{$currentUser['id']}}" flipped=1 content="Current timestamp will be applied"/>
                 </div>
                 <div>
-                    <x-controls.insp-chklst.name-position :user="$currentUser" subText="Current timestamp will be applied"/>                        
                 </div>
             </div>
         </div>

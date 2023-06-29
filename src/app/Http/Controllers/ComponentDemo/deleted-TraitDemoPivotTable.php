@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\ComponentDemo;
 
+use App\Http\Controllers\ComponentDemo\csv\CsvLoader;
+
 trait TraitDemoPivotTable
 {
     function getPivotTableColumns2()

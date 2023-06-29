@@ -60,7 +60,8 @@
                 <div class="mt-8 no-print"></div>
             </div> 
         </div>
-        
+        {{-- Button Go to Top and Bottom --}}
+        <x-renderer.button-scroll />
         {!! Toastr::message() !!}
         {{-- <script>
             window.Echo.channel('test')

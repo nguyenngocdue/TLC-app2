@@ -35,9 +35,9 @@
 
 <i id="iconSpin_{{$table01Name}}" class="fa-duotone fa-spinner fa-spin text-green-500" style="display: none"></i>
 <input class="bg-gray-200" readonly name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="{{$tableDebugTextHidden}}" />
-<br />
-<br />
 @if($tableName == 'hr_overtime_request_lines')
+<br />
+<br />
 <x-renderer.card title="Remaining Hours Legend">
     <div class="grid lg:grid-cols-5 md:grid-cols-5 grid-cols-2">
         <div class="flex">

@@ -14,26 +14,28 @@
         <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">Recent Projects</p>
         @endempty
         @foreach($recent as $project)
-            <li class="flex w-32">
-                <a href="{{$project->href}}" 
-                    title="{{$project->description}}"
-                    class="inline-flex items-center w-full p-1 space-x-2 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
-                    <x-renderer.image spanClass="w-10 h-10" src="{{$project->getAvatarThumbnailUrl('/images/modules.png')}}" ></x-renderer.image>
-                    <span>{{$project->name}}</span>
-                </a>
+            <li class="flex p-1">
+            <x-renderer.avatar-item 
+                title="{{$project->name}}"
+                description="{{$project->description}}"
+                href="{{$project->href}}"
+                avatar="{{$project->getAvatarThumbnailUrl('/images/modules.png')}}"
+                shape="square"
+                />
             </li>
         @endforeach
         @if(!$projects->isEmpty())
             <p class="border-t p-2 text-sm font-medium text-gray-900 dark:text-gray-300">Projects</p>
         @endempty
         @foreach($projects as $project)
-        <li class="flex w-32">
-            <a href="{{$project->href}}" 
-                title="{{$project->description}}"
-                class="inline-flex items-center w-full p-1 space-x-2 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
-                <x-renderer.image spanClass="w-10 h-10" src="{{$project->getAvatarThumbnailUrl('/images/modules.png')}}" ></x-renderer.image>
-                <span>{{$project->name}}</span>
-            </a>
+        <li class="flex p-1">
+            <x-renderer.avatar-item 
+                title="{{$project->name}}"
+                description="{{$project->description}}"
+                href="{{$project->href}}"
+                avatar="{{$project->getAvatarThumbnailUrl('/images/modules.png')}}"
+                shape="square"
+            />
         </li>
         @endforeach
 

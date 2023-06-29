@@ -40,17 +40,33 @@
                         @switch($app['edit_renderer'])
                         @case ('props-renderer')
                         <div class="px-2 flex justify-center ">
-                        <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
+                            <div class="fixed left-0">
+                                <div class="text-center">
+                                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" 
+                                    data-drawer-body-scrolling="true" data-drawer-backdrop="false">
+                                      <i class="fa-solid fa-bars"></i>
+                                    </button>
+                                 </div>
+                            </div>
+                            <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
                             <div class="fixed right-0">
-                                <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
+                                <x-controls.action-buttons isFixed="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
                             </div>
                         </div>
                         @break
                         @case ('checklist-sheet-renderer')
-                        <div class="px-2 flex justify-center">
+                         <div class="px-2 flex justify-center">
+                            <div class="fixed left-0">
+                                <div class="text-center">
+                                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" 
+                                    data-drawer-body-scrolling="true" data-drawer-backdrop="false">
+                                      <i class="fa-solid fa-bars"></i>
+                                    </button>
+                                 </div>
+                            </div>
                             <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
                             <div class="fixed right-0">
-                                <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
+                                <x-controls.action-buttons isFixed="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
                             </div>
                         </div>
                         @break
@@ -81,7 +97,9 @@
             </div>
         </div>
         @endif
-        {{-- <x-homepage.right-drawer /> --}}
+        <x-homepage.left-drawer title="Table of Content">
+            <x-homepage.table-of-content :item="$item" type="{{$type}}"/>
+        </x-homepage.left-drawer>
     
     
     {{-- <script type="text/javascript">

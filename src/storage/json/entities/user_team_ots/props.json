@@ -75,6 +75,25 @@
         "duplicatable": "",
         "new_line": ""
     },
+    "_def_assignee": {
+        "name": "_def_assignee",
+        "column_name": "def_assignee",
+        "column_type": "bigint unsigned",
+        "label": "Default Assignee",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

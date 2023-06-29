@@ -64,7 +64,7 @@
                 </div>
                 @endif
                 @if ($footer)
-                <div class='grid1 border-t bg-gray-100 px-4 py-3 text-xs font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
+                <div class='grid1 border-t rounded-b-lg bg-gray-100 px-4 py-3 text-xs font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
                     {!! $footer !!}
                 </div>
                 @endif

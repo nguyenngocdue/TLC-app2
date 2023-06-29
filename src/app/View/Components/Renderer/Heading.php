@@ -12,6 +12,7 @@ class Heading extends Component
      * @return void
      */
     public function __construct(
+        private $id ='',
         private $level = 6,
         private $title = '',
         private $xalign = 'left',
@@ -29,6 +30,7 @@ class Heading extends Component
     public function render()
     {
         return function (array $data) {
+            $id = $this->id;
             $font = "";
             $size = 6 - $this->level;
             $h = "h" . $this->level;
@@ -43,7 +45,7 @@ class Heading extends Component
 
             $theClass = "{$this->class} $font leading-tight text-{$textSize} text-black my-2 text-{$this->xalign} dark:text-gray-300";
             $slot = $data['slot'];
-            return "<$h class='$theClass' title='$this->title'>$slot <p class='text-sm font-light italic'>$labelExtra</p></$h>";
+            return "<$h  class='$theClass' id='$id' title='$this->title' style='scroll-margin-top: 90px;'>$slot <p class='text-sm font-light italic' >$labelExtra</p></$h>";
         };
         // return view('components.renderer.heading');
     }

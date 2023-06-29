@@ -4,15 +4,35 @@
             <div class="grid gap-6 mb-8 md:grid-cols-2 ">
                 <div>
                     AvatarItem with Attributes
-                    <x-renderer.avatar-item title="Steve Jobs" description="Software Engineer" href="http://www.google.com" avatar="/images/helen.jpeg"></x-renderer.avatar-item>
+                    <x-renderer.avatar-item title="Steve Jobs" description="Software Engineer" href="#" avatar="/images/helen.jpeg"></x-renderer.avatar-item>
                 </div>
                 <div>
-                    AvatarItem with gray= { { true } }
-                    <x-renderer.avatar-item title="Alan Turing" description="Software Engineer" href="http://www.google.com" avatar="/images/hans.jpeg" gray='true'></x-renderer.avatar-item>
+                    AvatarItem and GRAY
+                    <x-renderer.avatar-item title="Alan Turing" description="Software Engineer" href="#" avatar="/images/hans.jpeg" gray='true'></x-renderer.avatar-item>
+                </div>
+                <div>
+                    Flipped
+                    <x-renderer.avatar-item title="Alan Turing" description="Software Engineer" href="#" avatar="/images/hans.jpeg" flipped=1></x-renderer.avatar-item>
+                </div>
+                <div>
+                    Flipped and GRAY
+                    <x-renderer.avatar-item title="Alan Turing" description="Software Engineer" href="#" avatar="/images/hans.jpeg" flipped=1 gray='true'></x-renderer.avatar-item>
+                </div>
+                <div>
+                    Vertical
+                    <x-renderer.avatar-item title="Alan Turing" description="Software Engineer" href="#" avatar="/images/hans.jpeg" verticalLayout=1></x-renderer.avatar-item>
+                </div>
+                <div>
+                    Vertical and GRAY
+                    <x-renderer.avatar-item title="Alan Turing" description="Software Engineer" href="#" avatar="/images/hans.jpeg" verticalLayout=1 gray='true'></x-renderer.avatar-item>
                 </div>
                 <div>
                     Empty attribute (expected No Name with an anonymous avatar)
                     <x-renderer.avatar-item></x-renderer.avatar-item>
+                </div>
+                <div>
+                    Empty attribute (expected Module icon with text unknown)
+                    <x-renderer.avatar-item shape="square" avatar="/images/modules.png" title="Unknown"></x-renderer.avatar-item>
                 </div>
             </div>
         </x-renderer.card>
@@ -39,6 +59,8 @@
             <x-renderer.description label="Status" colName="hello" colSpan=6 :contents="456" />
         </div> --}}
     </x-renderer.card>
+    {{-- <x-renderer.card title="Another component here"> --}}
+    {{-- </x-renderer.card> --}}
     <x-renderer.card title="Tables 1">
         <x-renderer.card title="Table with Data and maxH= { { false } }">
             In dataSource: rowDescription="This is an example of a rowDescription"
