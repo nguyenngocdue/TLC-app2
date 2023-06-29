@@ -74,7 +74,7 @@
                         category="{{$category}}"
                         ownerIdColumnName="signatures[{{$category}}_{{$index}}][owner_id]"
                         value=""
-                        signatureComment=""
+                        signatureComment="Reviewed and confirmed."
                         signatureCommentColumnName="signatures[{{$category}}_{{$index}}][signature_comment]"
                         signedPersonId=""
                     />

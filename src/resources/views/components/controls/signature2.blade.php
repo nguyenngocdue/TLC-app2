@@ -23,7 +23,18 @@
     </div>
     @if(!is_null($signatureCommentColumnName))
     {{$debug ? $signatureCommentColumnName : ""}}
-    <input type="text" placeholder="Input your comment here..." class="border-2 rounded w-full" name="{{$signatureCommentColumnName}}" id="{{$signatureCommentColumnName}}" value="{{$signatureComment}}" />
+    <input type="text" class="border-2 rounded w-full" name="{{$signatureCommentColumnName}}" id="{{$signatureCommentColumnName}}" value="{{$signatureComment}}" 
+            placeholder="Input your comment here..."    
+            title="Common comments:
+    • Reviewed and confirmed.
+    • Approved and accepted.
+    • Endorsed and acknowledged.
+    • Agreed and authorized.
+    • Confirmed and validated.
+    • Consented and approved.
+    • Endorsed as accurate and complete.
+    • Acknowledged and supported."
+    />
     @endif
 
     {{$debug ? $name : ""}}
