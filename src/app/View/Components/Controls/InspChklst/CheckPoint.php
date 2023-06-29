@@ -41,6 +41,7 @@ class CheckPoint extends Component
             'table01Name' => $this->table01Name,
             'rowIndex' => $this->rowIndex,
             'attachments' => $attachments,
+            'attachmentIds' => $this->attachmentIds,
             'debug' => $this->debug,
             'type' => $this->type,
         ]);

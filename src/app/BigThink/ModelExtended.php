@@ -127,12 +127,13 @@ abstract class ModelExtended extends Model
         // if(!isset(static::getCollection()[$id])) 
         return static::getCollection()[$id] ?? null;
     }
-    private static $singletonMorphMany = null;
+    private static $singletonMorphMany = [];
 
     public static function getCollectionMorphMany($ids, $fieldNameCategory, $modelName, $keyType, $keyId)
     {
-        if (!isset(static::$singletonMorphMany)) {
-            static::$singletonMorphMany = $modelName::query()->where($keyType, static::class)->whereIn($keyId, $ids)
+        $key = $modelName . "_" . $fieldNameCategory;
+        if (!isset(static::$singletonMorphMany[$key])) {
+            static::$singletonMorphMany[$key] = $modelName::query()->where($keyType, static::class)->whereIn($keyId, $ids)
                 ->where('category', FieldSeeder::getIdFromFieldName($fieldNameCategory))->get()->groupBy($keyId);
         }
     }
@@ -148,7 +149,9 @@ abstract class ModelExtended extends Model
         if ($fieldNameCategory) {
             $eloquentParams = static::$eloquentParams[$fieldNameCategory] ?? [];
             static::getCollectionMorphMany($ids, $fieldNameCategory, $eloquentParams[1], $eloquentParams[3], $eloquentParams[4]);
+            $key = $eloquentParams[1] . "_" . $fieldNameCategory;
+            return static::$singletonMorphMany[$key][$this->id] ?? [];
         }
-        return static::$singletonMorphMany[$this->id] ?? [];
+        return [];
     }
 }
