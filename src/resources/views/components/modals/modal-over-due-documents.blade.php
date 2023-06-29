@@ -35,8 +35,8 @@
 </div>
 @endsection
 
-@section($modalId.'-footer')
-@endsection
+{{-- @section($modalId.'-footer')
+@endsection --}}
 
 @section($modalId.'-javascript')
 <script>

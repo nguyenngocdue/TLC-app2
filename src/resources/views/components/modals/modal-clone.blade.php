@@ -20,8 +20,8 @@
 
 @section($modalId.'-javascript')
 <script>
-    const url = @json($url);
-    const callApiCloneTemplate = () => {
+    url = @json($url);
+    callApiCloneTemplate = () => {
         id = document.getElementById('hse_insp_tmpl_sht_id').value
         if(id){
             $.ajax({
