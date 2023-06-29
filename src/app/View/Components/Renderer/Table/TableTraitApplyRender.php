@@ -41,7 +41,7 @@ trait TableTraitApplyRender
         return "rendererParam='$strParam' rendererUnit='$strUnit'";
     }
 
-    private function applyRender($name, $renderer, $rawData, $column, object $dataLineObj, $index)
+    private function applyRender($name, $renderer, $rawData, $column, object $dataLineObj, $index, $batchLength)
     {
         $name = $name ? "name='$name'" : "";
         $rowIndexRender = "rowIndex='$index'";
@@ -73,9 +73,10 @@ trait TableTraitApplyRender
             $tagName = "x-controls.has-data-source.dropdown4";
             $multiple = (isset($column['multiple']) && $column['multiple'] == true) ? "multiple=true" : "";
             $saveOnChangeRenderer = (isset($column['saveOnChange']) && $column['saveOnChange'] == true) ? "saveOnChange=true" : "";
+            $batchLength = "batchLength=$batchLength";
             $rawData = ($rawData instanceof Collection) ? $rawData = $rawData->pluck('id') : [$rawData];
             $rawData = json_encode($rawData);
-            $attributes = "$name $typeRender $multiple $propertyRender $rowIndexRender selected='$rawData' $saveOnChangeRenderer";
+            $attributes = "$name $typeRender $multiple $propertyRender $rowIndexRender selected='$rawData' $saveOnChangeRenderer $batchLength";
             $output = "<$tagName $attributes></$tagName>";
             // Log::info($output);
 

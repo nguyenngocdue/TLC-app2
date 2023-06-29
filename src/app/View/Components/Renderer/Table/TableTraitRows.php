@@ -44,7 +44,7 @@ trait TableTraitRows
         return [$cellClassList, $cellTitle, $cellHref, $value];
     }
 
-    private function makeTd($columns, $dataLineObj, $no, $dataLineIndex, $tableDebug)
+    private function makeTd($columns, $dataLineObj, $no, $dataLineIndex, $batchLength, $tableDebug)
     {
         $tds = [];
         $columnCount = sizeof($columns);
@@ -104,7 +104,7 @@ trait TableTraitRows
                     $rendered = $renderer
                         // ? "A" 
                         // : "B";
-                        ? $this->applyRender($name, $renderer, $rawData, $column, $dataLineObj, $dataLineIndex)
+                        ? $this->applyRender($name, $renderer, $rawData, $column, $dataLineObj, $dataLineIndex, $batchLength)
                         : ($dataIndex === 'action' ? $valueOfRawData :
                             "<div class='p-2 $cellDivClass' valueOfRawData>" . $valueOfRawData . "</div>"
                         );
@@ -163,7 +163,7 @@ trait TableTraitRows
         $lineNo = 0;
         foreach ($dataSource as $dataLineIndex => $dataLine) {
             $dataLineObj = is_object($dataLine) ? $dataLine : (object)$dataLine;
-            $tds = $this->makeTd($columns, $dataLineObj, $start + $lineNo++ + 1, $dataLineIndex, $tableDebug);
+            $tds = $this->makeTd($columns, $dataLineObj, $start + $lineNo++ + 1, $dataLineIndex, sizeof($dataSource), $tableDebug);
 
             if ($this->groupBy) {
                 $groupBy = $this->groupBy;
