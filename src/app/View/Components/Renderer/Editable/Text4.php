@@ -23,6 +23,7 @@ class Text4 extends Component
         private $icon = null,
         private $saveOnChange = false,
         private $readOnly = false,
+        private $batchLength = 1,
     ) {
         //In case of listeners, the data was parsed in to array
         if (is_array($this->cell)) {
@@ -53,6 +54,7 @@ class Text4 extends Component
             'saveOnChange' => $this->saveOnChange,
             'readOnly' => $this->readOnly,
             'classList' => ClassList::TEXT,
+            'batchLength' => $this->batchLength,
         ]);
     }
 }

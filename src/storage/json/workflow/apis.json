@@ -75,7 +75,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "hr_timesheet_workers": {
-        "name": "hr_timesheet_workers"
+        "name": "hr_timesheet_workers",
+        "storeEmpty_and_updateShort": "true"
     },
     "hse_corrective_actions": {
         "name": "hse_corrective_actions",
@@ -181,9 +182,6 @@
         "name": "qaqc_insp_chklst_lines",
         "storeEmpty_and_updateShort": "true"
     },
-    "qaqc_insp_chklst_sht_sigs": {
-        "name": "qaqc_insp_chklst_sht_sigs"
-    },
     "qaqc_insp_chklst_shts": {
         "name": "qaqc_insp_chklst_shts"
     },
@@ -223,6 +221,9 @@
     "qaqc_wirs": {
         "name": "qaqc_wirs",
         "renderTableForPopupModals": "true"
+    },
+    "signatures": {
+        "name": "signatures"
     },
     "sub_projects": {
         "name": "sub_projects"

@@ -318,27 +318,7 @@
                     return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
                 }
     }
-    function callApiStoreEmpty(url,data,callback = null){
-        $.ajax({
-            type: 'post',
-            url: url,
-            data: { lines: data },
-            // headers: {
-            //     'Authorization': 'Bearer ' + token,
-            // },
-            success: function (response) {
-                if(callback){
-                    callback(response);
-                }else{
-                    toastr.success(response.message);
-                    window.location.replace(response.hits[0]['redirect_edit_href']);
-                }
-            },
-            error: function (jqXHR) {
-                toastr.error(jqXHR.responseJSON.message);
-            },
-        })
-    }
+    
     function onHover(classHover,bgColor,textColor){
         if(classHover){
         $(`.${classHover}`).hover(function() {

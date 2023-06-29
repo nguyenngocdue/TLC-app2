@@ -128,6 +128,7 @@ class ViewAllTypeMatrix extends Component
     {
         $dataSource = $this->reIndexDataSource($dataSource, 'ts_date', 'team_id',);
         $result = [];
+        $routeCreate = route($this->type . '.storeEmpty');
 
         foreach ($yAxis as $y) {
             $yId = $y->id;
@@ -140,7 +141,8 @@ class ViewAllTypeMatrix extends Component
                 'cell_href' => route($yAxisTableName . ".edit", $y->id),
             ];
             $line['meta01'] = (object) [
-                'value' => User::findFromCache($y->owner_id)->name,
+                'value' => User::findFromCache($y->def_assignee)->name,
+                'cell_title' => $y->def_assignee,
             ];
             $line['count'] = count($y->getTshtMembers());
             foreach ($xAxis as $x) {
@@ -148,7 +150,7 @@ class ViewAllTypeMatrix extends Component
                 $xClass = $x['column_class'];
                 $line[$xId] = (object)[
                     'value' => '<i class="fa-duotone fa-circle-plus"></i>',
-                    'cell_href' => route($this->type . ".create"),
+                    'cell_href' => 'javascript:callApiStoreEmpty("' . $routeCreate . '",[{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}])',
                     'cell_class' => "text-center text-blue-800 $xClass",
                     'cell_title' => "Create a new document",
                 ];
