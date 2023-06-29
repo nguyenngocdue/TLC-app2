@@ -23,6 +23,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('note')->nullable();
             $table->unsignedBigInteger('def_assignee')->nullable();
             $table->float('standard_working_min')->nullable();
             $table->time('standard_start_time')->nullable();

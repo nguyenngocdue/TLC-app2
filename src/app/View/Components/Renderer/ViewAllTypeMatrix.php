@@ -28,6 +28,7 @@ class ViewAllTypeMatrix extends Component
         // dump($this->viewportDate);
         $this->viewportDate = strtotime($this->viewportDate ? $this->viewportDate : now());
         // dump($this->viewportMode);
+        if (!$this->viewportMode) $this->viewportMode = 'week';
     }
 
     function getYAxis()

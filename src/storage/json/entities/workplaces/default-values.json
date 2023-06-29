@@ -4,10 +4,11 @@
         "column_name": "id",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_name": {
@@ -15,21 +16,71 @@
         "column_name": "name",
         "label": "",
         "validation": "required",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
-    "_standard_working_hour": {
-        "name": "_standard_working_hour",
-        "column_name": "standard_working_hour",
+    "_note": {
+        "name": "_note",
+        "column_name": "note",
         "label": "",
-        "validation": "required",
+        "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
+        "control_extra": ""
+    },
+    "_standard_working_min": {
+        "name": "_standard_working_min",
+        "column_name": "standard_working_min",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
         "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_standard_start_time": {
+        "name": "_standard_start_time",
+        "column_name": "standard_start_time",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_standard_start_break": {
+        "name": "_standard_start_break",
+        "column_name": "standard_start_break",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_break_duration_in_min": {
+        "name": "_break_duration_in_min",
+        "column_name": "break_duration_in_min",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
         "control_extra": ""
     },
     "_description": {
@@ -37,10 +88,11 @@
         "column_name": "description",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_def_assignee": {
@@ -48,10 +100,11 @@
         "column_name": "def_assignee",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_getMonitors1()": {
@@ -59,10 +112,11 @@
         "column_name": "getMonitors1()",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_slug": {
@@ -70,32 +124,11 @@
         "column_name": "slug",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "All_SlugifyByName",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
-        "control_extra": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "label_extra": "",
-        "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_getUsers": {
@@ -103,10 +136,11 @@
         "column_name": "getUsers",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "default_value": "",
         "control_extra": ""
     },
     "_getPublicHolidays": {
@@ -114,10 +148,83 @@
         "column_name": "getPublicHolidays",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
+        "control_extra": ""
+    },
+    "_getHrOtrs": {
+        "name": "_getHrOtrs",
+        "column_name": "getHrOtrs",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
         "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
         "control_extra": ""
     }
 }
