@@ -1352,6 +1352,9 @@ video {
   width: -moz-max-content;
   width: max-content;
 }
+.w-9 {
+  width: 2.25rem;
+}
 .min-w-0 {
   min-width: 0px;
 }
