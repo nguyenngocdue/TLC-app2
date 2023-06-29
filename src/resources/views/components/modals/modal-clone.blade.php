@@ -1,7 +1,7 @@
 
-@extends("modals.modal-big")
+@extends("modals.modal-small")
 
-@section($modalId.'-header', "Document List")
+@section($modalId.'-header', "Create a new HSE Checklist from a template")
 
 @section($modalId.'-body')
     <div class="p-2">

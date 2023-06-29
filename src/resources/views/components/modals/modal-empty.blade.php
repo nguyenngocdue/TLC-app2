@@ -1,4 +1,4 @@
-@extends("modals.modal-big")
+@extends("modals.modal-large")
 
 @section($modalId.'-header', "Modal Empty")
 
