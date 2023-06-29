@@ -3,39 +3,35 @@
         <x-calendar.sidebar-calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}"/>
     </div>
     <div class="w-full px-1 bg-gray-100 rounded-lg shadow col-span-9">
-        <div class="grid grid-cols-12 gap-2 mx-2">
-            <div class="col-span-4 flex">
-                    <x-renderer.card class="w-full border bg-white p-2" title="Current view">
+        <div class="grid lg:grid-cols-12 gap-2 mx-2">
+            <div class="md:col-span-4 flex">
+                    <x-renderer.card class="w-full border bg-white p-2" title="Selected view">
                     <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
                     </x-renderer.card>
-                    </div>
-            <div class="col-span-8">
+            </div>
+            <div class="md:col-span-6">
                 <x-renderer.legend :dataSource="$dataSourceLegend" title="{{$titleLegend}}" />
             </div>
+            <div class="md:col-span-2">
+                <x-renderer.card class="w-full border bg-white p-[15px] items-center" title="Selected Year">
+                        <div class="text-center flex justify-around items-center">
+                            <button type="button" onclick="decrease(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                                <i class="w-5 h-full fa-regular fa-arrow-left"></i>
+                            </button>
+                            <span id="current-year">{{$year}}</span>
+                            <button type="button" onclick="increase(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                            <i class="w-5 h-full fa-regular fa-arrow-right"></i>
+                            </button>
+                        </div>
+                </x-renderer.card>
+            </div>
         </div>
-        <div class="mt-2 grid grid-cols-12">
-            <div class="col-span-11 overflow-y-auto overflow-x-hidden h-screen">
+        <div class="mt-2 grid grid-cols-12 ">
+            <div class="col-span-12 overflow-y-auto overflow-x-hidden h-screen">
                 <div class = "flex flex-wrap justify-center">
                     <div class="grid 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 gap-2 grid-cols-1 font-semibold" calendar-container>
                     </div> 
                 </div>
-            </div>
-            <div class="col-span-1">
-                <div class="grid grid-cols-12 h-full">
-                    <div class="col-span-6">
-
-                    </div>
-                    <div class="flex-col justify-between">
-                        <button type="button" onclick="decrease(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
-                            <i class="w-5 h-full fa-regular fa-arrow-up"></i>
-                        </button>
-                        <button type="button" onclick="increase(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
-                            <i class="w-5 h-full fa-regular fa-arrow-down"></i>
-                        </button>
-                    </div>
-                    
-                </div>
-                
             </div>
         </div>
     </div>
@@ -136,6 +132,7 @@
     function yearNow() {
         let today = new Date();
         year = today.getFullYear();
+        document.getElementById('current-year').innerText = year
     }
     function sunday(day,month,year) {
         return moment(`${year}-${month}-${day}`).isoWeekday() === 7;
