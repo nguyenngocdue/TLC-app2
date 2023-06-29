@@ -70,7 +70,7 @@ trait  ColumnsPivotReport
     {
         $result = [];
         $lib = LibPivotTables::getFor($this->key);
-        $b = $lib['column_fields'];
+        $b = $lib['column_fields'] ?? [];
         $result = [];
         foreach ($b as $value) {
             foreach ($a as $item) {

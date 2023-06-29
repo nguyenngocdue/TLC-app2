@@ -42,8 +42,9 @@ trait TraitLibPivotTableDataFields
     public function getDataFields()
     {
         $lib = LibPivotTables::getFor($this->key);
-        $dataFields = $lib['data_fields'];
-        $fields = $this->separateFields($lib['row_fields']);
+        $filters = $lib['filters'] ?? [];
+        $row_fields = $lib['row_fields'] ?? [];
+        $fields = $this->separateFields($row_fields);
         $rowFields = $fields['fields'] ?? [];
         $bidingRowFields = $fields['biding_fields'] ?? [];
 
@@ -56,19 +57,21 @@ trait TraitLibPivotTableDataFields
                 return $name .'_'.$attr;
             }
             return $item;
-        }, $lib['row_fields']));
+        }, $row_fields));
 
-        $valueIndexFields = $lib['value_index_fields'];
-        $filters = $lib['filters'];
-
-        $fields = $this->separateFields($lib['column_fields']);
-        $columnFields = $fields['fields'];
+        $columnFields = $lib['column_fields'] ?? [];
+        $fields = $this->separateFields($columnFields);
+        $columnFields = $fields['fields'] ?? [];
+        $valueIndexFields = $lib['value_index_fields'] ?? [];
         $columnFields =   $this->mapValueIndexColumnFields($columnFields, $valueIndexFields);
         
         $bidingColumnFields = $fields['biding_fields'] ?? [];
-        $dataAggregations = ReportPivot::combineArrays($dataFields, $lib['data_aggregations']);
-
-        $sortBy = $lib['sort_by'];
+        
+        $dataFields = $lib['data_fields'] ?? [];
+        $dataAggregation = $lib['data_aggregations'] ?? [];
+        $dataAggregations = ReportPivot::combineArrays($dataFields,$dataAggregation );
+        
+        $sortBy = $lib['sort_by'] ?? [];
         return [$rowFields, $bidingRowFields, $filters, $columnFields, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields];
     }
 }

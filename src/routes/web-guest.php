@@ -6,6 +6,8 @@ use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeCanhController;
 use App\Http\Controllers\WelcomeDueController;
+use App\Http\Controllers\WelcomeDueController_apple_store_category_per_date;
+use App\Http\Controllers\WelcomeDueController_apple_store_product_per_date;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_date;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_project;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_project_date;
@@ -23,6 +25,8 @@ Route::resource('welcome-due-employee_date', WelcomeDueController_hr_timesheet_e
 Route::resource('welcome-due-employee_project', WelcomeDueController_hr_timesheet_employee_project::class)->only('index');
 Route::resource('welcome-due-project_date', WelcomeDueController_hr_timesheet_project_date::class)->only('index');
 Route::resource('welcome-due-team_date', WelcomeDueController_hr_timesheet_team_date::class)->only('index');
+Route::resource('welcome-due-product_date', WelcomeDueController_apple_store_product_per_date::class)->only('index');
+Route::resource('welcome-due-category_date', WelcomeDueController_apple_store_category_per_date::class)->only('index');
 
 Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 

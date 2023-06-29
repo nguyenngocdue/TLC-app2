@@ -28,9 +28,14 @@ class PivotTable extends Component
     private function attachToDataSource($processedData, $calculatedData, $transferredData)
     {
         $dataOutput = [];
+        // dd($processedData, $calculatedData, $transferredData);
         foreach ($processedData as $k1 => $items) {
-            foreach ($items as $k2 => $item) $dataOutput[] = $calculatedData[$k1][$k2] + reset($item) + $transferredData[$k1][$k2];
+            foreach ($items as $k2 => $item) {
+                $dt = isset($calculatedData[$k1][$k2]) ? $calculatedData[$k1][$k2] : [];
+                $dataOutput[] = $dt + reset($item) + $transferredData[$k1][$k2];
+            };
         }
+        // dd($dataOutput);
         return $dataOutput;
     }
 
@@ -58,16 +63,18 @@ class PivotTable extends Component
     {
         [$rowFieldsHasAttr,, $filters, $columnFields,, $dataAggregations,,, $valueIndexFields] =  $this->getDataFields();
         // dd($bidingRowFields);
-        $valueFilters = array_combine($filters, [[1, 4], [7, 8]]);
+        $valueFilters = count($filters) ? array_combine($filters, [[1, 4], [7, 8]]) : [];
         // Step 1: reduce lines from Filters array
         $linesData = $primaryData;
-        // $a = array_column($linesData, 'sub_project_id');
-        // dd($linesData[487]);
+        // dd($linesData);
         $dataReduce = ReportPivot::reduceDataByFilterColumn($linesData, $valueFilters);
         // dd($valueFilters, $dataReduce);
 
         // Step 2: group lines by Row_Fields array
         $processedData = ReportPivot::groupBy($dataReduce, $rowFieldsHasAttr);
+        //Summarize the results of Value_Index_Fields that has the same value in a field
+        $processedData = ReportPivot::groupBy2($processedData, $columnFields);
+
         //Remove all array keys by looping through all elements
         $processedData = array_values(array_map(fn ($item) => ReportPivot::getLastArray($item), $processedData));
         // dd($processedData);
@@ -85,6 +92,7 @@ class PivotTable extends Component
 
         $tables = $this->getDataFromTables();
         $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput);
+        // dd($dataOutput);
         return $dataOutput;
     }
 
@@ -194,9 +202,9 @@ class PivotTable extends Component
     {
         $primaryData = $this->dataSource;
         $dataOutput = $this->makeDataRenderer($primaryData);
-        // dump($dataOutput);
         [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput);
         $dataOutput = $this->sortLinesData($dataOutput);
+        // dump($dataOutput, $tableColumns);
         $dataOutput = $this->changeValueData($dataOutput);
         return view('components.renderer.report.pivot-table', [
             'tableDataSource' => $dataOutput,

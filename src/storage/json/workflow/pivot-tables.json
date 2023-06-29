@@ -1,4 +1,26 @@
 {
+    "apple_store_category_per_date": {
+        "name": "apple_store_category_per_date",
+        "filters": null,
+        "row_fields": "category",
+        "column_fields": "date",
+        "value_index_fields": "amount",
+        "data_fields": null,
+        "data_aggregations": null,
+        "lookup_tables": null,
+        "sort_by": null
+    },
+    "apple_store_product_per_date": {
+        "name": "apple_store_product_per_date",
+        "filters": null,
+        "row_fields": "product",
+        "column_fields": "date,\r\ndate_discount",
+        "value_index_fields": "amount,\r\ndiscount",
+        "data_fields": "amount,\r\ndiscount",
+        "data_aggregations": "sum,\r\nsum,",
+        "lookup_tables": null,
+        "sort_by": null
+    },
     "hr_timesheet_employee_date": {
         "name": "hr_timesheet_employee_date",
         "filters": "workplace_id, department_id",
@@ -36,7 +58,7 @@
         "name": "hr_timesheet_team_date",
         "filters": "workplace_id, department_id",
         "row_fields": "workplace_id(workplaces.name), \r\ncategory_id(user_categories.name), \r\ntype_id(user_types.name)",
-        "column_fields": "time_sheet_start_time, time_sheet_start_time_otr, time_sheet_start_time_wfh",
+        "column_fields": "sub_project_id(sub_projects.name)",
         "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
         "data_aggregations": "sum,sum,sum",

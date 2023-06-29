@@ -200,8 +200,53 @@ class ReportPivot
             if (!isset($nestedArray['items'])) $nestedArray['items'] = [];
             $nestedArray['items'][] = $line;
         }
+        // dd($dataOutput);
         return $dataOutput;
     }
+
+    public static function reduceItemsRecursive(&$array, $columnFields)
+    {
+        foreach ($array as $key => &$value) {
+            if ($key === 'items' && is_array($value)) {
+                $array[$key] = self::sumFieldHasTheSameValue($value, $columnFields);
+            } elseif (is_array($value)) {
+                self::reduceItemsRecursive($value, $columnFields);
+            }
+        }
+    }
+
+    private static function sumFieldHasTheSameValue($data, $columnFields)
+    {
+        $fieldOperator = $columnFields[0]['fieldIndex'] ;
+        $indexValueOperator = $columnFields[0]['valueIndexField'];
+        $array = [];
+        $check = '';
+
+        
+
+
+        foreach ($data as $k => $item) {
+            if (!count($array))  $array[] = $item;
+            else {
+                foreach ($array as $key => $value) {
+                    if ($value[$fieldOperator] === $item[$fieldOperator]) {
+                        $array[$key][$indexValueOperator] =  $value[$indexValueOperator] + $item[$indexValueOperator];
+                        $check = $item[$fieldOperator];
+                    }
+                }
+                if ($data[$k][$fieldOperator] !== $check) $array[] = $item;
+            }
+        }
+        return $array;
+    }
+
+
+    public static function groupBy2($processedData, $columnFields)
+    {
+        self::reduceItemsRecursive($processedData, $columnFields);
+        return $processedData;
+    }
+
 
     public static function transferData($dataSource, $columnFields, $valueIndexFields)
     {
