@@ -150,7 +150,8 @@ abstract class ModelExtended extends Model
             $eloquentParams = static::$eloquentParams[$fieldNameCategory] ?? [];
             static::getCollectionMorphMany($ids, $fieldNameCategory, $eloquentParams[1], $eloquentParams[3], $eloquentParams[4]);
             $key = $eloquentParams[1] . "_" . $fieldNameCategory;
-            return static::$singletonMorphMany[$key][$this->id] ?? [];
+            $result = static::$singletonMorphMany[$key][$this->id] ?? [];
+            return $result;
         }
         return [];
     }
