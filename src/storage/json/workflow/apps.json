@@ -392,7 +392,8 @@
         "status": null,
         "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "checklist-sheet-renderer",
-        "icon": null
+        "icon": null,
+        "disallowed_direct_creation": "true"
     },
     "hse_insp_control_group": {
         "name": "hse_insp_control_group",

@@ -68,5 +68,7 @@
         @endif
     
     @endforeach
+    {!!$buttonClone!!}
+    {!!$modalClone!!}
 </div>
     
