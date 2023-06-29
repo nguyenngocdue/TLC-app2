@@ -21,7 +21,7 @@
     "_team_id": {
         "name": "_team_id",
         "column_name": "team_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Team",
         "control": "dropdown",
         "align": "",
