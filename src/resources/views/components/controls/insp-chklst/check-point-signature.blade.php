@@ -1,6 +1,6 @@
 <div class="flex justify-center">
      <div>
-          <div class="w-[340px] h-36">
+          <div class="w-[340px] mx-auto">
                <x-controls.signature2 
                     id="{{$table01Name}}[value][{{$rowIndex}}]"  
                     name="{{$table01Name}}[value][{{$rowIndex}}]"  
@@ -8,10 +8,10 @@
                     value="{{$line->value}}"
                     signedPersonId="{{$line->inspector_id}}"
                />
+               {{-- When user hasnt signed yet --}}
+               @if($user) 
+                    <x-renderer.avatar-user size="xlarge" uid="{{$user['id']}}" flipped=1 content="Signed at {{$user['timestamp']}}"></x-renderer.avatar-user> 
+               @endif
           </div>
-          {{-- When user hasnt signed yet --}}
-          @if($user) 
-               <x-renderer.avatar-user size="xlarge" uid="{{$user['id']}}" flipped=1 content="Signed at {{$user['timestamp']}}"></x-renderer.avatar-user> 
-          @endif
      </div>
 </div>

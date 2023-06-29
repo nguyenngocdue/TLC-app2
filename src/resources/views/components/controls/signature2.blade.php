@@ -9,6 +9,7 @@
         @endif
         {!! $value_decoded !!}
     </div>
+    <p class="text-left">{!! $signatureComment !!}</p>
 @endif
 
 <div id="div2{{$name}}" class="{{$value_decoded == '' ? "" : "hidden"}} signature-pad--body">
@@ -18,10 +19,13 @@
                 <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
             </button>
         @endif
-        <canvas width="{{$w}}" height="{{$h}}" id="canvas_{{$name}}"
-         style="touch-action: none; user-select: none;" >
-        </canvas>
+        <canvas width="{{$w}}" height="{{$h}}" id="canvas_{{$name}}" style="touch-action: none; user-select: none;" ></canvas>
     </div>
+    @if(!is_null($signatureCommentColumnName))
+    {{$debug ? $signatureCommentColumnName : ""}}
+    <input type="text" placeholder="Input your comment here..." class="border-2 rounded w-full" name="{{$signatureCommentColumnName}}" id="{{$signatureCommentColumnName}}" value="{{$signatureComment}}" />
+    @endif
+
     {{$debug ? $name : ""}}
     <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$name}}" id="{{$name}}" value='{!! $value !!}' />
     
