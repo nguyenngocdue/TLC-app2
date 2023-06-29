@@ -30,7 +30,7 @@
     <script src="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
-    <script src="{{ asset('js/tlc2.js') }}"></script>
+    <script src="{{ asset('js/tlc2-2023-06-29.js') }}"></script>
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
@@ -42,8 +42,6 @@
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20230406.js') }}"></script>
     <script src="{{ asset('js/components/Number4.js') }}"></script>
     <script src="{{ asset('js/components/Footer4.js') }}"></script>
-    {{-- <script src="{{ asset('js/components/EditableTable.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/components/EditableTableAddNewLine.js') }}"></script> --}}
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>
     <script src="{{ asset('js/components/KeyArrowTable.js') }}"></script>
     <script src="{{ asset('js/applayout.js') }}"></script>

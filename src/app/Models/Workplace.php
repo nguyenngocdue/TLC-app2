@@ -49,11 +49,24 @@ class Workplace extends ModelExtended
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function getDurationMorning()
-    {
+    public function getDurationMorningDefault(){
         $startTime =  Carbon::parse($this->standard_start_time);
         $startBreakTime =  Carbon::parse($this->standard_start_break);
         return $startBreakTime->diffInMinutes($startTime);
+    }
+    public function isDifferentDay(){
+        return $this->getDurationMorningDefault() > $this->standard_working_min;
+    }
+    public function getDurationMorning()
+    {
+        $duration = $this->getDurationMorningDefault();
+        $startTime =  Carbon::parse($this->standard_start_time);
+        $startBreakTime =  Carbon::parse($this->standard_start_break);
+        if($this->isDifferentDay()){
+            $startTime =  Carbon::parse($this->standard_start_time)->subDay();
+        }
+        $duration = $startBreakTime->diffInMinutes($startTime);
+        return $duration;
     }
     public function getDurationAfternoon()
     {

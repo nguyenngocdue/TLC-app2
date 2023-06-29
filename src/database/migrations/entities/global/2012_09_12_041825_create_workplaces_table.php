@@ -23,11 +23,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('note')->nullable();
             $table->unsignedBigInteger('def_assignee')->nullable();
             $table->float('standard_working_min')->nullable();
+            $table->float('break_duration_in_min')->nullable();
             $table->time('standard_start_time')->nullable();
             $table->time('standard_start_break')->nullable();
-            $table->float('break_duration_in_min')->nullable();
             $table->string('slug')->unique();
             $table->appendCommonFields();
         });

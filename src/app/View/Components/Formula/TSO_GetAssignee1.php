@@ -5,11 +5,10 @@ namespace App\View\Components\Formula;
 use App\Models\User;
 use App\Models\User_discipline;
 use App\Utils\Support\CurrentUser;
-use App\Utils\Support\Json\SuperDefinitions;
 
 class TSO_GetAssignee1
 {
-    public function __invoke($ownerId)
+    public function __invoke($ownerId = null)
     {
         if (!$ownerId) {
             $currentUser = CurrentUser::get();

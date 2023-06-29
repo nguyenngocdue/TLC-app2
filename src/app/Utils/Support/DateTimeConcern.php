@@ -5,6 +5,7 @@ namespace App\Utils\Support;
 use App\Models\User;
 use App\Utils\Constant;
 use Carbon\Carbon;
+use DateInterval;
 use DateTime;
 
 class DateTimeConcern
@@ -289,9 +290,12 @@ class DateTimeConcern
     {
         $dateTime = new DateTime($timestamp);
         $timeStart = self::getStandardStartTimeMorningOfUser($userId);
+        $isDifferentDay = self::isDifferentDayOfUser($userId);
         $explodeTimeStart = explode(":", $timeStart);
-        dd($explodeTimeStart);
         $dateTime->setTime($explodeTimeStart[0], $explodeTimeStart[1], $explodeTimeStart[2]);
+        if($isDifferentDay){
+            $dateTime->sub(new DateInterval('P1D'));
+        }
         return $dateTime->format("Y-m-d H:i:s");
     }
     /**
@@ -348,6 +352,7 @@ class DateTimeConcern
 
     public static function setTime($timeType, $startTime, $userId)
     {
+        dd($startTime);
         switch ($timeType) {
             case 'morning':
                 return self::formatTimestampStartForMorning($startTime, $userId);
@@ -371,6 +376,9 @@ class DateTimeConcern
     public static function getStandardStartTimeMorningOfUser($id)
     {
         return User::findFromCache($id)->getWorkplace->standard_start_time;
+    }
+    public static function isDifferentDayOfUser($id){
+        return User::findFromCache($id)->getWorkplace->isDifferentDay();
     }
     public static function getStandardStartTimeAfternoonOfUser($id)
     {

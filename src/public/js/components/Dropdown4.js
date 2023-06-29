@@ -106,7 +106,7 @@ const onChangeGetSelectedObject4 = (listener, table01Name, rowIndex) => {
     return selectedObject
 }
 
-const onChangeDropdown4Assign = (listener, table01Name, rowIndex) => {
+const onChangeDropdown4Assign = (listener, table01Name, rowIndex, batchLength = 1) => {
     // const debugListener = true
     if (debugListener) console.log("Assign", listener)
     const { column_name, listen_to_attrs } = listener
@@ -121,7 +121,7 @@ const onChangeDropdown4Assign = (listener, table01Name, rowIndex) => {
             // const column_name1 = removeParenthesis(id)
             if (debugListener) console.log("Set value of", id, "to", theValue)
             getEById(id).val(theValue)
-            getEById(id).trigger('change')
+            getEById(id).trigger('change', batchLength)
         }
         else {
             console.error("Column", listen_to_attr, 'not found in', id, "(Listeners Screen)")
@@ -423,7 +423,7 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, batchLength 
                     onChangeDropdown4Reduce(listener, table01Name, rowIndex, lineType)
                     break
                 case "assign":
-                    onChangeDropdown4Assign(listener, table01Name, rowIndex)
+                    onChangeDropdown4Assign(listener, table01Name, rowIndex, batchLength)
                     break
                 case "dot":
                     onChangeDropdown4Dot(listener, table01Name, rowIndex, batchLength)
@@ -479,7 +479,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
     if (dataSource.length === 1) theDropdown.trigger('change')
 }
 
-const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table }) => {
+const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table, batchLength = 1 }) => {
     if (runOnce[id]) {
         // console.log("cancel reload")
         getEById(id).select2({
@@ -501,7 +501,7 @@ const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table }) => {
             const fieldName = getFieldNameInTable01FormatJS(id, table01Name)
             if (listener.triggers.includes(fieldName) && listener.listen_action === 'reduce') {
                 // console.log("I am a trigger of reduce, I have to trigger myself when form load ", id)
-                getEById(id).trigger('change')
+                getEById(id).trigger('change', batchLength)
             }
         })
     })

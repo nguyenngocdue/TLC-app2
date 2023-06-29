@@ -23,11 +23,13 @@
       }
     }
     function goToTopFunction() {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
+      // document.body.scrollTop = 0;
+      // document.documentElement.scrollTop = 0;
+      window.scrollTo({top: 0, behavior: 'smooth'});
     }
     function goToBottomFunction() {
-      document.body.scrollTop =  document.body.scrollHeight;
-      document.documentElement.scrollTop = document.body.scrollHeight;
+      // document.body.scrollTop =  document.body.scrollHeight;
+      // document.documentElement.scrollTop = document.body.scrollHeight;
+      window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
     }
     </script>

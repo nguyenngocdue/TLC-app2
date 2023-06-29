@@ -22,6 +22,7 @@ class Dropdown4 extends Component
         private $tableName = null,
         private $lineType = null,
         private $rowIndex = null,
+        private $batchLength = 1,
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
@@ -45,6 +46,7 @@ class Dropdown4 extends Component
             'lineType' => $this->lineType,
             'table01Name' => $this->table01Name,
             'rowIndex' => $this->rowIndex,
+            'batchLength' => $this->batchLength,
         ];
         // dump($params);
         return view('components.controls.has-data-source.dropdown4', $params);

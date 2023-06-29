@@ -7,37 +7,42 @@
                 <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
             </a>
         </div>
-        @elseif(isset($value['type']) && $value['type'] == 'modePrint')
-        <div class="{{$classList}}">
-            <button class="text-lg text-blue-500 hover:text-gray-400" onclick="window.print();">
-                {!!$value['icon']!!}
-                <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
-            </button>
-        </div>
-        @elseif(isset($value['type']) && $value['type'] == 'report' )
-        <div class="{{$classList}}">
-            <button class="text-lg text-blue-500 hover:text-gray-400" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500" data-dropdown-trigger="hover" >
-                {!!$value['icon']!!}
-                <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
-            </button>
-            <div id="dropdownDelay" class="bg-gray-50 z-10 hidden divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
-                    @foreach($value['dataSource'] as $reportType)
-                        @foreach( $reportType as $report)
-                            <li title="{{$report['mode']}}">
-                                <a href="{{$report['href']}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{$report['title']}}</a>
-                            </li>
-                        @endforeach
-                  @endforeach
-                  @roleset('admin')
-                  <hr/>
-                  <li class="mt-2"><a href="/reports" target="_blank"><i class="fa-duotone fa-eye"></i> Report Index</a></li>
-                  @endroleset
-                </ul>
-            </div>
-        </div>
-        @else
-        Unknown type {{$value['type'] }}
+        @elseif(isset($value['type']))
+            @switch($value['type'])
+                @case('modePrint')
+                <div class="{{$classList}}">
+                    <button class="text-lg text-blue-500 hover:text-gray-400" onclick="window.print();">
+                        {!!$value['icon']!!}
+                        <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
+                    </button>
+                </div>
+                @break
+                @case('modal')
+                    <div class="{{$classList}}">
+                        <button class="text-lg text-blue-500 hover:text-gray-400" @click="toggleModal('{{$value['modalId']}}')">
+                            {!!$value['icon']!!}
+                            <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
+                        </button>
+                    </div>
+                    {!! $value['modalBody'] !!}
+                @break
+                @case('selectDropdown')
+                    <div class="{{$classList}}">
+                        <button class="text-lg text-blue-500 hover:text-gray-400" data-dropdown-toggle="a" data-dropdown-delay="500" data-dropdown-trigger="click" >
+                            {!!$value['icon']!!}
+                            <span class="flex text-xs font-normal">
+                                {!! $value['title'] !!}
+                                <i class="fa-solid fa-chevron-down pl-1"></i>
+                            </span>
+                        </button>
+                        <x-renderer.select-dropdown name="a" id="a" :dataSource="$value['dataSource']" />
+                    </div>
+                @break
+                @default
+                    Unknown type {{$value['type'] }} 
+                @break
+            @endswitch
+        @endif
         {{-- <div class="{{$classList}}">
             <button class="text-lg text-blue-500 hover:text-gray-400" id={{$value['id']}}>
                 {!!$value['icon']!!}
@@ -65,8 +70,6 @@
                     buttonExport.addEventListener('click', generatePDF);
             </script>
         </div> --}}
-        @endif
-    
     @endforeach
 </div>
     

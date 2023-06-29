@@ -18,7 +18,7 @@
     ></select>
     <script>
         $(document).ready(()=>{
-            const params = {id:'{{$id}}', table01Name: '{{$table01Name}}', selectedJson: '{!! $selected !!}', table: '{{$table}}'}
+            const params = {id:'{{$id}}', table01Name: '{{$table01Name}}', selectedJson: '{!! $selected !!}', table: '{{$table}}', batchLength: {{$batchLength}}}
             documentReadyDropdown4(params)
             // console.log("Document ready dropdown4")
         })
