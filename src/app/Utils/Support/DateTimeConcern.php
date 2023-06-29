@@ -293,7 +293,7 @@ class DateTimeConcern
         $isDifferentDay = self::isDifferentDayOfUser($userId);
         $explodeTimeStart = explode(":", $timeStart);
         $dateTime->setTime($explodeTimeStart[0], $explodeTimeStart[1], $explodeTimeStart[2]);
-        if($isDifferentDay){
+        if ($isDifferentDay) {
             $dateTime->sub(new DateInterval('P1D'));
         }
         return $dateTime->format("Y-m-d H:i:s");
@@ -352,7 +352,7 @@ class DateTimeConcern
 
     public static function setTime($timeType, $startTime, $userId)
     {
-        dd($startTime);
+        // dd($startTime);
         switch ($timeType) {
             case 'morning':
                 return self::formatTimestampStartForMorning($startTime, $userId);
@@ -377,7 +377,8 @@ class DateTimeConcern
     {
         return User::findFromCache($id)->getWorkplace->standard_start_time;
     }
-    public static function isDifferentDayOfUser($id){
+    public static function isDifferentDayOfUser($id)
+    {
         return User::findFromCache($id)->getWorkplace->isDifferentDay();
     }
     public static function getStandardStartTimeAfternoonOfUser($id)
