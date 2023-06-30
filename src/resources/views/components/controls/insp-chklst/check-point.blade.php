@@ -14,7 +14,7 @@
                 @case (4)  {{-- 4 => "radio" --}}
                     <div class="w-full">
                         <x-controls.insp_chklst.check-point-option :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
-                        <x-controls.insp_chklst.check-point-create-ncr-on-hold :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
+                        <x-controls.insp_chklst.check-point-create-ncr-on-hold :line="$line" :checkPointIds="$checkPointIds" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
                     </div>
                 @break
                 @case (7) {{-- 7 => "signature" --}}
@@ -32,6 +32,6 @@
                 /> --}}
         <x-renderer.attachment2 name="table01[insp_photos][{{$rowIndex}}]" :value="$attachments"/>
         <br/>
-        <x-controls.comment.comment-group2a :commentIds="$attachmentIds" category="insp_comments" commentableType="{{$type}}_line" commentableId="{{$line->id}}" />
+        <x-controls.comment.comment-group2a :commentIds="$checkPointIds" category="insp_comments" commentableType="{{$type}}_line" commentableId="{{$line->id}}" />
     </div>
 </x-renderer.card>

@@ -21,7 +21,7 @@ class CheckPoint extends Component
         private $table01Name,
         private $rowIndex,
         private $debug = false,
-        private $attachmentIds = [],
+        private $checkPointIds = [],
     ) {
         //
     }
@@ -34,14 +34,14 @@ class CheckPoint extends Component
     public function render()
     {
         $controlType = Control_type::getCollection()->pluck('name', 'id',) ?? Control_type::get()->pluck('name', 'id');
-        $attachments = $this->line->getMorphManyByIds($this->attachmentIds, 'insp_photos');
+        $attachments = $this->line->getMorphManyByIds($this->checkPointIds, 'insp_photos');
         return view('components.controls.insp-chklst.check-point', [
             'line' => $this->line,
             'controlType' => $controlType,
             'table01Name' => $this->table01Name,
             'rowIndex' => $this->rowIndex,
             'attachments' => $attachments,
-            'attachmentIds' => $this->attachmentIds,
+            'checkPointIds' => $this->checkPointIds,
             'debug' => $this->debug,
             'type' => $this->type,
         ]);

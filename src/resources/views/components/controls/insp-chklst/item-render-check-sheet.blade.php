@@ -9,7 +9,7 @@
         $typeLine = str_replace('_shts','',$type);
         $idName = $typeLine.'_id';
         $value = $item->$idName;
-        $attachmentIds = $lines->pluck('id');
+        $checkPointIds = $lines->pluck('id');
         $lineIds = $lines->pluck('id');
         // dump($lineIds);
         $groupedLines = $lines->groupBy($groupColumn);
@@ -20,7 +20,7 @@
             @endphp
             <x-renderer.card tooltip="#{{$groupId}}" idHtml="{{$groupColumn}}_{{$groupId}}_{{Str::slug($groupName)}}" titleClass="text-lg" title="{{$groupName}}">
                 @foreach($lines as $rowIndex => $line)
-                <x-controls.insp-chklst.check-point :line="$line" :attachmentIds="$attachmentIds" table01Name="table01" :rowIndex="$rowIndex" type="{{$typeLine}}" />
+                <x-controls.insp-chklst.check-point :line="$line" :checkPointIds="$checkPointIds" table01Name="table01" :rowIndex="$rowIndex" type="{{$typeLine}}" />
                 @endforeach
             </x-renderer.card>
             @endforeach

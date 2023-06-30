@@ -129,12 +129,15 @@ abstract class ModelExtended extends Model
     }
     private static $singletonMorphMany = [];
 
-    public static function getCollectionMorphMany($ids, $fieldNameCategory, $modelName, $keyType, $keyId)
+    public static function getCollectionMorphMany($ids, $fieldNameCategory, $modelName, $keyType, $keyId,$useTableField)
     {
         $key = $modelName . "_" . $fieldNameCategory;
         if (!isset(static::$singletonMorphMany[$key])) {
-            static::$singletonMorphMany[$key] = $modelName::query()->where($keyType, static::class)->whereIn($keyId, $ids)
-                ->where('category', FieldSeeder::getIdFromFieldName($fieldNameCategory))->get()->groupBy($keyId);
+            $query = $modelName::query()->where($keyType, static::class)->whereIn($keyId, $ids);
+            if($useTableField){
+                $query->where('category', FieldSeeder::getIdFromFieldName($fieldNameCategory));
+            }
+            static::$singletonMorphMany[$key] = $query->get()->groupBy($keyId);
         }
     }
     /**
@@ -142,13 +145,14 @@ abstract class ModelExtended extends Model
      *
      * @param array $ids
      * @param string $fieldNameCategory Field name category same eloquent params function
+     * @param bool $useTableField MorphMany table using table field key category 
      * @return mixed|array value MorphMany
      */
-    public function getMorphManyByIds($ids = [], $fieldNameCategory)
+    public function getMorphManyByIds($ids = [], $fieldNameCategory,$useTableField = true)
     {
         if ($fieldNameCategory) {
             $eloquentParams = static::$eloquentParams[$fieldNameCategory] ?? [];
-            static::getCollectionMorphMany($ids, $fieldNameCategory, $eloquentParams[1], $eloquentParams[3], $eloquentParams[4]);
+            static::getCollectionMorphMany($ids, $fieldNameCategory, $eloquentParams[1], $eloquentParams[3], $eloquentParams[4],$useTableField);
             $key = $eloquentParams[1] . "_" . $fieldNameCategory;
             $result = static::$singletonMorphMany[$key][$this->id] ?? [];
             return $result;
