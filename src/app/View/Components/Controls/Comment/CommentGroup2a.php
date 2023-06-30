@@ -24,7 +24,7 @@ class CommentGroup2a extends Component
         private $readOnly = false,
         private $commentableId = '',
         private $debug = false,
-        private $commentIds = [],
+        private $commentIds = null,
     ) {
         //
         static::$counter++;
@@ -118,8 +118,11 @@ class CommentGroup2a extends Component
         $commentableItem = new ($commentableTypePath); //::find($this->commentableId);
         if ('' !== $this->commentableId) {
             $commentableItem->id = $this->commentableId;
-            $comments = $commentableItem->getMorphManyByIds($this->commentIds, $this->category);
-            // $comments = $commentableItem->{$this->category};
+            if (is_null($this->commentIds)) {
+                $comments = $commentableItem->{$this->category};
+            } else {
+                $comments = $commentableItem->getMorphManyByIds($this->commentIds, $this->category);
+            }
         }
         if ($this->debug) dump("Type: $this->commentableType($commentableTypePath) - ID: $this->commentableId - Category: $this->category #$category_id - Count: " . sizeof($comments));
         $params = $this->createDataSource($comments, $commentableTypePath, $this->commentableId, $this->category, $category_id);
