@@ -42,6 +42,7 @@ class ReadOnlyText4 extends Component
         if (str_starts_with($value, "No dataIndex for ")) $value = null;
         if (str_starts_with($title, "No dataIndex for ")) $title = null;
         $href = (isset($this->column['properties']['lineTypeRoute'])) ? $this->column['properties']['lineTypeRoute'] . $title . "/edit" : "";
+        $isId = $this->column['id'] ?? false;
         return view('components.renderer.editable.read-only-text4', [
             'type' => "hidden",
             "name" => $this->name,
@@ -54,6 +55,7 @@ class ReadOnlyText4 extends Component
             'rowIndex' => $this->rowIndex,
             'saveOnChange' => $this->saveOnChange,
             'href' => $href,
+            'isId' => $isId,
         ]);
     }
 }
