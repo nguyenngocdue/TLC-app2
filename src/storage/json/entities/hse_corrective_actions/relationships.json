@@ -120,7 +120,7 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "",
+        "control": "parent_link",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
