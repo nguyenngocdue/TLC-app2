@@ -42,7 +42,7 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
     {
         return [
             ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
-            ['dataIndex' => 'id', 'invisible' => !true,],
+            ['dataIndex' => 'id',],
             ['dataIndex' => 'qaqc_insp_tmpl_id', 'value_as_parent_id' => true],
             ['dataIndex' => 'name'],
             // ['dataIndex' => 'description'],
