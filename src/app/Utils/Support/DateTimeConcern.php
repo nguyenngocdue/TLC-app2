@@ -394,15 +394,19 @@ class DateTimeConcern
         return User::findFromCache($id)->getWorkplace->getDurationAfternoon();
     }
 
-    public static function getDayHiddenForDayIndexWeek($start, $end = 7)
+    public static function getDayHiddenForDayIndexWeek($start, $end = 0)
     {
-        $value = [1, 2, 3, 4, 5, 6, 7];
-        $input = range($start, $end);
-        $result = array_diff($value, $input);
-        $hasValue7 = array_search(7, $result);
-        if ($hasValue7) {
-            $result[$hasValue7] = 0;
+        $value = [1, 2, 3, 4, 5, 6, 0];
+        if($end == 0){
+            $input = range($start,7);
+            $hasValue7 = array_search(7, $input);
+            if ($hasValue7) {
+                $input[$hasValue7] = 0;
+            }
+        }else{
+            $input = range($start, $end);
         }
+        $result = array_diff($value, $input);
         return array_values($result);
     }
 }

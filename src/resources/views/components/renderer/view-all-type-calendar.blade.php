@@ -307,16 +307,18 @@
                 day = padNumber(day);
                 dateTime = `${yearCurrent}-${month}-${day}`;
                 week = moment(dateTime).isoWeek();
+                console.log(week + `=====>` + month +`=====>` + day)
+                console.log(timesheet.week_value)
                 if(week == timesheet.week_value){
                     classHover = `hover-${week}-${yearCurrent}`;
-                    if(day == 26){
+                    // if(day == 26){
                         if(dateTime == timesheet.week){
                             return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
                         }else{
                             return null;
                         }
-                    }
-                    return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
+                    // }
+                    // return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
                 }
     }
     
