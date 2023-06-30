@@ -79,7 +79,7 @@ const addANewLine = (params) => {
         const data = ajaxAddLineQueue[url]['data']
 
         delete ajaxAddLineQueue[url]
-        console.log('Inserting', data)
+        // console.log('Inserting', data)
         $.ajax({
             type: 'POST',
             url,
@@ -264,7 +264,9 @@ const addANewLineFull = (params) => {
                                 "' type='hidden' />"
                             renderer +=
                                 "<div class='text-center'>" +
-                                insertedId +
+                                "<a target='_blank' class='text-blue-500' href='" + column['lineTypeRoute'] + insertedId + "/edit" + "'>" +
+                                makeId(insertedId) +
+                                '</a>' +
                                 '</div>'
                             renderer +=
                                 '<script>' +

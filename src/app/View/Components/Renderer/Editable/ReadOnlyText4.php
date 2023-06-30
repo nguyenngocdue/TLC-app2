@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer\Editable;
 
 use App\Utils\ClassList;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class ReadOnlyText4 extends Component
@@ -20,8 +21,8 @@ class ReadOnlyText4 extends Component
         private $table01Name = null,
         private $rowIndex = -1,
         private $saveOnChange = false,
+        private $column = null,
     ) {
-        //
     }
 
     /**
@@ -40,6 +41,7 @@ class ReadOnlyText4 extends Component
         }
         if (str_starts_with($value, "No dataIndex for ")) $value = null;
         if (str_starts_with($title, "No dataIndex for ")) $title = null;
+        $href = (isset($this->column['properties']['lineTypeRoute'])) ? $this->column['properties']['lineTypeRoute'] . $title . "/edit" : "";
         return view('components.renderer.editable.read-only-text4', [
             'type' => "hidden",
             "name" => $this->name,
@@ -51,6 +53,7 @@ class ReadOnlyText4 extends Component
             'table01Name' => $this->table01Name,
             'rowIndex' => $this->rowIndex,
             'saveOnChange' => $this->saveOnChange,
+            'href' => $href,
         ]);
     }
 }

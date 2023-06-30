@@ -1,5 +1,5 @@
 <input id="{{$name}}" name="{{$name}}" component="editable/read-only-text4" value="{{$value}}" type="hidden" class="{{$classList}} {{$align}}">
-{{$title}}
+<a target='_blank' class='text-blue-500' href="{{$href}}">{{Str::makeId($title)}}</a>
 <script>
     $("[id='{{$name}}']").on('change', function(e, batchLength){
         onChangeDropdown4({
