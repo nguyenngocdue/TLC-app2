@@ -34,7 +34,7 @@ class Hse_corrective_action extends ModelExtended
     public function correctable()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
     public function getUnsafeActionType()
     {
