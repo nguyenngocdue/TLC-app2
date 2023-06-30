@@ -106,9 +106,9 @@ trait TraitTableColumnEditable
                     $newColumn['properties']['placeholder'] = Str::getPickerPlaceholder($prop['control']);
                     break;
                 case 'attachment':
-                    $newColumn['renderer'] = "text4";
+                    $newColumn['renderer'] = "attachment4";
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = 'bg-red-600 ' . $classListText;
+                    $newColumn['classList'] = $classListText;
                     break;
                 default:
                     $newColumn['renderer'] = "text4";
