@@ -9,9 +9,6 @@
                     <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
                     </x-renderer.card>
             </div>
-            <div class="md:col-span-6">
-                <x-renderer.legend :dataSource="$dataSourceLegend" title="{{$titleLegend}}" />
-            </div>
             <div class="md:col-span-2">
                 <x-renderer.card class="w-full border bg-white p-[15px] items-center" title="Selected Year">
                         <div class="text-center flex justify-around items-center">
@@ -25,6 +22,10 @@
                         </div>
                 </x-renderer.card>
             </div>
+            <div class="md:col-span-6">
+                <x-renderer.legend :dataSource="$dataSourceLegend" title="{{$titleLegend}}" />
+            </div>
+            
         </div>
         <div class="mt-2 grid grid-cols-12 ">
             <div class="col-span-12 overflow-y-auto overflow-x-hidden h-screen">
