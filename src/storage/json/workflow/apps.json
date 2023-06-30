@@ -367,6 +367,32 @@
         "icon": "<i class=\"fa-solid fa-user-injured\"><\/i>",
         "show_in_my_view": "true"
     },
+    "hse_induction": {
+        "name": "hse_induction",
+        "package_tab": "application",
+        "package": "operation",
+        "sub_package": "hse",
+        "title": "Hse Induction",
+        "nickname": "hi",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
+    },
+    "hse_induction_line": {
+        "name": "hse_induction_line",
+        "package_tab": "application",
+        "package": "operation",
+        "sub_package": "hse",
+        "title": "Hse Induction Line",
+        "nickname": "hil",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
+    },
     "hse_insp_chklst_line": {
         "name": "hse_insp_chklst_line",
         "package_tab": "application",

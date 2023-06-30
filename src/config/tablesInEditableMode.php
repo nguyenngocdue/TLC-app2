@@ -18,6 +18,9 @@ return [
     'hse_insp_chklst_shts' => [
         'hse_insp_chklst_lines' => [],
     ],
+    'hse_inductions' => [
+        'hse_induction_lines' => [],
+    ],
 
     'qaqc_insp_tmpl_shts' => [
         'qaqc_insp_tmpl_lines' => [],
