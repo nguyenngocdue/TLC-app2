@@ -21,9 +21,9 @@ return new class extends Migration
 
         $schema->create('qaqc_insp_tmpl_shts', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
+            $table->string('slug')->nullable();
             $table->unsignedBigInteger('qaqc_insp_tmpl_id');
             $table->orderable();
             $table->appendCommonFields();

@@ -29,6 +29,9 @@ trait TraitTableColumnEditable
             $newColumn['column_type'] = $prop['column_type'];
 
             $newColumn['properties']['lineType'] = Str::singular($tableName);
+            $newColumn['properties']['lineTypeTable'] = Str::plural($tableName);
+            $dummyRoute = route("$tableName.edit", "_id_");
+            $newColumn['properties']['lineTypeRoute'] = substr($dummyRoute, 0, strpos($dummyRoute, "_id_"));
             $newColumn['properties']['table01Name'] = $table01Name;
 
             $isReadOnly = ($prop['read_only'] ?? false) === 'true'; //<<CONFIG_MIGRATE
