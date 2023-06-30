@@ -104,16 +104,21 @@ trait TraitStoreEmpty
 		// }
 
 		$message = "Created " . sizeof($theRows) . " " . Str::plural("line", sizeof($theRows)) . ".";
-		if ($totalInsertedRows > 0) {
-			$message = "Created "
-				. sizeof($theRows)
-				. " "
-				. Str::plural("document", sizeof($theRows))
-				. " with "
-				. $totalInsertedRows
-				. " "
-				. Str::plural("line", $totalInsertedRows)
-				. ".";
+		switch ($this->type) {
+			case 'hr_timesheet_worker':
+			case 'hr_timesheet_officer':
+				// if ($totalInsertedRows > 0) {
+				$message = "Created "
+					. sizeof($theRows)
+					. " "
+					. Str::plural("document", sizeof($theRows))
+					. " with "
+					. $totalInsertedRows
+					. " "
+					. Str::plural("line", $totalInsertedRows)
+					. ".";
+				// }
+				break;
 		}
 
 		return ResponseObject::responseSuccess(
