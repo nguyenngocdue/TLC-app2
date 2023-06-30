@@ -85,6 +85,13 @@
     "hse_incident_reports": {
         "name": "hse_incident_reports"
     },
+    "hse_induction_lines": {
+        "name": "hse_induction_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "hse_inductions": {
+        "name": "hse_inductions"
+    },
     "hse_insp_chklst_lines": {
         "name": "hse_insp_chklst_lines",
         "storeEmpty_and_updateShort": "true"

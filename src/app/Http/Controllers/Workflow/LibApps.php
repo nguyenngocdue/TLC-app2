@@ -72,7 +72,7 @@ class LibApps extends AbstractLib
                 if ($hasRoute) {
                     $app['href'] = route($route);
                 } else {
-                    $app['nickname'] = $app['nickname'] . " ?";
+                    $app['nickname'] = $app['nickname'] ?? '' . " ?";
                     $app['href'] = "#RouteNotFound3:$route";
                 }
             }
