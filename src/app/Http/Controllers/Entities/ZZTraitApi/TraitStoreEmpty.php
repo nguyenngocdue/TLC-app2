@@ -57,9 +57,13 @@ trait TraitStoreEmpty
 		$theRows = [];
 		$defaultValue = $this->getDefaultValue($props);
 		foreach ($lines as $item) {
+			// Log::info($defaultValue);
 			foreach ($defaultValue as $key => $value) {
-				if (isset($item[$key]) && $item[$key] !== false) $item[$key]  = $value;
+				// Order_no get override when without $value !== false
+				if (isset($item[$key]) && $item[$key] !== false && $value !== false) $item[$key]  = $value;
+				// if (isset($item[$key]) && $item[$key] !== false) $item[$key]  = $value;
 			}
+			// Log::info($item);
 			if (isset($item['ot_date'])) {
 				$item['ot_date'] = DateTimeConcern::convertForSaving('picker_date', $item['ot_date']);
 			}
