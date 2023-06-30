@@ -18,7 +18,7 @@ class TableOfContent extends Component
      */
     public function __construct(
         private $item = null,
-        private $type,
+        private $type = null,
     ) {
         //
     }
