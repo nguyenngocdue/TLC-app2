@@ -1,5 +1,5 @@
 <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
-    {{-- <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} /> --}}
+    <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
     {{-- <x-controls.insp-chklst.header-check-sheet :item="$item" :chklst="$chklst" :project="$project" :subProject="$subProject"/> --}}
     <hr/>
     <x-renderer.heading level=5>
@@ -25,11 +25,9 @@
             </x-renderer.card>
             @endforeach
             @php
-            $propGetMonitors1 = $props['_getMonitors1()'] ?? [];
-            $propSignature = $props['_getSignature'] ?? [];
-            $hasMonitors = $propGetMonitors1['hidden_edit'] ?? null;
-            $hasSignature = $propSignature['hidden_edit'] ?? null;
+            $hasMonitors = $props['_getMonitors1()']['hidden_edit'] ?? false;
             @endphp
+            
         @if($hasMonitors)
         <x-renderer.card title="Nominated Third Party:">
             @php
@@ -39,6 +37,12 @@
                 <x-controls.has-data-source.dropdown2 type={{$type}} name='getMonitors1()' :selected="$selectedMonitors1" multiple={{true}}  />
             </x-renderer.card>
             @endif
+
+            @php
+            $hasSignature = $props['_signature_qaqc_chklst_3rd_party'] ?? false;
+            @endphp
+
+            {{-- @dump($hasSignature) --}}
             @if($hasSignature)
             <x-controls.signature.signature-group2 
             title="Third Party Sign Off"
