@@ -202,7 +202,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "qaqc_insp_tmpl_shts": {
-        "name": "qaqc_insp_tmpl_shts"
+        "name": "qaqc_insp_tmpl_shts",
+        "storeEmpty_and_updateShort": "true"
     },
     "qaqc_insp_tmpls": {
         "name": "qaqc_insp_tmpls"
