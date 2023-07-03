@@ -23,7 +23,7 @@ const dumbIncludes2 = (array, item) => {
 }
 const getIsMultipleOfE = (id) => getEById(id)[0].hasAttribute('multiple')
 const getControlTypeOfE = (id) => getEById(id).attr('controlType')
-const getAllowClear = (id) => getEById(id).attr('allowClear')
+const getAllowClear = (id) => !!(getEById(id).attr('allowClear') === 'true')
 const getColSpanOfE = (id) => getEById(id).attr('colSpan')
 const getReadOnlyOfE = (id) => getEById(id).attr('readOnly')
 const getAllVariablesFromExpression = (str) => {
@@ -198,7 +198,7 @@ const onChangeDropdown2Reduce = (listener) => {
     // console.log("Selected of", column_name, "is", lastSelected)
     // console.log(attrs_to_compare)
     const allowClear = getAllowClear(column_name)
-    // console.log(allowClear)
+    console.log(column_name, allowClear, false)
     reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, lastSelected, allowClear)
 
     // console.log("Set to ", column_name, lastSelected1)
