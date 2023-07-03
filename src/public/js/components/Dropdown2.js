@@ -165,11 +165,7 @@ const onChangeDropdown2Reduce = (listener) => {
         //console.log("value", constraintsValues[i], value, !value)
         const column = listen_to_attrs[i]
         if (column === undefined)
-            console.log(
-                'The column to look up [',
-                column,
-                '] is not found in ...'
-            )
+            console.log('The column to look up [', column, '] is not found in ...')
         if (!value) continue
         if (debugListener)
             console.log('Applying', column, value, 'to', table_name)
@@ -180,13 +176,7 @@ const onChangeDropdown2Reduce = (listener) => {
             } else {
                 result = row[column] == value
             }
-            if (debugListener)
-                console.log(
-                    'Result of reduce filter',
-                    row[column],
-                    value,
-                    result
-                )
+            if (debugListener) console.log('Result of reduce filter', row[column], value, result)
             return result
         })
     }
@@ -197,6 +187,20 @@ const onChangeDropdown2Reduce = (listener) => {
     // console.log(column_name, lastSelected)
     if (undefined === lastSelected) lastSelected = []
     if (!Array.isArray(lastSelected)) lastSelected = [lastSelected]
+    // console.log(column_name, lastSelected, dataSource)
+
+    // const lastSelected1 = []
+    // //Try to delete the data if the new dataSource doesn't have it
+    // for (let i = 0; i < dataSource.length; i++) {
+    //     for (let j = 0; j < lastSelected.length; j++) {
+    //         if (dataSource[i] == lastSelected[j]) {
+    //             lastSelected1.push(lastSelected[j]);
+    //         }
+    //     }
+    // }
+    // console.log("lastSelected", lastSelected)
+    // console.log("lastSelected1", lastSelected1)
+
     // const lastSelected1 = (Array.isArray(lastSelected) && lastSelected.length == 0) ? [] : lastSelected
     // console.log("Selected of", column_name, "is", lastSelected)
     // console.log(attrs_to_compare)

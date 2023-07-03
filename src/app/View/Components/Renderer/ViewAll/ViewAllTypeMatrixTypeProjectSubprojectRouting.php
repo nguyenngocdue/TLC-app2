@@ -79,7 +79,7 @@ class ViewAllTypeMatrixTypeProjectSubprojectRouting extends ViewAllTypeMatrixPar
         return [
             'project_id' => $this->project,
             'sub_project_id' => $this->subProject,
-            'prod_routing' => $this->prodRouting,
+            'prod_routing_id' => $this->prodRouting,
         ];
     }
 

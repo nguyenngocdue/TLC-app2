@@ -25,7 +25,7 @@ class SidebarTask extends Component
         private $control = 'draggable-event2',
         // private $control = 'radio-or-checkbox2',
         private $allowClear = false,
-        private $typeToLoadListener = null,
+        private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }

@@ -23,7 +23,7 @@ class ModalFilterTask extends Component
         private $readOnly = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
-        private $typeToLoadListener = null,
+        private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
