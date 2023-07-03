@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 trait TraitEntityDynamicType
 {
-    private function makePermissionMiddleware($tableName)
+    protected function makePermissionMiddleware($tableName)
     {
         return [
             'read' => "read-$tableName",
@@ -52,7 +52,7 @@ trait TraitEntityDynamicType
         // ];
     }
 
-    private function assignDynamicTypeCreateEdit()
+    protected function assignDynamicTypeCreateEdit()
     {
         $routeName = Request::route() ? Request::route()->getName() : "attachment.index";
         $tableName = substr($routeName, 0, strpos($routeName, "."));
