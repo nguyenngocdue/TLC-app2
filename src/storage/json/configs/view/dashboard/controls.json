@@ -191,7 +191,8 @@
         "hr_timesheet_officers"
     ],
     "apps_have_view_all_matrix": [
-        "hr_timesheet_workers"
+        "hr_timesheet_workers",
+        "qaqc_wirs"
     ],
     "apps_have_qr_app": [
         "pj_module",

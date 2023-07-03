@@ -107,6 +107,7 @@ trait TraitStoreEmpty
 		switch ($this->type) {
 			case 'hr_timesheet_worker':
 			case 'hr_timesheet_officer':
+			case 'qaqc_wir':
 				// if ($totalInsertedRows > 0) {
 				$message = "Created "
 					. sizeof($theRows)

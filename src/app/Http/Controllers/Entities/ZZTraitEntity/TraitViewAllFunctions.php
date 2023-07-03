@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Http\Controllers\Workflow\LibApps;
-use App\Models\Qaqc_insp_chklst_line;
-use App\Models\Qaqc_mir;
 use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
-use App\Utils\Support\DateTimeConcern;
 use App\View\Components\Controls\TraitMorphTo;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -48,14 +43,14 @@ trait TraitViewAllFunctions
         return [$viewAllMode, $filterViewAllCalendar, $viewAllCalendarShowAllChildren];
     }
 
-    private function getUserSettingsViewAllMatrix()
-    {
-        $type = Str::plural($this->type);
-        $settings = CurrentUser::getSettings();
-        $viewportDate = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] ?? null;
-        $viewportMode = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_mode'] ?? null;
-        return [$viewportDate, $viewportMode];
-    }
+    // private function getUserSettingsViewAllMatrix()
+    // {
+    //     $type = Str::plural($this->type);
+    //     $settings = CurrentUser::getSettings();
+    //     $viewportDate = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] ?? null;
+    //     $viewportMode = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_mode'] ?? null;
+    //     return [$viewportDate, $viewportMode];
+    // }
 
     private function getEagerLoadParams($eloquentParams)
     {
@@ -75,7 +70,7 @@ trait TraitViewAllFunctions
             ->whereDate('week', '<=',  $endDate);
     }
 
-    private function getDataSource($advanceFilters = null, $trash = false)
+    public function getDataSource($advanceFilters = null, $trash = false)
     {
         $propsFilters = $this->advanceFilter();
         $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);

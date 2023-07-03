@@ -21,7 +21,7 @@ return new class extends Migration
 
         $schema->create('qaqc_wirs', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->unsignedInteger('doc_id');
             $table->text('description')->nullable();
             $table->string('slug')->unique();

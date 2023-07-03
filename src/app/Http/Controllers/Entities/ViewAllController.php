@@ -45,7 +45,7 @@ class ViewAllController extends Controller
         // dump($this->type);
         switch ($this->type) {
             case "hr_timesheet_worker":
-                // case "qaqc_wir":
+            case "qaqc_wir":
                 return 'matrix';
             case "hr_timesheet_officer":
                 return 'calendar';
