@@ -25,17 +25,21 @@ class PivotTable extends Component
     }
 
 
-    private function attachToDataSource($processedData, $calculatedData, $transferredData)
+    private function attachToDataSource($processedData, $calculatedData, $transferredData, $rowFields)
     {
         $dataOutput = [];
-        // dd($processedData, $calculatedData, $transferredData);
         foreach ($processedData as $k1 => $items) {
             foreach ($items as $k2 => $item) {
                 $dt = isset($calculatedData[$k1][$k2]) ? $calculatedData[$k1][$k2] : [];
-                $dataOutput[] = $dt + reset($item) + $transferredData[$k1][$k2];
+                $dataOutput[] = array_merge($dt, reset($item), $transferredData[$k1][$k2]);
             };
         }
-        // dd($dataOutput);
+        if(!$rowFields) {
+            $data1 = array_map(function ($item) use ($calculatedData) {
+                return array_merge($calculatedData[0], $item);
+            }, $dataOutput);
+            return $data1;
+        } 
         return $dataOutput;
     }
 
@@ -58,45 +62,6 @@ class PivotTable extends Component
         return $dataTables;
     }
 
-
-    private function makeDataRenderer($primaryData)
-    {
-        [$rowFields,, $filters, $columnFields,, $dataAggregations,,, $valueIndexFields] =  $this->getDataFields();
-        // dd($columnFields);
-        $valueFilters = count($filters) ? array_combine($filters, [[1, 4], [7, 8]]) : [];
-        // Step 1: reduce lines from Filters array
-        $linesData = $primaryData;
-        // dd($linesData);
-        $dataReduce = ReportPivot::reduceDataByFilterColumn($linesData, $valueFilters);
-        // dd($valueFilters, $dataReduce);
-
-        // Step 2: group lines by Row_Fields array
-        $processedData = ReportPivot::groupBy($dataReduce, $rowFields);
-        // dd($processedData);
-
-        //Remove all array keys by looping through all elements
-        $processedData = array_values(array_map(fn ($item) => ReportPivot::getLastArray($item, $columnFields), $processedData));
-        // dd($processedData);
-
-        // Step 3: transfer data from lines to columns by
-        // Column_Fields and Value_Index_Fields array 
-        $transferredData = ReportPivot::transferData($processedData, $columnFields, $valueIndexFields);
-        // dd($transferredData);
-
-        //Step 4: Calculate data from Data Fields columns
-        //The aggregated data are at the end of the items
-        $calculatedData = array_map(fn ($items) => ReportPivotDataFields::executeOperations($dataAggregations, $items), $processedData);
-        // dd($calculatedData);
-
-        $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData);
-        // dd($dataIdsOutput);
-
-        $tables = $this->getDataFromTables();
-        $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput);
-        // dd($dataOutput);
-        return $dataOutput;
-    }
-
     private function attachInfoToDataSource($tables, $processedData)
     {
 
@@ -104,7 +69,6 @@ class PivotTable extends Component
         // dump($processedData, $bindingFields);
         foreach ($processedData as &$items) {
             foreach ($items as $key => $id) {
-
                 if (in_array($key, $rowFieldsHasAttr)) {
                     try {
                         $infoAttr = $bindingFields[$key];
@@ -155,6 +119,7 @@ class PivotTable extends Component
 
     private function sortLinesData($dataOutput)
     {
+        // dd($dataOutput);
         [,,,,,,, $sortBy] =  $this->getDataFields();
 
         $sortOrders = $this->sortByData($sortBy);
@@ -199,14 +164,113 @@ class PivotTable extends Component
         return $dataSource;
     }
 
+    private function mergeLines($data, $rowFields)
+    {
+        if ($rowFields) return $data;
+        return [array_merge(...array_values($data))];
+    }
+
+    private function makeTopTitle($data, $rowFields, $columnFields)
+    {
+        if ($rowFields) return $data;
+        if ($columnFields) {
+            foreach ($data as $key => &$items) {
+                $keyName =  '';
+                foreach ($columnFields as $field) {
+                    $keyName .= $items[$field] . '_';
+                }
+                $keyName = trim($keyName, '_');
+                $items[$keyName] = end($items);
+            }
+        }
+        // dd($data);
+        return $data;
+    }
+
+    private function getFieldNeedToSum($propsColumnField)
+    {
+        $firstItem = reset($propsColumnField);
+        if ($firstItem) {
+            $fieldIndex = array_column($propsColumnField, 'fieldIndex');
+            $fields = array_unique(array_column($propsColumnField, 'valueIndexField'));
+            return ['fieldIndex' => $fieldIndex, 'valueIndexField' => $fields];
+        }
+        return [];
+    }
+
+    private function makeDataRenderer($primaryData)
+    {
+        [$rowFields,, $filters, $propsColumnField,, $dataAggregations,,, $valueIndexFields, $columnFields] =  $this->getDataFields();
+        // dd($columnFields);
+        $valueFilters = count($filters) ? array_combine($filters, [[1, 4], [7, 8]]) : [];
+        // Step 1: reduce lines from Filters array
+        $linesData = $primaryData;
+        // dd($linesData);
+        $dataReduce = ReportPivot::reduceDataByFilterColumn($linesData, $valueFilters);
+        // dd($valueFilters, $dataReduce);
+
+        // Step 2: group lines by Row_Fields array
+
+        if (!count($rowFields)) {
+            $processedData = ReportPivot::groupBy($dataReduce, $columnFields);
+        } else {
+            $processedData = ReportPivot::groupBy($dataReduce, $rowFields);
+        }
+        // dump($processedData, $propsColumnField);
+
+        //Remove all array keys by looping through all elements
+        $fieldsNeedToSum = $this->getFieldNeedToSum($propsColumnField);
+        $processedData = array_values(array_map(fn ($item) => ReportPivot::getLastArray($item, $fieldsNeedToSum), $processedData));
+        // dd($processedData, $propsColumnField);
+
+        // Step 3: transfer data from lines to columns by
+        // Column_Fields and Value_Index_Fields array 
+        $transferredData = ReportPivot::transferData($processedData, $propsColumnField, $valueIndexFields);
+        // dd($transferredData);
+
+        //Step 4: Calculate data from Data Fields columns
+        //The aggregated data are at the end of the items
+        $calculatedData = ReportPivotDataFields::executeOperations($dataAggregations,$processedData, $rowFields);
+        
+        // dd($processedData, $calculatedData);
+
+        $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData, $rowFields);
+        // dd($dataIdsOutput);
+
+        $tables = $this->getDataFromTables();
+        $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput);
+        // dd($dataOutput);
+
+
+        $dataOutput = $this->makeTopTitle($dataOutput, $rowFields, $columnFields);
+        // dd($dataOutput);
+
+
+        $infoColumnFields = [];
+        if (!$rowFields) {
+            $groupByColumnFields = Report::groupArrayByKey($dataOutput, $columnFields[0]);
+            foreach ($groupByColumnFields as $k1 => $values) {
+                foreach ($values as $value) {
+                    $lastItem = array_slice($value, count($value)-1, count($value));
+                    $infoColumnFields[$k1][] = $lastItem;
+                }
+            }
+        }
+        // dd($infoColumnFields, $dataOutput);
+        $dataOutput = $this->mergeLines($dataOutput, $rowFields);
+        $dataOutput[0]["info_column_field"] = $infoColumnFields;
+        // dd($dataOutput);
+        return $dataOutput;
+    }
+
     public function render()
     {
         $primaryData = $this->dataSource;
         $dataOutput = $this->makeDataRenderer($primaryData);
         [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput);
         $dataOutput = $this->sortLinesData($dataOutput);
-        // dump($dataOutput, $tableColumns);
         $dataOutput = $this->changeValueData($dataOutput);
+
         return view('components.renderer.report.pivot-table', [
             'tableDataSource' => $dataOutput,
             'tableColumns' => $tableColumns,

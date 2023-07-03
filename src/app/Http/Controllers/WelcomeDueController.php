@@ -337,8 +337,8 @@ class WelcomeDueController extends Controller
 
         $primaryData = [
             ["category" => "phone", "product" => "iPad", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 1000, "discount" => 10,"amount" => 990, 'sale_price' => 900],
-            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06","date_discount" => "2024-01-06", "price" => 1000, "discount" => 10,"amount" => 990, 'sale_price' => 800],
-            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06","date_discount" => "2024-01-06", "price" => 1000, "discount" => 30,"amount" => 1000, 'sale_price' => 1000],
+            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06","date_discount" => "2024-01-06", "price" => 1000, "discount" => 20,"amount" => 990, 'sale_price' => 800],
+            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06","date_discount" => "2024-01-06", "price" => 1000, "discount" => 0,"amount" => 1000, 'sale_price' => 1000],
             ["category" => "phone", "product" => "iPhone", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 1200, "discount" => 12,"amount" => 1188, 'sale_price' => 1056],
             ["category" => "phone", "product" => "iPhone", "date" => "2024-01-05","date_discount" => "2024-01-05", "price" => 1200, "discount" => 0,"amount" => 1200, 'sale_price' => 1200],
             ["category" => "computer", "product" => "MacMini", "date" => "2024-01-01","date_discount" => "2024-01-01", "price" => 1000, "discount" => 10,"amount" => 990, 'sale_price' => 900],

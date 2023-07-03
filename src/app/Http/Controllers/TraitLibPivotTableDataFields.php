@@ -46,20 +46,30 @@ trait TraitLibPivotTableDataFields
         if (count($lib) !== 2) return true;
         return false;
     }
+    private function checkRowAndColumnFields($columnFields, $rowFields ) {
+        $intersectRowCols = array_intersect($columnFields, $rowFields);
+        if (count($intersectRowCols) > 0) {
+            $str = implode(', ', $intersectRowCols);
+            return $str;
+        }
+        return '';
+    }
 
 
     public function getDataFields()
     {
         $lib = LibPivotTables::getFor($this->key);
-        $this->checkCreateManagePivotReport($lib) ? : dd('Please update the Pivot Report Management feature.');
-        // dd($lib);
+        if (!$this->checkCreateManagePivotReport($lib)) {
+            dd('Please update the Pivot Report Management feature.');
+        }
 
         $filters = $lib['filters'] ?? [];
         $row_fields = $lib['row_fields'] ?? [];
         $fields = $this->separateFields($row_fields);
         $rowFields = $fields['fields'] ?? [];
         $bidingRowFields = $fields['biding_fields'] ?? [];
-
+        
+    
         $dataIndex = array_values(array_map(function ($item) {
             if (str_contains($item, '(')) {
                 [$posBracket, $posDot]  = [strpos($item, '('), strpos($item, '.',)];
@@ -69,20 +79,28 @@ trait TraitLibPivotTableDataFields
             }
             return $item;
         }, $row_fields));
-
+    
         $columnFields = $lib['column_fields'] ?? [];
+        $invalidFields = $this->checkRowAndColumnFields($columnFields, $rowFields);
+        if ($invalidFields) {
+            dd("Please delete these fields [{$invalidFields}] in either the RowField or ColumnField column.");
+        }
+    
         $fields = $this->separateFields($columnFields);
         $columnFields = $fields['fields'] ?? [];
         $valueIndexFields = $lib['value_index_fields'] ?? [];
         $dataAggregation = $lib['data_aggregations'] ?? [];
-        $columnFields = $this->mapValueIndexColumnFields($columnFields, $valueIndexFields);
-
+        $propsColumnField = $this->mapValueIndexColumnFields($columnFields, $valueIndexFields);
+    
         $bidingColumnFields = $fields['biding_fields'] ?? [];
-
+        // dd($columnFields);
+    
         $dataFields = $lib['data_fields'] ?? [];
         $dataAggregations = ReportPivot::combineArrays($dataFields, $dataAggregation);
-
+        // dd($dataFields, $dataAggregations);
+    
         $sortBy = $lib['sort_by'] ?? [];
-        return [$rowFields, $bidingRowFields, $filters, $columnFields, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields];
+        return [$rowFields, $bidingRowFields, $filters, $propsColumnField, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields, $columnFields];
     }
+    
 }

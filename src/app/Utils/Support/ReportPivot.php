@@ -33,6 +33,7 @@ class ReportPivot
                                 if (!$field) continue;
                                 $array[$field] = $item[$field];
                             }
+                            // dd($value);
                             $dateItems[$value['fieldIndex'] . '_' . $key] = $array;
                             break;
                     }
@@ -48,19 +49,20 @@ class ReportPivot
         $newArray = self::concatKeyAndValueOfArray($newArray);
         return $newArray;
     }
-    public static function getLastArray($data, $columnFields)
+    public static function getLastArray($data, $fieldsNeedToSum = [])
     {
-        // if (empty($columnFields)) return $data;
         $outputArrays = [];
         foreach ($data as $key => $value) {
             if ($key === "items" && is_array($value)) {
-                //Summarize the results of Value_Index_Fields that has the same value in a field
-                $outputArrays[] = self::sumFieldsHaveTheSameValue($value, $columnFields);
+                //Sum the results of Value_Index_Fields that has the same value in a field
+                //Sum values before using Value Index Fields
+                $outputArrays[] = self::sumFieldsHaveTheSameValue($value, $fieldsNeedToSum);
             } elseif (is_array($value)) {
-                $nestedOutputArrays = self::getLastArray($value, $columnFields);
+                $nestedOutputArrays = self::getLastArray($value, $fieldsNeedToSum);
                 $outputArrays = array_merge($outputArrays, $nestedOutputArrays);
             }
         }
+        // dd($outputArrays);
         return $outputArrays;
     }
     public static function mergeChildrenValue($dataSource)
@@ -181,7 +183,7 @@ class ReportPivot
     }
     public static function groupBy($lineData, $rowFields)
     {
-        if (empty($rowFields)) return $lineData;
+        // if (empty($rowFields)) return $lineData;
         $dataOutput = [];
         foreach ($lineData as $line) {
             // Get the values of fields in $rowFields
@@ -216,25 +218,31 @@ class ReportPivot
     //     }
     // }
 
-    private static function sumFieldsHaveTheSameValue($data, $conditions)
+    private static function sumFieldsHaveTheSameValue($data, $fieldsNeedToSum)
     {
         $array = [];
+        $fieldIndex = $fieldsNeedToSum['fieldIndex'] ?? [];
+        $fieldsNeedToSum = $fieldsNeedToSum['valueIndexField'] ?? [];
+        // dump($fieldIndex, $fieldsNeedToSum);
+
         foreach ($data as $item) {
             $found = false;
-            foreach ($conditions as $cond) {
-                $fieldIndex = $cond["fieldIndex"];
-                $valueIndexField = $cond["valueIndexField"];
-                $aggregation = $cond["aggregation"];
+            foreach ($fieldsNeedToSum as $valueIndexField) {
+                if (!$valueIndexField) continue;
                 foreach ($array as  &$value) {
-                    if (!isset($value[$fieldIndex]) && !isset($item[$fieldIndex]) ) continue;
-                    if ($value[$fieldIndex] === $item[$fieldIndex]) {
-                        $found = true;
-                        if ($aggregation === 'sum') {
-                            $value[$valueIndexField] += $item[$valueIndexField];
+                    // if (!empty($fieldsNeedToSum)) continue;
+                    // if (!empty($fieldIndex) && !empty($fieldsNeedToSum)) continue;
+                    $check = false;
+                    foreach ($fieldIndex as $field) {
+                        if ($item[$field] === $value[$field]) {
+                            $check = true;
                         }
-                        break;
                     }
-
+                    if ($check) {
+                        $found = true;
+                        $value[$valueIndexField] += $item[$valueIndexField];
+                        break;                 
+                    }
                 }
                 
             }
@@ -252,13 +260,13 @@ class ReportPivot
     // }
 
 
-    public static function transferData($dataSource, $columnFields, $valueIndexFields)
+    public static function transferData($dataSource, $propsColumnField, $valueIndexFields)
     {
-        if (empty($columnFields) || empty($valueIndexFields)) return $dataSource;
+        if (empty($propsColumnField) || empty($valueIndexFields)) return $dataSource;
         $data = array_map(
             fn ($items) => array_map(
                 fn ($array) =>
-                self::transferValueOfKeys($array, $columnFields, $valueIndexFields),
+                self::transferValueOfKeys($array, $propsColumnField, $valueIndexFields),
                 $items
             ),
             $dataSource
@@ -298,4 +306,18 @@ class ReportPivot
         }
         return false;
     }
+
+    public static function groupItemsByFirstWord($data) {
+        $groupedItems = [];
+      
+        foreach ($data as $item) {
+          $nameParts = explode('_', $item);
+          $firstWord = $nameParts[0];
+          if (!isset($groupedItems[$firstWord])) {
+            $groupedItems[$firstWord] = [];
+          }
+          $groupedItems[$firstWord][] = $item;
+        }
+        return $groupedItems;
+      }
 }

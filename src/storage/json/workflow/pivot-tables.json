@@ -19,6 +19,17 @@
         "data_fields": null,
         "data_aggregations": null,
         "lookup_tables": null,
+        "sort_by": "category"
+    },
+    "apple_store_empty_row_field": {
+        "name": "apple_store_empty_row_field",
+        "filters": null,
+        "row_fields": null,
+        "column_fields": "category,product",
+        "value_index_fields": "amount,amount",
+        "data_fields": "amount",
+        "data_aggregations": "sum",
+        "lookup_tables": null,
         "sort_by": null
     },
     "apple_store_product_per_date": {
@@ -30,16 +41,16 @@
         "data_fields": "amount,\r\ndiscount",
         "data_aggregations": "sum,\r\nsum,",
         "lookup_tables": null,
-        "sort_by": null
+        "sort_by": "product:desc"
     },
     "apple_store_test_display": {
         "name": "apple_store_test_display",
         "filters": null,
         "row_fields": null,
-        "column_fields": "category",
-        "value_index_fields": null,
-        "data_fields": null,
-        "data_aggregations": null,
+        "column_fields": "category,product",
+        "value_index_fields": "amount,amount",
+        "data_fields": "amount",
+        "data_aggregations": "sum",
         "lookup_tables": null,
         "sort_by": null
     },
@@ -47,12 +58,12 @@
         "name": "hr_timesheet_employee_date",
         "filters": "workplace_id, department_id",
         "row_fields": "staff_id,\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name), \r\ntype_id(user_types.name),\r\ndepartment_id(departments.name),\r\ncategory_id(user_categories.name)",
-        "column_fields": "time_sheet_start_time, time_sheet_start_time_otr, time_sheet_start_time_wfh",
+        "column_fields": "time_sheet_start_time_otr, time_sheet_start_time_wfh,\r\ntime_sheet_start_time",
         "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, workplace_id",
         "data_aggregations": "sum,sum,sum,concat",
         "lookup_tables": "sub_projects,\r\nterms,\r\nusers,\r\nuser_types,\r\nworkplaces,\r\ndepartments,\r\nuser_categories",
-        "sort_by": "staff_id,\r\nworkplace_id(workplaces.name),"
+        "sort_by": "user_id(users.name:desc)"
     },
     "hr_timesheet_employee_project": {
         "name": "hr_timesheet_employee_project",
