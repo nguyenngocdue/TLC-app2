@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer\ViewAll;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
+use App\Models\Prod_order;
 use App\Models\Prod_routing;
 use App\Models\Qaqc_wir;
 use App\Utils\Constant;
@@ -15,6 +16,8 @@ class ViewAllTypeMatrixTypeProjectSubprojectRouting extends ViewAllTypeMatrixPar
     private $project, $subProject, $prodRouting;
     protected $dataIndexX = "wir_description_id";
     protected $dataIndexY = "prod_order_id";
+    protected $yAxis = Prod_order::class;
+    protected $xAxis = Wir_description::class;
     /**
      * Create a new component instance.
      *
@@ -50,6 +53,7 @@ class ViewAllTypeMatrixTypeProjectSubprojectRouting extends ViewAllTypeMatrixPar
                 'align' => 'center',
                 'prod_discipline_id' => $line->prod_discipline_id,
                 'def_assignee' => $line->def_assignee,
+                'width' => 40,
             ];
         }
         return $result;

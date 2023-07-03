@@ -12,6 +12,10 @@ trait TraitViewAllMatrixController
     private function indexViewAllMatrix($request)
     {
         if (!empty($request->input())) {
+            $request->merge([
+                'action' => "updateViewAllMatrix",
+                '_entity' => Str::plural($this->type),
+            ]);
             (new UpdateUserSettings())($request);
             return redirect($request->getPathInfo());
         }

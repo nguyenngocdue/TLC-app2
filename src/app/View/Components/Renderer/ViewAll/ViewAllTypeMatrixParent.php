@@ -4,11 +4,11 @@ namespace App\View\Components\Renderer\ViewAll;
 
 use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Models\Prod_order;
-use App\Models\User;
-use App\Models\User_team_tsht;
-use App\Models\Wir_description;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -32,52 +32,6 @@ abstract class ViewAllTypeMatrixParent extends Component
         $this->type = CurrentRoute::getTypePlural();
         $this->typeModel = Str::modelPathFrom($this->type);
         $this->statuses = LibStatuses::getFor($this->type);
-        $this->setAxisClass();
-    }
-
-    function setAxisClass()
-    {
-        switch ($this->type) {
-            case 'hr_timesheet_workers':
-                $this->yAxis =  User_team_tsht::class;
-                break;
-            case 'qaqc_wirs':
-                $this->yAxis =  Prod_order::class;
-                $this->xAxis = Wir_description::class;
-                break;
-            default:
-                dump("Unknown how to render matrix of view all type for " . $this->type);
-                break;
-        }
-    }
-
-    function getMeta01Object($y)
-    {
-        switch ($this->type) {
-            case 'hr_timesheet_workers':
-                return (object) [
-                    'value' => User::findFromCache($y->def_assignee)->name,
-                    'cell_title' => $y->def_assignee,
-                ];
-            case 'qaqc_wirs':
-                return $y->production_name;
-            default:
-                return (object) [
-                    'value' => "Unknown meta01 getter.",
-                ];
-                break;
-        }
-    }
-
-    function getMeta02Object($y)
-    {
-        switch ($this->type) {
-            case 'hr_timesheet_workers':
-                return count($y->getTshtMembers());
-            default:
-                return "Unknown meta02 getter.";
-                break;
-        }
     }
 
     protected function getYAxis()
@@ -107,9 +61,7 @@ abstract class ViewAllTypeMatrixParent extends Component
 
     function cellRenderer($cell)
     {
-        // return ($cell);
         $result = [];
-        // dump($statuses);
         foreach ($cell as $document) {
             $status = $this->statuses[$document->status];
             $result[] = (object)[
@@ -135,6 +87,11 @@ abstract class ViewAllTypeMatrixParent extends Component
         ];
     }
 
+    function getMetaObjects($y)
+    {
+        return [];
+    }
+
     function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource)
     {
         $dataSource = $this->reIndexDataSource($dataSource);
@@ -151,8 +108,6 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'cell_class' => "text-blue-800",
                 'cell_href' => route($yAxisTableName . ".edit", $y->id),
             ];
-            $line['meta01'] = $this->getMeta01Object($y);
-            $line['count'] = $this->getMeta02Object($y);
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 $xClass = $x['column_class'] ?? "";
@@ -172,6 +127,10 @@ abstract class ViewAllTypeMatrixParent extends Component
                     $line[$xId] = $this->cellRenderer($dataSource[$yId][$xId]);
                 }
             }
+            $metaObjects = $this->getMetaObjects($y);
+            foreach ($metaObjects as $key => $metaObject) {
+                $line[$key] = $metaObject;
+            }
             $result[] = $line;
         }
         // dump($result);
@@ -183,13 +142,17 @@ abstract class ViewAllTypeMatrixParent extends Component
         return [];
     }
 
+    protected function getMetaColumns()
+    {
+        return [];
+    }
+
     protected function getColumns($extraColumns)
     {
         return  [
             ['dataIndex' => 'name_for_group_by', 'hidden' => true],
             ['dataIndex' => 'name', 'width' => 250,],
-            ['dataIndex' => 'meta01', 'title' => 'Name', 'width' => 150,],
-            ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
+            ...$this->getMetaColumns(),
             ...$extraColumns,
         ];;
     }
@@ -197,6 +160,13 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected function getViewportParams()
     {
         return [];
+    }
+
+    private function paginate($items, $perPage = 15, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
     public function render()
@@ -213,6 +183,14 @@ abstract class ViewAllTypeMatrixParent extends Component
         $app = LibApps::getFor($yAxisTableName);
         $footer = "<a target='_blank' href='$yAxisRoute'>" . $app['title'] . "</a>";
 
+
+        $settings = CurrentUser::getSettings();
+        $per_page = $settings[$this->type]['view_all']['per_page'] ?? 15;
+        $page = $settings[$this->type]['view_all']['page'] ?? 1;
+        $dataSource = $this->paginate($dataSource, $per_page, $page);
+        $route = route('updateUserSettings');
+        $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
+
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
             [
@@ -222,6 +200,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'filterDataSource' => $this->getFilterDataSource(),
                 'viewportParams' => $this->getViewportParams(),
                 'footer' => $footer,
+                'perPage' => $perPage,
             ],
         );
     }

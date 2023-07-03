@@ -3,6 +3,8 @@
 namespace App\View\Components\Renderer\ViewAll;
 
 use App\Models\Hr_timesheet_worker;
+use App\Models\User;
+use App\Models\User_team_tsht;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
@@ -16,6 +18,9 @@ class ViewAllTypeMatrixTypeDateMode extends ViewAllTypeMatrixParent
 
     protected $dataIndexX = "ts_date";
     protected $dataIndexY = "team_id";
+
+    protected $yAxis = User_team_tsht::class;
+    // protected $xAxis = Date::class;
     /**
      * Create a new component instance.
      *
@@ -133,5 +138,24 @@ class ViewAllTypeMatrixTypeDateMode extends ViewAllTypeMatrixParent
         $params = parent::getCreateNewParams($x, $y);
         $params['assignee_1'] =  $y->def_assignee;
         return $params;
+    }
+
+    protected function getMetaColumns()
+    {
+        return [
+            ['dataIndex' => 'meta01', 'title' => 'Name', 'width' => 150,],
+            ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
+        ];
+    }
+
+    function getMetaObjects($y)
+    {
+        return [
+            'meta01' => (object) [
+                'value' => User::findFromCache($y->def_assignee)->name,
+                'cell_title' => $y->def_assignee,
+            ],
+            'count' => count($y->getTshtMembers()),
+        ];
     }
 }

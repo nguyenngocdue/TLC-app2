@@ -53,6 +53,11 @@ class UpdateUserSettings extends Controller
             $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_mode'] = $viewportMode;
         }
 
+        $page = $request->input("page");
+        if ($page) {
+            $settings[$type][Constant::VIEW_ALL]['page'] = $page;
+        }
+
         return $settings;
     }
 
