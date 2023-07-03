@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Renderer\ViewAll;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\Workflow\LibStatuses;
@@ -48,7 +48,7 @@ class ViewAllTypeCalendar extends Component
             $item['text_color'] = $this->getColorForStatus($item->status)[1];
             return $item;
         })->groupBy('year_value');
-        return view('components.renderer.view-all-type-calendar', [
+        return view('components.renderer.view-all.view-all-type-calendar', [
             'allTimesheet' => $allTimesheet,
             'routeCreate' => route($this->type . '.storeEmpty'),
             'token' => $token,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Renderer\ViewAll;
 
 use App\Utils\Support\JsonControls;
 use Illuminate\View\Component;
@@ -63,7 +63,7 @@ class ViewAllTypeSelector extends Component
     public function render()
     {
         return view(
-            'components.renderer.view-all-type-selector',
+            'components.renderer.view-all.view-all-type-selector',
             [
                 'tabs' => $this->getTabs(),
             ]

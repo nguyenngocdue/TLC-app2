@@ -82,6 +82,9 @@
         "name": "hse_corrective_actions",
         "storeEmpty_and_updateShort": "true"
     },
+    "hse_first_aids": {
+        "name": "hse_first_aids"
+    },
     "hse_incident_reports": {
         "name": "hse_incident_reports"
     },
@@ -228,6 +231,7 @@
     },
     "qaqc_wirs": {
         "name": "qaqc_wirs",
+        "storeEmpty_and_updateShort": "true",
         "renderTableForPopupModals": "true"
     },
     "signatures": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Renderer\ViewAll;
 
 use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Controllers\Workflow\LibStatuses;
@@ -222,7 +222,7 @@ class ViewAllTypeMatrix extends Component
         $footer = "<a target='_blank' href='$yAxisRoute'>" . $app['title'] . "</a>";
 
         return view(
-            'components.renderer.view-all-type-matrix',
+            'components.renderer.view-all.view-all-type-matrix',
             [
                 'columns' => $columns,
                 'dataSource' => $dataSource,

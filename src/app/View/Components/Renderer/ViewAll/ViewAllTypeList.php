@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Renderer\ViewAll;
 
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -48,7 +48,7 @@ class ViewAllTypeList extends Component
                 </div>";
         $actionMultipleGroup = $this->trashed ? "<x-form.action-multiple type='$this->type' restore='true'/>" : "<x-form.action-multiple type='$this->type'/>";
         return view(
-            'components.renderer.view-all-type-list',
+            'components.renderer.view-all.view-all-type-list',
             [
                 'tabPane' => $this->tabPane,
                 'columns' => $this->columns,
