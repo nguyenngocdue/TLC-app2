@@ -1,5 +1,5 @@
 <div class="bg-white w-full my-2 p-1 rounded grid grid-cols-12 gap-2">
-    <div class="col-span-3">
+    {{-- <div class="col-span-3">
         Project:
         <x-calendar.sidebar-filter-project 
             tableName="projects" 
@@ -8,7 +8,7 @@
             typeToLoadListener="qaqc_wir" 
             selected="{{$viewportParams['project_id']}}"
             />
-    </div>
+    </div> --}}
     <div class="col-span-3">
         Sub-Project:
         <x-calendar.sidebar-filter-sub-project 

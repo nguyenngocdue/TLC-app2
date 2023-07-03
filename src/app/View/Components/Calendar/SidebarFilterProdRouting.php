@@ -32,7 +32,9 @@ class SidebarFilterProdRouting extends Component
 
     private function getDataSource()
     {
-        $db = Prod_routing::select('id', 'name', 'description')->get();
+        $db = Prod_routing::select('id', 'name', 'description')
+            ->orderBy('name')
+            ->get();
         foreach ($db as &$line) {
             $fn = "getSubProjects()";
             $line->{$fn} = $line->getSubProjects()->pluck('id');

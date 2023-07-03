@@ -5,7 +5,7 @@
     @endphp
     @if($prop)
     @php
-    $readOnly = $hasReadOnly ?? $readOnly;
+    $readOnly = $hasReadOnly || $readOnly;
     @endphp
     <div class='col-span-{{$col_span}} grid'>
         <div class='grid grid-row-1'>

@@ -33,7 +33,9 @@ class SidebarTask extends Component
     private function getDataSource()
     {
         // $field_id = FieldSeeder::getIdFromFieldName('getLods');
-        $dataSource = Pj_task::select('id', 'name', 'description')->get();
+        $dataSource = Pj_task::select('id', 'name', 'description')
+            ->orderBy('name')
+            ->get();
         foreach ($dataSource as &$line) {
             $line->{"getDisciplines()"} = $line->getDisciplines()->pluck('id');
             $line->{"getLods()"} = $line->getLods()->pluck('id');

@@ -30,7 +30,9 @@ class SidebarFilterDiscipline extends Component
 
     private function getDataSource()
     {
-        $dataSource = User_discipline::select('id', 'name', 'description')->get();
+        $dataSource = User_discipline::select('id', 'name', 'description')
+            ->orderBy('name')
+            ->get();
         return $dataSource;
     }
 

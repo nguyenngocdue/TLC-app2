@@ -31,7 +31,9 @@ class SidebarFilterSubProject extends Component
 
     private function getDataSource()
     {
-        $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')->get();
+        $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')
+            ->orderBy('name')
+            ->get();
         return $dataSource;
     }
 

@@ -145,19 +145,11 @@ const filterDropdown2 = (column_name, dataSource) => {
 const onChangeDropdown2Reduce = (listener) => {
     // const debugListener = true
     if (debugListener) console.log('Reduce listener', listener)
-    const {
-        column_name,
-        table_name,
-        listen_to_attrs,
-        triggers,
-        attrs_to_compare,
-    } = listener
+    const { column_name, table_name, listen_to_attrs, triggers, attrs_to_compare, } = listener
     let dataSource = k[table_name]
     if (debugListener) console.log('dataSource in k of', table_name, dataSource)
 
-    const constraintsValues = triggers.map((trigger) =>
-        getValueOfEById(trigger)
-    )
+    const constraintsValues = triggers.map((trigger) => getValueOfEById(trigger))
     if (debugListener) console.log(triggers, constraintsValues)
 
     for (let i = 0; i < triggers.length; i++) {
@@ -193,7 +185,8 @@ const onChangeDropdown2Reduce = (listener) => {
     // //Try to delete the data if the new dataSource doesn't have it
     // for (let i = 0; i < dataSource.length; i++) {
     //     for (let j = 0; j < lastSelected.length; j++) {
-    //         if (dataSource[i] == lastSelected[j]) {
+    //         // console.log("comparing", dataSource[i]['id'], lastSelected[j])
+    //         if (dataSource[i]['id'] == lastSelected[j]) {
     //             lastSelected1.push(lastSelected[j]);
     //         }
     //     }
@@ -206,13 +199,12 @@ const onChangeDropdown2Reduce = (listener) => {
     // console.log(attrs_to_compare)
     const allowClear = getAllowClear(column_name)
     // console.log(allowClear)
-    reloadDataToDropdown2(
-        column_name,
-        attrs_to_compare,
-        dataSource,
-        lastSelected,
-        allowClear
-    )
+    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, lastSelected, allowClear)
+
+    // console.log("Set to ", column_name, lastSelected1)
+    // setValueOfEById(column_name, lastSelected1)
+    // getEById(column_name).trigger('change')
+
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -234,30 +226,17 @@ const onChangeDropdown2Assign = (listener) => {
     const selectedObject = onChangeGetSelectedObject2(listener)
     const listen_to_attr = listen_to_attrs[0]
     // const listen_to_attr = removeParenthesis(listen_to_attrs[0])
-    if (debugListener)
-        console.log(
-            'Selected Object:',
-            selectedObject,
-            ' - listen_to_attr:',
-            listen_to_attr
-        )
+    if (debugListener) console.log('Selected Object:', selectedObject, ' - listen_to_attr:', listen_to_attr)
     if (selectedObject !== undefined) {
         const theValue = selectedObject[listen_to_attr]
         if (theValue !== undefined) {
             // const column_name1 = removeParenthesis(column_name)
-            if (debugListener)
-                console.log('Set value of', column_name, 'to', theValue)
+            if (debugListener) console.log('Set value of', column_name, 'to', theValue)
             // getEById(column_name).val(theValue)
             setValueOfEById(column_name, theValue)
             getEById(column_name).trigger('change')
         } else {
-            console.error(
-                'Column',
-                listen_to_attr,
-                'not found in',
-                column_name,
-                '(Listeners Screen)'
-            )
+            console.error('Column', listen_to_attr, 'not found in', column_name, '(Listeners Screen)')
         }
     }
 }
