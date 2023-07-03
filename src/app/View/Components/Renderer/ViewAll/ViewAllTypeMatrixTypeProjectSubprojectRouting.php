@@ -18,6 +18,8 @@ class ViewAllTypeMatrixTypeProjectSubprojectRouting extends ViewAllTypeMatrixPar
     protected $dataIndexY = "prod_order_id";
     protected $yAxis = Prod_order::class;
     protected $xAxis = Wir_description::class;
+    protected $rotate45Width = 400;
+    protected $groupBy = null;
     /**
      * Create a new component instance.
      *
@@ -50,12 +52,14 @@ class ViewAllTypeMatrixTypeProjectSubprojectRouting extends ViewAllTypeMatrixPar
         foreach ($data as $line) {
             $result[] = [
                 'dataIndex' => $line->id,
+                'title' => $line->name,
                 'align' => 'center',
                 'prod_discipline_id' => $line->prod_discipline_id,
                 'def_assignee' => $line->def_assignee,
                 'width' => 40,
             ];
         }
+        usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
         return $result;
     }
 

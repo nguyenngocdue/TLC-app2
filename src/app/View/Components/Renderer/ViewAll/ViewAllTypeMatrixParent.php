@@ -22,6 +22,9 @@ abstract class ViewAllTypeMatrixParent extends Component
 
     protected $dataIndexX = null;
     protected $dataIndexY = null;
+    protected $rotate45Width = false;
+    protected $groupBy = 'name_for_group_by';
+    protected $groupByLength = 2;
     /**
      * Create a new component instance.
      *
@@ -183,7 +186,6 @@ abstract class ViewAllTypeMatrixParent extends Component
         $app = LibApps::getFor($yAxisTableName);
         $footer = "<a target='_blank' href='$yAxisRoute'>" . $app['title'] . "</a>";
 
-
         $settings = CurrentUser::getSettings();
         $per_page = $settings[$this->type]['view_all']['per_page'] ?? 15;
         $page = $settings[$this->type]['view_all']['page'] ?? 1;
@@ -201,6 +203,9 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'viewportParams' => $this->getViewportParams(),
                 'footer' => $footer,
                 'perPage' => $perPage,
+                'rotate45Width' => $this->rotate45Width,
+                'groupBy' => $this->groupBy,
+                'groupByLength' => $this->groupByLength,
             ],
         );
     }

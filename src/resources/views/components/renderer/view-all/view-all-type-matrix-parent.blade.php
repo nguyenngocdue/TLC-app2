@@ -3,11 +3,11 @@
           showPaginationTop="true"
           :columns="$columns"
           :dataSource="$dataSource"
-          groupBy="name_for_group_by"
-          groupByLength=2
+          groupBy="{{$groupBy}}"
+          groupByLength="{{$groupByLength}}"
           footer="{!! $footer !!}"
           showNo=1
           topRightControl="{!! $perPage !!}"
           bottomRightControl="{!! $perPage !!}"
-          {{-- tableTrueWidth="{{true}}" --}}
+          rotate45Width="{{$rotate45Width}}"
           />
