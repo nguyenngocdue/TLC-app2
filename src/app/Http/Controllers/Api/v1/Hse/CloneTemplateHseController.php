@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Log;
 
 class CloneTemplateHseController extends Controller
 {
-    public function cloneTemplateHse(Request $request){
-        if($id = $request->input('id')){
-            $ownerId =CurrentUser::id();
+    public function cloneTemplateHse(Request $request)
+    {
+        if ($id = $request->input('id')) {
+            $ownerId = CurrentUser::id();
             $params = [
                 '--ownerId' => $ownerId,
                 '--inspTmplId' => $id,
@@ -23,8 +24,8 @@ class CloneTemplateHseController extends Controller
                 $response['message'] = Artisan::output();
             } else {
                 $idHseChklstSht = trim(Artisan::output());
-                Log::info($idHseChklstSht);
-                Log::info(route("hse_insp_chklst_shts.edit", $idHseChklstSht));
+                // Log::info($idHseChklstSht);
+                // Log::info(route("hse_insp_chklst_shts.edit", $idHseChklstSht));
                 $response['href'] = route("hse_insp_chklst_shts.edit", $idHseChklstSht);
                 $response['message'] = "Cloned successfully.";
             }

@@ -44,14 +44,21 @@ class UpdateUserSettings extends Controller
     private function updateViewAllMatrix($request, &$settings)
     {
         $type = $request->input("_entity");
+
+        $page = $request->input("page");
+        if ($page) $settings[$type][Constant::VIEW_ALL]['page'] = $page;
+
         $viewportDate = $request->input("viewportDate");
-        if ($viewportDate) {
-            $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] = $viewportDate;
-        }
+        if ($viewportDate) $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] = $viewportDate;
+
         $viewportMode = $request->input("viewportMode");
-        if ($viewportMode) {
-            $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_mode'] = $viewportMode;
-        }
+        if ($viewportMode) $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_mode'] = $viewportMode;
+
+        $sub_project_id = $request->input("sub_project_id");
+        if ($sub_project_id) $settings[$type][Constant::VIEW_ALL]['matrix']['sub_project_id'] = $sub_project_id;
+
+        $prod_routing_id = $request->input("prod_routing_id");
+        if ($prod_routing_id) $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] = $prod_routing_id;
 
         return $settings;
     }

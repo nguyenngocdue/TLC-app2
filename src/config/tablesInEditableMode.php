@@ -8,12 +8,18 @@ return [
         'eco_material_impact_adds' => [],
         'eco_material_impact_removes' => [],
     ],
+    'qaqc_insp_tmpls' => [
+        'qaqc_insp_tmpl_shts' => [],
+    ],
     'hse_insp_tmpl_shts' => [
         'hse_insp_tmpl_lines' => [],
     ],
 
     'hse_insp_chklst_shts' => [
         'hse_insp_chklst_lines' => [],
+    ],
+    'hse_inductions' => [
+        'hse_induction_lines' => [],
     ],
 
     'qaqc_insp_tmpl_shts' => [

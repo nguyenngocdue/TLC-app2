@@ -37,25 +37,6 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_team_id": {
-        "name": "_team_id",
-        "column_name": "team_id",
-        "column_type": "bigint unsigned",
-        "label": "Team",
-        "control": "dropdown",
-        "align": "",
-        "col_span": "",
-        "width": "300",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": ""
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

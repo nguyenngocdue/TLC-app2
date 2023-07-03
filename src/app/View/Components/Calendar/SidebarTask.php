@@ -25,7 +25,7 @@ class SidebarTask extends Component
         private $control = 'draggable-event2',
         // private $control = 'radio-or-checkbox2',
         private $allowClear = false,
-        private $typeToLoadListener = null,
+        private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
@@ -33,7 +33,9 @@ class SidebarTask extends Component
     private function getDataSource()
     {
         // $field_id = FieldSeeder::getIdFromFieldName('getLods');
-        $dataSource = Pj_task::select('id', 'name', 'description')->get();
+        $dataSource = Pj_task::select('id', 'name', 'description')
+            ->orderBy('name')
+            ->get();
         foreach ($dataSource as &$line) {
             $line->{"getDisciplines()"} = $line->getDisciplines()->pluck('id');
             $line->{"getLods()"} = $line->getLods()->pluck('id');

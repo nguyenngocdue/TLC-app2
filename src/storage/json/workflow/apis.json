@@ -82,8 +82,18 @@
         "name": "hse_corrective_actions",
         "storeEmpty_and_updateShort": "true"
     },
+    "hse_first_aids": {
+        "name": "hse_first_aids"
+    },
     "hse_incident_reports": {
         "name": "hse_incident_reports"
+    },
+    "hse_induction_lines": {
+        "name": "hse_induction_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "hse_inductions": {
+        "name": "hse_inductions"
     },
     "hse_insp_chklst_lines": {
         "name": "hse_insp_chklst_lines",
@@ -202,7 +212,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "qaqc_insp_tmpl_shts": {
-        "name": "qaqc_insp_tmpl_shts"
+        "name": "qaqc_insp_tmpl_shts",
+        "storeEmpty_and_updateShort": "true"
     },
     "qaqc_insp_tmpls": {
         "name": "qaqc_insp_tmpls"
@@ -220,6 +231,7 @@
     },
     "qaqc_wirs": {
         "name": "qaqc_wirs",
+        "storeEmpty_and_updateShort": "true",
         "renderTableForPopupModals": "true"
     },
     "signatures": {

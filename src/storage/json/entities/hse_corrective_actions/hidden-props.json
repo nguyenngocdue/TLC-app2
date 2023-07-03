@@ -8,18 +8,18 @@
         "on_hold": "",
         "closed": ""
     },
+    "_correctable": {
+        "name": "_correctable",
+        "column_name": "correctable",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "closed": ""
-    },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
         "new": "",
         "in_progress": "",
         "cancelled": "",
@@ -38,6 +38,15 @@
     "_work_area_id": {
         "name": "_work_area_id",
         "column_name": "work_area_id",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
         "new": "",
         "in_progress": "",
         "cancelled": "",
@@ -98,18 +107,18 @@
         "on_hold": "",
         "closed": ""
     },
-    "_attachment_hse_car": {
-        "name": "_attachment_hse_car",
-        "column_name": "attachment_hse_car",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "new": "",
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
         "closed": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_attachment_hse_car": {
+        "name": "_attachment_hse_car",
+        "column_name": "attachment_hse_car",
         "new": "",
         "in_progress": "",
         "cancelled": "",
@@ -173,28 +182,19 @@
     "_correctable_type": {
         "name": "_correctable_type",
         "column_name": "correctable_type",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
-    "_correctable": {
-        "name": "_correctable",
-        "column_name": "correctable",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
     },
     "_correctable_id": {
         "name": "_correctable_id",
         "column_name": "correctable_id",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
     }
 }

@@ -29,6 +29,9 @@ trait TraitTableColumnEditable
             $newColumn['column_type'] = $prop['column_type'];
 
             $newColumn['properties']['lineType'] = Str::singular($tableName);
+            $newColumn['properties']['lineTypeTable'] = Str::plural($tableName);
+            $dummyRoute = route("$tableName.edit", "_id_");
+            $newColumn['properties']['lineTypeRoute'] = substr($dummyRoute, 0, strpos($dummyRoute, "_id_"));
             $newColumn['properties']['table01Name'] = $table01Name;
 
             $isReadOnly = ($prop['read_only'] ?? false) === 'true'; //<<CONFIG_MIGRATE
@@ -103,9 +106,9 @@ trait TraitTableColumnEditable
                     $newColumn['properties']['placeholder'] = Str::getPickerPlaceholder($prop['control']);
                     break;
                 case 'attachment':
-                    $newColumn['renderer'] = "text4";
+                    $newColumn['renderer'] = "attachment4";
                     $newColumn['editable'] = true;
-                    $newColumn['classList'] = 'bg-red-600 ' . $classListText;
+                    $newColumn['classList'] = $classListText;
                     break;
                 default:
                     $newColumn['renderer'] = "text4";

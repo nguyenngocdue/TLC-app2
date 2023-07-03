@@ -19,7 +19,10 @@
                 @break
                 @case('modal')
                     <div class="{{$classList}}">
-                        <button class="text-lg text-blue-500 hover:text-gray-400" @click="toggleModal('{{$value['modalId']}}')">
+                        <button class="text-lg text-blue-500 hover:text-gray-400 focus:outline-none" 
+                            @click="toggleModal('{{$value['modalId']}}')"
+                            @keydown.escape="closeModal('{{$value['modalId']}}')"
+                            >
                             {!!$value['icon']!!}
                             <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
                         </button>

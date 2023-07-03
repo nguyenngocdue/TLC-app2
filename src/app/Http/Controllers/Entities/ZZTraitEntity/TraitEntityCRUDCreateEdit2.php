@@ -64,7 +64,7 @@ trait TraitEntityCRUDCreateEdit2
 	}
 
 
-	public function edit(Request $request, $id)
+	public function edit(Request $request, $id, $title = null, $topTitle = null, $readOnly = false)
 	{
 		//check permission using gate
 		$original = $this->checkPermissionUsingGate($id, 'edit');
@@ -94,8 +94,8 @@ trait TraitEntityCRUDCreateEdit2
 			'type' => Str::plural($this->type),
 			'action' => __FUNCTION__,
 			'modelPath' => $this->data,
-			'title' => "Edit",
-			'topTitle' => CurrentRoute::getTitleOf($this->type),
+			'title' => $title ?? "Edit",
+			'topTitle' => $topTitle ?? CurrentRoute::getTitleOf($this->type),
 			'listenerDataSource' => $this->renderListenDataSource($tableToLoadDataSource),
 			'listeners2' => $this->getListeners2($this->type),
 			'filters2' => $this->getFilters2($this->type),
@@ -103,6 +103,7 @@ trait TraitEntityCRUDCreateEdit2
 			'filters4' => $this->getFilters4($tableBluePrint),
 			'disallowed' => false,
 			'app' => LibApps::getFor($this->type),
+			'hasReadOnly' => $readOnly,
 		]);
 	}
 }

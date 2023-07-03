@@ -31,7 +31,9 @@ class SidebarFilterProject extends Component
 
     private function getDataSource()
     {
-        return Project::select('id', 'name', 'description')->get();
+        return Project::select('id', 'name', 'description')
+            ->orderBy('name')
+            ->get();
     }
 
     /**

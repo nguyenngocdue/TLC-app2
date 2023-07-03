@@ -24,14 +24,16 @@ class SidebarFilterSubProject extends Component
         private $readOnly = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
-        private $typeToLoadListener = null,
+        private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
     private function getDataSource()
     {
-        $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')->get();
+        $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')
+            ->orderBy('name')
+            ->get();
         return $dataSource;
     }
 

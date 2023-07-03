@@ -9,9 +9,6 @@
                     <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
                     </x-renderer.card>
             </div>
-            <div class="md:col-span-6">
-                <x-renderer.legend :dataSource="$dataSourceLegend" title="{{$titleLegend}}" />
-            </div>
             <div class="md:col-span-2">
                 <x-renderer.card class="w-full border bg-white p-[15px] items-center" title="Selected Year">
                         <div class="text-center flex justify-around items-center">
@@ -25,6 +22,10 @@
                         </div>
                 </x-renderer.card>
             </div>
+            <div class="md:col-span-6">
+                <x-renderer.legend :dataSource="$dataSourceLegend" title="{{$titleLegend}}" />
+            </div>
+            
         </div>
         <div class="mt-2 grid grid-cols-12 ">
             <div class="col-span-12 overflow-y-auto overflow-x-hidden h-screen">
@@ -306,16 +307,18 @@
                 day = padNumber(day);
                 dateTime = `${yearCurrent}-${month}-${day}`;
                 week = moment(dateTime).isoWeek();
+                console.log(week + `=====>` + month +`=====>` + day)
+                console.log(timesheet.week_value)
                 if(week == timesheet.week_value){
                     classHover = `hover-${week}-${yearCurrent}`;
-                    if(day == 26){
+                    // if(day == 26){
                         if(dateTime == timesheet.week){
                             return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
                         }else{
                             return null;
                         }
-                    }
-                    return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
+                    // }
+                    // return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
                 }
     }
     

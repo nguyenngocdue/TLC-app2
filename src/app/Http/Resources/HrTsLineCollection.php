@@ -23,6 +23,7 @@ class HrTsLineCollection extends ResourceCollection
                     'title' => Calendar::renderTitle($item),
                     'title_default' => Pj_task::findOrFail($item->task_id)->name,
                     'tag_sub_project' => Calendar::renderTagSubProject($item),
+                    'name_project' => Calendar::renderNameProject($item),
                     'start' => $item->start_time ? DateTimeConcern::formatTimestampFromDBtoJS($item->start_time) : null,
                     'end' => $item->start_time ? DateTimeConcern::calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min) : null,
                     // 'allDay' => ($item->duration_in_min >= Constant::TIME_DEFAULT_ALLDAY) ? true : false,

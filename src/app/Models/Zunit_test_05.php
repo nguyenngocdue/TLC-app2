@@ -54,7 +54,7 @@ class Zunit_test_05 extends ModelExtended
     {
         return [
             ['dataIndex' => 'order_no', 'invisible' => true],
-            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'id',],
             ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'name', 'cloneable' => true],
             ['dataIndex' => 'attachment_1', 'cloneable' => !true],

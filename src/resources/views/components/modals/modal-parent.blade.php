@@ -1,6 +1,6 @@
 <template x-if="isModalOpening['{{$modalId}}']">
     <div id="{{$modalId}}" style="background-color: rgba(0, 0, 0, 0.8);" tabindex="-1" class="fixed sm:p-0 p-0 lg:p-4 top-0 left-0 right-0 bottom1-0 z-40 h-full dark:bg-slate-400 dark:bg-opacity-70 bg-opacity-70 justify-center items-center flex" aria-hidden="true" @keydown.escape="closeModal('{{$modalId}}')">
-        <div class="relative {{$class}} h-auto" @click.away="closeModal('{{$modalId}}')">
+        <div class="relative {{$modalClass}} h-auto" @click.away="closeModal('{{$modalId}}')">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
@@ -17,7 +17,7 @@
                     @yield($modalId.'-header-extra')
                 </div>
                 <!-- Modal body -->
-                <div class="px-6 overflow-y-auto h-[400px] md:h-[600px]" data-container>
+                <div class="px-6 overflow-y-auto h-[400px] md:h-[600px]" style="height:{{$height??""}}px" data-container>
                     @yield($modalId.'-body')
                     @sectionMissing($modalId.'-body')
                     <x-renderer.emptiness></x-renderer.emptiness>
@@ -27,8 +27,10 @@
                 @yield($modalId.'-footer')
                 @sectionMissing($modalId.'-footer')
                 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
-                    {{-- <x-renderer.button class="mx-2" type='success'>OK</x-renderer.button> --}}
-                    <x-renderer.button click="closeModal('{{$modalId}}')">Close</x-renderer.button>
+                    <div>
+                        <x-renderer.button click="closeModal('{{$modalId}}')">Cancel</x-renderer.button>
+                        {{-- <x-renderer.button type='success'>OK</x-renderer.button> --}}
+                    </div>
                 </div> 
                 @endif
             </div>

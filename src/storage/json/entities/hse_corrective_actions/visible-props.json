@@ -17,15 +17,6 @@
         "on_hold": "true",
         "closed": "true"
     },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
     "_priority_id": {
         "name": "_priority_id",
         "column_name": "priority_id",
@@ -38,6 +29,15 @@
     "_work_area_id": {
         "name": "_work_area_id",
         "column_name": "work_area_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
@@ -98,18 +98,18 @@
         "on_hold": "true",
         "closed": "true"
     },
-    "_attachment_hse_car": {
-        "name": "_attachment_hse_car",
-        "column_name": "attachment_hse_car",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "closed": ""
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_attachment_hse_car": {
+        "name": "_attachment_hse_car",
+        "column_name": "attachment_hse_car",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",

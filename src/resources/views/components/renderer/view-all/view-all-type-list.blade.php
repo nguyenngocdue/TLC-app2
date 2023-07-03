@@ -6,8 +6,8 @@
             :dataSource="$dataSource" 
             showPaginationTop="true"
             topLeftControl="{!! $actionButtonGroup !!}"
-            topRightControl="{!! $perPage !!}"
             bottomLeftControl="{!! $actionMultipleGroup !!}"
+            topRightControl="{!! $perPage !!}"
             bottomRightControl="{!! $perPage !!}"
             tableTrueWidth={{$tableTrueWidth}}
             maxH="41"

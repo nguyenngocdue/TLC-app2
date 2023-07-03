@@ -54,8 +54,8 @@ class Qaqc_insp_tmpl_line extends ModelExtended
             ['dataIndex' => 'qaqc_insp_group_id',],
             ['dataIndex' => 'name'],
             // ['dataIndex' => 'description'],
-            ['dataIndex' => 'control_type_id',],
-            ['dataIndex' => 'qaqc_insp_control_group_id',],
+            ['dataIndex' => 'control_type_id', 'cloneable' => true],
+            ['dataIndex' => 'qaqc_insp_control_group_id', 'cloneable' => true],
         ];
     }
 }

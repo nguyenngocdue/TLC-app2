@@ -26,7 +26,16 @@ class ItemRenderCheckSheet extends Component
         private $item = null,
     ) {
         // dump($item);
+    }
 
+    private function hasSignatureMulti()
+    {
+        $sp = SuperProps::getFor($this->type);
+        // dump($sp);
+        foreach ($sp['props'] as $prop) {
+            if ($prop['control'] == 'signature_multi') return true;
+        }
+        return false;
     }
 
     /**
@@ -63,6 +72,7 @@ class ItemRenderCheckSheet extends Component
                 'props' => $props,
                 'groupColumn' => $groupColumn,
                 'groupNames' => $groupNames,
+                'showSignOff' => $this->hasSignatureMulti(),
             ]
         );
     }

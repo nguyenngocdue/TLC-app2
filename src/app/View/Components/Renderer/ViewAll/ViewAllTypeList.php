@@ -1,8 +1,9 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Renderer\ViewAll;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class ViewAllTypeList extends Component
 {
@@ -24,6 +25,13 @@ class ViewAllTypeList extends Component
         //
     }
 
+    function removeStatusColumnIfStatusless()
+    {
+        $isStatusless = (Str::modelPathFrom($this->type))::isStatusless();
+        if ($isStatusless) $this->columns = array_filter($this->columns, fn ($c) => $c['dataIndex'] !== 'status');
+        // dump($this->columns);
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -31,6 +39,7 @@ class ViewAllTypeList extends Component
      */
     public function render()
     {
+        $this->removeStatusColumnIfStatusless();
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$this->perPage'/>";
         $actionButtonGroup = "<div class='flex'>
@@ -39,7 +48,7 @@ class ViewAllTypeList extends Component
                 </div>";
         $actionMultipleGroup = $this->trashed ? "<x-form.action-multiple type='$this->type' restore='true'/>" : "<x-form.action-multiple type='$this->type'/>";
         return view(
-            'components.renderer.view-all-type-list',
+            'components.renderer.view-all.view-all-type-list',
             [
                 'tabPane' => $this->tabPane,
                 'columns' => $this->columns,

@@ -34,7 +34,7 @@ class Hse_corrective_action extends ModelExtended
     public function correctable()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
     public function getUnsafeActionType()
     {
@@ -63,7 +63,7 @@ class Hse_corrective_action extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function getManyLineParams()
+    public function getManyLineParams() //In HSE Incident Report
     {
         return [
             ['dataIndex' => 'order_no', 'invisible' => true],
@@ -74,6 +74,7 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'priority_id',],
             ['dataIndex' => 'work_area_id'],
             ['dataIndex' => 'description'],
+            ['dataIndex' => 'attachment_hse_car',],
             ['dataIndex' => 'assignee_1'],
             ['dataIndex' => 'opened_date'],
             ['dataIndex' => 'closed_at'],
@@ -82,7 +83,7 @@ class Hse_corrective_action extends ModelExtended
         ];
     }
 
-    public function getManyLineParams1()
+    public function getManyLineParams1() // Unit Test 10
     {
         return [
             ['dataIndex' => 'order_no', 'invisible' => true],

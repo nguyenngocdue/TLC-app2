@@ -75,7 +75,7 @@ trait TraitEntityFormula
                     //     $value = (new Wir_NameRendered())($item);
                     //     break;
                 case "TSO_GetAssignee1":
-                    $value = (new TSO_GetAssignee1())();
+                    $value = (new TSO_GetAssignee1())($type);
                     break;
                 case "NCR_Report_Type":
                     $value = (new NCR_Report_Type())($item);

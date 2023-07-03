@@ -13,15 +13,15 @@
 
 @section($modalId.'-footer')
 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
-    <x-renderer.button class="mx-2" type='success' click="callApiCloneTemplate()">Clone Template</x-renderer.button>
     <x-renderer.button click="closeModal('{{$modalId}}')">Cancel</x-renderer.button>
+    <x-renderer.button class="mx-1" type='success' click="callApiCloneTemplate()">Clone Template</x-renderer.button>
 </div>
 @endsection
 
 @section($modalId.'-javascript')
 <script>
-    const url = @json($url);
-    const callApiCloneTemplate = () => {
+    url = @json($url);
+    callApiCloneTemplate = () => {
         id = document.getElementById('hse_insp_tmpl_sht_id').value
         if(id){
             $.ajax({

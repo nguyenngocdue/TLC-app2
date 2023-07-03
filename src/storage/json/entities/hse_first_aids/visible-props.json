@@ -1,0 +1,77 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "new": "true"
+    },
+    "_injured_person_id": {
+        "name": "_injured_person_id",
+        "column_name": "injured_person_id",
+        "new": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true"
+    },
+    "_injury_datetime": {
+        "name": "_injury_datetime",
+        "column_name": "injury_datetime",
+        "new": "true"
+    },
+    "_nature_of_injury": {
+        "name": "_nature_of_injury",
+        "column_name": "nature_of_injury",
+        "new": "true"
+    },
+    "_treatment_provided": {
+        "name": "_treatment_provided",
+        "column_name": "treatment_provided",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    }
+}

@@ -1,1 +1,1 @@
-<x-modals.modal-parent modalId="{{$modalId}}" class="w-1/2"/>
+<x-modals.modal-parent modalId="{{$modalId}}" modalClass="w-1/2"/>

@@ -5,6 +5,7 @@ namespace App\Utils\Support;
 use App\Models\Pj_sub_task;
 use App\Models\Pj_task;
 use App\Models\Sub_project;
+use App\Models\Project;
 use App\Models\User;
 use App\Models\Work_mode;
 use Illuminate\Support\Facades\Blade;
@@ -47,5 +48,12 @@ class Calendar
             $tagSubProject = Blade::render("<div class='flex items-end justify-between'><x-renderer.tag class='leading-none'>$nameSubProject</x-renderer.tag></div>");
         }
         return $tagSubProject ?? '';
+    }
+    public static function renderNameProject($item)
+    {
+        if ($item->project_id) {
+            $nameProject = Project::findOrFail($item->project_id)->name ?? '';
+        }
+        return $nameProject ?? '';
     }
 }
