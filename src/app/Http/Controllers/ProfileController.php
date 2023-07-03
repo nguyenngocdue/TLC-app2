@@ -2,62 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Entities\EntityCRUDController;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityListenDataSource;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitSupportEntityCRUDCreateEdit2;
+use App\Http\Controllers\Workflow\LibApps;
+use App\Models\User;
+use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\DefaultValues;
+use App\View\Components\Formula\All_DocId;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
-class ProfileController extends Controller
+class ProfileController extends EntityCRUDController
 {
-    use TraitSupportEntityCRUDCreateEdit2;
-    use TraitEntityListenDataSource;
-
-    private $type = 'users';
-    private $data = Me::class;
-
-    public function getType()
+    protected function assignDynamicTypeCreateEdit()
     {
-        return $this->type;
+        $this->type = 'users';
+        $this->data = Str::modelPathFrom('users');
+        $this->permissionMiddleware = $this->makePermissionMiddleware('users');
     }
-    public function profile(Request $request)
+    public function profile(Request $request, $id = null)
     {
-        $id = auth()->user()->id;
-        $status = $request->query('status');
-        $dryRunTokenRequest = $request->query('dryrun_token');
-        $valueCreateDryToken = $this->hashDryRunToken($id, $status);
-        $this->checkDryRunToken($dryRunTokenRequest, $valueCreateDryToken);
-        // dump(SuperProps::getFor($this->type));
-        $superProps = $this->getSuperProps();
-        $props = $superProps['props'];
-        $original = $this->data::findOrFail($id);
-        $values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $props);
-        $tableBluePrint = $this->makeTableBluePrint($props);
-        $tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
-        $isCheckColumnStatus = Schema::hasColumn(Str::plural($this->type), 'status');
-        return view('dashboards.pages.entity-create-edit', [
-            'superProps' => $superProps,
-            'props' => $props,
-            'item' => $original,
-            'defaultValues' => DefaultValues::getAllOf($this->type),
-            // 'realtimes' => Realtimes::getAllOf($this->type),
-            'values' => $values,
-            'status' => $status,
-            'dryRunToken' => Hash::make($valueCreateDryToken),
-            'isCheckColumnStatus' => $isCheckColumnStatus,
-            'type' => Str::plural($this->type),
-            'action' => 'edit',
-            'modelPath' => $this->data,
-            'title' => "Profile",
-            'topTitle' => CurrentRoute::getTitleOf($this->type),
-            'listenerDataSource' => $this->renderListenDataSource($tableToLoadDataSource),
-            'listeners2' => $this->getListeners2($this->type),
-            'filters2' => $this->getFilters2($this->type),
-            'listeners4' => $this->getListeners4($tableBluePrint),
-            'filters4' => $this->getFilters4($tableBluePrint),
-        ]);
+        $title = "Profile";
+        $topTitle = $id ? "Profile" : "Me";
+        $readOnly = $id ? true : false;
+        $id = $id ?? CurrentUser::id();
+        return $this->edit($request, $id, $title, $topTitle, $readOnly);
     }
 }
