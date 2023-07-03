@@ -39,9 +39,9 @@ class ViewAllTypeMatrixTypeProjectSubprojectRouting extends ViewAllTypeMatrixPar
     {
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
-        $project = $settings[$type][Constant::VIEW_ALL]['matrix']['project'] ?? null;
-        $subProject = $settings[$type][Constant::VIEW_ALL]['matrix']['sub_project'] ?? null;
-        $prodRouting = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing'] ?? null;
+        $project = $settings[$type][Constant::VIEW_ALL]['matrix']['project_id'] ?? null;
+        $subProject = $settings[$type][Constant::VIEW_ALL]['matrix']['sub_project_id'] ?? null;
+        $prodRouting = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] ?? null;
         return [$project, $subProject, $prodRouting];
     }
 
