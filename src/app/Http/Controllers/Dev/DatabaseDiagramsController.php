@@ -71,7 +71,11 @@ class DatabaseDiagramsController extends Controller
         foreach ($tables as $table) {
             // dump($table['relationships']);
             foreach ($table['relationships'] as $rel) {
-                if ($rel["REFERENCED_TABLE_NAME"] == 'users' && $rel["REFERENCED_COLUMN_NAME"] == 'id') continue;
+                if ($rel["REFERENCED_COLUMN_NAME"] == 'id') {
+                    if ($rel["REFERENCED_TABLE_NAME"] == 'users') continue;
+                    if ($rel["REFERENCED_TABLE_NAME"] == 'priorities') continue;
+                    // if ($rel["REFERENCED_TABLE_NAME"] == 'prod_disciplines') continue;
+                }
                 $result[] = [
                     "from" => $rel["TABLE_NAME"],
                     "fromPort" => $rel["COLUMN_NAME"],
