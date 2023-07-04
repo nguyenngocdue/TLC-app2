@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Report;
 
+use App\Http\Controllers\CheckFieldPivotInDatabase;
 use App\Http\Controllers\TraitLibPivotTableDataFields;
 use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\Report;
@@ -121,6 +122,7 @@ class PivotTable extends Component
     {
         // dd($dataOutput);
         [,,,,,,, $sortBy] =  $this->getDataFields();
+        if(!$this->getDataFields()) return collect($dataOutput);
 
         $sortOrders = $this->sortByData($sortBy);
         uasort($dataOutput, function ($item1, $item2) use ($sortOrders) {
@@ -137,7 +139,6 @@ class PivotTable extends Component
             }
             return 0;
         });
-        // dd($dataOutput);
         return collect($dataOutput);
     }
 
@@ -145,6 +146,7 @@ class PivotTable extends Component
     {
         $dataSource = array_slice($dataSource->toArray(), 0, 10000000);
         [$rowFields,,,,,, $dataIndex,] =  $this->getDataFields();
+        if(!$this->getDataFields()) return [];
         $allRowFields = array_unique(array_merge($rowFields, $dataIndex));
         // dd($dataSource);
         foreach ($dataSource as $key => $values) {
@@ -202,8 +204,7 @@ class PivotTable extends Component
     private function makeDataRenderer($primaryData)
     {
         [$rowFields,, $filters, $propsColumnField,, $dataAggregations,,, $valueIndexFields, $columnFields] =  $this->getDataFields();
-        // dd($columnFields);
-        $valueFilters = count($filters) ? array_combine($filters, [[1, 4], [7, 8]]) : [];
+        $valueFilters = count($filters)  ? array_combine($filters, [[1, 4], [7, 8]]) : [];
         // Step 1: reduce lines from Filters array
         $linesData = $primaryData;
         // dd($linesData);
@@ -211,7 +212,6 @@ class PivotTable extends Component
         // dd($valueFilters, $dataReduce);
 
         // Step 2: group lines by Row_Fields array
-
         if (!count($rowFields)) {
             $processedData = ReportPivot::groupBy($dataReduce, $columnFields);
         } else {
@@ -267,6 +267,7 @@ class PivotTable extends Component
     public function render()
     {
         $primaryData = $this->dataSource;
+        if (!$this->getDataFields()) return false;
         $dataOutput = $this->makeDataRenderer($primaryData);
         [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput);
         $dataOutput = $this->sortLinesData($dataOutput);

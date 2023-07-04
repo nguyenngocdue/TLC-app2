@@ -17,6 +17,7 @@ trait  ColumnsPivotReport
     private function makeHeadColumn($bidingRowFields)
     {
         $columnsData = [];
+        if(is_null($bidingRowFields)) return [];
         foreach ($bidingRowFields as $key => $value) {
             if (!$key) continue;
             if (count($value) and is_array($value)) {
@@ -143,6 +144,8 @@ trait  ColumnsPivotReport
     {
         $allColumns = [];
         [$rowFields,,,,,, $dataIndex,, $valueIndexFields, $columnFields] =  $this->getDataFields();
+        if(!$this->getDataFields()) return false;
+
         foreach ($dataOutput as $value) $allColumns = array_unique(array_merge($allColumns, array_keys($value)));
 
         $lastItemDataSource = key(array_slice($this->dataSource[0] ?? [], -1));
@@ -214,6 +217,7 @@ trait  ColumnsPivotReport
     public function makeColumnsRenderer($dataOutput)
     {
         [, $bidingRowFields,,,, $dataAggregations,,,,] = $this->getDataFields();
+        if(!$this->getDataFields()) return false;
         $columnsOfRowFields = $this->makeHeadColumn($bidingRowFields);
         [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields($dataOutput);
         $columnsOfAgg = $this->makeColumnsOfAgg($dataAggregations);
