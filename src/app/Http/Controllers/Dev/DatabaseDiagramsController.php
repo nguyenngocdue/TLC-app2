@@ -54,7 +54,7 @@ class DatabaseDiagramsController extends Controller
             }
             $nodeDataArray[] = $item;
             $index++;
-            if (sizeof($nodeDataArray) > 20) break;
+            // if (sizeof($nodeDataArray) > 20) break;
         }
         return $nodeDataArray;
     }

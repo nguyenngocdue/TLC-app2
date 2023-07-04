@@ -1,8 +1,29 @@
 function init(nodeDataArray, linkDataArray) {
 
+  let lastMouseEnteredNode = null
+  const tableIndex = {}
+
+  const updateLocation = (model) => {
+    const array = model.nodeDataArray
+    const index = tableIndex[lastMouseEnteredNode]
+    console.log(array[index])
+  }
+  const showModel = () => {
+    document.getElementById("mySavedModel").textContent = myDiagram.model.toJson()
+    const model = JSON.parse(myDiagram.model.toJson())
+    updateLocation(model)
+  }
+  const indexTable = () => {
+    for (let i = 0; i < nodeDataArray.length; i++) {
+      tableIndex[nodeDataArray[i]['key']] = i
+    }
+    console.log("Index", tableIndex)
+  }
+
   // Since 2.2 you can also author concise templates with method chaining instead of GraphObject.make
   // For details, see https://gojs.net/latest/intro/buildingObjects.html
   const $ = go.GraphObject.make;  // for conciseness in defining templates
+
 
   myDiagram =
     new go.Diagram("myDiagramDiv",
@@ -12,13 +33,14 @@ function init(nodeDataArray, linkDataArray) {
         "ModelChanged": e => {
           if (e.isTransactionFinished) showModel();
         },
-        "undoManager.isEnabled": true
+        "undoManager.isEnabled": true,
       });
 
   // myDiagram.grid.visible = true;
   myDiagram.toolManager.draggingTool.isGridSnapEnabled = true;
   myDiagram.toolManager.resizingTool.isGridSnapEnabled = true;
 
+  // myDiagram.addDiagramListener("SelectionMoved", e => console.log("SelectionMoved" + e));
   // This template is a Panel that is used to represent each item in a Panel.itemArray.
   // The Panel is data bound to the item object.
   var fieldTemplate =
@@ -67,7 +89,15 @@ function init(nodeDataArray, linkDataArray) {
   // This template represents a whole "record".
   myDiagram.nodeTemplate =
     $(go.Node, "Auto",
-      { copyable: false, deletable: false },
+      {
+        copyable: false,
+        deletable: false,
+        // click: (e, o) => console.log("Clicked", e, o),
+        mouseEnter: (e, o) => {
+          lastMouseEnteredNode = o.key
+          // console.log("mouseEntered", lastMouseEnteredNode, tableIndex[lastMouseEnteredNode])
+        }
+      },
       new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
       // this rectangular shape surrounds the content of the node
       $(go.Shape,
@@ -121,40 +151,12 @@ function init(nodeDataArray, linkDataArray) {
         copiesArrayObjects: true,
         linkFromPortIdProperty: "fromPort",
         linkToPortIdProperty: "toPort",
-        nodeDataArray: [
-          {
-            key: "Record1",
-            fields: [
-              { name: "field1", info: "", color: "#F7B84B", figure: "Key" },
-              { name: "field2", info: "the second one", color: "#F25022", figure: "Ellipse" },
-              { name: "fieldThree", info: "3rd", color: "#00BCF2" }
-            ],
-            loc: "0 0"
-          },
-          {
-            key: "Record2",
-            fields: [
-              { name: "fieldA", info: "", color: "#FFB900", figure: "Diamond" },
-              { name: "fieldB", info: "", color: "#F25022", figure: "Rectangle" },
-              { name: "fieldC", info: "", color: "#7FBA00", figure: "Diamond" },
-              { name: "fieldD", info: "fourth", color: "#00BCF2", figure: "Rectangle" }
-            ],
-            loc: "280 0"
-          },
-          ...nodeDataArray,
-        ],
-        linkDataArray: [
-          { from: "Record1", fromPort: "field1", to: "Record2", toPort: "fieldA" },
-          { from: "Record1", fromPort: "field2", to: "Record2", toPort: "fieldD" },
-          { from: "Record1", fromPort: "fieldThree", to: "Record2", toPort: "fieldB" },
-          ...linkDataArray,
-        ]
+        nodeDataArray,
+        linkDataArray,
       });
 
   showModel();  // show the diagram's initial model
+  indexTable(); // index the table key to number
 
-  function showModel() {
-    document.getElementById("mySavedModel").textContent = myDiagram.model.toJson();
-  }
 }
 window.addEventListener('DOMContentLoaded', () => init(nodeDataArray, linkDataArray));
