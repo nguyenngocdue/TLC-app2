@@ -1,5 +1,6 @@
 <?php
 
+use App\BigThink\Options;
 use App\Http\Controllers\Api\v1\Auth\AuthController;
 use App\Http\Controllers\Api\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\v1\Auth\ResetPasswordController;
@@ -76,7 +77,7 @@ Route::group([
 Route::group([
     'prefix' => 'v1/hse',
     'middleware' => ['auth:sanctum', 'throttle:600,1'],
-],function(){
+], function () {
     Route::post('clone_template_hse', [CloneTemplateHseController::class, 'cloneTemplateHse'])->name('cloneTemplateHse');
 });
 Route::group([
@@ -156,4 +157,11 @@ Route::group([
     foreach ($apps as $tableName) {
         Route::post("{$tableName}_renderTable", [EntityCRUDControllerForApiRenderer::class, 'renderTable'])->name($tableName . ".renderTable");
     }
+});
+
+Route::group([
+    'prefix' => 'v1',
+], function () {
+    Route::get('options', [Options::class, 'getByKeys']);
+    Route::post('options', [Options::class, 'setByKeyValues']);
 });

@@ -6,8 +6,23 @@ function init(nodeDataArray, linkDataArray) {
   const updateLocation = (model) => {
     const array = model.nodeDataArray
     const index = tableIndex[lastMouseEnteredNode]
-    console.log(array[index])
+    const node = array[index]
+    // console.log(node)
+    if (node) {
+      const obj = [{
+        key: "diagram.node." + node.key,
+        value: JSON.stringify({ loc: node.loc }),
+        owner_id: 1,
+      }]
+      jQuery.ajax({
+        url: "/api/v1/options",
+        method: "POST",
+        data: { lines: obj },
+        // success: (e) => console.log(e)
+      })
+    }
   }
+
   const showModel = () => {
     document.getElementById("mySavedModel").textContent = myDiagram.model.toJson()
     const model = JSON.parse(myDiagram.model.toJson())
@@ -17,7 +32,7 @@ function init(nodeDataArray, linkDataArray) {
     for (let i = 0; i < nodeDataArray.length; i++) {
       tableIndex[nodeDataArray[i]['key']] = i
     }
-    console.log("Index", tableIndex)
+    // console.log("Index", tableIndex)
   }
 
   // Since 2.2 you can also author concise templates with method chaining instead of GraphObject.make
@@ -30,9 +45,8 @@ function init(nodeDataArray, linkDataArray) {
       {
         validCycle: go.Diagram.CycleNotDirected,  // don't allow loops
         // For this sample, automatically show the state of the diagram's model on the page
-        "ModelChanged": e => {
-          if (e.isTransactionFinished) showModel();
-        },
+        "ModelChanged": e => (e.isTransactionFinished) ? showModel() : 0,
+        "SelectionMoved": e => console.log(e.diagram.selection, e.diagram.selection.first()),
         "undoManager.isEnabled": true,
       });
 

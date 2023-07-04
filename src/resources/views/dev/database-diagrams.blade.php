@@ -4,7 +4,7 @@
 
 @section('content')
 
-<script src="{{ asset('js/go@2.2.23.js') }}"></script>
+<script src="{{ asset('js/go_debug@2.3.8.js') }}"></script>
 
 <div id="sample">
     <div id="myDiagramDiv" class="p-2 w-full min-h-[700px]" style="border: 1px solid black; height: 400px; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);">

@@ -22,7 +22,7 @@ return new class extends Migration
         $schema->create('options', function (BlueprintExtended $table) {
             $table->id();
             $table->string('key');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->jsonb('value');
             $table->appendCommonFields();
         });
