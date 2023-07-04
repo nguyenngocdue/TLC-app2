@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dev;
 use App\Http\Controllers\Controller;
 use App\Utils\Support\DBTable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class DatabaseDiagramsController extends Controller
 {
@@ -13,33 +14,48 @@ class DatabaseDiagramsController extends Controller
         return "dashboard";
     }
 
+    function getSymbol($input)
+    {
+        switch ($input) {
+            case 'PRI':
+                return 'P';
+            case "MUL":
+                return "I";
+            case "UNI":
+                return "U";
+            case "":
+                return "";
+            default:
+                return "?";
+        }
+    }
+
     function getNodeDataArray($tables)
     {
         $nodeDataArray = [];
+        $index = 0;
+        $width = 10;
         foreach ($tables as $tableName => $table) {
+            $x = 300 * ($index % $width);
+            $y = 300 * floor($index / $width);
             $item['key'] = $tableName;
-            $item['loc'] = "";
+            $item['loc'] = "$x $y";
+            $item['fields'] = [];
+            // Log::info($index . " " . $x . " " . $y);
             foreach ($table as $field) {
-                $item['field'][] = [
+                $item['fields'][] = [
                     'name' => $field['Field'],
+                    'info' => $field['Type'],
+                    'null' =>  $field['Null'] === "YES" ? "NULL" : "",
+                    'key' => $this->getSymbol($field['Key']),
+                    // 'extra' =>  $field['Extra'],
+                    // 'default' =>  $field['Default'],
                 ];
             }
             $nodeDataArray[] = $item;
-            if (sizeof($nodeDataArray) > 10) break;
+            $index++;
+            // if (sizeof($nodeDataArray) > 10) break;
         }
-        // $nodeDataArray = [
-        //     [
-        //         'key' => "Record2",
-        //         'fields' => [
-        //             ['name' => "fieldA", 'info' => "", 'color' => "#FFB900", 'figure' => "Diamond"],
-        //             ['name' => "fieldB", 'info' => "", 'color' => "#F25022", 'figure' => "Rectangle"],
-        //             ['name' => "fieldC", 'info' => "", 'color' => "#7FBA00", 'figure' => "Diamond"],
-        //             ['name' => "fieldD", 'info' => "fourth", 'color' => "#00BCF2", 'figure' => "Rectangle"],
-        //         ],
-        //         'loc' => "280 100"
-        //     ]
-        // ];
-        // dd($nodeDataArray);
         return $nodeDataArray;
     }
 
