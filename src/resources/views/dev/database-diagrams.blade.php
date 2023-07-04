@@ -14,22 +14,10 @@
       </div>
     </div>
   </div>
-  <textarea id="mySavedModel" rows="50" class="w-full min-h-fit"></textarea>
+  <textarea id="mySavedModel" rows="50" class="w-full min-h-fit hidden"></textarea>
   <script>
     var nodeDataArray = @json($nodeDataArray);
     var linkDataArray = @json($linkDataArray);
     </script>
   <script src="{{ asset('js/database-diagrams.js') }}"></script>
-  
-    @php
-        foreach($tables as $tableName => $table){
-            echo $tableName;
-            echo Blade::render('<x-renderer.table :columns="$columns" :dataSource="$dataSource"></x-renderer.table>',[
-                'columns' =>$columns,
-                'dataSource' =>$table,
-            ]);
-            break;
-        }
-    @endphp
-
 @endsection

@@ -151,7 +151,9 @@ function init(nodeDataArray, linkDataArray) {
       {
         relinkableFrom: true, relinkableTo: true, // let user reconnect links
         toShortLength: 4, fromShortLength: 2,
-        routing: go.Link.Orthogonal, corner: 6,
+        routing: go.Link.Orthogonal,
+        routing: go.Link.AvoidsNodes,
+        corner: 6,
         curve: go.Link.JumpOver,
       },
       $(go.Shape, { strokeWidth: 1.5 }),
