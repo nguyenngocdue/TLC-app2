@@ -31,6 +31,7 @@ class ProjectOverview extends Component
             "<div class='p-2 m-1 rounded bg-red-500'></div>Overdue",
             "<div class='p-2 m-1 rounded bg-yellow-500'></div>In 7 days",
             "<div class='p-2 m-1 rounded bg-green-500'></div>More than 7 days",
+            "<div class='p-2 m-1 rounded bg-orange-500'></div>Unknown Due Date",
         ];
         return [
             ['dataIndex' => "doc_type"],
@@ -50,12 +51,17 @@ class ProjectOverview extends Component
             "overdue" => ['items' => []],
             "in_one_week" => ['items' => []],
             "more_than_one_week" => ['items' => []],
+            "unknown_due_date" => ['items' => []],
         ];
         foreach ($dataSource as $line) {
-            $dueDate = Carbon::createFromFormat(Constant::FORMAT_DATETIME_MYSQL, $line->due_date);
-            $diffFromToday = $dueDate->diffInDays(now(), false);
-            $dueDateType = ($diffFromToday > 0) ? "overdue" : ($diffFromToday > -7 ? "in_one_week" : "more_than_one_week");
-            $result[$dueDateType]['items'][] = $line; //->due_date . " " . $diffFromToday;
+            if ($line->due_date) {
+                $dueDate = Carbon::createFromFormat(Constant::FORMAT_DATETIME_MYSQL, $line->due_date);
+                $diffFromToday = $dueDate->diffInDays(now(), false);
+                $dueDateType = ($diffFromToday > 0) ? "overdue" : ($diffFromToday > -7 ? "in_one_week" : "more_than_one_week");
+                $result[$dueDateType]['items'][] = $line; //->due_date . " " . $diffFromToday;
+            } else {
+                $result['unknown_due_date']['items'][] = $line;
+            }
         }
         // dump($result);
         return $result;
@@ -79,6 +85,10 @@ class ProjectOverview extends Component
                     break;
                 case 'overdue':
                     $value['color'] = "red";
+                    break;
+                case 'unknown_due_date':
+                default:
+                    $value['color'] = "orange";
                     break;
             }
         }

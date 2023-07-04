@@ -31,14 +31,14 @@ function init(nodeDataArray) {
         // allow drawing links from or to this port:
         fromLinkable: true, toLinkable: true
       },
-      $(go.Shape,
-        {
-          width: 12, height: 12, column: 0, strokeWidth: 2, margin: 4,
-          // but disallow drawing links from or to this shape:
-          fromLinkable: false, toLinkable: false
-        },
-        new go.Binding("figure", "figure"),
-        new go.Binding("fill", "color")),
+      // $(go.Shape,
+      //   {
+      //     width: 12, height: 12, column: 0, strokeWidth: 2, margin: 4,
+      //     // but disallow drawing links from or to this shape:
+      //     fromLinkable: false, toLinkable: false
+      //   },
+      //   new go.Binding("figure", "figure"),
+      //   new go.Binding("fill", "color")),
       $(go.TextBlock,
         {
           margin: new go.Margin(0, 5), column: 1, font: "bold 13px sans-serif",
@@ -49,7 +49,19 @@ function init(nodeDataArray) {
         new go.Binding("text", "name")),
       $(go.TextBlock,
         { margin: new go.Margin(0, 5), column: 2, font: "13px sans-serif", alignment: go.Spot.Left },
-        new go.Binding("text", "info"))
+        new go.Binding("text", "info")),
+      $(go.TextBlock,
+        { margin: new go.Margin(0, 5), column: 3, font: "13px sans-serif", alignment: go.Spot.Left },
+        new go.Binding("text", "null")),
+      $(go.TextBlock,
+        { margin: new go.Margin(0, 5), column: 0, font: "13px sans-serif", alignment: go.Spot.Left },
+        new go.Binding("text", "key")),
+      // $(go.TextBlock,
+      //   { margin: new go.Margin(0, 5), column: 5, font: "13px sans-serif", alignment: go.Spot.Left },
+      //   new go.Binding("text", "default")),
+      // $(go.TextBlock,
+      //   { margin: new go.Margin(0, 5), column: 6, font: "13px sans-serif", alignment: go.Spot.Left },
+      //   new go.Binding("text", "extra")),
     );
 
   // This template represents a whole "record".
