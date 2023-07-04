@@ -1,4 +1,4 @@
-function init(nodeDataArray) {
+function init(nodeDataArray, linkDataArray) {
 
   // Since 2.2 you can also author concise templates with method chaining instead of GraphObject.make
   // For details, see https://gojs.net/latest/intro/buildingObjects.html
@@ -146,7 +146,8 @@ function init(nodeDataArray) {
         linkDataArray: [
           { from: "Record1", fromPort: "field1", to: "Record2", toPort: "fieldA" },
           { from: "Record1", fromPort: "field2", to: "Record2", toPort: "fieldD" },
-          { from: "Record1", fromPort: "fieldThree", to: "Record2", toPort: "fieldB" }
+          { from: "Record1", fromPort: "fieldThree", to: "Record2", toPort: "fieldB" },
+          ...linkDataArray,
         ]
       });
 
@@ -156,4 +157,4 @@ function init(nodeDataArray) {
     document.getElementById("mySavedModel").textContent = myDiagram.model.toJson();
   }
 }
-window.addEventListener('DOMContentLoaded', () => init(nodeDataArray));
+window.addEventListener('DOMContentLoaded', () => init(nodeDataArray, linkDataArray));

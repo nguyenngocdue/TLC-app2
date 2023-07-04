@@ -17,6 +17,7 @@
   <textarea id="mySavedModel" class="w-full min-h-fit"></textarea>
   <script>
     var nodeDataArray = @json($nodeDataArray);
+    var linkDataArray = @json($linkDataArray);
     </script>
   <script src="{{ asset('js/database-diagrams.js') }}"></script>
   

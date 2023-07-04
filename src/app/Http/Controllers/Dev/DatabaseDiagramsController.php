@@ -42,7 +42,7 @@ class DatabaseDiagramsController extends Controller
             $item['loc'] = "$x $y";
             $item['fields'] = [];
             // Log::info($index . " " . $x . " " . $y);
-            foreach ($table as $field) {
+            foreach ($table['columns'] as $field) {
                 $item['fields'][] = [
                     'name' => $field['Field'],
                     'info' => $field['Type'],
@@ -54,9 +54,26 @@ class DatabaseDiagramsController extends Controller
             }
             $nodeDataArray[] = $item;
             $index++;
-            // if (sizeof($nodeDataArray) > 10) break;
+            if (sizeof($nodeDataArray) > 20) break;
         }
         return $nodeDataArray;
+    }
+
+    function getLinkDataArray($tables)
+    {
+        $result = [];
+        foreach ($tables as $table) {
+            // dump($table['relationships']);
+            foreach ($table['relationships'] as $rel) {
+                $result[] = [
+                    "from" => $rel["TABLE_NAME"],
+                    "fromPort" => $rel["COLUMN_NAME"],
+                    "to" => $rel["REFERENCED_TABLE_NAME"],
+                    "toPort" => $rel["REFERENCED_COLUMN_NAME"],
+                ];
+            }
+        }
+        return $result;
     }
 
     function index(Request $request)
@@ -64,7 +81,8 @@ class DatabaseDiagramsController extends Controller
         $tables = [];
         $tableNames = DBTable::getAll();
         foreach ($tableNames as $tableName) {
-            $tables[$tableName] = DBTable::getAllColumns($tableName, true);
+            $tables[$tableName]['columns'] = DBTable::getAllColumns($tableName, true);
+            $tables[$tableName]['relationships'] = DBTable::getRelationships($tableName, true);
         }
         // dump($tables);
         $columns = [
@@ -80,6 +98,7 @@ class DatabaseDiagramsController extends Controller
             'columns' => $columns,
             'tables' => $tables,
             'nodeDataArray' => $this->getNodeDataArray($tables),
+            'linkDataArray' => $this->getLinkDataArray($tables),
         ]);
     }
 }
