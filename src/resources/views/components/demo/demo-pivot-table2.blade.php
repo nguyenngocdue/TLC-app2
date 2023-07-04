@@ -11,8 +11,12 @@
 <x-renderer.heading level=5>Pivot by apple_store_category_per_date</x-renderer.heading>
 <x-renderer.report.pivot-table key="apple_store_category_per_date" :dataSource="$dataSource"/>
 
-<x-renderer.heading level=5>Pivot by apple_store_test_display</x-renderer.heading>
-<x-renderer.report.pivot-table key="apple_store_test_display" :dataSource="$dataSource"/>
 
 <x-renderer.heading level=5>Pivot by apple_store_empty_row_field</x-renderer.heading>
 <x-renderer.report.pivot-table key="apple_store_empty_row_field" :dataSource="$dataSource"/>
+
+<x-renderer.heading level=5>Pivot by apple_store_empty_row_field_sum_attr</x-renderer.heading>
+<x-renderer.report.pivot-table key="apple_store_empty_row_field_sum_attr" :dataSource="$dataSource"/>
+
+<x-renderer.heading level=5>Pivot by apple_store_test_display</x-renderer.heading>
+<x-renderer.report.pivot-table key="apple_store_test_display" :dataSource="$dataSource"/>

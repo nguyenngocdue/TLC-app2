@@ -34,7 +34,7 @@ class PivotTable extends Component
                 $dataOutput[] = array_merge($dt, reset($item), $transferredData[$k1][$k2]);
             };
         }
-        if(!$rowFields) {
+        if(!$rowFields && $calculatedData) {
             $data1 = array_map(function ($item) use ($calculatedData) {
                 return array_merge($calculatedData[0], $item);
             }, $dataOutput);
@@ -177,6 +177,7 @@ class PivotTable extends Component
             foreach ($data as $key => &$items) {
                 $keyName =  '';
                 foreach ($columnFields as $field) {
+                    if (!$field) continue;
                     $keyName .= $items[$field] . '_';
                 }
                 $keyName = trim($keyName, '_');
@@ -241,13 +242,11 @@ class PivotTable extends Component
         $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput);
         // dd($dataOutput);
 
-
         $dataOutput = $this->makeTopTitle($dataOutput, $rowFields, $columnFields);
         // dd($dataOutput);
 
-
         $infoColumnFields = [];
-        if (!$rowFields) {
+        if (!$rowFields && $columnFields) {
             $groupByColumnFields = Report::groupArrayByKey($dataOutput, $columnFields[0]);
             foreach ($groupByColumnFields as $k1 => $values) {
                 foreach ($values as $value) {
@@ -258,7 +257,9 @@ class PivotTable extends Component
         }
         // dd($infoColumnFields, $dataOutput);
         $dataOutput = $this->mergeLines($dataOutput, $rowFields);
-        $dataOutput[0]["info_column_field"] = $infoColumnFields;
+        if (!$rowFields && $columnFields) {
+            $dataOutput[0]["info_column_field"] = $infoColumnFields;
+        }
         // dd($dataOutput);
         return $dataOutput;
     }

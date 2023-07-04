@@ -207,17 +207,6 @@ class ReportPivot
         return $dataOutput;
     }
 
-    // public static function reduceItemsRecursive(&$array, $columnFields)
-    // {
-    //     foreach ($array as $key => &$value) {
-    //         if ($key === 'items' && is_array($value)) {
-    //             $array[$key] = self::sumFieldsHaveTheSameValue($value, $columnFields);
-    //         } elseif (is_array($value)) {
-    //             self::reduceItemsRecursive($value, $columnFields);
-    //         }
-    //     }
-    // }
-
     private static function sumFieldsHaveTheSameValue($data, $fieldsNeedToSum)
     {
         $array = [];
@@ -234,6 +223,7 @@ class ReportPivot
                     // if (!empty($fieldIndex) && !empty($fieldsNeedToSum)) continue;
                     $check = false;
                     foreach ($fieldIndex as $field) {
+                        if(!$field) continue;
                         if ($item[$field] === $value[$field]) {
                             $check = true;
                         }
@@ -251,14 +241,6 @@ class ReportPivot
         // dd($array);
         return $array;
     }
-
-    // public static function groupBy2($processedData, $columnFields)
-    // {
-    //     if (empty($columnFields)) return $processedData;
-    //     self::reduceItemsRecursive($processedData, $columnFields);
-    //     return $processedData;
-    // }
-
 
     public static function transferData($dataSource, $propsColumnField, $valueIndexFields)
     {

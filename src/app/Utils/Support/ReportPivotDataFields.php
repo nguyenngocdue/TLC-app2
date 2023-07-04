@@ -12,7 +12,7 @@ class ReportPivotDataFields
     private static function execute($dataAggregations, $data)
     {
         if (!count($dataAggregations)) return [];
-
+        $newData = [];
         foreach ($dataAggregations as $field => $operator) {
             $result = null;
             foreach ($data as $key => $items) {
