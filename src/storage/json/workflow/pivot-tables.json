@@ -81,7 +81,7 @@
         "filters": "workplace_id, department_id",
         "row_fields": "user_id(users.name),\r\ntype_id(user_types.name),\r\npj_task_id(pj_tasks.name),",
         "column_fields": "sub_project_id(sub_projects.name)",
-        "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,\r\ntime_sheet_hours_wfh,\r\ntime_sheet_hours,",
+        "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,time_sheet_hours_wfh",
         "data_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_aggregations": "sum,\r\nsum,\r\nsum",
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms,\r\n pj_tasks",

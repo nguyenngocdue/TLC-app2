@@ -54,25 +54,31 @@ trait  ColumnsPivotReport
                 foreach ($fields as $field) {
                     $checkFiled =  ReportPivot::isStringInItemsOfArray($valueIndexFields, $field);
                     if ($checkFiled) {
-                        $title = ucwords(substr($field, strpos($field, "_")+1, strrpos($field, "_") - strpos($field, "_") - 1));
+                        $title = ucwords(substr($field, strpos($field, "_") + 1, strrpos($field, "_") - strpos($field, "_") - 1));
+                        foreach ($valueIndexFields as $value) {
+                            if (str_contains($field, $value)) {
+                                $title = ucwords(str_replace('_', ' ', $value));
+                            }
+                        }
                         $array[$field] = $title;
                     }
                 }
             }
         };
+        // dump($array);
         return $array;
     }
 
-    protected function editRowHeaderColumnFields2($arrayInfo, $columnFields) {
+    protected function editRowHeaderColumnFields2($arrayInfo, $columnFields)
+    {
         $data = [];
-        foreach(array_keys($arrayInfo) as $key) {
+        foreach (array_keys($arrayInfo) as $key) {
             $title = explode('_', $key)[1] ?? '';
             if (count($columnFields) > 2) {
-                $title = array_slice($x = explode('_', $key),count($x)-1, 1)[0]
-                        .'<br/> ('.array_slice($x = explode('_', $key),count($x)-2, 1)[0].')' ;
+                $title = array_slice($x = explode('_', $key), count($x) - 1, 1)[0]
+                    . '<br/> (' . array_slice($x = explode('_', $key), count($x) - 2, 1)[0] . ')';
             }
             $data[$key] = $title;
-
         }
         return $data;
     }
@@ -106,28 +112,29 @@ trait  ColumnsPivotReport
         return  $result;
     }
 
-    private function makeColumnsOfColumnFields2($dataOutput, $columnFields) {
+    private function makeColumnsOfColumnFields2($dataOutput, $columnFields)
+    {
         $tableDataHeader = [];
         $columnsOfColumnFields = [];
         // if (count($columnFields) <= 2) {
-            if (isset($dataOutput[0]['info_column_field'])) {
-                $info = $dataOutput[0]['info_column_field'];
-                $arrayInfo = array_merge(...array_merge(...array_values($info)));
-                foreach ($arrayInfo as $key =>$value) {
-                    $title = substr($key, 0, strpos($key, '_'));
-                    $indexTitle = $info[$title];
-                    $columnsOfColumnFields[] = [
-                        'title' => ucwords($title),
-                        'dataIndex' =>  $key,
-                        'align' => is_numeric($value) ? 'right' : 'left',
-                        'colspan' => count($indexTitle),
-                    ];
-                }
-                $tableDataHeader = $this->editRowHeaderColumnFields2($arrayInfo, $columnFields);
+        if (isset($dataOutput[0]['info_column_field'])) {
+            $info = $dataOutput[0]['info_column_field'];
+            $arrayInfo = array_merge(...array_merge(...array_values($info)));
+            foreach ($arrayInfo as $key => $value) {
+                $title = substr($key, 0, strpos($key, '_'));
+                $indexTitle = $info[$title];
+                $columnsOfColumnFields[] = [
+                    'title' => ucwords($title),
+                    'dataIndex' =>  $key,
+                    'align' => is_numeric($value) ? 'right' : 'left',
+                    'colspan' => count($indexTitle),
+                ];
             }
+            $tableDataHeader = $this->editRowHeaderColumnFields2($arrayInfo, $columnFields);
+        }
 
         // dd($tableDataHeader, $columnsOfColumnFields);
-        return [$tableDataHeader,$columnsOfColumnFields ];
+        return [$tableDataHeader, $columnsOfColumnFields];
     }
 
 
@@ -157,13 +164,13 @@ trait  ColumnsPivotReport
                             $checkFiled =  ReportPivot::isStringInItemsOfArray($valueIndexFields, $value);
                             if ($checkFiled) {
                                 $firstWord = explode('_', $value)[0];
-                                // dump($topTitleColumns, $value);
+                                // dd($checkFiled, $firstWord, $topTitleColumns, $value, $groupItems);
                                 $columnsOfColumnFields[] = [
                                     'title' => $topTitleColumns[$value] ?? ucwords($columnFields[0]) ?? '',
                                     'dataIndex' => $value,
-                                    'align' => is_numeric($value) ? 'left': 'right',
+                                    'align' => is_numeric($value) ? 'left' : 'right',
                                     'width' => 50,
-                                    'colspan' =>  count($groupItems[$firstWord]),
+                                    'colspan' =>  count($groupItems[$firstWord]) / (count($valueIndexFields) ?? 1),
                                 ];
                             };
                         }
@@ -174,18 +181,18 @@ trait  ColumnsPivotReport
                             $columnsOfColumnFields[] = [
                                 'title' => ucwords(str_replace('_', ' ', substr($value, $thirdUnderscore, 50))),
                                 'dataIndex' => $value,
-                                'align' => is_numeric($value) ? 'left': 'right',
+                                'align' => is_numeric($value) ? 'left' : 'right',
                                 'colspan' => count($items),
                             ];
                         }
                     }
                 }
             );
-            // dd($fields);
+            // dd($fields, $valueIndexFields, $topTitleColumns);
             $tableDataHeader = $this->editRowHeaderColumnFields($fields, $valueIndexFields);
         } else {
-                [$tableDataHeader,$columnsOfColumnFields ] = $this->makeColumnsOfColumnFields2($dataOutput, $columnFields);
-            }
+            [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields2($dataOutput, $columnFields);
+        }
         // dd($tableDataHeader, $columnsOfColumnFields);
         return [$tableDataHeader, $columnsOfColumnFields];
     }
@@ -206,7 +213,7 @@ trait  ColumnsPivotReport
 
     public function makeColumnsRenderer($dataOutput)
     {
-        [, $bidingRowFields, , , , $dataAggregations, , , , ] = $this->getDataFields();
+        [, $bidingRowFields,,,, $dataAggregations,,,,] = $this->getDataFields();
         $columnsOfRowFields = $this->makeHeadColumn($bidingRowFields);
         [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields($dataOutput);
         $columnsOfAgg = $this->makeColumnsOfAgg($dataAggregations);
