@@ -9,7 +9,7 @@
 </div>
 @endsection --}}
 
-<script src="{{ asset('js/go@2.2.23.js') }}"></script>
+<script src="{{ asset('js/go_debug@2.3.8.js') }}"></script>
 
  <div id="sample">
   <div id="diagramDiv" style="border: 1px solid black; width: 400px; height: 400px; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);">

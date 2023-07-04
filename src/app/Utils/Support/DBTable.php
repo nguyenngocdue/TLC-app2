@@ -32,21 +32,24 @@ class DBTable
         return static::$singletonColumns[$tableName];
     }
 
+    private static $relationships = null;
     public static function getRelationships($tableName)
     {
-        $temp = DB::select("SELECT 
-        TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME, REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
-        FROM
-            INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-        WHERE 1=1
-            AND REFERENCED_TABLE_SCHEMA = 'laravel' 
-            AND REFERENCED_TABLE_NAME = '$tableName'
-            ;");
-        $result = [];
-        foreach ($temp as $relation) {
-            $result[$relation->CONSTRAINT_NAME] = (array)$relation;
+        if (is_null(static::$relationships)) {
+            $temp = DB::select("SELECT 
+            TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME, REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
+            FROM
+                INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+            WHERE 1=1
+                AND REFERENCED_TABLE_SCHEMA = 'laravel' 
+                ;");
+            foreach ($temp as $relation) {
+                static::$relationships[$relation->TABLE_NAME][] = (array)$relation;
+                // dump($relation->TABLE_NAME);
+            }
         }
-        return $result;
+
+        return static::$relationships[$tableName] ?? [];
     }
 
     private static function getColumnsExpensive($tableName)

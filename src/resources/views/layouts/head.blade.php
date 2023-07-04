@@ -51,7 +51,7 @@
     <script src="{{ asset('js/qrcode@1.0.0.min.js') }}"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
-    <script src="{{ asset('js/go@2.2.23.js') }}"></script>
+    <script src="{{ asset('js/go_debug@2.3.8.js') }}"></script>
 
     <script src="{{ asset('js/html2pdf@0.10.1.bundle.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>

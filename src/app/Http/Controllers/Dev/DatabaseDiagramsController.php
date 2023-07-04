@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dev;
 
+use App\BigThink\Options;
 use App\Http\Controllers\Controller;
 use App\Utils\Support\DBTable;
 use Illuminate\Http\Request;
@@ -38,8 +39,10 @@ class DatabaseDiagramsController extends Controller
         foreach ($tables as $tableName => $table) {
             $x = 300 * ($index % $width);
             $y = 300 * floor($index / $width);
+            $option = Options::get("diagram.node.$tableName", (object)["loc" => "$x $y"], true);
+            // dump($option);
             $item['key'] = $tableName;
-            $item['loc'] = "$x $y";
+            $item['loc'] = $option->loc;
             $item['fields'] = [];
             // Log::info($index . " " . $x . " " . $y);
             foreach ($table['columns'] as $field) {
@@ -54,17 +57,21 @@ class DatabaseDiagramsController extends Controller
             }
             $nodeDataArray[] = $item;
             $index++;
-            if (sizeof($nodeDataArray) > 20) break;
+            // if (sizeof($nodeDataArray) > 20) break;
         }
         return $nodeDataArray;
     }
 
     function getLinkDataArray($tables)
     {
+        // $ignoredTo = [
+        //     ['to' => 'users', 'toPort' => 'id'],
+        // ];
         $result = [];
         foreach ($tables as $table) {
             // dump($table['relationships']);
             foreach ($table['relationships'] as $rel) {
+                if ($rel["REFERENCED_TABLE_NAME"] == 'users' && $rel["REFERENCED_COLUMN_NAME"] == 'id') continue;
                 $result[] = [
                     "from" => $rel["TABLE_NAME"],
                     "fromPort" => $rel["COLUMN_NAME"],
