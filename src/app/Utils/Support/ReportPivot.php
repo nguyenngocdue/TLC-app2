@@ -212,26 +212,25 @@ class ReportPivot
         $array = [];
         $fieldIndex = $fieldsNeedToSum['fieldIndex'] ?? [];
         $fieldsNeedToSum = $fieldsNeedToSum['valueIndexField'] ?? [];
-        // dump($fieldIndex, $fieldsNeedToSum);
+        // dd($fieldIndex, $fieldsNeedToSum);
 
         foreach ($data as $item) {
             $found = false;
             foreach ($fieldsNeedToSum as $valueIndexField) {
                 if (!$valueIndexField) continue;
                 foreach ($array as  &$value) {
-                    // if (!empty($fieldsNeedToSum)) continue;
-                    // if (!empty($fieldIndex) && !empty($fieldsNeedToSum)) continue;
                     $check = false;
                     foreach ($fieldIndex as $field) {
-                        if(!$field) continue;
+                        if(!$field || !isset($item[$field])) continue;
                         if ($item[$field] === $value[$field]) {
                             $check = true;
                         }
                     }
                     if ($check) {
                         $found = true;
+                        if(!isset($item[$valueIndexField])) continue;
                         $value[$valueIndexField] += $item[$valueIndexField];
-                        break;                 
+                        break;                
                     }
                 }
                 
@@ -302,4 +301,17 @@ class ReportPivot
         }
         return $groupedItems;
       }
+    public static function separateValueByStringInArray($data, $string1,$string2=":", $index =0) {
+        $arrayFields = [];
+        foreach ($data as $value){
+            if (str_contains($value, $string1)){
+                $field = explode($string1, $value, 2)[$index];
+                $arrayFields[] = $field;
+            } else {
+                $field = explode($string2, $value, 2)[$index];
+                $arrayFields[] = $field;
+            }
+        }
+        return $arrayFields;
+    }
 }
