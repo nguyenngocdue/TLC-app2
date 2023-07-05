@@ -22,6 +22,7 @@ class Breadcrumb extends Component
         'managePivotTable',
         'manageReport',
         'manageAppCreation',
+        'manageProfileField',
         'manageStandardProp',
         'manageStandardDefaultValue',
         'manageStatus',

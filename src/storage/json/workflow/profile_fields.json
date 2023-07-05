@@ -1,0 +1,163 @@
+{
+    "_address": {
+        "name": "_address",
+        "profile_hidden": "true"
+    },
+    "_attachment": {
+        "name": "_attachment",
+        "profile_readonly": "true"
+    },
+    "_category": {
+        "name": "_category",
+        "me_hidden": "true"
+    },
+    "_company": {
+        "name": "_company",
+        "me_readonly": "true"
+    },
+    "_created_at": {
+        "name": "_created_at"
+    },
+    "_date_of_birth": {
+        "name": "_date_of_birth"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by"
+    },
+    "_department": {
+        "name": "_department"
+    },
+    "_discipline": {
+        "name": "_discipline"
+    },
+    "_domain": {
+        "name": "_domain"
+    },
+    "_email": {
+        "name": "_email"
+    },
+    "_email_verified_at": {
+        "name": "_email_verified_at"
+    },
+    "_employeeid": {
+        "name": "_employeeid"
+    },
+    "_featured_image": {
+        "name": "_featured_image"
+    },
+    "_first_date": {
+        "name": "_first_date"
+    },
+    "_first_name": {
+        "name": "_first_name"
+    },
+    "_full_name": {
+        "name": "_full_name"
+    },
+    "_getAvatar": {
+        "name": "_getAvatar"
+    },
+    "_getOtTeams()": {
+        "name": "_getOtTeams()"
+    },
+    "_getPosts": {
+        "name": "_getPosts"
+    },
+    "_getRoleSet": {
+        "name": "_getRoleSet"
+    },
+    "_getTshtTeams()": {
+        "name": "_getTshtTeams()"
+    },
+    "_guid": {
+        "name": "_guid"
+    },
+    "_id": {
+        "name": "_id"
+    },
+    "_last_date": {
+        "name": "_last_date"
+    },
+    "_last_name": {
+        "name": "_last_name"
+    },
+    "_leaf_uids": {
+        "name": "_leaf_uids"
+    },
+    "_name": {
+        "name": "_name"
+    },
+    "_name_suffix": {
+        "name": "_name_suffix"
+    },
+    "_owner_id": {
+        "name": "_owner_id"
+    },
+    "_password": {
+        "name": "_password"
+    },
+    "_phone": {
+        "name": "_phone"
+    },
+    "_position_1": {
+        "name": "_position_1"
+    },
+    "_position_2": {
+        "name": "_position_2"
+    },
+    "_position_3": {
+        "name": "_position_3"
+    },
+    "_position_prefix": {
+        "name": "_position_prefix"
+    },
+    "_position_rendered": {
+        "name": "_position_rendered"
+    },
+    "_provider": {
+        "name": "_provider"
+    },
+    "_remember_token": {
+        "name": "_remember_token"
+    },
+    "_resigned": {
+        "name": "_resigned"
+    },
+    "_settings": {
+        "name": "_settings"
+    },
+    "_show_on_beta": {
+        "name": "_show_on_beta",
+        "profile_readonly": "true"
+    },
+    "_time_keeping_type": {
+        "name": "_time_keeping_type"
+    },
+    "_time_zone": {
+        "name": "_time_zone"
+    },
+    "_title": {
+        "name": "_title"
+    },
+    "_updated_at": {
+        "name": "_updated_at"
+    },
+    "_user_id_passport": {
+        "name": "_user_id_passport"
+    },
+    "_user_pin": {
+        "name": "_user_pin"
+    },
+    "_user_type": {
+        "name": "_user_type"
+    },
+    "_viewport_uids": {
+        "name": "_viewport_uids"
+    },
+    "_workplace": {
+        "name": "_workplace"
+    }
+}
