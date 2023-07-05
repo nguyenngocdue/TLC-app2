@@ -9,12 +9,30 @@ use Exception;
 
 class ReportPivot
 {
-    private static function transferValueOfKeys($data, $columnFields, $valueIndexFields)
+    private function makeColumnFieldsDuplicate($columnFields, $dataOutput)
     {
-        // dd(array_column($data, 'sub_project_id'));
-        $newArray = array_map(function ($item) use ($columnFields, $valueIndexFields) {
+        $newColumnFields = array_count_values($columnFields);
+        foreach ($newColumnFields as $field => $items) {
+            foreach ($dataOutput as $k1 => &$values) {
+                foreach ($values as $k2 => $value) {
+                    if (str_contains($k2, '_' . $field)) {
+                        for ($i = 2; $i <= $items * 1; $i++) {
+                            $newField = str_replace('_' . $field, '_' . $field . '_[' . $i . ']', $k2);
+                            $values[$newField] = $values[$k2];
+                        }
+                    }
+                }
+            }
+        }
+        return $dataOutput;
+    }
+
+    private static function transferValueOfKeys($data, $columnFields, $propsColumnField, $valueIndexFields)
+    {
+        // dd($data);
+        $newArray = array_map(function ($item) use ($propsColumnField, $valueIndexFields) {
             $dateItems = [];
-            foreach ($columnFields as $value) {
+            foreach ($propsColumnField as $value) {
                 if (!isset($value['fieldIndex']) || !isset($value['valueIndexField']) || !isset($item[$value['fieldIndex']])) continue;
                 try {
                     $date = DateTime::createFromFormat('Y-m-d', $item[$value['fieldIndex']]);
@@ -27,6 +45,7 @@ class ReportPivot
                             $dateItems[$_strDate] =  $item[$value['valueIndexField']];
                             break;
                         default:
+                            // dd($date, $propsColumnField,  $value);
                             $key = str_replace(' ', '_', strtolower($item[$value['fieldIndex']]));
                             $array = [];
                             foreach ($valueIndexFields as $field) {
@@ -43,10 +62,33 @@ class ReportPivot
             }
             return $dateItems;
         }, $data);
-        // $newArray = self::sumItemsInArray01($newArray);
-        // dump($newArray);
         $newArray = self::sumItemsInArray($newArray);
         $newArray = self::concatKeyAndValueOfArray($newArray);
+        // dump($newArray);
+
+        // Check items that were duplicated in Column_Field column
+        if (self::hasDuplicates($columnFields)) {
+            $newColumnFields = self::markDuplicates($columnFields);
+            $array = [];
+            foreach ($newColumnFields as $k => $values) {
+                foreach ($values as $newField) {
+                    foreach ($newArray as $field => $value) {
+                        if (str_contains($field, '_date')) {
+                            $newKey = str_replace('_date', '_' . $newField, $field);
+                            $array[$newKey] = $value;
+                        } else {
+                            $firstWord = explode('_', $field)[0];
+                            // dump($firstWord);
+                            $newKey = str_replace($firstWord . '_', $newField . '_', $field);
+                            $array[$newKey] = $value;
+                        }
+                    }
+                }
+            }
+            // dump($array);
+            return $array;
+        }
+        // dump($newArray);
         return $newArray;
     }
     public static function getLastArray($data, $fieldsNeedToSum = [])
@@ -221,19 +263,18 @@ class ReportPivot
                 foreach ($array as  &$value) {
                     $check = false;
                     foreach ($fieldIndex as $field) {
-                        if(!$field || !isset($item[$field])) continue;
+                        if (!$field || !isset($item[$field])) continue;
                         if ($item[$field] === $value[$field]) {
                             $check = true;
                         }
                     }
                     if ($check) {
                         $found = true;
-                        if(!isset($item[$valueIndexField])) continue;
+                        if (!isset($item[$valueIndexField])) continue;
                         $value[$valueIndexField] += $item[$valueIndexField];
-                        break;                
+                        break;
                     }
                 }
-                
             }
             if (!$found) $array[] = $item;
         }
@@ -241,13 +282,14 @@ class ReportPivot
         return $array;
     }
 
-    public static function transferData($dataSource, $propsColumnField, $valueIndexFields)
+    public static function transferData($dataSource, $columnFields, $propsColumnField, $valueIndexFields)
     {
         if (empty($propsColumnField) || empty($valueIndexFields)) return $dataSource;
+        // dd($dataSource);
         $data = array_map(
             fn ($items) => array_map(
                 fn ($array) =>
-                self::transferValueOfKeys($array, $propsColumnField, $valueIndexFields),
+                self::transferValueOfKeys($array, $columnFields, $propsColumnField, $valueIndexFields),
                 $items
             ),
             $dataSource
@@ -288,23 +330,25 @@ class ReportPivot
         return false;
     }
 
-    public static function groupItemsByFirstWord($data) {
+    public static function groupItemsByFirstWord($data)
+    {
         $groupedItems = [];
-      
+
         foreach ($data as $item) {
-          $nameParts = explode('_', $item);
-          $firstWord = $nameParts[0];
-          if (!isset($groupedItems[$firstWord])) {
-            $groupedItems[$firstWord] = [];
-          }
-          $groupedItems[$firstWord][] = $item;
+            $nameParts = explode('_', $item);
+            $firstWord = $nameParts[0];
+            if (!isset($groupedItems[$firstWord])) {
+                $groupedItems[$firstWord] = [];
+            }
+            $groupedItems[$firstWord][] = $item;
         }
         return $groupedItems;
-      }
-    public static function separateValueByStringInArray($data, $string1,$string2=":", $index =0) {
+    }
+    public static function separateValueByStringInArray($data, $string1, $string2 = ":", $index = 0)
+    {
         $arrayFields = [];
-        foreach ($data as $value){
-            if (str_contains($value, $string1)){
+        foreach ($data as $value) {
+            if (str_contains($value, $string1)) {
                 $field = explode($string1, $value, 2)[$index];
                 $arrayFields[] = $field;
             } else {
@@ -313,5 +357,32 @@ class ReportPivot
             }
         }
         return $arrayFields;
+    }
+    public static function markDuplicates($arr)
+    {
+        $counts = array();
+        $groupedArr = array();
+        foreach ($arr as $value) {
+            if ($value == "") continue;
+
+            if (!isset($counts[$value])) {
+                $counts[$value] = 2;
+                $groupedArr[$value] = array($value);
+            } else {
+                $groupedArr[$value][] = $value . "_[" . $counts[$value] . "]";
+                $counts[$value]++;
+            }
+        }
+        return $groupedArr;
+    }
+    public static function hasDuplicates($array)
+    {
+        $counts = array_count_values($array);
+        foreach ($counts as $value) {
+            if ($value > 1) {
+                return true;
+            }
+        }
+        return false;
     }
 }

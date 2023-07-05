@@ -35,12 +35,12 @@ class PivotTable extends Component
                 $dataOutput[] = array_merge($dt, reset($item), $transferredData[$k1][$k2]);
             };
         }
-        if(!$rowFields && $calculatedData) {
+        if (!$rowFields && $calculatedData) {
             $data1 = array_map(function ($item) use ($calculatedData) {
                 return array_merge($calculatedData[0], $item);
             }, $dataOutput);
             return $data1;
-        } 
+        }
         return $dataOutput;
     }
 
@@ -67,7 +67,6 @@ class PivotTable extends Component
     {
 
         [$rowFieldsHasAttr, $bindingFields,,, $bidingColumnFields,, $dataIndex,] =  $this->getDataFields();
-        // dump($processedData, $bindingFields);
         foreach ($processedData as &$items) {
             foreach ($items as $key => $id) {
                 if (in_array($key, $rowFieldsHasAttr)) {
@@ -122,7 +121,7 @@ class PivotTable extends Component
     {
         // dd($dataOutput);
         [,,,,,,, $sortBy] =  $this->getDataFields();
-        if(!$this->getDataFields()) return collect($dataOutput);
+        if (!$this->getDataFields()) return collect($dataOutput);
 
         $sortOrders = $this->sortByData($sortBy);
         uasort($dataOutput, function ($item1, $item2) use ($sortOrders) {
@@ -146,7 +145,7 @@ class PivotTable extends Component
     {
         $dataSource = array_slice($dataSource->toArray(), 0, 10000000);
         [$rowFields,,,,,, $dataIndex,] =  $this->getDataFields();
-        if(!$this->getDataFields()) return [];
+        if (!$this->getDataFields()) return [];
         $allRowFields = array_unique(array_merge($rowFields, $dataIndex));
         // dd($dataSource);
         foreach ($dataSource as $key => $values) {
@@ -211,6 +210,7 @@ class PivotTable extends Component
         $dataReduce = ReportPivot::reduceDataByFilterColumn($linesData, $valueFilters);
         // dd($valueFilters, $dataReduce);
 
+
         // Step 2: group lines by Row_Fields array
         if (!count($rowFields)) {
             $processedData = ReportPivot::groupBy($dataReduce, $columnFields);
@@ -226,14 +226,13 @@ class PivotTable extends Component
 
         // Step 3: transfer data from lines to columns by
         // Column_Fields and Value_Index_Fields array 
-        $transferredData = ReportPivot::transferData($processedData, $propsColumnField, $valueIndexFields);
+        $transferredData = ReportPivot::transferData($processedData,$columnFields, $propsColumnField, $valueIndexFields);
         // dd($transferredData);
 
         //Step 4: Calculate data from Data Fields columns
         //The aggregated data are at the end of the items
-        $calculatedData = ReportPivotDataFields::executeOperations($dataAggregations,$processedData, $rowFields);
-        
-        // dd($processedData, $calculatedData);
+        $calculatedData = ReportPivotDataFields::executeOperations($dataAggregations, $transferredData, $processedData, $rowFields, $columnFields);
+        // dump($transferredData, $processedData, $calculatedData);
 
         $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData, $rowFields);
         // dd($dataIdsOutput);
@@ -250,7 +249,7 @@ class PivotTable extends Component
             $groupByColumnFields = Report::groupArrayByKey($dataOutput, $columnFields[0]);
             foreach ($groupByColumnFields as $k1 => $values) {
                 foreach ($values as $value) {
-                    $lastItem = array_slice($value, count($value)-1, count($value));
+                    $lastItem = array_slice($value, count($value) - 1, count($value));
                     $infoColumnFields[$k1][] = $lastItem;
                 }
             }
@@ -260,6 +259,26 @@ class PivotTable extends Component
         if (!$rowFields && $columnFields) {
             $dataOutput[0]["info_column_field"] = $infoColumnFields;
         }
+        $dataOutput = $this->makeColumnFieldsDuplicate($columnFields, $dataOutput);
+        // dd($dataOutput);
+        return $dataOutput;
+    }
+
+    private function makeColumnFieldsDuplicate($columnFields, $dataOutput)
+    {
+        $newColumnFields = array_count_values($columnFields);
+        foreach ($newColumnFields as $field => $items){
+            foreach ($dataOutput as $k1 => &$values){
+                foreach ($values as $k2 => $value){
+                    if (str_contains($k2, '_'.$field)) {
+                        for($i = 2; $i <= $items*1; $i++){
+                            $newField = str_replace('_'.$field, '_'.$field.'_['.$i.']', $k2);
+                            $values[$newField] = $values[$k2];
+                        }
+                    }
+                }
+            }
+        }
         // dd($dataOutput);
         return $dataOutput;
     }
@@ -268,6 +287,7 @@ class PivotTable extends Component
     {
         $primaryData = $this->dataSource;
         if (!$this->getDataFields()) return false;
+        // dump($this->getDataFields());
         $dataOutput = $this->makeDataRenderer($primaryData);
         [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput);
         $dataOutput = $this->sortLinesData($dataOutput);

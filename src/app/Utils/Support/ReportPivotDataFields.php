@@ -70,8 +70,9 @@ class ReportPivotDataFields
         return $updatedArray;
     }
 
-    public static function executeOperations($dataAggregations, $data, $rowFields)
+    public static function executeOperations($dataAggregations,$transferredData,$data, $rowFields,$columnFields)
     {
+        // dd($data, $dataAggregations);
         $arrayValue = array_map(fn ($items) => ReportPivotDataFields::execute($dataAggregations, $items), $data);
         if (!$rowFields) {
             $totalNumber = self::calculateSubArraysTotal($arrayValue);

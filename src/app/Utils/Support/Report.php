@@ -176,4 +176,5 @@ class Report
             return $value !== null;
         });
     }
+    
 }
