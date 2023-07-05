@@ -32,13 +32,11 @@ trait TraitEntityCRUDCreateEdit2
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');
-
 		$disallowed = DisallowedDirectCreationChecker::checkAgainstRequest($request, $this->type);
 		if ($disallowed) {
 			$creationLinks = DisallowedDirectCreationChecker::getCreationLinks($this->type);
 			abort(403, "Please create via $creationLinks.");
 		}
-
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
 			'props' => $props,
@@ -60,6 +58,7 @@ trait TraitEntityCRUDCreateEdit2
 			'filters4' => $this->getFilters4($tableBluePrint),
 			'disallowed' => $disallowed,
 			'app' => LibApps::getFor($this->type),
+			'hasReadOnly' => false,
 		]);
 	}
 
@@ -83,7 +82,6 @@ trait TraitEntityCRUDCreateEdit2
 		$docId = $hasDocID ? Str::markDocId($this->data::find($id)) : null;
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
-			'props' => $props,
 			'item' => $original,
 			'defaultValues' => DefaultValues::getAllOf($this->type),
 			'values' => $values,
