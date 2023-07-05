@@ -59,6 +59,7 @@ trait TraitEntityCRUDCreateEdit2
 			'disallowed' => $disallowed,
 			'app' => LibApps::getFor($this->type),
 			'hasReadOnly' => false,
+			'redirect' => null,
 		]);
 	}
 
@@ -105,6 +106,7 @@ trait TraitEntityCRUDCreateEdit2
 			'disallowed' => false,
 			'app' => LibApps::getFor($this->type),
 			'hasReadOnly' => $readOnly,
+			'redirect' => $viewRender,
 		]);
 	}
 }

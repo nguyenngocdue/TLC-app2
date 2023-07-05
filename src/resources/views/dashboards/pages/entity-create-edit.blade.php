@@ -36,6 +36,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($allProps, $val
     <form class="w-full mb-8 mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
+        <input name="redirect" value="{{$redirect}}" type='hidden' /> {{-- This line is required for updating  --}}
         @method($action === "create" ? 'POST' : 'PUT')
         @switch($app['edit_renderer'])
         @case ('props-renderer')

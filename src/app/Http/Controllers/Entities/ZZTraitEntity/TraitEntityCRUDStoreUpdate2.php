@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Models\Logger;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -187,6 +185,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus, $this->data, $toastrResult);
+		if($request->input('redirect')) return redirect()->back();
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 }
