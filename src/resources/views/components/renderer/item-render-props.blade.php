@@ -7,9 +7,9 @@
     @php
     $readOnly = $hasReadOnly || $readOnly;
     @endphp
-    <div class='col-span-{{$col_span}} grid'>
+    <div class='col-span-{{$col_span}} {{$hiddenRow}}'>
         <div class='grid grid-row-1'>
-            <div class='grid grid-cols-12 items-center content-start {{$hiddenRow}} '>
+            <div class='grid grid-cols-12 items-center content-start'>
                 @if($columnType === 'static')
                 <div class='col-span-12 text-left'>
                     @switch($control)
