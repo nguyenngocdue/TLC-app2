@@ -232,9 +232,9 @@ class PivotTable extends Component
         //Step 4: Calculate data from Data Fields columns
         //The aggregated data are at the end of the items
         $calculatedData = ReportPivotDataFields::executeOperations($dataAggregations, $transferredData, $processedData, $rowFields, $columnFields);
-        // dump($transferredData, $processedData, $calculatedData);
+        // dump( $calculatedData);
 
-        $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData, $rowFields);
+        $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData, $rowFields, $columnFields);
         // dd($dataIdsOutput);
 
         $tables = $this->getDataFromTables();
@@ -259,27 +259,28 @@ class PivotTable extends Component
         if (!$rowFields && $columnFields) {
             $dataOutput[0]["info_column_field"] = $infoColumnFields;
         }
-        $dataOutput = $this->makeColumnFieldsDuplicate($columnFields, $dataOutput);
-        // dd($dataOutput);
+        $dataOutput = $this->updateResultOfAggregations($columnFields,$dataAggregations, $dataOutput);
+        // dump($dataOutput);
         return $dataOutput;
     }
 
-    private function makeColumnFieldsDuplicate($columnFields, $dataOutput)
+    private function updateResultOfAggregations($columnFields,$dataAggregations, $dataOutput)
     {
-        $newColumnFields = array_count_values($columnFields);
-        foreach ($newColumnFields as $field => $items){
-            foreach ($dataOutput as $k1 => &$values){
-                foreach ($values as $k2 => $value){
-                    if (str_contains($k2, '_'.$field)) {
-                        for($i = 2; $i <= $items*1; $i++){
-                            $newField = str_replace('_'.$field, '_'.$field.'_['.$i.']', $k2);
-                            $values[$newField] = $values[$k2];
-                        }
-                    }
+        if (ReportPivot::hasDuplicates($columnFields)) {
+            $newColumnFields = ReportPivot::markDuplicates($columnFields);
+            $num = count(reset($newColumnFields));
+
+            $field = array_slice($dataAggregations, 0, 1);
+            $keys = array_keys($field) ?? '';
+            $value = array_values($field);
+            $str = $value[0] ."_" .$keys[0] ;
+            
+            foreach ($dataOutput as &$values) {
+                if (isset($values[$str])){
+                    $values[$str] = $values[$str]*$num;
                 }
             }
         }
-        // dd($dataOutput);
         return $dataOutput;
     }
 

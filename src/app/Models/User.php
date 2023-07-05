@@ -230,6 +230,9 @@ class User extends Authenticatable implements LdapAuthenticatable
     //     $disciplineInspector = 23;
     //     return self::where('discipline', $disciplineInspector)->where('resigned', 0)->get();
     // }
+    public function getDepartment(){
+        return Department::findFromCache($this->department)->name ?? '';
+    }
     public static function isStatusless()
     {
         return static::$statusless;

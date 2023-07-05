@@ -32,39 +32,43 @@ class ReportPivot
         // dd($data);
         $newArray = array_map(function ($item) use ($propsColumnField, $valueIndexFields) {
             $dateItems = [];
-            foreach ($propsColumnField as $value) {
-                if (!isset($value['fieldIndex']) || !isset($value['valueIndexField']) || !isset($item[$value['fieldIndex']])) continue;
+            $dt = [];
+            foreach ($propsColumnField as $values) {
+                if (!isset($values['fieldIndex']) || !isset($values['valueIndexField']) || !isset($item[$values['fieldIndex']])) continue;
                 try {
-                    $date = DateTime::createFromFormat('Y-m-d', $item[$value['fieldIndex']]);
+                    $date = DateTime::createFromFormat('Y-m-d', $item[$values['fieldIndex']]);
                     $type = 'unknown';
                     if ($date) $type = 'date';
                     switch ($type) {
                         case 'date':
                             $reversedDate = $date->format('d-m-y');
-                            $_strDate = str_replace('-', '_', $reversedDate) . '_' . $value['fieldIndex'];
-                            $dateItems[$_strDate] =  $item[$value['valueIndexField']];
+                            $_strDate = str_replace('-', '_', $reversedDate) . '_' . $values['fieldIndex'];
+                            
+                            $key = str_replace(' ', '_', strtolower($item[$values['fieldIndex']]));
+                            $dateItems[$_strDate] = array_merge($dt,[$values['valueIndexField'] => $item[$values['valueIndexField']]]);
+                            $dt = [$values['valueIndexField'] => $item[$values['valueIndexField']]];
+
                             break;
                         default:
-                            // dd($date, $propsColumnField,  $value);
-                            $key = str_replace(' ', '_', strtolower($item[$value['fieldIndex']]));
+                            $key = str_replace(' ', '_', strtolower($item[$values['fieldIndex']]));
                             $array = [];
+                            // dd($values, $valueIndexFields, $dt);
                             foreach ($valueIndexFields as $field) {
                                 if (!$field) continue;
                                 $array[$field] = $item[$field];
                             }
-                            // dd($value);
-                            $dateItems[$value['fieldIndex'] . '_' . $key] = $array;
+                            $dateItems[$values['fieldIndex'] . '_' . $key] = $array;
                             break;
                     }
                 } catch (Exception $e) {
-                    dd($e->getMessage(), $value);
+                    dd($e->getMessage(), $values);
                 }
             }
             return $dateItems;
         }, $data);
+        // dd($newArray);
         $newArray = self::sumItemsInArray($newArray);
         $newArray = self::concatKeyAndValueOfArray($newArray);
-        // dump($newArray);
 
         // Check items that were duplicated in Column_Field column
         if (self::hasDuplicates($columnFields)) {
@@ -78,7 +82,6 @@ class ReportPivot
                             $array[$newKey] = $value;
                         } else {
                             $firstWord = explode('_', $field)[0];
-                            // dump($firstWord);
                             $newKey = str_replace($firstWord . '_', $newField . '_', $field);
                             $array[$newKey] = $value;
                         }
@@ -330,20 +333,26 @@ class ReportPivot
         return false;
     }
 
-    public static function groupItemsByFirstWord($data)
+    public static function groupItemsByString($data, $type ='first')
     {
         $groupedItems = [];
 
         foreach ($data as $item) {
             $nameParts = explode('_', $item);
-            $firstWord = $nameParts[0];
-            if (!isset($groupedItems[$firstWord])) {
-                $groupedItems[$firstWord] = [];
+            $text = $nameParts[0];
+            if ($type === 'end') {
+                $thirdUnderlined = ReportPivot::findPosition($item, '_', 3);
+                $text = substr($item, $thirdUnderlined);
             }
-            $groupedItems[$firstWord][] = $item;
+            if (!isset($groupedItems[$text])) {
+                $groupedItems[$text] = [];
+            }
+            $groupedItems[$text][] = $item;
         }
         return $groupedItems;
     }
+
+
     public static function separateValueByStringInArray($data, $string1, $string2 = ":", $index = 0)
     {
         $arrayFields = [];
@@ -369,7 +378,7 @@ class ReportPivot
                 $counts[$value] = 2;
                 $groupedArr[$value] = array($value);
             } else {
-                $groupedArr[$value][] = $value . "_[" . $counts[$value] . "]";
+                $groupedArr[$value][] = $value . "[" . $counts[$value] . "]";
                 $counts[$value]++;
             }
         }

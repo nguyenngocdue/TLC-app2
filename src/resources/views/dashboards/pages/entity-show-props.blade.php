@@ -32,7 +32,7 @@
         <x-print.description-group5 type={{$type}} modelPath={{$modelPath}} :propTree="$propTree" :dataSource="$dataSource" />
         @endforeach
         <div class="fixed top-52 right-0">
-            <x-controls.action-buttons isFixed="true" :buttonSave="$buttonSave" action="edit" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
+            <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" action="edit" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
         </div>
         
     </div>

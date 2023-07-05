@@ -29,6 +29,11 @@ class CalendarGrid extends Component
      */
     public function render()
     {
+        $statusTimeSheet = $this->timesheetableType::findFromCache($this->timesheetableId)->status ?? null;
+        $hasRenderSidebar = true;
+        if($statusTimeSheet && in_array($statusTimeSheet,['pending_approval','approved'])){
+            $hasRenderSidebar = false;
+        }
         return view('components.calendar.calendar-grid', [
             'readOnly' => $this->readOnly,
             'timesheetableType' => $this->timesheetableType,
@@ -36,6 +41,7 @@ class CalendarGrid extends Component
             'apiUrl' => $this->apiUrl,
             'arrHidden' => $this->arrHidden,
             'type' => $this->type,
+            'hasRenderSidebar' => $hasRenderSidebar,
         ]);
     }
 }

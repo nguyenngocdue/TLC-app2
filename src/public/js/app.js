@@ -69,11 +69,11 @@ __webpack_require__.r(__webpack_exports__);
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "tlc-key",
+  key: "tlc",
   // wsHost: process.env.MIX_PUSHER_HOST,
   wsHost: window.location.hostname,
-  wsPort: "443",
-  wssPort: "443",
+  wsPort: "6001",
+  wssPort: "6001",
   encrypted: true,
   disableStats: true,
   forceTLS: true,

@@ -36,6 +36,8 @@ class Constant
 
     const VIEW_EDIT = 'view_edit';
 
+    const VIEW_ORG_CHART = 'view_org_chart';
+
     const NAME_LOCK_COLUMN = 'lock_version';
 
     const NAME_LOCK_COLUMN_DEFAULT = 'updated_at';
