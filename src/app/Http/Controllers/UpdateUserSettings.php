@@ -23,6 +23,13 @@ class UpdateUserSettings extends Controller
         $type = $request->input("_entity");
         $settings[$type][Constant::VIEW_ALL]['per_page'] = $perPage;
         return $settings;
+        
+    }
+    private function updateShowOptionsOrgChart($request, $settings)
+    {
+        $showOptions = $request->input('show_options');
+        $settings[Constant::VIEW_ORG_CHART]['show_options'] = $showOptions;
+        return $settings;
     }
     private function getStartAndEndFilterByYear($year)
     {
@@ -291,6 +298,9 @@ class UpdateUserSettings extends Controller
         $user = User::find(Auth::id());
         $settings = $user->settings;
         switch ($action) {
+            case 'updateShowOptionsOrgChart':
+                $settings = $this->updateShowOptionsOrgChart($request, $settings);
+                break;
             case 'updateViewAllMode':
                 $settings = $this->updateViewAllMode($request, $settings);
                 break;

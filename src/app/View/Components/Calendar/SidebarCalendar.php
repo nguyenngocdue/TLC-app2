@@ -15,7 +15,9 @@ class SidebarCalendar extends Component
         private $id = null,
         private $model = null,
         private $readOnly = false,
-        private $type = null
+        private $type = null,
+        private $timesheetableType = null,
+        private $timesheetableId = null,
     ) {
         //
     }
@@ -32,6 +34,8 @@ class SidebarCalendar extends Component
             'model' => $this->model,
             'readOnly' => $this->readOnly,
             'type' => $this->type,
+            'timesheetableType' => $this->timesheetableType,
+            'timesheetableId' => $this->timesheetableId,
         ]);
     }
 }

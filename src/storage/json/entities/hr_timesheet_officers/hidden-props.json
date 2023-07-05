@@ -15,21 +15,13 @@
         "rejected": "",
         "approved": ""
     },
-    "_team_id": {
-        "name": "_team_id",
-        "column_name": "team_id",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
         "new": "true",
-        "pending_approval": "true",
+        "pending_approval": "",
         "rejected": "true",
-        "approved": "true"
+        "approved": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -94,5 +86,13 @@
         "pending_approval": "",
         "rejected": "",
         "approved": "true"
+    },
+    "_team_id": {
+        "name": "_team_id",
+        "column_name": "team_id",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     }
 }

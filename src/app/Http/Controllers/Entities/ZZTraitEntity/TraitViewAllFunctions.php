@@ -42,6 +42,10 @@ trait TraitViewAllFunctions
         $viewAllMode = $settings[$type][Constant::VIEW_ALL]['view_all_mode'] ?? null;
         return [$viewAllMode, $filterViewAllCalendar, $viewAllCalendarShowAllChildren];
     }
+    private function getUserSettingsViewOrgChart(){
+        $settings = CurrentUser::getSettings();
+        return $settings[Constant::VIEW_ORG_CHART]['show_options'] ?? [];
+    }
 
     // private function getUserSettingsViewAllMatrix()
     // {
