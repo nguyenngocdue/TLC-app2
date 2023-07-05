@@ -57,10 +57,11 @@ class UploadService2
         }
         return $result;
     }
-    private function countFileUploadByCondition($fieldName)
+    private function countFileUploadByCondition($fieldName,$id)
     {
         $fieldId = Field::where('name', $fieldName)->first()->id;
-        return Attachment::where('object_type', $this->model)->where('category', $fieldId)->get()->count() ?? 0;
+        return Attachment::where('object_type', $this->model)
+            ->where('object_id', $id)->where('category', $fieldId)->get()->count() ?? 0;
     }
     public function store($request)
     {
@@ -79,7 +80,7 @@ class UploadService2
                 $nameValidate = $fieldName . '.toBeUploaded';
                 $maxFileSize = $property['max_file_size'] * 1024;
                 $maxFileCount = $property['max_file_count'];
-                $fileUploadCount = $this->countFileUploadByCondition($fieldName);
+                $fileUploadCount = $this->countFileUploadByCondition($fieldName,$request->input('id'));
                 $fileUploadRemainingCount = $maxFileCount - $fileUploadCount;
                 $allowedFileTypes = $property['allowed_file_types'];
                 $allowedFileTypes = $this->getAllowedFileTypes($allowedFileTypes);

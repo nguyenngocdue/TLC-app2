@@ -66,7 +66,6 @@ class EntityCRUDController extends Controller
 	{
 		return $this->type;
 	}
-
 	public function show($id_or_slug, $trashed = false)
 	{
 		$app = LibApps::getFor($this->type);

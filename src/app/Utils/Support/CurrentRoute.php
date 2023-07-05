@@ -36,7 +36,7 @@ class CurrentRoute
         $current = Route::current();
         $typeSingular = Str::singular($typeSingular);
         // $typeSingular = $current->controller->getType();
-        $result = $current->parameters[$typeSingular] ?? null;
+        $result = $current->parameters[$typeSingular] ?? $current->parameters['id'] ?? null;
         return $result;
     }
 

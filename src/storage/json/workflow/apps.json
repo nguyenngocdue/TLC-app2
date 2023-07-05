@@ -583,6 +583,21 @@
         "hidden_navbar": "true",
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
+    "manageProfileFields": {
+        "name": "manageProfileFields",
+        "package_tab": "application",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Profile Fields",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
+    },
     "manageReports": {
         "name": "manageReports",
         "package_tab": "application",

@@ -4,6 +4,7 @@ use App\Http\Controllers\Workflow\ManageApisController;
 use App\Http\Controllers\Workflow\ManageAppCreationsController;
 use App\Http\Controllers\Workflow\ManageAppsController;
 use App\Http\Controllers\Workflow\ManagePivotTablesController;
+use App\Http\Controllers\Workflow\ManageProfileFieldsController;
 use App\Http\Controllers\Workflow\ManageReportsController;
 use App\Http\Controllers\Workflow\ManageStandardDefaultValuesController;
 use App\Http\Controllers\Workflow\ManageStandardPropsController;
@@ -22,6 +23,7 @@ Route::group([
     Route::resource('manageApps', ManageAppsController::class)->only('index', 'store', 'create');
     Route::resource('manageReports', ManageReportsController::class)->only('index', 'store', 'create');
     Route::resource('manageApis', ManageApisController::class)->only('index', 'store', 'create');
+    Route::resource('manageProfileFields', ManageProfileFieldsController::class)->only('index', 'store');
     Route::resource('manageAppCreations', ManageAppCreationsController::class)->only('index', 'store');
     Route::resource('manageStandardProps', ManageStandardPropsController::class)->only('index', 'store', 'create');
     Route::resource('manageStandardDefaultValues', ManageStandardDefaultValuesController::class)->only('index', 'store', 'create');

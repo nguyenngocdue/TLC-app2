@@ -9,7 +9,7 @@ $ownerId = $values->owner_id ?? null;
 $allProps = $superProps['props'];
 $tmp = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$hasStatusColumn,$ownerId);
 [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = $tmp;
-$propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
+$propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($allProps, $values, $defaultValues,$status,$type);
 @endphp
 
 @section('topTitle', $topTitle)
@@ -36,6 +36,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
     <form class="w-full mb-8 mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
+        <input name="redirect_back_to_last_page" value="{{$redirect}}" type='hidden' />  {{-- This line is required for profile and me --}}
         @method($action === "create" ? 'POST' : 'PUT')
         @switch($app['edit_renderer'])
         @case ('props-renderer')

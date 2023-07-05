@@ -2,6 +2,7 @@
 
 namespace App\Utils\Support\Json;
 
+use App\Http\Controllers\Workflow\LibProfileFields;
 use App\Http\Controllers\Workflow\LibStandardDefaultValues;
 use App\Http\Controllers\Workflow\LibStandardProps;
 use App\Http\Controllers\Workflow\LibStatuses;
@@ -292,10 +293,8 @@ class SuperProps
         $type = Str::singular($type);
         $key = "super_prop_$type";
         $result = CacheToRamForThisSection::get($key, fn () => static::make($type));
-        // dump($result);
         return $result;
     }
-
     public static function invalidateCache($type)
     {
         if (App::isLocal()) return;

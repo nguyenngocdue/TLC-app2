@@ -27,7 +27,7 @@ trait TraitSupportEntityCRUDCreateEdit2
         if ($dryRunTokenRequest && !Hash::check($value, $dryRunTokenRequest)) abort(403, 'Your dryrun token is invalid');
     }
 
-    private function getSuperProps()
+    protected function getSuperProps()
     {
         $result = SuperProps::getFor($this->type);
         return $result;
