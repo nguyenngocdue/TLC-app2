@@ -2,6 +2,7 @@
 
 namespace App\Utils\Support\Json;
 
+use App\Http\Controllers\Workflow\LibProfileFields;
 use App\Http\Controllers\Workflow\LibStandardDefaultValues;
 use App\Http\Controllers\Workflow\LibStandardProps;
 use App\Http\Controllers\Workflow\LibStatuses;
@@ -123,6 +124,20 @@ class SuperProps
         // dump($result);
         return $result;
     }
+    private static function overrideStandardProfileFields(&$allProps){
+        $libProfileFields = LibProfileFields::getAll();
+        $viewRender = 'me';
+        if($viewRender){
+        foreach ($allProps as $propKey => &$value) {
+                foreach ($libProfileFields as $field) {
+                    if($field['name'] == $propKey) {
+                        $value['hidden_edit'] = isset($field[$viewRender .'_hidden']) ? $field[$viewRender .'_hidden'] : '';
+                        $value['read_only'] = isset($field[$viewRender .'_readonly']) ? $field[$viewRender .'_readonly'] : '';
+                    }
+                }
+            }
+        }
+    }
 
     private static function overrideStandardConfig(&$allProps)
     {
@@ -155,10 +170,11 @@ class SuperProps
         // dd($allProps);
     }
 
-    private static function readProps($type)
+    private static function readProps($type,$viewRender)
     {
         $allProps = Props::getAllOf($type);
         static::overrideStandardConfig($allProps);
+        if($viewRender)static::overrideStandardProfileFields($allProps);
         // dump($allProps);
         foreach ($allProps as &$prop) {
             $prop['width'] = $prop['width'] ? $prop['width'] : 100;
@@ -267,13 +283,13 @@ class SuperProps
         return $result;
     }
 
-    private static function make($type)
+    private static function make($type,$viewRender = null)
     {
         static::$type = $type;
         static::$result['problems'] = [];
         static::$result['type'] = Str::singular($type);
         static::$result['plural'] = Str::plural($type);
-        static::$result['props'] = static::readProps($type);
+        static::$result['props'] = static::readProps($type,$viewRender);
         static::$result['statuses'] = static::readStatuses($type);
         static::$result['intermediate'] = static::readIntermediate($type);
         static::$result['settings'] = static::readSettings($type);
@@ -283,7 +299,7 @@ class SuperProps
         return static::$result;
     }
 
-    public static function getFor($type)
+    public static function getFor($type,$viewRender = null)
     {
         if (is_null($type)) {
             dump("Type is missing, SuperProps cant instantiate.");
@@ -292,10 +308,9 @@ class SuperProps
         $type = Str::singular($type);
         $key = "super_prop_$type";
         $result = CacheToRamForThisSection::get($key, fn () => static::make($type));
-        // dump($result);
+        if($viewRender) $result = static::make($type,$viewRender);
         return $result;
     }
-
     public static function invalidateCache($type)
     {
         if (App::isLocal()) return;

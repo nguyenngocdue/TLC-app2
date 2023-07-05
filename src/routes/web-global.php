@@ -19,7 +19,7 @@ Route::group([
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
-    Route::get('profile/{id}', [ProfileController::class, 'profile'])->name('me.index');
+    Route::get('profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::put('updateBookmark', [BookmarkController::class, 'updateBookmark'])->name('updateBookmark');
     Route::put('updateUserSettingsApi', [UpdateUserSettingsApi::class, 'updateUserSettingsApi'])->name('updateUserSettingsApi');

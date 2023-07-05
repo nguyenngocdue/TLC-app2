@@ -63,7 +63,11 @@ trait TraitEntityCRUDCreateEdit2
 	}
 
 
-	public function edit(Request $request, $id, $title = null, $topTitle = null, $readOnly = false)
+	public function edit(Request $request, $id, 
+		$viewRender =null, 
+		$title = null, 
+		$topTitle = null, 
+		$readOnly = false)
 	{
 		//check permission using gate
 		$original = $this->checkPermissionUsingGate($id, 'edit');
@@ -71,8 +75,7 @@ trait TraitEntityCRUDCreateEdit2
 		$dryRunTokenRequest = $request->query('dryrun_token');
 		$valueCreateDryToken = $this->hashDryRunToken($id, $status);
 		$this->checkDryRunToken($dryRunTokenRequest, $valueCreateDryToken);
-		// dump(SuperProps::getFor($this->type));
-		$superProps = $this->getSuperProps();
+		$superProps = $this->getSuperProps($viewRender);
 		$props = $superProps['props'];
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $props);
 		$tableBluePrint = $this->makeTableBluePrint($props);
