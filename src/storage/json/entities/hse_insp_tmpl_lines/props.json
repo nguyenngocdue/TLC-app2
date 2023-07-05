@@ -23,7 +23,7 @@
         "column_name": "name",
         "column_type": "varchar(255)",
         "label": "Name",
-        "control": "text",
+        "control": "textarea",
         "align": "",
         "col_span": "",
         "width": "",

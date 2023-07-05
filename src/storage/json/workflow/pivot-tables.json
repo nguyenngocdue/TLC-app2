@@ -21,6 +21,17 @@
         "lookup_tables": null,
         "sort_by": "category"
     },
+    "apple_store_duplicate_value_in_column_field": {
+        "name": "apple_store_duplicate_value_in_column_field",
+        "filters": null,
+        "row_fields": "category",
+        "column_fields": "date,\r\ndate,\r\ndate,",
+        "value_index_fields": "amount,\r\namount,\r\namount,",
+        "data_aggregations": "sum,",
+        "data_fields": "amount,",
+        "lookup_tables": null,
+        "sort_by": null
+    },
     "apple_store_empty_row_field": {
         "name": "apple_store_empty_row_field",
         "filters": null,
@@ -47,21 +58,21 @@
         "name": "apple_store_product_per_date",
         "filters": null,
         "row_fields": "product",
-        "column_fields": "date,category",
-        "value_index_fields": "amount,\r\ndiscount,",
-        "data_aggregations": "sum,\r\nsum,",
-        "data_fields": "amount,\r\ndiscount",
+        "column_fields": "date",
+        "value_index_fields": "amount",
+        "data_aggregations": "sum,",
+        "data_fields": "amount,",
         "lookup_tables": null,
         "sort_by": "product:desc"
     },
     "apple_store_test_display": {
         "name": "apple_store_test_display",
         "filters": null,
-        "row_fields": "category,\r\nproduct,",
-        "column_fields": "date,\r\ndate,",
-        "value_index_fields": "price,\r\ndiscount,",
-        "data_aggregations": "sum",
-        "data_fields": "price",
+        "row_fields": "product",
+        "column_fields": "date,\r\ndate,\r\ndate,",
+        "value_index_fields": "amount,\r\namount,\r\namount,",
+        "data_aggregations": "sum,",
+        "data_fields": "amount,",
         "lookup_tables": null,
         "sort_by": "category:desc"
     },

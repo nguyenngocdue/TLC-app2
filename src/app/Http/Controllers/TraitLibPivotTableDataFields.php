@@ -87,9 +87,24 @@ trait TraitLibPivotTableDataFields
         return $lib;
     }
 
+    private static function removeEmptyElements($array) {
+        foreach ($array as $key => $items) {
+            if ($items === "") continue;
+            if (is_array($items)) {
+                if (!$items) continue;
+                $arr = array_filter($items, function($value) {
+                    return $value !== "";
+                });
+                $array[$key] = $arr;
+            }
+        }
+        return $array;
+    }
+
     public function getDataFields()
     {
         $lib = LibPivotTables::getFor($this->key);
+        $lib = self::removeEmptyElements($lib);
         if (!$this->checkCreateManagePivotReport($lib)) return false;
 
         $filters = $lib['filters'] ?? [];
@@ -111,6 +126,8 @@ trait TraitLibPivotTableDataFields
         $fields = $this->separateFields($columnFields);
         $_columnFields = $fields['fields'] ?? [];
         $valueIndexFields = $lib['value_index_fields'] ?? [];
+
+
         $dataAggregation = $lib['data_aggregations'] ?? [];
         $propsColumnField = $this->mapValueIndexColumnFields($_columnFields, $valueIndexFields);
     

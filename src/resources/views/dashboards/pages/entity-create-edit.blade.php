@@ -36,7 +36,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($allProps, $val
     <form class="w-full mb-8 mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
-        <input name="redirect" value="{{$redirect}}" type='hidden' /> {{-- This line is required for updating  --}}
+        <input name="redirect_back_to_last_page" value="{{$redirect}}" type='hidden' />  {{-- This line is required for profile and me --}}
         @method($action === "create" ? 'POST' : 'PUT')
         @switch($app['edit_renderer'])
         @case ('props-renderer')
@@ -50,7 +50,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($allProps, $val
             </div>
             <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
             <div class="fixed right-0">
-                <x-controls.action-buttons isFixed="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
+                <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
             </div>
         </div>
         @break
@@ -65,7 +65,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($allProps, $val
             </div>
             <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
             <div class="fixed right-0">
-                <x-controls.action-buttons isFixed="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
+                <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
             </div>
         </div>
         @break

@@ -23,6 +23,16 @@ trait TraitEntityCRUDCreateEdit2
 	use TraitSupportEntityCRUDCreateEdit2;
 	use TraitSupportPermissionGate;
 
+	protected function getEditTitle()
+	{
+		return "Edit";
+	}
+
+	protected function getEditTopTitle()
+	{
+		return CurrentRoute::getTitleOf($this->type);
+	}
+
 	public function create(Request $request)
 	{
 		$superProps = $this->getSuperProps();
@@ -64,11 +74,7 @@ trait TraitEntityCRUDCreateEdit2
 	}
 
 
-	public function edit(Request $request, $id, 
-		$viewRender =null, 
-		$title = null, 
-		$topTitle = null, 
-		$readOnly = false)
+	public function edit(Request $request, $id, $viewRender = null, $readOnly = false)
 	{
 		//check permission using gate
 		$original = $this->checkPermissionUsingGate($id, 'edit');
@@ -76,7 +82,7 @@ trait TraitEntityCRUDCreateEdit2
 		$dryRunTokenRequest = $request->query('dryrun_token');
 		$valueCreateDryToken = $this->hashDryRunToken($id, $status);
 		$this->checkDryRunToken($dryRunTokenRequest, $valueCreateDryToken);
-		$superProps = $this->getSuperProps($viewRender);
+		$superProps = $this->getSuperProps();
 		$props = $superProps['props'];
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $props);
 		$tableBluePrint = $this->makeTableBluePrint($props);
@@ -96,8 +102,8 @@ trait TraitEntityCRUDCreateEdit2
 			'type' => Str::plural($this->type),
 			'action' => __FUNCTION__,
 			'modelPath' => $this->data,
-			'title' => $title ?? "Edit",
-			'topTitle' => $topTitle ?? CurrentRoute::getTitleOf($this->type),
+			'title' => $this->getEditTitle(), //$title ?? "Edit",
+			'topTitle' => $this->getEditTopTitle(), //$topTitle ?? CurrentRoute::getTitleOf($this->type),
 			'listenerDataSource' => $this->renderListenDataSource($tableToLoadDataSource),
 			'listeners2' => $this->getListeners2($this->type),
 			'filters2' => $this->getFilters2($this->type),
