@@ -50,7 +50,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($allProps, $val
             </div>
             <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
             <div class="fixed right-0">
-                <x-controls.action-buttons isFixed="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
+                <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
             </div>
         </div>
         @break
@@ -65,7 +65,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($allProps, $val
             </div>
             <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
             <div class="fixed right-0">
-                <x-controls.action-buttons isFixed="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
+                <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
             </div>
         </div>
         @break

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Homepage;
 
+use App\Utils\CacheToRamForThisSection;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
@@ -22,9 +23,18 @@ class MenuProfile extends Component
         // dump($this->table);
     }
 
+    private static function getMenuExpensive()
+    {
+        $pathFrom = storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json';
+        $json = file_get_contents($pathFrom, true);
+        return $json;
+    }
+
     private function getUserMenu()
     {
-        $userMenuStr = file_get_contents(storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json');
+        // $userMenuStr = file_get_contents(storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json');
+        $key = "navbarUserMenu_of_the_app";
+        $userMenuStr = CacheToRamForThisSection::get($key, fn () => static::getMenuExpensive());
         switch (env('APP_ENV')) {
             case "production":
                 $app = 'app2.tlcmodular.com';

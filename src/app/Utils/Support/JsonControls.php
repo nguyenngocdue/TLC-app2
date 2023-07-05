@@ -2,14 +2,22 @@
 
 namespace App\Utils\Support;
 
+use App\Utils\CacheToRamForThisSection;
+
 class JsonControls
 {
     private static $statuses_path = "configs/view/dashboard/controls.json";
-    private static function getAll()
+    private static function getAllExpensive()
     {
         $pathFrom = storage_path('json/' . self::$statuses_path);
         $json = json_decode(file_get_contents($pathFrom, true), true);
         return $json;
+    }
+
+    private static function getAll()
+    {
+        $key = "controls_json_of_the_app";
+        return CacheToRamForThisSection::get($key, fn () => static::getAllExpensive());
     }
 
     public static function getViewAllEloquents()
