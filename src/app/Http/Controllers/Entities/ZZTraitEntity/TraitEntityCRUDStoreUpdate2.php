@@ -185,7 +185,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus, $this->data, $toastrResult);
-		if($request->input('redirect')) return redirect()->back();
+		if ($request->input('redirect_back_to_last_page')) return redirect()->back();
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 }
