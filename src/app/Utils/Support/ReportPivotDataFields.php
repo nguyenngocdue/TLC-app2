@@ -74,12 +74,12 @@ class ReportPivotDataFields
     {
         // dd($data, $dataAggregations);
         $arrayValue = array_map(fn ($items) => ReportPivotDataFields::execute($dataAggregations, $items), $data);
+
         if (!$rowFields) {
             $totalNumber = self::calculateSubArraysTotal($arrayValue);
             $updateArrayValue = self::updateSumAmount($arrayValue, $totalNumber);
             return $updateArrayValue;
         }
-
         return $arrayValue;
     }
 }
