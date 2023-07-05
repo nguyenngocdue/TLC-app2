@@ -21,6 +21,17 @@
         "lookup_tables": null,
         "sort_by": "category"
     },
+    "apple_store_duplicate_value_in_column_field": {
+        "name": "apple_store_duplicate_value_in_column_field",
+        "filters": null,
+        "row_fields": "category",
+        "column_fields": "date",
+        "value_index_fields": "discount",
+        "data_aggregations": "sum",
+        "data_fields": "discount",
+        "lookup_tables": null,
+        "sort_by": null
+    },
     "apple_store_empty_row_field": {
         "name": "apple_store_empty_row_field",
         "filters": null,
@@ -58,8 +69,8 @@
         "name": "apple_store_test_display",
         "filters": null,
         "row_fields": "category,\r\nproduct,",
-        "column_fields": "date,\r\ndate,",
-        "value_index_fields": "price,\r\ndiscount,",
+        "column_fields": "date,",
+        "value_index_fields": "discount,",
         "data_aggregations": "sum",
         "data_fields": "price",
         "lookup_tables": null,

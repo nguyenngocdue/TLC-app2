@@ -17,7 +17,9 @@ trait CheckFieldsPivotInDatabase
             foreach ($values as $value) {
                 if (empty($value)) continue;
                 if (in_array($value, $originalKeys)) continue;
-                else $failedFields[$key][] = $value;
+                else {
+                    $failedFields[$key][] = $value;
+                } 
             }
         }
         $alertStr = '';
