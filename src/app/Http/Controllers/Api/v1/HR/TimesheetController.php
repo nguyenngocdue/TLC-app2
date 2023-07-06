@@ -113,6 +113,21 @@ abstract class TimesheetController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->input('time_type') == 'full_day'){
+            $results = [];
+            $timeTypes = ['morning','afternoon'];
+            $request->merge(['time_type' => $timeTypes[0]]);
+            $results['data'][] = $this->updateTimesheetLine($request,$id);
+            $request->merge(['time_type' => $timeTypes[1]]);
+            $timesheetLine = $this->timesheetLineService->duplicate($id);
+            $results['data'][] = $this->updateTimesheetLine($request,$timesheetLine->id);
+            return $results;
+        }else{
+            return $this->updateTimesheetLine($request,$id);
+        }
+    }
+
+    private function updateTimesheetLine($request,$id){
         $resource = new HrTsLineUpdateResource($request);
         $data = $resource->toArray($request);
         $data = array_filter($data, fn ($item) => $item);
