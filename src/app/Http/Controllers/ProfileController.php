@@ -21,9 +21,10 @@ class ProfileController extends EntityCRUDController
         $id = CurrentRoute::getEntityId($this->type);
         return $id ? "Profile" : "Me";
     }
-    private function overrideStandardProfileFields($allProps,$viewRender)
+    private function overrideStandardProfileFields($allProps)
     {
         $libProfileFields = LibProfileFields::getAll();
+        $viewRender = $this->getViewRender();
         if ($viewRender) {
             foreach ($allProps as $propKey => &$value) {
                 foreach ($libProfileFields as $field) {
@@ -36,10 +37,10 @@ class ProfileController extends EntityCRUDController
         }
         return $allProps;
     }
-    protected function getSuperProps($viewRender = null)
+    protected function getSuperProps()
     {
         $result = SuperProps::getFor($this->type);
-        $result['props'] = $this->overrideStandardProfileFields($result['props'],$viewRender);
+        $result['props'] = $this->overrideStandardProfileFields($result['props']);
         return $result;
     }
     protected function assignDynamicTypeCreateEdit()
@@ -48,10 +49,13 @@ class ProfileController extends EntityCRUDController
         $this->data = Str::modelPathFrom('users');
         $this->permissionMiddleware = $this->makePermissionMiddleware('users');
     }
-
+    private function getViewRender(){
+        $id = CurrentRoute::getEntityId($this->type);
+        return $id ? "profile" : "me";
+    }
     public function profile(Request $request, $id = null)
     {
-        $viewRender = $id ? "profile" : "me";
+        $viewRender = $this->getViewRender();
         $readOnly = $id ? true : false;
         $id = $id ?? CurrentUser::id();
         return $this->edit($request, $id, $viewRender, $readOnly);

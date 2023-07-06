@@ -82,7 +82,7 @@ trait TraitEntityCRUDCreateEdit2
 		$dryRunTokenRequest = $request->query('dryrun_token');
 		$valueCreateDryToken = $this->hashDryRunToken($id, $status);
 		$this->checkDryRunToken($dryRunTokenRequest, $valueCreateDryToken);
-		$superProps = $this->getSuperProps($viewRender);
+		$superProps = $this->getSuperProps();
 		$props = $superProps['props'];
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $props);
 		$tableBluePrint = $this->makeTableBluePrint($props);

@@ -130,6 +130,7 @@
     },
     "_last_name": {
         "name": "_last_name",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_leaf_uids": {
@@ -139,11 +140,13 @@
     },
     "_name": {
         "name": "_name",
+        "profile_hidden": "true",
         "profile_readonly": "true",
         "me_readonly": "true"
     },
     "_name_suffix": {
         "name": "_name_suffix",
+        "profile_hidden": "true",
         "profile_readonly": "true",
         "me_readonly": "true"
     },
