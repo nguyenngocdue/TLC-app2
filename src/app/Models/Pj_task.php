@@ -48,8 +48,6 @@ class Pj_task extends ModelExtended
 
         $tasks = $tasks->whereNotIn('id', ['mail_checking' => 4, 'meeting' => 5, 'other' => 6, 'training' => 8]);
 
-
-        $index = 0;
         // $projects = Project::with('getSubProjects')->orderBy('name')->get();
         // foreach ($projects as $project) {
         // $subProjects = $project->getSubProjects->sortBy('name');
@@ -57,7 +55,7 @@ class Pj_task extends ModelExtended
         // foreach ($subProjects as $subProject) {
         // dump($subProject->name);
         $tree = [
-            ["key" => 0],
+            ["key" => 0, "name" => "Any Project"],
         ];
         foreach ($lods as $lod) {
             foreach ($tasks as $task) {
@@ -68,36 +66,16 @@ class Pj_task extends ModelExtended
                     $taskKey = "task" . $task->id;
                     $tree[$taskKey] = ['key' => $taskKey, "name" => $task->name, "parent" => $lodKey];
                     $subTasks = $task->getChildrenSubTasks()->pluck('name', 'id');
-                    dump($subTasks);
+                    // dump($subTasks);
                     foreach ($subTasks as $subTaskId => $subTaskName) {
                         $subTaskKey = "subtask" . $subTaskId;
                         $tree[$subTaskKey] = ["key" => $subTaskKey, "name" => $subTaskName, "parent" => $taskKey,];
                     }
-                    echo "($index)" . $lod->name . " - " . $task->name . "-" . $subTasks;
-                    echo "<br/>";
-                    $index++;
                 }
             }
         }
-        dump($tree);
-        // }
-        // }
+        // dump($tree);
 
-
-
-        // $tasks = Pj_task::all();
-
-        // dump($tasks);
-
-        return null; // $projects;
+        return $tree;
     }
 }
-
-
-// UPDATE `fields` SET `name` = 'getDisciplinesOfTask' WHERE `fields`.`id` = 152;
-
-// UPDATE `fields` SET `reversed_name` = 'getTasksOfDiscipline' WHERE `fields`.`id` = 152;
-
-// UPDATE `fields` SET `name` = 'getLodsOfTask' WHERE `fields`.`id` = 139;
-
-//UPDATE `fields` SET `reversed_name` = 'getChildrenSubTasks' WHERE `fields`.`id` = 153;

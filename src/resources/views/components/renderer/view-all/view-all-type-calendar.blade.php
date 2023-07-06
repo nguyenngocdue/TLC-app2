@@ -8,8 +8,15 @@
                     <x-renderer.card class="w-full border bg-white p-2" title="Selected view">
                         <div class="flex">
                             <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
-                            <x-renderer.button class="w-40" icon="fa-duotone fa-briefcase" click="toggleModal('modal-task-list')">Task List</x-renderer.button>
-                            <x-modals.modal-task-list modalId='modal-task-list' selectedUser="{{$ownerId}}"/>
+                            <x-renderer.button 
+                                class="w-40" 
+                                icon="fa-duotone fa-briefcase" 
+                                click="toggleModal('modal-task-list')"
+                                keydown="closeModal('modal-task-list')"
+                                >
+                                Task List
+                            </x-renderer.button>
+                            <x-modals.modal-task-list modalId='modal-task-list' nodeTreeArray="{!! $nodeTreeArray !!}" selectedUser="{{$ownerId}}"/>
                         </div>
                     </x-renderer.card>
             </div>
