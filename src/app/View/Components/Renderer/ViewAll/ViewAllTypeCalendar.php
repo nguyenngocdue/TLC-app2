@@ -5,6 +5,7 @@ namespace App\View\Components\Renderer\ViewAll;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Pj_task;
+use App\Models\Project;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
@@ -49,7 +50,11 @@ class ViewAllTypeCalendar extends Component
             $item['text_color'] = $this->getColorForStatus($item->status)[1];
             return $item;
         })->groupBy('year_value');
-        $nodeTreeArray = Pj_task::getTasksOfUser($ownerId);
+        $nodeProjectTreeArray = json_encode(array_values(Project::getSubProjectTree()));
+        $nodeTaskTreeArray = json_encode(array_values(Pj_task::getTasksOfUser($ownerId)));
+        // dump($nodeProjectTreeArray);
+        // dump($nodeTaskTreeArray);
+
         return view('components.renderer.view-all.view-all-type-calendar', [
             'allTimesheet' => $allTimesheet,
             'routeCreate' => route($this->type . '.storeEmpty'),
@@ -61,7 +66,8 @@ class ViewAllTypeCalendar extends Component
             'dataSourceLegend' => $this->dataSourceLegend(),
             'titleLegend' => 'Legend',
             'ownerId' => $ownerId,
-            'nodeTreeArray' => json_encode(array_values($nodeTreeArray)),
+            'nodeProjectTreeArray' => $nodeProjectTreeArray,
+            'nodeTaskTreeArray' => $nodeTaskTreeArray,
         ]);
     }
     private function getDataCountOfWeek($ownerId)

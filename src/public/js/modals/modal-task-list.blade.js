@@ -1,10 +1,10 @@
-function init() {
+function init(diagramDiv, nodeDataArray) {
 
     // Since 2.2 you can also author concise templates with method chaining instead of GraphObject.make
     // For details, see https://gojs.net/latest/intro/buildingObjects.html
     const $ = go.GraphObject.make;  // for conciseness in defining templates
     myDiagram =
-        new go.Diagram("myDiagramDiv",
+        new go.Diagram(diagramDiv,
             {
                 allowMove: false,
                 allowCopy: false,
@@ -86,8 +86,5 @@ function init() {
     myDiagram.model = new go.TreeModel(nodeDataArray);
 }
 
-init()
-
-// window.addEventListener('DOMContentLoaded', init);
-// console.log("AAA")
-// console.log(nodeDataArray);
+init("myDiagramProjectDiv", projectDataArray)
+init("myDiagramTaskListDiv", taskListDataArray)
