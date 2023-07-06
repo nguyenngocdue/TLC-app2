@@ -11,7 +11,10 @@
     const checkbox = document.getElementById('drop-remove');
     const modalClickRight = $(`#modal-click-right`);
     const modalTitleTaskValue = $(`#title_task_value`);
-    const modalTask = $(`#task_id_1`);
+    const modalProject = $(`#project_id`);
+    const modalSubProject = $(`#sub_project_id`);
+    const modalLOD= $(`#lod_id`);
+    const modalTask = $(`#task_id`);
     const modalSubTask = $(`#sub_task_id`);
     const modalWorkMode = $(`#work_mode_id`);
     const modalRemark = $(`#remark`);
@@ -94,12 +97,21 @@
                                 handleUpdateModalEvent(info);
                                 //extended value render modal
                                 var extendedProps = info.event._def.extendedProps;
+                                var projectId = extendedProps.project_id;
+                                var subProjectId = extendedProps.sub_project_id;
+                                var lodId = extendedProps.lod_id;
                                 var taskId = extendedProps.task_id;
                                 var subTaskId = extendedProps.sub_task_id;
                                 var workModeId = extendedProps.work_mode_id;
                                 var remarkValue = extendedProps.remark;
                                 //render modal trigger
                                 modalTitleTaskValue.text(`Task: ${extendedProps.title_default}`);
+                                modalProject.val(projectId)
+                                modalProject.trigger('change');
+                                modalSubProject.val(subProjectId)
+                                modalSubProject.trigger('change');
+                                modalLOD.val(lodId)
+                                modalLOD.trigger('change');
                                 modalTask.val(taskId)
                                 modalTask.trigger('change');
                                 modalSubTask.val(subTaskId);
@@ -187,7 +199,6 @@
         })
     }
     function changeBackgroudColorBreakTime(){
-        console.log(timeBreaks)
         var trElements = $('td.fc-timegrid-slot');
         trElements.each(function() {
             var dataTimeValue = $(this).attr('data-time');
@@ -231,6 +242,10 @@
     function updateModalEvent(button) {
         var timesheetLineId = button.value;
         var data = {
+            'project_id': modalProject.val(),
+            'sub_project_id': modalSubProject.val(),
+            'lod_id': modalLOD.val(),
+            'task_id': modalTask.val(),
             'sub_task_id': modalSubTask.val(),
             'work_mode_id': modalWorkMode.val(),
             'remark': modalRemark.val(),
@@ -239,6 +254,10 @@
         if (timesheetLineId) {
             var event = calendar.getEventById(timesheetLineId);
             callApi('patch', url, data, null, function(event, response) {
+                event.setExtendedProp('project_id', response.data.project_id);
+                event.setExtendedProp('sub_project_id', response.data.sub_project_id);
+                event.setExtendedProp('lod_id', response.data.lod_id);
+                event.setExtendedProp('task_id', response.data.task_id);
                 event.setExtendedProp('work_mode_id', response.data.work_mode_id);
                 event.setExtendedProp('remark', response.data.remark);
                 event.setExtendedProp('sub_task_id', response.data.sub_task_id);
