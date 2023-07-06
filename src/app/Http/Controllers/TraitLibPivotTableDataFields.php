@@ -36,7 +36,8 @@ trait TraitLibPivotTableDataFields
             $columnFields[] = [
                 'fieldIndex' => $field,
                 'valueIndexField' => $valueIndexFields[$key] ?? null,
-                'aggregation' => 'sum'
+                'aggregation' => 'sum',
+                'mapFieldValue' => $field.'_' . $valueIndexFields[$key] ?? null,
             ];
         }
         // dd($columnFields);
@@ -75,13 +76,14 @@ trait TraitLibPivotTableDataFields
         return $arrayFields;
     }
 
-    private function getFieldsToCheckDatabase($lib, $array1) {
+    private function getFieldsToCheckDatabase($lib, $array1, $array2) {
         $keysToRemove = ['name', 'data_aggregations', 'lookup_tables'];
         foreach ($keysToRemove as $key) unset($lib[$key]);
-        $fieldInSortBy = $this->getFieldsInSortBy($lib['sort_by']);
+        $fieldInSortBy = $this->getFieldsInSortBy($lib['sort_by'] ??[]);
         foreach ($lib as $key => &$items){
             if ($key === 'row_fields') $items = $array1;
             if ($key === 'sort_by') $items = $fieldInSortBy;
+            if ($key === 'column_fields') $items = $array2;
             
         }
         return $lib;
@@ -109,29 +111,42 @@ trait TraitLibPivotTableDataFields
 
         $filters = $lib['filters'] ?? [];
         $row_fields = $lib['row_fields'] ?? [];
+
+
         $fields = $this->separateFields($row_fields);
+
+        $columnFields = $lib['column_fields'] ?? [];
+        $valueIndexFields = $lib['value_index_fields'] ?? [];
+
+        $checkIntersectColumnAndValueIndex = $this->checkIntersectColumnAndValueIndex($columnFields, $valueIndexFields);
+        if (!$checkIntersectColumnAndValueIndex) return false;
+
+        $_fields = $this->separateFields($columnFields);
+
+        $checkEmptyRowFieldsAndColumnFields = $this->checkEmptyRowFieldsAndColumnFields($row_fields, $columnFields);
+        if(!$checkEmptyRowFieldsAndColumnFields) return false;
+
+        $bidingColumnFields = $_fields['biding_fields'] ?? [];
+
         
         $bidingRowFields = $fields['biding_fields'] ?? [];
-        $fieldsToCheckDatabase = $this->getFieldsToCheckDatabase($lib, array_keys($bidingRowFields));
+        $fieldsToCheckDatabase = $this->getFieldsToCheckDatabase($lib, array_keys($bidingRowFields), array_keys($bidingColumnFields));
+        // dd($fieldsToCheckDatabase);
         
         $primaryData = $this->dataSource;
-        $isCheckFieldsInDatabase = $this->checkFieldsInDatabase($fieldsToCheckDatabase, $primaryData);
-        if(!$isCheckFieldsInDatabase) return false;
+        $checkFieldsInDatabase = $this->checkFieldsInDatabase($fieldsToCheckDatabase, $primaryData);
+        if(!$checkFieldsInDatabase) return false;
         
         $rowFields = $fields['fields'] ?? [];
-        $columnFields = $lib['column_fields'] ?? [];
-        $isCheckRowAndColumnFields = $this->checkRowAndColumnFields($columnFields, $rowFields);
-        if(!$isCheckRowAndColumnFields) return false;
+        $checkRowAndColumnFields = $this->checkRowAndColumnFields($columnFields, $rowFields);
+        if(!$checkRowAndColumnFields) return false;
 
-        $fields = $this->separateFields($columnFields);
-        $_columnFields = $fields['fields'] ?? [];
-        $valueIndexFields = $lib['value_index_fields'] ?? [];
+        $_columnFields = $_fields['fields'] ?? [];
 
 
         $dataAggregation = $lib['data_aggregations'] ?? [];
         $propsColumnField = $this->mapValueIndexColumnFields($_columnFields, $valueIndexFields);
     
-        $bidingColumnFields = $fields['biding_fields'] ?? [];
 
     
         $dataFields = $lib['data_fields'] ?? [];
@@ -139,6 +154,7 @@ trait TraitLibPivotTableDataFields
     
         $sortBy = $lib['sort_by'] ?? [];
         $dataIndex = $this->getDataIndex($row_fields);
+        // dd($bidingColumnFields);
         return [$rowFields, $bidingRowFields, $filters, $propsColumnField, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields, $columnFields];
     }
     

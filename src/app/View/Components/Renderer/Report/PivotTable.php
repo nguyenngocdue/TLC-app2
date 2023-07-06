@@ -288,7 +288,6 @@ class PivotTable extends Component
     {
         $primaryData = $this->dataSource;
         if (!$this->getDataFields()) return false;
-        // dump($this->getDataFields());
         $dataOutput = $this->makeDataRenderer($primaryData);
         [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput);
         $dataOutput = $this->sortLinesData($dataOutput);
