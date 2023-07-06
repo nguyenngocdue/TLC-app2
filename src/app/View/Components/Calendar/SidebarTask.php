@@ -43,6 +43,10 @@ class SidebarTask extends Component
         return $dataSource;
     }
 
+    private function getSuffix()
+    {
+        return "_11111";
+    }
     /**
      * Get the view / contents that represent the component.
      *

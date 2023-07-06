@@ -46,6 +46,22 @@ class SidebarFilterLod extends Component
         return "_11111";
     }
 
+    private function getListenersOfDropdown2()
+    {
+        $suffix = $this->getSuffix();
+        return [
+            [
+                'listen_action' => 'dot',
+                'column_name' => 'lod_id' . $suffix,
+                'listen_to_attrs' => ['lod_id'],
+                'listen_to_fields' => ['sub_project_id' . $suffix],
+                'listen_to_tables' => ['sub_projects'],
+                'table_name' => 'terms',
+                'triggers' => ['sub_project_id' . $suffix],
+            ],
+        ];
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
