@@ -47,9 +47,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getLods()": {
-        "name": "_getLods()",
-        "column_name": "getLods()",
+    "_getLodsOfTask()": {
+        "name": "_getLodsOfTask()",
+        "column_name": "getLodsOfTask()",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -59,9 +59,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getDisciplines()": {
-        "name": "_getDisciplines()",
-        "column_name": "getDisciplines()",
+    "_getDisciplinesOfTask()": {
+        "name": "_getDisciplinesOfTask()",
+        "column_name": "getDisciplinesOfTask()",
         "label": "",
         "validation": "",
         "validation_regex": "",

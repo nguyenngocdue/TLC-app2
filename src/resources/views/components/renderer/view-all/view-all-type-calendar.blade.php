@@ -6,7 +6,11 @@
         <div class="grid lg:grid-cols-12 gap-2 mx-2">
             <div class="md:col-span-4 flex">
                     <x-renderer.card class="w-full border bg-white p-2" title="Selected view">
-                    <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
+                        <div class="flex">
+                            <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
+                            <x-renderer.button class="w-40" icon="fa-duotone fa-briefcase" click="toggleModal('modal-task-list')">Task List</x-renderer.button>
+                            <x-modals.modal-task-list modalId='modal-task-list' selectedUser="{{$ownerId}}"/>
+                        </div>
                     </x-renderer.card>
             </div>
             <div class="md:col-span-2">

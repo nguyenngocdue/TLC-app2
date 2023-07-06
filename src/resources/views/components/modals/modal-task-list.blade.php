@@ -1,12 +1,14 @@
 
 @extends("modals.modal-large")
 
-@section($modalId.'-header', "Header")
+@section($modalId.'-header', "Task list")
 
 @section($modalId.'-body')
-    <div class="p-2">
-        Body
-    </div>
+@php
+    // $user = ("App\\Models\\User")::findFromCache($selectedUser);
+    // $discipline = $user->discipline;
+    // dump($discipline);
+@endphp
 @endsection
 
 {{-- @section($modalId.'-footer')

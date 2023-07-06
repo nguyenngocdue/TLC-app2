@@ -61,7 +61,7 @@
         "listen_action": "reduce",
         "triggers": "lod_id,discipline_id",
         "listen_to_fields": "task_id,task_id",
-        "listen_to_attrs": "getLods(),getDisciplines()",
+        "listen_to_attrs": "getLodsOfTask(),getDisciplinesOfTask()",
         "attrs_to_compare": "id",
         "expression": "",
         "ajax_response_attribute": "",

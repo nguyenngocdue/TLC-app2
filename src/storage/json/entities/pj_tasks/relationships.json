@@ -27,10 +27,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getDisciplines()": {
-        "name": "_getDisciplines()",
+    "_getDisciplinesOfTask()": {
+        "name": "_getDisciplinesOfTask()",
         "relationship": "getCheckedByField",
-        "control_name": "getDisciplines()",
+        "control_name": "getDisciplinesOfTask()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
@@ -41,10 +41,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getLods()": {
-        "name": "_getLods()",
+    "_getLodsOfTask()": {
+        "name": "_getLodsOfTask()",
         "relationship": "getCheckedByField",
-        "control_name": "getLods()",
+        "control_name": "getLodsOfTask()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
