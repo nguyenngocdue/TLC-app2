@@ -54,6 +54,17 @@
         "lookup_tables": null,
         "sort_by": null
     },
+    "apple_store_empty_input": {
+        "name": "apple_store_empty_input",
+        "filters": null,
+        "row_fields": null,
+        "column_fields": null,
+        "value_index_fields": null,
+        "data_aggregations": null,
+        "data_fields": null,
+        "lookup_tables": null,
+        "sort_by": null
+    },
     "apple_store_empty_row_field": {
         "name": "apple_store_empty_row_field",
         "filters": null,
@@ -113,7 +124,7 @@
         "name": "hr_timesheet_employee_date",
         "filters": "workplace_id, department_id",
         "row_fields": "staff_id,\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name), \r\ntype_id(user_types.name),\r\ndepartment_id(departments.name),\r\ncategory_id(user_categories.name)",
-        "column_fields": "time_sheet_start_time,\r\ntime_sheet_start_time_otr, time_sheet_start_time_wfh",
+        "column_fields": "ts_date,\r\nts_date, ts_date",
         "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_aggregations": "sum,sum,sum,concat",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, workplace_id",
@@ -135,7 +146,7 @@
         "name": "hr_timesheet_project_date",
         "filters": "workplace_id, department_id",
         "row_fields": "sub_project_id(sub_projects.name)",
-        "column_fields": "time_sheet_start_time_otr, time_sheet_start_time_wfh,\r\ntime_sheet_start_time",
+        "column_fields": "ts_date, ts_date,\r\nts_date",
         "value_index_fields": "time_sheet_hours_otr,\r\ntime_sheet_hours_wfh,\r\ntime_sheet_hours",
         "data_aggregations": "sum,sum,sum",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh",
@@ -152,9 +163,5 @@
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh",
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_categories,\r\nuser_types,\r\nsub_projects",
         "sort_by": null
-    },
-    "apple_store_empty_input": {
-        "name": "apple_store_empty_input",
-        "title": "Empty Input"
     }
 }
