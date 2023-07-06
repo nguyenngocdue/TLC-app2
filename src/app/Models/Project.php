@@ -63,12 +63,14 @@ class Project extends ModelExtended
         $projects = Project::with('getSubProjects')->orderBy('name')->get();
         foreach ($projects as $project) {
             $key = "project_" . $project->id;
-            $tree[$key] = ['key' => $key, 'name' => $project->name . " - " . $project->description, "parent" => 0];
+            $name = $project->name . ($project->description ? " - " . $project->description : "");
+            $tree[$key] = ['key' => $key, 'name' => $name, "parent" => 0];
             $subProjects = $project->getSubProjects->sortBy('name');
             foreach ($subProjects as $subProject) {
                 // dump($subProject->name);
                 $key = "subproject_" . $subProject->id;
-                $tree[$key] = ["key" => $key, "name" => $subProject->name, "parent" => "project_" . $project->id];
+                $name = $subProject->name . ($subProject->description ? " - " . $subProject->description : "");
+                $tree[$key] = ["key" => $key, "name" => $name, "parent" => "project_" . $project->id];
             }
         }
         // dd($tree);
