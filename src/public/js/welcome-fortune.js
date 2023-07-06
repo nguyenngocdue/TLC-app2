@@ -127,7 +127,7 @@ function init() {
         // $("TriStateCheckBoxButton"),
         $(go.TextBlock,
           { font: '9pt Verdana, sans-serif', margin: new go.Margin(0, 0, 0, 2) },
-          new go.Binding("text", "key", s => "item " + s))
+          new go.Binding("text", "name"))
       )  // end Horizontal Panel
     );  // end Node
 
@@ -149,33 +149,35 @@ function init() {
         { stroke: 'gray', strokeDashArray: [1, 2] }));
 
   // create a random tree
-  var nodeDataArray = [{ key: 0 }];
-  var max = 25;
-  var count = 0;
-  while (count < max) {
-    count = makeTree(3, count, max, nodeDataArray, nodeDataArray[0]);
-  }
+  // var nodeDataArray = [{ key: 0 }];
+  // var max = 25;
+  // var count = 0;
+  // while (count < max) {
+  //   count = makeTree(3, count, max, nodeDataArray, nodeDataArray[0]);
+  // }
+  // console.log(nodeDataArray);
+  // nodeDataArray = [
+  //   { key: 0, },
+  //   { key: 1, parent: 0 },
+  //   { key: "AA", parent: 0 },
+  //   { key: "345", parent: "AA" },
+  // ]
+
   console.log(nodeDataArray);
-  nodeDataArray = [
-    { key: 0, },
-    { key: 1, parent: 0 },
-    { key: "AA", parent: 0 },
-    { key: "345", parent: "AA" },
-  ]
   myDiagram.model = new go.TreeModel(nodeDataArray);
 }
 
-function makeTree(level, count, max, nodeDataArray, parentdata) {
-  var numchildren = Math.floor(Math.random() * 10);
-  for (var i = 0; i < numchildren; i++) {
-    if (count >= max) return count;
-    count++;
-    var childdata = { key: count, parent: parentdata.key, value: 123 };
-    nodeDataArray.push(childdata);
-    if (level > 0 && Math.random() > 0.5) {
-      count = makeTree(level - 1, count, max, nodeDataArray, childdata);
-    }
-  }
-  return count;
-}
+// function makeTree(level, count, max, nodeDataArray, parentdata) {
+//   var numchildren = Math.floor(Math.random() * 10);
+//   for (var i = 0; i < numchildren; i++) {
+//     if (count >= max) return count;
+//     count++;
+//     var childdata = { key: count, parent: parentdata.key, value: 123 };
+//     nodeDataArray.push(childdata);
+//     if (level > 0 && Math.random() > 0.5) {
+//       count = makeTree(level - 1, count, max, nodeDataArray, childdata);
+//     }
+//   }
+//   return count;
+// }
 window.addEventListener('DOMContentLoaded', init);

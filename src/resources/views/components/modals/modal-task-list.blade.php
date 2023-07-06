@@ -4,11 +4,14 @@
 @section($modalId.'-header', "Task list")
 
 @section($modalId.'-body')
-@php
-    // $user = ("App\\Models\\User")::findFromCache($selectedUser);
-    // $discipline = $user->discipline;
-    // dump($discipline);
-@endphp
+
+<div id="myDiagramDiv" class="w-full h-screen" style="border: 1px solid black; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);">
+    <canvas tabindex="0"  111 class="w-full h-screen" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none;">This text is displayed if your browser does not support the Canvas HTML element.</canvas>
+    <div style="position: absolute; overflow: auto; width: 398px; height: 398px; z-index: 1;">
+      <div style="position: absolute; width: 1px; height: 1px;">JS Loading...</div>
+    </div>
+</div>
+
 @endsection
 
 {{-- @section($modalId.'-footer')
@@ -16,6 +19,7 @@
 
 @section($modalId.'-javascript')
 <script>
-    
+    const nodeDataArray = {!! $nodeTreeArray !!}
 </script>
+<script src="{{ asset('js/modals/modal-task-list.blade.js') }}"></script>
 @endsection
