@@ -9,8 +9,10 @@ use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\WelcomeDueController_apple_store_category_per_date;
 use App\Http\Controllers\WelcomeDueController_apple_store_draw_row_field;
 use App\Http\Controllers\WelcomeDueController_apple_store_duplicate_value_in_column_field;
+use App\Http\Controllers\WelcomeDueController_apple_store_duplicate_value_in_column_field_test1;
 use App\Http\Controllers\WelcomeDueController_apple_store_empty_row_field;
-use App\Http\Controllers\WelcomeDueController_apple_store_empty_row_field_sum_attr;
+use App\Http\Controllers\WelcomeDueController_apple_store_empty_row_field_minimum_quantity_column_field;
+use App\Http\Controllers\WelcomeDueController_apple_store_product_date_date;
 use App\Http\Controllers\WelcomeDueController_apple_store_product_per_date;
 use App\Http\Controllers\WelcomeDueController_apple_store_test_display;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_date;
@@ -34,8 +36,10 @@ Route::resource('welcome-due-apple_store_product_per_date', WelcomeDueController
 Route::resource('welcome-due-apple_store_category_per_date', WelcomeDueController_apple_store_category_per_date::class)->only('index');
 Route::resource('welcome-due-apple_store_draw_row_field', WelcomeDueController_apple_store_draw_row_field::class)->only('index');
 Route::resource('welcome-due-apple_store_empty_row_field', WelcomeDueController_apple_store_empty_row_field::class)->only('index');
-Route::resource('welcome-due-apple_store_empty_row_field_sum_attr', WelcomeDueController_apple_store_empty_row_field_sum_attr::class)->only('index');
+Route::resource('welcome-due-apple_store_empty_row_field_minimum_quantity_column_field', WelcomeDueController_apple_store_empty_row_field_minimum_quantity_column_field::class)->only('index');
 Route::resource('welcome-due-apple_store_duplicate_value_in_column_field', WelcomeDueController_apple_store_duplicate_value_in_column_field::class)->only('index');
+Route::resource('welcome-due-apple_store_duplicate_value_in_column_field_test1', WelcomeDueController_apple_store_duplicate_value_in_column_field_test1::class)->only('index');
+Route::resource('welcome-due-apple_store_product_date_date', WelcomeDueController_apple_store_product_date_date::class)->only('index');
 Route::resource('welcome-due-apple_store_test_display', WelcomeDueController_apple_store_test_display::class)->only('index');
 
 Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');

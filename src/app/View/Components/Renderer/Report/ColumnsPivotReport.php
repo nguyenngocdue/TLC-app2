@@ -45,7 +45,7 @@ trait  ColumnsPivotReport
         return preg_replace($pattern, "", $title);
     }
 
-    protected function editRowHeaderColumnFields($fieldGroups, $valueIndexFields)
+    protected function editRowHeaderColumnFields($fieldGroups, $columnFields)
     {
         $array = [];
         // dd($fieldGroups);
@@ -59,18 +59,12 @@ trait  ColumnsPivotReport
                     }
                 }
             } else {
-                // dump($fields);
 
                 foreach ($fields as $field) {
-                    $checkFiled =  ReportPivot::isStringInItemsOfArray($valueIndexFields, $field);
+                    $checkFiled =  ReportPivot::isStringInItemsOfArray($columnFields, $field);
                     if ($checkFiled) {
                         // $title = ucwords(substr($field, strpos($field, "_") + 1, strrpos($field, "_") - strpos($field, "_") - 1));
-                        $title = ucwords(substr($field, strpos($field, "_") + 1, strrpos($field, "_") - strpos($field, "_") - 1));
-                        // foreach ($valueIndexFields as $value) {
-                        //     if (str_contains($field, $value)) {
-                        //         $title = ucwords(str_replace('_', ' ', $value));
-                        //     }
-                        // }
+                        $title = ucwords(substr($field, strpos($field, "_") + 1));
                         if (str_contains($title, '[')) {
                             $title = self::removeNumberedString($title);
                         }
@@ -79,7 +73,6 @@ trait  ColumnsPivotReport
                 }
             }
         };
-        // dd($array);
         return $array;
     }
 
@@ -104,27 +97,29 @@ trait  ColumnsPivotReport
         $lib = LibPivotTables::getFor($this->key);
         $columnFields = $lib['column_fields'] ?? [];
         $columnFields = ReportPivot::markDuplicates($columnFields);
-        // dd($columnFields);
         $result = [];
         foreach ($columnFields as $key => $values) {
             foreach ($values as $value) {
                 foreach ($a as $item) {
                     $thirdUnderscore = ReportPivot::findPosition($item, '_', 3);
-                    if (substr($item, $thirdUnderscore, 4) === $value) {
+                    // $substr = substr($item, $thirdUnderscore,  4));
+                    $substr = substr($item, $thirdUnderscore,  strlen($value));
+                    if ($substr === $value) {
+                        // dump($substr, $value, $item);
                         $result[$value][] = $item;
                     }
                 }
             }
         };
-        // dd($result, $columnFields);
-        foreach ($result as &$value) {
-            usort($value, function ($date1, $date2) {
-                $thirdUnderscore = ReportPivot::findPosition($date1, '_', 3);
-                $dateTime1 = DateTime::createFromFormat('d_m_y', substr($date1, 0, $thirdUnderscore - 1));
-                $dateTime2 = DateTime::createFromFormat('d_m_y', substr($date2, 0, $thirdUnderscore - 1));
-                return $dateTime1 <=> $dateTime2;
-            });
-        }
+        $result = array_unique(array_merge(...array_values($result)));
+
+        usort($result, function ($date1, $date2) {
+            $thirdUnderscore = ReportPivot::findPosition($date1, '_', 3);
+            $dateTime1 = DateTime::createFromFormat('d_m_y', substr($date1, 0, $thirdUnderscore - 1));
+            $dateTime2 = DateTime::createFromFormat('d_m_y', substr($date2, 0, $thirdUnderscore - 1));
+            return $dateTime1 <=> $dateTime2;
+        });
+        $result = ['date' => $result];
 
         $otherItems = array_diff($a, array_merge(...array_values($result)));
         $result['other'] = $otherItems;
@@ -180,12 +175,37 @@ trait  ColumnsPivotReport
         return array_merge($otherElements, $matchingElements);
     }
 
+    private function sortColumnsNeedToRender($data, $titleOrders)
+    {
+        usort($data, function ($a, $b) use ($titleOrders) {
+            $titleA = strtolower($a['title']);
+            $titleB = strtolower($b['title']);
+
+            $indexA = array_search($titleA, $titleOrders);
+            $indexB = array_search($titleB, $titleOrders);
+
+            return $indexA - $indexB;
+        });
+        return $data;
+    }
+
+    private function findItemsByMapFieldValue($data, $targetValue, $key = 'mapFieldValue')
+    {
+        $matchingItems = [];
+        foreach ($data as $item) {
+            if ($item[$key] === $targetValue) {
+                $matchingItems[] = $item;
+            }
+        }
+        return $matchingItems;
+    }
+
 
     private function makeColumnsOfColumnFields($dataOutput)
     {
         // dd($dataOutput);
         $allColumns = [];
-        [$rowFields,,,,,, $dataIndex,, $valueIndexFields, $columnFields] =  $this->getDataFields();
+        [$rowFields,,, $propsColumnField,,, $dataIndex,, $valueIndexFields, $columnFields] =  $this->getDataFields();
         if (!$this->getDataFields()) return false;
 
         foreach ($dataOutput as $value) $allColumns = array_unique(array_merge($allColumns, array_keys($value)));
@@ -193,22 +213,32 @@ trait  ColumnsPivotReport
         $lastItemDataSource = key(array_slice($this->dataSource[0] ?? [], -1));
         $endArray = Report::retrieveDataByIndex($allColumns, $lastItemDataSource, false, 'value');
         $diffFields = array_diff($endArray, $dataIndex);
-
         $fields = $this->sortDates($diffFields);
-
+        // dump($fields);
         $topTitleColumns = array_merge(...array_column($dataOutput, 'top_title_column'));
+
         $columnsOfColumnFields = [];
         if ($rowFields) {
             array_walk(
                 $fields,
-                function ($items, $key) use (&$columnsOfColumnFields, $topTitleColumns, $valueIndexFields, $columnFields) {
+                function ($items, $key) use (&$columnsOfColumnFields, $topTitleColumns, $valueIndexFields, $columnFields, $propsColumnField) {
                     if ($key === 'other') {
                         $items = self::moveStringToBottom($items);
                         $groupItems = ReportPivot::groupItemsByString($items);
+
+
                         foreach ($items as $value) {
-                            $checkFiled =  ReportPivot::isStringInItemsOfArray($valueIndexFields, $value);
+                            $columnsNeedToRender = array_column($propsColumnField, 'fieldIndex');
+                            $checkFiled =  ReportPivot::isStringInItemsOfArray($columnsNeedToRender, $value);
                             if ($checkFiled) {
                                 $firstWord = explode('_', $value)[0];
+                                $numDivideHeader = round(count($groupItems[$firstWord]));
+                                if ($topTitleColumns) {
+                                    $countItems = ReportPivot::countItems($items);
+                                    $numDivideHeader = $countItems[$value];
+                                }
+
+                                $title = ucwords($firstWord);
                                 if (str_contains($value, '[')) {
                                     $title = ucwords(str_replace('_', ' ', explode(']', $value, 2)[0])) . ']';
                                 }
@@ -217,35 +247,49 @@ trait  ColumnsPivotReport
                                     'dataIndex' => $value,
                                     'align' => is_numeric($value) ? 'left' : 'right',
                                     'width' => 50,
-                                    // 'colspan' =>  round(count($groupItems[$firstWord]) / (count($valueIndexFields) ?? 1)),
-                                    'colspan' =>  round(count($groupItems[$firstWord])),
+                                    'colspan' =>  $numDivideHeader,
                                 ];
                             };
                         }
                     } else {
                         $items = self::moveStringToBottom($items);
+
                         $groupItems = ReportPivot::groupItemsByString($items, 'end');
-                        foreach ($items as $value) {  
-                            $thirdUnderscore = ReportPivot::findPosition($value, '_', 3);
-                            $sixthUnderscore = ReportPivot::findPosition($value, '_', 4);
-                            $endWord = substr($value, $thirdUnderscore);
-                            if (!$thirdUnderscore) continue;
-                            $columnsOfColumnFields[] = [
-                                'title' => ucwords(str_replace('_', ' ', substr($value, $thirdUnderscore, $sixthUnderscore - $thirdUnderscore))),
-                                'dataIndex' => $value,
-                                'align' => is_numeric($value) ? 'left' : 'right',
-                                'colspan' => count($groupItems[$endWord]),
-                            ];
+                        $columnFields = ReportPivot::markDuplicates($columnFields);
+                        // dd($groupItems, $columnFields);
+                        foreach ($groupItems as $key => $dates) {
+                            $firstWord = explode('_', $key)[0];
+                            $title = ucwords($firstWord);
+
+                            $d = $this->findItemsByMapFieldValue($propsColumnField, $key);
+                            if (!reset($d)) continue;
+                            $keyNames = $columnFields[reset($d)['fieldIndex']] ?? [];
+
+                            foreach ($keyNames as $name) {
+                                foreach ($dates as $value) {
+                                    $columnsOfColumnFields[] = [
+                                        'title' => ucwords(str_replace('_', ' ', $name)),
+                                        'dataIndex' => $value,
+                                        'align' => is_numeric($value) ? 'left' : 'right',
+                                        'colspan' => count($dates),
+                                    ];
+                                }
+                            }
+                            // break;
                         }
                     }
                 }
             );
-            $tableDataHeader = $this->editRowHeaderColumnFields($fields, $valueIndexFields);
-            // dump($tableDataHeader);
+            $tableDataHeader = $this->editRowHeaderColumnFields($fields, $columnFields);
+            // dd($columnsOfColumnFields);
         } else {
             [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields2($dataOutput, $columnFields);
         }
-        // dd($tableDataHeader, $columnsOfColumnFields);
+        
+        $columnFields = ReportPivot::markDuplicates($columnFields);
+        $columnsOrder = array_merge(...array_values($columnFields));
+        $columnsOfColumnFields = $this->sortColumnsNeedToRender($columnsOfColumnFields, $columnsOrder);
+
         return [$tableDataHeader, $columnsOfColumnFields];
     }
 

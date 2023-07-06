@@ -29,7 +29,7 @@ class ReportPivot
 
     private static function transferValueOfKeys($data, $columnFields, $propsColumnField, $valueIndexFields)
     {
-        // dd($data);
+        // dump($propsColumnField);
         $newArray = array_map(function ($item) use ($propsColumnField, $valueIndexFields) {
             $dateItems = [];
             $dt = [];
@@ -43,21 +43,16 @@ class ReportPivot
                         case 'date':
                             $reversedDate = $date->format('d-m-y');
                             $_strDate = str_replace('-', '_', $reversedDate) . '_' . $values['fieldIndex'];
-                            
-                            $key = str_replace(' ', '_', strtolower($item[$values['fieldIndex']]));
-                            $dateItems[$_strDate] = array_merge($dt,[$values['valueIndexField'] => $item[$values['valueIndexField']]]);
-                            $dt = [$values['valueIndexField'] => $item[$values['valueIndexField']]];
 
+                            $key = str_replace(' ', '_', strtolower($item[$values['fieldIndex']]));
+                            $dateItems[$_strDate] = array_merge($dt, [$values['valueIndexField'] => $item[$values['valueIndexField']]]);
+                            // $dt = [$values['valueIndexField'] => $item[$values['valueIndexField']]];
+
+                            // dump($type, $values['fieldIndex']);
                             break;
                         default:
                             $key = str_replace(' ', '_', strtolower($item[$values['fieldIndex']]));
-                            $array = [];
-                            // dd($values, $valueIndexFields, $dt);
-                            foreach ($valueIndexFields as $field) {
-                                if (!$field) continue;
-                                $array[$field] = $item[$field];
-                            }
-                            $dateItems[$values['fieldIndex'] . '_' . $key] = $array;
+                            $dateItems[$values['fieldIndex'] . '_' . $key] = $item[$values['valueIndexField']];
                             break;
                     }
                 } catch (Exception $e) {
@@ -66,32 +61,32 @@ class ReportPivot
             }
             return $dateItems;
         }, $data);
-        // dd($newArray);
         $newArray = self::sumItemsInArray($newArray);
         $newArray = self::concatKeyAndValueOfArray($newArray);
-
+        // dump($newArray);
         // Check items that were duplicated in Column_Field column
         if (self::hasDuplicates($columnFields)) {
             $newColumnFields = self::markDuplicates($columnFields);
             $array = [];
-            foreach ($newColumnFields as $k => $values) {
-                foreach ($values as $newField) {
-                    foreach ($newArray as $field => $value) {
-                        if (str_contains($field, '_date')) {
-                            $newKey = str_replace('_date', '_' . $newField, $field);
-                            $array[$newKey] = $value;
-                        } else {
-                            $firstWord = explode('_', $field)[0];
-                            $newKey = str_replace($firstWord . '_', $newField . '_', $field);
-                            $array[$newKey] = $value;
+            foreach ($columnFields as $field) {
+                if (isset($newColumnFields[$field])) {
+                    $duplicateItems = $newColumnFields[$field];
+                    foreach ($duplicateItems as $fieldDup){
+                        foreach ($newArray as $key => $value){
+                            if (str_contains($key, $field)) {
+                                $newKey = str_replace($field, $fieldDup, $key);
+                                $array[$newKey] = $value;
+                            }
                         }
-                    }
+                    } 
+
                 }
+
             }
             // dump($array);
             return $array;
         }
-        // dump($newArray);
+        // dd($newArray);
         return $newArray;
     }
     public static function getLastArray($data, $fieldsNeedToSum = [])
@@ -204,11 +199,14 @@ class ReportPivot
         $data = [];
         foreach ($newArray as $k1 =>  $item) {
             // dump($k1);
-            if (!is_array($item))  return $newArray;
-            foreach ($item as $k2 => $value) {
-                $data[$k1 . '_' . $k2] = $value;
+            if (!is_array($item)) $data[$k1] = $item;
+            else {
+                foreach ($item as $k2 => $value) {
+                    $data[$k1 . '_' . $k2] = $value;
+                }
             }
         }
+        // dd($data);
         return $data;
     }
 
@@ -333,10 +331,10 @@ class ReportPivot
         return false;
     }
 
-    public static function groupItemsByString($data, $type ='first')
+    public static function groupItemsByString($data, $type = 'first')
     {
         $groupedItems = [];
-
+        // dd($data);
         foreach ($data as $item) {
             $nameParts = explode('_', $item);
             $text = $nameParts[0];
@@ -393,5 +391,16 @@ class ReportPivot
             }
         }
         return false;
+    }
+    public static function countItems($array) {
+        $itemCounts = array(); 
+        foreach ($array as $item) {
+            if (isset($itemCounts[$item])) {
+                $itemCounts[$item]++; 
+            } else {
+                $itemCounts[$item] = 1;
+            }
+        }
+        return $itemCounts;
     }
 }
