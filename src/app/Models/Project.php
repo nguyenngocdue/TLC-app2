@@ -54,4 +54,26 @@ class Project extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
+
+    public static function getSubProjectTree()
+    {
+        $tree = [
+            ["key" => 0, "name" => "All Projects"],
+        ];
+        $projects = Project::with('getSubProjects')->orderBy('name')->get();
+        foreach ($projects as $project) {
+            $key = "project_" . $project->id;
+            $name = $project->name . ($project->description ? " - " . $project->description : "");
+            $tree[$key] = ['key' => $key, 'name' => $name, "parent" => 0];
+            $subProjects = $project->getSubProjects->sortBy('name');
+            foreach ($subProjects as $subProject) {
+                // dump($subProject->name);
+                $key = "subproject_" . $subProject->id;
+                $name = $subProject->name . ($subProject->description ? " - " . $subProject->description : "");
+                $tree[$key] = ["key" => $key, "name" => $name, "parent" => "project_" . $project->id];
+            }
+        }
+        // dd($tree);
+        return $tree;
+    }
 }
