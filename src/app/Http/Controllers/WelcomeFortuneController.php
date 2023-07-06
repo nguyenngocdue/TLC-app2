@@ -15,10 +15,8 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
+        $taskTree = Pj_task::getTasksOfUser(71);
 
-        $tasks = Pj_task::getTasksOfUser(71);
-        dump($tasks);
-
-        return view("welcome-fortune", []);
+        return view("welcome-fortune", ['nodeTreeArray' => json_encode(array_values($taskTree))]);
     }
 }
