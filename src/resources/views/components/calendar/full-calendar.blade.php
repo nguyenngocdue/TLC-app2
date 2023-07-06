@@ -20,6 +20,7 @@
     const timesheetableId = @json($timesheetableId);
     const apiUrl = @json($apiUrl);
     const token = @json($token);
+    const timeBreaks = @json($timeBreaks);
     modalContainer = document.querySelector("[modal-container]");
     let events = [];
     $(document).click(function(event) {
@@ -180,9 +181,22 @@
                     })
                     calendar.render();
                 }
+                changeBackgroudColorBreakTime();
             },
             error: function(jqXHR, textStatus, errorThrown) {},
         })
+    }
+    function changeBackgroudColorBreakTime(){
+        console.log(timeBreaks)
+        var trElements = $('td.fc-timegrid-slot');
+        trElements.each(function() {
+            var dataTimeValue = $(this).attr('data-time');
+            if(timeBreaks){
+                if ( dataTimeValue === timeBreaks[0] ||dataTimeValue === timeBreaks[1]) {
+                    $(this).css('background-color', '#fdba74');
+                } 
+            }
+        });
     }
 
     function handleContextMenu(info) {
@@ -277,7 +291,6 @@
                             toastr.success('Set time for timesheet line successfully!');
                         });
                     }else{
-                        console.log(response.data)
                         calendar.addEvent(response.data)
                         toastr.success('Set time for timesheet line successfully!');
                     }
