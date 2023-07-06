@@ -26,11 +26,11 @@ trait CheckFieldsPivotInDatabase
         $route = route('managePivotTables.store');
         foreach ($failedFields as $key => $values) {
             $key = ucwords(str_replace('_', ' ', $key));
-            foreach ($values as $field) $alertStr .= '<a class="underline" target="_blank" href=' . $route . '>' . 'Field [' . $field . '] in ' . $key . ' column' . '</a>' . '</br>';
+            foreach ($values as $field) $alertStr .= '<p>' . '[' . $field . '] in ' . $key . ' column' . '</p>' . '</br>';
         }
         if ($alertStr) {
             $pageName = '<a class="underline" target="_blank" href=' . route('managePivotTables.store') . '>' . 'Manage Pivot Tables' . '</a>';
-            echo Blade::render("<x-feedback.alert type='warning' message='These fields of $pageName were not found in the database.<br/>$alertStr'></x-feedback.alert>");
+            echo Blade::render("<x-feedback.alert type='warning' message='These below fields of $pageName were not found in the database:<br/>$alertStr'></x-feedback.alert>");
             return false;
         }
         return true;
