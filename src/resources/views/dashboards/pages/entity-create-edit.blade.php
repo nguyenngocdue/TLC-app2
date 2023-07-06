@@ -49,9 +49,11 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($allProps, $val
                 </div>
             </div>
             <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
-            <div class="fixed right-0">
-                <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
-            </div>
+            @if(!$hasReadOnly)
+                <div class="fixed right-0">
+                    <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
+                </div>
+            @endif
         </div>
         @break
         @case ('checklist-sheet-renderer')
@@ -81,9 +83,11 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($allProps, $val
         @php $propsOfIntermediatePage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues, $status, $type); @endphp
         <x-renderer.editable.modal-intermediate key={{$key}} action={{$action}} type={{$type}} status={{$status}} id={{$id}} modelPath={{$modelPath}} :actionButtons="$actionButtons" :props="$props" :item="$item" :dataSource="$propsOfIntermediatePage" />
         @endforeach
+        @if(!$hasReadOnly)
         <div class="bg-white rounded-lg mt-2">
             <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
         </div>
+        @endif
     </form>
 </div>
 <x-renderer.editable.modal-broadcast-notification />
