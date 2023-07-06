@@ -1,237 +1,181 @@
+// This button assumes data binding to the "checked" property.
+// go.GraphObject.defineBuilder("TriStateCheckBoxButton", args => {
+//   var button = /** @type {Panel} */ (
+//     go.GraphObject.make("Button",
+//       {
+//         "ButtonBorder.fill": "white",
+//         width: 14,
+//         height: 14
+//       },
+//       go.GraphObject.make(go.Shape,
+//         {
+//           name: "ButtonIcon",
+//           geometryString: 'M0 0 M0 8.85 L4.9 13.75 16.2 2.45 M16.2 16.2',  // a 'check' mark
+//           strokeWidth: 2,
+//           stretch: go.GraphObject.Fill,  // this Shape expands to fill the Button
+//           geometryStretch: go.GraphObject.Uniform,  // the check mark fills the Shape without distortion
+//           background: null,
+//           visible: false  // visible set to false: not checked, unless data.checked is true
+//         },
+//         new go.Binding("visible", "checked", p => p === true || p === null),
+//         new go.Binding("stroke", "checked", p => p === null ? null : "black"),
+//         new go.Binding("background", "checked", p => p === null ? "gray" : null)
+//       )
+//     )
+//   );
+
+//   function updateCheckBoxesDown(node, val) {
+//     node.diagram.model.setDataProperty(node.data, "checked", val);
+//     node.findTreeChildrenNodes().each(child => updateCheckBoxesDown(child, val))
+//   }
+
+//   function updateCheckBoxesUp(node) {
+//     var parent = node.findTreeParentNode();
+//     if (parent !== null) {
+//       var anychecked = parent.findTreeChildrenNodes().any(n => n.data.checked !== false && n.data.checked !== undefined);
+//       var allchecked = parent.findTreeChildrenNodes().all(n => n.data.checked === true);
+//       node.diagram.model.setDataProperty(parent.data, "checked", (allchecked ? true : (anychecked ? null : false)));
+//       updateCheckBoxesUp(parent);
+//     }
+//   }
+
+//   button.click = (e, button) => {
+//     if (!button.isEnabledObject()) return;
+//     var diagram = e.diagram;
+//     if (diagram === null || diagram.isReadOnly) return;
+//     if (diagram.model.isReadOnly) return;
+//     e.handled = true;
+//     var shape = button.findObject("ButtonIcon");
+//     diagram.startTransaction("checkbox");
+//     // Assume the name of the data property is "checked".
+//     var node = button.part;
+//     var oldval = node.data.checked;
+//     var newval = (oldval !== true);  // newval will always be either true or false, never null
+//     // Set this data.checked property and those of all its children to the same value
+//     updateCheckBoxesDown(node, newval);
+//     // Walk up the tree and update all of their checkboxes
+//     updateCheckBoxesUp(node);
+//     // support extra side-effects without clobbering the click event handler:
+//     if (typeof button["_doClick"] === "function") button["_doClick"](e, button);
+//     diagram.commitTransaction("checkbox");
+//   };
+
+//   return button;
+// });
+
 function init() {
 
   // Since 2.2 you can also author concise templates with method chaining instead of GraphObject.make
   // For details, see https://gojs.net/latest/intro/buildingObjects.html
   const $ = go.GraphObject.make;  // for conciseness in defining templates
 
-  // some constants that will be reused within templates
-  var mt8 = new go.Margin(8, 0, 0, 0);
-  var mr8 = new go.Margin(0, 8, 0, 0);
-  var ml8 = new go.Margin(0, 0, 0, 8);
-  var roundedRectangleParams = {
-    parameter1: 2,  // set the rounded corner
-    spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight  // make content go all the way to inside edges of rounded corners
-  };
-
   myDiagram =
-    new go.Diagram("myDiagramDiv",  // the DIV HTML element
+    new go.Diagram("myDiagramDiv",
       {
-        // Put the diagram contents at the top center of the viewport
-        initialDocumentSpot: go.Spot.Top,
-        initialViewportSpot: go.Spot.Top,
-        // OR: Scroll to show a particular node, once the layout has determined where that node is
-        // "InitialLayoutCompleted": e => {
-        //  var node = e.diagram.findNodeForKey(28);
-        //  if (node !== null) e.diagram.commandHandler.scrollToPart(node);
-        // },
+        allowMove: false,
+        allowCopy: false,
+        allowDelete: false,
+        allowHorizontalScroll: false,
         layout:
-          $(go.TreeLayout,  // use a TreeLayout to position all of the nodes
+          $(go.TreeLayout,
             {
-              isOngoing: false,  // don't relayout when expanding/collapsing panels
-              treeStyle: go.TreeLayout.StyleLastParents,
-              // properties for most of the tree:
-              angle: 90,
-              layerSpacing: 80,
-              // properties for the "last parents":
-              alternateAngle: 0,
-              alternateAlignment: go.TreeLayout.AlignmentStart,
-              alternateNodeIndent: 15,
-              alternateNodeIndentPastParent: 1,
-              alternateNodeSpacing: 15,
-              alternateLayerSpacing: 40,
-              alternateLayerSpacingParentOverlap: 1,
-              alternatePortSpot: new go.Spot(0.001, 1, 20, 0),
-              alternateChildPortSpot: go.Spot.Left
+              alignment: go.TreeLayout.AlignmentStart,
+              angle: 0,
+              compaction: go.TreeLayout.CompactionNone,
+              layerSpacing: 16,
+              layerSpacingParentOverlap: 1,
+              nodeIndentPastParent: 1.0,
+              nodeSpacing: 0,
+              setsPortSpot: false,
+              setsChildPortSpot: false
             })
       });
 
-  // This function provides a common style for most of the TextBlocks.
-  // Some of these values may be overridden in a particular TextBlock.
-  function textStyle(field) {
-    return [
-      {
-        font: "12px Roboto, sans-serif", stroke: "rgba(0, 0, 0, .60)",
-        visible: false  // only show textblocks when there is corresponding data for them
-      },
-      new go.Binding("visible", field, val => val !== undefined)
-    ];
-  }
-
-  // define Converters to be used for Bindings
-  function theNationFlagConverter(nation) {
-    return "https://www.nwoods.com/images/emojiflags/" + nation + ".png";
-  }
-
-  // define the Node template
   myDiagram.nodeTemplate =
-    $(go.Node, "Auto",
-      {
-        locationSpot: go.Spot.Top,
-        isShadowed: true, shadowBlur: 1,
-        shadowOffset: new go.Point(0, 1),
-        shadowColor: "rgba(0, 0, 0, .14)",
-        selectionAdornmentTemplate:  // selection adornment to match shape of nodes
-          $(go.Adornment, "Auto",
-            $(go.Shape, "RoundedRectangle", roundedRectangleParams,
-              { fill: null, stroke: "#7986cb", strokeWidth: 3 }
-            ),
-            $(go.Placeholder)
-          )  // end Adornment
+    $(go.Node,
+      { // no Adornment: instead change panel background color by binding to Node.isSelected
+        selectionAdorned: false,
+        // a custom function to allow expanding/collapsing on double-click
+        // this uses similar logic to a TreeExpanderButton
+        // doubleClick: (e, node) => {
+        //   var cmd = myDiagram.commandHandler;
+        //   if (node.isTreeExpanded) {
+        //     if (!cmd.canCollapseTree(node)) return;
+        //   } else {
+        //     if (!cmd.canExpandTree(node)) return;
+        //   }
+        //   e.handled = true;
+        //   if (node.isTreeExpanded) {
+        //     cmd.collapseTree(node);
+        //   } else {
+        //     cmd.expandTree(node);
+        //   }
+        // }
       },
-      $(go.Shape, "RoundedRectangle", roundedRectangleParams,
-        { name: "SHAPE", fill: "#ffffff", strokeWidth: 0 },
-        // gold if highlighted, white otherwise
-        new go.Binding("fill", "isHighlighted", h => h ? "gold" : "#ffffff").ofObject()
-      ),
-      $(go.Panel, "Vertical",
-        $(go.Panel, "Horizontal",
-          { margin: 8 },
-          $(go.Picture,  // flag image, only visible if a nation is specified
-            { margin: mr8, visible: false, desiredSize: new go.Size(50, 50) },
-            new go.Binding("source", "nation", theNationFlagConverter),
-            new go.Binding("visible", "nation", nat => nat !== undefined)
-          ),
-          $(go.Panel, "Table",
-            $(go.TextBlock,
-              {
-                row: 0, alignment: go.Spot.Left,
-                font: "16px Roboto, sans-serif",
-                stroke: "rgba(0, 0, 0, .87)",
-                maxSize: new go.Size(160, NaN)
-              },
-              new go.Binding("text", "name")
-            ),
-            $(go.TextBlock, textStyle("title"),
-              {
-                row: 1, alignment: go.Spot.Left,
-                maxSize: new go.Size(160, NaN)
-              },
-              new go.Binding("text", "title")
-            ),
-            $("PanelExpanderButton", "INFO",
-              { row: 0, column: 1, rowSpan: 2, margin: ml8 }
-            )
-          )
-        ),
-        $(go.Shape, "LineH",
-          {
-            stroke: "rgba(0, 0, 0, .60)", strokeWidth: 1,
-            height: 1, stretch: go.GraphObject.Horizontal
-          },
-          new go.Binding("visible").ofObject("INFO")  // only visible when info is expanded
-        ),
-        $(go.Panel, "Vertical",
-          {
-            name: "INFO",  // identify to the PanelExpanderButton
-            stretch: go.GraphObject.Horizontal,  // take up whole available width
-            margin: 8,
-            defaultAlignment: go.Spot.Left,  // thus no need to specify alignment on each element
-          },
-          $(go.TextBlock, textStyle("headOf"),
-            new go.Binding("text", "headOf", head => "Head of: " + head)
-          ),
-          $(go.TextBlock, textStyle("boss"),
-            new go.Binding("margin", "headOf", head => mt8), // some space above if there is also a headOf value
-            new go.Binding("text", "boss", boss => {
-              var boss = myDiagram.model.findNodeDataForKey(boss);
-              if (boss !== null) {
-                return "Reporting to: " + boss.name;
-              }
-              return "";
-            })
-          )
-        )
-      )
-    );
+      $("TreeExpanderButton",
+        {
+          width: 14,
+          "ButtonBorder.fill": "whitesmoke",
+          "ButtonBorder.stroke": "lightgray",
+          "_buttonFillOver": "rgba(0,128,255,0.25)",
+          "_buttonStrokeOver": null,
+          "_buttonFillPressed": "rgba(0,128,255,0.4)"
+        }),
+      $(go.Panel, "Horizontal",
+        { position: new go.Point(16, 0), margin: new go.Margin(0, 20, 0, 0), defaultAlignment: go.Spot.Center },
+        new go.Binding("background", "isSelected", s => s ? "lightblue" : "white").ofObject(),
+        // $("TriStateCheckBoxButton"),
+        $(go.TextBlock,
+          { font: '9pt Verdana, sans-serif', margin: new go.Margin(0, 0, 0, 2) },
+          new go.Binding("text", "key", s => "item " + s))
+      )  // end Horizontal Panel
+    );  // end Node
 
-  // define the Link template, a simple orthogonal line
+  // without lines
+  //myDiagram.linkTemplate = $(go.Link);
+
+  // with lines
   myDiagram.linkTemplate =
-    $(go.Link, go.Link.Orthogonal,
-      { corner: 5, selectable: false },
-      $(go.Shape, { strokeWidth: 3, stroke: "#424242" }));  // dark gray, rounded corner links
-
-
-  // set up the nodeDataArray, describing each person/position
-  var nodeDataArray = [
-    { key: 0, name: "Ban Ki-moon 반기문", nation: "SouthKorea", title: "Secretary-General of the United Nations", headOf: "Secretariat" },
-    { key: 1, boss: 0, name: "Patricia O'Brien", nation: "Ireland", title: "Under-Secretary-General for Legal Affairs and United Nations Legal Counsel", headOf: "Office of Legal Affairs" },
-    { key: 3, boss: 1, name: "Peter Taksøe-Jensen", nation: "Denmark", title: "Assistant Secretary-General for Legal Affairs" },
-    { key: 9, boss: 3, name: "Other Employees" },
-    { key: 4, boss: 1, name: "Maria R. Vicien - Milburn", nation: "Argentina", title: "General Legal Division Director", headOf: "General Legal Division" },
-    { key: 10, boss: 4, name: "Other Employees" },
-    { key: 5, boss: 1, name: "Václav Mikulka", nation: "CzechRepublic", title: "Codification Division Director", headOf: "Codification Division" },
-    { key: 11, boss: 5, name: "Other Employees" },
-    { key: 6, boss: 1, name: "Sergei Tarassenko", nation: "Russia", title: "Division for Ocean Affairs and the Law of the Sea Director", headOf: "Division for Ocean Affairs and the Law of the Sea" },
-    { key: 12, boss: 6, name: "Alexandre Tagore Medeiros de Albuquerque", nation: "Brazil", title: "Chairman of the Commission on the Limits of the Continental Shelf", headOf: "The Commission on the Limits of the Continental Shelf" },
-    { key: 17, boss: 12, name: "Peter F. Croker", nation: "Ireland", title: "Chairman of the Committee on Confidentiality", headOf: "The Committee on Confidentiality" },
-    { key: 31, boss: 17, name: "Michael Anselme Marc Rosette", nation: "Seychelles", title: "Vice Chairman of the Committee on Confidentiality" },
-    { key: 32, boss: 17, name: "Kensaku Tamaki", nation: "Japan", title: "Vice Chairman of the Committee on Confidentiality" },
-    { key: 33, boss: 17, name: "Osvaldo Pedro Astiz", nation: "Argentina", title: "Member of the Committee on Confidentiality" },
-    { key: 34, boss: 17, name: "Yuri Borisovitch Kazmin", nation: "Russia", title: "Member of the Committee on Confidentiality" },
-    { key: 18, boss: 12, name: "Philip Alexander Symonds", nation: "Australia", title: "Chairman of the Committee on provision of scientific and technical advice to coastal States", headOf: "Committee on provision of scientific and technical advice to coastal States" },
-    { key: 35, boss: 18, name: "Emmanuel Kalngui", nation: "Cameroon", title: "Vice Chairman of the Committee on provision of scientific and technical advice to coastal States" },
-    { key: 36, boss: 18, name: "Sivaramakrishnan Rajan", nation: "India", title: "Vice Chairman of the Committee on provision of scientific and technical advice to coastal States" },
-    { key: 37, boss: 18, name: "Francis L. Charles", nation: "TrinidadAndTobago", title: "Member of the Committee on provision of scientific and technical advice to costal States" },
-    { key: 38, boss: 18, name: "Mihai Silviu German", nation: "Romania", title: "Member of the Committee on provision of scientific and technical advice to costal States" },
-    { key: 19, boss: 12, name: "Lawrence Folajimi Awosika", nation: "Nigeria", title: "Vice Chairman of the Commission on the Limits of the Continental Shelf" },
-    { key: 20, boss: 12, name: "Harald Brekke", nation: "Norway", title: "Vice Chairman of the Commission on the Limits of the Continental Shelf" },
-    { key: 21, boss: 12, name: "Yong-Ahn Park", nation: "SouthKorea", title: "Vice Chairman of the Commission on the Limits of the Continental Shelf" },
-    { key: 22, boss: 12, name: "Abu Bakar Jaafar", nation: "Malaysia", title: "Chairman of the Editorial Committee", headOf: "Editorial Committee" },
-    { key: 23, boss: 12, name: "Galo Carrera Hurtado", nation: "Mexico", title: "Chairman of the Training Committee", headOf: "Training Committee" },
-    { key: 24, boss: 12, name: "Indurlall Fagoonee", nation: "Mauritius", title: "Member of the Commission on the Limits of the Continental Shelf" },
-    { key: 25, boss: 12, name: "George Jaoshvili", nation: "Georgia", title: "Member of the Commission on the Limits of the Continental Shelf" },
-    { key: 26, boss: 12, name: "Wenzhang Lu", nation: "China", title: "Member of the Commission on the Limits of the Continental Shelf" },
-    { key: 27, boss: 12, name: "Isaac Owusu Orudo", nation: "Ghana", title: "Member of the Commission on the Limits of the Continental Shelf" },
-    { key: 28, boss: 12, name: "Fernando Manuel Maia Pimentel", nation: "Portugal", title: "Member of the Commission on the Limits of the Continental Shelf" },
-    { key: 7, boss: 1, name: "Renaud Sorieul", nation: "France", title: "International Trade Law Division Director", headOf: "International Trade Law Division" },
-    { key: 13, boss: 7, name: "Other Employees" },
-    { key: 8, boss: 1, name: "Annebeth Rosenboom", nation: "Netherlands", title: "Treaty Section Chief", headOf: "Treaty Section" },
-    { key: 14, boss: 8, name: "Bradford Smith", nation: "UnitedStates", title: "Substantive Legal Issues Head", headOf: "Substantive Legal Issues" },
-    { key: 29, boss: 14, name: "Other Employees" },
-    { key: 15, boss: 8, name: "Andrei Kolomoets", nation: "Russia", title: "Technical/Legal Issues Head", headOf: "Technical/Legal Issues" },
-    { key: 30, boss: 15, name: "Other Employees" },
-    { key: 16, boss: 8, name: "Other Employees" },
-    { key: 2, boss: 0, name: "Heads of Other Offices/Departments" }
-  ];
-
-  // create the Model with data for the tree, and assign to the Diagram
-  myDiagram.model =
-    new go.TreeModel(
+    $(go.Link,
       {
-        nodeParentKeyProperty: "boss",  // this property refers to the parent node data
-        nodeDataArray: nodeDataArray
-      });
+        selectable: false,
+        routing: go.Link.Orthogonal,
+        fromEndSegmentLength: 4,
+        toEndSegmentLength: 4,
+        fromSpot: new go.Spot(0.001, 1, 7, 0),
+        toSpot: go.Spot.Left
+      },
+      $(go.Shape,
+        { stroke: 'gray', strokeDashArray: [1, 2] }));
 
-  // Overview
-  myOverview =
-    new go.Overview("myOverviewDiv",  // the HTML DIV element for the Overview
-      { observed: myDiagram, contentAlignment: go.Spot.Center });   // tell it which Diagram to show and pan
+  // create a random tree
+  var nodeDataArray = [{ key: 0 }];
+  var max = 25;
+  var count = 0;
+  while (count < max) {
+    count = makeTree(3, count, max, nodeDataArray, nodeDataArray[0]);
+  }
+  console.log(nodeDataArray);
+  nodeDataArray = [
+    { key: 0, },
+    { key: 1, parent: 0 },
+    { key: "AA", parent: 0 },
+    { key: "345", parent: "AA" },
+  ]
+  myDiagram.model = new go.TreeModel(nodeDataArray);
 }
 
-// the Search functionality highlights all of the nodes that have at least one data property match a RegExp
-function searchDiagram() {  // called by button
-  var input = document.getElementById("mySearch");
-  if (!input) return;
-  myDiagram.focus();
-
-  myDiagram.startTransaction("highlight search");
-
-  if (input.value) {
-    // search four different data properties for the string, any of which may match for success
-    // create a case insensitive RegExp from what the user typed
-    var safe = input.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    var regex = new RegExp(safe, "i");
-    var results = myDiagram.findNodesByExample({ name: regex },
-      { nation: regex },
-      { title: regex },
-      { headOf: regex });
-    myDiagram.highlightCollection(results);
-    // try to center the diagram at the first node that was found
-    if (results.count > 0) myDiagram.centerRect(results.first().actualBounds);
-  } else {  // empty string only clears highlighteds collection
-    myDiagram.clearHighlighteds();
+function makeTree(level, count, max, nodeDataArray, parentdata) {
+  var numchildren = Math.floor(Math.random() * 10);
+  for (var i = 0; i < numchildren; i++) {
+    if (count >= max) return count;
+    count++;
+    var childdata = { key: count, parent: parentdata.key, value: 123 };
+    nodeDataArray.push(childdata);
+    if (level > 0 && Math.random() > 0.5) {
+      count = makeTree(level - 1, count, max, nodeDataArray, childdata);
+    }
   }
-
-  myDiagram.commitTransaction("highlight search");
+  return count;
 }
 window.addEventListener('DOMContentLoaded', init);

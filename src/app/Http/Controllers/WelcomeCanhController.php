@@ -30,6 +30,9 @@ class WelcomeCanhController extends Controller
         $results = [];
         $showOptions = $this->getUserSettingsViewOrgChart();
         $this->x($tree,$results,$this->getOptionsRenderByUserSetting($showOptions));
+        usort($results,function($a,$b){
+            return strcmp($a['name'],$b['name']);
+        });
         return view(
             'welcome-canh',
             ['dataSource'=> $results,'showOptions'=>$showOptions]
@@ -53,7 +56,8 @@ class WelcomeCanhController extends Controller
         }
     }
     private function convertDataSource($value,$options){
-        if(in_array($value->resigned,$options['resigned']) && in_array($value->time_keeping_type,$options['time_keeping_type'])){
+        if(in_array($value->resigned,$options['resigned']) 
+            && in_array($value->time_keeping_type,$options['time_keeping_type'])){
             $user = User::findFromCache($value->id);
             $positionRendered = $user->position_rendered;
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
@@ -62,10 +66,13 @@ class WelcomeCanhController extends Controller
                 'name' => $value->name,
                 'parent' => $value->parent_id,
                 'avatar' => $avatar,
-                'fill' => $value->resigned == 1 ? '#d1d5db' : "#ffffff",
+                'fill' => $this->getFillColor($value),
                 'title' => $positionRendered,
             ];
         }
+    }
+    private function getFillColor($item){
+        return $item->resigned == 1 ? '#d1d5db' : ($item->time_keeping_type == 3 ? "#fed7aa" : "#ffffff");
     }
     private function getOptionsRenderByUserSetting($showOptions){
         $results = [
