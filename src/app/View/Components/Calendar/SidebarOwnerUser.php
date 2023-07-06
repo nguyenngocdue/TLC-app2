@@ -19,8 +19,8 @@ class SidebarOwnerUser extends Component
     public function __construct(
         private $type,
         private $timesheetableType = null,
-        private $timesheetableId = null,)
-    {
+        private $timesheetableId = null,
+    ) {
         //
     }
 
@@ -34,6 +34,6 @@ class SidebarOwnerUser extends Component
         $ownerId = ($this->timesheetableType)::findFromCache($this->timesheetableId)->owner_id ?? CurrentUser::id();
         $user = json_encode(User::findFromCache($ownerId));
         $htmlUserRender =  Blade::render("<x-renderer.avatar-user>$user</x-renderer.avatar-user>") ?? '';
-        return "<x-renderer.card title='TImeSheet Owner User'>$htmlUserRender</x-renderer.card>";
+        return "<x-renderer.card title='TimeSheet Owner'>$htmlUserRender</x-renderer.card>";
     }
 }
