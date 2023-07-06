@@ -16,7 +16,13 @@
                                 >
                                 Task List
                             </x-renderer.button>
-                            <x-modals.modal-task-list modalId='modal-task-list' nodeTreeArray="{!! $nodeTreeArray !!}" selectedUser="{{$ownerId}}"/>
+                            <x-modals.modal-task-list 
+                                modalId='modal-task-list' 
+                                nodeProjectTreeArray="{!! $nodeProjectTreeArray !!}" 
+                                nodeTaskTreeArray="{!! $nodeTaskTreeArray !!}" 
+                                selectedUser="{{$ownerId}}"
+                                :userCurrentCalendar="$userCurrentCalendar"
+                                />
                         </div>
                     </x-renderer.card>
             </div>

@@ -48,12 +48,6 @@ class Pj_task extends ModelExtended
 
         $tasks = $tasks->whereNotIn('id', ['mail_checking' => 4, 'meeting' => 5, 'other' => 6, 'training' => 8]);
 
-        // $projects = Project::with('getSubProjects')->orderBy('name')->get();
-        // foreach ($projects as $project) {
-        // $subProjects = $project->getSubProjects->sortBy('name');
-        // $subProjects = Sub_project::all();
-        // foreach ($subProjects as $subProject) {
-        // dump($subProject->name);
         $tree = [
             ["key" => 0, "name" => "Any Project"],
         ];
@@ -61,21 +55,20 @@ class Pj_task extends ModelExtended
             foreach ($tasks as $task) {
                 $allLodsOfThisTask = $task->getLodsOfTask()->pluck('id')->toArray();
                 if (in_array($lod->id, $allLodsOfThisTask)) {
-                    $lodKey = "lod" . $lod->id;
+                    $lodKey = "lod_" . $lod->id;
                     $tree[$lodKey] = ['key' => $lodKey, "name" => $lod->name, "parent" => 0];
-                    $taskKey = "task" . $task->id;
-                    $tree[$taskKey] = ['key' => $taskKey, "name" => $task->name, "parent" => $lodKey];
+                    $taskKey = "task_" . $task->id;
+                    $tree[$taskKey . "+" . $lodKey] = ['key' => $taskKey, "name" => $task->name, "parent" => $lodKey];
                     $subTasks = $task->getChildrenSubTasks()->pluck('name', 'id');
                     // dump($subTasks);
                     foreach ($subTasks as $subTaskId => $subTaskName) {
-                        $subTaskKey = "subtask" . $subTaskId;
+                        $subTaskKey = "subtask_" . $subTaskId;
                         $tree[$subTaskKey] = ["key" => $subTaskKey, "name" => $subTaskName, "parent" => $taskKey,];
                     }
                 }
             }
         }
         // dump($tree);
-
         return $tree;
     }
 }
