@@ -17,21 +17,20 @@
         <!-- Modal body -->
         <div class="px-6 overflow-y-auto w-96 h-96" modal-container>
             <div class="grid grid-cols-12">
-                {{-- <div class="col-span-12 mt-2">
-                    <x-calendar.modal-filter-project tableName="projects" name="project_id" id="project_id" typeToLoadListener="hr_timesheet_line"/>
-                </div>
                 <div class="col-span-12 mt-2">
+                    Project: <x-calendar.modal-filter-project tableName="projects" name="project_id" id="project_id" typeToLoadListener="hr_timesheet_line"/>
+                </div>
+                 <div class="col-span-12 mt-2">
                     Sub Project:<x-calendar.modal-filter-sub-project tableName="sub_projects" name="sub_project_id" id="sub_project_id" typeToLoadListener="hr_timesheet_line" />
                 </div>
                 <div class="col-span-12 mt-2">
-                    LOD:<x-calendar.modal-filter-lod tableName="terms" name="lod_id" id="lod_id_1" typeToLoadListener="hr_timesheet_line" />
+                    LOD:<x-calendar.modal-filter-lod tableName="terms" name="lod_id" id="lod_id" typeToLoadListener="hr_timesheet_line" />
+                </div>
+                <div class="col-span-12 mt-2 hidden">
+                    Discipline:<x-calendar.modal-filter-discipline tableName="user_disciplines" name="discipline_id" id="discipline_id" typeToLoadListener="hr_timesheet_line" />
                 </div>
                 <div class="col-span-12 mt-2">
-                    Discipline:<x-calendar.modal-filter-discipline tableName="user_disciplines" name="discipline_id" id="discipline_id_1" typeToLoadListener="hr_timesheet_line" />
-                </div> --}}
-                <div class="col-span-12 mt-2">
-                    Task: <x-calendar.modal-filter-task tableName="pj_tasks" name="task_id_1" typeToLoadListener="hr_timesheet_line" />
-                    {{-- <input name="task_id_1" id="task_id_1" onchange="onChangeDropdown2('task_id_1')" type="hidden" /> --}}
+                    Task: <x-calendar.modal-filter-task tableName="pj_tasks" name="task_id" typeToLoadListener="hr_timesheet_line" />
                 </div>
                 <div class="col-span-12 mt-2">
                     Sub task: <x-calendar.modal-filter-sub-task tableName="pj_sub_tasks" name="sub_task_id" typeToLoadListener="hr_timesheet_line"/>

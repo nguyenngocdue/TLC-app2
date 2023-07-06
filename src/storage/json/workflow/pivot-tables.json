@@ -152,5 +152,9 @@
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh",
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_categories,\r\nuser_types,\r\nsub_projects",
         "sort_by": null
+    },
+    "apple_store_empty_input": {
+        "name": "apple_store_empty_input",
+        "title": "Empty Input"
     }
 }

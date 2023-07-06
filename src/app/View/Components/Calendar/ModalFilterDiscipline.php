@@ -37,13 +37,6 @@ class ModalFilterDiscipline extends Component
             ->get();
         return $dataSource;
     }
-    // private function getListenersOfDropdown2()
-    // {
-    //     $a = $this->getListeners2($this->typeToLoadListener);
-    //     $a = array_values(array_filter($a, fn ($x) => $x['column_name'] . "_1" == $this->name));
-    //     $listenersOfDropdown2 = [$a[0]];
-    //     return $listenersOfDropdown2;
-    // }
 
     /**
      * Get the view / contents that represent the component.

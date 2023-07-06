@@ -37,14 +37,14 @@ class ModalFilterSubTask extends Component
         return $dataSource;
     }
 
-    private function getListenersOfDropdown2()
-    {
-        $a = $this->getListeners2($this->typeToLoadListener);
-        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $this->name));
-        foreach ($a[0]["triggers"] as &$x) $x .= "_1";
-        $listenersOfDropdown2 = [$a[0]];
-        return $listenersOfDropdown2;
-    }
+    // private function getListenersOfDropdown2()
+    // {
+    //     $a = $this->getListeners2($this->typeToLoadListener);
+    //     $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $this->name));
+    //     foreach ($a[0]["triggers"] as &$x) $x .= "_1";
+    //     $listenersOfDropdown2 = [$a[0]];
+    //     return $listenersOfDropdown2;
+    // }
 
     /**
      * Get the view / contents that represent the component.
