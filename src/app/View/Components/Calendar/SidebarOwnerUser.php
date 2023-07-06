@@ -8,7 +8,7 @@ use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
-class SidebarSelectedUser extends Component
+class SidebarOwnerUser extends Component
 {
     use TraitViewAllFunctions;
     /**
@@ -16,7 +16,10 @@ class SidebarSelectedUser extends Component
      *
      * @return void
      */
-    public function __construct(private $type)
+    public function __construct(
+        private $type,
+        private $timesheetableType = null,
+        private $timesheetableId = null,)
     {
         //
     }
@@ -28,10 +31,9 @@ class SidebarSelectedUser extends Component
      */
     public function render()
     {
-        [, $filterViewAllCalendar] = $this->getUserSettingsViewAllCalendar();
-        $ownerId = isset($filterViewAllCalendar['owner_id']) ? $filterViewAllCalendar['owner_id'][0] : CurrentUser::id();
+        $ownerId = ($this->timesheetableType)::findFromCache($this->timesheetableId)->owner_id ?? CurrentUser::id();
         $user = json_encode(User::findFromCache($ownerId));
         $htmlUserRender =  Blade::render("<x-renderer.avatar-user>$user</x-renderer.avatar-user>") ?? '';
-        return "<x-renderer.card title='Selected User'>$htmlUserRender</x-renderer.card>";
+        return "<x-renderer.card title='TImeSheet Owner User'>$htmlUserRender</x-renderer.card>";
     }
 }

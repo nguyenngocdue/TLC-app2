@@ -3,11 +3,12 @@
 namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Pj_task;
+use App\Models\User_discipline;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class SidebarTask extends Component
+
+class ModalFilterDiscipline extends Component
 {
     use TraitListenerControl;
     /**
@@ -16,32 +17,33 @@ class SidebarTask extends Component
      * @return void
      */
     public function __construct(
+        private $id,
         private $name,
         private $tableName,
         private $selected = "",
-        private $multiple = true,
+        private $multiple = false,
         private $readOnly = false,
-        // private $control = 'dropdown2',
-        private $control = 'draggable-event2',
-        // private $control = 'radio-or-checkbox2',
+        private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
-        private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
+        private $typeToLoadListener = null,
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
     private function getDataSource()
     {
-        // $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
-        $dataSource = Pj_task::select('id', 'name', 'description')
+        $dataSource = User_discipline::select('id', 'name', 'description')
             ->orderBy('name')
             ->get();
-        foreach ($dataSource as &$line) {
-            $line->{"getDisciplinesOfTask()"} = $line->getDisciplinesOfTask()->pluck('id');
-            $line->{"getLodsOfTask()"} = $line->getLodsOfTask()->pluck('id');
-        }
         return $dataSource;
     }
+    // private function getListenersOfDropdown2()
+    // {
+    //     $a = $this->getListeners2($this->typeToLoadListener);
+    //     $a = array_values(array_filter($a, fn ($x) => $x['column_name'] . "_1" == $this->name));
+    //     $listenersOfDropdown2 = [$a[0]];
+    //     return $listenersOfDropdown2;
+    // }
 
     /**
      * Get the view / contents that represent the component.

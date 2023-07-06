@@ -228,6 +228,11 @@ class RelationshipRenderer2 extends Component
                 $typeEdit = substr($type, $index + 1);
                 $apiUrl = route($typeEdit . '.index');
                 $token = CurrentUser::getTokenForApi();
+                $statusTimeSheet = $modelPath::findFromCache($id)->status ?? null;
+                $hasRenderSidebar = true;
+                if($statusTimeSheet && in_array($statusTimeSheet,['pending_approval','approved'])){
+                    $hasRenderSidebar = false;
+                }
                 return view('components.calendar.calendar-grid', [
                     'timesheetableType' => $modelPath,
                     'timesheetableId' => $id,
@@ -235,6 +240,7 @@ class RelationshipRenderer2 extends Component
                     'readOnly' => $this->readOnly,
                     'arrHidden' => $arrHidden,
                     'type' => $type,
+                    'hasRenderSidebar' => $hasRenderSidebar,
                 ]);
             case "many_icons":
                 $colSpan =  Helper::getColSpan($colName, $type);

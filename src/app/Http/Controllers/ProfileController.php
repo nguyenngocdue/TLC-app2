@@ -16,17 +16,15 @@ class ProfileController extends EntityCRUDController
     {
         return "Profile";
     }
-
     protected function getEditTitle()
     {
         $id = CurrentRoute::getEntityId($this->type);
         return $id ? "Profile" : "Me";
     }
-
     private function overrideStandardProfileFields($allProps)
     {
         $libProfileFields = LibProfileFields::getAll();
-        $viewRender = 'me';
+        $viewRender = $this->getViewRender();
         if ($viewRender) {
             foreach ($allProps as $propKey => &$value) {
                 foreach ($libProfileFields as $field) {
@@ -39,24 +37,25 @@ class ProfileController extends EntityCRUDController
         }
         return $allProps;
     }
-
     protected function getSuperProps()
     {
         $result = SuperProps::getFor($this->type);
         $result['props'] = $this->overrideStandardProfileFields($result['props']);
         return $result;
     }
-
     protected function assignDynamicTypeCreateEdit()
     {
         $this->type = 'users';
         $this->data = Str::modelPathFrom('users');
         $this->permissionMiddleware = $this->makePermissionMiddleware('users');
     }
-
+    private function getViewRender(){
+        $id = CurrentRoute::getEntityId($this->type);
+        return $id ? "profile" : "me";
+    }
     public function profile(Request $request, $id = null)
     {
-        $viewRender = $id ? "profile" : "me";
+        $viewRender = $this->getViewRender();
         $readOnly = $id ? true : false;
         $id = $id ?? CurrentUser::id();
         return $this->edit($request, $id, $viewRender, $readOnly);

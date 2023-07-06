@@ -3,11 +3,11 @@
 namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Pj_task;
+use App\Models\Project;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class SidebarTask extends Component
+class ModalFilterProject extends Component
 {
     use TraitListenerControl;
     /**
@@ -16,31 +16,24 @@ class SidebarTask extends Component
      * @return void
      */
     public function __construct(
+        private $id,
         private $name,
         private $tableName,
         private $selected = "",
-        private $multiple = true,
+        private $multiple = false,
+        private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $readOnly = false,
-        // private $control = 'dropdown2',
-        private $control = 'draggable-event2',
-        // private $control = 'radio-or-checkbox2',
         private $allowClear = false,
-        private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
     ) {
+        // if (old($name)) $this->selected = old($name);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
     private function getDataSource()
     {
-        // $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
-        $dataSource = Pj_task::select('id', 'name', 'description')
+        return Project::select('id', 'name', 'description')
             ->orderBy('name')
             ->get();
-        foreach ($dataSource as &$line) {
-            $line->{"getDisciplinesOfTask()"} = $line->getDisciplinesOfTask()->pluck('id');
-            $line->{"getLodsOfTask()"} = $line->getLodsOfTask()->pluck('id');
-        }
-        return $dataSource;
     }
 
     /**
@@ -53,6 +46,6 @@ class SidebarTask extends Component
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
         // dump($params);
-        return view('components.controls.has-data-source.' . $this->control, $params);
+        return view('components.controls.has-data-source.dropdown2', $params);
     }
 }

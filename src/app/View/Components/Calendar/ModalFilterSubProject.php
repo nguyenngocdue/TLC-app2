@@ -3,11 +3,11 @@
 namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Pj_task;
+use App\Models\Sub_project;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class SidebarTask extends Component
+class ModalFilterSubProject extends Component
 {
     use TraitListenerControl;
     /**
@@ -16,14 +16,13 @@ class SidebarTask extends Component
      * @return void
      */
     public function __construct(
+        private $id,
         private $name,
         private $tableName,
         private $selected = "",
-        private $multiple = true,
+        private $multiple = false,
         private $readOnly = false,
-        // private $control = 'dropdown2',
-        private $control = 'draggable-event2',
-        // private $control = 'radio-or-checkbox2',
+        private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
         private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
     ) {
@@ -32,14 +31,9 @@ class SidebarTask extends Component
 
     private function getDataSource()
     {
-        // $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
-        $dataSource = Pj_task::select('id', 'name', 'description')
+        $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')
             ->orderBy('name')
             ->get();
-        foreach ($dataSource as &$line) {
-            $line->{"getDisciplinesOfTask()"} = $line->getDisciplinesOfTask()->pluck('id');
-            $line->{"getLodsOfTask()"} = $line->getLodsOfTask()->pluck('id');
-        }
         return $dataSource;
     }
 

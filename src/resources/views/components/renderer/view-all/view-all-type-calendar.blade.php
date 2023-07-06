@@ -6,7 +6,24 @@
         <div class="grid lg:grid-cols-12 gap-2 mx-2">
             <div class="md:col-span-4 flex">
                     <x-renderer.card class="w-full border bg-white p-2" title="Selected view">
-                    <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
+                        <div class="flex">
+                            <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
+                            <x-renderer.button 
+                                class="w-40" 
+                                icon="fa-duotone fa-briefcase" 
+                                click="toggleModal('modal-task-list')"
+                                keydown="closeModal('modal-task-list')"
+                                >
+                                Task List
+                            </x-renderer.button>
+                            <x-modals.modal-task-list 
+                                modalId='modal-task-list' 
+                                nodeProjectTreeArray="{!! $nodeProjectTreeArray !!}" 
+                                nodeTaskTreeArray="{!! $nodeTaskTreeArray !!}" 
+                                selectedUser="{{$ownerId}}"
+                                :userCurrentCalendar="$userCurrentCalendar"
+                                />
+                        </div>
                     </x-renderer.card>
             </div>
             <div class="md:col-span-2">
@@ -307,18 +324,20 @@
                 day = padNumber(day);
                 dateTime = `${yearCurrent}-${month}-${day}`;
                 week = moment(dateTime).isoWeek();
-                console.log(week + `=====>` + month +`=====>` + day)
-                console.log(timesheet.week_value)
+                startOfWeek = moment(dateTime).isoWeekday(1).format('YYYY-MM-DD');
                 if(week == timesheet.week_value){
                     classHover = `hover-${week}-${yearCurrent}`;
-                    // if(day == 26){
+                    if(day == 26){
                         if(dateTime == timesheet.week){
                             return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
-                        }else{
-                            return null;
                         }
-                    // }
-                    // return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
+                        return null;
+                    }else{
+                        if(timesheet.week == startOfWeek){
+                                return [timesheet.url,classHover,timesheet.id,timesheet.bg_color,timesheet.text_color,timesheet.count_duplicate];
+                        }
+                        return null;
+                    }
                 }
     }
     

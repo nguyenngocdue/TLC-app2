@@ -197,10 +197,12 @@
         var duplicateButton = modalClickRight.find('.duplicate-button');
         var setMorningButton = modalClickRight.find('.set-morning-button');
         var setAfternoonButton = modalClickRight.find('.set-afternoon-button');
+        var setFullDayButton = modalClickRight.find('.set-full-day-button');
         deleteButton.attr('value', info.event.id);
         duplicateButton.attr('value', info.event.id);
         setMorningButton.attr('value', info.event.id);
         setAfternoonButton.attr('value', info.event.id);
+        setFullDayButton.attr('value', info.event.id);
     }
 
     function closeModalEvent() {
@@ -256,15 +258,31 @@
                         'user_id': event.extendedProps.user_id,
                     }
                     break;
+                case 'full_day':
+                    data = {
+                        'start_time': event.startStr,
+                        'time_type': 'full_day',
+                        'user_id': event.extendedProps.user_id,
+                    }
+                    break;
                 default:
                     break;
             }
             callApi('patch', url, data, event, function(info, calendar, response) {
                 if (response.data) {
                     event.remove();
-                    calendar.addEvent(response.data)
-                    toastr.success('Set time for timesheet line successfully!');
+                    if(Array.isArray(response.data)) {
+                        response.data.forEach(value => {
+                            calendar.addEvent(value)
+                            toastr.success('Set time for timesheet line successfully!');
+                        });
+                    }else{
+                        console.log(response.data)
+                        calendar.addEvent(response.data)
+                        toastr.success('Set time for timesheet line successfully!');
+                    }
                     modalClickRight.addClass('hidden')
+                    
                 }
             }, calendar, null, modalClickRight);
         } else {
