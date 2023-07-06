@@ -18,7 +18,14 @@ class User_discipline extends ModelExtended
 
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
+        "getTasksOfDiscipline()" => ["getCheckedByField", Pj_task::class],
     ];
+
+    public function getTasksOfDiscipline()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
 
     public function getUsers()
     {

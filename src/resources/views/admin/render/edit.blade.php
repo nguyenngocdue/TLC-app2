@@ -14,7 +14,7 @@
                     </h3>
                     <button
                         class="float-right ml-auto border-0 bg-transparent p-1 text-3xl font-semibold leading-none text-black opacity-5 outline-none focus:outline-none"
-                        onclick="toggleModal('modal-id')" type="button">
+                        onclick="toggleModalPermission('modal-id')" type="button">
                         <span
                             class="block h-6 w-6 bg-transparent text-2xl text-black opacity-5 outline-none focus:outline-none">
                             ×
@@ -42,12 +42,12 @@
                 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 p-2">
                     <button
                         class="background-transparent mr-1 mb-1 px-6 py-2 text-sm font-bold uppercase text-red-500 outline-none transition-all duration-150 ease-linear focus:outline-none"
-                        type="button" onclick="toggleModal('modal-id')">
+                        type="button" onclick="toggleModalPermission('modal-id')">
                         Close
                     </button>
                     <button
                         class="mr-1 mb-1 rounded bg-emerald-500 p-3 text-sm font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none active:bg-emerald-600"
-                        type="submit" onclick="toggleModal('modal-id')">
+                        type="submit" onclick="toggleModalPermission('modal-id')">
                         Update Role
                     </button>
                 </div>
@@ -58,7 +58,7 @@
 </div>
 <div class="fixed inset-0 z-0 hidden bg-black opacity-25" id="modal-id-backdrop"></div>
 <script type="text/javascript">
-    function toggleModal(modalID) {
+    function toggleModalPermission(modalID) {
         document.getElementById(modalID).classList.toggle("hidden");
         document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
         document.getElementById(modalID).classList.toggle("flex");

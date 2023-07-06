@@ -24,14 +24,14 @@
         "column_name": "owner_id",
         "new": "true"
     },
-    "_getLods()": {
-        "name": "_getLods()",
-        "column_name": "getLods()",
+    "_getLodsOfTask()": {
+        "name": "_getLodsOfTask()",
+        "column_name": "getLodsOfTask()",
         "new": "true"
     },
-    "_getDisciplines()": {
-        "name": "_getDisciplines()",
-        "column_name": "getDisciplines()",
+    "_getDisciplinesOfTask()": {
+        "name": "_getDisciplinesOfTask()",
+        "column_name": "getDisciplinesOfTask()",
         "new": "true"
     },
     "_status": {

@@ -32,8 +32,8 @@ class ModalFilterTask extends Component
     {
         $dataSource = Pj_task::select('id', 'name', 'description')->get();
         foreach ($dataSource as &$line) {
-            $line->{"getDisciplines()"} = $line->getDisciplines()->pluck('id');
-            $line->{"getLods()"} = $line->getLods()->pluck('id');
+            $line->{"getDisciplinesOfTask()"} = $line->getDisciplinesOfTask()->pluck('id');
+            $line->{"getLodsOfTask()"} = $line->getLodsOfTask()->pluck('id');
         }
         return $dataSource;
     }
