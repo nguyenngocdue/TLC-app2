@@ -81,29 +81,45 @@ class Workplace extends ModelExtended
         return $endBreakTime->format('H:i:s');
     }
 
-    public function getTotalWorkingHoursOfMonth($month)
+    public function getTotalWorkingHoursOfYear($year)
     {
         $allWorkers = $this->getUsers->pluck('id');
-        $workingHours = User::getTotalWorkingHoursOfMonth($allWorkers, $month);
-        $overtimeHours = User::getTotalOvertimeHoursOfMonth($allWorkers, $month);
-        $result = [];
-        foreach ($allWorkers as $uid) {
-            $total = 0;
-            if (isset($workingHours[$uid])) {
-                $result[$uid]['working_hours'] = $workingHours[$uid]->working_hours;
-                $total += $workingHours[$uid]->working_hours;
-            }
-            if (isset($overtimeHours[$uid])) {
-                $result[$uid]['working_hours'] = $overtimeHours[$uid]->ot_hours;
-                $total += $overtimeHours[$uid]->ot_hours;
-            }
-            if ($total) {
-                $result[$uid]['total'] = $total;
+        $workingHours = User::getTotalWorkingHoursOfYear($allWorkers, $year);
+        $overtimeHours = User::getTotalOvertimeHoursOfYear($allWorkers, $year);
+
+        $result0 = [];
+        $months = [
+            "$year-01", "$year-02", "$year-03", "$year-04", "$year-05", "$year-06",
+            "$year-07", "$year-08", "$year-09", "$year-10", "$year-11", "$year-12"
+        ];
+        foreach ($months as $month) {
+            foreach ($allWorkers as $uid) {
+                $total = 0;
+                $key = $uid . "_" . $month;
+                if (isset($workingHours[$key])) {
+                    $result0[$key]['working_hours'] = $workingHours[$key]->working_hours;
+                    $result0[$key]['month'] = $workingHours[$key]->month0;
+                    $total += $workingHours[$key]->working_hours;
+                }
+                if (isset($overtimeHours[$key])) {
+                    $result0[$key]['overtime_hours'] = $overtimeHours[$key]->ot_hours;
+                    $result0[$key]['month'] = $overtimeHours[$key]->month0;
+                    $total += $overtimeHours[$key]->ot_hours;
+                }
+                if ($total > 0) {
+                    $result0[$key]['total'] = $total;
+                }
             }
         }
-        return array_sum(array_map(fn ($u) => $u['total'], $result));
-        // uasort($result, fn ($a, $b) => - ($a['total'] <=> $b['total']));
-        // dump($workingHours);
+        // dump($result);
+        $result = [];
+        foreach ($result0 as $r) {
+            if (!isset($result[$r['month']])) {
+                $result[$r['month']] = 0;
+            }
+            $result[$r['month']] += $r['total'] ?? 0;
+        }
+        // dump($result);
         return $result;
     }
 }

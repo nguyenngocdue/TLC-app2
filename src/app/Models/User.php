@@ -310,11 +310,11 @@ class User extends Authenticatable implements LdapAuthenticatable
         return static::getCollection()[$id] ?? null;
     }
 
-    public static function getTotalWorkingHoursOfMonth($uids, $month)
+    public static function getTotalWorkingHoursOfYear($uids, $year)
     {
         // dump(join(",", $uids->toArray()));
         $uidsArray = join(",", $uids->toArray());
-        $sql = "SELECT line.user_id, sum(line.duration_in_min)/60 working_hours 
+        $sql = "SELECT line.user_id, left(tsw.ts_date,7) month0, sum(line.duration_in_min)/60 working_hours 
         FROM 
             `hr_timesheet_lines` line, 
             `hr_timesheet_workers` tsw
@@ -323,39 +323,38 @@ class User extends Authenticatable implements LdapAuthenticatable
             AND timesheetable_type='App\\\\Models\\\\Hr_timesheet_worker'
             AND tsw.deleted_at IS NULL
             AND line.deleted_at IS NULL
-            AND left(tsw.ts_date,7) = '$month'
+            AND LEFT(tsw.ts_date,4) = '$year'
             AND user_id IN ($uidsArray)
-        GROUP BY line.user_id
+        GROUP BY month0, line.user_id
         ORDER BY working_hours DESC
         ";
-        $result = DB::select($sql);
         $rows = DB::select($sql);
         // Log::info($sql);
         $result = [];
         foreach ($rows as $row) {
-            $result[$row->user_id] = $row;
+            $result[$row->user_id . "_" . $row->month0] = $row;
         }
         return $result;
     }
 
-    public static function getTotalOvertimeHoursOfMonth($uids, $month)
+    public static function getTotalOvertimeHoursOfYear($uids, $year)
     {
         // dump(join(",", $uids->toArray()));
         $uidsArray = join(",", $uids->toArray());
-        $sql = "SELECT line.user_id, sum(line.total_time) ot_hours 
+        $sql = "SELECT line.user_id, left(line.ot_date,7) month0, sum(line.total_time) ot_hours 
         FROM `hr_overtime_request_lines` line
         WHERE 1=1 
             AND line.deleted_at IS NULL
             AND line.user_id IN ($uidsArray)
-            AND LEFT(line.ot_date, 7) = '$month'            
-        GROUP BY line.user_id
+            AND LEFT(line.ot_date, 4) = '$year'            
+        GROUP BY month0, line.user_id
         ORDER BY ot_hours DESC
         ";
         $rows = DB::select($sql);
         // Log::info($sql);
         $result = [];
         foreach ($rows as $row) {
-            $result[$row->user_id] = $row;
+            $result[$row->user_id . "_" . $row->month0] = $row;
         }
         return $result;
     }
