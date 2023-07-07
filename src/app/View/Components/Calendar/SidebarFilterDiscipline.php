@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\User_discipline;
 use Illuminate\View\Component;
@@ -10,6 +11,7 @@ use Illuminate\Support\Arr;
 class SidebarFilterDiscipline extends Component
 {
     use TraitListenerControl;
+    use TraitGetSuffixListenerControl;
     /**
      * Create a new component instance.
      *
@@ -36,6 +38,10 @@ class SidebarFilterDiscipline extends Component
         return $dataSource;
     }
 
+    public function getSuffix()
+    {
+        return "_11111";
+    }
     /**
      * Get the view / contents that represent the component.
      *

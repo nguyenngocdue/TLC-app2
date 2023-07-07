@@ -9,6 +9,11 @@
         "column_name": "name",
         "new": "true"
     },
+    "_training_course_id": {
+        "name": "_training_course_id",
+        "column_name": "training_course_id",
+        "new": "true"
+    },
     "_description": {
         "name": "_description",
         "column_name": "description",
@@ -24,9 +29,9 @@
         "column_name": "facilitator_id",
         "new": "true"
     },
-    "_training_location": {
-        "name": "_training_location",
-        "column_name": "training_location",
+    "_training_location_id": {
+        "name": "_training_location_id",
+        "column_name": "training_location_id",
         "new": "true"
     },
     "_training_datetime": {
@@ -37,11 +42,6 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "new": "true"
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
         "new": "true"
     },
     "_owner_id": {

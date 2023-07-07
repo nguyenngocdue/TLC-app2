@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Term;
 use Database\Seeders\FieldSeeder;
@@ -11,6 +12,7 @@ use Illuminate\Support\Arr;
 class SidebarFilterLod extends Component
 {
     use TraitListenerControl;
+    use TraitGetSuffixListenerControl;
     /**
      * Create a new component instance.
      *
@@ -41,9 +43,25 @@ class SidebarFilterLod extends Component
         return $dataSource;
     }
 
-    private function getSuffix()
+    public function getSuffix()
     {
         return "_11111";
+    }
+
+    private function getListenersOfDropdown2()
+    {
+        $suffix = $this->getSuffix();
+        return [
+            [
+                'listen_action' => 'dot',
+                'column_name' => 'lod_id' . $suffix,
+                'listen_to_attrs' => ['lod_id'],
+                'listen_to_fields' => ['sub_project_id' . $suffix],
+                'listen_to_tables' => ['sub_projects'],
+                'table_name' => 'terms',
+                'triggers' => ['sub_project_id' . $suffix],
+            ],
+        ];
     }
 
     /**

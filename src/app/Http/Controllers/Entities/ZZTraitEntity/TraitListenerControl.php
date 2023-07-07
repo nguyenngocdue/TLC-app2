@@ -8,12 +8,7 @@ use Illuminate\Support\Facades\Log;
 trait TraitListenerControl
 {
     use TraitEntityListenDataSource;
-
-    private function getSuffix()
-    {
-        return "";
-    }
-
+    use TraitGetSuffixListenerControl;
     private function renderJSForK()
     {
         $tableName = $this->tableName;
@@ -35,14 +30,16 @@ trait TraitListenerControl
         $columnName = $this->id ?? $this->name;
         // Log::info($columnName);
         $suffix = $this->getSuffix();
-        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] . $suffix == $columnName));
+        $a = array_values(array_filter($a, fn ($x) => ($x['column_name'] . $suffix) == $columnName));
         if (!isset($a[0])) throw new \Exception("Can not find control with column_name as " . $columnName . ", maybe you forget getSuffix() function.");
         $a = $a[0];
 
         if ($suffix) {
             $a['column_name'] .= $suffix;
-            foreach ($a['triggers'] as &$trigger) $trigger .= $suffix;
+            foreach ($a['triggers'] as &$x) $x .= $suffix;
+            // foreach ($a['listen_to_fields'] as $x) $x .= $suffix;
         }
+        // Log::info($a);
         $listenersOfDropdown2 = [$a];
         return $listenersOfDropdown2;
     }

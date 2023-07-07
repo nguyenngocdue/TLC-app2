@@ -2,14 +2,16 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Pj_task;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class SidebarTask extends Component
+class SidebarTask extends Component 
 {
     use TraitListenerControl;
+    use TraitGetSuffixListenerControl;
     /**
      * Create a new component instance.
      *
@@ -43,6 +45,28 @@ class SidebarTask extends Component
         return $dataSource;
     }
 
+    public function getSuffix()
+    {
+        return "_11111";
+    }
+
+    private function getListenersOfDropdown2()
+    {
+        $suffix = $this->getSuffix();
+        return [
+            [
+                'listen_action' => 'reduce',
+                'column_name' => 'task_id' . $suffix,
+                'listen_to_attrs' => ['getLodsOfTask()', 'getDisciplinesOfTask()'],
+                'listen_to_fields' => ['task_id' . $suffix, 'task_id' . $suffix],
+                'listen_to_tables' => ['pj_tasks', 'pj_tasks'],
+                'table_name' => 'pj_tasks',
+                'triggers' => ['lod_id' . $suffix, 'discipline_id' . $suffix],
+                'dev' => true,
+            ],
+        ];
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -53,6 +77,8 @@ class SidebarTask extends Component
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
         // dump($params);
+        $params['id'] = 'task_id' . $this->getSuffix();
+        $params['name'] = 'task_id' . $this->getSuffix();
         return view('components.controls.has-data-source.' . $this->control, $params);
     }
 }

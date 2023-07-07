@@ -1,6 +1,6 @@
 @extends("modals.modal-large")
 
-@section($modalId.'-header', "Task list of ".$userCurrentCalendar->name." (".$userCurrentCalendar->getUserDiscipline->name.")")
+@section($modalId.'-header', "Projects and Task list of ".$userCurrentCalendar->name." (".$userCurrentCalendar->getUserDiscipline->name.")")
 
 @section($modalId.'-body')
 

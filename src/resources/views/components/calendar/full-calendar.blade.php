@@ -6,12 +6,16 @@
     const readOnly = @json($readOnly);
     const arrHidden = @json($arrHidden);
     const modal = $(`#` + modalId);
-    const containerEl = document.getElementById('task_id');
+    const suffix = @json($suffix);
+    const containerEl = document.getElementById(`task_id`+suffix);
     const calendarEl = document.getElementById('calendar');
     const checkbox = document.getElementById('drop-remove');
     const modalClickRight = $(`#modal-click-right`);
     const modalTitleTaskValue = $(`#title_task_value`);
-    const modalTask = $(`#task_id_1`);
+    const modalProject = $(`#project_id`);
+    const modalSubProject = $(`#sub_project_id`);
+    const modalLOD= $(`#lod_id`);
+    const modalTask = $(`#task_id`);
     const modalSubTask = $(`#sub_task_id`);
     const modalWorkMode = $(`#work_mode_id`);
     const modalRemark = $(`#remark`);
@@ -94,12 +98,21 @@
                                 handleUpdateModalEvent(info);
                                 //extended value render modal
                                 var extendedProps = info.event._def.extendedProps;
+                                var projectId = extendedProps.project_id;
+                                var subProjectId = extendedProps.sub_project_id;
+                                var lodId = extendedProps.lod_id;
                                 var taskId = extendedProps.task_id;
                                 var subTaskId = extendedProps.sub_task_id;
                                 var workModeId = extendedProps.work_mode_id;
                                 var remarkValue = extendedProps.remark;
                                 //render modal trigger
                                 modalTitleTaskValue.text(`Task: ${extendedProps.title_default}`);
+                                modalProject.val(projectId)
+                                modalProject.trigger('change');
+                                modalSubProject.val(subProjectId)
+                                modalSubProject.trigger('change');
+                                modalLOD.val(lodId)
+                                modalLOD.trigger('change');
                                 modalTask.val(taskId)
                                 modalTask.trigger('change');
                                 modalSubTask.val(subTaskId);
@@ -121,10 +134,10 @@
                         },
                         eventReceive: function(info) {
                             if (!readOnly) {
-                                var projectId = document.getElementById('project_id').value;
-                                var subProjectId = document.getElementById('sub_project_id').value;
-                                var lodId = document.getElementById('lod_id').value;
-                                var disciplineId = document.getElementById('discipline_id').value;
+                                var projectId = document.getElementById('project_id'+suffix).value;
+                                var subProjectId = document.getElementById('sub_project_id'+suffix).value;
+                                var lodId = document.getElementById('lod_id'+suffix).value;
+                                var disciplineId = document.getElementById('discipline_id'+suffix).value;
                                 var dateTime = info.event.startStr;
                                 var draggedElDiv = info.draggedEl;
                                 var taskId = draggedElDiv.children[0].getAttribute('id');
@@ -173,7 +186,15 @@
                             var eventTitle = info.event.title;
                             var tagSubProject = info.event.extendedProps.tag_sub_project;
                             var nameProject = info.event.extendedProps.name_project;
-                            var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between" title="' + nameProject + '"><div>' + timeText + '</div>' + tagSubProject + '</div>' + eventTitle + '</div>';
+                            var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between" title="' 
+                                + nameProject + 
+                                '"><div>' 
+                                + timeText + 
+                                '</div>' 
+                                + tagSubProject + 
+                                '</div>' 
+                                + eventTitle + 
+                                '</div>';
                             return {
                                 html: eventTitleHTML
                             };
@@ -187,13 +208,12 @@
         })
     }
     function changeBackgroudColorBreakTime(){
-        console.log(timeBreaks)
         var trElements = $('td.fc-timegrid-slot');
         trElements.each(function() {
             var dataTimeValue = $(this).attr('data-time');
             if(timeBreaks){
                 if ( dataTimeValue === timeBreaks[0] ||dataTimeValue === timeBreaks[1]) {
-                    $(this).css('background-color', '#fdba74');
+                    $(this).css({'background-color': '#fdba74','border-radius': 0});
                 } 
             }
         });
@@ -202,7 +222,7 @@
     function handleContextMenu(info) {
         var rect = info.el.getBoundingClientRect();
         var x = rect.top;
-        var y = rect.left + 200;
+        var y = rect.left + 100;
         modalClickRight.css({
             top: x,
             left: y
@@ -231,6 +251,10 @@
     function updateModalEvent(button) {
         var timesheetLineId = button.value;
         var data = {
+            'project_id': modalProject.val(),
+            'sub_project_id': modalSubProject.val(),
+            'lod_id': modalLOD.val(),
+            'task_id': modalTask.val(),
             'sub_task_id': modalSubTask.val(),
             'work_mode_id': modalWorkMode.val(),
             'remark': modalRemark.val(),
@@ -239,9 +263,14 @@
         if (timesheetLineId) {
             var event = calendar.getEventById(timesheetLineId);
             callApi('patch', url, data, null, function(event, response) {
+                event.setExtendedProp('project_id', response.data.project_id);
+                event.setExtendedProp('sub_project_id', response.data.sub_project_id);
+                event.setExtendedProp('lod_id', response.data.lod_id);
+                event.setExtendedProp('task_id', response.data.task_id);
                 event.setExtendedProp('work_mode_id', response.data.work_mode_id);
                 event.setExtendedProp('remark', response.data.remark);
                 event.setExtendedProp('sub_task_id', response.data.sub_task_id);
+                event.setExtendedProp('tag_sub_project', response.data.tag_sub_project);
                 event.setProp('backgroundColor', response.data.color);
                 event.setProp('title', response.data.title);
                 toastr.success('Update data timesheet line successfully!');

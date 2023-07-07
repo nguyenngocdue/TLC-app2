@@ -8,7 +8,7 @@ class Hse_corrective_action extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'description', 'slug', 'correctable_type', 'correctable_id', 'priority_id', 'work_area_id',
-        'assignee_1', 'opened_date', 'closed_at', 'status', 'unsafe_action_type_id', 'order_no', 'owner_id'
+        'assignee_1', 'opened_date', 'closed_at', 'status', 'unsafe_action_type_id', 'order_no', 'owner_id', 'remark', 'due_date'
     ];
     protected $table = "hse_corrective_actions";
 
@@ -71,15 +71,36 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'correctable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
             ['dataIndex' => 'correctable_id', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'name',],
-            ['dataIndex' => 'priority_id',],
             ['dataIndex' => 'work_area_id'],
             ['dataIndex' => 'description'],
             ['dataIndex' => 'attachment_hse_car',],
             ['dataIndex' => 'assignee_1'],
-            ['dataIndex' => 'opened_date'],
-            ['dataIndex' => 'closed_at'],
+            ['dataIndex' => 'priority_id',],
+            ['dataIndex' => 'due_date'],
+            // ['dataIndex' => 'opened_date'],
+            // ['dataIndex' => 'closed_at'],
             ['dataIndex' => 'status',],
             ['dataIndex' => 'unsafe_action_type_id',],
+        ];
+    }
+
+    public function getManyLineParams2() //In HSE Walkthrough
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => !true],
+            ['dataIndex' => 'correctable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
+            ['dataIndex' => 'correctable_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name', 'title' => "Observation Finding", 'sub_title' => 'Phát hiện, quan sát'],
+            ['dataIndex' => 'attachment_hse_car', 'title' => 'Pictures taken on site', 'sub_title' => 'Hình ảnh tại hiện trường'],
+            ['dataIndex' => 'description'],
+            ['dataIndex' => 'work_area_id'],
+            ['dataIndex' => 'assignee_1', 'title' => 'Action by'],
+            ['dataIndex' => 'priority_id',],
+            ['dataIndex' => 'due_date'],
+            // ['dataIndex' => 'status',],
+            ['dataIndex' => 'unsafe_action_type_id',],
+            ['dataIndex' => 'remark',],
         ];
     }
 

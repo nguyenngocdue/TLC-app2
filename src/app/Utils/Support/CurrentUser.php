@@ -112,8 +112,7 @@ class CurrentUser
     }
     public static function getWorkPlace(){
         $user = self::get();
-        dd($user->workplace);
-        return $user->getWorkPlace();
+        return $user->getWorkPlace;
     }
     public static function id()
     {
