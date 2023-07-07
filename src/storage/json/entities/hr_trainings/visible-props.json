@@ -9,6 +9,11 @@
         "column_name": "name",
         "new": "true"
     },
+    "_course_training_id": {
+        "name": "_course_training_id",
+        "column_name": "course_training_id",
+        "new": "true"
+    },
     "_description": {
         "name": "_description",
         "column_name": "description",

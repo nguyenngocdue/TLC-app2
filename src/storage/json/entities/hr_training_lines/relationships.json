@@ -1,14 +1,14 @@
 {
-    "_getInduction": {
-        "name": "_getInduction",
+    "_getTraining": {
+        "name": "_getTraining",
         "relationship": "belongsTo",
-        "control_name": "hse_induction_id",
+        "control_name": "hr_training_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""

@@ -19,7 +19,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "T\u00ean kh\u00f3a h\u1ecdc",
+        "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
@@ -31,7 +31,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "M\u00f4 t\u1ea3 kho\u00e1 h\u1ecdc",
+        "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
@@ -55,37 +55,13 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "Ng\u01b0\u1eddi h\u01b0\u1edbng d\u1eabn",
+        "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
     "_training_location": {
         "name": "_training_location",
         "column_name": "training_location",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "V\u1ecb tr\u00ed h\u1ecdc",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_training_datetime": {
-        "name": "_training_datetime",
-        "column_name": "training_datetime",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "Ng\u00e0y",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
         "label": "",
         "validation": "",
         "validation_regex": "",

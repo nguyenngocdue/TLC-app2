@@ -18,8 +18,8 @@ return [
     'hse_insp_chklst_shts' => [
         'hse_insp_chklst_lines' => [],
     ],
-    'hse_inductions' => [
-        'hse_induction_lines' => [],
+    'hr_trainings' => [
+        'hr_training_lines' => [],
     ],
     'hse_walkthroughs' => [
         'hse_corrective_actions' => [],

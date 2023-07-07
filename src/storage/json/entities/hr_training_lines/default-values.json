@@ -59,9 +59,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_hse_induction_id": {
-        "name": "_hse_induction_id",
-        "column_name": "hse_induction_id",
+    "_hr_training_id": {
+        "name": "_hr_training_id",
+        "column_name": "hr_training_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -146,6 +146,18 @@
     "_getSignatures": {
         "name": "_getSignatures",
         "column_name": "getSignatures",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",
