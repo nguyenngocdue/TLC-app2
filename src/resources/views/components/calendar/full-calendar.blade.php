@@ -222,7 +222,7 @@
     function handleContextMenu(info) {
         var rect = info.el.getBoundingClientRect();
         var x = rect.top;
-        var y = rect.left + 200;
+        var y = rect.left + 100;
         modalClickRight.css({
             top: x,
             left: y

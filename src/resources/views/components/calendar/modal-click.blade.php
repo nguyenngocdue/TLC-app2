@@ -17,46 +17,46 @@
         <!-- Modal body -->
         <div class="px-2 overflow-y-auto w-96 h-[420px]" modal-container>
                 <div class="grid grid-cols-12 mt-2 items-center">
-                    <span class="col-span-3">Project:</span>
+                    <span class="col-span-3 text-right mr-1">Project</span>
                     <div class="col-span-9">
                         <x-calendar.modal-filter-project tableName="projects" name="project_id" id="project_id" typeToLoadListener="hr_timesheet_line"/>
                     </div>
                 </div>
                  <div class="grid grid-cols-12 mt-2 items-center">
-                    <span class="col-span-3">Sub Project:</span>
+                    <span class="col-span-3 text-right mr-1">Sub Project</span>
                     <div class="col-span-9">
                     <x-calendar.modal-filter-sub-project tableName="sub_projects" name="sub_project_id" id="sub_project_id" typeToLoadListener="hr_timesheet_line" />
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mt-2 items-center">
-                    <span class="col-span-3">LOD:</span>
+                    <span class="col-span-3 text-right mr-1">LOD</span>
                     <div class="col-span-9">
                     <x-calendar.modal-filter-lod tableName="terms" name="lod_id" id="lod_id" typeToLoadListener="hr_timesheet_line" />
                     </div>
                 </div>
                 <div class="col-span-12 mt-2 hidden">
-                    Discipline:<x-calendar.modal-filter-discipline tableName="user_disciplines" name="discipline_id" id="discipline_id" typeToLoadListener="hr_timesheet_line" />
+                    Discipline<x-calendar.modal-filter-discipline tableName="user_disciplines" name="discipline_id" id="discipline_id" typeToLoadListener="hr_timesheet_line" />
                 </div>
                 <div class="grid grid-cols-12 mt-2 items-center">
-                    <span class="col-span-3">Task:</span>
+                    <span class="col-span-3 text-right mr-1">Task</span>
                     <div class="col-span-9">
                     <x-calendar.modal-filter-task tableName="pj_tasks" name="task_id" typeToLoadListener="hr_timesheet_line" />
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mt-2 items-center">
-                    <span class="col-span-3">Sub Task:</span>
+                    <span class="col-span-3 text-right mr-1">Sub Task</span>
                     <div class="col-span-9">
                     <x-calendar.modal-filter-sub-task tableName="pj_sub_tasks" name="sub_task_id" typeToLoadListener="hr_timesheet_line"/>
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mt-2 items-center">
-                    <span class="col-span-3">Work Mode:</span>
+                    <span class="col-span-3 text-right mr-1">Work Mode</span>
                     <div class="col-span-9">
                     <x-calendar.modal-filter-work-mode tableName="work_modes" name="work_mode_id"/>
                     </div>
                 </div>
-                <div class="grid grid-cols-12 mt-2 items-center">
-                    <span class="col-span-3">Remark</span>
+                <div class="grid grid-cols-12 m-2 items-center">
+                    <span class="col-span-3 text-right mr-1">Remark</span>
                     <div class="col-span-9">
                     <x-controls.textarea2 name="remark" value="" />
                     </div>
