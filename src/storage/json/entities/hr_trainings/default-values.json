@@ -23,9 +23,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_course_training_id": {
-        "name": "_course_training_id",
-        "column_name": "course_training_id",
+    "_training_course_id": {
+        "name": "_training_course_id",
+        "column_name": "training_course_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -71,15 +71,15 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_training_location": {
-        "name": "_training_location",
-        "column_name": "training_location",
+    "_training_location_id": {
+        "name": "_training_location_id",
+        "column_name": "training_location_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "V\u1ecb tr\u00ed h\u1ecdc",
+        "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
@@ -98,18 +98,6 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",

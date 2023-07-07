@@ -16,7 +16,7 @@
     "_getLocationTraining": {
         "name": "_getLocationTraining",
         "relationship": "belongsTo",
-        "control_name": "training_location",
+        "control_name": "training_location_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

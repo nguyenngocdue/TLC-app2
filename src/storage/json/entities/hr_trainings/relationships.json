@@ -16,7 +16,21 @@
     "_getTrainingCourse": {
         "name": "_getTrainingCourse",
         "relationship": "belongsTo",
-        "control_name": "course_training_id",
+        "control_name": "training_course_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getTrainingLocation": {
+        "name": "_getTrainingLocation",
+        "relationship": "belongsTo",
+        "control_name": "training_location_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

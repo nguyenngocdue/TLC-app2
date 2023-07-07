@@ -7,14 +7,14 @@ use App\BigThink\ModelExtended;
 class Hr_training_course extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "facilitator_id", "training_location",
+        "id", "name", "description", "facilitator_id", "training_location_id",
         "owner_id", 'training_datetime', 'slug',
     ];
     protected $table = "hr_training_courses";
 
     public static $eloquentParams = [
         'getFacilitator' => ['belongsTo', User::class, 'facilitator_id'],
-        'getLocationTraining' => ['belongsTo', Workplace::class, 'training_location'],
+        'getLocationTraining' => ['belongsTo', Workplace::class, 'training_location_id'],
     ];
 
     public static $oracyParams = [];

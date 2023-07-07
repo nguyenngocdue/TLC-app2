@@ -59,9 +59,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_training_location": {
-        "name": "_training_location",
-        "column_name": "training_location",
+    "_training_location_id": {
+        "name": "_training_location_id",
+        "column_name": "training_location_id",
         "label": "",
         "validation": "",
         "validation_regex": "",

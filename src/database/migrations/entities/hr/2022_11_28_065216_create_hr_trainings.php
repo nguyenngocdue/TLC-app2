@@ -24,9 +24,9 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('course_training_id')->nullable();
+            $table->unsignedBigInteger('training_course_id')->nullable();
             $table->unsignedBigInteger('facilitator_id')->nullable();
-            $table->unsignedBigInteger('training_location')->nullable();
+            $table->unsignedBigInteger('training_location_id')->nullable();
             $table->dateTime('training_datetime')->nullable();
             // $table->orderable();
             $table->appendCommonFields();
