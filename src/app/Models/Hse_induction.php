@@ -8,7 +8,7 @@ class Hse_induction extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "facilitator_id", "training_location",
-        "owner_id",'training_datetime','slug',
+        "owner_id", 'training_datetime', 'slug',
     ];
     protected $table = "hse_inductions";
 
@@ -17,8 +17,7 @@ class Hse_induction extends ModelExtended
         'getFacilitator' => ['belongsTo', User::class, 'facilitator_id'],
     ];
 
-    public static $oracyParams = [
-    ];
+    public static $oracyParams = [];
 
     public function getLines()
     {
@@ -29,9 +28,5 @@ class Hse_induction extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getManyLineParams()
-    {
-        return [];
     }
 }

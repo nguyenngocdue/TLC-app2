@@ -9,11 +9,6 @@
         "column_name": "name",
         "new": "true"
     },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "new": "true"
-    },
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
@@ -24,6 +19,11 @@
         "column_name": "injured_person_id",
         "new": "true"
     },
+    "_employeeid": {
+        "name": "_employeeid",
+        "column_name": "employeeid",
+        "new": "true"
+    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -32,6 +32,11 @@
     "_injury_datetime": {
         "name": "_injury_datetime",
         "column_name": "injury_datetime",
+        "new": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
         "new": "true"
     },
     "_nature_of_injury": {
