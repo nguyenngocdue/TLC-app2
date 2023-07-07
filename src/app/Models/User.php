@@ -16,6 +16,7 @@ use App\Utils\PermissionTraits\CheckPermissionEntities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Laravel\Sanctum\HasApiTokens;
 use LdapRecord\Laravel\Auth\LdapAuthenticatable;
@@ -230,7 +231,8 @@ class User extends Authenticatable implements LdapAuthenticatable
     //     $disciplineInspector = 23;
     //     return self::where('discipline', $disciplineInspector)->where('resigned', 0)->get();
     // }
-    public function getDepartment(){
+    public function getDepartment()
+    {
         return Department::findFromCache($this->department)->name ?? '';
     }
     public static function isStatusless()
@@ -306,5 +308,55 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         // if(!isset(static::getCollection()[$id])) 
         return static::getCollection()[$id] ?? null;
+    }
+
+    public static function getTotalWorkingHoursOfMonth($uids, $month)
+    {
+        // dump(join(",", $uids->toArray()));
+        $uidsArray = join(",", $uids->toArray());
+        $sql = "SELECT line.user_id, sum(line.duration_in_min)/60 working_hours 
+        FROM 
+            `hr_timesheet_lines` line, 
+            `hr_timesheet_workers` tsw
+        WHERE 1=1 
+            AND tsw.id = line.timesheetable_id
+            AND timesheetable_type='App\\\\Models\\\\Hr_timesheet_worker'
+            AND tsw.deleted_at IS NULL
+            AND line.deleted_at IS NULL
+            AND left(tsw.ts_date,7) = '$month'
+            AND user_id IN ($uidsArray)
+        GROUP BY line.user_id
+        ORDER BY working_hours DESC
+        ";
+        $result = DB::select($sql);
+        $rows = DB::select($sql);
+        // Log::info($sql);
+        $result = [];
+        foreach ($rows as $row) {
+            $result[$row->user_id] = $row;
+        }
+        return $result;
+    }
+
+    public static function getTotalOvertimeHoursOfMonth($uids, $month)
+    {
+        // dump(join(",", $uids->toArray()));
+        $uidsArray = join(",", $uids->toArray());
+        $sql = "SELECT line.user_id, sum(line.total_time) ot_hours 
+        FROM `hr_overtime_request_lines` line
+        WHERE 1=1 
+            AND line.deleted_at IS NULL
+            AND line.user_id IN ($uidsArray)
+            AND LEFT(line.ot_date, 7) = '$month'            
+        GROUP BY line.user_id
+        ORDER BY ot_hours DESC
+        ";
+        $rows = DB::select($sql);
+        // Log::info($sql);
+        $result = [];
+        foreach ($rows as $row) {
+            $result[$row->user_id] = $row;
+        }
+        return $result;
     }
 }
