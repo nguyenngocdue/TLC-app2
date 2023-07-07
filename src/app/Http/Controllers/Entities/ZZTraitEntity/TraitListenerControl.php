@@ -8,12 +8,7 @@ use Illuminate\Support\Facades\Log;
 trait TraitListenerControl
 {
     use TraitEntityListenDataSource;
-
-    private function getSuffix()
-    {
-        return "";
-    }
-
+    use TraitGetSuffixListenerControl;
     private function renderJSForK()
     {
         $tableName = $this->tableName;

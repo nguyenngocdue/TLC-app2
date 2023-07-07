@@ -6,7 +6,8 @@
     const readOnly = @json($readOnly);
     const arrHidden = @json($arrHidden);
     const modal = $(`#` + modalId);
-    const containerEl = document.getElementById('task_id');
+    const suffix = @json($suffix);
+    const containerEl = document.getElementById(`task_id`+suffix);
     const calendarEl = document.getElementById('calendar');
     const checkbox = document.getElementById('drop-remove');
     const modalClickRight = $(`#modal-click-right`);
@@ -133,10 +134,10 @@
                         },
                         eventReceive: function(info) {
                             if (!readOnly) {
-                                var projectId = document.getElementById('project_id').value;
-                                var subProjectId = document.getElementById('sub_project_id').value;
-                                var lodId = document.getElementById('lod_id').value;
-                                var disciplineId = document.getElementById('discipline_id').value;
+                                var projectId = document.getElementById('project_id'+suffix).value;
+                                var subProjectId = document.getElementById('sub_project_id'+suffix).value;
+                                var lodId = document.getElementById('lod_id'+suffix).value;
+                                var disciplineId = document.getElementById('discipline_id'+suffix).value;
                                 var dateTime = info.event.startStr;
                                 var draggedElDiv = info.draggedEl;
                                 var taskId = draggedElDiv.children[0].getAttribute('id');

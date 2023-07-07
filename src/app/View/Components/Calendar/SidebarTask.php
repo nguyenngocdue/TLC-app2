@@ -2,14 +2,16 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Pj_task;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class SidebarTask extends Component
+class SidebarTask extends Component 
 {
     use TraitListenerControl;
+    use TraitGetSuffixListenerControl;
     /**
      * Create a new component instance.
      *
@@ -43,7 +45,7 @@ class SidebarTask extends Component
         return $dataSource;
     }
 
-    private function getSuffix()
+    public function getSuffix()
     {
         return "_11111";
     }
@@ -76,6 +78,7 @@ class SidebarTask extends Component
         $params = $this->getParamsForHasDataSource();
         // dump($params);
         $params['id'] = 'task_id' . $this->getSuffix();
+        $params['name'] = 'task_id' . $this->getSuffix();
         return view('components.controls.has-data-source.' . $this->control, $params);
     }
 }

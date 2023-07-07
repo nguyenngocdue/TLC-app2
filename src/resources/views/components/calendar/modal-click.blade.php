@@ -15,33 +15,52 @@
             </div>
         </div>
         <!-- Modal body -->
-        <div class="px-6 overflow-y-auto w-96 h-96" modal-container>
-            <div class="grid grid-cols-12">
-                <div class="col-span-12 mt-2">
-                    Project: <x-calendar.modal-filter-project tableName="projects" name="project_id" id="project_id" typeToLoadListener="hr_timesheet_line"/>
+        <div class="px-2 overflow-y-auto w-96 h-[420px]" modal-container>
+                <div class="grid grid-cols-12 mt-2 items-center">
+                    <span class="col-span-3">Project:</span>
+                    <div class="col-span-9">
+                        <x-calendar.modal-filter-project tableName="projects" name="project_id" id="project_id" typeToLoadListener="hr_timesheet_line"/>
+                    </div>
                 </div>
-                 <div class="col-span-12 mt-2">
-                    Sub Project:<x-calendar.modal-filter-sub-project tableName="sub_projects" name="sub_project_id" id="sub_project_id" typeToLoadListener="hr_timesheet_line" />
+                 <div class="grid grid-cols-12 mt-2 items-center">
+                    <span class="col-span-3">Sub Project:</span>
+                    <div class="col-span-9">
+                    <x-calendar.modal-filter-sub-project tableName="sub_projects" name="sub_project_id" id="sub_project_id" typeToLoadListener="hr_timesheet_line" />
+                    </div>
                 </div>
-                <div class="col-span-12 mt-2">
-                    LOD:<x-calendar.modal-filter-lod tableName="terms" name="lod_id" id="lod_id" typeToLoadListener="hr_timesheet_line" />
+                <div class="grid grid-cols-12 mt-2 items-center">
+                    <span class="col-span-3">LOD:</span>
+                    <div class="col-span-9">
+                    <x-calendar.modal-filter-lod tableName="terms" name="lod_id" id="lod_id" typeToLoadListener="hr_timesheet_line" />
+                    </div>
                 </div>
                 <div class="col-span-12 mt-2 hidden">
                     Discipline:<x-calendar.modal-filter-discipline tableName="user_disciplines" name="discipline_id" id="discipline_id" typeToLoadListener="hr_timesheet_line" />
                 </div>
-                <div class="col-span-12 mt-2">
-                    Task: <x-calendar.modal-filter-task tableName="pj_tasks" name="task_id" typeToLoadListener="hr_timesheet_line" />
+                <div class="grid grid-cols-12 mt-2 items-center">
+                    <span class="col-span-3">Task:</span>
+                    <div class="col-span-9">
+                    <x-calendar.modal-filter-task tableName="pj_tasks" name="task_id" typeToLoadListener="hr_timesheet_line" />
+                    </div>
                 </div>
-                <div class="col-span-12 mt-2">
-                    Sub task: <x-calendar.modal-filter-sub-task tableName="pj_sub_tasks" name="sub_task_id" typeToLoadListener="hr_timesheet_line"/>
+                <div class="grid grid-cols-12 mt-2 items-center">
+                    <span class="col-span-3">Sub Task:</span>
+                    <div class="col-span-9">
+                    <x-calendar.modal-filter-sub-task tableName="pj_sub_tasks" name="sub_task_id" typeToLoadListener="hr_timesheet_line"/>
+                    </div>
                 </div>
-                <div class="col-span-12">
-                    Work mode: <x-calendar.modal-filter-work-mode tableName="work_modes" name="work_mode_id"/>
+                <div class="grid grid-cols-12 mt-2 items-center">
+                    <span class="col-span-3">Work Mode:</span>
+                    <div class="col-span-9">
+                    <x-calendar.modal-filter-work-mode tableName="work_modes" name="work_mode_id"/>
+                    </div>
                 </div>
-                <div class="col-span-12">
-                    Remark: <x-controls.textarea2 name="remark" value="" />
+                <div class="grid grid-cols-12 mt-2 items-center">
+                    <span class="col-span-3">Remark</span>
+                    <div class="col-span-9">
+                    <x-controls.textarea2 name="remark" value="" />
+                    </div>
                 </div>
-            </div>
         </div>
         <!-- Modal footer -->
         <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">

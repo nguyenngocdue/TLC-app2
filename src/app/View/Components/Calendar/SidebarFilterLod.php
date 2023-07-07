@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Term;
 use Database\Seeders\FieldSeeder;
@@ -11,6 +12,7 @@ use Illuminate\Support\Arr;
 class SidebarFilterLod extends Component
 {
     use TraitListenerControl;
+    use TraitGetSuffixListenerControl;
     /**
      * Create a new component instance.
      *
@@ -41,7 +43,7 @@ class SidebarFilterLod extends Component
         return $dataSource;
     }
 
-    private function getSuffix()
+    public function getSuffix()
     {
         return "_11111";
     }
