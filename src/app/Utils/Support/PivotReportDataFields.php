@@ -5,7 +5,7 @@ namespace App\Utils\Support;
 use Illuminate\Support\Str;
 use DateTime;
 
-class ReportPivotDataFields
+class PivotReportDataFields
 {
 
 
@@ -74,8 +74,8 @@ class ReportPivotDataFields
     public static function executeOperations($dataAggregations, $transferredData, $data, $rowFields, $columnFields)
     {
         // dd($data, $transferredData);
-        // $arrayValue = array_map(fn ($items) => ReportPivotDataFields::execute($dataAggregations, $items), $transferredData);
-        $arrayValue = array_map(fn ($items) => ReportPivotDataFields::execute($dataAggregations, $items), $data);
+        // $arrayValue = array_map(fn ($items) => PivotReportDataFields::execute($dataAggregations, $items), $transferredData);
+        $arrayValue = array_map(fn ($items) => PivotReportDataFields::execute($dataAggregations, $items), $data);
 
         if (!$rowFields) {
             $totalNumber = self::calculateSubArraysTotal($arrayValue);
