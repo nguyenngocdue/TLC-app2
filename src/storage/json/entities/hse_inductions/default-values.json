@@ -19,7 +19,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "T\u00ean Kh\u00f3a H\u1ecdc",
+        "label_extra": "T\u00ean kh\u00f3a h\u1ecdc",
         "placeholder": "",
         "control_extra": ""
     },
@@ -31,7 +31,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "",
+        "label_extra": "M\u00f4 t\u1ea3 kho\u00e1 h\u1ecdc",
         "placeholder": "",
         "control_extra": ""
     },
