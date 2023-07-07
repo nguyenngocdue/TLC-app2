@@ -15,7 +15,7 @@ class Hr_training extends ModelExtended
     public static $eloquentParams = [
         "getLines" => ["hasMany", Hr_training_line::class, "hr_training_id"],
         'getFacilitator' => ['belongsTo', User::class, 'facilitator_id'],
-        "getCourseTraining" => ["belongsTo", Hr_course_training::class, "course_training_id"],
+        "getTrainingCourse" => ["belongsTo", Hr_training_course::class, "course_training_id"],
     ];
 
     public static $oracyParams = [];
@@ -30,7 +30,7 @@ class Hr_training extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getCourseTraining()
+    public function getTrainingCourse()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

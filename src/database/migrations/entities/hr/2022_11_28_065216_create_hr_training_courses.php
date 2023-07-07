@@ -19,7 +19,7 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('hr_course_trainings', function (BlueprintExtended $table) {
+        $schema->create('hr_training_courses', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hr_course_trainings');
+        Schema::dropIfExists('hr_training_courses');
     }
 };

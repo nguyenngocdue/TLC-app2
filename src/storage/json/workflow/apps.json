@@ -260,19 +260,6 @@
         "show_renderer": "props-renderer",
         "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
     },
-    "hr_course_training": {
-        "name": "hr_course_training",
-        "package_tab": "application",
-        "package": "hr_&_admin",
-        "sub_package": "hr",
-        "title": "Hr Course Training",
-        "nickname": null,
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "icon": null
-    },
     "hr_overtime_request": {
         "name": "hr_overtime_request",
         "package_tab": "application",
@@ -358,6 +345,19 @@
         "package": "hr_&_admin",
         "sub_package": "hr",
         "title": "Hr Training",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
+    },
+    "hr_training_course": {
+        "name": "hr_training_course",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr",
+        "title": "Hr Training Course",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,

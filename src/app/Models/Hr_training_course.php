@@ -4,13 +4,13 @@ namespace App\Models;
 
 use App\BigThink\ModelExtended;
 
-class Hr_course_training extends ModelExtended
+class Hr_training_course extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "facilitator_id", "training_location",
         "owner_id", 'training_datetime', 'slug',
     ];
-    protected $table = "hr_course_trainings";
+    protected $table = "hr_training_courses";
 
     public static $eloquentParams = [
         'getFacilitator' => ['belongsTo', User::class, 'facilitator_id'],
