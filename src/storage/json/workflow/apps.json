@@ -523,6 +523,19 @@
         "hidden_navbar": "true",
         "icon": null
     },
+    "hse_walkthrough": {
+        "name": "hse_walkthrough",
+        "package_tab": "application",
+        "package": "operation",
+        "sub_package": "hse",
+        "title": "Hse Walkthrough",
+        "nickname": "hw",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
+    },
     "manageApis": {
         "name": "manageApis",
         "package_tab": "application",

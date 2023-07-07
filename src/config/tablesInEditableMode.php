@@ -21,6 +21,9 @@ return [
     'hse_inductions' => [
         'hse_induction_lines' => [],
     ],
+    'hse_walkthroughs' => [
+        'hse_corrective_actions' => [],
+    ],
 
     'qaqc_insp_tmpl_shts' => [
         'qaqc_insp_tmpl_lines' => [],

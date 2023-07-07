@@ -416,5 +416,43 @@
         "save_on_change": "",
         "duplicatable": "",
         "new_line": ""
+    },
+    "_due_date": {
+        "name": "_due_date",
+        "column_name": "due_date",
+        "column_type": "datetime",
+        "label": "Target Date Closed",
+        "control": "picker_datetime",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "column_type": "text",
+        "label": "Remark",
+        "control": "textarea",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
     }
 }
