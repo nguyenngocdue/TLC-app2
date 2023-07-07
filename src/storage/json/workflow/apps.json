@@ -392,6 +392,19 @@
         "icon": "<i class=\"fa-solid fa-badge-check\"><\/i>",
         "show_in_my_view": "true"
     },
+    "hse_extra_metric": {
+        "name": "hse_extra_metric",
+        "package_tab": "application",
+        "package": "operation",
+        "sub_package": "hse",
+        "title": "Hse Extra Metric",
+        "nickname": "hem",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
+    },
     "hse_first_aid": {
         "name": "hse_first_aid",
         "package_tab": "application",
