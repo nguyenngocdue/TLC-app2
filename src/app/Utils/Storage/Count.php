@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Count
 {
-    public static function getCount()
+    public static function getCount($location = 'app2_prod')
     {
         /** @var Storage $disk */
         $disk = Storage::disk('s3');
@@ -15,7 +15,7 @@ class Count
             return 1;
             // dump($file);
             // return (int)$file['size'];
-        }, array_filter($disk->listContents('app2_prod', true /*<- recursive*/)->toArray(), function ($file) {
+        }, array_filter($disk->listContents($location, true /*<- recursive*/)->toArray(), function ($file) {
             return $file['type'] == 'file';
         })));
         return $size;
