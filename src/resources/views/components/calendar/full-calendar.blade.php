@@ -213,7 +213,7 @@
             var dataTimeValue = $(this).attr('data-time');
             if(timeBreaks){
                 if ( dataTimeValue === timeBreaks[0] ||dataTimeValue === timeBreaks[1]) {
-                    $(this).css('background-color', '#fdba74');
+                    $(this).css({'background-color': '#fdba74','border-radius': 0});
                 } 
             }
         });
