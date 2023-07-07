@@ -24,8 +24,9 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->float('training_hours')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('hse_induction_id');
+            $table->orderable();
             $table->appendCommonFields();
         });
     }

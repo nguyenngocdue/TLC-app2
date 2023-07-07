@@ -8,7 +8,7 @@ class Hse_induction_line extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "user_id", "hse_induction_id",
-        "owner_id",'training_hours'
+        "owner_id", 'training_hours', "order_no",
     ];
     protected $table = "hse_induction_lines";
     protected static $statusless = true;
@@ -37,14 +37,15 @@ class Hse_induction_line extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    
+
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id',],
-            ['dataIndex' => 'hse_induction_id', 'title' => 'Induction ID', 'invisible' => !true, 'value_as_parent_id' => true],
+            ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
+            ['dataIndex' => 'id', 'no_print' => true, 'invisible' => true],
+            ['dataIndex' => 'hse_induction_id', 'title' => 'Induction ID', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'user_id',],
-            ['dataIndex' => 'training_hours',],
+            ['dataIndex' => 'training_hours', 'cloneable' => true],
         ];
     }
 }
