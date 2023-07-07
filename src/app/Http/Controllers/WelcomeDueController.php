@@ -21,9 +21,7 @@ class WelcomeDueController extends Controller
         $primaryData = array_map(fn($item) =>(array)$item, $primaryData->toArray());
         $primaryData = [
             [
-                "time_sheet_start_time" => "2022-10-18",
-                "time_sheet_start_time_otr" => "2022-10-18",
-                "time_sheet_start_time_wfh" => "2022-10-18",
+                "ts_date" => "2022-10-18",
                 "time_sheet_hours" => 8,
                 "time_sheet_hours_otr" => 2,
                 "time_sheet_hours_wfh" => 3,
@@ -45,9 +43,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01219",
             ],
             [
-                "time_sheet_start_time" => "2022-10-19",
-                "time_sheet_start_time_otr" => "2022-10-19",
-                "time_sheet_start_time_wfh" => "2022-10-19",
+                "ts_date" => "2022-10-19",
                 "time_sheet_hours" => 8.0,
                 "time_sheet_hours_otr" => 2,
                 "time_sheet_hours_wfh" => 5,
@@ -69,9 +65,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01071",
             ],
             [
-                "time_sheet_start_time" => "2022-10-20",
-                "time_sheet_start_time_otr" => "2022-10-20",
-                "time_sheet_start_time_wfh" => "2022-10-20",
+                "ts_date" => "2022-10-20",
                 "time_sheet_hours" => 8.0,
                 "time_sheet_hours_otr" => 2,
                 "time_sheet_hours_wfh" => 7,
@@ -93,9 +87,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01071",
             ],
             [
-                "time_sheet_start_time" => "2022-10-03",
-                "time_sheet_start_time_otr" => "2022-10-03",
-                "time_sheet_start_time_wfh" => "2022-10-03",
+                "ts_date" => "2022-10-03",
                 "time_sheet_hours" => 8.0,
                 "time_sheet_hours_otr" => 3,
                 "time_sheet_hours_wfh" => 5,
@@ -117,9 +109,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01071",
             ],
             [
-                "time_sheet_start_time" => "2022-11-28",
-                "time_sheet_start_time_otr" => "2022-11-28",
-                "time_sheet_start_time_wfh" => "2022-11-28",
+                "ts_date" => "2022-11-28",
                 "time_sheet_hours" => 7.5,
                 "time_sheet_hours_otr" => 6,
                 "time_sheet_hours_wfh" => 7.5,
@@ -141,9 +131,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01060",
             ],
             [
-                "time_sheet_start_time" => "2022-11-28",
-                "time_sheet_start_time_otr" => "2022-11-28",
-                "time_sheet_start_time_wfh" => "2022-11-28",
+                "ts_date" => "2022-11-28",
                 "time_sheet_hours" => 7.5,
                 "time_sheet_hours_otr" => 6,
                 "time_sheet_hours_wfh" => 7.5,
@@ -165,9 +153,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01067",
             ],
             [
-                "time_sheet_start_time" => "2022-11-29",
-                "time_sheet_start_time_otr" => "2022-11-29",
-                "time_sheet_start_time_wfh" => "2022-11-29",
+                "ts_date" => "2022-11-29",
                 "time_sheet_hours" => 7.5,
                 "time_sheet_hours_otr" => 6,
                 "time_sheet_hours_wfh" => 7.5,
@@ -189,9 +175,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01068",
             ],
             [
-                "time_sheet_start_time" => "2022-11-29",
-                "time_sheet_start_time_otr" => "2022-11-29",
-                "time_sheet_start_time_wfh" => "2022-11-29",
+                "ts_date" => "2022-11-29",
                 "time_sheet_hours" => 8.5,
                 "time_sheet_hours_otr" => 1.5,
                 "time_sheet_hours_wfh" => 5,
@@ -213,9 +197,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01060",
             ],
             [
-                "time_sheet_start_time" => "2022-11-30",
-                "time_sheet_start_time_otr" => "2022-11-30",
-                "time_sheet_start_time_wfh" => "2022-11-30",
+                "ts_date" => "2022-11-30",
                 "time_sheet_hours" => 3,
                 "time_sheet_hours_otr" => 4,
                 "time_sheet_hours_wfh" => 3,
@@ -237,9 +219,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01060",
             ],
             [
-                "time_sheet_start_time" => "2022-11-14",
-                "time_sheet_start_time_otr" => "2022-11-14",
-                "time_sheet_start_time_wfh" => "2022-11-14",
+                "ts_date" => "2022-11-14",
                 "time_sheet_hours" => 8,
                 "time_sheet_hours_otr" => 7,
                 "time_sheet_hours_wfh" => 3,
@@ -261,9 +241,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01219",
             ],
             [
-                "time_sheet_start_time" => "2022-11-14",
-                "time_sheet_start_time_otr" => "2022-11-14",
-                "time_sheet_start_time_wfh" => "2022-11-14",
+                "ts_date" => "2022-11-14",
                 "time_sheet_hours" => 8,
                 "time_sheet_hours_otr" => 7,
                 "time_sheet_hours_wfh" => 3,
@@ -285,9 +263,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01219",
             ],
             [
-                "time_sheet_start_time" => "2022-11-15",
-                "time_sheet_start_time_otr" => "2022-11-15",
-                "time_sheet_start_time_wfh" => "2022-11-15",
+                "ts_date" => "2022-11-15",
                 "time_sheet_hours" => 8,
                 "time_sheet_hours_otr" => 1,
                 "time_sheet_hours_wfh" => 2,
@@ -309,9 +285,7 @@ class WelcomeDueController extends Controller
                 "staff_id" => "TLCM01219",
             ],
             [
-                "time_sheet_start_time" => "2022-11-16",
-                "time_sheet_start_time_otr" => "2022-11-16",
-                "time_sheet_start_time_wfh" => "2022-11-16",
+                "ts_date" => "2022-11-16",
                 "time_sheet_hours" => 5,
                 "time_sheet_hours_otr" => 1,
                 "time_sheet_hours_wfh" => 2,
@@ -335,21 +309,21 @@ class WelcomeDueController extends Controller
         ];
         // dump($primaryData);
 
-        $primaryData = [
-            ["category" => "phone", "product" => "iPad", "date" => "2024-01-01", "price" => 1000, "discount" => 10,"amount" => 990, 'sale_price' => 900],
-            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06", "price" => 1000, "discount" => 20,"amount" => 990, 'sale_price' => 800],
-            ["category" => "phone", "product" => "iPad", "date" => "2024-01-06", "price" => 1000, "discount" => 0,"amount" => 1000, 'sale_price' => 1000],
-            ["category" => "phone", "product" => "iPhone", "date" => "2024-01-01", "price" => 1200, "discount" => 12,"amount" => 1188, 'sale_price' => 1056],
-            ["category" => "phone", "product" => "iPhone", "date" => "2024-01-05", "price" => 1200, "discount" => 0,"amount" => 1200, 'sale_price' => 1200],
-            ["category" => "computer", "product" => "MacMini", "date" => "2024-01-01", "price" => 1000, "discount" => 10,"amount" => 990, 'sale_price' => 900],
-            ["category" => "computer", "product" => "MacBook", "date" => "2024-01-01", "price" => 2000, "discount" => 20,"amount" => 1980, 'sale_price' => 1600],
-            ["category" => "computer", "product" => "iMac", "date" => "2024-01-01", "price" => 2500, "discount" => 25,"amount" => 2475, 'sale_price' => 1875],
-            ["category" => "computer", "product" => "iPad", "date" => "2024-01-06", "price" => 1000, "discount" => 50,"amount" => 800, 'sale_price' => 1000],
-            ["category" => "computer", "product" => "MacMini", "date" => "2024-01-02", "price" => 1000, "discount" => 0,"amount" => 1000, 'sale_price' => 1000],
-            ["category" => "computer", "product" => "MacBook", "date" => "2024-01-03", "price" => 2000, "discount" => 0,"amount" => 2000, 'sale_price' => 2000],
-            ["category" => "computer", "product" => "iMac", "date" => "2024-01-04", "price" => 2500, "discount" => 0,"amount" => 2500, 'sale_price' => 2500],
+        // $primaryData = [
+        //     ["category" => "phone", "product" => "iPad", "date" => "2024-01-01", "price" => 1000, "discount" => 10,"amount" => 990, 'sale_price' => 900],
+        //     ["category" => "phone", "product" => "iPad", "date" => "2024-01-06", "price" => 1000, "discount" => 20,"amount" => 990, 'sale_price' => 800],
+        //     ["category" => "phone", "product" => "iPad", "date" => "2024-01-06", "price" => 1000, "discount" => 0,"amount" => 1000, 'sale_price' => 1000],
+        //     ["category" => "phone", "product" => "iPhone", "date" => "2024-01-01", "price" => 1200, "discount" => 12,"amount" => 1188, 'sale_price' => 1056],
+        //     ["category" => "phone", "product" => "iPhone", "date" => "2024-01-05", "price" => 1200, "discount" => 0,"amount" => 1200, 'sale_price' => 1200],
+        //     ["category" => "computer", "product" => "MacMini", "date" => "2024-01-01", "price" => 1000, "discount" => 10,"amount" => 990, 'sale_price' => 900],
+        //     ["category" => "computer", "product" => "MacBook", "date" => "2024-01-01", "price" => 2000, "discount" => 20,"amount" => 1980, 'sale_price' => 1600],
+        //     ["category" => "computer", "product" => "iMac", "date" => "2024-01-01", "price" => 2500, "discount" => 25,"amount" => 2475, 'sale_price' => 1875],
+        //     ["category" => "computer", "product" => "iPad", "date" => "2024-01-06", "price" => 1000, "discount" => 50,"amount" => 800, 'sale_price' => 1000],
+        //     ["category" => "computer", "product" => "MacMini", "date" => "2024-01-02", "price" => 1000, "discount" => 0,"amount" => 1000, 'sale_price' => 1000],
+        //     ["category" => "computer", "product" => "MacBook", "date" => "2024-01-03", "price" => 2000, "discount" => 0,"amount" => 2000, 'sale_price' => 2000],
+        //     ["category" => "computer", "product" => "iMac", "date" => "2024-01-04", "price" => 2500, "discount" => 0,"amount" => 2500, 'sale_price' => 2500],
 
-        ];
+        // ];
         return $primaryData;
     }
 

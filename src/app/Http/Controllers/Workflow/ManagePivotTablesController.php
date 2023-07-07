@@ -20,7 +20,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'dataIndex' => "name",
                 "renderer"  => 'read-only-text4',
                 'editable' => true,
-                'width' => 100,
+                'width' => 50,
             ],
             [
                 'dataIndex' => 'filters',
