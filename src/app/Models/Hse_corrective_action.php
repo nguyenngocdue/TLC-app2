@@ -94,6 +94,7 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'name', 'title' => "Observation Finding", 'sub_title' => 'Phát hiện, quan sát'],
             ['dataIndex' => 'attachment_hse_car', 'title' => 'Pictures taken on site', 'sub_title' => 'Hình ảnh tại hiện trường'],
             ['dataIndex' => 'description'],
+            ['dataIndex' => 'work_area_id'],
             ['dataIndex' => 'assignee_1', 'title' => 'Action by'],
             ['dataIndex' => 'priority_id',],
             ['dataIndex' => 'due_date'],
