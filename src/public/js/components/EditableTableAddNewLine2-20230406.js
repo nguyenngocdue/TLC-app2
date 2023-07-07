@@ -439,6 +439,9 @@ const addANewLineFull = (params) => {
                         makeOnChangeAdvanced(onChangeDropdown4Fn) +
                         '</script>'
                     break
+                case 'attachment4':
+                    renderer = '<div class="to be implemented"></div>'
+                    break
                 default:
                     renderer = 'Unknown how to render ' + column['renderer']
                     break
