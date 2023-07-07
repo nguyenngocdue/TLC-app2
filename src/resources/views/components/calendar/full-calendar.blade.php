@@ -186,7 +186,15 @@
                             var eventTitle = info.event.title;
                             var tagSubProject = info.event.extendedProps.tag_sub_project;
                             var nameProject = info.event.extendedProps.name_project;
-                            var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between" title="' + nameProject + '"><div>' + timeText + '</div>' + tagSubProject + '</div>' + eventTitle + '</div>';
+                            var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between" title="' 
+                                + nameProject + 
+                                '"><div>' 
+                                + timeText + 
+                                '</div>' 
+                                + tagSubProject + 
+                                '</div>' 
+                                + eventTitle + 
+                                '</div>';
                             return {
                                 html: eventTitleHTML
                             };
@@ -262,6 +270,7 @@
                 event.setExtendedProp('work_mode_id', response.data.work_mode_id);
                 event.setExtendedProp('remark', response.data.remark);
                 event.setExtendedProp('sub_task_id', response.data.sub_task_id);
+                event.setExtendedProp('tag_sub_project', response.data.tag_sub_project);
                 event.setProp('backgroundColor', response.data.color);
                 event.setProp('title', response.data.title);
                 toastr.success('Update data timesheet line successfully!');

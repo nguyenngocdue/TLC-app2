@@ -28,13 +28,12 @@ class Calendar
         if ($item->sub_task_id) {
             $nameSubTask = Pj_sub_task::findOrFail($item->sub_task_id)->name ?? '';
         }
-        if ($item->owner_id) {
-            $user = User::findFromCache($item->owner_id);
-            $avatar = Blade::render("<div class='mb-2'><x-renderer.avatar-user>$user</x-renderer.avatar-user></div>");
-        }
+        // if ($item->owner_id) {
+        //     $user = User::findFromCache($item->owner_id);
+        //     $avatar = Blade::render("<div class='mb-2'><x-renderer.avatar-user>$user</x-renderer.avatar-user></div>");
+        // }
         $remark = $item->remark ?? '';
         return "<div class='h-full'><div>"
-            // . ($avatar ?? '')
             . "<div class='font-semibold'>{$nameTask}</div>"
             . ($nameSubTask ? "<div>{$nameSubTask}</div>" : "")
             . ($remark ? "<div class='text-sm'>{$remark}</div>" : "")
