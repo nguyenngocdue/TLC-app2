@@ -53,7 +53,9 @@ class ViewAllTypeMatrixTypeDateMode extends ViewAllTypeMatrixParent
                 return [-$begin, $end + 1];
             case 'week':
             default:
-                return [-7, 1];
+                $dayOfWeek = Carbon::createFromDate($date)->dayOfWeek  - 1;
+                return [-$dayOfWeek, 7 - $dayOfWeek];
+                // return [-7, 1];
         }
     }
 
