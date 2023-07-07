@@ -6,8 +6,8 @@ use App\Http\Controllers\CheckFieldPivotInDatabase;
 use App\Http\Controllers\TraitLibPivotTableDataFields;
 use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\Report;
-use App\Utils\Support\ReportPivot;
-use App\Utils\Support\ReportPivotDataFields;
+use App\Utils\Support\PivotReport;
+use App\Utils\Support\PivotReportDataFields;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -81,15 +81,22 @@ class PivotTable extends Component
                         // dump($e->getMessage());
                     }
                 } else {
-                    if (!str_contains($key, '_id_')) continue;
-                    $lastUnderscoreIndex = strrpos($key, '_id_');
-                    $p1 = strpos($key, '_', $lastUnderscoreIndex + 4);
-                    $str1 = substr($key, 0, $lastUnderscoreIndex + 4);
+                    if (!str_contains($key, '_id') ) continue;
+                    $indexString = strrpos($key, '_id_');
+                    $p1 = strpos($key, '_', $indexString + 4);
+                    $str1 = substr($key, 0, $indexString + 4);
                     $str2 = substr($key, $p1, strlen($key));
                     $id = str_replace([$str1, $str2], '', $key);
-                    if (is_numeric($id) && $id) {
-                        $attr = substr($key, 0, $lastUnderscoreIndex + 3);
-                        // if ($key === 'sub_project_id_4_time_sheet_hours') dd($id);
+                    if (str_contains($key, '_id[')) {
+                        $indexString = strrpos($key, '_id[');
+                        $lastBracket = strrpos($key, ']');
+                        $p1 = strpos($key, '_', $indexString + ($lastBracket - $indexString + 2));
+                        $str1 = substr($key, 0, $indexString + ($lastBracket - $indexString + 2));
+                        $str2 = substr($key, $p1, strlen($key));
+                        $id = str_replace([$str1, $str2], '', $key);
+                    }
+                    if (is_numeric(trim($id,'_')) && $id) {
+                        $attr = substr($key, 0, $indexString + 3);
                         $infoAttr = $bidingColumnFields[$attr];
                         $tableName = $infoAttr['table_name'];
                         $attributeName = $infoAttr['attribute_name'];
@@ -202,36 +209,37 @@ class PivotTable extends Component
 
     private function makeDataRenderer($primaryData)
     {
-        [$rowFields,, $filters, $propsColumnField,, $dataAggregations,,, $valueIndexFields, $columnFields] =  $this->getDataFields();
+        [$rowFields,, $filters, $propsColumnField,, $dataAggregations,,, $valueIndexFields, $columnFields, $infoColumnFields] =  $this->getDataFields();
         $valueFilters = count($filters)  ? array_combine($filters, [[1, 4], [7, 8]]) : [];
         // Step 1: reduce lines from Filters array
         $linesData = $primaryData;
         // dd($linesData);
-        $dataReduce = ReportPivot::reduceDataByFilterColumn($linesData, $valueFilters);
+        $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $valueFilters);
         // dd($valueFilters, $dataReduce);
 
 
+        // dump($columnFields);
         // Step 2: group lines by Row_Fields array
         if (!count($rowFields)) {
-            $processedData = ReportPivot::groupBy($dataReduce, $columnFields);
+            $processedData = PivotReport::groupBy($dataReduce, $columnFields);
         } else {
-            $processedData = ReportPivot::groupBy($dataReduce, $rowFields);
+            $processedData = PivotReport::groupBy($dataReduce, $rowFields);
         }
         // dump($processedData, $propsColumnField);
 
         //Remove all array keys by looping through all elements
         $fieldsNeedToSum = $this->getFieldNeedToSum($propsColumnField);
-        $processedData = array_values(array_map(fn ($item) => ReportPivot::getLastArray($item, $fieldsNeedToSum), $processedData));
+        $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $fieldsNeedToSum), $processedData));
         // dd($processedData, $propsColumnField);
 
         // Step 3: transfer data from lines to columns by
         // Column_Fields and Value_Index_Fields array 
-        $transferredData = ReportPivot::transferData($processedData,$columnFields, $propsColumnField, $valueIndexFields);
+        $transferredData = PivotReport::transferData($processedData, $columnFields, $propsColumnField, $valueIndexFields);
         // dd($transferredData);
 
         //Step 4: Calculate data from Data Fields columns
         //The aggregated data are at the end of the items
-        $calculatedData = ReportPivotDataFields::executeOperations($dataAggregations, $transferredData, $processedData, $rowFields, $columnFields);
+        $calculatedData = PivotReportDataFields::executeOperations($dataAggregations, $transferredData, $processedData, $rowFields, $columnFields);
         // dump( $calculatedData);
 
         $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData, $rowFields, $columnFields);
@@ -259,25 +267,25 @@ class PivotTable extends Component
         if (!$rowFields && $columnFields) {
             $dataOutput[0]["info_column_field"] = $infoColumnFields;
         }
-        $dataOutput = $this->updateResultOfAggregations($columnFields,$dataAggregations, $dataOutput);
+        $dataOutput = $this->updateResultOfAggregations($columnFields, $dataAggregations, $dataOutput);
         // dump($dataOutput);
         return $dataOutput;
     }
 
-    private function updateResultOfAggregations($columnFields,$dataAggregations, $dataOutput)
+    private function updateResultOfAggregations($columnFields, $dataAggregations, $dataOutput)
     {
-        if (ReportPivot::hasDuplicates($columnFields)) {
-            $newColumnFields = ReportPivot::markDuplicates($columnFields);
+        if (PivotReport::hasDuplicates($columnFields)) {
+            $newColumnFields = PivotReport::markDuplicatesAndGroupKey($columnFields);
             $num = count(reset($newColumnFields));
 
             $field = array_slice($dataAggregations, 0, 1);
             $keys = array_keys($field) ?? '';
             $value = array_values($field);
-            $str = $value[0] ."_" .$keys[0] ;
-            
+            $str = $value[0] . "_" . $keys[0];
+
             foreach ($dataOutput as &$values) {
-                if (isset($values[$str])){
-                    $values[$str] = $values[$str]*$num;
+                if (isset($values[$str])) {
+                    $values[$str] = $values[$str] * $num;
                 }
             }
         }
@@ -293,6 +301,7 @@ class PivotTable extends Component
         $dataOutput = $this->sortLinesData($dataOutput);
         $dataOutput = $this->changeValueData($dataOutput);
 
+        // dump($dataOutput);
         return view('components.renderer.report.pivot-table', [
             'tableDataSource' => $dataOutput,
             'tableColumns' => $tableColumns,

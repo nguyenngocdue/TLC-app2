@@ -339,6 +339,45 @@
         "show_in_my_view": "true",
         "disallowed_direct_creation": "true"
     },
+    "hr_training": {
+        "name": "hr_training",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr",
+        "title": "Hr Training",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
+    },
+    "hr_training_course": {
+        "name": "hr_training_course",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr",
+        "title": "Hr Training Course",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
+    },
+    "hr_training_line": {
+        "name": "hr_training_line",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr",
+        "title": "Hr Training Line",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
+    },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
         "package_tab": "application",
@@ -352,6 +391,19 @@
         "show_renderer": "props-renderer",
         "icon": "<i class=\"fa-solid fa-badge-check\"><\/i>",
         "show_in_my_view": "true"
+    },
+    "hse_extra_metric": {
+        "name": "hse_extra_metric",
+        "package_tab": "application",
+        "package": "operation",
+        "sub_package": "hse",
+        "title": "Hse Extra Metric",
+        "nickname": "hem",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
     },
     "hse_first_aid": {
         "name": "hse_first_aid",
@@ -379,32 +431,6 @@
         "show_renderer": "props-renderer",
         "icon": "<i class=\"fa-solid fa-user-injured\"><\/i>",
         "show_in_my_view": "true"
-    },
-    "hse_induction": {
-        "name": "hse_induction",
-        "package_tab": "application",
-        "package": "operation",
-        "sub_package": "hse",
-        "title": "Hse Induction",
-        "nickname": "hi",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "icon": null
-    },
-    "hse_induction_line": {
-        "name": "hse_induction_line",
-        "package_tab": "application",
-        "package": "operation",
-        "sub_package": "hse",
-        "title": "Hse Induction Line",
-        "nickname": "hil",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "icon": null
     },
     "hse_insp_chklst_line": {
         "name": "hse_insp_chklst_line",
@@ -521,6 +547,19 @@
         "show_renderer": "props-renderer",
         "hidden": "true",
         "hidden_navbar": "true",
+        "icon": null
+    },
+    "hse_walkthrough": {
+        "name": "hse_walkthrough",
+        "package_tab": "application",
+        "package": "operation",
+        "sub_package": "hse",
+        "title": "Hse Walkthrough",
+        "nickname": "hw",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
         "icon": null
     },
     "manageApis": {

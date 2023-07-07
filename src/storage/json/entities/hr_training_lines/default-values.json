@@ -19,7 +19,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "T\u00ean Kh\u00f3a H\u1ecdc",
+        "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
@@ -35,9 +35,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
+    "_training_hours": {
+        "name": "_training_hours",
+        "column_name": "training_hours",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "S\u1ed1 gi\u1edd h\u1ecdc",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -47,57 +59,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_facilitator_id": {
-        "name": "_facilitator_id",
-        "column_name": "facilitator_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "Ng\u01b0\u1eddi h\u01b0\u1edbng d\u1eabn",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_training_location": {
-        "name": "_training_location",
-        "column_name": "training_location",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "V\u1ecb tr\u00ed h\u1ecdc",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_training_datetime": {
-        "name": "_training_datetime",
-        "column_name": "training_datetime",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "Ng\u00e0y",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
+    "_hr_training_id": {
+        "name": "_hr_training_id",
+        "column_name": "hr_training_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -170,6 +134,30 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getSignatures": {
+        "name": "_getSignatures",
+        "column_name": "getSignatures",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",

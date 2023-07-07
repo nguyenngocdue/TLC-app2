@@ -6,7 +6,8 @@
     const readOnly = @json($readOnly);
     const arrHidden = @json($arrHidden);
     const modal = $(`#` + modalId);
-    const containerEl = document.getElementById('task_id');
+    const suffix = @json($suffix);
+    const containerEl = document.getElementById(`task_id`+suffix);
     const calendarEl = document.getElementById('calendar');
     const checkbox = document.getElementById('drop-remove');
     const modalClickRight = $(`#modal-click-right`);
@@ -133,10 +134,10 @@
                         },
                         eventReceive: function(info) {
                             if (!readOnly) {
-                                var projectId = document.getElementById('project_id').value;
-                                var subProjectId = document.getElementById('sub_project_id').value;
-                                var lodId = document.getElementById('lod_id').value;
-                                var disciplineId = document.getElementById('discipline_id').value;
+                                var projectId = document.getElementById('project_id'+suffix).value;
+                                var subProjectId = document.getElementById('sub_project_id'+suffix).value;
+                                var lodId = document.getElementById('lod_id'+suffix).value;
+                                var disciplineId = document.getElementById('discipline_id'+suffix).value;
                                 var dateTime = info.event.startStr;
                                 var draggedElDiv = info.draggedEl;
                                 var taskId = draggedElDiv.children[0].getAttribute('id');
@@ -185,7 +186,15 @@
                             var eventTitle = info.event.title;
                             var tagSubProject = info.event.extendedProps.tag_sub_project;
                             var nameProject = info.event.extendedProps.name_project;
-                            var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between" title="' + nameProject + '"><div>' + timeText + '</div>' + tagSubProject + '</div>' + eventTitle + '</div>';
+                            var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between" title="' 
+                                + nameProject + 
+                                '"><div>' 
+                                + timeText + 
+                                '</div>' 
+                                + tagSubProject + 
+                                '</div>' 
+                                + eventTitle + 
+                                '</div>';
                             return {
                                 html: eventTitleHTML
                             };
@@ -204,7 +213,7 @@
             var dataTimeValue = $(this).attr('data-time');
             if(timeBreaks){
                 if ( dataTimeValue === timeBreaks[0] ||dataTimeValue === timeBreaks[1]) {
-                    $(this).css('background-color', '#fdba74');
+                    $(this).css({'background-color': '#fdba74','border-radius': 0});
                 } 
             }
         });
@@ -213,7 +222,7 @@
     function handleContextMenu(info) {
         var rect = info.el.getBoundingClientRect();
         var x = rect.top;
-        var y = rect.left + 200;
+        var y = rect.left + 100;
         modalClickRight.css({
             top: x,
             left: y
@@ -261,6 +270,7 @@
                 event.setExtendedProp('work_mode_id', response.data.work_mode_id);
                 event.setExtendedProp('remark', response.data.remark);
                 event.setExtendedProp('sub_task_id', response.data.sub_task_id);
+                event.setExtendedProp('tag_sub_project', response.data.tag_sub_project);
                 event.setProp('backgroundColor', response.data.color);
                 event.setProp('title', response.data.title);
                 toastr.success('Update data timesheet line successfully!');

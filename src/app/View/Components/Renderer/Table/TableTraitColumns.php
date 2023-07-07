@@ -49,6 +49,8 @@ trait TableTraitColumns
         $width = $column['width'] ?? "";
         $colspan = $column['colspan'] ?? 1;
         $title = $column['title'] ?? Str::headline($column['dataIndex']);
+        $subTitle = $column['subTitle'] ?? null;
+        if ($subTitle) $title .= "<hr/><i>" . $subTitle . "</i>";
         $tooltip = "Column details:\n";
         $tooltip .= "+ DataIndex: $dataIndex\n";
         $tooltip .= "+ ColumnName: $columnName\n";

@@ -49,12 +49,14 @@ class Workplace extends ModelExtended
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function getDurationMorningDefault(){
+    public function getDurationMorningDefault()
+    {
         $startTime =  Carbon::parse($this->standard_start_time);
         $startBreakTime =  Carbon::parse($this->standard_start_break);
         return $startBreakTime->diffInMinutes($startTime);
     }
-    public function isDifferentDay(){
+    public function isDifferentDay()
+    {
         return $this->getDurationMorningDefault() > $this->standard_working_min;
     }
     public function getDurationMorning()
@@ -62,7 +64,7 @@ class Workplace extends ModelExtended
         $duration = $this->getDurationMorningDefault();
         $startTime =  Carbon::parse($this->standard_start_time);
         $startBreakTime =  Carbon::parse($this->standard_start_break);
-        if($this->isDifferentDay()){
+        if ($this->isDifferentDay()) {
             $startTime =  Carbon::parse($this->standard_start_time)->subDay();
         }
         $duration = $startBreakTime->diffInMinutes($startTime);
@@ -77,5 +79,47 @@ class Workplace extends ModelExtended
         $startBreakTime = Carbon::parse($this->standard_start_break);
         $endBreakTime = $startBreakTime->addMinute($this->break_duration_in_min);
         return $endBreakTime->format('H:i:s');
+    }
+
+    public function getTotalWorkingHoursOfYear($year)
+    {
+        $allWorkers = $this->getUsers->pluck('id');
+        $workingHours = User::getTotalWorkingHoursOfYear($allWorkers, $year);
+        $overtimeHours = User::getTotalOvertimeHoursOfYear($allWorkers, $year);
+
+        $result0 = [];
+        $months = [
+            "$year-01", "$year-02", "$year-03", "$year-04", "$year-05", "$year-06",
+            "$year-07", "$year-08", "$year-09", "$year-10", "$year-11", "$year-12"
+        ];
+        foreach ($months as $month) {
+            foreach ($allWorkers as $uid) {
+                $total = 0;
+                $key = $uid . "_" . $month;
+                if (isset($workingHours[$key])) {
+                    $result0[$key]['working_hours'] = $workingHours[$key]->working_hours;
+                    $result0[$key]['month'] = $workingHours[$key]->month0;
+                    $total += $workingHours[$key]->working_hours;
+                }
+                if (isset($overtimeHours[$key])) {
+                    $result0[$key]['overtime_hours'] = $overtimeHours[$key]->ot_hours;
+                    $result0[$key]['month'] = $overtimeHours[$key]->month0;
+                    $total += $overtimeHours[$key]->ot_hours;
+                }
+                if ($total > 0) {
+                    $result0[$key]['total'] = $total;
+                }
+            }
+        }
+        // dump($result);
+        $result = [];
+        foreach ($result0 as $r) {
+            if (!isset($result[$r['month']])) {
+                $result[$r['month']] = 0;
+            }
+            $result[$r['month']] += $r['total'] ?? 0;
+        }
+        // dump($result);
+        return $result;
     }
 }

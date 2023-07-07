@@ -8,6 +8,15 @@
         "on_hold": "true",
         "closed": "true"
     },
+    "_correctable": {
+        "name": "_correctable",
+        "column_name": "correctable",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",
@@ -179,18 +188,27 @@
         "on_hold": "true",
         "closed": "true"
     },
-    "_correctable": {
-        "name": "_correctable",
-        "column_name": "correctable",
+    "_correctable_id": {
+        "name": "_correctable_id",
+        "column_name": "correctable_id",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
         "closed": "true"
     },
-    "_correctable_id": {
-        "name": "_correctable_id",
-        "column_name": "correctable_id",
+    "_due_date": {
+        "name": "_due_date",
+        "column_name": "due_date",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",

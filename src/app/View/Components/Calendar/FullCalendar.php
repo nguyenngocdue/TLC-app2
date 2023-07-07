@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\GetSetCookie;
@@ -9,6 +10,7 @@ use Illuminate\View\Component;
 
 class FullCalendar extends Component
 {
+    use TraitGetSuffixListenerControl;
     /**
      * Create a new component instance.
      *
@@ -44,6 +46,7 @@ class FullCalendar extends Component
             'readOnly' => $this->readOnly,
             'arrHidden' => $this->arrHidden,
             'timeBreaks' => $timeBreaks,
+            'suffix' => $this->getSuffix(),
         ]);
     }
     private function getTimeBreaksByWorkplace($workplace){
@@ -63,5 +66,8 @@ class FullCalendar extends Component
             default:
                 break;
         }
+    }
+    private function getSuffix(){
+        return '_11111';
     }
 }

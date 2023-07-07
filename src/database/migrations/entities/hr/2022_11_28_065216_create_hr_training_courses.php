@@ -19,13 +19,14 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('hse_induction_lines', function (BlueprintExtended $table) {
+        $schema->create('hr_training_courses', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->text('description')->nullable();
-            $table->float('training_hours')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('hse_induction_id');
+            $table->string('slug')->unique();
+            $table->unsignedBigInteger('facilitator_id')->nullable();
+            $table->unsignedBigInteger('training_location_id')->nullable();
+            $table->orderable();
             $table->appendCommonFields();
         });
     }
@@ -37,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hse_induction_lines');
+        Schema::dropIfExists('hr_training_courses');
     }
 };

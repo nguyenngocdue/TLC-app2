@@ -31,6 +31,8 @@ return new class extends Migration
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('unsafe_action_type_id')->nullable();
             $table->dateTime('opened_date')->nullable();
+            $table->text('remark')->nullable();
+            $table->hasDueDate();
             $table->orderable();
             $table->closable();
             $table->appendCommonFields();

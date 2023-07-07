@@ -23,7 +23,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
+            $table->string('employeeid')->nullable();
+            $table->string('slug')->nullable(); //unique();
             $table->unsignedBigInteger('injured_person_id')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->dateTime('injury_datetime')->nullable();

@@ -59,6 +59,9 @@
     "ghg_sheets": {
         "name": "ghg_sheets"
     },
+    "hr_course_trainings": {
+        "name": "hr_course_trainings"
+    },
     "hr_overtime_request_lines": {
         "name": "hr_overtime_request_lines",
         "storeEmpty_and_updateShort": "true"
@@ -78,6 +81,13 @@
         "name": "hr_timesheet_workers",
         "storeEmpty_and_updateShort": "true"
     },
+    "hr_training_lines": {
+        "name": "hr_training_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "hr_trainings": {
+        "name": "hr_trainings"
+    },
     "hse_corrective_actions": {
         "name": "hse_corrective_actions",
         "storeEmpty_and_updateShort": "true"
@@ -87,13 +97,6 @@
     },
     "hse_incident_reports": {
         "name": "hse_incident_reports"
-    },
-    "hse_induction_lines": {
-        "name": "hse_induction_lines",
-        "storeEmpty_and_updateShort": "true"
-    },
-    "hse_inductions": {
-        "name": "hse_inductions"
     },
     "hse_insp_chklst_lines": {
         "name": "hse_insp_chklst_lines",
@@ -120,6 +123,9 @@
     },
     "hse_insp_values": {
         "name": "hse_insp_values"
+    },
+    "hse_walkthroughs": {
+        "name": "hse_walkthroughs"
     },
     "loggers": {
         "name": "loggers"
