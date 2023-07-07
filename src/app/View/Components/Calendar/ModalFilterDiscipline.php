@@ -3,12 +3,12 @@
 namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Term;
-use Database\Seeders\FieldSeeder;
+use App\Models\User_discipline;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class SidebarFilterLod extends Component
+
+class ModalFilterDiscipline extends Component
 {
     use TraitListenerControl;
     /**
@@ -25,41 +25,17 @@ class SidebarFilterLod extends Component
         private $readOnly = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
-        private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
+        private $typeToLoadListener = null,
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
     private function getDataSource()
     {
-        $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
-        $dataSource = Term::select('id', 'name', 'description')
-            ->where('field_id', $field_id)
-            ->whereNotIn('id', [221, 222])
+        $dataSource = User_discipline::select('id', 'name', 'description')
             ->orderBy('name')
             ->get();
         return $dataSource;
-    }
-
-    private function getSuffix()
-    {
-        return "_11111";
-    }
-
-    private function getListenersOfDropdown2()
-    {
-        $suffix = $this->getSuffix();
-        return [
-            [
-                'listen_action' => 'dot',
-                'column_name' => 'lod_id' . $suffix,
-                'listen_to_attrs' => ['lod_id'],
-                'listen_to_fields' => ['sub_project_id' . $suffix],
-                'listen_to_tables' => ['sub_projects'],
-                'table_name' => 'terms',
-                'triggers' => ['sub_project_id' . $suffix],
-            ],
-        ];
     }
 
     /**

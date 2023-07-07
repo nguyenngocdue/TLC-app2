@@ -7,7 +7,7 @@
 
 @if($status && !($action === 'create'))
     <div class="w-full mb-4 p-2 bg-white rounded-lg dark:bg-gray-800 grid grid-cols-12 gap-2 no-print">
-        <div class="col-span-12 md:col-span-5 lg:col-span-3">
+        <div class="col-span-12 md:col-span-4 lg:col-span-2">
             <x-renderer.card class="bg-white border py-1" title="Test Status" >
                 <div class="mb-1">
                     @foreach($statuses as $key => $value)
@@ -20,7 +20,7 @@
                 </div>
             </x-renderer.card>
         </div>
-        <div class="col-span-12 md:col-span-3 lg:col-span-5 w-full max-h-60">
+        <div class="col-span-12 md:col-span-6 lg:col-span-8 w-full max-h-60">
             <x-renderer.card title="Accessible" class="bg-white border overflow-y-scroll " py="1">
                 <div class="mb-1">
                     @isset($statuses[$status])
@@ -42,17 +42,19 @@
                     @if($nextItem)
                         <x-renderer.button title="Next Record" href="{{route($type.'.edit',$nextItem->id)}}" icon="fa-duotone fa-forward  ">#{{$nextItem->id}}</x-renderer.button>
                     @endif
-                </div>
-            </x-renderer.card>
-        </div>
-        <div class="col-span-12 md:col-span-2 lg:col-span-2 w-full">
-            <x-renderer.card title="Console.log()" class="bg-white border py-1">
+                </div> 
+                Console.log
                 <div class="mb-1 text-center">
                    <x-renderer.button size="xs" onClick="console.log(superProps)">Super-Props</x-renderer.button>
                    <x-renderer.button size="xs" onClick="console.log(superWorkflows)">Super-Workflows</x-renderer.button>
                 </div>
             </x-renderer.card>
-           
         </div>
+        {{-- <div class="col-span-12 md:col-span-2 lg:col-span-2 w-full">
+            <x-renderer.card title="Console.log()" class="bg-white border py-1">
+               
+            </x-renderer.card>
+           
+        </div> --}}
     </div>
 @endif

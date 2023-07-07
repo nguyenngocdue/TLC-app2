@@ -6,6 +6,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Sub_project;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class SidebarFilterSubProject extends Component
 {
@@ -35,6 +36,11 @@ class SidebarFilterSubProject extends Component
             ->orderBy('name')
             ->get();
         return $dataSource;
+    }
+
+    private function getSuffix()
+    {
+        return "_11111";
     }
 
     /**

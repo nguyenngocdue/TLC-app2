@@ -88,6 +88,7 @@ class UploadService2
                     $nameValidate => 'array|max:' . $fileUploadRemainingCount,
                     $nameValidate . '.*' => 'file|' . $allowedFileTypes . '|max:' . $maxFileSize,
                 ]);
+                dd($files);
                 $files = $files['toBeUploaded'];
                 foreach ($files as $file) {
                     if (!$file->getClientOriginalExtension()) {

@@ -1396,3 +1396,13 @@ a.fc-event:hover {
 .fc-theme-bootstrap5-shaded {
     background-color: var(--bs-gray-200);
 }
+.fc-col-header tr{
+    background-color:#84cc16;
+}
+.fc-timegrid-slots table tbody tr:nth-child(even){
+    /* background-color: #E2EFDA */
+}
+.fc-timegrid-slots table tbody tr:nth-child(odd){
+    /* background-color: #E2EFDA */
+}
+

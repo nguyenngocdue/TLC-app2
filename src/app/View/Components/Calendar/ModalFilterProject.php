@@ -3,11 +3,11 @@
 namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Pj_task;
+use App\Models\Project;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class ModalFilterTask extends Component
+class ModalFilterProject extends Component
 {
     use TraitListenerControl;
     /**
@@ -16,35 +16,25 @@ class ModalFilterTask extends Component
      * @return void
      */
     public function __construct(
+        private $id,
         private $name,
         private $tableName,
         private $selected = "",
         private $multiple = false,
-        private $readOnly = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
+        private $readOnly = false,
         private $allowClear = false,
-        private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
     ) {
+        // if (old($name)) $this->selected = old($name);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
     private function getDataSource()
     {
-        $dataSource = Pj_task::select('id', 'name', 'description')->get();
-        foreach ($dataSource as &$line) {
-            $line->{"getDisciplinesOfTask()"} = $line->getDisciplinesOfTask()->pluck('id');
-            $line->{"getLodsOfTask()"} = $line->getLodsOfTask()->pluck('id');
-        }
-        return $dataSource;
+        return Project::select('id', 'name', 'description')
+            ->orderBy('name')
+            ->get();
     }
-
-    // private function getListenersOfDropdown2()
-    // {
-    //     $a = $this->getListeners2($this->typeToLoadListener);
-    //     $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $this->name));
-    //     $listenersOfDropdown2 = [$a[0]];
-    //     return $listenersOfDropdown2;
-    // }
 
     /**
      * Get the view / contents that represent the component.
@@ -56,6 +46,6 @@ class ModalFilterTask extends Component
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
         // dump($params);
-        return view('components.controls.has-data-source.' . $this->control, $params);
+        return view('components.controls.has-data-source.dropdown2', $params);
     }
 }

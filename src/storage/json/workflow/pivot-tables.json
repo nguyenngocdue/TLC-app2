@@ -10,8 +10,8 @@
         "lookup_tables": null,
         "sort_by": null
     },
-    "apple_store_draw_row_field": {
-        "name": "apple_store_draw_row_field",
+    "apple_store_delete_fields_database": {
+        "name": "apple_store_delete_fields_database",
         "filters": null,
         "row_fields": "category,\r\nproduct,\r\ndate,\r\ndate_discount,\r\nprice,\r\ndiscount,\r\namount",
         "column_fields": null,
@@ -21,6 +21,17 @@
         "lookup_tables": null,
         "sort_by": "category"
     },
+    "apple_store_duplicate_field_column_field_value_index_field": {
+        "name": "apple_store_duplicate_field_column_field_value_index_field",
+        "filters": null,
+        "row_fields": "product",
+        "column_fields": "date,\r\ncategory,\r\ncategory,\r\ncategory,",
+        "value_index_fields": "amount,\r\namount,\r\namount,\r\ncategory,",
+        "data_aggregations": "sum,",
+        "data_fields": "amount,",
+        "lookup_tables": null,
+        "sort_by": null
+    },
     "apple_store_duplicate_value_in_column_field": {
         "name": "apple_store_duplicate_value_in_column_field",
         "filters": null,
@@ -29,6 +40,28 @@
         "value_index_fields": "amount,\r\namount,\r\namount,",
         "data_aggregations": "sum,",
         "data_fields": "amount,",
+        "lookup_tables": null,
+        "sort_by": null
+    },
+    "apple_store_duplicate_value_in_column_field_many_objects": {
+        "name": "apple_store_duplicate_value_in_column_field_many_objects",
+        "filters": null,
+        "row_fields": "category",
+        "column_fields": "product,\r\ndate,\r\ndate,",
+        "value_index_fields": "amount,\r\ndiscount,\r\ndiscount,",
+        "data_aggregations": "sum,",
+        "data_fields": "discount,",
+        "lookup_tables": null,
+        "sort_by": null
+    },
+    "apple_store_empty_input": {
+        "name": "apple_store_empty_input",
+        "filters": null,
+        "row_fields": null,
+        "column_fields": null,
+        "value_index_fields": null,
+        "data_aggregations": null,
+        "data_fields": null,
         "lookup_tables": null,
         "sort_by": null
     },
@@ -43,12 +76,23 @@
         "lookup_tables": null,
         "sort_by": null
     },
-    "apple_store_empty_row_field_sum_attr": {
-        "name": "apple_store_empty_row_field_sum_attr",
+    "apple_store_minimum_quantity_column_field": {
+        "name": "apple_store_minimum_quantity_column_field",
         "filters": null,
         "row_fields": null,
-        "column_fields": "category,\r\nproduct,\r\ndate",
+        "column_fields": "category,\r\nproduct,\r\ndate,\r\ndate,",
         "value_index_fields": "amount",
+        "data_aggregations": "sum",
+        "data_fields": "amount",
+        "lookup_tables": null,
+        "sort_by": null
+    },
+    "apple_store_minimum_quantity_column_field_equal_3": {
+        "name": "apple_store_minimum_quantity_column_field_equal_3",
+        "filters": null,
+        "row_fields": null,
+        "column_fields": "category,\r\nproduct,\r\ndate,",
+        "value_index_fields": "amount,\r\namount,\r\namount,",
         "data_aggregations": "sum",
         "data_fields": "amount",
         "lookup_tables": null,
@@ -58,21 +102,21 @@
         "name": "apple_store_product_per_date",
         "filters": null,
         "row_fields": "product",
-        "column_fields": "date",
-        "value_index_fields": "amount",
+        "column_fields": "date,",
+        "value_index_fields": "discount",
         "data_aggregations": "sum,",
-        "data_fields": "amount,",
+        "data_fields": "discount,",
         "lookup_tables": null,
         "sort_by": "product:desc"
     },
-    "apple_store_test_display": {
-        "name": "apple_store_test_display",
+    "apple_store_test_code": {
+        "name": "apple_store_test_code",
         "filters": null,
-        "row_fields": "product",
-        "column_fields": "date,\r\ndate,\r\ndate,",
-        "value_index_fields": "amount,\r\namount,\r\namount,",
+        "row_fields": "category",
+        "column_fields": "product,\r\ndate,\r\ndate,",
+        "value_index_fields": "amount,\r\ndiscount,\r\ndiscount,",
         "data_aggregations": "sum,",
-        "data_fields": "amount,",
+        "data_fields": "discount,",
         "lookup_tables": null,
         "sort_by": "category:desc"
     },
@@ -80,7 +124,7 @@
         "name": "hr_timesheet_employee_date",
         "filters": "workplace_id, department_id",
         "row_fields": "staff_id,\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name), \r\ntype_id(user_types.name),\r\ndepartment_id(departments.name),\r\ncategory_id(user_categories.name)",
-        "column_fields": "time_sheet_start_time_otr, time_sheet_start_time_wfh,\r\ntime_sheet_start_time",
+        "column_fields": "ts_date,\r\nts_date, ts_date",
         "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_aggregations": "sum,sum,sum,concat",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, workplace_id",
@@ -102,10 +146,10 @@
         "name": "hr_timesheet_project_date",
         "filters": "workplace_id, department_id",
         "row_fields": "sub_project_id(sub_projects.name)",
-        "column_fields": "time_sheet_start_time_otr, time_sheet_start_time_wfh,\r\ntime_sheet_start_time",
+        "column_fields": "ts_date, ts_date,\r\nts_date",
         "value_index_fields": "time_sheet_hours_otr,\r\ntime_sheet_hours_wfh,\r\ntime_sheet_hours",
         "data_aggregations": "sum,sum,sum",
-        "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
+        "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh",
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\n pj_tasks",
         "sort_by": null
     },
@@ -116,7 +160,7 @@
         "column_fields": "sub_project_id(sub_projects.name)",
         "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_aggregations": "sum,sum,sum",
-        "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, category_name",
+        "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh",
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_categories,\r\nuser_types,\r\nsub_projects",
         "sort_by": null
     }

@@ -19,6 +19,7 @@ class DraggableEvent2 extends Component
         private $readOnly = false,
         private $saveOnChange = false,
         private $action = null,
+        private $id,
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
@@ -30,11 +31,11 @@ class DraggableEvent2 extends Component
         $table = $prop['relationships']['table'];
         $span = $prop['relationships']['radio_checkbox_colspan'] ? $prop['relationships']['radio_checkbox_colspan'] : 4;
         // dump($prop['relationships']);
-        $id = $this->name;
+        $id = $this->id;
         $name =  $this->name;
         $params = [
             'name' => $name,
-            'id' => $id,
+            'id' => $id . "AAAAA",
             'selected' => $this->selected,
             'multiple' => $this->multiple ? true : false,
             'classList' => ClassList::RADIO_CHECKBOX . ($this->readOnly ? ' readonly ' : ''),
@@ -44,7 +45,6 @@ class DraggableEvent2 extends Component
             'saveOnChange' => $this->saveOnChange,
             'action' => $this->action,
         ];
-
         return view('components.controls.has-data-source.draggable-event2', $params);
     }
 }

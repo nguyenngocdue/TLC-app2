@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\GetSetCookie;
 use Illuminate\View\Component;
@@ -31,6 +32,9 @@ class FullCalendar extends Component
     public function render()
     {
         $token = CurrentUser::getTokenForApi();
+        $ownerId = ($this->timesheetableType)::findFromCache($this->timesheetableId)->owner_id ?? CurrentUser::id();
+        $workplace = User::findFromCache($ownerId)->workplace;
+        $timeBreaks = $this->getTimeBreaksByWorkplace($workplace);
         return view('components.calendar.full-calendar', [
             'modalId' => 'calendar001',
             'timesheetableType' => $this->timesheetableType,
@@ -39,6 +43,25 @@ class FullCalendar extends Component
             'token' => $token,
             'readOnly' => $this->readOnly,
             'arrHidden' => $this->arrHidden,
+            'timeBreaks' => $timeBreaks,
         ]);
+    }
+    private function getTimeBreaksByWorkplace($workplace){
+        switch ($workplace) {
+            case 1:
+            case 6:
+                return ['12:00:00','12:30:00'];
+                break;
+            case 2:
+            case 3:
+            case 4:
+                return ['11:30:00','12:00:00'];
+                break;
+            case 5:
+                return ['1:00:00','1:30:00'];
+                break;
+            default:
+                break;
+        }
     }
 }

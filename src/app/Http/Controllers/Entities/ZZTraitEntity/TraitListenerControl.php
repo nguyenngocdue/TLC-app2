@@ -9,6 +9,11 @@ trait TraitListenerControl
 {
     use TraitEntityListenDataSource;
 
+    private function getSuffix()
+    {
+        return "";
+    }
+
     private function renderJSForK()
     {
         $tableName = $this->tableName;
@@ -22,13 +27,25 @@ trait TraitListenerControl
         $this->renderJSForListener();
     }
 
-    private function getListenersOfDropdown2()
+    //Public for Sidebar Filter Subproject
+    //Suffix is for case one form have multiple dropdown but same control (like sub projects in sidebar filter and sub projects in edit modal)
+    public function getListenersOfDropdown2()
     {
         $a = $this->getListeners2($this->typeToLoadListener);
         $columnName = $this->id ?? $this->name;
         // Log::info($columnName);
-        $a = array_values(array_filter($a, fn ($x) => $x['column_name'] == $columnName));
-        $listenersOfDropdown2 = [$a[0]];
+        $suffix = $this->getSuffix();
+        $a = array_values(array_filter($a, fn ($x) => ($x['column_name'] . $suffix) == $columnName));
+        if (!isset($a[0])) throw new \Exception("Can not find control with column_name as " . $columnName . ", maybe you forget getSuffix() function.");
+        $a = $a[0];
+
+        if ($suffix) {
+            $a['column_name'] .= $suffix;
+            foreach ($a['triggers'] as &$x) $x .= $suffix;
+            // foreach ($a['listen_to_fields'] as $x) $x .= $suffix;
+        }
+        // Log::info($a);
+        $listenersOfDropdown2 = [$a];
         return $listenersOfDropdown2;
     }
 

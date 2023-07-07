@@ -11,7 +11,10 @@
     const checkbox = document.getElementById('drop-remove');
     const modalClickRight = $(`#modal-click-right`);
     const modalTitleTaskValue = $(`#title_task_value`);
-    const modalTask = $(`#task_id_1`);
+    const modalProject = $(`#project_id`);
+    const modalSubProject = $(`#sub_project_id`);
+    const modalLOD= $(`#lod_id`);
+    const modalTask = $(`#task_id`);
     const modalSubTask = $(`#sub_task_id`);
     const modalWorkMode = $(`#work_mode_id`);
     const modalRemark = $(`#remark`);
@@ -20,6 +23,7 @@
     const timesheetableId = @json($timesheetableId);
     const apiUrl = @json($apiUrl);
     const token = @json($token);
+    const timeBreaks = @json($timeBreaks);
     modalContainer = document.querySelector("[modal-container]");
     let events = [];
     $(document).click(function(event) {
@@ -93,12 +97,21 @@
                                 handleUpdateModalEvent(info);
                                 //extended value render modal
                                 var extendedProps = info.event._def.extendedProps;
+                                var projectId = extendedProps.project_id;
+                                var subProjectId = extendedProps.sub_project_id;
+                                var lodId = extendedProps.lod_id;
                                 var taskId = extendedProps.task_id;
                                 var subTaskId = extendedProps.sub_task_id;
                                 var workModeId = extendedProps.work_mode_id;
                                 var remarkValue = extendedProps.remark;
                                 //render modal trigger
                                 modalTitleTaskValue.text(`Task: ${extendedProps.title_default}`);
+                                modalProject.val(projectId)
+                                modalProject.trigger('change');
+                                modalSubProject.val(subProjectId)
+                                modalSubProject.trigger('change');
+                                modalLOD.val(lodId)
+                                modalLOD.trigger('change');
                                 modalTask.val(taskId)
                                 modalTask.trigger('change');
                                 modalSubTask.val(subTaskId);
@@ -180,9 +193,21 @@
                     })
                     calendar.render();
                 }
+                changeBackgroudColorBreakTime();
             },
             error: function(jqXHR, textStatus, errorThrown) {},
         })
+    }
+    function changeBackgroudColorBreakTime(){
+        var trElements = $('td.fc-timegrid-slot');
+        trElements.each(function() {
+            var dataTimeValue = $(this).attr('data-time');
+            if(timeBreaks){
+                if ( dataTimeValue === timeBreaks[0] ||dataTimeValue === timeBreaks[1]) {
+                    $(this).css('background-color', '#fdba74');
+                } 
+            }
+        });
     }
 
     function handleContextMenu(info) {
@@ -197,10 +222,12 @@
         var duplicateButton = modalClickRight.find('.duplicate-button');
         var setMorningButton = modalClickRight.find('.set-morning-button');
         var setAfternoonButton = modalClickRight.find('.set-afternoon-button');
+        var setFullDayButton = modalClickRight.find('.set-full-day-button');
         deleteButton.attr('value', info.event.id);
         duplicateButton.attr('value', info.event.id);
         setMorningButton.attr('value', info.event.id);
         setAfternoonButton.attr('value', info.event.id);
+        setFullDayButton.attr('value', info.event.id);
     }
 
     function closeModalEvent() {
@@ -215,6 +242,10 @@
     function updateModalEvent(button) {
         var timesheetLineId = button.value;
         var data = {
+            'project_id': modalProject.val(),
+            'sub_project_id': modalSubProject.val(),
+            'lod_id': modalLOD.val(),
+            'task_id': modalTask.val(),
             'sub_task_id': modalSubTask.val(),
             'work_mode_id': modalWorkMode.val(),
             'remark': modalRemark.val(),
@@ -223,6 +254,10 @@
         if (timesheetLineId) {
             var event = calendar.getEventById(timesheetLineId);
             callApi('patch', url, data, null, function(event, response) {
+                event.setExtendedProp('project_id', response.data.project_id);
+                event.setExtendedProp('sub_project_id', response.data.sub_project_id);
+                event.setExtendedProp('lod_id', response.data.lod_id);
+                event.setExtendedProp('task_id', response.data.task_id);
                 event.setExtendedProp('work_mode_id', response.data.work_mode_id);
                 event.setExtendedProp('remark', response.data.remark);
                 event.setExtendedProp('sub_task_id', response.data.sub_task_id);
@@ -256,15 +291,30 @@
                         'user_id': event.extendedProps.user_id,
                     }
                     break;
+                case 'full_day':
+                    data = {
+                        'start_time': event.startStr,
+                        'time_type': 'full_day',
+                        'user_id': event.extendedProps.user_id,
+                    }
+                    break;
                 default:
                     break;
             }
             callApi('patch', url, data, event, function(info, calendar, response) {
                 if (response.data) {
                     event.remove();
-                    calendar.addEvent(response.data)
-                    toastr.success('Set time for timesheet line successfully!');
+                    if(Array.isArray(response.data)) {
+                        response.data.forEach(value => {
+                            calendar.addEvent(value)
+                            toastr.success('Set time for timesheet line successfully!');
+                        });
+                    }else{
+                        calendar.addEvent(response.data)
+                        toastr.success('Set time for timesheet line successfully!');
+                    }
                     modalClickRight.addClass('hidden')
+                    
                 }
             }, calendar, null, modalClickRight);
         } else {

@@ -110,6 +110,10 @@ class CurrentUser
     {
         return Auth::user();
     }
+    public static function getWorkPlace(){
+        $user = self::get();
+        return $user->getWorkPlace;
+    }
     public static function id()
     {
         $cu = self::get();

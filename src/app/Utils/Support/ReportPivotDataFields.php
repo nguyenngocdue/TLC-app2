@@ -59,7 +59,7 @@ class ReportPivotDataFields
             if (is_array($item)) {
                 foreach ($item as $key => $subItem) {
                     if (isset($subItem[key($subItem)])) {
-                        $updatedArray[$key]= [key($subItem) => $newValue];
+                        $updatedArray[$key] = [key($subItem) => $newValue];
                         break;
                     } else if (is_array($subItem)) {
                         $updatedArray = self::updateSumAmount($subItem, $newValue);
@@ -67,19 +67,24 @@ class ReportPivotDataFields
                 }
             }
         }
+        // dd($updatedArray);
         return $updatedArray;
     }
 
-    public static function executeOperations($dataAggregations,$transferredData,$data, $rowFields,$columnFields)
+    public static function executeOperations($dataAggregations, $transferredData, $data, $rowFields, $columnFields)
     {
-        // dd($data, $dataAggregations);
+        // dd($data, $transferredData);
+        // $arrayValue = array_map(fn ($items) => ReportPivotDataFields::execute($dataAggregations, $items), $transferredData);
         $arrayValue = array_map(fn ($items) => ReportPivotDataFields::execute($dataAggregations, $items), $data);
 
         if (!$rowFields) {
             $totalNumber = self::calculateSubArraysTotal($arrayValue);
             $updateArrayValue = self::updateSumAmount($arrayValue, $totalNumber);
+            // dd($updateArrayValue);
             return $updateArrayValue;
         }
+        $totalNumber = self::calculateSubArraysTotal($arrayValue);
+        // dd($data, $totalNumber, $arrayValue);
         return $arrayValue;
     }
 }
