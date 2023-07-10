@@ -71,6 +71,7 @@ function init() {
       {
         locationSpot: go.Spot.Top,
         isShadowed: true, shadowBlur: 1,
+        cursor: "pointer",
         shadowOffset: new go.Point(0, 1),
         shadowColor: "rgba(0, 0, 0, .14)",
         selectionAdornmentTemplate:  // selection adornment to match shape of nodes
@@ -80,6 +81,7 @@ function init() {
             ),
             $(go.Placeholder)
           ) , // end Adornment
+          
           click: function(e, obj){
             window.location.replace(obj.part.data.url);
           },
@@ -90,7 +92,7 @@ function init() {
           )  // end of Adornment
       },
       $(go.Shape, "RoundedRectangle", roundedRectangleParams,
-        { name: "SHAPE", fill: "#ffffff", strokeWidth: 0 },
+        { name: "SHAPE", fill: "#ffffff", strokeWidth: 0 ,},
         // gold if highlighted, white otherwise
         new go.Binding("fill", "fill")
       ),
