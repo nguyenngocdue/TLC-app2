@@ -2,7 +2,7 @@
     "_address": {
         "name": "_address",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_attachment": {
         "name": "_attachment",
@@ -12,12 +12,12 @@
     "_category": {
         "name": "_category",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_company": {
         "name": "_company",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_created_at": {
         "name": "_created_at",
@@ -27,7 +27,7 @@
     "_date_of_birth": {
         "name": "_date_of_birth",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -42,12 +42,12 @@
     "_department": {
         "name": "_department",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_discipline": {
         "name": "_discipline",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_domain": {
         "name": "_domain",
@@ -57,7 +57,7 @@
     "_email": {
         "name": "_email",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_email_verified_at": {
         "name": "_email_verified_at",
@@ -67,7 +67,7 @@
     "_employeeid": {
         "name": "_employeeid",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_featured_image": {
         "name": "_featured_image",
@@ -76,17 +76,17 @@
     "_first_date": {
         "name": "_first_date",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_first_name": {
         "name": "_first_name",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_full_name": {
         "name": "_full_name",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_getAvatar": {
         "name": "_getAvatar",
@@ -96,7 +96,7 @@
     "_getOtTeams()": {
         "name": "_getOtTeams()",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_getPosts": {
         "name": "_getPosts",
@@ -111,7 +111,7 @@
     "_getTshtTeams()": {
         "name": "_getTshtTeams()",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_guid": {
         "name": "_guid",
@@ -120,8 +120,9 @@
     },
     "_id": {
         "name": "_id",
-        "profile_readonly": "true",
-        "me_readonly": "true"
+        "me_readonly": "true",
+        "me_hidden": "true",
+        "profile_readonly": "true"
     },
     "_last_date": {
         "name": "_last_date",
@@ -130,7 +131,6 @@
     },
     "_last_name": {
         "name": "_last_name",
-        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_leaf_uids": {
@@ -141,14 +141,14 @@
     "_name": {
         "name": "_name",
         "profile_hidden": "true",
-        "profile_readonly": "true",
-        "me_readonly": "true"
+        "me_readonly": "true",
+        "profile_readonly": "true"
     },
     "_name_suffix": {
         "name": "_name_suffix",
         "profile_hidden": "true",
-        "profile_readonly": "true",
-        "me_readonly": "true"
+        "me_readonly": "true",
+        "profile_readonly": "true"
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -187,7 +187,7 @@
     "_position_rendered": {
         "name": "_position_rendered",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_provider": {
         "name": "_provider",
@@ -217,12 +217,12 @@
     "_time_keeping_type": {
         "name": "_time_keeping_type",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_time_zone": {
         "name": "_time_zone",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_title": {
         "name": "_title",
@@ -237,7 +237,7 @@
     "_user_id_passport": {
         "name": "_user_id_passport",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_user_pin": {
         "name": "_user_pin",
@@ -247,7 +247,7 @@
     "_user_type": {
         "name": "_user_type",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     },
     "_viewport_uids": {
         "name": "_viewport_uids",
@@ -257,6 +257,6 @@
     "_workplace": {
         "name": "_workplace",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_readonly": "true"
     }
 }
