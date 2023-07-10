@@ -57,7 +57,7 @@ class UploadService2
         }
         return $result;
     }
-    private function countFileUploadByCondition($fieldName,$id)
+    private function countFileUploadByCondition($fieldName, $id)
     {
         $fieldId = Field::where('name', $fieldName)->first()->id;
         return Attachment::where('object_type', $this->model)
@@ -75,12 +75,12 @@ class UploadService2
             $filesUpload = $request->files;
             $attachmentRows = [];
             foreach ($filesUpload as $fieldName => $files) {
-                $property = Properties::getFor('attachment', '_'.$fieldName);
+                $property = Properties::getFor('attachment', '_' . $fieldName);
                 // $property = ($attachmentP['_' . $fieldName] ?? ['max_file_size' => 10, 'max_file_count' => 10, 'allowed_file_types' => 'only_images']);
                 $nameValidate = $fieldName . '.toBeUploaded';
                 $maxFileSize = $property['max_file_size'] * 1024;
                 $maxFileCount = $property['max_file_count'];
-                $fileUploadCount = $this->countFileUploadByCondition($fieldName,$request->input('id'));
+                $fileUploadCount = $this->countFileUploadByCondition($fieldName, $request->input('id'));
                 $fileUploadRemainingCount = $maxFileCount - $fileUploadCount;
                 $allowedFileTypes = $property['allowed_file_types'];
                 $allowedFileTypes = $this->getAllowedFileTypes($allowedFileTypes);
@@ -88,7 +88,7 @@ class UploadService2
                     $nameValidate => 'array|max:' . $fileUploadRemainingCount,
                     $nameValidate . '.*' => 'file|' . $allowedFileTypes . '|max:' . $maxFileSize,
                 ]);
-                dd($files);
+                // dd($files);
                 $files = $files['toBeUploaded'];
                 foreach ($files as $file) {
                     if (!$file->getClientOriginalExtension()) {
