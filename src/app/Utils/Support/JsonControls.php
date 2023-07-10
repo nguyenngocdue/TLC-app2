@@ -6,7 +6,7 @@ use App\Utils\CacheToRamForThisSection;
 
 class JsonControls
 {
-    private static $statuses_path = "configs/view/dashboard/controls.json";
+    private static $statuses_path = "configs/controls.json";
     private static function getAllExpensive()
     {
         $pathFrom = storage_path('json/' . self::$statuses_path);

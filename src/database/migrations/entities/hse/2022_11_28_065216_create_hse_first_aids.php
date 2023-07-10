@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('slug')->nullable(); //unique();
             $table->unsignedBigInteger('injured_person_id')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
+            $table->unsignedBigInteger('work_area_id')->nullable();
             $table->dateTime('injury_datetime')->nullable();
             $table->text('nature_of_injury')->nullable();
             $table->text('treatment_provided')->nullable();
