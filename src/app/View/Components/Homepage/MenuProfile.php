@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Homepage;
 
-use App\Utils\CacheToRamForThisSection;
+use App\Http\Controllers\Workflow\LibNavbars;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
@@ -22,19 +22,9 @@ class MenuProfile extends Component
         $this->table = substr($as, 0, strpos($as, "."));
         // dump($this->table);
     }
-
-    private static function getMenuExpensive()
-    {
-        $pathFrom = storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json';
-        $json = file_get_contents($pathFrom, true);
-        return $json;
-    }
-
     private function getUserMenu()
     {
-        // $userMenuStr = file_get_contents(storage_path() . '/json/configs/view/dashboard/navbarUserMenu.json');
-        $key = "navbarUserMenu_of_the_app";
-        $userMenuStr = CacheToRamForThisSection::get($key, fn () => static::getMenuExpensive());
+        $navbarStr = json_encode(LibNavbars::getAll());
         switch (env('APP_ENV')) {
             case "production":
                 $app = 'app2.tlcmodular.com';
@@ -54,13 +44,14 @@ class MenuProfile extends Component
                 break;
         }
         $phpMyAdminTable = $phpMyAdmin . "/index.php?route=/sql&pos=0&db=laravel&table=" . $this->table . "&"; //<<Last amp & to compromise the slash /
-        $userMenuStr = str_replace("{{app}}", $app, $userMenuStr);
-        $userMenuStr = str_replace("{{redis}}", $redis, $userMenuStr);
-        $userMenuStr = str_replace("{{phpMyAdmin}}", $phpMyAdmin, $userMenuStr);
-        $userMenuStr = str_replace("{{phpMyAdminTable}}", $phpMyAdminTable, $userMenuStr);
-        // dump($userMenuStr);
 
-        $userMenu = json_decode($userMenuStr, true);
+        $navbarStr = str_replace("{app}", $app, $navbarStr);
+        $navbarStr = str_replace("{redis}", $redis, $navbarStr);
+        $navbarStr = str_replace("{phpMyAdmin}", $phpMyAdmin, $navbarStr);
+        $navbarStr = str_replace("{phpMyAdminTable}", $phpMyAdminTable, $navbarStr);
+        // dump($navbarStr);
+
+        $userMenu = json_decode($navbarStr, true);
         // dump($userMenu);
         return $userMenu;
     }
