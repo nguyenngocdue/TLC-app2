@@ -7,18 +7,20 @@
 require('./bootstrap')
 
 // import { createApp } from 'vue'
-// import FullCalendar from './components/FullCalendar'
-// import Draggable from './components/Draggable'
+// import Antd from 'ant-design-vue';
+// import 'ant-design-vue/dist/antd.css';
+// import Results from './components/Results'
+// // import FullCalendar from './components/FullCalendar'
+// // import Draggable from './components/Draggable'
 
-// const app = createApp({})
+// const app = createApp({}).use(Antd)
 
-// app.component('full-calendar', FullCalendar)
-// app.component('draggable-calendar', Draggable)
-
+// app.component('antd-results', Results)
+// // app.component('draggable-calendar', Draggable)
 // app.mount('#app')
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+// /**
+//  * Next, we will create a fresh Vue application instance and attach it to
+//  * the page. Then, you may begin adding components to this application
+//  * or customize the JavaScript scaffolding to fit your unique needs.
+//  */
