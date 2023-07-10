@@ -11,9 +11,10 @@ class PivotReportDataFields
 
     private static function execute($dataAggregations, $data)
     {
-        if (!count($dataAggregations)) return [];
+        $dataIndex =  array_column($dataAggregations, 'type_operator', 'name');
+        if (!count($dataIndex)) return [];
         $newData = [];
-        foreach ($dataAggregations as $field => $operator) {
+        foreach ($dataIndex as $field => $operator) {
             $result = null;
             foreach ($data as $key => $items) {
                 switch ($operator) {
@@ -71,10 +72,9 @@ class PivotReportDataFields
         return $updatedArray;
     }
 
-    public static function executeOperations($dataAggregations, $transferredData, $data, $rowFields, $columnFields)
+    public static function executeOperations($dataAggregations, $data, $rowFields)
     {
-        // dd($data, $transferredData);
-        // $arrayValue = array_map(fn ($items) => PivotReportDataFields::execute($dataAggregations, $items), $transferredData);
+        if(empty($dataAggregations)) return $data;
         $arrayValue = array_map(fn ($items) => PivotReportDataFields::execute($dataAggregations, $items), $data);
 
         if (!$rowFields) {

@@ -142,6 +142,17 @@
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms,\r\n pj_tasks",
         "sort_by": "staff_id:desc,"
     },
+    "hr_timesheet_employee_project_change_data_field_title": {
+        "name": "hr_timesheet_employee_project_change_data_field_title",
+        "filters": "workplace_id, department_id",
+        "row_fields": "user_id(users.name),\r\ntype_id(user_types.name),\r\npj_task_id(pj_tasks.name),",
+        "column_fields": "sub_project_id(sub_projects.name)",
+        "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,time_sheet_hours_wfh",
+        "data_aggregations": "sum,\r\nsum,\r\nsum",
+        "data_fields": "time_sheet_hours{Operator},\r\ntime_sheet_hours_otr(abc.a){Operator 2},\r\ntime_sheet_hours_wfh{Operator 3}",
+        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms,\r\n pj_tasks",
+        "sort_by": null
+    },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",
         "filters": "workplace_id, department_id",
