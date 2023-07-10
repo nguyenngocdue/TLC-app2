@@ -17,6 +17,13 @@
                 <x-utils.filter-head-of-department tableName="departments" name="show_options[department]" id="department" typeToLoadListener="" selected="{{$showOptions['department'] ?? ''}}"></x-utils.filter-head-of-department>
             </div>
             <div>
+              <label for="">Workplace</label>
+              @php
+                $selectedWorkplace = join(',',$showOptions['workplace']) ?? '';
+              @endphp
+              <x-utils.filter-workplace tableName="workplaces" multiple="true" name="show_options[workplace][]" id="workplace" typeToLoadListener="" selected="{{$selectedWorkplace}}"></x-utils.filter-workplace>
+          </div>
+            <div>
               <label for="">Resigned</label>
               <x-renderer.editable.checkbox name="show_options[resigned]" cell="{{$showOptions['resigned'] ?? ''}}"></x-renderer.editable.checkbox>
               <label for="">Worker</label>

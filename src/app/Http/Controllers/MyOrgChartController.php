@@ -61,7 +61,7 @@ class MyOrgChartController extends Controller
         }
     }
     private function convertDataSource($value,$options){
-        if(in_array($value->resigned,$options['resigned']) 
+        if(in_array($value->department,$options['workplace']) && in_array($value->resigned,$options['resigned']) 
             && in_array($value->time_keeping_type,$options['time_keeping_type'])){
             $user = User::findFromCache($value->id);
             $positionRendered = $user->position_rendered;
@@ -83,6 +83,7 @@ class MyOrgChartController extends Controller
         $results = [
             'resigned' => [0],
             'time_keeping_type' => [2,3],
+            'workplace'=> [1,2,3,4,5,6],
         ];
         foreach ($showOptions as $key => $value) {
                 switch ($key) {
@@ -91,6 +92,9 @@ class MyOrgChartController extends Controller
                         break;
                     case 'time_keeping_type':
                         if($value == 'true') $results['time_keeping_type'] = [1,2,3];
+                            break;
+                    case 'workplace':
+                        if(is_array($value)) $results['workplace'] = $value;
                             break;
                     default:
                         break;

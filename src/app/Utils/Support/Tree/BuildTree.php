@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class BuildTree
 {
     protected static $key = 'my_company';
-    protected static $fillableUser = ['id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta', 'time_keeping_type','department'];
+    protected static $fillableUser = ['id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta', 'time_keeping_type','department','workplace'];
     protected static $fillableUserDiscipline = ['id', 'name', 'def_assignee'];
     private static function buildTree(array &$elements, $parentId = 0)
     {
