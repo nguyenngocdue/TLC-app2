@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('slug')->unique();
+            $table->unsignedBigInteger("workplace_id")->nullable();
             $table->appendCommonFields();
         });
         // Schema::create('work_areas', function (Blueprint $table) {
