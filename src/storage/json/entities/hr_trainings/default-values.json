@@ -11,9 +11,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
+    "_training_course_id": {
+        "name": "_training_course_id",
+        "column_name": "training_course_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -23,9 +23,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_training_course_id": {
-        "name": "_training_course_id",
-        "column_name": "training_course_id",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -67,7 +67,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "Ng\u01b0\u1eddi h\u01b0\u1edbng d\u1eabn",
+        "label_extra": "Ng\u01b0\u1eddi t\u1eadp hu\u1ea5n",
         "placeholder": "",
         "control_extra": ""
     },
@@ -79,7 +79,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "",
+        "label_extra": "\u0110\u1ecba \u0111i\u1ec3m t\u1eadp hu\u1ea5n",
         "placeholder": "",
         "control_extra": ""
     },
@@ -91,7 +91,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "Ng\u00e0y",
+        "label_extra": "Ng\u00e0y t\u1eadp hu\u1ea5n",
         "placeholder": "",
         "control_extra": ""
     },
