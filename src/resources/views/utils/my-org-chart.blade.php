@@ -14,7 +14,7 @@
         <div class="col-span-4">
           <label for="">Workplace</label>
               @php
-                $selectedWorkplace = join(',',$showOptions['workplace']) ?? '';
+                $selectedWorkplace = isset($showOptions['workplace']) ? join(',',$showOptions['workplace']) : null;
               @endphp
               <x-utils.filter-workplace tableName="workplaces" multiple="true" name="show_options[workplace][]" id="workplace" typeToLoadListener="" selected="{{$selectedWorkplace}}"></x-utils.filter-workplace>
         </div>

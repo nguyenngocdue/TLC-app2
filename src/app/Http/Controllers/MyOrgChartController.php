@@ -61,9 +61,9 @@ class MyOrgChartController extends Controller
         }
     }
     private function convertDataSource($value,$options){
-        if(in_array($value->department,$options['workplace']) && in_array($value->resigned,$options['resigned']) 
+        if(in_array($value->workplace,$options['workplace']) && in_array($value->resigned,$options['resigned']) 
             && in_array($value->time_keeping_type,$options['time_keeping_type'])){
-                $id = $value->id;
+            $id = $value->id;
             $user = User::findFromCache($id);
             $positionRendered = $user->position_rendered;
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
