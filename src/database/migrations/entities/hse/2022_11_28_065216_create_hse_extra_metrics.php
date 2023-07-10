@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('slug')->nullable(); //unique();
-            $table->dateTime('metric_datetime')->nullable();
+            $table->date('metric_month')->nullable();
             $table->float('total_discipline');
             $table->float('total_third_party_insp_audit');
             $table->float('total_drill');

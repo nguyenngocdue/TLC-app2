@@ -6,10 +6,13 @@ use App\BigThink\ModelExtended;
 
 class Hse_extra_metric extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "slug", "owner_id","","total_discipline","total_third_party_insp_audit","total_drill"];
+    protected $fillable = [
+        "id", "name", "description", "slug", "owner_id",
+        "total_discipline", "total_third_party_insp_audit", "total_drill",
+        'metric_month',
+    ];
     protected $table = "hse_extra_metrics";
     protected static $statusless = true;
 
-    public static $eloquentParams = [
-    ];
+    public static $eloquentParams = [];
 }

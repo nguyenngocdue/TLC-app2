@@ -19,9 +19,9 @@
         "column_name": "slug",
         "new": "true"
     },
-    "_metric_datetime": {
-        "name": "_metric_datetime",
-        "column_name": "metric_datetime",
+    "_metric_month": {
+        "name": "_metric_month",
+        "column_name": "metric_month",
         "new": "true"
     },
     "_total_discipline": {
