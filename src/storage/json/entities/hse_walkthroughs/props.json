@@ -117,7 +117,7 @@
         "name": "_getCorrectiveActions",
         "column_name": "getCorrectiveActions",
         "column_type": "eloquent_prop",
-        "label": "Lines",
+        "label": "Unsafe Practices",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",
