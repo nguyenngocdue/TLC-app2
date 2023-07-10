@@ -31,13 +31,13 @@
         "rejected": "true",
         "approved": "true"
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+    "_getHrOtrLines1": {
+        "name": "_getHrOtrLines1",
+        "column_name": "getHrOtrLines1",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -71,6 +71,14 @@
         "rejected": "true",
         "approved": ""
     },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -82,6 +90,22 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
         "new": "",
         "pending_approval": "",
         "rejected": "",
