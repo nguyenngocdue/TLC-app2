@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
+use App\Models\Department;
 use App\Models\User;
 use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Http\Request;
@@ -20,14 +21,27 @@ class MyOrgChartController extends Controller
         $tree = BuildTree::getTree();
         $results = [];
         $showOptions = $this->getUserSettingsViewOrgChart();
+        $this->transformDataTree($tree,$showOptions);
         $this->x($tree,$results,$this->getOptionsRenderByUserSetting($showOptions));
         usort($results,function($a,$b){
             return strcmp($a['name'],$b['name']);
         });
         return view(
-            'welcome-canh',
-            ['dataSource'=> $results,'showOptions'=>$showOptions]
+            'utils.my-org-chart',
+            ['dataSource'=> $results,
+            'showOptions'=>$showOptions,
+
+            ]
         );
+    }
+    private function transformDataTree(&$tree,$showOptions = []){
+        if(isset($showOptions['department'])){
+            $department = Department::findFromCache($showOptions['department']);
+            $headOfDepartmentId = $department->head_of_department;
+            if($headOfDepartmentId){
+                $tree = BuildTree::getTreeById($headOfDepartmentId);
+            }
+        }
     }
     private function x($tree,&$results,$options){
         foreach ($tree as $value) {
