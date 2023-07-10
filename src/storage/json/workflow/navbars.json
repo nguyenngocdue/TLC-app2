@@ -47,6 +47,12 @@
         "href": "\/utils\/parser",
         "icon_fa": "fa-duotone fa-brackets-curly"
     },
+    "createThumbnail": {
+        "name": "createThumbnail",
+        "title": "Create Thumbnail",
+        "href": "\/utils\/createThumbnail",
+        "icon_fa": "fa-sharp fa-light fa-image"
+    },
     "hr1": {
         "name": "hr1",
         "title": "External",
@@ -94,11 +100,5 @@
         "title": "Font Awesome 6 Pro",
         "href": "https:\/\/fontawesome.com\/icons",
         "icon_fa": "fa-duotone fa-font-awesome"
-    },
-    "createThumbnail": {
-        "name": "createThumbnail",
-        "title": "Create Thumbnail",
-        "href": "\/utils\/createThumbnail",
-        "icon_fa": "fa-sharp fa-light fa-image"
     }
 }
