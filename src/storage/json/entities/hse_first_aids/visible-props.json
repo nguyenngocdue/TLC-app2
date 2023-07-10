@@ -29,6 +29,11 @@
         "column_name": "assignee_1",
         "new": "true"
     },
+    "_work_area_id": {
+        "name": "_work_area_id",
+        "column_name": "work_area_id",
+        "new": "true"
+    },
     "_injury_datetime": {
         "name": "_injury_datetime",
         "column_name": "injury_datetime",

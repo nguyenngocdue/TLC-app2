@@ -19,8 +19,8 @@
         "name": "_attachment_3",
         "field_id": "3",
         "field_name": "attachment_3",
-        "max_file_size": "10",
-        "max_file_count": "10",
+        "max_file_size": "1000",
+        "max_file_count": "1000",
         "allowed_file_types": "only_media"
     },
     "_attachment_4": {

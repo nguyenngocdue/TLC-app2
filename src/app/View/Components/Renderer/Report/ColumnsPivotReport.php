@@ -296,9 +296,9 @@ trait  ColumnsPivotReport
     {
         $columnsOfAgg = [];
         if (!$dataAggregations) return [];
-        foreach ($dataAggregations as $field => $fn) {
+        foreach ($dataAggregations as $field => $value) {
             $columnsOfAgg[] = [
-                'dataIndex' => $fn . '_' . $field,
+                'dataIndex' => $value['title_override'],
                 'align' => 'right',
                 'width' => 40,
             ];
@@ -308,6 +308,7 @@ trait  ColumnsPivotReport
 
     public function makeColumnsRenderer($dataOutput)
     {
+        // if (empty($dataOutput)) return [];
         [, $bidingRowFields,,,, $dataAggregations,,,,] = $this->getDataFields();
         if (!$this->getDataFields()) return false;
         $columnsOfRowFields = $this->makeHeadColumn($bidingRowFields);

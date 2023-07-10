@@ -55,7 +55,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>"
     },
     "department": {
         "name": "department",
@@ -143,7 +145,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-file-invoice\"><\/i>"
     },
     "eco_taken_action": {
         "name": "eco_taken_action",
@@ -156,7 +158,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-square-check\"><\/i>"
     },
     "erp_routing_link": {
         "name": "erp_routing_link",
@@ -350,8 +352,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "hidden_navbar": "true",
-        "icon": null
+        "icon": "<i class=\"fa-sharp fa-regular fa-transporter\"><\/i>"
     },
     "hr_training_course": {
         "name": "hr_training_course",
@@ -364,6 +365,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden_navbar": "true",
         "icon": null
     },
     "hr_training_line": {
@@ -406,7 +408,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-input-numeric\"><\/i>"
     },
     "hse_first_aid": {
         "name": "hse_first_aid",
@@ -419,7 +421,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-bandage\"><\/i>"
     },
     "hse_incident_report": {
         "name": "hse_incident_report",
@@ -461,7 +463,7 @@
         "status": null,
         "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "checklist-sheet-renderer",
-        "icon": null,
+        "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>",
         "disallowed_direct_creation": "true"
     },
     "hse_insp_control_group": {
@@ -564,7 +566,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-person-walking\"><\/i>"
     },
     "manageApis": {
         "name": "manageApis",
@@ -602,6 +604,21 @@
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Apps",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
+    },
+    "manageNavbars": {
+        "name": "manageNavbars",
+        "package_tab": "application",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Navbars",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
@@ -989,7 +1006,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-calendar\"><\/i>"
     },
     "project": {
         "name": "project",

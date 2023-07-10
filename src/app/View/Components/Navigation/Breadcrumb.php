@@ -17,16 +17,6 @@ class Breadcrumb extends Component
     private $blackList = [
         'dashboard',
         'admin_permission',
-        'manageApp',
-        'manageApi',
-        'managePivotTable',
-        'manageReport',
-        'manageAppCreation',
-        'manageProfileField',
-        'manageStandardProp',
-        'manageStandardDefaultValue',
-        'manageStatus',
-        'manageWidget',
         'reportIndex',
     ];
     private $action = null;
@@ -189,6 +179,7 @@ class Breadcrumb extends Component
         $isAdmin = CurrentUser::isAdmin();
 
         if (in_array($singular, $this->blackList)) return "";
+        if (str_starts_with($singular, "manage")) return "";
         if (in_array($singular, ['permission', 'role', 'role_set']))  return $this->getBreadcrumbOfPermission($singular, $type);
 
         if ($isAdmin) $this->showButtonViewFirst($singular, $type);

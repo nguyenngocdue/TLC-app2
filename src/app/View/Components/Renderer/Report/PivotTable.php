@@ -81,7 +81,7 @@ class PivotTable extends Component
                         // dump($e->getMessage());
                     }
                 } else {
-                    if (!str_contains($key, '_id') ) continue;
+                    if (!str_contains($key, '_id')) continue;
                     $indexString = strrpos($key, '_id_');
                     $p1 = strpos($key, '_', $indexString + 4);
                     $str1 = substr($key, 0, $indexString + 4);
@@ -95,12 +95,16 @@ class PivotTable extends Component
                         $str2 = substr($key, $p1, strlen($key));
                         $id = str_replace([$str1, $str2], '', $key);
                     }
-                    if (is_numeric(trim($id,'_')) && $id) {
+                    if (is_numeric(trim($id, '_')) && $id) {
                         $attr = substr($key, 0, $indexString + 3);
                         $infoAttr = $bidingColumnFields[$attr];
                         $tableName = $infoAttr['table_name'];
                         $attributeName = $infoAttr['attribute_name'];
-                        $name = $tables[$tableName][$id]->$attributeName;
+                        // dd($tables, $tableName, $attributeName);
+                        $name = $id;
+                        if (isset($tables[$tableName])) {
+                            $name = $tables[$tableName][$id]->$attributeName;
+                        }
                         $items['top_title_column'][$key] = $name;
                     }
                 }
@@ -239,8 +243,7 @@ class PivotTable extends Component
 
         //Step 4: Calculate data from Data Fields columns
         //The aggregated data are at the end of the items
-        $calculatedData = PivotReportDataFields::executeOperations($dataAggregations, $transferredData, $processedData, $rowFields, $columnFields);
-        // dump( $calculatedData);
+        $calculatedData = PivotReportDataFields::executeOperations($dataAggregations, $processedData, $rowFields);
 
         $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData, $rowFields, $columnFields);
         // dd($dataIdsOutput);
@@ -268,7 +271,6 @@ class PivotTable extends Component
             $dataOutput[0]["info_column_field"] = $infoColumnFields;
         }
         $dataOutput = $this->updateResultOfAggregations($columnFields, $dataAggregations, $dataOutput);
-        // dump($dataOutput);
         return $dataOutput;
     }
 
@@ -278,7 +280,8 @@ class PivotTable extends Component
             $newColumnFields = PivotReport::markDuplicatesAndGroupKey($columnFields);
             $num = count(reset($newColumnFields));
 
-            $field = array_slice($dataAggregations, 0, 1);
+            $dataIndex =  array_column($dataAggregations, 'type_operator', 'name');
+            $field = array_slice($dataIndex, 0, 1);
             $keys = array_keys($field) ?? '';
             $value = array_values($field);
             $str = $value[0] . "_" . $keys[0];
