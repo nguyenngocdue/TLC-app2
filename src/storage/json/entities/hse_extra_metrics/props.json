@@ -75,6 +75,25 @@
         "duplicatable": "",
         "new_line": ""
     },
+    "_metric_datetime": {
+        "name": "_metric_datetime",
+        "column_name": "metric_datetime",
+        "column_type": "datetime",
+        "label": "Date Month",
+        "control": "picker_month",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
     "_total_discipline": {
         "name": "_total_discipline",
         "column_name": "total_discipline",

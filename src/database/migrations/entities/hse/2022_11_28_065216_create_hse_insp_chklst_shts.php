@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->unsignedBigInteger('hse_insp_tmpl_sht_id');
             $table->unsignedBigInteger('assignee_1')->nullable();
-            $table->text('location_project')->nullable();
+            $table->unsignedBigInteger('work_area_id')->nullable();
             $table->float('progress')->nullable(); //version 2
             $table->dateTime('start_time')->nullable();
             $table->dateTime('finish_time')->nullable();

@@ -59,9 +59,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
+    "_work_area_id": {
+        "name": "_work_area_id",
+        "column_name": "work_area_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -71,9 +71,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_location_project": {
-        "name": "_location_project",
-        "column_name": "location_project",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -107,9 +107,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -119,9 +119,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -194,18 +206,6 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
         "label": "",
         "validation": "",
         "validation_regex": "",

@@ -47,6 +47,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_metric_datetime": {
+        "name": "_metric_datetime",
+        "column_name": "metric_datetime",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_total_discipline": {
         "name": "_total_discipline",
         "column_name": "total_discipline",
