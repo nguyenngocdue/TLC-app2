@@ -5,30 +5,31 @@
 @section('content')
 <div>
   
-  <form class="w-1/3 mb-5" method="POST" action="{{route('updateUserSettings')}}">
+  <form class="mb-5" method="POST" action="{{route('updateUserSettings')}}">
     @method('PUT')
     @csrf
     <input type="hidden" name='action' value="updateShowOptionsOrgChart">
     <x-renderer.card title="Shows">
-      <div class="flex justify-between">
-        <div>
-            <div>
-                <label for="">Head of Department</label>
-                <x-utils.filter-head-of-department tableName="departments" name="show_options[department]" id="department" typeToLoadListener="" selected="{{$showOptions['department'] ?? ''}}"></x-utils.filter-head-of-department>
-            </div>
-            <div>
-              <label for="">Workplace</label>
+      <div class="justify-between grid grid-cols-12 gap-5 items-center">
+        <div class="col-span-4">
+          <label for="">Workplace</label>
               @php
                 $selectedWorkplace = join(',',$showOptions['workplace']) ?? '';
               @endphp
               <x-utils.filter-workplace tableName="workplaces" multiple="true" name="show_options[workplace][]" id="workplace" typeToLoadListener="" selected="{{$selectedWorkplace}}"></x-utils.filter-workplace>
+        </div>
+        <div class="col-span-4">
+          <label for="">Head of Department</label>
+          <x-utils.filter-head-of-department tableName="departments" name="show_options[department]" id="department" typeToLoadListener="" selected="{{$showOptions['department'] ?? ''}}"></x-utils.filter-head-of-department>
+        </div>
+        <div class="col-span-3">
+          <label for="">Options</label>
+          <div>
+            <label for="">Resigned</label>
+            <x-renderer.editable.checkbox name="show_options[resigned]" cell="{{$showOptions['resigned'] ?? ''}}"></x-renderer.editable.checkbox>
+            <label for="" class="ml-3">Worker</label>
+            <x-renderer.editable.checkbox name="show_options[time_keeping_type]" cell="{{$showOptions['time_keeping_type'] ?? ''}}"></x-renderer.editable.checkbox>
           </div>
-            <div>
-              <label for="">Resigned</label>
-              <x-renderer.editable.checkbox name="show_options[resigned]" cell="{{$showOptions['resigned'] ?? ''}}"></x-renderer.editable.checkbox>
-              <label for="">Worker</label>
-              <x-renderer.editable.checkbox name="show_options[time_keeping_type]" cell="{{$showOptions['time_keeping_type'] ?? ''}}"></x-renderer.editable.checkbox>
-            </div>
         </div>
         <x-renderer.button htmlType='submit'>Save</x-renderer.button>
       </div>

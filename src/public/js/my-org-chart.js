@@ -79,7 +79,15 @@ function init() {
               { fill: null, stroke: "#7986cb", strokeWidth: 3 }
             ),
             $(go.Placeholder)
-          )  // end Adornment
+          ) , // end Adornment
+          click: function(e, obj){
+            window.location.replace(obj.part.data.url);
+          },
+          toolTip:  // define a tooltip for each node that displays the color as text
+          $("ToolTip",
+            $(go.TextBlock, { margin: 4 },
+              new go.Binding("text", "key"))
+          )  // end of Adornment
       },
       $(go.Shape, "RoundedRectangle", roundedRectangleParams,
         { name: "SHAPE", fill: "#ffffff", strokeWidth: 0 },
