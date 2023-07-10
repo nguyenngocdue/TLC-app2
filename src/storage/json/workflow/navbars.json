@@ -49,7 +49,7 @@
     },
     "createThumbnail": {
         "name": "createThumbnail",
-        "title": "Create Thumbnail",
+        "title": "Create Thumbnails",
         "href": "\/utils\/createThumbnail",
         "icon_fa": "fa-sharp fa-light fa-image"
     },
