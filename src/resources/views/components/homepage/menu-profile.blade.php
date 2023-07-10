@@ -6,13 +6,19 @@
         <li class="flex">
             <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="{{route('me.index') }}">
                 <i class="mr-3 h-4 w-4 fa-duotone fa-user"></i>
-                <span>Profile</span>
+                <span>My Profile</span>
+            </a>
+        </li>
+        <li class="flex1 hidden ">
+            <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="#">
+                <i class="mr-3 h-4 w-4 fa-duotone fa-gear"></i>
+                <span>My Settings</span>
             </a>
         </li>
         <li class="flex">
-            <a class="disabled inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="#">
-                <i class="mr-3 h-4 w-4 fa-duotone fa-gear"></i>
-                <span>Settings</span>
+            <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="{{route('myOrgChart.index') }}">
+                <i class="mr-3 h-4 w-4  fa-duotone fa-sitemap"></i>
+                <span>My Org Chart</span>
             </a>
         </li>
         <li class="flex">
@@ -27,16 +33,16 @@
         </li>
         @roleset('admin|super-admin')
         @foreach ($userMenu as $value)
-        @if($value['href'] === '-')
+        @if(($value['href']??'') === '-')
         <hr class="my-2" />
         <p class="font-bold text-center w-full text-sm">{{ $value['title'] }}</p>
         @else
         <li class="flex">
-            <a class="inline-flex w-full items-center rounded-md px-2 py-1 text-sm font-semibold transition-colors duration-150 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="{{ $value['href'] }}" target="_blank">
+            <a class="inline-flex w-full items-center rounded-md px-2 py-1 text-sm font-semibold transition-colors duration-150 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="{{ $value['href']??"" }}" target="_blank">
                 @isset($value['icon_fa'])
                 <i class="mr-3 h-4 w-4 {{$value['icon_fa']}}"></i>
                 @else
-                {!! $value['icon'] !!}
+                {!! $value['icon']??"" !!}
                 @endisset
                 <span>{{ $value['title'] }}</span>
             </a>

@@ -4,11 +4,13 @@ use App\Http\Controllers\Admin\AdminSetRoleSetController;
 use App\Http\Controllers\Api\v1\System\NotificationsController as SystemNotificationsController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MyOrgChartController;
 use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\UpdateUserSettingsApi;
 use App\Http\Controllers\Utils\MyCompanyController;
+use App\Http\Controllers\Utils\ThumbnailController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -19,6 +21,7 @@ Route::group([
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
+    Route::get('my-org-chart', [MyOrgChartController::class, 'index'])->name('myOrgChart.index');
     Route::get('profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::put('updateBookmark', [BookmarkController::class, 'updateBookmark'])->name('updateBookmark');
@@ -32,4 +35,6 @@ Route::group([
     Route::get('notifications/{type}/{id}/{idNotification}', [NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('system/notifications', [SystemNotificationsController::class, 'notifications']);
     Route::get('system/notificationsRender', [SystemNotificationsController::class, 'notificationsRender']);
+    Route::get('utils/createThumbnail', [ThumbnailController::class,'create']);
+
 });

@@ -55,7 +55,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>"
     },
     "department": {
         "name": "department",
@@ -143,7 +145,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-file-invoice\"><\/i>"
     },
     "eco_taken_action": {
         "name": "eco_taken_action",
@@ -156,7 +158,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-square-check\"><\/i>"
     },
     "erp_routing_link": {
         "name": "erp_routing_link",
@@ -343,39 +345,42 @@
         "name": "hr_training",
         "package_tab": "application",
         "package": "hr_&_admin",
-        "sub_package": "hr",
-        "title": "Hr Training",
+        "sub_package": "hr_admin",
+        "title": "HR Trainings",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-sharp fa-regular fa-transporter\"><\/i>"
     },
     "hr_training_course": {
         "name": "hr_training_course",
         "package_tab": "application",
         "package": "hr_&_admin",
-        "sub_package": "hr",
-        "title": "Hr Training Course",
+        "sub_package": "hr_admin",
+        "title": "HR Training Courses",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden_navbar": "true",
         "icon": null
     },
     "hr_training_line": {
         "name": "hr_training_line",
         "package_tab": "application",
         "package": "hr_&_admin",
-        "sub_package": "hr",
-        "title": "Hr Training Line",
+        "sub_package": "hr_admin",
+        "title": "HR Training Lines",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "hse_corrective_action": {
@@ -397,26 +402,26 @@
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "Hse Extra Metric",
+        "title": "HSE Extra Metrics",
         "nickname": "hem",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-input-numeric\"><\/i>"
     },
     "hse_first_aid": {
         "name": "hse_first_aid",
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "Hse First Aid",
-        "nickname": null,
+        "title": "HSE First Aids",
+        "nickname": "fac",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-bandage\"><\/i>"
     },
     "hse_incident_report": {
         "name": "hse_incident_report",
@@ -437,7 +442,7 @@
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "HSE Inspection Checklist Line",
+        "title": "HSE Inspection Checklist Lines",
         "nickname": "hic",
         "doc_id_format_column": null,
         "status": null,
@@ -452,13 +457,13 @@
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "HSE Inspection Checklist Sheet",
+        "title": "HSE Inspection Checklist Sheets",
         "nickname": "hics",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "checklist-sheet-renderer",
-        "icon": null,
+        "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>",
         "disallowed_direct_creation": "true"
     },
     "hse_insp_control_group": {
@@ -466,7 +471,7 @@
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "HSE Inspection Control Group",
+        "title": "HSE Inspection Control Groups",
         "nickname": "hicg",
         "doc_id_format_column": null,
         "status": null,
@@ -481,7 +486,7 @@
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "HSE Inspection Control Value",
+        "title": "HSE Inspection Control Values",
         "nickname": "hicv",
         "doc_id_format_column": null,
         "status": null,
@@ -496,7 +501,7 @@
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "HSE Inspection Group",
+        "title": "HSE Inspection Groups",
         "nickname": "hig",
         "doc_id_format_column": null,
         "status": null,
@@ -511,7 +516,7 @@
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "HSE Inspection Template Line",
+        "title": "HSE Inspection Template Lines",
         "nickname": "hitsl",
         "doc_id_format_column": null,
         "status": null,
@@ -526,12 +531,13 @@
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "HSE Inspection Template Sheet",
+        "title": "HSE Inspection Template Sheets",
         "nickname": "hits",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-sheet-renderer",
+        "hidden_navbar": "true",
         "icon": null
     },
     "hse_insp_value": {
@@ -539,7 +545,7 @@
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "HSE Inspection Value",
+        "title": "HSE Inspection Values",
         "nickname": "hiv",
         "doc_id_format_column": null,
         "status": null,
@@ -554,13 +560,13 @@
         "package_tab": "application",
         "package": "operation",
         "sub_package": "hse",
-        "title": "Hse Walkthrough",
+        "title": "HSE Walkthroughs",
         "nickname": "hw",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-person-walking\"><\/i>"
     },
     "manageApis": {
         "name": "manageApis",
@@ -598,6 +604,21 @@
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Apps",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
+    },
+    "manageNavbars": {
+        "name": "manageNavbars",
+        "package_tab": "application",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Navbars",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
@@ -985,7 +1006,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-calendar\"><\/i>"
     },
     "project": {
         "name": "project",
