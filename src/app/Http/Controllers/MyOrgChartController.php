@@ -3,22 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
-use App\Http\Controllers\Workflow\LibApps;
-use App\Http\Resources\HrTsLineCollection;
-use App\Models\Comment;
-use App\Models\Hr_timesheet_officer;
-use App\Models\Hr_timesheet_worker;
 use App\Models\User;
-use App\Models\Zunit_test_03;
-use App\Utils\Storage\Thumbnail;
-use App\Utils\Support\CurrentUser;
-use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 
-class WelcomeCanhController extends Controller
+class MyOrgChartController extends Controller
 {
     use TraitViewAllFunctions;
     public function getType()
@@ -27,7 +17,6 @@ class WelcomeCanhController extends Controller
     }
     public function index(Request $request)
     {
-        dd(Thumbnail::createThumbnailByOptions('input','output'));
         $tree = BuildTree::getTree();
         $results = [];
         $showOptions = $this->getUserSettingsViewOrgChart();
@@ -94,11 +83,5 @@ class WelcomeCanhController extends Controller
             }
         }
         return $results;
-    }
-    public function indexAll()
-    {
-        return view(
-            'welcome-canh-all',
-        );
     }
 }

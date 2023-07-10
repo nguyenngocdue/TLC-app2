@@ -38,6 +38,11 @@
         "href": "/utils/parser",
         "icon_fa": "fa-duotone fa-brackets-curly"
     },
+    "createThumbnail": {
+        "title": "Create Thumbnail",
+        "href": "/utils/createThumbnail",
+        "icon_fa": "fa-sharp fa-light fa-image"
+    },
     "hr1": {
         "title": "External",
         "href": "-"
