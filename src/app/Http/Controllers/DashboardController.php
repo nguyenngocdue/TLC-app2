@@ -28,6 +28,6 @@ class DashboardController extends Controller
     public function index()
     {
         $view = "dashboard" . CurrentUser::getViewSuffix();
-        return view('dashboards.' . $view,);
+        return view('dashboards.' . $view);
     }
 }
