@@ -414,7 +414,7 @@
         "package": "operation",
         "sub_package": "hse",
         "title": "HSE First Aids",
-        "nickname": null,
+        "nickname": "fac",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
