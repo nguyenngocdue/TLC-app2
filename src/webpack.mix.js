@@ -17,4 +17,4 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
         require('autoprefixer'),
     ])
-// mix.js('resources/js/laravel-echo.js', 'public/js')
+mix.js('resources/js/antd-vue.js', 'public/js').vue()
