@@ -27,7 +27,7 @@ Homestead.json
 
 mysql/
 redis/
-database/
+/database/
 
 #for mac os
 .DS_Store
