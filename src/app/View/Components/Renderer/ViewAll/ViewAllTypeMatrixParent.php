@@ -111,6 +111,7 @@ abstract class ViewAllTypeMatrixParent extends Component
 
         foreach ($yAxis as $y) {
             $yId = $y->id;
+            $line = [];
             $line['name_for_group_by'] = $y->name;
 
             $line['name'] = (object)[
