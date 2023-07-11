@@ -411,9 +411,10 @@ const onChangeSetTableColumn = (listener) => {
     // console.log(column_to_set, listen_to_attr)
     const selectedObject = onChangeGetSelectedObject2(listener)
     const selectedAttr = selectedObject[listen_to_attr]
-    let table01Name = tableObjectColName[column_name]['name']
+    let table01Name = tableObjectColName[column_name]?.['name']
     // console.log(selectedObject, table01Name)
 
+    if (undefined === table01Name) return //<< During create new, the table is not rendered yet
     const length = getAllRows(table01Name).length
 
     for (let i = 0; i < length; i++) {

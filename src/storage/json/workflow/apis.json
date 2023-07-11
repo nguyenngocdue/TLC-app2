@@ -59,9 +59,6 @@
     "ghg_sheets": {
         "name": "ghg_sheets"
     },
-    "hr_course_trainings": {
-        "name": "hr_course_trainings"
-    },
     "hr_overtime_request_lines": {
         "name": "hr_overtime_request_lines",
         "storeEmpty_and_updateShort": "true"
@@ -81,16 +78,23 @@
         "name": "hr_timesheet_workers",
         "storeEmpty_and_updateShort": "true"
     },
+    "hr_training_courses": {
+        "name": "hr_training_courses"
+    },
     "hr_training_lines": {
         "name": "hr_training_lines",
         "storeEmpty_and_updateShort": "true"
     },
     "hr_trainings": {
-        "name": "hr_trainings"
+        "name": "hr_trainings",
+        "storeEmpty_and_updateShort": "true"
     },
     "hse_corrective_actions": {
         "name": "hse_corrective_actions",
         "storeEmpty_and_updateShort": "true"
+    },
+    "hse_extra_metrics": {
+        "name": "hse_extra_metrics"
     },
     "hse_first_aids": {
         "name": "hse_first_aids"
