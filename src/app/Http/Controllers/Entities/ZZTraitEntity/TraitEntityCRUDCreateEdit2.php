@@ -51,7 +51,7 @@ trait TraitEntityCRUDCreateEdit2
 		}
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
-			'props' => $props,
+			// 'props' => $props,
 			'item' => (object)[],
 			'defaultValues' => DefaultValues::getAllOf($this->type),
 			'hasStatusColumn' => $hasStatusColumn,
