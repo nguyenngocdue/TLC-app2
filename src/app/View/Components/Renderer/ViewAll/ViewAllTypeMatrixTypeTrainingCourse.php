@@ -6,6 +6,8 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Models\Hr_training_course;
 use App\Models\Hr_training_line;
 use App\Models\User;
+use App\Utils\Constant;
+use Carbon\Carbon;
 
 class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
 {
@@ -64,12 +66,14 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
 
     protected function getYAxis()
     {
+        $timeFrame = Carbon::parse()->subWeek(4)->format(Constant::FORMAT_DATE_MYSQL);
         $data = ($this->yAxis)::query()
             ->whereNot('resigned', true)
+            ->where("first_date", '>', $timeFrame)
             // ->where('sub_project_id', $this->subProject)
             // ->where('prod_routing_id', $this->prodRouting)
             ->orderBy('name')
-            ->limit(10)
+            // ->limit(10)
             ->get();
 
         return $data;
