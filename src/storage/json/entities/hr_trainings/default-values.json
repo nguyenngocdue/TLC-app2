@@ -15,7 +15,7 @@
         "name": "_training_course_id",
         "column_name": "training_course_id",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",

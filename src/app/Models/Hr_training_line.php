@@ -8,10 +8,10 @@ class Hr_training_line extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "user_id", "hr_training_id",
-        "owner_id", 'training_hours', "order_no", "training_course_id",
+        "owner_id", 'training_hours', "order_no", "training_course_id", "status",
     ];
     protected $table = "hr_training_lines";
-    protected static $statusless = true;
+    // protected static $statusless = true;
 
     public static $eloquentParams = [
         "getSignatures" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
@@ -51,8 +51,9 @@ class Hr_training_line extends ModelExtended
             ['dataIndex' => 'id', 'no_print' => true, 'invisible' => true],
             ['dataIndex' => 'hr_training_id', 'title' => 'Training ID', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'user_id',],
-            ['dataIndex' => 'training_course_id',],
-            ['dataIndex' => 'training_hours', 'cloneable' => true],
+            ['dataIndex' => 'training_course_id', 'invisible' => true,],
+            ['dataIndex' => 'training_hours',  'cloneable' => true],
+            ['dataIndex' => 'status', 'cloneable' => true],
         ];
     }
 }

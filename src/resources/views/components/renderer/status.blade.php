@@ -2,8 +2,8 @@
 @php
     $status = $slot->__toString();
     $statuses = App\Http\Controllers\Workflow\LibStatuses::getAll();
-    $color = isset($statuses[$status]) ? $statuses[$status]['color'] : 'violet';
-    $colorIndex = isset($statuses[$status]) ? $statuses[$status]['color_index'] : 200;
+    $color = isset($statuses[$status]['color']) ? $statuses[$status]['color'] : 'violet';
+    $colorIndex = isset($statuses[$status]['color_index']) ? $statuses[$status]['color_index'] : 200;
     $bgIndex = 1000 - $colorIndex;
     $title = isset($statuses[$status]) ? $statuses[$status]['title'] : ($status ? Str::headline($status) : "null");
     $class = "hover:bg-{$color}-{$bgIndex} hover:text-{$color}-{$colorIndex}";
