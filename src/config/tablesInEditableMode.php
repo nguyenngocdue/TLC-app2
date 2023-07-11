@@ -8,6 +8,9 @@ return [
         'eco_material_impact_adds' => [],
         'eco_material_impact_removes' => [],
     ],
+    'act_currency_xrs' =>[
+        'act_currency_xr_lines' => [],
+    ],
     'qaqc_insp_tmpls' => [
         'qaqc_insp_tmpl_shts' => [],
     ],

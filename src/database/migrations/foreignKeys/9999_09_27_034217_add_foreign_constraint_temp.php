@@ -13,45 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        //************** HSE **************/
-        Schema::table('hse_insp_chklst_shts', function (Blueprint $table) {
-            $table->foreign('hse_insp_tmpl_sht_id')->references('id')->on('hse_insp_tmpl_shts')->cascadeOnDelete()->cascadeOnUpdate();
+         // Account 
+         Schema::table('act_currency_xr_lines', function (Blueprint $table) {
+            $table->foreign('currency_xr_id')->references('id')->on('act_currency_xrs');
         });
-        Schema::table('hse_insp_tmpl_lines', function (Blueprint $table) {
-            $table->foreign('hse_insp_tmpl_sht_id')->references('id')->on('hse_insp_tmpl_shts')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('hse_insp_group_id')->references('id')->on('hse_insp_groups');
-            $table->foreign('hse_insp_control_group_id')->references('id')->on('hse_insp_control_groups');
-            $table->foreign('control_type_id')->references('id')->on('control_types');
-        });
-        Schema::table('hse_insp_chklst_lines', function (Blueprint $table) {
-            $table->foreign('hse_insp_chklst_sht_id')->references('id')->on('hse_insp_chklst_shts'); // version 2
-            $table->foreign('hse_insp_group_id')->references('id')->on('hse_insp_groups');
-            $table->foreign('hse_insp_control_group_id')->references('id')->on('hse_insp_control_groups');
-            $table->foreign('hse_insp_control_value_id')->references('id')->on('hse_insp_control_values');
-            $table->foreign('control_type_id')->references('id')->on('control_types');
-            $table->foreign('owner_id')->references('id')->on('users');
-        });
-        Schema::table('hse_insp_values', function (Blueprint $table) {
-            $table->foreign('hse_insp_control_value_id')->references('id')->on('hse_insp_control_values');
-        });
-        Schema::table('hse_insp_control_values', function (Blueprint $table) {
-            $table->foreign('hse_insp_control_group_id')->references('id')->on('hse_insp_control_groups');
-        });
-        //************** ECO **************/
-        Schema::table('eco_effectiveness_lines', function (Blueprint $table) {
-            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
-        });
-        Schema::table('eco_labor_impacts', function (Blueprint $table) {
-            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
-        });
-        Schema::table('eco_material_impact_adds', function (Blueprint $table) {
-            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
-        });
-        Schema::table('eco_material_impact_removes', function (Blueprint $table) {
-            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
-        });
-        Schema::table('eco_taken_actions', function (Blueprint $table) {
-            $table->foreign('eco_sheet_id')->references('id')->on('eco_sheets');
+        Schema::table('act_currency_pairs', function (Blueprint $table) {
+            $table->foreign('base_currency_id')->references('id')->on('act_currencies');
+            $table->foreign('counter_currency_id')->references('id')->on('act_currencies');
         });
     }
 

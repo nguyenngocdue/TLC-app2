@@ -6,7 +6,9 @@
                         @yield('title', 'Untitled') 
                     </x-renderer.heading>
                     {{-- @if(isset($type)) --}}
-                        <div class="ml-1"><x-renderer.status>@yield('status', '')</x-renderer.status></div>
+                    @section('status')
+                        <div class="ml-1"><x-renderer.status>@yield('status','')</x-renderer.status></div>
+                    @endsection
                     {{-- @endif --}}
                     <div class="px-2 text-black">
                         @yield('docId','')
