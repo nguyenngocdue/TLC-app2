@@ -33,8 +33,10 @@ class ViewAllTypeMatrix extends Component
                 return Blade::render("<x-renderer.view-all.view-all-type-matrix-type-date-mode/>");
             case "qaqc_wirs":
                 return Blade::render("<x-renderer.view-all.view-all-type-matrix-type-project-subproject-routing/>");
+            case "hr_training_lines":
+                return Blade::render("<x-renderer.view-all.view-all-type-matrix-type-training-course />");
             default:
-                return "Unknown how to render matrix view for " . $this->type;
+                return "Unknown how to render matrix view for " . $this->type . " (ViewAllTypeMatrix).";
         }
     }
 }

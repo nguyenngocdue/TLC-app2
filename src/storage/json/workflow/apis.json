@@ -96,7 +96,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "hr_trainings": {
-        "name": "hr_trainings"
+        "name": "hr_trainings",
+        "storeEmpty_and_updateShort": "true"
     },
     "hse_corrective_actions": {
         "name": "hse_corrective_actions",
