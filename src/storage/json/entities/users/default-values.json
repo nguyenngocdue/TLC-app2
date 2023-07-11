@@ -43,7 +43,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "",
+        "label_extra": "Display name on app",
         "placeholder": "",
         "control_extra": ""
     },
@@ -55,7 +55,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "",
+        "label_extra": "Legal name on Passport",
         "placeholder": "",
         "control_extra": ""
     },
@@ -539,6 +539,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_getTshtTeams()": {
+        "name": "_getTshtTeams()",
+        "column_name": "getTshtTeams()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_getOtTeams()": {
         "name": "_getOtTeams()",
         "column_name": "getOtTeams()",
@@ -602,18 +614,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getTshtTeams()": {
-        "name": "_getTshtTeams()",
-        "column_name": "getTshtTeams()",
         "label": "",
         "validation": "",
         "validation_regex": "",

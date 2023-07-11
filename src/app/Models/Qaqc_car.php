@@ -11,7 +11,7 @@ class Qaqc_car extends ModelExtended
         "corrective_action", "order_no", "owner_id", "status",
     ];
     protected $table = "qaqc_cars";
-    public $nameless = true;
+    public static $nameless = true;
 
     public static $eloquentParams = [
         "getQaqcNcr" => ['belongsTo', Qaqc_ncr::class, 'qaqc_ncr_id'],

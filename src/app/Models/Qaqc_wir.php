@@ -15,7 +15,7 @@ class Qaqc_wir extends ModelExtended
     ];
     protected $table = "qaqc_wirs";
     public $hasDueDate = true;
-    public $nameless = true;
+    public static $nameless = true;
     public function getName()
     {
         return "[" . $this->getProdOrder->name . "] - " . $this->getWirDescription->name;

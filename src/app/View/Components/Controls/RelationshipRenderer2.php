@@ -157,7 +157,7 @@ class RelationshipRenderer2 extends Component
         $defaultColumns = [
             ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
         ];
-        if (!$instance->nameless) $defaultColumns[] = ["dataIndex" => 'name',];
+        if (!$instance::$nameless) $defaultColumns[] = ["dataIndex" => 'name',];
         $columns = ($fn === '')
             ? $defaultColumns
             : $instance->$fn();
@@ -230,7 +230,7 @@ class RelationshipRenderer2 extends Component
                 $token = CurrentUser::getTokenForApi();
                 $statusTimeSheet = $modelPath::findFromCache($id)->status ?? null;
                 $hasRenderSidebar = true;
-                if($statusTimeSheet && in_array($statusTimeSheet,['pending_approval','approved'])){
+                if ($statusTimeSheet && in_array($statusTimeSheet, ['pending_approval', 'approved'])) {
                     $hasRenderSidebar = false;
                 }
                 return view('components.calendar.calendar-grid', [

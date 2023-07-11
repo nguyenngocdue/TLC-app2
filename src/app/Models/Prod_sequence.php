@@ -15,7 +15,7 @@ class Prod_sequence extends ModelExtended
     ];
 
     protected $table = 'prod_sequences';
-    public $nameless = true;
+    public static $nameless = true;
 
     public static $eloquentParams = [
         "getProdOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],

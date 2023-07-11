@@ -33,6 +33,7 @@ class Dropdown4 extends Component
         // dump($id);
         $name = $this->multiple ? $this->name . "[]" : $this->name;
         $table = $this->tableName;
+        $nameless = Str::modelPathFrom($table)::$nameless;
         $params = [
             'name' => $name,
             'id' => $id,
@@ -47,6 +48,7 @@ class Dropdown4 extends Component
             'table01Name' => $this->table01Name,
             'rowIndex' => $this->rowIndex,
             'batchLength' => $this->batchLength,
+            'nameless' => $nameless,
         ];
         // dump($params);
         return view('components.controls.has-data-source.dropdown4', $params);

@@ -4,14 +4,14 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 Str::macro('appTitle', function (string $s) {
-    $exceptionOfKeepingSingular = ['hse', 'kpi', 'esg', 'ghg', 'hr', 'scm'];
+    $exceptionOfKeepingSingular = ['hse', 'kpi', 'esg', 'ghg', 'hr', 'scm', 'eco'];
     $s = in_array($s, $exceptionOfKeepingSingular) ? $s : Str::plural($s);
     $s = Str::headline($s);
 
-    $sources = ['hr', 'erp', 'wir', 'hse', 'esg', 'ghg', 'scm', 'qaqc', 'dev', 'kpi', 'qs', 'nz', 'dc', 'it', 'qa', 'qc', 'bd', 'prod', 'ho', 'ws', 'pj'];
+    $sources = ['hr', 'erp', 'wir', 'hse', 'esg', 'ghg', 'scm', 'qaqc', 'dev', 'kpi', 'qs', 'nz', 'dc', 'it', 'qa', 'qc', 'bd', 'prod', 'ho', 'ws', 'pj', 'eco'];
     // /i is for case insensitive
     $sources = array_map(fn ($i) => '/\b' . $i . '\b/i', $sources);
-    $target = ['HR', 'ERP', 'WIR', 'HSE', 'ESG', 'GHG', 'SCM', 'QAQC', 'DEV', 'KPI', 'QS', 'NZ', 'DC', 'IT', 'QA', 'QC', 'BD', 'PROD', 'HO', 'WS', 'PJ'];
+    $target = ['HR', 'ERP', 'WIR', 'HSE', 'ESG', 'GHG', 'SCM', 'QAQC', 'DEV', 'KPI', 'QS', 'NZ', 'DC', 'IT', 'QA', 'QC', 'BD', 'PROD', 'HO', 'WS', 'PJ', 'ECO'];
     $s = preg_replace($sources, $target, $s);
 
     $sources = ['acct', 'cpl', 'dir', 'fac', 'des', 'fin', 'mgr', 'pln', 'proc', 'proj', 'whs', 'asst'];
