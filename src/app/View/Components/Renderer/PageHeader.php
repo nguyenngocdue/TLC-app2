@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 
 class PageHeader extends Component
@@ -23,6 +24,9 @@ class PageHeader extends Component
      */
     public function render()
     {
-        return view('components.renderer.page-header');
+        $action = CurrentRoute::getControllerAction();
+        return view('components.renderer.page-header', [
+            'action' => $action
+        ]);
     }
 }

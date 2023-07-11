@@ -5,9 +5,9 @@
                     <x-renderer.heading level=4 title="@yield('tooltip')">
                         @yield('title', 'Untitled') 
                     </x-renderer.heading>
-                    {{-- @if(isset($type)) --}}
+                    @if(in_array($action, ['edit', /*'show'*/]))
                         <div class="ml-1"><x-renderer.status>@yield('status', '')</x-renderer.status></div>
-                    {{-- @endif --}}
+                    @endif
                     <div class="px-2 text-black">
                         @yield('docId','')
                     </div>
