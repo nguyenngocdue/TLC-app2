@@ -26,6 +26,7 @@ Route::group([
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::put('updateBookmark', [BookmarkController::class, 'updateBookmark'])->name('updateBookmark');
     Route::put('updateUserSettingsApi', [UpdateUserSettingsApi::class, 'updateUserSettingsApi'])->name('updateUserSettingsApi');
+    Route::put('updateUserSettingsFilterApi', [UpdateUserSettingsApi::class, 'updateUserSettingsFilterApi'])->name('updateUserSettingsFilterApi');
     Route::get('impersonate/user/{id}', [AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
     // Route::get('app-menu', [AppMenuController::class, 'index']);
     Route::get('my-company', [MyCompanyController::class, 'index'])->name("my-company.index");
