@@ -71,7 +71,7 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     protected $touches = [];
     protected static $statusless = true;
-    public static $nameless = true;
+    public static $nameless = false;
 
     /**
      * The attributes that should be cast.
