@@ -9,7 +9,10 @@
         , tableDebugJs: {{$tableDebug ? 1 : 0}}
         , isOrderable: {{$isOrderable ? 1 : 0}}
         , tableName: "{{$tableName}}"
-    , }
+    };
+    tableObjectColName["{{$colName}}"] = {
+        name:'{{$table01Name}}'
+    };
 
 </script>
 

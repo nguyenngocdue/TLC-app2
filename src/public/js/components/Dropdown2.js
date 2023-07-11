@@ -334,12 +334,7 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
     // const debugListener = true
     if (debugListener) console.log('AjaxRequestScalar', listener)
     const { triggers, expression: url } = listener
-    const {
-        ajax_response_attribute,
-        ajax_form_attributes,
-        ajax_item_attributes,
-        ajax_default_values,
-    } = listener
+    const { ajax_response_attribute, ajax_form_attributes, ajax_item_attributes, ajax_default_values, } = listener
 
     let enoughParams = true
     const data = {}
@@ -406,13 +401,38 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
             )
     }
 }
+
+const onChangeSetTableColumn = (listener) => {
+    // console.log("set_table_column", listener, tableObject)
+    const { column_name, listen_to_attrs, columns_to_set } = listener
+
+    const column_to_set = columns_to_set[0]
+    const listen_to_attr = listen_to_attrs[0]
+    // console.log(column_to_set, listen_to_attr)
+    const selectedObject = onChangeGetSelectedObject2(listener)
+    const selectedAttr = selectedObject[listen_to_attr]
+    let table01Name = tableObjectColName[column_name]['name']
+    // console.log(selectedObject, table01Name)
+
+    const length = getAllRows(table01Name).length
+
+    for (let i = 0; i < length; i++) {
+        const id = table01Name + "[" + column_to_set + "][" + i + "]" //table01[my_file][0]
+        getEById(id).val(selectedAttr)
+        getEById(id).trigger('change', length)
+    }
+}
+
 const onChangeDropdown2 = (name) => {
+    // const debugFlow = true
     // console.log("onChangeDropdown2", name)
     // console.log(listenersOfDropdown2)
     for (let i = 0; i < listenersOfDropdown2.length; i++) {
         let listener = listenersOfDropdown2[i]
-        const { triggers, listen_action } = listener
+        const { triggers, listen_action, column_name } = listener
+
         // console.log(listen_action, name, triggers)
+        if (debugFlow) console.log(name, "-->", column_name, listen_action)
         if (triggers.includes(name)) {
             // console.log("listen_action", listen_action)
             switch (listen_action) {
@@ -437,13 +457,11 @@ const onChangeDropdown2 = (name) => {
                 case 'trigger_change_some_lines':
                     //Do nothing, this is an action of table
                     break
+                case 'set_table_column':
+                    onChangeSetTableColumn(listener)
+                    break
                 default:
-                    console.error(
-                        'Unknown listen_action',
-                        listen_action,
-                        'of',
-                        name
-                    )
+                    console.error('Unknown listen_action', listen_action, 'of', name)
                     break
             }
         }
@@ -461,25 +479,14 @@ const reloadDataToDropdown2 = (
     const control_type = getControlTypeOfE(id)
     if (debugListener) console.log(id, attr_to_compare)
     if (debugListener)
-        console.log(
-            'reloadDataToDropdown2',
-            id,
-            control_type,
-            dataSource.length,
-            selected
-        )
+        console.log('reloadDataToDropdown2', id, control_type, dataSource.length, selected)
     if (dataSource === undefined) return
     getEById(id).empty()
 
     let options = []
     dataSource = filterDropdown2(id, dataSource)
     if (debugListener)
-        console.log(
-            'Loading dataSource after filterDropdown2',
-            id,
-            selected,
-            dataSource.length
-        )
+        console.log('Loading dataSource after filterDropdown2', id, selected, dataSource.length)
     // console.log(selected)
 
     if (control_type === 'dropdown') {
@@ -509,13 +516,7 @@ const reloadDataToDropdown2 = (
         options.unshift("<option value=''></option>")
         getEById(id).append(options)
         if (debugListener)
-            console.log(
-                'Appended',
-                id,
-                'with options has',
-                options.length,
-                'items'
-            )
+            console.log('Appended', id, 'with options has', options.length, 'items')
 
         getEById(id).select2({
             placeholder: 'Please select...',

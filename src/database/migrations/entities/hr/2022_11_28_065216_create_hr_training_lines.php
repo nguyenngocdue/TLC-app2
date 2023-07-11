@@ -26,6 +26,7 @@ return new class extends Migration
             $table->float('training_hours')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('hr_training_id');
+            $table->unsignedBigInteger('training_course_id');
             $table->orderable();
             $table->appendCommonFields();
         });

@@ -296,6 +296,7 @@ class RelationshipRenderer2 extends Component
 
                     'tableFooter' => $tableFooter,
                     'tableName' => $tableName,
+                    'colName' => $colName,
                     'tableDebug' => $this->tableDebug ? true : false,
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
 

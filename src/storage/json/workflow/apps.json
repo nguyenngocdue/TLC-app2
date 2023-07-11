@@ -381,7 +381,8 @@
         "show_renderer": "props-renderer",
         "hidden": "true",
         "hidden_navbar": "true",
-        "icon": null
+        "icon": null,
+        "disallowed_direct_creation": "true"
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",

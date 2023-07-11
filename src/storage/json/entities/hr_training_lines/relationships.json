@@ -13,6 +13,20 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
+    "_getTrainingCourse": {
+        "name": "_getTrainingCourse",
+        "relationship": "belongsTo",
+        "control_name": "training_course_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
     "_getUsers": {
         "name": "_getUsers",
         "relationship": "belongsTo",

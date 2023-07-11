@@ -8,7 +8,7 @@ class Hr_training_line extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "user_id", "hr_training_id",
-        "owner_id", 'training_hours', "order_no",
+        "owner_id", 'training_hours', "order_no", "training_course_id",
     ];
     protected $table = "hr_training_lines";
     protected static $statusless = true;
@@ -16,6 +16,7 @@ class Hr_training_line extends ModelExtended
     public static $eloquentParams = [
         "getSignatures" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
         "getTraining" => ["belongsTo", Hr_training::class, "hr_training_id"],
+        "getTrainingCourse" => ["belongsTo", Hr_training_course::class, "training_course_id"],
         'getUsers' => ['belongsTo', User::class, 'user_id'],
     ];
 
@@ -28,6 +29,11 @@ class Hr_training_line extends ModelExtended
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category')->orderBy('updated_at');
     }
     public function getTraining()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getTrainingCourse()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -45,6 +51,7 @@ class Hr_training_line extends ModelExtended
             ['dataIndex' => 'id', 'no_print' => true, 'invisible' => true],
             ['dataIndex' => 'hr_training_id', 'title' => 'Training ID', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'user_id',],
+            ['dataIndex' => 'training_course_id',],
             ['dataIndex' => 'training_hours', 'cloneable' => true],
         ];
     }

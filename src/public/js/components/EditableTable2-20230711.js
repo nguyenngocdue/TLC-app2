@@ -1,5 +1,5 @@
 const debugEditable = false
-const editableColumns = {}, tableObject = {}, entityId = null
+const editableColumns = {}, tableObject = {}, tableObjectColName = {}, entityId = null
 const getNameIndexOfRowIndex = (tableId, rowIndex) => {
     // const debugEditable = true
     const rows = $("#" + tableId + " > tbody")[0].children

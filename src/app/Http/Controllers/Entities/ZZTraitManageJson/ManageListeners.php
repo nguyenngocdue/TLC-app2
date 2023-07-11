@@ -27,7 +27,7 @@ class ManageListeners extends Manage_Parent
 
             'aggregate_from_table', // Field ONLY
             'trigger_change_all_lines', // Table ONLY
-            'column_from_field', // Table ONLY
+            'set_table_column', // Table ONLY
         ];
         return [
             // [
@@ -64,6 +64,11 @@ class ManageListeners extends Manage_Parent
             ],
             [
                 "dataIndex" => "listen_to_attrs",
+                "renderer" => "textarea4",
+                "editable" => true,
+            ],
+            [
+                "dataIndex" => "columns_to_set",
                 "renderer" => "textarea4",
                 "editable" => true,
             ],
@@ -127,6 +132,7 @@ class ManageListeners extends Manage_Parent
                         $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
                     case "assign":
                     case "dot":
@@ -136,6 +142,7 @@ class ManageListeners extends Manage_Parent
                         $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
                     case "expression":
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
@@ -145,11 +152,13 @@ class ManageListeners extends Manage_Parent
                         $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
                     case "ajax_request_scalar":
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
                         $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
                         $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
                     case "trigger_change_some_lines":
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
@@ -159,6 +168,17 @@ class ManageListeners extends Manage_Parent
                         $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
+                        break;
+                    case "set_table_column":
+                        // $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                        $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['expression'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+
                         break;
                 }
             } else {
@@ -171,6 +191,7 @@ class ManageListeners extends Manage_Parent
                 $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                 $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
                 $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                $newItem['columns_to_set'] = 'DO_NOT_RENDER';
             }
             $isStatic = (isset($prop['column_type']) && $prop['column_type'] === 'static');
             if (!$isStatic) $result[] = $newItem;
