@@ -49,7 +49,7 @@ return [
     "channels" => [
         "stack" => [
             "driver" => "stack",
-            "channels" => ["null"], //log logging 
+            "channels" => ["single"], //log logging 
             "ignore_exceptions" => false,
         ],
 
@@ -82,7 +82,7 @@ return [
                 "host" => env("PAPERTRAIL_URL"),
                 "port" => env("PAPERTRAIL_PORT"),
                 "connectionString" =>
-                    "tls://" .
+                "tls://" .
                     env("PAPERTRAIL_URL") .
                     ":" .
                     env("PAPERTRAIL_PORT"),
