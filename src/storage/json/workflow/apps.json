@@ -4,12 +4,14 @@
         "package_tab": "application",
         "package": "finance",
         "sub_package": "accounting",
-        "title": "Act Currency",
+        "title": "Currencies",
         "nickname": "ac",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "act_currency_pair": {
@@ -17,12 +19,14 @@
         "package_tab": "application",
         "package": "finance",
         "sub_package": "accounting",
-        "title": "Act Currency Pair",
+        "title": "Currency Pairs",
         "nickname": "acp",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "act_currency_xr": {
@@ -30,12 +34,13 @@
         "package_tab": "application",
         "package": "finance",
         "sub_package": "accounting",
-        "title": "Act Currency Xr",
+        "title": "Currency Exchange Rate",
         "nickname": "acx",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden_navbar": "true",
         "icon": null
     },
     "act_currency_xr_line": {
@@ -43,12 +48,14 @@
         "package_tab": "application",
         "package": "finance",
         "sub_package": "accounting",
-        "title": "Act Currency Xr Line",
+        "title": "Currency Exchange Rate Lines",
         "nickname": "acxl",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "hidden": "true",
+        "hidden_navbar": "true",
         "icon": null
     },
     "attachment": {
@@ -62,9 +69,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-regular fa-paperclip\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-regular fa-paperclip\"><\/i>"
     },
     "comment": {
         "name": "comment",
@@ -77,9 +84,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-duotone fa-comments\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-duotone fa-comments\"><\/i>"
     },
     "control_type": {
         "name": "control_type",
@@ -92,9 +99,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "currency": {
         "name": "currency",
@@ -107,9 +114,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>"
     },
     "department": {
         "name": "department",
@@ -122,9 +129,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>"
     },
     "eco_effectiveness_line": {
         "name": "eco_effectiveness_line",
@@ -137,9 +144,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "eco_labor_impact": {
         "name": "eco_labor_impact",
@@ -152,9 +159,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "eco_material_impact_add": {
         "name": "eco_material_impact_add",
@@ -167,9 +174,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "eco_material_impact_remove": {
         "name": "eco_material_impact_remove",
@@ -182,9 +189,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "eco_sheet": {
         "name": "eco_sheet",
@@ -223,8 +230,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-conveyor-belt-boxes\"><\/i>",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-conveyor-belt-boxes\"><\/i>"
     },
     "field": {
         "name": "field",
@@ -237,9 +244,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "ghg_line": {
         "name": "ghg_line",
@@ -252,9 +259,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "ghg_metric_type": {
         "name": "ghg_metric_type",
@@ -267,9 +274,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "ghg_metric_type_1": {
         "name": "ghg_metric_type_1",
@@ -282,9 +289,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "ghg_metric_type_2": {
         "name": "ghg_metric_type_2",
@@ -297,9 +304,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "ghg_sheet": {
         "name": "ghg_sheet",
@@ -340,9 +347,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
+        "icon": null,
         "apply_approval_tree": "true"
     },
     "hr_timesheet_line": {
@@ -356,9 +363,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
+        "icon": null,
         "apply_approval_tree": "true"
     },
     "hr_timesheet_officer": {
@@ -417,8 +424,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "hr_training_line": {
         "name": "hr_training_line",
@@ -431,9 +438,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
+        "icon": null,
         "disallowed_direct_creation": "true"
     },
     "hse_corrective_action": {
@@ -502,9 +509,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "hse_insp_chklst_sht": {
         "name": "hse_insp_chklst_sht",
@@ -531,9 +538,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "hse_insp_control_value": {
         "name": "hse_insp_control_value",
@@ -546,9 +553,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "hse_insp_group": {
         "name": "hse_insp_group",
@@ -561,9 +568,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "hse_insp_tmpl_line": {
         "name": "hse_insp_tmpl_line",
@@ -576,9 +583,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "hse_insp_tmpl_sht": {
         "name": "hse_insp_tmpl_sht",
@@ -591,8 +598,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-sheet-renderer",
-        "icon": null,
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "hse_insp_value": {
         "name": "hse_insp_value",
@@ -605,9 +612,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "hse_walkthrough": {
         "name": "hse_walkthrough",
@@ -633,9 +640,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>"
     },
     "manageAppCreations": {
         "name": "manageAppCreations",
@@ -648,9 +655,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>"
     },
     "manageApps": {
         "name": "manageApps",
@@ -663,9 +670,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
     "manageNavbars": {
         "name": "manageNavbars",
@@ -678,9 +685,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
     "managePivotTables": {
         "name": "managePivotTables",
@@ -693,9 +700,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
     "manageProfileFields": {
         "name": "manageProfileFields",
@@ -708,9 +715,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
     "manageReports": {
         "name": "manageReports",
@@ -723,9 +730,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>"
     },
     "manageStandardDefaultValues": {
         "name": "manageStandardDefaultValues",
@@ -738,9 +745,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
     },
     "manageStandardProps": {
         "name": "manageStandardProps",
@@ -753,9 +760,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
     },
     "manageStatuses": {
         "name": "manageStatuses",
@@ -768,9 +775,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-regular fa-bars-progress\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-regular fa-bars-progress\"><\/i>"
     },
     "manageWidgets": {
         "name": "manageWidgets",
@@ -783,9 +790,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>",
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>"
     },
     "permissions": {
         "name": "permissions",
@@ -798,9 +805,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "pj_module": {
         "name": "pj_module",
@@ -826,8 +833,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-sink\"><\/i>",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-sink\"><\/i>"
     },
     "pj_shipment": {
         "name": "pj_shipment",
@@ -840,8 +847,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
-        "icon": "<i class=\"fa-solid fa-ship\"><\/i>",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-ship\"><\/i>"
     },
     "pj_staircase": {
         "name": "pj_staircase",
@@ -854,8 +861,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-regular fa-circle-sort-up\"><\/i>",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-regular fa-circle-sort-up\"><\/i>"
     },
     "pj_sub_task": {
         "name": "pj_sub_task",
@@ -868,9 +875,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "pj_task": {
         "name": "pj_task",
@@ -883,9 +890,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "pj_unit": {
         "name": "pj_unit",
@@ -898,8 +905,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
-        "icon": "<i class=\"fa-solid fa-house\"><\/i>",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-house\"><\/i>"
     },
     "post": {
         "name": "post",
@@ -912,9 +919,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "priority": {
         "name": "priority",
@@ -927,9 +934,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "prod_discipline": {
         "name": "prod_discipline",
@@ -942,9 +949,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "prod_discipline_1": {
         "name": "prod_discipline_1",
@@ -957,9 +964,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "prod_discipline_2": {
         "name": "prod_discipline_2",
@@ -972,9 +979,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "prod_order": {
         "name": "prod_order",
@@ -1000,9 +1007,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "prod_routing_detail": {
         "name": "prod_routing_detail",
@@ -1015,9 +1022,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "prod_routing_link": {
         "name": "prod_routing_link",
@@ -1030,9 +1037,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "prod_run": {
         "name": "prod_run",
@@ -1045,9 +1052,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "prod_sequence": {
         "name": "prod_sequence",
@@ -1086,9 +1093,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "qaqc_car": {
         "name": "qaqc_car",
@@ -1129,9 +1136,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "qaqc_insp_chklst_sht": {
         "name": "qaqc_insp_chklst_sht",
@@ -1159,9 +1166,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "qaqc_insp_control_value": {
         "name": "qaqc_insp_control_value",
@@ -1174,9 +1181,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "qaqc_insp_group": {
         "name": "qaqc_insp_group",
@@ -1189,9 +1196,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "qaqc_insp_tmpl": {
         "name": "qaqc_insp_tmpl",
@@ -1204,8 +1211,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-renderer",
-        "icon": "<i class=\"fa-solid fa-list-ul\"><\/i>",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-list-ul\"><\/i>"
     },
     "qaqc_insp_tmpl_line": {
         "name": "qaqc_insp_tmpl_line",
@@ -1218,9 +1225,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "qaqc_insp_tmpl_sht": {
         "name": "qaqc_insp_tmpl_sht",
@@ -1233,8 +1240,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-sheet-renderer",
-        "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>"
     },
     "qaqc_insp_value": {
         "name": "qaqc_insp_value",
@@ -1247,9 +1254,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "qaqc_mir": {
         "name": "qaqc_mir",
@@ -1306,8 +1313,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-sharp fa-solid fa-file-chart-pie\"><\/i>",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": "<i class=\"fa-sharp fa-solid fa-file-chart-pie\"><\/i>"
     },
     "role_sets": {
         "name": "role_sets",
@@ -1320,9 +1327,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "roles": {
         "name": "roles",
@@ -1335,9 +1342,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "setpermissions": {
         "name": "setpermissions",
@@ -1350,9 +1357,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "setroles": {
         "name": "setroles",
@@ -1365,9 +1372,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "setrolesets": {
         "name": "setrolesets",
@@ -1380,9 +1387,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "signature": {
         "name": "signature",
@@ -1395,9 +1402,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "sub_project": {
         "name": "sub_project",
@@ -1423,9 +1430,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user": {
         "name": "user",
@@ -1438,8 +1445,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
-        "hidden": "true"
+        "hidden": "true",
+        "icon": null
     },
     "user_category": {
         "name": "user_category",
@@ -1452,9 +1459,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_company": {
         "name": "user_company",
@@ -1467,9 +1474,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_discipline": {
         "name": "user_discipline",
@@ -1482,9 +1489,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_position1": {
         "name": "user_position1",
@@ -1497,9 +1504,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_position2": {
         "name": "user_position2",
@@ -1512,9 +1519,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_position3": {
         "name": "user_position3",
@@ -1527,9 +1534,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_position_pre": {
         "name": "user_position_pre",
@@ -1542,9 +1549,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_team_ncr": {
         "name": "user_team_ncr",
@@ -1557,9 +1564,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_team_ot": {
         "name": "user_team_ot",
@@ -1572,9 +1579,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_team_tsht": {
         "name": "user_team_tsht",
@@ -1587,9 +1594,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_time_keep_type": {
         "name": "user_time_keep_type",
@@ -1602,9 +1609,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "user_type": {
         "name": "user_type",
@@ -1617,9 +1624,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "wir_description": {
         "name": "wir_description",
@@ -1632,9 +1639,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "work_area": {
         "name": "work_area",
@@ -1647,9 +1654,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "work_mode": {
         "name": "work_mode",
@@ -1662,9 +1669,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "workplace": {
         "name": "workplace",
@@ -1677,9 +1684,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_01": {
         "name": "zunit_test_01",
@@ -1692,9 +1699,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_02": {
         "name": "zunit_test_02",
@@ -1707,9 +1714,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_03": {
         "name": "zunit_test_03",
@@ -1722,9 +1729,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_04": {
         "name": "zunit_test_04",
@@ -1737,9 +1744,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_05": {
         "name": "zunit_test_05",
@@ -1752,9 +1759,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_06": {
         "name": "zunit_test_06",
@@ -1767,9 +1774,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_07": {
         "name": "zunit_test_07",
@@ -1782,9 +1789,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_08": {
         "name": "zunit_test_08",
@@ -1797,9 +1804,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
+        "icon": null,
         "apply_approval_tree": "true"
     },
     "zunit_test_09": {
@@ -1813,9 +1820,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_10": {
         "name": "zunit_test_10",
@@ -1828,9 +1835,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_11": {
         "name": "zunit_test_11",
@@ -1843,9 +1850,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_12": {
         "name": "zunit_test_12",
@@ -1858,9 +1865,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_13": {
         "name": "zunit_test_13",
@@ -1873,9 +1880,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_15": {
         "name": "zunit_test_15",
@@ -1888,9 +1895,9 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     },
     "zunit_test_19": {
         "name": "zunit_test_19",
@@ -1903,8 +1910,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "icon": null
     }
 }
