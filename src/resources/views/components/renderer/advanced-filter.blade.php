@@ -13,7 +13,7 @@
                     </div>
                     {{-- <x-renderer.button htmlType="submit" type="secondary" name="action" value="updateBasicFilter" class="ml-2"><i class="fa-regular fa-filter"></i></x-renderer.button> --}}
                     <x-renderer.button type="danger" click="deletedBasicFilter()" class="mx-2"><i class="fa-solid fa-trash"></i></x-renderer.button>
-                    <button type="button" class="pl-2 text-2xl text-gray-500 border-l" @click="toogleAdvanceFilter()">
+                    <button type="button" class="pl-2 text-2xl text-gray-500 border-l" @click="toogleAdvanceFilter('{{$type}}','advance_filter')" >
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                 </div>
@@ -29,7 +29,7 @@
             <div class="flex h-10">
                 <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
                 <div class="flex">
-                    <button type="button" class="pl-2 text-2xl text-gray-500 border-l" @click="toogleAdvanceFilter()">
+                    <button type="button" class="pl-2 text-2xl text-gray-500 border-l" @click="toogleAdvanceFilter('{{$type}}','basic_filter')">
                         <i class="fa-solid fa-chevron-up"></i>
                     </button>
                 </div>
@@ -44,7 +44,6 @@
                         <x-renderer.button type="secondary" click="saveBasicFilter()" class="ml-2"><i class="fa-solid fa-floppy-disk"></i></x-renderer.button>
                     </div>
                     @empty(!$basicFilter)
-                            
                     <div style="height: {{$maxH}}" class="w-full overflow-y-auto mt-2 text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         @foreach($basicFilter as $value)
                         <div  class="relative {{$valueBasicFilter == $value ? 'text-blue-700' : ''}} inline-flex text-left justify-between items-center w-full px-4 py-1 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
@@ -189,6 +188,7 @@
         </div>
     </form>
     <script>
+        var url = @json($routeUpdateUserSettings);
         function clearAdvanceFilter(){
             $('[id="'+"{{$type}}"+'"]').append('<input type="hidden" name="action" value="clearAdvanceFilter">')
             $('[id="'+"{{$type}}"+'"]').submit()
@@ -219,9 +219,23 @@
             $('[id="'+"{{$type}}"+'"]').append('<input type="hidden" name="action" value="deletedBasicFilter2">')
             $('[id="'+"{{$type}}"+'"]').submit()
         }
-        function toogleAdvanceFilter(){
+        function toogleAdvanceFilter(entity,value){
             $('[id="modal_basic_filter"]').toggleClass('hidden')
             $('[id="modal_advance_filter"]').toggleClass('hidden')
+            $.ajax({
+                type: 'put',
+                url: url,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                data: { entity: entity, current_filter : value },
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success(response.message, 'Updated User Settings');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {},
+            });
         }
     </script>
 

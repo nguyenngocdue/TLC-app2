@@ -49,7 +49,7 @@ return [
     "channels" => [
         "stack" => [
             "driver" => "stack",
-            "channels" => ["single"],
+            "channels" => ["null"], //log logging 
             "ignore_exceptions" => false,
         ],
 

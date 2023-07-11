@@ -32,4 +32,27 @@ class UpdateUserSettingsApi extends Controller
             );
         }
     }
+    public function updateUserSettingsFilterApi(Request $request){
+        try {
+            $entity = $request->input('entity');
+            $value = $request->input('current_filter');
+            if ($entity) {
+                $user = CurrentUser::get();
+                $settings = $user->settings;
+                $settings[$entity][Constant::VIEW_ALL]['current_filter'] = $value;
+                $user->settings = $settings;
+                $user->update();
+                return ResponseObject::responseSuccess(
+                    null,
+                    [],
+                    'Updated User Setting Successfully!'
+                );
+            }
+        } catch (\Throwable $th) {
+            return ResponseObject::responseFail(
+                $th->getMessage(),
+            );
+        }
+
+    }
 }

@@ -38,6 +38,7 @@ class AdvancedFilter extends Component
         $count = count($propsFilters) ?? 0;
         $maxH = round($count / 4) * 3.7 . 'rem';
         $route = $this->trashed ? route($this->type . '.trashed') : route($this->type . '.index');
+        $routeUpdateUserSettings = route('updateUserSettingsFilterApi');
 
         return view('components.renderer.advanced-filter', [
             'type' => $this->type,
@@ -48,6 +49,7 @@ class AdvancedFilter extends Component
             'basicFilter' => array_keys($basicFilter) ?? [],
             'maxH' => $maxH,
             'route' => $route,
+            'routeUpdateUserSettings' => $routeUpdateUserSettings,
         ]);
     }
 }
