@@ -12,7 +12,7 @@
         "show_renderer": "props-renderer",
         "hidden": "true",
         "hidden_navbar": "true",
-        "icon": null
+        "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>"
     },
     "act_currency_pair": {
         "name": "act_currency_pair",
@@ -27,7 +27,7 @@
         "show_renderer": "props-renderer",
         "hidden": "true",
         "hidden_navbar": "true",
-        "icon": null
+        "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>"
     },
     "act_currency_xr": {
         "name": "act_currency_xr",
@@ -41,7 +41,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "hidden_navbar": "true",
-        "icon": null
+        "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>"
     },
     "act_currency_xr_line": {
         "name": "act_currency_xr_line",
@@ -56,7 +56,7 @@
         "show_renderer": "props-renderer",
         "hidden": "true",
         "hidden_navbar": "true",
-        "icon": null
+        "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>"
     },
     "attachment": {
         "name": "attachment",
@@ -102,21 +102,6 @@
         "hidden": "true",
         "hidden_navbar": "true",
         "icon": null
-    },
-    "currency": {
-        "name": "currency",
-        "package_tab": "application",
-        "package": "finance",
-        "sub_package": "accounting",
-        "title": "Currency",
-        "nickname": "?",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "hidden": "true",
-        "hidden_navbar": "true",
-        "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>"
     },
     "department": {
         "name": "department",
