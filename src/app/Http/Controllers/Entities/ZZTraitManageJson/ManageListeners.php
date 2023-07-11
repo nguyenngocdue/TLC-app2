@@ -15,6 +15,20 @@ class ManageListeners extends Manage_Parent
     {
         $columns = array_values(array_map(fn ($i) => $i['column_name'], Props::getAllOf($this->type)));
         $columns = array_merge([""], $columns);
+        $listen_actions = [
+            '',
+            'reduce',
+            'assign',
+            'dot',
+            'expression',
+            'date_offset',
+            'number_to_words(not-yet)',
+            'ajax_request_scalar',
+
+            'aggregate_from_table', // Field ONLY
+            'trigger_change_all_lines', // Table ONLY
+            'column_from_field', // Table ONLY
+        ];
         return [
             // [
             //     "dataIndex" => "action",
@@ -34,7 +48,7 @@ class ManageListeners extends Manage_Parent
                 "dataIndex" => "listen_action",
                 "renderer" => "dropdown",
                 "editable" => true,
-                "cbbDataSource" => ['', 'reduce', 'assign', 'dot', 'aggregate_from_table', 'expression', 'date_offset', 'number_to_words(not-yet)', 'ajax_request_scalar', /*'trigger_change_same_line', 'trigger_change_some_lines', */ 'trigger_change_all_lines'],
+                "cbbDataSource" => $listen_actions,
                 "sortBy" => 'value',
                 "properties" => ["strFn" => 'same'],
             ],
