@@ -36,6 +36,7 @@ abstract class ModelExtended extends Model
     public static $eloquentParams = [];
     public static $oracyParams = [];
     protected static $statusless = false;
+    public static $nameless = false;
 
     public static function isStatusless()
     {
@@ -108,7 +109,7 @@ abstract class ModelExtended extends Model
 
     public function getName()
     {
-        if ($this->nameless) return "#" . $this->id;
+        if ($this::$nameless) return "#" . $this->id;
         else return $this->name;
     }
     static $singletonDbUserCollection = null;
@@ -129,12 +130,12 @@ abstract class ModelExtended extends Model
     }
     private static $singletonMorphMany = [];
 
-    public static function getCollectionMorphMany($ids, $fieldNameCategory, $modelName, $keyType, $keyId,$useTableField)
+    public static function getCollectionMorphMany($ids, $fieldNameCategory, $modelName, $keyType, $keyId, $useTableField)
     {
         $key = $modelName . "_" . $fieldNameCategory;
         if (!isset(static::$singletonMorphMany[$key])) {
             $query = $modelName::query()->where($keyType, static::class)->whereIn($keyId, $ids);
-            if($useTableField){
+            if ($useTableField) {
                 $query->where('category', FieldSeeder::getIdFromFieldName($fieldNameCategory));
             }
             static::$singletonMorphMany[$key] = $query->get()->groupBy($keyId);
@@ -148,11 +149,11 @@ abstract class ModelExtended extends Model
      * @param bool $useTableField MorphMany table using table field key category 
      * @return mixed|array value MorphMany
      */
-    public function getMorphManyByIds($ids = [], $fieldNameCategory,$useTableField = true)
+    public function getMorphManyByIds($ids = [], $fieldNameCategory, $useTableField = true)
     {
         if ($fieldNameCategory) {
             $eloquentParams = static::$eloquentParams[$fieldNameCategory] ?? [];
-            static::getCollectionMorphMany($ids, $fieldNameCategory, $eloquentParams[1], $eloquentParams[3], $eloquentParams[4],$useTableField);
+            static::getCollectionMorphMany($ids, $fieldNameCategory, $eloquentParams[1], $eloquentParams[3], $eloquentParams[4], $useTableField);
             $key = $eloquentParams[1] . "_" . $fieldNameCategory;
             $result = static::$singletonMorphMany[$key][$this->id] ?? [];
             return $result;

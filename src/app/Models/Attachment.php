@@ -22,7 +22,7 @@ class Attachment extends ModelExtended
         'object_type',
     ];
     protected $table = 'attachments';
-    public $nameless = true;
+    public static $nameless = true;
     protected static $statusless = true;
 
     public static $eloquentParams = [

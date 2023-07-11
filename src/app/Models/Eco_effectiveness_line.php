@@ -11,7 +11,7 @@ class Eco_effectiveness_line extends ModelExtended
     ];
     protected $table = "eco_effectiveness_lines";
     protected static $statusless = true;
-    public $nameless = true;
+    public static $nameless = true;
 
     public static $eloquentParams = [
         "getEcoSheet" => ['belongsTo', Eco_sheet::class, 'eco_sheet_id'],

@@ -23,7 +23,7 @@ class ChooseBasicFilter3 extends Component
         private $readOnly = false,
         private $saveOnChange = false,
         private $allowClear = false,
-        private $nameless = 'nameless',
+        // private $nameless = 'nameless',
     ) {
         //
     }
