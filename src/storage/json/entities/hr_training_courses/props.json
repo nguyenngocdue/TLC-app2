@@ -245,5 +245,24 @@
         "save_on_change": "",
         "duplicatable": "",
         "new_line": ""
+    },
+    "_attachment_training_course": {
+        "name": "_attachment_training_course",
+        "column_name": "attachment_training_course",
+        "column_type": "eloquent_prop",
+        "label": "Attachments",
+        "control": "attachment",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
     }
 }
