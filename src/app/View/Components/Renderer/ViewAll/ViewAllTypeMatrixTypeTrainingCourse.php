@@ -65,7 +65,7 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
         $data = ($this->yAxis)::query()
             ->whereNot('resigned', true)
             ->where("first_date", '>', $timeFrame)
-            ->where('workplace', $this->workplace_id)
+            ->whereIn('workplace', $this->workplace_id)
             ->orderBy('name')
             ->get();
 
