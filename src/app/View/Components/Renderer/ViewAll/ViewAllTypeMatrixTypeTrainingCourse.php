@@ -7,19 +7,23 @@ use App\Models\Hr_training_course;
 use App\Models\Hr_training_line;
 use App\Models\User;
 use App\Utils\Constant;
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateTimeConcern;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
 {
     use TraitViewAllFunctions;
-    private $project, $subProject, $prodRouting;
+    private $workplace_id;
     protected $xAxis = Hr_training_course::class;
     protected $dataIndexX = "training_course_id";
     protected $yAxis = User::class;
     protected $dataIndexY = "user_id";
-    protected $rotate45Width = 400;
+    // protected $rotate45Width = 400;
     protected $groupBy = null;
     protected $allowCreation = false;
+    private $timeFrameInDays = 30;
     /**
      * Create a new component instance.
      *
@@ -28,22 +32,17 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
     public function __construct()
     {
         parent::__construct();
-        // [$this->project, $this->subProject, $this->prodRouting] = $this->getUserSettings();
-        // $this->project = $this->project ? $this->project : 5;
-        // $this->subProject = $this->subProject ? $this->subProject : 21;
-        // $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
-        // dump($this->project, $this->subProject, $this->prodRouting);
+        [$this->workplace_id] = $this->getUserSettings();
+        $this->workplace_id = $this->workplace_id ? $this->workplace_id : 2;
     }
 
-    // private function getUserSettings()
-    // {
-    //     $type = Str::plural($this->type);
-    //     $settings = CurrentUser::getSettings();
-    //     $project = $settings[$type][Constant::VIEW_ALL]['matrix']['project_id'] ?? null;
-    //     $subProject = $settings[$type][Constant::VIEW_ALL]['matrix']['sub_project_id'] ?? null;
-    //     $prodRouting = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] ?? null;
-    //     return [$project, $subProject, $prodRouting];
-    // }
+    private function getUserSettings()
+    {
+        $type = Str::plural($this->type);
+        $settings = CurrentUser::getSettings();
+        $workplace_id = $settings[$type][Constant::VIEW_ALL]['matrix']['workplace_id'] ?? null;
+        return [$workplace_id];
+    }
 
     protected function getXAxis()
     {
@@ -55,8 +54,6 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
                 'dataIndex' => $line->id,
                 'title' => $line->name,
                 'align' => 'center',
-                // 'prod_discipline_id' => $line->prod_discipline_id,
-                // 'def_assignee' => $line->def_assignee,
                 'width' => 40,
             ];
         }
@@ -66,14 +63,13 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
 
     protected function getYAxis()
     {
-        $timeFrame = Carbon::parse()->subWeek(4)->format(Constant::FORMAT_DATE_MYSQL);
+        $timeFrame = Carbon::parse()->subDays($this->timeFrameInDays)->format(Constant::FORMAT_DATE_MYSQL);
         $data = ($this->yAxis)::query()
             ->whereNot('resigned', true)
             ->where("first_date", '>', $timeFrame)
-            // ->where('sub_project_id', $this->subProject)
-            // ->where('prod_routing_id', $this->prodRouting)
+            ->whereIn('workplace', $this->workplace_id)
+            ->orderBy('first_date')
             ->orderBy('name')
-            // ->limit(10)
             ->get();
 
         return $data;
@@ -82,35 +78,42 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
     protected function getViewportParams()
     {
         return [
-            'project_id' => $this->project,
-            'sub_project_id' => $this->subProject,
-            'prod_routing_id' => $this->prodRouting,
+            'workplace_id' => $this->workplace_id,
         ];
     }
 
     protected function getMatrixDataSource($xAxis)
     {
         $lines = Hr_training_line::query()
-            // ->where('sub_project_id', $this->subProject)
-            // ->where('prod_routing_id', $this->prodRouting)
             ->get();
         // dump($lines);
         return $lines;
     }
 
-    protected function getCreateNewParams($x, $y)
+    protected function getMetaColumns()
     {
-        // dump($x);
-        // dump($y);
-        // dd();
-        $params = parent::getCreateNewParams($x, $y);
-        $params['project_id'] =  $this->project;
-        $params['sub_project_id'] =  $this->subProject;
-        $params['prod_routing_id'] =  $this->prodRouting;
+        return [
+            ['dataIndex' => 'employee_id', 'align' => 'center', 'width' => 100],
+            ['dataIndex' => 'employee_cat', 'align' => 'center', 'width' => 100],
+            ['dataIndex' => 'employee_position', 'align' => 'center', 'width' => 100],
+            ['dataIndex' => 'report_to', 'align' => 'center', 'width' => 200],
+            ['dataIndex' => 'department_of_trainee', 'align' => 'center', 'width' => 100,],
+            ['dataIndex' => 'first_date', 'align' => 'center', 'width' => 100],
+            ['dataIndex' => 'due_date', 'align' => 'center', 'width' => 100],
+        ];
+    }
 
-        $params['prod_order_id'] =  $y->id;
-        // $params['prod_discipline_id'] =  $x['prod_discipline_id'];
-        // $params['assignee_1'] =  $x['def_assignee'];
-        return $params;
+    function getMetaObjects($y)
+    {
+        $dueDate = Carbon::parse($y->first_date)->addDays($this->timeFrameInDays)->format(Constant::FORMAT_DATE_MYSQL);
+        return [
+            'employee_id' => $y->employeeid,
+            'employee_cat' => $y->getUserCat->name,
+            'employee_position' => $y->position_rendered,
+            'report_to' => $y->getUserDiscipline->getDefAssignee->name,
+            'department_of_trainee' => $y->getUserDepartment->name,
+            'first_date' => DateTimeConcern::formatForLoading($y->first_date, Constant::FORMAT_DATE_MYSQL, Constant::FORMAT_DATE_ASIAN),
+            'due_date' => DateTimeConcern::formatForLoading($dueDate, Constant::FORMAT_DATE_MYSQL, Constant::FORMAT_DATE_ASIAN),
+        ];
     }
 }

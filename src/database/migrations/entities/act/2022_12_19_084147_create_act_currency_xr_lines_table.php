@@ -26,7 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('currency_xr_id')->nullable();
             $table->date('month')->nullable();
             $table->unsignedBigInteger('currency_pair_id')->nullable();
-            $table->float('value')->nullable();
+            $table->decimal('value', 20, 6)->nullable();
             $table->orderable();
             $table->appendCommonFields();
         });

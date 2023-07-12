@@ -5,7 +5,7 @@
           :dataSource="$dataSource"
           groupBy="{{$groupBy}}"
           groupByLength="{{$groupByLength}}"
-          footer="{!! $footer !!}"
+          bottomLeftControl="{!! $footer !!}"
           showNo=1
           topRightControl="{!! $perPage !!}"
           bottomRightControl="{!! $perPage !!}"
