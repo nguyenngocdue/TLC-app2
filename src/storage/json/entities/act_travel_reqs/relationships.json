@@ -13,10 +13,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getDocument": {
-        "name": "_getDocument",
+    "_getTravelType": {
+        "name": "_getTravelType",
         "relationship": "belongsTo",
-        "control_name": "document_id",
+        "control_name": "travel_type_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

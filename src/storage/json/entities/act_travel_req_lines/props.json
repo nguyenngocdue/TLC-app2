@@ -61,7 +61,7 @@
         "column_name": "act_travel_req_id",
         "column_type": "bigint unsigned",
         "label": "Parent",
-        "control": "dropdown",
+        "control": "number",
         "align": "",
         "col_span": "",
         "width": "",

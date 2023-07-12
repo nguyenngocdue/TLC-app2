@@ -1,4 +1,19 @@
 {
+    "_total_travel_day": {
+        "name": "_total_travel_day",
+        "column_name": "total_travel_day",
+        "listen_action": "aggregate_from_table",
+        "triggers": "table01[footer][total_day]",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_staff_workplace_id": {
         "name": "_staff_workplace_id",
         "column_name": "staff_workplace_id",
@@ -74,9 +89,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_document_id": {
-        "name": "_document_id",
-        "column_name": "document_id",
+    "_travel_type_id": {
+        "name": "_travel_type_id",
+        "column_name": "travel_type_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -134,9 +149,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_total_travel_day": {
-        "name": "_total_travel_day",
-        "column_name": "total_travel_day",
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -149,9 +164,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_remark": {
-        "name": "_remark",
-        "column_name": "remark",
+    "_getReqTravelDesk()": {
+        "name": "_getReqTravelDesk()",
+        "column_name": "getReqTravelDesk()",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -182,21 +197,6 @@
     "_attachment_current_portrait": {
         "name": "_attachment_current_portrait",
         "column_name": "attachment_current_portrait",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_getReqTravelDesk()": {
-        "name": "_getReqTravelDesk()",
-        "column_name": "getReqTravelDesk()",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

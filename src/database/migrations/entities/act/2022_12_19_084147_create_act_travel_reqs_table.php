@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('staff_id')->nullable();
-            $table->unsignedBigInteger('document_id')->nullable();
+            $table->unsignedBigInteger('travel_type_id')->nullable();
             $table->unsignedBigInteger('workplace_id')->nullable();
             $table->unsignedBigInteger('staff_discipline_id')->nullable();
             $table->unsignedBigInteger('staff_workplace_id')->nullable();

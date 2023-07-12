@@ -54,7 +54,7 @@ class Act_travel_req_line extends ModelExtended
             ['dataIndex' => 'datetime_outbound_2', 'cloneable' => true],
             ['dataIndex' => 'datetime_inbound_1', 'cloneable' => true],
             ['dataIndex' => 'datetime_inbound_2', 'cloneable' => true],
-            ['dataIndex' => 'total_day',],
+            ['dataIndex' => 'total_day', 'footer' => "agg_sum"],
             ['dataIndex' => 'remark'],
         ];
     }
