@@ -23,7 +23,6 @@ class UpdateUserSettings extends Controller
         $type = $request->input("_entity");
         $settings[$type][Constant::VIEW_ALL]['per_page'] = $perPage;
         return $settings;
-        
     }
     private function updateShowOptionsOrgChart($request, $settings)
     {
@@ -52,21 +51,13 @@ class UpdateUserSettings extends Controller
     {
         $type = $request->input("_entity");
 
-        $page = $request->input("page");
-        if ($page) $settings[$type][Constant::VIEW_ALL]['page'] = $page;
-
-        $viewportDate = $request->input("viewportDate");
-        if ($viewportDate) $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] = $viewportDate;
-
-        $viewportMode = $request->input("viewportMode");
-        if ($viewportMode) $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_mode'] = $viewportMode;
-
-        $sub_project_id = $request->input("sub_project_id");
-        if ($sub_project_id) $settings[$type][Constant::VIEW_ALL]['matrix']['sub_project_id'] = $sub_project_id;
-
-        $prod_routing_id = $request->input("prod_routing_id");
-        if ($prod_routing_id) $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] = $prod_routing_id;
-
+        $toBeSaved = [];
+        foreach ($request->input() as $key => $value) {
+            if (!in_array($key, ["_token", "_method", "_entity", "action"])) $toBeSaved[$key] = $value;
+        }
+        foreach ($toBeSaved as $key => $value) {
+            $settings[$type][Constant::VIEW_ALL]['matrix'][$key] = $value;
+        }
         return $settings;
     }
 

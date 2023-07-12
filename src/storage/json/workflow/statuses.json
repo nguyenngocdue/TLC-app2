@@ -95,7 +95,7 @@
         "title": "Failed",
         "color": "red",
         "color_index": "300",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-circle-xmark\"><\/i>"
     },
     "finished": {
         "name": "finished",
@@ -347,7 +347,7 @@
         "title": "Waived",
         "color": "neutral",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-check-double\"><\/i>"
     },
     "": {
         "name": null,

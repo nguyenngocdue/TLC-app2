@@ -199,7 +199,7 @@ abstract class ViewAllTypeMatrixParent extends Component
 
         $settings = CurrentUser::getSettings();
         $per_page = $settings[$this->type]['view_all']['per_page'] ?? 15;
-        $page = $settings[$this->type]['view_all']['page'] ?? 1;
+        $page = $settings[$this->type]['view_all']['matrix']['page'] ?? 1;
         $dataSource = $this->paginate($dataSource, $per_page, $page);
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
