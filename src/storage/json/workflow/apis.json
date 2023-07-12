@@ -1,4 +1,7 @@
 {
+    "act_advance_reqs": {
+        "name": "act_advance_reqs"
+    },
     "act_currencies": {
         "name": "act_currencies"
     },
@@ -11,6 +14,20 @@
     },
     "act_currency_xrs": {
         "name": "act_currency_xrs"
+    },
+    "act_travel_expense_claim_lines": {
+        "name": "act_travel_expense_claim_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "act_travel_expense_claims": {
+        "name": "act_travel_expense_claims"
+    },
+    "act_travel_req_lines": {
+        "name": "act_travel_req_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "act_travel_reqs": {
+        "name": "act_travel_reqs"
     },
     "attachments": {
         "name": "attachments"

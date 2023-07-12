@@ -1,0 +1,102 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
+    "_act_travel_req_id": {
+        "name": "_act_travel_req_id",
+        "column_name": "act_travel_req_id",
+        "new": "true"
+    },
+    "_from_id": {
+        "name": "_from_id",
+        "column_name": "from_id",
+        "new": "true"
+    },
+    "_to_id": {
+        "name": "_to_id",
+        "column_name": "to_id",
+        "new": "true"
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "new": "true"
+    },
+    "_datetime_outbound_1": {
+        "name": "_datetime_outbound_1",
+        "column_name": "datetime_outbound_1",
+        "new": "true"
+    },
+    "_datetime_outbound_2": {
+        "name": "_datetime_outbound_2",
+        "column_name": "datetime_outbound_2",
+        "new": "true"
+    },
+    "_datetime_inbound_1": {
+        "name": "_datetime_inbound_1",
+        "column_name": "datetime_inbound_1",
+        "new": "true"
+    },
+    "_datetime_inbound_2": {
+        "name": "_datetime_inbound_2",
+        "column_name": "datetime_inbound_2",
+        "new": "true"
+    },
+    "_total_day": {
+        "name": "_total_day",
+        "column_name": "total_day",
+        "new": "true"
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "new": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    }
+}
