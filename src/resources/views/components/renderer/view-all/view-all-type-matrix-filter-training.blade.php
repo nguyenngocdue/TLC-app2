@@ -10,10 +10,11 @@
                  Workplace:
                  <x-calendar.sidebar-filter-workplace
                      tableName="workplaces" 
-                     name="workplace_id" 
+                     name="workplace_id[]" 
                      id="workplace_id" 
+                     multiple="true"
                      {{-- typeToLoadListener="qaqc_wir"  --}}
-                     selected="{{$viewportParams['workplace_id']}}"
+                     :selected="$viewportParams['workplace_id']"
                      />
              </div>
              
