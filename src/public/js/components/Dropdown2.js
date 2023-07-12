@@ -154,19 +154,21 @@ const onChangeDropdown2Reduce = (listener) => {
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
-        //console.log("value", constraintsValues[i], value, !value)
-        const column = listen_to_attrs[i]
-        if (column === undefined)
-            console.log('The column to look up [', column, '] is not found in ...')
         if (!value) continue
-        if (debugListener)
-            console.log('Applying', column, value, 'to', table_name)
+        // console.log("value of trigger[", i, "]", value)
+
+        const column = listen_to_attrs[i]
+        if (column === undefined) console.log('The column to look up [', column, '] is not found in ...')
+        if (debugListener) console.log('Applying', column, value, 'to', table_name)
+
         dataSource = dataSource.filter((row) => {
             let result = null
             if (Array.isArray(row[column])) {
+                // console.log("Check if", value, "is in", row[column], result ? "YES" : "")
                 result = dumbIncludes2(row[column], value)
             } else {
-                result = row[column] == value
+                result = (row[column] == value)
+                // console.log("Check if", value, "is =", row[column], result ? "YES" : "")
             }
             if (debugListener) console.log('Result of reduce filter', row[column], value, result)
             return result
@@ -469,55 +471,34 @@ const onChangeDropdown2 = (name) => {
     }
 }
 
-const reloadDataToDropdown2 = (
-    id,
-    attr_to_compare = 'id',
-    dataSource,
-    selected,
-    allowClear = false
-) => {
+const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected, allowClear = false) => {
     // const debugListener = true
     const control_type = getControlTypeOfE(id)
     if (debugListener) console.log(id, attr_to_compare)
-    if (debugListener)
-        console.log('reloadDataToDropdown2', id, control_type, dataSource.length, selected)
+    if (debugListener) console.log('reloadDataToDropdown2', id, control_type, dataSource.length, selected)
     if (dataSource === undefined) return
     getEById(id).empty()
 
     let options = []
     dataSource = filterDropdown2(id, dataSource)
-    if (debugListener)
-        console.log('Loading dataSource after filterDropdown2', id, selected, dataSource.length)
+    if (debugListener) console.log('Loading dataSource after filterDropdown2', id, selected, dataSource.length)
     // console.log(selected)
 
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             selectedStr =
-                dataSource.length === 1
-                    ? 'selected'
-                    : dumbIncludes2(selected, item.id)
-                        ? 'selected'
-                        : ''
+                dataSource.length === 1 ? 'selected' : dumbIncludes2(selected, item.id) ? 'selected' : ''
             // console.log(id, selected, item.id, selectedStr)
-            const title =
-                item.description || (isNaN(item.id) ? item.id : makeId(item.id))
-            option =
-                "<option value='" +
-                item.id +
-                "' title='" +
-                title +
-                "' " +
-                selectedStr +
-                ' >'
+            const title = item.description || (isNaN(item.id) ? item.id : makeId(item.id))
+            option = "<option value='" + item.id + "' title='" + title + "' " + selectedStr + ' >'
             option += item.name || 'Nameless #' + item.id
             option += '</option>'
             options.push(option)
         }
         options.unshift("<option value=''></option>")
         getEById(id).append(options)
-        if (debugListener)
-            console.log('Appended', id, 'with options has', options.length, 'items')
+        if (debugListener) console.log('Appended', id, 'with options has', options.length, 'items')
 
         getEById(id).select2({
             placeholder: 'Please select...',
@@ -539,12 +520,7 @@ const reloadDataToDropdown2 = (
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr =
-                dataSource.length === 1
-                    ? 'checked'
-                    : dumbIncludes2(selected, itemId)
-                        ? 'checked'
-                        : ''
+            selectedStr = dataSource.length === 1 ? 'checked' : dumbIncludes2(selected, itemId) ? 'checked' : ''
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''

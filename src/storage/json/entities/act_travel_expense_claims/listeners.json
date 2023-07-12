@@ -37,7 +37,7 @@
         "listen_to_fields": "currency1_id,currency3_id",
         "listen_to_attrs": "id,id",
         "columns_to_set": "",
-        "attrs_to_compare": "base_currency, counter_currency",
+        "attrs_to_compare": "base_currency,counter_currency",
         "expression": "",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
