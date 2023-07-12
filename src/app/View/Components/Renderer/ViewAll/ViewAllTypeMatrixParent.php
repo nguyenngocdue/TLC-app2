@@ -183,6 +183,16 @@ abstract class ViewAllTypeMatrixParent extends Component
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
+    protected function getFooter($yAxisTableName)
+    {
+        $yAxisRoute = route($yAxisTableName . ".index");
+        $app = LibApps::getFor($yAxisTableName);
+        return "<div class='flex items-center justify-start'>
+                <span class='mr-1'>View all </span>
+                <a target='_blank' class='text-blue-400 cursor-pointer font-semibold' href='$yAxisRoute'> " . $app['title'] . "</a>
+            </div>";
+    }
+
     public function render()
     {
         $xAxis = $this->getXAxis();
@@ -192,14 +202,10 @@ abstract class ViewAllTypeMatrixParent extends Component
         $dataSource = $this->getMatrixDataSource($xAxis);
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource);
         $columns = $this->getColumns($xAxis);
-
-        $yAxisRoute = route($yAxisTableName . ".index");
-        $app = LibApps::getFor($yAxisTableName);
-        $footer = "<a target='_blank' href='$yAxisRoute'>" . $app['title'] . "</a>";
-
+        $footer = $this->getFooter($yAxisTableName);
         $settings = CurrentUser::getSettings();
         $per_page = $settings[$this->type]['view_all']['per_page'] ?? 15;
-        $page = $settings[$this->type]['view_all']['page'] ?? 1;
+        $page = $settings[$this->type]['view_all']['matrix']['page'] ?? 1;
         $dataSource = $this->paginate($dataSource, $per_page, $page);
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";

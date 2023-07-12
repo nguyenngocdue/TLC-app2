@@ -175,6 +175,14 @@
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
+    "_attachment_training_course": {
+        "name": "_attachment_training_course",
+        "field_id": "167",
+        "field_name": "attachment_training_course",
+        "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported"
+    },
     "_featured_image": {
         "name": "_featured_image",
         "field_id": "11",

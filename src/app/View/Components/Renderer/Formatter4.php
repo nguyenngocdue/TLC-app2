@@ -22,7 +22,8 @@ class Formatter4 extends Component
         $color = $this->dataLine->color ?? "";
         $colorIndex = $this->dataLine->color_index ?? "";
         $colorIndex = ($colorIndex) ? "colorIndex='$colorIndex'"  : "";
-        return "<x-renderer.tag color='$color' $colorIndex>$title</x-renderer.tag>";
+        $icon = $this->dataLine->icon ?? "";
+        return  "<x-renderer.tag color='$color' $colorIndex>$icon $title</x-renderer.tag>";
     }
 
     /**

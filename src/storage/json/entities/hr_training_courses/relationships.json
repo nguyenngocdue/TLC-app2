@@ -54,5 +54,19 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": ""
+    },
+    "_attachment_training_course": {
+        "name": "_attachment_training_course",
+        "relationship": "morphMany",
+        "control_name": "attachment_training_course",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "attachment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
     }
 }

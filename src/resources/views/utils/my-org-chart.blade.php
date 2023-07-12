@@ -13,10 +13,7 @@
       <div class="justify-between grid grid-cols-12 gap-5 items-center">
         <div class="col-span-4">
           <label for="">Workplace</label>
-              @php
-                $selectedWorkplace = isset($showOptions['workplace']) ? join(',',$showOptions['workplace']) : null;
-              @endphp
-              <x-utils.filter-workplace tableName="workplaces" multiple="true" name="show_options[workplace][]" id="workplace" typeToLoadListener="" selected="{{$selectedWorkplace}}"></x-utils.filter-workplace>
+              <x-utils.filter-workplace tableName="workplaces" multiple="true" name="show_options[workplace]" id="workplace" typeToLoadListener="" :selected="$showOptions['workplace']"></x-utils.filter-workplace>
         </div>
         <div class="col-span-4">
           <label for="">Head of Department</label>

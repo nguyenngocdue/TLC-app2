@@ -1,0 +1,87 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_staff_id": {
+        "name": "_staff_id",
+        "column_name": "staff_id",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true"
+    },
+    "_radio_advance_type": {
+        "name": "_radio_advance_type",
+        "column_name": "radio_advance_type",
+        "new": "true"
+    },
+    "_getSubProjectOfAdvanceReq()": {
+        "name": "_getSubProjectOfAdvanceReq()",
+        "column_name": "getSubProjectOfAdvanceReq()",
+        "new": "true"
+    },
+    "_advance_amount": {
+        "name": "_advance_amount",
+        "column_name": "advance_amount",
+        "new": "true"
+    },
+    "_currency_id": {
+        "name": "_currency_id",
+        "column_name": "currency_id",
+        "new": "true"
+    },
+    "_advance_amount_word": {
+        "name": "_advance_amount_word",
+        "column_name": "advance_amount_word",
+        "new": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true"
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    }
+}
