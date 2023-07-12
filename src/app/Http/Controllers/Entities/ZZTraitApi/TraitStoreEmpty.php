@@ -54,6 +54,11 @@ trait TraitStoreEmpty
 
 		if ($validation === false) return ResponseObject::responseFail("Validation failed");
 		if (is_null($lines)) return ResponseObject::responseFail("Lines is null.");
+
+		$sp = SuperProps::getFor($this->type);
+		// $props = $sp['props'];
+		$dateTimeControls = $sp['datetime_controls'];
+		// Log::info($dateTimeControls);
 		$theRows = [];
 		$defaultValue = $this->getDefaultValue($props);
 		foreach ($lines as $item) {
@@ -63,9 +68,11 @@ trait TraitStoreEmpty
 				if (isset($item[$key]) && $item[$key] !== false && $value !== false) $item[$key]  = $value;
 				// if (isset($item[$key]) && $item[$key] !== false) $item[$key]  = $value;
 			}
-			// Log::info($item);
-			if (isset($item['ot_date'])) {
-				$item['ot_date'] = DateTimeConcern::convertForSaving('picker_date', $item['ot_date']);
+			foreach ($dateTimeControls as $control => $controlType) {
+				$control = substr($control, 1); // Removed first _
+				if (isset($item[$control])) {
+					$item[$control] = DateTimeConcern::convertForSaving($controlType, $item[$control]);
+				}
 			}
 			$item = $this->applyFormula($item, 'store');
 			$createdItem = $this->modelPath::create($item);
