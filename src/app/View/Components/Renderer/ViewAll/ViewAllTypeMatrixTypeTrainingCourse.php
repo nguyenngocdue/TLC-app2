@@ -8,6 +8,7 @@ use App\Models\Hr_training_line;
 use App\Models\User;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateTimeConcern;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -19,9 +20,10 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
     protected $dataIndexX = "training_course_id";
     protected $yAxis = User::class;
     protected $dataIndexY = "user_id";
-    protected $rotate45Width = 400;
+    // protected $rotate45Width = 400;
     protected $groupBy = null;
     protected $allowCreation = false;
+    private $timeFrameInDays = 30;
     /**
      * Create a new component instance.
      *
@@ -61,11 +63,12 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
 
     protected function getYAxis()
     {
-        $timeFrame = Carbon::parse()->subWeek(4)->format(Constant::FORMAT_DATE_MYSQL);
+        $timeFrame = Carbon::parse()->subDays($this->timeFrameInDays)->format(Constant::FORMAT_DATE_MYSQL);
         $data = ($this->yAxis)::query()
             ->whereNot('resigned', true)
             ->where("first_date", '>', $timeFrame)
             ->whereIn('workplace', $this->workplace_id)
+            ->orderBy('first_date')
             ->orderBy('name')
             ->get();
 
@@ -87,19 +90,24 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
         return $lines;
     }
 
-    // protected function getCreateNewParams($x, $y)
-    // {
-    //     // dump($x);
-    //     // dump($y);
-    //     // dd();
-    //     $params = parent::getCreateNewParams($x, $y);
-    //     $params['project_id'] =  $this->project;
-    //     $params['sub_project_id'] =  $this->subProject;
-    //     $params['prod_routing_id'] =  $this->prodRouting;
+    protected function getMetaColumns()
+    {
+        return [
+            ['dataIndex' => 'report_to', 'align' => 'center', 'width' => 200],
+            ['dataIndex' => 'department', 'align' => 'center', 'width' => 100,],
+            ['dataIndex' => 'first_date', 'align' => 'center', 'width' => 100],
+            ['dataIndex' => 'due_date', 'align' => 'center', 'width' => 100],
+        ];
+    }
 
-    //     $params['prod_order_id'] =  $y->id;
-    //     // $params['prod_discipline_id'] =  $x['prod_discipline_id'];
-    //     // $params['assignee_1'] =  $x['def_assignee'];
-    //     return $params;
-    // }
+    function getMetaObjects($y)
+    {
+        $dueDate = Carbon::parse($y->first_date)->addDays($this->timeFrameInDays)->format(Constant::FORMAT_DATE_MYSQL);
+        return [
+            'report_to' => $y->getUserDiscipline->getDefAssignee->name,
+            'department' => $y->getUserDepartment->name,
+            'first_date' => DateTimeConcern::formatForLoading($y->first_date, Constant::FORMAT_DATE_MYSQL, Constant::FORMAT_DATE_ASIAN),
+            'due_date' => DateTimeConcern::formatForLoading($dueDate, Constant::FORMAT_DATE_MYSQL, Constant::FORMAT_DATE_ASIAN),
+        ];
+    }
 }
