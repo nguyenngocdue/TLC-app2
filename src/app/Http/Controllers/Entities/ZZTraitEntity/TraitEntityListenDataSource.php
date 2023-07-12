@@ -175,6 +175,8 @@ trait TraitEntityListenDataSource
                     $objectRow->name = $objectRow->getName();
                 }
             }
+            // $objectRows = $objectRows->toArray();
+            // $result[$table] = array_map(fn ($o) => (array)$o, $objectRows);
 
             $objectRowsMinimal = [];
             foreach ($objectRows as $row) {
@@ -184,7 +186,6 @@ trait TraitEntityListenDataSource
                 }
                 $objectRowsMinimal[] = $item;
             }
-            // $objectRows = $objectRows->toArray();
             $result[$table] = array_map(fn ($o) => (array)$o, $objectRowsMinimal);
         }
 
@@ -199,7 +200,7 @@ trait TraitEntityListenDataSource
                     foreach ($result[$table] as &$row) {
                         $model = new $modelPath(); //<<new $modelPath(['id' => $row['id']) doesn't work;
                         $model->id = $row['id'];
-                        // $model = $modelPath::find($row['id']);
+                        // $model = $modelPath::find($row['id']); //<<Don't have to actually init the model object to save ram
                         $row[$fn] = $model->getCheckedByField($fn_no_parenthesis)->pluck('id')->toArray();
                     }
                 }

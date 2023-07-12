@@ -155,7 +155,7 @@ const onChangeDropdown2Reduce = (listener) => {
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
         if (!value) continue
-        // console.log("value of trigger[", i, "]", value)
+        console.log("value of trigger[", i, "]", value)
 
         const column = listen_to_attrs[i]
         if (column === undefined) console.log('The column to look up [', column, '] is not found in ...')
@@ -163,12 +163,13 @@ const onChangeDropdown2Reduce = (listener) => {
 
         dataSource = dataSource.filter((row) => {
             let result = null
+            console.log("Row:", row, "column:", column, "row[column]", row[column])
             if (Array.isArray(row[column])) {
-                // console.log("Check if", value, "is in", row[column], result ? "YES" : "")
+                console.log("Check if", value, "is in", row[column], result ? "YES" : "")
                 result = dumbIncludes2(row[column], value)
             } else {
                 result = (row[column] == value)
-                // console.log("Check if", value, "is =", row[column], result ? "YES" : "")
+                console.log("Check if", value, "is =", row[column], result ? "YES" : "")
             }
             if (debugListener) console.log('Result of reduce filter', row[column], value, result)
             return result
