@@ -6,14 +6,16 @@ use App\BigThink\ModelExtended;
 
 class Act_travel_req extends ModelExtended
 {
-    protected $fillable = ["id","name", "description", "status","staff_id",
-    "document_id","workplace_id","staff_discipline_id","staff_workplace_id","total_travel_day","remark","assignee_1","owner_id"];
+    protected $fillable = [
+        "id", "name", "description", "status", "staff_id",
+        "travel_type_id", "workplace_id", "staff_discipline_id", "staff_workplace_id", "total_travel_day", "remark", "assignee_1", "owner_id"
+    ];
     protected $table = "act_travel_reqs";
 
     public static $eloquentParams = [
         'getStaff' => ['belongsTo', User::class, 'staff_id'],
         'getTravelReqLines' => ['hasMany', Act_travel_req_line::class, 'act_travel_req_id'],
-        'getDocument' => ['belongsTo', Term::class, 'document_id'],
+        'getTravelType' => ['belongsTo', Term::class, 'travel_type_id'],
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
         'getDiscipline' => ['belongsTo', User_discipline::class, 'staff_discipline_id'],
         'getWorkplaceStaff' => ['belongsTo', Workplace::class, 'staff_workplace_id'],
@@ -26,7 +28,7 @@ class Act_travel_req extends ModelExtended
         "getReqTravelDesk()" => ["getCheckedByField", Term::class],
         "getMonitors1()" => ["getCheckedByField", User::class],
         "getMonitors2()" => ["getCheckedByField", User::class],
-       
+
     ];
     public function getStaff()
     {
@@ -50,7 +52,7 @@ class Act_travel_req extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getDocument()
+    public function getTravelType()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -90,7 +92,7 @@ class Act_travel_req extends ModelExtended
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    
+
     public function getManyLineParams()
     {
         return [

@@ -35,21 +35,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_document_id": {
-        "name": "_document_id",
-        "column_name": "document_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_workplace_id": {
-        "name": "_workplace_id",
-        "column_name": "workplace_id",
+    "_staff_workplace_id": {
+        "name": "_staff_workplace_id",
+        "column_name": "staff_workplace_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -71,9 +59,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_staff_workplace_id": {
-        "name": "_staff_workplace_id",
-        "column_name": "staff_workplace_id",
+    "_travel_type_id": {
+        "name": "_travel_type_id",
+        "column_name": "travel_type_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_workplace_id": {
+        "name": "_workplace_id",
+        "column_name": "workplace_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -131,6 +131,42 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_getReqTravelDesk()": {
+        "name": "_getReqTravelDesk()",
+        "column_name": "getReqTravelDesk()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_sep01": {
+        "name": "_sep01",
+        "column_name": "sep01",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_International Only": {
+        "name": "_International Only",
+        "column_name": "International Only",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_attachment_current_passport": {
         "name": "_attachment_current_passport",
         "column_name": "attachment_current_passport",
@@ -155,9 +191,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getReqTravelDesk()": {
-        "name": "_getReqTravelDesk()",
-        "column_name": "getReqTravelDesk()",
+    "_sep02": {
+        "name": "_sep02",
+        "column_name": "sep02",
         "label": "",
         "validation": "",
         "validation_regex": "",

@@ -1,8 +1,22 @@
 {
-    "_getDocument": {
-        "name": "_getDocument",
+    "_getStaff": {
+        "name": "_getStaff",
         "relationship": "belongsTo",
-        "control_name": "document_id",
+        "control_name": "staff_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getTravelType": {
+        "name": "_getTravelType",
+        "relationship": "belongsTo",
+        "control_name": "travel_type_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
@@ -109,7 +123,7 @@
         "control": "checkbox",
         "filter_columns": "field_id",
         "filter_values": "168",
-        "radio_checkbox_colspan": "4"
+        "radio_checkbox_colspan": "3"
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",

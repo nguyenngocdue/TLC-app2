@@ -173,7 +173,7 @@
     "_advance_amount": {
         "name": "_advance_amount",
         "column_name": "advance_amount",
-        "column_type": "decimal(8,2)",
+        "column_type": "decimal(20,6)",
         "label": "Advance Amount",
         "control": "number",
         "align": "",
@@ -230,7 +230,7 @@
     "_rate_exchange_advance": {
         "name": "_rate_exchange_advance",
         "column_name": "rate_exchange_advance",
-        "column_type": "decimal(8,2)",
+        "column_type": "decimal(20,6)",
         "label": "Rate Exchange",
         "control": "number",
         "align": "",
@@ -249,7 +249,7 @@
     "_total_advance_amount": {
         "name": "_total_advance_amount",
         "column_name": "total_advance_amount",
-        "column_type": "decimal(8,2)",
+        "column_type": "decimal(20,6)",
         "label": "Total Advance Estimated Amount (LCY)",
         "control": "number",
         "align": "",
@@ -325,7 +325,7 @@
     "_travel_amount": {
         "name": "_travel_amount",
         "column_name": "travel_amount",
-        "column_type": "decimal(8,2)",
+        "column_type": "decimal(20,6)",
         "label": "Total Allowance Amount",
         "control": "number",
         "align": "",
@@ -382,7 +382,7 @@
     "_rate_exchange_travel": {
         "name": "_rate_exchange_travel",
         "column_name": "rate_exchange_travel",
-        "column_type": "decimal(8,2)",
+        "column_type": "decimal(20,6)",
         "label": "Rate Exchange",
         "control": "number",
         "align": "",
@@ -401,7 +401,7 @@
     "_total_travel_amount": {
         "name": "_total_travel_amount",
         "column_name": "total_travel_amount",
-        "column_type": "decimal(8,2)",
+        "column_type": "decimal(20,6)",
         "label": "Total Allowance Estimated Amount (LCY)",
         "control": "number",
         "align": "",
@@ -515,7 +515,7 @@
     "_total_amount_ee": {
         "name": "_total_amount_ee",
         "column_name": "total_amount_ee",
-        "column_type": "decimal(8,2)",
+        "column_type": "decimal(20,6)",
         "label": "Total Expense Estimated Amount (LCY)",
         "control": "number",
         "align": "",
@@ -526,7 +526,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "",
+        "read_only": "true",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": ""
@@ -534,7 +534,7 @@
     "_total_amount_re": {
         "name": "_total_amount_re",
         "column_name": "total_amount_re",
-        "column_type": "decimal(8,2)",
+        "column_type": "decimal(20,6)",
         "label": "Total Reimbursement Estimated Amount (LCY)",
         "control": "number",
         "align": "",
@@ -545,7 +545,7 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "read_only": "",
+        "read_only": "true",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": ""

@@ -14,14 +14,9 @@
         "column_name": "staff_id",
         "new": "true"
     },
-    "_document_id": {
-        "name": "_document_id",
-        "column_name": "document_id",
-        "new": "true"
-    },
-    "_workplace_id": {
-        "name": "_workplace_id",
-        "column_name": "workplace_id",
+    "_staff_workplace_id": {
+        "name": "_staff_workplace_id",
+        "column_name": "staff_workplace_id",
         "new": "true"
     },
     "_staff_discipline_id": {
@@ -29,9 +24,14 @@
         "column_name": "staff_discipline_id",
         "new": "true"
     },
-    "_staff_workplace_id": {
-        "name": "_staff_workplace_id",
-        "column_name": "staff_workplace_id",
+    "_travel_type_id": {
+        "name": "_travel_type_id",
+        "column_name": "travel_type_id",
+        "new": "true"
+    },
+    "_workplace_id": {
+        "name": "_workplace_id",
+        "column_name": "workplace_id",
         "new": "true"
     },
     "_description": {
@@ -54,6 +54,21 @@
         "column_name": "remark",
         "new": "true"
     },
+    "_getReqTravelDesk()": {
+        "name": "_getReqTravelDesk()",
+        "column_name": "getReqTravelDesk()",
+        "new": "true"
+    },
+    "_sep01": {
+        "name": "_sep01",
+        "column_name": "sep01",
+        "new": "true"
+    },
+    "_International Only": {
+        "name": "_International Only",
+        "column_name": "International Only",
+        "new": "true"
+    },
     "_attachment_current_passport": {
         "name": "_attachment_current_passport",
         "column_name": "attachment_current_passport",
@@ -64,9 +79,9 @@
         "column_name": "attachment_current_portrait",
         "new": "true"
     },
-    "_getReqTravelDesk()": {
-        "name": "_getReqTravelDesk()",
-        "column_name": "getReqTravelDesk()",
+    "_sep02": {
+        "name": "_sep02",
+        "column_name": "sep02",
         "new": "true"
     },
     "_assignee_1": {
