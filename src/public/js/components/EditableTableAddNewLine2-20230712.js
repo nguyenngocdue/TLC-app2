@@ -1,10 +1,7 @@
 const removeEmptinessLine = (tableId) =>
     $('#' + tableId + '_emptiness').remove()
 
-const findParentIdFieldName = (
-    tableId,
-    key_value_as = 'value_as_parent_id'
-) => {
+const findParentIdFieldName = (tableId, key_value_as = 'value_as_parent_id') => {
     const { columns } = tableObject[tableId]
     for (let i = 0; i < columns.length; i++) {
         const keys = Object.keys(columns[i])
@@ -23,28 +20,17 @@ const findParentIdFieldName = (
 const ajaxAddLineQueue = {}
 
 const addANewLine = (params) => {
-    const {
-        tableId,
-        valuesOfOrigin = {},
-        isDuplicatedOrAddFromList = false,
-        batchLength = 1,
-    } = params
-    const { tableName } = tableObject[tableId]
+    const { tableId, valuesOfOrigin = {}, isDuplicatedOrAddFromList = false, batchLength = 1, } = params
+    const { tableName, dateTimeControls = [] } = tableObject[tableId]
     // console.log(params, tableName,)
     const orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + 10
 
     const currentUser = getEById('currentUserId').val()
 
-    const parentIdFieldName = findParentIdFieldName(
-        tableId,
-        'value_as_parent_id'
-    )
+    const parentIdFieldName = findParentIdFieldName(tableId, 'value_as_parent_id')
     const parentId = getEById('entityParentId').val()
 
-    const parentTypeFieldName = findParentIdFieldName(
-        tableId,
-        'value_as_parent_type'
-    )
+    const parentTypeFieldName = findParentIdFieldName(tableId, 'value_as_parent_type')
     const parentType = getEById('entityParentType').val()
     // console.log(parentIdFieldName)
     const data0 = {
@@ -80,6 +66,16 @@ const addANewLine = (params) => {
 
         delete ajaxAddLineQueue[url]
         // console.log('Inserting', data)
+
+        const FORMAT = {
+            "picker_datetime": "DD/MM/YYYY hh:mm",
+            "picker_date": "DD/MM/YYYY",
+            "picker_time": "hh:mm",
+
+            "picker_month": "MM/YYYY",
+            "picker_year": "YYYY",
+        }
+
         $.ajax({
             type: 'POST',
             url,
@@ -87,19 +83,35 @@ const addANewLine = (params) => {
             success: (response) => {
                 // console.log(url, "is done")
                 // console.log(response)
+                // console.log(dateTimeControls)
                 for (let i = 0; i < batchLength; i++) {
                     const valuesOfOrigin = response['hits'][i]
-                    // valuesOfOrigin['id'] = line.id
-                    valuesOfOrigin['ot_date'] = moment(
-                        valuesOfOrigin['ot_date']
-                    ).format('DD/MM/YYYY')
-                    // console.log("Add line to table", valuesOfOrigin)
-                    addANewLineFull({
-                        tableId,
-                        valuesOfOrigin,
-                        isDuplicatedOrAddFromList,
-                        batchLength,
+                    Object.keys(dateTimeControls).forEach(key => {
+                        if (undefined !== valuesOfOrigin[key]) {
+                            const picker_type = dateTimeControls[key]
+                            // console.log(key, picker_type)
+                            if (FORMAT[picker_type] === undefined)
+                                console.log("Unknown how to format " + picker_type + " for " + key)
+                            else {
+                                // console.log("Converting " + valuesOfOrigin[key])
+                                switch (picker_type) {
+                                    case "picker_time":
+                                        valuesOfOrigin[key] = moment(valuesOfOrigin[key], "hh:mm:ss").format("hh:mm")
+                                        break
+                                    default:
+                                        valuesOfOrigin[key] = moment(valuesOfOrigin[key]).format(FORMAT[picker_type])
+                                        break
+                                }
+                                // console.log("Converted to " + valuesOfOrigin[key])
+                            }
+                        }
                     })
+                    // valuesOfOrigin['id'] = line.id
+                    // valuesOfOrigin['ot_date'] = moment(
+                    //     valuesOfOrigin['ot_date']
+                    // ).format('DD/MM/YYYY')
+                    // console.log("Add line to table", valuesOfOrigin)
+                    addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList, batchLength, })
                 }
                 getEById(btnAddANewLineId).show()
                 getEById(btnAddFromAListId).show()
@@ -254,31 +266,11 @@ const addANewLineFull = (params) => {
                 case 'read-only-text4':
                     if (column['dataIndex'] === 'id') {
                         if (insertedId) {
-                            renderer =
-                                "<input id='" +
-                                id +
-                                "' name='" +
-                                id +
-                                "' value='" +
-                                insertedId +
-                                "' type='hidden' />"
-                            renderer +=
-                                "<div class='text-center'>" +
-                                "<a target='_blank' class='text-blue-500' href='" + column['lineTypeRoute'] + insertedId + "/edit" + "'>" +
-                                makeId(insertedId) +
-                                '</a>' +
-                                '</div>'
-                            renderer +=
-                                '<script>' +
-                                makeOnChangeAdvanced(onChangeDropdown4Fn) +
-                                '</script>'
+                            renderer = "<input id='" + id + "' name='" + id + "' value='" + insertedId + "' type='hidden' />"
+                            renderer += "<div class='text-center'>" + "<a target='_blank' class='text-blue-500' href='" + column['lineTypeRoute'] + insertedId + "/edit" + "'>" + makeId(insertedId) + '</a>' + '</div>'
+                            renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                         } else {
-                            renderer =
-                                "<input id='" +
-                                id +
-                                "' name='" +
-                                id +
-                                "' type='hidden' />"
+                            renderer = "<input id='" + id + "' name='" + id + "' type='hidden' />"
                         }
                     } else {
                         renderer = 'New read-only-text'
@@ -286,108 +278,43 @@ const addANewLineFull = (params) => {
                     break
                 case 'dropdown':
                     if (column['dataIndex'] === 'status') {
-                        renderer =
-                            "<select id='" +
-                            id +
-                            "' name='" +
-                            id +
-                            "' class='" +
-                            column['classList'] +
-                            "'>"
-                        for (
-                            let i = 0;
-                            i < column['cbbDataSource'].length;
-                            i++
-                        ) {
+                        renderer = "<select id='" + id + "' name='" + id + "' class='" + column['classList'] + "'>"
+                        for (let i = 0; i < column['cbbDataSource'].length; i++) {
                             const status = column['cbbDataSource'][i]
                             statusObject = column['cbbDataSourceObject'][status]
                             const selected = i === 0 ? 'selected' : ''
-                            renderer +=
-                                "<option value='" +
-                                status +
-                                "' " +
-                                selected +
-                                '>' +
-                                statusObject.title +
-                                '</option>'
+                            renderer += "<option value='" + status + "' " + selected + '>' + statusObject.title + '</option>'
                         }
                         renderer += '</select>'
                     } else {
-                        renderer =
-                            'Only STATUS has been implemented for dropdown1.'
+                        renderer = 'Only STATUS has been implemented for dropdown1.'
                     }
                     break
                 case 'dropdown4':
                     multipleStr = column?.multiple ? 'multiple' : ''
                     bracket = column?.multiple ? '[]' : ''
                     if (column['readOnly']) {
-                        renderer =
-                            "<input id='" +
-                            id +
-                            "' name='" +
-                            id +
-                            bracket +
-                            "' type='hidden' >"
-                        renderer +=
-                            "<div id='" + id + "_label' class='px-2'></div>"
+                        renderer = "<input id='" + id + "' name='" + id + bracket + "' type='hidden' >"
+                        renderer += "<div id='" + id + "_label' class='px-2'></div>"
                     } else {
-                        renderer =
-                            "<select id='" +
-                            id +
-                            "' name='" +
-                            id +
-                            bracket +
-                            "' " +
-                            multipleStr +
-                            " class='" +
-                            column['classList'] +
-                            "'></select>"
-                        renderer +=
-                            "<script>getEById('" +
-                            id +
-                            "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
+                        renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + " class='" + column['classList'] + "'></select>"
+                        renderer += "<script>getEById('" + id + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
                     }
-                    renderer +=
-                        '<script>' +
-                        makeOnChangeAdvanced(onChangeDropdown4Fn) +
-                        '</script>'
+                    renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                     break
                 case 'toggle4':
-                    renderer =
-                        '<div class="flex justify-center">\
-                    <label for="' +
-                        id +
-                        '" class="inline-flex relative items-center cursor-pointer select">\
-                        <input id="' +
-                        id +
-                        '" name="' +
-                        id +
-                        '" type="checkbox" class="sr-only peer">\
+                    renderer = '<div class="flex justify-center">\
+                    <label for="' + id + '" class="inline-flex relative items-center cursor-pointer select">\
+                        <input id="' + id + '" name="' + id + '" type="checkbox" class="sr-only peer">\
                         <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[\'\'] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>\
                     </label></div>'
                     break
                 case 'number4':
-                    renderer =
-                        "<input id='" +
-                        id +
-                        "' name='" +
-                        id +
-                        "' " +
-                        (column['readOnly'] ? ' readonly' : '') +
-                        " class='" +
-                        column['classList'] +
-                        "' type=number step=any />"
+                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? ' readonly' : '') + " class='" + column['classList'] + "' type=number step=any />"
                     if (column['dataIndex'] === 'order_no') {
-                        orderNoValue =
-                            getMaxValueOfAColumn(tableId, '[order_no]') + 10
-                        const reRenderFn =
-                            'reRenderTableBaseOnNewOrder("' +
-                            tableId +
-                            '", batchLength)'
-                        renderer +=
-                            '<script>' +
-                            makeOnChangeAdvanced(reRenderFn) +
-                            '</script>'
+                        orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + 10
+                        const reRenderFn = 'reRenderTableBaseOnNewOrder("' + tableId + '", batchLength)'
+                        renderer += '<script>' + makeOnChangeAdvanced(reRenderFn) + '</script>'
                     } else {
                         // onChange = "onChangeDropdown4(" + onChangeParams + ");changeBgColor(this,\"" + tableId + "\")"
                         const changeBgColorFn = 'changeBgColor(this,"' + tableId + '");'
@@ -396,48 +323,15 @@ const addANewLineFull = (params) => {
                     }
                     break
                 case 'text4':
-                    renderer =
-                        "<input id='" +
-                        id +
-                        "' name='" +
-                        id +
-                        "' " +
-                        (column['readOnly'] ? ' readonly' : '') +
-                        " class='" +
-                        column['classList'] +
-                        "' />"
-                    renderer +=
-                        '<script>' +
-                        makeOnChangeAdvanced(onChangeDropdown4Fn) +
-                        '</script>'
+                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? ' readonly' : '') + " class='" + column['classList'] + "' />"
+                    renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                     break
                 case 'textarea4':
-                    renderer =
-                        "<textarea id='" +
-                        id +
-                        "' name='" +
-                        id +
-                        "' " +
-                        (column['readOnly'] ? ' readonly' : '') +
-                        " class='" +
-                        column['classList'] +
-                        "' rows='3'></textarea>"
+                    renderer = "<textarea id='" + id + "' name='" + id + "' " + (column['readOnly'] ? ' readonly' : '') + " class='" + column['classList'] + "' rows='3'></textarea>"
                     break
                 case 'picker-all4':
-                    renderer =
-                        "<input id='" +
-                        id +
-                        "' name='" +
-                        id +
-                        "' placeholder='" +
-                        column['placeholder'] +
-                        "' class='" +
-                        column['classList'] +
-                        "'>"
-                    renderer +=
-                        '<script>' +
-                        makeOnChangeAdvanced(onChangeDropdown4Fn) +
-                        '</script>'
+                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"
+                    renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                     break
                 case 'attachment4':
                     renderer = '<div class="to be implemented"></div>'
@@ -494,20 +388,10 @@ const addANewLineFull = (params) => {
                         }
                     }
                     getEById(id + '_label').html(label)
-                    toDoAfterAddedDropdown4ReadOnly.push({
-                        id,
-                        dataSource: k[column['tableName']],
-                        tableId,
-                        selected,
-                    })
+                    toDoAfterAddedDropdown4ReadOnly.push({ id, dataSource: k[column['tableName']], tableId, selected, })
                     // getEById(id).trigger('change')
                 } else {
-                    toDoAfterAddedDropdown4.push({
-                        id,
-                        dataSource: k[column['tableName']],
-                        tableId,
-                        selected,
-                    })
+                    toDoAfterAddedDropdown4.push({ id, dataSource: k[column['tableName']], tableId, selected, })
                 }
                 break
             case 'dropdown': //<<status

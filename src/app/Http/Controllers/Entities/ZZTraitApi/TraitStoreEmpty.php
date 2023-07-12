@@ -69,7 +69,7 @@ trait TraitStoreEmpty
 				// if (isset($item[$key]) && $item[$key] !== false) $item[$key]  = $value;
 			}
 			foreach ($dateTimeControls as $control => $controlType) {
-				$control = substr($control, 1); // Removed first _
+				// $control = substr($control, 1); // Removed first _
 				if (isset($item[$control])) {
 					$item[$control] = DateTimeConcern::convertForSaving($controlType, $item[$control]);
 				}

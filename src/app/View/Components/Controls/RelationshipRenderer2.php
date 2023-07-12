@@ -281,6 +281,7 @@ class RelationshipRenderer2 extends Component
                         $column['properties']['readOnly'] = true;
                     }
                 }
+                $dateTimeColumns = $sp['datetime_controls'];
 
                 return view('components.controls.' . $view, [
                     'readOnly' => $this->readOnly,
@@ -291,6 +292,7 @@ class RelationshipRenderer2 extends Component
                     'isOrderable' => $isOrderable,
                     'table01Name' => $this->table01Name,
                     'editableColumns' => $editableColumns,
+                    'dateTimeColumns' => $dateTimeColumns,
                     'dataSource2ndThead' => $dataSource2ndThead,
                     'dataSourceWithOld' => $dataSourceWithOld,
 

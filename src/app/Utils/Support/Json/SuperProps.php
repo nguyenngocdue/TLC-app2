@@ -263,7 +263,7 @@ class SuperProps
     {
         $result = [];
         $controls = JsonControls::getDateTimeControls();
-        foreach ($props as $key => $prop) if (in_array($prop['control'], $controls)) $result[$key] = $prop['control'];
+        foreach ($props as $key => $prop) if (in_array($prop['control'], $controls)) $result[substr($key, 1)] = $prop['control'];
         return $result;
     }
 
