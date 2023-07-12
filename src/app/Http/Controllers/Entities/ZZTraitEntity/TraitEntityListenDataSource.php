@@ -165,17 +165,27 @@ trait TraitEntityListenDataSource
             if (empty($columnsWithoutOracy)) $columnsWithoutOracy = ['id']; //<< getRemainingHours()
             // $rows = DB::table($table)->select($columnsWithoutOracy);
             $modelPath = Str::modelPathFrom($table);
-            $rows = $modelPath::query()->select($columnsWithoutOracy);
+            $rows = $modelPath::query(); //->select($columnsWithoutOracy);
             $nameless = $modelPath::$nameless;
             if (!$nameless) $rows = $rows->orderBy('name');
             $objectRows = $rows->get();
+
             if ($nameless) {
                 foreach ($objectRows as $objectRow) {
                     $objectRow->name = $objectRow->getName();
                 }
             }
-            $objectRows = $objectRows->toArray();
-            $result[$table] = array_map(fn ($o) => (array)$o, $objectRows);
+
+            $objectRowsMinimal = [];
+            foreach ($objectRows as $row) {
+                $item = [];
+                foreach ($columnsWithoutOracy as $column) {
+                    $item[$column] = $row->{$column};
+                }
+                $objectRowsMinimal[] = $item;
+            }
+            // $objectRows = $objectRows->toArray();
+            $result[$table] = array_map(fn ($o) => (array)$o, $objectRowsMinimal);
         }
 
         $this->dump2("columnsWithOracy", $columnsWithOracy, __LINE__);

@@ -15,8 +15,6 @@ class Act_currency_xr extends ModelExtended
     public static $nameless = true;
     public function getName()
     {
-        return $this->name;
-        return $this->month;
         return DateTimeConcern::convertForLoading("picker_month", $this->month);
     }
 
