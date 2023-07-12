@@ -93,8 +93,11 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         return [
+            ['dataIndex' => 'employee_id', 'align' => 'center', 'width' => 100],
+            ['dataIndex' => 'employee_cat', 'align' => 'center', 'width' => 100],
+            ['dataIndex' => 'employee_position', 'align' => 'center', 'width' => 100],
             ['dataIndex' => 'report_to', 'align' => 'center', 'width' => 200],
-            ['dataIndex' => 'department', 'align' => 'center', 'width' => 100,],
+            ['dataIndex' => 'department_of_trainee', 'align' => 'center', 'width' => 100,],
             ['dataIndex' => 'first_date', 'align' => 'center', 'width' => 100],
             ['dataIndex' => 'due_date', 'align' => 'center', 'width' => 100],
         ];
@@ -104,8 +107,11 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
     {
         $dueDate = Carbon::parse($y->first_date)->addDays($this->timeFrameInDays)->format(Constant::FORMAT_DATE_MYSQL);
         return [
+            'employee_id' => $y->employeeid,
+            'employee_cat' => $y->getUserCat->name,
+            'employee_position' => $y->position_rendered,
             'report_to' => $y->getUserDiscipline->getDefAssignee->name,
-            'department' => $y->getUserDepartment->name,
+            'department_of_trainee' => $y->getUserDepartment->name,
             'first_date' => DateTimeConcern::formatForLoading($y->first_date, Constant::FORMAT_DATE_MYSQL, Constant::FORMAT_DATE_ASIAN),
             'due_date' => DateTimeConcern::formatForLoading($dueDate, Constant::FORMAT_DATE_MYSQL, Constant::FORMAT_DATE_ASIAN),
         ];

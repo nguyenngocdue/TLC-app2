@@ -152,7 +152,10 @@ trait TraitEntityFieldHandler2
                 Toastr::error($toastrMessage, "$table01Name $action failed");
             }
         } else {
-            Toastr::success("$this->type $action successfully", "$action $this->type");
+            $app = LibApps::getFor($this->type);
+            $title = $app['title'];
+            $action = $action . "d";
+            Toastr::success("This document is $action successfully.", Str::ucfirst($action) . " $title");
         }
     }
 
