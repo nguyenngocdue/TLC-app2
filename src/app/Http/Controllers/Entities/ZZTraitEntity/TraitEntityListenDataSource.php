@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\Json\Listeners;
-use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -164,10 +163,18 @@ trait TraitEntityListenDataSource
             $columnsWithoutOracy = array_filter($columns, fn ($column) => !str_contains($column, "()"));
             $columnsWithOracy[$table] = array_values(array_filter($columns, fn ($column) => str_contains($column, "()")));
             if (empty($columnsWithoutOracy)) $columnsWithoutOracy = ['id']; //<< getRemainingHours()
-            $rows = DB::table($table)->select($columnsWithoutOracy);
-            $nameless = Str::modelPathFrom($table)::$nameless;
+            // $rows = DB::table($table)->select($columnsWithoutOracy);
+            $modelPath = Str::modelPathFrom($table);
+            $rows = $modelPath::query()->select($columnsWithoutOracy);
+            $nameless = $modelPath::$nameless;
             if (!$nameless) $rows = $rows->orderBy('name');
-            $objectRows = $rows->get()->toArray();
+            $objectRows = $rows->get();
+            if ($nameless) {
+                foreach ($objectRows as $objectRow) {
+                    $objectRow->name = $objectRow->getName();
+                }
+            }
+            $objectRows = $objectRows->toArray();
             $result[$table] = array_map(fn ($o) => (array)$o, $objectRows);
         }
 
