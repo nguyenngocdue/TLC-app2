@@ -27,7 +27,7 @@ return new class extends Migration
             $table->float('quantity')->nullable();
             $table->unsignedBigInteger('currency_id')->nullable();
             $table->unsignedBigInteger('travel_expense_claim_id')->nullable();
-            $table->float('total_amount')->nullable();
+            $table->decimal('total_amount',20,6)->nullable();
             $table->unsignedBigInteger('currency_pair_id')->nullable();
             $table->decimal('rate_exchange',20,6)->nullable();
             $table->decimal('total_estimated_amount',20,6)->nullable();
