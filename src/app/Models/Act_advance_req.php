@@ -12,7 +12,6 @@ class Act_advance_req extends ModelExtended
 
     public static $eloquentParams = [
         'getStaff' => ['belongsTo', User::class, 'staff_id'],
-        'getSubProject' => ['belongsTo', Sub_project::class, 'sub_project_id'],
         'getCurrency' => ['belongsTo', Act_currency::class, 'currency_id'],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         "radioAdvanceType" => ['belongsTo', Term::class, 'radio_advance_type'],
@@ -20,6 +19,7 @@ class Act_advance_req extends ModelExtended
 
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
+        'getSubProjectOfAdvanceReq()' => ['getCheckedByField', Sub_project::class,],
        
     ];
     public function getStaff()
@@ -27,10 +27,10 @@ class Act_advance_req extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getSubProject()
+    public function getSubProjectOfAdvanceReq()
     {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function getCurrency()
     {

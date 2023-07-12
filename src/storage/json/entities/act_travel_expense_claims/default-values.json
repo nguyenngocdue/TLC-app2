@@ -59,9 +59,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_sub_project_id": {
-        "name": "_sub_project_id",
-        "column_name": "sub_project_id",
+    "_getSubProjectOfExpenseClaim()": {
+        "name": "_getSubProjectOfExpenseClaim()",
+        "column_name": "getSubProjectOfExpenseClaim()",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -167,6 +167,30 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_divider2": {
+        "name": "_divider2",
+        "column_name": "divider2",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_h3a": {
+        "name": "_h3a",
+        "column_name": "h3a",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_travel_req_id": {
         "name": "_travel_req_id",
         "column_name": "travel_req_id",
@@ -230,6 +254,30 @@
     "_total_travel_amount": {
         "name": "_total_travel_amount",
         "column_name": "total_travel_amount",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_divider3": {
+        "name": "_divider3",
+        "column_name": "divider3",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_h4a": {
+        "name": "_h4a",
+        "column_name": "h4a",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -314,6 +362,18 @@
     "_remark": {
         "name": "_remark",
         "column_name": "remark",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_divider4": {
+        "name": "_divider4",
+        "column_name": "divider4",
         "label": "",
         "validation": "",
         "validation_regex": "",
