@@ -18,9 +18,9 @@ class Hse_walkthrough extends ModelExtended
     ];
 
     public static $oracyParams = [
-        "getDefMonitors1()" => ["getCheckedByField", User::class],
+        "getMonitors1()" => ["getCheckedByField", User::class],
     ];
-    public function getDefMonitors1()
+    public function getMonitors1()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

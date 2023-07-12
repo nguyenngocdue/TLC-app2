@@ -75,12 +75,12 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_sub_project_id": {
-        "name": "_sub_project_id",
-        "column_name": "sub_project_id",
-        "column_type": "bigint unsigned",
-        "label": "Sub Project",
-        "control": "dropdown",
+    "_getSubProjectOfAdvanceReq()": {
+        "name": "_getSubProjectOfAdvanceReq()",
+        "column_name": "getSubProjectOfAdvanceReq()",
+        "column_type": "oracy_prop",
+        "label": "Sub Projects",
+        "control": "dropdown_multi",
         "align": "",
         "col_span": "6",
         "width": "",

@@ -17,7 +17,6 @@ class Act_travel_expense_claim extends ModelExtended
 
     public static $eloquentParams = [
         'getStaff' => ['belongsTo', User::class, 'staff_id'],
-        'getSubProject' => ['belongsTo', Sub_project::class, 'sub_project_id'],
         'getAdvanceTravel' => ['belongsTo', Act_advance_req::class, 'advance_req_id'],
         'getTravelReq' => ['belongsTo', Act_travel_req::class, 'travel_req_id'],
 
@@ -35,8 +34,14 @@ class Act_travel_expense_claim extends ModelExtended
 
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
-
+        'getSubProjectOfExpenseClaim()' => ['getCheckedByField', Sub_project::class,],
     ];
+
+    public function getSubProjectOfExpenseClaim()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
     public function getStaff()
     {
         $p = static::$eloquentParams[__FUNCTION__];

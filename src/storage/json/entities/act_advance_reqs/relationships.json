@@ -13,20 +13,6 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getSubProject": {
-        "name": "_getSubProject",
-        "relationship": "belongsTo",
-        "control_name": "sub_project_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
     "_getCurrency": {
         "name": "_getCurrency",
         "relationship": "belongsTo",
@@ -101,6 +87,20 @@
         "name": "_getMonitors1()",
         "relationship": "getCheckedByField",
         "control_name": "getMonitors1()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_getSubProjectOfAdvanceReq()": {
+        "name": "_getSubProjectOfAdvanceReq()",
+        "relationship": "getCheckedByField",
+        "control_name": "getSubProjectOfAdvanceReq()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
