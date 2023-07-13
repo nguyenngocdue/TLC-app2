@@ -13,7 +13,7 @@ trait TraitSupportEntityShow
         return [
             [
                 "title" => 'Description',
-                "dataIndex" => "name",
+                "dataIndex" => "name_description",
                 'width' => 300,
             ],
             [
@@ -27,11 +27,13 @@ trait TraitSupportEntityShow
     {
         foreach ($dataSource as &$value) {
             $value['response_type'] = $this->createDataSourceTableRun($value);
+            $value['name_description'] = $this->createDataSourceDescription($value);
             $value['group_description'] = $value->getGroup->name ?? '';
         }
         if ($entityShtSigs) {
             foreach ($entityShtSigs as &$value) {
                 $value['response_type'] = $this->createDataSourceTableRun($value);
+                $value['name_description'] = $this->createDataSourceDescription($value);
                 $value['group_description'] = 'Third Party  Sign Off';
             }
         } else {
@@ -44,7 +46,7 @@ trait TraitSupportEntityShow
         $controlGroup = $item->getControlGroup->name ?? null;
         $str = '';
         if (!is_null($controlGroup)) {
-            $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($item) . "</tr>";
+            $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($item,$controlGroup) . "</tr>";
             $str .= $this->createStrHtmlAttachment($item);
             $str .=  $this->createStrHtmlComment($item);
         } else {
@@ -83,14 +85,12 @@ trait TraitSupportEntityShow
         }
         return $str;
     }
-    private function createStrHtmlGroupRadio($item)
+    private function createStrHtmlGroupRadio($item,$controlGroup)
     {
-        $controlGroup = $item->getControlGroup->name ?? '';
         $arrayControl = explode('|', $controlGroup);
-        array_pop($arrayControl);
+        if(($this->type) == 'qaqc_insp_chklst_sht') array_pop($arrayControl);
         $controlValue = $item->getControlValue->name ?? '';
         $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
-
         $str = "";
         foreach ($arrayControl as $value) {
             if ($controlValue === $value) {
@@ -126,7 +126,7 @@ trait TraitSupportEntityShow
         $runUpdated = $this->createStrHtmlDateTime($item);
         // $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item->description . ":" . "</td>" : "";
         // $lineId =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item->id . '</td>' : "";
-        $longStr = /*$runDesc . $lineId .*/ $str . $runUpdated;
+        $longStr = /*$runDesc . $lineId .*/  $str . $runUpdated;
         return $longStr;
     }
     private function createStrHtmlDateTime($item)
@@ -200,5 +200,11 @@ trait TraitSupportEntityShow
     {
         $html = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $this->transFormLine($value) . "</tbody>" . "</table>";
         return $html;
+    }
+    private function createDataSourceDescription($value){
+        return "<div>
+                    <p>{$value->name}</p>
+                    <i class='text-xs'>{$value->description}</i>
+                </div>";
     }
 }
