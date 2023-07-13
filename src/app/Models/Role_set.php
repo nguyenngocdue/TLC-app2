@@ -9,6 +9,11 @@ class Role_set extends ModelsRoleSet
 {
     use Searchable;
     public static $nameless = true;
+    public function getName()
+    {
+        return $this->name;
+    }
+
     public function toSearchableArray()
     {
         return [

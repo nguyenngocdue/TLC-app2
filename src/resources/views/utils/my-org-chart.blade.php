@@ -13,7 +13,7 @@
       <div class="justify-between grid grid-cols-12 gap-5 items-center">
         <div class="col-span-4">
           <label for="">Workplace</label>
-              <x-utils.filter-workplace tableName="workplaces" multiple="true" name="show_options[workplace]" id="workplace" typeToLoadListener="" :selected="$showOptions['workplace']"></x-utils.filter-workplace>
+              <x-utils.filter-workplace tableName="workplaces" multiple="true" name="show_options[workplace]" id="workplace" typeToLoadListener="" :selected="$showOptions['workplace'] ?? []"></x-utils.filter-workplace>
         </div>
         <div class="col-span-4">
           <label for="">Head of Department</label>
