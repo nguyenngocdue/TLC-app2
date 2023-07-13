@@ -1,6 +1,5 @@
 //Setup for any Ajax requests need to login
 $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), }, })
-
 function callApiStoreEmpty(url, data, callback = null) {
     $.ajax({
         type: 'post',
@@ -18,4 +17,15 @@ function callApiStoreEmpty(url, data, callback = null) {
             toastr.error(jqXHR.responseJSON.message);
         },
     })
+}
+function listenerSubmitForm(idForm){
+    var form = document.getElementById(idForm);
+    form.addEventListener('submit', function(event) {
+        $('button').prop('disabled',true);
+        $('input[component="controls/number2"]').each(function() {
+            var currentValue = $(this).val();
+            var cleanedValue = currentValue.replace(/[^0-9.]/g, '');
+            $(this).val(cleanedValue);
+        });
+    });
 }

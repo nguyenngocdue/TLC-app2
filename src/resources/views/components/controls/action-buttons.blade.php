@@ -9,9 +9,10 @@
             @php $btnText = $action=='edit' ? 'Save' : 'Create New' @endphp
             @if($isFloatingOnRightSide)<div class="text-right mr-3">@endif
                 <x-renderer.button htmlType="submit" icon="fa-solid fa-floppy-disk"
-                onClick="this.form.submit(); $('button').prop('disabled',true);" 
+                {{-- onClick="$('button').prop('disabled',true);"  --}}
                 class="{{$class}} border-gray-300"
                 >{{$btnText}}</x-renderer.button>
+                {{-- this.form.submit(); --}}
             @if($isFloatingOnRightSide)</div>@endif
         @endif
         @if($action !== 'create')

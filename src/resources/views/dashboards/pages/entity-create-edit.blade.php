@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @php
 $user = auth()->user();
 $editType = Str::plural($type);
@@ -88,6 +87,9 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
             <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
         </div>
         @endif
+        <script>
+            listenerSubmitForm('form-upload');
+        </script>
     </form>
 </div>
 <x-renderer.editable.modal-broadcast-notification />
@@ -103,8 +105,6 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 <x-homepage.left-drawer title="Table of Content">
     <x-homepage.table-of-content :item="$item" type="{{$type}}" />
 </x-homepage.left-drawer>
-
-
 {{-- <script type="text/javascript">
         userCurrent = @json($user);
         window.Echo.channel('edit.'+'{{$type}}' +'-'+ '{{$id}}')
