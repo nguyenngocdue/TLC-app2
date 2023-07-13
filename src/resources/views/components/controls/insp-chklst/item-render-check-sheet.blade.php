@@ -1,5 +1,5 @@
 <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
-    {{-- <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} /> --}}
+    <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
     {{-- <x-controls.insp-chklst.header-check-sheet :item="$item" :chklst="$chklst" :project="$project" :subProject="$subProject"/> --}}
     <hr/>
     <x-renderer.heading level=5>
