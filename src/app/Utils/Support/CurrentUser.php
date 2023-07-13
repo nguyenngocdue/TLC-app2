@@ -89,12 +89,15 @@ class CurrentUser
     {
         $permissions = static::getRoles($userAuth, false);
         $ids = join(',', $permissions->pluck('id')->toArray());
-        $sql = DB::select(
-            "SELECT  permissions.name
-            FROM permissions INNER JOIN role_has_permissions 
-            ON permissions.id = role_has_permissions.permission_id 
-            WHERE role_has_permissions.role_id IN ($ids)"
-        );
+        $sql = [];
+        if ($ids) { //In case if no permissions found (workers, guests, ...)
+            $sql = DB::select(
+                "SELECT  permissions.name
+                FROM permissions INNER JOIN role_has_permissions 
+                ON permissions.id = role_has_permissions.permission_id 
+                WHERE role_has_permissions.role_id IN ($ids)"
+            );
+        }
         $permissions = [];
         foreach ($sql as $value) {
             $permissions[] = $value->name;
@@ -110,7 +113,8 @@ class CurrentUser
     {
         return Auth::user();
     }
-    public static function getWorkPlace(){
+    public static function getWorkPlace()
+    {
         $user = self::get();
         return $user->getWorkPlace;
     }

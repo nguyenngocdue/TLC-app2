@@ -8,6 +8,15 @@ return [
         'eco_material_impact_adds' => [],
         'eco_material_impact_removes' => [],
     ],
+    'act_travel_expense_claims' =>[
+        'act_travel_expense_claim_lines' => [],
+    ],
+    'act_currency_xrs' =>[
+        'act_currency_xr_lines' => [],
+    ],
+    'act_travel_reqs' => [
+        'act_travel_req_lines' => [],
+    ],
     'qaqc_insp_tmpls' => [
         'qaqc_insp_tmpl_shts' => [],
     ],

@@ -4,10 +4,7 @@
     @else 
         @php 
         $selectedArray = json_decode($selected); 
-        $modelPath = Str::modelPathFrom($table);
-        $nameless = (new $modelPath)->nameless;
-        
-        $label = $nameless ? "Nameless #$selected" : DB::table($table)->whereIn('id',$selectedArray)->pluck('name');
+        $label = $nameless ? ["Nameless #$selected"] : DB::table($table)->whereIn('id',$selectedArray)->pluck('name');
         $selected = (empty($selectedArray)) ? null : $selectedArray[0]; 
         @endphp
         <input id='{{$id}}' name='{{$name}}' class='{{$classList}} readonly' value="{{$selected}}" type="hidden" readonly/>

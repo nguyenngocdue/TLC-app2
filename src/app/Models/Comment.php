@@ -12,7 +12,7 @@ class Comment extends ModelExtended
     protected $fillable = ['id', 'content', 'position_rendered', 'owner_id', 'category', 'commentable_type', 'commentable_id'];
     protected $table = "comments";
 
-    public $nameless = true;
+    public static $nameless = true;
     protected static $statusless = true;
 
     public static $eloquentParams = [

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
+use App\Models\Department;
 use App\Models\User;
 use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Http\Request;
@@ -20,14 +21,27 @@ class MyOrgChartController extends Controller
         $tree = BuildTree::getTree();
         $results = [];
         $showOptions = $this->getUserSettingsViewOrgChart();
+        $this->transformDataTree($tree,$showOptions);
         $this->x($tree,$results,$this->getOptionsRenderByUserSetting($showOptions));
         usort($results,function($a,$b){
             return strcmp($a['name'],$b['name']);
         });
         return view(
-            'welcome-canh',
-            ['dataSource'=> $results,'showOptions'=>$showOptions]
+            'utils.my-org-chart',
+            ['dataSource'=> $results,
+            'showOptions'=>$showOptions,
+
+            ]
         );
+    }
+    private function transformDataTree(&$tree,$showOptions = []){
+        if(isset($showOptions['department'])){
+            $department = Department::findFromCache($showOptions['department']);
+            $headOfDepartmentId = $department->head_of_department;
+            if($headOfDepartmentId){
+                $tree = BuildTree::getTreeById($headOfDepartmentId);
+            }
+        }
     }
     private function x($tree,&$results,$options){
         foreach ($tree as $value) {
@@ -47,18 +61,20 @@ class MyOrgChartController extends Controller
         }
     }
     private function convertDataSource($value,$options){
-        if(in_array($value->resigned,$options['resigned']) 
+        if(in_array($value->workplace,$options['workplace']) && in_array($value->resigned,$options['resigned']) 
             && in_array($value->time_keeping_type,$options['time_keeping_type'])){
-            $user = User::findFromCache($value->id);
+            $id = $value->id;
+            $user = User::findFromCache($id);
             $positionRendered = $user->position_rendered;
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
             return [
-                'key' => $value->id,
+                'key' => $id,
                 'name' => $value->name,
                 'parent' => $value->parent_id,
                 'avatar' => $avatar,
                 'fill' => $this->getFillColor($value),
                 'title' => $positionRendered,
+                'url' => "/profile/$id",
             ];
         }
     }
@@ -69,6 +85,7 @@ class MyOrgChartController extends Controller
         $results = [
             'resigned' => [0],
             'time_keeping_type' => [2,3],
+            'workplace'=> [1,2,3,4,5,6],
         ];
         foreach ($showOptions as $key => $value) {
                 switch ($key) {
@@ -77,6 +94,9 @@ class MyOrgChartController extends Controller
                         break;
                     case 'time_keeping_type':
                         if($value == 'true') $results['time_keeping_type'] = [1,2,3];
+                            break;
+                    case 'workplace':
+                        if(is_array($value)) $results['workplace'] = $value;
                             break;
                     default:
                         break;

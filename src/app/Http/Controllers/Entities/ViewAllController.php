@@ -7,9 +7,11 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllTable;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Utils\Support\JsonControls;
 use App\Utils\System\Timer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class ViewAllController extends Controller
 {
@@ -42,16 +44,13 @@ class ViewAllController extends Controller
 
     private function getDefaultViewType()
     {
-        // dump($this->type);
-        switch ($this->type) {
-            case "hr_timesheet_worker":
-            case "qaqc_wir":
-                return 'matrix';
-            case "hr_timesheet_officer":
-                return 'calendar';
-            default:
-                return null;
-        }
+        $table = Str::plural($this->type);
+        $calendar_apps = JsonControls::getAppsHaveViewAllCalendar();
+        $matrix_apps = JsonControls::getAppsHaveViewAllMatrix();
+
+        if (in_array($table, $calendar_apps)) return 'calendar';
+        if (in_array($table, $matrix_apps)) return 'matrix';
+        return null;
     }
 
     public function index(Request $request, $trashed = false)

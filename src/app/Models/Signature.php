@@ -9,7 +9,7 @@ class Signature extends ModelExtended
     protected $fillable = ["id", "value", "owner_id", 'category', 'signable_type', 'signable_id', 'signature_comment'];
     protected $table = "signatures";
 
-    public $nameless = true;
+    public static $nameless = true;
     protected static $statusless = true;
 
     public static $eloquentParams = [

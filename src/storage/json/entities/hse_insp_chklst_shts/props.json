@@ -94,12 +94,12 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_location_project": {
-        "name": "_location_project",
-        "column_name": "location_project",
-        "column_type": "text",
+    "_work_area_id": {
+        "name": "_work_area_id",
+        "column_name": "work_area_id",
+        "column_type": "bigint unsigned",
         "label": "Location\/Project",
-        "control": "text",
+        "control": "dropdown",
         "align": "",
         "col_span": "6",
         "width": "",
@@ -344,7 +344,7 @@
     "_progress": {
         "name": "_progress",
         "column_name": "progress",
-        "column_type": "float",
+        "column_type": "double(8,2)",
         "label": "Progress",
         "control": "number",
         "align": "",

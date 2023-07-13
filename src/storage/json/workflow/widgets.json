@@ -119,7 +119,7 @@
     "users_1": {
         "name": "users_1",
         "hidden": null,
-        "chart_type": "doughnut",
+        "chart_type": "pie",
         "fn": "SqlForeignKey",
         "section_title": "Users",
         "widget_title": "by Workplace",
@@ -128,7 +128,7 @@
     "users_2": {
         "name": "users_2",
         "hidden": null,
-        "chart_type": "doughnut",
+        "chart_type": "bar",
         "fn": "SqlForeignKey",
         "section_title": "Users",
         "widget_title": "by Category",
@@ -173,7 +173,7 @@
     "users_7": {
         "name": "users_7",
         "hidden": null,
-        "chart_type": "doughnut",
+        "chart_type": "line",
         "fn": "SqlForeignKey",
         "section_title": "Users",
         "widget_title": "by Department",

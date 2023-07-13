@@ -157,7 +157,7 @@ class RelationshipRenderer2 extends Component
         $defaultColumns = [
             ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
         ];
-        if (!$instance->nameless) $defaultColumns[] = ["dataIndex" => 'name',];
+        if (!$instance::$nameless) $defaultColumns[] = ["dataIndex" => 'name',];
         $columns = ($fn === '')
             ? $defaultColumns
             : $instance->$fn();
@@ -230,7 +230,7 @@ class RelationshipRenderer2 extends Component
                 $token = CurrentUser::getTokenForApi();
                 $statusTimeSheet = $modelPath::findFromCache($id)->status ?? null;
                 $hasRenderSidebar = true;
-                if($statusTimeSheet && in_array($statusTimeSheet,['pending_approval','approved'])){
+                if ($statusTimeSheet && in_array($statusTimeSheet, ['pending_approval', 'approved'])) {
                     $hasRenderSidebar = false;
                 }
                 return view('components.calendar.calendar-grid', [
@@ -281,6 +281,7 @@ class RelationshipRenderer2 extends Component
                         $column['properties']['readOnly'] = true;
                     }
                 }
+                $dateTimeColumns = $sp['datetime_controls'];
 
                 return view('components.controls.' . $view, [
                     'readOnly' => $this->readOnly,
@@ -291,11 +292,13 @@ class RelationshipRenderer2 extends Component
                     'isOrderable' => $isOrderable,
                     'table01Name' => $this->table01Name,
                     'editableColumns' => $editableColumns,
+                    'dateTimeColumns' => $dateTimeColumns,
                     'dataSource2ndThead' => $dataSource2ndThead,
                     'dataSourceWithOld' => $dataSourceWithOld,
 
                     'tableFooter' => $tableFooter,
                     'tableName' => $tableName,
+                    'colName' => $colName,
                     'tableDebug' => $this->tableDebug ? true : false,
                     'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
 

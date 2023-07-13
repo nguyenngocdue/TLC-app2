@@ -21,7 +21,7 @@ return new class extends Migration
 
         $schema->create('hr_trainings', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->unsignedBigInteger('training_course_id')->nullable();

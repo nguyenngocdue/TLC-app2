@@ -110,13 +110,21 @@ Arr::macro('containsEach', function ($arrayCheck, $arrayIndex) {
 });
 Arr::macro('normalizeSelected', function ($selected, $old = null) {
     if ($old) {
-        $selected = (is_array($old)) ? "[" . join(",", $old) . "]" : "[$old]";
+        return (is_array($old)) ? "[" . join(",", $old) . "]" : "[$old]";
     } else {
-        if (isset($selected[0])) {
-            $selected =  ($selected[0] != '[') ? "[" . $selected . "]" : $selected;
-        } else {
-            $selected = "[]";
+        if (is_array($selected)) {
+            return "[" . join(",", $selected) . "]";
+        } elseif (is_string($selected) || is_numeric($selected)) {
+            if (str_starts_with($selected, "[")) return $selected;
+            else return "[" . $selected . "]";
         }
+
+        dump("Unknown how to normalize selected [$selected]");
+        // if (isset($selected[0])) {
+        //     $selected =  ($selected[0] != '[') ? "[" . $selected . "]" : $selected;
+        // } else {
+        //     $selected = "[]";
+        // }
     }
-    return $selected;
+    // return $selected;
 });

@@ -13,7 +13,7 @@ class Ghg_line extends ModelExtended
         "ytd", "remark", "owner_id", "status", "order_no",
     ];
     protected $table = "ghg_lines";
-    public $nameless = true;
+    public static $nameless = true;
 
     public static $eloquentParams = [
         "getGhgSheet" => ['belongsTo', Ghg_sheet::class, 'ghg_sheet_id'],

@@ -105,8 +105,11 @@ trait TableTraitRows
                         // ? "A" 
                         // : "B";
                         ? $this->applyRender($name, $renderer, $rawData, $column, $dataLineObj, $dataLineIndex, $batchLength)
-                        : ($dataIndex === 'action' ? $valueOfRawData :
-                            "<div class='p-2 $cellDivClass' valueOfRawData>" . $valueOfRawData . "</div>"
+                        : ($dataIndex === 'action'
+                            ?
+                            $valueOfRawData
+                            :
+                            "<div class='p-2 $cellDivClass' valueOfRawData>" . (is_object($valueOfRawData) ? "[object]" : $valueOfRawData) . "</div>"
                         );
                     break;
             }

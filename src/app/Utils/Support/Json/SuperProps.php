@@ -237,10 +237,8 @@ class SuperProps
     {
         $result = [];
         foreach ($props as $prop) {
-            if (isset($prop['relationships']['table'])) {
-                if ('relationship_renderer' == $prop['control']) {
-                    $result[$prop['relationships']['table']][] = $prop['column_name'];
-                }
+            if (isset($prop['relationships']['table']) && 'relationship_renderer' == $prop['control']) {
+                $result[$prop['relationships']['table']][] = $prop['column_name'];
             }
         }
         return $result;
@@ -250,21 +248,22 @@ class SuperProps
     {
         $result = [];
         $index = 1;
-        foreach ($props as $key => $prop) {
-            if ($prop['control'] === 'comment')
-                $result["comment" . $index++] = $key;
-        }
+        foreach ($props as $key => $prop) if ($prop['control'] === 'comment') $result["comment" . $index++] = $key;
         return $result;
     }
 
     private static function getAttachmentsFromProps($props)
     {
         $result = [];
-        foreach ($props as $key => $prop) {
-            if ($prop['control'] == 'attachment') {
-                $result[] = $key;
-            }
-        }
+        foreach ($props as $key => $prop) if ($prop['control'] == 'attachment') $result[] = $key;
+        return $result;
+    }
+
+    private static function getDateTimeFromProps($props)
+    {
+        $result = [];
+        $controls = JsonControls::getDateTimeControls();
+        foreach ($props as $key => $prop) if (in_array($prop['control'], $controls)) $result[substr($key, 1)] = $prop['control'];
         return $result;
     }
 
@@ -281,6 +280,7 @@ class SuperProps
         static::$result['tables'] = static::getTablesFromProps(static::$result['props']);
         static::$result['comments'] = static::getCommentsFromProps(static::$result['props']);
         static::$result['attachments'] = static::getAttachmentsFromProps(static::$result['props']);
+        static::$result['datetime_controls'] = static::getDateTimeFromProps(static::$result['props']);
         return static::$result;
     }
 

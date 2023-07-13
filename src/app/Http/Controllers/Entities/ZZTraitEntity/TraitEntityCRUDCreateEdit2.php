@@ -45,11 +45,13 @@ trait TraitEntityCRUDCreateEdit2
 		$disallowed = DisallowedDirectCreationChecker::checkAgainstRequest($request, $this->type);
 		if ($disallowed) {
 			$creationLinks = DisallowedDirectCreationChecker::getCreationLinks($this->type);
-			abort(403, "Please create via $creationLinks.");
+			abort(403, "Please create via $creationLinks.",[
+				'url' => 'hihi',
+			]);
 		}
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
-			'props' => $props,
+			// 'props' => $props,
 			'item' => (object)[],
 			'defaultValues' => DefaultValues::getAllOf($this->type),
 			'hasStatusColumn' => $hasStatusColumn,

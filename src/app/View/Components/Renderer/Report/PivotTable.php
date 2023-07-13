@@ -164,7 +164,7 @@ class PivotTable extends Component
             foreach ($allRowFields as $field) {
                 // $attrName = str_replace('id', 'name', $field);
                 if (isset($values[$field])) {
-                    Log::info($field);
+                    // Log::info($field);
                     $values[$field] = (object) [
                         'value' => $values[$field],
                         // 'cell_title' => $tooltip,

@@ -9,7 +9,7 @@ class Prod_run extends ModelExtended
     protected $fillable = ["prod_sequence_id", "date", "start", "end", "owner_id"];
 
     protected $table = 'prod_runs';
-    public $nameless = true;
+    public static $nameless = true;
     protected static $statusless = true;
 
     public static $eloquentParams = [

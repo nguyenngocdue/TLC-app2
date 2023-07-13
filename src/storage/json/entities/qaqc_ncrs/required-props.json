@@ -383,42 +383,6 @@
         "inspection_rejected": "",
         "closed": ""
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": "true"
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
     "_attachment_defect_photos": {
         "name": "_attachment_defect_photos",
         "column_name": "attachment_defect_photos",
@@ -458,6 +422,54 @@
     "_attachment_corrective_pdfs": {
         "name": "_attachment_corrective_pdfs",
         "column_name": "attachment_corrective_pdfs",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
         "new": "",
         "assigned": "",
         "assign_rejected": "",

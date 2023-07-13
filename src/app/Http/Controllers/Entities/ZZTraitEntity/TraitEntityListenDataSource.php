@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\Json\Listeners;
-use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -161,16 +160,33 @@ trait TraitEntityListenDataSource
         $columnsWithOracy = [];
 
         foreach ($matrix as $table => $columns) {
-            // $modelPath = "App\\Models\\" . Str::singular($table);
-            $modelPath = Str::modelPathFrom($table);
             $columnsWithoutOracy = array_filter($columns, fn ($column) => !str_contains($column, "()"));
             $columnsWithOracy[$table] = array_values(array_filter($columns, fn ($column) => str_contains($column, "()")));
             if (empty($columnsWithoutOracy)) $columnsWithoutOracy = ['id']; //<< getRemainingHours()
-            $rows = DB::table($table)->select($columnsWithoutOracy);
-            $nameless = (new $modelPath)->nameless;
+            // $rows = DB::table($table)->select($columnsWithoutOracy);
+            $modelPath = Str::modelPathFrom($table);
+            $rows = $modelPath::query(); //->select($columnsWithoutOracy);
+            $nameless = $modelPath::$nameless;
             if (!$nameless) $rows = $rows->orderBy('name');
-            $objectRows = $rows->get()->toArray();
-            $result[$table] = array_map(fn ($o) => (array)$o, $objectRows);
+            $objectRows = $rows->get();
+
+            if ($nameless) {
+                foreach ($objectRows as $objectRow) {
+                    $objectRow->name = $objectRow->getName();
+                }
+            }
+            // $objectRows = $objectRows->toArray();
+            // $result[$table] = array_map(fn ($o) => (array)$o, $objectRows);
+
+            $objectRowsMinimal = [];
+            foreach ($objectRows as $row) {
+                $item = [];
+                foreach ($columnsWithoutOracy as $column) {
+                    $item[$column] = $row->{$column};
+                }
+                $objectRowsMinimal[] = $item;
+            }
+            $result[$table] = array_map(fn ($o) => (array)$o, $objectRowsMinimal);
         }
 
         $this->dump2("columnsWithOracy", $columnsWithOracy, __LINE__);
@@ -184,7 +200,7 @@ trait TraitEntityListenDataSource
                     foreach ($result[$table] as &$row) {
                         $model = new $modelPath(); //<<new $modelPath(['id' => $row['id']) doesn't work;
                         $model->id = $row['id'];
-                        // $model = $modelPath::find($row['id']);
+                        // $model = $modelPath::find($row['id']); //<<Don't have to actually init the model object to save ram
                         $row[$fn] = $model->getCheckedByField($fn_no_parenthesis)->pluck('id')->toArray();
                     }
                 }

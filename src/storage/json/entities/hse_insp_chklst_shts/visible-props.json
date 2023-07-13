@@ -29,9 +29,9 @@
         "new": "true",
         "active": "true"
     },
-    "_location_project": {
-        "name": "_location_project",
-        "column_name": "location_project",
+    "_work_area_id": {
+        "name": "_work_area_id",
+        "column_name": "work_area_id",
         "new": "true",
         "active": "true"
     },

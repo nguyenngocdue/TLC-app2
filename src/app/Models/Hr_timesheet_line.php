@@ -11,7 +11,7 @@ class Hr_timesheet_line extends ModelExtended
         'discipline_id', 'task_id', 'sub_task_id', 'work_mode_id', 'owner_id',
         'order_no', 'id', 'remark', 'status', 'lod_id', 'prod_routing_id', 'user_id'
     ];
-    public $nameless = true;
+    public static $nameless = true;
 
     public static $eloquentParams = [
         "getUser" => ['belongsTo', User::class, 'user_id'],

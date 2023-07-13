@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Models\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;

@@ -25,6 +25,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $rotate45Width = false;
     protected $groupBy = 'name_for_group_by';
     protected $groupByLength = 2;
+    protected $allowCreation = true;
     /**
      * Create a new component instance.
      *
@@ -66,15 +67,22 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         $result = [];
         foreach ($cell as $document) {
-            $status = $this->statuses[$document->status];
-            $result[] = (object)[
-                'value' => $status['icon'],
-                'cell_title' => 'Open this document',
-                $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'],
-                $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']),
-                'cell_class' => "$bgColor $textColor",
-                'cell_href' => route($this->type . ".edit", $document->id),
-            ];
+            $status = $this->statuses[$document->status] ?? null;
+            if (!is_null($status)) {
+                $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'];
+                $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']);
+                $result[] = (object)[
+                    'value' => $status['icon'] ? $status['icon']  : $document->status,
+                    'cell_title' => 'Open this document',
+                    'cell_class' => "$bgColor $textColor",
+                    'cell_href' => route($this->type . ".edit", $document->id),
+                ];
+            } else {
+                // dump("Status not found: " . $document->status . " #" . $document->id);
+                $result[] = (object)[
+                    'value' => $document->status . " ???",
+                ];
+            }
         }
         // dump($result);
         if (sizeof($result) == 1) return $result[0];
@@ -103,6 +111,7 @@ abstract class ViewAllTypeMatrixParent extends Component
 
         foreach ($yAxis as $y) {
             $yId = $y->id;
+            $line = [];
             $line['name_for_group_by'] = $y->name;
 
             $line['name'] = (object)[
@@ -111,18 +120,20 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'cell_class' => "text-blue-800",
                 'cell_href' => route($yAxisTableName . ".edit", $y->id),
             ];
-            foreach ($xAxis as $x) {
-                $xId = $x['dataIndex'];
-                $xClass = $x['column_class'] ?? "";
-                $paramStr = $this->getCreateNewParams($x, $y);
-                $paramStr = (json_encode($paramStr));
-                // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
-                $line[$xId] = (object)[
-                    'value' => '<i class="fa-duotone fa-circle-plus"></i>',
-                    'cell_href' => 'javascript:callApiStoreEmpty("' . $routeCreate . '",[' . $paramStr . '])',
-                    'cell_class' => "text-center text-blue-800 $xClass",
-                    'cell_title' => "Create a new document",
-                ];
+            if ($this->allowCreation) {
+                foreach ($xAxis as $x) {
+                    $xId = $x['dataIndex'];
+                    $xClass = $x['column_class'] ?? "";
+                    $paramStr = $this->getCreateNewParams($x, $y);
+                    $paramStr = (json_encode($paramStr));
+                    // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
+                    $line[$xId] = (object)[
+                        'value' => '<i class="fa-duotone fa-circle-plus"></i>',
+                        'cell_href' => 'javascript:callApiStoreEmpty("' . $routeCreate . '",[' . $paramStr . '])',
+                        'cell_class' => "text-center text-blue-800 $xClass",
+                        'cell_title' => "Create a new document",
+                    ];
+                }
             }
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
@@ -172,6 +183,16 @@ abstract class ViewAllTypeMatrixParent extends Component
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
+    protected function getFooter($yAxisTableName)
+    {
+        $yAxisRoute = route($yAxisTableName . ".index");
+        $app = LibApps::getFor($yAxisTableName);
+        return "<div class='flex items-center justify-start'>
+                <span class='mr-1'>View all </span>
+                <a target='_blank' class='text-blue-400 cursor-pointer font-semibold' href='$yAxisRoute'> " . $app['title'] . "</a>
+            </div>";
+    }
+
     public function render()
     {
         $xAxis = $this->getXAxis();
@@ -181,14 +202,10 @@ abstract class ViewAllTypeMatrixParent extends Component
         $dataSource = $this->getMatrixDataSource($xAxis);
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource);
         $columns = $this->getColumns($xAxis);
-
-        $yAxisRoute = route($yAxisTableName . ".index");
-        $app = LibApps::getFor($yAxisTableName);
-        $footer = "<a target='_blank' href='$yAxisRoute'>" . $app['title'] . "</a>";
-
+        $footer = $this->getFooter($yAxisTableName);
         $settings = CurrentUser::getSettings();
         $per_page = $settings[$this->type]['view_all']['per_page'] ?? 15;
-        $page = $settings[$this->type]['view_all']['page'] ?? 1;
+        $page = $settings[$this->type]['view_all']['matrix']['page'] ?? 1;
         $dataSource = $this->paginate($dataSource, $per_page, $page);
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";

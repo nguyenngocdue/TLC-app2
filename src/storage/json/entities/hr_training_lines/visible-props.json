@@ -34,9 +34,16 @@
         "passed": "true",
         "failed": "true"
     },
-    "_hse_induction_id": {
-        "name": "_hse_induction_id",
-        "column_name": "hse_induction_id",
+    "_hr_training_id": {
+        "name": "_hr_training_id",
+        "column_name": "hr_training_id",
+        "new": "",
+        "passed": "",
+        "failed": ""
+    },
+    "_training_course_id": {
+        "name": "_training_course_id",
+        "column_name": "training_course_id",
         "new": "true",
         "passed": "true",
         "failed": "true"
@@ -89,5 +96,12 @@
         "new": "true",
         "passed": "true",
         "failed": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "",
+        "passed": "",
+        "failed": ""
     }
 }

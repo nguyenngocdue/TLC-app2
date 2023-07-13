@@ -8,7 +8,7 @@ use App\Utils\Constant;
 class Hr_timesheet_worker extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'ts_date', 'team_id', 'assignee_1',  'owner_id', 'status'];
-    public $nameless = true;
+    public static $nameless = true;
     public function getName()
     {
         return "[" . date(Constant::FORMAT_DATE_ASIAN, strtotime($this->ts_date)) . "] - " . $this->getUserTeam->name;

@@ -117,16 +117,16 @@ class ViewAllTypeMatrixTypeDateMode extends ViewAllTypeMatrixParent
         $plus1year = date(Constant::FORMAT_DATE_MYSQL, strtotime("+1 year", $this->viewportDate));
 
         return [
-            '-1year' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1year",
-            '-1month' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1month",
-            '-1week' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$minus1week",
-            'today' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$today",
-            '+1week' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1week",
-            '+1month' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1month",
-            '+1year' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportDate=$plus1year",
+            '-1year' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$minus1year",
+            '-1month' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$minus1month",
+            '-1week' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$minus1week",
+            'today' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$today",
+            '+1week' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$plus1week",
+            '+1month' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$plus1month",
+            '+1year' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$plus1year",
 
-            'weekView' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportMode=week",
-            'monthView' => "?action=updateViewAllMatrix&_entity={$this->type}&viewportMode=month",
+            'weekView' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_mode=week",
+            'monthView' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_mode=month",
         ];
     }
 

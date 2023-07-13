@@ -8,6 +8,7 @@ use Ndc\SpatieCustom\Models\RoleSet as ModelsRoleSet;
 class Role_set extends ModelsRoleSet
 {
     use Searchable;
+    public static $nameless = true;
     public function toSearchableArray()
     {
         return [

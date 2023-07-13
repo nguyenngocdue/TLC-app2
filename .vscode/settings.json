@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "antd",
     "asgn",
     "Authorizable",
     "Capa",
@@ -37,6 +38,7 @@
     "Realtimes",
     "remainings",
     "Renderable",
+    "reqs",
     "sats",
     "shts",
     "signoffs",
@@ -44,6 +46,7 @@
     "statusless",
     "subproject",
     "Swal",
+    "tailwindcss",
     "thirdparty",
     "timesheet",
     "timesheetable",
@@ -57,6 +60,7 @@
     "tsht",
     "tshts",
     "uids",
+    "varchar",
     "wirs",
     "xalign",
     "zunit"

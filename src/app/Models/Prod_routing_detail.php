@@ -11,7 +11,7 @@ class Prod_routing_detail extends ModelExtended
         "wir_description_id", "target_hours", "target_man_hours", "priority", "owner_id"
     ];
     protected $table = "prod_routing_details";
-    public $nameless = true;
+    public static $nameless = true;
     protected static $statusless = true;
 
     public static $eloquentParams = [

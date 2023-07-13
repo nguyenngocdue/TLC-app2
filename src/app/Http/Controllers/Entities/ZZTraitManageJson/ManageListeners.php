@@ -15,6 +15,20 @@ class ManageListeners extends Manage_Parent
     {
         $columns = array_values(array_map(fn ($i) => $i['column_name'], Props::getAllOf($this->type)));
         $columns = array_merge([""], $columns);
+        $listen_actions = [
+            '',
+            'reduce',
+            'assign',
+            'dot',
+            'expression',
+            'date_offset',
+            'number_to_words(not-yet)',
+            'ajax_request_scalar',
+
+            'aggregate_from_table', // Field ONLY
+            'trigger_change_all_lines', // Table ONLY
+            'set_table_column', // Table ONLY
+        ];
         return [
             // [
             //     "dataIndex" => "action",
@@ -34,7 +48,7 @@ class ManageListeners extends Manage_Parent
                 "dataIndex" => "listen_action",
                 "renderer" => "dropdown",
                 "editable" => true,
-                "cbbDataSource" => ['', 'reduce', 'assign', 'dot', 'aggregate_from_table', 'expression', 'date_offset', 'number_to_words(not-yet)', 'ajax_request_scalar', /*'trigger_change_same_line', 'trigger_change_some_lines', */ 'trigger_change_all_lines'],
+                "cbbDataSource" => $listen_actions,
                 "sortBy" => 'value',
                 "properties" => ["strFn" => 'same'],
             ],
@@ -50,6 +64,11 @@ class ManageListeners extends Manage_Parent
             ],
             [
                 "dataIndex" => "listen_to_attrs",
+                "renderer" => "textarea4",
+                "editable" => true,
+            ],
+            [
+                "dataIndex" => "columns_to_set",
                 "renderer" => "textarea4",
                 "editable" => true,
             ],
@@ -113,6 +132,7 @@ class ManageListeners extends Manage_Parent
                         $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
                     case "assign":
                     case "dot":
@@ -122,6 +142,7 @@ class ManageListeners extends Manage_Parent
                         $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
                     case "expression":
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
@@ -131,11 +152,13 @@ class ManageListeners extends Manage_Parent
                         $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
                     case "ajax_request_scalar":
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
                         $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
                         $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
                     case "trigger_change_some_lines":
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
@@ -145,7 +168,40 @@ class ManageListeners extends Manage_Parent
                         $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
+                    case "set_table_column":
+                        // $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                        $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['expression'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        break;
+                    case "aggregate_from_table":
+                        // $newItem['triggers'] = 'DO_NOT_RENDER';
+                        $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                        $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
+                        $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['expression'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
+                        break;
+                    default:
+                        $newItem['triggers'] = 'DO_NOT_RENDER';
+                        $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                        $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
+                        $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['expression'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                 }
             } else {
                 $newItem['triggers'] = 'DO_NOT_RENDER';
@@ -157,6 +213,7 @@ class ManageListeners extends Manage_Parent
                 $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                 $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
                 $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                $newItem['columns_to_set'] = 'DO_NOT_RENDER';
             }
             $isStatic = (isset($prop['column_type']) && $prop['column_type'] === 'static');
             if (!$isStatic) $result[] = $newItem;

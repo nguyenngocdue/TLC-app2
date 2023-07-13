@@ -154,19 +154,22 @@ const onChangeDropdown2Reduce = (listener) => {
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
-        //console.log("value", constraintsValues[i], value, !value)
-        const column = listen_to_attrs[i]
-        if (column === undefined)
-            console.log('The column to look up [', column, '] is not found in ...')
         if (!value) continue
-        if (debugListener)
-            console.log('Applying', column, value, 'to', table_name)
+        // console.log("value of trigger[", i, "]", value)
+
+        const column = listen_to_attrs[i]
+        if (column === undefined) console.log('The column to look up [', column, '] is not found in ...')
+        if (debugListener) console.log('Applying', column, value, 'to', table_name)
+
         dataSource = dataSource.filter((row) => {
             let result = null
+            // console.log("Row:", row, "column:", column, "row[column]", row[column])
             if (Array.isArray(row[column])) {
+                // console.log("Check if", value, "is in", row[column], result ? "YES" : "")
                 result = dumbIncludes2(row[column], value)
             } else {
-                result = row[column] == value
+                result = (row[column] == value)
+                // console.log("Check if", value, "is =", row[column], result ? "YES" : "")
             }
             if (debugListener) console.log('Result of reduce filter', row[column], value, result)
             return result
@@ -334,12 +337,7 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
     // const debugListener = true
     if (debugListener) console.log('AjaxRequestScalar', listener)
     const { triggers, expression: url } = listener
-    const {
-        ajax_response_attribute,
-        ajax_form_attributes,
-        ajax_item_attributes,
-        ajax_default_values,
-    } = listener
+    const { ajax_response_attribute, ajax_form_attributes, ajax_item_attributes, ajax_default_values, } = listener
 
     let enoughParams = true
     const data = {}
@@ -406,13 +404,39 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
             )
     }
 }
+
+const onChangeSetTableColumn = (listener) => {
+    // console.log("set_table_column", listener, tableObject)
+    const { column_name, listen_to_attrs, columns_to_set } = listener
+
+    const column_to_set = columns_to_set[0]
+    const listen_to_attr = listen_to_attrs[0]
+    // console.log(column_to_set, listen_to_attr)
+    const selectedObject = onChangeGetSelectedObject2(listener)
+    const selectedAttr = selectedObject[listen_to_attr]
+    let table01Name = tableObjectColName[column_name]?.['name']
+    // console.log(selectedObject, table01Name)
+
+    if (undefined === table01Name) return //<< During create new, the table is not rendered yet
+    const length = getAllRows(table01Name).length
+
+    for (let i = 0; i < length; i++) {
+        const id = table01Name + "[" + column_to_set + "][" + i + "]" //table01[my_file][0]
+        getEById(id).val(selectedAttr)
+        getEById(id).trigger('change', length)
+    }
+}
+
 const onChangeDropdown2 = (name) => {
+    // const debugFlow = true
     // console.log("onChangeDropdown2", name)
     // console.log(listenersOfDropdown2)
     for (let i = 0; i < listenersOfDropdown2.length; i++) {
         let listener = listenersOfDropdown2[i]
-        const { triggers, listen_action } = listener
+        const { triggers, listen_action, column_name } = listener
+
         // console.log(listen_action, name, triggers)
+        if (debugFlow) console.log(name, "-->", column_name, listen_action)
         if (triggers.includes(name)) {
             // console.log("listen_action", listen_action)
             switch (listen_action) {
@@ -437,85 +461,45 @@ const onChangeDropdown2 = (name) => {
                 case 'trigger_change_some_lines':
                     //Do nothing, this is an action of table
                     break
+                case 'set_table_column':
+                    onChangeSetTableColumn(listener)
+                    break
                 default:
-                    console.error(
-                        'Unknown listen_action',
-                        listen_action,
-                        'of',
-                        name
-                    )
+                    console.error('Unknown listen_action', listen_action, 'of', name)
                     break
             }
         }
     }
 }
 
-const reloadDataToDropdown2 = (
-    id,
-    attr_to_compare = 'id',
-    dataSource,
-    selected,
-    allowClear = false
-) => {
+const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected, allowClear = false) => {
     // const debugListener = true
     const control_type = getControlTypeOfE(id)
     if (debugListener) console.log(id, attr_to_compare)
-    if (debugListener)
-        console.log(
-            'reloadDataToDropdown2',
-            id,
-            control_type,
-            dataSource.length,
-            selected
-        )
+    if (debugListener) console.log('reloadDataToDropdown2', id, control_type, dataSource.length, selected)
     if (dataSource === undefined) return
     getEById(id).empty()
 
     let options = []
     dataSource = filterDropdown2(id, dataSource)
-    if (debugListener)
-        console.log(
-            'Loading dataSource after filterDropdown2',
-            id,
-            selected,
-            dataSource.length
-        )
+    if (debugListener) console.log('Loading dataSource after filterDropdown2', id, selected, dataSource.length)
     // console.log(selected)
 
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             selectedStr =
-                dataSource.length === 1
-                    ? 'selected'
-                    : dumbIncludes2(selected, item.id)
-                        ? 'selected'
-                        : ''
+                dataSource.length === 1 ? 'selected' : dumbIncludes2(selected, item.id) ? 'selected' : ''
             // console.log(id, selected, item.id, selectedStr)
-            const title =
-                item.description || (isNaN(item.id) ? item.id : makeId(item.id))
-            option =
-                "<option value='" +
-                item.id +
-                "' title='" +
-                title +
-                "' " +
-                selectedStr +
-                ' >'
+            const title = item.description || (isNaN(item.id) ? item.id : makeId(item.id))
+            option = "<option value='" + item.id + "' title='" + title + "' " + selectedStr + ' >'
             option += item.name || 'Nameless #' + item.id
             option += '</option>'
             options.push(option)
         }
         options.unshift("<option value=''></option>")
         getEById(id).append(options)
-        if (debugListener)
-            console.log(
-                'Appended',
-                id,
-                'with options has',
-                options.length,
-                'items'
-            )
+        if (debugListener) console.log('Appended', id, 'with options has', options.length, 'items')
 
         getEById(id).select2({
             placeholder: 'Please select...',
@@ -537,12 +521,7 @@ const reloadDataToDropdown2 = (
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr =
-                dataSource.length === 1
-                    ? 'checked'
-                    : dumbIncludes2(selected, itemId)
-                        ? 'checked'
-                        : ''
+            selectedStr = dataSource.length === 1 ? 'checked' : dumbIncludes2(selected, itemId) ? 'checked' : ''
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''

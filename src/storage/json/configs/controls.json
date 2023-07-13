@@ -108,6 +108,7 @@
         "accounting",
         "project_management",
         "design",
+        "eco",
         "qs",
         "scm",
         "warehouse",
@@ -124,6 +125,7 @@
         "system_admin",
         "dev_admin",
         "hr_admin",
+        "hr_training",
         "hr",
         "system_configuration",
         "system_permission",
@@ -192,7 +194,8 @@
     ],
     "apps_have_view_all_matrix": [
         "hr_timesheet_workers",
-        "qaqc_wirs"
+        "qaqc_wirs",
+        "hr_training_lines"
     ],
     "apps_have_qr_app": [
         "pj_module",

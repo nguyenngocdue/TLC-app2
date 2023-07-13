@@ -21,14 +21,21 @@ class Zunit_test_09 extends ModelExtended
         'sub_project_1',
         'prod_routing_1',
         'prod_order_1',
+        //Reduce (A,A1)=>B1,(A,A2=>B2)
+        'currency1_id',
+        'currency_pair1_id',
+        'currency2_id',
+        'currency_pair2_id',
+        'currency3_id',
         //Assign
         'prod_discipline_1',
         'assignee_1',
-        'user_4',
-        'user_position_1',
         //Dot
         'department_1',
         'user_1',
+        'user_4',
+        'user_position_1',
+        //Date Offset
         "priority_id",
         "due_date",
         //Expression
@@ -76,6 +83,11 @@ class Zunit_test_09 extends ModelExtended
         "user4" => ['belongsTo', User::class, 'user_4'],
         "getPriority" => ['belongsTo', Priority::class, 'priority_id'],
 
+        'getCurrency1' => ['belongsTo', Act_currency::class, 'currency1_id'],
+        'getCurrencyPair1' => ['belongsTo', Act_currency_pair::class, 'currency_pair1_id'],
+        'getCurrency2' => ['belongsTo', Act_currency::class, 'currency2_id'],
+        'getCurrencyPair2' => ['belongsTo', Act_currency_pair::class, 'currency_pair2_id'],
+        'getCurrency3' => ['belongsTo', Act_currency::class, 'currency3_id'],
     ];
 
     public static $oracyParams = [
@@ -106,6 +118,20 @@ class Zunit_test_09 extends ModelExtended
             ['dataIndex' => 'sub_project_1'],
             ['dataIndex' => 'prod_routing_1'],
             ['dataIndex' => 'prod_order_1'],
+        ];
+    }
+    public function getManyLineParamsReduce_AA1B1_AA2B2()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'name',],
+            ['dataIndex' => 'expected_received'],
+            ['dataIndex' => 'currency_1'],
+            ['dataIndex' => 'currency_pair_1'],
+            ['dataIndex' => 'currency_2'],
+            ['dataIndex' => 'currency_pair_2'],
         ];
     }
     public function getManyLineParamsAssign()

@@ -6,15 +6,17 @@ use Illuminate\Support\Facades\Blade;
 
 trait TableTraitFooter
 {
-    function makeOneFooter($column, $tableName)
+    function makeOneFooter($column, $tableName, $dataSource)
     {
         $fieldName = $column['dataIndex'];
+        $sum = $dataSource->sum(fn ($item) => $item[$fieldName]);
+        // $sum = array_sum(array_column($dataSource->toArray(), $fieldName));
         $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr-6 py-0";
         $id = "{$tableName}[footer][{$fieldName}]";
-        return "<input id='$id' component='TraitFooter' readonly class='$class' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
+        return "<input id='$id' component='TraitFooter' value='$sum' readonly class='$class' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
     }
 
-    function makeFooter($columns, $tableName)
+    function makeFooter($columns, $tableName, $dataSource)
     {
         $result0 = [];
         $hasFooter = false;
@@ -22,7 +24,7 @@ trait TableTraitFooter
             if (isset($column['invisible'])) continue;
             if (isset($column['footer'])) {
                 $hasFooter = true;
-                $result0[$column['dataIndex']] = $this->makeOneFooter($column, $tableName);
+                $result0[$column['dataIndex']] = $this->makeOneFooter($column, $tableName, $dataSource);
             } else {
                 $result0[$column['dataIndex']] = "";
             }
