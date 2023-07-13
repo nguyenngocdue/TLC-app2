@@ -47,43 +47,7 @@
     </div>
     @endif
     <div class="flex justify-between py-1 px-3">
-        @if($tableOfContents)
-            <div class="flex flex-1 justify-center">
-                <div class="flex flex-col pr-2  font-medium text-base">
-                    <span>Organization:</span>
-                    <span>Project Name:</span>
-                </div>
-                <div class="flex flex-col font-light text-base">
-                    <span>{{config("company.name")}}</span>
-                    <span>{{$projectName}}</span>
-                </div>
-            </div>
-            <div class="flex flex-1 justify-center">
-                <div class="flex flex-col pr-2  font-medium text-base">
-                    <span>Sub Project Name:</span>
-                    <span>Prod Order Name:</span>
-                </div>
-                <div class="flex flex-col font-light text-base">
-                    <span>{{$subProjectName}}</span>
-                    <span>{{$prodOrderName}}</span>
-                </div>
-            </div>
-        @else
-            <div class="flex">
-                <div class="flex flex-col pr-2  font-medium text-base">
-                    <span>Organization:</span>
-                    <span>Project Name:</span>
-                    <span>Sub Project Name:</span>
-                    <span>Prod Order Name:</span>
-                </div>
-                <div class="flex flex-col font-light text-base">
-                    <span>{{config("company.name")}}</span>
-                    <span>{{$projectName}}</span>
-                    <span>{{$subProjectName}}</span>
-                    <span>{{$prodOrderName}}</span>
-                </div>
-            </div>
-        @endif
+        {!!$contentHeader!!}
         @if(!$tableOfContents)
         <div class="w-48">
             <img src="{{asset('logo/tlc.png')}}" />
@@ -104,7 +68,7 @@
     @else
     <div class="border-t py-1 px-3">
         <div class="flex flex-1 justify-center pr-2  font-medium">
-            <span>TABLE OF CONTENTS</span>
+            <span>TABLE OF CONTENTS </span>
         </div>
     </div>
     @endif

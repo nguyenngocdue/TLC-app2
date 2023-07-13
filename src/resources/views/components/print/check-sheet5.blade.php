@@ -6,7 +6,7 @@
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         <div class="{{$layout}} items-center bg-white box-border px-8">
-            <x-print.header5 :dataSource="$headerDataSource" />
+            <x-print.header5 :dataSource="$headerDataSource"  type="{{$typePlural}}"/>
             <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
         </div>
     </div>
