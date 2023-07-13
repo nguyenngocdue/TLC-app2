@@ -8,7 +8,7 @@ class Act_travel_expense_claim extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "status", "staff_id",
-        "sub_project_id", "advance_req_id", "advance_amount", "currency1_id", "currency_pair1_id",
+        "advance_req_id", "advance_amount", "currency1_id", "currency_pair1_id",
         "rate_exchange_advance", "total_advance_amount", "travel_req_id", "travel_amount",
         "currency2_id", "currency_pair2_id", "rate_exchange_travel", "total_travel_amount", "rate_exchange_month_id",
         "currency3_id", "total_amount_ee", "total_amount_re", "remark", "assignee_1", "owner_id"
@@ -34,10 +34,10 @@ class Act_travel_expense_claim extends ModelExtended
 
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
-        'getSubProjectOfExpenseClaim()' => ['getCheckedByField', Sub_project::class,],
+        'getSubProjectsOfExpenseClaim()' => ['getCheckedByField', Sub_project::class,],
     ];
 
-    public function getSubProjectOfExpenseClaim()
+    public function getSubProjectsOfExpenseClaim()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

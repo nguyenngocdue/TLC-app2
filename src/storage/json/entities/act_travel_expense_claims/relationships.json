@@ -181,10 +181,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getSubProjectOfExpenseClaim()": {
-        "name": "_getSubProjectOfExpenseClaim()",
+    "_getSubProjectsOfExpenseClaim()": {
+        "name": "_getSubProjectsOfExpenseClaim()",
         "relationship": "getCheckedByField",
-        "control_name": "getSubProjectOfExpenseClaim()",
+        "control_name": "getSubProjectsOfExpenseClaim()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

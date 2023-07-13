@@ -47,9 +47,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getSubProjectOfAdvanceReq()": {
-        "name": "_getSubProjectOfAdvanceReq()",
-        "column_name": "getSubProjectOfAdvanceReq()",
+    "_getSubProjectsOfAdvanceReq()": {
+        "name": "_getSubProjectsOfAdvanceReq()",
+        "column_name": "getSubProjectsOfAdvanceReq()",
         "label": "",
         "validation": "",
         "validation_regex": "",

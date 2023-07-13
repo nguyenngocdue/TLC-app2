@@ -24,9 +24,9 @@
         "column_name": "staff_id",
         "new": "true"
     },
-    "_getSubProjectOfExpenseClaim()": {
-        "name": "_getSubProjectOfExpenseClaim()",
-        "column_name": "getSubProjectOfExpenseClaim()",
+    "_getSubProjectsOfExpenseClaim()": {
+        "name": "_getSubProjectsOfExpenseClaim()",
+        "column_name": "getSubProjectsOfExpenseClaim()",
         "new": "true"
     },
     "_divider1": {
