@@ -73,7 +73,7 @@
         "name": "_getSignatures",
         "relationship": "morphMany",
         "control_name": "getSignatures",
-        "renderer_view_all": "agg_count",
+        "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",

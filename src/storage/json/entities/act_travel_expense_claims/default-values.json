@@ -91,7 +91,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "(If having related Advance Request, please enter their post ID)",
+        "label_extra": "(If there is a related Advance Request, please select it here)",
         "placeholder": "",
         "control_extra": ""
     },

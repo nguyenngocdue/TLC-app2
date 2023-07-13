@@ -114,9 +114,9 @@ Arr::macro('normalizeSelected', function ($selected, $old = null) {
     } else {
         if (is_array($selected)) {
             return "[" . join(",", $selected) . "]";
-        } elseif (is_string($selected)) {
+        } elseif (is_string($selected) || is_numeric($selected)) {
             if (str_starts_with($selected, "[")) return $selected;
-            return "[" . $selected . "]";
+            else return "[" . $selected . "]";
         }
 
         dump("Unknown how to normalize selected [$selected]");
