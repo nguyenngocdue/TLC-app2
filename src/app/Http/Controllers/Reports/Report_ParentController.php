@@ -138,7 +138,7 @@ abstract class Report_ParentController extends Controller
         return redirect($request->getPathInfo());
     }
 
-    protected function tableDataHeader($modeParams)
+    protected function tableDataHeader($modeParams, $data)
     {
         return [];
     }
@@ -146,8 +146,9 @@ abstract class Report_ParentController extends Controller
     private function makeModeTitleReport($routeName)
     {
         $lib = LibReports::getAll();
-        $title = $lib[$routeName]['title'];
-        return $title ?? 'Untitled';
+        // dd($lib);
+        $title = $lib[$routeName]['title'] ??'Empty Title';
+        return $title;
     }
 
     public function index(Request $request)
@@ -173,7 +174,7 @@ abstract class Report_ParentController extends Controller
 
         $viewName = CurrentPathInfo::getViewName($request);
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
-        $tableDataHeader = $this->tableDataHeader($modeParams);
+        $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
         echo $this->getJS();
         $modeReport = $this->makeModeTitleReport($routeName);
 

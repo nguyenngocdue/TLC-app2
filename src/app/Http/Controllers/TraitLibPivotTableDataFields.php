@@ -225,7 +225,6 @@ trait TraitLibPivotTableDataFields
         // dd($dataAggregations);
         $sortBy = $lib['sort_by'] ?? [];
         $dataIndex = $this->getDataIndex($row_fields);
-        // dd($propsColumnField, $originalFields);
         $columnFields = $originalFields;
         // dd($propsColumnField);
 

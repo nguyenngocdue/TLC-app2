@@ -33,4 +33,9 @@ trait TraitDataModesReport
             '100' => "Line Data",
         ]];
     }
+    public function hse_incident_reports(){
+        return ['mode_option' =>[
+            '010' => 'TLC HSE Key Performance Indicator Year 2023',
+        ]];
+    }
 }

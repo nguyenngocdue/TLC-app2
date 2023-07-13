@@ -150,7 +150,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             ],
             [
                 'title' => 'Prod Order',
-                'dataIndex' => 'prod_order_id2',
+                'dataIndex' => 'many_prod_order_id',
                 'allowClear' => true,
                 'multiple' => true
             ],
@@ -158,7 +158,7 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ];
     }
 
-    protected function tableDataHeader($modeParams) {
+    protected function tableDataHeader($modeParams, $dataSource) {
         $sheets = $this->transformSheetsDesc($modeParams);
         $dataHeader = [];
         foreach ($sheets as $key => $id) {

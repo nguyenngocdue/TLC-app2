@@ -10,6 +10,8 @@ trait CheckFieldsPivotInDatabase
 
     public function checkFieldsInDatabase($lib, $dataSource)
     {
+        if(is_object($dataSource)) $dataSource = array_map(fn($item) => (array)$item, $dataSource->toArray());
+        // dd($dataSource);
         $originalKeys = array_keys(array_merge(...array_values($dataSource)));
         $failedFields = [];
         foreach ($lib as $key => $values) {
@@ -23,7 +25,6 @@ trait CheckFieldsPivotInDatabase
             }
         }
         $alertStr = '';
-        $route = route('managePivotTables.store');
         foreach ($failedFields as $key => $values) {
             $key = ucwords(str_replace('_', ' ', $key));
             foreach ($values as $field) $alertStr .= '<li>' . '[' . $field . '] in ' . $key . '</li>';

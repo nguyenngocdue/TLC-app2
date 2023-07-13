@@ -7,6 +7,7 @@ use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeCanhController;
 use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\WelcomeDueController_apple_store_category_per_date;
+use App\Http\Controllers\WelcomeDueController_apple_store_delete_fields_database;
 use App\Http\Controllers\WelcomeDueController_apple_store_duplicate_field_column_field_value_index_field;
 use App\Http\Controllers\WelcomeDueController_apple_store_duplicate_value_in_column_field;
 use App\Http\Controllers\WelcomeDueController_apple_store_duplicate_value_in_column_field_many_objects;
@@ -44,7 +45,7 @@ Route::resource('welcome-due-apple_store_duplicate_value_in_column_field', Welco
 Route::resource('welcome-due-apple_store_duplicate_field_column_field_value_index_field', WelcomeDueController_apple_store_duplicate_field_column_field_value_index_field::class)->only('index');
 Route::resource('welcome-due-apple_store_duplicate_value_in_column_field_many_objects', WelcomeDueController_apple_store_duplicate_value_in_column_field_many_objects::class)->only('index');
 Route::resource('welcome-due-empty_input', WelcomeDueController_apple_store_empty_input::class)->only('index');
-Route::resource('welcome-due-apple_store_minimum_quantity_column_field_equal_3', WelcomeDueController_apple_store_minimum_quantity_column_field_equal_3::class)->only('index');
+// Route::resource('welcome-due-apple_store_minimum_quantity_column_field_equal_3', WelcomeDueController_apple_store_minimum_quantity_column_field_equal_3::class)->only('index');
 Route::resource('welcome-due-employee_project_not_table_information', WelcomeDueController_hr_timesheet_employee_project_not_table_information::class)->only('index');
 Route::resource('welcome-due-employee_project_change_data_field_title', WelcomeDueController_hr_timesheet_employee_project_change_data_field_title::class)->only('index');
 Route::resource('welcome-due-apple_store_test_code', WelcomeDueController_apple_store_test_code::class)->only('index');

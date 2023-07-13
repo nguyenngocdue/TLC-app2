@@ -212,13 +212,18 @@ trait  ColumnsPivotReport
 
         foreach ($dataOutput as $value) $allColumns = array_unique(array_merge($allColumns, array_keys($value)));
 
-        $lastItemDataSource = key(array_slice($this->dataSource[0] ?? [], -1));
+        $dataSource = $this->dataSource;
+        if(is_object($dataSource)) $dataSource = array_map(fn($item) => (array)$item, $dataSource->toArray());
+        // dd($dataSource);
+
+        $lastItemDataSource = key(array_slice($dataSource[0] ?? [], -1));
         $endArray = Report::retrieveDataByIndex($allColumns, $lastItemDataSource, false, 'value');
         $diffFields = array_diff($endArray, $dataIndex);
         $fields = $this->sortDates($diffFields);
-        // dump($dataOutput, $fields);
+        // dump($allColumns  , $lastItemDataSource, $endArray, $dataIndex);
         $topTitleColumns = array_merge(...array_column($dataOutput, 'top_title_column'));
         // dump($topTitleColumns, $propsColumnField);
+        // dd($dataOutput, $fields);
 
         $columnsOfColumnFields = [];
         if ($rowFields) {
@@ -288,6 +293,9 @@ trait  ColumnsPivotReport
         }
         // $columnsOrder = array_merge(...array_values($columnFields));
         // $columnsOfColumnFields = $this->sortColumnsNeedToRender($columnsOfColumnFields, $columnsOrder);
+        // dd($dataOutput);
+
+        // dd($columnsOfColumnFields);
 
         return [$tableDataHeader, $columnsOfColumnFields];
     }
@@ -315,7 +323,6 @@ trait  ColumnsPivotReport
         [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields($dataOutput);
         $columnsOfAgg = $this->makeColumnsOfAgg($dataAggregations);
         $tableColumns = array_merge($columnsOfRowFields, $columnsOfColumnFields, $columnsOfAgg);
-        // dd($tableColumns);
         return [$tableDataHeader, $tableColumns];
     }
 }

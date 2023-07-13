@@ -47,6 +47,12 @@
         "package": "hr_&_admin",
         "title": "Timesheet TS Lines"
     },
+    "report-hse_incident_report_010": {
+        "name": "report-hse_incident_report_010",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "title": "HSE Key Performance Indicator"
+    },
     "report-prod_order_010": {
         "name": "report-prod_order_010",
         "package_tab": "report",

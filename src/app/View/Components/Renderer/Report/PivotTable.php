@@ -216,8 +216,8 @@ class PivotTable extends Component
         [$rowFields,, $filters, $propsColumnField,, $dataAggregations,,, $valueIndexFields, $columnFields, $infoColumnFields] =  $this->getDataFields();
         $valueFilters = count($filters)  ? array_combine($filters, [[1, 4], [7, 8]]) : [];
         // Step 1: reduce lines from Filters array
+        if(is_object($primaryData)) $primaryData = array_map(fn($item) => (array)$item, $primaryData->toArray());
         $linesData = $primaryData;
-        // dd($linesData);
         $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $valueFilters);
         // dd($valueFilters, $dataReduce);
 
@@ -265,12 +265,12 @@ class PivotTable extends Component
                 }
             }
         }
-        // dd($infoColumnFields, $dataOutput);
         $dataOutput = $this->mergeLines($dataOutput, $rowFields);
         if (!$rowFields && $columnFields) {
             $dataOutput[0]["info_column_field"] = $infoColumnFields;
         }
         $dataOutput = $this->updateResultOfAggregations($columnFields, $dataAggregations, $dataOutput);
+        // dump($dataOutput);
         return $dataOutput;
     }
 

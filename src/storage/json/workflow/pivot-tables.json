@@ -112,13 +112,13 @@
     "apple_store_test_code": {
         "name": "apple_store_test_code",
         "filters": null,
-        "row_fields": "category",
-        "column_fields": "product,\r\ndate,\r\ndate,",
-        "value_index_fields": "amount,\r\ndiscount,\r\ndiscount,",
-        "data_aggregations": "sum,",
-        "data_fields": "discount,",
+        "row_fields": null,
+        "column_fields": "hseir_ltc_count_vote,\r\nhseir_rwc_count_vote,\r\nhseir_mtc_count_vote",
+        "value_index_fields": null,
+        "data_aggregations": "sum,\r\nsum",
+        "data_fields": "hseir_ltc_count_vote,\r\nhseir_rwc_count_vote,",
         "lookup_tables": null,
-        "sort_by": "category:desc"
+        "sort_by": null
     },
     "hr_timesheet_employee_date": {
         "name": "hr_timesheet_employee_date",
