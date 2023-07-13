@@ -33,7 +33,7 @@
             </script>
             
         @else
-        <div class="flex flex-1 justify-center">
+        <div class="flex flex-1 justify-center mt-3">
             @php
                 $page = $page ? '('. $page .')' : '';
             @endphp
@@ -55,16 +55,18 @@
         @endif
     </div>
     @if(!$tableOfContents)
-    <div class="border-t py-1 px-3 font-medium flex justify-start">
-        <div class="flex">
-            <div class="flex flex-col pr-2  font-medium">
-                <span>Consent Number:</span>
-            </div>
-            <div class="flex flex-col font-normal">
-                <span>{{$consentNumber}}</span>
+        @if($consentNumber)
+        <div class="border-t py-1 px-3 font-medium flex justify-start">
+            <div class="flex">
+                <div class="flex flex-col pr-2  font-medium">
+                    <span>Consent Number:</span>
+                </div>
+                <div class="flex flex-col font-normal">
+                    <span>{{$consentNumber}}</span>
+                </div>
             </div>
         </div>
-    </div>
+        @endif
     @else
     <div class="border-t py-1 px-3">
         <div class="flex flex-1 justify-center pr-2  font-medium">

@@ -47,7 +47,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
                     </button>
                 </div>
             </div>
-            <x-renderer.item-render-props id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
+            <x-renderer.item-render-props width='md:w-3/4 xl:w-3/4' id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
             @if(!$hasReadOnly)
                 <div class="fixed right-0">
                     <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
