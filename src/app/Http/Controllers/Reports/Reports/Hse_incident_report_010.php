@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
+use App\BigThink\HasStatus;
 use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDataModesReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitLegendReport;
+use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Models\User;
 use App\Models\Workplace;
 use App\Utils\Support\Report;
@@ -18,18 +22,20 @@ class Hse_incident_report_010 extends Report_ParentReportController
 
 {
     use TraitDynamicColumnsTableReport;
-    use TraitDataModesReport;
-    protected $maxH = 50;
-    protected $mode = '010';
-    // protected $rotate45Width = 300;
-    protected $libPivotFilters;
+    use TraitForwardModeReport;
+    
+    protected $maxH = 80;
+    protected $year = 2023;
+    #protected $many_workplace_id = [2,4];
 
     public function getSqlStr($modeParams)
     {
         $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();
         $currentYear = date('Y');
-        $workplaceIds = isset($modeParams['many_workplace_id']) ? $modeParams['many_workplace_id'] : $dbWorkplaceIds;
-        $strWorkplaceIds = implode(',', $workplaceIds);
+
+        $workplaceIds = isset($modeParams['many_workplace_id']) && $modeParams['many_workplace_id'][0] ? $modeParams['many_workplace_id'] : $dbWorkplaceIds;
+        $strWorkplaceIds = '(' . implode(',', $workplaceIds) .')';
+
         $year = isset($modeParams['year']) ? $modeParams['year'] : $currentYear;
 
         $sql = " 
@@ -37,7 +43,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     SELECT wa.id
                     FROM work_areas wa
                     INNER JOIN workplaces wp ON wa.workplace_id = wp.id
-                    WHERE wp.id IN (" . $strWorkplaceIds . ")
+                    WHERE wp.id IN $strWorkplaceIds
 
                 )
                 SELECT  
@@ -87,7 +93,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                         COUNT(hsew.id) AS hsew_count_vote
                     FROM hse_walkthroughs hsew
                     WHERE 1 = 1
-                        AND FIND_IN_SET(hsew.workplace_id, $strWorkplaceIds)
+                        AND hsew.workplace_id IN $strWorkplaceIds
                         AND SUBSTR(hsew.walkthrough_datetime, 1, 4) = $year
                 
                     GROUP BY hse_month
@@ -99,7 +105,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     FROM hse_walkthroughs hsew
                     JOIN hse_corrective_actions hseca ON hseca.correctable_id = hsew.id
                     WHERE 1 = 1
-                        AND FIND_IN_SET( hsew.workplace_id, $strWorkplaceIds)
+                        AND hsew.workplace_id IN $strWorkplaceIds
                         AND SUBSTR(hsew.walkthrough_datetime, 1, 4) =$year
                     GROUP BY hse_month
                 ) AS t5 ON t1.hse_month = t5.hse_month
@@ -123,14 +129,14 @@ class Hse_incident_report_010 extends Report_ParentReportController
                         SUM(hseem.total_drill) AS drill
                     FROM hse_extra_metrics hseem
                     WHERE 1 = 1
-                        AND FIND_IN_SET(hseem.workplace_id, $strWorkplaceIds)
+                        AND hseem.workplace_id IN $strWorkplaceIds
                            AND SUBSTR(hseem.metric_month, 1, 4) = $year
                     GROUP BY hse_month
                 ) AS t7 ON t1.hse_month = t7.hse_month
                 JOIN (
                     SELECT GROUP_CONCAT(id) AS wp_id_list
                     FROM workplaces wp
-                    WHERE FIND_IN_SET(wp.id, $strWorkplaceIds)
+                    WHERE wp.id IN  $strWorkplaceIds
                 ) AS wp_ids";
         return $sql;
     }
@@ -175,78 +181,91 @@ class Hse_incident_report_010 extends Report_ParentReportController
             [
                 'title' => 'MTC',
                 'dataIndex' => 'hseir_mtc_count_vote',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Incident (property damage,oil spills)',
                 'dataIndex' => 'hseir_incident_count_vote',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Near Miss',
                 'dataIndex' => 'hseir_near_miss_count_vote',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'FAC & Medical assistant ',
                 'dataIndex' => 'hsefa_count_vote',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Lost Days',
                 'dataIndex' => 'hseir_lost_day_count_vote',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'HSE inspection ',
                 'dataIndex' => 'hseicshts_tmpl_sht_count_vote',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'HSE Walkthrough',
                 'dataIndex' => 'hsew_count_vote',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'HSE Observations',
                 'dataIndex' => 'hseca_line_count',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'HSE Training & Induction (Pax)',
                 'dataIndex' => 'hrt_line_count',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Disciplines',
                 'dataIndex' => 'discipline',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Third party Inspections & audit',
                 'dataIndex' => 'third_party_inspection_audit',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Drills',
                 'dataIndex' => 'drill',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'TRIR',
                 'dataIndex' => 'trir',
+                // 'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
@@ -276,11 +295,18 @@ class Hse_incident_report_010 extends Report_ParentReportController
     protected function transformDataSource($dataSource, $modeParams)
     {
         if (is_object($dataSource)) $dataSource = array_map(fn ($item) => (array)$item, $dataSource->toArray());
-        $wp = Workplace::find(2);
-        $workHoursOfYear  = [];
-        foreach ([2021, 2022, 2023] as $year) {
-            $workHoursOfYear[$year] = $wp->getTotalWorkingHoursOfYear($year);
+        if (empty($dataSource)) return collect([]);
+
+        $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();
+        $workplaceIds = isset($modeParams['many_workplace_id']) &&  $modeParams['many_workplace_id'][0] ? $modeParams['many_workplace_id'] : $dbWorkplaceIds;
+        $workPlacesHoursOfYear  = [];
+        foreach ($workplaceIds as $workplaceId){
+            $wp = Workplace::find($workplaceId);
+            foreach ([2021, 2022, 2023] as $year) {
+                $workPlacesHoursOfYear[$year][] = $wp->getTotalWorkingHoursOfYear($year);
+            }
         }
+        $workHoursOfYear = Report::sumAndMergeNestedKeys($workPlacesHoursOfYear);
         foreach ($dataSource as &$value) {
             if (isset($value['year'])) {
                 $workHours = $workHoursOfYear[$value['year']];
@@ -293,10 +319,25 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 $value['trir'] = round($totalRecIncidentRate, 3);
             }
         }
+
+        $months = array_column($dataSource, 'month');
+        $addMissingMonths = Report::addMissingMonths($months);
+        $diffMonths = array_diff($addMissingMonths, $months);
+
+        $keysInDataSource = array_keys($dataSource[0]);
+
+        $data2 =  array_map(function($item) use ($keysInDataSource) {
+            $arr = array_fill_keys($keysInDataSource, null);
+            $arr['month'] = $item;
+            $arr['year'] = substr($item, 0, 4);
+            return $arr;
+
+        }, $diffMonths);
+        $dataSource = array_merge($dataSource, $data2);
         return collect($dataSource);
     }
 
-    protected function tableDataHeader($modeParams, $dataSource)
+    protected function delete_tableDataHeader($modeParams, $dataSource)
     {
         if (is_object($dataSource)) $dataSource = $dataSource->items();
         if (!isset($dataSource[0])) return [];
@@ -314,11 +355,36 @@ class Hse_incident_report_010 extends Report_ParentReportController
             }
         }
         // dump($dataHeader, $dataSource);
+        $dataHeader = [];
         return ['month' => 'YTD'] + $dataHeader;
     }
 
+    
     protected function changeValueData($dataSource, $modeParams)
     {
+        foreach ($dataSource as $key => $values){
+            if (isset($values['trir'])){
+                $values['trir'] = (object) [
+                    'value' => $values['trir'],
+                    'cell_title' => 'SUM(LTI, RWC ,MTC ,Incident (property damage,oil spills) ,Near Miss)*200000/Work Hours)'
+                ];
+                $values['work_hours'] = round($values['work_hours'] ? $values['work_hours'] : 0, 3);
+                $dataSource[$key] = $values;
+            }
+        }
+        // dd($dataSource);
         return $dataSource;
+    }
+
+    protected function getDefaultValueModeParams($modeParams, $request)
+    {
+        $x = 'year';
+        $y = 'many_workplace_id';
+        $isNullModeParams = Report::isNullModeParams($modeParams);
+        if ($isNullModeParams) {
+            $modeParams[$x] = $this->year;
+            #$modeParams[$y] = $this->many_workplace_id;
+        }
+        return $modeParams;
     }
 }
