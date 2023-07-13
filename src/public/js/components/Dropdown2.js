@@ -227,7 +227,15 @@ const onChangeDropdown2Assign = (listener) => {
     if (debugListener) console.log('Assign', listener)
     const { column_name, listen_to_attrs } = listener
     const selectedObject = onChangeGetSelectedObject2(listener)
-    const listen_to_attr = listen_to_attrs[0]
+    let listen_to_attr = listen_to_attrs[0]
+
+    //This section allows {currency_pair1_id, currency_pair2_id} to be lookup the value on the form to make it column
+    if (listen_to_attr[0] === "{" && listen_to_attr[listen_to_attr.length - 1] === "}") {
+        listen_to_attr = listen_to_attr.slice(1, -1)
+        // console.log(listen_to_attr)
+        listen_to_attr = getValueOfEById(listen_to_attr)
+    }
+
     // const listen_to_attr = removeParenthesis(listen_to_attrs[0])
     if (debugListener) console.log('Selected Object:', selectedObject, ' - listen_to_attr:', listen_to_attr)
     if (selectedObject !== undefined) {

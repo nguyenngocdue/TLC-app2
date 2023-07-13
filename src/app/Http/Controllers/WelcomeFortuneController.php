@@ -28,6 +28,9 @@ class WelcomeFortuneController extends Controller
         //     $lines = $wp->getTotalWorkingHoursOfYear($year);
         //     dump($lines);
         // }
+
+        // https://openexchangerates.org/api/historical/2023-01-01.json?app_id=c7a1bb091c0d450ba9cae26a53308448
+
         return view("welcome-fortune", [
             // 'nodeTreeArray' => json_encode(array_values($taskTree))
         ]);
