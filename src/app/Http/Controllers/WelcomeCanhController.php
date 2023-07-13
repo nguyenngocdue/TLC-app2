@@ -27,7 +27,7 @@ class WelcomeCanhController extends Controller
     }
     public function index(Request $request)
     {
-        dd(Thumbnail::createThumbnailByOptions('input','output'));
+        // dd(Thumbnail::createThumbnailByOptions('input','output'));
         $tree = BuildTree::getTree();
         $results = [];
         $showOptions = $this->getUserSettingsViewOrgChart();

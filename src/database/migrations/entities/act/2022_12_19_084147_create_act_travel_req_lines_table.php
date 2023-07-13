@@ -23,15 +23,17 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('from_id')->nullable();
             $table->unsignedBigInteger('act_travel_req_id')->nullable();
+            $table->unsignedBigInteger('from_id')->nullable();
             $table->unsignedBigInteger('to_id')->nullable();
+            $table->unsignedBigInteger('workplace_id')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
             $table->dateTime('datetime_outbound_1')->nullable();
             $table->dateTime('datetime_outbound_2')->nullable();
             $table->dateTime('datetime_inbound_1')->nullable();
             $table->dateTime('datetime_inbound_2')->nullable();
             $table->float('total_day')->nullable();
+            $table->decimal('total_price')->nullable();
             $table->text('remark')->nullable();
             $table->orderable();
             $table->appendCommonFields();

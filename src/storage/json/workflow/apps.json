@@ -97,6 +97,32 @@
         "show_renderer": "props-renderer",
         "icon": null
     },
+    "act_travel_expense_claimable": {
+        "name": "act_travel_expense_claimable",
+        "package_tab": "application",
+        "package": "finance",
+        "sub_package": "hr",
+        "title": "Act Travel Expense Claimable",
+        "nickname": "atec",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
+    },
+    "act_travel_place": {
+        "name": "act_travel_place",
+        "package_tab": "application",
+        "package": "finance",
+        "sub_package": "hr",
+        "title": "Act Travel Place",
+        "nickname": "atp",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null
+    },
     "act_travel_req": {
         "name": "act_travel_req",
         "package_tab": "application",
