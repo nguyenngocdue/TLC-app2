@@ -10,7 +10,7 @@ class Act_travel_expense_claim extends ModelExtended
         "id", "name", "description", "status", "staff_id",
         "sub_project_id", "advance_req_id", "advance_amount", "currency1_id", "currency_pair1_id",
         "rate_exchange_advance", "total_advance_amount", "travel_req_id", "travel_amount",
-        "currency2_id", "currency_pair2_id", "rate_exchange_travel", "total_travel_amount", "rate_exchange_month",
+        "currency2_id", "currency_pair2_id", "rate_exchange_travel", "total_travel_amount", "rate_exchange_month_id",
         "currency3_id", "total_amount_ee", "total_amount_re", "remark", "assignee_1", "owner_id"
     ];
     protected $table = "act_travel_expense_claims";
