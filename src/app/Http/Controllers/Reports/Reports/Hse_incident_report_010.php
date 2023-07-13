@@ -2,21 +2,12 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\BigThink\HasStatus;
 use App\Http\Controllers\Reports\Report_ParentReportController;
-use App\Http\Controllers\Reports\TraitDataModesReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use App\Http\Controllers\Reports\TraitLegendReport;
-use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
-use App\Models\User;
 use App\Models\Workplace;
 use App\Utils\Support\Report;
-use DateInterval;
-use DatePeriod;
-use DateTime;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class Hse_incident_report_010 extends Report_ParentReportController
 
@@ -53,11 +44,11 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 FROM (
                     SELECT
                         SUBSTR(hseir.issue_datetime, 1, 7) AS hse_month,
-                        COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 118 THEN hseir.id END) AS hseir_ltc_count_vote,
-                        COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 119 THEN hseir.id END) AS hseir_rwc_count_vote,
-                        COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 120 THEN hseir.id END) AS hseir_mtc_count_vote,
-                        COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = 107 THEN hseir.id END) AS hseir_incident_count_vote,
-                        COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = 109 THEN hseir.id END) AS hseir_near_miss_count_vote,
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 118 THEN hseir.id END), 0) AS hseir_ltc_count_vote,
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 119 THEN hseir.id END), 0) AS hseir_rwc_count_vote,
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 120 THEN hseir.id END), 0) AS hseir_mtc_count_vote,
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = 107 THEN hseir.id END), 0) AS hseir_incident_count_vote,
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = 109 THEN hseir.id END), 0) AS hseir_near_miss_count_vote,
                         SUM(hseir.lost_days) AS hseir_lost_day_count_vote
                     FROM hse_incident_reports hseir
                     WHERE 1 = 1 
@@ -68,7 +59,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 LEFT JOIN (
                     SELECT
                         SUBSTR(hsefa.injury_datetime, 1, 7) AS hse_month,
-                        COUNT(hsefa.id) AS hsefa_count_vote
+                        COUNT(CASE WHEN 1 = 1 THEN hsefa.id END) AS hsefa_count_vote
                     FROM hse_first_aids hsefa
                     WHERE 1 = 1 
                         AND hsefa.work_area_id IN (SELECT id FROM temp_work_areas)
@@ -187,7 +178,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 'width' => 100,
             ],
             [
-                'title' => 'Incident (property damage,oil spills)',
+                'title' => 'Incident (Property damage,Oil spills)',
                 'dataIndex' => 'hseir_incident_count_vote',
                 'footer' => 'agg_sum',
                 'align' => 'right',
@@ -201,7 +192,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 'width' => 100,
             ],
             [
-                'title' => 'FAC & Medical assistant ',
+                'title' => 'FAC & Medical Assistant ',
                 'dataIndex' => 'hsefa_count_vote',
                 'footer' => 'agg_sum',
                 'align' => 'right',
@@ -215,7 +206,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 'width' => 100,
             ],
             [
-                'title' => 'HSE inspection ',
+                'title' => 'HSE Inspection ',
                 'dataIndex' => 'hseicshts_tmpl_sht_count_vote',
                 'footer' => 'agg_sum',
                 'align' => 'right',
@@ -250,7 +241,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 'width' => 100,
             ],
             [
-                'title' => 'Third party Inspections & audit',
+                'title' => 'Third party Inspections & Audit',
                 'dataIndex' => 'third_party_inspection_audit',
                 'footer' => 'agg_sum',
                 'align' => 'right',
@@ -334,31 +325,9 @@ class Hse_incident_report_010 extends Report_ParentReportController
             return $arr;
         }, $diffMonths);
         $dataSource = array_merge($dataSource, $data2);
+        dump($dataSource);
         return collect($dataSource);
     }
-
-    protected function delete_tableDataHeader($modeParams, $dataSource)
-    {
-        if (is_object($dataSource)) $dataSource = $dataSource->items();
-        if (!isset($dataSource[0])) return [];
-
-        $index1 = array_search('hseir_rwc_count_vote', array_keys($dataSource[0]));
-        $index2 = array_search('trir', array_keys($dataSource[0]));
-        $fields = array_keys(array_slice($dataSource[0], $index1 - 1, $index2 - $index1 + 2));
-        $dataHeader = [];
-        foreach ($dataSource as $values) {
-            foreach ($fields as $field) {
-                if (!isset($dataHeader[$field])) {
-                    $dataHeader[$field] = 0;
-                }
-                $dataHeader[$field] += $values[$field];
-            }
-        }
-        // dump($dataHeader, $dataSource);
-        $dataHeader = [];
-        return ['month' => 'YTD'] + $dataHeader;
-    }
-
 
     protected function changeValueData($dataSource, $modeParams)
     {
