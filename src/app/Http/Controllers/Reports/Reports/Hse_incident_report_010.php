@@ -325,7 +325,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
             return $arr;
         }, $diffMonths);
         $dataSource = array_merge($dataSource, $data2);
-        dump($dataSource);
+        // dump($dataSource);
         return collect($dataSource);
     }
 
