@@ -97,10 +97,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getSubProjectOfAdvanceReq()": {
-        "name": "_getSubProjectOfAdvanceReq()",
+    "_getSubProjectsOfAdvanceReq()": {
+        "name": "_getSubProjectsOfAdvanceReq()",
         "relationship": "getCheckedByField",
-        "control_name": "getSubProjectOfAdvanceReq()",
+        "control_name": "getSubProjectsOfAdvanceReq()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

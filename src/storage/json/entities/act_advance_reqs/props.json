@@ -75,9 +75,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_getSubProjectOfAdvanceReq()": {
-        "name": "_getSubProjectOfAdvanceReq()",
-        "column_name": "getSubProjectOfAdvanceReq()",
+    "_getSubProjectsOfAdvanceReq()": {
+        "name": "_getSubProjectsOfAdvanceReq()",
+        "column_name": "getSubProjectsOfAdvanceReq()",
         "column_type": "oracy_prop",
         "label": "Sub Projects",
         "control": "dropdown_multi",

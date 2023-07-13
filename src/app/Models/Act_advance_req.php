@@ -6,8 +6,11 @@ use App\BigThink\ModelExtended;
 
 class Act_advance_req extends ModelExtended
 {
-    protected $fillable = ["id","name", "description", "status","staff_id","sub_project_id","radio_advance_type"
-    ,"advance_amount","currency_id","advance_amount_word","assignee_1","owner_id"];
+    protected $fillable = [
+        "id", "name", "description", "status", "staff_id",
+        "radio_advance_type", "advance_amount", "currency_id",
+        "advance_amount_word", "assignee_1", "owner_id"
+    ];
     protected $table = "act_advance_reqs";
 
     public static $eloquentParams = [
@@ -19,15 +22,15 @@ class Act_advance_req extends ModelExtended
 
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
-        'getSubProjectOfAdvanceReq()' => ['getCheckedByField', Sub_project::class,],
-       
+        'getSubProjectsOfAdvanceReq()' => ['getCheckedByField', Sub_project::class,],
+
     ];
     public function getStaff()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getSubProjectOfAdvanceReq()
+    public function getSubProjectsOfAdvanceReq()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
@@ -58,7 +61,7 @@ class Act_advance_req extends ModelExtended
             ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'currency_xr_id', 'value_as_parent_id' => true, 'invisible' => true,],
-            ['dataIndex' => 'month','cloneable' => true],
+            ['dataIndex' => 'month', 'cloneable' => true],
             ['dataIndex' => 'currency_pair_id', 'cloneable' => true],
             ['dataIndex' => 'value'],
         ];

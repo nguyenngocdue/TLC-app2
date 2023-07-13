@@ -209,9 +209,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getSubProjectOfExpenseClaim()": {
-        "name": "_getSubProjectOfExpenseClaim()",
-        "column_name": "getSubProjectOfExpenseClaim()",
+    "_getSubProjectsOfExpenseClaim()": {
+        "name": "_getSubProjectsOfExpenseClaim()",
+        "column_name": "getSubProjectsOfExpenseClaim()",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

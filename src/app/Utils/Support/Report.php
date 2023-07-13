@@ -151,14 +151,14 @@ class Report
     {
         $strDate = str_replace(['-', '_'], '/', $strDate);
         $dateTime = DateTime::createFromFormat('d/m/Y', $strDate);
-        if(!$dateTime) return false;
+        if (!$dateTime) return false;
         if ($dateTime) {
             return $dateTime->format($typeFormat);
         }
         return DateTime::createFromFormat('Y/m/d', $strDate)->format($typeFormat);
     }
 
-    public static function retrieveDataByIndex($array, $key, $reverse = false, $type='key')
+    public static function retrieveDataByIndex($array, $key, $reverse = false, $type = 'key')
     {
         $idx = array_search($key, array_values($array));
         if ($type == 'key') {
@@ -176,5 +176,57 @@ class Report
             return $value !== null;
         });
     }
-    
+
+    public static function sumAndMergeKeys(array $array)
+    {
+        $result = [];
+
+        foreach ($array as $item) {
+            foreach ($item as $key => $value) {
+                if (!isset($result[$key])) {
+                    $result[$key] = 0;
+                }
+                $result[$key] += $value;
+            }
+        }
+
+        return $result;
+    }
+
+    public static function sumAndMergeNestedKeys($array)
+    {
+        $result = [];
+        foreach ($array as $key => $subArray) {
+            $mergedArray = [];
+            foreach ($subArray as $item) {
+                foreach ($item as $subKey => $value) {
+                    if (!isset($mergedArray[$subKey])) {
+                        $mergedArray[$subKey] = 0;
+                    }
+                    $mergedArray[$subKey] += $value;
+                }
+            }
+            $result[$key] = $mergedArray;
+        }
+        return $result;
+    }
+
+    public static function addMissingMonths($months)
+    {
+        $fullMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+
+        $missingMonths = [];
+        $year = null;
+        if (!empty($months)) {
+            $year = substr($months[0], 0, 4);
+        }
+        foreach ($fullMonths as $month) {
+            $fullMonth = "$year-$month";
+            if (!in_array($fullMonth, $months)) {
+                $missingMonths[] = $fullMonth;
+            }
+        }
+
+        return array_merge($months, $missingMonths);
+    }
 }

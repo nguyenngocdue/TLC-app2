@@ -59,9 +59,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getSubProjectOfExpenseClaim()": {
-        "name": "_getSubProjectOfExpenseClaim()",
-        "column_name": "getSubProjectOfExpenseClaim()",
+    "_getSubProjectsOfExpenseClaim()": {
+        "name": "_getSubProjectsOfExpenseClaim()",
+        "column_name": "getSubProjectsOfExpenseClaim()",
         "label": "",
         "validation": "",
         "validation_regex": "",

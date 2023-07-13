@@ -94,9 +94,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_getSubProjectOfExpenseClaim()": {
-        "name": "_getSubProjectOfExpenseClaim()",
-        "column_name": "getSubProjectOfExpenseClaim()",
+    "_getSubProjectsOfExpenseClaim()": {
+        "name": "_getSubProjectsOfExpenseClaim()",
+        "column_name": "getSubProjectsOfExpenseClaim()",
         "column_type": "oracy_prop",
         "label": "Sub Projects",
         "control": "dropdown_multi",

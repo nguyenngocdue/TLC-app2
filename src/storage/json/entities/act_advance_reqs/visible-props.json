@@ -19,9 +19,9 @@
         "column_name": "radio_advance_type",
         "new": "true"
     },
-    "_getSubProjectOfAdvanceReq()": {
-        "name": "_getSubProjectOfAdvanceReq()",
-        "column_name": "getSubProjectOfAdvanceReq()",
+    "_getSubProjectsOfAdvanceReq()": {
+        "name": "_getSubProjectsOfAdvanceReq()",
+        "column_name": "getSubProjectsOfAdvanceReq()",
         "new": "true"
     },
     "_advance_amount": {
