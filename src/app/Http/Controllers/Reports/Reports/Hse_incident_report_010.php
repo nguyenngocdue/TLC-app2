@@ -23,7 +23,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
 {
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
-    
+
     protected $maxH = 80;
     protected $year = 2023;
     #protected $many_workplace_id = [2,4];
@@ -34,7 +34,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $currentYear = date('Y');
 
         $workplaceIds = isset($modeParams['many_workplace_id']) && $modeParams['many_workplace_id'][0] ? $modeParams['many_workplace_id'] : $dbWorkplaceIds;
-        $strWorkplaceIds = '(' . implode(',', $workplaceIds) .')';
+        $strWorkplaceIds = '(' . implode(',', $workplaceIds) . ')';
 
         $year = isset($modeParams['year']) ? $modeParams['year'] : $currentYear;
 
@@ -176,6 +176,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 'title' => 'RWC',
                 'dataIndex' => 'hseir_rwc_count_vote',
                 'align' => 'right',
+                'footer' => 'agg_sum',
                 'width' => 100,
             ],
             [
@@ -265,7 +266,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
             [
                 'title' => 'TRIR',
                 'dataIndex' => 'trir',
-                // 'footer' => 'agg_sum',
+                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
@@ -300,7 +301,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();
         $workplaceIds = isset($modeParams['many_workplace_id']) &&  $modeParams['many_workplace_id'][0] ? $modeParams['many_workplace_id'] : $dbWorkplaceIds;
         $workPlacesHoursOfYear  = [];
-        foreach ($workplaceIds as $workplaceId){
+        foreach ($workplaceIds as $workplaceId) {
             $wp = Workplace::find($workplaceId);
             foreach ([2021, 2022, 2023] as $year) {
                 $workPlacesHoursOfYear[$year][] = $wp->getTotalWorkingHoursOfYear($year);
@@ -316,7 +317,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     + $value['hseir_mtc_count_vote']
                     + $value['hseir_incident_count_vote']
                     + $value['hseir_near_miss_count_vote']) * 200000) / $value['work_hours'];
-                $value['trir'] = round($totalRecIncidentRate, 3);
+                $value['trir'] = round($totalRecIncidentRate, 2);
             }
         }
 
@@ -326,12 +327,11 @@ class Hse_incident_report_010 extends Report_ParentReportController
 
         $keysInDataSource = array_keys($dataSource[0]);
 
-        $data2 =  array_map(function($item) use ($keysInDataSource) {
+        $data2 =  array_map(function ($item) use ($keysInDataSource) {
             $arr = array_fill_keys($keysInDataSource, null);
             $arr['month'] = $item;
             $arr['year'] = substr($item, 0, 4);
             return $arr;
-
         }, $diffMonths);
         $dataSource = array_merge($dataSource, $data2);
         return collect($dataSource);
@@ -359,11 +359,11 @@ class Hse_incident_report_010 extends Report_ParentReportController
         return ['month' => 'YTD'] + $dataHeader;
     }
 
-    
+
     protected function changeValueData($dataSource, $modeParams)
     {
-        foreach ($dataSource as $key => $values){
-            if (isset($values['trir'])){
+        foreach ($dataSource as $key => $values) {
+            if (isset($values['trir'])) {
                 $values['trir'] = (object) [
                     'value' => $values['trir'],
                     'cell_title' => 'SUM(LTI, RWC ,MTC ,Incident (property damage,oil spills) ,Near Miss)*200000/Work Hours)'

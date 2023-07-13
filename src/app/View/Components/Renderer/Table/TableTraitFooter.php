@@ -2,14 +2,12 @@
 
 namespace App\View\Components\Renderer\Table;
 
-use Illuminate\Support\Facades\Blade;
-
 trait TableTraitFooter
 {
     function makeOneFooter($column, $tableName, $dataSource)
     {
         $fieldName = $column['dataIndex'];
-        $sum = $dataSource->sum(fn ($item) => $item[$fieldName]);
+        $sum = round($dataSource->sum(fn ($item) => is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName]), 2);
         // $sum = array_sum(array_column($dataSource->toArray(), $fieldName));
         $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr-6 py-0";
         $id = "{$tableName}[footer][{$fieldName}]";
