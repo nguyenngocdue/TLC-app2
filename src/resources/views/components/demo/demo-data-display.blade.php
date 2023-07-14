@@ -46,6 +46,14 @@
                     Empty attribute (expected blank)
                     <x-renderer.avatar-user></x-renderer.avatar-user>
                 </div>
+                <div>
+                    AvatarUser Array (2 users)
+                    <x-renderer.avatar-user>[{!!Auth::user()!!}, {!!Auth::user()!!}]</x-renderer.avatar-user>
+                </div>
+                <div>
+                    AvatarUser Array (4 users)
+                    <x-renderer.avatar-user>[{!!Auth::user()!!}, {!!Auth::user()!!}, {!!Auth::user()!!}, {!!Auth::user()!!}]</x-renderer.avatar-user>
+                </div>
             </div>
         </x-renderer.card>
     </x-renderer.card>
