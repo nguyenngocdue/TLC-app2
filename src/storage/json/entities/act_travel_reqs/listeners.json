@@ -14,6 +14,21 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_total_travel_price": {
+        "name": "_total_travel_price",
+        "column_name": "total_travel_price",
+        "listen_action": "aggregate_from_table",
+        "triggers": "table01[footer][total_price]",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_staff_workplace_id": {
         "name": "_staff_workplace_id",
         "column_name": "staff_workplace_id",
