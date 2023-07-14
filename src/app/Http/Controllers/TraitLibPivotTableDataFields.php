@@ -16,23 +16,26 @@ trait TraitLibPivotTableDataFields
     private function separateFields($data)
     {
         $array = [];
-        foreach ($data as $value) {
-            if (str_contains($value, '(')) {
-                $pos = strpos($value, '(');
-                $field = substr($value, 0, $pos);
-                $bindingName = substr($value,  $pos + 1, strlen($value) - $pos - 2);
-                $array['fields'][] = $field;
-                $array['biding_fields'][$field] =  array_combine(['table_name', 'attribute_name'], explode('.', $bindingName));
-            } else {
-                $array['fields'][] = $value;
-                $array['biding_fields'][$value] =  [];
-            }
+        try {
+                foreach ($data as $value) {
+                    if (str_contains($value, '(')) {
+                        $pos = strpos($value, '(');
+                        $field = substr($value, 0, $pos);
+                        $bindingName = substr($value,  $pos + 1, strlen($value) - $pos - 2);
+                        $array['fields'][] = $field;
+                        $array['bidding_fields'][$field] =  array_combine(['table_name', 'attribute_name'], explode('.', $bindingName));
+                    } else {
+                        $array['fields'][] = $value;
+                        $array['bidding_fields'][$value] =  [];
+                    }
+                }
+                // dd($array);
+                return $array;
         }
-        // dd($array);
-        return $array;
+        catch (\Exception $e) {
+            dd($e->getMessage());
+        }
     }
-
-
 
 
     private static function separateFields2($data, $patternFields, $valueIndexFields)
@@ -202,13 +205,14 @@ trait TraitLibPivotTableDataFields
         $infoColumnFields = $this->exploreColumnFields($columnFields, $valueIndexFields);
         // dd($infoColumnFields);
         $originalFields = $infoColumnFields['original_fields'];
-        $bidingColumnFields = $infoColumnFields['bidding_fields'] ?? [];
+        $biddingColumnFields = $infoColumnFields['bidding_fields'] ?? [];
 
-        $bidingRowFields = $fields['bidding_fields'] ?? [];
+        
+        $biddingRowFields = $fields['bidding_fields'] ?? [];
 
         $dataFields = self::triggerFieldsInfo($lib['data_fields'] ?? []) ?? [];
         $fieldOdDataFields = $dataFields['field_names'] ?? [];
-        $fieldsToCheckDatabase = $this->getFieldsToCheckDatabase($lib, array_keys($bidingRowFields), $originalFields, $fieldOdDataFields);
+        $fieldsToCheckDatabase = $this->getFieldsToCheckDatabase($lib, array_keys($biddingRowFields), $originalFields, $fieldOdDataFields);
 
         $primaryData = $this->dataSource;
         $checkFieldsInDatabase = $this->checkFieldsInDatabase($fieldsToCheckDatabase, $primaryData);
@@ -227,7 +231,10 @@ trait TraitLibPivotTableDataFields
         $dataIndex = $this->getDataIndex($row_fields);
         $columnFields = $originalFields;
         // dd($propsColumnField);
+        $propsColumnField = array_merge($propsColumnField,$biddingRowFields);
+        // dd($propsColumnField);
 
-        return [$rowFields, $bidingRowFields, $filters, $propsColumnField, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields, $columnFields, $infoColumnFields];
+        $tableIndex = $lib['lookup_tables'];
+        return [$rowFields, $biddingRowFields, $filters, $propsColumnField, $biddingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields, $columnFields, $infoColumnFields, $tableIndex];
     }
 }
