@@ -10,6 +10,7 @@ use App\Models\Hr_timesheet_officer;
 use App\Models\Hr_timesheet_worker;
 use App\Models\User;
 use App\Models\Zunit_test_03;
+use App\Utils\AccessLogger\LoggerAccessRecent;
 use App\Utils\Storage\Thumbnail;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
@@ -27,6 +28,7 @@ class WelcomeCanhController extends Controller
     }
     public function index(Request $request)
     {
+        // dd((new LoggerAccessRecent)(CurrentUser::id()));
         // dd(Thumbnail::createThumbnailByOptions('input','output'));
         $tree = BuildTree::getTree();
         $results = [];
