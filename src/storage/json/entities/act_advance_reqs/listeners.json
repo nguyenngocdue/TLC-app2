@@ -1,4 +1,19 @@
 {
+    "_advance_amount_word": {
+        "name": "_advance_amount_word",
+        "column_name": "advance_amount_word",
+        "listen_action": "number_to_words",
+        "triggers": "advance_amount, currency_id",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_id": {
         "name": "_id",
         "column_name": "id",
@@ -44,9 +59,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_advancedType()": {
-        "name": "_advancedType()",
-        "column_name": "advancedType()",
+    "_radio_advance_type": {
+        "name": "_radio_advance_type",
+        "column_name": "radio_advance_type",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -59,9 +74,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_sub_project_id": {
-        "name": "_sub_project_id",
-        "column_name": "sub_project_id",
+    "_getSubProjectsOfAdvanceReq()": {
+        "name": "_getSubProjectsOfAdvanceReq()",
+        "column_name": "getSubProjectsOfAdvanceReq()",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -77,7 +92,7 @@
     "_advance_amount": {
         "name": "_advance_amount",
         "column_name": "advance_amount",
-        "listen_action": "number_to_words(not-yet)",
+        "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
@@ -92,21 +107,6 @@
     "_currency_id": {
         "name": "_currency_id",
         "column_name": "currency_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_advance_amount_word": {
-        "name": "_advance_amount_word",
-        "column_name": "advance_amount_word",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
