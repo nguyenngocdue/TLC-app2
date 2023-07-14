@@ -119,6 +119,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_total_travel_price": {
+        "name": "_total_travel_price",
+        "column_name": "total_travel_price",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_remark": {
         "name": "_remark",
         "column_name": "remark",

@@ -29,6 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('staff_discipline_id')->nullable();
             $table->unsignedBigInteger('staff_workplace_id')->nullable();
             $table->float('total_travel_day')->nullable();
+            $table->decimal('total_travel_price',20,6)->nullable();
             $table->text('remark')->nullable();
             // $table->unsignedBigInteger('req_travel_desk_id')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
