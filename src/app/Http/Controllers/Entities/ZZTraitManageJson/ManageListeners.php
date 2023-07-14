@@ -22,7 +22,7 @@ class ManageListeners extends Manage_Parent
             'dot',
             'expression',
             'date_offset',
-            'number_to_words(not-yet)',
+            'number_to_words',
             'ajax_request_scalar',
 
             'aggregate_from_table', // Field ONLY
@@ -180,6 +180,18 @@ class ManageListeners extends Manage_Parent
                         $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
                         break;
                     case "aggregate_from_table":
+                        // $newItem['triggers'] = 'DO_NOT_RENDER';
+                        $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                        $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
+                        $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['expression'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
+                        break;
+                    case "number_to_words":
                         // $newItem['triggers'] = 'DO_NOT_RENDER';
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
                         $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';

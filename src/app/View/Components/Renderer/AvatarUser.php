@@ -21,6 +21,52 @@ class AvatarUser extends Component
         //
     }
 
+    private function renderOneUserBySlot($slot, $shortForm)
+    {
+        $avatar = null;
+        $user = null;
+        if (isset($slot->{'id'})) {
+            $user = User::findFromCache($slot->{'id'});
+            $avatar = $user->getAvatarThumbnailUrl();
+        }
+        if (is_null($user)) return null;
+
+        $title = $shortForm ? ($slot->{"first_name"} ?? "") : ($slot->{'name'} ?? '');
+        $description = $shortForm ? "" : ($slot->{'position_rendered'} ?? '');
+        $gray = $slot->{'resigned'} ?? '';
+        $href = $slot->{'href'} ?? '';
+
+        return [$user, $avatar, $title, $description, $href, $gray];
+    }
+
+    private function renderOneUserByAttribute()
+    {
+        $user = User::findFromCache($this->uid);
+        $avatar = $user->getAvatarThumbnailUrl();
+        $title = $user->full_name;
+        $description = $user->position_rendered;
+        $gray = $user->resigned;
+        $href = "";
+        return [$user, $avatar, $title, $description, $href, $gray];
+    }
+
+    function renderOneUserSlot($slot, $index, $shortForm = false)
+    {
+        if (is_null($this->uid)) {
+            $array = $this->renderOneUserBySlot($slot, $shortForm);
+            if (is_null($array)) return;
+        } else {
+            $array = $this->renderOneUserByAttribute();
+        }
+        [$user, $avatar, $title, $description, $href, $gray]  = $array;
+
+        $verticalLayout = $this->verticalLayout;
+        $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") . " (#$user->id)" : "";
+        if ($shortForm) $tooltip  = $user->name . "\n" . $user->position_rendered . "\n" . $tooltip;
+        $class = ($shortForm && $index >= 2) ? "-mt-4" : "";
+        return "<x-renderer.avatar-item class='$class' flipped='$this->flipped' tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -30,31 +76,21 @@ class AvatarUser extends Component
     {
         return function (array $data) {
             $slot = json_decode($data['slot']);
+            $result = [];
+            // $slotArray = is_array($slot) ? $slot : [$slot];
 
-            if (is_null($this->uid)) {
-                $avatar = null;
-                $user = null;
-                if (isset($slot->{'id'})) {
-                    $user = User::findFromCache($slot->{'id'});
-                    $avatar = $user->getAvatarThumbnailUrl();
+            if (is_array($slot)) {
+                foreach ($slot as $index => $slotScalar) {
+                    $result[] = $this->renderOneUserSlot($slotScalar, $index, true);
                 }
-                if (is_null($user)) return "";
-
-                $title = $slot->{'name'} ?? '';
-                $description = $slot->{'position_rendered'} ?? '';
-                $gray = $slot->{'resigned'} ?? '';
+                $div = "<div class='grid grid-cols-2'>";
+                $div .= join("", $result);
+                $div .= "</div>";
+                return $div;
             } else {
-                $user = User::findFromCache($this->uid);
-                $title = $user->full_name;
-                $description = $user->position_rendered;
-                $gray = $user->resigned;
-                $avatar = $user->getAvatarThumbnailUrl();
+                return $this->renderOneUserSlot($slot, 0);
             }
-
-            $href = $slot->{'href'} ?? '';
-            $verticalLayout = $this->verticalLayout;
-            $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") . " (#$user->id)" : "";
-            return "<x-renderer.avatar-item flipped='$this->flipped' tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
+            // return join("", $result);
         };
     }
 }

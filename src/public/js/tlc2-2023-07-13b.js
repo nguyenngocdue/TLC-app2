@@ -24,7 +24,7 @@ function listenerSubmitForm(idForm) {
         $('button').prop('disabled', true);
         $('input[component="controls/number2"]').each(function () {
             var currentValue = $(this).val();
-            var cleanedValue = currentValue.replace(/[^0-9.]/g, '');
+            var cleanedValue = currentValue.replace(/[^0-9.\-]/g, '');
             $(this).val(cleanedValue);
         });
     });
