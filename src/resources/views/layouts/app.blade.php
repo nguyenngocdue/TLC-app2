@@ -65,8 +65,8 @@
         {!! Toastr::message() !!}
         <script>
             function numberToWords(number){
-                var cleanedNumber = number.replace(/[^0-9.]/g, '');
-                return capitalizeFirstLetter(window.toWords(cleanedNumber) + readDecimalPart(cleanedNumber));
+                if(typeof number == 'string') number = number.replace(/[^0-9.]/g, '');
+                return capitalizeFirstLetter(window.toWords(number) + readDecimalPart(number));
             }
             function capitalizeFirstLetter(str) {
                 return str.replace(/(^|\s)\w/g, (match) => match.toUpperCase());
@@ -83,7 +83,6 @@
                     const word = convertDigitToWord(digit);
                     result.push(word);
                 }
-                console.log(result)
             return ' ' + result.join(' ');
             }
             function convertDigitToWord(digit) {
