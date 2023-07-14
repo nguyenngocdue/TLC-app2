@@ -66,7 +66,7 @@
         <script>
             function numberToWords(number){
                 var cleanedNumber = number.replace(/[^0-9.]/g, '');
-                return capitalizeFirstLetter(window.toWords(cleanedNumber) + ' ' + readDecimalPart(cleanedNumber));
+                return capitalizeFirstLetter(window.toWords(cleanedNumber) + readDecimalPart(cleanedNumber));
             }
             function capitalizeFirstLetter(str) {
                 return str.replace(/(^|\s)\w/g, (match) => match.toUpperCase());
@@ -77,13 +77,14 @@
                 if (!decimalPart) {
                     return '';
                 }
-                let result = 'point ';
+                let result = ['point'];
                 for (let i = 0; i < decimalPart.length; i++) {
                     const digit = parseInt(decimalPart[i]);
                     const word = convertDigitToWord(digit);
-                    result += word + ' ';
+                    result.push(word);
                 }
-            return result.trim();
+                console.log(result)
+            return ' ' + result.join(' ');
             }
             function convertDigitToWord(digit) {
             const digitsMap = {
