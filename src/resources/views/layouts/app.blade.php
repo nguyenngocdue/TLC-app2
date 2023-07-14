@@ -63,12 +63,42 @@
         {{-- Button Go to Top and Bottom --}}
         <x-renderer.button-scroll />
         {!! Toastr::message() !!}
-        {{-- <script>
-            window.Echo.channel('test')
-                .listen('.Test', (e) => {
-                    console.log(e);
-                })
-        </script> --}}
+        <script>
+            function numberToWords(number){
+                var cleanedNumber = number.replace(/[^0-9.]/g, '');
+                return window.toWords(cleanedNumber) + ' ' + readDecimalPart(cleanedNumber);;
+            }
+            function readDecimalPart(number) {
+                const numberString = number + '';
+                const decimalPart = numberString.split('.')[1];
+                if (!decimalPart) {
+                    return '';
+                }
+                let result = 'point ';
+                for (let i = 0; i < decimalPart.length; i++) {
+                    const digit = parseInt(decimalPart[i]);
+                    const word = convertDigitToWord(digit);
+                    result += word + ' ';
+                }
+            return result.trim();
+            }
+            function convertDigitToWord(digit) {
+            const digitsMap = {
+                '0': 'zero',
+                '1': 'one',
+                '2': 'two',
+                '3': 'three',
+                '4': 'four',
+                '5': 'five',
+                '6': 'six',
+                '7': 'seven',
+                '8': 'eight',
+                '9': 'nine',
+            };
+            return digitsMap[digit];
+            }
+            console.log(numberToWords('1,000,000.123456789'));
+        </script>
 </body>
 </html>
 

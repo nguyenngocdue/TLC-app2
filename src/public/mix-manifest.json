@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/antd-vue.js": "/js/antd-vue.js",
+    "/js/number-to-words.js": "/js/number-to-words.js",
     "/css/app.css": "/css/app.css"
 }

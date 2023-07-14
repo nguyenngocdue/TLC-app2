@@ -18,3 +18,4 @@ mix.js('resources/js/app.js', 'public/js')
         require('autoprefixer'),
     ])
 mix.js('resources/js/antd-vue.js', 'public/js').vue()
+mix.js('resources/js/number-to-words.js', 'public/js')
