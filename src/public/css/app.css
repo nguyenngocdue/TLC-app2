@@ -749,6 +749,9 @@ video {
 .m-auto {
   margin: auto;
 }
+.-m-4 {
+  margin: -1rem;
+}
 .-mx-6 {
   margin-left: -1.5rem;
   margin-right: -1.5rem;
@@ -836,6 +839,10 @@ video {
 .my-60 {
   margin-top: 15rem;
   margin-bottom: 15rem;
+}
+.-my-4 {
+  margin-top: -1rem;
+  margin-bottom: -1rem;
 }
 .-mb-4 {
   margin-bottom: -1rem;
@@ -968,6 +975,9 @@ video {
 }
 .mt-\[3px\] {
   margin-top: 3px;
+}
+.-mt-4 {
+  margin-top: -1rem;
 }
 .box-border {
   box-sizing: border-box;
@@ -3435,6 +3445,9 @@ video {
 }
 .bg-opacity-70 {
   --tw-bg-opacity: 0.7;
+}
+.bg-opacity-30 {
+  --tw-bg-opacity: 0.3;
 }
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
