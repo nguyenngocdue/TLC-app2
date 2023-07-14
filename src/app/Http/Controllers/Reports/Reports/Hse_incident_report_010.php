@@ -152,7 +152,6 @@ class Hse_incident_report_010 extends Report_ParentReportController
             [
                 'title' => 'Work Hours',
                 'dataIndex' => 'work_hours',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
@@ -160,104 +159,89 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 'title' => 'LTI',
                 'dataIndex' => 'hseir_ltc_count_vote',
                 'align' => 'right',
-                'footer' => 'agg_sum',
                 'width' => 100,
             ],
             [
                 'title' => 'RWC',
                 'dataIndex' => 'hseir_rwc_count_vote',
                 'align' => 'right',
-                'footer' => 'agg_sum',
                 'width' => 100,
             ],
             [
                 'title' => 'MTC',
                 'dataIndex' => 'hseir_mtc_count_vote',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Incident (Property damage,Oil spills)',
                 'dataIndex' => 'hseir_incident_count_vote',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Near Miss',
                 'dataIndex' => 'hseir_near_miss_count_vote',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'FAC & Medical Assistant ',
                 'dataIndex' => 'hsefa_count_vote',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Lost Days',
                 'dataIndex' => 'hseir_lost_day_count_vote',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'HSE Inspection ',
                 'dataIndex' => 'hseicshts_tmpl_sht_count_vote',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'HSE Walkthrough',
                 'dataIndex' => 'hsew_count_vote',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'HSE Observations',
                 'dataIndex' => 'hseca_line_count',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'HSE Training & Induction (Pax)',
                 'dataIndex' => 'hrt_line_count',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Disciplines',
                 'dataIndex' => 'discipline',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Third party Inspections & Audit',
                 'dataIndex' => 'third_party_inspection_audit',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'Drills',
                 'dataIndex' => 'drill',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
             [
                 'title' => 'TRIR',
                 'dataIndex' => 'trir',
-                'footer' => 'agg_sum',
                 'align' => 'right',
                 'width' => 100,
             ],
@@ -298,6 +282,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 $workPlacesHoursOfYear[$year][] = $wp->getTotalWorkingHoursOfYear($year);
             }
         }
+        // dump($workPlacesHoursOfYear);
         $workHoursOfYear = Report::sumAndMergeNestedKeys($workPlacesHoursOfYear);
         foreach ($dataSource as &$value) {
             if (isset($value['year'])) {
@@ -325,7 +310,31 @@ class Hse_incident_report_010 extends Report_ParentReportController
             return $arr;
         }, $diffMonths);
         $dataSource = array_merge($dataSource, $data2);
-        // dump($dataSource);
+
+        // Create a new line at the end of the table
+        $fields = array_keys($dataSource[0]);
+        $dataFooter = [];
+        foreach ($dataSource as $values) {
+            foreach ($fields as $field) {
+                try {
+                    if (!isset($dataFooter[$field])) {
+                        $dataFooter[$field] = 0;
+                    }
+                    $dataFooter[$field] += $values[$field];
+                }
+                catch (\Exception $e) {
+                    $dataFooter[$field] = $values[$field];
+                }
+            }
+        }
+        $dataFooter['year'] = null;
+        $dataFooter['month'] = 'YTD';
+        $dataFooter['trir'] = round((($dataFooter['hseir_ltc_count_vote']
+                                +$dataFooter['hseir_rwc_count_vote']
+                                +$dataFooter['hseir_mtc_count_vote']
+                                +$dataFooter['hseir_incident_count_vote']
+                                +$dataFooter['hseir_near_miss_count_vote']) * 200000)/$dataFooter['work_hours'], 2);
+        $dataSource = array_merge($dataSource,[$dataFooter]);
         return collect($dataSource);
     }
 
@@ -337,12 +346,22 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     'value' => $values['trir'],
                     'cell_title' => 'SUM(LTI, RWC ,MTC ,Incident (property damage,oil spills) ,Near Miss)*200000/Work Hours)'
                 ];
-                $values['work_hours'] = round($values['work_hours'] ? $values['work_hours'] : 0, 3);
+                $values['work_hours'] = round($values['work_hours'] ? $values['work_hours'] : 0, 2);
                 $dataSource[$key] = $values;
             }
         }
-        // dd($dataSource);
-        return $dataSource;
+        $lastElement = array_slice($dataSource->toArray(), count($dataSource) - 1);
+        foreach ($lastElement as &$values){
+            foreach ($values as $key => &$value){
+                if (is_object($value)) $value = $value->value;
+                $values[$key] = (object)[
+                    'value' => $value,
+                    'cell_class' => 'bg-gray-300 font-bold',
+                ];
+            }
+        }
+        $dataSource = array_merge(array_slice($dataSource->toArray(), 0, count($dataSource) - 1), $lastElement);
+        return collect($dataSource);
     }
 
     protected function getDefaultValueModeParams($modeParams, $request)
