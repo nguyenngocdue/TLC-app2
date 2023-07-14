@@ -66,7 +66,10 @@
         <script>
             function numberToWords(number){
                 var cleanedNumber = number.replace(/[^0-9.]/g, '');
-                return window.toWords(cleanedNumber) + ' ' + readDecimalPart(cleanedNumber);;
+                return capitalizeFirstLetter(window.toWords(cleanedNumber) + ' ' + readDecimalPart(cleanedNumber));
+            }
+            function capitalizeFirstLetter(str) {
+                return str.replace(/(^|\s)\w/g, (match) => match.toUpperCase());
             }
             function readDecimalPart(number) {
                 const numberString = number + '';
