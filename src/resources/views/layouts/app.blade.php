@@ -65,7 +65,7 @@
         {!! Toastr::message() !!}
         <script>
             function numberToWords(number){
-                if(typeof number == 'string') number = number.replace(/[^0-9.]/g, '');
+                if(typeof number == 'string') number = number.replace(/[^0-9.\-]/g, '');
                 number = (number*1).toString() * 1;
                 return capitalizeFirstLetter(window.toWords(number) + readDecimalPart(number));
             }
