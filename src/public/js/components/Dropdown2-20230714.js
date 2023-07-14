@@ -125,13 +125,7 @@ const filterDropdown2 = (column_name, dataSource) => {
             const value = filter_values[i]
             dataSource.forEach((row) => {
                 if (row[column] === undefined) {
-                    console.error(
-                        'Column [',
-                        column,
-                        '] in filter_columns not found in',
-                        column_name,
-                        '(Relationships Screen)'
-                    )
+                    console.error('Column [', column, '] in filter_columns not found in', column_name, '(Relationships Screen)')
                     // } else {
                     //     console.log("Column [", column, "] in filter_columns found in", column_name, "(Relationships Screen)");
                 }
@@ -310,6 +304,9 @@ const onChangeDropdown2Expression = (listener) => {
         )
             continue
         let varValue = getEById(varName).val() || 0
+        varValue = varValue.replace(/\,/g, '') * 1  //<<Remove , as the thousand separator
+
+        // console.log(varValue, isNaN(varValue))
         if (varValue && isNaN(varValue)) {
             const includedHour = varValue.includes(':')
             const includedDateSlash = varValue.includes('/')
@@ -318,9 +315,7 @@ const onChangeDropdown2Expression = (listener) => {
                 const datetime = varValue.split(' ')
                 const date = datetime[0]
                 const time = datetime[1]
-                varValue =
-                    getDaysFromDateSlash(date) * 24 * 3600 +
-                    getSecondsFromTime(time)
+                varValue = getDaysFromDateSlash(date) * 24 * 3600 + getSecondsFromTime(time)
             } else {
                 if (includedHour) {
                     varValue = getSecondsFromTime(varValue)

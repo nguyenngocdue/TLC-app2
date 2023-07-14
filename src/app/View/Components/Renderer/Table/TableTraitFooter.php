@@ -19,7 +19,7 @@ trait TableTraitFooter
         $result0 = [];
         $hasFooter = false;
         foreach ($columns as $column) {
-            if (isset($column['invisible'])) continue;
+            if (isset($column['invisible']) && $column['invisible']) continue;
             if (isset($column['footer'])) {
                 $hasFooter = true;
                 $result0[$column['dataIndex']] = $this->makeOneFooter($column, $tableName, $dataSource);
