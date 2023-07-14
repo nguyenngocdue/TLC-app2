@@ -29,6 +29,11 @@
         "column_name": "to_id",
         "new": "true"
     },
+    "_workplace_id": {
+        "name": "_workplace_id",
+        "column_name": "workplace_id",
+        "new": "true"
+    },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
@@ -57,6 +62,11 @@
     "_total_day": {
         "name": "_total_day",
         "column_name": "total_day",
+        "new": "true"
+    },
+    "_total_price": {
+        "name": "_total_price",
+        "column_name": "total_price",
         "new": "true"
     },
     "_remark": {

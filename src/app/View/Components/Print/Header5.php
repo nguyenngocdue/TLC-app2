@@ -74,25 +74,30 @@ class Header5 extends Component
         return "<div class='flex flex-1 justify-center'>
                         <div class='flex flex-col pr-2  font-medium text-base'>
                             <span>Location/Project:</span>
+                            <span>Start Time:</span>
+                            <span>Finish Time:</span>
                             <span>Inspector:</span>
                             <span>Person Incharge:</span>
                         </div>
                         <div class='flex flex-col font-light text-base'>
                             <span>$location</span>
+                            <span>$startTime</span>
+                            <span>$finishTime</span>
                             <span>$inspector</span>
                             <span>$personIncharge</span>
                         </div>
                     </div>
-                    <div class='flex flex-1 justify-center'>
-                        <div class='flex flex-col pr-2  font-medium text-base'>
-                            <span>Start Time:</span>
-                            <span>Finish Time:</span>
-                        </div>
-                        <div class='flex flex-col font-light text-base'>
-                            <span>$startTime</span>
-                            <span>$finishTime</span>
-                        </div>
-                    </div>";
+                    <div class='flex flex-1 justify-center'></div>";
+                    // <div class='flex flex-1 justify-center'>
+                    //     <div class='flex flex-col pr-2  font-medium text-base'>
+                    //         <span>Start Time:</span>
+                    //         <span>Finish Time:</span>
+                    //     </div>
+                    //     <div class='flex flex-col font-light text-base'>
+                    //         <span>$startTime</span>
+                    //         <span>$finishTime</span>
+                    //     </div>
+                    // </div>";
     }
     private function contentHeaderQaqcChecklist(){
         $dataSource = $this->dataSource;

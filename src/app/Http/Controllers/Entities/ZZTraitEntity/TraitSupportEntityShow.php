@@ -204,7 +204,7 @@ trait TraitSupportEntityShow
     private function createDataSourceDescription($value){
         return "<div>
                     <p>{$value->name}</p>
-                    <i class='text-xs'>{$value->description}</i>
+                    <i class='text-sm'>{$value->description}</i>
                 </div>";
     }
 }

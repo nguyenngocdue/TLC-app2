@@ -71,6 +71,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_workplace_id": {
+        "name": "_workplace_id",
+        "column_name": "workplace_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
@@ -134,6 +146,18 @@
     "_total_day": {
         "name": "_total_day",
         "column_name": "total_day",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_total_price": {
+        "name": "_total_price",
+        "column_name": "total_price",
         "label": "",
         "validation": "",
         "validation_regex": "",

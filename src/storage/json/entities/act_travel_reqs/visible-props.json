@@ -49,6 +49,11 @@
         "column_name": "total_travel_day",
         "new": "true"
     },
+    "_total_travel_price": {
+        "name": "_total_travel_price",
+        "column_name": "total_travel_price",
+        "new": "true"
+    },
     "_remark": {
         "name": "_remark",
         "column_name": "remark",
