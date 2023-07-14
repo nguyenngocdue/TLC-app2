@@ -103,7 +103,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 LEFT JOIN (
                     SELECT
                         SUBSTR(hrt.training_datetime, 1, 7) AS hse_month,
-                        COUNT(CASE WHEN hrtl.hr_training_id = 1 THEN hrt.id END) AS hrt_line_count
+                        NULLIF(COUNT(CASE WHEN hrtl.hr_training_id = 1 THEN hrt.id END),0) AS hrt_line_count
                     FROM hr_trainings hrt
                     JOIN hr_training_lines hrtl ON hrtl.hr_training_id = hrt.id
                     WHERE 1 = 1
