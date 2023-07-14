@@ -95,33 +95,39 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
     },
     "act_travel_expense_claimable": {
         "name": "act_travel_expense_claimable",
         "package_tab": "application",
         "package": "finance",
         "sub_package": "hr",
-        "title": "Act Travel Expense Claimable",
-        "nickname": "atec",
+        "title": "Travel Expense Claimables",
+        "nickname": "tec",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
     },
     "act_travel_place": {
         "name": "act_travel_place",
         "package_tab": "application",
         "package": "finance",
         "sub_package": "hr",
-        "title": "Act Travel Place",
-        "nickname": "atp",
+        "title": "Travel Places",
+        "nickname": "tp",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-route\"><\/i>",
+        "hidden": "true",
+        "hidden_navbar": "true"
     },
     "act_travel_req": {
         "name": "act_travel_req",
@@ -147,7 +153,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": null
+        "icon": null,
+        "hidden_navbar": "true"
     },
     "attachment": {
         "name": "attachment",

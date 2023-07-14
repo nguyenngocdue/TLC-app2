@@ -435,6 +435,27 @@ const onChangeSetTableColumn = (listener) => {
     }
 }
 
+const onChangeNumberToWords = (listener) => {
+    // console.log("onChangeNumberToWords", listener)
+    const { triggers, column_name } = listener
+    const number = getValueOfEById(triggers[0])
+    let numberWords = ""
+    if (number) {
+        numberWords = numberToWords(number)
+    }
+
+    const currency = getValueOfEById(triggers[1])
+    let currencyWords = ""
+    if (currency) {
+        const currencyObject = k["act_currencies"].find(i => i['id'] === currency * 1)
+        // console.log(currencyObject)
+        currencyWords = (currencyObject)?.description
+    }
+    // console.log(numberWords)
+    getEById(column_name).val(numberWords + " " + currencyWords)
+    getEById(column_name).trigger('change')
+}
+
 const onChangeDropdown2 = (name) => {
     // const debugFlow = true
     // console.log("onChangeDropdown2", name)
@@ -472,6 +493,10 @@ const onChangeDropdown2 = (name) => {
                 case 'set_table_column':
                     onChangeSetTableColumn(listener)
                     break
+                case 'number_to_words':
+                    onChangeNumberToWords(listener)
+                    break
+
                 default:
                     console.error('Unknown listen_action', listen_action, 'of', name)
                     break
