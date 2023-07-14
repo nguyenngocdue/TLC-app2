@@ -66,6 +66,7 @@
         <script>
             function numberToWords(number){
                 if(typeof number == 'string') number = number.replace(/[^0-9.]/g, '');
+                number = (number*1).toString() * 1;
                 return capitalizeFirstLetter(window.toWords(number) + readDecimalPart(number));
             }
             function capitalizeFirstLetter(str) {
@@ -101,7 +102,7 @@
             };
             return digitsMap[digit];
             }
-            console.log(numberToWords('1,000,000.000001'));
+            console.log(numberToWords('1,000,000.001000'));
         </script>
 </body>
 </html>
