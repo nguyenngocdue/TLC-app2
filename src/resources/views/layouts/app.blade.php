@@ -102,7 +102,6 @@
             };
             return digitsMap[digit];
             }
-            console.log(numberToWords('1,000,000.001000'));
         </script>
 </body>
 </html>
