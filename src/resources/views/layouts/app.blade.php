@@ -74,6 +74,7 @@
             function readDecimalPart(number) {
                 const numberString = number + '';
                 const decimalPart = numberString.split('.')[1];
+                if((decimalPart * 1 == 0)) return '';
                 if (!decimalPart) {
                     return '';
                 }
@@ -100,7 +101,7 @@
             };
             return digitsMap[digit];
             }
-            console.log(numberToWords('1,000,000.123456789'));
+            console.log(numberToWords('1,000,000.000001'));
         </script>
 </body>
 </html>
