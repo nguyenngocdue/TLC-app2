@@ -1,6 +1,10 @@
 <?php
 
 return [
+
+    'prod_sequences' => [
+        'prod_runs' => [],
+    ],
     'eco_sheets' => [
         'eco_effectiveness_lines' => [],
         'eco_taken_actions' => [],
@@ -8,10 +12,10 @@ return [
         'eco_material_impact_adds' => [],
         'eco_material_impact_removes' => [],
     ],
-    'act_travel_expense_claims' =>[
+    'act_travel_expense_claims' => [
         'act_travel_expense_claim_lines' => [],
     ],
-    'act_currency_xrs' =>[
+    'act_currency_xrs' => [
         'act_currency_xr_lines' => [],
     ],
     'act_travel_reqs' => [
@@ -37,9 +41,7 @@ return [
     'qaqc_insp_tmpl_shts' => [
         'qaqc_insp_tmpl_lines' => [],
     ],
-    // 'qaqc_insp_chklsts' => [
-    //     'qaqc_insp_chklst_shts' => [],
-    // ],
+
     'qaqc_insp_chklst_shts' => [
         'qaqc_insp_chklst_lines' => [],
     ],
@@ -49,6 +51,9 @@ return [
     'hse_incident_reports' => [
         'hse_corrective_actions' => [],
     ],
+
+    //** HR */
+
     'hr_overtime_requests' => [
         'hr_overtime_request_lines' => [
             'showBtnAddFromAList' => 1,
@@ -72,6 +77,8 @@ return [
         'ghg_lines' => [],
     ],
 
+    //** UNIT TEST */
+
     'zunit_test_06s' => [
         'prod_discipline_1s' => [],
     ],
@@ -91,4 +98,5 @@ return [
     'zunit_test_19s' => [
         'zunit_test_09s' => [],
     ],
+
 ];

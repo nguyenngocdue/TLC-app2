@@ -26,6 +26,8 @@ return new class extends Migration
             $table->time('start');
             $table->time('end')->nullable();
             $table->double('worker_number')->nullable();
+            $table->double('total_hours')->nullable();
+            $table->double('total_man_hours')->nullable();
             $table->appendCommonFields();
         });
         // Schema::create('prod_runs', function (Blueprint $table) {
