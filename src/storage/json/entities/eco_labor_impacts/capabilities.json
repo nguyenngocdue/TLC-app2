@@ -3,357 +3,306 @@
         "name": "acct_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "acct_manager_nz": {
         "name": "acct_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "acct_member": {
         "name": "acct_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "acct_member_nz": {
         "name": "acct_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "admin": {
         "name": "admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "closed": "true"
+        "new": "true"
     },
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "bd_member": {
         "name": "bd_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "cpl_member": {
         "name": "cpl_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "dc_ho": {
         "name": "dc_ho",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "dc_manager": {
         "name": "dc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "dc_ws": {
         "name": "dc_ws",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "des_manager": {
         "name": "des_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "des_member": {
         "name": "des_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "dir": {
         "name": "dir",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "dir_nz": {
         "name": "dir_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "external_inspector": {
         "name": "external_inspector",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "fac_admin": {
         "name": "fac_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "fin_member_nz": {
         "name": "fin_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "guest": {
         "name": "guest",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "hr_manager": {
         "name": "hr_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "hr_member": {
         "name": "hr_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "hr_member_nz": {
         "name": "hr_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "hse_manager": {
         "name": "hse_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "closed": "true"
+        "new": ""
     },
     "hse_member": {
         "name": "hse_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "closed": "true"
+        "new": ""
     },
     "it_manager": {
         "name": "it_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "it_member": {
         "name": "it_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "mgr_asst_nz": {
         "name": "mgr_asst_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "newcomer": {
         "name": "newcomer",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "pln_admin": {
         "name": "pln_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "proc_manager": {
         "name": "proc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "proc_member": {
         "name": "proc_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "proc_member_nz": {
         "name": "proc_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "prod_manager": {
         "name": "prod_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "prod_manager_nz": {
         "name": "prod_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "prod_member": {
         "name": "prod_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "proj_manager": {
         "name": "proj_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "proj_member": {
         "name": "proj_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "qaqc_manager": {
         "name": "qaqc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "qaqc_member": {
         "name": "qaqc_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "qaqc_member_nz": {
         "name": "qaqc_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "qs_manager": {
         "name": "qs_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "qs_member": {
         "name": "qs_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "qs_member_nz": {
         "name": "qs_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "closed": "true"
+        "new": ""
     },
     "whs_manager": {
         "name": "whs_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "whs_member": {
         "name": "whs_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     },
     "worker": {
         "name": "worker",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "closed": ""
+        "new": ""
     }
 }
