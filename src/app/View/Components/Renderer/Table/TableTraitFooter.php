@@ -24,7 +24,7 @@ trait TableTraitFooter
                 $hasFooter = true;
                 $result0[$column['dataIndex']] = $this->makeOneFooter($column, $tableName, $dataSource);
             } else {
-                $result0[$column['dataIndex']] = "";
+                // $result0[$column['dataIndex']] = "";
             }
         }
         if (!$hasFooter) return;

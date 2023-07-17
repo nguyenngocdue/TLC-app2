@@ -35,9 +35,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_total_uom": {
+        "name": "_total_uom",
+        "column_name": "total_uom",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_uom_id": {
+        "name": "_uom_id",
+        "column_name": "uom_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -66,7 +78,7 @@
         "validation": "required",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "0",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -78,7 +90,7 @@
         "validation": "required",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "0",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -95,21 +107,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_total_uom": {
-        "name": "_total_uom",
-        "column_name": "total_uom",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_uom_id": {
-        "name": "_uom_id",
-        "column_name": "uom_id",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
         "validation": "",
         "validation_regex": "",

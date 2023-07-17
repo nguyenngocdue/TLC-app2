@@ -75,7 +75,7 @@
         "control_name": "getProdRuns",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
+        "renderer_view_all_unit": "line",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
