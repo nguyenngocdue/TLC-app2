@@ -1,0 +1,62 @@
+{
+    "new": {
+        "name": "new",
+        "location": "",
+        "new": "",
+        "in_progress": "true",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": "",
+        "obsolete": ""
+    },
+    "in_progress": {
+        "name": "in_progress",
+        "location": "",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "true",
+        "finished": "true",
+        "cancelled": "true",
+        "obsolete": "true"
+    },
+    "on_hold": {
+        "name": "on_hold",
+        "location": "",
+        "new": "",
+        "in_progress": "true",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": "",
+        "obsolete": ""
+    },
+    "finished": {
+        "name": "finished",
+        "location": "",
+        "new": "",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "",
+        "cancelled": "true",
+        "obsolete": "true"
+    },
+    "cancelled": {
+        "name": "cancelled",
+        "location": "",
+        "new": "",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true",
+        "cancelled": "",
+        "obsolete": "true"
+    },
+    "obsolete": {
+        "name": "obsolete",
+        "location": "",
+        "new": "",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true",
+        "cancelled": "true",
+        "obsolete": ""
+    }
+}
