@@ -19,8 +19,14 @@
         "name": "act_travel_expense_claim_lines",
         "storeEmpty_and_updateShort": "true"
     },
+    "act_travel_expense_claimables": {
+        "name": "act_travel_expense_claimables"
+    },
     "act_travel_expense_claims": {
         "name": "act_travel_expense_claims"
+    },
+    "act_travel_places": {
+        "name": "act_travel_places"
     },
     "act_travel_req_lines": {
         "name": "act_travel_req_lines",
@@ -210,7 +216,8 @@
         "name": "prod_routings"
     },
     "prod_runs": {
-        "name": "prod_runs"
+        "name": "prod_runs",
+        "storeEmpty_and_updateShort": "true"
     },
     "prod_sequences": {
         "name": "prod_sequences"
@@ -300,6 +307,9 @@
     },
     "user_position_pres": {
         "name": "user_position_pres"
+    },
+    "user_sign_in_histories": {
+        "name": "user_sign_in_histories"
     },
     "user_team_ncrs": {
         "name": "user_team_ncrs"
