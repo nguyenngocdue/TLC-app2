@@ -58,12 +58,30 @@ const renderSearchModalHtml = (apps,url) => {
         dataContainer.innerHTML += resultHtml
 
 }
+const matchIconForAction = (action) => {
+    switch (action) {
+        case 'index':
+            icon = '<i class="fa-solid fa-table-cells"></i>';
+            break;
+        case 'show':
+            icon = '<i class="fa-duotone fa-print"></i>';
+            break;
+        case 'edit':
+            icon = '<i class="fa-duotone fa-pen-to-square"></i>'
+            break;
+        default:
+            icon = '<i class="fa-solid fa-question"></i>'
+            break;
+    }
+    return icon;
+
+}
 const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
         dataTopDrawer.innerHTML = ``;
         let htmlButtons = ``;
         let indexButtonTabs = 1;
         buttonTabs.forEach((button) => {
-            const nameButton = capitalize(button);
+            const nameButton = capitalize(button) + 's';
             const isActiveCss = indexButtonTabs == 1 ? 'active' : 'dark:hover:text-gray-300';
             htmlButtons += 
             `<button type="button" class="hs-tab-active:border-blue-500 hs-tab-active:text-blue-600 dark:hs-tab-active:text-blue-600 py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 ${isActiveCss}" id="vertical-tab-with-border-item-${indexButtonTabs}" data-hs-tab="#vertical-tab-with-border-${indexButtonTabs}" aria-controls="vertical-tab-with-border-${indexButtonTabs}" role="tab">
@@ -84,15 +102,19 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
             const subPackage = property
             let html = ``
             recentDoc[property].forEach((item) => {
-                const statusHtml = item.status
-                            ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
+                const entityIdHtml = item.entity_id
+                            ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${item.entity_id}</span>`
                             : ''
+                const iconAction = matchIconForAction(item.action_recent);
+                const actionHtml = item.action_recent ?  `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${iconAction}</span>`
+                : '';
                 html += `<li>
                             <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
-                                    <a href="${item.href}" class="flex flex-1 px-2 items-center ">
+                                    <a href="${item.href_recent}" class="flex flex-1 px-2 items-center ">
                                     ${item.icon ??"<i class='fa-light fa-file'></i>"}
                                 <span class="flex-1 ml-3 whitespace-nowrap">${item.title}</span>
-                                ${statusHtml}
+                                ${actionHtml}
+                                ${entityIdHtml}
                                     </a>
                             </div>
                         </li>`;

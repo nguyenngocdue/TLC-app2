@@ -5,6 +5,7 @@ namespace App\Utils\BookmarkTraits;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\AccessLogger\EntityNameClickCount;
 use App\Utils\AccessLogger\LoggerAccessRecent;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 
 trait TraitFormatBookmarkEntities
@@ -86,6 +87,8 @@ trait TraitFormatBookmarkEntities
             $index = $item->entity_name;
             if(isset($allApps[$index])){
                 $allApps[$index]['href_recent'] = $item->url;
+                $allApps[$index]['action_recent'] = substr($item->route_name, strpos($item->route_name, ".") + 1);
+                $allApps[$index]['entity_id'] = $item->entity_id;
                 return $allApps[$index];
             }
         },$array),fn($item) => $item);
