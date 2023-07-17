@@ -1,0 +1,14 @@
+{
+    "new": {
+        "name": "new",
+        "location": "",
+        "new": "",
+        "closed": "true"
+    },
+    "closed": {
+        "name": "closed",
+        "location": "",
+        "new": "true",
+        "closed": ""
+    }
+}

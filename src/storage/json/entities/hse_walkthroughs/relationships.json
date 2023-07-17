@@ -17,7 +17,7 @@
         "name": "_getAssignee1",
         "relationship": "belongsTo",
         "control_name": "assignee_1",
-        "renderer_view_all": "column",
+        "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
@@ -55,11 +55,11 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getDefMonitors1()": {
-        "name": "_getDefMonitors1()",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
         "relationship": "getCheckedByField",
-        "control_name": "getDefMonitors1()",
-        "renderer_view_all": "column",
+        "control_name": "getMonitors1()",
+        "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",

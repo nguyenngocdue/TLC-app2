@@ -2,8 +2,8 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true",
-        "closed": "true"
+        "new": "",
+        "closed": ""
     },
     "_name": {
         "name": "_name",
@@ -14,8 +14,8 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "new": "true",
-        "closed": "true"
+        "new": "",
+        "closed": ""
     },
     "_injured_person_id": {
         "name": "_injured_person_id",
@@ -80,25 +80,25 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true",
-        "closed": "true"
+        "new": "",
+        "closed": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true",
-        "closed": "true"
+        "new": "",
+        "closed": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true",
-        "closed": "true"
+        "new": "",
+        "closed": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
-        "closed": "true"
+        "new": "",
+        "closed": ""
     }
 }

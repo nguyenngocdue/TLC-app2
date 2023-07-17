@@ -97,7 +97,7 @@
     "_work_area_id": {
         "name": "_work_area_id",
         "column_name": "work_area_id",
-        "column_type": "bigint unsigned",
+        "column_type": "text",
         "label": "Location\/Project",
         "control": "dropdown",
         "align": "",

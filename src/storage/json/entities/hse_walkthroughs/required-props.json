@@ -2,10 +2,10 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_walkthrough_datetime": {
         "name": "_walkthrough_datetime",
@@ -58,10 +58,10 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -82,41 +82,41 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     }
 }
