@@ -11,7 +11,7 @@ class Act_travel_expense_claim extends ModelExtended
         "advance_req_id", "advance_amount", "currency1_id", "currency_pair1_id",
         "rate_exchange_advance", "total_advance_amount", "travel_req_id", "travel_amount",
         "currency2_id", "currency_pair2_id", "rate_exchange_travel", "total_travel_amount", "rate_exchange_month_id",
-        "currency3_id", "total_amount_ee", "total_amount_re", "remark", "assignee_1", "owner_id"
+        "counter_currency_id", "total_amount_ee", "total_amount_re", "remark", "assignee_1", "owner_id"
     ];
     protected $table = "act_travel_expense_claims";
 
@@ -24,7 +24,7 @@ class Act_travel_expense_claim extends ModelExtended
         'getCurrencyPair1' => ['belongsTo', Act_currency_pair::class, 'currency_pair1_id'],
         'getCurrency2' => ['belongsTo', Act_currency::class, 'currency2_id'],
         'getCurrencyPair2' => ['belongsTo', Act_currency_pair::class, 'currency_pair2_id'],
-        'getCurrency3' => ['belongsTo', Act_currency::class, 'currency3_id'],
+        'getCounterCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
 
         'getTravelExpenseClaimLines' => ['hasMany', Act_travel_expense_claim_line::class, 'travel_expense_claim_id'],
         'getRateExchangeMonth' => ['belongsTo', Act_currency_xr::class, 'rate_exchange_month_id'],
@@ -93,7 +93,7 @@ class Act_travel_expense_claim extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getCurrency3()
+    public function getCounterCurrency()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

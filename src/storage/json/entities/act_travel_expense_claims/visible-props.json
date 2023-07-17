@@ -129,9 +129,9 @@
         "column_name": "rate_exchange_month_id",
         "new": "true"
     },
-    "_currency3_id": {
-        "name": "_currency3_id",
-        "column_name": "currency3_id",
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
         "new": "true"
     },
     "_total_amount_ee": {

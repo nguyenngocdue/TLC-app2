@@ -3,306 +3,714 @@
         "name": "acct_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "acct_manager_nz": {
         "name": "acct_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "acct_member": {
         "name": "acct_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "acct_member_nz": {
         "name": "acct_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "admin": {
         "name": "admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "true"
+        "new": "true",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "true",
+        "pending_review": "true",
+        "review_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "active": "true"
     },
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "bd_member": {
         "name": "bd_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "cpl_member": {
         "name": "cpl_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "dc_ho": {
         "name": "dc_ho",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "true",
+        "active": ""
     },
     "dc_manager": {
         "name": "dc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "active": ""
     },
     "dc_ws": {
         "name": "dc_ws",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "des_manager": {
         "name": "des_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "des_member": {
         "name": "des_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "dir": {
         "name": "dir",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "dir_nz": {
         "name": "dir_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "external_inspector": {
         "name": "external_inspector",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "fac_admin": {
         "name": "fac_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "fin_member_nz": {
         "name": "fin_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "guest": {
         "name": "guest",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "hr_manager": {
         "name": "hr_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "hr_member": {
         "name": "hr_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "hr_member_nz": {
         "name": "hr_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "hse_manager": {
         "name": "hse_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "hse_member": {
         "name": "hse_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "it_manager": {
         "name": "it_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "it_member": {
         "name": "it_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "mgr_asst_nz": {
         "name": "mgr_asst_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "newcomer": {
         "name": "newcomer",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "pln_admin": {
         "name": "pln_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "proc_manager": {
         "name": "proc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "proc_member": {
         "name": "proc_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "proc_member_nz": {
         "name": "proc_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "prod_manager": {
         "name": "prod_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "prod_manager_nz": {
         "name": "prod_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "prod_member": {
         "name": "prod_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "proj_manager": {
         "name": "proj_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "proj_member": {
         "name": "proj_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true",
+        "pending_endorsement": "",
+        "endorsement_rejected": "true",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "qaqc_manager": {
         "name": "qaqc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "qaqc_member": {
         "name": "qaqc_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "qaqc_member_nz": {
         "name": "qaqc_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "qs_manager": {
         "name": "qs_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "qs_member": {
         "name": "qs_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "qs_member_nz": {
         "name": "qs_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "whs_manager": {
         "name": "whs_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
     },
     "whs_member": {
         "name": "whs_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "worker": {
         "name": "worker",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     }
 }

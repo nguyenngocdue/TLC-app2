@@ -1,0 +1,82 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_department_id": {
+        "name": "_department_id",
+        "column_name": "department_id",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
+    "_head_count": {
+        "name": "_head_count",
+        "column_name": "head_count",
+        "new": "true"
+    },
+    "_man_day": {
+        "name": "_man_day",
+        "column_name": "man_day",
+        "new": "true"
+    },
+    "_labor_cost": {
+        "name": "_labor_cost",
+        "column_name": "labor_cost",
+        "new": "true"
+    },
+    "_total_cost": {
+        "name": "_total_cost",
+        "column_name": "total_cost",
+        "new": "true"
+    },
+    "_eco_sheet_id": {
+        "name": "_eco_sheet_id",
+        "column_name": "eco_sheet_id",
+        "new": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    }
+}

@@ -1,8 +1,7 @@
 {
     "_address": {
         "name": "_address",
-        "profile_readonly": "true",
-        "me_readonly": "true"
+        "profile_readonly": "true"
     },
     "_attachment": {
         "name": "_attachment",
@@ -131,9 +130,9 @@
     "_id": {
         "name": "_id",
         "profile_readonly": "true",
-        "me_readonly": "true",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_last_date": {
         "name": "_last_date",
@@ -245,6 +244,8 @@
     "_time_zone": {
         "name": "_time_zone",
         "profile_readonly": "true",
+        "profile_hidden": "true",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_title": {
@@ -262,8 +263,8 @@
     "_user_id_passport": {
         "name": "_user_id_passport",
         "profile_readonly": "true",
-        "me_readonly": "true",
-        "profile_hidden": "true"
+        "profile_hidden": "true",
+        "me_readonly": "true"
     },
     "_user_pin": {
         "name": "_user_pin",

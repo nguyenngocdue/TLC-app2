@@ -111,7 +111,16 @@ const onChangeDropdown4Assign = (listener, table01Name, rowIndex, batchLength = 
     if (debugListener) console.log("Assign", listener)
     const { column_name, listen_to_attrs } = listener
     const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
-    const listen_to_attr = listen_to_attrs[0]
+    let listen_to_attr = listen_to_attrs[0]
+
+    //This section allows {currency_pair1_id, currency_pair2_id} to be lookup the value on the form to make it column
+    if (listen_to_attr[0] === "{" && listen_to_attr[listen_to_attr.length - 1] === "}") {
+        listen_to_attr = listen_to_attr.slice(1, -1)
+        // console.log(listen_to_attr)
+        const idToLookUp = makeIdFrom(table01Name, listen_to_attr, rowIndex)
+        listen_to_attr = getValueOfEById(idToLookUp)
+    }
+
     // const listen_to_attr = removeParenthesis(listen_to_attrs[0])
     if (debugListener) console.log("Selected Object:", selectedObject, " - listen_to_attr:", listen_to_attr)
     if (selectedObject !== undefined) {
@@ -205,28 +214,8 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex, batchLengt
         const varName = vars[i]
         if (['Math', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed'].includes(varName)) continue
         const varNameFull = makeIdFrom(table01Name, varName, rowIndex)
-        let varValue = getEById(varNameFull).val() || 0
-        if (varValue && isNaN(varValue)) {
-            const includedHour = varValue.includes(':')
-            const includedDateSlash = varValue.includes('/')
-            const includedDateDash = varValue.includes('-')
-            if (includedHour && includedDateSlash) {
-                const datetime = varValue.split(" ")
-                const date = datetime[0]
-                const time = datetime[1]
-                varValue = getDaysFromDateSlash(date) * 24 * 3600 + getSecondsFromTime(time)
-            }
-            else {
-                if (includedHour) {
-                    varValue = getSecondsFromTime(varValue)
-                } else if (includedDateSlash) {
-                    varValue = getDaysFromDateSlash(varValue) * 24 * 3600
-                } else if (includedDateDash) {
-                    varValue = getDaysFromDateDash(varValue) * 24 * 3600
-                }
-            }
-            if (debugListener) console.log(varName, varValue)
-        }
+        let varValue = (getEById(varNameFull).val() || 0) + '' //<< toString
+        varValue = convertStrToNumber(varValue)
 
         if (debugListener) console.log(varName, "=", varValue)
         expression1 = expression1.replace(varName, varValue)

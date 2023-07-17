@@ -1,4 +1,19 @@
 {
+    "_rate_exchange": {
+        "name": "_rate_exchange",
+        "column_name": "rate_exchange",
+        "listen_action": "assign",
+        "triggers": "currency_pair_id,rate_exchange_month_id",
+        "listen_to_fields": "rate_exchange_month_id",
+        "listen_to_attrs": "{currency_pair_id}",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_total_amount": {
         "name": "_total_amount",
         "column_name": "total_amount",
@@ -24,6 +39,21 @@
         "columns_to_set": "",
         "attrs_to_compare": "",
         "expression": "(total_amount * rate_exchange).toFixed(6)",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_currency_pair_id": {
+        "name": "_currency_pair_id",
+        "column_name": "currency_pair_id",
+        "listen_action": "reduce",
+        "triggers": "currency_id,counter_currency_id",
+        "listen_to_fields": "currency_pair_id,currency_pair_id",
+        "listen_to_attrs": "base_currency_id,counter_currency_id",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
         "ajax_item_attributes": "",
@@ -134,9 +164,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_currency_pair_id": {
-        "name": "_currency_pair_id",
-        "column_name": "currency_pair_id",
+    "_rate_exchange_month_id": {
+        "name": "_rate_exchange_month_id",
+        "column_name": "rate_exchange_month_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -149,9 +179,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_rate_exchange": {
-        "name": "_rate_exchange",
-        "column_name": "rate_exchange",
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

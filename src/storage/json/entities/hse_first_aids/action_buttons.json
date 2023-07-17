@@ -1,0 +1,12 @@
+{
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": ""
+    },
+    "closed": {
+        "name": "closed",
+        "label": "Close",
+        "tooltip": ""
+    }
+}
