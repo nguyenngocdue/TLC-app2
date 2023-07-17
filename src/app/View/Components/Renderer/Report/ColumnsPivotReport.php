@@ -131,10 +131,11 @@ trait  ColumnsPivotReport
     {
         $tableDataHeader = [];
         $columnsOfColumnFields = [];
-        // if (count($columnFields) <= 2) {
+
         if (isset($dataOutput[0]['info_column_field'])) {
             $info = $dataOutput[0]['info_column_field'];
             $arrayInfo = array_merge(...array_merge(...array_values($info)));
+            // dd($info);
             foreach ($arrayInfo as $key => $value) {
                 $title = substr($key, 0, strpos($key, '_'));
                 $indexTitle = $info[$title];
@@ -194,6 +195,7 @@ trait  ColumnsPivotReport
     {
         $matchingItems = [];
         foreach ($data as $item) {
+            if(!isset($item[$key])) continue;
             if ($item[$key] === $targetValue) {
                 $matchingItems[] = $item;
             }

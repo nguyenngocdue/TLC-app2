@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models;
+
+use App\BigThink\ModelExtended;
+
+class User_sign_in_history extends ModelExtended
+{
+    protected $fillable = ["name", "description", "ip_address","owner_id","time"];
+    protected $table = 'user_sign_in_histories';
+    protected static $statusless = true;
+
+    public static $eloquentParams = [
+    ];
+}

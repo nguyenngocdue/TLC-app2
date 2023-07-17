@@ -19,7 +19,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
     use TraitDataModesReport;
     protected $maxH = 50;
     protected $mode = '100';
-    protected $rotate45Width = 300;
+    #protected $rotate45Width = 300;
     protected $libPivotFilters;
 
     public function getSqlStr($modeParams)
@@ -31,11 +31,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         $sql = "SELECT
                     tsl.project_id AS project_id,
                     DATE(tsl.start_time) AS time_sheet_start_time,
-                    DATE(tsl.start_time) AS time_sheet_start_time_otr,
-                    DATE(tsl.start_time) AS time_sheet_start_time_wfh,
                     SUM(tsl.duration_in_min) AS time_sheet_durations,
-                    SUM(0) AS time_sheet_hours_otr,
-                    SUM(0) AS time_sheet_hours_wfh,
                     SUM(tsl.ts_hour) AS time_sheet_hours,
 
                     tsl.sub_project_id AS sub_project_id,
@@ -231,11 +227,11 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                 "title" => "Date",
                 "dataIndex" => "time_sheet_start_time",
                 "align" => 'left',
-                "width" => 200,
+                "width" => 300,
             ],
             [
-                "title" => "Hours",
-                "dataIndex" => "time_sheet_hours",
+                "title" => "Duration (min)",
+                "dataIndex" => "time_sheet_durations",
                 "align" => 'right',
                 "width" => 50,
             ]

@@ -21,10 +21,10 @@ return new class extends Migration
 
         $schema->create('user_sign_in_histories', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('ip_address');
-            $table->unsignedBigInteger('uid');
+            // $table->unsignedBigInteger('uid');
             $table->dateTime('time');
             $table->appendCommonFields();
         });
