@@ -27,10 +27,9 @@ class PivotReport
         return $dataOutput;
     }
 
-    private static function transferValueOfKeys($data, $columnFields, $propsColumnField, $valueIndexFields)
+    private static function transferValueOfKeys($data, $columnFields, $propsColumnField)
     {
-        // dd($propsColumnField);
-        $newArray = array_map(function ($item) use ($propsColumnField, $valueIndexFields) {
+        $newArray = array_map(function ($item) use ($propsColumnField) {
             $dateItems = [];
             $dt = [];
             foreach ($propsColumnField as $values) {
@@ -46,9 +45,6 @@ class PivotReport
 
                             $key = str_replace(' ', '_', strtolower($item[$values['field_index']]));
                             $dateItems[$_strDate] = array_merge($dt, [$values['value_field_index'] => $item[$values['value_field_index']]]);
-                            // $dt = [$values['value_field_index'] => $item[$values['value_field_index']]];
-
-                            // dump($type, $values['field_index']);
                             break;
                         default:
                             $key = str_replace(' ', '_', strtolower($item[$values['field_index']]));
@@ -56,7 +52,8 @@ class PivotReport
                             break;
                     }
                 } catch (Exception $e) {
-                    dd($e->getMessage(), $values);
+                        continue;
+                    // dd($e->getMessage(), $values);
                 }
             }
             return $dateItems;
@@ -64,7 +61,6 @@ class PivotReport
         
         $newArray = self::sumItemsInArray($newArray);
         $newArray = self::concatKeyAndValueOfArray($newArray);
-        // dump($newArray);
         // Check items that were duplicated in Column_Field column
         if (self::hasDuplicates($columnFields)) {
             $newColumnFields = self::markDuplicatesAndGroupKey($columnFields);
@@ -303,7 +299,7 @@ class PivotReport
         $data = array_map(
             fn ($items) => array_map(
                 fn ($array) =>
-                self::transferValueOfKeys($array, $columnFields, $propsColumnField, $valueIndexFields),
+                self::transferValueOfKeys($array, $columnFields, $propsColumnField),
                 $items
             ),
             $dataSource

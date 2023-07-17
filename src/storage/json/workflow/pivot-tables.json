@@ -153,10 +153,21 @@
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms,\r\n pj_tasks",
         "sort_by": null
     },
+    "hr_timesheet_line_project_date": {
+        "name": "hr_timesheet_line_project_date",
+        "filters": "workplace_id, department_id",
+        "row_fields": "sub_project_id(sub_projects.name),\r\nlod_id(terms.name),\r\ndepartment_id(departments.name),\r\nstaff_id,\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),\r\ndiscipline_id(user_disciplines.name),\r\npj_task_id(pj_tasks.name)",
+        "column_fields": "time_sheet_start_time",
+        "value_index_fields": "time_sheet_durations",
+        "data_aggregations": "sum",
+        "data_fields": "time_sheet_durations",
+        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms,\r\n pj_tasks,\r\ndepartments,\r\nuser_disciplines",
+        "sort_by": null
+    },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",
         "filters": "workplace_id, department_id",
-        "row_fields": "sub_project_id(sub_projects.name)",
+        "row_fields": "sub_project_id(sub_projects.name),",
         "column_fields": "ts_date{Hello 1}, ts_date,\r\nts_date{Hello World}",
         "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours,\r\ntime_sheet_hours,",
         "data_aggregations": "sum,sum,sum",

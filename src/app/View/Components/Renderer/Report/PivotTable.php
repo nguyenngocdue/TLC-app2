@@ -32,6 +32,7 @@ class PivotTable extends Component
         foreach ($processedData as $k1 => $items) {
             foreach ($items as $k2 => $item) {
                 $dt = isset($calculatedData[$k1][$k2]) ? $calculatedData[$k1][$k2] : [];
+                // $dt2 = isset($transferredData[$k1][$k2]) ?$transferredData[$k1][$k2] : [];
                 $dataOutput[] = array_merge($dt, reset($item), $transferredData[$k1][$k2]);
             };
         }
@@ -41,13 +42,13 @@ class PivotTable extends Component
             }, $dataOutput);
             return $data1;
         }
+        // dd($dataOutput);
+        // dd($processedData, $calculatedData, $transferredData, $rowFields, $dataOutput);
         return $dataOutput;
     }
 
-    private function getDataFromTables()
+    private function getDataFromTables($tableIndex)
     {
-        $lib = LibPivotTables::getFor($this->key);
-        $tableNames = $lib['lookup_tables'] ?? [];
         $dataTables = array_merge(...array_map(function ($name) {
             try {
                 $array = DB::table($name)->select('id', 'name', 'description')->get()->toArray();
@@ -58,8 +59,7 @@ class PivotTable extends Component
                 $array = array_combine(array_column($array, 'id'), $array);
                 return [$name => $array];
             }
-        }, $tableNames));
-        // dump($tableNames);
+        }, $tableIndex));
         return $dataTables;
     }
 
@@ -213,13 +213,13 @@ class PivotTable extends Component
 
     private function makeDataRenderer($primaryData)
     {
-        [$rowFields,, $filters, $propsColumnField,, $dataAggregations,,, $valueIndexFields, $columnFields, $infoColumnFields] =  $this->getDataFields();
-        $valueFilters = count($filters)  ? array_combine($filters, [[1, 4], [7, 8]]) : [];
+        [$rowFields, $bidingRowFields, $filters, $propsColumnField, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields, $columnFields, $infoColumnFields, $tableIndex] =  $this->getDataFields();
+        $valueFilters = count($filters)  ? array_combine($filters, [[1,4,2,3], [7,8,9,10]]) : [];
         // Step 1: reduce lines from Filters array
         if(is_object($primaryData)) $primaryData = array_map(fn($item) => (array)$item, $primaryData->toArray());
         $linesData = $primaryData;
         $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $valueFilters);
-        // dd($valueFilters, $dataReduce);
+        // dd($valueFilters, $dataReduce, $linesData);
 
 
         // dump($columnFields);
@@ -229,28 +229,31 @@ class PivotTable extends Component
         } else {
             $processedData = PivotReport::groupBy($dataReduce, $rowFields);
         }
-        // dump($processedData, $propsColumnField);
+        // dump($processedData);
 
         //Remove all array keys by looping through all elements
         $fieldsNeedToSum = $this->getFieldNeedToSum($propsColumnField);
         $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $fieldsNeedToSum), $processedData));
-        // dd($processedData, $propsColumnField);
+        // dd($processedData, $fieldsNeedToSum);
+        // dump($processedData);
+
 
         // Step 3: transfer data from lines to columns by
         // Column_Fields and Value_Index_Fields array 
         $transferredData = PivotReport::transferData($processedData, $columnFields, $propsColumnField, $valueIndexFields);
-        // dd($transferredData);
+        // dump($transferredData);
 
         //Step 4: Calculate data from Data Fields columns
         //The aggregated data are at the end of the items
         $calculatedData = PivotReportDataFields::executeOperations($dataAggregations, $processedData, $rowFields);
+        // dump($calculatedData);
 
         $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData, $rowFields, $columnFields);
         // dd($dataIdsOutput);
 
-        $tables = $this->getDataFromTables();
+        $tables = $this->getDataFromTables($tableIndex);
         $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput);
-        // dd($dataOutput);
+        // dd($dataOutput, $tables);
 
         $dataOutput = $this->makeTopTitle($dataOutput, $rowFields, $columnFields);
         // dd($dataOutput);
@@ -270,7 +273,8 @@ class PivotTable extends Component
             $dataOutput[0]["info_column_field"] = $infoColumnFields;
         }
         $dataOutput = $this->updateResultOfAggregations($columnFields, $dataAggregations, $dataOutput);
-        // dump($dataOutput);
+        // dd($dataOutput);
+        
         return $dataOutput;
     }
 

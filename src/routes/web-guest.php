@@ -24,6 +24,7 @@ use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_project_not_
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_project_date;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_team_date;
 use App\Http\Controllers\WelcomeFortuneController;
+use App\View\Components\Renderer\Report\PivotTables\PivotReport_Hr_timesheet_line_project_date;
 use Illuminate\Support\Facades\Route;
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
@@ -49,6 +50,12 @@ Route::resource('welcome-due-empty_input', WelcomeDueController_apple_store_empt
 Route::resource('welcome-due-employee_project_not_table_information', WelcomeDueController_hr_timesheet_employee_project_not_table_information::class)->only('index');
 Route::resource('welcome-due-employee_project_change_data_field_title', WelcomeDueController_hr_timesheet_employee_project_change_data_field_title::class)->only('index');
 Route::resource('welcome-due-apple_store_test_code', WelcomeDueController_apple_store_test_code::class)->only('index');
+// Pivot table
+Route::resource('pivot-report-hr_timesheet_line_project_date', PivotReport_Hr_timesheet_line_project_date::class)->only('index');
+
+
+
+
 
 Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 
