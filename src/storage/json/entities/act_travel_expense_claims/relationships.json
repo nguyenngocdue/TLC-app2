@@ -97,10 +97,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getRateExchangeMonth": {
-        "name": "_getRateExchangeMonth",
+    "_getCounterCurrency": {
+        "name": "_getCounterCurrency",
         "relationship": "belongsTo",
-        "control_name": "rate_exchange_month_id",
+        "control_name": "counter_currency_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
@@ -111,10 +111,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getCurrency3": {
-        "name": "_getCurrency3",
+    "_getRateExchangeMonth": {
+        "name": "_getRateExchangeMonth",
         "relationship": "belongsTo",
-        "control_name": "counter_currency_id",
+        "control_name": "rate_exchange_month_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
