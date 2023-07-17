@@ -1,4 +1,4 @@
-<div class="fixed right-5 bottom-5">
+<div class="fixed right-5 bottom-5 no-print">
     <x-renderer.button id="go-to-top-button" onClick="goToTopFunction()" size="md" type="info">
         <i class="fa-solid fa-arrow-up"></i>
     </x-renderer.button>

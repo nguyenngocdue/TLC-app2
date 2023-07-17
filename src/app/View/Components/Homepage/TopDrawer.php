@@ -37,7 +37,7 @@ class TopDrawer extends Component
     }
     private function buttonTabs($allAppsTopDrawer){
         $buttonTabs = array_unique(array_column($allAppsTopDrawer,'package_tab'));
-        array_unshift($buttonTabs,'recent_document');
-        return $buttonTabs;
+        array_push($buttonTabs,'recent_document');
+        return array_values($buttonTabs);
     }
 }

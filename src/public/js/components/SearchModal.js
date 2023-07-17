@@ -66,7 +66,7 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
             const nameButton = capitalize(button);
             const isActiveCss = indexButtonTabs == 1 ? 'active' : 'dark:hover:text-gray-300';
             htmlButtons += 
-            `<button type="button" class="hs-tab-active:border-blue-500 hs-tab-active:text-blue-600 dark:hs-tab-active:text-blue-600 py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 ${isActiveCss}" id="vertical-tab-with-border-item-${indexButtonTabs}" data-hs-tab="#vertical-tab-with-border-${indexButtonTabs}" aria-controls="vertical-tab-with-border-1" role="tab">
+            `<button type="button" class="hs-tab-active:border-blue-500 hs-tab-active:text-blue-600 dark:hs-tab-active:text-blue-600 py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 ${isActiveCss}" id="vertical-tab-with-border-item-${indexButtonTabs}" data-hs-tab="#vertical-tab-with-border-${indexButtonTabs}" aria-controls="vertical-tab-with-border-${indexButtonTabs}" role="tab">
              ${nameButton}
             </button>`
             indexButtonTabs++;
@@ -79,6 +79,7 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
         </div>
         `
         let htmlProperty = ``;
+        const lastIndexButtonRecent = buttonTabs.length;
         for (const property in recentDoc) {
             const subPackage = property
             let html = ``
@@ -101,11 +102,11 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
                                     ${html}
                                 </ul>`;
         }
-        var htmlRecentDoc = `<div id="vertical-tab-with-border-1" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-1">
-                        ${htmlProperty}
-                </div>`
+        var htmlRecentDoc = `<div id="vertical-tab-with-border-${lastIndexButtonRecent}" class="hidden" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-${lastIndexButtonRecent}">
+                                ${htmlProperty}
+                            </div>`
         let resultHtmlTopDrawer = ``
-        let indexTabs = 2;
+        let indexTabs = 1;
         for (const app_index in appsRender) {
             let resultHtml = ``
             const apps = appsRender[app_index]
@@ -222,7 +223,8 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
                                             ${htmlGroup}
                                 </div>`
             }
-            resultHtmlTopDrawer += `<div id="vertical-tab-with-border-${indexTabs}" class="hidden" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-${indexTabs}">
+            const isHiddenCss = indexTabs !== 1 ?  'hidden' : '';
+            resultHtmlTopDrawer += `<div id="vertical-tab-with-border-${indexTabs}" class="${isHiddenCss}" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-${indexTabs}">
                                         <div class="grid grid-rows-auto grid-flow-col">
                                             <div class='xl:flex flex-wrap'>${resultHtml}</div>
                                         </div>
@@ -233,8 +235,8 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
         dataTopDrawer.innerHTML += `<div class="flex flex-wra1p">
                                         ${htmlButtonTabs}
                                         <div class="ml-3 overflow-x-auto">
-                                        ${htmlRecentDoc}
                                         ${resultHtmlTopDrawer} 
+                                        ${htmlRecentDoc}
                                         </div>
                                     </div>`;
    
