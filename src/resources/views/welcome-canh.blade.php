@@ -3,38 +3,38 @@
 @section('title', '')
 
 @section('content')
-<div>
-  
-  <form class="w-1/3 mb-5" method="POST" action="{{route('updateUserSettings')}}">
-    @method('PUT')
-    @csrf
-    <input type="hidden" name='action' value="updateShowOptionsOrgChart">
-    <x-renderer.card title="Shows">
-      <div class="flex justify-between">
-        <div>
-          <label for="">Resigned</label>
-          <x-renderer.editable.checkbox name="show_options[resigned]" cell="{{$showOptions['resigned'] ?? ''}}"></x-renderer.editable.checkbox>
-          <label for="">Worker</label>
-          <x-renderer.editable.checkbox name="show_options[time_keeping_type]" cell="{{$showOptions['time_keeping_type'] ?? ''}}"></x-renderer.editable.checkbox>
-        </div>
-        <x-renderer.button htmlType='submit'>Save</x-renderer.button>
-      </div>
-    </x-renderer.card>
-  </form>
-  <script src="{{ asset('js/go_debug@2.3.8.js') }}"></script>
-  <div id="myDiagramDiv" class="w-full h-screen" style="border: 1px solid black; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);">
-    <canvas tabindex="0"  111 class="w-full h-screen" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none;">This text is displayed if your browser does not support the Canvas HTML element.</canvas>
-    {{-- <div style="position: absolute; overflow: auto; width: 398px; height: 398px; z-index: 1;">
-      <div style="position: absolute; width: 1px; height: 1px;">JS ERROR</div>
-    </div> --}}
+{{-- <div class="flex flex-wrap">
+  <div class="border-r border-gray-200 dark:border-gray-700">
+    <nav class="flex flex-col space-y-2" aria-label="Tabs" role="tablist" data-hs-tabs-vertical="true">
+      <button type="button" class="hs-tab-active:border-blue-500 hs-tab-active:text-blue-600 dark:hs-tab-active:text-blue-600 py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 active" id="vertical-tab-with-border-item-1" data-hs-tab="#vertical-tab-with-border-1" aria-controls="vertical-tab-with-border-1" role="tab">
+        Tab 1
+      </button>
+      <button type="button" class="hs-tab-active:border-blue-500 hs-tab-active:text-blue-600 dark:hs-tab-active:text-blue-600 py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 dark:hover:text-gray-300" id="vertical-tab-with-border-item-2" data-hs-tab="#vertical-tab-with-border-2" aria-controls="vertical-tab-with-border-2" role="tab">
+        Tab 2
+      </button>
+      <button type="button" class="hs-tab-active:border-blue-500 hs-tab-active:text-blue-600 dark:hs-tab-active:text-blue-600 py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 dark:hover:text-gray-300" id="vertical-tab-with-border-item-3" data-hs-tab="#vertical-tab-with-border-3" aria-controls="vertical-tab-with-border-3" role="tab">
+        Tab 3
+      </button>
+    </nav>
   </div>
-  
-  <script>
-    nodeDataArray = @json($dataSource);
-  </script>
-<script src="{{ asset('js/welcome-canh.js') }}">
-</script>
-</body>
-</div>
+
+  <div class="ml-3">
+    <div id="vertical-tab-with-border-1" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-1">
+      <p class="text-gray-500 dark:text-gray-400">
+        This is the <em class="font-semibold text-gray-800 dark:text-gray-200">first</em> item's tab body.
+      </p>
+    </div>
+    <div id="vertical-tab-with-border-2" class="hidden" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-2">
+      <p class="text-gray-500 dark:text-gray-400">
+        This is the <em class="font-semibold text-gray-800 dark:text-gray-200">second</em> item's tab body.
+      </p>
+    </div>
+    <div id="vertical-tab-with-border-3" class="hidden" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-3">
+      <p class="text-gray-500 dark:text-gray-400">
+        This is the <em class="font-semibold text-gray-800 dark:text-gray-200">third</em> item's tab body.
+      </p>
+    </div>
+  </div>
+</div> --}}
 
 @endsection

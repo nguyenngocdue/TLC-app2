@@ -9,7 +9,7 @@
     "approval_rejected": {
         "name": "approval_rejected",
         "title": "Approval Rejected",
-        "color": "orange",
+        "color": "red",
         "color_index": "200",
         "icon": null
     },
@@ -86,7 +86,7 @@
     "endorsement_rejected": {
         "name": "endorsement_rejected",
         "title": "Endorsement Rejected",
-        "color": "orange",
+        "color": "purple",
         "color_index": "200",
         "icon": null
     },
@@ -275,7 +275,7 @@
     "review_rejected": {
         "name": "review_rejected",
         "title": "Review Rejected",
-        "color": "red",
+        "color": "cyan",
         "color_index": "200",
         "icon": null
     },
@@ -338,7 +338,7 @@
     "verification_rejected": {
         "name": "verification_rejected",
         "title": "Verification Rejected",
-        "color": "red",
+        "color": "purple",
         "color_index": "200",
         "icon": null
     },

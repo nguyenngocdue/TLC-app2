@@ -307,6 +307,8 @@ class RelationshipRenderer2 extends Component
                     'userId' => CurrentUser::get()->id,
                     'entityProjectId' => $itemOriginal['project_id'] ?? null,
                     'entitySubProjectId' => $itemOriginal['sub_project_id'] ?? null,
+                    // 'entityCurrencyMonth' => $itemOriginal['rate_exchange_month_id'] ?? null,
+                    // 'entityCurrencyExpected' => $itemOriginal['counter_currency_id'] ?? null,
 
                     'noCss' => $this->noCss,
 

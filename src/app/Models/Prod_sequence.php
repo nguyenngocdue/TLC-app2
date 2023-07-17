@@ -82,8 +82,8 @@ class Prod_sequence extends ModelExtended
             ["dataIndex" => "prod_routing_link_id", "title" => "Prod Routing ID", "rendererParam" => "id"],
             ["dataIndex" => "prod_routing_link_id",  "title" => "Prod Routing Name (*)", "rendererParam" => "name"],
 
-            ["dataIndex" => "expected_start_at",],
-            ["dataIndex" => "expected_finish_at",],
+            // ["dataIndex" => "expected_start_at",],
+            // ["dataIndex" => "expected_finish_at",],
 
             ["dataIndex" => "total_hours",],
             ["dataIndex" => "total_man_hours", "title" => "Total ManHours",],

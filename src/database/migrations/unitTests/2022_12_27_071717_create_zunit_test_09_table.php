@@ -27,8 +27,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_2')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('user_3')->nullable();
-            $table->date('ot_date_1')->nullable();
-            $table->float('remaining_hours')->nullable();
+
+            // $table->date('ot_date_1')->nullable();
+            // $table->float('remaining_hours')->nullable();
             //Reduce 1111
             $table->unsignedBigInteger('project_1')->nullable();
             $table->unsignedBigInteger('sub_project_1')->nullable();
@@ -39,7 +40,7 @@ return new class extends Migration
             $table->unsignedBigInteger('currency_pair1_id')->nullable();
             $table->unsignedBigInteger('currency2_id')->nullable();
             $table->unsignedBigInteger('currency_pair2_id')->nullable();
-            $table->unsignedBigInteger('currency3_id')->nullable();
+            $table->unsignedBigInteger('counter_currency_id')->nullable();
             //Assign
             $table->unsignedBigInteger('prod_discipline_1')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();

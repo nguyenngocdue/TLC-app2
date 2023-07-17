@@ -4,7 +4,7 @@
         $tr_td = preg_replace('/<tr class=\'.*?\'/', "<tr class='border border-gray-400'", $tr_td);
     @endphp
     <table class="w-full min-w-full max-w-full">
-        <thead>{!! $columnsRendered !!}</thead>
+        <thead><tr class="text-center 456">{!! $columnsRendered !!}</tr></thead>
         <tbody>{!! $tr_td !!}</tbody>
     </table>
 @else

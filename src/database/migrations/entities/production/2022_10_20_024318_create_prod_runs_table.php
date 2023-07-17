@@ -22,10 +22,12 @@ return new class extends Migration
         $schema->create('prod_runs', function (BlueprintExtended $table) {
             $table->id();
             $table->unsignedBigInteger('prod_sequence_id');
-            $table->date('date');
-            $table->time('start');
+            $table->date('date')->nullable();
+            $table->time('start')->nullable();
             $table->time('end')->nullable();
             $table->double('worker_number')->nullable();
+            $table->double('total_hours')->nullable();
+            $table->double('total_man_hours')->nullable();
             $table->appendCommonFields();
         });
         // Schema::create('prod_runs', function (Blueprint $table) {

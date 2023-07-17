@@ -173,7 +173,7 @@
         "toggle": "",
         "new": "",
         "active": "",
-        "pending_ack": "",
+        "pending_ack": "true",
         "pending_review": "",
         "review_rejected": "",
         "pending_verification": "",
@@ -505,6 +505,18 @@
     },
     "qaqc_member": {
         "name": "qaqc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "",

@@ -39,11 +39,11 @@
         "name": "_name",
         "column_name": "name",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "",
+        "label_extra": "Ti\u00eau \u0111\u1ec1",
         "placeholder": "",
         "control_extra": ""
     },
@@ -59,15 +59,15 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getDefMonitors1()": {
-        "name": "_getDefMonitors1()",
-        "column_name": "getDefMonitors1()",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "Th\u00e0nh ph\u1ea7n tham d\u1ef1",
+        "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
@@ -89,7 +89,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "",
+        "formula": "All_SlugifyByName",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -103,7 +103,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "",
+        "label_extra": "Ng\u01b0\u1eddi duy\u1ec7t",
         "placeholder": "",
         "control_extra": ""
     },

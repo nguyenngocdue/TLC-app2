@@ -260,7 +260,7 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
-        "placeholder": "",
+        "placeholder": "Please enter number if issue category is Incident",
         "control_extra": ""
     },
     "_number_injured_person": {

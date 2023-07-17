@@ -71,4 +71,6 @@
     <input class="bg-gray-200" readonly title="currentUserId" id="currentUserId" value="{{$userId}}" type="{{$tableDebugTextHidden}}" />
     <input class="bg-gray-200" readonly title="entityProjectId" id="entityProjectId" value="{{$entityProjectId}}" type="{{$tableDebugTextHidden}}" />
     <input class="bg-gray-200" readonly title="entitySubProjectId" id="entitySubProjectId" value="{{$entitySubProjectId}}" type="{{$tableDebugTextHidden}}" />
+    {{-- <input class="bg-gray-200" readonly title="entityCurrencyMonth" id="entityCurrencyMonth" value="{{$entityCurrencyMonth}}" type="{{$tableDebugTextHidden}}" /> --}}
+    {{-- <input class="bg-gray-200" readonly title="entityCurrencyExpected" id="entityCurrencyExpected" value="{{$entityCurrencyExpected}}" type="{{$tableDebugTextHidden}}" /> --}}
 @endonce

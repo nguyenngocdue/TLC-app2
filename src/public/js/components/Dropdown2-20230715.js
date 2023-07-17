@@ -3,11 +3,7 @@ let k = {},
     filtersOfDropdown2 = [],
     debugListener = false,
     debugFlow = false
-const makeIdForNumber = (n) =>
-    '#' +
-    String(n).padStart(6, '0').substring(0, 3) +
-    '.' +
-    String(n).padStart(6, '0').substring(3)
+const makeIdForNumber = (n) => '#' + String(n).padStart(6, '0').substring(0, 3) + '.' + String(n).padStart(6, '0').substring(3)
 const makeId = (n) => (isNaN(n) ? '' : makeIdForNumber(n))
 const select2FormatState = (state) => !state.id ? state.text : $(
     `<div class="flex justify-between px-1"><span>${state.text
@@ -15,20 +11,14 @@ const select2FormatState = (state) => !state.id ? state.text : $(
     }</span></div>`
 )
 const getEById = (id) => $("[id='" + id + "']")
-const dumbIncludes2 = (array, item) => {
-    for (let i = 0; i < array.length; i++) {
-        if (array[i] == item) return true
-    }
-    return false
-}
+const dumbIncludes2 = (array, item) => { for (let i = 0; i < array.length; i++) { if (array[i] == item) return true } return false }
 const getIsMultipleOfE = (id) => (getEById(id)[0]) ? getEById(id)[0].hasAttribute('multiple') : false
 const getControlTypeOfE = (id) => getEById(id).attr('controlType')
 const getAllowClear = (id) => !!(getEById(id).attr('allowClear') === 'true')
 const getColSpanOfE = (id) => getEById(id).attr('colSpan')
 const getReadOnlyOfE = (id) => getEById(id).attr('readOnly')
 const getAllVariablesFromExpression = (str) => {
-    const regex = new RegExp('[a-zA-Z_]+[a-zA-Z0-9]*', 'gm'),
-        result = []
+    const regex = new RegExp('[a-zA-Z_]+[a-zA-Z0-9]*', 'gm'), result = []
     let m
     while ((m = regex.exec(str)) !== null) {
         // This is necessary to avoid infinite loops with zero-width matches
@@ -41,18 +31,13 @@ const getAllVariablesFromExpression = (str) => {
 const getSecondsFromTime = (hms) => {
     var a = hms.split(':') // split it at the colons
     switch (a.length) {
-        case 1:
-            return +a[0]
-        case 2:
-            return +a[0] * 60 * 60 + +a[1] * 60 // HH:MM
-        case 3:
-            return +a[0] * 60 * 60 + +a[1] * 60 + +a[2]
+        case 1: return +a[0]
+        case 2: return +a[0] * 60 * 60 + +a[1] * 60 // HH:MM
+        case 3: return +a[0] * 60 * 60 + +a[1] * 60 + +a[2]
     }
 }
-const getDaysFromDateSlash = (dmy) =>
-    moment(dmy, 'DD/MM/YYYY').diff(moment('1970-01-01'), 'days')
-const getDaysFromDateDash = (dmy) =>
-    moment(dmy, 'YYYY-MM-DD').diff(moment('1970-01-01'), 'days')
+const getDaysFromDateSlash = (dmy) => moment(dmy, 'DD/MM/YYYY').diff(moment('1970-01-01'), 'days')
+const getDaysFromDateDash = (dmy) => moment(dmy, 'YYYY-MM-DD').diff(moment('1970-01-01'), 'days')
 const getValueOfEById = (id) => {
     const isMultipleOfE = getIsMultipleOfE(id)
     const controlType = getControlTypeOfE(id)
@@ -113,6 +98,46 @@ const setValueOfEById = (id, value) => {
 }
 // const removeParenthesis = (str) => (str.includes("()")) ? str.substring(0, str.length - 2) : str
 
+const convertStrToNumber = (varValue) => {
+    const debugListener = false
+    let type = "normal_number"
+    if (varValue.includes(",")) type = "number_with_commas"
+    else if (isNaN(varValue)) type = "datetime_string"
+
+    // console.log(varValue, isNaN(varValue))
+    if (varValue) {
+        switch (type) {
+            case "normal_number": break
+            case "number_with_commas":
+                varValue = (varValue + '').replace(/\,/g, '') * 1  //<<Remove all "," as the thousand separator
+                break
+            case "datetime_string":
+                const includedHour = varValue.includes(':')
+                const includedDateSlash = varValue.includes('/')
+                const includedDateDash = varValue.includes('-')
+                if (includedHour && includedDateSlash) {
+                    const datetime = varValue.split(' ')
+                    const date = datetime[0]
+                    const time = datetime[1]
+                    varValue = getDaysFromDateSlash(date) * 24 * 3600 + getSecondsFromTime(time)
+                } else {
+                    if (includedHour) {
+                        varValue = getSecondsFromTime(varValue)
+                    } else if (includedDateSlash) {
+                        varValue = getDaysFromDateSlash(varValue) * 24 * 3600
+                    } else if (includedDateDash) {
+                        varValue = getDaysFromDateDash(varValue) * 24 * 3600
+                    }
+                }
+                break
+            default: console.log("Unknown how to convert string to value: " + varValue)
+        }
+
+        if (debugListener) console.log(varName, varValue)
+        return varValue
+    }
+}
+
 const filterDropdown2 = (column_name, dataSource) => {
     // const filtersOfDropdown2 = filtersOfDropdown2s[lineType]
     // console.log(filtersOfDropdown2s, filtersOfDropdown2, column_name, lineType)
@@ -125,13 +150,7 @@ const filterDropdown2 = (column_name, dataSource) => {
             const value = filter_values[i]
             dataSource.forEach((row) => {
                 if (row[column] === undefined) {
-                    console.error(
-                        'Column [',
-                        column,
-                        '] in filter_columns not found in',
-                        column_name,
-                        '(Relationships Screen)'
-                    )
+                    console.error('Column [', column, '] in filter_columns not found in', column_name, '(Relationships Screen)')
                     // } else {
                     //     console.log("Column [", column, "] in filter_columns found in", column_name, "(Relationships Screen)");
                 }
@@ -222,6 +241,19 @@ const onChangeGetSelectedObject2 = (listener) => {
     return selectedObject
 }
 
+const onChangeGetSelectedObject2_1 = (listener, index = 0) => {
+    const { listen_to_fields, listen_to_tables, listen_to_attrs } = listener
+    const listen_to_field = listen_to_fields[index]
+    const listen_to_table = listen_to_tables[index]
+    const listen_to_attr = listen_to_attrs[index] || "id"
+    const selectedId = getValueOfEById(listen_to_field)
+
+    const table = k[listen_to_table]
+    const selectedObject = table.find((i) => i[listen_to_attr] == selectedId)
+
+    return selectedObject
+}
+
 const onChangeDropdown2Assign = (listener) => {
     // const debugListener = true
     if (debugListener) console.log('Assign', listener)
@@ -284,15 +316,12 @@ const onChangeDropdown2DateOffset = (listener) => {
         const theValue = selectedObject[listen_to_attr]
         if (debugListener) console.log(theValue)
 
-        const theValueDate = moment()
-            .add(theValue, 'days')
-            .format('DD/MM/YYYY HH:mm')
+        const theValueDate = moment().add(theValue, 'days').format('DD/MM/YYYY HH:mm')
         if (debugListener) console.log(theValueDate)
 
         getEById(column_name).val(theValueDate)
         getEById(column_name).trigger('change')
-        if (debugListener)
-            console.log('Date Offset', column_name, 'with value', theValueDate)
+        if (debugListener) console.log('Date Offset', column_name, 'with value', theValueDate)
     }
 }
 
@@ -305,33 +334,9 @@ const onChangeDropdown2Expression = (listener) => {
     const vars = getAllVariablesFromExpression(expression)
     for (let i = 0; i < vars.length; i++) {
         const varName = vars[i]
-        if (
-            ['Math', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed'].includes(varName)
-        )
-            continue
-        let varValue = getEById(varName).val() || 0
-        if (varValue && isNaN(varValue)) {
-            const includedHour = varValue.includes(':')
-            const includedDateSlash = varValue.includes('/')
-            const includedDateDash = varValue.includes('-')
-            if (includedHour && includedDateSlash) {
-                const datetime = varValue.split(' ')
-                const date = datetime[0]
-                const time = datetime[1]
-                varValue =
-                    getDaysFromDateSlash(date) * 24 * 3600 +
-                    getSecondsFromTime(time)
-            } else {
-                if (includedHour) {
-                    varValue = getSecondsFromTime(varValue)
-                } else if (includedDateSlash) {
-                    varValue = getDaysFromDateSlash(varValue) * 24 * 3600
-                } else if (includedDateDash) {
-                    varValue = getDaysFromDateDash(varValue) * 24 * 3600
-                }
-            }
-            if (debugListener) console.log(varName, varValue)
-        }
+        if (['Math', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed'].includes(varName)) continue
+        let varValue = (getEById(varName).val() || 0) + '' //<< toString
+        varValue = convertStrToNumber(varValue)
 
         if (debugListener) console.log(varName, '=', varValue)
         expression1 = expression1.replace(varName, varValue)
@@ -413,19 +418,20 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
     }
 }
 
-const onChangeSetTableColumn = (listener) => {
+const onChangeSetTableColumn = (listener, triggerIndex) => {
     // console.log("set_table_column", listener, tableObject)
     const { column_name, listen_to_attrs, columns_to_set } = listener
-
-    const column_to_set = columns_to_set[0]
-    const listen_to_attr = listen_to_attrs[0]
-    // console.log(column_to_set, listen_to_attr)
-    const selectedObject = onChangeGetSelectedObject2(listener)
-    const selectedAttr = selectedObject[listen_to_attr]
-    let table01Name = tableObjectColName[column_name]?.['name']
-    // console.log(selectedObject, table01Name)
-
+    const table01Name = tableObjectColName[column_name]?.['name']
     if (undefined === table01Name) return //<< During create new, the table is not rendered yet
+
+    const listen_to_attr = listen_to_attrs[triggerIndex]
+    const column_to_set = columns_to_set[triggerIndex]
+
+    const selectedObject = onChangeGetSelectedObject2_1(listener, triggerIndex)
+    // console.log("Selected Obj", selectedObject)
+    const selectedAttr = selectedObject[listen_to_attr]
+    // console.log("Setting column value for ", table01Name, selectedObject, column_name)
+
     const length = getAllRows(table01Name).length
 
     for (let i = 0; i < length; i++) {
@@ -466,40 +472,43 @@ const onChangeDropdown2 = (name) => {
 
         // console.log(listen_action, name, triggers)
         if (debugFlow) console.log(name, "-->", column_name, listen_action)
-        if (triggers.includes(name)) {
-            // console.log("listen_action", listen_action)
-            switch (listen_action) {
-                case 'reduce':
-                    onChangeDropdown2Reduce(listener)
-                    break
-                case 'assign':
-                    onChangeDropdown2Assign(listener)
-                    break
-                case 'dot':
-                    onChangeDropdown2Dot(listener)
-                    break
-                case 'date_offset':
-                    onChangeDropdown2DateOffset(listener)
-                    break
-                case 'expression':
-                    onChangeDropdown2Expression(listener)
-                    break
-                case 'ajax_request_scalar':
-                    onChangeDropdown2AjaxRequestScalar(listener)
-                    break
-                case 'trigger_change_some_lines':
-                    //Do nothing, this is an action of table
-                    break
-                case 'set_table_column':
-                    onChangeSetTableColumn(listener)
-                    break
-                case 'number_to_words':
-                    onChangeNumberToWords(listener)
-                    break
+        for (let i = 0; i < triggers.length; i++) {
+            // if (triggers.includes(name)) {
+            if (name == triggers[i]) {
+                // console.log("listen_action", listen_action)
+                switch (listen_action) {
+                    case 'reduce':
+                        onChangeDropdown2Reduce(listener)
+                        break
+                    case 'assign':
+                        onChangeDropdown2Assign(listener)
+                        break
+                    case 'dot':
+                        onChangeDropdown2Dot(listener)
+                        break
+                    case 'date_offset':
+                        onChangeDropdown2DateOffset(listener)
+                        break
+                    case 'expression':
+                        onChangeDropdown2Expression(listener)
+                        break
+                    case 'ajax_request_scalar':
+                        onChangeDropdown2AjaxRequestScalar(listener)
+                        break
+                    case 'trigger_change_some_lines':
+                        //Do nothing, this is an action of table
+                        break
+                    case 'set_table_column':
+                        onChangeSetTableColumn(listener, i)
+                        break
+                    case 'number_to_words':
+                        onChangeNumberToWords(listener)
+                        break
 
-                default:
-                    console.error('Unknown listen_action', listen_action, 'of', name)
-                    break
+                    default:
+                        console.error('Unknown listen_action', listen_action, 'of', name)
+                        break
+                }
             }
         }
     }
@@ -627,9 +636,9 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
     } else if (control_type === 'draggable_event') {
         // const control = getEById(id)
         // const isMultiple = control[0].hasAttribute("multiple")
-        const isMultiple = getIsMultipleOfE(id)
-        const radio_or_checkbox = isMultiple ? 'checkbox' : 'radio'
-        const control_name = isMultiple ? id + '[]' : id
+        // const isMultiple = getIsMultipleOfE(id)
+        // const radio_or_checkbox = isMultiple ? 'checkbox' : 'radio'
+        // const control_name = isMultiple ? id + '[]' : id
         const colSpan = getColSpanOfE(id)
         const readOnly = getReadOnlyOfE(id)
         // console.log(attr_to_compare)
@@ -637,12 +646,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr =
-                dataSource.length === 1
-                    ? 'checked'
-                    : dumbIncludes2(selected, itemId)
-                        ? 'checked'
-                        : ''
+            selectedStr = dataSource.length === 1 ? 'checked' : dumbIncludes2(selected, itemId) ? 'checked' : ''
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
@@ -737,13 +741,7 @@ const documentReadyDropdown2 = (params) => {
     // }
     // console.log(id, listenersOfDropdown2, attr_to_compare, dataSourceDropdown)
     // console.log(id, attr_to_compare, dataSourceDropdown, selectedJson)
-    reloadDataToDropdown2(
-        id,
-        attr_to_compare,
-        dataSourceDropdown,
-        selectedArray,
-        allowClear
-    )
+    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedArray, allowClear)
 
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {
@@ -751,11 +749,8 @@ const documentReadyDropdown2 = (params) => {
                 const list =
                     action === 'create'
                         ? ['reduce', 'assign']
-                        : ['reduce' /* 'assign'*/] //<< without assign, keep value from DB
-                if (
-                    listener.triggers.includes(id) &&
-                    list.includes(listener.listen_action)
-                ) {
+                        : ['reduce' /* 'assign'*/] //<< without assign, keep value from DB, otherwise it will be overwritten every time the form is loaded
+                if (listener.triggers.includes(id) && list.includes(listener.listen_action)) {
                     // console.log("I am a trigger of reduce/assign, I have to trigger myself when form load [id]",)
                     getEById(id).trigger('change')
                 }

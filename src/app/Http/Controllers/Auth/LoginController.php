@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\LoggedUserSignInHistoriesEvent;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -89,6 +90,7 @@ class LoginController extends Controller
             if (Auth::user()) {
                 PostLoggedInActions::setTimeZoneWhenLogged($request);
                 PostLoggedInActions::setTokenWhenLoggedForCookie();
+                $this->loggedInfoUserSignIn($request);
             }
             return $this->sendLoginResponse($request);
         }
@@ -126,5 +128,10 @@ class LoginController extends Controller
         //     ? new JsonResponse([], 204)
         //     : redirect('/');
         return redirect('/');
+    }
+    private function loggedInfoUserSignIn($request){
+        $ipAddress = $request->ip();
+        $time = $request->server('REQUEST_TIME');
+        event(new LoggedUserSignInHistoriesEvent(Auth::id(),$ipAddress,$time));
     }
 }

@@ -1,0 +1,104 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "",
+        "active": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "",
+        "active": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "new": "",
+        "active": ""
+    },
+    "_injured_person_id": {
+        "name": "_injured_person_id",
+        "column_name": "injured_person_id",
+        "new": "",
+        "active": ""
+    },
+    "_employeeid": {
+        "name": "_employeeid",
+        "column_name": "employeeid",
+        "new": "",
+        "active": ""
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "",
+        "active": ""
+    },
+    "_work_area_id": {
+        "name": "_work_area_id",
+        "column_name": "work_area_id",
+        "new": "",
+        "active": ""
+    },
+    "_injury_datetime": {
+        "name": "_injury_datetime",
+        "column_name": "injury_datetime",
+        "new": "",
+        "active": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "",
+        "active": ""
+    },
+    "_nature_of_injury": {
+        "name": "_nature_of_injury",
+        "column_name": "nature_of_injury",
+        "new": "",
+        "active": ""
+    },
+    "_treatment_provided": {
+        "name": "_treatment_provided",
+        "column_name": "treatment_provided",
+        "new": "",
+        "active": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "",
+        "active": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "",
+        "active": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "active": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "active": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "active": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "active": ""
+    }
+}

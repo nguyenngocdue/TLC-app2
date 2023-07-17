@@ -39,6 +39,8 @@ const addANewLine = (params) => {
         [parentTypeFieldName]: parentType,
         project_id: getEById('entityProjectId').val(),
         sub_project_id: getEById('entitySubProjectId').val(),
+        // rate_exchange_month_id: getEById('entityCurrencyMonth').val(),
+        // counter_currency_id: getEById('entityCurrencyExpected').val(),
         order_no: orderNoValue,
 
         ...valuesOfOrigin,
@@ -96,7 +98,7 @@ const addANewLine = (params) => {
                                 // console.log("Converting " + valuesOfOrigin[key])
                                 switch (picker_type) {
                                     case "picker_time":
-                                        valuesOfOrigin[key] = moment(valuesOfOrigin[key], "hh:mm:ss").format("hh:mm")
+                                        valuesOfOrigin[key] = moment(valuesOfOrigin[key], "HH:mm:ss").format("HH:mm")
                                         break
                                     default:
                                         valuesOfOrigin[key] = moment(valuesOfOrigin[key]).format(FORMAT[picker_type])
@@ -374,6 +376,12 @@ const addANewLineFull = (params) => {
                         case column['value_as_sub_project_id']:
                             selected = $('#entitySubProjectId').val()
                             break
+                        // case column['value_as_rate_exchange_month_id']:
+                        //     selected = $('#entityCurrencyMonth').val()
+                        //     break
+                        // case column['value_as_counter_currency_id']:
+                        //     selected = $('#entityCurrencyExpected').val()
+                        //     break
                     }
                 }
                 if (column['readOnly']) {

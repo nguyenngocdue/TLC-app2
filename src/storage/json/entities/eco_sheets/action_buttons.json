@@ -1,0 +1,47 @@
+{
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": ""
+    },
+    "pending_endorsement": {
+        "name": "pending_endorsement",
+        "label": "Request for Endorsement",
+        "tooltip": ""
+    },
+    "endorsement_rejected": {
+        "name": "endorsement_rejected",
+        "label": "Reject Endorsement",
+        "tooltip": ""
+    },
+    "pending_review": {
+        "name": "pending_review",
+        "label": "Request for Review of Managers",
+        "tooltip": ""
+    },
+    "review_rejected": {
+        "name": "review_rejected",
+        "label": "Reject Review",
+        "tooltip": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "label": "Request for Approval",
+        "tooltip": ""
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "label": "Reject Approval",
+        "tooltip": ""
+    },
+    "pending_ack": {
+        "name": "pending_ack",
+        "label": "Request for Acknowledgement",
+        "tooltip": ""
+    },
+    "active": {
+        "name": "active",
+        "label": "Active",
+        "tooltip": ""
+    }
+}

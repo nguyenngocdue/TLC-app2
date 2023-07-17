@@ -179,6 +179,90 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_break8": {
+        "name": "_break8",
+        "column_name": "break8",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_h8": {
+        "name": "_h8",
+        "column_name": "h8",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_currency1_id": {
+        "name": "_currency1_id",
+        "column_name": "currency1_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_currency_pair1_id": {
+        "name": "_currency_pair1_id",
+        "column_name": "currency_pair1_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_currency2_id": {
+        "name": "_currency2_id",
+        "column_name": "currency2_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_currency_pair2_id": {
+        "name": "_currency_pair2_id",
+        "column_name": "currency_pair2_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_break3": {
         "name": "_break3",
         "column_name": "break3",
@@ -563,30 +647,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_ot_date_1": {
-        "name": "_ot_date_1",
-        "column_name": "ot_date_1",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_remaining_hours": {
-        "name": "_remaining_hours",
-        "column_name": "remaining_hours",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -650,6 +710,18 @@
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
         "label": "",
         "validation": "",
         "validation_regex": "",

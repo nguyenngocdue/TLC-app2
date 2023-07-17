@@ -23,25 +23,9 @@
         "rejected": "true",
         "closed": "true"
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "closed": "true"
-    },
     "_parent_id": {
         "name": "_parent_id",
         "column_name": "parent_id",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "closed": "true"
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
@@ -79,6 +63,46 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -90,6 +114,78 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_getMonitors2()": {
+        "name": "_getMonitors2()",
+        "column_name": "getMonitors2()",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_getMonitors3()": {
+        "name": "_getMonitors3()",
+        "column_name": "getMonitors3()",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_getMonitors4()": {
+        "name": "_getMonitors4()",
+        "column_name": "getMonitors4()",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_getMonitors5()": {
+        "name": "_getMonitors5()",
+        "column_name": "getMonitors5()",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_getMonitors6()": {
+        "name": "_getMonitors6()",
+        "column_name": "getMonitors6()",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_getMonitors7()": {
+        "name": "_getMonitors7()",
+        "column_name": "getMonitors7()",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_getMonitors8()": {
+        "name": "_getMonitors8()",
+        "column_name": "getMonitors8()",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_getMonitors9()": {
+        "name": "_getMonitors9()",
+        "column_name": "getMonitors9()",
         "new": "true",
         "assigned": "true",
         "rejected": "true",

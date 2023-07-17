@@ -6,7 +6,10 @@ use App\BigThink\ModelExtended;
 
 class Prod_run extends ModelExtended
 {
-    protected $fillable = ["prod_sequence_id", "date", "start", "end", "owner_id"];
+    protected $fillable = [
+        "id", "prod_sequence_id", "date", "start", "end", "total_hours", "owner_id",
+        "worker_number", "total_man_hours"
+    ];
 
     protected $table = 'prod_runs';
     public static $nameless = true;
@@ -32,12 +35,15 @@ class Prod_run extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ['dataIndex' => 'id'],
-            ['dataIndex' => 'prod_sequence_id', 'title' => 'Run ID',  'rendererParam' => 'id'],
-            ['dataIndex' => 'date',],
-            ['dataIndex' => 'start',],
-            ['dataIndex' => 'end',],
-            ['dataIndex' => 'owner_id',],
+            ['dataIndex' => 'id', 'invisible' => true,],
+            ['dataIndex' => 'prod_sequence_id', 'value_as_parent_id' => true, 'invisible' => true,],
+            ['dataIndex' => 'date', 'cloneable' => true,],
+            ['dataIndex' => 'start', 'cloneable' => true,],
+            ['dataIndex' => 'end', 'cloneable' => true,],
+            ['dataIndex' => 'total_hours', 'footer' => 'agg_sum'],
+            ['dataIndex' => 'worker_number', 'cloneable' => true,],
+            ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum'],
+            // ['dataIndex' => 'owner_id',],
         ];
     }
 }

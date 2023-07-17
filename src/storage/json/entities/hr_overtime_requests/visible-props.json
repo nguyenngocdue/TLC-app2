@@ -55,6 +55,14 @@
         "rejected": "true",
         "approved": "true"
     },
+    "_user_team_ot_id": {
+        "name": "_user_team_ot_id",
+        "column_name": "user_team_ot_id",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",

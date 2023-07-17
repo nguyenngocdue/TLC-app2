@@ -26,11 +26,13 @@ return new class extends Migration
             $table->float('unit_price')->nullable();
             $table->float('quantity')->nullable();
             $table->unsignedBigInteger('currency_id')->nullable();
+            $table->unsignedBigInteger('counter_currency_id')->nullable();
+            $table->unsignedBigInteger('rate_exchange_month_id')->nullable();
             $table->unsignedBigInteger('travel_expense_claim_id')->nullable();
-            $table->decimal('total_amount',20,6)->nullable();
+            $table->decimal('total_amount', 20, 6)->nullable();
             $table->unsignedBigInteger('currency_pair_id')->nullable();
-            $table->decimal('rate_exchange',20,6)->nullable();
-            $table->decimal('total_estimated_amount',20,6)->nullable();
+            $table->decimal('rate_exchange', 20, 6)->nullable();
+            $table->decimal('total_estimated_amount', 20, 6)->nullable();
             $table->orderable();
             $table->appendCommonFields();
         });

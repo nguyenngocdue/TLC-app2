@@ -4,14 +4,15 @@ namespace App\Utils\BookmarkTraits;
 
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\AccessLogger\EntityNameClickCount;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use App\Utils\AccessLogger\LoggerAccessRecent;
+use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 
 trait TraitFormatBookmarkEntities
 {
     public function getDataSource($allApps)
     {
-        $data = (new EntityNameClickCount)(Auth::id());
+        $data = (new EntityNameClickCount)(CurrentUser::id());
         $entitiesName = collect($data)->pluck('entity_name')->toArray();
         $entities = $this->convertData($data);
         // dd($entities);
@@ -77,11 +78,28 @@ trait TraitFormatBookmarkEntities
         }, []);
         return $result;
     }
+    private function getDataSourceRecentDoc(){
+        $data = (new LoggerAccessRecent)(CurrentUser::id());
+        return collect($data)->toArray();
+    }
+    private function filterRecentDocument($array,$allApps){
+        return array_filter(array_map(function($item) use ($allApps){
+            $index = $item->entity_name;
+            if(isset($allApps[$index])){
+                $allApps[$index]['href_recent'] = $item->url;
+                $allApps[$index]['action_recent'] = substr($item->route_name, strpos($item->route_name, ".") + 1);
+                $allApps[$index]['entity_id'] = $item->entity_id;
+                return $allApps[$index];
+            }
+        },$array),fn($item) => $item);
+    }
     public function getAllAppsOfSearchModalAndTopDrawer()
     {
+        $recentDoc = $this->getDataSourceRecentDoc();
         $allApps = $this->getDataSource(LibApps::getAllShowBookmark());
         $allAppsTopDrawer = $this->getDataSource(LibApps::getAllNavbarBookmark());
         $allAppsTopDrawer = $this->formatDataSource($allAppsTopDrawer);
-        return [array_values($allApps), array_values($allAppsTopDrawer)];
+        $allAppsRecent = $this->filterRecentDocument($recentDoc,$allApps);
+        return [array_values($allAppsRecent),array_values($allApps), array_values($allAppsTopDrawer)];
     }
 }

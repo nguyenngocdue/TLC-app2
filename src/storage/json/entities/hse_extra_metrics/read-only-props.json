@@ -1,0 +1,92 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "",
+        "active": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "",
+        "active": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "",
+        "active": "true"
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "new": "",
+        "active": "true"
+    },
+    "_metric_month": {
+        "name": "_metric_month",
+        "column_name": "metric_month",
+        "new": "",
+        "active": "true"
+    },
+    "_workplace_id": {
+        "name": "_workplace_id",
+        "column_name": "workplace_id",
+        "new": "",
+        "active": "true"
+    },
+    "_total_discipline": {
+        "name": "_total_discipline",
+        "column_name": "total_discipline",
+        "new": "",
+        "active": "true"
+    },
+    "_total_third_party_insp_audit": {
+        "name": "_total_third_party_insp_audit",
+        "column_name": "total_third_party_insp_audit",
+        "new": "",
+        "active": "true"
+    },
+    "_total_drill": {
+        "name": "_total_drill",
+        "column_name": "total_drill",
+        "new": "",
+        "active": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "",
+        "active": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "",
+        "active": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "active": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "active": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "active": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "active": "true"
+    }
+}

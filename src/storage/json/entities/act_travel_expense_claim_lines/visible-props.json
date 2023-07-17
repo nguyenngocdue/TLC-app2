@@ -34,6 +34,16 @@
         "column_name": "currency_id",
         "new": "true"
     },
+    "_rate_exchange_month_id": {
+        "name": "_rate_exchange_month_id",
+        "column_name": "rate_exchange_month_id",
+        "new": "true"
+    },
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
+        "new": "true"
+    },
     "_total_amount": {
         "name": "_total_amount",
         "column_name": "total_amount",
@@ -83,5 +93,10 @@
         "name": "_deleted_at",
         "column_name": "deleted_at",
         "new": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": ""
     }
 }

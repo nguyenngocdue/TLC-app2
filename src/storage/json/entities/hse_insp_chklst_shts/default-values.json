@@ -41,7 +41,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "",
+        "formula": "All_SlugifyByName",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
