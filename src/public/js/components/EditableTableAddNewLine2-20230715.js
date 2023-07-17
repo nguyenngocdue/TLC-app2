@@ -65,7 +65,7 @@ const addANewLine = (params) => {
         ...valuesOfOrigin,
         ...getDefaultValueOfSetTableColumnListener(),
     }
-    console.log(data0)
+    // console.log(data0)
 
     const btnAddANewLineId = 'btnAddANewLine_' + tableId
     const btnAddFromAListId = 'btnAddFromAList_' + tableId
@@ -151,7 +151,7 @@ const addANewLine = (params) => {
 const addANewLineFull = (params) => {
     const { tableId, isDuplicatedOrAddFromList, batchLength = 1 } = params
     let { valuesOfOrigin } = params //<< Incase of duplicate, this is the value of the original line
-    console.log("valuesOfOrigin: ", valuesOfOrigin)
+    // console.log("valuesOfOrigin: ", valuesOfOrigin)
     const insertedId = valuesOfOrigin['id']
     // console.log('addANewLine', tableId, insertedId)
     const { columns, showNo, showNoR, tableDebugJs, isOrderable } =
