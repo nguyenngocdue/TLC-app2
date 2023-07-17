@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Hr_overtime_request extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'workplace_id', 'assignee_1',  'owner_id', 'status'];
+    protected $fillable = ['id', 'name', 'workplace_id', 'assignee_1', 'owner_id', 'status', 'user_team_ot_id'];
     protected $table = "hr_overtime_requests";
     public static $nameless = true;
     public function getName()
@@ -17,6 +17,7 @@ class Hr_overtime_request extends ModelExtended
     public static $eloquentParams = [
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],
+        "getUserTeamOt" => ["belongsTo", User_team_ot::class, 'user_team_ot_id'],
         'getHrOtrLines' => ['hasMany', Hr_overtime_request_line::class, 'hr_overtime_request_id'],
         'getHrOtrLines1' => ['hasMany', Hr_overtime_request_line::class, 'hr_overtime_request_id'],
 
@@ -34,6 +35,12 @@ class Hr_overtime_request extends ModelExtended
     }
 
     public function getAssignee1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getUserTeamOt()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
