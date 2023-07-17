@@ -132,9 +132,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_currency3_id": {
-        "name": "_currency3_id",
-        "column_name": "currency3_id",
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
         "column_type": "bigint unsigned",
         "label": "Expected Receiving Currency",
         "control": "dropdown",

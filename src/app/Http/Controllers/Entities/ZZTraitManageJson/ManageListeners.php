@@ -203,6 +203,18 @@ class ManageListeners extends Manage_Parent
                         $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
                         $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
+                    case "date_offset":
+                        // $newItem['triggers'] = 'DO_NOT_RENDER';
+                        // $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
+                        // $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
+                        // $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
+                        $newItem['expression'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
+                        $newItem['ajax_default_values'] = 'DO_NOT_RENDER';
+                        $newItem['columns_to_set'] = 'DO_NOT_RENDER';
+                        break;
                     default:
                         $newItem['triggers'] = 'DO_NOT_RENDER';
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';

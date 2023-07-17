@@ -14,8 +14,8 @@ class Zunit_test_09 extends ModelExtended
         'user_2',
         'category_id',
         'user_3',
-        'ot_date_1',
-        'remaining_hours',
+        // 'ot_date_1',
+        // 'remaining_hours',
         //Reduce 1111
         'project_1',
         'sub_project_1',
@@ -26,7 +26,7 @@ class Zunit_test_09 extends ModelExtended
         'currency_pair1_id',
         'currency2_id',
         'currency_pair2_id',
-        'currency3_id',
+        'counter_currency_id',
         //Assign
         'prod_discipline_1',
         'assignee_1',
@@ -87,7 +87,7 @@ class Zunit_test_09 extends ModelExtended
         'getCurrencyPair1' => ['belongsTo', Act_currency_pair::class, 'currency_pair1_id'],
         'getCurrency2' => ['belongsTo', Act_currency::class, 'currency2_id'],
         'getCurrencyPair2' => ['belongsTo', Act_currency_pair::class, 'currency_pair2_id'],
-        'getCurrency3' => ['belongsTo', Act_currency::class, 'currency3_id'],
+        'getCounterCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
     ];
 
     public static $oracyParams = [
@@ -273,6 +273,31 @@ class Zunit_test_09 extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function user4()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCurrency1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCurrencyPair1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCurrency2()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCurrencyPair2()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCounterCurrency()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -214,28 +214,8 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex, batchLengt
         const varName = vars[i]
         if (['Math', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed'].includes(varName)) continue
         const varNameFull = makeIdFrom(table01Name, varName, rowIndex)
-        let varValue = getEById(varNameFull).val() || 0
-        if (varValue && isNaN(varValue)) {
-            const includedHour = varValue.includes(':')
-            const includedDateSlash = varValue.includes('/')
-            const includedDateDash = varValue.includes('-')
-            if (includedHour && includedDateSlash) {
-                const datetime = varValue.split(" ")
-                const date = datetime[0]
-                const time = datetime[1]
-                varValue = getDaysFromDateSlash(date) * 24 * 3600 + getSecondsFromTime(time)
-            }
-            else {
-                if (includedHour) {
-                    varValue = getSecondsFromTime(varValue)
-                } else if (includedDateSlash) {
-                    varValue = getDaysFromDateSlash(varValue) * 24 * 3600
-                } else if (includedDateDash) {
-                    varValue = getDaysFromDateDash(varValue) * 24 * 3600
-                }
-            }
-            if (debugListener) console.log(varName, varValue)
-        }
+        let varValue = (getEById(varNameFull).val() || 0) + '' //<< toString
+        varValue = convertStrToNumber(varValue)
 
         if (debugListener) console.log(varName, "=", varValue)
         expression1 = expression1.replace(varName, varValue)

@@ -251,10 +251,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getCurrency3": {
-        "name": "_getCurrency3",
+    "_getCounterCurrency": {
+        "name": "_getCounterCurrency",
         "relationship": "belongsTo",
-        "control_name": "currency3_id",
+        "control_name": "counter_currency_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
