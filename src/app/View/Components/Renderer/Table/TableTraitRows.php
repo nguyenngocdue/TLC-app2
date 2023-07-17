@@ -122,7 +122,7 @@ trait TableTraitRows
             [$cellClassList, $cellTitle, $cellHref] = $this->parseCellObject($rawData);
             $breakWords = $this->noCss ? "break-all123" : "";
             $tinyText = $this->noCss ? "text-xs" : "";
-            $borderGray = $this->noCss ? "border-gray-400" : "";
+            $borderGray = $this->noCss ? "border-gray-200" : "";
             $td = "<td class='dark:border-gray-600 border-b $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align'";
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";

@@ -72,7 +72,7 @@ trait TableTraitColumns
         $tinyText = $this->noCss ? "text-xs" : "";
         $colspanStr = ($colspan > 1) ? "colspan=$colspan" : "";
         $th = "";
-        $th .= "<th $colspanStr class='px-4 py-3 border-b border-gray-500 $borderRight $classTh' $styleStr title='$tooltip'>";
+        $th .= "<th $colspanStr class='px-4 py-3 border-b border-gray-300 $borderRight $classTh' $styleStr title='$tooltip'>";
         $th .= "<div class='$classDiv $tinyText text-gray-700 dark:text-gray-300'>";
         $th .= "<span>" . $title . "</span>";
         $th .= "</div>";
