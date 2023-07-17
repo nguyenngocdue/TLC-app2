@@ -36,9 +36,10 @@
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/components/RadioOrCheckbox2-20230606.js') }}"></script>
-    <script src="{{ asset('js/components/Dropdown2-20230714.js') }}"></script>
     <script src="{{ asset('js/components/ActionMultiple.js') }}"></script>
-    <script src="{{ asset('js/components/Dropdown4-20230714.js') }}"></script>
+
+    <script src="{{ asset('js/components/Dropdown2-20230715.js') }}"></script>
+    <script src="{{ asset('js/components/Dropdown4-20230715.js') }}"></script>
     <script src="{{ asset('js/components/EditableTable2-20230712.js') }}"></script>
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20230712.js') }}"></script>
     <script src="{{ asset('js/components/Number4.js') }}"></script>
