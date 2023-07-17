@@ -98,7 +98,7 @@
         "name": "_getProdRuns",
         "column_name": "getProdRuns",
         "column_type": "eloquent_prop",
-        "label": "Production Runs",
+        "label": "Production Run Lines",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",

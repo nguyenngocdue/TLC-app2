@@ -7,6 +7,7 @@ use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 trait TraitEntityListenDataSource
 {
@@ -154,41 +155,61 @@ trait TraitEntityListenDataSource
         return $matrix;
     }
 
+    private function mapGetNameForNameless($table, $columnsWithoutOracy)
+    {
+        $modelPath = Str::modelPathFrom($table);
+        $rows = $modelPath::query(); //->select($columnsWithoutOracy);
+        $nameless = $modelPath::$nameless;
+        if (!$nameless) $rows = $rows->orderBy('name');
+        $objectRows = $rows->get();
+        // dump($table, sizeof($objectRows));
+        if ($nameless) {
+            $max = 5000;
+            if (sizeof($objectRows) <= $max) {
+                foreach ($objectRows as $objectRow) $objectRow->name = $objectRow->getName();
+            } else {
+                Log::info("$table has more than $max lines, skipping making name as it will overflow ram.");
+            }
+        }
+
+        $objectRowsMinimal = [];
+        foreach ($objectRows as $row) {
+            $item = [];
+            foreach ($columnsWithoutOracy as $column) {
+                $item[$column] = $row->{$column};
+            }
+            $objectRowsMinimal[] = $item;
+        }
+        return array_map(fn ($o) => (array)$o, $objectRowsMinimal);
+    }
+
+    private function mapIdForNameless($table, $columnsWithoutOracy)
+    {
+        $rows = DB::table($table)->select($columnsWithoutOracy);
+        $objectRows = $rows->get();
+        $objectRows = $objectRows->toArray();
+        return array_map(fn ($o) => (array)$o, $objectRows);
+    }
+
     private function renderListenDataSource($types)
     {
         $matrix = $this->getMatrix($types);
         // dump($types, $matrix);
         $result = [];
         $columnsWithOracy = [];
-
         foreach ($matrix as $table => $columns) {
             $columnsWithoutOracy = array_filter($columns, fn ($column) => !str_contains($column, "()"));
             $columnsWithOracy[$table] = array_values(array_filter($columns, fn ($column) => str_contains($column, "()")));
             if (empty($columnsWithoutOracy)) $columnsWithoutOracy = ['id']; //<< getRemainingHours()
-            // $rows = DB::table($table)->select($columnsWithoutOracy);
-            $modelPath = Str::modelPathFrom($table);
-            $rows = $modelPath::query(); //->select($columnsWithoutOracy);
-            $nameless = $modelPath::$nameless;
-            if (!$nameless) $rows = $rows->orderBy('name');
-            $objectRows = $rows->get();
 
-            if ($nameless) {
-                foreach ($objectRows as $objectRow) {
-                    $objectRow->name = $objectRow->getName();
-                }
+            switch ($table) {
+                case "hr_timesheet_lines":
+                    $result[$table] = $this->mapIdForNameless($table, $columnsWithoutOracy);
+                    break;
+                default:
+                    $result[$table] = $this->mapGetNameForNameless($table, $columnsWithoutOracy);
+                    break;
             }
-            // $objectRows = $objectRows->toArray();
-            // $result[$table] = array_map(fn ($o) => (array)$o, $objectRows);
-
-            $objectRowsMinimal = [];
-            foreach ($objectRows as $row) {
-                $item = [];
-                foreach ($columnsWithoutOracy as $column) {
-                    $item[$column] = $row->{$column};
-                }
-                $objectRowsMinimal[] = $item;
-            }
-            $result[$table] = array_map(fn ($o) => (array)$o, $objectRowsMinimal);
         }
 
         $this->dump2("columnsWithOracy", $columnsWithOracy, __LINE__);

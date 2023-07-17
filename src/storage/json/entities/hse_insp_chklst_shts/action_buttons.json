@@ -1,0 +1,12 @@
+{
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": ""
+    },
+    "active": {
+        "name": "active",
+        "label": "Active",
+        "tooltip": ""
+    }
+}

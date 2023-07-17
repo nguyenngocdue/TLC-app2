@@ -684,8 +684,8 @@
     "_divider10": {
         "name": "_divider10",
         "column_name": "divider10",
-        "new": "",
-        "active": "",
+        "new": "true",
+        "active": "true",
         "pending_ack": "",
         "pending_review": "",
         "review_rejected": "",
@@ -714,23 +714,12 @@
         "pending_verification": "",
         "closed": ""
     },
-    "_assignee_2": {
-        "name": "_assignee_2",
-        "column_name": "assignee_2",
-        "new": "true",
-        "active": "true",
-        "pending_ack": "",
-        "pending_review": "true",
-        "review_rejected": "",
-        "pending_verification": "",
-        "closed": ""
-    },
     "_divider11": {
         "name": "_divider11",
         "column_name": "divider11",
-        "new": "",
-        "active": "",
-        "pending_ack": "",
+        "new": "true",
+        "active": "true",
+        "pending_ack": "true",
         "pending_review": "",
         "review_rejected": "",
         "pending_verification": "",
@@ -743,6 +732,17 @@
         "active": "true",
         "pending_ack": "true",
         "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "new": "true",
+        "active": "true",
+        "pending_ack": "",
+        "pending_review": "true",
         "review_rejected": "",
         "pending_verification": "",
         "closed": ""
@@ -772,13 +772,13 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true",
-        "active": "true",
-        "pending_ack": "true",
-        "pending_review": "true",
-        "review_rejected": "true",
-        "pending_verification": "true",
-        "closed": "true"
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
     },
     "_created_at": {
         "name": "_created_at",

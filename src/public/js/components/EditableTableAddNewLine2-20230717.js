@@ -98,7 +98,7 @@ const addANewLine = (params) => {
                                 // console.log("Converting " + valuesOfOrigin[key])
                                 switch (picker_type) {
                                     case "picker_time":
-                                        valuesOfOrigin[key] = moment(valuesOfOrigin[key], "hh:mm:ss").format("hh:mm")
+                                        valuesOfOrigin[key] = moment(valuesOfOrigin[key], "HH:mm:ss").format("HH:mm")
                                         break
                                     default:
                                         valuesOfOrigin[key] = moment(valuesOfOrigin[key]).format(FORMAT[picker_type])

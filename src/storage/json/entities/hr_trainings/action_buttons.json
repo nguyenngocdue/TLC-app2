@@ -1,0 +1,32 @@
+{
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": ""
+    },
+    "assigned": {
+        "name": "assigned",
+        "label": "Assign to Facillitator",
+        "tooltip": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "label": "Reject Assignment",
+        "tooltip": ""
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "label": "Request for Verification",
+        "tooltip": ""
+    },
+    "verification_rejected": {
+        "name": "verification_rejected",
+        "label": "Reject Verification",
+        "tooltip": ""
+    },
+    "closed": {
+        "name": "closed",
+        "label": "Close",
+        "tooltip": ""
+    }
+}
