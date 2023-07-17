@@ -8,8 +8,7 @@ use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\Report;
 use App\Utils\Support\PivotReport;
 use DateTime;
-use Illuminate\View\Component;
-use Illuminate\Support\Str;
+
 
 trait  ColumnsPivotReport
 {
@@ -95,7 +94,7 @@ trait  ColumnsPivotReport
     private function sortDates($a)
     {
         $result = [];
-        $lib = LibPivotTables::getFor($this->key);
+        $lib = LibPivotTables::getFor($this->modeType);
         $columnFields = $lib['column_fields'] ?? [];
         $columnFields = PivotReport::markDuplicatesAndGroupKey($columnFields);
         $result = [];
@@ -293,12 +292,7 @@ trait  ColumnsPivotReport
         } else {
             [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields2($dataOutput, $columnFields);
         }
-        // $columnsOrder = array_merge(...array_values($columnFields));
-        // $columnsOfColumnFields = $this->sortColumnsNeedToRender($columnsOfColumnFields, $columnsOrder);
-        // dd($dataOutput);
-
         // dd($columnsOfColumnFields);
-
         return [$tableDataHeader, $columnsOfColumnFields];
     }
 
@@ -316,10 +310,10 @@ trait  ColumnsPivotReport
         return $columnsOfAgg;
     }
 
-    public function makeColumnsRenderer($dataOutput)
+    public function makeColumnsRenderer($dataOutput, $allDataFields)
     {
-        // if (empty($dataOutput)) return [];
-        [, $bidingRowFields,,,, $dataAggregations,,,,] = $this->getDataFields();
+        // dd($dataOutput);
+        [,$bidingRowFields,,,,$dataAggregations,,,,,,,,] = $allDataFields;
         if (!$this->getDataFields()) return false;
         $columnsOfRowFields = $this->makeHeadColumn($bidingRowFields);
         [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields($dataOutput);

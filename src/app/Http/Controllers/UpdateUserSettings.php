@@ -338,6 +338,9 @@ class UpdateUserSettings extends Controller
             case 'updateReportRegisters':
                 $settings = $this->updateReport($request, $settings);
                 break;
+            case 'updateReportPivots':
+                $settings = $this->updateReport($request, $settings);
+                break;
             case 'updateReportReports':
                 $settings = $this->updateReport($request, $settings);
                 break;

@@ -17,12 +17,20 @@
                                     </div>
                                 @break
                             @case('checkbox')
+                                <div class='p1-2  bor1der border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
+                                    @php
+                                        $selected = $content->pluck('id')->toArray();
+                                        $selected = '['.join(',',$selected).']';
+                                    @endphp
+                                    <x-controls.has-data-source.radio-or-checkbox2 type={{$type}} name={{$columnName}} selected={{$selected}} readOnly={{true}} multiple={{true}} />
+                                </div>
+                                @break
                             @case('radio')
                             @case('dropdown')
                             @case('dropdown_multi')
-                            <div class='p-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
-                                <x-print.checkbox-or-radio5 :relationships="$relationships" :value="$value" />
-                            </div>
+                                <div class='p-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
+                                    <x-print.checkbox-or-radio5 :relationships="$relationships" :value="$value" />
+                                </div>
                                 @break
                             @case('comment')
                                 <div class='p-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
@@ -60,6 +68,14 @@
                                 </div>
                                 @break
                             @case('checkbox')
+                                <div class='p1-2 bo1rder border-gray-600 text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
+                                    @php
+                                        $selected = $content->pluck('id')->toArray();
+                                        $selected = '['.join(',',$selected).']';
+                                    @endphp
+                                    <x-controls.has-data-source.radio-or-checkbox2 type={{$type}} name={{$columnName}} selected={{$selected}} readOnly={{true}} multiple={{true}} />
+                                </div>
+                                @break
                             @case('radio')
                             @case('dropdown')
                             @case('dropdown_multi')
@@ -127,11 +143,12 @@
                     <label class='p-2 text-base font-medium h-full w-full flex col-span-{{$colSpan}} items-center justify-start col-start-1'>{{$label}}</label>
                 @endif
                 @if ($control == 'parent_link')
-                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
+                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-{{$colSpan}} text-left'>
                     <x-print.parent-link5 :dataSource="$content"/>
                 </span>
                 @else
-                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
+                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-{{$colSpan}} text-left'>
+                    (None)
                 </span>
                 @endif
             @else
@@ -147,7 +164,6 @@
                 </span>
                 @endif
             @endif
-            
         </div>
     </div>
 </div>

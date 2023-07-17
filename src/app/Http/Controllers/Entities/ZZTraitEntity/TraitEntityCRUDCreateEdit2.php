@@ -106,7 +106,7 @@ trait TraitEntityCRUDCreateEdit2
 			'modelPath' => $this->data,
 			'title' => $this->getEditTitle(), //$title ?? "Edit",
 			'topTitle' => $this->getEditTopTitle(), //$topTitle ?? CurrentRoute::getTitleOf($this->type),
-			'listenerDataSource' => $this->renderListenDataSource($tableToLoadDataSource),
+			'listenerDataSource' => $this->renderListenDataSource($tableToLoadDataSource), // query allowed memory usage
 			'listeners2' => $this->getListeners2($this->type),
 			'filters2' => $this->getFilters2($this->type),
 			'listeners4' => $this->getListeners4($tableBluePrint),

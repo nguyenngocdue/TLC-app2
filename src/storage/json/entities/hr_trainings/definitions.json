@@ -1,0 +1,47 @@
+{
+    "new": {
+        "name": "new",
+        "new": "true",
+        "assigned": "",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": ""
+    },
+    "read-only": {
+        "name": "read-only",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": "true"
+    },
+    "hide-save-btn": {
+        "name": "hide-save-btn",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": "true"
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": "true"
+    },
+    "post-closed": {
+        "name": "post-closed",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "closed": ""
+    }
+}

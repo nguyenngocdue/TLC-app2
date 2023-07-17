@@ -338,7 +338,7 @@
     "verification_rejected": {
         "name": "verification_rejected",
         "title": "Verification Rejected",
-        "color": "red",
+        "color": "purple",
         "color_index": "200",
         "icon": null
     },

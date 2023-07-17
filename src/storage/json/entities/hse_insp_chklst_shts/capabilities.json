@@ -164,15 +164,15 @@
         "name": "hse_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "active": ""
+        "new": "true",
+        "active": "true"
     },
     "hse_member": {
         "name": "hse_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "active": ""
+        "new": "true",
+        "active": "true"
     },
     "it_manager": {
         "name": "it_manager",
@@ -332,8 +332,8 @@
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "active": ""
+        "new": "true",
+        "active": "true"
     },
     "whs_manager": {
         "name": "whs_manager",

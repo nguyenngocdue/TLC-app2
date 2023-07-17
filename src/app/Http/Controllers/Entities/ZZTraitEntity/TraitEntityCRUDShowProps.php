@@ -68,7 +68,7 @@ trait TraitEntityCRUDShowProps
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$typePlural =Str::plural($this->type);
 		$params =  [
-			'propsTree' => array_values($node),
+			'propsTree' => $this->formatPropTree(array_values($node)),
 			'dataSource' => $dataSource,
 			'type' => $this->type,
 			'typePlural' => $typePlural,
@@ -98,5 +98,38 @@ trait TraitEntityCRUDShowProps
 		$tmp = WorkflowFields::resolveSuperProps($superProps ,$status,$this->type,true,CurrentUser::id());
     	[, , , $actionButtons,, $buttonSave,$propsIntermediate] = $tmp;
 		return [$actionButtons,$buttonSave,$propsIntermediate];
+	}
+	private function formatPropTree($propTree){
+		foreach ($propTree as &$value) {
+			if(isset($value['children'])){
+				$previousColSpan = 0;
+				$keyPrevious = null;
+				$keyLast = array_key_last($value['children']);
+				foreach ($value['children'] as $key => &$prop) {
+					$colSpan = $prop['col_span'];
+					$previousColSpan += $colSpan;
+					switch ($previousColSpan) {
+						case 12:
+							$previousColSpan = 0;
+							break;
+						case 18:
+							$value['children'][$keyPrevious]['col_span'] = "12"; 
+							$previousColSpan = 0;
+								break;
+						case 6:
+							if($key == $keyLast){
+								$value['children'][$keyPrevious]['col_span'] = "12"; 
+								$previousColSpan = 0;
+							}
+						default:
+							# code...
+							break;
+					}
+					$keyPrevious = $key;
+
+				}
+			}
+		}
+		return $propTree;
 	}
 }

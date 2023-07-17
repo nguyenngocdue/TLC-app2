@@ -20,8 +20,9 @@ class PivotTable extends Component
     use TraitLibPivotTableDataFields;
     use ColumnsPivotReport;
     public function __construct(
-        private $key = '',
+        private $modeType = '',
         private $dataSource = [],
+        private $itemsSelected = [],
     ) {
     }
 
@@ -42,8 +43,6 @@ class PivotTable extends Component
             }, $dataOutput);
             return $data1;
         }
-        // dd($dataOutput);
-        // dd($processedData, $calculatedData, $transferredData, $rowFields, $dataOutput);
         return $dataOutput;
     }
 
@@ -63,15 +62,15 @@ class PivotTable extends Component
         return $dataTables;
     }
 
-    private function attachInfoToDataSource($tables, $processedData)
+    private function attachInfoToDataSource($tables, $processedData, $allDataFields)
     {
+        [$rowFields, $bidingRowFields,,, $bidingColumnFields,,,,,,,,,] =  $allDataFields;
 
-        [$rowFieldsHasAttr, $bindingFields,,, $bidingColumnFields,, $dataIndex,] =  $this->getDataFields();
         foreach ($processedData as &$items) {
             foreach ($items as $key => $id) {
-                if (in_array($key, $rowFieldsHasAttr)) {
+                if (in_array($key, $rowFields)) {
                     try {
-                        $infoAttr = $bindingFields[$key];
+                        $infoAttr = $bidingRowFields[$key];
                         $tableName = $infoAttr['table_name'];
                         $attributeName = $infoAttr['attribute_name'];
                         $fieldName = $key . '_' . $tableName . '_' . $attributeName;
@@ -128,12 +127,12 @@ class PivotTable extends Component
         return $orders;
     }
 
-    private function sortLinesData($dataOutput)
+    private function sortLinesData($dataOutput, $allDataFields)
     {
         // dd($dataOutput);
-        [,,,,,,, $sortBy] =  $this->getDataFields();
+        [, , , , , , , $sortBy, , , , ,,]= $allDataFields;
+        // dd($allDataFields);
         if (!$this->getDataFields()) return collect($dataOutput);
-
         $sortOrders = $this->sortByData($sortBy);
         uasort($dataOutput, function ($item1, $item2) use ($sortOrders) {
             foreach ($sortOrders as $field => $sortOrder) {
@@ -211,18 +210,39 @@ class PivotTable extends Component
         return [];
     }
 
-    private function makeDataRenderer($primaryData)
+    private function triggerFilters($topParams, $fieldOfFilters)
     {
-        [$rowFields, $bidingRowFields, $filters, $propsColumnField, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields, $columnFields, $infoColumnFields, $tableIndex] =  $this->getDataFields();
-        $valueFilters = count($filters)  ? array_combine($filters, [[1,4,2,3], [7,8,9,10]]) : [];
+        $dataFilters = [];
+        foreach ($fieldOfFilters as $fieldFilter) {
+            if (isset($topParams['many_' . $fieldFilter])) {
+                $dataFilters[$fieldFilter] = (array)$topParams['many_' . $fieldFilter];
+            } elseif (isset($topParams[$fieldFilter])) {
+                $dataFilters[$fieldFilter] = (array)$topParams[$fieldFilter];
+            }
+        }
+        return $dataFilters;
+    }
+
+    private function makeDataRenderer($linesData, $allDataFields)
+    {
+        $topParams = $this->itemsSelected;
+        [
+            $rowFields,,
+            $fieldOfFilters,
+            $propsColumnField,,
+            $dataAggregations,,,
+            $valueIndexFields,
+            $columnFields,
+            $infoColumnFields,
+            $tableIndex,,
+        ] =  $allDataFields;
+
+        if (is_object($linesData)) $linesData = array_map(fn ($item) => (array)$item, $linesData->toArray());
         // Step 1: reduce lines from Filters array
-        if(is_object($primaryData)) $primaryData = array_map(fn($item) => (array)$item, $primaryData->toArray());
-        $linesData = $primaryData;
-        $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $valueFilters);
-        // dd($valueFilters, $dataReduce, $linesData);
+        $keysFilters = $this->triggerFilters($topParams, $fieldOfFilters);
+        $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $keysFilters);
+        // dump($dataFilters, $dataReduce);
 
-
-        // dump($columnFields);
         // Step 2: group lines by Row_Fields array
         if (!count($rowFields)) {
             $processedData = PivotReport::groupBy($dataReduce, $columnFields);
@@ -252,8 +272,7 @@ class PivotTable extends Component
         // dd($dataIdsOutput);
 
         $tables = $this->getDataFromTables($tableIndex);
-        $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput);
-        // dd($dataOutput, $tables);
+        $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput, $allDataFields);
 
         $dataOutput = $this->makeTopTitle($dataOutput, $rowFields, $columnFields);
         // dd($dataOutput);
@@ -274,7 +293,7 @@ class PivotTable extends Component
         }
         $dataOutput = $this->updateResultOfAggregations($columnFields, $dataAggregations, $dataOutput);
         // dd($dataOutput);
-        
+
         return $dataOutput;
     }
 
@@ -301,12 +320,13 @@ class PivotTable extends Component
 
     public function render()
     {
-        $primaryData = $this->dataSource;
-        if (!$this->getDataFields()) return false;
-        $dataOutput = $this->makeDataRenderer($primaryData);
-        [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput);
-        $dataOutput = $this->sortLinesData($dataOutput);
+        $allDataFields = $this->getDataFields($this->dataSource, $this->modeType);
+        $dataOutput = $this->makeDataRenderer($this->dataSource, $allDataFields);
+        [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput, $allDataFields);
+        $dataOutput = $this->sortLinesData($dataOutput, $allDataFields);
         $dataOutput = $this->changeValueData($dataOutput);
+
+        $pivotFilters = $this->itemsSelected;
 
         // dump($dataOutput);
         return view('components.renderer.report.pivot-table', [

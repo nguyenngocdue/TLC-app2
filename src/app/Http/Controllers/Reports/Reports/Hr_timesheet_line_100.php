@@ -28,6 +28,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         [$startDate, $endDate] = Report::explodePickerDate($pickerDate);
         $startDate = Report::formatDateString($startDate, 'Y-m-d');
         $endDate = Report::formatDateString($endDate, 'Y-m-d');
+        // dump($startDate, $endDate, $modeParams);
         $sql = "SELECT
                     tsl.project_id AS project_id,
                     DATE(tsl.start_time) AS time_sheet_start_time,

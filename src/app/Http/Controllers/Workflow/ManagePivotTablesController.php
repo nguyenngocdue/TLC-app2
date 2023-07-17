@@ -27,7 +27,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 170,
+                'width' => 300,
             ],
             [
                 'dataIndex' => 'row_fields',
@@ -35,14 +35,14 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 300,
+                'width' => 200,
             ],
             [
                 'dataIndex' => 'column_fields',
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 300,
+                'width' => 200,
             ],
             [
                 'dataIndex' => 'value_index_fields',
@@ -70,14 +70,14 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 500,
+                'width' => 200,
             ],
             [
                 'dataIndex' => 'sort_by',
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 500,
+                'width' => 50,
             ],
         ];
     }
