@@ -31,10 +31,10 @@
         @foreach($propsTree as $propTree)
         <x-print.description-group5 type={{$type}} modelPath={{$modelPath}} :propTree="$propTree" :dataSource="$dataSource" />
         @endforeach
+        <x-print.printed-time-zone />
         <div class="fixed top-52 right-0 no-print">
             <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" action="edit" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
         </div>
-        
     </div>
 </div>
 <div class="no-print">
