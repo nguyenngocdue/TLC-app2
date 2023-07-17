@@ -81,19 +81,22 @@ trait TraitFormatBookmarkEntities
         $data = (new LoggerAccessRecent)(CurrentUser::id());
         return collect($data)->toArray();
     }
+    private function filterRecentDocument($array,$allApps){
+        return array_filter(array_map(function($item) use ($allApps){
+            $index = $item->entity_name;
+            if(isset($allApps[$index])){
+                $allApps[$index]['href_recent'] = $item->url;
+                return $allApps[$index];
+            }
+        },$array),fn($item) => $item);
+    }
     public function getAllAppsOfSearchModalAndTopDrawer()
     {
         $recentDoc = $this->getDataSourceRecentDoc();
         $allApps = $this->getDataSource(LibApps::getAllShowBookmark());
         $allAppsTopDrawer = $this->getDataSource(LibApps::getAllNavbarBookmark());
         $allAppsTopDrawer = $this->formatDataSource($allAppsTopDrawer);
-        $a = array_map(function($item) use ($allApps){
-            $index = $item->entity_name;
-            if(isset($allApps[$index])){
-                $allApps[$index]['href_recent'] = $item->url;
-                return $allApps[$index];
-            }
-        },$recentDoc);
-        return [array_values($allApps), array_values($allAppsTopDrawer)];
+        $allAppsRecent = $this->filterRecentDocument($recentDoc,$allApps);
+        return [array_values($allAppsRecent),array_values($allApps), array_values($allAppsTopDrawer)];
     }
 }

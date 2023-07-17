@@ -26,11 +26,18 @@ class TopDrawer extends Component
      */
     public function render()
     {
-        [$allApps, $allAppsTopDrawer] = $this->getAllAppsOfSearchModalAndTopDrawer();
+        [$allAppsRecent,$allApps, $allAppsTopDrawer] = $this->getAllAppsOfSearchModalAndTopDrawer();
         return view('components.homepage.top-drawer', [
+            'buttonTabs' => $this->buttonTabs($allAppsTopDrawer),
+            'allAppsRecent' => $allAppsRecent,
             'allApps' => $allApps,
             'allAppsTopDrawer' => $allAppsTopDrawer,
             'route' => route('updateBookmark'),
         ]);
+    }
+    private function buttonTabs($allAppsTopDrawer){
+        $buttonTabs = array_unique(array_column($allAppsTopDrawer,'package_tab'));
+        array_unshift($buttonTabs,'recent_document');
+        return $buttonTabs;
     }
 }

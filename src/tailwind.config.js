@@ -5,6 +5,7 @@ module.exports = {
         './resources/**/*.blade.php',
         './resources/**/*.js',
         './resources/**/*.vue',
+        'node_modules/preline/dist/*.js',
     ],
     theme: {
         extend: {
@@ -103,5 +104,7 @@ module.exports = {
         divideColor: ['dark'],
         boxShadow: ['focus', 'dark:focus'],
     },
-    plugins: [],
+    plugins: [
+        require('preline/plugin'),
+    ],
 }

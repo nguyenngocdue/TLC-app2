@@ -19,10 +19,12 @@
         </div>
     </ul>
     <script>
-        dataTopDrawer = document.querySelector("[data-top-drawer]")
-        allApps = allApps == null ? (@json($allApps)) : allApps
-        allAppsTopDrawer = allAppsTopDrawer == null ? (@json($allAppsTopDrawer)) : allAppsTopDrawer
-        url = (@json($route))
-        renderTopDrawer(filterAllAppCheckAdmin(allAppsTopDrawer),url)
+        dataTopDrawer = document.querySelector("[data-top-drawer]");
+        allAppsRecent = allAppsRecent == null ? (@json($allAppsRecent)) : allAppsRecent;
+        allApps = allApps == null ? (@json($allApps)) : allApps;
+        allAppsTopDrawer = allAppsTopDrawer == null ? (@json($allAppsTopDrawer)) : allAppsTopDrawer;
+        buttonTabs =  @json($buttonTabs);
+        url = (@json($route));
+        renderTopDrawer(buttonTabs,allAppsRecent,filterAllAppCheckAdmin(allAppsTopDrawer),url);
     </script>
 </template>

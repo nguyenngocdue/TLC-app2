@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.3.2 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -167,6 +167,8 @@ optgroup,
 select,
 textarea {
   font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
   font-size: 100%; /* 1 */
   font-weight: inherit; /* 1 */
   line-height: inherit; /* 1 */
@@ -301,6 +303,13 @@ ul,
 menu {
   list-style: none;
   margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog {
   padding: 0;
 }
 
@@ -528,6 +537,9 @@ video {
 }
 .invisible {
   visibility: hidden;
+}
+.collapse {
+  visibility: collapse;
 }
 .static {
   position: static;
@@ -1231,9 +1243,6 @@ video {
 .w-1\/2 {
   width: 50%;
 }
-.w-1\/3 {
-  width: 33.333333%;
-}
 .w-1\/4 {
   width: 25%;
 }
@@ -1516,6 +1525,9 @@ video {
 .resize-none {
   resize: none;
 }
+.resize {
+  resize: both;
+}
 .snap-start {
   scroll-snap-align: start;
 }
@@ -1776,6 +1788,9 @@ video {
 }
 .border-r-2 {
   border-right-width: 2px;
+}
+.border-r-\[3px\] {
+  border-right-width: 3px;
 }
 .border-t {
   border-top-width: 1px;
@@ -4633,6 +4648,10 @@ video {
 .outline {
   outline-style: solid;
 }
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
@@ -7414,6 +7433,22 @@ video {
   --tw-text-opacity: 1;
   color: rgb(190 24 93 / var(--tw-text-opacity));
 }
+[data-hs-tab].active.hs-tab-active\:border-blue-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+[data-hs-tab].active.hs-tab-active\:text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+[data-hs-tab].active .hs-tab-active\:border-blue-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+[data-hs-tab].active .hs-tab-active\:text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
 :is(.dark .dark\:divide-gray-700) > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-divide-opacity));
@@ -7519,6 +7554,9 @@ video {
 }
 :is(.dark .dark\:bg-opacity-70) {
   --tw-bg-opacity: 0.7;
+}
+:is(.dark .dark\:bg-opacity-80) {
+  --tw-bg-opacity: 0.8;
 }
 :is(.dark .dark\:text-blue-500) {
   --tw-text-opacity: 1;
@@ -7694,6 +7732,14 @@ video {
 :is(.dark .dark\:focus\:ring-primary-800:focus) {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(30 64 175 / var(--tw-ring-opacity));
+}
+:is(.dark [data-hs-tab].active.dark\:hs-tab-active\:text-blue-600) {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+:is(.dark [data-hs-tab].active .dark\:hs-tab-active\:text-blue-600) {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 @media (min-width: 640px) {
 

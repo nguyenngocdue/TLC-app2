@@ -4,18 +4,110 @@ let dataContainer = null
 let dataTopDrawer = null
 let searchInput = null
 let allApps = null
+let allAppsRecent = null
 let allAppsTopDrawer = null
 let currentUserIsAdmin = null
 let apps = []
 let appsTopDrawer = []
 
-const renderHtml = (appsRender, url, topDrawer) => {
-    if (topDrawer) {
-        dataTopDrawer.innerHTML = ``
+const renderSearchModalHtml = (apps,url) => {
+        dataContainer.innerHTML = ``
+        let resultHtml = ``
+        for (const property in apps) {
+            const subPackage = property
+            let html = ``
+            apps[property].forEach((app) => {
+                const isBookmark = app.bookmark
+                    ? 'text-blue-500'
+                    : 'text-gray-300'
+                const status = capitalize(app.status ?? '')
+                const isAdmin =
+                    app.hidden == 'true'
+                        ? '<i class="fa-duotone fa-eye text-blue-500"></i>'
+                        : ''
+                const statusHtml = status
+                    ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
+                    : ''
+                const { package_rendered } = app
+                html += `<li>
+                                <div class='flex p-2 text-xs font-medium  text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
+                                <a href="${app.href
+                    }" class="flex flex-1 items-center ">
+                                    ${app.icon ??
+                    "<i class='fa-light fa-file'></i>"
+                    }
+                                    <span class="flex-1 ml-3 whitespace-nowrap">${app.title
+                    }</span>
+                                    ${isAdmin}
+                                    ${statusHtml}
+                                    <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
+                                    </a>
+                                    <button tabIndex=-1 id='bookmark_${app.name
+                    }' onclick="bookmarkSearchModal('${app.name
+                    }','${url}')" class='px-2 text-base ${isBookmark}'><i class="fa-solid fa-bookmark"></i></button>
+                                </div>
+                            </li>`
+            })
+            resultHtml += `<div >
+                                <p class="py-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
+                                    <ul class="space-y-1">
+                                        ${html}
+                                    </ul>
+                                </div>`
+        }
+        dataContainer.innerHTML += resultHtml
+
+}
+const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
+        dataTopDrawer.innerHTML = ``;
+        let htmlButtons = ``;
+        let indexButtonTabs = 1;
+        buttonTabs.forEach((button) => {
+            const nameButton = capitalize(button);
+            const isActiveCss = indexButtonTabs == 1 ? 'active' : 'dark:hover:text-gray-300';
+            htmlButtons += 
+            `<button type="button" class="hs-tab-active:border-blue-500 hs-tab-active:text-blue-600 dark:hs-tab-active:text-blue-600 py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 ${isActiveCss}" id="vertical-tab-with-border-item-${indexButtonTabs}" data-hs-tab="#vertical-tab-with-border-${indexButtonTabs}" aria-controls="vertical-tab-with-border-1" role="tab">
+             ${nameButton}
+            </button>`
+            indexButtonTabs++;
+        })
+        var htmlButtonTabs = `
+        <div class="border-r border-gray-200 dark:border-gray-700">
+            <nav class="flex flex-col space-y-2" aria-label="Tabs" role="tablist" data-hs-tabs-vertical="true">
+            ${htmlButtons}
+            </nav>
+        </div>
+        `
+        let htmlProperty = ``;
+        for (const property in recentDoc) {
+            const subPackage = property
+            let html = ``
+            recentDoc[property].forEach((item) => {
+                const statusHtml = item.status
+                            ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
+                            : ''
+                html += `<li>
+                            <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
+                                    <a href="${item.href}" class="flex flex-1 px-2 items-center ">
+                                    ${item.icon ??"<i class='fa-light fa-file'></i>"}
+                                <span class="flex-1 ml-3 whitespace-nowrap">${item.title}</span>
+                                ${statusHtml}
+                                    </a>
+                            </div>
+                        </li>`;
+            })
+            htmlProperty += `<p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
+                                <ul class="space-y-1">
+                                    ${html}
+                                </ul>`;
+        }
+        var htmlRecentDoc = `<div id="vertical-tab-with-border-1" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-1">
+                        ${htmlProperty}
+                </div>`
         let resultHtmlTopDrawer = ``
+        let indexTabs = 2;
         for (const app_index in appsRender) {
             let resultHtml = ``
-            const nameApp = capitalize(app_index ?? '')
             const apps = appsRender[app_index]
             for (const property in apps) {
                 const lengthGroup = Object.keys(apps[property]).length
@@ -129,66 +221,23 @@ const renderHtml = (appsRender, url, topDrawer) => {
                                         <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${package} ${totalPackageHtml}</p>
                                             ${htmlGroup}
                                 </div>`
-                // <ul class="grid grid-rows-2 grid-flow-col">
             }
-            resultHtmlTopDrawer += `<div class="px-2 border-b border-gray-700 py-5">
-                                        <p class="p-1 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                            ${nameApp}
-                                        </p>
+            resultHtmlTopDrawer += `<div id="vertical-tab-with-border-${indexTabs}" class="hidden" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-${indexTabs}">
                                         <div class="grid grid-rows-auto grid-flow-col">
-                                            <div class='xl:flex'>${resultHtml}</div>
+                                            <div class='xl:flex flex-wrap'>${resultHtml}</div>
                                         </div>
-                                    </div>`
+                                    </div>
+                                    `;
+            indexTabs++;
         }
-
-        dataTopDrawer.innerHTML += resultHtmlTopDrawer
-    } else {
-        dataContainer.innerHTML = ``
-        let resultHtml = ``
-        for (const property in apps) {
-            const subPackage = property
-            let html = ``
-            apps[property].forEach((app) => {
-                const isBookmark = app.bookmark
-                    ? 'text-blue-500'
-                    : 'text-gray-300'
-                const status = capitalize(app.status ?? '')
-                const isAdmin =
-                    app.hidden == 'true'
-                        ? '<i class="fa-duotone fa-eye text-blue-500"></i>'
-                        : ''
-                const statusHtml = status
-                    ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
-                    : ''
-                const { package_rendered } = app
-                html += `<li>
-                                <div class='flex p-2 text-xs font-medium  text-gray-700 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
-                                <a href="${app.href
-                    }" class="flex flex-1 items-center ">
-                                    ${app.icon ??
-                    "<i class='fa-light fa-file'></i>"
-                    }
-                                    <span class="flex-1 ml-3 whitespace-nowrap">${app.title
-                    }</span>
-                                    ${isAdmin}
-                                    ${statusHtml}
-                                    <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
-                                    </a>
-                                    <button tabIndex=-1 id='bookmark_${app.name
-                    }' onclick="bookmarkSearchModal('${app.name
-                    }','${url}')" class='px-2 text-base ${isBookmark}'><i class="fa-solid fa-bookmark"></i></button>
-                                </div>
-                            </li>`
-            })
-            resultHtml += `<div >
-                                <p class="py-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
-                                    <ul class="space-y-1">
-                                        ${html}
-                                    </ul>
-                                </div>`
-        }
-        dataContainer.innerHTML += resultHtml
-    }
+        dataTopDrawer.innerHTML += `<div class="flex flex-wra1p">
+                                        ${htmlButtonTabs}
+                                        <div class="ml-3 overflow-x-auto">
+                                        ${htmlRecentDoc}
+                                        ${resultHtmlTopDrawer} 
+                                        </div>
+                                    </div>`;
+   
 }
 function groupBySubPackage(arr) {
     const result = arr.reduce((group, product) => {
@@ -237,16 +286,17 @@ function capitalize(str) {
 }
 function render(value, url) {
     apps = groupByFil(value, 'sub_package_rendered')
-    renderHtml(apps, url)
+    renderSearchModalHtml(apps, url)
 }
-function renderTopDrawer(value, url) {
+function renderTopDrawer(buttonTabs,recentDoc,value, url) {
     appsTopDrawer = groupByFilHasSubFill(
         value,
         'package_tab',
         'package_rendered',
         'sub_package_rendered'
     )
-    renderHtml(appsTopDrawer, url, true)
+    recentDoc = groupByFil(recentDoc, 'sub_package_rendered');
+    renderTopDrawerHtml(buttonTabs,recentDoc, appsTopDrawer, url)
 }
 function matchRegex(valueSearch, app) {
     const formatText = valueSearch.replaceAll(' ', '.*')

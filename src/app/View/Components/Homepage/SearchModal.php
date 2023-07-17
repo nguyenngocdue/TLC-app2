@@ -30,7 +30,7 @@ class SearchModal extends Component
      */
     public function render()
     {
-        [$allApps, $allAppsTopDrawer] = $this->getAllAppsOfSearchModalAndTopDrawer();
+        [,$allApps, $allAppsTopDrawer] = $this->getAllAppsOfSearchModalAndTopDrawer();
         return view('components.homepage.search-modal', [
             'allApps' => $allApps,
             'allAppsTopDrawer' => $allAppsTopDrawer,
