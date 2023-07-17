@@ -429,6 +429,16 @@
         "on_hold": "",
         "closed": ""
     },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "closed": ""
+    },
     "qs_manager": {
         "name": "qs_manager",
         "name_rendered": "",
@@ -463,11 +473,11 @@
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "closed": ""
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
     },
     "whs_manager": {
         "name": "whs_manager",

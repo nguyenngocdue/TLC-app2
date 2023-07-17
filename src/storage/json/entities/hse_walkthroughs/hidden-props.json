@@ -2,58 +2,58 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_walkthrough_datetime": {
+        "name": "_walkthrough_datetime",
+        "column_name": "walkthrough_datetime",
         "new": "",
         "pending_approval": "",
         "rejected": "",
         "closed": ""
     },
-    "_walkthrough_datetime": {
-        "name": "_walkthrough_datetime",
-        "column_name": "walkthrough_datetime",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
-    },
     "_workplace_id": {
         "name": "_workplace_id",
         "column_name": "workplace_id",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
         "column_name": "getCorrectiveActions",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_slug": {
         "name": "_slug",
@@ -66,18 +66,18 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
         "new": "",
         "pending_approval": "",
         "rejected": "",
         "closed": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "closed": "true"
     },
     "_status": {
         "name": "_status",
