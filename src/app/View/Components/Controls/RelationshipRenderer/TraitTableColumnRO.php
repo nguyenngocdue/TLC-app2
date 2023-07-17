@@ -65,7 +65,7 @@ trait TraitTableColumnRO
                     $newColumn["align"] = "center";
                     break;
                 case 'attachment':
-                    $newColumn['renderer'] = "text";
+                    $newColumn['renderer'] = "thumbnails";
                     break;
                 default:
                     $newColumn['renderer'] = "text";
