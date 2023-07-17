@@ -27,7 +27,7 @@
 
   const showPoint = (e, obj)=>{
     const location =obj.part.location
-    const index =  obj.qb.index
+    const index =  obj.data.index
     const id = "table01[location]["+index+"]";
     const locStr = location.x.toFixed(2) + " " + location.y.toFixed(2)
     document.querySelector('[id="'+id+'"]').value=locStr
@@ -51,7 +51,7 @@
       { margin: 5 },
       new go.Binding("text", "title"),
       new go.Binding("stroke", "color"),
-      new go.Binding("index", "color"),
+      // new go.Binding("index", "index"),
       )
   );
   myDiagram1.linkTemplate =
@@ -61,9 +61,9 @@
     $(go.Shape, { toArrow: "Standard" })
   );
   
+const blocks = @json($blocks);
+const links = @json($links);
+console.log(blocks, links);
   // create the model data that will be represented by Nodes and Links
-  myDiagram1.model = new go.GraphLinksModel(
-    @json($blocks),
-    @json($links))
-    
+  myDiagram1.model = new go.GraphLinksModel(blocks, links)
   </script>

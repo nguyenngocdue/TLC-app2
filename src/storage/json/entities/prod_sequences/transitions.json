@@ -1,7 +1,7 @@
 {
     "new": {
         "name": "new",
-        "location": "",
+        "location": "-420.00 -80.00",
         "new": "",
         "in_progress": "true",
         "on_hold": "",
@@ -11,7 +11,7 @@
     },
     "in_progress": {
         "name": "in_progress",
-        "location": "",
+        "location": "-250.00 -70.00",
         "new": "",
         "in_progress": "",
         "on_hold": "true",
@@ -21,7 +21,7 @@
     },
     "on_hold": {
         "name": "on_hold",
-        "location": "",
+        "location": "-170.00 80.00",
         "new": "",
         "in_progress": "true",
         "on_hold": "",
@@ -31,7 +31,7 @@
     },
     "finished": {
         "name": "finished",
-        "location": "",
+        "location": "110.00 80.00",
         "new": "",
         "in_progress": "true",
         "on_hold": "true",
@@ -41,7 +41,7 @@
     },
     "cancelled": {
         "name": "cancelled",
-        "location": "",
+        "location": "-40.00 -130.00",
         "new": "",
         "in_progress": "true",
         "on_hold": "true",
@@ -51,7 +51,7 @@
     },
     "obsolete": {
         "name": "obsolete",
-        "location": "",
+        "location": "230.00 -70.00",
         "new": "",
         "in_progress": "true",
         "on_hold": "true",
