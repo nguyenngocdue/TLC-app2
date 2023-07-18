@@ -2,19 +2,15 @@
 
 namespace App\View\Components\Renderer\Report;
 
-use App\Http\Controllers\CheckFieldPivotInDatabase;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\TraitLibPivotTableDataFields;
-use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\Report;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\PivotReportDataFields;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\View\Component;
-use Illuminate\Support\Str;
 
-class PivotTable extends Component
+class PivotTable extends Controller
 {
 
     use TraitLibPivotTableDataFields;
@@ -45,22 +41,6 @@ class PivotTable extends Component
         }
         return $dataOutput;
     }
-
-    // private function getDataFromTables($tableIndex)
-    // {
-    //     $dataTables = array_merge(...array_map(function ($name) {
-    //         try {
-    //             $array = DB::table($name)->select('id', 'name', 'description')->get()->toArray();
-    //             $array = array_combine(array_column($array, 'id'), $array);
-    //             return [$name => $array];
-    //         } catch (\Exception $e) {
-    //             $array = DB::table($name)->select('id', 'name')->get()->toArray();
-    //             $array = array_combine(array_column($array, 'id'), $array);
-    //             return [$name => $array];
-    //         }
-    //     }, $tableIndex));
-    //     return $dataTables;
-    // }
 
     private function getDataFromTables($tableIndex)
     {
@@ -336,23 +316,5 @@ class PivotTable extends Component
             }
         }
         return $dataOutput;
-    }
-
-    public function render()
-    {
-        $topParams = $this->itemsSelected;
-        $linesData = $this->dataSource;
-        $allDataFields = $this->getDataFields($linesData, $this->modeType);
-        $dataOutput = $this->makeDataRenderer($linesData, $allDataFields, $topParams);
-        // dump($dataOutput);
-
-        [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($linesData, $dataOutput, $allDataFields, $this->modeType);
-        $dataOutput = $this->sortLinesData($dataOutput, $allDataFields);
-        // dump($dataOutput);
-        return view('components.renderer.report.pivot-table', [
-            'tableDataSource' => $dataOutput,
-            'tableColumns' => $tableColumns,
-            'tableDataHeader' => $tableDataHeader,
-        ]);
     }
 }
