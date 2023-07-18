@@ -6,9 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Sub_project extends ModelExtended
 {
-    public $timestamps = false;
     protected $fillable = ["id", "name", "description", "slug", "status", "project_id", "owner_id", 'lod_id'];
-
     protected $table = 'sub_projects';
 
     public static $eloquentParams = [
