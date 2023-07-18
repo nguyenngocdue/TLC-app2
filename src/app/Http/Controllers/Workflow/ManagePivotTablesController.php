@@ -49,21 +49,21 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 300,
+                'width' => 200,
             ],
             [
                 'dataIndex' => 'data_aggregations',
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 300,
+                'width' => 100,
             ],
             [
                 'dataIndex' => 'data_fields',
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 500,
+                'width' => 200,
             ],
             [
                 'dataIndex' => 'lookup_tables',
@@ -77,7 +77,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 50,
+                'width' => 200,
             ],
         ];
     }

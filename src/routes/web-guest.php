@@ -51,7 +51,7 @@ Route::resource('welcome-due-employee_project_not_table_information', WelcomeDue
 Route::resource('welcome-due-employee_project_change_data_field_title', WelcomeDueController_hr_timesheet_employee_project_change_data_field_title::class)->only('index');
 Route::resource('welcome-due-apple_store_test_code', WelcomeDueController_apple_store_test_code::class)->only('index');
 // Pivot table
-Route::get('pivot/report-hr_timesheet_line_project_date', [PivotReport_Hr_timesheet_line_project_date::class, 'index'])->name('report-hr_timesheet_line_project_date');
+Route::get('pivot-table/report-hr_timesheet_line_project_date', [PivotReport_Hr_timesheet_line_project_date::class, 'index'])->name('report-hr_timesheet_line_project_date');
 
 
 

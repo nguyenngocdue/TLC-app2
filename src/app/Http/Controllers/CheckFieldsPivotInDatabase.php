@@ -10,6 +10,7 @@ trait CheckFieldsPivotInDatabase
 
     public function checkFieldsInDatabase($lib, $dataSource)
     {
+        // if(empty($dataSource->toArray())) return [];
         if(is_object($dataSource)) $dataSource = (array)$dataSource->toArray()[0];
         $originalKeys = array_keys($dataSource);
         $failedFields = [];

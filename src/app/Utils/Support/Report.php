@@ -43,7 +43,6 @@ class Report
         foreach ($result0 as $line) {
             $result1[$line['name']] = $line;
         }
-        // dump($result1);
         return $result1;
     }
     public static function getFirstItemFromChildrenArray($dataSource)

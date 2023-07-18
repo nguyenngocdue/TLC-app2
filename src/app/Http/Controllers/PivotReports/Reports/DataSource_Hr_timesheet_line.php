@@ -1,17 +1,14 @@
 <?php
 
-namespace App\View\Components\Renderer\Report\PivotTables;
+namespace App\Http\Controllers\PivotReports\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\Reports\Hr_timesheet_line_100;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\TraitLibPivotTableDataFields;
 use App\Http\Controllers\UpdateUserSettings;
-use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\CurrentPathInfo;
-use App\Utils\Support\Report;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class DataSource_Hr_timesheet_line extends Controller
 {
