@@ -19,6 +19,25 @@ const findParentIdFieldName = (tableId, key_value_as = 'value_as_parent_id') => 
 
 const ajaxAddLineQueue = {}
 
+const getDefaultValueOfSetTableColumnListener = () => {
+    const result = {}
+    listenersOfDropdown2.forEach(listener => {
+        if (listener.listen_action === "set_table_column") {
+            const { listen_to_fields } = listener
+            listen_to_fields.forEach(field => {
+                const selectedId = getEById(field).val()
+                result[field] = selectedId
+            })
+        }
+    })
+    // console.log(k, result)
+    return result
+    // return {
+    //     rate_exchange_month_id: 1,
+    //     counter_currency_id: 1,
+    // }
+}
+
 const addANewLine = (params) => {
     const { tableId, valuesOfOrigin = {}, isDuplicatedOrAddFromList = false, batchLength = 1, } = params
     const { tableName, dateTimeControls = [] } = tableObject[tableId]
@@ -44,8 +63,9 @@ const addANewLine = (params) => {
         order_no: orderNoValue,
 
         ...valuesOfOrigin,
+        ...getDefaultValueOfSetTableColumnListener(),
     }
-    // console.log(data)
+    // console.log(data0)
 
     const btnAddANewLineId = 'btnAddANewLine_' + tableId
     const btnAddFromAListId = 'btnAddFromAList_' + tableId
@@ -131,9 +151,9 @@ const addANewLine = (params) => {
 const addANewLineFull = (params) => {
     const { tableId, isDuplicatedOrAddFromList, batchLength = 1 } = params
     let { valuesOfOrigin } = params //<< Incase of duplicate, this is the value of the original line
+    // console.log("valuesOfOrigin: ", valuesOfOrigin)
     const insertedId = valuesOfOrigin['id']
     // console.log('addANewLine', tableId, insertedId)
-    // console.log("valuesOfOrigin: ", valuesOfOrigin)
     const { columns, showNo, showNoR, tableDebugJs, isOrderable } =
         tableObject[tableId]
     // console.log("ADD LINE TO", params, tableDebugJs, isOrderable)
@@ -357,6 +377,7 @@ const addANewLineFull = (params) => {
         switch (column['renderer']) {
             case 'dropdown4':
                 let selected
+                // console.log(isDuplicatedOrAddFromList)
                 if (isDuplicatedOrAddFromList) {
                     selected = valuesOfOrigin[column['dataIndex']]
                 } else {
@@ -375,6 +396,10 @@ const addANewLineFull = (params) => {
                             break
                         case column['value_as_sub_project_id']:
                             selected = $('#entitySubProjectId').val()
+                            break
+                        default:
+                            //This is to get the default value from set_table_column
+                            selected = valuesOfOrigin[column['dataIndex']]
                             break
                         // case column['value_as_rate_exchange_month_id']:
                         //     selected = $('#entityCurrencyMonth').val()

@@ -6,4 +6,4 @@
     class="{{$classList}} {{$readOnly ? 'readonly' : ''}}" 
     placeholder="Type here..."
     {{$readOnly ? 'readonly': ''}}
-    >{{old($name, $value)}}</textarea>
+    >{!!old($name, $value)!!}</textarea>

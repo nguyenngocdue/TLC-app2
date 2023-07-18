@@ -60,9 +60,9 @@ class Act_travel_expense_claim_line extends ModelExtended
             ['dataIndex' => 'unit_price', 'cloneable' => true],
             ['dataIndex' => 'currency_id',],
             ['dataIndex' => 'total_amount',],
-            ['dataIndex' => 'rate_exchange_month_id', 'invisible' => !true],
-            ['dataIndex' => 'counter_currency_id', 'invisible' => !true],
-            ['dataIndex' => 'currency_pair_id', 'invisible' => !true],
+            ['dataIndex' => 'rate_exchange_month_id', 'invisible' => true],
+            ['dataIndex' => 'counter_currency_id', 'invisible' => true],
+            ['dataIndex' => 'currency_pair_id', 'invisible' => true],
             ['dataIndex' => 'rate_exchange',],
             ['dataIndex' => 'total_estimated_amount', 'footer' => 'agg_sum'],
         ];
