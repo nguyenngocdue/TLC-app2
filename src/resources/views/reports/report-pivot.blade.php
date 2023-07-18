@@ -14,7 +14,7 @@
     </div>
     <div class="flex pb-2 pr-4 ">
         <x-reports.utility-report routeName="{{$routeName}}" />
-        <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{10}}" formName="updatePerPage" />
+        <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{$pageLimit}}" formName="updatePerPage" />
     </div>
     <x-renderer.report.pivot-table modeType="{{$modeType}}" :dataSource="$dataSource" :itemsSelected="$modeParams" />
 </div>

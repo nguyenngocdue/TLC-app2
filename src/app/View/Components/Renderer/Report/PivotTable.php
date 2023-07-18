@@ -133,6 +133,7 @@ class PivotTable extends Component
     private function sortByData($sortByColumn)
     {
         $orders = [];
+        // if(is_null($sortByColumn) || empty($sortByColumn)) return [];
         array_map(function ($item) use (&$orders) {
             $ex = explode(':', $item);
             $key = $ex[0];
