@@ -76,7 +76,7 @@ class DataSource_Hr_timesheet_line extends Controller
             return $this->forwardToMode($request, $modeParams);
         }
         $modeParams = $this->getModeParams($request);
-        $dataSource = collect(array_slice($this->getDataSource1($modeParams)->toArray(), 0, 10000000));
+        $dataSource = collect(array_slice($this->getDataSource1($modeParams)->toArray(), 0, 1000));
         $paramColumns = $this->getParamColumns($dataSource, $this->modeType);
 
         // dd($dataFilters);

@@ -18,6 +18,7 @@ Route::group([
             foreach ($routes as $route) {
                 ['path' => $path, 'name' => $name,] = $route;
                 Route::get($name, [$path, 'index'])->name($name);
+                Route::get("{$name}_ep", [$path, "exportCSV"])->name("{$name}_ep.exportCSV");
             }
         });
     });
