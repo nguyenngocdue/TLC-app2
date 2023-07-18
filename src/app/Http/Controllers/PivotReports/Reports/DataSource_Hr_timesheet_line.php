@@ -4,16 +4,21 @@ namespace App\Http\Controllers\PivotReports\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\Reports\Hr_timesheet_line_100;
+use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
+use App\Http\Controllers\Reports\TraitUpdateParamsReport;
 use App\Http\Controllers\TraitLibPivotTableDataFields;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentPathInfo;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 
 class DataSource_Hr_timesheet_line extends Controller
 {
     use TraitModeParamsReport;
     use TraitLibPivotTableDataFields;
+    use TraitUpdateParamsReport;   
+
     protected $modeType = '';
     protected $mode = '010';
     public function getType()
@@ -21,12 +26,15 @@ class DataSource_Hr_timesheet_line extends Controller
         return "dashboard";
     }
 
+    
+
 
     public function getDataSource1($modeParams)
     {
         $primaryData = (new Hr_timesheet_line_100())->getDataSource($modeParams);
         return $primaryData;
     }
+
 
     protected function getParamColumns($dataSource, $modeType)
     {
@@ -50,18 +58,16 @@ class DataSource_Hr_timesheet_line extends Controller
         return $paramColumns;
     }
 
-
-    protected function forwardToMode($request, $modeParams)
+    protected function getPageParam($typeReport, $entity)
     {
-        $input = $request->input();
-        $isFormType = isset($input['form_type']);
-        // dd($input);
-        if ($isFormType && $input['form_type'] === 'updateParamsReport' || $isFormType && $input['form_type'] === 'updatePerPageReport') {
-            (new UpdateUserSettings())($request);
+        $settings = CurrentUser::getSettings();
+        if (!isset($settings[$entity])) return 10;
+        if (isset($settings[$entity][strtolower($typeReport)]['per_page'])) {
+            $pageLimit = $settings[$entity][strtolower($typeReport)]['per_page'];
+            return $pageLimit;
         }
-        return redirect($request->getPathInfo());
+        return 10;
     }
-
 
     public function index(Request $request)
     {
@@ -70,16 +76,18 @@ class DataSource_Hr_timesheet_line extends Controller
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
         $typeReport = CurrentPathInfo::getTypeReport($request);
-
+        // dump($entity, $typeReport);
         $modeParams = [];
-        if (!$request->input('page') && !empty($input)) {
-            return $this->forwardToMode($request, $modeParams);
-        }
         $modeParams = $this->getModeParams($request);
+
+        if (!$request->input('page') && !empty($input)) {
+            return $this->updateParams($request, $modeParams);
+        }
+
         $dataSource = collect(array_slice($this->getDataSource1($modeParams)->toArray(), 0, 1000));
         $paramColumns = $this->getParamColumns($dataSource, $this->modeType);
+        $pageLimit = $this->getPageParam($typeReport, $entity);
 
-        // dd($dataFilters);
         // dump($dataSource);
         return view("reports.report-pivot", [
             'modeType' => $this->modeType,
@@ -90,6 +98,7 @@ class DataSource_Hr_timesheet_line extends Controller
             'routeName' => $routeName,
             'typeReport' => $typeReport,
             'entity' => $entity,
+            'pageLimit' => $pageLimit,
         ]);
     }
 
