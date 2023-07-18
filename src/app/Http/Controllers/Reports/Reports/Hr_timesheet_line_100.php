@@ -28,7 +28,6 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         [$startDate, $endDate] = Report::explodePickerDate($pickerDate);
         $startDate = Report::formatDateString($startDate, 'Y-m-d');
         $endDate = Report::formatDateString($endDate, 'Y-m-d');
-        // dump($startDate, $endDate, $modeParams);
         $sql = "SELECT
                     tsl.project_id AS project_id,
                     DATE(tsl.start_time) AS time_sheet_start_time,
@@ -51,7 +50,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                 INNER JOIN
                     users us ON tsl.user_id = us.id
                 WHERE
-                    DATE(tsl.start_time) BETWEEN '2022-10-14' AND '2023-01-14'
+                    DATE(tsl.start_time) BETWEEN '$startDate' AND '$endDate'
                 GROUP BY
                     time_sheet_start_time,
                     pj_task_id,

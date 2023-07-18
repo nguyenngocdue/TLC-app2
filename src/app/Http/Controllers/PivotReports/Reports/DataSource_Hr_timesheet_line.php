@@ -1,17 +1,14 @@
 <?php
 
-namespace App\View\Components\Renderer\Report\PivotTables;
+namespace App\Http\Controllers\PivotReports\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\Reports\Hr_timesheet_line_100;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\TraitLibPivotTableDataFields;
 use App\Http\Controllers\UpdateUserSettings;
-use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\CurrentPathInfo;
-use App\Utils\Support\Report;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class DataSource_Hr_timesheet_line extends Controller
 {
@@ -25,15 +22,30 @@ class DataSource_Hr_timesheet_line extends Controller
     }
 
 
-    public function getDataSource1()
+    public function getDataSource1($modeParams)
     {
-        $primaryData = (new Hr_timesheet_line_100())->getDataSource([]);
+        $primaryData = (new Hr_timesheet_line_100())->getDataSource($modeParams);
         return $primaryData;
     }
 
     protected function getParamColumns($dataSource, $modeType)
     {
-        [,,,,,,,,,,,,$dataFilters] = $this->getDataFields($dataSource, $modeType);
+        if (empty($dataSource->toArray())) return [];
+        [
+            $rowFields,
+            $bindingRowFields,
+            $fieldOfFilters,
+            $propsColumnField,
+            $bindingColumnFields,
+            $dataAggregations,
+            $dataIndex,
+            $sortBy,
+            $valueIndexFields,
+            $columnFields,
+            $infoColumnFields,
+            $tableIndex,
+            $dataFilters
+        ] = $this->getDataFields($dataSource, $modeType);
         $paramColumns = array_values($dataFilters);
         return $paramColumns;
     }
@@ -64,10 +76,8 @@ class DataSource_Hr_timesheet_line extends Controller
             return $this->forwardToMode($request, $modeParams);
         }
         $modeParams = $this->getModeParams($request);
-        $dataSource = collect(array_slice($this->getDataSource1()->toArray(), 0, 1000));
+        $dataSource = collect(array_slice($this->getDataSource1($modeParams)->toArray(), 0, 1000));
         $paramColumns = $this->getParamColumns($dataSource, $this->modeType);
-
-        [,,,,,,,,,,,,$dataFilters] = $this->getDataFields($dataSource);
 
         // dd($dataFilters);
         // dump($dataSource);

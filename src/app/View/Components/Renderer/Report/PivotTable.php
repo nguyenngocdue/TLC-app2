@@ -46,19 +46,36 @@ class PivotTable extends Component
         return $dataOutput;
     }
 
+    // private function getDataFromTables($tableIndex)
+    // {
+    //     $dataTables = array_merge(...array_map(function ($name) {
+    //         try {
+    //             $array = DB::table($name)->select('id', 'name', 'description')->get()->toArray();
+    //             $array = array_combine(array_column($array, 'id'), $array);
+    //             return [$name => $array];
+    //         } catch (\Exception $e) {
+    //             $array = DB::table($name)->select('id', 'name')->get()->toArray();
+    //             $array = array_combine(array_column($array, 'id'), $array);
+    //             return [$name => $array];
+    //         }
+    //     }, $tableIndex));
+    //     return $dataTables;
+    // }
+
     private function getDataFromTables($tableIndex)
     {
-        $dataTables = array_merge(...array_map(function ($name) {
+
+        $dataTables = [];
+        foreach (array_values($tableIndex) as $name){
             try {
                 $array = DB::table($name)->select('id', 'name', 'description')->get()->toArray();
-                $array = array_combine(array_column($array, 'id'), $array);
-                return [$name => $array];
+                $dataTables[$name]  = array_combine(array_column($array, 'id'), $array);;
+
             } catch (\Exception $e) {
                 $array = DB::table($name)->select('id', 'name')->get()->toArray();
-                $array = array_combine(array_column($array, 'id'), $array);
-                return [$name => $array];
+                $dataTables[$name]  = array_combine(array_column($array, 'id'), $array);
             }
-        }, $tableIndex));
+        }
         return $dataTables;
     }
 
@@ -130,7 +147,7 @@ class PivotTable extends Component
     private function sortLinesData($dataOutput, $allDataFields)
     {
         // dd($dataOutput);
-        [, , , , , , , $sortBy, , , , ,,]= $allDataFields;
+        [,,,,,,, $sortBy,,,,,,] = $allDataFields;
         // dd($allDataFields);
         if (!$this->getDataFields()) return collect($dataOutput);
         $sortOrders = $this->sortByData($sortBy);
@@ -212,6 +229,7 @@ class PivotTable extends Component
 
     private function triggerFilters($topParams, $fieldOfFilters)
     {
+        if (empty($fieldOfFilters)) return [];
         $dataFilters = [];
         foreach ($fieldOfFilters as $fieldFilter) {
             if (isset($topParams['many_' . $fieldFilter])) {
@@ -225,6 +243,7 @@ class PivotTable extends Component
 
     private function makeDataRenderer($linesData, $allDataFields)
     {
+        if (empty($linesData->toArray())) return [];
         $topParams = $this->itemsSelected;
         [
             $rowFields,,
@@ -292,7 +311,7 @@ class PivotTable extends Component
             $dataOutput[0]["info_column_field"] = $infoColumnFields;
         }
         $dataOutput = $this->updateResultOfAggregations($columnFields, $dataAggregations, $dataOutput);
-        // dd($dataOutput);
+        // dump($dataOutput);
 
         return $dataOutput;
     }
@@ -320,14 +339,11 @@ class PivotTable extends Component
 
     public function render()
     {
-        $allDataFields = $this->getDataFields($this->dataSource, $this->modeType);
-        $dataOutput = $this->makeDataRenderer($this->dataSource, $allDataFields);
+        $linesData = $this->dataSource;
+        $allDataFields = $this->getDataFields($linesData, $this->modeType);
+        $dataOutput = $this->makeDataRenderer($linesData, $allDataFields);
         [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput, $allDataFields);
         $dataOutput = $this->sortLinesData($dataOutput, $allDataFields);
-        $dataOutput = $this->changeValueData($dataOutput);
-
-        $pivotFilters = $this->itemsSelected;
-
         // dump($dataOutput);
         return view('components.renderer.report.pivot-table', [
             'tableDataSource' => $dataOutput,

@@ -162,7 +162,7 @@
         "data_aggregations": "sum",
         "data_fields": "time_sheet_durations",
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms,\r\n pj_tasks,\r\ndepartments,\r\nuser_disciplines",
-        "sort_by": null
+        "sort_by": "sub_project_id(sub_projects.name)"
     },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",

@@ -9,22 +9,40 @@ use Exception;
 
 class PivotReport
 {
-    private function makeColumnFieldsDuplicate($columnFields, $dataOutput)
+
+    private static function actionCreator($reportType, $path, $singular, $mode)
     {
-        $newColumnFields = array_count_values($columnFields);
-        foreach ($newColumnFields as $field => $items) {
-            foreach ($dataOutput as $k1 => &$values) {
-                foreach ($values as $k2 => $value) {
-                    if (str_contains($k2, '_' . $field)) {
-                        for ($i = 2; $i <= $items * 1; $i++) {
-                            $newField = str_replace('_' . $field, '_' . $field . '_[' . $i . ']', $k2);
-                            $values[$newField] = $values[$k2];
-                        }
-                    }
-                }
+        return [
+            'singular' => $singular,
+            'mode' => $mode,
+            'reportType' => $reportType,
+            'path' => $path,
+            // 'routeName' => $reportType . '-' . $singular . "_" . $mode,
+            'name' => $reportType . '-' . $singular . "_" . $mode,
+        ];
+    }
+
+    public static function getAllRoutes()
+    {
+        $entities = Entities::getAll();
+        $result0 = [];
+        $result0 = [];
+        foreach ($entities as $entity) {
+            $entityName = Str::getEntityName($entity);
+            $singular = Str::singular($entityName);
+            $ucfirstName = Str::ucfirst($singular);
+            for ($i = 10; $i <= 100; $i += 10) {
+                $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
+                $path = "App\\Http\\Controllers\\PivotReports\\Reports\\{$ucfirstName}_$mode";
+                if (class_exists($path)) $result0[] = static::actionCreator('report', $path, $singular, $mode);
             }
         }
-        return $dataOutput;
+
+        $result1 = [];
+        foreach ($result0 as $line) {
+            $result1[$line['name']] = $line;
+        }
+        return $result1;
     }
 
     private static function transferValueOfKeys($data, $columnFields, $propsColumnField)

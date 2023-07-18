@@ -15,3 +15,4 @@ include_once(__DIR__ . "/web-database.php");
 include_once(__DIR__ . "/web-guest.php");
 include_once(__DIR__ . "/web-permission.php");
 include_once(__DIR__ . "/web-report.php");
+include_once(__DIR__ . "/web-pivot-report.php");

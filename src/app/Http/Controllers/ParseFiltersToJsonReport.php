@@ -8,6 +8,7 @@ trait ParseFiltersToJsonReport
 {
     function parseStringToJson($array)
     {
+        if(empty($array)) return [];
         $jsonData = [];
         foreach ($array as $value) {
             $jsonData = array_merge($jsonData,self::convertToJSON(($value)));
