@@ -145,7 +145,7 @@ class PivotTable extends Component
         return $orders;
     }
 
-    private function sortLinesData($dataOutput, $allDataFields)
+    public function sortLinesData($dataOutput, $allDataFields)
     {
         // dd($dataOutput);
         [,,,,,,, $sortBy,,,,,,] = $allDataFields;
@@ -242,10 +242,10 @@ class PivotTable extends Component
         return $dataFilters;
     }
 
-    private function makeDataRenderer($linesData, $allDataFields)
+    public function makeDataRenderer($linesData, $allDataFields, $topParams)
     {
         if (empty($linesData->toArray())) return [];
-        $topParams = $this->itemsSelected;
+        
         [
             $rowFields,,
             $fieldOfFilters,
@@ -261,7 +261,7 @@ class PivotTable extends Component
         // Step 1: reduce lines from Filters array
         $keysFilters = $this->triggerFilters($topParams, $fieldOfFilters);
         $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $keysFilters);
-        // dump($dataFilters, $dataReduce);
+        // dd($dataReduce);
 
         // Step 2: group lines by Row_Fields array
         if (!count($rowFields)) {
@@ -340,10 +340,13 @@ class PivotTable extends Component
 
     public function render()
     {
+        $topParams = $this->itemsSelected;
         $linesData = $this->dataSource;
         $allDataFields = $this->getDataFields($linesData, $this->modeType);
-        $dataOutput = $this->makeDataRenderer($linesData, $allDataFields);
-        [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput, $allDataFields);
+        $dataOutput = $this->makeDataRenderer($linesData, $allDataFields, $topParams);
+        // dump($dataOutput);
+
+        [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($linesData, $dataOutput, $allDataFields, $this->modeType);
         $dataOutput = $this->sortLinesData($dataOutput, $allDataFields);
         // dump($dataOutput);
         return view('components.renderer.report.pivot-table', [
