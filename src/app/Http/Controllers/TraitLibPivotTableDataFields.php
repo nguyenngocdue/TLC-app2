@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\StringPivotTable;
+use App\View\Components\Renderer\Report\PivotTables\DataSource_Hr_timesheet_line;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
@@ -12,6 +13,7 @@ use Illuminate\Support\Str;
 trait TraitLibPivotTableDataFields
 {
     use CheckFieldsPivotInDatabase;
+    use ParseFiltersToJsonReport;
 
     private function separateFields($data)
     {
@@ -181,18 +183,28 @@ trait TraitLibPivotTableDataFields
         ];
     }
 
-    public function getDataFields()
+
+
+    public function getDataFields($dataSource = [], $modeType ='')
     {
-        $lib = LibPivotTables::getFor($this->key);
+        $lib = LibPivotTables::getFor($modeType);
         $lib = self::removeEmptyElements($lib);
+
+        $tableIndex = $lib['lookup_tables'] ?? [];
+        // dump($this->modeType, $lib);
+
         if (!$this->checkCreateManagePivotReport($lib)) return false;
 
         $filters = $lib['filters'] ?? [];
+        $dataFilters = $this->parseStringToJson($filters);
+        $fieldOfFilters = array_keys($dataFilters);
+
+
         $row_fields = $lib['row_fields'] ?? [];
-
-
+        
+        
         $fields = $this->separateFields($row_fields);
-
+        
         $columnFields = $lib['column_fields'] ?? [];
         $valueIndexFields = $lib['value_index_fields'] ?? [];
 
@@ -214,8 +226,7 @@ trait TraitLibPivotTableDataFields
         $fieldOdDataFields = $dataFields['field_names'] ?? [];
         $fieldsToCheckDatabase = $this->getFieldsToCheckDatabase($lib, array_keys($biddingRowFields), $originalFields, $fieldOdDataFields);
 
-        $primaryData = $this->dataSource;
-        $checkFieldsInDatabase = $this->checkFieldsInDatabase($fieldsToCheckDatabase, $primaryData);
+        $checkFieldsInDatabase = $this->checkFieldsInDatabase($fieldsToCheckDatabase, $dataSource);
         if (!$checkFieldsInDatabase) return false;
 
         $rowFields = $fields['fields'] ?? [];
@@ -230,11 +241,22 @@ trait TraitLibPivotTableDataFields
         $sortBy = $lib['sort_by'] ?? [];
         $dataIndex = $this->getDataIndex($row_fields);
         $columnFields = $originalFields;
-        // dd($propsColumnField);
         $propsColumnField = array_merge($propsColumnField,$biddingRowFields);
-        // dd($propsColumnField);
 
-        $tableIndex = $lib['lookup_tables'];
-        return [$rowFields, $biddingRowFields, $filters, $propsColumnField, $biddingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields, $columnFields, $infoColumnFields, $tableIndex];
+        return [
+            $rowFields, 
+            $biddingRowFields, 
+            $fieldOfFilters, 
+            $propsColumnField, 
+            $biddingColumnFields, 
+            $dataAggregations, 
+            $dataIndex, 
+            $sortBy, 
+            $valueIndexFields, 
+            $columnFields, 
+            $infoColumnFields, 
+            $tableIndex,
+            $dataFilters,
+        ];
     }
 }

@@ -173,7 +173,7 @@ class Report
     public static function dataWithoutNull($data)
     {
         return array_filter($data, function ($value) {
-            return $value !== null;
+            return $value !== null && $value != '';
         });
     }
 
@@ -229,4 +229,5 @@ class Report
 
         return array_merge($months, $missingMonths);
     }
+
 }

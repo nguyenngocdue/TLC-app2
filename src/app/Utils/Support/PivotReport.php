@@ -52,13 +52,13 @@ class PivotReport
                             break;
                     }
                 } catch (Exception $e) {
-                        continue;
+                    continue;
                     // dd($e->getMessage(), $values);
                 }
             }
             return $dateItems;
         }, $data);
-        
+
         $newArray = self::sumItemsInArray($newArray);
         $newArray = self::concatKeyAndValueOfArray($newArray);
         // Check items that were duplicated in Column_Field column
@@ -68,17 +68,15 @@ class PivotReport
             foreach ($columnFields as $field) {
                 if (isset($newColumnFields[$field])) {
                     $duplicateItems = $newColumnFields[$field];
-                    foreach ($duplicateItems as $fieldDup){
-                        foreach ($newArray as $key => $value){
+                    foreach ($duplicateItems as $fieldDup) {
+                        foreach ($newArray as $key => $value) {
                             if (str_contains($key, $field)) {
                                 $newKey = str_replace($field, $fieldDup, $key);
                                 $array[$newKey] = $value;
                             }
                         }
-                    } 
-
+                    }
                 }
-
             }
             return $array;
         }
@@ -152,10 +150,10 @@ class PivotReport
         $array = [];
         if (!isset($dataFields['field_names'])) return [];
         $x = $dataFields['field_names'];
-        foreach($dataAggregation as $key => $value){
+        foreach ($dataAggregation as $key => $value) {
             $array[$x[$key]]['type_operator'] = $value;
             $array[$x[$key]]['name'] = $x[$key];
-            $array[$x[$key]]['title_override'] = ($t = $dataFields['field_titles'][$key]) ? $t : $value.'_'.$x[$key] ;
+            $array[$x[$key]]['title_override'] = ($t = $dataFields['field_titles'][$key]) ? $t : $value . '_' . $x[$key];
         }
         return $array;
     }
@@ -220,16 +218,20 @@ class PivotReport
     }
 
 
-    public static function reduceDataByFilterColumn($linesData, $conditions)
+    public static function reduceDataByFilterColumn($linesData, $dataFilters)
     {
-        $conditions = Report::dataWithoutNull($conditions);
-        $result = array_filter($linesData, function ($data) use ($conditions) {
-            foreach ($conditions as $field => $values) {
-                if (!isset($data[$field]) || !in_array($data[$field], $values)) {
-                    return false;
+        // dd($dataFilters, $linesData);
+        if (empty($dataFilters)) return $linesData;
+        $result = array_filter($linesData, function ($line) use ($dataFilters) {
+            $lineMatchesFilter = true;
+            foreach ($dataFilters as $field => $values) {
+                if ($field === 'picker_date') continue;
+                if (!isset($line[$field]) || !in_array($line[$field], $values)) {
+                    $lineMatchesFilter = false;
+                    break;
                 }
             }
-            return true;
+            return $lineMatchesFilter;
         });
         return $result;
     }
@@ -419,31 +421,32 @@ class PivotReport
         }
         return false;
     }
-    public static function countItems($array) {
-        $itemCounts = array(); 
+    public static function countItems($array)
+    {
+        $itemCounts = array();
         foreach ($array as $item) {
             if (isset($itemCounts[$item])) {
-                $itemCounts[$item]++; 
+                $itemCounts[$item]++;
             } else {
                 $itemCounts[$item] = 1;
             }
         }
         return $itemCounts;
     }
-    public static function groupSimilarStrings($arr) {
+    public static function groupSimilarStrings($arr)
+    {
         $groupedArr = array();
-    
+
         foreach ($arr as $value) {
             $key = preg_replace('/_[^_]*$/', '', $value);
-    
+
             if (isset($groupedArr[$key])) {
                 $groupedArr[$key][] = $value;
             } else {
                 $groupedArr[$key] = array($value);
             }
         }
-    
+
         return $groupedArr;
     }
-    
 }
