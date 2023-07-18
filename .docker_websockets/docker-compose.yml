@@ -7,8 +7,8 @@ services:
   nginx:
     image: nginx:alpine
     container_name: websockets_nginx
-    # restart: unless-stopped
-    # tty: true
+    restart: unless-stopped
+    tty: true
     environment:
       - NGINX_WEBSOCKET_HOST=${WEBSOCKET_DOMAIN_NAME}
     ports:
@@ -30,18 +30,18 @@ services:
     networks:
       - ws
   soketi:
-    image: "quay.io/soketi/soketi:1.4-16-debian"
+    image: "quay.io/soketi/soketi:latest-16-alpine"
     container_name: websockets_soketi
     environment:
       SOKETI_DEBUG: "1"
       SOKETI_METRICS_SERVER_PORT: "9601"
-      # SOKETI_DEFAULT_APP_ID: "tlc-id"
-      # SOKETI_DEFAULT_APP_KEY: "tlc-key"
-      # SOKETI_DEFAULT_APP_SECRET: "tlc-secret"
+      SOKETI_DEFAULT_APP_ID: "tlc-id"
+      SOKETI_DEFAULT_APP_KEY: "tlc-key"
+      SOKETI_DEFAULT_APP_SECRET: "tlc-secret"
       # SOKETI_SSL_CERT: "/path/to/certs/public.crt"
       # SOKETI_SSL_KEY: "/path/to/certs/private.key"
-    volumes:
-      - ../.docker_configs/certs:/path/to/certs
+    # volumes:
+      # - ../.docker_configs/certs:/path/to/certs
     ports:
       - "${SOKETI_PORT:-6001}:6001"
       - "${SOKETI_METRICS_SERVER_PORT:-9601}:9601"
