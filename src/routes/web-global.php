@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\Test;
 use App\Http\Controllers\Admin\AdminSetRoleSetController;
 use App\Http\Controllers\Api\v1\System\NotificationsController as SystemNotificationsController;
 use App\Http\Controllers\BookmarkController;
@@ -37,5 +38,8 @@ Route::group([
     Route::get('system/notifications', [SystemNotificationsController::class, 'notifications']);
     Route::get('system/notificationsRender', [SystemNotificationsController::class, 'notificationsRender']);
     Route::get('utils/createThumbnail', [ThumbnailController::class,'create']);
+    Route::get('test', function(){
+        event( new Test(['DinhCanh','30031997']));
+    });
 
 });

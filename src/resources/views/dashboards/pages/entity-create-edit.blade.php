@@ -108,15 +108,15 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 {{-- <script type="text/javascript">
         userCurrent = @json($user);
         window.Echo.channel('edit.'+'{{$type}}' +'-'+ '{{$id}}')
-.listen('.BroadcastUpdateEvent.' + '{{$type}}' + '-'+ '{{$id}}', (data) => {
-const user = data['user']
-const dataSource = data['dataSource']
-if(userCurrent['id'] !== user['id']){
-$(".buttonToggleNotification").click()
-setTimeout(() => {
-$(".userNameNotification").text(`${user['name']}`)
-}, 5);
-}
-});
+        .listen('.BroadcastUpdateEvent.' + '{{$type}}' + '-'+ '{{$id}}', (data) => {
+        const user = data['user']
+        const dataSource = data['dataSource']
+        if(userCurrent['id'] !== user['id']){
+        $(".buttonToggleNotification").click()
+        setTimeout(() => {
+        $(".userNameNotification").text(`${user['name']}`)
+        }, 5);
+        }
+        });
 </script> --}}
 @endsection

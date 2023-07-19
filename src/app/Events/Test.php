@@ -19,16 +19,9 @@ class Test implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public $data)
     {
     }
-    public function broadcastWith()
-    {
-        return [
-            'name' => 'Dinh Canh'
-        ];
-    }
-
     /**
      * Get the channels the event should broadcast on.
      *
