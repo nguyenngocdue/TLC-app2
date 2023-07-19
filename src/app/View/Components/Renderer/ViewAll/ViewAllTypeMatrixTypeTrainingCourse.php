@@ -63,11 +63,13 @@ class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
 
     protected function getYAxis()
     {
+        // dump($this->workplace_id);
+        $workplace_ids = is_array($this->workplace_id) ? $this->workplace_id : [$this->workplace_id];
         $timeFrame = Carbon::parse()->subDays($this->timeFrameInDays)->format(Constant::FORMAT_DATE_MYSQL);
         $data = ($this->yAxis)::query()
             ->whereNot('resigned', true)
             ->where("first_date", '>', $timeFrame)
-            ->whereIn('workplace', $this->workplace_id)
+            ->whereIn('workplace', $workplace_ids)
             ->orderBy('first_date')
             ->orderBy('name')
             ->get();

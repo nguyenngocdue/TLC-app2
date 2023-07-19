@@ -1,5 +1,4 @@
-<x-renderer.heading level=5>Raw Data</x-renderer.heading>
-{{-- @dump($dataSource) --}}
+{{-- <x-renderer.heading level=5>Raw Data</x-renderer.heading>
 <x-renderer.table :columns="$columns" :dataSource="$dataSource"/>
 
 
@@ -45,3 +44,4 @@
 
 <x-renderer.heading level=5>Pivot by apple_store_test_code</x-renderer.heading>
 <x-renderer.report.pivot-table key="apple_store_test_code" :dataSource="$dataSource"/>
+ --}}

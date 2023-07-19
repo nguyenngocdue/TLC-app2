@@ -21,12 +21,11 @@ class DataSource_Hr_timesheet_line extends Controller
 
     protected $modeType = '';
     protected $mode = '010';
+    // protected function makeDataPivotTable();
     public function getType()
     {
         return "dashboard";
     }
-
-    
 
 
     public function getDataSource1($modeParams)
@@ -83,8 +82,12 @@ class DataSource_Hr_timesheet_line extends Controller
         if (!$request->input('page') && !empty($input)) {
             return $this->updateParams($request, $modeParams);
         }
-
         $dataSource = collect(array_slice($this->getDataSource1($modeParams)->toArray(), 0, 1000));
+
+        $fn = (new DataPivotTable);
+        $data = $fn->makeDataPivotTable($dataSource, $this->modeType, $modeParams);
+        [$dataOutput, $tableColumns, $tableDataHeader] = $data;
+        
         $paramColumns = $this->getParamColumns($dataSource, $this->modeType);
         $pageLimit = $this->getPageParam($typeReport, $entity);
 
@@ -99,6 +102,9 @@ class DataSource_Hr_timesheet_line extends Controller
             'typeReport' => $typeReport,
             'entity' => $entity,
             'pageLimit' => $pageLimit,
+            'tableDataSource' => $dataOutput,
+            'tableColumns' => $tableColumns,
+            'tableDataHeader' => $tableDataHeader,
         ]);
     }
 
