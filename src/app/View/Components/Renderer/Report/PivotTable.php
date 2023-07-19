@@ -47,6 +47,7 @@ class PivotTable extends Controller
 
         $dataTables = [];
         foreach (array_values($tableIndex) as $name){
+            if(!$name) continue;
             try {
                 $array = DB::table($name)->select('id', 'name', 'description')->get()->toArray();
                 $dataTables[$name]  = array_combine(array_column($array, 'id'), $array);;
@@ -130,7 +131,7 @@ class PivotTable extends Controller
         // dd($dataOutput);
         [,,,,,,, $sortBy,,,,,,] = $allDataFields;
         // dd($allDataFields);
-        if (!$this->getDataFields()) return collect($dataOutput);
+        // if (!$this->getDataFields($dataOutput)) return collect($dataOutput);
         $sortOrders = $this->sortByData($sortBy);
         uasort($dataOutput, function ($item1, $item2) use ($sortOrders) {
             foreach ($sortOrders as $field => $sortOrder) {
@@ -149,29 +150,29 @@ class PivotTable extends Controller
         return collect($dataOutput);
     }
 
-    protected function changeValueData($dataSource)
-    {
-        $dataSource = array_slice($dataSource->toArray(), 0, 10000000);
-        [$rowFields,,,,,, $dataIndex,] =  $this->getDataFields();
-        if (!$this->getDataFields()) return [];
-        $allRowFields = array_unique(array_merge($rowFields, $dataIndex));
-        // dd($dataSource);
-        foreach ($dataSource as $key => $values) {
-            // dd($values);
-            foreach ($allRowFields as $field) {
-                // $attrName = str_replace('id', 'name', $field);
-                if (isset($values[$field])) {
-                    // Log::info($field);
-                    $values[$field] = (object) [
-                        'value' => $values[$field],
-                        // 'cell_title' => $tooltip,
-                    ];
-                }
-            }
-            $dataSource[$key] = $values;
-        }
-        return $dataSource;
-    }
+    // protected function changeValueData($dataSource)
+    // {
+    //     $dataSource = array_slice($dataSource->toArray(), 0, 10000000);
+    //     [$rowFields,,,,,, $dataIndex,] =  $this->getDataFields($dataSource);
+    //     if (!$this->getDataFields($dataSource)) return [];
+    //     $allRowFields = array_unique(array_merge($rowFields, $dataIndex));
+    //     // dd($dataSource);
+    //     foreach ($dataSource as $key => $values) {
+    //         // dd($values);
+    //         foreach ($allRowFields as $field) {
+    //             // $attrName = str_replace('id', 'name', $field);
+    //             if (isset($values[$field])) {
+    //                 // Log::info($field);
+    //                 $values[$field] = (object) [
+    //                     'value' => $values[$field],
+    //                     // 'cell_title' => $tooltip,
+    //                 ];
+    //             }
+    //         }
+    //         $dataSource[$key] = $values;
+    //     }
+    //     return $dataSource;
+    // }
 
     private function mergeLines($data, $rowFields)
     {

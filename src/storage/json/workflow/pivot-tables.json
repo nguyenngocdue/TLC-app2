@@ -156,7 +156,7 @@
     "hr_timesheet_line_project_date": {
         "name": "hr_timesheet_line_project_date",
         "filters": "sub_project_id[\r\n'title':'Sub Project'.\r\n'allowClear': true.\r\n'multiple':true.\r\n],\r\nworkplace_id[\r\n'title' :'Workplace.\r\n'allowClear':true.\r\n'multiple':true.\r\n], \r\ndepartment_id['title':'Department'.\r\n'allowClear':true.],\r\npicker_date['title':'Date'],",
-        "row_fields": "sub_project_id(sub_projects.name),\r\nlod_id(terms.name),\r\ndepartment_id(departments.name),\r\nstaff_id,\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),\r\ndiscipline_id(user_disciplines.name),\r\npj_task_id(pj_tasks.name)",
+        "row_fields": "sub_project_id(sub_projects.name),\r\nlod_id(terms.name){LOD},\r\ndepartment_id(departments.name),\r\nstaff_id{Staff ID},\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),\r\ndiscipline_id(user_disciplines.name),\r\npj_task_id(pj_tasks.name){Task},",
         "column_fields": "time_sheet_start_time",
         "value_index_fields": "time_sheet_durations",
         "data_aggregations": "sum",
