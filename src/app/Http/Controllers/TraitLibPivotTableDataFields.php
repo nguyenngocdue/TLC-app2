@@ -36,6 +36,28 @@ trait TraitLibPivotTableDataFields
         }
     }
 
+    private static function separateFields3($data)
+    {
+        $array = [];
+        foreach ($data as $key => $value) {
+            $stringExplore = explode('.', StringPivotTable::stringByPattern($value, '/\((.*?)\)/'));
+            $pos = StringPivotTable::findCharacterIndex($value, ['(', '{']);
+            $filedKey = $pos > 0 ? substr($value, 0, $pos) : $value;
+
+            $tableName = $stringExplore[0] ?? "";
+            $attributeName = $stringExplore[1] ?? "";
+            $title = ucwords(substr($value, 0, strpos($value, '_')));
+            $titleOverride = ($t = StringPivotTable::stringByPattern($value, '/\{([^}]*)\}/')) ? $t : $title;
+            $array[$filedKey] = [
+                'table_name' => $tableName,
+                'attribute_name' => $attributeName,
+                'title_override' => $titleOverride,
+                'field_index' => $filedKey,
+            ];
+        }
+        return $array;
+    }
+
 
     private static function separateFields2($data, $patternFields, $valueIndexFields)
     {
@@ -193,10 +215,11 @@ trait TraitLibPivotTableDataFields
 
         return $keysWithTableName;
     }
-    public function getDataFields($dataSource = [], $modeType = '')
+    public function getDataFields($dataSource, $modeType)
     {
         $lib = LibPivotTables::getFor($modeType);
         $lib = self::removeEmptyElements($lib);
+        $isEmptyData = PivotReport::isEmptyArray($dataSource);
 
         // $tableIndex = $lib['lookup_tables'] ?? [];
 
@@ -213,6 +236,13 @@ trait TraitLibPivotTableDataFields
 
 
         $fields = $this->separateFields($row_fields);
+        
+        $bindingRowFields = $this->separateFields3($row_fields);
+        // dd($bindingRowFields);
+        // dump($bindingRowFields);
+
+        // $bindingRowFields = $fields['bidding_fields'] ?? [];
+
 
         $columnFields = $lib['column_fields'] ?? [];
         $valueIndexFields = $lib['value_index_fields'] ?? [];
@@ -224,12 +254,9 @@ trait TraitLibPivotTableDataFields
         if (!$checkEmptyRowFieldsAndColumnFields) return false;
 
         $infoColumnFields = $this->exploreColumnFields($columnFields, $valueIndexFields);
-        // dd($infoColumnFields);
         $originalFields = $infoColumnFields['original_fields'];
         $bindingColumnFields = $infoColumnFields['bidding_fields'] ?? [];
 
-
-        $bindingRowFields = $fields['bidding_fields'] ?? [];
 
         $dataFields = self::triggerFieldsInfo($lib['data_fields'] ?? []) ?? [];
         $fieldOdDataFields = $dataFields['field_names'] ?? [];
@@ -250,7 +277,7 @@ trait TraitLibPivotTableDataFields
         $sortBy = $lib['sort_by'] ?? [];
         $dataIndex = $this->getDataIndex($row_fields);
         $columnFields = $originalFields;
-        $propsColumnField = array_merge($propsColumnField, $bindingRowFields);
+        // $propsColumnField = array_merge($propsColumnField, $bindingRowFields);
 
         $tableIndex = self::getKeysWithTableName($bindingRowFields);
         // dump(self::getKeysWithTableName($bindingRowFields), $bindingRowFields);

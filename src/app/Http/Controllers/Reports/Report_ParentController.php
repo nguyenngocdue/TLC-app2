@@ -227,14 +227,14 @@ abstract class Report_ParentController extends Controller
             "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
             "Expires"             => "0"
         );
-        $columnKeys = array_combine($columnKeys, $columnKeys);
+        // $columnKeys = array_combine($columnKeys, $columnKeys);
         $callback = function () use ($rows, $columnKeys, $columnNames) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columnNames);
             $array = [];
             foreach ($rows as $row) {
-                foreach ($columnKeys as $key => $column) {
-                    $array[$column] = $row[$key];
+                foreach ($columnKeys as $key) {
+                    $array[$key] = $row[$key];
                 }
                 fputcsv($file, $array);
             }

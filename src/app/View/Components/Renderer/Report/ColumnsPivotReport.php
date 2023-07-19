@@ -19,11 +19,10 @@ trait  ColumnsPivotReport
         if (is_null($bindingRowFields)) return [];
         foreach ($bindingRowFields as $key => $value) {
             if (!$key) continue;
-            if (count($value) and is_array($value)) {
+            if (count($value) && is_array($value)) {
                 $dataIndex = $value['table_name'] . '_' . $value['attribute_name'];
-                $title = ucwords(str_replace('_', ' ', substr($key, 0, strrpos($key, '_'))));
                 $columnsData[] = [
-                    'title' => $title,
+                    'title' => $value['title_override'],
                     'dataIndex' => $key . '_' . $dataIndex,
                     'width' => 250,
                 ];
@@ -248,14 +247,14 @@ trait  ColumnsPivotReport
                         $groupItems = PivotReport::groupSimilarStrings($items);
                         foreach ($items as $value) {
                             $columnsNeedToRender = array_column($propsColumnField, 'field_index');
-                            $checkFiled =  PivotReport::isStringInItemsOfArray($columnsNeedToRender, $value);
-                            if ($checkFiled) {
-                                // dd($groupItems, $value, $items,$propsColumnField);
-
+                            // dd($propsColumnField, $columnsNeedToRender, $items);
+                            $checkField =  PivotReport::isStringInItemsOfArray($columnsNeedToRender, $value);
+                            // dd($groupItems, $value, $items,$propsColumnField);
+                            if ($checkField) {
                                 $title = '';
                                 $countRenderCol = 1;
                                 foreach ($groupItems as $keyGroup => $group) {
-                                    if (str_contains($value, $keyGroup) && in_array($value, $group)) {
+                                    if (str_contains($value, $keyGroup) && in_array($value, $group) && isset($propsColumnField[$keyGroup])) {
                                         $info = $propsColumnField[$keyGroup];
                                         $title = $info['title_override'];
                                         $countRenderCol = count($group);
@@ -323,7 +322,7 @@ trait  ColumnsPivotReport
         // dd($dataOutput, $allDataFields);
         if(empty($dataOutput)) return [[],[]];
         [, $bindingRowFields,,,, $dataAggregations,,,,,,,,] = $allDataFields;
-        if (!$this->getDataFields()) return false;
+        if (!$this->getDataFields($linesData, $modeType)) return false;
         $columnsOfRowFields = $this->makeHeadColumn($bindingRowFields);
         [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields($linesData,$dataOutput, $allDataFields, $modeType);
         $columnsOfAgg = $this->makeColumnsOfAgg($dataAggregations);

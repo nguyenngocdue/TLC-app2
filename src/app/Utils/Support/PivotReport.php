@@ -467,4 +467,11 @@ class PivotReport
 
         return $groupedArr;
     }
+
+    public static function isEmptyArray($data){
+        if(is_object($data)) {
+            return empty($data->toArray());
+        }
+        return empty($data);
+    }
 }
