@@ -248,10 +248,9 @@ trait  ColumnsPivotReport
                         $groupItems = PivotReport::groupSimilarStrings($items);
                         foreach ($items as $value) {
                             $columnsNeedToRender = array_column($propsColumnField, 'field_index');
-                            $checkFiled =  PivotReport::isStringInItemsOfArray($columnsNeedToRender, $value);
-                            if ($checkFiled) {
-                                // dd($groupItems, $value, $items,$propsColumnField);
-
+                            $checkField =  PivotReport::isStringInItemsOfArray($columnsNeedToRender, $value);
+                            // dd($groupItems, $value, $items,$propsColumnField);
+                            if ($checkField) {
                                 $title = '';
                                 $countRenderCol = 1;
                                 foreach ($groupItems as $keyGroup => $group) {
