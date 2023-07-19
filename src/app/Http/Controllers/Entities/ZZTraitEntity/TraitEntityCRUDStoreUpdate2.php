@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Models\Sub_project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -147,8 +148,8 @@ trait TraitEntityCRUDStoreUpdate2
 			$fields = $this->handleFields($request, __FUNCTION__);
 			$fieldsHandle = $this->addEntityType($fields, 'status', $newStatus);
 			$previousValue = $this->getPreviousValue($fieldsHandle, $theRow);
-			$theRow->updateWithOptimisticLocking($fields);
-			$fieldForEmailHandler = $this->addEntityType($theRow->getAttributes(), 'status', $newStatus);
+			$theRow->updateWithOptimisticLocking($fieldsHandle);
+			// $fieldForEmailHandler = $this->addEntityType($theRow->getAttributes(), 'status', $newStatus);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
 			if ($uploadedIds) {
@@ -183,7 +184,7 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus, $this->data, $toastrResult);
+		$this->eventUpdatedNotificationAndMail($previousValue, $fieldsHandle, $this->type, $newStatus, $this->data, $toastrResult);
 		if ($request->input('redirect_back_to_last_page')) return redirect()->back();
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
