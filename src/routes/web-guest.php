@@ -24,7 +24,6 @@ use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_project_not_
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_project_date;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_team_date;
 use App\Http\Controllers\WelcomeFortuneController;
-use App\View\Components\Renderer\Report\PivotTables\PivotReport_Hr_timesheet_line_project_date;
 use Illuminate\Support\Facades\Route;
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
