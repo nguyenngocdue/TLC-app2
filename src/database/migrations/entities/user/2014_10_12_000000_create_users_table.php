@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string("employeeid")->nullable();
             $table->string("first_name");
             $table->string("last_name");
+            $table->boolean('gender')->nullable();
             $table->string("address")->nullable();
             $table->string("phone")->nullable();
             $table->unsignedBigInteger("time_keeping_type")->default(1);
