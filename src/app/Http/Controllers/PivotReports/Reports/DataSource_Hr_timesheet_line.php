@@ -105,12 +105,12 @@ class DataSource_Hr_timesheet_line extends Controller
         $linesData = $this->getDataSource1($modeParams);
 
         if (PivotReport::isEmptyArray($linesData)) {
-            $dataColumns = $this->getParamColumns($linesData, $this->modeType);
-            $paramColumns = $dataColumns['filter_fields'];
+            $dataColumns = $this->getParamColumns($linesData, $modeType);
+            $paramColumns = array_values($dataColumns['data_filters']);
             $colRender = $dataColumns['binding_row_fields'];
             $tableColumns = $this->makeTableColumns($colRender);
             return view("reports.report-pivot", [
-                'modeType' => $this->modeType,
+                'modeType' => $modeType,
                 'modeParams' => $modeParams,
                 'currentMode' => $this->mode,
                 'paramColumns' => $paramColumns,
@@ -126,7 +126,8 @@ class DataSource_Hr_timesheet_line extends Controller
 
         // Pivot data before render 
         [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData, $modeParams);
-        $paramColumns = $this->getParamColumns($dataOutput, $this->modeType);
+        $paramColumns = $this->getParamColumns($dataOutput,$modeType);
+
 
         $dataSource = $this->paginateDataSource($dataOutput, $pageLimit);
         // dump($dataSource);

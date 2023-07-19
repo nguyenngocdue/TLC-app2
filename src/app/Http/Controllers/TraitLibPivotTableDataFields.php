@@ -220,28 +220,29 @@ trait TraitLibPivotTableDataFields
         $lib = LibPivotTables::getFor($modeType);
         $lib = self::removeEmptyElements($lib);
         $isEmptyData = PivotReport::isEmptyArray($dataSource);
-
-        // $tableIndex = $lib['lookup_tables'] ?? [];
-
-        // dump($this->modeType, $lib);
-
+        
+        
         if (!$this->checkCreateManagePivotReport($lib)) return false;
-
+        
         $filters = $lib['filters'] ?? [];
         $dataFilters = $this->parseStringToJson($filters);
         $fieldOfFilters = array_keys($dataFilters) ?? [];
-
-
+        
+        
         $row_fields = $lib['row_fields'] ?? [];
-
-
+        
+        
         $fields = $this->separateFields($row_fields);
         
         $bindingRowFields = $this->separateFields3($row_fields);
-        // dd($bindingRowFields);
-        // dump($bindingRowFields);
 
-        // $bindingRowFields = $fields['bidding_fields'] ?? [];
+        if($isEmptyData) {
+            return [
+                'binding_row_fields' => $bindingRowFields,
+                'data_filters' => $dataFilters,
+
+            ];
+        } 
 
 
         $columnFields = $lib['column_fields'] ?? [];
