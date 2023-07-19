@@ -202,14 +202,21 @@ trait TraitEntityListenDataSource
             $columnsWithOracy[$table] = array_values(array_filter($columns, fn ($column) => str_contains($column, "()")));
             if (empty($columnsWithoutOracy)) $columnsWithoutOracy = ['id']; //<< getRemainingHours()
 
-            switch ($table) {
-                case "hr_timesheet_lines":
-                    $result[$table] = $this->mapIdForNameless($table, $columnsWithoutOracy);
-                    break;
-                default:
-                    $result[$table] = $this->mapGetNameForNameless($table, $columnsWithoutOracy);
-                    break;
+            // dump($table, $columns);
+            if (sizeof($columns) === 1 && $columns[0] === 'id') {
+                //Skip the table has only [id]: hr_timesheet_lines, comments,...
+            } else {
+                $result[$table] = $this->mapGetNameForNameless($table, $columnsWithoutOracy);
             }
+
+            // switch ($table) {
+            //     case "hr_timesheet_lines":
+            //         $result[$table] = $this->mapIdForNameless($table, $columnsWithoutOracy);
+            //         break;
+            //     default:
+            //         $result[$table] = $this->mapGetNameForNameless($table, $columnsWithoutOracy);
+            //         break;
+            // }
         }
 
         $this->dump2("columnsWithOracy", $columnsWithOracy, __LINE__);
