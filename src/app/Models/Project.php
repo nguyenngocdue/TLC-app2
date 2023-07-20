@@ -9,7 +9,6 @@ class Project extends ModelExtended
 {
     use HasCachedAvatar;
 
-    public $timestamps = false;
     protected $fillable = ["id", "name", "description", "slug", "status", "owner_id"];
 
     protected $table = 'projects';

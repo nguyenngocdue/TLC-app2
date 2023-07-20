@@ -20,10 +20,10 @@ trait  ColumnsPivotReport
         foreach ($bindingRowFields as $key => $value) {
             if (!$key) continue;
             if (count($value) && is_array($value)) {
-                $dataIndex = $value['table_name'] . '_' . $value['attribute_name'];
+                $dataIndex = $value['table_name'] ? $key . '_' . $value['table_name'] . '_' . $value['attribute_name'] : $key;
                 $columnsData[] = [
                     'title' => $value['title_override'],
-                    'dataIndex' => $key . '_' . $dataIndex,
+                    'dataIndex' => $dataIndex,
                     'width' => 250,
                 ];
             } else {
@@ -56,7 +56,6 @@ trait  ColumnsPivotReport
                     }
                 }
             } else {
-
                 foreach ($fields as $field) {
                     $checkFiled =  PivotReport::isStringInItemsOfArray($columnFields, $field);
                     if ($checkFiled) {
@@ -233,14 +232,13 @@ trait  ColumnsPivotReport
 
         // dump($allColumns  , $lastItemDataSource, $endArray, $dataIndex);
         $topTitleColumns = array_merge(...array_column($dataOutput, 'top_title_column'));
-        // dump($topTitleColumns, $propsColumnField);
         // dd($dataOutput, $fields);
 
         $columnsOfColumnFields = [];
         if ($rowFields) {
             array_walk(
                 $fields,
-                function ($items, $key) use (&$columnsOfColumnFields, $topTitleColumns, $propsColumnField) {
+                function ($items, $key) use (&$columnsOfColumnFields, $propsColumnField) {
                     if ($key === 'other') {
                         $items = self::moveStringToBottom($items);
                         // $groupItems = PivotReport::groupItemsByString($items);
@@ -300,6 +298,7 @@ trait  ColumnsPivotReport
         } else {
             [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields2($dataOutput, $columnFields);
         }
+        // dump($tableDataHeader);
         return [$tableDataHeader, $columnsOfColumnFields];
     }
 
@@ -319,7 +318,7 @@ trait  ColumnsPivotReport
 
     public function makeColumnsRenderer($linesData,$dataOutput, $allDataFields, $modeType)
     {
-        // dd($dataOutput, $allDataFields);
+        // dd($dataOutput[0], $allDataFields);
         if(empty($dataOutput)) return [[],[]];
         [, $bindingRowFields,,,, $dataAggregations,,,,,,,,] = $allDataFields;
         if (!$this->getDataFields($linesData, $modeType)) return false;

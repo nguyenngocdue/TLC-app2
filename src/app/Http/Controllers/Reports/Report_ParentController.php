@@ -145,7 +145,6 @@ abstract class Report_ParentController extends Controller
     private function makeModeTitleReport($routeName)
     {
         $lib = LibReports::getAll();
-        // dd($lib);
         $title = $lib[$routeName]['title'] ??'Empty Title';
         return $title;
     }

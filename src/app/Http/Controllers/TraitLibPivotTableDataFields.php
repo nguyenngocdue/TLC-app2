@@ -202,11 +202,11 @@ trait TraitLibPivotTableDataFields
         ];
     }
 
-    private static function getKeysWithTableName($data)
+    private static function getKeysWithTableName($data1, $data2)
     {
+        $allData = array_merge($data1, $data2);
         $keysWithTableName = [];
-
-        foreach ($data as $key => $value) {
+        foreach ($allData as $key => $value) {
             if (isset($value['table_name'])) {
                 $tableName = $value['table_name'];
                 $keysWithTableName[$key] = $tableName;
@@ -220,28 +220,30 @@ trait TraitLibPivotTableDataFields
         $lib = LibPivotTables::getFor($modeType);
         $lib = self::removeEmptyElements($lib);
         $isEmptyData = PivotReport::isEmptyArray($dataSource);
-
-        // $tableIndex = $lib['lookup_tables'] ?? [];
-
-        // dump($this->modeType, $lib);
-
+        
+        
         if (!$this->checkCreateManagePivotReport($lib)) return false;
-
+        
         $filters = $lib['filters'] ?? [];
         $dataFilters = $this->parseStringToJson($filters);
         $fieldOfFilters = array_keys($dataFilters) ?? [];
-
-
+        
+        
         $row_fields = $lib['row_fields'] ?? [];
-
-
+        
+        
         $fields = $this->separateFields($row_fields);
         
         $bindingRowFields = $this->separateFields3($row_fields);
-        // dd($bindingRowFields);
-        // dump($bindingRowFields);
 
-        // $bindingRowFields = $fields['bidding_fields'] ?? [];
+        if($isEmptyData) {
+            return [
+                'empty_data' => true,
+                'binding_row_fields' => $bindingRowFields,
+                'data_filters' => $dataFilters,
+
+            ];
+        } 
 
 
         $columnFields = $lib['column_fields'] ?? [];
@@ -279,7 +281,7 @@ trait TraitLibPivotTableDataFields
         $columnFields = $originalFields;
         // $propsColumnField = array_merge($propsColumnField, $bindingRowFields);
 
-        $tableIndex = self::getKeysWithTableName($bindingRowFields);
+        $tableIndex = self::getKeysWithTableName($bindingRowFields, $bindingColumnFields);
         // dump(self::getKeysWithTableName($bindingRowFields), $bindingRowFields);
         return [
             $rowFields,
