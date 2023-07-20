@@ -258,17 +258,11 @@ trait  ColumnsPivotReport
                                         $countRenderCol = count($group);
                                     }
                                 }
-
-                                // if ($topTitleColumns) {
-                                //     $countItems = PivotReport::countItems($items);
-                                //     $numDivideHeader = $countItems[$value];
-                                // }
                                 $columnsOfColumnFields[] = [
-                                    // 'title' => $topTitleColumns[$value] ?? $title ?? ucwords($columnFields[0]) ?? '',
                                     'title' => $title,
                                     'dataIndex' => $value,
                                     'align' => is_numeric($value) ? 'left' : 'right',
-                                    'width' => 50,
+                                    'width' => 40,
                                     'colspan' =>  $countRenderCol,
                                 ];
                             };
@@ -279,7 +273,6 @@ trait  ColumnsPivotReport
                         // dd($groupItems);
                         foreach ($groupItems as $key => $dates) {
                             $attribute = $this->findItemsByMapValueIndexField($propsColumnField, $key);
-                            // dd($items, $propsColumnField);
                             if (!$arr = reset($attribute)) continue;
                             $title = ($t = $arr['title_override']) ? $t : 'Empty Title';
                             foreach ($dates as $value) {
@@ -288,6 +281,7 @@ trait  ColumnsPivotReport
                                     'dataIndex' => $value,
                                     'align' => is_numeric($value) ? 'left' : 'right',
                                     'colspan' => count($dates),
+                                    'width' => 40,
                                 ];
                             }
                         }
@@ -308,7 +302,8 @@ trait  ColumnsPivotReport
         if (!$dataAggregations) return [];
         foreach ($dataAggregations as $field => $value) {
             $columnsOfAgg[] = [
-                'dataIndex' => $value['title_override'],
+                'title' => $value['title_override'] ?? str_replace('_', ' ', $value['data_index']),
+                'dataIndex' => $value['data_index'],
                 'align' => 'right',
                 'width' => 40,
             ];

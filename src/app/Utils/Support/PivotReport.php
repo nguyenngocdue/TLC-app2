@@ -170,8 +170,9 @@ class PivotReport
         if (!isset($dataFields['field_names'])) return [];
         $x = $dataFields['field_names'];
         foreach ($dataAggregation as $key => $value) {
-            $array[$x[$key]]['type_operator'] = $value;
             $array[$x[$key]]['name'] = $x[$key];
+            $array[$x[$key]]['data_index'] = $value . '_' . $x[$key];
+            $array[$x[$key]]['type_operator'] = $value;
             $array[$x[$key]]['title_override'] = ($t = $dataFields['field_titles'][$key]) ? $t : $value . '_' . $x[$key];
         }
         return $array;

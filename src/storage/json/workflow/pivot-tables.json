@@ -160,7 +160,7 @@
         "column_fields": "time_sheet_start_time",
         "value_index_fields": "time_sheet_durations",
         "data_aggregations": "sum",
-        "data_fields": "time_sheet_durations",
+        "data_fields": "time_sheet_durations{Total}",
         "lookup_tables": null,
         "sort_by": "user_id(users.name)"
     },
@@ -171,7 +171,7 @@
         "column_fields": "sub_project_id(sub_projects.name){Sub Projects},",
         "value_index_fields": "time_sheet_durations",
         "data_aggregations": "sum",
-        "data_fields": "time_sheet_durations",
+        "data_fields": "time_sheet_durations{Total}",
         "lookup_tables": null,
         "sort_by": "user_id(users.name),"
     },
@@ -182,7 +182,7 @@
         "column_fields": "time_sheet_start_time",
         "value_index_fields": "time_sheet_durations",
         "data_aggregations": "sum",
-        "data_fields": "time_sheet_durations",
+        "data_fields": "time_sheet_durations{Total}",
         "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms,\r\n pj_tasks,\r\ndepartments,\r\nuser_disciplines",
         "sort_by": "sub_project_id(sub_projects.name)"
     },
@@ -193,7 +193,7 @@
         "column_fields": "sub_project_id(sub_projects.name){Sub Projects},",
         "value_index_fields": "time_sheet_durations",
         "data_aggregations": "sum",
-        "data_fields": "time_sheet_durations",
+        "data_fields": "time_sheet_durations{Total}",
         "lookup_tables": null,
         "sort_by": "sub_project_id(sub_projects.name)"
     },
