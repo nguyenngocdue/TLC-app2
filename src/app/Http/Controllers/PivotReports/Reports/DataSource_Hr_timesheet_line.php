@@ -26,6 +26,7 @@ class DataSource_Hr_timesheet_line extends Controller
     use TraitUpdateParamsReport;
     use TraitFunctionsReport;
     use TraitMenuTitle;
+    use TraitChangeDataPivotTable;
 
     protected $modeType = '';
     protected $mode = '010';
@@ -98,7 +99,7 @@ class DataSource_Hr_timesheet_line extends Controller
         return $title;
     }
 
-    protected function getTable()
+    private function getTable()
     {
         $tableName = CurrentRoute::getCurrentController();
         $tableName = substr($tableName, 0, strrpos($tableName, "_"));
@@ -115,7 +116,6 @@ class DataSource_Hr_timesheet_line extends Controller
         $entity = CurrentPathInfo::getEntityReport($request);
         $typeReport = CurrentPathInfo::getTypeReport($request);
         // dump($entity, $typeReport);
-        $modeParams = [];
         $modeParams = $this->getModeParams($request);
         $pageLimit = $this->getPageParam($typeReport, $entity);
 
@@ -127,7 +127,11 @@ class DataSource_Hr_timesheet_line extends Controller
         $linesData = $this->getDataSource1($modeParams);
         [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData, $modeParams);
         // $linesData = collect(array_slice($linesData->toArray(), 0, 10));
+
+        
         // dd($dataOutput);
+
+        
         if (PivotReport::isEmptyArray($dataOutput)) {
             $dataColumns = $this->getParamColumns($dataOutput, $modeType);
             $paramColumns = array_values($dataColumns['data_filters']);
@@ -153,6 +157,7 @@ class DataSource_Hr_timesheet_line extends Controller
         $paramColumns = $this->getParamColumns($dataOutput, $modeType);
         // dd($paramColumns);
         $dataSource = $this->paginateDataSource($dataOutput, $pageLimit);
+        $dataSource = $this->changeValueData($dataSource);
 
         return view("reports.report-pivot", [
             'modeReport' => $modeReport,
