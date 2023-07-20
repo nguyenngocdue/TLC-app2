@@ -127,10 +127,8 @@ class PivotTable extends Controller
 
     public function sortLinesData($dataOutput, $allDataFields)
     {
-        // dd($dataOutput);
+        if(isset($allDataFields['empty_data'])) return collect($dataOutput);
         [,,,,,,, $sortBy,,,,,,] = $allDataFields;
-        // dd($allDataFields);
-        // if (!$this->getDataFields($dataOutput)) return collect($dataOutput);
         $sortOrders = $this->sortByData($sortBy);
         uasort($dataOutput, function ($item1, $item2) use ($sortOrders) {
             foreach ($sortOrders as $field => $sortOrder) {
@@ -257,7 +255,6 @@ class PivotTable extends Controller
         // dd($processedData, $fieldsNeedToSum);
         // dump($processedData);
 
-
         // Step 3: transfer data from lines to columns by
         // Column_Fields and Value_Index_Fields array 
         $transferredData = PivotReport::transferData($processedData, $columnFields, $propsColumnField, $valueIndexFields);
@@ -292,7 +289,6 @@ class PivotTable extends Controller
             $dataOutput[0]["info_column_field"] = $infoColumnFields;
         }
         $dataOutput = $this->updateResultOfAggregations($columnFields, $dataAggregations, $dataOutput);
-        // dump($dataOutput);
 
         return $dataOutput;
     }

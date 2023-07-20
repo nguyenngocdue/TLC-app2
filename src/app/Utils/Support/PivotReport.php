@@ -26,7 +26,6 @@ class PivotReport
     {
         $entities = Entities::getAll();
         $result0 = [];
-        $result0 = [];
         foreach ($entities as $entity) {
             $entityName = Str::getEntityName($entity);
             $singular = Str::singular($entityName);
@@ -34,7 +33,7 @@ class PivotReport
             for ($i = 10; $i <= 100; $i += 10) {
                 $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
                 $path = "App\\Http\\Controllers\\PivotReports\\Reports\\{$ucfirstName}_$mode";
-                if (class_exists($path)) $result0[] = static::actionCreator('report', $path, $singular, $mode);
+                if (class_exists($path)) $result0[] = static::actionCreator('report-pivot', $path, $singular, $mode);
             }
         }
 
@@ -47,6 +46,7 @@ class PivotReport
 
     private static function transferValueOfKeys($data, $columnFields, $propsColumnField)
     {
+        // dd($data);
         $newArray = array_map(function ($item) use ($propsColumnField) {
             $dateItems = [];
             $dt = [];
@@ -98,6 +98,7 @@ class PivotReport
             }
             return $array;
         }
+        // dd($newArray);
         return $newArray;
     }
     public static function getLastArray($data, $fieldsNeedToSum = [])
@@ -202,6 +203,21 @@ class PivotReport
         }
         return $result;
     }
+    // private static function sumItemsInArray($newArray)
+    // {
+    //     dump($newArray);
+    //     $data = [];
+    //     foreach ($newArray as $item) {
+    //         foreach ($item as $key => $value) {
+    //             if (isset($data[$key]) && is_array($value)) {
+    //                 $data[$key] = self::sumArrays($data[$key], $value);
+    //             } else {
+    //                 $data[$key] = $value;
+    //             }
+    //         }
+    //     }
+    //     return $data;
+    // }
 
     private static function sumItemsInArray($newArray)
     {
@@ -209,13 +225,14 @@ class PivotReport
         $data = [];
         foreach ($newArray as $item) {
             foreach ($item as $key => $value) {
-                if (isset($data[$key]) && is_array($value)) {
-                    $data[$key] = self::sumArrays($data[$key], $value);
+                if (isset($data[$key])) {
+                    $data[$key] += $value;
                 } else {
                     $data[$key] = $value;
                 }
             }
         }
+        // dd($data);
         return $data;
     }
 
@@ -324,6 +341,7 @@ class PivotReport
             ),
             $dataSource
         );
+        // dd($data);
         return $data;
     }
 

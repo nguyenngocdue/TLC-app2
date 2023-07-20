@@ -238,6 +238,7 @@ trait TraitLibPivotTableDataFields
 
         if($isEmptyData) {
             return [
+                'empty_data' => true,
                 'binding_row_fields' => $bindingRowFields,
                 'data_filters' => $dataFilters,
 
