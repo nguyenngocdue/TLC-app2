@@ -202,11 +202,11 @@ trait TraitLibPivotTableDataFields
         ];
     }
 
-    private static function getKeysWithTableName($data)
+    private static function getKeysWithTableName($data1, $data2)
     {
+        $allData = array_merge($data1, $data2);
         $keysWithTableName = [];
-
-        foreach ($data as $key => $value) {
+        foreach ($allData as $key => $value) {
             if (isset($value['table_name'])) {
                 $tableName = $value['table_name'];
                 $keysWithTableName[$key] = $tableName;
@@ -280,7 +280,7 @@ trait TraitLibPivotTableDataFields
         $columnFields = $originalFields;
         // $propsColumnField = array_merge($propsColumnField, $bindingRowFields);
 
-        $tableIndex = self::getKeysWithTableName($bindingRowFields);
+        $tableIndex = self::getKeysWithTableName($bindingRowFields, $bindingColumnFields);
         // dump(self::getKeysWithTableName($bindingRowFields), $bindingRowFields);
         return [
             $rowFields,

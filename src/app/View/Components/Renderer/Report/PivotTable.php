@@ -44,7 +44,6 @@ class PivotTable extends Controller
 
     private function getDataFromTables($tableIndex)
     {
-
         $dataTables = [];
         foreach (array_values($tableIndex) as $name){
             if(!$name) continue;
@@ -274,9 +273,9 @@ class PivotTable extends Controller
 
         $tables = $this->getDataFromTables($tableIndex);
         $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput, $allDataFields);
-
+        // dd($dataOutput[0]);
         $dataOutput = $this->makeTopTitle($dataOutput, $rowFields, $columnFields);
-        // dd($dataOutput);
+        // dd($dataOutput[0]);
 
         $infoColumnFields = [];
         if (!$rowFields && $columnFields) {
