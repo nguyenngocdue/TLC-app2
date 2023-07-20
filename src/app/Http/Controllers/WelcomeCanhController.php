@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
-use App\Http\Controllers\Workflow\LibApps;
-use App\Http\Resources\HrTsLineCollection;
 use App\Learn\Bridge\Bridge;
 use App\Learn\Builder\BurgerBuilder;
+use App\Learn\Composite\Composite;
 use App\Learn\Facade\Facade;
 use App\Learn\FactoryMethod\DeveloperManager;
 use App\Learn\FactoryMethod\MarketingManager;
@@ -52,6 +51,7 @@ class WelcomeCanhController extends Controller
         Facade::using();
         Flyweight::using();
         Proxy::using();
+        Composite::using();
         dd();
         $tree = BuildTree::getTree();
         $results = [];

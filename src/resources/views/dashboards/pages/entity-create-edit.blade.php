@@ -105,18 +105,18 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 <x-homepage.left-drawer title="Table of Content">
     <x-homepage.table-of-content :item="$item" type="{{$type}}" />
 </x-homepage.left-drawer>
-{{-- <script type="text/javascript">
+<script type="text/javascript">
         userCurrent = @json($user);
         window.Echo.channel('edit.'+'{{$type}}' +'-'+ '{{$id}}')
-        .listen('.BroadcastUpdateEvent.' + '{{$type}}' + '-'+ '{{$id}}', (data) => {
+        .listen('BroadcastUpdateEvent.' + '{{$type}}' + '-'+ '{{$id}}', (data) => {
         const user = data['user']
         const dataSource = data['dataSource']
         if(userCurrent['id'] !== user['id']){
         $(".buttonToggleNotification").click()
-        setTimeout(() => {
-        $(".userNameNotification").text(`${user['name']}`)
-        }, 5);
-        }
+            setTimeout(() => {
+            $(".userNameNotification").text(`${user['name']}`)
+            }, 5);
+            }
         });
-</script> --}}
+</script>
 @endsection
