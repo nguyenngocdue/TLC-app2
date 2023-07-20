@@ -4058,6 +4058,9 @@ video {
   --tw-text-opacity: 1;
   color: rgb(49 46 129 / var(--tw-text-opacity));
 }
+.text-inherit {
+  color: inherit;
+}
 .text-lime-100 {
   --tw-text-opacity: 1;
   color: rgb(236 252 203 / var(--tw-text-opacity));
@@ -4569,9 +4572,6 @@ video {
 .text-zinc-900 {
   --tw-text-opacity: 1;
   color: rgb(24 24 27 / var(--tw-text-opacity));
-}
-.text-inherit {
-  color: inherit;
 }
 .underline {
   text-decoration-line: underline;
@@ -8279,6 +8279,11 @@ video {
 
   .xl\:p-0 {
     padding: 0px;
+  }
+
+  .xl\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 @media (min-width: 1536px) {
