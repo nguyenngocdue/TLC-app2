@@ -6,7 +6,6 @@ use App\BigThink\ModelExtended;
 
 class Pj_module extends ModelExtended
 {
-    public $timestamps = false;
     protected $fillable = [
         "id", "name", "description", "slug", "pj_building_id", "pj_level_id", "pj_module_type_id",
         "pj_name_id", "pj_character_id", "pj_unit_id", "pj_shipment_id", "owner_id"
