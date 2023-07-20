@@ -127,7 +127,7 @@ class DataSource_Hr_timesheet_line extends Controller
         // Pivot data before render 
         [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData, $modeParams);
         $paramColumns = $this->getParamColumns($dataOutput,$modeType);
-
+        // dd($tableColumns);
 
         $dataSource = $this->paginateDataSource($dataOutput, $pageLimit);
         // dump($dataSource);

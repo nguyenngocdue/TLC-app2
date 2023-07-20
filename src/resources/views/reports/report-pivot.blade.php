@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('topTitle', "")
-@section('title', "")
-@section('tooltip', "")
+@section('title', $modeType)
+{{-- @section('tooltip', Str::ucfirst($typeReport)." ".$mode) --}}
 @section('content')
 
 {{-- @dd($paramColumns) --}}

@@ -20,10 +20,10 @@ trait  ColumnsPivotReport
         foreach ($bindingRowFields as $key => $value) {
             if (!$key) continue;
             if (count($value) && is_array($value)) {
-                $dataIndex = $value['table_name'] . '_' . $value['attribute_name'];
+                $dataIndex = $value['table_name'] ? $key . '_' . $value['table_name'] . '_' . $value['attribute_name'] : $key;
                 $columnsData[] = [
                     'title' => $value['title_override'],
-                    'dataIndex' => $key . '_' . $dataIndex,
+                    'dataIndex' => $dataIndex,
                     'width' => 250,
                 ];
             } else {
