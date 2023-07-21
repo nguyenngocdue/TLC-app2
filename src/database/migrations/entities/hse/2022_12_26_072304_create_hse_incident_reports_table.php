@@ -46,7 +46,7 @@ return new class extends Migration
             $table->string('injured_staff_cat_desc');
             $table->unsignedBigInteger('injured_staff_discipline');
             $table->float('lost_value')->nullable();
-            $table->unsignedBigInteger('lost_unit')->nullable();
+            $table->unsignedBigInteger('lost_unit_id')->nullable();
             $table->boolean('need_to_transfer_position')->nullable();
 
             $table->boolean('accident_book_entry')->nullable();

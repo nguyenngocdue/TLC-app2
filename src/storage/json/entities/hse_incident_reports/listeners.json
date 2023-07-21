@@ -314,9 +314,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_lost_unit": {
-        "name": "_lost_unit",
-        "column_name": "lost_unit",
+    "_lost_unit_id": {
+        "name": "_lost_unit_id",
+        "column_name": "lost_unit_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
