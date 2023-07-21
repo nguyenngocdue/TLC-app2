@@ -135,6 +135,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                         'cell_href' => 'javascript:callApiStoreEmpty("' . $routeCreate . '",[' . $paramStr . '])',
                         'cell_class' => "text-center text-blue-800 $xClass",
                         'cell_title' => "Create a new document",
+                        'cell_onclick' => "$(this).hide()",
                     ];
                 }
             }
