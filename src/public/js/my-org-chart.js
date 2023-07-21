@@ -83,7 +83,7 @@ function init() {
           ) , // end Adornment
           
           click: function(e, obj){
-            window.location.replace(obj.part.data.url);
+            window.open(obj.part.data.url,'_blank');
           },
           toolTip:  // define a tooltip for each node that displays the color as text
           $("ToolTip",

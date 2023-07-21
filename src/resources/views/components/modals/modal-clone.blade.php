@@ -30,7 +30,7 @@
             data: { id: id },
             success: (response) => {
                 toastr.success(response.message);
-                window.location.replace(response.href);
+                window.location.href = response.href;
             },
             error: (jqXHR) => {
                 toastr.error(jqXHR.responseJSON.message);

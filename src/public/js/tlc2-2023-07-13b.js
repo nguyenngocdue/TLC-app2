@@ -10,7 +10,7 @@ function callApiStoreEmpty(url, data, callback = null) {
                 callback(response);
             } else {
                 toastr.success(response.message);
-                window.location.replace(response.hits[0]['redirect_edit_href']);
+                window.location.href = response.hits[0]['redirect_edit_href'];
             }
         },
         error: function (jqXHR) {
