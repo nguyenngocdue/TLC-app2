@@ -20,6 +20,7 @@ class Hse_first_aid extends ModelExtended
     ];
 
     public static $oracyParams = [];
+    public static $nameless = true;
     public function getInjuredPerson()
     {
         $p = static::$eloquentParams[__FUNCTION__];

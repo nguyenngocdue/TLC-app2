@@ -1,13 +1,13 @@
 <?php
 
-namespace App\View\Components\Calendar;
+namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Prod_routing;
+use App\Models\Project;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class SidebarFilterProdRouting extends Component
+class ProjectFilter extends Component
 {
     use TraitListenerControl;
     /**
@@ -24,7 +24,6 @@ class SidebarFilterProdRouting extends Component
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $readOnly = false,
         private $allowClear = false,
-        private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
     ) {
         // if (old($name)) $this->selected = old($name);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
@@ -32,14 +31,9 @@ class SidebarFilterProdRouting extends Component
 
     private function getDataSource()
     {
-        $db = Prod_routing::select('id', 'name', 'description')
+        return Project::select('id', 'name', 'description')
             ->orderBy('name')
             ->get();
-        foreach ($db as &$line) {
-            $fn = "getSubProjects()";
-            $line->{$fn} = $line->getSubProjects()->pluck('id');
-        }
-        return $db;
     }
 
     /**

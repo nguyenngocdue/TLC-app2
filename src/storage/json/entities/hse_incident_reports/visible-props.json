@@ -230,9 +230,9 @@
         "pending_verification": "true",
         "closed": "true"
     },
-    "_loss_value": {
-        "name": "_loss_value",
-        "column_name": "loss_value",
+    "_lost_value": {
+        "name": "_lost_value",
+        "column_name": "lost_value",
         "new": "true",
         "active": "true",
         "pending_ack": "true",

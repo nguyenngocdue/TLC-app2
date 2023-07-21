@@ -1133,9 +1133,9 @@
         "qs_member_nz": "",
         "external_inspector": ""
     },
-    "_loss_value": {
-        "name": "_loss_value",
-        "column_name": "loss_value",
+    "_lost_value": {
+        "name": "_lost_value",
+        "column_name": "lost_value",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
