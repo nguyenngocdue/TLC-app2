@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer\ViewAll;
+namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Models\Hr_training_course;
@@ -9,10 +9,11 @@ use App\Models\User;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
+use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
-class ViewAllTypeMatrixTypeTrainingCourse extends ViewAllTypeMatrixParent
+class HrTrainingLines extends ViewAllTypeMatrixParent
 {
     use TraitViewAllFunctions;
     private $workplace_id;

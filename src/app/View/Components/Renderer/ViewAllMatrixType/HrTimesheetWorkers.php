@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer\ViewAll;
+namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Models\Hr_timesheet_worker;
 use App\Models\User;
@@ -8,10 +8,11 @@ use App\Models\User_team_tsht;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
+use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
-class ViewAllTypeMatrixTypeDateMode extends ViewAllTypeMatrixParent
+class HrTimesheetWorkers extends ViewAllTypeMatrixParent
 {
     protected $viewportDate = null;
     protected $viewportMode = null;

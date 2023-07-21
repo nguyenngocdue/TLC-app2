@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer\ViewAll;
+namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Models\Prod_order;
@@ -8,9 +8,10 @@ use App\Models\Prod_routing;
 use App\Models\Qaqc_wir;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
 use Illuminate\Support\Str;
 
-class ViewAllTypeMatrixTypeProjectSubprojectRouting extends ViewAllTypeMatrixParent
+class QaqcWirs extends ViewAllTypeMatrixParent
 {
     use TraitViewAllFunctions;
     private $project, $subProject, $prodRouting;
