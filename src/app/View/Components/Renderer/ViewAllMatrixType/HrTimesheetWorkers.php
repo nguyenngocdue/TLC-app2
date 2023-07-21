@@ -7,14 +7,14 @@ use App\Models\User;
 use App\Models\User_team_tsht;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
-use App\Utils\Support\DateTimeConcern;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
-use Carbon\Carbon;
+use App\View\Components\Renderer\ViewAllMatrixFilter\TraitFilterWeekMonth;
 use Illuminate\Support\Str;
 
 class HrTimesheetWorkers extends ViewAllTypeMatrixParent
 {
     use TraitXAxisDate;
+    use TraitFilterWeekMonth;
 
     protected $viewportDate = null;
     protected $viewportMode = null;
@@ -59,30 +59,6 @@ class HrTimesheetWorkers extends ViewAllTypeMatrixParent
         $lastDay =  $xAxis[sizeof($xAxis) - 1]['dataIndex'];
         $lines = Hr_timesheet_worker::whereBetween('ts_date', [$firstDay, $lastDay])->get();
         return $lines;
-    }
-
-    protected function getFilterDataSource()
-    {
-        $minus1year = date(Constant::FORMAT_DATE_MYSQL, strtotime("-1 year", $this->viewportDate));
-        $minus1month = date(Constant::FORMAT_DATE_MYSQL, strtotime("-1 month", $this->viewportDate));
-        $minus1week = date(Constant::FORMAT_DATE_MYSQL, strtotime("-1 week", $this->viewportDate));
-        $today = date(Constant::FORMAT_DATE_MYSQL);
-        $plus1week = date(Constant::FORMAT_DATE_MYSQL, strtotime("+1 week", $this->viewportDate));
-        $plus1month = date(Constant::FORMAT_DATE_MYSQL, strtotime("+1 month", $this->viewportDate));
-        $plus1year = date(Constant::FORMAT_DATE_MYSQL, strtotime("+1 year", $this->viewportDate));
-
-        return [
-            '-1year' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$minus1year",
-            '-1month' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$minus1month",
-            '-1week' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$minus1week",
-            'today' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$today",
-            '+1week' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$plus1week",
-            '+1month' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$plus1month",
-            '+1year' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$plus1year",
-
-            'weekView' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_mode=week",
-            'monthView' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_mode=month",
-        ];
     }
 
     protected function getViewportParams()

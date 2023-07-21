@@ -108,4 +108,23 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         $params['assignee_1'] =  $x['def_assignee'];
         return $params;
     }
+
+    protected function getMetaColumns()
+    {
+        return [
+            ['dataIndex' => 'production_name',  'width' => 150,],
+            ['dataIndex' => 'compliance_name',  'width' => 150,],
+            ['dataIndex' => 'quantity',  'width' => 50,],
+            // ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
+        ];
+    }
+
+    function getMetaObjects($y)
+    {
+        return [
+            'production_name' =>  $y->production_name,
+            'compliance_name' =>  $y->compliance_name,
+            'quantity' => $y->quantity,
+        ];
+    }
 }

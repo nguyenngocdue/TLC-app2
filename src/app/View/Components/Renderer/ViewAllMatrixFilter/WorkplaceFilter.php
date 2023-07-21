@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Calendar;
+namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
@@ -8,7 +8,7 @@ use App\Models\Workplace;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class SidebarFilterWorkplace extends Component
+class WorkplaceFilter extends Component
 {
     use TraitListenerControl;
     use TraitGetSuffixListenerControl;
