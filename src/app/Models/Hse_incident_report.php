@@ -16,7 +16,7 @@ class Hse_incident_report extends ModelExtended
         'owner_staff_id', 'owner_staff_position',
         'first_date', 'employed_duration_in_year', 'injured_staff_cat', 'injured_staff_cat_desc',
         'injured_staff_discipline',  'need_to_transfer_position',
-        'lost_value', 'loss_unit',
+        'lost_value', 'lost_unit_id',
     ];
     protected $table = "hse_incident_reports";
     public static $nameless = true;

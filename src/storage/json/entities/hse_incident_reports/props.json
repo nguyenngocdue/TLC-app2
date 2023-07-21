@@ -418,8 +418,8 @@
         "new_line": ""
     },
     "_lost_unit_id": {
-        "name": "_lost_unit",
-        "column_name": "lost_unit",
+        "name": "_lost_unit_id",
+        "column_name": "lost_unit_id",
         "column_type": "bigint unsigned",
         "label": "Lost Unit",
         "control": "dropdown",

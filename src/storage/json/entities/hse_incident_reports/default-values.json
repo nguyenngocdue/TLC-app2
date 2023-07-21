@@ -263,6 +263,18 @@
         "placeholder": "Please enter number if issue category is Incident",
         "control_extra": ""
     },
+    "_lost_unit_id": {
+        "name": "_lost_unit_id",
+        "column_name": "lost_unit_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_number_injured_person": {
         "name": "_number_injured_person",
         "column_name": "number_injured_person",
@@ -395,6 +407,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_need_to_transfer_position": {
+        "name": "_need_to_transfer_position",
+        "column_name": "need_to_transfer_position",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_time_in_hospital": {
         "name": "_time_in_hospital",
         "column_name": "time_in_hospital",
@@ -412,18 +436,6 @@
         "column_name": "time_out_hospital",
         "label": "",
         "validation": "nullable|date_format:d\/m\/Y H:i",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_need_to_transfer_position": {
-        "name": "_need_to_transfer_position",
-        "column_name": "need_to_transfer_position",
-        "label": "",
-        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -779,18 +791,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_assignee_2": {
-        "name": "_assignee_2",
-        "column_name": "assignee_2",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "16",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_divider11": {
         "name": "_divider11",
         "column_name": "divider11",
@@ -811,6 +811,18 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "16",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
