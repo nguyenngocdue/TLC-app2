@@ -9,7 +9,9 @@ class CurrentPathInfo
     public static function getTypeReport($request, $tail = '')
     {
         $pathInfo = $tail ? str_replace($tail, '', $request->getPathInfo()) : $request->getPathInfo();
-        $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[0]);
+        // $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[0]);
+        $pathInfo =  [explode('/', trim($pathInfo, '/'))[0]];
+        // dd($pathInfo);
         $str = strtolower(Str::plural($pathInfo[0]));
         if (filter_var($str . 's', FILTER_SANITIZE_NUMBER_INT)) {
             $str = str_replace('_' . filter_var($str . 's', FILTER_SANITIZE_NUMBER_INT), '', $str);

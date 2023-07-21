@@ -131,7 +131,6 @@ abstract class Report_ParentController extends Controller
     {
         $input = $request->input();
         $isFormType = isset($input['form_type']);
-        // dd($input);
         if ($isFormType && $input['form_type'] === 'updateParamsReport' || $isFormType && $input['form_type'] === 'updatePerPageReport') {
             (new UpdateUserSettings())($request);
         }
@@ -146,7 +145,6 @@ abstract class Report_ParentController extends Controller
     private function makeModeTitleReport($routeName)
     {
         $lib = LibReports::getAll();
-        // dd($lib);
         $title = $lib[$routeName]['title'] ??'Empty Title';
         return $title;
     }
@@ -228,14 +226,14 @@ abstract class Report_ParentController extends Controller
             "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
             "Expires"             => "0"
         );
-        $columnKeys = array_combine($columnKeys, $columnKeys);
+        // $columnKeys = array_combine($columnKeys, $columnKeys);
         $callback = function () use ($rows, $columnKeys, $columnNames) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columnNames);
             $array = [];
             foreach ($rows as $row) {
-                foreach ($columnKeys as $key => $column) {
-                    $array[$column] = $row[$key];
+                foreach ($columnKeys as $key) {
+                    $array[$key] = $row[$key];
                 }
                 fputcsv($file, $array);
             }

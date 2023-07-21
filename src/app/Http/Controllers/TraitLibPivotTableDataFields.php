@@ -5,36 +5,57 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\StringPivotTable;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 
 trait TraitLibPivotTableDataFields
 {
     use CheckFieldsPivotInDatabase;
+    use ParseFiltersToJsonReport;
 
     private function separateFields($data)
     {
         $array = [];
         try {
-                foreach ($data as $value) {
-                    if (str_contains($value, '(')) {
-                        $pos = strpos($value, '(');
-                        $field = substr($value, 0, $pos);
-                        $bindingName = substr($value,  $pos + 1, strlen($value) - $pos - 2);
-                        $array['fields'][] = $field;
-                        $array['bidding_fields'][$field] =  array_combine(['table_name', 'attribute_name'], explode('.', $bindingName));
-                    } else {
-                        $array['fields'][] = $value;
-                        $array['bidding_fields'][$value] =  [];
-                    }
+            foreach ($data as $value) {
+                if (str_contains($value, '(')) {
+                    $pos = strpos($value, '(');
+                    $field = substr($value, 0, $pos);
+                    $bindingName = substr($value,  $pos + 1, strlen($value) - $pos - 2);
+                    $array['fields'][] = $field;
+                    $array['bidding_fields'][$field] =  array_combine(['table_name', 'attribute_name'], explode('.', $bindingName));
+                } else {
+                    $array['fields'][] = $value;
+                    $array['bidding_fields'][$value] =  [];
                 }
-                // dd($array);
-                return $array;
-        }
-        catch (\Exception $e) {
+            }
+            // dd($array);
+            return $array;
+        } catch (\Exception $e) {
             dd($e->getMessage());
         }
+    }
+
+    private static function separateFields3($data)
+    {
+        $array = [];
+        foreach ($data as $key => $value) {
+            $stringExplore = explode('.', StringPivotTable::stringByPattern($value, '/\((.*?)\)/'));
+            $pos = StringPivotTable::findCharacterIndex($value, ['(', '{']);
+            $filedKey = $pos > 0 ? substr($value, 0, $pos) : $value;
+
+            $tableName = $stringExplore[0] ?? "";
+            $attributeName = $stringExplore[1] ?? "";
+            $title = ucwords(substr($value, 0, strpos($value, '_')));
+            $titleOverride = ($t = StringPivotTable::stringByPattern($value, '/\{([^}]*)\}/')) ? $t : $title;
+            $array[$filedKey] = [
+                'table_name' => $tableName,
+                'attribute_name' => $attributeName,
+                'title_override' => $titleOverride,
+                'field_index' => $filedKey,
+            ];
+        }
+        return $array;
     }
 
 
@@ -140,8 +161,8 @@ trait TraitLibPivotTableDataFields
         $fieldNames = [];
         $fieldsBiddings = [];
         $fieldTitles = [];
-    
-        if(!$fields) return [];
+
+        if (!$fields) return [];
         foreach ($fields as $value) {
             if (strpos($value, '(') !== false) {
                 $fieldName = substr($value, 0, strpos($value, '('));
@@ -161,14 +182,14 @@ trait TraitLibPivotTableDataFields
                 $fieldTitles[] = "";
             }
         }
-    
+
         return [
             'field_names' => $fieldNames,
             'field_biddings' => $fieldsBiddings,
             'field_titles' => $fieldTitles
         ];
     }
-    
+
     public static function exploreColumnFields($columnFields, $valueIndexFields)
     {
         $originalColumnFields = self::getFieldsInColumnField($columnFields);
@@ -181,17 +202,49 @@ trait TraitLibPivotTableDataFields
         ];
     }
 
-    public function getDataFields()
+    private static function getKeysWithTableName($data1, $data2)
     {
-        $lib = LibPivotTables::getFor($this->key);
+        $allData = array_merge($data1, $data2);
+        $keysWithTableName = [];
+        foreach ($allData as $key => $value) {
+            if (isset($value['table_name'])) {
+                $tableName = $value['table_name'];
+                $keysWithTableName[$key] = $tableName;
+            }
+        }
+
+        return $keysWithTableName;
+    }
+    public function getDataFields($dataSource, $modeType)
+    {
+        $lib = LibPivotTables::getFor($modeType);
         $lib = self::removeEmptyElements($lib);
+        $isEmptyData = PivotReport::isEmptyArray($dataSource);
+        
+        
         if (!$this->checkCreateManagePivotReport($lib)) return false;
-
+        
         $filters = $lib['filters'] ?? [];
+        $dataFilters = $this->parseStringToJson($filters);
+        $fieldOfFilters = array_keys($dataFilters) ?? [];
+        
+        
         $row_fields = $lib['row_fields'] ?? [];
-
-
+        
+        
         $fields = $this->separateFields($row_fields);
+        
+        $bindingRowFields = $this->separateFields3($row_fields);
+
+        if($isEmptyData) {
+            return [
+                'empty_data' => true,
+                'binding_row_fields' => $bindingRowFields,
+                'data_filters' => $dataFilters,
+
+            ];
+        } 
+
 
         $columnFields = $lib['column_fields'] ?? [];
         $valueIndexFields = $lib['value_index_fields'] ?? [];
@@ -203,19 +256,15 @@ trait TraitLibPivotTableDataFields
         if (!$checkEmptyRowFieldsAndColumnFields) return false;
 
         $infoColumnFields = $this->exploreColumnFields($columnFields, $valueIndexFields);
-        // dd($infoColumnFields);
         $originalFields = $infoColumnFields['original_fields'];
-        $biddingColumnFields = $infoColumnFields['bidding_fields'] ?? [];
+        $bindingColumnFields = $infoColumnFields['bidding_fields'] ?? [];
 
-        
-        $biddingRowFields = $fields['bidding_fields'] ?? [];
 
         $dataFields = self::triggerFieldsInfo($lib['data_fields'] ?? []) ?? [];
         $fieldOdDataFields = $dataFields['field_names'] ?? [];
-        $fieldsToCheckDatabase = $this->getFieldsToCheckDatabase($lib, array_keys($biddingRowFields), $originalFields, $fieldOdDataFields);
+        $fieldsToCheckDatabase = $this->getFieldsToCheckDatabase($lib, array_keys($bindingRowFields), $originalFields, $fieldOdDataFields);
 
-        $primaryData = $this->dataSource;
-        $checkFieldsInDatabase = $this->checkFieldsInDatabase($fieldsToCheckDatabase, $primaryData);
+        $checkFieldsInDatabase = $this->checkFieldsInDatabase($fieldsToCheckDatabase, $dataSource);
         if (!$checkFieldsInDatabase) return false;
 
         $rowFields = $fields['fields'] ?? [];
@@ -230,11 +279,24 @@ trait TraitLibPivotTableDataFields
         $sortBy = $lib['sort_by'] ?? [];
         $dataIndex = $this->getDataIndex($row_fields);
         $columnFields = $originalFields;
-        // dd($propsColumnField);
-        $propsColumnField = array_merge($propsColumnField,$biddingRowFields);
-        // dd($propsColumnField);
+        // $propsColumnField = array_merge($propsColumnField, $bindingRowFields);
 
-        $tableIndex = $lib['lookup_tables'];
-        return [$rowFields, $biddingRowFields, $filters, $propsColumnField, $biddingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields, $columnFields, $infoColumnFields, $tableIndex];
+        $tableIndex = self::getKeysWithTableName($bindingRowFields, $bindingColumnFields);
+        // dump(self::getKeysWithTableName($bindingRowFields), $bindingRowFields);
+        return [
+            $rowFields,
+            $bindingRowFields,
+            $fieldOfFilters,
+            $propsColumnField,
+            $bindingColumnFields,
+            $dataAggregations,
+            $dataIndex,
+            $sortBy,
+            $valueIndexFields,
+            $columnFields,
+            $infoColumnFields,
+            $tableIndex,
+            $dataFilters,
+        ];
     }
 }

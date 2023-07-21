@@ -3,10 +3,6 @@
 namespace App\View\Components\Reports\Modals;
 
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
-use App\Models\Sub_project;
-use App\Models\User;
-use App\Utils\Support\CurrentUser;
-use App\Utils\Support\Tree\BuildTree;
 use App\View\Components\Reports\ParentTypeParamReport;
 
 class ParamUserId extends ParentTypeParamReport

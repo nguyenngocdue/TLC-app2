@@ -47,10 +47,17 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
 
                 FROM
                     hr_timesheet_lines tsl
-                INNER JOIN
-                    users us ON tsl.user_id = us.id
-                WHERE
-                    DATE(tsl.start_time) BETWEEN '2022-10-14' AND '2023-01-14'
+                INNER JOIN \n";
+
+        if (isset($modeParams['many_user_id']) || isset($modeParams['user_id'])) {
+            $ids = implode(',', $modeParams['many_user_id'] ?? $modeParams['user_id']);
+            $sql .= "users us ON tsl.user_id IN ($ids)";
+        } else {
+            $sql .= "users us ON tsl.user_id = us.id";
+        }
+        $sql .= "\n WHERE 1 = 1 
+                    AND DATE(tsl.start_time) BETWEEN '$startDate' AND '$endDate'
+                    #AND tsl.sub_project_id IN (82, 21)
                 GROUP BY
                     time_sheet_start_time,
                     pj_task_id,
@@ -78,7 +85,8 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         return $modeParams;
     }
 
-    private function defaultPickerDate(){
+    private function defaultPickerDate()
+    {
         $currentDate = new DateTime();
         $targetDate = clone $currentDate;
         $targetDate->modify('-6 months');
@@ -265,38 +273,40 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         $users = $dataWaitingFor['users'];
         $infoHeadUsers['user_name'] = $users[$infoHeadUsers['user_id']]['name'];
         $infoHeadUsers['staff_id'] =  $users[$infoHeadUsers['user_id']]['employeeid'];
-        $infoHeadUsers['workplace_id'] =$users[$infoHeadUsers['user_id']]['workplace'];
+        $infoHeadUsers['workplace_id'] = $users[$infoHeadUsers['user_id']]['workplace'];
         $infoHeadUsers['type_id'] = $users[$infoHeadUsers['user_id']]['user_type'];
         $infoHeadUsers['department_id'] = $users[$infoHeadUsers['user_id']]['department'];
         $infoHeadUsers['category_id'] = $users[$infoHeadUsers['user_id']]['category'];
-        
+
         $infoHeadUsers['project_name'] = $dataWaitingFor['projects'][$infoHeadUsers['project_id']];
         $infoHeadUsers['sub_project_name'] = $dataWaitingFor['sub_projects'][$infoHeadUsers['sub_project_id']];
         $infoHeadUsers['lod_name'] = $dataWaitingFor['terms'][$infoHeadUsers['lod_id']];
         $infoHeadUsers['discipline_name'] = $dataWaitingFor['user_disciplines'][$infoHeadUsers['discipline_id']];
         $infoHeadUsers['pj_task_name'] = $dataWaitingFor['pj_tasks'][$infoHeadUsers['pj_task_id']];
-        
+
         $infoHeadUsers['type_name'] = $dataWaitingFor['user_types'][$infoHeadUsers['type_id']];
         $infoHeadUsers['workplace_name'] = $dataWaitingFor['workplaces'][$infoHeadUsers['workplace_id']];
         $infoHeadUsers['category_name'] =  $dataWaitingFor['user_categories'][$infoHeadUsers['category_id']];
-        $infoHeadUsers['department_name'] =$dataWaitingFor['departments'][$infoHeadUsers['department_id']];
+        $infoHeadUsers['department_name'] = $dataWaitingFor['departments'][$infoHeadUsers['department_id']];
 
         // dd($infoHeadUsers, $dataWaitingFor);
         return $infoHeadUsers;
     }
     private function dataWaitingForLooking()
     {
-        $arrayModelNames = ['Project', 'Sub_project', 'Term','User_Type', 'User_discipline','Workplace', 'Pj_task', 'User_category', 'Department'];
-        $dataModels = array_map(function($modelName) {
-            $key = Str::plural(strtolower($modelName));
-            $value = array_column(Str::modelPathFrom($modelName)::select('id', 'name')->get()->toArray(), 'name', 'id');
-            return [$key => $value];
-        } 
-        , $arrayModelNames);
+        $arrayModelNames = ['Project', 'Sub_project', 'Term', 'User_Type', 'User_discipline', 'Workplace', 'Pj_task', 'User_category', 'Department'];
+        $dataModels = array_map(
+            function ($modelName) {
+                $key = Str::plural(strtolower($modelName));
+                $value = array_column(Str::modelPathFrom($modelName)::select('id', 'name')->get()->toArray(), 'name', 'id');
+                return [$key => $value];
+            },
+            $arrayModelNames
+        );
         $dataModels = array_merge(...$dataModels);
         $users = User::select('id', 'name', 'employeeid', 'user_type', 'workplace', 'category', 'department')->get()->toArray();;
-        $users =  array_map(fn($item)  => $item[0],Report::groupArrayByKey($users, 'id'));
-        return ['users'=> $users] + $dataModels;
+        $users =  array_map(fn ($item)  => $item[0], Report::groupArrayByKey($users, 'id'));
+        return ['users' => $users] + $dataModels;
     }
 
 
@@ -305,18 +315,19 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         // dd($this->a);
         $data = array_slice($dataSource->toArray(), 0, 100);
         $dataWaitingFor = $this->dataWaitingForLooking();
-        $dataSource = array_map(fn($item) => (Array)$item, $data);
+        $dataSource = array_map(fn ($item) => (array)$item, $data);
         array_walk($dataSource, function ($value, $key) use (&$dataSource, $dataWaitingFor) {
-            $datesHaveValue = Report::retrieveDataByIndex($value,'pj_task_id');
+            $datesHaveValue = Report::retrieveDataByIndex($value, 'pj_task_id');
             $infoHeadUsers = Report::retrieveDataByIndex($value, 'pj_task_id', true);
             $dataHeadUsers = $this->addInfoHeadUsers($infoHeadUsers, $dataWaitingFor);
-            $dataSource[$key] =  $dataHeadUsers +$datesHaveValue;
+            $dataSource[$key] =  $dataHeadUsers + $datesHaveValue;
         });
         // $this->hr_timesheet_line_020($dataSource);
         return collect($dataSource);
     }
 
-    private function hr_timesheet_line_020($dataSource) {
+    private function hr_timesheet_line_020($dataSource)
+    {
         $libPivotFilters = $this->libPivotFilters;
         $rowFields = $libPivotFilters['row_fields'];
 
@@ -328,22 +339,20 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
             dd($dataGroup1);
             ++$keyCol;
             $data = [];
-            if ($keyCol < count($rowFields) ) {
+            if ($keyCol < count($rowFields)) {
                 foreach ($dataGroup1 as $k1 => $g1) {
                     $dataGroup1 = Report::groupArrayByKey($g1, $rowFields[$keyCol] . '_name');
                     ++$keyCol;
-                    foreach($dataGroup1 as $k2 => $g2) {
+                    foreach ($dataGroup1 as $k2 => $g2) {
                         $dataGroup2 = Report::groupArrayByKey($g2, $rowFields[$keyCol] . '_name');
                         ++$keyCol;
-                        if ($keyCol < count($rowFields) ) {
-                            foreach($dataGroup2 as $k3 => $g3) {
+                        if ($keyCol < count($rowFields)) {
+                            foreach ($dataGroup2 as $k3 => $g3) {
                                 $dataGroup3 = Report::groupArrayByKey($g3, $rowFields[$keyCol] . '_name');
                                 $data[$k1][$k2][$k3] = $dataGroup3;
                                 dd($data);
                             }
-
                         }
-
                     }
                 }
                 ++$keyCol;

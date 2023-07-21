@@ -43,7 +43,6 @@ class Report
         foreach ($result0 as $line) {
             $result1[$line['name']] = $line;
         }
-        // dump($result1);
         return $result1;
     }
     public static function getFirstItemFromChildrenArray($dataSource)
@@ -173,7 +172,7 @@ class Report
     public static function dataWithoutNull($data)
     {
         return array_filter($data, function ($value) {
-            return $value !== null;
+            return $value !== null && $value != '';
         });
     }
 
@@ -229,4 +228,5 @@ class Report
 
         return array_merge($months, $missingMonths);
     }
+
 }

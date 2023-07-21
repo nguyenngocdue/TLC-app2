@@ -6,7 +6,6 @@ use App\BigThink\ModelExtended;
 
 class Pj_shipment extends ModelExtended
 {
-    public $timestamps = false;
     protected $fillable = ["id", "name", "description", "slug", "project_id", "sub_project_id", "external_doc_link", "owner_id"];
 
     protected $table = 'pj_shipments';

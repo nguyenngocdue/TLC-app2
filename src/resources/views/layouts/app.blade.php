@@ -103,6 +103,12 @@
             return digitsMap[digit];
             }
         </script>
+        <script>
+            window.Echo.channel('test')
+                .listen('Test', (e) => {
+                    console.log(e.data);
+                })
+        </script>
 </body>
 </html>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Notifications;
 
 use App\Http\Controllers\Controller;
+use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ class NotificationsController extends Controller
     }
     private function getDataSource()
     {
-        return auth()->user()->notifications->toArray();
+        return CurrentUser::get()->notifications->toArray();
     }
 
     public function index()
@@ -32,7 +33,7 @@ class NotificationsController extends Controller
         $routeName = "{$typePlural}.edit";
         $routeExits =  (Route::has($routeName));
         $href =  $routeExits ? route($routeName, $id) : "#";
-        auth()->user()
+        CurrentUser::get()
             ->unreadNotifications
             ->when($idNotification, function ($query) use ($idNotification) {
                 return $query->where('id', $idNotification);

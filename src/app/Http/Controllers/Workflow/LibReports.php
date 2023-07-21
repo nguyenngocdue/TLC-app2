@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Workflow;
 
+use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Str;
 
@@ -12,8 +13,9 @@ class LibReports extends AbstractLib
     public static function getAll()
     {
         $json = parent::getAll();
+        // dd($json);
         $jsonNames = array_map(fn ($i) => $i['name'], $json);
-        $routes = Report::getAllRoutes();
+        $routes = Report::getAllRoutes() + PivotReport::getAllRoutes();
         $result = [];
         foreach ($routes as $route) {
             $tableName = Str::plural($route['singular']);

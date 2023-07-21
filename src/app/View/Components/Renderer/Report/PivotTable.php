@@ -2,26 +2,23 @@
 
 namespace App\View\Components\Renderer\Report;
 
-use App\Http\Controllers\CheckFieldPivotInDatabase;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\TraitLibPivotTableDataFields;
-use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Utils\Support\Report;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\PivotReportDataFields;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\View\Component;
-use Illuminate\Support\Str;
 
-class PivotTable extends Component
+class PivotTable extends Controller
 {
 
     use TraitLibPivotTableDataFields;
     use ColumnsPivotReport;
     public function __construct(
-        private $key = '',
+        private $modeType = '',
         private $dataSource = [],
+        private $itemsSelected = [],
     ) {
     }
 
@@ -42,36 +39,35 @@ class PivotTable extends Component
             }, $dataOutput);
             return $data1;
         }
-        // dd($dataOutput);
-        // dd($processedData, $calculatedData, $transferredData, $rowFields, $dataOutput);
         return $dataOutput;
     }
 
     private function getDataFromTables($tableIndex)
     {
-        $dataTables = array_merge(...array_map(function ($name) {
+        $dataTables = [];
+        foreach (array_values($tableIndex) as $name){
+            if(!$name) continue;
             try {
                 $array = DB::table($name)->select('id', 'name', 'description')->get()->toArray();
-                $array = array_combine(array_column($array, 'id'), $array);
-                return [$name => $array];
+                $dataTables[$name]  = array_combine(array_column($array, 'id'), $array);;
+
             } catch (\Exception $e) {
                 $array = DB::table($name)->select('id', 'name')->get()->toArray();
-                $array = array_combine(array_column($array, 'id'), $array);
-                return [$name => $array];
+                $dataTables[$name]  = array_combine(array_column($array, 'id'), $array);
             }
-        }, $tableIndex));
+        }
         return $dataTables;
     }
 
-    private function attachInfoToDataSource($tables, $processedData)
+    private function attachInfoToDataSource($tables, $processedData, $allDataFields)
     {
+        [$rowFields, $bidingRowFields,,, $bidingColumnFields,,,,,,,,,] =  $allDataFields;
 
-        [$rowFieldsHasAttr, $bindingFields,,, $bidingColumnFields,, $dataIndex,] =  $this->getDataFields();
         foreach ($processedData as &$items) {
             foreach ($items as $key => $id) {
-                if (in_array($key, $rowFieldsHasAttr)) {
+                if (in_array($key, $rowFields)) {
                     try {
-                        $infoAttr = $bindingFields[$key];
+                        $infoAttr = $bidingRowFields[$key];
                         $tableName = $infoAttr['table_name'];
                         $attributeName = $infoAttr['attribute_name'];
                         $fieldName = $key . '_' . $tableName . '_' . $attributeName;
@@ -117,6 +113,7 @@ class PivotTable extends Component
     private function sortByData($sortByColumn)
     {
         $orders = [];
+        // if(is_null($sortByColumn) || empty($sortByColumn)) return [];
         array_map(function ($item) use (&$orders) {
             $ex = explode(':', $item);
             $key = $ex[0];
@@ -128,12 +125,10 @@ class PivotTable extends Component
         return $orders;
     }
 
-    private function sortLinesData($dataOutput)
+    public function sortLinesData($dataOutput, $allDataFields)
     {
-        // dd($dataOutput);
-        [,,,,,,, $sortBy] =  $this->getDataFields();
-        if (!$this->getDataFields()) return collect($dataOutput);
-
+        if(isset($allDataFields['empty_data'])) return collect($dataOutput);
+        [,,,,,,, $sortBy,,,,,,] = $allDataFields;
         $sortOrders = $this->sortByData($sortBy);
         uasort($dataOutput, function ($item1, $item2) use ($sortOrders) {
             foreach ($sortOrders as $field => $sortOrder) {
@@ -152,29 +147,29 @@ class PivotTable extends Component
         return collect($dataOutput);
     }
 
-    protected function changeValueData($dataSource)
-    {
-        $dataSource = array_slice($dataSource->toArray(), 0, 10000000);
-        [$rowFields,,,,,, $dataIndex,] =  $this->getDataFields();
-        if (!$this->getDataFields()) return [];
-        $allRowFields = array_unique(array_merge($rowFields, $dataIndex));
-        // dd($dataSource);
-        foreach ($dataSource as $key => $values) {
-            // dd($values);
-            foreach ($allRowFields as $field) {
-                // $attrName = str_replace('id', 'name', $field);
-                if (isset($values[$field])) {
-                    // Log::info($field);
-                    $values[$field] = (object) [
-                        'value' => $values[$field],
-                        // 'cell_title' => $tooltip,
-                    ];
-                }
-            }
-            $dataSource[$key] = $values;
-        }
-        return $dataSource;
-    }
+    // protected function changeValueData($dataSource)
+    // {
+    //     $dataSource = array_slice($dataSource->toArray(), 0, 10000000);
+    //     [$rowFields,,,,,, $dataIndex,] =  $this->getDataFields($dataSource);
+    //     if (!$this->getDataFields($dataSource)) return [];
+    //     $allRowFields = array_unique(array_merge($rowFields, $dataIndex));
+    //     // dd($dataSource);
+    //     foreach ($dataSource as $key => $values) {
+    //         // dd($values);
+    //         foreach ($allRowFields as $field) {
+    //             // $attrName = str_replace('id', 'name', $field);
+    //             if (isset($values[$field])) {
+    //                 // Log::info($field);
+    //                 $values[$field] = (object) [
+    //                     'value' => $values[$field],
+    //                     // 'cell_title' => $tooltip,
+    //                 ];
+    //             }
+    //         }
+    //         $dataSource[$key] = $values;
+    //     }
+    //     return $dataSource;
+    // }
 
     private function mergeLines($data, $rowFields)
     {
@@ -211,18 +206,41 @@ class PivotTable extends Component
         return [];
     }
 
-    private function makeDataRenderer($primaryData)
+    private function triggerFilters($topParams, $fieldOfFilters)
     {
-        [$rowFields, $bidingRowFields, $filters, $propsColumnField, $bidingColumnFields, $dataAggregations, $dataIndex, $sortBy, $valueIndexFields, $columnFields, $infoColumnFields, $tableIndex] =  $this->getDataFields();
-        $valueFilters = count($filters)  ? array_combine($filters, [[1,4,2,3], [7,8,9,10]]) : [];
+        if (empty($fieldOfFilters)) return [];
+        $dataFilters = [];
+        foreach ($fieldOfFilters as $fieldFilter) {
+            if (isset($topParams['many_' . $fieldFilter])) {
+                $dataFilters[$fieldFilter] = (array)$topParams['many_' . $fieldFilter];
+            } elseif (isset($topParams[$fieldFilter])) {
+                $dataFilters[$fieldFilter] = (array)$topParams[$fieldFilter];
+            }
+        }
+        return $dataFilters;
+    }
+
+    public function makeDataRenderer($linesData, $allDataFields, $topParams)
+    {
+        if (empty($linesData->toArray())) return [];
+        
+        [
+            $rowFields,,
+            $fieldOfFilters,
+            $propsColumnField,,
+            $dataAggregations,,,
+            $valueIndexFields,
+            $columnFields,
+            $infoColumnFields,
+            $tableIndex,,
+        ] =  $allDataFields;
+
+        if (is_object($linesData)) $linesData = array_map(fn ($item) => (array)$item, $linesData->toArray());
         // Step 1: reduce lines from Filters array
-        if(is_object($primaryData)) $primaryData = array_map(fn($item) => (array)$item, $primaryData->toArray());
-        $linesData = $primaryData;
-        $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $valueFilters);
-        // dd($valueFilters, $dataReduce, $linesData);
+        $keysFilters = $this->triggerFilters($topParams, $fieldOfFilters);
+        $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $keysFilters);
+        // dd($dataReduce);
 
-
-        // dump($columnFields);
         // Step 2: group lines by Row_Fields array
         if (!count($rowFields)) {
             $processedData = PivotReport::groupBy($dataReduce, $columnFields);
@@ -236,7 +254,6 @@ class PivotTable extends Component
         $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $fieldsNeedToSum), $processedData));
         // dd($processedData, $fieldsNeedToSum);
         // dump($processedData);
-
 
         // Step 3: transfer data from lines to columns by
         // Column_Fields and Value_Index_Fields array 
@@ -252,11 +269,10 @@ class PivotTable extends Component
         // dd($dataIdsOutput);
 
         $tables = $this->getDataFromTables($tableIndex);
-        $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput);
-        // dd($dataOutput, $tables);
-
+        $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput, $allDataFields);
+        // dd($dataOutput[0]);
         $dataOutput = $this->makeTopTitle($dataOutput, $rowFields, $columnFields);
-        // dd($dataOutput);
+        // dd($dataOutput[0]);
 
         $infoColumnFields = [];
         if (!$rowFields && $columnFields) {
@@ -273,8 +289,7 @@ class PivotTable extends Component
             $dataOutput[0]["info_column_field"] = $infoColumnFields;
         }
         $dataOutput = $this->updateResultOfAggregations($columnFields, $dataAggregations, $dataOutput);
-        // dd($dataOutput);
-        
+
         return $dataOutput;
     }
 
@@ -297,22 +312,5 @@ class PivotTable extends Component
             }
         }
         return $dataOutput;
-    }
-
-    public function render()
-    {
-        $primaryData = $this->dataSource;
-        if (!$this->getDataFields()) return false;
-        $dataOutput = $this->makeDataRenderer($primaryData);
-        [$tableDataHeader, $tableColumns] = $this->makeColumnsRenderer($dataOutput);
-        $dataOutput = $this->sortLinesData($dataOutput);
-        $dataOutput = $this->changeValueData($dataOutput);
-
-        // dump($dataOutput);
-        return view('components.renderer.report.pivot-table', [
-            'tableDataSource' => $dataOutput,
-            'tableColumns' => $tableColumns,
-            'tableDataHeader' => $tableDataHeader,
-        ]);
     }
 }

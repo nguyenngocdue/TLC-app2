@@ -286,6 +286,7 @@ class UpdateUserSettings extends Controller
     public function __invoke(Request $request, $redirectTo = null)
     {
         $action = $request->input('action');
+        // dd($action);
         $user = User::find(Auth::id());
         $settings = $user->settings;
         switch ($action) {
@@ -338,6 +339,9 @@ class UpdateUserSettings extends Controller
             case 'updateReportRegisters':
                 $settings = $this->updateReport($request, $settings);
                 break;
+            case 'updateReportPivot-reports':
+                $settings = $this->updateReport($request, $settings);
+                break;
             case 'updateReportReports':
                 $settings = $this->updateReport($request, $settings);
                 break;
@@ -348,6 +352,9 @@ class UpdateUserSettings extends Controller
                 $settings = $this->updatePerPageReports($request, $settings);
                 break;
             case 'updatePerPageReports':
+                $settings = $this->updatePerPageReports($request, $settings);
+                break;
+            case 'updatePerPagePivot-reports':
                 $settings = $this->updatePerPageReports($request, $settings);
                 break;
             case 'updatePerPageDocuments':

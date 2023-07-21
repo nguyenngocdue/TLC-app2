@@ -3,8 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
-use App\Http\Controllers\Workflow\LibApps;
-use App\Http\Resources\HrTsLineCollection;
+use App\Learn\Bridge\Bridge;
+use App\Learn\Builder\BurgerBuilder;
+use App\Learn\Composite\Composite;
+use App\Learn\Facade\Facade;
+use App\Learn\FactoryMethod\DeveloperManager;
+use App\Learn\FactoryMethod\MarketingManager;
+use App\Learn\Flyweight\Flyweight;
+use App\Learn\Proxy\Proxy;
+use App\Learn\SimpleFactory\DoorFactory;
 use App\Models\Comment;
 use App\Models\Hr_timesheet_officer;
 use App\Models\Hr_timesheet_worker;
@@ -15,6 +22,7 @@ use App\Utils\Storage\Thumbnail;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Tree\BuildTree;
+use Doctrine\DBAL\Query\QueryBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +38,21 @@ class WelcomeCanhController extends Controller
     {
         // dd((new LoggerAccessRecent)(CurrentUser::id()));
         // dd(Thumbnail::createThumbnailByOptions('input','output'));
+        // $devManager = (new DeveloperManager())->takeInterView();
+        // $marketingManager = (new MarketingManager())->takeInterView();
+        // $query = QueryBuilder::select();
+        // $burger = (new BurgerBuilder(14))
+        //                         ->addCheese()
+        //                         ->addLettuce()
+        //                         ->addPepperoni()
+        //                         ->addTomato()
+        //                         ->build();
+        Bridge::using();
+        Facade::using();
+        Flyweight::using();
+        Proxy::using();
+        Composite::using();
+        dd();
         $tree = BuildTree::getTree();
         $results = [];
         $showOptions = $this->getUserSettingsViewOrgChart();

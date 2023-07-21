@@ -9,26 +9,44 @@ use Exception;
 
 class PivotReport
 {
-    private function makeColumnFieldsDuplicate($columnFields, $dataOutput)
+
+    private static function actionCreator($reportType, $path, $singular, $mode)
     {
-        $newColumnFields = array_count_values($columnFields);
-        foreach ($newColumnFields as $field => $items) {
-            foreach ($dataOutput as $k1 => &$values) {
-                foreach ($values as $k2 => $value) {
-                    if (str_contains($k2, '_' . $field)) {
-                        for ($i = 2; $i <= $items * 1; $i++) {
-                            $newField = str_replace('_' . $field, '_' . $field . '_[' . $i . ']', $k2);
-                            $values[$newField] = $values[$k2];
-                        }
-                    }
-                }
+        return [
+            'singular' => $singular,
+            'mode' => $mode,
+            'reportType' => $reportType,
+            'path' => $path,
+            // 'routeName' => $reportType . '-' . $singular . "_" . $mode,
+            'name' => $reportType . '-' . $singular . "_" . $mode,
+        ];
+    }
+
+    public static function getAllRoutes()
+    {
+        $entities = Entities::getAll();
+        $result0 = [];
+        foreach ($entities as $entity) {
+            $entityName = Str::getEntityName($entity);
+            $singular = Str::singular($entityName);
+            $ucfirstName = Str::ucfirst($singular);
+            for ($i = 10; $i <= 100; $i += 10) {
+                $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
+                $path = "App\\Http\\Controllers\\PivotReports\\Reports\\{$ucfirstName}_$mode";
+                if (class_exists($path)) $result0[] = static::actionCreator('report-pivot', $path, $singular, $mode);
             }
         }
-        return $dataOutput;
+
+        $result1 = [];
+        foreach ($result0 as $line) {
+            $result1[$line['name']] = $line;
+        }
+        return $result1;
     }
 
     private static function transferValueOfKeys($data, $columnFields, $propsColumnField)
     {
+        // dd($data);
         $newArray = array_map(function ($item) use ($propsColumnField) {
             $dateItems = [];
             $dt = [];
@@ -52,13 +70,13 @@ class PivotReport
                             break;
                     }
                 } catch (Exception $e) {
-                        continue;
+                    continue;
                     // dd($e->getMessage(), $values);
                 }
             }
             return $dateItems;
         }, $data);
-        
+
         $newArray = self::sumItemsInArray($newArray);
         $newArray = self::concatKeyAndValueOfArray($newArray);
         // Check items that were duplicated in Column_Field column
@@ -68,20 +86,19 @@ class PivotReport
             foreach ($columnFields as $field) {
                 if (isset($newColumnFields[$field])) {
                     $duplicateItems = $newColumnFields[$field];
-                    foreach ($duplicateItems as $fieldDup){
-                        foreach ($newArray as $key => $value){
+                    foreach ($duplicateItems as $fieldDup) {
+                        foreach ($newArray as $key => $value) {
                             if (str_contains($key, $field)) {
                                 $newKey = str_replace($field, $fieldDup, $key);
                                 $array[$newKey] = $value;
                             }
                         }
-                    } 
-
+                    }
                 }
-
             }
             return $array;
         }
+        // dd($newArray);
         return $newArray;
     }
     public static function getLastArray($data, $fieldsNeedToSum = [])
@@ -152,10 +169,11 @@ class PivotReport
         $array = [];
         if (!isset($dataFields['field_names'])) return [];
         $x = $dataFields['field_names'];
-        foreach($dataAggregation as $key => $value){
-            $array[$x[$key]]['type_operator'] = $value;
+        foreach ($dataAggregation as $key => $value) {
             $array[$x[$key]]['name'] = $x[$key];
-            $array[$x[$key]]['title_override'] = ($t = $dataFields['field_titles'][$key]) ? $t : $value.'_'.$x[$key] ;
+            $array[$x[$key]]['data_index'] = $value . '_' . $x[$key];
+            $array[$x[$key]]['type_operator'] = $value;
+            $array[$x[$key]]['title_override'] = ($t = $dataFields['field_titles'][$key]) ? $t : $value . '_' . $x[$key];
         }
         return $array;
     }
@@ -186,6 +204,21 @@ class PivotReport
         }
         return $result;
     }
+    // private static function sumItemsInArray($newArray)
+    // {
+    //     dump($newArray);
+    //     $data = [];
+    //     foreach ($newArray as $item) {
+    //         foreach ($item as $key => $value) {
+    //             if (isset($data[$key]) && is_array($value)) {
+    //                 $data[$key] = self::sumArrays($data[$key], $value);
+    //             } else {
+    //                 $data[$key] = $value;
+    //             }
+    //         }
+    //     }
+    //     return $data;
+    // }
 
     private static function sumItemsInArray($newArray)
     {
@@ -193,13 +226,14 @@ class PivotReport
         $data = [];
         foreach ($newArray as $item) {
             foreach ($item as $key => $value) {
-                if (isset($data[$key]) && is_array($value)) {
-                    $data[$key] = self::sumArrays($data[$key], $value);
+                if (isset($data[$key])) {
+                    $data[$key] += $value;
                 } else {
                     $data[$key] = $value;
                 }
             }
         }
+        // dd($data);
         return $data;
     }
 
@@ -220,16 +254,20 @@ class PivotReport
     }
 
 
-    public static function reduceDataByFilterColumn($linesData, $conditions)
+    public static function reduceDataByFilterColumn($linesData, $dataFilters)
     {
-        $conditions = Report::dataWithoutNull($conditions);
-        $result = array_filter($linesData, function ($data) use ($conditions) {
-            foreach ($conditions as $field => $values) {
-                if (!isset($data[$field]) || !in_array($data[$field], $values)) {
-                    return false;
+        // dd($dataFilters, $linesData);
+        if (empty($dataFilters)) return $linesData;
+        $result = array_filter($linesData, function ($line) use ($dataFilters) {
+            $lineMatchesFilter = true;
+            foreach ($dataFilters as $field => $values) {
+                if ($field === 'picker_date') continue;
+                if (!isset($line[$field]) || !in_array($line[$field], $values)) {
+                    $lineMatchesFilter = false;
+                    break;
                 }
             }
-            return true;
+            return $lineMatchesFilter;
         });
         return $result;
     }
@@ -304,6 +342,7 @@ class PivotReport
             ),
             $dataSource
         );
+        // dd($data);
         return $data;
     }
 
@@ -419,31 +458,39 @@ class PivotReport
         }
         return false;
     }
-    public static function countItems($array) {
-        $itemCounts = array(); 
+    public static function countItems($array)
+    {
+        $itemCounts = array();
         foreach ($array as $item) {
             if (isset($itemCounts[$item])) {
-                $itemCounts[$item]++; 
+                $itemCounts[$item]++;
             } else {
                 $itemCounts[$item] = 1;
             }
         }
         return $itemCounts;
     }
-    public static function groupSimilarStrings($arr) {
+    public static function groupSimilarStrings($arr)
+    {
         $groupedArr = array();
-    
+
         foreach ($arr as $value) {
             $key = preg_replace('/_[^_]*$/', '', $value);
-    
+
             if (isset($groupedArr[$key])) {
                 $groupedArr[$key][] = $value;
             } else {
                 $groupedArr[$key] = array($value);
             }
         }
-    
+
         return $groupedArr;
     }
-    
+
+    public static function isEmptyArray($data){
+        if(is_object($data)) {
+            return empty($data->toArray());
+        }
+        return empty($data);
+    }
 }
