@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use App\Models\User;
+use App\Models\Workplace;
 use App\Utils\Constant;
 use Carbon\Carbon;
 use DateInterval;
@@ -268,6 +269,15 @@ class DateTimeConcern
         return str_replace(' ', 'T', $timestamp) . 'Z';
     }
 
+    public static function formatTimeForPH($item){
+        $standardStartTime = Workplace::findFromCache($item->workplace_id)->standard_start_time;
+        return $item->ph_date . ' '.$standardStartTime;
+    }
+    public static function formatTimestampFromDBtoJSForPH($item){
+        $timestamp = static::formatTimeForPH($item);
+        return static::formatTimestampFromDBtoJS($timestamp);
+    }
+
     /**
      * Convert timestamps from javascript format (Full Calendar) to database format
      *
@@ -337,6 +347,13 @@ class DateTimeConcern
         $startDateTime = Carbon::parse($startTime);
         $endDateTime = $startDateTime->addMinute($duration);
         return self::formatTimestampFromDBtoJS($endDateTime->format('Y-m-d H:i:s'));
+    }
+
+
+
+    public static function calTimestampEndFromStartTimeAndDurationForPH($item){
+        $startTime = static::formatTimeForPH($item);
+        return static::calTimestampEndFromStartTimeAndDuration($startTime,($item->ph_hours * 60 + 60));
     }
 
     /**

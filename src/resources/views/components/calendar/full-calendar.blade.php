@@ -82,6 +82,8 @@
                         events: events,
                         hiddenDays: arrHidden,
                         eventClick: function(info) {
+                            var extendedProps = info.event._def.extendedProps;
+                            if(extendedProps.public_holiday == true) return;
                             if (!readOnly) {
                                 //indentify location modal
                                 var {
@@ -97,7 +99,6 @@
                                 //handle modal
                                 handleUpdateModalEvent(info);
                                 //extended value render modal
-                                var extendedProps = info.event._def.extendedProps;
                                 var projectId = extendedProps.project_id;
                                 var subProjectId = extendedProps.sub_project_id;
                                 var lodId = extendedProps.lod_id;
@@ -123,6 +124,8 @@
                             }
                         },
                         eventDidMount: function(info) {
+                            var extendedProps = info.event._def.extendedProps;
+                            if(extendedProps.public_holiday == true) return;
                             if (!readOnly) {
                                 //handle click mouse right
                                 info.el.addEventListener('contextmenu', function(e) {
