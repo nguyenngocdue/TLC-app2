@@ -59,9 +59,9 @@
         "new": "true",
         "active": "true"
     },
-    "_meeting_toolbox": {
-        "name": "_meeting_toolbox",
-        "column_name": "meeting_toolbox",
+    "_total_meeting_toolbox": {
+        "name": "_total_meeting_toolbox",
+        "column_name": "total_meeting_toolbox",
         "new": "true",
         "active": "true"
     },
@@ -77,9 +77,9 @@
         "new": "true",
         "active": "true"
     },
-    "_work_hours": {
-        "name": "_work_hours",
-        "column_name": "work_hours",
+    "_total_work_hours": {
+        "name": "_total_work_hours",
+        "column_name": "total_work_hours",
         "new": "true",
         "active": "true"
     },

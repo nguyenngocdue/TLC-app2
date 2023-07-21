@@ -15,7 +15,7 @@
         "name": "_name",
         "column_name": "name",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -119,21 +119,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_work_hours": {
-        "name": "_work_hours",
-        "column_name": "work_hours",
+    "_total_meeting_toolbox": {
+        "name": "_total_meeting_toolbox",
+        "column_name": "total_meeting_toolbox",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "0",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "If work hours input in this box, it will override value of work hours in the HSE KPI Peport."
+        "control_extra": ""
     },
-    "_meeting_toolbox": {
-        "name": "_meeting_toolbox",
-        "column_name": "meeting_toolbox",
+    "_sep01": {
+        "name": "_sep01",
+        "column_name": "sep01",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -142,6 +142,30 @@
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
+    },
+    "_heading01": {
+        "name": "_heading01",
+        "column_name": "heading01",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_total_work_hours": {
+        "name": "_total_work_hours",
+        "column_name": "total_work_hours",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "If work hours input in this box, it will override value of work hours in the HSE KPI Peport."
     },
     "_status": {
         "name": "_status",

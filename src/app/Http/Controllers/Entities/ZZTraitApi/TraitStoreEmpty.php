@@ -75,6 +75,7 @@ trait TraitStoreEmpty
 				}
 			}
 			$item = $this->applyFormula($item, 'store');
+			// Log::info($item);
 			$createdItem = $this->modelPath::create($item);
 			$tableName = Str::plural($this->type);
 			$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);

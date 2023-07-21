@@ -15,7 +15,7 @@
             </div>
         </div>
         <!-- Modal body -->
-        <div class="px-2 overflow-y-auto w-96 h-[420px]" modal-container>
+        <div class="px-2 overflow-y-auto w-96 h-[500px]" modal-container>
                 <div class="grid grid-cols-12 mt-2 items-center">
                     <span class="col-span-3 text-right mr-1">Project</span>
                     <div class="col-span-9">
