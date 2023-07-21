@@ -8,8 +8,8 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_slug": {
         "name": "_slug",

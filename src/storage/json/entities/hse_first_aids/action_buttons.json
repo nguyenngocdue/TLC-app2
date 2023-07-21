@@ -1,12 +1,12 @@
 {
     "new": {
         "name": "new",
-        "label": "Create New",
+        "label": "Revise to New",
         "tooltip": ""
     },
-    "closed": {
-        "name": "closed",
-        "label": "Close",
+    "active": {
+        "name": "active",
+        "label": "Active",
         "tooltip": ""
     }
 }

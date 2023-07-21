@@ -11,6 +11,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "Ti\u00eau \u0111\u1ec1",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_walkthrough_datetime": {
         "name": "_walkthrough_datetime",
         "column_name": "walkthrough_datetime",
@@ -32,18 +44,6 @@
         "formula": "",
         "default_value": "",
         "label_extra": "\u0110\u1ecba \u0111i\u1ec3m ki\u1ec3m tra",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
-        "label": "",
-        "validation": "required",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "Ti\u00eau \u0111\u1ec1",
         "placeholder": "",
         "control_extra": ""
     },
@@ -71,30 +71,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getCorrectiveActions": {
-        "name": "_getCorrectiveActions",
-        "column_name": "getCorrectiveActions",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "C\u00e1c ho\u1ea1t \u0111\u1ed9ng m\u1ea5t an to\u00e0n",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "All_SlugifyByName",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -110,6 +86,30 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getCorrectiveActions": {
+        "name": "_getCorrectiveActions",
+        "column_name": "getCorrectiveActions",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "C\u00e1c ho\u1ea1t \u0111\u1ed9ng m\u1ea5t an to\u00e0n",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
         "label": "",
         "validation": "",
         "validation_regex": "",
