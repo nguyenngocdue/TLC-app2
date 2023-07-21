@@ -158,9 +158,9 @@
         "filters": "category_id[\r\n'title':'Team'.\r\n'allowClear': true.\r\n'multiple':true.\r\n],\r\nuser_id[\r\n'title':'User'.\r\n'allowClear':true.\r\n'multiple':true.\r\n],\r\nworkplace_id[\r\n'title' :'Workplace.\r\n'allowClear':true.\r\n'multiple':true.\r\n], \r\ndepartment_id['title':'Department'.\r\n'allowClear':true.],\r\npicker_date['title':'Date'],",
         "row_fields": "staff_id{Staff ID},\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),\r\ndepartment_id(departments.name)",
         "column_fields": "time_sheet_start_time,\r\ntime_sheet_start_time_wfh,\r\ntime_sheet_start_time_otr",
-        "value_index_fields": "time_sheet_durations,\r\ntime_sheet_durations,\r\ntime_sheet_durations",
-        "data_aggregations": "sum",
-        "data_fields": "time_sheet_durations{Total}",
+        "value_index_fields": "time_sheet_durations,\r\ntime_sheet_durations_wfh,\r\ntime_sheet_durations_otr",
+        "data_aggregations": "sum,\r\nsum,\r\nsum,",
+        "data_fields": "time_sheet_durations{Total},\r\ntime_sheet_durations_wfh{Total WFH},\r\ntime_sheet_durations_otr{Total OTR}",
         "lookup_tables": null,
         "sort_by": "user_id(users.name)"
     },
