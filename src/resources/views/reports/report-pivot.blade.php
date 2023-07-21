@@ -15,7 +15,7 @@
         <x-reports.utility-report routeName="{{$routeName}}" />
         <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{$pageLimit}}" formName="updatePerPage" />
     </div>
-    <x-renderer.table showNo={{true}} :dataHeader="$tableDataHeader" :columns="$tableColumns" :dataSource="$tableDataSource" tableTrueWidth={{$tableTrueWidth?1:0}}   />
+    <x-renderer.table showNo={{true}} :dataHeader="$tableDataHeader" :columns="$tableColumns" :dataSource="$tableDataSource" tableTrueWidth={{$tableTrueWidth?1:0}}  headerTop=10 />
     {{-- <x-renderer.report.pivot-table modeType="{{$modeType}}" :dataSource="$dataSource" :itemsSelected="$modeParams" /> --}}
 </div>
     @endsection

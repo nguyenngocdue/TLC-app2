@@ -26,7 +26,7 @@ trait  ColumnsPivotReport
                     'dataIndex' => $dataIndex,
                     'width' => 140,
                 ];
-            } 
+            }
             // else {
             //     $columnsData[] = [
             //         'dataIndex' => $key,
@@ -203,7 +203,7 @@ trait  ColumnsPivotReport
 
     private function makeColumnsOfColumnFields($linesData, $dataOutput, $allDataFields, $modeType)
     {
-        [$rowFields, , , $propsColumnField, , , $dataIndex, , , $columnFields, , ,,] =  $allDataFields;
+        [$rowFields,,, $propsColumnField,,, $dataIndex,,, $columnFields,,,,] =  $allDataFields;
         $allColumns = [];
 
         foreach ($dataOutput as $value) $allColumns = array_unique(array_merge($allColumns, array_keys($value)));
@@ -263,7 +263,7 @@ trait  ColumnsPivotReport
                                     'title' =>  $title,
                                     'dataIndex' => $value,
                                     'align' => is_numeric($value) ? 'left' : 'right',
-                                    'width' => 80,
+                                    'width' => 50,
                                     'colspan' => count($dates),
                                 ];
                             }
@@ -273,10 +273,10 @@ trait  ColumnsPivotReport
             );
         } else {
             [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields2($dataOutput, $columnFields);
-        }        
+        }
         // sort column fields follow table header
         usort($columnsOfColumnFields, function ($a, $b) {
-            if(!isset($a['header_name'])) return [];
+            if (!isset($a['header_name'])) return [];
             return strcmp($a['header_name'], $b['header_name']);
         });
         return [$tableDataHeader, $columnsOfColumnFields];
@@ -297,14 +297,14 @@ trait  ColumnsPivotReport
         return $columnsOfAgg;
     }
 
-    public function makeColumnsRenderer($linesData,$dataOutput, $allDataFields, $modeType)
+    public function makeColumnsRenderer($linesData, $dataOutput, $allDataFields, $modeType)
     {
         // dd($dataOutput[0], $allDataFields);
-        if(empty($dataOutput)) return [[],[]];
+        if (empty($dataOutput)) return [[], []];
         [, $bindingRowFields,,,, $dataAggregations,,,,,,,,] = $allDataFields;
         if (!$this->getDataFields($linesData, $modeType)) return false;
         $columnsOfRowFields = $this->makeHeadColumn($bindingRowFields);
-        [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields($linesData,$dataOutput, $allDataFields, $modeType);
+        [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields($linesData, $dataOutput, $allDataFields, $modeType);
         $columnsOfAgg = $this->makeColumnsOfAgg($dataAggregations);
         $tableColumns = array_merge($columnsOfRowFields, $columnsOfColumnFields, $columnsOfAgg);
         // dd($tableDataHeader, $columnsOfColumnFields);
