@@ -127,7 +127,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "hse_extra_metrics": {
-        "name": "hse_extra_metrics"
+        "name": "hse_extra_metrics",
+        "storeEmpty_and_updateShort": "true"
     },
     "hse_first_aids": {
         "name": "hse_first_aids"

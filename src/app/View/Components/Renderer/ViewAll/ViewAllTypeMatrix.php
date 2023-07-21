@@ -30,13 +30,13 @@ class ViewAllTypeMatrix extends Component
     {
         switch ($this->type) {
             case "hr_timesheet_workers":
-                return Blade::render("<x-renderer.view-all-matrix-type.Hr_timesheet_workers/>");
+                return Blade::render("<x-renderer.view-all-matrix-type.HrTimesheetWorkers/>");
             case "qaqc_wirs":
-                return Blade::render("<x-renderer.view-all-matrix-type.Qaqc_wirs/>");
+                return Blade::render("<x-renderer.view-all-matrix-type.QaqcWirs/>");
             case "hr_training_lines":
-                return Blade::render("<x-renderer.view-all-matrix-type.Hr_training_lines />");
-                // case "hse_extra_metrics":
-                //     return Blade::render("<x-renderer.view-all-matrix-type.Hse_extra_metrics/>");
+                return Blade::render("<x-renderer.view-all-matrix-type.HrTrainingLines />");
+            case "hse_extra_metrics":
+                return Blade::render("<x-renderer.view-all-matrix-type.HseExtraMetrics/>");
 
             default:
                 return "Unknown how to render matrix view for " . $this->type . " (ViewAllTypeMatrix).";

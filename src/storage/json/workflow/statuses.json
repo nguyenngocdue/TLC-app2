@@ -4,7 +4,7 @@
         "title": "Active",
         "color": "lime",
         "color_index": "800",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-check\"><\/i>"
     },
     "approval_rejected": {
         "name": "approval_rejected",

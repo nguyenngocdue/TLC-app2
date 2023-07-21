@@ -189,9 +189,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_meeting_toolbox": {
-        "name": "_meeting_toolbox",
-        "column_name": "meeting_toolbox",
+    "_total_meeting_toolbox": {
+        "name": "_total_meeting_toolbox",
+        "column_name": "total_meeting_toolbox",
         "column_type": "double(8,2)",
         "label": "Total Meeting ToolBoxes",
         "control": "number",
@@ -246,9 +246,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_work_hours": {
-        "name": "_work_hours",
-        "column_name": "work_hours",
+    "_total_work_hours": {
+        "name": "_total_work_hours",
+        "column_name": "total_work_hours",
         "column_type": "double(8,2)",
         "label": "Total Work Hours",
         "control": "number",
