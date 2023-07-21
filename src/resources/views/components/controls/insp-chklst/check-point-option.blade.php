@@ -26,7 +26,8 @@ function registerListen(lineId, id){
     $("#radio_" + lineId + "_" + id).click(reRender)
 }
     var objIds = {}; 
-    function updateIdsOfFail(id, name ,valueId) {
+    function updateIdsOfFail(id, name ,valueId,rowIndex,type) {
+        showOrHiddenGroupAttachmentAndComment(valueId,rowIndex,type)
         if (!Object.keys(objIds).includes(name)) {
             objIds[name] = []
             if([2,6].includes(valueId)){
@@ -43,6 +44,15 @@ function registerListen(lineId, id){
             }
         }
         document.getElementById(name).value = objIds[name]
+    }
+    function showOrHiddenGroupAttachmentAndComment(valueId,rowIndex,type){
+        if(type !== 'hse_insp_chklst') return;
+        if([2,6].includes(valueId)){
+            $(`#group_attachment_comment_${rowIndex}`).hide();
+        }else{
+            $(`#group_attachment_comment_${rowIndex}`).show();
+        }
+
     }
 </script>
 @endonce
@@ -65,7 +75,7 @@ function registerListen(lineId, id){
             <label for="radio_{{$line->id}}_{{$id}}" 
                 class="{{$class[$id] ?? $class[1]}} block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
                 title="#{{$id}}"
-                onclick="updateIdsOfFail({{$line->id}}, 'radio_{{$line->id}}_hidden',{{$id}})"
+                onclick="updateIdsOfFail({{$line->id}}, 'radio_{{$line->id}}_hidden',{{$id}},{{$rowIndex}},'{{$type}}')"
                 >{{$option}}</label>
         </div>
         <script>

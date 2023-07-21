@@ -26,18 +26,18 @@
         "on_hold": "true",
         "closed": "true"
     },
-    "_priority_id": {
-        "name": "_priority_id",
-        "column_name": "priority_id",
+    "_work_area_id": {
+        "name": "_work_area_id",
+        "column_name": "work_area_id",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
         "closed": "true"
     },
-    "_work_area_id": {
-        "name": "_work_area_id",
-        "column_name": "work_area_id",
+    "_unsafe_action_type_id": {
+        "name": "_unsafe_action_type_id",
+        "column_name": "unsafe_action_type_id",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
@@ -80,6 +80,24 @@
         "on_hold": "true",
         "closed": "true"
     },
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_due_date": {
+        "name": "_due_date",
+        "column_name": "due_date",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
     "_opened_date": {
         "name": "_opened_date",
         "column_name": "opened_date",
@@ -98,15 +116,6 @@
         "on_hold": "true",
         "closed": "true"
     },
-    "_unsafe_action_type_id": {
-        "name": "_unsafe_action_type_id",
-        "column_name": "unsafe_action_type_id",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -116,9 +125,18 @@
         "on_hold": "true",
         "closed": "true"
     },
-    "_attachment_hse_car": {
-        "name": "_attachment_hse_car",
-        "column_name": "attachment_hse_car",
+    "_opened_photos": {
+        "name": "_opened_photos",
+        "column_name": "opened_photos",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "closed": "true"
+    },
+    "_closed_photos": {
+        "name": "_closed_photos",
+        "column_name": "closed_photos",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
@@ -191,15 +209,6 @@
     "_correctable_id": {
         "name": "_correctable_id",
         "column_name": "correctable_id",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
-    "_due_date": {
-        "name": "_due_date",
-        "column_name": "due_date",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",

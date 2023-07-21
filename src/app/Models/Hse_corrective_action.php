@@ -8,9 +8,11 @@ class Hse_corrective_action extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'description', 'slug', 'correctable_type', 'correctable_id', 'priority_id', 'work_area_id',
-        'assignee_1', 'opened_date', 'closed_at', 'status', 'unsafe_action_type_id', 'order_no', 'owner_id', 'remark', 'due_date'
+        'assignee_1', 'closed_at', 'status', 'unsafe_action_type_id', 'order_no', 'owner_id', 'remark', 'due_date'
     ];
+
     protected $table = "hse_corrective_actions";
+    public static $nameless = true;
 
     public static $eloquentParams = [
         "correctable" => ['morphTo', Hse_corrective_action::class, 'correctable_type', 'correctable_id'],
@@ -18,13 +20,20 @@ class Hse_corrective_action extends ModelExtended
         'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         'getUnsafeActionType' => ['belongsTo', Term::class, 'unsafe_action_type_id'],
-        "attachment_hse_car" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "opened_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "closed_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
-    public function attachment_hse_car()
+    public function opened_photos()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function closed_photos()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);

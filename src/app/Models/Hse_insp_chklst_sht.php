@@ -8,7 +8,7 @@ class Hse_insp_chklst_sht extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "slug", "hse_insp_tmpl_sht_id", "owner_id",
-        "progress", "status", "order_no", "assignee_1", "work_area_id", "start_time", "finish_time"
+        "progress", "status", "order_no", "assignee_1", "workplace_id", "start_time", "finish_time"
     ];
     protected $table = "hse_insp_chklst_shts";
 
@@ -16,11 +16,11 @@ class Hse_insp_chklst_sht extends ModelExtended
         "getTmplSheet" => ["belongsTo", Hse_insp_tmpl_sht::class, 'hse_insp_tmpl_sht_id'],
         "getLines" => ["hasMany", Hse_insp_chklst_line::class, "hse_insp_chklst_sht_id"],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
-        'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
+        'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
     ];
 
     public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
+        // "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
     public function getLines()
@@ -33,7 +33,7 @@ class Hse_insp_chklst_sht extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getWorkArea()
+    public function getWorkplace()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -43,11 +43,11 @@ class Hse_insp_chklst_sht extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getMonitors1()
-    {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
+    // public function getMonitors1()
+    // {
+    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
 
     public function getManyLineParams()
     {
