@@ -59,6 +59,30 @@
         "new": "true",
         "active": "true"
     },
+    "_meeting_toolbox": {
+        "name": "_meeting_toolbox",
+        "column_name": "meeting_toolbox",
+        "new": "true",
+        "active": "true"
+    },
+    "_heading01": {
+        "name": "_heading01",
+        "column_name": "heading01",
+        "new": "true",
+        "active": "true"
+    },
+    "_sep01": {
+        "name": "_sep01",
+        "column_name": "sep01",
+        "new": "true",
+        "active": "true"
+    },
+    "_work_hours": {
+        "name": "_work_hours",
+        "column_name": "work_hours",
+        "new": "true",
+        "active": "true"
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",
