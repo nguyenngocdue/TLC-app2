@@ -24,14 +24,15 @@ trait  ColumnsPivotReport
                 $columnsData[] = [
                     'title' => $value['title_override'],
                     'dataIndex' => $dataIndex,
-                    'width' => 250,
+                    'width' => 300,
                 ];
-            } else {
-                $columnsData[] = [
-                    'dataIndex' => $key,
-                    'width' => 250,
-                ];
-            }
+            } 
+            // else {
+            //     $columnsData[] = [
+            //         'dataIndex' => $key,
+            //         'width' => 250,
+            //     ];
+            // }
         }
         // dd($columnsData);
         return $columnsData;
@@ -204,36 +205,19 @@ trait  ColumnsPivotReport
 
     private function makeColumnsOfColumnFields($linesData, $dataOutput, $allDataFields, $modeType)
     {
-        [$rowFields, 
-        $bindingRowFields, 
-        $fieldOfFilters, 
-        $propsColumnField, 
-        $bindingColumnFields, 
-        $dataAggregations, 
-        $dataIndex, 
-        $sortBy, 
-        $valueIndexFields, 
-        $columnFields, 
-        $infoColumnFields, 
-        $tableIndex,
-        $dataFilters,] =  $allDataFields;
+        [$rowFields, , , $propsColumnField, , , $dataIndex, , , $columnFields, , ,,] =  $allDataFields;
         $allColumns = [];
-        // if (!$this->getDataFields()) return [false];
 
         foreach ($dataOutput as $value) $allColumns = array_unique(array_merge($allColumns, array_keys($value)));
-
         if (is_object($linesData)) $linesData = array_map(fn ($item) => (array)$item, $linesData->toArray());
         // dd($dataSource);
-
         $lastItemDataSource = key(array_slice($linesData[0] ?? [], -1));
         $endArray = Report::retrieveDataByIndex($allColumns, $lastItemDataSource, false, 'value');
         $diffFields = array_diff($endArray, $dataIndex);
         $fields = $this->sortDates($diffFields, $modeType);
 
-        // dump($allColumns  , $lastItemDataSource, $endArray, $dataIndex);
         $topTitleColumns = array_merge(...array_column($dataOutput, 'top_title_column'));
         // dd($dataOutput, $fields);
-
         $columnsOfColumnFields = [];
         if ($rowFields) {
             array_walk(
@@ -247,7 +231,6 @@ trait  ColumnsPivotReport
                             $columnsNeedToRender = array_column($propsColumnField, 'field_index');
                             // dd($propsColumnField, $columnsNeedToRender, $items);
                             $checkField =  PivotReport::isStringInItemsOfArray($columnsNeedToRender, $value);
-                            // dd($groupItems, $value, $items,$propsColumnField);
                             if ($checkField) {
                                 $title = '';
                                 $countRenderCol = 1;
@@ -262,7 +245,7 @@ trait  ColumnsPivotReport
                                     'title' => $title,
                                     'dataIndex' => $value,
                                     'align' => is_numeric($value) ? 'left' : 'right',
-                                    'width' => 40,
+                                    'width' => 80,
                                     'colspan' =>  $countRenderCol,
                                 ];
                             };
@@ -280,8 +263,8 @@ trait  ColumnsPivotReport
                                     'title' =>  $title,
                                     'dataIndex' => $value,
                                     'align' => is_numeric($value) ? 'left' : 'right',
+                                    'width' => 100,
                                     'colspan' => count($dates),
-                                    'width' => 40,
                                 ];
                             }
                         }

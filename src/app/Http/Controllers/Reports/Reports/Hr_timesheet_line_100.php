@@ -31,6 +31,8 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         $sql = "SELECT
                     tsl.project_id AS project_id,
                     DATE(tsl.start_time) AS time_sheet_start_time,
+                    DATE(tsl.start_time) AS time_sheet_start_time_wfh,
+                    DATE(tsl.start_time) AS time_sheet_start_time_otr,
                     SUM(tsl.duration_in_min) AS time_sheet_durations,
                     SUM(tsl.ts_hour) AS time_sheet_hours,
 
@@ -138,7 +140,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_name",
                 "align" => 'left',
-                "width" => 130,
+                "width" => 150,
             ],
             [
                 'title' => "LOD",
