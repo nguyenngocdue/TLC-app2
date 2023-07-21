@@ -30,7 +30,8 @@ class DataSource_Hr_timesheet_line extends Controller
 
     protected $modeType = '';
     protected $mode = '010';
-    // protected function makeDataPivotTable();
+    protected $tableTrueWidth = true;
+
     public function getType()
     {
         return "dashboard";
@@ -150,6 +151,7 @@ class DataSource_Hr_timesheet_line extends Controller
                 'tableColumns' => $tableColumns,
                 'tableDataHeader' => [],
                 'topTitle' => $this->getMenuTitle(),
+                'tableTrueWidth' => $this->tableTrueWidth,
             ]);
         }
 
@@ -172,6 +174,7 @@ class DataSource_Hr_timesheet_line extends Controller
             'tableColumns' => $tableColumns,
             'tableDataHeader' => $tableDataHeader,
             'topTitle' => $this->getMenuTitle(),
+            'tableTrueWidth' => $this->tableTrueWidth,
         ]);
     }
 

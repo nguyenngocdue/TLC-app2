@@ -24,7 +24,7 @@ trait  ColumnsPivotReport
                 $columnsData[] = [
                     'title' => $value['title_override'],
                     'dataIndex' => $dataIndex,
-                    'width' => 300,
+                    'width' => 140,
                 ];
             } 
             // else {
@@ -101,10 +101,8 @@ trait  ColumnsPivotReport
             foreach ($values as $value) {
                 foreach ($a as $item) {
                     $thirdUnderscore = PivotReport::findPosition($item, '_', 3);
-                    // $substr = substr($item, $thirdUnderscore,  4));
                     $substr = substr($item, $thirdUnderscore,  strlen($value));
                     if ($substr === $value) {
-                        // dump($substr, $value, $item);
                         $result[$value][] = $item;
                     }
                 }
@@ -220,11 +218,12 @@ trait  ColumnsPivotReport
         // dd($dataOutput, $fields);
         $columnsOfColumnFields = [];
         if ($rowFields) {
+            $tableDataHeader = $this->editRowHeaderColumnFields($fields, $columnFields, $topTitleColumns);
             array_walk(
                 $fields,
-                function ($items, $key) use (&$columnsOfColumnFields, $propsColumnField) {
+                function ($items, $key) use (&$columnsOfColumnFields, $propsColumnField, $tableDataHeader) {
                     if ($key === 'other') {
-                        $items = self::moveStringToBottom($items);
+                        // $items = self::moveStringToBottom($items);
                         // $groupItems = PivotReport::groupItemsByString($items);
                         $groupItems = PivotReport::groupSimilarStrings($items);
                         foreach ($items as $value) {
@@ -247,6 +246,7 @@ trait  ColumnsPivotReport
                                     'align' => is_numeric($value) ? 'left' : 'right',
                                     'width' => 80,
                                     'colspan' =>  $countRenderCol,
+                                    'header_name' => $tableDataHeader[$value] ?? '',
                                 ];
                             };
                         }
@@ -263,7 +263,7 @@ trait  ColumnsPivotReport
                                     'title' =>  $title,
                                     'dataIndex' => $value,
                                     'align' => is_numeric($value) ? 'left' : 'right',
-                                    'width' => 100,
+                                    'width' => 80,
                                     'colspan' => count($dates),
                                 ];
                             }
@@ -271,11 +271,14 @@ trait  ColumnsPivotReport
                     }
                 }
             );
-            $tableDataHeader = $this->editRowHeaderColumnFields($fields, $columnFields, $topTitleColumns);
         } else {
             [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields2($dataOutput, $columnFields);
-        }
-        // dump($tableDataHeader);
+        }        
+        // sort column fields follow table header
+        usort($columnsOfColumnFields, function ($a, $b) {
+            if(!isset($a['header_name'])) return [];
+            return strcmp($a['header_name'], $b['header_name']);
+        });
         return [$tableDataHeader, $columnsOfColumnFields];
     }
 
@@ -283,12 +286,12 @@ trait  ColumnsPivotReport
     {
         $columnsOfAgg = [];
         if (!$dataAggregations) return [];
-        foreach ($dataAggregations as $field => $value) {
+        foreach ($dataAggregations as $value) {
             $columnsOfAgg[] = [
                 'title' => $value['title_override'] ?? str_replace('_', ' ', $value['data_index']),
                 'dataIndex' => $value['data_index'],
                 'align' => 'right',
-                'width' => 40,
+                'width' => 100,
             ];
         };
         return $columnsOfAgg;

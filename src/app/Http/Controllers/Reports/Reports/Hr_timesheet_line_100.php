@@ -178,7 +178,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                 "title" => "User",
                 "dataIndex" => "user_name",
                 "align" => 'left',
-                "width" => 200,
+                "width" => 600,
             ],
             [
                 "title" => "Workplace",
