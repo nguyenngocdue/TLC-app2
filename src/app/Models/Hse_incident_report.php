@@ -15,7 +15,8 @@ class Hse_incident_report extends ModelExtended
         'lost_days', 'status', 'injured_staff_position', 'manager_staff_id', 'manager_staff_position',
         'owner_staff_id', 'owner_staff_position',
         'first_date', 'employed_duration_in_year', 'injured_staff_cat', 'injured_staff_cat_desc',
-        'injured_staff_discipline', 'loss_value', 'need_to_transfer_position'
+        'injured_staff_discipline',  'need_to_transfer_position',
+        'lost_value', 'loss_unit',
     ];
     protected $table = "hse_incident_reports";
     public static $nameless = true;
@@ -30,6 +31,7 @@ class Hse_incident_report extends ModelExtended
         "getDocSubType" => ['belongsTo', Term::class, 'incident_doc_sub_type_id'],
         "getInjuredStaffCat" => ['belongsTo', User_category::class, 'injured_staff_cat'],
         "getInjuredStaffDiscipline" => ['belongsTo', User_discipline::class, 'injured_staff_discipline'],
+        "getLostUnit" => ['belongsTo', Term::class, 'lost_unit_id'],
 
         "getCorrectiveActions" => ['morphMany', Hse_corrective_action::class, 'correctable', 'correctable_type', 'correctable_id'],
 
@@ -75,6 +77,11 @@ class Hse_incident_report extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function getLostUnit()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function comment_by_line_manager()
     {

@@ -25,6 +25,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->float('training_hours')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('employeeid')->nullable();
+            $table->string("position_rendered")->nullable();
+            $table->string("remark")->nullable();
             $table->unsignedBigInteger('hr_training_id');
             $table->unsignedBigInteger('training_course_id');
             $table->orderable();

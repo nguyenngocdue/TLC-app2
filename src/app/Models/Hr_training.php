@@ -11,6 +11,7 @@ class Hr_training extends ModelExtended
         "owner_id", 'training_datetime', 'slug',
     ];
     protected $table = "hr_trainings";
+    public static $nameless = true;
 
     public static $eloquentParams = [
         "getLines" => ["hasMany", Hr_training_line::class, "hr_training_id"],

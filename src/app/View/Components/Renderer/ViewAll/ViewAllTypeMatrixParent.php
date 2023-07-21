@@ -92,10 +92,12 @@ abstract class ViewAllTypeMatrixParent extends Component
 
     protected function getCreateNewParams($x, $y)
     {
-        return [
+        $params = [
             $this->dataIndexX => $x['dataIndex'],
             $this->dataIndexY => $y->id,
         ];
+        // dump($params);
+        return $params;
     }
 
     function getMetaObjects($y)
@@ -125,6 +127,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                     $xId = $x['dataIndex'];
                     $xClass = $x['column_class'] ?? "";
                     $paramStr = $this->getCreateNewParams($x, $y);
+                    // dump($paramStr);
                     $paramStr = (json_encode($paramStr));
                     // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
                     $line[$xId] = (object)[

@@ -5,29 +5,29 @@
     <input type="hidden" name="_entity" value="{{$type}}"/>
     <div class="bg-white rounded w-full my-2 p-2">
         <div class="w-full my-1 grid grid-cols-12 gap-2">
-            {{-- <div class="col-span-3">
+            <div class="col-span-3">
                 Project:
-                <x-calendar.sidebar-filter-project 
+                <x-renderer.view-all-matrix-filter.project-filter 
                     tableName="projects" 
                     name="project_id" 
                     id="project_id" 
                     typeToLoadListener="qaqc_wir" 
                     selected="{{$viewportParams['project_id']}}"
                     />
-            </div> --}}
+            </div>
             <div class="col-span-3">
                 Sub-Project:
-                <x-calendar.sidebar-filter-sub-project 
+                <x-renderer.view-all-matrix-filter.sub-project-filter 
                     tableName="sub_projects" 
                     name="sub_project_id" 
                     id="sub_project_id" 
                     typeToLoadListener="qaqc_wir" 
                     selected="{{$viewportParams['sub_project_id']}}"
-                    />
+                />
             </div>
             <div class="col-span-3">
                 Production Routing
-                <x-calendar.sidebar-filter-prod-routing 
+                <x-renderer.view-all-matrix-filter.prod-routing-filter 
                     tableName="prod_routings" 
                     name="prod_routing_id" 
                     id="prod_routing_id" 
