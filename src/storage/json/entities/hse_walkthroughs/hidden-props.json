@@ -7,6 +7,14 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
     "_walkthrough_datetime": {
         "name": "_walkthrough_datetime",
         "column_name": "walkthrough_datetime",
@@ -18,14 +26,6 @@
     "_workplace_id": {
         "name": "_workplace_id",
         "column_name": "workplace_id",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "closed": ""
-    },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
         "new": "",
         "pending_approval": "",
         "rejected": "",
@@ -47,22 +47,6 @@
         "rejected": "",
         "closed": ""
     },
-    "_getCorrectiveActions": {
-        "name": "_getCorrectiveActions",
-        "column_name": "getCorrectiveActions",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "closed": ""
-    },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "closed": ""
-    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -78,6 +62,22 @@
         "pending_approval": "true",
         "rejected": "true",
         "closed": "true"
+    },
+    "_getCorrectiveActions": {
+        "name": "_getCorrectiveActions",
+        "column_name": "getCorrectiveActions",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
     },
     "_status": {
         "name": "_status",

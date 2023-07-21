@@ -7,6 +7,14 @@
         "rejected": "",
         "closed": ""
     },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
+    },
     "_walkthrough_datetime": {
         "name": "_walkthrough_datetime",
         "column_name": "walkthrough_datetime",
@@ -18,14 +26,6 @@
     "_workplace_id": {
         "name": "_workplace_id",
         "column_name": "workplace_id",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
-    },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -47,22 +47,6 @@
         "rejected": "true",
         "closed": "true"
     },
-    "_getCorrectiveActions": {
-        "name": "_getCorrectiveActions",
-        "column_name": "getCorrectiveActions",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
-    },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "closed": ""
-    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -74,6 +58,22 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "_getCorrectiveActions": {
+        "name": "_getCorrectiveActions",
+        "column_name": "getCorrectiveActions",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
         "new": "",
         "pending_approval": "",
         "rejected": "",
