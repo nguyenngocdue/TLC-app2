@@ -104,8 +104,8 @@
             }
         </script>
         <script>
-            window.Echo.channel('test')
-                .listen('Test', (e) => {
+            window.Echo.channel('wss-demo-channel')
+                .listen('WssDemoChannel', (e) => {
                     console.log(e.data);
                 })
         </script>
