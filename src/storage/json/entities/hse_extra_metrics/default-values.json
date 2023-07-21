@@ -119,6 +119,30 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_work_hours": {
+        "name": "_work_hours",
+        "column_name": "work_hours",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "If work hours input in this box, it will override value of work hours in the HSE KPI Peport."
+    },
+    "_meeting_toolbox": {
+        "name": "_meeting_toolbox",
+        "column_name": "meeting_toolbox",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",

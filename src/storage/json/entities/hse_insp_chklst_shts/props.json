@@ -98,7 +98,7 @@
         "name": "_workplace_id",
         "column_name": "workplace_id",
         "column_type": "bigint unsigned",
-        "label": "Location\/Project",
+        "label": "Location",
         "control": "dropdown",
         "align": "",
         "col_span": "6",
