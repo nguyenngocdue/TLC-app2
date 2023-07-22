@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('sub_project_id')->nullable();
+            // $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->unsignedBigInteger('advance_req_id')->nullable();
             $table->decimal('advance_amount', 20, 6)->nullable();
             $table->unsignedBigInteger('currency1_id')->nullable();
