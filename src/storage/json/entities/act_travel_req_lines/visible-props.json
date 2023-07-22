@@ -29,6 +29,16 @@
         "column_name": "to_id",
         "new": "true"
     },
+    "_travel_place_pair_id": {
+        "name": "_travel_place_pair_id",
+        "column_name": "travel_place_pair_id",
+        "new": "true"
+    },
+    "_claimable_amount": {
+        "name": "_claimable_amount",
+        "column_name": "claimable_amount",
+        "new": "true"
+    },
     "_workplace_id": {
         "name": "_workplace_id",
         "column_name": "workplace_id",
@@ -64,9 +74,9 @@
         "column_name": "total_day",
         "new": "true"
     },
-    "_total_price": {
-        "name": "_total_price",
-        "column_name": "total_price",
+    "_total_amount": {
+        "name": "_total_amount",
+        "column_name": "total_amount",
         "new": "true"
     },
     "_remark": {

@@ -9,7 +9,9 @@
             @endforeach   
         </div>
     @endif
-    <div id="divSubOptionNCR_{{$line->id}}" class="hidden">
+    <div id="divSubOptionNCR_{{$line->id}}" @class([
+        'hidden' => !in_array($line->hse_insp_control_value_id,[2,6])
+    ])>
         <x-renderer.button type='success' href="{!! $href !!}" class="m-1">{{$nameButton}}</x-renderer.button>
     </div>
     <div id="divSubOptionOnHold_{{$line->id}}" class="hidden">

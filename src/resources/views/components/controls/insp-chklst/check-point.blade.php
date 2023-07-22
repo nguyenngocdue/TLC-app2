@@ -13,7 +13,7 @@
                 @break
                 @case (4)  {{-- 4 => "radio" --}}
                     <div class="w-full">
-                        <x-controls.insp_chklst.check-point-option :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
+                        <x-controls.insp_chklst.check-point-option :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" type="{{$type}}"/>
                         <x-controls.insp_chklst.check-point-create-ncr-on-hold :line="$line" :checkPointIds="$checkPointIds" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug"/>
                     </div>
                 @break
@@ -30,8 +30,12 @@
                 value="{{$line->owner_id}}" 
                 onchange="console.log('{{$line->value}}', {{$line->owner_id}})"
                 /> --}}
-        <x-renderer.attachment2 name="table01[insp_photos][{{$rowIndex}}]" :value="$attachments"/>
-        <br/>
-        <x-controls.comment.comment-group2a :commentIds="$checkPointIds" category="insp_comments" commentableType="{{$type}}_line" commentableId="{{$line->id}}" />
+        <div id="group_attachment_comment_{{$rowIndex}}" @class([
+            'hidden' => $type == 'hse_insp_chklst' && in_array($line->hse_insp_control_value_id,[2,6])
+        ])>
+            <x-renderer.attachment2 name="table01[insp_photos][{{$rowIndex}}]" :value="$attachments"/>
+            <br/>
+            <x-controls.comment.comment-group2a :commentIds="$checkPointIds" category="insp_comments" commentableType="{{$type}}_line" commentableId="{{$line->id}}" />
+        </div>
     </div>
 </x-renderer.card>

@@ -7,7 +7,12 @@ use Carbon\Carbon;
 
 class Workplace extends ModelExtended
 {
-    protected $fillable = ["name", "description", "standard_working_hour", "standard_start_time", "standard_start_break", "break_duration_in_min", "def_assignee", "slug"];
+    protected $fillable = [
+        "name", "description",
+        "standard_working_hour", "standard_start_time", "standard_start_break",
+        "break_duration_in_min", "def_assignee", "slug",
+        "travel_place_id"
+    ];
 
     protected $table = 'workplaces';
     protected static $statusless = true;
@@ -17,7 +22,9 @@ class Workplace extends ModelExtended
 
         "getUsers" => ['hasMany', User::class, 'workplace'],
         "getPublicHolidays" => ["hasMany", Public_holiday::class, 'workplace_id'],
-        "getHrOtrs" => ["hasMany", Hr_overtime_request::class, 'workplace_id'],
+
+        "getTravelPlace" => ["belongsTo", Act_travel_place::class, "travel_place_id"],
+        // "getHrOtrs" => ["hasMany", Hr_overtime_request::class, 'workplace_id'],
     ];
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
@@ -33,16 +40,21 @@ class Workplace extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getTravelPlace()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function getPublicHolidays()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getHrOtrs()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
+    // public function getHrOtrs()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
 
     public function getMonitors1()
     {

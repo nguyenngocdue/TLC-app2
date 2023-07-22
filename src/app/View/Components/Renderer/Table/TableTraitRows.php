@@ -34,14 +34,16 @@ trait TableTraitRows
         $cellClassList = '';
         $cellTitle = '';
         $cellHref = '';
+        $cellOnClick = '';
         $value = '';
         if (is_object($rawData)) {
             if (isset($rawData->cell_class)) $cellClassList = $rawData->cell_class;
             if (isset($rawData->cell_title)) $cellTitle = $rawData->cell_title;
             if (isset($rawData->cell_href)) $cellHref = $rawData->cell_href;
+            if (isset($rawData->cell_onclick)) $cellOnClick = $rawData->cell_onclick;
             if (isset($rawData->value)) $value = $rawData->value;
         }
-        return [$cellClassList, $cellTitle, $cellHref, $value];
+        return [$cellClassList, $cellTitle, $cellHref, $cellOnClick, $value];
     }
 
     private function makeTd($columns, $dataLineObj, $no, $dataLineIndex, $batchLength, $tableDebug)
@@ -82,9 +84,9 @@ trait TableTraitRows
                             $output = "";
                             foreach ($rawData as $item) {
                                 $obj = $this->parseCellObject($item);
-                                [$cellClassList, $cellTitle, $cellHref, $value] = $obj;
+                                [$cellClassList, $cellTitle, $cellHref, $cellOnClick, $value] = $obj;
                                 $div = "<span class='$cellClassList mx-0.5 px-2 py-1 rounded' title='$cellTitle'>" . $value . "</span>";
-                                if ($cellHref) $div = "<a href='$cellHref'>" . $div . "</a>";
+                                if ($cellHref) $div = "<a href='$cellHref' onclick='$cellOnClick'>" . $div . "</a>";
                                 $output .= $div;
                             }
                             $rawData = $output;
@@ -119,7 +121,7 @@ trait TableTraitRows
             $styleStr = $this->getStyleStr($column);
             $rendered = ($tableDebug && ($renderer != 'no.') ? $name : "") . $rendered;
 
-            [$cellClassList, $cellTitle, $cellHref] = $this->parseCellObject($rawData);
+            [$cellClassList, $cellTitle, $cellHref, $cellOnClick] = $this->parseCellObject($rawData);
             $breakWords = $this->noCss ? "break-all123" : "";
             $tinyText = $this->noCss ? "text-xs" : "";
             $borderGray = $this->noCss ? "border-gray-200" : "";
@@ -127,7 +129,7 @@ trait TableTraitRows
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";
             $td .= ">";
-            if ($cellHref) $td .= "<a href='$cellHref'>";
+            if ($cellHref) $td .= "<a href='$cellHref' onclick='$cellOnClick'>";
             $td .= $rendered;
             if ($cellHref) $td .= "</a>";
             $td .= "</td>";

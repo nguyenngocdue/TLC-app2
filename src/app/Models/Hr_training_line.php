@@ -53,7 +53,7 @@ class Hr_training_line extends ModelExtended
             ['dataIndex' => 'user_id',],
             ['dataIndex' => 'training_course_id', 'invisible' => !true,],
             ['dataIndex' => 'training_hours',  'cloneable' => true],
-            ['dataIndex' => 'status', 'cloneable' => true],
+            ['dataIndex' => 'status', 'title' => "Result", 'cloneable' => true],
         ];
     }
 }

@@ -27,6 +27,10 @@ class Zunit_test_09 extends ModelExtended
         'currency2_id',
         'currency_pair2_id',
         'counter_currency_id',
+        //Month
+        'rate_exchange_month_id',
+        'rate_exchange_value_1',
+        'rate_exchange_value_2',
         //Assign
         'prod_discipline_1',
         'assignee_1',
@@ -88,6 +92,8 @@ class Zunit_test_09 extends ModelExtended
         'getCurrency2' => ['belongsTo', Act_currency::class, 'currency2_id'],
         'getCurrencyPair2' => ['belongsTo', Act_currency_pair::class, 'currency_pair2_id'],
         'getCounterCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
+
+        'getRateExchangeMonth' => ['belongsTo', Act_currency_xr::class, 'rate_exchange_month_id'],
     ];
 
     public static $oracyParams = [

@@ -31,14 +31,16 @@
     <script src="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
-    <script src="{{ asset('js/tlc2-2023-07-13b.js') }}"></script>
+
+    <script src="{{ asset('js/tlc2-2023-07-22.js') }}"></script>
+    
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
-    <script src="{{ asset('js/components/RadioOrCheckbox2-20230606.js') }}"></script>
+    <script src="{{ asset('js/components/RadioOrCheckbox2-20230722.js') }}"></script>
     <script src="{{ asset('js/components/ActionMultiple.js') }}"></script>
 
-    <script src="{{ asset('js/components/Dropdown2-20230715.js') }}"></script>
+    <script src="{{ asset('js/components/Dropdown2-20230722.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4-20230715.js') }}"></script>
     <script src="{{ asset('js/components/EditableTable2-20230712.js') }}"></script>
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20230715.js') }}"></script>

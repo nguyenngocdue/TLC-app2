@@ -1,17 +1,18 @@
 {
-    "_getStaff": {
-        "name": "_getStaff",
+    "_getUser": {
+        "name": "_getUser",
         "relationship": "belongsTo",
-        "control_name": "staff_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "control_name": "user_id",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getAdvanceTravel": {
         "name": "_getAdvanceTravel",
@@ -25,7 +26,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "true"
     },
     "_getTravelReq": {
         "name": "_getTravelReq",
@@ -39,7 +41,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "true"
     },
     "_getCurrency1": {
         "name": "_getCurrency1",
@@ -53,7 +56,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getCurrencyPair1": {
         "name": "_getCurrencyPair1",
@@ -67,7 +71,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getCurrency2": {
         "name": "_getCurrency2",
@@ -81,7 +86,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getCurrencyPair2": {
         "name": "_getCurrencyPair2",
@@ -95,7 +101,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getCounterCurrency": {
         "name": "_getCounterCurrency",
@@ -109,7 +116,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getRateExchangeMonth": {
         "name": "_getRateExchangeMonth",
@@ -123,7 +131,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getAssignee1": {
         "name": "_getAssignee1",
@@ -137,7 +146,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -151,7 +161,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -165,7 +176,8 @@
         "control": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -179,7 +191,8 @@
         "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getSubProjectsOfExpenseClaim()": {
         "name": "_getSubProjectsOfExpenseClaim()",
@@ -193,7 +206,8 @@
         "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getTravelExpenseClaimLines": {
         "name": "_getTravelExpenseClaimLines",
@@ -207,7 +221,8 @@
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_attachment_doc_travel_expense_claim": {
         "name": "_attachment_doc_travel_expense_claim",
@@ -221,6 +236,7 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     }
 }

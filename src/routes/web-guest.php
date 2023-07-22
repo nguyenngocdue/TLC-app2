@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\Test;
+use App\Events\WssDemoChannel;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Utils\ParserController;
@@ -65,6 +66,6 @@ Route::get('redis', [RedisController::class, 'index']);
 
 Route::get('login/google', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('login/google/callback', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'handleGoogleCallback']);
-Route::get('test-websocket', function () {
-    broadcast(new Test());
+Route::get('wss-demo', function () {
+    broadcast(new WssDemoChannel(['name' => 'wss-demo']));
 });

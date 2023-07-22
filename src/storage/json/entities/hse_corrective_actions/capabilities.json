@@ -7,6 +7,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "acct_manager_nz": {
@@ -17,6 +19,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "acct_member": {
@@ -27,6 +31,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "acct_member_nz": {
@@ -37,6 +43,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "admin": {
@@ -47,6 +55,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "bd_manager": {
@@ -57,6 +67,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "bd_member": {
@@ -67,6 +79,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "cpl_manager_nz": {
@@ -77,6 +91,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "cpl_member": {
@@ -87,6 +103,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "dc_ho": {
@@ -97,6 +115,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "dc_manager": {
@@ -107,6 +127,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "dc_ws": {
@@ -117,6 +139,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "des_manager": {
@@ -127,6 +151,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "des_member": {
@@ -137,6 +163,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "dir": {
@@ -147,6 +175,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "dir_nz": {
@@ -157,6 +187,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "external_inspector": {
@@ -167,16 +199,20 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "fac_admin": {
         "name": "fac_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "",
+        "rejected": "true",
         "closed": ""
     },
     "fin_member_nz": {
@@ -187,6 +223,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "guest": {
@@ -197,6 +235,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "hr_manager": {
@@ -207,6 +247,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "hr_member": {
@@ -217,6 +259,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "hr_member_nz": {
@@ -227,6 +271,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "hse_manager": {
@@ -237,6 +283,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "hse_member": {
@@ -247,6 +295,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "it_manager": {
@@ -257,6 +307,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "it_member": {
@@ -267,6 +319,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "mgr_asst_nz": {
@@ -277,6 +331,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "newcomer": {
@@ -287,6 +343,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "pln_admin": {
@@ -297,6 +355,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "proc_manager": {
@@ -307,6 +367,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "proc_member": {
@@ -317,6 +379,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "proc_member_nz": {
@@ -327,16 +391,20 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "prod_manager": {
         "name": "prod_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "",
+        "rejected": "true",
         "closed": ""
     },
     "prod_manager_nz": {
@@ -347,6 +415,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "prod_member": {
@@ -357,6 +427,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "prod_member_nz": {
@@ -367,6 +439,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "proj_manager": {
@@ -377,6 +451,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "proj_manager_nz": {
@@ -387,6 +463,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "proj_member": {
@@ -397,6 +475,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "proj_member_nz": {
@@ -407,16 +487,20 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "qaqc_manager": {
         "name": "qaqc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "",
+        "rejected": "true",
         "closed": ""
     },
     "qaqc_member": {
@@ -427,6 +511,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "qaqc_member_nz": {
@@ -437,6 +523,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "qs_manager": {
@@ -447,6 +535,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "qs_member": {
@@ -457,6 +547,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "qs_member_nz": {
@@ -467,6 +559,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "supreme_manage": {
@@ -477,16 +571,20 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "whs_manager": {
         "name": "whs_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "",
+        "rejected": "true",
         "closed": ""
     },
     "whs_member": {
@@ -497,6 +595,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "worker": {
@@ -507,6 +607,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     }
 }

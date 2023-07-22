@@ -27,7 +27,10 @@ class Dropdown2 extends Component
     public function render()
     {
         $sp = SuperProps::getFor($this->type);
-        $prop = $sp['props']["_" . $this->name];
+        $props = $sp['props'];
+        $prop = $props["_" . $this->name];
+        $letUserChooseWhenOneItem = ($prop['relationships']['let_user_choose_when_one_item'] ?? false) === "true";
+        // dump($letUserChooseWhenOneItem);
         if (!isset($prop['relationships']['table'])) {
             dump("Orphan prop " . $this->type . "\\" . $this->name);
             return;
@@ -49,8 +52,9 @@ class Dropdown2 extends Component
             'allowClear' => $this->allowClear,
             'nameless' => $nameless,
             'action' => $this->action,
+            'letUserChooseWhenOneItem' => $letUserChooseWhenOneItem,
         ];
-        // dump($params);
+        // dd($params);
         return view('components.controls.has-data-source.dropdown2', $params);
     }
 }

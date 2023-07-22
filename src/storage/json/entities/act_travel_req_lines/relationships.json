@@ -11,7 +11,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getTo": {
         "name": "_getTo",
@@ -25,21 +26,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
-    },
-    "_getWorkplace": {
-        "name": "_getWorkplace",
-        "relationship": "belongsTo",
-        "control_name": "workplace_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getProject": {
         "name": "_getProject",
@@ -53,7 +41,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getParent": {
         "name": "_getParent",
@@ -67,7 +56,23 @@
         "control": "number",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
+    },
+    "_getTravelPlacePair": {
+        "name": "_getTravelPlacePair",
+        "relationship": "belongsTo",
+        "control_name": "travel_place_pair_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -81,7 +86,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -95,6 +101,7 @@
         "control": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     }
 }

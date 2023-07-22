@@ -9,9 +9,9 @@
         "column_name": "name",
         "new": "true"
     },
-    "_staff_id": {
-        "name": "_staff_id",
-        "column_name": "staff_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "new": "true"
     },
     "_staff_workplace_id": {
@@ -49,9 +49,9 @@
         "column_name": "total_travel_day",
         "new": "true"
     },
-    "_total_travel_price": {
-        "name": "_total_travel_price",
-        "column_name": "total_travel_price",
+    "_total_travel_amount": {
+        "name": "_total_travel_amount",
+        "column_name": "total_travel_amount",
         "new": "true"
     },
     "_remark": {

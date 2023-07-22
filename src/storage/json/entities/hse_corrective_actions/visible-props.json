@@ -6,6 +6,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_correctable": {
@@ -15,6 +17,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_name": {
@@ -24,15 +28,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
-        "closed": "true"
-    },
-    "_priority_id": {
-        "name": "_priority_id",
-        "column_name": "priority_id",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_work_area_id": {
@@ -42,60 +39,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
-        "closed": "true"
-    },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
-    "_opened_date": {
-        "name": "_opened_date",
-        "column_name": "opened_date",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
-    "_closed_at": {
-        "name": "_closed_at",
-        "column_name": "closed_at",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_unsafe_action_type_id": {
@@ -105,96 +50,63 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
-    "_attachment_hse_car": {
-        "name": "_attachment_hse_car",
-        "column_name": "attachment_hse_car",
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
         "new": "true",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
-        "closed": "true"
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
-    "_deleted_by": {
-        "name": "_deleted_by",
-        "column_name": "deleted_by",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "closed": ""
-    },
-    "_deleted_at": {
-        "name": "_deleted_at",
-        "column_name": "deleted_at",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "closed": ""
-    },
-    "_correctable_type": {
-        "name": "_correctable_type",
-        "column_name": "correctable_type",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "closed": "true"
-    },
-    "_correctable_id": {
-        "name": "_correctable_id",
-        "column_name": "correctable_id",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_due_date": {
@@ -204,6 +116,140 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_opened_photos": {
+        "name": "_opened_photos",
+        "column_name": "opened_photos",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_closed_photos": {
+        "name": "_closed_photos",
+        "column_name": "closed_photos",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_correctable_type": {
+        "name": "_correctable_type",
+        "column_name": "correctable_type",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_correctable_id": {
+        "name": "_correctable_id",
+        "column_name": "correctable_id",
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_remark": {
@@ -213,6 +259,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     }
 }

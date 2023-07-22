@@ -7,7 +7,7 @@
         <div class="w-full my-1 grid grid-cols-12 gap-2">
             <div class="col-span-3">
                 Project:
-                <x-renderer.view-all-matrix-filter.project-filter 
+                <x-renderer.view-all-matrix-filter.ProjectFilter 
                     tableName="projects" 
                     name="project_id" 
                     id="project_id" 
@@ -17,7 +17,7 @@
             </div>
             <div class="col-span-3">
                 Sub-Project:
-                <x-renderer.view-all-matrix-filter.sub-project-filter 
+                <x-renderer.view-all-matrix-filter.SubProjectFilter 
                     tableName="sub_projects" 
                     name="sub_project_id" 
                     id="sub_project_id" 
@@ -27,7 +27,7 @@
             </div>
             <div class="col-span-3">
                 Production Routing
-                <x-renderer.view-all-matrix-filter.prod-routing-filter 
+                <x-renderer.view-all-matrix-filter.ProdRoutingFilter 
                     tableName="prod_routings" 
                     name="prod_routing_id" 
                     id="prod_routing_id" 

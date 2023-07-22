@@ -7,13 +7,19 @@ use App\BigThink\ModelExtended;
 class Act_travel_req extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "status", "staff_id",
-        "travel_type_id", "workplace_id", "staff_discipline_id", "staff_workplace_id", "total_travel_day", "remark", "assignee_1", "owner_id"
+        "id", "name", "description", "status", "user_id",
+        "travel_type_id", "workplace_id", "staff_discipline_id",
+        "staff_workplace_id", "remark", "assignee_1", "owner_id",
+        "total_travel_day", "total_travel_amount",
     ];
     protected $table = "act_travel_reqs";
+    public function getNameAttribute($value)
+    {
+        return $value . " (" . number_format($this->total_travel_amount, 2) . " USD)";
+    }
 
     public static $eloquentParams = [
-        'getStaff' => ['belongsTo', User::class, 'staff_id'],
+        'getUser' => ['belongsTo', User::class, 'user_id'],
         'getTravelReqLines' => ['hasMany', Act_travel_req_line::class, 'act_travel_req_id'],
         'getTravelType' => ['belongsTo', Term::class, 'travel_type_id'],
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
@@ -30,7 +36,7 @@ class Act_travel_req extends ModelExtended
         "getMonitors2()" => ["getCheckedByField", User::class],
 
     ];
-    public function getStaff()
+    public function getUser()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

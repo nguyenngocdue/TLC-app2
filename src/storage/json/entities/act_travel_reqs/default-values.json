@@ -15,7 +15,7 @@
         "name": "_name",
         "column_name": "name",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -23,13 +23,13 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_staff_id": {
-        "name": "_staff_id",
-        "column_name": "staff_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
-        "formula": "All_OwnerId",
+        "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -63,7 +63,7 @@
         "name": "_travel_type_id",
         "column_name": "travel_type_id",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -99,7 +99,7 @@
         "name": "_getTravelReqLines",
         "column_name": "getTravelReqLines",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -119,9 +119,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_total_travel_price": {
-        "name": "_total_travel_price",
-        "column_name": "total_travel_price",
+    "_total_travel_amount": {
+        "name": "_total_travel_amount",
+        "column_name": "total_travel_amount",
         "label": "",
         "validation": "",
         "validation_regex": "",

@@ -210,7 +210,7 @@
         "new": "",
         "active": "",
         "pending_ack": "true",
-        "pending_review": "",
+        "pending_review": "true",
         "review_rejected": "",
         "pending_verification": "",
         "closed": ""

@@ -11,7 +11,7 @@ const radioOrCheckboxDeselectAll = (id) => {
 const radioOrCheckboxChangeOrder = (id, table, parentId) => {
     const dataSourceDropdown = k[table]
     const sortedDataSource = dataSourceDropdown.sort((a, b) => (a.description).localeCompare(b.description))
-    reloadDataToDropdown2(id, 'id', sortedDataSource, [])
+    reloadDataToDropdown2(id, 'id', sortedDataSource, [], /* letUserChooseWhenOneItem */)
     if (Array.isArray(listenersOfDropdown2)) {
         listenersOfDropdown2.forEach((listener) => {
             if (listener.triggers.includes(parentId) && listener.listen_action === 'reduce') {

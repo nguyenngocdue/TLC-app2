@@ -19,14 +19,24 @@
         "column_name": "description",
         "new": "true"
     },
-    "_staff_id": {
-        "name": "_staff_id",
-        "column_name": "staff_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "new": "true"
     },
     "_getSubProjectsOfExpenseClaim()": {
         "name": "_getSubProjectsOfExpenseClaim()",
         "column_name": "getSubProjectsOfExpenseClaim()",
+        "new": "true"
+    },
+    "_rate_exchange_month_id": {
+        "name": "_rate_exchange_month_id",
+        "column_name": "rate_exchange_month_id",
+        "new": "true"
+    },
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
         "new": "true"
     },
     "_divider1": {
@@ -44,6 +54,11 @@
         "column_name": "advance_req_id",
         "new": "true"
     },
+    "_currency_pair1_id": {
+        "name": "_currency_pair1_id",
+        "column_name": "currency_pair1_id",
+        "new": "true"
+    },
     "_advance_amount": {
         "name": "_advance_amount",
         "column_name": "advance_amount",
@@ -52,11 +67,6 @@
     "_currency1_id": {
         "name": "_currency1_id",
         "column_name": "currency1_id",
-        "new": "true"
-    },
-    "_currency_pair1_id": {
-        "name": "_currency_pair1_id",
-        "column_name": "currency_pair1_id",
         "new": "true"
     },
     "_rate_exchange_advance": {
@@ -84,6 +94,11 @@
         "column_name": "travel_req_id",
         "new": "true"
     },
+    "_currency_pair2_id": {
+        "name": "_currency_pair2_id",
+        "column_name": "currency_pair2_id",
+        "new": "true"
+    },
     "_travel_amount": {
         "name": "_travel_amount",
         "column_name": "travel_amount",
@@ -92,11 +107,6 @@
     "_currency2_id": {
         "name": "_currency2_id",
         "column_name": "currency2_id",
-        "new": "true"
-    },
-    "_currency_pair2_id": {
-        "name": "_currency_pair2_id",
-        "column_name": "currency_pair2_id",
         "new": "true"
     },
     "_rate_exchange_travel": {
@@ -124,16 +134,6 @@
         "column_name": "getTravelExpenseClaimLines",
         "new": "true"
     },
-    "_rate_exchange_month_id": {
-        "name": "_rate_exchange_month_id",
-        "column_name": "rate_exchange_month_id",
-        "new": "true"
-    },
-    "_counter_currency_id": {
-        "name": "_counter_currency_id",
-        "column_name": "counter_currency_id",
-        "new": "true"
-    },
     "_total_amount_ee": {
         "name": "_total_amount_ee",
         "column_name": "total_amount_ee",
@@ -142,6 +142,11 @@
     "_total_amount_re": {
         "name": "_total_amount_re",
         "column_name": "total_amount_re",
+        "new": "true"
+    },
+    "_reimbursement_in_words": {
+        "name": "_reimbursement_in_words",
+        "column_name": "reimbursement_in_words",
         "new": "true"
     },
     "_attachment_doc_travel_expense_claim": {
@@ -179,15 +184,10 @@
         "column_name": "status",
         "new": "true"
     },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "new": "true"
-    },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true"
+        "new": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",

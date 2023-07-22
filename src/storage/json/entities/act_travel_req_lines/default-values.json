@@ -51,7 +51,7 @@
         "name": "_from_id",
         "column_name": "from_id",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -63,6 +63,18 @@
         "name": "_to_id",
         "column_name": "to_id",
         "label": "",
+        "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_travel_place_pair_id": {
+        "name": "_travel_place_pair_id",
+        "column_name": "travel_place_pair_id",
+        "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
@@ -71,9 +83,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_workplace_id": {
-        "name": "_workplace_id",
-        "column_name": "workplace_id",
+    "_claimable_amount": {
+        "name": "_claimable_amount",
+        "column_name": "claimable_amount",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -99,7 +111,7 @@
         "name": "_datetime_outbound_1",
         "column_name": "datetime_outbound_1",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -123,7 +135,7 @@
         "name": "_datetime_inbound_1",
         "column_name": "datetime_inbound_1",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -155,9 +167,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_total_price": {
-        "name": "_total_price",
-        "column_name": "total_price",
+    "_total_amount": {
+        "name": "_total_amount",
+        "column_name": "total_amount",
         "label": "",
         "validation": "",
         "validation_regex": "",

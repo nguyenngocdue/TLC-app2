@@ -241,6 +241,17 @@
         "pending_verification": "true",
         "closed": "true"
     },
+    "_lost_unit_id": {
+        "name": "_lost_unit_id",
+        "column_name": "lost_unit_id",
+        "new": "",
+        "active": "",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_verification": "true",
+        "closed": "true"
+    },
     "_number_injured_person": {
         "name": "_number_injured_person",
         "column_name": "number_injured_person",
@@ -362,6 +373,17 @@
         "pending_verification": "",
         "closed": ""
     },
+    "_need_to_transfer_position": {
+        "name": "_need_to_transfer_position",
+        "column_name": "need_to_transfer_position",
+        "new": "",
+        "active": "",
+        "pending_ack": "true",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
     "_time_in_hospital": {
         "name": "_time_in_hospital",
         "column_name": "time_in_hospital",
@@ -383,17 +405,6 @@
         "review_rejected": "",
         "pending_verification": "true",
         "closed": "true"
-    },
-    "_need_to_transfer_position": {
-        "name": "_need_to_transfer_position",
-        "column_name": "need_to_transfer_position",
-        "new": "",
-        "active": "",
-        "pending_ack": "true",
-        "pending_review": "true",
-        "review_rejected": "",
-        "pending_verification": "",
-        "closed": ""
     },
     "_attachment_hse_hr_decision": {
         "name": "_attachment_hse_hr_decision",
@@ -714,17 +725,6 @@
         "pending_verification": "true",
         "closed": "true"
     },
-    "_assignee_2": {
-        "name": "_assignee_2",
-        "column_name": "assignee_2",
-        "new": "",
-        "active": "",
-        "pending_ack": "",
-        "pending_review": "true",
-        "review_rejected": "",
-        "pending_verification": "true",
-        "closed": "true"
-    },
     "_divider11": {
         "name": "_divider11",
         "column_name": "divider11",
@@ -742,6 +742,17 @@
         "new": "",
         "active": "",
         "pending_ack": "true",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_verification": "true",
+        "closed": "true"
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
         "pending_review": "true",
         "review_rejected": "",
         "pending_verification": "true",

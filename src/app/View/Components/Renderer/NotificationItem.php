@@ -36,10 +36,10 @@ class NotificationItem extends Component
         $title = $dataModel['name'] ?? 'NameLess' . $id;
         $isRead = $dataSource['read_at'];
         $timeAgo = Carbon::createFromTimestamp(strtotime($dataSource['updated_at']))->diffForHumans();
-        $dataStatus = LibStatuses::getFor($typeEntity)[$status];
-        $titleStatus = $dataStatus['title'];
-        $colorStatus = $dataStatus['color'];
-        $colorIndexStatus = $dataStatus['color_index'];
+        $dataStatus = LibStatuses::getFor($typeEntity)[$status] ?? [];
+        $titleStatus = $dataStatus['title'] ?? '';
+        $colorStatus = $dataStatus['color'] ?? '';
+        $colorIndexStatus = $dataStatus['color_index'] ?? '';
 
         return view('components.renderer.notification-item', [
             'documentType' => LibApps::getFor($typeEntity)['title'],

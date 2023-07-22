@@ -19,6 +19,7 @@ class CheckPointOption extends Component
         private $table01Name,
         private $rowIndex,
         private $debug,
+        private $type,
     ) {
         //
     }
@@ -68,6 +69,7 @@ class CheckPointOption extends Component
                 'rowIndex' => $this->rowIndex,
                 'class' => $class,
                 'keyIdModelControlValue' => $keyIdModelControlValue ?? '',
+                'type' => $this->type,
             ]
         );
     }

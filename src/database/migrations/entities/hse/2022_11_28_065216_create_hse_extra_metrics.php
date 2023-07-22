@@ -26,9 +26,11 @@ return new class extends Migration
             $table->string('slug')->nullable(); //unique();
             $table->date('metric_month')->nullable();
             $table->unsignedBigInteger('workplace_id')->nullable();
-            $table->float('total_discipline');
-            $table->float('total_third_party_insp_audit');
-            $table->float('total_drill');
+            $table->float('total_work_hours')->nullable();
+            $table->float('total_meeting_toolbox')->nullable();
+            $table->float('total_discipline')->nullable();
+            $table->float('total_third_party_insp_audit')->nullable();
+            $table->float('total_drill')->nullable();
             $table->appendCommonFields();
         });
     }

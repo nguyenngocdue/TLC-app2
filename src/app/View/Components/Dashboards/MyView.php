@@ -35,7 +35,7 @@ class MyView extends Component
         $idText = Str::makeId($doc->id);
         $idHref = route(Str::plural($app['name']) . ".edit", $doc->id);
         $doc->id_link = "<a class='text-blue-700' href='$idHref'>$idText</a>";
-        $doc->name = $doc->getName();
+        // $doc->name = $doc->getName();
         return $doc;
     }
 

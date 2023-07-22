@@ -6,12 +6,17 @@ use App\BigThink\ModelExtended;
 
 class Hr_overtime_request extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'workplace_id', 'assignee_1', 'owner_id', 'status', 'user_team_ot_id'];
+    protected $fillable = [
+        'id', 'name', 'description',
+        'workplace_id', 'assignee_1', 'owner_id',
+        'status', 'user_team_ot_id'
+    ];
     protected $table = "hr_overtime_requests";
     public static $nameless = true;
-    public function getName()
+    public function getNameAttribute($value)
     {
-        return "[OTR#" . $this->id . "] - " . User::findFromCache($this->owner_id)->name;
+        $creator = User::findFromCache($this->owner_id);
+        return "[OTR#" . $this->id . "] - " . ($creator->name ?? "Creator");
     }
 
     public static $eloquentParams = [

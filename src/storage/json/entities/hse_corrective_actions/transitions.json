@@ -1,42 +1,79 @@
 {
     "new": {
         "name": "new",
+        "location": "",
         "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "in_progress": {
         "name": "in_progress",
+        "location": "",
         "new": "",
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
-        "closed": "true"
+        "pending_verification": "true",
+        "rejected": "",
+        "closed": ""
     },
     "cancelled": {
         "name": "cancelled",
+        "location": "",
         "new": "",
         "in_progress": "true",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "on_hold": {
         "name": "on_hold",
+        "location": "",
         "new": "",
         "in_progress": "true",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
-    "closed": {
-        "name": "closed",
+    "pending_verification": {
+        "name": "pending_verification",
+        "location": "",
         "new": "",
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "rejected": {
+        "name": "rejected",
+        "location": "",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "pending_verification": "true",
+        "rejected": "",
+        "closed": ""
+    },
+    "closed": {
+        "name": "closed",
+        "location": "",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     }
 }

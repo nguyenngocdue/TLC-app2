@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer\ViewAll;
+namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Models\Prod_order;
@@ -8,9 +8,10 @@ use App\Models\Prod_routing;
 use App\Models\Qaqc_wir;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
 use Illuminate\Support\Str;
 
-class ViewAllTypeMatrixTypeProjectSubprojectRouting extends ViewAllTypeMatrixParent
+class QaqcWirs extends ViewAllTypeMatrixParent
 {
     use TraitViewAllFunctions;
     private $project, $subProject, $prodRouting;
@@ -106,5 +107,24 @@ class ViewAllTypeMatrixTypeProjectSubprojectRouting extends ViewAllTypeMatrixPar
         $params['prod_discipline_id'] =  $x['prod_discipline_id'];
         $params['assignee_1'] =  $x['def_assignee'];
         return $params;
+    }
+
+    protected function getMetaColumns()
+    {
+        return [
+            ['dataIndex' => 'production_name',  'width' => 150,],
+            ['dataIndex' => 'compliance_name',  'width' => 150,],
+            ['dataIndex' => 'quantity',  'width' => 50,],
+            // ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
+        ];
+    }
+
+    function getMetaObjects($y)
+    {
+        return [
+            'production_name' =>  $y->production_name,
+            'compliance_name' =>  $y->compliance_name,
+            'quantity' => $y->quantity,
+        ];
     }
 }

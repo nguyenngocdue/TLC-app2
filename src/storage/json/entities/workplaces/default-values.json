@@ -23,30 +23,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_note": {
-        "name": "_note",
-        "column_name": "note",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_standard_working_min": {
-        "name": "_standard_working_min",
-        "column_name": "standard_working_min",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_standard_start_time": {
         "name": "_standard_start_time",
         "column_name": "standard_start_time",
@@ -71,6 +47,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_standard_working_min": {
+        "name": "_standard_working_min",
+        "column_name": "standard_working_min",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_break_duration_in_min": {
         "name": "_break_duration_in_min",
         "column_name": "break_duration_in_min",
@@ -86,6 +74,18 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_note": {
+        "name": "_note",
+        "column_name": "note",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -146,18 +146,6 @@
     "_getPublicHolidays": {
         "name": "_getPublicHolidays",
         "column_name": "getPublicHolidays",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getHrOtrs": {
-        "name": "_getHrOtrs",
-        "column_name": "getHrOtrs",
         "label": "",
         "validation": "",
         "validation_regex": "",

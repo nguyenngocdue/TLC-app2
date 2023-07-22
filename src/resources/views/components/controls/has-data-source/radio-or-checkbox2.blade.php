@@ -13,6 +13,7 @@
         , selectedJson: '{!! $selected !!}'
         , table: "{{$table}}" 
         , action: "{{$action ?? 'create'}}"
+        , letUserChooseWhenOneItem: {{($letUserChooseWhenOneItem??false)?'true':'false'}}
     }
     documentReadyDropdown2(params2)
 

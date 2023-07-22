@@ -23,10 +23,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('staff_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             // $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->unsignedBigInteger('radio_advance_type')->nullable();
-            $table->decimal('advance_amount',20,6)->nullable();
+            $table->decimal('advance_amount', 20, 6)->nullable();
             $table->unsignedBigInteger('currency_id')->nullable();
             $table->string('advance_amount_word')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();

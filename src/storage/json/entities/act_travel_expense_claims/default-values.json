@@ -47,11 +47,11 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_staff_id": {
-        "name": "_staff_id",
-        "column_name": "staff_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "All_OwnerId",
         "default_value": "",
@@ -63,7 +63,31 @@
         "name": "_getSubProjectsOfExpenseClaim()",
         "column_name": "getSubProjectsOfExpenseClaim()",
         "label": "",
-        "validation": "",
+        "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_rate_exchange_month_id": {
+        "name": "_rate_exchange_month_id",
+        "column_name": "rate_exchange_month_id",
+        "label": "",
+        "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
+        "label": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -107,6 +131,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_currency_pair1_id": {
+        "name": "_currency_pair1_id",
+        "column_name": "currency_pair1_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_advance_amount": {
         "name": "_advance_amount",
         "column_name": "advance_amount",
@@ -122,18 +158,6 @@
     "_currency1_id": {
         "name": "_currency1_id",
         "column_name": "currency1_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_currency_pair1_id": {
-        "name": "_currency_pair1_id",
-        "column_name": "currency_pair1_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -195,6 +219,18 @@
         "name": "_travel_req_id",
         "column_name": "travel_req_id",
         "label": "",
+        "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_currency_pair2_id": {
+        "name": "_currency_pair2_id",
+        "column_name": "currency_pair2_id",
+        "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
@@ -222,19 +258,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_currency_pair2_id": {
-        "name": "_currency_pair2_id",
-        "column_name": "currency_pair2_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
+        "default_value": "5",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -290,30 +314,6 @@
     "_getTravelExpenseClaimLines": {
         "name": "_getTravelExpenseClaimLines",
         "column_name": "getTravelExpenseClaimLines",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_rate_exchange_month_id": {
-        "name": "_rate_exchange_month_id",
-        "column_name": "rate_exchange_month_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_counter_currency_id": {
-        "name": "_counter_currency_id",
-        "column_name": "counter_currency_id",
         "label": "",
         "validation": "",
         "validation_regex": "",

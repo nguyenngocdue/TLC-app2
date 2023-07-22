@@ -14,11 +14,11 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_total_travel_price": {
-        "name": "_total_travel_price",
-        "column_name": "total_travel_price",
+    "_total_travel_amount": {
+        "name": "_total_travel_amount",
+        "column_name": "total_travel_amount",
         "listen_action": "aggregate_from_table",
-        "triggers": "table01[footer][total_price]",
+        "triggers": "table01[footer][total_amount]",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "columns_to_set": "",
@@ -33,8 +33,8 @@
         "name": "_staff_workplace_id",
         "column_name": "staff_workplace_id",
         "listen_action": "dot",
-        "triggers": "staff_id",
-        "listen_to_fields": "staff_id",
+        "triggers": "user_id",
+        "listen_to_fields": "user_id",
         "listen_to_attrs": "workplace",
         "columns_to_set": "",
         "attrs_to_compare": "",
@@ -48,8 +48,8 @@
         "name": "_staff_discipline_id",
         "column_name": "staff_discipline_id",
         "listen_action": "dot",
-        "triggers": "staff_id",
-        "listen_to_fields": "staff_id",
+        "triggers": "user_id",
+        "listen_to_fields": "user_id",
         "listen_to_attrs": "discipline",
         "columns_to_set": "",
         "attrs_to_compare": "",
@@ -89,9 +89,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_staff_id": {
-        "name": "_staff_id",
-        "column_name": "staff_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

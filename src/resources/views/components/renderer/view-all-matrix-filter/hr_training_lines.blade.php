@@ -8,7 +8,7 @@
            
              <div class="col-span-3">
                  Workplace:
-                 <x-calendar.sidebar-filter-workplace
+                 <x-renderer.view-all-matrix-filter.WorkplaceFilter 
                      tableName="workplaces" 
                      name="workplace_id[]" 
                      id="workplace_id" 

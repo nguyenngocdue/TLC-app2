@@ -23,8 +23,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('staff_id')->nullable();
-            $table->unsignedBigInteger('sub_project_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            // $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->unsignedBigInteger('advance_req_id')->nullable();
             $table->decimal('advance_amount', 20, 6)->nullable();
             $table->unsignedBigInteger('currency1_id')->nullable();
@@ -42,6 +42,7 @@ return new class extends Migration
             $table->decimal('total_amount_ee', 20, 6)->nullable();
             $table->decimal('total_amount_re', 20, 6)->nullable();
             $table->text('remark')->nullable();
+            $table->text('reimbursement_in_words')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->appendCommonFields();
         });

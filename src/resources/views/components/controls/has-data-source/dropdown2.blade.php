@@ -38,7 +38,11 @@
     @endif
 @else
 
-    <select id='{{$id}}' name='{{$name}}' allowClear={{$allowClear?'true':'false'}} onChange='onChangeDropdown2("{{$id}}")' {{$multipleStr}} controlType='dropdown' class='{{$classList}}'></select>
+    <select id='{{$id}}' name='{{$name}}' {{$multipleStr}} controlType='dropdown' onChange='onChangeDropdown2("{{$id}}")' 
+        allowClear={{$allowClear?'true':'false'}} 
+        letUserChooseWhenOneItem={{($letUserChooseWhenOneItem??false)?'true':'false'}} 
+        class='{{$classList}}'
+        ></select>
 
     <script>
         params2 = {
@@ -47,6 +51,7 @@
             , table: "{{$table}}"
             , allowClear: {{$allowClear ?'true':'false'}}
             , action: "{{$action ?? 'create'}}"
+            , letUserChooseWhenOneItem: {{($letUserChooseWhenOneItem??false) ?'true':'false'}}
         }
         documentReadyDropdown2(params2)
         // console.log("Document ready dropdown2")

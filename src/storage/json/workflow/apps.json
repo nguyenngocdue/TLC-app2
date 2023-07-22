@@ -99,25 +99,10 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
-    "act_travel_expense_claimable": {
-        "name": "act_travel_expense_claimable",
-        "package_tab": "application",
-        "package": "finance",
-        "sub_package": "hr",
-        "title": "Travel Expense Claimables",
-        "nickname": "tec",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "icon": null,
-        "hidden": "true",
-        "hidden_navbar": "true"
-    },
     "act_travel_place": {
         "name": "act_travel_place",
         "package_tab": "application",
-        "package": "finance",
+        "package": "hr_&_admin",
         "sub_package": "hr",
         "title": "Travel Places",
         "nickname": "tp",
@@ -126,6 +111,21 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "icon": "<i class=\"fa-duotone fa-route\"><\/i>",
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
+    "act_travel_place_pair": {
+        "name": "act_travel_place_pair",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr",
+        "title": "Travel Place Pairs",
+        "nickname": "tpp",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
     },
@@ -538,8 +538,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "icon": "<i class=\"fa-solid fa-badge-check\"><\/i>",
-        "show_in_my_view": "true",
-        "disallowed_direct_creation": "true"
+        "show_in_my_view": "true"
     },
     "hse_extra_metric": {
         "name": "hse_extra_metric",
@@ -552,7 +551,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-input-numeric\"><\/i>"
+        "icon": "<i class=\"fa-solid fa-input-numeric\"><\/i>",
+        "disallowed_direct_creation": "true"
     },
     "hse_first_aid": {
         "name": "hse_first_aid",

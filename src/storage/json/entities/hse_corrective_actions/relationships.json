@@ -97,10 +97,24 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_attachment_hse_car": {
-        "name": "_attachment_hse_car",
+    "_opened_photos": {
+        "name": "_opened_photos",
         "relationship": "morphMany",
-        "control_name": "attachment_hse_car",
+        "control_name": "opened_photos",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "attachment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": ""
+    },
+    "_closed_photos": {
+        "name": "_closed_photos",
+        "relationship": "morphMany",
+        "control_name": "closed_photos",
         "renderer_view_all": "thumbnails",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

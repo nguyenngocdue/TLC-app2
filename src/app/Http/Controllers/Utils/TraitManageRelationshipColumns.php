@@ -79,6 +79,13 @@ trait TraitManageRelationshipColumns
                 "renderer" => "number4",
                 'properties' => ['placeholder' => 4],
             ],
+            [
+                "dataIndex" => "let_user_choose_when_one_item",
+                "editable" => true,
+                "renderer" => "checkbox",
+                'align' => "center",
+                // 'properties' => ['placeholder' => 4],
+            ],
         ];
     }
 }

@@ -2,7 +2,7 @@
     <x-renderer.item-render-props id={{$id}} :item="$item" width='' :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
     {{-- <x-controls.insp-chklst.header-check-sheet :item="$item" :chklst="$chklst" :project="$project" :subProject="$subProject"/> --}}
     <hr/>
-    <x-renderer.heading level=5>
+    <x-renderer.heading level=4>
         <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{$item->name}}</span>
     </x-renderer.heading>
     @php
@@ -17,11 +17,15 @@
             @php
                 $groupName = $groupNames[$groupId] ?? "Untitled Group";
             @endphp
-            <x-renderer.card tooltip="#{{$groupId}}" idHtml="{{$groupColumn}}_{{$groupId}}_{{Str::slug($groupName)}}" titleClass="text-lg" title="{{$groupName}}">
+            <x-renderer.heading level=5 id="{{$groupColumn}}_{{$groupId}}_{{Str::slug($groupName)}}">
+                <span title="{{$groupName}}">{{$groupName}}</span>
+            </x-renderer.heading>
+            <x-renderer.card tooltip="#{{$groupId}}" titleClass="text-lg">
                 @foreach($lines as $rowIndex => $line)
                 <x-controls.insp-chklst.check-point :line="$line" :checkPointIds="$checkPointIds" table01Name="table01" :rowIndex="$rowIndex" type="{{$typeLine}}" />
                 @endforeach
             </x-renderer.card>
+            <div class="mb-8"></div>
         @endforeach
         
 

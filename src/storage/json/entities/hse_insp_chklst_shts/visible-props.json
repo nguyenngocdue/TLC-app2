@@ -29,9 +29,9 @@
         "new": "true",
         "active": "true"
     },
-    "_work_area_id": {
-        "name": "_work_area_id",
-        "column_name": "work_area_id",
+    "_workplace_id": {
+        "name": "_workplace_id",
+        "column_name": "workplace_id",
         "new": "true",
         "active": "true"
     },
@@ -56,12 +56,6 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "new": "true",
-        "active": "true"
-    },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
         "new": "true",
         "active": "true"
     },
