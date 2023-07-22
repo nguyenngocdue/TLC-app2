@@ -54,7 +54,7 @@ class Dropdown2 extends Component
             'action' => $this->action,
             'letUserChooseWhenOneItem' => $letUserChooseWhenOneItem,
         ];
-        // dump($params);
+        // dd($params);
         return view('components.controls.has-data-source.dropdown2', $params);
     }
 }
