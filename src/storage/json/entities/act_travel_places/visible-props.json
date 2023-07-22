@@ -19,6 +19,11 @@
         "column_name": "owner_id",
         "new": "true"
     },
+    "_getWorkplaces": {
+        "name": "_getWorkplaces",
+        "column_name": "getWorkplaces",
+        "new": "true"
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",
