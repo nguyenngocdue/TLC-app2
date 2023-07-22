@@ -82,7 +82,7 @@ trait HasCheckbox
             if (!isset(static::$singleton01[$key][$id])) {
                 if (!isset(static::$warnings01["{$id}_{$key}"])) {
                     static::$warnings01["{$id}_{$key}"] = true;
-                    dump("Cannot find #$id for $key when run getWhereIn");
+                    dump("Cannot find [#$id] for [$modelPath].[$column_name] when run getWhereIn.");
                 }
             } else {
                 $result[] = static::$singleton01[$key][$id];

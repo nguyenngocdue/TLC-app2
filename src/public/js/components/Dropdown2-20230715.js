@@ -15,6 +15,7 @@ const dumbIncludes2 = (array, item) => { for (let i = 0; i < array.length; i++) 
 const getIsMultipleOfE = (id) => (getEById(id)[0]) ? getEById(id)[0].hasAttribute('multiple') : false
 const getControlTypeOfE = (id) => getEById(id).attr('controlType')
 const getAllowClear = (id) => !!(getEById(id).attr('allowClear') === 'true')
+const getLetUserChooseWhenOneItem = (id) => !!(getEById(id).attr('letUserChooseWhenOneItem') === 'true')
 const getColSpanOfE = (id) => getEById(id).attr('colSpan')
 const getReadOnlyOfE = (id) => getEById(id).attr('readOnly')
 const getAllVariablesFromExpression = (str) => {
@@ -220,8 +221,9 @@ const onChangeDropdown2Reduce = (listener) => {
     // console.log("Selected of", column_name, "is", lastSelected)
     // console.log(attrs_to_compare)
     const allowClear = getAllowClear(column_name)
+    const letUserChooseWhenOneItem = getLetUserChooseWhenOneItem(column_name)
     // console.log(column_name, allowClear, false)
-    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, lastSelected, allowClear)
+    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, lastSelected, letUserChooseWhenOneItem, allowClear,)
 
     // console.log("Set to ", column_name, lastSelected1)
     // setValueOfEById(column_name, lastSelected1)
@@ -514,7 +516,7 @@ const onChangeDropdown2 = (name) => {
     }
 }
 
-const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected, allowClear = false) => {
+const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected, letUserChooseWhenOneItem = false, allowClear = false) => {
     // const debugListener = true
     const control_type = getControlTypeOfE(id)
     if (debugListener) console.log(id, attr_to_compare)
@@ -530,8 +532,8 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
-            selectedStr =
-                dataSource.length === 1 ? 'selected' : dumbIncludes2(selected, item.id) ? 'selected' : ''
+            if (letUserChooseWhenOneItem) { selectedStr = (dumbIncludes2(selected, item.id) ? 'selected' : '') }
+            else { selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes2(selected, item.id) ? 'selected' : '') }
             // console.log(id, selected, item.id, selectedStr)
             const title = item.description || (isNaN(item.id) ? item.id : makeId(item.id))
             option = "<option value='" + item.id + "' title='" + title + "' " + selectedStr + ' >'
@@ -550,7 +552,10 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             templateResult: select2FormatState,
             // , disabled: true
         })
-        if (dataSource.length === 1) getEById(id).trigger('change')
+        if (dataSource.length === 1) {
+            console.log("Changes when only one item in data source", id)
+            getEById(id).trigger('change')
+        }
     } else if (control_type == 'radio_or_checkbox') {
         // const control = getEById(id)
         // const isMultiple = control[0].hasAttribute("multiple")
@@ -563,7 +568,9 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr = dataSource.length === 1 ? 'checked' : dumbIncludes2(selected, itemId) ? 'checked' : ''
+            // selectedStr = (dataSource.length === 1) ? 'checked' : (dumbIncludes2(selected, itemId) ? 'checked' : '')
+            if (letUserChooseWhenOneItem) { selectedStr = (dumbIncludes2(selected, item.id) ? 'checked' : '') }
+            else { selectedStr = (dataSource.length === 1) ? 'checked' : (dumbIncludes2(selected, item.id) ? 'checked' : '') }
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
@@ -721,7 +728,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
 
 const documentReadyDropdown2 = (params) => {
     // console.log(params)
-    const { id, selectedJson, table, allowClear = false, action } = params
+    const { id, selectedJson, table, allowClear = false, action, letUserChooseWhenOneItem } = params
 
     // selectedJson = '{!! $selected !!}'
     const selectedJson1 = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
@@ -741,7 +748,7 @@ const documentReadyDropdown2 = (params) => {
     // }
     // console.log(id, listenersOfDropdown2, attr_to_compare, dataSourceDropdown)
     // console.log(id, attr_to_compare, dataSourceDropdown, selectedJson)
-    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedArray, allowClear)
+    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedArray, letUserChooseWhenOneItem, allowClear,)
 
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {

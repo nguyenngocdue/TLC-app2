@@ -29,6 +29,7 @@ class RadioOrCheckbox2 extends Component
         $prop = $sp['props']["_" . $this->name];
         $table = $prop['relationships']['table'];
         $span = $prop['relationships']['radio_checkbox_colspan'] ? $prop['relationships']['radio_checkbox_colspan'] : 4;
+        $letUserChooseWhenOneItem = ($prop['relationships']['let_user_choose_when_one_item'] ?? false) === "true";
         // dump($prop['relationships']);
         $id = $this->name;
         $name =  $this->name;
@@ -43,6 +44,7 @@ class RadioOrCheckbox2 extends Component
             'readOnly' => $this->readOnly,
             'saveOnChange' => $this->saveOnChange,
             'action' => $this->action,
+            'letUserChooseWhenOneItem' => $letUserChooseWhenOneItem,
         ];
 
         return view('components.controls.has-data-source.radio-or-checkbox2', $params);
