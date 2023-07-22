@@ -15,6 +15,14 @@
         "rejected": "",
         "approved": "true"
     },
+    "_user_team_ot_id": {
+        "name": "_user_team_ot_id",
+        "column_name": "user_team_ot_id",
+        "new": "",
+        "pending_approval": "true",
+        "rejected": "",
+        "approved": "true"
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",

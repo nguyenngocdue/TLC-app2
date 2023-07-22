@@ -11,18 +11,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_training_course_id": {
-        "name": "_training_course_id",
-        "column_name": "training_course_id",
-        "label": "",
-        "validation": "required",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "T\u00ean kh\u00f3a h\u1ecdc",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_name": {
         "name": "_name",
         "column_name": "name",
@@ -32,6 +20,18 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_training_course_id": {
+        "name": "_training_course_id",
+        "column_name": "training_course_id",
+        "label": "",
+        "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "T\u00ean kh\u00f3a h\u1ecdc",
         "placeholder": "",
         "control_extra": ""
     },
@@ -87,7 +87,7 @@
         "name": "_training_datetime",
         "column_name": "training_datetime",
         "label": "",
-        "validation": "",
+        "validation": "required|date_format:d\/m\/Y H:i",
         "validation_regex": "",
         "formula": "",
         "default_value": "",

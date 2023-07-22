@@ -41,7 +41,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "All_SlugifyByName",
+        "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -107,18 +107,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_total_meeting_toolbox": {
         "name": "_total_meeting_toolbox",
         "column_name": "total_meeting_toolbox",
@@ -166,6 +154,18 @@
         "label_extra": "",
         "placeholder": "",
         "control_extra": "If work hours input in this box, it will override value of work hours in the HSE KPI Peport."
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
     },
     "_status": {
         "name": "_status",

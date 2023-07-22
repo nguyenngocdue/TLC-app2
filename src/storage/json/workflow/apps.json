@@ -551,7 +551,8 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
-        "icon": "<i class=\"fa-solid fa-input-numeric\"><\/i>"
+        "icon": "<i class=\"fa-solid fa-input-numeric\"><\/i>",
+        "disallowed_direct_creation": "true"
     },
     "hse_first_aid": {
         "name": "hse_first_aid",

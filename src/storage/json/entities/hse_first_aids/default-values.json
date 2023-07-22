@@ -87,7 +87,7 @@
         "name": "_injury_datetime",
         "column_name": "injury_datetime",
         "label": "",
-        "validation": "",
+        "validation": "required|date_format:d\/m\/Y H:i",
         "validation_regex": "",
         "formula": "",
         "default_value": "",

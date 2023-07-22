@@ -53,6 +53,30 @@
         "new": "",
         "active": "true"
     },
+    "_total_meeting_toolbox": {
+        "name": "_total_meeting_toolbox",
+        "column_name": "total_meeting_toolbox",
+        "new": "",
+        "active": "true"
+    },
+    "_sep01": {
+        "name": "_sep01",
+        "column_name": "sep01",
+        "new": "",
+        "active": ""
+    },
+    "_heading01": {
+        "name": "_heading01",
+        "column_name": "heading01",
+        "new": "",
+        "active": ""
+    },
+    "_total_work_hours": {
+        "name": "_total_work_hours",
+        "column_name": "total_work_hours",
+        "new": "",
+        "active": "true"
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
