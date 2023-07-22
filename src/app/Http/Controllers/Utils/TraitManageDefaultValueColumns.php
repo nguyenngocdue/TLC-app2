@@ -26,7 +26,8 @@ trait TraitManageDefaultValueColumns
                 "dataIndex" => "validation",
                 "editable" => true,
                 "renderer" => "text4",
-                'title' => "Validation Rules<br/><a class='text-blue-700 underline' target='_blank' href='https://laravel.com/docs/9.x/validation#available-validation-rules'>Open Laravel Doc</a>"
+                'title' => "Validation Rules<br/><a class='text-blue-700 underline' target='_blank' href='https://laravel.com/docs/9.x/validation#available-validation-rules'>Open Laravel Doc</a>",
+                'subTitle' => 'required|date_format:d/m/Y<br/>required|date_format:H:i<br/>nullable|date_format:d/m/Y H:i',
             ],
             [
                 "dataIndex" => "validation_regex",
