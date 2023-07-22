@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Workflow\LibPivotTables;
+use App\Http\Controllers\Workflow\LibPivotTables2;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\StringPivotTable;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 
-trait TraitLibPivotTableDataFields
+trait TraitLibPivotTableDataFields2
 {
     use CheckFieldsPivotInDatabase;
     use ParseFiltersToJsonReport;
@@ -217,18 +218,17 @@ trait TraitLibPivotTableDataFields
     }
     public function getDataFields($dataSource, $modeType)
     {
-        $lib = LibPivotTables::getFor($modeType);
+        $lib = LibPivotTables2::getFor($modeType);
         $lib = self::removeEmptyElements($lib);
-        $isEmptyData = PivotReport::isEmptyArray($dataSource);
-        // dd($lib);
+        return $lib;
         
+        $isEmptyData = PivotReport::isEmptyArray($dataSource);
         
         if (!$this->checkCreateManagePivotReport($lib)) return false;
         
         $filters = $lib['filters'] ?? [];
         $dataFilters = $this->parseStringToJson($filters);
         $fieldOfFilters = array_keys($dataFilters) ?? [];
-        
         
         $row_fields = $lib['row_fields'] ?? [];
         
@@ -237,14 +237,6 @@ trait TraitLibPivotTableDataFields
         
         $bindingRowFields = $this->separateFields3($row_fields);
 
-        if($isEmptyData) {
-            return [
-                'empty_data' => true,
-                'binding_row_fields' => $bindingRowFields,
-                'data_filters' => $dataFilters,
-
-            ];
-        } 
 
 
         $columnFields = $lib['column_fields'] ?? [];

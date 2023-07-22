@@ -94,4 +94,9 @@ class StringPivotTable
         }
         return $dateList;
     }
+
+    public static function retrieveStringBeforeString($string, $stringSearch) {
+        $posIndex = strpos($string,$stringSearch);
+        return substr($string,0, $posIndex);
+    }
 }

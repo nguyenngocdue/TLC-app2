@@ -7,7 +7,6 @@
         "value_index_fields": "amount",
         "data_aggregations": "sum",
         "data_fields": "amount",
-        "lookup_tables": null,
         "sort_by": null
     },
     "apple_store_delete_fields_database": {
@@ -18,7 +17,6 @@
         "value_index_fields": null,
         "data_aggregations": null,
         "data_fields": null,
-        "lookup_tables": null,
         "sort_by": "category"
     },
     "apple_store_duplicate_field_column_field_value_index_field": {
@@ -29,7 +27,6 @@
         "value_index_fields": "amount,\r\namount,\r\namount,\r\ncategory,",
         "data_aggregations": "sum,",
         "data_fields": "amount,",
-        "lookup_tables": null,
         "sort_by": null
     },
     "apple_store_duplicate_value_in_column_field": {
@@ -40,7 +37,6 @@
         "value_index_fields": "amount,\r\namount,\r\namount,",
         "data_aggregations": "sum,",
         "data_fields": "amount,",
-        "lookup_tables": null,
         "sort_by": null
     },
     "apple_store_duplicate_value_in_column_field_many_objects": {
@@ -51,7 +47,6 @@
         "value_index_fields": "amount,\r\ndiscount,\r\ndiscount,",
         "data_aggregations": "sum,",
         "data_fields": "discount,",
-        "lookup_tables": null,
         "sort_by": null
     },
     "apple_store_empty_input": {
@@ -62,7 +57,6 @@
         "value_index_fields": null,
         "data_aggregations": null,
         "data_fields": null,
-        "lookup_tables": null,
         "sort_by": null
     },
     "apple_store_empty_row_field": {
@@ -73,7 +67,6 @@
         "value_index_fields": "amount,amount",
         "data_aggregations": "sum",
         "data_fields": "amount",
-        "lookup_tables": null,
         "sort_by": null
     },
     "apple_store_minimum_quantity_column_field": {
@@ -84,7 +77,6 @@
         "value_index_fields": "amount",
         "data_aggregations": "sum",
         "data_fields": "amount",
-        "lookup_tables": null,
         "sort_by": null
     },
     "apple_store_minimum_quantity_column_field_equal_3": {
@@ -95,7 +87,6 @@
         "value_index_fields": "amount,\r\namount,\r\namount,",
         "data_aggregations": "sum",
         "data_fields": "amount",
-        "lookup_tables": null,
         "sort_by": null
     },
     "apple_store_product_per_date": {
@@ -106,7 +97,6 @@
         "value_index_fields": "discount",
         "data_aggregations": "sum,",
         "data_fields": "discount,",
-        "lookup_tables": null,
         "sort_by": "product:desc"
     },
     "apple_store_test_code": {
@@ -117,7 +107,6 @@
         "value_index_fields": null,
         "data_aggregations": "sum,\r\nsum",
         "data_fields": "hseir_ltc_count_vote,\r\nhseir_rwc_count_vote,",
-        "lookup_tables": null,
         "sort_by": null
     },
     "hr_timesheet_employee_date": {
@@ -128,7 +117,6 @@
         "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours,\r\ntime_sheet_hours,\r\ntime_sheet_hours,\r\ntime_sheet_hours,",
         "data_aggregations": "sum,sum,sum,concat",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh, workplace_id",
-        "lookup_tables": "sub_projects,\r\nterms,\r\nusers,\r\nuser_types,\r\nworkplaces,\r\ndepartments,\r\nuser_categories",
         "sort_by": "user_id(users.name):asc"
     },
     "hr_timesheet_employee_project": {
@@ -139,7 +127,6 @@
         "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,time_sheet_hours_wfh",
         "data_aggregations": "sum,\r\nsum,\r\nsum",
         "data_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
-        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms,\r\n pj_tasks",
         "sort_by": "staff_id:desc,"
     },
     "hr_timesheet_employee_project_change_data_field_title": {
@@ -150,30 +137,37 @@
         "value_index_fields": "time_sheet_hours, time_sheet_hours_otr,time_sheet_hours_wfh",
         "data_aggregations": "sum,\r\nsum,\r\nsum",
         "data_fields": "time_sheet_hours{Operator},\r\ntime_sheet_hours_otr(abc.a){Operator 2},\r\ntime_sheet_hours_wfh{Operator 3}",
-        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms,\r\n pj_tasks",
         "sort_by": null
     },
     "hr_timesheet_line_employee_date": {
         "name": "hr_timesheet_line_employee_date",
         "filters": "category_id{\r\n\"title\":\"Team\",\r\n\"allowClear\": true,\r\n\"multiple\":true\r\n};\r\nuser_id{\r\n\"title\":\"User\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\nworkplace_id{\r\n\"title\" :\"Workplace\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\ndepartment_id{\"title\":\"Department\",\r\n\"allowClear\":true};\r\npicker_date{\"title\":\"Date\"};",
         "row_fields": "staff_id{\"title\":\"Staff ID\"};\r\nuser_id{\"column\":\"users.name\"};\r\nworkplace_id{\"column\":\"workplaces.name\"};\r\ncategory_id{\"column\":\"user_categories.name\"};\r\ntype_id{\"column\":\"user_types.name\"};\r\ndepartment_id{\"column\":\"departments.name\"}",
-        "column_fields": "time_sheet_start_time;\r\ntime_sheet_start_time_wfh;\r\ntime_sheet_start_time_otr",
+        "column_fields": "time_sheet_start_time{\"value_index\":\"time_sheet_durations\",\"title\":\"Hours\"};\r\ntime_sheet_start_time_wfh{\"value_index\":\"time_sheet_durations_wfh\",\"title\":\"WFH\"};\r\ntime_sheet_start_time_otr{\r\n\"value_index\":\"time_sheet_durations_otr\", \"title\":\"OTR\"}",
         "value_index_fields": "time_sheet_durations;\r\ntime_sheet_durations_wfh;\r\ntime_sheet_durations_otr",
         "data_aggregations": "sum;\r\nsum;\r\nsum;",
-        "data_fields": "time_sheet_durations{\"title\":\"Total\"};\r\ntime_sheet_durations_wfh{\"title\":\"Total WFH\"};\r\ntime_sheet_durations_otr{\"title\":\"Total OTR\"}",
-        "lookup_tables": null,
+        "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"};\r\ntime_sheet_durations_wfh{\"title\":\"Total WFH\",\"aggregation\":\"sum\"};\r\ntime_sheet_durations_otr{\"title\":\"Total OTR\",\"aggregation\":\"sum\"}",
         "sort_by": "user_id{\"column\":\"users.name\"}"
+    },
+    "hr_timesheet_line_employee_date_060_test": {
+        "name": "hr_timesheet_line_employee_date_060_test",
+        "filters": "category_id[\r\n'title':'Team'.\r\n'allowClear': true.\r\n'multiple':true.\r\n],\r\nuser_id[\r\n'title':'User'.\r\n'allowClear':true.\r\n'multiple':true.\r\n],\r\nworkplace_id[\r\n'title' :'Workplace.\r\n'allowClear':true.\r\n'multiple':true.\r\n], \r\ndepartment_id['title':'Department'.\r\n'allowClear':true.],\r\npicker_date['title':'Date'],",
+        "row_fields": "staff_id,\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),\r\ndepartment_id(departments.name)",
+        "column_fields": "time_sheet_start_time,\r\ntime_sheet_start_time_wfh,\r\ntime_sheet_start_time_otr",
+        "value_index_fields": "time_sheet_durations,\r\ntime_sheet_durations_wfh,\r\ntime_sheet_durations_otr",
+        "data_aggregations": "sum,\r\nsum,\r\nsum,",
+        "data_fields": "time_sheet_durations{Total 1},\r\ntime_sheet_durations_wfh{Total 2},\r\ntime_sheet_durations_otr{Total 3}",
+        "sort_by": "user_id(users.name)"
     },
     "hr_timesheet_line_employee_project": {
         "name": "hr_timesheet_line_employee_project",
-        "filters": "sub_project_id[\r\n'title':'Sub Project'.\r\n'allowClear': true.\r\n'multiple':true.\r\n],\r\nworkplace_id[\r\n'title' :'Workplace.\r\n'allowClear':true.\r\n'multiple':true.\r\n], \r\ndepartment_id['title':'Department'.\r\n'allowClear':true.],\r\nuser_id[\r\n'title':'User'.\r\n'allowClear':true.\r\n'multiple':true.\r\n],\r\npicker_date['title':'Date'],",
-        "row_fields": "staff_id{Staff ID},\r\nuser_id(users.name),\r\ndiscipline_id(user_disciplines.name),\r\nworkplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),",
-        "column_fields": "sub_project_id(sub_projects.name){Sub Projects},",
-        "value_index_fields": "time_sheet_durations",
+        "filters": "category_id[\r\n'title':'Team'.\r\n'allowClear': true.\r\n'multiple':true.\r\n],\r\nuser_id[\r\n'title':'User'.\r\n'allowClear':true.\r\n'multiple':true.\r\n],\r\nworkplace_id[\r\n'title' :'Workplace.\r\n'allowClear':true.\r\n'multiple':true.\r\n], \r\ndepartment_id['title':'Department'.\r\n'allowClear':true.],\r\npicker_date['title':'Date'],",
+        "row_fields": "staff_id{Staff ID},\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),\r\ndepartment_id(departments.name)",
+        "column_fields": "time_sheet_start_time,\r\ntime_sheet_start_time_wfh,\r\ntime_sheet_start_time_otr",
+        "value_index_fields": "time_sheet_durations,\r\ntime_sheet_durations,\r\ntime_sheet_durations",
         "data_aggregations": "sum",
         "data_fields": "time_sheet_durations{Total}",
-        "lookup_tables": null,
-        "sort_by": "user_id(users.name),"
+        "sort_by": "user_id(users.name)"
     },
     "hr_timesheet_line_project_date": {
         "name": "hr_timesheet_line_project_date",
@@ -183,18 +177,26 @@
         "value_index_fields": "time_sheet_durations",
         "data_aggregations": "sum",
         "data_fields": "time_sheet_durations{Total}",
-        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\nterms,\r\n pj_tasks,\r\ndepartments,\r\nuser_disciplines",
         "sort_by": "sub_project_id(sub_projects.name)"
     },
     "hr_timesheet_line_team_project": {
         "name": "hr_timesheet_line_team_project",
+        "filters": "sub_project_id{\r\n\"title\":\"Sub Project\",\r\n\"allowClear\": true,\r\n\"multiple\":true\r\n};\r\nworkplace_id{\r\n\"title\":\"Workplace\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\npicker_date{\"title\":\"Month\",\r\n\"allowClear\":true};",
+        "row_fields": "workplace_id{\"column\":\"workplaces.name\"};\r\ncategory_id{\"column\":\"user_categories.name\"};\r\ntype_id{\"column\":\"user_types.name\"};",
+        "column_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\"};\r\nsub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\"}",
+        "value_index_fields": "time_sheet_durations",
+        "data_aggregations": "sum",
+        "data_fields": "time_sheet_durations{\"title\":\"Total\", \"aggregation\":\"sum\"}",
+        "sort_by": "sub_project_id{\"column\":\"sub_projects.name\",\"order\": \"desc\"}"
+    },
+    "hr_timesheet_line_team_project_050_test": {
+        "name": "hr_timesheet_line_team_project_050_test",
         "filters": "sub_project_id[\r\n'title':'Sub Project'.\r\n'allowClear': true.\r\n'multiple':true.\r\n],\r\nworkplace_id[\r\n'title' :'Workplace.\r\n'allowClear':true.\r\n'multiple':true.\r\n], \r\npicker_date['title':'Date'],",
         "row_fields": "workplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),",
-        "column_fields": "sub_project_id(sub_projects.name){Sub Projects},",
+        "column_fields": "sub_project_id(sub_projects.name){Sub Projects}",
         "value_index_fields": "time_sheet_durations",
         "data_aggregations": "sum",
         "data_fields": "time_sheet_durations{Total}",
-        "lookup_tables": null,
         "sort_by": "sub_project_id(sub_projects.name)"
     },
     "hr_timesheet_project_date": {
@@ -205,7 +207,6 @@
         "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours,\r\ntime_sheet_hours,",
         "data_aggregations": "sum,sum,sum",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh",
-        "lookup_tables": "users,\r\nworkplaces,\r\nuser_types,\r\ndepartments,\r\nuser_categories,\r\nsub_projects,\r\n pj_tasks",
         "sort_by": null
     },
     "hr_timesheet_team_date": {
@@ -216,7 +217,6 @@
         "value_index_fields": "time_sheet_hours,\r\ntime_sheet_hours_otr,\r\ntime_sheet_hours_wfh",
         "data_aggregations": "sum,sum,sum",
         "data_fields": "time_sheet_hours, time_sheet_hours_otr, time_sheet_hours_wfh",
-        "lookup_tables": "users,\r\nworkplaces,\r\nuser_categories,\r\nuser_types,\r\nsub_projects",
         "sort_by": null
     }
 }

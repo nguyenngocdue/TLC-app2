@@ -46,7 +46,7 @@ class PivotReport
 
     private static function transferValueOfKeys($data, $columnFields, $propsColumnField)
     {
-        // dd($data);
+        // dd($propsColumnField, $columnFields);
         $newArray = array_map(function ($item) use ($propsColumnField) {
             $dateItems = [];
             $dt = [];
@@ -98,9 +98,70 @@ class PivotReport
             }
             return $array;
         }
-        // dd($newArray);
         return $newArray;
     }
+
+    private static function transferValueOfKeys2($data, $columnFields)
+    {
+        // dd($columnFields, $data);
+        $newArray = array_map(function ($item) use ($columnFields) {
+            $dateItems = [];
+            $dt = [];
+            foreach ($columnFields as $key => $values) {
+                if (!isset($values->value_index)) continue;
+                try {
+                    $date = DateTime::createFromFormat('Y-m-d', $item[$key]);
+                    $type = 'unknown';
+                    if ($date) $type = 'date';
+                    switch ($type) {
+                        case 'date':
+                            $reversedDate = $date->format('d-m-y');
+                            $_strDate = str_replace('-', '_', $reversedDate) . '_' . $key;
+
+                            $key = str_replace(' ', '_', strtolower($item[$key]));
+                            $dateItems[$_strDate] = array_merge($dt, [$values->value_index => $item[$values->value_index]]);
+                            break;
+                        default:
+                            $keyNumber = str_replace(' ', '_', strtolower($item[$key]));
+                            $dateItems[$key . '_' . $keyNumber] = $item[$values->value_index];
+                            break;
+                    }
+                } catch (Exception $e) {
+                    continue;
+                    // dd($e->getMessage(), $values);
+                }
+            }
+            return $dateItems;
+        }, $data);
+        // dd($newArray);
+
+        $newArray = self::sumItemsInArray($newArray);
+        // dd($newArray);
+        $newArray = self::concatKeyAndValueOfArray($newArray);
+        // Check items that were duplicated in Column_Field column
+        // dump($columnFields);
+        // if (self::hasDuplicates2($columnFields)) {
+        //     $newColumnFields = self::markDuplicatesAndGroupKey($columnFields);
+        //     $array = [];
+        //     foreach ($columnFields as $field) {
+        //         if (isset($newColumnFields[$field])) {
+        //             $duplicateItems = $newColumnFields[$field];
+        //             foreach ($duplicateItems as $fieldDup) {
+        //                 foreach ($newArray as $key => $value) {
+        //                     if (str_contains($key, $field)) {
+        //                         $newKey = str_replace($field, $fieldDup, $key);
+        //                         $array[$newKey] = $value;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     return $array;
+        // }
+        return $newArray;
+    }
+
+
     public static function getLastArray($data, $fieldsNeedToSum = [])
     {
         $outputArrays = [];
@@ -346,6 +407,23 @@ class PivotReport
         return $data;
     }
 
+    public static function transferData2($dataSource, $columnFields)
+    {
+        // if (empty($propsColumnField) || empty($valueIndexFields)) return $dataSource;
+        // dd($dataSource, $columnFields);
+        $data = array_map(
+            fn ($items) => array_map(
+                fn ($array) =>
+                self::transferValueOfKeys2($array, $columnFields),
+                $items
+            ),
+            $dataSource
+        );
+        // dd($data);
+        return $data;
+    }
+
+
     public static function isSaturdayOrSunday($dateString)
     {
         $date = DateTime::createFromFormat("d/m/Y", $dateString);
@@ -431,6 +509,24 @@ class PivotReport
         return $groupedArr;
     }
 
+    public static function markDuplicatesAndGroupKey2($arr)
+    {
+        $counts = array();
+        $groupedArr = array();
+        foreach ($arr as $value) {
+            if ($value == "") continue;
+
+            if (!isset($counts[$value])) {
+                $counts[$value] = 2;
+                $groupedArr[$value] = array($value);
+            } else {
+                $groupedArr[$value][] = $value . "[" . $counts[$value] . "]";
+                $counts[$value]++;
+            }
+        }
+        return $groupedArr;
+    }
+
     public static function markDuplicates($arr)
     {
         $counts = array();
@@ -458,6 +554,21 @@ class PivotReport
         }
         return false;
     }
+
+    public static function hasDuplicates2($array)
+    {
+
+        dd($array);
+        $counts = array_count_values(((array)$array));
+
+        foreach ($counts as $value) {
+            if ($value > 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static function countItems($array)
     {
         $itemCounts = array();

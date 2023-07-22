@@ -8,25 +8,26 @@ use App\Http\Controllers\Reports\Reports\Hr_timesheet_line_100;
 use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\Reports\TraitUpdateParamsReport;
-use App\Http\Controllers\TraitLibPivotTableDataFields;
+use App\Http\Controllers\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\Workflow\LibReports;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\PivotReport;
+use App\Utils\Support\StringPivotTable;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 
-class DataSource_Hr_timesheet_line extends Controller
+class DataSource_Hr_timesheet_line2 extends Controller
 {
     use TraitModeParamsReport;
-    use TraitLibPivotTableDataFields;
+    use TraitLibPivotTableDataFields2;
     use TraitUpdateParamsReport;
     use TraitFunctionsReport;
     use TraitMenuTitle;
-    use TraitChangeDataPivotTable;
+    use TraitChangeDataPivotTable2;
 
     protected $modeType = '';
     protected $mode = '010';
@@ -47,13 +48,26 @@ class DataSource_Hr_timesheet_line extends Controller
 
     protected function getParamColumns($dataSource, $modeType)
     {
-        try {
-            [,,,,,,,,,,,, $dataFilters] = $this->getDataFields($dataSource, $modeType);
-            return $dataFilters;
-        } catch (Exception $e) {
-            $dataFilters = $this->getDataFields($dataSource, $modeType);
-            return $dataFilters;
+        $filters = $this->getDataFields($dataSource, $modeType)['filters'];
+        $colParams = [];
+        foreach ($filters as $key => $values){
+            $dataIndex = $key;
+            if (isset($values->multiple)){
+                $dataIndex = 'many_'.$key;
+            }
+            $a = [];
+            if ($dataIndex === 'picker_date') {
+                $a = ['renderer' => 'picker_date'];
+            }
+            $colParams[] = [
+                'title' => $values->title ?? ucwords(str_replace('_', ' ', $key)),
+                'allowClear' => $values->allowClear ?? false,
+                'multiple' => $values->multiple ?? false,
+                'dataIndex' => $dataIndex,
+            ] + $a;
         }
+        // dd($colParams);
+        return $colParams;
     }
 
     protected function getPageParam($typeReport, $entity)
@@ -74,13 +88,16 @@ class DataSource_Hr_timesheet_line extends Controller
         return $dataSource;
     }
 
-    private function makeTableColumns($data)
+    private function makeTableColumnsWhenEmptyData($modeType)
     {
+        $rowFields = $this->getDataFields([], $modeType)['row_fields'];
         $cols = [];
-        foreach (array_values($data) as $values) {
+        foreach ($rowFields as $key => $values) {
             $cols[] = [
-                'title' => $values['title_override'] ?? str_replace('_', ' ', $values['field_index']),
-                'dataIndex' => $values['field_index'],
+                'title' => isset($values -> title) ? 
+                            ucfirst(StringPivotTable::retrieveStringBeforeString($values->title, '_')) : 
+                            ucfirst(StringPivotTable::retrieveStringBeforeString($key, '_')),
+                'dataIndex' => $key,
             ];
         }
         return $cols;
@@ -88,7 +105,7 @@ class DataSource_Hr_timesheet_line extends Controller
 
     private function triggerDataFollowManagePivot($linesData, $modeParams)
     {
-        $fn = (new DataPivotTable);
+        $fn = (new DataPivotTable2);
         $data = $fn->makeDataPivotTable($linesData, $this->modeType, $modeParams);
         return $data;
     }
@@ -129,15 +146,9 @@ class DataSource_Hr_timesheet_line extends Controller
         [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData, $modeParams);
         // $linesData = collect(array_slice($linesData->toArray(), 0, 10));
 
-        
-        // dd($dataOutput);
-
-        
         if (PivotReport::isEmptyArray($dataOutput)) {
-            $dataColumns = $this->getParamColumns($dataOutput, $modeType);
-            $paramColumns = array_values($dataColumns['data_filters']);
-            $colRender = $dataColumns['binding_row_fields'];
-            $tableColumns = $this->makeTableColumns($colRender);
+            $paramColumns = $this->getParamColumns($dataOutput, $modeType);
+            $tableColumns = $this->makeTableColumnsWhenEmptyData($modeType);
             return view("reports.report-pivot", [
                 'modeReport' => $modeReport,
                 'modeParams' => $modeParams,

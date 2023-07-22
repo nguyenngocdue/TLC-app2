@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Workflow;
 
 use Illuminate\Support\Str;
 
-class LibPivotTables extends AbstractLib
+class LibPivotTables2 extends AbstractLib
 {
     protected static $key = "pivot-tables";
 
@@ -37,8 +37,8 @@ class LibPivotTables extends AbstractLib
                 foreach ($item as $key1 => $str) {
                     if ($key1 === 'name') continue;
                     // dump($key1);
-                    // $result[$key1] = static::parseArrayWithJson($str, ";");
-                    $result[$key1] = Str::parseArray($str);
+                    $result[$key1] = static::parseArrayWithJson($str, ";");
+                    // $result[$key1] = Str::parseArray($str);
                 }
                 // dump($result);
                 return $result;
