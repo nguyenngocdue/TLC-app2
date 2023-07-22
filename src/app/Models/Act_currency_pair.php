@@ -15,9 +15,11 @@ class Act_currency_pair extends ModelExtended
         'getCountCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
     ];
     public static $nameless = true;
-    public function getName()
+    public function getNameAttribute($value)
     {
-        return $this->getBaseCurrency->name . "/" . $this->getCountCurrency->name;
+        $base = $this->getBaseCurrency;
+        $counter = $this->getCountCurrency;
+        return ($base->name ?? "") . "/" . ($counter->name ?? "");
     }
 
     public static $oracyParams = [];

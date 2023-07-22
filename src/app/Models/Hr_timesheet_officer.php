@@ -9,10 +9,11 @@ class Hr_timesheet_officer extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'week', 'team_id', 'assignee_1',  'owner_id', 'status'];
     public static $nameless = true;
-    public function getName()
+    public function getNameAttribute($value)
     {
+        $creator = User::findFromCache($this->owner_id);
         $week = "W" . date(Constant::FORMAT_WEEK, strtotime($this->week));
-        return "[" . $week . "] - " . User::findFromCache($this->owner_id)->name;
+        return "[" . $week . "] - " . ($creator->name ?? "");
     }
 
     public static $eloquentParams = [

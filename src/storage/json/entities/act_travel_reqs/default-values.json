@@ -29,7 +29,7 @@
         "label": "",
         "validation": "required",
         "validation_regex": "",
-        "formula": "All_OwnerId",
+        "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",

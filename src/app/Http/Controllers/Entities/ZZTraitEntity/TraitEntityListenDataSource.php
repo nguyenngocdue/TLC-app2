@@ -163,14 +163,14 @@ trait TraitEntityListenDataSource
         if (!$nameless) $rows = $rows->orderBy('name');
         $objectRows = $rows->get();
         // dump($table, sizeof($objectRows));
-        if ($nameless) {
-            $max = 5000;
-            if (sizeof($objectRows) <= $max) {
-                foreach ($objectRows as $objectRow) $objectRow->name = $objectRow->getName();
-            } else {
-                Log::info("$table has more than $max lines, skipping making name as it will overflow ram.");
-            }
-        }
+        // if ($nameless) {
+        //     $max = 5000;
+        //     if (sizeof($objectRows) <= $max) {
+        //         foreach ($objectRows as $objectRow) $objectRow->name = $objectRow->getName();
+        //     } else {
+        //         Log::info("$table has more than $max lines, skipping making name as it will overflow ram.");
+        //     }
+        // }
 
         $objectRowsMinimal = [];
         foreach ($objectRows as $row) {

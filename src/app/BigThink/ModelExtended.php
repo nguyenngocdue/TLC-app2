@@ -107,10 +107,10 @@ abstract class ModelExtended extends Model
         return $result;
     }
 
-    public function getName()
+    public function getNameAttribute($value)
     {
         if ($this::$nameless) return "#" . $this->id;
-        else return $this->name;
+        return $value;
     }
     static $singletonDbUserCollection = null;
     public static function getCollection()

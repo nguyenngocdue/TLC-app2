@@ -12,6 +12,12 @@ class Act_advance_req extends ModelExtended
         "advance_amount_word", "assignee_1", "owner_id"
     ];
     protected $table = "act_advance_reqs";
+    protected $with = ["getCurrency"];
+    public function getNameAttribute($value)
+    {
+        $currency = $this->getCurrency;
+        return $value . " - " . number_format($this->advance_amount, 2) . " " . ($currency->name ?? "");
+    }
 
     public static $eloquentParams = [
         'getUser' => ['belongsTo', User::class, 'user_id'],
