@@ -16,7 +16,7 @@ class Act_advance_req extends ModelExtended
     public function getNameAttribute($value)
     {
         $currency = $this->getCurrency;
-        return $value . " - " . number_format($this->advance_amount, 2) . " " . ($currency->name ?? "");
+        return $value . " (" . number_format($this->advance_amount, 2) . " " . ($currency->name ?? "") . ")";
     }
 
     public static $eloquentParams = [

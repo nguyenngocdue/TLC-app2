@@ -13,6 +13,10 @@ class Act_travel_req extends ModelExtended
         "total_travel_day", "total_travel_amount",
     ];
     protected $table = "act_travel_reqs";
+    public function getNameAttribute($value)
+    {
+        return $value . " (" . number_format($this->total_travel_amount, 2) . " USD)";
+    }
 
     public static $eloquentParams = [
         'getUser' => ['belongsTo', User::class, 'user_id'],

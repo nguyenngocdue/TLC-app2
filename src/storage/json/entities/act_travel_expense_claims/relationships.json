@@ -23,7 +23,7 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "radio",
+        "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
@@ -42,7 +42,7 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "true"
     },
     "_getCurrency1": {
         "name": "_getCurrency1",

@@ -11,7 +11,8 @@ class Act_travel_expense_claim extends ModelExtended
         "advance_req_id", "advance_amount", "currency1_id", "currency_pair1_id",
         "rate_exchange_advance", "total_advance_amount", "travel_req_id", "travel_amount",
         "currency2_id", "currency_pair2_id", "rate_exchange_travel", "total_travel_amount", "rate_exchange_month_id",
-        "counter_currency_id", "total_amount_ee", "total_amount_re", "remark", "assignee_1", "owner_id"
+        "counter_currency_id", "total_amount_ee", "total_amount_re", "remark", "assignee_1", "owner_id",
+        "reimbursement_in_words"
     ];
     protected $table = "act_travel_expense_claims";
 
