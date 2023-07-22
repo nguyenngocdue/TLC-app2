@@ -6,6 +6,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_correctable": {
@@ -15,6 +17,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_name": {
@@ -24,6 +28,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_work_area_id": {
@@ -33,6 +39,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_unsafe_action_type_id": {
@@ -42,6 +50,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_slug": {
@@ -51,6 +61,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_description": {
@@ -60,6 +72,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_assignee_1": {
@@ -69,6 +83,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_getMonitors1()": {
@@ -78,6 +94,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_priority_id": {
@@ -87,6 +105,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_due_date": {
@@ -96,15 +116,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
-        "closed": "true"
-    },
-    "_opened_date": {
-        "name": "_opened_date",
-        "column_name": "opened_date",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_closed_at": {
@@ -114,6 +127,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_owner_id": {
@@ -123,6 +138,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_opened_photos": {
@@ -132,6 +149,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_closed_photos": {
@@ -141,6 +160,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_status": {
@@ -150,6 +171,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_created_at": {
@@ -159,6 +182,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_updated_at": {
@@ -168,6 +193,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_order_no": {
@@ -177,6 +204,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_deleted_by": {
@@ -186,6 +215,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "_deleted_at": {
@@ -195,6 +226,8 @@
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
         "closed": ""
     },
     "_correctable_type": {
@@ -204,6 +237,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_correctable_id": {
@@ -213,6 +248,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_remark": {
@@ -222,6 +259,8 @@
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
         "closed": "true"
     }
 }

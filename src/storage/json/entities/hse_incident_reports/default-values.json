@@ -306,7 +306,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "16,108,88,2,191",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""

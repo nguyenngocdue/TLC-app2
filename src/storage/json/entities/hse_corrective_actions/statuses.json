@@ -3,5 +3,7 @@
     "in_progress",
     "cancelled",
     "on_hold",
+    "pending_verification",
+    "rejected",
     "closed"
 ]

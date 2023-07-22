@@ -1,0 +1,37 @@
+{
+    "new": {
+        "name": "new",
+        "label": "New",
+        "tooltip": ""
+    },
+    "in_progress": {
+        "name": "in_progress",
+        "label": "In Progress",
+        "tooltip": ""
+    },
+    "cancelled": {
+        "name": "cancelled",
+        "label": "Cancel",
+        "tooltip": ""
+    },
+    "on_hold": {
+        "name": "on_hold",
+        "label": "On Hold",
+        "tooltip": ""
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "label": "Request for Verification",
+        "tooltip": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "label": "Reject Verification",
+        "tooltip": ""
+    },
+    "closed": {
+        "name": "closed",
+        "label": "Close",
+        "tooltip": ""
+    }
+}
