@@ -15,9 +15,25 @@
         "rejected": "true",
         "approved": "true"
     },
+    "_user_team_ot_id": {
+        "name": "_user_team_ot_id",
+        "column_name": "user_team_ot_id",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -50,14 +66,6 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
-    },
-    "_user_team_ot_id": {
-        "name": "_user_team_ot_id",
-        "column_name": "user_team_ot_id",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",

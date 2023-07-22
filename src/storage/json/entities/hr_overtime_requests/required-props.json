@@ -31,6 +31,14 @@
         "rejected": "true",
         "approved": "true"
     },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
     "_getHrOtrLines": {
         "name": "_getHrOtrLines",
         "column_name": "getHrOtrLines",

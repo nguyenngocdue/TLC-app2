@@ -22,6 +22,7 @@ return new class extends Migration
         $schema->create('hr_overtime_requests', function (BlueprintExtended $table) {
             $table->id();
             $table->string("name")->nullable();
+            $table->text("description")->nullable();
             $table->unsignedBigInteger("workplace_id");
             $table->unsignedBigInteger('assignee_1');
             $table->unsignedBigInteger('user_team_ot_id')->nullable();

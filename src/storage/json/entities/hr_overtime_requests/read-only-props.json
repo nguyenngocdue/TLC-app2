@@ -27,6 +27,14 @@
         "name": "_name",
         "column_name": "name",
         "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "",
         "pending_approval": "true",
         "rejected": "",
         "approved": "true"
