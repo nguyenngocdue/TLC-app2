@@ -19,12 +19,13 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('act_travel_expense_claimables', function (BlueprintExtended $table) {
+        $schema->create('act_travel_place_pairs', function (BlueprintExtended $table) {
             $table->id();
-            $table->unsignedBigInteger('from_id')->nullable();
-            $table->unsignedBigInteger('to_id')->nullable();
-            $table->float('price')->nullable();
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('from_place_id')->nullable();
+            $table->unsignedBigInteger('to_place_id')->nullable();
+            $table->float('value')->nullable();
             $table->appendCommonFields();
         });
     }
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('act_travel_expense_claimables');
+        Schema::dropIfExists('act_travel_place_pairs');
     }
 };
