@@ -14,11 +14,11 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_total_travel_price": {
-        "name": "_total_travel_price",
-        "column_name": "total_travel_price",
+    "_total_travel_amount": {
+        "name": "_total_travel_amount",
+        "column_name": "total_travel_amount",
         "listen_action": "aggregate_from_table",
-        "triggers": "table01[footer][total_price]",
+        "triggers": "table01[footer][total_amount]",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "columns_to_set": "",
