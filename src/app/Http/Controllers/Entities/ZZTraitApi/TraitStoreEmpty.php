@@ -111,24 +111,27 @@ trait TraitStoreEmpty
 		// 	return ResponseObject::responseFail($e->getMessage());
 		// }
 
-		$message = "Created " . sizeof($theRows) . " " . Str::plural("line", sizeof($theRows)) . ".";
-		switch ($this->type) {
-			case 'hr_timesheet_worker':
-			case 'hr_timesheet_officer':
-			case 'qaqc_wir':
-				// if ($totalInsertedRows > 0) {
-				$message = "Created "
-					. sizeof($theRows)
-					. " "
-					. Str::plural("document", sizeof($theRows))
-					. " with "
-					. $totalInsertedRows
-					. " "
-					. Str::plural("line", $totalInsertedRows)
-					. ".";
-				// }
-				break;
-		}
+		$meta = $request->input('meta');
+		$caller = $meta['caller'] ?? "";
+		$line_or_doc = $caller == 'view-all-matrix' ? "document" : "line";
+		$message = "Created " . sizeof($theRows) . " " . Str::plural($line_or_doc, sizeof($theRows)) . ".";
+		// switch ($this->type) {
+		// 	case 'hr_timesheet_worker':
+		// 	case 'hr_timesheet_officer':
+		// 	case 'qaqc_wir':
+		// 		// if ($totalInsertedRows > 0) {
+		// 		$message = "Created "
+		// 			. sizeof($theRows)
+		// 			. " "
+		// 			. Str::plural("document", sizeof($theRows))
+		// 			. " with "
+		// 			. $totalInsertedRows
+		// 			. " "
+		// 			. Str::plural("line", $totalInsertedRows)
+		// 			. ".";
+		// 		// }
+		// 		break;
+		// }
 
 		return ResponseObject::responseSuccess(
 			$theRows,

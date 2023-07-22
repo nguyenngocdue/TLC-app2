@@ -123,6 +123,8 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'cell_href' => route($yAxisTableName . ".edit", $y->id),
             ];
             if ($this->allowCreation) {
+                $meta['caller'] = 'view-all-matrix';
+                $metaStr = json_encode($meta);
                 foreach ($xAxis as $x) {
                     $xId = $x['dataIndex'];
                     $xClass = $x['column_class'] ?? "";
@@ -132,7 +134,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                     // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
                     $line[$xId] = (object)[
                         'value' => '<i class="fa-duotone fa-circle-plus"></i>',
-                        'cell_href' => 'javascript:callApiStoreEmpty("' . $routeCreate . '",[' . $paramStr . '])',
+                        'cell_href' => 'javascript:callApiStoreEmpty("' . $routeCreate . '",[' . $paramStr . '], ' . $metaStr . ')',
                         'cell_class' => "text-center text-blue-800 $xClass",
                         'cell_title' => "Create a new document",
                         'cell_onclick' => "$(this).hide()",
