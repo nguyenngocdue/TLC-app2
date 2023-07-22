@@ -19,7 +19,7 @@ class Act_travel_req_line extends ModelExtended
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
         'getProject' => ['belongsTo', Project::class, 'project_id'],
         "getParent" => ['belongsTo', Act_travel_req::class, 'act_travel_req_id'],
-        "getTravelPlacePair" => [],
+        // "getTravelPlacePair" => [],
     ];
 
     public static $oracyParams = [];

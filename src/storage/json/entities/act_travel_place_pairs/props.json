@@ -98,7 +98,7 @@
         "name": "_value",
         "column_name": "value",
         "column_type": "double(8,2)",
-        "label": "Value",
+        "label": "Value (USD)",
         "control": "number",
         "align": "",
         "col_span": "4",
