@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -13,7 +13,7 @@
     "_correctable": {
         "name": "_correctable",
         "column_name": "correctable",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -24,7 +24,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -35,7 +35,7 @@
     "_work_area_id": {
         "name": "_work_area_id",
         "column_name": "work_area_id",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -46,7 +46,7 @@
     "_unsafe_action_type_id": {
         "name": "_unsafe_action_type_id",
         "column_name": "unsafe_action_type_id",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -57,7 +57,7 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -68,7 +68,7 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -79,7 +79,7 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -101,7 +101,7 @@
     "_priority_id": {
         "name": "_priority_id",
         "column_name": "priority_id",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -112,7 +112,7 @@
     "_due_date": {
         "name": "_due_date",
         "column_name": "due_date",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -134,7 +134,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "true",
+        "new": "",
         "in_progress": "",
         "cancelled": "",
         "on_hold": "",
@@ -167,7 +167,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -178,7 +178,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -189,7 +189,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -200,7 +200,7 @@
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -211,7 +211,7 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -222,7 +222,7 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -233,7 +233,7 @@
     "_correctable_type": {
         "name": "_correctable_type",
         "column_name": "correctable_type",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
@@ -244,7 +244,7 @@
     "_correctable_id": {
         "name": "_correctable_id",
         "column_name": "correctable_id",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "cancelled": "true",
         "on_hold": "true",
