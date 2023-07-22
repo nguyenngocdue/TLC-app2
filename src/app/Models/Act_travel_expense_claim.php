@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Act_travel_expense_claim extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "status", "staff_id",
+        "id", "name", "description", "status", "user_id",
         "advance_req_id", "advance_amount", "currency1_id", "currency_pair1_id",
         "rate_exchange_advance", "total_advance_amount", "travel_req_id", "travel_amount",
         "currency2_id", "currency_pair2_id", "rate_exchange_travel", "total_travel_amount", "rate_exchange_month_id",
@@ -16,7 +16,7 @@ class Act_travel_expense_claim extends ModelExtended
     protected $table = "act_travel_expense_claims";
 
     public static $eloquentParams = [
-        'getStaff' => ['belongsTo', User::class, 'staff_id'],
+        'getUser' => ['belongsTo', User::class, 'user_id'],
         'getAdvanceTravel' => ['belongsTo', Act_advance_req::class, 'advance_req_id'],
         'getTravelReq' => ['belongsTo', Act_travel_req::class, 'travel_req_id'],
 
@@ -42,7 +42,7 @@ class Act_travel_expense_claim extends ModelExtended
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function getStaff()
+    public function getUser()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

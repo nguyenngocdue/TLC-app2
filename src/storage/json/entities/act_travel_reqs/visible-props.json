@@ -9,9 +9,9 @@
         "column_name": "name",
         "new": "true"
     },
-    "_staff_id": {
-        "name": "_staff_id",
-        "column_name": "staff_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "new": "true"
     },
     "_staff_workplace_id": {

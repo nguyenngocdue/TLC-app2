@@ -3,7 +3,7 @@
         "name": "_advance_amount_word",
         "column_name": "advance_amount_word",
         "listen_action": "number_to_words",
-        "triggers": "advance_amount, currency_id",
+        "triggers": "advance_amount,currency_id",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "columns_to_set": "",
@@ -29,9 +29,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_staff_id": {
-        "name": "_staff_id",
-        "column_name": "staff_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

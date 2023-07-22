@@ -209,9 +209,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_staff_id": {
-        "name": "_staff_id",
-        "column_name": "staff_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

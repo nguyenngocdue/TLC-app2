@@ -75,9 +75,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_staff_id": {
-        "name": "_staff_id",
-        "column_name": "staff_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "column_type": "bigint unsigned",
         "label": "Identification",
         "control": "dropdown",

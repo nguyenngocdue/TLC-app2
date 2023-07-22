@@ -23,9 +23,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_staff_id": {
-        "name": "_staff_id",
-        "column_name": "staff_id",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "label": "",
         "validation": "",
         "validation_regex": "",

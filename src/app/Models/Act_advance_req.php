@@ -7,14 +7,14 @@ use App\BigThink\ModelExtended;
 class Act_advance_req extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "status", "staff_id",
+        "id", "name", "description", "status", "user_id",
         "radio_advance_type", "advance_amount", "currency_id",
         "advance_amount_word", "assignee_1", "owner_id"
     ];
     protected $table = "act_advance_reqs";
 
     public static $eloquentParams = [
-        'getStaff' => ['belongsTo', User::class, 'staff_id'],
+        'getUser' => ['belongsTo', User::class, 'user_id'],
         'getCurrency' => ['belongsTo', Act_currency::class, 'currency_id'],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         "radioAdvanceType" => ['belongsTo', Term::class, 'radio_advance_type'],
@@ -25,7 +25,7 @@ class Act_advance_req extends ModelExtended
         'getSubProjectsOfAdvanceReq()' => ['getCheckedByField', Sub_project::class,],
 
     ];
-    public function getStaff()
+    public function getUser()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

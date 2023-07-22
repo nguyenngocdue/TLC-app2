@@ -1,10 +1,10 @@
 {
-    "_getStaff": {
-        "name": "_getStaff",
+    "_getUser": {
+        "name": "_getUser",
         "relationship": "belongsTo",
-        "control_name": "staff_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "control_name": "user_id",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
