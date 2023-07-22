@@ -56,7 +56,7 @@ class User extends Authenticatable implements LdapAuthenticatable
      */
     protected $fillable = [
         "name", "full_name", "name_suffix", "employeeid", "first_name",
-        "last_name","gender" ,"address", "phone", "time_keeping_type", "user_type", "workplace",
+        "last_name", "gender", "address", "phone", "time_keeping_type", "user_type", "workplace",
         "category", "date_of_birth", "first_date", "last_date", "title", "position_prefix", "position_1",
         "position_2", "position_3", "position_rendered", "discipline", "department", "show_on_beta",
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password",
@@ -72,6 +72,10 @@ class User extends Authenticatable implements LdapAuthenticatable
     protected $touches = [];
     protected static $statusless = true;
     public static $nameless = false;
+    public function getNameAttribute($value)
+    {
+        return $value . ($this->resigned ? " (RESIGNED)" : "") . ($this->show_on_beta ? " (BETA)" : "");
+    }
 
     /**
      * The attributes that should be cast.
