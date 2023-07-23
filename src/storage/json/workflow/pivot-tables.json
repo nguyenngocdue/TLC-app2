@@ -134,23 +134,14 @@
         "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"};\r\ntime_sheet_durations_wfh{\"title\":\"Total WFH\",\"aggregation\":\"sum\"};\r\ntime_sheet_durations_otr{\"title\":\"Total OTR\",\"aggregation\":\"sum\"}",
         "sort_by": "user_id{\"column\":\"users.name\"}"
     },
-    "hr_timesheet_line_employee_date_060_test": {
-        "name": "hr_timesheet_line_employee_date_060_test",
-        "filters": "category_id[\r\n'title':'Team'.\r\n'allowClear': true.\r\n'multiple':true.\r\n],\r\nuser_id[\r\n'title':'User'.\r\n'allowClear':true.\r\n'multiple':true.\r\n],\r\nworkplace_id[\r\n'title' :'Workplace.\r\n'allowClear':true.\r\n'multiple':true.\r\n], \r\ndepartment_id['title':'Department'.\r\n'allowClear':true.],\r\npicker_date['title':'Date'],",
-        "row_fields": "staff_id,\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),\r\ndepartment_id(departments.name)",
-        "column_fields": "time_sheet_start_time,\r\ntime_sheet_start_time_wfh,\r\ntime_sheet_start_time_otr",
-        "value_index_fields": "time_sheet_durations,\r\ntime_sheet_durations_wfh,\r\ntime_sheet_durations_otr",
-        "data_fields": "time_sheet_durations{Total 1},\r\ntime_sheet_durations_wfh{Total 2},\r\ntime_sheet_durations_otr{Total 3}",
-        "sort_by": "user_id(users.name)"
-    },
     "hr_timesheet_line_employee_project": {
         "name": "hr_timesheet_line_employee_project",
-        "filters": "category_id[\r\n'title':'Team'.\r\n'allowClear': true.\r\n'multiple':true.\r\n],\r\nuser_id[\r\n'title':'User'.\r\n'allowClear':true.\r\n'multiple':true.\r\n],\r\nworkplace_id[\r\n'title' :'Workplace.\r\n'allowClear':true.\r\n'multiple':true.\r\n], \r\ndepartment_id['title':'Department'.\r\n'allowClear':true.],\r\npicker_date['title':'Date'],",
-        "row_fields": "staff_id{Staff ID},\r\nuser_id(users.name),\r\nworkplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),\r\ndepartment_id(departments.name)",
-        "column_fields": "time_sheet_start_time,\r\ntime_sheet_start_time_wfh,\r\ntime_sheet_start_time_otr",
-        "value_index_fields": "time_sheet_durations,\r\ntime_sheet_durations,\r\ntime_sheet_durations",
-        "data_fields": "time_sheet_durations{Total}",
-        "sort_by": "user_id(users.name)"
+        "filters": "user_id{\r\n\"title\":\"User\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\ncategory_id{\r\n\"title\":\"Team\",\r\n\"allowClear\": true,\r\n\"multiple\":true\r\n};\r\nworkplace_id{\r\n\"title\" :\"Workplace\",\r\n\"allowClear\":true,\r\n\"multiple\":true,\r\n};\r\ndepartment_id{\r\n\"title\":\"Department\",\r\n\"allowClear\":true,\r\n};\r\npicker_date{\r\n\"title\":\"Date\",\r\n\"allowClear\":true\r\n};",
+        "row_fields": "staff_id{\"title\":\"Staff ID\"};\r\nuser_id{\"column\":\"users.name\",\"width\":200};\r\ndiscipline_id{\"column\":\"user_disciplines.name\",\"width\":280};\r\nworkplace_id{\"column\":\"workplaces.name\"};\r\ncategory_id{\"column\":\"user_categories.name\"};\r\ntype_id{\"column\":\"user_types.name\"};",
+        "column_fields": "time_sheet_start_time{\"value_index\":\"time_sheet_durations\",\"title\":\"Thimesheet Hours\", \"width\":50,\r\n\"align\": \"right\"};",
+        "value_index_fields": null,
+        "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"};",
+        "sort_by": "user_id{\"column\":\"users.name\"};"
     },
     "hr_timesheet_line_project_date": {
         "name": "hr_timesheet_line_project_date",
@@ -169,15 +160,6 @@
         "value_index_fields": "time_sheet_durations",
         "data_fields": "time_sheet_durations{\"title\":\"Total\", \"aggregation\":\"sum\",\"with\":80,\"align\":\"right\"}",
         "sort_by": "sub_project_id{\"column\":\"sub_projects.name\",\"order\": \"desc\"},\r\nuser_id{\"column\":\"users.name\"\r\n};"
-    },
-    "hr_timesheet_line_team_project_050_test": {
-        "name": "hr_timesheet_line_team_project_050_test",
-        "filters": "sub_project_id[\r\n'title':'Sub Project'.\r\n'allowClear': true.\r\n'multiple':true.\r\n],\r\nworkplace_id[\r\n'title' :'Workplace.\r\n'allowClear':true.\r\n'multiple':true.\r\n], \r\npicker_date['title':'Date'],",
-        "row_fields": "workplace_id(workplaces.name),\r\ncategory_id(user_categories.name),\r\ntype_id(user_types.name),",
-        "column_fields": "sub_project_id(sub_projects.name){Sub Projects}",
-        "value_index_fields": "time_sheet_durations",
-        "data_fields": "time_sheet_durations{Total}",
-        "sort_by": "sub_project_id(sub_projects.name)"
     },
     "hr_timesheet_project_date": {
         "name": "hr_timesheet_project_date",

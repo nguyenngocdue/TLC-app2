@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Workflow;
 
-use Illuminate\Support\Str;
-
 class LibPivotTables2 extends AbstractLib
 {
     protected static $key = "pivot-tables";
