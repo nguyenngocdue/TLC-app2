@@ -7,6 +7,7 @@ use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Models\Workplace;
 use App\Utils\Support\Report;
+use App\Utils\Support\StringPivotTable;
 use Illuminate\Support\Facades\DB;
 
 class Hse_incident_report_010 extends Report_ParentReportController
@@ -40,7 +41,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 SELECT  
                         SUBSTR(t1.hse_month, 1, 4) AS year,
                         t1.hse_month AS month,
-                        t1.*, t2.*, t3.*, t4.*, t5.*, t6.*, t7.*, wp_ids.wp_id_list
+                        t1.*, t2.*, t3.*, t4.*, t5.*, t6.*, t7a.*,t7b.*, wp_ids.wp_id_list
                 FROM (
                     SELECT
                         SUBSTR(hseir.issue_datetime, 1, 7) AS hse_month,
@@ -112,6 +113,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 
                     GROUP BY hse_month
                 ) AS t6 ON t1.hse_month = t6.hse_month
+
                 LEFT JOIN (
                     SELECT
                         SUBSTR(hseem.metric_month, 1, 7) AS hse_month,
@@ -119,11 +121,22 @@ class Hse_incident_report_010 extends Report_ParentReportController
                         SUM(hseem.total_third_party_insp_audit) AS third_party_inspection_audit,
                         SUM(hseem.total_drill) AS drill
                     FROM hse_extra_metrics hseem
-                    WHERE 1 = 1
-                        AND hseem.workplace_id IN $strWorkplaceIds
-                           AND SUBSTR(hseem.metric_month, 1, 4) = $year
+                    WHERE hseem.workplace_id IN $strWorkplaceIds
+                        AND SUBSTR(hseem.metric_month, 1, 4) = $year
                     GROUP BY hse_month
-                ) AS t7 ON t1.hse_month = t7.hse_month
+                ) AS t7a ON t1.hse_month = t7a.hse_month
+                RIGHT JOIN (
+                    SELECT
+                        SUBSTR(hseem.metric_month, 1, 7) AS hse_month,
+                        SUM(hseem.total_discipline) AS discipline,
+                        SUM(hseem.total_third_party_insp_audit) AS third_party_inspection_audit,
+                        SUM(hseem.total_drill) AS drill
+                    FROM hse_extra_metrics hseem
+                    WHERE hseem.workplace_id IN $strWorkplaceIds
+                        AND SUBSTR(hseem.metric_month, 1, 4) = $year
+                    GROUP BY hse_month
+                ) AS t7b ON t1.hse_month = t7b.hse_month
+
                 JOIN (
                     SELECT GROUP_CONCAT(id) AS wp_id_list
                     FROM workplaces wp
@@ -145,7 +158,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $dataColumn = [
             [
                 'title' => 'Month',
-                'dataIndex' => 'month',
+                'dataIndex' => 'hse_month',
                 'align' => 'center',
                 'width' => 250,
             ],
@@ -282,12 +295,24 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 $workPlacesHoursOfYear[$year][] = $wp->getTotalWorkingHoursOfYear($year);
             }
         }
-        // dump($workPlacesHoursOfYear);
+        // dd($workPlacesHoursOfYear);
         $workHoursOfYear = Report::sumAndMergeNestedKeys($workPlacesHoursOfYear);
         foreach ($dataSource as &$value) {
-            if (isset($value['year'])) {
-                $workHours = $workHoursOfYear[$value['year']];
-                $value['work_hours'] = $workHours[$value['month']];
+            if (!is_null($value['hse_month'])) {
+                $hseMonth = $value['hse_month'];
+                [$year, $month] = explode('-', $hseMonth);
+                if(!isset($workHoursOfYear[$year])) {
+                    $value['work_hours'] = 0;
+                    $value['trir'] = 0;
+                    continue;
+                };
+                $workHours = $workHoursOfYear[$year];
+                if(!isset($workHours[$hseMonth])) {
+                    $value['work_hours'] = 0;
+                    $value['trir'] = 0;
+                    continue;
+                };
+                $value['work_hours'] = $workHours[$hseMonth];
                 $totalRecIncidentRate = (($value['hseir_ltc_count_vote']
                     + $value['hseir_rwc_count_vote']
                     + $value['hseir_mtc_count_vote']
@@ -297,7 +322,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
             }
         }
 
-        $months = array_column($dataSource, 'month');
+        $months = array_column($dataSource, 'hse_month');
         $addMissingMonths = Report::addMissingMonths($months);
         $diffMonths = array_diff($addMissingMonths, $months);
 
@@ -307,8 +332,11 @@ class Hse_incident_report_010 extends Report_ParentReportController
             $arr = array_fill_keys($keysInDataSource, null);
             $arr['month'] = $item;
             $arr['year'] = substr($item, 0, 4);
+            $arr['hse_month'] = $item;
             return $arr;
         }, $diffMonths);
+
+
         $dataSource = array_merge($dataSource, $data2);
 
         // Create a new line at the end of the table
@@ -321,8 +349,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                         $dataFooter[$field] = 0;
                     }
                     $dataFooter[$field] += $values[$field];
-                }
-                catch (\Exception $e) {
+                } catch (\Exception $e) {
                     $dataFooter[$field] = $values[$field];
                 }
             }
@@ -330,11 +357,11 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $dataFooter['year'] = null;
         $dataFooter['month'] = 'YTD';
         $dataFooter['trir'] = round((($dataFooter['hseir_ltc_count_vote']
-                                +$dataFooter['hseir_rwc_count_vote']
-                                +$dataFooter['hseir_mtc_count_vote']
-                                +$dataFooter['hseir_incident_count_vote']
-                                +$dataFooter['hseir_near_miss_count_vote']) * 200000)/$dataFooter['work_hours'], 2);
-        $dataSource = array_merge($dataSource,[$dataFooter]);
+            + $dataFooter['hseir_rwc_count_vote']
+            + $dataFooter['hseir_mtc_count_vote']
+            + $dataFooter['hseir_incident_count_vote']
+            + $dataFooter['hseir_near_miss_count_vote']) * 200000) / $dataFooter['work_hours'], 2);
+        $dataSource = array_merge($dataSource, [$dataFooter]);
         return collect($dataSource);
     }
 
@@ -351,8 +378,8 @@ class Hse_incident_report_010 extends Report_ParentReportController
             }
         }
         $lastElement = array_slice($dataSource->toArray(), count($dataSource) - 1);
-        foreach ($lastElement as &$values){
-            foreach ($values as $key => &$value){
+        foreach ($lastElement as &$values) {
+            foreach ($values as $key => &$value) {
                 if (is_object($value)) $value = $value->value;
                 $values[$key] = (object)[
                     'value' => $value,
@@ -361,6 +388,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
             }
         }
         $dataSource = array_merge(array_slice($dataSource->toArray(), 0, count($dataSource) - 1), $lastElement);
+        // dd($dataSource);
         return collect($dataSource);
     }
 
