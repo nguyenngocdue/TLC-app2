@@ -15,7 +15,6 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\StringPivotTable;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
@@ -50,10 +49,10 @@ class DataSource_Hr_timesheet_line2 extends Controller
     {
         $filters = $this->getDataFields($dataSource, $modeType)['filters'];
         $colParams = [];
-        foreach ($filters as $key => $values){
+        foreach ($filters as $key => $values) {
             $dataIndex = $key;
-            if (isset($values->multiple)){
-                $dataIndex = 'many_'.$key;
+            if (isset($values->multiple)) {
+                $dataIndex = 'many_' . $key;
             }
             $a = [];
             if ($dataIndex === 'picker_date') {
@@ -94,9 +93,9 @@ class DataSource_Hr_timesheet_line2 extends Controller
         $cols = [];
         foreach ($rowFields as $key => $values) {
             $cols[] = [
-                'title' => isset($values -> title) ? 
-                            ucfirst(StringPivotTable::retrieveStringBeforeString($values->title, '_')) : 
-                            ucfirst(StringPivotTable::retrieveStringBeforeString($key, '_')),
+                'title' => isset($values->title) ?
+                    ucfirst(StringPivotTable::retrieveStringBeforeString($values->title, '_')) :
+                    ucfirst(StringPivotTable::retrieveStringBeforeString($key, '_')),
                 'dataIndex' => $key,
             ];
         }
@@ -168,8 +167,8 @@ class DataSource_Hr_timesheet_line2 extends Controller
 
         // Pivot data before render 
         $paramColumns = $this->getParamColumns($dataOutput, $modeType);
-        $dataSource = $this->paginateDataSource($dataOutput, $pageLimit);
-        $dataSource = $this->changeValueData($dataSource);
+        $dataSource = $this->changeValueData($dataOutput);
+        $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
 
         return view("reports.report-pivot", [
             'modeReport' => $modeReport,

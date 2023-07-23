@@ -126,6 +126,7 @@ class PivotTable2 extends Controller
     private function makeKeysOrderSort($sortByFields)
     {
         $orders = [];
+        // dd($sortByFields);
         foreach($sortByFields as $key => $values) {
             $str = str_replace('.', '_', $values->column);
             $orders[$key.'_'.$str] = $values->order ?? 'ASC';
@@ -271,7 +272,6 @@ class PivotTable2 extends Controller
         
         
         $dataOutput = $this->updateResultOfAggregations($keysOfColumnFields, $aggregations, $dataOutput);
-        // dd($dataOutput);
         // dd($dataOutput);
         return $dataOutput;
     }

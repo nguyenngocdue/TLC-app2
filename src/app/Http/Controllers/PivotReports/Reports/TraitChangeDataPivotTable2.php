@@ -32,6 +32,6 @@ trait TraitChangeDataPivotTable2
           }
           $results[] = $values;
       }
-      return $results;
+      return collect($results);
    }
 }

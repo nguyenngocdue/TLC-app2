@@ -15,11 +15,9 @@ class DataPivotTable2 extends Controller
       $fn = (new PivotTable2());
       $libs = $fn->getDataFields($drawData, $modeType);
       $dataOutput = $fn->makeDataRenderer($drawData, $libs, $modeParams);
-      // dd($allDataFields);
-      // dd($dataOutput[0]);
       [$tableDataHeader, $tableColumns] = $fn->makeColumnsRenderer($drawData, $dataOutput, $libs, $modeType);
       $dataOutput = $fn->sortLinesData($dataOutput, $libs);
       
-      return [ $dataOutput, $tableColumns, $tableDataHeader];
+      return [$dataOutput, $tableColumns, $tableDataHeader];
    }
 }

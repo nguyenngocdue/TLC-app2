@@ -60,7 +60,7 @@ trait CheckFieldsPivotInDatabase
         return false;
     }
 
-    public function checkEmptyRowFieldsAndColumnFields($rowFields, $columnFields)
+    public function checkEmptyRowFieldsAndNumberOfColumnFields($rowFields, $columnFields)
     {
         if (empty($rowFields) && count($columnFields) > 3) {
             echo Blade::render("<x-feedback.alert type='warning' message='The number of Column Fields must be less than 4.'></x-feedback.alert>");

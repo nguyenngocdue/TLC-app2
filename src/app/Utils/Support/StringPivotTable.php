@@ -97,6 +97,7 @@ class StringPivotTable
 
     public static function retrieveStringBeforeString($string, $stringSearch) {
         $posIndex = strpos($string,$stringSearch);
+        if(!$posIndex) return $string;
         return substr($string,0, $posIndex);
     }
 }
