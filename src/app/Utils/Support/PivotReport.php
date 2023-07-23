@@ -361,10 +361,9 @@ class PivotReport
     private static function sumFieldsHaveTheSameValue($data, $fieldsNeedToSum)
     {
         $array = [];
-        $fieldIndex = $fieldsNeedToSum['fieldIndex'] ?? [];
-        $fieldsNeedToSum = $fieldsNeedToSum['value_field_index'] ?? [];
-        // dd($fieldIndex, $fieldsNeedToSum);
-
+        $fieldIndex = $fieldsNeedToSum['field_indexes'] ?? [];
+        $fieldsNeedToSum = $fieldsNeedToSum['value_field_indexes'] ?? [];
+        
         foreach ($data as $item) {
             $found = false;
             foreach ($fieldsNeedToSum as $valueIndexField) {
@@ -387,7 +386,6 @@ class PivotReport
             }
             if (!$found) $array[] = $item;
         }
-        // dd($array);
         return $array;
     }
 

@@ -233,8 +233,7 @@ class PivotTable2 extends Controller
 
         //Remove all array keys by looping through all elements
         $fieldsNeedToSum = $this->getFieldNeedToSum($columnFields);
-        // dd($fieldsNeedToSum, $columnFields);
-
+        
         $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $fieldsNeedToSum), $processedData));
         // dd($processedData, $fieldsNeedToSum);
 

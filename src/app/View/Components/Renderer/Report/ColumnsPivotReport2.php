@@ -26,7 +26,7 @@ trait  ColumnsPivotReport2
                 $columnsData[] = [
                     'title' => $value->title ?? ucfirst(substr($key,0, strpos($key, '_'))),
                     'dataIndex' => $dataIndex,
-                    'width' => 140,
+                    'width' => $value->width ?? 140,
                 ];
             }
         }
@@ -223,25 +223,27 @@ trait  ColumnsPivotReport2
                         $groupItems = PivotReport::groupSimilarStrings($items);
                         foreach ($items as $value) {
                             $columnsNeedToRender = array_keys($columnFields);
-                            // dd($columnFields, $columnsNeedToRender, $items);
+
                             $checkField =  PivotReport::isStringInItemsOfArray($columnsNeedToRender, $value);
                             if ($checkField) {
-                                $title = '';
                                 $countRenderCol = 1;
                                 foreach ($groupItems as $keyGroup => $group) {
                                     if (str_contains($value, $keyGroup) && in_array($value, $group) && isset($columnFields[$keyGroup])) {
                                         $info = $columnFields[$keyGroup];
                                         $title = $info->title ?? 'Empty tile Column';
+                                        $width = $info->width ?? '50';
+                                        $align = $info->align ?? 'center';
                                         $countRenderCol = count($group);
                                     }
                                 }
                                 $columnsOfColumnFields[] = [
-                                    'title' => $title,
+                                    'title' => $title ?? 'Empty',
                                     'dataIndex' => $value,
                                     'align' => is_numeric($value) ? 'left' : 'right',
-                                    'width' => 80,
+                                    'width' => $width ?? 50,
                                     'colspan' =>  $countRenderCol,
                                     'header_name' => $tableDataHeader[$value] ?? '',
+                                    'align'=> $align,
                                 ];
                             };
                         }
@@ -251,13 +253,12 @@ trait  ColumnsPivotReport2
                         foreach ($groupItems as $key => $dates) {
                             $attributes = $this->filterValuesByKeyIndex($columnFields, $key);
                             if (!$attrs = reset($attributes)) continue;
-                            $title = $attrs->title ??  'Empty Title';
                             foreach ($dates as $value) {
                                 $columnsOfColumnFields[] = [
-                                    'title' =>  $title,
+                                    'title' => $attrs->title ??  'Empty Title',
                                     'dataIndex' => $value,
-                                    'align' => is_numeric($value) ? 'left' : 'right',
-                                    'width' => 50,
+                                    'align' => $attrs->align ?? 'left',
+                                    'width' => $attrs->width ?? 50,
                                     'colspan' => count($dates),
                                 ];
                             }
@@ -285,7 +286,8 @@ trait  ColumnsPivotReport2
                 'title' => $value->title ?? str_replace('_', ' ', $key),
                 'dataIndex' => $value->aggregation.'_'. $key,
                 'align' => 'right',
-                'width' => 100,
+                'width' => $value->width ?? 50,
+                'align' => $value->align ?? 'right',
             ];
         };
         return $columnsOfAgg;

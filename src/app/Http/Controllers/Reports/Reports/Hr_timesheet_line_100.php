@@ -55,7 +55,7 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
 
         if (isset($modeParams['many_user_id']) || isset($modeParams['user_id'])) {
             $ids = implode(',', $modeParams['many_user_id'] ?? $modeParams['user_id']);
-            $sql .= "users us ON tsl.user_id IN ($ids)";
+            $sql .= "users us ON tsl.user_id IN ($ids) AND us.id = tsl.user_id";
         } else {
             $sql .= "users us ON tsl.user_id = us.id";
         }
@@ -336,11 +336,9 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
         $rowFields = $libPivotFilters['row_fields'];
 
         $data = [];
-        dd($dataSource);
 
         foreach ($rowFields as $keyCol => $nameCol) {
             $dataGroup1 = Report::groupArrayByKey($dataSource, $nameCol . '_name');
-            dd($dataGroup1);
             ++$keyCol;
             $data = [];
             if ($keyCol < count($rowFields)) {
@@ -354,7 +352,6 @@ class Hr_timesheet_line_100 extends Report_ParentReportController
                             foreach ($dataGroup2 as $k3 => $g3) {
                                 $dataGroup3 = Report::groupArrayByKey($g3, $rowFields[$keyCol] . '_name');
                                 $data[$k1][$k2][$k3] = $dataGroup3;
-                                dd($data);
                             }
                         }
                     }
