@@ -87,16 +87,14 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     ),
                     t5 AS (
                         SELECT
-                                            SUBSTR(hsew.walkthrough_datetime, 1, 7) AS hse_month,
+                                            SUBSTR(hseca.opened_at, 1, 7) AS hse_month,
                                             #COUNT(DISTINCT CASE WHEN hsew.status = 'closed' THEN hsew.id END)hsew_count_test,
                                             NULLIF(COUNT(DISTINCT CASE WHEN hseca.correctable_type = 'App\\\\Models\\\Hse_walkthrough' 
                                                                 OR hseca.correctable_type ='App\\\\Models\\\\Hse_insp_chklst_line' THEN hseca.id END),0) AS hseca_line_count
-                                        FROM hse_walkthroughs hsew
-                                        JOIN hse_corrective_actions hseca ON hseca.correctable_id = hsew.id
+                                        FROM hse_corrective_actions hseca
                                         WHERE 1 = 1
-                                            AND hsew.workplace_id IN $strWorkplaceIds
-                                            AND SUBSTR(hsew.walkthrough_datetime, 1, 4) = $year
-                                            AND SUBSTR(hseca.opened_at, 1, 7) = SUBSTR(hsew.walkthrough_datetime, 1, 7)
+                                            AND hseca.work_area_id IN (SELECT id FROM temp_work_areas) 
+                                            AND SUBSTR(hseca.opened_at, 1, 4) = $year
                                         GROUP BY hse_month
                     ),
                     t6 AS (
@@ -116,7 +114,8 @@ class Hse_incident_report_010 extends Report_ParentReportController
                             MAX(hseem.total_discipline) AS discipline,
                             MAX(hseem.total_third_party_insp_audit) AS third_party_inspection_audit,
                             MAX(hseem.total_drill) AS drill,
-                            MAX(hseem.total_meeting_toolbox) AS total_meeting_toolbox
+                            MAX(hseem.total_meeting_toolbox) AS total_meeting_toolbox,
+                            MAX(hseem.total_work_hours) AS hseem_total_work_hours
                         FROM hse_extra_metrics hseem
                         WHERE hseem.workplace_id IN $strWorkplaceIds
                             AND SUBSTR(hseem.metric_month, 1, 4) = $year
@@ -321,9 +320,10 @@ class Hse_incident_report_010 extends Report_ParentReportController
         foreach ($dataSource as $value) {
             $hseMonth = is_null($value['month']) ? $value['hse_month'] : $value['month'];
             if ($hseMonth) {
+                $num = $value['hseem_total_work_hours'];
                 [$year, $month] = explode('-', $hseMonth);
                 if (!isset($workHoursOfYear[$year])) {
-                    $value['work_hours'] = null;
+                    $value['work_hours'] = is_null($num) ? null : $num;
                     $value['trir'] = null;
                     $value['year'] = $year;
                     $value['hse_month'] = $hseMonth;
@@ -335,7 +335,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 $workHours = $workHoursOfYear[$year];
                 if (!isset($workHours[$hseMonth])) {
                     // Set work_hours and trir values to null
-                    $value['work_hours'] = null;
+                    $value['work_hours'] =  is_null($num) ? null : $num;
                     $value['trir'] = null;
                     $value['year'] = $year;
                     $value['hse_month'] = $hseMonth;
@@ -344,7 +344,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     $hseMonths[] = $hseMonth;
                     continue;
                 }
-                $value['work_hours'] = $workHours[$hseMonth];
+                $value['work_hours'] = is_null($num) ? $workHours[$hseMonth] : $num;
                 $value['hse_month'] = $hseMonth;
                 // Calculate the total recordable incident rate (TRIR)
                 $totalRecIncidentRate = (($value['hseir_ltc_count_vote']
