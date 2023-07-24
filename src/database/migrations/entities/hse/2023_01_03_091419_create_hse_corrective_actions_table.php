@@ -30,7 +30,7 @@ return new class extends Migration
             $table->unsignedBigInteger('work_area_id')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('unsafe_action_type_id')->nullable();
-            // $table->dateTime('opened_date')->nullable();
+            $table->dateTime('opened_at')->nullable();
             $table->text('remark')->nullable();
             $table->hasDueDate();
             $table->orderable();
