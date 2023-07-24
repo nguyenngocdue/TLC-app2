@@ -13,7 +13,7 @@ class Hse_extra_metric extends ModelExtended
         "status",
     ];
     protected $table = "hse_extra_metrics";
-    protected static $statusless = true;
+    // protected static $statusless = true;
     public static $nameless = true;
 
     public static $eloquentParams = [
