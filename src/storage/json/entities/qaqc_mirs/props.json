@@ -493,9 +493,9 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_inspected_by": {
-        "name": "_inspected_by",
-        "column_name": "inspected_by",
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
         "column_type": "bigint unsigned",
         "label": "Inspected By",
         "control": "dropdown",

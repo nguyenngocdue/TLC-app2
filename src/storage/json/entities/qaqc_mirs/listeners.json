@@ -215,9 +215,9 @@
         "listen_to_fields": "",
         "listen_to_attrs": ""
     },
-    "_inspected_by": {
-        "name": "_inspected_by",
-        "column_name": "inspected_by",
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

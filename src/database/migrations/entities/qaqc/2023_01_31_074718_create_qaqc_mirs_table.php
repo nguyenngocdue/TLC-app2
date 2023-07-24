@@ -31,31 +31,11 @@ return new class extends Migration
             $table->unsignedBigInteger('priority_id')->nullable();
             // $table->dateTime('due_date')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
-            $table->unsignedBigInteger('inspected_by')->nullable();
+            $table->unsignedBigInteger('assignee_2')->nullable();
             $table->hasDueDate();
             $table->closable();
             $table->appendCommonFields();
         });
-        // Schema::create('qaqc_mirs', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->unsignedInteger('doc_id');
-        //     $table->text('description')->nullable();
-        //     $table->string('slug')->unique();
-        //     $table->unsignedBigInteger('project_id')->nullable();
-        //     $table->unsignedBigInteger('sub_project_id')->nullable();
-        //     $table->unsignedBigInteger('prod_discipline_id')->nullable();
-        //     $table->unsignedBigInteger('priority_id')->nullable();
-        //     $table->dateTime('due_date')->nullable();
-        //     $table->unsignedBigInteger('assignee_1')->nullable();
-        //     $table->unsignedBigInteger('inspected_by')->nullable();
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->string('status')->nullable();
-        //     $table->dateTime('closed_at')->nullable();
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**

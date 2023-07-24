@@ -8,7 +8,7 @@ class Qaqc_mir extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "doc_id", "description", "slug", "project_id", "sub_project_id", "status",
-        "prod_discipline_id", "priority_id", "due_date", "assignee_1", "inspected_by", "owner_id", "closed_at"
+        "prod_discipline_id", "priority_id", "due_date", "assignee_1", "assignee_2", "owner_id", "closed_at"
     ];
     protected $table = "qaqc_mirs";
     // public static $hasDueDate = true;
@@ -19,7 +19,7 @@ class Qaqc_mir extends ModelExtended
         "getDiscipline" => ['belongsTo', Prod_discipline::class, "prod_discipline_id"],
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
-        'getInspector' => ["belongsTo", User::class, 'inspected_by'],
+        'getAssignee2' => ["belongsTo", User::class, 'assignee_2'],
 
         "attachment_mir_po" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_mir_delivery_docket" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
@@ -91,7 +91,7 @@ class Qaqc_mir extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getInspector()
+    public function getAssignee2()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

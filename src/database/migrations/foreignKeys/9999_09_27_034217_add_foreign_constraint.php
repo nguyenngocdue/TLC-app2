@@ -193,7 +193,7 @@ return new class extends Migration
             $table->foreign('prod_discipline_id')->references('id')->on('prod_disciplines');
             $table->foreign('priority_id')->references('id')->on('priorities');
             $table->foreign('assignee_1')->references('id')->on('users');
-            $table->foreign('inspected_by')->references('id')->on('users');
+            $table->foreign('assignee_2')->references('id')->on('users');
         });
         Schema::table('qaqc_wirs', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')->on('projects');
