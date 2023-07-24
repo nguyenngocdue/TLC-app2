@@ -1,4 +1,23 @@
 {
+    "_opened_at": {
+        "name": "_opened_at",
+        "column_name": "opened_at",
+        "column_type": "datetime",
+        "label": "Opened at",
+        "control": "picker_date",
+        "align": "",
+        "col_span": "6",
+        "width": "200",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": ""
+    },
     "_id": {
         "name": "_id",
         "column_name": "id",
@@ -417,12 +436,12 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_correctable_type": {
-        "name": "_correctable_type",
-        "column_name": "correctable_type",
-        "column_type": "varchar(255)",
-        "label": "Correct Type",
-        "control": "parent_type",
+    "_correctable_id": {
+        "name": "_correctable_id",
+        "column_name": "correctable_id",
+        "column_type": "bigint unsigned",
+        "label": "Correct Id",
+        "control": "text",
         "align": "",
         "col_span": "6",
         "width": "",
@@ -436,12 +455,12 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_correctable_id": {
-        "name": "_correctable_id",
-        "column_name": "correctable_id",
-        "column_type": "bigint unsigned",
-        "label": "Correct Id",
-        "control": "text",
+    "_correctable_type": {
+        "name": "_correctable_type",
+        "column_name": "correctable_type",
+        "column_type": "varchar(255)",
+        "label": "Correct Type",
+        "control": "parent_type",
         "align": "",
         "col_span": "6",
         "width": "",
