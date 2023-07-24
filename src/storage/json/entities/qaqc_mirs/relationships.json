@@ -69,10 +69,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getInspector": {
-        "name": "_getInspector",
+    "_getAssignee2": {
+        "name": "_getAssignee2",
         "relationship": "belongsTo",
-        "control_name": "inspected_by",
+        "control_name": "assignee_2",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

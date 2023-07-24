@@ -75,7 +75,7 @@
         "name": "_attachment_mir_conformity_certificate",
         "field_id": "126",
         "field_name": "attachment_mir_conformity_certificate",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -83,7 +83,7 @@
         "name": "_attachment_mir_delivery_docket",
         "field_id": "121",
         "field_name": "attachment_mir_delivery_docket",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -91,7 +91,7 @@
         "name": "_attachment_mir_general_certificate",
         "field_id": "128",
         "field_name": "attachment_mir_general_certificate",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -99,7 +99,7 @@
         "name": "_attachment_mir_invoice",
         "field_id": "122",
         "field_name": "attachment_mir_invoice",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -107,15 +107,15 @@
         "name": "_attachment_mir_material_inspection_photo",
         "field_id": "132",
         "field_name": "attachment_mir_material_inspection_photo",
-        "max_file_size": "10",
-        "max_file_count": "10",
+        "max_file_size": "30",
+        "max_file_count": "30",
         "allowed_file_types": "only_images"
     },
     "_attachment_mir_material_test_certificate": {
         "name": "_attachment_mir_material_test_certificate",
         "field_id": "125",
         "field_name": "attachment_mir_material_test_certificate",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -123,7 +123,7 @@
         "name": "_attachment_mir_material_test_report",
         "field_id": "124",
         "field_name": "attachment_mir_material_test_report",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -131,7 +131,7 @@
         "name": "_attachment_mir_non_conformity_report",
         "field_id": "129",
         "field_name": "attachment_mir_non_conformity_report",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -139,7 +139,7 @@
         "name": "_attachment_mir_packing_list",
         "field_id": "123",
         "field_name": "attachment_mir_packing_list",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -155,7 +155,7 @@
         "name": "_attachment_mir_po",
         "field_id": "120",
         "field_name": "attachment_mir_po",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -163,7 +163,7 @@
         "name": "_attachment_mir_quality_certificate",
         "field_id": "127",
         "field_name": "attachment_mir_quality_certificate",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -171,7 +171,7 @@
         "name": "_attachment_mir_safety_data_sheet",
         "field_id": "130",
         "field_name": "attachment_mir_safety_data_sheet",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -179,7 +179,7 @@
         "name": "_attachment_mir_technical_data_sheet",
         "field_id": "131",
         "field_name": "attachment_mir_technical_data_sheet",
-        "max_file_size": "10",
+        "max_file_size": "20",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },

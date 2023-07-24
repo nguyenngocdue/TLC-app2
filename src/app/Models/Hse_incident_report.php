@@ -19,7 +19,7 @@ class Hse_incident_report extends ModelExtended
         'lost_value', 'lost_unit_id',
     ];
     protected $table = "hse_incident_reports";
-    public static $nameless = true;
+    // public static $nameless = true;
 
     public static $eloquentParams = [
         'getInjuredPerson' => ["belongsTo", User::class, 'injured_person'],

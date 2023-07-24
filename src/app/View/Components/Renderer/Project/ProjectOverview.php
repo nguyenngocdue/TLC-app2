@@ -20,7 +20,8 @@ class ProjectOverview extends Component
     public function __construct(
         private $table,
         private $title = "Outstanding Tasks",
-        private $id = 1,
+        private $id = null,
+        private $modalId = "modal-over-due-documents",
     ) {
         //
     }
@@ -40,6 +41,7 @@ class ProjectOverview extends Component
                 'renderer' => 'progress-bar',
                 'title' => "<div class='flex justify-center items-center'>" . join(" ", $progressTitle) . "</div>",
                 'width' => '50%',
+                'properties' => ["modalId" => $this->modalId],
             ],
             ['dataIndex' => "total_open", 'align' => 'center'],
         ];
@@ -91,6 +93,8 @@ class ProjectOverview extends Component
                     $value['color'] = "orange";
                     break;
             }
+
+            $value['modalKey'] = $appKey . "_" . $key;
         }
         return $dataSource;
     }
@@ -99,7 +103,11 @@ class ProjectOverview extends Component
     {
         $id_column = ($this->table == 'projects') ? "project_id" : "sub_project_id";
         $items = $modelPath::query();
-        $items = $items->where($id_column, $this->id);
+        if (is_null($this->id)) {
+            // $items = $items->where($id_column, $this->id);
+        } else {
+            $items = $items->where($id_column, $this->id);
+        }
         $items = $items->whereNotIn('status', $closedArray);
         // dump($items->toSql());
         $items = $items->get();
@@ -162,8 +170,16 @@ class ProjectOverview extends Component
     public function render()
     {
         $modelPath = Str::modelPathFrom($this->table);
-        $project = $modelPath::find($this->id);
+        // dump($modelPath);
+        if (is_null($this->id)) {
+            $project = $modelPath::all();
+        } else {
+            $project = $modelPath::find($this->id);
+        }
+        // dump($project->count());
         $dataSource = $this->getDataSource();
+        // dump("Data source count " . count($dataSource));
+        // dump($dataSource);
         $modalParams = $this->makeModalParams($dataSource);
         // dump($modalParams);
 
@@ -173,6 +189,7 @@ class ProjectOverview extends Component
             'dataSource' => $dataSource,
             'modalParams' => $modalParams,
             'title' => $this->title,
+            'modalId' => $this->modalId,
         ]);
     }
 }

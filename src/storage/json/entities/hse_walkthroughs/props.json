@@ -60,7 +60,7 @@
         "name": "_workplace_id",
         "column_name": "workplace_id",
         "column_type": "bigint unsigned",
-        "label": "Location of Inspection",
+        "label": "Inspected Location",
         "control": "dropdown",
         "align": "",
         "col_span": "6",

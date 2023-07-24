@@ -181,6 +181,13 @@
         "color_index": "200",
         "icon": null
     },
+    "partially_closed": {
+        "name": "partially_closed",
+        "title": "Partially Closed",
+        "color": "cyan",
+        "color_index": "200",
+        "icon": "<i class=\"fa-solid fa-circle-check\"><\/i>"
+    },
     "passed": {
         "name": "passed",
         "title": "Passed",

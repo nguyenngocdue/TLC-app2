@@ -126,7 +126,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$newStatus = $request['status'];
 			$rules = $this->getValidationRules($oldStatus, $newStatus, __FUNCTION__, $isFakeRequest);
 			// if ($request['tableNames'] == 'fakeRequest') Log::info($rules);
-			// if ($request['tableNames'] !== 'fakeRequest') {
+			// if ($request['tableNames'] !== 'fakeRequest') 
 			if (!$isFakeRequest) {
 				$this->makeUpTableFieldForRequired($request);
 			}
@@ -149,7 +149,8 @@ trait TraitEntityCRUDStoreUpdate2
 			$fieldsHandle = $this->addEntityType($fields, 'status', $newStatus);
 			$previousValue = $this->getPreviousValue($fieldsHandle, $theRow);
 			$theRow->updateWithOptimisticLocking($fieldsHandle);
-			// $fieldForEmailHandler = $this->addEntityType($theRow->getAttributes(), 'status', $newStatus);
+			$fieldForEmailHandler = $this->addEntityType($fieldsHandle, 'created_at', $theRow->getAttributes()['created_at']);
+			$fieldForEmailHandler = $this->addEntityType($fieldForEmailHandler, 'updated_at', $theRow->getAttributes()['updated_at']);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
 			if ($uploadedIds) {
@@ -184,7 +185,7 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		$this->eventUpdatedNotificationAndMail($previousValue, $fieldsHandle, $this->type, $newStatus, $this->data, $toastrResult);
+		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $this->type, $newStatus, $this->data, $toastrResult);
 		if ($request->input('redirect_back_to_last_page')) return redirect()->back();
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}

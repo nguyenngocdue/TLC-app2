@@ -23,11 +23,23 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_getNcrs": {
+        "name": "_getNcrs",
+        "column_name": "getNcrs",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -39,7 +51,7 @@
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -51,7 +63,7 @@
         "name": "_prod_discipline_id",
         "column_name": "prod_discipline_id",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -99,7 +111,7 @@
         "name": "_priority_id",
         "column_name": "priority_id",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -110,18 +122,6 @@
     "_due_date": {
         "name": "_due_date",
         "column_name": "due_date",
-        "label": "",
-        "validation": "required",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_closed_at": {
-        "name": "_closed_at",
-        "column_name": "closed_at",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -299,26 +299,26 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "All_OwnerId",
+        "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "17",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -335,9 +335,45 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_inspected_by": {
-        "name": "_inspected_by",
-        "column_name": "inspected_by",
+    "_comment_asm_rejected_reason": {
+        "name": "_comment_asm_rejected_reason",
+        "column_name": "comment_asm_rejected_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_comment_insp_rejected_reason": {
+        "name": "_comment_insp_rejected_reason",
+        "column_name": "comment_insp_rejected_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -350,6 +386,18 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -383,9 +431,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getNcrs": {
-        "name": "_getNcrs",
-        "column_name": "getNcrs",
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
         "label": "",
         "validation": "",
         "validation_regex": "",

@@ -14,5 +14,9 @@
     "closed": {
         "name": "closed",
         "withdraw_to": ""
+    },
+    "not_applicable": {
+        "name": "not_applicable",
+        "withdraw_to": ""
     }
 }

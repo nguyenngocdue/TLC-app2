@@ -139,6 +139,11 @@ class ManageAppsController extends AbstractManageLibController
                 'editable' => true,
             ],
             [
+                'dataIndex' => 'tutorial_link',
+                'renderer' => 'text4',
+                'editable' => true,
+            ],
+            [
                 'dataIndex' => 'icon',
                 'renderer' => 'text4',
                 'editable' => true,

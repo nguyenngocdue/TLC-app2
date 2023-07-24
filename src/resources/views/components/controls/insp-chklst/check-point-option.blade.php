@@ -27,7 +27,7 @@ function registerListen(lineId, id){
 }
     var objIds = {}; 
     function updateIdsOfFail(id, name ,valueId,rowIndex,type) {
-        showOrHiddenGroupAttachmentAndComment(valueId,rowIndex,type)
+        //showOrHiddenGroupAttachmentAndComment(valueId,rowIndex,type)
         if (!Object.keys(objIds).includes(name)) {
             objIds[name] = []
             if([2,6].includes(valueId)){

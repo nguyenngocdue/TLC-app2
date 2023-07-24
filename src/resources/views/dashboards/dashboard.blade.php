@@ -7,10 +7,16 @@
 
 <div class="px-4">
     <x-elapse title="Boot the layout: "/>
+    
     <x-dashboards.bookmark-group />
     <x-elapse title="Bookmark group: " />
+
+    <x-renderer.project.project-overview table="projects" />
+    <x-elapse title="Project Overview: " />
+
     <x-dashboards.my-view-groups />
     <x-elapse title="My View: "/>
+    
     <x-dashboards.widget-groups />
     <x-elapse title="Widget group: "/>
 </div>

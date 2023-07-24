@@ -22,7 +22,7 @@
     <div>
         <x-renderer.button disabled="{{$readOnly}}" id="btnAddANewLine_{{$table01Name}}" type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
         @if(isset($tableSettings['showBtnAddFromAList']) && $tableSettings['showBtnAddFromAList'])
-            <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('{{$table01Name}}')" keydown="closeModal('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
+            <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('{{$table01Name}}')" keydownEscape="closeModal('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
             <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
         @endif
     </div>

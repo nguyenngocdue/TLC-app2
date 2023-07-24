@@ -5,6 +5,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -15,6 +16,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -25,6 +27,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -35,6 +38,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -45,6 +49,7 @@
         "toggle": "",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -55,6 +60,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -65,6 +71,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -75,6 +82,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -85,6 +93,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -95,6 +104,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -105,6 +115,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -114,7 +125,8 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -125,6 +137,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -135,6 +148,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -145,6 +159,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -155,6 +170,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -165,6 +181,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -175,6 +192,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -185,6 +203,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -195,6 +214,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -205,6 +225,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -215,6 +236,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -225,6 +247,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -235,6 +258,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -245,6 +269,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -255,6 +280,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -265,6 +291,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -275,6 +302,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -285,6 +313,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -295,6 +324,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -305,6 +335,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -315,6 +346,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -325,6 +357,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -335,6 +368,7 @@
         "toggle": "",
         "new": "true",
         "assigned": "",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "",
         "not_applicable": ""
@@ -345,6 +379,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -355,6 +390,7 @@
         "toggle": "",
         "new": "true",
         "assigned": "",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "",
         "not_applicable": ""
@@ -365,6 +401,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -375,6 +412,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -385,6 +423,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -395,6 +434,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -405,6 +445,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -415,6 +456,7 @@
         "toggle": "",
         "new": "",
         "assigned": "true",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -425,6 +467,18 @@
         "toggle": "",
         "new": "",
         "assigned": "true",
+        "partially_closed": "",
+        "rejected": "",
+        "closed": "",
+        "not_applicable": ""
+    },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -435,6 +489,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -445,6 +500,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -455,6 +511,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -465,6 +522,7 @@
         "toggle": "",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "",
         "not_applicable": ""
@@ -475,6 +533,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -485,6 +544,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
@@ -495,6 +555,7 @@
         "toggle": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""

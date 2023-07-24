@@ -10,6 +10,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null
     },
     "act_currency": {
@@ -23,6 +24,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -38,6 +40,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -53,6 +56,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>",
         "hidden_navbar": "true"
     },
@@ -67,6 +71,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-regular fa-dollar-sign\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -82,6 +87,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null
     },
     "act_travel_expense_claim_line": {
@@ -95,6 +101,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -110,6 +117,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-route\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -125,6 +133,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -140,6 +149,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-plane\"><\/i>"
     },
     "act_travel_req_line": {
@@ -153,6 +163,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden_navbar": "true"
     },
@@ -167,6 +178,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-regular fa-paperclip\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -182,6 +194,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-comments\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -197,6 +210,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -212,6 +226,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-regular fa-sitemap\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -227,6 +242,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -242,6 +258,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -257,6 +274,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -272,6 +290,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -287,6 +306,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-file-invoice\"><\/i>"
     },
     "eco_taken_action": {
@@ -300,6 +320,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-square-check\"><\/i>"
     },
     "erp_routing_link": {
@@ -313,6 +334,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-conveyor-belt-boxes\"><\/i>",
         "hidden_navbar": "true"
     },
@@ -327,6 +349,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -342,6 +365,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -357,6 +381,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -372,6 +397,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -387,6 +413,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -402,6 +429,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
     },
     "hr_overtime_request": {
@@ -415,6 +443,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-user-clock\"><\/i>",
         "apply_approval_tree": "true",
         "show_in_my_view": "true"
@@ -430,6 +459,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
@@ -446,6 +476,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
@@ -462,6 +493,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
         "apply_approval_tree": "true",
         "show_in_my_view": "true",
@@ -478,6 +510,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
         "apply_approval_tree": "true",
         "show_in_my_view": "true",
@@ -494,6 +527,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-regular fa-transporter\"><\/i>"
     },
     "hr_training_course": {
@@ -507,6 +541,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden_navbar": "true"
     },
@@ -521,6 +556,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
@@ -537,6 +573,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-badge-check\"><\/i>",
         "show_in_my_view": "true"
     },
@@ -551,6 +588,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-input-numeric\"><\/i>",
         "disallowed_direct_creation": "true"
     },
@@ -565,6 +603,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": "https:\/\/appcenter.tlcmodular.com\/hse-first-aid\/",
         "icon": "<i class=\"fa-duotone fa-bandage\"><\/i>"
     },
     "hse_incident_report": {
@@ -578,6 +617,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-user-injured\"><\/i>",
         "show_in_my_view": "true"
     },
@@ -592,6 +632,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -607,6 +648,7 @@
         "status": null,
         "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "checklist-sheet-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>",
         "disallowed_direct_creation": "true"
     },
@@ -621,6 +663,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -636,6 +679,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -651,6 +695,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -666,6 +711,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -681,6 +727,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-sheet-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden_navbar": "true"
     },
@@ -695,6 +742,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -710,6 +758,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-person-walking\"><\/i>"
     },
     "manageApis": {
@@ -723,6 +772,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -738,6 +788,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-layer-plus\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -753,6 +804,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -768,6 +820,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -783,6 +836,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -798,6 +852,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -813,6 +868,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -828,6 +884,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -843,6 +900,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -858,6 +916,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-regular fa-bars-progress\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -873,6 +932,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-icons\"><\/i>",
         "hidden": "true",
         "hidden_navbar": "true"
@@ -888,6 +948,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -903,6 +964,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-container-storage\"><\/i>"
     },
     "pj_pod": {
@@ -916,6 +978,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-sink\"><\/i>",
         "hidden_navbar": "true"
     },
@@ -930,6 +993,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-ship\"><\/i>",
         "hidden_navbar": "true"
     },
@@ -944,6 +1008,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-regular fa-circle-sort-up\"><\/i>",
         "hidden_navbar": "true"
     },
@@ -958,6 +1023,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -973,6 +1039,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -988,6 +1055,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "qr-app-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-house\"><\/i>",
         "hidden_navbar": "true"
     },
@@ -1002,6 +1070,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1017,6 +1086,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1032,6 +1102,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1047,6 +1118,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1062,6 +1134,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1077,6 +1150,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-bags-shopping\"><\/i>"
     },
     "prod_routing": {
@@ -1090,6 +1164,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1105,6 +1180,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1120,6 +1196,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1135,6 +1212,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1150,6 +1228,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-calendar\"><\/i>"
     },
     "project": {
@@ -1163,6 +1242,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "project-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-city\"><\/i>"
     },
     "public_holiday": {
@@ -1176,6 +1256,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1191,6 +1272,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-square-check\"><\/i>",
         "show_in_my_view": "true"
     },
@@ -1205,6 +1287,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-list-check\"><\/i>",
         "disallowed_direct_creation": "true"
     },
@@ -1219,6 +1302,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1234,6 +1318,7 @@
         "status": null,
         "edit_renderer": "checklist-sheet-renderer",
         "show_renderer": "checklist-sheet-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>",
         "disallowed_direct_creation": "true",
         "show_in_monitored_by_me": "true"
@@ -1249,6 +1334,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1264,6 +1350,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1279,6 +1366,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1294,6 +1382,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-list-ul\"><\/i>",
         "hidden_navbar": "true"
     },
@@ -1308,6 +1397,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1323,6 +1413,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "checklist-sheet-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
         "hidden_navbar": "true"
     },
@@ -1337,6 +1428,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1352,6 +1444,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-warehouse-full\"><\/i>",
         "show_in_my_view": "true"
     },
@@ -1366,6 +1459,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-sensor-triangle-exclamation\"><\/i>",
         "show_in_my_view": "true",
         "disallowed_direct_creation": "true"
@@ -1381,6 +1475,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-clipboard-list-check\"><\/i>",
         "show_in_my_view": "true",
         "disallowed_direct_creation": "true"
@@ -1396,6 +1491,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-file-chart-pie\"><\/i>",
         "hidden_navbar": "true"
     },
@@ -1410,6 +1506,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1425,6 +1522,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1440,6 +1538,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1455,6 +1554,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1470,6 +1570,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1485,6 +1586,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1500,6 +1602,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "project-renderer",
+        "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-hotel\"><\/i>"
     },
     "term": {
@@ -1513,6 +1616,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1528,6 +1632,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true"
     },
@@ -1542,6 +1647,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1557,6 +1663,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1572,6 +1679,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1587,6 +1695,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1602,6 +1711,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1617,6 +1727,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1632,6 +1743,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1647,6 +1759,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1662,6 +1775,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1677,6 +1791,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1692,6 +1807,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1707,6 +1823,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1722,6 +1839,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1737,6 +1855,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1752,6 +1871,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1767,6 +1887,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1782,6 +1903,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1797,6 +1919,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1812,6 +1935,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1827,6 +1951,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1842,6 +1967,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1857,6 +1983,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1872,6 +1999,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1887,6 +2015,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
@@ -1903,6 +2032,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1918,6 +2048,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1933,6 +2064,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1948,6 +2080,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1963,6 +2096,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1978,6 +2112,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"
@@ -1993,6 +2128,7 @@
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
+        "tutorial_link": null,
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true"

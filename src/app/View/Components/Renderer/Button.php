@@ -23,10 +23,11 @@ class Button extends Component
         private $onClick = '',
         private $title = '',
         private $click = '',
-        private $keydown = '',
+        private $keydownEscape = '',
         private $accesskey = '',
         private $block = false,
         private $class = '',
+        private $style = '',
         private $href = null,
         private $target = '_self',
         private $icon = null,
@@ -113,6 +114,9 @@ class Button extends Component
             case 'lg':
                 $className = "px-4 py-3 ";
                 break;
+            case 'none':
+                $className = '';
+                break;
         }
         $classList = ClassList::BUTTON . " disabled:opacity-50";
 
@@ -121,6 +125,7 @@ class Button extends Component
         return view('components.renderer.button', [
             // 'label' => $this->label,
             'className' => $className . " " . $this->class,
+            'style' => $this->style,
             'htmlType' => $this->htmlType,
             'value' => $this->value,
             'id' => $this->id,
@@ -128,7 +133,7 @@ class Button extends Component
             'onClick' => $this->onClick,
             'title' => $this->title,
             'click' => $this->click,
-            'keydown' => $this->keydown,
+            'keydownEscape' => $this->keydownEscape,
             'accesskey' => $this->accesskey,
             'href' => $this->href,
             'target' => $this->target,

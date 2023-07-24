@@ -40,21 +40,30 @@ class EntityCRUDControllerForApiRenderer extends Controller
 		$columns = [
 			['dataIndex' => 'id', 'renderer' => 'id', 'type' => $tableName, /*'align' => 'center',*/ 'width' => 100],
 			['dataIndex' => 'id', 'renderer' => 'qr-code', 'title' => 'QR Code', 'type' => $tableName, 'align' => 'center', 'width' => 60,],
+			['dataIndex' => 'due_date', 'renderer' => 'date_time', 'width' => 170],
+			['dataIndex' => 'project_name', 'width' => 100, 'align' => 'center'],
+			['dataIndex' => 'sub_project_name', 'width' => 100, 'align' => 'center'],
 			['dataIndex' => 'name', 'title' => 'Title', 'width' => 500, 'align' => 'left'],
 			['dataIndex' => 'ball_in_court', 'width' => 200, 'align' => 'left'],
 			['dataIndex' => 'status', 'renderer' => 'status', 'align' => 'center', 'width' => 150],
-			['dataIndex' => 'due_date', 'renderer' => 'date_time', 'width' => 170],
 		];
 
 		$model = Str::modelPathFrom($tableName);
 		$dataSource = $model::whereIn('id', $ids)
-			->orderBy('due_date', 'desc')
+			->with("getProject")
+			->with("getSubProject")
+			->orderBy('due_date')
 			->get();
 
 		foreach ($dataSource as &$doc) {
 			$uid = $doc->getCurrentBicId();
 			if ($uid) $doc->ball_in_court = User::findFromCache($uid)->name;
+			$doc->project_name = $doc->getProject->name;
+			$doc->sub_project_name = $doc->getSubProject->name;
 		}
+
+		// dump($dataSource);
+		// Log::info($doc);
 
 		$blade = '<x-renderer.table :columns="$columns" :dataSource="$dataSource" maxH=35 tableTrueWidth=0 ></x-renderer.table>';
 		$result = Blade::render($blade, [

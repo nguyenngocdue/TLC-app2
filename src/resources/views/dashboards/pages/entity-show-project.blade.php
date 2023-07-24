@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $appName)
-@section('title', "Overview of ".$project->name )
+@section('title', "Overview of ". $project->name )
 
 @section('content')
 <div class="p-5">
@@ -18,6 +18,7 @@
         <x-renderer.project.project-overview title="MIRs by Disciplines" table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-overview>
         <x-renderer.project.project-overview title="WIRs by Disciplines" table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-overview>
     </div> --}}
+
     <x-dashboards.widget-groups table="{{$table}}" projectId="{{$projectId}}"/>
 </div>
 @endsection

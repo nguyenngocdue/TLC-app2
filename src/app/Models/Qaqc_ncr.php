@@ -15,7 +15,7 @@ class Qaqc_ncr extends ModelExtended
         "qty_man_power", "hour_per_man", "total_hour",
     ];
     protected $table = "qaqc_ncrs";
-    public $hasDueDate = true;
+    // public static $hasDueDate = true;
 
     public static $eloquentParams = [
         "getProject" => ['belongsTo', Project::class, "project_id"],

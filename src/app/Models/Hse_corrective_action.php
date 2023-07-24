@@ -7,12 +7,15 @@ use App\BigThink\ModelExtended;
 class Hse_corrective_action extends ModelExtended
 {
     protected $fillable = [
-        'id', 'name', 'description', 'slug', 'correctable_type', 'correctable_id', 'priority_id', 'work_area_id',
-        'assignee_1', 'closed_at', 'status', 'unsafe_action_type_id', 'order_no', 'owner_id', 'remark', 'due_date'
+        'id', 'name', 'description', 'slug',
+        'correctable_type', 'correctable_id', 'priority_id', 'work_area_id',
+        'assignee_1',  'status', 'unsafe_action_type_id',
+        'order_no', 'owner_id', 'remark',
+        'due_date', 'closed_at', 'opened_at'
     ];
 
     protected $table = "hse_corrective_actions";
-    public static $nameless = true;
+    // public static $nameless = true; //Untidy
 
     public static $eloquentParams = [
         "correctable" => ['morphTo', Hse_corrective_action::class, 'correctable_type', 'correctable_id'],

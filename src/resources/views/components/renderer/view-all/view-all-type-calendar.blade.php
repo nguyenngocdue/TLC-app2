@@ -12,7 +12,7 @@
                                 class="w-40" 
                                 icon="fa-duotone fa-briefcase" 
                                 click="toggleModal('modal-task-list')"
-                                keydown="closeModal('modal-task-list')"
+                                keydownEscape="closeModal('modal-task-list')"
                                 >
                                 Task List
                             </x-renderer.button>

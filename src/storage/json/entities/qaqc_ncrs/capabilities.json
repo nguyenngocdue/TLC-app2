@@ -146,13 +146,13 @@
         "name": "dc_ws",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
+        "new": "true",
         "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
+        "assign_rejected": "true",
+        "resolved": "true",
         "rejected": "",
         "inspected": "",
-        "inspection_rejected": "",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "des_manager": {
@@ -556,6 +556,19 @@
         "rejected": "",
         "inspected": "",
         "inspection_rejected": "true",
+        "closed": ""
+    },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "qs_manager": {

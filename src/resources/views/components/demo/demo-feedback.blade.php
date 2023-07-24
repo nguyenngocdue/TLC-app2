@@ -16,7 +16,7 @@
         <div class="mb-8 grid gap-6">
             <x-renderer.button type="success" 
                 click="openModal('modal-empty-123')"
-                keydown="closeModal('modal-empty-123')"
+                keydownEscape="closeModal('modal-empty-123')"
                 >Open An Empty Modal </x-renderer.button>
             <x-modals.modal-empty modalId="modal-empty-123" />
         </div>

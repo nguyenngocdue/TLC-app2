@@ -162,6 +162,12 @@ class Breadcrumb extends Component
             $this->links[] = ['type' => 'selectDropdown', 'title' => 'View Report', 'dataSource' => $allReports, 'icon' => '<i class="fa-regular fa-file-chart-column"></i>'];
         }
     }
+    private function showButtonTutorialLink($type)
+    {
+        if (isset(LibApps::getFor($type)['tutorial_link'])) {
+            $this->links[] = ['href' => LibApps::getFor($type)['tutorial_link'], 'title' => 'Tutorial', 'icon' => '<i class="fa-solid fa-circle-info"></i>'];
+        };
+    }
     private function showButtonViewTrash($type)
     {
         if ($this->action == 'index') {
@@ -189,6 +195,7 @@ class Breadcrumb extends Component
         $this->showButtonAddNew($type);
         $this->showButtonAddNewByCloning($type);
         $this->showButtonViewReport($type);
+        $this->showButtonTutorialLink($type);
         if ($isAdmin) $this->showButtonViewTrash($type);
         if ($isAdmin) $this->showButtonWorkflow($singular);
 
