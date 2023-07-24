@@ -38,10 +38,11 @@ class Dropdown4 extends Component
             'name' => $name,
             'id' => $id,
             'selected' => $this->selected,
-            'multiple' => $this->multiple,
+            'multipleStr' => $this->multiple ? "multiple" : "",
+            'readOnlyStr' => $this->readOnly ? "readonly" : "",
+
             'classList' => ClassList::DROPDOWN,
             'table' => $table,
-            'readOnly' => $this->readOnly,
             'saveOnChange' => $this->saveOnChange,
 
             'lineType' => $this->lineType,
