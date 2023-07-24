@@ -18,7 +18,9 @@ class Qaqc_wir extends ModelExtended
     public static $nameless = true;
     public function getNameAttribute($value)
     {
-        return "[" . $this->getProdOrder->name . "] - " . $this->getWirDescription->name;
+        $prodOrder = $this->getProdOrder;
+        $wirDesc = $this->getWirDescription;
+        return "[" . ($prodOrder->name ?? "") . "] - " . ($wirDesc->name ?? "");
     }
 
     public static $eloquentParams = [
