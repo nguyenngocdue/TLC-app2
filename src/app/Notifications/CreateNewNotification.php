@@ -13,8 +13,6 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-use function PHPSTORM_META\type;
-
 class CreateNewNotification extends Notification
 {
     use TraitSupportNotification;
