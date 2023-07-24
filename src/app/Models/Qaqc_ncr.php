@@ -12,7 +12,7 @@ class Qaqc_ncr extends ModelExtended
         "prod_discipline_id", "prod_discipline_2_id", "user_team_id", "priority_id", "due_date",
         "assignee_1", "assignee_2", "cause_analysis", "owner_id", "inter_subcon_id", "defect_root_cause_id",
         "defect_disposition_id", "closed_at", "severity", "report_type",
-        "qty_man_power", "hour_per_man", "total_hour",
+        "qty_man_power", "hour_per_man", "total_hour", "defect_severity", "defect_report_type"
     ];
     protected $table = "qaqc_ncrs";
     // public static $hasDueDate = true;
