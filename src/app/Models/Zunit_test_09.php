@@ -63,7 +63,7 @@ class Zunit_test_09 extends ModelExtended
         'owner_id',
     ];
     protected $table = "zunit_test_09s";
-    public $hasDueDate = true;
+    // public static $hasDueDate = true;
     protected static $statusless = true;
 
     public static $eloquentParams = [

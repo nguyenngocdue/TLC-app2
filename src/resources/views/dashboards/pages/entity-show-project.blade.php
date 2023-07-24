@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $appName)
-@section('title', "Overview of ".$project->name )
+@section('title', "Overview of ". $project->name )
 
 @section('content')
 <div class="p-5">

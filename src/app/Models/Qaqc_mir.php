@@ -11,7 +11,7 @@ class Qaqc_mir extends ModelExtended
         "prod_discipline_id", "priority_id", "due_date", "assignee_1", "inspected_by", "owner_id", "closed_at"
     ];
     protected $table = "qaqc_mirs";
-    public $hasDueDate = true;
+    // public static $hasDueDate = true;
 
     public static $eloquentParams = [
         "getProject" => ['belongsTo', Project::class, "project_id"],

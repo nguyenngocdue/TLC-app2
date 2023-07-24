@@ -14,7 +14,7 @@ class Qaqc_wir extends ModelExtended
         "qc_total", "qc_accepted", "qc_remaining", "qc_rejected",
     ];
     protected $table = "qaqc_wirs";
-    public $hasDueDate = true;
+    // public static $hasDueDate = true;
     public static $nameless = true;
     public function getNameAttribute($value)
     {
