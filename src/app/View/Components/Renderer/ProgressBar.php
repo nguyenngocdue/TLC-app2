@@ -14,6 +14,7 @@ class ProgressBar extends Component
     public function __construct(
         private $cell = null,
         private $dataSource = null,
+        private $modalId = null,
     ) {
         //
         // dump($this->dataSource);
@@ -32,10 +33,13 @@ class ProgressBar extends Component
     {
         if (is_null($this->dataSource)) return "<div class='p-2'>dataSource is null</div>";
         $dataSource = $this->dataSource;
-        $classList = "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center";
+        $classList = "shadow-none flex flex-col1 text-xs text-center whitespace-nowrap text-white justify-center";
         return view('components.renderer.progress-bar', [
             'dataSource' => $dataSource,
             'classList' => $classList,
+
+            // 'renderAsButton' => true,
+            'modalId' => $this->modalId,
         ]);
     }
 }

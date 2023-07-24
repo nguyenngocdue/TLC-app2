@@ -21,6 +21,7 @@ class ProjectOverview extends Component
         private $table,
         private $title = "Outstanding Tasks",
         private $id = null,
+        private $modalId = "modal-over-due-documents",
     ) {
         //
     }
@@ -40,6 +41,7 @@ class ProjectOverview extends Component
                 'renderer' => 'progress-bar',
                 'title' => "<div class='flex justify-center items-center'>" . join(" ", $progressTitle) . "</div>",
                 'width' => '50%',
+                'properties' => ["modalId" => $this->modalId],
             ],
             ['dataIndex' => "total_open", 'align' => 'center'],
         ];
@@ -91,6 +93,8 @@ class ProjectOverview extends Component
                     $value['color'] = "orange";
                     break;
             }
+
+            $value['modalKey'] = $appKey . "_" . $key;
         }
         return $dataSource;
     }
@@ -185,6 +189,7 @@ class ProjectOverview extends Component
             'dataSource' => $dataSource,
             'modalParams' => $modalParams,
             'title' => $this->title,
+            'modalId' => $this->modalId,
         ]);
     }
 }
