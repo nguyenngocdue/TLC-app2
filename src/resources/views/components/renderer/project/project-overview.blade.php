@@ -11,7 +11,7 @@
             $('#progress_'+'{{$key}}').click(()=>$('#btnHidden_'+'{{$key}}').click())
         </script>
         <x-renderer.button class="hidden" id="btnHidden_{{$key}}" 
-            keydown="closeModal('{{$modalId}}')" 
+            keydownEscape="closeModal('{{$modalId}}')" 
             click="toggleModal('{{$modalId}}',{{$key}})"
             >
             Open {{$key}}
