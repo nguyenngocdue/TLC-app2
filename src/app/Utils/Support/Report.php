@@ -229,4 +229,11 @@ class Report
         return array_merge($months, $missingMonths);
     }
 
+    public static function sortByKey($data, $key) {
+        usort($data, function($a, $b) use ($key) {
+            return strtotime($a[$key]) <=> strtotime($b[$key]);
+        });
+        return $data;
+    }
+
 }
