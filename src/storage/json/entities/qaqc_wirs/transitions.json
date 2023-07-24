@@ -1,40 +1,60 @@
 {
     "new": {
         "name": "new",
+        "location": "",
         "new": "",
         "assigned": "true",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": "true"
     },
     "assigned": {
         "name": "assigned",
+        "location": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": ""
     },
-    "rejected": {
-        "name": "rejected",
+    "partially_closed": {
+        "name": "partially_closed",
+        "location": "",
         "new": "",
         "assigned": "true",
+        "partially_closed": "",
+        "rejected": "",
+        "closed": "",
+        "not_applicable": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "location": "",
+        "new": "",
+        "assigned": "true",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
     },
     "closed": {
         "name": "closed",
+        "location": "",
         "new": "",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""
     },
     "not_applicable": {
         "name": "not_applicable",
+        "location": "",
         "new": "true",
         "assigned": "",
+        "partially_closed": "",
         "rejected": "",
         "closed": "",
         "not_applicable": ""

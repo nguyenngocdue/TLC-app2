@@ -4,6 +4,7 @@
         "column_name": "id",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -11,17 +12,19 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": "",
-        "not_applicable": ""
+        "new": "true",
+        "assigned": "true",
+        "partially_closed": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_doc_id": {
         "name": "_doc_id",
         "column_name": "doc_id",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -29,17 +32,19 @@
     "_getNcrs": {
         "name": "_getNcrs",
         "column_name": "getNcrs",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": "",
-        "not_applicable": ""
+        "new": "true",
+        "assigned": "true",
+        "partially_closed": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -49,6 +54,7 @@
         "column_name": "sub_project_id",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -58,6 +64,7 @@
         "column_name": "prod_routing_id",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -67,6 +74,7 @@
         "column_name": "prod_order_id",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -76,6 +84,7 @@
         "column_name": "prod_discipline_id",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -85,6 +94,7 @@
         "column_name": "wir_description_id",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -92,17 +102,19 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": "",
-        "not_applicable": ""
+        "new": "true",
+        "assigned": "true",
+        "partially_closed": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -112,6 +124,7 @@
         "column_name": "qc_total",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -121,6 +134,7 @@
         "column_name": "qc_accepted",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -130,6 +144,7 @@
         "column_name": "qc_remaining",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -139,6 +154,7 @@
         "column_name": "qc_rejected",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -148,6 +164,7 @@
         "column_name": "priority_id",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -157,6 +174,7 @@
         "column_name": "due_date",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -166,6 +184,7 @@
         "column_name": "owner_id",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -175,6 +194,7 @@
         "column_name": "assignee_1",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -184,6 +204,47 @@
         "column_name": "getMonitors1()",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
+    },
+    "_lock_version": {
+        "name": "_lock_version",
+        "column_name": "lock_version",
+        "new": "true",
+        "assigned": "true",
+        "partially_closed": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "new": "true",
+        "assigned": "true",
+        "partially_closed": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
+    },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
+        "new": "true",
+        "assigned": "true",
+        "partially_closed": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
+    },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "new": "true",
+        "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
@@ -193,62 +254,49 @@
         "column_name": "status",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
-    },
-    "_closed_at": {
-        "name": "_closed_at",
-        "column_name": "closed_at",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": "true",
-        "not_applicable": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": "",
-        "not_applicable": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "closed": "",
-        "not_applicable": ""
-    },
-    "_lock_version": {
-        "name": "_lock_version",
-        "column_name": "lock_version",
         "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
         "not_applicable": "true"
     },
-    "_comment_rejected_reason": {
-        "name": "_comment_rejected_reason",
-        "column_name": "comment_rejected_reason",
-        "new": "",
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
-        "not_applicable": ""
+        "not_applicable": "true"
     },
-    "_comment_inspector_decision": {
-        "name": "_comment_inspector_decision",
-        "column_name": "comment_inspector_decision",
-        "new": "",
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true",
         "assigned": "true",
+        "partially_closed": "true",
         "rejected": "true",
         "closed": "true",
-        "not_applicable": ""
+        "not_applicable": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true",
+        "assigned": "true",
+        "partially_closed": "true",
+        "rejected": "true",
+        "closed": "true",
+        "not_applicable": "true"
     }
 }

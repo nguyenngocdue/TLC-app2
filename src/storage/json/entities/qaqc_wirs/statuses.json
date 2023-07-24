@@ -1,6 +1,7 @@
 [
     "new",
     "assigned",
+    "partially_closed",
     "rejected",
     "closed",
     "not_applicable"
