@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFieldHandler2;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitSendNotificationAndMail;
 use App\Models\Hr_timesheet_line;
 use App\Models\Hr_timesheet_worker;
 use App\Models\User_team_tsht;
@@ -13,8 +15,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+
 trait TraitStoreEmpty
 {
+	use TraitSendNotificationAndMail;
+	use TraitEntityFieldHandler2;
 	public function tso_week_validate($lines)
 	{
 		foreach ($lines as $value) {
@@ -77,6 +82,7 @@ trait TraitStoreEmpty
 			$item = $this->applyFormula($item, 'store');
 			// Log::info($item);
 			$createdItem = $this->modelPath::create($item);
+			$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', $this->type, $this->modelPath, []);
 			$tableName = Str::plural($this->type);
 			$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
 			$theRows[] = $createdItem;
