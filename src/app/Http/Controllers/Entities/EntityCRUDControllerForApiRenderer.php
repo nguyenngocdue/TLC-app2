@@ -40,19 +40,19 @@ class EntityCRUDControllerForApiRenderer extends Controller
 		$columns = [
 			['dataIndex' => 'id', 'renderer' => 'id', 'type' => $tableName, /*'align' => 'center',*/ 'width' => 100],
 			['dataIndex' => 'id', 'renderer' => 'qr-code', 'title' => 'QR Code', 'type' => $tableName, 'align' => 'center', 'width' => 60,],
+			['dataIndex' => 'due_date', 'renderer' => 'date_time', 'width' => 170],
 			['dataIndex' => 'project_name', 'width' => 100, 'align' => 'center'],
 			['dataIndex' => 'sub_project_name', 'width' => 100, 'align' => 'center'],
 			['dataIndex' => 'name', 'title' => 'Title', 'width' => 500, 'align' => 'left'],
 			['dataIndex' => 'ball_in_court', 'width' => 200, 'align' => 'left'],
 			['dataIndex' => 'status', 'renderer' => 'status', 'align' => 'center', 'width' => 150],
-			['dataIndex' => 'due_date', 'renderer' => 'date_time', 'width' => 170],
 		];
 
 		$model = Str::modelPathFrom($tableName);
 		$dataSource = $model::whereIn('id', $ids)
 			->with("getProject")
 			->with("getSubProject")
-			->orderBy('due_date', 'desc')
+			->orderBy('due_date')
 			->get();
 
 		foreach ($dataSource as &$doc) {
