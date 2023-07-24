@@ -1,8 +1,8 @@
 {
     "new": {
         "name": "new",
-        "label": "Create New",
-        "tooltip": "Create New"
+        "label": "Revise to New",
+        "tooltip": "Revise to New"
     },
     "assigned": {
         "name": "assigned",
