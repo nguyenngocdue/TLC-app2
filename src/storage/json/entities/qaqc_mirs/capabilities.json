@@ -125,11 +125,11 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "rejected": "",
         "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "des_manager": {
         "name": "des_manager",
@@ -166,6 +166,17 @@
     },
     "dir_nz": {
         "name": "dir_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "external_inspector": {
+        "name": "external_inspector",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -459,6 +470,17 @@
         "rejected": "",
         "inspected": "",
         "inspection_rejected": "true",
+        "closed": ""
+    },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "qs_manager": {
