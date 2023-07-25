@@ -37,6 +37,7 @@ class LoggedUserSignInHistoriesListener implements ShouldQueue
             'ip_address' => $ip,
             'owner_id' => $uid,
             'time' => Carbon::parse($time),
+            'location' => $info['location'],
             'browser' => $info['browser'],
             'browser_version' => $info['browser_version'],
             'platform' => $info['platform'],

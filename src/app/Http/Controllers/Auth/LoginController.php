@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LdapRecord\Laravel\Auth\ListensForLdapBindFailure;
 use Jenssegers\Agent\Agent;
+use Stevebauman\Location\Facades\Location;
 
 class LoginController extends Controller
 {
@@ -136,13 +137,18 @@ class LoginController extends Controller
         $agent = new Agent();
         $headers = $request->header('User-Agent');
         $agent->setUserAgent($headers);
+        
+        $ipAddress = $request->ip();
+        $location = Location::get($ipAddress);
+        $locationName = '';
+        if($location) $locationName = $location->countryName;
         $infoBrowser = [
+            'location' => $locationName,
             'browser' => $agent->browser(),
             'browser_version' => $agent->version($agent->browser()),
             'platform' => $agent->platform(),
             'device' => $agent->device(),
         ];
-        $ipAddress = $request->ip();
         $time = $request->server('REQUEST_TIME');
         event(new LoggedUserSignInHistoriesEvent(Auth::id(), $ipAddress, $time, $infoBrowser));
     }
