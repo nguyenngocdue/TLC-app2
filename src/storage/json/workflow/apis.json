@@ -275,6 +275,10 @@
         "name": "qaqc_ncrs",
         "renderTableForPopupModals": "true"
     },
+    "qaqc_wir_lines": {
+        "name": "qaqc_wir_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
     "qaqc_wirs": {
         "name": "qaqc_wirs",
         "storeEmpty_and_updateShort": "true",

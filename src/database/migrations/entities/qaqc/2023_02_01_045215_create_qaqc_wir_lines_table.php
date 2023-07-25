@@ -23,10 +23,11 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedInteger('qc_total')->nullable();
-            $table->unsignedInteger('qc_accepted')->nullable();
-            $table->unsignedInteger('qc_remaining')->nullable();
-            $table->unsignedInteger('qc_rejected')->nullable();
+            $table->integer('qc_order')->nullable();
+            $table->integer('qc_total')->nullable();
+            $table->integer('qc_accepted')->nullable();
+            $table->integer('qc_remaining')->nullable();
+            $table->integer('qc_rejected')->nullable();
             $table->unsignedBigInteger('qaqc_wir_id')->nullable();
             $table->orderable();
             $table->appendCommonFields();

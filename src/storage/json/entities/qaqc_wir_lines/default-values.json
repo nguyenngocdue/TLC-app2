@@ -35,6 +35,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_qc_order": {
+        "name": "_qc_order",
+        "column_name": "qc_order",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_qc_total": {
         "name": "_qc_total",
         "column_name": "qc_total",

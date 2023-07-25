@@ -59,7 +59,11 @@ class Qaqc_wir extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-
+    public function getLines()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function getSubProject()
     {
         $p = static::$eloquentParams[__FUNCTION__];

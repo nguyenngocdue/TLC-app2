@@ -119,39 +119,9 @@
         "closed": "true",
         "not_applicable": "true"
     },
-    "_qc_total": {
-        "name": "_qc_total",
-        "column_name": "qc_total",
-        "new": "true",
-        "assigned": "true",
-        "partially_closed": "true",
-        "rejected": "true",
-        "closed": "true",
-        "not_applicable": "true"
-    },
-    "_qc_accepted": {
-        "name": "_qc_accepted",
-        "column_name": "qc_accepted",
-        "new": "true",
-        "assigned": "true",
-        "partially_closed": "true",
-        "rejected": "true",
-        "closed": "true",
-        "not_applicable": "true"
-    },
-    "_qc_remaining": {
-        "name": "_qc_remaining",
-        "column_name": "qc_remaining",
-        "new": "true",
-        "assigned": "true",
-        "partially_closed": "true",
-        "rejected": "true",
-        "closed": "true",
-        "not_applicable": "true"
-    },
-    "_qc_rejected": {
-        "name": "_qc_rejected",
-        "column_name": "qc_rejected",
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
         "new": "true",
         "assigned": "true",
         "partially_closed": "true",
