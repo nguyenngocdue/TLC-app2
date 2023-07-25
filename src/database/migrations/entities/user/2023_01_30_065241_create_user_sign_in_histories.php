@@ -23,7 +23,11 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('ip_address');
+            $table->string('ip_address')->nullable();
+            $table->string('browser')->nullable();
+            $table->string('version')->nullable();
+            $table->string('platform')->nullable();
+            $table->string('device')->nullable();
             // $table->unsignedBigInteger('uid');
             $table->dateTime('time');
             $table->appendCommonFields();

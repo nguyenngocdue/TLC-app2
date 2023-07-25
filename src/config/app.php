@@ -171,6 +171,7 @@ return [
         Brian2694\Toastr\ToastrServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         // Spatie\Permission\PermissionServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -206,6 +207,7 @@ return [
         ->merge([
             'Image' => Intervention\Image\Facades\Image::class,
             'Redis' => Illuminate\Support\Facades\Redis::class,
+            'Agent' => Jenssegers\Agent\Facades\Agent::class,
         ])
         ->toArray(),
 ];
