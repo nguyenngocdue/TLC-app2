@@ -196,7 +196,8 @@
         "hr_timesheet_workers",
         "qaqc_wirs",
         "hr_training_lines",
-        "hse_extra_metrics"
+        "hse_extra_metrics",
+        "prod_sequences"
     ],
     "apps_have_qr_app": [
         "pj_module",

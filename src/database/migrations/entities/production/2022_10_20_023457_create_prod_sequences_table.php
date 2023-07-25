@@ -23,6 +23,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('prod_order_id');
             $table->unsignedBigInteger('prod_routing_link_id');
+            $table->unsignedBigInteger('sub_project_id')->nullable();
+            $table->unsignedBigInteger('prod_routing_id')->nullable();
+
             $table->unique(['prod_order_id', 'prod_routing_link_id']);
             $table->integer('priority')->nullable();
             $table->double('total_hours')->nullable();
@@ -33,24 +36,6 @@ return new class extends Migration
             $table->float('total_uom')->nullable();
             $table->appendCommonFields();
         });
-        // Schema::create('prod_sequences', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->unsignedBigInteger('prod_order_id');
-        //     $table->unsignedBigInteger('prod_routing_link_id');
-        //     $table->unique(['prod_order_id', 'prod_routing_link_id']);
-        //     $table->string('status')->nullable();
-        //     $table->integer('priority')->nullable();
-        //     $table->double('total_hours')->nullable();
-        //     $table->double('total_man_hours')->nullable();
-        //     $table->dateTime('expected_start_at')->nullable();
-        //     $table->dateTime('expected_finish_at')->nullable();
-        //     $table->unsignedBigInteger('uom_id')->nullable();
-        //     $table->float('total_uom')->nullable();
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**

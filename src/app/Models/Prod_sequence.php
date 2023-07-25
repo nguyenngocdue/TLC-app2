@@ -11,7 +11,8 @@ class Prod_sequence extends ModelExtended
         "prod_order_id", "prod_routing_link_id",
         "status", "total_hours", "total_man_hours",
         "expected_start_at", "expected_finish_at",
-        "priority", "uom_id", "total_uom", "owner_id"
+        "priority", "uom_id", "total_uom", "owner_id",
+        "sub_project_id", "prod_routing_id",
     ];
 
     protected $table = 'prod_sequences';
@@ -24,6 +25,9 @@ class Prod_sequence extends ModelExtended
 
         "getProdRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
+
+        "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
+        "getProdRouting" => ['belongsTo', Prod_routing::class, "prod_routing_id"],
     ];
 
     public function getProdOrder()
@@ -55,6 +59,18 @@ class Prod_sequence extends ModelExtended
     //     $p = static::$eloquentParams[__FUNCTION__];
     //     return $this->{$p[0]}($p[1], $p[2], $p[3]);
     // }
+
+    public function getSubProject()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getProdRouting()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getProdRoutingDetails()
     {
