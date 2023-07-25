@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\LoggedUserSignInHistoriesEvent;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Utils\System\GetSetCookie;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LdapRecord\Laravel\Auth\ListensForLdapBindFailure;
+use Jenssegers\Agent\Agent;
 
 class LoginController extends Controller
 {
@@ -124,17 +123,27 @@ class LoginController extends Controller
             }
             return redirect('/');
         } catch (\Throwable $th) {
-            dump("Logout Exception: ".$th->getMessage());
+            dump("Logout Exception: " . $th->getMessage());
             return redirect('/');
         }
-        
+
         // return $request->wantsJson()
         //     ? new JsonResponse([], 204)
         //     : redirect('/');
     }
-    private function loggedInfoUserSignIn($request){
+    private function loggedInfoUserSignIn($request)
+    {
+        $agent = new Agent();
+        $headers = $request->header('User-Agent');
+        $agent->setUserAgent($headers);
+        $infoBrowser = [
+            'browser' => $agent->browser(),
+            'browser_version' => $agent->version($agent->browser()),
+            'platform' => $agent->platform(),
+            'device' => $agent->device(),
+        ];
         $ipAddress = $request->ip();
         $time = $request->server('REQUEST_TIME');
-        event(new LoggedUserSignInHistoriesEvent(Auth::id(),$ipAddress,$time));
+        event(new LoggedUserSignInHistoriesEvent(Auth::id(), $ipAddress, $time, $infoBrowser));
     }
 }

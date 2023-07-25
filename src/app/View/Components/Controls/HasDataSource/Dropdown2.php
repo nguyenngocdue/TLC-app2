@@ -3,7 +3,6 @@
 namespace App\View\Components\Controls\HasDataSource;
 
 use App\Utils\ClassList;
-use App\Utils\Support\Json\DefaultValues;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
