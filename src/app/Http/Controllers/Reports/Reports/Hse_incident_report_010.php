@@ -30,129 +30,140 @@ class Hse_incident_report_010 extends Report_ParentReportController
 
         $year = isset($modeParams['year']) ? $modeParams['year'] : $currentYear;
 
-        $sql = "WITH temp_work_areas AS (
-                        SELECT wa.id
-                        FROM work_areas wa
-                        INNER JOIN workplaces wp ON wa.workplace_id = wp.id
-                        WHERE wp.id IN $strWorkplaceIds
-                    ),
-                    t1 AS (
-                        SELECT
-                            SUBSTR(hseir.issue_datetime, 1, 7) AS hse_month,
-                            NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 118 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_ltc_count_vote,
-                            NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 119 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_rwc_count_vote,
-                            NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 120 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_mtc_count_vote,
-                            NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = 107 AND hseir.status != 'new' AND hseir.incident_doc_sub_type_id IN (112,114) THEN hseir.id END), 0) AS hseir_incident_count_vote,
-                            NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = 109 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_near_miss_count_vote,
-                            NULLIF(SUM(CASE WHEN hseir.status != 'new' THEN hseir.lost_days END), 0) AS hseir_lost_day_count_vote
-                        FROM hse_incident_reports hseir
-                        WHERE 1 = 1 
-                            AND hseir.work_area_id IN (SELECT id FROM temp_work_areas)  
-                            AND SUBSTR(hseir.issue_datetime, 1, 4) = $year
-                        GROUP BY SUBSTR(hseir.issue_datetime, 1, 7)
-                    ),
-                    t2 AS (
-                        SELECT
-                                            SUBSTR(hsefa.injury_datetime, 1, 7) AS hse_month,
-                                            COUNT(CASE WHEN 1 = 1 THEN hsefa.id END) AS hsefa_count_vote
-                                        FROM hse_first_aids hsefa
-                                        WHERE 1 = 1 
-                                            AND hsefa.work_area_id IN (SELECT id FROM temp_work_areas)  
-                                            AND SUBSTR(hsefa.injury_datetime, 1, 4) = $year
-                                            AND hsefa.status = 'active'
-                                        GROUP BY SUBSTR(hsefa.injury_datetime, 1, 7)
-                    ),
-                    t3 AS (
-                        SELECT
-                                            SUBSTR(hseicshts.start_time, 1, 7) AS hse_month,
-                                            COUNT(hseicshts.id) AS hseicshts_tmpl_sht_count_vote
-                                        FROM hse_insp_chklst_shts hseicshts
-                                        WHERE 1 = 1
-                                            AND hseicshts.workplace_id IN $strWorkplaceIds
-                                            AND hseicshts.hse_insp_tmpl_sht_id = 1
-                                            AND SUBSTR(hseicshts.start_time, 1, 4) = $year
-                                            AND hseicshts.status = 'active'
-                                        GROUP BY hse_month
-                    ),
-                    t4 AS (
-                                        SELECT
-                                            SUBSTR(hsew.walkthrough_datetime, 1, 7) AS hse_month,
-                                            COUNT(hsew.id) AS hsew_count_vote
-                                        FROM hse_walkthroughs hsew
-                                        WHERE 1 = 1
-                                            AND hsew.workplace_id IN $strWorkplaceIds
-                                            AND SUBSTR(hsew.walkthrough_datetime, 1, 4) = $year
-                                            AND hsew.status = 'closed'
-                                        GROUP BY hse_month
-                    ),
-                    t5 AS (
-                        SELECT
-                                            SUBSTR(hseca.opened_at, 1, 7) AS hse_month,
-                                            #COUNT(DISTINCT CASE WHEN hsew.status = 'closed' THEN hsew.id END)hsew_count_test,
-                                            NULLIF(COUNT(DISTINCT CASE WHEN hseca.correctable_type = 'App\\\\Models\\\Hse_walkthrough' 
-                                                                OR hseca.correctable_type ='App\\\\Models\\\\Hse_insp_chklst_line' THEN hseca.id END),0) AS hseca_line_count
-                                        FROM hse_corrective_actions hseca
-                                        WHERE 1 = 1
-                                            AND hseca.work_area_id IN (SELECT id FROM temp_work_areas) 
-                                            AND SUBSTR(hseca.opened_at, 1, 4) = $year
-                                        GROUP BY hse_month
-                    ),
-                    t6 AS (
-                                        SELECT
-                                            SUBSTR(hrt.training_datetime, 1, 7) AS hse_month,
-                                            NULLIF(COUNT( CASE WHEN hrtl.training_course_id = 2 AND hrt.status = 'closed' THEN hrt.id END),0) AS hrt_line_count
-                                        FROM hr_trainings hrt, hr_training_lines hrtl
-                                        WHERE 1 = 1
-                                            AND hrt.training_location_id IN $strWorkplaceIds
-                                            AND SUBSTR(hrt.training_datetime, 1, 4) = $year
-                                            AND hrtl.hr_training_id = hrt.id
-                                        GROUP BY hse_month
-                    ),
-                    t7 AS (
-                        SELECT
-                            SUBSTR(hseem.metric_month, 1, 7) AS hse_month,
-                            MAX(hseem.total_discipline) AS discipline,
-                            MAX(hseem.total_third_party_insp_audit) AS third_party_inspection_audit,
-                            MAX(hseem.total_drill) AS drill,
-                            MAX(hseem.total_meeting_toolbox) AS total_meeting_toolbox,
-                            MAX(hseem.total_work_hours) AS hseem_total_work_hours
-                        FROM hse_extra_metrics hseem
-                        WHERE hseem.workplace_id IN $strWorkplaceIds
-                            AND SUBSTR(hseem.metric_month, 1, 4) = $year
-                            AND hseem.status = 'active'
-                        GROUP BY hse_month
-                    ),
-                    wp_ids AS (
-                        SELECT GROUP_CONCAT(id) AS wp_id_list
-                        FROM workplaces wp
-                        WHERE wp.id IN (5,6,1,2,3,4)
-                    )
+        $sql = "    WITH temp_work_areas AS (
+                    SELECT wa.id
+                    FROM work_areas wa
+                    INNER JOIN workplaces wp ON wa.workplace_id = wp.id
+                    WHERE wp.id IN $strWorkplaceIds
+                ),
+
+                -- CTE to calculate counts and sums for health, safety, and environmental incidents (hse_incident_reports)
+                t1 AS (
+                    SELECT
+                        SUBSTR(hseir.issue_datetime, 1, 7) AS hse_month,
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 118 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_ltc_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 119 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_rwc_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 120 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_mtc_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = 107 AND hseir.status != 'new' AND hseir.incident_doc_sub_type_id IN (112, 114) THEN hseir.id END), 0) AS hseir_incident_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = 109 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_near_miss_count_vote, 
+                        NULLIF(SUM(CASE WHEN hseir.status != 'new' THEN hseir.lost_days END), 0) AS hseir_lost_day_count_vote
+                    FROM hse_incident_reports hseir
+                    WHERE 
+                        hseir.work_area_id IN (SELECT id FROM temp_work_areas)  -- Filter by work areas from temp_work_areas
+                        AND SUBSTR(hseir.issue_datetime, 1, 4) = $year 
+                    GROUP BY SUBSTR(hseir.issue_datetime, 1, 7)  -- Group incidents by year and month
+                ),
+
+                -- CTE to calculate the count of first aid incidents (hse_first_aids)
+                t2 AS (
+                    SELECT
+                        SUBSTR(hsefa.injury_datetime, 1, 7) AS hse_month,
+                        COUNT(CASE WHEN 1 = 1 THEN hsefa.id END) AS hsefa_count_vote
+                    FROM hse_first_aids hsefa
+                    WHERE 
+                        hsefa.work_area_id IN (SELECT id FROM temp_work_areas)  -- Filter by work areas from temp_work_areas
+                        AND SUBSTR(hsefa.injury_datetime, 1, 4) = $year  
+                        AND hsefa.status = 'active'  
+                    GROUP BY SUBSTR(hsefa.injury_datetime, 1, 7)  
+                ),
+                t3 AS (
+                    SELECT
+                                        SUBSTR(hseicshts.start_time, 1, 7) AS hse_month,
+                                        COUNT(hseicshts.id) AS hseicshts_tmpl_sht_count_vote
+                                    FROM hse_insp_chklst_shts hseicshts
+                                    WHERE 1 = 1
+                                        AND hseicshts.workplace_id IN $strWorkplaceIds
+                                        AND hseicshts.hse_insp_tmpl_sht_id = 1
+                                        AND SUBSTR(hseicshts.start_time, 1, 4) = $year
+                                        AND hseicshts.status = 'active'
+                                    GROUP BY hse_month
+                ),
+                                    t4 AS (
+                                    SELECT
+                                        SUBSTR(hsew.walkthrough_datetime, 1, 7) AS hse_month,
+                                        COUNT(hsew.id) AS hsew_count_vote
+                                    FROM hse_walkthroughs hsew
+                                    WHERE 1 = 1
+                                        AND hsew.workplace_id IN $strWorkplaceIds
+                                        AND SUBSTR(hsew.walkthrough_datetime, 1, 4) = $year
+                                        AND hsew.status = 'closed'
+                                    GROUP BY hse_month
+                ),
+                t5 AS (
+                    SELECT
+                                        SUBSTR(hseca.opened_at, 1, 7) AS hse_month,
+                                        NULLIF(COUNT(DISTINCT CASE WHEN hseca.correctable_type = 'App\\\Models\\\Hse_walkthrough' 
+                                                            OR hseca.correctable_type ='App\\\Models\\\Hse_insp_chklst_line' THEN hseca.id END),0) AS hseca_line_count 
+                                    FROM hse_corrective_actions hseca
+                                    WHERE 1 = 1
+                                        AND hseca.work_area_id IN (SELECT id FROM temp_work_areas) 
+                                        AND SUBSTR(hseca.opened_at, 1, 4) = $year
+                                    GROUP BY hse_month
+                ),
+                t6 AS (
+                                    SELECT
+                                        SUBSTR(hrt.training_datetime, 1, 7) AS hse_month,
+                                        NULLIF(COUNT( CASE WHEN hrtl.training_course_id = 2 AND hrt.status = 'closed' THEN hrt.id END),0) AS hrt_line_count 
+                                    FROM hr_trainings hrt, hr_training_lines hrtl
+                                    WHERE 1 = 1
+                                        AND hrt.training_location_id IN $strWorkplaceIds
+                                        AND SUBSTR(hrt.training_datetime, 1, 4) = $year
+                                        AND hrtl.hr_training_id = hrt.id
+                                    GROUP BY hse_month
+                ),
+                t7 AS (
+                    SELECT
+                        SUBSTR(hseem.metric_month, 1, 7) AS hse_month,
+                        MAX(hseem.total_discipline) AS discipline,
+                        MAX(hseem.total_third_party_insp_audit) AS third_party_inspection_audit,
+                        MAX(hseem.total_drill) AS drill,
+                        MAX(hseem.total_meeting_toolbox) AS total_meeting_toolbox,
+                        MAX(hseem.total_work_hours) AS hseem_total_work_hours
+                    FROM hse_extra_metrics hseem
+                    WHERE hseem.workplace_id IN $strWorkplaceIds
+                        AND SUBSTR(hseem.metric_month, 1, 4) = 2023
+                        AND hseem.status = 'active'
+                    GROUP BY hse_month
+                ),
+                -- CTE to get a comma-separated list of workplace IDs (5, 6, 1, 2, 3, 4)
+                wp_ids AS (
+                    SELECT GROUP_CONCAT(id) AS wp_id_list
+                    FROM workplaces wp
+                    WHERE wp.id IN (5, 6, 1, 2, 3, 4)
+                ),
+
+                -- CTE to generate all months for the year 2023
+                all_months AS (
+                    SELECT '$year-01' AS month UNION
+                    SELECT '$year-02' AS month UNION
+                    SELECT '$year-03' AS month UNION
+                    SELECT '$year-04' AS month UNION
+                    SELECT '$year-05' AS month UNION
+                    SELECT '$year-06' AS month UNION
+                    SELECT '$year-07' AS month UNION
+                    SELECT '$year-08' AS month UNION
+                    SELECT '$year-09' AS month UNION
+                    SELECT '$year-10' AS month UNION
+                    SELECT '$year-11' AS month UNION
+                    SELECT '$year-12' AS month
+                )
+
+                -- Final query to include missing months and set counts to zero
+                SELECT
+                    missing_months.month AS missing_month,
+                    SUBSTR(COALESCE(t1.hse_month, t2.hse_month, missing_months.month), 1, 4) AS year,
+                    t1.*, t2.*,t3.*,t4.*, t5.*, t6.*,t7.*, wp_ids.wp_id_list
+                FROM all_months as missing_months
+                LEFT JOIN t1 ON missing_months.month = t1.hse_month
+                LEFT JOIN t2 ON missing_months.month = t2.hse_month
+                LEFT JOIN t3 ON missing_months.month = t3.hse_month
+                LEFT JOIN t4 ON missing_months.month = t4.hse_month
+                LEFT JOIN t5 ON missing_months.month = t5.hse_month
+                LEFT JOIN t6 ON missing_months.month = t6.hse_month
+                LEFT JOIN t7 ON missing_months.month = t7.hse_month
+                CROSS JOIN wp_ids
                     
-                    SELECT  
-                        SUBSTR(t1.hse_month, 1, 4) AS year,
-                        t1.hse_month AS month,
-                        t1.*,t2.*,t3.*,t4.*, t5.*, t6.*, t7.*, wp_ids.wp_id_list
-                    FROM t1
-                    LEFT JOIN t2 ON t1.hse_month = t2.hse_month
-                    LEFT JOIN t3 ON t1.hse_month = t3.hse_month
-                    LEFT JOIN t4 ON t1.hse_month = t4.hse_month
-                    LEFT JOIN t5 ON t1.hse_month = t5.hse_month
-                    LEFT JOIN t6 ON t1.hse_month = t6.hse_month
-                    LEFT JOIN t7 ON t1.hse_month = t7.hse_month
-                    CROSS JOIN wp_ids
-                    UNION
-                    SELECT  
-                        SUBSTR(t1.hse_month, 1, 4) AS year,
-                        t1.hse_month AS month,
-                        t1.*,t2.*,t3.*,t4.*, t5.*,t6.*, t7.*, wp_ids.wp_id_list
-                    FROM t1
-                    RIGHT JOIN t2 ON t1.hse_month = t2.hse_month
-                    RIGHT JOIN t3 ON t1.hse_month = t3.hse_month
-                    RIGHT JOIN t4 ON t1.hse_month = t4.hse_month
-                    RIGHT JOIN t5 ON t1.hse_month = t5.hse_month
-                    RIGHT JOIN t6 ON t1.hse_month = t6.hse_month
-                    RIGHT JOIN t7 ON t1.hse_month = t7.hse_month 
-                    CROSS JOIN wp_ids";
+        ";
         return $sql;
     }
 
@@ -308,7 +319,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
 
     protected function transformDataSource($dataSource, $modeParams)
     {
-        // dump($dataSource);
+        // dd($dataSource);
         if (is_object($dataSource)) $dataSource = array_map(fn ($item) => (array)$item, $dataSource->toArray());
         if (empty($dataSource)) return collect([]);
 
@@ -326,28 +337,27 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $data = [];
         $hseMonths = [];
         foreach ($dataSource as $value) {
-            $hseMonth = is_null($value['month']) ? $value['hse_month'] : $value['month'];
+            $hseMonth = is_null($value['missing_month']) ? $value['hse_month'] : $value['missing_month'];
             if ($hseMonth) {
                 $num = $value['hseem_total_work_hours'];
                 [$year, $month] = explode('-', $hseMonth);
                 if (!isset($workHoursOfYear[$year])) {
+                    // Set year values to null
                     $value['work_hours'] = is_null($num) ? null : $num;
                     $value['trir'] = null;
                     $value['year'] = $year;
                     $value['hse_month'] = $hseMonth;
-
                     if (!in_array($hseMonth, $hseMonths)) $data[] = $value;
                     $hseMonths[] = $hseMonth;
                     continue;
                 }
                 $workHours = $workHoursOfYear[$year];
                 if (!isset($workHours[$hseMonth])) {
-                    // Set work_hours and trir values to null
+                    // Set month values to null
                     $value['work_hours'] =  is_null($num) ? null : $num;
                     $value['trir'] = null;
                     $value['year'] = $year;
                     $value['hse_month'] = $hseMonth;
-
                     if (!in_array($hseMonth, $hseMonths)) $data[] = $value;
                     $hseMonths[] = $hseMonth;
                     continue;
@@ -366,23 +376,6 @@ class Hse_incident_report_010 extends Report_ParentReportController
             }
         }
         $dataSource = $data;
-
-        $months = array_column($dataSource, 'hse_month');
-        $addMissingMonths = Report::addMissingMonths($months);
-        $diffMonths = array_diff($addMissingMonths, $months);
-
-        $keysInDataSource = array_keys($dataSource[0]);
-
-        $data2 =  array_map(function ($item) use ($keysInDataSource) {
-            $arr = array_fill_keys($keysInDataSource, null);
-            $arr['month'] = $item;
-            $arr['year'] = substr($item, 0, 4);
-            $arr['hse_month'] = $item;
-            return $arr;
-        }, $diffMonths);
-
-        $dataSource = array_merge($dataSource, $data2);
-        // dump($dataSource);
 
         // Create a new line at the end of the table
         $fields = array_keys($dataSource[0]);
