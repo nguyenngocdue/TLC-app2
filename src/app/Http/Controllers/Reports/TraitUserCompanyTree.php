@@ -19,17 +19,18 @@ trait TraitUserCompanyTree
             $currentUser = CurrentUser::get();
             [$viewport_uids, $leaf_uids] = [$currentUser['viewport_uids'], $currentUser['leaf_uids']];
         }
-        $treeData = BuildTree::getTreeByOptions($uid, $viewport_uids, $leaf_uids, false, true);
+        $treeData = BuildTree::getTreeByOptions($uid, $viewport_uids, $leaf_uids, false, true) ;
 
         $data = [];
         if (app()->isProduction()) {
             foreach ($treeData as $value) {
-                if (!$value->show_on_beta) $data[] = $value;
+                if (!$value->show_on_beta) $data[] = $value ;
             }
         } else {
             $data = $treeData;
         }
-        // dd($treeData);
-        return $data;
+        $currentUser = [];
+        if (empty($data)) $currentUser = [(object)CurrentUser::get()->toArray()];
+        return  array_merge($currentUser ,$data);
     }
 }
