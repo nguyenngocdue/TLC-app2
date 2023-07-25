@@ -115,6 +115,9 @@
                     @endif
                     @break
                     @case ('dropdown')
+                    @php
+                        $value = $value ? $value : $default_value;
+                    @endphp
                     <x-controls.has-data-source.dropdown2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break

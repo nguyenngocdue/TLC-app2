@@ -117,6 +117,10 @@ trait TraitTableEditableDataSourceWithOld
             $msg = join(", ", $diff) . " not found in fillable of $lineModelPath.";
             echo Blade::render("<x-feedback.alert type='error' message='$msg' ></x-feedback.alert>");
         }
+        if (!in_array('id', $columns)) {
+            $msg = "ID is missing in getManyLineParams() function.";
+            echo Blade::render("<x-feedback.alert type='error' message='$msg' ></x-feedback.alert>");
+        }
     }
 
     private function attachActionColumn($table01Name, $dataSource, $isOrderable, $readOnly)

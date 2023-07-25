@@ -14,26 +14,26 @@
     "_getParent": {
         "name": "_getParent",
         "column_name": "getParent",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_doc_id": {
         "name": "_doc_id",
         "column_name": "doc_id",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_name": {
         "name": "_name",
@@ -62,14 +62,14 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_parent_type": {
         "name": "_parent_type",
@@ -230,13 +230,13 @@
     "_closed_at": {
         "name": "_closed_at",
         "column_name": "closed_at",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "_defect_root_cause_id": {
@@ -299,90 +299,6 @@
         "inspection_rejected": "",
         "closed": ""
     },
-    "_qty_man_power": {
-        "name": "_qty_man_power",
-        "column_name": "qty_man_power",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
-    "_hour_per_man": {
-        "name": "_hour_per_man",
-        "column_name": "hour_per_man",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
-    "_total_hour": {
-        "name": "_total_hour",
-        "column_name": "total_hour",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
-    "_assignee_2": {
-        "name": "_assignee_2",
-        "column_name": "assignee_2",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
     "_attachment_defect_photos": {
         "name": "_attachment_defect_photos",
         "column_name": "attachment_defect_photos",
@@ -410,6 +326,66 @@
     "_attachment_corrective_photos": {
         "name": "_attachment_corrective_photos",
         "column_name": "attachment_corrective_photos",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_attachment_corrective_pdfs": {
+        "name": "_attachment_corrective_pdfs",
+        "column_name": "attachment_corrective_pdfs",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_qty_man_power": {
+        "name": "_qty_man_power",
+        "column_name": "qty_man_power",
+        "new": "true",
+        "assigned": "",
+        "assign_rejected": "true",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_hour_per_man": {
+        "name": "_hour_per_man",
+        "column_name": "hour_per_man",
+        "new": "true",
+        "assigned": "",
+        "assign_rejected": "true",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_total_hour": {
+        "name": "_total_hour",
+        "column_name": "total_hour",
+        "new": "true",
+        "assigned": "",
+        "assign_rejected": "true",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "new": "",
         "assigned": "",
         "assign_rejected": "",
@@ -419,9 +395,21 @@
         "inspection_rejected": "",
         "closed": ""
     },
-    "_attachment_corrective_pdfs": {
-        "name": "_attachment_corrective_pdfs",
-        "column_name": "attachment_corrective_pdfs",
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
         "new": "",
         "assigned": "",
         "assign_rejected": "",
@@ -429,6 +417,18 @@
         "rejected": "",
         "inspected": "",
         "inspection_rejected": "",
+        "closed": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "_status": {
@@ -441,7 +441,7 @@
         "rejected": "true",
         "inspected": "true",
         "inspection_rejected": "true",
-        "closed": "true"
+        "closed": ""
     },
     "_created_at": {
         "name": "_created_at",

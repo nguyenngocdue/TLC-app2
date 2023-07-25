@@ -172,6 +172,7 @@ class WorkflowFields
         $result['value'] = $values->{$columnName} ?? '';
         $result['title'] = $columnName . " / " . $control;
         $defaultValue = $defaultValues[$key] ?? [];
+        $result['default_value'] = $defaultValue['default_value'] ?? "";
         $result['labelExtra'] = $defaultValue['label_extra'] ?? "";
         $result['placeholder'] = $defaultValue['placeholder'] ?? "";
         $result['controlExtra'] = $defaultValue['control_extra'] ?? "";
