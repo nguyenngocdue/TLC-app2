@@ -35,6 +35,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_getNcrs": {
+        "name": "_getNcrs",
+        "column_name": "getNcrs",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
@@ -131,6 +143,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_priority_id": {
         "name": "_priority_id",
         "column_name": "priority_id",
@@ -150,6 +174,18 @@
         "validation": "date_format:d\/m\/Y H:i|required",
         "validation_regex": "",
         "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "All_OwnerId",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -179,25 +215,37 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_lock_version": {
+        "name": "_lock_version",
+        "column_name": "lock_version",
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "All_OwnerId",
+        "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "All_DefinitionOfNew",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -210,6 +258,18 @@
         "validation": "",
         "validation_regex": "",
         "formula": "All_ClosedAt",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "All_DefinitionOfNew",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
@@ -239,9 +299,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_lock_version": {
-        "name": "_lock_version",
-        "column_name": "lock_version",
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
         "label": "",
         "validation": "",
         "validation_regex": "",

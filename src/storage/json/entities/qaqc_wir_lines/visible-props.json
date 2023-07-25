@@ -1,0 +1,77 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
+    "_qc_total": {
+        "name": "_qc_total",
+        "column_name": "qc_total",
+        "new": "true"
+    },
+    "_qc_accepted": {
+        "name": "_qc_accepted",
+        "column_name": "qc_accepted",
+        "new": "true"
+    },
+    "_qc_remaining": {
+        "name": "_qc_remaining",
+        "column_name": "qc_remaining",
+        "new": "true"
+    },
+    "_qc_rejected": {
+        "name": "_qc_rejected",
+        "column_name": "qc_rejected",
+        "new": "true"
+    },
+    "_qaqc_wir_id": {
+        "name": "_qaqc_wir_id",
+        "column_name": "qaqc_wir_id",
+        "new": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    }
+}

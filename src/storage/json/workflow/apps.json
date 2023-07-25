@@ -1480,6 +1480,20 @@
         "show_in_my_view": "true",
         "disallowed_direct_creation": "true"
     },
+    "qaqc_wir_line": {
+        "name": "qaqc_wir_line",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Qaqc Wir Line",
+        "nickname": "wirl",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null
+    },
     "reportIndex": {
         "name": "reportIndex",
         "package_tab": "application",

@@ -11,7 +11,6 @@ class Qaqc_wir extends ModelExtended
         "id", "name", "doc_id", "description", "slug", "project_id", "sub_project_id", "prod_routing_id", "status",
         "prod_discipline_id", "pj_level_id", "pj_module_type_id", "prod_order_id", "priority_id", "due_date",
         "assignee_1", "wir_description_id", "owner_id", "closed_at",
-        "qc_total", "qc_accepted", "qc_remaining", "qc_rejected",
     ];
     protected $table = "qaqc_wirs";
     // public static $hasDueDate = true;
@@ -32,7 +31,7 @@ class Qaqc_wir extends ModelExtended
         "getWirDescription" => ['belongsTo', Wir_description::class, "wir_description_id"],
         "getPriority" => ['belongsTo', Priority::class, "priority_id"],
         'getAssignee1' => ["belongsTo", User::class, 'assignee_1'],
-
+        "getLines" => ["hasMany", Qaqc_wir_line::class, "qaqc_wir_id"],
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_inspector_decision" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],

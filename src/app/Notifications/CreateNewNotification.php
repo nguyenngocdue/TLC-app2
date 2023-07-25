@@ -4,9 +4,6 @@ namespace App\Notifications;
 
 use App\Http\Controllers\Workflow\LibApps;
 use App\Mail\SendMailCreateNew;
-use App\Models\User;
-use App\Notifications\Traits\TraitSupportNotification;
-use App\Utils\Support\Json\Definitions;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -16,7 +13,6 @@ use Illuminate\Support\Str;
 
 class CreateNewNotification extends Notification
 {
-    use TraitSupportNotification;
     use Queueable;
     public $data;
     /**
