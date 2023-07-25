@@ -1485,14 +1485,17 @@
         "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
-        "title": "Qaqc Wir Line",
+        "title": "WIR Lines",
         "nickname": "wirl",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "disallowed_direct_creation": "true"
     },
     "reportIndex": {
         "name": "reportIndex",
