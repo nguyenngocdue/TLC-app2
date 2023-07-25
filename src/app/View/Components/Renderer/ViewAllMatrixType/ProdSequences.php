@@ -3,7 +3,7 @@
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Models\Prod_order;
-use App\Models\Prod_routing_link;
+use App\Models\Prod_routing;
 use App\Models\Prod_sequence;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
@@ -36,7 +36,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $this->project = $this->project ? $this->project : 5;
         $this->subProject = $this->subProject ? $this->subProject : 21;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
-        dump($this->project, $this->subProject, $this->prodRouting);
+        // dump($this->project, $this->subProject, $this->prodRouting);
     }
 
     private function getUserSettings()
@@ -51,15 +51,18 @@ class ProdSequences extends ViewAllTypeMatrixParent
 
     protected function getYAxis()
     {
-        $yAxis = $this->yAxis::orderBy('name')->get();
+        $yAxis = $this->yAxis::query()
+            ->where('sub_project_id', $this->subProject)
+            ->where('prod_routing_id', $this->prodRouting)
+            ->orderBy('name')
+            ->get();
         return $yAxis;
     }
 
     protected function getXAxis()
     {
         $result = [];
-        $data = Prod_routing_link::all();
-        // $data = Prod_routing::find($this->prodRouting)->getWirDescriptions();
+        $data = Prod_routing::find($this->prodRouting)->getProdRoutingLinks;
         foreach ($data as $line) {
             $result[] = [
                 'dataIndex' => $line->id,
@@ -75,10 +78,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected function getMatrixDataSource($xAxis)
     {
         $lines = Prod_sequence::query()
-            // ->where('')
-            ->get();
+            ->where('sub_project_id', $this->subProject)
+            ->where('prod_routing_id', $this->prodRouting);
         // dump($lines);
-        return $lines;
+        return $lines->get();
     }
 
     protected function getViewportParams()
@@ -100,7 +103,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         return [
-            ['dataIndex' => 'production_name',  'width' => 250,],
+            ['dataIndex' => 'production_name',  'width' => 300,],
             ['dataIndex' => 'quantity', 'align' => 'center', 'width' => 50, 'align' => 'right'],
         ];
     }
