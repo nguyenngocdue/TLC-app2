@@ -23,48 +23,65 @@ class Hse_incident_report_010 extends Report_ParentReportController
 
     public function getSqlStr($modeParams)
     {
+        // alias variable in SQL
+        $lti = 118;
+        $rwc = 119;
+        $mtc = 120;
+        $incident = 107;
+        $incidentProperty = 112;
+        $incidentOil = 114;
+        $nearMiss = 109;
+
+        $exceptStatusLti = 'new';
+        $exceptStatusRwc = 'new';
+        $exceptStatusMtc = 'new';
+        $exceptStatusIncident = 'new';
+        $exceptStatusNearMiss = 'new';
+        $exceptStatusLostDay = 'new';
+
+        $statusFirstAid = 'active';
+        $statusICShts = 'active';
+        $statusWalkthrough = 'closed';
+        $statusHrTraining = 'closed';
+        $statusExtraMetric = 'active';
+        
+        //params from user settings 
         $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();
         $currentYear = date('Y');
-
         $workplaceIds = isset($modeParams['many_workplace_id']) && $modeParams['many_workplace_id'][0] ? $modeParams['many_workplace_id'] : $dbWorkplaceIds;
         $strWorkplaceIds = '(' . implode(',', $workplaceIds) . ')';
-
         $year = isset($modeParams['year']) ? $modeParams['year'] : $currentYear;
-
-        $sql = "    WITH temp_work_areas AS (
+        // String SQL query
+        $sql = "WITH temp_work_areas AS (
                     SELECT wa.id
                     FROM work_areas wa
                     INNER JOIN workplaces wp ON wa.workplace_id = wp.id
                     WHERE wp.id IN $strWorkplaceIds
                 ),
-
-                -- CTE to calculate counts and sums for health, safety, and environmental incidents (hse_incident_reports)
                 t1 AS (
                     SELECT
                         SUBSTR(hseir.issue_datetime, 1, 7) AS hse_month,
-                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 118 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_ltc_count_vote, 
-                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 119 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_rwc_count_vote, 
-                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = 120 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_mtc_count_vote, 
-                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = 107 AND hseir.status != 'new' AND hseir.incident_doc_sub_type_id IN (112, 114) THEN hseir.id END), 0) AS hseir_incident_count_vote, 
-                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = 109 AND hseir.status != 'new' THEN hseir.id END), 0) AS hseir_near_miss_count_vote, 
-                        NULLIF(SUM(CASE WHEN hseir.status != 'new' THEN hseir.lost_days END), 0) AS hseir_lost_day_count_vote
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = $lti AND hseir.status != '$exceptStatusLti' THEN hseir.id END), 0) AS hseir_ltc_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = $rwc AND hseir.status != '$exceptStatusRwc' THEN hseir.id END), 0) AS hseir_rwc_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = $mtc AND hseir.status != '$exceptStatusMtc' THEN hseir.id END), 0) AS hseir_mtc_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = $incident AND hseir.status != '$exceptStatusIncident' AND hseir.incident_doc_sub_type_id IN ($incidentProperty, $incidentOil) THEN hseir.id END), 0) AS hseir_incident_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = $nearMiss AND hseir.status != '$exceptStatusNearMiss' THEN hseir.id END), 0) AS hseir_near_miss_count_vote, 
+                        NULLIF(SUM(CASE WHEN hseir.status != '$exceptStatusLostDay' THEN hseir.lost_days END), 0) AS hseir_lost_day_count_vote
                     FROM hse_incident_reports hseir
                     WHERE 
-                        hseir.work_area_id IN (SELECT id FROM temp_work_areas)  -- Filter by work areas from temp_work_areas
+                        hseir.work_area_id IN (SELECT id FROM temp_work_areas) 
                         AND SUBSTR(hseir.issue_datetime, 1, 4) = $year 
-                    GROUP BY SUBSTR(hseir.issue_datetime, 1, 7)  -- Group incidents by year and month
+                    GROUP BY SUBSTR(hseir.issue_datetime, 1, 7)  
                 ),
-
-                -- CTE to calculate the count of first aid incidents (hse_first_aids)
                 t2 AS (
                     SELECT
                         SUBSTR(hsefa.injury_datetime, 1, 7) AS hse_month,
                         COUNT(CASE WHEN 1 = 1 THEN hsefa.id END) AS hsefa_count_vote
                     FROM hse_first_aids hsefa
                     WHERE 
-                        hsefa.work_area_id IN (SELECT id FROM temp_work_areas)  -- Filter by work areas from temp_work_areas
+                        hsefa.work_area_id IN (SELECT id FROM temp_work_areas)
                         AND SUBSTR(hsefa.injury_datetime, 1, 4) = $year  
-                        AND hsefa.status = 'active'  
+                        AND hsefa.status = '$statusFirstAid'  
                     GROUP BY SUBSTR(hsefa.injury_datetime, 1, 7)  
                 ),
                 t3 AS (
@@ -76,7 +93,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                                         AND hseicshts.workplace_id IN $strWorkplaceIds
                                         AND hseicshts.hse_insp_tmpl_sht_id = 1
                                         AND SUBSTR(hseicshts.start_time, 1, 4) = $year
-                                        AND hseicshts.status = 'active'
+                                        AND hseicshts.status = '$statusICShts'
                                     GROUP BY hse_month
                 ),
                                     t4 AS (
@@ -87,7 +104,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                                     WHERE 1 = 1
                                         AND hsew.workplace_id IN $strWorkplaceIds
                                         AND SUBSTR(hsew.walkthrough_datetime, 1, 4) = $year
-                                        AND hsew.status = 'closed'
+                                        AND hsew.status = '$statusWalkthrough'
                                     GROUP BY hse_month
                 ),
                 t5 AS (
@@ -104,7 +121,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 t6 AS (
                                     SELECT
                                         SUBSTR(hrt.training_datetime, 1, 7) AS hse_month,
-                                        NULLIF(COUNT( CASE WHEN hrtl.training_course_id = 2 AND hrt.status = 'closed' THEN hrt.id END),0) AS hrt_line_count 
+                                        NULLIF(COUNT( CASE WHEN hrtl.training_course_id = 2 AND hrt.status = '$statusHrTraining' THEN hrt.id END),0) AS hrt_line_count 
                                     FROM hr_trainings hrt, hr_training_lines hrtl
                                     WHERE 1 = 1
                                         AND hrt.training_location_id IN $strWorkplaceIds
@@ -123,10 +140,9 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     FROM hse_extra_metrics hseem
                     WHERE hseem.workplace_id IN $strWorkplaceIds
                         AND SUBSTR(hseem.metric_month, 1, 4) = 2023
-                        AND hseem.status = 'active'
+                        AND hseem.status = '$statusExtraMetric'
                     GROUP BY hse_month
                 ),
-                -- CTE to get a comma-separated list of workplace IDs (5, 6, 1, 2, 3, 4)
                 wp_ids AS (
                     SELECT GROUP_CONCAT(id) AS wp_id_list
                     FROM workplaces wp
@@ -173,17 +189,17 @@ class Hse_incident_report_010 extends Report_ParentReportController
 
         $stringIcon = "class='text-base fa-duotone fa-circle-question hover:bg-blue-400 rounded'></i>";
         $notes = [
-            'hseir_ltc_count_vote' => "<br/><i title='Lost Time Incident:\nLost time incidents are the result of a work-related injury or illness, where an employer or health care professional keeps or recommends keeping an employee from doing their job.\nUpdated Aug 2022:\nLost time days are counted from the day after the incident occurred.'".$stringIcon,
-            'hseir_rwc_count_vote' => "<br/><i title='Restricted Work Case:\nRestricted work activity occurs when, as the result of a work-related injury or illness, and employer or health care professional recommends keeping an employee from doing the routine functions of their job or from working the full workday as scheduled before the injury or illness.  If a single injury or illness involved both days away from work and restricted work, count the total for each category.\nUpdated Aug 2022:\nRestricted days counted from the day after the incident occurred.'".$stringIcon,
-            'hseir_mtc_count_vote' => "<br/><i title='Medical Treatment Case:\nMedical treatment includes managing and caring for a patient for the purpose of combating of disease or disorder. Any case that that falls beyond the scope of First Aid Case is to be considered as medical treatment. The administering of prescription medicine, sutures, broken bones, etc.'".$stringIcon,
-            'hsefa_count_vote' => "<br/><i title='First Aid Case:\nFirst aid is defined as routine treatment such as non-prescription medicine, tetanus shots, wound covering (bandages, gauze pads, Steri-strips, etc.), flushing or soaking wounds on the skin surface, use of non-rigid support (elastic bandages, wraps, etc.), eye patches, simple irrigation or cotton swabs to remove foreign bodies not embedded in or adhered to the eye, irrigation, tweezers or cotton swab to remove splinters or foreign material from areas other than the eye; drilling a fingernail or toenail to relieve pressure or draining fluids from blisters; hot or cold therapy.'".$stringIcon,
-            'hseir_near_miss_count_vote' => "<br/><i title='Near Miss:\nA near miss case is where energy has been released but no consequences have been realized, i.e. a hammer was dropped but it did not injure anyone nor did any damage when it hit the surface.'".$stringIcon,
-            'trir' => "<br/><i title='Total Recordable Incident Rate:\nTotal recordable incident (LTI,RWC,MTC,OI) rate is the total number of injuries and illnesses times 200,000 divided by number of hours worked by all employees.'".$stringIcon,
-            'hseir_incident_count_vote' => "<br/><i title='Oil Spill:\nWater Soluble Chemicals with high toxicity, such as water soluble or water dispersant corrosion inhibitors, biocides, reactive substances such as oxygen scavengers, methanol, concentrated acids and bases, sodium hypochlorite which are lost into the environment. By this we mean lost to sea, air or ground. A spill of oil in a workshop which is correctly contained / cleaned up and disposed correctly is NOT a spill to the environment.'".$stringIcon,
-            'total_meeting_toolbox' => "<br/><i title='HSE Meeting :\nToolbox meeting,committee meeting,pre-start meeting,other meeting related to HSE.'".$stringIcon,
-            'hrt_line_count' => "<br/><i title='HSE Training:\nHSE induction,HSE on jobs training,Third party training.'".$stringIcon,
-            'third_party_inspection_audit' => "<br/><i title='Third party inspections:\nGovernment, ISO,Smecta,other inspections of third party or client related to HSE.'".$stringIcon,
-            'hseca_line_count' => "<br/><i title='Safety Observations Frequency Rating:\nIf we are to eliminate injuries, damage or near miss incidents, we need to focus on at-risk acts and unsafe conditions, which have not yet caused loss or harm but have the potential to. Thus we need a systematic approach to observing, correcting and recording such at-risk behaviour or unsafe situations.\nThis is generally called safety observation (or hazard observation). The expected result is that by increasing safety observation, there would be a reduction in injuries, damage or near misses – the undesired events Number of safety observations x 200,000 / Total man-hours Safety Observation Report identifying at-risk behaviour, or an unsafe condition to prevent loss or harm e.g. ACT / ROC /STOP card or similar.'".$stringIcon,
+            'hseir_ltc_count_vote' => "<br/><i title='Lost Time Incident:\nLost time incidents are the result of a work-related injury or illness, where an employer or health care professional keeps or recommends keeping an employee from doing their job.\nUpdated Aug 2022:\nLost time days are counted from the day after the incident occurred.'" . $stringIcon,
+            'hseir_rwc_count_vote' => "<br/><i title='Restricted Work Case:\nRestricted work activity occurs when, as the result of a work-related injury or illness, and employer or health care professional recommends keeping an employee from doing the routine functions of their job or from working the full workday as scheduled before the injury or illness.  If a single injury or illness involved both days away from work and restricted work, count the total for each category.\nUpdated Aug 2022:\nRestricted days counted from the day after the incident occurred.'" . $stringIcon,
+            'hseir_mtc_count_vote' => "<br/><i title='Medical Treatment Case:\nMedical treatment includes managing and caring for a patient for the purpose of combating of disease or disorder. Any case that that falls beyond the scope of First Aid Case is to be considered as medical treatment. The administering of prescription medicine, sutures, broken bones, etc.'" . $stringIcon,
+            'hsefa_count_vote' => "<br/><i title='First Aid Case:\nFirst aid is defined as routine treatment such as non-prescription medicine, tetanus shots, wound covering (bandages, gauze pads, Steri-strips, etc.), flushing or soaking wounds on the skin surface, use of non-rigid support (elastic bandages, wraps, etc.), eye patches, simple irrigation or cotton swabs to remove foreign bodies not embedded in or adhered to the eye, irrigation, tweezers or cotton swab to remove splinters or foreign material from areas other than the eye; drilling a fingernail or toenail to relieve pressure or draining fluids from blisters; hot or cold therapy.'" . $stringIcon,
+            'hseir_near_miss_count_vote' => "<br/><i title='Near Miss:\nA near miss case is where energy has been released but no consequences have been realized, i.e. a hammer was dropped but it did not injure anyone nor did any damage when it hit the surface.'" . $stringIcon,
+            'trir' => "<br/><i title='Total Recordable Incident Rate:\nTotal recordable incident (LTI,RWC,MTC,OI) rate is the total number of injuries and illnesses times 200,000 divided by number of hours worked by all employees.'" . $stringIcon,
+            'hseir_incident_count_vote' => "<br/><i title='Oil Spill:\nWater Soluble Chemicals with high toxicity, such as water soluble or water dispersant corrosion inhibitors, biocides, reactive substances such as oxygen scavengers, methanol, concentrated acids and bases, sodium hypochlorite which are lost into the environment. By this we mean lost to sea, air or ground. A spill of oil in a workshop which is correctly contained / cleaned up and disposed correctly is NOT a spill to the environment.'" . $stringIcon,
+            'total_meeting_toolbox' => "<br/><i title='HSE Meeting :\nToolbox meeting,committee meeting,pre-start meeting,other meeting related to HSE.'" . $stringIcon,
+            'hrt_line_count' => "<br/><i title='HSE Training:\nHSE induction,HSE on jobs training,Third party training.'" . $stringIcon,
+            'third_party_inspection_audit' => "<br/><i title='Third party inspections:\nGovernment, ISO,Smecta,other inspections of third party or client related to HSE.'" . $stringIcon,
+            'hseca_line_count' => "<br/><i title='Safety Observations Frequency Rating:\nIf we are to eliminate injuries, damage or near miss incidents, we need to focus on at-risk acts and unsafe conditions, which have not yet caused loss or harm but have the potential to. Thus we need a systematic approach to observing, correcting and recording such at-risk behaviour or unsafe situations.\nThis is generally called safety observation (or hazard observation). The expected result is that by increasing safety observation, there would be a reduction in injuries, damage or near misses – the undesired events Number of safety observations x 200,000 / Total man-hours Safety Observation Report identifying at-risk behaviour, or an unsafe condition to prevent loss or harm e.g. ACT / ROC /STOP card or similar.'" . $stringIcon,
         ];
 
 
@@ -219,28 +235,28 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 "width" => 60,
             ],
             [
-                "title" => "Incident (Property damage,Oil spills) {$notes['hseir_incident_count_vote']}",
+                "title" => "Incident (Property damage, Oil spills) {$notes['hseir_incident_count_vote']}",
                 "dataIndex" => "hseir_incident_count_vote",
                 "align" => "right",
-                "width" => 80,
+                "width" => 60,
             ],
             [
                 "title" => "Near Miss {$notes['hseir_near_miss_count_vote']}",
                 "dataIndex" => "hseir_near_miss_count_vote",
                 "align" => "right",
-                "width" => 80,
+                "width" => 60,
             ],
             [
                 "title" => "FAC & Medical Assistant  {$notes['hsefa_count_vote']}",
                 "dataIndex" => "hsefa_count_vote",
                 "align" => "right",
-                "width" => 80,
+                "width" => 60,
             ],
             [
                 "title" => "Lost Days",
                 "dataIndex" => "hseir_lost_day_count_vote",
                 "align" => "right",
-                "width" => 80,
+                "width" => 60,
             ],
             [
                 "title" => "HSE Inspection",
@@ -258,13 +274,13 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 "title" => "HSE Observations {$notes['hseca_line_count']}",
                 "dataIndex" => "hseca_line_count",
                 "align" => "right",
-                "width" => 80,
+                "width" => 60,
             ],
             [
                 "title" => "HSE Training & Induction (Pax) {$notes['hrt_line_count']}",
                 "dataIndex" => "hrt_line_count",
                 "align" => "right",
-                "width" => 80,
+                "width" => 60,
             ],
             [
                 "title" => "HSE Meeting Toolbox & Committee  {$notes['total_meeting_toolbox']}",
@@ -282,7 +298,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 "title" => "Third party Inspections & Audit {$notes['third_party_inspection_audit']}",
                 "dataIndex" => "third_party_inspection_audit",
                 "align" => "right",
-                "width" => 80,
+                "width" => 60,
             ],
             [
                 "title" => "Drills",
