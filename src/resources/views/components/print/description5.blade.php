@@ -7,7 +7,7 @@
                         $value = $content->toArray();
                     @endphp
                     @if (!(sizeof($value) == 0 && ($control == 'attachment')) && !$hiddenLabel)
-                        <label class='p-2 h-full w-full text-base font-medium flex col-span-{{$colSpan}} items-center justify-start col-start-1'>{{$label}}</label>
+                        <label class='p-2 h-full w-full border border-gray-600 text-base font-medium flex col-span-{{$colSpan}} items-center justify-start col-start-1'>{{$label}}</label>
                     @endif
                     @if(sizeof($value) > 0)
                         @switch($control)
