@@ -231,7 +231,7 @@
         "name": "_getLines",
         "column_name": "getLines",
         "column_type": "eloquent_prop",
-        "label": "Lines",
+        "label": "WIR Lines",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",
@@ -244,7 +244,7 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "true"
     },
     "_priority_id": {
         "name": "_priority_id",
