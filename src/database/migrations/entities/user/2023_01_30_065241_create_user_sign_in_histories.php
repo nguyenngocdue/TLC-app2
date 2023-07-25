@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('ip_address')->nullable();
             $table->string('browser')->nullable();
-            $table->string('version')->nullable();
+            $table->string('browser_version')->nullable();
             $table->string('platform')->nullable();
             $table->string('device')->nullable();
             // $table->unsignedBigInteger('uid');

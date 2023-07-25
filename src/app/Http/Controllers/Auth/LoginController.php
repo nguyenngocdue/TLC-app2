@@ -123,26 +123,27 @@ class LoginController extends Controller
             }
             return redirect('/');
         } catch (\Throwable $th) {
-            dump("Logout Exception: ".$th->getMessage());
+            dump("Logout Exception: " . $th->getMessage());
             return redirect('/');
         }
-        
+
         // return $request->wantsJson()
         //     ? new JsonResponse([], 204)
         //     : redirect('/');
     }
-    private function loggedInfoUserSignIn($request){
+    private function loggedInfoUserSignIn($request)
+    {
         $agent = new Agent();
         $headers = $request->header('User-Agent');
         $agent->setUserAgent($headers);
         $infoBrowser = [
             'browser' => $agent->browser(),
-            'version' =>$agent->version($agent->browser()),
+            'browser_version' => $agent->version($agent->browser()),
             'platform' => $agent->platform(),
             'device' => $agent->device(),
         ];
         $ipAddress = $request->ip();
         $time = $request->server('REQUEST_TIME');
-        event(new LoggedUserSignInHistoriesEvent(Auth::id(),$ipAddress,$time,$infoBrowser));
+        event(new LoggedUserSignInHistoriesEvent(Auth::id(), $ipAddress, $time, $infoBrowser));
     }
 }
