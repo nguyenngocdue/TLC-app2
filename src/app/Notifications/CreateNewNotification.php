@@ -3,9 +3,7 @@
 namespace App\Notifications;
 
 use App\Http\Controllers\Workflow\LibApps;
-use App\Models\User;
-use App\Notifications\Traits\TraitSupportNotification;
-use App\Utils\Support\Json\Definitions;
+use App\Mail\SendMailCreateNew;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -15,7 +13,6 @@ use Illuminate\Support\Str;
 
 class CreateNewNotification extends Notification
 {
-    use TraitSupportNotification;
     use Queueable;
     public $data;
     /**
@@ -51,7 +48,25 @@ class CreateNewNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return $this->sendMailCreate($this->data, $notifiable);
+        $currentValue = $this->data['currentValue'];
+        $type = $currentValue['entity_type'];
+        $id = $currentValue['id'];
+        $typePlural = Str::plural($type);
+        $routeName = "{$typePlural}.edit";
+        $routeExits = (Route::has($routeName));
+        $url =  $routeExits ? route($routeName, $id) : "#";
+        $nameUserCreated = $notifiable['name'];
+        $libApps = LibApps::getFor($type);
+        $nickNameEntity = strtoupper($libApps['nickname'] ?? $type);
+        $titleEntity = $libApps['title'];
+        $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' . $nameUserCreated . ' - ' . $titleEntity . ' - ' . config("company.name") . ' APP';
+        return (new SendMailCreateNew([
+            'name' => $nameUserCreated,
+            'url' => $url,
+        ]))
+            ->to($notifiable['email'])
+            ->subject($subjectMail)
+            ->bcc(env('MAIL_ARCHIVE_BCC', 'info@gamil.com'));
     }
 
     /**

@@ -2,26 +2,28 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Models\Prod_order;
 use App\Models\Prod_routing;
-use App\Models\Qaqc_wir;
+use App\Models\Prod_sequence;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
 use Illuminate\Support\Str;
 
-class QaqcWirs extends ViewAllTypeMatrixParent
+class ProdSequences extends ViewAllTypeMatrixParent
 {
-    use TraitViewAllFunctions;
+    // use TraitFilterMonth;
+
     private $project, $subProject, $prodRouting;
-    protected $dataIndexX = "wir_description_id";
-    protected $dataIndexY = "prod_order_id";
+    // protected $viewportMode = null;
+
+    // protected $xAxis = Prod_routing_link::class;
+    protected $dataIndexX = "prod_routing_link_id";
     protected $yAxis = Prod_order::class;
-    protected $xAxis = Wir_description::class;
+    protected $dataIndexY = "prod_order_id";
     protected $rotate45Width = 400;
-    protected $groupBy = null;
     protected $tableTrueWidth = true;
+    // protected $xAxis = Date::class;
     /**
      * Create a new component instance.
      *
@@ -47,17 +49,25 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         return [$project, $subProject, $prodRouting];
     }
 
+    protected function getYAxis()
+    {
+        $yAxis = $this->yAxis::query()
+            ->where('sub_project_id', $this->subProject)
+            ->where('prod_routing_id', $this->prodRouting)
+            ->orderBy('name')
+            ->get();
+        return $yAxis;
+    }
+
     protected function getXAxis()
     {
         $result = [];
-        $data = Prod_routing::find($this->prodRouting)->getWirDescriptions();
+        $data = Prod_routing::find($this->prodRouting)->getProdRoutingLinks;
         foreach ($data as $line) {
             $result[] = [
                 'dataIndex' => $line->id,
                 'title' => $line->name,
                 'align' => 'center',
-                'prod_discipline_id' => $line->prod_discipline_id,
-                'def_assignee' => $line->def_assignee,
                 'width' => 40,
             ];
         }
@@ -65,15 +75,13 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         return $result;
     }
 
-    protected function getYAxis()
+    protected function getMatrixDataSource($xAxis)
     {
-        $data = ($this->yAxis)::query()
+        $lines = Prod_sequence::query()
             ->where('sub_project_id', $this->subProject)
-            ->where('prod_routing_id', $this->prodRouting)
-            ->orderBy('name')
-            ->get();
-
-        return $data;
+            ->where('prod_routing_id', $this->prodRouting);
+        // dump($lines);
+        return $lines->get();
     }
 
     protected function getViewportParams()
@@ -85,28 +93,10 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         ];
     }
 
-    protected function getMatrixDataSource($xAxis)
-    {
-        $lines = Qaqc_wir::query()
-            ->where('sub_project_id', $this->subProject)
-            ->where('prod_routing_id', $this->prodRouting)
-            ->get();
-        return $lines;
-    }
-
     protected function getCreateNewParams($x, $y)
     {
-        // dump($x);
-        // dump($y);
-        // dd();
         $params = parent::getCreateNewParams($x, $y);
-        $params['project_id'] =  $this->project;
-        $params['sub_project_id'] =  $this->subProject;
-        $params['prod_routing_id'] =  $this->prodRouting;
-
-        $params['prod_order_id'] =  $y->id;
-        $params['prod_discipline_id'] =  $x['prod_discipline_id'];
-        $params['assignee_1'] =  $x['def_assignee'];
+        $params['status'] =  'new';
         return $params;
     }
 
@@ -114,17 +104,14 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     {
         return [
             ['dataIndex' => 'production_name',  'width' => 300,],
-            ['dataIndex' => 'compliance_name',  'width' => 300,],
-            ['dataIndex' => 'quantity',  'width' => 50, 'align' => 'right'],
-            // ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
+            ['dataIndex' => 'quantity', 'align' => 'center', 'width' => 50, 'align' => 'right'],
         ];
     }
 
     function getMetaObjects($y)
     {
         return [
-            'production_name' =>  $y->production_name,
-            'compliance_name' =>  $y->compliance_name,
+            'production_name' => $y->production_name,
             'quantity' => $y->quantity,
         ];
     }
