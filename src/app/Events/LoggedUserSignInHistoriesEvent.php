@@ -19,7 +19,7 @@ class LoggedUserSignInHistoriesEvent
      *
      * @return void
      */
-    public function __construct(public $uid,public $ip,public $time)
+    public function __construct(public $uid,public $ip,public $time,public $info)
     {
         //
     }

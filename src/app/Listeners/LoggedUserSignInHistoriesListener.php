@@ -32,10 +32,15 @@ class LoggedUserSignInHistoriesListener implements ShouldQueue
         $uid = $event->{'uid'};
         $ip = $event->{'ip'};
         $time = $event->{'time'};
+        $info = $event->{'info'};
         User_sign_in_history::create([
             'ip_address' => $ip,
             'owner_id' => $uid,
             'time' => Carbon::parse($time),
+            'browser' => $info['browser'],
+            'version' => $info['version'],
+            'platform' => $info['platform'],
+            'device' => $info['device'],
         ]);
     }
 }
