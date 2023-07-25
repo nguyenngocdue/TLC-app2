@@ -138,7 +138,7 @@ class LoginController extends Controller
         $headers = $request->header('User-Agent');
         $agent->setUserAgent($headers);
         
-        $ipAddress = $request->ip();
+        $ipAddress = $request->getClientIp(true);
         $location = Location::get($ipAddress);
         $locationName = '';
         if($location) $locationName = $location->countryName;
@@ -149,6 +149,7 @@ class LoginController extends Controller
             'platform' => $agent->platform(),
             'device' => $agent->device(),
         ];
+        dd($infoBrowser);
         $time = $request->server('REQUEST_TIME');
         event(new LoggedUserSignInHistoriesEvent(Auth::id(), $ipAddress, $time, $infoBrowser));
     }
