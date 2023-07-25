@@ -24,6 +24,9 @@ return [
     'qaqc_insp_tmpls' => [
         'qaqc_insp_tmpl_shts' => [],
     ],
+    'qaqc_wirs' => [
+        'qaqc_wir_lines' => [],
+    ],
     'hse_insp_tmpl_shts' => [
         'hse_insp_tmpl_lines' => [],
     ],

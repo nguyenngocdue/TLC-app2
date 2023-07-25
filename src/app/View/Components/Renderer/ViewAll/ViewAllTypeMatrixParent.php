@@ -26,6 +26,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $groupBy = 'name_for_group_by';
     protected $groupByLength = 2;
     protected $allowCreation = true;
+    protected $tableTrueWidth = false;
     /**
      * Create a new component instance.
      *
@@ -229,6 +230,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'rotate45Width' => $this->rotate45Width,
                 'groupBy' => $this->groupBy,
                 'groupByLength' => $this->groupByLength,
+                'tableTrueWidth' => $this->tableTrueWidth,
             ],
         );
     }

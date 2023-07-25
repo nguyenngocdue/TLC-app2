@@ -37,6 +37,8 @@ class ViewAllTypeMatrix extends Component
                 return Blade::render("<x-renderer.view-all-matrix-type.HrTrainingLines />");
             case "hse_extra_metrics":
                 return Blade::render("<x-renderer.view-all-matrix-type.HseExtraMetrics/>");
+            case "prod_sequences":
+                return Blade::render("<x-renderer.view-all-matrix-type.ProdSequences/>");
 
             default:
                 return "Unknown how to render matrix view for " . $this->type . " (ViewAllTypeMatrix).";

@@ -176,11 +176,15 @@ trait TraitEntityListenDataSource
         foreach ($objectRows as $row) {
             $item = [];
             foreach ($columnsWithoutOracy as $column) {
-                $item[$column] = $row->{$column};
+                $value = $row->{$column};
+                //belongsToMany EG: production routing links belongsToMany production routings
+                if ($value instanceof \Illuminate\Support\Collection) $value = $value->pluck('id');
+                $item[$column] = $value;
             }
             $objectRowsMinimal[] = $item;
         }
-        return array_map(fn ($o) => (array)$o, $objectRowsMinimal);
+        $rows = array_map(fn ($o) => (array)$o, $objectRowsMinimal);
+        return $rows;
     }
 
     private function mapIdForNameless($table, $columnsWithoutOracy)

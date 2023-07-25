@@ -102,7 +102,7 @@
         "title": "Finished",
         "color": "green",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-check\"><\/i>"
     },
     "future": {
         "name": "future",

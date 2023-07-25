@@ -19,11 +19,11 @@
         "name": "act_travel_expense_claim_lines",
         "storeEmpty_and_updateShort": "true"
     },
-    "act_travel_expense_claimables": {
-        "name": "act_travel_expense_claimables"
-    },
     "act_travel_expense_claims": {
         "name": "act_travel_expense_claims"
+    },
+    "act_travel_place_pairs": {
+        "name": "act_travel_place_pairs"
     },
     "act_travel_places": {
         "name": "act_travel_places"
@@ -221,7 +221,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "prod_sequences": {
-        "name": "prod_sequences"
+        "name": "prod_sequences",
+        "storeEmpty_and_updateShort": "true"
     },
     "projects": {
         "name": "projects"
@@ -273,6 +274,10 @@
     "qaqc_ncrs": {
         "name": "qaqc_ncrs",
         "renderTableForPopupModals": "true"
+    },
+    "qaqc_wir_lines": {
+        "name": "qaqc_wir_lines",
+        "storeEmpty_and_updateShort": "true"
     },
     "qaqc_wirs": {
         "name": "qaqc_wirs",

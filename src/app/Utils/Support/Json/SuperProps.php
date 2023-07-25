@@ -160,7 +160,7 @@ class SuperProps
     {
         $allProps = Props::getAllOf($type);
         static::overrideStandardConfig($allProps);
-        // dump($allProps);
+        // dump($type, $allProps);
         foreach ($allProps as &$prop) {
             $prop['width'] = $prop['width'] ? $prop['width'] : 100;
             $prop['col_span'] = $prop['col_span'] ? $prop['col_span'] : 12;

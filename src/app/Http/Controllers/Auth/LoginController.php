@@ -115,19 +115,22 @@ class LoginController extends Controller
         if (GetSetCookie::hasCookie('tlc_token')) {
             GetSetCookie::forgetCookie('tlc_token');
         }
-        $this->guard()->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        if ($response = $this->loggedOut($request)) {
-            return $response;
+        try {
+            $this->guard()->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            if ($response = $this->loggedOut($request)) {
+                return $response;
+            return redirect('/');
         }
+        } catch (\Throwable $th) {
+            dump("Logout Exception: ".$th->getMessage());
+            return redirect('/');
+        }
+        
         // return $request->wantsJson()
         //     ? new JsonResponse([], 204)
         //     : redirect('/');
-        return redirect('/');
     }
     private function loggedInfoUserSignIn($request){
         $ipAddress = $request->ip();

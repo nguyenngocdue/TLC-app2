@@ -26,6 +26,7 @@ class ViewAllTypeMatrixFilter extends Component
      */
     public function render()
     {
+        //qaqc_wirs.blade.php //FULL TEXT SEARCH HERE
         $params = [
             "type" => $this->type,
             "dataSource" => $this->dataSource,
