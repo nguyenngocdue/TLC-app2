@@ -21,7 +21,7 @@ trait TraitUserCompanyTree
         }
         $treeData = BuildTree::getTreeByOptions($uid, $viewport_uids, $leaf_uids, false, true) ;
 
-        $data = [];
+        
         if (app()->isProduction()) {
             foreach ($treeData as $value) {
                 if (!$value->show_on_beta) $data[] = $value ;
@@ -29,8 +29,7 @@ trait TraitUserCompanyTree
         } else {
             $data = $treeData;
         }
-        $currentUser = [];
-        if (empty($data)) $currentUser = [(object)CurrentUser::get()->toArray()];
-        return  array_merge($currentUser ,$data);
+        $data = array_merge($data ,[(object)CurrentUser::get()->toArray()]);
+        return  $data;
     }
 }
