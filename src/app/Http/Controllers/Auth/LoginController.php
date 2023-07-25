@@ -121,15 +121,16 @@ class LoginController extends Controller
             $request->session()->regenerateToken();
             if ($response = $this->loggedOut($request)) {
                 return $response;
+            return redirect('/');
         }
         } catch (\Throwable $th) {
             dump("Logout Exception: ".$th->getMessage());
+            return redirect('/');
         }
         
         // return $request->wantsJson()
         //     ? new JsonResponse([], 204)
         //     : redirect('/');
-        return redirect('/');
     }
     private function loggedInfoUserSignIn($request){
         $ipAddress = $request->ip();
