@@ -134,10 +134,10 @@ class LoginController extends Controller
     }
     private function loggedInfoUserSignIn($request)
     {
-        $agent = new Agent();
-        $headers = $request->header('User-Agent');
-        $agent->setUserAgent($headers);
         try {
+            $agent = new Agent();
+            $headers = $request->header('User-Agent');
+            $agent->setUserAgent($headers);
             $ipAddress = $request->getClientIp(true);
             $location = Location::get($ipAddress);
             $locationName = '';
@@ -149,12 +149,10 @@ class LoginController extends Controller
                 'platform' => $agent->platform(),
                 'device' => $agent->device(),
             ];
-            dd($infoBrowser);
+            $time = $request->server('REQUEST_TIME');
+            event(new LoggedUserSignInHistoriesEvent(Auth::id(), $ipAddress, $time, $infoBrowser));
         } catch (\Throwable $th) {
            dd($th->getMessage());
         }
-       
-        $time = $request->server('REQUEST_TIME');
-        event(new LoggedUserSignInHistoriesEvent(Auth::id(), $ipAddress, $time, $infoBrowser));
     }
 }
