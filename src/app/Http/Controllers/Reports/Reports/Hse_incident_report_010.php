@@ -18,7 +18,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
 
     protected $maxH = 80;
     protected $year = 2023;
-    protected $tableTrueWidth = true;
+    protected $tableTrueWidth = false;
 
     public function getSqlStr($modeParams)
     {
@@ -186,103 +186,103 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 "title" => "Work Hours",
                 "dataIndex" => "work_hours",
                 "align" => "right",
-                "width" => 100,
+                "width" => 60,
             ],
             [
                 "title" => "LTI {$notes['hseir_ltc_count_vote']}",
                 "dataIndex" => "hseir_ltc_count_vote",
                 "align" => "right",
-                "width" => 100,
+                "width" => 60,
             ],
             [
                 "title" => "RWC {$notes['hseir_rwc_count_vote']}",
                 "dataIndex" => "hseir_rwc_count_vote",
                 "align" => "right",
-                "width" => 100,
+                "width" => 60,
             ],
             [
                 "title" => "MTC {$notes['hseir_mtc_count_vote']}",
                 "dataIndex" => "hseir_mtc_count_vote",
                 "align" => "right",
-                "width" => 100,
+                "width" => 60,
             ],
             [
                 "title" => "Incident (Property damage,Oil spills) {$notes['hseir_incident_count_vote']}",
                 "dataIndex" => "hseir_incident_count_vote",
                 "align" => "right",
-                "width" => 150,
+                "width" => 80,
             ],
             [
                 "title" => "Near Miss {$notes['hseir_near_miss_count_vote']}",
                 "dataIndex" => "hseir_near_miss_count_vote",
                 "align" => "right",
-                "width" => 150,
+                "width" => 80,
             ],
             [
                 "title" => "FAC & Medical Assistant  {$notes['hsefa_count_vote']}",
                 "dataIndex" => "hsefa_count_vote",
                 "align" => "right",
-                "width" => 150,
+                "width" => 80,
             ],
             [
                 "title" => "Lost Days",
                 "dataIndex" => "hseir_lost_day_count_vote",
                 "align" => "right",
-                "width" => 100,
+                "width" => 80,
             ],
             [
                 "title" => "HSE Inspection",
                 "dataIndex" => "hseicshts_tmpl_sht_count_vote",
                 "align" => "right",
-                "width" => 180,
+                "width" => 60,
             ],
             [
                 "title" => "HSE Walkthrough",
                 "dataIndex" => "hsew_count_vote",
                 "align" => "right",
-                "width" => 100,
+                "width" => 60,
             ],
             [
                 "title" => "HSE Observations {$notes['hseca_line_count']}",
                 "dataIndex" => "hseca_line_count",
                 "align" => "right",
-                "width" => 150,
+                "width" => 80,
             ],
             [
                 "title" => "HSE Training & Induction (Pax) {$notes['hrt_line_count']}",
                 "dataIndex" => "hrt_line_count",
                 "align" => "right",
-                "width" => 150,
+                "width" => 80,
             ],
             [
                 "title" => "HSE Meeting Toolbox & Committee  {$notes['total_meeting_toolbox']}",
                 "dataIndex" => "total_meeting_toolbox",
                 "align" => "right",
-                "width" => 100,
+                "width" => 60,
             ],
             [
                 "title" => "Disciplines",
                 "dataIndex" => "discipline",
                 "align" => "right",
-                "width" => 100,
+                "width" => 60,
             ],
             [
                 "title" => "Third party Inspections & Audit {$notes['third_party_inspection_audit']}",
                 "dataIndex" => "third_party_inspection_audit",
                 "align" => "right",
-                "width" => 150,
+                "width" => 80,
             ],
             [
                 "title" => "Drills",
                 "dataIndex" => "drill",
                 "align" => "right",
-                "width" => 100,
+                "width" => 60,
             ],
             [
                 "title" => "TRIR {$notes['trir']}",
                 "dataIndex" => "trir",
                 "align" => "right",
-                "width" => 100,
+                "width" => 60,
             ],
         ];
 
