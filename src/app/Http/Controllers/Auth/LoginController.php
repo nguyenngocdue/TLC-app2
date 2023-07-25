@@ -149,7 +149,6 @@ class LoginController extends Controller
             'platform' => $agent->platform(),
             'device' => $agent->device(),
         ];
-        dd($infoBrowser);
         $time = $request->server('REQUEST_TIME');
         event(new LoggedUserSignInHistoriesEvent(Auth::id(), $ipAddress, $time, $infoBrowser));
     }
