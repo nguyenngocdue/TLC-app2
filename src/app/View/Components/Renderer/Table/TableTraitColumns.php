@@ -117,7 +117,7 @@ trait TableTraitColumns
 
     private function makeNoColumn($columns)
     {
-        $columnNo = ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center', "width" => '10'];
+        $columnNo = ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center', "width" => '50'];
         if ($this->showNo) array_unshift($columns, $columnNo);
         if ($this->showNoR) array_push($columns, $columnNo);
         return $columns;
