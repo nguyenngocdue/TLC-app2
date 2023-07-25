@@ -19,6 +19,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
     protected $maxH = 80;
     protected $year = 2023;
     protected $tableTrueWidth = false;
+    protected $pageLimit = 100;
 
     public function getSqlStr($modeParams)
     {

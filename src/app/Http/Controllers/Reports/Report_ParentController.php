@@ -31,6 +31,7 @@ abstract class Report_ParentController extends Controller
     protected $groupByLength = 7;
     protected $maxH = null;
     protected $tableTrueWidth = false;
+    protected $pageLimit = 10;
 
     public function getType()
     {
