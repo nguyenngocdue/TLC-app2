@@ -23,7 +23,8 @@
     </div>
 
     @php
-    $tc = "<x-reports.utility-report routeName='$routeName' ";
+    $tc = "
+    <x-reports.utility-report routeName='$routeName' ";
     @endphp
     {{-- <x-renderer.tag>Top Center</x-renderer.tag> --}}
     <x-renderer.table 

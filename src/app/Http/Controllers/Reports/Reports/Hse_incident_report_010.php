@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Reports\Reports;
 use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitLegendReport;
 use App\Models\Workplace;
 use App\Utils\Support\Report;
-use App\Utils\Support\StringPivotTable;
 use Illuminate\Support\Facades\DB;
 
 class Hse_incident_report_010 extends Report_ParentReportController
@@ -18,7 +18,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
 
     protected $maxH = 80;
     protected $year = 2023;
-    #protected $many_workplace_id = [2,4];
+    protected $tableTrueWidth = true;
 
     public function getSqlStr($modeParams)
     {
@@ -100,12 +100,12 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     t6 AS (
                                         SELECT
                                             SUBSTR(hrt.training_datetime, 1, 7) AS hse_month,
-                                            NULLIF(COUNT(CASE WHEN hrtl.hr_training_id = 1 AND hrt.status = 'closed' THEN hrt.id END),0) AS hrt_line_count
-                                        FROM hr_trainings hrt
-                                        JOIN hr_training_lines hrtl ON hrtl.hr_training_id = hrt.id
+                                            NULLIF(COUNT( CASE WHEN hrtl.training_course_id = 2 AND hrt.status = 'closed' THEN hrt.id END),0) AS hrt_line_count
+                                        FROM hr_trainings hrt, hr_training_lines hrtl
                                         WHERE 1 = 1
-                                            AND hrt.training_location_id IN (SELECT id FROM temp_work_areas)
+                                            AND hrt.training_location_id IN $strWorkplaceIds
                                             AND SUBSTR(hrt.training_datetime, 1, 4) = $year
+                                            AND hrtl.hr_training_id = hrt.id
                                         GROUP BY hse_month
                     ),
                     t7 AS (
@@ -158,122 +158,131 @@ class Hse_incident_report_010 extends Report_ParentReportController
 
     protected function getTableColumns($dataSource, $modeParams)
     {
-        // if (is_object($dataSource)) $dataSource = array_map(fn ($item) => (array)$item, $dataSource->items());
-        // $dataColumn = [];
-        // foreach ($dataSource[0] as $key => $value) {
-        //     $dataColumn[] = [
-        //         'dataIndex' => $key
-        //     ];
-        // }
-        // dd($dataSource);
+
+        $stringIcon = "class='text-base fa-duotone fa-circle-question hover:bg-blue-400 rounded'></i>";
+        $notes = [
+            'hseir_ltc_count_vote' => "<br/><i title='Lost Time Incident:\nLost time incidents are the result of a work-related injury or illness, where an employer or health care professional keeps or recommends keeping an employee from doing their job.\nUpdated Aug 2022:\nLost time days are counted from the day after the incident occurred.'".$stringIcon,
+            'hseir_rwc_count_vote' => "<br/><i title='Restricted Work Case:\nRestricted work activity occurs when, as the result of a work-related injury or illness, and employer or health care professional recommends keeping an employee from doing the routine functions of their job or from working the full workday as scheduled before the injury or illness.  If a single injury or illness involved both days away from work and restricted work, count the total for each category.\nUpdated Aug 2022:\nRestricted days counted from the day after the incident occurred.'".$stringIcon,
+            'hseir_mtc_count_vote' => "<br/><i title='Medical Treatment Case:\nMedical treatment includes managing and caring for a patient for the purpose of combating of disease or disorder. Any case that that falls beyond the scope of First Aid Case is to be considered as medical treatment. The administering of prescription medicine, sutures, broken bones, etc.'".$stringIcon,
+            'hsefa_count_vote' => "<br/><i title='First Aid Case:\nFirst aid is defined as routine treatment such as non-prescription medicine, tetanus shots, wound covering (bandages, gauze pads, Steri-strips, etc.), flushing or soaking wounds on the skin surface, use of non-rigid support (elastic bandages, wraps, etc.), eye patches, simple irrigation or cotton swabs to remove foreign bodies not embedded in or adhered to the eye, irrigation, tweezers or cotton swab to remove splinters or foreign material from areas other than the eye; drilling a fingernail or toenail to relieve pressure or draining fluids from blisters; hot or cold therapy.'".$stringIcon,
+            'hseir_near_miss_count_vote' => "<br/><i title='Near Miss:\nA near miss case is where energy has been released but no consequences have been realized, i.e. a hammer was dropped but it did not injure anyone nor did any damage when it hit the surface.'".$stringIcon,
+            'trir' => "<br/><i title='Total Recordable Incident Rate:\nTotal recordable incident (LTI,RWC,MTC,OI) rate is the total number of injuries and illnesses times 200,000 divided by number of hours worked by all employees.'".$stringIcon,
+            'hseir_incident_count_vote' => "<br/><i title='Oil Spill:\nWater Soluble Chemicals with high toxicity, such as water soluble or water dispersant corrosion inhibitors, biocides, reactive substances such as oxygen scavengers, methanol, concentrated acids and bases, sodium hypochlorite which are lost into the environment. By this we mean lost to sea, air or ground. A spill of oil in a workshop which is correctly contained / cleaned up and disposed correctly is NOT a spill to the environment.'".$stringIcon,
+            'total_meeting_toolbox' => "<br/><i title='HSE Meeting :\nToolbox meeting,committee meeting,pre-start meeting,other meeting related to HSE.'".$stringIcon,
+            'hrt_line_count' => "<br/><i title='HSE Training:\nHSE induction,HSE on jobs training,Third party training.'".$stringIcon,
+            'third_party_inspection_audit' => "<br/><i title='Third party inspections:\nGovernment, ISO,Smecta,other inspections of third party or client related to HSE.'".$stringIcon,
+            'hseca_line_count' => "<br/><i title='Safety Observations Frequency Rating:\nIf we are to eliminate injuries, damage or near miss incidents, we need to focus on at-risk acts and unsafe conditions, which have not yet caused loss or harm but have the potential to. Thus we need a systematic approach to observing, correcting and recording such at-risk behaviour or unsafe situations.\nThis is generally called safety observation (or hazard observation). The expected result is that by increasing safety observation, there would be a reduction in injuries, damage or near misses – the undesired events Number of safety observations x 200,000 / Total man-hours Safety Observation Report identifying at-risk behaviour, or an unsafe condition to prevent loss or harm e.g. ACT / ROC /STOP card or similar.'".$stringIcon,
+        ];
+
+
         $dataColumn = [
             [
-                'title' => 'Month',
-                'dataIndex' => 'hse_month',
-                'align' => 'center',
-                'width' => 250,
+                "title" => "Month",
+                "dataIndex" => "hse_month",
+                "align" => "center",
+                "width" => 110,
             ],
             [
-                'title' => 'Work Hours',
-                'dataIndex' => 'work_hours',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "Work Hours",
+                "dataIndex" => "work_hours",
+                "align" => "right",
+                "width" => 100,
             ],
             [
-                'title' => 'LTI',
-                'dataIndex' => 'hseir_ltc_count_vote',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "LTI {$notes['hseir_ltc_count_vote']}",
+                "dataIndex" => "hseir_ltc_count_vote",
+                "align" => "right",
+                "width" => 100,
             ],
             [
-                'title' => 'RWC',
-                'dataIndex' => 'hseir_rwc_count_vote',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "RWC {$notes['hseir_rwc_count_vote']}",
+                "dataIndex" => "hseir_rwc_count_vote",
+                "align" => "right",
+                "width" => 100,
             ],
             [
-                'title' => 'MTC',
-                'dataIndex' => 'hseir_mtc_count_vote',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "MTC {$notes['hseir_mtc_count_vote']}",
+                "dataIndex" => "hseir_mtc_count_vote",
+                "align" => "right",
+                "width" => 100,
             ],
             [
-                'title' => 'Incident (Property damage,Oil spills)',
-                'dataIndex' => 'hseir_incident_count_vote',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "Incident (Property damage,Oil spills) {$notes['hseir_incident_count_vote']}",
+                "dataIndex" => "hseir_incident_count_vote",
+                "align" => "right",
+                "width" => 150,
             ],
             [
-                'title' => 'Near Miss',
-                'dataIndex' => 'hseir_near_miss_count_vote',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "Near Miss {$notes['hseir_near_miss_count_vote']}",
+                "dataIndex" => "hseir_near_miss_count_vote",
+                "align" => "right",
+                "width" => 150,
             ],
             [
-                'title' => 'FAC & Medical Assistant ',
-                'dataIndex' => 'hsefa_count_vote',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "FAC & Medical Assistant  {$notes['hsefa_count_vote']}",
+                "dataIndex" => "hsefa_count_vote",
+                "align" => "right",
+                "width" => 150,
             ],
             [
-                'title' => 'Lost Days',
-                'dataIndex' => 'hseir_lost_day_count_vote',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "Lost Days",
+                "dataIndex" => "hseir_lost_day_count_vote",
+                "align" => "right",
+                "width" => 100,
             ],
             [
-                'title' => 'HSE Inspection ',
-                'dataIndex' => 'hseicshts_tmpl_sht_count_vote',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "HSE Inspection",
+                "dataIndex" => "hseicshts_tmpl_sht_count_vote",
+                "align" => "right",
+                "width" => 180,
             ],
             [
-                'title' => 'HSE Walkthrough',
-                'dataIndex' => 'hsew_count_vote',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "HSE Walkthrough",
+                "dataIndex" => "hsew_count_vote",
+                "align" => "right",
+                "width" => 100,
             ],
             [
-                'title' => 'HSE Observations',
-                'dataIndex' => 'hseca_line_count',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "HSE Observations {$notes['hseca_line_count']}",
+                "dataIndex" => "hseca_line_count",
+                "align" => "right",
+                "width" => 150,
             ],
             [
-                'title' => 'HSE Training & Induction (Pax)',
-                'dataIndex' => 'hrt_line_count',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "HSE Training & Induction (Pax) {$notes['hrt_line_count']}",
+                "dataIndex" => "hrt_line_count",
+                "align" => "right",
+                "width" => 150,
             ],
             [
-                'title' => 'HSE Meeting Toolbox & Committee ',
-                'dataIndex' => 'total_meeting_toolbox',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "HSE Meeting Toolbox & Committee  {$notes['total_meeting_toolbox']}",
+                "dataIndex" => "total_meeting_toolbox",
+                "align" => "right",
+                "width" => 100,
             ],
             [
-                'title' => 'Disciplines',
-                'dataIndex' => 'discipline',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "Disciplines",
+                "dataIndex" => "discipline",
+                "align" => "right",
+                "width" => 100,
             ],
             [
-                'title' => 'Third party Inspections & Audit',
-                'dataIndex' => 'third_party_inspection_audit',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "Third party Inspections & Audit {$notes['third_party_inspection_audit']}",
+                "dataIndex" => "third_party_inspection_audit",
+                "align" => "right",
+                "width" => 150,
             ],
             [
-                'title' => 'Drills',
-                'dataIndex' => 'drill',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "Drills",
+                "dataIndex" => "drill",
+                "align" => "right",
+                "width" => 100,
             ],
             [
-                'title' => 'TRIR',
-                'dataIndex' => 'trir',
-                'align' => 'right',
-                'width' => 100,
+                "title" => "TRIR {$notes['trir']}",
+                "dataIndex" => "trir",
+                "align" => "right",
+                "width" => 100,
             ],
         ];
 
@@ -297,7 +306,6 @@ class Hse_incident_report_010 extends Report_ParentReportController
     }
 
 
-
     protected function transformDataSource($dataSource, $modeParams)
     {
         // dump($dataSource);
@@ -313,7 +321,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 $workPlacesHoursOfYear[$year][] = $wp->getTotalWorkingHoursOfYear($year);
             }
         }
-        
+
         $workHoursOfYear = Report::sumAndMergeNestedKeys($workPlacesHoursOfYear);
         $data = [];
         $hseMonths = [];
@@ -327,7 +335,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     $value['trir'] = null;
                     $value['year'] = $year;
                     $value['hse_month'] = $hseMonth;
-        
+
                     if (!in_array($hseMonth, $hseMonths)) $data[] = $value;
                     $hseMonths[] = $hseMonth;
                     continue;
@@ -339,7 +347,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     $value['trir'] = null;
                     $value['year'] = $year;
                     $value['hse_month'] = $hseMonth;
-        
+
                     if (!in_array($hseMonth, $hseMonths)) $data[] = $value;
                     $hseMonths[] = $hseMonth;
                     continue;
@@ -358,13 +366,13 @@ class Hse_incident_report_010 extends Report_ParentReportController
             }
         }
         $dataSource = $data;
-        
+
         $months = array_column($dataSource, 'hse_month');
         $addMissingMonths = Report::addMissingMonths($months);
         $diffMonths = array_diff($addMissingMonths, $months);
-        
+
         $keysInDataSource = array_keys($dataSource[0]);
-        
+
         $data2 =  array_map(function ($item) use ($keysInDataSource) {
             $arr = array_fill_keys($keysInDataSource, null);
             $arr['month'] = $item;
@@ -372,7 +380,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
             $arr['hse_month'] = $item;
             return $arr;
         }, $diffMonths);
-        
+
         $dataSource = array_merge($dataSource, $data2);
         // dump($dataSource);
 
@@ -428,7 +436,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
             }
         }
         $dataSource = array_merge(array_slice($dataSource->toArray(), 0, count($dataSource) - 1), $lastElement);
-        // dd($dataSource);
+        // dump($dataSource);
         return collect($dataSource);
     }
 
