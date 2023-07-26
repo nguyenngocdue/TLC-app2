@@ -43,9 +43,9 @@
         "name": "_getHrOtrLines",
         "column_name": "getHrOtrLines",
         "new": "",
-        "pending_approval": "true",
+        "pending_approval": "",
         "rejected": "",
-        "approved": "true"
+        "approved": ""
     },
     "_getHrOtrLines1": {
         "name": "_getHrOtrLines1",

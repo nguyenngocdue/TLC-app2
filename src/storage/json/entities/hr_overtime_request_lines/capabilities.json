@@ -143,6 +143,15 @@
         "rejected": "",
         "approved": ""
     },
+    "external_inspector": {
+        "name": "external_inspector",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
     "fac_admin": {
         "name": "fac_admin",
         "name_rendered": "",
@@ -370,6 +379,15 @@
     },
     "qaqc_member": {
         "name": "qaqc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "",

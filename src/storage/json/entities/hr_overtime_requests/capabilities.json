@@ -186,7 +186,7 @@
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
-        "approved": ""
+        "approved": "true"
     },
     "hr_member": {
         "name": "hr_member",
@@ -195,7 +195,7 @@
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
-        "approved": ""
+        "approved": "true"
     },
     "hr_member_nz": {
         "name": "hr_member_nz",
@@ -384,6 +384,15 @@
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
+        "approved": ""
+    },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
         "approved": ""
     },
     "qs_manager": {
