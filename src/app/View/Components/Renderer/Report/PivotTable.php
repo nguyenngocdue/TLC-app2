@@ -71,14 +71,13 @@ class PivotTable extends Component
             $columns[] = [
                 'title' => ucwords(str_replace(' id', '', str_replace('_', ' ', $key))),
                 'dataIndex' => $key,
-                'width' => 60,
+                'width' => 100,
             ];
         }
         return $columns;
     }
 
 
-    
     public function render()
     {
         $linesData = $this->dataSource;
@@ -89,23 +88,19 @@ class PivotTable extends Component
         if ($modeType) {
             [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData,$modeType, $modeParams);
             $dataSource = $this->changeValueData($dataOutput);
-            $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
             if (PivotReport::isEmptyArray($dataOutput)) {
                 $tableColumns = $this->makeTableColumnsWhenEmptyData($modeType);
             }
         }
         $dataSource = $linesData;
         $tableColumns = $this->makeTableColumnsWhenEmptyModeType($linesData);
+        $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
         // dd($tableColumns);
         
         return view("components.renderer.report.pivot-table", [
-            // 'tableDataSource' => $dataSource,
-            // 'tableColumns' => $tableColumns,
-            // 'tableDataHeader' => $tableDataHeader,
-            // 'tableTrueWidth' => $this->tableTrueWidth,
             'tableDataSource' => $dataSource,
             'tableColumns' => $tableColumns,
-            'tableDataHeader' => [],
+            'tableDataHeader' => $tableDataHeader ?? [],
             'tableTrueWidth' => $this->tableTrueWidth,
         ]);
     }

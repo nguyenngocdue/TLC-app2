@@ -9,6 +9,11 @@ $route = $routeName ? route($routeName) : "";
             <input type="hidden" name='type_report' value="{{$typeReport}}">
             <input type="hidden" name='mode_option' value="{{$modeOption}}">
             <input type="hidden" name='form_type' value="updateParamsReport">
+            @if (!reset($columns))
+            <div class="col-span-12">
+                <x-feedback.alert type='warning' message="There are no filters to render here."></x-feedback.alert>
+            </div>
+            @else
             @foreach($columns as $key =>$value)
             @php
             $title = isset($value['title']) ? $value['title'] : ucwords(str_replace('_', " ", $value['dataIndex']));
@@ -31,6 +36,7 @@ $route = $routeName ? route($routeName) : "";
                 @endswitch
             </div>
             @endforeach
+            @endif
         </div>
     </div>
     <div class="py-2">

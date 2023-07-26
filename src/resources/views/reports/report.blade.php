@@ -4,8 +4,6 @@
 @section('title', $modeReport)
 @section('tooltip', Str::ucfirst($typeReport)." ".$mode)
 @section('content')
-
-{{-- @dd($modeParams, $tableDataSource, $tableColumns); --}}
 <div class="px-4">
     <div class="justify-end pb-5"></div>
     <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
