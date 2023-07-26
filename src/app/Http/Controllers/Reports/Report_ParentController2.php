@@ -68,25 +68,7 @@ abstract class Report_ParentController2 extends Controller
         return $collection;
     }
 
-    protected function enrichDataSource($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
 
-    protected function transformDataSource($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
-
-    protected function changeValueData($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
-
-    protected function getSheets($dataSource) // Override document report
-    {
-        return [];
-    }
     protected function getTable()
     {
         $tableName = CurrentRoute::getCurrentController();
@@ -95,12 +77,6 @@ abstract class Report_ParentController2 extends Controller
         return $tableName;
     }
 
-    private function paginateDataSource($dataSource, $pageLimit)
-    {
-        $page = $_GET['page'] ?? 1;
-        $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))->appends(request()->query());
-        return $dataSource;
-    }
 
     protected function getPageParam($typeReport, $entity)
     {
@@ -111,25 +87,6 @@ abstract class Report_ParentController2 extends Controller
             return $pageLimit;
         }
         return 10;
-    }
-
-    protected function getDefaultValueModeParams($modeParams, $request)
-    {
-        return $modeParams;
-    }
-
-    protected function getColorLegends()
-    {
-        return [];
-    }
-
-    protected function modeColumns()        // dd($dataModeControl);
-    {
-        return [
-            'title' => 'Mode',
-            'dataIndex' => 'mode_option',
-            'allowClear' => true
-        ];
     }
 
     protected function forwardToMode($request, $modeParams)
@@ -150,13 +107,13 @@ abstract class Report_ParentController2 extends Controller
     private function makeModeTitleReport($routeName)
     {
         $lib = LibReports::getAll();
-        $title = $lib[$routeName]['title'] ??'Empty Title';
+        $title = $lib[$routeName]['title'] ?? 'Empty Title';
         return $title;
     }
 
     protected function getParamColumns($dataSource, $modeType)
     {
-        if(!$modeType) return [[]];
+        if (!$modeType) return [[]];
         $filters = $this->getDataFields($dataSource, $modeType)['filters'];
         $colParams = [];
         foreach ($filters as $key => $values) {
@@ -188,16 +145,14 @@ abstract class Report_ParentController2 extends Controller
         $entity = CurrentPathInfo::getEntityReport($request);
         $currentUserId = Auth::id();
         $modeParams = $this->getModeParams($request);
-        $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
-        
+
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $modeParams);
         }
         $dataSource = $this->getDataSource($modeParams);
-        $dataSource = $this->changeValueData($dataSource, $modeParams);
         $pageLimit = $this->getPageParam($typeReport, $entity);
-        
-        
+
+
         $viewName =  CurrentPathInfo::getViewName($request);
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
 
@@ -209,7 +164,7 @@ abstract class Report_ParentController2 extends Controller
 
         return view('reports.' . $viewName, [
             'typeOfView' => $this->typeView,
-            'modeType'=>$this->modeType,
+            'modeType' => $this->modeType,
             'maxH' => $this->maxH,
             'entity' => $entity,
             'mode' => $this->mode,
@@ -221,35 +176,40 @@ abstract class Report_ParentController2 extends Controller
             'currentMode' =>  $this->mode,
             'tableColumns' => $tableColumns,
             'paramColumns' => $paramColumns,
-            'tableDataSource' => $dataSource,
             'currentUserId' => $currentUserId,
             'groupBy' => $this->groupBy,
-            'modeOptions' => $this->$entity(),
+            // 'modeOptions' => $this->$entity(),
             'tableDataHeader' => $tableDataHeader,
             'rotate45Width' => $this->rotate45Width,
             'groupByLength' => $this->groupByLength,
             'topTitle' => $this->getMenuTitle(),
-            'modeColumns' => $this->modeColumns(),
-            'legendColors' => $this->getColorLegends(),
             'tableTrueWidth' => $this->tableTrueWidth,
         ]);
     }
-    protected function modifyDataToExportCSV($dataSource)
+
+    private function triggerDataFollowManagePivot($linesData, $modeType, $modeParams)
     {
-        return $dataSource;
+        $fn = (new DataPivotTable2);
+        $data = $fn->makeDataPivotTable($linesData, $modeType, $modeParams);
+        return $data;
     }
 
     public function exportCSV(Request $request)
     {
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
         $modeParams = $this->getModeParams($request, '_ep');
-        $dataSource = $this->getDataSource($modeParams);
-        $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        $dataSource = $this->transformDataSource($dataSource, $modeParams);
-        $dataSource = $this->modifyDataToExportCSV($dataSource);
-        // dd($modeParams, $dataSource);
-        [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $modeParams);
-        $rows = $this->makeRowsFollowColumns($dataSource, $columnKeys);
+        $linesData = $this->getDataSource($modeParams);
+        $modeType = $this->modeType;
+        // Pivot data before render 
+
+        if ($modeType) {
+            [$dataOutput, $tableColumns,] = $this->triggerDataFollowManagePivot($linesData, $modeType, $modeParams);
+            [$columnKeys, $columnNames] = $this->makeColumnsPivotTable($dataOutput, $modeParams, $tableColumns);
+        } else {
+            [$columnKeys, $columnNames] = $this->makeColumns($linesData, $modeParams);
+        }
+
+        $rows = $this->makeRowsFollowColumns($dataOutput, $columnKeys);
         $fileName = $entity . '_' . date('d:m:Y H:i:s') . '.csv';
         $headers = array(
             "Content-type"        => "text/csv",
@@ -258,57 +218,28 @@ abstract class Report_ParentController2 extends Controller
             "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
             "Expires"             => "0"
         );
-        // $columnKeys = array_combine($columnKeys, $columnKeys);
         $callback = function () use ($rows, $columnKeys, $columnNames) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columnNames);
             $array = [];
             foreach ($rows as $row) {
                 foreach ($columnKeys as $key) {
-                    $array[$key] = $row[$key];
+                    $array[$key] = $row[$key] ?? '';
                 }
                 fputcsv($file, $array);
             }
             fclose($file);
-            // Log::info($array);
         };
         return response()->stream($callback, 200, $headers);
+    }
+
+    protected function modifyDataToExportCSV($dataSource)
+    {
+        return $dataSource;
     }
 
     protected function getJS()
     {
         return "";
     }
-
-    // public function exportCSV(Request $request)
-    // {
-    //     $entity = CurrentPathInfo::getEntityReport($request, '_ep');
-    //     $modeParams = $this->getModeParams($request, '_ep');
-    //     $linesData = $this->getDataSource1($modeParams);
-    //     // Pivot data before render 
-    //     [$dataOutput, $tableColumns,] = $this->triggerDataFollowManagePivot($linesData, $modeParams);
-    //     [$columnKeys, $columnNames] = $this->makeColumnsPivotTable($dataOutput, $modeParams, $tableColumns);
-    //     $rows = $this->makeRowsFollowColumns($dataOutput, $columnKeys);
-    //     $fileName = $entity . '_' . date('d:m:Y H:i:s') . '.csv';
-    //     $headers = array(
-    //         "Content-type"        => "text/csv",
-    //         "Content-Disposition" => "attachment; filename=$fileName",
-    //         "Pragma"              => "no-cache",
-    //         "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-    //         "Expires"             => "0"
-    //     );
-    //     $callback = function () use ($rows, $columnKeys, $columnNames) {
-    //         $file = fopen('php://output', 'w');
-    //         fputcsv($file, $columnNames);
-    //         $array = [];
-    //         foreach ($rows as $row) {
-    //             foreach ($columnKeys as $key) {
-    //                 $array[$key] = $row[$key] ?? '';
-    //             }
-    //             fputcsv($file, $array);
-    //         }
-    //         fclose($file);
-    //     };
-    //     return response()->stream($callback, 200, $headers);
-    // }
 }

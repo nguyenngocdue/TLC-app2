@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Utils\Support;
+namespace App\View\Components\Renderer\Report;
 
-use Illuminate\Support\Str;
-use DateTime;
-
-class PivotReportDataFields
+class PivotReportDataFields2
 {
 
 
-    private static function execute($dataAggregations, $data)
+    private static function execute($aggregations, $data)
     {
-        $dataIndex =  array_column($dataAggregations, 'type_operator', 'name');
-        if (!count($dataIndex)) return [];
+        if (!count($aggregations)) return [];
         $newData = [];
-        foreach ($dataIndex as $field => $operator) {
+        foreach ($aggregations as $field => $info) {
             $result = null;
+            $operator = $info->aggregation;
             foreach ($data as $key => $items) {
                 switch ($operator) {
                     case 'sum':
@@ -32,7 +29,7 @@ class PivotReportDataFields
                 $newData[$key][$operator . '_' . $field] = $result;
             }
         }
-        // dd($newData);
+        // dd($data[0], $newData);
         return $newData;
     }
 
@@ -76,8 +73,7 @@ class PivotReportDataFields
     public static function executeOperations($dataAggregations, $data, $rowFields)
     {
         if(empty($dataAggregations)) return $data;
-        // dd($data);
-        $arrayValue = array_map(fn ($items) => PivotReportDataFields::execute($dataAggregations, $items), $data);
+        $arrayValue = array_map(fn ($items) => PivotReportDataFields2::execute($dataAggregations, $items), $data);
 
         if (!$rowFields) {
             $totalNumber = self::calculateSubArraysTotal($arrayValue);

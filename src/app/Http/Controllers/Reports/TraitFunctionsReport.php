@@ -20,6 +20,7 @@ trait TraitFunctionsReport
         $columns = $this->getTableColumns($dataSource, $modeParams);
         $columnKeys = array_column($columns, 'dataIndex');
         $columnNames =  array_map(function ($item) {
+
             if (!isset($item['title'])) return Report::makeTitle($item['dataIndex']);
             if (str_contains($item['title'], '/>')) {
                 $str = trim(substr($item['title'],0, strpos($item['title'], '<', 0)));

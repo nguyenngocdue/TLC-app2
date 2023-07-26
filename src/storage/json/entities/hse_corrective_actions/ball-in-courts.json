@@ -6,7 +6,7 @@
     },
     "in_progress": {
         "name": "in_progress",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "creator",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "cancelled": {

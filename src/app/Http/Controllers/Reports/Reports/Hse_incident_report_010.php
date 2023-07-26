@@ -139,14 +139,14 @@ class Hse_incident_report_010 extends Report_ParentReportController
                         MAX(hseem.total_work_hours) AS hseem_total_work_hours
                     FROM hse_extra_metrics hseem
                     WHERE hseem.workplace_id IN $strWorkplaceIds
-                        AND SUBSTR(hseem.metric_month, 1, 4) = 2023
+                        AND SUBSTR(hseem.metric_month, 1, 4) = $year
                         AND hseem.status = '$statusExtraMetric'
                     GROUP BY hse_month
                 ),
                 wp_ids AS (
                     SELECT GROUP_CONCAT(id) AS wp_id_list
                     FROM workplaces wp
-                    WHERE wp.id IN (5, 6, 1, 2, 3, 4)
+                    WHERE wp.id IN $strWorkplaceIds
                 ),
 
                 -- CTE to generate all months for the year 2023
@@ -345,8 +345,10 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $workPlacesHoursOfYear  = [];
         foreach ($workplaceIds as $workplaceId) {
             $wp = Workplace::find($workplaceId);
-            foreach ([2021, 2022, 2023] as $year) {
-                $workPlacesHoursOfYear[$year][] = $wp->getTotalWorkingHoursOfYear($year);
+            $year = isset($modeParams['year']) ? $modeParams['year'] : date('Y');
+
+            foreach ([$year] as $y) {
+                $workPlacesHoursOfYear[$y][] = $wp->getTotalWorkingHoursOfYear($y);
             }
         }
 
@@ -388,7 +390,10 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     + $value['hseir_incident_count_vote']
                     + $value['hseir_near_miss_count_vote']) * 200000) / $value['work_hours'];
                 $value['trir'] = ($num = round($totalRecIncidentRate, 2)) ? $num : null;
-                if (!in_array($hseMonth, $hseMonths)) $data[] = $value;
+                if (!in_array($hseMonth, $hseMonths)){
+                    $value['work_hours'] = round($value['work_hours'], 2);
+                    $data[] = $value;
+                } 
                 $hseMonths[] = $hseMonth;
             }
         }
@@ -412,11 +417,13 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $dataSource = Report::sortByKey($dataSource, 'hse_month');
         $dataFooter['year'] = null;
         $dataFooter['hse_month'] = 'YTD';
-        $dataFooter['trir'] = round((($dataFooter['hseir_ltc_count_vote']
-            + $dataFooter['hseir_rwc_count_vote']
-            + $dataFooter['hseir_mtc_count_vote']
-            + $dataFooter['hseir_incident_count_vote']
-            + $dataFooter['hseir_near_miss_count_vote']) * 200000) / $dataFooter['work_hours'], 2);
+        if($dataFooter['work_hours']) {
+            $dataFooter['trir'] = round((($dataFooter['hseir_ltc_count_vote']
+                + $dataFooter['hseir_rwc_count_vote']
+                + $dataFooter['hseir_mtc_count_vote']
+                + $dataFooter['hseir_incident_count_vote']
+                + $dataFooter['hseir_near_miss_count_vote']) * 200000) / $dataFooter['work_hours'], 2);
+        }
         $dataSource = array_merge($dataSource, [$dataFooter]);
 
         // dd($dataSource);

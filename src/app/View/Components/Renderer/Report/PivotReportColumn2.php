@@ -4,7 +4,6 @@ namespace App\View\Components\Renderer\Report;
 
 
 use App\Http\Controllers\TraitLibPivotTableDataFields2;
-use App\Http\Controllers\Workflow\LibPivotTables;
 use App\Http\Controllers\Workflow\LibPivotTables2;
 use App\Utils\Support\Report;
 use App\Utils\Support\PivotReport;
@@ -12,7 +11,7 @@ use Illuminate\Support\Str;
 use DateTime;
 
 
-trait  ColumnsPivotReport2
+trait  PivotReportColumn2
 {
     use TraitLibPivotTableDataFields2;
     private function makeHeadColumn($rowFields)
