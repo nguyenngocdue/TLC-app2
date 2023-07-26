@@ -68,25 +68,7 @@ abstract class Report_ParentController2 extends Controller
         return $collection;
     }
 
-    protected function enrichDataSource($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
 
-    protected function transformDataSource($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
-
-    protected function changeValueData($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
-
-    protected function getSheets($dataSource) // Override document report
-    {
-        return [];
-    }
     protected function getTable()
     {
         $tableName = CurrentRoute::getCurrentController();
@@ -95,12 +77,6 @@ abstract class Report_ParentController2 extends Controller
         return $tableName;
     }
 
-    private function paginateDataSource($dataSource, $pageLimit)
-    {
-        $page = $_GET['page'] ?? 1;
-        $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))->appends(request()->query());
-        return $dataSource;
-    }
 
     protected function getPageParam($typeReport, $entity)
     {
@@ -111,25 +87,6 @@ abstract class Report_ParentController2 extends Controller
             return $pageLimit;
         }
         return 10;
-    }
-
-    protected function getDefaultValueModeParams($modeParams, $request)
-    {
-        return $modeParams;
-    }
-
-    protected function getColorLegends()
-    {
-        return [];
-    }
-
-    protected function modeColumns()        // dd($dataModeControl);
-    {
-        return [
-            'title' => 'Mode',
-            'dataIndex' => 'mode_option',
-            'allowClear' => true
-        ];
     }
 
     protected function forwardToMode($request, $modeParams)
@@ -188,13 +145,11 @@ abstract class Report_ParentController2 extends Controller
         $entity = CurrentPathInfo::getEntityReport($request);
         $currentUserId = Auth::id();
         $modeParams = $this->getModeParams($request);
-        $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
 
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $modeParams);
         }
         $dataSource = $this->getDataSource($modeParams);
-        $dataSource = $this->changeValueData($dataSource, $modeParams);
         $pageLimit = $this->getPageParam($typeReport, $entity);
 
 
@@ -221,16 +176,13 @@ abstract class Report_ParentController2 extends Controller
             'currentMode' =>  $this->mode,
             'tableColumns' => $tableColumns,
             'paramColumns' => $paramColumns,
-            'tableDataSource' => $dataSource,
             'currentUserId' => $currentUserId,
             'groupBy' => $this->groupBy,
-            'modeOptions' => $this->$entity(),
+            'tableDataSource' => $dataSource,
             'tableDataHeader' => $tableDataHeader,
             'rotate45Width' => $this->rotate45Width,
             'groupByLength' => $this->groupByLength,
             'topTitle' => $this->getMenuTitle(),
-            'modeColumns' => $this->modeColumns(),
-            'legendColors' => $this->getColorLegends(),
             'tableTrueWidth' => $this->tableTrueWidth,
         ]);
     }
