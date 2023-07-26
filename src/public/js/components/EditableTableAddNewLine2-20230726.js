@@ -124,14 +124,25 @@ const addANewLine = (params) => {
                                         valuesOfOrigin[key] = moment(valuesOfOrigin[key]).format(FORMAT[picker_type])
                                         break
                                 }
-                                // console.log("Converted to " + valuesOfOrigin[key])
+                                // console.log("Converted to " + picker_type + key + valuesOfOrigin[key])
                             }
+                        } else {
+                            // console.log("Date time has value ", key, valuesOfOrigin[key])
                         }
                     })
                     // valuesOfOrigin['id'] = line.id
-                    // valuesOfOrigin['ot_date'] = moment(
-                    //     valuesOfOrigin['ot_date']
-                    // ).format('DD/MM/YYYY')
+
+                    //Find a way to run from default values
+                    // console.log("tableName", tableName)
+                    if (tableName === "hr_overtime_request_lines") {
+                        // console.log("OT_DATE", valuesOfOrigin['ot_date'])
+                        if (undefined === valuesOfOrigin['ot_date']) {
+                            valuesOfOrigin['ot_date'] = moment().format('DD/MM/YYYY')
+                        }
+
+                        valuesOfOrigin['break_time'] = 0
+                    }
+
                     // console.log("Add line to table", valuesOfOrigin)
                     addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList, batchLength, })
                 }
