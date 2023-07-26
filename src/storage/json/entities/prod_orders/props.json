@@ -231,7 +231,7 @@
         "name": "_getProdSequences",
         "column_name": "getProdSequences",
         "column_type": "eloquent_prop",
-        "label": "Production Sequences",
+        "label": "Sequence-based Timesheets",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",

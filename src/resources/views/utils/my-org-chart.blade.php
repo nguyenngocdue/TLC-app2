@@ -22,10 +22,12 @@
         <div class="col-span-3">
           <label for="">Options</label>
           <div>
-            <label for="">Resigned</label>
-            <x-renderer.editable.checkbox name="show_options[resigned]" cell="{{$showOptions['resigned'] ?? ''}}"></x-renderer.editable.checkbox>
-            <label for="" class="ml-3">Worker</label>
-            <x-renderer.editable.checkbox name="show_options[time_keeping_type]" cell="{{$showOptions['time_keeping_type'] ?? ''}}"></x-renderer.editable.checkbox>
+            <label>Show Resigned
+              <x-renderer.editable.checkbox name="show_options[resigned]" cell="{{$showOptions['resigned'] ?? ''}}"></x-renderer.editable.checkbox>
+            </label>
+            <label class="ml-3">Show Workers
+              <x-renderer.editable.checkbox name="show_options[time_keeping_type]" cell="{{$showOptions['time_keeping_type'] ?? ''}}"></x-renderer.editable.checkbox>
+            </label>
           </div>
         </div>
         <x-renderer.button htmlType='submit'>Save</x-renderer.button>

@@ -309,7 +309,10 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
 
 const triggerChangeQueue = {}
 
-const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex, batchLength = 1) => {
+//<< If only one line is updated, this will trigger a change request to all lines except the updated line.
+//<< If multiple lines are updated, this will trigger a change request to all lines.
+//<<The change will carry out next action, usually an ajax request
+const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex, batchLength = 1, exceptCurrent = false) => {
     // const debugListener = true
     if (debugListener) console.log("TriggerChangeAllLines", listener)
     const { column_name } = listener
@@ -326,11 +329,13 @@ const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex,
             const rows = getAllRows(table01Name)
             batchLength = rows.length
             for (let i = 0; i < batchLength; i++) {
-                if (i === rowIndex) continue
                 const id = makeIdFrom(table01Name, column_name, i, batchLength)
-                // setTimeout(() =>
-                getEById(id).trigger('change', batchLength - 1)
-                // , 1000)
+                if (exceptCurrent) {
+                    if (i === rowIndex) continue
+                    getEById(id).trigger('change', batchLength - 1)
+                } else {
+                    getEById(id).trigger('change', batchLength)
+                }
             }
         } else {
             for (let i = 0; i < batchLength; i++) {
@@ -342,6 +347,10 @@ const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex,
         }
 
     }
+}
+
+const onChangeDropdown4TriggerChangeAllLinesExceptCurrent = (listener, table01Name, rowIndex, batchLength = 1) => {
+    return onChangeDropdown4TriggerChangeAllLines(listener, table01Name, rowIndex, batchLength, true)
 }
 
 const ajaxQueueUpdate = {}
@@ -428,6 +437,9 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, batchLength 
                     break
                 case "trigger_change_all_lines":
                     onChangeDropdown4TriggerChangeAllLines(listener, table01Name, rowIndex, batchLength)
+                    break
+                case "trigger_change_all_lines_except_current":
+                    onChangeDropdown4TriggerChangeAllLinesExceptCurrent(listener, table01Name, rowIndex, batchLength)
                     break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);

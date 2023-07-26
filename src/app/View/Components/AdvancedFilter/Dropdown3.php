@@ -64,10 +64,11 @@ class Dropdown3 extends Component
                 if ($params[1] == 'App\Models\User') {
                     $dataSource = static::singletonCache();
                 } else {
-                    if($params[1]::get()->count() > 1000) {
-                     dump('Number of items over 1000 please render the component -> number');
-                     return '';
-                    }    
+                    //<<This will hide production order
+                    // if ($params[1]::get()->count() > 1000) {
+                    //     dump('Number of items over 1000 please render the component -> number');
+                    //     return '';
+                    // }
                     $dataSource = ($params[1])::all();
                 }
             } else {

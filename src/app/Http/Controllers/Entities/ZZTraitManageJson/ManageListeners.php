@@ -27,6 +27,7 @@ class ManageListeners extends Manage_Parent
 
             'aggregate_from_table', // Field ONLY
             'trigger_change_all_lines', // Table ONLY
+            'trigger_change_all_lines_except_current', // Table ONLY
             'set_table_column', // Table ONLY
         ];
         return [
@@ -160,10 +161,12 @@ class ManageListeners extends Manage_Parent
                         $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
                         $newItem['columns_to_set'] = 'DO_NOT_RENDER';
                         break;
-                    case "trigger_change_some_lines":
+                    case "trigger_change_all_lines":
+                    case "trigger_change_all_lines_except_current":
                         $newItem['listen_to_fields'] = 'DO_NOT_RENDER';
                         $newItem['listen_to_attrs'] = 'DO_NOT_RENDER';
                         $newItem['expression'] = 'DO_NOT_RENDER';
+                        $newItem['attrs_to_compare'] = 'DO_NOT_RENDER';
                         $newItem['ajax_response_attribute'] = 'DO_NOT_RENDER';
                         $newItem['ajax_form_attributes'] = 'DO_NOT_RENDER';
                         $newItem['ajax_item_attributes'] = 'DO_NOT_RENDER';
