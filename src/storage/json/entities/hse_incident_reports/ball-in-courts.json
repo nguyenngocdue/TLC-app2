@@ -1,12 +1,12 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "active": {
         "name": "active",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "pending_ack": {
@@ -21,7 +21,7 @@
     },
     "review_rejected": {
         "name": "review_rejected",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "pending_verification": {
@@ -31,7 +31,7 @@
     },
     "closed": {
         "name": "closed",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     }
 }

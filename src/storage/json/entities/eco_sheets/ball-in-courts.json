@@ -1,7 +1,7 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": ""
     },
     "pending_endorsement": {
@@ -11,7 +11,7 @@
     },
     "endorsement_rejected": {
         "name": "endorsement_rejected",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": ""
     },
     "pending_review": {

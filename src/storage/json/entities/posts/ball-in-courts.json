@@ -1,7 +1,7 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court": "creator"
+        "ball-in-court": "owner_id"
     },
     "draft": {
         "name": "draft",

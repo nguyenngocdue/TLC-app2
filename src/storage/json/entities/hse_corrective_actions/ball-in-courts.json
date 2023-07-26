@@ -1,7 +1,7 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "assignee_1",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "in_progress": {
@@ -11,17 +11,17 @@
     },
     "cancelled": {
         "name": "cancelled",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "on_hold": {
         "name": "on_hold",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "pending_verification": {
         "name": "pending_verification",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "rejected": {

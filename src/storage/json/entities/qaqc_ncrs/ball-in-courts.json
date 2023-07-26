@@ -1,7 +1,7 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "assigned": {
@@ -11,12 +11,12 @@
     },
     "assign_rejected": {
         "name": "assign_rejected",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "resolved": {
         "name": "resolved",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "rejected": {

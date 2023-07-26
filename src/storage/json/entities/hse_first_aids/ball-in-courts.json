@@ -1,12 +1,12 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "assignee_1",
         "ball-in-court-monitors": ""
     },
     "active": {
         "name": "active",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "assignee_1",
         "ball-in-court-monitors": ""
     }
 }
