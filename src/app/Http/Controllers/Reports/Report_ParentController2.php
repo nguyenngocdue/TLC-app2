@@ -156,6 +156,7 @@ abstract class Report_ParentController2 extends Controller
 
     protected function getParamColumns($dataSource, $modeType)
     {
+        if(!$modeType) return [[]];
         $filters = $this->getDataFields($dataSource, $modeType)['filters'];
         $colParams = [];
         foreach ($filters as $key => $values) {
