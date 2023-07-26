@@ -147,7 +147,7 @@ abstract class Report_ParentController extends Controller
     private function makeModeTitleReport($routeName)
     {
         $lib = LibReports::getAll();
-        $title = $lib[$routeName]['title'] ??'Empty Title';
+        $title = $lib[$routeName]['title'] ?? 'Empty Title';
         return $title;
     }
 
@@ -179,7 +179,7 @@ abstract class Report_ParentController extends Controller
 
         return view('reports.' . $viewName, [
             'typeOfView' => $this->typeView,
-            'modeType'=>$this->modeType,
+            'modeType' => $this->modeType,
             'maxH' => $this->maxH,
             'entity' => $entity,
             'sheets' =>  $sheet,
@@ -194,7 +194,7 @@ abstract class Report_ParentController extends Controller
             'tableDataSource' => $dataSource,
             'currentUserId' => $currentUserId,
             'groupBy' => $this->groupBy,
-            'modeOptions' => $this->$entity(),
+            // 'modeOptions' => $this->$entity(),
             'tableDataHeader' => $tableDataHeader,
             'rotate45Width' => $this->rotate45Width,
             'groupByLength' => $this->groupByLength,
