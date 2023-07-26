@@ -148,7 +148,6 @@ trait TraitEntityCRUDStoreUpdate2
 			$fields = $this->handleFields($request, __FUNCTION__);
 			$fieldsHandle = $this->addEntityType($fields, 'status', $newStatus);
 			$previousValue = $this->getPreviousValue($fieldsHandle, $theRow);
-			$theRow->updateWithOptimisticLocking($fieldsHandle);
 			$fieldForEmailHandler = $this->addEntityType($fieldsHandle, 'created_at', $theRow->getAttributes()['created_at']);
 			$fieldForEmailHandler = $this->addEntityType($fieldForEmailHandler, 'updated_at', $theRow->getAttributes()['updated_at']);
 			$objectType = Str::modelPathFrom($theRow->getTable());
@@ -165,7 +164,7 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
-
+		
 		$toastrResult = [];
 		$lineResult = true;
 		if (!$isFakeRequest) {
@@ -173,7 +172,10 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			//If all tables are created or updated, change the status of the item
-			if ($lineResult) $this->handleStatus($theRow, $newStatus);
+			if ($lineResult) {
+				$this->handleStatus($theRow, $newStatus);
+				$theRow->updateWithOptimisticLocking($fieldsHandle);
+			}
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
