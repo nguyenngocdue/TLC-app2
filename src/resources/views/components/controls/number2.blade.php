@@ -11,5 +11,5 @@
     >
 
 <script>
-    parseNumber2(@json($name), @json(old($name, $value)))
+    parseNumber2(@json($name), @json(old($name, $value)));
 </script>

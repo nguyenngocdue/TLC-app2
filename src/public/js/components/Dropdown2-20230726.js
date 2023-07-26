@@ -366,11 +366,9 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
         data[triggers[i]] = value
     }
     if (enoughParams) {
-        if (debugListener)
-            console.log('Sending AjaxRequest with data:', data, url)
+        if (debugListener) console.log('Sending AjaxRequest with data:', data, url)
         $.ajax({
-            url,
-            data,
+            url, data,
             success: (response) => {
                 let value = -1
                 if (debugListener) console.log('Response', response)
@@ -378,33 +376,15 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
                 for (let i = 0; i < ajax_form_attributes.length; i++) {
                     if (hits_0 === undefined) {
                         value = ajax_default_values[i]
-                        if (debugListener)
-                            console.log(
-                                'Response empty',
-                                ajax_response_attribute,
-                                '- assigning default value',
-                                ajax_default_values[i]
-                            )
+                        if (debugListener) console.log('Response empty', ajax_response_attribute, '- assigning default value', ajax_default_values[i])
                     } else if (hits_0[ajax_item_attributes[i]] === undefined) {
                         value = ajax_default_values[i]
-                        if (debugListener)
-                            console.log(
-                                'Requested column',
-                                ajax_item_attributes[i],
-                                'not found, assigning default value',
-                                ajax_default_values[i]
-                            )
+                        if (debugListener) console.log('Requested column', ajax_item_attributes[i], 'not found, assigning default value', ajax_default_values[i])
                     } else {
                         value = hits_0[ajax_item_attributes[i]]
                     }
                     const toBeAssigned = ajax_form_attributes[i]
-                    if (debugListener)
-                        console.log(
-                            'Assigning',
-                            toBeAssigned,
-                            'with value',
-                            value
-                        )
+                    if (debugListener) console.log('Assigning', toBeAssigned, 'with value', value)
                     getEById(toBeAssigned).val(value)
                     getEById(toBeAssigned).trigger('change')
                 }
@@ -497,8 +477,9 @@ const onChangeDropdown2 = (name) => {
                     case 'ajax_request_scalar':
                         onChangeDropdown2AjaxRequestScalar(listener)
                         break
-                    case 'trigger_change_some_lines':
-                        //Do nothing, this is an action of table
+                    case 'trigger_change_all_lines':
+                    case 'trigger_change_all_lines_except_current':
+                        // Do nothing, this is an action of table 
                         break
                     case 'set_table_column':
                         onChangeSetTableColumn(listener, i)

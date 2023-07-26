@@ -1222,7 +1222,7 @@
         "package_tab": "application",
         "package": "project_management",
         "sub_package": "production",
-        "title": "Production Sequences",
+        "title": "Sequence-based Timesheet",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
