@@ -22,7 +22,7 @@ return new class extends Migration
         $schema->create('prod_routing_details', function (BlueprintExtended $table) {
             $table->id();
             $table->unsignedBigInteger('prod_routing_id');
-            $table->unsignedBigInteger('prod_routing_link_id');
+            $table->unsignedBigInteger('prod_routing_link_id')->nullable();
             $table->unsignedBigInteger('erp_routing_link_id')->nullable();
             $table->unsignedBigInteger('wir_description_id')->nullable();
             $table->integer('priority')->nullable(); //<<TO be removed

@@ -1,5 +1,5 @@
 
-@extends("modals.modal-small")
+@extends("modals.modal-medium")
 
 @section($modalId.'-header', "Create a new HSE Checklist from a template")
 
