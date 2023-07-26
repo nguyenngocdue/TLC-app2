@@ -8,6 +8,7 @@ use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
 use App\View\Components\Renderer\ViewAllMatrixFilter\TraitFilterMonth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class HseExtraMetrics extends ViewAllTypeMatrixParent
@@ -61,7 +62,7 @@ class HseExtraMetrics extends ViewAllTypeMatrixParent
         // dump($xAxis);
 
         $xAxis = array_map(fn ($c) => [
-            'dataIndex' => $c,
+            'dataIndex' => substr($c, 0, 7),
             'title' => date(Constant::FORMAT_MONTH, strtotime($c)),
             'width' => 10,
             'align' => 'center',
@@ -75,7 +76,10 @@ class HseExtraMetrics extends ViewAllTypeMatrixParent
         // dump($xAxis);
         // $firstDay = $xAxis[0]['dataIndex'];
         // $lastDay =  $xAxis[sizeof($xAxis) - 1]['dataIndex'];
-        $lines = Hse_extra_metric::whereYear('metric_month', $selectedYear)->get();
+        $lines = Hse_extra_metric::query()
+            ->whereYear('metric_month', $selectedYear)
+            ->select(["*", DB::raw(" substr(metric_month,1,7) as metric_month")])
+            ->get();
         // dump($lines);
         return $lines;
     }
@@ -90,6 +94,7 @@ class HseExtraMetrics extends ViewAllTypeMatrixParent
     protected function getCreateNewParams($x, $y)
     {
         $params = parent::getCreateNewParams($x, $y);
+        $params['metric_month'] .=  '-01';
         $params['status'] =  'new';
         return $params;
     }
