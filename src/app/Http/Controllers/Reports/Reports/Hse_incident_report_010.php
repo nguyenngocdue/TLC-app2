@@ -139,14 +139,14 @@ class Hse_incident_report_010 extends Report_ParentReportController
                         MAX(hseem.total_work_hours) AS hseem_total_work_hours
                     FROM hse_extra_metrics hseem
                     WHERE hseem.workplace_id IN $strWorkplaceIds
-                        AND SUBSTR(hseem.metric_month, 1, 4) = 2023
+                        AND SUBSTR(hseem.metric_month, 1, 4) = $year
                         AND hseem.status = '$statusExtraMetric'
                     GROUP BY hse_month
                 ),
                 wp_ids AS (
                     SELECT GROUP_CONCAT(id) AS wp_id_list
                     FROM workplaces wp
-                    WHERE wp.id IN (5, 6, 1, 2, 3, 4)
+                    WHERE wp.id IN $strWorkplaceIds
                 ),
 
                 -- CTE to generate all months for the year 2023
@@ -345,8 +345,10 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $workPlacesHoursOfYear  = [];
         foreach ($workplaceIds as $workplaceId) {
             $wp = Workplace::find($workplaceId);
-            foreach ([$this->year] as $year) {
-                $workPlacesHoursOfYear[$year][] = $wp->getTotalWorkingHoursOfYear($year);
+            $year = isset($modeParams['year']) ? $modeParams['year'] : date('Y');
+
+            foreach ([$year] as $y) {
+                $workPlacesHoursOfYear[$y][] = $wp->getTotalWorkingHoursOfYear($y);
             }
         }
 
