@@ -8,7 +8,7 @@
     name="{{$name}}"
     value="{{$cell??$slot}}"
     step='any' 
-    type="number"
+    type="text"
     placeholder="{{$placeholder}}" 
     class="{{$classList}} {{$bgColor}} {{$readOnly?"hidden1":""}}"
     >

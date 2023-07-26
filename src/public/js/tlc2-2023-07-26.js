@@ -35,9 +35,11 @@ const parseNumber2 = (id, initValue) => {
     // console.log(inputNumber, id)
     // const inputNumber = document.getElementById(id);
     const formatterFn = (value) => {
+        if(typeof value !== "object" && value !== null){
+            const [a, b] = value.split(".")
+            return a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (typeof b == 'string' ? ('.' + b.replace(/0+$/, '')) : "")
+        }
         // if (value.includes('.')) {
-        const [a, b] = value.split(".")
-        return a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (typeof b == 'string' ? ('.' + b.replace(/0+$/, '')) : "")
         // } else {
         //     return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/^0+(?=\d)/, '');
         // }
@@ -56,19 +58,19 @@ const parseNumber2 = (id, initValue) => {
             range.select();
         }
     };
-    inputNumber.on('blur', event => {
-        const inputValue = event.target.value;
+    inputNumber.on('blur change', () => {
+        const inputValue = inputNumber.val();
         // const oldCursorPosition = inputNumber.selectionStart;
         const parsedValue = parserFn(inputValue);
         if (!isNaN(parsedValue)) {
             formattedValue = formatterFn(parsedValue);
-            event.target.val = formattedValue;
+            inputNumber.val(formattedValue);
             // const diffLength = formattedValue.length - inputValue.length;
             // const newCursorPosition = oldCursorPosition + diffLength;
             // setCursorPosition(inputNumber, newCursorPosition);
         }
     });
-    inputNumber.value = formatterFn(initValue);
+    inputNumber.val(formatterFn(initValue));
 }
 
 const makeKi = (k) => {
