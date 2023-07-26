@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\TraitLibPivotTableDataFields2;
 use App\Utils\Support\Report;
 use App\Utils\Support\PivotReport;
-use App\Utils\Support\PivotReportDataFields;
-use App\Utils\Support\PivotReportDataFields2;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +13,7 @@ class PivotTableController extends Controller
 {
 
     use TraitLibPivotTableDataFields2;
-    use ColumnsPivotReport2;
+    use PivotReportColumn2;
     public function __construct(
         private $modeType = '',
         private $dataSource = [],

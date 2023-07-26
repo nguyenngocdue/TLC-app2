@@ -345,7 +345,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $workPlacesHoursOfYear  = [];
         foreach ($workplaceIds as $workplaceId) {
             $wp = Workplace::find($workplaceId);
-            foreach ([2021, 2022, 2023] as $year) {
+            foreach ([$this->year] as $year) {
                 $workPlacesHoursOfYear[$year][] = $wp->getTotalWorkingHoursOfYear($year);
             }
         }
@@ -412,11 +412,13 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $dataSource = Report::sortByKey($dataSource, 'hse_month');
         $dataFooter['year'] = null;
         $dataFooter['hse_month'] = 'YTD';
-        $dataFooter['trir'] = round((($dataFooter['hseir_ltc_count_vote']
-            + $dataFooter['hseir_rwc_count_vote']
-            + $dataFooter['hseir_mtc_count_vote']
-            + $dataFooter['hseir_incident_count_vote']
-            + $dataFooter['hseir_near_miss_count_vote']) * 200000) / $dataFooter['work_hours'], 2);
+        if($dataFooter['work_hours']) {
+            $dataFooter['trir'] = round((($dataFooter['hseir_ltc_count_vote']
+                + $dataFooter['hseir_rwc_count_vote']
+                + $dataFooter['hseir_mtc_count_vote']
+                + $dataFooter['hseir_incident_count_vote']
+                + $dataFooter['hseir_near_miss_count_vote']) * 200000) / $dataFooter['work_hours'], 2);
+        }
         $dataSource = array_merge($dataSource, [$dataFooter]);
 
         // dd($dataSource);

@@ -18,7 +18,7 @@ class PivotTable extends Component
 {
 
     use TraitLibPivotTableDataFields2;
-    use ColumnsPivotReport2;
+    use PivotReportColumn2;
     use TraitModeParamsReport;
     use TraitUpdateParamsReport;
     use TraitFunctionsReport;
@@ -84,21 +84,19 @@ class PivotTable extends Component
         $modeParams = $this->modeParams;
         $pageLimit = $this->pageLimit;
         $modeType = $this->modeType;
-        $dataOutput = [];
         if ($modeType) {
             [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData,$modeType, $modeParams);
-            $dataSource = $this->changeValueData($dataOutput);
             if (PivotReport::isEmptyArray($dataOutput)) {
                 $tableColumns = $this->makeTableColumnsWhenEmptyData($modeType);
             }
+        } else {
+            $tableColumns = $this->makeTableColumnsWhenEmptyModeType($linesData);
+            $dataOutput = $dataOutput ?? $linesData; 
         }
-        $dataSource = $linesData;
-        $tableColumns = $this->makeTableColumnsWhenEmptyModeType($linesData);
-        $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-        // dd($tableColumns);
-        
+        $dataOutput = $this->changeValueData($dataOutput);
+        $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
         return view("components.renderer.report.pivot-table", [
-            'tableDataSource' => $dataSource,
+            'tableDataSource' => $dataRender,
             'tableColumns' => $tableColumns,
             'tableDataHeader' => $tableDataHeader ?? [],
             'tableTrueWidth' => $this->tableTrueWidth,

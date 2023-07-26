@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TraitLibPivotTableDataFields2;
-use App\View\Components\Renderer\Report\ColumnsPivotReport2;
+use App\View\Components\Renderer\Report\PivotReportColumn2;
 use App\View\Components\Renderer\Report\PivotTableController;
 
 class DataPivotTable2 extends Controller
 {
    use TraitLibPivotTableDataFields2;
-   use ColumnsPivotReport2;
+   use PivotReportColumn2;
    public function makeDataPivotTable($drawData, $modeType, $modeParams) {
       $fn = (new PivotTableController());
       $libs = $fn->getDataFields($drawData, $modeType);
