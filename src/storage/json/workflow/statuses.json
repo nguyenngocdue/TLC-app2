@@ -44,8 +44,8 @@
     "closed": {
         "name": "closed",
         "title": "Closed",
-        "color": "neutral",
-        "color_index": "300",
+        "color": "green",
+        "color_index": "200",
         "icon": "<i class=\"fa-duotone fa-thumbs-up\"><\/i>"
     },
     "concept": {
