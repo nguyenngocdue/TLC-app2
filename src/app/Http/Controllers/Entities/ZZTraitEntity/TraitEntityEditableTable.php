@@ -68,7 +68,9 @@ trait TraitEntityEditableTable
                     // if ($tableName === 'comments') $line['commentable_id'] = $parentId;
                     $line['tableNames'] = "fakeRequest";
                     // $line['rowIndex'] = $rowIndex;
-                    $line['idForScroll'] = substr($props[$table01Name], 1); //remove first "_"
+                    if (isset($props[$table01Name])) { //<< if we hide the table in Manage Props
+                        $line['idForScroll'] = substr($props[$table01Name], 1); //remove first "_"
+                    }
                     // dump($line);
                     $fakeRequest->merge($line);
                     $this->distributeFileBag($request, $rowIndex, $fakeRequest);

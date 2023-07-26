@@ -23,12 +23,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('prod_routing_id');
             $table->unsignedBigInteger('prod_routing_link_id');
-            $table->unsignedBigInteger('erp_routing_link_id');
-            $table->unsignedBigInteger('wir_description_id');
-            $table->integer('priority')->nullable();
+            $table->unsignedBigInteger('erp_routing_link_id')->nullable();
+            $table->unsignedBigInteger('wir_description_id')->nullable();
+            $table->integer('priority')->nullable(); //<<TO be removed
             $table->double('target_hours')->nullable();
             $table->double('target_man_hours')->nullable();
 
+            $table->orderable();
             $table->appendCommonFields();
 
             // $table->primary(['prod_routing_id', 'prod_routing_link_id'], md5('prod_routing_id' . 'prod_routing_link_id'));
