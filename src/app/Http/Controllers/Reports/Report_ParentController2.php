@@ -156,6 +156,7 @@ abstract class Report_ParentController2 extends Controller
 
     protected function getParamColumns($dataSource, $modeType)
     {
+        if(!$modeType) return [[]];
         $filters = $this->getDataFields($dataSource, $modeType)['filters'];
         $colParams = [];
         foreach ($filters as $key => $values) {
@@ -278,4 +279,36 @@ abstract class Report_ParentController2 extends Controller
     {
         return "";
     }
+
+    // public function exportCSV(Request $request)
+    // {
+    //     $entity = CurrentPathInfo::getEntityReport($request, '_ep');
+    //     $modeParams = $this->getModeParams($request, '_ep');
+    //     $linesData = $this->getDataSource1($modeParams);
+    //     // Pivot data before render 
+    //     [$dataOutput, $tableColumns,] = $this->triggerDataFollowManagePivot($linesData, $modeParams);
+    //     [$columnKeys, $columnNames] = $this->makeColumnsPivotTable($dataOutput, $modeParams, $tableColumns);
+    //     $rows = $this->makeRowsFollowColumns($dataOutput, $columnKeys);
+    //     $fileName = $entity . '_' . date('d:m:Y H:i:s') . '.csv';
+    //     $headers = array(
+    //         "Content-type"        => "text/csv",
+    //         "Content-Disposition" => "attachment; filename=$fileName",
+    //         "Pragma"              => "no-cache",
+    //         "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+    //         "Expires"             => "0"
+    //     );
+    //     $callback = function () use ($rows, $columnKeys, $columnNames) {
+    //         $file = fopen('php://output', 'w');
+    //         fputcsv($file, $columnNames);
+    //         $array = [];
+    //         foreach ($rows as $row) {
+    //             foreach ($columnKeys as $key) {
+    //                 $array[$key] = $row[$key] ?? '';
+    //             }
+    //             fputcsv($file, $array);
+    //         }
+    //         fclose($file);
+    //     };
+    //     return response()->stream($callback, 200, $headers);
+    // }
 }

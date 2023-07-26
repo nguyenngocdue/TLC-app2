@@ -177,7 +177,6 @@ abstract class Report_ParentController extends Controller
         echo $this->getJS();
         $modeReport = $this->makeModeTitleReport($routeName);
 
-
         return view('reports.' . $viewName, [
             'typeOfView' => $this->typeView,
             'modeType'=>$this->modeType,

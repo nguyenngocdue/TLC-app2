@@ -16,7 +16,7 @@ class Hr_timesheet_line_010 extends Report_ParentController2
     protected $maxH = 50;
     protected $libPivotFilters;
     protected $typeView = 'report-pivot';
-    protected $modeType = 'hr_timesheet_line_project_date';
+    protected $modeType = '';
     protected $tableTrueWidth = true;
 
     public function getDataSource($modeParams)
@@ -36,5 +36,4 @@ class Hr_timesheet_line_010 extends Report_ParentController2
         $dataColumn1 = [[]];
         return $dataColumn1;
     }
-
 }
