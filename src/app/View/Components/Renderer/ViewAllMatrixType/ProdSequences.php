@@ -97,6 +97,9 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         $params = parent::getCreateNewParams($x, $y);
         $params['status'] =  'new';
+        // $params['project_id'] =  $this->project;
+        $params['sub_project_id'] =  $this->subProject;
+        $params['prod_routing_id'] =  $this->prodRouting;
         return $params;
     }
 
