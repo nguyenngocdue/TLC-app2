@@ -26,8 +26,10 @@
     $tc = "
     <x-reports.utility-report routeName='$routeName' ";
     @endphp
-    {{-- <x-renderer.tag>Top Center</x-renderer.tag> --}}
-    <x-renderer.table 
-        topCenterControl=" {!!$tc!!}" showNo={{true}} :dataHeader="$tableDataHeader" :columns="$tableColumns" :dataSource="$tableDataSource" rotate45Width={{$rotate45Width}} maxH="{{$maxH}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
+    @if($typeReport)
+    <x-renderer.report.pivot-table modeType="{{$modeType}}"  showNo={{true}} :dataHeader="$tableDataHeader" :columns="$tableColumns" :modeParams="$modeParams" :dataSource="$tableDataSource"  tableTrueWidth={{$tableTrueWidth?1:0}} page-limit="{{$pageLimit}}" headerTop=10 />
+    @else
+    <x-renderer.table topCenterControl=" {!!$tc!!}" showNo={{true}} :dataHeader="$tableDataHeader" :columns="$tableColumns" :dataSource="$tableDataSource" rotate45Width={{$rotate45Width}} maxH="{{$maxH}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
+    @endif
     @endsection
 </div>
