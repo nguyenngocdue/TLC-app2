@@ -39,7 +39,25 @@
         "name": "report-hr_timesheet_line_020",
         "package_tab": "report",
         "package": "hr_&_admin",
-        "title": "Untitled"
+        "title": "Employee\/Project"
+    },
+    "report-hr_timesheet_line_030": {
+        "name": "report-hr_timesheet_line_030",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "title": "Employee\/Date"
+    },
+    "report-hr_timesheet_line_040": {
+        "name": "report-hr_timesheet_line_040",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "title": "Team\/Project"
+    },
+    "report-hr_timesheet_line_050": {
+        "name": "report-hr_timesheet_line_050",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "title": "Test"
     },
     "report-hr_timesheet_line_100": {
         "name": "report-hr_timesheet_line_100",
@@ -76,6 +94,12 @@
         "package_tab": "report",
         "package": null,
         "title": "Team\/Project"
+    },
+    "report-pivot-hr_timesheet_line_050": {
+        "name": "report-pivot-hr_timesheet_line_050",
+        "package_tab": "report",
+        "package": null,
+        "title": null
     },
     "report-prod_order_010": {
         "name": "report-prod_order_010",

@@ -33,6 +33,10 @@ class Report
                 $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
                 $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}_$mode";
                 if (class_exists($path)) $result0[] = static::actionCreator('report', $path, $singular, $mode);
+
+                $path = "App\\Http\\Controllers\\PivotReports\Reports\\{$ucfirstName}_$mode";
+                if (class_exists($path)) $result0[]   = static::actionCreator('report', $path, $singular,$mode);
+   
                 $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}_$mode";
                 if (class_exists($path)) $result0[] = static::actionCreator('register', $path, $singular, $mode);
                 $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}_$mode";
