@@ -1,12 +1,15 @@
 {{-- @if($readOnly)
 <div class="p-2">{{$cell??$slot}}</div>
 @endif --}}
+@php
+    $value = json_decode($cell??$slot);
+@endphp
 <input
     @readonly($readOnly)
     component="editable/number4"
     id="{{$name}}"
     name="{{$name}}"
-    value="{{$cell??$slot}}"
+    value="{{$value}}"
     step='any' 
     type="text"
     placeholder="{{$placeholder}}" 
@@ -30,5 +33,5 @@
     })
 </script>
 <script>
-    parseNumber2(@json($name), @json($cell??$slot));
+    parseNumber2(@json($name), @json($value));
 </script>

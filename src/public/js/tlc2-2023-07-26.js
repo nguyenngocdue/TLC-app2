@@ -35,15 +35,16 @@ const parseNumber2 = (id, initValue) => {
     // console.log(inputNumber, id)
     // const inputNumber = document.getElementById(id);
     const formatterFn = (value) => {
-        if(typeof value !== "object" && value !== null){
+        if (value !== null) {
+            if (typeof value === 'number') value = value + '';
             const [a, b] = value.split(".")
             const formattedValue = a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            if(typeof b == 'string' && b.length > 0){
-                return  formattedValue + '.' +  b.replace(/0+$/, '');
+            if (typeof b == 'string' && b.length > 0) {
+                return formattedValue + '.' + b.replace(/0+$/, '');
             }
             return formattedValue;
-            }
         }
+    }
     const parserFn = value => value.replace(/\$\s?|(,*)/g, '');
     const setCursorPosition = (el, pos) => {
         if (el.setSelectionRange) {
@@ -83,3 +84,5 @@ const makeKi = (k) => {
     })
     return ki
 }
+
+const numberRemoveComma = (number) => number.replace(/[^0-9.\-]/g, '')
