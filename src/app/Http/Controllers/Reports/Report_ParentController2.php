@@ -188,22 +188,21 @@ abstract class Report_ParentController2 extends Controller
         $currentUserId = Auth::id();
         $modeParams = $this->getModeParams($request);
         $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
-
+        
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $modeParams);
         }
         $dataSource = $this->getDataSource($modeParams);
         $dataSource = $this->changeValueData($dataSource, $modeParams);
         $pageLimit = $this->getPageParam($typeReport, $entity);
-
-
+        
+        
         $viewName =  CurrentPathInfo::getViewName($request);
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
+
         $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
         echo $this->getJS();
         $modeReport = $this->makeModeTitleReport($routeName);
-
-        // dd($dataSource, $viewName);
         $modeType = $this->modeType;
         $paramColumns = $this->getParamColumns($dataSource, $modeType);
 

@@ -34,8 +34,8 @@ class Report
                 $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}_$mode";
                 if (class_exists($path)) $result0[] = static::actionCreator('report', $path, $singular, $mode);
 
-                $path = "App\\Http\\Controllers\\PivotReports\Reports\\{$ucfirstName}_$mode";
-                if (class_exists($path)) $result0[]   = static::actionCreator('report', $path, $singular,$mode);
+                // $path = "App\\Http\\Controllers\\PivotReports\Reports\\{$ucfirstName}_$mode";
+                // if (class_exists($path)) $result0[]   = static::actionCreator('report', $path, $singular,$mode);
    
                 $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}_$mode";
                 if (class_exists($path)) $result0[] = static::actionCreator('register', $path, $singular, $mode);
