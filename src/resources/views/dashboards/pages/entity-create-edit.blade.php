@@ -18,6 +18,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 @section('content')
 <script>
     k = @json($listenerDataSource);
+    ki = makeKi(k)
 
     listenersOfDropdown2 = @json($listeners2);
     filtersOfDropdown2 = @json($filters2);
