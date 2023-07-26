@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\PivotReports\Reports;
+namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\Workflow\LibPivotTables2;
