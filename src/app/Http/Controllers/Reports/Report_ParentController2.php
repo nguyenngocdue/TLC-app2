@@ -224,7 +224,7 @@ abstract class Report_ParentController2 extends Controller
             'tableDataSource' => $dataSource,
             'currentUserId' => $currentUserId,
             'groupBy' => $this->groupBy,
-            'modeOptions' => $this->$entity(),
+            // 'modeOptions' => $this->$entity(),
             'tableDataHeader' => $tableDataHeader,
             'rotate45Width' => $this->rotate45Width,
             'groupByLength' => $this->groupByLength,
