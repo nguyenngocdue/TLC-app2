@@ -95,8 +95,9 @@ class StringPivotTable
         return $dateList;
     }
 
-    public static function retrieveStringBeforeString($string, $stringSearch) {
+    public static function retrieveStringBySign($string, $stringSearch, $location = 0) {
         $posIndex = strpos($string,$stringSearch);
+        if($location) $posIndex = strrpos($string,$stringSearch);
         if(!$posIndex) return $string;
         return substr($string,0, $posIndex);
     }

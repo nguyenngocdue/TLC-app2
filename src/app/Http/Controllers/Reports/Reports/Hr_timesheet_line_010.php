@@ -16,7 +16,7 @@ class Hr_timesheet_line_010 extends Report_ParentController2
     protected $maxH = 50;
     protected $libPivotFilters;
     protected $typeView = 'report-pivot';
-    protected $modeType = 'hr_timesheet_line_project_date';
+    protected $modeType = '';
     protected $tableTrueWidth = true;
 
     public function getDataSource($modeParams)
@@ -35,6 +35,21 @@ class Hr_timesheet_line_010 extends Report_ParentController2
     {
         $dataColumn1 = [[]];
         return $dataColumn1;
+    }
+
+    protected function getParamColumns($dataSource, $modeType)
+    {
+        return [
+            [
+                'title' => 'Sub Project',
+                'dataIndex' => 'sub_project_id',
+            ],
+            [
+                'title' => 'Prod Order',
+                'dataIndex' => 'prod_order_id',
+                'allowClear' => true
+            ]
+        ];
     }
 
 }

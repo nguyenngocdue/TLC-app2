@@ -11,7 +11,7 @@ use App\Utils\Support\PivotReportDataFields2;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class PivotTable2 extends Controller
+class PivotTableController extends Controller
 {
 
     use TraitLibPivotTableDataFields2;
