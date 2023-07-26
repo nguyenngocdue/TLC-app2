@@ -2,41 +2,39 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\Workflow\LibPivotTables;
-use App\Utils\Support\CurrentRoute;
-use Illuminate\Support\Str;
+use App\Http\Controllers\Reports\Report_ParentController2;
+use App\Http\Controllers\Reports\Reports\Hr_timesheet_line_100;
+use App\Http\Controllers\Reports\TraitDataModesReport;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 
-class Hr_timesheet_line_020 extends Controller
+
+class Hr_timesheet_line_020 extends Report_ParentController2
+
 {
+    use TraitDynamicColumnsTableReport;
+    use TraitDataModesReport;
+    protected $maxH = 50;
+    protected $libPivotFilters;
+    protected $typeView = 'report-pivot';
+    protected $modeType = 'hr_timesheet_line_employee_project';
+    protected $tableTrueWidth = true;
 
-    protected function getTable()
+    public function getDataSource($modeParams)
     {
-        $tableName = CurrentRoute::getCurrentController();
-        $tableName = substr($tableName, 0, strrpos($tableName, "_"));
-        $tableName = strtolower(Str::plural($tableName));
-        return $tableName;
-    }
-    public function getType()
-    {
-        return $this->getTable();
-        // return str_replace(' ', '_', strtolower($this->getMenuTitle()));
-    }
-
-    protected $key = 'hr_timesheet_project_date';
-    private function getDataSource1()
-    {
-        $primaryData = (new Hr_timesheet_line_100())->getDataSource([]);
-        $primaryData = array_map(fn($item) =>(array)$item, $primaryData->toArray());
-        // dump($primaryData);
+        $primaryData = (new Hr_timesheet_line_100())->getDataSource($modeParams);
         return $primaryData;
     }
 
 
-    public function index() {
-        return view('reports.due-test-report', [
-            'key' => $this->key,
-            'dataSource' => $this->getDataSource1()
-        ]);
+    public function getSqlStr($modeParams)
+    {
+      return "";
     }
+
+    protected function getTableColumns($dataSource, $modeParams)
+    {
+        $dataColumn1 = [[]];
+        return $dataColumn1;
+    }
+
 }

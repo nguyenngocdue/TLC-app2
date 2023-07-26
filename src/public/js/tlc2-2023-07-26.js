@@ -33,13 +33,8 @@ function listenerSubmitForm(idForm) {
 const parseNumber2 = (id, initValue) => {
     const inputNumber = document.getElementById(id);
     const formatterFn = (value) => {
-        if (value.includes('.')) {
-            const [a, b] = value.split(".")
-            return a.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (typeof b == 'string' ? ('.' + b) : "")
-        } else {
-            return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/^0+(?=\d)/, '');
-        }
-        
+        const [a, b] = value.split(".")
+        return a.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (typeof b == 'string' ? ('.' + b) : "")
     }
     const parserFn = value => value.replace(/\$\s?|(,*)/g, '');
     const setCursorPosition = (el, pos) => {
@@ -59,9 +54,7 @@ const parseNumber2 = (id, initValue) => {
         const oldCursorPosition = inputNumber.selectionStart;
         const parsedValue = parserFn(inputValue);
         if (!isNaN(parsedValue)) {
-            console.log(parsedValue);
             formattedValue = formatterFn(parsedValue);
-            console.log(formattedValue);
             event.target.value = formattedValue;
             const diffLength = formattedValue.length - inputValue.length;
             const newCursorPosition = oldCursorPosition + diffLength;
@@ -69,4 +62,15 @@ const parseNumber2 = (id, initValue) => {
         }
     });
     inputNumber.value = formatterFn(initValue);
+}
+const makeKi = (k) => {
+    const ki = {}
+    Object.keys(k).forEach(tableName => {
+        const rows = k[tableName]
+        ki[tableName] = {}
+        rows.forEach(row => {
+            ki[tableName][row['id']] = row
+        })
+    })
+    return ki
 }
