@@ -109,7 +109,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "read_only": "",
-        "save_on_change": "",
+        "save_on_change": "true",
         "duplicatable": "",
         "new_line": ""
     },
@@ -155,7 +155,7 @@
         "name": "_qc_remaining",
         "column_name": "qc_remaining",
         "column_type": "int",
-        "label": "Remaining Quantity",
+        "label": "Remaining Order Quantity",
         "control": "number",
         "align": "",
         "col_span": "",

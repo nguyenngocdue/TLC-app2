@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\v1\HR\TimeSheetOfficerController;
 use App\Http\Controllers\Api\v1\HR\TimeSheetWorkerController;
 use App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController;
 use App\Http\Controllers\Api\v1\Hse\CloneTemplateHseController;
+use App\Http\Controllers\Api\v1\qaqc\WirLineController;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApi;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApiRenderer;
 use App\Http\Controllers\Workflow\LibApis;
@@ -137,6 +138,12 @@ Route::group([
     'middleware' => 'throttle:600,1',
 ], function () {
     Route::post('overtime_request_line2', [OvertimeRequestLineController::class, 'getRemainingHours2']);
+});
+Route::group([
+    'prefix' => 'v1/qaqc',
+    'middleware' => 'throttle:6000,1',
+], function () {
+    Route::post('wir_line', [WirLineController::class, 'getRemaining']);
 });
 Route::group([
     'prefix' => 'v1/entity',
