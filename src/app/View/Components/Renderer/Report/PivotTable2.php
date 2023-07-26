@@ -206,7 +206,6 @@ class PivotTable2 extends Controller
 
     public function makeDataRenderer($linesData, $libs, $topParams)
     {
-        // dd($libs);
         $keysOfFilters = array_keys($libs['filters']);
         $keysOfRowFilters = array_keys($libs['filters']);
         $keysOfColumnFields = array_keys($libs['column_fields']);

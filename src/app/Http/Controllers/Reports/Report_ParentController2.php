@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports;
 
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibReports;
 use App\Utils\Support\CurrentPathInfo;
@@ -16,12 +17,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-abstract class Report_ParentController extends Controller
+abstract class Report_ParentController2 extends Controller
 {
     use TraitMenuTitle;
     use TraitModeParamsReport;
     use TraitDataModesReport;
     use TraitFunctionsReport;
+    use TraitLibPivotTableDataFields2;
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($dataSource, $modeParams);
 
@@ -152,6 +154,31 @@ abstract class Report_ParentController extends Controller
         return $title;
     }
 
+    protected function getParamColumns($dataSource, $modeType)
+    {
+        $filters = $this->getDataFields($dataSource, $modeType)['filters'];
+        $colParams = [];
+        foreach ($filters as $key => $values) {
+            $dataIndex = $key;
+            if (isset($values->multiple)) {
+                $dataIndex = 'many_' . $key;
+            }
+            $a = [];
+            if ($dataIndex === 'picker_date') {
+                $a = ['renderer' => 'picker_date'];
+            }
+            $colParams[] = [
+                'title' => $values->title ?? ucwords(str_replace('_', ' ', $key)),
+                'allowClear' => $values->allowClear ?? false,
+                'multiple' => $values->multiple ?? false,
+                'dataIndex' => $dataIndex,
+            ] + $a;
+        }
+        // dd($colParams);
+        return $colParams;
+    }
+
+
     public function index(Request $request)
     {
         $input = $request->input();
@@ -166,15 +193,9 @@ abstract class Report_ParentController extends Controller
             return $this->forwardToMode($request, $modeParams);
         }
         $dataSource = $this->getDataSource($modeParams);
-        $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        $dataSource = $this->transformDataSource($dataSource, $modeParams);
         $dataSource = $this->changeValueData($dataSource, $modeParams);
-        $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
 
-        if ($this->typeView !== 'report-pivot') {
-            $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-        }
 
         $viewName =  CurrentPathInfo::getViewName($request);
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
@@ -182,13 +203,15 @@ abstract class Report_ParentController extends Controller
         echo $this->getJS();
         $modeReport = $this->makeModeTitleReport($routeName);
 
+        // dd($dataSource, $viewName);
+        $modeType = $this->modeType;
+        $paramColumns = $this->getParamColumns($dataSource, $modeType);
 
         return view('reports.' . $viewName, [
             'typeOfView' => $this->typeView,
             'modeType'=>$this->modeType,
             'maxH' => $this->maxH,
             'entity' => $entity,
-            'sheets' =>  $sheet,
             'mode' => $this->mode,
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
@@ -197,6 +220,7 @@ abstract class Report_ParentController extends Controller
             'typeReport' => $typeReport,
             'currentMode' =>  $this->mode,
             'tableColumns' => $tableColumns,
+            'paramColumns' => $paramColumns,
             'tableDataSource' => $dataSource,
             'currentUserId' => $currentUserId,
             'groupBy' => $this->groupBy,
@@ -206,7 +230,6 @@ abstract class Report_ParentController extends Controller
             'groupByLength' => $this->groupByLength,
             'topTitle' => $this->getMenuTitle(),
             'modeColumns' => $this->modeColumns(),
-            'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),
             'tableTrueWidth' => $this->tableTrueWidth,
         ]);
