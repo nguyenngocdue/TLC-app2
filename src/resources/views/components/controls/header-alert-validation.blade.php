@@ -10,8 +10,8 @@
         <ul class="mt-1.5 ml-4 text-red-700 list-disc list-inside">
             @foreach($colNameErrors as $colName => $errorList)
             {{-- @dump($errorList) --}}
-            @php $label = $props["_".$colName]['label']; @endphp
-            @php $control = $props["_".$colName]['control']; @endphp
+            @php $label = $props["_".$colName]['label'] ?? "Label?"; @endphp
+            @php $control = $props["_".$colName]['control'] ?? "Control?"; @endphp
             <li>
                 <a class="underline" href="#scroll-{{$colName}}" title="{{$colName}} - {{$control}}">{{$label}}:</a>
                 <ul class="mt-1.5 ml-4 text-red-700 list-disc list-inside">

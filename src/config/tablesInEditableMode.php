@@ -1,7 +1,9 @@
 <?php
 
 return [
-
+    'prod_routings' => [
+        'prod_routing_details' => [],
+    ],
     'prod_sequences' => [
         'prod_runs' => [],
     ],

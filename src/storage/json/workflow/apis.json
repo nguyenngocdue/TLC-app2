@@ -208,7 +208,8 @@
         "name": "prod_orders"
     },
     "prod_routing_details": {
-        "name": "prod_routing_details"
+        "name": "prod_routing_details",
+        "storeEmpty_and_updateShort": "true"
     },
     "prod_routing_links": {
         "name": "prod_routing_links"

@@ -8,7 +8,8 @@ class Prod_routing_detail extends ModelExtended
 {
     protected $fillable = [
         "id", "prod_routing_id", "prod_routing_link_id", "erp_routing_link_id",
-        "wir_description_id", "target_hours", "target_man_hours", "priority", "owner_id"
+        "wir_description_id", "target_hours", "target_man_hours",  "owner_id",
+        "priority", "order_no",
     ];
     protected $table = "prod_routing_details";
     public static $nameless = true;
@@ -48,10 +49,12 @@ class Prod_routing_detail extends ModelExtended
     public function getManyLineParams()
     {
         return [
+            ["dataIndex" => 'order_no', 'invisible' => !true, 'no_print' => true],
             ['dataIndex' => 'id', 'invisible' => !true],
-            ['dataIndex' => 'prod_routing_id',],
+            ['dataIndex' => 'prod_routing_id', 'invisible' => true, 'value_as_parent_id' => true],
+
             ['dataIndex' => 'prod_routing_link_id',],
-            ['dataIndex' => 'erp_routing_link_id',],
+            // ['dataIndex' => 'erp_routing_link_id',],
             ['dataIndex' => 'wir_description_id',],
             ["dataIndex" => 'target_hours'],
             ["dataIndex" => 'target_man_hours'],
