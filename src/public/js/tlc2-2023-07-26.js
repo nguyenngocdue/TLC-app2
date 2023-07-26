@@ -31,7 +31,9 @@ function listenerSubmitForm(idForm) {
 }
 
 const parseNumber2 = (id, initValue) => {
-    const inputNumber = document.getElementById(id);
+    const inputNumber = $("[id='" + id + "']");
+    // console.log(inputNumber, id)
+    // const inputNumber = document.getElementById(id);
     const formatterFn = (value) => {
         // if (value.includes('.')) {
         const [a, b] = value.split(".")
@@ -54,13 +56,13 @@ const parseNumber2 = (id, initValue) => {
             range.select();
         }
     };
-    inputNumber.addEventListener('blur', event => {
+    inputNumber.on('blur', event => {
         const inputValue = event.target.value;
         // const oldCursorPosition = inputNumber.selectionStart;
         const parsedValue = parserFn(inputValue);
         if (!isNaN(parsedValue)) {
             formattedValue = formatterFn(parsedValue);
-            event.target.value = formattedValue;
+            event.target.val = formattedValue;
             // const diffLength = formattedValue.length - inputValue.length;
             // const newCursorPosition = oldCursorPosition + diffLength;
             // setCursorPosition(inputNumber, newCursorPosition);
