@@ -31,20 +31,34 @@ function listenerSubmitForm(idForm) {
 }
 
 const parseNumber2 = (id, initValue) => {
-    // var id = @json($name);
-    // let initValue = @json(old($name, $value));
     const inputNumber = document.getElementById(id);
-    // const formatterSubmitFn = value => value.replace(/,/g, '');
     const formatterFn = (value) => {
         const [a, b] = value.split(".")
         return a.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (typeof b == 'string' ? ('.' + b) : "")
     }
     const parserFn = value => value.replace(/\$\s?|(,*)/g, '');
+    const setCursorPosition = (el, pos) => {
+        if (el.setSelectionRange) {
+            el.focus();
+            el.setSelectionRange(pos, pos);
+        } else if (el.createTextRange) {
+            const range = el.createTextRange();
+            range.collapse(true);
+            range.moveEnd('character', pos);
+            range.moveStart('character', pos);
+            range.select();
+        }
+    };
     inputNumber.addEventListener('input', event => {
         const inputValue = event.target.value;
+        const oldCursorPosition = inputNumber.selectionStart;
         const parsedValue = parserFn(inputValue);
         if (!isNaN(parsedValue)) {
-            event.target.value = formatterFn(parsedValue);
+            formattedValue = formatterFn(parsedValue);
+            event.target.value = formattedValue;
+            const diffLength = formattedValue.length - inputValue.length;
+            const newCursorPosition = oldCursorPosition + diffLength;
+            setCursorPosition(inputNumber, newCursorPosition);
         }
     });
     inputNumber.value = formatterFn(initValue);
