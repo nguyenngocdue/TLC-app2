@@ -35,7 +35,8 @@ const parseNumber2 = (id, initValue) => {
     // console.log(inputNumber, id)
     // const inputNumber = document.getElementById(id);
     const formatterFn = (value) => {
-        if(typeof value !== "object" && value !== null){
+        if(value !== null){
+            if(typeof value === 'number') value = value + '';
             const [a, b] = value.split(".")
             const formattedValue = a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             if(typeof b == 'string' && b.length > 0){
