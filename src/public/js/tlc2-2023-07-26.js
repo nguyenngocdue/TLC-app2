@@ -18,61 +18,6 @@ function callApiStoreEmpty(url, data, meta, callback = null) {
         },
     })
 }
-function listenerSubmitForm(idForm) {
-    var form = document.getElementById(idForm);
-    form.addEventListener('submit', function (event) {
-        $('button').prop('disabled', true);
-        $('input[component="controls/number2"]').each(function () {
-            var currentValue = $(this).val();
-            var cleanedValue = currentValue.replace(/[^0-9.\-]/g, '');
-            $(this).val(cleanedValue);
-        });
-    });
-}
-
-const parseNumber2 = (id, initValue) => {
-    const inputNumber = $("[id='" + id + "']");
-    // console.log(inputNumber, id)
-    // const inputNumber = document.getElementById(id);
-    const formatterFn = (value) => {
-        if (value !== null) {
-            if (typeof value === 'number') value = value + '';
-            const [a, b] = value.split(".")
-            const formattedValue = a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            if (typeof b == 'string' && b.length > 0) {
-                return formattedValue + '.' + b.replace(/0+$/, '');
-            }
-            return formattedValue;
-        }
-    }
-    const parserFn = value => value.replace(/\$\s?|(,*)/g, '');
-    const setCursorPosition = (el, pos) => {
-        if (el.setSelectionRange) {
-            el.focus();
-            el.setSelectionRange(pos, pos);
-        } else if (el.createTextRange) {
-            const range = el.createTextRange();
-            range.collapse(true);
-            range.moveEnd('character', pos);
-            range.moveStart('character', pos);
-            range.select();
-        }
-    };
-    inputNumber.on('blur change', () => {
-        const inputValue = inputNumber.val();
-        // const oldCursorPosition = inputNumber.selectionStart;
-        const parsedValue = parserFn(inputValue);
-        if (!isNaN(parsedValue)) {
-            formattedValue = formatterFn(parsedValue);
-            inputNumber.val(formattedValue);
-            // const diffLength = formattedValue.length - inputValue.length;
-            // const newCursorPosition = oldCursorPosition + diffLength;
-            // setCursorPosition(inputNumber, newCursorPosition);
-        }
-    });
-    inputNumber.val(formatterFn(initValue));
-}
-
 const makeKi = (k) => {
     const ki = {}
     Object.keys(k).forEach(tableName => {
@@ -84,5 +29,3 @@ const makeKi = (k) => {
     })
     return ki
 }
-
-const numberRemoveComma = (number) => number.replace(/[^0-9.\-]/g, '')

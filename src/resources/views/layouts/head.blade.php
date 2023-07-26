@@ -33,6 +33,7 @@
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
 
     <script src="{{ asset('js/tlc2-2023-07-26.js') }}"></script>
+    <script src="{{ asset('js/parsenumber.js') }}"></script>
     
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
