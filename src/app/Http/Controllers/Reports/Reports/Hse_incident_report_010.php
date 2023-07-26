@@ -390,7 +390,10 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     + $value['hseir_incident_count_vote']
                     + $value['hseir_near_miss_count_vote']) * 200000) / $value['work_hours'];
                 $value['trir'] = ($num = round($totalRecIncidentRate, 2)) ? $num : null;
-                if (!in_array($hseMonth, $hseMonths)) $data[] = $value;
+                if (!in_array($hseMonth, $hseMonths)){
+                    $value['work_hours'] = round($value['work_hours'], 2);
+                    $data[] = $value;
+                } 
                 $hseMonths[] = $hseMonth;
             }
         }
