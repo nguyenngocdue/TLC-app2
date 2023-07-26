@@ -33,12 +33,12 @@ function listenerSubmitForm(idForm) {
 const parseNumber2 = (id, initValue) => {
     const inputNumber = document.getElementById(id);
     const formatterFn = (value) => {
-        if (value.includes('.')) {
+        // if (value.includes('.')) {
             const [a, b] = value.split(".")
-            return a.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (typeof b == 'string' ? ('.' + b) : "")
-        } else {
-            return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/^0+(?=\d)/, '');
-        }
+            return a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (typeof b == 'string' ? ('.' + b.replace(/0+$/, '')) : "")
+        // } else {
+        //     return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/^0+(?=\d)/, '');
+        // }
         
     }
     const parserFn = value => value.replace(/\$\s?|(,*)/g, '');
@@ -54,18 +54,16 @@ const parseNumber2 = (id, initValue) => {
             range.select();
         }
     };
-    inputNumber.addEventListener('input', event => {
+    inputNumber.addEventListener('blur', event => {
         const inputValue = event.target.value;
-        const oldCursorPosition = inputNumber.selectionStart;
+        // const oldCursorPosition = inputNumber.selectionStart;
         const parsedValue = parserFn(inputValue);
         if (!isNaN(parsedValue)) {
-            console.log(parsedValue);
             formattedValue = formatterFn(parsedValue);
-            console.log(formattedValue);
             event.target.value = formattedValue;
-            const diffLength = formattedValue.length - inputValue.length;
-            const newCursorPosition = oldCursorPosition + diffLength;
-            setCursorPosition(inputNumber, newCursorPosition);
+            // const diffLength = formattedValue.length - inputValue.length;
+            // const newCursorPosition = oldCursorPosition + diffLength;
+            // setCursorPosition(inputNumber, newCursorPosition);
         }
     });
     inputNumber.value = formatterFn(initValue);
