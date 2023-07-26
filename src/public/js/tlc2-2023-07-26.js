@@ -31,10 +31,17 @@ function listenerSubmitForm(idForm) {
 }
 
 const parseNumber2 = (id, initValue) => {
-    const inputNumber = document.getElementById(id);
+    const inputNumber = $("[id='" + id + "']");
+    // console.log(inputNumber, id)
+    // const inputNumber = document.getElementById(id);
     const formatterFn = (value) => {
+        // if (value.includes('.')) {
         const [a, b] = value.split(".")
-        return a.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (typeof b == 'string' ? ('.' + b) : "")
+        return a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (typeof b == 'string' ? ('.' + b.replace(/0+$/, '')) : "")
+        // } else {
+        //     return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/^0+(?=\d)/, '');
+        // }
+
     }
     const parserFn = value => value.replace(/\$\s?|(,*)/g, '');
     const setCursorPosition = (el, pos) => {
@@ -49,17 +56,29 @@ const parseNumber2 = (id, initValue) => {
             range.select();
         }
     };
-    inputNumber.addEventListener('input', event => {
+    inputNumber.on('blur', event => {
         const inputValue = event.target.value;
-        const oldCursorPosition = inputNumber.selectionStart;
+        // const oldCursorPosition = inputNumber.selectionStart;
         const parsedValue = parserFn(inputValue);
         if (!isNaN(parsedValue)) {
             formattedValue = formatterFn(parsedValue);
-            event.target.value = formattedValue;
-            const diffLength = formattedValue.length - inputValue.length;
-            const newCursorPosition = oldCursorPosition + diffLength;
-            setCursorPosition(inputNumber, newCursorPosition);
+            event.target.val = formattedValue;
+            // const diffLength = formattedValue.length - inputValue.length;
+            // const newCursorPosition = oldCursorPosition + diffLength;
+            // setCursorPosition(inputNumber, newCursorPosition);
         }
     });
     inputNumber.value = formatterFn(initValue);
+}
+
+const makeKi = (k) => {
+    const ki = {}
+    Object.keys(k).forEach(tableName => {
+        const rows = k[tableName]
+        ki[tableName] = {}
+        rows.forEach(row => {
+            ki[tableName][row['id']] = row
+        })
+    })
+    return ki
 }

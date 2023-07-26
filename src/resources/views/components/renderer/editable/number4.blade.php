@@ -29,3 +29,6 @@
         @endif
     })
 </script>
+<script>
+    parseNumber2(@json($name), @json($cell??$slot));
+</script>
