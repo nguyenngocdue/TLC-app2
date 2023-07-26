@@ -21,7 +21,7 @@ function calculateFooterValue(operator, tableId, fieldName) {
         const name = tableId + "[" + fieldName + "][" + i + "]"
         switch (operator) {
             case 'agg_sum':
-                result += 1 * (getEById(name).val())
+                result += 1 * numberRemoveComma(getEById(name).val())
                 break
             default:
                 console.log("Unknown operator '" + operator + "'")
