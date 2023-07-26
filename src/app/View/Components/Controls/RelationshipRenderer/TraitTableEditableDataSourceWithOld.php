@@ -97,7 +97,7 @@ trait TraitTableEditableDataSourceWithOld
     {
         // dump($dataSource);
         foreach ($dataSource as $index => &$row) {
-            $row->order_no = 99 + $index * 10;
+            $row->order_no = 100 + $index * 10;
         }
         return $dataSource;
     }
