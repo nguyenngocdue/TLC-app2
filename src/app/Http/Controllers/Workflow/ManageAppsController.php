@@ -95,6 +95,12 @@ class ManageAppsController extends AbstractManageLibController
                 ],
             ],
             [
+                'dataIndex' => 'do_not_send_notification_mails',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+            [
                 'dataIndex' => 'apply_approval_tree',
                 'renderer' => 'checkbox',
                 'editable' => true,

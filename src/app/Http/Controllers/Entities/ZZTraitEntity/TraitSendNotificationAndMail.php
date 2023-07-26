@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Events\CreateNewDocumentEvent;
 use App\Events\UpdatedDocumentEvent;
+use App\Http\Controllers\Workflow\LibApps;
 use App\Models\Logger;
 use App\Utils\Support\JsonControls;
 use Brian2694\Toastr\Facades\Toastr;
@@ -12,38 +13,45 @@ use Illuminate\Support\Facades\Auth;
 
 trait TraitSendNotificationAndMail
 {
-    private function eventCreatedNotificationAndMail($fields, $id, $status, $type, $classType, $toastrResult)
+    private function eventCreatedNotificationAndMail($fields, $id, $status,$toastrResult)
     {
         if ($status && empty($toastrResult)) {
             $fields = $this->addEntityType($fields, 'id', $id);
             $fields = $this->addEntityType($fields, 'status', $status);
             try {
-                $currentValue = $this->addEntityType($fields, 'entity_type', $type);
-                $this->insertLogger($currentValue, null, Auth::id(), $classType);
-                event(new CreateNewDocumentEvent($currentValue = $currentValue, $classType));
+                $currentValue = $this->addEntityType($fields, 'entity_type', $this->type);
+                $this->insertLogger($currentValue, null, Auth::id(), $this->data);
+                if(!($this->ignoreSendMail())){
+                    event(new CreateNewDocumentEvent($currentValue = $currentValue, $this->data));
+                }
             } catch (\Throwable $th) {
                 Toastr::error($th->getFile() . " " . $th->getLine() . " in " . __FUNCTION__, $th->getMessage());
             }
         }
     }
-    private function eventUpdatedNotificationAndMail($previousValue, $fields, $type, $status, $classType, $toastrResult)
+    private function eventUpdatedNotificationAndMail($previousValue, $fields, $status,$toastrResult)
     {
         if ($status && empty($toastrResult)) {
             try {
-                $previousValue = $this->addEntityType($previousValue, 'entity_type', $type);
-                $currentValue = $this->addEntityType($fields, 'entity_type', $type);
+                $previousValue = $this->addEntityType($previousValue, 'entity_type', $this->type);
+                $currentValue = $this->addEntityType($fields, 'entity_type',  $this->type);
                 $userCurrentId = Auth::id();
-                $this->insertLogger($currentValue, $previousValue, $userCurrentId, $classType, 'update');
-                event(new UpdatedDocumentEvent(
-                    $previousValue = $previousValue,
-                    $currentValue = $currentValue,
-                    $classType = $classType,
-                    $userCurrentId = $userCurrentId,
-                ));
+                $this->insertLogger($currentValue, $previousValue, $userCurrentId, $this->data, 'update');
+                if(!($this->ignoreSendMail())){
+                    event(new UpdatedDocumentEvent(
+                        $previousValue = $previousValue,
+                        $currentValue = $currentValue,
+                        $classType = $this->data,
+                        $userCurrentId = $userCurrentId,
+                    ));
+                }
             } catch (\Throwable $th) {
                 Toastr::error($th->getFile() . " " . $th->getLine() . " in " . __FUNCTION__, $th->getMessage());
             }
         }
+    }
+    private function ignoreSendMail(){
+        return LibApps::getFor($this->type)['do_not_send_notification_mails'] ?? false;
     }
     private function getPreviousValue($fields, $item)
     {
