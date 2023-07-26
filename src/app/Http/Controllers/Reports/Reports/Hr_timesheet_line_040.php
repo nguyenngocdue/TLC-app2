@@ -8,7 +8,7 @@ use App\Http\Controllers\Reports\TraitDataModesReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 
 
-class Hr_timesheet_line_010 extends Report_ParentController2
+class Hr_timesheet_line_040 extends Report_ParentController2
 
 {
     use TraitDynamicColumnsTableReport;
@@ -16,7 +16,7 @@ class Hr_timesheet_line_010 extends Report_ParentController2
     protected $maxH = 50;
     protected $libPivotFilters;
     protected $typeView = 'report-pivot';
-    protected $modeType = 'hr_timesheet_line_project_date';
+    protected $modeType = 'hr_timesheet_line_team_project';
     protected $tableTrueWidth = true;
 
     public function getDataSource($modeParams)

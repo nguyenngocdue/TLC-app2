@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 abstract class Report_ParentController extends Controller
@@ -171,10 +170,6 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->changeValueData($dataSource, $modeParams);
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
-
-        if ($this->typeView !== 'report-pivot') {
-            $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-        }
 
         $viewName =  CurrentPathInfo::getViewName($request);
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
