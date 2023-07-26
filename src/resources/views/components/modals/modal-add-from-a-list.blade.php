@@ -31,8 +31,8 @@ const addLinesToTable = (listId, tableId) => {
     // console.log(result)
     for (let i = 0; i < result.length; i++) {
         const user_id = result[i]
-        const today = moment().format('DD/MM/YYYY')
-        const valuesOfOrigin = { user_id, ot_date: today }
+        // const today = moment().format('DD/MM/YYYY')
+        const valuesOfOrigin = { user_id }
         // console.log("Add line", tableId, valuesOfOrigin)
         addANewLine({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList:true, batchLength: result.length })
     }

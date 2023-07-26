@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use App\Http\Controllers\Workflow\LibApps;
-use App\Notifications\Traits\TraitSupportNotification;
 use App\Utils\SendMaiAndNotification\CheckDefinitionsNew;
 use App\Utils\Support\Json\Definitions;
 use Illuminate\Bus\Queueable;
@@ -16,7 +15,6 @@ use Illuminate\Support\Str;
 
 class UpdatedNotification extends Notification implements ShouldQueue
 {
-    use TraitSupportNotification;
     use CheckDefinitionsNew;
     use Queueable;
     public $data;
