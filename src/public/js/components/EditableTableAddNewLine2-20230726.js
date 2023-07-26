@@ -284,16 +284,8 @@ const addANewLineFull = (params) => {
             onChangeParams += 'batchLength ' + ','
             onChangeParams += '}'
 
-            const onChangeDropdown4Fn =
-                'onChangeDropdown4(' + onChangeParams + ');'
-
-            const makeOnChangeAdvanced = (moreCodeAfter) =>
-                '' +
-                '$("[id=\'' +
-                id +
-                "']\").on('change', function(e, batchLength){" +
-                moreCodeAfter +
-                '})'
+            const onChangeDropdown4Fn = 'onChangeDropdown4(' + onChangeParams + ');'
+            const makeOnChangeAdvanced = (moreCodeAfter) => '' + '$("[id=\'' + id + "']\").on('change', function(e, batchLength){" + moreCodeAfter + '})'
 
             switch (column['renderer']) {
                 case 'read-only-text4':
@@ -325,12 +317,13 @@ const addANewLineFull = (params) => {
                     break
                 case 'dropdown4':
                     multipleStr = column?.multiple ? 'multiple' : ''
+                    readOnlyStr = column?.readOnly ? 'readonly' : ''
                     bracket = column?.multiple ? '[]' : ''
-                    if (column['readOnly']) {
+                    if (column['readOnly'] && column['deaf']) {
                         renderer = "<input id='" + id + "' name='" + id + bracket + "' type='hidden' >"
                         renderer += "<div id='" + id + "_label' class='px-2'></div>"
                     } else {
-                        renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + " class='" + column['classList'] + "'></select>"
+                        renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + " " + readOnlyStr + " class='" + column['classList'] + "'></select>"
                         renderer += "<script>getEById('" + id + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
                     }
                     renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
@@ -420,17 +413,12 @@ const addANewLineFull = (params) => {
                         //     break
                     }
                 }
-                if (column['readOnly']) {
+                if ((column['readOnly'] && column['deaf'])) {
                     getEById(id).val(selected)
-                    const dataSource = k[column['tableName']]
-                    // console.log(dataSource)
-                    let label = 'Unknown #' + selected
-                    for (let i = 0; i < dataSource.length; i++) {
-                        if (dataSource[i].id == selected) {
-                            label = dataSource[i].name
-                            break
-                        }
-                    }
+                    const dataSource = ki[column['tableName']]
+                    // console.log(dataSource, dataSource[selected])
+
+                    const label = dataSource[selected].name
                     getEById(id + '_label').html(label)
                     toDoAfterAddedDropdown4ReadOnly.push({ id, dataSource: k[column['tableName']], tableId, selected, })
                     // getEById(id).trigger('change')

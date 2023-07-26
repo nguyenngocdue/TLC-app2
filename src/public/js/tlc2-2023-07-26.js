@@ -37,14 +37,13 @@ const parseNumber2 = (id, initValue) => {
     const formatterFn = (value) => {
         if(typeof value !== "object" && value !== null){
             const [a, b] = value.split(".")
-            return a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (typeof b == 'string' ? ('.' + b.replace(/0+$/, '')) : "")
+            const formattedValue = a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            if(typeof b == 'string' && b.length > 0){
+                return  formattedValue + '.' +  b.replace(/0+$/, '');
+            }
+            return formattedValue;
+            }
         }
-        // if (value.includes('.')) {
-        // } else {
-        //     return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/^0+(?=\d)/, '');
-        // }
-
-    }
     const parserFn = value => value.replace(/\$\s?|(,*)/g, '');
     const setCursorPosition = (el, pos) => {
         if (el.setSelectionRange) {
