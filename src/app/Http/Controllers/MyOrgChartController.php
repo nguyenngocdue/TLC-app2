@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\App;
 
 class MyOrgChartController extends Controller
 {
+    const ARRAY_TSO_NONE = [2,3];
+
+    const ARRAY_RESIGNED = [0,1];
+
+    const ARRAY_NONE_RESIGNED = [0];
+
     use TraitViewAllFunctions;
     public function getType()
     {
@@ -94,14 +100,14 @@ class MyOrgChartController extends Controller
     }
     private function getOptionsRenderByUserSetting($showOptions){
         $results = [
-            'resigned' => Constant::ARRAY_NONE_RESIGNED,
-            'time_keeping_type' => Constant::ARRAY_TSO_NONE,
+            'resigned' => $this::ARRAY_NONE_RESIGNED,
+            'time_keeping_type' => $this::ARRAY_TSO_NONE,
             'workplace'=> $this->getIdsWorkplace(),
         ];
         foreach ($showOptions as $key => $value) {
                 switch ($key) {
                     case 'resigned':
-                        if($value == 'true') $results['resigned'] = Constant::ARRAY_RESIGNED;
+                        if($value == 'true') $results['resigned'] = $this::ARRAY_RESIGNED;
                         break;
                     case 'time_keeping_type':
                         if($value == 'true') $results['time_keeping_type'] = $this->getIdsUserTimeKeepingType();
