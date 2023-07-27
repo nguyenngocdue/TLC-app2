@@ -48,4 +48,7 @@ class Constant
     const TIME_DEFAULT_MORNING = 240;
 
     const TIME_DEFAULT_AFTERNOON = 270;
+
+
+    
 }
