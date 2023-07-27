@@ -79,7 +79,7 @@
         "name": "_wir_description_id",
         "column_name": "wir_description_id",
         "column_type": "bigint unsigned",
-        "label": "Wir Description",
+        "label": "WIR Description",
         "control": "dropdown",
         "align": "",
         "col_span": "",
