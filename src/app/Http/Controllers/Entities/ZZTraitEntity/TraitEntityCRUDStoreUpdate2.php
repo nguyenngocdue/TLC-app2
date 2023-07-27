@@ -187,6 +187,7 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
+		$this->removeAttachmentForFields($fieldForEmailHandler,$props['attachment']);
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler,$newStatus,$toastrResult);
 		if ($request->input('redirect_back_to_last_page')) return redirect()->back();
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
