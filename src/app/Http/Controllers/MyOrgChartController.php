@@ -66,12 +66,14 @@ class MyOrgChartController extends Controller
             $id = $value->id;
             $user = User::findFromCache($id);
             $positionRendered = $user->position_rendered;
+            $email = $user->email;
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
             return [
                 'key' => $id,
                 'name' => $value->name,
                 'parent' => $value->parent_id,
                 'avatar' => $avatar,
+                'email' => $email,
                 'fill' => $this->getFillColor($value),
                 'title' => $positionRendered,
                 'url' => "/profile/$id",

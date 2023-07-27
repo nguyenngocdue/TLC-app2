@@ -140,8 +140,8 @@ function init() {
             margin: 8,
             defaultAlignment: go.Spot.Left,  // thus no need to specify alignment on each element
           },
-          $(go.TextBlock, textStyle("headOf"),
-            new go.Binding("text", "headOf", head => "Head of: " + head)
+          $(go.TextBlock, textStyle("email"),
+            new go.Binding("text", "email", head => "Email: " + head)
           ),
           $(go.TextBlock, textStyle("parent"),
             new go.Binding("margin", "headOf", head => mt8), // some space above if there is also a headOf value
