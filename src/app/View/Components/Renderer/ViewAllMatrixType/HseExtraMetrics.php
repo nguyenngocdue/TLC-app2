@@ -107,7 +107,7 @@ class HseExtraMetrics extends ViewAllTypeMatrixParent
     //     ];
     // }
 
-    // function getMetaObjects($y)
+    // function getMetaObjects($y, $dataSource, $xAxis)
     // {
     //     return [
     //         'meta01' => (object) [

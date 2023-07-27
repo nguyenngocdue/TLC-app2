@@ -30,7 +30,7 @@
             </label>
           </div>
         </div>
-        <x-renderer.button htmlType='submit'>Save</x-renderer.button>
+        <x-renderer.button htmlType='submit' type="secondary" >Save</x-renderer.button>
       </div>
     </x-renderer.card>
   </form>

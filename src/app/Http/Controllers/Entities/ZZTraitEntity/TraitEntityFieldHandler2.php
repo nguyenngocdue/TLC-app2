@@ -124,6 +124,12 @@ trait TraitEntityFieldHandler2
             $this->dump1("handleCheckboxAndDropdownMulti $propName", $ids, __LINE__);
         }
     }
+    private function removeAttachmentForFields(&$fields,$keyRemoves){
+        foreach ($keyRemoves as $key) {
+            $key = substr($key,1);
+            if(isset($fields[$key]))  unset($fields[$key]);
+        }
+    }
 
     private function handleFields(Request $request, $action)
     {

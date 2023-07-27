@@ -116,16 +116,32 @@ class QaqcWirs extends ViewAllTypeMatrixParent
             ['dataIndex' => 'production_name',  'width' => 300,],
             ['dataIndex' => 'compliance_name',  'width' => 300,],
             ['dataIndex' => 'quantity',  'width' => 50, 'align' => 'right'],
-            // ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
+            ['dataIndex' => 'progress', 'width' => 50, 'align' => 'right'],
         ];
     }
 
-    function getMetaObjects($y)
+    function getProgress($line)
     {
+        $result = 0;
+        foreach ($line as $cell) {
+            foreach ($cell as $wir) {
+                $result += in_array($wir->status, ['closed', 'not_applicable']);
+            }
+        }
+        return $result;
+    }
+
+    function getMetaObjects($y, $dataSource, $xAxis)
+    {
+        $prodOrderId = $y->id;
+        $line = $dataSource[$prodOrderId] ?? [];
+        $wirCount = count($xAxis);
+        $progress = 100 * $this->getProgress($line) / $wirCount;
         return [
             'production_name' =>  $y->production_name,
             'compliance_name' =>  $y->compliance_name,
             'quantity' => $y->quantity,
+            'progress' => $progress . "%",
         ];
     }
 }
