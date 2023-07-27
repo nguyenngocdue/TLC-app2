@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Models\Department;
 use App\Models\User;
+use App\Models\User_time_keep_type;
+use App\Models\Workplace;
+use App\Utils\Constant;
 use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -83,19 +86,25 @@ class MyOrgChartController extends Controller
     private function getFillColor($item){
         return $item->resigned == 1 ? '#d1d5db' : ($item->time_keeping_type == 3 ? "#fed7aa" : "#ffffff");
     }
+    private function getIdsWorkplace(){
+        return Workplace::query()->get()->pluck('id')->toArray();
+    }
+    private function getIdsUserTimeKeepingType(){
+        return User_time_keep_type::query()->get()->pluck('id')->toArray();
+    }
     private function getOptionsRenderByUserSetting($showOptions){
         $results = [
-            'resigned' => [0],
-            'time_keeping_type' => [2,3],
-            'workplace'=> [1,2,3,4,5,6],
+            'resigned' => Constant::ARRAY_NONE_RESIGNED,
+            'time_keeping_type' => Constant::ARRAY_TSO_NONE,
+            'workplace'=> $this->getIdsWorkplace(),
         ];
         foreach ($showOptions as $key => $value) {
                 switch ($key) {
                     case 'resigned':
-                        if($value == 'true') $results['resigned'] = [0,1];
+                        if($value == 'true') $results['resigned'] = Constant::ARRAY_RESIGNED;
                         break;
                     case 'time_keeping_type':
-                        if($value == 'true') $results['time_keeping_type'] = [1,2,3];
+                        if($value == 'true') $results['time_keeping_type'] = $this->getIdsUserTimeKeepingType();
                             break;
                     case 'workplace':
                         if(is_array($value)) $results['workplace'] = $value;
