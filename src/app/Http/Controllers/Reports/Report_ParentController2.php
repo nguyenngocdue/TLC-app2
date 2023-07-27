@@ -163,27 +163,26 @@ abstract class Report_ParentController2 extends Controller
         $paramColumns = $this->getParamColumns($dataSource, $modeType);
 
         return view('reports.' . $viewName, [
-            'typeOfView' => $this->typeView,
-            'modeType' => $this->modeType,
-            'maxH' => $this->maxH,
             'entity' => $entity,
+            'maxH' => $this->maxH,
             'mode' => $this->mode,
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
+            'groupBy' => $this->groupBy,
             'modeReport' => $modeReport,
             'modeParams' => $modeParams,
             'typeReport' => $typeReport,
+            'modeType' => $this->modeType,
             'currentMode' =>  $this->mode,
+            'typeOfView' => $this->typeView,
             'tableColumns' => $tableColumns,
             'paramColumns' => $paramColumns,
-            'currentUserId' => $currentUserId,
-            'groupBy' => $this->groupBy,
-            // 'modeOptions' => $this->$entity(),
+            'tableDataSource'=> $dataSource,
             'tableDataHeader' => $tableDataHeader,
             'rotate45Width' => $this->rotate45Width,
             'groupByLength' => $this->groupByLength,
-            'topTitle' => $this->getMenuTitle(),
             'tableTrueWidth' => $this->tableTrueWidth,
+            'topTitle' => $this->getMenuTitle(),
         ]);
     }
 

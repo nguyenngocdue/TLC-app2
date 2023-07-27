@@ -63,43 +63,13 @@
         "name": "report-hr_timesheet_line_100",
         "package_tab": "report",
         "package": "hr_&_admin",
-        "title": "Timesheet TS Lines"
+        "title": "Timesheet Lines DataSource"
     },
     "report-hse_incident_report_010": {
         "name": "report-hse_incident_report_010",
         "package_tab": "report",
         "package": "hr_&_admin",
         "title": "HSE Key Performance Indicator"
-    },
-    "report-pivot-hr_timesheet_line_010": {
-        "name": "report-pivot-hr_timesheet_line_010",
-        "package_tab": "report",
-        "package": null,
-        "title": "Project \/ Date"
-    },
-    "report-pivot-hr_timesheet_line_020": {
-        "name": "report-pivot-hr_timesheet_line_020",
-        "package_tab": "report",
-        "package": null,
-        "title": "Employee\/Project"
-    },
-    "report-pivot-hr_timesheet_line_030": {
-        "name": "report-pivot-hr_timesheet_line_030",
-        "package_tab": "report",
-        "package": null,
-        "title": "Employee\/Date"
-    },
-    "report-pivot-hr_timesheet_line_040": {
-        "name": "report-pivot-hr_timesheet_line_040",
-        "package_tab": "report",
-        "package": null,
-        "title": "Team\/Project"
-    },
-    "report-pivot-hr_timesheet_line_050": {
-        "name": "report-pivot-hr_timesheet_line_050",
-        "package_tab": "report",
-        "package": null,
-        "title": null
     },
     "report-prod_order_010": {
         "name": "report-prod_order_010",

@@ -95,6 +95,7 @@ class PivotTable extends Component
         }
         $dataOutput = $this->changeValueData($dataOutput);
         $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
+        // dd($linesData, $dataOutput);
         return view("components.renderer.report.pivot-table", [
             'tableDataSource' => $dataRender,
             'tableColumns' => $tableColumns,

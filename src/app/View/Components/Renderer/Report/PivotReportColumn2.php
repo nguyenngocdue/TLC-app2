@@ -26,6 +26,7 @@ trait  PivotReportColumn2
                     'title' => $value->title ?? ucfirst(substr($key,0, strpos($key, '_'))),
                     'dataIndex' => $dataIndex,
                     'width' => $value->width ?? 140,
+                    'align' => $value->align ?? 'left',
                 ];
             }
         }
@@ -213,6 +214,7 @@ trait  PivotReportColumn2
         $topTitleColumns = array_merge(...array_column($dataOutput, 'top_title_column'));
 
         $columnsOfColumnFields = [];
+        // dd($linesData);
         if ($rowFields) {
             $tableDataHeader = $this->editRowHeaderColumnFields($fields, $keysOfColumnFields, $topTitleColumns);
             array_walk(
@@ -238,11 +240,10 @@ trait  PivotReportColumn2
                                 $columnsOfColumnFields[] = [
                                     'title' => $title ?? 'Empty',
                                     'dataIndex' => $value,
-                                    'align' => is_numeric($value) ? 'left' : 'right',
                                     'width' => $width ?? 50,
                                     'colspan' =>  $countRenderCol,
                                     'header_name' => $tableDataHeader[$value] ?? '',
-                                    'align'=> $align,
+                                    'align'=> is_numeric($value) ? 'right':$align,
                                 ];
                             };
                         }
@@ -284,7 +285,6 @@ trait  PivotReportColumn2
             $columnsOfAgg[] = [
                 'title' => $value->title ?? str_replace('_', ' ', $key),
                 'dataIndex' => $value->aggregation.'_'. $key,
-                'align' => 'right',
                 'width' => $value->width ?? 50,
                 'align' => $value->align ?? 'right',
             ];

@@ -16,12 +16,12 @@ class Hr_timesheet_line_050 extends Report_ParentController2
     protected $maxH = 50;
     protected $libPivotFilters;
     protected $typeView = 'report-pivot';
-    protected $modeType = '';
+    protected $modeType = 'datasource_hr_timesheet_line';
     protected $tableTrueWidth = true;
 
     public function getDataSource($modeParams)
     {
-        $primaryData = (new Hr_timesheet_line_100())->getDataSource($modeParams);
+        $primaryData = (new Hr_timesheet_line_dataSource())->getDataSource($modeParams);
         return $primaryData;
     }
 
