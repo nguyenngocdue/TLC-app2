@@ -1,33 +1,21 @@
 {
-    "register-hr_overtime_request_010": {
-        "name": "register-hr_overtime_request_010",
-        "package_tab": "report",
-        "package": "hr_&_admin",
-        "title": "Overtime Summary"
-    },
-    "register-hr_overtime_request_020": {
-        "name": "register-hr_overtime_request_020",
-        "package_tab": "report",
-        "package": "hr_&_admin",
-        "title": "Overtime OT Lines"
-    },
     "register-qaqc_insp_chklst_020": {
         "name": "register-qaqc_insp_chklst_020",
         "package_tab": "report",
         "package": "project_management",
         "title": "Inspection Matrix"
     },
-    "register-qaqc_wir_010": {
-        "name": "register-qaqc_wir_010",
+    "report-hr_overtime_request_010": {
+        "name": "report-hr_overtime_request_010",
         "package_tab": "report",
-        "package": "project_management",
-        "title": "WIR Register"
+        "package": "hr_&_admin",
+        "title": "Overtime Summary"
     },
-    "register-qaqc_wir_020": {
-        "name": "register-qaqc_wir_020",
+    "report-hr_overtime_request_020": {
+        "name": "report-hr_overtime_request_020",
         "package_tab": "report",
-        "package": "project_management",
-        "title": "WIR Detail Progress"
+        "package": "hr_&_admin",
+        "title": "Overtime OT Lines"
     },
     "report-hr_timesheet_line_010": {
         "name": "report-hr_timesheet_line_010",

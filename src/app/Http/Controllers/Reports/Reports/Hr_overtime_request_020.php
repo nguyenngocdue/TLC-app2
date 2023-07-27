@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Reports\Registers;
+namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
