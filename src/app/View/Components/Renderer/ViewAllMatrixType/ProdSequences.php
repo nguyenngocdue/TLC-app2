@@ -111,7 +111,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         ];
     }
 
-    function getMetaObjects($y)
+    function getMetaObjects($y, $dataSource, $xAxis)
     {
         return [
             'production_name' => $y->production_name,
