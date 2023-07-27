@@ -134,7 +134,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     function getMetaObjects($y, $dataSource, $xAxis)
     {
         $prodOrderId = $y->id;
-        $line = $dataSource[$prodOrderId];
+        $line = $dataSource[$prodOrderId] ?? [];
         $wirCount = count($xAxis);
         $progress = 100 * $this->getProgress($line) / $wirCount;
         return [
