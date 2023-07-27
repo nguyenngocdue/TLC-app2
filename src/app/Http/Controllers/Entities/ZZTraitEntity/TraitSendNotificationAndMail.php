@@ -20,9 +20,9 @@ trait TraitSendNotificationAndMail
             $fields = $this->addEntityType($fields, 'status', $status);
             try {
                 $currentValue = $this->addEntityType($fields, 'entity_type', $this->type);
-                $this->insertLogger($currentValue, null, Auth::id(), $this->data);
+                $this->insertLogger($currentValue, null, Auth::id(), ($this->data ?? $this->modelPath));
                 if(!($this->ignoreSendMail())){
-                    event(new CreateNewDocumentEvent($currentValue = $currentValue,$this->type, $this->data));
+                    event(new CreateNewDocumentEvent($currentValue = $currentValue,$this->type, ($this->data ?? $this->modelPath)));
                 }
             } catch (\Throwable $th) {
                 Toastr::error($th->getFile() . " " . $th->getLine() . " in " . __FUNCTION__, $th->getMessage());
