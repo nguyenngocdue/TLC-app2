@@ -1,0 +1,129 @@
+<?php
+
+namespace App\Http\Controllers\Reports\Reports;
+
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Reports\TraitDataModesReport;
+use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Models\User;
+use App\Utils\Support\Report;
+use DateInterval;
+use DatePeriod;
+use DateTime;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
+class Hr_timesheet_line_dataSource extends Controller
+
+{
+    use TraitDynamicColumnsTableReport;
+    use TraitDataModesReport;
+    protected $maxH = 50;
+    protected $mode = '100';
+    #protected $rotate45Width = 300;
+    protected $libPivotFilters;
+
+    public function getSqlStr($modeParams)
+    {
+        $pickerDate = $modeParams['picker_date'] ?? self::defaultPickerDate();
+        [$startDate, $endDate] = Report::explodePickerDate($pickerDate);
+        $startDate = Report::formatDateString($startDate, 'Y-m-d');
+        $endDate = Report::formatDateString($endDate, 'Y-m-d');
+        $sql = "SELECT
+                    tsl.project_id AS project_id,
+                    DATE(tsl.start_time) AS time_sheet_start_time,
+                    SUBSTRING(tsl.start_time, 1, 7) AS month,
+                    DATE(tsl.start_time) AS time_sheet_start_time_wfh,
+                    DATE(tsl.start_time) AS time_sheet_start_time_otr,
+                    SUM(tsl.duration_in_min) AS time_sheet_durations,
+                    SUM(0) AS time_sheet_durations_wfh,
+                    SUM(0) AS time_sheet_durations_otr,
+                    SUM(tsl.ts_hour) AS time_sheet_hours,
+
+                    tsl.sub_project_id AS sub_project_id,
+                    tsl.user_id AS user_id,
+                    tsl.discipline_id AS discipline_id,
+                    tsl.lod_id AS lod_id,
+                    tsl.task_id AS pj_task_id,
+                    us.department AS department_id,
+                    us.user_type AS type_id,
+                    us.category AS category_id,
+                    us.employeeid AS staff_id,
+                    us.workplace AS workplace_id
+
+                FROM
+                    hr_timesheet_lines tsl
+                INNER JOIN \n";
+
+        if (isset($modeParams['many_user_id']) || isset($modeParams['user_id'])) {
+            $ids = implode(',', $modeParams['many_user_id'] ?? $modeParams['user_id']);
+            $sql .= "users us ON tsl.user_id IN ($ids) AND us.id = tsl.user_id";
+        } else {
+            $sql .= "users us ON tsl.user_id = us.id";
+        }
+        $sql .= "\n WHERE 1 = 1 
+                    AND DATE(tsl.start_time) BETWEEN '$startDate' AND '$endDate'
+                    #AND tsl.sub_project_id IN (82, 21)
+                GROUP BY
+                    time_sheet_start_time,
+                    pj_task_id,
+                    project_id,
+                    sub_project_id,
+                    user_id,
+                    discipline_id,
+                    lod_id,
+                    department_id,
+                    type_id,
+                    category_id,
+                    staff_id,
+                    workplace_id,
+                    month
+                ORDER BY
+                    user_id";
+        return $sql;
+    }
+    protected function getDefaultValueModeParams($modeParams, $request)
+    {
+        $pickerDate = 'picker_date';
+        $isNullModeParams = Report::isNullModeParams($modeParams);
+        if ($isNullModeParams) {
+            $modeParams[$pickerDate] = self::defaultPickerDate();
+        }
+        return $modeParams;
+    }
+
+    private function defaultPickerDate()
+    {
+        $currentDate = new DateTime();
+        $targetDate = clone $currentDate;
+        $targetDate->modify('-6 months');
+        $targetDate->modify('-1 day');
+        return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
+    }
+
+    private function getSql($modeParams)
+    {
+
+        $sqlStr = $this->getSqlStr($modeParams);
+        preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
+        foreach (last($matches) as $key => $value) {
+            if (isset($modeParams[$value])) {
+                $valueParam =  $modeParams[$value];
+                $searchStr = head($matches)[$key];
+                $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
+            }
+        }
+        // dd($sqlStr);
+        return $sqlStr;
+    }
+
+    public function getDataSource($modeParams)
+    {
+        $sql = $this->getSql($modeParams);
+        if (is_null($sql) || !$sql) return collect();
+        $sqlData = DB::select(DB::raw($sql));
+        $collection = collect($sqlData);
+        return $collection;
+    }
+
+}

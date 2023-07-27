@@ -205,7 +205,6 @@ class PivotTableController extends Controller
     public function makeDataRenderer($linesData, $libs, $topParams)
     {
         $keysOfFilters = array_keys($libs['filters']);
-        $keysOfRowFilters = array_keys($libs['filters']);
         $keysOfColumnFields = array_keys($libs['column_fields']);
         $keysOfRowFields = array_keys($libs['row_fields']);
         $columnFields = $libs['column_fields'];
@@ -222,12 +221,11 @@ class PivotTableController extends Controller
         // dd($dataReduce);
 
         // Step 2: group lines by Row_Fields array
-        if (!count($keysOfRowFilters)) {
+        if (!count($keysOfRowFields)) {
             $processedData = PivotReport::groupBy($dataReduce, $keysOfColumnFields);
         } else {
             $processedData = PivotReport::groupBy($dataReduce, $keysOfRowFields);
         }
-        // dd($rowFields, $processedData);
 
         //Remove all array keys by looping through all elements
         $fieldsNeedToSum = $this->getFieldNeedToSum($columnFields);

@@ -101,7 +101,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $params;
     }
 
-    function getMetaObjects($y)
+    function getMetaObjects($y, $dataSource, $xAxis)
     {
         return [];
     }
@@ -148,10 +148,8 @@ abstract class ViewAllTypeMatrixParent extends Component
                     $line[$xId] = $this->cellRenderer($dataSource[$yId][$xId]);
                 }
             }
-            $metaObjects = $this->getMetaObjects($y);
-            foreach ($metaObjects as $key => $metaObject) {
-                $line[$key] = $metaObject;
-            }
+            $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis);
+            foreach ($metaObjects as $key => $metaObject)  $line[$key] = $metaObject;
             $result[] = $line;
         }
         // dump($result);

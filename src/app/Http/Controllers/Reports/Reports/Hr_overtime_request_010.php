@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Reports\Registers;
+namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
@@ -296,7 +296,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
     {
 
         // $dataSource = $this->getDataByCompanyTree($dataSource);
-        $type = Str::singular($this->getType());
+        // $type = Str::singular($this->getType());
         foreach ($dataSource as $key => $value) {
 
             // display colors for total_overtime_hours
@@ -315,7 +315,7 @@ class Hr_overtime_request_010 extends Report_ParentRegisterController
             $dataSource[$key]->remaining_allowed_ot_hours_year = $reAllowedOTHoursYear;
 
             // dd($dataSource[0]);
-            $hrefForward = route("register-hr_overtime_request_020") . $param;
+            $hrefForward = route("report-hr_overtime_request_020") . $param;
             $dataSource[$key]->total_overtime_hours = (object)[
                 'value' => $value->total_overtime_hours,
                 'cell_href' => $hrefForward,

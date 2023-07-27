@@ -106,7 +106,7 @@ class HrTrainingLines extends ViewAllTypeMatrixParent
         ];
     }
 
-    function getMetaObjects($y)
+    function getMetaObjects($y, $dataSource, $xAxis)
     {
         $dueDate = Carbon::parse($y->first_date)->addDays($this->timeFrameInDays)->format(Constant::FORMAT_DATE_MYSQL);
         return [
