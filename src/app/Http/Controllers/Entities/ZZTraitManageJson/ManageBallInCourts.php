@@ -40,7 +40,7 @@ class ManageBallInCourts extends Manage_Parent
                 "dataIndex" => 'ball-in-court-assignee',
                 'renderer' => 'dropdown',
                 'editable' => true,
-                "cbbDataSource" => ['', 'creator', ...$allAssignees],
+                "cbbDataSource" => ['', 'owner_id', ...$allAssignees],
                 'width' => 10,
             ],
 

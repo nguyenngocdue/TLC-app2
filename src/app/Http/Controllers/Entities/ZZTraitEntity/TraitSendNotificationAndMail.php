@@ -22,7 +22,7 @@ trait TraitSendNotificationAndMail
                 $currentValue = $this->addEntityType($fields, 'entity_type', $this->type);
                 $this->insertLogger($currentValue, null, Auth::id(), $this->data);
                 if(!($this->ignoreSendMail())){
-                    event(new CreateNewDocumentEvent($currentValue = $currentValue, $this->data));
+                    event(new CreateNewDocumentEvent($currentValue = $currentValue,$this->type, $this->data));
                 }
             } catch (\Throwable $th) {
                 Toastr::error($th->getFile() . " " . $th->getLine() . " in " . __FUNCTION__, $th->getMessage());
@@ -41,6 +41,7 @@ trait TraitSendNotificationAndMail
                     event(new UpdatedDocumentEvent(
                         $previousValue = $previousValue,
                         $currentValue = $currentValue,
+                        $type = $this->type,
                         $classType = $this->data,
                         $userCurrentId = $userCurrentId,
                     ));

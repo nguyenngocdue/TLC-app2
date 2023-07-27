@@ -19,7 +19,7 @@ class UpdatedDocumentEvent
      *
      * @return void
      */
-    public function __construct(public $previousValue, public $currentValue, public $classType, public $userCurrentId)
+    public function __construct(public $previousValue, public $currentValue,public $type, public $classType, public $userCurrentId)
     {
     }
 
