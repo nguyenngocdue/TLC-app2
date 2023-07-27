@@ -10,11 +10,10 @@ use App\Http\Controllers\Workflow\LibReports;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\PivotReport;
+use App\Utils\Support\Report;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 abstract class Report_ParentController2 extends Controller
@@ -24,8 +23,6 @@ abstract class Report_ParentController2 extends Controller
     use TraitDataModesReport;
     use TraitFunctionsReport;
     use TraitLibPivotTableDataFields2;
-    abstract protected function getSqlStr($modeParams);
-    abstract protected function getTableColumns($dataSource, $modeParams);
 
     protected $rotate45Width = false;
     protected $groupBy = false;
@@ -68,6 +65,15 @@ abstract class Report_ParentController2 extends Controller
         return $collection;
     }
 
+    protected function getDefaultValueModeParams($modeParams)
+    {
+        $x = 'picker_date';
+        $isNullModeParams = Report::isNullModeParams($modeParams);
+        if ($isNullModeParams) {
+            $modeParams[$x] = PivotReport::defaultPickerDate();
+        }
+        return $modeParams;
+    }
 
     protected function getTable()
     {
@@ -143,8 +149,8 @@ abstract class Report_ParentController2 extends Controller
         $typeReport = CurrentPathInfo::getTypeReport($request);
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
-        $currentUserId = Auth::id();
         $modeParams = $this->getModeParams($request);
+        $modeParams = $this->getDefaultValueModeParams($modeParams);
 
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $modeParams);
@@ -154,7 +160,10 @@ abstract class Report_ParentController2 extends Controller
 
 
         $viewName =  CurrentPathInfo::getViewName($request);
-        $tableColumns = $this->getTableColumns($dataSource, $modeParams);
+        if ($this->typeView === 'report-pivot') {
+
+        }
+        $tableColumns = [[]];
 
         $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
         echo $this->getJS();

@@ -4,6 +4,7 @@ namespace App\View\Components\Reports\Modals;
 
 use App\Models\Department;
 use App\View\Components\Reports\ParentIdParamReports2;
+use Illuminate\Support\Facades\DB;
 
 class ParamManyDepartmentId extends ParentIdParamReports2
 {

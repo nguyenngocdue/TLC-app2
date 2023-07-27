@@ -3,38 +3,21 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentController2;
-use App\Http\Controllers\Reports\Reports\Hr_timesheet_line_100;
-use App\Http\Controllers\Reports\TraitDataModesReport;
-use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
-
+use App\Http\Controllers\Reports\TraitForwardModeReport;
 
 class Hr_timesheet_line_030 extends Report_ParentController2
 
 {
-    use TraitDynamicColumnsTableReport;
-    use TraitDataModesReport;
+    use TraitForwardModeReport;
+
     protected $maxH = 50;
-    protected $libPivotFilters;
     protected $typeView = 'report-pivot';
     protected $modeType = 'hr_timesheet_line_employee_date';
     protected $tableTrueWidth = true;
 
     public function getDataSource($modeParams)
     {
-        $primaryData = (new Hr_timesheet_line_100())->getDataSource($modeParams);
+        $primaryData = (new Hr_timesheet_line_dataSource())->getDataSource($modeParams);
         return $primaryData;
     }
-
-
-    public function getSqlStr($modeParams)
-    {
-      return "";
-    }
-
-    protected function getTableColumns($dataSource, $modeParams)
-    {
-        $dataColumn1 = [[]];
-        return $dataColumn1;
-    }
-
 }

@@ -3,6 +3,8 @@
 namespace App\Utils\Support;
 
 use App\Http\Controllers\Workflow\LibPivotTables;
+use DateInterval;
+use DatePeriod;
 use Illuminate\Support\Str;
 use DateTime;
 use Exception;
@@ -187,12 +189,14 @@ class PivotReport
         }
         return $data;
     }
-    public static function isValidDate($dateString, $dateFormat = 'Y-m-d')
+    public static function isValidDate($dateStr, $type = 'd-m-y')
     {
-        $date = DateTime::createFromFormat($dateFormat, $dateString);
-
-        return ($date && $date->format($dateFormat) === $dateString);
+        $dateObj = DateTime::createFromFormat($type, $dateStr);
+        if ($dateObj && $dateObj->format($type) === $dateStr) return true;
+        return false;
     }
+
+
 
     public static function sortItems($data, $arrayStr)
     {
@@ -363,7 +367,7 @@ class PivotReport
         $array = [];
         $fieldIndex = $fieldsNeedToSum['field_indexes'] ?? [];
         $fieldsNeedToSum = $fieldsNeedToSum['value_field_indexes'] ?? [];
-        
+
         foreach ($data as $item) {
             $found = false;
             foreach ($fieldsNeedToSum as $valueIndexField) {
@@ -419,6 +423,32 @@ class PivotReport
         );
         // dd($data);
         return $data;
+    }
+
+    public static function defaultPickerDate()
+    {
+        $currentDate = new DateTime();
+        $targetDate = clone $currentDate;
+        $targetDate->modify('-6 months');
+        $targetDate->modify('-1 day');
+        return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
+    }
+
+    public static function getDatesBetween($startDate, $endDate)
+    {
+        $dateList = array();
+        // Convert start and end dates to DateTime objects
+        $start = DateTime::createFromFormat('d/m/Y', $startDate);
+        $end = DateTime::createFromFormat('d/m/Y', $endDate);
+        // Include the end date in the range
+        $end = $end->modify('+1 day');
+        // Iterate over the range of dates
+        $interval = new DateInterval('P1D');
+        $dateRange = new DatePeriod($start, $interval, $end);
+        foreach ($dateRange as $date) {
+            $dateList[] = $date->format('d/m/Y');
+        }
+        return $dateList;
     }
 
 
@@ -596,8 +626,9 @@ class PivotReport
         return $groupedArr;
     }
 
-    public static function isEmptyArray($data){
-        if(is_object($data)) {
+    public static function isEmptyArray($data)
+    {
+        if (is_object($data)) {
             return empty($data->toArray());
         }
         return empty($data);
