@@ -136,7 +136,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         $prodOrderId = $y->id;
         $line = $dataSource[$prodOrderId] ?? [];
         $wirCount = count($xAxis);
-        $progress = 100 * $this->getProgress($line) / $wirCount;
+        $progress = ($wirCount) ? round(100 * $this->getProgress($line) / $wirCount, 2) : 0;
         return [
             'production_name' =>  $y->production_name,
             'compliance_name' =>  $y->compliance_name,
