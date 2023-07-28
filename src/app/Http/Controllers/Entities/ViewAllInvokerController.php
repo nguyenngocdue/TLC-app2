@@ -59,8 +59,8 @@ class ViewAllInvokerController extends Controller
             : Str::headline($item['dataIndex'])), $columns));
             array_unshift($columns,  'No.');
             $fileName = $this->type . '_matrix.csv';
-            $headers = Excel::header($fileName);
             $dataSource = $this->makeDataSourceForViewMatrix($request,$dataSource);
+            $headers = Excel::header($fileName);
             $callback = Excel::export($columns,$dataSource);
             return response()->stream($callback, 200, $headers);
         }
