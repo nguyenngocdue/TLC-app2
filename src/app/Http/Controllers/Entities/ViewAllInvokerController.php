@@ -8,9 +8,11 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
+use App\Utils\Excel\Excel;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ViewAllInvokerController extends Controller
 {
@@ -43,27 +45,69 @@ class ViewAllInvokerController extends Controller
             $rows[] = $this->makeRowData($columns, $dataLine, $no + 1);
         }
         $fileName = $this->type . '.csv';
-        $headers = array(
-            "Content-type"        => "text/csv",
-            "Content-Disposition" => "attachment; filename=$fileName",
-            "Pragma"              => "no-cache",
-            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0"
-        );
         $columns = array_values(array_map(fn ($item) => $item['label'], $columns));
-        $callback = function () use ($rows, $columns) {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
-            $array = [];
-            foreach ($rows as $row) {
-                foreach ($columns as $key => $column) {
-                    $array[$column] = $row[$key];
-                }
-                fputcsv($file, $array);
-            }
-            fclose($file);
-        };
+        $headers = Excel::header($fileName);
+        $callback = Excel::export($columns,$rows);
         return response()->stream($callback, 200, $headers);
+    }
+    private function groupByDataSource($request,$dataSource){
+        if($request->groupBy){
+            $result = [];
+            foreach ($dataSource as $key => $item) {
+                $groupKey = substr($item[$request->groupBy], 0, $request->groupByLength);
+                if (!isset($result[$groupKey])) {
+                    $result[$groupKey] = [];
+                }
+                $result[$groupKey][$key] = $item;
+            }
+            return $result;
+        }
+        return $dataSource;
+    }
+    private function makeDataSourceForViewMatrix($request,$dataSource){
+        $rows = [];
+        foreach ($dataSource as $key => $value) {
+           $rows[] = [$key];
+           foreach ($value as $no => $item) {
+            if(isset($item[$request->groupBy])) unset($item[$request->groupBy]);
+            $item = array_values(array_map(fn($item) => $item->value ?? $item,$item));
+            array_unshift($item,($no + 1));
+            $rows[] = $item;
+           }
+        }
+        return $rows;
+        
+    }
+    private function sortDataValueFollowColumns($columns,$dataSource){
+        $columns = array_column($columns,'dataIndex');
+        $result = [];
+        foreach ($dataSource as $item) {
+            $arrayTemp = [];
+            foreach ($columns as $key) {
+                $arrayTemp[$key] = $item[$key];
+            }
+            $result[] = $arrayTemp;
+        }
+        return $result;
+    }
+    public function exportCSV2(Request $request){
+        if($modelPath = $request->modelPath){
+            [,$columns,$dataSource] = (new ($modelPath))->getParams();
+            // dump($columns);
+            // dd($dataSource);
+            $dataSource = $this->sortDataValueFollowColumns($columns,$dataSource);
+            $dataSource = $this->groupByDataSource($request,$dataSource);
+            $columns = array_filter($columns,fn($item) => !isset($item['hidden']));
+            $columns = array_values(array_map(fn ($item) => (isset($item['title']) ? 
+            Str::headline(strip_tags($item['title'])) 
+            : Str::headline($item['dataIndex'])), $columns));
+            array_unshift($columns,  'No.');
+            $fileName = $this->type . '_matrix.csv';
+            $headers = Excel::header($fileName);
+            $dataSource = $this->makeDataSourceForViewMatrix($request,$dataSource);
+            $callback = Excel::export($columns,$dataSource);
+            return response()->stream($callback, 200, $headers);
+        }
     }
     public function duplicateMultiple(Request $request)
     {
