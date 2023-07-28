@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\TraitDataModesReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Models\User;
+use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use DateInterval;
 use DatePeriod;
@@ -25,7 +26,7 @@ class Hr_timesheet_line_dataSource extends Controller
 
     public function getSqlStr($modeParams)
     {
-        $pickerDate = $modeParams['picker_date'] ?? self::defaultPickerDate();
+        $pickerDate = $modeParams['picker_date'] ?? PivotReport::defaultPickerDate();
         [$startDate, $endDate] = Report::explodePickerDate($pickerDate);
         $startDate = Report::formatDateString($startDate, 'Y-m-d');
         $endDate = Report::formatDateString($endDate, 'Y-m-d');
@@ -81,24 +82,6 @@ class Hr_timesheet_line_dataSource extends Controller
                 ORDER BY
                     user_id";
         return $sql;
-    }
-    protected function getDefaultValueModeParams($modeParams, $request)
-    {
-        $pickerDate = 'picker_date';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$pickerDate] = self::defaultPickerDate();
-        }
-        return $modeParams;
-    }
-
-    private function defaultPickerDate()
-    {
-        $currentDate = new DateTime();
-        $targetDate = clone $currentDate;
-        $targetDate->modify('-6 months');
-        $targetDate->modify('-1 day');
-        return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
     }
 
     private function getSql($modeParams)
