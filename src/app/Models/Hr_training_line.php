@@ -9,6 +9,7 @@ class Hr_training_line extends ModelExtended
     protected $fillable = [
         "id", "name", "description", "user_id", "hr_training_id",
         "owner_id", 'training_hours', "order_no", "training_course_id", "status",
+        "employeeid", "position_rendered", "remark"
     ];
     protected $table = "hr_training_lines";
     // protected static $statusless = true;
@@ -51,9 +52,12 @@ class Hr_training_line extends ModelExtended
             ['dataIndex' => 'id', 'no_print' => true, 'invisible' => true],
             ['dataIndex' => 'hr_training_id', 'title' => 'Training ID', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'user_id',],
-            ['dataIndex' => 'training_course_id', 'invisible' => !true,],
+            ['dataIndex' => 'employeeid',],
+            ['dataIndex' => 'position_rendered',],
+            ['dataIndex' => 'training_course_id', 'invisible' => true,],
             ['dataIndex' => 'training_hours',  'cloneable' => true],
             ['dataIndex' => 'status', 'title' => "Result", 'cloneable' => true],
+            ['dataIndex' => 'remark',],
         ];
     }
 }

@@ -32,6 +32,7 @@ class ProjectFilter extends Component
     private function getDataSource()
     {
         return Project::select('id', 'name', 'description')
+            ->whereIn('status', ['manufacturing', 'construction_site'])
             ->orderBy('name')
             ->get();
     }
