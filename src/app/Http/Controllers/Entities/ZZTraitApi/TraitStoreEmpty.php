@@ -82,7 +82,8 @@ trait TraitStoreEmpty
 			$item = $this->applyFormula($item, 'store');
 			// Log::info($item);
 			$createdItem = $this->modelPath::create($item);
-			$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', $this->type, $this->modelPath, []);
+			// dd(123);
+			$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
 			$tableName = Str::plural($this->type);
 			$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
 			$theRows[] = $createdItem;
