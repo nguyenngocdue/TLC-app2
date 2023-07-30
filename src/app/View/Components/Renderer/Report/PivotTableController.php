@@ -212,9 +212,8 @@ class PivotTableController extends Controller
         $aggregations = $libs['data_fields'];
         $tableName = $this->getTablesNamesFromLibs($libs);
 
-        if (empty($linesData->toArray())) return [];
-
         if (is_object($linesData)) $linesData = array_map(fn ($item) => (array)$item, $linesData->toArray());
+        if (empty($linesData)) return [];
         // Step 1: reduce lines from Filters array
         $keysFilters = $this->triggerFilters($topParams, $keysOfFilters);
         $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $keysFilters);

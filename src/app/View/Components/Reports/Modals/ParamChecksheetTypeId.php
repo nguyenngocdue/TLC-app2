@@ -3,9 +3,10 @@
 namespace App\View\Components\Reports\Modals;
 
 use App\Models\Qaqc_insp_tmpl;
+use App\View\Components\Reports\ParentParamReports;
 use App\View\Components\Reports\ParentTypeParamReport;
 
-class ParamChecksheetTypeId extends ParentTypeParamReport
+class ParamChecksheetTypeId extends ParentParamReports
 {
     protected function getDataSource()
     {

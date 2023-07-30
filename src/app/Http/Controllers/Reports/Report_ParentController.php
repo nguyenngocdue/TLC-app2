@@ -42,7 +42,7 @@ abstract class Report_ParentController extends Controller
 
     private function getSql($modeParams)
     {
-
+        
         $sqlStr = $this->getSqlStr($modeParams);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
@@ -52,7 +52,6 @@ abstract class Report_ParentController extends Controller
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
         }
-        // dd($sqlStr);
         return $sqlStr;
     }
 

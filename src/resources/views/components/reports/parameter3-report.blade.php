@@ -22,12 +22,13 @@ $route = $routeName ? route($routeName) : "";
             $date = $itemsSelected['picker_date'] ?? "";
             $allowClear = $value['allowClear'] ?? false;
             $multiple = $value['multiple'] ?? false;
+            $hasListenTo = $value['hasListenTo'] ?? false;
             // dump($multiple, $date, $allowClear)
             @endphp
             <div class="col-span-3">
                 @switch($renderer)
                 @case("drop_down")
-                <x-reports.dropdown7 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />
+                <x-reports.dropdown7 hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />
                 @break
                 @case('picker_date')
                 <x-reports.picker-date1 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} value="{{$date}}" />

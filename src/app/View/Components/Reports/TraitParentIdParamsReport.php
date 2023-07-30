@@ -5,30 +5,13 @@ namespace App\View\Components\Reports;
 
 use App\Utils\ClassList;
 use Illuminate\Support\Arr;
-use Illuminate\View\Component;
 
-abstract class ParentIdParamReports extends Component
+trait TraitParentIdParamsReport
 {
-
-    abstract protected function getDataSource($attr_name);
-    protected $referData = '';
-
-    public function __construct(
-        private $name,
-        private $selected = "",
-        private $multiple = false,
-        private $readOnly = false,
-        private $control = 'dropdown2', // or 'radio-or-checkbox2'
-        private $allowClear = false,
-    ) {
-        $this->selected = Arr::normalizeSelected($this->selected, old($name));
-    }
-    private function renderJS($tableName, $objectTypeStr, $objectIdStr)
+    private function renderJS1($tableName, $objectTypeStr, $objectIdStr)
     {
-        // dump($objectIdStr);
         $attr_name = $tableName . '_parent_fake_id';
         $k = [$tableName => $this->getDataSource($attr_name),];
-        // dump($attr_name);
         $listenersOfDropdown2 = [
             [
                 'listen_action' => 'reduce',
@@ -51,13 +34,13 @@ abstract class ParentIdParamReports extends Component
         echo $str;
     }
 
-    public function render()
+    public function getParamsReport()
     {
         $tableName = $this->name;
         $params = [
             'name' => $this->multiple ?  $this->name . '[]' : $this->name,
             'id' => $this->name,
-            'selected' => $this->selected,
+            'selected' => str_contains($this->selected, '[') ? $this->selected : json_encode([$this->selected]),
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $tableName,
             'readOnly' => $this->readOnly,
@@ -65,8 +48,9 @@ abstract class ParentIdParamReports extends Component
             'multiple' => $this->multiple ? true : false,
             'allowClear' => $this->allowClear,
         ];
-
-        $this->renderJS($tableName, $this->referData, $this->name);
-        return view('components.controls.has-data-source.' . $this->control, $params);
+        // dump($this->selected, $tableName, $this->multiple, $params);
+        $referData = $this->hasListenTo ? $this->referData : '';
+        $this->renderJS1($tableName, $referData, $this->name);
+        return $params;
     }
 }

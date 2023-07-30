@@ -3,6 +3,7 @@
 namespace App\View\Components\Reports;
 
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
@@ -15,6 +16,7 @@ class Dropdown7 extends Component
         private $title = "No title",
         private $allowClear = false,
         private $multiple = false,
+        private $hasListenTo = false,
     ) {
     }
 
@@ -26,8 +28,19 @@ class Dropdown7 extends Component
         $title = $this->title;
         $viewName = Report::getViewName($this->name);
         $selected = is_array($selected) ? json_encode($selected) : $selected;
-        $str = "<span class='px-1 '>$title</span>
-                <x-reports.modals.$viewName name='$this->name' selected='$selected' allowClear='$this->allowClear' multiple='$this->multiple' />";
+
+        $strMultiple = $this->multiple ? 'true' : 'false';
+        $strHasListenTo = $this->hasListenTo ? 'true' : 'false';
+
+        $info = "";
+        if(!App::isProduction()) {
+            $info = "dataIndex: $this->name";
+            $info .="\nviewName: $viewName";
+            $info .="\nmultiple: $strMultiple";
+            $info .="\nhasListenTo: $strHasListenTo";
+        }
+        $str = "<span class='px-1' title='$info'>$title</span>
+        <x-reports.modals.$viewName name='$this->name' selected='$selected' allowClear='$this->allowClear' multiple='$this->multiple' hasListenTo='$this->hasListenTo' />";
         echo  Blade::render($str);
-    }
+    }   
 }

@@ -48,7 +48,9 @@ class Hse_incident_report_010 extends Report_ParentReportController
         //params from user settings 
         $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();
         $currentYear = date('Y');
-        $workplaceIds = isset($modeParams['many_workplace_id']) && $modeParams['many_workplace_id'][0] ? $modeParams['many_workplace_id'] : $dbWorkplaceIds;
+        $workplaceIds = isset($modeParams['workplace_id']) ? Report::removeNullValuesFromArray($modeParams['workplace_id']) : $dbWorkplaceIds;
+        $workplaceIds = empty($inputArray) ? $dbWorkplaceIds : $workplaceIds;
+        
         $strWorkplaceIds = '(' . implode(',', $workplaceIds) . ')';
         $year = isset($modeParams['year']) ? $modeParams['year'] : $currentYear;
         // String SQL query
@@ -326,7 +328,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
             ],
             [
                 'title' => 'Workplace',
-                'dataIndex' => 'many_workplace_id',
+                'dataIndex' => 'workplace_id',
                 'allowClear' => true,
                 'multiple' => true,
             ],

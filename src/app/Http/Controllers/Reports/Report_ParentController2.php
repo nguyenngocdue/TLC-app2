@@ -20,7 +20,6 @@ abstract class Report_ParentController2 extends Controller
 {
     use TraitMenuTitle;
     use TraitModeParamsReport;
-    use TraitDataModesReport;
     use TraitFunctionsReport;
     use TraitLibPivotTableDataFields2;
 
@@ -124,8 +123,12 @@ abstract class Report_ParentController2 extends Controller
         $colParams = [];
         foreach ($filters as $key => $values) {
             $dataIndex = $key;
+            $multiple = false;
             if (isset($values->multiple)) {
-                $dataIndex = 'many_' . $key;
+                if($values->multiple == 'true' || $values->multiple) {
+                    $dataIndex =  $key;
+                    $multiple = true;
+                }else $dataIndex = $key;
             }
             $a = [];
             if ($dataIndex === 'picker_date') {
@@ -134,8 +137,9 @@ abstract class Report_ParentController2 extends Controller
             $colParams[] = [
                 'title' => $values->title ?? ucwords(str_replace('_', ' ', $key)),
                 'allowClear' => $values->allowClear ?? false,
-                'multiple' => $values->multiple ?? false,
+                'multiple' => $multiple,
                 'dataIndex' => $dataIndex,
+                'hasListenTo' => $values->hasListenTo ?? false,
             ] + $a;
         }
         // dd($colParams);

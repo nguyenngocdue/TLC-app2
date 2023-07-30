@@ -2,21 +2,22 @@
 
 namespace App\View\Components\Reports\Modals;
 
-use App\View\Components\Reports\ParentIdParamReports;
+use App\View\Components\Reports\ParentParamReports;
 use Illuminate\Support\Facades\DB;
 
-class ParamProdOrderId extends ParentIdParamReports
+class ParamProdOrderId extends ParentParamReports
 {
     protected $referData = 'sub_project_id';
-    protected function getDataSource($attr_name)
+    protected $referData1 = 'prod_routing_id';
+    protected function getDataSource()
     {
         // dump($attr_name);
         $sql = "SELECT 
                     po.id AS id
                     ,po.name AS name
                     ,po.status AS po_status
-                    ,po.sub_project_id AS $attr_name
-                    ,po.prod_routing_id AS po_prod_routing_id
+                    ,po.sub_project_id AS sub_project_id
+                    ,po.prod_routing_id AS prod_routing_id
                     FROM prod_orders po
                     WHERE po.deleted_at IS NULL
                     ORDER BY po.name

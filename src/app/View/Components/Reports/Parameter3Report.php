@@ -19,6 +19,7 @@ class Parameter3Report extends Component
         private $entity = '',
         private $typeReport = '',
         private $modeOption = '',
+        private $hasListenTo = false,
     ) {
         //
     }
@@ -34,6 +35,7 @@ class Parameter3Report extends Component
             'typeReport' => $this->typeReport,
             'columns' => $this->columns,
             'modeOption' => $this->modeOption,
+            'hasListenTo' => $this->hasListenTo,
         ]);
     }
 }

@@ -178,11 +178,12 @@ class Prod_run_010 extends  Report_ParentReportController
             [
                 'title' => 'Prod Order',
                 'dataIndex' => 'prod_order_id',
-                'allowClear' => true
+                'allowClear' => true,
+                'hasListenTo' => true,
             ],
             [
                 'dataIndex' => 'prod_routing_link_id',
-                'allowClear' => true
+                'allowClear' => true,
             ]
         ];
     }

@@ -106,7 +106,8 @@ class Prod_order_010 extends Report_ParentReportController
             [
                 'title' => 'Prod Order',
                 'dataIndex' => 'prod_order_id',
-                'allowClear' => true
+                'allowClear' => true,
+                'hasListenTo' => true,
             ]
         ];
     }

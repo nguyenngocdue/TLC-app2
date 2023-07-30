@@ -132,21 +132,6 @@ trait TraitLibPivotTableDataFields2
         return $lib;
     }
 
-    private static function removeEmptyElements($array)
-    {
-        foreach ($array as $key => $items) {
-            if ($items === "") continue;
-            if (is_array($items)) {
-                if (!$items) continue;
-                $arr = array_filter($items, function ($value) {
-                    return $value !== "";
-                });
-                $array[$key] = $arr;
-            }
-        }
-        return $array;
-    }
-
     private static function getFieldsInColumnField($data)
     {
         $fields =  array_map(function ($item) {
