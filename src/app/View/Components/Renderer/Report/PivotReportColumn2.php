@@ -2,12 +2,10 @@
 
 namespace App\View\Components\Renderer\Report;
 
-
-use App\Http\Controllers\TraitLibPivotTableDataFields2;
+use App\Http\Controllers\Reports\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\Workflow\LibPivotTables2;
 use App\Utils\Support\Report;
 use App\Utils\Support\PivotReport;
-use Illuminate\Support\Str;
 use DateTime;
 
 

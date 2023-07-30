@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Reports;
 
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibReports;
 use App\Utils\Support\CurrentPathInfo;
@@ -36,7 +35,6 @@ abstract class Report_ParentController2 extends Controller
     public function getType()
     {
         return $this->getTable();
-        // return str_replace(' ', '_', strtolower($this->getMenuTitle()));
     }
 
     private function getSql($modeParams)

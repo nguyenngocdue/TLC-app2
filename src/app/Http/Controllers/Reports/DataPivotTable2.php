@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\TraitLibPivotTableDataFields2;
 use App\View\Components\Renderer\Report\PivotReportColumn2;
 use App\View\Components\Renderer\Report\PivotTableController;
 

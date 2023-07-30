@@ -3,7 +3,7 @@
 namespace App\View\Components\Renderer\Report;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\TraitLibPivotTableDataFields2;
+use App\Http\Controllers\Reports\TraitLibPivotTableDataFields2;
 use App\Utils\Support\Report;
 use App\Utils\Support\PivotReport;
 use Exception;
