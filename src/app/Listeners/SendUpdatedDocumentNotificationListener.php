@@ -14,6 +14,7 @@ use App\Utils\SendMaiAndNotification\CheckDefinitionsNew;
 use App\Utils\Support\Json\BallInCourts;
 use App\Utils\Support\JsonControls;
 use Barryvdh\Debugbar\Twig\Extension\Dump;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
@@ -51,16 +52,21 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
             dump('Send Mail And Notifications will not work.');
             return;
         }
-        $ballInCourts = BallInCourts::getAllOf($type);
-        $previousStatus = $previousValue['status'];
-        $currentStatus = $currentValue['status'];
-        [$userAssigneePrevious,$userMonitorsPrevious,$userAssigneeCurrent,$userMonitorsCurrent] = 
-            $this->getUserIdsAssigneeAndMonitors($ballInCourts, $previousValue, $currentValue,$previousStatus,$currentStatus);
-        [$userAssigneeCurrent,$listCc,$isChangeStatus,$isChangeAssignee,$isChangeMonitors] = 
-            $this->handleBallInCourtForAssigneeAndMonitors($previousStatus,$currentStatus,$userAssigneePrevious,
-            $userMonitorsPrevious,$userAssigneeCurrent,$userMonitorsCurrent);
-        $this->sendMail($userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors,
-        $type,$id,$previousValue,$currentValue,$userAssigneePrevious,$userMonitorsPrevious,$userMonitorsCurrent);
+        try {
+            $ballInCourts = BallInCourts::getAllOf($type);
+            $previousStatus = $previousValue['status'];
+            $currentStatus = $currentValue['status'];
+            [$userAssigneePrevious,$userMonitorsPrevious,$userAssigneeCurrent,$userMonitorsCurrent] = 
+                $this->getUserIdsAssigneeAndMonitors($ballInCourts, $previousValue, $currentValue,$previousStatus,$currentStatus);
+            [$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors] = 
+                $this->handleBallInCourtForAssigneeAndMonitors($previousStatus,$currentStatus,$userAssigneePrevious,
+                $userMonitorsPrevious,$userAssigneeCurrent,$userMonitorsCurrent);
+            $this->sendMail($userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors,
+            $type,$id,$previousValue,$currentValue,$userAssigneePrevious,$userMonitorsPrevious,$userMonitorsCurrent);
+        } catch (\Throwable $th) {
+            Toastr::warning($th->getMessage(), 'Send mail failed');
+        }
+        
     }
     private function sendMail($userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors
     ,$type,$id,$previousValue,$currentValue,$userAssigneePrevious,$userMonitorsPrevious,$userMonitorsCurrent){
@@ -114,7 +120,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
             $userAssigneePrevious,$userAssigneeCurrent,$userMonitorsPrevious,
             $userMonitorsCurrent,$isChangeStatus);
         }
-        return [$userAssigneeCurrent,$listCc,$isChangeStatus,$isChangeAssignee,$isChangeMonitors];
+        return [$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors];
     }
     private function handleProcessSendMailByBallInCourt(&$listCc,&$isChangeAssignee,&$isChangeMonitors,
     $userAssigneePrevious,$userAssigneeCurrent,$userMonitorsPrevious,

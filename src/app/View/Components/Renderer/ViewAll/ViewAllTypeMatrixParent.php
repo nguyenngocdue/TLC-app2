@@ -200,13 +200,7 @@ abstract class ViewAllTypeMatrixParent extends Component
 
     public function render()
     {
-        $xAxis = $this->getXAxis();
-        // dump($xAxis);
-        $yAxis = $this->getYAxis();
-        $yAxisTableName = (new $this->yAxis)->getTableName();
-        $dataSource = $this->getMatrixDataSource($xAxis);
-        $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource);
-        $columns = $this->getColumns($xAxis);
+        [$yAxisTableName,$columns,$dataSource] = $this->getParams();
         $footer = $this->getFooter($yAxisTableName);
         $settings = CurrentUser::getSettings();
         $per_page = $settings[$this->type]['view_all']['per_page'] ?? 15;
@@ -214,7 +208,8 @@ abstract class ViewAllTypeMatrixParent extends Component
         $dataSource = $this->paginate($dataSource, $per_page, $page);
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
-
+        $modelPathMatrix = get_class($this);
+        $actionButtons = "<x-form.action-button-group-view-matrix type='$this->type' modelPath='$modelPathMatrix' groupBy='$this->groupBy' groupByLength='$this->groupByLength'/>";
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
             [
@@ -229,7 +224,17 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'groupBy' => $this->groupBy,
                 'groupByLength' => $this->groupByLength,
                 'tableTrueWidth' => $this->tableTrueWidth,
+                'actionButtons' => $actionButtons,
             ],
         );
+    }
+    public function getParams(){
+        $xAxis = $this->getXAxis();
+        $yAxis = $this->getYAxis();
+        $yAxisTableName = (new $this->yAxis)->getTableName();
+        $dataSource = $this->getMatrixDataSource($xAxis);
+        $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource);
+        $columns = $this->getColumns($xAxis);
+        return [$yAxisTableName,$columns,$dataSource];
     }
 }

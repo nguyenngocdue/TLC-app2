@@ -8,9 +8,11 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
+use App\Utils\Excel\Excel;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ViewAllInvokerController extends Controller
 {
@@ -29,12 +31,10 @@ class ViewAllInvokerController extends Controller
         $this->assignDynamicTypeViewAllQrList6();
         $this->middleware("permission:{$this->permissionMiddleware['read']}")->only('index');
     }
-
     public function getType()
     {
         return $this->type;
     }
-
     public function exportCSV()
     {
         [$columns, $dataSource] = $this->normalizeDataSourceAndColumnsFollowAdvanceFilter();
@@ -43,27 +43,27 @@ class ViewAllInvokerController extends Controller
             $rows[] = $this->makeRowData($columns, $dataLine, $no + 1);
         }
         $fileName = $this->type . '.csv';
-        $headers = array(
-            "Content-type"        => "text/csv",
-            "Content-Disposition" => "attachment; filename=$fileName",
-            "Pragma"              => "no-cache",
-            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0"
-        );
         $columns = array_values(array_map(fn ($item) => $item['label'], $columns));
-        $callback = function () use ($rows, $columns) {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
-            $array = [];
-            foreach ($rows as $row) {
-                foreach ($columns as $key => $column) {
-                    $array[$column] = $row[$key];
-                }
-                fputcsv($file, $array);
-            }
-            fclose($file);
-        };
+        $headers = Excel::header($fileName);
+        $callback = Excel::export($columns,$rows);
         return response()->stream($callback, 200, $headers);
+    }
+    public function exportCSV2(Request $request){
+        if($modelPath = $request->modelPath){
+            [,$columns,$dataSource] = (new ($modelPath))->getParams();
+            $dataSource = $this->sortDataValueFollowColumns($columns,$dataSource);
+            $dataSource = $this->groupByDataSource($request,$dataSource);
+            $columns = array_filter($columns,fn($item) => !isset($item['hidden']));
+            $columns = array_values(array_map(fn ($item) => (isset($item['title']) ? 
+            Str::headline(strip_tags($item['title'])) 
+            : Str::headline($item['dataIndex'])), $columns));
+            array_unshift($columns,  'No.');
+            $fileName = $this->type . '_matrix.csv';
+            $dataSource = $this->makeDataSourceForViewMatrix($request,$dataSource);
+            $headers = Excel::header($fileName);
+            $callback = Excel::export($columns,$dataSource);
+            return response()->stream($callback, 200, $headers);
+        }
     }
     public function duplicateMultiple(Request $request)
     {
