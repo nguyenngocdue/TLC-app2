@@ -432,6 +432,52 @@
         "tutorial_link": null,
         "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
     },
+    "hr_onboarding": {
+        "name": "hr_onboarding",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr_onboarding",
+        "title": "HR Onboardings",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-sharp fa-regular fa-transporter\"><\/i>"
+    },
+    "hr_onboarding_course": {
+        "name": "hr_onboarding_course",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr_onboarding",
+        "title": "HR Onboarding Courses",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden_navbar": "true"
+    },
+    "hr_onboarding_line": {
+        "name": "hr_onboarding_line",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr_onboarding",
+        "title": "HR Onboarding Lines",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "disallowed_direct_creation": "true"
+    },
     "hr_overtime_request": {
         "name": "hr_overtime_request",
         "package_tab": "application",
@@ -496,9 +542,9 @@
         "show_renderer": "props-renderer",
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
+        "disallowed_direct_creation": "true",
         "apply_approval_tree": "true",
-        "show_in_my_view": "true",
-        "disallowed_direct_creation": "true"
+        "show_in_my_view": "true"
     },
     "hr_timesheet_worker": {
         "name": "hr_timesheet_worker",
@@ -513,55 +559,9 @@
         "show_renderer": "props-renderer",
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
+        "disallowed_direct_creation": "true",
         "apply_approval_tree": "true",
-        "show_in_my_view": "true",
-        "disallowed_direct_creation": "true"
-    },
-    "hr_onboarding": {
-        "name": "hr_onboarding",
-        "package_tab": "application",
-        "package": "hr_&_admin",
-        "sub_package": "hr_onboarding",
-        "title": "HR Onboardings",
-        "nickname": null,
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "tutorial_link": null,
-        "icon": "<i class=\"fa-sharp fa-regular fa-transporter\"><\/i>"
-    },
-    "hr_onboarding_course": {
-        "name": "hr_onboarding_course",
-        "package_tab": "application",
-        "package": "hr_&_admin",
-        "sub_package": "hr_onboarding",
-        "title": "HR Onboarding Courses",
-        "nickname": null,
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "tutorial_link": null,
-        "icon": null,
-        "hidden_navbar": "true"
-    },
-    "hr_onboarding_line": {
-        "name": "hr_onboarding_line",
-        "package_tab": "application",
-        "package": "hr_&_admin",
-        "sub_package": "hr_onboarding",
-        "title": "HR Onboarding Lines",
-        "nickname": null,
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": "props-renderer",
-        "show_renderer": "props-renderer",
-        "tutorial_link": null,
-        "icon": null,
-        "hidden": "true",
-        "hidden_navbar": "true",
-        "disallowed_direct_creation": "true"
+        "show_in_my_view": "true"
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
@@ -1076,6 +1076,48 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "ppr_routing": {
+        "name": "ppr_routing",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Ppr Routing",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null
+    },
+    "ppr_routing_line": {
+        "name": "ppr_routing_line",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Ppr Routing Line",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null
+    },
+    "ppr_routing_link": {
+        "name": "ppr_routing_link",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Ppr Routing Link",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null
+    },
     "priority": {
         "name": "priority",
         "package_tab": "application",
@@ -1462,8 +1504,8 @@
         "show_renderer": "props-renderer",
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-sensor-triangle-exclamation\"><\/i>",
-        "show_in_my_view": "true",
-        "disallowed_direct_creation": "true"
+        "disallowed_direct_creation": "true",
+        "show_in_my_view": "true"
     },
     "qaqc_wir": {
         "name": "qaqc_wir",
@@ -1478,8 +1520,8 @@
         "show_renderer": "props-renderer",
         "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-clipboard-list-check\"><\/i>",
-        "show_in_my_view": "true",
-        "disallowed_direct_creation": "true"
+        "disallowed_direct_creation": "true",
+        "show_in_my_view": "true"
     },
     "qaqc_wir_line": {
         "name": "qaqc_wir_line",
