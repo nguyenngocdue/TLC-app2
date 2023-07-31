@@ -50,7 +50,7 @@ class Qaqc_car extends ModelExtended
             ['dataIndex' => 'corrective_action'],
             ['dataIndex' => 'responsible_person'],
             ['dataIndex' => 'remark'],
-            ['dataIndex' => 'status'],
+            // ['dataIndex' => 'status'],
         ];
     }
 }
