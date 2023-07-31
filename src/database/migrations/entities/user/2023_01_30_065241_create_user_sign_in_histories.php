@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('ip_address')->nullable();
-            $table->string('location')->nullable();
+            $table->string('city_name')->nullable();
+            $table->string('country_name')->nullable();
             $table->string('browser')->nullable();
             $table->string('browser_version')->nullable();
             $table->string('platform')->nullable();
