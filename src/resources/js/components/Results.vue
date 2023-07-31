@@ -3,6 +3,7 @@
         <template #extra>
             <a-button type="primary" @click="refreshPage">Refresh</a-button>
             <a-button type="primary" @click="goBack">Back </a-button>
+            <a-button type="primary" href='/'>Home</a-button>
         </template>
     </a-result>
 </template>
