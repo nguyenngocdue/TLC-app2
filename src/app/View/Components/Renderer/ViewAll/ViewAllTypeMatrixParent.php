@@ -64,7 +64,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $result;
     }
 
-    function cellRenderer($cell)
+    function cellRenderer($cell, $forExcel = false)
     {
         $result = [];
         foreach ($cell as $document) {
@@ -72,8 +72,10 @@ abstract class ViewAllTypeMatrixParent extends Component
             if (!is_null($status)) {
                 $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'];
                 $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']);
+                $value = $status['icon'] ? $status['icon'] : $document->status;
+                if ($forExcel) $value = $document->status;
                 $result[] = (object)[
-                    'value' => $status['icon'] ? $status['icon']  : $document->status,
+                    'value' => $value,
                     'cell_title' => 'Open this document',
                     'cell_class' => "$bgColor $textColor",
                     'cell_href' => route($this->type . ".edit", $document->id),
@@ -106,7 +108,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return [];
     }
 
-    function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource)
+    function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel)
     {
         $dataSource = $this->reIndexDataSource($dataSource);
         $result = [];
@@ -145,7 +147,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 if (isset($dataSource[$yId][$xId])) {
-                    $line[$xId] = $this->cellRenderer($dataSource[$yId][$xId]);
+                    $line[$xId] = $this->cellRenderer($dataSource[$yId][$xId], $forExcel);
                 }
             }
             $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis);
@@ -200,7 +202,7 @@ abstract class ViewAllTypeMatrixParent extends Component
 
     public function render()
     {
-        [$yAxisTableName,$columns,$dataSource] = $this->getParams();
+        [$yAxisTableName, $columns, $dataSource] = $this->getViewAllMatrixParams();
         $footer = $this->getFooter($yAxisTableName);
         $settings = CurrentUser::getSettings();
         $per_page = $settings[$this->type]['view_all']['per_page'] ?? 15;
@@ -228,13 +230,14 @@ abstract class ViewAllTypeMatrixParent extends Component
             ],
         );
     }
-    public function getParams(){
+    public function getViewAllMatrixParams($forExcel = false)
+    {
         $xAxis = $this->getXAxis();
         $yAxis = $this->getYAxis();
         $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getMatrixDataSource($xAxis);
-        $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource);
+        $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel);
         $columns = $this->getColumns($xAxis);
-        return [$yAxisTableName,$columns,$dataSource];
+        return [$yAxisTableName, $columns, $dataSource];
     }
 }
