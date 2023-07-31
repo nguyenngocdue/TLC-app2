@@ -23,6 +23,13 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'width' => 50,
             ],
             [
+                'dataIndex' => 'is_raw',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 50,
+            ],
+            [
                 'dataIndex' => 'filters',
                 'renderer' => 'textarea4',
                 'editable' => true,
