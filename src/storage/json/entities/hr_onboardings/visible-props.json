@@ -19,9 +19,9 @@
         "verification_rejected": "true",
         "closed": "true"
     },
-    "_training_course_id": {
-        "name": "_training_course_id",
-        "column_name": "training_course_id",
+    "_onboarding_course_id": {
+        "name": "_onboarding_course_id",
+        "column_name": "onboarding_course_id",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
@@ -59,9 +59,9 @@
         "verification_rejected": "true",
         "closed": "true"
     },
-    "_training_location_id": {
-        "name": "_training_location_id",
-        "column_name": "training_location_id",
+    "_onboarding_location_id": {
+        "name": "_onboarding_location_id",
+        "column_name": "onboarding_location_id",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
@@ -69,9 +69,9 @@
         "verification_rejected": "true",
         "closed": "true"
     },
-    "_training_datetime": {
-        "name": "_training_datetime",
-        "column_name": "training_datetime",
+    "_onboarding_datetime": {
+        "name": "_onboarding_datetime",
+        "column_name": "onboarding_datetime",
         "new": "true",
         "assigned": "true",
         "rejected": "true",

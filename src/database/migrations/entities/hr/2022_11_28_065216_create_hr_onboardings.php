@@ -19,14 +19,16 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('hr_training_courses', function (BlueprintExtended $table) {
+        $schema->create('hr_onboardings', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('slug')->unique();
+            $table->unsignedBigInteger('onboarding_course_id')->nullable();
             $table->unsignedBigInteger('facilitator_id')->nullable();
-            $table->unsignedBigInteger('training_location_id')->nullable();
-            $table->orderable();
+            $table->unsignedBigInteger('onboarding_location_id')->nullable();
+            $table->dateTime('onboarding_datetime')->nullable();
+            // $table->orderable();
             $table->appendCommonFields();
         });
     }
@@ -38,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hr_training_courses');
+        Schema::dropIfExists('hr_onboardings');
     }
 };

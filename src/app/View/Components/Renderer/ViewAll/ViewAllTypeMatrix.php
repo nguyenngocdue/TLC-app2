@@ -33,8 +33,8 @@ class ViewAllTypeMatrix extends Component
                 return Blade::render("<x-renderer.view-all-matrix-type.HrTimesheetWorkers/>");
             case "qaqc_wirs":
                 return Blade::render("<x-renderer.view-all-matrix-type.QaqcWirs/>");
-            case "hr_training_lines":
-                return Blade::render("<x-renderer.view-all-matrix-type.HrTrainingLines />");
+            case "hr_onboarding_lines":
+                return Blade::render("<x-renderer.view-all-matrix-type.HrOnboardingLines />");
             case "hse_extra_metrics":
                 return Blade::render("<x-renderer.view-all-matrix-type.HseExtraMetrics/>");
             case "prod_sequences":

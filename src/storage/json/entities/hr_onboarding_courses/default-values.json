@@ -35,21 +35,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_training_hours": {
-        "name": "_training_hours",
-        "column_name": "training_hours",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "S\u1ed1 gi\u1edd h\u1ecdc",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_user_id": {
-        "name": "_user_id",
-        "column_name": "user_id",
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -59,9 +47,33 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_hr_training_id": {
-        "name": "_hr_training_id",
-        "column_name": "hr_training_id",
+    "_facilitator_id": {
+        "name": "_facilitator_id",
+        "column_name": "facilitator_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_onboarding_location_id": {
+        "name": "_onboarding_location_id",
+        "column_name": "onboarding_location_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -134,30 +146,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getSignatures": {
-        "name": "_getSignatures",
-        "column_name": "getSignatures",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",

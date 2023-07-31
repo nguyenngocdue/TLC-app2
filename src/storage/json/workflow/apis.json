@@ -111,15 +111,15 @@
         "name": "hr_timesheet_workers",
         "storeEmpty_and_updateShort": "true"
     },
-    "hr_training_courses": {
-        "name": "hr_training_courses"
+    "hr_onboarding_courses": {
+        "name": "hr_onboarding_courses"
     },
-    "hr_training_lines": {
-        "name": "hr_training_lines",
+    "hr_onboarding_lines": {
+        "name": "hr_onboarding_lines",
         "storeEmpty_and_updateShort": "true"
     },
-    "hr_trainings": {
-        "name": "hr_trainings",
+    "hr_onboardings": {
+        "name": "hr_onboardings",
         "storeEmpty_and_updateShort": "true"
     },
     "hse_corrective_actions": {
