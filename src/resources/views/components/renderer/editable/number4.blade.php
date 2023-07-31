@@ -16,7 +16,7 @@
     class="{{$classList}} {{$bgColor}} {{$readOnly?"hidden1":""}}"
     >
 <script>
-    $("[id='{{$name}}']").on('change', function(e, batchLength){
+    $("[id='{{$name}}']").on('change', function(e, dropdownParams){
         @if($onChange)
         {{$onChange}} //<< For order_no column to change line order
         @else
@@ -25,7 +25,7 @@
             table01Name:"{{$table01Name}}", 
             rowIndex:{{$rowIndex}}, 
             saveOnChange: {{$saveOnChange?1:0}},
-            batchLength,
+            dropdownParams,
         })
         changeBgColor(this,'{{$table01Name}}')
         changeFooterValue(this,'{{$table01Name}}')

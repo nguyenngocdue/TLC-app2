@@ -68,9 +68,10 @@ const setCellValueByName = (tableId, columnName, rowIndex, value) => {
 
 
 const reRenderQueue = {}
-const reRenderTableBaseOnNewOrder = (tableId, batchLength = 1) => {
+const reRenderTableBaseOnNewOrder = (tableId, dropdownParams) => {
     // const debugEditable = true
     // console.log(batchLength)
+    const { batchLength = 1 } = dropdownParams
     if (reRenderQueue[tableId] === undefined) reRenderQueue[tableId] = 0
     if (reRenderQueue[tableId] < batchLength) {
         reRenderQueue[tableId]++;
@@ -232,7 +233,7 @@ const refreshCalculation = (tableId) => {
     if (debugEditable) console.log(length)
     for (let i = 0; i < length; i++) {
         const id = makeIdFrom(tableId, 'id', i)
-        getEById(id).trigger('change', length)
+        getEById(id).trigger('change', { batchLength: length })
     }
 }
 
@@ -253,7 +254,7 @@ const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
             // getEById(id).trigger('change')
         } else {
             getEById(id).val(value)
-            getEById(id).trigger('change', length)
+            getEById(id).trigger('change', { batchLength: length })
         }
     }
 }

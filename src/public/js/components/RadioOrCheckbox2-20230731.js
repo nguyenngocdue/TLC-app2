@@ -16,7 +16,7 @@ const radioOrCheckboxChangeOrder = (id, table, parentId) => {
         listenersOfDropdown2.forEach((listener) => {
             if (listener.triggers.includes(parentId) && listener.listen_action === 'reduce') {
                 // console.log("I am a trigger of reduce, I have to trigger myself when form load [id]", )
-                getEById(parentId).trigger('change')
+                getEById(parentId).trigger('change', { onLoad: true })
             }
         })
     }

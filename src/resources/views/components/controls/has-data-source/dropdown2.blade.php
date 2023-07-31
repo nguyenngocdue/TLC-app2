@@ -1,7 +1,6 @@
 {{-- @php $selectedDecode =json_decode($selected); @endphp --}}
 
 <select id='{{$id}}' name='{{$name}}' {{$multipleStr}} {{$readOnly ? "readonly" : ""}} controlType='dropdown' 
-    onChange='onChangeDropdown2("{{$id}}")' 
     allowClear={{$allowClear?'true':'false'}} 
     letUserChooseWhenOneItem={{($letUserChooseWhenOneItem??false)?'true':'false'}} 
     class='{{$classList}}'
@@ -21,3 +20,11 @@
 
 </script>
 
+<script>
+    $("[id='{{$name}}']").on('change',function(e, dropdownParams){
+        onChangeDropdown2({
+            name:"{{$id}}",
+            dropdownParams,
+        })
+    })
+</script>

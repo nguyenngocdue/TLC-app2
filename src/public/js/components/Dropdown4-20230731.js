@@ -106,8 +106,9 @@ const onChangeGetSelectedObject4 = (listener, table01Name, rowIndex) => {
     return selectedObject
 }
 
-const onChangeDropdown4Assign = (listener, table01Name, rowIndex, batchLength = 1) => {
+const onChangeDropdown4Assign = (listener, table01Name, rowIndex, dropdownParams) => {
     // const debugListener = true
+    const { batchLength = 1 } = dropdownParams
     if (debugListener) console.log("Assign", listener)
     const { column_name, listen_to_attrs } = listener
     const selectedObject = onChangeGetSelectedObject4(listener, table01Name, rowIndex)
@@ -130,7 +131,7 @@ const onChangeDropdown4Assign = (listener, table01Name, rowIndex, batchLength = 
             // const column_name1 = removeParenthesis(id)
             if (debugListener) console.log("Set value of", id, "to", theValue)
             getEById(id).val(theValue)
-            getEById(id).trigger('change', batchLength)
+            getEById(id).trigger('change', { batchLength })
         }
         else {
             console.error("Column", listen_to_attr, 'not found in', id, "(Listeners Screen)")
@@ -174,7 +175,7 @@ const onChangeDropdown4Dot = (listener, table01Name, rowIndex, batchLength = 1) 
 
 
                 getEById(id).val(theValue)
-                getEById(id).trigger('change', actualBatchLength)
+                getEById(id).trigger('change', { batchLength: actualBatchLength })
                 if (debugListener) console.log("Dotting", id, "with value", theValue)
             }
         }
@@ -224,7 +225,7 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex, batchLengt
     if (debugListener) console.log(column_name, '=', expression1, result)
     const id = makeIdFrom(table01Name, column_name, rowIndex)
     getEById(id).val(result)
-    getEById(id).trigger('change', batchLength)
+    getEById(id).trigger('change', { batchLength })
 }
 
 const ajaxQueueSelect = {}
@@ -293,7 +294,7 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
                             }
                             if (debugListener) console.log("Assigning", id, "with value", value)
                             getEById(id).val(value)
-                            getEById(id).trigger('change', batchLength)
+                            getEById(id).trigger('change', { batchLength })
 
                             getEById(id).show()
                         }
@@ -332,16 +333,16 @@ const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex,
                 const id = makeIdFrom(table01Name, column_name, i, batchLength)
                 if (exceptCurrent) {
                     if (i === rowIndex) continue
-                    getEById(id).trigger('change', batchLength - 1)
+                    getEById(id).trigger('change', { batchLength: batchLength - 1 })
                 } else {
-                    getEById(id).trigger('change', batchLength)
+                    getEById(id).trigger('change', { batchLength })
                 }
             }
         } else {
             for (let i = 0; i < batchLength; i++) {
                 const id = makeIdFrom(table01Name, column_name, i, batchLength)
                 // setTimeout(() =>
-                getEById(id).trigger('change', batchLength)
+                getEById(id).trigger('change', { batchLength })
                 // , 1000)
             }
         }
@@ -355,10 +356,11 @@ const onChangeDropdown4TriggerChangeAllLinesExceptCurrent = (listener, table01Na
 
 const ajaxQueueUpdate = {}
 
-const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange, batchLength = 1 }) => {
+const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange, dropdownParams }) => {
     // console.log("onChangeDropdown4", name, table01Name, rowIndex, saveOnChange, lineType)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s, table01Name)
     // console.log("onChangeDropdown4", name, batchLength)
+    const { batchLength = 1 } = dropdownParams
     const fieldName = getFieldNameInTable01FormatJS(name, table01Name)
     const { tableName } = tableObject[table01Name]
     const url = '/api/v1/entity/' + tableName + '_updateShort'
@@ -394,20 +396,21 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
                     // console.log("Execute listeners")
                     // const hits = response['hits']
                     for (let i = 0; i < rowIndexes.length; i++) {
-                        onChangeFull({ fieldName, table01Name, rowIndex: rowIndexes[i], lineType, batchLength, name })
+                        onChangeFull({ fieldName, table01Name, rowIndex: rowIndexes[i], lineType, dropdownParams, name })
                     }
                 },
                 error: (response) => showErrorMessage(response)
             })
         }
     } else {
-        onChangeFull({ fieldName, table01Name, rowIndex, lineType, batchLength, name })
+        onChangeFull({ fieldName, table01Name, rowIndex, lineType, dropdownParams, name })
     }
 }
 
-const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, batchLength = 1, name }) => {
+const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownParams, name }) => {
     // const debugFlow = true
     // console.log({ fieldName, table01Name, rowIndex, lineType, batchLength, name })
+    const { batchLength = 1 } = dropdownParams
     const listenersOfDropdown4 = listenersOfDropdown4s[table01Name]
     for (let i = 0; i < listenersOfDropdown4.length; i++) {
         let listener = listenersOfDropdown4[i]
@@ -502,7 +505,7 @@ const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table, batchLen
             const fieldName = getFieldNameInTable01FormatJS(id, table01Name)
             if (listener.triggers.includes(fieldName) && listener.listen_action === 'reduce') {
                 // console.log("I am a trigger of reduce, I have to trigger myself when form load ", id)
-                getEById(id).trigger('change', batchLength)
+                getEById(id).trigger('change', { batchLength, onLoad: true })
             }
         })
     })
