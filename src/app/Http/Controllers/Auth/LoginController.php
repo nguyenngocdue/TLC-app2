@@ -140,10 +140,15 @@ class LoginController extends Controller
             $agent->setUserAgent($headers);
             $ipAddress = $request->server('HTTP_X_REAL_IP');
             $location = Location::get($ipAddress);
-            $locationName = 'internal';
-            if($location) $locationName = $location->cityName ?? $location->regionName;
+            $cityName = 'internal';
+            $countryName = 'internal';
+            if($location){
+                $countryName = $location->countryName ?? $location->countryCode;
+                $cityName = $location->cityName ?? $location->regionName;
+            } 
             $infoBrowser = [
-                'location' => $locationName,
+                'city_name' => $cityName,
+                'country_name' => $countryName,
                 'browser' => $agent->browser(),
                 'browser_version' => $agent->version($agent->browser()),
                 'platform' => $agent->platform(),
