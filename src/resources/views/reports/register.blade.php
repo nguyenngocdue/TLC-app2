@@ -15,14 +15,28 @@
         <x-reports.color-legend-report :dataSource="$legendColors" />
     </x-renderer.card>
     @endif
-    <div class="flex pb-2 pr-4 ">
-        <x-reports.utility-report routeName="{{$routeName}}" />
-        <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{$pageLimit}}" formName="updatePerPage" />
-    </div>
     @php
-    $tc = "<x-renderer.tag>Top Center</x-renderer.tag> ";
+        $tl = "<div></div>";
+        $tc = "<x-reports.utility-report routeName='$routeName'/>"; 
+        $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
     @endphp
-    {{-- <x-renderer.tag>Top Center</x-renderer.tag> --}}
-    <x-renderer.table  :dataHeader="$tableDataHeader" topCenterControl="{!!$tc!!}" :columns="$tableColumns" :dataSource="$tableDataSource" showNo={{true}} maxH="{{$maxH}}" rotate45Width={{$rotate45Width}} groupBy="{{$groupBy}}" groupByLength="{{$groupByLength}}" tableTrueWidth_disabled={{$tableTrueWidth?1:0}} />
+    @if($typeOfView === 'report-pivot')
+    <x-renderer.report.pivot-table modeType="{{$modeType}}"  showNo={{true}} :dataHeader="$tableDataHeader" :columns="$tableColumns" :modeParams="$modeParams" :dataSource="$tableDataSource"  tableTrueWidth={{$tableTrueWidth?1:0}} page-limit="{{$pageLimit}}" headerTop=10 />
+    @else
+    <x-renderer.table 
+                    showNo={{true}} 
+                    :dataHeader="$tableDataHeader" 
+                    :columns="$tableColumns" 
+                    :dataSource="$tableDataSource" 
+                    rotate45Width={{$rotate45Width}} 
+                    maxH="{{$maxH}}" 
+                    tableTrueWidth={{$tableTrueWidth?1:0}}
+
+                    showPaginationTop="true"
+                    topLeftControl="{!!$tl!!}" 
+                    topCenterControl="{!!$tc!!}" 
+                    topRightControl="{!!$tr!!}" 
+                    />
+    @endif
 </div>
 @endsection
