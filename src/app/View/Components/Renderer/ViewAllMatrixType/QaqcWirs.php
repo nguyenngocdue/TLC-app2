@@ -14,6 +14,8 @@ use Illuminate\Support\Str;
 class QaqcWirs extends ViewAllTypeMatrixParent
 {
     use TraitViewAllFunctions;
+    use TraitYAxisDiscipline;
+
     private $project, $subProject, $prodRouting;
     protected $dataIndexX = "wir_description_id";
     protected $dataIndexY = "prod_order_id";
@@ -22,6 +24,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     protected $rotate45Width = 400;
     protected $groupBy = null;
     protected $tableTrueWidth = true;
+    protected $headerTop = "[300px]";
     /**
      * Create a new component instance.
      *
