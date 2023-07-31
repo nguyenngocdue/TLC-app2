@@ -281,11 +281,11 @@ const addANewLineFull = (params) => {
             onChangeParams += 'table01Name:"' + column['table01Name'] + '",'
             onChangeParams += 'rowIndex: ' + newRowIndex + ','
             onChangeParams += 'saveOnChange: ' + saveOnChange + ','
-            onChangeParams += 'batchLength ' + ','
+            onChangeParams += 'dropdownParams ' + ','
             onChangeParams += '}'
 
             const onChangeDropdown4Fn = 'onChangeDropdown4(' + onChangeParams + ');'
-            const makeOnChangeAdvanced = (moreCodeAfter) => '' + '$("[id=\'' + id + "']\").on('change', function(e, batchLength){" + moreCodeAfter + '})'
+            const makeOnChangeAdvanced = (moreCodeAfter) => '' + '$("[id=\'' + id + "']\").on('change', function(e, dropdownParams){" + moreCodeAfter + '})'
 
             switch (column['renderer']) {
                 case 'read-only-text4':
@@ -339,7 +339,7 @@ const addANewLineFull = (params) => {
                     renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? ' readonly' : '') + " class='" + column['classList'] + "' type=number step=any />"
                     if (column['dataIndex'] === 'order_no') {
                         orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + 10
-                        const reRenderFn = 'reRenderTableBaseOnNewOrder("' + tableId + '", batchLength)'
+                        const reRenderFn = 'reRenderTableBaseOnNewOrder("' + tableId + '", dropdownParams)'
                         renderer += '<script>' + makeOnChangeAdvanced(reRenderFn) + '</script>'
                     } else {
                         // onChange = "onChangeDropdown4(" + onChangeParams + ");changeBgColor(this,\"" + tableId + "\")"
@@ -431,7 +431,7 @@ const addANewLineFull = (params) => {
                 if (selected1 !== undefined) {
                     // console.log("Setting status", id, 'to', selected1)
                     getEById(id).val(selected1)
-                    getEById(id).trigger('change', batchLength)
+                    getEById(id).trigger('change', { batchLength })
                 } else {
                     //get the 1st value of the select during render
                 }
@@ -439,32 +439,32 @@ const addANewLineFull = (params) => {
             default:
                 if (column['value_as_parent_type']) {
                     getEById(id).val($('#entityParentType').val())
-                    getEById(id).trigger('change', batchLength)
+                    getEById(id).trigger('change', { batchLength })
                     break
                 }
                 if (column['value_as_parent_id']) {
                     getEById(id).val($('#entityParentId').val())
-                    getEById(id).trigger('change', batchLength)
+                    getEById(id).trigger('change', { batchLength })
                     break
                 }
                 if (column['value_as_user_id']) {
                     getEById(id).val($('#userId').val())
-                    getEById(id).trigger('change', batchLength)
+                    getEById(id).trigger('change', { batchLength })
                     break
                 }
                 if (column['value_as_project_id']) {
                     getEById(id).val($('#entityProjectId').val())
-                    getEById(id).trigger('change', batchLength)
+                    getEById(id).trigger('change', { batchLength })
                     break
                 }
                 if (column['value_as_sub_project_id']) {
                     getEById(id).val($('#entitySubProjectId').val())
-                    getEById(id).trigger('change', batchLength)
+                    getEById(id).trigger('change', { batchLength })
                     break
                 }
                 if (column['dataIndex'] === 'order_no') {
                     getEById(id).val(orderNoValue)
-                    getEById(id).trigger('change', batchLength)
+                    getEById(id).trigger('change', { batchLength })
                     break
                 }
                 const value = valuesOfOrigin[column['dataIndex']]
@@ -473,7 +473,7 @@ const addANewLineFull = (params) => {
                 } else {
                     getEById(id).val(value)
                 }
-                getEById(id).trigger('change', batchLength)
+                getEById(id).trigger('change', { batchLength })
                 break
 
             // console.log("Added new column", column['dataIndex'])
@@ -484,14 +484,14 @@ const addANewLineFull = (params) => {
     for (let i = 0; i < toDoAfterAddedDropdown4.length; i++) {
         const { id, dataSource, tableId, selected } = toDoAfterAddedDropdown4[i]
         reloadDataToDropdown4(id, dataSource, tableId, selected)
-        getEById(id).trigger('change', batchLength)
+        getEById(id).trigger('change', { batchLength })
         // console.log("Triggered change", id)
     }
     for (let i = 0; i < toDoAfterAddedDropdown4ReadOnly.length; i++) {
         const { id, dataSource, tableId, selected } =
             toDoAfterAddedDropdown4ReadOnly[i]
         // reloadDataToDropdown4(id, dataSource, tableId, selected)
-        getEById(id).trigger('change', batchLength)
+        getEById(id).trigger('change', { batchLength })
         // console.log("Triggered change", id)
     }
     // console.log(showNoR)

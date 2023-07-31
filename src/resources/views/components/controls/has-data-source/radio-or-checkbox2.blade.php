@@ -1,6 +1,6 @@
 <div id='{{$id}}' 
     name='{{$multiple?$name."[]":$name}}' 
-    onChange='onChangeDropdown2("{{$id}}")' 
+    {{-- onChange='onChangeDropdown2({name: "{{$id}}"})'  --}}
     {{($multiple) ? 'multiple' : ''}} 
     controlType='radio_or_checkbox' 
     colSpan='col-span-{{$span??4}}' 
@@ -17,4 +17,13 @@
     }
     documentReadyDropdown2(params2)
 
+</script>
+
+<script>
+    $("[id='{{$id}}']").on('change',function(e, dropdownParams){
+        onChangeDropdown2({
+            name:"{{$id}}",
+            dropdownParams,
+        })
+    })
 </script>
