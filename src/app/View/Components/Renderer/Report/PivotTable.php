@@ -86,6 +86,8 @@ class PivotTable extends Component
         // dump($columns);
         return $columns;
     }
+
+
     private function makeTableColumnsWhenRenderRawData($linesData, $libs)
     {
         $rowFields = $libs['row_fields'];
@@ -106,30 +108,6 @@ class PivotTable extends Component
         return $columns;
     }
 
-    private function updateRawData($linesData, $libs)
-    {
-        $rowFields = $libs['row_fields'];
-        $tableName = $this->getTablesNamesFromLibs($libs);
-        $tables = $this->getDataFromTables($tableName);
-
-        foreach ($linesData as &$lines) {
-            foreach ($rowFields  as $key => $field) {
-                if (isset($lines->$key)) {
-                    [$tableName, $attr] = explode('.', $field->column, 2);
-                    $id = $lines->$key;
-                    $nameOfField = $tables[$tableName][$id]->{$attr};
-                    $tooltip = $tables[$tableName][$id]->description ?? 'ID: ' . $id;
-                    $lines->$key = (object)[
-                        'value' => $nameOfField ?? $id,
-                        'cell_title' => $tooltip,
-                    ];
-                }
-            }
-        }
-        return $linesData;
-    }
-
-
     public function render()
     {
         $linesData = $this->dataSource;
@@ -139,23 +117,28 @@ class PivotTable extends Component
 
         $dataFields = $this->getDataFields($modeType);
 
-        $isDataSource = false;
+        $isRawData = false;
         if (isset($dataFields['is_raw'][$modeType])) {
-            $isDataSource = $dataFields['is_raw'][$modeType]->is_dataSource;
+            $isRawData = $dataFields['is_raw'][$modeType]->is_dataSource;
         }
 
-        if ($modeType && !$isDataSource) {
+        if ($modeType && !$isRawData) {
             [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData, $modeType, $modeParams);
             if (PivotReport::isEmptyArray($dataOutput)) {
                 $tableColumns = $this->makeTableColumnsWhenEmptyData($modeType);
             }
-        } else {
-            $libs = LibPivotTables2::getFor($this->modeType);
-            $linesData = $this->updateRawData($linesData, $libs);
-            $tableColumns = $this->makeTableColumnsWhenRenderRawData($linesData, $libs);
+        }
+        if (!$modeType) {
+            $tableColumns = $this->makeTableColumnsWhenEmptyModeType($linesData);
             $dataOutput = $dataOutput ?? $linesData;
         }
-        $dataOutput = $this->changeValueData($dataOutput);
+
+        if ($isRawData) {
+            $libs = LibPivotTables2::getFor($this->modeType);
+            $tableColumns = $this->makeTableColumnsWhenRenderRawData($linesData, $libs);
+            $dataOutput = $linesData;
+        }
+        $dataOutput = $this->changeValueData($dataOutput, $isRawData);
         $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
 
         // dd($linesData, $dataOutput);

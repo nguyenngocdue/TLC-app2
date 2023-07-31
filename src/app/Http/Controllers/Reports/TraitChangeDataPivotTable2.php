@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\Workflow\LibPivotTables2;
 use App\Utils\Support\PivotReport;
+use App\Utils\Support\Report;
 use DateTime;
 
 trait TraitChangeDataPivotTable2
@@ -20,8 +21,37 @@ trait TraitChangeDataPivotTable2
         }
         return '';
     }
-    public function changeValueData($data)
+
+    private function updateValueForRawData($linesData, $libs)
     {
+        $rowFields = $libs['row_fields'];
+        $tableName = $this->getTablesNamesFromLibs($libs);
+        $tables = $this->getDataFromTables($tableName);
+
+        foreach ($linesData as &$lines) {
+            foreach ($rowFields  as $key => $field) {
+                if (isset($lines->$key) && isset($field->column)) {
+                    [$tableName, $attr] = explode('.', $field->column, 2);
+                    $id = $lines->$key;
+                    $nameOfField = $tables[$tableName][$id]->{$attr};
+                    $tooltip = $tables[$tableName][$id]->description ?? 'ID: ' . $id;
+                    $lines->$key = (object)[
+                        'value' => $nameOfField ?? $id,
+                        'cell_title' => $tooltip,
+                    ];
+                }
+            }
+        }
+        return collect($linesData);
+    }
+
+    public function changeValueData($data, $isRawData)
+    {
+        if ($isRawData) {
+            $libs = LibPivotTables2::getFor($this->modeType);
+            return $this->updateValueForRawData($data, $libs);
+        }
+
         if ($this->modeType) {
             $bgColor = 'bg-gray-100';
             $results = [];
@@ -37,6 +67,7 @@ trait TraitChangeDataPivotTable2
                             $indexField .= '_' . str_replace('.', '_', $attrs->column);
                         }
                         if ($key === $indexField) {
+
                             $values[$key] = (object) [
                                 'value' => $value,
                                 'cell_title' =>  in_array($keyField, $fieldsUnShowTitle) ? '' : 'ID: ' . (string)$values[$keyField],
