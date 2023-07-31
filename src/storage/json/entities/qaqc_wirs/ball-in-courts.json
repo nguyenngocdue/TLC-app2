@@ -21,12 +21,12 @@
     },
     "closed": {
         "name": "closed",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "not_applicable": {
         "name": "not_applicable",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": "getMonitors1()"
     }
 }
