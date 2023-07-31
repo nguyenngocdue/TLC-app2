@@ -193,8 +193,7 @@
         "name": "posts"
     },
     "ppr_routing_lines": {
-        "name": "ppr_routing_lines",
-        "storeEmpty_and_updateShort": "true"
+        "name": "ppr_routing_lines"
     },
     "ppr_routing_links": {
         "name": "ppr_routing_links"
