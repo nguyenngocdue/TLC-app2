@@ -13,7 +13,9 @@ class ParamUserId extends ParentParamReports
         $treeData = $this->getDataByCompanyTree();
         $dataSource = [];
         foreach ($treeData as $value) {
-            $dataSource[] = ['id' => $value->id, 'name' => $value->name];
+            $name = $value->resigned ? $value->name . ' (RESIGNED)' : $value->name;
+            $name = $value->show_on_beta ? $name . ' (BETA)' : $name;
+            $dataSource[] = ['id' => $value->id, 'name' => $name];
         }
         return $dataSource;
     }
