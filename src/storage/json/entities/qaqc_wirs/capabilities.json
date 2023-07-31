@@ -124,12 +124,12 @@
         "name": "dc_ws",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
+        "new": "true",
         "assigned": "true",
         "partially_closed": "",
         "rejected": "",
         "closed": "",
-        "not_applicable": ""
+        "not_applicable": "true"
     },
     "des_manager": {
         "name": "des_manager",
