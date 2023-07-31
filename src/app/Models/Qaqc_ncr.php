@@ -44,35 +44,35 @@ class Qaqc_ncr extends ModelExtended
         "attachment_corrective_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_corrective_pdfs" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
 
-        "comment_assignment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        "comment_corrective_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        "comment_inspection_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        "comment_inspection_decision_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_asm_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_insp_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_inspector_decision" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
 
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
-    public function comment_assignment_rejected_reason()
+    public function comment_asm_rejected_reason()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function comment_corrective_rejected_reason()
+    public function comment_rejected_reason()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function comment_inspection_rejected_reason()
+    public function comment_insp_rejected_reason()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function comment_inspection_decision_reason()
+    public function comment_inspector_decision()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
