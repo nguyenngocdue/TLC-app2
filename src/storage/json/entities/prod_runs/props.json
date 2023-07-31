@@ -230,7 +230,7 @@
     "_total_hours": {
         "name": "_total_hours",
         "column_name": "total_hours",
-        "column_type": "float",
+        "column_type": "double",
         "label": "Total Hours",
         "control": "number",
         "align": "",
@@ -249,7 +249,7 @@
     "_total_man_hours": {
         "name": "_total_man_hours",
         "column_name": "total_man_hours",
-        "column_type": "float",
+        "column_type": "double",
         "label": "Total Man-hours",
         "control": "number",
         "align": "",
