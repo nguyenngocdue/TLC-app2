@@ -37,10 +37,11 @@ trait TraitParentIdParamsReport
     public function getParamsReport()
     {
         $tableName = $this->name;
+        $selected = str_contains($this->selected, '[') ? $this->selected : json_encode([$this->selected]);
         $params = [
             'name' => $this->multiple ?  $this->name . '[]' : $this->name,
             'id' => $this->name,
-            'selected' => str_contains($this->selected, '[') ? $this->selected : json_encode([$this->selected]),
+            'selected' => $selected,
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $tableName,
             'readOnly' => $this->readOnly,
@@ -48,7 +49,7 @@ trait TraitParentIdParamsReport
             'multiple' => $this->multiple ? true : false,
             'allowClear' => $this->allowClear,
         ];
-        // dump($this->selected, $tableName, $this->multiple, $params);
+        // dump($this->selected, $tableName, $this->multiple, $params, json_encode('[2023-06]'));
         $referData = $this->hasListenTo ? $this->referData : '';
         $this->renderJS1($tableName, $referData, $this->name);
         return $params;
