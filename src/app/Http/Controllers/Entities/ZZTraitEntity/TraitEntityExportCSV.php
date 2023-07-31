@@ -189,4 +189,8 @@ trait TraitEntityExportCSV
         }
         return $result;
     }
+    private function getModelPath(){
+        $namespace = 'App\View\Components\Renderer\ViewAllMatrixType';
+        return $namespace .'\\' . Str::of(Str::plural($this->type))->studly();
+    }
 }

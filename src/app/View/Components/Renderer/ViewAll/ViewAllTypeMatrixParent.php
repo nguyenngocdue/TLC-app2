@@ -208,8 +208,8 @@ abstract class ViewAllTypeMatrixParent extends Component
         $dataSource = $this->paginate($dataSource, $per_page, $page);
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
-        $modelPathMatrix = get_class($this);
-        $actionButtons = "<x-form.action-button-group-view-matrix type='$this->type' modelPath='$modelPathMatrix' groupBy='$this->groupBy' groupByLength='$this->groupByLength'/>";
+        // $modelPathMatrix = get_class($this);
+        $actionButtons = "<x-form.action-button-group-view-matrix type='$this->type' groupBy='$this->groupBy' groupByLength='$this->groupByLength'/>";
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
             [
