@@ -1317,7 +1317,8 @@
         "show_renderer": "props-renderer",
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-square-check\"><\/i>",
-        "show_in_my_view": "true"
+        "show_in_my_view": "true",
+        "do_not_send_notification_mails": "true"
     },
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
@@ -1901,7 +1902,6 @@
         "show_renderer": "props-renderer",
         "tutorial_link": null,
         "icon": null,
-        "hidden": "true",
         "hidden_navbar": "true"
     },
     "work_area": {
