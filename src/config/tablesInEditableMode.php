@@ -5,7 +5,9 @@ return [
         'prod_routing_details' => [],
     ],
     'prod_sequences' => [
-        'prod_runs' => [],
+        'prod_runs' => [
+            'showBtnRecalculate' => 1,
+        ],
     ],
     'eco_sheets' => [
         'eco_effectiveness_lines' => [],
