@@ -1076,6 +1076,48 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "ppr_routing": {
+        "name": "ppr_routing",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Ppr Routing",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null
+    },
+    "ppr_routing_line": {
+        "name": "ppr_routing_line",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Ppr Routing Line",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null
+    },
+    "ppr_routing_link": {
+        "name": "ppr_routing_link",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Ppr Routing Link",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null
+    },
     "priority": {
         "name": "priority",
         "package_tab": "application",

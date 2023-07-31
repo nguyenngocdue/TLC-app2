@@ -739,7 +739,7 @@ const documentReadyDropdown2 = (params) => {
             listenersOfDropdown2.forEach((listener) => {
                 const list = action === 'create' ? ['reduce', 'assign'] : ['reduce' /* 'assign'*/] //<< without assign, keep value from DB, otherwise it will be overwritten every time the form is loaded
                 if (listener.triggers.includes(id) && list.includes(listener.listen_action)) {
-                    console.log("I am a trigger of ", listener.listen_action, ", I have to trigger myself when form load [", id, "]",)
+                    // console.log("I am a trigger of ", listener.listen_action, ", I have to trigger myself when form load [", id, "]",)
                     getEById(id).trigger('change', { onLoad: true })
                 }
             })

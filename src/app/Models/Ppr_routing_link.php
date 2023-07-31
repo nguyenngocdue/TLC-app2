@@ -12,19 +12,11 @@ class Ppr_routing_link extends ModelExtended
     protected static $statusless = true;
 
     public static $eloquentParams = [
-        "getProdRoutings" => ['belongsToMany', Prod_routing::class, 'ppr_routing_lines', 'ppr_routing_link_id', 'ppr_routing_id'],
+        "getPprRoutingLines" => ['hasMany', Ppr_routing_line::class, 'ppr_routing_link_id'],
     ];
-
-    public function getProdRoutings()
+    public function getPprRoutingLines()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('target_hours', 'target_man_hours');
-    }
-    public function getManyLineParams()
-    {
-        return [
-            ['dataIndex' => 'id',],
-            ['dataIndex' => 'name'],
-        ];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

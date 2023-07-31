@@ -356,7 +356,7 @@ const onChangeDropdown4TriggerChangeAllLinesExceptCurrent = (listener, table01Na
 
 const ajaxQueueUpdate = {}
 
-const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange, dropdownParams }) => {
+const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange, dropdownParams = {} }) => {
     // console.log("onChangeDropdown4", name, table01Name, rowIndex, saveOnChange, lineType)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s, table01Name)
     // console.log("onChangeDropdown4", name, batchLength)
