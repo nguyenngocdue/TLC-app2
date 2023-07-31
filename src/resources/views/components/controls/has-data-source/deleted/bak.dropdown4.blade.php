@@ -23,14 +23,14 @@
 @endif
 
 <script>
-    $("[id='{{$name}}']").on('change', function(e, batchLength){
+    $("[id='{{$name}}']").on('change', function(e, params){
         onChangeDropdown4({
             name:"{{$name}}", 
             lineType:"{{$lineType}}",
             table01Name:"{{$table01Name}}", 
             rowIndex:{{$rowIndex}}, 
             saveOnChange: {{$saveOnChange?1:0}},
-            batchLength,
+            params,
         })
     })
 </script>
