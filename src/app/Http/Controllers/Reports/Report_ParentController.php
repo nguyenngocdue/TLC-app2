@@ -169,7 +169,8 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->changeValueData($dataSource, $modeParams);
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
-
+        $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
+        
         $viewName =  CurrentPathInfo::getViewName($request);
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
         $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);

@@ -2,10 +2,10 @@
 
 namespace App\View\Components\Reports\Modals;
 
-use App\View\Components\Reports\ParentParamReports;
+use App\View\Components\Reports\ParentTypeParamReport;
 use Illuminate\Support\Facades\DB;
 
-class ParamMonth extends ParentParamReports
+class ParamMonth extends ParentTypeParamReport
 {
     protected function getDataSource()
     {

@@ -37,10 +37,11 @@ trait TraitParentIdParamsReport
     public function getParamsReport()
     {
         $tableName = $this->name;
+        $selected = str_contains($this->selected, '[') ? $this->selected : json_encode([$this->selected]);
         $params = [
             'name' => $this->multiple ?  $this->name . '[]' : $this->name,
             'id' => $this->name,
-            'selected' => str_contains($this->selected, '[') ? $this->selected : json_encode([$this->selected]),
+            'selected' => $selected,
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $tableName,
             'readOnly' => $this->readOnly,
