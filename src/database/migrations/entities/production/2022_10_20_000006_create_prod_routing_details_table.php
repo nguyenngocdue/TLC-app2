@@ -27,6 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('wir_description_id')->nullable();
             $table->integer('priority')->nullable(); //<<TO be removed
             $table->double('target_hours')->nullable();
+            $table->double('target_man_power')->nullable();
             $table->double('target_man_hours')->nullable();
 
             $table->orderable();

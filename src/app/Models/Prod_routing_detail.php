@@ -8,7 +8,8 @@ class Prod_routing_detail extends ModelExtended
 {
     protected $fillable = [
         "id", "prod_routing_id", "prod_routing_link_id", "erp_routing_link_id",
-        "wir_description_id", "target_hours", "target_man_hours",  "owner_id",
+        "wir_description_id", "owner_id",
+        "target_hours", "target_man_power", "target_man_hours",
         "priority", "order_no",
     ];
     protected $table = "prod_routing_details";
@@ -55,9 +56,10 @@ class Prod_routing_detail extends ModelExtended
 
             ['dataIndex' => 'prod_routing_link_id',],
             // ['dataIndex' => 'erp_routing_link_id',],
-            ['dataIndex' => 'wir_description_id',],
             ["dataIndex" => 'target_hours'],
             ["dataIndex" => 'target_man_hours'],
+
+            ['dataIndex' => 'wir_description_id',],
         ];
     }
 }
