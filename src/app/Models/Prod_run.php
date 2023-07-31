@@ -7,8 +7,8 @@ use App\BigThink\ModelExtended;
 class Prod_run extends ModelExtended
 {
     protected $fillable = [
-        "id", "prod_sequence_id", "date", "start", "end", "total_hours", "owner_id",
-        "worker_number", "total_man_hours"
+        "id", "prod_sequence_id", "date", "start", "end", "owner_id",
+        "total_hours",  "worker_number", "total_man_hours"
     ];
 
     protected $table = 'prod_runs';
@@ -41,7 +41,7 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'start', 'cloneable' => true,],
             ['dataIndex' => 'end', 'cloneable' => true,],
             ['dataIndex' => 'total_hours', 'footer' => 'agg_sum'],
-            ['dataIndex' => 'worker_number', 'cloneable' => true,],
+            ['dataIndex' => 'worker_number', 'cloneable' => true, 'footer' => 'agg_avg'],
             ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum'],
             // ['dataIndex' => 'owner_id',],
         ];

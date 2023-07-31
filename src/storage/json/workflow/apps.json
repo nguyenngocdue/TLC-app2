@@ -1258,7 +1258,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "prod_sequence": {
         "name": "prod_sequence",
