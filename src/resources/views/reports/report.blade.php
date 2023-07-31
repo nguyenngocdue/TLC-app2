@@ -21,7 +21,22 @@
         $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
     @endphp
     @if($typeOfView === 'report-pivot')
-    <x-renderer.report.pivot-table modeType="{{$modeType}}"  showNo={{true}} :dataHeader="$tableDataHeader" :columns="$tableColumns" :modeParams="$modeParams" :dataSource="$tableDataSource"  tableTrueWidth={{$tableTrueWidth?1:0}} page-limit="{{$pageLimit}}" headerTop=10 />
+    <x-renderer.report.pivot-table 
+                    modeType="{{$modeType}}"  
+                    showNo={{true}} 
+                    :dataHeader="$tableDataHeader" 
+                    :columns="$tableColumns" 
+                    :modeParams="$modeParams" 
+                    :dataSource="$tableDataSource"  
+                    tableTrueWidth={{$tableTrueWidth?1:0}} 
+                    page-limit="{{$pageLimit}}" 
+                    headerTop=10
+                    
+                    showPaginationTop="true"
+                    topLeftControl="{!!$tl!!}" 
+                    topCenterControl="{!!$tc!!}" 
+                    topRightControl="{!!$tr!!}" 
+                    />
     @else
     <x-renderer.table 
                     showNo={{true}} 
