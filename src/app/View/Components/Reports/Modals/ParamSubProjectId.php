@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Reports\Modals;
 
-use App\View\Components\Reports\ParentIdParamReports;
 use App\View\Components\Reports\ParentParamReports;
 use Illuminate\Support\Facades\DB;
 

@@ -185,7 +185,7 @@ class RelationshipRenderer2 extends Component
         // dump($this->tablesInEditableMode[$this->type]);
 
         $createANewForm = isset($this->tablesHaveCreateANewForm[$this->type]);
-        $createSettings = $createANewForm ? $this->tablesHaveCreateANewForm[$this->type][$tableName] : [];
+        $createSettings = $createANewForm ? ($this->tablesHaveCreateANewForm[$this->type][$tableName] ?? []) : [];
 
         $btnCmd = isset($this->tablesCallCmdBtn[$this->type]);
         $btnCmdSettings = $btnCmd ? ($this->tablesCallCmdBtn[$this->type][$tableName] ?? []) : [];

@@ -19,7 +19,6 @@
         <x-reports.utility-report routeName="{{$routeName}}" />
         <x-reports.per-page-report typeReport="{{$typeReport}}" entity="{{$entity}}" routeName="{{$routeName}}" page-limit="{{$pageLimit}}" formName="updatePerPage" />
     </div>
-
     @php
     $tc = "
     <x-reports.utility-report routeName='$routeName' ";

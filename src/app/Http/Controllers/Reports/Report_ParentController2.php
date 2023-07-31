@@ -22,10 +22,7 @@ abstract class Report_ParentController2 extends Controller
     use TraitFunctionsReport;
     use TraitLibPivotTableDataFields2;
 
-    protected $rotate45Width = false;
-    protected $groupBy = false;
     protected $mode = '010';
-    protected $groupByLength = 7;
     protected $maxH = null;
     protected $tableTrueWidth = false;
     protected $pageLimit = 10;
@@ -179,7 +176,6 @@ abstract class Report_ParentController2 extends Controller
             'mode' => $this->mode,
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
-            'groupBy' => $this->groupBy,
             'modeReport' => $modeReport,
             'modeParams' => $modeParams,
             'typeReport' => $typeReport,
@@ -190,8 +186,6 @@ abstract class Report_ParentController2 extends Controller
             'paramColumns' => $paramColumns,
             'tableDataSource'=> $dataSource,
             'tableDataHeader' => $tableDataHeader,
-            'rotate45Width' => $this->rotate45Width,
-            'groupByLength' => $this->groupByLength,
             'tableTrueWidth' => $this->tableTrueWidth,
             'topTitle' => $this->getMenuTitle(),
         ]);
@@ -241,11 +235,6 @@ abstract class Report_ParentController2 extends Controller
             fclose($file);
         };
         return response()->stream($callback, 200, $headers);
-    }
-
-    protected function modifyDataToExportCSV($dataSource)
-    {
-        return $dataSource;
     }
 
     protected function getJS()

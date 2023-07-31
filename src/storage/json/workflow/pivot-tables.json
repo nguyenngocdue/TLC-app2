@@ -11,7 +11,7 @@
     "apple_store_delete_fields_database": {
         "name": "apple_store_delete_fields_database",
         "filters": null,
-        "row_fields": "category,\r\nproduct,\r\ndate,\r\ndate_discount,\r\nprice,\r\ndiscount,\r\namount",
+        "row_fields": "category;\r\nproduct;\r\ndate;\r\ndate_discount;\r\nprice;\r\ndiscount;\r\namount;",
         "column_fields": null,
         "value_index_fields": null,
         "data_fields": null,
@@ -19,29 +19,29 @@
     },
     "apple_store_duplicate_field_column_field_value_index_field": {
         "name": "apple_store_duplicate_field_column_field_value_index_field",
-        "filters": "del-ParamSubProjectId copy",
+        "filters": null,
         "row_fields": "product",
-        "column_fields": "date,\r\ncategory,\r\ncategory,\r\ncategory,",
-        "value_index_fields": "amount,\r\namount,\r\namount,\r\ncategory,",
-        "data_fields": "amount,",
+        "column_fields": "date;\r\ncategory;\r\ncategory;\r\ncategory;",
+        "value_index_fields": "amount;\r\namount;\r\namount;\r\ncategory;",
+        "data_fields": "amount;",
         "sort_by": null
     },
     "apple_store_duplicate_value_in_column_field": {
         "name": "apple_store_duplicate_value_in_column_field",
         "filters": null,
         "row_fields": "category",
-        "column_fields": "date,\r\ndate,\r\ndate,",
-        "value_index_fields": "amount,\r\namount,\r\namount,",
-        "data_fields": "amount,",
+        "column_fields": "date;\r\ndate;\r\ndate;",
+        "value_index_fields": "amount;\r\namount;\r\namount;",
+        "data_fields": "amount;",
         "sort_by": null
     },
     "apple_store_duplicate_value_in_column_field_many_objects": {
         "name": "apple_store_duplicate_value_in_column_field_many_objects",
         "filters": null,
         "row_fields": "category",
-        "column_fields": "product,\r\ndate,\r\ndate,",
-        "value_index_fields": "amount,\r\ndiscount,\r\ndiscount,",
-        "data_fields": "discount,",
+        "column_fields": "product;\r\ndate;\r\ndate;",
+        "value_index_fields": "amount;\r\ndiscount;\r\ndiscount;",
+        "data_fields": "discount;",
         "sort_by": null
     },
     "apple_store_empty_input": {
@@ -57,8 +57,8 @@
         "name": "apple_store_empty_row_field",
         "filters": null,
         "row_fields": null,
-        "column_fields": "category,product",
-        "value_index_fields": "amount,amount",
+        "column_fields": "category;\r\nproduct;",
+        "value_index_fields": "amount;\r\namount;",
         "data_fields": "amount",
         "sort_by": null
     },
@@ -66,7 +66,7 @@
         "name": "apple_store_minimum_quantity_column_field",
         "filters": null,
         "row_fields": null,
-        "column_fields": "category,\r\nproduct,\r\ndate,\r\ndate,",
+        "column_fields": "category;\r\nproduct;\r\ndate;\r\ndate;",
         "value_index_fields": "amount",
         "data_fields": "amount",
         "sort_by": null
@@ -75,8 +75,8 @@
         "name": "apple_store_minimum_quantity_column_field_equal_3",
         "filters": null,
         "row_fields": null,
-        "column_fields": "category,\r\nproduct,\r\ndate,",
-        "value_index_fields": "amount,\r\namount,\r\namount,",
+        "column_fields": "category;\r\nproduct;\r\ndate;",
+        "value_index_fields": "amount;\r\namount;\r\namount;",
         "data_fields": "amount",
         "sort_by": null
     },
@@ -84,18 +84,9 @@
         "name": "apple_store_product_per_date",
         "filters": null,
         "row_fields": "product",
-        "column_fields": "date,",
-        "value_index_fields": "discount",
-        "data_fields": "discount,",
-        "sort_by": "product:desc"
-    },
-    "apple_store_test_code": {
-        "name": "apple_store_test_code",
-        "filters": null,
-        "row_fields": null,
-        "column_fields": "hseir_ltc_count_vote,\r\nhseir_rwc_count_vote,\r\nhseir_mtc_count_vote",
-        "value_index_fields": null,
-        "data_fields": "hseir_ltc_count_vote,\r\nhseir_rwc_count_vote,",
+        "column_fields": "date{\r\n\"value_index\":discount\r\n};",
+        "value_index_fields": "date;",
+        "data_fields": "discount;",
         "sort_by": null
     },
     "datasource_hr_timesheet_line": {

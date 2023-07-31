@@ -3,11 +3,7 @@
 namespace App\View\Components\Reports\Modals;
 
 use App\Models\Prod_routing;
-use App\Models\Sub_project;
-use App\View\Components\Reports\ParentIdParamReports;
-use App\View\Components\Reports\ParentIdParamReports2;
 use App\View\Components\Reports\ParentParamReports;
-use Illuminate\Support\Facades\DB;
 
 class ParamProdRoutingId extends ParentParamReports
 {

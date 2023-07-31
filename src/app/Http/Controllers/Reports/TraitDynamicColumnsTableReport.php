@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Reports;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 
 trait TraitDynamicColumnsTableReport
 {
