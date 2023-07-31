@@ -6,7 +6,6 @@ use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitLegendReport;
-use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
 use App\Utils\Support\CurrentUser;

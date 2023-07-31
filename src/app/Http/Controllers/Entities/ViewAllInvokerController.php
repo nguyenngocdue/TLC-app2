@@ -31,12 +31,10 @@ class ViewAllInvokerController extends Controller
         $this->assignDynamicTypeViewAllQrList6();
         $this->middleware("permission:{$this->permissionMiddleware['read']}")->only('index');
     }
-
     public function getType()
     {
         return $this->type;
     }
-
     public function exportCSV()
     {
         [$columns, $dataSource] = $this->normalizeDataSourceAndColumnsFollowAdvanceFilter();
@@ -50,51 +48,10 @@ class ViewAllInvokerController extends Controller
         $callback = Excel::export($columns,$rows);
         return response()->stream($callback, 200, $headers);
     }
-    private function groupByDataSource($request,$dataSource){
-        if($request->groupBy){
-            $result = [];
-            foreach ($dataSource as $key => $item) {
-                $groupKey = substr($item[$request->groupBy], 0, $request->groupByLength);
-                if (!isset($result[$groupKey])) {
-                    $result[$groupKey] = [];
-                }
-                $result[$groupKey][$key] = $item;
-            }
-            return $result;
-        }
-        return $dataSource;
-    }
-    private function makeDataSourceForViewMatrix($request,$dataSource){
-        $rows = [];
-        foreach ($dataSource as $key => $value) {
-           $rows[] = [$key];
-           foreach ($value as $no => $item) {
-            if(isset($item[$request->groupBy])) unset($item[$request->groupBy]);
-            $item = array_values(array_map(fn($item) => $item->value ?? $item,$item));
-            array_unshift($item,($no + 1));
-            $rows[] = $item;
-           }
-        }
-        return $rows;
-        
-    }
-    private function sortDataValueFollowColumns($columns,$dataSource){
-        $columns = array_column($columns,'dataIndex');
-        $result = [];
-        foreach ($dataSource as $item) {
-            $arrayTemp = [];
-            foreach ($columns as $key) {
-                $arrayTemp[$key] = $item[$key];
-            }
-            $result[] = $arrayTemp;
-        }
-        return $result;
-    }
     public function exportCSV2(Request $request){
-        if($modelPath = $request->modelPath){
+        try {
+            $modelPath = $this->getModelPath();
             [,$columns,$dataSource] = (new ($modelPath))->getParams();
-            // dump($columns);
-            // dd($dataSource);
             $dataSource = $this->sortDataValueFollowColumns($columns,$dataSource);
             $dataSource = $this->groupByDataSource($request,$dataSource);
             $columns = array_filter($columns,fn($item) => !isset($item['hidden']));
@@ -103,11 +60,17 @@ class ViewAllInvokerController extends Controller
             : Str::headline($item['dataIndex'])), $columns));
             array_unshift($columns,  'No.');
             $fileName = $this->type . '_matrix.csv';
-            $headers = Excel::header($fileName);
             $dataSource = $this->makeDataSourceForViewMatrix($request,$dataSource);
+            $headers = Excel::header($fileName);
             $callback = Excel::export($columns,$dataSource);
             return response()->stream($callback, 200, $headers);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
         }
+    }
+    private function getModelPath(){
+        $namespace = 'App\View\Components\Renderer\ViewAllMatrixType';
+        return $namespace .'\\' . Str::of(Str::plural($this->type))->studly();
     }
     public function duplicateMultiple(Request $request)
     {

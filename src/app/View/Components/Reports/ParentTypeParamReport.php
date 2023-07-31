@@ -44,6 +44,7 @@ abstract class ParentTypeParamReport extends Component
             'allowClear' => $this->allowClear,
         ];
         $this->renderJS($tableName);
+        // dump($this->selected, json_encode([$this->selected]));
         return view('components.controls.has-data-source.dropdown2', $params);
     }
 }

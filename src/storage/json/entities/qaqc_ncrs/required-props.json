@@ -122,26 +122,26 @@
     "_prod_routing_id": {
         "name": "_prod_routing_id",
         "column_name": "prod_routing_id",
-        "new": "true",
-        "assigned": "true",
-        "assign_rejected": "true",
-        "resolved": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_prod_order_id": {
         "name": "_prod_order_id",
         "column_name": "prod_order_id",
-        "new": "true",
-        "assigned": "true",
-        "assign_rejected": "true",
-        "resolved": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
@@ -278,14 +278,14 @@
     "_defect_report_type": {
         "name": "_defect_report_type",
         "column_name": "defect_report_type",
-        "new": "true",
-        "assigned": "true",
-        "assign_rejected": "true",
-        "resolved": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_getQaqcCars": {
         "name": "_getQaqcCars",

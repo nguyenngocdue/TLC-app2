@@ -183,10 +183,10 @@
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
-    "_attachment_training_course": {
-        "name": "_attachment_training_course",
+    "_attachment_onboarding_course": {
+        "name": "_attachment_onboarding_course",
         "field_id": "167",
-        "field_name": "attachment_training_course",
+        "field_name": "attachment_onboarding_course",
         "max_file_size": "10",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"

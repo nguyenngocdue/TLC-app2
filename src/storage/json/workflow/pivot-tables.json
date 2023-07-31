@@ -11,7 +11,7 @@
     "apple_store_delete_fields_database": {
         "name": "apple_store_delete_fields_database",
         "filters": null,
-        "row_fields": "category,\r\nproduct,\r\ndate,\r\ndate_discount,\r\nprice,\r\ndiscount,\r\namount",
+        "row_fields": "category;\r\nproduct;\r\ndate;\r\ndate_discount;\r\nprice;\r\ndiscount;\r\namount;",
         "column_fields": null,
         "value_index_fields": null,
         "data_fields": null,
@@ -21,27 +21,27 @@
         "name": "apple_store_duplicate_field_column_field_value_index_field",
         "filters": null,
         "row_fields": "product",
-        "column_fields": "date,\r\ncategory,\r\ncategory,\r\ncategory,",
-        "value_index_fields": "amount,\r\namount,\r\namount,\r\ncategory,",
-        "data_fields": "amount,",
+        "column_fields": "date;\r\ncategory;\r\ncategory;\r\ncategory;",
+        "value_index_fields": "amount;\r\namount;\r\namount;\r\ncategory;",
+        "data_fields": "amount;",
         "sort_by": null
     },
     "apple_store_duplicate_value_in_column_field": {
         "name": "apple_store_duplicate_value_in_column_field",
         "filters": null,
         "row_fields": "category",
-        "column_fields": "date,\r\ndate,\r\ndate,",
-        "value_index_fields": "amount,\r\namount,\r\namount,",
-        "data_fields": "amount,",
+        "column_fields": "date;\r\ndate;\r\ndate;",
+        "value_index_fields": "amount;\r\namount;\r\namount;",
+        "data_fields": "amount;",
         "sort_by": null
     },
     "apple_store_duplicate_value_in_column_field_many_objects": {
         "name": "apple_store_duplicate_value_in_column_field_many_objects",
         "filters": null,
         "row_fields": "category",
-        "column_fields": "product,\r\ndate,\r\ndate,",
-        "value_index_fields": "amount,\r\ndiscount,\r\ndiscount,",
-        "data_fields": "discount,",
+        "column_fields": "product;\r\ndate;\r\ndate;",
+        "value_index_fields": "amount;\r\ndiscount;\r\ndiscount;",
+        "data_fields": "discount;",
         "sort_by": null
     },
     "apple_store_empty_input": {
@@ -57,8 +57,8 @@
         "name": "apple_store_empty_row_field",
         "filters": null,
         "row_fields": null,
-        "column_fields": "category,product",
-        "value_index_fields": "amount,amount",
+        "column_fields": "category;\r\nproduct;",
+        "value_index_fields": "amount;\r\namount;",
         "data_fields": "amount",
         "sort_by": null
     },
@@ -66,7 +66,7 @@
         "name": "apple_store_minimum_quantity_column_field",
         "filters": null,
         "row_fields": null,
-        "column_fields": "category,\r\nproduct,\r\ndate,\r\ndate,",
+        "column_fields": "category;\r\nproduct;\r\ndate;\r\ndate;",
         "value_index_fields": "amount",
         "data_fields": "amount",
         "sort_by": null
@@ -75,8 +75,8 @@
         "name": "apple_store_minimum_quantity_column_field_equal_3",
         "filters": null,
         "row_fields": null,
-        "column_fields": "category,\r\nproduct,\r\ndate,",
-        "value_index_fields": "amount,\r\namount,\r\namount,",
+        "column_fields": "category;\r\nproduct;\r\ndate;",
+        "value_index_fields": "amount;\r\namount;\r\namount;",
         "data_fields": "amount",
         "sort_by": null
     },
@@ -84,23 +84,14 @@
         "name": "apple_store_product_per_date",
         "filters": null,
         "row_fields": "product",
-        "column_fields": "date,",
-        "value_index_fields": "discount",
-        "data_fields": "discount,",
-        "sort_by": "product:desc"
-    },
-    "apple_store_test_code": {
-        "name": "apple_store_test_code",
-        "filters": null,
-        "row_fields": null,
-        "column_fields": "hseir_ltc_count_vote,\r\nhseir_rwc_count_vote,\r\nhseir_mtc_count_vote",
-        "value_index_fields": null,
-        "data_fields": "hseir_ltc_count_vote,\r\nhseir_rwc_count_vote,",
+        "column_fields": "date{\r\n\"value_index\":discount\r\n};",
+        "value_index_fields": "date;",
+        "data_fields": "discount;",
         "sort_by": null
     },
     "datasource_hr_timesheet_line": {
         "name": "datasource_hr_timesheet_line",
-        "filters": "picker_date{\"title\":\"Month\",\r\n\"allowClear\":true};\r\nsub_project_id{\r\n\"title\":\"Sub Project\",\r\n\"allowClear\": true,\r\n\"multiple\":true\r\n};\r\ndepartment_id{\r\n\"title\":\"Department\",\r\n\"allowClear\":true,\r\n\"multiple\":true};\r\nuser_id{\r\n\"title\":\"User\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\nworkplace_id{\r\n\"title\":\"Workplace\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\ncategory_id{\r\n\"title\":\"Team\",\r\n\"allowClear\": true,\r\n\"multiple\":true\r\n};",
+        "filters": "picker_date{\r\n\"title\":\"Date\",\r\n\"allowClear\":true\r\n};\r\nsub_project_id{\r\n\"title\":\"Sub Project\",\r\n\"allowClear\":true,\r\n\"multiple\":true};\r\nprod_order_id{\r\n\"title\":\"Prod Order\",\r\n\"allowClear\":true,\r\n\"multiple\":true,\r\n\"hasListenTo\":false};\r\ndepartment_id{\r\n\"title\":\"Department\",\r\n\"allowClear\":true,\r\n\"multiple\":true,\r\n\"hasListenTo\":false\r\n};\r\nuser_id{\r\n\"title\":\"User\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\nworkplace_id{\r\n\"title\":\"Workplace\",\r\n\"allowClear\":true,\r\n\"multiple\":true,\r\n\"hasListenTo\":false\r\n};\r\ncategory_id{\r\n\"title\":\"Category\",\r\n\"allowClear\":true,\r\n\"multiple\":true,\r\n\"hasListenTo\":false\r\n};",
         "row_fields": "sub_project_id{\r\n    \"column\": \"sub_projects.name\",\r\n    \"title\": \"Sub Project\"\r\n};\r\nlod_id{\r\n    \"column\": \"terms.name\",\r\n    \"title\": \"LOD\",\r\n};\r\ndepartment_id{\r\n    \"column\": \"departments.name\"\r\n};\r\nstaff_id{\r\n    \"title\": \"Staff ID\"\r\n};\r\nuser_id{\r\n    \"column\": \"users.name\",\r\n    \"width\": 200\r\n};\r\nworkplace_id{\r\n    \"column\": \"workplaces.name\"\r\n};\r\ncategory_id{\r\n    \"column\": \"user_categories.name\"\r\n};\r\ntype_id{\r\n    \"column\": \"user_types.name\"\r\n};\r\ndiscipline_id{\r\n    \"column\": \"user_disciplines.name\",\r\n    \"width\": 280\r\n};\r\npj_task_id{\r\n    \"column\": \"pj_tasks.name\",\r\n    \"title\": \"Task\",\r\n    \"width\": 200\r\n};\r\nmonth{\r\n\"title\": \"Month\",\"align\":\"center\"};\r\ntime_sheet_start_time{\r\n    \"title\": \"Date\",\"align\":\"center\"\r\n};\r\ntime_sheet_durations{\r\n\"title\":\"Duration\",\"align\":\"right\"};",
         "column_fields": null,
         "value_index_fields": null,
@@ -109,7 +100,7 @@
     },
     "hr_timesheet_line_employee_date": {
         "name": "hr_timesheet_line_employee_date",
-        "filters": "category_id{\r\n\"title\":\"Team\",\r\n\"allowClear\": true,\r\n\"multiple\":true\r\n};\r\nuser_id{\r\n\"title\":\"User\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\nworkplace_id{\r\n\"title\" :\"Workplace\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\ndepartment_id{\"title\":\"Department\",\r\n\"allowClear\":true};\r\npicker_date{\"title\":\"Date\"};",
+        "filters": "category_id{\r\n\"title\":\"Team\",\r\n\"allowClear\": true,\r\n\"multiple\":true\r\n};\r\nuser_id{\r\n\"title\":\"User\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\nworkplace_id{\r\n\"title\" :\"Workplace\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\ndepartment_id{\r\n\"title\":\"Department\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\npicker_date{\"title\":\"Date\"};",
         "row_fields": "staff_id{\"title\":\"Staff ID\"};\r\nuser_id{\"column\":\"users.name\", \"width\":200};\r\nworkplace_id{\"column\":\"workplaces.name\"};\r\ncategory_id{\"column\":\"user_categories.name\"};\r\ntype_id{\"column\":\"user_types.name\"};\r\ndepartment_id{\"column\":\"departments.name\"}",
         "column_fields": "time_sheet_start_time{\"value_index\":\"time_sheet_durations\",\"title\":\"Timesheet Hours\", \"width\":50,\r\n\"align\": \"right\"};\r\ntime_sheet_start_time_wfh{\"value_index\":\"time_sheet_durations_wfh\",\"title\":\"Timesheet WFH\"};\r\ntime_sheet_start_time_otr{\r\n\"value_index\":\"time_sheet_durations_otr\", \"title\":\"Timesheet OTR\"}",
         "value_index_fields": "time_sheet_durations;\r\ntime_sheet_durations_wfh;\r\ntime_sheet_durations_otr",
@@ -118,7 +109,7 @@
     },
     "hr_timesheet_line_employee_project": {
         "name": "hr_timesheet_line_employee_project",
-        "filters": "user_id{\r\n\"title\":\"User\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\ncategory_id{\r\n\"title\":\"Team\",\r\n\"allowClear\": true,\r\n\"multiple\":true\r\n};\r\nworkplace_id{\r\n\"title\" :\"Workplace\",\r\n\"allowClear\":true,\r\n\"multiple\":true,\r\n};\r\ndepartment_id{\r\n\"title\":\"Department\",\r\n\"allowClear\":true,\r\n};\r\npicker_date{\r\n\"title\":\"Date\",\r\n\"allowClear\":true\r\n};",
+        "filters": "user_id{\r\n\"title\":\"User\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\nworkplace_id{\r\n\"title\" :\"Workplace\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\ncategory_id{\r\n\"title\":\"Team\",\r\n\"allowClear\": true,\r\n\"multiple\":true\r\n};\r\nsub_project_id{\r\n\"title\" :\"Sub Project\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\npicker_date{\r\n\"title\":\"Date\",\r\n\"allowClear\":true\r\n};",
         "row_fields": "staff_id{\"title\":\"Staff ID\"};\r\nuser_id{\"column\":\"users.name\",\"width\":200};\r\ndiscipline_id{\"column\":\"user_disciplines.name\",\"width\":280};\r\nworkplace_id{\"column\":\"workplaces.name\"};\r\ncategory_id{\"column\":\"user_categories.name\"};\r\ntype_id{\"column\":\"user_types.name\"};",
         "column_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\"};",
         "value_index_fields": null,

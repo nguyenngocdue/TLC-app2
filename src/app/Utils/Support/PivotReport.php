@@ -338,7 +338,7 @@ class PivotReport
     }
     public static function groupBy($lineData, $rowFields)
     {
-        // if (empty($rowFields)) return $lineData;
+        if (empty($lineData)) return [];
         $dataOutput = [];
         foreach ($lineData as $line) {
             // Get the values of fields in $rowFields
@@ -585,8 +585,6 @@ class PivotReport
 
     public static function hasDuplicates2($array)
     {
-
-        dd($array);
         $counts = array_count_values(((array)$array));
 
         foreach ($counts as $value) {

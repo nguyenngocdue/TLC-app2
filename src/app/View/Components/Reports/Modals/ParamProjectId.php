@@ -3,9 +3,9 @@
 namespace App\View\Components\Reports\Modals;
 
 use App\Models\Project;
-use App\View\Components\Reports\ParentTypeParamReport;
+use App\View\Components\Reports\ParentParamReports;
 
-class ParamProjectId extends ParentTypeParamReport
+class ParamProjectId extends ParentParamReports
 {
     protected function getDataSource()
     {

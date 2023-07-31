@@ -3,7 +3,7 @@
 namespace App\View\Components\Renderer\Report;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\TraitLibPivotTableDataFields2;
+use App\Http\Controllers\Reports\TraitLibPivotTableDataFields2;
 use App\Utils\Support\Report;
 use App\Utils\Support\PivotReport;
 use Exception;
@@ -212,9 +212,8 @@ class PivotTableController extends Controller
         $aggregations = $libs['data_fields'];
         $tableName = $this->getTablesNamesFromLibs($libs);
 
-        if (empty($linesData->toArray())) return [];
-
         if (is_object($linesData)) $linesData = array_map(fn ($item) => (array)$item, $linesData->toArray());
+        if (empty($linesData)) return [];
         // Step 1: reduce lines from Filters array
         $keysFilters = $this->triggerFilters($topParams, $keysOfFilters);
         $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $keysFilters);

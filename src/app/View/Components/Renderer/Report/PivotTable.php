@@ -8,10 +8,11 @@ use App\Http\Controllers\Reports\TraitChangeDataPivotTable2;
 use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\Reports\TraitUpdateParamsReport;
-use App\Http\Controllers\TraitLibPivotTableDataFields2;
+use App\Http\Controllers\Reports\TraitLibPivotTableDataFields2;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\StringPivotTable;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class PivotTable extends Component
@@ -32,9 +33,10 @@ class PivotTable extends Component
         private $pageLimit = 10,
         protected $tableTrueWidth = true,
 
-    ) {}
+    ) {
+    }
 
-    private function triggerDataFollowManagePivot($linesData,$modeType, $modeParams)
+    private function triggerDataFollowManagePivot($linesData, $modeType, $modeParams)
     {
         $fn = (new DataPivotTable2);
         $data = $fn->makeDataPivotTable($linesData, $modeType, $modeParams);
@@ -43,9 +45,15 @@ class PivotTable extends Component
 
     private function paginateDataSource($dataSource, $pageLimit)
     {
-        $page = $_GET['page'] ?? 1;
-        $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))->appends(request()->query());
-        return $dataSource;
+            $page = $_GET['page'] ?? 1;
+            // Convert array to a collection
+            if (!($dataSource instanceof Collection)) {
+                $dataSource = collect($dataSource);
+            }
+            $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))
+                ->appends(request()->query());
+            return $dataSource;
+
     }
 
     private function makeTableColumnsWhenEmptyData($modeType)
@@ -65,7 +73,7 @@ class PivotTable extends Component
 
     private function makeTableColumnsWhenEmptyModeType($linesData)
     {
-        $data = is_object($linesData) ? $linesData->toArray(): $linesData;
+        $data = is_object($linesData) ? $linesData->toArray() : $linesData;
         $columns = [];
         foreach (array_keys((array)reset($data)) as $key) {
             $columns[] = [
@@ -85,16 +93,17 @@ class PivotTable extends Component
         $pageLimit = $this->pageLimit;
         $modeType = $this->modeType;
         if ($modeType) {
-            [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData,$modeType, $modeParams);
+            [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData, $modeType, $modeParams);
             if (PivotReport::isEmptyArray($dataOutput)) {
                 $tableColumns = $this->makeTableColumnsWhenEmptyData($modeType);
             }
         } else {
             $tableColumns = $this->makeTableColumnsWhenEmptyModeType($linesData);
-            $dataOutput = $dataOutput ?? $linesData; 
+            $dataOutput = $dataOutput ?? $linesData;
         }
         $dataOutput = $this->changeValueData($dataOutput);
         $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
+
         // dd($linesData, $dataOutput);
         return view("components.renderer.report.pivot-table", [
             'tableDataSource' => $dataRender,

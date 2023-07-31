@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\UpdateUserSettings;
-use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Reports;
 
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibReports;
 use App\Utils\Support\CurrentPathInfo;
@@ -20,14 +19,10 @@ abstract class Report_ParentController2 extends Controller
 {
     use TraitMenuTitle;
     use TraitModeParamsReport;
-    use TraitDataModesReport;
     use TraitFunctionsReport;
     use TraitLibPivotTableDataFields2;
 
-    protected $rotate45Width = false;
-    protected $groupBy = false;
     protected $mode = '010';
-    protected $groupByLength = 7;
     protected $maxH = null;
     protected $tableTrueWidth = false;
     protected $pageLimit = 10;
@@ -37,7 +32,6 @@ abstract class Report_ParentController2 extends Controller
     public function getType()
     {
         return $this->getTable();
-        // return str_replace(' ', '_', strtolower($this->getMenuTitle()));
     }
 
     private function getSql($modeParams)
@@ -124,8 +118,12 @@ abstract class Report_ParentController2 extends Controller
         $colParams = [];
         foreach ($filters as $key => $values) {
             $dataIndex = $key;
+            $multiple = false;
             if (isset($values->multiple)) {
-                $dataIndex = 'many_' . $key;
+                if($values->multiple == 'true' || $values->multiple) {
+                    $dataIndex =  $key;
+                    $multiple = true;
+                }else $dataIndex = $key;
             }
             $a = [];
             if ($dataIndex === 'picker_date') {
@@ -134,8 +132,9 @@ abstract class Report_ParentController2 extends Controller
             $colParams[] = [
                 'title' => $values->title ?? ucwords(str_replace('_', ' ', $key)),
                 'allowClear' => $values->allowClear ?? false,
-                'multiple' => $values->multiple ?? false,
+                'multiple' => $multiple,
                 'dataIndex' => $dataIndex,
+                'hasListenTo' => $values->hasListenTo ?? false,
             ] + $a;
         }
         // dd($colParams);
@@ -177,7 +176,6 @@ abstract class Report_ParentController2 extends Controller
             'mode' => $this->mode,
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
-            'groupBy' => $this->groupBy,
             'modeReport' => $modeReport,
             'modeParams' => $modeParams,
             'typeReport' => $typeReport,
@@ -188,8 +186,6 @@ abstract class Report_ParentController2 extends Controller
             'paramColumns' => $paramColumns,
             'tableDataSource'=> $dataSource,
             'tableDataHeader' => $tableDataHeader,
-            'rotate45Width' => $this->rotate45Width,
-            'groupByLength' => $this->groupByLength,
             'tableTrueWidth' => $this->tableTrueWidth,
             'topTitle' => $this->getMenuTitle(),
         ]);
@@ -239,11 +235,6 @@ abstract class Report_ParentController2 extends Controller
             fclose($file);
         };
         return response()->stream($callback, 200, $headers);
-    }
-
-    protected function modifyDataToExportCSV($dataSource)
-    {
-        return $dataSource;
     }
 
     protected function getJS()

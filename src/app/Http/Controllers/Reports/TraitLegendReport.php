@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Reports;
 
-use App\Http\Controllers\Workflow\LibStatuses;
 
 trait TraitLegendReport
 {

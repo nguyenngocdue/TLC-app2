@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Reports\Modals;
 
-use App\Models\Sub_project;
+use App\View\Components\Reports\ParentParamReports;
 use App\View\Components\Reports\ParentTypeParamReport;
 use Illuminate\Support\Facades\DB;
 

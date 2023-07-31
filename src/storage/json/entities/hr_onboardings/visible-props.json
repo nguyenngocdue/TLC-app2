@@ -1,0 +1,152 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_onboarding_course_id": {
+        "name": "_onboarding_course_id",
+        "column_name": "onboarding_course_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_facilitator_id": {
+        "name": "_facilitator_id",
+        "column_name": "facilitator_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_onboarding_location_id": {
+        "name": "_onboarding_location_id",
+        "column_name": "onboarding_location_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_onboarding_datetime": {
+        "name": "_onboarding_datetime",
+        "column_name": "onboarding_datetime",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "closed": "true"
+    }
+}
