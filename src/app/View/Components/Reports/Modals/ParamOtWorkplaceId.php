@@ -3,14 +3,14 @@
 namespace App\View\Components\Reports\Modals;
 
 use App\Models\Workplace;
+use App\View\Components\Reports\ParentParamReports;
 use App\View\Components\Reports\ParentTypeParamReport;
 use Illuminate\Support\Facades\DB;
 
-class ParamOtWorkplaceId extends ParentTypeParamReport
+class ParamOtWorkplaceId extends ParentParamReports
 {
     protected function getDataSource()
     {
-
         $sql = "SELECT 
                     otr.id AS id,
                     wp.name AS name

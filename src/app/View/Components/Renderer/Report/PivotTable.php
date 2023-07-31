@@ -8,7 +8,7 @@ use App\Http\Controllers\Reports\TraitChangeDataPivotTable2;
 use App\Http\Controllers\Reports\TraitFunctionsReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\Reports\TraitUpdateParamsReport;
-use App\Http\Controllers\TraitLibPivotTableDataFields2;
+use App\Http\Controllers\Reports\TraitLibPivotTableDataFields2;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\StringPivotTable;
 use Illuminate\Pagination\LengthAwarePaginator;

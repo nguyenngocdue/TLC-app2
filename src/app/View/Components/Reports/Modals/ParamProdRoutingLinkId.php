@@ -3,9 +3,10 @@
 namespace App\View\Components\Reports\Modals;
 
 use App\Models\Prod_routing_link;
+use App\View\Components\Reports\ParentParamReports;
 use App\View\Components\Reports\ParentTypeParamReport;
 
-class ParamProdRoutingLinkId extends ParentTypeParamReport
+class ParamProdRoutingLinkId extends ParentParamReports
 {
     protected function getDataSource()
     {

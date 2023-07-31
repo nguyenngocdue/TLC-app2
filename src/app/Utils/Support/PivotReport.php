@@ -338,7 +338,7 @@ class PivotReport
     }
     public static function groupBy($lineData, $rowFields)
     {
-        // if (empty($rowFields)) return $lineData;
+        if (empty($lineData)) return [];
         $dataOutput = [];
         foreach ($lineData as $line) {
             // Get the values of fields in $rowFields

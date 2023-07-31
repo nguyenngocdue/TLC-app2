@@ -13,6 +13,8 @@ class Hr_timesheet_line_040 extends Report_ParentController2
     protected $typeView = 'report-pivot';
     protected $modeType = 'hr_timesheet_line_team_project';
     protected $tableTrueWidth = true;
+    protected $mode='040';
+
 
     public function getDataSource($modeParams)
     {

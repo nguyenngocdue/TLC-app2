@@ -66,7 +66,6 @@ abstract class ParentIdParamReports extends Component
             'allowClear' => $this->allowClear,
         ];
 
-
         $this->renderJS($tableName, $this->referData, $this->name);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }

@@ -240,4 +240,24 @@ class Report
         return $data;
     }
 
+    public static function removeEmptyElements($array)
+    {
+        foreach ($array as $key => $items) {
+            if ($items === "") continue;
+            if (is_array($items)) {
+                if (!$items) continue;
+                $arr = array_filter($items, function ($value) {
+                    return $value !== "";
+                });
+                $array[$key] = $arr;
+            }
+        }
+        return $array;
+    }
+
+    public static function removeNullValuesFromArray($inputArray) {
+        // if (is_null(reset($inputArray)) && count($inputArray) === 1) return [];
+        return array_filter($inputArray, fn($value) => $value !== null);
+    }
+
 }

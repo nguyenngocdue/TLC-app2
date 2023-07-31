@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Reports;
 
-use App\Http\Controllers\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\Workflow\LibPivotTables2;
 use App\Utils\Support\PivotReport;
 use DateTime;

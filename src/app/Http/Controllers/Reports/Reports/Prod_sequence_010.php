@@ -96,10 +96,12 @@ class Prod_sequence_010 extends  Report_ParentReportController
             [
                 'title' => 'Prod Order',
                 'dataIndex' => $this->y,
+                'hasListenTo' => true
             ],
             [
                 'title' => 'Prod Routing',
                 'dataIndex' => $this->z,
+                'hasListenTo'=>true
             ],
 
         ];

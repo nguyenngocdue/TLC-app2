@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Reports\TraitDataModesReport;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Models\User;
 use App\Utils\Support\PivotReport;
@@ -18,7 +17,6 @@ class Hr_timesheet_line_dataSource extends Controller
 
 {
     use TraitDynamicColumnsTableReport;
-    use TraitDataModesReport;
     protected $maxH = 50;
     protected $mode = '100';
     #protected $rotate45Width = 300;
@@ -26,6 +24,9 @@ class Hr_timesheet_line_dataSource extends Controller
 
     public function getSqlStr($modeParams)
     {
+
+
+
         $pickerDate = $modeParams['picker_date'] ?? PivotReport::defaultPickerDate();
         [$startDate, $endDate] = Report::explodePickerDate($pickerDate);
         $startDate = Report::formatDateString($startDate, 'Y-m-d');
@@ -53,16 +54,20 @@ class Hr_timesheet_line_dataSource extends Controller
                     us.workplace AS workplace_id
 
                 FROM
-                    hr_timesheet_lines tsl
-                INNER JOIN \n";
+                    hr_timesheet_lines tsl, users us 
+                    WHERE 1 = 1
+                            AND us.id = tsl.user_id";
 
-        if (isset($modeParams['many_user_id']) || isset($modeParams['user_id'])) {
-            $ids = implode(',', $modeParams['many_user_id'] ?? $modeParams['user_id']);
-            $sql .= "users us ON tsl.user_id IN ($ids) AND us.id = tsl.user_id";
+        if (isset($modeParams['user_id']) && is_array($modeParams['user_id']) ) {
+            $ids = implode(',', $modeParams['user_id']);
+            if($ids) $sql .= "\n AND tsl.user_id IN ($ids)";
         } else {
-            $sql .= "users us ON tsl.user_id = us.id";
+            if (isset($modeParams['user_id']) &&  $modeParams['user_id']) {
+                $id = $modeParams['user_id'];
+                $sql .= "\n AND tsl.user_id = $id";
+            }
         }
-        $sql .= "\n WHERE 1 = 1 
+        $sql .= "\n 
                     AND DATE(tsl.start_time) BETWEEN '$startDate' AND '$endDate'
                     #AND tsl.sub_project_id IN (82, 21)
                 GROUP BY

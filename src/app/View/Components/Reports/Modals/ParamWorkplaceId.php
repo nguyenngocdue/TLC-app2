@@ -2,17 +2,26 @@
 
 namespace App\View\Components\Reports\Modals;
 
-use App\Models\Workplace;
-use App\View\Components\Reports\ParentTypeParamReport;
+use App\View\Components\Reports\ParentParamReports;
+use Illuminate\Support\Facades\DB;
 
-class ParamWorkplaceId extends ParentTypeParamReport
+class ParamWorkplaceId extends ParentParamReports
 {
-    protected function getDataSource()
+    protected $referData = 'user_id';
+    public function getDataSource()
     {
-        $list = Workplace::where('deleted_at', NULL)-> get()->toArray();
-        $dataSource = [];
-        usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
-        foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name']];
-        return $dataSource;
+        $hasListenTo = $this->hasListenTo();
+        $sql = "SELECT 
+                        wp.id AS id
+                        ,wp.description
+                        ,wp.name AS name";
+        if ($hasListenTo) $sql .= " ,us.id AS $this->referData";
+        $sql .= "\n FROM  workplaces wp";
+        if ($hasListenTo) $sql .= ", users us";
+        $sql .= "\n WHERE 1 = 1 AND wp.deleted_at IS NULL";
+        if ($hasListenTo) $sql .= "\n AND us.workplace = wp.id";
+        $sql .=  "\n ORDER BY wp.name";
+        $result = DB::select($sql);
+        return $result;
     }
 }

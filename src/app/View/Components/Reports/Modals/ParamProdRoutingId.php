@@ -6,15 +6,15 @@ use App\Models\Prod_routing;
 use App\Models\Sub_project;
 use App\View\Components\Reports\ParentIdParamReports;
 use App\View\Components\Reports\ParentIdParamReports2;
+use App\View\Components\Reports\ParentParamReports;
 use Illuminate\Support\Facades\DB;
 
-class ParamProdRoutingId extends ParentIdParamReports2
+class ParamProdRoutingId extends ParentParamReports
 {
     protected $referData = 'sub_project_id';
     protected $referData1 = 'checksheet_type_id';
-    protected function getDataSource($attr_name)
+    protected function getDataSource()
     {
-
         $prodRoutings = Prod_routing::whereNull('deleted_by')->get();
         $result = [];
         foreach ($prodRoutings as $routing){

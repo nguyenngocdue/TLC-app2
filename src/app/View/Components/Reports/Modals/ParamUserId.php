@@ -3,9 +3,9 @@
 namespace App\View\Components\Reports\Modals;
 
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
-use App\View\Components\Reports\ParentTypeParamReport;
+use App\View\Components\Reports\ParentParamReports;
 
-class ParamUserId extends ParentTypeParamReport
+class ParamUserId extends ParentParamReports
 {
     use TraitUserCompanyTree;
     protected function getDataSource()
