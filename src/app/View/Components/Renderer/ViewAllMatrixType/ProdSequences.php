@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 class ProdSequences extends ViewAllTypeMatrixParent
 {
     // use TraitFilterMonth;
+    use TraitYAxisDiscipline;
 
     private $project, $subProject, $prodRouting;
     // protected $viewportMode = null;
@@ -23,6 +24,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected $dataIndexY = "prod_order_id";
     protected $rotate45Width = 400;
     protected $tableTrueWidth = true;
+    protected $headerTop = "[300px]";
     // protected $xAxis = Date::class;
     /**
      * Create a new component instance.
@@ -62,16 +64,17 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected function getXAxis()
     {
         $result = [];
-        $data = Prod_routing::find($this->prodRouting)->getProdRoutingLinks;
+        $data = Prod_routing::find($this->prodRouting)->getProdRoutingLinks()->orderBy('order_no')->get();
         foreach ($data as $line) {
             $result[] = [
                 'dataIndex' => $line->id,
                 'title' => $line->name,
                 'align' => 'center',
                 'width' => 40,
+                'prod_discipline_id' => $line->prod_discipline_id,
             ];
         }
-        usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
+        // usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
         return $result;
     }
 
