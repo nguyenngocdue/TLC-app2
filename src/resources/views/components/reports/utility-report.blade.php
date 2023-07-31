@@ -1,4 +1,4 @@
-<div class="w-full lg:w-1/3 p-2 lg:p-0 items-center mb-4 m-auto no-print">
+<div class="w-full lg:w-1/3 p-2 lg:p-0 items-center m-auto no-print">
     <div class="lg:flex lg:justify-center lg:gap-2">
         <a href="{{route($routeName.'_ep.exportCSV')}}" target="_blank">
             <x-renderer.button title="Export this list to CSV">
