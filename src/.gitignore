@@ -18,3 +18,4 @@ yarn-error.log
 
 dockersh
 composer.lock
+package-lock.json
