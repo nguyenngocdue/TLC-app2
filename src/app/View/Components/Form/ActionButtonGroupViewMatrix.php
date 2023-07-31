@@ -30,7 +30,6 @@ class ActionButtonGroupViewMatrix extends Component
     public function render()
     {
         $paramsRoute = [
-            'modelPath' => $this->modelPath,
             'groupBy' => $this->groupBy,
             'groupByLength' => $this->groupByLength,
         ];

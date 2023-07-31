@@ -49,7 +49,8 @@ class ViewAllInvokerController extends Controller
         return response()->stream($callback, 200, $headers);
     }
     public function exportCSV2(Request $request){
-        if($modelPath = $request->modelPath){
+        try {
+            $modelPath = $this->getModelPath();
             [,$columns,$dataSource] = (new ($modelPath))->getParams();
             $dataSource = $this->sortDataValueFollowColumns($columns,$dataSource);
             $dataSource = $this->groupByDataSource($request,$dataSource);
@@ -63,7 +64,13 @@ class ViewAllInvokerController extends Controller
             $headers = Excel::header($fileName);
             $callback = Excel::export($columns,$dataSource);
             return response()->stream($callback, 200, $headers);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
         }
+    }
+    private function getModelPath(){
+        $namespace = 'App\View\Components\Renderer\ViewAllMatrixType';
+        return $namespace .'\\' . Str::of(Str::plural($this->type))->studly();
     }
     public function duplicateMultiple(Request $request)
     {
