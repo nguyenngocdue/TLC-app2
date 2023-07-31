@@ -135,13 +135,12 @@ class LoginController extends Controller
     private function loggedInfoUserSignIn($request)
     {
         try {
-            dd($request);
             $agent = new Agent();
             $headers = $request->header('User-Agent');
             $agent->setUserAgent($headers);
             $ipAddress = $request->getClientIp(true);
             $location = Location::get($ipAddress);
-            $locationName = '';
+            $locationName = 'internal';
             if($location) $locationName = $location->countryName;
             $infoBrowser = [
                 'location' => $locationName,
