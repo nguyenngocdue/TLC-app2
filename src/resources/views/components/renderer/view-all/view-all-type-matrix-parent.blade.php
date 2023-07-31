@@ -3,6 +3,7 @@
           showPaginationTop="true"
           :columns="$columns"
           :dataSource="$dataSource"
+          :dataHeader="$dataHeader"
           groupBy="{{$groupBy}}"
           groupByLength="{{$groupByLength}}"
           bottomLeftControl="{!! $footer !!}"
@@ -12,4 +13,5 @@
           bottomRightControl="{!! $perPage !!}"
           rotate45Width="{{$rotate45Width}}"
           tableTrueWidth="{{$tableTrueWidth}}"
+          headerTop="{{$headerTop}}"
           />

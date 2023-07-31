@@ -27,6 +27,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $groupByLength = 2;
     protected $allowCreation = true;
     protected $tableTrueWidth = false;
+    protected $headerTop = '';
     /**
      * Create a new component instance.
      *
@@ -48,6 +49,12 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return [];
     }
+
+    protected function getXAxis2ndHeader($xAxis)
+    {
+        return [];
+    }
+
 
     protected function getMatrixDataSource($xAxis)
     {
@@ -202,7 +209,7 @@ abstract class ViewAllTypeMatrixParent extends Component
 
     public function render()
     {
-        [$yAxisTableName, $columns, $dataSource] = $this->getViewAllMatrixParams();
+        [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading] = $this->getViewAllMatrixParams();
         $footer = $this->getFooter($yAxisTableName);
         $settings = CurrentUser::getSettings();
         $per_page = $settings[$this->type]['view_all']['per_page'] ?? 15;
@@ -217,6 +224,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             [
                 'columns' => $columns,
                 'dataSource' => $dataSource,
+                'dataHeader' => $xAxis2ndHeading,
                 'type' => $this->type,
                 'filterDataSource' => $this->getFilterDataSource(),
                 'viewportParams' => $this->getViewportParams(),
@@ -227,17 +235,19 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'groupByLength' => $this->groupByLength,
                 'tableTrueWidth' => $this->tableTrueWidth,
                 'actionButtons' => $actionButtons,
+                'headerTop' => $this->headerTop,
             ],
         );
     }
     public function getViewAllMatrixParams($forExcel = false)
     {
         $xAxis = $this->getXAxis();
+        $xAxis2ndHeading = $this->getXAxis2ndHeader($xAxis);
         $yAxis = $this->getYAxis();
         $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getMatrixDataSource($xAxis);
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel);
         $columns = $this->getColumns($xAxis);
-        return [$yAxisTableName, $columns, $dataSource];
+        return [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading];
     }
 }

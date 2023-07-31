@@ -118,6 +118,7 @@
 <span class="hover:bg-gray-200 "></span>
 <span class="hover:bg-red-100 "></span>
 
+{{-- for table headerTop --}}
 <span class="top-0"></span>
 <span class="top-1"></span>
 <span class="top-2"></span>
@@ -139,6 +140,7 @@
 <span class="top-32"></span>
 <span class="top-36"></span>
 <span class="top-40"></span>
+<span class="top-[300px]"></span>
 
 <span class="max-h-[10rem] "></span>
 <span class="max-h-[12rem] "></span>

@@ -11,11 +11,11 @@
             <x-renderer.button 
                 style="width: {{$line['percent']}}"
                 class="{{$classList}} {{$line['classList'] ?? ''}} bg-{{$line['color']}}-500" 
-                id="progress_{{$line['id']}}" 
+                id="progress_{{($line['id'] ?? '')}}" 
                 size="none"
                 title="{{$line['title'] ?? ''}}"
                 keydownEscape="closeModal('{{$modalId}}')" 
-                click="toggleModal('{{$modalId}}', {{$line['modalKey']}})"
+                click="toggleModal('{{$modalId}}', {{($line['modalKey']??'unknown_modal_key')}})"
             >
             {{$line['label']}}
         </x-renderer.button>

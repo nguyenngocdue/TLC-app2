@@ -233,12 +233,18 @@ class Report
         return array_merge($months, $missingMonths);
     }
 
-    public static function sortByKey($data, $key) {
-        usort($data, function($a, $b) use ($key) {
-            return strtotime($a[$key]) <=> strtotime($b[$key]);
+    public static function sortByKey($data, $key, $isDateTime = false) {
+        usort($data, function($a, $b) use ($key, $isDateTime) {
+            if ($isDateTime) {
+                return strtotime($a[$key]) <=> strtotime($b[$key]);
+            } else {
+                if (!isset($a[$key]) || !isset($b[$key])) return 0;
+                return strcmp($a[$key], $b[$key]);
+            }
         });
         return $data;
     }
+
 
     public static function removeEmptyElements($array)
     {

@@ -57,6 +57,7 @@ class Prod_routing_detail extends ModelExtended
             ['dataIndex' => 'prod_routing_link_id',],
             // ['dataIndex' => 'erp_routing_link_id',],
             ["dataIndex" => 'target_hours'],
+            ["dataIndex" => 'target_man_power'],
             ["dataIndex" => 'target_man_hours'],
 
             ['dataIndex' => 'wir_description_id',],

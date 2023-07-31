@@ -27,7 +27,6 @@ class Hr_timesheet_line_dataSource extends Controller
         $startDate = Report::formatDateString($startDate, 'Y-m-d');
         $endDate = Report::formatDateString($endDate, 'Y-m-d');
         $sql = "SELECT
-                    tsl.project_id AS project_id,
                     DATE(tsl.start_time) AS time_sheet_start_time,
                     SUBSTRING(tsl.start_time, 1, 7) AS month,
                     DATE(tsl.start_time) AS time_sheet_start_time_wfh,
@@ -68,7 +67,6 @@ class Hr_timesheet_line_dataSource extends Controller
                 GROUP BY
                     time_sheet_start_time,
                     pj_task_id,
-                    project_id,
                     sub_project_id,
                     user_id,
                     discipline_id,

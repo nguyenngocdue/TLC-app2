@@ -136,7 +136,13 @@ trait TableTraitColumns
             $dataIndex = $column['dataIndex'];
             $borderR = $key < (sizeof($columns) - 1) ? 'border-r' : "";
             if (isset($dataHeader[$dataIndex])) {
-                $th[] = "<th $styleStr class='py-1 $borderR border-b'>" . $dataHeader[$dataIndex] . "</th>";
+                if (is_object($dataHeader[$dataIndex])) {
+                    $cell_class = $dataHeader[$dataIndex]->cell_class;
+                    $cell_title = $dataHeader[$dataIndex]->cell_title;
+                    $th[] = "<th $styleStr class='py-1 $borderR border-b $cell_class' title='$cell_title'>" . $dataHeader[$dataIndex]->value . "</th>";
+                } else {
+                    $th[] = "<th $styleStr class='py-1 $borderR border-b'>" . $dataHeader[$dataIndex] . "</th>";
+                }
             } else {
                 $th[] = "<th $styleStr class='py-1 $borderR border-b' dataIndex='" . $dataIndex . "'></th>";
             }
