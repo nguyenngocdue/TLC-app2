@@ -45,32 +45,34 @@ class ViewAllInvokerController extends Controller
         $fileName = $this->type . '.csv';
         $columns = array_values(array_map(fn ($item) => $item['label'], $columns));
         $headers = Excel::header($fileName);
-        $callback = Excel::export($columns,$rows);
+        $callback = Excel::export($columns, $rows);
         return response()->stream($callback, 200, $headers);
     }
-    public function exportCSV2(Request $request){
+    public function exportCSV2(Request $request)
+    {
         try {
             $modelPath = $this->getModelPath();
-            [,$columns,$dataSource] = (new ($modelPath))->getParams();
-            $dataSource = $this->sortDataValueFollowColumns($columns,$dataSource);
-            $dataSource = $this->groupByDataSource($request,$dataSource);
-            $columns = array_filter($columns,fn($item) => !isset($item['hidden']));
-            $columns = array_values(array_map(fn ($item) => (isset($item['title']) ? 
-            Str::headline(strip_tags($item['title'])) 
-            : Str::headline($item['dataIndex'])), $columns));
+            [, $columns, $dataSource] = (new ($modelPath))->getViewAllMatrixParams(true);
+            $dataSource = $this->sortDataValueFollowColumns($columns, $dataSource);
+            $dataSource = $this->groupByDataSource($request, $dataSource);
+            $columns = array_filter($columns, fn ($item) => !isset($item['hidden']));
+            $columns = array_values(array_map(fn ($item) => (isset($item['title']) ?
+                Str::headline(strip_tags($item['title']))
+                : Str::headline($item['dataIndex'])), $columns));
             array_unshift($columns,  'No.');
             $fileName = $this->type . '_matrix.csv';
-            $dataSource = $this->makeDataSourceForViewMatrix($request,$dataSource);
+            $dataSource = $this->makeDataSourceForViewMatrix($request, $dataSource);
             $headers = Excel::header($fileName);
-            $callback = Excel::export($columns,$dataSource);
+            $callback = Excel::export($columns, $dataSource);
             return response()->stream($callback, 200, $headers);
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }
     }
-    private function getModelPath(){
+    private function getModelPath()
+    {
         $namespace = 'App\View\Components\Renderer\ViewAllMatrixType';
-        return $namespace .'\\' . Str::of(Str::plural($this->type))->studly();
+        return $namespace . '\\' . Str::of(Str::plural($this->type))->studly();
     }
     public function duplicateMultiple(Request $request)
     {
