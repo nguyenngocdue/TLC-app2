@@ -4,20 +4,20 @@ namespace App\Models;
 
 use App\BigThink\ModelExtended;
 
-class Hr_training extends ModelExtended
+class Hr_onboarding extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "facilitator_id", "training_location_id", 'training_course_id',
-        "owner_id", 'training_datetime', 'slug',
+        "id", "name", "description", "facilitator_id", "onboarding_location_id", 'onboarding_course_id',
+        "owner_id", 'onboarding_datetime', 'slug',
     ];
-    protected $table = "hr_trainings";
+    protected $table = "hr_onboardings";
     public static $nameless = true;
 
     public static $eloquentParams = [
-        "getLines" => ["hasMany", Hr_training_line::class, "hr_training_id"],
+        "getLines" => ["hasMany", Hr_onboarding_line::class, "hr_onboarding_id"],
         'getFacilitator' => ['belongsTo', User::class, 'facilitator_id'],
-        "getTrainingCourse" => ["belongsTo", Hr_training_course::class, "training_course_id"],
-        "getTrainingLocation" => ["belongsTo", Workplace::class, "training_location_id"],
+        "getOnboardingCourse" => ["belongsTo", Hr_onboarding_course::class, "onboarding_course_id"],
+        "getOnboardingLocation" => ["belongsTo", Workplace::class, "onboarding_location_id"],
     ];
 
     public static $oracyParams = [];
@@ -27,7 +27,7 @@ class Hr_training extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getTrainingLocation()
+    public function getOnboardingLocation()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -37,7 +37,7 @@ class Hr_training extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getTrainingCourse()
+    public function getOnboardingCourse()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

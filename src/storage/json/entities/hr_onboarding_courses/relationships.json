@@ -13,10 +13,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_getLocationTraining": {
-        "name": "_getLocationTraining",
+    "_getLocationOnboarding": {
+        "name": "_getLocationOnboarding",
         "relationship": "belongsTo",
-        "control_name": "training_location_id",
+        "control_name": "onboarding_location_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
@@ -55,10 +55,10 @@
         "filter_values": "",
         "radio_checkbox_colspan": ""
     },
-    "_attachment_training_course": {
-        "name": "_attachment_training_course",
+    "_attachment_onboarding_course": {
+        "name": "_attachment_onboarding_course",
         "relationship": "morphMany",
-        "control_name": "attachment_training_course",
+        "control_name": "attachment_onboarding_course",
         "renderer_view_all": "thumbnails",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

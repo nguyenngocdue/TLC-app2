@@ -517,12 +517,12 @@
         "show_in_my_view": "true",
         "disallowed_direct_creation": "true"
     },
-    "hr_training": {
-        "name": "hr_training",
+    "hr_onboarding": {
+        "name": "hr_onboarding",
         "package_tab": "application",
         "package": "hr_&_admin",
-        "sub_package": "hr_training",
-        "title": "HR Trainings",
+        "sub_package": "hr_onboarding",
+        "title": "HR Onboardings",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
@@ -531,12 +531,12 @@
         "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-regular fa-transporter\"><\/i>"
     },
-    "hr_training_course": {
-        "name": "hr_training_course",
+    "hr_onboarding_course": {
+        "name": "hr_onboarding_course",
         "package_tab": "application",
         "package": "hr_&_admin",
-        "sub_package": "hr_training",
-        "title": "HR Training Courses",
+        "sub_package": "hr_onboarding",
+        "title": "HR Onboarding Courses",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
@@ -546,12 +546,12 @@
         "icon": null,
         "hidden_navbar": "true"
     },
-    "hr_training_line": {
-        "name": "hr_training_line",
+    "hr_onboarding_line": {
+        "name": "hr_onboarding_line",
         "package_tab": "application",
         "package": "hr_&_admin",
-        "sub_package": "hr_training",
-        "title": "HR Training Lines",
+        "sub_package": "hr_onboarding",
+        "title": "HR Onboarding Lines",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,

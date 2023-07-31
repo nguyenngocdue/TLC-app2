@@ -125,7 +125,7 @@
         "system_admin",
         "dev_admin",
         "hr_admin",
-        "hr_training",
+        "hr_onboarding",
         "hr",
         "system_configuration",
         "system_permission",
@@ -195,7 +195,7 @@
     "apps_have_view_all_matrix": [
         "hr_timesheet_workers",
         "qaqc_wirs",
-        "hr_training_lines",
+        "hr_onboarding_lines",
         "hse_extra_metrics",
         "prod_sequences"
     ],

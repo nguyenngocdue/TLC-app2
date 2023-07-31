@@ -3,8 +3,8 @@
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
-use App\Models\Hr_training_course;
-use App\Models\Hr_training_line;
+use App\Models\Hr_onboarding_course;
+use App\Models\Hr_onboarding_line;
 use App\Models\User;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
@@ -13,12 +13,12 @@ use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
-class HrTrainingLines extends ViewAllTypeMatrixParent
+class HrOnboardingLines extends ViewAllTypeMatrixParent
 {
     use TraitViewAllFunctions;
     private $workplace_id;
-    protected $xAxis = Hr_training_course::class;
-    protected $dataIndexX = "training_course_id";
+    protected $xAxis = Hr_onboarding_course::class;
+    protected $dataIndexX = "onboarding_course_id";
     protected $yAxis = User::class;
     protected $dataIndexY = "user_id";
     // protected $rotate45Width = 400;
@@ -48,7 +48,7 @@ class HrTrainingLines extends ViewAllTypeMatrixParent
     protected function getXAxis()
     {
         $result = [];
-        $data = Hr_training_course::all();
+        $data = Hr_onboarding_course::all();
         // $data = Prod_routing::find($this->prodRouting)->getWirDescriptions();
         foreach ($data as $line) {
             $result[] = [
@@ -87,7 +87,7 @@ class HrTrainingLines extends ViewAllTypeMatrixParent
 
     protected function getMatrixDataSource($xAxis)
     {
-        $lines = Hr_training_line::query()
+        $lines = Hr_onboarding_line::query()
             ->get();
         // dump($lines);
         return $lines;

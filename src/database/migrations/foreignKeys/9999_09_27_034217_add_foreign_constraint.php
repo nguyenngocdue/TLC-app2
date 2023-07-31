@@ -278,6 +278,7 @@ return new class extends Migration
         // Account 
         Schema::table('act_currency_xr_lines', function (Blueprint $table) {
             $table->foreign('currency_xr_id')->references('id')->on('act_currency_xrs');
+            $table->foreign('currency_pair_id')->references('id')->on('act_currency_pairs');
         });
         Schema::table('act_currency_pairs', function (Blueprint $table) {
             $table->foreign('base_currency_id')->references('id')->on('act_currencies');
