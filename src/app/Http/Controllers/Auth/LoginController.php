@@ -141,7 +141,7 @@ class LoginController extends Controller
             $ipAddress = $request->server('HTTP_X_REAL_IP');
             $location = Location::get($ipAddress);
             $locationName = 'internal';
-            if($location) $locationName = $location->countryName;
+            if($location) $locationName = $location->cityName ?? $location->regionName;
             $infoBrowser = [
                 'location' => $locationName,
                 'browser' => $agent->browser(),
