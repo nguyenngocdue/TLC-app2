@@ -20,7 +20,7 @@ class Hr_timesheet_line_100 extends Report_ParentController2
     {
         $primaryData = (new Hr_timesheet_line_dataSource())->getDataSource($modeParams);
         // $primaryData = array_slice($primaryData->toArray(), 0, 100);
-        return $primaryData;
+        return collect($primaryData);
     }
 
 }

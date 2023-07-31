@@ -268,10 +268,7 @@ trait  PivotReportColumn2
             [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields2($dataOutput, $columnFields);
         }
         // sort column fields follow table header
-        usort($columnsOfColumnFields, function ($a, $b) {
-            if (!isset($a['header_name'])) return [];
-            return strcmp($a['header_name'], $b['header_name']);
-        });
+        $columnsOfColumnFields = Report::sortByKey($columnsOfColumnFields, 'header_name');
         return [$tableDataHeader, $columnsOfColumnFields];
     }
 
@@ -296,7 +293,7 @@ trait  PivotReportColumn2
         $aggregations = $libs['data_fields'];
 
         if (empty($dataOutput)) return [[], []];
-        if (!$this->getDataFields($linesData, $modeType)) return false;
+        if (!$this->getDataFields($modeType)) return false;
         $columnsOfRowFields = $this->makeHeadColumn($rowFields);
         [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields($linesData, $dataOutput, $libs, $modeType);
         $columnsOfAgg = $this->makeColumnsOfAgg($aggregations);

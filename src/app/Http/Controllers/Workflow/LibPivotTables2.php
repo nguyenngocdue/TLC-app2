@@ -6,7 +6,7 @@ class LibPivotTables2 extends AbstractLib
 {
     protected static $key = "pivot-tables";
 
-    private static function parseArrayWithJson($str, $delimiter = ",")
+    private static function parseArrayWithJson($str, $delimiter = ",", $modeKey)
     {
         $str = str_replace("\r\n", "", $str);
         $strings = explode($delimiter, $str);
@@ -18,24 +18,25 @@ class LibPivotTables2 extends AbstractLib
                 [$key, $json] = explode("{", $string);
                 $result[$key] = json_decode("{" . $json);
             } else {
-                $result[$string] = (object)["key" => $string];
+                // dd($str, $strings, $string);
+                $result[$modeKey] = (object)["is_dataSource" => (bool)$string];
             }
         }
         // dump($result);
         return $result;
     }
 
-    public static function getFor($key)
+    public static function getFor($modeKey)
     {
         $all = static::getAll();
         $result = [];
         foreach ($all as $item) {
-            if ($item['name'] === $key) {
-                $result['name'] = $key;
+            if ($item['name'] === $modeKey) {
+                $result['name'] = $modeKey;
                 foreach ($item as $key1 => $str) {
                     if ($key1 === 'name') continue;
                     // dump($key1);
-                    $result[$key1] = static::parseArrayWithJson($str, ";");
+                    $result[$key1] = static::parseArrayWithJson($str, ";", $modeKey);
                     // $result[$key1] = Str::parseArray($str);
                 }
                 // dump($result);

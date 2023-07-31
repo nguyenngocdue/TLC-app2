@@ -419,7 +419,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 }
             }
         }
-        $dataSource = Report::sortByKey($dataSource, 'hse_month');
+        $dataSource = Report::sortByKey($dataSource, 'hse_month', true);
         $dataFooter['year'] = null;
         $dataFooter['hse_month'] = 'YTD';
         if($dataFooter['work_hours']) {
