@@ -12,7 +12,7 @@ class DataPivotTable2 extends Controller
    use PivotReportColumn2;
    public function makeDataPivotTable($drawData, $modeType, $modeParams) {
       $fn = (new PivotTableController());
-      $libs = $fn->getDataFields($drawData, $modeType);
+      $libs = $fn->getDataFields($modeType);
       $dataOutput = $fn->makeDataRenderer($drawData, $libs, $modeParams);
       [$tableDataHeader, $tableColumns] = $fn->makeColumnsRenderer($drawData, $dataOutput, $libs, $modeType);
       $dataOutput = $fn->sortLinesData($dataOutput, $libs);

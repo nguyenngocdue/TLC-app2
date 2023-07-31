@@ -114,7 +114,7 @@ abstract class Report_ParentController2 extends Controller
     protected function getParamColumns($dataSource, $modeType)
     {
         if (!$modeType) return [[]];
-        $filters = $this->getDataFields($dataSource, $modeType)['filters'];
+        $filters = $this->getDataFields($modeType)['filters'];
         $colParams = [];
         foreach ($filters as $key => $values) {
             $dataIndex = $key;
@@ -159,11 +159,7 @@ abstract class Report_ParentController2 extends Controller
 
 
         $viewName =  CurrentPathInfo::getViewName($request);
-        if ($this->typeView === 'report-pivot') {
-
-        }
         $tableColumns = [[]];
-
         $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
         echo $this->getJS();
         $modeReport = $this->makeModeTitleReport($routeName);
