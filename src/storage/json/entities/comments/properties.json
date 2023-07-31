@@ -41,6 +41,12 @@
         "field_name": "comment_asm_rejected_reason",
         "allowed_to_delete": "true"
     },
+    "_comment_assignment_rejected_reason": {
+        "name": "_comment_assignment_rejected_reason",
+        "field_id": "180",
+        "field_name": "",
+        "allowed_to_delete": ""
+    },
     "_comment_by_clinic": {
         "name": "_comment_by_clinic",
         "field_id": "28",
@@ -59,10 +65,28 @@
         "field_name": "comment_by_line_manager",
         "allowed_to_delete": ""
     },
+    "_comment_corrective_rejected_reason": {
+        "name": "_comment_corrective_rejected_reason",
+        "field_id": "181",
+        "field_name": "",
+        "allowed_to_delete": ""
+    },
     "_comment_insp_rejected_reason": {
         "name": "_comment_insp_rejected_reason",
         "field_id": "51",
         "field_name": "comment_insp_rejected_reason",
+        "allowed_to_delete": ""
+    },
+    "_comment_inspection_decision_reason": {
+        "name": "_comment_inspection_decision_reason",
+        "field_id": "182",
+        "field_name": "",
+        "allowed_to_delete": ""
+    },
+    "_comment_inspection_rejected_reason": {
+        "name": "_comment_inspection_rejected_reason",
+        "field_id": "183",
+        "field_name": "",
         "allowed_to_delete": ""
     },
     "_comment_inspector_decision": {

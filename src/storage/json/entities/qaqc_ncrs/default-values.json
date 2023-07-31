@@ -490,5 +490,53 @@
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
+    },
+    "_comment_assignment_rejected_reason": {
+        "name": "_comment_assignment_rejected_reason",
+        "column_name": "comment_assignment_rejected_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_comment_corrective_rejected_reason": {
+        "name": "_comment_corrective_rejected_reason",
+        "column_name": "comment_corrective_rejected_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_comment_inspection_rejected_reason": {
+        "name": "_comment_inspection_rejected_reason",
+        "column_name": "comment_inspection_rejected_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_comment_inspection_decision_reason": {
+        "name": "_comment_inspection_decision_reason",
+        "column_name": "comment_inspection_decision_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
     }
 }

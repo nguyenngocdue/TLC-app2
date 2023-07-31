@@ -299,6 +299,54 @@
         "inspection_rejected": "true",
         "closed": "true"
     },
+    "_attachment_defect_photos": {
+        "name": "_attachment_defect_photos",
+        "column_name": "attachment_defect_photos",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_attachment_defect_pdfs": {
+        "name": "_attachment_defect_pdfs",
+        "column_name": "attachment_defect_pdfs",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_attachment_corrective_photos": {
+        "name": "_attachment_corrective_photos",
+        "column_name": "attachment_corrective_photos",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_attachment_corrective_pdfs": {
+        "name": "_attachment_corrective_pdfs",
+        "column_name": "attachment_corrective_pdfs",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
     "_qty_man_power": {
         "name": "_qty_man_power",
         "column_name": "qty_man_power",
@@ -383,54 +431,6 @@
         "inspection_rejected": "true",
         "closed": "true"
     },
-    "_attachment_defect_photos": {
-        "name": "_attachment_defect_photos",
-        "column_name": "attachment_defect_photos",
-        "new": "true",
-        "assigned": "true",
-        "assign_rejected": "true",
-        "resolved": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
-    },
-    "_attachment_defect_pdfs": {
-        "name": "_attachment_defect_pdfs",
-        "column_name": "attachment_defect_pdfs",
-        "new": "true",
-        "assigned": "true",
-        "assign_rejected": "true",
-        "resolved": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
-    },
-    "_attachment_corrective_photos": {
-        "name": "_attachment_corrective_photos",
-        "column_name": "attachment_corrective_photos",
-        "new": "true",
-        "assigned": "true",
-        "assign_rejected": "true",
-        "resolved": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
-    },
-    "_attachment_corrective_pdfs": {
-        "name": "_attachment_corrective_pdfs",
-        "column_name": "attachment_corrective_pdfs",
-        "new": "true",
-        "assigned": "true",
-        "assign_rejected": "true",
-        "resolved": "true",
-        "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
-    },
     "_status": {
         "name": "_status",
         "column_name": "status",
@@ -490,5 +490,53 @@
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
+    },
+    "_comment_assignment_rejected_reason": {
+        "name": "_comment_assignment_rejected_reason",
+        "column_name": "comment_assignment_rejected_reason",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_comment_corrective_rejected_reason": {
+        "name": "_comment_corrective_rejected_reason",
+        "column_name": "comment_corrective_rejected_reason",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_comment_inspection_rejected_reason": {
+        "name": "_comment_inspection_rejected_reason",
+        "column_name": "comment_inspection_rejected_reason",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_comment_inspection_decision_reason": {
+        "name": "_comment_inspection_decision_reason",
+        "column_name": "comment_inspection_decision_reason",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     }
 }
