@@ -209,9 +209,7 @@ class PivotReport
                     break;
                 }
             }
-            // $groups['_'][] = $value;
         }
-
         $group1 = array_merge(...array_values($groups));
         $group2 = array_diff($data, $group1);
         return array_merge($group2, $group1);
@@ -258,33 +256,6 @@ class PivotReport
         return $data;
     }
 
-
-    private static function sumArrays($array1, $array2)
-    {
-        $result = [];
-        foreach ($array1 as $key => $value) {
-            if (isset($array2[$key])) {
-                $result[$key] = $value + $array2[$key];
-            }
-        }
-        return $result;
-    }
-    // private static function sumItemsInArray($newArray)
-    // {
-    //     dump($newArray);
-    //     $data = [];
-    //     foreach ($newArray as $item) {
-    //         foreach ($item as $key => $value) {
-    //             if (isset($data[$key]) && is_array($value)) {
-    //                 $data[$key] = self::sumArrays($data[$key], $value);
-    //             } else {
-    //                 $data[$key] = $value;
-    //             }
-    //         }
-    //     }
-    //     return $data;
-    // }
-
     private static function sumItemsInArray($newArray)
     {
         // dump($newArray);
@@ -317,7 +288,6 @@ class PivotReport
         // dd($data);
         return $data;
     }
-
 
     public static function reduceDataByFilterColumn($linesData, $dataFilters)
     {
@@ -411,8 +381,6 @@ class PivotReport
 
     public static function transferData2($dataSource, $columnFields)
     {
-        // if (empty($propsColumnField) || empty($valueIndexFields)) return $dataSource;
-        // dd($dataSource, $columnFields);
         $data = array_map(
             fn ($items) => array_map(
                 fn ($array) =>

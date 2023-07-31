@@ -44,6 +44,9 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $statusWalkthrough = 'closed';
         $statusHrTraining = 'closed';
         $statusExtraMetric = 'active';
+
+        $hseInspTmplShtId = 1;
+        $trainingCourseId = 2;
         
         //params from user settings 
         $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();
@@ -93,7 +96,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                                     FROM hse_insp_chklst_shts hseicshts
                                     WHERE 1 = 1
                                         AND hseicshts.workplace_id IN $strWorkplaceIds
-                                        AND hseicshts.hse_insp_tmpl_sht_id = 1
+                                        AND hseicshts.hse_insp_tmpl_sht_id = $hseInspTmplShtId
                                         AND SUBSTR(hseicshts.start_time, 1, 4) = $year
                                         AND hseicshts.status = '$statusICShts'
                                     GROUP BY hse_month
@@ -123,7 +126,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 t6 AS (
                                     SELECT
                                         SUBSTR(hrt.training_datetime, 1, 7) AS hse_month,
-                                        NULLIF(COUNT( CASE WHEN hrtl.training_course_id = 2 AND hrt.status = '$statusHrTraining' THEN hrt.id END),0) AS hrt_line_count 
+                                        NULLIF(COUNT( CASE WHEN hrtl.training_course_id = $trainingCourseId AND hrt.status = '$statusHrTraining' THEN hrt.id END),0) AS hrt_line_count 
                                     FROM hr_trainings hrt, hr_training_lines hrtl
                                     WHERE 1 = 1
                                         AND hrt.training_location_id IN $strWorkplaceIds
