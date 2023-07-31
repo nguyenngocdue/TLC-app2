@@ -71,7 +71,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
     private function sendMail($userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors
     ,$type,$id,$previousValue,$currentValue,$userAssigneePrevious,$userMonitorsPrevious,$userMonitorsCurrent){
         $user = $userAssigneeCurrent ? User::findFromCache($userAssigneeCurrent) : User::findFromCache(1);
-        [$subjectMail,$href] = $this->getRouteAndSubjectMail($type,$id);
+        [$href,$subjectMail] = $this->getRouteAndSubjectMail($type,$id);
         $nameOldAssignee = User::findFromCache($userAssigneePrevious)->name ?? '';
         $stringNameMonitorsPrevious = $this->implodeNameMonitors($userMonitorsPrevious);
         $stringNameMonitorsCurrent = $this->implodeNameMonitors($userMonitorsCurrent);
