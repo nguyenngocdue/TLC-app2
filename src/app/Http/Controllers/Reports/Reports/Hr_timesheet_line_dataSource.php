@@ -4,14 +4,9 @@ namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
-use App\Models\User;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
-use DateInterval;
-use DatePeriod;
-use DateTime;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class Hr_timesheet_line_dataSource extends Controller
 

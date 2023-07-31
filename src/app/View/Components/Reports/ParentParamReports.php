@@ -3,6 +3,8 @@
 namespace App\View\Components\Reports;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Arr;
+
 
 abstract class ParentParamReports extends Component
 {
@@ -22,6 +24,7 @@ abstract class ParentParamReports extends Component
         private $allowClear = false,
         private $hasListenTo = false,
     ) {
+        $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
     public function hasListenTo() {
         return $this->hasListenTo;

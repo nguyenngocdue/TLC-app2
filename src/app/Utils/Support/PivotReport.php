@@ -585,8 +585,6 @@ class PivotReport
 
     public static function hasDuplicates2($array)
     {
-
-        dd($array);
         $counts = array_count_values(((array)$array));
 
         foreach ($counts as $value) {
