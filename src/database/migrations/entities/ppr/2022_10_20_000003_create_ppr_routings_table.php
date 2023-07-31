@@ -19,19 +19,11 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('user_sign_in_histories', function (BlueprintExtended $table) {
+        $schema->create('ppr_routings', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->text('description')->nullable();
-            $table->string('ip_address')->nullable();
-            $table->string('city_name')->nullable();
-            $table->string('country_name')->nullable();
-            $table->string('browser')->nullable();
-            $table->string('browser_version')->nullable();
-            $table->string('platform')->nullable();
-            $table->string('device')->nullable();
-            // $table->unsignedBigInteger('uid');
-            $table->dateTime('time');
+            $table->string('slug')->unique();
             $table->appendCommonFields();
         });
     }
@@ -43,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_sign_in_histories');
+        Schema::dropIfExists('ppr_routings');
     }
 };

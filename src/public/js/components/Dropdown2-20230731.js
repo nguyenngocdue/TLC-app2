@@ -256,9 +256,10 @@ const onChangeGetSelectedObject2_1 = (listener, index = 0) => {
     return selectedObject
 }
 
-const onChangeDropdown2Assign = (listener) => {
+const onChangeDropdown2Assign = (listener, onLoad) => {
     // const debugListener = true
     if (debugListener) console.log('Assign', listener)
+    if (onLoad) return //<< If monitor1 or assignee1 is filled, this will prevent the discipline1 to overwrite
     const { column_name, listen_to_attrs } = listener
     const selectedObject = onChangeGetSelectedObject2(listener)
     let listen_to_attr = listen_to_attrs[0]
@@ -414,12 +415,12 @@ const onChangeSetTableColumn = (listener, triggerIndex) => {
     const selectedAttr = selectedObject[listen_to_attr]
     // console.log("Setting column value for ", table01Name, selectedObject, column_name)
 
-    const length = getAllRows(table01Name).length
+    const batchLength = getAllRows(table01Name).length
 
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < batchLength; i++) {
         const id = table01Name + "[" + column_to_set + "][" + i + "]" //table01[my_file][0]
         getEById(id).val(selectedAttr)
-        getEById(id).trigger('change', length)
+        getEById(id).trigger('change', { batchLength })
     }
 }
 
@@ -444,10 +445,12 @@ const onChangeNumberToWords = (listener) => {
     getEById(column_name).trigger('change')
 }
 
-const onChangeDropdown2 = (name) => {
+const onChangeDropdown2 = ({ name, dropdownParams = {} }) => {
     // const debugFlow = true
     // console.log("onChangeDropdown2", name)
     // console.log(listenersOfDropdown2)
+    const { onLoad = false } = dropdownParams
+    // console.log(name, onLoad)
     for (let i = 0; i < listenersOfDropdown2.length; i++) {
         let listener = listenersOfDropdown2[i]
         const { triggers, listen_action, column_name } = listener
@@ -463,7 +466,7 @@ const onChangeDropdown2 = (name) => {
                         onChangeDropdown2Reduce(listener)
                         break
                     case 'assign':
-                        onChangeDropdown2Assign(listener)
+                        onChangeDropdown2Assign(listener, onLoad)
                         break
                     case 'dot':
                         onChangeDropdown2Dot(listener)
@@ -734,13 +737,10 @@ const documentReadyDropdown2 = (params) => {
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {
             listenersOfDropdown2.forEach((listener) => {
-                const list =
-                    action === 'create'
-                        ? ['reduce', 'assign']
-                        : ['reduce' /* 'assign'*/] //<< without assign, keep value from DB, otherwise it will be overwritten every time the form is loaded
+                const list = action === 'create' ? ['reduce', 'assign'] : ['reduce' /* 'assign'*/] //<< without assign, keep value from DB, otherwise it will be overwritten every time the form is loaded
                 if (listener.triggers.includes(id) && list.includes(listener.listen_action)) {
-                    // console.log("I am a trigger of reduce/assign, I have to trigger myself when form load [id]",)
-                    getEById(id).trigger('change')
+                    console.log("I am a trigger of ", listener.listen_action, ", I have to trigger myself when form load [", id, "]",)
+                    getEById(id).trigger('change', { onLoad: true })
                 }
             })
         } else {

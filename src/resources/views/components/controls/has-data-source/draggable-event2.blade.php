@@ -1,7 +1,7 @@
 
 <div id='{{$id}}' 
     name='{{$multiple?$name."[]":$name}}' 
-    onChange='onChangeDropdown2("{{$id}}")' 
+    onChange='onChangeDropdown2({name: "{{$id}}"})' 
     {{($multiple) ? 'multiple' : ''}} 
     controlType='draggable_event' 
     colSpan='col-span-{{$span??4}}' 
