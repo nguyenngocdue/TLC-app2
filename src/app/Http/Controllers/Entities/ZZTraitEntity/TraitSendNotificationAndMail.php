@@ -25,6 +25,7 @@ trait TraitSendNotificationAndMail
                     event(new CreateNewDocumentEvent($currentValue = $currentValue,$this->type, ($this->data ?? $this->modelPath)));
                 }
             } catch (\Throwable $th) {
+                dd($th->getMessage());
                 Toastr::error($th->getFile() . " " . $th->getLine() . " in " . __FUNCTION__, $th->getMessage());
             }
         }

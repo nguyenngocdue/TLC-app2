@@ -299,6 +299,54 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_attachment_defect_photos": {
+        "name": "_attachment_defect_photos",
+        "column_name": "attachment_defect_photos",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_attachment_defect_pdfs": {
+        "name": "_attachment_defect_pdfs",
+        "column_name": "attachment_defect_pdfs",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_attachment_corrective_photos": {
+        "name": "_attachment_corrective_photos",
+        "column_name": "attachment_corrective_photos",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_attachment_corrective_pdfs": {
+        "name": "_attachment_corrective_pdfs",
+        "column_name": "attachment_corrective_pdfs",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_qty_man_power": {
         "name": "_qty_man_power",
         "column_name": "qty_man_power",
@@ -354,7 +402,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "17",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -419,9 +467,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_attachment_defect_photos": {
-        "name": "_attachment_defect_photos",
-        "column_name": "attachment_defect_photos",
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -431,9 +479,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_attachment_defect_pdfs": {
-        "name": "_attachment_defect_pdfs",
-        "column_name": "attachment_defect_pdfs",
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -443,9 +491,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_attachment_corrective_photos": {
-        "name": "_attachment_corrective_photos",
-        "column_name": "attachment_corrective_photos",
+    "_comment_assignment_rejected_reason": {
+        "name": "_comment_assignment_rejected_reason",
+        "column_name": "comment_assignment_rejected_reason",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -455,9 +503,33 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_attachment_corrective_pdfs": {
-        "name": "_attachment_corrective_pdfs",
-        "column_name": "attachment_corrective_pdfs",
+    "_comment_corrective_rejected_reason": {
+        "name": "_comment_corrective_rejected_reason",
+        "column_name": "comment_corrective_rejected_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_comment_inspection_rejected_reason": {
+        "name": "_comment_inspection_rejected_reason",
+        "column_name": "comment_inspection_rejected_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_comment_inspection_decision_reason": {
+        "name": "_comment_inspection_decision_reason",
+        "column_name": "comment_inspection_decision_reason",
         "label": "",
         "validation": "",
         "validation_regex": "",

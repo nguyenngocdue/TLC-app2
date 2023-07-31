@@ -43,11 +43,12 @@ class MenuProfile extends Component
                 $phpMyAdmin = "localhost:38102";
                 break;
         }
+        $phpMyAdminLaravel = $phpMyAdmin . "/db_structure.php?server=1&db=laravel" . "&";
         $phpMyAdminTable = $phpMyAdmin . "/index.php?route=/sql&pos=0&db=laravel&table=" . $this->table . "&"; //<<Last amp & to compromise the slash /
 
         $navbarStr = str_replace("{app}", $app, $navbarStr);
         $navbarStr = str_replace("{redis}", $redis, $navbarStr);
-        $navbarStr = str_replace("{phpMyAdmin}", $phpMyAdmin, $navbarStr);
+        $navbarStr = str_replace("{phpMyAdmin}", $phpMyAdminLaravel, $navbarStr);
         $navbarStr = str_replace("{phpMyAdminTable}", $phpMyAdminTable, $navbarStr);
         // dump($navbarStr);
 

@@ -92,6 +92,17 @@
     "ghg_sheets": {
         "name": "ghg_sheets"
     },
+    "hr_onboarding_courses": {
+        "name": "hr_onboarding_courses"
+    },
+    "hr_onboarding_lines": {
+        "name": "hr_onboarding_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "hr_onboardings": {
+        "name": "hr_onboardings",
+        "storeEmpty_and_updateShort": "true"
+    },
     "hr_overtime_request_lines": {
         "name": "hr_overtime_request_lines",
         "storeEmpty_and_updateShort": "true"
@@ -109,17 +120,6 @@
     },
     "hr_timesheet_workers": {
         "name": "hr_timesheet_workers",
-        "storeEmpty_and_updateShort": "true"
-    },
-    "hr_onboarding_courses": {
-        "name": "hr_onboarding_courses"
-    },
-    "hr_onboarding_lines": {
-        "name": "hr_onboarding_lines",
-        "storeEmpty_and_updateShort": "true"
-    },
-    "hr_onboardings": {
-        "name": "hr_onboardings",
         "storeEmpty_and_updateShort": "true"
     },
     "hse_corrective_actions": {
@@ -191,6 +191,15 @@
     },
     "posts": {
         "name": "posts"
+    },
+    "ppr_routing_lines": {
+        "name": "ppr_routing_lines"
+    },
+    "ppr_routing_links": {
+        "name": "ppr_routing_links"
+    },
+    "ppr_routings": {
+        "name": "ppr_routings"
     },
     "priorities": {
         "name": "priorities"

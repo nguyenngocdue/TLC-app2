@@ -49,7 +49,6 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
         if(isset($ballInCourts['new'])){
             $keySendMailCreate = $ballInCourts['new']['ball-in-court-assignee'] ?? 'owner_id';
         }
-        if($keySendMailCreate == 'creator') $keySendMailCreate = 'owner_id';
         foreach ($currentValue as $key => $value) {
             switch ($key) {
                 case $keySendMailCreate:

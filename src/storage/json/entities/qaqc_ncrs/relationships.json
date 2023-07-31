@@ -11,7 +11,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getSubProject": {
         "name": "_getSubProject",
@@ -25,7 +26,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getProdRouting": {
         "name": "_getProdRouting",
@@ -39,7 +41,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getProdOrder": {
         "name": "_getProdOrder",
@@ -53,7 +56,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getDiscipline": {
         "name": "_getDiscipline",
@@ -67,7 +71,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getDiscipline1": {
         "name": "_getDiscipline1",
@@ -81,7 +86,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getDiscipline2": {
         "name": "_getDiscipline2",
@@ -95,7 +101,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getUserTeam": {
         "name": "_getUserTeam",
@@ -109,7 +116,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getPriority": {
         "name": "_getPriority",
@@ -123,7 +131,8 @@
         "control": "dropdown",
         "filter_columns": "field_id",
         "filter_values": "135",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getAssignee1": {
         "name": "_getAssignee1",
@@ -137,7 +146,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getAssignee2": {
         "name": "_getAssignee2",
@@ -151,7 +161,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getInterSubcon": {
         "name": "_getInterSubcon",
@@ -165,7 +176,8 @@
         "control": "dropdown",
         "filter_columns": "field_id",
         "filter_values": "119",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getDefectRootCause": {
         "name": "_getDefectRootCause",
@@ -179,7 +191,8 @@
         "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "117",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getDefectDisposition": {
         "name": "_getDefectDisposition",
@@ -193,7 +206,8 @@
         "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "118",
-        "radio_checkbox_colspan": "3"
+        "radio_checkbox_colspan": "3",
+        "let_user_choose_when_one_item": ""
     },
     "_getSeverity": {
         "name": "_getSeverity",
@@ -207,7 +221,8 @@
         "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "141",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getReportType": {
         "name": "_getReportType",
@@ -221,7 +236,8 @@
         "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "142",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -235,7 +251,8 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -249,7 +266,8 @@
         "control": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -263,7 +281,8 @@
         "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getQaqcCars": {
         "name": "_getQaqcCars",
@@ -277,7 +296,8 @@
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_attachment_defect_photos": {
         "name": "_attachment_defect_photos",
@@ -291,7 +311,8 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_attachment_defect_pdfs": {
         "name": "_attachment_defect_pdfs",
@@ -305,7 +326,8 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_attachment_corrective_photos": {
         "name": "_attachment_corrective_photos",
@@ -319,7 +341,8 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_attachment_corrective_pdfs": {
         "name": "_attachment_corrective_pdfs",
@@ -333,7 +356,68 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
+    },
+    "_comment_assignment_rejected_reason": {
+        "name": "_comment_assignment_rejected_reason",
+        "relationship": "morphMany",
+        "control_name": "comment_assignment_rejected_reason",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "comment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
+    },
+    "_comment_corrective_rejected_reason": {
+        "name": "_comment_corrective_rejected_reason",
+        "relationship": "morphMany",
+        "control_name": "comment_corrective_rejected_reason",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "comment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
+    },
+    "_comment_inspection_rejected_reason": {
+        "name": "_comment_inspection_rejected_reason",
+        "relationship": "morphMany",
+        "control_name": "comment_inspection_rejected_reason",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "comment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
+    },
+    "_comment_inspection_decision_reason": {
+        "name": "_comment_inspection_decision_reason",
+        "relationship": "morphMany",
+        "control_name": "comment_inspection_decision_reason",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "comment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     },
     "_getParent": {
         "name": "_getParent",
@@ -347,6 +431,7 @@
         "control": "parent_link",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": ""
     }
 }
