@@ -101,12 +101,12 @@ abstract class Report_ParentController extends Controller
     protected function getPageParam($typeReport, $entity)
     {
         $settings = CurrentUser::getSettings();
-        if (!isset($settings[$entity])) return 10;
+        if (!isset($settings[$entity])) return $this->pageLimit;
         if (isset($settings[$entity][strtolower($typeReport)]['per_page'])) {
             $pageLimit = $settings[$entity][strtolower($typeReport)]['per_page'];
             return $pageLimit;
         }
-        return 10;
+        return $this->pageLimit;
     }
 
     protected function getDefaultValueModeParams($modeParams, $request)

@@ -19,7 +19,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
     protected $maxH = 80;
     protected $year = 2023;
     protected $tableTrueWidth = false;
-    protected $pageLimit = 100;
+    protected $pageLimit = 20;
 
     public function getSqlStr($modeParams)
     {
@@ -462,11 +462,9 @@ class Hse_incident_report_010 extends Report_ParentReportController
     protected function getDefaultValueModeParams($modeParams, $request)
     {
         $x = 'year';
-        $y = 'many_workplace_id';
         $isNullModeParams = Report::isNullModeParams($modeParams);
         if ($isNullModeParams) {
             $modeParams[$x] = $this->year;
-            #$modeParams[$y] = $this->many_workplace_id;
         }
         return $modeParams;
     }
