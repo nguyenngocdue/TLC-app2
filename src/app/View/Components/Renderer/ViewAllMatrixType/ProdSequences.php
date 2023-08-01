@@ -79,7 +79,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
 
     protected function getXAxisExtraColumns()
     {
-        return ["man_power", "total_uom", "total_mins", "min_per_uom"];
+        return ["man_power", "total_mins",  "total_uom", "min_per_uom"];
     }
 
     protected function getXAxis()
@@ -171,7 +171,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             case "total_mins":
                 return $doc->total_hours * 60;
             case "min_per_uom":
-                return ($doc->total_uom > 0) ? round($doc->total_hours * 60 / $doc->total_uom, 2) : "DIV 0";
+                return ($doc->total_uom > 0) ? round($doc->total_hours * 60 / $doc->total_uom, 2) : '<i class="fa-solid fa-infinity" title="DIV 0"></i>';
             default:
                 return "852. Not found " . $dataIndex;
         }
