@@ -38,11 +38,10 @@ Route::group([
     Route::get('notifications/{type}/{id}/{idNotification}', [NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('system/notifications', [SystemNotificationsController::class, 'notifications']);
     Route::get('system/notificationsRender', [SystemNotificationsController::class, 'notificationsRender']);
-    Route::get('utils/createThumbnail', [ThumbnailController::class,'create']);
-    Route::get('orphan/many_to_many', [OrphanManyToManyController::class,'get']);
-    Route::post('orphan/many_to_many', [OrphanManyToManyController::class,'destroy'])->name('orphan.destroy');
-    Route::get('test', function(){
-        event( new Test(['DinhCanh','30031997']));
-    });
-
+    Route::get('utils/createThumbnail', [ThumbnailController::class, 'create']);
+    Route::get('orphan/many_to_many', [OrphanManyToManyController::class, 'get'])->name('orphan.index');
+    Route::post('orphan/many_to_many', [OrphanManyToManyController::class, 'destroy'])->name('orphan.destroy');
+    // Route::get('test', function () {
+    //     event(new Test(['DinhCanh', '30031997']));
+    // });
 });
