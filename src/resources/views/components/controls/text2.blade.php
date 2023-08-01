@@ -8,7 +8,7 @@
       $value = $value ? $value : old($name, ($value));
     @endphp
     <input 
-        component="controls/text2"
+        component="{{$component}}"
         id="{{$name}}" 
         name="{{$name}}" 
         placeholder="{{$placeholder}}" 

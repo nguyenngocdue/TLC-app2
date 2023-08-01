@@ -5,6 +5,9 @@ function listenerSubmitForm(idForm) {
         $('button').prop('disabled', true);
         $elements = ['input[component="controls/number2"]', 'input[component="editable/number4"'];
         $elements.forEach((element) => numberRemoveCommaByElements(element));
+        $element2 = ['input[component="controls/picker_datetime"]'];
+        $element2.forEach((element) => dataPickerFormatByElements(element));
+
 
     });
 }
@@ -13,6 +16,13 @@ const numberRemoveCommaByElements = (nameElement) => {
         var currentValue = $(this).val();
         var cleanedValue = numberRemoveComma(currentValue);
         $(this).val(cleanedValue);
+    });
+}
+const dataPickerFormatByElements = (nameElement) => {
+    $(nameElement).each(function () {
+        var currentValue = $(this).val();
+        var formatValue = currentValue.replace(/^(\d{1})\/(\d{1})/, '0$1/0$2').replace(/\s(\d{1}):(\d{1})$/, ' 0$1:0$2');;
+        $(this).val(formatValue);
     });
 }
 const removeLetters = (number) => number.replace(/[^\d.-]/g, '');

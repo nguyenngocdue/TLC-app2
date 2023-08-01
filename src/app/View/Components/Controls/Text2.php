@@ -11,6 +11,7 @@ class Text2 extends Component
     public function __construct(
         private $name,
         private $value,
+        private $component = 'controls/text2',
         private $placeholder = 'Type here...',
         private $icon = null,
         private $readOnly = false,
@@ -27,6 +28,7 @@ class Text2 extends Component
         return view('components.controls.text2', [
             'name' => $name,
             'value' => $value,
+            'component' => $this->component,
             'placeholder' => $placeholder,
             'icon' => $icon,
             'readOnly' => $readOnly,
