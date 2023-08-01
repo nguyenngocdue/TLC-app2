@@ -11,9 +11,10 @@
         <x-renderer.card title="Doc Orphan">
             <x-renderer.table 
             tableName="orphan_doc"
-            showPaginationTop="true"
             :columns="$columns"
             :dataSource="$dataSource1"
+            showNo="true"
+            editable="true"
             />
         </x-renderer.card>
         
@@ -22,9 +23,10 @@
         <x-renderer.card title="Doc Orphan">
             <x-renderer.table 
             tableName="orphan_term"
-            showPaginationTop="true"
             :columns="$columns"
             :dataSource="$dataSource2"
+            showNo="true"
+            editable="true"
             />
         </x-renderer.card>
     @endempty
