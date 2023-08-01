@@ -35,6 +35,30 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_prod_routing_id": {
+        "name": "_prod_routing_id",
+        "column_name": "prod_routing_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_total_uom": {
         "name": "_total_uom",
         "column_name": "total_uom",
@@ -79,6 +103,18 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "0",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_worker_number": {
+        "name": "_worker_number",
+        "column_name": "worker_number",
+        "label": "",
+        "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -170,6 +206,42 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_expected_start_at": {
+        "name": "_expected_start_at",
+        "column_name": "expected_start_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_expected_finish_at": {
+        "name": "_expected_finish_at",
+        "column_name": "expected_finish_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_priority": {
+        "name": "_priority",
+        "column_name": "priority",
         "label": "",
         "validation": "",
         "validation_regex": "",
