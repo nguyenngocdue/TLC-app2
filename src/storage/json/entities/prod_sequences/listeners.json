@@ -1,9 +1,9 @@
 {
-    "_total_hours": {
-        "name": "_total_hours",
-        "column_name": "total_hours",
+    "_start_date": {
+        "name": "_start_date",
+        "column_name": "start_date",
         "listen_action": "aggregate_from_table",
-        "triggers": "table01[footer][total_hours]",
+        "triggers": "table01[footer][date]",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "columns_to_set": "",
@@ -19,6 +19,21 @@
         "column_name": "worker_number",
         "listen_action": "aggregate_from_table",
         "triggers": "table01[footer][worker_number]",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
+        "listen_action": "aggregate_from_table",
+        "triggers": "table01[footer][total_hours]",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "columns_to_set": "",
@@ -152,6 +167,21 @@
     "_getProdRuns": {
         "name": "_getProdRuns",
         "column_name": "getProdRuns",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_end_date": {
+        "name": "_end_date",
+        "column_name": "end_date",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

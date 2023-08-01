@@ -13,6 +13,7 @@ class Prod_sequence extends ModelExtended
         "priority", "uom_id", "total_uom", "owner_id",
         "sub_project_id", "prod_routing_id",
         "total_hours", "worker_number", "total_man_hours",
+        "start_date", "end_date",
     ];
 
     protected $table = 'prod_sequences';
