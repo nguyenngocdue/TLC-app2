@@ -9,6 +9,7 @@ use App\Utils\Support\CurrentUser;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -207,6 +208,20 @@ abstract class ViewAllTypeMatrixParent extends Component
             </div>";
     }
 
+    private function getFilter()
+    {
+        $filterDataSource  = $this->getFilterDataSource();
+        $viewportParams = $this->getViewportParams();
+        //qaqc_wirs.blade.php //FULL TEXT SEARCH HERE
+        $params = ["type" => $this->type, "dataSource" => $filterDataSource, "viewportParams" => $viewportParams,];
+        $viewName = 'components.renderer.view-all-matrix-filter.' . $this->type;
+        if (view()->exists($viewName)) {
+            return Blade::render('<x-renderer.view-all-matrix-filter.' . $this->type . ' :type="$type" :dataSource="$dataSource" :viewportParams="$viewportParams"/>', $params);
+        } else {
+            return "Unknown type $this->type in type matrix filter (ViewAllTypeMatrixFilter)";
+        }
+    }
+
     public function render()
     {
         [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading] = $this->getViewAllMatrixParams();
@@ -217,7 +232,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $dataSource = $this->paginate($dataSource, $per_page, $page);
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
-        // $modelPathMatrix = get_class($this);
+        $filterRenderer = $this->getFilter();
         $actionButtons = "<x-form.action-button-group-view-matrix type='$this->type' groupBy='$this->groupBy' groupByLength='$this->groupByLength'/>";
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
@@ -226,8 +241,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'dataSource' => $dataSource,
                 'dataHeader' => $xAxis2ndHeading,
                 'type' => $this->type,
-                'filterDataSource' => $this->getFilterDataSource(),
-                'viewportParams' => $this->getViewportParams(),
+                'filterRenderer' => $filterRenderer,
                 'footer' => $footer,
                 'perPage' => $perPage,
                 'rotate45Width' => $this->rotate45Width,

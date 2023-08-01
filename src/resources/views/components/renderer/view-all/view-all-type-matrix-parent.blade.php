@@ -1,4 +1,5 @@
-<x-renderer.view-all.view-all-type-matrix-filter :type="$type" :dataSource="$filterDataSource" :viewportParams="$viewportParams"/>
+{!! $filterRenderer !!}
+
 <x-renderer.table 
           showPaginationTop="true"
           :columns="$columns"
