@@ -125,13 +125,13 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 ),
                 t6 AS (
                                     SELECT
-                                        SUBSTR(hrt.training_datetime, 1, 7) AS hse_month,
-                                        NULLIF(COUNT( CASE WHEN hrtl.training_course_id = $HSE_INDUCTION AND hrt.status = '$STATUS_HR_TRAINING' THEN hrt.id END),0) AS hrt_line_count 
-                                    FROM hr_trainings hrt, hr_training_lines hrtl
+                                        SUBSTR(hrt.onboarding_datetime, 1, 7) AS hse_month,
+                                        NULLIF(COUNT( CASE WHEN hrtl.onboarding_course_id = $HSE_INDUCTION AND hrt.status = '$STATUS_HR_TRAINING' THEN hrt.id END),0) AS hrt_line_count 
+                                    FROM hr_onboardings hrt, hr_onboarding_lines hrtl
                                     WHERE 1 = 1
-                                        AND hrt.training_location_id IN $strWorkplaceIds
-                                        AND SUBSTR(hrt.training_datetime, 1, 4) = $year
-                                        AND hrtl.hr_training_id = hrt.id
+                                        AND hrt.onboarding_location_id IN $strWorkplaceIds
+                                        AND SUBSTR(hrt.onboarding_datetime, 1, 4) = $year
+                                        AND hrtl.hr_onboarding_id = hrt.id
                                     GROUP BY hse_month
                 ),
                 t7 AS (
