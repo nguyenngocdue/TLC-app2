@@ -149,8 +149,9 @@ trait TraitEntityExportCSV
         $dataSource = $this->getDataSource($advanceFilters)->get();
         return [$columns, $dataSource];
     }
-    private function groupByDataSource($request,$dataSource){
-        if($request->groupBy){
+    private function groupByDataSource($request, $dataSource)
+    {
+        if ($request->groupBy) {
             $result = [];
             foreach ($dataSource as $key => $item) {
                 $groupKey = substr($item[$request->groupBy], 0, $request->groupByLength);
@@ -163,34 +164,37 @@ trait TraitEntityExportCSV
         }
         return $dataSource;
     }
-    private function makeDataSourceForViewMatrix($request,$dataSource){
+    private function makeDataSourceForViewMatrix($request, $dataSource)
+    {
         $rows = [];
-        if(!$request->groupBy) $dataSource = [$dataSource];
+        if (!$request->groupBy) $dataSource = [$dataSource];
         foreach ($dataSource as $key => $value) {
-            if(gettype($key) !== 'integer') $rows[] = [$key];
+            if (gettype($key) !== 'integer') $rows[] = [$key];
             foreach ($value as $no => $item) {
-                if(isset($item['name_for_group_by'])) unset($item['name_for_group_by']);
-                $item = array_values(array_map(fn($item) =>isset($item->value) ? strip_tags($item->value) : strip_tags($item),$item));
-                array_unshift($item,($no + 1));
+                if (isset($item['name_for_group_by'])) unset($item['name_for_group_by']);
+                $item = array_values(array_map(fn ($item) => isset($item->value) ? strip_tags($item->value) : strip_tags($item), $item));
+                array_unshift($item, ($no + 1));
                 $rows[] = $item;
             }
         }
         return $rows;
     }
-    private function sortDataValueFollowColumns($columns,$dataSource){
-        $columns = array_column($columns,'dataIndex');
+    private function sortDataValueFollowColumns($columns, $dataSource)
+    {
+        $columns = array_column($columns, 'dataIndex');
         $result = [];
         foreach ($dataSource as $item) {
             $arrayTemp = [];
             foreach ($columns as $key) {
-                $arrayTemp[$key] = $item[$key];
+                if (isset($item[$key])) $arrayTemp[$key] = $item[$key];
             }
             $result[] = $arrayTemp;
         }
         return $result;
     }
-    private function getModelPath(){
+    private function getModelPath()
+    {
         $namespace = 'App\View\Components\Renderer\ViewAllMatrixType';
-        return $namespace .'\\' . Str::of(Str::plural($this->type))->studly();
+        return $namespace . '\\' . Str::of(Str::plural($this->type))->studly();
     }
 }
