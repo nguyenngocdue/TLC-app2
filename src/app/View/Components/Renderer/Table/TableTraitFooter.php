@@ -6,32 +6,46 @@ trait TableTraitFooter
 {
     function makeOneFooter($column, $tableName, $dataSource)
     {
+
+        $aggList = [
+            'agg_none',
+            'agg_count_all',
+            'agg_sum',
+            'agg_avg',
+            'agg_median',
+            'agg_min',
+            'agg_max',
+            'agg_range',
+
+            // 'agg_count_values',
+            // 'agg_count_unique_values',
+            // 'agg_count_empty',
+            // 'agg_count_not_empty',
+            // 'agg_percent_empty',
+            // 'agg_percent_not_empty',
+        ];
         $fieldName = $column['dataIndex'];
-        $footer = $column['footer'];
         $items = $dataSource->map(fn ($item) => is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName]);
-        switch ($footer) {
-            case 'agg_avg':
-            case 'agg_sum':
-                $sum = round($items->sum(), 2);
-                break;
-            default:
-                $sum = 0;
-                break;
-        }
-        switch ($footer) {
-            case 'agg_avg':
-                $count = $items->count();
-                $result = ($count) ?  $sum / $count : 0;
-                break;
-            default:
-                $result = $sum;
-                break;
-        }
-        $result = round($result, 2);
-        // $sum = array_sum(array_column($dataSource->toArray(), $fieldName));
+
+        $result['agg_none'] = '';
+        $result['agg_count_all'] = $items->count();
+        $result['agg_sum'] = round($items->sum(), 2);
+        $result['agg_avg'] = round($items->avg(), 2);
+        $result['agg_median'] = $items->median();
+        $result['agg_min'] = $items->min();
+        $result['agg_max'] = $items->max();
+        $result['agg_range'] = $result['agg_max'] - $result['agg_min'];
+
         $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr-6 py-0";
-        $id = "{$tableName}[footer][{$fieldName}]";
-        return "<input id='$id' component='TraitFooter' value='$result' readonly class='$class' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
+        $inputs = [];
+        $footer = $column['footer'];
+        // echo $footer;
+        foreach ($aggList as $agg) {
+            $bg = ($footer == $agg) ? "text-blue-700" : "hidden";
+            $id = "{$tableName}[footer][{$fieldName}][$agg]";
+            $inputs[] = "<input id='$id' title='$agg' component='TraitFooter' value='$result[$agg]' readonly class='$class $bg' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
+        }
+        return join("", $inputs);
     }
 
     function makeFooter($columns, $tableName, $dataSource)

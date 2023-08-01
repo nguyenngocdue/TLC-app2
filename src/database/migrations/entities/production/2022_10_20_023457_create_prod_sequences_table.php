@@ -31,6 +31,8 @@ return new class extends Migration
             $table->double('total_hours')->nullable();
             $table->double('worker_number')->nullable();
             $table->double('total_man_hours')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
             $table->dateTime('expected_start_at')->nullable();
             $table->dateTime('expected_finish_at')->nullable();
             $table->unsignedBigInteger('uom_id')->nullable();

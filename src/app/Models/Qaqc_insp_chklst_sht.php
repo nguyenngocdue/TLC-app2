@@ -96,7 +96,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
             ['dataIndex' => 'name'],
             ['dataIndex' => 'qaqc_insp_tmpl_sht_id', 'rendererParam' => 'name'],
             ['dataIndex' => 'qaqc_insp_chklst_id'],
-            ['dataIndex' => 'getMonitors1()', 'renderer' => 'agg_count'],
+            ['dataIndex' => 'getMonitors1()', 'renderer' => 'agg_count_all'],
             ['dataIndex' => 'progress'],
             ['dataIndex' => 'status'],
         ];
