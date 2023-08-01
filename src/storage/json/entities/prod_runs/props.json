@@ -98,7 +98,7 @@
         "name": "_worker_number",
         "column_name": "worker_number",
         "column_type": "double",
-        "label": "Number Of Workers",
+        "label": "Man-power",
         "control": "number",
         "align": "",
         "col_span": "",

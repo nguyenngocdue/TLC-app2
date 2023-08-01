@@ -42,20 +42,20 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $this->subProject = $this->subProject ? $this->subProject : 21;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
         // dump($this->project, $this->subProject, $this->prodRouting);
-        // $this->cacheUnit();
+        $this->cacheUnit();
     }
 
-    // private $unit;
-    // private function cacheUnit()
-    // {
-    //     $result = [];
-    //     $terms = Arr::groupBy(Term::all()->toArray(), 'id');
-    //     foreach ($terms as $key => $subArr) {
-    //         $result[$key]   = array_pop($subArr);
-    //     }
-    //     // dump($result);
-    //     $this->unit = $result;
-    // }
+    private $unit;
+    private function cacheUnit()
+    {
+        $result = [];
+        $terms = Arr::groupBy(Term::all()->toArray(), 'id');
+        foreach ($terms as $key => $subArr) {
+            $result[$key]   = array_pop($subArr);
+        }
+        // dump($result);
+        $this->unit = $result;
+    }
 
     private function getUserSettings()
     {
@@ -79,7 +79,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
 
     protected function getXAxisExtraColumns()
     {
-        return ["man_power", "total_mins",  "total_uom", "min_per_uom"];
+        return ["man_power", "uom", "total_uom", "total_mins", "min_per_uom"];
     }
 
     protected function getXAxis()
@@ -172,6 +172,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
                 return $doc->total_hours * 60;
             case "min_per_uom":
                 return ($doc->total_uom > 0) ? round($doc->total_hours * 60 / $doc->total_uom, 2) : '<i class="fa-solid fa-infinity" title="DIV 0"></i>';
+            case "uom":
+                return $this->unit[$doc->uom_id]['name'] ?? "(unit)";
             default:
                 return "852. Not found " . $dataIndex;
         }
@@ -182,7 +184,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
         foreach ($xAxis as $line) {
             $result[$line['dataIndex']] =  Str::headline($line['columnIndex']);
             if ($line['columnIndex'] == 'total_uom') $result[$line['dataIndex']] = "Total UoM";
-            if ($line['columnIndex'] == 'min_per_uom') $result[$line['dataIndex']] = "Min/UoM";
+            if ($line['columnIndex'] == 'min_per_uom') $result[$line['dataIndex']] = "min/UoM";
+            if ($line['columnIndex'] == 'uom') $result[$line['dataIndex']] = "UoM";
+            if ($line['columnIndex'] == 'total_mins') $result[$line['dataIndex']] = "min";
+            if ($line['columnIndex'] == 'man_power') $result[$line['dataIndex']] = "m'p";
         }
         foreach ($result as &$row) {
             $row = "<div class='p-1 text-center'>" . $row . "</div>";
