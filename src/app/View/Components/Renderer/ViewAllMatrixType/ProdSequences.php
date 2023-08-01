@@ -25,7 +25,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected $dataIndexY = "prod_order_id";
     // protected $rotate45Width = 400;
     protected $tableTrueWidth = true;
-    protected $headerTop = "20";
+    protected $headerTop = "10";
     // protected $headerTop = "[300px]";
     protected $groupBy = null;
     protected $mode = 'detail';
@@ -79,7 +79,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
 
     protected function getXAxisExtraColumns()
     {
-        return ["man_power", "uom", "total_uom", "total_mins", "min_per_uom"];
+        return ["start_date", "end_date", "man_power", "uom", "total_uom", "total_mins", "min_per_uom"];
     }
 
     protected function getXAxis()
@@ -164,10 +164,14 @@ class ProdSequences extends ViewAllTypeMatrixParent
         if ($dataIndex === 'status') return parent::cellRenderer($cell, $dataIndex, $forExcel);
         $doc = $cell[0];
         switch ($dataIndex) {
+            case "total_uom":
+                return $doc->{$dataIndex};
+            case "start_date":
+            case "end_date":
+                $date = $doc->{$dataIndex};
+                return $date ? date(Constant::FORMAT_DATE_ASIAN, strtotime($date)) : "";
             case "man_power":
                 return $doc->worker_number;
-            case "total_uom":
-                return $doc->total_uom . " "; //. ($this->unit[$doc->uom_id]['name'] ?? "(unit)");
             case "total_mins":
                 return $doc->total_hours * 60;
             case "min_per_uom":
@@ -175,6 +179,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             case "uom":
                 return $this->unit[$doc->uom_id]['name'] ?? "(unit)";
             default:
+                // if (isset($doc->{$dataIndex})) return $doc->{$dataIndex};
                 return "852. Not found " . $dataIndex;
         }
     }
@@ -188,6 +193,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
             if ($line['columnIndex'] == 'uom') $result[$line['dataIndex']] = "UoM";
             if ($line['columnIndex'] == 'total_mins') $result[$line['dataIndex']] = "min";
             if ($line['columnIndex'] == 'man_power') $result[$line['dataIndex']] = "m'p";
+            if ($line['columnIndex'] == 'start_date') $result[$line['dataIndex']] = "Start";
+            if ($line['columnIndex'] == 'end_date') $result[$line['dataIndex']] = "Finish";
         }
         foreach ($result as &$row) {
             $row = "<div class='p-1 text-center'>" . $row . "</div>";
