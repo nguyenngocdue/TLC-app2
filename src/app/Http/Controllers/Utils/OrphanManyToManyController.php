@@ -8,9 +8,11 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\Memory;
 use App\Utils\System\Timer;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class OrphanManyToManyController extends Controller
 {
@@ -20,23 +22,43 @@ class OrphanManyToManyController extends Controller
     }
     public function get()
     {
-       $arrayOrphan1 = $this->getOrphan('doc_type','doc_id');
+       $tableFilterOrphan = 'many_to_many';
+       $arrayOrphan1 = $this->getOrphan('doc_type','doc_id',$tableFilterOrphan);
        $arrayOrphan1 = array_filter($arrayOrphan1, fn($item) => !empty($item));
        $dataSource1 = $this->getDataSource($arrayOrphan1);
-       $arrayOrphan2 = $this->getOrphan('term_type','term_id');
+       $arrayOrphan2 = $this->getOrphan('term_type','term_id',$tableFilterOrphan);
        $arrayOrphan2 = array_filter($arrayOrphan2, fn($item) => !empty($item));
-       $dataSource2 = $this->getDataSource($arrayOrphan2);
-
+       $dataSource2 = $this->getDataSource($arrayOrphan2,'orphan_term');
        return view("components.orphan.many-to-many",[
         'topTitle' => 'View Orphan',
+        'tableFilterOrphan'=> $tableFilterOrphan,
         'columns' => $this->getColumnsTable(),
         'dataSource1' => $dataSource1,
         'dataSource2' => $dataSource2,
        ]);
     }
     public function destroy(Request $request){
-        dd($request);
-
+        try {
+            $tableName = $request->table_name;
+            if($dataOrphan = $request->orphan_doc){
+                $this->clearOrphanForDatabase($tableName,$dataOrphan);
+            }        
+            if($dataOrphan = $request->orphan_term){
+                $this->clearOrphanForDatabase($tableName,$dataOrphan,'term_type','term_id');
+            }
+            Toastr::success('Clear orphan for table '.$tableName.'successfully', 'Clear Orphan');
+        } catch (\Throwable $th) {
+            Toastr::error($th->getMessage(), 'Clear Orphan');
+        }
+        return redirect()->back();
+    }
+    private function clearOrphanForDatabase($tableName,$dataOrphan,$field1 ='doc_type', $field2 ='doc_id'){
+        foreach($dataOrphan as $value){
+            $docType = $value['doc_type'];
+            $docType = preg_replace('/(\\\\+)/', '\\\\\\\\', $docType);
+            $docIds = str_replace(' ','',$value['doc_ids']);
+            DB::select("DELETE FROM $tableName WHERE $field1='$docType' AND $field2 IN ($docIds)");
+        }
     }
     private function getColumnsTable(){
         return [
@@ -51,16 +73,19 @@ class OrphanManyToManyController extends Controller
                 ],
             ];
     }
-    private function getDataSource($arrayOrphan){
+    private function getDataSource($arrayOrphan,$tableName = 'orphan_doc'){
         $result = [];
         $count = 1;
-        foreach ($arrayOrphan as $key => $value) {
+        foreach ($arrayOrphan as $key => $item) {
+            $id = $tableName.'['.$count.'][doc_type]';
+            $value = $tableName.'['.$count.'][doc_ids]';
             $result[$count]['id'] = $count;
             $result[$count]['doc_type'] = (object)[
-                'value' => $key,
+                'value' => "<div><input type='hidden' name='$id' value='$key'/>$key</div>",
             ];
+            $ids = join(', ',array_values($item));
             $result[$count]['doc_ids'] = (object)[
-                'value' => join(', ',array_values($value)),
+                'value' => "<div><input type='hidden' name='$value' value='$ids'/>$ids</div>",
             ];
             $count++;
 
