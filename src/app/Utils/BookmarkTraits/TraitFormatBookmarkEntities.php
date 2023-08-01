@@ -23,6 +23,7 @@ trait TraitFormatBookmarkEntities
                     $value['click_count'] = $entities[$key]['click_count'];
                 }
             });
+            $entitiesName = array_filter($entitiesName,fn($item) => $item);
             $allApps = array_filter(array_replace(array_flip($entitiesName), $allApps), function ($item) {
                 return is_array($item);
             });

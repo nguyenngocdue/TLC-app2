@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\UpdateUserSettingsApi;
 use App\Http\Controllers\Utils\MyCompanyController;
+use App\Http\Controllers\Utils\OrphanManyToManyController;
 use App\Http\Controllers\Utils\ThumbnailController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -38,6 +39,8 @@ Route::group([
     Route::get('system/notifications', [SystemNotificationsController::class, 'notifications']);
     Route::get('system/notificationsRender', [SystemNotificationsController::class, 'notificationsRender']);
     Route::get('utils/createThumbnail', [ThumbnailController::class,'create']);
+    Route::get('orphan/many_to_many', [OrphanManyToManyController::class,'get']);
+    Route::post('orphan/many_to_many', [OrphanManyToManyController::class,'destroy'])->name('orphan.destroy');
     Route::get('test', function(){
         event( new Test(['DinhCanh','30031997']));
     });

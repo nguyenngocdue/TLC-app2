@@ -46,6 +46,7 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
             return;
         }
         $ballInCourts = BallInCourts::getAllOf($type);
+        $keySendMailCreate = 'owner_id';
         if(isset($ballInCourts['new'])){
             $keySendMailCreate = $ballInCourts['new']['ball-in-court-assignee'] ?? 'owner_id';
         }
