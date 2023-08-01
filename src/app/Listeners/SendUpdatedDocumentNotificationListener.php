@@ -2,24 +2,16 @@
 
 namespace App\Listeners;
 
-use App\Events\BroadcastEvents\BroadcastNotificationEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Mail\SendMailChangeStatus;
-use App\Models\Logger;
 use App\Models\User;
-use App\Notifications\UpdatedNotification;
-use App\Utils\Constant;
 use App\Utils\SendMaiAndNotification\CheckDefinitionsNew;
 use App\Utils\Support\Json\BallInCourts;
-use App\Utils\Support\JsonControls;
-use Barryvdh\Debugbar\Twig\Extension\Dump;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -110,7 +102,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $isChangeStatus = false;
         $isChangeAssignee = false;
         $isChangeMonitors = false;
-        if($previousStatus === $currentStatus){
+        if($previousStatus !== $currentStatus){
             $this->handleProcessSendMailByBallInCourt($listCc,$isChangeAssignee,$isChangeMonitors,
             $userAssigneePrevious,$userAssigneeCurrent,$userMonitorsPrevious,
             $userMonitorsCurrent,$isChangeStatus);

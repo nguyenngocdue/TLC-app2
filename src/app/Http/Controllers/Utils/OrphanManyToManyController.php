@@ -24,10 +24,10 @@ class OrphanManyToManyController extends Controller
     {
        $tableFilterOrphan = 'many_to_many';
        $arrayOrphan1 = $this->getOrphan('doc_type','doc_id',$tableFilterOrphan);
-       $arrayOrphan1 = array_filter($arrayOrphan1, fn($item) => !empty($item));
+       $arrayOrphan1 = $this->filterArrayOrphan($arrayOrphan1);
        $dataSource1 = $this->getDataSource($arrayOrphan1);
        $arrayOrphan2 = $this->getOrphan('term_type','term_id',$tableFilterOrphan);
-       $arrayOrphan2 = array_filter($arrayOrphan2, fn($item) => !empty($item));
+       $arrayOrphan2 = $this->filterArrayOrphan($arrayOrphan2);
        $dataSource2 = $this->getDataSource($arrayOrphan2,'orphan_term');
        return view("components.orphan.many-to-many",[
         'topTitle' => 'View Orphan',
@@ -51,6 +51,9 @@ class OrphanManyToManyController extends Controller
             Toastr::error($th->getMessage(), 'Clear Orphan');
         }
         return redirect()->back();
+    }
+    private function filterArrayOrphan($array){
+        return array_filter($array, fn($item) => !empty($item));
     }
     private function clearOrphanForDatabase($tableName,$dataOrphan,$field1 ='doc_type', $field2 ='doc_id'){
         foreach($dataOrphan as $value){

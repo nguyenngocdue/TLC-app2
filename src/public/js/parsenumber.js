@@ -64,7 +64,7 @@ const dataPickerFormatByElements = (nameElement) => {
     $(nameElement).each(function () {
         var currentValue = $(this).val();
         if(callback){
-            var formatValue = callback(currentValue);
+            var formatValue = currentValue.replace(/^(\d{1})\/(\d{1})/, '0$1/0$2').replace(/\s(\d{1}):(\d{1})$/, ' 0$1:0$2');
         }else{
             var formatValue = currentValue.replace(regex, replacement);
         }
