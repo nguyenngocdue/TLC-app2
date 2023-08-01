@@ -5,13 +5,15 @@ function listenerSubmitForm(idForm) {
         $('button').prop('disabled', true);
         $elements = ['input[component="controls/number2"]', 'input[component="editable/number4"'];
         $elements.forEach((element) => numberRemoveCommaByElements(element));
-        $element2 = ['input[component="controls/picker_datetime"]'];
+        $element2 = ['input[component="controls/picker_datetime"]','input[component="controls/datepicker3"]',
+                    'input[component="controls/picker_month"]','input[component="controls/picker_week"]',
+                    'input[component="controls/picker_time"]','input[component="controls/picker_date"]'];
         $element2.forEach((element) => dataPickerFormatByElements(element));
-
 
     });
 }
 const numberRemoveCommaByElements = (nameElement) => {
+    
     $(nameElement).each(function () {
         var currentValue = $(this).val();
         var cleanedValue = numberRemoveComma(currentValue);
@@ -19,11 +21,44 @@ const numberRemoveCommaByElements = (nameElement) => {
     });
 }
 const dataPickerFormatByElements = (nameElement) => {
+    var regex;
+    var replacement;
+    var callback;
+    switch (nameElement) {
+        case 'input[component="controls/picker_time"]':
+            regex = /(\d+):(\d+)/g;
+            replacement = (match, p1, p2) => {
+                return p1.padStart(2, '0') + ':' + p2.padStart(2, '0');
+              };
+            break;
+            break;
+        case 'input[component="controls/picker_month"]':
+            regex = /^(\d{1})\//;
+            replacement = '0$1/';
+            break;
+        case 'input[component="controls/picker_week"]':
+            regex = /^W(\d{1})\//;
+            replacement = 'W0$1/';
+            break;
+        case 'input[component="controls/datepicker3"]':
+        case 'input[component="controls/picker_datetime"]':
+        case 'input[component="controls/picker_date"]':
+            callback = (value) => {value.replace(/^(\d{1})\/(\d{1})/, '0$1/0$2').replace(/\s(\d{1}):(\d{1})$/, ' 0$1:0$2')};
+            break;
+        default:
+            break;
+            
+    }
     $(nameElement).each(function () {
         var currentValue = $(this).val();
-        var formatValue = currentValue.replace(/^(\d{1})\/(\d{1})/, '0$1/0$2').replace(/\s(\d{1}):(\d{1})$/, ' 0$1:0$2');;
+        if(callback){
+            var formatValue = callback(currentValue);
+        }else{
+            var formatValue = currentValue.replace(regex, replacement);
+        }
         $(this).val(formatValue);
     });
+    
 }
 const removeLetters = (number) => number.replace(/[^\d.-]/g, '');
 
