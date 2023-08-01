@@ -5,11 +5,18 @@ function listenerSubmitForm(idForm) {
         $('button').prop('disabled', true);
         $elements = ['input[component="controls/number2"]', 'input[component="editable/number4"'];
         $elements.forEach((element) => numberRemoveCommaByElements(element));
-        $element2 = ['input[component="controls/picker_datetime"]','input[component="controls/datepicker3"]',
-                    'input[component="controls/picker_month"]','input[component="controls/picker_week"]',
-                    'input[component="controls/picker_time"]','input[component="controls/picker_date"]'];
+        $element2 = ['input[component="controls/picker_datetime"]',
+                    'input[component="editable/picker_datetime"]',
+                    'input[component="controls/datepicker3"]',
+                    'input[component="controls/picker_month"]',
+                    'input[component="editable/picker_month"]',
+                    'input[component="controls/picker_week"]',
+                    'input[component="editable/picker_week"]',
+                    'input[component="controls/picker_time"]',
+                    'input[component="editable/picker_time"]',
+                    'input[component="controls/picker_date"]',
+                    'input[component="editable/picker_date"]'];
         $element2.forEach((element) => dataPickerFormatByElements(element));
-
     });
 }
 const numberRemoveCommaByElements = (nameElement) => {
@@ -26,6 +33,7 @@ const dataPickerFormatByElements = (nameElement) => {
     var callback;
     switch (nameElement) {
         case 'input[component="controls/picker_time"]':
+            case 'input[component="editable/picker_time"]':
             regex = /(\d+):(\d+)/g;
             replacement = (match, p1, p2) => {
                 return p1.padStart(2, '0') + ':' + p2.padStart(2, '0');
@@ -33,16 +41,20 @@ const dataPickerFormatByElements = (nameElement) => {
             break;
             break;
         case 'input[component="controls/picker_month"]':
+        case 'input[component="editable/picker_month"]':
             regex = /^(\d{1})\//;
             replacement = '0$1/';
             break;
         case 'input[component="controls/picker_week"]':
+        case 'input[component="editable/picker_week"]':
             regex = /^W(\d{1})\//;
             replacement = 'W0$1/';
             break;
         case 'input[component="controls/datepicker3"]':
         case 'input[component="controls/picker_datetime"]':
+        case 'input[component="editable/picker_datetime"]':
         case 'input[component="controls/picker_date"]':
+        case 'input[component="editable/picker_date"]':
             callback = (value) => {value.replace(/^(\d{1})\/(\d{1})/, '0$1/0$2').replace(/\s(\d{1}):(\d{1})$/, ' 0$1:0$2')};
             break;
         default:
