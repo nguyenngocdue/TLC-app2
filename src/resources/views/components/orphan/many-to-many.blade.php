@@ -8,7 +8,7 @@
     @csrf
     @method('POST')
     <input name="table_name" value="{{$tableFilterOrphan}}" type='hidden' />
-        <x-renderer.card title="Doc Orphan">
+        <x-renderer.card title="Orphan Docs">
             <x-renderer.table 
             tableName="orphan_doc"
             :columns="$columns"
@@ -17,7 +17,7 @@
             editable="true"
             />
         </x-renderer.card>
-        <x-renderer.card title="Doc Orphan">
+        <x-renderer.card title="Orphan Terms">
             <x-renderer.table 
             tableName="orphan_term"
             :columns="$columns"

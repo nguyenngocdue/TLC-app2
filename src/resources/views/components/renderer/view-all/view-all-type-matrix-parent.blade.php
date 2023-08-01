@@ -9,7 +9,7 @@
           groupByLength="{{$groupByLength}}"
           bottomLeftControl="{!! $footer !!}"
           showNo=1
-          topCenterControl="{!!$actionButtons!!}"
+          topLeftControl="{!!$actionButtons!!}"
           topRightControl="{!! $perPage !!}"
           bottomRightControl="{!! $perPage !!}"
           rotate45Width="{{$rotate45Width}}"

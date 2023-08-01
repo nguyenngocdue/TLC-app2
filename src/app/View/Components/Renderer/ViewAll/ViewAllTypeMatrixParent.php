@@ -91,7 +91,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 if ($forExcel) $value = $document->status;
                 $result[] = (object)[
                     'value' => $value,
-                    'cell_title' => 'Open this document',
+                    'cell_title' => 'Open this document (' . $status['title'] . ')',
                     'cell_class' => "$bgColor $textColor",
                     'cell_href' => route($this->type . ".edit", $document->id),
                 ];
