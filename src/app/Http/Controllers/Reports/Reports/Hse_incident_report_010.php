@@ -24,36 +24,36 @@ class Hse_incident_report_010 extends Report_ParentReportController
     public function getSqlStr($modeParams)
     {
         // alias variable in SQL
-        $lti = 118;
-        $rwc = 119;
-        $mtc = 120;
-        $incident = 107;
-        $incidentProperty = 112;
-        $incidentOil = 114;
-        $nearMiss = 109;
+        $LTI = 118;
+        $RWC = 119;
+        $MTC = 120;
+        $INCIDENT = 107;
+        $INCIDENT_PROPERTY = 112;
+        $INCIDENT_OIL = 114;
+        $NEAR_MISS = 109;
 
-        $exceptStatusLti = 'new';
-        $exceptStatusRwc = 'new';
-        $exceptStatusMtc = 'new';
-        $exceptStatusIncident = 'new';
-        $exceptStatusNearMiss = 'new';
-        $exceptStatusLostDay = 'new';
+        $EXCEPT_STATUS_LTI = 'new';
+        $EXCEPT_STATUS_RWS = 'new';
+        $EXCEPT_STATUS_MTC = 'new';
+        $EXCEPT_STATUS_INCIDENT = 'new';
+        $EXCEPT_STATUS_NEAR_MISS = 'new';
+        $EXCEPT_STATUS_LOST_DAY = 'new';
 
-        $statusFirstAid = 'active';
-        $statusICShts = 'active';
-        $statusWalkthrough = 'closed';
-        $statusHrTraining = 'closed';
-        $statusExtraMetric = 'active';
+        $STATUS_FIRST_AID = 'active';
+        $STATUS_INSP_CHKLST = 'active';
+        $STATUS_WALKTHROUGH = 'closed';
+        $STATUS_HR_TRAINING = 'closed';
+        $STATUS_EXTRA_METRIC = 'active';
 
-        $hseInspTmplShtId = 1;
-        $trainingCourseId = 2;
-        
+        $HSE_INSP_CHKLST = 1;
+        $HSE_INDUCTION = 2;
+
         //params from user settings 
         $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();
         $currentYear = date('Y');
         $workplaceIds = isset($modeParams['workplace_id']) ? Report::removeNullValuesFromArray($modeParams['workplace_id']) : $dbWorkplaceIds;
         $workplaceIds = empty($inputArray) ? $dbWorkplaceIds : $workplaceIds;
-        
+
         $strWorkplaceIds = '(' . implode(',', $workplaceIds) . ')';
         $year = isset($modeParams['year']) ? $modeParams['year'] : $currentYear;
         // String SQL query
@@ -66,12 +66,12 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 t1 AS (
                     SELECT
                         SUBSTR(hseir.issue_datetime, 1, 7) AS hse_month,
-                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = $lti AND hseir.status != '$exceptStatusLti' THEN hseir.id END), 0) AS hseir_ltc_count_vote, 
-                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = $rwc AND hseir.status != '$exceptStatusRwc' THEN hseir.id END), 0) AS hseir_rwc_count_vote, 
-                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = $mtc AND hseir.status != '$exceptStatusMtc' THEN hseir.id END), 0) AS hseir_mtc_count_vote, 
-                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = $incident AND hseir.status != '$exceptStatusIncident' AND hseir.incident_doc_sub_type_id IN ($incidentProperty, $incidentOil) THEN hseir.id END), 0) AS hseir_incident_count_vote, 
-                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = $nearMiss AND hseir.status != '$exceptStatusNearMiss' THEN hseir.id END), 0) AS hseir_near_miss_count_vote, 
-                        NULLIF(SUM(CASE WHEN hseir.status != '$exceptStatusLostDay' THEN hseir.lost_days END), 0) AS hseir_lost_day_count_vote
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = $LTI AND hseir.status != '$EXCEPT_STATUS_LTI' THEN hseir.id END), 0) AS hseir_ltc_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = $RWC AND hseir.status != '$EXCEPT_STATUS_RWS' THEN hseir.id END), 0) AS hseir_rwc_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_sub_type_id = $MTC AND hseir.status != '$EXCEPT_STATUS_MTC' THEN hseir.id END), 0) AS hseir_mtc_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = $INCIDENT AND hseir.status != '$EXCEPT_STATUS_INCIDENT' AND hseir.incident_doc_sub_type_id IN ($INCIDENT_PROPERTY, $INCIDENT_OIL) THEN hseir.id END), 0) AS hseir_incident_count_vote, 
+                        NULLIF(COUNT(DISTINCT CASE WHEN hseir.incident_doc_type_id = $NEAR_MISS AND hseir.status != '$EXCEPT_STATUS_NEAR_MISS' THEN hseir.id END), 0) AS hseir_near_miss_count_vote, 
+                        NULLIF(SUM(CASE WHEN hseir.status != '$EXCEPT_STATUS_LOST_DAY' THEN hseir.lost_days END), 0) AS hseir_lost_day_count_vote
                     FROM hse_incident_reports hseir
                     WHERE 
                         hseir.work_area_id IN (SELECT id FROM temp_work_areas) 
@@ -86,7 +86,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     WHERE 
                         hsefa.work_area_id IN (SELECT id FROM temp_work_areas)
                         AND SUBSTR(hsefa.injury_datetime, 1, 4) = $year  
-                        AND hsefa.status = '$statusFirstAid'  
+                        AND hsefa.status = '$STATUS_FIRST_AID'  
                     GROUP BY SUBSTR(hsefa.injury_datetime, 1, 7)  
                 ),
                 t3 AS (
@@ -96,9 +96,9 @@ class Hse_incident_report_010 extends Report_ParentReportController
                                     FROM hse_insp_chklst_shts hseicshts
                                     WHERE 1 = 1
                                         AND hseicshts.workplace_id IN $strWorkplaceIds
-                                        AND hseicshts.hse_insp_tmpl_sht_id = $hseInspTmplShtId
+                                        AND hseicshts.hse_insp_tmpl_sht_id = $HSE_INSP_CHKLST
                                         AND SUBSTR(hseicshts.start_time, 1, 4) = $year
-                                        AND hseicshts.status = '$statusICShts'
+                                        AND hseicshts.status = '$STATUS_INSP_CHKLST'
                                     GROUP BY hse_month
                 ),
                                     t4 AS (
@@ -109,7 +109,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                                     WHERE 1 = 1
                                         AND hsew.workplace_id IN $strWorkplaceIds
                                         AND SUBSTR(hsew.walkthrough_datetime, 1, 4) = $year
-                                        AND hsew.status = '$statusWalkthrough'
+                                        AND hsew.status = '$STATUS_WALKTHROUGH'
                                     GROUP BY hse_month
                 ),
                 t5 AS (
@@ -126,7 +126,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 t6 AS (
                                     SELECT
                                         SUBSTR(hrt.training_datetime, 1, 7) AS hse_month,
-                                        NULLIF(COUNT( CASE WHEN hrtl.training_course_id = $trainingCourseId AND hrt.status = '$statusHrTraining' THEN hrt.id END),0) AS hrt_line_count 
+                                        NULLIF(COUNT( CASE WHEN hrtl.training_course_id = $HSE_INDUCTION AND hrt.status = '$STATUS_HR_TRAINING' THEN hrt.id END),0) AS hrt_line_count 
                                     FROM hr_trainings hrt, hr_training_lines hrtl
                                     WHERE 1 = 1
                                         AND hrt.training_location_id IN $strWorkplaceIds
@@ -145,7 +145,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     FROM hse_extra_metrics hseem
                     WHERE hseem.workplace_id IN $strWorkplaceIds
                         AND SUBSTR(hseem.metric_month, 1, 4) = $year
-                        AND hseem.status = '$statusExtraMetric'
+                        AND hseem.status = '$STATUS_EXTRA_METRIC'
                     GROUP BY hse_month
                 ),
                 wp_ids AS (
@@ -395,10 +395,10 @@ class Hse_incident_report_010 extends Report_ParentReportController
                     + $value['hseir_incident_count_vote']
                     + $value['hseir_near_miss_count_vote']) * 200000) / $value['work_hours'];
                 $value['trir'] = ($num = round($totalRecIncidentRate, 2)) ? $num : null;
-                if (!in_array($hseMonth, $hseMonths)){
+                if (!in_array($hseMonth, $hseMonths)) {
                     $value['work_hours'] = round($value['work_hours'], 2);
                     $data[] = $value;
-                } 
+                }
                 $hseMonths[] = $hseMonth;
             }
         }
@@ -422,7 +422,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $dataSource = Report::sortByKey($dataSource, 'hse_month', true);
         $dataFooter['year'] = null;
         $dataFooter['hse_month'] = 'YTD';
-        if($dataFooter['work_hours']) {
+        if ($dataFooter['work_hours']) {
             $dataFooter['trir'] = round((($dataFooter['hseir_ltc_count_vote']
                 + $dataFooter['hseir_rwc_count_vote']
                 + $dataFooter['hseir_mtc_count_vote']
