@@ -7,12 +7,31 @@ trait TableTraitFooter
     function makeOneFooter($column, $tableName, $dataSource)
     {
         $fieldName = $column['dataIndex'];
+        $footer = $column['footer'];
         $items = $dataSource->map(fn ($item) => is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName]);
-        $sum = round($items->sum(), 2);
+        switch ($footer) {
+            case 'agg_avg':
+            case 'agg_sum':
+                $sum = round($items->sum(), 2);
+                break;
+            default:
+                $sum = 0;
+                break;
+        }
+        switch ($footer) {
+            case 'agg_avg':
+                $count = $items->count();
+                $result = ($count) ?  $sum / $count : 0;
+                break;
+            default:
+                $result = $sum;
+                break;
+        }
+        $result = round($result, 2);
         // $sum = array_sum(array_column($dataSource->toArray(), $fieldName));
         $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr-6 py-0";
         $id = "{$tableName}[footer][{$fieldName}]";
-        return "<input id='$id' component='TraitFooter' value='$sum' readonly class='$class' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
+        return "<input id='$id' component='TraitFooter' value='$result' readonly class='$class' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
     }
 
     function makeFooter($columns, $tableName, $dataSource)

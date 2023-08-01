@@ -25,6 +25,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected $rotate45Width = 400;
     protected $tableTrueWidth = true;
     protected $headerTop = "[300px]";
+    protected $groupBy = null;
     // protected $xAxis = Date::class;
     /**
      * Create a new component instance.

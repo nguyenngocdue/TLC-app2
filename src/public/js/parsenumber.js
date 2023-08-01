@@ -3,9 +3,9 @@ function listenerSubmitForm(idForm) {
     var form = document.getElementById(idForm);
     form.addEventListener('submit', function (event) {
         $('button').prop('disabled', true);
-        $elements = ['input[component="controls/number2"]','input[component="editable/number4"'];
+        $elements = ['input[component="controls/number2"]', 'input[component="editable/number4"'];
         $elements.forEach((element) => numberRemoveCommaByElements(element));
-        
+
     });
 }
 const numberRemoveCommaByElements = (nameElement) => {
@@ -25,7 +25,7 @@ const parseNumber2 = (id, initValue) => {
             if (typeof value === 'number') value = value + '';
             const [a, b] = value.split(".")
             const formattedValue = a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            if (typeof b == 'string' && (b*1) !== 0 && b.length > 0) {
+            if (typeof b == 'string' && (b * 1) !== 0 && b.length > 0) {
                 return formattedValue + '.' + b.replace(/0+$/, '');
             }
             return formattedValue;
@@ -35,8 +35,8 @@ const parseNumber2 = (id, initValue) => {
     inputNumber.on('blur change', () => {
         const inputValue = inputNumber.val();
         const parsedValue = parserFn(inputValue);
-        console.log(parsedValue)
-        console.log(!isNaN(parsedValue))
+        // console.log(parsedValue)
+        // console.log(!isNaN(parsedValue))
         if (!isNaN(parsedValue)) {
             formattedValue = formatterFn(parsedValue);
             inputNumber.val(formattedValue);

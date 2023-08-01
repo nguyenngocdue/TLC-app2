@@ -29,6 +29,7 @@ return new class extends Migration
             $table->unique(['prod_order_id', 'prod_routing_link_id']);
             $table->integer('priority')->nullable();
             $table->double('total_hours')->nullable();
+            $table->double('worker_number')->nullable();
             $table->double('total_man_hours')->nullable();
             $table->dateTime('expected_start_at')->nullable();
             $table->dateTime('expected_finish_at')->nullable();

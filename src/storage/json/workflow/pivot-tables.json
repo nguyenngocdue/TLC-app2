@@ -92,7 +92,7 @@
     "datasource_hr_timesheet_line": {
         "name": "datasource_hr_timesheet_line",
         "filters": "picker_date{\r\n\"title\":\"Date\",\r\n\"allowClear\":true\r\n};\r\nsub_project_id{\r\n\"title\":\"Sub Project\",\r\n\"allowClear\":true,\r\n\"multiple\":true};\r\ndepartment_id{\r\n\"title\":\"Department\",\r\n\"allowClear\":true,\r\n\"multiple\":true,\r\n\"hasListenTo\":false\r\n};\r\nuser_id{\r\n\"title\":\"User\",\r\n\"allowClear\":true,\r\n\"multiple\":true\r\n};\r\nworkplace_id{\r\n\"title\":\"Workplace\",\r\n\"allowClear\":true,\r\n\"multiple\":true,\r\n\"hasListenTo\":false\r\n};\r\ncategory_id{\r\n\"title\":\"Category\",\r\n\"allowClear\":true,\r\n\"multiple\":true,\r\n\"hasListenTo\":false\r\n};",
-        "row_fields": "sub_project_id{\r\n\"column\":\"sub_projects.name\",\r\n    \"title\": \"Sub Project\",\r\n\"align\":\"left\"\r\n};\r\nlod_id{\r\n    \"column\": \"terms.name\",\r\n    \"title\": \"LOD\"\r\n};\r\ndepartment_id{\r\n    \"column\": \"departments.name\"\r\n};\r\ncategory_id{\r\n    \"column\": \"user_categories.name\"\r\n};",
+        "row_fields": "sub_project_id{\r\n\"column\":\"sub_projects.name\",\r\n    \"title\": \"Sub Project\",\r\n\"align\":\"left\"\r\n};\r\nlod_id{\r\n    \"column\": \"terms.name\",\r\n    \"title\": \"LOD\"\r\n};\r\ndepartment_id{\r\n    \"column\": \"departments.name\"\r\n};\r\ncategory_id{\r\n    \"column\": \"user_categories.name\"\r\n};\r\ntime_sheet_durations{\r\n\"title\":\"Durations\"\r\n};\r\ntime_sheet_durations_otr{\r\n\"title\":\"Duration OTR\"\r\n};\r\ntime_sheet_start_time{\r\n\"title\":\"Timesheet Start Time\"\r\n};\r\ndiscipline_id{\r\n\"column\":\"user_disciplines.name\"\r\n}",
         "column_fields": null,
         "value_index_fields": null,
         "data_fields": null,

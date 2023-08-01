@@ -21,12 +21,16 @@ function calculateFooterValue(operator, tableId, fieldName) {
         const name = tableId + "[" + fieldName + "][" + i + "]"
         switch (operator) {
             case 'agg_sum':
+            case 'agg_avg':
                 result += 1 * numberRemoveComma(getEById(name).val())
                 break
             default:
                 console.log("Unknown operator '" + operator + "'")
                 break
         }
+    }
+    if (operator == 'agg_avg') {
+        result = result / count
     }
     const footerName = tableId + "[footer][" + fieldName + "]"
     getEById(footerName).val(result.toFixed(2))
