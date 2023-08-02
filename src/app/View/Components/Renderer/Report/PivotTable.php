@@ -127,11 +127,11 @@ class PivotTable extends Component
             if (PivotReport::isEmptyArray($dataOutput)) {
                 $tableColumns = $this->makeTableColumnsWhenEmptyData($modeType);
             }
-        }
-        if (!$modeType) {
+        } elseif (!$modeType) {
             $tableColumns = $this->makeTableColumnsWhenEmptyModeType($linesData);
             $dataOutput = $dataOutput ?? $linesData;
         }
+        
 
         if ($isRawData) {
             $libs = LibPivotTables2::getFor($this->modeType);
