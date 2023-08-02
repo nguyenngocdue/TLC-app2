@@ -79,28 +79,32 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $result;
     }
 
+    protected function makeStatus($document, $forExcel)
+    {
+        $status = $this->statuses[$document->status] ?? null;
+        if (!is_null($status)) {
+            $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'];
+            $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']);
+            $value = $status['icon'] ? $status['icon'] : $document->status;
+            if ($forExcel) $value = $document->status;
+            $item = [
+                'value' => $value,
+                'cell_title' => 'Open this document (' . $status['title'] . ')',
+                'cell_class' => "$bgColor $textColor",
+                'cell_href' => route($this->type . ".edit", $document->id),
+            ];
+            return (object) $item;
+        } else {
+            // dump("Status not found: " . $document->status . " #" . $document->id);
+            return (object)['value' => $document->status . " ???",];
+        }
+    }
+
     function cellRenderer($cell, $dataIndex, $forExcel = false)
     {
         $result = [];
         foreach ($cell as $document) {
-            $status = $this->statuses[$document->status] ?? null;
-            if (!is_null($status)) {
-                $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'];
-                $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']);
-                $value = $status['icon'] ? $status['icon'] : $document->status;
-                if ($forExcel) $value = $document->status;
-                $result[] = (object)[
-                    'value' => $value,
-                    'cell_title' => 'Open this document (' . $status['title'] . ')',
-                    'cell_class' => "$bgColor $textColor",
-                    'cell_href' => route($this->type . ".edit", $document->id),
-                ];
-            } else {
-                // dump("Status not found: " . $document->status . " #" . $document->id);
-                $result[] = (object)[
-                    'value' => $document->status . " ???",
-                ];
-            }
+            $result[] = $this->makeStatus($document, $forExcel);
         }
         // dump($result);
         if (sizeof($result) == 1) return $result[0];
@@ -118,7 +122,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $params;
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     {
         return [];
     }
@@ -172,7 +176,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                     }
                 }
             }
-            $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis);
+            $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis, $forExcel);
             foreach ($metaObjects as $key => $metaObject)  $line[$key] = $metaObject;
             $result[] = $line;
         }

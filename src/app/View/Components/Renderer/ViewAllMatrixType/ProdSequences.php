@@ -8,7 +8,9 @@ use App\Models\Prod_sequence;
 use App\Models\Term;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateTimeConcern;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -149,21 +151,30 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return [
             ['dataIndex' => 'production_name',  'width' => 300,],
             ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50,],
+            ['dataIndex' => 'status', 'align' => 'center', 'width' => 50,],
             ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150,],
             ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150,],
             ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50,],
         ];
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     {
-        return [
+        $started_at = DateTimeConcern::convertForLoading("picker_datetime", $y->started_at);
+        $finished_at = DateTimeConcern::convertForLoading("picker_datetime", $y->finished_at);
+        $status_object = $this->makeStatus($y, false);
+        $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
+        $result = [
             'production_name' => $y->production_name,
             'quantity' => $y->quantity,
-            'started_at' => "22/12/2023",
-            'finished_at' => "22/01/2024",
-            'total_days' => 30,
+            'status' => $status_object,
+            'started_at' => substr($started_at, 0, 10),
+            'finished_at' =>  substr($finished_at, 0, 10),
+            // 'finished_at' => ($y->status === 'finished') ? substr($finished_at, 0, 10) : "",
+            'total_days' => $y->finished_at ? Carbon::parse($y->finished_at)->diffInDays($y->started_at) : "",
         ];
+
+        return $result;
     }
 
     function cellRenderer($cell, $dataIndex, $forExcel = false)
