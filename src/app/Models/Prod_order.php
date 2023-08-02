@@ -8,7 +8,8 @@ class Prod_order extends ModelExtended
 {
     protected $fillable = [
         "id", "slug", "name", "status", "production_name", "compliance_name", "description", "quantity",
-        "sub_project_id", "prod_routing_id", "status", "meta_type", "meta_id", "owner_id"
+        "sub_project_id", "prod_routing_id", "status", "meta_type", "meta_id", "owner_id",
+        "started_at", "finished_at",
     ];
 
     protected $table = 'prod_orders';
