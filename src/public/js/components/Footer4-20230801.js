@@ -51,10 +51,10 @@ function calculateFooterValue(tableId, fieldName, control) {
     const result = {}
     result['agg_none'] = '';
     result['agg_count_all'] = array.length;
-    result['agg_sum'] = array.reduce((accumulator, a) => accumulator + a, 0)
+    result['agg_sum'] = array.length ? array.reduce((accumulator, a) => accumulator + a, 0) : 0
     result['agg_avg'] = array.length ? (result['agg_sum'] / result['agg_count_all']) : 0
-    result['agg_min'] = array.reduce((acc, curr) => Math.min(acc, curr))
-    result['agg_max'] = array.reduce((acc, curr) => Math.max(acc, curr))
+    result['agg_min'] = array.length ? array.reduce((acc, curr) => Math.min(acc, curr)) : 0
+    result['agg_max'] = array.length ? array.reduce((acc, curr) => Math.max(acc, curr)) : 0
     result['agg_range'] = (result['agg_max'] - result['agg_min'])
     result['agg_median'] = median(array)
     // console.log(result)
