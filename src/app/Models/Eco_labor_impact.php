@@ -39,11 +39,11 @@ class Eco_labor_impact extends ModelExtended
             ['dataIndex' => 'eco_sheet_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ['dataIndex' => 'department_id'],
             ['dataIndex' => 'name'],
-            ['dataIndex' => 'head_count',],
-            ['dataIndex' => 'man_day',],
-            ['dataIndex' => 'labor_cost', 'footer' => 'agg_sum'],
-            ['dataIndex' => 'total_cost', 'footer' => 'agg_sum'],
-            ['dataIndex' => 'description'],
+            ['dataIndex' => 'head_count', 'cloneable' => true,],
+            ['dataIndex' => 'man_day', 'cloneable' => true,],
+            ['dataIndex' => 'labor_cost', 'cloneable' => true, 'footer' => 'agg_sum'],
+            ['dataIndex' => 'total_cost', 'cloneable' => true, 'footer' => 'agg_sum'],
+            ['dataIndex' => 'description', 'cloneable' => true,],
         ];
     }
 }

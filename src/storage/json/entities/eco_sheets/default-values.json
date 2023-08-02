@@ -270,7 +270,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "5",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -342,7 +342,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "5",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
