@@ -47,7 +47,7 @@
         <div class="mt-2 grid grid-cols-12 ">
             <div class="col-span-12 overflow-y-auto overflow-x-hidden h-screen">
                 <div class = "flex flex-wrap justify-center">
-                    <div class="grid 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 gap-2 grid-cols-1 font-semibold" calendar-container>
+                    <div class="grid 2xl:grid-cols-3 md:grid-cols-2 gap-2 grid-cols-1 font-semibold" calendar-container>
                     </div> 
                 </div>
             </div>
@@ -190,7 +190,7 @@
                     let index = valueWeek.indexOf(25);
                     let valueWeek_1 = valueWeek.slice(0, index + 1);
                     let valueWeek_2 = valueWeek.slice(index + 1);
-                    htmlWeekContent_1 = renderHtmlContentWeekForArrayDivide(valueWeek_1,month,yearCurrent,routeCreate,allTimesheet);
+                    htmlWeekContent_1 = renderHtmlContentWeekForArrayDivide(valueWeek_1,month,yearCurrent,routeCreate,allTimesheet,true);
                     htmlWeekContent_2 = renderHtmlContentWeekForArrayDivide(valueWeek_2,month,yearCurrent,routeCreate,allTimesheet);
                     htmlWeekContentAll += `<div class="grid grid-cols-7 gap-0 font-semibold">
                                                 ${htmlWeekContent_1}
@@ -235,21 +235,22 @@
         }
         
     }
-    function renderHtmlContentWeekForArrayDivide(array,month,year,routeCreate,allTimesheet) {
+    function renderHtmlContentWeekForArrayDivide(array,month,year,routeCreate,allTimesheet,marginLeft = false) {
         const lengthArr = array.length;
         let htmlDays = '';
         htmlDays = renderHtmlContentWeek(htmlDays,array,month);
         var dataCreate = genDataCreate(array,year,month);
         [url,classHover,id,bg_color,text_color,count_duplicate] = transformDataByTimeSheet(allTimesheet,array,month,year,routeCreate);
         var htmlCountDuplicate = count_duplicate > 1 ? `<x-renderer.badge>${count_duplicate}</x-renderer.badge>` : '';
+        margin = marginLeft ? 'mr-1' : '';
         let result =  url
-                    ? `<a href="${url}" title="#${id}" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')" class="relative ${classHover} col-span-${lengthArr} focus:outline-none text-${text_color} hover:text-${bg_color} bg-${bg_color} hover:bg-${text_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <div class="grid grid-cols-${lengthArr} gap-1 font-semibold text-center ">
+                    ? `<a href="${url}" title="#${id}" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')" class="relative ${classHover} col-span-${lengthArr} focus:outline-none text-${text_color} hover:text-${bg_color} bg-${bg_color} hover:bg-${text_color} focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 ${margin} dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <div class="grid grid-cols-${lengthArr} gap-1 font-semibold text-center">
                                 ${htmlDays}
                             </div>
                             ${htmlCountDuplicate}
                         </a>
-                        ` : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="${classHover} col-span-${lengthArr} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        ` : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="${classHover} col-span-${lengthArr} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 ${margin} dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                 <button  onclick="callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:'${ownerId}'}])" class="w-full grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-gray-800">
                                         ${htmlDays}
                                 </button>
