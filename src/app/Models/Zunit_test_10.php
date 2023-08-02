@@ -12,7 +12,8 @@ class Zunit_test_10 extends ModelExtended
     protected static $statusless = true;
 
     public static $eloquentParams = [
-        'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
+        // 'getCorrectiveActions' => ['hasMany', Hse_corrective_action::class, 'hse_incident_report_id'],
+        "getCorrectiveActions" => ['morphMany', Hse_corrective_action::class, 'correctable', 'correctable_type', 'correctable_id'],
         "getDiscipline1" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],
         "getUT1" => ['hasMany', Zunit_test_01::class, 'parent_id'],
         "getUT2" => ['hasMany', Zunit_test_02::class, 'parent_id'],
