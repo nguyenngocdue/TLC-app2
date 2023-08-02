@@ -189,11 +189,11 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_worker_number": {
-        "name": "_worker_number",
-        "column_name": "worker_number",
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
         "column_type": "double",
-        "label": "Man-power",
+        "label": "Total Hours",
         "control": "number",
         "align": "",
         "col_span": "4",
@@ -208,11 +208,11 @@
         "duplicatable": "",
         "new_line": ""
     },
-    "_total_hours": {
-        "name": "_total_hours",
-        "column_name": "total_hours",
+    "_worker_number": {
+        "name": "_worker_number",
+        "column_name": "worker_number",
         "column_type": "double",
-        "label": "Total Hours",
+        "label": "Man-power",
         "control": "number",
         "align": "",
         "col_span": "4",

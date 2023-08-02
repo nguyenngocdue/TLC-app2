@@ -357,7 +357,8 @@ const addANewLineFull = (params) => {
                     break
                 case 'picker-all4':
                     renderer = "<input id='" + id + "' name='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"
-                    renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
+                    const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
+                    renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeFooterValue) + '</script>'
                     break
                 case 'attachment4':
                     renderer = '<div class="to be implemented"></div>'

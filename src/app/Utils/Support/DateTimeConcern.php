@@ -11,7 +11,7 @@ use DateTime;
 
 class DateTimeConcern
 {
-    private static function getTz()
+    public static function getTz()
     {
         return CurrentUser::get()->timezone ??  7;
     }
@@ -269,11 +269,13 @@ class DateTimeConcern
         return str_replace(' ', 'T', $timestamp) . 'Z';
     }
 
-    public static function formatTimeForPH($item){
+    public static function formatTimeForPH($item)
+    {
         $standardStartTime = Workplace::findFromCache($item->workplace_id)->standard_start_time;
-        return $item->ph_date . ' '.$standardStartTime;
+        return $item->ph_date . ' ' . $standardStartTime;
     }
-    public static function formatTimestampFromDBtoJSForPH($item){
+    public static function formatTimestampFromDBtoJSForPH($item)
+    {
         $timestamp = static::formatTimeForPH($item);
         return static::formatTimestampFromDBtoJS($timestamp);
     }
@@ -351,9 +353,10 @@ class DateTimeConcern
 
 
 
-    public static function calTimestampEndFromStartTimeAndDurationForPH($item){
+    public static function calTimestampEndFromStartTimeAndDurationForPH($item)
+    {
         $startTime = static::formatTimeForPH($item);
-        return static::calTimestampEndFromStartTimeAndDuration($startTime,($item->ph_hours * 60 + 60));
+        return static::calTimestampEndFromStartTimeAndDuration($startTime, ($item->ph_hours * 60 + 60));
     }
 
     /**
@@ -414,13 +417,13 @@ class DateTimeConcern
     public static function getDayHiddenForDayIndexWeek($start, $end = 0)
     {
         $value = [1, 2, 3, 4, 5, 6, 0];
-        if($end == 0){
-            $input = range($start,7);
+        if ($end == 0) {
+            $input = range($start, 7);
             $hasValue7 = array_search(7, $input);
             if ($hasValue7) {
                 $input[$hasValue7] = 0;
             }
-        }else{
+        } else {
             $input = range($start, $end);
         }
         $result = array_diff($value, $input);

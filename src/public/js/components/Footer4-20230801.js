@@ -24,15 +24,30 @@ const median = (arr) => {
     }
 };
 
-function calculateFooterValue(operator, tableId, fieldName) {
+function calculateFooterValue(operator, tableId, fieldName, control) {
     const aggList = ['agg_none', 'agg_count_all', 'agg_sum', 'agg_avg', 'agg_median', 'agg_min', 'agg_max', 'agg_range',];
     const count = getAllRows(tableId).length
     // console.log(operator, tableId, fieldName, count)
     const array = []
     for (let i = 0; i < count; i++) {
         const name = tableId + "[" + fieldName + "][" + i + "]"
-        array.push(1 * numberRemoveComma(getEById(name).val()))
+        const value = getEById(name).val()
+        switch (control) {
+            case 'picker_date':
+                array.push(moment(getEById(name).val(), "DD/MM/YYYY") / 1000) //<<convert milliseconds to seconds
+                break
+            case 'picker_datetime':
+                array.push(moment(getEById(name).val(), "DD/MM/YYYY HH:mm") / 1000) //<<convert milliseconds to seconds
+                break
+            case 'picker_time':
+                array.push(moment(getEById(name).val(), "HH:mm") / 1000) //<<convert milliseconds to seconds
+                break
+            default:
+                array.push(1 * numberRemoveComma(value))
+                break
+        }
     }
+    // console.log(array)
     const result = {}
     result['agg_none'] = '';
     result['agg_count_all'] = array.length;
@@ -44,11 +59,43 @@ function calculateFooterValue(operator, tableId, fieldName) {
     result['agg_median'] = median(array)
     // console.log(result)
 
+    switch (control) {
+        case 'picker_date':
+            result['agg_avg'] = moment.unix(result['agg_avg']).format("DD/MM/YYYY");
+            result['agg_min'] = moment.unix(result['agg_min']).format("DD/MM/YYYY");
+            result['agg_max'] = moment.unix(result['agg_max']).format("DD/MM/YYYY");
+            result['agg_median'] = moment.unix(result['agg_median']).format("DD/MM/YYYY");
+            result['agg_sum'] = "maybe_meaningless";
+            break
+        case 'picker_datetime':
+            result['agg_avg'] = moment.unix(result['agg_avg']).format("DD/MM/YYYY HH:mm");
+            result['agg_min'] = moment.unix(result['agg_min']).format("DD/MM/YYYY HH:mm");
+            result['agg_max'] = moment.unix(result['agg_max']).format("DD/MM/YYYY HH:mm");
+            result['agg_median'] = moment.unix(result['agg_median']).format("DD/MM/YYYY HH:mm");
+            result['agg_sum'] = "maybe_meaningless";
+            break
+        case 'picker_time':
+            result['agg_avg'] = moment.unix(result['agg_avg']).format("HH:mm");
+            result['agg_min'] = moment.unix(result['agg_min']).format("HH:mm");
+            result['agg_max'] = moment.unix(result['agg_max']).format("HH:mm");
+            result['agg_median'] = moment.unix(result['agg_median']).format("HH:mm");
+            result['agg_sum'] = "maybe_meaningless";
+            break
+        default:
+            result['agg_avg'] = result['agg_avg'].toFixed(2)
+            result['agg_min'] = result['agg_min'].toFixed(2)
+            result['agg_max'] = result['agg_max'].toFixed(2)
+            result['agg_median'] = result['agg_median'].toFixed(2)
+            result['agg_sum'] = result['agg_sum'].toFixed(2)
+            break
+    }
+
     for (let i = 0; i < aggList.length; i++) {
         const agg = aggList[i]
         const footerName = tableId + "[footer][" + fieldName + "][" + agg + "]"
         // console.log(footerName, result[agg])
-        getEById(footerName).val(agg == 'agg_none' ? '' : (result[agg] * 1).toFixed(2))
+        getEById(footerName).val(agg == 'agg_none' ? '' : result[agg])
+        // getEById(footerName).val(agg == 'agg_none' ? '' : (result[agg] * 1).toFixed(2))
         getEById(footerName).trigger('change')
     }
 }
@@ -60,10 +107,12 @@ function changeFooterValue(object, tableId) {
     const { columns } = table
     for (let i = 0; i < columns.length; i++) {
         const column = columns[i]
-        const { footer, dataIndex } = column
+        // console.log(column)
+        const { footer, dataIndex, properties = {} } = column
         // console.log(footer)
+        const { control = '' } = properties
         if (dataIndex == fieldName && footer !== undefined) {
-            calculateFooterValue(footer, tableId, fieldName)
+            calculateFooterValue(footer, tableId, fieldName, control)
         }
     }
     // console.log(fieldName, table);
