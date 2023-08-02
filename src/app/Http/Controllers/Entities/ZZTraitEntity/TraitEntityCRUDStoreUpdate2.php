@@ -19,6 +19,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitSendNotificationAndMail;
 	use TraitEventInspChklst;
 	use TraitEntityUpdateUserSettings;
+	use TraitUpdatedProdSequenceEvent;
 
 	private $debugForStoreUpdate = false;
 
@@ -204,7 +205,7 @@ trait TraitEntityCRUDStoreUpdate2
 		//Fire the event "Updated New Document"
 		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment']);
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
-		event(new UpdatedSequenceBaseEvent($this->data,$theRow->id));
+		$this->eventUpdatedProdSequence($theRow->id);
 		if ($request->input('redirect_back_to_last_page')) return redirect()->back();
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
