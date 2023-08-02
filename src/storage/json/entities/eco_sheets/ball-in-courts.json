@@ -2,17 +2,17 @@
     "new": {
         "name": "new",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "getMonitors1()"
     },
     "pending_endorsement": {
         "name": "pending_endorsement",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "getMonitors1()"
     },
     "endorsement_rejected": {
         "name": "endorsement_rejected",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "getMonitors1()"
     },
     "pending_review": {
         "name": "pending_review",
