@@ -34,6 +34,7 @@ class SendMailChangeStatus extends Mailable
         $oldStatus = $data['previousValue']['status'];
         $newStatus = $data['currentValue']['status'];
         $appName = config("company.name");
+        $isChangeStatus = $data['isChangeStatus'];
         $changeAssignee = $data['changeAssignee'];
         $changeMonitor = $data['changeMonitor'];
         return $this->subject($data['subject'])->markdown('emails.mail-change-status', [
@@ -42,6 +43,7 @@ class SendMailChangeStatus extends Mailable
             'action' => $data['action'],
             'oldStatus' => $oldStatus,
             'newStatus' => $newStatus,
+            'isChangeStatus' => $isChangeStatus,
             'changeAssignee' => $changeAssignee,
             'changeMonitor' => $changeMonitor,
         ]);

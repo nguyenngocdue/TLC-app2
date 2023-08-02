@@ -1,10 +1,12 @@
 <x-mail::message>
 # Dear {{$name}}, 
+@if($isChangeStatus)
 This document change status from 
 <x-mail::status>{{$oldStatus}}</x-mail::status>
  to 
 <x-mail::status>{{$newStatus}}</x-mail::status>
 <br>
+@endif
 @if($changeAssignee)
 This document change assignee from 
 <x-mail::status>{{$changeAssignee['previous']}}</x-mail::status>
