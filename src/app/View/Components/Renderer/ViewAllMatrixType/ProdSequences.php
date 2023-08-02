@@ -10,6 +10,7 @@ use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ProdSequences extends ViewAllTypeMatrixParent
@@ -147,7 +148,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         return [
             ['dataIndex' => 'production_name',  'width' => 300,],
-            ['dataIndex' => 'quantity', 'align' => 'center', 'width' => 50, 'align' => 'right'],
+            ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50,],
+            ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150,],
+            ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150,],
+            ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50,],
         ];
     }
 
@@ -156,6 +160,9 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return [
             'production_name' => $y->production_name,
             'quantity' => $y->quantity,
+            'started_at' => "22/12/2023",
+            'finished_at' => "22/01/2024",
+            'total_days' => 30,
         ];
     }
 
@@ -167,9 +174,12 @@ class ProdSequences extends ViewAllTypeMatrixParent
             case "total_uom":
                 return $doc->{$dataIndex};
             case "start_date":
+                return ($date = $doc->{$dataIndex}) ? date(Constant::FORMAT_DATE_ASIAN, strtotime($date)) : "";
             case "end_date":
-                $date = $doc->{$dataIndex};
-                return $date ? date(Constant::FORMAT_DATE_ASIAN, strtotime($date)) : "";
+                if (in_array($doc->status, ['finished'])) {
+                    return ($date = $doc->{$dataIndex}) ? date(Constant::FORMAT_DATE_ASIAN, strtotime($date)) : "";
+                }
+                return "";
             case "man_power":
                 return $doc->worker_number;
             case "total_mins":
