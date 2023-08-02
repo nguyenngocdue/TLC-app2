@@ -92,7 +92,7 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Created New Document"
-		$this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus,$toastrResult);
+		$this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $toastrResult);
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -135,6 +135,17 @@ trait TraitEntityCRUDStoreUpdate2
 			// dump($request);
 			// dump($rules);
 			// dd();
+
+			//START OF TABLE BLOCK
+			//This handle table block is moved from the bottom to before validate fields
+			//As if it was, the datetime picker would apply YYYY-MM-DD format and cause validation issues for the next submission
+			$toastrResult = [];
+			$lineResult = true;
+			if (!$isFakeRequest) {
+				[$toastrResult, $lineResult] = $this->handleEditableTables($request, $props['editable_table'], $theRow->id);
+			}
+			//END OF TABLE BLOCK
+
 			$request->validate($rules, ["date_format" => "The :attribute must be correct datetime format."]);
 			$this->postValidationForDateTime($request, $props);
 		} catch (ValidationException $e) {
@@ -164,12 +175,15 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
-		
-		$toastrResult = [];
-		$lineResult = true;
-		if (!$isFakeRequest) {
-			[$toastrResult, $lineResult] = $this->handleEditableTables($request, $props['editable_table'], $objectId);
-		}
+
+		//START OF TABLE BLOCK
+		// $toastrResult = [];
+		// $lineResult = true;
+		// if (!$isFakeRequest) {
+		// 	[$toastrResult, $lineResult] = $this->handleEditableTables($request, $props['editable_table'], $objectId);
+		// }
+		//END OF TABLE BLOCK
+
 		try {
 			//If all tables are created or updated, change the status of the item
 			if ($lineResult) {
@@ -187,8 +201,8 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		$this->removeAttachmentForFields($fieldForEmailHandler,$props['attachment']);
-		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler,$newStatus,$toastrResult);
+		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment']);
+		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
 		if ($request->input('redirect_back_to_last_page')) return redirect()->back();
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
