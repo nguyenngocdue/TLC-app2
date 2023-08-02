@@ -150,7 +150,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return [
             ['dataIndex' => 'production_name',  'width' => 300,],
             ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50,],
-            ['dataIndex' => 'status', 'align' => 'center', 'width' => 50,],
+            ['dataIndex' => 'status', "title" => "Summary", 'align' => 'center', 'width' => 50, 'colspan' => 4],
             ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150,],
             ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150,],
             ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50,],
@@ -216,6 +216,13 @@ class ProdSequences extends ViewAllTypeMatrixParent
             if ($line['columnIndex'] == 'start_date') $result[$line['dataIndex']] = "Start";
             if ($line['columnIndex'] == 'end_date') $result[$line['dataIndex']] = "Finish";
         }
+
+        //For Meta columns
+        $result['status'] = "Status";
+        $result['started_at'] = "Started At";
+        $result['finished_at'] = "Finished At";
+        $result['total_days'] = "Total Days";
+
         foreach ($result as &$row) {
             $row = "<div class='p-1 text-center'>" . $row . "</div>";
         }
