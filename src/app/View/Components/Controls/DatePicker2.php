@@ -36,6 +36,7 @@ class DatePicker2 extends Component
                 'name' => $this->name,
                 'value' => $this->value,
                 'readOnly' => $this->readOnly,
+                'control' => $this->dateTimeType,
             ]
         );
     }

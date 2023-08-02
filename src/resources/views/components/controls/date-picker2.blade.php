@@ -6,7 +6,7 @@
       value="{{$value}}" name={{$name}} id={{$name}} 
       {{$readOnly ? "" : "datepicker" }}
       datepicker-autohide 
-      component="controls/datepicker3"
+      component="controls/{{$control}}"
       type='text'
       autocomplete="off"
       {{$readOnly ? 'readonly' : ''}}
