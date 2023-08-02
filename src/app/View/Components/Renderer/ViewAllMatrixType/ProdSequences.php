@@ -28,8 +28,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected $dataIndexY = "prod_order_id";
     // protected $rotate45Width = 400;
     protected $tableTrueWidth = true;
-    protected $headerTop = "10";
-    // protected $headerTop = "[300px]";
+    protected $headerTop = "[60px]";
     protected $groupBy = null;
     protected $mode = 'detail';
     /**

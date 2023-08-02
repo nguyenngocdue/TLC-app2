@@ -1273,7 +1273,8 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": "<i class=\"fa-duotone fa-calendar\"><\/i>"
+        "icon": "<i class=\"fa-duotone fa-calendar\"><\/i>",
+        "disallowed_direct_creation": "true"
     },
     "project": {
         "name": "project",
