@@ -19,6 +19,6 @@
         <x-renderer.project.project-overview title="WIRs by Disciplines" table="{{$table}}" id="{{$projectId}}"></x-renderer.project.project-overview>
     </div> --}}
 
-    <x-dashboards.widget-groups table="{{$table}}" projectId="{{$projectId}}"/>
+    {{-- <x-dashboards.widget-groups table="{{$table}}" projectId="{{$projectId}}"/> --}}
 </div>
 @endsection

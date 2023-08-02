@@ -17,8 +17,8 @@
     <x-dashboards.my-view-groups />
     <x-elapse title="My View: "/>
     
-    <x-dashboards.widget-groups />
-    <x-elapse title="Widget group: "/>
+    {{-- <x-dashboards.widget-groups /> --}}
+    {{-- <x-elapse title="Widget group: "/> --}}
 </div>
 
 @endsection

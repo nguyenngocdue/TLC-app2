@@ -170,7 +170,7 @@ class MyView extends Component
         $apps = array_filter($apps, fn ($app) => CurrentUser::hasPermissionTo("read-" . Str::plural($app['name'])));
 
         $result = $this->getItems($apps, $viewType);
-
+        // $result = [...$result, ...$result, ...$result, ...$result];
         // dd($result);
         return $result;
     }
