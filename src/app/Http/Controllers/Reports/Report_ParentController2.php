@@ -28,6 +28,8 @@ abstract class Report_ParentController2 extends Controller
     protected $pageLimit = 10;
     protected $typeView = '';
     protected $modeType = '';
+    protected $rotate45Width = false;
+
 
     public function getType()
     {
@@ -183,6 +185,7 @@ abstract class Report_ParentController2 extends Controller
             'tableDataSource'=> $dataSource,
             'tableDataHeader' => $tableDataHeader,
             'tableTrueWidth' => $this->tableTrueWidth,
+            'rotate45Width' => $this->rotate45Width,
             'topTitle' => $this->getMenuTitle(),
         ]);
     }
