@@ -1,4 +1,5 @@
-<x-renderer.view-all.view-all-type-matrix-filter :type="$type" :dataSource="$filterDataSource" :viewportParams="$viewportParams"/>
+{!! $filterRenderer !!}
+
 <x-renderer.table 
           showPaginationTop="true"
           :columns="$columns"
@@ -8,7 +9,7 @@
           groupByLength="{{$groupByLength}}"
           bottomLeftControl="{!! $footer !!}"
           showNo=1
-          topCenterControl="{!!$actionButtons!!}"
+          topLeftControl="{!!$actionButtons!!}"
           topRightControl="{!! $perPage !!}"
           bottomRightControl="{!! $perPage !!}"
           rotate45Width="{{$rotate45Width}}"

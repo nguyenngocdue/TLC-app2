@@ -9,6 +9,8 @@ use App\Utils\Support\CurrentUser;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -28,6 +30,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $allowCreation = true;
     protected $tableTrueWidth = false;
     protected $headerTop = '';
+    protected $mode = 'status_only';
     /**
      * Create a new component instance.
      *
@@ -46,6 +49,11 @@ abstract class ViewAllTypeMatrixParent extends Component
     }
 
     protected function getXAxis()
+    {
+        return [];
+    }
+
+    protected function getXAxisExtraColumns()
     {
         return [];
     }
@@ -71,7 +79,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $result;
     }
 
-    function cellRenderer($cell, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $forExcel = false)
     {
         $result = [];
         foreach ($cell as $document) {
@@ -83,7 +91,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 if ($forExcel) $value = $document->status;
                 $result[] = (object)[
                     'value' => $value,
-                    'cell_title' => 'Open this document',
+                    'cell_title' => 'Open this document (' . $status['title'] . ')',
                     'cell_class' => "$bgColor $textColor",
                     'cell_href' => route($this->type . ".edit", $document->id),
                 ];
@@ -120,6 +128,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $dataSource = $this->reIndexDataSource($dataSource);
         $result = [];
         $routeCreate = route($this->type . '.storeEmpty');
+        $extraColumns = $this->getXAxisExtraColumns();
 
         foreach ($yAxis as $y) {
             $yId = $y->id;
@@ -136,6 +145,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 $meta['caller'] = 'view-all-matrix';
                 $metaStr = json_encode($meta);
                 foreach ($xAxis as $x) {
+                    if (isset($x['isExtra']) && $x['isExtra']) continue;
                     $xId = $x['dataIndex'];
                     $xClass = $x['column_class'] ?? "";
                     $paramStr = $this->getCreateNewParams($x, $y);
@@ -154,7 +164,12 @@ abstract class ViewAllTypeMatrixParent extends Component
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 if (isset($dataSource[$yId][$xId])) {
-                    $line[$xId] = $this->cellRenderer($dataSource[$yId][$xId], $forExcel);
+                    $line[$xId] = $this->cellRenderer($dataSource[$yId][$xId], 'status', $forExcel);
+                    if ($this->mode == 'detail') {
+                        foreach ($extraColumns as $column) {
+                            $line[$xId . "_" . $column] = $this->cellRenderer($dataSource[$yId][$xId], $column, $forExcel);
+                        }
+                    }
                 }
             }
             $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis);
@@ -207,6 +222,20 @@ abstract class ViewAllTypeMatrixParent extends Component
             </div>";
     }
 
+    private function getFilter()
+    {
+        $filterDataSource  = $this->getFilterDataSource();
+        $viewportParams = $this->getViewportParams();
+        //qaqc_wirs.blade.php //FULL TEXT SEARCH HERE
+        $params = ["type" => $this->type, "dataSource" => $filterDataSource, "viewportParams" => $viewportParams,];
+        $viewName = 'components.renderer.view-all-matrix-filter.' . $this->type;
+        if (view()->exists($viewName)) {
+            return Blade::render('<x-renderer.view-all-matrix-filter.' . $this->type . ' :type="$type" :dataSource="$dataSource" :viewportParams="$viewportParams"/>', $params);
+        } else {
+            return "Unknown type $this->type in type matrix filter (ViewAllTypeMatrixFilter)";
+        }
+    }
+
     public function render()
     {
         [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading] = $this->getViewAllMatrixParams();
@@ -217,7 +246,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $dataSource = $this->paginate($dataSource, $per_page, $page);
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
-        // $modelPathMatrix = get_class($this);
+        $filterRenderer = $this->getFilter();
         $actionButtons = "<x-form.action-button-group-view-matrix type='$this->type' groupBy='$this->groupBy' groupByLength='$this->groupByLength'/>";
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
@@ -226,8 +255,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'dataSource' => $dataSource,
                 'dataHeader' => $xAxis2ndHeading,
                 'type' => $this->type,
-                'filterDataSource' => $this->getFilterDataSource(),
-                'viewportParams' => $this->getViewportParams(),
+                'filterRenderer' => $filterRenderer,
                 'footer' => $footer,
                 'perPage' => $perPage,
                 'rotate45Width' => $this->rotate45Width,

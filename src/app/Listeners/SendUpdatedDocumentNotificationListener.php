@@ -2,24 +2,16 @@
 
 namespace App\Listeners;
 
-use App\Events\BroadcastEvents\BroadcastNotificationEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Mail\SendMailChangeStatus;
-use App\Models\Logger;
 use App\Models\User;
-use App\Notifications\UpdatedNotification;
-use App\Utils\Constant;
 use App\Utils\SendMaiAndNotification\CheckDefinitionsNew;
 use App\Utils\Support\Json\BallInCourts;
-use App\Utils\Support\JsonControls;
-use Barryvdh\Debugbar\Twig\Extension\Dump;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -58,17 +50,19 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
             $currentStatus = $currentValue['status'];
             [$userAssigneePrevious,$userMonitorsPrevious,$userAssigneeCurrent,$userMonitorsCurrent] = 
                 $this->getUserIdsAssigneeAndMonitors($ballInCourts, $previousValue, $currentValue,$previousStatus,$currentStatus);
-            [$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors] = 
+            [$isChangeStatus,$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors] = 
                 $this->handleBallInCourtForAssigneeAndMonitors($previousStatus,$currentStatus,$userAssigneePrevious,
                 $userMonitorsPrevious,$userAssigneeCurrent,$userMonitorsCurrent);
-            $this->sendMail($userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors,
-            $type,$id,$previousValue,$currentValue,$userAssigneePrevious,$userMonitorsPrevious,$userMonitorsCurrent);
+                if($isChangeStatus || $isChangeAssignee || $isChangeMonitors){
+                    $this->sendMail($isChangeStatus,$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors,
+                    $type,$id,$previousValue,$currentValue,$userAssigneePrevious,$userMonitorsPrevious,$userMonitorsCurrent);
+                }
         } catch (\Throwable $th) {
             Toastr::warning($th->getMessage(), 'Send mail failed');
         }
         
     }
-    private function sendMail($userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors
+    private function sendMail($isChangeStatus,$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors
     ,$type,$id,$previousValue,$currentValue,$userAssigneePrevious,$userMonitorsPrevious,$userMonitorsCurrent){
         $user = $userAssigneeCurrent ? User::findFromCache($userAssigneeCurrent) : User::findFromCache(1);
         [$href,$subjectMail] = $this->getRouteAndSubjectMail($type,$id);
@@ -83,12 +77,12 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
                 'name' => $user['name'],
                 'subject' => $subjectMail,
                 'action' => url($href),
+                'isChangeStatus' => $isChangeStatus,
                 'changeAssignee' => $isChangeAssignee ? ['previous' => $nameOldAssignee, 'current' => $user['name']] : null ,
                 'changeMonitor' => $isChangeMonitors ? ['previous' => $stringNameMonitorsPrevious, 'current' => $stringNameMonitorsCurrent] : null,
                 'currentValue' => $currentValue,
                 'previousValue' => $previousValue,
             ]));
-
     }
     private function getUserIdsAssigneeAndMonitors($ballInCourts, $previousValue, $currentValue,$previousStatus,$currentStatus){
         $ballInCourtPrevious = $ballInCourts[$previousStatus];
@@ -120,7 +114,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
             $userAssigneePrevious,$userAssigneeCurrent,$userMonitorsPrevious,
             $userMonitorsCurrent,$isChangeStatus);
         }
-        return [$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors];
+        return [$isChangeStatus,$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors];
     }
     private function handleProcessSendMailByBallInCourt(&$listCc,&$isChangeAssignee,&$isChangeMonitors,
     $userAssigneePrevious,$userAssigneeCurrent,$userMonitorsPrevious,

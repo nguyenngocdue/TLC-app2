@@ -9,10 +9,11 @@ class Prod_sequence extends ModelExtended
 {
     protected $fillable = [
         "prod_order_id", "prod_routing_link_id",
-        "status", "total_hours", "total_man_hours",
-        "expected_start_at", "expected_finish_at",
+        "status", "expected_start_at", "expected_finish_at",
         "priority", "uom_id", "total_uom", "owner_id",
         "sub_project_id", "prod_routing_id",
+        "total_hours", "worker_number", "total_man_hours",
+        "start_date", "end_date",
     ];
 
     protected $table = 'prod_sequences';

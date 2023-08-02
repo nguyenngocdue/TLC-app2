@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait TraitSendNotificationAndMail
 {
-    private function eventCreatedNotificationAndMail($fields, $id, $status,$toastrResult)
+    private function eventCreatedNotificationAndMail($fields, $id, $status, $toastrResult)
     {
         if ($status && empty($toastrResult)) {
             $fields = $this->addEntityType($fields, 'id', $id);
@@ -21,16 +21,16 @@ trait TraitSendNotificationAndMail
             try {
                 $currentValue = $this->addEntityType($fields, 'entity_type', $this->type);
                 $this->insertLogger($currentValue, null, Auth::id(), ($this->data ?? $this->modelPath));
-                if(!($this->ignoreSendMail())){
-                    event(new CreateNewDocumentEvent($currentValue = $currentValue,$this->type, ($this->data ?? $this->modelPath)));
+                if (!($this->ignoreSendMail())) {
+                    event(new CreateNewDocumentEvent($currentValue = $currentValue, $this->type, ($this->data ?? $this->modelPath)));
                 }
             } catch (\Throwable $th) {
-                dd($th->getMessage());
+                // dd($th->getMessage());
                 Toastr::error($th->getFile() . " " . $th->getLine() . " in " . __FUNCTION__, $th->getMessage());
             }
         }
     }
-    private function eventUpdatedNotificationAndMail($previousValue, $fields, $status,$toastrResult)
+    private function eventUpdatedNotificationAndMail($previousValue, $fields, $status, $toastrResult)
     {
         if ($status && empty($toastrResult)) {
             try {
@@ -38,7 +38,7 @@ trait TraitSendNotificationAndMail
                 $currentValue = $this->addEntityType($fields, 'entity_type',  $this->type);
                 $userCurrentId = Auth::id();
                 $this->insertLogger($currentValue, $previousValue, $userCurrentId, $this->data, 'update');
-                if(!($this->ignoreSendMail())){
+                if (!($this->ignoreSendMail())) {
                     event(new UpdatedDocumentEvent(
                         $previousValue = $previousValue,
                         $currentValue = $currentValue,
@@ -52,7 +52,8 @@ trait TraitSendNotificationAndMail
             }
         }
     }
-    private function ignoreSendMail(){
+    private function ignoreSendMail()
+    {
         return LibApps::getFor($this->type)['do_not_send_notification_mails'] ?? false;
     }
     private function getPreviousValue($fields, $item)

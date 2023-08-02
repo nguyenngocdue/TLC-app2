@@ -10,7 +10,8 @@
         name="{{$name}}" 
         placeholder="{{$placeholder}}" 
         value="{{old($name, ($value))}}"
-        onchange='onChangeDropdown2({name: "{{$name}}"})'
+        {{-- onchange='onChangeDropdown2({name: "{{$name}}"})' --}}
+        onchange="onChangeDropdown2({name: '{{$name}}' })"
         onkeypress="{{$onKeyPress}}"
         class='{{$classList}} {{$icon ? 'pl-10' : ''}} {{$readOnly ? 'readonly' : ''}}'
         {{$readOnly ? 'readonly' : ''}} 

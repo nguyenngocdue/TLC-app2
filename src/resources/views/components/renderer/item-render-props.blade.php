@@ -139,31 +139,31 @@
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_time')
-                    <x-controls.text2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} placeholder="HH:MM" icon="fa-duotone fa-clock" />
+                    <x-controls.text2 name={{$columnName}} component="controls/picker_time" value={{$value}} readOnly={{$readOnly}} placeholder="HH:MM" icon="fa-duotone fa-clock" />
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_datetime')
-                    <x-controls.text2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" />
+                    <x-controls.text2 name={{$columnName}} component="controls/picker_datetime" value={{$value}} readOnly={{$readOnly}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" />
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_date')
-                    <x-controls.date-picker2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
+                    <x-controls.date-picker2 name={{$columnName}} component="controls/picker_date" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_week')
-                    <x-controls.text2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} placeholder="W01/YYYY" icon="fa-solid fa-calendar-day" />
+                    <x-controls.text2 name={{$columnName}} component="controls/picker_week" value={{$value}} readOnly={{$readOnly}} placeholder="W01/YYYY" icon="fa-solid fa-calendar-day" />
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_month')
-                    <x-controls.text2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} placeholder="MM/YYYY" icon="fa-solid fa-calendar-day" />
+                    <x-controls.text2 name={{$columnName}} component="controls/picker_month" value={{$value}} readOnly={{$readOnly}} placeholder="MM/YYYY" icon="fa-solid fa-calendar-day" />
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_quarter')
-                    <x-controls.text2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} placeholder="Q1/YYYY" icon="fa-solid fa-calendar-day" />
+                    <x-controls.text2 name={{$columnName}} component="controls/picker_quarter" value={{$value}} readOnly={{$readOnly}} placeholder="Q1/YYYY" icon="fa-solid fa-calendar-day" />
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_year')
-                    <x-controls.text2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} placeholder="YYYY" icon="fa-solid fa-calendar-day" />
+                    <x-controls.text2 name={{$columnName}} component="controls/picker_year" value={{$value}} readOnly={{$readOnly}} placeholder="YYYY" icon="fa-solid fa-calendar-day" />
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('attachment')
@@ -208,7 +208,7 @@
                     <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
                     @break
                     @endswitch
-                    {{$controlExtra}}
+                    <div component="control-extra" class="text-gray-600 text-sm">{{$controlExtra}}</div>
                 </div>
                 @endif
             </div>

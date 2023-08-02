@@ -6,7 +6,8 @@
     type='text' 
     {{$readOnly ? 'readonly' : ''}}
     value='{{old($name, $value)}}' 
-    onchange='onChangeDropdown2({name: "{{$name}}"})'
+    {{-- onchange='onChangeDropdown2({name: "{{$name}}"})' --}}
+    onchange="onChangeDropdown2({name: '{{$name}}' })"
     class='{{$classList}} {{$readOnly ? 'readonly' : ''}}'
     >
 

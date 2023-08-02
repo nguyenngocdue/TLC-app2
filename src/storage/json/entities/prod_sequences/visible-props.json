@@ -49,6 +49,26 @@
         "cancelled": "true",
         "obsolete": "true"
     },
+    "_start_date": {
+        "name": "_start_date",
+        "column_name": "start_date",
+        "new": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true",
+        "cancelled": "true",
+        "obsolete": "true"
+    },
+    "_end_date": {
+        "name": "_end_date",
+        "column_name": "end_date",
+        "new": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true",
+        "cancelled": "true",
+        "obsolete": "true"
+    },
     "_total_uom": {
         "name": "_total_uom",
         "column_name": "total_uom",
@@ -82,6 +102,16 @@
     "_total_hours": {
         "name": "_total_hours",
         "column_name": "total_hours",
+        "new": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true",
+        "cancelled": "true",
+        "obsolete": "true"
+    },
+    "_worker_number": {
+        "name": "_worker_number",
+        "column_name": "worker_number",
         "new": "true",
         "in_progress": "true",
         "on_hold": "true",

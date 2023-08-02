@@ -8,7 +8,7 @@
       $value = $value ? $value : old($name, ($value));
     @endphp
     <input 
-        component="controls/text2"
+        component="{{$component}}"
         id="{{$name}}" 
         name="{{$name}}" 
         placeholder="{{$placeholder}}" 
@@ -16,7 +16,8 @@
         {{-- After a form is submitted, and a fail validation happen, this will only return the old, not the value --}}
         {{-- And if a week should be W10/2023, it will become 07/03/2023, and then it fails the next validation --}}
         {{-- value="{{old($name, ($value))}}" --}}
-        onchange='onChangeDropdown2({name: "{{$name}}"})'
+        {{-- onchange='onChangeDropdown2({name: "{{$name}}"})' --}}
+        onchange="onChangeDropdown2({name: '{{$name}}' })"
         class='{{$classList}} {{$icon ? 'pl-10' : ''}} {{$readOnly ? 'readonly' : ''}}'
         {{$readOnly ? 'readonly' : ''}} 
         />

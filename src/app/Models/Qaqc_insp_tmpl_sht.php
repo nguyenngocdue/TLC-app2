@@ -47,7 +47,7 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
             ['dataIndex' => 'name'],
             // ['dataIndex' => 'description'],
             // ['dataIndex' => 'getLines',],
-            // ['dataIndex' => 'getMonitors1()', 'renderer' => 'agg_count'],
+            // ['dataIndex' => 'getMonitors1()', 'renderer' => 'agg_count_all'],
         ];
     }
 }

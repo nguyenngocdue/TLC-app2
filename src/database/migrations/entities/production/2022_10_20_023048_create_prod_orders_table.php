@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('meta_type')->nullable();
             $table->unsignedBigInteger('meta_id')->nullable();
             $table->dateTime('started_at')->nullable();
+            $table->dateTime('finished_at')->nullable();
             $table->appendCommonFields();
         });
         // Schema::create('prod_orders', function (Blueprint $table) {
