@@ -64,7 +64,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "eco_sheets": {
-        "name": "eco_sheets"
+        "name": "eco_sheets",
+        "renderTableForPopupModals": "true"
     },
     "eco_taken_actions": {
         "name": "eco_taken_actions",
