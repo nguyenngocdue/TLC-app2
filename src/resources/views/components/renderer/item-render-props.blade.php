@@ -208,7 +208,7 @@
                     <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
                     @break
                     @endswitch
-                    {{$controlExtra}}
+                    <div component="control-extra" class="text-gray-600 text-sm">{{$controlExtra}}</div>
                 </div>
                 @endif
             </div>

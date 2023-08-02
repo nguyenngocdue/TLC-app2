@@ -36,6 +36,14 @@ trait TableTraitFooter
 
         $result['agg_none'] = '';
         $result['agg_count_all'] = $items->count();
+
+        $result['agg_sum'] = 0;
+        $result['agg_avg'] = 0;
+        $result['agg_median'] = 0;
+        $result['agg_min'] = 0;
+        $result['agg_max'] = 0;
+        $result['agg_range'] = 0;
+
         if (in_array($control, ['picker_date', 'picker_datetime'])) {
             $items = $items->map(fn ($item) => Carbon::parse($item)->diffInSeconds('1970-01-01 00:00:00'));
         }
@@ -46,9 +54,10 @@ trait TableTraitFooter
             $items = collect([]); //TO BE IMPLEMENTED
         }
         if (in_array($control, ['picker_year'])) {
-            $items = $items->map(fn ($item) => substr($item, 0, 4));
+            $items = $items->map(fn ($item) => $item ? substr($item, 0, 4) : 0); //<< Incase year is "", make it 0
         }
 
+        // dump($items);
         $result['agg_sum'] = $items->sum();
         $result['agg_avg'] = $items->avg();
         $result['agg_median'] = $items->median();
