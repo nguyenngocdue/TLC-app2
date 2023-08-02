@@ -494,49 +494,49 @@
     "_comment_asm_rejected_reason": {
         "name": "_comment_asm_rejected_reason",
         "column_name": "comment_asm_rejected_reason",
-        "new": "",
+        "new": "true",
         "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
         "resolved": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_comment_insp_rejected_reason": {
         "name": "_comment_insp_rejected_reason",
         "column_name": "comment_insp_rejected_reason",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
         "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_comment_inspector_decision": {
         "name": "_comment_inspector_decision",
         "column_name": "comment_inspector_decision",
-        "new": "",
-        "assigned": "",
-        "assign_rejected": "",
-        "resolved": "",
-        "rejected": "",
+        "new": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
         "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
+        "inspection_rejected": "true",
+        "closed": "true"
     }
 }
