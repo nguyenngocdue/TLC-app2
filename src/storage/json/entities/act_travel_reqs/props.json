@@ -244,7 +244,7 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "true"
     },
     "_sep01": {
         "name": "_sep01",

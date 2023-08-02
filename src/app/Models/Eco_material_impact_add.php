@@ -38,9 +38,9 @@ class Eco_material_impact_add extends ModelExtended
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'eco_sheet_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ['dataIndex' => 'name'],
-            ['dataIndex' => 'unit_price',],
-            ['dataIndex' => 'quantity',],
-            ['dataIndex' => 'unit_id'],
+            ['dataIndex' => 'unit_price', 'cloneable' => true,],
+            ['dataIndex' => 'quantity', 'cloneable' => true,],
+            ['dataIndex' => 'unit_id', 'cloneable' => true,],
             ['dataIndex' => 'amount', 'footer' => 'agg_sum'],
             ['dataIndex' => 'description'],
         ];

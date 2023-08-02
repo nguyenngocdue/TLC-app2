@@ -286,7 +286,6 @@ const addANewLineFull = (params) => {
 
             const onChangeDropdown4Fn = 'onChangeDropdown4(' + onChangeParams + ');'
             const makeOnChangeAdvanced = (moreCodeAfter) => '' + '$("[id=\'' + id + "']\").on('change', function(e, dropdownParams){" + moreCodeAfter + '})'
-
             switch (column['renderer']) {
                 case 'read-only-text4':
                     if (column['dataIndex'] === 'id') {
@@ -356,7 +355,8 @@ const addANewLineFull = (params) => {
                     renderer = "<textarea id='" + id + "' name='" + id + "' " + (column['readOnly'] ? ' readonly' : '') + " class='" + column['classList'] + "' rows='3'></textarea>"
                     break
                 case 'picker-all4':
-                    renderer = "<input id='" + id + "' name='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"
+                    const { control } = column
+                    renderer = "<input component='editable/" + control + "' id='" + id + "' name='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"
                     const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
                     renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeFooterValue) + '</script>'
                     break

@@ -3,7 +3,8 @@
 @endif --}}
 <input
     @readonly($readOnly)
-    component="editable/picker-all4"
+    component="editable/{{$control}}"
+    {{-- component="editable/picker-all4" --}}
     id="{{$name}}"
     name="{{$name}}"
     value="{{$cell??$slot}}"

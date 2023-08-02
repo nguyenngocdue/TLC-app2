@@ -50,16 +50,20 @@ class EntityCRUDControllerForApiRenderer extends Controller
 
 		$model = Str::modelPathFrom($tableName);
 		$dataSource = $model::whereIn('id', $ids)
-			->with("getProject")
-			->with("getSubProject")
-			->orderBy('due_date')
+			->with("getProject");
+		if (!in_array($this->type, ['eco_sheet'])) {
+			$dataSource = $dataSource->with("getSubProject");
+		}
+		$dataSource = $dataSource->orderBy('due_date')
 			->get();
 
 		foreach ($dataSource as &$doc) {
 			$uid = $doc->getCurrentBicId();
 			if ($uid) $doc->ball_in_court = User::findFromCache($uid)->name;
 			$doc->project_name = $doc->getProject->name;
-			$doc->sub_project_name = $doc->getSubProject->name;
+			if (!in_array($this->type, ['eco_sheet'])) {
+				$doc->sub_project_name = $doc->getSubProject->name;
+			}
 		}
 
 		// dump($dataSource);

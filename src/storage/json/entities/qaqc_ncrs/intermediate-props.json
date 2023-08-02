@@ -495,7 +495,7 @@
         "name": "_comment_asm_rejected_reason",
         "column_name": "comment_asm_rejected_reason",
         "new": "",
-        "assigned": "",
+        "assigned": "assign_rejected",
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
@@ -509,7 +509,7 @@
         "new": "",
         "assigned": "",
         "assign_rejected": "",
-        "resolved": "",
+        "resolved": "rejected",
         "rejected": "",
         "inspected": "",
         "inspection_rejected": "",
@@ -523,7 +523,7 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "inspected": "",
+        "inspected": "inspection_rejected",
         "inspection_rejected": "",
         "closed": ""
     },
@@ -535,7 +535,7 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "inspected": "",
+        "inspected": "closed",
         "inspection_rejected": "",
         "closed": ""
     }

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->float('unit_price')->nullable();
+            $table->decimal('unit_price', 20, 6)->nullable();
             $table->float('quantity')->nullable();
             $table->unsignedBigInteger('currency_id')->nullable();
             $table->unsignedBigInteger('counter_currency_id')->nullable();

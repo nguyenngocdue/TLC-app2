@@ -8,7 +8,9 @@ use App\Models\Prod_sequence;
 use App\Models\Term;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateTimeConcern;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -26,8 +28,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected $dataIndexY = "prod_order_id";
     // protected $rotate45Width = 400;
     protected $tableTrueWidth = true;
-    protected $headerTop = "10";
-    // protected $headerTop = "[300px]";
+    protected $headerTop = "[60px]";
     protected $groupBy = null;
     protected $mode = 'detail';
     /**
@@ -149,21 +150,30 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return [
             ['dataIndex' => 'production_name',  'width' => 300,],
             ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50,],
+            ['dataIndex' => 'status', "title" => "Summary", 'align' => 'center', 'width' => 50, 'colspan' => 4],
             ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150,],
             ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150,],
             ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50,],
         ];
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     {
-        return [
+        $started_at = DateTimeConcern::convertForLoading("picker_datetime", $y->started_at);
+        $finished_at = DateTimeConcern::convertForLoading("picker_datetime", $y->finished_at);
+        $status_object = $this->makeStatus($y, false);
+        $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
+        $result = [
             'production_name' => $y->production_name,
             'quantity' => $y->quantity,
-            'started_at' => "22/12/2023",
-            'finished_at' => "22/01/2024",
-            'total_days' => 30,
+            'status' => $status_object,
+            'started_at' => substr($started_at, 0, 10),
+            'finished_at' =>  substr($finished_at, 0, 10),
+            // 'finished_at' => ($y->status === 'finished') ? substr($finished_at, 0, 10) : "",
+            'total_days' => $y->finished_at ? Carbon::parse($y->finished_at)->diffInDays($y->started_at) : "",
         ];
+
+        return $result;
     }
 
     function cellRenderer($cell, $dataIndex, $forExcel = false)
@@ -206,6 +216,13 @@ class ProdSequences extends ViewAllTypeMatrixParent
             if ($line['columnIndex'] == 'start_date') $result[$line['dataIndex']] = "Start";
             if ($line['columnIndex'] == 'end_date') $result[$line['dataIndex']] = "Finish";
         }
+
+        //For Meta columns
+        $result['status'] = "Status";
+        $result['started_at'] = "Started At";
+        $result['finished_at'] = "Finished At";
+        $result['total_days'] = "Total Days";
+
         foreach ($result as &$row) {
             $row = "<div class='p-1 text-center'>" . $row . "</div>";
         }

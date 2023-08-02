@@ -140,6 +140,8 @@
 <span class="top-32"></span>
 <span class="top-36"></span>
 <span class="top-40"></span>
+<span class="h-[60px]"></span>
+<span class="top-[60px]"></span>
 <span class="top-[300px]"></span>
 
 <span class="max-h-[10rem] "></span>

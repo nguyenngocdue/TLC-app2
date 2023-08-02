@@ -683,6 +683,9 @@ video {
 .top-\[50\%\] {
   top: 50%;
 }
+.top-\[60px\] {
+  top: 60px;
+}
 .z-0 {
   z-index: 0;
 }
@@ -1124,6 +1127,9 @@ video {
 }
 .h-screen {
   height: 100vh;
+}
+.h-\[60px\] {
+  height: 60px;
 }
 .max-h-0 {
   max-height: 0px;

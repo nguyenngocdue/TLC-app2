@@ -11,7 +11,8 @@ class Hr_timesheet_worker extends ModelExtended
     public static $nameless = true;
     public function getNameAttribute($value)
     {
-        return "[" . date(Constant::FORMAT_DATE_ASIAN, strtotime($this->ts_date)) . "] - " . $this->getUserTeam->name;
+        $team = $this->getUserTeam;
+        return "[" . date(Constant::FORMAT_DATE_ASIAN, strtotime($this->ts_date)) . "] - " . ($team->name ?? "");
     }
 
     public static $eloquentParams = [

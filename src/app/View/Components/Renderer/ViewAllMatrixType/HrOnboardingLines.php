@@ -106,7 +106,7 @@ class HrOnboardingLines extends ViewAllTypeMatrixParent
         ];
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     {
         $dueDate = Carbon::parse($y->first_date)->addDays($this->timeFrameInDays)->format(Constant::FORMAT_DATE_MYSQL);
         return [
