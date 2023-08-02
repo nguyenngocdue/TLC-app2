@@ -33,7 +33,7 @@ const dataPickerFormatByElements = (nameElement) => {
     var callback;
     switch (nameElement) {
         case 'input[component="controls/picker_time"]':
-            case 'input[component="editable/picker_time"]':
+        case 'input[component="editable/picker_time"]':
             regex = /(\d+):(\d+)/g;
             replacement = (match, p1, p2) => {
                 return p1.padStart(2, '0') + ':' + p2.padStart(2, '0');
@@ -55,16 +55,21 @@ const dataPickerFormatByElements = (nameElement) => {
         case 'input[component="editable/picker_datetime"]':
         case 'input[component="controls/picker_date"]':
         case 'input[component="editable/picker_date"]':
-            callback = (value) => {value.replace(/^(\d{1})\/(\d{1})/, '0$1/0$2').replace(/\s(\d{1}):(\d{1})$/, ' 0$1:0$2')};
+            callback = (value) => {
+                return value.replace(/(\d{1,2})\/(\d{1,2})\//g, (match,p1,p2) =>{
+                    return p1.padStart(2, '0') + '/' + p2.padStart(2, '0') + '/';
+                })
+                .replace(/(\d+):(\d+)/g,(match, p1, p2) => {
+                    return p1.padStart(2, '0') + ':' + p2.padStart(2, '0');
+                  })};
             break;
         default:
             break;
-            
     }
     $(nameElement).each(function () {
         var currentValue = $(this).val();
         if(callback){
-            var formatValue = currentValue.replace(/^(\d{1})\/(\d{1})/, '0$1/0$2').replace(/\s(\d{1}):(\d{1})$/, ' 0$1:0$2');
+            var formatValue = callback(currentValue);
         }else{
             var formatValue = currentValue.replace(regex, replacement);
         }
