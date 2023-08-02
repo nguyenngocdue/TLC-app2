@@ -359,10 +359,10 @@
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": ""
     },
-    "_comment_assignment_rejected_reason": {
-        "name": "_comment_assignment_rejected_reason",
+    "_comment_asm_rejected_reason": {
+        "name": "_comment_asm_rejected_reason",
         "relationship": "morphMany",
-        "control_name": "comment_assignment_rejected_reason",
+        "control_name": "comment_asm_rejected_reason",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
@@ -374,10 +374,10 @@
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": ""
     },
-    "_comment_corrective_rejected_reason": {
-        "name": "_comment_corrective_rejected_reason",
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
         "relationship": "morphMany",
-        "control_name": "comment_corrective_rejected_reason",
+        "control_name": "comment_rejected_reason",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
@@ -389,10 +389,10 @@
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": ""
     },
-    "_comment_inspection_rejected_reason": {
-        "name": "_comment_inspection_rejected_reason",
+    "_comment_insp_rejected_reason": {
+        "name": "_comment_insp_rejected_reason",
         "relationship": "morphMany",
-        "control_name": "comment_inspection_rejected_reason",
+        "control_name": "comment_insp_rejected_reason",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
@@ -404,10 +404,10 @@
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": ""
     },
-    "_comment_inspection_decision_reason": {
-        "name": "_comment_inspection_decision_reason",
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
         "relationship": "morphMany",
-        "control_name": "comment_inspection_decision_reason",
+        "control_name": "comment_inspector_decision",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

@@ -1540,7 +1540,8 @@
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
-        "disallowed_direct_creation": "true"
+        "disallowed_direct_creation": "true",
+        "do_not_send_notification_mails": "true"
     },
     "reportIndex": {
         "name": "reportIndex",
