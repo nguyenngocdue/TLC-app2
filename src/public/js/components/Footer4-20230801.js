@@ -24,23 +24,23 @@ const median = (arr) => {
     }
 };
 
-function calculateFooterValue(operator, tableId, fieldName, control) {
+function calculateFooterValue(tableId, fieldName, control) {
     const aggList = ['agg_none', 'agg_count_all', 'agg_sum', 'agg_avg', 'agg_median', 'agg_min', 'agg_max', 'agg_range',];
     const count = getAllRows(tableId).length
-    // console.log(operator, tableId, fieldName, count)
+    // console.log(tableId, fieldName, count)
     const array = []
     for (let i = 0; i < count; i++) {
         const name = tableId + "[" + fieldName + "][" + i + "]"
         const value = getEById(name).val()
         switch (control) {
             case 'picker_date':
-                array.push(moment(getEById(name).val(), "DD/MM/YYYY") / 1000) //<<convert milliseconds to seconds
+                if (value) array.push(moment(value, "DD/MM/YYYY") / 1000) //<<convert milliseconds to seconds
                 break
             case 'picker_datetime':
-                array.push(moment(getEById(name).val(), "DD/MM/YYYY HH:mm") / 1000) //<<convert milliseconds to seconds
+                if (value) array.push(moment(value, "DD/MM/YYYY HH:mm") / 1000) //<<convert milliseconds to seconds
                 break
             case 'picker_time':
-                array.push(moment(getEById(name).val(), "HH:mm") / 1000) //<<convert milliseconds to seconds
+                if (value) array.push(moment(value, "HH:mm") / 1000) //<<convert milliseconds to seconds
                 break
             default:
                 array.push(1 * numberRemoveComma(value))
@@ -108,11 +108,13 @@ function changeFooterValue(object, tableId) {
     for (let i = 0; i < columns.length; i++) {
         const column = columns[i]
         // console.log(column)
-        const { footer, dataIndex, properties = {} } = column
+        const { footer, dataIndex, properties = {}, control: control_in_col = '' } = column
         // console.log(footer)
-        const { control = '' } = properties
+        const { control: control_in_properties = '' } = properties
+        const control = control_in_properties || control_in_col
+        // console.log(properties, control)
         if (dataIndex == fieldName && footer !== undefined) {
-            calculateFooterValue(footer, tableId, fieldName, control)
+            calculateFooterValue(tableId, fieldName, control)
         }
     }
     // console.log(fieldName, table);
