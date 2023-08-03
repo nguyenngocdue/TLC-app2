@@ -66,7 +66,7 @@
         "validation": "required|date_format:d\/m\/Y",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "0",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -102,7 +102,7 @@
         "validation": "required|date_format:H:i",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "16:00:00",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -114,7 +114,7 @@
         "validation": "required|date_format:H:i",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "18:00:00",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -138,7 +138,7 @@
         "validation": "numeric|min:0|not_in:0",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "2",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""

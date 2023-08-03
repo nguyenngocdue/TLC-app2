@@ -7,6 +7,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitSendNotificationAndMail;
 use App\Models\Hr_timesheet_line;
 use App\Models\Hr_timesheet_worker;
 use App\Models\User_team_tsht;
+use App\Utils\Constant;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
@@ -69,20 +70,37 @@ trait TraitStoreEmpty
 		foreach ($lines as $item) {
 			// Log::info($defaultValue);
 			foreach ($defaultValue as $key => $value) {
+				// Log::info($item[$key] . " " . $key . " " . $value);
 				// Order_no get override when without $value !== false
-				if (isset($item[$key]) && $item[$key] !== false && $value !== false) $item[$key]  = $value;
+				// if (isset($item[$key]) && $item[$key] !== false && $value !== false) $item[$key]  = $value;
+				//Default of ot_date = "0", break_time = 0 will be filtered out with $value !== false
 				// if (isset($item[$key]) && $item[$key] !== false) $item[$key]  = $value;
+				$item[$key] = $value;
 			}
+			// Log::info($item);
 			foreach ($dateTimeControls as $control => $controlType) {
 				// $control = substr($control, 1); // Removed first _
 				if (isset($item[$control])) {
+					if ($item[$control] == "0") {
+						switch ($controlType) {
+							case "picker_date":
+								$item[$control] = date(Constant::FORMAT_DATE_MYSQL);
+								break;
+								// case "picker_time":
+								// $currentTime = date(Constant::FORMAT_TIME_MYSQL);
+								// $item[$control] = DateTimeConcern::formatForSaving($currentTime, Constant::FORMAT_TIME_MYSQL, Constant::FORMAT_TIME_MYSQL);
+								// break;
+							default:
+								dump("Unknown how to convert $controlType 777888");
+								break;
+						}
+					}
 					$item[$control] = DateTimeConcern::convertForSaving($controlType, $item[$control]);
 				}
 			}
 			$item = $this->applyFormula($item, 'store');
 			// Log::info($item);
 			$createdItem = $this->modelPath::create($item);
-			// dd(123);
 			$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
 			$tableName = Str::plural($this->type);
 			$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
