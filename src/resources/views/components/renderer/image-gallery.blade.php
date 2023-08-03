@@ -19,7 +19,7 @@
                 @foreach($dataSource as $attachment)
                 @php
                     $extension = $attachment['extension'];
-                    $minType = $attachment['mime_type'];
+                    $mimeType = $attachment['mime_type'];
                     $fileName = $attachment['filename'];
                     $urlMedia = $pathMinio.$attachment['url_media'];
                     $uploadBy = \App\Models\User::findFromCache($attachment['owner_id'])->name ?? '';
@@ -27,20 +27,22 @@
                     $dataVideo = '';
                     switch ($extension) {
                         case 'csv':
-                            $urlThumbnail = asset('icons/csv-256.png');
-                            break;
                         case 'pdf':
-                            $urlThumbnail = asset('icons/pdf-256.png');
-                            break;
                         case 'zip':
-                            $urlThumbnail = asset('icons/zip-256.png');
+                        case 'doc':
+                        case 'txt':
+                            $urlThumbnail = asset("icons/$extension-128.png");
                             break;
-                        case 'mp4':
-                        case 'webm':
-                            $dataVideo='{"source": [{"src":"'.$urlMedia.'", "type":"'.$minType.'"}], "attributes": {"preload": false, "controls": true}}';
+                        case 'MP4':
+                        case 'MOV':
+                            $mimeType ='video/mp4';
                             break;
                         default:
                             break;
+                    }
+                    if(in_array($mimeType,['video/mp4','video/webm'])){
+                        $dataVideo='{"source": [{"src":"'.$urlMedia.'", "type":"'.$mimeType.'"}], "attributes": {"preload": false, "controls": true}}';
+                        $urlThumbnail = asset('icons/video-128.png');
                     }
                 @endphp
                     <a id="{{$attachment['id']}}" alt="{{$fileName}}" data-lg-size="1280-720" class="gallery-item"
@@ -49,7 +51,7 @@
                     data-pinterest-text="{{$fileName}}" data-tweet-text="lightGallery {{$fileName}}"
                     data-sub-html="
                     <p> File Name: {{$fileName}} </p>
-                    <p> Upload by: {{$uploadBy}} </p>">
+                    <p> Uploaded by: {{$uploadBy}} </p>">
                     <img class="img-responsive" 
                         src="{{$urlThumbnail}}" />
                     </a>
