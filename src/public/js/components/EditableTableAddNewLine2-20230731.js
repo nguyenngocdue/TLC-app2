@@ -254,7 +254,7 @@ const addANewLineFull = (params) => {
             const btnDuplicate =
                 '<button value = "' +
                 tableId +
-                '" onClick = "duplicateEditableTable(' +
+                '" onClick = "duplicateLineEditableTable(' +
                 paramString +
                 ')" type = "button" class="px-1.5 py-1 border-2 border-blue-600 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg"> <i class="fa fa-copy"></i></button >'
             const btnTrash =

@@ -181,7 +181,7 @@ const moveDownEditableTable = (params) => {
     reRenderTableBaseOnNewOrder(tableId)
 }
 
-const duplicateEditableTable = (params) => {
+const duplicateLineEditableTable = (params) => {
     const { control, fingerPrint, nameIndex } = params
     const tableId = control.value
     const { columns } = tableObject[tableId]

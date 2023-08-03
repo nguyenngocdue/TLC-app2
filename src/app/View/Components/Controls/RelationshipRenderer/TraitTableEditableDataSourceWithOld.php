@@ -137,7 +137,7 @@ trait TraitTableEditableDataSourceWithOld
             <div class='whitespace-nowrap flex justify-center '>";
             if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})'><i class='fa fa-arrow-up'></i></x-renderer.button>
                  <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
-            $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='duplicateEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
+            $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='duplicateLineEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
                 <x-renderer.button size='xs' value='$table01Name' onClick='trashEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})' type='danger' ><i class='fa fa-trash'></i></x-renderer.button>
             </div>
             ";
