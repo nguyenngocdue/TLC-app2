@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
+
     {{-- TLC2 will always be the last of CSS List --}}
     <link rel="stylesheet" href="{{ asset('css/select2-canh.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2-due.css') }}">
@@ -24,6 +25,7 @@
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/number-to-words.js') }}"></script>
+    
     {{-- <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js')}}"></script>
     <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js')}}"></script>
@@ -56,7 +58,6 @@
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
     <script src="{{ asset('js/signature_pad@4.0.0.umd.min.js') }}"></script>
     <script src="{{ asset('js/qrcode@1.0.0.min.js') }}"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
     <script src="{{ asset('js/go@2.3.8.js') }}"></script>
     <script src="{{ asset('js/html2pdf@0.10.1.bundle.min.js') }}"></script>
@@ -67,6 +68,11 @@
     <script src="{{ asset('js/fullcalendar/timegrid@6.1.8.min.js') }}"></script>
     <script src="{{ asset('js/fullcalendar/list@6.1.8.min.js') }}"></script>
     <script src="{{ asset('js/fullcalendar/multimonth@6.1.8.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/lightgallery.css') }}">
+    <script src="{{ asset('js/lightgallery.js') }}"></script>
+
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/index.global.min.js"></script>

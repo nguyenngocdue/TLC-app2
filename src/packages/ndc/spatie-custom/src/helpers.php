@@ -20,3 +20,13 @@ if (!function_exists('getRolesTeamId')) {
         return app(\Ndc\SpatieCustom\RoleRegistrar::class)->getRolesTeamId();
     }
 }
+
+if (!function_exists('pathMinio')) {
+    /**
+     * @return int|string
+     */
+    function pathMinio()
+    {
+        return env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+    }
+}

@@ -2,5 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/antd-vue.js": "/js/antd-vue.js",
     "/js/number-to-words.js": "/js/number-to-words.js",
+    "/js/lightgallery.js": "/js/lightgallery.js",
+    "/css/lightgallery.css": "/css/lightgallery.css",
     "/css/app.css": "/css/app.css"
 }

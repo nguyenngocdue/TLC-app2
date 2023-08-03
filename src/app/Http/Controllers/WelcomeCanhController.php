@@ -47,22 +47,22 @@ class WelcomeCanhController extends Controller
         //                         ->addPepperoni()
         //                         ->addTomato()
         //                         ->build();
-        Bridge::using();
-        Facade::using();
-        Flyweight::using();
-        Proxy::using();
-        Composite::using();
-        dd();
-        $tree = BuildTree::getTree();
-        $results = [];
-        $showOptions = $this->getUserSettingsViewOrgChart();
-        $this->x($tree,$results,$this->getOptionsRenderByUserSetting($showOptions));
-        usort($results,function($a,$b){
-            return strcmp($a['name'],$b['name']);
-        });
+        // Bridge::using();
+        // Facade::using();
+        // Flyweight::using();
+        // Proxy::using();
+        // Composite::using();
+        // dd();
+        // $tree = BuildTree::getTree();
+        // $results = [];
+        // $showOptions = $this->getUserSettingsViewOrgChart();
+        // $this->x($tree,$results,$this->getOptionsRenderByUserSetting($showOptions));
+        // usort($results,function($a,$b){
+        //     return strcmp($a['name'],$b['name']);
+        // });
         return view(
             'welcome-canh',
-            ['dataSource'=> $results,'showOptions'=>$showOptions]
+            // ['dataSource'=> $results,'showOptions'=>$showOptions]
         );
     }
     private function x($tree,&$results,$options){

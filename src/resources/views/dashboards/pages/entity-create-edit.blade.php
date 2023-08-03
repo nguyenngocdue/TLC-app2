@@ -40,7 +40,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
         @method($action === "create" ? 'POST' : 'PUT')
         @switch($app['edit_renderer'])
         @case ('props-renderer')
-        <div class="px-2 flex justify-center ">
+        <div class="px-2 flex justify-center">
             <div class="fixed left-0">
                 <div class="text-center">
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" data-drawer-body-scrolling="true" data-drawer-backdrop="false">
@@ -106,6 +106,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 <x-homepage.left-drawer title="Table of Content">
     <x-homepage.table-of-content :item="$item" type="{{$type}}" />
 </x-homepage.left-drawer>
+<x-renderer.image-gallery id={{$id}} :item="$item" :dataSource="$propsOfMainPage" type={{$type}} modelPath={{$modelPath}} />
 <script type="text/javascript">
         userCurrent = @json($user);
         window.Echo.channel('edit.'+'{{$type}}' +'-'+ '{{$id}}')
