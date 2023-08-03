@@ -7,16 +7,17 @@ use App\BigThink\ModelExtended;
 class Act_advance_req extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "status", "user_id",
+        "id", "name", "title", "description", "status", "user_id",
         "radio_advance_type", "advance_amount", "currency_id",
         "advance_amount_word", "assignee_1", "owner_id"
     ];
     protected $table = "act_advance_reqs";
     protected $with = ["getCurrency"];
+    public static $nameless = true;
     public function getNameAttribute($value)
     {
         $currency = $this->getCurrency;
-        return $value . " (" . number_format($this->advance_amount, 2) . " " . ($currency->name ?? "") . ")";
+        return $this->title . " (" . number_format($this->advance_amount, 2) . " " . ($currency->name ?? "") . ")";
     }
 
     public static $eloquentParams = [

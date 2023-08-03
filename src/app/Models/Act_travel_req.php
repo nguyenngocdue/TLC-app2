@@ -7,15 +7,16 @@ use App\BigThink\ModelExtended;
 class Act_travel_req extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "status", "user_id",
+        "id", "name", "title", "description", "status", "user_id",
         "travel_type_id", "workplace_id", "staff_discipline_id",
         "staff_workplace_id", "remark", "assignee_1", "owner_id",
         "total_travel_day", "total_travel_amount",
     ];
     protected $table = "act_travel_reqs";
+    public static $nameless = true;
     public function getNameAttribute($value)
     {
-        return $value . " (" . number_format($this->total_travel_amount, 2) . " USD)";
+        return $this->title . " (" . number_format($this->total_travel_amount, 2) . " USD)";
     }
 
     public static $eloquentParams = [
