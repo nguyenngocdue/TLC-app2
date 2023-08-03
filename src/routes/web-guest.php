@@ -25,6 +25,7 @@ use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_project_not_
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_project_date;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_team_date;
 use App\Http\Controllers\WelcomeFortuneController;
+use App\Warehouse\Wh_user_sub_project_task;
 use Illuminate\Support\Facades\Route;
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
@@ -32,6 +33,7 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 Route::resource('welcome-canh', WelcomeCanhController::class)->only('index');
 Route::get('welcome-canh-all', [WelcomeCanhController::class, 'indexAll'])->name('welcome-canh-all.index');
 Route::resource('welcome-due', WelcomeDueController::class)->only('index');
+Route::resource('welcome-due-dataWarehouse', Wh_user_sub_project_task::class)->only('index');
 
 Route::resource('welcome-due-employee_date', WelcomeDueController_hr_timesheet_employee_date::class)->only('index');
 Route::resource('welcome-due-employee_project', WelcomeDueController_hr_timesheet_employee_project::class)->only('index');

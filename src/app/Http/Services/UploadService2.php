@@ -41,7 +41,7 @@ class UploadService2
                 $result = "mimes:png,jpeg,gif,jpg,svg,webp";
                 break;
             case 'only_videos':
-                $result = "mimes:mp4";
+                $result = "mimes:mp4,mov";
                 break;
             case 'only_media':
                 $result = "mimes:mp4,png,jpeg,gif,jpg,svg,webp";
