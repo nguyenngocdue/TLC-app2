@@ -33,16 +33,7 @@
     },
     "emit_chain": {
         "name": "emit_chain",
-        "triggers": "true",
-        "expression": "true",
-        "ajax_response_attribute": "true",
-        "ajax_form_attributes": "true",
-        "ajax_item_attributes": "true",
-        "ajax_default_values": "true",
-        "listen_to_fields": "true",
-        "listen_to_attrs": "true",
-        "attrs_to_compare": "true",
-        "columns_to_set": "true"
+        "triggers": "true"
     },
     "expression": {
         "name": "expression",

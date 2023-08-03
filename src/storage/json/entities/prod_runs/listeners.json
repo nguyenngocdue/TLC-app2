@@ -1,4 +1,34 @@
 {
+    "_date": {
+        "name": "_date",
+        "column_name": "date",
+        "listen_action": "emit_chain",
+        "triggers": "id",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_worker_number": {
+        "name": "_worker_number",
+        "column_name": "worker_number",
+        "listen_action": "emit_chain",
+        "triggers": "id",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_total_hours": {
         "name": "_total_hours",
         "column_name": "total_hours",
@@ -59,21 +89,6 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_date": {
-        "name": "_date",
-        "column_name": "date",
-        "listen_action": "emit_chain",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_start": {
         "name": "_start",
         "column_name": "start",
@@ -93,21 +108,6 @@
         "name": "_end",
         "column_name": "end",
         "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_worker_number": {
-        "name": "_worker_number",
-        "column_name": "worker_number",
-        "listen_action": "emit_chain",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",

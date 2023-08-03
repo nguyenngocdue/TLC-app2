@@ -407,6 +407,14 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
     }
 }
 
+const onChangeDropdown4EmitChain = (listener, table01Name, rowIndex, batchLength) => {
+    // const debugFlow = true
+    const { column_name } = listener
+    if (debugFlow) console.log("onChangeDropdown4EmitChain", listener)
+    const id = makeIdFrom(table01Name, column_name, rowIndex, batchLength)
+    getEById(id).trigger('change', { batchLength })
+}
+
 const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownParams, name }) => {
     // const debugFlow = true
     // console.log({ fieldName, table01Name, rowIndex, lineType, batchLength, name })
@@ -443,6 +451,9 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownPara
                     break
                 case "trigger_change_all_lines_except_current":
                     onChangeDropdown4TriggerChangeAllLinesExceptCurrent(listener, table01Name, rowIndex, batchLength)
+                    break
+                case "emit_chain":
+                    onChangeDropdown4EmitChain(listener, table01Name, rowIndex, batchLength)
                     break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);
