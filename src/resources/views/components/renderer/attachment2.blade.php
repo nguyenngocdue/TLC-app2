@@ -31,7 +31,7 @@
             </span>
             {{-- This is to show the thin layer which has the filename and trash button --}}
             <div class="invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]">
-                <a title="{{$attachment['filename']}}" href="{{$path.$attachment['url_media']}}" target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
+                <a title="{{$attachment['filename']}}" onclick="openAnotherLink({{$attachment['id']}})" h1ref="{{$path.$attachment['url_media']}}" target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
                     <span class="text-sm">{{$attachment['filename']}}</span>
                 </a>
                 @if(!$readOnly)

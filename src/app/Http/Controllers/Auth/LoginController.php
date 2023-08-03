@@ -138,7 +138,7 @@ class LoginController extends Controller
             $agent = new Agent();
             $headers = $request->header('User-Agent');
             $agent->setUserAgent($headers);
-            $ipAddress = $request->server('HTTP_X_REAL_IP');
+            $ipAddress = $request->server('HTTP_X_REAL_IP') ?? '';
             $location = Location::get($ipAddress);
             $cityName = 'internal';
             $countryName = 'internal';

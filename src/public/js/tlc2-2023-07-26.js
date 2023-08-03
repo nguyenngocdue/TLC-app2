@@ -29,3 +29,9 @@ const makeKi = (k) => {
     })
     return ki
 }
+const openAnotherLink = (linkId) => {
+    const a = document.getElementById(linkId);
+    if (a) {
+        a.click();
+    }
+}
