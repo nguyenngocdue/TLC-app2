@@ -811,6 +811,22 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "manageListenerActions": {
+        "name": "manageListenerActions",
+        "package_tab": "application",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Listener Actions",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-solid fa-gears\"><\/i>",
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "manageNavbars": {
         "name": "manageNavbars",
         "package_tab": "application",

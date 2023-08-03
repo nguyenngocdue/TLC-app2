@@ -62,7 +62,7 @@
     "_date": {
         "name": "_date",
         "column_name": "date",
-        "listen_action": "",
+        "listen_action": "emit_chain",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",
@@ -107,7 +107,7 @@
     "_worker_number": {
         "name": "_worker_number",
         "column_name": "worker_number",
-        "listen_action": "",
+        "listen_action": "emit_chain",
         "triggers": "",
         "listen_to_fields": "",
         "listen_to_attrs": "",

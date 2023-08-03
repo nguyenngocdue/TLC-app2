@@ -1,0 +1,78 @@
+{
+    "aggregate_from_table": {
+        "name": "aggregate_from_table",
+        "triggers": "true"
+    },
+    "ajax_request_scalar": {
+        "name": "ajax_request_scalar",
+        "triggers": "true",
+        "expression": "true",
+        "ajax_response_attribute": "true",
+        "ajax_form_attributes": "true",
+        "ajax_item_attributes": "true",
+        "ajax_default_values": "true"
+    },
+    "assign": {
+        "name": "assign",
+        "triggers": "true",
+        "listen_to_fields": "true",
+        "listen_to_attrs": "true"
+    },
+    "date_offset": {
+        "name": "date_offset",
+        "triggers": "true",
+        "listen_to_fields": "true",
+        "listen_to_attrs": "true",
+        "attrs_to_compare": "true"
+    },
+    "dot": {
+        "name": "dot",
+        "triggers": "true",
+        "listen_to_fields": "true",
+        "listen_to_attrs": "true"
+    },
+    "emit_chain": {
+        "name": "emit_chain",
+        "triggers": "true",
+        "expression": "true",
+        "ajax_response_attribute": "true",
+        "ajax_form_attributes": "true",
+        "ajax_item_attributes": "true",
+        "ajax_default_values": "true",
+        "listen_to_fields": "true",
+        "listen_to_attrs": "true",
+        "attrs_to_compare": "true",
+        "columns_to_set": "true"
+    },
+    "expression": {
+        "name": "expression",
+        "triggers": "true",
+        "expression": "true"
+    },
+    "number_to_words": {
+        "name": "number_to_words",
+        "triggers": "true"
+    },
+    "reduce": {
+        "name": "reduce",
+        "triggers": "true",
+        "listen_to_fields": "true",
+        "listen_to_attrs": "true",
+        "attrs_to_compare": "true"
+    },
+    "set_table_column": {
+        "name": "set_table_column",
+        "triggers": "true",
+        "listen_to_fields": "true",
+        "listen_to_attrs": "true",
+        "columns_to_set": "true"
+    },
+    "trigger_change_all_lines": {
+        "name": "trigger_change_all_lines",
+        "triggers": "true"
+    },
+    "trigger_change_all_lines_except_current": {
+        "name": "trigger_change_all_lines_except_current",
+        "triggers": "true"
+    }
+}

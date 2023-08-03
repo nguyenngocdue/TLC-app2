@@ -228,9 +228,8 @@ const trashEditableTable = (params) => {
 
 const refreshCalculation = (tableId) => {
     // const debugEditable = true
-    if (debugEditable) console.log(tableId)
     const length = getAllRows(tableId).length
-    if (debugEditable) console.log(length)
+    if (debugEditable) console.log(tableId, "length", length)
     for (let i = 0; i < length; i++) {
         const id = makeIdFrom(tableId, 'id', i)
         getEById(id).trigger('change', { batchLength: length })

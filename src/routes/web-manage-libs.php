@@ -3,6 +3,7 @@
 use App\Http\Controllers\Workflow\ManageApisController;
 use App\Http\Controllers\Workflow\ManageAppCreationsController;
 use App\Http\Controllers\Workflow\ManageAppsController;
+use App\Http\Controllers\Workflow\ManageListenerActionsController;
 use App\Http\Controllers\Workflow\ManageNavbarsController;
 use App\Http\Controllers\Workflow\ManagePivotTablesController;
 use App\Http\Controllers\Workflow\ManageProfileFieldsController;
@@ -29,4 +30,5 @@ Route::group([
     Route::resource('manageAppCreations', ManageAppCreationsController::class)->only('index', 'store');
     Route::resource('manageStandardProps', ManageStandardPropsController::class)->only('index', 'store', 'create');
     Route::resource('manageStandardDefaultValues', ManageStandardDefaultValuesController::class)->only('index', 'store', 'create');
+    Route::resource('manageListenerActions', ManageListenerActionsController::class)->only('index', 'store', 'create');
 });
