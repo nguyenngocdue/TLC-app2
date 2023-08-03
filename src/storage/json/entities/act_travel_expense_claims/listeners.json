@@ -3,7 +3,7 @@
         "name": "_total_amount_ee",
         "column_name": "total_amount_ee",
         "listen_action": "aggregate_from_table",
-        "triggers": "table01[footer][total_estimated_amount][agg_sum]",
+        "triggers": "getTravelExpenseClaimLines[footer][total_estimated_amount][agg_sum]",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "columns_to_set": "",

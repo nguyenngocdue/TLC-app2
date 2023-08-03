@@ -24,6 +24,9 @@ class RelationshipRenderer2 extends Component
     use TraitTableEditableDataSourceWithOld;
 
     private static $table00Count = 1;
+    private static $cacheEloquentToTable01Name = [];
+    private static $cacheTable01NameToEloquent = [];
+
     private $table01Name;
     private $tableDebug = false;
 
@@ -55,6 +58,16 @@ class RelationshipRenderer2 extends Component
         $this->tablesHaveCreateANewForm = config()->get('tablesHaveCreateANewForm');
         $this->tablesInEditableMode = config()->get('tablesInEditableMode');
         $this->tablesCallCmdBtn = config()->get('tablesCallCmdBtn');
+    }
+
+    public static function getCacheEloquentToTable01Name()
+    {
+        return static::$cacheEloquentToTable01Name;
+    }
+
+    public static function getCacheTable01NameToEloquent()
+    {
+        return static::$cacheTable01NameToEloquent;
     }
 
     private function isTableOrderable($row, $colName, $columns)
@@ -282,6 +295,9 @@ class RelationshipRenderer2 extends Component
                     }
                 }
                 $dateTimeColumns = $sp['datetime_controls'];
+
+                static::$cacheEloquentToTable01Name[$colName] = $this->table01Name;
+                static::$cacheTable01NameToEloquent[$this->table01Name] = $colName;
 
                 return view('components.controls.' . $view, [
                     'readOnly' => $this->readOnly,
