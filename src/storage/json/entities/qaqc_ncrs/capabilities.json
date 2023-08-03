@@ -147,13 +147,13 @@
         "name_rendered": "",
         "toggle": "",
         "new": "true",
-        "assigned": "",
+        "assigned": "true",
         "assign_rejected": "true",
         "resolved": "true",
-        "rejected": "",
-        "inspected": "",
+        "rejected": "true",
+        "inspected": "true",
         "inspection_rejected": "true",
-        "closed": ""
+        "closed": "true"
     },
     "des_manager": {
         "name": "des_manager",
@@ -469,6 +469,19 @@
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "proj_admin": {
+        "name": "proj_admin",
         "name_rendered": "",
         "toggle": "",
         "new": "",

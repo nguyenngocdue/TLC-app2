@@ -126,9 +126,9 @@
         "toggle": "",
         "new": "true",
         "assigned": "true",
-        "partially_closed": "",
-        "rejected": "",
-        "closed": "",
+        "partially_closed": "true",
+        "rejected": "true",
+        "closed": "true",
         "not_applicable": "true"
     },
     "des_manager": {
@@ -397,6 +397,17 @@
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "partially_closed": "",
+        "rejected": "",
+        "closed": "",
+        "not_applicable": ""
+    },
+    "proj_admin": {
+        "name": "proj_admin",
         "name_rendered": "",
         "toggle": "",
         "new": "",
