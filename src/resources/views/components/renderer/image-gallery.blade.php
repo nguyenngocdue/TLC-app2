@@ -44,7 +44,7 @@
                     }
                 @endphp
                     <a id="{{$attachment['id']}}" alt="{{$fileName}}" data-lg-size="1280-720" class="gallery-item"
-                    {{$dataVideo ? "":"data-src=$urlMedia"}} 
+                    {!!$dataVideo ? "":"data-src='$urlMedia'"!!} 
                     data-video="{{$dataVideo}}"
                     data-pinterest-text="{{$fileName}}" data-tweet-text="lightGallery {{$fileName}}"
                     data-sub-html="
