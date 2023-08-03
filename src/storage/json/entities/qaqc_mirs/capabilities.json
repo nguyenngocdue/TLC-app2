@@ -124,10 +124,10 @@
         "name": "dc_ws",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
+        "new": "true",
         "assigned": "true",
-        "rejected": "",
-        "inspected": "",
+        "rejected": "true",
+        "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
     },
@@ -397,6 +397,17 @@
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "proj_admin": {
+        "name": "proj_admin",
         "name_rendered": "",
         "toggle": "",
         "new": "",
