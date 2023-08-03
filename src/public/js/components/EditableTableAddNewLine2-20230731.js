@@ -118,10 +118,11 @@ const addANewLine = (params) => {
                                 // console.log("Converting " + valuesOfOrigin[key])
                                 switch (picker_type) {
                                     case "picker_time":
-                                        valuesOfOrigin[key] = moment(valuesOfOrigin[key], "HH:mm:ss").format("HH:mm")
+                                        //check not null, otherwise Invalid Date
+                                        if (valuesOfOrigin[key]) valuesOfOrigin[key] = moment(valuesOfOrigin[key], "HH:mm:ss").format("HH:mm")
                                         break
                                     default:
-                                        valuesOfOrigin[key] = moment(valuesOfOrigin[key]).format(FORMAT[picker_type])
+                                        if (valuesOfOrigin[key]) valuesOfOrigin[key] = moment(valuesOfOrigin[key]).format(FORMAT[picker_type])
                                         break
                                 }
                                 // console.log("Converted to " + picker_type + key + valuesOfOrigin[key])
