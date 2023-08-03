@@ -106,7 +106,8 @@ trait TableTraitFooter
             $id = "{$tableName}[footer][{$fieldName}][$agg]";
             // $value = ($agg != 'agg_none') ? round($result[$agg], 2)  : "";
             $value = $result[$agg];
-            $inputs[] = "<input id='$id' title='$agg' component='TraitFooter' value='$value' readonly class='$class $bg' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
+            $onChange = "onChangeDropdown4AggregateFromTable111('$id', this.value)";
+            $inputs[] = "<input id='$id' title='$agg' component='TraitFooter' value='$value' readonly class='$class $bg' onChange=\"$onChange\" />";
         }
         return join("", $inputs);
     }
