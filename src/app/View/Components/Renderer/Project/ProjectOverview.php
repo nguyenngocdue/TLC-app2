@@ -35,7 +35,7 @@ class ProjectOverview extends Component
             "<div class='p-2 m-1 rounded bg-orange-500'></div>Unknown Due Date",
         ];
         return [
-            ['dataIndex' => "doc_type"],
+            ['dataIndex' => "doc_type", 'align' => 'center'],
             [
                 'dataIndex' => "progress",
                 'renderer' => 'progress-bar',
