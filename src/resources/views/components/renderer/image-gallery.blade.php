@@ -53,7 +53,7 @@
                     <p> File Name: {{$fileName}} </p>
                     <p> Uploaded by: {{$uploadBy}} </p>">
                     <img class="img-responsive" 
-                        src="{{$urlThumbnail}}" />
+                        src="{{$urlThumbnail}}" class="lazyload" />
                     </a>
                 @endforeach
             </div>
