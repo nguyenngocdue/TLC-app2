@@ -75,7 +75,10 @@ trait TraitStoreEmpty
 				// if (isset($item[$key]) && $item[$key] !== false && $value !== false) $item[$key]  = $value;
 				//Default of ot_date = "0", break_time = 0 will be filtered out with $value !== false
 				// if (isset($item[$key]) && $item[$key] !== false) $item[$key]  = $value;
-				$item[$key] = $value;
+				//<<Only if default values IS NOT FALSE: parent_id, order_no
+				if ($value !== false) {
+					$item[$key] = $value;
+				}
 			}
 			// Log::info($item);
 			foreach ($dateTimeControls as $control => $controlType) {
@@ -99,7 +102,8 @@ trait TraitStoreEmpty
 				}
 			}
 			$item = $this->applyFormula($item, 'store');
-			// Log::info($item);
+			Log::info("Store empty");
+			Log::info($item);
 			$createdItem = $this->modelPath::create($item);
 			$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
 			$tableName = Str::plural($this->type);
