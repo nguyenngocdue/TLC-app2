@@ -60,4 +60,5 @@ class ProfileController extends EntityCRUDController
         $id = $id ?? CurrentUser::id();
         return $this->edit($request, $id, $viewRender, $readOnly);
     }
+    
 }

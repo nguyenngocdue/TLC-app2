@@ -18,6 +18,7 @@ class Breadcrumb extends Component
         'dashboard',
         'admin_permission',
         'reportIndex',
+        'profile_social'
     ];
     private $action = null;
     public function __construct()

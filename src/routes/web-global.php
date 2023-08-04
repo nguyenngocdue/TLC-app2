@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MyOrgChartController;
 use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileSocialController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\UpdateUserSettingsApi;
 use App\Http\Controllers\Utils\MyCompanyController;
@@ -25,6 +26,7 @@ Route::group([
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::get('my-org-chart', [MyOrgChartController::class, 'index'])->name('myOrgChart.index');
     Route::get('profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');
+    Route::get('profile_social/{id}', [ProfileSocialController::class, 'profileSocial'])->name('profileSocial.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');
     Route::put('updateBookmark', [BookmarkController::class, 'updateBookmark'])->name('updateBookmark');
     Route::put('updateUserSettingsApi', [UpdateUserSettingsApi::class, 'updateUserSettingsApi'])->name('updateUserSettingsApi');
