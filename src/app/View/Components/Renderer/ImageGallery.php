@@ -11,7 +11,7 @@ class ImageGallery extends Component
      *
      * @return void
      */
-    public function __construct(private $id, private $modelPath, private $type,private $dataSource,private $item)
+    public function __construct(private $dataSource,private $action)
     {
         //
     }
@@ -23,6 +23,7 @@ class ImageGallery extends Component
      */
     public function render()
     {
+        if($this->action == 'create') return '';
         $propsAttachment = array_filter($this->dataSource,fn($item) => $item['control'] == 'attachment');
         $attachments = array_column($propsAttachment,'value');
         $results = collect();

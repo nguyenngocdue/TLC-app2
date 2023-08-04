@@ -106,7 +106,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 <x-homepage.left-drawer title="Table of Content">
     <x-homepage.table-of-content :item="$item" type="{{$type}}" />
 </x-homepage.left-drawer>
-<x-renderer.image-gallery id={{$id}} :item="$item" :dataSource="$propsOfMainPage" type={{$type}} modelPath={{$modelPath}} />
+<x-renderer.image-gallery :dataSource="$propsOfMainPage" action={{$action}} />
 <script type="text/javascript">
         userCurrent = @json($user);
         window.Echo.channel('edit.'+'{{$type}}' +'-'+ '{{$id}}')
