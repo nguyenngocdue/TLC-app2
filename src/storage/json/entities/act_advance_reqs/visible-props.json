@@ -14,6 +14,11 @@
         "column_name": "name",
         "new": "true"
     },
+    "_title": {
+        "name": "_title",
+        "column_name": "title",
+        "new": "true"
+    },
     "_radio_advance_type": {
         "name": "_radio_advance_type",
         "column_name": "radio_advance_type",

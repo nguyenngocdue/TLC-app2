@@ -22,6 +22,7 @@ return new class extends Migration
         $schema->create('act_advance_reqs', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             // $table->unsignedBigInteger('sub_project_id')->nullable();

@@ -1,5 +1,5 @@
 function onChangeDropdown4AggregateFromTable(id, value) {
-    // console.log("onChangeDropdown4AggregateFromTable", id)
+    // console.log("onChangeDropdown4AggregateFromTable", id, value)
     for (let i = 0; i < listenersOfDropdown2.length; i++) {
         const listener = listenersOfDropdown2[i]
         const triggers = listener['triggers']
@@ -24,13 +24,13 @@ const median = (arr) => {
     }
 };
 
-function calculateFooterValue(tableId, fieldName, control) {
+function calculateFooterValue(table01Name, eloquentFn, fieldName, control) {
     const aggList = ['agg_none', 'agg_count_all', 'agg_sum', 'agg_avg', 'agg_median', 'agg_min', 'agg_max', 'agg_range',];
-    const count = getAllRows(tableId).length
-    // console.log(tableId, fieldName, count)
+    const count = getAllRows(table01Name).length
+    // console.log(table01Name, fieldName, count)
     const array = []
     for (let i = 0; i < count; i++) {
-        const name = tableId + "[" + fieldName + "][" + i + "]"
+        const name = table01Name + "[" + fieldName + "][" + i + "]"
         const value = getEById(name).val()
         switch (control) {
             case 'picker_date':
@@ -92,7 +92,7 @@ function calculateFooterValue(tableId, fieldName, control) {
 
     for (let i = 0; i < aggList.length; i++) {
         const agg = aggList[i]
-        const footerName = tableId + "[footer][" + fieldName + "][" + agg + "]"
+        const footerName = eloquentFn + "[footer][" + fieldName + "][" + agg + "]"
         // console.log(footerName, result[agg])
         getEById(footerName).val(agg == 'agg_none' ? '' : result[agg])
         // getEById(footerName).val(agg == 'agg_none' ? '' : (result[agg] * 1).toFixed(2))
@@ -100,11 +100,11 @@ function calculateFooterValue(tableId, fieldName, control) {
     }
 }
 
-function changeFooterValue(object, tableId) {
-    const fieldName = getFieldNameInTable01FormatJS(object.name, tableId);
-    // console.log('footer', tableId, object, fieldName);
-    const table = tableObject[tableId];
-    const { columns } = table
+function changeFooterValue(object, table01Name) {
+    const fieldName = getFieldNameInTable01FormatJS(object.name, table01Name);
+    // console.log('footer', table01Name, object, fieldName);
+    const table = tableObject[table01Name];
+    const { columns, eloquentFn } = table
     for (let i = 0; i < columns.length; i++) {
         const column = columns[i]
         // console.log(column)
@@ -114,7 +114,7 @@ function changeFooterValue(object, tableId) {
         const control = control_in_properties || control_in_col
         // console.log(properties, control)
         if (dataIndex == fieldName && footer !== undefined) {
-            calculateFooterValue(tableId, fieldName, control)
+            calculateFooterValue(table01Name, eloquentFn, fieldName, control)
         }
     }
     // console.log(fieldName, table);
