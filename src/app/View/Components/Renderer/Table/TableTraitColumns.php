@@ -39,7 +39,7 @@ trait TableTraitColumns
         return join("", $result);
     }
 
-    private function makeTh($column, $isLastColumn, $elapse)
+    private function makeTh($column, $isLastColumn, $elapse, $hidden)
     {
         $renderer = $column['renderer'] ?? "_no_renderer_";
         // $rendererUnit = $column['rendererUnit'] ?? "_no_unit_";
@@ -71,8 +71,9 @@ trait TableTraitColumns
         $borderRight = ($this->rotate45Width) ? "" : $borderRight;
         $tinyText = $this->noCss ? "text-xs" : "";
         $colspanStr = ($colspan > 1) ? "colspan=$colspan" : "";
+        $hiddenStr = $hidden ? "hidden" : "";
         $th = "";
-        $th .= "<th $colspanStr class='px-4 py-3 border-b border-gray-300 $borderRight $classTh' $styleStr title='$tooltip'>";
+        $th .= "<th id='$columnName' $colspanStr class='px-4 py-3 border-b border-gray-300 $borderRight $classTh $hiddenStr' $styleStr title='$tooltip'>";
         $th .= "<div class='$classDiv $tinyText text-gray-700 dark:text-gray-300'>";
         $th .= "<span>" . $title . "</span>";
         $th .= "</div>";
@@ -104,12 +105,14 @@ trait TableTraitColumns
         $columns = array_values($columns);
         foreach ($columns as $key => $column) {
             if (empty($column)) continue;
-            if ($skippedDueToColspan[$key]) continue;
-            if (!$this->isInvisible($column)) {
-                $dataIndex = $column['dataIndex'];
-                $elapse = $timeElapse[$dataIndex] ?? 0;
-                $columnsRendered[] = $this->makeTh($column, $key == sizeof($columns) - 1, $elapse);
-            }
+            // if ($skippedDueToColspan[$key]) continue;
+            $hidden = $this->isInvisible($column);
+            $hidden = $hidden || $skippedDueToColspan[$key];
+            // if (!$this->isInvisible($column)) {
+            $dataIndex = $column['dataIndex'];
+            $elapse = $timeElapse[$dataIndex] ?? 0;
+            $columnsRendered[] = $this->makeTh($column, $key == sizeof($columns) - 1, $elapse, $hidden);
+            // }
         }
         $columnsRendered = join("", $columnsRendered);
         return $columnsRendered;

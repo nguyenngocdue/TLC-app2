@@ -537,7 +537,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             // , disabled: true
         })
         if (dataSource.length === 1) {
-            console.log("Changes when only one item in data source", id)
+            // console.log("Changes when only one item in data source", id)
             getEById(id).trigger('change')
         }
     } else if (control_type == 'radio_or_checkbox') {
