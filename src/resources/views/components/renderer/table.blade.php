@@ -29,7 +29,7 @@
                 @endif
                 @php 
                 $classH= "";$classTop= "";$styleH = "";$styleT = "";
-                if(is_numeric($headerTop)) {
+                if(!is_numeric($headerTop)) {
                     $styleH = "height: $headerTop";
                     $styleT = "top: $headerTop";
                 }else {
@@ -47,7 +47,7 @@
                             </tr>
                         </thead>
                         @isset($headerRendered)
-                        <thead class="sticky z-10 top-{{ $classTop }}" style="{{$styleT}}">
+                        <thead class="sticky z-10 {{$classTop}}" style="{{$styleT}}">
                             <tr class="{{$trClassList}}">{!! $headerRendered !!}</tr>
                         </thead>
                         @endisset
