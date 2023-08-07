@@ -181,8 +181,8 @@ return [
 
     'defaults' => [
         'supervisor-1' => [
-            // 'connection' => 'redis',
-            'connection' => 'database',
+            'connection' => 'redis',
+            // 'connection' => 'database', //<< Horizon doesn't support database, only redis
             'queue' => ['default'],
             'balance' => 'auto',
             'autoScalingStrategy' => 'time',
