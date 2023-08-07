@@ -78,7 +78,7 @@ class Table extends Component
       'headerRendered' => $this->makeTable2ndThead($columns, $this->dataHeader),
       'footerRendered' => $this->makeFooter($columns, $this->tableName, $dataSource),
       'headerTop' => $this->headerTop,
-      'columnsRendered' => $this->getColumnRendered($columns, $this->timeElapse),
+      'columnsRendered' => $this->getColumnRendered($columns, $this->timeElapse, $this->tableName),
       'tr_td' => $tr_td,
       'showing' => ($hasPaging && !$this->editable) ? $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing') : "",
       'pagination' => $hasPaging ? $dataSource->links('dashboards.pagination.pagination') : "",

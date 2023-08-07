@@ -39,7 +39,7 @@ trait TableTraitColumns
         return join("", $result);
     }
 
-    private function makeTh($column, $isLastColumn, $elapse, $hidden)
+    private function makeTh($column, $isLastColumn, $elapse, $hidden, $table01Name)
     {
         $renderer = $column['renderer'] ?? "_no_renderer_";
         // $rendererUnit = $column['rendererUnit'] ?? "_no_unit_";
@@ -73,7 +73,7 @@ trait TableTraitColumns
         $colspanStr = ($colspan > 1) ? "colspan=$colspan" : "";
         $hiddenStr = $hidden ? "hidden" : "";
         $th = "";
-        $th .= "<th id='$columnName' $colspanStr class='px-4 py-3 border-b border-gray-300 $borderRight $classTh $hiddenStr' $styleStr title='$tooltip'>";
+        $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr class='px-4 py-3 border-b border-gray-300 $borderRight $classTh $hiddenStr' $styleStr title='$tooltip'>";
         $th .= "<div class='$classDiv $tinyText text-gray-700 dark:text-gray-300'>";
         $th .= "<span>" . $title . "</span>";
         $th .= "</div>";
@@ -98,7 +98,7 @@ trait TableTraitColumns
         return $skippedDueToColspan;
     }
 
-    private function getColumnRendered($columns, $timeElapse)
+    private function getColumnRendered($columns, $timeElapse, $table01Name)
     {
         $columnsRendered = [];
         $skippedDueToColspan = $this->getSkippedDueToColspan($columns);
@@ -111,7 +111,7 @@ trait TableTraitColumns
             // if (!$this->isInvisible($column)) {
             $dataIndex = $column['dataIndex'];
             $elapse = $timeElapse[$dataIndex] ?? 0;
-            $columnsRendered[] = $this->makeTh($column, $key == sizeof($columns) - 1, $elapse, $hidden);
+            $columnsRendered[] = $this->makeTh($column, $key == sizeof($columns) - 1, $elapse, $hidden, $table01Name);
             // }
         }
         $columnsRendered = join("", $columnsRendered);
