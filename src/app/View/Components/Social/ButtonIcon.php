@@ -18,7 +18,11 @@ class ButtonIcon extends Component
     private $textColor = 'text-gray-900',
     private $widthIcon = 'w-10',
     private $heightIcon = 'h-10',
-    private $title= '',)
+    private $title= '',
+    private $onClickModal = false,
+    private $onKeyDown = false,
+    private $modalId = '',
+    )
     {
         //
     }
@@ -38,6 +42,9 @@ class ButtonIcon extends Component
             'widthIcon' => $this->widthIcon,
             'heightIcon' => $this->heightIcon,
             'title' => $this->title,
+            'onClickModal' => $this->onClickModal,
+            'onKeyDown' => $this->onKeyDown,
+            'modalId' => $this->modalId,
         ];
         return view('components.social.button-icon',$params);
     }

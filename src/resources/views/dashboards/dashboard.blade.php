@@ -175,5 +175,14 @@
     </div>
     @endif
 </div>
+    <script>
+        tinymce.init({
+          selector: "#post-textarea",
+          plugins: "emoticons",
+          toolbar: "emoticons",
+          toolbar_location: "bottom",
+          menubar: false
+        });
+      </script>
 
 @endsection

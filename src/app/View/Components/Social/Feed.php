@@ -2,16 +2,17 @@
 
 namespace App\View\Components\Social;
 
+use App\Models\Post;
 use Illuminate\View\Component;
 
-class PostFormFooter extends Component
+class Feed extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(private $modalId)
+    public function __construct()
     {
         //
     }
@@ -23,8 +24,7 @@ class PostFormFooter extends Component
      */
     public function render()
     {
-        return view('components.social.post-form-footer',[
-            'modalId' => $this->modalId,
-        ]);
+        dd(Post::all());
+        return view('components.social.feed');
     }
 }

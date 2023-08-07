@@ -11,7 +11,7 @@ class PostFormHeader extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private $modalId)
     {
         //
     }
@@ -23,6 +23,8 @@ class PostFormHeader extends Component
      */
     public function render()
     {
-        return view('components.social.post-form-header');
+        return view('components.social.post-form-header',[
+            'modalId' => $this->modalId,
+        ]);
     }
 }

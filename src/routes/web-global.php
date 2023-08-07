@@ -2,6 +2,7 @@
 
 use App\Events\Test;
 use App\Http\Controllers\Admin\AdminSetRoleSetController;
+use App\Http\Controllers\Api\v1\Social\PostController;
 use App\Http\Controllers\Api\v1\System\NotificationsController as SystemNotificationsController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\DashboardController;
@@ -23,6 +24,7 @@ Route::group([
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::resource('posts', PostController::class)->only(['store','update','destroy']);
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::get('my-org-chart', [MyOrgChartController::class, 'index'])->name('myOrgChart.index');
     Route::get('profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');

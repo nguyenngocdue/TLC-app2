@@ -19,22 +19,14 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('posts', function (BlueprintExtended $table) {
+        $schema->create('groups', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name');
-            $table->text('content');
+            $table->unsignedBigInteger('group_id');
+            $table->timestamp('confirmed_at')->nullable();
             $table->appendCommonFields();
+            $table->unique(['owner_id', 'group_id']);
         });
-        // Schema::create('posts', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->text('content');
-        //     $table->string('status')->nullable();
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**
@@ -44,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('groups');
     }
 };

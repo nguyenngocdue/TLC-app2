@@ -4,7 +4,7 @@ namespace App\View\Components\Social;
 
 use Illuminate\View\Component;
 
-class PostFormFooter extends Component
+class PostFormInput extends Component
 {
     /**
      * Create a new component instance.
@@ -23,7 +23,7 @@ class PostFormFooter extends Component
      */
     public function render()
     {
-        return view('components.social.post-form-footer',[
+        return view('components.social.post-form-input',[
             'modalId' => $this->modalId,
         ]);
     }

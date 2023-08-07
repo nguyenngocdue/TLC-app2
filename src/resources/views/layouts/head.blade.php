@@ -74,6 +74,8 @@
     <link rel="stylesheet" href="{{ asset('css/lightgallery.css') }}">
     <script src="{{ asset('js/lightgallery.js') }}"></script>
 
+    <script src="https://cdn.tiny.cloud/1/fclv950nwjacvpdeyszgia9sfzh514e25u6olez0h2z46d4c/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/index.global.min.js"></script>
