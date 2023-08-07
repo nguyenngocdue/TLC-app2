@@ -29,7 +29,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $groupByLength = 2;
     protected $allowCreation = true;
     protected $tableTrueWidth = false;
-    protected $headerTop = '';
+    protected $headerTop = null;
     protected $mode = 'status_only';
     /**
      * Create a new component instance.

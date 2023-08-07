@@ -27,18 +27,27 @@
                     </span>
                 </div>
                 @endif
+                @php 
+                $classH= "";$classTop= "";$styleH = "";$styleT = "";
+                if(is_numeric($headerTop)) {
+                    $styleH = "height: $headerTop";
+                    $styleT = "top: $headerTop";
+                }else {
+                    $classH= "h-$headerTop";
+                    $classTop= "top-$headerTop";
+                } @endphp
                 <div class="table-wrp block {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t":"rounded-t-lg"}}">
                     <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm border-separate border-spacing-0' style="table-layout: auto; {{$tableWidth}}">
                         <colgroup>
                             {!! $colgroup !!}
                         </colgroup>
                         <thead class="sticky z-10 top-0">
-                            <tr class="{{$trClassList}} h-{{$headerTop}}">
+                            <tr class="{{$trClassList}} {{$classH}}" style="{{$styleH}}">
                                 {!! $columnsRendered !!}
                             </tr>
                         </thead>
                         @isset($headerRendered)
-                        <thead class="sticky z-10 top-{{ $headerTop }}">
+                        <thead class="sticky z-10 top-{{ $classTop }}" style="{{$styleT}}">
                             <tr class="{{$trClassList}}">{!! $headerRendered !!}</tr>
                         </thead>
                         @endisset

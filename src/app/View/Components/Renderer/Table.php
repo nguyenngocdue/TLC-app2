@@ -24,7 +24,7 @@ class Table extends Component
     private $columns = null,
     private $dataSource = null,
     private $dataHeader = null,
-    private $headerTop = 0,
+    private $headerTop = null,
     private $showNo = false,
     private $showNoR = false,
     private $groupBy = false,
