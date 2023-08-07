@@ -181,7 +181,8 @@ return [
 
     'defaults' => [
         'supervisor-1' => [
-            'connection' => 'redis',
+            // 'connection' => 'redis',
+            'connection' => 'database',
             'queue' => ['default'],
             'balance' => 'auto',
             'autoScalingStrategy' => 'time',
