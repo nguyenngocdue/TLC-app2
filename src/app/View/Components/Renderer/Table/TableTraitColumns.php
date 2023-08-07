@@ -39,8 +39,11 @@ trait TableTraitColumns
         return join("", $result);
     }
 
-    private function makeTh($column, $isLastColumn, $elapse, $hidden, $table01Name)
+    private function makeTh($column, $index, $elapse, $hidden, $table01Name, $columns)
     {
+        $fixedLeft = (isset($column['fixed']) && ($column['fixed'] == "left"))  ? "table-th-fixed-left table-th-fixed-left-$index" : "";
+        $fixedRight = (isset($column['fixed']) && ($column['fixed'] == "right"))  ? "table-th-fixed-right table-th-fixed-right-$index" : "";
+        $isLastColumn = ($index == sizeof($columns) - 1);
         $renderer = $column['renderer'] ?? "_no_renderer_";
         // $rendererUnit = $column['rendererUnit'] ?? "_no_unit_";
         $dataIndex = $column['dataIndex'];
@@ -52,6 +55,7 @@ trait TableTraitColumns
         $subTitle = $column['subTitle'] ?? null;
         if ($subTitle) $title .= "<hr/><i>" . $subTitle . "</i>";
         $tooltip = "Column details:\n";
+        $tooltip .= "+ Index: $index\n";
         $tooltip .= "+ DataIndex: $dataIndex\n";
         $tooltip .= "+ ColumnName: $columnName\n";
         $tooltip .= "+ Renderer: $renderer\n";
@@ -73,7 +77,10 @@ trait TableTraitColumns
         $colspanStr = ($colspan > 1) ? "colspan=$colspan" : "";
         $hiddenStr = $hidden ? "hidden" : "";
         $th = "";
-        $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr class='px-4 py-3 border-b border-gray-300 $borderRight $classTh $hiddenStr' $styleStr title='$tooltip'>";
+        $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr $styleStr ";
+        $th .= "class='$fixedLeft $fixedRight px-4 py-3 border-b border-gray-300 $borderRight $classTh $hiddenStr' ";
+        $th .= "title='$tooltip' ";
+        $th .= ">";
         $th .= "<div class='$classDiv $tinyText text-gray-700 dark:text-gray-300'>";
         $th .= "<span>" . $title . "</span>";
         $th .= "</div>";
@@ -103,15 +110,15 @@ trait TableTraitColumns
         $columnsRendered = [];
         $skippedDueToColspan = $this->getSkippedDueToColspan($columns);
         $columns = array_values($columns);
-        foreach ($columns as $key => $column) {
+        foreach ($columns as $index => $column) {
             if (empty($column)) continue;
-            // if ($skippedDueToColspan[$key]) continue;
+            // if ($skippedDueToColspan[$index]) continue;
             $hidden = $this->isInvisible($column);
-            $hidden = $hidden || $skippedDueToColspan[$key];
+            $hidden = $hidden || $skippedDueToColspan[$index];
             // if (!$this->isInvisible($column)) {
             $dataIndex = $column['dataIndex'];
             $elapse = $timeElapse[$dataIndex] ?? 0;
-            $columnsRendered[] = $this->makeTh($column, $key == sizeof($columns) - 1, $elapse, $hidden, $table01Name);
+            $columnsRendered[] = $this->makeTh($column, $index, $elapse, $hidden, $table01Name, $columns);
             // }
         }
         $columnsRendered = join("", $columnsRendered);
@@ -120,7 +127,14 @@ trait TableTraitColumns
 
     private function makeNoColumn($columns)
     {
-        $columnNo = ["title" => "No.", "renderer" => "no.", "dataIndex" => "auto.no.", 'align' => 'center', "width" => '50'];
+        $columnNo = [
+            "title" => "No.",
+            "renderer" => "no.",
+            "dataIndex" => "auto.no.",
+            'align' => 'center',
+            "width" => '50',
+            "fixed" => "left",
+        ];
         if ($this->showNo) array_unshift($columns, $columnNo);
         if ($this->showNoR) array_push($columns, $columnNo);
         return $columns;
@@ -133,21 +147,23 @@ trait TableTraitColumns
         // dump($dataHeader);
         $th = [];
         $columns = array_values($columns);
-        foreach ($columns as $key => $column) {
+        foreach ($columns as $index => $column) {
             if ($this->isInvisible($column)) continue;
+            $fixedLeft = (isset($column['fixed']) && ($column['fixed'] == "left"))  ? "table-th-fixed-left table-th-fixed-left-$index" : "";
+            $fixedRight = (isset($column['fixed']) && ($column['fixed'] == "right"))  ? "table-th-fixed-right table-th-fixed-right-$index" : "";
             $styleStr = $this->getStyleStr($column);
             $dataIndex = $column['dataIndex'];
-            $borderR = $key < (sizeof($columns) - 1) ? 'border-r' : "";
+            $borderR = $index < (sizeof($columns) - 1) ? 'border-r' : "";
             if (isset($dataHeader[$dataIndex])) {
                 if (is_object($dataHeader[$dataIndex])) {
                     $cell_class = $dataHeader[$dataIndex]->cell_class;
                     $cell_title = $dataHeader[$dataIndex]->cell_title;
-                    $th[] = "<th $styleStr class='py-1 $borderR border-b $cell_class' title='$cell_title'>" . $dataHeader[$dataIndex]->value . "</th>";
+                    $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b $cell_class' title='$cell_title'>" . $dataHeader[$dataIndex]->value . "</th>";
                 } else {
-                    $th[] = "<th $styleStr class='py-1 $borderR border-b'>" . $dataHeader[$dataIndex] . "</th>";
+                    $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b'>" . $dataHeader[$dataIndex] . "</th>";
                 }
             } else {
-                $th[] = "<th $styleStr class='py-1 $borderR border-b' dataIndex='" . $dataIndex . "'></th>";
+                $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b' dataIndex='" . $dataIndex . "'></th>";
             }
         }
         $result = join($th);

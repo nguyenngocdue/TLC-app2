@@ -148,14 +148,24 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         return [
-            ['dataIndex' => 'production_name',  'width' => 300,],
-            ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50,],
-            ['dataIndex' => 'status', "title" => "Summary", 'align' => 'center', 'width' => 50, 'colspan' => 4],
-            ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150,],
-            ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150,],
-            ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50,],
+            ['dataIndex' => 'production_name',  'width' => 300, 'fixed' => 'left',],
+            ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
+            ['dataIndex' => 'status',  'align' => 'center', 'width' => 50, 'fixed' => 'left', "title" => "Summary", 'colspan' => 4],
+            ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
+            ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
+            ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
         ];
     }
+
+    // protected function getRightMetaColumns()
+    // {
+    //     return [
+    //         ['dataIndex' => 'status',  'align' => 'center', 'width' => 50, 'fixed' => 'right', "title" => "Summary",],
+    //         ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150, 'fixed' => 'right',],
+    //         ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150, 'fixed' => 'right',],
+    //         ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50, 'fixed' => 'right',],
+    //     ];
+    // }
 
     function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     {

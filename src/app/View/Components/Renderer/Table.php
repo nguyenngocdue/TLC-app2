@@ -67,6 +67,7 @@ class Table extends Component
 
     $columns = $this->makeNoColumn($columns);
     $columns = $this->hideColumns($columns);
+    $columns = array_values($columns);
     $dataSource = $this->dataSource;
     $hasPaging = (is_object($dataSource) && method_exists($dataSource, 'links') && !empty($dataSource));
     $tr_td = $this->makeTrTd($columns, $dataSource, $this->tableDebug, $this->tableName);

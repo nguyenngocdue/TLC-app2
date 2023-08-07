@@ -116,10 +116,10 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         return [
-            ['dataIndex' => 'production_name',  'width' => 300,],
-            ['dataIndex' => 'compliance_name',  'width' => 300,],
-            ['dataIndex' => 'quantity',  'width' => 50, 'align' => 'right'],
-            ['dataIndex' => 'progress', 'width' => 50, 'align' => 'right'],
+            ['dataIndex' => 'quantity',  'width' => 50, "fixed" => "left", 'align' => 'right'],
+            ['dataIndex' => 'progress', 'width' => 50, "fixed" => "left", 'align' => 'right'],
+            ['dataIndex' => 'production_name',  'width' => 300, "fixed1" => "left",],
+            // ['dataIndex' => 'compliance_name',  'width' => 300, "fixed1" => "left",],
         ];
     }
 
