@@ -7,6 +7,7 @@ use App\Utils\Support\Json\Relationships;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TraitViewAllTable
@@ -24,12 +25,14 @@ trait TraitViewAllTable
                 $output['renderer'] = 'id';
                 $output['align'] = 'center';
                 $output['type'] = $type;
+                $output['fixed'] = 'left';
                 break;
             case 'qr_code':
                 $output['renderer'] = 'qr-code';
                 $output['align'] = 'center';
                 $output['type'] = $type;
                 $output['width'] = 10;
+                $output['fixed'] = 'left';
                 break;
             case 'avatar':
                 $output['renderer'] = 'avatar_user';
@@ -42,18 +45,21 @@ trait TraitViewAllTable
                 $output['align'] = 'center';
                 $output['type'] = $type;
                 $output['width'] = 10;
+                $output['fixed'] = 'left';
                 break;
             case 'restore_column':
                 $output['renderer'] = 'restore_column';
                 $output['align'] = 'center';
                 $output['type'] = $type;
                 $output['width'] = 10;
+                $output['fixed'] = 'left';
                 break;
             case 'checkbox_column':
                 $output['renderer'] = 'checkbox_column';
                 $output['align'] = 'center';
                 $output['type'] = $type;
                 $output['width'] = 10;
+                $output['fixed'] = 'left';
                 break;
             case 'toggle':
                 $output['renderer'] = "toggle";
@@ -98,6 +104,12 @@ trait TraitViewAllTable
                 break;
         }
 
+        $frozenLeft = ($prop["frozen_left"] ?? false) ? "left" : false;
+        $frozenRight = ($prop["frozen_right"] ?? false) ? "right" : false;
+
+        if ($frozenLeft) $output['fixed'] = 'left';
+        if ($frozenRight) $output['fixed'] = 'right';
+
         return $output;
     }
 
@@ -122,11 +134,13 @@ trait TraitViewAllTable
                     'label' => "Deleted By",
                     'column_name' => 'deleted_by',
                     'control' => 'avatar',
+                    'frozen_left' => true,
                 ],
                 [
                     'label' => "Deleted At",
                     'column_name' => 'deleted_at',
                     'control' => 'picker_datetime',
+                    'frozen_left' => true,
                     'width' => 170,
                 ]
             ] : [];

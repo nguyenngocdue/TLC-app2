@@ -25,7 +25,8 @@
         "hidden_edit": "true",
         "hidden_filter": "true",
         "hidden_view_all": "true",
-        "hidden_print": "true"
+        "hidden_print": "true",
+        "frozen_left": "true"
     },
     "_deleted_by": {
         "move_to": null,
@@ -40,7 +41,8 @@
         "hidden_edit": "true",
         "hidden_filter": "true",
         "hidden_view_all": "true",
-        "hidden_print": "true"
+        "hidden_print": "true",
+        "frozen_left": "true"
     },
     "_id": {
         "move_to": null,
