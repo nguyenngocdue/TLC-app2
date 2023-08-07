@@ -188,20 +188,20 @@ const applyFixedColumnWidth = (tableName, columns) => {
         accumulated += getColumnWidth(tableName, index)
         tableObjectColumns[tableName].push(column)        
     })
-    // const totalWidth = accumulated
-    // tableObjectColumns[tableName].forEach((column, index) => {
-    //     accumulated -= getColumnWidth(tableName, index)
-    //     column['fixedRight'] = accumulated
-    // })
+    const totalWidth = accumulated
+    tableObjectColumns[tableName].forEach((column, index) => {
+        accumulated -= getColumnWidth(tableName, index)
+        column['fixedRight'] = accumulated
+    })
 
     tableObjectColumns[tableName].forEach((column, index)=>{
         const left = column['fixedLeft'];
         $(`.table-td-fixed-left-${index}`).css('left', left);
         $(`.table-th-fixed-left-${index}`).css('left', left);
-        console.log("Setting left for ",index,"value",left)
-        // const right = column['fixedRight'];
-        // $(`.table-td-fixed-right-${index}`).css('right', right);
-        // $(`.table-th-fixed-right-${index}`).css('right', right);
+        // console.log("Setting left for ",index,"value",left)
+        const right = column['fixedRight'];
+        $(`.table-td-fixed-right-${index}`).css('right', right);
+        $(`.table-th-fixed-right-${index}`).css('right', right);
     })
 }
 </script>

@@ -10,7 +10,8 @@
         "col_span": "6",
         "width": "170",
         "hidden_edit": "true",
-        "hidden_filter": "true"
+        "hidden_filter": "true",
+        "frozen_right": "true"
     },
     "_deleted_at": {
         "move_to": null,
@@ -82,7 +83,8 @@
         "align": null,
         "col_span": "6",
         "width": "150",
-        "hidden_edit": "true"
+        "hidden_edit": "true",
+        "frozen_right": "true"
     },
     "_updated_at": {
         "move_to": null,
@@ -96,6 +98,7 @@
         "width": "170",
         "hidden_edit": "true",
         "hidden_filter": "true",
+        "frozen_right": "true",
         "hidden_view_all": "true",
         "hidden_print": "true"
     }
