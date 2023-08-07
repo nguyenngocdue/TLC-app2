@@ -58,6 +58,8 @@ class OvertimeRequestLineController extends Controller
             // dump($idCmp);
 
             $sql = "SELECT * FROM 
+                (SELECT $user_id as uid) AS uid
+                LEFT JOIN
                 (SELECT 
                     if(ot_date BETWEEN concat(year(ot_date),'-12-$hr_month_starting_date') AND concat(year(ot_date),'-12-31'), year(ot_date)+1, year(ot_date)) AS `year0`, 
                     user_id, 
@@ -71,6 +73,7 @@ class OvertimeRequestLineController extends Controller
                     AND otrl.deleted_at IS NULL
                     $idCmp
                 GROUP BY user_id, year0) AS year0
+                ON (uid.uid = user_id)
                 LEFT JOIN
                 (SELECT 
                     if(day(ot_date) BETWEEN 1 AND $hr_month_ending_date, substr(ot_date, 1,7), substr(DATE_ADD(ot_date, INTERVAL 1 MONTH),1,7)) AS `year_month0`,
@@ -89,7 +92,17 @@ class OvertimeRequestLineController extends Controller
                 ";
             // Log::info($sql);
             $resultLine = DB::select($sql);
-            $resultLine_0 = $resultLine[0] ?? [];
+            $resultLine_0 = $resultLine[0]; // ?? [];
+
+            if (!isset($resultLine_0->user_id)) {
+                $resultLine_0->user_id = 1 * $user_id;
+
+                $resultLine_0->year0 = 1 * substr($ot_date, 0, 4);
+                $resultLine_0->year_remaining_hours = $standard_year_hours;
+
+                $resultLine_0->year_month0 = substr($ot_date, 0, 7);
+                $resultLine_0->month_remaining_hours = $standard_month_hours;
+            }
 
             if (isset($resultLine_0->year0)) {
                 $this->addExtraOtHour($resultLine_0);
