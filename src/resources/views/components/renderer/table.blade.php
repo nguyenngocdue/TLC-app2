@@ -1,3 +1,8 @@
+@once
+<script>
+var tableObjectColumns = {}
+</script>
+@endonce
 @if($noCss)
     @php
         $columnsRendered = preg_replace('/<th class=\'.*?\'/', "<th class='text-center bg-gray-50 border border-gray-400  py-2'", $columnsRendered);
@@ -27,18 +32,27 @@
                     </span>
                 </div>
                 @endif
+                @php 
+                $classH= "";$classTop= "";$styleH = "";$styleT = "";
+                if(!is_numeric($headerTop)) {
+                    $styleH = "height: $headerTop";
+                    $styleT = "top: $headerTop";
+                }else {
+                    $classH= "h-$headerTop";
+                    $classTop= "top-$headerTop";
+                } @endphp
                 <div class="table-wrp block {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t":"rounded-t-lg"}}">
                     <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm border-separate border-spacing-0' style="table-layout: auto; {{$tableWidth}}">
                         <colgroup>
                             {!! $colgroup !!}
                         </colgroup>
                         <thead class="sticky z-10 top-0">
-                            <tr class="{{$trClassList}} h-{{$headerTop}}">
+                            <tr class="{{$trClassList}} {{$classH}}" style="{{$styleH}}">
                                 {!! $columnsRendered !!}
                             </tr>
                         </thead>
                         @isset($headerRendered)
-                        <thead class="sticky z-10 top-{{ $headerTop }}">
+                        <thead class="sticky z-10 {{$classTop}}" style="{{$styleT}}">
                             <tr class="{{$trClassList}}">{!! $headerRendered !!}</tr>
                         </thead>
                         @endisset
@@ -140,6 +154,61 @@
 
     </script>
 @endif
+
+<script>
+    function getColumnWidth(tableId, columnIndex) {
+  const table = document.getElementById(tableId);
+  const rows = table.getElementsByTagName('tr');
+
+  let maxWidth = 0;
+
+   if(columnIndex === 0) {
+        // console.log(i,cellWidth)
+        const cell = rows[0].getElementsByTagName('th')[columnIndex];
+        const cellWidth = cell.getBoundingClientRect().width;
+        return (cellWidth) //<< No. column
+      }
+
+  for (let i = 0; i < rows.length; i++) {
+    const cell = rows[i].getElementsByTagName('td')[columnIndex];
+    if (cell) {
+      const cellWidth = cell.getBoundingClientRect().width;
+      maxWidth = Math.max(maxWidth, cellWidth);
+    }
+  }
+
+  return maxWidth;
+}
+
+const applyFixedColumnWidth = (tableName, columns) => {
+    tableObjectColumns[tableName] = []
+    let accumulated = 0
+    columns.forEach((column, index) => {
+        column['fixedLeft'] = accumulated
+        accumulated += getColumnWidth(tableName, index)
+        tableObjectColumns[tableName].push(column)        
+    })
+    // const totalWidth = accumulated
+    // tableObjectColumns[tableName].forEach((column, index) => {
+    //     accumulated -= getColumnWidth(tableName, index)
+    //     column['fixedRight'] = accumulated
+    // })
+
+    tableObjectColumns[tableName].forEach((column, index)=>{
+        const left = column['fixedLeft'];
+        $(`.table-td-fixed-left-${index}`).css('left', left);
+        $(`.table-th-fixed-left-${index}`).css('left', left);
+        console.log("Setting left for ",index,"value",left)
+        // const right = column['fixedRight'];
+        // $(`.table-td-fixed-right-${index}`).css('right', right);
+        // $(`.table-th-fixed-right-${index}`).css('right', right);
+    })
+}
+</script>
+
+<script>
+applyFixedColumnWidth("{{$tableName}}", @json($columns))
+</script>
 
 @if (env('ENV_OF_FORTUNE1'))
 @roleset('admin')

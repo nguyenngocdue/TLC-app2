@@ -20,7 +20,7 @@ abstract class Manage_Parent
     protected $jsonGetSet;
     protected $storingWhiteList = [];
     protected $storingBlackList = [];
-    protected $headerTop = 0;
+    protected $headerTop = null;
 
     protected $showToggleColumn = false;
     protected $showToggleRow = false;

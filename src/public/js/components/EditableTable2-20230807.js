@@ -82,7 +82,7 @@ const reRenderTableBaseOnNewOrder = (tableId, dropdownParams = {}) => {
 
         var colIndex = -1;
         $("#" + tableId + " th").each(function (index) {
-            if ($(this).attr("id") === "order_no") {
+            if ($(this).attr("id") === tableId + "_th_" + "order_no") {
                 colIndex = index;
                 return false; // Exit the loop once found
             }

@@ -102,3 +102,11 @@ Str::macro('humanReadable', function ($bytes, $base = 1000, $dec = 1) {
 
     return sprintf("%.{$dec}f%s", $bytes / ($base ** $factor), $size[$factor]);
 });
+
+Str::macro('removeDuplicateSpaces', function ($str) {    // Use regular expression to remove duplicate spaces
+    $pattern = '/\s+/';
+    $replacement = ' ';
+    $result = preg_replace($pattern, $replacement, $str);
+
+    return $result;
+});

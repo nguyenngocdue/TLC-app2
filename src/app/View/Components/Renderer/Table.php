@@ -24,7 +24,7 @@ class Table extends Component
     private $columns = null,
     private $dataSource = null,
     private $dataHeader = null,
-    private $headerTop = 0,
+    private $headerTop = null,
     private $showNo = false,
     private $showNoR = false,
     private $groupBy = false,
@@ -67,6 +67,7 @@ class Table extends Component
 
     $columns = $this->makeNoColumn($columns);
     $columns = $this->hideColumns($columns);
+    $columns = array_values($columns);
     $dataSource = $this->dataSource;
     $hasPaging = (is_object($dataSource) && method_exists($dataSource, 'links') && !empty($dataSource));
     $tr_td = $this->makeTrTd($columns, $dataSource, $this->tableDebug, $this->tableName);
@@ -78,7 +79,7 @@ class Table extends Component
       'headerRendered' => $this->makeTable2ndThead($columns, $this->dataHeader),
       'footerRendered' => $this->makeFooter($columns, $this->tableName, $dataSource),
       'headerTop' => $this->headerTop,
-      'columnsRendered' => $this->getColumnRendered($columns, $this->timeElapse),
+      'columnsRendered' => $this->getColumnRendered($columns, $this->timeElapse, $this->tableName),
       'tr_td' => $tr_td,
       'showing' => ($hasPaging && !$this->editable) ? $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing') : "",
       'pagination' => $hasPaging ? $dataSource->links('dashboards.pagination.pagination') : "",

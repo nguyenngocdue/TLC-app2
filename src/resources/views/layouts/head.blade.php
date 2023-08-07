@@ -18,7 +18,7 @@
     {{-- TLC2 will always be the last of CSS List --}}
     <link rel="stylesheet" href="{{ asset('css/select2-canh.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2-due.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/tlc2-20230724.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/tlc2-20230807.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/fullcalendar.bundle.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/plugin.bundle.css') }}"> 
         
@@ -46,7 +46,7 @@
     <script src="{{ asset('js/components/RadioOrCheckbox2-20230731.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2-20230731.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4-20230731.js') }}"></script>
-    <script src="{{ asset('js/components/EditableTable2-20230731.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTable2-20230807.js') }}"></script>
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20230731.js') }}"></script>
 
     <script src="{{ asset('js/components/Number4.js') }}"></script>

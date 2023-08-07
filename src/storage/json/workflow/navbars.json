@@ -77,6 +77,12 @@
         "href": "\/telescope\/requests",
         "icon_fa": "fa-duotone fa-telescope"
     },
+    "horizon": {
+        "name": "horizon",
+        "title": "Horizon",
+        "href": "\/horizon",
+        "icon_fa": "fa-duotone fa-ruler-horizontal"
+    },
     "graphql": {
         "name": "graphql",
         "title": "GraphQL PlayGround",

@@ -29,7 +29,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $groupByLength = 2;
     protected $allowCreation = true;
     protected $tableTrueWidth = false;
-    protected $headerTop = '';
+    protected $headerTop = null;
     protected $mode = 'status_only';
     /**
      * Create a new component instance.
@@ -194,13 +194,19 @@ abstract class ViewAllTypeMatrixParent extends Component
         return [];
     }
 
+    protected function getRightMetaColumns()
+    {
+        return [];
+    }
+
     protected function getColumns($extraColumns)
     {
         return  [
             ['dataIndex' => 'name_for_group_by', 'hidden' => true],
-            ['dataIndex' => 'name', 'width' => 250,],
+            ['dataIndex' => 'name', 'width' => 250, 'fixed' => 'left',],
             ...$this->getMetaColumns(),
             ...$extraColumns,
+            ...$this->getRightMetaColumns(),
         ];;
     }
 
