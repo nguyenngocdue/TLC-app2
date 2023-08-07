@@ -102,8 +102,8 @@ trait TraitStoreEmpty
 				}
 			}
 			$item = $this->applyFormula($item, 'store');
-			Log::info("Store empty");
-			Log::info($item);
+			// Log::info("Store empty");
+			// Log::info($item);
 			$createdItem = $this->modelPath::create($item);
 			$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
 			$tableName = Str::plural($this->type);
