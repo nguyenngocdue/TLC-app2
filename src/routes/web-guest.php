@@ -25,6 +25,7 @@ use App\Http\Controllers\WelcomeDueController_hr_timesheet_employee_project_not_
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_project_date;
 use App\Http\Controllers\WelcomeDueController_hr_timesheet_team_date;
 use App\Http\Controllers\WelcomeFortuneController;
+use App\Jobs\TestLogToFileJob;
 use App\Warehouse\Wh_user_sub_project_task;
 use Illuminate\Support\Facades\Route;
 
@@ -70,4 +71,8 @@ Route::get('login/google', [App\Http\Controllers\Auth\SocialiteAuthController::c
 Route::get('login/google/callback', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'handleGoogleCallback']);
 Route::get('wss-demo', function () {
     broadcast(new WssDemoChannel(['name' => 'wss-demo']));
+});
+
+Route::get('test-queue', function () {
+    TestLogToFileJob::dispatch();
 });
