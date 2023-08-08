@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 abstract class Wh_parent extends Controller {
 
+    protected $tableName = '';
     abstract protected function getSqlStr($userIds, $month);
     private function getDataSource($userIds, $month)
     {
@@ -25,7 +26,7 @@ abstract class Wh_parent extends Controller {
         $userIds = collect($treeData)->pluck('id')->toArray();
         $dataQuery = $this->getDataSource($userIds, $month);
 
-        $tableToMark =  DB::table('wh_user_sub_project_tasks');
+        $tableToMark =  DB::table($this->tableName);
         $tableToMark->where('month', $month.'-01')->delete();
         foreach ($dataQuery as $result) {
             $tableToMark->insert((array)$result);
