@@ -156,7 +156,7 @@
         "column_name": "opened_at",
         "column_type": "datetime",
         "label": "Opened Date",
-        "control": "picker_date",
+        "control": "picker_datetime",
         "align": "",
         "col_span": "6",
         "width": "",

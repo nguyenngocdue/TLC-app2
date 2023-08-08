@@ -1,8 +1,8 @@
 [
     "new",
     "in_progress",
-    "on_hold",
     "finished",
+    "on_hold",
     "cancelled",
     "obsolete"
 ]
