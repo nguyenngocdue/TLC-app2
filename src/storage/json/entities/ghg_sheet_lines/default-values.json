@@ -11,9 +11,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
+    "_ghg_sheet_id": {
+        "name": "_ghg_sheet_id",
+        "column_name": "ghg_sheet_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -35,9 +35,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
+    "_ghg_metric_type_1_id": {
+        "name": "_ghg_metric_type_1_id",
+        "column_name": "ghg_metric_type_1_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -47,11 +47,11 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_month": {
-        "name": "_month",
-        "column_name": "month",
+    "_ghg_metric_type_2_id": {
+        "name": "_ghg_metric_type_2_id",
+        "column_name": "ghg_metric_type_2_id",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -59,9 +59,45 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
+    "_unit": {
+        "name": "_unit",
+        "column_name": "unit",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_factor": {
+        "name": "_factor",
+        "column_name": "factor",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -77,7 +113,7 @@
         "label": "",
         "validation": "",
         "validation_regex": "",
-        "formula": "All_OwnerId",
+        "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",

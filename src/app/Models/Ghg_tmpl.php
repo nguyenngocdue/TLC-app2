@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use App\BigThink\ModelExtended;
+
+class Ghg_tmpl extends ModelExtended
+{
+    protected $fillable = [
+        "id", "name", "description",
+        "owner_id",
+    ];
+    protected $table = "ghg_tmpls";
+
+    public static $eloquentParams = [
+        "getLines" => ["hasMany", Ghg_tmpl_line::class, "ghg_tmpl_id"],
+    ];
+
+    public function getLines()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+}
