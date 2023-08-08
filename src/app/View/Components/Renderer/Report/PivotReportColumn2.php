@@ -55,7 +55,6 @@ trait  PivotReportColumn2
                     $checkFiled =  PivotReport::isStringInItemsOfArray($keysOfColumnFields, $field);
                     if ($checkFiled) {
                         // $title = ucwords(substr($field, strpos($field, "_") + 1, strrpos($field, "_") - strpos($field, "_") - 1));
-
                         $title = ucwords(substr($field, strpos($field, "_") + 1));
                         if (str_contains($title, '[')) {
                             $title = self::removeNumberedString($title);
@@ -66,6 +65,7 @@ trait  PivotReportColumn2
                 }
             }
         };
+        // dd($array);
         return $array;
     }
 

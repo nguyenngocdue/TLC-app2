@@ -19,9 +19,6 @@ class Hr_timesheet_line_dataSource extends Controller
 
     public function getSqlStr($modeParams)
     {
-
-
-
         $pickerDate = $modeParams['picker_date'] ?? PivotReport::defaultPickerDate();
         [$startDate, $endDate] = Report::explodePickerDate($pickerDate);
         $startDate = Report::formatDateString($startDate, 'Y-m-d');

@@ -34,6 +34,8 @@ class Constant
 
     const VIEW_ALL = 'view_all';
 
+    const VIEW_CREATE_THUMBNAIL = 'view_create_thumbnail';
+
     const VIEW_EDIT = 'view_edit';
 
     const VIEW_ORG_CHART = 'view_org_chart';

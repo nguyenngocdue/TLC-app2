@@ -43,6 +43,27 @@ services:
       - "27902:8001"
     networks:
       - laravel202
+  redis_horizon:
+    image: redis
+    container_name: laravel302_redis_horizon
+    restart: unless-stopped
+    environment:
+      - REDIS_PASSWORD=password
+      - REDIS_REPLICATION_mode=master
+    ports:
+      - "27913:6379"
+    networks:
+      - laravel202
+  redisinsight_horizon:
+    image: redislabs/redisinsight
+    container_name: laravel302_redisinsight_horizon
+    restart: unless-stopped
+    volumes:
+      - ../redis:/var/lib/redis
+    ports:
+      - "27903:8001"
+    networks:
+      - laravel202
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: laravel202_phpmyadmin

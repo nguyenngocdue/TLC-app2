@@ -1,13 +1,13 @@
 
 @extends("modals.modal-medium")
 
-@section($modalId.'-header', "Create a new HSE Checklist from a template")
+@section($modalId.'-header', "Create a Document from a Template")
 
 @section($modalId.'-body')
     <div class="p-2">
-        <label for="hse_insp_tmpl_sht_id" class="py-2 text-gray-700">Choose a Template to Clone</label>
+        <label for="template_id" class="py-2 text-gray-700">Choose a Template to Clone</label>
         <div class="py-1"></div>
-        <x-modals.dropdown5 name="hse_insp_tmpl_sht_id" :dataSource="$dataSource"></x-modals.dropdown5>
+        <x-modals.dropdown5 name="template_id" :dataSource="$dataSource"></x-modals.dropdown5>
     </div>
 @endsection
 
@@ -22,7 +22,7 @@
 <script>
     url = @json($url);
     callApiCloneTemplate = () => {
-        id = document.getElementById('hse_insp_tmpl_sht_id').value
+        id = document.getElementById('template_id').value
         if(id){
             $.ajax({
             type: 'post',

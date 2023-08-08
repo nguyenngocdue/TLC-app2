@@ -9,24 +9,39 @@
         "column_name": "name",
         "new": "true"
     },
+    "_month": {
+        "name": "_month",
+        "column_name": "month",
+        "new": "true"
+    },
+    "_ghg_tmpl_id": {
+        "name": "_ghg_tmpl_id",
+        "column_name": "ghg_tmpl_id",
+        "new": "true"
+    },
     "_description": {
         "name": "_description",
         "column_name": "description",
         "new": "true"
     },
-    "_year": {
-        "name": "_year",
-        "column_name": "year",
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
         "new": "true"
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
+    "_total": {
+        "name": "_total",
+        "column_name": "total",
         "new": "true"
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
         "new": "true"
     },
     "_created_at": {
@@ -47,11 +62,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true"
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
         "new": "true"
     }
 }
