@@ -17,7 +17,7 @@
         </div>
         <div>
             <label for="position">Position</label>
-            <x-renderer.editable.dropdown name="position" :cbbDataSource='["top", "center","bottom"]' cell="{{$settings['position']}}" ></x-renderer.editable.dropdown>
+            <x-renderer.editable.dropdown name="position" :cbbDataSource='["top", "center","bottom"]' cell="{{$settings['position'] ?? ''}}" ></x-renderer.editable.dropdown>
         </div>
         <div class="flex justify-end">
             <x-renderer.button htmlType="submit" type="primary">Create</x-renderer.button>
