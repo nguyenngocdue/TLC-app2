@@ -9,7 +9,7 @@ class Ghg_sheet extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description",
-        "month", "owner_id", "ghg_tmpl_id",
+        "month", "owner_id", "ghg_tmpl_id", "total",
     ];
     protected $table = "ghg_sheets";
 

@@ -1,4 +1,19 @@
 {
+    "_total": {
+        "name": "_total",
+        "column_name": "total",
+        "listen_action": "aggregate_from_table",
+        "triggers": "getLines[footer][total][agg_sum]",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
@@ -44,6 +59,21 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_month": {
+        "name": "_month",
+        "column_name": "month",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_ghg_tmpl_id": {
         "name": "_ghg_tmpl_id",
         "column_name": "ghg_tmpl_id",
@@ -62,21 +92,6 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_month": {
-        "name": "_month",
-        "column_name": "month",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

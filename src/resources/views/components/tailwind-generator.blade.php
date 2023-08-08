@@ -185,3 +185,10 @@
 
 {{-- avatar user --}}
 <div class="-mt-4 bg-opacity-30"></div>
+
+{{-- popover / general --}}
+<div class="z-10"></div>
+<div class="z-20"></div>
+<div class="z-30"></div>
+<div class="z-40"></div>
+<div class="z-50"></div>

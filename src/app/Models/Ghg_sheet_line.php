@@ -55,30 +55,14 @@ class Ghg_sheet_line extends ModelExtended
             ["dataIndex" => 'id', 'title' => 'OT Line ID', 'no_print' => true, 'invisible' => true],
             ['dataIndex' => 'ghg_sheet_id', 'invisible' => true, 'value_as_parent_id' => true],
 
-            ['dataIndex' => 'ghg_tmpl_id', 'invisible' => !true, 'no_print' => true],
+            ['dataIndex' => 'ghg_tmpl_id', 'invisible' => true, 'no_print' => true],
             ['dataIndex' => 'ghg_metric_type_1_id'],
             ['dataIndex' => 'ghg_metric_type_2_id'],
 
-            // ['dataIndex' => 'year', 'cloneable' => true],
-            ['dataIndex' => 'unit'],
             ['dataIndex' => 'factor'],
             ['dataIndex' => 'value'],
-            ['dataIndex' => 'total'],
-
-            // ['dataIndex' => 'm01'],
-            // ['dataIndex' => 'm02'],
-            // ['dataIndex' => 'm03'],
-            // ['dataIndex' => 'm04'],
-            // ['dataIndex' => 'm05'],
-            // ['dataIndex' => 'm06'],
-            // ['dataIndex' => 'm07'],
-            // ['dataIndex' => 'm08'],
-            // ['dataIndex' => 'm09'],
-            // ['dataIndex' => 'm10'],
-            // ['dataIndex' => 'm11'],
-            // ['dataIndex' => 'm12'],
-
-            // ['dataIndex' => 'ytd'],
+            ['dataIndex' => 'unit'],
+            ['dataIndex' => 'total', 'footer' => "agg_sum",],
 
             ['dataIndex' => 'remark', 'cloneable' => true],
             ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],

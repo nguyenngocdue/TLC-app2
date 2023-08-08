@@ -9,6 +9,11 @@
         "column_name": "name",
         "new": "true"
     },
+    "_month": {
+        "name": "_month",
+        "column_name": "month",
+        "new": "true"
+    },
     "_ghg_tmpl_id": {
         "name": "_ghg_tmpl_id",
         "column_name": "ghg_tmpl_id",
@@ -19,14 +24,14 @@
         "column_name": "description",
         "new": "true"
     },
-    "_month": {
-        "name": "_month",
-        "column_name": "month",
-        "new": "true"
-    },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
+        "new": "true"
+    },
+    "_total": {
+        "name": "_total",
+        "column_name": "total",
         "new": "true"
     },
     "_owner_id": {
