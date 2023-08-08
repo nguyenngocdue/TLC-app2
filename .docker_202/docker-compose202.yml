@@ -38,7 +38,8 @@ services:
     container_name: laravel202_redisinsight
     restart: unless-stopped
     volumes:
-      - ../redis:/var/lib/redis
+      # - ../redis:/var/lib/redis
+      - redis_insight_db:/db
     ports:
       - "27902:8001"
     networks:
