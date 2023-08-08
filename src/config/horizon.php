@@ -183,7 +183,7 @@ return [
         'supervisor-1' => [
             'connection' => 'redis',
             // 'connection' => 'database', //<< Horizon doesn't support database, only redis
-            'queue' => ['default'],
+            'queue' => ['horizon'],
             'balance' => 'auto',
             'autoScalingStrategy' => 'time',
             'maxProcesses' => 1,
