@@ -41,9 +41,9 @@
         "frozen_left": "",
         "frozen_right": ""
     },
-    "_month": {
-        "name": "_month",
-        "column_name": "month",
+    "_ghg_month": {
+        "name": "_ghg_month",
+        "column_name": "ghg_month",
         "column_type": "date",
         "label": "Month",
         "control": "picker_month",
