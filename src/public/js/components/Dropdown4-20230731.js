@@ -68,7 +68,7 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
-        // console.log("value", constraintsValues[i], value, !value)
+        // console.log("value", value)
         const column = listen_to_attrs[i]
         if (column === undefined) console.log("The column to look up [", column, "] is not found in ...")
         if (!value) continue;
@@ -91,6 +91,7 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
     const lastSelected = getEById(id).val()
     // console.log("Selected", lastSelected)
     //TODO: make selected array if dropdown is multiple
+    // console.log("reloadDataToDropdown4 from onChangeDropdown4Reduce", id)
     reloadDataToDropdown4(id, dataSource, table01Name, [lastSelected * 1])
 }
 const onChangeGetSelectedObject4 = (listener, table01Name, rowIndex) => {
@@ -359,8 +360,8 @@ const ajaxQueueUpdate = {}
 const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange, dropdownParams = {} }) => {
     // console.log("onChangeDropdown4", name, table01Name, rowIndex, saveOnChange, lineType)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s, table01Name)
-    // console.log("onChangeDropdown4", name, batchLength)
     const { batchLength = 1 } = dropdownParams
+    // console.log("onChangeDropdown4", name, batchLength)
     const fieldName = getFieldNameInTable01FormatJS(name, table01Name)
     const { tableName } = tableObject[table01Name]
     const url = '/api/v1/entity/' + tableName + '_updateShort'
@@ -510,6 +511,7 @@ const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table, batchLen
     dataSourceDropdown = k[table];
     if (dataSourceDropdown === undefined) console.error("Key " + table + " not found in k[]");
     //This will load all line without reduce
+    // console.log("reloadDataToDropdown4 from documentReadyDropdown4", id)
     reloadDataToDropdown4(id, dataSourceDropdown, table01Name, selectedJson)
     $(document).ready(() => {
         listenersOfDropdown4s[table01Name].forEach((listener) => {

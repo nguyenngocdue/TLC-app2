@@ -19,16 +19,6 @@
         "column_name": "description",
         "new": "true"
     },
-    "_month": {
-        "name": "_month",
-        "column_name": "month",
-        "new": "true"
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
-        "new": "true"
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

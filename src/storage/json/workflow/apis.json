@@ -78,8 +78,7 @@
         "name": "fields"
     },
     "ghg_lines": {
-        "name": "ghg_lines",
-        "storeEmpty_and_updateShort": "true"
+        "name": "ghg_lines"
     },
     "ghg_metric_type_1s": {
         "name": "ghg_metric_type_1s"
@@ -90,8 +89,22 @@
     "ghg_metric_types": {
         "name": "ghg_metric_types"
     },
+    "ghg_sheet_lines": {
+        "name": "ghg_sheet_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
     "ghg_sheets": {
         "name": "ghg_sheets"
+    },
+    "ghg_tmpl_lines": {
+        "name": "ghg_tmpl_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "ghg_tmpls": {
+        "name": "ghg_tmpls"
+    },
+    "groups": {
+        "name": "groups"
     },
     "hr_onboarding_courses": {
         "name": "hr_onboarding_courses"
@@ -165,6 +178,9 @@
     },
     "hse_walkthroughs": {
         "name": "hse_walkthroughs"
+    },
+    "likes": {
+        "name": "likes"
     },
     "loggers": {
         "name": "loggers"

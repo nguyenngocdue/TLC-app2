@@ -19,12 +19,19 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('ghg_sheets', function (BlueprintExtended $table) {
+        $schema->create('ghg_sheet_lines', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
-            $table->date('month');
+            $table->unsignedBigInteger('ghg_sheet_id');
             $table->unsignedBigInteger('ghg_tmpl_id')->nullable();
+            $table->unsignedBigInteger('ghg_metric_type_1_id')->nullable();
+            $table->unsignedBigInteger('ghg_metric_type_2_id')->nullable();
+            // $table->date('year')->nullable();
+            $table->unsignedBigInteger('unit')->nullable();
+            $table->decimal('factor', 10, 4)->nullable();
+            $table->decimal('value', 10, 4)->nullable();
+            $table->decimal('total', 10, 4)->nullable();
+            $table->text('remark')->nullable();
+            $table->orderable();
             $table->appendCommonFields();
         });
     }
@@ -36,6 +43,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ghg_sheets');
+        Schema::dropIfExists('ghg_sheet_lines');
     }
 };

@@ -134,6 +134,20 @@ trait TraitManagePropColumns
                 "renderer" => "checkbox",
                 'width' => 10,
             ],
+            [
+                "dataIndex" => "frozen_left",
+                "align" => "center",
+                "editable" => true,
+                "renderer" => "checkbox",
+                'width' => 10,
+            ],
+            [
+                "dataIndex" => "frozen_right",
+                "align" => "center",
+                "editable" => true,
+                "renderer" => "checkbox",
+                'width' => 10,
+            ],
         ];
     }
 }

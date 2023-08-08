@@ -248,25 +248,27 @@ div.scroll-to-month {
 .table-td-fixed-left{
     position:sticky !important;
     z-index: 2;
-    background-color: #fff;
+    /* background-color: #fff; */
 }
 
 .table-th-fixed-left{
     position:sticky !important;
     z-index: 2;
-    --tw-bg-opacity: 1;
-    background-color: rgb(243 244 246 / var(--tw-bg-opacity)); /*<< bg-gray-100*/
+    /* --tw-bg-opacity: 1; */
+    /* background-color: rgb(243 244 246 / var(--tw-bg-opacity));  */
+    /*<< bg-gray-100*/
 }
 
 .table-td-fixed-right{
     position:sticky !important;
     z-index: 2;
-    background-color: #fff;
+    /* background-color: #fff; */
 }
 
 .table-th-fixed-right{
     position:sticky !important;
     z-index: 2;
-    --tw-bg-opacity: 1;
-    background-color: rgb(243 244 246 / var(--tw-bg-opacity)); /*<< bg-gray-100*/
+    /* --tw-bg-opacity: 1; */
+    /* background-color: rgb(243 244 246 / var(--tw-bg-opacity));  */
+    /*<< bg-gray-100*/
 }

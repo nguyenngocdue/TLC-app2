@@ -4,20 +4,20 @@ namespace App\Models;
 
 use App\BigThink\ModelExtended;
 
-class Ghg_line extends ModelExtended
+class Ghg_sheet_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "ghg_metric_type_id", "ghg_metric_type_1_id", "ghg_metric_type_2_id", "unit", "factor",
-        "ghg_sheet_id",
-        // "m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m09", "m10", "m11", "m12","ytd",
+        "id", "ghg_tmpl_id", "ghg_metric_type_1_id", "ghg_metric_type_2_id",
+        "unit", "factor", "ghg_sheet_id", "value", "total",
         "remark", "owner_id", "status", "order_no",
     ];
-    protected $table = "ghg_lines";
+    protected $table = "ghg_sheet_lines";
     public static $nameless = true;
 
     public static $eloquentParams = [
         "getGhgSheet" => ['belongsTo', Ghg_sheet::class, 'ghg_sheet_id'],
-        "getGhgMetricType" => ['belongsTo', Ghg_metric_type::class, 'ghg_metric_type_id'],
+        // "getGhgMetricType" => ['belongsTo', Ghg_metric_type::class, 'ghg_metric_type_id'],
+        "getGhgTmpl" => ['belongsTo', Ghg_tmpl::class, 'ghg_tmpl_id'],
         "getGhgMetricType1" => ['belongsTo', Ghg_metric_type_1::class, 'ghg_metric_type_1_id'],
         "getGhgMetricType2" => ['belongsTo', Ghg_metric_type_2::class, 'ghg_metric_type_2_id'],
         "getUnit" => ['belongsTo', Term::class, 'unit'],
@@ -27,7 +27,7 @@ class Ghg_line extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getGhgMetricType()
+    public function getGhgTmpl()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -53,30 +53,32 @@ class Ghg_line extends ModelExtended
         return [
             ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
             ["dataIndex" => 'id', 'title' => 'OT Line ID', 'no_print' => true, 'invisible' => true],
-            ['dataIndex' => 'ghg_sheet_id', 'title' => 'OT ID', 'invisible' => true, 'value_as_parent_id' => true],
+            ['dataIndex' => 'ghg_sheet_id', 'invisible' => true, 'value_as_parent_id' => true],
 
-            ['dataIndex' => 'ghg_metric_type_id'],
+            ['dataIndex' => 'ghg_tmpl_id', 'invisible' => !true, 'no_print' => true],
             ['dataIndex' => 'ghg_metric_type_1_id'],
             ['dataIndex' => 'ghg_metric_type_2_id'],
 
             // ['dataIndex' => 'year', 'cloneable' => true],
             ['dataIndex' => 'unit'],
             ['dataIndex' => 'factor'],
+            ['dataIndex' => 'value'],
+            ['dataIndex' => 'total'],
 
-            ['dataIndex' => 'm01'],
-            ['dataIndex' => 'm02'],
-            ['dataIndex' => 'm03'],
-            ['dataIndex' => 'm04'],
-            ['dataIndex' => 'm05'],
-            ['dataIndex' => 'm06'],
-            ['dataIndex' => 'm07'],
-            ['dataIndex' => 'm08'],
-            ['dataIndex' => 'm09'],
-            ['dataIndex' => 'm10'],
-            ['dataIndex' => 'm11'],
-            ['dataIndex' => 'm12'],
+            // ['dataIndex' => 'm01'],
+            // ['dataIndex' => 'm02'],
+            // ['dataIndex' => 'm03'],
+            // ['dataIndex' => 'm04'],
+            // ['dataIndex' => 'm05'],
+            // ['dataIndex' => 'm06'],
+            // ['dataIndex' => 'm07'],
+            // ['dataIndex' => 'm08'],
+            // ['dataIndex' => 'm09'],
+            // ['dataIndex' => 'm10'],
+            // ['dataIndex' => 'm11'],
+            // ['dataIndex' => 'm12'],
 
-            ['dataIndex' => 'ytd'],
+            // ['dataIndex' => 'ytd'],
 
             ['dataIndex' => 'remark', 'cloneable' => true],
             ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],

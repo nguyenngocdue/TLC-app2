@@ -142,7 +142,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             $line['name'] = (object)[
                 'value' => $y->name,
                 'cell_title' => "(#" . $y->id . ")",
-                'cell_class' => "text-blue-800",
+                'cell_class' => "text-blue-800 bg-white",
                 'cell_href' => route($yAxisTableName . ".edit", $y->id),
             ];
             if ($this->allowCreation) {
@@ -177,7 +177,16 @@ abstract class ViewAllTypeMatrixParent extends Component
                 }
             }
             $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis, $forExcel);
-            foreach ($metaObjects as $key => $metaObject)  $line[$key] = $metaObject;
+            foreach ($metaObjects as $key => $metaObject) {
+                $newObject = $metaObject;
+                if (!is_object($metaObject)) {
+                    $newObject = (object) [
+                        "cell_class" => "bg-white",
+                        "value" => $metaObject,
+                    ];
+                }
+                $line[$key] =  $newObject;
+            }
             $result[] = $line;
         }
         // dump($result);
