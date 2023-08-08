@@ -1,32 +1,32 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court-assignee": "creator",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": ""
     },
     "assigned": {
         "name": "assigned",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "getMonitors1()"
     },
     "rejected": {
         "name": "rejected",
-        "ball-in-court-assignee": "creator",
-        "ball-in-court-monitors": ""
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "getMonitors1()"
     },
     "inspected": {
         "name": "inspected",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "getMonitors1()"
     },
     "inspection_rejected": {
         "name": "inspection_rejected",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "getMonitors1()"
     },
     "closed": {
         "name": "closed",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "getMonitors1()"
     }
 }

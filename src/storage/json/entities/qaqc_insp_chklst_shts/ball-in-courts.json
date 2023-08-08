@@ -2,7 +2,7 @@
     "new": {
         "name": "new",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": ""
     },
     "in_progress": {
         "name": "in_progress",

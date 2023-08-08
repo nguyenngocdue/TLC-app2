@@ -2,24 +2,16 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Qaqc_insp_chklst;
-use App\Models\Qaqc_insp_chklst_sht;
-use App\Models\Qaqc_insp_tmpl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
-use App\Models\Hse_insp_chklst;
 use App\Models\Hse_insp_chklst_line;
 use App\Models\Hse_insp_chklst_sht;
-use App\Models\Hse_insp_tmpl;
 use App\Models\Hse_insp_tmpl_sht;
-use App\Models\Prod_order;
-use App\Models\Qaqc_insp_chklst_line;
 use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Formula\All_SlugifyByName;
-use App\View\Components\Formula\TSO_GetAssignee1;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class CloneTemplateHseCommand extends Command
+class CloneTemplateForHseChecklistCommand extends Command
 {
     // use CloneRunTrait;
     use TraitEntityFormula;
