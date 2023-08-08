@@ -47,6 +47,7 @@ trait TraitChangeDataPivotTable2
 
     public function changeValueData($data, $isRawData)
     {
+        // dd($data);
         if ($isRawData) {
             $libs = LibPivotTables2::getFor($this->modeType);
             return $this->updateValueForRawData($data, $libs);

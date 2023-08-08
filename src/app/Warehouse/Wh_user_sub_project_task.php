@@ -2,11 +2,9 @@
 
 namespace App\Warehouse;
 
-use App\Utils\Support\Tree\BuildTree;
-use Illuminate\Support\Facades\DB;
-
 class Wh_user_sub_project_task extends Wh_parent
 {
+    protected $tableName = 'wh_user_sub_project_tasks';
     public function getSqlStr($userIds, $month)
     {
         $strUserIds = '(' . implode(',', $userIds) . ')';
