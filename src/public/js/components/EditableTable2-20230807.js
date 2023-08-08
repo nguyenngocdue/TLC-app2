@@ -39,6 +39,7 @@ const getValueOfTrByName = (aRow, fieldName) => {
     return result
 }
 const setValueOfTrByName = (aRow, fieldName, value) => {
+    fieldName = "[" + fieldName + "]"
     aRow.childNodes.forEach((td) => {
         td.childNodes.forEach((control) => {
             const name = control.name
@@ -68,27 +69,38 @@ const setCellValueByName = (tableId, columnName, rowIndex, value) => {
 
 
 const reRenderQueue = {}
-const reRenderTableBaseOnNewOrder = (tableId, dropdownParams) => {
+const reRenderTableBaseOnNewOrder = (tableId, dropdownParams = {}) => {
     // const debugEditable = true
-    // console.log(batchLength)
     const { batchLength = 1 } = dropdownParams
-    if (reRenderQueue[tableId] === undefined) reRenderQueue[tableId] = 0
+    if (debugEditable) console.log("reRenderTableBaseOnNewOrder", tableId, batchLength)
+    if (reRenderQueue[tableId] === undefined) reRenderQueue[tableId] = 1
     if (reRenderQueue[tableId] < batchLength) {
+        if (debugEditable) console.log("Enqueue and wait...")
         reRenderQueue[tableId]++;
     } else {
         delete reRenderQueue[tableId]
-        const rows = getAllRows(tableId)
-        if (debugEditable) console.log("rows", rows)
-        const newTable = []
-        for (let item of rows) newTable.push(item)
-        const sortedTable = newTable.sort((a, b) => {
-            const aValue = getValueOfTrByName(a, '[order_no]') * 1
-            const bValue = getValueOfTrByName(b, '[order_no]') * 1
-            return aValue - bValue
-        })
 
-        $("#" + tableId + ' > tbody').html(sortedTable)
-        if (debugEditable) console.log("Re-render completed", tableId, sortedTable)
+        var colIndex = -1;
+        $("#" + tableId + " th").each(function (index) {
+            if ($(this).attr("id") === tableId + "_th_" + "order_no") {
+                colIndex = index;
+                return false; // Exit the loop once found
+            }
+        });
+
+        // Sort the table rows based on the values in the selected column
+        var tbody = $('#' + tableId + ' tbody');
+        var rows = tbody.children('tr').get();
+        rows.sort(function (a, b) {
+            var aVal = parseFloat($(a).children('td').eq(colIndex).find('input').val());
+            var bVal = parseFloat($(b).children('td').eq(colIndex).find('input').val());
+            return aVal - bVal;
+        });
+
+        // Clear the table body and re-append the sorted rows
+        $.each(rows, function (index, row) {
+            tbody.append(row);
+        });
     }
 }
 
@@ -137,10 +149,11 @@ const moveUpEditableTable = (params) => {
     if (debugEditable) console.log(tableId, fingerPrint, firstRowFingerPrintValue)
     if (fingerPrint === firstRowFingerPrintValue) {
         const max = getMaxValueOfAColumn(tableId, "[order_no]")
-        if (debugEditable) console.log("FIRST ROW, max of order_no", max)
-        setCellValueByName(tableId, '[order_no]', 0, max + 10)
+        // if (debugEditable) console.log("FIRST ROW, max of order_no", max)
+        setCellValueByName(tableId, 'order_no', 0, max + 10)
+        if (debugEditable) console.log("First ROW, move up, make it to MAX=", max + 10)
     } else {
-        if (debugEditable) console.log("NORMAL ROW")
+        // if (debugEditable) console.log("NORMAL ROW")
         const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
         const myValue = 1 * getCellValueByName(tableId, '[order_no]', myRowIndex)
 
@@ -149,13 +162,16 @@ const moveUpEditableTable = (params) => {
         if (debugEditable) console.log(previousRowIndex, myRowIndex, myPreviousValue, myValue)
 
         const tmp = myPreviousValue
-        setCellValueByName(tableId, '[order_no]', previousRowIndex, myValue)
-        setCellValueByName(tableId, '[order_no]', myRowIndex, tmp)
+        setCellValueByName(tableId, 'order_no', previousRowIndex, myValue)
+        setCellValueByName(tableId, 'order_no', myRowIndex, tmp)
+        if (debugEditable) console.log("Normal ROW, move up, swap [", previousRowIndex, "]=", myValue, "with [", myRowIndex, "]=", tmp)
     }
     reRenderTableBaseOnNewOrder(tableId)
 }
 
 const moveDownEditableTable = (params) => {
+    // const debugEditable = true
+    if (debugEditable) console.log("Moving down editable table", params)
     const { control, fingerPrint } = params
     const tableId = control.value
     const length = getAllRows(tableId).length
@@ -164,7 +180,8 @@ const moveDownEditableTable = (params) => {
     if (fingerPrint === lastRowFingerPrintValue) {
         const min = getMinValueOfAColumn(tableId, "[order_no]")
         // console.log("FIRST ROW, min of order_by", min)
-        setCellValueByName(tableId, '[order_no]', length - 1, min - 10)
+        setCellValueByName(tableId, 'order_no', length - 1, min - 10)
+        if (debugEditable) console.log("First ROW, move up, make it to MIN=", min - 10)
     } else {
         // console.log("NORMAL ROW")
         const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
@@ -175,8 +192,9 @@ const moveDownEditableTable = (params) => {
         // console.log(nextRowIndex, myRowIndex)
 
         const tmp = myNextValue
-        setCellValueByName(tableId, '[order_no]', nextRowIndex, myValue)
-        setCellValueByName(tableId, '[order_no]', myRowIndex, tmp)
+        setCellValueByName(tableId, 'order_no', nextRowIndex, myValue)
+        setCellValueByName(tableId, 'order_no', myRowIndex, tmp)
+        if (debugEditable) console.log("Normal ROW, move up, swap [", nextRowIndex, "]=", myValue, "with [", myRowIndex, "]=", tmp)
     }
     reRenderTableBaseOnNewOrder(tableId)
 }
@@ -212,7 +230,7 @@ const trashEditableTable = (params) => {
     const rowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
     const value = getCellValueByName(tableId, '[DESTROY_THIS_LINE]', rowIndex) === 'true'
     const isDeleted = !value;
-    setCellValueByName(tableId, '[DESTROY_THIS_LINE]', rowIndex, isDeleted)
+    setCellValueByName(tableId, 'DESTROY_THIS_LINE', rowIndex, isDeleted)
     const icon_i_tag = button.firstChild
     // console.log(button, icon_i_tag)
     if (isDeleted) {

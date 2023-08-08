@@ -427,6 +427,7 @@ const addANewLineFull = (params) => {
                 } else {
                     toDoAfterAddedDropdown4.push({ id, dataSource: k[column['tableName']], tableId, selected, })
                 }
+                // console.log("DDDDDD4", column)
                 break
             case 'dropdown': //<<status
                 let selected1 = valuesOfOrigin[column['dataIndex']]
@@ -439,6 +440,7 @@ const addANewLineFull = (params) => {
                 }
                 break
             default:
+                // console.log("DDDDDD5", column)
                 if (column['value_as_parent_type']) {
                     getEById(id).val($('#entityParentType').val())
                     getEById(id).trigger('change', { batchLength })
@@ -483,15 +485,19 @@ const addANewLineFull = (params) => {
     })
     // console.log(toDoAfterAddedDropdown4)
     //This is to make sure the Listen assign will assign to the existing column
-    for (let i = 0; i < toDoAfterAddedDropdown4.length; i++) {
+    for (let i = toDoAfterAddedDropdown4.length - 1; i >= 0; i--) {
+        // for (let i = 0; i < toDoAfterAddedDropdown4.length; i++) {
+        //<< Have to do from length back to 0, 
+        //<< as the reduce of the previous dropdown may be overwritten by the later dropdown reloadDataToDropdown4
+        //<< E.G: GHG template already reduce metric 1, but when metric 1 load after that, it will load whole list
         const { id, dataSource, tableId, selected } = toDoAfterAddedDropdown4[i]
+        // console.log("reloadDataToDropdown4 from addANewLineFull", id)
         reloadDataToDropdown4(id, dataSource, tableId, selected)
         getEById(id).trigger('change', { batchLength })
         // console.log("Triggered change", id)
     }
     for (let i = 0; i < toDoAfterAddedDropdown4ReadOnly.length; i++) {
-        const { id, dataSource, tableId, selected } =
-            toDoAfterAddedDropdown4ReadOnly[i]
+        const { id, dataSource, tableId, selected } = toDoAfterAddedDropdown4ReadOnly[i]
         // reloadDataToDropdown4(id, dataSource, tableId, selected)
         getEById(id).trigger('change', { batchLength })
         // console.log("Triggered change", id)

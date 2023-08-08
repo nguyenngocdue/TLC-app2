@@ -59,6 +59,7 @@ class ManageListeners extends Manage_Parent
                 "dataIndex" => "triggers",
                 "renderer" => "textarea4",
                 "editable" => true,
+                'width' => 150,
             ],
             [
                 "dataIndex" => "listen_to_fields",

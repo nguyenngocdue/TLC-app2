@@ -20,10 +20,10 @@
     ></select>
     <script>
         $(document).ready(()=>{
-            const dropdownParams = { batchLength: {{$batchLength}}, onLoad:true}
-            const params1 = {id:'{{$id}}', table01Name: '{{$table01Name}}', selectedJson: '{!! $selected !!}', table: '{{$table}}', dropdownParams}
+            const dropdownParams = { batchLength: {{$batchLength}}, onLoad:true};
+            const params1 = {id:'{{$id}}', table01Name: '{{$table01Name}}', selectedJson: '{!! $selected !!}', table: '{{$table}}', dropdownParams};
             documentReadyDropdown4(params1)
-            // console.log("Document ready dropdown4")
+            /* console.log("Document ready dropdown4") */
         })
     </script>
 @endif

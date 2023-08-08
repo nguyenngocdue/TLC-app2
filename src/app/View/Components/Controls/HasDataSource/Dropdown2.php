@@ -30,6 +30,7 @@ class Dropdown2 extends Component
         $props = $sp['props'];
         $prop = $props["_" . $this->name];
         $letUserChooseWhenOneItem = ($prop['relationships']['let_user_choose_when_one_item'] ?? false) === "true";
+        $letUserClear = ($prop['relationships']['let_user_clear'] ?? false) === "true";
         // dump($letUserChooseWhenOneItem);
         if (!isset($prop['relationships']['table'])) {
             dump("Orphan prop " . $this->type . "\\" . $this->name);
@@ -49,7 +50,7 @@ class Dropdown2 extends Component
             'classList' => ClassList::DROPDOWN,
             'table' => $table,
             'saveOnChange' => $this->saveOnChange,
-            'allowClear' => $this->allowClear,
+            'allowClear' => $this->allowClear || $letUserClear,
             'nameless' => $nameless,
             'action' => $this->action,
             'letUserChooseWhenOneItem' => $letUserChooseWhenOneItem,

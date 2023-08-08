@@ -11,6 +11,7 @@
         , isOrderable: {{$isOrderable ? 1 : 0}}
         , tableName: "{{$tableName}}"
         , dateTimeControls: dateTimeControls['{{$table01Name}}']
+        , eloquentFn: "{{$colName}}"
     };
     tableObjectColName["{{$colName}}"] = {
         name:'{{$table01Name}}'

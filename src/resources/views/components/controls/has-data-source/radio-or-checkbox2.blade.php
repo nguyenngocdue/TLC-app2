@@ -20,7 +20,7 @@
 </script>
 
 <script>
-    $("[id='{{$id}}']").on('change',function(e, dropdownParams){
+    $("[id='{{$id}}']").on('change', function(e, dropdownParams){
         onChangeDropdown2({
             name:"{{$id}}",
             dropdownParams,

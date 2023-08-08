@@ -18,13 +18,14 @@
     {{-- TLC2 will always be the last of CSS List --}}
     <link rel="stylesheet" href="{{ asset('css/select2-canh.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2-due.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/tlc2-20230724.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/tlc2-20230808.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/fullcalendar.bundle.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/plugin.bundle.css') }}"> 
         
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/number-to-words.js') }}"></script>
+    <script src="{{ asset('js/lazysizes.js') }}"></script>
     
     {{-- <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js')}}"></script>
@@ -45,7 +46,7 @@
     <script src="{{ asset('js/components/RadioOrCheckbox2-20230731.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2-20230731.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4-20230731.js') }}"></script>
-    <script src="{{ asset('js/components/EditableTable2-20230731.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTable2-20230807.js') }}"></script>
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20230731.js') }}"></script>
 
     <script src="{{ asset('js/components/Number4.js') }}"></script>
@@ -72,6 +73,8 @@
     <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/lightgallery.css') }}">
     <script src="{{ asset('js/lightgallery.js') }}"></script>
+
+    <script src="https://cdn.tiny.cloud/1/fclv950nwjacvpdeyszgia9sfzh514e25u6olez0h2z46d4c/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>

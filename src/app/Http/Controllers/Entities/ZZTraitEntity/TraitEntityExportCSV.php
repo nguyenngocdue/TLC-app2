@@ -56,7 +56,7 @@ trait TraitEntityExportCSV
                     $data = $dataLine->$fn() ?? [];
                     $dataOracy = [];
                     foreach ($data as $value) {
-                        $dataOracy[] = $value['name'];
+                        if ($value) $dataOracy[] = $value['name'];
                     }
                     $result[] = join(',', $dataOracy);
                     break;

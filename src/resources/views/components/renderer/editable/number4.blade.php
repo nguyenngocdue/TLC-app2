@@ -18,7 +18,7 @@
 <script>
     $("[id='{{$name}}']").on('change', function(e, dropdownParams){
         @if($onChange)
-        {{$onChange}} //<< For order_no column to change line order
+        {{$onChange}} /* << For order_no column to change line order */
         @else
         onChangeDropdown4({
             name:"{{$name}}", 
@@ -26,9 +26,9 @@
             rowIndex:{{$rowIndex}}, 
             saveOnChange: {{$saveOnChange?1:0}},
             dropdownParams,
-        })
-        changeBgColor(this,'{{$table01Name}}')
-        changeFooterValue(this,'{{$table01Name}}')
+        });
+        changeBgColor(this,'{{$table01Name}}');
+        changeFooterValue(this,'{{$table01Name}}');
         @endif
     })
 </script>

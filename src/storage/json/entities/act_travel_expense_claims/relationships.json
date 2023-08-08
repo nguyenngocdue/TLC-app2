@@ -12,7 +12,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getAdvanceTravel": {
         "name": "_getAdvanceTravel",
@@ -27,7 +28,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": "true"
+        "let_user_choose_when_one_item": "true",
+        "let_user_clear": "true"
     },
     "_getTravelReq": {
         "name": "_getTravelReq",
@@ -42,7 +44,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": "true"
+        "let_user_choose_when_one_item": "true",
+        "let_user_clear": "true"
     },
     "_getCurrency1": {
         "name": "_getCurrency1",
@@ -57,7 +60,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getCurrencyPair1": {
         "name": "_getCurrencyPair1",
@@ -72,7 +76,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getCurrency2": {
         "name": "_getCurrency2",
@@ -87,7 +92,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getCurrencyPair2": {
         "name": "_getCurrencyPair2",
@@ -102,7 +108,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getCounterCurrency": {
         "name": "_getCounterCurrency",
@@ -117,7 +124,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getRateExchangeMonth": {
         "name": "_getRateExchangeMonth",
@@ -132,7 +140,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getAssignee1": {
         "name": "_getAssignee1",
@@ -147,7 +156,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -162,7 +172,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -177,7 +188,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -192,7 +204,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getSubProjectsOfExpenseClaim()": {
         "name": "_getSubProjectsOfExpenseClaim()",
@@ -207,7 +220,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getTravelExpenseClaimLines": {
         "name": "_getTravelExpenseClaimLines",
@@ -222,7 +236,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_doc_travel_expense_claim": {
         "name": "_attachment_doc_travel_expense_claim",
@@ -237,6 +252,7 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }

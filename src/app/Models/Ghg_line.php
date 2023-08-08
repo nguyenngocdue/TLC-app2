@@ -9,8 +9,8 @@ class Ghg_line extends ModelExtended
     protected $fillable = [
         "id", "ghg_metric_type_id", "ghg_metric_type_1_id", "ghg_metric_type_2_id", "unit", "factor",
         "ghg_sheet_id",
-        "m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m09", "m10", "m11", "m12",
-        "ytd", "remark", "owner_id", "status", "order_no",
+        // "m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m09", "m10", "m11", "m12","ytd",
+        "remark", "owner_id", "status", "order_no",
     ];
     protected $table = "ghg_lines";
     public static $nameless = true;

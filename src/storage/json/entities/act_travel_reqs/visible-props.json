@@ -9,6 +9,11 @@
         "column_name": "name",
         "new": "true"
     },
+    "_title": {
+        "name": "_title",
+        "column_name": "title",
+        "new": "true"
+    },
     "_user_id": {
         "name": "_user_id",
         "column_name": "user_id",

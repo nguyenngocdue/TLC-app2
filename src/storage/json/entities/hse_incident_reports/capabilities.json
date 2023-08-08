@@ -443,6 +443,18 @@
         "pending_verification": "",
         "closed": ""
     },
+    "proj_admin": {
+        "name": "proj_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
     "proj_manager": {
         "name": "proj_manager",
         "name_rendered": "",

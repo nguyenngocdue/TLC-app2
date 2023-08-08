@@ -63,7 +63,7 @@
         "name": "_injured_person",
         "column_name": "injured_person",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\View\Components\Calendar;
+namespace App\View\Components\Social;
 
 use Illuminate\View\Component;
 
-class SidebarOptions extends Component
+class PostForm extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(private $id = null, private $model = null)
+    public function __construct()
     {
         //
     }
@@ -23,7 +23,6 @@ class SidebarOptions extends Component
      */
     public function render()
     {
-        $model = $this->model::findOrFail($this->id);
-        return view('components.calendar.sidebar-options');
+        return view('components.social.post-form');
     }
 }

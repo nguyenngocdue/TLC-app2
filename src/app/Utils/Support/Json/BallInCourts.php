@@ -18,7 +18,7 @@ class BallInCourts extends JsonGetSet
         }
         foreach ($dataSource as &$item) {
             if (!isset($item['ball-in-court-assignee'])) {
-                $item['ball-in-court-assignee'] = 'assignee_1';
+                $item['ball-in-court-assignee'] = 'owner_id';
             }
             if (!isset($item['ball-in-court-monitors'])) {
                 $item['ball-in-court-monitors'] = 'getMonitors1()';

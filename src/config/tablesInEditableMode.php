@@ -82,8 +82,14 @@ return [
         'sub_projects' => [],
     ],
 
+    //** ESG TEST */
+
+    'ghg_tmpls' => [
+        'ghg_tmpl_lines' => [],
+    ],
+
     'ghg_sheets' => [
-        'ghg_lines' => [],
+        'ghg_sheet_lines' => [],
     ],
 
     //** UNIT TEST */

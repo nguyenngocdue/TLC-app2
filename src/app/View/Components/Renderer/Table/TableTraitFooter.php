@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\Table;
 
 use App\Utils\Constant;
 use App\Utils\Support\DateTimeConcern;
+use App\View\Components\Controls\RelationshipRenderer2;
 use Carbon\Carbon;
 
 trait TableTraitFooter
@@ -106,20 +107,23 @@ trait TableTraitFooter
             $id = "{$tableName}[footer][{$fieldName}][$agg]";
             // $value = ($agg != 'agg_none') ? round($result[$agg], 2)  : "";
             $value = $result[$agg];
-            $inputs[] = "<input id='$id' title='$agg' component='TraitFooter' value='$value' readonly class='$class $bg' onChange='onChangeDropdown4AggregateFromTable(\"$id\", this.value)'/>";
+            $onChange = "onChangeDropdown4AggregateFromTable('$id', this.value)";
+            $inputs[] = "<input id='$id' title='$agg' component='TraitFooter' value='$value' readonly class='$class $bg' onChange=\"$onChange\" />";
         }
         return join("", $inputs);
     }
 
     function makeFooter($columns, $tableName, $dataSource)
     {
+        $eloquentTables = RelationshipRenderer2::getCacheTable01NameToEloquent();
+        $eloquentTable = $eloquentTables[$tableName] ?? "";
         $result0 = [];
         $hasFooter = false;
         foreach ($columns as $column) {
             if (isset($column['invisible']) && $column['invisible']) continue;
             if (isset($column['footer'])) {
                 $hasFooter = true;
-                $result0[$column['dataIndex']] = $this->makeOneFooter($column, $tableName, $dataSource);
+                $result0[$column['dataIndex']] = $this->makeOneFooter($column, $eloquentTable, $dataSource);
             } else {
                 if (isset($column['dataIndex'])) $result0[$column['dataIndex']] = "";
             }

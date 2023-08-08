@@ -84,7 +84,12 @@ trait TraitManageRelationshipColumns
                 "editable" => true,
                 "renderer" => "checkbox",
                 'align' => "center",
-                // 'properties' => ['placeholder' => 4],
+            ],
+            [
+                "dataIndex" => "let_user_clear",
+                "editable" => true,
+                "renderer" => "checkbox",
+                'align' => "center",
             ],
         ];
     }

@@ -15,19 +15,19 @@
         "name": "report-hr_overtime_request_010",
         "package_tab": "report",
         "package": "hr_&_admin",
-        "title": "Overtime Summary"
+        "title": "Overtime Monthly Report"
     },
     "report-hr_overtime_request_020": {
         "name": "report-hr_overtime_request_020",
         "package_tab": "report",
         "package": "hr_&_admin",
-        "title": "Overtime OT Lines"
+        "title": "Overtime Daily Report"
     },
     "report-hr_timesheet_line_010": {
         "name": "report-hr_timesheet_line_010",
         "package_tab": "report",
         "package": "hr_&_admin",
-        "title": "Project \/ Date"
+        "title": "Project\/Date"
     },
     "report-hr_timesheet_line_020": {
         "name": "report-hr_timesheet_line_020",

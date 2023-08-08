@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class Thumbnail {
-    public static function createThumbnailByOptions($locationInput = 'input',$locationOutput ='output',$weight = 150,$height = 150,$position = 'top'){
+    public static function createThumbnailByOptions($height = 150,$width = 150,$position = 'top',$locationInput = 'input',$locationOutput ='output'){
         try {
              /** @var Storage $disk */
             $disk = Storage::disk('s3');
@@ -16,11 +16,11 @@ class Thumbnail {
                     $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
                     $fileName = pathinfo($file, PATHINFO_FILENAME);
                     $thumbnailImage = Image::make($fileContent);
-                    $thumbnailImage->fit($weight,$height,function ($constraint) {
+                    $thumbnailImage->fit($width,$height,function ($constraint) {
                         $constraint->upsize();
                     },$position);
                     $resource = $thumbnailImage->stream();
-                    $thumbnailFileName = $fileName . "-{$height}x{$weight}." . $fileExtension;
+                    $thumbnailFileName = $fileName . "-{$height}x{$width}." . $fileExtension;
                     $thumbnailPath = $locationOutput.'/' . $thumbnailFileName;
                     Storage::disk('s3')->put($thumbnailPath, $resource->__toString(), 'public');
                 }

@@ -5,6 +5,7 @@ namespace App\View\Components\Renderer\Table;
 use App\Utils\System\Timer;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use ReflectionClass;
 
 trait TableTraitRows
@@ -51,7 +52,11 @@ trait TableTraitRows
         $tds = [];
         $columnCount = sizeof($columns);
         // Log::info($columns);
-        foreach (array_values($columns) as $index => $column) {
+        $columns = array_values($columns);
+        foreach ($columns as $index => $column) {
+            // dump($column);
+            $fixedLeft = (isset($column['fixed']) && ($column['fixed'] == "left"))  ? "table-td-fixed-left table-td-fixed-left-$index" : "";
+            $fixedRight = (isset($column['fixed']) && ($column['fixed'] == "right"))  ? "table-td-fixed-right table-td-fixed-right-$index" : "";
             $renderer = $column['renderer'] ?? false;
             $columnName = $column['column_name'] ?? $column['dataIndex'];
             $name = isset($column['dataIndex']) ? "{$this->tableName}[$columnName][$dataLineIndex]" : "";
@@ -125,7 +130,8 @@ trait TableTraitRows
             $breakWords = $this->noCss ? "break-all123" : "";
             $tinyText = $this->noCss ? "text-xs" : "";
             $borderGray = $this->noCss ? "border-gray-200" : "";
-            $td = "<td class='dark:border-gray-600 border-b $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align'";
+            $bgWhite = ($renderer == 'no.') ? "bg-white" : "";
+            $td = "<td class='$fixedLeft $fixedRight $bgWhite dark:border-gray-600 border-b  $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align'";
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";
             $td .= ">";
@@ -134,7 +140,7 @@ trait TableTraitRows
             if ($cellHref) $td .= "</a>";
             $td .= "</td>";
 
-            $tds[] = $td;
+            $tds[] = Str::removeDuplicateSpaces($td);
 
             if (!isset($this->timeElapse[$columnName])) $this->timeElapse[$columnName] = 0;
             $this->timeElapse[$columnName] += Timer::getTimeElapseFromLastAccess();
@@ -175,7 +181,12 @@ trait TableTraitRows
                 $index = isset($dataLineObj->{$groupBy}[0]) ? strtoupper(substr($dataLineObj->{$groupBy}, 0, $this->groupByLength)) : "(EMPTY)";
                 if ($index !== $lastIndex) {
                     $lastIndex = $index;
-                    $trs[] = "<tr class='bg-gray-100 dark:bg-gray-800'><td class='p-2 border-b text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td></tr>";
+                    //<<This fixedLeft still doesn't work
+                    $fixedLeft = "table-th-fixed-left table-th-fixed-left-0";
+                    $tr = "<tr class='bg-gray-100 dark:bg-gray-800'>";
+                    $tr .= "<td class='$fixedLeft bg-white1 p-2 border-b text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td>";
+                    $tr .= "</tr>";
+                    $trs[] = $tr;
                 }
             }
             $bgClass = ($dataLineObj->row_color ?? false) ? "bg-" . $dataLineObj->row_color . "-400" : "";
