@@ -431,7 +431,8 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
+        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>",
+        "disallowed_direct_creation": "true"
     },
     "ghg_sheet_line": {
         "name": "ghg_sheet_line",
