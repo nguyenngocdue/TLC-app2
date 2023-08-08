@@ -70,7 +70,7 @@ return [
 
         "redis" => [
             "driver" => "redis",
-            "connection" => "horizon",
+            "connection" => "cache",
             "lock_connection" => "default",
         ],
 
