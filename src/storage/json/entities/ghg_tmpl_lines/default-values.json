@@ -23,9 +23,69 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_ghg_tmpl_id": {
+        "name": "_ghg_tmpl_id",
+        "column_name": "ghg_tmpl_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_description": {
         "name": "_description",
         "column_name": "description",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_ghg_metric_type_1_id": {
+        "name": "_ghg_metric_type_1_id",
+        "column_name": "ghg_metric_type_1_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_ghg_metric_type_2_id": {
+        "name": "_ghg_metric_type_2_id",
+        "column_name": "ghg_metric_type_2_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_unit": {
+        "name": "_unit",
+        "column_name": "unit",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_factor": {
+        "name": "_factor",
+        "column_name": "factor",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -98,6 +158,18 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",

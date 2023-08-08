@@ -30,7 +30,7 @@ abstract class Report_ParentController2 extends Controller
     protected $modeType = '';
     protected $rotate45Width = false;
 
-
+    // abstract protected function getSqlStr($modeParams);
     public function getType()
     {
         return $this->getTable();
