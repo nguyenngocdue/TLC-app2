@@ -74,7 +74,7 @@ return [
         ],
 
         "redis_horizon" => [
-            "driver" => "redis_horizon",
+            "driver" => "redis",
             "connection" => "default",
             "queue" => env("REDIS_HORIZON_QUEUE", "default"),
             "retry_after" => 90,
