@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 
-class CloneTemplateHseController extends Controller
+class CloneTemplateForHseChecklistController extends Controller
 {
     public function cloneTemplateHse(Request $request)
     {

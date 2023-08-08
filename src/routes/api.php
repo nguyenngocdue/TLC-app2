@@ -15,11 +15,11 @@ use App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_sht_sigController;
 use App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_lineController;
 use App\Http\Controllers\Api\v1\Auth\SocialiteAuthController;
 use App\Http\Controllers\Api\v1\qaqc\RemindSignOffController;
-use App\Http\Controllers\Api\v1\qaqc\CloneChklstFromTmpl;
+use App\Http\Controllers\Api\v1\qaqc\CloneTemplateForQaqcChecklistController;
 use App\Http\Controllers\Api\v1\HR\TimeSheetOfficerController;
 use App\Http\Controllers\Api\v1\HR\TimeSheetWorkerController;
 use App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController;
-use App\Http\Controllers\Api\v1\Hse\CloneTemplateHseController;
+use App\Http\Controllers\Api\v1\Hse\CloneTemplateForHseChecklistController;
 use App\Http\Controllers\Api\v1\qaqc\WirLineController;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApi;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApiRenderer;
@@ -79,7 +79,7 @@ Route::group([
     'prefix' => 'v1/hse',
     'middleware' => ['auth:sanctum', 'throttle:600,1'],
 ], function () {
-    Route::post('clone_template_hse', [CloneTemplateHseController::class, 'cloneTemplateHse'])->name('cloneTemplateHse');
+    Route::post('clone_template_hse', [CloneTemplateForHseChecklistController::class, 'cloneTemplateHse'])->name('cloneTemplateHse');
 });
 Route::group([
     'prefix' => 'v1/qaqc',
@@ -123,7 +123,7 @@ Route::group([
     // 'middleware' => 'auth'
 ], function () {
     Route::post("remind_sign_off", [RemindSignOffController::class, 'remind']);
-    Route::post("clone_chklst_from_tmpl", [CloneChklstFromTmpl::class, 'clone']);
+    Route::post("clone_chklst_from_tmpl", [CloneTemplateForQaqcChecklistController::class, 'clone']);
 });
 Route::group([
     'prefix' => 'v1/hr',
