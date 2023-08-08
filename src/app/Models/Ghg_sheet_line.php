@@ -7,16 +7,16 @@ use App\BigThink\ModelExtended;
 class Ghg_sheet_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "ghg_tmpl_id", "ghg_metric_type_1_id", "ghg_metric_type_2_id",
+        "id",  "owner_id", "order_no", "ghg_tmpl_id",
+        "ghg_metric_type_1_id", "ghg_metric_type_2_id",
         "unit", "factor", "ghg_sheet_id", "value", "total",
-        "remark", "owner_id", "status", "order_no",
+        "remark", "status",
     ];
     protected $table = "ghg_sheet_lines";
     public static $nameless = true;
 
     public static $eloquentParams = [
         "getGhgSheet" => ['belongsTo', Ghg_sheet::class, 'ghg_sheet_id'],
-        // "getGhgMetricType" => ['belongsTo', Ghg_metric_type::class, 'ghg_metric_type_id'],
         "getGhgTmpl" => ['belongsTo', Ghg_tmpl::class, 'ghg_tmpl_id'],
         "getGhgMetricType1" => ['belongsTo', Ghg_metric_type_1::class, 'ghg_metric_type_1_id'],
         "getGhgMetricType2" => ['belongsTo', Ghg_metric_type_2::class, 'ghg_metric_type_2_id'],

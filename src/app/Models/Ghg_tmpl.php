@@ -11,6 +11,7 @@ class Ghg_tmpl extends ModelExtended
         "owner_id",
     ];
     protected $table = "ghg_tmpls";
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getLines" => ["hasMany", Ghg_tmpl_line::class, "ghg_tmpl_id"],
