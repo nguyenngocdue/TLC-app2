@@ -130,7 +130,7 @@ trait TableTraitRows
             $breakWords = $this->noCss ? "break-all123" : "";
             $tinyText = $this->noCss ? "text-xs" : "";
             $borderGray = $this->noCss ? "border-gray-200" : "";
-            $td = "<td class='$fixedLeft $fixedRight dark:border-gray-600 border-b  $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align'";
+            $td = "<td class='$fixedLeft $fixedRight bg-white dark:border-gray-600 border-b  $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align'";
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";
             $td .= ">";
@@ -183,7 +183,7 @@ trait TableTraitRows
                     //<<This fixedLeft still doesn't work
                     $fixedLeft = "table-th-fixed-left table-th-fixed-left-0";
                     $tr = "<tr class='bg-gray-100 dark:bg-gray-800'>";
-                    $tr .= "<td class='$fixedLeft p-2 border-b text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td>";
+                    $tr .= "<td class='$fixedLeft bg-white p-2 border-b text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td>";
                     $tr .= "</tr>";
                     $trs[] = $tr;
                 }

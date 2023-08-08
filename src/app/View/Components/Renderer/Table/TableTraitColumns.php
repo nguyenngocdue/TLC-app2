@@ -78,7 +78,7 @@ trait TableTraitColumns
         $hiddenStr = $hidden ? "hidden" : "";
         $th = "";
         $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr $styleStr ";
-        $th .= "class='$fixedLeft $fixedRight px-4 py-3 border-b border-gray-300 $borderRight $classTh $hiddenStr' ";
+        $th .= "class='$fixedLeft $fixedRight bg-gray-100 px-4 py-3 border-b border-gray-300 $borderRight $classTh $hiddenStr' ";
         $th .= "title='$tooltip' ";
         $th .= ">";
         $th .= "<div class='$classDiv $tinyText text-gray-700 dark:text-gray-300'>";
@@ -158,12 +158,12 @@ trait TableTraitColumns
                 if (is_object($dataHeader[$dataIndex])) {
                     $cell_class = $dataHeader[$dataIndex]->cell_class;
                     $cell_title = $dataHeader[$dataIndex]->cell_title;
-                    $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b $cell_class' title='$cell_title'>" . $dataHeader[$dataIndex]->value . "</th>";
+                    $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b bg-gray-100 $cell_class' title='$cell_title'>" . $dataHeader[$dataIndex]->value . "</th>";
                 } else {
-                    $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b'>" . $dataHeader[$dataIndex] . "</th>";
+                    $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b bg-gray-100'>" . $dataHeader[$dataIndex] . "</th>";
                 }
             } else {
-                $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b' dataIndex='" . $dataIndex . "'></th>";
+                $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b bg-gray-100' dataIndex='" . $dataIndex . "'></th>";
             }
         }
         $result = join($th);
