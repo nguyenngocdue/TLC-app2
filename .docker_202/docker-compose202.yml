@@ -94,3 +94,5 @@ services:
       - "29002:9000"
     networks:
       - laravel202
+volumes:
+  redis_insight_db:
