@@ -132,7 +132,6 @@ class PivotTable extends Component
             $dataOutput = $dataOutput ?? $linesData;
         }
         
-
         if ($isRawData) {
             $libs = LibPivotTables2::getFor($this->modeType);
             $tableColumns = $this->makeTableColumnsWhenRenderRawData($linesData, $libs);

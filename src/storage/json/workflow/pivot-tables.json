@@ -99,6 +99,24 @@
         "sort_by": "user_id{\"column\":\"users.name\"};",
         "is_raw": "true"
     },
+    "eco_labor_impact": {
+        "name": "eco_labor_impact",
+        "filters": null,
+        "row_fields": "department_id{\"column\":\"departments.name\",\"title\":\"Department\" };head_count{ \"title\":\"Headcounts (Man)\" };man_day{ \"title\":\"Man-day (Day)\" };labor_cost{ \"title\":\"Labor Cost (USD)\" };total_cost{ \"title\":\"Total Cost (USD)\" }",
+        "column_fields": null,
+        "value_index_fields": null,
+        "data_fields": null,
+        "sort_by": null
+    },
+    "eco_material_impact": {
+        "name": "eco_material_impact",
+        "filters": null,
+        "row_fields": "department_id{\"column\":\"departments.name\",\"title\":\"Department\" };head_count{ \"title\":\"Headcounts (Man)\" };man_day{ \"title\":\"Man-day (Day)\" };labor_cost{ \"title\":\"Labor Cost (USD)\" };total_cost{ \"title\":\"Total Cost (USD)\" }",
+        "column_fields": null,
+        "value_index_fields": null,
+        "data_fields": null,
+        "sort_by": null
+    },
     "hr_timesheet_line_employee_date": {
         "name": "hr_timesheet_line_employee_date",
         "filters": "category_id{ \"title\":\"Team\", \"allowClear\": true, \"multiple\":true }; user_id{ \"title\":\"User\", \"allowClear\":true, \"multiple\":true }; workplace_id{ \"title\" :\"Workplace\", \"allowClear\":true, \"multiple\":true }; department_id{ \"title\":\"Department\", \"allowClear\":true, \"multiple\":true }; picker_date{\"title\":\"Date\"};",

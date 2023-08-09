@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Http\Controllers\Reports\Report_ParentController2;
-use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\Report_ParentDocumentController;
 
-class Eco_sheet_010 extends Report_ParentController2
+
+class Eco_sheet_010 extends Report_ParentDocumentController
 {
 
-    use TraitForwardModeReport;
+    protected $groupBy = 'ot_date';
+    protected $mode = '010';
     protected $maxH = 50;
-    protected $typeView = 'report-pivot';
-    protected $modeType = 'eco_labor_impact';
     protected $tableTrueWidth = false;
-    protected $mode='020';
 
-    protected function getSqlStr($modeParams)
+    public function getSqlStr($modeParams)
     { 
         $sql ="SELECT
                     SUBSTR(ecoli.updated_at, 1,7) AS month
@@ -36,7 +34,45 @@ class Eco_sheet_010 extends Report_ParentController2
         
         return $sql;
     }
-    protected function getParamColumns($dataSource, $modeType)
+
+    public function getTableColumns($dataSource, $modeParams)
+    {
+        // dump($dataSource);
+        return [
+            [
+                'title' => 'Department',
+                "dataIndex" => "department_name",
+                "align" => 'left',
+                "width" => 150,
+            ],
+            [
+                'title' => 'Headcounts (Man)',
+                "dataIndex" => "head_count",
+                "align" => 'right',
+                "width" => 100,
+            ],
+            [
+                'title' => 'Man-day (Day)',
+                "dataIndex" => "man_day",
+                "align" => 'right',
+                "width" => 100,
+            ],
+            [
+                'title' => 'Labor Cost (USD)',
+                "dataIndex" => "labor_cost",
+                "align" => 'right',
+                "width" => 100,
+            ],
+            [
+                'title' => 'Total Cost (USD)',
+                "dataIndex" => "total_cost",
+                "align" => 'right',
+                "width" => 100,
+            ],
+
+        ];
+    }
+    protected function getParamColumns()
     {
         return [
             [
