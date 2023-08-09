@@ -6,6 +6,7 @@ use App\Http\Controllers\Reports\ReportIndexController;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\JsonControls;
 use App\View\Components\Controls\DisallowedDirectCreationChecker;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
@@ -146,7 +147,8 @@ class Breadcrumb extends Component
     }
     private function showButtonAddNewByCloning($type)
     {
-        $types = ["hse_insp_chklst_shts", "ghg_sheets"];
+        // $types = ["hse_insp_chklst_shts", "ghg_sheets"];
+        $types = JsonControls::getAppsHaveAddNewByCloning();
         if (in_array($type, $types)) {
             $modalId = 'clone_sheet_from_template';
             $this->links[] = [
