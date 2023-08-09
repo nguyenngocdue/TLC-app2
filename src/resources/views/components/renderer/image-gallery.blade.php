@@ -12,7 +12,7 @@
     padding: 5px;
     }
 </style>
-<div class="container-sm hid1den">
+<div class="container-sm hidden">
     <div class="row justify-content-center">
         <div class="col col-md-10">
             <div class="gallery-container" id="animated-thumbnails-gallery">

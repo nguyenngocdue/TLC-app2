@@ -44,16 +44,6 @@ class Constant
 
     const NAME_LOCK_COLUMN_DEFAULT = 'updated_at';
 
+    const EXTENSIONS_OF_FILE_GALLERY = ['mp4','MP4','mov','MOV','png','jpeg','gif','jpg','svg','webp','pdf'];
 
-    const TIME_DEFAULT_ALLDAY = 480;
-
-    const TIME_DEFAULT_MORNING = 240;
-
-    const TIME_DEFAULT_AFTERNOON = 270;
-
-
-    const IGNORE_FILE_GALLERY = ['csv','zip','doc','txt','xls'];
-
-
-    
 }
