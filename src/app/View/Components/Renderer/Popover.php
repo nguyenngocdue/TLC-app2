@@ -11,7 +11,10 @@ class Popover extends Component
      *
      * @return void
      */
-    public function __construct(private $id = null, private $title = null, private $content = null)
+    public function __construct(private $id = null, 
+    private $title = null,
+     private $content = null,
+     private $hidden = false,)
     {
     }
 
@@ -26,6 +29,7 @@ class Popover extends Component
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
+            'hidden' => $this->hidden,
         ]);
     }
 }

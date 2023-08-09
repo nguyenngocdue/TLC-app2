@@ -21,10 +21,11 @@ return new class extends Migration
 
         $schema->create('ghg_metric_type_1s', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('ghg_metric_type_id')->nullable();
 
+            $table->orderable();
             $table->appendCommonFields();
         });
     }

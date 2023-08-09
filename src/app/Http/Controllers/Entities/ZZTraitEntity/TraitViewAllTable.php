@@ -123,7 +123,7 @@ trait TraitViewAllTable
             $props = array_filter($props, fn ($prop) => in_array($prop['name'], $allows));
         }
         $qrCodeColumn = [
-            'label' => "QR Code",
+            'label' => "Print",
             'column_name' => 'id',
             'control' => 'qr_code',
         ];

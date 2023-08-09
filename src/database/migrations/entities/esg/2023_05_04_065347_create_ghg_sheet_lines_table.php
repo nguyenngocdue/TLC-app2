@@ -23,8 +23,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('ghg_sheet_id');
             $table->unsignedBigInteger('ghg_tmpl_id')->nullable();
+
+            $table->unsignedBigInteger('ghg_metric_type_id')->nullable();
             $table->unsignedBigInteger('ghg_metric_type_1_id')->nullable();
             $table->unsignedBigInteger('ghg_metric_type_2_id')->nullable();
+
             $table->unsignedBigInteger('unit')->nullable();
             $table->decimal('factor', 10, 4)->nullable();
             $table->decimal('value', 10, 4)->nullable();

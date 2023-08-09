@@ -7,6 +7,9 @@
         "prod_sequences",
         "ghg_sheets"
     ],
+    "apps_have_add_new_by_cloning": [
+        "hse_insp_chklst_shts"
+    ],
     "headings": [
         "",
         "z_h1",

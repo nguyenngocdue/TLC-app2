@@ -78,10 +78,12 @@
         "name": "fields"
     },
     "ghg_metric_type_1s": {
-        "name": "ghg_metric_type_1s"
+        "name": "ghg_metric_type_1s",
+        "storeEmpty_and_updateShort": "true"
     },
     "ghg_metric_type_2s": {
-        "name": "ghg_metric_type_2s"
+        "name": "ghg_metric_type_2s",
+        "storeEmpty_and_updateShort": "true"
     },
     "ghg_metric_types": {
         "name": "ghg_metric_types"
