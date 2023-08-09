@@ -92,7 +92,8 @@
     },
     "ghg_sheets": {
         "name": "ghg_sheets",
-        "storeEmpty_and_updateShort": "true"
+        "storeEmpty_and_updateShort": "true",
+        "cloneTemplate_and_updateShort": "true"
     },
     "ghg_tmpl_lines": {
         "name": "ghg_tmpl_lines",

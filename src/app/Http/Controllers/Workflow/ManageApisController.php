@@ -27,6 +27,12 @@ class ManageApisController extends AbstractManageLibController
                 'align' => 'center',
             ],
             [
+                'dataIndex' => 'cloneTemplate_and_updateShort',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+            [
                 'dataIndex' => 'renderTableForPopupModals',
                 'title' => 'Render Table for popup modals',
                 'renderer' => 'checkbox',

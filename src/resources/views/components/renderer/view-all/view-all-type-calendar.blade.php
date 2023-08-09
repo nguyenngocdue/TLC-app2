@@ -211,7 +211,7 @@
                                                     </a>
                                                 </div>` 
                                             : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                                    <button onclick="callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:'${ownerId}'}])" class="${classHover} w-full grid grid-cols-7 gap-1 font-semibold text-center text-gray-800">
+                                                    <button onclick="callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:'${ownerId}'}], {caller: 'view-all-calendar'})" class="${classHover} w-full grid grid-cols-7 gap-1 font-semibold text-center text-gray-800">
                                                             ${htmlContentWeek}
                                                     </button>
                                                 </div>`
@@ -251,7 +251,7 @@
                             ${htmlCountDuplicate}
                         </a>
                         ` : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="${classHover} col-span-${lengthArr} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm py-2 mb-2 ${margin} dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                <button  onclick="callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:'${ownerId}'}])" class="w-full grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-gray-800">
+                                <button  onclick="callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:'${ownerId}'}], {caller: 'view-all-calendar'})" class="w-full grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-gray-800">
                                         ${htmlDays}
                                 </button>
                             </div>`;

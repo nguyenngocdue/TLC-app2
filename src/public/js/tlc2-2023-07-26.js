@@ -1,6 +1,6 @@
 //Setup for any Ajax requests need to login
 $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), }, })
-function callApiStoreEmpty(url, data, meta, callback = null) {
+const callApiStoreEmpty = (url, data, meta, callback = null) => {
     $.ajax({
         type: 'post',
         url,
@@ -18,6 +18,9 @@ function callApiStoreEmpty(url, data, meta, callback = null) {
         },
     })
 }
+
+const callApiCloneTemplate = (url, data, meta, callback = null) => callApiStoreEmpty(url, data, meta, callback)
+
 const makeKi = (k) => {
     const ki = {}
     Object.keys(k).forEach(tableName => {
