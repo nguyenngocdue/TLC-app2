@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 class GhgSheets extends ViewAllTypeMatrixParent
 {
     use TraitFilterMonth;
+    use TraitXAxisMonthly;
 
     protected $viewportDate = null;
     // protected $viewportMode = null;
@@ -25,6 +26,7 @@ class GhgSheets extends ViewAllTypeMatrixParent
 
     protected $yAxis = Ghg_tmpl::class;
     protected $groupBy = null;
+    protected $attOfCellToRender = "total";
     /**
      * Create a new component instance.
      *
@@ -54,30 +56,9 @@ class GhgSheets extends ViewAllTypeMatrixParent
         return $yAxis;
     }
 
-    protected function getXAxis()
-    {
-        $selectedYear = date('Y', $this->viewportDate);
-        $xAxis = [];
-        for ($i = 01; $i <= 12; $i++) {
-            $xAxis[] = sprintf("$selectedYear-%02d-01", $i);
-        }
-        // dump($xAxis);
-
-        $xAxis = array_map(fn ($c) => [
-            'dataIndex' => substr($c, 0, 7),
-            'title' => date(Constant::FORMAT_MONTH, strtotime($c)),
-            'width' => 10,
-            'align' => 'center',
-        ], $xAxis);
-        return $xAxis;
-    }
-
     protected function getMatrixDataSource($xAxis)
     {
         $selectedYear = date('Y', $this->viewportDate);
-        // dump($xAxis);
-        // $firstDay = $xAxis[0]['dataIndex'];
-        // $lastDay =  $xAxis[sizeof($xAxis) - 1]['dataIndex'];
         $lines = Ghg_sheet::query()
             ->whereYear('ghg_month', $selectedYear)
             ->select(["*", DB::raw(" substr(ghg_month,1,7) as ghg_month")])
@@ -101,22 +82,27 @@ class GhgSheets extends ViewAllTypeMatrixParent
         return $params;
     }
 
-    // protected function getMetaColumns()
-    // {
-    //     return [
-    //         ['dataIndex' => 'meta01', 'title' => 'Name', 'width' => 150,],
-    //         ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
-    //     ];
-    // }
+    protected function getRightMetaColumns()
+    {
+        return [
+            ['dataIndex' => 'ytd', 'title' => 'YTD', "align" => "center", 'width' => 100,],
+        ];
+    }
 
-    // function getMetaObjects($y, $dataSource, $xAxis)
-    // {
-    //     return [
-    //         'meta01' => (object) [
-    //             'value' => User::findFromCache($y->def_assignee)->name,
-    //             'cell_title' => $y->def_assignee,
-    //         ],
-    //         'count' => count($y->getTshtMembers()),
-    //     ];
-    // }
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    {
+        $line = $dataSource[$y->id] ?? [];
+        $ytd = 0;
+        foreach ($line as $month) {
+            foreach ($month as $doc) {
+                $ytd += $doc->total;
+            }
+        }
+        return [
+            'ytd' => (object) [
+                'value' => $ytd,
+                'cell_class' => "bg-text-400",
+            ],
+        ];
+    }
 }

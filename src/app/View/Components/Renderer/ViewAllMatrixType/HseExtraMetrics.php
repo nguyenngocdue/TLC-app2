@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 class HseExtraMetrics extends ViewAllTypeMatrixParent
 {
     use TraitFilterMonth;
+    use TraitXAxisMonthly;
 
     protected $viewportDate = null;
     // protected $viewportMode = null;
@@ -50,24 +51,6 @@ class HseExtraMetrics extends ViewAllTypeMatrixParent
     {
         $yAxis = $this->yAxis::orderBy('name')->get();
         return $yAxis;
-    }
-
-    protected function getXAxis()
-    {
-        $selectedYear = date('Y', $this->viewportDate);
-        $xAxis = [];
-        for ($i = 01; $i <= 12; $i++) {
-            $xAxis[] = sprintf("$selectedYear-%02d-01", $i);
-        }
-        // dump($xAxis);
-
-        $xAxis = array_map(fn ($c) => [
-            'dataIndex' => substr($c, 0, 7),
-            'title' => date(Constant::FORMAT_MONTH, strtotime($c)),
-            'width' => 10,
-            'align' => 'center',
-        ], $xAxis);
-        return $xAxis;
     }
 
     protected function getMatrixDataSource($xAxis)
@@ -107,7 +90,7 @@ class HseExtraMetrics extends ViewAllTypeMatrixParent
     //     ];
     // }
 
-    // function getMetaObjects($y, $dataSource, $xAxis)
+    // function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     // {
     //     return [
     //         'meta01' => (object) [
