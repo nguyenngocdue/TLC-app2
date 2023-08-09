@@ -48,7 +48,7 @@ class QrCode extends Component
             $color =  $routeExits ? "blue" : "red";
             $icon = "<i class='fa-duotone fa-qrcode'></i>";
             $content = $this->contentPopover($id . '-canvas', $href, static::$count);
-            $popover = "<x-renderer.popover id='$id' content='$content'/>";
+            $popover = "<x-renderer.popover id='$id' content='$content' hidden='true'/>";
             $hyperlink_qr = "<a href='$href' data-popover-target='$id' class='inline-block text-{$color}-500'>$icon</a>" . "$popover";
 
             return $hyperlink_qr;
