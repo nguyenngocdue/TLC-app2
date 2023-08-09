@@ -46,7 +46,8 @@ class QrCode extends Component
             [$routeExits, $href] = $this->checkRouteShowUsingIdOrSlug($type, $id_or_slug);
             // dump($id);
             $color =  $routeExits ? "blue" : "red";
-            $icon = "<i class='fa-duotone fa-qrcode'></i>";
+            // $icon = "<i class='fa-duotone fa-qrcode'></i>";
+            $icon = "<i class='fa-thin fa-print'></i>";
             $content = $this->contentPopover($id . '-canvas', $href, static::$count);
             $popover = "<x-renderer.popover id='$id' content='$content' hidden='true'/>";
             $hyperlink_qr = "<a href='$href' data-popover-target='$id' class='inline-block text-{$color}-500'>$icon</a>" . "$popover";
