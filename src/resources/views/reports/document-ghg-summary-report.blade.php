@@ -27,7 +27,7 @@
             <thead>
               <tr class="">
                 <th class="w-12" colspan="2">Category</th>
-                <th class="w-96">Emission source category</th>
+                <th class="w-[450px]">Emission source category</th>
                 <th class="">Source</th>
                 <th class="">t CO2e</th>
               </tr>
@@ -38,62 +38,62 @@
                     <div class="">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</div>
                 </td>
                 <td class="" rowspan="2">Scope 1</td>
-                <td class="">Direct emissions arising from owned or controlled stationary sources that use fossil fuels and/or emit fugitive emissions</td>
+                <td class="">1.1 Direct emissions arising from owned or controlled stationary sources that use fossil fuels and/or emit fugitive emissions</td>
                 <td class=""></td>
                 <td class=""></td>
               </tr>
               <tr>
-                <td class="">Direct emissions from owned or controlled mobile sources</td>
+                <td class="">1.2 Direct emissions from owned or controlled mobile sources</td>
                 <td class=""></td>
                 <td class=""></td>
               </tr>
               <tr>
                 <td class="">Scope 2</td>
-                <td class="">Location-based emissions from the generation of purchased electricity and transmission &amp; distrubution loss</td>
+                <td class="">2.1 Location-based emissions from the generation of purchased electricity and transmission &amp; distrubution loss</td>
                 <td class=""></td>
                 <td class=""></td>
               </tr>
               <tr>
                 <td class="" rowspan="7">Scope 3</td>
-                <td class="">Purchased goods</td>
+                <td class="">3.1 Purchased goods</td>
                 <td class=""></td>
                 <td class=""></td>
               </tr>
               <tr>
-                <td class="">Waste generated in operations</td>
+                <td class="">3.2 Waste generated in operations</td>
                 <td class=""></td>
                 <td class=""></td>
               </tr>
               <tr>
-                <td class="">Business travel</td>
+                <td class="">3.3 Business travel</td>
                 <td class=""></td>
                 <td class=""></td>
               </tr>
               <tr>
-                <td class="">Upstream transportation and distribution</td>
+                <td class="">3.4 Upstream transportation and distribution</td>
                 <td class=""></td>
                 <td class=""></td>
               </tr>
               <tr>
-                <td class="">Commuting</td>
+                <td class="">3.5 Commuting</td>
                 <td class=""></td>
                 <td class=""></td>
               </tr>
               <tr>
-                <td class="">Manage Assets</td>
+                <td class="">3.6 Manage Assets</td>
                 <td class=""></td>
                 <td class=""></td>
               </tr>
               <tr>
-                <td class="">Home office</td>
+                <td class="">3.7 Home office</td>
                 <td class=""></td>
                 <td class=""></td>
               </tr>
               <tr>
-                <td class=""></td>
-                <td class=""></td>
+                <td class="" colspan="3"></td>
+                {{-- <td class=""></td> --}}
+                {{-- <td class=""></td> --}}
                 <td class="">Total Emissions</td>
-                <td class=""></td>
                 <td class=""></td>
               </tr>
             </tbody>

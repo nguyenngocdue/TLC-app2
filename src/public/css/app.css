@@ -1406,6 +1406,9 @@ video {
   width: -moz-max-content;
   width: max-content;
 }
+.w-\[450px\] {
+  width: 450px;
+}
 .min-w-0 {
   min-width: 0px;
 }
