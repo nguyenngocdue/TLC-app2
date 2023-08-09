@@ -227,13 +227,13 @@ return new class extends Migration
         Schema::table('ghg_metric_type_2s', function (Blueprint $table) {
             $table->foreign('ghg_metric_type_1_id')->references('id')->on('ghg_metric_type_1s');
         });
-        Schema::table('ghg_lines', function (Blueprint $table) {
-            $table->foreign('ghg_metric_type_1_id')->references('id')->on('ghg_metric_type_1s');
-            $table->foreign('ghg_metric_type_2_id')->references('id')->on('ghg_metric_type_2s');
-            $table->foreign('ghg_metric_type_id')->references('id')->on('ghg_metric_types');
-            $table->foreign('ghg_sheet_id')->references('id')->on('ghg_sheets');
-            $table->foreign('unit')->references('id')->on('terms');
-        });
+        // Schema::table('ghg_lines', function (Blueprint $table) {
+        //     $table->foreign('ghg_metric_type_1_id')->references('id')->on('ghg_metric_type_1s');
+        //     $table->foreign('ghg_metric_type_2_id')->references('id')->on('ghg_metric_type_2s');
+        //     $table->foreign('ghg_metric_type_id')->references('id')->on('ghg_metric_types');
+        //     $table->foreign('ghg_sheet_id')->references('id')->on('ghg_sheets');
+        //     $table->foreign('unit')->references('id')->on('terms');
+        // });
         //************** HSE **************/
         Schema::table('hse_insp_chklst_shts', function (Blueprint $table) {
             $table->foreign('hse_insp_tmpl_sht_id')->references('id')->on('hse_insp_tmpl_shts')->cascadeOnDelete()->cascadeOnUpdate();
