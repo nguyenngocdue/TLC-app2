@@ -15,15 +15,17 @@ trait TraitSendNotificationAndMail
 {
     private function eventCreatedNotificationAndMail($fields, $id, $status, $toastrResult)
     {
-        if(($this->data)::isStatusless()) return;
+        $modelPath = $this->data ?? $this->modelPath ?? null;
+        if (!$modelPath) return;
+        if (($modelPath)::isStatusless()) return;
         if ($status && empty($toastrResult)) {
             $fields = $this->addEntityType($fields, 'id', $id);
             $fields = $this->addEntityType($fields, 'status', $status);
             try {
                 $currentValue = $this->addEntityType($fields, 'entity_type', $this->type);
-                $this->insertLogger($currentValue, null, Auth::id(), ($this->data ?? $this->modelPath));
+                $this->insertLogger($currentValue, null, Auth::id(), ($modelPath));
                 if (!($this->ignoreSendMail())) {
-                    event(new CreateNewDocumentEvent($currentValue = $currentValue, $this->type, ($this->data ?? $this->modelPath)));
+                    event(new CreateNewDocumentEvent($currentValue = $currentValue, $this->type, ($modelPath)));
                 }
             } catch (\Throwable $th) {
                 // dd($th->getMessage());
@@ -33,7 +35,7 @@ trait TraitSendNotificationAndMail
     }
     private function eventUpdatedNotificationAndMail($previousValue, $fields, $status, $toastrResult)
     {
-        if(($this->data)::isStatusless()) return;
+        if (($this->data)::isStatusless()) return;
         if ($status && empty($toastrResult)) {
             try {
                 $previousValue = $this->addEntityType($previousValue, 'entity_type', $this->type);
