@@ -9,6 +9,7 @@ use App\Http\Controllers\WelcomeCanhController;
 use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\WelcomeFortuneController;
 use App\Jobs\TestLogToFileJob;
+use App\Warehouse\Wh_report_data_1s;
 use App\Warehouse\Wh_user_sub_project_task;
 use Illuminate\Support\Facades\Route;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Reports\Modals;
+namespace App\View\Components\Reports\ModeParams;
 
 use App\Models\Prod_routing_link;
 use App\View\Components\Reports\ParentParamReports;

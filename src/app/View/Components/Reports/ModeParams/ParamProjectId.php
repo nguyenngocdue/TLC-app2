@@ -1,20 +1,18 @@
 <?php
 
-namespace App\View\Components\Reports\Modals;
+namespace App\View\Components\Reports\ModeParams;
 
-use App\Models\Qaqc_insp_tmpl;
+use App\Models\Project;
 use App\View\Components\Reports\ParentParamReports;
-use App\View\Components\Reports\ParentTypeParamReport;
 
-class ParamChecksheetTypeId extends ParentParamReports
+class ParamProjectId extends ParentParamReports
 {
     protected function getDataSource()
     {
-        $list = Qaqc_insp_tmpl::where('deleted_at', NULL)->get()->toArray();
+        $list = Project::where('deleted_at', NULL)->get()->toArray();
         $dataSource = [];
         usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
         foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name']];
-        // dd($dataSource);
         return $dataSource;
     }
 }

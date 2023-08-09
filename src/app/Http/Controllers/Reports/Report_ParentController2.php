@@ -119,13 +119,10 @@ abstract class Report_ParentController2 extends Controller
         $filters = $this->getDataFields($modeType)['filters'];
         $colParams = [];
         foreach ($filters as $key => $values) {
-            $dataIndex = $key;
+            $dataIndex = trim($key);
             $multiple = false;
             if (isset($values->multiple)) {
-                if($values->multiple == 'true' || $values->multiple) {
-                    $dataIndex =  $key;
-                    $multiple = true;
-                }else $dataIndex = $key;
+                if($values->multiple == 'true' || $values->multiple) $multiple = true;
             }
             $a = [];
             if ($dataIndex === 'picker_date') {
@@ -135,7 +132,7 @@ abstract class Report_ParentController2 extends Controller
                 'title' => $values->title ?? ucwords(str_replace('_', ' ', $key)),
                 'allowClear' => $values->allowClear ?? false,
                 'multiple' => $multiple,
-                'dataIndex' => $dataIndex,
+                'dataIndex' => trim($dataIndex),
                 'hasListenTo' => $values->hasListenTo ?? false,
             ] + $a;
         }
@@ -167,7 +164,6 @@ abstract class Report_ParentController2 extends Controller
         $modeReport = $this->makeModeTitleReport($routeName);
         $modeType = $this->modeType;
         $paramColumns = $this->getParamColumns($dataSource, $modeType);
-
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,
