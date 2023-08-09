@@ -12,7 +12,7 @@
     padding: 5px;
     }
 </style>
-<div class="container-sm hidden">
+<div class="container-sm hid1den">
     <div class="row justify-content-center">
         <div class="col col-md-10">
             <div class="gallery-container" id="animated-thumbnails-gallery">
@@ -25,12 +25,14 @@
                     $uploadBy = \App\Models\User::findFromCache($attachment['owner_id'])->name ?? '';
                     $urlThumbnail = $urlMedia;
                     $dataVideo = '';
+                    $dataIframe=false;
                     switch ($extension) {
                         case 'csv':
                         case 'pdf':
                         case 'zip':
                         case 'doc':
                         case 'txt':
+                            $dataIframe=true;
                             $urlThumbnail = asset("icons/$extension-128.png");
                             break;
                         case 'MP4':
@@ -48,7 +50,9 @@
                     <a id="{{$attachment['id']}}" alt="{{$fileName}}" data-lg-size="1280-720" class="gallery-item"
                     {!!$dataVideo ? "":"data-src='$urlMedia'"!!} 
                     data-video="{{$dataVideo}}"
-                    data-pinterest-text="{{$fileName}}" data-tweet-text="lightGallery {{$fileName}}"
+                    data-pinterest-text="{{$fileName}}" 
+                    data-tweet-text="lightGallery {{$fileName}}"
+                    {!!$dataIframe ? "data-iframe='true'" : ""!!}
                     data-sub-html="
                     <p> File Name: {{$fileName}} </p>
                     <p> Uploaded by: {{$uploadBy}} </p>">

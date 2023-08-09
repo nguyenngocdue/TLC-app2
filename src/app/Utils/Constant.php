@@ -52,5 +52,8 @@ class Constant
     const TIME_DEFAULT_AFTERNOON = 270;
 
 
+    const IGNORE_FILE_GALLERY = ['csv','zip','doc','txt','xls'];
+
+
     
 }
