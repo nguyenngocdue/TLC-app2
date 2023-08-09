@@ -71,6 +71,7 @@ class CloneTemplateForGhgSheetCommand extends Command
             foreach ($tmplItem->getLines as $tmplLine) {
                 Ghg_sheet_line::create([
                     'ghg_sheet_id' => $createdDoc->id,
+                    'ghg_metric_type_id' => $tmplLine->ghg_metric_type_id,
                     'ghg_metric_type_1_id' => $tmplLine->ghg_metric_type_1_id,
                     'ghg_metric_type_2_id' => $tmplLine->ghg_metric_type_2_id,
                     'factor' => $tmplLine->factor,

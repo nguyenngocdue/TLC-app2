@@ -87,10 +87,16 @@ return [
     'ghg_tmpls' => [
         'ghg_tmpl_lines' => [],
     ],
-
     'ghg_sheets' => [
         'ghg_sheet_lines' => [],
     ],
+    'ghg_metric_types' => [
+        'ghg_metric_type_1s' => [],
+    ],
+    'ghg_metric_type_1s' => [
+        'ghg_metric_type_2s' => [],
+    ],
+
 
     //** UNIT TEST */
 
