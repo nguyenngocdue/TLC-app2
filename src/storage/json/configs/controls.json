@@ -1,4 +1,12 @@
 {
+    "apps_have_view_all_matrix": [
+        "hr_timesheet_workers",
+        "qaqc_wirs",
+        "hr_onboarding_lines",
+        "hse_extra_metrics",
+        "prod_sequences",
+        "ghg_sheets"
+    ],
     "headings": [
         "",
         "z_h1",
@@ -192,13 +200,6 @@
     ],
     "apps_have_view_all_calendar": [
         "hr_timesheet_officers"
-    ],
-    "apps_have_view_all_matrix": [
-        "hr_timesheet_workers",
-        "qaqc_wirs",
-        "hr_onboarding_lines",
-        "hse_extra_metrics",
-        "prod_sequences"
     ],
     "apps_have_qr_app": [
         "pj_module",

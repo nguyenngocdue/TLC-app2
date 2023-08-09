@@ -23,7 +23,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
-            $table->date('month');
+            $table->date('ghg_month');
             $table->double("total")->nullable();
             $table->unsignedBigInteger('ghg_tmpl_id')->nullable();
             $table->appendCommonFields();

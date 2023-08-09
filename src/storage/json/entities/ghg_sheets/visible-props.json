@@ -9,9 +9,9 @@
         "column_name": "name",
         "new": "true"
     },
-    "_month": {
-        "name": "_month",
-        "column_name": "month",
+    "_ghg_month": {
+        "name": "_ghg_month",
+        "column_name": "ghg_month",
         "new": "true"
     },
     "_ghg_tmpl_id": {

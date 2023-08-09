@@ -8,8 +8,8 @@ use App\Utils\Support\DateTimeConcern;
 class Ghg_sheet extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description",
-        "month", "owner_id", "ghg_tmpl_id", "total",
+        "id", "name", "description", "status",
+        "ghg_month", "owner_id", "ghg_tmpl_id", "total",
     ];
     protected $table = "ghg_sheets";
 
@@ -17,7 +17,7 @@ class Ghg_sheet extends ModelExtended
     public function getNameAttribute($value)
     {
         $template = $this->getGhgTmpl;
-        return ($template->name ?? "Template?") . " - " . DateTimeConcern::convertForLoading("picker_month", $this->month);
+        return ($template->name ?? "Template?") . " - " . DateTimeConcern::convertForLoading("picker_month", $this->ghg_month);
     }
 
     public static $eloquentParams = [
