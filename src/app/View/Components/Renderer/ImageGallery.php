@@ -31,7 +31,7 @@ class ImageGallery extends Component
         foreach ($attachments as  $collection) {
             $results = $results->merge($collection);
         }
-        $results = $results->whereNotIn('extension',Constant::IGNORE_FILE_GALLERY);
+        $results = $results->whereIn('extension',Constant::EXTENSIONS_OF_FILE_GALLERY);
         return view('components.renderer.image-gallery',['dataSource' => $results,'pathMinio' => pathMinio()]);
     }
 }

@@ -33,7 +33,7 @@
             <div class="invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]">
                 @php
                     $onClick = "openAnotherLink(".$attachment['id'].")";
-                    if(in_array($extension,\App\Utils\Constant::IGNORE_FILE_GALLERY)) {
+                    if(!in_array($extension,\App\Utils\Constant::EXTENSIONS_OF_FILE_GALLERY)) {
                         $onClick = '';
                         $url = $path.$attachment['url_media'];
                         $href = "href='$url'";

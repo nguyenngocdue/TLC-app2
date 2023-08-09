@@ -27,7 +27,6 @@ class HrTsLineCollection extends ResourceCollection
                     'name_project' => Calendar::renderNameProject($item) ?? '',
                     'start' => $item->start_time ? DateTimeConcern::formatTimestampFromDBtoJS($item->start_time) : DateTimeConcern::formatTimestampFromDBtoJSForPH($item),
                     'end' => $item->start_time ? DateTimeConcern::calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min) : DateTimeConcern::calTimestampEndFromStartTimeAndDurationForPH($item),
-                    // 'allDay' => ($item->duration_in_min >= Constant::TIME_DEFAULT_ALLDAY) ? true : false,
                     'id' => ($item instanceof Public_holiday) ? '' : $item->id,
                     'user_id' => $item->user_id ?? '',
                     'project_id' => $item->project_id ?? '',
