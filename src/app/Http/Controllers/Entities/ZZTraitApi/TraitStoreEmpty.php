@@ -142,7 +142,7 @@ trait TraitStoreEmpty
 
 		$meta = $request->input('meta');
 		$caller = $meta['caller'] ?? "";
-		$line_or_doc = $caller == 'view-all-matrix' ? "document" : "line";
+		$line_or_doc = (in_array($caller, ['view-all-matrix', 'view-all-calendar'])) ? "document" : "line";
 		$message = "Created " . sizeof($theRows) . " " . Str::plural($line_or_doc, sizeof($theRows)) . ".";
 		// switch ($this->type) {
 		// 	case 'hr_timesheet_worker':

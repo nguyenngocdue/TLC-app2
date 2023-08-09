@@ -35,7 +35,7 @@
     <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
 
-    <script src="{{ asset('js/tlc2-2023-07-26.js') }}"></script>
+    <script src="{{ asset('js/tlc2-20230809.js') }}"></script>
     <script src="{{ asset('js/parseNumber-20230802.js') }}"></script>
     
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
