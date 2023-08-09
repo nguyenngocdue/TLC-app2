@@ -360,7 +360,7 @@
         "package_tab": "application",
         "package": "compliance",
         "sub_package": "esg",
-        "title": "GHG Metric Type",
+        "title": "GHG Metric Type 0",
         "nickname": "ghg",
         "doc_id_format_column": null,
         "status": null,

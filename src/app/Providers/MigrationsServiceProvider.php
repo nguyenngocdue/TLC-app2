@@ -39,11 +39,11 @@ class MigrationsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom($path . "entities/hr");
         $this->loadMigrationsFrom($path . "entities/act");
         $this->loadMigrationsFrom($path . "entities/ppr");
-        $this->loadMigrationsFrom($path . "dataWarehouses");
-        
+        // $this->loadMigrationsFrom($path . "dataWarehouses");
+
         $this->loadMigrationsFrom($path . "pivots");
         $this->loadMigrationsFrom($path . "foreignKeys");
-        
+
         $this->loadMigrationsFrom($path . "views");
         // $this->loadMigrationsFrom($path . "storedProcedures");
         // $this->loadMigrationsFrom($path . "storedFunctions");

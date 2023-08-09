@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('ghg_tmpl_id')->nullable();
 
+            $table->unsignedBigInteger('ghg_metric_type_id')->nullable();
             $table->unsignedBigInteger('ghg_metric_type_1_id')->nullable();
             $table->unsignedBigInteger('ghg_metric_type_2_id')->nullable();
             $table->unsignedBigInteger('unit')->nullable();

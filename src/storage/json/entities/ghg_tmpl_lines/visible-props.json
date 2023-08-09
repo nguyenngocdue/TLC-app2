@@ -19,6 +19,11 @@
         "column_name": "description",
         "new": "true"
     },
+    "_ghg_metric_type_id": {
+        "name": "_ghg_metric_type_id",
+        "column_name": "ghg_metric_type_id",
+        "new": "true"
+    },
     "_ghg_metric_type_1_id": {
         "name": "_ghg_metric_type_1_id",
         "column_name": "ghg_metric_type_1_id",
