@@ -12,7 +12,7 @@ use App\View\Components\Formula\All_SlugifyByName;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class CloneTemplateFormProdOrderCommand extends Command
+class CloneTemplateForQaqcChecklistCommand extends Command
 {
     // use CloneRunTrait;
     use TraitEntityFormula;

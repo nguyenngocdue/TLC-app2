@@ -20,7 +20,7 @@
             rowIndex:{{$rowIndex}}, 
             saveOnChange: {{$saveOnChange?1:0}},
             dropdownParams,
-        })
-        changeFooterValue(this,'{{$table01Name}}')
+        });
+        changeFooterValue(this,'{{$table01Name}}');
     })
 </script>

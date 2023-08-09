@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Modals;
 
+use App\Models\Ghg_tmpl;
 use App\Models\Hse_insp_tmpl_sht;
 use Illuminate\View\Component;
 
@@ -14,9 +15,21 @@ class ModalClone extends Component
      */
     public function __construct(
         private $modalId,
-    )
+        private $cloneFor = '',
+    ) {
+        // dump($this->cloneFor);
+    }
+
+    private function getDataSource()
     {
-        //
+        switch ($this->cloneFor) {
+            case "ghg_sheets":
+                return Ghg_tmpl::all();
+            case "hse_insp_chklst_shts":
+                return Hse_insp_tmpl_sht::all();
+            default:
+                return collect([]);
+        }
     }
 
     /**
@@ -26,9 +39,10 @@ class ModalClone extends Component
      */
     public function render()
     {
-        $dataSource = Hse_insp_tmpl_sht::all();
+
+        $dataSource = $this->getDataSource();
         $url = route('cloneTemplateHse') ?? '';
-        return view('components.modals.modal-clone',[
+        return view('components.modals.modal-clone', [
             'modalId' => $this->modalId,
             'dataSource' => $dataSource,
             'url' => $url,

@@ -2,6 +2,8 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
+use App\Models\Ghg_sheet;
+use App\Models\Ghg_tmpl;
 use App\Models\Hse_extra_metric;
 use App\Models\Workplace;
 use App\Utils\Constant;
@@ -11,7 +13,7 @@ use App\View\Components\Renderer\ViewAllMatrixFilter\TraitFilterMonth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class HseExtraMetrics extends ViewAllTypeMatrixParent
+class GhgSheets extends ViewAllTypeMatrixParent
 {
     use TraitFilterMonth;
     use TraitXAxisMonthly;
@@ -19,11 +21,12 @@ class HseExtraMetrics extends ViewAllTypeMatrixParent
     protected $viewportDate = null;
     // protected $viewportMode = null;
 
-    protected $dataIndexX = "metric_month";
-    protected $dataIndexY = "workplace_id";
+    protected $dataIndexX = "ghg_month";
+    protected $dataIndexY = "ghg_tmpl_id";
 
-    protected $yAxis = Workplace::class;
-    // protected $xAxis = Date::class;
+    protected $yAxis = Ghg_tmpl::class;
+    protected $groupBy = null;
+    protected $attOfCellToRender = "total";
     /**
      * Create a new component instance.
      *
@@ -56,12 +59,9 @@ class HseExtraMetrics extends ViewAllTypeMatrixParent
     protected function getMatrixDataSource($xAxis)
     {
         $selectedYear = date('Y', $this->viewportDate);
-        // dump($xAxis);
-        // $firstDay = $xAxis[0]['dataIndex'];
-        // $lastDay =  $xAxis[sizeof($xAxis) - 1]['dataIndex'];
-        $lines = Hse_extra_metric::query()
-            ->whereYear('metric_month', $selectedYear)
-            ->select(["*", DB::raw(" substr(metric_month,1,7) as metric_month")])
+        $lines = Ghg_sheet::query()
+            ->whereYear('ghg_month', $selectedYear)
+            ->select(["*", DB::raw(" substr(ghg_month,1,7) as ghg_month")])
             ->get();
         // dump($lines);
         return $lines;
@@ -77,27 +77,32 @@ class HseExtraMetrics extends ViewAllTypeMatrixParent
     protected function getCreateNewParams($x, $y)
     {
         $params = parent::getCreateNewParams($x, $y);
-        $params['metric_month'] .=  '-01';
+        $params['ghg_month'] .=  '-01';
         $params['status'] =  'new';
         return $params;
     }
 
-    // protected function getMetaColumns()
-    // {
-    //     return [
-    //         ['dataIndex' => 'meta01', 'title' => 'Name', 'width' => 150,],
-    //         ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
-    //     ];
-    // }
+    protected function getRightMetaColumns()
+    {
+        return [
+            ['dataIndex' => 'ytd', 'title' => 'YTD', "align" => "center", 'width' => 100,],
+        ];
+    }
 
-    // function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
-    // {
-    //     return [
-    //         'meta01' => (object) [
-    //             'value' => User::findFromCache($y->def_assignee)->name,
-    //             'cell_title' => $y->def_assignee,
-    //         ],
-    //         'count' => count($y->getTshtMembers()),
-    //     ];
-    // }
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    {
+        $line = $dataSource[$y->id] ?? [];
+        $ytd = 0;
+        foreach ($line as $month) {
+            foreach ($month as $doc) {
+                $ytd += $doc->total;
+            }
+        }
+        return [
+            'ytd' => (object) [
+                'value' => $ytd,
+                'cell_class' => "bg-text-400",
+            ],
+        ];
+    }
 }

@@ -23,6 +23,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_ghg_month": {
+        "name": "_ghg_month",
+        "column_name": "ghg_month",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_ghg_tmpl_id": {
         "name": "_ghg_tmpl_id",
         "column_name": "ghg_tmpl_id",
@@ -47,11 +59,11 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_month": {
-        "name": "_month",
-        "column_name": "month",
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -59,9 +71,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
+    "_total": {
+        "name": "_total",
+        "column_name": "total",
         "label": "",
         "validation": "",
         "validation_regex": "",

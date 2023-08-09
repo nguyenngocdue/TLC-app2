@@ -31,6 +31,8 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $tableTrueWidth = false;
     protected $headerTop = null;
     protected $mode = 'status_only';
+    protected $apiToCallWhenCreateNew = 'callApiStoreEmpty';
+    protected $attOfCellToRender = "status";
     /**
      * Create a new component instance.
      *
@@ -79,14 +81,25 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $result;
     }
 
+    protected function getValueToRender($status, $document, $forExcel)
+    {
+        if ($this->attOfCellToRender == 'status') {
+            $value = $status['icon'] ? $status['icon'] : $document->status;
+            if ($forExcel) $value = $document->status;
+            return $value;
+        }
+        $value = $document->{$this->attOfCellToRender};
+        // dump($value);
+        return $value ? $value : '';
+    }
+
     protected function makeStatus($document, $forExcel)
     {
         $status = $this->statuses[$document->status] ?? null;
         if (!is_null($status)) {
             $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'];
             $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']);
-            $value = $status['icon'] ? $status['icon'] : $document->status;
-            if ($forExcel) $value = $document->status;
+            $value = $this->getValueToRender($status, $document, $forExcel);
             $item = [
                 'value' => $value,
                 'cell_title' => 'Open this document (' . $status['title'] . ')',
@@ -156,9 +169,10 @@ abstract class ViewAllTypeMatrixParent extends Component
                     // dump($paramStr);
                     $paramStr = (json_encode($paramStr));
                     // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
+                    $api = $this->apiToCallWhenCreateNew;
                     $line[$xId] = (object)[
                         'value' => '<i class="fa-duotone fa-circle-plus"></i>',
-                        'cell_href' => 'javascript:callApiStoreEmpty("' . $routeCreate . '",[' . $paramStr . '], ' . $metaStr . ')',
+                        'cell_href' => 'javascript:' . $api . '("' . $routeCreate . '",[' . $paramStr . '], ' . $metaStr . ')',
                         'cell_class' => "text-center text-blue-800 $xClass",
                         'cell_title' => "Create a new document",
                         'cell_onclick' => "$(this).hide()",
@@ -247,11 +261,22 @@ abstract class ViewAllTypeMatrixParent extends Component
         $viewportParams = $this->getViewportParams();
         //qaqc_wirs.blade.php //FULL TEXT SEARCH HERE
         $params = ["type" => $this->type, "dataSource" => $filterDataSource, "viewportParams" => $viewportParams,];
-        $viewName = 'components.renderer.view-all-matrix-filter.' . $this->type;
+        $filterName = "";
+        switch ($this->type) {
+            case "ghg_sheets":
+            case "hse_extra_metrics":
+                $filterName = "select_year";
+                break;
+            default:
+                $filterName = $this->type;
+                break;
+        }
+
+        $viewName = 'components.renderer.view-all-matrix-filter.' . $filterName;
         if (view()->exists($viewName)) {
-            return Blade::render('<x-renderer.view-all-matrix-filter.' . $this->type . ' :type="$type" :dataSource="$dataSource" :viewportParams="$viewportParams"/>', $params);
+            return Blade::render('<x-renderer.view-all-matrix-filter.' . $filterName . ' :type="$type" :dataSource="$dataSource" :viewportParams="$viewportParams"/>', $params);
         } else {
-            return "Unknown type $this->type in type matrix filter (ViewAllTypeMatrixFilter)";
+            return "Unknown type $this->type in type matrix filter (ViewAllTypeMatrixParent.getFilter)";
         }
     }
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 
-class CloneChklstFromTmpl extends Controller
+class CloneTemplateForQaqcChecklistController extends Controller
 {
     public function clone(Request $request)
     {

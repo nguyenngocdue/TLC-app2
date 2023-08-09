@@ -146,12 +146,13 @@ class Breadcrumb extends Component
     }
     private function showButtonAddNewByCloning($type)
     {
-        if ($type == 'hse_insp_chklst_shts') {
-            $modalId = 'clone_hse_insp_chklst_shts';
+        $types = ["hse_insp_chklst_shts", "ghg_sheets"];
+        if (in_array($type, $types)) {
+            $modalId = 'clone_sheet_from_template';
             $this->links[] = [
                 'title' => 'Add New', 'icon' => "<i class='fa-light fa-clone'></i>", 'type' => 'modal',
                 'modalId' => $modalId,
-                "modalBody" => Blade::render("<x-modals.modal-clone modalId='$modalId'/>")
+                "modalBody" => Blade::render("<x-modals.modal-clone modalId='$modalId' cloneFor='$type'/>")
             ];
         }
     }
