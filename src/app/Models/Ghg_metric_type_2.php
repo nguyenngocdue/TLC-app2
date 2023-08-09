@@ -8,6 +8,7 @@ class Ghg_metric_type_2 extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "ghg_metric_type_1_id", "owner_id", "factor", "unit", "order_no"];
     protected $table = "ghg_metric_type_2s";
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getGhgMetricType1" => ['belongsTo', Ghg_metric_type_1::class, 'ghg_metric_type_1_id'],
