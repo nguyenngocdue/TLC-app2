@@ -24,6 +24,7 @@ class CloneTemplateForGhgSheetCommand extends Command
      */
     protected $signature = 'ndc:cloneGhg 
     {--ownerId= : ID of current user}
+    {--month= : Month of the sheet}
     {--tmplId= : ID of the template}';
 
     /**
@@ -42,6 +43,7 @@ class CloneTemplateForGhgSheetCommand extends Command
     {
         $ownerId = $this->input->getOption('ownerId');
         $tmplId = $this->input->getOption('tmplId');
+        $month = $this->input->getOption('month');
         $tmplItem = Ghg_tmpl::findOrFail($tmplId);
         if (!$ownerId) {
             $this->info("Owner ID: {$ownerId} doesn't exist");
@@ -51,15 +53,20 @@ class CloneTemplateForGhgSheetCommand extends Command
             $this->info("GHG template ID: {$tmplId} doesn't exist");
             return Command::FAILURE;
         }
+        if (!$month) {
+            $this->info("Month param is missing");
+            return Command::FAILURE;
+        }
         try {
             // $valueDefaultAssignee1 = $this->getDefaultValues('assignee_1');
             $createdDoc = Ghg_sheet::create([
                 'slug' => (new All_SlugifyByName())($tmplItem->slug, 'hse_insp_chklst_sht', ''),
                 'ghg_tmpl_id' => $tmplItem->id,
                 'owner_id' => $ownerId,
-                'month' => date(Constant::FORMAT_DATE_MYSQL),
+                'ghg_month' => $month,
                 // 'assignee_1' => $valueDefaultAssignee1,
                 'status' => 'new',
+                'total' => 0,
             ]);
             foreach ($tmplItem->getLines as $tmplLine) {
                 Ghg_sheet_line::create([

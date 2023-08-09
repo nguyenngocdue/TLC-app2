@@ -31,7 +31,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $tableTrueWidth = false;
     protected $headerTop = null;
     protected $mode = 'status_only';
-    protected $apiToCallWhenCreateNew = 'callApiStoreEmpty';
+    protected $apiToCallWhenCreateNew = 'storeEmpty';
     protected $attOfCellToRender = "status";
     /**
      * Create a new component instance.
@@ -144,7 +144,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         $dataSource = $this->reIndexDataSource($dataSource);
         $result = [];
-        $routeCreate = route($this->type . '.storeEmpty');
+        $routeCreate = route($this->type . '.' . $this->apiToCallWhenCreateNew);
         $extraColumns = $this->getXAxisExtraColumns();
 
         foreach ($yAxis as $y) {
@@ -169,7 +169,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                     // dump($paramStr);
                     $paramStr = (json_encode($paramStr));
                     // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
-                    $api = $this->apiToCallWhenCreateNew;
+                    $api = "callApi" . ucfirst($this->apiToCallWhenCreateNew);
                     $line[$xId] = (object)[
                         'value' => '<i class="fa-duotone fa-circle-plus"></i>',
                         'cell_href' => 'javascript:' . $api . '("' . $routeCreate . '",[' . $paramStr . '], ' . $metaStr . ')',

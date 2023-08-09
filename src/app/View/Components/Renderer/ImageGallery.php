@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Utils\Constant;
 use Illuminate\View\Component;
 
 class ImageGallery extends Component
@@ -30,6 +31,7 @@ class ImageGallery extends Component
         foreach ($attachments as  $collection) {
             $results = $results->merge($collection);
         }
+        $results = $results->whereIn('extension',Constant::EXTENSIONS_OF_FILE_GALLERY);
         return view('components.renderer.image-gallery',['dataSource' => $results,'pathMinio' => pathMinio()]);
     }
 }

@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController;
 use App\Http\Controllers\Api\v1\Hse\CloneTemplateForHseChecklistController;
 use App\Http\Controllers\Api\v1\qaqc\WirLineController;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApi;
+use App\Http\Controllers\Entities\EntityCRUDControllerForApiClone;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApiRenderer;
 use App\Http\Controllers\Workflow\LibApis;
 use App\Utils\System\Memory;
@@ -155,14 +156,16 @@ Route::group([
         Route::post("{$tableName}_storeEmpty", [EntityCRUDControllerForApi::class, 'storeEmpty'])->name($tableName . ".storeEmpty");
         Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
     }
-});
-Route::group([
-    'prefix' => 'v1/entity',
-    'middleware' => 'throttle:600,1'
-], function () {
+
     $apps = LibApis::getFor('renderTableForPopupModals');
     foreach ($apps as $tableName) {
         Route::post("{$tableName}_renderTable", [EntityCRUDControllerForApiRenderer::class, 'renderTable'])->name($tableName . ".renderTable");
+    }
+
+    $apps = LibApis::getFor('cloneTemplate_and_updateShort');
+    foreach ($apps as $tableName) {
+        Route::post("{$tableName}_cloneTemplate", [EntityCRUDControllerForApiClone::class, 'cloneTemplate'])->name($tableName . ".cloneTemplate");
+        // Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
     }
 });
 

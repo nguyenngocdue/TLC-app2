@@ -26,6 +26,7 @@ class GhgSheets extends ViewAllTypeMatrixParent
 
     protected $yAxis = Ghg_tmpl::class;
     protected $groupBy = null;
+    protected $apiToCallWhenCreateNew = 'cloneTemplate';
     protected $attOfCellToRender = "total";
     /**
      * Create a new component instance.

@@ -24,7 +24,6 @@ class HrTsLineStoreResource extends JsonResource
             'timesheetable_id' => $request->timesheetable_id,
             'start_time' => $request->date_time ? DateTimeConcern::formatTimestampFromJStoDB($request->date_time) : null,
             'duration_in_min' => DateTimeConcern::isFormatJsDateTime($request->date_time) ? 60 : null,
-            // 'duration_in_min' => $request->all_day ? Constant::TIME_DEFAULT_ALLDAY : (DateTimeConcern::isFormatJsDateTime($request->date_time) ? 60 : null),
             'user_id' => CurrentUser::id() ?? null,
             'project_id' => $request->project_id,
             'sub_project_id' => $request->sub_project_id,

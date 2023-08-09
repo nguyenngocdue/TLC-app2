@@ -15,6 +15,7 @@ trait TraitSendNotificationAndMail
 {
     private function eventCreatedNotificationAndMail($fields, $id, $status, $toastrResult)
     {
+        if(($this->data)::isStatusless()) return;
         if ($status && empty($toastrResult)) {
             $fields = $this->addEntityType($fields, 'id', $id);
             $fields = $this->addEntityType($fields, 'status', $status);
@@ -32,6 +33,7 @@ trait TraitSendNotificationAndMail
     }
     private function eventUpdatedNotificationAndMail($previousValue, $fields, $status, $toastrResult)
     {
+        if(($this->data)::isStatusless()) return;
         if ($status && empty($toastrResult)) {
             try {
                 $previousValue = $this->addEntityType($previousValue, 'entity_type', $this->type);
