@@ -35,9 +35,7 @@ class LibPivotTables2 extends AbstractLib
                 $result['name'] = $modeKey;
                 foreach ($item as $key1 => $str) {
                     if ($key1 === 'name') continue;
-                    // dump($key1);
                     $result[$key1] = static::parseArrayWithJson($str, ";", $modeKey);
-                    // $result[$key1] = Str::parseArray($str);
                 }
                 // dump($result);
                 return $result;

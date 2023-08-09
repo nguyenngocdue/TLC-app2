@@ -33,6 +33,7 @@ abstract class Report_ParentController extends Controller
     protected $pageLimit = 10;
     protected $typeView = '';
     protected $modeType = '';
+    protected $viewName = '';
 
     public function getType()
     {
@@ -172,6 +173,7 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
         
         $viewName =  CurrentPathInfo::getViewName($request);
+        if($this->viewName) $viewName = $this->viewName;
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
         $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
         echo $this->getJS();
