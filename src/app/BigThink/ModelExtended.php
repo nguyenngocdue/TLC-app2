@@ -149,7 +149,7 @@ abstract class ModelExtended extends Model
      * @param bool $useTableField MorphMany table using table field key category 
      * @return mixed|array value MorphMany
      */
-    public function getMorphManyByIds($ids = [], $fieldNameCategory, $useTableField = true)
+    public function getMorphManyByIds($ids = [], $fieldNameCategory = null, $useTableField = true)
     {
         if ($fieldNameCategory) {
             $eloquentParams = static::$eloquentParams[$fieldNameCategory] ?? [];
