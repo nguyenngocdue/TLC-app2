@@ -65,6 +65,9 @@ trait TraitStoreEmpty
 		// $props = $sp['props'];
 		$dateTimeControls = $sp['datetime_controls'];
 		// Log::info($dateTimeControls);
+		$numberControls = $sp['number_controls'];
+		// Log::info($numberControls);
+
 		$theRows = [];
 		$defaultValue = $this->getDefaultValue($props);
 		foreach ($lines as $item) {
@@ -99,6 +102,11 @@ trait TraitStoreEmpty
 						}
 					}
 					$item[$control] = DateTimeConcern::convertForSaving($controlType, $item[$control]);
+				}
+			}
+			foreach ($numberControls as $control => $controlType) {
+				if (isset($item[$control])) {
+					$item[$control] = Str::replace(',', '', $item[$control]);
 				}
 			}
 			$item = $this->applyFormula($item, 'store');

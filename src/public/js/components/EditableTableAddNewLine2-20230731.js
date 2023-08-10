@@ -345,7 +345,9 @@ const addANewLineFull = (params) => {
                         // onChange = "onChangeDropdown4(" + onChangeParams + ");changeBgColor(this,\"" + tableId + "\")"
                         const changeBgColorFn = 'changeBgColor(this,"' + tableId + '");'
                         const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
-                        renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeBgColorFn + changeFooterValue) + '</script>'
+                        const parseNumber4 = ''
+                        // const parseNumber4 = 'parseNumber2("' + id + '", 11111);'
+                        renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeBgColorFn + changeFooterValue + parseNumber4) + '</script>'
                     }
                     break
                 case 'text4':
