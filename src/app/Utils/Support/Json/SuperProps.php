@@ -267,6 +267,14 @@ class SuperProps
         return $result;
     }
 
+    private static function getNumberFromProps($props)
+    {
+        $result = [];
+        $controls = ['number']; //JsonControls::getDateTimeControls();
+        foreach ($props as $key => $prop) if (in_array($prop['control'], $controls)) $result[substr($key, 1)] = $prop['control'];
+        return $result;
+    }
+
     private static function make($type)
     {
         static::$type = $type;
@@ -281,6 +289,7 @@ class SuperProps
         static::$result['comments'] = static::getCommentsFromProps(static::$result['props']);
         static::$result['attachments'] = static::getAttachmentsFromProps(static::$result['props']);
         static::$result['datetime_controls'] = static::getDateTimeFromProps(static::$result['props']);
+        static::$result['number_controls'] = static::getNumberFromProps(static::$result['props']);
         return static::$result;
     }
 

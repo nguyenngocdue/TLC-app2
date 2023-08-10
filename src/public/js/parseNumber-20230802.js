@@ -109,6 +109,8 @@ const parseNumber2 = (id, initValue) => {
             inputNumber.val(formattedValue);
         }
     });
-    inputNumber.val(formatterFn(initValue));
+    const result = formatterFn(initValue);
+    inputNumber.val(result);
+    return result
 }
 const numberRemoveComma = (number) => number.replace(/[^0-9.\-]/g, '')

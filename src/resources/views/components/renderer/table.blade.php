@@ -155,6 +155,7 @@ var tableObjectColumns = {}
     </script>
 @endif
 
+@once
 <script>
     function getColumnWidth(tableId, columnIndex) {
   const table = document.getElementById(tableId);
@@ -205,6 +206,7 @@ const applyFixedColumnWidth = (tableName, columns) => {
     })
 }
 </script>
+@endonce
 
 <script>
 applyFixedColumnWidth("{{$tableName}}", @json($columns))
