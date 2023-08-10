@@ -51,7 +51,7 @@
         "name": "cpl_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true"
     },
     "dc_ho": {
         "name": "dc_ho",
@@ -179,6 +179,18 @@
         "toggle": "",
         "new": ""
     },
+    "ppc_admin": {
+        "name": "ppc_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
+    "ppc_manager": {
+        "name": "ppc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
     "proc_manager": {
         "name": "proc_manager",
         "name_rendered": "",
@@ -221,6 +233,12 @@
         "toggle": "",
         "new": ""
     },
+    "proj_admin": {
+        "name": "proj_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
     "proj_manager": {
         "name": "proj_manager",
         "name_rendered": "",
@@ -257,6 +275,12 @@
         "toggle": "",
         "new": ""
     },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
     "qs_manager": {
         "name": "qs_manager",
         "name_rendered": "",
@@ -279,7 +303,7 @@
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true"
     },
     "whs_manager": {
         "name": "whs_manager",

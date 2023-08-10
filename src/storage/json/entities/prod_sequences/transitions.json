@@ -4,18 +4,28 @@
         "location": "-420.00 -80.00",
         "new": "",
         "in_progress": "true",
-        "on_hold": "",
-        "finished": "",
-        "cancelled": "",
-        "obsolete": ""
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "obsolete": "true"
     },
     "in_progress": {
         "name": "in_progress",
         "location": "-250.00 -70.00",
         "new": "",
         "in_progress": "",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "obsolete": "true"
+    },
+    "finished": {
+        "name": "finished",
+        "location": "110.00 80.00",
+        "new": "",
+        "in_progress": "true",
+        "finished": "",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -24,28 +34,18 @@
         "location": "-170.00 80.00",
         "new": "",
         "in_progress": "true",
-        "on_hold": "",
         "finished": "",
+        "on_hold": "",
         "cancelled": "",
         "obsolete": ""
-    },
-    "finished": {
-        "name": "finished",
-        "location": "110.00 80.00",
-        "new": "",
-        "in_progress": "true",
-        "on_hold": "true",
-        "finished": "",
-        "cancelled": "true",
-        "obsolete": "true"
     },
     "cancelled": {
         "name": "cancelled",
         "location": "-40.00 -130.00",
         "new": "",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "",
         "obsolete": "true"
     },
@@ -54,8 +54,8 @@
         "location": "230.00 -70.00",
         "new": "",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": ""
     }
