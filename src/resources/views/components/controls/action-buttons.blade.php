@@ -8,6 +8,10 @@
         @if($buttonSave)
             @php $btnText = $action=='edit' ? 'Save' : 'Create New' @endphp
             @if($isFloatingOnRightSide)<div class="text-right mr-3">@endif
+                <x-renderer.button icon="fa-solid fa-floppy-disk"
+                {{-- onClick="$('button').prop('disabled',true);"  --}}
+                class="{{$class}} border-gray-300" onClick="saveAndClose()"
+                >Save and Close</x-renderer.button>
                 <x-renderer.button htmlType="submit" icon="fa-solid fa-floppy-disk"
                 {{-- onClick="$('button').prop('disabled',true);"  --}}
                 class="{{$class}} border-gray-300"
@@ -59,3 +63,9 @@
 @if(!$isFloatingOnRightSide)
 </div>
 @endif
+<script>
+    function saveAndClose(){
+            $('[id="form-upload"]').append('<input type="hidden" name="saveAndClose" value="true">')
+            $('[id="form-upload"]').submit()
+        }
+</script>
