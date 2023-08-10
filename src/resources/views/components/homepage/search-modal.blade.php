@@ -18,10 +18,11 @@
 
 @section($modalId.'-footer')
 <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-    <a href="#" class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-300">
+    <div class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-300">
         <i class="fa-light fa-circle-question pr-1"></i>
-        Didn't find what you were looking for?
-    </a>
+        <p>Total number of apps: <p class="font-bold">{{" ".$totalApps}}</p></p>
+        
+    </div>
 </div>
 @endsection
 
