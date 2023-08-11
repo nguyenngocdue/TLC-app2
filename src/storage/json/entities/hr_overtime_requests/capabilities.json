@@ -269,6 +269,33 @@
         "rejected": "true",
         "approved": ""
     },
+    "ppc_admin": {
+        "name": "ppc_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_approval": "",
+        "rejected": "true",
+        "approved": ""
+    },
+    "ppc_manager": {
+        "name": "ppc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_approval": "",
+        "rejected": "true",
+        "approved": ""
+    },
+    "ppc_member": {
+        "name": "ppc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_approval": "",
+        "rejected": "true",
+        "approved": ""
+    },
     "proc_manager": {
         "name": "proc_manager",
         "name_rendered": "",
@@ -330,6 +357,15 @@
         "new": "",
         "pending_approval": "",
         "rejected": "",
+        "approved": ""
+    },
+    "proj_admin": {
+        "name": "proj_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_approval": "",
+        "rejected": "true",
         "approved": ""
     },
     "proj_manager": {
