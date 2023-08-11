@@ -31,12 +31,14 @@ class SearchModal extends Component
     public function render()
     {
         [,$allApps, $allAppsTopDrawer] = $this->getAllAppsOfSearchModalAndTopDrawer();
+        $totalApps = count($allApps) ?? 0 ;
         return view('components.homepage.search-modal', [
             'allApps' => $allApps,
             'allAppsTopDrawer' => $allAppsTopDrawer,
             'currentUserIsAdmin' => CurrentUser::isAdmin(),
             'route' => route('updateBookmark'),
             'modalId' => $this->modalId,
+            'totalApps' => $totalApps,
         ]);;
     }
 }

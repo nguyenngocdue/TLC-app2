@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Events\UpdatedSequenceBaseEvent;
-use App\Models\Sub_project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -20,6 +18,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEventInspChklst;
 	use TraitEntityUpdateUserSettings;
 	use TraitUpdatedProdSequenceEvent;
+	use TraitHelperRedirect;
 
 	private $debugForStoreUpdate = false;
 
@@ -102,7 +101,7 @@ trait TraitEntityCRUDStoreUpdate2
 	{
 		// dd(SuperProps::getFor($this->type));
 		// dump($this->type);
-		// dd($request->input());
+		// dd($request->input('saveAndClose'));
 		// dump($request->files);
 		// dd();
 		// if ($request['tableNames'] == 'fakeRequest') {
@@ -208,7 +207,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment']);
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
 		$this->eventUpdatedProdSequence($theRow->id);
-		if ($request->input('redirect_back_to_last_page')) return redirect()->back();
-		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
+		return $this->redirectCustomForUpdate2($request,$theRow);
 	}
+	
 }

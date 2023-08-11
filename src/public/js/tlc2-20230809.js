@@ -38,3 +38,7 @@ const openAnotherLink = (linkId) => {
         a.click();
     }
 }
+const saveAndRedirectViewAll = (e) => {
+    
+
+}
