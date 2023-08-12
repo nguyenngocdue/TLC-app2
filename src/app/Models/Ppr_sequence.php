@@ -18,7 +18,7 @@ class Ppr_sequence extends ModelExtended
         "start_date", "end_date",
     ];
 
-    protected $table = 'prod_sequences';
+    protected $table = 'ppr_sequences';
     public static $nameless = true;
 
     public static $eloquentParams = [
