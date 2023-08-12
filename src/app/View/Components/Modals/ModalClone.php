@@ -24,8 +24,8 @@ class ModalClone extends Component
     {
         $route = route($this->cloneFor . ".cloneTemplate");
         switch ($this->cloneFor) {
-            case "ghg_sheets":
-                return [Ghg_tmpl::all(), $route];
+                // case "ghg_sheets":
+                //     return [Ghg_tmpl::all(), $route];
             case "hse_insp_chklst_shts":
                 return [Hse_insp_tmpl_sht::all(), $route];
             default:

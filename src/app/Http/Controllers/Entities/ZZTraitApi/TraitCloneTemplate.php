@@ -15,25 +15,17 @@ trait TraitCloneTemplate
 	public function cloneTemplate(Request $request)
 	{
 		$lines = $request->input('lines');
+		// dump($lines);
 		$line = $lines[0] ?? [];
+		// dump($line);
 		$insertedId = null;
 		$params = $line;
 		$plural = Str::plural($this->type);
+		// dump($plural);
 		$tmpl_id = "?????";
 		$ownerId = CurrentUser::id();
 		switch ($plural) {
-			case "ghg_sheets":
-				['ghg_month' => $ghg_month, 'ghg_tmpl_id' => $tmpl_id,] = $line;
-				$params = ['--ownerId' => $ownerId, '--tmplId' => $tmpl_id, '--month' => $ghg_month,];
-				$cmdOutput = Artisan::call("ndc:cloneGhg", $params);
-				if ($cmdOutput) {
-					$result = [['message' => "Problem ???"]];
-				} else {
-					$insertedId = trim(Artisan::output());
-					$result = [['redirect_edit_href' => route($plural . '.edit', $insertedId),]];
-				}
-				break;
-			case "hse_insp_chklst_shts ":
+			case "hse_insp_chklst_shts":
 				['tmpl_id' => $tmpl_id,] = $line;
 				$params = ['--ownerId' => $ownerId, '--inspTmplId' => $tmpl_id,];
 				$cmdOutput = Artisan::call("ndc:cloneHse", $params);
@@ -46,6 +38,7 @@ trait TraitCloneTemplate
 				break;
 			default:
 				$result = [];
+				dump("[$plural] is not in the switch");
 				break;
 		}
 
