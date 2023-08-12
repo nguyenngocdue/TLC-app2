@@ -64,16 +64,6 @@ class RelationshipRenderer2 extends Component
         $this->tablesCallCmdBtn = config()->get('tablesCallCmdBtn');
     }
 
-    public static function getCacheEloquentToTable01Name()
-    {
-        return static::$cacheEloquentToTable01Name;
-    }
-
-    public static function getCacheTable01NameToEloquent()
-    {
-        return static::$cacheTable01NameToEloquent;
-    }
-
     private function isTableOrderable($row, $colName, $columns)
     {
         $eloquentParam = $row::$eloquentParams[$colName];

@@ -10,6 +10,16 @@ trait TraitTableRendererManyLines
     private static $cacheEloquentToTable01Name = [];
     private static $cacheTable01NameToEloquent = [];
 
+    public static function getCacheEloquentToTable01Name()
+    {
+        return static::$cacheEloquentToTable01Name;
+    }
+
+    public static function getCacheTable01NameToEloquent()
+    {
+        return static::$cacheTable01NameToEloquent;
+    }
+
     private function renderManyLines($tableName, $dataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter)
     {
         $createANewForm = isset($this->tablesHaveCreateANewForm[$this->type]);
