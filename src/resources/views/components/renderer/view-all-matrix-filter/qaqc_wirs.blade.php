@@ -42,6 +42,7 @@
                     name="prod_discipline_id" 
                     id="prod_discipline_id" 
                     typeToLoadListener="qaqc_wir" 
+                    allowClear="true"
                     selected="{{$viewportParams['prod_discipline_id']}}"
                     />
             </div>

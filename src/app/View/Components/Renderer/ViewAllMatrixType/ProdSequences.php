@@ -43,7 +43,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $this->project = $this->project ? $this->project : 5;
         $this->subProject = $this->subProject ? $this->subProject : 21;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
-        $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
+        // $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
         // dump($this->project, $this->subProject, $this->prodRouting);
         $this->cacheUnit();
     }
@@ -89,7 +89,12 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected function getXAxis()
     {
         $result = [];
-        $data = Prod_routing::find($this->prodRouting)->getProdRoutingLinks()->orderBy('order_no')->get();
+        $data = Prod_routing::find($this->prodRouting)
+            ->getProdRoutingLinks();
+        if ($this->prodDiscipline) $data = $data->where('prod_discipline_id', $this->prodDiscipline);
+        $data = $data->orderBy('order_no')
+            ->get();
+        // dump($data[0]);
         $extraColumns = $this->getXAxisExtraColumns();
         foreach ($data as $line) {
             $result[] = [

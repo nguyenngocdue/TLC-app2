@@ -37,7 +37,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         $this->project = $this->project ? $this->project : 5;
         $this->subProject = $this->subProject ? $this->subProject : 21;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
-        $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
+        // $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
         // dump($this->project, $this->subProject, $this->prodRouting);
     }
 
@@ -57,6 +57,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         $result = [];
         $data = Prod_routing::find($this->prodRouting)->getWirDescriptions();
         foreach ($data as $line) {
+            if ($this->prodDiscipline && $line->prod_discipline_id != $this->prodDiscipline) continue;
             $result[] = [
                 'dataIndex' => $line->id,
                 'title' => $line->name,
