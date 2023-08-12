@@ -31,8 +31,12 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_routing_id')->nullable();
             $table->string('meta_type')->nullable();
             $table->unsignedBigInteger('meta_id')->nullable();
+
             $table->dateTime('started_at')->nullable();
             $table->dateTime('finished_at')->nullable();
+            $table->unsignedInteger('total_hours')->nullable();
+            $table->unsignedInteger('total_man_hours')->nullable();
+
             $table->appendCommonFields();
         });
         // Schema::create('prod_orders', function (Blueprint $table) {
