@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 class Prod_sequence extends ModelExtended
 {
     protected $fillable = [
-        "prod_order_id", "prod_routing_link_id",
+        "id", "prod_order_id", "prod_routing_link_id",
         "status", "expected_start_at", "expected_finish_at",
         "priority", "uom_id", "total_uom", "owner_id",
         "sub_project_id", "prod_routing_id",
