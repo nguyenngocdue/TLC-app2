@@ -12,30 +12,22 @@
 @endsection
 
 @section($modalId.'-footer')
+
 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
     <x-renderer.button click="closeModal('{{$modalId}}')">Cancel</x-renderer.button>
-    <x-renderer.button class="mx-1" type='success' click="callApiCloneTemplate()">Clone Template</x-renderer.button>
+    <x-renderer.button class="mx-1" type='success' onClick="callApiCloneTemplate1()">Clone Template</x-renderer.button>
 </div>
 @endsection
 
 @section($modalId.'-javascript')
 <script>
     url = @json($url);
-    callApiCloneTemplate = () => {
-        id = document.getElementById('template_id').value
-        if(id){
-            $.ajax({
-            type: 'post',
-            url: url,
-            data: { id: id },
-            success: (response) => {
-                toastr.success(response.message);
-                window.location.href = response.href;
-            },
-            error: (jqXHR) => {
-                toastr.error(jqXHR.responseJSON.message);
-            },
-            }) 
+    callApiCloneTemplate1 = () => {
+        tmpl_id = document.getElementById('template_id').value
+        if(tmpl_id){
+           callApiCloneTemplate(url, [{tmpl_id}])
+        }else{
+            console.log("What is the selected template?")
         }
     }
 </script>

@@ -20,15 +20,16 @@ class ModalClone extends Component
         // dump($this->cloneFor);
     }
 
-    private function getDataSource()
+    private function getDataSourceAndUrl()
     {
+        $route = route($this->cloneFor . ".cloneTemplate");
         switch ($this->cloneFor) {
             case "ghg_sheets":
-                return Ghg_tmpl::all();
+                return [Ghg_tmpl::all(), $route];
             case "hse_insp_chklst_shts":
-                return Hse_insp_tmpl_sht::all();
+                return [Hse_insp_tmpl_sht::all(), $route];
             default:
-                return collect([]);
+                return [collect([]), $route];
         }
     }
 
@@ -39,9 +40,7 @@ class ModalClone extends Component
      */
     public function render()
     {
-
-        $dataSource = $this->getDataSource();
-        $url = route('cloneTemplateHse') ?? '';
+        [$dataSource, $url] = $this->getDataSourceAndUrl();
         return view('components.modals.modal-clone', [
             'modalId' => $this->modalId,
             'dataSource' => $dataSource,

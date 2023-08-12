@@ -156,7 +156,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "hse_insp_chklst_shts": {
-        "name": "hse_insp_chklst_shts"
+        "name": "hse_insp_chklst_shts",
+        "cloneTemplate_and_updateShort": "true"
     },
     "hse_insp_control_groups": {
         "name": "hse_insp_control_groups"
@@ -218,6 +219,9 @@
     },
     "ppr_routings": {
         "name": "ppr_routings"
+    },
+    "ppr_runs": {
+        "name": "ppr_runs"
     },
     "priorities": {
         "name": "priorities"
