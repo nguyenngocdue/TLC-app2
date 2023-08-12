@@ -44,7 +44,7 @@
     <script src="{{ asset('js/components/ActionMultiple.js') }}"></script>
     
     <script src="{{ asset('js/components/RadioOrCheckbox2-20230731.js') }}"></script>
-    <script src="{{ asset('js/components/Dropdown2-20230731.js') }}"></script>
+    <script src="{{ asset('js/components/Dropdown2-20230812.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4-20230731.js') }}"></script>
     <script src="{{ asset('js/components/EditableTable2-20230807.js') }}"></script>
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20230731.js') }}"></script>

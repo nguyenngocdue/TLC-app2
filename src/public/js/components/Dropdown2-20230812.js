@@ -5,10 +5,13 @@ let k = {},
     debugFlow = false
 const makeIdForNumber = (n) => '#' + String(n).padStart(6, '0').substring(0, 3) + '.' + String(n).padStart(6, '0').substring(3)
 const makeId = (n) => (isNaN(n) ? '' : makeIdForNumber(n))
+// const makePrefix = () => isNaN(state.id) ? state.id : makeId(state.id)
 const select2FormatState = (state) => !state.id ? state.text : $(
-    `<div class="flex justify-between px-1"><span>${state.text
-    }</span><pre>   </pre><span>${isNaN(state.id) ? state.id : makeId(state.id)
-    }</span></div>`
+    `<div class="flex justify-between px-1">
+        <span>${state.text}</span>
+        <pre>   </pre>
+        <span></span>
+    </div>`
 )
 const getEById = (id) => $("[id='" + id + "']")
 const dumbIncludes2 = (array, item) => { for (let i = 0; i < array.length; i++) { if (array[i] == item) return true } return false }
