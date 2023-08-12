@@ -2,17 +2,18 @@
 
 namespace App\View\Components\Controls;
 
-use App\Helpers\Helper;
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\CurrentUser;
-use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable2ndThead;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnRO;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableEditableDataSourceWithOld;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Blade;
+
+use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererSameAsViewAll;
+use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyIcons;
+use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyLines;
+use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererCalendarGrid;
+
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -23,9 +24,12 @@ class RelationshipRenderer2 extends Component
     use TraitTableColumnEditable2ndThead;
     use TraitTableEditableDataSourceWithOld;
 
+    use TraitTableRendererSameAsViewAll;
+    use TraitTableRendererManyIcons;
+    use TraitTableRendererManyLines;
+    use TraitTableRendererCalendarGrid;
+
     private static $table00Count = 1;
-    private static $cacheEloquentToTable01Name = [];
-    private static $cacheTable01NameToEloquent = [];
 
     private $table01Name;
     private $tableDebug = false;
@@ -197,14 +201,7 @@ class RelationshipRenderer2 extends Component
         // dump($tableName);
         // dump($this->tablesInEditableMode[$this->type]);
 
-        $createANewForm = isset($this->tablesHaveCreateANewForm[$this->type]);
-        $createSettings = $createANewForm ? ($this->tablesHaveCreateANewForm[$this->type][$tableName] ?? []) : [];
-
-        $btnCmd = isset($this->tablesCallCmdBtn[$this->type]);
-        $btnCmdSettings = $btnCmd ? ($this->tablesCallCmdBtn[$this->type][$tableName] ?? []) : [];
-
         $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, array_keys($this->tablesInEditableMode[$this->type]));
-        $tableSettings = $editable ? $this->tablesInEditableMode[$this->type][$tableName] : [];
         $showAll = ($renderer_edit === "many_icons" || ($renderer_edit === "many_lines" && $editable));
 
         [$tableFooter, $columns,] = $this->loadColumnsFromRendererEditParam($props, $instance, $lineModelPath, $tableName);
@@ -214,130 +211,14 @@ class RelationshipRenderer2 extends Component
         $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
         switch ($renderer_edit) {
             case "same_as_view_all":
-                $renderer_view_all = $props['relationships']['renderer_view_all'];
-                $renderer_view_all_param = $props['relationships']['renderer_view_all_param'];
-                $renderer_view_all_unit = $props['relationships']['renderer_view_all_unit'];
-                $slot = json_encode($dataSource->all());
-                $tag = "x-renderer.$renderer_view_all";
-                $output = "<$tag renderRaw=1 rendererParam='$renderer_view_all_param' rendererUnit='$renderer_view_all_unit'>$slot</$tag>";
-                return Blade::render($output);
+                return $this->renderSameAsViewAll($props, $dataSource);
             case "calendar_grid":
-                $arrHidden = [];
-                $dateTime = Carbon::parse($row->week);
-                $weekNumber = $dateTime->weekOfYear;
-                if ($dateTime->day == 26) {
-                    $dayOfWeek = $dateTime->dayOfWeek;
-                    $arrHidden = DateTimeConcern::getDayHiddenForDayIndexWeek($dayOfWeek);
-                } else {
-                    $dateTimeDay25 = Carbon::createFromDate($dateTime->year, $dateTime->month, 25);
-                    $weekOfDay25 = $dateTimeDay25->weekOfYear;
-                    if ($weekOfDay25 == $weekNumber) {
-                        $dayOfWeekStart = $dateTime->dayOfWeek;
-                        $dayOfWeekEnd = $dateTimeDay25->dayOfWeek;
-                        $arrHidden = DateTimeConcern::getDayHiddenForDayIndexWeek($dayOfWeekStart, $dayOfWeekEnd);
-                    }
-                }
-                $index = strpos($type, "_");
-                $typeEdit = substr($type, $index + 1);
-                $apiUrl = route($typeEdit . '.index');
-                $token = CurrentUser::getTokenForApi();
-                $statusTimeSheet = $modelPath::findFromCache($id)->status ?? null;
-                $hasRenderSidebar = true;
-                if ($statusTimeSheet && in_array($statusTimeSheet, ['pending_approval', 'approved'])) {
-                    $hasRenderSidebar = false;
-                }
-                return view('components.calendar.calendar-grid', [
-                    'timesheetableType' => $modelPath,
-                    'timesheetableId' => $id,
-                    'apiUrl' => $apiUrl,
-                    'readOnly' => $this->readOnly,
-                    'arrHidden' => $arrHidden,
-                    'type' => $type,
-                    'hasRenderSidebar' => $hasRenderSidebar,
-                ]);
+                return $this->renderCalendarGrid($id, $modelPath, $row, $type);
             case "many_icons":
-                $colSpan =  Helper::getColSpan($colName, $type);
-                foreach ($dataSource as &$item) {
-                    $item['href'] = route($tableName . '.edit', $item->id);
-                    $item['gray'] = $item['resigned'];
-                }
-                $dataSource = $dataSource->all(); // Force LengthAwarePaginator to Array
-                return view('components.controls.many-icon-params')->with(compact('dataSource', 'colSpan'));
+                return $this->renderManyIcons($colName, $type, $dataSource, $tableName);
                 // case "calendar_grid":
             case "many_lines":
-                $sp = SuperProps::getFor($tableName);
-                $dataSourceWithOld = $this->convertOldToDataSource($this->table01Name, $dataSource, $lineModelPath);
-                $editableColumns = $this->makeEditableColumns($columns, $sp, $tableName, $this->table01Name);
-                if ($editable) {
-                    $this->alertIfFieldsAreMissingFromFillable($instance, $lineModelPath, $editableColumns);
-                }
-                //remakeOrderNoColumn MUST before attach Action Column
-                $dataSourceWithOld = $this->remakeOrderNoColumn($dataSourceWithOld);
-                $dataSourceWithOld = $this->attachActionColumn($this->table01Name, $dataSourceWithOld, $isOrderable, $this->readOnly);
-                // dump($dataSourceWithOld);
-                // dump($dataSource);
-                // $tableName = $lineModelPath::getTableName();
-                $roColumns = $this->makeReadOnlyColumns($columns, $sp, $tableName, $this->noCss);
-                // dump($roColumns);
-
-                //<<This is to avoid crash in print mode, as no item pass down
-                $href = '';
-                if ($this->item) {
-                    $itemOriginal = $this->item->getOriginal();
-                    $href = $this->createHref($this->item, $createSettings, $tableName);
-                }
-                $view = $editable ? 'many-line-params-editable' : 'many-line-params-ro';
-                $dataSource2ndThead = $this->readOnly ? null : $this->makeEditable2ndThead($editableColumns, $this->table01Name);
-                if ($this->readOnly) {
-                    array_shift($editableColumns);
-                    foreach ($editableColumns as &$column) {
-                        $column['properties']['readOnly'] = true;
-                    }
-                }
-                $dateTimeColumns = $sp['datetime_controls'];
-
-                static::$cacheEloquentToTable01Name[$colName] = $this->table01Name;
-                static::$cacheTable01NameToEloquent[$this->table01Name] = $colName;
-
-                return view('components.controls.' . $view, [
-                    'readOnly' => $this->readOnly,
-                    'table01ROName' => $this->table01Name . "RO",
-                    'readOnlyColumns' => $roColumns,
-                    'dataSource' => $dataSource,
-
-                    'isOrderable' => $isOrderable,
-                    'table01Name' => $this->table01Name,
-                    'editableColumns' => $editableColumns,
-                    'dateTimeColumns' => $dateTimeColumns,
-                    'dataSource2ndThead' => $dataSource2ndThead,
-                    'dataSourceWithOld' => $dataSourceWithOld,
-
-                    'tableFooter' => $tableFooter,
-                    'tableName' => $tableName,
-                    'colName' => $colName,
-                    'tableDebug' => $this->tableDebug ? true : false,
-                    'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
-
-                    'entityId' => $this->entityId,
-                    'entityType' => $this->entityType,
-                    'userId' => CurrentUser::get()->id,
-                    'entityProjectId' => $itemOriginal['project_id'] ?? null,
-                    'entitySubProjectId' => $itemOriginal['sub_project_id'] ?? null,
-                    // 'entityCurrencyMonth' => $itemOriginal['rate_exchange_month_id'] ?? null,
-                    // 'entityCurrencyExpected' => $itemOriginal['counter_currency_id'] ?? null,
-
-                    'noCss' => $this->noCss,
-
-                    'editable' => $editable,
-                    'tableSettings' => $tableSettings,
-
-                    'createANewForm' => $createANewForm,
-                    // 'createSettings' => $createSettings,
-                    'btnCmdSettings' => $btnCmdSettings,
-                    'href' => $href,
-                    'showNo' => true,
-                    'showNoR' => false,
-                ]);
+                return $this->renderManyLines($tableName, $dataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }
