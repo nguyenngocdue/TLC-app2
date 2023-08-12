@@ -5,7 +5,7 @@ namespace App\Providers\Support;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Tree\BuildTree;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TraitSupportPermissionGate
@@ -73,32 +73,35 @@ trait TraitSupportPermissionGate
     }
     private function checkPermissionUsingGateForDeleteMultiple($ids, $action = 'delete', $restore = false)
     {
+        if (CurrentUser::isAdmin()) return []; // Admin is always can delete;
         $permissions = $this->permissionMiddleware[$action];
         $permissions = is_array($permissions) ? $permissions : explode('|', $permissions);
+        // Log::info("Permissions " . join(",", $permissions));
         $arrFail = [];
-        if (CurrentUser::isAdmin()) {
-            return $arrFail;
-        }
         foreach ($ids as $id) {
             $model = $restore ? $this->data::withTrashed()->findOrFail($id) : $this->data::findOrFail($id);
             $isTree = $this->useTree($model);
-            [$delete, $deleteOther] = $this->useTreeForPermissionTheLine($isTree, $permissions, $model);
-            if (!($delete || $deleteOther)) $arrFail[] = $id;
+            if ($isTree) {
+                [$delete, $deleteOther] = $this->useTreeForPermissionTheLine($permissions, $model);
+                if (!($delete || $deleteOther)) $arrFail[] = $id;
+            }
+            // Log::info("Result " . $isTree . " - " . $delete . " - " . $deleteOther);
         }
-        return array_unique($arrFail) ?? [];
+        $result = array_unique($arrFail) ?? [];
+        return $result;
     }
-    private function useTreeForPermissionTheLine($isTree, $permissions, $model)
+    private function useTreeForPermissionTheLine($permissions, $model)
     {
         $result1 = false;
         $result2 = false;
-        if ($isTree) {
-            if ($this->checkPermission($permissions[0])) {
-                $result1 = CurrentUser::id() == $model->owner_id;
-            }
-            if ($this->checkPermission($permissions[1])) {
-                $result2 = (CurrentUser::id() == $model->owner_id) || $this->checkTree($model);
-            }
+
+        if ($this->checkPermission($permissions[0])) {
+            $result1 = CurrentUser::id() == $model->owner_id;
         }
+        if ($this->checkPermission($permissions[1])) {
+            $result2 = (CurrentUser::id() == $model->owner_id) || $this->checkTree($model);
+        }
+
         return [$result1, $result2];
     }
 }

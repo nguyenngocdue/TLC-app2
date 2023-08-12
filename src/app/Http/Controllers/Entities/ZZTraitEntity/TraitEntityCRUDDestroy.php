@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 trait TraitEntityCRUDDestroy
 {
@@ -12,10 +13,11 @@ trait TraitEntityCRUDDestroy
     public function destroyMultiple(Request $request)
     {
         try {
-
             $strIds = $request->ids;
+            // Log::info("Deleting " . $strIds);
             $ids = explode(',', $strIds) ?? [];
             $arrFail = $this->checkPermissionUsingGateForDeleteMultiple($ids, 'delete');
+            // Log::info("Arr Fail " . join(",", $arrFail));
             $arrDelete = array_diff($ids, $arrFail);
             $this->data::whereIn('id', $arrDelete)->delete();
             return ResponseObject::responseSuccess(
