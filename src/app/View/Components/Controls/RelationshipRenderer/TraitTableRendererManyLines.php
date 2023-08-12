@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls\RelationshipRenderer;
 
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\CurrentUser;
 
@@ -22,6 +23,9 @@ trait TraitTableRendererManyLines
 
     private function renderManyLines($tableName, $dataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter)
     {
+        $app = LibApps::getFor($tableName);
+        $nickname = strtoupper($app['nickname'] ?? "no nickname");
+
         $createANewForm = isset($this->tablesHaveCreateANewForm[$this->type]);
         $createSettings = $createANewForm ? ($this->tablesHaveCreateANewForm[$this->type][$tableName] ?? []) : [];
 
@@ -79,6 +83,7 @@ trait TraitTableRendererManyLines
 
             'tableFooter' => $tableFooter,
             'tableName' => $tableName,
+            'nickname' => $nickname,
             'colName' => $colName,
             'tableDebug' => $this->tableDebug ? true : false,
             'tableDebugTextHidden' => $this->tableDebug ? "text" : "hidden",
