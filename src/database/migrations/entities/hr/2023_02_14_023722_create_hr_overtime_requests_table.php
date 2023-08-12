@@ -23,6 +23,7 @@ return new class extends Migration
             $table->id();
             $table->string("name")->nullable();
             $table->text("description")->nullable();
+            $table->unsignedInteger("total_hours")->nullable();
             $table->unsignedBigInteger("workplace_id");
             $table->unsignedBigInteger('assignee_1');
             $table->unsignedBigInteger('user_team_ot_id')->nullable();

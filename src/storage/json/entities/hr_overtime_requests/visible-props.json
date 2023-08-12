@@ -47,6 +47,14 @@
         "rejected": "true",
         "approved": "true"
     },
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
     "_getHrOtrLines1": {
         "name": "_getHrOtrLines1",
         "column_name": "getHrOtrLines1",

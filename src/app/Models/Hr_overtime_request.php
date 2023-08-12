@@ -9,7 +9,7 @@ class Hr_overtime_request extends ModelExtended
     protected $fillable = [
         'id', 'name', 'description',
         'workplace_id', 'assignee_1', 'owner_id',
-        'status', 'user_team_ot_id'
+        'status', 'user_team_ot_id', "total_hours",
     ];
     protected $table = "hr_overtime_requests";
     public static $nameless = true;
