@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_routing_link_id');
             $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->unsignedBigInteger('prod_routing_id')->nullable();
+            $table->unsignedBigInteger('prod_discipline_id')->nullable();
 
             $table->unique(['prod_order_id', 'prod_routing_link_id']);
             $table->integer('priority')->nullable();

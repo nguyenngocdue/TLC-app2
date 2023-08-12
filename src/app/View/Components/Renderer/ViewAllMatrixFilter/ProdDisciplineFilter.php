@@ -3,11 +3,11 @@
 namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Project;
+use App\Models\Prod_discipline;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class ProjectFilter extends Component
+class ProdDisciplineFilter extends Component
 {
     use TraitListenerControl;
     /**
@@ -32,8 +32,8 @@ class ProjectFilter extends Component
 
     private function getDataSource()
     {
-        return Project::select('id', 'name', 'description')
-            ->whereIn('status', ['manufacturing', 'construction_site'])
+        return Prod_discipline::select('id', 'name', 'description')
+            // ->whereIn('status', ['manufacturing', 'construction_site'])
             ->orderBy('name')
             ->get();
     }

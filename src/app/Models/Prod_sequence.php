@@ -13,7 +13,7 @@ class Prod_sequence extends ModelExtended
         "priority", "uom_id", "total_uom", "owner_id",
         "sub_project_id", "prod_routing_id",
         "total_hours", "worker_number", "total_man_hours",
-        "start_date", "end_date",
+        "start_date", "end_date", "prod_discipline_id",
     ];
 
     protected $table = 'prod_sequences';
@@ -29,6 +29,7 @@ class Prod_sequence extends ModelExtended
 
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getProdRouting" => ['belongsTo', Prod_routing::class, "prod_routing_id"],
+        "getProdDiscipline" => ['belongsTo', Prod_discipline::class, "prod_discipline_id"],
     ];
 
     public function getProdOrder()
@@ -68,6 +69,12 @@ class Prod_sequence extends ModelExtended
     }
 
     public function getProdRouting()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getProdDiscipline()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

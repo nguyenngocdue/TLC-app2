@@ -4,8 +4,8 @@
         "column_name": "id",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -14,8 +14,8 @@
         "column_name": "prod_order_id",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -24,8 +24,8 @@
         "column_name": "prod_routing_link_id",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -34,8 +34,8 @@
         "column_name": "sub_project_id",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -44,28 +44,18 @@
         "column_name": "prod_routing_id",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
-    "_start_date": {
-        "name": "_start_date",
-        "column_name": "start_date",
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
-        "cancelled": "true",
-        "obsolete": "true"
-    },
-    "_end_date": {
-        "name": "_end_date",
-        "column_name": "end_date",
-        "new": "true",
-        "in_progress": "true",
         "on_hold": "true",
-        "finished": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -74,8 +64,8 @@
         "column_name": "total_uom",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -84,8 +74,8 @@
         "column_name": "uom_id",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -94,8 +84,28 @@
         "column_name": "getProdRuns",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "obsolete": "true"
+    },
+    "_start_date": {
+        "name": "_start_date",
+        "column_name": "start_date",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "obsolete": "true"
+    },
+    "_end_date": {
+        "name": "_end_date",
+        "column_name": "end_date",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -104,8 +114,8 @@
         "column_name": "total_hours",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -114,8 +124,8 @@
         "column_name": "worker_number",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -124,8 +134,8 @@
         "column_name": "total_man_hours",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -134,8 +144,8 @@
         "column_name": "getProdRoutingDetails",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -144,8 +154,8 @@
         "column_name": "owner_id",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -154,8 +164,8 @@
         "column_name": "status",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -164,8 +174,8 @@
         "column_name": "created_at",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -174,8 +184,8 @@
         "column_name": "updated_at",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -184,8 +194,8 @@
         "column_name": "deleted_by",
         "new": "",
         "in_progress": "",
-        "on_hold": "",
         "finished": "",
+        "on_hold": "",
         "cancelled": "",
         "obsolete": ""
     },
@@ -194,8 +204,8 @@
         "column_name": "deleted_at",
         "new": "",
         "in_progress": "",
-        "on_hold": "",
         "finished": "",
+        "on_hold": "",
         "cancelled": "",
         "obsolete": ""
     },
@@ -204,8 +214,8 @@
         "column_name": "expected_start_at",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -214,8 +224,8 @@
         "column_name": "expected_finish_at",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     },
@@ -224,8 +234,8 @@
         "column_name": "priority",
         "new": "true",
         "in_progress": "true",
-        "on_hold": "true",
         "finished": "true",
+        "on_hold": "true",
         "cancelled": "true",
         "obsolete": "true"
     }

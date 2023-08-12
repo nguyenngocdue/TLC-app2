@@ -16,7 +16,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     use TraitViewAllFunctions;
     use TraitYAxisDiscipline;
 
-    private $project, $subProject, $prodRouting;
+    private $project, $subProject, $prodRouting, $prodDiscipline;
     protected $dataIndexX = "wir_description_id";
     protected $dataIndexY = "prod_order_id";
     protected $yAxis = Prod_order::class;
@@ -33,10 +33,11 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     public function __construct()
     {
         parent::__construct();
-        [$this->project, $this->subProject, $this->prodRouting] = $this->getUserSettings();
+        [$this->project, $this->subProject, $this->prodRouting, $this->prodDiscipline] = $this->getUserSettings();
         $this->project = $this->project ? $this->project : 5;
         $this->subProject = $this->subProject ? $this->subProject : 21;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
+        $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
         // dump($this->project, $this->subProject, $this->prodRouting);
     }
 
@@ -47,7 +48,8 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         $project = $settings[$type][Constant::VIEW_ALL]['matrix']['project_id'] ?? null;
         $subProject = $settings[$type][Constant::VIEW_ALL]['matrix']['sub_project_id'] ?? null;
         $prodRouting = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] ?? null;
-        return [$project, $subProject, $prodRouting];
+        $prodDiscipline = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_discipline_id'] ?? null;
+        return [$project, $subProject, $prodRouting, $prodDiscipline];
     }
 
     protected function getXAxis()
@@ -85,6 +87,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
             'project_id' => $this->project,
             'sub_project_id' => $this->subProject,
             'prod_routing_id' => $this->prodRouting,
+            'prod_discipline_id' => $this->prodDiscipline,
         ];
     }
 
@@ -93,6 +96,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         $lines = Qaqc_wir::query()
             ->where('sub_project_id', $this->subProject)
             ->where('prod_routing_id', $this->prodRouting)
+            ->where('prod_discipline_id', $this->prodDiscipline)
             ->get();
         return $lines;
     }
@@ -110,6 +114,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         $params['prod_order_id'] =  $y->id;
         $params['prod_discipline_id'] =  $x['prod_discipline_id'];
         $params['assignee_1'] =  $x['def_assignee'];
+
         return $params;
     }
 

@@ -12,7 +12,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdRoutingLinks": {
         "name": "_getProdRoutingLinks",
@@ -27,7 +28,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getUomId": {
         "name": "_getUomId",
@@ -42,7 +44,8 @@
         "filter_columns": "field_id",
         "filter_values": "140",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getSubProject": {
         "name": "_getSubProject",
@@ -57,7 +60,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdRouting": {
         "name": "_getProdRouting",
@@ -72,7 +76,24 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_getProdDiscipline": {
+        "name": "_getProdDiscipline",
+        "relationship": "belongsTo",
+        "control_name": "prod_discipline_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -87,7 +108,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -102,7 +124,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdRuns": {
         "name": "_getProdRuns",
@@ -117,7 +140,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdRoutingDetails": {
         "name": "_getProdRoutingDetails",
@@ -132,6 +156,7 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }
