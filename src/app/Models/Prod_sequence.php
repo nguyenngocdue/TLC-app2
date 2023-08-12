@@ -93,6 +93,20 @@ class Prod_sequence extends ModelExtended
     public function getManyLineParams()
     {
         return [
+            ["dataIndex" => "id",],
+            ["dataIndex" => "prod_routing_link_id", "deaf" => true,],
+
+            ["dataIndex" => "total_hours", "footer" => "agg_sum"],
+            ["dataIndex" => "worker_number",],
+            ["dataIndex" => "total_man_hours", "footer" => "agg_sum"],
+            ["dataIndex" => "total_uom",],
+            ["dataIndex" => "uom_id",],
+        ];
+    }
+
+    public function getManyLineParams1()
+    {
+        return [
             ["dataIndex" => "id",], //"renderer" => "id", "type" => "prod_sequences", "align" => "center"],
             ["dataIndex" => "prod_order_id", "title" => "Prod Order Id", "rendererParam" => "id"],
             ["dataIndex" => "prod_order_id", "title" => "Routing Id (*)", "rendererParam" => "prod_routing_id"],
