@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+        Schema::table('sub_projects', function (Blueprint $table) {
+            $table->foreign('project_id')->references('id')->on('projects')->cascadeOnDelete()->cascadeOnUpdate();
+        });
+        Schema::table('priorities', function (Blueprint $table) {
+            $table->foreign('field_id')->references('id')->on('fields');
         });
     }
 

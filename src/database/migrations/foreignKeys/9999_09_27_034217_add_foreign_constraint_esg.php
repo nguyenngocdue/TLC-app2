@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+        Schema::table('ghg_metric_type_1s', function (Blueprint $table) {
+            $table->foreign('ghg_metric_type_id')->references('id')->on('ghg_metric_types');
+        });
+        Schema::table('ghg_metric_type_2s', function (Blueprint $table) {
+            $table->foreign('ghg_metric_type_1_id')->references('id')->on('ghg_metric_type_1s');
         });
     }
 
