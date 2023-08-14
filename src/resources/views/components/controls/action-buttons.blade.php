@@ -9,8 +9,8 @@
             @php $btnText = $action=='edit' ? 'Save' : 'Create New' @endphp
             @if($isFloatingOnRightSide)<div class="text-right mr-3">@endif
                 <x-renderer.button icon="fa-solid fa-floppy-disk"
-                class="{{$class}} border-gray-300 text-right mr-3" onClick="saveAndClose()"
-                >Save and Close</x-renderer.button>
+                class="{{$class}} border-gray-300" onClick="saveAndClose()"
+                >Save and Return</x-renderer.button>
             @if($isFloatingOnRightSide)</div>@endif
             @if($isFloatingOnRightSide)<div class="text-right mr-3">@endif
                 <x-renderer.button htmlType="submit" icon="fa-solid fa-floppy-disk"
