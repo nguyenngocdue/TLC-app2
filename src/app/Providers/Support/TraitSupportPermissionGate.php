@@ -54,7 +54,7 @@ trait TraitSupportPermissionGate
         }
         $message = [];
         if ($isTree) {
-            [$edit, $editOther] = $this->useTreeForPermissionTheLine($isTree, $permissions, $model);
+            [$edit, $editOther] = $this->useTreeForPermissionTheLine($permissions, $model);
             $message[] = 'Edit denied';
             $message[] = $edit ? '' : 'You are not the document owner';
             $message[] = $editOther ? '' : "You are not in the approval tree";
