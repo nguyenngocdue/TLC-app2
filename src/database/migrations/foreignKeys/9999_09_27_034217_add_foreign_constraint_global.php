@@ -13,6 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::table('sub_projects', function (Blueprint $table) {
+            $table->foreign('project_id')->references('id')->on('projects')->cascadeOnDelete()->cascadeOnUpdate();
+        });
+        Schema::table('priorities', function (Blueprint $table) {
+            $table->foreign('field_id')->references('id')->on('fields');
+        });
     }
 
     /**
