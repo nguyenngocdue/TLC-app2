@@ -3,5 +3,5 @@
 
 return [
     'failed_email' => 'This email/username is not found.',
-    'failed_password' => 'The password you entered was incorrect.',
+    'failed_password' => 'The password is incorrect.',
 ];
