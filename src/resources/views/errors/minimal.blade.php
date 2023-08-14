@@ -10,6 +10,14 @@
                 font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             }
         </style>
+        <style>
+            .ant-result-subtitle {
+                color: red!important;
+                font-size: 20px!important;
+                line-height: 1.4!important;
+                text-align: center!important;
+            }
+        </style>
 </head>
     <body class="antialiased">
         <div id="app" class="relative flex items-top justify-center min-h-screen bg-gray-200 dark:bg-gray-900 sm:items-center sm:pt-0">
@@ -25,8 +33,10 @@
                             default:
                                 break;
                         }
+                        $isAdmin = App\Utils\Support\CurrentUser::isAdmin();
+                        $message = $isAdmin ? $exception->getMessage() : 'User does not have the right permissions.';
                     @endphp
-                    <antd-results :code="@yield('code')" :message="'@yield('message')'" :url="'{{$url}}'"/>
+                    <antd-results :code="@yield('code')" :message="'{{$message}}'" :url="'{{$url}}'"/>
                 </div>
         </div>
         <script src="{{ asset('js/antd-vue.js') }}"></script>
