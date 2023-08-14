@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\LoggedUserSignInHistoriesEvent;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Utils\System\GetSetCookie;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use LdapRecord\Laravel\Auth\ListensForLdapBindFailure;
 use Jenssegers\Agent\Agent;
 use Stevebauman\Location\Facades\Location;
@@ -94,7 +97,6 @@ class LoginController extends Controller
             }
             return $this->sendLoginResponse($request);
         }
-
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
@@ -157,7 +159,54 @@ class LoginController extends Controller
             $time = $request->server('REQUEST_TIME');
             event(new LoggedUserSignInHistoriesEvent(Auth::id(), $ipAddress, $time, $infoBrowser));
         } catch (\Throwable $th) {
-           dd($th->getMessage());
+           dump($th->getMessage());
         }
+    }
+
+     /**
+     * Generate a human validation error for LDAP bind failures.
+     *
+     * @param string      $errorMessage
+     * @param string|null $diagnosticMessage
+     *
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    protected function ldapBindFailed($errorMessage, $diagnosticMessage = null)
+    {
+        switch (true) {
+            case $this->causedByLostConnection($errorMessage):
+                return $this->handleLdapBindError($errorMessage);
+            case $this->causedByInvalidCredentials($errorMessage, $diagnosticMessage):
+                // We'll bypass any invalid LDAP credential errors and let
+                // the login controller handle it. This is so proper
+                // translation can be done on the validation error.
+                return throw ValidationException::withMessages([
+                    $this->password() => [trans('auth.failed_password')],
+                ]);
+            default:
+                foreach ($this->ldapDiagnosticCodeErrorMap() as $code => $message) {
+                    if ($this->errorContainsMessage($diagnosticMessage, (string) $code)) {
+                        return $this->handleLdapBindError($message, $code);
+                    }
+                }
+        }
+    }
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $username = $request->{$this->username()};
+        $user = User::where('email', $username)->first();
+        if(!$user){
+            return throw ValidationException::withMessages([
+                $this->username() => [trans('auth.failed_email')],
+            ]);
+        }
+        return throw ValidationException::withMessages([
+            $this->password() => [trans('auth.failed_password')],
+        ]);
+    }
+    private function password(){
+        return 'password';
     }
 }

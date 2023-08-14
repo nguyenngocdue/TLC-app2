@@ -96,9 +96,9 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     {
         $lines = Qaqc_wir::query()
             ->where('sub_project_id', $this->subProject)
-            ->where('prod_routing_id', $this->prodRouting)
-            ->where('prod_discipline_id', $this->prodDiscipline)
-            ->get();
+            ->where('prod_routing_id', $this->prodRouting);
+        if ($this->prodDiscipline) $lines = $lines->where('prod_discipline_id', $this->prodDiscipline);
+        $lines = $lines->get();
         return $lines;
     }
 
