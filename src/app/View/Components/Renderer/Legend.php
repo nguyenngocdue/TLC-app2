@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\View\Component;
 
 class Legend extends Component
@@ -12,10 +13,16 @@ class Legend extends Component
      * @return void
      */
     public function __construct(
-        private $dataSource = null,
+        private $type = null,
         private $title = null,
+        private $dataSource = null,
     ) {
-        //
+        // dump($type);
+    }
+
+    private function getLegendDataSource()
+    {
+        return LibStatuses::getFor($this->type);
     }
 
     /**
@@ -25,10 +32,11 @@ class Legend extends Component
      */
     public function render()
     {
-        $count = count($this->dataSource) ?? 0;
+        $dataSource = $this->dataSource ?  $this->dataSource : $this->getLegendDataSource();
+        $count = count($dataSource);
         $gridCss = $this->getGridCss($count);
         return view('components.renderer.legend', [
-            'dataSource' => $this->dataSource,
+            'dataSource' => $dataSource,
             'title' => $this->title,
             'gridCss' => $gridCss,
         ]);

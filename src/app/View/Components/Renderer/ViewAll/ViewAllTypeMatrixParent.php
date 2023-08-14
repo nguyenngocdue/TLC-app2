@@ -33,6 +33,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $mode = 'status_only';
     protected $apiToCallWhenCreateNew = 'storeEmpty';
     protected $attOfCellToRender = "status";
+    protected $showLegend = true;
     /**
      * Create a new component instance.
      *
