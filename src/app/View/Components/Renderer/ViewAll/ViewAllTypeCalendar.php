@@ -63,7 +63,6 @@ class ViewAllTypeCalendar extends Component
             'typeModel' => $this->typeModel,
             'year' => $filterViewAllCalendar['year'] ?? '',
             'userCurrentCalendar' => $userCurrentCalendar,
-            'dataSourceLegend' => $this->dataSourceLegend(),
             'titleLegend' => 'Legend',
             'ownerId' => $ownerId,
             'nodeProjectTreeArray' => $nodeProjectTreeArray,
@@ -84,10 +83,7 @@ class ViewAllTypeCalendar extends Component
         }
         return $result;
     }
-    private function dataSourceLegend()
-    {
-        return LibStatuses::getFor($this->type);
-    }
+
     private function getWeekByDay($day)
     {
         $date = Carbon::parse($day);

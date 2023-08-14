@@ -40,7 +40,7 @@
                 </x-renderer.card>
             </div>
             <div class="md:col-span-6">
-                <x-renderer.legend :dataSource="$dataSourceLegend" title="{{$titleLegend}}" />
+                <x-renderer.legend type="{{$type}}" title="{{$titleLegend}}" />
             </div>
             
         </div>
