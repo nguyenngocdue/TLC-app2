@@ -25,6 +25,17 @@ trait TraitCloneTemplate
 		$tmpl_id = "?????";
 		$ownerId = CurrentUser::id();
 		switch ($plural) {
+			case "ghg_sheets":
+				['ghg_month' => $ghg_month, 'ghg_tmpl_id' => $tmpl_id,] = $line;
+				$params = ['--ownerId' => $ownerId, '--tmplId' => $tmpl_id, '--month' => $ghg_month,];
+				$cmdOutput = Artisan::call("ndc:cloneGhg", $params);
+				if ($cmdOutput) {
+					$result = [['message' => "Problem ???"]];
+				} else {
+					$insertedId = trim(Artisan::output());
+					$result = [['redirect_edit_href' => route($plural . '.edit', $insertedId),]];
+				}
+				break;
 			case "hse_insp_chklst_shts":
 				['tmpl_id' => $tmpl_id,] = $line;
 				$params = ['--ownerId' => $ownerId, '--inspTmplId' => $tmpl_id,];
