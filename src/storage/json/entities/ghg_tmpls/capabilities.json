@@ -51,7 +51,7 @@
         "name": "cpl_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true"
     },
     "dc_ho": {
         "name": "dc_ho",
@@ -179,6 +179,24 @@
         "toggle": "",
         "new": ""
     },
+    "ppc_admin": {
+        "name": "ppc_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
+    "ppc_manager": {
+        "name": "ppc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
+    "ppc_member": {
+        "name": "ppc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
     "proc_manager": {
         "name": "proc_manager",
         "name_rendered": "",
@@ -217,6 +235,12 @@
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
+    "proj_admin": {
+        "name": "proj_admin",
         "name_rendered": "",
         "toggle": "",
         "new": ""
@@ -285,7 +309,7 @@
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true"
     },
     "whs_manager": {
         "name": "whs_manager",
