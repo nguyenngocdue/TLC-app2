@@ -39,3 +39,7 @@ const openAnotherLink = (linkId) => {
         a.click();
     }
 }
+
+//This will stop user to click "Back" on browser
+setTimeout(() => { window.history.forward(); }, 0);
+window.onunload = () => { null };
