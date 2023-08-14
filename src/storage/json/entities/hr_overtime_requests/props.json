@@ -125,27 +125,6 @@
         "frozen_left": "",
         "frozen_right": ""
     },
-    "_getHrOtrLines1": {
-        "name": "_getHrOtrLines1",
-        "column_name": "getHrOtrLines1",
-        "column_type": "eloquent_prop",
-        "label": "Total Hours",
-        "control": "relationship_renderer",
-        "align": "",
-        "col_span": "",
-        "width": "150",
-        "hidden_view_all": "",
-        "hidden_edit": "true",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "true",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": "",
-        "frozen_left": "",
-        "frozen_right": ""
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -191,7 +170,7 @@
     "_total_hours": {
         "name": "_total_hours",
         "column_name": "total_hours",
-        "column_type": "int unsigned",
+        "column_type": "double(8,2)",
         "label": "Total Hours",
         "control": "number",
         "align": "",
