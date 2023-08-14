@@ -21,6 +21,7 @@ class Eco_sheet_010 extends Controller
     use TraitMenuTitle;
     use TraitModeParamsReport;
     use Eco_sheet_dataSource;
+
     protected $mode = '010';
     protected $maxH = 50;
 
@@ -163,6 +164,11 @@ class Eco_sheet_010 extends Controller
 
         $entity = CurrentPathInfo::getEntityReport($request);
         $modeParams = $this->getModeParams($request);
+
+        $input = $request->input();
+        if (!$request->input('page') && !empty($input)) {
+            return $this->forwardToMode($request, $modeParams);
+        }
 
         $data = $this->getDataSource($modeParams);
         $dataRender = [];

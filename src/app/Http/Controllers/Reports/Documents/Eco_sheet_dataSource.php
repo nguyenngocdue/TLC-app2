@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Controller;
+use App\Utils\Support\DocumentReport;
 
 Trait Eco_sheet_dataSource
 {
-    protected function sqlStr1($modeParams)
+    private function selectMonth($modeParams) {
+        $month = DocumentReport::getCurrentMonthYear();
+        if (isset($modeParams['month'])) {
+            $month = $modeParams['month'];
+        }
+        return $month;
+    }
+
+    private function sqlStr1($modeParams)
     { 
+        $month = $this->selectMonth($modeParams);
         $sql ="SELECT
                     SUBSTR(ecoli.updated_at, 1,7) AS month
                     ,pj.name AS project_name
@@ -22,14 +32,15 @@ Trait Eco_sheet_dataSource
                     LEFT JOIN eco_sheets ecos ON ecos.id = ecoli.eco_sheet_id
                     LEFT JOIN departments dp ON dp.id = ecoli.department_id
                     LEFT JOIN projects pj ON pj.id = ecos.project_id
-                    WHERE SUBSTR(ecoli.updated_at, 1,7) = '2023-08'
+                    WHERE SUBSTR(ecoli.updated_at, 1,7) = '$month'
                     GROUP BY department_id, project_name, month";
         
         return $sql;
     }
 
-    protected function sqlStr2($modeParams)
-    { 
+    private function sqlStr2($modeParams)
+    {
+        $month = $this->selectMonth($modeParams);
         $sql ="SELECT 
                         ecos.id AS ecos_id
                         ,ecos.name AS ecos_name
@@ -39,14 +50,15 @@ Trait Eco_sheet_dataSource
                         ,ecos.status AS ecos_starus
                     FROM eco_sheets ecos
                     WHERE 1 = 1
-                    AND SUBSTR(ecos.closed_at, 1, 7) = '2023-08'
+                    AND SUBSTR(ecos.closed_at, 1, 7) = '$month'
                     AND ecos.status = 'active';";
         
         return $sql;
     }
 
-    protected function sqlStr3($modeParams)
+    private function sqlStr3($modeParams)
     { 
+        $month = $this->selectMonth($modeParams);
         $sql ="SELECT 
                         ecos.id AS scos_id
                         ,ecos.name AS scos_name
@@ -55,7 +67,7 @@ Trait Eco_sheet_dataSource
                         ,ecos.status AS ecos_starus
                     FROM eco_sheets ecos
                     WHERE 1 = 1
-                    AND SUBSTR(ecos.closed_at, 1, 7) = '2023-08'
+                    AND SUBSTR(ecos.closed_at, 1, 7) = '$month'
                     AND ecos.status = 'active';";
         
         return $sql;
