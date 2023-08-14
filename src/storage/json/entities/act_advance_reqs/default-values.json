@@ -27,6 +27,18 @@
         "name": "_name",
         "column_name": "name",
         "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_title": {
+        "name": "_title",
+        "column_name": "title",
+        "label": "",
         "validation": "required",
         "validation_regex": "",
         "formula": "",
