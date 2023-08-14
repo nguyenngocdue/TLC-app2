@@ -92,11 +92,8 @@ class ViewAllTypeCalendar extends Component
     private function getColorForStatus($status)
     {
         $statuses = LibStatuses::getAll();
-        $color = isset($statuses[$status]) ? $statuses[$status]['color'] : 'red';
-        $colorIndex = isset($statuses[$status]) ? $statuses[$status]['color_index'] : 200;
-        $bgIndex = 1000 - $colorIndex;
-        $bgColor = $color . '-' . $colorIndex;
-        $textColor = $color . '-' . $bgIndex;
+        $bgColor = $statuses[$status]['bg_color'];
+        $textColor = $statuses[$status]['text_color'];
         return [$bgColor, $textColor];
     }
 }
