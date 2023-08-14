@@ -1,0 +1,442 @@
+{
+    "acct_manager": {
+        "name": "acct_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "acct_manager_nz": {
+        "name": "acct_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "acct_member": {
+        "name": "acct_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "acct_member_nz": {
+        "name": "acct_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "admin": {
+        "name": "admin",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "bd_manager": {
+        "name": "bd_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "bd_member": {
+        "name": "bd_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "cpl_manager_nz": {
+        "name": "cpl_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "cpl_member": {
+        "name": "cpl_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "dc_ho": {
+        "name": "dc_ho",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "dc_manager": {
+        "name": "dc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "dc_ws": {
+        "name": "dc_ws",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "des_manager": {
+        "name": "des_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "des_member": {
+        "name": "des_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "dir": {
+        "name": "dir",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "dir_nz": {
+        "name": "dir_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "external_inspector": {
+        "name": "external_inspector",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "fac_admin": {
+        "name": "fac_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "fin_member_nz": {
+        "name": "fin_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "guest": {
+        "name": "guest",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "hr_manager": {
+        "name": "hr_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "hr_member": {
+        "name": "hr_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "hr_member_nz": {
+        "name": "hr_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "hse_manager": {
+        "name": "hse_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "hse_member": {
+        "name": "hse_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "it_manager": {
+        "name": "it_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "it_member": {
+        "name": "it_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "mgr_asst_nz": {
+        "name": "mgr_asst_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "newcomer": {
+        "name": "newcomer",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "pln_admin": {
+        "name": "pln_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "ppc_admin": {
+        "name": "ppc_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true"
+    },
+    "ppc_manager": {
+        "name": "ppc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "ppc_member": {
+        "name": "ppc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "proc_manager": {
+        "name": "proc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "proc_member": {
+        "name": "proc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "proc_member_nz": {
+        "name": "proc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "prod_manager": {
+        "name": "prod_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "prod_manager_nz": {
+        "name": "prod_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "prod_member": {
+        "name": "prod_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "prod_member_nz": {
+        "name": "prod_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "proj_admin": {
+        "name": "proj_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "proj_manager": {
+        "name": "proj_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "proj_manager_nz": {
+        "name": "proj_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "proj_member": {
+        "name": "proj_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "proj_member_nz": {
+        "name": "proj_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "qaqc_manager": {
+        "name": "qaqc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "qaqc_member": {
+        "name": "qaqc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "qs_manager": {
+        "name": "qs_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "qs_member": {
+        "name": "qs_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "qs_member_nz": {
+        "name": "qs_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "supreme_manage": {
+        "name": "supreme_manage",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "whs_manager": {
+        "name": "whs_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "whs_member": {
+        "name": "whs_member",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    },
+    "worker": {
+        "name": "worker",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": ""
+    }
+}
