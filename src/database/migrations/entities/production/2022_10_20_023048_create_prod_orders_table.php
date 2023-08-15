@@ -29,6 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('quantity')->nullable();
             $table->unsignedBigInteger('sub_project_id');
             $table->unsignedBigInteger('prod_routing_id')->nullable();
+            $table->unsignedBigInteger('room_type_id')->nullable();
             $table->string('meta_type')->nullable();
             $table->unsignedBigInteger('meta_id')->nullable();
 
