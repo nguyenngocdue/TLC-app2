@@ -23,6 +23,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_title": {
+        "name": "_title",
+        "column_name": "title",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_user_id": {
         "name": "_user_id",
         "column_name": "user_id",

@@ -17,15 +17,16 @@ trait TraitValidation
         $subErrors = [];
         foreach ($validationErrors as $key => $msg) {
             $subErrors[$key] = $msg;
-            unset($validationErrors[$key]);
+            //<<This to force to show the table line validation message
+            // unset($validationErrors[$key]);
         }
 
-        $newValidation = new MessageBag($validationErrors);
+        $newMessageBag = new MessageBag($validationErrors);
         // dd($subErrors);
         foreach ($subErrors as $key => $msg) {
-            $newValidation->getMessageBag()->add($idForScroll, $msg[0]);
+            $newMessageBag->getMessageBag()->add($idForScroll, $msg[0]);
         }
-        return $newValidation;
+        return $newMessageBag;
     }
 
     private function getListOfTableNameToIgnoreRequired($action)

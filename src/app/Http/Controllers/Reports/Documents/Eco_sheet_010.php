@@ -43,7 +43,7 @@ class Eco_sheet_010 extends Controller
     private function makeModeTitleReport($routeName)
     {
         $lib = LibReports::getAll();
-        $title = $lib[$routeName]['title'] ?? 'Empty Title';
+        $title = $lib[$routeName]['title'] ?? 'Empty Title 3';
         return $title;
     }
 

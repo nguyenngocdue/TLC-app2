@@ -125,6 +125,27 @@
         "frozen_left": "",
         "frozen_right": ""
     },
+    "_room_type_id": {
+        "name": "_room_type_id",
+        "column_name": "room_type_id",
+        "column_type": "bigint unsigned",
+        "label": "Room Type",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
     "_quantity": {
         "name": "_quantity",
         "column_name": "quantity",

@@ -109,7 +109,7 @@ abstract class Report_ParentController2 extends Controller
     private function makeModeTitleReport($routeName)
     {
         $lib = LibReports::getAll();
-        $title = $lib[$routeName]['title'] ?? 'Empty Title';
+        $title = $lib[$routeName]['title'] ?? 'Empty Title 2';
         return $title;
     }
 
@@ -122,7 +122,7 @@ abstract class Report_ParentController2 extends Controller
             $dataIndex = trim($key);
             $multiple = false;
             if (isset($values->multiple)) {
-                if($values->multiple == 'true' || $values->multiple) $multiple = true;
+                if ($values->multiple == 'true' || $values->multiple) $multiple = true;
             }
             $a = [];
             if ($dataIndex === 'picker_date') {
@@ -178,7 +178,7 @@ abstract class Report_ParentController2 extends Controller
             'typeOfView' => $this->typeView,
             'tableColumns' => $tableColumns,
             'paramColumns' => $paramColumns,
-            'tableDataSource'=> $dataSource,
+            'tableDataSource' => $dataSource,
             'tableDataHeader' => $tableDataHeader,
             'tableTrueWidth' => $this->tableTrueWidth,
             'rotate45Width' => $this->rotate45Width,

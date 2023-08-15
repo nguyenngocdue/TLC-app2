@@ -126,10 +126,9 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         $lines = Prod_sequence::query()
             ->where('sub_project_id', $this->subProject)
-            ->where('prod_routing_id', $this->prodRouting)
-            // ->where('prod_discipline_id', $this->prodDiscipline)
-            // ->with('getUomId')
-        ;
+            ->where('prod_routing_id', $this->prodRouting);
+        if ($this->prodDiscipline) $lines = $lines->where('prod_discipline_id', $this->prodDiscipline);
+        // ->with('getUomId')
         // dump($lines);
         return $lines->get();
     }

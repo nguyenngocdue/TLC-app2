@@ -9,7 +9,7 @@ class Prod_order extends ModelExtended
     protected $fillable = [
         "id", "slug", "name", "status", "production_name", "compliance_name", "description", "quantity",
         "sub_project_id", "prod_routing_id", "status", "meta_type", "meta_id", "owner_id",
-        "started_at", "finished_at", "total_hours", "total_man_hours",
+        "started_at", "finished_at", "total_hours", "total_man_hours", "room_type_id",
     ];
 
     protected $table = 'prod_orders';
@@ -17,6 +17,7 @@ class Prod_order extends ModelExtended
     public static $eloquentParams = [
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getProdRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
+        "getRoomType" => ['belongsTo', Term::class, 'room_type_id'],
 
         "getProdSequences" => ['hasMany', Prod_sequence::class, 'prod_order_id'],
         "getQaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'prod_order_id'],
@@ -37,6 +38,12 @@ class Prod_order extends ModelExtended
     }
 
     public function getProdRouting()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getRoomType()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
