@@ -101,6 +101,7 @@ class Prod_sequence extends ModelExtended
     {
         return [
             ["dataIndex" => "id",],
+            ["dataIndex" => "prod_order_id", "deaf" => true,],
             ["dataIndex" => "prod_routing_link_id", "deaf" => true,],
 
             ["dataIndex" => "total_hours", "footer" => "agg_sum"],
@@ -111,23 +112,23 @@ class Prod_sequence extends ModelExtended
         ];
     }
 
-    public function getManyLineParams1()
-    {
-        return [
-            ["dataIndex" => "id",], //"renderer" => "id", "type" => "prod_sequences", "align" => "center"],
-            ["dataIndex" => "prod_order_id", "title" => "Prod Order Id", "rendererParam" => "id"],
-            ["dataIndex" => "prod_order_id", "title" => "Routing Id (*)", "rendererParam" => "prod_routing_id"],
-            ["dataIndex" => "prod_routing_link_id", "title" => "Prod Routing ID", "rendererParam" => "id"],
-            ["dataIndex" => "prod_routing_link_id",  "title" => "Prod Routing Name (*)", "rendererParam" => "name"],
+    // public function getManyLineParams1()
+    // {
+    //     return [
+    //         ["dataIndex" => "id",], //"renderer" => "id", "type" => "prod_sequences", "align" => "center"],
+    //         ["dataIndex" => "prod_order_id", "title" => "Prod Order Id", "rendererParam" => "id"],
+    //         ["dataIndex" => "prod_order_id", "title" => "Routing Id (*)", "rendererParam" => "prod_routing_id"],
+    //         ["dataIndex" => "prod_routing_link_id", "title" => "Prod Routing ID", "rendererParam" => "id"],
+    //         ["dataIndex" => "prod_routing_link_id",  "title" => "Prod Routing Name (*)", "rendererParam" => "name"],
 
-            // ["dataIndex" => "expected_start_at",],
-            // ["dataIndex" => "expected_finish_at",],
+    //         // ["dataIndex" => "expected_start_at",],
+    //         // ["dataIndex" => "expected_finish_at",],
 
-            ["dataIndex" => "total_hours",],
-            ["dataIndex" => "total_man_hours", "title" => "Total ManHours",],
-            ["dataIndex" => "prod_routing_link_id", "title" => "Target Hours", "rendererParam" => "target_hours"],
-            ["dataIndex" => "prod_routing_link_id", "title" => "Target ManHours (*)", "rendererParam" => "target_man_hours"],
-            ["dataIndex" => "status",],
-        ];
-    }
+    //         ["dataIndex" => "total_hours",],
+    //         ["dataIndex" => "total_man_hours", "title" => "Total ManHours",],
+    //         ["dataIndex" => "prod_routing_link_id", "title" => "Target Hours", "rendererParam" => "target_hours"],
+    //         ["dataIndex" => "prod_routing_link_id", "title" => "Target ManHours (*)", "rendererParam" => "target_man_hours"],
+    //         ["dataIndex" => "status",],
+    //     ];
+    // }
 }
