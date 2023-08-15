@@ -9,12 +9,12 @@ use App\Models\Sub_project;
 
 trait TraitDataModesDocument
 {
-    public function qaqc_insp_chklsts()
-    {
-        return ['mode_option' => [
-            // '010' => 'Inspection Checklist',
-        ]];
-    }
+    // public function qaqc_insp_chklsts()
+    // {
+    //     return ['mode_option' => [
+    //         // '010' => 'Inspection Checklist',
+    //     ]];
+    // }
 
     // public function getDataForModeControl($dataSource = [])
     // {
@@ -26,30 +26,30 @@ trait TraitDataModesDocument
     //     return array_merge($subProjects, $prod_orders, $insp_tmpls, $insp_chklsts, $run_option);
     // }
 
-    public function getSettingParamsReport()
-    {
-        $result = [
-            [
-                'name_param' => 'sub_project',
-                'listen_from' => '',
-                'name_more' => 'type-report-sub-project',
-            ],
-            [
-                'name_param' => 'prod_order',
-                'listen_from' => 'sub_project',
-                'name_more' => 'id-report-prod-order',
-            ],
-            [
-                'name_param' => 'check_sheet',
-                'listen_from' => 'prod_order',
-                'name_more' => 'id-report-check-sheet',
-            ],
-            [
-                'name_param' => 'run_option',
-                'listen_from' => '',
-                'name_more' => 'type-report-run-history-option',
-            ]
-        ];
-        return $result;
-    }
+    // public function getSettingParamsReport()
+    // {
+    //     $result = [
+    //         [
+    //             'name_param' => 'sub_project',
+    //             'listen_from' => '',
+    //             'name_more' => 'type-report-sub-project',
+    //         ],
+    //         [
+    //             'name_param' => 'prod_order',
+    //             'listen_from' => 'sub_project',
+    //             'name_more' => 'id-report-prod-order',
+    //         ],
+    //         [
+    //             'name_param' => 'check_sheet',
+    //             'listen_from' => 'prod_order',
+    //             'name_more' => 'id-report-check-sheet',
+    //         ],
+    //         [
+    //             'name_param' => 'run_option',
+    //             'listen_from' => '',
+    //             'name_more' => 'type-report-run-history-option',
+    //         ]
+    //     ];
+    //     return $result;
+    // }
 }

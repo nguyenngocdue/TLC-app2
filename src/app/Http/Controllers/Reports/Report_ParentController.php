@@ -43,7 +43,7 @@ abstract class Report_ParentController extends Controller
 
     private function getSql($modeParams)
     {
-        
+
         $sqlStr = $this->getSqlStr($modeParams);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
@@ -147,8 +147,9 @@ abstract class Report_ParentController extends Controller
     private function makeModeTitleReport($routeName)
     {
         $lib = LibReports::getAll();
-        $title = $lib[$routeName]['title'] ?? 'Empty Title';
-        return $title;
+        $title = $lib[$routeName]['title'] ?? '';
+        $topTitle = $lib[$routeName]['top_title'] ?? '';
+        return [$topTitle, $title];
     }
 
     public function index(Request $request)
@@ -171,13 +172,14 @@ abstract class Report_ParentController extends Controller
         $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-        
+
         $viewName =  CurrentPathInfo::getViewName($request);
-        if($this->viewName) $viewName = $this->viewName;
+        if ($this->viewName) $viewName = $this->viewName;
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
         $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
         echo $this->getJS();
-        $modeReport = $this->makeModeTitleReport($routeName);
+        [$topTitle, $modeReport] = $this->makeModeTitleReport($routeName);
+        if (!$topTitle) $topTitle = $this->getMenuTitle();
 
         return view('reports.' . $viewName, [
             'typeOfView' => $this->typeView,
@@ -200,7 +202,7 @@ abstract class Report_ParentController extends Controller
             'tableDataHeader' => $tableDataHeader,
             'rotate45Width' => $this->rotate45Width,
             'groupByLength' => $this->groupByLength,
-            'topTitle' => $this->getMenuTitle(),
+            'topTitle' => $topTitle,
             'modeColumns' => $this->modeColumns(),
             'paramColumns' => $this->getParamColumns(),
             'legendColors' => $this->getColorLegends(),

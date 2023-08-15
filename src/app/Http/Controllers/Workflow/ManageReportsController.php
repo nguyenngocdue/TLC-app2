@@ -42,14 +42,11 @@ class ManageReportsController extends AbstractManageLibController
                 // "sortBy" => "value",
                 "properties" => ["strFn" => "appTitle"],
             ],
-            // [
-            //     'dataIndex' => "sub_package",
-            //     'renderer' => 'dropdown',
-            //     'editable' => true,
-            //     "cbbDataSource" => $subPackages,
-            //     "sortBy" => "value",
-            //     "properties" => ["strFn" => "appTitle"],
-            // ],
+            [
+                'dataIndex' => 'top_title',
+                'renderer' => 'text4',
+                'editable' => true,
+            ],
             [
                 'dataIndex' => 'title',
                 'renderer' => 'text4',

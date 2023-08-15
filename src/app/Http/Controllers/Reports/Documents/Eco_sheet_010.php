@@ -41,7 +41,7 @@ class Eco_sheet_010 extends Controller
     private function makeModeTitleReport($routeName)
     {
         $lib = LibReports::getAll();
-        $title = $lib[$routeName]['title'] ?? 'Empty Title';
+        $title = $lib[$routeName]['title'] ?? 'Empty Title 3';
         return $title;
     }
 
@@ -149,7 +149,8 @@ class Eco_sheet_010 extends Controller
         ];
     }
 
-    private function makeTitleForTables(){
+    private function makeTitleForTables()
+    {
         $tableName = array_keys($this->getTableColumns());
         $name = ['Labor Impact', 'Material Impact Add', 'Material Impact Remove'];
         return array_combine($tableName, $name);
