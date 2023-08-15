@@ -16,7 +16,7 @@
                 <a class="underline" href="#scroll-{{$colName}}" title="{{$colName}} - {{$control}}">{{$label}}:</a>
                 <ul class="mt-1.5 ml-4 text-red-700 list-disc list-inside">
                     @foreach($errorList as $msg)
-                    <li class="text-xs">{{$msg}}</li>
+                    <li class="text-xs">{{$colName}}: {{$msg}}</li>
                     @endforeach
                 </ul>
             </li>
