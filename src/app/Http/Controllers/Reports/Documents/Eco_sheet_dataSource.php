@@ -56,7 +56,8 @@ trait Eco_sheet_dataSource
                     WHERE 1 = 1
                     AND SUBSTR(ecos.closed_at, 1, 7) = '$month'
                     AND ecos.project_id = $projectId
-                    AND ecos.status = 'active'";
+                    AND ecos.status = 'active'
+                    GROUP BY ecos_id, ecos_name";
         // dump($sql);
         return $sql;
     }
@@ -75,42 +76,41 @@ trait Eco_sheet_dataSource
                     WHERE 1 = 1
                     AND SUBSTR(ecos.closed_at, 1, 7) = '$month'
                     AND ecos.project_id = $projectId
-                    AND ecos.status = 'active';";
-        // dump($sql);
+                    AND ecos.status = 'active'
+                    GROUP BY ecos_id, ecos_name;";
         return $sql;
     }
 
     private function sqlCalculateTimeFromOpenEcoToSignOff($modeParams)
     {
         [$month, $projectId] = $this->selectMonth($modeParams);
-        $sql = "SELECT ecos_id,ecos_name,ecos_create_at, usecos.term_id AS user_id, 
-                IF(signeco.owner_id = usecos.term_id,True, False) AS is_signed, 
-                signeco.updated_at AS date_signed,
-                us.name AS user_name,
-                ROUND( IFNULL(TIMESTAMPDIFF(HOUR, ecos_create_at, signeco.updated_at), TIMESTAMPDIFF(HOUR, ecos_create_at, NOW())) / 24,2) AS duration,
-                ROUND(TIMESTAMPDIFF(HOUR, ecos_create_at, CONCAT('$month-','26', ' 23:59:59')) / 24,2) AS range_duration,
-                (ROUND(TIMESTAMPDIFF(HOUR, ecos_create_at, CONCAT('$month-','26', ' 23:59:59')) / 24,2) -
-                ROUND( IFNULL(TIMESTAMPDIFF(HOUR, ecos_create_at, signeco.updated_at), TIMESTAMPDIFF(HOUR, ecos_create_at, NOW())) / 24,2) ) AS latency
-                FROM (SELECT 
-                ecos.id AS ecos_id
-                ,ecos.name AS ecos_name
-                ,ecos.created_at AS ecos_create_at
-                FROM eco_sheets ecos
-                WHERE 1 = 1
-                AND ecos.project_id = $projectId
-                AND SUBSTR(ecos.created_at, 1, 7) = '$month') AS ecosheet
-                LEFT JOIN ( SELECT *
-                                FROM many_to_many mtm
-                                WHERE 1 = 1 
-                                AND mtm.field_id = 31
-                                AND mtm.doc_type = 'App\\\Models\\\Eco_sheet') AS usecos ON usecos.doc_id =  ecosheet.ecos_id
-                LEFT JOIN (SELECT *
-                        FROM signatures sign
-                        WHERE 1 = 1
-                        AND sign.signable_type = 'App\\\Models\\\Eco_sheet') AS signeco ON signeco.signable_id = ecosheet.ecos_id
-                        AND signeco.owner_id = usecos.term_id
-                LEFT JOIN users us ON us.id = usecos.term_id 
-        ";
+        $sql = " SELECT 	
+                    #ecosheet.ecos_id AS eco_sheet_id, 
+                    usecos.term_id AS user_id,
+                    us.name AS user_name,
+                    SUM(ROUND(TIMESTAMPDIFF(HOUR, ecos_create_at,sign_updated_at)/24,2)) AS latency
+                                FROM (SELECT 
+                                ecos.id AS ecos_id
+                                ,ecos.created_at AS ecos_create_at
+                                FROM eco_sheets ecos
+                                WHERE 1 = 1
+                                AND ecos.project_id = $projectId
+                                AND SUBSTR(ecos.created_at, 1, 7) = '$month'
+                                #AND ecos.status = 'active'
+                                ) AS ecosheet
+                                LEFT JOIN ( SELECT *
+                                                FROM many_to_many mtm
+                                                WHERE 1 = 1 
+                                                AND mtm.field_id = 31
+                                                AND mtm.doc_type = 'App\\\Models\\\Eco_sheet') AS usecos ON usecos.doc_id =  ecosheet.ecos_id
+                                LEFT JOIN (SELECT sign.id AS sign_id, sign.owner_id AS sign_ower_id, sign.signable_id AS ecos_id, sign.updated_at AS sign_updated_at
+                                        FROM signatures sign
+                                        WHERE 1 = 1
+                                        AND sign.signable_type = 'App\\\Models\\\Eco_sheet') AS signeco ON signeco.ecos_id = ecosheet.ecos_id
+                                        AND signeco.sign_ower_id = usecos.term_id
+                                LEFT JOIN users us ON us.id = usecos.term_id
+                                GROUP BY user_id,user_name
+                                ORDER BY user_name";
         return $sql;
     }
 

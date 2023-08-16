@@ -129,7 +129,7 @@ class Eco_sheet_010 extends Controller
             ],
             "getEcoSheetsMaterialAdd" => [
                 [
-                    "title" => "ECO Title",
+                    "title" => "ECO",
                     "dataIndex" => "ecos_name",
                     "align" => "left"
                 ],
@@ -141,7 +141,7 @@ class Eco_sheet_010 extends Controller
             ],
             "getEcoSheetsMaterialRemove" => [
                 [
-                    "title" => "ECO Title",
+                    "title" => "ECO",
                     "dataIndex" => "ecos_name",
                     "align" => "left"
 
@@ -155,24 +155,9 @@ class Eco_sheet_010 extends Controller
             ],
             "getTimeEcoSheetSignOff" => [
                 [
-                    "title" => "ECO Title",
-                    "dataIndex" => "ecos_name",
-                    "align" => "left"
-                ],
-                [
                     "title" => "User to Sign",
                     "dataIndex" => "user_name",
                     "align" => "center"
-                ],
-                // [
-                //     "title" => "Signed",
-                //     "dataIndex" => "is_signed",
-                //     "align" => "center"
-                // ],
-                [
-                    "title" => "Remaining Time (days)",
-                    "dataIndex" => "duration",
-                    "align" => "right"
                 ],
                 [
                     "title" => "Latency (days)",
@@ -202,41 +187,6 @@ class Eco_sheet_010 extends Controller
 
     private function changeValue($key, $values)
     {
-        if ($key === 'getTimeEcoSheetSignOff') {
-            foreach ($values as &$value) {
-                if ($value->is_signed && (int)$value->latency >= 0) {
-                    $value->latency = 0;
-                }
-                if ($value->is_signed && (int)$value->latency < 0) {
-                    $value->latency = (object)[
-                        'value' => $value->latency,
-                        'cell_class' => 'bg-red-300'
-                    ];
-                }
-                if (!$value->is_signed && (int)$value->latency >= 0 && $value->latency <= 30) {
-                    $value->latency = 0;
-                }
-                if ($value->is_signed) {
-                    $value->duration = 0;
-                }
-                if (!$value->is_signed) {
-                    $value->duration = (object)[
-                        'value' => $value->duration,
-                        'cell_class' => 'bg-green-300'
-                    ];
-                }
-                if (!$value->is_signed && (int)$value->latency < 0) {
-                    $value->duration = (object)[
-                        'value' => $value->latency,
-                        'cell_class' => 'bg-red-300'
-                    ];
-                    $value->latency =  (object)[
-                        'value' => $value->latency,
-                        'cell_class' => 'bg-red-300'
-                    ];
-                }
-            }
-        }
         return $values;
     }
 
