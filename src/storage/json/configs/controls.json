@@ -5,7 +5,8 @@
         "hr_onboarding_lines",
         "hse_extra_metrics",
         "prod_sequences",
-        "ghg_sheets"
+        "ghg_sheets",
+        "site_daily_assignments"
     ],
     "apps_have_add_new_by_cloning": [
         "hse_insp_chklst_shts"

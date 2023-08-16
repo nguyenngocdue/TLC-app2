@@ -53,6 +53,8 @@ trait TraitXAxisDate
             'width' => 10,
             'align' => 'center',
         ], $xAxis);
+
+        // dump($xAxis);
         return $xAxis;
     }
 }

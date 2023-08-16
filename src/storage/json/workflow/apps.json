@@ -1732,6 +1732,20 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "site_daily_assignment": {
+        "name": "site_daily_assignment",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "on_site",
+        "title": "Site Daily Assignment",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null
+    },
     "sub_project": {
         "name": "sub_project",
         "package_tab": "application",
