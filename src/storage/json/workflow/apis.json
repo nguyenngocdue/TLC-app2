@@ -223,6 +223,9 @@
     "ppr_runs": {
         "name": "ppr_runs"
     },
+    "ppr_sequences": {
+        "name": "ppr_sequences"
+    },
     "priorities": {
         "name": "priorities"
     },
@@ -318,6 +321,10 @@
     },
     "signatures": {
         "name": "signatures"
+    },
+    "site_daily_assignments": {
+        "name": "site_daily_assignments",
+        "storeEmpty_and_updateShort": "true"
     },
     "sub_projects": {
         "name": "sub_projects"
