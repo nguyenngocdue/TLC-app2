@@ -41,8 +41,8 @@ trait TableTraitColumns
 
     private function makeTh($column, $index, $elapse, $hidden, $table01Name, $columns)
     {
-        $fixedLeft = (isset($column['fixed']) && ($column['fixed'] == "left"))  ? "table-th-fixed-left table-th-fixed-left-$index" : "";
-        $fixedRight = (isset($column['fixed']) && ($column['fixed'] == "right"))  ? "table-th-fixed-right table-th-fixed-right-$index" : "";
+        $fixedLeft = $this->getFixedLeftOrRight($column, $index, "left", "th");
+        $fixedRight = $this->getFixedLeftOrRight($column, $index, "right", "th");
         $isLastColumn = ($index == sizeof($columns) - 1);
         $renderer = $column['renderer'] ?? "_no_renderer_";
         // $rendererUnit = $column['rendererUnit'] ?? "_no_unit_";
@@ -149,8 +149,8 @@ trait TableTraitColumns
         $columns = array_values($columns);
         foreach ($columns as $index => $column) {
             if ($this->isInvisible($column)) continue;
-            $fixedLeft = (isset($column['fixed']) && ($column['fixed'] == "left"))  ? "table-th-fixed-left table-th-fixed-left-$index" : "";
-            $fixedRight = (isset($column['fixed']) && ($column['fixed'] == "right"))  ? "table-th-fixed-right table-th-fixed-right-$index" : "";
+            $fixedLeft = $this->getFixedLeftOrRight($column, $index, "left", "th");
+            $fixedRight = $this->getFixedLeftOrRight($column, $index, "right", "th");
             $styleStr = $this->getStyleStr($column);
             $dataIndex = $column['dataIndex'];
             $borderR = $index < (sizeof($columns) - 1) ? 'border-r' : "";
