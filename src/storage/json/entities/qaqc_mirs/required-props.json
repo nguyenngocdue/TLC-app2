@@ -306,7 +306,7 @@
         "assigned": "true",
         "rejected": "",
         "inspected": "",
-        "inspection_rejected": "",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "_owner_id": {
