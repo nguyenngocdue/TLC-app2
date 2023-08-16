@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Models\Site_daily_assignment;
 use App\Models\User;
+use App\Models\User_team_site;
 use App\Models\User_team_tsht;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
@@ -22,7 +23,7 @@ class SiteDailyAssignments extends ViewAllTypeMatrixParent
     protected $dataIndexX = "site_date";
     protected $dataIndexY = "site_team_id";
 
-    protected $yAxis = User_team_tsht::class;
+    protected $yAxis = User_team_site::class;
     // protected $xAxis = Date::class;
     /**
      * Create a new component instance.
@@ -89,7 +90,7 @@ class SiteDailyAssignments extends ViewAllTypeMatrixParent
                 'value' => User::findFromCache($y->def_assignee)->name,
                 'cell_title' => $y->def_assignee,
             ],
-            'count' => count($y->getTshtMembers()),
+            'count' => count($y->getSiteMembers()),
         ];
     }
 }
