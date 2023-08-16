@@ -26,20 +26,14 @@
             <div class="col-span-12 grid">
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right ">
-                        <label class="p-2 border border-gray-600 text-base font-medium bg-gray-50 h-full w-full flex col-span-2 items-center justify-end col-start-1">ECO Title</label>
-                        <span class="p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-3 col-span-10 text-left">...</span>
-                    </div>
-                </div>
-                <div class="grid grid-rows-1">
-                    <div class="grid grid-cols-12 text-right ">
                         <label class="p-2 border border-gray-600 text-base font-medium bg-gray-50 h-full w-full flex col-span-2 items-center justify-end col-start-1">Month</label>
-                        <span class="p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-3 col-span-10 text-left">2023-08</span>
+                        <span class="p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-3 col-span-10 text-left">{{$basicInfoData['month']}}</span>
                     </div>
                 </div>
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right ">
                         <label class="p-2 border border-gray-600 text-base font-medium bg-gray-50 h-full w-full flex col-span-2 items-center justify-end col-start-1">Project</label>
-                        <span class="p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-3 col-span-10 text-left">HLC</span>
+                        <span class="p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-3 col-span-10 text-left">{{$basicInfoData['project_name']}}</span>
                     </div>
                 </div>
             </div>

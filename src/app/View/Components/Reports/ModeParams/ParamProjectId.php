@@ -12,7 +12,7 @@ class ParamProjectId extends ParentParamReports
         $list = Project::where('deleted_at', NULL)->get()->toArray();
         $dataSource = [];
         usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
-        foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name']];
+        foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name'], 'description' => $team['description']];
         return $dataSource;
     }
 }
