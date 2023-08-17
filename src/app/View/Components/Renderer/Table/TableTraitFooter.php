@@ -11,6 +11,7 @@ trait TableTraitFooter
 {
     function makeOneFooter($column, $tableName, $dataSource)
     {
+        if (!$dataSource) return;
         $debug = !true;
         $tz = DateTimeConcern::getTz();
         $aggList = [
@@ -33,7 +34,16 @@ trait TableTraitFooter
         $fieldName = $column['dataIndex'];
         $control = $column['properties']['control'] ?? "";
 
-        $items = $dataSource->map(fn ($item) => is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName]);
+        // $items = $dataSource->map(fn ($item) => is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName]);
+        $items = $dataSource->map(function ($item) use ($fieldName) {
+            if (is_object($item)) {
+                return is_object($item->$fieldName) ? $item->$fieldName->value : $item->$fieldName;
+            }
+            if (is_array($item)) {
+                return is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName];
+            }
+            return "-111111";
+        });
 
         $result['agg_none'] = '';
         $result['agg_count_all'] = $items->count();
