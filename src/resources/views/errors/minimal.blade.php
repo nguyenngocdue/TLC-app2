@@ -39,7 +39,7 @@
                         $message = $isAdmin ? $exception->getMessage() : 'User does not have the right permissions.';
                     }
                     @endphp
-                    <antd-results :code="@yield('code')" :message="'{{$message ?? @yield('message')}}'" :url="'{{$url}}'"/>
+                    <antd-results :code="@yield('code')" :message="'{{$message ?? $exception->getMessage()}}'" :url="'{{$url}}'"/>
                 </div>
         </div>
         <script src="{{ asset('js/antd-vue.js') }}"></script>
