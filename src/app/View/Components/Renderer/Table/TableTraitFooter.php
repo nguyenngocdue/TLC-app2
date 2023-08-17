@@ -9,28 +9,30 @@ use Carbon\Carbon;
 
 trait TableTraitFooter
 {
+    private $aggList = [
+        'agg_none',
+        'agg_count_all',
+        'agg_sum',
+        'agg_avg',
+        'agg_median',
+        'agg_min',
+        'agg_max',
+        'agg_range',
+
+        // 'agg_count_values',
+        // 'agg_count_unique_values',
+        // 'agg_count_empty',
+        // 'agg_count_not_empty',
+        // 'agg_percent_empty',
+        // 'agg_percent_not_empty',
+    ];
+
     function makeOneFooter($column, $tableName, $dataSource)
     {
         if (!$dataSource) return;
         $debug = !true;
         $tz = DateTimeConcern::getTz();
-        $aggList = [
-            'agg_none',
-            'agg_count_all',
-            'agg_sum',
-            'agg_avg',
-            'agg_median',
-            'agg_min',
-            'agg_max',
-            'agg_range',
 
-            // 'agg_count_values',
-            // 'agg_count_unique_values',
-            // 'agg_count_empty',
-            // 'agg_count_not_empty',
-            // 'agg_percent_empty',
-            // 'agg_percent_not_empty',
-        ];
         $fieldName = $column['dataIndex'];
         $control = $column['properties']['control'] ?? "";
 
@@ -112,7 +114,7 @@ trait TableTraitFooter
         $inputs = [];
         $footer = $column['footer'];
         // echo $footer;
-        foreach ($aggList as $agg) {
+        foreach ($this->aggList as $agg) {
             $bg = ($footer == $agg) ? "text-blue-700" : ($debug ? "" : "hidden");
             $id = "{$tableName}[footer][{$fieldName}][$agg]";
             // $value = ($agg != 'agg_none') ? round($result[$agg], 2)  : "";
@@ -133,7 +135,11 @@ trait TableTraitFooter
             if (isset($column['invisible']) && $column['invisible']) continue;
             if (isset($column['footer'])) {
                 $hasFooter = true;
-                $result0[$column['dataIndex']] = $this->makeOneFooter($column, $eloquentTable, $dataSource);
+                if (in_array($column['footer'], $this->aggList)) {
+                    $result0[$column['dataIndex']] = $this->makeOneFooter($column, $eloquentTable, $dataSource);
+                } else {
+                    $result0[$column['dataIndex']] = $column['footer'];
+                }
             } else {
                 if (isset($column['dataIndex'])) $result0[$column['dataIndex']] = "";
             }
