@@ -1935,6 +1935,22 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "user_team_site": {
+        "name": "user_team_site",
+        "package_tab": "application",
+        "package": "system",
+        "sub_package": "hr_admin",
+        "title": "User Team Site",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "user_team_tsht": {
         "name": "user_team_tsht",
         "package_tab": "application",
