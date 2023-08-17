@@ -207,7 +207,7 @@ class Prod_sequence_010 extends Controller
         $data = $data['dailySequenceTimesheet']->toArray();
         $data = reset($data);
         $prod_routing = Prod_routing::find($modeParams['prod_routing_id'] ?? 2)->name;
-        $prod_discipline = Prod_discipline::find($modeParams['prod_discipline_id'])->name ?? '';
+        $prod_discipline = isset($modeParams['prod_discipline_id']) ? Prod_discipline::find($modeParams['prod_discipline_id'])->name : '';
         return [
             'date' => date('d/m/Y'),
             'project' => $projectName,
