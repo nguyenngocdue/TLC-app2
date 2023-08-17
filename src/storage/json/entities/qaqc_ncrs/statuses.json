@@ -1,5 +1,6 @@
 [
     "new",
+    "pending_review",
     "assigned",
     "assign_rejected",
     "resolved",

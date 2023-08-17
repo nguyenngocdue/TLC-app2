@@ -7,7 +7,7 @@
         "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "obsolete": "true"
+        "not_applicable": "true"
     },
     "in_progress": {
         "name": "in_progress",
@@ -17,7 +17,7 @@
         "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "obsolete": "true"
+        "not_applicable": ""
     },
     "finished": {
         "name": "finished",
@@ -27,7 +27,7 @@
         "finished": "",
         "on_hold": "true",
         "cancelled": "true",
-        "obsolete": "true"
+        "not_applicable": ""
     },
     "on_hold": {
         "name": "on_hold",
@@ -37,7 +37,7 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "obsolete": ""
+        "not_applicable": ""
     },
     "cancelled": {
         "name": "cancelled",
@@ -47,16 +47,16 @@
         "finished": "true",
         "on_hold": "true",
         "cancelled": "",
-        "obsolete": "true"
+        "not_applicable": ""
     },
-    "obsolete": {
-        "name": "obsolete",
-        "location": "230.00 -70.00",
-        "new": "",
+    "not_applicable": {
+        "name": "not_applicable",
+        "location": "-420.00 90.00",
+        "new": "true",
         "in_progress": "true",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "obsolete": ""
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
     }
 }
