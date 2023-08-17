@@ -1,5 +1,4 @@
 <?php
-
 namespace App\View\Components\AdvancedFilter;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
