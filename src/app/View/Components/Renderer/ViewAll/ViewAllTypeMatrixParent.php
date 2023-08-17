@@ -110,7 +110,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             return (object) $item;
         } else {
             // dump("Status not found: " . $document->status . " #" . $document->id);
-            return (object)['value' => $document->status . " ???",];
+            return (object)['value' => "unknown status [" . $document->status . "] ???",];
         }
     }
 
@@ -267,6 +267,10 @@ abstract class ViewAllTypeMatrixParent extends Component
             case "ghg_sheets":
             case "hse_extra_metrics":
                 $filterName = "select_year";
+                break;
+            case "hr_timesheet_workers":
+            case "site_daily_assignments":
+                $filterName = "select_week_or_month";
                 break;
             default:
                 $filterName = $this->type;

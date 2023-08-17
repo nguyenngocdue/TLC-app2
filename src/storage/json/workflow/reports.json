@@ -3,114 +3,126 @@
         "name": "document-eco_sheet_010",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "top_title": null,
         "title": "ECO Report"
     },
     "document-ghg_sheet_010": {
         "name": "document-ghg_sheet_010",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "top_title": null,
         "title": "GHG Sumary Report"
-    },
-    "document-qaqc_wir_010": {
-        "name": "document-qaqc_wir_010",
-        "package_tab": "report",
-        "package": "hr_&_admin",
-        "title": "WIR Report Design Document"
     },
     "register-qaqc_insp_chklst_020": {
         "name": "register-qaqc_insp_chklst_020",
         "package_tab": "report",
         "package": "project_management",
+        "top_title": null,
         "title": "Inspection Matrix"
     },
     "report-hr_overtime_request_010": {
         "name": "report-hr_overtime_request_010",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "top_title": null,
         "title": "Overtime Monthly Report"
     },
     "report-hr_overtime_request_020": {
         "name": "report-hr_overtime_request_020",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "top_title": null,
         "title": "Overtime Daily Report"
     },
     "report-hr_timesheet_line_010": {
         "name": "report-hr_timesheet_line_010",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "top_title": null,
         "title": "Project\/Date"
     },
     "report-hr_timesheet_line_020": {
         "name": "report-hr_timesheet_line_020",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "top_title": null,
         "title": "Employee\/Project"
     },
     "report-hr_timesheet_line_030": {
         "name": "report-hr_timesheet_line_030",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "top_title": null,
         "title": "Employee\/Date"
     },
     "report-hr_timesheet_line_040": {
         "name": "report-hr_timesheet_line_040",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "top_title": null,
         "title": "Team\/Project"
     },
     "report-hr_timesheet_line_100": {
         "name": "report-hr_timesheet_line_100",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "top_title": null,
         "title": "Timesheet Lines DataSource"
     },
     "report-hse_incident_report_010": {
         "name": "report-hse_incident_report_010",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "top_title": "HSE KPI Report",
         "title": "HSE Key Performance Indicator"
     },
     "report-prod_order_010": {
         "name": "report-prod_order_010",
         "package_tab": "report",
         "package": "project_management",
+        "top_title": null,
         "title": "Total VS Target (Hour_Man-hour)"
     },
     "report-prod_run_010": {
         "name": "report-prod_run_010",
         "package_tab": "report",
         "package": "project_management",
+        "top_title": null,
         "title": "Daily Timesheet"
     },
     "report-prod_sequence_010": {
         "name": "report-prod_sequence_010",
         "package_tab": "report",
         "package": "project_management",
+        "top_title": null,
         "title": "Worker number"
     },
     "report-prod_sequence_020": {
         "name": "report-prod_sequence_020",
         "package_tab": "report",
         "package": "project_management",
+        "top_title": null,
         "title": "Total man-hours"
     },
     "report-prod_sequence_030": {
         "name": "report-prod_sequence_030",
         "package_tab": "report",
         "package": "project_management",
+        "top_title": null,
         "title": "Work Amount"
     },
     "report-prod_sequence_040": {
         "name": "report-prod_sequence_040",
         "package_tab": "report",
         "package": "project_management",
+        "top_title": null,
         "title": "min_UoM"
     },
     "report-prod_sequence_050": {
         "name": "report-prod_sequence_050",
         "package_tab": "report",
         "package": "project_management",
+        "top_title": null,
         "title": "Summary"
     }
 }

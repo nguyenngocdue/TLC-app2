@@ -1,7 +1,22 @@
 {
     "new": {
         "name": "new",
+        "location": "-410.00 -150.00",
         "new": "",
+        "pending_review": "true",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "pending_review": {
+        "name": "pending_review",
+        "location": "-270.00 -150.00",
+        "new": "true",
+        "pending_review": "",
         "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
@@ -12,7 +27,9 @@
     },
     "assigned": {
         "name": "assigned",
+        "location": "-170.00 -80.00",
         "new": "",
+        "pending_review": "",
         "assigned": "",
         "assign_rejected": "true",
         "resolved": "true",
@@ -23,7 +40,9 @@
     },
     "assign_rejected": {
         "name": "assign_rejected",
+        "location": "-400.00 -20.00",
         "new": "",
+        "pending_review": "",
         "assigned": "true",
         "assign_rejected": "",
         "resolved": "",
@@ -34,7 +53,9 @@
     },
     "resolved": {
         "name": "resolved",
+        "location": "0.00 -80.00",
         "new": "",
+        "pending_review": "",
         "assigned": "",
         "assign_rejected": "",
         "resolved": "",
@@ -45,7 +66,9 @@
     },
     "rejected": {
         "name": "rejected",
+        "location": "-170.00 -20.00",
         "new": "",
+        "pending_review": "",
         "assigned": "",
         "assign_rejected": "",
         "resolved": "true",
@@ -56,7 +79,9 @@
     },
     "inspected": {
         "name": "inspected",
+        "location": "170.00 -80.00",
         "new": "",
+        "pending_review": "",
         "assigned": "",
         "assign_rejected": "",
         "resolved": "",
@@ -67,7 +92,9 @@
     },
     "inspection_rejected": {
         "name": "inspection_rejected",
+        "location": "0.00 -150.00",
         "new": "",
+        "pending_review": "",
         "assigned": "",
         "assign_rejected": "",
         "resolved": "",
@@ -78,7 +105,9 @@
     },
     "closed": {
         "name": "closed",
+        "location": "350.00 -80.00",
         "new": "",
+        "pending_review": "",
         "assigned": "",
         "assign_rejected": "",
         "resolved": "",

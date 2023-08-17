@@ -11,6 +11,7 @@ use ReflectionClass;
 trait TableTraitRows
 {
     use TableTraitApplyRender;
+    use TableTraitCommon;
     public $timeElapse = [];
 
     private function smartGetItems($dataSource)
@@ -55,8 +56,9 @@ trait TableTraitRows
         $columns = array_values($columns);
         foreach ($columns as $index => $column) {
             // dump($column);
-            $fixedLeft = (isset($column['fixed']) && ($column['fixed'] == "left"))  ? "table-td-fixed-left table-td-fixed-left-$index" : "";
-            $fixedRight = (isset($column['fixed']) && ($column['fixed'] == "right"))  ? "table-td-fixed-right table-td-fixed-right-$index" : "";
+            $fixedLeft = $this->getFixedLeftOrRight($column, $index, "left", "td");
+            $fixedRight = $this->getFixedLeftOrRight($column, $index, "right", "td");
+
             $renderer = $column['renderer'] ?? false;
             $columnName = $column['column_name'] ?? $column['dataIndex'];
             $name = isset($column['dataIndex']) ? "{$this->tableName}[$columnName][$dataLineIndex]" : "";

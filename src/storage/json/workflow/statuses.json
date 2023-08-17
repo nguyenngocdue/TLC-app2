@@ -39,7 +39,7 @@
         "title": "Cancelled",
         "color": "red",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-ban\"><\/i>"
     },
     "closed": {
         "name": "closed",
@@ -116,7 +116,7 @@
         "title": "In Progress",
         "color": "yellow",
         "color_index": "200",
-        "icon": "<i class=\"fa-regular fa-screwdriver-wrench\"><\/i>"
+        "icon": "<i class=\"fa-duotone fa-screwdriver-wrench\"><\/i>"
     },
     "inactive": {
         "name": "inactive",
@@ -165,21 +165,21 @@
         "title": "Obsolete",
         "color": "fuchsia",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-ban\"><\/i>"
     },
     "on_hold": {
         "name": "on_hold",
         "title": "On Hold",
         "color": "violet",
         "color_index": "200",
-        "icon": "<i class=\"fa-solid fa-circle-pause\"><\/i>"
+        "icon": "<i class=\"fa-duotone fa-circle-pause\"><\/i>"
     },
     "opened": {
         "name": "opened",
         "title": "Opened",
         "color": "lime",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-folder-open\"><\/i>"
     },
     "partially_closed": {
         "name": "partially_closed",
@@ -240,7 +240,7 @@
     "pending_review": {
         "name": "pending_review",
         "title": "Pending Review",
-        "color": "amber",
+        "color": "purple",
         "color_index": "200",
         "icon": null
     },

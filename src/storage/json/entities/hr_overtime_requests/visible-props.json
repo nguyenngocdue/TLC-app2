@@ -47,22 +47,6 @@
         "rejected": "true",
         "approved": "true"
     },
-    "_total_hours": {
-        "name": "_total_hours",
-        "column_name": "total_hours",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
-    },
-    "_getHrOtrLines1": {
-        "name": "_getHrOtrLines1",
-        "column_name": "getHrOtrLines1",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -74,6 +58,14 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",

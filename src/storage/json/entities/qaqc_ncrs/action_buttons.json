@@ -4,6 +4,11 @@
         "label": "New",
         "tooltip": ""
     },
+    "pending_review": {
+        "name": "pending_review",
+        "label": "Review",
+        "tooltip": ""
+    },
     "assigned": {
         "name": "assigned",
         "label": "Assign To",

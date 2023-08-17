@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocumentController;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use DateTime;
 
 class Ghg_sheet_010 extends Report_ParentDocumentController
 {

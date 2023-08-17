@@ -303,10 +303,10 @@
         "name": "_comment_inspector_decision",
         "column_name": "comment_inspector_decision",
         "new": "",
-        "assigned": "",
+        "assigned": "true",
         "rejected": "",
-        "inspected": "true",
-        "inspection_rejected": "",
+        "inspected": "",
+        "inspection_rejected": "true",
         "closed": ""
     },
     "_owner_id": {

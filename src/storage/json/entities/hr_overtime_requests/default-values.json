@@ -47,11 +47,11 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getHrOtrLines": {
-        "name": "_getHrOtrLines",
-        "column_name": "getHrOtrLines",
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -59,11 +59,11 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_getHrOtrLines1": {
-        "name": "_getHrOtrLines1",
-        "column_name": "getHrOtrLines1",
+    "_getHrOtrLines": {
+        "name": "_getHrOtrLines",
+        "column_name": "getHrOtrLines",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -88,6 +88,18 @@
         "column_name": "assignee_1",
         "label": "",
         "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
+        "label": "",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",

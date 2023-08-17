@@ -53,6 +53,15 @@
         "finished": "true",
         "cancelled": "true"
     },
+    "_room_type_id": {
+        "name": "_room_type_id",
+        "column_name": "room_type_id",
+        "new": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true",
+        "cancelled": "true"
+    },
     "_quantity": {
         "name": "_quantity",
         "column_name": "quantity",

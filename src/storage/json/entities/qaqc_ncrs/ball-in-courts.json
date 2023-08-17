@@ -4,6 +4,11 @@
         "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": ""
     },
+    "pending_review": {
+        "name": "pending_review",
+        "ball-in-court-assignee": "assignee_2",
+        "ball-in-court-monitors": "getMonitors1()"
+    },
     "assigned": {
         "name": "assigned",
         "ball-in-court-assignee": "assignee_1",

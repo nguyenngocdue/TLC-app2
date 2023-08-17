@@ -52,7 +52,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_getParent": {
         "name": "_getParent",
@@ -107,7 +111,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_doc_id": {
         "name": "_doc_id",
@@ -162,7 +170,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_name": {
         "name": "_name",
@@ -217,7 +229,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_description": {
         "name": "_description",
@@ -272,7 +288,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_slug": {
         "name": "_slug",
@@ -327,7 +347,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_parent_type": {
         "name": "_parent_type",
@@ -382,7 +406,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_parent_id": {
         "name": "_parent_id",
@@ -437,7 +465,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_project_id": {
         "name": "_project_id",
@@ -492,7 +524,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
@@ -547,7 +583,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_prod_routing_id": {
         "name": "_prod_routing_id",
@@ -602,7 +642,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_prod_order_id": {
         "name": "_prod_order_id",
@@ -657,7 +701,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
@@ -712,7 +760,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_prod_discipline_1_id": {
         "name": "_prod_discipline_1_id",
@@ -767,7 +819,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_prod_discipline_2_id": {
         "name": "_prod_discipline_2_id",
@@ -822,7 +878,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_user_team_id": {
         "name": "_user_team_id",
@@ -877,7 +937,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_inter_subcon_id": {
         "name": "_inter_subcon_id",
@@ -932,7 +996,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_priority_id": {
         "name": "_priority_id",
@@ -987,7 +1055,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_due_date": {
         "name": "_due_date",
@@ -1042,7 +1114,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_closed_at": {
         "name": "_closed_at",
@@ -1097,7 +1173,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_defect_root_cause_id": {
         "name": "_defect_root_cause_id",
@@ -1152,7 +1232,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_defect_disposition_id": {
         "name": "_defect_disposition_id",
@@ -1207,7 +1291,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_defect_severity": {
         "name": "_defect_severity",
@@ -1262,7 +1350,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_defect_report_type": {
         "name": "_defect_report_type",
@@ -1317,7 +1409,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_getQaqcCars": {
         "name": "_getQaqcCars",
@@ -1372,7 +1468,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_attachment_defect_photos": {
         "name": "_attachment_defect_photos",
@@ -1427,7 +1527,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_attachment_defect_pdfs": {
         "name": "_attachment_defect_pdfs",
@@ -1482,7 +1586,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_attachment_corrective_photos": {
         "name": "_attachment_corrective_photos",
@@ -1537,7 +1645,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_attachment_corrective_pdfs": {
         "name": "_attachment_corrective_pdfs",
@@ -1592,7 +1704,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_qty_man_power": {
         "name": "_qty_man_power",
@@ -1647,7 +1763,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_hour_per_man": {
         "name": "_hour_per_man",
@@ -1702,7 +1822,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_total_hour": {
         "name": "_total_hour",
@@ -1757,7 +1881,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -1812,7 +1940,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_assignee_2": {
         "name": "_assignee_2",
@@ -1867,7 +1999,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -1922,7 +2058,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -1977,7 +2117,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_status": {
         "name": "_status",
@@ -2032,7 +2176,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -2087,7 +2235,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -2142,7 +2294,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -2197,7 +2353,11 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -2252,11 +2412,15 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
-    "_comment_assignment_rejected_reason": {
-        "name": "_comment_assignment_rejected_reason",
-        "column_name": "comment_assignment_rejected_reason",
+    "_comment_asm_rejected_reason": {
+        "name": "_comment_asm_rejected_reason",
+        "column_name": "comment_asm_rejected_reason",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -2307,11 +2471,15 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
-    "_comment_corrective_rejected_reason": {
-        "name": "_comment_corrective_rejected_reason",
-        "column_name": "comment_corrective_rejected_reason",
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -2362,11 +2530,15 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
-    "_comment_inspection_rejected_reason": {
-        "name": "_comment_inspection_rejected_reason",
-        "column_name": "comment_inspection_rejected_reason",
+    "_comment_insp_rejected_reason": {
+        "name": "_comment_insp_rejected_reason",
+        "column_name": "comment_insp_rejected_reason",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -2417,11 +2589,15 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     },
-    "_comment_inspection_decision_reason": {
-        "name": "_comment_inspection_decision_reason",
-        "column_name": "comment_inspection_decision_reason",
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -2472,6 +2648,10 @@
         "proj_member_nz": "",
         "qs_member_nz": "",
         "external_inspector": "",
-        "qaqc_member_nz": ""
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": ""
     }
 }

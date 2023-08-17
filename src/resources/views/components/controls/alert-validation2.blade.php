@@ -4,7 +4,7 @@
 <span class="text-xs" role="alert">
     <ul class="mt-1.5 text-red-600 font-semibold">
         @foreach($messages as $message)
-        <li>{!!$message!!}</li>
+        <li>{{$name}}: {!!$message!!}</li>
         @endforeach
     </ul>
 </span>

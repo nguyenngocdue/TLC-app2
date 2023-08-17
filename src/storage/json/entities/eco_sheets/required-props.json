@@ -447,12 +447,12 @@
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",
-        "pending_review": "true",
+        "pending_review": "",
         "review_rejected": "",
-        "pending_approval": "true",
-        "approval_rejected": "true",
-        "pending_ack": "true",
-        "active": "true"
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "_divider5": {
         "name": "_divider5",

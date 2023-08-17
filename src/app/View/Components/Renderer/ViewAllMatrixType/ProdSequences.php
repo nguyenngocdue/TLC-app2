@@ -105,6 +105,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
                 'width' => 40,
                 'prod_discipline_id' => $line->prod_discipline_id,
                 "colspan" => 1 + sizeof($extraColumns),
+
             ];
             foreach ($extraColumns as $column) {
                 $item = [
@@ -126,10 +127,9 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         $lines = Prod_sequence::query()
             ->where('sub_project_id', $this->subProject)
-            ->where('prod_routing_id', $this->prodRouting)
-            // ->where('prod_discipline_id', $this->prodDiscipline)
-            // ->with('getUomId')
-        ;
+            ->where('prod_routing_id', $this->prodRouting);
+        if ($this->prodDiscipline) $lines = $lines->where('prod_discipline_id', $this->prodDiscipline);
+        // ->with('getUomId')
         // dump($lines);
         return $lines->get();
     }
@@ -161,7 +161,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return [
             ['dataIndex' => 'production_name',  'width' => 300, 'fixed' => 'left',],
             ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
-            ['dataIndex' => 'status',  'align' => 'center', 'width' => 50, 'fixed' => 'left', "title" => "Summary", 'colspan' => 4],
+            ['dataIndex' => 'status',  'align' => 'center', 'width' => 50, 'fixed' => 'left-no-bg', "title" => "Summary", 'colspan' => 4],
             ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
             ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
             ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],

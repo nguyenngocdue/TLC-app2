@@ -104,21 +104,6 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getHrOtrLines1": {
-        "name": "_getHrOtrLines1",
-        "column_name": "getHrOtrLines1",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
