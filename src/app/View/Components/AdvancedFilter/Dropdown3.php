@@ -37,50 +37,44 @@ class Dropdown3 extends Component
         $typeRelationship = isset($dataRelationShips['eloquentParams']) ? 'eloquent' : 'oracy';
         $filterColumns = $dataRelationShips['filter_columns'];
         $filterValues = $dataRelationShips['filter_values'];
+        
+        return view('components.advanced-filter.dropdown3', [
+            'dataSource' => $this->getDataSource($params,$typeRelationship,$filterColumns,$filterValues),
+            'name' =>  $this->name,
+            'valueSelected' => $this->valueSelected,
+        ]);
+    }
+    private function getDataSource($params,$typeRelationship,$filterColumns,$filterValues){
         if (!empty($filterColumns) && !empty($filterValues)) {
             $arrayQuery = [];
             foreach ($filterColumns as $key => $value) {
                 if (isset($arrayQuery[$value])) {
-                    $result = [];
-                    $result[] = $arrayQuery[$value];
-                    $result[] = $filterValues[$key];
-                    $arrayQuery[$value] = $result;
+                    $arrayQuery[$value] = [
+                        $arrayQuery[$value],
+                        $filterValues[$key]
+                    ];
                 } else {
                     $arrayQuery[$value] = $filterValues[$key];
                 }
             }
             if ($typeRelationship == 'eloquent') {
-                $dataSource = ($params[1])::where(function ($q) use ($arrayQuery, $typeRelationship) {
+                return ($params[1])::where(function ($q) use ($arrayQuery, $typeRelationship) {
                     foreach ($arrayQuery as $key => $value) {
                         is_array($value) ? $q->whereIn($key, $value) : $q->where($key, $value);
                     }
                     return $q;
                 })->get();
-            } else {
-                dump('Oracy relationship is not yet implemented.');
-                $dataSource = [];
-                // $dataSource = ($params[1])::{$params[0]}($arrayQuery[0], $arrayQuery[1])->get();
-            }
+            } 
+            dump('Oracy relationship is not yet implemented.');
+            return collect();
         } else {
             if (isset($params[1])) {
                 if ($params[1] == 'App\Models\User') {
-                    $dataSource = static::singletonCache();
-                } else {
-                    //<<This will hide production order
-                    // if ($params[1]::get()->count() > 1000) {
-                    //     dump('Number of items over 1000 please render the component -> number');
-                    //     return '';
-                    // }
-                    $dataSource = ($params[1])::all();
+                    return static::singletonCache();
                 }
-            } else {
-                $dataSource = collect();
+                return ($params[1])::all();
             }
+            return collect();
         }
-        return view('components.advanced-filter.dropdown3', [
-            'dataSource' => $dataSource,
-            'name' =>  $this->name,
-            'valueSelected' => $this->valueSelected,
-        ]);
     }
 }
