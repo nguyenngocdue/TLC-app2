@@ -2,7 +2,8 @@
 
 namespace App\View\Components\Renderer\Table;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -75,7 +76,7 @@ trait TableTraitApplyRender
             $deaf = (isset($column['deaf']) && $column['deaf'] == true) ? "deaf=true" : "";
             $saveOnChangeRenderer = (isset($column['saveOnChange']) && $column['saveOnChange'] == true) ? "saveOnChange=true" : "";
             $batchLength = "batchLength=$batchLength";
-            $rawData = ($rawData instanceof Collection) ? $rawData = $rawData->pluck('id') : [$rawData];
+            $rawData = ($rawData instanceof EloquentCollection || $rawData instanceof SupportCollection) ? $rawData = $rawData->pluck('id') : [$rawData];
             $rawData = json_encode($rawData);
             $attributes = "$name $typeRender $multiple $deaf $propertyRender $rowIndexRender selected='$rawData' $saveOnChangeRenderer $batchLength";
             $output = "<$tagName $attributes></$tagName>";

@@ -16,8 +16,7 @@
         </script>
     @endif
 @else
-    <select id='{{$id}}' name='{{$name}}' {{$multipleStr}} {{$readOnlyStr}} class='{{$classList}}'
-    ></select>
+    <select id='{{$id}}' name='{{$name}}' {{$multipleStr}} {{$readOnlyStr}} class='{{$classList}}'></select>
     <script>
         $(document).ready(()=>{
             const dropdownParams = { batchLength: {{$batchLength}}, onLoad:true};
