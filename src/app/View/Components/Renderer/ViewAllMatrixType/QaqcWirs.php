@@ -9,6 +9,7 @@ use App\Models\Qaqc_wir;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class QaqcWirs extends ViewAllTypeMatrixParent
@@ -57,17 +58,19 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         $result = [];
         $data = Prod_routing::find($this->prodRouting)->getWirDescriptions();
         foreach ($data as $line) {
-            if ($this->prodDiscipline && $line->prod_discipline_id != $this->prodDiscipline) continue;
+            if ($this->prodDiscipline && ($line->prod_discipline_id != $this->prodDiscipline)) continue;
             $result[] = [
                 'dataIndex' => $line->id,
                 'title' => $line->name,
                 'align' => 'center',
                 'prod_discipline_id' => $line->prod_discipline_id,
                 'def_assignee' => $line->def_assignee,
+                'getDefMonitors1()' => $line->getDefMonitors1()->pluck('id'),
                 'width' => 40,
             ];
         }
         usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
+        // Log::info($result);
         return $result;
     }
 
@@ -115,6 +118,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         $params['prod_order_id'] =  $y->id;
         $params['prod_discipline_id'] =  $x['prod_discipline_id'];
         $params['assignee_1'] =  $x['def_assignee'];
+        $params['getMonitors1()'] = $x['getDefMonitors1()'];
 
         return $params;
     }

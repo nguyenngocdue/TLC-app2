@@ -21,6 +21,32 @@ trait TraitStoreEmpty
 {
 	use TraitSendNotificationAndMail;
 	use TraitEntityFieldHandler2;
+
+	private function getModelButNeedToHaveAMoreDecentWay($fieldName, $sp)
+	{
+		$model = ($sp['props']["_" . $fieldName . "()"]['relationships']['oracyParams'][1]);
+		return $model;
+		// switch ($fieldName) {
+		// 	case "getMonitors1":
+		// 		return "App\\Models\\User";
+		// 	default:
+		// 		Log::info("Unknown how to get model for field $fieldName");
+		// 		return null;
+		// }
+	}
+
+	private function insertOracy($item, $createdItem, $sp)
+	{
+		// Log::info($item);
+		$oracy = array_filter($item, fn ($fnName) => str_contains($fnName, '()'), ARRAY_FILTER_USE_KEY);
+		// Log::info($oracy);
+		foreach ($oracy as $functionName => $valueArr) {
+			$fieldName = substr($functionName, 0, strlen($functionName) - 2);
+			$model = $this->getModelButNeedToHaveAMoreDecentWay($fieldName, $sp);
+			$createdItem->attachCheck($fieldName, $model, $valueArr);
+		}
+	}
+
 	public function tso_week_validate($lines)
 	{
 		foreach ($lines as $value) {
@@ -110,9 +136,13 @@ trait TraitStoreEmpty
 				}
 			}
 			$item = $this->applyFormula($item, 'store');
-			// Log::info("Store empty");
 			// Log::info($item);
+
 			$createdItem = $this->modelPath::create($item);
+			$this->insertOracy($item, $createdItem, $sp);
+			// Log::info("Store empty");
+			// Log::info($createdItem);
+
 			$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
 			$tableName = Str::plural($this->type);
 			$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
