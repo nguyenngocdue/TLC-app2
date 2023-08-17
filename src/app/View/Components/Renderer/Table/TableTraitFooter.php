@@ -6,6 +6,7 @@ use App\Utils\Constant;
 use App\Utils\Support\DateTimeConcern;
 use App\View\Components\Controls\RelationshipRenderer2;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 trait TableTraitFooter
 {
@@ -71,12 +72,16 @@ trait TableTraitFooter
         }
 
         // dump($items);
-        $result['agg_sum'] = $items->sum();
-        $result['agg_avg'] = $items->avg();
-        $result['agg_median'] = $items->median();
-        $result['agg_min'] = $items->min();
-        $result['agg_max'] = $items->max();
-        $result['agg_range'] = $result['agg_max'] - $result['agg_min'];
+        try {
+            $result['agg_sum'] = $items->sum();
+            $result['agg_avg'] = $items->avg();
+            $result['agg_median'] = $items->median();
+            $result['agg_min'] = $items->min();
+            $result['agg_max'] = $items->max();
+            $result['agg_range'] = $result['agg_max'] - $result['agg_min'];
+        } catch (\Exception $e) {
+            Log::info("Table [" . $tableName . "] " . "field [" . $fieldName . "] " . $e->getMessage());
+        }
 
         if (in_array($control, ['picker_date', 'picker_datetime', 'picker_time'])) {
             $timestampSum = $result['agg_sum'];
