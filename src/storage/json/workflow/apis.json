@@ -322,6 +322,10 @@
     "signatures": {
         "name": "signatures"
     },
+    "site_daily_assignment_lines": {
+        "name": "site_daily_assignment_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
     "site_daily_assignments": {
         "name": "site_daily_assignments",
         "storeEmpty_and_updateShort": "true"
@@ -361,6 +365,9 @@
     },
     "user_team_ots": {
         "name": "user_team_ots"
+    },
+    "user_team_sites": {
+        "name": "user_team_sites"
     },
     "user_team_tshts": {
         "name": "user_team_tshts"

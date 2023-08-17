@@ -1746,6 +1746,22 @@
         "tutorial_link": null,
         "icon": null
     },
+    "site_daily_assignment_line": {
+        "name": "site_daily_assignment_line",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "on_site",
+        "title": "Site Daily Assignment Lines",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "sub_project": {
         "name": "sub_project",
         "package_tab": "application",

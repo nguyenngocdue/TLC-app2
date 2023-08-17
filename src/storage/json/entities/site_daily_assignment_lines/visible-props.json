@@ -4,29 +4,19 @@
         "column_name": "id",
         "new": "true"
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
+    "_site_daily_assignment_id": {
+        "name": "_site_daily_assignment_id",
+        "column_name": "site_daily_assignment_id",
         "new": "true"
     },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "new": "true"
     },
-    "_site_date": {
-        "name": "_site_date",
-        "column_name": "site_date",
-        "new": "true"
-    },
-    "_site_team_id": {
-        "name": "_site_team_id",
-        "column_name": "site_team_id",
-        "new": "true"
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
+    "_getSiteTasks()": {
+        "name": "_getSiteTasks()",
+        "column_name": "getSiteTasks()",
         "new": "true"
     },
     "_owner_id": {
@@ -58,5 +48,10 @@
         "name": "_deleted_at",
         "column_name": "deleted_at",
         "new": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": ""
     }
 }

@@ -13,9 +13,16 @@ class Site_daily_assignment extends ModelExtended
 
     public static $eloquentParams = [
         "getUserTeamSite" => ["belongsTo", User_team_tsht::class, 'site_team_id'],
+        'getLines' => ['hasMany', Site_daily_assignment_line::class, 'site_daily_assignment_id'],
     ];
 
     public function getUserTeamSite()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getLines()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
