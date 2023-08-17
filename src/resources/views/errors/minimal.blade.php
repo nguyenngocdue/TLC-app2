@@ -23,6 +23,8 @@
         <div id="app" class="relative flex items-top justify-center min-h-screen bg-gray-200 dark:bg-gray-900 sm:items-center sm:pt-0">
                 <div class="w-1/2 mx-auto sm:px-6 lg:px-8 bg-white shadow-lg rounded">
                     @php
+                    $url = false;
+                    if(App\Utils\Support\CurrentUser::get()){
                         $route = App\Utils\Support\CurrentRoute::getName();
                         $url = false;
                         switch (true) {
@@ -35,8 +37,9 @@
                         }
                         $isAdmin = App\Utils\Support\CurrentUser::isAdmin();
                         $message = $isAdmin ? $exception->getMessage() : 'User does not have the right permissions.';
+                    }
                     @endphp
-                    <antd-results :code="@yield('code')" :message="'{{$message}}'" :url="'{{$url}}'"/>
+                    <antd-results :code="@yield('code')" :message="'{{$message ?? @yield('message')}}'" :url="'{{$url}}'"/>
                 </div>
         </div>
         <script src="{{ asset('js/antd-vue.js') }}"></script>

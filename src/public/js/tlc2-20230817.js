@@ -43,3 +43,9 @@ const openAnotherLink = (linkId) => {
 //This will stop user to click "Back" on browser
 setTimeout(() => { window.history.forward(); }, 0);
 window.onunload = () => { null };
+
+
+function saveAndClose(){
+    $('[id="form-upload"]').append('<input type="hidden" name="saveAndClose" value="true">')
+    $('[id="form-upload"]').submit()
+}

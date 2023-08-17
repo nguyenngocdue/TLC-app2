@@ -65,9 +65,3 @@
 @if(!$isFloatingOnRightSide)
 </div>
 @endif
-<script>
-    function saveAndClose(){
-            $('[id="form-upload"]').append('<input type="hidden" name="saveAndClose" value="true">')
-            $('[id="form-upload"]').submit()
-        }
-</script>
