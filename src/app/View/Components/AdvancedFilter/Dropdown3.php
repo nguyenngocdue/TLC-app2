@@ -39,6 +39,7 @@ class Dropdown3 extends Component
         $dataRelationShips = $this->relationships;
         if (empty($dataRelationShips)) return "Relationship not found";
         $params = $dataRelationShips['eloquentParams'] ?? ($dataRelationShips['oracyParams'] ?? "");
+        $typeRelationship = isset($dataRelationShips['eloquentParams']) ? 'eloquent' : 'oracy';
         $filterColumns = $dataRelationShips['filter_columns'];
         $filterValues = $dataRelationShips['filter_values'];
         if (!empty($filterColumns) && !empty($filterValues)) {
@@ -53,12 +54,18 @@ class Dropdown3 extends Component
                     $arrayQuery[$value] = $filterValues[$key];
                 }
             }
-            $dataSource = ($params[1])::where(function ($q) use ($arrayQuery) {
-                foreach ($arrayQuery as $key => $value) {
-                    is_array($value) ? $q->whereIn($key, $value) : $q->where($key, $value);
-                }
-                return $q;
-            })->get();
+            if ($typeRelationship == 'eloquent') {
+                $dataSource = ($params[1])::where(function ($q) use ($arrayQuery, $typeRelationship) {
+                    foreach ($arrayQuery as $key => $value) {
+                        is_array($value) ? $q->whereIn($key, $value) : $q->where($key, $value);
+                    }
+                    return $q;
+                })->get();
+            } else {
+                dump('Oracy relationship is not yet implemented.');
+                $dataSource = [];
+                // $dataSource = ($params[1])::{$params[0]}($arrayQuery[0], $arrayQuery[1])->get();
+            }
         } else {
             if (isset($params[1])) {
                 if ($params[1] == 'App\Models\User') {

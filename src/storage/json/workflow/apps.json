@@ -1744,7 +1744,8 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null
+        "icon": null,
+        "disallowed_direct_creation": "true"
     },
     "site_daily_assignment_line": {
         "name": "site_daily_assignment_line",
@@ -1760,7 +1761,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "disallowed_direct_creation": "true"
     },
     "sub_project": {
         "name": "sub_project",
