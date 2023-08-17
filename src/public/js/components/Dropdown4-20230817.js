@@ -7,9 +7,7 @@ const showErrorMessage = (response) => {
 //Similar to includes, this will be checking both numbers and strings
 const dumbIncludes4 = (item, array) => {
     if (Array.isArray(array)) {
-        for (let i = 0; i < array.length; i++) {
-            if (array[i] == item) return true
-        }
+        for (let i = 0; i < array.length; i++) if (array[i] == item) return true
         return false
     } else {
         return item == array
@@ -17,6 +15,17 @@ const dumbIncludes4 = (item, array) => {
     }
 }
 const makeIdFrom = (table01Name, fieldName, rowIndex) => table01Name + "[" + fieldName + "][" + rowIndex + "]"
+const smartFilter4 = (dataSource, column, value) => {
+    return dataSource.filter((row) => {
+        let result = null
+        if (Array.isArray(row[column])) {
+            result = dumbIncludes4(value, row[column])
+        } else {
+            result = row[column] == value
+        }
+        return result
+    })
+}
 
 const getFieldNameInTable01FormatJS = (name, table01Name) => {
     const isStartWith = table01Name && name.startsWith(table01Name)
@@ -49,7 +58,7 @@ const filterDropdown4 = (id, dataSource, table01Name) => {
                     //     console.log("Column [", column, "] in filter_columns found in", column_name, "(Relationships Screen)");
                 }
             })
-            dataSource = dataSource.filter((row) => value == row[column])
+            dataSource = smartFilter4(dataSource, column, value)
         }
     }
     // console.log("Filtered")
@@ -73,16 +82,7 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
         if (column === undefined) console.log("The column to look up [", column, "] is not found in ...")
         if (!value) continue;
         if (debugListener) console.log("Applying", column, value, "to", table_name, 'by column', column)
-        dataSource = dataSource.filter((row) => {
-            let result = null
-            if (Array.isArray(row[column])) {
-                result = dumbIncludes4(value, row[column])
-            } else {
-                result = row[column] == value
-            }
-            if (debugListener) console.log("Result of reduce filter", row[column], value, result)
-            return result
-        })
+        dataSource = smartFilter4(dataSource, column, value)
     }
 
     if (debugListener) console.log("DataSource AFTER reduce", dataSource)

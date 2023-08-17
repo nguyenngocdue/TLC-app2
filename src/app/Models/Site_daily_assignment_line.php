@@ -21,7 +21,7 @@ class Site_daily_assignment_line extends ModelExtended
     ];
 
     public static $oracyParams = [
-        "getSiteTasks()" => ["getCheckedByField", User::class],
+        "getSiteTasks()" => ["getCheckedByField", Prod_routing_link::class],
     ];
 
     public function getParent()
