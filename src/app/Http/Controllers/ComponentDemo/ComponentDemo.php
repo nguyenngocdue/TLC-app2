@@ -7,6 +7,7 @@ use App\Http\Controllers\ComponentDemo\DataSource\CsvLoader;
 class ComponentDemo
 {
     use TraitDemoAttachmentData;
+    use TraitDemoIconsData;
     use TraitDemoCommentData;
     use TraitDemoGridData;
     use TraitDemoTableData;
@@ -25,6 +26,7 @@ class ComponentDemo
     {
         return [
             'static' => ['href' => "#static", 'title' => "Static", 'active' => false,],
+            'icons' => ['href' => "#icons", 'title' => "Icons", 'active' => true,],
             'data_display' => ['href' => "#data_display", 'title' => "Data Display", 'active' => false,],
             'data_entry' => ['href' => "#data_entry", 'title' => "Data Entry", 'active' => false,],
             'attachments' => ['href' => "#attachments", 'title' => "Attachments", 'active' => false,],
@@ -33,7 +35,7 @@ class ComponentDemo
             'feedbacks' => ['href' => "#feedbacks", 'title' => "Feedback", 'active' => false,],
             'listeners' => ['href' => "#listeners", 'title' => "Listeners", 'active' => false,],
             'pivot_tables' => ['href' => "#pivot_tables", 'title' => "Pivot Tables", 'active' => false,],
-            'pivot_tables2' => ['href' => "#pivot_tables2", 'title' => "Pivot Tables 2", 'active' => true,],
+            'pivot_tables2' => ['href' => "#pivot_tables2", 'title' => "Pivot Tables 2", 'active' => false,],
             // 'modecontrols' => ['href' => "#modecontrols", 'title' => "Mode Controls", 'active' => false,],
         ];
     }
@@ -60,6 +62,8 @@ class ComponentDemo
             'tagDataSource' => $this->getTagDataSource(),
             'tabData1' => $this->getTab1(),
             'tabData2' => $this->getTab2(),
+            'iconsColumns' => $this->getIconsColumns(),
+            'iconsDataSource' => $this->getIconsDataSource(),
             // 'listenerDataSource' => $this->getDataSource(), //??
             // 'itemsSelected' => $this->getItemsSelected(), //??
             'pivotTableColumns' => $pivot1Columns,
