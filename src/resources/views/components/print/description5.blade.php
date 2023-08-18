@@ -12,7 +12,7 @@
                     @if(sizeof($value) > 0)
                         @switch($control)
                             @case('attachment')
-                                    <div class='p-2 border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
+                                    <div class='flex p-2 border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left items-center'>
                                     @php
                                         $isRenderSimple = $content->every(function($item){
                                             return in_array($item->extension,['pdf','csv','zip']);
@@ -72,8 +72,17 @@
                     @if(sizeof($value) > 0)
                         @switch($control)
                             @case('attachment')
-                                <div class='p-2 border border-gray-600 text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
+                                <div class='flex p-2 border border-gray-600 text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left items-center'>
+                                    @php
+                                    $isRenderSimple = $content->every(function($item){
+                                        return in_array($item->extension,['pdf','csv','zip']);
+                                    });
+                                @endphp
+                                @if($isRenderSimple)
+                                    <x-print.attachment-simple :dataSource="$value"/>
+                                @else
                                     <x-renderer.attachment2 name='attachment' :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />
+                                @endif
                                 </div>
                                 @break
                             @case('checkbox')
