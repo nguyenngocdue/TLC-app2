@@ -6,6 +6,8 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFieldHandler2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitSendNotificationAndMail;
 use App\Models\Hr_timesheet_line;
 use App\Models\Hr_timesheet_worker;
+use App\Models\Site_daily_assignment_line;
+use App\Models\User_team_site;
 use App\Models\User_team_tsht;
 use App\Utils\Constant;
 use App\Utils\Support\DateTimeConcern;
@@ -26,13 +28,6 @@ trait TraitStoreEmpty
 	{
 		$model = ($sp['props']["_" . $fieldName . "()"]['relationships']['oracyParams'][1]);
 		return $model;
-		// switch ($fieldName) {
-		// 	case "getMonitors1":
-		// 		return "App\\Models\\User";
-		// 	default:
-		// 		Log::info("Unknown how to get model for field $fieldName");
-		// 		return null;
-		// }
 	}
 
 	private function insertOracy($item, $createdItem, $sp)
@@ -71,7 +66,6 @@ trait TraitStoreEmpty
 
 	public function storeEmpty(Request $request)
 	{
-		// try{
 		$sp = SuperProps::getFor($this->type);
 		$props = $sp['props'];
 		$lines = $request->get('lines');
@@ -139,6 +133,7 @@ trait TraitStoreEmpty
 			// Log::info($item);
 
 			$createdItem = $this->modelPath::create($item);
+
 			$this->insertOracy($item, $createdItem, $sp);
 			// Log::info("Store empty");
 			// Log::info($createdItem);
@@ -155,7 +150,6 @@ trait TraitStoreEmpty
 				foreach ($theRows as $row) {
 					$team = User_team_tsht::find($row->team_id);
 					$workers = $team->getTshtMembers();
-					$totalInsertedRows  += count($workers);
 					foreach ($workers as $worker) {
 						Hr_timesheet_line::create([
 							'timesheetable_type' => Hr_timesheet_worker::class,
@@ -168,37 +162,30 @@ trait TraitStoreEmpty
 							'duration' => 480, //480 = 8 * 60
 						]);
 					}
+					$totalInsertedRows  += count($workers);
 				}
-
+				break;
+			case "site_daily_assignment":
+				foreach ($theRows as $row) {
+					$team = User_team_site::find($row->site_team_id);
+					$workers = $team->getSiteMembers();
+					foreach ($workers as $worker) {
+						Site_daily_assignment_line::create([
+							'owner_id' => $row->owner_id,
+							'user_id' => $worker->id,
+						]);
+					}
+					$totalInsertedRows  += count($workers);
+				}
 				break;
 			default:
 				break;
 		}
-		// } catch (\Exception $e) {
-		// 	return ResponseObject::responseFail($e->getMessage());
-		// }
 
 		$meta = $request->input('meta');
 		$caller = $meta['caller'] ?? "";
 		$line_or_doc = (in_array($caller, ['view-all-matrix', 'view-all-calendar'])) ? "document" : "line";
 		$message = "Created " . sizeof($theRows) . " " . Str::plural($line_or_doc, sizeof($theRows)) . ".";
-		// switch ($this->type) {
-		// 	case 'hr_timesheet_worker':
-		// 	case 'hr_timesheet_officer':
-		// 	case 'qaqc_wir':
-		// 		// if ($totalInsertedRows > 0) {
-		// 		$message = "Created "
-		// 			. sizeof($theRows)
-		// 			. " "
-		// 			. Str::plural("document", sizeof($theRows))
-		// 			. " with "
-		// 			. $totalInsertedRows
-		// 			. " "
-		// 			. Str::plural("line", $totalInsertedRows)
-		// 			. ".";
-		// 		// }
-		// 		break;
-		// }
 
 		return ResponseObject::responseSuccess(
 			$theRows,
