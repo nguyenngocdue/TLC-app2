@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\Workflow\LibReports;
-use App\Models\Eco_sheet;
 use App\Models\Project;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentRoute;
@@ -177,8 +176,8 @@ class Eco_sheet_010 extends Controller
 
     private function getBasicInfoData($modeParams)
     {
-        $month = $modeParams['month'];
-        $projectName = Project::find($modeParams['project_id'])->name;
+        $month = $modeParams['month'] ?? date("Y-m");
+        $projectName = Project::find($modeParams['project_id'] ?? 5)->name;
         return [
             'month' => $month,
             'project_name' => $projectName

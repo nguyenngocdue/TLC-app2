@@ -94,7 +94,7 @@ class Prod_sequence_030 extends Report_ParentReportController
 
     protected function transformDataSource($dataSource, $modeParams)
     {
-        $dataSource = Report::pressArrayTypeAllItems($dataSource);
+        $dataSource = Report::convertToType($dataSource);
         $groupByProdOrders = Report::groupArrayByKey($dataSource, 'po_id');
         $enrichProdOrders = array_map(function ($items) {
             array_walk($items, function ($value, $key) use (&$items) {

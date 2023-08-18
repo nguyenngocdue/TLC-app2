@@ -142,7 +142,6 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             [
                 'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_id',
-                'hasListenTo' => true,
             ],
             [
                 'title' => 'Prod Routing',

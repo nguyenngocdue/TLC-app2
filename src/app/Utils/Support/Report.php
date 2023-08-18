@@ -36,7 +36,7 @@ class Report
 
                 // $path = "App\\Http\\Controllers\\PivotReports\Reports\\{$ucfirstName}_$mode";
                 // if (class_exists($path)) $result0[]   = static::actionCreator('report', $path, $singular,$mode);
-   
+
                 $path = "App\\Http\\Controllers\\Reports\\Registers\\{$ucfirstName}_$mode";
                 if (class_exists($path)) $result0[] = static::actionCreator('register', $path, $singular, $mode);
                 $path = "App\\Http\\Controllers\\Reports\\Documents\\{$ucfirstName}_$mode";
@@ -107,13 +107,18 @@ class Report
         return ucwords(str_replace('_', ' ', $string));
     }
 
-    public static function pressArrayTypeAllItems($dataSource)
+    public static function convertToType($dataSource, $type = 'array')
     {
-        $array = [];
+        $convertedData = [];
+    
         foreach ($dataSource as $key => $value) {
-            $array[] = (array)$value;
+            if ($type === 'array') {
+                $convertedData[] = (array)$value;
+            } elseif ($type === 'object') {
+                $convertedData[] = (object)$value;
+            }
         }
-        return $array;
+        return $convertedData;
     }
     public static function replaceAndUcwords($string)
     {
@@ -233,8 +238,9 @@ class Report
         return array_merge($months, $missingMonths);
     }
 
-    public static function sortByKey($data, $key, $isDateTime = false) {
-        usort($data, function($a, $b) use ($key, $isDateTime) {
+    public static function sortByKey($data, $key, $isDateTime = false)
+    {
+        usort($data, function ($a, $b) use ($key, $isDateTime) {
             if ($isDateTime) {
                 return strtotime($a[$key]) <=> strtotime($b[$key]);
             } else {
@@ -261,9 +267,15 @@ class Report
         return $array;
     }
 
-    public static function removeNullValuesFromArray($inputArray) {
+    public static function removeNullValuesFromArray($inputArray)
+    {
         // if (is_null(reset($inputArray)) && count($inputArray) === 1) return [];
-        return array_filter($inputArray, fn($value) => $value !== null);
+        return array_filter($inputArray, fn ($value) => $value !== null);
     }
 
+    public static function createDefaultPickerDate($daysStr = '-3 days'){
+        $nowDate =  date('d/m/Y');
+        $beforeDate = date('d/m/Y', strtotime($daysStr));
+        return $beforeDate .' - ' . $nowDate;
+    }
 }

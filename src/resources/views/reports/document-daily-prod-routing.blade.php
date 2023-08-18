@@ -2,7 +2,7 @@
 
 @section('topTitle', $topTitle)
 @section('title', $modeReport)
-@section('tooltip', Str::ucfirst($typeReport)." ".$mode)
+@section('tooltip', Str::ucfirst($typeReport)." ".$currentMode)
 @section('content')
 
 @php
@@ -18,13 +18,20 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
         <x-reports.parameter3-report :itemsSelected="$modeParams" modeOption="{{$currentMode}}" :columns="$paramColumns" routeName="{{$routeName}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
     </div>
 </div>
+{{-- RENDER TABLES --}}
+@foreach($dataRender as $key => $data)
+@php
+$tableColumns = $data['tableColumns'];
+$tableDataSource = $data['tableDataSource'];
+$basicInfo = $basicInfoData[$key];
+@endphp
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         <div style='page-break-after:always!important' class="w-[1000px] min-h-[1360px] items-center bg-white box-border p-8">
             <x-print.header6 />
+
             {{-- BASIC INFORMATION --}}
-            {{-- <x-renderer.heading level=1 class='text-center'>Sequence-based</x-renderer.heading> --}}
-            <x-renderer.heading level=2 class='text-center'>Daily Production Routing's Progress Report</x-renderer.heading>
+            <x-renderer.heading level=2 class='text-center'>Production Routing Daily Report</x-renderer.heading>
             <div class="grid grid-cols-12">
                 <div class="col-span-12 text-left">
                     <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Basic Information <p class="text-sm font-light italic"></p>
@@ -35,39 +42,33 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right ">
                         <label class="{{$class1}} col-start-1  col-span-3">Date</label>
-                        <span class="{{$class2}}  col-start-4  col-span-9">{{$basicInfoData['date']}}</span>
+                        <span class="{{$class2}}  col-start-4  col-span-9">{{$basicInfo['date']}}</span>
                     </div>
                 </div>
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right">
                         <label class="{{$class1}} col-start-1  col-span-3">Project</label>
-                        <span class="{{$class2}}  col-start-4  col-span-4">{{$basicInfoData['project']}}</span>
+                        <span class="{{$class2}}  col-start-4  col-span-4">{{$basicInfo['project']}}</span>
                         <label class="{{$class1}} col-start-8  col-span-3 items-center">Sub-Project</label>
-                        <span class="{{$class2}}  col-start-11 col-span-2">{{$basicInfoData['sub_project']}}</span>
+                        <span class="{{$class2}}  col-start-11 col-span-2">{{$basicInfo['sub_project']}}</span>
                     </div>
                 </div>
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right ">
                         <label class="{{$class1}} col-start-1   col-span-3">Production Routing</label>
-                        <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfoData['prod_routing']}}</span>
+                        <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfo['prod_routing']}}</span>
                     </div>
                 </div>
-                @if(isset($basicInfoData['prod_discipline']) && $basicInfoData['prod_discipline'])
+                @if(isset($basicInfo['prod_discipline']) && $basicInfo['prod_discipline'])
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right ">
                         <label class="{{$class1}} col-start-1   col-span-3">Production Discipline</label>
-                        <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfoData['prod_discipline']}}</span>
+                        <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfo['prod_discipline']}}</span>
                     </div>
                 </div>
                 @endif
             </div>
 
-            {{-- RENDER TABLES --}}
-            @foreach($dataRender as $key => $data)
-            @php
-            $tableColumns = $data['tableColumns'];
-            $tableDataSource = $data['tableDataSource'];
-            @endphp
             <div class="grid grid-cols-12 items-center">
                 <div class="col-span-12 text-left">
                     <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">{{$titleTables[$key]}}
@@ -75,9 +76,10 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                     </h4>
                 </div>
             </div>
-            <x-renderer.table showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource" maxH="{{$maxH}}" />
-            @endforeach
+            <x-renderer.table showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource" {{-- maxH="{{$maxH}}" --}} {{-- groupBy="{{$groupBy}}" groupByLength="{{$groupByLength}}" --}}/>
         </div>
     </div>
 </div>
+<x-renderer.page-break />
+@endforeach
 @endsection

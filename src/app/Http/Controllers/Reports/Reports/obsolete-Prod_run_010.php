@@ -192,11 +192,11 @@ class Prod_run_010 extends  Report_ParentReportController
     {
 
         $dataHours = $this->getMaxProdRunIdAndTotalHours($modeParams);
-        $dataHours = Report::pressArrayTypeAllItems($dataHours);
+        $dataHours = Report::convertToType($dataHours);
         $dataHours = Report::assignKeyByKey($dataHours, 'max_prod_run_id');
 
         $itemsSource = $dataSource->all();
-        $itemsSource = Report::pressArrayTypeAllItems($itemsSource);
+        $itemsSource = Report::convertToType($itemsSource);
         // Calculate all of man (minute)
         $groupIdsProdSeq = Report::groupArrayByKey($itemsSource, 'prod_sequence_id');
         $sumManMinutesProSeq = [];

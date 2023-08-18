@@ -297,7 +297,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 
 	protected function getSheets($dataSource)
 	{
-		$items = Report::pressArrayTypeAllItems($dataSource);
+		$items = Report::convertToType($dataSource);
 		$sheets = array_values(array_map(function ($item) {
 			$x = isset(reset($item)['sheet_name']);
 			if ($x) {

@@ -39,7 +39,7 @@ trait TraitParentIdHasListenToParamsReport
             'name' => $this->multiple ?  $this->name . '[]' : $this->name,
             'id' => $this->name,
             // 'selected' => $this->selected,
-            'selected' => str_contains($this->selected, '["') ? $this->selected : json_encode([$this->selected]),
+            'selected' => str_contains($this->selected, '["') || str_contains($this->selected, '[') ? $this->selected : json_encode([$this->selected]),
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $tableName,
             'readOnly' => $this->readOnly,

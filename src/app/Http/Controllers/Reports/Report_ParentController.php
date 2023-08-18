@@ -22,7 +22,7 @@ abstract class Report_ParentController extends Controller
     use TraitDataModesReport;
     use TraitFunctionsReport;
     abstract protected function getSqlStr($modeParams);
-    abstract protected function getTableColumns($dataSource, $modeParams);
+    abstract protected function getTableColumns($modeParams, $dataSource);
 
     protected $rotate45Width = false;
     protected $groupBy = false;

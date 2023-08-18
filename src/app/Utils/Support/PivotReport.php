@@ -241,21 +241,6 @@ class PivotReport
         return $array;
     }
 
-    private static function sumItemsInArray01($newArray)
-    {
-        $data = [];
-        foreach ($newArray as $item) {
-            foreach ($item as $key => $value) {
-                if (isset($data[$key])) {
-                    $data[$key] = $data[$key] + $value;
-                } else {
-                    $data[$key] = $value;
-                }
-            }
-        }
-        return $data;
-    }
-
     private static function sumItemsInArray($newArray)
     {
         // dump($newArray);
