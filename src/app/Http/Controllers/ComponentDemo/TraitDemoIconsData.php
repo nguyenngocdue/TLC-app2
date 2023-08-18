@@ -53,7 +53,7 @@ trait TraitDemoIconsData
         echo "<script>const icon_{$type}_$index='$solid';</script>\n";
         $solid = $this->insertSubstring($solid, "text-5xl ", 10);
         if ($style) $solid = $this->insertSubstring($solid, "style='$style' ", 3);
-        $solidBtn = "<button type='button' class='hover:bg-blue-400 rounded p-1' onclick=\"setClipboardValue(icon_{$type}_$index)\">" . $solid . "</button>";
+        $solidBtn = "<button type='button' title='Click to copy' class='hover:bg-blue-400 rounded p-1' onclick=\"setClipboardValue(icon_{$type}_$index)\">" . $solid . "</button>";
 
         return "$solidBtn";
     }
