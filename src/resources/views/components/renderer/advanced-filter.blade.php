@@ -144,7 +144,7 @@
                         @case ('radio')
                         @case ('dropdown_multi')
                         @case('checkbox')
-                            <x-advanced-filter.dropdown3 modelPath="{{$modelPath}}"  :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
+                            <x-advanced-filter.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
                         @break
                         @case('status')
                         @if(!$valueControl || !$valueControl[0] || count($valueControl) > 1)

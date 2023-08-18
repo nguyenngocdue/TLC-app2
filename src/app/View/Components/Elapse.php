@@ -33,7 +33,7 @@ class Elapse extends Component
         $isAdmin  = CurrentUser::isAdmin();
         if (!$isAdmin) return "";
         $value = "";
-        // if (!env("SHOW_ELAPSE")) return;
+        if (!env("SHOW_ELAPSE")) return;
         if (!env("SHOW_ELAPSE")) {
             // 35: Vo Van Thuc - Software Tester
             // 38: Fortune Truong - Project Manager

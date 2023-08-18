@@ -41,11 +41,12 @@ const openAnotherLink = (linkId) => {
 }
 
 //This will stop user to click "Back" on browser
-setTimeout(() => { window.history.forward(); }, 0);
-window.onunload = () => { null };
+//This is to stop user from create 2 documents from 2 tabs of view all matrix
+//But if we constrained the unique key in database, this seems to be not necessary
+// setTimeout(() => { window.history.forward(); }, 0);
+// window.onunload = () => { null };
 
-
-function saveAndClose(){
+function saveAndClose() {
     $('[id="form-upload"]').append('<input type="hidden" name="saveAndClose" value="true">')
     // $('[id="form-upload"]').submit()
 }
