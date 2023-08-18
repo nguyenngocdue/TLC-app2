@@ -65,8 +65,13 @@ class Dropdown3 extends Component
                     return $q;
                 })->get();
             } 
-            dump('Oracy relationship is not yet implemented.');
-            return collect();
+            $allModel =  ($params[1])::all();
+            $keyFirst = array_key_first($arrayQuery);
+            $valueFirst = $arrayQuery[$keyFirst];
+            $results = $allModel->filter(function($item) use ($keyFirst,$valueFirst){
+                return $item->{$keyFirst}->where('id', $valueFirst)->count() > 0;
+            });
+            return $results;
         } else {
             if (isset($params[1])) {
                 if ($params[1] == 'App\Models\User') {
