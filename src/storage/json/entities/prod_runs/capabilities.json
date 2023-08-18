@@ -35,9 +35,9 @@
         "name": "admin",
         "name_rendered": "",
         "toggle": "",
-        "in_progress": "",
-        "on_hold": "",
-        "finished": ""
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true"
     },
     "bd_manager": {
         "name": "bd_manager",
@@ -251,17 +251,17 @@
         "name": "ppc_manager",
         "name_rendered": "",
         "toggle": "",
-        "in_progress": "",
-        "on_hold": "",
-        "finished": ""
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true"
     },
     "ppc_member": {
         "name": "ppc_member",
         "name_rendered": "",
         "toggle": "",
-        "in_progress": "",
-        "on_hold": "",
-        "finished": ""
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true"
     },
     "proc_manager": {
         "name": "proc_manager",
@@ -323,17 +323,17 @@
         "name": "proj_admin",
         "name_rendered": "",
         "toggle": "",
-        "in_progress": "",
-        "on_hold": "",
-        "finished": ""
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true"
     },
     "proj_manager": {
         "name": "proj_manager",
         "name_rendered": "",
         "toggle": "",
-        "in_progress": "",
-        "on_hold": "",
-        "finished": ""
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true"
     },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
@@ -347,9 +347,9 @@
         "name": "proj_member",
         "name_rendered": "",
         "toggle": "",
-        "in_progress": "",
-        "on_hold": "",
-        "finished": ""
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true"
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
@@ -358,6 +358,14 @@
         "in_progress": "",
         "on_hold": "",
         "finished": ""
+    },
+    "proj_supervisor_nz": {
+        "name": "proj_supervisor_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true"
     },
     "qaqc_manager": {
         "name": "qaqc_manager",
@@ -411,9 +419,9 @@
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
-        "in_progress": "",
-        "on_hold": "",
-        "finished": ""
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true"
     },
     "whs_manager": {
         "name": "whs_manager",
