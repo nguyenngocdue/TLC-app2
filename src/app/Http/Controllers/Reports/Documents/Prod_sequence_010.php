@@ -35,13 +35,6 @@ class Prod_sequence_010 extends Report_ParentDocumentController
     protected $topTitleTable = 'Detail Report';
     protected $groupBy = 'prod_discipline_name';
 
-    private function makeModeTitleReport($routeName)
-    {
-        $lib = LibReports::getAll();
-        $title = $lib[$routeName]['title'] ?? 'Empty Title 3';
-        return $title;
-    }
-
     // DataSource
     public function getSqlStr($modeParam)
     {
@@ -130,29 +123,11 @@ class Prod_sequence_010 extends Report_ParentDocumentController
         return $sqlStr;
     }
 
-    private function getArraySqlStr($modeParams)
-    {
-        $arraySqlStrs = $this->createArraySqlFromSqlStr($modeParams);
-        $array = [];
-        foreach ($arraySqlStrs as $k => $sqlStr) {
-            preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
-            foreach (last($matches) as $key => $value) {
-                if (isset($modeParams[$value])) {
-                    $valueParam =  $modeParams[$value];
-                    $searchStr = head($matches)[$key];
-                    $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
-                    $array[$k] = $sqlStr;
-                }
-            }
-            $array[$k] = $sqlStr;
-        }
-        return $array;
-    }
-
     public function getDataSource($modeParams)
     {
+        $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
         $data = [];
-        foreach ($this->getArraySqlStr($modeParams) as $k => $sql) {
+        foreach ($arraySqlStr as $k => $sql) {
             if (is_null($sql) || !$sql) return collect();
             $sqlData = DB::select(DB::raw($sql));
             $collection = collect($sqlData);
@@ -288,12 +263,11 @@ class Prod_sequence_010 extends Report_ParentDocumentController
     {
         $typeReport = CurrentPathInfo::getTypeReport($request);
         $routeName = $request->route()->action['as'];
-        $modeReport = $this->makeModeTitleReport($routeName);
-
         $entity = CurrentPathInfo::getEntityReport($request);
+        
         $modeParams = $this->getModeParams($request);
         $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
-
+        
         $input = $request->input();
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $modeParams);
@@ -306,13 +280,14 @@ class Prod_sequence_010 extends Report_ParentDocumentController
             $dataRender[$key]['tableDataSource'] = $values;
             $dataRender[$key]['tableColumns'] = $this->getTableColumns($modeParams, $data)[$key];
         }
-        // dd($basicInfoData, $dataRender);
-
+        $titleReport  = $this->makeTitleReport($routeName);
+        
         return view('reports.document-daily-prod-routing', [
+            'paramColumns' => $this->getParamColumns(),
             'entity' => $entity,
             'routeName' => $routeName,
             'groupBy' => $this->groupBy,
-            'modeReport' => $modeReport,
+            'titleReport' => $titleReport,
             'typeReport' => $typeReport,
             'modeParams' => $modeParams,
             'currentMode' =>  $this->mode,
@@ -320,7 +295,6 @@ class Prod_sequence_010 extends Report_ParentDocumentController
             'groupByLength' => $this->groupByLength,
 
             'basicInfoData' => $basicInfoData,
-            'paramColumns' => $this->getParamColumns(),
             'dataRender' => $dataRender,
             'titleTables' => $this->makeTitleForTables($modeParams),
         ]);
