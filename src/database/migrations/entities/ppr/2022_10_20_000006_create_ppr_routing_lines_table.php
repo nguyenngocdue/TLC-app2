@@ -27,6 +27,7 @@ return new class extends Migration
             $table->double('target_man_hours')->nullable();
             $table->orderable();
             $table->appendCommonFields();
+
             $table->unique(['ppr_routing_id', 'ppr_routing_link_id'], md5('ppr_routing_id' . 'ppr_routing_link_id'));
             $table->foreign('ppr_routing_id')->references('id')->on('ppr_routings')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ppr_routing_link_id')->references('id')->on('ppr_routing_links')->onDelete('cascade')->onUpdate('cascade');

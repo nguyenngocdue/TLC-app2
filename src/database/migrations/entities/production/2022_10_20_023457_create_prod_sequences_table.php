@@ -27,7 +27,6 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_routing_id')->nullable();
             $table->unsignedBigInteger('prod_discipline_id')->nullable();
 
-            $table->unique(['prod_order_id', 'prod_routing_link_id']);
             $table->integer('priority')->nullable();
             $table->double('total_hours')->nullable();
             $table->double('worker_number')->nullable();
@@ -39,6 +38,8 @@ return new class extends Migration
             $table->unsignedBigInteger('uom_id')->nullable();
             $table->float('total_uom')->nullable();
             $table->appendCommonFields();
+
+            $table->unique(['prod_order_id', 'prod_routing_link_id']);
         });
     }
 
