@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Reports\Report_ParentDocumentController;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Http\Controllers\Workflow\LibReports;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
-class Eco_sheet_010 extends Controller
+class Eco_sheet_010 extends Report_ParentDocumentController
 {
 
     use TraitForwardModeReport;
@@ -24,11 +25,13 @@ class Eco_sheet_010 extends Controller
     use Eco_sheet_dataSource;
 
     protected $mode = '010';
-    protected $maxH = 50;
 
     public function getType()
     {
         return $this->getTable();
+    }
+    public function getSqlStr($modeParams) {
+        return $this->createArraySqlFromSqlStr($modeParams);
     }
 
     protected function getTable()
@@ -39,38 +42,12 @@ class Eco_sheet_010 extends Controller
         return $tableName;
     }
 
-    private function makeModeTitleReport($routeName)
-    {
-        $lib = LibReports::getAll();
-        $title = $lib[$routeName]['title'] ?? 'Empty Title 3';
-        return $title;
-    }
-
     // DataSource
-
-    private function getArraySqlStr($modeParams)
-    {
-        $arraySqlStrs = $this->createArraySqlFromSqlStr($modeParams);
-        $array = [];
-        foreach ($arraySqlStrs as $k => $sqlStr) {
-            preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
-            foreach (last($matches) as $key => $value) {
-                if (isset($modeParams[$value])) {
-                    $valueParam =  $modeParams[$value];
-                    $searchStr = head($matches)[$key];
-                    $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
-                    $array[$k] = $sqlStr;
-                }
-            }
-            $array[$k] = $sqlStr;
-        }
-        return $array;
-    }
 
     public function getDataSource($modeParams)
     {
         $data = [];
-        foreach ($this->getArraySqlStr($modeParams) as $k => $sql) {
+        foreach ($this->getSqlStr($modeParams) as $k => $sql) {
             if (is_null($sql) || !$sql) return collect();
             $sqlData = DB::select(DB::raw($sql));
             $collection = collect($sqlData);
@@ -95,7 +72,7 @@ class Eco_sheet_010 extends Controller
     }
 
 
-    private function getTableColumns()
+    public function getTableColumns($modeParams, $dataSource)
     {
         return [
             "getEcoLaborImpacts" => [
@@ -167,9 +144,9 @@ class Eco_sheet_010 extends Controller
         ];
     }
 
-    private function makeTitleForTables()
+    private function makeTitleForTables($modeParams)
     {
-        $tableName = array_keys($this->getTableColumns());
+        $tableName = array_keys($this->getTableColumns($modeParams,[]));
         $name = ['Labor Impact', 'Material Impact Add', 'Material Impact Remove', 'Sign Off'];
         return array_combine($tableName, $name);
     }
@@ -193,7 +170,6 @@ class Eco_sheet_010 extends Controller
     {
         $typeReport = CurrentPathInfo::getTypeReport($request);
         $routeName = $request->route()->action['as'];
-        $modeReport = $this->makeModeTitleReport($routeName);
 
         $entity = CurrentPathInfo::getEntityReport($request);
         $modeParams = $this->getModeParams($request);
@@ -208,28 +184,28 @@ class Eco_sheet_010 extends Controller
         $basicInfoData =  $this->getBasicInfoData($modeParams);
         // dd($basicInfoData);
 
-        $dataRender = [];
+        $dataSource = [];
         foreach ($data as $key => $values) {
             $values = $this->changeValue($key, $values);
-            $dataRender[$key]['tableDataSource'] = $values;
-            $dataRender[$key]['tableColumns'] = $this->getTableColumns()[$key];
+            $dataSource[$key]['tableDataSource'] = $values;
+            $dataSource[$key]['tableColumns'] = $this->getTableColumns($modeParams, [])[$key];
         }
-
+        $titleReport  = $this->makeTitleReport($routeName);
+        dd($dataSource);
         return view('reports.document-eco-sheet', [
+            'paramColumns' => $this->getParamColumns(),
             'topTitle' => $this->getMenuTitle(),
-            'modeReport' => $modeReport,
+            'titleReport' => $titleReport,
             'typeReport' => $typeReport,
             'mode' => $this->mode,
             'modeParams' => $modeParams,
             'currentMode' =>  $this->mode,
             'routeName' => $routeName,
             'entity' => $entity,
-            'maxH' => $this->maxH,
 
             'basicInfoData' => $basicInfoData,
-            'paramColumns' => $this->getParamColumns(),
-            'dataRender' => $dataRender,
-            'titleTables' => $this->makeTitleForTables(),
+            'dataSource' => $dataSource,
+            'titleTables' => $this->makeTitleForTables($modeParams),
         ]);
     }
 }

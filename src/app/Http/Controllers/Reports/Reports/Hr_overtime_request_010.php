@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentRegisterController;
+use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitLegendReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
 use App\Utils\Support\CurrentUser;
-use App\Utils\Support\Tree\BuildTree;
-use Illuminate\Support\Str;
 
-class Hr_overtime_request_010 extends Report_ParentRegisterController
+class Hr_overtime_request_010 extends Report_ParentReportController
 {
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;

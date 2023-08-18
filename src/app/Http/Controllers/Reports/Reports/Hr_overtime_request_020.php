@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentRegisterController;
+use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
@@ -13,7 +13,7 @@ use DateTime;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class Hr_overtime_request_020 extends Report_ParentRegisterController
+class Hr_overtime_request_020 extends Report_ParentReportController
 {
     use TraitDynamicColumnsTableReport;
     use TraitModifyDataToExcelReport;

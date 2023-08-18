@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', $modeReport)
+@section('title', $titleReport)
 @section('tooltip', Str::ucfirst($typeReport)." ".$currentMode)
 @section('content')
 

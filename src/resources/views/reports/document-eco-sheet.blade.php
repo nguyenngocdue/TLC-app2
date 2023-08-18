@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', $modeReport)
+@section('title', $titleReport)
 @section('tooltip', Str::ucfirst($typeReport)." ".$mode)
 @section('content')
 
@@ -40,7 +40,7 @@
 
 
             {{-- RENDER TABLES --}}
-            @foreach($dataRender as $key => $data)
+            @foreach($dataSource as $key => $data)
             @php
             $tableColumns = $data['tableColumns'];
             $tableDataSource = $data['tableDataSource'];
@@ -52,7 +52,7 @@
                     </h4>
                 </div>
             </div>
-            <x-renderer.table showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource"  maxH="{{$maxH}}" />
+            <x-renderer.table showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource" />
             @endforeach
         </div>
     </div>

@@ -43,7 +43,6 @@ abstract class Report_ParentController extends Controller
 
     private function getSql($modeParams)
     {
-
         $sqlStr = $this->getSqlStr($modeParams);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
@@ -80,10 +79,6 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
-    protected function getSheets($dataSource) // Override document report
-    {
-        return [];
-    }
     protected function getTable()
     {
         $tableName = CurrentRoute::getCurrentController();
@@ -144,12 +139,12 @@ abstract class Report_ParentController extends Controller
         return [];
     }
 
-    private function makeModeTitleReport($routeName)
+    public function makeTitleReport($routeName)
     {
         $lib = LibReports::getAll();
-        $title = $lib[$routeName]['title'] ?? '';
-        $topTitle = $lib[$routeName]['top_title'] ?? '';
-        return [$topTitle, $title];
+        $titleReport = $lib[$routeName]['title'] ?? '';
+        // $topTitle = $lib[$routeName]['top_title'] ?? '';
+        return $titleReport;
     }
 
     public function index(Request $request)
@@ -169,7 +164,6 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->enrichDataSource($dataSource, $modeParams);
         $dataSource = $this->transformDataSource($dataSource, $modeParams);
         $dataSource = $this->changeValueData($dataSource, $modeParams);
-        $sheet = $this->getSheets($dataSource);
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
 
@@ -178,19 +172,19 @@ abstract class Report_ParentController extends Controller
         $tableColumns = $this->getTableColumns($dataSource, $modeParams);
         $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
         echo $this->getJS();
-        [$topTitle, $modeReport] = $this->makeModeTitleReport($routeName);
-        if (!$topTitle) $topTitle = $this->getMenuTitle();
+        $titleReport = $this->makeTitleReport($routeName);
+        $topTitle = $this->getMenuTitle();
 
+        dd($dataSource);
         return view('reports.' . $viewName, [
             'typeOfView' => $this->typeView,
             'modeType' => $this->modeType,
             'maxH' => $this->maxH,
             'entity' => $entity,
-            'sheets' =>  $sheet,
             'mode' => $this->mode,
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
-            'modeReport' => $modeReport,
+            'titleReport' => $titleReport,
             'modeParams' => $modeParams,
             'typeReport' => $typeReport,
             'currentMode' =>  $this->mode,
