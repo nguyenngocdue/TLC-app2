@@ -34,6 +34,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $apiToCallWhenCreateNew = 'storeEmpty';
     protected $attOfCellToRender = "status";
     protected $showLegend = true;
+    protected $showPrintButton = false;
     /**
      * Create a new component instance.
      *
@@ -50,10 +51,16 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return [];
     }
+    protected function getYAxisPrevious(){
+        return [];
+    }
 
     protected function getXAxis()
     {
         return [];
+    }
+    protected function getXAxisPrevious(){
+        return collect();
     }
 
     protected function getXAxisExtraColumns()
@@ -113,16 +120,39 @@ abstract class ViewAllTypeMatrixParent extends Component
             return (object)['value' => "unknown status [" . $document->status . "] ???",];
         }
     }
+    protected function makeCheckbox($document, $forExcel){
+            $id = $document->id;
+            $item = [
+                'value' => "<div><input type='checkbox' name='$id'/></div>",
+                'cell_title' => 'Select check box id:'.$id,
+                'cell_class' => "",
+            ];
+            return (object) $item;
+    }
 
     function cellRenderer($cell, $dataIndex, $forExcel = false)
     {
         $result = [];
-        foreach ($cell as $document) {
-            $result[] = $this->makeStatus($document, $forExcel);
+        switch ($dataIndex) {
+            case 'checkbox':
+                foreach ($cell as $document) {
+                    $result[] = $this->makeCheckbox($document, $forExcel);
+                }
+                break;
+            case 'status_only':
+            case 'status':
+            case 'detail':
+                foreach ($cell as $document) {
+                    $result[] = $this->makeStatus($document, $forExcel);
+                }
+                break;
+            default:
+                # code...
+                break;
         }
-        // dump($result);
         if (sizeof($result) == 1) return $result[0];
         return $result;
+        // dump($result);
         // return [1, 2];
     }
 
@@ -140,7 +170,6 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return [];
     }
-
     function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel)
     {
         $dataSource = $this->reIndexDataSource($dataSource);
@@ -152,7 +181,6 @@ abstract class ViewAllTypeMatrixParent extends Component
             $yId = $y->id;
             $line = [];
             $line['name_for_group_by'] = $y->name;
-
             $line['name'] = (object)[
                 'value' => $y->name,
                 'cell_title' => "(#" . $y->id . ")",
@@ -183,7 +211,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 if (isset($dataSource[$yId][$xId])) {
-                    $line[$xId] = $this->cellRenderer($dataSource[$yId][$xId], 'status', $forExcel);
+                    $line[$xId] = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $forExcel);
                     if ($this->mode == 'detail') {
                         foreach ($extraColumns as $column) {
                             $line[$xId . "_" . $column] = $this->cellRenderer($dataSource[$yId][$xId], $column, $forExcel);
@@ -296,7 +324,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
         $filterRenderer = $this->getFilter();
-        $actionButtons = "<x-form.action-button-group-view-matrix type='$this->type' groupBy='$this->groupBy' groupByLength='$this->groupByLength'/>";
+        $actionButtons = "<x-form.action-button-group-view-matrix type='$this->type' groupBy='$this->groupBy' groupByLength='$this->groupByLength' printButton='$this->showPrintButton'/>";
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
             [
@@ -313,6 +341,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'tableTrueWidth' => $this->tableTrueWidth,
                 'actionButtons' => $actionButtons,
                 'headerTop' => $this->headerTop,
+                'showPrintButton' => $this->showPrintButton,
             ],
         );
     }

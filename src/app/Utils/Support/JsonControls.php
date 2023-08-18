@@ -119,6 +119,10 @@ class JsonControls
     {
         return self::getAll()['apps_have_view_all_matrix'];
     }
+    public static function getAppsHaveViewAllMatrixPrint()
+    {
+        return self::getAll()['apps_have_view_all_matrix_print'];
+    }
     public static function getAppsHaveAddNewByCloning()
     {
         return self::getAll()['apps_have_add_new_by_cloning'];

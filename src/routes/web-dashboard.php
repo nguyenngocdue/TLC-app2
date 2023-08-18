@@ -30,6 +30,7 @@ Route::group([], function () {
             Route::post("{$entityName}_dp", [ViewAllInvokerController::class, "duplicateMultiple"])->name("{$entityName}_dp.duplicateMultiple");
             Route::get("{$entityName}_ep", [ViewAllInvokerController::class, "exportCSV"])->name("{$entityName}_ep.exportCSV");
             Route::get("{$entityName}_mep", [ViewAllInvokerController::class, "exportCSV2"])->name("{$entityName}_mep.exportCSV2");
+            Route::put("{$entityName}_prt", [ViewAllInvokerController::class, "print"])->name("{$entityName}_prt.print");
             Route::get("{$entityName}_qr", [ViewAllInvokerController::class, "showQRList6"])->name("{$entityName}_qr.showQRList6");
         });
     }

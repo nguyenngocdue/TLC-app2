@@ -14,6 +14,7 @@ class ViewAllTypeMatrix extends Component
      */
     public function __construct(
         private $type,
+        private $view =null,
         // private $viewportDate = null,
         // private $viewportMode = 'week',
     ) {
@@ -38,6 +39,7 @@ class ViewAllTypeMatrix extends Component
             case "hse_extra_metrics":
                 return Blade::render("<x-renderer.view-all-matrix-type.HseExtraMetrics/>");
             case "prod_sequences":
+                if($this->view == 'print') return Blade::render("<x-renderer.view-all-matrix-type.ProdSequencesPrint/>");
                 return Blade::render("<x-renderer.view-all-matrix-type.ProdSequences/>");
             case "ghg_sheets":
                 return Blade::render("<x-renderer.view-all-matrix-type.GhgSheets/>");

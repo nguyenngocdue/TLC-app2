@@ -118,6 +118,9 @@ class Breadcrumb extends Component
                 $this->links[] = ['href' => null, 'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
                 $this->links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
+            case 'print':
+                $this->links[] = ['href' => null, 'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                break;
             case 'showQRApp':
                 $slug = CurrentRoute::getEntitySlug($singular);
                 $modelPath = Str::modelPathFrom($singular);

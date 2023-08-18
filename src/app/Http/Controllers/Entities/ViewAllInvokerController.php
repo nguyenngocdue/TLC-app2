@@ -7,8 +7,11 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityExportCSV;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityShowQRList6;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetOptionPrint;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
+use App\Utils\ClassList;
 use App\Utils\Excel\Excel;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
@@ -21,6 +24,7 @@ class ViewAllInvokerController extends Controller
     use TraitEntityDynamicType;
     use TraitViewAllFunctions;
     use TraitEntityFormula;
+    use TraitGetOptionPrint;
 
     protected $type = "";
     protected $typeModel = '';
@@ -118,5 +122,22 @@ class ViewAllInvokerController extends Controller
     {
         $props =  SuperProps::getFor($this->type)['props'];
         return array_map(fn ($item) => $item['duplicatable'], $props);
+    }
+    public function print(Request $request){
+        $dataSource = $request->except(['_token', '_method', '_entity', 'action', 'per_page']);
+        $typePlural =Str::plural($this->type);
+		$valueOptionPrint = $this->getValueOptionPrint();
+		$params =  [
+			'type' => $this->type,
+			'typePlural' => $typePlural,
+			'dataSource' => $dataSource,
+			'classListOptionPrint' => ClassList::DROPDOWN,
+			'valueOptionPrint' => $valueOptionPrint,
+			'layout' => $this->getLayoutPrint($valueOptionPrint),
+			'modelPath' => $this->typeModel,
+			'trashed' => false,
+			'topTitle' => CurrentRoute::getTitleOf($this->type),
+		];
+		return view('dashboards.pages.entity-show-matrix-print', $params);
     }
 }

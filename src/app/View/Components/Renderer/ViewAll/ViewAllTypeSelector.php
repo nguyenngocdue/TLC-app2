@@ -52,6 +52,14 @@ class ViewAllTypeSelector extends Component
                 ]
             ];
         };
+        if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixPrint())) {
+            $tabs['print'] = [
+                    'href' => "?view_type=matrix_print&action=updateViewAllMode&_entity=$tableName",
+                    'title' => "Print Matrix View",
+                    'icon' => 'fa-duotone fa-table',
+                    'active' =>  $this->viewType == 'matrix-print-view',
+            ];
+        };
         return $tabs;
     }
 
