@@ -43,7 +43,6 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'total_hours', 'footer' => 'agg_sum'],
             ['dataIndex' => 'worker_number', 'cloneable' => true, 'footer' => 'agg_avg'],
             ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum'],
-            // ['dataIndex' => 'owner_id',],
         ];
     }
 }
