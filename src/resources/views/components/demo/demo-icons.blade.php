@@ -6,3 +6,30 @@
     </x-renderer.card>
    
 </div>
+
+<script>
+
+async function setClipboardValue(text) {
+    try {
+        await navigator.clipboard.writeText(text);
+        console.log('Text set to clipboard');
+    } catch (error) {
+        console.error('Failed to set clipboard text: ', error);
+    }
+}
+
+// Usage
+// const textToSet = 'This is the text to set in the clipboard.';
+// setClipboardValue(textToSet);
+
+function insertSubstring(originalString, substring, position) {
+  if (position < 0 || position > originalString.length) {
+    return originalString; // Invalid position, return the original string
+  }
+
+  const part1 = originalString.substring(0, position);
+  const part2 = originalString.substring(position);
+
+  return part1 + substring + part2;
+}
+</script>
