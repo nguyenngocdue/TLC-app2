@@ -72,21 +72,33 @@ class Table extends Component
     $hasPaging = (is_object($dataSource) && method_exists($dataSource, 'links') && !empty($dataSource));
     $tr_td = $this->makeTrTd($columns, $dataSource, $this->tableDebug, $this->tableName);
 
+    $headerRendered = $this->makeTable2ndThead($columns, $this->dataHeader);
+    $footerRendered = $this->makeFooter($columns, $this->tableName, $dataSource);
+
+    $columnsRendered =  $this->getColumnRendered($columns, $this->timeElapse, $this->tableName);
+    $showing = ($hasPaging && !$this->editable) ? $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing') : "";
+    $pagination = $hasPaging ? $dataSource->links('dashboards.pagination.pagination') : "";
+
+    $colgroup = $this->makeColGroup($columns);
+    $tableWidth = $this->tableTrueWidth ? $this->getTableWidth($columns) : "";
+
+    // return "TABLE";
+
     return view("components.renderer.table", [
       'tableName' => $this->tableName,
       'columns' => $columns,
       'dataSource' => $dataSource,
-      'headerRendered' => $this->makeTable2ndThead($columns, $this->dataHeader),
-      'footerRendered' => $this->makeFooter($columns, $this->tableName, $dataSource),
+      'headerRendered' => $headerRendered,
+      'footerRendered' => $footerRendered,
       'headerTop' => $this->headerTop,
-      'columnsRendered' => $this->getColumnRendered($columns, $this->timeElapse, $this->tableName),
+      'columnsRendered' => $columnsRendered,
       'tr_td' => $tr_td,
-      'showing' => ($hasPaging && !$this->editable) ? $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing') : "",
-      'pagination' => $hasPaging ? $dataSource->links('dashboards.pagination.pagination') : "",
+      'showing' => $showing,
+      'pagination' => $pagination,
       'header' => $this->header,
       'footer' => $this->footer,
-      'colgroup' => $this->makeColGroup($columns),
-      'tableWidth' => $this->tableTrueWidth ? $this->getTableWidth($columns) : "",
+      'colgroup' => $colgroup,
+      'tableWidth' => $tableWidth,
       'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
       // 'minH' => $this->minH ? "min-h-[{$this->minH}rem]" : "",
       'tableDebug' => $this->tableDebug,

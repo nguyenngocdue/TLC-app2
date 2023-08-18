@@ -33,12 +33,20 @@ class UpdatedSequenceBaseListener
             $instance = $modelPath::findFromCache($id);
             $parentInstance = $instance->getProdOrder;
             $listInstanceChildren = $parentInstance->getProdSequences;
+            $totalHours = $listInstanceChildren->pluck('total_hours')->sum();
+            $totalManHours = $listInstanceChildren->pluck('total_man_hours')->sum();
             $startedAtMin = $listInstanceChildren->pluck('start_date')->min();
             $finishedMax = $listInstanceChildren->pluck('end_date')->max();
+            $isFinished = $listInstanceChildren->pluck('status')->every(function($value){
+                return in_array($value,['finished','no','canceled']);
+            });
             $dataUpdated = [
                 'started_at' => $startedAtMin,
                 'finished_at' => $finishedMax,
+                'total_hours' => $totalHours,
+                'total_man_hours' => $totalManHours,
             ];
+            if($isFinished) $dataUpdated['status'] = 'finished';
             $parentInstance->update($dataUpdated);
             Toastr::success("The Event Updated Time Successfully!", 'Event Update Successfully');
         } catch (\Throwable $th) {

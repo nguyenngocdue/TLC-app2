@@ -127,6 +127,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     public static $oracyParams = [
         "getOtTeams()" => ["getCheckedByField", User_team_ot::class],
         "getTshtTeams()" => ["getCheckedByField", User_team_tsht::class],
+        "getSiteTeams()" => ["getCheckedByField", User_team_site::class],
     ];
 
     public function getOtTeams()
@@ -136,6 +137,12 @@ class User extends Authenticatable implements LdapAuthenticatable
     }
 
     public function getTshtTeams()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getSiteTeams()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

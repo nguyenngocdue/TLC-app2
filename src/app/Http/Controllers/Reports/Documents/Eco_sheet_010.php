@@ -49,7 +49,7 @@ class Eco_sheet_010 extends Controller
 
     // DataSource
 
-    private function getArraySqlStrs($modeParams)
+    private function getArraySqlStr($modeParams)
     {
         $arraySqlStrs = $this->createArraySqlFromSqlStr($modeParams);
         $array = [];
@@ -71,7 +71,7 @@ class Eco_sheet_010 extends Controller
     public function getDataSource($modeParams)
     {
         $data = [];
-        foreach ($this->getArraySqlStrs($modeParams) as $k => $sql) {
+        foreach ($this->getArraySqlStr($modeParams) as $k => $sql) {
             if (is_null($sql) || !$sql) return collect();
             $sqlData = DB::select(DB::raw($sql));
             $collection = collect($sqlData);

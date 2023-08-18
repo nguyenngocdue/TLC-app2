@@ -16,7 +16,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_getAvatar": {
         "name": "_getAvatar",
@@ -35,7 +37,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_email": {
         "name": "_email",
@@ -54,7 +58,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_gender": {
         "name": "_gender",
@@ -73,7 +79,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_name": {
         "name": "_name",
@@ -92,7 +100,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_full_name": {
         "name": "_full_name",
@@ -111,7 +121,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_name_suffix": {
         "name": "_name_suffix",
@@ -130,7 +142,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_employeeid": {
         "name": "_employeeid",
@@ -149,7 +163,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_first_name": {
         "name": "_first_name",
@@ -168,7 +184,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_last_name": {
         "name": "_last_name",
@@ -187,7 +205,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_address": {
         "name": "_address",
@@ -206,7 +226,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_company": {
         "name": "_company",
@@ -225,7 +247,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_phone": {
         "name": "_phone",
@@ -244,7 +268,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_featured_image": {
         "name": "_featured_image",
@@ -263,7 +289,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_time_keeping_type": {
         "name": "_time_keeping_type",
@@ -282,7 +310,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_user_type": {
         "name": "_user_type",
@@ -301,7 +331,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_workplace": {
         "name": "_workplace",
@@ -320,7 +352,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_category": {
         "name": "_category",
@@ -339,7 +373,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_date_of_birth": {
         "name": "_date_of_birth",
@@ -358,7 +394,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_title": {
         "name": "_title",
@@ -377,7 +415,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_first_date": {
         "name": "_first_date",
@@ -396,7 +436,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_last_date": {
         "name": "_last_date",
@@ -415,7 +457,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_position_prefix": {
         "name": "_position_prefix",
@@ -434,7 +478,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_position_1": {
         "name": "_position_1",
@@ -453,7 +499,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_position_2": {
         "name": "_position_2",
@@ -472,7 +520,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_position_3": {
         "name": "_position_3",
@@ -491,7 +541,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_position_rendered": {
         "name": "_position_rendered",
@@ -510,7 +562,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_discipline": {
         "name": "_discipline",
@@ -529,7 +583,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_department": {
         "name": "_department",
@@ -548,7 +604,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_show_on_beta": {
         "name": "_show_on_beta",
@@ -567,7 +625,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_resigned": {
         "name": "_resigned",
@@ -586,7 +646,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_viewport_uids": {
         "name": "_viewport_uids",
@@ -605,7 +667,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_leaf_uids": {
         "name": "_leaf_uids",
@@ -624,7 +688,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_user_id_passport": {
         "name": "_user_id_passport",
@@ -643,7 +709,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_password": {
         "name": "_password",
@@ -662,7 +730,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_user_pin": {
         "name": "_user_pin",
@@ -681,7 +751,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_email_verified_at": {
         "name": "_email_verified_at",
@@ -700,7 +772,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_getRoleSet": {
         "name": "_getRoleSet",
@@ -719,7 +793,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_provider": {
         "name": "_provider",
@@ -738,7 +814,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_time_zone": {
         "name": "_time_zone",
@@ -757,7 +835,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_settings": {
         "name": "_settings",
@@ -776,7 +856,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_remember_token": {
         "name": "_remember_token",
@@ -795,7 +877,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_guid": {
         "name": "_guid",
@@ -814,7 +898,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_domain": {
         "name": "_domain",
@@ -833,7 +919,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_getPosts": {
         "name": "_getPosts",
@@ -852,7 +940,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_attachment": {
         "name": "_attachment",
@@ -871,7 +961,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_getTshtTeams()": {
         "name": "_getTshtTeams()",
@@ -890,7 +982,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_getOtTeams()": {
         "name": "_getOtTeams()",
@@ -909,7 +1003,30 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_getSiteTeams()": {
+        "name": "_getSiteTeams()",
+        "column_name": "getSiteTeams()",
+        "column_type": "oracy_prop",
+        "label": "Site Teams",
+        "control": "dropdown_multi",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -928,7 +1045,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -947,7 +1066,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -966,7 +1087,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -985,7 +1108,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -1004,6 +1129,8 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     }
 }

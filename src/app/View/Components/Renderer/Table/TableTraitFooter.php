@@ -6,34 +6,47 @@ use App\Utils\Constant;
 use App\Utils\Support\DateTimeConcern;
 use App\View\Components\Controls\RelationshipRenderer2;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 trait TableTraitFooter
 {
+    private $aggList = [
+        'agg_none',
+        'agg_count_all',
+        'agg_sum',
+        'agg_avg',
+        'agg_median',
+        'agg_min',
+        'agg_max',
+        'agg_range',
+
+        // 'agg_count_values',
+        // 'agg_count_unique_values',
+        // 'agg_count_empty',
+        // 'agg_count_not_empty',
+        // 'agg_percent_empty',
+        // 'agg_percent_not_empty',
+    ];
+
     function makeOneFooter($column, $tableName, $dataSource)
     {
+        if (!$dataSource) return;
         $debug = !true;
         $tz = DateTimeConcern::getTz();
-        $aggList = [
-            'agg_none',
-            'agg_count_all',
-            'agg_sum',
-            'agg_avg',
-            'agg_median',
-            'agg_min',
-            'agg_max',
-            'agg_range',
 
-            // 'agg_count_values',
-            // 'agg_count_unique_values',
-            // 'agg_count_empty',
-            // 'agg_count_not_empty',
-            // 'agg_percent_empty',
-            // 'agg_percent_not_empty',
-        ];
         $fieldName = $column['dataIndex'];
         $control = $column['properties']['control'] ?? "";
 
-        $items = $dataSource->map(fn ($item) => is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName]);
+        // $items = $dataSource->map(fn ($item) => is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName]);
+        $items = $dataSource->map(function ($item) use ($fieldName) {
+            if (is_object($item)) {
+                return is_object($item->$fieldName) ? $item->$fieldName->value : $item->$fieldName;
+            }
+            if (is_array($item)) {
+                return is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName];
+            }
+            return "-111111";
+        });
 
         $result['agg_none'] = '';
         $result['agg_count_all'] = $items->count();
@@ -59,12 +72,16 @@ trait TableTraitFooter
         }
 
         // dump($items);
-        $result['agg_sum'] = $items->sum();
-        $result['agg_avg'] = $items->avg();
-        $result['agg_median'] = $items->median();
-        $result['agg_min'] = $items->min();
-        $result['agg_max'] = $items->max();
-        $result['agg_range'] = $result['agg_max'] - $result['agg_min'];
+        try {
+            $result['agg_sum'] = $items->sum();
+            $result['agg_avg'] = $items->avg();
+            $result['agg_median'] = $items->median();
+            $result['agg_min'] = $items->min();
+            $result['agg_max'] = $items->max();
+            $result['agg_range'] = $result['agg_max'] - $result['agg_min'];
+        } catch (\Exception $e) {
+            Log::info("Table [" . $tableName . "] " . "field [" . $fieldName . "] " . $e->getMessage());
+        }
 
         if (in_array($control, ['picker_date', 'picker_datetime', 'picker_time'])) {
             $timestampSum = $result['agg_sum'];
@@ -102,7 +119,7 @@ trait TableTraitFooter
         $inputs = [];
         $footer = $column['footer'];
         // echo $footer;
-        foreach ($aggList as $agg) {
+        foreach ($this->aggList as $agg) {
             $bg = ($footer == $agg) ? "text-blue-700" : ($debug ? "" : "hidden");
             $id = "{$tableName}[footer][{$fieldName}][$agg]";
             // $value = ($agg != 'agg_none') ? round($result[$agg], 2)  : "";
@@ -123,7 +140,11 @@ trait TableTraitFooter
             if (isset($column['invisible']) && $column['invisible']) continue;
             if (isset($column['footer'])) {
                 $hasFooter = true;
-                $result0[$column['dataIndex']] = $this->makeOneFooter($column, $eloquentTable, $dataSource);
+                if (in_array($column['footer'], $this->aggList)) {
+                    $result0[$column['dataIndex']] = $this->makeOneFooter($column, $eloquentTable, $dataSource);
+                } else {
+                    $result0[$column['dataIndex']] = $column['footer'];
+                }
             } else {
                 if (isset($column['dataIndex'])) $result0[$column['dataIndex']] = "";
             }
