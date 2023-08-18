@@ -56,7 +56,7 @@ class ViewAllTypeSelector extends Component
             $tabs['print'] = [
                     'href' => "?view_type=matrix_print&action=updateViewAllMode&_entity=$tableName",
                     'title' => "Print Matrix View",
-                    'icon' => 'fa-duotone fa-table',
+                    'icon' => 'fa-duotone fa-print',
                     'active' =>  $this->viewType == 'matrix-print-view',
             ];
         };

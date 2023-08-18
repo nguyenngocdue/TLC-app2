@@ -66,131 +66,140 @@ trait TraitStoreEmpty
 
 	public function storeEmpty(Request $request)
 	{
-		$sp = SuperProps::getFor($this->type);
-		$props = $sp['props'];
-		$lines = $request->get('lines');
-		$validation = true;
-		switch ($this->type) {
-			case 'hr_timesheet_officer':
-				$validation = $this->tso_week_validate($lines);
-				break;
-			default:
-				break;
-		}
-
-		if ($validation === false) return ResponseObject::responseFail("Validation failed");
-		if (is_null($lines)) return ResponseObject::responseFail("Lines is null.");
-
-		$sp = SuperProps::getFor($this->type);
-		// $props = $sp['props'];
-		$dateTimeControls = $sp['datetime_controls'];
-		// Log::info($dateTimeControls);
-		$numberControls = $sp['number_controls'];
-		// Log::info($numberControls);
-
-		$theRows = [];
-		$defaultValue = $this->getDefaultValue($props);
-		foreach ($lines as $item) {
-			// Log::info($defaultValue);
-			foreach ($defaultValue as $key => $value) {
-				// Log::info($item[$key] . " " . $key . " " . $value);
-				// Order_no get override when without $value !== false
-				// if (isset($item[$key]) && $item[$key] !== false && $value !== false) $item[$key]  = $value;
-				//Default of ot_date = "0", break_time = 0 will be filtered out with $value !== false
-				// if (isset($item[$key]) && $item[$key] !== false) $item[$key]  = $value;
-				//<<Only if default values IS NOT FALSE: parent_id, order_no
-				if ($value !== false) {
-					$item[$key] = $value;
-				}
+		try {
+			$sp = SuperProps::getFor($this->type);
+			$props = $sp['props'];
+			$lines = $request->get('lines');
+			$validation = true;
+			switch ($this->type) {
+				case 'hr_timesheet_officer':
+					$validation = $this->tso_week_validate($lines);
+					break;
+				default:
+					break;
 			}
-			// Log::info($item);
-			foreach ($dateTimeControls as $control => $controlType) {
-				// $control = substr($control, 1); // Removed first _
-				if (isset($item[$control])) {
-					if ($item[$control] == "0") {
-						switch ($controlType) {
-							case "picker_date":
-								$item[$control] = date(Constant::FORMAT_DATE_MYSQL);
-								break;
-								// case "picker_time":
-								// $currentTime = date(Constant::FORMAT_TIME_MYSQL);
-								// $item[$control] = DateTimeConcern::formatForSaving($currentTime, Constant::FORMAT_TIME_MYSQL, Constant::FORMAT_TIME_MYSQL);
-								// break;
-							default:
-								dump("Unknown how to convert $controlType 777888");
-								break;
+
+			if ($validation === false) return ResponseObject::responseFail("Validation failed");
+			if (is_null($lines)) return ResponseObject::responseFail("Lines is null.");
+
+			$sp = SuperProps::getFor($this->type);
+			// $props = $sp['props'];
+			$dateTimeControls = $sp['datetime_controls'];
+			// Log::info($dateTimeControls);
+			$numberControls = $sp['number_controls'];
+			// Log::info($numberControls);
+
+			$theRows = [];
+			$defaultValue = $this->getDefaultValue($props);
+			foreach ($lines as $item) {
+				// Log::info($defaultValue);
+				foreach ($defaultValue as $key => $value) {
+					// Log::info($item[$key] . " " . $key . " " . $value);
+					// Order_no get override when without $value !== false
+					// if (isset($item[$key]) && $item[$key] !== false && $value !== false) $item[$key]  = $value;
+					//Default of ot_date = "0", break_time = 0 will be filtered out with $value !== false
+					// if (isset($item[$key]) && $item[$key] !== false) $item[$key]  = $value;
+					//<<Only if default values IS NOT FALSE: parent_id, order_no
+					if ($value !== false) {
+						$item[$key] = $value;
+					}
+				}
+				// Log::info($item);
+				foreach ($dateTimeControls as $control => $controlType) {
+					// $control = substr($control, 1); // Removed first _
+					if (isset($item[$control])) {
+						if ($item[$control] == "0") {
+							switch ($controlType) {
+								case "picker_date":
+									$item[$control] = date(Constant::FORMAT_DATE_MYSQL);
+									break;
+									// case "picker_time":
+									// $currentTime = date(Constant::FORMAT_TIME_MYSQL);
+									// $item[$control] = DateTimeConcern::formatForSaving($currentTime, Constant::FORMAT_TIME_MYSQL, Constant::FORMAT_TIME_MYSQL);
+									// break;
+								default:
+									dump("Unknown how to convert $controlType 777888");
+									break;
+							}
 						}
+						$item[$control] = DateTimeConcern::convertForSaving($controlType, $item[$control]);
 					}
-					$item[$control] = DateTimeConcern::convertForSaving($controlType, $item[$control]);
 				}
+				foreach ($numberControls as $control => $controlType) {
+					if (isset($item[$control])) {
+						$item[$control] = Str::replace(',', '', $item[$control]);
+					}
+				}
+				$item = $this->applyFormula($item, 'store');
+				// Log::info($item);
+
+				$createdItem = $this->modelPath::create($item);
+
+				$this->insertOracy($item, $createdItem, $sp);
+				// Log::info("Store empty");
+				// Log::info($createdItem);
+
+				$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
+				$tableName = Str::plural($this->type);
+				$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
+				$theRows[] = $createdItem;
 			}
-			foreach ($numberControls as $control => $controlType) {
-				if (isset($item[$control])) {
-					$item[$control] = Str::replace(',', '', $item[$control]);
-				}
+
+			$totalInsertedRows = 0;
+			switch ($this->type) {
+				case 'hr_timesheet_worker':
+					foreach ($theRows as $row) {
+						$team = User_team_tsht::find($row->team_id);
+						$workers = $team->getTshtMembers();
+						foreach ($workers as $worker) {
+							Hr_timesheet_line::create([
+								'timesheetable_type' => Hr_timesheet_worker::class,
+								'timesheetable_id' => $row->id,
+								'owner_id' => $row->owner_id,
+								'user_id' => $worker->id,
+								'discipline_id' => $worker->discipline,
+								'task_id' => 357, //357 = on the floor
+								'work_mode_id' => 2, //2 = office/workshop
+								'duration' => 480, //480 = 8 * 60
+							]);
+						}
+						$totalInsertedRows  += count($workers);
+					}
+					break;
+				case "site_daily_assignment":
+					foreach ($theRows as $row) {
+						$team = User_team_site::find($row->site_team_id);
+						$workers = $team->getSiteMembers();
+						foreach ($workers as $worker) {
+							Site_daily_assignment_line::create([
+								'owner_id' => $row->owner_id,
+								'user_id' => $worker->id,
+							]);
+						}
+						$totalInsertedRows  += count($workers);
+					}
+					break;
+				default:
+					break;
 			}
-			$item = $this->applyFormula($item, 'store');
-			// Log::info($item);
 
-			$createdItem = $this->modelPath::create($item);
+			$meta = $request->input('meta');
+			$caller = $meta['caller'] ?? "";
+			$line_or_doc = (in_array($caller, ['view-all-matrix', 'view-all-calendar'])) ? "document" : "line";
+			$message = "Created " . sizeof($theRows) . " " . Str::plural($line_or_doc, sizeof($theRows)) . ".";
 
-			$this->insertOracy($item, $createdItem, $sp);
-			// Log::info("Store empty");
-			// Log::info($createdItem);
-
-			$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
-			$tableName = Str::plural($this->type);
-			$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
-			$theRows[] = $createdItem;
+			return ResponseObject::responseSuccess(
+				$theRows,
+				['defaultValue' => $defaultValue, 'requestedLines' => $lines],
+				$message,
+			);
+		} catch (\Throwable $th) {
+			$message = $th->getMessage();
+			if(str_contains($message,'Integrity constraint violation: 1062 Duplicate entry')) $message = "Duplicate entry";
+			return ResponseObject::responseFail(
+				$message,
+			);
 		}
-
-		$totalInsertedRows = 0;
-		switch ($this->type) {
-			case 'hr_timesheet_worker':
-				foreach ($theRows as $row) {
-					$team = User_team_tsht::find($row->team_id);
-					$workers = $team->getTshtMembers();
-					foreach ($workers as $worker) {
-						Hr_timesheet_line::create([
-							'timesheetable_type' => Hr_timesheet_worker::class,
-							'timesheetable_id' => $row->id,
-							'owner_id' => $row->owner_id,
-							'user_id' => $worker->id,
-							'discipline_id' => $worker->discipline,
-							'task_id' => 357, //357 = on the floor
-							'work_mode_id' => 2, //2 = office/workshop
-							'duration' => 480, //480 = 8 * 60
-						]);
-					}
-					$totalInsertedRows  += count($workers);
-				}
-				break;
-			case "site_daily_assignment":
-				foreach ($theRows as $row) {
-					$team = User_team_site::find($row->site_team_id);
-					$workers = $team->getSiteMembers();
-					foreach ($workers as $worker) {
-						Site_daily_assignment_line::create([
-							'owner_id' => $row->owner_id,
-							'user_id' => $worker->id,
-						]);
-					}
-					$totalInsertedRows  += count($workers);
-				}
-				break;
-			default:
-				break;
-		}
-
-		$meta = $request->input('meta');
-		$caller = $meta['caller'] ?? "";
-		$line_or_doc = (in_array($caller, ['view-all-matrix', 'view-all-calendar'])) ? "document" : "line";
-		$message = "Created " . sizeof($theRows) . " " . Str::plural($line_or_doc, sizeof($theRows)) . ".";
-
-		return ResponseObject::responseSuccess(
-			$theRows,
-			['defaultValue' => $defaultValue, 'requestedLines' => $lines],
-			$message,
-		);
+		
 	}
 }
