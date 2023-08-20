@@ -57,16 +57,28 @@ trait TraitDataSourceReport
     public function getDataSource2($modeParams)
     {
         $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
-        $data = [];
-        foreach ($arraySqlStr as $k => $sql) {
-            if (is_null($sql) || !$sql) return collect();
-            $sqlData = DB::select(DB::raw($sql));
-            $collection = collect($sqlData);
-            $data[$k] = $collection;
+        
+        if (!empty($arraySqlStr)) {
+            $data = [];
+            foreach ($arraySqlStr as $k => $sql) {
+                if (is_null($sql) || !$sql) return collect();
+                $sqlData = DB::select(DB::raw($sql));
+                $collection = collect($sqlData);
+                $data[$k] = $collection;
+            }
+            $dataSource = $this->prepareDataRender($modeParams, $data);
+            return $dataSource;
         }
-        $dataSource = $this->prepareDataRender($modeParams, $data);
+    
+        $sql = $this->getSql($modeParams);
+        if (is_null($sql) || !$sql) {
+            return collect(); // Return an empty collection
+        }
+        $sqlData = DB::select(DB::raw($sql));
+        $dataSource = collect($sqlData);
         return $dataSource;
     }
+    
 
     public function getBasicInfoData($modeParams)
     {
