@@ -12,18 +12,20 @@ use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 abstract class Report_ParentController extends Controller
 {
+    // Traits
     use TraitMenuTitle;
     use TraitModeParamsReport;
     use TraitFunctionsReport;
     use TraitDataSourceReport;
+
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($modeParams, $dataSource);
 
+    // Properties
     protected $rotate45Width = false;
     protected $groupBy = false;
     protected $mode = '010';
@@ -56,7 +58,8 @@ abstract class Report_ParentController extends Controller
     private function paginateDataSource($dataSource, $pageLimit)
     {
         $page = $_GET['page'] ?? 1;
-        $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))->appends(request()->query());
+        $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))
+            ->appends(request()->query());
         return $dataSource;
     }
 
@@ -104,7 +107,6 @@ abstract class Report_ParentController extends Controller
         return $titleReport;
     }
 
-
     public function makeTitleForTables($modeParams)
     {
         return [];
@@ -126,8 +128,8 @@ abstract class Report_ParentController extends Controller
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $titleReport = $this->makeTitleReport($routeName);
         $topTitle = $this->getMenuTitle();
+        $dataSource = $this->getDataSource2($modeParams);
         if (!str_contains($routeName, 'document-')) {
-            $dataSource = $this->getDataSource($modeParams);
             $dataSource = $this->enrichDataSource($dataSource, $modeParams);
             $dataSource = $this->transformDataSource($dataSource, $modeParams);
             $dataSource = $this->changeValueData($dataSource, $modeParams);
@@ -140,46 +142,44 @@ abstract class Report_ParentController extends Controller
             echo $this->getJS();
 
             return view('reports.' . $viewName, [
-                'typeOfView' => $this->typeView,
-                'modeType' => $this->modeType,
-                'maxH' => $this->maxH,
                 'entity' => $entity,
+                'maxH' => $this->maxH,
                 'mode' => $this->mode,
+                'topTitle' => $topTitle,
                 'pageLimit' => $pageLimit,
                 'routeName' => $routeName,
-                'titleReport' => $titleReport,
                 'modeParams' => $modeParams,
+                'groupBy' => $this->groupBy,
                 'typeReport' => $typeReport,
+                'titleReport' => $titleReport,
+                'modeType' => $this->modeType,
                 'currentMode' =>  $this->mode,
+                'typeOfView' => $this->typeView,
                 'tableColumns' => $tableColumns,
                 'tableDataSource' => $dataSource,
                 'currentUserId' => $currentUserId,
-                'groupBy' => $this->groupBy,
-                // 'modeOptions' => $this->$entity(),
                 'tableDataHeader' => $tableDataHeader,
                 'rotate45Width' => $this->rotate45Width,
                 'groupByLength' => $this->groupByLength,
-                'topTitle' => $topTitle,
                 'paramColumns' => $this->getParamColumns(),
                 'legendColors' => $this->getColorLegends(),
                 'tableTrueWidth' => $this->tableTrueWidth,
             ]);
         }
         $basicInfoData =  $this->getBasicInfoData($modeParams);
-        $dataSource = $this->getDataSource2($modeParams);
 
-        // dd($tableColumns);
-        return view('reports.'. $this->viewName, [
+        //render for document reports
+        return view('reports.' . $this->viewName, [
             'paramColumns' => $this->getParamColumns(),
             'entity' => $entity,
             'routeName' => $routeName,
-            'titleReport' => $titleReport,
-            'typeReport' => $typeReport,
-            'topTitle' => $this->getMenuTitle(),
-            'modeParams' => $modeParams,
-            'currentMode' =>  $this->mode,
-            'groupByLength' => $this->groupByLength,
             'groupBy' => $this->groupBy,
+            'modeParams' => $modeParams,
+            'typeReport' => $typeReport,
+            'currentMode' =>  $this->mode,
+            'titleReport' => $titleReport,
+            'groupByLength' => $this->groupByLength,
+            'topTitle' => $this->getMenuTitle(),
 
             'basicInfoData' => $basicInfoData,
             'tableDataSource' => $dataSource,
