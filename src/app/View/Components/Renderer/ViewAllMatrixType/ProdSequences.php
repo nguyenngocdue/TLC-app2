@@ -71,7 +71,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return [$project, $subProject, $prodRouting, $prodDiscipline];
     }
 
-    protected function getYAxis()
+    public function getYAxis()
     {
         $yAxis = $this->yAxis::query()
             ->where('sub_project_id', $this->subProject)
@@ -85,15 +85,19 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         return ["start_date", "end_date", "man_power", "uom", "total_uom", "total_mins", "min_per_uom"];
     }
+    public function getXAxisPrevious(){
+        $data = Prod_routing::find($this->prodRouting)
+        ->getProdRoutingLinks();
+        if ($this->prodDiscipline) $data = $data->where('prod_discipline_id', $this->prodDiscipline);
+        $data = $data->orderBy('order_no')
+            ->get();
+        return $data;
+    }
 
     protected function getXAxis()
     {
         $result = [];
-        $data = Prod_routing::find($this->prodRouting)
-            ->getProdRoutingLinks();
-        if ($this->prodDiscipline) $data = $data->where('prod_discipline_id', $this->prodDiscipline);
-        $data = $data->orderBy('order_no')
-            ->get();
+        $data = $this->getXAxisPrevious();
         // dump($data[0]);
         $extraColumns = $this->getXAxisExtraColumns();
         foreach ($data as $line) {
@@ -123,14 +127,13 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return $result;
     }
 
-    protected function getMatrixDataSource($xAxis)
+    public function getMatrixDataSource($xAxis)
     {
         $lines = Prod_sequence::query()
             ->where('sub_project_id', $this->subProject)
             ->where('prod_routing_id', $this->prodRouting);
         if ($this->prodDiscipline) $lines = $lines->where('prod_discipline_id', $this->prodDiscipline);
         // ->with('getUomId')
-        // dump($lines);
         return $lines->get();
     }
 
@@ -199,7 +202,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
 
     function cellRenderer($cell, $dataIndex, $forExcel = false)
     {
-        if ($dataIndex === 'status') return parent::cellRenderer($cell, $dataIndex, $forExcel);
+        if (in_array($dataIndex,['status','detail'])) return parent::cellRenderer($cell, $dataIndex, $forExcel);
+        if ($dataIndex === 'checkbox') return parent::cellRenderer($cell, $dataIndex, $forExcel);
         $doc = $cell[0];
         switch ($dataIndex) {
             case "total_uom":

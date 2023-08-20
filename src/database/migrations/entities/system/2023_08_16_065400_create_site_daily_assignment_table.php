@@ -27,6 +27,8 @@ return new class extends Migration
             // $table->double("total")->nullable();
             $table->unsignedBigInteger('site_team_id')->nullable();
             $table->appendCommonFields();
+
+            $table->unique(['site_team_id', 'site_date']);
         });
     }
 

@@ -18,6 +18,7 @@ class ActionButtonGroupViewMatrix extends Component
         private $modelPath = null,
         private $groupBy = false,
         private $groupByLength = 1,
+        private $printButton = false
     ) {
         //
     }
@@ -33,10 +34,11 @@ class ActionButtonGroupViewMatrix extends Component
             'groupBy' => $this->groupBy,
             'groupByLength' => $this->groupByLength,
         ];
-        $route = route($this->type.'_mep.exportCSV2',$paramsRoute);
+        $routeExportCSV = route($this->type.'_mep.exportCSV2',$paramsRoute);
         return view('components.form.action-button-group-view-matrix', [
             'type' => $this->type,
-            'route' => $route,
+            'routeExportCSV' => $routeExportCSV,
+            'printButton' => $this->printButton,
         ]);
     }
 }

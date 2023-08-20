@@ -94,6 +94,7 @@ class ManageAppsController extends AbstractManageLibController
                     'qr-app-renderer',
                 ],
             ],
+            
             [
                 'dataIndex' => 'do_not_send_notification_mails',
                 'renderer' => 'checkbox',

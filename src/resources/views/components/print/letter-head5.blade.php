@@ -1,6 +1,6 @@
 <table class="border-none whitespace-nowrap w-full">
     @php
-        $urlCurrent = url()->current();
+        $urlCurrent = route($type.'.show',$id);
     @endphp
     <tbody>
         <tr>
