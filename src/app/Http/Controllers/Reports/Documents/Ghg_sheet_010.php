@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Http\Controllers\Reports\Report_ParentDocumentController;
+use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 
-class Ghg_sheet_010 extends Report_ParentDocumentController
+class Ghg_sheet_010 extends Report_ParentController
 {
 
 	use TraitForwardModeReport;
 	protected $viewName = 'document-ghg-summary-report';
+	protected $mode = '010';
 
 	private function getCurrentDateRange() {
 		$currentYearMonth = date("Y-m");

@@ -3,24 +3,20 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\Reports\Report_ParentDocumentController;
+use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
-use App\Http\Controllers\Workflow\LibReports;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
-use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class Prod_sequence_010 extends Report_ParentDocumentController
+class Prod_sequence_010 extends Report_ParentController
 {
 
     use TraitForwardModeReport;
@@ -114,7 +110,7 @@ class Prod_sequence_010 extends Report_ParentDocumentController
         return $manyModeParams;
     }
 
-    private function createArraySqlFromSqlStr($modeParams)
+    public function createArraySqlFromSqlStr($modeParams)
     {
         $sqlStr = [];
         $manyModeParams = $this->createManyParamsFromDates($modeParams);
@@ -183,6 +179,8 @@ class Prod_sequence_010 extends Report_ParentDocumentController
                 'dataIndex' => 'prod_routing_link_id',
                 'allowClear' => true,
                 'multiple' => true,
+                'hasListenTo' => true,
+
             ],
         ];
     }

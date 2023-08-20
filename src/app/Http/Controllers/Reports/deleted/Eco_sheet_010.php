@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Http\Controllers\Reports\Report_ParentDocumentController;
+use App\Http\Controllers\Reports\Report_ParentController;
 
-
-class Eco_sheet_010 extends Report_ParentDocumentController
+class Eco_sheet_010 extends Report_ParentController
 {
 
     protected $groupBy = 'ot_date';

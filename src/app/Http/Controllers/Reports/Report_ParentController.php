@@ -19,8 +19,8 @@ abstract class Report_ParentController extends Controller
 {
     use TraitMenuTitle;
     use TraitModeParamsReport;
-    use TraitDataModesReport;
     use TraitFunctionsReport;
+    use TraitDataSourceReport;
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($modeParams, $dataSource);
 
@@ -35,81 +35,22 @@ abstract class Report_ParentController extends Controller
     protected $modeType = '';
     protected $viewName = '';
 
-    public function getType()
-    {
-        return $this->getTable();
-        // return str_replace(' ', '_', strtolower($this->getMenuTitle()));
-    }
-
-    private function getSql($modeParams)
-    {
-        $sqlStr = $this->getSqlStr($modeParams);
-        preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
-        foreach (last($matches) as $key => $value) {
-            if (isset($modeParams[$value])) {
-                $valueParam =  $modeParams[$value];
-                $searchStr = head($matches)[$key];
-                $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
-            }
-        }
-        return $sqlStr;
-    }
-
-    public function getDataSource($modeParams)
-    {
-        $sql = $this->getSql($modeParams);
-        if (is_null($sql) || !$sql) return collect();
-        $sqlData = DB::select(DB::raw($sql));
-        $collection = collect($sqlData);
-        return $collection;
-    }
-
-    private function prepareDataRender($modeParams, $data)
-    {
-        $dataSource = [];
-        foreach ($data as $key => $values) {
-            $dataSource[$key]['tableDataSource'] = $values;
-            $dataSource[$key]['tableColumns'] = $this->getTableColumns($modeParams, $data)[$key];
-        }
-        return $dataSource;
-    }
-
-    public function getDataSource2($modeParams)
-    {
-        $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
-        $data = [];
-        foreach ($arraySqlStr as $k => $sql) {
-            if (is_null($sql) || !$sql) return collect();
-            $sqlData = DB::select(DB::raw($sql));
-            $collection = collect($sqlData);
-            $data[$k] = $collection;
-        }
-        $dataSource = $this->prepareDataRender($modeParams, $data);
-        return $dataSource;
-    }
-
-
-    protected function enrichDataSource($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
-
-    protected function transformDataSource($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
-
-    protected function changeValueData($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
-
     protected function getTable()
     {
         $tableName = CurrentRoute::getCurrentController();
         $tableName = substr($tableName, 0, strrpos($tableName, "_"));
         $tableName = strtolower(Str::plural($tableName));
         return $tableName;
+    }
+
+    public function getType()
+    {
+        return $this->getTable();
+    }
+
+    protected function changeValueData($dataSource, $modeParams)
+    {
+        return $dataSource;
     }
 
     private function paginateDataSource($dataSource, $pageLimit)
@@ -140,15 +81,6 @@ abstract class Report_ParentController extends Controller
         return [];
     }
 
-    protected function modeColumns()        // dd($dataModeControl);
-    {
-        return [
-            'title' => 'Mode',
-            'dataIndex' => 'mode_option',
-            'allowClear' => true
-        ];
-    }
-
     protected function forwardToMode($request, $modeParams)
     {
         $input = $request->input();
@@ -172,10 +104,6 @@ abstract class Report_ParentController extends Controller
         return $titleReport;
     }
 
-    public function getBasicInfoData($modeParams)
-    {
-        return [];
-    }
 
     public function makeTitleForTables($modeParams)
     {
@@ -232,7 +160,6 @@ abstract class Report_ParentController extends Controller
                 'rotate45Width' => $this->rotate45Width,
                 'groupByLength' => $this->groupByLength,
                 'topTitle' => $topTitle,
-                'modeColumns' => $this->modeColumns(),
                 'paramColumns' => $this->getParamColumns(),
                 'legendColors' => $this->getColorLegends(),
                 'tableTrueWidth' => $this->tableTrueWidth,

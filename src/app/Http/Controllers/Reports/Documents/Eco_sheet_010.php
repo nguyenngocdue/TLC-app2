@@ -3,26 +3,21 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\Reports\Report_ParentDocumentController;
+use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
-use App\Http\Controllers\Workflow\LibReports;
 use App\Models\Project;
-use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentRoute;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
-class Eco_sheet_010 extends Report_ParentDocumentController
+class Eco_sheet_010 extends Report_ParentController
 {
 
     use TraitForwardModeReport;
     use TraitMenuTitle;
     use TraitModeParamsReport;
-    use Eco_sheet_dataSource;
+    use Eco_sheet_100;
 
     protected $mode = '010';
     protected $viewName = 'document-eco-sheet';

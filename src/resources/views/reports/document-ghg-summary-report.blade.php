@@ -2,7 +2,7 @@
 
 @section('topTitle', $topTitle)
 @section('title', $titleReport)
-@section('tooltip', Str::ucfirst($typeReport)." ".$mode)
+@section('tooltip', Str::ucfirst($typeReport)." ".$currentMode)
 @section('content')
 
 {{-- <div class="px-4">
