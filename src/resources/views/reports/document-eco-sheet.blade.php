@@ -2,7 +2,7 @@
 
 @section('topTitle', $topTitle)
 @section('title', $titleReport)
-@section('tooltip', Str::ucfirst($typeReport)." ".$mode)
+@section('tooltip', Str::ucfirst($typeReport)." ".$currentMode)
 @section('content')
 
 <div class="px-4">
@@ -37,10 +37,8 @@
                     </div>
                 </div>
             </div>
-
-
             {{-- RENDER TABLES --}}
-            @foreach($dataSource as $key => $data)
+            @foreach($tableDataSource as $key => $data)
             @php
             $tableColumns = $data['tableColumns'];
             $tableDataSource = $data['tableDataSource'];

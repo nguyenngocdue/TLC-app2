@@ -64,6 +64,31 @@ abstract class Report_ParentController extends Controller
         return $collection;
     }
 
+    private function prepareDataRender($modeParams, $data)
+    {
+        $dataSource = [];
+        foreach ($data as $key => $values) {
+            $dataSource[$key]['tableDataSource'] = $values;
+            $dataSource[$key]['tableColumns'] = $this->getTableColumns($modeParams, $data)[$key];
+        }
+        return $dataSource;
+    }
+
+    public function getDataSource2($modeParams)
+    {
+        $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
+        $data = [];
+        foreach ($arraySqlStr as $k => $sql) {
+            if (is_null($sql) || !$sql) return collect();
+            $sqlData = DB::select(DB::raw($sql));
+            $collection = collect($sqlData);
+            $data[$k] = $collection;
+        }
+        $dataSource = $this->prepareDataRender($modeParams, $data);
+        return $dataSource;
+    }
+
+
     protected function enrichDataSource($dataSource, $modeParams)
     {
         return $dataSource;
@@ -147,6 +172,16 @@ abstract class Report_ParentController extends Controller
         return $titleReport;
     }
 
+    public function getBasicInfoData($modeParams)
+    {
+        return [];
+    }
+
+    public function makeTitleForTables($modeParams)
+    {
+        return [];
+    }
+
     public function index(Request $request)
     {
         $input = $request->input();
@@ -160,47 +195,68 @@ abstract class Report_ParentController extends Controller
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $modeParams);
         }
-        $dataSource = $this->getDataSource($modeParams);
-        $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        $dataSource = $this->transformDataSource($dataSource, $modeParams);
-        $dataSource = $this->changeValueData($dataSource, $modeParams);
         $pageLimit = $this->getPageParam($typeReport, $entity);
-        $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-
-        $viewName =  CurrentPathInfo::getViewName($request);
-        if ($this->viewName) $viewName = $this->viewName;
-        $tableColumns = $this->getTableColumns($dataSource, $modeParams);
-        $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
-        echo $this->getJS();
         $titleReport = $this->makeTitleReport($routeName);
         $topTitle = $this->getMenuTitle();
+        if (!str_contains($routeName, 'document-')) {
+            $dataSource = $this->getDataSource($modeParams);
+            $dataSource = $this->enrichDataSource($dataSource, $modeParams);
+            $dataSource = $this->transformDataSource($dataSource, $modeParams);
+            $dataSource = $this->changeValueData($dataSource, $modeParams);
+            $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
 
-        dd($dataSource);
-        return view('reports.' . $viewName, [
-            'typeOfView' => $this->typeView,
-            'modeType' => $this->modeType,
-            'maxH' => $this->maxH,
+            $viewName =  CurrentPathInfo::getViewName($request);
+            if ($this->viewName) $viewName = $this->viewName;
+            $tableColumns = $this->getTableColumns($dataSource, $modeParams);
+            $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
+            echo $this->getJS();
+
+            return view('reports.' . $viewName, [
+                'typeOfView' => $this->typeView,
+                'modeType' => $this->modeType,
+                'maxH' => $this->maxH,
+                'entity' => $entity,
+                'mode' => $this->mode,
+                'pageLimit' => $pageLimit,
+                'routeName' => $routeName,
+                'titleReport' => $titleReport,
+                'modeParams' => $modeParams,
+                'typeReport' => $typeReport,
+                'currentMode' =>  $this->mode,
+                'tableColumns' => $tableColumns,
+                'tableDataSource' => $dataSource,
+                'currentUserId' => $currentUserId,
+                'groupBy' => $this->groupBy,
+                // 'modeOptions' => $this->$entity(),
+                'tableDataHeader' => $tableDataHeader,
+                'rotate45Width' => $this->rotate45Width,
+                'groupByLength' => $this->groupByLength,
+                'topTitle' => $topTitle,
+                'modeColumns' => $this->modeColumns(),
+                'paramColumns' => $this->getParamColumns(),
+                'legendColors' => $this->getColorLegends(),
+                'tableTrueWidth' => $this->tableTrueWidth,
+            ]);
+        }
+        $basicInfoData =  $this->getBasicInfoData($modeParams);
+        $dataSource = $this->getDataSource2($modeParams);
+
+        // dd($tableColumns);
+        return view('reports.'. $this->viewName, [
+            'paramColumns' => $this->getParamColumns(),
             'entity' => $entity,
-            'mode' => $this->mode,
-            'pageLimit' => $pageLimit,
             'routeName' => $routeName,
             'titleReport' => $titleReport,
-            'modeParams' => $modeParams,
             'typeReport' => $typeReport,
+            'topTitle' => $this->getMenuTitle(),
+            'modeParams' => $modeParams,
             'currentMode' =>  $this->mode,
-            'tableColumns' => $tableColumns,
-            'tableDataSource' => $dataSource,
-            'currentUserId' => $currentUserId,
-            'groupBy' => $this->groupBy,
-            // 'modeOptions' => $this->$entity(),
-            'tableDataHeader' => $tableDataHeader,
-            'rotate45Width' => $this->rotate45Width,
             'groupByLength' => $this->groupByLength,
-            'topTitle' => $topTitle,
-            'modeColumns' => $this->modeColumns(),
-            'paramColumns' => $this->getParamColumns(),
-            'legendColors' => $this->getColorLegends(),
-            'tableTrueWidth' => $this->tableTrueWidth,
+            'groupBy' => $this->groupBy,
+
+            'basicInfoData' => $basicInfoData,
+            'tableDataSource' => $dataSource,
+            'titleTables' => $this->makeTitleForTables($modeParams),
         ]);
     }
     protected function modifyDataToExportCSV($dataSource)
