@@ -12,6 +12,7 @@ use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 abstract class Report_ParentController extends Controller
@@ -20,7 +21,6 @@ abstract class Report_ParentController extends Controller
     use TraitMenuTitle;
     use TraitModeParamsReport;
     use TraitFunctionsReport;
-    use TraitDataSourceReport;
 
     abstract protected function getSqlStr($modeParams);
     abstract protected function getTableColumns($modeParams, $dataSource);
@@ -37,6 +37,58 @@ abstract class Report_ParentController extends Controller
     protected $modeType = '';
     protected $viewName = '';
 
+    private function getSql($modeParams)
+    {
+        $sqlStr = $this->getSqlStr($modeParams);
+        preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
+        foreach (last($matches) as $key => $value) {
+            if (isset($modeParams[$value])) {
+                $valueParam =  $modeParams[$value];
+                $searchStr = head($matches)[$key];
+                $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
+            }
+        }
+        return $sqlStr;
+    }
+
+    private function overKeyAndValueDataSource($modeParams, $data)
+    {
+        $dataSource = [];
+        foreach ($data as $key => $values) {
+            $dataSource[$key]['tableDataSource'] = $values;
+            $dataSource[$key]['tableColumns'] = $this->getTableColumns($modeParams, $data)[$key];
+        }
+        return $dataSource;
+    }
+
+    protected function createArraySqlFromSqlStr($modeParams){
+        return [];
+    }
+
+    protected function getBasicInfoData($modeParams){
+        return [];
+    }
+
+    public function getDataSource($modeParams)
+    {
+        $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
+        if (empty($arraySqlStr)) {
+            $sql = $this->getSql($modeParams);
+            if (is_null($sql) || !$sql) return collect();
+            $sqlData = DB::select(DB::raw($sql));
+            return collect($sqlData);
+        }
+        $data = [];
+        foreach ($arraySqlStr as $k => $sql) {
+            if (is_null($sql) || !$sql) return collect();
+            // $sql = $this->getSql($modeParams);
+            $sqlData = DB::select(DB::raw($sql));
+            $data[$k] = collect($sqlData);
+        }
+        $dataSource = $this->overKeyAndValueDataSource($modeParams, $data);
+        return $dataSource;
+    }
+    
     protected function getTable()
     {
         $tableName = CurrentRoute::getCurrentController();
@@ -74,11 +126,6 @@ abstract class Report_ParentController extends Controller
         return $modeParams;
     }
 
-    protected function getColorLegends()
-    {
-        return [];
-    }
-
     protected function forwardToMode($request, $modeParams)
     {
         $input = $request->input();
@@ -100,6 +147,11 @@ abstract class Report_ParentController extends Controller
         $titleReport = $lib[$routeName]['title'] ?? '';
         // $topTitle = $lib[$routeName]['top_title'] ?? '';
         return $titleReport;
+    }
+
+    protected function getColorLegends()
+    {
+        return [];
     }
 
     public function makeTitleForTables($modeParams)
@@ -152,7 +204,7 @@ abstract class Report_ParentController extends Controller
             echo $this->getJS();
         }
         $basicInfoData =  $this->getBasicInfoData($modeParams);
-        //data to render for each document report
+        //data to render for document reports
         $dataRenderDocReport = [
             'basicInfoData' => $basicInfoData,
             'titleTables' => $this->makeTitleForTables($modeParams)

@@ -6,7 +6,6 @@ use App\Http\Controllers\Reports\Report_ParentController2;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 
 class Hr_timesheet_line_010 extends Report_ParentController2
-
 {
     use TraitForwardModeReport;
     protected $maxH = 50;

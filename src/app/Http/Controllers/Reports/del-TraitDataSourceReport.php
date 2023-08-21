@@ -31,10 +31,6 @@ trait TraitDataSourceReport
         return $dataSource;
     }
 
-    public function createArraySqlFromSqlStr($modeParams){
-        return [];
-    }
-
     public function getDataSource($modeParams)
     {
         $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
