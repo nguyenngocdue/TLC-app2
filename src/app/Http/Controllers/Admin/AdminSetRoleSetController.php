@@ -124,6 +124,6 @@ class AdminSetRoleSetController extends Controller
         if ($user) {
             Session::put('impersonate', $user->id);
         }
-        return redirect('dashboard/admin/setrolesets');
+        return redirect('dashboard/');
     }
 }
