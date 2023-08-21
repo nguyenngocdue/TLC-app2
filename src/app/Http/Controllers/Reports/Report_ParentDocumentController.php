@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Reports;
 
-use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\DocumentReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
-use Illuminate\Support\Str;
 
-abstract class Report_ParentDocumentController extends Report_ParentController
+abstract class Report_ParentDocumentController extends Report_ParentController2
 {
-    
+
    //select date in document-prod_routing_010
     public function createManyParamsFromDates($modeParams)
     {
@@ -34,6 +33,11 @@ abstract class Report_ParentDocumentController extends Report_ParentController
 
     protected function createArraySqlFromSqlStr($modeParams)
     {
-        return [];
+        $sqlStr = [];
+        $manyModeParams = $this->createManyParamsFromDates($modeParams);
+        foreach ($manyModeParams as $key => $modeParam) {
+            $sqlStr[$key] = $this->getSqlStr($modeParam);
+        }
+        return $sqlStr;
     }
 }

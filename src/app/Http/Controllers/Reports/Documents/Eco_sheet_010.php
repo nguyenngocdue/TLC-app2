@@ -20,7 +20,7 @@ class Eco_sheet_010 extends Report_ParentDocumentController
     protected $viewName = 'document-eco-sheet';
     protected $projectId = 5;
 
-    protected function getParamColumns()
+    protected function getParamColumns($dataSource, $modeType)
     {
         return [
             [
