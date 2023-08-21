@@ -1,4 +1,4 @@
-@if($deaf && $readOnlyStr)
+@if($deaf /*&& $readOnlyStr*/)
     @if($multipleStr)
         Not implemented yet for multiple dropdown4
     @else 
