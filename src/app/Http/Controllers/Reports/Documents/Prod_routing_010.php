@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
-use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\Report_ParentDocumentController;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
@@ -78,7 +77,7 @@ class Prod_routing_010 extends Report_ParentDocumentController
         return $sql;
     }
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueModeParams($modeParams)
     {
         $a = 'picker_date';
         $b = 'project_id';
@@ -95,7 +94,7 @@ class Prod_routing_010 extends Report_ParentDocumentController
         return $modeParams;
     }
 
-    protected function getParamColumns()
+    protected function getParamColumns($dataSource, $modeType)
     {
         return [
             [
@@ -220,14 +219,4 @@ class Prod_routing_010 extends Report_ParentDocumentController
         return $basicInfoData;
     }
 
-        protected function createArraySqlFromSqlStr($modeParams)
-    {
-        $sqlStr = [];
-        $manyModeParams = $this->createManyParamsFromDates($modeParams);
-        foreach ($manyModeParams as $key => $modeParam) {
-            $sqlStr[$key] = $this->getSqlStr($modeParam);
-        }
-        // dd($sqlStr);
-        return $sqlStr;
-    }
 }

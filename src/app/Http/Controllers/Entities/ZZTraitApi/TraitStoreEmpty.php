@@ -174,6 +174,7 @@ trait TraitStoreEmpty
 							Site_daily_assignment_line::create([
 								'owner_id' => $row->owner_id,
 								'user_id' => $worker->id,
+								'site_daily_assignment_id' => $createdItem->id,
 							]);
 						}
 						$totalInsertedRows  += count($workers);

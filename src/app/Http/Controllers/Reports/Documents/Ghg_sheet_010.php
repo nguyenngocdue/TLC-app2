@@ -61,7 +61,7 @@ class Ghg_sheet_010 extends Report_ParentDocumentController
 		return [[]];
 	}
 
-	protected function getParamColumns()
+	protected function getParamColumns($dataSource, $modeType)
 	{
 		return [
 			[

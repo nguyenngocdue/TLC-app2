@@ -29,7 +29,7 @@ class Report
             $singular = Str::singular($entityName);
             $ucfirstName = Str::ucfirst($singular);
 
-            for ($i = 10; $i <= 100; $i += 10) {
+            for ($i = 10; $i <= 200; $i += 10) {
                 $mode = str_pad($i, 3, '0', STR_PAD_LEFT);
                 $path = "App\\Http\\Controllers\\Reports\\Reports\\{$ucfirstName}_$mode";
                 if (class_exists($path)) $result0[] = static::actionCreator('report', $path, $singular, $mode);

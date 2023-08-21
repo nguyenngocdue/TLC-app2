@@ -5,18 +5,6 @@ use App\Utils\Support\DocumentReport;
 
 trait Eco_sheet_100
 {
-    private function selectMonth($modeParams)
-    {
-        $month = DocumentReport::getCurrentMonthYear();
-        $projectId = 5;
-        if (isset($modeParams['month'])) {
-            $month = $modeParams['month'];
-        }
-        if (isset($modeParams['project_id'])) {
-            $projectId = $modeParams['project_id'];
-        }
-        return [$month, $projectId];
-    }
 
     private function sqlEcoLaborImpacts($modeParams)
     {
