@@ -123,21 +123,23 @@ class ViewAllInvokerController extends Controller
         $props =  SuperProps::getFor($this->type)['props'];
         return array_map(fn ($item) => $item['duplicatable'], $props);
     }
-    public function print(Request $request){
+    public function print(Request $request)
+    {
         $dataSource = $request->except(['_token', '_method', '_entity', 'action', 'per_page']);
-        $typePlural =Str::plural($this->type);
-		$valueOptionPrint = $this->getValueOptionPrint();
-		$params =  [
-			'type' => $this->type,
-			'typePlural' => $typePlural,
-			'dataSource' => $dataSource,
-			'classListOptionPrint' => ClassList::DROPDOWN,
-			'valueOptionPrint' => $valueOptionPrint,
-			'layout' => $this->getLayoutPrint($valueOptionPrint),
-			'modelPath' => $this->typeModel,
-			'trashed' => false,
-			'topTitle' => CurrentRoute::getTitleOf($this->type),
-		];
-		return view('dashboards.pages.entity-show-matrix-print', $params);
+        $typePlural = Str::plural($this->type);
+        $valueOptionPrint = $this->getValueOptionPrint();
+        $params =  [
+            'type' => $this->type,
+            'typePlural' => $typePlural,
+            'dataSource' => $dataSource,
+            'classListOptionPrint' => ClassList::DROPDOWN,
+            'valueOptionPrint' => $valueOptionPrint,
+            'layout' => $this->getLayoutPrint($valueOptionPrint),
+            'modelPath' => $this->typeModel,
+            'trashed' => false,
+            'topTitle' => CurrentRoute::getTitleOf($this->type),
+            'numberOfEmptyLines' => 5,
+        ];
+        return view('dashboards.pages.entity-show-matrix-print', $params);
     }
 }

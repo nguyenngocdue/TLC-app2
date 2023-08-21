@@ -67,7 +67,7 @@ class Ghg_sheet_line extends ModelExtended
             ['dataIndex' => 'ghg_metric_type_1_id'],
             ['dataIndex' => 'ghg_metric_type_2_id'],
 
-            // ['dataIndex' => 'factor'],
+            ['dataIndex' => 'factor', 'invisible' => true,],
             ['dataIndex' => 'value'],
             ['dataIndex' => 'unit'],
             ['dataIndex' => 'total', 'footer' => "agg_sum",],

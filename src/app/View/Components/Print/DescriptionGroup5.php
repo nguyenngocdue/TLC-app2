@@ -16,6 +16,7 @@ class DescriptionGroup5 extends Component
         private $dataSource,
         private $type,
         private $modelPath,
+        private $numberOfEmptyLines = 0,
     ) {
         //
     }
@@ -31,7 +32,8 @@ class DescriptionGroup5 extends Component
             'propTree' => $this->propTree,
             'dataSource' => $this->dataSource,
             'type' => $this->type,
-            'modelPath' => $this->modelPath
+            'modelPath' => $this->modelPath,
+            'numberOfEmptyLines' => $this->numberOfEmptyLines,
         ]);
     }
 }

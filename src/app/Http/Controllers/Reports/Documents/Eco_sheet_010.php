@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
-use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\Report_ParentDocumentController;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Models\Project;
-use App\Utils\Support\CurrentRoute;
-use Illuminate\Support\Str;
 
-
-class Eco_sheet_010 extends Report_ParentController
+class Eco_sheet_010 extends Report_ParentDocumentController
 {
 
     use TraitForwardModeReport;
@@ -22,22 +19,6 @@ class Eco_sheet_010 extends Report_ParentController
     protected $mode = '010';
     protected $viewName = 'document-eco-sheet';
     protected $projectId = 5;
-
-    public function getType()
-    {
-        return $this->getTable();
-    }
-    public function getSqlStr($modeParams) {
-        return $this->createArraySqlFromSqlStr($modeParams);
-    }
-
-    protected function getTable()
-    {
-        $tableName = CurrentRoute::getCurrentController();
-        $tableName = substr($tableName, 0, strrpos($tableName, "_"));
-        $tableName = strtolower(Str::plural($tableName));
-        return $tableName;
-    }
 
     protected function getParamColumns()
     {

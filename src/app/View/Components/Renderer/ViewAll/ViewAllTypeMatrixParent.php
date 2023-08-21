@@ -51,7 +51,8 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return [];
     }
-    protected function getYAxisPrevious(){
+    protected function getYAxisPrevious()
+    {
         return [];
     }
 
@@ -59,7 +60,8 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return [];
     }
-    protected function getXAxisPrevious(){
+    protected function getXAxisPrevious()
+    {
         return collect();
     }
 

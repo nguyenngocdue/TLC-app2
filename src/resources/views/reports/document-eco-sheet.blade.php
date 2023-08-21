@@ -44,6 +44,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
             </div>
             {{-- RENDER TABLES --}}
             @foreach($tableDataSource as $key => $data)
+            {{-- @dump($tableDataSource) --}}
             @php
             $tableColumns = $data['tableColumns'];
             $tableDataSource = $data['tableDataSource'];

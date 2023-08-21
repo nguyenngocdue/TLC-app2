@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\BigThink\HasStatus;
-use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\Report_ParentRegisterController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
@@ -16,7 +15,8 @@ use App\Models\Qaqc_insp_tmpl_sht;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 
-class Qaqc_insp_chklst_020 extends Report_ParentController
+class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
+
 {
     use TraitDynamicColumnsTableReport;
     use TraitModifyDataToExcelReport;

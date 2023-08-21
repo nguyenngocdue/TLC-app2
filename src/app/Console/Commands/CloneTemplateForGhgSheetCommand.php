@@ -77,6 +77,7 @@ class CloneTemplateForGhgSheetCommand extends Command
                     'factor' => $tmplLine->factor,
                     'value' => $tmplLine->value,
                     'unit' => $tmplLine->unit,
+                    'remark' => $tmplLine->remark,
                     'owner_id' => $ownerId,
                 ]);
             }

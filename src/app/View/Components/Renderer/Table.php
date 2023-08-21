@@ -50,6 +50,7 @@ class Table extends Component
     private $bottomRightControl = null,
     private $tableTrueWidth = false,
     private $editable = false,
+    private $numberOfEmptyLines = 0,
   ) {
   }
 
@@ -70,10 +71,21 @@ class Table extends Component
     $columns = array_values($columns);
     $dataSource = $this->dataSource;
     $hasPaging = (is_object($dataSource) && method_exists($dataSource, 'links') && !empty($dataSource));
+
+    //makeFooter has to called before adding numberOfEmptyLines empty lines 
+    $footerRendered = $this->makeFooter($columns, $this->tableName, $dataSource);
+
+    if ($this->noCss && $this->numberOfEmptyLines) {
+      // dump($dataSource);
+      for ($i = 0; $i < $this->numberOfEmptyLines; $i++) {
+        if (is_array($dataSource)) array_push($dataSource, []);
+        else $dataSource->push([]);
+      }
+    }
+
     $tr_td = $this->makeTrTd($columns, $dataSource, $this->tableDebug, $this->tableName);
 
     $headerRendered = $this->makeTable2ndThead($columns, $this->dataHeader);
-    $footerRendered = $this->makeFooter($columns, $this->tableName, $dataSource);
 
     $columnsRendered =  $this->getColumnRendered($columns, $this->timeElapse, $this->tableName);
     $showing = ($hasPaging && !$this->editable) ? $dataSource->appends($this->request->toArray())->links('dashboards.pagination.showing') : "";
@@ -112,6 +124,7 @@ class Table extends Component
       'bottomLeftControl' => $this->bottomLeftControl,
       'bottomCenterControl' => $this->bottomCenterControl,
       'bottomRightControl' => $this->bottomRightControl,
+      'numberOfEmptyLines' => $this->numberOfEmptyLines,
     ]);
   }
 }

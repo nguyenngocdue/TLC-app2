@@ -9,7 +9,7 @@ class Ghg_tmpl_line extends ModelExtended
     protected $fillable = [
         "id",  "owner_id", "order_no", "ghg_tmpl_id",
         "ghg_metric_type_id", "ghg_metric_type_1_id", "ghg_metric_type_2_id",
-        "unit", "factor",
+        "unit", "factor", "remark",
         "status",
     ];
     protected $table = "ghg_tmpl_lines";
@@ -69,7 +69,7 @@ class Ghg_tmpl_line extends ModelExtended
 
             ['dataIndex' => 'factor'],
             ['dataIndex' => 'unit'],
-
+            ['dataIndex' => 'remark'],
         ];
     }
 }

@@ -5,6 +5,7 @@
         howNo="{{$showNo?1:0}}" 
         footer="{{$tableFooter}}" 
         noCss="{{$noCss}}" 
+        numberOfEmptyLines="{{$numberOfEmptyLines}}"
         />
 
 @if(!$readOnly && $createANewForm)

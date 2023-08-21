@@ -20,6 +20,7 @@ function listenerSubmitForm(idForm) {
             'input[component="editable/picker_time"]',
             'input[component="editable/picker_date"]',
         ];
+        //Add leading ZERO to date or time when user only enter one digit
         $element2.forEach((element) => dataPickerFormatByElements(element));
     });
 }
