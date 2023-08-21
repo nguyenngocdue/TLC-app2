@@ -85,9 +85,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         return ["start_date", "end_date", "man_power", "uom", "total_uom", "total_mins", "min_per_uom"];
     }
-    public function getXAxisPrevious(){
+    public function getXAxisPrevious()
+    {
         $data = Prod_routing::find($this->prodRouting)
-        ->getProdRoutingLinks();
+            ->getProdRoutingLinks();
         if ($this->prodDiscipline) $data = $data->where('prod_discipline_id', $this->prodDiscipline);
         $data = $data->orderBy('order_no')
             ->get();
@@ -202,7 +203,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
 
     function cellRenderer($cell, $dataIndex, $forExcel = false)
     {
-        if (in_array($dataIndex,['status','detail'])) return parent::cellRenderer($cell, $dataIndex, $forExcel);
+        if (in_array($dataIndex, ['status', 'detail'])) return parent::cellRenderer($cell, $dataIndex, $forExcel);
         if ($dataIndex === 'checkbox') return parent::cellRenderer($cell, $dataIndex, $forExcel);
         $doc = $cell[0];
         switch ($dataIndex) {
@@ -222,7 +223,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             case "min_per_uom":
                 return ($doc->total_uom > 0) ? round($doc->total_hours * 60 / $doc->total_uom, 2) : '<i class="fa-solid fa-infinity" title="DIV 0"></i>';
             case "uom":
-                return $this->unit[$doc->uom_id]['name'] ?? "(unit)";
+                return $this->unit[$doc->uom_id]['name'] ?? "(unknown unit)";
             default:
                 // if (isset($doc->{$dataIndex})) return $doc->{$dataIndex};
                 return "852. Not found " . $dataIndex;

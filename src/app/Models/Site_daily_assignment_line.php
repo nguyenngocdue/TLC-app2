@@ -47,7 +47,7 @@ class Site_daily_assignment_line extends ModelExtended
             ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'site_daily_assignment_id', 'value_as_parent_id' => true, 'invisible' => true,],
-            ['dataIndex' => "user_id"],
+            ['dataIndex' => "user_id", 'deaf' => true],
             ['dataIndex' => "getSiteTasks()"],
         ];
     }
