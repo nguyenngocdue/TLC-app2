@@ -16,9 +16,17 @@
             </a>
         </li>
         <li class="flex">
-            <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="{{route('myOrgChart.index') }}">
-                <i class="mr-3 h-4 w-4  fa-duotone fa-sitemap"></i>
+            <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" 
+            href="{{route('myOrgChart.index') }}">
+                <i class="mr-3 h-4 w-4 fa-duotone fa-sitemap"></i>
                 <span>My Org Chart</span>
+            </a>
+        </li>
+        <li class="flex">
+            <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" 
+            href="{{route('setrolesets.stopImpersonate') }}">
+                <i class="mr-3 h-4 w-4 fa-thin fa-circle-stop"></i>
+                <span>Stop Impersonate</span>
             </a>
         </li>
         <li class="flex">

@@ -4,16 +4,25 @@ namespace App\View\Components\Reports\ModeParams;
 
 use App\Models\Prod_routing_link;
 use App\View\Components\Reports\ParentParamReports;
-use App\View\Components\Reports\ParentTypeParamReport;
 
 class ParamProdRoutingLinkId extends ParentParamReports
 {
+    protected $referData = 'prod_routing_id';
+    // protected $referData1 = 'prod_discipline_id';
     protected function getDataSource()
     {
-        $list = Prod_routing_link::whereNull('deleted_at')->get()->toArray();
-        $dataSource = [];
-        usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
-        foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name']];
-        return $dataSource;
+        $prodRoutingLinks = Prod_routing_link::whereNull('deleted_by')->get();
+        $result = [];
+        foreach ($prodRoutingLinks as $routing){
+            $prodRoutingIds = $routing->getProdRoutings()->get()->pluck('id')->toArray();
+            // $disciplineIds = $routing->getDiscipline()->pluck('id')->toArray();
+            $array = (object)[];
+            $array->id = $routing->id;
+            $array->name = $routing->name;
+            $array->{$this->referData} = $prodRoutingIds;
+            // $array->{$this->referData1} = $disciplineIds;
+            $result[] = $array;
+        };
+        return $result;
     }
 }

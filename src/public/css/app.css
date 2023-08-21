@@ -748,8 +748,14 @@ video {
 .col-start-1 {
   grid-column-start: 1;
 }
+.col-start-11 {
+  grid-column-start: 11;
+}
 .col-start-4 {
   grid-column-start: 4;
+}
+.col-start-8 {
+  grid-column-start: 8;
 }
 .float-right {
   float: right;
@@ -1434,6 +1440,10 @@ video {
 .max-w-xl {
   max-width: 36rem;
 }
+.max-w-max {
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1769,6 +1779,9 @@ video {
 }
 .whitespace-pre-wrap {
   white-space: pre-wrap;
+}
+.whitespace-break-spaces {
+  white-space: break-spaces;
 }
 .break-words {
   overflow-wrap: break-word;

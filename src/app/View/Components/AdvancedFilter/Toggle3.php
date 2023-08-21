@@ -19,7 +19,7 @@ class Toggle3 extends Component
         $dataSource = $this->dataSource;
         if (!$dataSource) {
             $dataSource = [
-                '' => "null",
+                'Please select...' => "null",
                 'True' => 1,
                 'False' => 0,
             ];

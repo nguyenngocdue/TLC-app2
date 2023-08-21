@@ -161,7 +161,7 @@ abstract class Report_ParentController2 extends Controller
         $tableColumns = [[]];
         $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
         echo $this->getJS();
-        $modeReport = $this->makeModeTitleReport($routeName);
+        $titleReport = $this->makeModeTitleReport($routeName);
         $modeType = $this->modeType;
         $paramColumns = $this->getParamColumns($dataSource, $modeType);
         return view('reports.' . $viewName, [
@@ -170,7 +170,7 @@ abstract class Report_ParentController2 extends Controller
             'mode' => $this->mode,
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
-            'modeReport' => $modeReport,
+            'titleReport' => $titleReport,
             'modeParams' => $modeParams,
             'typeReport' => $typeReport,
             'modeType' => $this->modeType,

@@ -1,5 +1,7 @@
 <?php
 namespace App\View\Components\AdvancedFilter;
+
+use App\Models\Field;
 use App\Models\User;
 use Illuminate\View\Component;
 class Dropdown3 extends Component
@@ -65,9 +67,12 @@ class Dropdown3 extends Component
                 })->get();
             } 
             try {
-                $allModel =  ($params[1])::all();
                 $keyFirst = array_key_first($arrayQuery);
                 $valueFirst = $arrayQuery[$keyFirst];
+                if($keyFirst == 'field_id'){
+                    return ($params[1])::where($keyFirst,$valueFirst)->get();
+                }
+                $allModel =  ($params[1])::all();
                 $results = $allModel->filter(function($item) use ($keyFirst,$valueFirst){
                     return $item->{$keyFirst}->where('id', $valueFirst)->count() > 0;
                 });

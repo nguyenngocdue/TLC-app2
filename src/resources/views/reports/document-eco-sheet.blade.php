@@ -2,8 +2,13 @@
 
 @section('topTitle', $topTitle)
 @section('title', $titleReport)
-@section('tooltip', Str::ucfirst($typeReport)." ".$mode)
+@section('tooltip', Str::ucfirst($typeReport)." ".$currentMode)
 @section('content')
+
+@php
+$class1 = 'p-2 border h-full w-full flex border-gray-600 text-base font-medium bg-gray-50 items-center justify-end';
+$class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left'
+@endphp
 
 <div class="px-4">
     <div class="justify-end pb-5"></div>
@@ -26,21 +31,19 @@
             <div class="col-span-12 grid">
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right ">
-                        <label class="p-2 border border-gray-600 text-base font-medium bg-gray-50 h-full w-full flex col-span-2 items-center justify-end col-start-1">Month</label>
-                        <span class="p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-3 col-span-10 text-left">{{$basicInfoData['month']}}</span>
+                        <label class="{{$class1}} col-start-1  col-span-3">Month</label>
+                        <span class="{{$class2}}  col-start-4  col-span-9">{{$basicInfoData['month']}}</span>
                     </div>
                 </div>
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right ">
-                        <label class="p-2 border border-gray-600 text-base font-medium bg-gray-50 h-full w-full flex col-span-2 items-center justify-end col-start-1">Project</label>
-                        <span class="p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-3 col-span-10 text-left">{{$basicInfoData['project_name']}}</span>
+                        <label class="{{$class1}} col-start-1  col-span-3">Project</label>
+                        <span class="{{$class2}}  col-start-4  col-span-9">{{$basicInfoData['project_name']}}</span>
                     </div>
                 </div>
             </div>
-
-
             {{-- RENDER TABLES --}}
-            @foreach($dataSource as $key => $data)
+            @foreach($tableDataSource as $key => $data)
             @php
             $tableColumns = $data['tableColumns'];
             $tableDataSource = $data['tableDataSource'];
