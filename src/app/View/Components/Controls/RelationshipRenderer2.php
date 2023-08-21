@@ -52,6 +52,7 @@ class RelationshipRenderer2 extends Component
         private $noCss = false,
         private $item = null,
         private $readOnly = false,
+        private $numberOfEmptyLines = 0,
     ) {
         $this->table01Name = "table" . str_pad(static::$table00Count++, 2, 0, STR_PAD_LEFT);
         $this->entityId = CurrentRoute::getEntityId($this->type);
@@ -208,7 +209,7 @@ class RelationshipRenderer2 extends Component
                 return $this->renderManyIcons($colName, $type, $dataSource, $tableName);
                 // case "calendar_grid":
             case "many_lines":
-                return $this->renderManyLines($tableName, $dataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter);
+                return $this->renderManyLines($tableName, $dataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $this->numberOfEmptyLines);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }

@@ -20,6 +20,7 @@ class Description5 extends Component
         private $dataSource,
         private $modelPath,
         private $type,
+        private $numberOfEmptyLines = 0,
     ) {
         //
     }
@@ -46,13 +47,13 @@ class Description5 extends Component
                 $content = $isContent ? $title : '';
                 break;
             case 'picker_time':
-                $content ? $content = DateTimeConcern::convertForLoading($control,$content)  : $content;
+                $content ? $content = DateTimeConcern::convertForLoading($control, $content)  : $content;
                 break;
             case 'picker_date':
-                $content ? $content = DateTimeConcern::convertForLoading($control,$content)  : $content;
+                $content ? $content = DateTimeConcern::convertForLoading($control, $content)  : $content;
                 break;
             case 'picker_month':
-                $content ? $content = DateTimeConcern::convertForLoading($control,$content)  : $content;
+                $content ? $content = DateTimeConcern::convertForLoading($control, $content)  : $content;
                 break;
             case 'picker_week':
                 $formatFrom = Constant::FORMAT_DATE_MYSQL;
@@ -65,10 +66,10 @@ class Description5 extends Component
                 $content ? $content = DateTimeConcern::formatQuarterForLoading($content, $formatFrom, $formatTo) : $content;
                 break;
             case 'picker_year':
-                $content ? $content = DateTimeConcern::convertForLoading($control,$content) : $content;
+                $content ? $content = DateTimeConcern::convertForLoading($control, $content) : $content;
                 break;
             case 'picker_datetime':
-                $content ? $content = DateTimeConcern::convertForLoading($control,$content): $content;
+                $content ? $content = DateTimeConcern::convertForLoading($control, $content) : $content;
                 break;
 
             default:
@@ -90,7 +91,8 @@ class Description5 extends Component
             'newLine' => $newLine,
             'hiddenLabel' => $hiddenLabel,
             'modelPath' => $this->modelPath,
-            'relationships' => $relationships
+            'relationships' => $relationships,
+            'numberOfEmptyLines' => $this->numberOfEmptyLines,
         ]);
     }
 }

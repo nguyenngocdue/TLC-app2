@@ -16,31 +16,33 @@ use Illuminate\Support\Str;
 
 class PrintProps extends Component
 {
-    use TraitEntityListenDataSource;
-    use TraitSupportEntityCRUDCreateEdit2;
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct(private $type,
-    private $id,
-    private $trashed,
-    private $modelPath,
-    private $layout)
-    {
-        //
-    }
+	use TraitEntityListenDataSource;
+	use TraitSupportEntityCRUDCreateEdit2;
+	/**
+	 * Create a new component instance.
+	 *
+	 * @return void
+	 */
+	public function __construct(
+		private $type,
+		private $id,
+		private $trashed,
+		private $modelPath,
+		private $layout,
+		private $numberOfEmptyLines = 0,
+	) {
+		//
+	}
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
-        $blackList = ['z_divider', 'z_page_break'];
-		$superProps =SuperProps::getFor($this->type);
+	/**
+	 * Get the view / contents that represent the component.
+	 *
+	 * @return \Illuminate\Contracts\View\View|\Closure|string
+	 */
+	public function render()
+	{
+		$blackList = ['z_divider', 'z_page_break'];
+		$superProps = SuperProps::getFor($this->type);
 		$props = $superProps['props'];
 		$props = array_filter($props, fn ($item) => $item['hidden_print'] != true);
 		$node = [];
@@ -86,18 +88,18 @@ class PrintProps extends Component
 		}
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($dataModelCurrent, $props);
 		$status = $dataSource['status'] ?? null;
-		[$actionButtons,$buttonSave,$propsIntermediate] = $this->getConfigActionButtons($superProps,$status);
+		[$actionButtons, $buttonSave, $propsIntermediate] = $this->getConfigActionButtons($superProps, $status);
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
-		$typePlural =Str::plural($this->type);
+		$typePlural = Str::plural($this->type);
 		$params =  [
 			'propsTree' => $this->formatPropTree(array_values($node)),
 			'dataSource' => $dataSource,
 			'showId' => $this->id,
-            'typePlural' => $typePlural,
-            'type' => $this->type,
+			'typePlural' => $typePlural,
+			'type' => $this->type,
 			'modelPath' => $this->modelPath,
-			
+
 			'actionButtons' => $actionButtons,
 			'buttonSave' => $buttonSave,
 			'propsIntermediate' => $propsIntermediate,
@@ -110,20 +112,23 @@ class PrintProps extends Component
 			'filters2' => $this->getFilters2($this->type),
 			'listeners4' => $this->getListeners4($tableBluePrint),
 			'filters4' => $this->getFilters4($tableBluePrint),
-			'routeUpdate' => route($typePlural.'.update',$this->id) ?? '',
-            'layout' => $this->layout,
+			'routeUpdate' => route($typePlural . '.update', $this->id) ?? '',
+			'layout' => $this->layout,
+			'numberOfEmptyLines' => $this->numberOfEmptyLines,
 		];
-        return view('components.print.print-props', $params);
-    }
-    
-	private function getConfigActionButtons($superProps,$status){
-		$tmp = WorkflowFields::resolveSuperProps($superProps ,$status,$this->type,true,CurrentUser::id());
-    	[, , , $actionButtons,, $buttonSave,$propsIntermediate] = $tmp;
-		return [$actionButtons,$buttonSave,$propsIntermediate];
+		return view('components.print.print-props', $params);
 	}
-	private function formatPropTree($propTree){
+
+	private function getConfigActionButtons($superProps, $status)
+	{
+		$tmp = WorkflowFields::resolveSuperProps($superProps, $status, $this->type, true, CurrentUser::id());
+		[,,, $actionButtons,, $buttonSave, $propsIntermediate] = $tmp;
+		return [$actionButtons, $buttonSave, $propsIntermediate];
+	}
+	private function formatPropTree($propTree)
+	{
 		foreach ($propTree as &$value) {
-			if(isset($value['children'])){
+			if (isset($value['children'])) {
 				$previousColSpan = 0;
 				$keyPrevious = null;
 				$keyLast = array_key_last($value['children']);
@@ -135,12 +140,12 @@ class PrintProps extends Component
 							$previousColSpan = 0;
 							break;
 						case 18:
-							$value['children'][$keyPrevious]['col_span'] = "12"; 
+							$value['children'][$keyPrevious]['col_span'] = "12";
 							$previousColSpan = 0;
-								break;
+							break;
 						case 6:
-							if($key == $keyLast){
-								$value['children'][$keyPrevious]['col_span'] = "12"; 
+							if ($key == $keyLast) {
+								$value['children'][$keyPrevious]['col_span'] = "12";
 								$previousColSpan = 0;
 							}
 						default:
@@ -148,7 +153,6 @@ class PrintProps extends Component
 							break;
 					}
 					$keyPrevious = $key;
-
 				}
 			}
 		}

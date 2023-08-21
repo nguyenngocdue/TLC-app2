@@ -21,7 +21,7 @@ trait TraitTableRendererManyLines
         return static::$cacheTable01NameToEloquent;
     }
 
-    private function renderManyLines($tableName, $dataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter)
+    private function renderManyLines($tableName, $dataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $numberOfEmptyLines = 0)
     {
         $app = LibApps::getFor($tableName);
         $nickname = strtoupper($app['nickname'] ?? "no nickname");
@@ -107,6 +107,7 @@ trait TraitTableRendererManyLines
             'href' => $href,
             'showNo' => true,
             'showNoR' => false,
+            'numberOfEmptyLines' => $numberOfEmptyLines,
         ]);
     }
 }

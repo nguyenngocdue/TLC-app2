@@ -6,11 +6,16 @@ var tableObjectColumns = {}
 @if($noCss)
     @php
         $columnsRendered = preg_replace('/<th class=\'.*?\'/', "<th class='text-center bg-gray-50 border border-gray-400  py-2'", $columnsRendered);
-        $tr_td = preg_replace('/<tr class=\'.*?\'/', "<tr class='border border-gray-400'", $tr_td);
+        $tr_td = preg_replace('/<tr class=\'.*?\'/', "<tr class='border border-gray-400 h-10'", $tr_td);
     @endphp
     <table class="w-full min-w-full max-w-full">
         <thead><tr class="text-center 456">{!! $columnsRendered !!}</tr></thead>
         <tbody>{!! $tr_td !!}</tbody>
+        @isset($footerRendered)
+        <tfoot>
+            <tr class="{{$trClassList}}">{!! $footerRendered !!}</tr>
+        </tfoot>
+        @endif
     </table>
 @else
     <div class="border rounded-lg border-gray-300 dark:border-gray-600 ">

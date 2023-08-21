@@ -51,7 +51,8 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return [];
     }
-    protected function getYAxisPrevious(){
+    protected function getYAxisPrevious()
+    {
         return [];
     }
 
@@ -59,7 +60,8 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return [];
     }
-    protected function getXAxisPrevious(){
+    protected function getXAxisPrevious()
+    {
         return collect();
     }
 
@@ -120,14 +122,15 @@ abstract class ViewAllTypeMatrixParent extends Component
             return (object)['value' => "unknown status [" . $document->status . "] ???",];
         }
     }
-    protected function makeCheckbox($document, $forExcel){
-            $id = $document->id;
-            $item = [
-                'value' => "<div><input type='checkbox' name='$id'/></div>",
-                'cell_title' => 'Select check box id:'.$id,
-                'cell_class' => "",
-            ];
-            return (object) $item;
+    protected function makeCheckbox($document, $forExcel)
+    {
+        $id = $document->id;
+        $item = [
+            'value' => "<div><input title='" . Str::makeId($id) . "' type='checkbox' name='$id'/></div>",
+            // 'cell_title' => 'Select check box id:'.$id,
+            'cell_class' => "",
+        ];
+        return (object) $item;
     }
 
     function cellRenderer($cell, $dataIndex, $forExcel = false)
