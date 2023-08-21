@@ -126,4 +126,8 @@ class AdminSetRoleSetController extends Controller
         }
         return redirect('dashboard/');
     }
+    public function stopImpersonate(){
+        Session::forget('impersonate');
+        return redirect('dashboard/');
+    }
 }

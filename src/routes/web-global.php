@@ -34,6 +34,7 @@ Route::group([
     Route::put('updateUserSettingsApi', [UpdateUserSettingsApi::class, 'updateUserSettingsApi'])->name('updateUserSettingsApi');
     Route::put('updateUserSettingsFilterApi', [UpdateUserSettingsApi::class, 'updateUserSettingsFilterApi'])->name('updateUserSettingsFilterApi');
     Route::get('impersonate/user/{id}', [AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
+    Route::get('impersonate/stop', [AdminSetRoleSetController::class, 'stopImpersonate'])->name('setrolesets.stopImpersonate');
     // Route::get('app-menu', [AppMenuController::class, 'index']);
     Route::get('my-company', [MyCompanyController::class, 'index'])->name("my-company.index");
     Route::get('reset', fn () => (new UpdateUserSettings())(new Request(['action' => 'resetAllSettings']), '/'));
