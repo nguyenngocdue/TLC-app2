@@ -7,16 +7,6 @@ use Illuminate\Support\Facades\DB;
 trait TraitDataSourceReport
 {
 
-    protected function enrichDataSource($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
-
-    protected function transformDataSource($dataSource, $modeParams)
-    {
-        return $dataSource;
-    }
-
     private function getSql($modeParams)
     {
         $sqlStr = $this->getSqlStr($modeParams);
@@ -31,16 +21,7 @@ trait TraitDataSourceReport
         return $sqlStr;
     }
 
-    public function getDataSource($modeParams)
-    {
-        $sql = $this->getSql($modeParams);
-        if (is_null($sql) || !$sql) return collect();
-        $sqlData = DB::select(DB::raw($sql));
-        $collection = collect($sqlData);
-        return $collection;
-    }
-
-    private function prepareDataRender($modeParams, $data)
+    private function overKeyAndValueDataSource($modeParams, $data)
     {
         $dataSource = [];
         foreach ($data as $key => $values) {
@@ -54,32 +35,25 @@ trait TraitDataSourceReport
         return [];
     }
 
-    public function getDataSource2($modeParams)
+    public function getDataSource($modeParams)
     {
         $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
-        
-        if (!empty($arraySqlStr)) {
-            $data = [];
-            foreach ($arraySqlStr as $k => $sql) {
-                if (is_null($sql) || !$sql) return collect();
-                $sqlData = DB::select(DB::raw($sql));
-                $collection = collect($sqlData);
-                $data[$k] = $collection;
-            }
-            $dataSource = $this->prepareDataRender($modeParams, $data);
-            return $dataSource;
+        if (empty($arraySqlStr)) {
+            $sql = $this->getSql($modeParams);
+            if (is_null($sql) || !$sql) return collect();
+            $sqlData = DB::select(DB::raw($sql));
+            return collect($sqlData);
         }
-    
-        $sql = $this->getSql($modeParams);
-        if (is_null($sql) || !$sql) {
-            return collect(); // Return an empty collection
+        $data = [];
+        foreach ($arraySqlStr as $k => $sql) {
+            if (is_null($sql) || !$sql) return collect();
+            $sqlData = DB::select(DB::raw($sql));
+            $data[$k] = collect($sqlData);
         }
-        $sqlData = DB::select(DB::raw($sql));
-        $dataSource = collect($sqlData);
+        $dataSource = $this->overKeyAndValueDataSource($modeParams, $data);
         return $dataSource;
     }
     
-
     public function getBasicInfoData($modeParams)
     {
         return [];

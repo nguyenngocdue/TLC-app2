@@ -16,7 +16,7 @@ use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
 
-class Prod_sequence_010 extends Report_ParentController
+class Prod_routing_010 extends Report_ParentController
 {
 
     use TraitForwardModeReport;
@@ -195,14 +195,14 @@ class Prod_sequence_010 extends Report_ParentController
                     [
                         "title" => "Production Routing Link",
                         "dataIndex" => "prod_routing_link_name",
-                        "align" => "center",
-                        "width" => 160,
+                        "align" => "left",
+                        "width" => 250,
                     ],
                     [
-                        "title" => "Production Discipline",
+                        "title" => "Discipline",
                         "dataIndex" => "prod_discipline_name",
-                        "align" => "center",
-                        "width" => 160,
+                        "align" => "left",
+                        "width" => 100,
                     ],
                     [
                         "title" => "Man Power",

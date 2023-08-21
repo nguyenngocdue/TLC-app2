@@ -21,6 +21,7 @@ class Eco_sheet_010 extends Report_ParentController
 
     protected $mode = '010';
     protected $viewName = 'document-eco-sheet';
+    protected $projectId = 5;
 
     public function getType()
     {
@@ -51,7 +52,6 @@ class Eco_sheet_010 extends Report_ParentController
             ]
         ];
     }
-
 
     protected function getTableColumns($modeParams, $dataSource)
     {
@@ -135,7 +135,7 @@ class Eco_sheet_010 extends Report_ParentController
     public function getBasicInfoData($modeParams)
     {
         $month = $modeParams['month'] ?? date("Y-m");
-        $projectName = Project::find($modeParams['project_id'] ?? 5)->name;
+        $projectName = Project::find($modeParams['project_id'] ?? $this->projectId)->name;
         return [
             'month' => $month,
             'project_name' => $projectName

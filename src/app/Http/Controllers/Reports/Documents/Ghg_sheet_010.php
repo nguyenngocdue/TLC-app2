@@ -10,7 +10,6 @@ class Ghg_sheet_010 extends Report_ParentController
 
 	use TraitForwardModeReport;
 	protected $viewName = 'document-ghg-summary-report';
-	protected $mode = '010';
 
 	private function getCurrentDateRange() {
 		$currentYearMonth = date("Y-m");
