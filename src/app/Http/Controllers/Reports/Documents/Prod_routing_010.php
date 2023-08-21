@@ -3,24 +3,20 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\Reports\Report_ParentDocumentController;
+use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
-use App\Http\Controllers\Workflow\LibReports;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
-use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class Prod_sequence_010 extends Report_ParentDocumentController
+class Prod_routing_010 extends Report_ParentController
 {
 
     use TraitForwardModeReport;
@@ -34,6 +30,7 @@ class Prod_sequence_010 extends Report_ParentDocumentController
     protected $groupByLength = 1;
     protected $topTitleTable = 'Detail Report';
     protected $groupBy = 'prod_discipline_name';
+    protected $viewName = 'document-daily-prod-routing';
 
     // DataSource
     public function getSqlStr($modeParam)
@@ -113,7 +110,7 @@ class Prod_sequence_010 extends Report_ParentDocumentController
         return $manyModeParams;
     }
 
-    private function createArraySqlFromSqlStr($modeParams)
+    public function createArraySqlFromSqlStr($modeParams)
     {
         $sqlStr = [];
         $manyModeParams = $this->createManyParamsFromDates($modeParams);
@@ -123,7 +120,19 @@ class Prod_sequence_010 extends Report_ParentDocumentController
         return $sqlStr;
     }
 
-    public function getDataSource($modeParams)
+    private function prepareDataRender($modeParams, $data)
+    {
+        $dataSource = [];
+        foreach ($data as $key => $values) {
+            // $dataSource[$key]['tableDataSource'] = Report::convertToType($values->toArray());
+            $dataSource[$key]['tableDataSource'] = $values;
+            $dataSource[$key]['tableColumns'] = $this->getTableColumns($modeParams, $data)[$key];
+        }
+        // dd($dataSource);
+        return $dataSource;
+    }
+
+    public function getDataSource2($modeParams)
     {
         $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
         $data = [];
@@ -133,7 +142,8 @@ class Prod_sequence_010 extends Report_ParentDocumentController
             $collection = collect($sqlData);
             $data[$k] = $collection;
         }
-        return $data;
+        $dataSource = $this->prepareDataRender($modeParams,$data);
+        return $dataSource;
     }
 
     protected function getParamColumns()
@@ -169,11 +179,13 @@ class Prod_sequence_010 extends Report_ParentDocumentController
                 'dataIndex' => 'prod_routing_link_id',
                 'allowClear' => true,
                 'multiple' => true,
+                'hasListenTo' => true,
+
             ],
         ];
     }
 
-    public function getTableColumns($modeParams, $dataSource)
+    protected function getTableColumns($modeParams, $dataSource)
     {
         $countTables = array_keys($this->createArraySqlFromSqlStr($modeParams));
         $array = [];
@@ -183,14 +195,14 @@ class Prod_sequence_010 extends Report_ParentDocumentController
                     [
                         "title" => "Production Routing Link",
                         "dataIndex" => "prod_routing_link_name",
-                        "align" => "center",
-                        "width" => 160,
+                        "align" => "left",
+                        "width" => 250,
                     ],
                     [
-                        "title" => "Production Discipline",
+                        "title" => "Discipline",
                         "dataIndex" => "prod_discipline_name",
-                        "align" => "center",
-                        "width" => 160,
+                        "align" => "left",
+                        "width" => 100,
                     ],
                     [
                         "title" => "Man Power",
@@ -218,13 +230,13 @@ class Prod_sequence_010 extends Report_ParentDocumentController
         return $array;
     }
 
-    private function makeTitleForTables($modeParams)
+    public function makeTitleForTables($modeParams)
     {
         $tableName = array_keys($this->getTableColumns($modeParams, []));
         return array_fill_keys($tableName, $this->topTitleTable);
     }
 
-    private function getBasicInfoData($modeParams)
+    public function getBasicInfoData($modeParams)
     {
         $projectName = Project::find($modeParams['project_id'] ?? $this->projectId)->name;
         $subProjectName = Sub_project::find($modeParams['sub_project_id'] ?? $this->subProjectId)->name;
@@ -257,46 +269,5 @@ class Prod_sequence_010 extends Report_ParentDocumentController
         }
         // dd($manyModeParams);
         return $basicInfoData;
-    }
-
-    public function index(Request $request)
-    {
-        $typeReport = CurrentPathInfo::getTypeReport($request);
-        $routeName = $request->route()->action['as'];
-        $entity = CurrentPathInfo::getEntityReport($request);
-        
-        $modeParams = $this->getModeParams($request);
-        $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
-        
-        $input = $request->input();
-        if (!$request->input('page') && !empty($input)) {
-            return $this->forwardToMode($request, $modeParams);
-        }
-        $data = $this->getDataSource($modeParams);
-        $basicInfoData =  $this->getBasicInfoData($modeParams);
-        $dataRender = [];
-        foreach ($data as $key => $values) {
-            // $dataRender[$key]['tableDataSource'] = Report::convertToType($values->toArray());
-            $dataRender[$key]['tableDataSource'] = $values;
-            $dataRender[$key]['tableColumns'] = $this->getTableColumns($modeParams, $data)[$key];
-        }
-        $titleReport  = $this->makeTitleReport($routeName);
-        
-        return view('reports.document-daily-prod-routing', [
-            'paramColumns' => $this->getParamColumns(),
-            'entity' => $entity,
-            'routeName' => $routeName,
-            'groupBy' => $this->groupBy,
-            'titleReport' => $titleReport,
-            'typeReport' => $typeReport,
-            'modeParams' => $modeParams,
-            'currentMode' =>  $this->mode,
-            'topTitle' => $this->getMenuTitle(),
-            'groupByLength' => $this->groupByLength,
-
-            'basicInfoData' => $basicInfoData,
-            'dataRender' => $dataRender,
-            'titleTables' => $this->makeTitleForTables($modeParams),
-        ]);
     }
 }

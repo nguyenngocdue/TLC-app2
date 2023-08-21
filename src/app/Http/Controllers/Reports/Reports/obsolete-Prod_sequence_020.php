@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentReportController;
+use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Utils\Support\Report;
 
-class Prod_sequence_020 extends Report_ParentReportController
+class Prod_sequence_020 extends Report_ParentController
 
 {
     use TraitForwardModeReport;

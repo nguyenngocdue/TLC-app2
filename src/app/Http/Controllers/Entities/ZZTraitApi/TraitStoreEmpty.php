@@ -195,11 +195,11 @@ trait TraitStoreEmpty
 			);
 		} catch (\Throwable $th) {
 			$message = $th->getMessage();
-			if(str_contains($message,'Integrity constraint violation: 1062 Duplicate entry')) $message = "Duplicate entry";
+			if (str_contains($message, 'Integrity constraint violation: 1062 Duplicate entry'))
+				$message = "This document is exist, please refresh the page to load the latest matrix.";
 			return ResponseObject::responseFail(
 				$message,
 			);
 		}
-		
 	}
 }

@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Reports\Documents;
-
-use App\Http\Controllers\Controller;
 use App\Utils\Support\DocumentReport;
 
-trait Eco_sheet_dataSource
+trait Eco_sheet_100
 {
     private function selectMonth($modeParams)
     {

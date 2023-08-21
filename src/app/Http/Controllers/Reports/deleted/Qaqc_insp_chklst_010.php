@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Http\Controllers\Reports\Report_ParentDocumentController;
+use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Models\Attachment;
@@ -11,7 +11,7 @@ use App\Utils\Support\Report;
 
 use function PHPUnit\Framework\isEmpty;
 
-class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
+class Qaqc_insp_chklst_010 extends Report_ParentController
 {
 	use TraitDynamicColumnsTableReport;
 	protected $viewName = 'document-qaqc-insp-chklst';
@@ -126,13 +126,6 @@ class Qaqc_insp_chklst_010 extends Report_ParentDocumentController
 		];
 	}
 
-	protected function modeColumns()
-	{
-		return [
-			'title' => 'Mode',
-			'dataIndex' => 'mode_option',
-		];
-	}
 
 	protected function getPageParam($typeReport, $entity)
 	{

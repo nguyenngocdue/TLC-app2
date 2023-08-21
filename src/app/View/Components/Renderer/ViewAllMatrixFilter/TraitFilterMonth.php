@@ -23,8 +23,9 @@ trait TraitFilterMonth
             '+1year' => "?action=updateViewAllMatrix&_entity={$this->type}&viewport_date=$plus1year",
 
             '-1yearLabel' => "<- " . date(Constant::FORMAT_YEAR, $minus1yearTimestamp),
-            'todayLabel' => "Reset to " . date(Constant::FORMAT_YEAR),
-            'selectedYearLabel' =>  "Selected Year " . date(Constant::FORMAT_YEAR, $selectedYearTimestamp),
+            'todayLabel' => "Reset to Current Year",
+            // 'todayLabel' => "Reset to " . date(Constant::FORMAT_YEAR),
+            'selectedYearLabel' =>  date(Constant::FORMAT_YEAR, $selectedYearTimestamp),
             '+1yearLabel' => date(Constant::FORMAT_YEAR, $plus1yearTimestamp) . "->",
         ];
     }

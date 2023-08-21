@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentReportController;
+use App\Http\Controllers\Reports\Report_ParentController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use App\Http\Controllers\Reports\TraitLegendReport;
 use App\Models\Workplace;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
-class Hse_incident_report_010 extends Report_ParentReportController
+class Hse_incident_report_010 extends Report_ParentController
 
 {
     use TraitDynamicColumnsTableReport;
