@@ -20,7 +20,7 @@
         <div class="ml-24 w-full">
                 <div title="{{$timeFull}}" class="text-sm italic md:mb-3 text-left">({{$timeAgo}})</div>
                 <div class="flex items-center p-1 border border-gray-300 rounded bg-gray-100 mb-4 w-max">
-                    <p class="w-full flex">
+                    <p class="w-full flex items-center text-center">
                         <x-renderer.status>{{$statusOld}}</x-renderer.status>
                         <i>=></i>
                         <x-renderer.status>{{$statusNew}}</x-renderer.status>
@@ -40,8 +40,8 @@
         <div class="ml-24 w-full">
                 <div title="{{$timeFull}}" class="text-sm italic md:mb-3 text-left">({{$timeAgo}})</div>
                 <div class="text-sm md:mb-3 font-medium whitespace-nowrap text-left">{{$nameComment}}</div>
-                <div class="flex items-center p-1 border border-gray-300 rounded bg-gray-100 mb-4 w-max px-2" title="{{$contentTitle}}">
-                    <p class="w-max flex font-normal text-sm">
+                <div class="flex items-center p-1 border border-gray-300 rounded bg-gray-100 mb-4 w-72 px-2" title="{{$contentTitle}}">
+                    <p class="font-normal text-sm text-left">
                         {{$contentComment}}
                     </p>
                 </div>       

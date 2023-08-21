@@ -48,7 +48,7 @@
                                 @break
                             @case('relationship_renderer')
                                 <div class='p1-2  border border-gray-600 text-sm font-normal col-span-{{$colSpan}} text-left'>
-                                    <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} />
+                                    <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} numberOfEmptyLines="{{$numberOfEmptyLines}}"/>
                                 </div>
                                 @break
                             @default
@@ -108,7 +108,7 @@
                                 @break
                             @case('relationship_renderer')
                                 <div class='p-2  border border-gray-600 text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
-                                    <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} />
+                                    <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} numberOfEmptyLines="{{$numberOfEmptyLines}}"/>
                                 </div>
                                 @break
                             @default

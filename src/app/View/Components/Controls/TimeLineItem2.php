@@ -32,7 +32,7 @@ class TimeLineItem2 extends Component
         $dataSource = $this->dataSource;
         if (isset($dataSource->content)) {
             $field = FieldSeeder::getNameFromFieldId($dataSource->category);
-            $contentComment = Str::limitWords($dataSource->content, 7, 40);
+            $contentComment = $dataSource->content ?? ''; //Str::limitWords($dataSource->content, 7, 40);
             $contentTitle = $dataSource->content;
             $nameComment = $this->props['_' . $field]['label'] ?? '';
             $userComment = User::findFromCache($dataSource->owner_id);

@@ -44,6 +44,11 @@
         "column_name": "factor",
         "new": "true"
     },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "new": "true"
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

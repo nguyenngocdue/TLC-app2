@@ -6,7 +6,7 @@
 @section('content')
 <div class="px-4 mt-2">
     @foreach($dataSource as $id => $value)
-    <x-print.print-props type="{{$type}}" modelPath="{{$modelPath}}" trashed="{{$trashed}}" id="{{$id}}" layout="{{$layout}}" />
+    <x-print.print-props type="{{$type}}" modelPath="{{$modelPath}}" trashed="{{$trashed}}" id="{{$id}}" layout="{{$layout}}" numberOfEmptyLines="{{$numberOfEmptyLines}}" />
     <x-renderer.page-break />
     @endforeach
     <x-print.printed-time-zone />
