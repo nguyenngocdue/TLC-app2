@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\Report_ParentDocumentController;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModeParamsReport;
 use App\Models\Prod_discipline;
@@ -16,7 +17,7 @@ use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
 
-class Prod_routing_010 extends Report_ParentController
+class Prod_routing_010 extends Report_ParentDocumentController
 {
 
     use TraitForwardModeReport;
@@ -92,58 +93,6 @@ class Prod_routing_010 extends Report_ParentController
             $modeParams[$d] = $this->prodRoutingId;
         }
         return $modeParams;
-    }
-
-    private function createManyParamsFromDates($modeParams)
-    {
-        $pickerDate = $modeParams['picker_date'];
-        $dates = explode("-", $pickerDate);
-        [$fromDate, $toDate] = [trim($dates[0]), trim($dates[1])];
-
-        $manyDates = PivotReport::getDatesBetween($fromDate, $toDate);
-        $manyDates = array_map(fn ($item) => Report::formatDateString($item), $manyDates);
-
-        $manyModeParams = array_map(function ($item) use ($modeParams) {
-            $modeParams['picker_date'] =  $item;
-            return $modeParams;
-        }, $manyDates);
-        return $manyModeParams;
-    }
-
-    public function createArraySqlFromSqlStr($modeParams)
-    {
-        $sqlStr = [];
-        $manyModeParams = $this->createManyParamsFromDates($modeParams);
-        foreach ($manyModeParams as $key => $modeParam) {
-            $sqlStr[$key] = $this->getSqlStr($modeParam);
-        }
-        return $sqlStr;
-    }
-
-    private function prepareDataRender($modeParams, $data)
-    {
-        $dataSource = [];
-        foreach ($data as $key => $values) {
-            // $dataSource[$key]['tableDataSource'] = Report::convertToType($values->toArray());
-            $dataSource[$key]['tableDataSource'] = $values;
-            $dataSource[$key]['tableColumns'] = $this->getTableColumns($modeParams, $data)[$key];
-        }
-        // dd($dataSource);
-        return $dataSource;
-    }
-
-    public function getDataSource2($modeParams)
-    {
-        $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
-        $data = [];
-        foreach ($arraySqlStr as $k => $sql) {
-            if (is_null($sql) || !$sql) return collect();
-            $sqlData = DB::select(DB::raw($sql));
-            $collection = collect($sqlData);
-            $data[$k] = $collection;
-        }
-        $dataSource = $this->prepareDataRender($modeParams,$data);
-        return $dataSource;
     }
 
     protected function getParamColumns()
@@ -269,5 +218,16 @@ class Prod_routing_010 extends Report_ParentController
         }
         // dd($manyModeParams);
         return $basicInfoData;
+    }
+
+        protected function createArraySqlFromSqlStr($modeParams)
+    {
+        $sqlStr = [];
+        $manyModeParams = $this->createManyParamsFromDates($modeParams);
+        foreach ($manyModeParams as $key => $modeParam) {
+            $sqlStr[$key] = $this->getSqlStr($modeParam);
+        }
+        // dd($sqlStr);
+        return $sqlStr;
     }
 }

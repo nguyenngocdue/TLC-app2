@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Log;
 
-class Prod_order_010 extends Report_ParentController
+class Prod_order_010 extends Report_ParentReportController
 
 {
     use TraitDynamicColumnsTableReport;

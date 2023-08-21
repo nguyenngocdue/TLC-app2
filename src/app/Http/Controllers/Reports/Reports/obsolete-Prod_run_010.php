@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentController;
+use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
-class Prod_run_010 extends  Report_ParentController
+class Prod_run_010 extends  Report_ParentReportController
 
 {
     use TraitDynamicColumnsTableReport;
