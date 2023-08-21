@@ -105,9 +105,8 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         $status = $this->statuses[$document->status] ?? null;
         if (!is_null($status)) {
-            $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'];
-            $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']);
             $value = $this->getValueToRender($status, $document, $forExcel);
+            [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
             $item = [
                 'value' => $value,
                 'cell_title' => 'Open this document (' . $status['title'] . ')',
@@ -120,14 +119,26 @@ abstract class ViewAllTypeMatrixParent extends Component
             return (object)['value' => "unknown status [" . $document->status . "] ???",];
         }
     }
+    private function getBackgroundColorAndTextColor($document){
+        $status = $this->statuses[$document->status] ?? null;
+        if (!is_null($status)) {
+            $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'];
+            $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']);
+        }
+        $bgColor = $bgColor ?? '';
+        $textColor = $textColor ?? '';
+        return [$bgColor, $textColor];
+    }
     protected function makeCheckbox($document, $forExcel){
-            $id = $document->id;
-            $item = [
-                'value' => "<div><input type='checkbox' name='$id'/></div>",
-                'cell_title' => 'Select check box id:'.$id,
-                'cell_class' => "",
-            ];
-            return (object) $item;
+       
+        $id = $document->id;
+        [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
+        $item = [
+            'value' => "<div><input type='checkbox' name='$id'/></div>",
+            'cell_title' => 'Select check box id:'.$id,
+            'cell_class' => "$bgColor $textColor",
+        ];
+        return (object) $item;
     }
 
     function cellRenderer($cell, $dataIndex, $forExcel = false)
