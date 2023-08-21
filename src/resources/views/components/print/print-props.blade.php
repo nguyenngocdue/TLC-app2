@@ -13,7 +13,8 @@
         <div class="{{$layout}} items-center bor1der bg-white box-border p-8">
             <x-print.letter-head5 showId={{$showId}} type={{$type}} :dataSource="$dataSource" />
             @foreach($propsTree as $propTree)
-            <x-print.description-group5 type={{$type}} modelPath={{$modelPath}} :propTree="$propTree" :dataSource="$dataSource" numberOfEmptyLines="{{$numberOfEmptyLines}}" />
+            <x-print.description-group5 type={{$type}} modelPath={{$modelPath}} :propTree="$propTree" :dataSource="$dataSource" numberOfEmptyLines="{{$numberOfEmptyLines}}" 
+            printMode="{{$printMode}}" />
             @endforeach
             
             {{-- <div class="fixed top-52 right-0 no-print">

@@ -21,6 +21,7 @@ class Description5 extends Component
         private $modelPath,
         private $type,
         private $numberOfEmptyLines = 0,
+        private $printMode = null,
     ) {
         //
     }
@@ -93,6 +94,7 @@ class Description5 extends Component
             'modelPath' => $this->modelPath,
             'relationships' => $relationships,
             'numberOfEmptyLines' => $this->numberOfEmptyLines,
+            'printMode' => $this->printMode,
         ]);
     }
 }
