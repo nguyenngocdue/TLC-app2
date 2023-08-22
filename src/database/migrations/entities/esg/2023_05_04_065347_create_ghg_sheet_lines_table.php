@@ -30,8 +30,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('unit')->nullable();
             $table->decimal('factor', 10, 4)->nullable();
-            $table->decimal('value', 10, 4)->nullable();
-            $table->decimal('total', 20, 4)->nullable();
+            $table->double('value')->nullable();
+            $table->double('total')->nullable();
             $table->text('remark')->nullable();
             $table->orderable();
             $table->appendCommonFields();

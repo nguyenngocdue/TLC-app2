@@ -30,6 +30,7 @@ class PrintProps extends Component
 		private $modelPath,
 		private $layout,
 		private $numberOfEmptyLines = 0,
+		private $printMode = 'normal',
 	) {
 		//
 	}
@@ -44,7 +45,8 @@ class PrintProps extends Component
 		$blackList = ['z_divider', 'z_page_break'];
 		$superProps = SuperProps::getFor($this->type);
 		$props = $superProps['props'];
-		$props = array_filter($props, fn ($item) => $item['hidden_print'] != true);
+		$hiddenPrintMode = $this->printMode == 'template' ? 'hidden_template_print' : 'hidden_print';
+		$props = array_filter($props, fn ($item) => $item[$hiddenPrintMode] != true);
 		$node = [];
 		$nodeCount = 0;
 		foreach ($props as $key => $value) {
@@ -115,6 +117,7 @@ class PrintProps extends Component
 			'routeUpdate' => route($typePlural . '.update', $this->id) ?? '',
 			'layout' => $this->layout,
 			'numberOfEmptyLines' => $this->numberOfEmptyLines,
+			'printMode' => $this->printMode,
 		];
 		return view('components.print.print-props', $params);
 	}

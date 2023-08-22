@@ -140,6 +140,6 @@ class ViewAllInvokerController extends Controller
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'numberOfEmptyLines' => 5,
         ];
-        return view('dashboards.pages.entity-show-matrix-print', $params);
+        return view('dashboards.pages.entity-show-template-print', $params);
     }
 }
