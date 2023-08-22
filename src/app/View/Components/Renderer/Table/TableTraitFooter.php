@@ -115,7 +115,7 @@ trait TableTraitFooter
             }
         }
 
-        $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr-6 py-0";
+        $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr1-6 py-0";
         $inputs = [];
         $footer = $column['footer'];
         // echo $footer;
