@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Reports;
 use App\Utils\Support\DocumentReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\DB;
 
-abstract class Report_ParentDocumentController2 extends Report_ParentController2
+abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 {
-
    //select date in document-prod_routing_010
     protected function createManyParamsFromDates($params)
     {
@@ -44,4 +44,26 @@ abstract class Report_ParentDocumentController2 extends Report_ParentController2
 		$toDate = date("Y-m", strtotime("$toYear-$toMonth-$toDay"));
 		return ['from' => $fromDate, 'to' => $toDate];
 	}
+
+    protected function createArraySqlFromSqlStr($params)
+    {
+        $sqlStr = [];
+        return $sqlStr;
+    }
+
+    public function getDataSource($params)
+    {
+        $arraySqlStr = $this->createArraySqlFromSqlStr($params);
+        $dataSource = [];
+        foreach ($arraySqlStr as $k => $sql) {
+            if (is_null($sql) || !$sql) return collect();
+            // $sql = $this->getSql($params);
+            $sqlData = DB::select(DB::raw($sql));
+            $dataSource[$k] = collect($sqlData);
+        }
+        return $dataSource;
+    }
+
+
+
 }

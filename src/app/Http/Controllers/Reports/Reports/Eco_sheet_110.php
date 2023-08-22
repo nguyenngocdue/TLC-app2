@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentReportController2;
+use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 
-class Eco_sheet_110 extends Report_ParentReportController2
+class Eco_sheet_110 extends Report_ParentReport2Controller
 {
 
     public function getSqlStr($params)

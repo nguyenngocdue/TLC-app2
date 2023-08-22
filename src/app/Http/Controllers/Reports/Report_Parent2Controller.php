@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-abstract class Report_ParentController2 extends Controller
+abstract class Report_Parent2Controller extends Controller
 {
     use TraitMenuTitle;
     use TraitParamsSettingReport;
@@ -55,34 +55,13 @@ abstract class Report_ParentController2 extends Controller
         return $sqlStr;
     }
 
-    private function overKeyAndValueDataSource($params, $data)
+    public function getDataSource($modeParams)
     {
-        $dataSource = [];
-        foreach ($data as $key => $values) {
-            $dataSource[$key]['tableDataSource'] = $values;
-            $dataSource[$key]['tableColumns'] = $this->getTableColumns($params, $data)[$key];
-        }
-        return $dataSource;
-    }
-
-    public function getDataSource($params)
-    {
-        $arraySqlStr = $this->createArraySqlFromSqlStr($params);
-        if (empty($arraySqlStr)) {
-            $sql = $this->getSql($params);
-            if (is_null($sql) || !$sql) return collect();
-            $sqlData = DB::select(DB::raw($sql));
-            return collect($sqlData);
-        }
-        $data = [];
-        foreach ($arraySqlStr as $k => $sql) {
-            if (is_null($sql) || !$sql) return collect();
-            // $sql = $this->getSql($params);
-            $sqlData = DB::select(DB::raw($sql));
-            $data[$k] = collect($sqlData);
-        }
-        $dataSource = $this->overKeyAndValueDataSource($params, $data);
-        return $dataSource;
+        $sql = $this->getSql($modeParams);
+        if (is_null($sql) || !$sql) return collect();
+        $sqlData = DB::select(DB::raw($sql));
+        $collection = collect($sqlData);
+        return $collection;
     }
 
     protected function getDefaultValueParams($params)
@@ -164,19 +143,9 @@ abstract class Report_ParentController2 extends Controller
         return $colParams;
     }
 
-    protected function createArraySqlFromSqlStr($params)
-    {
-        return [];
-    }
-
     protected function getBasicInfoData($params)
     {
-        return [];
-    }
-
-    public function makeTitleForTables($params)
-    {
-        return [];
+        return [[]];
     }
 
     public function selectMonth($params)
@@ -217,17 +186,15 @@ abstract class Report_ParentController2 extends Controller
         $titleReport = $this->makeModeTitleReport($routeName);
         $modeType = $this->modeType;
         $paramColumns = $this->getParamColumns($dataSource, $modeType);
-
         //data to render for document reports
         [$dataRenderDocReport , $basicInfoData] = [[], []];
         if (str_contains($routeName, 'document-')) {
             $basicInfoData =  $this->getBasicInfoData($params);
             $dataRenderDocReport = [
                 'basicInfoData' => $basicInfoData,
-                'titleTables' => $this->makeTitleForTables($params)
             ];
         }
-
+        // dd($viewName, $tableColumns, $dataSource);
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,

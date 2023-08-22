@@ -22,7 +22,7 @@
          <x-renderer.report.pivot-table
                     modeType="{{$modeType}}"  
                     showNo={{true}} 
-                    :columns="$tableColumns" 
+                    :tableColumns="$tableColumns" 
                     :params="$params" 
                     :dataSource="$tableDataSource"
                     tableTrueWidth={{$tableTrueWidth?1:0}} 
@@ -30,7 +30,7 @@
          <x-renderer.report.pivot-table
                     modeType="{{$modeType}}"  
                     showNo={{true}} 
-                    :columns="$tableColumns" 
+                    :tableColumns="$tableColumns" 
                     :params="$params" 
                     :dataSource="$tableDataSource"
                     tableTrueWidth={{$tableTrueWidth?1:0}} 
@@ -38,7 +38,7 @@
          <x-renderer.report.pivot-table
                     modeType="{{$modeType}}"  
                     showNo={{true}} 
-                    :columns="$tableColumns" 
+                    :tableColumns="$tableColumns" 
                     :params="$params" 
                     :dataSource="$tableDataSource"
                     tableTrueWidth={{$tableTrueWidth?1:0}} 

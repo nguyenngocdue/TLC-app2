@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentController2;
+use App\Http\Controllers\Reports\Report_Parent2Controller;
 use App\Http\Controllers\Reports\Reports\Hr_timesheet_line_100;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 
-class Hr_timesheet_line_050 extends Report_ParentController2
+class Hr_timesheet_line_050 extends Report_Parent2Controller
 
 {
     use TraitDynamicColumnsTableReport;
