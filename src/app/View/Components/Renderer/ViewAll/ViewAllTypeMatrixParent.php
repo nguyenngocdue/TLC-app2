@@ -6,7 +6,6 @@ use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
@@ -34,7 +33,11 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $apiToCallWhenCreateNew = 'storeEmpty';
     protected $attOfCellToRender = "status";
     protected $showLegend = true;
-    protected $showPrintButton = false;
+
+    protected $actionBtnShowExportCsv = true;
+    protected $actionBtnShowPrintButton = false;
+    protected $tableTopCenterControl = "";
+
     /**
      * Create a new component instance.
      *
@@ -48,10 +51,6 @@ abstract class ViewAllTypeMatrixParent extends Component
     }
 
     protected function getYAxis()
-    {
-        return [];
-    }
-    protected function getYAxisPrevious()
     {
         return [];
     }
@@ -155,7 +154,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 }
                 break;
             case 'status_only':
-            case 'status':
+                // case 'status':
             case 'detail':
                 foreach ($cell as $document) {
                     $result[] = $this->makeStatus($document, $forExcel);
@@ -290,7 +289,7 @@ abstract class ViewAllTypeMatrixParent extends Component
 
         //<< If current page of HLC is 12, but STW only have 1 page
         //Force the program to select the smallest page
-        $page = min(floor($perPage / $count), $page);
+        $page = ($count) ? min(floor($perPage / $count), $page) : 1;
 
         return new LengthAwarePaginator($items->forPage($page, $perPage), $count, $perPage, $page, $options);
     }
@@ -330,7 +329,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         if (view()->exists($viewName)) {
             return Blade::render('<x-renderer.view-all-matrix-filter.' . $filterName . ' :type="$type" :dataSource="$dataSource" :viewportParams="$viewportParams"/>', $params);
         } else {
-            return "Unknown type $this->type in type matrix filter (ViewAllTypeMatrixParent.getFilter)";
+            return "Filter $this->type blade file not found (ViewAllTypeMatrixParent.getFilter)";
         }
     }
 
@@ -345,7 +344,15 @@ abstract class ViewAllTypeMatrixParent extends Component
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
         $filterRenderer = $this->getFilter();
-        $actionButtons = "<x-form.action-button-group-view-matrix type='$this->type' groupBy='$this->groupBy' groupByLength='$this->groupByLength' printButton='$this->showPrintButton'/>";
+
+        $actionButtons = "<x-form.action-button-group-view-matrix 
+            type='$this->type' 
+            groupBy='$this->groupBy' 
+            groupByLength='$this->groupByLength' 
+            actionBtnShowPrintButton='$this->actionBtnShowPrintButton'
+            actionBtnShowExportCsv='$this->actionBtnShowExportCsv'
+            />";
+
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
             [
@@ -362,7 +369,8 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'tableTrueWidth' => $this->tableTrueWidth,
                 'actionButtons' => $actionButtons,
                 'headerTop' => $this->headerTop,
-                'showPrintButton' => $this->showPrintButton,
+                'showPrintButton' => $this->actionBtnShowPrintButton,
+                'tableTopCenterControl' => $this->tableTopCenterControl,
             ],
         );
     }
