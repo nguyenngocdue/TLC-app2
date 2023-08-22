@@ -94,7 +94,7 @@
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('number')
-                    <x-controls.number2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
+                    <x-controls.number2 name={{$columnName}} numericScale={{$numericScale}} value={{$value}} readOnly={{$readOnly}} />
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('textarea')

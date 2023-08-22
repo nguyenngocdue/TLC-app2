@@ -33,5 +33,5 @@
     })
 </script>
 <script>
-    parseNumber2(@json($name), @json($value));
+    parseNumber2(@json($name), @json($value),@json($numericScale));
 </script>

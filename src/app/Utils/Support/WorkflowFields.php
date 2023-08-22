@@ -158,6 +158,7 @@ class WorkflowFields
         $result['properties'] = $prop['properties'];
         $columnName = $prop['column_name'];
         $result['columnName'] = $columnName;
+        $result['numericScale'] = $prop['numeric_scale'];
         $result['new_line'] = $prop['new_line'];
         $columnType = $prop['column_type'];
         $result['columnType'] = $columnType;

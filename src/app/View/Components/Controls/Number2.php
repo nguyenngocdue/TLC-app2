@@ -11,6 +11,7 @@ class Number2 extends Component
     public function __construct(
         private $name,
         private $value,
+        private $numericScale = 0,
         private $readOnly = false,
     ) {
     }
@@ -21,6 +22,7 @@ class Number2 extends Component
             'name' => $this->name,
             'value' => $this->value,
             'readOnly' => $this->readOnly,
+            'numericScale'=> $this->numericScale,
             'classList' => ClassList::TEXT,
         ]);
     }

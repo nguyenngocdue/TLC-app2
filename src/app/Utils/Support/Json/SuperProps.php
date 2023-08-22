@@ -170,6 +170,7 @@ class SuperProps
             } else {
                 $prop['duplicatable'] = $prop['duplicatable'] ?? ''; //<<CONFIG_MIGRATE
             }
+            static::attachJsonProps($prop);
         }
         // static::attachJson("listeners", $allProps, Listeners::getAllOf($type));
         $standardDefaultValues = LibStandardDefaultValues::getAll();
@@ -177,8 +178,31 @@ class SuperProps
         // static::attachJson("realtimes", $allProps, Realtimes::getAllOf($type));
         static::attachJson("relationships", $allProps, static::makeRelationshipObject($type));
         static::attachJson("properties", $allProps, static::attachProperty($type));
-
         return $allProps;
+    }
+    private static function attachJsonProps(&$prop){
+        if(in_array($prop['column_type'],['int','float','double']) || str_contains($prop['column_type'],'decimal')){
+            $value = 0;
+            switch (true) {
+                case $prop['column_type'] == 'float':
+                    $value = 2;
+                    break;
+                case $prop['column_type'] == 'double':
+                    $value = 3;
+                    break;
+                case str_contains($prop['column_type'],'decimal'):
+                    $array = explode(',',$prop['column_type']);
+                    $result = str_replace(')','',$array[1]) ?? 0;
+                    $value = $result;
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+            $prop['numeric_scale'] = $value;
+        }else{
+            $prop['numeric_scale'] = "";
+        }
     }
 
     private static function loadCapa($type)
