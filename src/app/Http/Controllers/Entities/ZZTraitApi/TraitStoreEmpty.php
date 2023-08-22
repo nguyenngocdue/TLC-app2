@@ -6,6 +6,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFieldHandler2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitSendNotificationAndMail;
 use App\Models\Hr_timesheet_line;
 use App\Models\Hr_timesheet_worker;
+use App\Models\Priority;
 use App\Models\Site_daily_assignment_line;
 use App\Models\User_team_site;
 use App\Models\User_team_tsht;
@@ -108,10 +109,16 @@ trait TraitStoreEmpty
 				foreach ($dateTimeControls as $control => $controlType) {
 					// $control = substr($control, 1); // Removed first _
 					if (isset($item[$control])) {
-						if ($item[$control] == "0") {
+						//0 is for now()
+						if ($item[$control] || ($item[$control] == 0)) {
+							//<< 0: now, +7 days...
+							$adding = ($item[$control] == 0) ? strtotime(now()) : strtotime($item[$control]);
 							switch ($controlType) {
 								case "picker_date":
-									$item[$control] = date(Constant::FORMAT_DATE_MYSQL);
+									$item[$control] = date(Constant::FORMAT_DATE_MYSQL, $adding);
+									break;
+								case "picker_datetime":
+									$item[$control] = date(Constant::FORMAT_DATETIME_MYSQL, $adding);
 									break;
 									// case "picker_time":
 									// $currentTime = date(Constant::FORMAT_TIME_MYSQL);

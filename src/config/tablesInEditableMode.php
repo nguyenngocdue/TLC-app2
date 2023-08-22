@@ -156,7 +156,8 @@ return [
 
     "site_daily_assignments" => [
         'site_daily_assignment_lines' => [
-            'showBtnAddANewLine' => 1,
+            // 'showBtnAddANewLine' => 1,
+            'showBtnAddFromAList' => 1,
         ],
     ],
 

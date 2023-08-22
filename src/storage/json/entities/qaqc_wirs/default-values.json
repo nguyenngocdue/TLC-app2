@@ -162,7 +162,7 @@
         "validation": "required",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "2",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -174,7 +174,7 @@
         "validation": "date_format:d\/m\/Y H:i|required",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "+7 days",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
