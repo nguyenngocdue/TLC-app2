@@ -180,19 +180,25 @@ class SuperProps
         static::attachJson("properties", $allProps, static::attachProperty($type));
         return $allProps;
     }
-    private static function attachJsonProps(&$prop){
-        if(in_array($prop['column_type'],['int','float','double']) || str_contains($prop['column_type'],'decimal')){
+    private static function attachJsonProps(&$prop)
+    {
+        $common = in_array($prop['column_type'], ['int', 'float', 'double']);
+        $isDecimal = str_contains($prop['column_type'], 'decimal');
+        $isDouble = str_contains($prop['column_type'], 'double');
+        if ($common || $isDecimal || $isDouble) {
             $value = 0;
             switch (true) {
                 case $prop['column_type'] == 'float':
+                    // case $prop['column_type'] == 'double(8,2)':
                     $value = 2;
                     break;
                 case $prop['column_type'] == 'double':
                     $value = 3;
                     break;
-                case str_contains($prop['column_type'],'decimal'):
-                    $array = explode(',',$prop['column_type']);
-                    $result = str_replace(')','',$array[1]) ?? 0;
+                case str_contains($prop['column_type'], 'decimal'):
+                case str_contains($prop['column_type'], 'double'):
+                    $array = explode(',', $prop['column_type']);
+                    $result = str_replace(')', '', $array[1]) ?? 0;
                     $value = $result;
                     break;
                 default:
@@ -200,7 +206,7 @@ class SuperProps
                     break;
             }
             $prop['numeric_scale'] = $value;
-        }else{
+        } else {
             $prop['numeric_scale'] = "";
         }
     }
