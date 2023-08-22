@@ -35,8 +35,8 @@ return new class extends Migration
 
             $table->dateTime('started_at')->nullable();
             $table->dateTime('finished_at')->nullable();
-            $table->unsignedInteger('total_hours')->nullable();
-            $table->unsignedInteger('total_man_hours')->nullable();
+            $table->double('total_hours')->nullable();
+            $table->double('total_man_hours')->nullable();
 
             $table->appendCommonFields();
         });
