@@ -2,23 +2,14 @@
 
 namespace App\Http\Controllers\Entities;
 
-use App\Http\Controllers\UpdateUserSettings;
 use App\Utils\Support\CurrentRoute;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TraitViewAllMatrixApproveMultiController
 {
     private function indexViewAllMatrixApproveMulti($request)
     {
-        if (!empty($request->input())) {
-            $request->merge([
-                'action' => "updateViewAllMatrix",
-                '_entity' => Str::plural($this->type),
-            ]);
-            (new UpdateUserSettings())($request);
-            return redirect($request->getPathInfo());
-        }
+        if ($r = $this->updateUserSettings($request)) return $r;
         return view('dashboards.pages.entity-view-all-matrix-print', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'title' => '(Matrix)',
