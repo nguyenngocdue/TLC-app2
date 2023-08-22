@@ -24,7 +24,7 @@ class ViewAllTypeSelector extends Component
     {
         $tabs = [];
         $tableName = Str::plural($this->type);
-        $home = [
+        $listView = [
             'href' => "?view_type=table&action=updateViewAllMode&_entity=$tableName",
             'title' => "List View",
             'icon' => 'fa-duotone fa-list',
@@ -32,7 +32,7 @@ class ViewAllTypeSelector extends Component
         ];
         if (in_array($tableName, JsonControls::getAppsHaveViewAllCalendar())) {
             $tabs = [
-                'home' => $home,
+                'home' => $listView,
                 'calendar' => [
                     'href' => "?view_type=calendar&action=updateViewAllMode&_entity=$tableName",
                     'title' => "Calendar All",
@@ -43,7 +43,7 @@ class ViewAllTypeSelector extends Component
         };
         if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrix())) {
             $tabs = [
-                'home' => $home,
+                'home' => $listView,
                 'calendar' => [
                     'href' => "?view_type=matrix&action=updateViewAllMode&_entity=$tableName",
                     'title' => "Matrix View",
@@ -54,10 +54,18 @@ class ViewAllTypeSelector extends Component
         };
         if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixPrint())) {
             $tabs['print'] = [
-                    'href' => "?view_type=matrix_print&action=updateViewAllMode&_entity=$tableName",
-                    'title' => "Print Matrix View",
-                    'icon' => 'fa-duotone fa-print',
-                    'active' =>  $this->viewType == 'matrix-print-view',
+                'href' => "?view_type=matrix_print&action=updateViewAllMode&_entity=$tableName",
+                'title' => "Print View",
+                'icon' => 'fa-duotone fa-print',
+                'active' =>  $this->viewType == 'matrix-print-view',
+            ];
+        };
+        if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixApproveMulti())) {
+            $tabs['approval'] = [
+                'href' => "?view_type=matrix_approve_multi&action=updateViewAllMode&_entity=$tableName",
+                'title' => "Approval View",
+                'icon' => 'fa-duotone fa-box-check',
+                'active' =>  $this->viewType == 'matrix-print-view',
             ];
         };
         return $tabs;
