@@ -18,9 +18,9 @@ class Prod_order_010 extends Report_ParentReportController
     protected  $sub_project_id = 21;
     protected $maxH = 50;
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
-        // Log::info($modeParams);
+        // Log::info($params);
         $sql = "SELECT 
      			sp.name AS sub_project_name
      			,po.sub_project_id AS sub_project_id
@@ -45,13 +45,13 @@ class Prod_order_010 extends Report_ParentReportController
                         AND prd.deleted_at IS NULL
                         AND ps.deleted_at IS NULL
                     ";
-        if (empty($modeParams)) $sql  .= "AND po.sub_project_id =" . $this->sub_project_id;
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
-        if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'\n ";
+        if (empty($params)) $sql  .= "AND po.sub_project_id =" . $this->sub_project_id;
+        if (isset($params['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
+        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'\n ";
         $sql .=  "\n GROUP BY po.id";
         return $sql;
     }
-    public function getTableColumns($dataSource, $modeParams)
+    public function getTableColumns($dataSource, $params)
     {
         return [
             [
@@ -113,14 +113,14 @@ class Prod_order_010 extends Report_ParentReportController
         ];
     }
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueParams($params, $request)
     {
         $x = 'sub_project_id';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        // dd($modeParams, $isNullModeParams);
-        if ($isNullModeParams) {
-            $modeParams[$x] = $this->sub_project_id;
+        $isNullParams = Report::isNullParams($params);
+        // dd($params, $isNullParams);
+        if ($isNullParams) {
+            $params[$x] = $this->sub_project_id;
         }
-        return $modeParams;
+        return $params;
     }
 }

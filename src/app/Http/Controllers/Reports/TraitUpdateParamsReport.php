@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 trait TraitUpdateParamsReport
 {
-    protected function updateParams($request, $modeParams)
+    protected function updateParams($request, $params)
     {
         $input = $request->input();
         $isFormType = isset($input['form_type']);

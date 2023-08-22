@@ -19,9 +19,9 @@ class Qaqc_wir_010 extends Report_ParentController2
     protected $tableTrueWidth = false;
     protected $mode = '010';
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
-        $month = isset($modeParams['month']) ? $modeParams['month'] : implode('-', array_values(PivotReport::getCurrentYearAndMonth()));
+        $month = isset($params['month']) ? $params['month'] : implode('-', array_values(PivotReport::getCurrentYearAndMonth()));
         $sql = "SELECT 
                     SUBSTR(whrd1s.month,1,7) AS month
                     ,whrd1s.project_id AS project_id

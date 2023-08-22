@@ -20,7 +20,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
     protected $tableTrueWidth = false;
     protected $pageLimit = 20;
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
         // alias variable in SQL
         $LTI = 118;
@@ -50,11 +50,11 @@ class Hse_incident_report_010 extends Report_ParentReportController
         //params from user settings 
         $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();
         $currentYear = date('Y');
-        $workplaceIds = isset($modeParams['workplace_id']) ? Report::removeNullValuesFromArray($modeParams['workplace_id']) : $dbWorkplaceIds;
+        $workplaceIds = isset($params['workplace_id']) ? Report::removeNullValuesFromArray($params['workplace_id']) : $dbWorkplaceIds;
         $workplaceIds = empty($inputArray) ? $dbWorkplaceIds : $workplaceIds;
 
         $strWorkplaceIds = '(' . implode(',', $workplaceIds) . ')';
-        $year = isset($modeParams['year']) ? $modeParams['year'] : $currentYear;
+        $year = isset($params['year']) ? $params['year'] : $currentYear;
         // String SQL query
         $sql = "WITH temp_work_areas AS (
                     SELECT wa.id
@@ -188,7 +188,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
         return $sql;
     }
 
-    protected function getTableColumns($dataSource, $modeParams)
+    protected function getTableColumns($dataSource, $params)
     {
 
         $stringIcon = "class='text-base fa-duotone fa-circle-question hover:bg-blue-400 rounded'></i>";
@@ -338,18 +338,18 @@ class Hse_incident_report_010 extends Report_ParentReportController
     }
 
 
-    protected function transformDataSource($dataSource, $modeParams)
+    protected function transformDataSource($dataSource, $params)
     {
         // dd($dataSource);
         if (is_object($dataSource)) $dataSource = array_map(fn ($item) => (array)$item, $dataSource->toArray());
         if (empty($dataSource)) return collect([]);
 
         $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();
-        $workplaceIds = isset($modeParams['many_workplace_id']) &&  $modeParams['many_workplace_id'][0] ? $modeParams['many_workplace_id'] : $dbWorkplaceIds;
+        $workplaceIds = isset($params['many_workplace_id']) &&  $params['many_workplace_id'][0] ? $params['many_workplace_id'] : $dbWorkplaceIds;
         $workPlacesHoursOfYear  = [];
         foreach ($workplaceIds as $workplaceId) {
             $wp = Workplace::find($workplaceId);
-            $year = isset($modeParams['year']) ? $modeParams['year'] : date('Y');
+            $year = isset($params['year']) ? $params['year'] : date('Y');
 
             foreach ([$year] as $y) {
                 $workPlacesHoursOfYear[$y][] = $wp->getTotalWorkingHoursOfYear($y);
@@ -434,7 +434,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
         return collect($dataSource);
     }
 
-    protected function changeValueData($dataSource, $modeParams)
+    protected function changeValueData($dataSource, $params)
     {
         foreach ($dataSource as $key => $values) {
             if (isset($values['trir'])) {
@@ -461,13 +461,13 @@ class Hse_incident_report_010 extends Report_ParentReportController
         return collect($dataSource);
     }
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueParams($params, $request)
     {
         $x = 'year';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$x] = $this->year;
+        $isNullParams = Report::isNullParams($params);
+        if ($isNullParams) {
+            $params[$x] = $this->year;
         }
-        return $modeParams;
+        return $params;
     }
 }

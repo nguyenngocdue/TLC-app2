@@ -17,9 +17,9 @@ class Hr_timesheet_line_030 extends Report_ParentController2
     protected $mode='030';
 
 
-    public function getDataSource($modeParams)
+    public function getDataSource($params)
     {
-        $primaryData = (new Hr_timesheet_line_dataSource())->getDataSource($modeParams);
+        $primaryData = (new Hr_timesheet_line_dataSource())->getDataSource($params);
         return $primaryData;
     }
 }

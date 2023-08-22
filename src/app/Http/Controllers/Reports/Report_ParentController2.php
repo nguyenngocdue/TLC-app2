@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 abstract class Report_ParentController2 extends Controller
 {
     use TraitMenuTitle;
-    use TraitModeParamsReport;
+    use TraitParamsSettingReport;
     use TraitFunctionsReport;
     use TraitLibPivotTableDataFields2;
 
@@ -33,20 +33,20 @@ abstract class Report_ParentController2 extends Controller
     protected $viewName = '';
 
 
-    // abstract protected function getSqlStr($modeParams);
+    // abstract protected function getSqlStr($params);
     public function getType()
     {
         return $this->getTable();
     }
 
-    private function getSql($modeParams)
+    private function getSql($params)
     {
 
-        $sqlStr = $this->getSqlStr($modeParams);
+        $sqlStr = $this->getSqlStr($params);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
-            if (isset($modeParams[$value])) {
-                $valueParam =  $modeParams[$value];
+            if (isset($params[$value])) {
+                $valueParam =  $params[$value];
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
@@ -55,21 +55,21 @@ abstract class Report_ParentController2 extends Controller
         return $sqlStr;
     }
 
-    private function overKeyAndValueDataSource($modeParams, $data)
+    private function overKeyAndValueDataSource($params, $data)
     {
         $dataSource = [];
         foreach ($data as $key => $values) {
             $dataSource[$key]['tableDataSource'] = $values;
-            $dataSource[$key]['tableColumns'] = $this->getTableColumns($modeParams, $data)[$key];
+            $dataSource[$key]['tableColumns'] = $this->getTableColumns($params, $data)[$key];
         }
         return $dataSource;
     }
 
-    public function getDataSource($modeParams)
+    public function getDataSource($params)
     {
-        $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
+        $arraySqlStr = $this->createArraySqlFromSqlStr($params);
         if (empty($arraySqlStr)) {
-            $sql = $this->getSql($modeParams);
+            $sql = $this->getSql($params);
             if (is_null($sql) || !$sql) return collect();
             $sqlData = DB::select(DB::raw($sql));
             return collect($sqlData);
@@ -77,22 +77,22 @@ abstract class Report_ParentController2 extends Controller
         $data = [];
         foreach ($arraySqlStr as $k => $sql) {
             if (is_null($sql) || !$sql) return collect();
-            // $sql = $this->getSql($modeParams);
+            // $sql = $this->getSql($params);
             $sqlData = DB::select(DB::raw($sql));
             $data[$k] = collect($sqlData);
         }
-        $dataSource = $this->overKeyAndValueDataSource($modeParams, $data);
+        $dataSource = $this->overKeyAndValueDataSource($params, $data);
         return $dataSource;
     }
 
-    protected function getDefaultValueModeParams($modeParams)
+    protected function getDefaultValueParams($params)
     {
         $x = 'picker_date';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$x] = PivotReport::defaultPickerDate();
+        $isNullParams = Report::isNullParams($params);
+        if ($isNullParams) {
+            $params[$x] = PivotReport::defaultPickerDate();
         }
-        return $modeParams;
+        return $params;
     }
 
     protected function getTable()
@@ -115,7 +115,7 @@ abstract class Report_ParentController2 extends Controller
         return 10;
     }
 
-    protected function forwardToMode($request, $modeParams)
+    protected function forwardToMode($request, $params)
     {
         $input = $request->input();
         $isFormType = isset($input['form_type']);
@@ -125,7 +125,7 @@ abstract class Report_ParentController2 extends Controller
         return redirect($request->getPathInfo());
     }
 
-    protected function tableDataHeader($modeParams, $data)
+    protected function tableDataHeader($params, $data)
     {
         return [];
     }
@@ -164,30 +164,30 @@ abstract class Report_ParentController2 extends Controller
         return $colParams;
     }
 
-    protected function createArraySqlFromSqlStr($modeParams)
+    protected function createArraySqlFromSqlStr($params)
     {
         return [];
     }
 
-    protected function getBasicInfoData($modeParams)
+    protected function getBasicInfoData($params)
     {
         return [];
     }
 
-    public function makeTitleForTables($modeParams)
+    public function makeTitleForTables($params)
     {
         return [];
     }
 
-    public function selectMonth($modeParams)
+    public function selectMonth($params)
     {
         $month = DocumentReport::getCurrentMonthYear();
         $projectId = 5;
-        if (isset($modeParams['month'])) {
-            $month = $modeParams['month'];
+        if (isset($params['month'])) {
+            $month = $params['month'];
         }
-        if (isset($modeParams['project_id'])) {
-            $projectId = $modeParams['project_id'];
+        if (isset($params['project_id'])) {
+            $projectId = $params['project_id'];
         }
         return [$month, $projectId];
     }
@@ -198,11 +198,11 @@ abstract class Report_ParentController2 extends Controller
         $typeReport = CurrentPathInfo::getTypeReport($request);
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
-        $modeParams = $this->getModeParams($request);
-        $modeParams = $this->getDefaultValueModeParams($modeParams);
+        $params = $this->getParams($request);
+        $params = $this->getDefaultValueParams($params);
 
         if (!$request->input('page') && !empty($input)) {
-            return $this->forwardToMode($request, $modeParams);
+            return $this->forwardToMode($request, $params);
         }
         $pageLimit = $this->getPageParam($typeReport, $entity);
 
@@ -210,9 +210,9 @@ abstract class Report_ParentController2 extends Controller
         $viewName =  CurrentPathInfo::getViewName($request);
         if ($this->viewName) $viewName = $this->viewName;
 
-        $dataSource = $this->getDataSource($modeParams);
-        $tableColumns = $this->getTableColumns($modeParams, $dataSource);
-        $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
+        $dataSource = $this->getDataSource($params);
+        $tableColumns = $this->typeView === 'report-pivot' ? [] : $this->getTableColumns($params, $dataSource);
+        $tableDataHeader = $this->tableDataHeader($params, $dataSource);
         echo $this->getJS();
         $titleReport = $this->makeModeTitleReport($routeName);
         $modeType = $this->modeType;
@@ -221,10 +221,10 @@ abstract class Report_ParentController2 extends Controller
         //data to render for document reports
         [$dataRenderDocReport , $basicInfoData] = [[], []];
         if (str_contains($routeName, 'document-')) {
-            $basicInfoData =  $this->getBasicInfoData($modeParams);
+            $basicInfoData =  $this->getBasicInfoData($params);
             $dataRenderDocReport = [
                 'basicInfoData' => $basicInfoData,
-                'titleTables' => $this->makeTitleForTables($modeParams)
+                'titleTables' => $this->makeTitleForTables($params)
             ];
         }
 
@@ -235,7 +235,7 @@ abstract class Report_ParentController2 extends Controller
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
             'titleReport' => $titleReport,
-            'modeParams' => $modeParams,
+            'params' => $params,
             'typeReport' => $typeReport,
             'modeType' => $this->modeType,
             'currentMode' =>  $this->mode,
@@ -250,26 +250,26 @@ abstract class Report_ParentController2 extends Controller
         ] + $dataRenderDocReport);
     }
 
-    private function triggerDataFollowManagePivot($linesData, $modeType, $modeParams)
+    private function triggerDataFollowManagePivot($linesData, $modeType, $params)
     {
         $fn = (new DataPivotTable2);
-        $data = $fn->makeDataPivotTable($linesData, $modeType, $modeParams);
+        $data = $fn->makeDataPivotTable($linesData, $modeType, $params);
         return $data;
     }
 
     public function exportCSV(Request $request)
     {
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
-        $modeParams = $this->getModeParams($request, '_ep');
-        $linesData = $this->getDataSource($modeParams);
+        $params = $this->getParams($request, '_ep');
+        $linesData = $this->getDataSource($params);
         $modeType = $this->modeType;
         // Pivot data before render 
 
         if ($modeType) {
-            [$dataOutput, $tableColumns,] = $this->triggerDataFollowManagePivot($linesData, $modeType, $modeParams);
-            [$columnKeys, $columnNames] = $this->makeColumnsPivotTable($dataOutput, $modeParams, $tableColumns);
+            [$dataOutput, $tableColumns,] = $this->triggerDataFollowManagePivot($linesData, $modeType, $params);
+            [$columnKeys, $columnNames] = $this->makeColumnsPivotTable($dataOutput, $params, $tableColumns);
         } else {
-            [$columnKeys, $columnNames] = $this->makeColumns($linesData, $modeParams);
+            [$columnKeys, $columnNames] = $this->makeColumns($linesData, $params);
         }
 
         $rows = $this->makeRowsFollowColumns($dataOutput, $columnKeys);

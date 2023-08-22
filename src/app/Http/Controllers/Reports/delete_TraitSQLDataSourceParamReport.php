@@ -11,7 +11,6 @@ trait delete_TraitSQLDataSourceParamReport
 {
     function getDataProdRouting()
     {
-        dd(123);
         $sql = "
             SELECT
                 prodr.id AS prod_routing_id
@@ -33,9 +32,9 @@ trait delete_TraitSQLDataSourceParamReport
         return $sqlData;
     }
 
-    function sqlMultiSelectProdOrders($sql, $modeParams, $field = 'prod_order_id')
+    function sqlMultiSelectProdOrders($sql, $params, $field = 'prod_order_id')
     {
-        $x = $modeParams[$field];
+        $x = $params[$field];
         $con = str_replace(['[', ']'], ['(', ')'], json_encode($x));
         $sql .= "\n AND po.id IN " . $con;
 

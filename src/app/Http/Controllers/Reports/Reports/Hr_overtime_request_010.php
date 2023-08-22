@@ -22,7 +22,7 @@ class Hr_overtime_request_010 extends Report_ParentReportController
     protected $groupByLength = 1;
     protected $maxH = 50;
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
         $sql = "SELECT 
         wpus.name AS user_workplace,
@@ -70,8 +70,8 @@ class Hr_overtime_request_010 extends Report_ParentReportController
                     AND uscate.id = us.category
                     AND otline.hr_overtime_request_id = otr.id
                     AND otr.status LIKE 'approved'";
-        if (isset($modeParams['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
-        if (isset($modeParams['workplace_id'])) $sql .= "\n AND us.workplace = '{{workplace_id}}'";
+        if (isset($params['user_id'])) $sql .= "\n AND us.id = '{{user_id}}'";
+        if (isset($params['workplace_id'])) $sql .= "\n AND us.workplace = '{{workplace_id}}'";
         $sql .= "\n GROUP BY 
                     user_id, employee_id, 
                     year_months, 
@@ -82,18 +82,18 @@ class Hr_overtime_request_010 extends Report_ParentReportController
             ) AS rgt_ot 
             JOIN workplaces wp ON wp.id = rgt_ot.ot_workplace_id";
 
-        if (isset($modeParams['ot_workplace_id'])) $sql .= "\n AND wp.id = '{{ot_workplace_id}}'";
+        if (isset($params['ot_workplace_id'])) $sql .= "\n AND wp.id = '{{ot_workplace_id}}'";
         $sql .= "\n JOIN users us ON us.id = rgt_ot.user_id) AS tb3
                     JOIN workplaces wpus ON tb3.user_workplace_id = wpus.id";
 
-        if (isset($modeParams['month'])) $sql .= "\n AND year_months = '{{month}}'";
+        if (isset($params['month'])) $sql .= "\n AND year_months = '{{month}}'";
         $sql .= "\n ORDER BY name_render, employee_id,  year_months DESC";
         return $sql;
     }
 
 
     // Table
-    public function getTableColumns($dataSource, $modeParams)
+    public function getTableColumns($dataSource, $params)
     {
         // dump($dataSource);
         return [
@@ -280,7 +280,7 @@ class Hr_overtime_request_010 extends Report_ParentReportController
         return $this->createLegendData($legendData);
     }
 
-    protected function enrichDataSource($dataSource, $modeParams)
+    protected function enrichDataSource($dataSource, $params)
     {
 
         // $dataSource = $this->getDataByCompanyTree($dataSource);

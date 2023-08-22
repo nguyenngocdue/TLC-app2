@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\DB;
 trait TraitDataSourceReport
 {
 
-    private function getSql($modeParams)
+    private function getSql($params)
     {
-        $sqlStr = $this->getSqlStr($modeParams);
+        $sqlStr = $this->getSqlStr($params);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
-            if (isset($modeParams[$value])) {
-                $valueParam =  $modeParams[$value];
+            if (isset($params[$value])) {
+                $valueParam =  $params[$value];
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
@@ -21,21 +21,21 @@ trait TraitDataSourceReport
         return $sqlStr;
     }
 
-    private function overKeyAndValueDataSource($modeParams, $data)
+    private function overKeyAndValueDataSource($params, $data)
     {
         $dataSource = [];
         foreach ($data as $key => $values) {
             $dataSource[$key]['tableDataSource'] = $values;
-            $dataSource[$key]['tableColumns'] = $this->getTableColumns($modeParams, $data)[$key];
+            $dataSource[$key]['tableColumns'] = $this->getTableColumns($params, $data)[$key];
         }
         return $dataSource;
     }
 
-    public function getDataSource($modeParams)
+    public function getDataSource($params)
     {
-        $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
+        $arraySqlStr = $this->createArraySqlFromSqlStr($params);
         if (empty($arraySqlStr)) {
-            $sql = $this->getSql($modeParams);
+            $sql = $this->getSql($params);
             if (is_null($sql) || !$sql) return collect();
             $sqlData = DB::select(DB::raw($sql));
             return collect($sqlData);
@@ -46,11 +46,11 @@ trait TraitDataSourceReport
             $sqlData = DB::select(DB::raw($sql));
             $data[$k] = collect($sqlData);
         }
-        $dataSource = $this->overKeyAndValueDataSource($modeParams, $data);
+        $dataSource = $this->overKeyAndValueDataSource($params, $data);
         return $dataSource;
     }
     
-    public function getBasicInfoData($modeParams)
+    public function getBasicInfoData($params)
     {
         return [];
     }

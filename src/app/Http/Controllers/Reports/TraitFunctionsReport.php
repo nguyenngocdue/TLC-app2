@@ -15,9 +15,9 @@ trait TraitFunctionsReport
         return $sqlData;
     }
 
-    protected function makeColumns($dataSource, $modeParams)
+    protected function makeColumns($dataSource, $params)
     {
-        $columns = $this->getTableColumns($dataSource, $modeParams);
+        $columns = $this->getTableColumns($dataSource, $params);
         $columnKeys = array_column($columns, 'dataIndex');
         $columnNames =  array_map(function ($item) {
 
@@ -47,7 +47,7 @@ trait TraitFunctionsReport
         return true;
     }
 
-    protected function makeColumnsPivotTable($dataSource, $modeParams, $tableColumns)
+    protected function makeColumnsPivotTable($dataSource, $params, $tableColumns)
     {
         $columns = $tableColumns;
         $columnKeys = array_column($columns, 'dataIndex');

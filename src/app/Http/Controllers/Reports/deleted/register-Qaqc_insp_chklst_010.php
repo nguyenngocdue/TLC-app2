@@ -21,7 +21,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
     protected $tableTrueWidth = true;
     protected $maxH = 50;
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
         $sql = "SELECT tb.*,
         CASE
@@ -74,8 +74,8 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
                             AND chlst.deleted_at IS NULL
                             AND tmpl.deleted_at IS NULL
                             AND tmplsh.deleted_at IS NULL";
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
-        if (isset($modeParams['checksheet_type_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
+        if (isset($params['sub_project_id'])) $sql .= "\n AND prod.sub_project_id = '{{sub_project_id}}'";
+        if (isset($params['checksheet_type_id'])) $sql .= "\n AND chlst.qaqc_insp_tmpl_id = '{{checksheet_type_id}}'";
         $sql .= "\n AND sp.id = prod.sub_project_id
                     AND chlst.prod_order_id = prod.id
                     AND chlst.qaqc_insp_tmpl_id = tmpl.id
@@ -91,7 +91,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         GROUP BY sheet_id, prod_id, tmpl_sheet_id) AS tb";
         return $sql;
     }
-    public function getTableColumns($dataSource, $modeParams)
+    public function getTableColumns($dataSource, $params)
     {
         $array = [];
         foreach ($dataSource as $key => $value) {
@@ -138,7 +138,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
         ];
     }
 
-    protected function changeValueData($dataSource, $modeParams)
+    protected function changeValueData($dataSource, $params)
     {
 
         foreach ($dataSource as $key => $value) {
@@ -191,9 +191,9 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
     }
 
 
-    protected function enrichDataSource($dataSource, $modeParams)
+    protected function enrichDataSource($dataSource, $params)
     {
-        $isNullParams = Report::isNullModeParams($modeParams);
+        $isNullParams = Report::isNullParams($params);
         if ($isNullParams) return collect([]);
 
         $enrichData = array_map(function ($item) {
@@ -202,17 +202,17 @@ class Qaqc_insp_chklst_010 extends Report_ParentRegisterController
 
         $groupedArray = Report::groupArrayByKey($enrichData, 'prod_id');
         $result = Report::mergeArrayValues($groupedArray);
-        $data = $this->changeValueData($result, $modeParams);
+        $data = $this->changeValueData($result, $params);
         return collect($data);
     }
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueParams($params, $request)
     {
         $x = 'sub_project_id';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$x] = $this->sub_project_id;
+        $isNullParams = Report::isNullParams($params);
+        if ($isNullParams) {
+            $params[$x] = $this->sub_project_id;
         }
-        return $modeParams;
+        return $params;
     }
 }

@@ -23,7 +23,7 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 	protected  $check_sheet_id = 1;
 	protected  $run_history_option_id = 1;
 
-	public function getSqlStr($modeParams)
+	public function getSqlStr($params)
 	{
 		$sql =  " SELECT
                         
@@ -50,20 +50,20 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
                         ,c2
                         ,c3
                         ,c4";
-		if (isset($modeParams['prod_order_id'])) $sql .= "\n ,po.id AS po_id , po.name AS po_name , po.compliance_name AS compliance_name";
-		if (isset($modeParams['sub_project_id'])) $sql .= " \n ,sp.name AS sub_project_name, pj.name AS project_name ";
+		if (isset($params['prod_order_id'])) $sql .= "\n ,po.id AS po_id , po.name AS po_name , po.compliance_name AS compliance_name";
+		if (isset($params['sub_project_id'])) $sql .= " \n ,sp.name AS sub_project_name, pj.name AS project_name ";
 		$sql .= "\n FROM qaqc_insp_chklst_runs r
                     JOIN qaqc_insp_chklst_shts s ON r.qaqc_insp_chklst_sht_id = s.id #AND s.id = 44
                     JOIN qaqc_insp_chklsts csh ON csh.id = s.qaqc_insp_chklst_id
                     JOIN qaqc_insp_tmpls tp ON tp.id = csh.qaqc_insp_tmpl_id";
-		if (isset($modeParams['checksheet_type_id'])) $sql .= "\n AND tp.id = '{{checksheet_type_id}}'";
+		if (isset($params['checksheet_type_id'])) $sql .= "\n AND tp.id = '{{checksheet_type_id}}'";
 		$sql .= "\n JOIN qaqc_insp_chklst_run_lines l ON l.qaqc_insp_chklst_run_id = r.id
                     JOIN control_types ct ON ct.id = l.control_type_id";
-		if (isset($modeParams['prod_order_id']))  $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
+		if (isset($params['prod_order_id']))  $sql .= "\nJOIN prod_orders po ON po.id = '{{prod_order_id}}'";
 		else {
 			$sql .= "\nJOIN prod_orders po ON po.id = 0";
 		};
-		if (isset($modeParams['sub_project_id'])) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id
+		if (isset($params['sub_project_id'])) $sql .= "\nJOIN sub_projects sp ON sp.id = po.sub_project_id
 								 JOIN projects pj ON pj.id = sp.project_id";
 
 		$sql .= "\nLEFT JOIN qaqc_insp_control_values cv ON l.qaqc_insp_control_value_id = cv.id
@@ -78,13 +78,13 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
                             )  AS divide_control ON l.qaqc_insp_control_group_id = divide_control.control_group_id
             
                 WHERE 1=1";
-		if (isset($modeParams['sub_project_id']))  $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
-		if (isset($modeParams['check_sheet_id'])) $sql .= " \n AND csh.id = '{{check_sheet_id}}'";
+		if (isset($params['sub_project_id']))  $sql .= " \n AND po.sub_project_id = '{{sub_project_id}}' \n";
+		if (isset($params['check_sheet_id'])) $sql .= " \n AND csh.id = '{{check_sheet_id}}'";
 		$sql .= "\n ORDER BY line_name,  run_updated DESC ";
 		return $sql;
 	}
 
-	public function getTableColumns($dataSource, $modeParams)
+	public function getTableColumns($dataSource, $params)
 	{
 		return [
 			[
@@ -132,9 +132,9 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		return 1000;
 	}
 
-	private function transformLines($groupByLinesDesc, $indexByLineIds, $modeParams)
+	private function transformLines($groupByLinesDesc, $indexByLineIds, $params)
 	{
-		if (isset($modeParams['run_option']) && !$modeParams['run_option']) {
+		if (isset($params['run_option']) && !$params['run_option']) {
 			array_walk($groupByLinesDesc, function ($ids, $desc) use (&$groupByLinesDesc) {
 				if ($desc === 'TLC Inspector Name') {
 					$groupByLinesDesc[$desc] = (array)$ids;
@@ -177,9 +177,9 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		return $data;
 	}
 
-	protected function enrichDataSource($dataSource, $modeParams)
+	protected function enrichDataSource($dataSource, $params)
 	{
-		$isNullParams = Report::isNullModeParams($modeParams);
+		$isNullParams = Report::isNullParams($params);
 		if ($isNullParams) return collect([]);
 
 		$groupByChklsts = Report::groupArrayByKey($dataSource, 'chklsts_id');
@@ -190,11 +190,11 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 			$groupByChklsts[$value] =  Report::assignKeyByKey($groupByChklsts[$value], 'line_id');
 		});
 		//add "response_type" field into lines
-		array_walk($groupByChklsts, function ($value, $key) use (&$groupByChklsts, $modeParams) {
+		array_walk($groupByChklsts, function ($value, $key) use (&$groupByChklsts, $params) {
 			$groupByLinesDesc = Report::groupArrayByKey2($value, 'line_description', 'line_id', 'sheet_id');
 			// unique run for  "TLC Inspector Name" line
 			$groupByLinesDesc['TLC Inspector Name'] = array_unique($groupByLinesDesc['TLC Inspector Name']);
-			$groupByChklsts[$key] = $this->transformLines($groupByLinesDesc, $value, $modeParams);
+			$groupByChklsts[$key] = $this->transformLines($groupByLinesDesc, $value, $params);
 		});
 		//group lines into each sheet
 		$sheetGroup = [];
@@ -302,26 +302,26 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		return $sheets;
 	}
 
-	protected function getDefaultValueModeParams($modeParams, $request)
+	protected function getDefaultValueParams($params, $request)
 	{
 		$x = 'sub_project_id';
 		$y = 'prod_order_id';
 		$z = 'check_sheet_id';
 		$l = 'checksheet_type_id';
 		$m = 'run_history_option_id';
-		$isNullModeParams = Report::isNullModeParams($modeParams);
-		if ($isNullModeParams) {
-			$modeParams[$x] = $this->sub_project_id;
-			$modeParams[$y] = $this->prod_order_id;
-			$modeParams[$z] = $this->check_sheet_id;
-			$modeParams[$l] = $this->checksheet_type_id;
-			$modeParams[$m] = $this->run_history_option_id;
+		$isNullParams = Report::isNullParams($params);
+		if ($isNullParams) {
+			$params[$x] = $this->sub_project_id;
+			$params[$y] = $this->prod_order_id;
+			$params[$z] = $this->check_sheet_id;
+			$params[$l] = $this->checksheet_type_id;
+			$params[$m] = $this->run_history_option_id;
 		}
-		// dd($modeParams);
-		return $modeParams;
+		// dd($params);
+		return $params;
 	}
 
-	protected function forwardToMode($request, $modeParams)
+	protected function forwardToMode($request, $params)
 	{
 		$input = $request->input();
 		$isFormType = isset($input['form_type']);
