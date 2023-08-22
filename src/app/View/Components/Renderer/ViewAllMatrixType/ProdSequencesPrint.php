@@ -8,7 +8,9 @@ use Illuminate\Support\Str;
 class ProdSequencesPrint extends ProdSequences
 {
     protected $mode = 'checkbox';
-    protected $showPrintButton = true;
+
+    protected $actionBtnShowExportCsv = false;
+    protected $actionBtnShowPrintButton = true;
 
     protected function getXAxis2ndHeader($xAxis)
     {

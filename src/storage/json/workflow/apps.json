@@ -355,6 +355,22 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "ghg_cat": {
+        "name": "ghg_cat",
+        "package_tab": "application",
+        "package": "compliance",
+        "sub_package": "esg",
+        "title": "GHG Categories",
+        "nickname": "ghgc",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "ghg_metric_type": {
         "name": "ghg_metric_type",
         "package_tab": "application",

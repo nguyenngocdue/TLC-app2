@@ -11,6 +11,7 @@
         "width": "170",
         "hidden_edit": "true",
         "hidden_filter": "true",
+        "hidden_template_print": "true",
         "frozen_right": "true"
     },
     "_deleted_at": {
@@ -25,6 +26,7 @@
         "width": "170",
         "hidden_edit": "true",
         "hidden_filter": "true",
+        "hidden_template_print": "true",
         "hidden_view_all": "true",
         "hidden_print": "true",
         "frozen_left": "true"
@@ -41,6 +43,7 @@
         "width": "100",
         "hidden_edit": "true",
         "hidden_filter": "true",
+        "hidden_template_print": "true",
         "hidden_view_all": "true",
         "hidden_print": "true",
         "frozen_left": "true"
@@ -56,6 +59,7 @@
         "col_span": "12",
         "width": "100",
         "hidden_edit": "true",
+        "hidden_template_print": "true",
         "hidden_print": "true"
     },
     "_order_no": {
@@ -70,6 +74,7 @@
         "width": "20",
         "hidden_edit": "true",
         "hidden_filter": "true",
+        "hidden_template_print": "true",
         "hidden_view_all": "true",
         "hidden_print": "true"
     },
@@ -84,6 +89,7 @@
         "col_span": "6",
         "width": "150",
         "hidden_edit": "true",
+        "hidden_template_print": "true",
         "frozen_right": "true"
     },
     "_updated_at": {
@@ -98,6 +104,7 @@
         "width": "170",
         "hidden_edit": "true",
         "hidden_filter": "true",
+        "hidden_template_print": "true",
         "frozen_right": "true",
         "hidden_view_all": "true",
         "hidden_print": "true"

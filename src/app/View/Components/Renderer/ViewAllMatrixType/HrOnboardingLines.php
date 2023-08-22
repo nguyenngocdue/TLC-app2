@@ -24,6 +24,8 @@ class HrOnboardingLines extends ViewAllTypeMatrixParent
     // protected $rotate45Width = 400;
     protected $groupBy = null;
     protected $allowCreation = false;
+    protected $tableTopCenterControl = "To create data, please use HR OnBoarding screen.";
+
     private $timeFrameInDays = 30;
     /**
      * Create a new component instance.

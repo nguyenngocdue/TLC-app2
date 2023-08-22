@@ -1,8 +1,8 @@
 {
-    "_getGhgCat": {
-        "name": "_getGhgCat",
+    "_getScope": {
+        "name": "_getScope",
         "relationship": "belongsTo",
-        "control_name": "ghg_cat_id",
+        "control_name": "scope_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
@@ -41,22 +41,6 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "",
-        "filter_columns": "",
-        "filter_values": "",
-        "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "relationship": "hasMany",
-        "control_name": "getLines",
-        "renderer_view_all": "agg_count",
-        "renderer_view_all_param": "",
-        "renderer_view_all_unit": "line",
-        "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
-        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",

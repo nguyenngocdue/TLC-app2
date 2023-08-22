@@ -30,6 +30,9 @@ class Prod_sequence extends ModelExtended
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getProdRouting" => ['belongsTo', Prod_routing::class, "prod_routing_id"],
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, "prod_discipline_id"],
+
+        "comment_on_hold_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_cancel_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
 
     public function getProdOrder()
@@ -78,6 +81,20 @@ class Prod_sequence extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function comment_on_hold_reason()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function comment_cancel_reason()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 
     public function getProdRoutingDetails()
