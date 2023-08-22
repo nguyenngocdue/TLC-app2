@@ -13,10 +13,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_name": {
         "name": "_name",
@@ -32,10 +35,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_text1": {
         "name": "_text1",
@@ -51,10 +57,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_text2": {
         "name": "_text2",
@@ -70,10 +79,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_text4": {
         "name": "_text4",
@@ -89,10 +101,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_text3": {
         "name": "_text3",
@@ -108,10 +123,123 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_number1": {
+        "name": "_number1",
+        "column_name": "number1",
+        "column_type": "int",
+        "label": "Integer",
+        "control": "number",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "hidden_template_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_number2": {
+        "name": "_number2",
+        "column_name": "number2",
+        "column_type": "float",
+        "label": "Float",
+        "control": "number",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "hidden_template_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_number3": {
+        "name": "_number3",
+        "column_name": "number3",
+        "column_type": "double",
+        "label": "Double",
+        "control": "number",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "hidden_template_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_number4": {
+        "name": "_number4",
+        "column_name": "number4",
+        "column_type": "decimal(8,4)",
+        "label": "Decimal 8,4",
+        "control": "number",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "hidden_template_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
+    },
+    "_number5": {
+        "name": "_number5",
+        "column_name": "number5",
+        "column_type": "decimal(10,6)",
+        "label": "Decimal 10,6",
+        "control": "number",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "hidden_template_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_boolean1": {
         "name": "_boolean1",
@@ -127,10 +255,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_radio1": {
         "name": "_radio1",
@@ -146,10 +277,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_dropdown1": {
         "name": "_dropdown1",
@@ -165,10 +299,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_checkboxZut1()": {
         "name": "_checkboxZut1()",
@@ -184,10 +321,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_dropdownMultiZut1()": {
         "name": "_dropdownMultiZut1()",
@@ -203,10 +343,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_parent_id": {
         "name": "_parent_id",
@@ -222,10 +365,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -241,10 +387,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_signature": {
         "name": "_signature",
@@ -260,10 +409,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -279,10 +431,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -298,10 +453,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_order_no": {
         "name": "_order_no",
@@ -317,10 +475,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -336,10 +497,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -355,9 +519,12 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
+        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": ""
     }
 }

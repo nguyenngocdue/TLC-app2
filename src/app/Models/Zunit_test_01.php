@@ -13,6 +13,11 @@ class Zunit_test_01 extends ModelExtended
         "text2",
         "text3",
         "text4",
+        "number1", //int
+        "number2", //float
+        "number3", //double
+        "number4", //decimal(8,4)
+        "number5", //decimal(10,6)
         "dropdown1",
         "radio1",
         "boolean1",
