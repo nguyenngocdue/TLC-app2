@@ -162,12 +162,12 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true",
-        "in_progress": "true",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "not_applicable": "true"
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -242,21 +242,21 @@
     "_comment_on_hold_reason": {
         "name": "_comment_on_hold_reason",
         "column_name": "comment_on_hold_reason",
-        "new": "",
-        "in_progress": "",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "not_applicable": "true"
+        "new": "on_hold",
+        "in_progress": "on_hold",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
     },
     "_comment_cancel_reason": {
         "name": "_comment_cancel_reason",
         "column_name": "comment_cancel_reason",
-        "new": "",
-        "in_progress": "",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "not_applicable": "true"
+        "new": "cancelled",
+        "in_progress": "cancelled",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
     }
 }

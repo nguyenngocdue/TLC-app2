@@ -59,6 +59,12 @@
         "field_name": "comment_by_line_manager",
         "allowed_to_delete": ""
     },
+    "_comment_cancel_reason": {
+        "name": "_comment_cancel_reason",
+        "field_id": "190",
+        "field_name": "comment_cancel_reason",
+        "allowed_to_delete": ""
+    },
     "_comment_insp_rejected_reason": {
         "name": "_comment_insp_rejected_reason",
         "field_id": "51",
@@ -69,6 +75,12 @@
         "name": "_comment_inspector_decision",
         "field_id": "53",
         "field_name": "comment_inspector_decision",
+        "allowed_to_delete": ""
+    },
+    "_comment_on_hold_reason": {
+        "name": "_comment_on_hold_reason",
+        "field_id": "189",
+        "field_name": "comment_on_hold_reason",
         "allowed_to_delete": ""
     },
     "_comment_rejected_reason": {
