@@ -60,7 +60,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return [];
     }
-    protected function getXAxisPrevious()
+    protected function getXAxisPrimaryColumns()
     {
         return collect();
     }
@@ -121,7 +121,8 @@ abstract class ViewAllTypeMatrixParent extends Component
             return (object)['value' => "unknown status [" . $document->status . "] ???",];
         }
     }
-    private function getBackgroundColorAndTextColor($document){
+    private function getBackgroundColorAndTextColor($document)
+    {
         $status = $this->statuses[$document->status] ?? null;
         if (!is_null($status)) {
             $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'];
@@ -131,13 +132,14 @@ abstract class ViewAllTypeMatrixParent extends Component
         $textColor = $textColor ?? '';
         return [$bgColor, $textColor];
     }
-    protected function makeCheckbox($document, $forExcel){
-       
+    protected function makeCheckbox($document, $forExcel)
+    {
+
         $id = $document->id;
         [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
         $item = [
             'value' => "<div><input type='checkbox' name='$id'/></div>",
-            'cell_title' => 'Select check box id:'.$id,
+            'cell_title' => 'Select check box id:' . $id,
             'cell_class' => "$bgColor $textColor",
         ];
         return (object) $item;
