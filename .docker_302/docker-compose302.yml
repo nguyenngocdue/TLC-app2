@@ -32,7 +32,7 @@ services:
       - REDIS_PASSWORD=password
       - REDIS_REPLICATION_mode=master
     ports:
-      - "37912:6379"
+      - "37802:6379"
     networks:
       - laravel302
   redisinsight:
@@ -70,7 +70,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "38302:3306"
+      - "38202:3306"
     volumes:
       - ../mysql:/var/lib/mysql
     environment:
