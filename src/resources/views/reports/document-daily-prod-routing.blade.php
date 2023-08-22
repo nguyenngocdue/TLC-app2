@@ -21,8 +21,6 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
 {{-- RENDER TABLES --}}
 @foreach($tableDataSource as $key => $data)
 @php
-$tableColumns = $data['tableColumns'];
-$tableDataSource = $data['tableDataSource'];
 $basicInfo = $basicInfoData[$key];
 @endphp
 <div class="flex justify-center bg-only-print">
@@ -69,14 +67,10 @@ $basicInfo = $basicInfoData[$key];
                 @endif
             </div>
 
-            <div class="grid grid-cols-12 items-center">
-                <div class="col-span-12 text-left">
-                    <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">{{$titleTables[$key]}}
-                        <p class="text-sm font-light italic"></p>
-                    </h4>
-                </div>
+            <div class="">
+                <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Detail Report</h4>
+                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns" :dataSource="$data" />
             </div>
-            <x-renderer.table showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource" {{-- maxH="{{$maxH}}" --}} {{-- groupBy="{{$groupBy}}" groupByLength="{{$groupByLength}}" --}}/>
         </div>
     </div>
 </div>

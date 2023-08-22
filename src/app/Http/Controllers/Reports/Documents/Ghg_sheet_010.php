@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Http\Controllers\Reports\Report_ParentDocumentController2;
+use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Utils\Support\Report;
 
-class Ghg_sheet_010 extends Report_ParentDocumentController2
+class Ghg_sheet_010 extends Report_ParentDocument2Controller
 {
 
 	use TraitForwardModeReport;
@@ -14,7 +14,6 @@ class Ghg_sheet_010 extends Report_ParentDocumentController2
 
 	public function getSqlStr($params)
 	{
-		// dump($params);
 		$defaultMonth = $this->getCurrentDateRange();
 		$fromMonth = $defaultMonth['from'];
 		$toMonth = $defaultMonth['to'];

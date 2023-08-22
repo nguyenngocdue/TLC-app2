@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Http\Controllers\Reports\Report_ParentController2;
+use App\Http\Controllers\Reports\Report_Parent2Controller;
 use App\Http\Controllers\Reports\Reports\Hr_timesheet_line_dataSource;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Utils\Support\PivotReport;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class Qaqc_wir_010 extends Report_ParentController2
+class Qaqc_wir_010 extends Report_Parent2Controller
 
 {
     use TraitForwardModeReport;

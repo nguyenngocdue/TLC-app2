@@ -34,6 +34,7 @@ class PivotTable extends Component
         private $params = [],
         private $pageLimit = 10,
         protected $tableTrueWidth = false,
+        protected $tableColumns = [],
 
     ) {
     }
@@ -110,6 +111,7 @@ class PivotTable extends Component
 
     public function render()
     {
+
         $linesData = $this->dataSource;
         $params = $this->params;
         $pageLimit = $this->pageLimit;
@@ -139,8 +141,8 @@ class PivotTable extends Component
         }
         $dataOutput = $this->changeValueData($dataOutput, $isRawData);
         $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
+        if(!empty($this->tableColumns)) $tableColumns = $this->tableColumns;
 
-        // dd($linesData, $dataOutput);
         return view("components.renderer.report.pivot-table", [
             'tableDataSource' => $dataRender,
             'tableColumns' => $tableColumns,

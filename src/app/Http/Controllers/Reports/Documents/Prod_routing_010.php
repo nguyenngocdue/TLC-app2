@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
-use App\Http\Controllers\Reports\Report_ParentDocumentController2;
+use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Models\Prod_discipline;
@@ -11,10 +11,12 @@ use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
+use App\Utils\Support\DocumentReport;
+use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 
 
-class Prod_routing_010 extends Report_ParentDocumentController2
+class Prod_routing_010 extends Report_ParentDocument2Controller
 {
 
     use TraitForwardModeReport;
@@ -26,7 +28,6 @@ class Prod_routing_010 extends Report_ParentDocumentController2
     protected $subProjectId = 21;
     protected $prodRoutingId = 2;
     protected $groupByLength = 1;
-    protected $topTitleTable = 'Detail Report';
     protected $groupBy = 'prod_discipline_name';
     protected $viewName = 'document-daily-prod-routing';
 
@@ -73,6 +74,16 @@ class Prod_routing_010 extends Report_ParentDocumentController2
                     ORDER BY prod_discipline_name";
         // dump($sql);
         return $sql;
+    }
+
+    protected function createArraySqlFromSqlStr($params)
+    {
+        $sqlStr = [];
+        $manyParams = $this->createManyParamsFromDates($params);
+        foreach ($manyParams as $key => $param) {
+            $sqlStr[$key] = $this->getSqlStr($param);
+        }
+        return $sqlStr;
     }
 
     protected function getDefaultValueParams($params)
@@ -132,10 +143,7 @@ class Prod_routing_010 extends Report_ParentDocumentController2
 
     protected function getTableColumns($params, $dataSource)
     {
-        $countTables = array_keys($this->createArraySqlFromSqlStr($params));
-        $array = [];
-        foreach ($countTables as $key) {
-            $array[$key] =
+        return
                 [
                     [
                         "title" => "Production Routing Link",
@@ -171,14 +179,6 @@ class Prod_routing_010 extends Report_ParentDocumentController2
                         'footer' => "agg_sum"
                     ]
                 ];
-        }
-        return $array;
-    }
-
-    public function makeTitleForTables($params)
-    {
-        $tableName = array_keys($this->getTableColumns($params, []));
-        return array_fill_keys($tableName, $this->topTitleTable);
     }
 
     public function getBasicInfoData($params)
@@ -215,15 +215,4 @@ class Prod_routing_010 extends Report_ParentDocumentController2
         // dd($manyParams);
         return $basicInfoData;
     }
-
-    protected function createArraySqlFromSqlStr($params)
-    {
-        $sqlStr = [];
-        $manyParams = $this->createManyParamsFromDates($params);
-        foreach ($manyParams as $key => $param) {
-            $sqlStr[$key] = $this->getSqlStr($param);
-        }
-        return $sqlStr;
-    }
-
 }

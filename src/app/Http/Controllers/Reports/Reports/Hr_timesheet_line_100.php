@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentController2;
+use App\Http\Controllers\Reports\Report_Parent2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 
-class Hr_timesheet_line_100 extends Report_ParentController2
+class Hr_timesheet_line_100 extends Report_Parent2Controller
 
 {
     use TraitForwardModeReport;

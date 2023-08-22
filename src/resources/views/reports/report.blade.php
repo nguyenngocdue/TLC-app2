@@ -24,7 +24,7 @@
                     modeType="{{$modeType}}"  
                     showNo={{true}} 
                     :dataHeader="$tableDataHeader" 
-                    :columns="$tableColumns" 
+                    :tableColumns="$tableColumns" 
                     :params="$params" 
                     :dataSource="$tableDataSource"  
                     tableTrueWidth={{$tableTrueWidth?1:0}} 
