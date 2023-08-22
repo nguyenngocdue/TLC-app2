@@ -5,14 +5,12 @@ namespace App\Http\Controllers\Entities;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Str;
 
-trait TraitViewAllMatrixController
+trait TraitViewAllMatrixApproveMultiController
 {
-    use TraitViewAllMatrixCommon;
-
-    private function indexViewAllMatrix($request)
+    private function indexViewAllMatrixApproveMulti($request)
     {
         if ($r = $this->updateUserSettings($request)) return $r;
-        return view('dashboards.pages.entity-view-all-matrix', [
+        return view('dashboards.pages.entity-view-all-matrix-print', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'title' => '(Matrix)',
             'type' => Str::plural($this->type),

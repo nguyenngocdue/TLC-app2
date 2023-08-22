@@ -24,6 +24,7 @@ class ViewAllController extends Controller
     use TraitViewAllCalendarController;
     use TraitViewAllMatrixController;
     use TraitViewAllMatrixPrintController;
+    use TraitViewAllMatrixApproveMultiController;
 
     protected $type = "";
     protected $typeModel = '';
@@ -76,6 +77,8 @@ class ViewAllController extends Controller
                 return $this->indexViewAllMatrix($request);
             case 'matrix_print':
                 return $this->indexViewAllMatrixPrint($request);
+            case "matrix_approve_multi":
+                return $this->indexViewAllMatrixApproveMulti($request);
             case 'table':
             default:
                 return $this->indexViewAllTable($request, $trashed);
