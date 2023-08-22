@@ -65,7 +65,7 @@ class ViewAllTypeSelector extends Component
                 'href' => "?view_type=matrix_approve_multi&action=updateViewAllMode&_entity=$tableName",
                 'title' => "Approval View",
                 'icon' => 'fa-duotone fa-box-check',
-                'active' =>  $this->viewType == 'matrix-print-view',
+                'active' =>  $this->viewType == 'matrix-approve-multi-view',
             ];
         };
         return $tabs;

@@ -10,5 +10,4 @@
     <x-renderer.view-all.view-all-type-selector type="{{$type}}" viewType="matrix-view" />
     <x-renderer.view-all.view-all-type-matrix type="{{$type}}" />
 </div>
-{{-- <script src="{{ asset('js/renderprop.js') }}"></script> --}}
 @endsection

@@ -54,10 +54,15 @@ class HrTimesheetWorkers extends ViewAllTypeMatrixParent
 
     protected function getMatrixDataSource($xAxis)
     {
-        // dump($xAxis);
-        $firstDay = $xAxis[0]['dataIndex'];
-        $lastDay =  $xAxis[sizeof($xAxis) - 1]['dataIndex'];
-        $lines = Hr_timesheet_worker::whereBetween('ts_date', [$firstDay, $lastDay])->get();
+        // dd($xAxis);
+        $lines = collect();
+        if (sizeof($xAxis)) {
+            $firstDay = $xAxis[0]['dataIndex'];
+            $lastDay =  $xAxis[sizeof($xAxis) - 1]['dataIndex'];
+            $lines = Hr_timesheet_worker::whereBetween('ts_date', [$firstDay, $lastDay])->get();
+        } else {
+            dump("xAxis is empty.");
+        }
         return $lines;
     }
 

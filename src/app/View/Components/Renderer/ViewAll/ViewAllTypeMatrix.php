@@ -14,7 +14,7 @@ class ViewAllTypeMatrix extends Component
      */
     public function __construct(
         private $type,
-        private $view =null,
+        private $view = null,
         // private $viewportDate = null,
         // private $viewportMode = 'week',
     ) {
@@ -31,6 +31,7 @@ class ViewAllTypeMatrix extends Component
     {
         switch ($this->type) {
             case "hr_timesheet_workers":
+                if ($this->view == 'approve-multi') return Blade::render("<x-renderer.view-all-matrix-type.HrTimesheetWorkersApproveMulti/>");
                 return Blade::render("<x-renderer.view-all-matrix-type.HrTimesheetWorkers/>");
             case "qaqc_wirs":
                 return Blade::render("<x-renderer.view-all-matrix-type.QaqcWirs/>");
@@ -39,7 +40,7 @@ class ViewAllTypeMatrix extends Component
             case "hse_extra_metrics":
                 return Blade::render("<x-renderer.view-all-matrix-type.HseExtraMetrics/>");
             case "prod_sequences":
-                if($this->view == 'print') return Blade::render("<x-renderer.view-all-matrix-type.ProdSequencesPrint/>");
+                if ($this->view == 'print') return Blade::render("<x-renderer.view-all-matrix-type.ProdSequencesPrint/>");
                 return Blade::render("<x-renderer.view-all-matrix-type.ProdSequences/>");
             case "ghg_sheets":
                 return Blade::render("<x-renderer.view-all-matrix-type.GhgSheets/>");
