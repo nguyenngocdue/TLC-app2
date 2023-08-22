@@ -336,6 +336,7 @@ const addANewLineFull = (params) => {
                     </label></div>'
                     break
                 case 'number4':
+                    const { numericScale = 0 } = column
                     renderer = "<input id='" + id + "' name='" + id + "' component='editable/number4' " + (column['readOnly'] ? ' readonly' : '') + " class='" + column['classList'] + "' />"
                     if (column['dataIndex'] === 'order_no') {
                         orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + 10
@@ -345,7 +346,7 @@ const addANewLineFull = (params) => {
                         // onChange = "onChangeDropdown4(" + onChangeParams + ");changeBgColor(this,\"" + tableId + "\")"
                         const changeBgColorFn = 'changeBgColor(this,"' + tableId + '");'
                         const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
-                        const parseNumber4 = 'parseNumber2("' + id + '", getEById("' + id + '").val());'
+                        const parseNumber4 = 'parseNumber2("' + id + '", getEById("' + id + '").val(), ' + numericScale + ');'
                         renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeBgColorFn + changeFooterValue + parseNumber4) + '</script>'
                     }
                     break

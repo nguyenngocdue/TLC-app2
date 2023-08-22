@@ -55,6 +55,13 @@ class Zunit_test_01 extends ModelExtended
             ['dataIndex' => 'text2', 'cloneable' => true],
             // ['dataIndex' => 'text3'],
             ['dataIndex' => 'text4', 'cloneable' => true],
+
+            ['dataIndex' => 'number1', 'cloneable' => true],
+            ['dataIndex' => 'number2', 'cloneable' => true],
+            ['dataIndex' => 'number3', 'cloneable' => true],
+            ['dataIndex' => 'number4', 'cloneable' => true],
+            ['dataIndex' => 'number5', 'cloneable' => true],
+
             // ['dataIndex' => 'dropdown1'],
             ['dataIndex' => 'radio1', 'cloneable' => true],
             ['dataIndex' => 'boolean1', 'cloneable' => true],

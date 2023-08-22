@@ -85,6 +85,7 @@ trait TraitTableColumnEditable
                     $newColumn['renderer'] = 'number4';
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = 'text-right ' . $classListText;
+                    $newColumn['properties']['numericScale'] = $prop['numeric_scale'];
                     break;
                 case 'toggle':
                     $newColumn['renderer'] = 'toggle4';

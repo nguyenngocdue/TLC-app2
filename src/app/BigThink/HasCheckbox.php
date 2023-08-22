@@ -219,8 +219,9 @@ trait HasCheckbox
     //Zunit_test_01::find(1)->attachCheck(20, "App\\Models\\Workplace", [1,2,3])
     //Zunit_test_01::find(1)->attachCheck(20, "App\\Models\\Workplace", [4,5=> ["xyz" => 456],6])
     //Zunit_test_01::find(1)->attachCheck(20, "App\\Models\\Workplace", [7=> ["xyz" => 789],8,9])
-    function attachCheck($fieldNameOrId, $termModelPath, array $ids)
+    function attachCheck($fieldNameOrId, $termModelPath, $ids)
     {
+        if (is_string($ids)) $ids = explode(",", $ids);
         [$fieldId, $reversedDirection] = $this->guessFieldId($fieldNameOrId);
         $result = $this->prepareForAttach($fieldId, $termModelPath, $ids, $reversedDirection);
         // var_dump($result);
