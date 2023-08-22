@@ -22,7 +22,7 @@ class Prod_sequence_040 extends Report_ParentReportController
     protected $rotate45Width = 400;
 
     protected $tableTrueWidth = true;
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
         $sql = "SELECT 
         sp.name AS sub_project_name, po.id AS po_id, po.name AS po_name, ps.id AS prod_sequence_id 
@@ -39,9 +39,9 @@ class Prod_sequence_040 extends Report_ParentReportController
             AND pr.deleted_at IS NULL
             AND prl.deleted_at IS NULL
             AND terms.deleted_at IS NULL";
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
-        if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
-        if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";
+        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
+        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
+        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";
         $sql .= "\n 
         AND sp.id = po.sub_project_id
         AND ps.prod_order_id = po.id
@@ -53,7 +53,7 @@ class Prod_sequence_040 extends Report_ParentReportController
         return $sql;
     }
 
-    public function getTableColumns($dataSource, $modeParams)
+    public function getTableColumns($dataSource, $params)
     {
         // dd($dataSource);
         $firstCols = [
@@ -94,7 +94,7 @@ class Prod_sequence_040 extends Report_ParentReportController
     }
 
 
-    protected function transformDataSource($dataSource, $modeParams)
+    protected function transformDataSource($dataSource, $params)
     {
         $dataSource = Report::convertToType($dataSource);
         $groupByProdOrders = Report::groupArrayByKey($dataSource, 'po_id');
@@ -126,17 +126,17 @@ class Prod_sequence_040 extends Report_ParentReportController
         return collect($dataSource);
     }
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueParams($params, $request)
     {
         $x = 'sub_project_id';
         $y = 'prod_routing_id';
         $z = 'prod_order_id';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$x] = $this->sub_project_id;
-            $modeParams[$y] = $this->prod_routing_id;
-            $modeParams[$z] = $this->prod_order_id;
+        $isNullParams = Report::isNullParams($params);
+        if ($isNullParams) {
+            $params[$x] = $this->sub_project_id;
+            $params[$y] = $this->prod_routing_id;
+            $params[$z] = $this->prod_order_id;
         }
-        return $modeParams;
+        return $params;
     }
 }

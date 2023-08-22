@@ -238,5 +238,25 @@
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
+    },
+    "_comment_on_hold_reason": {
+        "name": "_comment_on_hold_reason",
+        "column_name": "comment_on_hold_reason",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
+    "_comment_cancel_reason": {
+        "name": "_comment_cancel_reason",
+        "column_name": "comment_cancel_reason",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
     }
 }

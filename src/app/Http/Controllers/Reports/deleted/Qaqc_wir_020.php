@@ -24,7 +24,7 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
     protected  $mode = '020';
 
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
 
         $plural = 'qaqc_wirs';
@@ -75,9 +75,9 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
                             AND pr.id = sp.project_id
                             AND po.sub_project_id = sp.id
                             #AND po.id = 247";
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
-        // if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
-        if (isset($modeParams['prod_order_id'])) $sql = $this->sqlMultiSelectProdOrders($sql, $modeParams);
+        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
+        // if (isset($params['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'";
+        if (isset($params['prod_order_id'])) $sql = $this->sqlMultiSelectProdOrders($sql, $params);
         $sql .= "\n ) AS potb
                             LEFT JOIN qaqc_wirs wir ON wir.sub_project_id = potb.sub_project_id 
                                                         AND wir.prod_order_id = potb.prod_order_id 
@@ -100,7 +100,7 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
     }
 
 
-    protected function getTableColumns($dataSource, $modeParams)
+    protected function getTableColumns($dataSource, $params)
     {
 
         $columns1 = [
@@ -157,13 +157,13 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
         ];
     }
 
-    protected function transformDataSource($dataSource, $modeParams)
+    protected function transformDataSource($dataSource, $params)
     {
         // dd($dataSource);
         return $dataSource;
     }
 
-    protected function changeValueData($dataSource, $modeParams)
+    protected function changeValueData($dataSource, $params)
     {
         $dataSource = $dataSource->ToArray() ?? $dataSource;
         array_walk($dataSource, function ($value) {
@@ -176,17 +176,17 @@ class Qaqc_wir_020 extends Report_ParentRegisterController
         return collect($dataSource);
     }
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueParams($params, $request)
     {
-        // dd($modeParams);
+        // dd($params);
         $x = 'sub_project_id';
         $z = 'prod_routing_id';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$x] = $this->sub_project_id;
-            $modeParams[$z] = $this->prod_routing_id;
+        $isNullParams = Report::isNullParams($params);
+        if ($isNullParams) {
+            $params[$x] = $this->sub_project_id;
+            $params[$z] = $this->prod_routing_id;
         }
-        // dd($modeParams);
-        return $modeParams;
+        // dd($params);
+        return $params;
     }
 }

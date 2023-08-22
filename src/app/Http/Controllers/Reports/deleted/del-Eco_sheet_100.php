@@ -6,9 +6,9 @@ use App\Utils\Support\DocumentReport;
 trait Eco_sheet_100
 {
 
-    private function sqlEcoLaborImpacts($modeParams)
+    private function sqlEcoLaborImpacts($params)
     {
-        [$month, $projectId] = $this->selectMonth($modeParams);
+        [$month, $projectId] = $this->selectMonth($params);
         $sql = "SELECT
                     SUBSTR(ecoli.updated_at, 1,7) AS month
                     ,ecos.project_id AS ecos_project_id
@@ -27,9 +27,9 @@ trait Eco_sheet_100
         return $sql;
     }
 
-    private function sqlEcoSheetsMaterialAdd($modeParams)
+    private function sqlEcoSheetsMaterialAdd($params)
     {
-        [$month, $projectId] = $this->selectMonth($modeParams);
+        [$month, $projectId] = $this->selectMonth($params);
         $sql = "SELECT 
                         ecos.id AS ecos_id
                         ,ecos.name AS ecos_name
@@ -48,9 +48,9 @@ trait Eco_sheet_100
         return $sql;
     }
 
-    private function sqlEcoSheetsMaterialRemove($modeParams)
+    private function sqlEcoSheetsMaterialRemove($params)
     {
-        [$month, $projectId] = $this->selectMonth($modeParams);
+        [$month, $projectId] = $this->selectMonth($params);
         $sql = "SELECT 
                         ecos.id AS ecos_id
                         ,ecos.name AS ecos_name
@@ -67,9 +67,9 @@ trait Eco_sheet_100
         return $sql;
     }
 
-    private function sqlCalculateTimeFromOpenEcoToSignOff($modeParams)
+    private function sqlCalculateTimeFromOpenEcoToSignOff($params)
     {
-        [$month, $projectId] = $this->selectMonth($modeParams);
+        [$month, $projectId] = $this->selectMonth($params);
         $sql = " SELECT 	
                     #ecosheet.ecos_id AS eco_sheet_id, 
                     usecos.term_id AS user_id,
@@ -100,13 +100,13 @@ trait Eco_sheet_100
         return $sql;
     }
 
-    public function createArraySqlFromSqlStr($modeParams)
+    public function createArraySqlFromSqlStr($params)
     {
         return [
-            'getEcoLaborImpacts' => $this->sqlEcoLaborImpacts($modeParams),
-            'getEcoSheetsMaterialAdd' => $this->sqlEcoSheetsMaterialAdd($modeParams),
-            'getEcoSheetsMaterialRemove' => $this->sqlEcoSheetsMaterialRemove($modeParams),
-            'getTimeEcoSheetSignOff' => $this->sqlCalculateTimeFromOpenEcoToSignOff($modeParams),
+            'getEcoLaborImpacts' => $this->sqlEcoLaborImpacts($params),
+            'getEcoSheetsMaterialAdd' => $this->sqlEcoSheetsMaterialAdd($params),
+            'getEcoSheetsMaterialRemove' => $this->sqlEcoSheetsMaterialRemove($params),
+            'getTimeEcoSheetSignOff' => $this->sqlCalculateTimeFromOpenEcoToSignOff($params),
         ];
     }
 }

@@ -207,7 +207,6 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment']);
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
 		$this->eventUpdatedProdSequence($theRow->id);
-		return $this->redirectCustomForUpdate2($request,$theRow);
+		return $this->redirectCustomForUpdate2($request, $theRow);
 	}
-	
 }

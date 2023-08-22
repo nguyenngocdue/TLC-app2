@@ -10,11 +10,12 @@ $class1 = 'p-2 border h-full w-full flex border-gray-600 text-base font-medium b
 $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left'
 @endphp
 
+
 <div class="px-4">
     <div class="justify-end pb-5"></div>
     <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
         <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
-        <x-reports.parameter3-report :itemsSelected="$modeParams" modeOption="{{$currentMode}}" :columns="$paramColumns" routeName="{{$routeName}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
+        <x-reports.parameter3-report :itemsSelected="$params" modeOption="{{$currentMode}}" :columns="$paramColumns" routeName="{{$routeName}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
     </div>
 </div>
 <div class="flex justify-center bg-only-print">
@@ -43,22 +44,26 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                 </div>
             </div>
             {{-- RENDER TABLES --}}
-            @foreach($tableDataSource as $key => $data)
-            {{-- @dump($tableDataSource) --}}
-            @php
-            $tableColumns = $data['tableColumns'];
-            $tableDataSource = $data['tableDataSource'];
-            @endphp
-            <div class="grid grid-cols-12 items-center">
-                <div class="col-span-12 text-left">
-                    <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">{{$titleTables[$key]}}
-                        <p class="text-sm font-light italic"></p>
-                    </h4>
-                </div>
+            <div>
+                <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Labor Impacts</h4>
+                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ecoLaborImpacts']" :dataSource="$tableDataSource['ecoLaborImpacts']" />
             </div>
-            <x-renderer.table showNo={{true}} :columns="$tableColumns" :dataSource="$tableDataSource" />
-            @endforeach
+            <div>
+                <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Material Add</h4>
+                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ecoSheetsMaterialAdd']" :dataSource="$tableDataSource['ecoSheetsMaterialAdd']" />
+            </div>
+            <div>
+                <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Material Remove</h4>
+                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ecoSheetsMaterialRemove']" :dataSource="$tableDataSource['ecoSheetsMaterialRemove']" />
+            </div>
+            <div>
+                <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Sign Off</h4>
+                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['timeEcoSheetSignOff']" :dataSource="$tableDataSource['timeEcoSheetSignOff']" />
+            </div>
+
         </div>
+
+
     </div>
 </div>
 @endsection

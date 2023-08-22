@@ -6,7 +6,7 @@ use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\DataPivotTable2;
 use App\Http\Controllers\Reports\TraitChangeDataPivotTable2;
 use App\Http\Controllers\Reports\TraitFunctionsReport;
-use App\Http\Controllers\Reports\TraitModeParamsReport;
+use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Http\Controllers\Reports\TraitUpdateParamsReport;
 use App\Http\Controllers\Reports\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\Workflow\LibPivotTables2;
@@ -21,7 +21,7 @@ class PivotTable extends Component
 {
 
     use PivotReportColumn2;
-    use TraitModeParamsReport;
+    use TraitParamsSettingReport;
     use TraitUpdateParamsReport;
     use TraitFunctionsReport;
     use TraitMenuTitle;
@@ -31,17 +31,18 @@ class PivotTable extends Component
     public function __construct(
         private $modeType = '',
         private $dataSource = [],
-        private $modeParams = [],
+        private $params = [],
         private $pageLimit = 10,
-        protected $tableTrueWidth = true,
+        protected $tableTrueWidth = false,
+        protected $tableColumns = [],
 
     ) {
     }
 
-    private function triggerDataFollowManagePivot($linesData, $modeType, $modeParams)
+    private function triggerDataFollowManagePivot($linesData, $modeType, $params)
     {
         $fn = (new DataPivotTable2);
-        $data = $fn->makeDataPivotTable($linesData, $modeType, $modeParams);
+        $data = $fn->makeDataPivotTable($linesData, $modeType, $params);
         return $data;
     }
 
@@ -110,8 +111,9 @@ class PivotTable extends Component
 
     public function render()
     {
+
         $linesData = $this->dataSource;
-        $modeParams = $this->modeParams;
+        $params = $this->params;
         $pageLimit = $this->pageLimit;
         $modeType = $this->modeType;
 
@@ -123,7 +125,7 @@ class PivotTable extends Component
         }
 
         if ($modeType && !$isRawData) {
-            [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData, $modeType, $modeParams);
+            [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData, $modeType, $params);
             if (PivotReport::isEmptyArray($dataOutput)) {
                 $tableColumns = $this->makeTableColumnsWhenEmptyData($modeType);
             }
@@ -139,8 +141,8 @@ class PivotTable extends Component
         }
         $dataOutput = $this->changeValueData($dataOutput, $isRawData);
         $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
+        if(!empty($this->tableColumns)) $tableColumns = $this->tableColumns;
 
-        // dd($linesData, $dataOutput);
         return view("components.renderer.report.pivot-table", [
             'tableDataSource' => $dataRender,
             'tableColumns' => $tableColumns,

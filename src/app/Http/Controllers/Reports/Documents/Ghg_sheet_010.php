@@ -2,42 +2,27 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Http\Controllers\Reports\Report_ParentDocumentController;
+use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Utils\Support\Report;
 
-class Ghg_sheet_010 extends Report_ParentDocumentController
+class Ghg_sheet_010 extends Report_ParentDocument2Controller
 {
 
 	use TraitForwardModeReport;
 	protected $viewName = 'document-ghg-summary-report';
 
-	private function getCurrentDateRange() {
-		$currentYearMonth = date("Y-m");
-		$sixMonthsAgo = date("Y-m", strtotime("-6 months"));
-		return ['from' => $sixMonthsAgo, 'to' => $currentYearMonth];
-	}
-
-	private function parseDateRange($dateRange) {
-		$parts = explode(" - ", $dateRange);
-		list($fromDay, $fromMonth, $fromYear) = explode("/", $parts[0]);
-		$fromDate = date("Y-m", strtotime("$fromYear-$fromMonth-$fromDay"));
-		list($toDay, $toMonth, $toYear) = explode("/", $parts[1]);
-		$toDate = date("Y-m", strtotime("$toYear-$toMonth-$toDay"));
-		return ['from' => $fromDate, 'to' => $toDate];
-	}
-
-	public function getSqlStr($modeParams)
+	public function getSqlStr($params)
 	{
-
 		$defaultMonth = $this->getCurrentDateRange();
 		$fromMonth = $defaultMonth['from'];
 		$toMonth = $defaultMonth['to'];
-		if(isset($modeParams['picker_date'])){
-			$arrayMonth = $this->parseDateRange($modeParams['picker_date']);
+		if(isset($params['picker_date']) && $params['picker_date']){
+			$arrayMonth = $this->parseDateRange($params['picker_date']);
 			$fromMonth = $arrayMonth['from'];
 			$toMonth = $arrayMonth['to'];
 		}
-
+		
 		$sql =  "SELECT 
 			#SUBSTR(ghgsh.ghg_month, 1, 7) AS ghgsh_month
 			#,ghgsh.id AS ghgsh_id
@@ -56,12 +41,12 @@ class Ghg_sheet_010 extends Report_ParentDocumentController
 		return $sql;
 	}
 
-	public function getTableColumns($dataSource, $modeParams)
+	public function getTableColumns($dataSource, $params)
 	{
 		return [[]];
 	}
 
-	protected function getParamColumns($dataSource, $modeType)
+	public function getParamColumns($dataSource, $modeType)
 	{
 		return [
 			[
@@ -73,8 +58,14 @@ class Ghg_sheet_010 extends Report_ParentDocumentController
 		];
 	}
 
-	protected function enrichDataSource($dataSource, $modeParams)
-	{
-		return collect($dataSource);
-	}
+
+    protected function getDefaultValueParams($params)
+    {
+        $a = 'picker_date';
+        $pickerDate = Report::createDefaultPickerDate();
+        if (Report::isNullParams($params)) {
+            $params[$a] = $pickerDate;
+        }
+        return $params;
+    }
 }

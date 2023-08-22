@@ -12,5 +12,21 @@ class DocumentReport
         $formattedDate = $currentDate->format("Y-m");
         return $formattedDate;
     }
+
+    // public static function createManyParamsFromDates($params)
+    // {
+    //     $pickerDate = $params['picker_date'];
+    //     $dates = explode("-", $pickerDate);
+    //     [$fromDate, $toDate] = [trim($dates[0]), trim($dates[1])];
+        
+    //     $manyDates = PivotReport::getDatesBetween($fromDate, $toDate);
+    //     $manyDates = array_map(fn ($item) => Report::formatDateString($item), $manyDates);
+        
+    //     $params = array_map(function ($item) use ($params) {
+    //         $params['picker_date'] =  $item;
+    //         return $params;
+    //     }, $manyDates);
+    //     return $params;
+    // }
     
 }

@@ -85,7 +85,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         return ["start_date", "end_date", "man_power", "uom", "total_uom", "total_mins", "min_per_uom"];
     }
-    public function getXAxisPrevious()
+    public function getXAxisPrimaryColumns()
     {
         $data = Prod_routing::find($this->prodRouting)
             ->getProdRoutingLinks();
@@ -98,7 +98,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected function getXAxis()
     {
         $result = [];
-        $data = $this->getXAxisPrevious();
+        $data = $this->getXAxisPrimaryColumns();
         // dump($data[0]);
         $extraColumns = $this->getXAxisExtraColumns();
         foreach ($data as $line) {

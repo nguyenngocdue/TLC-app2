@@ -126,10 +126,10 @@ class Report
         $str = ucwords($str, '-');
         return  ucwords(str_replace('_', " ", $str));
     }
-    public static function isNullModeParams($modeParams)
+    public static function isNullParams($params)
     {
-        // dd($modeParams);
-        return count(array_filter($modeParams, fn ($value) => !is_null($value))) <= 0;
+        // dd($params);
+        return count(array_filter($params, fn ($value) => !is_null($value))) <= 0;
     }
     public static function getViewName($str)
     {

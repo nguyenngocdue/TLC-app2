@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentController2;
+use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 
-class Hr_timesheet_line_010 extends Report_ParentController2
+class Hr_timesheet_line_010 extends Report_ParentReport2Controller
 {
     use TraitForwardModeReport;
     protected $maxH = 50;
@@ -14,9 +14,9 @@ class Hr_timesheet_line_010 extends Report_ParentController2
     protected $tableTrueWidth = true;
     protected $mode='010';
 
-    public function getDataSource($modeParams)
+    public function getDataSource($params)
     {
-        $primaryData = (new Hr_timesheet_line_dataSource())->getDataSource($modeParams);
+        $primaryData = (new Hr_timesheet_line_dataSource())->getDataSource($params);
         return $primaryData;
     }
 }

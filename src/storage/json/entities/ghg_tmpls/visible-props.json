@@ -14,6 +14,11 @@
         "column_name": "description",
         "new": "true"
     },
+    "_ghg_cat_id": {
+        "name": "_ghg_cat_id",
+        "column_name": "ghg_cat_id",
+        "new": "true"
+    },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",

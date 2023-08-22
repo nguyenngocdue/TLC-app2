@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentReportController2;
+use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 
-class Eco_sheet_110 extends Report_ParentReportController2
+class Eco_sheet_110 extends Report_ParentReport2Controller
 {
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
-        [$month, $projectId] = $this->selectMonth($modeParams);
+        [$month, $projectId] = $this->selectMonth($params);
         $sql = "SELECT
                     SUBSTR(ecoli.updated_at, 1,7) AS month
                     ,ecos.project_id AS ecos_project_id
@@ -42,7 +42,7 @@ class Eco_sheet_110 extends Report_ParentReportController2
         ];
     }
 
-    protected function getTableColumns($modeParams, $dataSource)
+    protected function getTableColumns($params, $dataSource)
     {
         return [
 

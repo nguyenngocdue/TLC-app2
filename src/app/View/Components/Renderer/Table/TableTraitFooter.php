@@ -59,16 +59,17 @@ trait TableTraitFooter
         $result['agg_range'] = 0;
 
         if (in_array($control, ['picker_date', 'picker_datetime'])) {
-            $items = $items->map(fn ($item) => Carbon::parse($item)->diffInSeconds('1970-01-01 00:00:00'));
+            // $items = $items->map(fn ($item) => $item ? Carbon::parse($item)->diffInSeconds('1970-01-01 00:00:00') : 0);
+            $items = $items->map(fn ($item) => $item ? Carbon::parse(DateTimeConcern::convertForSaving($control, $item))->diffInSeconds('1970-01-01 00:00:00') : 0);
         }
         if (in_array($control, ['picker_time'])) {
-            $items = $items->map(fn ($item) => Carbon::parse($item)->diffInSeconds('00:00:00'));
+            $items = $items->map(fn ($item) => $item ? Carbon::parse(DateTimeConcern::convertForSaving($control, $item))->diffInSeconds('00:00:00') : 0);
         }
         if (in_array($control, ['picker_month', 'picker_week', 'picker_quarter'])) {
             $items = collect([]); //TO BE IMPLEMENTED
         }
         if (in_array($control, ['picker_year'])) {
-            $items = $items->map(fn ($item) => $item ? substr($item, 0, 4) : 0); //<< Incase year is "", make it 0
+            $items = $items->map(fn ($item) => $item ? substr($item, 0, 4) : 0); //<< Incase year is a empty string, make it 0
         }
 
         // dump($items);
@@ -115,7 +116,7 @@ trait TableTraitFooter
             }
         }
 
-        $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr-6 py-0";
+        $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr1-6 py-0";
         $inputs = [];
         $footer = $column['footer'];
         // echo $footer;
@@ -132,27 +133,32 @@ trait TableTraitFooter
 
     function makeFooter($columns, $tableName, $dataSource)
     {
-        $eloquentTables = RelationshipRenderer2::getCacheTable01NameToEloquent();
-        $eloquentTable = $eloquentTables[$tableName] ?? "";
-        $result0 = [];
-        $hasFooter = false;
-        foreach ($columns as $column) {
-            if (isset($column['invisible']) && $column['invisible']) continue;
-            if (isset($column['footer'])) {
-                $hasFooter = true;
-                if (in_array($column['footer'], $this->aggList)) {
-                    $result0[$column['dataIndex']] = $this->makeOneFooter($column, $eloquentTable, $dataSource);
+        try {
+            $eloquentTables = RelationshipRenderer2::getCacheTable01NameToEloquent();
+            $eloquentTable = $eloquentTables[$tableName] ?? "";
+            $result0 = [];
+            $hasFooter = false;
+            foreach ($columns as $column) {
+                if (isset($column['invisible']) && $column['invisible']) continue;
+                if (isset($column['footer'])) {
+                    $hasFooter = true;
+                    if (in_array($column['footer'], $this->aggList)) {
+                        $result0[$column['dataIndex']] = $this->makeOneFooter($column, $eloquentTable, $dataSource);
+                    } else {
+                        $result0[$column['dataIndex']] = $column['footer'];
+                    }
                 } else {
-                    $result0[$column['dataIndex']] = $column['footer'];
+                    if (isset($column['dataIndex'])) $result0[$column['dataIndex']] = "";
                 }
-            } else {
-                if (isset($column['dataIndex'])) $result0[$column['dataIndex']] = "";
             }
-        }
-        if (!$hasFooter) return;
+            if (!$hasFooter) return;
 
-        $result0 = array_map(fn ($c) => "<td>" . $c . "</td>", $result0);
-        // dump($result0);
-        return join("", $result0);
+            $result0 = array_map(fn ($c) => "<td>" . $c . "</td>", $result0);
+            // dump($result0);
+            return join("", $result0);
+        } catch (\Exception $e) {
+            dump("Error during making footer aggregation.");
+            dd($e->getMessage());
+        }
     }
 }

@@ -17,9 +17,9 @@ class Hr_timesheet_line_dataSource extends Controller
     #protected $rotate45Width = 300;
     protected $libPivotFilters;
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
-        $pickerDate = $modeParams['picker_date'] ?? PivotReport::defaultPickerDate();
+        $pickerDate = $params['picker_date'] ?? PivotReport::defaultPickerDate();
         [$startDate, $endDate] = Report::explodePickerDate($pickerDate);
         $startDate = Report::formatDateString($startDate, 'Y-m-d');
         $endDate = Report::formatDateString($endDate, 'Y-m-d');
@@ -49,12 +49,12 @@ class Hr_timesheet_line_dataSource extends Controller
                     WHERE 1 = 1
                             AND us.id = tsl.user_id";
 
-        if (isset($modeParams['user_id']) && is_array($modeParams['user_id']) ) {
-            $ids = implode(',', $modeParams['user_id']);
+        if (isset($params['user_id']) && is_array($params['user_id']) ) {
+            $ids = implode(',', $params['user_id']);
             if($ids) $sql .= "\n AND tsl.user_id IN ($ids)";
         } else {
-            if (isset($modeParams['user_id']) &&  $modeParams['user_id']) {
-                $id = $modeParams['user_id'];
+            if (isset($params['user_id']) &&  $params['user_id']) {
+                $id = $params['user_id'];
                 $sql .= "\n AND tsl.user_id = $id";
             }
         }
@@ -79,14 +79,14 @@ class Hr_timesheet_line_dataSource extends Controller
         return $sql;
     }
 
-    private function getSql($modeParams)
+    private function getSql($params)
     {
 
-        $sqlStr = $this->getSqlStr($modeParams);
+        $sqlStr = $this->getSqlStr($params);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
-            if (isset($modeParams[$value])) {
-                $valueParam =  $modeParams[$value];
+            if (isset($params[$value])) {
+                $valueParam =  $params[$value];
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
@@ -95,9 +95,9 @@ class Hr_timesheet_line_dataSource extends Controller
         return $sqlStr;
     }
 
-    public function getDataSource($modeParams)
+    public function getDataSource($params)
     {
-        $sql = $this->getSql($modeParams);
+        $sql = $this->getSql($params);
         if (is_null($sql) || !$sql) return collect();
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);

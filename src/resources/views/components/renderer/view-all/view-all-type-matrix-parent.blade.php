@@ -15,7 +15,7 @@
           showNo=1
 
           topLeftControl="{!!$actionButtons!!}"
-          {{-- topCenterControl="{!! $legends !!}" --}}
+          topCenterControl="<div class='flex items-center text-lg'>{!! $tableTopCenterControl !!}</div>"
           topRightControl="{!! $perPage !!}"
           bottomRightControl="{!! $perPage !!}"
           

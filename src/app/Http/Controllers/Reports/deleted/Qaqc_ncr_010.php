@@ -21,7 +21,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
     protected $maxH = 45;
 
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
 
         $sql = "SELECT 
@@ -44,7 +44,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
                 WHERE 1 = 1
                     AND sp.deleted_at IS  NULL
                     AND mir.deleted_at IS NULL";
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
+        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = '{{sub_project_id}}'";
         $sql .= "\n AND sp.id = mir.sub_project_id
                     GROUP BY year_month_open_mir) AS mirtb
                         LEFT JOIN (SELECT
@@ -75,7 +75,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
                                             AND ncr.deleted_at IS NULL
                                             AND sp.deleted_at IS  NULL
                                             AND mir.deleted_at IS NULL";
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND ncr.sub_project_id = '{{sub_project_id}}'";
+        if (isset($params['sub_project_id'])) $sql .= "\n AND ncr.sub_project_id = '{{sub_project_id}}'";
         $sql .= "\n  AND mir.id = ncr.parent_id
                     AND ncr.sub_project_id = sp.id
                     AND ncr.sub_project_id = mir.sub_project_id
@@ -95,7 +95,7 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
         return $sql;
     }
 
-    protected function getTableColumns($dataSource, $modeParams)
+    protected function getTableColumns($dataSource, $params)
     {
         $dataColumns = [
             [
@@ -285,13 +285,13 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
         return $table;
     }
 
-    protected function transformDataSource($dataSource, $modeParams)
+    protected function transformDataSource($dataSource, $params)
     {
         // dd($dataSource);
         return collect($dataSource);
     }
 
-    protected function changeValueData($dataSource, $modeParams)
+    protected function changeValueData($dataSource, $params)
     {
         $monthYears = [];
         foreach ($dataSource as $key => $value) {
@@ -338,17 +338,17 @@ class Qaqc_ncr_010 extends Report_ParentRegisterController
         return collect($dataSource);
     }
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueParams($params, $request)
     {
-        // dd($modeParams);
+        // dd($params);
         $x = 'project_id';
         $y = 'sub_project_id';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$x] = $this->project_id;
-            $modeParams[$y] = $this->sub_project_id;
+        $isNullParams = Report::isNullParams($params);
+        if ($isNullParams) {
+            $params[$x] = $this->project_id;
+            $params[$y] = $this->sub_project_id;
         }
-        // dd($modeParams);
-        return $modeParams;
+        // dd($params);
+        return $params;
     }
 }

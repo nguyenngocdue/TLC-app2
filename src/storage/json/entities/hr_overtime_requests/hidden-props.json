@@ -84,7 +84,7 @@
         "column_name": "comment_rejected_reason",
         "new": "",
         "pending_approval": "",
-        "rejected": "",
+        "rejected": "true",
         "approved": ""
     },
     "_status": {

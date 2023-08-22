@@ -3,18 +3,21 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
-use App\Http\Controllers\Reports\Report_ParentDocumentController;
+use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
+use App\Http\Controllers\Reports\Reports\Eco_sheet_110;
+use App\Http\Controllers\Reports\Reports\Eco_sheet_120;
+use App\Http\Controllers\Reports\Reports\Eco_sheet_130;
+use App\Http\Controllers\Reports\Reports\Eco_sheet_140;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use App\Http\Controllers\Reports\TraitModeParamsReport;
+use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Models\Project;
 
-class Eco_sheet_010 extends Report_ParentDocumentController
+class Eco_sheet_010 extends Report_ParentDocument2Controller
 {
 
     use TraitForwardModeReport;
     use TraitMenuTitle;
-    use TraitModeParamsReport;
-    use Eco_sheet_100;
+    use TraitParamsSettingReport;
 
     protected $mode = '010';
     protected $viewName = 'document-eco-sheet';
@@ -34,10 +37,10 @@ class Eco_sheet_010 extends Report_ParentDocumentController
         ];
     }
 
-    protected function getTableColumns($modeParams, $dataSource)
+    protected function getTableColumns($params, $dataSource)
     {
         return [
-            "getEcoLaborImpacts" => [
+            "ecoLaborImpacts" => [
                 [
                     "title" => "Department",
                     "dataIndex" => "department_name",
@@ -65,7 +68,7 @@ class Eco_sheet_010 extends Report_ParentDocumentController
                     // "footer" => "agg_sum"
                 ],
             ],
-            "getEcoSheetsMaterialAdd" => [
+            "ecoSheetsMaterialAdd" => [
                 [
                     "title" => "ECO",
                     "dataIndex" => "ecos_name",
@@ -77,7 +80,7 @@ class Eco_sheet_010 extends Report_ParentDocumentController
                     "align" => "right"
                 ],
             ],
-            "getEcoSheetsMaterialRemove" => [
+            "ecoSheetsMaterialRemove" => [
                 [
                     "title" => "ECO",
                     "dataIndex" => "ecos_name",
@@ -91,7 +94,7 @@ class Eco_sheet_010 extends Report_ParentDocumentController
 
                 ],
             ],
-            "getTimeEcoSheetSignOff" => [
+            "timeEcoSheetSignOff" => [
                 [
                     "title" => "User to Sign",
                     "dataIndex" => "user_name",
@@ -106,22 +109,22 @@ class Eco_sheet_010 extends Report_ParentDocumentController
         ];
     }
 
-    public function makeTitleForTables($modeParams)
+    public function getBasicInfoData($params)
     {
-        $tableName = array_keys($this->getTableColumns($modeParams,[]));
-        $name = ['Labor Impact', 'Material Impact Add', 'Material Impact Remove', 'Sign Off'];
-        return array_combine($tableName, $name);
-    }
-
-    public function getBasicInfoData($modeParams)
-    {
-        $month = $modeParams['month'] ?? date("Y-m");
-        $projectName = Project::find($modeParams['project_id'] ?? $this->projectId)->name;
+        $month = $params['month'] ?? date("Y-m");
+        $projectName = Project::find($params['project_id'] ?? $this->projectId)->name;
         return [
             'month' => $month,
             'project_name' => $projectName
         ];
     }
 
-    
+    public function getDataSource($params){
+        return [
+            'ecoLaborImpacts' => (new Eco_sheet_110())->getDataSource($params),
+            'ecoSheetsMaterialAdd' => (new Eco_sheet_120())->getDataSource($params),
+            'ecoSheetsMaterialRemove' => (new Eco_sheet_130())->getDataSource($params),
+            'timeEcoSheetSignOff' => (new Eco_sheet_140())->getDataSource($params),
+        ];
+    }
 }

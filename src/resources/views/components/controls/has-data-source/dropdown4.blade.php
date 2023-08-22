@@ -1,4 +1,5 @@
-@if($deaf /*&& $readOnlyStr*/)
+{{-- $readOnlyStr: if obmit this, when validation fail, the dropdown become deaf --}}
+@if($deaf && $readOnlyStr)
     @if($multipleStr)
         Not implemented yet for multiple dropdown4
     @else 

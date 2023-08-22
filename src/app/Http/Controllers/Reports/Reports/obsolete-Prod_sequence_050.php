@@ -19,9 +19,9 @@ class Prod_sequence_050 extends Report_ParentReportController
     protected  $sub_project_id = 82;
     protected  $prod_routing_id = 6;
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
-        // dd($modeParams);
+        // dd($params);
         $sql = "SELECT
         sub_project_name
         ,prod_sequence_id
@@ -51,11 +51,11 @@ class Prod_sequence_050 extends Report_ParentReportController
                         AND ps.deleted_at IS NULL
                         AND pr.deleted_at IS NULL
                         AND prl.deleted_at IS NULL";
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $modeParams['sub_project_id'];
-        if (!isset($modeParams['sub_project_id'])) $sql .= "\n AND sp.id =" . $this->sub_project_id;
-        if (isset($modeParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";
-        if (!isset($modeParams['prod_routing_id'])) $sql .= "\n AND sp.id =" . $this->prod_routing_id;
-        // dump($modeParams);
+        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id =" . $params['sub_project_id'];
+        if (!isset($params['sub_project_id'])) $sql .= "\n AND sp.id =" . $this->sub_project_id;
+        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = '{{prod_routing_id}}'";
+        if (!isset($params['prod_routing_id'])) $sql .= "\n AND sp.id =" . $this->prod_routing_id;
+        // dump($params);
         $sql .= "\n     AND sp.id = po.sub_project_id
                         AND po.id = ps.prod_order_id
                         AND ps.prod_routing_link_id = prl.id
@@ -67,7 +67,7 @@ class Prod_sequence_050 extends Report_ParentReportController
     }
 
 
-    public function getTableColumns($dataSource, $modeParams)
+    public function getTableColumns($dataSource, $params)
     {
         // dd($dataSource);
         $dataCols = [
@@ -143,7 +143,7 @@ class Prod_sequence_050 extends Report_ParentReportController
     }
 
 
-    protected function transformDataSource($dataSource, $modeParams)
+    protected function transformDataSource($dataSource, $params)
     {
         // dd($dataSource);
         foreach ($dataSource as $key => $value) {
@@ -180,16 +180,16 @@ class Prod_sequence_050 extends Report_ParentReportController
         return collect($dataSource);
     }
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueParams($params, $request)
     {
         $x = 'sub_project_id';
         $y = 'prod_routing_id';
         $z = 'prod_order_id';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$x] = $this->sub_project_id;
-            $modeParams[$y] = $this->prod_routing_id;
+        $isNullParams = Report::isNullParams($params);
+        if ($isNullParams) {
+            $params[$x] = $this->sub_project_id;
+            $params[$y] = $this->prod_routing_id;
         }
-        return $modeParams;
+        return $params;
     }
 }
