@@ -19,11 +19,11 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('ghg_tmpls', function (BlueprintExtended $table) {
+        $schema->create('ghg_cats', function (BlueprintExtended $table) {
             $table->id();
             $table->string("name")->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('ghg_cat_id')->nullable();
+            $table->unsignedBigInteger('scope_id')->nullable();
             $table->appendCommonFields();
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ghg_tmpls');
+        Schema::dropIfExists('ghg_cats');
     }
 };
