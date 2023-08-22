@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Reports;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentUser;
 
-trait TraitModeParamsReport
+trait TraitParamsSettingReport
 {
-    protected function getModeParams($request, $str = '')
+    protected function getParams($request, $str = '')
     {
         $currentMode = $this->mode;
         $typeReport = CurrentPathInfo::getTypeReport($request, $str);
         $entity = CurrentPathInfo::getEntityReport($request, $str);
         $settings = CurrentUser::getSettings();
         if (isset($settings[$entity][$typeReport][$currentMode])) {
-            $modeParams = $settings[$entity][$typeReport][$currentMode];
-            return $modeParams;
+            $params = $settings[$entity][$typeReport][$currentMode];
+            return $params;
         }
         return [];
     }

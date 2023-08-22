@@ -19,11 +19,11 @@ abstract class Report_ParentController extends Controller
 {
     // Traits
     use TraitMenuTitle;
-    use TraitModeParamsReport;
+    use TraitParamsSettingReport;
     use TraitFunctionsReport;
 
-    abstract protected function getSqlStr($modeParams);
-    abstract protected function getTableColumns($modeParams, $dataSource);
+    abstract protected function getSqlStr($params);
+    abstract protected function getTableColumns($params, $dataSource);
 
     // Properties
     protected $rotate45Width = false;
@@ -37,13 +37,13 @@ abstract class Report_ParentController extends Controller
     protected $modeType = '';
     protected $viewName = '';
 
-    private function getSql($modeParams)
+    private function getSql($params)
     {
-        $sqlStr = $this->getSqlStr($modeParams);
+        $sqlStr = $this->getSqlStr($params);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
-            if (isset($modeParams[$value])) {
-                $valueParam =  $modeParams[$value];
+            if (isset($params[$value])) {
+                $valueParam =  $params[$value];
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
@@ -51,29 +51,29 @@ abstract class Report_ParentController extends Controller
         return $sqlStr;
     }
 
-    private function overKeyAndValueDataSource($modeParams, $data)
+    private function overKeyAndValueDataSource($params, $data)
     {
         $dataSource = [];
         foreach ($data as $key => $values) {
             $dataSource[$key]['tableDataSource'] = $values;
-            $dataSource[$key]['tableColumns'] = $this->getTableColumns($modeParams, $data)[$key];
+            $dataSource[$key]['tableColumns'] = $this->getTableColumns($params, $data)[$key];
         }
         return $dataSource;
     }
 
-    protected function createArraySqlFromSqlStr($modeParams){
+    protected function createArraySqlFromSqlStr($params){
         return [];
     }
 
-    protected function getBasicInfoData($modeParams){
+    protected function getBasicInfoData($params){
         return [];
     }
 
-    public function getDataSource($modeParams)
+    public function getDataSource($params)
     {
-        $arraySqlStr = $this->createArraySqlFromSqlStr($modeParams);
+        $arraySqlStr = $this->createArraySqlFromSqlStr($params);
         if (empty($arraySqlStr)) {
-            $sql = $this->getSql($modeParams);
+            $sql = $this->getSql($params);
             if (is_null($sql) || !$sql) return collect();
             $sqlData = DB::select(DB::raw($sql));
             return collect($sqlData);
@@ -81,11 +81,11 @@ abstract class Report_ParentController extends Controller
         $data = [];
         foreach ($arraySqlStr as $k => $sql) {
             if (is_null($sql) || !$sql) return collect();
-            // $sql = $this->getSql($modeParams);
+            // $sql = $this->getSql($params);
             $sqlData = DB::select(DB::raw($sql));
             $data[$k] = collect($sqlData);
         }
-        $dataSource = $this->overKeyAndValueDataSource($modeParams, $data);
+        $dataSource = $this->overKeyAndValueDataSource($params, $data);
         return $dataSource;
     }
     
@@ -121,12 +121,12 @@ abstract class Report_ParentController extends Controller
         return $this->pageLimit;
     }
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueParams($params, $request)
     {
-        return $modeParams;
+        return $params;
     }
 
-    protected function forwardToMode($request, $modeParams)
+    protected function forwardToMode($request, $params)
     {
         $input = $request->input();
         $isFormType = isset($input['form_type']);
@@ -136,7 +136,7 @@ abstract class Report_ParentController extends Controller
         return redirect($request->getPathInfo());
     }
 
-    protected function tableDataHeader($modeParams, $data)
+    protected function tableDataHeader($params, $data)
     {
         return [];
     }
@@ -154,22 +154,22 @@ abstract class Report_ParentController extends Controller
         return [];
     }
 
-    public function makeTitleForTables($modeParams)
+    public function makeTitleForTables($params)
     {
         return [];
     }
     // DataSource
-    protected function enrichDataSource($dataSource, $modeParams)
+    protected function enrichDataSource($dataSource, $params)
     {
         return $dataSource;
     }
 
-    protected function transformDataSource($dataSource, $modeParams)
+    protected function transformDataSource($dataSource, $params)
     {
         return $dataSource;
     }
 
-    protected function changeValueData($dataSource, $modeParams)
+    protected function changeValueData($dataSource, $params)
     {
         return $dataSource;
     }
@@ -181,33 +181,33 @@ abstract class Report_ParentController extends Controller
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
         $currentUserId = Auth::id();
-        $modeParams = $this->getModeParams($request);
-        $modeParams = $this->getDefaultValueModeParams($modeParams, $request);
+        $params = $this->getParams($request);
+        $params = $this->getDefaultValueParams($params, $request);
 
         if (!$request->input('page') && !empty($input)) {
-            return $this->forwardToMode($request, $modeParams);
+            return $this->forwardToMode($request, $params);
         }
         $pageLimit = $this->getPageParam($typeReport, $entity);
         $titleReport = $this->makeTitleReport($routeName);
         $topTitle = $this->getMenuTitle();
-        $dataSource = $this->getDataSource($modeParams);
+        $dataSource = $this->getDataSource($params);
         $viewName =  CurrentPathInfo::getViewName($request);
         if ($this->viewName) $viewName = $this->viewName;
 
         if (!str_contains($routeName, 'document-')) {
-            $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-            $dataSource = $this->transformDataSource($dataSource, $modeParams);
-            $dataSource = $this->changeValueData($dataSource, $modeParams);
+            $dataSource = $this->enrichDataSource($dataSource, $params);
+            $dataSource = $this->transformDataSource($dataSource, $params);
+            $dataSource = $this->changeValueData($dataSource, $params);
             $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-            $tableColumns = $this->getTableColumns($dataSource, $modeParams);
-            $tableDataHeader = $this->tableDataHeader($modeParams, $dataSource);
+            $tableColumns = $this->getTableColumns($dataSource, $params);
+            $tableDataHeader = $this->tableDataHeader($params, $dataSource);
             echo $this->getJS();
         }
-        $basicInfoData =  $this->getBasicInfoData($modeParams);
+        $basicInfoData =  $this->getBasicInfoData($params);
         //data to render for document reports
         $dataRenderDocReport = [
             'basicInfoData' => $basicInfoData,
-            'titleTables' => $this->makeTitleForTables($modeParams)
+            'titleTables' => $this->makeTitleForTables($params)
         ];
         return view('reports.' . $viewName, [
             'entity' => $entity,
@@ -216,7 +216,7 @@ abstract class Report_ParentController extends Controller
             'topTitle' => $topTitle,
             'pageLimit' => $pageLimit,
             'routeName' => $routeName,
-            'modeParams' => $modeParams,
+            'params' => $params,
             'groupBy' => $this->groupBy,
             'typeReport' => $typeReport,
             'titleReport' => $titleReport,
@@ -242,13 +242,13 @@ abstract class Report_ParentController extends Controller
     public function exportCSV(Request $request)
     {
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
-        $modeParams = $this->getModeParams($request, '_ep');
-        $dataSource = $this->getDataSource($modeParams);
-        $dataSource = $this->enrichDataSource($dataSource, $modeParams);
-        $dataSource = $this->transformDataSource($dataSource, $modeParams);
+        $params = $this->getParams($request, '_ep');
+        $dataSource = $this->getDataSource($params);
+        $dataSource = $this->enrichDataSource($dataSource, $params);
+        $dataSource = $this->transformDataSource($dataSource, $params);
         $dataSource = $this->modifyDataToExportCSV($dataSource);
-        // dd($modeParams, $dataSource);
-        [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $modeParams);
+        // dd($params, $dataSource);
+        [$columnKeys, $columnNames] = $this->makeColumns($dataSource, $params);
         $rows = $this->makeRowsFollowColumns($dataSource, $columnKeys);
         $fileName = $entity . '_' . date('d:m:Y H:i:s') . '.csv';
         $headers = array(

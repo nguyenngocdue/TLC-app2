@@ -20,7 +20,7 @@ class Prod_run_010 extends  Report_ParentReportController
     protected  $sub_project_id = 21;
     protected $maxH = 50;
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
         $sql = "SELECT prlTb.*
         ,pr.id AS prod_run_id
@@ -49,17 +49,17 @@ class Prod_run_010 extends  Report_ParentReportController
             AND po.deleted_at IS NULL
             AND ps.deleted_at IS NULL
             AND prl.deleted_at IS NULL";
-        if (empty($modeParams)) $sql  .= "\n AND po.sub_project_id =" . $this->sub_project_id;
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
-        if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'\n ";
-        if (isset($modeParams['prod_routing_link_id'])) $sql .= "\n AND prl.id = '{{prod_routing_link_id}}'\n ";
+        if (empty($params)) $sql  .= "\n AND po.sub_project_id =" . $this->sub_project_id;
+        if (isset($params['sub_project_id'])) $sql .= "\n AND po.sub_project_id = '{{sub_project_id}}' \n";
+        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id = '{{prod_order_id}}'\n ";
+        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id = '{{prod_routing_link_id}}'\n ";
         $sql .= "\n AND ps.prod_order_id = po.id
                     AND ps.prod_routing_link_id = prl.id) AS prlTb
         JOIN prod_runs pr ON pr.prod_sequence_id = prlTb.prod_sequence_id";
         return $sql;
     }
 
-    public function getMaxProdRunIdAndTotalHours($modeParams)
+    public function getMaxProdRunIdAndTotalHours($params)
     {
         $sql = "SELECT prlTb.*
             , MAX(pr.id) AS max_prod_run_id
@@ -77,10 +77,10 @@ class Prod_run_010 extends  Report_ParentReportController
             FROM sub_projects sp, prod_orders po, prod_sequences ps, prod_routing_links prl
             WHERE 1 = 1
                 AND sp.id = po.sub_project_id";
-        if (empty($modeParams)) $sql  .= "\n AND po.sub_project_id =" . $this->sub_project_id;
-        if (isset($modeParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id =" . $modeParams['sub_project_id'];
-        if (isset($modeParams['prod_order_id'])) $sql .= "\n AND po.id =" . $modeParams['prod_order_id'];
-        if (isset($modeParams['prod_routing_link'])) $sql .= "\n AND prl.id = '{{prod_routing_link}}'\n ";
+        if (empty($params)) $sql  .= "\n AND po.sub_project_id =" . $this->sub_project_id;
+        if (isset($params['sub_project_id'])) $sql .= "\n AND po.sub_project_id =" . $params['sub_project_id'];
+        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id =" . $params['prod_order_id'];
+        if (isset($params['prod_routing_link'])) $sql .= "\n AND prl.id = '{{prod_routing_link}}'\n ";
         $sql .= "\n AND ps.prod_order_id = po.id
                 AND ps.prod_routing_link_id = prl.id
             ) AS prlTb
@@ -90,7 +90,7 @@ class Prod_run_010 extends  Report_ParentReportController
         return $sqlData;
     }
 
-    public function getTableColumns($dataSource, $modeParams)
+    public function getTableColumns($dataSource, $params)
     {
         return [
             [
@@ -189,10 +189,10 @@ class Prod_run_010 extends  Report_ParentReportController
         ];
     }
 
-    protected function enrichDataSource($dataSource, $modeParams)
+    protected function enrichDataSource($dataSource, $params)
     {
 
-        $dataHours = $this->getMaxProdRunIdAndTotalHours($modeParams);
+        $dataHours = $this->getMaxProdRunIdAndTotalHours($params);
         $dataHours = Report::convertToType($dataHours);
         $dataHours = Report::assignKeyByKey($dataHours, 'max_prod_run_id');
 
@@ -238,13 +238,13 @@ class Prod_run_010 extends  Report_ParentReportController
     }
 
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueParams($params, $request)
     {
         $x = 'sub_project_id';
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$x] = $this->sub_project_id;
+        $isNullParams = Report::isNullParams($params);
+        if ($isNullParams) {
+            $params[$x] = $this->sub_project_id;
         }
-        return $modeParams;
+        return $params;
     }
 }

@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
-use App\Http\Controllers\Reports\Report_ParentDocumentController;
+use App\Http\Controllers\Reports\Report_ParentDocumentController2;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use App\Http\Controllers\Reports\TraitModeParamsReport;
+use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Models\Project;
 
-class Eco_sheet_010 extends Report_ParentDocumentController
+class Eco_sheet_010 extends Report_ParentDocumentController2
 {
 
     use TraitForwardModeReport;
     use TraitMenuTitle;
-    use TraitModeParamsReport;
+    use TraitParamsSettingReport;
     use Eco_sheet_100;
 
     protected $mode = '010';
@@ -34,7 +34,7 @@ class Eco_sheet_010 extends Report_ParentDocumentController
         ];
     }
 
-    protected function getTableColumns($modeParams, $dataSource)
+    protected function getTableColumns($params, $dataSource)
     {
         return [
             "getEcoLaborImpacts" => [
@@ -106,17 +106,17 @@ class Eco_sheet_010 extends Report_ParentDocumentController
         ];
     }
 
-    public function makeTitleForTables($modeParams)
+    public function makeTitleForTables($params)
     {
-        $tableName = array_keys($this->getTableColumns($modeParams,[]));
+        $tableName = array_keys($this->getTableColumns($params,[]));
         $name = ['Labor Impact', 'Material Impact Add', 'Material Impact Remove', 'Sign Off'];
         return array_combine($tableName, $name);
     }
 
-    public function getBasicInfoData($modeParams)
+    public function getBasicInfoData($params)
     {
-        $month = $modeParams['month'] ?? date("Y-m");
-        $projectName = Project::find($modeParams['project_id'] ?? $this->projectId)->name;
+        $month = $params['month'] ?? date("Y-m");
+        $projectName = Project::find($params['project_id'] ?? $this->projectId)->name;
         return [
             'month' => $month,
             'project_name' => $projectName

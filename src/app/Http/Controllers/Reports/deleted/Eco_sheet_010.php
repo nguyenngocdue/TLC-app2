@@ -12,7 +12,7 @@ class Eco_sheet_010 extends Report_ParentController
     protected $maxH = 50;
     protected $tableTrueWidth = false;
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     { 
         $sql ="SELECT
                     SUBSTR(ecoli.updated_at, 1,7) AS month
@@ -34,7 +34,7 @@ class Eco_sheet_010 extends Report_ParentController
         return $sql;
     }
 
-    public function getTableColumns($dataSource, $modeParams)
+    public function getTableColumns($dataSource, $params)
     {
         // dump($dataSource);
         return [

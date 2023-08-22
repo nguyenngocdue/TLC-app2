@@ -22,9 +22,9 @@ class Hr_overtime_request_020 extends Report_ParentReportController
     protected $mode = '020';
     protected $maxH = 50;
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
-        $pickerDate =  isset($modeParams['picker_date']) ? $modeParams['picker_date'] : '';
+        $pickerDate =  isset($params['picker_date']) ? $params['picker_date'] : '';
         // dd($fromDate);
         $sql = "SELECT 	uswp.name workplace_name,tb1.*
         FROM 
@@ -58,7 +58,7 @@ class Hr_overtime_request_020 extends Report_ParentReportController
                 AND otr.deleted_at IS NULL
                 AND wm.deleted_at IS NULL
         ";
-        if (isset($modeParams['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
+        if (isset($params['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
         if ($pickerDate) {
             $fromDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 0, 10)))->format('Y-m-d');
             $toDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 13, strlen($pickerDate))))->format('Y-m-d');
@@ -78,15 +78,15 @@ class Hr_overtime_request_020 extends Report_ParentReportController
                     AND us.id = otline.user_id
                     AND otline.work_mode_id = wm.id 
                     AND otr.workplace_id = wp.id";
-        if (isset($modeParams['ot_workplace_id'])) $sql .= "\n AND otr.workplace_id = '{{ot_workplace_id}}'";
+        if (isset($params['ot_workplace_id'])) $sql .= "\n AND otr.workplace_id = '{{ot_workplace_id}}'";
         $sql .= " \n  ) AS tb1
                     LEFT JOIN workplaces uswp ON uswp.id = tb1.us_workplace_id ";
-        if (isset($modeParams['month'])) $sql .= "\n WHERE tb1.years_month  = '{{month}}'";
+        if (isset($params['month'])) $sql .= "\n WHERE tb1.years_month  = '{{month}}'";
         $sql .= "\n ORDER BY name_render, employee_id, ot_date DESC";
         return $sql;
     }
 
-    public function getTableColumns($dataSource, $modeParams)
+    public function getTableColumns($dataSource, $params)
     {
         // dump($dataSource);
         $totalDataCol = [
@@ -205,12 +205,12 @@ class Hr_overtime_request_020 extends Report_ParentReportController
     }
 
 
-    protected function getDefaultValueModeParams($modeParams, $request)
+    protected function getDefaultValueParams($params, $request)
     {
-        return $modeParams;
+        return $params;
     }
 
-    protected function enrichDataSource($dataSource, $modeParams)
+    protected function enrichDataSource($dataSource, $params)
     {
         foreach ($dataSource as $key => $value) {
             $dataSource[$key]->employee_id = (object)[
@@ -222,7 +222,7 @@ class Hr_overtime_request_020 extends Report_ParentReportController
         return collect($dataSource);
     }
 
-    protected function forwardToMode($request, $modeParams)
+    protected function forwardToMode($request, $params)
     {
         $input = $request->input();
         if (isset($input['month']) || isset($input['user_id'])) {

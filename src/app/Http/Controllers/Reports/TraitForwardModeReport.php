@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 trait TraitForwardModeReport
 {
-    protected function forwardToMode($request, $modeParams)
+    protected function forwardToMode($request, $params)
     {
         $input = $request->input();
         $isFormType = isset($input['form_type']);

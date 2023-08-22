@@ -3,25 +3,23 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\BigThink\TraitMenuTitle;
-use App\Http\Controllers\Reports\Report_ParentDocumentController;
+use App\Http\Controllers\Reports\Report_ParentDocumentController2;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use App\Http\Controllers\Reports\TraitModeParamsReport;
+use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
-use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
-use Illuminate\Support\Facades\DB;
 
 
-class Prod_routing_010 extends Report_ParentDocumentController
+class Prod_routing_010 extends Report_ParentDocumentController2
 {
 
     use TraitForwardModeReport;
     use TraitMenuTitle;
-    use TraitModeParamsReport;
+    use TraitParamsSettingReport;
 
     protected $mode = '010';
     protected $projectId = 5;
@@ -33,15 +31,15 @@ class Prod_routing_010 extends Report_ParentDocumentController
     protected $viewName = 'document-daily-prod-routing';
 
     // DataSource
-    public function getSqlStr($modeParam)
+    public function getSqlStr($params)
     {
-        $projectId =  $modeParam['project_id'] ?? $this->projectId;
-        $subProjectId =  $modeParam['sub_project_id'] ?? $this->subProjectId;
-        $prodRoutingId =  $modeParam['prod_routing_id'] ?? $this->prodRoutingId;
-        $prodRoutingLinkId = isset($modeParam['prod_routing_link_id']) ? implode(',', $modeParam['prod_routing_link_id']) : [];
-        $prodDisciplineId = isset($modeParam['prod_discipline_id']) ? implode(',', $modeParam['prod_discipline_id']) : [];
+        $projectId =  $params['project_id'] ?? $this->projectId;
+        $subProjectId =  $params['sub_project_id'] ?? $this->subProjectId;
+        $prodRoutingId =  $params['prod_routing_id'] ?? $this->prodRoutingId;
+        $prodRoutingLinkId = isset($params['prod_routing_link_id']) ? implode(',', $params['prod_routing_link_id']) : [];
+        $prodDisciplineId = isset($params['prod_discipline_id']) ? implode(',', $params['prod_discipline_id']) : [];
 
-        $pickerDate = $modeParam['picker_date'];
+        $pickerDate = $params['picker_date'];
 
         $sql = "SELECT 
                     sp.project_id AS project_id
@@ -77,21 +75,20 @@ class Prod_routing_010 extends Report_ParentDocumentController
         return $sql;
     }
 
-    protected function getDefaultValueModeParams($modeParams)
+    protected function getDefaultValueParams($params)
     {
         $a = 'picker_date';
         $b = 'project_id';
         $c = 'sub_project_id';
         $d = 'prod_routing_id';
         $pickerDate = Report::createDefaultPickerDate();
-        $isNullModeParams = Report::isNullModeParams($modeParams);
-        if ($isNullModeParams) {
-            $modeParams[$a] = $pickerDate;
-            $modeParams[$b] = $this->projectId;
-            $modeParams[$c] = $this->subProjectId;
-            $modeParams[$d] = $this->prodRoutingId;
+        if (Report::isNullParams($params)) {
+            $params[$a] = $pickerDate;
+            $params[$b] = $this->projectId;
+            $params[$c] = $this->subProjectId;
+            $params[$d] = $this->prodRoutingId;
         }
-        return $modeParams;
+        return $params;
     }
 
     protected function getParamColumns($dataSource, $modeType)
@@ -133,9 +130,9 @@ class Prod_routing_010 extends Report_ParentDocumentController
         ];
     }
 
-    protected function getTableColumns($modeParams, $dataSource)
+    protected function getTableColumns($params, $dataSource)
     {
-        $countTables = array_keys($this->createArraySqlFromSqlStr($modeParams));
+        $countTables = array_keys($this->createArraySqlFromSqlStr($params));
         $array = [];
         foreach ($countTables as $key) {
             $array[$key] =
@@ -178,34 +175,34 @@ class Prod_routing_010 extends Report_ParentDocumentController
         return $array;
     }
 
-    public function makeTitleForTables($modeParams)
+    public function makeTitleForTables($params)
     {
-        $tableName = array_keys($this->getTableColumns($modeParams, []));
+        $tableName = array_keys($this->getTableColumns($params, []));
         return array_fill_keys($tableName, $this->topTitleTable);
     }
 
-    public function getBasicInfoData($modeParams)
+    public function getBasicInfoData($params)
     {
-        $projectName = Project::find($modeParams['project_id'] ?? $this->projectId)->name;
-        $subProjectName = Sub_project::find($modeParams['sub_project_id'] ?? $this->subProjectId)->name;
-        $prodPouting = Prod_routing::find($modeParams['prod_routing_id'] ?? $this->prodRoutingId)->name;
+        $projectName = Project::find($params['project_id'] ?? $this->projectId)->name;
+        $subProjectName = Sub_project::find($params['sub_project_id'] ?? $this->subProjectId)->name;
+        $prodPouting = Prod_routing::find($params['prod_routing_id'] ?? $this->prodRoutingId)->name;
 
-        $prodDiscipline = isset($modeParams['prod_discipline_id']) ?
-            implode(', ', Prod_discipline::whereIn('id', $modeParams['prod_discipline_id'])
+        $prodDiscipline = isset($params['prod_discipline_id']) ?
+            implode(', ', Prod_discipline::whereIn('id', $params['prod_discipline_id'])
                 ->pluck('name')
                 ->toArray()) :
             implode(', ', Prod_discipline::all()
                 ->pluck('name')
                 ->toArray());
 
-        $prodRoutingLink = isset($modeParams['prod_routing_link_id']) ?
-            implode(',', Prod_routing_link::whereIn('id', $modeParams['prod_routing_link_id'])
+        $prodRoutingLink = isset($params['prod_routing_link_id']) ?
+            implode(',', Prod_routing_link::whereIn('id', $params['prod_routing_link_id'])
                 ->pluck('name')
                 ->toArray()) : '';
 
-        $manyModeParams = $this->createManyParamsFromDates($modeParams);
+        $manyParams = $this->createManyParamsFromDates($params);
         $basicInfoData = [];
-        foreach ($manyModeParams as $key => $value) {
+        foreach ($manyParams as $key => $value) {
             $array = [];
             $array['date'] = date_create_from_format('Y-m-d', $value['picker_date'])->format('d/m/Y');
             $array['project'] = $projectName;
@@ -215,8 +212,18 @@ class Prod_routing_010 extends Report_ParentDocumentController
             $array['prod_discipline'] = $prodDiscipline;
             $basicInfoData[$key] = $array;
         }
-        // dd($manyModeParams);
+        // dd($manyParams);
         return $basicInfoData;
+    }
+
+    protected function createArraySqlFromSqlStr($params)
+    {
+        $sqlStr = [];
+        $manyParams = $this->createManyParamsFromDates($params);
+        foreach ($manyParams as $key => $param) {
+            $sqlStr[$key] = $this->getSqlStr($param);
+        }
+        return $sqlStr;
     }
 
 }

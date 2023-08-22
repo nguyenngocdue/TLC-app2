@@ -7,9 +7,9 @@ use App\Http\Controllers\Reports\Report_ParentReportController2;
 class Eco_sheet_140 extends Report_ParentReportController2
 {
 
-    public function getSqlStr($modeParams)
+    public function getSqlStr($params)
     {
-        [$month, $projectId] = $this->selectMonth($modeParams);
+        [$month, $projectId] = $this->selectMonth($params);
         $sql = "SELECT 	
                     #ecosheet.ecos_id AS eco_sheet_id, 
                     usecos.term_id AS user_id,
@@ -54,7 +54,7 @@ class Eco_sheet_140 extends Report_ParentReportController2
         ];
     }
 
-    protected function getTableColumns($modeParams, $dataSource)
+    protected function getTableColumns($params, $dataSource)
     {
         return [
             [
