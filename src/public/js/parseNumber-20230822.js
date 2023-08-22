@@ -85,7 +85,7 @@ const dataPickerFormatByElements = (nameElement) => {
 }
 const removeLetters = (number) => number.replace(/[^\d.-]/g, '');
 
-const parseNumber2 = (id, initValue) => {
+const parseNumber2 = (id, initValue,decimalDecision = 2) => {
     const inputNumber = $("[id='" + id + "']");
     const formatterFn = (value) => {
         if (value !== null) {
@@ -93,10 +93,14 @@ const parseNumber2 = (id, initValue) => {
             if (typeof value === 'number') value = value + '';
             const [a, b] = value.split(".")
             const formattedValue = a.replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            let formattedValue2 = '';
             if (typeof b == 'string' && (b * 1) !== 0 && b.length > 0) {
-                return formattedValue + '.' + b.replace(/0+$/, '');
+                formattedValue2 = (('0.' + b.replace(/0+$/, '')) * 1).toFixed(decimalDecision);
+                const [c,d] = formattedValue2.split(".");
+                return formattedValue + '.' +  d.padEnd(decimalDecision,'0');
             }
-            return formattedValue;
+            console.log(formattedValue)
+            return (decimalDecision >= 1) ? formattedValue + '.' + ('').padEnd(decimalDecision,'0') : formattedValue;
         }
     }
     const parserFn = value => value.replace(/\$\s?|(,*)/g, '');
