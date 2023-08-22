@@ -285,8 +285,14 @@ abstract class ViewAllTypeMatrixParent extends Component
     private function paginate($items, $perPage = 15, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+        if (is_array($items)) $items = collect($items);
+        $count = $items->count();
+
+        //<< If current page of HLC is 12, but STW only have 1 page
+        //Force the program to select the smallest page
+        $page = min(floor($perPage / $count), $page);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $count, $perPage, $page, $options);
     }
 
     protected function getFooter($yAxisTableName)
