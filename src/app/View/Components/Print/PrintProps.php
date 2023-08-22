@@ -31,6 +31,7 @@ class PrintProps extends Component
 		private $layout,
 		private $numberOfEmptyLines = 0,
 		private $printMode = 'normal',
+		private $topTitle = "",
 	) {
 		//
 	}
@@ -118,6 +119,7 @@ class PrintProps extends Component
 			'layout' => $this->layout,
 			'numberOfEmptyLines' => $this->numberOfEmptyLines,
 			'printMode' => $this->printMode,
+			'topTitle' => $this->topTitle,
 		];
 		return view('components.print.print-props', $params);
 	}

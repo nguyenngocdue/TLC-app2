@@ -16,6 +16,13 @@
                 break;
         }
 @endphp
-    <x-print.print-props type="{{$type}}" modelPath="{{$modelPath}}" trashed="{{$trashed}}" id="{{$id}}" layout="{{$layout}}" />
+    <x-print.print-props 
+        id="{{$id}}" 
+        type="{{$type}}" 
+        modelPath="{{$modelPath}}" 
+        trashed="{{$trashed}}" 
+        layout="{{$layout}}" 
+        topTitle="{{$topTitle}}"
+        />
     <x-print.printed-time-zone />
 @endsection

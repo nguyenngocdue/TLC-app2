@@ -6,6 +6,6 @@
 
 @if($actionBtnShowPrintButton)
     <x-renderer.button class="mr-1" type="secondary" htmlType="submit" outline=true title="Print mode multiple">
-        <i class="fa-duotone fa-print"></i> Print
+        <i class="fa-duotone fa-print"></i> Print Template with extra empty lines
     </x-renderer.button>
 @endif

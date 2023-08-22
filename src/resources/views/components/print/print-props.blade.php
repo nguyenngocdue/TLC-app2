@@ -2,16 +2,17 @@
     <script>
         k = @json($listenerDataSource);
         ki = makeKi(k);
-    
+        
         listenersOfDropdown2 = @json($listeners2);
         filtersOfDropdown2 = @json($filters2);
-    
+        
         listenersOfDropdown4s = @json($listeners4);
         filtersOfDropdown4s = @json($filters4);
-    </script>
+        </script>
     <div class="flex justify-center">
         <div class="{{$layout}} items-center bor1der bg-white box-border p-8">
             <x-print.letter-head5 showId={{$showId}} type={{$type}} :dataSource="$dataSource" />
+            <x-renderer.heading level=3 xalign='center'>{{$topTitle}}</x-renderer.heading>
             @foreach($propsTree as $propTree)
             <x-print.description-group5 type={{$type}} modelPath={{$modelPath}} :propTree="$propTree" :dataSource="$dataSource" numberOfEmptyLines="{{$numberOfEmptyLines}}" 
             printMode="{{$printMode}}" />
