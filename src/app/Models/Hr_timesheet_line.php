@@ -148,7 +148,7 @@ class Hr_timesheet_line extends ModelExtended
             ['dataIndex' => 'sub_task_id', 'cloneable' => true],
             ['dataIndex' => 'work_mode_id', 'cloneable' => true, 'no_print' => true],
             // ['dataIndex' => 'ts_hour', 'cloneable' => true],
-            ['dataIndex' => 'duration_in_min', 'cloneable' => true],
+            ['dataIndex' => 'duration_in_min', 'cloneable' => true, 'footer' => 'agg_sum'],
             ['dataIndex' => 'remark', 'cloneable' => true],
             ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],
         ];
