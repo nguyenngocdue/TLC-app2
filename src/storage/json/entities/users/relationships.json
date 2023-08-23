@@ -11,7 +11,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getUserType": {
         "name": "_getUserType",
@@ -25,7 +27,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getUserCompany": {
         "name": "_getUserCompany",
@@ -39,7 +43,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getUserCat": {
         "name": "_getUserCat",
@@ -53,7 +59,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getPositionPrefix": {
         "name": "_getPositionPrefix",
@@ -67,7 +75,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getPosition1": {
         "name": "_getPosition1",
@@ -81,7 +91,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getPosition2": {
         "name": "_getPosition2",
@@ -95,7 +107,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getPosition3": {
         "name": "_getPosition3",
@@ -109,7 +123,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getUserDiscipline": {
         "name": "_getUserDiscipline",
@@ -123,7 +139,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getUserDepartment": {
         "name": "_getUserDepartment",
@@ -137,7 +155,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getTimeKeepType": {
         "name": "_getTimeKeepType",
@@ -151,7 +171,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -165,7 +187,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -179,7 +203,9 @@
         "control": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getOtTeams()": {
         "name": "_getOtTeams()",
@@ -193,7 +219,9 @@
         "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getTshtTeams()": {
         "name": "_getTshtTeams()",
@@ -204,10 +232,28 @@
         "renderer_view_all_unit": "team",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "",
+        "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_getSiteTeams()": {
+        "name": "_getSiteTeams()",
+        "relationship": "getCheckedByField",
+        "control_name": "getSiteTeams()",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "team",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getPosts": {
         "name": "_getPosts",
@@ -221,7 +267,9 @@
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment": {
         "name": "_attachment",
@@ -235,7 +283,9 @@
         "control": "text",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_featured_image": {
         "name": "_featured_image",
@@ -249,7 +299,9 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getAvatar": {
         "name": "_getAvatar",
@@ -263,7 +315,9 @@
         "control": "thumbnail",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getRoleSet": {
         "name": "_getRoleSet",
@@ -277,6 +331,8 @@
         "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }
