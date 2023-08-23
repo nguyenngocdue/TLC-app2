@@ -50,7 +50,7 @@
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20230821.js') }}"></script>
 
     <script src="{{ asset('js/components/Number4.js') }}"></script>
-    <script src="{{ asset('js/components/Footer4-20230801.js') }}"></script>
+    <script src="{{ asset('js/components/Footer4-20230823.js') }}"></script>
 
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>
     <script src="{{ asset('js/components/KeyArrowTable.js') }}"></script>

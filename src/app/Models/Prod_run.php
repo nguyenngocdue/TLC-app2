@@ -40,8 +40,8 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'date', 'cloneable' => true, 'footer' => 'agg_none'],
             ['dataIndex' => 'start', 'cloneable' => true,],
             ['dataIndex' => 'end', 'cloneable' => true,],
-            ['dataIndex' => 'total_hours', 'footer' => 'agg_sum'],
-            ['dataIndex' => 'worker_number', 'cloneable' => true, 'footer' => 'agg_avg'],
+            ['dataIndex' => 'total_hours', 'footer' => 'agg_sum', 'no_print' => true,],
+            ['dataIndex' => 'worker_number', 'cloneable' => true, 'footer' => 'agg_avg', 'no_print' => true,],
             ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum'],
         ];
     }
