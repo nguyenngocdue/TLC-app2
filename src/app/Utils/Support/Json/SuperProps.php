@@ -82,7 +82,7 @@ class SuperProps
         // dump($allProps);
     }
 
-    private static function makeCheckbox($dataSource)
+    private static function makeDataFromCheckbox($dataSource)
     {
         $result = [];
         foreach ($dataSource as $key => $value) {
@@ -236,7 +236,7 @@ class SuperProps
     private static function readStatuses($type)
     {
         $allStatuses = LibStatuses::getFor($type);
-        static::attachJson("transitions", $allStatuses, static::makeCheckbox(Transitions::getAllOf($type)));
+        static::attachJson("transitions", $allStatuses, static::makeDataFromCheckbox(Transitions::getAllOf($type)));
         static::attachJson("ball-in-courts", $allStatuses, static::makeFromWhiteList(BallInCourts::getAllOf($type)));
         static::attachJson("action-buttons", $allStatuses, static::makeFromWhiteList(ActionButtons::getAllOf($type)));
         static::attachJson("capability-roles", $allStatuses, static::loadCapa($type));
@@ -260,7 +260,7 @@ class SuperProps
     private static function readSettings($type)
     {
         $result = [];
-        $result["definitions"] = static::makeCheckbox(Definitions::getAllOf($type));
+        $result["definitions"] = static::makeDataFromCheckbox(Definitions::getAllOf($type));
         return $result;
     }
 
@@ -308,6 +308,9 @@ class SuperProps
 
     private static function make($type)
     {
+        $modelPath = Str::modelPathFrom($type);
+        if (!class_exists($modelPath)) return ["problems" => "Class $modelPath not found."];
+
         static::$type = $type;
         static::$result['problems'] = [];
         static::$result['type'] = Str::singular($type);

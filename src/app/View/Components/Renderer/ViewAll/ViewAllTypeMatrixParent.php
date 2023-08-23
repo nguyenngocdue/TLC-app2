@@ -135,7 +135,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $textColor = $textColor ?? '';
         return [$bgColor, $textColor];
     }
-    protected function makeCaption($document)
+    protected function makeCaptionForCheckbox($document)
     {
         if (is_null($this->checkboxCaptionColumn)) return "";
 
@@ -145,27 +145,36 @@ abstract class ViewAllTypeMatrixParent extends Component
 
         return $a;
     }
-    protected function makeCheckbox($document, $forExcel)
+    protected function getCheckboxVisible($document, $y)
     {
+        return true;
+    }
+
+    protected function makeCheckbox($document, $y, $forExcel)
+    {
+        $isCheckboxVisible = $this->getCheckboxVisible($document, $y) ? 1 : 0;
         $id = $document->id;
+        $yId = $y->id;
 
         [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
-        $checkbox = "<input class='cursor-pointer' title='" . Str::makeId($id) . "' type='checkbox' name='$id'/>";
+        $className = $isCheckboxVisible ? "cursor-pointer view-all-matrix-checkbox-$yId" : "cursor-not-allowed disabled:opacity-50";
+        $disabledStr = $isCheckboxVisible ? "" : "disabled";
+        $checkbox = "<input $disabledStr class='$className' title='" . Str::makeId($id) . "' type='checkbox' name='$id'/>";
         $item = [
-            'value' => $checkbox . "<br/>" . $this->makeCaption($document),
+            'value' => $checkbox . "<br/>" . $this->makeCaptionForCheckbox($document),
             // 'cell_title' => 'Select check box id:' . $id,
             'cell_class' => "$bgColor $textColor",
         ];
         return (object) $item;
     }
 
-    function cellRenderer($cell, $dataIndex, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $y, $forExcel = false)
     {
         $result = [];
         switch ($dataIndex) {
             case 'checkbox':
                 foreach ($cell as $document) {
-                    $result[] = $this->makeCheckbox($document, $forExcel);
+                    $result[] = $this->makeCheckbox($document, $y, $forExcel);
                 }
                 break;
             case 'status_only':
@@ -246,12 +255,12 @@ abstract class ViewAllTypeMatrixParent extends Component
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 if (isset($dataSource[$yId][$xId])) {
-                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $forExcel);
+                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $y, $forExcel);
                     $line[$xId] = $value;
                     if ($this->mode == 'detail') {
                         foreach ($extraColumns as $column) {
                             $key = $xId . "_" . $column;
-                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $forExcel);
+                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $y, $forExcel);
                             //<< convert to empty string for excel
                             $line[$key] = is_null($value) ? "" : $value;
                         }

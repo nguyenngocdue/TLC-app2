@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class BuildTree
 {
     protected static $key = 'my_company';
-    protected static $fillableUser = ['id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta', 'time_keeping_type','department','workplace'];
+    protected static $fillableUser = ['id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta', 'time_keeping_type', 'department', 'workplace'];
     protected static $fillableUserDiscipline = ['id', 'name', 'def_assignee'];
     private static function buildTree(array &$elements, $parentId = 0)
     {
@@ -134,9 +134,10 @@ class BuildTree
         return $result;
     }
 
-    public static function getTreeById($id,$flatten = false){
+    public static function getTreeById($id, $flatten = false)
+    {
         $tree = static::getAll();
-        $tree = static::findNodeValueById($tree,$id);
+        $tree = static::findNodeValueById($tree, $id);
         if ($flatten) {
             return static::flatten($tree);
         }
@@ -201,5 +202,13 @@ class BuildTree
             }
         }
         return [];
+    }
+
+    public static function isApprovable($managerId, $creatorId)
+    {
+        if (CurrentUser::isAdmin()) return true;
+        $tree = BuildTree::getTreeById($managerId, true);
+        $staffIds = array_map(fn ($user) => $user->id, $tree);
+        return in_array($creatorId, $staffIds);
     }
 }

@@ -1122,9 +1122,6 @@ video {
 .h-\[300px\] {
   height: 300px;
 }
-.h-\[32px\] {
-  height: 32px;
-}
 .h-\[400px\] {
   height: 400px;
 }
@@ -1437,12 +1434,11 @@ video {
 .max-w-full {
   max-width: 100%;
 }
+.max-w-md {
+  max-width: 28rem;
+}
 .max-w-xl {
   max-width: 36rem;
-}
-.max-w-max {
-  max-width: -moz-max-content;
-  max-width: max-content;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -1464,6 +1460,9 @@ video {
 }
 .table-auto {
   table-layout: auto;
+}
+.border-collapse {
+  border-collapse: collapse;
 }
 .border-separate {
   border-collapse: separate;
@@ -1729,6 +1728,11 @@ video {
   margin-right: calc(1.5rem * var(--tw-space-x-reverse));
   margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
+.space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+}
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1779,9 +1783,6 @@ video {
 }
 .whitespace-pre-wrap {
   white-space: pre-wrap;
-}
-.whitespace-break-spaces {
-  white-space: break-spaces;
 }
 .break-words {
   overflow-wrap: break-word;

@@ -201,10 +201,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return $result;
     }
 
-    function cellRenderer($cell, $dataIndex, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $y, $forExcel = false)
     {
-        if (in_array($dataIndex, ['status', 'detail'])) return parent::cellRenderer($cell, $dataIndex, $forExcel);
-        if ($dataIndex === 'checkbox') return parent::cellRenderer($cell, $dataIndex, $forExcel);
+        if (in_array($dataIndex, ['status', 'detail'])) return parent::cellRenderer($cell, $dataIndex, $y, $forExcel);
+        if ($dataIndex === 'checkbox') return parent::cellRenderer($cell, $dataIndex, $y, $forExcel);
         $doc = $cell[0];
         switch ($dataIndex) {
             case "total_uom":
