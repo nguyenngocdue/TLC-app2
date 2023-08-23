@@ -7,7 +7,9 @@ use App\BigThink\ModelExtended;
 class Hr_timesheet_line extends ModelExtended
 {
     protected $fillable = [
-        'timesheetable_type', 'timesheetable_id', 'start_time', 'duration_in_min', 'ts_date', 'ts_hour', 'project_id', 'sub_project_id',
+        'timesheetable_type', 'timesheetable_id', 'start_time',
+        'duration_in_min', 'duration_in_hour',
+        'ts_date', 'ts_hour', 'project_id', 'sub_project_id',
         'discipline_id', 'task_id', 'sub_task_id', 'work_mode_id', 'owner_id',
         'order_no', 'id', 'remark', 'status', 'lod_id', 'prod_routing_id', 'user_id'
     ];
@@ -136,6 +138,7 @@ class Hr_timesheet_line extends ModelExtended
             ['dataIndex' => 'timesheetable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
 
             ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true, "deaf" => true, 'cloneable' => !true],
+            ['dataIndex' => 'discipline_id', 'cloneable' => true, 'deaf' => true],
 
             // ['dataIndex' => 'ts_date', 'cloneable' => true],
             // ['dataIndex' => 'start_time', 'cloneable' => true],
@@ -143,12 +146,12 @@ class Hr_timesheet_line extends ModelExtended
             ['dataIndex' => 'sub_project_id', 'cloneable' => true],
             ['dataIndex' => 'prod_routing_id', 'cloneable' => true],
             ['dataIndex' => 'lod_id', 'cloneable' => true],
-            ['dataIndex' => 'discipline_id', 'cloneable' => true],
             ['dataIndex' => 'task_id', 'cloneable' => true],
             ['dataIndex' => 'sub_task_id', 'cloneable' => true],
             ['dataIndex' => 'work_mode_id', 'cloneable' => true, 'no_print' => true],
             // ['dataIndex' => 'ts_hour', 'cloneable' => true],
-            ['dataIndex' => 'duration_in_min', 'cloneable' => true, 'footer' => 'agg_sum'],
+            ['dataIndex' => 'duration_in_hour', 'cloneable' => true, 'footer' => 'agg_sum'],
+            ['dataIndex' => 'duration_in_min', 'invisible' => 'true'],
             ['dataIndex' => 'remark', 'cloneable' => true],
             ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],
         ];

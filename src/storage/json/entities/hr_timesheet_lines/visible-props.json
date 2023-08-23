@@ -17,7 +17,7 @@
     "_timesheetable": {
         "name": "_timesheetable",
         "column_name": "timesheetable",
-        "new": ""
+        "new": "true"
     },
     "_user_id": {
         "name": "_user_id",
@@ -34,15 +34,20 @@
         "column_name": "duration_in_min",
         "new": "true"
     },
+    "_duration_in_hour": {
+        "name": "_duration_in_hour",
+        "column_name": "duration_in_hour",
+        "new": "true"
+    },
     "_ts_date": {
         "name": "_ts_date",
         "column_name": "ts_date",
-        "new": ""
+        "new": "true"
     },
     "_ts_hour": {
         "name": "_ts_hour",
         "column_name": "ts_hour",
-        "new": ""
+        "new": "true"
     },
     "_project_id": {
         "name": "_project_id",

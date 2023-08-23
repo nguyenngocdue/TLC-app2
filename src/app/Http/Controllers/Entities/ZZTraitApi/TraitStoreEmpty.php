@@ -167,7 +167,8 @@ trait TraitStoreEmpty
 								'discipline_id' => $worker->discipline,
 								'task_id' => 357, //357 = on the floor
 								'work_mode_id' => 2, //2 = office/workshop
-								'duration' => 480, //480 = 8 * 60
+								'duration_in_hour' => 8,
+								'duration_in_min' => 480, //480 = 8 * 60
 							]);
 						}
 						$totalInsertedRows  += count($workers);
