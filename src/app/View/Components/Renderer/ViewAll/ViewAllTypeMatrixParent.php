@@ -137,8 +137,8 @@ abstract class ViewAllTypeMatrixParent extends Component
         $id = $document->id;
         [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
         $item = [
-            'value' => "<div><input type='checkbox' name='$id'/></div>",
-            'cell_title' => 'Select check box id:' . $id,
+            'value' => "<div><input title='" . Str::makeId($id) . "' type='checkbox' name='$id'/></div>",
+            // 'cell_title' => 'Select check box id:' . $id,
             'cell_class' => "$bgColor $textColor",
         ];
         return (object) $item;
