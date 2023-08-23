@@ -364,7 +364,7 @@
         "name_rendered": "",
         "toggle": "",
         "new": "true",
-        "pending_approval": "",
+        "pending_approval": "true",
         "rejected": "true",
         "approved": ""
     },
@@ -397,6 +397,15 @@
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "proj_supervisor_nz": {
+        "name": "proj_supervisor_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "",
