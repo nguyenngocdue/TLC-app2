@@ -243,13 +243,13 @@
         "name": "proj_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true"
     },
     "proj_manager": {
         "name": "proj_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true"
     },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
@@ -261,10 +261,16 @@
         "name": "proj_member",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true"
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
+    "proj_supervisor_nz": {
+        "name": "proj_supervisor_nz",
         "name_rendered": "",
         "toggle": "",
         "new": ""
@@ -309,7 +315,7 @@
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true"
     },
     "whs_manager": {
         "name": "whs_manager",
