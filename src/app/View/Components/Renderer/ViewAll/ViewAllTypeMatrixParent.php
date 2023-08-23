@@ -231,10 +231,14 @@ abstract class ViewAllTypeMatrixParent extends Component
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 if (isset($dataSource[$yId][$xId])) {
-                    $line[$xId] = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $forExcel);
+                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $forExcel);
+                    $line[$xId] = $value;
                     if ($this->mode == 'detail') {
                         foreach ($extraColumns as $column) {
-                            $line[$xId . "_" . $column] = $this->cellRenderer($dataSource[$yId][$xId], $column, $forExcel);
+                            $key = $xId . "_" . $column;
+                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $forExcel);
+                            //<< convert to empty string for excel
+                            $line[$key] = is_null($value) ? "" : $value;
                         }
                     }
                 }
