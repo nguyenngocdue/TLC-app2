@@ -422,7 +422,7 @@ const addANewLineFull = (params) => {
                     const dataSource = ki[column['tableName']]
                     // console.log(dataSource, dataSource[selected])
 
-                    const label = dataSource[selected].name
+                    const label = dataSource[selected]?.name
                     getEById(id + '_label').html(label)
                     toDoAfterAddedDropdown4ReadOnly.push({ id, dataSource: k[column['tableName']], tableId, selected, })
                     // getEById(id).trigger('change')

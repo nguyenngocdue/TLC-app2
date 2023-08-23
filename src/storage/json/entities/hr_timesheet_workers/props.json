@@ -87,11 +87,11 @@
         "frozen_left": "",
         "frozen_right": ""
     },
-    "_total_minutes": {
-        "name": "_total_minutes",
-        "column_name": "total_minutes",
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
         "column_type": "double(8,2)",
-        "label": "Total Minutes",
+        "label": "Total Hours",
         "control": "number",
         "align": "",
         "col_span": "6",

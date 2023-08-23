@@ -1,9 +1,9 @@
 {
-    "_total_minutes": {
-        "name": "_total_minutes",
-        "column_name": "total_minutes",
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
         "listen_action": "aggregate_from_table",
-        "triggers": "getHrTsLines[footer][duration_in_min][agg_sum]",
+        "triggers": "getHrTsLines[footer][duration_in_hour][agg_sum]",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "columns_to_set": "",

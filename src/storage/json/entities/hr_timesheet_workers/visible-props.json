@@ -26,18 +26,18 @@
         "pending_approval": "true",
         "approved": "true"
     },
-    "_total_minutes": {
-        "name": "_total_minutes",
-        "column_name": "total_minutes",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "new": "true",
         "pending_review": "true",
         "review_rejected": "true",
         "pending_approval": "true",
         "approved": "true"
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
         "new": "true",
         "pending_review": "true",
         "review_rejected": "true",

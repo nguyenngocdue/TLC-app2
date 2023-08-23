@@ -29,6 +29,21 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_duration_in_hour": {
+        "name": "_duration_in_hour",
+        "column_name": "duration_in_hour",
+        "listen_action": "emit_chain",
+        "triggers": "id",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_duration_in_min": {
         "name": "_duration_in_min",
         "column_name": "duration_in_min",
@@ -182,21 +197,6 @@
     "_start_time": {
         "name": "_start_time",
         "column_name": "start_time",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_duration_in_hour": {
-        "name": "_duration_in_hour",
-        "column_name": "duration_in_hour",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

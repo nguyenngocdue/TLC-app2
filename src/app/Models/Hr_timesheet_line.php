@@ -138,7 +138,7 @@ class Hr_timesheet_line extends ModelExtended
             ['dataIndex' => 'timesheetable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
 
             ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true, "deaf" => true, 'cloneable' => !true],
-            ['dataIndex' => 'discipline_id', 'cloneable' => true, 'deaf' => true],
+            ['dataIndex' => 'discipline_id', 'cloneable' => true, 'deaf' => !true],
 
             // ['dataIndex' => 'ts_date', 'cloneable' => true],
             // ['dataIndex' => 'start_time', 'cloneable' => true],

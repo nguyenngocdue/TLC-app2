@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date("ts_date");
             $table->unsignedBigInteger("team_id")->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
-            $table->double("total_minutes", 8, 2)->nullable();
+            $table->double("total_hours", 8, 2)->nullable();
 
             $table->appendCommonFields();
         });

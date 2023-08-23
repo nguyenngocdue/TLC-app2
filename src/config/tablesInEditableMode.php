@@ -122,7 +122,7 @@ return [
         'hr_timesheet_lines' => [
             'showBtnAddANewLine' => 1,
             'showBtnAddFromAList' => 1,
-            // 'showBtnRecalculate' => 1,
+            'showBtnRecalculate' => 1,
         ],
     ],
     'projects' => [
