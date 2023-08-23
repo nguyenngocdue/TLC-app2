@@ -9,7 +9,7 @@ class Site_daily_assignment_line extends ModelExtended
     protected $fillable = [
         "id",  "owner_id", "status", "order_no",
         "site_daily_assignment_id",
-        "user_id",
+        "user_id", "employeeid",
     ];
 
     public static $nameless = true;
@@ -48,6 +48,7 @@ class Site_daily_assignment_line extends ModelExtended
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'site_daily_assignment_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ['dataIndex' => "user_id", 'value_as_user_id' => true,  'deaf' => true],
+            ['dataIndex' => "employeeid",],
             ['dataIndex' => "getSiteTasks()"],
         ];
     }
