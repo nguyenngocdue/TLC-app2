@@ -4,7 +4,10 @@
 @section('title', $titleReport)
 @section('tooltip', Str::ucfirst($typeReport)." ".$currentMode)
 @section('content')
-@dump($tableDataSource, $params)
+{{-- @dump($tableDataSource ,$settingComplexTable) --}}
+
+
+
 {{-- @dump($params) --}}
 <div class="px-4">
     <div class="justify-end pb-5"></div>
@@ -58,9 +61,6 @@
                     <th class="w-[450px]">Emission source category</th>
                     <th class="">Source</th>
                     <th class="">Year</th>
-                    <th class="">01</th>
-                    <th class="">02</th>
-                    <th class="">03</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,188 +70,38 @@
                     </td>
                 </tr>
                 {{-- Point --}}
+
+                @foreach($tableDataSource as $keyScope => $values)
+                @php
+                $rowSpanOutSide = $settingComplexTable[$keyScope]['scope_rowspan'];
+                $remainingItem = [];
+                @endphp
                 <tr>
-                    <td class="" rowspan="4">Scope 1</td>
-                    <td class="" rowspan="2">1.1 Direct emissions arising from owned or controlled stationary sources that use fossil fuels and/or emit fugitive emissions</td>
-                    <td class="">Fuels</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
+                    <td class="" rowspan="{{$rowSpanOutSide}}">Scope 1</td>
+                    @foreach($values as $ghgcateId => $values2)
+                    @php
+                    $rowSpanInside = count($values2);
+                    $firstItem = $values2[0];
+                    $remainingItem = array_splice($values2, 1);
+                    @endphp
+                    <td class="" rowspan="{{$rowSpanInside}}">{{$firstItem['ghgcate_name']}}</td>
+                    <td class="" >{{$firstItem['ghgtmpl_name']}}</td>
+                    <td class="">{{$firstItem['total_12_months']}}</td>
+
+                        @foreach($remainingItem as $k3 => $values3)
+                        <tr>
+                            <td class="">{{$values3['ghgtmpl_name']}}</td>
+                            <td class="">{{$values3['total_12_months']}}</td>
+                        </tr>
+                        @endforeach
                 </tr>
-                <tr>
-                    <td class="">Refrigerants</td>
-                    <td class="">2000</td>
-                    <td class="">2000</td>
-                    <td class="">2000</td>
-                    <td class="">2000</td>
-
-                </tr>
-                <tr>
-                    <td class="" rowspan="2">1.2 Direct emissions from owned or controlled mobile sources</td>
-                    <td class="">Passenger vehicles</td>
-                    <td class="">3000</td>
-                    <td class="">3000</td>
-                    <td class="">3000</td>
-                    <td class="">3000</td>
-
-                </tr>
-                <tr>
-                    <td class="">Delivery vehicles</td>
-                    <td class="">4000</td>
-                    <td class="">4000</td>
-                    <td class="">4000</td>
-                    <td class="">4000</td>
-
-                </tr>
-                {{-- Point --}}
-
-
-
-
-
-
-                <tr>
-                    <td class="" rowspan="2">Scope 2</td>
-                    <td class="" rowspan="2">2.1 Location-based emissions from the generation of purchased electricity and transmission &amp; distribution loss</td>
-                    <td class="">Electricity</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="">Transmission and distribution losses</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="" rowspan="13">Scope 3</td>
-                    <td class="" rowspan="2">3.1 Purchased goods</td>
-                    <td class="">Water supplied</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="">Material use</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="" rowspan="2">3.2 Waste generated in operations</td>
-                    <td class="">Waste water (water treatment)</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="">Waste</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="" rowspan="3">3.3 Business travel</td>
-                    <td class="">All transportation by air</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="">All transportation by land, public transport, rented/leased vehicle and taxi, and sea</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                <tr>
-                    <td class="">Emissions arising from hotel accommodation associated with business travel</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                </tr>
-
-                <tr>
-                    <td class="" rowspan="2">3.4 Upstream transportation and distribution</td>
-                    <td class="">Freighting goods - Land and Sea</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="">Freighting goods - Air</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-
-                <tr>
-                    <td class="" rowspan="1">3.5 Commuting</td>
-                    <td class="">Employees commuting </td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="" rowspan="2">3.6 Manage Assets</td>
-                    <td class="">Provide Electricity</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="">Vehicle</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="">3.7 Home office</td>
-                    <td class="" rowspan="1">Home office </td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
-                <tr>
-                    <td class="" colspan="3"></td>
+                    @endforeach
+                @endforeach
+                  <tr>
+                    <td class="" colspan="2"></td>
                     <td class="">Total Emissions</td>
                     <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-                    <td class="">1000</td>
-
-                </tr>
+                </tr> 
             </tbody>
         </table>
 
