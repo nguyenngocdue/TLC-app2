@@ -81,8 +81,8 @@ class HrTimesheetWorkers extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         return [
-            ['dataIndex' => 'meta01', 'title' => 'Name', 'width' => 150,],
-            ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
+            ['dataIndex' => 'meta01', 'title' => 'Name', 'width' => 150, "fixed" => 'left'],
+            ['dataIndex' => 'count', 'align' => 'center', 'width' => 50, "fixed" => 'left'],
         ];
     }
 

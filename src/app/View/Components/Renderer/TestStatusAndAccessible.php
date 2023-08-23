@@ -3,8 +3,6 @@
 namespace App\View\Components\Renderer;
 
 use App\Utils\Support\CurrentUser;
-use App\Utils\Support\Json\SuperProps;
-use App\Utils\Support\Json\SuperWorkflows;
 use Illuminate\View\Component;
 
 class TestStatusAndAccessible extends Component
@@ -35,8 +33,6 @@ class TestStatusAndAccessible extends Component
     {
         $isAdmin = CurrentUser::isAdmin();
         if (!$isAdmin) return "";
-        $superProps = SuperProps::getFor($this->type);
-        $superWorkflows = SuperWorkflows::getFor($this->type);
         return view('components.renderer.test-status-and-accessible', [
             'type' => $this->type,
             'renderId' => $this->renderId,
@@ -45,8 +41,6 @@ class TestStatusAndAccessible extends Component
             'statuses' => $this->statuses,
             'isAdmin' => $isAdmin,
             'dryRunToken' => $this->dryRunToken,
-            'superProps' => $superProps,
-            'superWorkflows' => $superWorkflows,
             'nextItem' => ($this->item instanceof \stdClass) ? null : $this->item->next(),
             'previousItem' => ($this->item instanceof \stdClass) ? null : $this->item->previous(),
         ]);

@@ -3,7 +3,7 @@
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\View\Components\Renderer\ViewAllMatrixType\ProdSequences;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Blade;
 
 class ProdSequencesPrint extends ProdSequences
 {
@@ -49,6 +49,18 @@ class ProdSequencesPrint extends ProdSequences
     {
         return [
             ['dataIndex' => 'production_name',  'width' => 300, 'fixed' => 'left',],
+            ['dataIndex' => 'toggle', 'width' => 30, 'align' => "center",],
         ];
+    }
+
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    {
+        $yId = $y->id;
+        $toggleBtn = Blade::render("<x-renderer.button size='xs' onClick='toggleCheckbox($yId)'>TG</x-renderer.button>");
+        return
+            [
+                'production_name' => $y->production_name,
+                'toggle' => $toggleBtn,
+            ];
     }
 }

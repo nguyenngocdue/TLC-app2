@@ -35,7 +35,7 @@ class ViewAllTypeSelector extends Component
                 'home' => $listView,
                 'calendar' => [
                     'href' => "?view_type=calendar&action=updateViewAllMode&_entity=$tableName",
-                    'title' => "Calendar All",
+                    'title' => "Calendar View",
                     'icon' => 'fa-duotone fa-calendar',
                     'active' => $this->viewType == 'calendar-view',
                 ]
