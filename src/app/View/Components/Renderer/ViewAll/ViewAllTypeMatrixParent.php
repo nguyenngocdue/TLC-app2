@@ -135,7 +135,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $textColor = $textColor ?? '';
         return [$bgColor, $textColor];
     }
-    protected function makeCaption($document)
+    protected function makeCaptionForCheckbox($document)
     {
         if (is_null($this->checkboxCaptionColumn)) return "";
 
@@ -145,27 +145,27 @@ abstract class ViewAllTypeMatrixParent extends Component
 
         return $a;
     }
-    protected function makeCheckbox($document, $forExcel)
+    protected function makeCheckbox($document, $yId, $forExcel)
     {
         $id = $document->id;
 
         [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
-        $checkbox = "<input class='cursor-pointer' title='" . Str::makeId($id) . "' type='checkbox' name='$id'/>";
+        $checkbox = "<input class='cursor-pointer view-all-matrix-checkbox-$yId' title='" . Str::makeId($id) . "' type='checkbox' name='$id'/>";
         $item = [
-            'value' => $checkbox . "<br/>" . $this->makeCaption($document),
+            'value' => $checkbox . "<br/>" . $this->makeCaptionForCheckbox($document),
             // 'cell_title' => 'Select check box id:' . $id,
             'cell_class' => "$bgColor $textColor",
         ];
         return (object) $item;
     }
 
-    function cellRenderer($cell, $dataIndex, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $yId, $forExcel = false)
     {
         $result = [];
         switch ($dataIndex) {
             case 'checkbox':
                 foreach ($cell as $document) {
-                    $result[] = $this->makeCheckbox($document, $forExcel);
+                    $result[] = $this->makeCheckbox($document, $yId, $forExcel);
                 }
                 break;
             case 'status_only':
@@ -246,12 +246,12 @@ abstract class ViewAllTypeMatrixParent extends Component
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 if (isset($dataSource[$yId][$xId])) {
-                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $forExcel);
+                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $yId, $forExcel);
                     $line[$xId] = $value;
                     if ($this->mode == 'detail') {
                         foreach ($extraColumns as $column) {
                             $key = $xId . "_" . $column;
-                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $forExcel);
+                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $yId, $forExcel);
                             //<< convert to empty string for excel
                             $line[$key] = is_null($value) ? "" : $value;
                         }
