@@ -61,7 +61,7 @@
         @endswitch
     @else
         @if($control !== 'attachment')
-            <div class='h-[32px] p-2 border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
+            <div class='p-2 border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left flex items-center'>
                 (None)
             </div> 
         @endif
