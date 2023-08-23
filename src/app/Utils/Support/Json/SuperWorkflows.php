@@ -15,7 +15,7 @@ class SuperWorkflows
     private static $result = [];
     private static $adminIsRampage  = !true;
 
-    private static function makeCheckbox($dataSource)
+    private static function makeDataFromCheckbox($dataSource)
     {
         $result = [];
         foreach ($dataSource as $key => $value) {
@@ -73,7 +73,7 @@ class SuperWorkflows
     {
         $statuses = LibStatuses::getFor($type);
         $result = $statuses;
-        $capabilities = static::makeCheckbox(Capabilities::getAllOf($type));
+        $capabilities = static::makeDataFromCheckbox(Capabilities::getAllOf($type));
         if (isset($capabilities[$roleSet])) {
             foreach ($capabilities[$roleSet] as $statusKey) {
                 $result[$statusKey]['capabilities'] = true;
@@ -87,10 +87,10 @@ class SuperWorkflows
         }
 
         $props = Props::getAllOf($type);
-        $visibleProps = static::consolidate($props, $roleSet, $statuses, "VisibleProps", VisibleProps::getAllOf($type), static::makeCheckbox(VisibleWLProps::getAllOf($type)), true);
-        $readonlyProps = static::consolidate($props, $roleSet, $statuses, "ReadOnlyProps", ReadOnlyProps::getAllOf($type), static::makeCheckbox(ReadOnlyWLProps::getAllOf($type)), false);
-        $hiddenProps = static::consolidate($props, $roleSet, $statuses, "HiddenProps", HiddenProps::getAllOf($type), static::makeCheckbox(HiddenWLProps::getAllOf($type)), false);
-        $requiredProps = static::consolidate($props, $roleSet, $statuses, "RequiredProps", RequiredProps::getAllOf($type), static::makeCheckbox(RequiredWLProps::getAllOf($type)), false);
+        $visibleProps = static::consolidate($props, $roleSet, $statuses, "VisibleProps", VisibleProps::getAllOf($type), static::makeDataFromCheckbox(VisibleWLProps::getAllOf($type)), true);
+        $readonlyProps = static::consolidate($props, $roleSet, $statuses, "ReadOnlyProps", ReadOnlyProps::getAllOf($type), static::makeDataFromCheckbox(ReadOnlyWLProps::getAllOf($type)), false);
+        $hiddenProps = static::consolidate($props, $roleSet, $statuses, "HiddenProps", HiddenProps::getAllOf($type), static::makeDataFromCheckbox(HiddenWLProps::getAllOf($type)), false);
+        $requiredProps = static::consolidate($props, $roleSet, $statuses, "RequiredProps", RequiredProps::getAllOf($type), static::makeDataFromCheckbox(RequiredWLProps::getAllOf($type)), false);
 
         foreach (array_keys($statuses) as $statusKey) {
             $result[$statusKey]['visible']  = static::getPropValueByStatus($statusKey, $visibleProps);

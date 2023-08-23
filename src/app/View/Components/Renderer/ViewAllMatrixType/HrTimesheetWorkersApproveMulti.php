@@ -2,6 +2,8 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Support\Facades\Blade;
 
 class HrTimesheetWorkersApproveMulti extends HrTimesheetWorkers
@@ -41,5 +43,15 @@ class HrTimesheetWorkersApproveMulti extends HrTimesheetWorkers
                 'toggle' => $toggleBtn,
             ]
         );
+    }
+
+    function getCheckboxVisible($document, $y)
+    {
+        $managerId = CurrentUser::id();
+        $creatorId = $document->owner_id;
+        $result = BuildTree::isApprovable($managerId, $creatorId) ? 1 : 0;
+        // echo "($managerId-$creatorId-$result)";
+
+        return $result;
     }
 }
