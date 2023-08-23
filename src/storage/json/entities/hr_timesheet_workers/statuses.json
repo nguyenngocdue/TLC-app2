@@ -1,6 +1,7 @@
 [
     "new",
+    "pending_review",
+    "review_rejected",
     "pending_approval",
-    "rejected",
     "approved"
 ]

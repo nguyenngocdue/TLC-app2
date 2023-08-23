@@ -47,7 +47,7 @@ class PrintProps extends Component
 		$superProps = SuperProps::getFor($this->type);
 		$props = $superProps['props'];
 		$hiddenPrintMode = $this->printMode == 'template' ? 'hidden_template_print' : 'hidden_print';
-		$props = array_filter($props, fn ($item) => $item[$hiddenPrintMode] != true);
+		$props = array_filter($props, fn ($item) => ($item[$hiddenPrintMode] ?? false) != true);
 		$node = [];
 		$nodeCount = 0;
 		foreach ($props as $key => $value) {
