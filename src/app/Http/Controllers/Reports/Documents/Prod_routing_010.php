@@ -14,7 +14,7 @@ use App\Models\Sub_project;
 use App\Utils\Support\DocumentReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
-
+use Illuminate\Support\Facades\DB;
 
 class Prod_routing_010 extends Report_ParentDocument2Controller
 {
@@ -214,5 +214,18 @@ class Prod_routing_010 extends Report_ParentDocument2Controller
         }
         // dd($manyParams);
         return $basicInfoData;
+    }
+
+    public function getDataSource($params)
+    {
+        $arraySqlStr = $this->createArraySqlFromSqlStr($params);
+        $dataSource = [];
+        foreach ($arraySqlStr as $k => $sql) {
+            if (is_null($sql) || !$sql) return collect();
+            // $sql = $this->getSql($params);
+            $sqlData = DB::select(DB::raw($sql));
+            $dataSource[$k] = collect($sqlData);
+        }
+        return $dataSource;
     }
 }

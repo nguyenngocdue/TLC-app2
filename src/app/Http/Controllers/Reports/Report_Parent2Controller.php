@@ -162,6 +162,7 @@ abstract class Report_Parent2Controller extends Controller
     }
 
     private function isEmptyAllDataSource($dataSource){
+        return false;
         $isEmptyAllData = true;
         $isAtLeastData = true;
         $isCheck = true;
@@ -175,6 +176,7 @@ abstract class Report_Parent2Controller extends Controller
     }
 
     private function filterEmptyItems($dataSource, $info){
+        return [];
         $emptyItems = [];
         foreach ($dataSource as $key => $value){
             if(empty($value->toArray())) {
@@ -182,6 +184,9 @@ abstract class Report_Parent2Controller extends Controller
             }
         }
         return $emptyItems;
+    }
+    public function changeDataSource($dataSource){
+        return $dataSource;
     }
 
 
@@ -204,6 +209,9 @@ abstract class Report_Parent2Controller extends Controller
         if ($this->viewName) $viewName = $this->viewName;
 
         $dataSource = $this->getDataSource($params);
+        $dataSource = $this->changeDataSource($dataSource);
+        // dd($dataSource);
+
         $isEmptyAllDataSource = $this->isEmptyAllDataSource($dataSource);
 
 
@@ -223,6 +231,7 @@ abstract class Report_Parent2Controller extends Controller
         }
 
         $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
+
 
         return view('reports.' . $viewName, [
             'entity' => $entity,

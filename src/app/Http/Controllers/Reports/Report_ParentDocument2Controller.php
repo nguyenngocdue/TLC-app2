@@ -51,19 +51,16 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
         return $sqlStr;
     }
 
-    public function getDataSource($params)
-    {
-        $arraySqlStr = $this->createArraySqlFromSqlStr($params);
-        $dataSource = [];
-        foreach ($arraySqlStr as $k => $sql) {
-            if (is_null($sql) || !$sql) return collect();
-            // $sql = $this->getSql($params);
-            $sqlData = DB::select(DB::raw($sql));
-            $dataSource[$k] = collect($sqlData);
-        }
-        return $dataSource;
-    }
-
-
-
+    // public function getDataSource($params)
+    // {
+    //     $arraySqlStr = $this->createArraySqlFromSqlStr($params);
+    //     $dataSource = [];
+    //     foreach ($arraySqlStr as $k => $sql) {
+    //         if (is_null($sql) || !$sql) return collect();
+    //         // $sql = $this->getSql($params);
+    //         $sqlData = DB::select(DB::raw($sql));
+    //         $dataSource[$k] = collect($sqlData);
+    //     }
+    //     return $dataSource;
+    // }
 }

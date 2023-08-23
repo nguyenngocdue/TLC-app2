@@ -23,21 +23,31 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 			$toMonth = $arrayMonth['to'];
 		}
 		
-		$sql =  "SELECT 
-			#SUBSTR(ghgsh.ghg_month, 1, 7) AS ghgsh_month
-			#,ghgsh.id AS ghgsh_id
-			#,ghgsh.name AS ghgsh_name
-			
-			ghgsh.ghg_tmpl_id AS ghgsh_tmpl_id
-			,ghgtmpl.name AS ghgsh_tmpl_name
-			,ghgsh.total AS ghgsh_total
-			FROM ghg_sheets ghgsh, ghg_tmpls ghgtmpl
-			WHERE  1 = 1 
-			AND SUBSTR(ghgsh.ghg_month, 1, 7) >= '$fromMonth' 
-			AND SUBSTR(ghgsh.ghg_month, 1, 7) <= '$toMonth'
-			AND ghgtmpl.id = ghgsh.ghg_tmpl_id
-			GROUP BY  ghgsh_tmpl_id, ghgsh_total
-			";
+		$sql =  " SELECT infghgsh.*,
+							ghgsh_totals.`01`, ghgsh_totals.`02`, ghgsh_totals.`03`,
+							ROUND(ghgsh_totals.`01` + ghgsh_totals.`02` + ghgsh_totals.`03`,2) AS total_12_months
+					FROM (SELECT 
+					term.id AS scope_id, term.name AS scope_name,
+					ghgcate.id AS ghgcate_id, ghgcate.name AS ghgcate_name,
+					ghgtmpl.id AS ghg_tmpl_id, ghgtmpl.name AS ghgtmpl_name
+					FROM ghg_cats ghgcate
+					LEFT JOIN terms term ON ghgcate.scope_id = term.id
+					LEFT JOIN ghg_tmpls ghgtmpl ON ghgtmpl.ghg_cat_id = ghgcate.id
+					ORDER BY ghgcate_name, ghgtmpl_name) infghgsh
+					LEFT JOIN (
+						SELECT
+						ghgsh.ghg_tmpl_id AS ghgsh_tmpl_id,
+						SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '01' THEN ghgsh.total ELSE 0 END) AS `01`,
+						SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '02' THEN ghgsh.total ELSE 0 END) AS `02`,
+						SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '03' THEN ghgsh.total ELSE 0 END) AS `03`
+						FROM ghg_sheets ghgsh 
+						WHERE 1 = 1
+						AND SUBSTR(ghgsh.ghg_month, 1, 4) = '2023'
+						GROUP BY ghgsh_tmpl_id
+					) ghgsh_totals ON infghgsh.ghg_tmpl_id = ghgsh_totals.ghgsh_tmpl_id
+					ORDER BY ghgcate_id, ghg_tmpl_id
+					;
+					";
 		return $sql;
 	}
 
@@ -56,12 +66,23 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 			[
 				'title' => 'Quarter',
 				'dataIndex' => 'quarter_time',
+				'allowClear' => true,
 			],
 			[
 				'title' => 'Month',
 				'dataIndex' => 'only_month',
+				'allowClear' => true,
+				'multiple' => true,
 			],
 		];
+	}
+
+	public function changeDataSource($dataSource){
+		$dataSource =  Report::convertToType($dataSource->toArray());
+		$groupByScope = Report::groupArrayByKey($dataSource, 'scope_id');
+		$groupByScope = array_map(fn($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope);
+		// dd($groupByScope);
+		return collect($groupByScope);
 	}
 
 
