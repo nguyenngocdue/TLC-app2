@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use DateTime;
+use Exception;
 use Illuminate\Support\Str;
 
 class DocumentReport
@@ -41,5 +42,27 @@ class DocumentReport
         }
         return $totalItemCount;
     }
+
+    public static function groupMonths($data) {
+        $groupedData = [];
+        $months = [];
+        foreach ($data as $item) {
+            $item = (array) $item;
+            $monthsData = [];
+            for ($i = 1; $i <= 12; $i++) {
+                $monthKey = str_pad($i, 2, "0", STR_PAD_LEFT);
+                try {
+                    $months[$monthKey] = null;
+                    $monthsData[$monthKey] = (string)$item[$monthKey];
+                } catch (\Exception $e) {
+                    continue;
+                }
+            }
+            $item['months'] = empty($monthsData) ? $months : $monthsData;
+            $groupedData[] = $item;
+        }
+        return $groupedData;
+    }
+    
     
 }

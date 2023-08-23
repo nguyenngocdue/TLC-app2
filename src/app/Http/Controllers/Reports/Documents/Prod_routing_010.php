@@ -86,7 +86,7 @@ class Prod_routing_010 extends Report_ParentDocument2Controller
         return $sqlStr;
     }
 
-    protected function getDefaultValueParams($params)
+    protected function getDefaultValueParams($params, $request)
     {
         $a = 'picker_date';
         $b = 'project_id';

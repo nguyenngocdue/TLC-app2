@@ -64,7 +64,7 @@ abstract class Report_Parent2Controller extends Controller
         return $collection;
     }
 
-    protected function getDefaultValueParams($params)
+    protected function getDefaultValueParams($params,$request)
     {
         $x = 'picker_date';
         $isNullParams = Report::isNullParams($params);
@@ -185,7 +185,7 @@ abstract class Report_Parent2Controller extends Controller
         }
         return $emptyItems;
     }
-    public function changeDataSource($dataSource){
+    public function changeDataSource($dataSource, $params){
         return $dataSource;
     }
 
@@ -200,8 +200,8 @@ abstract class Report_Parent2Controller extends Controller
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
         $params = $this->getParams($request);
-        $params = $this->getDefaultValueParams($params);
-
+        $params = $this->getDefaultValueParams($params, $request);
+        
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $params);
         }
@@ -212,7 +212,7 @@ abstract class Report_Parent2Controller extends Controller
         if ($this->viewName) $viewName = $this->viewName;
 
         $dataSource = $this->getDataSource($params);
-        $dataSource = $this->changeDataSource($dataSource);
+        $dataSource = $this->changeDataSource($dataSource, $params);
         // dd($dataSource);
 
         $isEmptyAllDataSource = $this->isEmptyAllDataSource($dataSource);

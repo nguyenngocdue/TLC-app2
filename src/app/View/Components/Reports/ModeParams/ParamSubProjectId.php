@@ -21,6 +21,7 @@ class ParamSubProjectId extends ParentParamReports
                         WHERE sp.deleted_at IS NULL
                         ORDER BY sp.name";
         $result = DB::select($sql);
+        // dump($result);
         return $result;
     }
 }
