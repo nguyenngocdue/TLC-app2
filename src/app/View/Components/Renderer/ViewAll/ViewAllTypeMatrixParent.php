@@ -34,6 +34,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $attOfCellToRender = "status";
     protected $showLegend = true;
     protected $tableTopCenterControl = "";
+    protected $checkboxCaptionColumn = null;
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -134,13 +135,24 @@ abstract class ViewAllTypeMatrixParent extends Component
         $textColor = $textColor ?? '';
         return [$bgColor, $textColor];
     }
+    protected function makeCaption($document)
+    {
+        if (is_null($this->checkboxCaptionColumn)) return "";
+
+        $caption = ($th = $document->total_hours) ?  "$th hours" : "...";
+        $href = route($this->type . ".edit", $document->id);
+        $a = "<a href='$href'>$caption</a>";
+
+        return $a;
+    }
     protected function makeCheckbox($document, $forExcel)
     {
-
         $id = $document->id;
+
         [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
+        $checkbox = "<input class='cursor-pointer' title='" . Str::makeId($id) . "' type='checkbox' name='$id'/>";
         $item = [
-            'value' => "<div><input class='cursor-pointer' title='" . Str::makeId($id) . "' type='checkbox' name='$id'/></div>",
+            'value' => $checkbox . "<br/>" . $this->makeCaption($document),
             // 'cell_title' => 'Select check box id:' . $id,
             'cell_class' => "$bgColor $textColor",
         ];

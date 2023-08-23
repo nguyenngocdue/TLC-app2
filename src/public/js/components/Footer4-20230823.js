@@ -24,6 +24,15 @@ const median = (arr) => {
     }
 };
 
+const countUniqueValues = (arr) => {
+    const valueCounts = {};
+    arr.forEach(value => {
+        valueCounts[value] = (valueCounts[value] || 0) + 1;
+    });
+
+    return Object.keys(valueCounts).length;
+}
+
 function calculateFooterValue(table01Name, eloquentFn, fieldName, control) {
     const aggList = ['agg_none', 'agg_count_all', 'agg_sum', 'agg_avg', 'agg_median', 'agg_min', 'agg_max', 'agg_range',];
     const count = getAllRows(table01Name).length
@@ -51,6 +60,7 @@ function calculateFooterValue(table01Name, eloquentFn, fieldName, control) {
     const result = {}
     result['agg_none'] = '';
     result['agg_count_all'] = array.length;
+    result['agg_count_unique_values'] = countUniqueValues(array);
     result['agg_sum'] = array.length ? array.reduce((accumulator, a) => accumulator + a, 0) : 0
     result['agg_avg'] = array.length ? (result['agg_sum'] / result['agg_count_all']) : 0
     result['agg_min'] = array.length ? array.reduce((acc, curr) => Math.min(acc, curr)) : 0

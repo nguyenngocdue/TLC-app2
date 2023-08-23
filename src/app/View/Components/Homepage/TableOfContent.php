@@ -92,9 +92,9 @@ class TableOfContent extends Component
         }
         return $minIndex;
     }
-    private function renderTableOfContentReport($dataSource){
+    private function renderTableOfContentReport($dataSource)
+    {
         dd($dataSource);
-
     }
     private function renderTableOfContentProps($dataSource)
     {

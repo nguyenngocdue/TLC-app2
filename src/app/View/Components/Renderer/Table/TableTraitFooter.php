@@ -19,9 +19,9 @@ trait TableTraitFooter
         'agg_min',
         'agg_max',
         'agg_range',
+        'agg_count_unique_values',
 
         // 'agg_count_values',
-        // 'agg_count_unique_values',
         // 'agg_count_empty',
         // 'agg_count_not_empty',
         // 'agg_percent_empty',
@@ -50,6 +50,7 @@ trait TableTraitFooter
 
         $result['agg_none'] = '';
         $result['agg_count_all'] = $items->count();
+        $result['agg_count_unique_values'] = $items->unique()->count();
 
         $result['agg_sum'] = 0;
         $result['agg_avg'] = 0;
@@ -81,7 +82,7 @@ trait TableTraitFooter
             $result['agg_max'] = $items->max();
             $result['agg_range'] = $result['agg_max'] - $result['agg_min'];
         } catch (\Exception $e) {
-            Log::info("Table [" . $tableName . "] " . "field [" . $fieldName . "] " . $e->getMessage());
+            Log::error("Exception in Footer, Table [" . $tableName . "] " . "field [" . $fieldName . "] " . $e->getMessage());
         }
 
         if (in_array($control, ['picker_date', 'picker_datetime', 'picker_time'])) {
