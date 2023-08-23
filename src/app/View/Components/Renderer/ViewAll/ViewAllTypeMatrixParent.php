@@ -220,6 +220,12 @@ abstract class ViewAllTypeMatrixParent extends Component
                         'cell_title' => "Create a new document",
                         'cell_onclick' => "$(this).hide()",
                     ];
+                    if ($this->mode == 'detail') {
+                        foreach ($extraColumns as $column) {
+                            //<<create empty cell in excel file
+                            $line[$xId . "_" . $column] = "";
+                        }
+                    }
                 }
             }
             foreach ($xAxis as $x) {
