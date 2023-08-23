@@ -31,7 +31,6 @@ class TableOfContent extends Component
     public function render()
     {
         $typeEditRenderer =  LibApps::getFor($this->type)['edit_renderer'] ?? null;
-        dd(LibApps::getFor($this->type));
         $props = SuperProps::getFor($this->type)['props'];
         $a = array_filter($props, function ($item) {
             return $item['column_type'] == 'static' && $item['control'] != 'z_divider';
