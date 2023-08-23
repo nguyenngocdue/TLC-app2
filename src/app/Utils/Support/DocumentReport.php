@@ -28,5 +28,18 @@ class DocumentReport
     //     }, $manyDates);
     //     return $params;
     // }
+
+    public static function countLastItems($array) {
+        $totalItemCount = 0;
+        foreach ($array as $item) {
+            if (is_array($item)) {
+                $totalItemCount += self::countLastItems($item);
+            } else {
+                $totalItemCount++;
+                break;
+            }
+        }
+        return $totalItemCount;
+    }
     
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Utils\Support\DocumentReport;
 use App\Utils\Support\Report;
 
 class Ghg_sheet_010 extends Report_ParentDocument2Controller
@@ -95,4 +96,18 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
         }
         return $params;
     }
+
+	public function createInfoToRenderTable($dataSource){
+		$info = [];
+		foreach ( $dataSource as $k1 => $values1){
+			$array = [];
+			$array['scope_rowspan'] = DocumentReport::countLastItems($values1);
+			foreach($values1 as $k2 => $values2) {
+				$array['scope_rowspan_children_'.$k2] = DocumentReport::countLastItems($values2);
+			}
+			$info[$k1] = $array;
+		}
+		// dd($info);
+		return $info;
+	}
 }

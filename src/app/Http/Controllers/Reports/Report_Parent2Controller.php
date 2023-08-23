@@ -189,6 +189,9 @@ abstract class Report_Parent2Controller extends Controller
         return $dataSource;
     }
 
+    public function createInfoToRenderTable($dataSource){
+        return [];
+    }
 
     public function index(Request $request)
     {
@@ -231,7 +234,7 @@ abstract class Report_Parent2Controller extends Controller
         }
 
         $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
-
+        $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
 
         return view('reports.' . $viewName, [
             'entity' => $entity,
@@ -254,6 +257,7 @@ abstract class Report_Parent2Controller extends Controller
             'emptyItems' =>$emptyItems,
             'isEmptyAllDataSource' => $isEmptyAllDataSource,
             'topTitle' => $this->getMenuTitle(),
+            'settingComplexTable' => $settingComplexTable,
         ] + $dataRenderDocReport);
     }
 
