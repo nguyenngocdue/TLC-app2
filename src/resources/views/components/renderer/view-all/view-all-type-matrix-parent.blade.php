@@ -1,32 +1,25 @@
 {!! $filterRenderer !!}
-@if($showPrintButton)
 <form action="{{route($type.'_prt.print')}}" method="POST" id="form-upload" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-@endif
-<x-renderer.table 
-          showPaginationTop="true"
-          :columns="$columns"
-          :dataSource="$dataSource"
-          :dataHeader="$dataHeader"
-          groupBy="{{$groupBy}}"
-          groupByLength="{{$groupByLength}}"
-          bottomLeftControl="{!! $footer !!}"
-          showNo=1
+    <x-renderer.table 
+            showPaginationTop="true"
+            :columns="$columns"
+            :dataSource="$dataSource"
+            :dataHeader="$dataHeader"
+            groupBy="{{$groupBy}}"
+            groupByLength="{{$groupByLength}}"
+            bottomLeftControl="{!! $footer !!}"
+            showNo=1
 
-          topLeftControl="{!!$actionButtons!!}"
-          topCenterControl="<div class='flex items-center text-lg'>{!! $tableTopCenterControl !!}</div>"
-          topRightControl="{!! $perPage !!}"
-          bottomRightControl="{!! $perPage !!}"
-          
-          rotate45Width="{{$rotate45Width}}"
-          tableTrueWidth="{{$tableTrueWidth}}"
-          headerTop="{{$headerTop}}"
-          />
-@if($showPrintButton)
-    </form>
-@endif
-    </form>
-
-
+            topLeftControl="{!!$actionButtons!!}"
+            topCenterControl="<div class='flex items-center text-lg'>{!! $tableTopCenterControl !!}</div>"
+            topRightControl="{!! $perPage !!}"
+            bottomRightControl="{!! $perPage !!}"
+            
+            rotate45Width="{{$rotate45Width}}"
+            tableTrueWidth="{{$tableTrueWidth}}"
+            headerTop="{{$headerTop}}"
+            />
+</form>
 <x-renderer.legend type="{{$type}}" title="Legend of Status" />

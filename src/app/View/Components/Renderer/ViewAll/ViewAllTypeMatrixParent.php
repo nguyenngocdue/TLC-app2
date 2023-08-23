@@ -33,10 +33,13 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $apiToCallWhenCreateNew = 'storeEmpty';
     protected $attOfCellToRender = "status";
     protected $showLegend = true;
-
-    protected $actionBtnShowExportCsv = true;
-    protected $actionBtnShowPrintButton = false;
     protected $tableTopCenterControl = "";
+
+    protected $actionBtnList = [
+        'exportSCV' => true,
+        'printTemplate' => false,
+        'approveMulti' => false,
+    ];
 
     /**
      * Create a new component instance.
@@ -137,7 +140,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $id = $document->id;
         [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
         $item = [
-            'value' => "<div><input title='" . Str::makeId($id) . "' type='checkbox' name='$id'/></div>",
+            'value' => "<div><input class='cursor-pointer' title='" . Str::makeId($id) . "' type='checkbox' name='$id'/></div>",
             // 'cell_title' => 'Select check box id:' . $id,
             'cell_class' => "$bgColor $textColor",
         ];
@@ -355,13 +358,14 @@ abstract class ViewAllTypeMatrixParent extends Component
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
         $filterRenderer = $this->getFilter();
 
-        $actionButtons = "<x-form.action-button-group-view-matrix 
+        $actionButtons = Blade::render("<x-form.action-button-group-view-matrix 
             type='$this->type' 
             groupBy='$this->groupBy' 
             groupByLength='$this->groupByLength' 
-            actionBtnShowPrintButton='$this->actionBtnShowPrintButton'
-            actionBtnShowExportCsv='$this->actionBtnShowExportCsv'
-            />";
+            :actionBtnList='\$actionBtnList'
+            />", [
+            'actionBtnList' => $this->actionBtnList,
+        ]);
 
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
@@ -379,7 +383,6 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'tableTrueWidth' => $this->tableTrueWidth,
                 'actionButtons' => $actionButtons,
                 'headerTop' => $this->headerTop,
-                'showPrintButton' => $this->actionBtnShowPrintButton,
                 'tableTopCenterControl' => $this->tableTopCenterControl,
             ],
         );

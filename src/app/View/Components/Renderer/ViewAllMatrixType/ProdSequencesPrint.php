@@ -9,8 +9,11 @@ class ProdSequencesPrint extends ProdSequences
 {
     protected $mode = 'checkbox';
 
-    protected $actionBtnShowExportCsv = false;
-    protected $actionBtnShowPrintButton = true;
+    protected $actionBtnList = [
+        'exportSCV' => false,
+        'printTemplate' => true,
+        'approveMulti' => false,
+    ];
 
     protected function getXAxis2ndHeader($xAxis)
     {

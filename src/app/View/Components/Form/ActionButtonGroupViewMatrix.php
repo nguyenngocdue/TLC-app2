@@ -19,8 +19,7 @@ class ActionButtonGroupViewMatrix extends Component
         private $groupBy = false,
         private $groupByLength = 1,
 
-        private $actionBtnShowExportCsv = false,
-        private $actionBtnShowPrintButton = false,
+        protected $actionBtnList = [],
     ) {
         //
     }
@@ -41,8 +40,7 @@ class ActionButtonGroupViewMatrix extends Component
             'type' => $this->type,
             'routeExportCSV' => $routeExportCSV,
 
-            'actionBtnShowExportCsv' => $this->actionBtnShowExportCsv,
-            'actionBtnShowPrintButton' => $this->actionBtnShowPrintButton,
+            'actionBtnList' => $this->actionBtnList,
         ]);
     }
 }
