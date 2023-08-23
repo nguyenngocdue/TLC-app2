@@ -50,10 +50,16 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 	{
 		return [
 			[
-				'title' => 'Date',
-				'dataIndex' => 'picker_date',
-				'renderer' => 'picker_date',
-				'allowClear' => true,
+				'title' => 'Year',
+				'dataIndex' => 'year',
+			],
+			[
+				'title' => 'Quarter',
+				'dataIndex' => 'quarter_time',
+			],
+			[
+				'title' => 'Month',
+				'dataIndex' => 'only_month',
 			],
 		];
 	}
