@@ -104,6 +104,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 </div>
 @endif
 <x-homepage.left-drawer title="Table of Content">
+{{-- @dd($item) --}}
     <x-homepage.table-of-content :item="$item" type="{{$type}}" />
 </x-homepage.left-drawer>
 <x-renderer.image-gallery :dataSource="$propsOfMainPage" action={{$action}} />

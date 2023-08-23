@@ -47,10 +47,11 @@ class Hr_overtime_request_020 extends Report_ParentReportController
         ,otline.month_allowed_hours month_allowed_hours
         ,otline.month_remaining_hours month_remaining_hours
         ,otline.year_allowed_hours year_allowed_hours
+        ,uscate.name AS user_category_name
         ,if(day(otline.ot_date) BETWEEN 1 AND 25, substr(SUBSTR(otline.ot_date,1,20), 1,7), substr(DATE_ADD(SUBSTR(otline.ot_date,1,20), INTERVAL 1 MONTH),1,7)) AS years_month 
         ,otline.year_remaining_hours year_remaining_hours
 
-        FROM hr_overtime_request_lines otline, sub_projects sp, users us, hr_overtime_requests otr, work_modes wm, workplaces wp
+        FROM hr_overtime_request_lines otline, sub_projects sp, users us, hr_overtime_requests otr, work_modes wm, workplaces wp, user_categories uscate
         WHERE 1 = 1
                 AND otline.deleted_at IS  NULL
                 AND sp.deleted_at IS NULL
@@ -77,7 +78,8 @@ class Hr_overtime_request_020 extends Report_ParentReportController
                     AND otr.status LIKE 'approved'
                     AND us.id = otline.user_id
                     AND otline.work_mode_id = wm.id 
-                    AND otr.workplace_id = wp.id";
+                    AND otr.workplace_id = wp.id
+                    AND us.category = uscate.id";
         if (isset($params['ot_workplace_id'])) $sql .= "\n AND otr.workplace_id = '{{ot_workplace_id}}'";
         $sql .= " \n  ) AS tb1
                     LEFT JOIN workplaces uswp ON uswp.id = tb1.us_workplace_id ";
@@ -130,6 +132,12 @@ class Hr_overtime_request_020 extends Report_ParentReportController
             [
                 "title" => "User Workplace",
                 "dataIndex" => "workplace_name",
+                "align" => 'left',
+                "width" => 150,
+            ],
+            [
+                "title" => "Team",
+                "dataIndex" => "user_category_name",
                 "align" => 'left',
                 "width" => 150,
             ],

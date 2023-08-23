@@ -31,6 +31,7 @@ class TableOfContent extends Component
     public function render()
     {
         $typeEditRenderer =  LibApps::getFor($this->type)['edit_renderer'] ?? null;
+        dd(LibApps::getFor($this->type));
         $props = SuperProps::getFor($this->type)['props'];
         $a = array_filter($props, function ($item) {
             return $item['column_type'] == 'static' && $item['control'] != 'z_divider';
@@ -65,7 +66,6 @@ class TableOfContent extends Component
         }
         switch ($typeEditRenderer) {
             case 'props-renderer':
-
                 return $this->renderTableOfContentProps($results);
                 break;
             case 'checklist-sheet-renderer':
@@ -73,6 +73,9 @@ class TableOfContent extends Component
                 [$groupColumn, $groupNames] = $this->getGroups($lines);
                 $groupLines = $lines->groupBy($groupColumn);
                 return $this->renderTableOfContentCheckList($groupLines, $groupColumn, $groupNames);
+                break;
+            case 'report-renderer':
+                return $this->renderTableOfContentReport($results);
                 break;
             default:
                 # code...
@@ -89,6 +92,10 @@ class TableOfContent extends Component
             }
         }
         return $minIndex;
+    }
+    private function renderTableOfContentReport($dataSource){
+        dd($dataSource);
+
     }
     private function renderTableOfContentProps($dataSource)
     {

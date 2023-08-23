@@ -278,4 +278,5 @@ class Report
         $beforeDate = date('d/m/Y', strtotime($daysStr));
         return $beforeDate .' - ' . $nowDate;
     }
+
 }

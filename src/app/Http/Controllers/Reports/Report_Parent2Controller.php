@@ -161,6 +161,30 @@ abstract class Report_Parent2Controller extends Controller
         return [$month, $projectId];
     }
 
+    private function isEmptyAllDataSource($dataSource){
+        $isEmptyAllData = true;
+        $isAtLeastData = true;
+        $isCheck = true;
+        foreach(array_values($dataSource) as $values) {
+            if (!empty($values->toArray())) {
+                $isCheck = false;
+                return $isCheck;
+            }   
+        };
+        return $isCheck;
+    }
+
+    private function filterEmptyItems($dataSource, $info){
+        $emptyItems = [];
+        foreach ($dataSource as $key => $value){
+            if(empty($value->toArray())) {
+                $emptyItems[$key] = $info[$key]['date'];
+            }
+        }
+        return $emptyItems;
+    }
+
+
     public function index(Request $request)
     {
         $input = $request->input();
@@ -180,6 +204,9 @@ abstract class Report_Parent2Controller extends Controller
         if ($this->viewName) $viewName = $this->viewName;
 
         $dataSource = $this->getDataSource($params);
+        $isEmptyAllDataSource = $this->isEmptyAllDataSource($dataSource);
+
+
         $tableColumns = $this->typeView === 'report-pivot' ? [] : $this->getTableColumns($params, $dataSource);
         $tableDataHeader = $this->tableDataHeader($params, $dataSource);
         echo $this->getJS();
@@ -194,7 +221,9 @@ abstract class Report_Parent2Controller extends Controller
                 'basicInfoData' => $basicInfoData,
             ];
         }
-        // dd($viewName, $tableColumns, $dataSource);
+
+        $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
+
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,
@@ -213,6 +242,8 @@ abstract class Report_Parent2Controller extends Controller
             'tableDataHeader' => $tableDataHeader,
             'tableTrueWidth' => $this->tableTrueWidth,
             'rotate45Width' => $this->rotate45Width,
+            'emptyItems' =>$emptyItems,
+            'isEmptyAllDataSource' => $isEmptyAllDataSource,
             'topTitle' => $this->getMenuTitle(),
         ] + $dataRenderDocReport);
     }

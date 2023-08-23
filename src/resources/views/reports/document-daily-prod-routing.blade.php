@@ -10,7 +10,6 @@ $class1 = 'p-2 border h-full w-full flex border-gray-600 text-base font-medium b
 $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left'
 @endphp
 
-
 <div class="px-4">
     <div class="justify-end pb-5"></div>
     <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
@@ -18,18 +17,37 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
         <x-reports.parameter3-report :itemsSelected="$params" modeOption="{{$currentMode}}" :columns="$paramColumns" routeName="{{$routeName}}" typeReport="{{$typeReport}}" entity="{{$entity}}" />
     </div>
 </div>
-{{-- RENDER TABLES --}}
+
+{{-- RENDER WHEN THERE ARE NO ITEMS --}}
+@if($isEmptyAllDataSource)
+<div class="flex justify-center bg-only-print">
+    <div class="md:px-4">
+        <div style='page-break-after:always!important' class="w-[1000px] min-h-[1360px] items-center bg-white box-border p-8">
+            <div class="p-10 text-center text-gray-500 ">
+                There is no item to be found from advanced filter
+            </div>
+        </div>
+    </div>
+</div>
+@elseif($emptyItems)
+<div class="grid grid-row-1 w-full md:px-4 pb-4">
+    <x-renderer.report.list-empty-items :dataSource="$emptyItems" title="The dates with data are empty." span='1'/>
+</div>
+@endif
+
+{{-- RENDER WHEN THERE ARE ITEMS --}}
 @foreach($tableDataSource as $key => $data)
 @php
 $basicInfo = $basicInfoData[$key];
 @endphp
+@if($data->toArray())
+{{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         <div style='page-break-after:always!important' class="w-[1000px] min-h-[1360px] items-center bg-white box-border p-8">
             <x-print.header6 />
-
             {{-- BASIC INFORMATION --}}
-            <x-renderer.heading level=2 class='text-center'>Production Routing Daily Report</x-renderer.heading>
+            <x-renderer.heading level=2 class='text-center'>{{$titleReport}}</x-renderer.heading>
             <div class="grid grid-cols-12">
                 <div class="col-span-12 text-left">
                     <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Basic Information <p class="text-sm font-light italic"></p>
@@ -75,5 +93,11 @@ $basicInfo = $basicInfoData[$key];
     </div>
 </div>
 <x-renderer.page-break />
+@endif
 @endforeach
 @endsection
+
+
+<x-homepage.left-drawer title="Table of Content">
+    <x-homepage.table-of-content :item="[]" type="prod_routing" />
+</x-homepage.left-drawer>
