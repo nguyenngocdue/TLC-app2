@@ -78,7 +78,7 @@ class ViewAllTypeCalendar extends Component
     }
     private function getListIdPendingApproval($dataSource)
     {
-        return $dataSource->get()->where('status', 'pending_approval')->pluck('id')->toArray();
+        return $dataSource->get()->where('status', 'pending_approval')->pluck('id')->toArray() ?? [];
     }
     private function getDataCountOfWeek($ownerId)
     {

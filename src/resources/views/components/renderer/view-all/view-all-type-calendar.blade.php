@@ -26,7 +26,7 @@
                         </div>
                     </x-renderer.card>
             </div>
-            <div class="md:col-span-2">
+            <div class="md:col-span-3 lg:col-span-2">
                 <x-renderer.card class="w-full border bg-white p-[15px] items-center" title="Selected Year">
                         <div class="text-center flex justify-around items-center">
                             <button type="button" onclick="decrease(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
@@ -39,11 +39,12 @@
                         </div>
                 </x-renderer.card>
             </div>
-            <div class="md:col-span-5">
+            <div class="md:col-span-3 lg:col-span-5">
                 <x-renderer.legend type="{{$type}}" title="{{$titleLegend}}" />
             </div>
-            <div class="md:col-span-2">
+            <div class="md:col-span-3 lg:col-span-2">
             @php
+                $disableButton = empty($listIdPendingApproval);
                 $listIdPendingApproval = json_encode($listIdPendingApproval);
             @endphp
                 <x-renderer.card class="w-full border bg-white p-4 flex justify-center" title="Options">
@@ -52,6 +53,7 @@
                         icon="fa-duotone fa-thumbs-up"
                         class="bg-green-200 text-green-800"
                         onClick="approveAll('{{$urlPendingApproval}}',{{$listIdPendingApproval}})"
+                        disabled="{{$disableButton}}"
                         >
                         Approve All
                     </x-renderer.button>
@@ -62,7 +64,7 @@
         <div class="mt-2 grid grid-cols-12 ">
             <div class="col-span-12 overflow-y-auto overflow-x-hidden h-screen">
                 <div class = "flex flex-wrap justify-center">
-                    <div class="grid 2xl:grid-cols-3 md:grid-cols-2 gap-2 grid-cols-1 font-semibold" calendar-container>
+                    <div class="grid 2xl:grid-cols-3 lg:grid-cols-2 gap-2 grid-cols-1 font-semibold" calendar-container>
                     </div> 
                 </div>
             </div>
@@ -236,7 +238,7 @@
             }
             var tagMonthNow = monthNow(month) ? 'id="scroll-to-month"' : "";
             var offset = monthNow(month) ? 'scroll-to-month' : "";
-            htmlRender = `  <div ${tagMonthNow} class="${offset} p-1 m-1 font-sans bg-white rounded shadow-md w-96 bg-blend-luminosity bg-gradient-to-b from-green-50 via-white to-green-50">
+            htmlRender = `  <div ${tagMonthNow} class="${offset} p-1 m-1 font-sans bg-white rounded shadow-md md:w-96 w-80 bg-blend-luminosity bg-gradient-to-b from-green-50 via-white to-green-50">
                                 <p class="p-1 text-xl font-semibold text-center text-gray-800">${month_name}/${yearCurrent}</p>
                                 <div class="p-1 m-1">
                                     <div class="grid grid-cols-7 font-semibold text-gray-500 border-b-2">
