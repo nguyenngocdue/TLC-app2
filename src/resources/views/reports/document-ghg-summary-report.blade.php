@@ -9,6 +9,7 @@
 @php
 $class1 = "bg-white dark:border-gray-600 border-r";
 $class2 =" bg-gray-100 px-4 py-3 border-gray-300";
+$widthCell = 50
 @endphp
 
 
@@ -67,8 +68,8 @@ $class2 =" bg-gray-100 px-4 py-3 border-gray-300";
                         </div>
                     </td>
                     {{-- Source Column --}}
-                    <td class="{{$class1}} text-left border-t text-blue-800">
-                        <a href='{{ route("ghg_tmpls.edit", $ghgTmplId) }}'>
+                    <td class="{{$class1}} text-left border-t text-blue-800">                    
+                        <a href='{{ route("ghg_tmpls.edit", $ghgTmplId ?? 0) }}'>
                             <div class='p-2'>
                                 {{$firstItem['ghgtmpl_name']}}
                             </div>
@@ -83,7 +84,7 @@ $class2 =" bg-gray-100 px-4 py-3 border-gray-300";
 
                     {{-- Month --}}
                     @foreach($firstItem['months'] as $key => $value)
-                    <td class='w-10 {{$class1}} text-right border-t text-blue-800'>
+                    <td class='w-{{$widthCell}} {{$class1}} text-right border-t text-blue-800'>
                         <a href='{{ route("ghg_sheets.edit", $firstItem['month_ghg_sheet_id'][$key] ?? 0)}}'>
                             <div class='p-2'>
                                 {{$value === '0'? '': $value}}
@@ -102,7 +103,7 @@ $class2 =" bg-gray-100 px-4 py-3 border-gray-300";
                         </a>
                     </td>
                     {{-- Month --}}
-                    <td class='w-10 {{$class1}} text-right border-t'>
+                    <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
                         <div class='p-2'>
                             {{(string)$values3['total_months'] === '0' ? '': $values3['total_months']}}
                         </div>
@@ -110,7 +111,7 @@ $class2 =" bg-gray-100 px-4 py-3 border-gray-300";
                     </td>
                     @foreach($values3['months'] as $k3 => $value)
                     {{-- @dd($values3); --}}
-                    <td class='w-10 {{$class1}} text-right border-t text-blue-800'>
+                    <td class='w-{{$widthCell}} {{$class1}} text-right border-t text-blue-800'>
                         <a href='{{ route("ghg_sheets.edit", $values3['month_ghg_sheet_id'][$k3] ?? 0) }}'>
                             <div class='p-2'>
                                 {{$value === '0'? '': $value}}
