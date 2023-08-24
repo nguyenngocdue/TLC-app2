@@ -4,12 +4,14 @@
 @section('title', $titleReport)
 @section('tooltip', Str::ucfirst($typeReport)." ".$currentMode)
 @section('content')
-{{-- @dd($tableDataSource ,$settingComplexTable) --}}
-{{-- CLASS --}}
+
+{{-- PARAMETERS --}}
 @php
+$widthCell = 50;
 $class1 = "bg-white dark:border-gray-600 border-r";
-$class2 =" bg-gray-100 px-4 py-3 border-gray-300";
-$widthCell = 50
+$class2 =" bg-gray-100 px-4 py-3 border-gray-300 ";
+$titleColName = isset($params['quarter_time']) ? 'OTR'.$params['quarter_time'] : 'YTD';
+$titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
 @endphp
 
 
@@ -26,15 +28,17 @@ $widthCell = 50
         <table class="tg whitespace-no-wrap w-full text-sm">
             <thead class=''>
                 <tr class="">
-                    <th class=" w-20 bg-gray-100 {{$class2}} " colspan=" 2">Category</th>
-                    <th class="w-[300px] p-2   bg-gray-100 {{$class2}}  ">Emission source category</th>
-                    <th class="  bu-gray-100 {{$class2}}  ">Source</th>
-                    <th class="  bg-gray-100 {{$class2}}  ">{{isset($params['quarter_time']) ? 'QTR' : 'YTD'}}</th>
+                    <th class=" w-20{{$class2}}" colspan=" 2">Category</th>
+                    <th class="w-[300px] p-2 {{$class2}} border-l ">Emission source category</th>
+                    <th class=" {{$class2}} border-l  ">Source</th>
+                    <th class=" {{$class2}} border-l">
+                        {{$titleColName}}<br>(t CO2e)</br>
+                    </th>
                     @php
                     $month = array_slice($tableDataSource['total_emission'],1, null, true);
                     @endphp
                     @foreach(array_keys($month) as $value)
-                    <th class="bg-gray-100 {{$class2}} border-l">{{$value}}</th>
+                    <th class="{{$class2}} border-l">{{$value}}</th>
                     @endforeach
                 </tr>
             </thead>
@@ -68,55 +72,44 @@ $widthCell = 50
                         </div>
                     </td>
                     {{-- Source Column --}}
-                    <td class="{{$class1}} text-left border-t text-blue-800">                    
-                        <a href='{{ route("ghg_tmpls.edit", $ghgTmplId ?? 0) }}'>
-                            <div class='p-2'>
-                                {{$firstItem['ghgtmpl_name']}}
-                            </div>
-                        </a>
+                    <td class="{{$class1}} text-left border-t text-blue-800">
+                         <div class='p-2'>
+                            {!! $firstItem['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $ghgTmplId ?? 0) . "'>" . $firstItem['ghgtmpl_name'] . "</a>" : '' !!} </div>
                     </td>
+                    {{-- Value --}}
                     <td class="{{$class1}} text-right border-t">
-                        <div class='p-2'>
+                        <div class='p-2 font-bold'>
                             {{(string)$firstItem['total_months'] === '0' ? '': $firstItem['total_months']}}
                         </div>
                     </td>
-                    {{-- End Source Column --}}
 
                     {{-- Month --}}
                     @foreach($firstItem['months'] as $key => $value)
                     <td class='w-{{$widthCell}} {{$class1}} text-right border-t text-blue-800'>
-                        <a href='{{ route("ghg_sheets.edit", $firstItem['month_ghg_sheet_id'][$key] ?? 0)}}'>
-                            <div class='p-2'>
-                                {{$value === '0'? '': $value}}
-                            </div>
-                        </a>
+                        <div class='p-2'>
+                            {!! $value !== '0' ? "<a href='" . route('ghg_sheets.edit', $firstItem['month_ghg_sheet_id'][$key] ?? 0) . "'>" . $value . "</a>" : '' !!} 
+                        </div>
                     </td>
                     @endforeach
                     @foreach(array_values($remainingItem) as $values3)
                 <tr>
                     {{--Source--}}
                     <td class="{{$class1}} text-left border-t text-blue-800">
-                        <a href='{{ route("ghg_tmpls.edit", $values3['ghg_tmpl_id']) }}'>
-                            <div class='p-2'>
-                                {{$values3['ghgtmpl_name']}}
-                            </div>
-                        </a>
-                    </td>
-                    {{-- Month --}}
-                    <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
                         <div class='p-2'>
+                            {!! $values3['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $values3['ghg_tmpl_id'] ?? 0) . "'>" . $values3['ghgtmpl_name'] . "</a>" : '' !!} </div>
+                    </td>
+                    {{-- Total Month (YTD) --}}
+                    <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
+                        <div class='p-2 font-bold'>
                             {{(string)$values3['total_months'] === '0' ? '': $values3['total_months']}}
                         </div>
 
                     </td>
+                    {{-- Month --}}
                     @foreach($values3['months'] as $k3 => $value)
-                    {{-- @dd($values3); --}}
                     <td class='w-{{$widthCell}} {{$class1}} text-right border-t text-blue-800'>
-                        <a href='{{ route("ghg_sheets.edit", $values3['month_ghg_sheet_id'][$k3] ?? 0) }}'>
-                            <div class='p-2'>
-                                {{$value === '0'? '': $value}}
-                            </div>
-                        </a>
+                        <div class='p-2'>
+                            {!! $value === '0' ? '' : "<a href='" . route('ghg_sheets.edit', $values3['month_ghg_sheet_id'][$k3] ?? 0) . "'>$value</a>" !!} </div>
                     </td>
                     @endforeach
                 </tr>
@@ -130,10 +123,10 @@ $widthCell = 50
                     $totalEmissions = $tableDataSource['total_emission'];
                     @endphp
                     <td class="bg-white border-t" colspan="2"></td>
-                    <td class="{{$class1}} text-left border-t">Total Emissions</td>
+                    <td class="{{$class1}} text-left border-t font-bold">Total Emissions</td>
                     @foreach($totalEmissions as $value)
                     <td class="{{$class1}} text-right border-t">
-                        <div class='p-2'>
+                        <div class='p-2 font-bold text-red-600'>
                             {{(string)$value === '0'? '': $value}}
                         </div>
                     </td>
