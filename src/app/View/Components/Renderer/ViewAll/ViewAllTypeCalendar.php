@@ -50,6 +50,7 @@ class ViewAllTypeCalendar extends Component
             $item['text_color'] = $this->getColorForStatus($item->status)[1];
             return $item;
         })->groupBy('year_value');
+        $listIdPendingApproval = $this->getListIdPendingApproval($dataSource);
         $nodeProjectTreeArray = json_encode(array_values(Project::getSubProjectTree()));
         $nodeTaskTreeArray = json_encode(array_values(Pj_task::getTasksOfUser($ownerId)));
         // dump($nodeProjectTreeArray);
@@ -67,7 +68,15 @@ class ViewAllTypeCalendar extends Component
             'ownerId' => $ownerId,
             'nodeProjectTreeArray' => $nodeProjectTreeArray,
             'nodeTaskTreeArray' => $nodeTaskTreeArray,
+            'listIdPendingApproval' => $listIdPendingApproval,
+            'urlPendingApproval' => $this->getUrlApprovalAll(),
         ]);
+    }
+    private function getUrlApprovalAll(){
+        return route('timesheet_officers.approval_all') ?? '';
+    }
+    private function getListIdPendingApproval($dataSource){
+        return $dataSource->get()->where('status','pending_approval')->pluck('id')->toArray();
     }
     private function getDataCountOfWeek($ownerId)
     {

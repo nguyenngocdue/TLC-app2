@@ -4,7 +4,7 @@
     </div>
     <div class="w-full px-1 bg-gray-100 rounded-lg shadow col-span-9">
         <div class="grid lg:grid-cols-12 gap-2 mx-2">
-            <div class="md:col-span-4 flex">
+            <div class="md:col-span-3 flex">
                     <x-renderer.card class="w-full border bg-white p-2" title="Selected view">
                         <div class="flex">
                             <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
@@ -39,8 +39,23 @@
                         </div>
                 </x-renderer.card>
             </div>
-            <div class="md:col-span-6">
+            <div class="md:col-span-5">
                 <x-renderer.legend type="{{$type}}" title="{{$titleLegend}}" />
+            </div>
+            <div class="md:col-span-2">
+            @php
+                $listIdPendingApproval = json_encode($listIdPendingApproval);
+            @endphp
+                <x-renderer.card class="w-full border bg-white p-2 flex justify-center" title="Options">
+                    <x-renderer.button 
+                        class="w-40" 
+                        icon="fa-duotone fa-thumbs-up"
+                        class="bg-green-200 text-green-800"
+                        onClick="approvalAll('{{$urlPendingApproval}}',{{$listIdPendingApproval}})"
+                        >
+                        Approved All
+                    </x-renderer.button>
+                </x-renderer.card>
             </div>
             
         </div>
@@ -54,6 +69,7 @@
         </div>
     </div>
 </div>
+
 <script>
     calendarContainer = document.querySelector("[calendar-container]");
     let count = 0;
