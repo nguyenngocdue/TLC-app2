@@ -1378,9 +1378,6 @@ video {
 .w-\[400px\] {
   width: 400px;
 }
-.w-\[450px\] {
-  width: 450px;
-}
 .w-\[50\%\] {
   width: 50%;
 }
@@ -1460,9 +1457,6 @@ video {
 }
 .table-auto {
   table-layout: auto;
-}
-.border-collapse {
-  border-collapse: collapse;
 }
 .border-separate {
   border-collapse: separate;

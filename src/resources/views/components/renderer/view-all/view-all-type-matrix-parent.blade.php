@@ -1,5 +1,5 @@
 {!! $filterRenderer !!}
-<form action="{{route($type.'_prt.print')}}" method="POST" id="form-upload" enctype="multipart/form-data">
+<form action="{{$route}}" method="POST" id="form-upload" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <x-renderer.table 

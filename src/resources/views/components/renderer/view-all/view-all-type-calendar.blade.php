@@ -46,14 +46,14 @@
             @php
                 $listIdPendingApproval = json_encode($listIdPendingApproval);
             @endphp
-                <x-renderer.card class="w-full border bg-white p-2 flex justify-center" title="Options">
+                <x-renderer.card class="w-full border bg-white p-4 flex justify-center" title="Options">
                     <x-renderer.button 
                         class="w-40" 
                         icon="fa-duotone fa-thumbs-up"
                         class="bg-green-200 text-green-800"
-                        onClick="approvalAll('{{$urlPendingApproval}}',{{$listIdPendingApproval}})"
+                        onClick="approveAll('{{$urlPendingApproval}}',{{$listIdPendingApproval}})"
                         >
-                        Approved All
+                        Approve All
                     </x-renderer.button>
                 </x-renderer.card>
             </div>

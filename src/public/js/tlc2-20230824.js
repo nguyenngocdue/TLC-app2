@@ -56,7 +56,7 @@ function saveAndClose() {
     // $('[id="form-upload"]').submit()
 }
 
-function approvalAll(url, listIdPendingApproval) {
+function approveAll(url, listIdPendingApproval) {
     $.ajax({
         type: 'post',
         url,
