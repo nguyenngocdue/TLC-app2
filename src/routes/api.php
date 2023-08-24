@@ -133,7 +133,7 @@ Route::group([
     Route::resource('timesheet_officers', TimeSheetOfficerController::class);
     Route::get('timesheet_officers_duplicate/{id}', [TimeSheetOfficerController::class, 'duplicate']);
     Route::resource('timesheet_workers', TimeSheetWorkerController::class);
-    Route::post('timesheet_officers/approval_all', [TimeSheetOfficerController::class, 'approvalAll'])->name('timesheet_officers.approval_all');
+    Route::post('timesheet_officers/approve_all', [TimeSheetOfficerController::class, 'approveAll'])->name('timesheet_officers.approve_all');
 });
 Route::group([
     'prefix' => 'v1/hr',

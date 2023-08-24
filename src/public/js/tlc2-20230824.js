@@ -56,19 +56,32 @@ function saveAndClose() {
     // $('[id="form-upload"]').submit()
 }
 
-function approvalAll(url, listIdPendingApproval) {
-    $.ajax({
-        type: 'post',
-        url,
-        data: { ids: listIdPendingApproval },
-        success: function (response) {
-            if (response.success) {
-                toastr.success(response.message)
-                window.location.reload()
-            }
-        },
-        error: function (jqXHR) {
-            toastr.error(jqXHR.responseJSON.message)
-        },
+function approveAll(url, listIdPendingApproval) {
+    textListIdPendingApproval = listIdPendingApproval.toString();
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `You want approve all list id: ${textListIdPendingApproval} this!`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `Yes, I want!`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'post',
+                url,
+                data: { ids: listIdPendingApproval },
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success(response.message)
+                        window.location.reload()
+                    }
+                },
+                error: function (jqXHR) {
+                    toastr.error(jqXHR.responseJSON.message)
+                },
+            })
+        }
     })
 }

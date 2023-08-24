@@ -54,6 +54,12 @@ abstract class ViewAllTypeMatrixParent extends Component
         $this->statuses = LibStatuses::getFor($this->type);
     }
 
+    protected function getRouteAfterSubmit()
+    {
+        if ($this->actionBtnList['printTemplate']) return route($this->type . '_prt.print');
+        if ($this->actionBtnList['approveMulti']) return route($this->type . '_prt.print');
+    }
+
     protected function getYAxis()
     {
         return [];
@@ -406,6 +412,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'actionButtons' => $actionButtons,
                 'headerTop' => $this->headerTop,
                 'tableTopCenterControl' => $this->tableTopCenterControl,
+                'route' => $this->getRouteAfterSubmit(),
             ],
         );
     }

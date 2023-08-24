@@ -26,16 +26,17 @@ class TimeSheetOfficerController extends TimesheetController
         $workplaceId = User::findFromCache($ownerId)->workplace;
         $hrTsLines = $hrTimesheetOfficer->getHrTsLines;
         $initialDate = $hrTimesheetOfficer->week;
-        $publicHoliday = Public_holiday::where('year',$year)->where('workplace_id',$workplaceId)->get();
+        $publicHoliday = Public_holiday::where('year', $year)->where('workplace_id', $workplaceId)->get();
         $collectionMerge = $hrTsLines->merge($publicHoliday);
         return ['hits' => new HrTsLineCollection($collectionMerge), 'meta' => $initialDate,];
     }
-    public function approvalAll(Request $request){
+    public function approveAll(Request $request)
+    {
         $ids = $request->input('ids');
         try {
-            if(is_array($ids) && !empty($ids)){
-                Hr_timesheet_officer::whereIn('id',$ids)
-                ->where('status','pending_approval')->update(['status' => 'approved']);
+            if (is_array($ids) && !empty($ids)) {
+                Hr_timesheet_officer::whereIn('id', $ids)
+                    ->where('status', 'pending_approval')->update(['status' => 'approved']);
                 return ResponseObject::responseSuccess(
                     null,
                     [],
@@ -47,6 +48,5 @@ class TimeSheetOfficerController extends TimesheetController
                 $th->getMessage(),
             );
         }
-        
     }
 }

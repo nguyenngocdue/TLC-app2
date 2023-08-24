@@ -1,0 +1,27 @@
+{
+    "new": {
+        "name": "new",
+        "label": "New",
+        "tooltip": ""
+    },
+    "pending_review": {
+        "name": "pending_review",
+        "label": "Pending Review",
+        "tooltip": ""
+    },
+    "review_rejected": {
+        "name": "review_rejected",
+        "label": "Review Rejected",
+        "tooltip": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "label": "Pending Approval",
+        "tooltip": ""
+    },
+    "approved": {
+        "name": "approved",
+        "label": "Approve",
+        "tooltip": ""
+    }
+}

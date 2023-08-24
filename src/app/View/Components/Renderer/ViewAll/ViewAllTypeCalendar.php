@@ -69,14 +69,16 @@ class ViewAllTypeCalendar extends Component
             'nodeProjectTreeArray' => $nodeProjectTreeArray,
             'nodeTaskTreeArray' => $nodeTaskTreeArray,
             'listIdPendingApproval' => $listIdPendingApproval,
-            'urlPendingApproval' => $this->getUrlApprovalAll(),
+            'urlPendingApproval' => $this->getUrlApproveAll(),
         ]);
     }
-    private function getUrlApprovalAll(){
-        return route('timesheet_officers.approval_all') ?? '';
+    private function getUrlApproveAll()
+    {
+        return route('timesheet_officers.approve_all') ?? '';
     }
-    private function getListIdPendingApproval($dataSource){
-        return $dataSource->get()->where('status','pending_approval')->pluck('id')->toArray();
+    private function getListIdPendingApproval($dataSource)
+    {
+        return $dataSource->get()->where('status', 'pending_approval')->pluck('id')->toArray() ?? [];
     }
     private function getDataCountOfWeek($ownerId)
     {

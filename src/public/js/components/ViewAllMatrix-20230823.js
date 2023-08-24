@@ -85,11 +85,12 @@ const determineNextStatuses = (id, status, value) => {
         // console.log(statusObj.icon, parsedDocument, icon)
 
         const caption = document.createElement('span')
-        caption.innerHTML = " " + statusObj.title
+        caption.innerHTML = " " + statusObj['action-buttons']['label']
 
         const button = document.createElement('button');
         if (statusObj.icon) button.appendChild(icon);
         button.appendChild(caption);
+        button.type = 'button'
 
         let classesToAdd = 'px-2.5 py-2 font-medium leading-tight rounded transition duration-150 ease-in-out focus:ring-0 focus:outline-n1one disabled:opacity-50 inline-block text-sm border-2 hover:bg-black hover:bg-opacity-5 mr-1' // Add CSS class
         classesToAdd += " text-" + statusObj.text_color
