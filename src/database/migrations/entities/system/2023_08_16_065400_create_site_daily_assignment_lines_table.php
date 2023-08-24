@@ -23,6 +23,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('site_daily_assignment_id')->nullable();
             $table->unsignedBigInteger("user_id")->nullable();
+            $table->unsignedBigInteger("sub_project_id")->nullable();
 
             $table->orderable();
             $table->appendCommonFields();

@@ -14,6 +14,16 @@
         "column_name": "user_id",
         "new": "true"
     },
+    "_employeeid": {
+        "name": "_employeeid",
+        "column_name": "employeeid",
+        "new": "true"
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "new": "true"
+    },
     "_getSiteTasks()": {
         "name": "_getSiteTasks()",
         "column_name": "getSiteTasks()",
