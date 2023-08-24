@@ -11,7 +11,5 @@
 @endif
 
 @if(isset($actionBtnList['approveMulti']) && $actionBtnList['approveMulti'])
-    <x-renderer.button class="mr-1" type="secondary" htmlType="submit" outline=true>
-        <i class="fa-duotone fa-check-double"></i> Approve Selected Sheets
-    </x-renderer.button>
+    <div id="divApproveMulti"></div>
 @endif
