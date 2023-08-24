@@ -7,58 +7,51 @@ use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Utils\Support\DocumentReport;
 use App\Utils\Support\Report;
+use App\Utils\Support\StringReport;
 
 class Ghg_sheet_010 extends Report_ParentDocument2Controller
 {
 
 	use TraitForwardModeReport;
-    use TraitParamsSettingReport;
+	use TraitParamsSettingReport;
 
 	protected $viewName = 'document-ghg-summary-report';
-	protected $year = '2032';
+	protected $year = '2023';
 
 	public function getSqlStr($params)
 	{
-		dump($params);
-		$months = range(1,12);
+		// GET MONTHS TO SHOW ON TABLE
+		$months = range(1, 12);
 		if (isset($params['quarter_time'])) {
-			if($params['quarter_time'] === '1'){
-				$months = range(1,3);
-			} elseif($params['quarter_time'] === '2'){
-				$months = range(4,6);
+			$quarter = $params['quarter_time'];
+			if ($quarter === '1') {
+				$months = range(1, 3);
+			} elseif ($quarter === '2') {
+				$months = range(4, 6);
+			} elseif ($quarter === '3') {
+				$months = range(7, 9);
+			} elseif ($quarter === '4') {
+				$months = range(10, 12);
 			}
-			elseif($params['quarter_time'] === '3'){
-				$months = range(7,9);
-			}
-			elseif($params['quarter_time'] === '4'){
-				$months = range(10,12);
-			}
-			elseif(isset($params['only_month']) && empty($params['only_month']) && is_null($params['quarter_time'])){
-				$months = range(1,12);
-			}elseif(!isset($params['only_month']) && is_null($params['quarter_time'])){
-				$months = range(1,12);
-			} 
 		}
-		if(isset($params['only_month'])){
+		if (isset($params['only_month'])) {
 			$months = $params['only_month'];
+			if (is_null($params['only_month'][0])) {
+				$months = range(1, 12);
+			}
 		}
-		// if(isset($params['only_month']) && is_null($params['only_month'][0]) && !isset($params['quarter_time'])){
-		// 	$months = range(1,12);
-		// } 
-
-		dump($months);
 		$strSqlMonth = '';
-		foreach($months as $month){
+		foreach ($months as $month) {
 			$tableName = 'ghgsh_totals';
-			$month = strlen($month) > 1 ? $month : '0'.$month;
-			$strSqlMonth .= $tableName.'.'.$month.',';
+			$month = strlen($month) > 1 ? $month : '0' . $month;
+			$strSqlMonth .= $tableName . '.' . $month . ',';
 		}
-		$strSumValue = str_replace(',',' + ',trim($strSqlMonth, ','));
+		$strSumValue = str_replace(',', ' + ', trim($strSqlMonth, ','));
 		$year = $params['year'];
+		// dump($month, $strSumValue);
 
-
-
-		$sql =  " SELECT infghgsh.*,$strSqlMonth
+		// SQL
+		$sql =  " SELECT infghgsh.*,$strSqlMonth ghgsh_totals.month_ghg_sheet_id,
 						ROUND($strSumValue,2) AS total_months
 						FROM (SELECT 
 						term.id AS scope_id, term.name AS scope_name,
@@ -71,6 +64,7 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 						LEFT JOIN (
 							SELECT
 							ghgsh.ghg_tmpl_id AS ghgsh_tmpl_id,
+							GROUP_CONCAT(CONCAT(SUBSTR(ghgsh.ghg_month, 6, 2),':',ghgsh.id)) AS month_ghg_sheet_id,
 							SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '01' THEN ghgsh.total ELSE 0 END) AS `01`,
 							SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '02' THEN ghgsh.total ELSE 0 END) AS `02`,
 							SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '03' THEN ghgsh.total ELSE 0 END) AS `03`,
@@ -123,46 +117,50 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 		];
 	}
 
-	public function changeDataSource($dataSource, $params){
+	public function changeDataSource($dataSource, $params)
+	{
 		$dataSource =  Report::convertToType($dataSource);
 		$dataSource = DocumentReport::groupMonths($dataSource);
 		$months = reset($dataSource)['months'];
 		$monthlyTotals = ['sum_total_months' => 0.0] + array_fill_keys(array_keys($months), 0.0);
-		foreach ($dataSource as $item) {
+		foreach ($dataSource as &$item) {
 			$monthlyTotals['sum_total_months'] += $item['total_months'];
 			foreach ($item['months'] as $month => $value) {
 				$monthlyTotals[$month] += (int)$value;
+				//get ID to link to ghg_sheet
 			}
+			$item['month_ghg_sheet_id'] = StringReport::parseKeyValueString($item['month_ghg_sheet_id']);
 		}
 		$groupByScope = Report::groupArrayByKey($dataSource, 'scope_id');
-		$groupByScope = array_map(fn($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope);
+		$groupByScope = array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope);
 		$groupByScope['total_emission'] = $monthlyTotals;
+		// dump($groupByScope);
 		return collect($groupByScope);
 	}
 
 
-    protected function getDefaultValueParams($params,$request)
-    {
-        $a = 'year';
-        if (Report::isNullParams($params)) {
-            $params[$a] = $this->year;
-        }
-        return $params;
-    }
+	protected function getDefaultValueParams($params, $request)
+	{
+		$a = 'year';
+		if (Report::isNullParams($params)) {
+			$params[$a] = $this->year;
+		}
+		return $params;
+	}
 
-	public function createInfoToRenderTable($dataSource){
+	public function createInfoToRenderTable($dataSource)
+	{
 		$info = [];
-		foreach ( $dataSource as $k1 => $values1){
+		foreach ($dataSource as $k1 => $values1) {
 			$array = [];
 			$array['scope_rowspan'] = DocumentReport::countLastItems($values1);
-			foreach($values1 as $k2 => $values2) {
-				if(!isset($values2['months'])) continue;
+			foreach (array_values($values1) as $values2) {
+				if (!isset($values2['months'])) continue;
 				$array['months'] = array_keys(reset($values2)['months']);
-				$array['scope_rowspan_children_'.$k2] = DocumentReport::countLastItems($values2);
+				// $array['scope_rowspan_children_'.$k2] = DocumentReport::countLastItems($values2);
 			}
 			$info[$k1] = $array;
 		}
-		// dd($dataSource, $info);
 		return $info;
 	}
 }

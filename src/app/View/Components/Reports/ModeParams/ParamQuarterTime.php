@@ -12,7 +12,7 @@ class ParamQuarterTime extends ParentTypeParamReport
     {
         $numbers = range(1, 4);
         $dataSource = array_map(function ($number) {
-            return ['id' => $number, 'name' => 'Qu - 0'.$number];
+            return ['id' => $number, 'name' => 'QTR'.$number];
         }, $numbers);
         return $dataSource;
     }
