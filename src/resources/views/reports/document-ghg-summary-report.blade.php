@@ -10,7 +10,7 @@
 $widthCell = 50;
 $class1 = "bg-white dark:border-gray-600 border-r";
 $class2 =" bg-gray-100 px-4 py-3 border-gray-300 ";
-$titleColName = isset($params['quarter_time']) ? 'OTR'.$params['quarter_time'] : 'YTD';
+$titleColName = isset($params['quarter_time']) ? 'QTR'.$params['quarter_time'] : 'YTD';
 $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
 @endphp
 
@@ -32,7 +32,7 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                     <th class="w-[300px] p-2 {{$class2}} border-l ">Emission source category</th>
                     <th class=" {{$class2}} border-l  ">Source</th>
                     <th class=" {{$class2}} border-l">
-                        {{$titleColName}}<br>(t CO2e)</br>
+                        {{$titleColName}}<br>(tCO2e)</br>
                     </th>
                     @php
                     $month = array_slice($tableDataSource['total_emission'],1, null, true);
