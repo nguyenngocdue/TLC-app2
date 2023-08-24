@@ -9,7 +9,7 @@ class Site_daily_assignment_line extends ModelExtended
     protected $fillable = [
         "id",  "owner_id", "status", "order_no",
         "site_daily_assignment_id",
-        "user_id", "employeeid",
+        "user_id", "employeeid", "sub_project_id",
     ];
 
     public static $nameless = true;
@@ -18,6 +18,7 @@ class Site_daily_assignment_line extends ModelExtended
     public static $eloquentParams = [
         "getParent" => ["belongsTo", Site_daily_assignment::class, 'site_daily_assignment_id'],
         "getUser" => ["belongsTo", User::class, 'user_id'],
+        "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
     ];
 
     public static $oracyParams = [
@@ -41,6 +42,12 @@ class Site_daily_assignment_line extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
+    public function getSubProject()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
     public function getManyLineParams()
     {
         return [
@@ -49,6 +56,7 @@ class Site_daily_assignment_line extends ModelExtended
             ['dataIndex' => 'site_daily_assignment_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ['dataIndex' => "user_id", 'value_as_user_id' => true,  'deaf' => true],
             ['dataIndex' => "employeeid",],
+            ['dataIndex' => "sub_project_id", "cloneable" => true,],
             ['dataIndex' => "getSiteTasks()"],
         ];
     }

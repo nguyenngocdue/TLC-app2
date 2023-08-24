@@ -154,12 +154,13 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         $isCheckboxVisible = $this->getCheckboxVisible($document, $y) ? 1 : 0;
         $id = $document->id;
+        $status = $document->status;
         $yId = $y->id;
 
         [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
         $className = $isCheckboxVisible ? "cursor-pointer view-all-matrix-checkbox-$yId" : "cursor-not-allowed disabled:opacity-50";
         $disabledStr = $isCheckboxVisible ? "" : "disabled";
-        $checkbox = "<input $disabledStr class='$className' title='" . Str::makeId($id) . "' type='checkbox' name='$id'/>";
+        $checkbox = "<input $disabledStr onclick='determineNextStatuses(\"$id\", \"$status\", this.checked)' status='$status' class='$className' title='" . Str::makeId($id) . "' type='checkbox' id='checkbox_{$yId}_$id' name='$id'/>";
         $item = [
             'value' => $checkbox . "<br/>" . $this->makeCaptionForCheckbox($document),
             // 'cell_title' => 'Select check box id:' . $id,
