@@ -76,6 +76,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $yAxis = $this->yAxis::query()
             ->where('sub_project_id', $this->subProject)
             ->where('prod_routing_id', $this->prodRouting)
+            ->with('getRoomType')
             ->orderBy('name')
             ->get();
         return $yAxis;
@@ -166,6 +167,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             ['dataIndex' => 'production_name',  'width' => 300, 'fixed' => 'left',],
             ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
             ['dataIndex' => 'status',  'align' => 'center', 'width' => 50, 'fixed' => 'left-no-bg', "title" => "Summary", 'colspan' => 4],
+            ['dataIndex' => 'room_type',  'align' => 'center', 'width' => 50, 'fixed' => 'left',],
             ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
             ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
             ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
@@ -192,6 +194,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             'production_name' => $y->production_name,
             'quantity' => $y->quantity,
             'status' => $status_object,
+            'room_type' => ($y->getRoomType) ? $y->getRoomType->name : "",
             'started_at' => substr($started_at, 0, 10),
             'finished_at' =>  substr($finished_at, 0, 10),
             // 'finished_at' => ($y->status === 'finished') ? substr($finished_at, 0, 10) : "",
@@ -245,6 +248,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
 
         //For Meta columns
         $result['status'] = "Status";
+        $result['room_type'] = "Room Type";
         $result['started_at'] = "Started At";
         $result['finished_at'] = "Finished At";
         $result['total_days'] = "Total Days";
