@@ -37,8 +37,8 @@ class UpdatedSequenceBaseListener
             $totalManHours = $listInstanceChildren->pluck('total_man_hours')->sum();
             $startedAtMin = $listInstanceChildren->pluck('start_date')->min();
             $finishedMax = $listInstanceChildren->pluck('end_date')->max();
-            $isFinished = $listInstanceChildren->pluck('status')->every(function($value){
-                return in_array($value,['finished','no','canceled']);
+            $isFinished = $listInstanceChildren->pluck('status')->every(function ($value) {
+                return in_array($value, ['finished', 'no', 'canceled']);
             });
             $dataUpdated = [
                 'started_at' => $startedAtMin,
@@ -46,7 +46,8 @@ class UpdatedSequenceBaseListener
                 'total_hours' => $totalHours,
                 'total_man_hours' => $totalManHours,
             ];
-            if($isFinished) $dataUpdated['status'] = 'finished';
+            if ($isFinished) $dataUpdated['status'] = 'finished';
+            else $dataUpdated['status'] = 'in_progress';
             $parentInstance->update($dataUpdated);
             Toastr::success("The Event Updated Time Successfully!", 'Event Update Successfully');
         } catch (\Throwable $th) {
