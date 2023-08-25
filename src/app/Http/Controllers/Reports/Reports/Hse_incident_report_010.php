@@ -221,19 +221,19 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 "width" => 60,
             ],
             [
-                "title" => "LTI {$notes['hseir_ltc_count_vote']}",
+                "title" => "Lost Time Incident Cases",
                 "dataIndex" => "hseir_ltc_count_vote",
                 "align" => "right",
                 "width" => 60,
             ],
             [
-                "title" => "RWC {$notes['hseir_rwc_count_vote']}",
+                "title" => "Restricted Work Cases",
                 "dataIndex" => "hseir_rwc_count_vote",
                 "align" => "right",
                 "width" => 60,
             ],
             [
-                "title" => "MTC {$notes['hseir_mtc_count_vote']}",
+                "title" => "Medical Treatment Cases",
                 "dataIndex" => "hseir_mtc_count_vote",
                 "align" => "right",
                 "width" => 60,
@@ -275,7 +275,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 "width" => 60,
             ],
             [
-                "title" => "HSE Observations {$notes['hseca_line_count']}",
+                "title" => "HSE Issues",
                 "dataIndex" => "hseca_line_count",
                 "align" => "right",
                 "width" => 60,
@@ -293,7 +293,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 "width" => 60,
             ],
             [
-                "title" => "Disciplines",
+                "title" => "Disciplinary / Violations",
                 "dataIndex" => "discipline",
                 "align" => "right",
                 "width" => 60,
