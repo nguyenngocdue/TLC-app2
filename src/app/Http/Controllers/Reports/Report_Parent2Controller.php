@@ -13,6 +13,7 @@ use App\Utils\Support\DocumentReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -162,12 +163,11 @@ abstract class Report_Parent2Controller extends Controller
     }
 
     private function isEmptyAllDataSource($dataSource){
-        return false;
-        $isEmptyAllData = true;
-        $isAtLeastData = true;
         $isCheck = true;
-        foreach(array_values($dataSource) as $values) {
-            if (!empty($values->toArray())) {
+        $data = $dataSource;
+        if ($dataSource instanceof Collection)$data = $dataSource->toArray();
+        foreach(array_values($data) as $values) {
+            if (!empty($values)) {
                 $isCheck = false;
                 return $isCheck;
             }   
