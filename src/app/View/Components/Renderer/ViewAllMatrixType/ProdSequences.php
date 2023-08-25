@@ -204,7 +204,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     function cellRenderer($cell, $dataIndex, $y, $forExcel = false)
     {
         if (in_array($dataIndex, ['status', 'detail'])) return parent::cellRenderer($cell, $dataIndex, $y, $forExcel);
-        if ($dataIndex === 'checkbox') return parent::cellRenderer($cell, $dataIndex, $y, $forExcel);
+        if ($dataIndex === 'checkbox_print') return parent::cellRenderer($cell, $dataIndex, $y, $forExcel);
         $doc = $cell[0];
         switch ($dataIndex) {
             case "total_uom":

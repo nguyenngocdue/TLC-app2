@@ -39,6 +39,12 @@ class ManageActionButtons extends Manage_Parent
                 'renderer' => 'text4',
                 'editable' => true,
             ],
+            [
+                "dataIndex" => 'change_status_multiple',
+                'renderer' => 'checkbox',
+                'align' => 'center',
+                'editable' => true,
+            ],
         ];
         return $columns;
     }

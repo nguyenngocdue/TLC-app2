@@ -2,26 +2,31 @@
     "new": {
         "name": "new",
         "label": "New",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "pending_review": {
         "name": "pending_review",
         "label": "Pending Review",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "review_rejected": {
         "name": "review_rejected",
         "label": "Review Rejected",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "pending_approval": {
         "name": "pending_approval",
         "label": "Pending Approval",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": "true"
     },
     "approved": {
         "name": "approved",
         "label": "Approve",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": "true"
     }
 }

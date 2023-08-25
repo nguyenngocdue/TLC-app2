@@ -73,7 +73,7 @@ const determineNextStatuses = (id, status, value, route) => {
         const status = uniqueValuesArray[i]
         const { transitions } = statuses[status]
         result0.push(transitions)
-        // console.log(status, transitions, statuses[status], result)
+        // console.log(status, transitions, statuses[status])
     }
     const result = intersectionArraysOfArrays(result0)
     // console.log(uniqueValuesArray, statuses, result);
@@ -82,7 +82,9 @@ const determineNextStatuses = (id, status, value, route) => {
     for (let i = 0; i < result.length; i++) {
         const status = result[i]
         const statusObj = statuses[status]
-        const { label } = statusObj['action-buttons']
+        const actionButton = statusObj['action-buttons']
+        const { label, } = actionButton
+        const { change_status_multiple = false } = actionButton
         // console.log(statusObj)
         const parsedDocument = (new DOMParser()).parseFromString(statusObj.icon, 'text/html');
         const icon = parsedDocument.body.firstChild;
@@ -95,10 +97,15 @@ const determineNextStatuses = (id, status, value, route) => {
         if (statusObj.icon) button.appendChild(icon);
         button.appendChild(caption);
         button.type = 'button'
-        button.addEventListener('click', function () {
-            changeStatusAll(route, ids, status, label)
-            console.log('Button clicked!', route, status, label, ids)
-        });
+        if (!change_status_multiple) {
+            // button.disabled = true
+            continue;
+        } else {
+            button.addEventListener('click', function () {
+                changeStatusAll(route, ids, status, label)
+                console.log('Button clicked!', route, status, label, ids)
+            });
+        }
 
         let classesToAdd = 'px-2.5 py-2 font-medium leading-tight rounded transition duration-150 ease-in-out focus:ring-0 focus:outline-n1one disabled:opacity-50 inline-block text-sm border-2 hover:bg-black hover:bg-opacity-5 mr-1' // Add CSS class
         classesToAdd += " text-" + statusObj.text_color

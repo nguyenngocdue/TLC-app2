@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Blade;
 
 class ProdSequencesPrint extends ProdSequences
 {
-    protected $mode = 'checkbox';
+    protected $mode = 'checkbox_print';
 
     protected $actionBtnList = [
         'exportSCV' => false,

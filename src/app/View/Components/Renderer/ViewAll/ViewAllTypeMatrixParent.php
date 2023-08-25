@@ -58,7 +58,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected function getRouteAfterSubmit()
     {
         if ($this->actionBtnList['printTemplate']) return route($this->type . '_prt.print');
-        if ($this->actionBtnList['approveMulti']) return route($this->type . '_prt.print');
+        // if ($this->actionBtnList['approveMulti']) return route($this->type . '_prt.print');
     }
 
     protected function getYAxis()
@@ -181,10 +181,9 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         $result = [];
         switch ($dataIndex) {
-            case 'checkbox':
-                foreach ($cell as $document) {
-                    $result[] = $this->makeCheckbox($document, $y, $forExcel);
-                }
+            case 'checkbox_change_status':
+            case 'checkbox_print':
+                foreach ($cell as $document) $result[] = $this->makeCheckbox($document, $y, $forExcel);
                 break;
             case 'status_only':
                 // case 'status':
