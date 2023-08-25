@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 
 class MyView extends Component
 {
+    private $maxRecords = 100;
     /**
      * Create a new component instance.
      *
@@ -44,7 +45,8 @@ class MyView extends Component
         $result = [];
         $docs = $openingDocs
             ->where('owner_id', $uid)
-            ->orderBy('updated_at', 'desc');
+            ->orderBy('updated_at', 'desc')
+            ->limit($this->maxRecords);
         // dump($docs->toSql());
         $docs = $docs->get();
 
@@ -60,6 +62,7 @@ class MyView extends Component
         $docs = $openingDocs
             ->where('status', '!=', 'new')
             ->orderBy('updated_at', 'desc')
+            ->limit($this->maxRecords)
             ->get();
         $result = [];
         foreach ($docs as $doc) {
@@ -78,7 +81,7 @@ class MyView extends Component
 
     private function monitored_by_me($appKey, $app, $openingDocs, $uid, $statuses)
     {
-        $docs = $openingDocs->get();
+        $docs = $openingDocs->limit($this->maxRecords)->get();
         $result = [];
         // dump("monitored_by_me");
         // dump($docs->count());
