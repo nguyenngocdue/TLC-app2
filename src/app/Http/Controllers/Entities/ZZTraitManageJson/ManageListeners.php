@@ -26,6 +26,7 @@ class ManageListeners extends Manage_Parent
             'number_to_words',
             'ajax_request_scalar',
             'emit_chain',
+            'count_selected_values',
 
             'aggregate_from_table', // Field ONLY
             'trigger_change_all_lines', // Table ONLY

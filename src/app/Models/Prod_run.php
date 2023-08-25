@@ -8,7 +8,8 @@ class Prod_run extends ModelExtended
 {
     protected $fillable = [
         "id", "prod_sequence_id", "date", "start", "end", "owner_id",
-        "total_hours",  "worker_number", "total_man_hours"
+        "total_hours", "total_man_hours",
+        "worker_number", "worker_number_count", "worker_number_input",
     ];
 
     protected $table = 'prod_runs';
@@ -18,6 +19,10 @@ class Prod_run extends ModelExtended
     public static $eloquentParams = [
         "getProdSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],
         "getUsers" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_id', 'user_id'],
+    ];
+
+    public static $oracyParams = [
+        'getWorkersOfRun()' => ['getCheckedByField', User::class,],
     ];
 
     public function getUsers()
@@ -32,6 +37,12 @@ class Prod_run extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getWorkersOfRun()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
     public function getManyLineParams()
     {
         return [
@@ -41,8 +52,11 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'start', 'cloneable' => true,],
             ['dataIndex' => 'end', 'cloneable' => true,],
             ['dataIndex' => 'total_hours', 'footer' => 'agg_sum', 'no_print' => true,],
-            ['dataIndex' => 'worker_number', 'cloneable' => true, 'footer' => 'agg_avg', 'no_print' => true,],
+            ['dataIndex' => 'worker_number_input', 'footer' => 'agg_sum'],
             ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum'],
+            ['dataIndex' => 'getWorkersOfRun()'],
+            ['dataIndex' => 'worker_number_count'],
+            ['dataIndex' => 'worker_number', 'cloneable' => true, 'footer' => 'agg_avg', 'no_print' => true,],
         ];
     }
 }

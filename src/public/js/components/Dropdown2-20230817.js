@@ -446,6 +446,15 @@ const onChangeNumberToWords = (listener) => {
     getEById(column_name).trigger('change')
 }
 
+const onChangeDropdown2CountSelectedValues = (listener, name) => {
+    const { column_name } = listener
+    const count = getEById(name).val().length
+
+    // console.log(listener, name, count)
+    getEById(column_name).val(count)
+    getEById(column_name).trigger('change')
+}
+
 const onChangeDropdown2 = ({ name, dropdownParams = {} }) => {
     // const debugFlow = true
     // console.log("onChangeDropdown2", name)
@@ -491,7 +500,9 @@ const onChangeDropdown2 = ({ name, dropdownParams = {} }) => {
                     case 'number_to_words':
                         onChangeNumberToWords(listener)
                         break
-
+                    case 'count_selected_values':
+                        onChangeDropdown2CountSelectedValues(listener, name)
+                        break
                     default:
                         console.error('Unknown listen_action', listen_action, 'of', name)
                         break

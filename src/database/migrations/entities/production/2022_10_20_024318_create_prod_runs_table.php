@@ -25,6 +25,8 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->time('start')->nullable();
             $table->time('end')->nullable();
+            $table->double('worker_number_input', 8, 2)->nullable();
+            $table->unsignedInteger('worker_number_count')->nullable();
             $table->double('worker_number', 8, 2)->nullable();
             $table->double('total_hours', 8, 2)->nullable();
             $table->double('total_man_hours', 8, 2)->nullable();
