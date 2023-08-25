@@ -133,7 +133,7 @@ Route::group([
     Route::resource('timesheet_officers', TimeSheetOfficerController::class);
     Route::get('timesheet_officers_duplicate/{id}', [TimeSheetOfficerController::class, 'duplicate']);
     Route::resource('timesheet_workers', TimeSheetWorkerController::class);
-    Route::post('timesheet_officers/approve_all', [TimeSheetOfficerController::class, 'approveAll'])->name('timesheet_officers.approve_all');
+    // Route::post('timesheet_officers/approve_all', [TimeSheetOfficerController::class, 'approveAll'])->name('timesheet_officers.approve_all');
 });
 Route::group([
     'prefix' => 'v1/hr',
@@ -158,6 +158,11 @@ Route::group([
         Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
     }
 
+    $apps = LibApis::getFor('changeStatusMultiple');
+    foreach ($apps as $tableName) {
+        Route::post("{$tableName}_changeStatusMultiple", [EntityCRUDControllerForApi::class, 'changeStatusMultiple'])->name($tableName . ".changeStatusMultiple");
+    }
+
     $apps = LibApis::getFor('renderTableForPopupModals');
     foreach ($apps as $tableName) {
         Route::post("{$tableName}_renderTable", [EntityCRUDControllerForApiRenderer::class, 'renderTable'])->name($tableName . ".renderTable");
@@ -166,7 +171,6 @@ Route::group([
     $apps = LibApis::getFor('cloneTemplate_and_updateShort');
     foreach ($apps as $tableName) {
         Route::post("{$tableName}_cloneTemplate", [EntityCRUDControllerForApiClone::class, 'cloneTemplate'])->name($tableName . ".cloneTemplate");
-        // Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
     }
 });
 

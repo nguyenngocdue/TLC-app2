@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
 
 abstract class ViewAllTypeMatrixParent extends Component
 {
@@ -166,7 +167,8 @@ abstract class ViewAllTypeMatrixParent extends Component
         [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
         $className = $isCheckboxVisible ? "cursor-pointer view-all-matrix-checkbox-$yId" : "cursor-not-allowed disabled:opacity-50";
         $disabledStr = $isCheckboxVisible ? "" : "disabled";
-        $checkbox = "<input $disabledStr onclick='determineNextStatuses(\"$id\", \"$status\", this.checked)' status='$status' class='$className' title='" . Str::makeId($id) . "' type='checkbox' id='checkbox_{$yId}_$id' name='$id'/>";
+        $route = Route::has($rStr = ($this->type . ".changeStatusMultiple")) ? route($rStr) : "null";
+        $checkbox = "<input $disabledStr onclick='determineNextStatuses(\"$id\", \"$status\", this.checked, \"$route\")' status='$status' class='$className' title='" . Str::makeId($id) . "' type='checkbox' id='checkbox_{$yId}_$id' name='$id'/>";
         $item = [
             'value' => $checkbox . "<br/>" . $this->makeCaptionForCheckbox($document),
             // 'cell_title' => 'Select check box id:' . $id,

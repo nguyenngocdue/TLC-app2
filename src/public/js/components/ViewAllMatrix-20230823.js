@@ -1,5 +1,5 @@
 const toggleCheckboxCache = {}
-const toggleCheckbox = (yAxisId) => {
+const toggleCheckbox = (yAxisId, route = null) => {
     const className = "view-all-matrix-checkbox-" + yAxisId
     if (toggleCheckboxCache[className]) {
         toggleCheckboxCache[className] = !toggleCheckboxCache[className]
@@ -11,10 +11,12 @@ const toggleCheckbox = (yAxisId) => {
     const allCheckbox = $("." + className)
     allCheckbox.prop('checked', value);
 
-    for (let i = 0; i < allCheckbox.length; i++) {
-        const checkbox = allCheckbox[i]
-        const status = $("#" + checkbox.id).attr("status")
-        determineNextStatuses(checkbox.name, status, value)
+    if (route) {
+        for (let i = 0; i < allCheckbox.length; i++) {
+            const checkbox = allCheckbox[i]
+            const status = $("#" + checkbox.id).attr("status")
+            determineNextStatuses(checkbox.name, status, value, route)
+        }
     }
 }
 
@@ -50,7 +52,7 @@ function intersectionArraysOfArrays(arrays) {
 }
 
 const determineNextStatusesCache = {}
-const determineNextStatuses = (id, status, value) => {
+const determineNextStatuses = (id, status, value, route) => {
     const div = $("#divApproveMulti")
     // console.log("determineNextStatuses", id, status, value, div.length);
     if (div.length === 0) return;
@@ -63,6 +65,7 @@ const determineNextStatuses = (id, status, value) => {
     // console.log(determineNextStatusesCache)
 
     const uniqueValuesArray = getUniqueValueFromObject(determineNextStatusesCache)
+    const ids = Object.keys(determineNextStatusesCache)
 
     const { statuses } = superProps
     const result0 = []
@@ -79,18 +82,23 @@ const determineNextStatuses = (id, status, value) => {
     for (let i = 0; i < result.length; i++) {
         const status = result[i]
         const statusObj = statuses[status]
+        const { label } = statusObj['action-buttons']
         // console.log(statusObj)
         const parsedDocument = (new DOMParser()).parseFromString(statusObj.icon, 'text/html');
         const icon = parsedDocument.body.firstChild;
         // console.log(statusObj.icon, parsedDocument, icon)
 
         const caption = document.createElement('span')
-        caption.innerHTML = " " + statusObj['action-buttons']['label']
+        caption.innerHTML = " " + label
 
         const button = document.createElement('button');
         if (statusObj.icon) button.appendChild(icon);
         button.appendChild(caption);
         button.type = 'button'
+        button.addEventListener('click', function () {
+            changeStatusAll(route, ids, status, label)
+            console.log('Button clicked!', route, status, label, ids)
+        });
 
         let classesToAdd = 'px-2.5 py-2 font-medium leading-tight rounded transition duration-150 ease-in-out focus:ring-0 focus:outline-n1one disabled:opacity-50 inline-block text-sm border-2 hover:bg-black hover:bg-opacity-5 mr-1' // Add CSS class
         classesToAdd += " text-" + statusObj.text_color

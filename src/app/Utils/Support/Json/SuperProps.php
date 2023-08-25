@@ -309,7 +309,7 @@ class SuperProps
     private static function make($type)
     {
         $modelPath = Str::modelPathFrom($type);
-        if (!class_exists($modelPath)) return ["problems" => "Class $modelPath not found."];
+        if (!class_exists($modelPath)) return ["problems" => "Class $modelPath not found when constructing SuperProps."];
 
         static::$type = $type;
         static::$result['problems'] = [];

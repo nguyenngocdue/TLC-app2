@@ -36,7 +36,10 @@ class HrTimesheetWorkersApproveMulti extends HrTimesheetWorkers
     {
         $parent = parent::getMetaObjects($y, $dataSource, $xAxis, $forExcel);
         $yId = $y->id;
-        $toggleBtn = Blade::render("<x-renderer.button size='xs' onClick='toggleCheckbox($yId)'>TG</x-renderer.button>");
+        $route = route($this->type . ".changeStatusMultiple");
+        $script = "<script>const route_$yId='$route';</script>";
+        $btn = "$script<x-renderer.button size='xs' onClick='toggleCheckbox($yId, route_$yId)'>TG</x-renderer.button>";
+        $toggleBtn = Blade::render($btn);
         return array_merge(
             $parent,
             [

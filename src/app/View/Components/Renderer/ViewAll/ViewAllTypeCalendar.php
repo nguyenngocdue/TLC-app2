@@ -69,12 +69,8 @@ class ViewAllTypeCalendar extends Component
             'nodeProjectTreeArray' => $nodeProjectTreeArray,
             'nodeTaskTreeArray' => $nodeTaskTreeArray,
             'listIdPendingApproval' => $listIdPendingApproval,
-            'urlPendingApproval' => $this->getUrlApproveAll(),
+            'routeChangeStatusMultiple' => route("{$this->type}.changeStatusMultiple"),
         ]);
-    }
-    private function getUrlApproveAll()
-    {
-        return route('timesheet_officers.approve_all') ?? '';
     }
     private function getListIdPendingApproval($dataSource)
     {

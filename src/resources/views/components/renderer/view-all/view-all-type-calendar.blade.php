@@ -52,7 +52,7 @@
                         class="w-40" 
                         icon="fa-duotone fa-thumbs-up"
                         class="bg-green-200 text-green-800"
-                        onClick="approveAll('{{$urlPendingApproval}}',{{$listIdPendingApproval}})"
+                        onClick="changeStatusAll('{{$routeChangeStatusMultiple}}',{{$listIdPendingApproval}}, 'approved', 'Approved')"
                         disabled="{{$disableButton}}"
                         >
                         Approve All

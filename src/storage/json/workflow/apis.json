@@ -131,11 +131,13 @@
     },
     "hr_timesheet_officers": {
         "name": "hr_timesheet_officers",
-        "storeEmpty_and_updateShort": "true"
+        "storeEmpty_and_updateShort": "true",
+        "changeStatusMultiple": "true"
     },
     "hr_timesheet_workers": {
         "name": "hr_timesheet_workers",
-        "storeEmpty_and_updateShort": "true"
+        "storeEmpty_and_updateShort": "true",
+        "changeStatusMultiple": "true"
     },
     "hse_corrective_actions": {
         "name": "hse_corrective_actions",

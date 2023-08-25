@@ -36,11 +36,9 @@ const makeKi = (k) => {
     })
     return ki
 }
-const openAnotherLink = (linkId) => {
+const openGallery = (linkId) => {
     const a = document.getElementById(linkId)
-    if (a) {
-        a.click()
-    }
+    if (a) a.click()
 }
 
 //This will stop user to click "Back" on browser
@@ -49,39 +47,42 @@ const openAnotherLink = (linkId) => {
 // setTimeout(() => { window.history.forward(); }, 0);
 // window.onunload = () => { null };
 
-function saveAndClose() {
-    $('[id="form-upload"]').append(
-        '<input type="hidden" name="saveAndClose" value="true">'
-    )
+const appendSaveAndCloseInput = () => {
+    $('[id="form-upload"]').append('<input type="hidden" name="saveAndClose" value="true">')
     // $('[id="form-upload"]').submit()
 }
 
-function approveAll(url, listIdPendingApproval) {
-    textListIdPendingApproval = listIdPendingApproval.toString();
-    Swal.fire({
-        title: 'Are you sure?',
-        text: `You want approve all list id: ${textListIdPendingApproval} this!`,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: `Yes, I want!`,
-    }).then((result) => {
+const confirmChange = (ids, nextStatusLabel) => ({
+    title: 'Are you sure?',
+    html: `This action will change status of ${ids.length} item${ids.length > 1 ? 's' : ''} to <b>${nextStatusLabel}</b>.`,
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: `Yes`,
+    cancelButtonText: `No`,
+})
+
+const changeStatusAll = (url, ids, nextStatus, nextStatusLabel) => {
+    console.log(url, ids, nextStatus, nextStatusLabel)
+    Swal.fire(confirmChange(ids, nextStatusLabel)).then((result) => {
         if (result.isConfirmed) {
-            $.ajax({
-                type: 'post',
-                url,
-                data: { ids: listIdPendingApproval },
-                success: function (response) {
-                    if (response.success) {
-                        toastr.success(response.message)
-                        window.location.reload()
-                    }
-                },
-                error: function (jqXHR) {
-                    toastr.error(jqXHR.responseJSON.message)
-                },
-            })
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'post',
+                    url,
+                    data: { ids, nextStatus, nextStatusLabel },
+                    success: function (response) {
+                        if (response.success) {
+                            toastr.success(response.message)
+                            window.location.reload()
+                        }
+                    },
+                    error: function (jqXHR) {
+                        toastr.error(jqXHR.responseJSON.message)
+                    },
+                })
+            }
         }
     })
 }

@@ -30,23 +30,4 @@ class TimeSheetOfficerController extends TimesheetController
         $collectionMerge = $hrTsLines->merge($publicHoliday);
         return ['hits' => new HrTsLineCollection($collectionMerge), 'meta' => $initialDate,];
     }
-    public function approveAll(Request $request)
-    {
-        $ids = $request->input('ids');
-        try {
-            if (is_array($ids) && !empty($ids)) {
-                Hr_timesheet_officer::whereIn('id', $ids)
-                    ->where('status', 'pending_approval')->update(['status' => 'approved']);
-                return ResponseObject::responseSuccess(
-                    null,
-                    [],
-                    'Updated all status pending_approval to approved successfully!',
-                );
-            }
-        } catch (\Throwable $th) {
-            return ResponseObject::responseFail(
-                $th->getMessage(),
-            );
-        }
-    }
 }
