@@ -248,7 +248,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
 
         //For Meta columns
         $result['status'] = "Status";
-        $result['room_type'] = "Room Type";
+        $result['room_type'] = "Product Type";
         $result['started_at'] = "Started At";
         $result['finished_at'] = "Finished At";
         $result['total_days'] = "Total Days";
