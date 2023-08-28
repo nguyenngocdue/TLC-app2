@@ -6,7 +6,9 @@
         "hse_extra_metrics",
         "prod_sequences",
         "ghg_sheets",
-        "site_daily_assignments"
+        "site_daily_assignments",
+        "qaqc_insp_chklst_shts",
+        "qaqc_insp_chklsts"
     ],
     "apps_have_view_all_matrix_print": [
         "prod_sequences"
