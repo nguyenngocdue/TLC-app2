@@ -47,6 +47,17 @@ trait TraitCloneTemplate
 					$result = [['redirect_edit_href' => route($plural . '.edit', $insertedId),]];
 				}
 				break;
+			case "qaqc_insp_chklst_shts":
+				['qaqc_insp_tmpl_sht_id' => $tmpl_id, "qaqc_insp_chklst_id" => $chklst_id] = $line;
+				$params = ['--ownerId' => $ownerId, '--inspChklstId' => $chklst_id, '--inspTmplShtId' => $tmpl_id];
+				$cmdOutput = Artisan::call("ndc:cloneQaqcSheet", $params);
+				if ($cmdOutput) {
+					$result = [['message' => "Problem ???"]];
+				} else {
+					$insertedId = trim(Artisan::output());
+					$result = [['redirect_edit_href' => route($plural . '.edit', $insertedId),]];
+				}
+				break;
 			default:
 				$result = [];
 				dump("[$plural] is not in the switch");

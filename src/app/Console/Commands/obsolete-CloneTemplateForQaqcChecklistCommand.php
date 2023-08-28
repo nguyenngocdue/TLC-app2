@@ -63,7 +63,7 @@ class CloneTemplateForQaqcChecklistCommand extends Command
             $shortName = $qaqcInspTmpl->description;
             $insertedItem = $qaqcInspChklst = Qaqc_insp_chklst::create([
                 'prod_order_id' => $prodOrderId,
-                'name' => "Checklist of " . $prodOrder->name . " ($shortName)",
+                'name' =>  $prodOrder->name . " ($shortName)",
                 'slug' => (new All_SlugifyByName())($prodOrder->name, 'qaqc_insp_chklst', ''),
                 'owner_id' => $ownerId,
                 'qaqc_insp_tmpl_id' => $inspTmplId,

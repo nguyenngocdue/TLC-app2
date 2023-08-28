@@ -96,6 +96,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $result = [];
 
         foreach ($dataSource as $line) {
+            // dump($this->dataIndexY . " - " . $this->dataIndexX);
             $result[$line->{$this->dataIndexY}][$line->{$this->dataIndexX}][] = $line;
         }
         return $result;
@@ -262,7 +263,9 @@ abstract class ViewAllTypeMatrixParent extends Component
             }
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
-                if (isset($dataSource[$yId][$xId])) {
+                $hasFile = isset($dataSource[$yId][$xId]);
+                // dump("yID $yId xId $xId $hasFile");
+                if ($hasFile) {
                     $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $y, $forExcel);
                     $line[$xId] = $value;
                     if ($this->mode == 'detail') {
@@ -350,7 +353,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         $filterDataSource  = $this->getFilterDataSource();
         $viewportParams = $this->getViewportParams();
-        //qaqc_wirs.blade.php //FULL TEXT SEARCH HERE
+
         $params = ["type" => $this->type, "dataSource" => $filterDataSource, "viewportParams" => $viewportParams,];
         $filterName = "";
         switch ($this->type) {
@@ -371,7 +374,8 @@ abstract class ViewAllTypeMatrixParent extends Component
         if (view()->exists($viewName)) {
             return Blade::render('<x-renderer.view-all-matrix-filter.' . $filterName . ' :type="$type" :dataSource="$dataSource" :viewportParams="$viewportParams"/>', $params);
         } else {
-            return "Filter $this->type blade file not found (ViewAllTypeMatrixParent.getFilter)";
+            //qaqc_wirs.blade.php //FULL TEXT SEARCH HERE
+            return "Filter $this->type.blade.php file not found (ViewAllTypeMatrixParent.getFilter, search qaqc_wirs.blade.php)";
         }
     }
 

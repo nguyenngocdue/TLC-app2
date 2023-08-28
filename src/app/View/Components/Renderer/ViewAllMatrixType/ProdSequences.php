@@ -86,7 +86,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         return ["start_date", "end_date", "man_power", "uom", "total_uom", "total_mins", "min_per_uom"];
     }
-    public function getXAxisPrimaryColumns()
+
+    protected function getXAxisPrimaryColumns()
     {
         $data = Prod_routing::find($this->prodRouting)
             ->getProdRoutingLinks();

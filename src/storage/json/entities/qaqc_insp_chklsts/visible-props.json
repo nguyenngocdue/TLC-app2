@@ -2,10 +2,10 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "approved": ""
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "approved": "true"
     },
     "_name": {
         "name": "_name",
@@ -98,6 +98,22 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "approved": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
         "new": "",
         "in_progress": "",
         "cancelled": "",
