@@ -1,4 +1,19 @@
 {
+    "_worker_number_count": {
+        "name": "_worker_number_count",
+        "column_name": "worker_number_count",
+        "listen_action": "count_selected_values",
+        "triggers": "getWorkersOfRun()",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_date": {
         "name": "_date",
         "column_name": "date",
@@ -14,9 +29,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_worker_number": {
-        "name": "_worker_number",
-        "column_name": "worker_number",
+    "_worker_number_input": {
+        "name": "_worker_number_input",
+        "column_name": "worker_number_input",
         "listen_action": "emit_chain",
         "triggers": "id",
         "listen_to_fields": "",
@@ -24,6 +39,21 @@
         "columns_to_set": "",
         "attrs_to_compare": "",
         "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_worker_number": {
+        "name": "_worker_number",
+        "column_name": "worker_number",
+        "listen_action": "expression",
+        "triggers": "worker_number_input,worker_number_count",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "Math.max(worker_number_input, worker_number_count)",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
         "ajax_item_attributes": "",
@@ -54,21 +84,6 @@
         "columns_to_set": "",
         "attrs_to_compare": "",
         "expression": "(worker_number * total_hours).toFixed(2)",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_worker_number_count": {
-        "name": "_worker_number_count",
-        "column_name": "worker_number_count",
-        "listen_action": "count_selected_values",
-        "triggers": "getWorkersOfRun()",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "getWorkersOfRun()",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
         "ajax_item_attributes": "",
@@ -122,21 +137,6 @@
     "_end": {
         "name": "_end",
         "column_name": "end",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_worker_number_input": {
-        "name": "_worker_number_input",
-        "column_name": "worker_number_input",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

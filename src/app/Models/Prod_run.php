@@ -52,11 +52,11 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'start', 'cloneable' => true,],
             ['dataIndex' => 'end', 'cloneable' => true,],
             ['dataIndex' => 'total_hours', 'footer' => 'agg_sum', 'no_print' => true,],
-            ['dataIndex' => 'worker_number_input', 'footer' => 'agg_sum'],
-            ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum'],
-            ['dataIndex' => 'getWorkersOfRun()'],
-            ['dataIndex' => 'worker_number_count'],
-            ['dataIndex' => 'worker_number', 'cloneable' => true, 'footer' => 'agg_avg', 'no_print' => true,],
+            ['dataIndex' => 'worker_number_input', 'footer' => 'agg_sum',],
+            ['dataIndex' => 'getWorkersOfRun()', 'cloneable' => true,],
+            ['dataIndex' => 'worker_number_count', 'invisible' => !true,],
+            ['dataIndex' => 'worker_number',  'footer' => 'agg_avg', 'no_print' => true,],
+            ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum',],
         ];
     }
 }

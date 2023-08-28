@@ -29,9 +29,10 @@
 @endif
 
 <script>
-    $("[id='{{$name}}']").on('change', function(e, dropdownParams){
+    $("[id='{{$id}}']").on('change', function(e, dropdownParams){
         onChangeDropdown4({
             name:"{{$name}}", 
+            id:"{{$id}}",
             lineType:"{{$lineType}}",
             table01Name:"{{$table01Name}}", 
             rowIndex:{{$rowIndex}}, 
