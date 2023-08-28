@@ -6,6 +6,9 @@
 @section('content')
 <div class="px-4 mt-2">
     @foreach($dataSource as $id => $value)
+    @php
+    $item = $modelPath::find($id);
+    @endphp
     <x-print.print-props 
         id="{{$id}}" 
         type="{{$type}}" 

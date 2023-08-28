@@ -29,7 +29,7 @@ class ViewAllInvokerController extends Controller
     use TraitGetOptionPrint;
 
     protected $type = "";
-    protected $typeModel = '';
+    protected $modelPath = '';
     protected $permissionMiddleware;
 
     public function __construct()
@@ -88,7 +88,7 @@ class ViewAllInvokerController extends Controller
             $arrFail = [];
             $arrDuplicate = [];
             foreach ($ids as $id) {
-                $theLine = $this->typeModel::findOrFail($id)->toArray();
+                $theLine = $this->modelPath::findOrFail($id)->toArray();
                 if (!$theLine) {
                     $arrFail[] = $id;
                 }
@@ -100,7 +100,7 @@ class ViewAllInvokerController extends Controller
                         }
                     };
                     $theLine = $this->applyFormula($theLine, 'store');
-                    $this->typeModel::create($theLine);
+                    $this->modelPath::create($theLine);
                     $arrDuplicate[] = $id;
                 } catch (\Throwable $th) {
                     $arrFail[] = $id;
