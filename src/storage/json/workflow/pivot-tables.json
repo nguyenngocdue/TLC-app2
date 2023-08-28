@@ -4,7 +4,6 @@
         "filters": null,
         "row_fields": "category",
         "column_fields": "date",
-        "value_index_fields": "amount",
         "data_fields": "amount",
         "sort_by": null
     },
@@ -13,7 +12,6 @@
         "filters": null,
         "row_fields": "category; product; date; date_discount; price; discount; amount;",
         "column_fields": null,
-        "value_index_fields": null,
         "data_fields": null,
         "sort_by": "category"
     },
@@ -22,7 +20,6 @@
         "filters": null,
         "row_fields": "product",
         "column_fields": "date; category; category; category;",
-        "value_index_fields": "amount; amount; amount; category;",
         "data_fields": "amount;",
         "sort_by": null
     },
@@ -31,7 +28,6 @@
         "filters": null,
         "row_fields": "category",
         "column_fields": "date; date; date;",
-        "value_index_fields": "amount; amount; amount;",
         "data_fields": "amount;",
         "sort_by": null
     },
@@ -40,7 +36,6 @@
         "filters": null,
         "row_fields": "category",
         "column_fields": "product; date; date;",
-        "value_index_fields": "amount; discount; discount;",
         "data_fields": "discount;",
         "sort_by": null
     },
@@ -49,7 +44,6 @@
         "filters": null,
         "row_fields": null,
         "column_fields": null,
-        "value_index_fields": null,
         "data_fields": null,
         "sort_by": null
     },
@@ -58,7 +52,6 @@
         "filters": null,
         "row_fields": null,
         "column_fields": "category; product;",
-        "value_index_fields": "amount; amount;",
         "data_fields": "amount",
         "sort_by": null
     },
@@ -67,7 +60,6 @@
         "filters": null,
         "row_fields": null,
         "column_fields": "category; product; date; date;",
-        "value_index_fields": "amount",
         "data_fields": "amount",
         "sort_by": null
     },
@@ -76,7 +68,6 @@
         "filters": null,
         "row_fields": null,
         "column_fields": "category; product; date;",
-        "value_index_fields": "amount; amount; amount;",
         "data_fields": "amount",
         "sort_by": null
     },
@@ -85,7 +76,6 @@
         "filters": null,
         "row_fields": "product",
         "column_fields": "date{ \"value_index\":discount };",
-        "value_index_fields": "date;",
         "data_fields": "discount;",
         "sort_by": null
     },
@@ -94,7 +84,15 @@
         "filters": "picker_date{ \"title\":\"Date\", \"allowClear\":true }; sub_project_id{ \"title\":\"Sub Project\", \"allowClear\":true, \"multiple\":true}; department_id{ \"title\":\"Department\", \"allowClear\":true, \"multiple\":true, \"hasListenTo\":false }; user_id{ \"title\":\"User\", \"allowClear\":true, \"multiple\":true }; workplace_id{ \"title\":\"Workplace\", \"allowClear\":true, \"multiple\":true, \"hasListenTo\":false }; category_id{ \"title\":\"Category\", \"allowClear\":true, \"multiple\":true, \"hasListenTo\":false };",
         "row_fields": "category_id{ \"column\": \"user_categories.name\" };sub_project_id{ \"column\":\"sub_projects.name,\"title\":\"Sub Project\"};",
         "column_fields": null,
-        "value_index_fields": null,
+        "data_fields": null,
+        "sort_by": "user_id{\"column\":\"users.name\"};",
+        "is_raw": "true"
+    },
+    "datasource_site_daily_assignment": {
+        "name": "datasource_site_daily_assignment",
+        "filters": null,
+        "row_fields": "site_daily_assignment_id{ \"column\":\"site_daily_assignments.name\"}; site_daily_assignment_line_user_id{ \"column\":\"users.name\" }; site_team_id{ \"column\":\"user_team_sites.name\"}; site_date{}",
+        "column_fields": null,
         "data_fields": null,
         "sort_by": "user_id{\"column\":\"users.name\"};",
         "is_raw": "true"
@@ -104,7 +102,6 @@
         "filters": null,
         "row_fields": "department_id{\"column\":\"departments.name\",\"title\":\"Department\" };head_count{ \"title\":\"Headcounts (Man)\" };man_day{ \"title\":\"Man-day (Day)\" };labor_cost{ \"title\":\"Labor Cost (USD)\" };total_cost{ \"title\":\"Total Cost (USD)\" }",
         "column_fields": null,
-        "value_index_fields": null,
         "data_fields": null,
         "sort_by": null
     },
@@ -113,7 +110,6 @@
         "filters": null,
         "row_fields": "department_id{\"column\":\"departments.name\",\"title\":\"Department\" };head_count{ \"title\":\"Headcounts (Man)\" };man_day{ \"title\":\"Man-day (Day)\" };labor_cost{ \"title\":\"Labor Cost (USD)\" };total_cost{ \"title\":\"Total Cost (USD)\" }",
         "column_fields": null,
-        "value_index_fields": null,
         "data_fields": null,
         "sort_by": null
     },
@@ -122,7 +118,6 @@
         "filters": "category_id{ \"title\":\"Team\", \"allowClear\": true, \"multiple\":true }; user_id{ \"title\":\"User\", \"allowClear\":true, \"multiple\":true }; workplace_id{ \"title\" :\"Workplace\", \"allowClear\":true, \"multiple\":true }; department_id{ \"title\":\"Department\", \"allowClear\":true, \"multiple\":true }; picker_date{\"title\":\"Date\"};",
         "row_fields": "staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name\", \"width\":200};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};department_id{\"column\":\"departments.name\"}",
         "column_fields": "time_sheet_start_time{\"value_index\":\"time_sheet_durations\",\"title\":\"Timesheet Hours\", \"width\":50, \"align\": \"right\"}; time_sheet_start_time_wfh{\"value_index\":\"time_sheet_durations_wfh\",\"title\":\"Timesheet WFH\"}; time_sheet_start_time_otr{ \"value_index\":\"time_sheet_durations_otr\", \"title\":\"Timesheet OTR\"}",
-        "value_index_fields": "time_sheet_durations; time_sheet_durations_wfh; time_sheet_durations_otr",
         "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"}; time_sheet_durations_wfh{\"title\":\"Total WFH\",\"aggregation\":\"sum\"}; time_sheet_durations_otr{\"title\":\"Total OTR\",\"aggregation\":\"sum\"}",
         "sort_by": "user_id{\"column\":\"users.name\" };"
     },
@@ -131,7 +126,6 @@
         "filters": "user_id{ \"title\":\"User\", \"allowClear\":true, \"multiple\":true }; workplace_id{ \"title\" :\"Workplace\", \"allowClear\":true, \"multiple\":true }; category_id{ \"title\":\"Team\", \"allowClear\": true, \"multiple\":true }; sub_project_id{ \"title\" :\"Sub Project\", \"allowClear\":true, \"multiple\":true }; picker_date{ \"title\":\"Date\", \"allowClear\":true };",
         "row_fields": "staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name\",\"width\":200};discipline_id{\"column\":\"user_disciplines.name\",\"width\":280};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};",
         "column_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\"};",
-        "value_index_fields": null,
         "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"};",
         "sort_by": "user_id{\"column\":\"users.name\"};"
     },
@@ -140,7 +134,6 @@
         "filters": "sub_project_id{ \"title\":\"Sub Project\", \"allowClear\": true, \"multiple\":true };department_id{ \"title\":\"Department\", \"allowClear\":true, \"multiple\":true };user_id{ \"title\":\"User\", \"allowClear\":true, \"multiple\":true }; workplace_id{ \"title\":\"Workplace\", \"allowClear\":true, \"multiple\":true };picker_date{\"title\":\"Month\", \"allowClear\":true};",
         "row_fields": "sub_project_id{ \"column\":\"sub_projects.name\", \"title\":\"Sub Project\"};lod_id{\"column\":\"terms.name\",\"title\":\"LOD\"};department_id{\"column\":\"departments.name\"};staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name\",\"width\":200};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};discipline_id{\"column\":\"user_disciplines.name\",\"width\":280};pj_task_id{\"column\":\"pj_tasks.name\",\"title\":\"Task\",\"width\":200};",
         "column_fields": "time_sheet_start_time{\"value_index\":\"time_sheet_durations\",\"title\":\"Timesheet Hours\", \"width\":50, \"align\": \"right\"};",
-        "value_index_fields": null,
         "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"};",
         "sort_by": "sub_project_id{\"column\":\"sub_projects.name\"}; user_id{\"column\":\"users.name\", \"order\":\"asc\"};"
     },
@@ -149,8 +142,15 @@
         "filters": "category_id{ \"title\":\"Team\", \"allowClear\": true, \"multiple\":true }; workplace_id{ \"title\":\"Workplace\", \"allowClear\":true, \"multiple\":true }; sub_project_id{ \"title\":\"Sub Project\", \"allowClear\": true, \"multiple\":true }; picker_date{\"title\":\"Month\", \"allowClear\":true};",
         "row_fields": "workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};",
         "column_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\"};",
-        "value_index_fields": null,
         "data_fields": "time_sheet_durations{\"title\":\"Total\", \"aggregation\":\"sum\",\"with\":80,\"align\":\"right\"}",
         "sort_by": "sub_project_id{\"column\":\"sub_projects.name\"}; user_id{\"column\":\"users.name\" };"
+    },
+    "site_daily_assignment_team_user_by_date": {
+        "name": "site_daily_assignment_team_user_by_date",
+        "filters": "picker_date{ \"title\":\"Date\"};",
+        "row_fields": "site_team_id{ \"column\":\"user_team_sites.name\"}",
+        "column_fields": "site_date{ \"title\":\"Date\", \"value_index\":\"site_daily_assignment_line_user_id\" ,\r\n\"aggregation\":\"count\"\r\n}",
+        "data_fields": "site_daily_assignment_line_user_id{\"title\":\"Total\", \"aggregation\":\"sum\",\"with\":80,\"align\":\"right\"}",
+        "sort_by": null
     }
 }

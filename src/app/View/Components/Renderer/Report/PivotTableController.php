@@ -55,7 +55,7 @@ class PivotTableController extends Controller
     private function attachInfoToDataSource($tables, $processedData, $columnFields, $rowFields)
     {
         $keysOfRowFields = array_keys($rowFields);
-        // dd($rowFields, $columnFields,$keysOfRowFields);
+        // dd($processedData);
 
         foreach ($processedData as &$items) {
             foreach ($items as $key => $id) {
@@ -72,7 +72,7 @@ class PivotTableController extends Controller
                     }
                 } else {
                     if (!str_contains($key, '_id')) continue;
-                    $indexString = strrpos($key, '_id_');
+                    $indexString = strrpos($key, '_id_') || strrpos($key, '_id');
                     $p1 = strpos($key, '_', $indexString + 4);
                     $str1 = substr($key, 0, $indexString + 4);
                     $str2 = substr($key, $p1, strlen($key));
@@ -163,6 +163,7 @@ class PivotTableController extends Controller
 
     private function getFieldNeedToSum($columnFields)
     {
+        // dump($columnFields);
         if ($columnFields) {
             $fieldIndex = array_keys($columnFields);
             $fields = array_column($columnFields, 'value_index');
@@ -212,7 +213,8 @@ class PivotTableController extends Controller
         //Remove all array keys by looping through all elements
         $fieldsNeedToSum = $this->getFieldNeedToSum($columnFields);
         
-        $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $fieldsNeedToSum), $processedData));
+        // $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $fieldsNeedToSum), $processedData));
+        $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $columnFields), $processedData));
         // dd($processedData, $fieldsNeedToSum);
 
         // Step 3: transfer data from lines to columns by

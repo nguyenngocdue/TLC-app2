@@ -110,5 +110,19 @@
         "package": "hr_&_admin",
         "top_title": "HSE KPI Report",
         "title": "HSE Key Performance Indicator"
+    },
+    "report-site_daily_assignment_010": {
+        "name": "report-site_daily_assignment_010",
+        "package_tab": "report",
+        "package": "project_management",
+        "top_title": "Site Daily Assignment",
+        "title": "Team\/Date"
+    },
+    "report-site_daily_assignment_110": {
+        "name": "report-site_daily_assignment_110",
+        "package_tab": "report",
+        "package": "project_management",
+        "top_title": "Site Daily Assignment",
+        "title": "Site Daily Assignment DataSource"
     }
 }

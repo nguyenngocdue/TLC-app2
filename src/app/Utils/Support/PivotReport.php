@@ -171,7 +171,8 @@ class PivotReport
             if ($key === "items" && is_array($value)) {
                 //Sum the results of Value_Index_Fields that has the same value in a field
                 //Sum values before using Value Index Fields
-                $outputArrays[] = self::sumFieldsHaveTheSameValue($value, $fieldsNeedToSum);
+                // $outputArrays[] = self::sumFieldsHaveTheSameValue($value, $fieldsNeedToSum);
+                $outputArrays[] = self::sumFieldsHaveTheSameValue2($value, $fieldsNeedToSum);
             } elseif (is_array($value)) {
                 $nestedOutputArrays = self::getLastArray($value, $fieldsNeedToSum);
                 $outputArrays = array_merge($outputArrays, $nestedOutputArrays);
@@ -243,7 +244,7 @@ class PivotReport
 
     private static function sumItemsInArray($newArray)
     {
-        // dump($newArray);
+        // dd($newArray);
         $data = [];
         foreach ($newArray as $item) {
             foreach ($item as $key => $value) {
@@ -319,6 +320,40 @@ class PivotReport
 
     private static function sumFieldsHaveTheSameValue($data, $fieldsNeedToSum)
     {
+        // dd($data);
+        $array = [];
+        $fieldIndex = $fieldsNeedToSum['field_indexes'] ?? [];
+        $fieldsNeedToSum = $fieldsNeedToSum['value_field_indexes'] ?? [];
+
+        foreach ($data as $item) {
+            $found = false;
+            foreach ($fieldsNeedToSum as $valueIndexField) {
+                if (!$valueIndexField) continue;
+                foreach ($array as  &$value) {
+                    $check = false;
+                    foreach ($fieldIndex as $field) {
+                        if (!$field || !isset($item[$field])) continue;
+                        if ($item[$field] === $value[$field]) {
+                            $check = true;
+                        }
+                    }
+                    if ($check) {
+                        $found = true;
+                        if (!isset($item[$valueIndexField])) continue;
+                        $value[$valueIndexField] += $item[$valueIndexField];
+                        break;
+                    }
+                }
+            }
+            if (!$found) $array[] = $item;
+        }
+        return $array;
+    }
+
+
+    private static function sumFieldsHaveTheSameValue2($data, $fieldsNeedToSum)
+    {
+        // dd($data);
         $array = [];
         $fieldIndex = $fieldsNeedToSum['field_indexes'] ?? [];
         $fieldsNeedToSum = $fieldsNeedToSum['value_field_indexes'] ?? [];
