@@ -53,8 +53,11 @@ class MenuProfile extends Component
         // dump($navbarStr);
 
         $userMenu = json_decode($navbarStr, true);
-        // dump($userMenu);
-        return $userMenu;
+        $group = [];
+        foreach ($userMenu as $value) {
+            $group[$value['group']][] = $value;
+        }
+        return $group;
     }
 
     /**
@@ -65,7 +68,6 @@ class MenuProfile extends Component
     public function render()
     {
         $user = CurrentUser::get();
-
         return view('components.homepage.menu-profile', [
             'userMenu' => $this->getUserMenu(),
             'user' => $user,

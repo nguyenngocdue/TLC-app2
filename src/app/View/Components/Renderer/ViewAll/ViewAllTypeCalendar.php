@@ -70,7 +70,11 @@ class ViewAllTypeCalendar extends Component
             'nodeTaskTreeArray' => $nodeTaskTreeArray,
             'listIdPendingApproval' => $listIdPendingApproval,
             'routeChangeStatusMultiple' => route("{$this->type}.changeStatusMultiple"),
+            'disableButton' => $this->disableButtonApproveAll($listIdPendingApproval,$userCurrentCalendar),
         ]);
+    }
+    private function disableButtonApproveAll($listIdPendingApproval,$userCurrentCalendar){
+        return empty($listIdPendingApproval) || ($userCurrentCalendar->id == CurrentUser::id());
     }
     private function getListIdPendingApproval($dataSource)
     {

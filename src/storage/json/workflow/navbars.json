@@ -1,108 +1,105 @@
 {
-    "hr0": {
-        "name": "hr0",
-        "title": "Internal",
-        "href": "-",
-        "icon_fa": null
-    },
     "php_admin": {
         "name": "php_admin",
+        "group": "internal",
         "title": "PhpMyAdmin",
         "href": "http:\/\/{phpMyAdmin}\/",
         "icon_fa": "fa-duotone fa-database"
     },
     "php_admin_table": {
         "name": "php_admin_table",
+        "group": "internal",
         "title": "PhpMyAdmin -> Table",
         "href": "http:\/\/{phpMyAdminTable}\/",
         "icon_fa": "fa-duotone fa-database"
     },
     "component": {
         "name": "component",
+        "group": "internal",
         "title": "Components Demo",
         "href": "\/components",
         "icon_fa": "fa-brands fa-elementor"
     },
     "database_summary": {
         "name": "database_summary",
+        "group": "internal",
         "title": "Database Summary",
         "href": "\/database\/summary",
         "icon_fa": "fa-duotone fa-table"
     },
     "database_diagrams": {
         "name": "database_diagrams",
+        "group": "internal",
         "title": "Database Diagrams",
         "href": "\/database\/diagrams",
         "icon_fa": "fa-duotone fa-table"
     },
     "my_company": {
         "name": "my_company",
+        "group": "internal",
         "title": "My Company Tree",
         "href": "\/my-company",
         "icon_fa": "fa-duotone fa-folder-tree"
     },
     "serializeParser": {
         "name": "serializeParser",
+        "group": "external",
         "title": "Serialize Parser",
         "href": "\/utils\/parser",
         "icon_fa": "fa-duotone fa-brackets-curly"
     },
     "createThumbnail": {
         "name": "createThumbnail",
+        "group": "external",
         "title": "Create Thumbnails",
         "href": "\/utils\/createThumbnail",
         "icon_fa": "fa-sharp fa-light fa-image"
     },
-    "hr1": {
-        "name": "hr1",
-        "title": "External",
-        "href": "-",
-        "icon_fa": null
-    },
     "min_io": {
         "name": "min_io",
+        "group": "external",
         "title": "MinIO",
         "href": "https:\/\/console.tlcmodular.com",
         "icon_fa": "fa-duotone fa-images"
     },
     "redis": {
         "name": "redis",
+        "group": "external",
         "title": "Redis Insight",
         "href": "http:\/\/{redis}",
         "icon_fa": "fa-duotone fa-registered"
     },
     "telescope": {
         "name": "telescope",
+        "group": "external",
         "title": "Telescope",
         "href": "\/telescope\/requests",
         "icon_fa": "fa-duotone fa-telescope"
     },
     "horizon": {
         "name": "horizon",
+        "group": "external",
         "title": "Horizon",
         "href": "\/horizon",
         "icon_fa": "fa-duotone fa-ruler-horizontal"
     },
     "graphql": {
         "name": "graphql",
+        "group": "external",
         "title": "GraphQL PlayGround",
         "href": "\/graphql-playground",
         "icon_fa": "fa-duotone fa-diagram-project"
     },
-    "hr2": {
-        "name": "hr2",
-        "title": "3rd Party",
-        "href": "-",
-        "icon_fa": null
-    },
     "windmill": {
         "name": "windmill",
+        "group": "3rd_party",
         "title": "Windmill Dashboard",
         "href": "https:\/\/windmill-dashboard.vercel.app\/",
         "icon_fa": "fa-duotone fa-gauge"
     },
     "font": {
         "name": "font",
+        "group": "3rd_party",
         "title": "Font Awesome 6 Pro",
         "href": "https:\/\/fontawesome.com\/icons",
         "icon_fa": "fa-duotone fa-font-awesome"

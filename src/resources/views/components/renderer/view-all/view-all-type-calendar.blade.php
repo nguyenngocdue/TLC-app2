@@ -44,7 +44,6 @@
             </div>
             <div class="md:col-span-3 lg:col-span-2">
             @php
-                $disableButton = empty($listIdPendingApproval);
                 $listIdPendingApproval = json_encode($listIdPendingApproval);
             @endphp
                 <x-renderer.card class="w-full border bg-white p-4 flex justify-center" title="Options">

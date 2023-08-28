@@ -22,6 +22,12 @@ class ManageNavbarsController extends AbstractManageLibController
                 'editable' => true,
             ],
             [
+                'dataIndex' => "group",
+                "renderer"  => 'dropdown',
+                'editable' => true,
+                "cbbDataSource" => ["internal","external","3rd_party"]
+            ],
+            [
                 'dataIndex' => 'title',
                 'renderer' => 'text4',
                 'editable' => true,
