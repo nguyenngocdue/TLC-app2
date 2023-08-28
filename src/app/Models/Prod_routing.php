@@ -26,6 +26,12 @@ class Prod_routing extends ModelExtended
         "getSubProjects()" => ["getCheckedByField", Sub_project::class],
     ];
 
+    //This is temporary design, will finalize when PPR on board.
+    public function getRoutingsHaveWorkersOfRun()
+    {
+        return [52, 55, 56];
+    }
+
     public function getProdRoutingLinks()
     {
         $p = static::$eloquentParams[__FUNCTION__];

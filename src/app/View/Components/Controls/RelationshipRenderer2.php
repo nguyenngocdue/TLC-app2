@@ -168,7 +168,7 @@ class RelationshipRenderer2 extends Component
         if (!$instance::$nameless) $defaultColumns[] = ["dataIndex" => 'name',];
         $columns = ($fn === '')
             ? $defaultColumns
-            : $instance->$fn();
+            : $instance->$fn($this->item);
 
         return [$tableFooter, $columns,];
     }
