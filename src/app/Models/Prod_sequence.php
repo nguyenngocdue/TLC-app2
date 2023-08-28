@@ -35,6 +35,11 @@ class Prod_sequence extends ModelExtended
         "comment_cancel_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
 
+    public function getRoutingsHaveWorkersOfRun()
+    {
+        return [52, 55, 56];
+    }
+
     public function getProdOrder()
     {
         $p = static::$eloquentParams[__FUNCTION__];

@@ -43,20 +43,32 @@ class Prod_run extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function getManyLineParams()
+    public function getManyLineParams($parentItem)
     {
-        return [
+        $isNZ = false;
+        $a = $parentItem->getRoutingsHaveWorkersOfRun();
+        if (in_array($parentItem->prod_routing_id, $a)) $isNZ = true;
+
+        $result = [
             ['dataIndex' => 'id', 'invisible' => true,],
             ['dataIndex' => 'prod_sequence_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ['dataIndex' => 'date', 'cloneable' => true, 'footer' => 'agg_none'],
             ['dataIndex' => 'start', 'cloneable' => true,],
             ['dataIndex' => 'end', 'cloneable' => true,],
             ['dataIndex' => 'total_hours', 'footer' => 'agg_sum', 'no_print' => true,],
-            ['dataIndex' => 'worker_number_input', 'footer' => 'agg_sum',],
-            ['dataIndex' => 'getWorkersOfRun()', 'cloneable' => true, 'no_print' => true,],
+        ];
+        if ($isNZ) {
+            $result[] =   ['dataIndex' => 'getWorkersOfRun()', 'cloneable' => true, 'no_print' => true,];
+        } else {
+            $result[] =  ['dataIndex' => 'worker_number_input', 'footer' => 'agg_sum',];
+        }
+        $result = [
+            ...$result,
             ['dataIndex' => 'worker_number_count', 'invisible' => true,],
             ['dataIndex' => 'worker_number',  'footer' => 'agg_avg', 'no_print' => true,],
             ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum', 'no_print' => true,],
         ];
+
+        return $result;
     }
 }
