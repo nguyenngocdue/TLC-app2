@@ -4,7 +4,6 @@ namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst;
-use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
@@ -74,6 +73,8 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
             ->get();
         // dump($data[0]);
         foreach ($data as $line) {
+            $supported = $line->getProdRoutingsOfInspTmpl()->pluck('id')->toArray();
+            if (!in_array($this->prodRouting, $supported)) continue;
             $result[] = [
                 'dataIndex' => $line->id,
                 'columnIndex' => "status",
@@ -140,16 +141,4 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
 
         return $result;
     }
-
-    // protected function getXAxis2ndHeader($xAxis)
-    // {
-    //     $result = [];
-    //     foreach ($xAxis as $line) {
-    //         $result[$line['dataIndex']] =  Str::headline($line['columnIndex']);
-    //     }
-    //     foreach ($result as &$row) {
-    //         $row = "<div class='p-1 text-center'>" . $row . "</div>";
-    //     }
-    //     return $result;
-    // }
 }

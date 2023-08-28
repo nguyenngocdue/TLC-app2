@@ -35,7 +35,7 @@
                     selected="{{$viewportParams['prod_routing_id']}}"
                     />
             </div>
-            <div class="col-span-3">
+            {{-- <div class="col-span-3">
                 Production Discipline
                 <x-renderer.view-all-matrix-filter.ProdDisciplineFilter 
                     tableName="prod_disciplines" 
@@ -45,7 +45,7 @@
                     allowClear="true"
                     selected="{{$viewportParams['prod_discipline_id']}}"
                     />
-            </div>
+            </div> --}}
         </div>
         <x-renderer.button type='primary' htmlType="submit" icon="fa-sharp fa-solid fa-check">Apply Filter</x-renderer.button>
     </div>
