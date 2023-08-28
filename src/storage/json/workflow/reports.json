@@ -2,23 +2,23 @@
     "document-eco_sheet_010": {
         "name": "document-eco_sheet_010",
         "package_tab": "report",
-        "package": "hr_&_admin",
+        "package": "project_management",
         "top_title": null,
         "title": "ECO Report"
     },
     "document-ghg_sheet_010": {
         "name": "document-ghg_sheet_010",
         "package_tab": "report",
-        "package": "hr_&_admin",
+        "package": "compliance",
         "top_title": null,
         "title": "GHG Summary Report"
     },
-    "document-prod_routing_010": {
-        "name": "document-prod_routing_010",
+    "document-prod_sequence_010": {
+        "name": "document-prod_sequence_010",
         "package_tab": "report",
-        "package": "hr_&_admin",
+        "package": "project_management",
         "top_title": null,
-        "title": "Production Rouitng Daily Report"
+        "title": "Daily Timesheet Report"
     },
     "register-qaqc_insp_chklst_020": {
         "name": "register-qaqc_insp_chklst_020",

@@ -16,7 +16,7 @@ use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
-class Prod_routing_010 extends Report_ParentDocument2Controller
+class Prod_sequence_010 extends Report_ParentDocument2Controller
 {
 
     use TraitForwardModeReport;
@@ -144,41 +144,41 @@ class Prod_routing_010 extends Report_ParentDocument2Controller
     protected function getTableColumns($params, $dataSource)
     {
         return
+            [
                 [
-                    [
-                        "title" => "Production Routing Link",
-                        "dataIndex" => "prod_routing_link_name",
-                        "align" => "left",
-                        "width" => 250,
-                    ],
-                    [
-                        "title" => "Discipline",
-                        "dataIndex" => "prod_discipline_name",
-                        "align" => "left",
-                        "width" => 100,
-                    ],
-                    [
-                        "title" => "Man Power",
-                        "dataIndex" => "man_power",
-                        "align" => "right",
-                        "width" => 30,
-                        'footer' => "agg_sum"
-                    ],
-                    [
-                        "title" => "Hours",
-                        "dataIndex" => "hours",
-                        "align" => "right",
-                        "width" => 30,
-                        'footer' => "agg_sum"
-                    ],
-                    [
-                        "title" => "Man-Hours",
-                        "dataIndex" => "man_hours",
-                        "align" => "right",
-                        "width" => 30,
-                        'footer' => "agg_sum"
-                    ]
-                ];
+                    "title" => "Production Routing Link",
+                    "dataIndex" => "prod_routing_link_name",
+                    "align" => "left",
+                    "width" => 250,
+                ],
+                [
+                    "title" => "Discipline",
+                    "dataIndex" => "prod_discipline_name",
+                    "align" => "left",
+                    "width" => 100,
+                ],
+                [
+                    "title" => "Man Power",
+                    "dataIndex" => "man_power",
+                    "align" => "right",
+                    "width" => 30,
+                    'footer' => "agg_sum"
+                ],
+                [
+                    "title" => "Hours",
+                    "dataIndex" => "hours",
+                    "align" => "right",
+                    "width" => 30,
+                    'footer' => "agg_sum"
+                ],
+                [
+                    "title" => "Man-Hours",
+                    "dataIndex" => "man_hours",
+                    "align" => "right",
+                    "width" => 30,
+                    'footer' => "agg_sum"
+                ]
+            ];
     }
 
     public function getBasicInfoData($params)
@@ -228,5 +228,4 @@ class Prod_routing_010 extends Report_ParentDocument2Controller
         }
         return $dataSource;
     }
-    
 }
