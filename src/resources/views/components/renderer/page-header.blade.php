@@ -13,11 +13,11 @@
                         @yield('title', 'Untitled') 
                     </x-renderer.heading>
                     @if(in_array($action,['edit']))
-                        @section('status')
+                        @hasSection('status')
                             <div class="ml-1">
                                 <x-renderer.status>@yield('status','')</x-renderer.status>
                             </div>
-                        @endsection
+                        @endif
                     @endif
                     <div class="px-2 text-black">
                         @yield('docId','')
