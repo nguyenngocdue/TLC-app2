@@ -73,7 +73,8 @@ trait TableTraitRows
                     $dataIndex = $column['dataIndex'];
                     if (str_contains($dataIndex, "()")) {
                         $fn = substr($dataIndex, 0, strlen($dataIndex) - strlen("()"));
-                        $rawData = $dataLineObj->$fn() ?? ""; //this is to execute the getCheckedByField function
+                        //<< this is to execute the getCheckedByField function
+                        $rawData = method_exists($dataLineObj, $fn) ? $dataLineObj->$fn() : "?";
                     } else {
                         $rawData = $dataLineObj->$dataIndex ?? "";
                     }
