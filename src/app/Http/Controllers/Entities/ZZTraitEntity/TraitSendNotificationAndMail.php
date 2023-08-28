@@ -47,7 +47,7 @@ trait TraitSendNotificationAndMail
                         $previousValue = $previousValue,
                         $currentValue = $currentValue,
                         $type = $this->type,
-                        $classType = $this->modelPath,
+                        $modelPath = $this->modelPath,
                         $userCurrentId = $userCurrentId,
                     ));
                 }

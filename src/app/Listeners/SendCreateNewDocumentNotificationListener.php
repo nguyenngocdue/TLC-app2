@@ -35,7 +35,7 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
     {
         $createNotification = [];
         $currentValue = $event->{'currentValue'};
-        $classType = $event->{'classType'};
+        $modelPath = $event->{'modelPath'};
         $type = $event->{'type'};
         if (!$currentValue['status']) {
             Toastr::warning('Send Notifications Warning!', 'Please check columns status or DefaultValues.json doest not exist');
