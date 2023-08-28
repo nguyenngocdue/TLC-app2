@@ -122,9 +122,10 @@ trait TraitStoreEmpty
 									break;
 									//Current time, other adding have not been implemented
 								case "picker_time":
-									$currentTime = Carbon::now(DateTimeConcern::getTz());
-									$item[$control] = $currentTime->format(Constant::FORMAT_TIME_MYSQL);
-									// $item[$control] = DateTimeConcern::formatForSaving($currentTime, Constant::FORMAT_TIME_MYSQL, Constant::FORMAT_TIME_MYSQL);
+									//The following code will get current time
+									//But in OTR it is getting the default value
+									// $currentTime = Carbon::now(DateTimeConcern::getTz());
+									// $item[$control] = $currentTime->format(Constant::FORMAT_TIME_MYSQL);
 									break;
 								case "picker_week":
 									break;
