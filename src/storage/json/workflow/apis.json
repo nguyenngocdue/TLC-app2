@@ -77,6 +77,9 @@
     "fields": {
         "name": "fields"
     },
+    "ghg_cats": {
+        "name": "ghg_cats"
+    },
     "ghg_metric_type_1s": {
         "name": "ghg_metric_type_1s",
         "storeEmpty_and_updateShort": "true"
@@ -94,7 +97,6 @@
     },
     "ghg_sheets": {
         "name": "ghg_sheets",
-        "storeEmpty_and_updateShort": "true",
         "cloneTemplate_and_updateShort": "true"
     },
     "ghg_tmpl_lines": {
@@ -276,10 +278,12 @@
         "storeEmpty_and_updateShort": "true"
     },
     "qaqc_insp_chklst_shts": {
-        "name": "qaqc_insp_chklst_shts"
+        "name": "qaqc_insp_chklst_shts",
+        "cloneTemplate_and_updateShort": "true"
     },
     "qaqc_insp_chklsts": {
-        "name": "qaqc_insp_chklsts"
+        "name": "qaqc_insp_chklsts",
+        "storeEmpty_and_updateShort": "true"
     },
     "qaqc_insp_control_groups": {
         "name": "qaqc_insp_control_groups"
