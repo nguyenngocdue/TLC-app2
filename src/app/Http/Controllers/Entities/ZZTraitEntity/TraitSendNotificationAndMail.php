@@ -47,7 +47,7 @@ trait TraitSendNotificationAndMail
                         $previousValue = $previousValue,
                         $currentValue = $currentValue,
                         $type = $this->type,
-                        $classType = $this->modelPath,
+                        $modelPath = $this->modelPath,
                         $userCurrentId = $userCurrentId,
                     ));
                 }
@@ -84,7 +84,7 @@ trait TraitSendNotificationAndMail
         }
         return $previousValue;
     }
-    private function insertLogger($currentValue, $previousValue,  $userId, $classType, $action = 'create')
+    private function insertLogger($currentValue, $previousValue,  $userId, $modelPath, $action = 'create')
     {
         $isLogger = false;
         switch ($action) {
@@ -102,7 +102,7 @@ trait TraitSendNotificationAndMail
         }
         if ($isLogger) {
             Logger::create([
-                'loggable_type' => $classType,
+                'loggable_type' => $modelPath,
                 'loggable_id' => $currentValue['id'],
                 'type' => $type,
                 'key' => $key,

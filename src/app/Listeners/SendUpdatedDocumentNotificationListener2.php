@@ -49,7 +49,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $changStatusMonitors = [];
         $previousValue = $event->{'previousValue'};
         $currentValue = $event->{'currentValue'};
-        $classType = $event->{'classType'};
+        $modelPath = $event->{'modelPath'};
         $userCurrentId = $event->{'userCurrentId'};
         if (!$currentValue['status']) {
             dump('Status NOT FOUND.');

@@ -18,7 +18,7 @@ class CreateNewDocumentEvent
      *
      * @return void
      */
-    public function __construct(public $currentValue,public $type, public $classType)
+    public function __construct(public $currentValue,public $type, public $modelPath)
     {
     }
 
