@@ -15,6 +15,7 @@
         layout="{{$layout}}" 
         topTitle="{{$topTitle}}"
         numberOfEmptyLines="{{$numberOfEmptyLines}}" 
+        :item="$item"
     />
     <x-renderer.page-break />
     @endforeach

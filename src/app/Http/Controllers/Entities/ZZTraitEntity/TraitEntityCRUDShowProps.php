@@ -14,6 +14,7 @@ trait TraitEntityCRUDShowProps
 
 		$typePlural = Str::plural($this->type);
 		$valueOptionPrint = $this->getValueOptionPrint();
+		$item = $this->data::find($id);
 		$params =  [
 			'type' => $this->type,
 			'typePlural' => $typePlural,
@@ -24,6 +25,7 @@ trait TraitEntityCRUDShowProps
 			'modelPath' => $this->data,
 			'trashed' => $trashed,
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
+			'item' => $item,
 		];
 		return view('dashboards.pages.entity-show-props', $params);
 	}

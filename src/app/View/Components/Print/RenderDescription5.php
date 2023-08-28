@@ -25,8 +25,8 @@ class RenderDescription5 extends Component
         private $control = null,
         private $label = null,
         private $printMode = null,
-    )
-    {
+        private $item = null,
+    ) {
         //
     }
 
@@ -38,8 +38,8 @@ class RenderDescription5 extends Component
     public function render()
     {
         $colSpan = $this->colSpan;
-        $valueColSpan = $this->newLine ? $this->formatColSpanByNewLine([$colSpan,$colSpan,$colSpan]) 
-        : $this->formatColSpan([24/$colSpan,24/$colSpan+1,12 - 24/$colSpan]);
+        $valueColSpan = $this->newLine ? $this->formatColSpanByNewLine([$colSpan, $colSpan, $colSpan])
+            : $this->formatColSpan([24 / $colSpan, 24 / $colSpan + 1, 12 - 24 / $colSpan]);
         $params = [
             "label" => $this->label,
             "newLine" => $this->newLine,
@@ -54,16 +54,19 @@ class RenderDescription5 extends Component
             "control" => $this->control,
             "valueColSpan" => $valueColSpan,
             "printMode" => $this->printMode,
+            "item" => $this->item,
         ];
-        return view('components.print.render-description5',$params);
+        return view('components.print.render-description5', $params);
     }
-    private function formatColSpanByNewLine(array $attributes){
-        return array_map(fn($item) => 'col-span-'.$item, $attributes);
+    private function formatColSpanByNewLine(array $attributes)
+    {
+        return array_map(fn ($item) => 'col-span-' . $item, $attributes);
     }
-    private function formatColSpan(array $attributes){
+    private function formatColSpan(array $attributes)
+    {
         foreach ($attributes as $key => &$value) {
-            if($key == 1) $value = 'col-start-'.$value;
-            else $value = 'col-span-'.$value;
+            if ($key == 1) $value = 'col-start-' . $value;
+            else $value = 'col-span-' . $value;
         }
         return $attributes;
     }

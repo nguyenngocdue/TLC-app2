@@ -58,7 +58,7 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'total_hours', 'footer' => 'agg_sum', 'no_print' => true,],
         ];
         if ($isNZ) {
-            $result[] =   ['dataIndex' => 'getWorkersOfRun()', 'cloneable' => true, 'no_print' => true,];
+            $result[] =   ['dataIndex' => 'getWorkersOfRun()', 'cloneable' => true,];
         } else {
             $result[] =  ['dataIndex' => 'worker_number_input', 'footer' => 'agg_sum',];
         }

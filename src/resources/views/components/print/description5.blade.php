@@ -2,7 +2,9 @@
     <div class='col-span-{{$colSpan}} grid gap-0'>
         <div class='grid grid-row-1'>
             <div class='grid grid-cols-12 text-right'>
-                <x-print.render-description5 newLine="{{$newLine}}" :content="$content" colSpan="{{$colSpan}}" hiddenLabel="{{$hiddenLabel}}" 
+                <x-print.render-description5 
+                newLine="{{$newLine}}" :item="$item"
+                :content="$content" colSpan="{{$colSpan}}" hiddenLabel="{{$hiddenLabel}}" 
                 type="{{$type}}" columnName="{{$columnName}}" :relationships="$relationships" numberOfEmptyLines="{{$numberOfEmptyLines}}" modelPath="{{$modelPath}}" 
                 id="{{$id}}" control="{{$control}}" label="{{$label}}" printMode="{{$printMode}}"/>
             </div>

@@ -43,7 +43,7 @@
             @break
         @case('relationship_renderer')
             <div class='p1-2  border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
-                <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} numberOfEmptyLines="{{$numberOfEmptyLines}}"/>
+                <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} :item="$item"  numberOfEmptyLines="{{$numberOfEmptyLines}}"/>
             </div>
             @break
         @default
@@ -54,7 +54,7 @@
         @switch($control)
             @case('relationship_renderer')
                         <div class='p1-2  border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
-                            <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} numberOfEmptyLines="{{$numberOfEmptyLines}}"/>
+                            <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} :item="$item" numberOfEmptyLines="{{$numberOfEmptyLines}}"/>
                         </div>
                     @break
             @default

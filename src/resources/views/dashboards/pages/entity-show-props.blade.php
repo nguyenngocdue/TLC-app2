@@ -23,6 +23,7 @@
         trashed="{{$trashed}}" 
         layout="{{$layout}}" 
         topTitle="{{$topTitle}}"
+        :item="$item"
         />
     <x-print.printed-time-zone />
 @endsection

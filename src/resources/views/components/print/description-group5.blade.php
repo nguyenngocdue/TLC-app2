@@ -44,7 +44,7 @@
             $colSpan = $prop['col_span'];
             $columnName = $prop['column_name'];
             @endphp
-                <x-print.description5 type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" numberOfEmptyLines="{{$numberOfEmptyLines}}" printMode="{{$printMode}}"/>
+                <x-print.description5 type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" :item="$item" numberOfEmptyLines="{{$numberOfEmptyLines}}" printMode="{{$printMode}}"/>
             @endforeach
         @endif
     </div>
@@ -53,7 +53,7 @@
     <div class='grid grid-cols-12'>
         @if ($propTree['children'])
             @foreach($propTree['children'] as $prop)
-            <x-print.description5 type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" numberOfEmptyLines="{{$numberOfEmptyLines}}" printMode="{{$printMode}}"/>
+            <x-print.description5 type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" :item="$item" numberOfEmptyLines="{{$numberOfEmptyLines}}" printMode="{{$printMode}}"/>
             @endforeach
         @else
             

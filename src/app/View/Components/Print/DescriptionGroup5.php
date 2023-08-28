@@ -18,6 +18,7 @@ class DescriptionGroup5 extends Component
         private $modelPath,
         private $numberOfEmptyLines = 0,
         private $printMode = null,
+        private $item = null,
     ) {
     }
 
@@ -35,6 +36,7 @@ class DescriptionGroup5 extends Component
             'modelPath' => $this->modelPath,
             'numberOfEmptyLines' => $this->numberOfEmptyLines,
             'printMode' => $this->printMode,
+            'item' => $this->item,
         ]);
     }
 }

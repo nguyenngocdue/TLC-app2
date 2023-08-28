@@ -14,8 +14,9 @@
             <x-print.letter-head5 showId={{$showId}} type={{$type}} :dataSource="$dataSource" />
             <x-renderer.heading level=3 xalign='center'>{{$topTitle}}</x-renderer.heading>
             @foreach($propsTree as $propTree)
-            <x-print.description-group5 type={{$type}} modelPath={{$modelPath}} :propTree="$propTree" :dataSource="$dataSource" numberOfEmptyLines="{{$numberOfEmptyLines}}" 
-            printMode="{{$printMode}}" />
+            <x-print.description-group5 type={{$type}} modelPath={{$modelPath}} 
+            :propTree="$propTree" :dataSource="$dataSource" :item="$item"
+            numberOfEmptyLines="{{$numberOfEmptyLines}}" printMode="{{$printMode}}" />
             @endforeach
             
             {{-- <div class="fixed top-52 right-0 no-print">
