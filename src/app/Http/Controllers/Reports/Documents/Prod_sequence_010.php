@@ -29,7 +29,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
     protected $prodRoutingId = 2;
     protected $groupByLength = 1;
     protected $groupBy = 'prod_discipline_name';
-    protected $viewName = 'document-daily-prod-routing';
+    protected $viewName = 'prod-sequence-010';
 
     // DataSource
     public function getSqlStr($params)
@@ -224,6 +224,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
             if (is_null($sql) || !$sql) return collect();
             // $sql = $this->getSql($params);
             $sqlData = DB::select(DB::raw($sql));
+            if(empty($sqlData)) continue;
             $dataSource[$k] = collect($sqlData);
         }
         return $dataSource;

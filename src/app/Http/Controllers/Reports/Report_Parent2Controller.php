@@ -163,6 +163,7 @@ abstract class Report_Parent2Controller extends Controller
     }
 
     private function isEmptyAllDataSource($dataSource){
+        // dd($dataSource);
         $isCheck = true;
         $data = $dataSource;
         if ($dataSource instanceof Collection)$data = $dataSource->toArray();
@@ -213,7 +214,6 @@ abstract class Report_Parent2Controller extends Controller
 
         $dataSource = $this->getDataSource($params);
         $dataSource = $this->changeDataSource($dataSource, $params);
-        // dd($dataSource);
 
         $isEmptyAllDataSource = $this->isEmptyAllDataSource($dataSource);
 

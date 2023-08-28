@@ -24,7 +24,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     <div class="md:px-4">
         <div style='page-break-after:always!important' class="w-[1000px] min-h-[1360px] items-center bg-white box-border p-8">
             <div class="p-10 text-center text-gray-500 ">
-                There is no item to be found from advanced filter
+                There is no item to be found from "Advanced Filter"
             </div>
         </div>
     </div>
@@ -35,6 +35,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
 </div>
 @endif
 
+{{-- @dd($tableDataSource) --}}
 {{-- RENDER WHEN THERE ARE ITEMS --}}
 @foreach($tableDataSource as $key => $data)
 @php
