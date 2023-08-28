@@ -101,6 +101,8 @@ trait TraitSendNotificationAndMail
                 break;
         }
         if ($isLogger) {
+            if(!isset($currentValue['id'])) Toastr::warning('Configuration is missing'
+            ,'Please check config prop id in workflow hidden and visible');
             Logger::create([
                 'loggable_type' => $modelPath,
                 'loggable_id' => $currentValue['id'],
