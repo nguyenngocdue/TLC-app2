@@ -124,6 +124,8 @@ trait TraitStoreEmpty
 									// $currentTime = date(Constant::FORMAT_TIME_MYSQL);
 									// $item[$control] = DateTimeConcern::formatForSaving($currentTime, Constant::FORMAT_TIME_MYSQL, Constant::FORMAT_TIME_MYSQL);
 									// break;
+								case "picker_week":
+									break;
 								default:
 									dump("Unknown how to convert $controlType 777888");
 									break;
@@ -197,7 +199,6 @@ trait TraitStoreEmpty
 			$caller = $meta['caller'] ?? "";
 			$line_or_doc = (in_array($caller, ['view-all-matrix', 'view-all-calendar'])) ? "document" : "line";
 			$message = "Created " . sizeof($theRows) . " " . Str::plural($line_or_doc, sizeof($theRows)) . ".";
-
 			return ResponseObject::responseSuccess(
 				$theRows,
 				['defaultValue' => $defaultValue, 'requestedLines' => $lines],
