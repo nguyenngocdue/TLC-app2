@@ -416,6 +416,16 @@ const onChangeDropdown4EmitChain = (listener, table01Name, rowIndex, batchLength
     getEById(id).trigger('change', { batchLength })
 }
 
+const onChangeDropdown4CountSelectedValues = (listener, name) => {
+    const { column_name } = listener
+    const count = getEById(name).val().length
+
+    const id = makeIdFrom(table01Name, column_name, rowIndex, batchLength)
+    console.log(listener, name, count, id)
+    getEById(id).val(count)
+    getEById(id).trigger('change')
+}
+
 const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownParams, name }) => {
     // const debugFlow = true
     // console.log({ fieldName, table01Name, rowIndex, lineType, batchLength, name })
@@ -455,6 +465,9 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownPara
                     break
                 case "emit_chain":
                     onChangeDropdown4EmitChain(listener, table01Name, rowIndex, batchLength)
+                    break
+                case 'count_selected_values':
+                    onChangeDropdown4CountSelectedValues(listener)
                     break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);

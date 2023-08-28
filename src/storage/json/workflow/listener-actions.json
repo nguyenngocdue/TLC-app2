@@ -18,6 +18,10 @@
         "listen_to_fields": "true",
         "listen_to_attrs": "true"
     },
+    "count_selected_values": {
+        "name": "count_selected_values",
+        "triggers": "true"
+    },
     "date_offset": {
         "name": "date_offset",
         "triggers": "true",
