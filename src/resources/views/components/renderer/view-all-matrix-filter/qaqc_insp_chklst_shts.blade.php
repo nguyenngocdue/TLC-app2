@@ -7,7 +7,7 @@
         <div class="w-full my-1 grid grid-cols-12 gap-2">
             <div class="col-span-3">
                 CheckList Type
-                <x-renderer.view-all-matrix-filter.CheckListTypeFilter 
+                <x-renderer.view-all-matrix-filter.ChecklistTypeFilter 
                     tableName="qaqc_insp_tmpls" 
                     name="qaqc_insp_tmpl_id" 
                     id="qaqc_insp_tmpl_id" 
