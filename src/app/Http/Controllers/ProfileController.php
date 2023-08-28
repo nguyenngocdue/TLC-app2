@@ -46,10 +46,11 @@ class ProfileController extends EntityCRUDController
     protected function assignDynamicTypeCreateEdit()
     {
         $this->type = 'users';
-        $this->data = Str::modelPathFrom('users');
+        $this->modelPath = Str::modelPathFrom('users');
         $this->permissionMiddleware = $this->makePermissionMiddleware('users');
     }
-    private function getViewRender(){
+    private function getViewRender()
+    {
         $id = CurrentRoute::getEntityId($this->type);
         return $id ? "profile" : "me";
     }
@@ -60,5 +61,4 @@ class ProfileController extends EntityCRUDController
         $id = $id ?? CurrentUser::id();
         return $this->edit($request, $id, $viewRender, $readOnly);
     }
-    
 }

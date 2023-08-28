@@ -56,7 +56,7 @@ trait TraitEntityCRUDCreateEdit2
 			'type' => $this->type,
 			'docId' => null,
 			'action' => __FUNCTION__,
-			'modelPath' => $this->data,
+			'modelPath' => $this->modelPath,
 			'values' => $values,
 			'dryRunToken' => null,
 			'title' => "Add New",
@@ -89,7 +89,7 @@ trait TraitEntityCRUDCreateEdit2
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');
 		$hasDocID = All_DocId::getAllEntityHasDocId($this->type);
-		$docId = $hasDocID ? Str::markDocId($this->data::find($id)) : null;
+		$docId = $hasDocID ? Str::markDocId($this->modelPath::find($id)) : null;
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
 			'item' => $original,
@@ -101,7 +101,7 @@ trait TraitEntityCRUDCreateEdit2
 			'hasStatusColumn' => $hasStatusColumn,
 			'type' => Str::plural($this->type),
 			'action' => __FUNCTION__,
-			'modelPath' => $this->data,
+			'modelPath' => $this->modelPath,
 			'title' => $this->getEditTitle(), //$title ?? "Edit",
 			'topTitle' => $this->getEditTopTitle(), //$topTitle ?? CurrentRoute::getTitleOf($this->type),
 			'listenerDataSource' => $this->renderListenDataSource($tableToLoadDataSource), // query allowed memory usage

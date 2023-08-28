@@ -59,7 +59,7 @@ trait TraitEntityDynamicType
         $singular = Str::singular($tableName);
 
         $this->type = $singular;
-        $this->data = Str::modelPathFrom($tableName);
+        $this->modelPath = Str::modelPathFrom($tableName);
         $this->permissionMiddleware = $this->makePermissionMiddleware($tableName);
         // $this->permissionMiddleware = [
         //     'read' => "read-$tableName",
@@ -116,7 +116,7 @@ trait TraitEntityDynamicType
         $singular = Str::singular($tableName);
 
         $this->type = $singular;
-        $this->data = Str::modelPathFrom($tableName);
+        $this->modelPath = Str::modelPathFrom($tableName);
         $this->permissionMiddleware = $this->makePermissionMiddleware($tableName);
         // $this->permissionMiddleware = [
         //     'read' => "read-$tableName",

@@ -15,7 +15,7 @@ trait TraitSendNotificationAndMail
 {
     private function eventCreatedNotificationAndMail($fields, $id, $status, $toastrResult)
     {
-        $modelPath = $this->data ?? $this->modelPath ?? null;
+        $modelPath = $this->modelPath ?? null;
         if (!$modelPath) return;
         if (($modelPath)::isStatusless()) return;
         if ($status && empty($toastrResult)) {
@@ -35,19 +35,19 @@ trait TraitSendNotificationAndMail
     }
     private function eventUpdatedNotificationAndMail($previousValue, $fields, $status, $toastrResult)
     {
-        if (($this->data)::isStatusless()) return;
+        if (($this->modelPath)::isStatusless()) return;
         if ($status && empty($toastrResult)) {
             try {
                 $previousValue = $this->addEntityType($previousValue, 'entity_type', $this->type);
                 $currentValue = $this->addEntityType($fields, 'entity_type',  $this->type);
                 $userCurrentId = Auth::id();
-                $this->insertLogger($currentValue, $previousValue, $userCurrentId, $this->data, 'update');
+                $this->insertLogger($currentValue, $previousValue, $userCurrentId, $this->modelPath, 'update');
                 if (!($this->ignoreSendMail())) {
                     event(new UpdatedDocumentEvent(
                         $previousValue = $previousValue,
                         $currentValue = $currentValue,
                         $type = $this->type,
-                        $classType = $this->data,
+                        $classType = $this->modelPath,
                         $userCurrentId = $userCurrentId,
                     ));
                 }

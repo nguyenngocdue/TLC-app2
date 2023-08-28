@@ -12,7 +12,7 @@ trait TraitEntityCRUDShowChklst
     use TraitGetOptionPrint;
     public function showChklst($id, $trashed)
     {
-        $entity = $trashed ? ($this->data)::withTrashed()->findOrFail($id) : ($this->data)::findOrFail($id);;
+        $entity = $trashed ? ($this->modelPath)::withTrashed()->findOrFail($id) : ($this->modelPath)::findOrFail($id);;
         $entityShts = $entity->getSheets;
         foreach ($entityShts as $value) {
             $tableDataSource[] = $this->transformDataSource($value->getLines->sortBy('order_no'), $value->getShtSigs);

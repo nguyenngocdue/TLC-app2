@@ -64,7 +64,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			$fields = $this->handleFields($request, __FUNCTION__);
-			$theRow = $this->data::create($fields);
+			$theRow = $this->modelPath::create($fields);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
 			if ($uploadedIds) {
@@ -122,7 +122,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			//Get newStatus before it get removed by handleFields
-			$theRow = $this->data::find($id);
+			$theRow = $this->modelPath::find($id);
 			$oldStatus = $theRow['status'];
 			$newStatus = $request['status'];
 			// dump($oldStatus);

@@ -13,7 +13,7 @@ trait TraitEntityCRUDShowChklstSht
 
     public function showChklstSht($id, $trashed)
     {
-        $entity = $trashed ? ($this->data)::withTrashed()->findOrFail($id) : ($this->data)::findOrFail($id);
+        $entity = $trashed ? ($this->modelPath)::withTrashed()->findOrFail($id) : ($this->modelPath)::findOrFail($id);
         $entityLines = $entity->getLines->sortBy('order_no');
         $entityShtSigs = $entity->getShtSigs;
         $tableDataSource = $this->transformDataSource($entityLines, $entityShtSigs);

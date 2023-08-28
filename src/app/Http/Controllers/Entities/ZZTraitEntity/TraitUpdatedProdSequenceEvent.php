@@ -9,6 +9,6 @@ trait TraitUpdatedProdSequenceEvent
 
     public function eventUpdatedProdSequence($id)
     {
-        if($this->type == 'prod_sequence') event(new UpdatedSequenceBaseEvent($this->data,$id));
+        if ($this->type == 'prod_sequence') event(new UpdatedSequenceBaseEvent($this->modelPath, $id));
     }
 }

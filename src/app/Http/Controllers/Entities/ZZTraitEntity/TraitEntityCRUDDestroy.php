@@ -19,7 +19,7 @@ trait TraitEntityCRUDDestroy
             $arrFail = $this->checkPermissionUsingGateForDeleteMultiple($ids, 'delete');
             // Log::info("Arr Fail " . join(",", $arrFail));
             $arrDelete = array_diff($ids, $arrFail);
-            $this->data::whereIn('id', $arrDelete)->delete();
+            $this->modelPath::whereIn('id', $arrDelete)->delete();
             return ResponseObject::responseSuccess(
                 $arrDelete,
                 [$arrFail],
@@ -39,7 +39,7 @@ trait TraitEntityCRUDDestroy
             $ids = explode(',', $strIds) ?? [];
             $arrFail = $this->checkPermissionUsingGateForDeleteMultiple($ids, 'delete', true);
             $arrRestore = array_diff($ids, $arrFail);
-            $this->data::withTrashed()->whereIn('id', $arrRestore)->restore();
+            $this->modelPath::withTrashed()->whereIn('id', $arrRestore)->restore();
             return ResponseObject::responseSuccess(
                 $arrRestore,
                 [$arrFail],

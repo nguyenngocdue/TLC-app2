@@ -32,7 +32,7 @@ class EntityCRUDController extends Controller
 	use TraitEntityDynamicType;
 
 	protected $type;
-	protected $data;
+	protected $modelPath;
 	protected $superProps;
 
 	protected $uploadService2;
@@ -58,7 +58,7 @@ class EntityCRUDController extends Controller
 
 	private function postConstruct()
 	{
-		$this->uploadService2 = new UploadService2($this->data);
+		$this->uploadService2 = new UploadService2($this->modelPath);
 		$this->superProps = SuperProps::getFor($this->type);
 	}
 

@@ -14,7 +14,7 @@ trait TraitEntityCRUDShowProps
 
 		$typePlural = Str::plural($this->type);
 		$valueOptionPrint = $this->getValueOptionPrint();
-		$item = $this->data::find($id);
+		$item = $this->modelPath::find($id);
 		$params =  [
 			'type' => $this->type,
 			'typePlural' => $typePlural,
@@ -22,7 +22,7 @@ trait TraitEntityCRUDShowProps
 			'classListOptionPrint' => ClassList::DROPDOWN,
 			'valueOptionPrint' => $valueOptionPrint,
 			'layout' => $this->getLayoutPrint($valueOptionPrint),
-			'modelPath' => $this->data,
+			'modelPath' => $this->modelPath,
 			'trashed' => $trashed,
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
 			'item' => $item,

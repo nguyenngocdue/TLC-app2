@@ -10,7 +10,7 @@ trait TraitEntityCRUDShowQRApp
 {
 	public function showQRApp($slug, $trashed)
 	{
-		$modelCurrent = new ($this->data);
+		$modelCurrent = new ($this->modelPath);
 		$dataSource = $trashed ? $modelCurrent::withTrashed()->where('slug', $slug)->first() : $modelCurrent::where('slug', $slug)->first();
 		if (!$dataSource) {
 			throw new NotFoundHttpException();
