@@ -48,6 +48,8 @@ class ViewAllTypeMatrix extends Component
                 return Blade::render("<x-renderer.view-all-matrix-type.SiteDailyAssignments/>");
             case "qaqc_insp_chklst_shts":
                 return Blade::render("<x-renderer.view-all-matrix-type.QaqcInspChklstShts/>");
+            case "qaqc_insp_chklsts":
+                return Blade::render("<x-renderer.view-all-matrix-type.QaqcInspChklsts/>");
             default:
                 return "Unknown how to render matrix view for " . $this->type . " (ViewAllTypeMatrix).";
         }
