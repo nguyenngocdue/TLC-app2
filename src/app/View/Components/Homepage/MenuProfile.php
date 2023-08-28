@@ -68,9 +68,11 @@ class MenuProfile extends Component
     public function render()
     {
         $user = CurrentUser::get();
+        $isAdmin = CurrentUser::isAdmin();
         return view('components.homepage.menu-profile', [
             'userMenu' => $this->getUserMenu(),
             'user' => $user,
+            'isAdmin' => $isAdmin,
         ]);
     }
 }
