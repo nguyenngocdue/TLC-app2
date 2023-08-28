@@ -214,7 +214,7 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex, batchLengt
     const vars = getAllVariablesFromExpression(expression)
     for (let i = 0; i < vars.length; i++) {
         const varName = vars[i]
-        if (['Math', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed'].includes(varName)) continue
+        if (['Math', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed', 'min', 'max'].includes(varName)) continue
         const varNameFull = makeIdFrom(table01Name, varName, rowIndex)
         let varValue = (getEById(varNameFull).val() || 0) + '' //<< toString
         varValue = convertStrToNumber(varValue)
@@ -363,6 +363,7 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
     const { batchLength = 1 } = dropdownParams
     // console.log("onChangeDropdown4", name, batchLength)
     const fieldName = getFieldNameInTable01FormatJS(name, table01Name)
+    // console.log(name, table01Name, fieldName)
     const { tableName } = tableObject[table01Name]
     const url = '/api/v1/entity/' + tableName + '_updateShort'
     if (saveOnChange) {
@@ -416,14 +417,15 @@ const onChangeDropdown4EmitChain = (listener, table01Name, rowIndex, batchLength
     getEById(id).trigger('change', { batchLength })
 }
 
-const onChangeDropdown4CountSelectedValues = (listener, name) => {
+const onChangeDropdown4CountSelectedValues = (listener, table01Name, rowIndex, batchLength, fieldName) => {
     const { column_name } = listener
-    const count = getEById(name).val().length
+    const idSource = makeIdFrom(table01Name, fieldName, rowIndex, batchLength)
+    const count = getEById(idSource).val().length
 
-    const id = makeIdFrom(table01Name, column_name, rowIndex, batchLength)
-    console.log(listener, name, count, id)
-    getEById(id).val(count)
-    getEById(id).trigger('change')
+    const idTarget = makeIdFrom(table01Name, column_name, rowIndex, batchLength)
+    // console.log(listener, fieldName, count, id)
+    getEById(idTarget).val(count)
+    getEById(idTarget).trigger('change')
 }
 
 const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownParams, name }) => {
@@ -435,6 +437,7 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownPara
         let listener = listenersOfDropdown4[i]
         const { triggers, listen_action, column_name } = listener
         // console.log(triggers, listen_action, name, fieldName, table01Name, rowIndex)
+        // console.log(listen_action, triggers, fieldName)
         if (triggers.includes(fieldName)) {
             // console.log("listen_action", listen_action)
             if (debugFlow) console.log(name, "-->", column_name, listen_action, table01Name + "_" + rowIndex, batchLength)
@@ -467,7 +470,7 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownPara
                     onChangeDropdown4EmitChain(listener, table01Name, rowIndex, batchLength)
                     break
                 case 'count_selected_values':
-                    onChangeDropdown4CountSelectedValues(listener)
+                    onChangeDropdown4CountSelectedValues(listener, table01Name, rowIndex, batchLength, fieldName)
                     break
                 default:
                     console.error("Unknown listen_action", listen_action, "of", name);
