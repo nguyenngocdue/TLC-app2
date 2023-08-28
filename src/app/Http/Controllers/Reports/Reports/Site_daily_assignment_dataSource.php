@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
@@ -12,6 +13,7 @@ class Site_daily_assignment_dataSource extends Controller
 
 {
     use TraitDynamicColumnsTableReport;
+    use TraitCreateSQL;
     protected $maxH = 50;
     protected $mode = '100';
     #protected $rotate45Width = 300;
@@ -19,6 +21,7 @@ class Site_daily_assignment_dataSource extends Controller
 
     public function getSqlStr($params)
     {
+        $teamSiteIds = 
         $sql = "SELECT
                     sda.id AS site_daily_assignment_id,
                     sda.site_date AS site_date,
@@ -31,23 +34,10 @@ class Site_daily_assignment_dataSource extends Controller
                     AND sda.id = sdal.site_daily_assignment_id
                     AND sda.deleted_by IS NULL
                     AND sdal.deleted_by IS NULL
-                    #AND sdal.site_daily_assignment_id = 13";
+                    #AND sdal.site_daily_assignment_id = 13"
+                    ;
+        if(isset($params['user_team_site_id'])) $sql .= "\n AND sda.site_team_id IN ('{{user_team_site_id}}')";
         return $sql;
-    }
-
-    private function getSql($params)
-    {
-        $sqlStr = $this->getSqlStr($params);
-        preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
-        foreach (last($matches) as $key => $value) {
-            if (isset($params[$value])) {
-                $valueParam =  $params[$value];
-                $searchStr = head($matches)[$key];
-                $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
-            }
-        }
-        // dd($sqlStr);
-        return $sqlStr;
     }
 
     public function getDataSource($params)

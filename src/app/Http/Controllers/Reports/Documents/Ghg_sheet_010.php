@@ -157,7 +157,6 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 			foreach (array_values($values1) as $values2) {
 				if (!isset($values2['months'])) continue;
 				$array['months'] = array_keys(reset($values2)['months']);
-				// $array['scope_rowspan_children_'.$k2] = DocumentReport::countLastItems($values2);
 			}
 			$info[$k1] = $array;
 		}

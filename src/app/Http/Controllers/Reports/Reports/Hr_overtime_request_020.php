@@ -59,7 +59,8 @@ class Hr_overtime_request_020 extends Report_ParentReportController
                 AND otr.deleted_at IS NULL
                 AND wm.deleted_at IS NULL
         ";
-        if (isset($params['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
+
+if (isset($params['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
         if ($pickerDate) {
             $fromDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 0, 10)))->format('Y-m-d');
             $toDate = DateTime::createFromFormat('d-m-Y', str_replace('/', '-', substr($pickerDate, 13, strlen($pickerDate))))->format('Y-m-d');

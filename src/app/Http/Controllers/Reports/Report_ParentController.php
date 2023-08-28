@@ -21,6 +21,7 @@ abstract class Report_ParentController extends Controller
     use TraitMenuTitle;
     use TraitParamsSettingReport;
     use TraitFunctionsReport;
+    use TraitCreateSQL;
 
     abstract protected function getSqlStr($params);
     abstract protected function getTableColumns($params, $dataSource);
@@ -37,19 +38,6 @@ abstract class Report_ParentController extends Controller
     protected $modeType = '';
     protected $viewName = '';
 
-    private function getSql($params)
-    {
-        $sqlStr = $this->getSqlStr($params);
-        preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
-        foreach (last($matches) as $key => $value) {
-            if (isset($params[$value])) {
-                $valueParam =  $params[$value];
-                $searchStr = head($matches)[$key];
-                $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
-            }
-        }
-        return $sqlStr;
-    }
 
     private function overKeyAndValueDataSource($params, $data)
     {

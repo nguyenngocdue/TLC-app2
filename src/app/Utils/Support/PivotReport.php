@@ -46,63 +46,6 @@ class PivotReport
         return $result1;
     }
 
-    private static function transferValueOfKeys($data, $columnFields, $propsColumnField)
-    {
-        // dd($propsColumnField, $columnFields);
-        $newArray = array_map(function ($item) use ($propsColumnField) {
-            $dateItems = [];
-            $dt = [];
-            foreach ($propsColumnField as $values) {
-                if (!isset($values['field_index']) || !isset($values['value_field_index']) || !isset($item[$values['field_index']])) continue;
-                try {
-                    $date = DateTime::createFromFormat('Y-m-d', $item[$values['field_index']]);
-                    $type = 'unknown';
-                    if ($date) $type = 'date';
-                    switch ($type) {
-                        case 'date':
-                            $reversedDate = $date->format('d-m-y');
-                            $_strDate = str_replace('-', '_', $reversedDate) . '_' . $values['field_index'];
-
-                            $key = str_replace(' ', '_', strtolower($item[$values['field_index']]));
-                            $dateItems[$_strDate] = array_merge($dt, [$values['value_field_index'] => $item[$values['value_field_index']]]);
-                            break;
-                        default:
-                            $key = str_replace(' ', '_', strtolower($item[$values['field_index']]));
-                            $dateItems[$values['field_index'] . '_' . $key] = $item[$values['value_field_index']];
-                            break;
-                    }
-                } catch (Exception $e) {
-                    continue;
-                    // dd($e->getMessage(), $values);
-                }
-            }
-            return $dateItems;
-        }, $data);
-
-        $newArray = self::sumItemsInArray($newArray);
-        $newArray = self::concatKeyAndValueOfArray($newArray);
-        // Check items that were duplicated in Column_Field column
-        if (self::hasDuplicates($columnFields)) {
-            $newColumnFields = self::markDuplicatesAndGroupKey($columnFields);
-            $array = [];
-            foreach ($columnFields as $field) {
-                if (isset($newColumnFields[$field])) {
-                    $duplicateItems = $newColumnFields[$field];
-                    foreach ($duplicateItems as $fieldDup) {
-                        foreach ($newArray as $key => $value) {
-                            if (str_contains($key, $field)) {
-                                $newKey = str_replace($field, $fieldDup, $key);
-                                $array[$newKey] = $value;
-                            }
-                        }
-                    }
-                }
-            }
-            return $array;
-        }
-        return $newArray;
-    }
-
     private static function transferValueOfKeys2($data, $columnFields)
     {
         // dd($columnFields, $data);
@@ -135,50 +78,26 @@ class PivotReport
             }
             return $dateItems;
         }, $data);
-        // dd($newArray);
-
-        $newArray = self::sumItemsInArray($newArray);
-        // dd($newArray);
-        $newArray = self::concatKeyAndValueOfArray($newArray);
-        // Check items that were duplicated in Column_Field column
-        // dump($columnFields);
-        // if (self::hasDuplicates2($columnFields)) {
-        //     $newColumnFields = self::markDuplicatesAndGroupKey($columnFields);
-        //     $array = [];
-        //     foreach ($columnFields as $field) {
-        //         if (isset($newColumnFields[$field])) {
-        //             $duplicateItems = $newColumnFields[$field];
-        //             foreach ($duplicateItems as $fieldDup) {
-        //                 foreach ($newArray as $key => $value) {
-        //                     if (str_contains($key, $field)) {
-        //                         $newKey = str_replace($field, $fieldDup, $key);
-        //                         $array[$newKey] = $value;
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     return $array;
-        // }
         return $newArray;
     }
 
 
-    public static function getLastArray($data, $fieldsNeedToSum = [])
+    public static function getLastArray($data, $columnFields = [])
     {
-        $outputArrays = [];
+        // dd($data, $columnFields);
+        $agg =
+            $outputArrays = [];
         foreach ($data as $key => $value) {
             if ($key === "items" && is_array($value)) {
                 //Sum the results of Value_Index_Fields that has the same value in a field
                 //Sum values before using Value Index Fields
-                // $outputArrays[] = self::sumFieldsHaveTheSameValue($value, $fieldsNeedToSum);
-                $outputArrays[] = self::sumFieldsHaveTheSameValue2($value, $fieldsNeedToSum);
+                $outputArrays[] = self::sumFieldsHaveTheSameValue($value, $columnFields);
             } elseif (is_array($value)) {
-                $nestedOutputArrays = self::getLastArray($value, $fieldsNeedToSum);
+                $nestedOutputArrays = self::getLastArray($value, $columnFields);
                 $outputArrays = array_merge($outputArrays, $nestedOutputArrays);
             }
         }
-        // dd($outputArrays);
+        // dd($data,$outputArrays);
         return $outputArrays;
     }
     public static function mergeChildrenValue($dataSource)
@@ -247,15 +166,34 @@ class PivotReport
         // dd($newArray);
         $data = [];
         foreach ($newArray as $item) {
-            foreach ($item as $key => $value) {
-                if (isset($data[$key])) {
-                    $data[$key] += $value;
-                } else {
-                    $data[$key] = $value;
+            if(is_array($item)) {
+                foreach ($item as $key => $value) {
+                    if (isset($data[$key])) {
+                        $data[$key] += $value;
+                    } else {
+                        $data[$key] = $value;
+                    }
                 }
             }
         }
-        // dd($data);
+        return $data;
+    }
+
+    private static function countItemsInArray($newArray)
+    {
+        $data = [];
+        foreach ($newArray as $item) {
+            foreach ($item as $key => $value) {
+                // dd($key);
+                if (isset($data[$key])) {
+                    $num = $data[$key][key($value)];
+                    $data[$key] = [key($value) => $num + count($value)];
+                } else {
+                    // dd($value);
+                    $data[$key] = [key($value) => count($value)];
+                }
+            }
+        }
         return $data;
     }
 
@@ -347,69 +285,36 @@ class PivotReport
             }
             if (!$found) $array[] = $item;
         }
+        // dd($array);
         return $array;
     }
 
-
-    private static function sumFieldsHaveTheSameValue2($data, $fieldsNeedToSum)
-    {
-        // dd($data);
-        $array = [];
-        $fieldIndex = $fieldsNeedToSum['field_indexes'] ?? [];
-        $fieldsNeedToSum = $fieldsNeedToSum['value_field_indexes'] ?? [];
-
-        foreach ($data as $item) {
-            $found = false;
-            foreach ($fieldsNeedToSum as $valueIndexField) {
-                if (!$valueIndexField) continue;
-                foreach ($array as  &$value) {
-                    $check = false;
-                    foreach ($fieldIndex as $field) {
-                        if (!$field || !isset($item[$field])) continue;
-                        if ($item[$field] === $value[$field]) {
-                            $check = true;
-                        }
-                    }
-                    if ($check) {
-                        $found = true;
-                        if (!isset($item[$valueIndexField])) continue;
-                        $value[$valueIndexField] += $item[$valueIndexField];
-                        break;
-                    }
-                }
-            }
-            if (!$found) $array[] = $item;
-        }
-        return $array;
-    }
-
-    public static function transferData($dataSource, $columnFields, $propsColumnField, $valueIndexFields)
-    {
-        if (empty($propsColumnField) || empty($valueIndexFields)) return $dataSource;
-        // dd($dataSource, $columnFields);
-        $data = array_map(
-            fn ($items) => array_map(
-                fn ($array) =>
-                self::transferValueOfKeys($array, $columnFields, $propsColumnField),
-                $items
-            ),
-            $dataSource
-        );
-        // dd($data);
-        return $data;
-    }
 
     public static function transferData2($dataSource, $columnFields)
     {
         $data = array_map(
             fn ($items) => array_map(
-                fn ($array) =>
-                self::transferValueOfKeys2($array, $columnFields),
-                $items
+                function($array) use ($columnFields) {
+                    $newArray = self::transferValueOfKeys2($array, $columnFields);
+                    foreach ($columnFields as $field => $valColField) {
+                        $agg = $valColField->aggregation ?? 'sum';
+                        switch ($agg) {
+                            case 'sum':
+                                $newArray = self::sumItemsInArray($newArray);
+                                break;
+                            case  'count':
+                                $newArray = self::countItemsInArray($newArray);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    $newArray = self::concatKeyAndValueOfArray($newArray);
+                    return $newArray;
+                },$items
             ),
             $dataSource
         );
-        // dd($data);
         return $data;
     }
 

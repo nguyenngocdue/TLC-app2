@@ -45,9 +45,25 @@ trait TraitChangeDataPivotTable2
         return collect($linesData);
     }
 
-    public function changeValueData($data, $isRawData)
+    private function triggerValueData($endRowField,$dataReduce,$columnFields,$linesData, $valDateInDB){
+        $href = null;
+        foreach ($columnFields as $k1 => $valColFields) {
+            if(!isset($valColFields->href_from_field)) return $href;
+            $hrefToField = $valColFields->href_from_field;      
+                $f1 = $dataReduce[$endRowField];
+                foreach ($linesData as $line){
+                    if($line->$endRowField === $f1 && $line->$k1 === $valDateInDB) {
+                        $href = route("site_daily_assignments.edit", $line->$hrefToField);
+                        break;
+                    }
+                }
+        }
+        return $href;
+    }
+
+    public function changeValueData($data, $isRawData, $linesData)
     {
-        // dd($data);
+        // dd($linesData);
         if ($isRawData) {
             $libs = LibPivotTables2::getFor($this->modeType);
             return $this->updateValueForRawData($data, $libs);
@@ -62,8 +78,10 @@ trait TraitChangeDataPivotTable2
             $datesDoWork = [];
             foreach ($data as $values) {
                 foreach ($values as $key => $value) {
+                    $endRowField = ''; // to get key of row_field for filtering cell_href
                     foreach ($rowFields as $keyField => $attrs) {
                         $indexField = $keyField;
+                        $endRowField = $keyField;
                         if (isset($attrs->column)) {
                             $indexField .= '_' . str_replace('.', '_', $attrs->column);
                         }
@@ -78,7 +96,11 @@ trait TraitChangeDataPivotTable2
                     $date = $this->retrieveDateFromString($key);
                     if ($date) {
                         $date = str_replace('-', '/', $date);
+                        $columnFields = $libs['column_fields'];
                         $titleDate = DateTime::createFromFormat('d/m/y', $date)->format('d-m-Y');
+                        $valDateInDB = DateTime::createFromFormat('d/m/y', $date)->format('Y-m-d');
+                        $href = $this->triggerValueData($endRowField,$values,$columnFields,$linesData,$valDateInDB); 
+                        $bgColor =  $href ? $bgColor.' text-blue-800 ':$bgColor;            
                         $datesDoWork[$key] = $date;
                         $isSaturdaySunDay = PivotReport::isSaturdayOrSunday($date);
                         if ($isSaturdaySunDay) {
@@ -86,18 +108,22 @@ trait TraitChangeDataPivotTable2
                                 'value' => $value,
                                 'cell_class' => $bgColor,
                                 'cell_title' => 'Date: ' . $titleDate,
+                                'cell_href' => $href,
                             ];
                         } else {
                             $values[$key] = (object) [
                                 'value' => $value,
-                                'cell_title' => 'Date: ' . $titleDate
+                                'cell_class' => $bgColor,
+                                'cell_title' => 'Date: ' . $titleDate,
+                                'cell_href' => $href,
                             ];
                         }
                     }
                 }
                 $results[] = $values;
             }
-
+            // dd($results);
+            // is Saturday Or Sunday
             foreach ($results as $key => &$values) {
                 foreach ($datesDoWork as $k => $date) {
                     $isSaturdaySunDay = PivotReport::isSaturdayOrSunday($date);

@@ -147,9 +147,9 @@
     },
     "site_daily_assignment_team_user_by_date": {
         "name": "site_daily_assignment_team_user_by_date",
-        "filters": "picker_date{ \"title\":\"Date\"};",
-        "row_fields": "site_team_id{ \"column\":\"user_team_sites.name\"}",
-        "column_fields": "site_date{ \"title\":\"Date\", \"value_index\":\"site_daily_assignment_line_user_id\" ,\r\n\"aggregation\":\"count\"\r\n}",
+        "filters": "picker_date{ \"title\":\"Date\"}; user_team_site_id{ \"title\":\"Team Site\", \"allowClear\": true, \"multiple\":true };",
+        "row_fields": "site_team_id{ \"titile\":\"Team Site\", \"column\":\"user_team_sites.name\"}",
+        "column_fields": "site_date{ \"title\":\"Date\", \"value_index\":\"site_daily_assignment_line_user_id\" , \"aggregation\":\"count\" ,\"align\":\"right\",\"href_from_field\":\"site_daily_assignment_id\" };",
         "data_fields": "site_daily_assignment_line_user_id{\"title\":\"Total\", \"aggregation\":\"sum\",\"with\":80,\"align\":\"right\"}",
         "sort_by": null
     }

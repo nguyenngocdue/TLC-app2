@@ -23,6 +23,8 @@ abstract class Report_Parent2Controller extends Controller
     use TraitParamsSettingReport;
     use TraitFunctionsReport;
     use TraitLibPivotTableDataFields2;
+    use TraitCreateSQL;
+
 
     protected $mode = '010';
     protected $maxH = null;
@@ -38,22 +40,6 @@ abstract class Report_Parent2Controller extends Controller
     public function getType()
     {
         return $this->getTable();
-    }
-
-    private function getSql($params)
-    {
-
-        $sqlStr = $this->getSqlStr($params);
-        preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
-        foreach (last($matches) as $key => $value) {
-            if (isset($params[$value])) {
-                $valueParam =  $params[$value];
-                $searchStr = head($matches)[$key];
-                $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
-            }
-        }
-        // dd($sqlStr);
-        return $sqlStr;
     }
 
     public function getDataSource($modeParams)

@@ -216,16 +216,18 @@ class PivotTableController extends Controller
         // $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $fieldsNeedToSum), $processedData));
         $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $columnFields), $processedData));
         // dd($processedData, $fieldsNeedToSum);
+        // dump($fieldsNeedToSum);
 
         // Step 3: transfer data from lines to columns by
         // Column_Fields and Value_Index_Fields array 
         $transferredData = PivotReport::transferData2($processedData, $columnFields);
-        // dd($transferredData);
+        // dd($processedData, $transferredData);
 
+        
         //Step 4: Calculate data from Data Fields columns
         //The aggregated data are at the end of the items
-        $calculatedData = PivotReportDataFields2::executeOperations($aggregations, $processedData, $keysOfRowFields);
-        // dd($calculatedData, $aggregations);
+        // dd($columnFields);
+        $calculatedData = PivotReportDataFields2::executeOperations($aggregations, $transferredData, $keysOfRowFields);
 
         $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData, $keysOfRowFields, $keysOfColumnFields);
         // dd($dataIdsOutput);
@@ -251,7 +253,7 @@ class PivotTableController extends Controller
         
         
         $dataOutput = $this->updateResultOfAggregations($keysOfColumnFields, $aggregations, $dataOutput);
-        // dd($dataOutput);
+        // dump($dataOutput);
         return $dataOutput;
     }
 

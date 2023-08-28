@@ -16,7 +16,7 @@ class PivotReportDataFields2
             foreach ($data as $key => $items) {
                 switch ($operator) {
                     case 'sum':
-                        $result = array_sum(array_column($items, $field));
+                        $result = array_sum(array_values($items));
                         break;
                     case 'concat':
                         $source = array_unique(array_column($items, $field));
@@ -26,7 +26,7 @@ class PivotReportDataFields2
                         $result = "Unknown operator '" . $operator . "'";
                         break;
                 }
-                $newData[$key][$operator . '_' . $field] = $result;
+                $newData[$key][$operator.'_'.$field] = $result;
             }
         }
         // dd($data[0], $newData);
@@ -73,8 +73,7 @@ class PivotReportDataFields2
     public static function executeOperations($dataAggregations, $data, $rowFields)
     {
         if(empty($dataAggregations)) return $data;
-        $arrayValue = array_map(fn ($items) => PivotReportDataFields2::execute($dataAggregations, $items), $data);
-
+        $arrayValue = array_map(fn ($items) => PivotReportDataFields2::execute($dataAggregations,$items), $data);
         if (!$rowFields) {
             $totalNumber = self::calculateSubArraysTotal($arrayValue);
             $updateArrayValue = self::updateSumAmount($arrayValue, $totalNumber);

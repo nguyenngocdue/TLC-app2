@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
@@ -12,6 +13,8 @@ class Hr_timesheet_line_dataSource extends Controller
 
 {
     use TraitDynamicColumnsTableReport;
+    use TraitCreateSQL;
+    
     protected $maxH = 50;
     protected $mode = '100';
     #protected $rotate45Width = 300;
@@ -77,22 +80,6 @@ class Hr_timesheet_line_dataSource extends Controller
                 ORDER BY
                     user_id";
         return $sql;
-    }
-
-    private function getSql($params)
-    {
-
-        $sqlStr = $this->getSqlStr($params);
-        preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
-        foreach (last($matches) as $key => $value) {
-            if (isset($params[$value])) {
-                $valueParam =  $params[$value];
-                $searchStr = head($matches)[$key];
-                $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
-            }
-        }
-        // dd($sqlStr);
-        return $sqlStr;
     }
 
     public function getDataSource($params)

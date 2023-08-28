@@ -113,6 +113,7 @@ class PivotTable extends Component
     {
 
         $linesData = $this->dataSource;
+        // dump($linesData);
         $params = $this->params;
         $pageLimit = $this->pageLimit;
         $modeType = $this->modeType;
@@ -134,12 +135,13 @@ class PivotTable extends Component
             $dataOutput = $dataOutput ?? $linesData;
         }
         
+        $libs = LibPivotTables2::getFor($this->modeType);
         if ($isRawData) {
-            $libs = LibPivotTables2::getFor($this->modeType);
             $tableColumns = $this->makeTableColumnsWhenRenderRawData($linesData, $libs);
             $dataOutput = $linesData;
         }
-        $dataOutput = $this->changeValueData($dataOutput, $isRawData);
+        // dump($dataOutput);
+        $dataOutput = $this->changeValueData($dataOutput, $isRawData, $linesData);
         $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
         if(!empty($this->tableColumns)) $tableColumns = $this->tableColumns;
 
