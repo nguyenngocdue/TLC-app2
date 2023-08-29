@@ -100,7 +100,6 @@ class PivotTableController extends Controller
                 }
             }
         }
-        // dd($processedData);
         return $processedData;
     }
 
@@ -201,7 +200,7 @@ class PivotTableController extends Controller
         // Step 1: reduce lines from Filters array
         $keysFilters = $this->triggerFilters($topParams, $keysOfFilters);
         $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $keysFilters);
-        // dd($dataReduce);
+        // dd($rowFields);
 
         // Step 2: group lines by Row_Fields array
         if (!count($keysOfRowFields)) {
@@ -215,8 +214,7 @@ class PivotTableController extends Controller
         
         // $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $fieldsNeedToSum), $processedData));
         $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $columnFields), $processedData));
-        // dd($processedData, $fieldsNeedToSum);
-        // dump($fieldsNeedToSum);
+        // dd($processedData);
 
         // Step 3: transfer data from lines to columns by
         // Column_Fields and Value_Index_Fields array 
@@ -234,6 +232,7 @@ class PivotTableController extends Controller
 
         $tables = $this->getDataFromTables($tableName);
         $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput, $columnFields, $rowFields);
+        // dd($dataOutput);
         $dataOutput = $this->makeTopTitle($dataOutput, $keysOfRowFields, $keysOfColumnFields);
         
         $infoColumnFields = [];
@@ -253,7 +252,6 @@ class PivotTableController extends Controller
         
         
         $dataOutput = $this->updateResultOfAggregations($keysOfColumnFields, $aggregations, $dataOutput);
-        // dump($dataOutput);
         return $dataOutput;
     }
 

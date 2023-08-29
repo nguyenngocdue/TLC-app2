@@ -88,15 +88,6 @@
         "sort_by": "user_id{\"column\":\"users.name\"};",
         "is_raw": "true"
     },
-    "datasource_site_daily_assignment": {
-        "name": "datasource_site_daily_assignment",
-        "filters": null,
-        "row_fields": "site_daily_assignment_id{ \"column\":\"site_daily_assignments.name\"}; site_daily_assignment_line_user_id{ \"column\":\"users.name\" }; site_team_id{ \"column\":\"user_team_sites.name\"}; site_date{}",
-        "column_fields": null,
-        "data_fields": null,
-        "sort_by": "user_id{\"column\":\"users.name\"};",
-        "is_raw": "true"
-    },
     "eco_labor_impact": {
         "name": "eco_labor_impact",
         "filters": null,
@@ -144,6 +135,32 @@
         "column_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\"};",
         "data_fields": "time_sheet_durations{\"title\":\"Total\", \"aggregation\":\"sum\",\"with\":80,\"align\":\"right\"}",
         "sort_by": "sub_project_id{\"column\":\"sub_projects.name\"}; user_id{\"column\":\"users.name\" };"
+    },
+    "site_daily_assignment_line": {
+        "name": "site_daily_assignment_line",
+        "filters": "picker_date{ \"title\":\"Date\"}; user_team_site_id{ \"title\":\"Team Site\", \"allowClear\": true, \"multiple\":true };",
+        "row_fields": "site_daily_assignment_id{ \"column\":\"site_daily_assignments.name\"}; site_daily_assignment_line_user_id{ \"column\":\"users.name\" }; site_team_id{ \"column\":\"user_team_sites.name\"}; site_date{}",
+        "column_fields": null,
+        "data_fields": null,
+        "sort_by": "user_id{\"column\":\"users.name\"};",
+        "is_raw": "true"
+    },
+    "site_daily_assignment_line2": {
+        "name": "site_daily_assignment_line2",
+        "filters": "picker_date{ \"title\":\"Date\"}; user_team_site_id{ \"title\":\"Team Site\", \"allowClear\": true, \"multiple\":true };",
+        "row_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\"};",
+        "column_fields": null,
+        "data_fields": null,
+        "sort_by": null,
+        "is_raw": "true"
+    },
+    "site_daily_assignment_task_user": {
+        "name": "site_daily_assignment_task_user",
+        "filters": "picker_date{ \"title\":\"Date\"}; user_team_site_id{ \"title\":\"Team Site\", \"allowClear\": true, \"multiple\":true }; prod_routing_link_id{ \"title\":\"Task\", \"allowClear\": true, \"multiple\":true }; sub_project_id{ \"title\":\"Sub Project\", \"allowClear\": true, \"multiple\":true };user_id{ \"title\":\"User\", \"allowClear\": true, \"multiple\":true };",
+        "row_fields": "site_date{\"title\":\"Date\",\"width\":70,\"align\":\"left\" };sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\"};prod_routing_link_id{\"column\":\"prod_routing_links.name\",\"width\":280,\"title\":\"Task\"};site_team_id{\"title\":\"Site Team\",\"column\":\"user_team_sites.name\",\"width\":200,\"href_from_field\":\"site_team_id\",\"route_name\":\"user_team_sites.edit\"};employeeid{ \"title\":\"Employee Id\" };user_id{\"column\":\"users.name\",\"width\":200};",
+        "column_fields": null,
+        "data_fields": null,
+        "sort_by": null
     },
     "site_daily_assignment_team_user_by_date": {
         "name": "site_daily_assignment_team_user_by_date",

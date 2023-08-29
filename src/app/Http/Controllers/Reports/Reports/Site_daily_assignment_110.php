@@ -11,7 +11,7 @@ class Site_daily_assignment_110 extends Report_Parent2Controller
     use TraitForwardModeReport;
     protected $maxH = 50;
     protected $typeView = 'report-pivot';
-    protected $modeType = 'datasource_site_daily_assignment';
+    protected $modeType = 'site_daily_assignment_line';
     protected $tableTrueWidth = true;
     protected $mode='110';
 
