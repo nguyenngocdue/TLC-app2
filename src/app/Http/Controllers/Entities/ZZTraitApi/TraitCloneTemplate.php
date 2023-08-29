@@ -23,7 +23,7 @@ trait TraitCloneTemplate
 			$insertedId = trim($artisanOutput);
 			$result = [
 				"message" => "Cloned $plural from template #$tmpl_id",
-				"result" => ['redirect_edit_href' => route($plural . '.edit', $insertedId),]
+				"result" => [['redirect_edit_href' => route($plural . '.edit', $insertedId),]]
 			];
 		}
 		return $result;
