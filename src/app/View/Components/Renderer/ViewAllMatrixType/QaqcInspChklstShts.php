@@ -15,14 +15,14 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 {
     // use TraitYAxisDiscipline;
 
-    private $qaqcInspTmpl, $subProject, $prodRouting, $prodDiscipline;
+    private $project, $qaqcInspTmpl, $subProject, $prodRouting, $prodDiscipline;
     // protected $viewportMode = null;
 
     protected $xAxis = Qaqc_insp_chklst_sht::class;
     protected $dataIndexX = "qaqc_insp_tmpl_sht_id";
     protected $yAxis = Qaqc_insp_chklst::class;
     protected $dataIndexY = "qaqc_insp_chklst_id";
-    protected $rotate45Width = 400;
+    protected $rotate45Width = 300;
     protected $tableTrueWidth = true;
     protected $headerTop = 20;
     protected $groupBy = null;
@@ -36,23 +36,23 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     public function __construct()
     {
         parent::__construct();
-        [$this->qaqcInspTmpl, $this->subProject, $this->prodRouting, $this->prodDiscipline] = $this->getUserSettings();
+        [$this->project, $this->qaqcInspTmpl, $this->subProject, $this->prodRouting, $this->prodDiscipline] = $this->getUserSettings();
+        $this->project = $this->project ? $this->project : 5;
         $this->qaqcInspTmpl = $this->qaqcInspTmpl ? $this->qaqcInspTmpl : 5;
         $this->subProject = $this->subProject ? $this->subProject : 21;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
-        // $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
-        // dump($this->qaqcInspTmpl, $this->subProject, $this->prodRouting);
     }
 
     private function getUserSettings()
     {
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
+        $project = $settings[$type][Constant::VIEW_ALL]['matrix']['project_id'] ?? null;
         $qaqcInspTmpl = $settings[$type][Constant::VIEW_ALL]['matrix']['qaqc_insp_tmpl_id'] ?? null;
         $subProject = $settings[$type][Constant::VIEW_ALL]['matrix']['sub_project_id'] ?? null;
         $prodRouting = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] ?? null;
         $prodDiscipline = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_discipline_id'] ?? null;
-        return [$qaqcInspTmpl, $subProject, $prodRouting, $prodDiscipline];
+        return [$project, $qaqcInspTmpl, $subProject, $prodRouting, $prodDiscipline];
     }
 
     public function getYAxis()
@@ -93,7 +93,9 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 
     public function getMatrixDataSource($xAxis)
     {
-        $result = Qaqc_insp_chklst_sht::query()->get();
+        $result = Qaqc_insp_chklst_sht::query()
+            // ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmpl)
+            ->get();
         // dump($result);
         return $result;
     }
@@ -101,6 +103,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected function getViewportParams()
     {
         return [
+            'project_id' => $this->project,
             'qaqc_insp_tmpl_id' => $this->qaqcInspTmpl,
             'sub_project_id' => $this->subProject,
             'prod_routing_id' => $this->prodRouting,
@@ -132,9 +135,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     {
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
-        Log::info($y);
         $result = [
-            'compliance_name' => $y->getProdOrder->compliance_name,
+            'compliance_name' => $y->getProdOrder->compliance_name ?: "",
             'progress' => $y->progress ?: 0,
         ];
 

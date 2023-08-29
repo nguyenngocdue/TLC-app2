@@ -26,6 +26,7 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
     protected $tableTrueWidth = true;
     protected $headerTop = 20;
     protected $groupBy = null;
+    protected $apiCallback = "()=>location.reload()";
     // protected $mode = 'status_only';
     /**
      * Create a new component instance.

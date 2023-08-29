@@ -36,6 +36,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $showLegend = true;
     protected $tableTopCenterControl = "";
     protected $checkboxCaptionColumn = null;
+    protected $apiCallback = 'null'; //<<JS String
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -221,7 +222,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         $dataSource = $this->reIndexDataSource($dataSource);
         $result = [];
-        $routeCreate = route($this->type . '.' . $this->apiToCallWhenCreateNew);
+        $api_url = route($this->type . '.' . $this->apiToCallWhenCreateNew);
         $extraColumns = $this->getXAxisExtraColumns();
 
         foreach ($yAxis as $y) {
@@ -236,19 +237,20 @@ abstract class ViewAllTypeMatrixParent extends Component
             ];
             if ($this->allowCreation) {
                 $meta['caller'] = 'view-all-matrix';
-                $metaStr = json_encode($meta);
+                $api_meta = json_encode($meta);
                 foreach ($xAxis as $x) {
                     if (isset($x['isExtra']) && $x['isExtra']) continue;
                     $xId = $x['dataIndex'];
                     $xClass = $x['column_class'] ?? "";
-                    $paramStr = $this->getCreateNewParams($x, $y);
-                    // dump($paramStr);
-                    $paramStr = (json_encode($paramStr));
+                    $api_params = $this->getCreateNewParams($x, $y);
+                    // dump($api_params);
+                    $api_params = (json_encode($api_params));
+                    $api_callback = $this->apiCallback;
                     // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
                     $api = "callApi" . ucfirst($this->apiToCallWhenCreateNew);
                     $line[$xId] = (object)[
                         'value' => '<i class="fa-duotone fa-circle-plus"></i>',
-                        'cell_href' => 'javascript:' . $api . '("' . $routeCreate . '",[' . $paramStr . '], ' . $metaStr . ')',
+                        'cell_href' => 'javascript:' . $api . '("' . $api_url . '",[' . $api_params . '], ' . $api_meta . ', ' . $api_callback . ')',
                         'cell_class' => "text-center text-blue-800 $xClass",
                         'cell_title' => "Create a new document",
                         'cell_onclick' => "$(this).hide()",

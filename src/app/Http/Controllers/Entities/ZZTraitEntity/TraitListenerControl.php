@@ -27,14 +27,21 @@ trait TraitListenerControl
     public function getListenersOfDropdown2()
     {
         $a = $this->getListeners2($this->typeToLoadListener);
+        // dump($a);
         $columnName = $this->id ?? $this->name;
-        // Log::info($columnName);
+        // dump($columnName);
         $suffix = $this->getSuffix();
-        $a = array_values(array_filter($a, fn ($x) => ($x['column_name'] . $suffix) == $columnName));
+        // dump($suffix);
+        $a = array_filter($a, fn ($x) => ($x['column_name'] . $suffix) == $columnName);
+        // dump($a);
+        $a = array_values($a);
+        // dump($a);
         if (!isset($a[0])) {
+            // dump("A");
             // throw new \Exception("Can not find control with column_name as [" . $columnName . "], maybe you forget getSuffix() function.");
             //<<This cause WIR View All Matrix crashes
         } else {
+            // dump("B");
             $a = $a[0];
 
             if ($suffix) {
