@@ -99,21 +99,20 @@ trait TraitChangeDataPivotTable2
                         $columnFields = $libs['column_fields'];
                         $titleDate = DateTime::createFromFormat('d/m/y', $date)->format('d-m-Y');
                         $valDateInDB = DateTime::createFromFormat('d/m/y', $date)->format('Y-m-d');
-                        $href = $this->triggerValueData($endRowField,$values,$columnFields,$linesData,$valDateInDB); 
-                        $bgColor =  $href ? $bgColor.' text-blue-800 ':$bgColor;            
+                        $href = $this->triggerValueData($endRowField,$values,$columnFields,$linesData,$valDateInDB);            
                         $datesDoWork[$key] = $date;
                         $isSaturdaySunDay = PivotReport::isSaturdayOrSunday($date);
                         if ($isSaturdaySunDay) {
                             $values[$key] = (object) [
                                 'value' => $value,
-                                'cell_class' => $bgColor,
+                                'cell_class' => $href ? $bgColor.' text-blue-800 ':$bgColor,
                                 'cell_title' => 'Date: ' . $titleDate,
                                 'cell_href' => $href,
                             ];
                         } else {
                             $values[$key] = (object) [
                                 'value' => $value,
-                                'cell_class' => $bgColor,
+                                'cell_class' =>  $href ? 'text-blue-800': '',
                                 'cell_title' => 'Date: ' . $titleDate,
                                 'cell_href' => $href,
                             ];
