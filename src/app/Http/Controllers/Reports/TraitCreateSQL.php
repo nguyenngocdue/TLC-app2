@@ -17,7 +17,6 @@ trait TraitCreateSQL
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
         }
-        // dd($sqlStr);
         return $sqlStr;
     }
 }

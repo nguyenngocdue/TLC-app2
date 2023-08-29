@@ -211,7 +211,7 @@ class PivotTableController extends Controller
         }
 
         //Remove all array keys by looping through all elements
-        $fieldsNeedToSum = $this->getFieldNeedToSum($columnFields);
+        // $fieldsNeedToSum = $this->getFieldNeedToSum($columnFields);
         
         // $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $fieldsNeedToSum), $processedData));
         $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $columnFields), $processedData));

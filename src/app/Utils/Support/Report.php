@@ -159,6 +159,7 @@ class Report
     {
         $strDate = str_replace(['-', '_'], '/', $strDate);
         $dateTime = DateTime::createFromFormat('d/m/Y', $strDate);
+        // dd($strDate, $dateTime);
         if (!$dateTime) return false;
         if ($dateTime) {
             return $dateTime->format($typeFormat);

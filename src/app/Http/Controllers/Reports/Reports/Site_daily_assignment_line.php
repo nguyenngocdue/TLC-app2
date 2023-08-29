@@ -9,7 +9,7 @@ use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
-class Site_daily_assignment_dataSource extends Controller
+class Site_daily_assignment_line extends Controller
 
 {
     use TraitDynamicColumnsTableReport;
@@ -21,6 +21,9 @@ class Site_daily_assignment_dataSource extends Controller
 
     public function getSqlStr($params)
     {
+        $dates = Report::explodePickerDate($params['picker_date']);
+        [$startDate, $endDate] = array_map(fn($item) => Report::formatDateString($item), $dates);
+        
         $sql = "SELECT
                     sda.id AS site_daily_assignment_id,
                     sda.site_date AS site_date,
@@ -35,7 +38,9 @@ class Site_daily_assignment_dataSource extends Controller
                     AND sdal.deleted_by IS NULL
                     #AND sdal.site_daily_assignment_id = 13"
                     ;
-        if(isset($params['user_team_site_id'])) $sql .= "\n AND sda.site_team_id IN ('{{user_team_site_id}}')";
+        if(isset($params['user_team_site_id'])) $sql .= "\n AND sda.site_team_id IN ({{user_team_site_id}})";
+        if($startDate) $sql .= "\n AND sda.site_date >= '$startDate'";
+        if($endDate) $sql .= "\n AND sda.site_date <= '$endDate'";
         return $sql;
     }
 

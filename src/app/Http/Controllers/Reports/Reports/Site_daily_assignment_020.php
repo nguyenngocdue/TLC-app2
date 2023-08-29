@@ -4,16 +4,15 @@ namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use App\Utils\Support\Report;
 
-class Site_daily_assignment_010 extends Report_ParentReport2Controller
+class Site_daily_assignment_020 extends Report_ParentReport2Controller
 {
     use TraitForwardModeReport;
     protected $maxH = 50;
     protected $typeView = 'report-pivot';
     protected $modeType = 'site_daily_assignment_team_user_by_date';
     protected $tableTrueWidth = false;
-    protected $mode='010';
+    protected $mode='020';
 
     public function getDataSource($params)
     {
