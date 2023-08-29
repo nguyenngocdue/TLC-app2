@@ -22,7 +22,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected $dataIndexX = "qaqc_insp_tmpl_sht_id";
     protected $yAxis = Qaqc_insp_chklst::class;
     protected $dataIndexY = "qaqc_insp_chklst_id";
-    protected $rotate45Width = 400;
+    protected $rotate45Width = 300;
     protected $tableTrueWidth = true;
     protected $headerTop = 20;
     protected $groupBy = null;
@@ -132,7 +132,6 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     {
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
-        Log::info($y);
         $result = [
             'compliance_name' => $y->getProdOrder->compliance_name,
             'progress' => $y->progress ?: 0,
