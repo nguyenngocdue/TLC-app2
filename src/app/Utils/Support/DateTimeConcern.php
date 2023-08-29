@@ -20,7 +20,11 @@ class DateTimeConcern
     {
         //Deal with old()
         if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
-        return Carbon::createFromFormat($formatFrom, $value)->format($formatTo);
+        $value0 = Carbon::createFromFormat($formatFrom, $value);
+        if ($formatFrom == Constant::FORMAT_MONTH) {
+            $value0->day = 1;
+        }
+        return $value0->format($formatTo);
     }
     public static function formatForLoading($value, $formatFrom, $formatTo)
     {

@@ -99,18 +99,13 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
-		// dd(SuperProps::getFor($this->type));
-		// dump($this->type);
-		// dd($request->input('saveAndClose'));
-		// dump($request->files);
-		// dd();
-		// if ($request['tableNames'] == 'fakeRequest') {
+		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
+		// if (!$isFakeRequest) {
 		// 	dump($request->input());
 		// }
 		$this->updateUserSettings($request);
 		$this->reArrangeComments($request);
 
-		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
 			$props = $this->getProps1();
@@ -151,6 +146,10 @@ trait TraitEntityCRUDStoreUpdate2
 
 			$request->validate($rules, ["date_format" => "The :attribute must be correct datetime format."]);
 			$this->postValidationForDateTime($request, $props);
+			// if (!$isFakeRequest) {
+			// 	dump($request->input());
+			// 	dd();
+			// }
 		} catch (ValidationException $e) {
 			if ($isFakeRequest) {
 				$newValidation = $this->createTableValidator($e, $request);
