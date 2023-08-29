@@ -19,11 +19,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-
 trait TraitStoreEmpty
 {
 	use TraitSendNotificationAndMail;
 	use TraitEntityFieldHandler2;
+	use TraitFailObject;
 
 	private function getModelButNeedToHaveAMoreDecentWay($fieldName, $sp)
 	{
@@ -208,12 +208,7 @@ trait TraitStoreEmpty
 				$message,
 			);
 		} catch (\Throwable $th) {
-			$message = $th->getMessage();
-			if (str_contains($message, 'Integrity constraint violation: 1062 Duplicate entry'))
-				$message = "This document is exist, please refresh the page to load the latest matrix.";
-			return ResponseObject::responseFail(
-				$message,
-			);
+			return $this->getFailObject($th);
 		}
 	}
 }
