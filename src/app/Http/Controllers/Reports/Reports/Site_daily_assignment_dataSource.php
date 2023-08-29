@@ -21,7 +21,6 @@ class Site_daily_assignment_dataSource extends Controller
 
     public function getSqlStr($params)
     {
-        $teamSiteIds = 
         $sql = "SELECT
                     sda.id AS site_daily_assignment_id,
                     sda.site_date AS site_date,
