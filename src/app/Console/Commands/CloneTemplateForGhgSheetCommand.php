@@ -6,7 +6,6 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Models\Ghg_sheet;
 use App\Models\Ghg_sheet_line;
 use App\Models\Ghg_tmpl;
-use App\Utils\Constant;
 use App\View\Components\Formula\All_SlugifyByName;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -86,7 +85,7 @@ class CloneTemplateForGhgSheetCommand extends Command
             return Command::SUCCESS;
         } catch (\Throwable $th) {
 
-            $this->error($th->getMessage());
+            $this->info($th->getMessage());
             // $this->error($th->getMessage());
             return Command::FAILURE;
         }
