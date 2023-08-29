@@ -24,7 +24,7 @@ class ChecklistTypeFilter extends Component
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $readOnly = false,
         private $allowClear = false,
-        // private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
+        private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
     ) {
         // if (old($name)) $this->selected = old($name);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
@@ -32,10 +32,14 @@ class ChecklistTypeFilter extends Component
 
     private function getDataSource()
     {
-        return Qaqc_insp_tmpl::select('id', 'name', 'description')
-            // ->whereIn('status', ['manufacturing', 'construction_site'])
+        $db = Qaqc_insp_tmpl::select('id', 'name', 'description')
             ->orderBy('name')
             ->get();
+        foreach ($db as &$line) {
+            $fn = "getProdRoutingsOfInspTmpl()";
+            $line->{$fn} = $line->getProdRoutingsOfInspTmpl()->pluck('id');
+        }
+        return $db;
     }
 
     /**

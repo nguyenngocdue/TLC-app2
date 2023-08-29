@@ -811,6 +811,22 @@
         "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-person-walking\"><\/i>"
     },
+    "listener_config": {
+        "name": "listener_config",
+        "package_tab": "manage_admin",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Listener Configs",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-ear\"><\/i>",
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "manageApis": {
         "name": "manageApis",
         "package_tab": "application",

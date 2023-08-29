@@ -212,15 +212,6 @@ trait TraitEntityListenDataSource
             } else {
                 $result[$table] = $this->mapGetNameForNameless($table, $columnsWithoutOracy);
             }
-
-            // switch ($table) {
-            //     case "hr_timesheet_lines":
-            //         $result[$table] = $this->mapIdForNameless($table, $columnsWithoutOracy);
-            //         break;
-            //     default:
-            //         $result[$table] = $this->mapGetNameForNameless($table, $columnsWithoutOracy);
-            //         break;
-            // }
         }
 
         $this->dump2("columnsWithOracy", $columnsWithOracy, __LINE__);
@@ -251,7 +242,8 @@ trait TraitEntityListenDataSource
     private function getListeners2($type)
     {
         $sp = SuperProps::getFor($type);
-        $result = array_values(Listeners::getAllOf($type));
+        $result = Listeners::getAllOf($type);
+        $result = array_values($result);
         foreach ($result as &$line) {
             $relationships = $sp['props']["_" . $line['column_name']]['relationships'];
             unset($line['name']);
