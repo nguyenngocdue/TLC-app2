@@ -27,6 +27,8 @@ return new class extends Migration
             $table->double("total")->nullable();
             $table->unsignedBigInteger('ghg_tmpl_id')->nullable();
             $table->appendCommonFields();
+
+            $table->unique(['ghg_month', 'ghg_tmpl_id']);
         });
     }
 
