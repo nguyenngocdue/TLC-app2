@@ -293,7 +293,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 "width" => 60,
             ],
             [
-                "title" => "Disciplinary / Violations",
+                "title" => "Disciplinary/Violations",
                 "dataIndex" => "discipline",
                 "align" => "right",
                 "width" => 60,

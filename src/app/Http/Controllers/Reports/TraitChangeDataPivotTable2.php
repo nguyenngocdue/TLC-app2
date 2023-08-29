@@ -45,7 +45,7 @@ trait TraitChangeDataPivotTable2
         return collect($linesData);
     }
 
-    private function triggerValueData($endRowField,$dataReduce,$columnFields,$linesData, $valDateInDB){
+    private function makeHrefForColumnFields($endRowField,$dataReduce,$columnFields,$linesData, $valDateInDB){
         $href = null;
         foreach ($columnFields as $k1 => $valColFields) {
             if(!isset($valColFields->href_from_field)) return $href;
@@ -53,7 +53,7 @@ trait TraitChangeDataPivotTable2
                 $f1 = $dataReduce[$endRowField];
                 foreach ($linesData as $line){
                     if($line->$endRowField === $f1 && $line->$k1 === $valDateInDB) {
-                        $href = route("site_daily_assignments.edit", $line->$hrefToField);
+                        $href = route($valColFields->route_name, $line->$hrefToField);
                         break;
                     }
                 }
@@ -61,9 +61,14 @@ trait TraitChangeDataPivotTable2
         return $href;
     }
 
+    private function makeHrefForRowFields($indexRowField, $values){
+        if(isset($indexRowField->href_from_field) && isset($indexRowField->route_name)){
+            return route($indexRowField->route_name,$values[$indexRowField->href_from_field]);
+        }
+    }
+
     public function changeValueData($data, $isRawData, $linesData)
     {
-        // dd($linesData);
         if ($isRawData) {
             $libs = LibPivotTables2::getFor($this->modeType);
             return $this->updateValueForRawData($data, $libs);
@@ -86,10 +91,12 @@ trait TraitChangeDataPivotTable2
                             $indexField .= '_' . str_replace('.', '_', $attrs->column);
                         }
                         if ($key === $indexField) {
-
+                            $href = $this->makeHrefForRowFields($rowFields[$keyField], $values);    
                             $values[$key] = (object) [
                                 'value' => $value,
                                 'cell_title' =>  in_array($keyField, $fieldsUnShowTitle) ? '' : 'ID: ' . (string)$values[$keyField],
+                                'cell_class' => $href ? ' text-blue-800 ':'',
+                                'cell_href' => $href
                             ];
                         }
                     }
@@ -99,7 +106,7 @@ trait TraitChangeDataPivotTable2
                         $columnFields = $libs['column_fields'];
                         $titleDate = DateTime::createFromFormat('d/m/y', $date)->format('d-m-Y');
                         $valDateInDB = DateTime::createFromFormat('d/m/y', $date)->format('Y-m-d');
-                        $href = $this->triggerValueData($endRowField,$values,$columnFields,$linesData,$valDateInDB);            
+                        $href = $this->makeHrefForColumnFields($endRowField,$values,$columnFields,$linesData,$valDateInDB);            
                         $datesDoWork[$key] = $date;
                         $isSaturdaySunDay = PivotReport::isSaturdayOrSunday($date);
                         if ($isSaturdaySunDay) {
@@ -138,6 +145,7 @@ trait TraitChangeDataPivotTable2
             }
             return collect($results);
         }
+        // dd($data);
         return $data;
     }
 }

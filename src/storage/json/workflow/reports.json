@@ -102,7 +102,7 @@
         "package_tab": "report",
         "package": "hr_&_admin",
         "top_title": null,
-        "title": "Timesheet Lines DataSource"
+        "title": "Timesheet Lines"
     },
     "report-hse_incident_report_010": {
         "name": "report-hse_incident_report_010",
@@ -116,13 +116,20 @@
         "package_tab": "report",
         "package": "project_management",
         "top_title": "Site Daily Assignment",
-        "title": "Team\/Date"
+        "title": "Site Team\/Date"
+    },
+    "report-site_daily_assignment_020": {
+        "name": "report-site_daily_assignment_020",
+        "package_tab": "report",
+        "package": null,
+        "top_title": null,
+        "title": null
     },
     "report-site_daily_assignment_110": {
         "name": "report-site_daily_assignment_110",
         "package_tab": "report",
         "package": "project_management",
         "top_title": "Site Daily Assignment",
-        "title": "Site Daily Assignment DataSource"
+        "title": "Site Daily Assignment Line"
     }
 }

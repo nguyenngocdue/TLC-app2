@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\Report;
 
 use App\Http\Controllers\Reports\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\Workflow\LibPivotTables2;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\Report;
 use App\Utils\Support\PivotReport;
 use DateTime;
@@ -38,17 +39,28 @@ trait  PivotReportColumn2
         return preg_replace($pattern, "", $title);
     }
 
-    protected function editRowHeaderColumnFields($fieldGroups, $keysOfColumnFields, $topTitleColumns)
+    protected function editRowHeaderColumnFields($fieldGroups, $keysOfColumnFields, $topTitleColumns, $columnFields)
     {
         $array = [];
         foreach ($fieldGroups as $key => $fields) {
             if ($key !== 'other') {
-                foreach ($fields as  $field) {
-                    $thirdUnderscore = PivotReport::findPosition($field, '_', 3);
-                    if ($thirdUnderscore) {
-                        $date = Report::formatDateString(substr($field, 0, $thirdUnderscore - 1), 'd/m/y');
-                        if ($date) $array[$field] = str_replace('/', '<br/>', $date);
+                foreach ($columnFields as $field => $valColFields){
+                    $typeRender = $valColFields->top_header ?? 'type_1';
+                    foreach ($fields as  $field) {
+                        $thirdUnderscore = PivotReport::findPosition($field, '_', 3);
+                        if ($thirdUnderscore) {
+                            if($typeRender === 'type_2') {
+                                $date = Report::formatDateString(substr($field, 0, $thirdUnderscore - 1), 'd/m/Y');
+                                $dayOfWeek = DateReport::getShortDayOfWeek($date);
+                                $array[$field] = "<div class='text-gray-700 dark:text-gray-300'><span>$date<br>$dayOfWeek</span></div>";
+
+                            } else {
+                                $date = Report::formatDateString(substr($field, 0, $thirdUnderscore - 1), 'd/m/y');
+                                if ($date) $array[$field] = str_replace('/', '<br/>', $date);
+                            }
+                        }
                     }
+                    
                 }
             } else {
                 foreach ($fields as $field) {
@@ -65,7 +77,6 @@ trait  PivotReportColumn2
                 }
             }
         };
-        // dd($array);
         return $array;
     }
 
@@ -214,7 +225,7 @@ trait  PivotReportColumn2
         $columnsOfColumnFields = [];
         // dd($linesData);
         if ($rowFields) {
-            $tableDataHeader = $this->editRowHeaderColumnFields($fields, $keysOfColumnFields, $topTitleColumns);
+            $tableDataHeader = $this->editRowHeaderColumnFields($fields, $keysOfColumnFields, $topTitleColumns, $columnFields);
             array_walk(
                 $fields,
                 function ($items, $key) use (&$columnsOfColumnFields, $columnFields, $tableDataHeader) {
