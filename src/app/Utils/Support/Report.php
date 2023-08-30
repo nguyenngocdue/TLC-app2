@@ -147,11 +147,15 @@ class Report
         return $newArray;
     }
 
-    public static function explodePickerDate($pickerDate)
+    public static function explodePickerDate($pickerDate, $type='d/m/Y')
     {
         $pickerDate = array_map(fn ($item) => trim($item), explode('-', $pickerDate));
         $startDate = $pickerDate[0] ?? '01/01/2021';
         $endDate = $pickerDate[1] ?? '01/02/2021';
+        if($type === 'Y-m-d'){
+            $startDate = Report::formatDateString($startDate, 'Y-m-d');
+            $endDate = Report::formatDateString($endDate, 'Y-m-d');
+        }
         return [$startDate, $endDate];
     }
 

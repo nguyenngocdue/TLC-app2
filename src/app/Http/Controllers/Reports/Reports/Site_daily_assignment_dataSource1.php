@@ -18,9 +18,8 @@ class Site_daily_assignment_dataSource1 extends Controller
 
     public function getSqlStr($params)
     {
-        $dates = Report::explodePickerDate($params['picker_date']);
-        [$startDate, $endDate] = array_map(fn($item) => Report::formatDateString($item), $dates);
-        
+        $pickerDate = $params['picker_date'] ?? PivotReport::defaultPickerDate();
+        [$startDate, $endDate] = Report::explodePickerDate($pickerDate, 'Y-m-d');
         $sql = "SELECT
                     sda.id AS site_daily_assignment_id,
                     sda.site_date AS site_date,
