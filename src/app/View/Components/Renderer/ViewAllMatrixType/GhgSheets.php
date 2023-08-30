@@ -86,7 +86,7 @@ class GhgSheets extends ViewAllTypeMatrixParent
     protected function getRightMetaColumns()
     {
         return [
-            ['dataIndex' => 'ytd', 'title' => 'YTD', "align" => "center", 'width' => 100,],
+            ['dataIndex' => 'ytd', 'title' => 'YTD', "align" => "right", 'width' => 100,],
         ];
     }
 
@@ -101,8 +101,8 @@ class GhgSheets extends ViewAllTypeMatrixParent
         }
         return [
             'ytd' => (object) [
-                'value' => $ytd,
-                'cell_class' => "bg-text-400",
+                'value' => number_format($ytd, 2),
+                'cell_class' => "bg-text-400 text-right1",
             ],
         ];
     }

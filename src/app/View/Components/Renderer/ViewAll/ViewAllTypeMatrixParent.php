@@ -111,6 +111,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             return $value;
         }
         $value = $document->{$this->attOfCellToRender};
+        if (is_numeric($value)) $value = number_format($value, 2);
         // dump($value);
         return $value ? $value : '';
     }

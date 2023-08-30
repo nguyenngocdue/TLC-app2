@@ -20,7 +20,18 @@ class DateTimeConcern
     {
         //Deal with old()
         if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
-        return Carbon::createFromFormat($formatFrom, $value)->format($formatTo);
+        // dump($value);
+        if ($formatFrom == Constant::FORMAT_MONTH) {
+            $value = '01/' . $value; //<< This will prevent 29/02, 30/02, 31/02 -> 01/03, 02/03, 03/03
+            $value0 = Carbon::createFromFormat(Constant::FORMAT_DATE_ASIAN, $value);
+        } else {
+            $value0 = Carbon::createFromFormat($formatFrom, $value);
+        }
+        // dump($value0->format('Y-m-d'));
+        // if ($formatFrom == Constant::FORMAT_MONTH) {
+        //     $value0->day = 1;
+        // }
+        return $value0->format($formatTo);
     }
     public static function formatForLoading($value, $formatFrom, $formatTo)
     {
