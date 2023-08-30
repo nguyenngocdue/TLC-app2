@@ -15,18 +15,19 @@ class Site_daily_assignment_dataSource2 extends Controller
     use TraitDynamicColumnsTableReport;
     use TraitCreateSQL;
     protected $maxH = 50;
-    protected $mode = '100';
-    #protected $rotate45Width = 300;
-    protected $libPivotFilters;
 
     public function getSqlStr($params)
     {
         $dates = Report::explodePickerDate($params['picker_date']);
         [$startDate, $endDate] = array_map(fn ($item) => Report::formatDateString($item), $dates);
-        $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ? implode(',', $params['prod_routing_link_id']) : '';
-        $subProjectIds = isset($params['sub_project_id']) ? implode(',', $params['sub_project_id']) : '';
-        $userIds = isset($params['user_id']) ? implode(',', $params['user_id']) : '';
-        // dump($prodRoutingLinkId);
+        $valOfParams = Report::createValueForParams([
+            'prod_routing_id',
+            'prod_routing_link_id',
+            'sub_project_id',
+            'user_id'
+        ], $params);
+
+        // dump($valOfParams);
         $sql = "SELECT
                         sda.site_date AS site_date,
                         sdal.sub_project_id AS sub_project_id,
@@ -34,6 +35,7 @@ class Site_daily_assignment_dataSource2 extends Controller
                         sdal.id AS site_daily_assignment_line_id,
                         mtm_sdal.prod_routing_link_id AS prod_routing_link_id,
                         sda.site_team_id AS site_team_id,
+                        pr.id AS prod_routing_id,
                         sdal.user_id AS user_id,
                         sdal.employeeid AS employeeid
                         FROM site_daily_assignments sda, site_daily_assignment_lines sdal
@@ -45,13 +47,16 @@ class Site_daily_assignment_dataSource2 extends Controller
                                         AND mtm.doc_type = 'App\\\Models\\\Site_daily_assignment_line'
                                         AND mtm.term_type = 'App\\\Models\\\Prod_routing_link'
                                         ) mtm_sdal ON mtm_sdal.site_daily_assignment_line_id = sdal.id
+                        LEFT JOIN prod_routing_details  prd ON prd.prod_routing_link_id = mtm_sdal.prod_routing_link_id
+                        LEFT JOIN prod_routings pr ON pr.id = prd.prod_routing_id
                         WHERE 1 = 1
                         AND sda.id = sdal.site_daily_assignment_id
                         AND sda.deleted_by IS NULL
                         AND sdal.deleted_by IS NULL";
-        if($subProjectIds) $sql .= "\n AND sdal.sub_project_id IN ($subProjectIds)";
-        if($userIds) $sql .= "\n AND sdal.user_id IN ($userIds)";
-        if ($prodRoutingLinkIds) $sql .= "\n AND mtm_sdal.prod_routing_link_id IN ($prodRoutingLinkIds)
+        if($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
+        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND sdal.sub_project_id IN ($sub)";
+        if ($us = $valOfParams['user_id']) $sql .= "\n AND sdal.user_id IN ($us)";
+        if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND mtm_sdal.prod_routing_link_id IN ($prl)
                                              AND mtm_sdal.prod_routing_link_id IS NOT NULL";
         if (isset($params['user_team_site_id'])) $sql .= "\n AND sda.site_team_id IN ({{user_team_site_id}})";
         if ($startDate) $sql .= "\n AND sda.site_date >= '$startDate'";

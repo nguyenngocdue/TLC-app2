@@ -11,6 +11,8 @@ class ParamProdRoutingLinkId extends ParentParamReports
     // protected $referData1 = 'prod_discipline_id';
     protected function getDataSource()
     {
+        $hasListenTo = $this->hasListenTo();
+        // dump($hasListenTo);
         $prodRoutingLinks = Prod_routing_link::whereNull('deleted_by')->get();
         $result = [];
         foreach ($prodRoutingLinks as $routing){
@@ -19,10 +21,11 @@ class ParamProdRoutingLinkId extends ParentParamReports
             $array = (object)[];
             $array->id = $routing->id;
             $array->name = $routing->name;
-            $array->{$this->referData} = $prodRoutingIds;
+            if($hasListenTo) $array->{$this->referData} = $prodRoutingIds;
             // $array->{$this->referData1} = $disciplineIds;
             $result[] = $array;
         };
+        // dump($result);
         return $result;
     }
 }

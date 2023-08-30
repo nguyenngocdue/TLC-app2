@@ -15,9 +15,6 @@ class Site_daily_assignment_dataSource1 extends Controller
     use TraitDynamicColumnsTableReport;
     use TraitCreateSQL;
     protected $maxH = 50;
-    protected $mode = '100';
-    #protected $rotate45Width = 300;
-    protected $libPivotFilters;
 
     public function getSqlStr($params)
     {
