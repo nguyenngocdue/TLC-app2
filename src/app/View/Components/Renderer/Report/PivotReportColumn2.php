@@ -13,23 +13,35 @@ use DateTime;
 trait  PivotReportColumn2
 {
     use TraitLibPivotTableDataFields2;
-    private function makeHeadColumn($rowFields)
+    private function makeHeadColumn($rowFields, $insColRowField)
     {
         $columnsData = [];
         if (is_null($rowFields)) return [];
-        foreach ($rowFields as $key => $value) {
-            if (!$key) continue;
+        foreach ($rowFields as $field => $value) {
+            if (!$field) continue;
             if (is_object($value)) {
-                $dataIndex = isset($value->column)? $key . '_' . str_replace('.', '_', $value->column) : $key;
+                $dataIndex = isset($value->column) ? $field . '_' . str_replace('.', '_', $value->column) : $field;
                 $columnsData[] = [
-                    'title' => $value->title ?? ucfirst(substr($key,0, strpos($key, '_'))),
+                    'title' => $value->title ?? ucfirst(substr($field, 0, strpos($field, '_'))),
                     'dataIndex' => $dataIndex,
                     'width' => $value->width ?? 140,
                     'align' => $value->align ?? 'left',
+                    "footer" => $value->footer ?? '',
                 ];
             }
+            foreach ($insColRowField as $insCol => $valInsRowField) {
+                if (isset($valInsRowField->insert_after_field) && ($f = $valInsRowField->insert_after_field) === $field) {
+                    $columnsData[] = [
+                        'title' => $valInsRowField->title ?? ucfirst(substr($field, 0, strpos($field, '_'))),
+                        'dataIndex' => $valInsRowField->value_index,
+                        'width' => $valInsRowField->width ?? 140,
+                        'align' => $valInsRowField->align ?? 'left',
+                        "footer" => $valInsRowField->footer ?? '',
+                    ];
+                }
+            }
         }
-        // dd($columnsData);
+        // dd($rowFields, $columnsData, $insColRowField);
         return $columnsData;
     }
 
@@ -44,23 +56,21 @@ trait  PivotReportColumn2
         $array = [];
         foreach ($fieldGroups as $key => $fields) {
             if ($key !== 'other') {
-                foreach ($columnFields as $field => $valColFields){
+                foreach ($columnFields as $field => $valColFields) {
                     $typeRender = $valColFields->top_header ?? 'type_1';
                     foreach ($fields as  $field) {
                         $thirdUnderscore = PivotReport::findPosition($field, '_', 3);
                         if ($thirdUnderscore) {
-                            if($typeRender === 'type_2') {
+                            if ($typeRender === 'type_2') {
                                 $date = Report::formatDateString(substr($field, 0, $thirdUnderscore - 1), 'd/m/Y');
                                 $dayOfWeek = DateReport::getShortDayOfWeek($date);
                                 $array[$field] = "<div class='text-gray-700 dark:text-gray-300'><span>$date<br>$dayOfWeek</span></div>";
-
                             } else {
                                 $date = Report::formatDateString(substr($field, 0, $thirdUnderscore - 1), 'd/m/y');
                                 if ($date) $array[$field] = str_replace('/', '<br/>', $date);
                             }
                         }
                     }
-                    
                 }
             } else {
                 foreach ($fields as $field) {
@@ -197,7 +207,7 @@ trait  PivotReportColumn2
         $matchingItems = [];
         foreach ($data as $key => $item) {
             if (!isset($item->$keyIndex)) continue;
-            if ($key.'_'.$item->$keyIndex === $targetValue) {
+            if ($key . '_' . $item->$keyIndex === $targetValue) {
                 $matchingItems[] = $item;
             }
         }
@@ -252,7 +262,8 @@ trait  PivotReportColumn2
                                     'width' => $width ?? 50,
                                     'colspan' =>  $countRenderCol,
                                     'header_name' => $tableDataHeader[$value] ?? '',
-                                    'align'=> is_numeric($value) ? 'right':$align,
+                                    'align' => is_numeric($value) ? 'right' : $align,
+                                    
                                 ];
                             };
                         }
@@ -269,6 +280,7 @@ trait  PivotReportColumn2
                                     'align' => $attrs->align ?? 'left',
                                     'width' => $attrs->width ?? 50,
                                     'colspan' => count($dates),
+                                    "footer"=>$attrs->footer ?? '',
                                 ];
                             }
                         }
@@ -280,6 +292,7 @@ trait  PivotReportColumn2
         }
         // sort column fields follow table header
         $columnsOfColumnFields = Report::sortByKey($columnsOfColumnFields, 'header_name');
+        // dd($columnsOfColumnFields);
         return [$tableDataHeader, $columnsOfColumnFields];
     }
 
@@ -290,7 +303,7 @@ trait  PivotReportColumn2
         foreach ($dataAggregations as $key => $value) {
             $columnsOfAgg[] = [
                 'title' => $value->title ?? str_replace('_', ' ', $key),
-                'dataIndex' => $value->aggregation.'_'. $key,
+                'dataIndex' => $value->aggregation . '_' . $key,
                 'width' => $value->width ?? 50,
                 'align' => $value->align ?? 'right',
             ];
@@ -301,11 +314,12 @@ trait  PivotReportColumn2
     public function makeColumnsRenderer($linesData, $dataOutput, $libs, $modeType)
     {
         $rowFields = $libs['row_fields'];
+        $insColRowField = $libs['insert_column_row_fields'];
         $aggregations = $libs['data_fields'];
 
         if (empty($dataOutput)) return [[], []];
         if (!$this->getDataFields($modeType)) return false;
-        $columnsOfRowFields = $this->makeHeadColumn($rowFields);
+        $columnsOfRowFields = $this->makeHeadColumn($rowFields, $insColRowField);
         [$tableDataHeader, $columnsOfColumnFields] = $this->makeColumnsOfColumnFields($linesData, $dataOutput, $libs, $modeType);
         $columnsOfAgg = $this->makeColumnsOfAgg($aggregations);
         $tableColumns = array_merge($columnsOfRowFields, $columnsOfColumnFields, $columnsOfAgg);
