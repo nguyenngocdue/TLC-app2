@@ -22,7 +22,7 @@ class DateTimeConcern
         if (\DateTime::createFromFormat($formatTo, $value) !== false) return $value;
         // dump($value);
         if ($formatFrom == Constant::FORMAT_MONTH) {
-            $value = '01/' . $value;
+            $value = '01/' . $value; //<< This will prevent 29/02, 30/02, 31/02 -> 01/03, 02/03, 03/03
             $value0 = Carbon::createFromFormat(Constant::FORMAT_DATE_ASIAN, $value);
         } else {
             $value0 = Carbon::createFromFormat($formatFrom, $value);
