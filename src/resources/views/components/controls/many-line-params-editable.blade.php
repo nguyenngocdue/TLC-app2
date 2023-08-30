@@ -21,16 +21,16 @@
 
 <div class="flex justify-between">
     <div>
-        @if(isset($tableSettings['showBtnAddANewLine']) && $tableSettings['showBtnAddANewLine'])
+        @if(isset($tableSettings['button_add_a_new_line']) && $tableSettings['button_add_a_new_line'])
             <x-renderer.button disabled="{{$readOnly}}" id="btnAddANewLine_{{$table01Name}}" type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
         @endif
-        @if(isset($tableSettings['showBtnAddFromAList']) && $tableSettings['showBtnAddFromAList'])
+        @if(isset($tableSettings['button_add_from_a_list']) && $tableSettings['button_add_from_a_list'])
             <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('{{$table01Name}}')" keydownEscape="closeModal('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
             <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
         @endif
     </div>
 
-    @if( isset($tableSettings['showBtnRecalculate']) && $tableSettings['showBtnRecalculate'])
+    @if( isset($tableSettings['button_recalculate']) && $tableSettings['button_recalculate'])
         <x-renderer.button disabled="{{$readOnly}}" type="secondary" onClick="refreshCalculation('{{$table01Name}}')"><i class="fa-solid fa-calculator"></i> Recalculate</x-renderer.button>
         <script>
             $(document).ready(()=>{
