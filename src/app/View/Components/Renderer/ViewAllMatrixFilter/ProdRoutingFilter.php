@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 
+use App\BigThink\Oracy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Prod_routing;
 use Illuminate\View\Component;
@@ -35,10 +36,8 @@ class ProdRoutingFilter extends Component
         $db = Prod_routing::select('id', 'name', 'description')
             ->orderBy('name')
             ->get();
-        foreach ($db as &$line) {
-            $fn = "getSubProjects()";
-            $line->{$fn} = $line->getSubProjects()->pluck('id');
-        }
+        Oracy::attach("getSubProjects()", $db);
+
         return $db;
     }
 
