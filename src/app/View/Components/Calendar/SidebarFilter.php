@@ -17,6 +17,8 @@ class SidebarFilter extends Component
     public function __construct(
         private $readOnly = false,
         private $type = null,
+        private $timesheetableType = null,
+        private $timesheetableId = null,
     ) {
         //
     }
@@ -29,10 +31,10 @@ class SidebarFilter extends Component
     public function render()
     {
         [$valueFiltersTask] = $this->getUserSettingsViewEditCalendar();
-        $user = CurrentUser::get();
-        $discipline = ($user) ? $user->discipline : null;
+        $owner = $this->getSheetOwner($this->timesheetableType, $this->timesheetableId);
+        $selectedUserDisciplineId = ($owner) ? $owner->discipline : null;
         return view('components.calendar.sidebar-filter', [
-            'discipline' => $discipline,
+            'selectedUserDisciplineId' => $selectedUserDisciplineId,
             'readOnly' => $this->readOnly,
             'valueFiltersTask' => $valueFiltersTask,
         ]);

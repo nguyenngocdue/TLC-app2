@@ -3,14 +3,14 @@
 namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
-use App\Models\User;
-use App\Utils\Support\CurrentUser;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewEditFunctions;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
 class SidebarOwnerUser extends Component
 {
     use TraitViewAllFunctions;
+    use TraitViewEditFunctions;
     /**
      * Create a new component instance.
      *
@@ -31,8 +31,9 @@ class SidebarOwnerUser extends Component
      */
     public function render()
     {
-        $ownerId = ($this->timesheetableType)::findFromCache($this->timesheetableId)->owner_id ?? CurrentUser::id();
-        $user = json_encode(User::findFromCache($ownerId));
+        // $ownerId = ($this->timesheetableType)::findFromCache($this->timesheetableId)->owner_id ?? CurrentUser::id();
+        $owner = $this->getSheetOwner($this->timesheetableType, $this->timesheetableId);
+        $user = json_encode($owner);
         $htmlUserRender =  Blade::render("<x-renderer.avatar-user>$user</x-renderer.avatar-user>") ?? '';
         return "<x-renderer.card title='TimeSheet Owner'>$htmlUserRender</x-renderer.card>";
     }
