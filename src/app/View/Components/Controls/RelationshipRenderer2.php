@@ -39,7 +39,7 @@ class RelationshipRenderer2 extends Component
 
     private $tablesHaveCreateANewForm;
     private $tablesInEditableMode;
-    private $tablesCallCmdBtn;
+    // private $tablesCallCmdBtn;
     /**
      * Create a new component instance.
      *
@@ -64,7 +64,7 @@ class RelationshipRenderer2 extends Component
         $this->tablesHaveCreateANewForm = config()->get('tablesHaveCreateANewForm');
         // $this->tablesInEditableMode = config()->get('tablesInEditableMode');
         $this->tablesInEditableMode = LibEditableTables::getAllIndexed();
-        $this->tablesCallCmdBtn = config()->get('tablesCallCmdBtn');
+        // $this->tablesCallCmdBtn = config()->get('tablesCallCmdBtn');
     }
 
     private function isTableOrderable($row, $colName, $columns)
