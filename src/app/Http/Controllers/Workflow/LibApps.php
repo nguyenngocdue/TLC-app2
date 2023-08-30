@@ -43,6 +43,8 @@ class LibApps extends AbstractLib
             foreach ($reportRoutes as $route) {
                 $name = $route['name'];
                 $lib = $libReport[$name];
+                if ($lib['hidden'] ?? false) continue;
+
                 $reportType = ucfirst(substr($lib['name'], 0, strpos($lib['name'], "-")));
                 $item = [
                     'name' => $name,

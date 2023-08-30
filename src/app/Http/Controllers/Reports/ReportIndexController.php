@@ -28,6 +28,7 @@ class ReportIndexController extends Controller
         $routes = array_filter($reports, fn ($i) => $i['singular'] == $singular);
         $result = [];
         foreach ($routes as $route) {
+            if ($lib[$route['name']]['hidden'] ?? false) continue;
             $result[$route['reportType']][$route['mode']] = [
                 "path" => $route['name'],
                 "title" => $lib[$route['name']]['title'] ?? "Untitled Report",

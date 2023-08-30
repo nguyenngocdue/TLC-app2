@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Http\Controllers\Workflow\LibEditableTables;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableColumnEditable;
@@ -38,7 +39,7 @@ class RelationshipRenderer2 extends Component
 
     private $tablesHaveCreateANewForm;
     private $tablesInEditableMode;
-    private $tablesCallCmdBtn;
+    // private $tablesCallCmdBtn;
     /**
      * Create a new component instance.
      *
@@ -61,8 +62,9 @@ class RelationshipRenderer2 extends Component
         // dump($item);
 
         $this->tablesHaveCreateANewForm = config()->get('tablesHaveCreateANewForm');
-        $this->tablesInEditableMode = config()->get('tablesInEditableMode');
-        $this->tablesCallCmdBtn = config()->get('tablesCallCmdBtn');
+        // $this->tablesInEditableMode = config()->get('tablesInEditableMode');
+        $this->tablesInEditableMode = LibEditableTables::getAllIndexed();
+        // $this->tablesCallCmdBtn = config()->get('tablesCallCmdBtn');
     }
 
     private function isTableOrderable($row, $colName, $columns)

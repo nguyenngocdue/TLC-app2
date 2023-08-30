@@ -12,7 +12,7 @@ class Site_daily_assignment extends ModelExtended
     protected static $statusless = true;
 
     public static $eloquentParams = [
-        "getUserTeamSite" => ["belongsTo", User_team_tsht::class, 'site_team_id'],
+        "getUserTeamSite" => ["belongsTo", User_team_site::class, 'site_team_id'],
         'getLines' => ['hasMany', Site_daily_assignment_line::class, 'site_daily_assignment_id'],
     ];
 

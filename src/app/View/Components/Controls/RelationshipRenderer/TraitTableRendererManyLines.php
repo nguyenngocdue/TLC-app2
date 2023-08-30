@@ -29,8 +29,8 @@ trait TraitTableRendererManyLines
         $createANewForm = isset($this->tablesHaveCreateANewForm[$this->type]);
         $createSettings = $createANewForm ? ($this->tablesHaveCreateANewForm[$this->type][$tableName] ?? []) : [];
 
-        $btnCmd = isset($this->tablesCallCmdBtn[$this->type]);
-        $btnCmdSettings = $btnCmd ? ($this->tablesCallCmdBtn[$this->type][$tableName] ?? []) : [];
+        // $btnCmd = isset($this->tablesCallCmdBtn[$this->type]);
+        // $btnCmdSettings = $btnCmd ? ($this->tablesCallCmdBtn[$this->type][$tableName] ?? []) : [];
 
         $tableSettings = $editable ? $this->tablesInEditableMode[$this->type][$tableName] : [];
 
@@ -103,7 +103,7 @@ trait TraitTableRendererManyLines
 
             'createANewForm' => $createANewForm,
             // 'createSettings' => $createSettings,
-            'btnCmdSettings' => $btnCmdSettings,
+            // 'btnCmdSettings' => $btnCmdSettings,
             'href' => $href,
             'showNo' => true,
             'showNoR' => false,
