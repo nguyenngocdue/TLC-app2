@@ -3,7 +3,12 @@
 @section('title', '')
 
 @section('content')
-<style>
+<div class="check"> 
+  <antd-tree :treeData="{{json_encode($treeData)}}"/> 
+</div>
+<script src="{{ asset('js/antd-vue.js') }}"></script>
+
+{{-- <style>
   body {
   padding: 40px;
   background-image: linear-gradient(#e8f0ff 0%, white 52.08%);
@@ -165,7 +170,7 @@ $("#animated-thumbnails-gallery")
       }
     });
   });
-</script>
+</script> --}}
 <!-- Add the library (only one file) -->
 {{-- <script src="fslightbox.js"></script> --}}
 {{-- <div class="flex flex-wrap">
