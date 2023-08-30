@@ -9,7 +9,7 @@ use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
-class Site_daily_assignment_line extends Controller
+class Site_daily_assignment_dataSource1 extends Controller
 
 {
     use TraitDynamicColumnsTableReport;

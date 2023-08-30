@@ -121,15 +121,22 @@
     "report-site_daily_assignment_020": {
         "name": "report-site_daily_assignment_020",
         "package_tab": "report",
-        "package": null,
-        "top_title": null,
-        "title": null
+        "package": "project_management",
+        "top_title": "Site Daily Assignment",
+        "title": "Task\/Employee"
     },
     "report-site_daily_assignment_110": {
         "name": "report-site_daily_assignment_110",
         "package_tab": "report",
         "package": "project_management",
         "top_title": "Site Daily Assignment",
-        "title": "Site Daily Assignment Line"
+        "title": "Site Daily Assignment Line 01"
+    },
+    "report-site_daily_assignment_120": {
+        "name": "report-site_daily_assignment_120",
+        "package_tab": "report",
+        "package": "project_management",
+        "top_title": "Site Daily Assignment",
+        "title": "Site Daily Assignment Line 02"
     }
 }

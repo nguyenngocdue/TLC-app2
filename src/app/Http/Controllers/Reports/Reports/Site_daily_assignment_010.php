@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use App\Utils\Support\Report;
 
 class Site_daily_assignment_010 extends Report_ParentReport2Controller
 {
@@ -17,7 +16,7 @@ class Site_daily_assignment_010 extends Report_ParentReport2Controller
 
     public function getDataSource($params)
     {
-        $primaryData = (new Site_daily_assignment_line())->getDataSource($params);
+        $primaryData = (new Site_daily_assignment_dataSource1())->getDataSource($params);
         return $primaryData;
     }
 }
