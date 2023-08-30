@@ -188,6 +188,9 @@
     "likes": {
         "name": "likes"
     },
+    "listener_configs": {
+        "name": "listener_configs"
+    },
     "loggers": {
         "name": "loggers"
     },
@@ -257,7 +260,8 @@
     },
     "prod_runs": {
         "name": "prod_runs",
-        "storeEmpty_and_updateShort": "true"
+        "storeEmpty_and_updateShort": "true",
+        "getLines": "true"
     },
     "prod_sequences": {
         "name": "prod_sequences",

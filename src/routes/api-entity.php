@@ -11,24 +11,13 @@ Route::group([
     // 'middleware' => ['throttle:600,1'],
     'middleware' => ['auth:sanctum', 'throttle:600,1'],
 ], function () {
-    $apps = LibApis::getFor('storeEmpty_and_updateShort');
-    foreach ($apps as $tableName) {
-        Route::post("{$tableName}_storeEmpty", [EntityCRUDControllerForApi::class, 'storeEmpty'])->name($tableName . ".storeEmpty");
-        Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
-    }
-
-    $apps = LibApis::getFor('changeStatusMultiple');
-    foreach ($apps as $tableName) {
-        Route::post("{$tableName}_changeStatusMultiple", [EntityCRUDControllerForApi::class, 'changeStatusMultiple'])->name($tableName . ".changeStatusMultiple");
-    }
-
-    $apps = LibApis::getFor('renderTableForPopupModals');
-    foreach ($apps as $tableName) {
-        Route::post("{$tableName}_renderTable", [EntityCRUDControllerForApiRenderer::class, 'renderTable'])->name($tableName . ".renderTable");
-    }
-
-    $apps = LibApis::getFor('cloneTemplate_and_updateShort');
-    foreach ($apps as $tableName) {
-        Route::post("{$tableName}_cloneTemplate", [EntityCRUDControllerForApiClone::class, 'cloneTemplate'])->name($tableName . ".cloneTemplate");
+    $apps = LibApis::getAll();
+    foreach ($apps as $app) {
+        $tableName = $app['name'];
+        if ($app['storeEmpty_and_updateShort'] ?? false) Route::post("{$tableName}_storeEmpty", [EntityCRUDControllerForApi::class, 'storeEmpty'])->name($tableName . ".storeEmpty");
+        if ($app['storeEmpty_and_updateShort'] ?? false) Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
+        if ($app['changeStatusMultiple'] ?? false) Route::post("{$tableName}_changeStatusMultiple", [EntityCRUDControllerForApi::class, 'changeStatusMultiple'])->name($tableName . ".changeStatusMultiple");
+        if ($app['renderTableForPopupModals'] ?? false) Route::post("{$tableName}_renderTable", [EntityCRUDControllerForApiRenderer::class, 'renderTable'])->name($tableName . ".renderTable");
+        if ($app['cloneTemplate_and_updateShort'] ?? false) Route::post("{$tableName}_cloneTemplate", [EntityCRUDControllerForApiClone::class, 'cloneTemplate'])->name($tableName . ".cloneTemplate");
     }
 });
