@@ -52,6 +52,12 @@ class ManageReportsController extends AbstractManageLibController
                 'renderer' => 'text4',
                 'editable' => true,
             ],
+            [
+                'dataIndex' => 'hidden',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
         ];
     }
 }
