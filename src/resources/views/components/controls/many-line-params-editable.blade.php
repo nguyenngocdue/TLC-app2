@@ -17,17 +17,25 @@
         name:'{{$table01Name}}'
     };
 
+
+const getLines = ({ tableId }) => {
+    console.log(tableId, tableObject[tableId])
+}
+
 </script>
 
 <div class="flex justify-between">
     <div>
         @if(isset($tableSettings['button_add_a_new_line']) && $tableSettings['button_add_a_new_line'])
-            <x-renderer.button disabled="{{$readOnly}}" id="btnAddANewLine_{{$table01Name}}" type="success" title="Add a new line" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
+            <x-renderer.button disabled="{{$readOnly}}" id="btnAddANewLine_{{$table01Name}}" type="success" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
         @endif
         @if(isset($tableSettings['button_add_from_a_list']) && $tableSettings['button_add_from_a_list'])
-            <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('{{$table01Name}}')" keydownEscape="closeModal('{{$table01Name}}')" type="success" title="Add from a list">Add From A List</x-renderer.button>
+            <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('{{$table01Name}}')" keydownEscape="closeModal('{{$table01Name}}')" type="success">Add From A List</x-renderer.button>
             <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
         @endif
+        @if(isset($tableSettings['button_get_lines']) && $tableSettings['button_get_lines'])
+        <x-renderer.button disabled="{{$readOnly}}" id="btnGetLines_{{$table01Name}}" type="success" onClick="getLines({tableId: '{{$table01Name}}'})">Get Lines</x-renderer.button>
+    @endif
     </div>
 
     @if( isset($tableSettings['button_recalculate']) && $tableSettings['button_recalculate'])

@@ -52,6 +52,12 @@ class ManageEditableTablesController extends AbstractManageLibController
                 'align' => "center",
             ],
             [
+                'dataIndex' => "button_get_lines",
+                "renderer"  => 'checkbox',
+                'editable' => true,
+                'align' => "center",
+            ],
+            [
                 'dataIndex' => "button_recalculate",
                 "renderer"  => 'checkbox',
                 'editable' => true,
