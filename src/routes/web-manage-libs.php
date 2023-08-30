@@ -3,6 +3,7 @@
 use App\Http\Controllers\Workflow\ManageApisController;
 use App\Http\Controllers\Workflow\ManageAppCreationsController;
 use App\Http\Controllers\Workflow\ManageAppsController;
+use App\Http\Controllers\Workflow\ManageEditableTablesController;
 use App\Http\Controllers\Workflow\ManageListenerActionsController;
 use App\Http\Controllers\Workflow\ManageNavbarsController;
 use App\Http\Controllers\Workflow\ManagePivotTablesController;
@@ -31,4 +32,5 @@ Route::group([
     Route::resource('manageStandardProps', ManageStandardPropsController::class)->only('index', 'store', 'create');
     Route::resource('manageStandardDefaultValues', ManageStandardDefaultValuesController::class)->only('index', 'store', 'create');
     Route::resource('manageListenerActions', ManageListenerActionsController::class)->only('index', 'store', 'create');
+    Route::resource('manageEditableTables', ManageEditableTablesController::class)->only('index', 'store', 'create');
 });
