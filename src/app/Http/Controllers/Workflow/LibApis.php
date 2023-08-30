@@ -28,11 +28,11 @@ class LibApis extends AbstractLib
         return $result;
     }
 
-    public static function getFor($key)
-    {
-        $data = array_filter(static::getAll(), fn ($i) => isset($i[$key]));
-        $data = array_map(fn ($i) => $i['name'], $data);
-        // dump($data);
-        return $data;
-    }
+    // public static function getFor($key)
+    // {
+    //     $data = array_filter(static::getAll(), fn ($i) => isset($i[$key]));
+    //     $data = array_map(fn ($i) => $i['name'], $data);
+    //     // dump($data);
+    //     return $data;
+    // }
 }

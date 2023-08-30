@@ -3,14 +3,14 @@
 namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
-use App\Models\User;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewEditFunctions;
 use App\Utils\Support\CurrentUser;
-use App\Utils\System\GetSetCookie;
 use Illuminate\View\Component;
 
 class FullCalendar extends Component
 {
     use TraitGetSuffixListenerControl;
+    use TraitViewEditFunctions;
     /**
      * Create a new component instance.
      *
@@ -34,8 +34,9 @@ class FullCalendar extends Component
     public function render()
     {
         $token = CurrentUser::getTokenForApi();
-        $ownerId = ($this->timesheetableType)::findFromCache($this->timesheetableId)->owner_id ?? CurrentUser::id();
-        $workplace = User::findFromCache($ownerId)->workplace;
+        $owner = $this->getSheetOwner($this->timesheetableType, $this->timesheetableId);
+        // $ownerId = ($this->timesheetableType)::findFromCache($this->timesheetableId)->owner_id ?? CurrentUser::id();
+        $workplace = $owner->workplace;
         $timeBreaks = $this->getTimeBreaksByWorkplace($workplace);
         return view('components.calendar.full-calendar', [
             'modalId' => 'calendar001',
@@ -49,25 +50,27 @@ class FullCalendar extends Component
             'suffix' => $this->getSuffix(),
         ]);
     }
-    private function getTimeBreaksByWorkplace($workplace){
+    private function getTimeBreaksByWorkplace($workplace)
+    {
         switch ($workplace) {
             case 1:
             case 6:
-                return ['12:00:00','12:30:00'];
+                return ['12:00:00', '12:30:00'];
                 break;
             case 2:
             case 3:
             case 4:
-                return ['11:30:00','12:00:00'];
+                return ['11:30:00', '12:00:00'];
                 break;
             case 5:
-                return ['1:00:00','1:30:00'];
+                return ['1:00:00', '1:30:00'];
                 break;
             default:
                 break;
         }
     }
-    private function getSuffix(){
+    private function getSuffix()
+    {
         return '_11111';
     }
 }
