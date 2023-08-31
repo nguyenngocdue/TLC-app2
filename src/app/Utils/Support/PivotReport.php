@@ -215,7 +215,6 @@ class PivotReport
 
     public static function reduceDataByFilterColumn($linesData, $dataFilters)
     {
-        // dd($dataFilters, $linesData);
         if (empty($dataFilters)) return $linesData;
         $result = array_filter($linesData, function ($line) use ($dataFilters) {
             $lineMatchesFilter = true;

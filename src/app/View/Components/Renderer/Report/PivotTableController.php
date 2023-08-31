@@ -106,10 +106,13 @@ class PivotTableController extends Controller
     private function makeKeysOrderSort($sortByFields)
     {
         $orders = [];
-        // dd($sortByFields);
-        foreach($sortByFields as $key => $values) {
-            $str = str_replace('.', '_', $values->column);
-            $orders[$key.'_'.$str] = $values->order ?? 'ASC';
+        foreach ($sortByFields as $key => $values) {
+            if(isset($values->column)){
+                $str = str_replace('.', '_', $values->column);
+                $orders[$key . '_' . $str] = $values->order ?? 'ASC';
+            } else {
+                $orders[$key] = $values->order ?? 'ASC';
+            }
         }
         return $orders;
     }
@@ -132,6 +135,7 @@ class PivotTableController extends Controller
             }
             return 0;
         });
+        // dump($dataOutput);
         return collect($dataOutput);
     }
 
@@ -200,7 +204,7 @@ class PivotTableController extends Controller
         // Step 1: reduce lines from Filters array
         $keysFilters = $this->triggerFilters($topParams, $keysOfFilters);
         $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $keysFilters);
-        // dd($rowFields);
+        // dump($rowFields, $dataReduce);
 
         // Step 2: group lines by Row_Fields array
         if (!count($keysOfRowFields)) {

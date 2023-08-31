@@ -15,25 +15,32 @@ class Site_daily_assignment_dataSource1 extends Controller
     use TraitDynamicColumnsTableReport;
     use TraitCreateSQL;
     protected $maxH = 50;
-    protected $mode = '100';
-    #protected $rotate45Width = 300;
-    protected $libPivotFilters;
 
     public function getSqlStr($params)
     {
-        $dates = Report::explodePickerDate($params['picker_date']);
-        [$startDate, $endDate] = array_map(fn($item) => Report::formatDateString($item), $dates);
-        
+        $pickerDate = $params['picker_date'] ?? PivotReport::defaultPickerDate();
+        [$startDate, $endDate] = Report::explodePickerDate($pickerDate, 'Y-m-d');
         $sql = "SELECT
                     sda.id AS site_daily_assignment_id,
                     sda.site_date AS site_date,
                     sda.site_team_id AS site_team_id,
+                    mtm_site_team.count_user AS count_user_site_team,
                     sdal.id AS site_daily_assignment_line_id,
                     sdal.user_id AS site_daily_assignment_line_user_id,
                     sdal.sub_project_id AS sub_project_id
-                    FROM site_daily_assignments sda, site_daily_assignment_lines sdal
+                    FROM site_daily_assignments sda
+                    INNER JOIN site_daily_assignment_lines sdal ON sda.id = sdal.site_daily_assignment_id
+                    LEFT JOIN (
+                            SELECT
+                                    mtm.doc_id AS  site_team_id,
+                                    count(mtm.term_id) AS count_user
+                                    FROM many_to_many mtm 
+                                    WHERE 1 = 1
+                                    AND mtm.doc_type = 'App\\\Models\\\user_team_site'
+                                    AND mtm.term_type = 'App\\\Models\\\user'
+                                    GROUP BY mtm.doc_id
+                    ) mtm_site_team ON mtm_site_team.site_team_id = sda.site_team_id
                     WHERE 1 = 1
-                    AND sda.id = sdal.site_daily_assignment_id
                     AND sda.deleted_by IS NULL
                     AND sdal.deleted_by IS NULL
                     #AND sdal.site_daily_assignment_id = 13"

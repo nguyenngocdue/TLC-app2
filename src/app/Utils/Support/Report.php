@@ -110,7 +110,7 @@ class Report
     public static function convertToType($dataSource, $type = 'array')
     {
         $convertedData = [];
-    
+
         foreach ($dataSource as $key => $value) {
             if ($type === 'array') {
                 $convertedData[] = (array)$value;
@@ -147,11 +147,15 @@ class Report
         return $newArray;
     }
 
-    public static function explodePickerDate($pickerDate)
+    public static function explodePickerDate($pickerDate, $type='d/m/Y')
     {
         $pickerDate = array_map(fn ($item) => trim($item), explode('-', $pickerDate));
         $startDate = $pickerDate[0] ?? '01/01/2021';
         $endDate = $pickerDate[1] ?? '01/02/2021';
+        if($type === 'Y-m-d'){
+            $startDate = Report::formatDateString($startDate, 'Y-m-d');
+            $endDate = Report::formatDateString($endDate, 'Y-m-d');
+        }
         return [$startDate, $endDate];
     }
 
@@ -274,10 +278,24 @@ class Report
         return array_filter($inputArray, fn ($value) => $value !== null);
     }
 
-    public static function createDefaultPickerDate($daysStr = '-3 days'){
+    public static function createDefaultPickerDate($daysStr = '-3 days')
+    {
         $nowDate =  date('d/m/Y');
         $beforeDate = date('d/m/Y', strtotime($daysStr));
-        return $beforeDate .' - ' . $nowDate;
+        return $beforeDate . ' - ' . $nowDate;
     }
 
+    public static function createValueForParams($fields, $params)
+    {
+        // dd($fields, $params);
+        $valParams = [];
+        foreach ($fields as $field) {
+            if(isset($params[$field]) &&  is_array($params[$field])){
+                $valParams[$field] = isset($params[$field]) ? implode(',', $params[$field]) : '';
+            } else {
+                $valParams[$field] = isset($params[$field]) ?  $params[$field] : '';
+            }
+        }
+        return $valParams;
+    }
 }

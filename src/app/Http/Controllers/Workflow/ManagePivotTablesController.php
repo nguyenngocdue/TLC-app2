@@ -45,6 +45,14 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'width' => 200,
             ],
             [
+                'dataIndex' => 'insert_column_row_fields',
+                'title' => 'Insert Column Fields <br/>(for Row Fields)',
+                'renderer' => 'textarea4',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 200,
+            ],
+            [
                 'dataIndex' => 'column_fields',
                 'renderer' => 'textarea4',
                 'editable' => true,
