@@ -106,10 +106,13 @@ class PivotTableController extends Controller
     private function makeKeysOrderSort($sortByFields)
     {
         $orders = [];
-        // dd($sortByFields);
-        foreach($sortByFields as $key => $values) {
-            $str = isset($values->column) ? str_replace('.', '_', $values->column) : $key;
-            $orders[$key.'_'.$str] = $values->order ?? 'ASC';
+        foreach ($sortByFields as $key => $values) {
+            if(isset($values->column)){
+                $str = str_replace('.', '_', $values->column);
+                $orders[$key . '_' . $str] = $values->order ?? 'ASC';
+            } else {
+                $orders[$key] = $values->order ?? 'ASC';
+            }
         }
         return $orders;
     }
@@ -132,6 +135,7 @@ class PivotTableController extends Controller
             }
             return 0;
         });
+        // dump($dataOutput);
         return collect($dataOutput);
     }
 
