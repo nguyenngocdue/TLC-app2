@@ -24,8 +24,8 @@ class Site_daily_assignment_dataSource1 extends Controller
                     sda.id AS site_daily_assignment_id,
                     sda.site_date AS site_date,
                     sda.site_team_id AS site_team_id,
-                    mtm_site_team.count_user AS count_user_site_team,
                     sdal.id AS site_daily_assignment_line_id,
+                    mtm_site_team.count_user AS count_user_site_team,
                     sdal.user_id AS site_daily_assignment_line_user_id,
                     sdal.sub_project_id AS sub_project_id
                     FROM site_daily_assignments sda

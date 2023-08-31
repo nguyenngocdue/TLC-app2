@@ -12,7 +12,7 @@ class Site_daily_assignment_120 extends Report_Parent2Controller
     protected $maxH = 50;
     protected $typeView = 'report-pivot';
     protected $modeType = 'site_daily_assignment_120';
-    protected $tableTrueWidth = true;
+    protected $tableTrueWidth = false;
     protected $mode='120';
 
 
