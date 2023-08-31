@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\User_team_tsht;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateTimeConcern;
 use App\Utils\System\Api\ResponseObject;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -111,7 +112,7 @@ trait TraitGetLines
 				if ($sequence_id == 'all') continue;
 				if ($line['total_hours'] == 0) continue;
 				$sequence = $allSequences[$sequence_id];
-				$debug = $manySheets['all']['total_hours'] . "/" . $manySheets['all']['ot_hours'];
+				$debug = $manySheets['all']['total_hours'] . "+" . $manySheets['all']['ot_hours'];
 				$item = [
 					'timesheetable_type' => 'App\Models\Hr_timesheet_worker',
 					'timesheetable_id' => $parent_id,
@@ -189,6 +190,7 @@ trait TraitGetLines
 	{
 		$line = $request->input('lines')[0];
 		['date' => $date, 'team_id' => $team_id, 'parent_id' => $parent_id] = $line;
+		$date = DateTimeConcern::convertForSaving('picker_date', $date);
 
 		[$result, $allSequences] = $this->makeData($team_id, $date);
 		// Log::info($result);
