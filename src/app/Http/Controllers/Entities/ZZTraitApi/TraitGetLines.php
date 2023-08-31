@@ -48,6 +48,15 @@ trait TraitGetLines
 		return [$allSequences, $allSubProjects, $allRoutingLinks];
 	}
 
+	private function accumulate(&$variable, $array, $value)
+	{
+		if (isset($variable[$array[0]][$array[1]][$array[2]])) {
+			$variable[$array[0]][$array[1]][$array[2]] += $value;
+		} else {
+			$variable[$array[0]][$array[1]][$array[2]] = $value;
+		}
+	}
+
 	private function makeData($team_id, $date)
 	{
 		$runs = Prod_run::query()->where('date', $date)->get();
@@ -60,34 +69,21 @@ trait TraitGetLines
 			foreach ($run->{"getWorkersOfRun()"} as $worker_id) {
 				if (in_array($worker_id, $teamMembers)) {
 					$allSequences[$run->prod_sequence_id] = true;
-					// if (isset($result[$worker_id]['all']['total_hours'])) {
-					// 	$result[$worker_id]['all']['total_hours'] += $run->total_hours;
-					// } else {
-					// 	$result[$worker_id]['all']['total_hours'] = $run->total_hours;
-					// }
-					// if ($result[$worker_id]['all']['total_hours'] > 8) {
-					// 	$ot_hour = $result[$worker_id]['all']['total_hours'] - 8;
-					// 	$result[$worker_id]['all']['total_hours'] = 8;
-					// 	if (isset($result[$worker_id]['all']['ot_hours'])) {
-					// 		$result[$worker_id]['all']['ot_hours'] = $ot_hour;
-					// 	} else {
-					// 		$result[$worker_id]['all']['ot_hours'] += $ot_hour;
-					// 	}
-					// }
+					$this->accumulate($result, [$worker_id, 'all', 'total_hours'], $run->total_hours);
+					if ($result[$worker_id]['all']['total_hours'] > 8) {
 
-					if (isset($result[$worker_id][$run->prod_sequence_id])) {
-						$result[$worker_id][$run->prod_sequence_id]['total_hours'] += $run->total_hours;
-						$result[$worker_id][$run->prod_sequence_id]['date'] = $run->date;
+						$ot_hour = $result[$worker_id]['all']['total_hours'] - 8;
+						$result[$worker_id]['all']['total_hours'] = 8;
+						$this->accumulate($result, [$worker_id, 'all', 'ot_hours'], $ot_hour);
+
+						$timesheetHours = $run->total_hours - $ot_hour;
+						$this->accumulate($result, [$worker_id, $run->prod_sequence_id, 'total_hours'], $timesheetHours);
 					} else {
-						$result[$worker_id][$run->prod_sequence_id]['total_hours'] = $run->total_hours;
-						$result[$worker_id][$run->prod_sequence_id]['date'] = $run->date;
+						$result[$worker_id]['all']['ot_hours'] = 0;
+						$this->accumulate($result, [$worker_id, $run->prod_sequence_id, 'total_hours'], $run->total_hours);
 					}
 
-					// if ($result[$worker_id][$run->prod_sequence_id]['total_hours'] > 8) {
-					// 	$ot_hour = $result[$worker_id][$run->prod_sequence_id]['total_hours'] - 8;
-					// 	$result[$worker_id][$run->prod_sequence_id]['total_hours'] = 8;
-					// 	$result[$worker_id][$run->prod_sequence_id]['ot_hours'] += $ot_hour;
-					// }
+					$result[$worker_id][$run->prod_sequence_id]['date'] = $run->date;
 				}
 			}
 		}
@@ -108,6 +104,8 @@ trait TraitGetLines
 		foreach ($result as $worker_id => $manySheets) {
 			$user = User::findFromCache($worker_id);
 			foreach ($manySheets as $sequence_id => $line) {
+				if ($sequence_id == 'all') continue;
+				if ($line['total_hours'] == 0) continue;
 				$sequence = $allSequences[$sequence_id];
 				$item = [
 					'timesheetable_type' => 'App\Models\Hr_timesheet_worker',
@@ -122,7 +120,8 @@ trait TraitGetLines
 					'project_id' => $allSubProjects[$sequence['sub_project_id']]->project_id,
 					'sub_project_id' => $sequence['sub_project_id'],
 					'prod_routing_id' => $sequence['prod_routing_id'],
-					'remark' => $allRoutingLinks[$sequence['prod_routing_link_id']]->description,
+					// 'remark' => $allRoutingLinks[$sequence['prod_routing_link_id']]->description,
+					'remark' => $manySheets['all']['total_hours'] . "/" . $manySheets['all']['ot_hours'],
 
 					'lod_id' => 228, // 228: LOD400
 					'work_mode_id' => 1, //1: NZ, 2: TF, 3: WFH
@@ -186,11 +185,11 @@ trait TraitGetLines
 		['date' => $date, 'team_id' => $team_id, 'parent_id' => $parent_id] = $line;
 
 		[$result, $allSequences] = $this->makeData($team_id, $date);
-		Log::info($result);
+		// Log::info($result);
 		[$allSequences, $allSubProjects, $allRoutingLinks] = $this->getCacheData($allSequences);
 		$this->emptyCurrentTSW($parent_id);
 		$this->setCurrentTSWLines($result, $allSequences, $allSubProjects, $allRoutingLinks, $parent_id);
-		// $otr = $this->makeNewOTR();
+		$otr = $this->makeNewOTR();
 		// $otr = (object)['id' => 123456];
 		// $this->setOTRLines($otr, $date, $result, $allSequences);
 
