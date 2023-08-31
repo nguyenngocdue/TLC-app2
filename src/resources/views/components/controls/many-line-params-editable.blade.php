@@ -19,7 +19,11 @@
 
 
 const getLines = ({ tableId }) => {
-    console.log(tableId, tableObject[tableId])
+    // console.log(tableId, tableObject[tableId])
+    const url = @json(route("prod_runs.getLines"));
+    const data = [{team_id: 4, date: '2022-08-31', parent_id: 11576 }];
+    callApiGetLines(url, data, [], ()=>alert("Get lines is done."))
+    // callApiGetLines(url, data, [], ()=>location.reload())
 }
 
 </script>
