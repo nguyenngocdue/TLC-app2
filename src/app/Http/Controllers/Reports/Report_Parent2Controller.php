@@ -135,6 +135,11 @@ abstract class Report_Parent2Controller extends Controller
         return [[]];
     }
 
+    protected function getTableColumns($dataSource, $params)
+	{
+		return [[]];
+	}
+
     public function selectMonth($params)
     {
         $month = DocumentReport::getCurrentMonthYear();

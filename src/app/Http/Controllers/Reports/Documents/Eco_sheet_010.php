@@ -37,7 +37,7 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
         ];
     }
 
-    protected function getTableColumns($params, $dataSource)
+    public function getTableColumns($params, $dataSource)
     {
         return [
             "ecoLaborImpacts" => [

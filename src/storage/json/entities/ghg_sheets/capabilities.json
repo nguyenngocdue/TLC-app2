@@ -45,7 +45,7 @@
         "name": "cpl_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": ""
+        "new": "true"
     },
     "cpl_member": {
         "name": "cpl_member",
@@ -191,6 +191,12 @@
         "toggle": "",
         "new": ""
     },
+    "ppc_member": {
+        "name": "ppc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
     "proc_manager": {
         "name": "proc_manager",
         "name_rendered": "",
@@ -259,6 +265,12 @@
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
+    "proj_supervisor_nz": {
+        "name": "proj_supervisor_nz",
         "name_rendered": "",
         "toggle": "",
         "new": ""

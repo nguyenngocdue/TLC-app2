@@ -26,9 +26,11 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
         return $params;
     }
 
-    protected function getSqlStr($params) {
-        return [];
-    }
+    public function getSqlStr($params)
+	{
+		$sql =  "";
+		return $sql;
+	}
 
     protected function getCurrentDateRange() {
 		$currentYearMonth = date("Y-m");
