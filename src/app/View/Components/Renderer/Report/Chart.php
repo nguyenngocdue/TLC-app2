@@ -44,6 +44,9 @@ class Chart extends Component
             $result[] = $href;
         }
         $meta['href'] = '[' . join(", ", array_map(fn ($item) =>  "'" . $item . "'", $result)) . ']';
+
+        dump($this->key,$metric, $meta);
+
         return view(
             'components.renderer.report.chart',
             [

@@ -141,7 +141,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         ];
     }
 
-    protected function getTableColumns($params, $dataSource)
+    public function getTableColumns($params, $dataSource)
     {
         return
             [

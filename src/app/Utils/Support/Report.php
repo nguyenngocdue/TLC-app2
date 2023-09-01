@@ -298,4 +298,32 @@ class Report
         }
         return $valParams;
     }
+
+    public static function transformDataItemByKey($data, $key, $dataType = 'array') {
+        $transformData = [];
+		foreach ($data as $value){
+			if (is_object($value)){
+				$transformData[$value->{$key}] = $dataType === 'array' ? (array)$value : (object)$value;	
+			} else {
+				$transformData[$value[$key]] = $dataType === 'array' ? (array)$value : (object)$value;
+			}
+		}
+
+        return $transformData;
+
+    }
+
+ 	public static function getLastArrayValuesByKey($data,$field)
+    {
+		$outputArrays = [];
+        foreach ($data as $key => $value) {
+            if ($key === $field){
+				$outputArrays[] = $value;
+            } elseif (is_array($value)) {
+				$nestedOutputArrays = self::getLastArrayValuesByKey($value, $field);
+                $outputArrays = array_merge($outputArrays, $nestedOutputArrays);
+            }
+        }
+        return $outputArrays;
+    }
 }

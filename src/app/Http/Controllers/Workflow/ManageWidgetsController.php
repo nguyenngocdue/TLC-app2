@@ -23,6 +23,8 @@ class ManageWidgetsController extends AbstractManageLibController
                 'value' => $key,
             ];
         }
+
+        $allNameReports = array_keys(LibReports::getAll());
         // dump($apps);
         return   [
             [
@@ -35,6 +37,13 @@ class ManageWidgetsController extends AbstractManageLibController
                 "renderer"  => 'read-only-text4',
                 'editable' => true,
                 "width" => 100,
+            ],
+            [
+                'dataIndex' => "report_name",
+                "renderer"  => 'dropdown',
+                'editable' => true,
+                "width" => 100,
+                'cbbDataSource' => $allNameReports
             ],
             [
                 'dataIndex' => "hidden",

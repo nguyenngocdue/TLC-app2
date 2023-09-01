@@ -13,6 +13,13 @@
         "top_title": null,
         "title": "GHG Summary Report"
     },
+    "document-ghg_sheet_020": {
+        "name": "document-ghg_sheet_020",
+        "package_tab": "report",
+        "package": "compliance",
+        "top_title": null,
+        "title": "GHG CO2 Report"
+    },
     "document-prod_sequence_010": {
         "name": "document-prod_sequence_010",
         "package_tab": "report",
@@ -130,13 +137,15 @@
         "package_tab": "report",
         "package": "project_management",
         "top_title": "Site Daily Assignment",
-        "title": "Site Daily Assignment Lines 01"
+        "title": "Site Daily Assignment Lines 01",
+        "hidden": "true"
     },
     "report-site_daily_assignment_120": {
         "name": "report-site_daily_assignment_120",
         "package_tab": "report",
         "package": "project_management",
         "top_title": "Site Daily Assignment",
-        "title": "Site Daily Assignment Lines 02"
+        "title": "Site Daily Assignment Lines 02",
+        "hidden": "true"
     }
 }

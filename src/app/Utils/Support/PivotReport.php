@@ -85,7 +85,6 @@ class PivotReport
     public static function getLastArray($data, $columnFields = [])
     {
         // dd($data, $columnFields);
-        $agg =
             $outputArrays = [];
         foreach ($data as $key => $value) {
             if ($key === "items" && is_array($value)) {

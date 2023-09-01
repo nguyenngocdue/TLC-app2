@@ -17,11 +17,8 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controller
 
 Route::resource('welcome-canh', WelcomeCanhController::class)->only('index');
 Route::get('welcome-canh-all', [WelcomeCanhController::class, 'indexAll'])->name('welcome-canh-all.index');
+Route::resource('welcome-due-test-widget', WelcomeDueController::class)->only('index');
 Route::resource('welcome-due', WelcomeDueController::class)->only('index');
-
-// Report from dataWarehouse
-Route::resource('welcome-due-dataWarehouse', Wh_user_sub_project_task::class)->only('index');
-Route::resource('welcome-due-dataWarehouse1', Wh_report_data_1s::class)->only('index');
 
 Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 

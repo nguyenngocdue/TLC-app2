@@ -135,6 +135,11 @@ abstract class Report_Parent2Controller extends Controller
         return [[]];
     }
 
+    protected function getTableColumns($dataSource, $params)
+	{
+		return [[]];
+	}
+
     public function selectMonth($params)
     {
         $month = DocumentReport::getCurrentMonthYear();
@@ -204,7 +209,6 @@ abstract class Report_Parent2Controller extends Controller
         $isEmptyAllDataSource = $this->isEmptyAllDataSource($dataSource);
 
         $tableColumns = $this->typeView === 'report-pivot' ? [] : $this->getTableColumns($params, $dataSource);
-        dd($tableColumns);
         $tableDataHeader = $this->tableDataHeader($params, $dataSource);
         echo $this->getJS();
         $titleReport = $this->makeModeTitleReport($routeName);
