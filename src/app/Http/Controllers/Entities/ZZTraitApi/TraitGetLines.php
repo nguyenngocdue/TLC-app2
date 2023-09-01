@@ -13,8 +13,11 @@ use App\Models\Prod_sequence;
 use App\Models\Sub_project;
 use App\Models\User;
 use App\Models\User_team_tsht;
+use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateTimeConcern;
 use App\Utils\System\Api\ResponseObject;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -72,6 +75,7 @@ trait TraitGetLines
 					$this->accumulate($result, [$worker_id, 'all', 'total_hours'], $run->total_hours);
 					if ($result[$worker_id]['all']['total_hours'] > 8) {
 
+						$result[$worker_id]['all']['sequence_id'] = $run->prod_sequence_id;
 						$ot_hour = $result[$worker_id]['all']['total_hours'] - 8;
 						$result[$worker_id]['all']['total_hours'] = 8;
 						$this->accumulate($result, [$worker_id, 'all', 'ot_hours'], $ot_hour);
@@ -79,6 +83,7 @@ trait TraitGetLines
 						$timesheetHours = $run->total_hours - $ot_hour;
 						$this->accumulate($result, [$worker_id, $run->prod_sequence_id, 'total_hours'], $timesheetHours);
 					} else {
+						$result[$worker_id]['all']['sequence_id'] = 0;
 						$result[$worker_id]['all']['ot_hours'] = 0;
 						$this->accumulate($result, [$worker_id, $run->prod_sequence_id, 'total_hours'], $run->total_hours);
 					}
@@ -107,6 +112,7 @@ trait TraitGetLines
 				if ($sequence_id == 'all') continue;
 				if ($line['total_hours'] == 0) continue;
 				$sequence = $allSequences[$sequence_id];
+				$debug = $manySheets['all']['total_hours'] . "+" . $manySheets['all']['ot_hours'];
 				$item = [
 					'timesheetable_type' => 'App\Models\Hr_timesheet_worker',
 					'timesheetable_id' => $parent_id,
@@ -120,8 +126,7 @@ trait TraitGetLines
 					'project_id' => $allSubProjects[$sequence['sub_project_id']]->project_id,
 					'sub_project_id' => $sequence['sub_project_id'],
 					'prod_routing_id' => $sequence['prod_routing_id'],
-					// 'remark' => $allRoutingLinks[$sequence['prod_routing_link_id']]->description,
-					'remark' => $manySheets['all']['total_hours'] . "/" . $manySheets['all']['ot_hours'],
+					'remark' => $allRoutingLinks[$sequence['prod_routing_link_id']]->description . " ($debug)",
 
 					'lod_id' => 228, // 228: LOD400
 					'work_mode_id' => 1, //1: NZ, 2: TF, 3: WFH
@@ -150,32 +155,34 @@ trait TraitGetLines
 	private function setOTRLines($otr, $date, $result, $allSequences)
 	{
 		$id = $otr->id;
-		// Log::info($id);
-		Log::info($result);
+		$from_time = Carbon::createFromFormat('H:i:s', '17:00:00');
 
 		foreach ($result as $worker_id => $manySheets) {
 			$user = User::findFromCache($worker_id);
-			foreach ($manySheets as $sequence_id => $line) {
-				$sequence = $allSequences[$sequence_id];
-				$item = [
-					'hr_overtime_request_id' => $id,
-					'user_id' => $worker_id,
-					'employeeid' => $user->employeeid,
-					'position_rendered' => $user->position_rendered,
-					'ot_date' => $date,
-					'from_time' => '16:00:00',
-					'to_time' => '18:00:00',
-					'break_time' => 0,
-					'total_time' => 123456,
-					'sub_project_id' => $sequence['sub_project_id'],
-					'work_mode_id'  => 1, //1: NZSite
-					'remark' => 'NZ Site Work',
+			$sequence_id = $manySheets['all']['sequence_id'];
+			if ($sequence_id == 0) continue;
+			$sequence = $allSequences[$sequence_id];
+			$ot_hours = $manySheets['all']['ot_hours'];
+			$to_time = $from_time->copy()->addMinutes($ot_hours * 60);
+			// Log::info($worker_id . " " . $ot_hours . " " . $from_time->format(Constant::FORMAT_TIME_MYSQL) . " " . $to_time->format(Constant::FORMAT_TIME_MYSQL));
+			$item = [
+				'hr_overtime_request_id' => $id,
+				'user_id' => $worker_id,
+				'employeeid' => $user->employeeid,
+				'position_rendered' => $user->position_rendered,
+				'ot_date' => $date,
+				'from_time' => $from_time->format(Constant::FORMAT_TIME_MYSQL),
+				'to_time' => $to_time->format(Constant::FORMAT_TIME_MYSQL),
+				'break_time' => 0,
+				'total_time' => $ot_hours,
+				'sub_project_id' => $sequence['sub_project_id'],
+				'work_mode_id'  => 1, //1: NZSite
+				'remark' => 'NZ Site Work',
 
-					'owner_id' => $otr->owner_id,
-					'status' => 'new',
-				];
-				Hr_overtime_request_line::create($item);
-			}
+				'owner_id' => $otr->owner_id,
+				'status' => 'new',
+			];
+			Hr_overtime_request_line::create($item);
 		}
 	}
 
@@ -183,6 +190,7 @@ trait TraitGetLines
 	{
 		$line = $request->input('lines')[0];
 		['date' => $date, 'team_id' => $team_id, 'parent_id' => $parent_id] = $line;
+		$date = DateTimeConcern::convertForSaving('picker_date', $date);
 
 		[$result, $allSequences] = $this->makeData($team_id, $date);
 		// Log::info($result);
@@ -190,8 +198,7 @@ trait TraitGetLines
 		$this->emptyCurrentTSW($parent_id);
 		$this->setCurrentTSWLines($result, $allSequences, $allSubProjects, $allRoutingLinks, $parent_id);
 		$otr = $this->makeNewOTR();
-		// $otr = (object)['id' => 123456];
-		// $this->setOTRLines($otr, $date, $result, $allSequences);
+		$this->setOTRLines($otr, $date, $result, $allSequences);
 
 		return ResponseObject::responseSuccess($result, ['line' => $line], "AABBCC");
 	}
