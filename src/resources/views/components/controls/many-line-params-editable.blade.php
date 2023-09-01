@@ -60,6 +60,7 @@ const getLines = ({ tableId }) => {
 
 <i id="iconSpin_{{$table01Name}}" class="fa-duotone fa-spinner fa-spin text-green-500" style="display: none"></i>
 <input class="bg-gray-200" readonly name="tableNames[{{$table01Name}}]" value="{{$tableName}}" type="{{$tableDebugTextHidden}}" />
+<input class="bg-gray-200" readonly name="tableFnNames[{{$table01Name}}]" value="{{$colName}}" type="{{$tableDebugTextHidden}}" />
 @if($tableName == 'hr_overtime_request_lines')
 <br />
 <br />

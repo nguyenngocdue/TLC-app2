@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\FileBag;
 
 trait TraitEntityEditableTable
 {
-    // use TraitEntityComment2;
+    use TraitEntityEditableTableFooter;
 
     private function parseHTTPArrayToLines(array $dataSource)
     {
@@ -41,11 +41,13 @@ trait TraitEntityEditableTable
 
     private function handleEditableTables(Request $request, $props, $parentId)
     {
-        // dump($request);
+        // dd($request->input());
         $toastrResult = [];
         $lineResult = [];
         $table01Names = $request['tableNames'];
+        $tableFnNames = $request['tableFnNames'];
         session()->forget('editableTablesTransactions');
+
         if (!is_null($table01Names)) {
             foreach ($table01Names as $table01Name => $tableName) {
                 $dataSource = $request[$table01Name];
@@ -120,11 +122,14 @@ trait TraitEntityEditableTable
                         }
                     }
                 }
+
+                $toBeOverrideAggregatedFields = $this->recalculateAggregatedFields($tableName, $table01Name, $tableFnNames, $parentId);
+                // Log::info($toBeOverrideAggregatedFields);
             }
         }
         // return $toastrResult;
         // dump($lineResult);
-        $result = [$toastrResult, empty($lineResult)];
+        $result = [$toastrResult, empty($lineResult), $toBeOverrideAggregatedFields];
         // dump($result);
         return $result;
     }

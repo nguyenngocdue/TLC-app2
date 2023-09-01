@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 trait TableTraitFooter
 {
+    private $debugFooter = !true;
     private $aggList = [
         'agg_none',
         'agg_count_all',
@@ -28,14 +29,11 @@ trait TableTraitFooter
         // 'agg_percent_not_empty',
     ];
 
-    function makeOneFooter($column, $tableName, $dataSource)
+    function makeOneFooterRaw($fieldName, $control, $eloquentTable, $dataSource)
     {
         if (!$dataSource) return;
-        $debug = !true;
-        $tz = DateTimeConcern::getTz();
 
-        $fieldName = $column['dataIndex'];
-        $control = $column['properties']['control'] ?? "";
+        $tz = DateTimeConcern::getTz();
 
         // $items = $dataSource->map(fn ($item) => is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName]);
         $items = $dataSource->map(function ($item) use ($fieldName) {
@@ -82,7 +80,7 @@ trait TableTraitFooter
             $result['agg_max'] = $items->max();
             $result['agg_range'] = $result['agg_max'] - $result['agg_min'];
         } catch (\Exception $e) {
-            Log::error("Exception in Footer, Table [" . $tableName . "] " . "field [" . $fieldName . "] " . $e->getMessage());
+            Log::error("Exception in Footer, Table [" . $eloquentTable . "] " . "field [" . $fieldName . "] " . $e->getMessage());
         }
 
         if (in_array($control, ['picker_date', 'picker_datetime', 'picker_time'])) {
@@ -117,19 +115,24 @@ trait TableTraitFooter
             }
         }
 
+        return $result;
+    }
+    private function makeOneFooter($result, $fieldName, $footer, $eloquentTable)
+    {
         $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr1-6 py-0";
         $inputs = [];
-        $footer = $column['footer'];
-        // echo $footer;
+
         foreach ($this->aggList as $agg) {
-            $bg = ($footer == $agg) ? "text-blue-700" : ($debug ? "" : "hidden");
-            $id = "{$tableName}[footer][{$fieldName}][$agg]";
+            $bg = ($footer == $agg) ? "text-blue-700" : ($this->debugFooter ? "" : "hidden");
+            $id = "{$eloquentTable}[footer][{$fieldName}][$agg]";
             // $value = ($agg != 'agg_none') ? round($result[$agg], 2)  : "";
             $value = $result[$agg];
             $onChange = "onChangeDropdown4AggregateFromTable('$id', this.value)";
             $inputs[] = "<input id='$id' title='$agg' component='TraitFooter' value='$value' readonly class='$class $bg' onChange=\"$onChange\" />";
         }
-        return join("", $inputs);
+
+        $inputs = join("", $inputs);
+        return $inputs;
     }
 
     function makeFooter($columns, $tableName, $dataSource)
@@ -144,7 +147,13 @@ trait TableTraitFooter
                 if (isset($column['footer'])) {
                     $hasFooter = true;
                     if (in_array($column['footer'], $this->aggList)) {
-                        $result0[$column['dataIndex']] = $this->makeOneFooter($column, $eloquentTable, $dataSource);
+                        $fieldName = $column['dataIndex'];
+                        $control = $column['properties']['control'] ?? "";
+                        $footer = $column['footer'];
+                        // $fieldName = $column['dataIndex'];
+                        $raw = $this->makeOneFooterRaw($fieldName, $control, $eloquentTable, $dataSource);
+                        $inputs = $this->makeOneFooter($raw, $fieldName, $footer, $eloquentTable);
+                        $result0[$column['dataIndex']] = $inputs;
                     } else {
                         $result0[$column['dataIndex']] = $column['footer'];
                     }
@@ -158,7 +167,7 @@ trait TableTraitFooter
             // dump($result0);
             return join("", $result0);
         } catch (\Exception $e) {
-            dump("Error during making footer aggregation.");
+            dump("Error during making footer aggregation, line " . $e->getLine());
             dd($e->getMessage());
         }
     }

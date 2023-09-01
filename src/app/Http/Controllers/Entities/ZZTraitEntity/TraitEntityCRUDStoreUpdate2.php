@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -140,7 +141,8 @@ trait TraitEntityCRUDStoreUpdate2
 			$toastrResult = [];
 			$lineResult = true;
 			if (!$isFakeRequest) {
-				[$toastrResult, $lineResult] = $this->handleEditableTables($request, $props['editable_table'], $theRow->id);
+				[$toastrResult, $lineResult, $toBeOverrideAggregatedFields] = $this->handleEditableTables($request, $props['editable_table'], $theRow->id);
+				// Log::info($toBeOverrideAggregatedFields);
 			}
 			//END OF TABLE BLOCK
 
@@ -159,9 +161,9 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			$fields = $this->handleFields($request, __FUNCTION__);
-			$fieldsHandle = $this->addEntityType($fields, 'status', $newStatus);
-			$previousValue = $this->getPreviousValue($fieldsHandle, $theRow);
-			$fieldForEmailHandler = $this->addEntityType($fieldsHandle, 'created_at', $theRow->getAttributes()['created_at']);
+			$handledFields = $this->addEntityType($fields, 'status', $newStatus);
+			$previousValue = $this->getPreviousValue($handledFields, $theRow);
+			$fieldForEmailHandler = $this->addEntityType($handledFields, 'created_at', $theRow->getAttributes()['created_at']);
 			$fieldForEmailHandler = $this->addEntityType($fieldForEmailHandler, 'updated_at', $theRow->getAttributes()['updated_at']);
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
@@ -190,7 +192,14 @@ trait TraitEntityCRUDStoreUpdate2
 			//If all tables are created or updated, change the status of the item
 			if ($lineResult) {
 				$this->handleStatus($theRow, $newStatus);
-				$theRow->updateWithOptimisticLocking($fieldsHandle);
+				if (isset($toBeOverrideAggregatedFields)) {
+					//If there are aggregation fields, override them
+					// Log::info($toBeOverrideAggregatedFields);
+					// Log::info($handledFields);
+					$handledFields = array_merge($handledFields, $toBeOverrideAggregatedFields);
+					// Log::info($handledFields);
+				}
+				$theRow->updateWithOptimisticLocking($handledFields);
 			}
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
