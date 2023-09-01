@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitChangeStatusMultiple;
+use App\Http\Controllers\Entities\ZZTraitApi\TraitGetLines;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitStoreEmpty;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitUpdateShort;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
@@ -21,6 +22,7 @@ class EntityCRUDControllerForApi extends Controller
 	use TraitStoreEmpty;
 	use TraitUpdateShort;
 	use TraitChangeStatusMultiple;
+	use TraitGetLines;
 
 	protected $type;
 	protected $modelPath;

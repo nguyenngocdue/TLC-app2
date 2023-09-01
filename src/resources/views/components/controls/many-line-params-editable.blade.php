@@ -19,7 +19,16 @@
 
 
 const getLines = ({ tableId }) => {
-    console.log(tableId, tableObject[tableId])
+    const team_id = getEById('team_id').val();
+    const date = getEById('ts_date').val();
+    const parent_id = getEById('entityParentId').val()
+    console.log(team_id, date, parent_id)
+    // console.log(tableId, tableObject[tableId])
+    const url = @json(route("prod_runs.getLines"));
+    const data = [{team_id, date, parent_id }];
+    // const data = [{team_id: 4, date: '2022-08-31', parent_id: 11576 }];
+    callApiGetLines(url, data, [], ()=>alert("Get lines is done."))
+    // callApiGetLines(url, data, [], ()=>location.reload())
 }
 
 </script>

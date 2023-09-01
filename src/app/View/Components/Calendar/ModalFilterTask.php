@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\BigThink\Oracy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Pj_task;
 use Illuminate\View\Component;
@@ -31,10 +32,8 @@ class ModalFilterTask extends Component
     private function getDataSource()
     {
         $dataSource = Pj_task::select('id', 'name', 'description')->get();
-        foreach ($dataSource as &$line) {
-            $line->{"getDisciplinesOfTask()"} = $line->getDisciplinesOfTask()->pluck('id');
-            $line->{"getLodsOfTask()"} = $line->getLodsOfTask()->pluck('id');
-        }
+        Oracy::attach("getDisciplinesOfTask()", $dataSource);
+        Oracy::attach("getLodsOfTask()", $dataSource);
         return $dataSource;
     }
 

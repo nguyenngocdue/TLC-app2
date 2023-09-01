@@ -13,6 +13,7 @@ use App\BigThink\TraitModelExtended;
 use App\BigThink\TraitMorphManyByFieldName;
 use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -74,7 +75,9 @@ class User extends Authenticatable implements LdapAuthenticatable
     public static $nameless = false;
     public function getNameAttribute($value)
     {
-        return $value . ($this->resigned ? " (RESIGNED)" : "") . ($this->show_on_beta ? " (BETA)" : "");
+        $name = $value . ($this->resigned ? " (RESIGNED)" : "") . ($this->show_on_beta ? " (BETA)" : "");
+        if (CurrentUser::isAdmin()) $name .= " (#" . $this->id . ")";
+        return $name;
     }
 
     /**
