@@ -90,13 +90,13 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 ),
                 t3 AS (
                     SELECT
-                                        SUBSTR(hseicshts.start_time, 1, 7) AS hse_month,
+                                        SUBSTR(hseicshts.start_date, 1, 7) AS hse_month,
                                         COUNT(hseicshts.id) AS hseicshts_tmpl_sht_count_vote
                                     FROM hse_insp_chklst_shts hseicshts
                                     WHERE 1 = 1
                                         AND hseicshts.workplace_id IN $strWorkplaceIds
                                         AND hseicshts.hse_insp_tmpl_sht_id = $HSE_INSP_CHKLST
-                                        AND SUBSTR(hseicshts.start_time, 1, 4) = $year
+                                        AND SUBSTR(hseicshts.start_date, 1, 4) = $year
                                         AND hseicshts.status = '$STATUS_INSP_CHKLST'
                                     GROUP BY hse_month
                 ),
