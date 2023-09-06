@@ -6,7 +6,9 @@ use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\Reports\Ghg_sheet_dataSource;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
+use App\Models\Term;
 use App\Utils\Support\DocumentReport;
+use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use App\Utils\Support\StringReport;
 use Illuminate\Support\Facades\DB;
@@ -30,8 +32,6 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			]
 		];
 	}
-
-
 
 	private function getNumberOfUserOfYear($params)
 	{
@@ -60,14 +60,78 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		return $collection;
 	}
 
-
-
-
 	public function getDataSource($params)
 	{
 		// dump($params);
 		$primaryData = (new Ghg_sheet_dataSource())->getDataSource($params);
 		return collect($primaryData);
+	}
+
+	private function updateDataForPivotChart($data, $key)
+	{
+		$array = [];
+		$max = 0;
+		$count = 1;
+		$scopeData = $data[$key];
+		foreach ($scopeData as $key => $scope) {
+			$scopeName = Term::find($scope['scope_id'])->toArray()['name'];
+			$array['meta']['labels'][] = $scopeName;
+			$array['meta']['numbers'][] = $scope['total_tco2e'];
+			$array['meta']['max'] = $scope['total_tco2e'] > $max ? $scope['total_tco2e'] : $max;
+			$array['meta']['count'] = $count++;
+			$array['metric'][] = (object)[
+				'metric_id' => $scope['scope_id'],
+				'metric_name' => $scopeName,
+				'metric_count' => $scope['total_tco2e']
+			];
+		}
+
+		foreach ($array as $key => &$value) {
+			if ($key === 'meta') {
+				$value['labels'] = StringReport::arrayToJsonWithSingleQuotes($value['labels']);
+				$value['numbers'] = $value['numbers'];
+			}
+		}
+		$data['pivot_chart_1'] = $array;
+		// dd($data);
+		return $data;
+	}
+
+	private function updateDataPivotHorizontalChart($dataSource)
+	{
+		$scopes = $dataSource['scopes'];
+		$data = [];
+		foreach ($scopes as $scopeId => $scope) $data[$scopeId] = array_merge(...$scope);
+		$datasets = [];
+		$numbers = array_fill(0, count($data), 0);
+		$labels = [];
+		$index = 0;
+		foreach ($data as $scopeId => $items) {
+			if(is_null($items)) continue;
+			foreach ($items as $value) {
+				if(!$value['ghgtmpl_name']) continue;
+				$labels[$scopeId] = $value['scope_name'];
+				$val = $numbers;
+				$val[$index] = is_null($value['total_months']) ? 0 :$value['total_months'];
+				// $val = StringReport::arrayToJsonWithSingleQuotes($val);
+				$datasets[] = (object)[
+					'label' => $value['ghgtmpl_name'],
+					'data' =>  $val,
+				];
+			}
+			++$index;
+		}
+		$metric  = [];
+		$dataSource->put('pivot_chart_2', []);
+		$dataSource['pivot_chart_2'] = [
+			'meta' => [
+				'numbers' => $datasets, 
+				'labels' => StringReport::arrayToJsonWithSingleQuotes($labels),
+				'count' => count($numbers)
+			],
+			'metric' => $metric,
+		];
+		return $dataSource;
 	}
 
 	public function changeDataSource($dataSource, $params)
@@ -79,7 +143,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 
 		// Calculate Scopes
 		$scopeSummaryMonths = [];
-		foreach ($data as $key => $value) {
+		foreach ($data['scopes'] as $key => $value) {
 			if (!is_numeric($key)) continue;
 			$scopeSummaryMonths[] = [
 				'scope_id' => $key,
@@ -95,10 +159,11 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$c02FootprintInfo[$year]['total_emission'] = $data['total_emission']['sum_total_months'];
 
 		$data->put('carbon_footprint', $c02FootprintInfo);
-		$data->put('scope', $scopeSummaryMonths);
-
-		dump($data);
-
+		$data->put('tco2e_by_scope', $scopeSummaryMonths);
+		// update values to render pivot chart
+		$data = self::updateDataForPivotChart($data, 'tco2e_by_scope');
+		$data = self::updateDataPivotHorizontalChart($data);
+		// dd($data);
 		return collect($data);
 	}
 
@@ -114,11 +179,11 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 	public function createInfoToRenderTable($dataSource)
 	{
 		$info = [];
-		foreach ($dataSource as $k1 => $values1) {
+		foreach ($dataSource['scopes'] as $k1 => $values1) {
 			$array = [];
 			$array['scope_rowspan'] = DocumentReport::countLastItems($values1);
 			foreach (array_values($values1) as $values2) {
-				if (!isset($values2['months'])) continue;
+				if (is_array($values2) && !isset($values2['months'])) continue;
 				$array['months'] = array_keys(reset($values2)['months']);
 			}
 			$info[$k1] = $array;

@@ -14,9 +14,12 @@ $titleColName = isset($params['quarter_time']) ? 'QTR'.$params['quarter_time'] :
 $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
 $year = $params['year'];
 $data = $tableDataSource['carbon_footprint'][$year];
+$pivotChart1 = $tableDataSource['pivot_chart_1'];
+$pivotChart2 = $tableDataSource['pivot_chart_2'];
+#dd($pivotChart2);
 @endphp
 
-{{-- @dump($tableDataSource, $params) --}}
+{{-- @dump($tableDataSource) --}}
 
 <div class="px-4">
     <div class="justify-end pb-5"></div>
@@ -53,7 +56,22 @@ $data = $tableDataSource['carbon_footprint'][$year];
                         </div>
                     </div>
                 </div>
-                <x-renderer.heading level=3 xalign='left' class='text-blue-600 font-semibold'>Chart</x-renderer.heading>
+                {{-- <x-renderer.heading level=3 xalign='left' class='text-blue-600 font-semibold'>Chart</x-renderer.heading> --}}
+                <div class=" grid-rows-1 pt-2 flex justify-center items-center">
+                    <div class="w-1/2 h-1/2">
+                        <x-renderer.report.pivot-chart key="carbon_footprint_1" :dataSource="$pivotChart1"></x-renderer.report.pivot-chart>
+                    </div>
+                    <x-renderer.heading level=6 xalign='left' class='text-blue-600 font-semibold'>Company's direct emissions in the year amounted to tCO2e. Indirect emissions from purchased energy
+                        accounted for tCO2e and other indirect emissions generated in the company's value chain were tCO2e.</x-renderer.heading>
+                </div>
+                <x-renderer.heading level=3 xalign='left' class='text-blue-600 font-semibold'>Horizontal Bar</x-renderer.heading>
+                <div class=" grid-rows-1 pt-2">
+                    <x-renderer.report.pivot-chart key="carbon_footprint_2" :dataSource="$pivotChart2"></x-renderer.report.pivot-chart>
+                    <x-renderer.heading level=6 xalign='left' class='text-blue-600 font-semibold'>Company's direct emissions in the year amounted to tCO2e. Indirect emissions from purchased energy
+                        accounted for tCO2e and other indirect emissions generated in the company's value chain were tCO2e.</x-renderer.heading>
+
+                </div>
+
 
             </div>
         </div>

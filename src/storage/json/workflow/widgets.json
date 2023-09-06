@@ -1,6 +1,6 @@
 {
-    "carbon_footprint": {
-        "name": "carbon_footprint",
+    "carbon_footprint_1": {
+        "name": "carbon_footprint_1",
         "report_name": "document-ghg_sheet_010",
         "hidden": null,
         "chart_type": "doughnut",
@@ -11,17 +11,27 @@
     },
     "carbon_footprint_2": {
         "name": "carbon_footprint_2",
-        "report_name": "document-ghg_sheet_020",
+        "report_name": "document-ghg_sheet_010",
         "hidden": null,
-        "chart_type": "doughnut",
+        "chart_type": "horizontal_bar",
         "fn": "SqlForeignKey",
         "section_title": "Carbon Report",
         "widget_title": "by Emission",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
     },
+    "carbon_footprint_3": {
+        "name": "carbon_footprint_3",
+        "report_name": "document-ghg_sheet_020",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": "SqlForeignKey",
+        "section_title": "Carbon Report",
+        "widget_title": "by Year",
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
+    },
     "chklst_01": {
         "name": "chklst_01",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -31,7 +41,7 @@
     },
     "chklst_02": {
         "name": "chklst_02",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -41,7 +51,7 @@
     },
     "chklst_03": {
         "name": "chklst_03",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -51,7 +61,7 @@
     },
     "chklst_04": {
         "name": "chklst_04",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -61,7 +71,7 @@
     },
     "prod_order_routing": {
         "name": "prod_order_routing",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -71,7 +81,7 @@
     },
     "prod_order_status": {
         "name": "prod_order_status",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "bar",
         "fn": "SqlForeignKeyWidget01",
@@ -81,7 +91,7 @@
     },
     "qaqc_ncr_assignee": {
         "name": "qaqc_ncr_assignee",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -91,7 +101,7 @@
     },
     "qaqc_ncr_discipline": {
         "name": "qaqc_ncr_discipline",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -101,7 +111,7 @@
     },
     "qaqc_ncr_owner_id": {
         "name": "qaqc_ncr_owner_id",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -111,7 +121,7 @@
     },
     "qaqc_ncr_report_type": {
         "name": "qaqc_ncr_report_type",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -121,7 +131,7 @@
     },
     "qaqc_ncr_status": {
         "name": "qaqc_ncr_status",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -131,7 +141,7 @@
     },
     "qaqc_wir_assignee": {
         "name": "qaqc_wir_assignee",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -141,7 +151,7 @@
     },
     "qaqc_wir_status": {
         "name": "qaqc_wir_status",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKeyWidget01",
@@ -151,7 +161,7 @@
     },
     "users_1": {
         "name": "users_1",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "pie",
         "fn": "SqlForeignKey",
@@ -161,7 +171,7 @@
     },
     "users_2": {
         "name": "users_2",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "bar",
         "fn": "SqlForeignKey",
@@ -171,7 +181,7 @@
     },
     "users_3": {
         "name": "users_3",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
@@ -181,7 +191,7 @@
     },
     "users_4": {
         "name": "users_4",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": "true",
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
@@ -191,7 +201,7 @@
     },
     "users_5": {
         "name": "users_5",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": "true",
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
@@ -201,7 +211,7 @@
     },
     "users_6": {
         "name": "users_6",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": "true",
         "chart_type": "doughnut",
         "fn": "SqlForeignKey",
@@ -211,7 +221,7 @@
     },
     "users_7": {
         "name": "users_7",
-        "report_name": "document-eco_sheet_010",
+        "report_name": null,
         "hidden": null,
         "chart_type": "line",
         "fn": "SqlForeignKey",

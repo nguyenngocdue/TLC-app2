@@ -24,7 +24,7 @@ class ManageWidgetsController extends AbstractManageLibController
             ];
         }
 
-        $allNameReports = array_keys(LibReports::getAll());
+        $allNameReports = [''] + array_keys(LibReports::getAll());
         // dump($apps);
         return   [
             [
@@ -55,7 +55,7 @@ class ManageWidgetsController extends AbstractManageLibController
                 'dataIndex' => "chart_type",
                 "renderer"  => 'dropdown',
                 'editable' => true,
-                'cbbDataSource' => ['', 'line', 'bar', 'pie', 'doughnut'],
+                'cbbDataSource' => ['', 'line', 'bar', 'horizontal_bar', 'pie', 'doughnut'],
                 'sortBy' => 'value',
                 "width" => 100,
             ],
