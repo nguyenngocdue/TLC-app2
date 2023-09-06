@@ -161,6 +161,7 @@
     },
     "hse_insp_chklst_shts": {
         "name": "hse_insp_chklst_shts",
+        "storeEmpty_and_updateShort": "true",
         "cloneTemplate_and_updateShort": "true"
     },
     "hse_insp_control_groups": {

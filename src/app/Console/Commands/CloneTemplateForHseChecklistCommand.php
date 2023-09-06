@@ -24,7 +24,9 @@ class CloneTemplateForHseChecklistCommand extends Command
      */
     protected $signature = 'ndc:cloneHse 
     {--ownerId= : ID of current user}
-    {--inspTmplId= : ID template Hse_insp_tmpls}';
+    {--inspTmplId= : ID template Hse_insp_tmpls}
+    {--workplaceId= : Workplace}
+    {--startDate= : Monday of the week}';
 
     /**
      * The console command description.
@@ -42,6 +44,8 @@ class CloneTemplateForHseChecklistCommand extends Command
     {
         $ownerId = $this->input->getOption('ownerId');
         $inspTmplId = $this->input->getOption('inspTmplId');
+        $workplaceId = $this->input->getOption('workplaceId');
+        $startDate = $this->input->getOption('startDate');
         $hseInspTmplSht = Hse_insp_tmpl_sht::findOrFail($inspTmplId);
         if (!$ownerId) {
             $this->info("Owner ID:{$ownerId} doesn't exist");
@@ -49,6 +53,14 @@ class CloneTemplateForHseChecklistCommand extends Command
         }
         if (!$hseInspTmplSht) {
             $this->info("Hse_insp_tmpl_sht ID:{$inspTmplId} doesn't exist");
+            return Command::FAILURE;
+        }
+        if (!$workplaceId) {
+            $this->info("Workplace ID:{$workplaceId} doesn't exist");
+            return Command::FAILURE;
+        }
+        if (!$startDate) {
+            $this->info("Start Date:{$startDate} doesn't exist");
             return Command::FAILURE;
         }
         try {
@@ -63,6 +75,9 @@ class CloneTemplateForHseChecklistCommand extends Command
                 'status' => 'new',
                 'progress' => 0,
                 'order_no' => $hseInspTmplSht->order_no,
+
+                'workplace_id' => $workplaceId,
+                "start_date" => $startDate,
             ]);
             foreach ($hseInspTmplSht->getLines as $hseInspTmplLine) {
                 Hse_insp_chklst_line::create([

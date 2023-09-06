@@ -8,7 +8,9 @@ class Hse_insp_chklst_sht extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "slug", "hse_insp_tmpl_sht_id", "owner_id",
-        "progress", "status", "order_no", "assignee_1", "workplace_id", "start_time", "finish_time"
+        "progress", "status", "order_no", "assignee_1", "workplace_id",
+        "start_date",
+        // "start_time", "finish_time"
     ];
     protected $table = "hse_insp_chklst_shts";
 

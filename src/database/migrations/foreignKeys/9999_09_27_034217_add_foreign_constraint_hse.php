@@ -26,9 +26,9 @@ return new class extends Migration
             $table->foreign('work_area_id')->references('id')->on('work_areas');
             $table->foreign('assignee_1')->references('id')->on('users');
         });
-        Schema::table('hse_insp_chklst_shts', function (Blueprint $table) {
-            $table->foreign('hse_insp_tmpl_sht_id')->references('id')->on('hse_insp_tmpl_shts')->cascadeOnDelete()->cascadeOnUpdate();
-        });
+        // Schema::table('hse_insp_chklst_shts', function (Blueprint $table) {
+        //     $table->foreign('hse_insp_tmpl_sht_id')->references('id')->on('hse_insp_tmpl_shts')->cascadeOnDelete()->cascadeOnUpdate();
+        // });
         Schema::table('hse_insp_tmpl_lines', function (Blueprint $table) {
             $table->foreign('hse_insp_tmpl_sht_id')->references('id')->on('hse_insp_tmpl_shts')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('hse_insp_group_id')->references('id')->on('hse_insp_groups');
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->foreign('control_type_id')->references('id')->on('control_types');
         });
         Schema::table('hse_insp_chklst_lines', function (Blueprint $table) {
-            $table->foreign('hse_insp_chklst_sht_id')->references('id')->on('hse_insp_chklst_shts'); // version 2
+            $table->foreign('hse_insp_chklst_sht_id')->references('id')->on('hse_insp_chklst_shts')->cascadeOnDelete(); // version 2
             $table->foreign('hse_insp_group_id')->references('id')->on('hse_insp_groups');
             $table->foreign('hse_insp_control_group_id')->references('id')->on('hse_insp_control_groups');
             $table->foreign('hse_insp_control_value_id')->references('id')->on('hse_insp_control_values');

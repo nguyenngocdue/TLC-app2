@@ -41,6 +41,12 @@
         "new": "true",
         "active": "true"
     },
+    "_start_date": {
+        "name": "_start_date",
+        "column_name": "start_date",
+        "new": "true",
+        "active": "true"
+    },
     "_start_time": {
         "name": "_start_time",
         "column_name": "start_time",
