@@ -81,23 +81,4 @@ class HseExtraMetrics extends ViewAllTypeMatrixParent
         $params['status'] =  'new';
         return $params;
     }
-
-    // protected function getMetaColumns()
-    // {
-    //     return [
-    //         ['dataIndex' => 'meta01', 'title' => 'Name', 'width' => 150,],
-    //         ['dataIndex' => 'count', 'align' => 'center', 'width' => 50],
-    //     ];
-    // }
-
-    // function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
-    // {
-    //     return [
-    //         'meta01' => (object) [
-    //             'value' => User::findFromCache($y->def_assignee)->name,
-    //             'cell_title' => $y->def_assignee,
-    //         ],
-    //         'count' => count($y->getTshtMembers()),
-    //     ];
-    // }
 }

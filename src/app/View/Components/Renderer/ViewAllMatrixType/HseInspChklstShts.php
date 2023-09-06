@@ -7,30 +7,32 @@ use App\Models\Workplace;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
+use App\View\Components\Renderer\ViewAllMatrixFilter\TraitFilterMonth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class HseInspChklstShts extends ViewAllTypeMatrixParent
 {
+    use TraitFilterMonth;
     use TraitXAxisWeekly;
     // use TraitYAxisDiscipline;
 
-    private $project, $subProject, $prodRouting, $prodDiscipline;
     protected $viewportDate = null;
-    protected $viewportMode = null;
+    // protected $viewportMode = null;
 
     // protected $xAxis = Prod_routing_link::class;
     protected $dataIndexX = "start_date";
     protected $yAxis = Workplace::class;
     protected $dataIndexY = "workplace_id";
-    // protected $rotate45Width = 400;
-    protected $tableTrueWidth = true;
-    protected $headerTop = 20;
+    protected $rotate45Width = 250;
+    // protected $tableTrueWidth = true;
+    // protected $headerTop = 20;
     protected $groupBy = null;
-    protected $mode = 'detail';
+    // protected $mode = 'detail';
     protected $apiToCallWhenCreateNew = 'cloneTemplate';
+    protected $nameColumnFixed = false;
 
-    protected $templateId = 1;
+    private $templateId;
     /**
      * Create a new component instance.
      *
@@ -39,9 +41,11 @@ class HseInspChklstShts extends ViewAllTypeMatrixParent
     public function __construct()
     {
         parent::__construct();
-        [$this->selectedYear, $this->selectedQuarter,] = $this->getUserSettings();
-        $this->selectedYear = $this->selectedYear ?: date("Y");
-        $this->selectedQuarter = $this->selectedQuarter ?: 3;
+        [$this->viewportDate, $this->templateId] = $this->getUserSettings();
+        $this->viewportDate = strtotime($this->viewportDate ? $this->viewportDate : now());
+        // [$this->selectedYear, $this->selectedQuarter,] = $this->getUserSettings();
+        // $this->selectedYear = $this->selectedYear ?: date("Y");
+        // $this->selectedQuarter = $this->selectedQuarter ?: 1;
         $this->templateId = $this->templateId ?: 1;
     }
 
@@ -49,10 +53,11 @@ class HseInspChklstShts extends ViewAllTypeMatrixParent
     {
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
-        $selectedYear = $settings[$type][Constant::VIEW_ALL]['matrix']['selected_year'] ?? null;
-        $selectedQuarter = $settings[$type][Constant::VIEW_ALL]['matrix']['selected_quarter'] ?? null;
+        // $selectedYear = $settings[$type][Constant::VIEW_ALL]['matrix']['selected_year'] ?? null;
+        // $selectedQuarter = $settings[$type][Constant::VIEW_ALL]['matrix']['selected_quarter'] ?? null;
+        $viewportDate = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] ?? null;
         $templateId = $settings[$type][Constant::VIEW_ALL]['matrix']['template_id'] ?? null;
-        return [$selectedYear, $selectedQuarter, $templateId];
+        return [$viewportDate, $templateId];
     }
 
     public function getYAxis()
@@ -73,8 +78,8 @@ class HseInspChklstShts extends ViewAllTypeMatrixParent
     protected function getViewportParams()
     {
         return [
-            'selected_year' => $this->selectedYear,
-            'selected_quarter' => $this->selectedQuarter,
+            // 'selected_year' => $this->selectedYear,
+            // 'selected_quarter' => $this->selectedQuarter,
         ];
     }
 
@@ -87,12 +92,5 @@ class HseInspChklstShts extends ViewAllTypeMatrixParent
         $params['start_date'] = $x['dataIndex'];
 
         return $params;
-    }
-
-    protected function getMetaColumns()
-    {
-        return [
-            // ['dataIndex' => 'production_name',  'width' => 300, 'fixed' => 'left',],
-        ];
     }
 }

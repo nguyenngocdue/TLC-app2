@@ -7,29 +7,19 @@ use Illuminate\Support\Facades\Log;
 
 trait TraitXAxisWeekly
 {
-    protected $selectedYear = 2023;
-    protected $selectedQuarter = 3;
-
     protected function getXAxis()
     {
         $xAxis = [];
-        $start = [1, 4, 7, 10];
-        $end = [3, 6, 9, 12];
-        $endD = [31, 30, 30, 31];
-        $quarterIndex = $this->selectedQuarter - 1;
 
-        $startMonth = $start[$quarterIndex];
-        $endMonth = $end[$quarterIndex];
-        $endDate = $endD[$quarterIndex];
+        $selectedYear =  date('Y', $this->viewportDate);
 
-        $startDate = Carbon::create($this->selectedYear, $startMonth, 1)->startOfWeek(); // Start from January 1, 2023
-
-        $endOfQuarter = Carbon::create($this->selectedYear, $endMonth, $endDate)->endOfWeek(); // End of March 2023
+        $startDate = Carbon::create($selectedYear, 1, 1)->startOfWeek(); // Start from January 1, 2023
+        $endOfQuarter = Carbon::create($selectedYear, 12, 31)->endOfWeek(); // End of March 2023
 
         $weekBeginningDates = [];
 
         while ($startDate->lte($endOfQuarter)) {
-            if ($startDate->year == $this->selectedYear) {
+            if ($startDate->year == $selectedYear) {
                 $weekBeginningDates[] = $startDate->copy(); // Copy the date to avoid modifying the original
             }
             $startDate->addWeek(); // Move to the next week
@@ -40,8 +30,9 @@ trait TraitXAxisWeekly
             // echo $date->toDateString() . "\n";
             $item = [
                 'dataIndex' => $date->toDateString(),
-                'title' => "Week " . $date->week . "<br/>(" . $date->format("d/m") . ")",
-                // 'tooltip' => "aa",
+                'title' => "Week " . $date->week . " (" . $date->format("d/m/Y") . ")",
+                'align' => 'center',
+                'width' => 50,
             ];
             $xAxis[] = $item;
         }
