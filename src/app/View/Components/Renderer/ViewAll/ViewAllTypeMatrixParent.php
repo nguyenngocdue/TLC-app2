@@ -37,6 +37,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $tableTopCenterControl = "";
     protected $checkboxCaptionColumn = null;
     protected $apiCallback = 'null'; //<<JS String
+    protected $nameColumnFixed = 'left';
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -317,7 +318,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return  [
             ['dataIndex' => 'name_for_group_by', 'hidden' => true],
-            ['dataIndex' => 'name', 'width' => 250, 'fixed' => 'left',],
+            ['dataIndex' => 'name', 'width' => 250, 'fixed' => $this->nameColumnFixed,],
             ...$this->getMetaColumns(),
             ...$extraColumns,
             ...$this->getRightMetaColumns(),
@@ -362,6 +363,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         switch ($this->type) {
             case "ghg_sheets":
             case "hse_extra_metrics":
+            case "hse_insp_chklst_shts":
                 $filterName = "select_year";
                 break;
             case "hr_timesheet_workers":
