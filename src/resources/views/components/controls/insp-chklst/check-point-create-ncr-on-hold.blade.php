@@ -3,9 +3,11 @@
         <div id="divRelatedNCRs"> 
             Related {{$syntax}}(s):
             @foreach($relatedEntities as $value)
+            <li>
                 <x-renderer.button target="_blank" class="m-1" title="{!! $value->description !!} (#{{$value->id}})" href="{{route($nameShow, $value->id)}}">
                     {{$value->name}} (<x-renderer.status>{{$value->status}}</x-renderer.status>)
                 </x-renderer.button>
+            </li>
             @endforeach   
         </div>
     @endif

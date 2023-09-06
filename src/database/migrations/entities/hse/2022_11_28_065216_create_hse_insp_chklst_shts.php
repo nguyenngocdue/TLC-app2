@@ -28,8 +28,11 @@ return new class extends Migration
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('workplace_id')->nullable();
             $table->float('progress')->nullable(); //version 2
-            $table->dateTime('start_time')->nullable();
-            $table->dateTime('finish_time')->nullable();
+
+            $table->date('start_date')->nullable();
+
+            // $table->dateTime('start_time')->nullable();
+            // $table->dateTime('finish_time')->nullable();
             $table->orderable();
             $table->appendCommonFields();
         });

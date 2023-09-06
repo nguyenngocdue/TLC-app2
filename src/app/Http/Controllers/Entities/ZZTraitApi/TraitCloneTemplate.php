@@ -49,8 +49,8 @@ trait TraitCloneTemplate
 					$result = $this->getResult($command, $params, $plural, $tmpl_id);
 					break;
 				case "hse_insp_chklst_shts":
-					['tmpl_id' => $tmpl_id,] = $line;
-					$params = ['--ownerId' => $ownerId, '--inspTmplId' => $tmpl_id,];
+					['tmpl_id' => $tmpl_id, 'workplace_id' => $workplace_id, 'start_date' => $start_date] = $line;
+					$params = ['--ownerId' => $ownerId, '--inspTmplId' => $tmpl_id, '--workplaceId' => $workplace_id, "--startDate" => $start_date];
 					$command = "ndc:cloneHse";
 					$result = $this->getResult($command, $params, $plural, $tmpl_id);
 					break;

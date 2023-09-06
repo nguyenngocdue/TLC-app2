@@ -8,7 +8,8 @@
         "ghg_sheets",
         "site_daily_assignments",
         "qaqc_insp_chklst_shts",
-        "qaqc_insp_chklsts"
+        "qaqc_insp_chklsts",
+        "hse_insp_chklst_shts"
     ],
     "apps_have_view_all_matrix_print": [
         "prod_sequences"
@@ -16,9 +17,7 @@
     "apps_have_view_all_matrix_approve_multi": [
         "hr_timesheet_workers"
     ],
-    "apps_have_add_new_by_cloning": [
-        "hse_insp_chklst_shts"
-    ],
+    "apps_have_add_new_by_cloning": [],
     "headings": [
         "",
         "z_h1",
