@@ -48,6 +48,7 @@ trait TraitEntityEditableTable
         $tableFnNames = $request['tableFnNames'];
         session()->forget('editableTablesTransactions');
 
+        $toBeOverrideAggregatedFields = [];
         if (!is_null($table01Names)) {
             foreach ($table01Names as $table01Name => $tableName) {
                 $dataSource = $request[$table01Name];
