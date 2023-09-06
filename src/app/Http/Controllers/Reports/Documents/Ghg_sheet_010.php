@@ -64,9 +64,9 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 			$item['month_ghg_sheet_id'] = StringReport::parseKeyValueString($item['month_ghg_sheet_id']);
 		}
 		$groupByScope = Report::groupArrayByKey($dataSource, 'scope_id');
-		$groupByScope = array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope);
+		$groupByScope = ['scopes' =>array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope)];
 		$groupByScope['total_emission'] = $monthlyTotals;
-		// dump($groupByScope);
+		// dd($groupByScope);
 		return collect($groupByScope);
 	}
 
@@ -83,7 +83,7 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 	public function createInfoToRenderTable($dataSource)
 	{
 		$info = [];
-		foreach ($dataSource as $k1 => $values1) {
+		foreach ($dataSource['scopes'] as $k1 => $values1) {
 			$array = [];
 			$array['scope_rowspan'] = DocumentReport::countLastItems($values1);
 			foreach (array_values($values1) as $values2) {

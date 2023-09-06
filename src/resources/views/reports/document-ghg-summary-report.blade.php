@@ -49,7 +49,7 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                     </td>
                 </tr>
                 {{-- Begin Row --}}
-                @foreach($tableDataSource as $keyScope => $values)
+                @foreach($tableDataSource['scopes'] as $keyScope => $values)
                 @php
                 if(!is_numeric($keyScope)) continue;
                 $rowSpanOutSide = $settingComplexTable[$keyScope]['scope_rowspan'];
