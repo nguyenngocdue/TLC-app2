@@ -35,33 +35,33 @@
         "new": "true",
         "active": "true"
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "new": "true",
-        "active": "true"
-    },
     "_start_date": {
         "name": "_start_date",
         "column_name": "start_date",
         "new": "true",
         "active": "true"
     },
-    "_start_time": {
-        "name": "_start_time",
-        "column_name": "start_time",
-        "new": "true",
-        "active": "true"
-    },
-    "_finish_time": {
-        "name": "_finish_time",
-        "column_name": "finish_time",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "new": "true",
         "active": "true"
     },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
+        "new": "true",
+        "active": "true"
+    },
+    "_progress": {
+        "name": "_progress",
+        "column_name": "progress",
+        "new": "true",
+        "active": "true"
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
         "new": "true",
         "active": "true"
     },
@@ -98,18 +98,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
-        "active": "true"
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
-        "new": "true",
-        "active": "true"
-    },
-    "_progress": {
-        "name": "_progress",
-        "column_name": "progress",
         "new": "true",
         "active": "true"
     }

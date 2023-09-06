@@ -71,9 +71,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_start_date": {
+        "name": "_start_date",
+        "column_name": "start_date",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -83,23 +83,11 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_start_time": {
-        "name": "_start_time",
-        "column_name": "start_time",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
-        "validation": "required|datetime_format:d\/m\/Y H:i",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_finish_time": {
-        "name": "_finish_time",
-        "column_name": "finish_time",
-        "label": "",
-        "validation": "required|datetime_format:d\/m\/Y H:i",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -115,6 +103,30 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "191",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_progress": {
+        "name": "_progress",
+        "column_name": "progress",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": ""
@@ -182,30 +194,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_progress": {
-        "name": "_progress",
-        "column_name": "progress",
         "label": "",
         "validation": "",
         "validation_regex": "",
