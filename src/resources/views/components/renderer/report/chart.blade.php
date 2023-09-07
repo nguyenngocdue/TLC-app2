@@ -44,7 +44,7 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 	}
 	Chart.register(ChartDataLabels);
   // Create the Chart.js configuration
-	chartConfig['{{$key}}'] = {
+	var chartConfig  = {
 		type: chartType,
 		data: {
 		labels: {!! $meta['labels'] !!},
@@ -80,7 +80,7 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
   var chartElement = document.getElementById('{{$key}}');
 
   // Create a new Chart.js chart with the specified element and configuration
-  new Chart(chartElement, chartConfig['{{$key}}']);
+  new Chart(chartElement, chartConfig);
 </script>
 
 
