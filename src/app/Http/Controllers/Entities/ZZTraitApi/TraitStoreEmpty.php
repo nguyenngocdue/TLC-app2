@@ -6,7 +6,6 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFieldHandler2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitSendNotificationAndMail;
 use App\Models\Hr_timesheet_line;
 use App\Models\Hr_timesheet_worker;
-use App\Models\Priority;
 use App\Models\Site_daily_assignment_line;
 use App\Models\User_team_site;
 use App\Models\User_team_tsht;
@@ -204,7 +203,10 @@ trait TraitStoreEmpty
 			$message = "Created " . sizeof($theRows) . " " . Str::plural($line_or_doc, sizeof($theRows)) . ".";
 			return ResponseObject::responseSuccess(
 				$theRows,
-				['defaultValue' => $defaultValue, 'requestedLines' => $lines],
+				[
+					'defaultValue' => $defaultValue,
+					'requestedLines' => $lines,
+				],
 				$message,
 			);
 		} catch (\Throwable $th) {

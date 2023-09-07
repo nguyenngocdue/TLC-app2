@@ -55,7 +55,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 			$this->makeUpCommentFieldForRequired($request);
 			$request->validate($rules, ["date_format" => "The :attribute must be correct datetime format."]);
-			$this->postValidationForDateTime($request, $props);
+			// $this->postValidationForDateTime($request, $props);//<< Removed since flatpickr
 		} catch (ValidationException $e) {
 			if ($request['tableNames'] == 'fakeRequest') {
 				$newValidation = $this->createTableValidator($e, $request);
@@ -132,7 +132,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->makeUpAttachmentFieldForRequired($theRow, $request);
 			$this->makeUpCommentFieldForRequired($request);
 			// dump($request);
-			// dump($rules);
+			// Log::info($rules);
 			// dd();
 
 			//START OF TABLE BLOCK
@@ -147,7 +147,7 @@ trait TraitEntityCRUDStoreUpdate2
 			//END OF TABLE BLOCK
 
 			$request->validate($rules, ["date_format" => "The :attribute must be correct datetime format."]);
-			$this->postValidationForDateTime($request, $props);
+			// $this->postValidationForDateTime($request, $props); //<< Removed since flatpickr
 			// if (!$isFakeRequest) {
 			// 	dump($request->input());
 			// 	dd();

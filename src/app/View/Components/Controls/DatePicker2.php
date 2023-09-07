@@ -29,6 +29,7 @@ class DatePicker2 extends Component
     {
         // dump($this->dateTimeType);
         // dump($this->value);
+        echo "(predicated2)";
 
         return view(
             'components.controls.date-picker2',

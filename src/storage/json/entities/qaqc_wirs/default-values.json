@@ -171,7 +171,7 @@
         "name": "_due_date",
         "column_name": "due_date",
         "label": "",
-        "validation": "date_format:d\/m\/Y H:i|required",
+        "validation": "date_format:Y-m-d H:i:s|required",
         "validation_regex": "",
         "formula": "",
         "default_value": "+7 days",

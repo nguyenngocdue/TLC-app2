@@ -1,12 +1,29 @@
 function onChangeDropdown4AggregateFromTable(id, value) {
     // console.log("onChangeDropdown4AggregateFromTable", id, value)
+    const props = superProps['props']
     for (let i = 0; i < listenersOfDropdown2.length; i++) {
         const listener = listenersOfDropdown2[i]
         const triggers = listener['triggers']
         // console.log(triggers, id)
         if (triggers.includes(id)) {
             const targetName = listener['column_name']
-            getEById(targetName).val(value)
+            const prop = props["_" + targetName]
+            const { control } = prop
+            // console.log(targetName, prop.control)
+            switch (control) {
+                case 'picker_date':
+                    initFlatPickrDate(targetName).setDate(value);
+                    break;
+                case 'picker_time':
+                    initFlatPickrTime(targetName).setDate(value);
+                    break;
+                case 'picker_datetime':
+                    initFlatPickrDateTime(targetName).setDate(value);
+                    break;
+                default:
+                    getEById(targetName).val(value)
+                    break;
+            }
             getEById(targetName).trigger('change')
             // console.log(listener)
         }
@@ -43,10 +60,10 @@ function calculateFooterValue(table01Name, eloquentFn, fieldName, control) {
         const value = getEById(name).val()
         switch (control) {
             case 'picker_date':
-                if (value) array.push(moment(value, "DD/MM/YYYY") / 1000) //<<convert milliseconds to seconds
+                if (value) array.push(moment(value, "YYYY-MM-DD") / 1000) //<<convert milliseconds to seconds
                 break
             case 'picker_datetime':
-                if (value) array.push(moment(value, "DD/MM/YYYY HH:mm") / 1000) //<<convert milliseconds to seconds
+                if (value) array.push(moment(value, "YYYY-MM-DD HH:mm") / 1000) //<<convert milliseconds to seconds
                 break
             case 'picker_time':
                 if (value) array.push(moment(value, "HH:mm") / 1000) //<<convert milliseconds to seconds
@@ -56,7 +73,7 @@ function calculateFooterValue(table01Name, eloquentFn, fieldName, control) {
                 break
         }
     }
-    // console.log(array)
+    // console.log(array, control)
     const result = {}
     result['agg_none'] = '';
     result['agg_count_all'] = array.length;
@@ -71,24 +88,27 @@ function calculateFooterValue(table01Name, eloquentFn, fieldName, control) {
 
     switch (control) {
         case 'picker_date':
-            result['agg_avg'] = moment.unix(result['agg_avg']).format("DD/MM/YYYY");
-            result['agg_min'] = moment.unix(result['agg_min']).format("DD/MM/YYYY");
-            result['agg_max'] = moment.unix(result['agg_max']).format("DD/MM/YYYY");
-            result['agg_median'] = moment.unix(result['agg_median']).format("DD/MM/YYYY");
+            const format0 = "YYYY-MM-DD";
+            result['agg_avg'] = moment.unix(result['agg_avg']).format(format0);
+            result['agg_min'] = moment.unix(result['agg_min']).format(format0);
+            result['agg_max'] = moment.unix(result['agg_max']).format(format0);
+            result['agg_median'] = moment.unix(result['agg_median']).format(format0);
             result['agg_sum'] = "maybe_meaningless";
             break
         case 'picker_datetime':
-            result['agg_avg'] = moment.unix(result['agg_avg']).format("DD/MM/YYYY HH:mm");
-            result['agg_min'] = moment.unix(result['agg_min']).format("DD/MM/YYYY HH:mm");
-            result['agg_max'] = moment.unix(result['agg_max']).format("DD/MM/YYYY HH:mm");
-            result['agg_median'] = moment.unix(result['agg_median']).format("DD/MM/YYYY HH:mm");
+            const format1 = "YYYY-MM-DD HH:mm";
+            result['agg_avg'] = moment.unix(result['agg_avg']).format(format1);
+            result['agg_min'] = moment.unix(result['agg_min']).format(format1);
+            result['agg_max'] = moment.unix(result['agg_max']).format(format1);
+            result['agg_median'] = moment.unix(result['agg_median']).format(format1);
             result['agg_sum'] = "maybe_meaningless";
             break
         case 'picker_time':
-            result['agg_avg'] = moment.unix(result['agg_avg']).format("HH:mm");
-            result['agg_min'] = moment.unix(result['agg_min']).format("HH:mm");
-            result['agg_max'] = moment.unix(result['agg_max']).format("HH:mm");
-            result['agg_median'] = moment.unix(result['agg_median']).format("HH:mm");
+            const format2 = "HH:mm";
+            result['agg_avg'] = moment.unix(result['agg_avg']).format(format2);
+            result['agg_min'] = moment.unix(result['agg_min']).format(format2);
+            result['agg_max'] = moment.unix(result['agg_max']).format(format2);
+            result['agg_median'] = moment.unix(result['agg_median']).format(format2);
             result['agg_sum'] = "maybe_meaningless";
             break
         default:

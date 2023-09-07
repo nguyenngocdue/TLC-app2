@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}">
 
     {{-- TLC2 will always be the last of CSS List --}}
     <link rel="stylesheet" href="{{ asset('css/select2-canh.css') }}">
@@ -26,6 +27,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/number-to-words.js') }}"></script>
     <script src="{{ asset('js/lazysizes.js') }}"></script>
+    <script src="{{ asset('js/flatpickr@4.6.13.min.js') }}"></script>
     
     {{-- <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js')}}"></script>

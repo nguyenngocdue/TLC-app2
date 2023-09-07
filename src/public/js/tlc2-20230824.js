@@ -86,3 +86,72 @@ const changeStatusAll = (url, ids, nextStatus, nextStatusLabel) => {
         }
     })
 }
+
+const convertToLocalTimezone = (datetimeString) => {
+    const now = new Date();
+    const timezoneOffset = now.getTimezoneOffset(); // in minutes
+
+    const datetime = new Date(datetimeString);
+    const localTime = new Date(datetime.getTime() - timezoneOffset * 60 * 1000);
+    return localTime;
+}
+
+const convertToServerTimezoneStr = (datetimeString) => {
+    const datetime = new Date(datetimeString);
+    const str = datetime.toISOString().substring(0, 19).replace("T", " ");
+    return str;
+}
+
+// function a() {
+//     const x = convertToLocalTimezone('2023-01-01 12:34:56')
+//     console.log(x.toISOString())
+
+//     const y = convertToServerTimezone(x)
+//     console.log(y)
+// }
+
+const initFlatPickrDateTimeParseDate = (dateString, format) => convertToLocalTimezone(dateString)
+
+const initFlatPickrDateTime = (id, name) => {
+    const element = document.getElementById(id)
+    return flatpickr(element, {
+        enableTime: true,
+        altInput: true,
+        altFormat: "d/m/Y H:i",
+        dateFormat: 'Y-m-d H:i:S',
+        weekNumbers: true,
+        time_24hr: true,
+        parseDate: initFlatPickrDateTimeParseDate,
+        onChange: (selectedDates, dateStr, instance) => {
+            const date = selectedDates[0]
+            const result = convertToServerTimezoneStr(date)
+            const hiddenInput = document.getElementById('hidden_' + name);
+            hiddenInput.value = result;
+        }
+    });
+}
+
+const initFlatPickrTime = (id) => {
+    const element = document.getElementById(id)
+    return flatpickr(element, {
+        noCalendar: true,
+        enableTime: true,
+        altInput: true,
+        altFormat: "H:i",
+        dateFormat: 'H:i:S',
+        weekNumbers: true,
+        time_24hr: true
+    });
+}
+
+const initFlatPickrDate = (id) => {
+    const element = document.getElementById(id)
+    return flatpickr(element, {
+        // enableTime: true,
+        altInput: true,
+        altFormat: "d/m/Y",
+        dateFormat: 'Y-m-d',
+        weekNumbers: true,
+        time_24hr: true
+    });
+}

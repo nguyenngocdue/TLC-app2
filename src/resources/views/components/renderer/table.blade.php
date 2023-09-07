@@ -1,6 +1,7 @@
 @once
 <script>
-var tableObjectColumns = {}
+var tableObjectColumns = {};
+var tableObjectIndexedColumns = {};
 </script>
 @endonce
 @if($noCss)
@@ -209,6 +210,14 @@ const applyFixedColumnWidth = (tableName, columns) => {
         $(`.table-td-fixed-right-${index}`).css('right', right);
         $(`.table-th-fixed-right-${index}`).css('right', right);
     })
+
+    const allColumns =  tableObjectColumns[tableName]
+    
+    tableObjectIndexedColumns[tableName] = {}
+    for(let i = 0; i< allColumns.length; i++) {
+        const column = allColumns[i];
+        tableObjectIndexedColumns[tableName][column['dataIndex']] = column;
+    }
 }
 </script>
 @endonce
