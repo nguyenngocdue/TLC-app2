@@ -49,7 +49,7 @@ $info = $tableDataSource['info'];
                     </div>
                     <div class="col-span-6 m-auto">
                         <div class='w-60 h-60 bg-green-700 p-3 flex justify-between flex-col '>
-                            <h3 class='text-xl font-semibold text-white'>Carbon per employee</h3>
+                            <h3 class='text-xl font-semibold text-white'>Carbon Footprint per Employee</h3>
                             <h4 class='text-4xl font-semibold text-white'>{{$data['co2_footprint_employee']}}</h4>
                             <h2 class='text-sm text-white'>average tCO2e/FTE</h2>
                         </div>
