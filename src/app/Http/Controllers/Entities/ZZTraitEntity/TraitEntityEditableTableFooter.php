@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
+use App\Utils\Support\JsonControls;
 use App\View\Components\Renderer\Table\TableTraitFooter;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -70,6 +72,9 @@ trait TraitEntityEditableTableFooter
                 $targetField = $listener['targetField'];
                 // $item->total = $newValue; //<< Update here will be overwritten by the_form's flow
                 // Log::info("Update item $tableName #$parentId ($modelPath) $targetField with value $newValue");
+                if (in_array($control, JsonControls::getDateTimeControls())) {
+                    $newValue = DateTimeConcern::convertForSaving($control, $newValue);
+                }
                 $result[$targetField] = $newValue;
             }
         }
