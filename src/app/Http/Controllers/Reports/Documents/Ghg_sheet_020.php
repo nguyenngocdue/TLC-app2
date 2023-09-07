@@ -134,6 +134,21 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		return $dataSource;
 	}
 
+	private function addInfo($dataSource) {
+		if(isset($dataSource['tco2e_by_scope'])) {
+			$directEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 335)[0]['total_tco2e'] ?? null;
+			$inDirectEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 336)[0]['total_tco2e'] ?? null;
+			$otherInDirectEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 337)[0]['total_tco2e'] ?? null;
+			$array = [
+				'direct_emissions' => $directEmissions,
+				'indirect_emissions' => $inDirectEmissions,
+				'other_indirect_emissions' => $otherInDirectEmissions
+			];
+			$dataSource->put('info', $this->addInfo($array));
+		}
+		return $dataSource;
+	}
+
 	public function changeDataSource($dataSource, $params)
 	{
 		$dataSource =  Report::convertToType($dataSource);
@@ -163,7 +178,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		// update values to render pivot chart
 		$data = self::updateDataForPivotChart($data, 'tco2e_by_scope');
 		$data = self::updateDataPivotHorizontalChart($data);
-		// dd($data);
+		$data = self::addInfo($data);
 		return collect($data);
 	}
 
@@ -188,6 +203,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			}
 			$info[$k1] = $array;
 		}
+		// dd($info);
 		return $info;
 	}
 }

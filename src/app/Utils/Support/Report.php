@@ -326,4 +326,14 @@ class Report
         }
         return $outputArrays;
     }
+
+    public static function filterItemByKeyAndValue($dataArray, $indexKey, $targetScopeId) {
+        $resultArray = [];
+        foreach ($dataArray as $item) {
+            if ($item[$indexKey] === $targetScopeId) {
+                $resultArray[] = $item;
+            }
+        }
+        return $resultArray;
+    }
 }

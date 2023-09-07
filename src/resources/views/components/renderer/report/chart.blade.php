@@ -55,9 +55,20 @@ var c = {}
       responsive: true,
       scales: scales,
       indexAxis: indexAxis,
+
       plugins: {
         legend: { position: 'bottom' },
-        title: { display: false, text: 'Chart.js Doughnut Chart' }
+          datalabels: {
+              anchor: 'end'
+              , align: 'start'
+              , formatter: (value, context) => {
+                  return value + '%';
+              }
+              , color: 'white'
+              , font: {
+                  size: 14
+              }
+          }
       }
     }
   };
