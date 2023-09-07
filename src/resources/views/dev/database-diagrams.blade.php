@@ -14,7 +14,7 @@
       </div>
     </div>
   </div>
-  <textarea id="mySavedModel" rows="50" class="w-full min-h-fit hidden"></textarea>
+  <textarea id="mySavedModel" rows="50" class="w-full min-h-fit hidden1-for-not-flashing"></textarea>
   <script>
     var nodeDataArray = @json($nodeDataArray);
     var linkDataArray = @json($linkDataArray);
