@@ -13,6 +13,7 @@ class PivotChart extends Component
     public function __construct(
         private $key = '',
         private $dataSource = [],
+        private $showValue = false,
     ) {
     }
 
@@ -28,7 +29,8 @@ class PivotChart extends Component
         $widget['metric'] = $dataSource['metric'];
         // dd($widget);
         return view("components.renderer.report.pivot-chart", [
-            'widget' => $widget
+            'widget' => $widget,
+            'showValue' => $this->showValue
         ]);
     }
 }

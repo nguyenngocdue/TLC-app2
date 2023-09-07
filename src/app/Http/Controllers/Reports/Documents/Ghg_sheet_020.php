@@ -77,13 +77,14 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			$scopeName = Term::find($scope['scope_id'])->toArray()['name'];
 			$array['meta']['labels'][] = $scopeName;
 			$array['meta']['numbers'][] = $scope['total_tco2e'];
-			$array['meta']['max'] = $scope['total_tco2e'] > $max ? $scope['total_tco2e'] : $max;
+			$array['meta']['max'] =  $max + $scope['total_tco2e'];
 			$array['meta']['count'] = $count++;
 			$array['metric'][] = (object)[
 				'metric_id' => $scope['scope_id'],
 				'metric_name' => $scopeName,
 				'metric_count' => $scope['total_tco2e']
 			];
+			$max  = $scope['total_tco2e'];
 		}
 
 		foreach ($array as $key => &$value) {
@@ -93,7 +94,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			}
 		}
 		$data['pivot_chart_1'] = $array;
-		// dd($data);
+		// dump($data);
 		return $data;
 	}
 
@@ -127,7 +128,8 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			'meta' => [
 				'numbers' => $datasets, 
 				'labels' => StringReport::arrayToJsonWithSingleQuotes($labels),
-				'count' => count($numbers)
+				'count' => count($numbers),
+				'max' => 1,
 			],
 			'metric' => $metric,
 		];
