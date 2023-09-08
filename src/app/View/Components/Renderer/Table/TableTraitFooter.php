@@ -126,7 +126,7 @@ trait TableTraitFooter
             $bg = ($footer == $agg) ? "text-blue-700" : ($this->debugFooter ? "" : "hidden");
             $id = "{$eloquentTable}[footer][{$fieldName}][$agg]";
             // $value = ($agg != 'agg_none') ? round($result[$agg], 2)  : "";
-            $value = $result[$agg];
+            $value = $result[$agg] ?? "";
             $onChange = "onChangeDropdown4AggregateFromTable('$id', this.value)";
             $inputs[] = "<input id='$id' title='$agg' component='TraitFooter' value='$value' readonly class='$class $bg' onChange=\"$onChange\" />";
         }
