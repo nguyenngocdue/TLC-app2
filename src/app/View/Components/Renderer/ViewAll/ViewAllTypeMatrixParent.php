@@ -132,7 +132,10 @@ abstract class ViewAllTypeMatrixParent extends Component
             return (object) $item;
         } else {
             // dump("Status not found: " . $document->status . " #" . $document->id);
-            return (object)['value' => "unknown status [" . $document->status . "] ???",];
+            return (object)[
+                'value' => "unknown status [" . $document->status . "] ???",
+                'cell_href' => route($this->type . ".edit", $document->id),
+            ];
         }
     }
     private function getBackgroundColorAndTextColor($document)
