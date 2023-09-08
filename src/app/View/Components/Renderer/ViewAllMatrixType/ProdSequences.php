@@ -189,6 +189,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         $started_at = DateTimeConcern::convertForLoading("picker_datetime", $y->started_at);
         $finished_at = DateTimeConcern::convertForLoading("picker_datetime", $y->finished_at);
+        $finished_at = (in_array($y->status, ['finished'])) ? substr($finished_at, 0, 10) : "";
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
         $result = [
@@ -197,7 +198,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             'status' => $status_object,
             'room_type' => ($y->getRoomType) ? $y->getRoomType->name : "",
             'started_at' => substr($started_at, 0, 10),
-            'finished_at' =>  substr($finished_at, 0, 10),
+            'finished_at' => $finished_at,
             // 'finished_at' => ($y->status === 'finished') ? substr($finished_at, 0, 10) : "",
             'total_days' => $y->finished_at ? Carbon::parse($y->finished_at)->diffInDays($y->started_at) : "",
         ];
@@ -223,7 +224,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             case "man_power":
                 return $doc->worker_number;
             case "total_mins":
-                return $doc->total_hours * 60;
+                return round($doc->total_hours * 60);
             case "min_per_uom":
                 return ($doc->total_uom > 0) ? round($doc->total_hours * 60 / $doc->total_uom, 2) : '<i class="fa-solid fa-infinity" title="DIV 0"></i>';
             case "uom":
@@ -250,8 +251,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
         //For Meta columns
         $result['status'] = "Status";
         $result['room_type'] = "Product Type";
-        $result['started_at'] = "Started At";
-        $result['finished_at'] = "Finished At";
+        $result['started_at'] = "Start";
+        $result['finished_at'] = "Finish";
         $result['total_days'] = "Total Days";
 
         foreach ($result as &$row) {
