@@ -147,30 +147,6 @@ class Report
         return $newArray;
     }
 
-    public static function explodePickerDate($pickerDate, $type='d/m/Y')
-    {
-        $pickerDate = array_map(fn ($item) => trim($item), explode('-', $pickerDate));
-        $startDate = $pickerDate[0] ?? '01/01/2021';
-        $endDate = $pickerDate[1] ?? '01/02/2021';
-        if($type === 'Y-m-d'){
-            $startDate = Report::formatDateString($startDate, 'Y-m-d');
-            $endDate = Report::formatDateString($endDate, 'Y-m-d');
-        }
-        return [$startDate, $endDate];
-    }
-
-    public static function formatDateString($strDate, $typeFormat = 'Y-m-d')
-    {
-        $strDate = str_replace(['-', '_'], '/', $strDate);
-        $dateTime = DateTime::createFromFormat('d/m/Y', $strDate);
-        // dd($strDate, $dateTime);
-        if (!$dateTime) return false;
-        if ($dateTime) {
-            return $dateTime->format($typeFormat);
-        }
-        return DateTime::createFromFormat('Y/m/d', $strDate)->format($typeFormat);
-    }
-
     public static function retrieveDataByIndex($array, $key, $reverse = false, $type = 'key')
     {
         $idx = array_search($key, array_values($array));

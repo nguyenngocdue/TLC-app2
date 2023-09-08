@@ -35,6 +35,8 @@ class PivotTable extends Component
         private $pageLimit = 10,
         protected $tableTrueWidth = false,
         protected $tableColumns = [],
+        protected $tableDataHeader = [],
+        protected $maxH = false,
 
     ) {
     }
@@ -124,6 +126,7 @@ class PivotTable extends Component
         if (isset($dataFields['is_raw'][$modeType])) {
             $isRawData = $dataFields['is_raw'][$modeType]->is_dataSource;
         }
+        $tableDataHeader = $this->tableDataHeader;
 
         if ($modeType && !$isRawData) {
             [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData, $modeType, $params);
@@ -148,8 +151,9 @@ class PivotTable extends Component
         return view("components.renderer.report.pivot-table", [
             'tableDataSource' => $dataRender,
             'tableColumns' => $tableColumns,
-            'tableDataHeader' => $tableDataHeader ?? [],
+            'tableDataHeader' => $tableDataHeader,
             'tableTrueWidth' => $this->tableTrueWidth,
+            'maxH'=>$this->maxH,
         ]);
     }
 }

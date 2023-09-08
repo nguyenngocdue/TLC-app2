@@ -62,11 +62,11 @@ trait  PivotReportColumn2
                         $thirdUnderscore = PivotReport::findPosition($field, '_', 3);
                         if ($thirdUnderscore) {
                             if ($typeRender === 'type_2') {
-                                $date = Report::formatDateString(substr($field, 0, $thirdUnderscore - 1), 'd/m/Y');
+                                $date = DateReport::formatDateString(substr($field, 0, $thirdUnderscore - 1), 'd/m/Y');
                                 $dayOfWeek = DateReport::getShortDayOfWeek($date);
                                 $array[$field] = "<div class='text-gray-700 dark:text-gray-300'><span>$date<br>$dayOfWeek</span></div>";
                             } else {
-                                $date = Report::formatDateString(substr($field, 0, $thirdUnderscore - 1), 'd/m/y');
+                                $date = DateReport::formatDateString(substr($field, 0, $thirdUnderscore - 1), 'd/m/y');
                                 if ($date) $array[$field] = str_replace('/', '<br/>', $date);
                             }
                         }

@@ -29,7 +29,8 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
     protected $prodRoutingId = 2;
     protected $groupByLength = 1;
     protected $groupBy = 'prod_discipline_name';
-    protected $viewName = 'prod-sequence-010';
+    protected $viewName = 'document-prod-sequence-010';
+    protected $type = 'prod_sequence';
 
     // DataSource
     public function getSqlStr($params)
@@ -92,7 +93,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         $b = 'project_id';
         $c = 'sub_project_id';
         $d = 'prod_routing_id';
-        $pickerDate = Report::createDefaultPickerDate();
+        $pickerDate = Report::createDefaultPickerDate('-3 years');
         if (Report::isNullParams($params)) {
             $params[$a] = $pickerDate;
             $params[$b] = $this->projectId;
@@ -229,4 +230,5 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         }
         return $dataSource;
     }
+    
 }

@@ -17,7 +17,7 @@ class PickerDate1 extends Component
         private $value = '',
         private $title = '',
         private $allowClear = false,
-
+        private $singleDatePicker = false,
     ) {
         //
     }
@@ -34,6 +34,7 @@ class PickerDate1 extends Component
             'name' => $this->name,
             'value' => $this->value,
             'allowClear' => $this->allowClear,
+            'singleDatePicker' => (bool)$this->singleDatePicker,
         ]);
     }
 }

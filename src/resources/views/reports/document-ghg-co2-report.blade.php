@@ -26,7 +26,7 @@ $info = $tableDataSource['info'];
         break;
         case 'portrait':
         default:
-            $layout = 'w-[1000px] min-h-[1355px]';
+            $layout = 'w-[1000px] min-h-[1360px]';
             break;
     }
 @endphp
@@ -36,9 +36,7 @@ $info = $tableDataSource['info'];
 <div class="px-4">
 
     @include('components.reports.shared-parameter')
-    <div class="w-full no-print bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600">
-        <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$entity}}" />
-    </div>
+    @include('components.reports.show-layout')
 </div>
 {{-- @dd($entity) --}}
 <br />

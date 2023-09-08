@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Reports;
 
-use App\Utils\Support\DocumentReport;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\PivotReport;
-use App\Utils\Support\Report;
-use Illuminate\Support\Facades\DB;
 
 abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 {
@@ -15,9 +13,9 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
         $pickerDate = $params['picker_date'];
         $dates = explode("-", $pickerDate);
         [$fromDate, $toDate] = [trim($dates[0]), trim($dates[1])];
-
+        
         $manyDates = PivotReport::getDatesBetween($fromDate, $toDate);
-        $manyDates = array_map(fn ($item) => Report::formatDateString($item), $manyDates);
+        $manyDates = array_map(fn ($item) => DateReport::formatDateString($item), $manyDates);
 
         $params = array_map(function ($item) use ($params) {
             $params['picker_date'] =  $item;

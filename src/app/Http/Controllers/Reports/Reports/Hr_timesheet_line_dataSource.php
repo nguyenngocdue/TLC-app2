@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Reports\Reports;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\PivotReport;
-use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
 class Hr_timesheet_line_dataSource extends Controller
@@ -23,7 +23,7 @@ class Hr_timesheet_line_dataSource extends Controller
     public function getSqlStr($params)
     {
         $pickerDate = $params['picker_date'] ?? PivotReport::defaultPickerDate();
-        [$startDate, $endDate] = Report::explodePickerDate($pickerDate, 'Y-m-d');
+        [$startDate, $endDate] = DateReport::explodePickerDate($pickerDate, 'Y-m-d');
         $sql = "SELECT
                     DATE(tsl.start_time) AS time_sheet_start_time,
                     SUBSTRING(tsl.start_time, 1, 7) AS month,

@@ -95,7 +95,7 @@ abstract class Report_Parent2Controller extends Controller
         return redirect($request->getPathInfo());
     }
 
-    protected function tableDataHeader($params, $data)
+    protected function tableDataHeader($data, $params)
     {
         return [];
     }
@@ -213,7 +213,7 @@ abstract class Report_Parent2Controller extends Controller
         $isEmptyAllDataSource = $this->isEmptyAllDataSource($dataSource);
 
         $tableColumns = $this->typeView === 'report-pivot' ? [] : $this->getTableColumns($params, $dataSource);
-        $tableDataHeader = $this->tableDataHeader($params, $dataSource);
+        $tableDataHeader = $this->tableDataHeader($dataSource, $params);
         echo $this->getJS();
         $titleReport = $this->makeModeTitleReport($routeName);
         $modeType = $this->modeType;
