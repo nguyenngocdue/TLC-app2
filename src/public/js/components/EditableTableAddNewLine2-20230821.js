@@ -108,29 +108,32 @@ const addANewLine = (params) => {
                 // console.log(dateTimeControls)
                 for (let i = 0; i < batchLength; i++) {
                     const valuesOfOrigin = response['hits'][i]
-                    Object.keys(dateTimeControls).forEach(key => {
-                        if (undefined !== valuesOfOrigin[key]) {
-                            const picker_type = dateTimeControls[key]
-                            // console.log(key, picker_type)
-                            if (FORMAT[picker_type] === undefined)
-                                console.log("Unknown how to format " + picker_type + " for " + key)
-                            else {
-                                // console.log("Converting " + valuesOfOrigin[key])
-                                switch (picker_type) {
-                                    case "picker_time":
-                                        //check not null, otherwise Invalid Date
-                                        if (valuesOfOrigin[key]) valuesOfOrigin[key] = moment(valuesOfOrigin[key], "HH:mm:ss").format("HH:mm")
-                                        break
-                                    default:
-                                        if (valuesOfOrigin[key]) valuesOfOrigin[key] = moment(valuesOfOrigin[key]).format(FORMAT[picker_type])
-                                        break
-                                }
-                                // console.log("Converted to " + picker_type + key + valuesOfOrigin[key])
-                            }
-                        } else {
-                            // console.log("Date time has value ", key, valuesOfOrigin[key])
-                        }
-                    })
+                    // Object.keys(dateTimeControls).forEach(key => {
+                    //     if (undefined !== valuesOfOrigin[key]) {
+                    //         const picker_type = dateTimeControls[key]
+                    //         // console.log(key, picker_type)
+                    //         if (FORMAT[picker_type] === undefined)
+                    //             console.log("Unknown how to format " + picker_type + " for " + key)
+                    //         else {
+                    //             // console.log("Converting " + valuesOfOrigin[key])
+                    //             switch (picker_type) {
+                    //                 case "picker_time":
+                    //                     //check not null, otherwise Invalid Date
+                    //                     if (valuesOfOrigin[key]) valuesOfOrigin[key] = moment(valuesOfOrigin[key], "HH:mm:ss").format("HH:mm")
+                    //                     break
+                    //                 // case "picker_datetime":
+                    //                 //     console.log(key, valuesOfOrigin[key])
+                    //                 //     break
+                    //                 default:
+                    //                     if (valuesOfOrigin[key]) valuesOfOrigin[key] = moment(valuesOfOrigin[key]).format(FORMAT[picker_type])
+                    //                     break
+                    //             }
+                    //             // console.log("Converted to " + picker_type + key + valuesOfOrigin[key])
+                    //         }
+                    //     } else {
+                    //         // console.log("Date time has value ", key, valuesOfOrigin[key])
+                    //     }
+                    // })
                     // valuesOfOrigin['id'] = line.id
 
                     //Find a way to run from default values
@@ -144,7 +147,7 @@ const addANewLine = (params) => {
                     //     valuesOfOrigin['break_time'] = 0
                     // }
 
-                    // console.log("Add line to table", valuesOfOrigin)
+                    // console.log("Add line to table from ajax respond", valuesOfOrigin)
                     addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList, batchLength, })
                 }
                 getEById(btnAddANewLineId).show()
@@ -359,7 +362,8 @@ const addANewLineFull = (params) => {
                     break
                 case 'picker-all4':
                     const { control } = column
-                    renderer = "<input component='editable/" + control + "' id='" + id + "' name='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"
+                    const attributeName = control === 'picker_datetime' ? 'name1' : 'name'
+                    renderer = "<input component='editable/" + control + "' id='" + id + "' " + attributeName + "='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"
                     const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
                     renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeFooterValue) + '</script>'
                     break
@@ -442,7 +446,8 @@ const addANewLineFull = (params) => {
                 }
                 break
             default:
-                // console.log("DDDDDD5", column)
+                const value = valuesOfOrigin[column['dataIndex']]
+                // console.log("DDDDDD5", column, value)
                 if (column['value_as_parent_type']) {
                     getEById(id).val($('#entityParentType').val())
                     getEById(id).trigger('change', { batchLength })
@@ -473,12 +478,21 @@ const addANewLineFull = (params) => {
                     getEById(id).trigger('change', { batchLength })
                     break
                 }
-                const value = valuesOfOrigin[column['dataIndex']]
                 if (column['renderer'] === 'toggle') {
                     getEById(id)[0].checked = value
+                } else if (column['control'] === 'picker_datetime') {
+                    initFlatPickrDateTime(id, id).setDate(value);
+                    getEById("hidden_" + id).val(value);
+                } else if (column['control'] === 'picker_date') {
+                    initFlatPickrDate(id).setDate(value);
+                }
+                else if (column['control'] === 'picker_time') {
+                    initFlatPickrTime(id).setDate(value);
                 } else {
+                    // console.log("Applying data for", id, value)
                     getEById(id).val(value)
                 }
+
                 getEById(id).trigger('change', { batchLength })
                 break
 

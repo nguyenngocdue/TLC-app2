@@ -1,17 +1,33 @@
 {{-- @if($readOnly)
 <div class="p-2">{{$cell??$slot}}</div>
 @endif --}}
+@php $attributeName = ($control == 'picker_datetime') ? "name1" : "name"; @endphp
+
 <input
     @readonly($readOnly)
     component="editable/{{$control}}"
     {{-- component="editable/picker-all4" --}}
     id="{{$name}}"
-    name="{{$name}}"
+    {{$attributeName}}="{{$name}}"
     value="{{$cell??$slot}}"
     type="text"
     placeholder="{{$placeholder}}" 
     class="{{$classList}} {{$readOnly?"readonly":""}} {{$readOnly?"hidden1":""}}"
 >
+
+@switch($control)
+    @case('picker_datetime')
+    <input type="hidden" name="{{$name}}" id="hidden_{{$name}}" value="{{$cell??$slot}}"/>
+    <script>initFlatPickrDateTime("{{$name}}", "{{$name}}");</script>
+    @break
+    @case('picker_date')
+    <script>initFlatPickrDate("{{$name}}");</script>
+    @break
+    @case('picker_time')
+    <script>initFlatPickrTime("{{$name}}");</script>
+    @break
+@endswitch
+
 <script>
     $("[id='{{$name}}']").on('change', function(e, dropdownParams){
         onChangeDropdown4({

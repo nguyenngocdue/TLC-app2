@@ -210,7 +210,12 @@ const duplicateLineEditableTable = (params) => {
         const column = columns[i]
         //Do not duplicate those columns
         if (['action', 'id', 'order_no'].includes(column.dataIndex)) continue
-        const name = tableId + "[" + column['dataIndex'] + "][" + nameIndex + "]"
+        let name = tableId + "[" + column['dataIndex'] + "][" + nameIndex + "]"
+        // console.log(column, column['properties'])
+        if (column['properties']?.['control'] == 'picker_datetime' || column['control'] == 'picker_datetime') {
+            name = "hidden_" + name
+            // console.log("Get from hidden filed", name)
+        }
         const value = getValueById(name, column['renderer'])
         valuesOfOrigin[column['dataIndex']] = value
     }
@@ -259,6 +264,8 @@ const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
     if (debugEditable) console.log(tableId)
     const nameIndex = getNameIndexOfRowIndex(tableId, 0)
     if (debugEditable) console.log(nameIndex, renderer)
+    const column = tableObjectIndexedColumns[tableId]
+    const control = (column[dataIndex]['properties']['control'])
     const name = tableId + "[" + dataIndex + "][" + nameIndex + "]"
     const value = getValueById(name, renderer)
     // const value = getCellValueByName(tableId, '[' + dataIndex + ']', 0)
@@ -266,12 +273,32 @@ const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
     const length = getAllRows(tableId).length
     for (let i = 0; i < length; i++) {
         const id = makeIdFrom(tableId, dataIndex, i)
+
         if (renderer === 'toggle') {
             getEById(id)[0].checked = value
-            // getEById(id).trigger('change')
+        } else if (control === 'picker_datetime') {
+            initFlatPickrDateTime(id, id).setDate(value);
+            getEById("hidden_" + id).val(value);
+            getEById(id).trigger('change', { batchLength: length })
+        } else if (control === 'picker_date') {
+            initFlatPickrDate(id).setDate(value);
+            getEById(id).trigger('change', { batchLength: length })
+        }
+        else if (control === 'picker_time') {
+            initFlatPickrTime(id).setDate(value);
+            getEById(id).trigger('change', { batchLength: length })
         } else {
+            // console.log("Applying data for", id, value)
             getEById(id).val(value)
             getEById(id).trigger('change', { batchLength: length })
         }
+
+        // if (renderer === 'toggle') {
+        //     getEById(id)[0].checked = value
+        //     // getEById(id).trigger('change')
+        // } else {
+        //     getEById(id).val(value)
+        //     getEById(id).trigger('change', { batchLength: length })
+        // }
     }
 }

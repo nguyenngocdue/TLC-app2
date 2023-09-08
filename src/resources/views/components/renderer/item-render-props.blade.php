@@ -139,15 +139,18 @@
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_time')
-                    <x-controls.text2 name={{$columnName}} component="controls/picker_time" value={{$value}} readOnly={{$readOnly}} placeholder="HH:MM" icon="fa-duotone fa-clock" />
+                    <x-controls.picker-time2 name={{$columnName}} component="controls/picker_time2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
+                    {{-- <x-controls.text2 name={{$columnName}} component="controls/picker_time" value={{$value}} readOnly={{$readOnly}} placeholder="HH:MM" icon="fa-duotone fa-clock" /> --}}
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_datetime')
-                    <x-controls.text2 name={{$columnName}} component="controls/picker_datetime" value={{$value}} readOnly={{$readOnly}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" />
+                    <x-controls.picker-datetime2 name={{$columnName}} component="controls/picker_datetime2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
+                    {{-- <x-controls.text2 name={{$columnName}} component="controls/picker_datetime" value={{$value}} readOnly={{$readOnly}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" /> --}}
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_date')
-                    <x-controls.date-picker2 name={{$columnName}} component="controls/picker_date" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
+                    <x-controls.picker-date2 name={{$columnName}} component="controls/picker_date2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
+                    {{-- <x-controls.date-picker2 name={{$columnName}} component="controls/picker_date" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" /> --}}
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_week')

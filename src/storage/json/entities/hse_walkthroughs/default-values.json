@@ -27,7 +27,7 @@
         "name": "_walkthrough_datetime",
         "column_name": "walkthrough_datetime",
         "label": "",
-        "validation": "required|date_format:d\/m\/Y H:i",
+        "validation": "required|date_format:Y-m-d H:i:s",
         "validation_regex": "",
         "formula": "",
         "default_value": "",

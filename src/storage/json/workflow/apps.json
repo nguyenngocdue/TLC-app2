@@ -625,7 +625,8 @@
         "show_renderer": "props-renderer",
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-badge-check\"><\/i>",
-        "show_in_my_view": "true"
+        "show_in_my_view": "true",
+        "disallowed_direct_creation": "true"
     },
     "hse_extra_metric": {
         "name": "hse_extra_metric",

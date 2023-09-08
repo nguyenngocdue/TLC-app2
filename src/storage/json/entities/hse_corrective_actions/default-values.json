@@ -147,7 +147,7 @@
         "name": "_closed_at",
         "column_name": "closed_at",
         "label": "",
-        "validation": "date_format:d\/m\/Y H:i|nullable",
+        "validation": "date_format:Y-m-d H:i:s|nullable",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
