@@ -22,6 +22,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 	protected $viewName = 'document-ghg-co2-report';
 	protected $year = '2023';
 	protected $mode = '020';
+	protected $type = 'ghg_sheets';
 
 	public function getParamColumns($dataSource, $modeType)
 	{

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Reports;
 
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetOptionPrint;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibReports;
+use App\Utils\ClassList;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
@@ -24,6 +26,7 @@ abstract class Report_Parent2Controller extends Controller
     use TraitFunctionsReport;
     use TraitLibPivotTableDataFields2;
     use TraitCreateSQL;
+    use TraitGetOptionPrint;
 
 
     protected $mode = '010';
@@ -34,6 +37,7 @@ abstract class Report_Parent2Controller extends Controller
     protected $modeType = '';
     protected $rotate45Width = false;
     protected $viewName = '';
+    protected $type = '';
 
 
     // abstract protected function getSqlStr($params);
@@ -248,6 +252,8 @@ abstract class Report_Parent2Controller extends Controller
             'isEmptyAllDataSource' => $isEmptyAllDataSource,
             'topTitle' => $this->getMenuTitle(),
             'settingComplexTable' => $settingComplexTable,
+            'classListOptionPrint' => ClassList::DROPDOWN,
+            'valueOptionPrint' => $this->getValueOptionPrint()
         ] + $dataRenderDocReport);
     }
 

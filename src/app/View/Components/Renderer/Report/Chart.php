@@ -17,6 +17,7 @@ class Chart extends Component
         private $metric = [],
         private $key = "",
         private $widgetParams = [],
+        private $showValue  = false,
     ) {
         //
     }
@@ -52,6 +53,7 @@ class Chart extends Component
                 'key' => $this->key,
                 'meta' => $meta,
                 'metric' => $metric,
+                'showValue' => $this->showValue
             ]
         );
     }

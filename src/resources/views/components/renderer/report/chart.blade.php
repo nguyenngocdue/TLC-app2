@@ -1,4 +1,4 @@
-@props(['chartType','showValue'])
+@props(['chartType'])
 
 <div class="block"><canvas id="{{$key}}"></canvas></div>
 
@@ -20,12 +20,27 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 	var scales = {};
 		if ('{{$chartType}}' === 'horizontal_bar') {
 			datasets = {!! json_encode($meta['numbers']) !!};
-			// Customize options for horizontal bar chart
 			chartType = 'bar';
 			indexAxis = 'y';  
 			scales = {
-				x: { stacked: true }, // Customize scales for horizontal bar chart
-				y: { stacked: true }
+				x: { 
+					stacked: true 
+					,ticks: {
+						font: {
+                            size: 16, 
+                            weight: 'bold'
+                        }
+					}
+				},
+				y: { 
+					stacked: true
+					,ticks: {
+						font: {
+                            size: 16, 
+                            weight: 'bold'
+                        }
+					}	
+				}
 			};
 			datasets.forEach(function(dataset, index) {
 				dataset.backgroundColor = COLORS[index];
@@ -39,9 +54,6 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 			backgroundColor: Object.values(COLORS)
 			});
 		}
-	if('{{$showValue}}' !== '') {
-
-	}
 	Chart.register(ChartDataLabels);
   // Create the Chart.js configuration
 	var chartConfig  = {
@@ -55,9 +67,18 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 		scales: scales,
 		indexAxis: indexAxis,
 		plugins: {
-			legend: { position: 'bottom' },
+			legend: { 
+					position: 'bottom'
+					,labels: {
+						color: 'rgba(0, 0, 0, 0.7)'
+						,font: {
+							size: 16,
+						}
+						,padding: 16
+					}
+			},
 			datalabels:{
-				display: '{{$showValue}}'*1,
+				display: '{{$showValue}}'*1 ?? 0,
 				anchor: 'end'
 				,align: 'start'
 				,color: 'white'
