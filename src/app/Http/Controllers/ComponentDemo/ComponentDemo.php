@@ -26,7 +26,7 @@ class ComponentDemo
     {
         return [
             'static' => ['href' => "#static", 'title' => "Static", 'active' => false,],
-            'icons' => ['href' => "#icons", 'title' => "Icons", 'active' => true,],
+            'icons' => ['href' => "#icons", 'title' => "Icons", 'active' => false,],
             'data_display' => ['href' => "#data_display", 'title' => "Data Display", 'active' => false,],
             'data_entry' => ['href' => "#data_entry", 'title' => "Data Entry", 'active' => false,],
             'attachments' => ['href' => "#attachments", 'title' => "Attachments", 'active' => false,],
@@ -36,6 +36,7 @@ class ComponentDemo
             'listeners' => ['href' => "#listeners", 'title' => "Listeners", 'active' => false,],
             'pivot_tables' => ['href' => "#pivot_tables", 'title' => "Pivot Tables", 'active' => false,],
             'pivot_tables2' => ['href' => "#pivot_tables2", 'title' => "Pivot Tables 2", 'active' => false,],
+            'charts' => ['href' => "#charts", 'title' => "Charts", 'active' => true,],
             // 'modecontrols' => ['href' => "#modecontrols", 'title' => "Mode Controls", 'active' => false,],
         ];
     }

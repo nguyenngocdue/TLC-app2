@@ -29,9 +29,9 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
         <div id="data_entry" class="bg-white p-4 hidden">
             <x-demo.demo-data-entry :dropdownCell="$dropdownCell" />
         </div>
-        <div id="icons" class="bg-white p-4 hidden1">
+        {{-- <div id="icons" class="bg-white p-4 hidden1">
             <x-demo.demo-icons :columns="$iconsColumns" :dataSource="$iconsDataSource"/>
-        </div>
+        </div> --}}
         <div id="attachments" class="bg-white p-4 hidden">
             <x-demo.demo-attachment-comment :attachmentData="$attachmentData" :attachmentData2="$attachmentData2" :dataComment="$dataComment" />
         </div>
@@ -48,13 +48,16 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
             <x-demo.demo-listener />
         </div>
         {{-- <div id="modecontrols" class="bg-white p-4 hidden">
-            <x-demo.demo-modes-control :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
+        <x-demo.demo-modes-control :dataSource="$dataSource" :itemsSelected="$itemsSelected" />
         </div> --}}
         <div id="pivot_tables" class="bg-white p-4 hidden">
             <x-demo.demo-pivot-table :columns="$pivotTableColumns" :dataSource="$pivotTableDataSource" />
         </div>
         <div id="pivot_tables2" class="bg-white p-4 hidden">
             <x-demo.demo-pivot-table2 :columns="$pivotTableColumns2" :dataSource="$pivotTableDataSource2" />
+        </div>
+        <div id="charts" class="bg-white p-4 hidden">
+            <x-demo.demo-chart/>
         </div>
     </div>
 </x-renderer.tab-pane>
