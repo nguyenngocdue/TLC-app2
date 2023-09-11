@@ -37,7 +37,7 @@
     <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
 
-    <script src="{{ asset('js/tlc2-20230824.js') }}"></script>
+    <script src="{{ asset('js/tlc2-20230907.js') }}"></script>
     <script src="{{ asset('js/parseNumber-20230822.js') }}"></script>
     
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
@@ -46,14 +46,15 @@
     <script src="{{ asset('js/components/ActionMultiple.js') }}"></script>
     
     <script src="{{ asset('js/components/RadioOrCheckbox2-20230731.js') }}"></script>
+    <script src="{{ asset('js/components/Number4.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2-20230817.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4-20230817.js') }}"></script>
-    <script src="{{ asset('js/components/EditableTable2-20230807.js') }}"></script>
-    <script src="{{ asset('js/components/EditableTableAddNewLine2-20230821.js') }}"></script>
-    <script src="{{ asset('js/components/ViewAllMatrix-20230823.js') }}"></script>
 
-    <script src="{{ asset('js/components/Number4.js') }}"></script>
-    <script src="{{ asset('js/components/Footer4-20230823.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTable2-20230907.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTableAddNewLine2-20230907.js') }}"></script>
+    <script src="{{ asset('js/components/Footer4-20230907.js') }}"></script>
+    
+    <script src="{{ asset('js/components/ViewAllMatrix-20230823.js') }}"></script>
 
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>
     <script src="{{ asset('js/components/KeyArrowTable.js') }}"></script>
