@@ -14,7 +14,9 @@
                     });
                 @endphp
                 @if($isRenderSimple)
+                <div>
                     <x-print.attachment-simple :dataSource="$value"/>
+                </div>
                 @else
                     <x-renderer.attachment2 name='attachment' :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />
                 @endif
@@ -63,8 +65,8 @@
         @if($control !== 'attachment')
             <div class='p-2 border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left flex items-center'>
                 (None)
-            </div> 
+            </div>
         @endif
     @endif
-           
+
 @endif

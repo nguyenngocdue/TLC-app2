@@ -112,6 +112,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
                 'width' => 40,
                 'prod_discipline_id' => $line->prod_discipline_id,
                 "colspan" => 1 + sizeof($extraColumns),
+                "target_man_minutes" => $line->pivot->target_man_hours * 60,
 
             ];
             foreach ($extraColumns as $column) {
@@ -175,16 +176,6 @@ class ProdSequences extends ViewAllTypeMatrixParent
         ];
     }
 
-    // protected function getRightMetaColumns()
-    // {
-    //     return [
-    //         ['dataIndex' => 'status',  'align' => 'center', 'width' => 50, 'fixed' => 'right', "title" => "Summary",],
-    //         ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150, 'fixed' => 'right',],
-    //         ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150, 'fixed' => 'right',],
-    //         ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50, 'fixed' => 'right',],
-    //     ];
-    // }
-
     function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     {
         $started_at = DateTimeConcern::convertForLoading("picker_datetime", $y->started_at);
@@ -194,7 +185,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
         $result = [
             'production_name' => $y->production_name,
-            'quantity' => $y->quantity,
+            'quantity' => ($v = $y->quantity) ? $v : "",
             'status' => $status_object,
             'room_type' => ($y->getRoomType) ? $y->getRoomType->name : "",
             'started_at' => substr($started_at, 0, 10),
@@ -206,10 +197,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return $result;
     }
 
-    function cellRenderer($cell, $dataIndex, $y, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false)
     {
-        if (in_array($dataIndex, ['status', 'detail'])) return parent::cellRenderer($cell, $dataIndex, $y, $forExcel);
-        if ($dataIndex === 'checkbox_print') return parent::cellRenderer($cell, $dataIndex, $y, $forExcel);
+        if (in_array($dataIndex, ['status', 'detail'])) return parent::cellRenderer($cell, $dataIndex, $x, $y, $forExcel);
+        if ($dataIndex === 'checkbox_print') return parent::cellRenderer($cell, $dataIndex, $x, $y, $forExcel);
         $doc = $cell[0];
         switch ($dataIndex) {
             case "total_uom":
@@ -224,7 +215,16 @@ class ProdSequences extends ViewAllTypeMatrixParent
             case "man_power":
                 return $doc->worker_number;
             case "total_mins":
-                return round($doc->total_hours * 60);
+                $target = $x['target_man_minutes'];
+                $actual = round($doc->total_hours * 60);
+                $color = $target >= $actual ? "green" : "red";
+                if ($actual == 0) return 0;
+                if (!$target) return $actual;
+                return (object)[
+                    "value" => $actual,
+                    "cell_class" => "text-$color-700 bg-$color-300 font-bold",
+                    "cell_title" => "Target: " . $target . " - Variance: " . ($target - $actual),
+                ];
             case "min_per_uom":
                 return ($doc->total_uom > 0) ? round($doc->total_hours * 60 / $doc->total_uom, 2) : '<i class="fa-solid fa-infinity" title="DIV 0"></i>';
             case "uom":

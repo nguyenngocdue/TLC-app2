@@ -41,7 +41,7 @@ function init() {
               alternateLayerSpacing: 40,
               alternateLayerSpacingParentOverlap: 1,
               alternatePortSpot: new go.Spot(0.001, 1, 20, 0),
-              alternateChildPortSpot: go.Spot.Left
+              alternateChildPortSpot: go.Spot.Left,
             })
       });
 
@@ -81,7 +81,7 @@ function init() {
             ),
             $(go.Placeholder)
           ) , // end Adornment
-          
+
           click: function(e, obj){
             window.open(obj.part.data.url,'_blank');
           },
@@ -110,20 +110,27 @@ function init() {
                 row: 0, alignment: go.Spot.Left,
                 font: "16px Roboto, sans-serif",
                 stroke: "rgba(0, 0, 0, .87)",
-                maxSize: new go.Size(160, NaN)
+                minSize: new go.Size(150, NaN),
               },
               new go.Binding("text", "name")
             ),
-            $(go.TextBlock, textStyle("title"),
+            $(go.TextBlock, textStyle("employeeid"),
               {
                 row: 1, alignment: go.Spot.Left,
-                maxSize: new go.Size(160, NaN)
+                minSize: new go.Size(150, NaN),
+              },
+              new go.Binding("text", "employeeid")
+            ),
+            $(go.TextBlock, textStyle("title"),
+              {
+                row: 2, alignment: go.Spot.Left,
+                minSize: new go.Size(150, NaN),
               },
               new go.Binding("text", "title")
             ),
-            $("PanelExpanderButton", "INFO",
-              { row: 0, column: 1, rowSpan: 2, margin: ml8 }
-            )
+            // $("PanelExpanderButton", "INFO",
+            //   { row: 0, column: 1, rowSpan: 2, margin: ml8 }
+            // )
           )
         ),
         $(go.Shape, "LineH",
@@ -143,16 +150,20 @@ function init() {
           $(go.TextBlock, textStyle("email"),
             new go.Binding("text", "email", head => "Email: " + head)
           ),
-          $(go.TextBlock, textStyle("parent"),
-            new go.Binding("margin", "headOf", head => mt8), // some space above if there is also a headOf value
-            new go.Binding("text", "parent", parent => {
-              var parent = myDiagram.model.findNodeDataForKey(parent);
-              if (parent !== null) {
-                return "Reporting to: " + parent.name;
-              }
-              return "";
-            })
-          )
+          $(go.TextBlock, textStyle("phone"),
+
+          new go.Binding("text", "phone", head => "Phone: " + head)
+            ),
+        //   $(go.TextBlock, textStyle("parent"),
+        //     new go.Binding("margin", "headOf", head => mt8), // some space above if there is also a headOf value
+        //     new go.Binding("text", "parent", parent => {
+        //       var parent = myDiagram.model.findNodeDataForKey(parent);
+        //       if (parent !== null) {
+        //         return "Reporting to: " + parent.name;
+        //       }
+        //       return "";
+        //     })
+        //   )
         )
       )
     );
