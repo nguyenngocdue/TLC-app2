@@ -63,14 +63,14 @@ class MyOrgChartController extends Controller
                     if($a)$results[] = $a;
                 }
             }
-            else{ 
+            else{
                 $a = $this->convertDataSource($value,$options);
                 if($a)$results[] = $a;
             }
         }
     }
     private function convertDataSource($value,$options){
-        if(in_array($value->workplace,$options['workplace']) && in_array($value->resigned,$options['resigned']) 
+        if(in_array($value->workplace,$options['workplace']) && in_array($value->resigned,$options['resigned'])
             && in_array($value->time_keeping_type,$options['time_keeping_type'])){
             $id = $value->id;
             $user = User::findFromCache($id);
@@ -80,7 +80,9 @@ class MyOrgChartController extends Controller
             return [
                 'key' => $id,
                 'name' => $value->name,
+                'employeeid' => $user->employeeid,
                 'parent' => $value->parent_id,
+                'phone' => $user->phone,
                 'avatar' => $avatar,
                 'email' => $email,
                 'fill' => $this->getFillColor($value),
