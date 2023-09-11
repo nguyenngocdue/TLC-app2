@@ -61,7 +61,7 @@ class Prod_run extends ModelExtended
         if ($isNZ) {
             $result[] =   ['dataIndex' => 'getWorkersOfRun()', 'cloneable' => true,];
         } else {
-            $result[] =  ['dataIndex' => 'worker_number_input', 'footer' => 'agg_sum',];
+            $result[] =  ['dataIndex' => 'worker_number_input', 'footer' => 'agg_avg',];
         }
         $result = [
             ...$result,
