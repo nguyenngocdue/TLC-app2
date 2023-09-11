@@ -39,7 +39,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
             </div>
         </div>
     </div>
-</div> max-w-max
+</div>
 </div>
 @endif
 
