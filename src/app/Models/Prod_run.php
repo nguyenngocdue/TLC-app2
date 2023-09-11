@@ -10,6 +10,7 @@ class Prod_run extends ModelExtended
         "id", "prod_sequence_id", "date", "start", "end", "owner_id",
         "total_hours", "total_man_hours",
         "worker_number", "worker_number_count", "worker_number_input",
+        "remark",
     ];
 
     protected $table = 'prod_runs';
@@ -67,6 +68,7 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'worker_number_count', 'invisible' => true,],
             ['dataIndex' => 'worker_number',  'footer' => 'agg_avg', 'no_print' => true,],
             ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum', 'no_print' => true,],
+            ['dataIndex' => 'remark', 'no_print' => true,],
         ];
 
         return $result;
