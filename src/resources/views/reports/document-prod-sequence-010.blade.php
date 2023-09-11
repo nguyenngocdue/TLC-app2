@@ -39,10 +39,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
             </div>
         </div>
     </div>
-</div>
-@elseif($emptyItems)
-<div class="grid grid-row-1 w-full md:px-4 pb-4">
-    <x-renderer.report.list-empty-items :dataSource="$emptyItems" title="The dates with data are empty." span='1' />
+</div> max-w-max
 </div>
 @endif
 
