@@ -35,7 +35,7 @@ class Prod_routing extends ModelExtended
     public function getProdRoutingLinks()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('target_hours', 'target_man_hours');
     }
 
     public function getProdOrders()

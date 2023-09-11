@@ -184,7 +184,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return (object) $item;
     }
 
-    function cellRenderer($cell, $dataIndex, $y, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false)
     {
         $result = [];
         switch ($dataIndex) {
@@ -273,12 +273,12 @@ abstract class ViewAllTypeMatrixParent extends Component
                 $hasFile = isset($dataSource[$yId][$xId]);
                 // dump("yID $yId xId $xId $hasFile");
                 if ($hasFile) {
-                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $y, $forExcel);
+                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $x, $y, $forExcel);
                     $line[$xId] = $value;
                     if ($this->mode == 'detail') {
                         foreach ($extraColumns as $column) {
                             $key = $xId . "_" . $column;
-                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $y, $forExcel);
+                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $x, $y, $forExcel);
                             //<< convert to empty string for excel
                             $line[$key] = is_null($value) ? "" : $value;
                         }

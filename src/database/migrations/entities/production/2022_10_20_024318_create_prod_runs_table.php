@@ -30,6 +30,8 @@ return new class extends Migration
             $table->double('worker_number', 8, 2)->nullable();
             $table->double('total_hours', 8, 2)->nullable();
             $table->double('total_man_hours', 8, 2)->nullable();
+            $table->string('remark')->nullable();
+
             $table->appendCommonFields();
         });
         // Schema::create('prod_runs', function (Blueprint $table) {
