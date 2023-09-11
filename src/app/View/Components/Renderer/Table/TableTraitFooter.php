@@ -74,10 +74,10 @@ trait TableTraitFooter
         // dump($items);
         try {
             $result['agg_sum'] = $items->sum();
-            $result['agg_avg'] = $items->avg();
-            $result['agg_median'] = $items->median();
-            $result['agg_min'] = $items->min();
-            $result['agg_max'] = $items->max();
+            $result['agg_avg'] = ($a = $items->avg()) ? $a : null;
+            $result['agg_median'] = ($a = $items->median()) ? $a : null;
+            $result['agg_min'] = ($a = $items->min()) ? $a : null;
+            $result['agg_max'] = ($a = $items->max()) ? $a : null;
             $result['agg_range'] = $result['agg_max'] - $result['agg_min'];
         } catch (\Exception $e) {
             Log::error("Exception in Footer, Table [" . $eloquentTable . "] " . "field [" . $fieldName . "] " . $e->getMessage());
@@ -91,18 +91,18 @@ trait TableTraitFooter
             $timestampMedian = $result['agg_median'];
             // $timestampRange = $result['agg_range'];
             if ($control == 'picker_date') {
-                $result['agg_avg'] = Carbon::createFromTimestamp($timestampAvg)->format(Constant::FORMAT_DATE_ASIAN);
-                $result['agg_min'] = Carbon::createFromTimestamp($timestampMin)->format(Constant::FORMAT_DATE_ASIAN);
-                $result['agg_max'] = Carbon::createFromTimestamp($timestampMax)->format(Constant::FORMAT_DATE_ASIAN);
-                $result['agg_median'] = Carbon::createFromTimestamp($timestampMedian)->format(Constant::FORMAT_DATE_ASIAN);
+                $result['agg_avg'] = ($timestampAvg) ?  Carbon::createFromTimestamp($timestampAvg)->format(Constant::FORMAT_DATE_ASIAN) : null;
+                $result['agg_min'] = ($timestampMin) ? Carbon::createFromTimestamp($timestampMin)->format(Constant::FORMAT_DATE_ASIAN) : null;
+                $result['agg_max'] = ($timestampMax) ? Carbon::createFromTimestamp($timestampMax)->format(Constant::FORMAT_DATE_ASIAN) : null;
+                $result['agg_median'] = ($timestampMedian) ? Carbon::createFromTimestamp($timestampMedian)->format(Constant::FORMAT_DATE_ASIAN) : null;
                 $result['agg_sum'] = "maybe_meaningless";
                 // $result['agg_range'] = $timestampRange / (24 * 3600);
             }
             if ($control == 'picker_datetime') {
-                $result['agg_avg'] = Carbon::createFromTimestamp($timestampAvg)->setTimezone($tz)->format(Constant::FORMAT_DATETIME_ASIAN);
-                $result['agg_min'] = Carbon::createFromTimestamp($timestampMin)->setTimezone($tz)->format(Constant::FORMAT_DATETIME_ASIAN);
-                $result['agg_max'] = Carbon::createFromTimestamp($timestampMax)->setTimezone($tz)->format(Constant::FORMAT_DATETIME_ASIAN);
-                $result['agg_median'] = Carbon::createFromTimestamp($timestampMedian)->setTimezone($tz)->format(Constant::FORMAT_DATETIME_ASIAN);
+                $result['agg_avg'] = ($timestampAvg) ? Carbon::createFromTimestamp($timestampAvg)->setTimezone($tz)->format(Constant::FORMAT_DATETIME_ASIAN) : null;
+                $result['agg_min'] = ($timestampMin) ? Carbon::createFromTimestamp($timestampMin)->setTimezone($tz)->format(Constant::FORMAT_DATETIME_ASIAN) : null;
+                $result['agg_max'] = ($timestampMax) ? Carbon::createFromTimestamp($timestampMax)->setTimezone($tz)->format(Constant::FORMAT_DATETIME_ASIAN) : null;
+                $result['agg_median'] = ($timestampMedian) ? Carbon::createFromTimestamp($timestampMedian)->setTimezone($tz)->format(Constant::FORMAT_DATETIME_ASIAN) : null;
                 $result['agg_sum'] = "maybe_meaningless";
                 // $result['agg_range'] = $timestampRange / (24 * 3600);
             }
