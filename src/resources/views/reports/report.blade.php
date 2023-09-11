@@ -41,6 +41,8 @@
                     rotate45Width={{$rotate45Width}} 
                     maxH="{{$maxH}}" 
                     tableTrueWidth={{$tableTrueWidth?1:0}}
+                    page-limit="{{$pageLimit}}" 
+
 
                     showPaginationTop="true"
                     topLeftControl="{!!$tl!!}" 

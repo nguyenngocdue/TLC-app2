@@ -32,6 +32,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
     protected $viewName = 'document-prod-sequence-010';
     protected $type = 'prod_sequence';
 
+
     // DataSource
     public function getSqlStr($params)
     {
@@ -228,6 +229,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
             if(empty($sqlData)) continue;
             $dataSource[$k] = collect($sqlData);
         }
+        // dd($dataSource);
         return $dataSource;
     }
     

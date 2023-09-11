@@ -113,7 +113,6 @@ class PivotTable extends Component
 
     public function render()
     {
-
         $linesData = $this->dataSource;
         // dump($linesData);
         $params = $this->params;
@@ -134,7 +133,7 @@ class PivotTable extends Component
                 $tableColumns = $this->makeTableColumnsWhenEmptyData($modeType);
             }
         } elseif (!$modeType) {
-            $tableColumns = $this->makeTableColumnsWhenEmptyModeType($linesData);
+            $tableColumns = $this->tableColumns ? $this->tableColumns: $this->makeTableColumnsWhenEmptyModeType($linesData);
             $dataOutput = $dataOutput ?? $linesData;
         }
         
@@ -144,6 +143,7 @@ class PivotTable extends Component
             $dataOutput = $linesData;
         }
         // dump($dataOutput);
+        
         $dataOutput = $this->changeValueData($dataOutput, $isRawData, $linesData);
         $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
         if(!empty($this->tableColumns)) $tableColumns = $this->tableColumns;

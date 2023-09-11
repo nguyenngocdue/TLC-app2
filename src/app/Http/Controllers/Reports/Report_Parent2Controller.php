@@ -27,7 +27,7 @@ abstract class Report_Parent2Controller extends Controller
     use TraitLibPivotTableDataFields2;
     use TraitCreateSQL;
     use TraitGetOptionPrint;
-
+    use TraitShowTooltipForLines;
 
     protected $mode = '010';
     protected $maxH = null;
@@ -55,7 +55,7 @@ abstract class Report_Parent2Controller extends Controller
         return $collection;
     }
 
-    protected function getDefaultValueParams($params,$request)
+    protected function getDefaultValueParams($params, $request)
     {
         $x = 'picker_date';
         $isNullParams = Report::isNullParams($params);
@@ -140,9 +140,9 @@ abstract class Report_Parent2Controller extends Controller
     }
 
     protected function getTableColumns($dataSource, $params)
-	{
-		return [[]];
-	}
+    {
+        return [[]];
+    }
 
     public function selectMonth($params)
     {
@@ -157,35 +157,40 @@ abstract class Report_Parent2Controller extends Controller
         return [$month, $projectId];
     }
 
-    private function isEmptyAllDataSource($dataSource){
+    private function isEmptyAllDataSource($dataSource)
+    {
         // dd($dataSource);
         $isCheck = true;
         $data = $dataSource;
-        if ($dataSource instanceof Collection)$data = $dataSource->toArray();
-        foreach(array_values($data) as $values) {
+        if ($dataSource instanceof Collection) $data = $dataSource->toArray();
+        foreach (array_values($data) as $values) {
             if (!empty($values)) {
                 $isCheck = false;
                 return $isCheck;
-            }   
+            }
         };
         return $isCheck;
     }
 
-    private function filterEmptyItems($dataSource, $info){
+    private function filterEmptyItems($dataSource, $info)
+    {
         return [];
         $emptyItems = [];
-        foreach ($dataSource as $key => $value){
-            if(empty($value->toArray())) {
+        foreach ($dataSource as $key => $value) {
+            if (empty($value->toArray())) {
                 $emptyItems[$key] = $info[$key]['date'];
             }
         }
         return $emptyItems;
     }
-    public function changeDataSource($dataSource, $params){
+    public function changeDataSource($dataSource, $params)
+    {
+        $dataSource = $this->addTooltip($dataSource);
         return $dataSource;
     }
 
-    public function createInfoToRenderTable($dataSource){
+    public function createInfoToRenderTable($dataSource)
+    {
         return [];
     }
 
@@ -197,7 +202,7 @@ abstract class Report_Parent2Controller extends Controller
         $entity = CurrentPathInfo::getEntityReport($request);
         $params = $this->getParams($request);
         $params = $this->getDefaultValueParams($params, $request);
-        
+
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $params);
         }
@@ -212,14 +217,17 @@ abstract class Report_Parent2Controller extends Controller
 
         $isEmptyAllDataSource = $this->isEmptyAllDataSource($dataSource);
 
-        $tableColumns = $this->typeView === 'report-pivot' ? [] : $this->getTableColumns($params, $dataSource);
+        $tableColumns = $this->getTableColumns($params, $dataSource);
+        $tableColumns = $this->typeView === 'report-pivot'
+            && empty($tableColumns) ? [] : $tableColumns;
+
         $tableDataHeader = $this->tableDataHeader($dataSource, $params);
         echo $this->getJS();
         $titleReport = $this->makeModeTitleReport($routeName);
         $modeType = $this->modeType;
         $paramColumns = $this->getParamColumns($dataSource, $modeType);
         //data to render for document reports
-        [$dataRenderDocReport , $basicInfoData] = [[], []];
+        [$dataRenderDocReport, $basicInfoData] = [[], []];
         if (str_contains($routeName, 'document-')) {
             $basicInfoData =  $this->getBasicInfoData($params);
             $dataRenderDocReport = [
@@ -229,6 +237,7 @@ abstract class Report_Parent2Controller extends Controller
 
         $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
         $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
+        // dd($dataSource);
 
         return view('reports.' . $viewName, [
             'entity' => $entity,
@@ -248,7 +257,7 @@ abstract class Report_Parent2Controller extends Controller
             'tableDataHeader' => $tableDataHeader,
             'tableTrueWidth' => $this->tableTrueWidth,
             'rotate45Width' => $this->rotate45Width,
-            'emptyItems' =>$emptyItems,
+            'emptyItems' => $emptyItems,
             'isEmptyAllDataSource' => $isEmptyAllDataSource,
             'topTitle' => $this->getMenuTitle(),
             'settingComplexTable' => $settingComplexTable,
@@ -271,15 +280,16 @@ abstract class Report_Parent2Controller extends Controller
         $linesData = $this->getDataSource($params);
         $modeType = $this->modeType;
         // Pivot data before render 
-
         if ($modeType) {
-            [$dataOutput, $tableColumns,] = $this->triggerDataFollowManagePivot($linesData, $modeType, $params);
-            [$columnKeys, $columnNames] = $this->makeColumnsPivotTable($dataOutput, $params, $tableColumns);
+            [$dataSource, $tableColumns,] = $this->triggerDataFollowManagePivot($linesData, $modeType, $params);
+            [$columnKeys, $columnNames] = $this->makeColumnsPivotTable($dataSource, $params, $tableColumns);
         } else {
+            //no pivot table
+            $dataSource = $linesData;
             [$columnKeys, $columnNames] = $this->makeColumns($linesData, $params);
         }
 
-        $rows = $this->makeRowsFollowColumns($dataOutput, $columnKeys);
+        $rows = $this->makeRowsFollowColumns($dataSource, $columnKeys);
         $fileName = $entity . '_' . date('d:m:Y H:i:s') . '.csv';
         $headers = array(
             "Content-type"        => "text/csv",

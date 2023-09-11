@@ -90,6 +90,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                         tableTrueWidth={{$tableTrueWidth?1:0}}
 
                         topRightControl="{!!$tr!!}" 
+                        topCenterControl="{!!$tc!!}" 
                         />
             </div>
         </div>
