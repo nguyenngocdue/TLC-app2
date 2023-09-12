@@ -11,57 +11,9 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_ppr_routing_id": {
-        "name": "_ppr_routing_id",
-        "column_name": "ppr_routing_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_ppr_routing_link_id": {
-        "name": "_ppr_routing_link_id",
-        "column_name": "ppr_routing_link_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_target_hours": {
-        "name": "_target_hours",
-        "column_name": "target_hours",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_target_man_hours": {
-        "name": "_target_man_hours",
-        "column_name": "target_man_hours",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -74,18 +26,6 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
         "label": "",
         "validation": "",
         "validation_regex": "",
