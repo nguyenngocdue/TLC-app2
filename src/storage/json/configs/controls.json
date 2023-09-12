@@ -148,8 +148,7 @@
         "hr",
         "system_configuration",
         "system_permission",
-        "dashboard",
-        "ppr"
+        "dashboard"
     ],
     "assignees": [
         "assignee_1",
