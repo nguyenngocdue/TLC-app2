@@ -219,12 +219,14 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "dataIndex" => "sub_project_name",
                     "align" => "left",
                     "width" => 120,
+                    'fixed' => 'left'
                 ],
                 [
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
                     "width" => 220,
+                    'fixed' => 'left'
                 ],
                 [
                     "title" => "Man-power",
