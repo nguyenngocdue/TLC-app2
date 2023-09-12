@@ -51,5 +51,36 @@ $route = $routeName ? route($routeName) : "";
     function resetFilter() {
         $('[id="' + "{{$entity}}" + '"]').append('<input type="hidden" name="form_type" value="resetParamsReport">')
     }
+</script>
 
+<script>
+        // This script runs after the HTML document has fully loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check if a "reload" cookie exists
+            const reloadCookie = getCookie("reload");
+
+            // If the "reload" cookie does not exist (page was not manually reloaded)
+            if (!reloadCookie) {
+                // Submit the form with the ID specified in the {{$entity}} variable
+                document.getElementById("{{$entity}}").submit();
+                
+                // Create a "reload" cookie with a value of "1" (expires in 1 minute)
+                setCookie("reload", "1", 1);
+            }
+        });
+
+        // Function to retrieve the value of a specific cookie
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // Function to create a new cookie
+        function setCookie(name, value, minutes) {
+            const date = new Date();
+            date.setTime(date.getTime() + (minutes * 60 * 1000));
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
 </script>

@@ -185,10 +185,9 @@ abstract class Report_Parent2Controller extends Controller
     }
     public function changeDataSource($dataSource, $params)
     {
-        $dataSource = $this->addTooltip($dataSource);
+        // $dataSource = $this->addTooltip($dataSource);
         return $dataSource;
     }
-
     public function createInfoToRenderTable($dataSource)
     {
         return [];
@@ -213,6 +212,7 @@ abstract class Report_Parent2Controller extends Controller
         if ($this->viewName) $viewName = $this->viewName;
 
         $dataSource = $this->getDataSource($params);
+        $dataSource  = $this->addTooltip($dataSource);
         $dataSource = $this->changeDataSource($dataSource, $params);
 
         $isEmptyAllDataSource = $this->isEmptyAllDataSource($dataSource);
@@ -275,8 +275,11 @@ abstract class Report_Parent2Controller extends Controller
 
     public function exportCSV(Request $request)
     {
+
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
         $params = $this->getParams($request, '_ep');
+        // dd($params);
+
         $linesData = $this->getDataSource($params);
         $modeType = $this->modeType;
         // Pivot data before render 

@@ -31,6 +31,7 @@ trait TraitShowTooltipForLines
             'prod_order_name',
             'prod_routing_name',
             'prod_routing_link_name',
+            'department_name',
         ] + $fieldInputs;
         foreach ($dataSource as $key => &$values) {
             if (($values instanceof Collection)) {

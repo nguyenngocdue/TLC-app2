@@ -25,6 +25,7 @@ class Eco_sheet_110 extends Report_ParentReport2Controller
                     WHERE SUBSTR(ecoli.updated_at, 1,7) = '$month'
                     AND ecos.project_id = $projectId
                     GROUP BY department_id, ecos_project_id, month";
+        // dump($sql);
         return $sql;
     }
 

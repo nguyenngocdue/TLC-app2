@@ -11,6 +11,7 @@ use App\Http\Controllers\Reports\Reports\Eco_sheet_140;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Models\Project;
+use App\Utils\Support\Report;
 
 class Eco_sheet_010 extends Report_ParentDocument2Controller
 {
@@ -107,6 +108,18 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
                 ]
             ]
         ];
+    }
+
+    protected function getDefaultValueParams($params, $request)
+    {
+        $a = 'month';
+        $b = 'project_id';
+        if (Report::isNullParams($params)) {
+            $params[$a] = date("Y-m");
+            $params[$b] = $this->projectId;
+           
+        }
+        return $params;
     }
 
     public function getBasicInfoData($params)

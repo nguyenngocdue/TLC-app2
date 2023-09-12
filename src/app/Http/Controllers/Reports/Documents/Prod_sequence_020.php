@@ -93,19 +93,20 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         JOIN prod_orders po ON po.sub_project_id = sp.id";
         if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
         $sql .= "\n LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
+                        LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
                         JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
                         LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id 
-                                                        AND prd.prod_routing_id = {{prod_routing_id}}
+                                                        AND prd.prod_routing_id = pr.id
                         LEFT JOIN projects pj ON pj.id = sp.project_id
                         LEFT JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
                         WHERE 1 = 1
                             AND pose.deleted_by IS NULL
                             AND sp.project_id = {{project_id}}
                             AND sp.id = {{sub_project_id}}
-                            AND po.prod_routing_id = {{prod_routing_id}}
                             AND pose.status IN ('in_progress', 'finished', 'on_hold')
                             AND po.status IN ('in_progress', 'finished', 'on_hold')
                             AND SUBSTR(pru.date, 1, 10) <= '{{picker_date}}'";
+        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
         if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pose.prod_routing_link_id IN ({{prod_routing_link_id}})";
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id IN ({{prod_discipline_id}})";
 
@@ -353,7 +354,6 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
 
     public function changeDataSource($dataSource, $params)
     {
-        $dataSource = $this->addTooltip($dataSource);
         // dump($dataSource, );
         foreach ($dataSource as $key => $values) {
             $paramUrl = "?project_id={$values['project_id']}";
