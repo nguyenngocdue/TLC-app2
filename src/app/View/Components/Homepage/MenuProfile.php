@@ -69,10 +69,12 @@ class MenuProfile extends Component
     {
         $user = CurrentUser::get();
         $isAdmin = CurrentUser::isAdmin();
+        $stopImpersonate = session()->has('impersonate');
         return view('components.homepage.menu-profile', [
             'userMenu' => $this->getUserMenu(),
             'user' => $user,
             'isAdmin' => $isAdmin,
+            'stopImpersonate' => $stopImpersonate,
         ]);
     }
 }
