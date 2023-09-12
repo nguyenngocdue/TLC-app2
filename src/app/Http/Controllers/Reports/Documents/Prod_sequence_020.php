@@ -66,21 +66,29 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         actualTb.man_power,
                         round(actualTb.man_power - targetTb.target_man_power,2) AS vari_man_power,
                         round((actualTb.man_power / targetTb.target_man_power)*100,2) AS percent_vari_man_power
-                    FROM 
-                        (SELECT 
-                            sp.project_id,
-                            sp.id AS sub_project_id,
-                            pj.name project_name,
-                            sp.name AS sub_project_name,
-                            sp.description AS sub_project_desc,
-                            prl.id AS prod_routing_link_id,
-                            prl.name AS prod_routing_link_name,
-                            prl.description AS prod_routing_link_desc,
-                            prl.prod_discipline_id AS prod_discipline_id,
-                            po.prod_routing_id AS prod_routing_id,
-                            SUM(prd.target_hours) AS target_hours,
-                            SUM(prd.target_man_hours) AS target_man_hours,    
-                            SUM(prd.target_man_power) AS target_man_power
+                    FROM
+                        (SELECT
+                        project_id, project_name,sub_project_id,prod_routing_link_desc, sub_project_desc, 
+                        sub_project_name, prod_routing_id, prod_discipline_id, prod_routing_link_name
+                        ,prod_routing_link_id
+                        ,SUM(target_hours) AS target_hours
+                        ,SUM(target_man_hours) AS target_man_hours
+                        ,SUM(target_man_power) AS target_man_power
+                        FROM  (SELECT 
+                                    sp.project_id,
+                                    sp.id AS sub_project_id,
+                                    pj.name project_name,
+                                    sp.name AS sub_project_name,
+                                    (po.id) AS prod_order_id,
+                                    sp.description AS sub_project_desc,
+                                    prl.id AS prod_routing_link_id,
+                                    prl.name AS prod_routing_link_name,
+                                    prl.description AS prod_routing_link_desc,
+                                    prl.prod_discipline_id AS prod_discipline_id,
+                                    po.prod_routing_id AS prod_routing_id,
+                                    (prd.target_hours) AS target_hours,
+                                    (prd.target_man_hours) AS target_man_hours,    
+                                    (prd.target_man_power) AS target_man_power
                         FROM sub_projects sp
                         JOIN prod_orders po ON po.sub_project_id = sp.id";
         if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
@@ -89,43 +97,53 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id 
                                                         AND prd.prod_routing_id = {{prod_routing_id}}
                         LEFT JOIN projects pj ON pj.id = sp.project_id
-                        #LEFT JOIN prod_runs pru pru.prod_sequence_id = pose.id
+                        LEFT JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
                         WHERE 1 = 1
+                            AND pose.deleted_by IS NULL
                             AND sp.project_id = {{project_id}}
                             AND sp.id = {{sub_project_id}}
                             AND po.prod_routing_id = {{prod_routing_id}}
                             AND pose.status IN ('in_progress', 'finished', 'on_hold')
-                            AND po.status IN ('in_progress', 'finished', 'on_hold')";
-
+                            AND po.status IN ('in_progress', 'finished', 'on_hold')
+                            AND SUBSTR(pru.date, 1, 10) <= '{{picker_date}}'";
         if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pose.prod_routing_link_id IN ({{prod_routing_link_id}})";
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id IN ({{prod_discipline_id}})";
 
-        $sql .= "\n GROUP BY prod_routing_link_id) AS targetTb
-                    JOIN 
+        $sql .= "\n  GROUP BY prod_routing_link_id, prod_order_id ) AS tb1
+                    GROUP BY prod_routing_link_id) AS targetTb
+                    JOIN
                         (SELECT 
-                            sp.project_id,
-                            sp.id AS sub_project_id,
-                            
-                            prl.id AS prod_routing_link_id,
-                            ROUND(SUM(pr.worker_number), 2) AS man_power,
-                            SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start)) / 60 / 60, 2)) AS hours,
-                            ROUND(SUM(pr.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)),2) AS man_hours
-                        FROM sub_projects sp
-                        JOIN prod_orders po ON po.sub_project_id = sp.id
-                        LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
-                        JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id";
-        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pose.prod_routing_link_id IN ({{prod_routing_link_id}})";
-        $sql .= "\n JOIN prod_runs pr ON pr.prod_sequence_id = pose.id
-                        JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
-                        WHERE 1 = 1
-                            AND sp.project_id = '{{project_id}}'
-                            AND sp.id = '{{sub_project_id}}'
-                            AND po.prod_routing_id = '{{prod_routing_id}}'
-                            AND pose.status IN ('in_progress', 'finished', 'on_hold')
-                            AND po.status IN ('in_progress', 'finished', 'on_hold')
-                            AND SUBSTR(pr.date, 1, 10) <= '{{picker_date}}'
-                            AND pose.deleted_by IS NULL
-                        GROUP BY prod_routing_link_id) AS actualTb
+                        prod_routing_link_id
+                        ,ROUND(SUM(man_power),2) AS man_power
+                        ,ROUND(SUM(hours),2) AS hours
+                        ,ROUND(SUM(man_hours),2) AS man_hours
+                                FROM (SELECT 
+                                        sp.project_id,
+                                        sp.id AS sub_project_id,
+                                        prl.id AS prod_routing_link_id,
+                                        po.id AS prod_order_id,
+                                        (pru.worker_number) AS man_power
+                                        ,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)) AS hours
+                                        ,ROUND((pru.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/ 60/60,2)),2) AS man_hours
+                                    FROM sub_projects sp
+                                    JOIN prod_orders po ON po.sub_project_id = sp.id
+                                    LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
+                                    JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
+                                    JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
+                                    JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id";
+
+                if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pose.prod_routing_link_id IN ({{prod_routing_link_id}})";
+                $sql .= "\n         WHERE 1 = 1
+                                    AND sp.project_id = '{{project_id}}'
+                                    AND sp.id = '{{sub_project_id}}'
+                                    AND po.prod_routing_id = '{{prod_routing_id}}'
+                                    AND pose.status IN ('in_progress', 'finished', 'on_hold')
+                                    AND po.status IN ('in_progress', 'finished', 'on_hold')
+                                    AND SUBSTR(pru.date, 1, 10) <= '{{picker_date}}'
+                                    AND pose.deleted_by IS NULL
+                                    #AND prl.id = 15
+                                GROUP BY prod_routing_link_id , po.id, pru.worker_number) AS tb2
+                            GROUP BY prod_routing_link_id) AS actualTb
                     ON 
                         actualTb.prod_routing_link_id = targetTb.prod_routing_link_id;";
         return $sql;

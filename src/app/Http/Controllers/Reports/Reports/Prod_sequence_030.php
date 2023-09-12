@@ -41,7 +41,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                         ,pr.id AS prod_routing_id    
                         ,pr.name AS prod_routing_name    
                         ,po.status AS pro_status
-                        ,pose.total_hours AS total_hours
+                        #,pose.total_hours AS total_hours
                         ,prd.target_hours AS target_hours
                         ,prd.target_man_hours AS target_man_hours
                         ,prd.target_man_power AS target_man_power
@@ -49,9 +49,9 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                         ,pd.id AS prod_discipline_id
                         ,pd.name AS prod_discipline_name
 
-                        ,ROUND(SUM(pru.worker_number), 2) AS man_power
-                        ,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)) AS hours
-                        ,ROUND(SUM(pru.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/ 60/60,2)),2) AS man_hours
+                        ,ROUND((pru.worker_number), 2) AS man_power
+                        ,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)) AS total_hours
+                        ,ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) AS man_hours
 
                     FROM sub_projects sp
                     JOIN prod_orders po ON po.sub_project_id = sp.id
@@ -60,7 +60,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
 
                     LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
                     LEFT JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
-                    LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id 
+                    LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id AND prd.prod_routing_id = pr.id
 
                     JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
                     JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
@@ -76,7 +76,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                         AND pose.deleted_by IS NULL";
 
         if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id = {{prod_routing_link_id}}";
-        $sql .= "\n GROUP BY project_id, sub_project_name, prod_order_id, prod_order_name, sub_project_id,prod_routing_link_id
+        $sql .= "\n GROUP BY project_id, sub_project_name, prod_order_id, prod_order_name, sub_project_id,prod_routing_link_id,pru.worker_number
                     ,target_hours
                     ,target_man_hours
                     ,target_man_power
@@ -190,7 +190,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     'footer' => 'agg_sum',
                 ],
                 [
-                    "dataIndex" => "target_man_hours",
+                    "dataIndex" => "target_man_hours", // filtering from static number in database
                     "align" => "right",
                     "width" => 30,
                     'footer' => 'agg_sum'
@@ -202,30 +202,27 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     'footer' => 'agg_sum'
                 ],
                 [
-                    "dataIndex" => "total_hours",
-                    "align" => "right",
-                    "width" => 30,
-                    'footer' => 'agg_sum',
-                ],
-                [
                     "dataIndex" => "total_man_hours",
                     "align" => "right",
                     "width" => 30,
                     'footer' => 'agg_sum',
                 ],
                 [
+                    "title" => "Total Hours (Actual)", // for a prod_order
+                    "dataIndex" => "total_hours",
+                    "align" => "right",
+                    "width" => 30,
+                    'footer' => 'agg_sum',
+                ],
+                [
+                    "title" => "Man Power (Actual)",
                     "dataIndex" => "man_power",
                     "align" => "right",
                     "width" => 30,
                     'footer' => 'agg_sum',
                 ],
                 [
-                    "dataIndex" => "hours",
-                    "align" => "right",
-                    "width" => 30,
-                    'footer' => 'agg_sum',
-                ],
-                [
+                    "title" => "Man Hours (Actual)",
                     "dataIndex" => "man_hours",
                     "align" => "right",
                     "width" => 30,
