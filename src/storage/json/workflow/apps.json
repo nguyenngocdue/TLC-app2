@@ -1252,6 +1252,22 @@
         "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-bags-shopping\"><\/i>"
     },
+    "prod_ppr_item": {
+        "name": "prod_ppr_item",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Prod PPR Items",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "prod_routing": {
         "name": "prod_routing",
         "package_tab": "application",

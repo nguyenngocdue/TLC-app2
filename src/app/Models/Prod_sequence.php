@@ -35,10 +35,17 @@ class Prod_sequence extends ModelExtended
         "comment_cancel_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
 
+    //This is temporary design, will finalize when PPR on board.
     public function getRoutingsHaveWorkersOfRun()
     {
         return [52, 55, 56];
     }
+
+    public function getRoutingsHavePprItems()
+    {
+        return [62];
+    }
+
 
     public function getProdOrder()
     {

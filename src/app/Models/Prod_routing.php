@@ -27,10 +27,15 @@ class Prod_routing extends ModelExtended
     ];
 
     //This is temporary design, will finalize when PPR on board.
-    public function getRoutingsHaveWorkersOfRun()
-    {
-        return [52, 55, 56];
-    }
+    // public function getRoutingsHaveWorkersOfRun()
+    // {
+    //     return [52, 55, 56];
+    // }
+
+    // public function getRoutingsHavePprItems()
+    // {
+    //     return [62];
+    // }
 
     public function getProdRoutingLinks()
     {
