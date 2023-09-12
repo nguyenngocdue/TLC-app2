@@ -32,7 +32,7 @@
         "package_tab": "report",
         "package": "project_management",
         "top_title": null,
-        "title": "Sequence-based Timesheet (Tartget - Actual)"
+        "title": "Sequence-based Timesheet (Target - Actual)"
     },
     "register-qaqc_insp_chklst_020": {
         "name": "register-qaqc_insp_chklst_020",
@@ -130,7 +130,7 @@
         "package_tab": "report",
         "package": "project_management",
         "top_title": "Sequence-based Timesheet",
-        "title": "Prod Order (Tartget - Actual)"
+        "title": "Prod Order (Target - Actual)"
     },
     "report-site_daily_assignment_010": {
         "name": "report-site_daily_assignment_010",

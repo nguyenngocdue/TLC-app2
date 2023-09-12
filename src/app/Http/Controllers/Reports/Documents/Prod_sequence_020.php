@@ -113,8 +113,9 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         FROM sub_projects sp
                         JOIN prod_orders po ON po.sub_project_id = sp.id
                         LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
-                        JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
-                        JOIN prod_runs pr ON pr.prod_sequence_id = pose.id
+                        JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id";
+        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pose.prod_routing_link_id IN ({{prod_routing_link_id}})";
+        $sql .= "\n JOIN prod_runs pr ON pr.prod_sequence_id = pose.id
                         JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
                         WHERE 1 = 1
                             AND sp.project_id = '{{project_id}}'
@@ -334,16 +335,16 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     {
         $dataSource = $this->addTooltip($dataSource);
         // dump($dataSource, );
-        foreach ($dataSource as $key => $values){
+        foreach ($dataSource as $key => $values) {
             $paramUrl = "?project_id={$values['project_id']}";
             $paramUrl .= "&sub_project_id={$values['sub_project_id']}";
             $paramUrl .= "&prod_routing_id={$values['prod_routing_id']}";
             $paramUrl .= "&prod_routing_link_id={$values['prod_routing_link_id']}";
             $paramUrl .= "&picker_date={$params['picker_date']}";
-            if(isset($params['prod_order_id'])) $paramUrl .= "&prod_order_id={$values['prod_order_id']}";
-            if(isset($params['prod_discipline_id'])) $paramUrl .= "&prod_discipline_id={$values['prod_discipline_id']}";
-            
-        
+            if (isset($params['prod_order_id'])) $paramUrl .= "&prod_order_id={$values['prod_order_id']}";
+            if (isset($params['prod_discipline_id'])) $paramUrl .= "&prod_discipline_id={$values['prod_discipline_id']}";
+
+
             $values = Report::addHrefForValues($values, 'target_hours', $paramUrl);
             $values = Report::addHrefForValues($values, 'target_man_power', $paramUrl);
             $values = Report::addHrefForValues($values, 'target_man_hours', $paramUrl);

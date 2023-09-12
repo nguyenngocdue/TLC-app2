@@ -52,15 +52,15 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                     ,prl.name AS prod_routing_link_name
                     ,pd.name AS prod_discipline_name
                     ,po.prod_routing_id AS prod_routing_id
-                    ,SUM(pr.worker_number) AS man_power
+                    ,pr.worker_number AS man_power
                     ,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)) AS hours
-                    ,SUM(pr.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)) AS man_hours 
+                    ,(pr.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)) AS man_hours 
                     
                     FROM sub_projects sp
                     JOIN prod_orders po ON po.sub_project_id = sp.id
-                    LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
+                    LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id AND pose.deleted_by IS NULL
                     JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
-                    JOIN prod_runs pr ON pr.prod_sequence_id = pose.id
+                    JOIN prod_runs pr ON pr.prod_sequence_id = pose.id AND pr.deleted_by IS NULL
                     JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
                     WHERE 1 = 1
                     AND sp.project_id = $projectId
@@ -72,7 +72,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         if ($prodRoutingLinkId) $sql .= "\n AND pose.prod_routing_link_id IN ($prodRoutingLinkId)";
         if ($prodDisciplineId) $sql .= "\n AND prl.prod_discipline_id IN ($prodDisciplineId)";
 
-        $sql .= "\n GROUP BY prod_discipline_name, prod_routing_link_id
+        $sql .= "\n GROUP BY prod_discipline_name, prod_routing_link_id, po.id,pr.worker_number
                     ORDER BY prod_discipline_name";
         // dump($sql);
         return $sql;
