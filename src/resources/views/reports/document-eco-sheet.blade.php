@@ -10,19 +10,6 @@ $class1 = 'p-2 border h-full w-full flex border-gray-600 text-base font-medium b
 $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left'
 @endphp
 
-{{-- "Printing settings"  --}}
-@php
-    switch ($valueOptionPrint) {
-        case 'landscape':
-        $layout = 'w-[1400px] min-h-[1000px]';
-        break;
-        case 'portrait':
-        default:
-            $layout = 'w-[1000px] min-h-[1360px]';
-            break;
-    }
-@endphp
-
 {{-- "Show utility"  --}}
 @php
     $tl = "<div></div>";
@@ -30,16 +17,15 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
 @endphp
 
-
 <div class="px-4">
     @include('components.reports.shared-parameter')
+    @include('components.reports.show-layout')
 </div>
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
             <x-print.header6 />
             {{-- BASIC INFORMATION --}}
-
             <div class="grid grid-cols-12">
                 <div class="col-span-12 text-left">
                     <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Basic Information <p class="text-sm font-light italic"></p>
@@ -67,12 +53,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                     showNo={{true}} 
                     :tableColumns="$tableColumns['ecoLaborImpacts']" 
                     :dataSource="$tableDataSource['ecoLaborImpacts']"
-
-                    showPaginationTop="true"
-                    topLeftControl="{!!$tl!!}" 
-                    {{-- topCenterControl="{!!$tc!!}"  --}}
-                    topRightControl="{!!$tr!!}" 
-                    
+                    page-limit="{{$pageLimit}}"
                      />
             </div>
             <div>
@@ -80,12 +61,8 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                 <x-renderer.report.pivot-table 
                     showNo={{true}} 
                     :tableColumns="$tableColumns['ecoSheetsMaterialAdd']" 
-                    :dataSource="$tableDataSource['ecoSheetsMaterialAdd']" 
-                    
-                    showPaginationTop="true"
-                    topLeftControl="{!!$tl!!}" 
-                    {{-- topCenterControl="{!!$tc!!}"  --}}
-                    topRightControl="{!!$tr!!}" 
+                    :dataSource="$tableDataSource['ecoSheetsMaterialAdd']"
+                    page-limit="{{$pageLimit}}"
                     />
             </div>
             <div>
@@ -93,11 +70,9 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                 <x-renderer.report.pivot-table 
                     showNo={{true}} 
                     :tableColumns="$tableColumns['ecoSheetsMaterialRemove']" 
-                    :dataSource="$tableDataSource['ecoSheetsMaterialRemove']" 
-                    showPaginationTop="true"
-                    topLeftControl="{!!$tl!!}" 
-                    {{-- topCenterControl="{!!$tc!!}"  --}}
-                    topRightControl="{!!$tr!!}" />
+                    :dataSource="$tableDataSource['ecoSheetsMaterialRemove']"
+                    page-limit="{{$pageLimit}}"
+                    />
             </div>
             <div>
                 <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Sign Off</h4>
@@ -105,10 +80,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                     showNo={{true}} 
                     :tableColumns="$tableColumns['timeEcoSheetSignOff']" 
                     :dataSource="$tableDataSource['timeEcoSheetSignOff']" 
-                    showPaginationTop="true"
-                    topLeftControl="{!!$tl!!}" 
-                    {{-- topCenterControl="{!!$tc!!}"  --}}
-                    topRightControl="{!!$tr!!}" 
+                    page-limit="{{$pageLimit}}" 
                     />
             </div>
 

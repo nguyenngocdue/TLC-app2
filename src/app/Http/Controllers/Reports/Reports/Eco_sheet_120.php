@@ -23,6 +23,7 @@ class Eco_sheet_120 extends Report_ParentReport2Controller
                 AND ecos.project_id = $projectId
                 AND ecos.status = 'active'
                 GROUP BY ecos_id, ecos_name";
+                // dump($sql);
         return $sql;
     }
 
@@ -49,10 +50,21 @@ class Eco_sheet_120 extends Report_ParentReport2Controller
                 "align" => "left"
             ],
             [
-                "title" => "Total Cost",
+                "title" => "Total Cost (USD)",
                 "dataIndex" => "ecos_total_add_cost",
-                "align" => "right"
+                "align" => "right",
+                "footer" => "agg_sum"
             ],
+        ];
+    }
+    public function getDisplayValueColumns()
+    {
+        return [
+            [
+                'ecos_name' => [
+                    'route_name' => 'eco_sheets.edit'
+                ],
+            ]
         ];
     }
 }
