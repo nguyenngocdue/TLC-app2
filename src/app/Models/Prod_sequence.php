@@ -41,10 +41,12 @@ class Prod_sequence extends ModelExtended
         return [52, 55, 56];
     }
 
-    // public function getRoutingsHavePprItems()
-    // {
-    //     return [62, 63];
-    // }
+    public function getRoutingsHavePprItems()
+    {
+        //62: PPR Monthly timesheet, 
+        //63: Factory Upgrade,
+        return [62];
+    }
 
 
     public function getProdOrder()
