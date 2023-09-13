@@ -41,10 +41,10 @@ class Prod_sequence extends ModelExtended
         return [52, 55, 56];
     }
 
-    public function getRoutingsHavePprItems()
-    {
-        return [62];
-    }
+    // public function getRoutingsHavePprItems()
+    // {
+    //     return [62, 63];
+    // }
 
 
     public function getProdOrder()
