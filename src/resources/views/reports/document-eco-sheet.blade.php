@@ -25,6 +25,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     <div class="md:px-4">
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
             <x-print.header6 />
+            <x-renderer.heading level=2 class='text-center'>{{$titleReport}}</x-renderer.heading>
             {{-- BASIC INFORMATION --}}
             <div class="grid grid-cols-12">
                 <div class="col-span-12 text-left">
