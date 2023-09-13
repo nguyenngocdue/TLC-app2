@@ -21,8 +21,11 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
     use TraitParamsSettingReport;
 
     protected $mode = '010';
-    protected $viewName = 'document-eco-sheet';
     protected $projectId = 5;
+    protected $type = 'eco_sheet';
+    protected $viewName = 'document-eco-sheet';
+    protected $pageLimit = 1000;
+    protected $month = '2023-07';
 
     protected function getParamColumns($dataSource, $modeType)
     {
@@ -51,34 +54,40 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
                     "title" => "Headcounts (Man)",
                     "dataIndex" => "head_count",
                     "align" => "right",
+                    "footer" => "agg_sum",
                 ],
                 [
                     "title" => "Man-day (Day)",
                     "dataIndex" => "man_day",
                     "align" => "right",
+                    "footer" => "agg_sum",
                 ],
                 [
                     "title" => "Labor Cost (USD)",
                     "dataIndex" => "labor_cost",
                     "align" => "right",
+                    "footer" => "agg_sum",
                 ],
                 [
                     "title" => "Total Cost (USD)",
                     "dataIndex" => "total_cost",
                     "align" => "right",
-                    // "footer" => "agg_sum"
+                    "footer" => "agg_sum",
                 ],
             ],
             "ecoSheetsMaterialAdd" => [
                 [
                     "title" => "ECO",
                     "dataIndex" => "ecos_name",
-                    "align" => "left"
+                    "align" => "left",
+
                 ],
                 [
                     "title" => "Total Cost",
                     "dataIndex" => "ecos_total_add_cost",
-                    "align" => "right"
+                    "align" => "right",
+                    "footer" => "agg_sum",
+
                 ],
             ],
             "ecoSheetsMaterialRemove" => [
@@ -86,13 +95,12 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
                     "title" => "ECO",
                     "dataIndex" => "ecos_name",
                     "align" => "left"
-
                 ],
                 [
                     "title" => "Total Cost",
                     "dataIndex" => "ecos_total_remove_cost",
-                    "align" => "right"
-
+                    "align" => "right",
+                    "footer" => "agg_sum",
                 ],
             ],
             "timeEcoSheetSignOff" => [
@@ -104,7 +112,8 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
                 [
                     "title" => "Latency (days)",
                     "dataIndex" => "latency",
-                    "align" => "right"
+                    "align" => "right",
+                    "footer" => "agg_sum",
                 ]
             ]
         ];
@@ -115,16 +124,15 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
         $a = 'month';
         $b = 'project_id';
         if (Report::isNullParams($params)) {
-            $params[$a] = date("Y-m");
+            $params[$a] = $this->month ?? date("Y-m");
             $params[$b] = $this->projectId;
-           
         }
         return $params;
     }
 
     public function getBasicInfoData($params)
     {
-        $month = $params['month'] ?? date("Y-m");
+        $month = $this->month ?? $params['month'] ?? date("Y-m");
         $projectName = Project::find($params['project_id'] ?? $this->projectId)->name;
         return [
             'month' => $month,
@@ -132,7 +140,32 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
         ];
     }
 
-    public function getDataSource($params){
+    public function getDisplayValueColumns()
+    {
+        return [
+            'ecoSheetsMaterialAdd' => [
+                'ecos_name' => [
+                    'route_name' => 'eco_sheets.edit'
+                ],
+                'ecos_total_add_cost' => [
+                    'route_name' => 'eco_sheets.edit'
+                ]
+            ],
+            'ecoSheetsMaterialRemove' => [
+                'ecos_name' => [
+                    'route_name' => 'eco_sheets.edit'
+                ]
+            ],
+            'timeEcoSheetSignOff' => [
+                'user_name' => [
+                    'route_name' => 'users.edit'
+                ]
+            ]
+        ];
+    }
+
+    public function getDataSource($params)
+    {
         return [
             'ecoLaborImpacts' => (new Eco_sheet_110())->getDataSource($params),
             'ecoSheetsMaterialAdd' => (new Eco_sheet_120())->getDataSource($params),

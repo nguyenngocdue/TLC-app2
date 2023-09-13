@@ -28,6 +28,7 @@ abstract class Report_Parent2Controller extends Controller
     use TraitCreateSQL;
     use TraitGetOptionPrint;
     use TraitShowTooltipForLines;
+    use TraitSettingLayout;
 
     protected $mode = '010';
     protected $maxH = null;
@@ -38,9 +39,7 @@ abstract class Report_Parent2Controller extends Controller
     protected $rotate45Width = false;
     protected $viewName = '';
     protected $type = '';
-
-
-    // abstract protected function getSqlStr($params);
+    
     public function getType()
     {
         return $this->getTable();
@@ -82,7 +81,7 @@ abstract class Report_Parent2Controller extends Controller
             $pageLimit = $settings[$entity][strtolower($typeReport)]['per_page'];
             return $pageLimit;
         }
-        return 10;
+        return $this->pageLimit;
     }
 
     protected function forwardToMode($request, $params)
@@ -193,6 +192,10 @@ abstract class Report_Parent2Controller extends Controller
         return [];
     }
 
+    public function getDisplayValueColumns(){
+        return [];
+    }
+
     public function index(Request $request)
     {
         $input = $request->input();
@@ -206,8 +209,7 @@ abstract class Report_Parent2Controller extends Controller
             return $this->forwardToMode($request, $params);
         }
         $pageLimit = $this->getPageParam($typeReport, $entity);
-
-
+        
         $viewName =  CurrentPathInfo::getViewName($request);
         if ($this->viewName) $viewName = $this->viewName;
 
@@ -237,8 +239,8 @@ abstract class Report_Parent2Controller extends Controller
 
         $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
         $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
+        $valueOptionPrint =  $this->getValueOptionPrint();
         // dd($dataSource);
-
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,
@@ -262,7 +264,8 @@ abstract class Report_Parent2Controller extends Controller
             'topTitle' => $this->getMenuTitle(),
             'settingComplexTable' => $settingComplexTable,
             'classListOptionPrint' => ClassList::DROPDOWN,
-            'valueOptionPrint' => $this->getValueOptionPrint()
+            'valueOptionPrint' => $valueOptionPrint,
+            'layout' => $this->layout($valueOptionPrint),
         ] + $dataRenderDocReport);
     }
 

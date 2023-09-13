@@ -11,7 +11,7 @@ class Eco_sheet_110 extends Report_ParentReport2Controller
     {
         [$month, $projectId] = $this->selectMonth($params);
         $sql = "SELECT
-                    SUBSTR(ecoli.updated_at, 1,7) AS month
+                    SUBSTR(ecos.updated_at, 1,7) AS month
                     ,ecos.project_id AS ecos_project_id
                     ,ecoli.department_id AS department_id
                     ,dp.name AS department_name
@@ -22,8 +22,10 @@ class Eco_sheet_110 extends Report_ParentReport2Controller
                     FROM eco_labor_impacts ecoli
                     LEFT JOIN eco_sheets ecos ON ecos.id = ecoli.eco_sheet_id
                     LEFT JOIN departments dp ON dp.id = ecoli.department_id
-                    WHERE SUBSTR(ecoli.updated_at, 1,7) = '$month'
+                    WHERE 1 = 1 
+                    AND SUBSTR(ecos.updated_at, 1,7) = '$month'
                     AND ecos.project_id = $projectId
+                    AND ecos.id = ecoli.eco_sheet_id
                     GROUP BY department_id, ecos_project_id, month";
         // dump($sql);
         return $sql;
@@ -43,10 +45,10 @@ class Eco_sheet_110 extends Report_ParentReport2Controller
         ];
     }
 
+
     protected function getTableColumns($params, $dataSource)
     {
         return [
-
             [
                 "title" => "Department",
                 "dataIndex" => "department_name",
@@ -71,9 +73,19 @@ class Eco_sheet_110 extends Report_ParentReport2Controller
                 "title" => "Total Cost (USD)",
                 "dataIndex" => "total_cost",
                 "align" => "right",
-                // "footer" => "agg_sum"
+                "footer" => "agg_sum"
             ],
 
+        ];
+    }
+    public function getDisplayValueColumns()
+    {
+        return [
+            [
+                'department_name' => [
+                    'route_name' => 'departments.edit'
+                ],
+            ]
         ];
     }
 }

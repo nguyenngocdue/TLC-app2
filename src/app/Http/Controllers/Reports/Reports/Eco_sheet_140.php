@@ -37,6 +37,7 @@ class Eco_sheet_140 extends Report_ParentReport2Controller
                                 LEFT JOIN users us ON us.id = usecos.term_id
                                 GROUP BY user_id,user_name
                                 ORDER BY user_name";
+        // dump($sql);
         return $sql;
     }
 
@@ -58,17 +59,28 @@ class Eco_sheet_140 extends Report_ParentReport2Controller
     {
         return [
             [
-                "title" => "ECO",
-                "dataIndex" => "ecos_name",
+                "title" => "User to Sign",
+                "dataIndex" => "user_name",
                 "align" => "left"
 
             ],
             [
-                "title" => "Total Cost",
-                "dataIndex" => "ecos_total_remove_cost",
+                "title" => "Latency (days)",
+                "dataIndex" => "latency",
                 "align" => "right"
 
             ],
+        ];
+    }
+
+    public function getDisplayValueColumns()
+    {
+        return [
+            [
+                'user_name' => [
+                    'route_name' => 'users.edit'
+                ],
+            ]
         ];
     }
 }

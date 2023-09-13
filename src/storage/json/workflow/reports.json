@@ -4,7 +4,7 @@
         "package_tab": "report",
         "package": "project_management",
         "top_title": null,
-        "title": "ECO Report"
+        "title": "Engineering Change Order - Sumary Report"
     },
     "document-ghg_sheet_010": {
         "name": "document-ghg_sheet_010",
@@ -44,28 +44,28 @@
     "report-eco_sheet_110": {
         "name": "report-eco_sheet_110",
         "package_tab": "report",
-        "package": "hr_&_admin",
+        "package": "project_management",
         "top_title": null,
         "title": "ECO Labor Impacts"
     },
     "report-eco_sheet_120": {
         "name": "report-eco_sheet_120",
         "package_tab": "report",
-        "package": "hr_&_admin",
+        "package": "project_management",
         "top_title": null,
         "title": "ECO Material Add"
     },
     "report-eco_sheet_130": {
         "name": "report-eco_sheet_130",
         "package_tab": "report",
-        "package": "hr_&_admin",
+        "package": "project_management",
         "top_title": null,
         "title": "ECO Material Remove"
     },
     "report-eco_sheet_140": {
         "name": "report-eco_sheet_140",
         "package_tab": "report",
-        "package": "hr_&_admin",
+        "package": "project_management",
         "top_title": null,
         "title": "ECO Sign Off"
     },
