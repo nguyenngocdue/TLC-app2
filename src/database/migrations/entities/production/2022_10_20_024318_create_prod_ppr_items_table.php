@@ -19,16 +19,10 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('ppr_runs', function (BlueprintExtended $table) {
+        $schema->create('prod_ppr_items', function (BlueprintExtended $table) {
             $table->id();
-            $table->unsignedBigInteger('ppr_sequence_id');
-            $table->date('date')->nullable();
-            $table->time('start')->nullable();
-            $table->time('end')->nullable();
-            $table->double('quantity')->nullable();
-            $table->double('worker_number')->nullable();
-            $table->double('total_hours')->nullable();
-            $table->double('total_man_hours')->nullable();
+            $table->string('name');
+
             $table->appendCommonFields();
         });
     }
@@ -40,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ppr_runs');
+        Schema::dropIfExists('prod_ppr_items');
     }
 };

@@ -52,9 +52,20 @@ class Eco_sheet_130 extends Report_ParentReport2Controller
             [
                 "title" => "Total Cost",
                 "dataIndex" => "ecos_total_remove_cost",
-                "align" => "right"
-
+                "align" => "right",
+                "footer" => "agg_sum"
             ],
+        ];
+    }
+
+    public function getDisplayValueColumns()
+    {
+        return [
+            [
+                'ecos_name' => [
+                    'route_name' => 'eco_sheets.edit'
+                ],
+            ]
         ];
     }
 }

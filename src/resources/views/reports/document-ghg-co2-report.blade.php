@@ -18,19 +18,6 @@ $pivotChart1 = $tableDataSource['pivot_chart_1'];
 $pivotChart2 = $tableDataSource['pivot_chart_2'];
 $info = $tableDataSource['info'];
 @endphp
-
-@php
-    switch ($valueOptionPrint) {
-        case 'landscape':
-        $layout = 'w-[1400px] min-h-[1000px]';
-        break;
-        case 'portrait':
-        default:
-            $layout = 'w-[1000px] min-h-[1360px]';
-            break;
-    }
-@endphp
-
 {{-- @dump($tableDataSource) --}}
 
 <div class="px-4">

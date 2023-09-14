@@ -123,11 +123,13 @@ class AdminSetRoleSetController extends Controller
         $user = User::find($id);
         if ($user) {
             Session::put('impersonate', $user->id);
+            Session::put('impersonate_admin', true);
         }
         return redirect('dashboard/');
     }
     public function stopImpersonate(){
         Session::forget('impersonate');
+        Session::forget('impersonate_admin');
         return redirect('dashboard/');
     }
 }

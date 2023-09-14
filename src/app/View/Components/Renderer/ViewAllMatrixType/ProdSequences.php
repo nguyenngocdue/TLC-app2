@@ -185,7 +185,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
         $result = [
             'production_name' => $y->production_name,
-            'quantity' => $y->quantity,
+            'quantity' => ($v = $y->quantity) ? $v : "",
             'status' => $status_object,
             'room_type' => ($y->getRoomType) ? $y->getRoomType->name : "",
             'started_at' => substr($started_at, 0, 10),

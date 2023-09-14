@@ -32,14 +32,16 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
     protected $viewName = 'document-prod-sequence-010';
     protected $type = 'prod_sequence';
 
+
     // DataSource
     public function getSqlStr($params)
     {
         $projectId =  $params['project_id'] ?? $this->projectId;
         $subProjectId =  $params['sub_project_id'] ?? $this->subProjectId;
         $prodRoutingId =  $params['prod_routing_id'] ?? $this->prodRoutingId;
-        $prodRoutingLinkId = isset($params['prod_routing_link_id']) ? implode(',', $params['prod_routing_link_id']) : [];
-        $prodDisciplineId = isset($params['prod_discipline_id']) ? implode(',', $params['prod_discipline_id']) : [];
+        $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ? implode(',', $params['prod_routing_link_id']) : [];
+        $prodDisciplineIds = isset($params['prod_discipline_id']) ? implode(',', $params['prod_discipline_id']) : [];
+        $prodOrderIds =  isset($params['prod_order_id']) ? implode(',', $params['prod_order_id']) : [];
 
         $pickerDate = $params['picker_date'];
 
@@ -49,17 +51,20 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                     ,sp.name AS sub_project_name
                     ,prl.id AS prod_routing_link_id
                     ,prl.name AS prod_routing_link_name
+                    ,pose.status AS prod_sequence_status
                     ,pd.name AS prod_discipline_name
+                    ,po.id AS prod_order_id
+                    ,po.name AS prod_order_name
                     ,po.prod_routing_id AS prod_routing_id
-                    ,SUM(pr.worker_number) AS man_power
+                    ,pr.worker_number AS man_power
                     ,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)) AS hours
-                    ,SUM(pr.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)) AS man_hours 
+                    ,(pr.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)) AS man_hours 
                     
                     FROM sub_projects sp
                     JOIN prod_orders po ON po.sub_project_id = sp.id
-                    LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
+                    LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id AND pose.deleted_by IS NULL
                     JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
-                    JOIN prod_runs pr ON pr.prod_sequence_id = pose.id
+                    JOIN prod_runs pr ON pr.prod_sequence_id = pose.id AND pr.deleted_by IS NULL
                     JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
                     WHERE 1 = 1
                     AND sp.project_id = $projectId
@@ -68,11 +73,12 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                     AND pose.status IN ('in_progress', 'finished', 'on_hold')
                     AND po.status IN ('in_progress', 'finished', 'on_hold')
                     AND SUBSTR(pr.date,1,10) = '$pickerDate'";
-        if ($prodRoutingLinkId) $sql .= "\n AND pose.prod_routing_link_id IN ($prodRoutingLinkId)";
-        if ($prodDisciplineId) $sql .= "\n AND prl.prod_discipline_id IN ($prodDisciplineId)";
+        if ($prodRoutingLinkIds) $sql .= "\n AND pose.prod_routing_link_id IN ($prodRoutingLinkIds)";
+        if ($prodDisciplineIds) $sql .= "\n AND prl.prod_discipline_id IN ($prodDisciplineIds)";
+        if ($prodOrderIds) $sql .= "\n AND po.id IN ($prodOrderIds)";
 
-        $sql .= "\n GROUP BY prod_discipline_name, prod_routing_link_id
-                    ORDER BY prod_discipline_name";
+        $sql .= "\n GROUP BY prod_discipline_name, prod_routing_link_id, po.id,pr.worker_number
+                    ORDER BY prod_order_name, prod_discipline_name";
         // dump($sql);
         return $sql;
     }
@@ -121,6 +127,12 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                 'hasListenTo' => true,
             ],
             [
+                'title' => 'Production Order',
+                'dataIndex' => 'prod_order_id',
+                'hasListenTo' => true,
+                'multiple' => true,
+            ],
+            [
                 'title' => 'Production Routing',
                 'dataIndex' => 'prod_routing_id',
                 'hasListenTo' => true,
@@ -147,16 +159,28 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         return
             [
                 [
+                    "title" => "Production Order",
+                    "dataIndex" => "prod_order_name",
+                    "align" => "center",
+                    "width" => 100,
+                ],
+                [
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
-                    "width" => 250,
+                    "width" => 300,
+                ],
+                [
+                    "title" => "Status",
+                    "dataIndex" => "prod_sequence_status",
+                    "align" => "left",
+                    "width" => 30,
                 ],
                 [
                     "title" => "Discipline",
                     "dataIndex" => "prod_discipline_name",
                     "align" => "left",
-                    "width" => 100,
+                    "width" => 30,
                 ],
                 [
                     "title" => "Man Power",
@@ -228,6 +252,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
             if(empty($sqlData)) continue;
             $dataSource[$k] = collect($sqlData);
         }
+        // dd($dataSource);
         return $dataSource;
     }
     

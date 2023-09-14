@@ -6,6 +6,7 @@ use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
+use App\Http\Controllers\Reports\TraitShowTooltipForLines;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
@@ -23,6 +24,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     use TraitForwardModeReport;
     use TraitMenuTitle;
     use TraitParamsSettingReport;
+    use TraitShowTooltipForLines;
 
     protected $mode = '020';
     protected $projectId = 5;
@@ -32,20 +34,11 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     protected $groupBy = 'prod_discipline_name';
     protected $viewName = 'document-prod-sequence-020';
     protected $type = 'prod_sequence';
+    protected $tableTrueWidth = true;
 
     // DataSource
     public function getSqlStr($params)
     {
-        $projectId =  $params['project_id'] ?? $this->projectId;
-        $subProjectId =  $params['sub_project_id'] ?? $this->subProjectId;
-        $prodRoutingId =  $params['prod_routing_id'] ?? $this->prodRoutingId;
-        $prodRoutingLinkId = isset($params['prod_routing_link_id']) ? implode(',', $params['prod_routing_link_id']) : [];
-        $prodDisciplineId = isset($params['prod_discipline_id']) ? implode(',', $params['prod_discipline_id']) : [];
-
-        $pickerDate =  DateReport::formatDateString($params['picker_date']) ;
-
-        // dump($prodDisciplineId, $prodRoutingLinkId);
-
         $sql = "SELECT
                         targetTb.project_name,
                         targetTb.sub_project_name,
@@ -53,6 +46,10 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         targetTb.project_id,
                         targetTb.sub_project_id,    
                         targetTb.prod_routing_link_id,
+                        targetTb.prod_routing_id,
+                        targetTb.prod_discipline_id,
+                        targetTb.prod_routing_link_desc,
+                        targetTb.sub_project_desc,
                     
                         
                         targetTb.target_hours,
@@ -69,61 +66,87 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         actualTb.man_power,
                         round(actualTb.man_power - targetTb.target_man_power,2) AS vari_man_power,
                         round((actualTb.man_power / targetTb.target_man_power)*100,2) AS percent_vari_man_power
-                    FROM 
-                        (SELECT 
-                            sp.project_id,
-                            sp.id AS sub_project_id,
-                            pj.name project_name,
-                            sp.name AS sub_project_name,
-                            prl.id AS prod_routing_link_id,
-                            prl.name AS prod_routing_link_name,
-                            SUM(prd.target_hours) AS target_hours,
-                            SUM(prd.target_man_hours) AS target_man_hours,    
-                            SUM(prd.target_man_power) AS target_man_power
+                    FROM
+                        (SELECT
+                        project_id, project_name,sub_project_id,prod_routing_link_desc, sub_project_desc, 
+                        sub_project_name, prod_routing_id, prod_discipline_id, prod_routing_link_name
+                        ,prod_routing_link_id
+                        ,SUM(target_hours) AS target_hours
+                        ,SUM(target_man_hours) AS target_man_hours
+                        ,SUM(target_man_power) AS target_man_power
+                        FROM  (SELECT 
+                                    sp.project_id,
+                                    sp.id AS sub_project_id,
+                                    pj.name project_name,
+                                    sp.name AS sub_project_name,
+                                    (po.id) AS prod_order_id,
+                                    sp.description AS sub_project_desc,
+                                    prl.id AS prod_routing_link_id,
+                                    prl.name AS prod_routing_link_name,
+                                    prl.description AS prod_routing_link_desc,
+                                    prl.prod_discipline_id AS prod_discipline_id,
+                                    po.prod_routing_id AS prod_routing_id,
+                                    (prd.target_hours) AS target_hours,
+                                    (prd.target_man_hours) AS target_man_hours,    
+                                    (prd.target_man_power) AS target_man_power
                         FROM sub_projects sp
-                        JOIN prod_orders po ON po.sub_project_id = sp.id
-                        LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
+                        JOIN prod_orders po ON po.sub_project_id = sp.id";
+        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
+        $sql .= "\n LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
+                        LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
                         JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
                         LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id 
-                                                        AND prd.prod_routing_id = $prodRoutingId
+                                                        AND prd.prod_routing_id = pr.id
                         LEFT JOIN projects pj ON pj.id = sp.project_id
+                        LEFT JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
                         WHERE 1 = 1
-                            AND sp.project_id = $projectId
-                            AND sp.id = $subProjectId
-                            AND po.prod_routing_id = $prodRoutingId
-                            AND pose.status IN ('in_progress', 'finished', 'on_hold')
-                            AND po.status IN ('in_progress', 'finished', 'on_hold')";
-
-        if ($prodRoutingLinkId) $sql .= "\n AND pose.prod_routing_link_id IN ($prodRoutingLinkId)";
-        if ($prodDisciplineId) $sql .= "\n AND prl.prod_discipline_id IN ($prodDisciplineId)";
-
-        $sql .= "\n GROUP BY prod_routing_link_id) AS targetTb
-                    JOIN 
-                        (SELECT 
-                            sp.project_id,
-                            sp.id AS sub_project_id,
-                            prl.id AS prod_routing_link_id,
-                            ROUND(SUM(pr.worker_number), 2) AS man_power,
-                            SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start)) / 60 / 60, 2)) AS hours,
-                            ROUND(SUM(pr.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)),2) AS man_hours
-                        FROM sub_projects sp
-                        JOIN prod_orders po ON po.sub_project_id = sp.id
-                        LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
-                        JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
-                        JOIN prod_runs pr ON pr.prod_sequence_id = pose.id
-                        JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
-                        WHERE 1 = 1
-                            AND sp.project_id = $projectId
-                            AND sp.id = $subProjectId
-                            AND po.prod_routing_id = $prodRoutingId
+                            AND pose.deleted_by IS NULL
+                            AND sp.project_id = {{project_id}}
+                            AND sp.id = {{sub_project_id}}
                             AND pose.status IN ('in_progress', 'finished', 'on_hold')
                             AND po.status IN ('in_progress', 'finished', 'on_hold')
-                            AND SUBSTR(pr.date, 1, 10) <= '$pickerDate'
-                            AND pose.deleted_by IS NULL
-                        GROUP BY prod_routing_link_id) AS actualTb
+                            AND SUBSTR(pru.date, 1, 10) <= '{{picker_date}}'";
+        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
+        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pose.prod_routing_link_id IN ({{prod_routing_link_id}})";
+        if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id IN ({{prod_discipline_id}})";
+
+        $sql .= "\n  GROUP BY prod_routing_link_id, prod_order_id ) AS tb1
+                    GROUP BY prod_routing_link_id) AS targetTb
+                    JOIN
+                        (SELECT 
+                        prod_routing_link_id
+                        ,ROUND(SUM(man_power),2) AS man_power
+                        ,ROUND(SUM(hours),2) AS hours
+                        ,ROUND(SUM(man_hours),2) AS man_hours
+                                FROM (SELECT 
+                                        sp.project_id,
+                                        sp.id AS sub_project_id,
+                                        prl.id AS prod_routing_link_id,
+                                        po.id AS prod_order_id,
+                                        (pru.worker_number) AS man_power
+                                        ,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)) AS hours
+                                        ,ROUND((pru.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/ 60/60,2)),2) AS man_hours
+                                    FROM sub_projects sp
+                                    JOIN prod_orders po ON po.sub_project_id = sp.id
+                                    LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
+                                    JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
+                                    JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
+                                    JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id";
+
+                if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pose.prod_routing_link_id IN ({{prod_routing_link_id}})";
+                $sql .= "\n         WHERE 1 = 1
+                                    AND sp.project_id = '{{project_id}}'
+                                    AND sp.id = '{{sub_project_id}}'
+                                    AND po.prod_routing_id = '{{prod_routing_id}}'
+                                    AND pose.status IN ('in_progress', 'finished', 'on_hold')
+                                    AND po.status IN ('in_progress', 'finished', 'on_hold')
+                                    AND SUBSTR(pru.date, 1, 10) <= '{{picker_date}}'
+                                    AND pose.deleted_by IS NULL
+                                    #AND prl.id = 15
+                                GROUP BY prod_routing_link_id , po.id, pru.worker_number) AS tb2
+                            GROUP BY prod_routing_link_id) AS actualTb
                     ON 
                         actualTb.prod_routing_link_id = targetTb.prod_routing_link_id;";
-        // dump($sql);
         return $sql;
     }
 
@@ -166,6 +189,12 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'hasListenTo' => true,
             ],
             [
+                'title' => 'Production Order',
+                'dataIndex' => 'prod_order_id',
+                'hasListenTo' => true,
+                'multiple' => true,
+            ],
+            [
                 'title' => 'Production Discipline',
                 'dataIndex' => 'prod_discipline_id',
                 'allowClear' => true,
@@ -187,38 +216,42 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
         return
             [
                 [
+                    "title" => "Sub Project",
                     "dataIndex" => "sub_project_name",
                     "align" => "left",
-                    "width" => 50,
+                    "width" => 120,
+                    'fixed' => 'left'
                 ],
                 [
+                    "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
-                    "width" => 50,
+                    "width" => 220,
+                    'fixed' => 'left'
                 ],
                 [
                     "title" => "Man-power",
                     "dataIndex" => "target_man_power",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                     "colspan" => 4,
 
                 ],
                 [
                     "dataIndex" => "man_power",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                 ],
                 [
                     "dataIndex" => "vari_man_power",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
 
                 ],
                 [
                     "dataIndex" => "percent_vari_man_power",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
 
                 ],
 
@@ -226,45 +259,46 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "title" => "Hours",
                     "dataIndex" => "target_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                     "colspan" => 4,
                 ],
                 [
                     "dataIndex" => "hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                 ],
                 [
                     "dataIndex" => "vari_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                 ],
                 [
                     "dataIndex" => "percent_vari_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                 ],
                 [
                     "title" => "Man-hours",
                     "dataIndex" => "target_man_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                     "colspan" => 4,
+
                 ],
                 [
                     "dataIndex" => "man_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                 ],
                 [
                     "dataIndex" => "vari_man_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                 ],
                 [
                     "dataIndex" => "percent_vari_man_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                 ],
             ];
     }
@@ -274,18 +308,18 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
         return [
             'man_power' => 'Actual',
             'target_man_power' => 'Target',
-            'vari_man_power' => 'Variant',
-            'percent_vari_man_power' => '% Variant',
+            'vari_man_power' => 'Variance',
+            'percent_vari_man_power' => 'Var.%',
 
             'hours' => 'Actual',
             'target_hours' => 'Target',
-            'vari_hours' => 'Variant',
-            'percent_vari_hours' => '% Variant',
+            'vari_hours' => 'Variance',
+            'percent_vari_hours' => 'Var.%',
 
-            'target_man_hours' => 'Actual',
-            'man_hours' => 'Target',
-            'vari_man_hours' => 'Variant',
-            'percent_vari_man_hours' => '% Variant',
+            'man_hours' => 'Actual',
+            'target_man_hours' => 'Target',
+            'vari_man_hours' => 'Variance',
+            'percent_vari_man_hours' => 'Var.%',
         ];
     }
 
@@ -320,6 +354,22 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
 
     public function changeDataSource($dataSource, $params)
     {
+        // dump($dataSource, );
+        foreach ($dataSource as $key => $values) {
+            $paramUrl = "?project_id={$values['project_id']}";
+            $paramUrl .= "&sub_project_id={$values['sub_project_id']}";
+            $paramUrl .= "&prod_routing_id={$values['prod_routing_id']}";
+            $paramUrl .= "&prod_routing_link_id={$values['prod_routing_link_id']}";
+            $paramUrl .= "&picker_date={$params['picker_date']}";
+            if (isset($params['prod_order_id'])) $paramUrl .= "&prod_order_id={$values['prod_order_id']}";
+            if (isset($params['prod_discipline_id'])) $paramUrl .= "&prod_discipline_id={$values['prod_discipline_id']}";
+
+
+            $values = Report::addHrefForValues($values, 'target_hours', $paramUrl);
+            $values = Report::addHrefForValues($values, 'target_man_power', $paramUrl);
+            $values = Report::addHrefForValues($values, 'target_man_hours', $paramUrl);
+            $dataSource[$key] = $values;
+        }
         // dd($dataSource);
         return $dataSource;
     }

@@ -26,7 +26,7 @@ trait TraitYAxisDiscipline
             3 => "<span class=''>FIT</span>",
             4 => "<span class=''>MEPF</span>",
             5 => "<span class=''>WH</span>",
-            6 => "<span class=''>SHP</span>",
+            6 => "<span class=''>PAS</span>",
             7 => "<span class=''>QAQC</span>",
         ];
         $bg = [

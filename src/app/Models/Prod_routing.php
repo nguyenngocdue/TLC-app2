@@ -6,7 +6,9 @@ use App\BigThink\ModelExtended;
 
 class Prod_routing extends ModelExtended
 {
-    protected $fillable = ["name", "description", "slug", "owner_id"];
+    protected $fillable = [
+        "name", "description", "slug", "owner_id",
+    ];
 
     protected $table = 'prod_routings';
     protected static $statusless = true;
@@ -24,12 +26,28 @@ class Prod_routing extends ModelExtended
         "getWirDescriptions()" => ["getCheckedByField", Wir_description::class],
         "getChklstTmpls()" => ["getCheckedByField", Qaqc_insp_tmpl::class],
         "getSubProjects()" => ["getCheckedByField", Sub_project::class],
+        "getScreensShowRoutingOn()" => ["getCheckedByField", Term::class],
     ];
 
-    //This is temporary design, will finalize when PPR on board.
-    public function getRoutingsHaveWorkersOfRun()
+    public function isShowOnQaqcInspection()
     {
-        return [52, 55, 56];
+        $allow = $this->getScreensShowRoutingOn()->pluck('id')->toArray();
+        $config = config("production.prod_routing.show_on_qaqc_inspection");
+        return in_array($config, $allow);
+    }
+
+    public function isShowOnQaqcWir()
+    {
+        $allow = $this->getScreensShowRoutingOn()->pluck('id')->toArray();
+        $config = config("production.prod_routing.show_on_qaqc_wir");
+        return in_array($config, $allow);
+    }
+
+    public function isShowOnProdSequence()
+    {
+        $allow = $this->getScreensShowRoutingOn()->pluck('id')->toArray();
+        $config = config("production.prod_routing.show_on_prod_sequence");
+        return in_array($config, $allow);
     }
 
     public function getProdRoutingLinks()
@@ -69,6 +87,12 @@ class Prod_routing extends ModelExtended
     }
 
     public function getSubProjects()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getScreensShowRoutingOn()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

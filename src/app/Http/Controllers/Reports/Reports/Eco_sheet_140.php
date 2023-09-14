@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
+use App\Models\Eco_sheet;
 
 class Eco_sheet_140 extends Report_ParentReport2Controller
 {
@@ -13,15 +14,17 @@ class Eco_sheet_140 extends Report_ParentReport2Controller
         $sql = "SELECT 	
                     #ecosheet.ecos_id AS eco_sheet_id, 
                     usecos.term_id AS user_id,
-                    us.name AS user_name,
+                    us.full_name AS user_name,
+                    GROUP_CONCAT(ecosheet.ecos_id) AS ecos_ids,
+                    COUNT(ecosheet.ecos_id) AS count_ecos,
                     SUM(ROUND(TIMESTAMPDIFF(HOUR, ecos_create_at,sign_updated_at)/24,2)) AS latency
                                 FROM (SELECT 
                                 ecos.id AS ecos_id
-                                ,ecos.created_at AS ecos_create_at
+                                ,ecos.due_date AS ecos_create_at
                                 FROM eco_sheets ecos
                                 WHERE 1 = 1
                                 AND ecos.project_id = $projectId
-                                AND SUBSTR(ecos.created_at, 1, 7) = '$month'
+                                AND SUBSTR(ecos.due_date, 1, 7) = '$month'
                                 #AND ecos.status = 'active'
                                 ) AS ecosheet
                                 LEFT JOIN ( SELECT *
@@ -37,6 +40,7 @@ class Eco_sheet_140 extends Report_ParentReport2Controller
                                 LEFT JOIN users us ON us.id = usecos.term_id
                                 GROUP BY user_id,user_name
                                 ORDER BY user_name";
+        // dump($sql);
         return $sql;
     }
 
@@ -58,17 +62,61 @@ class Eco_sheet_140 extends Report_ParentReport2Controller
     {
         return [
             [
-                "title" => "ECO",
-                "dataIndex" => "ecos_name",
-                "align" => "left"
+                "title" => "User to Sign",
+                "dataIndex" => "user_name",
+                "align" => "left",
+                'width' => 30
 
             ],
             [
-                "title" => "Total Cost",
-                "dataIndex" => "ecos_total_remove_cost",
-                "align" => "right"
+                "title" => "ECOs",
+                "dataIndex" => "ecos_ids",
+                "align" => "left",
+                'width' => 30
+            ],
+            [
+                "title" => "Quantity",
+                "dataIndex" => "count_ecos",
+                "align" => "right",
+                'width' => 30
 
             ],
+            [
+                "title" => "Latency (days)",
+                "dataIndex" => "latency",
+                "align" => "right",
+                'width' => 30
+            ],
         ];
+    }
+
+    public function getDisplayValueColumns()
+    {
+        return [
+            [
+                'user_name' => [
+                    'route_name' => 'users.edit'
+                ],
+            ]
+        ];
+    }
+
+    public function changeDataSource($dataSource, $params)
+    {
+        // dd($dataSource);
+        foreach ($dataSource as $key => &$items) {
+            if ($strIds = $items['ecos_ids']) {
+                $ids = explode(',', $strIds);
+                $strName = "";
+                foreach ($ids as $id) {
+                    $ecoName = Eco_sheet::find($id)->toArray()['name'];
+                    $route = route('eco_sheets.edit', $id);
+                    $strName .= '<a  class="text-blue-800" href="'. $route . '" >' . $ecoName . '</a>' . "</br>";
+                }
+                $items['ecos_ids'] = (object)['value' => $strName,];
+                $dataSource[$key] = $items;
+            }
+        }
+        return $dataSource;
     }
 }

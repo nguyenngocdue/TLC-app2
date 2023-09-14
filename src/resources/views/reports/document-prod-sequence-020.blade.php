@@ -15,19 +15,6 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     $tc = "<x-reports.utility-report routeName='$routeName'/>"; 
     $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
 @endphp
-{{-- "Printing settings"  --}}
-@php
-    switch ($valueOptionPrint) {
-        case 'landscape':
-        $layout = 'w-[1400px] min-h-[1000px]';
-        break;
-        case 'portrait':
-        default:
-            $layout = 'w-[1000px] min-h-[1360px]';
-            break;
-    }
-@endphp
-
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
@@ -90,6 +77,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                         tableTrueWidth={{$tableTrueWidth?1:0}}
 
                         topRightControl="{!!$tr!!}" 
+                        topCenterControl="{!!$tc!!}" 
                         />
             </div>
         </div>

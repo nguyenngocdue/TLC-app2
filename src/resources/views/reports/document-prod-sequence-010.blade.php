@@ -10,20 +10,6 @@ $class1 = 'p-2 border h-full w-full flex border-gray-600 text-base font-medium b
 $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left'
 @endphp
 
-{{-- "Printing settings"  --}}
-@php
-    switch ($valueOptionPrint) {
-        case 'landscape':
-        $layout = 'w-[1400px] min-h-[1000px]';
-        break;
-        case 'portrait':
-        default:
-            $layout = 'w-[1000px] min-h-[1360px]';
-            break;
-    }
-@endphp
-
-
 <div class="px-4">
     @include('components.reports.shared-parameter')
     @include('components.reports.show-layout')
@@ -40,9 +26,6 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
         </div>
     </div>
 </div>
-@elseif($emptyItems)
-<div class="grid grid-row-1 w-full md:px-4 pb-4">
-    <x-renderer.report.list-empty-items :dataSource="$emptyItems" title="The dates with data are empty." span='1' />
 </div>
 @endif
 
