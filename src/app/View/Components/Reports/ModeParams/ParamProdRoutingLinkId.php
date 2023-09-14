@@ -26,6 +26,7 @@ class ParamProdRoutingLinkId extends ParentParamReports
             $result[] = $array;
         };
         // dump($result);
+        usort($result, function ($a, $b) { return strcmp($a->name, $b->name); });
         return $result;
     }
 }

@@ -34,7 +34,8 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     protected $groupBy = 'prod_discipline_name';
     protected $viewName = 'document-prod-sequence-020';
     protected $type = 'prod_sequence';
-    protected $tableTrueWidth = true;
+    protected $tableTrueWidth = false;
+    protected $pageLimit = 1000;
 
     // DataSource
     public function getSqlStr($params)
@@ -50,20 +51,19 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         targetTb.prod_discipline_id,
                         targetTb.prod_routing_link_desc,
                         targetTb.sub_project_desc,
-                    
-                        
+
                         targetTb.target_hours,
-                        actualTb.hours,
+                        IF(actualTb.hours, actualTb.hours, NULL) AS hours,
                         round(actualTb.hours - targetTb.target_hours,2) AS vari_hours,
                         round((actualTb.hours / targetTb.target_hours)*100,2) AS percent_vari_hours,
                     
                         targetTb.target_man_hours,
-                        actualTb.man_hours,
+                        IF(actualTb.man_hours, actualTb.man_hours, NULL) AS man_hours,
                         round(actualTb.man_hours - targetTb.target_man_hours,2) AS vari_man_hours,
                         round((actualTb.man_hours / targetTb.target_man_hours)*100,2) AS percent_vari_man_hours,
                     
                         targetTb.target_man_power,
-                        actualTb.man_power,
+                        IF(actualTb.man_power,actualTb.man_power, null) AS man_power,
                         round(actualTb.man_power - targetTb.target_man_power,2) AS vari_man_power,
                         round((actualTb.man_power / targetTb.target_man_power)*100,2) AS percent_vari_man_power
                     FROM
@@ -91,7 +91,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                                     (prd.target_man_power) AS target_man_power
                         FROM sub_projects sp
                         JOIN prod_orders po ON po.sub_project_id = sp.id";
-        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
+        // if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
         $sql .= "\n LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
                         LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
                         JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
@@ -115,9 +115,9 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     JOIN
                         (SELECT 
                         prod_routing_link_id
-                        ,ROUND(SUM(man_power),2) AS man_power
-                        ,ROUND(SUM(hours),2) AS hours
-                        ,ROUND(SUM(man_hours),2) AS man_hours
+                        ,ROUND(AVG(man_power),2) AS man_power
+                        ,ROUND(AVG(hours),2) AS hours
+                        ,ROUND(AVG(man_hours),2) AS man_hours
                                 FROM (SELECT 
                                         sp.project_id,
                                         sp.id AS sub_project_id,
@@ -189,12 +189,6 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'hasListenTo' => true,
             ],
             [
-                'title' => 'Production Order',
-                'dataIndex' => 'prod_order_id',
-                'hasListenTo' => true,
-                'multiple' => true,
-            ],
-            [
                 'title' => 'Production Discipline',
                 'dataIndex' => 'prod_discipline_id',
                 'allowClear' => true,
@@ -219,7 +213,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "title" => "Sub Project",
                     "dataIndex" => "sub_project_name",
                     "align" => "left",
-                    "width" => 120,
+                    "width" => 110,
                     'fixed' => 'left'
                 ],
                 [
@@ -233,25 +227,25 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "title" => "Man-power",
                     "dataIndex" => "target_man_power",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
                     "colspan" => 4,
 
                 ],
                 [
                     "dataIndex" => "man_power",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
                 ],
                 [
                     "dataIndex" => "vari_man_power",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
 
                 ],
                 [
                     "dataIndex" => "percent_vari_man_power",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
 
                 ],
 
@@ -259,46 +253,46 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "title" => "Hours",
                     "dataIndex" => "target_hours",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
                     "colspan" => 4,
                 ],
                 [
                     "dataIndex" => "hours",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
                 ],
                 [
                     "dataIndex" => "vari_hours",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
                 ],
                 [
                     "dataIndex" => "percent_vari_hours",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
                 ],
                 [
                     "title" => "Man-hours",
                     "dataIndex" => "target_man_hours",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
                     "colspan" => 4,
 
                 ],
                 [
                     "dataIndex" => "man_hours",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
                 ],
                 [
                     "dataIndex" => "vari_man_hours",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
                 ],
                 [
                     "dataIndex" => "percent_vari_man_hours",
                     "align" => "right",
-                    "width" => 80,
+                    "width" => 60,
                 ],
             ];
     }
@@ -326,7 +320,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     public function getBasicInfoData($params)
     {
         $projectName = Project::find($params['project_id'] ?? $this->projectId)->name;
-        $subProjectName = Sub_project::find($params['sub_project_id'] ?? $this->subProjectId)->name;
+        $subProjectName = Sub_project::find($params['sub_project_id'] ?? $this->subProjectId);
         $prodPouting = Prod_routing::find($params['prod_routing_id'] ?? $this->prodRoutingId)->name;
 
         $prodDiscipline = isset($params['prod_discipline_id']) ?
@@ -345,10 +339,11 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
         $basicInfoData = [];
         $basicInfoData['date'] =  $params['picker_date'];
         $basicInfoData['project'] = $projectName;
-        $basicInfoData['sub_project'] = $subProjectName;
+        $basicInfoData['sub_project'] = $subProjectName->name;
         $basicInfoData['prod_routing'] = $prodPouting;
         $basicInfoData['prod_routing_link'] = $prodRoutingLink;
         $basicInfoData['prod_discipline'] = $prodDiscipline;
+        $basicInfoData['created_at'] = date("d/m/Y", strtotime($subProjectName->created_at->toDateTimeString()));
         return $basicInfoData;
     }
 
@@ -361,13 +356,13 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
             $paramUrl .= "&prod_routing_id={$values['prod_routing_id']}";
             $paramUrl .= "&prod_routing_link_id={$values['prod_routing_link_id']}";
             $paramUrl .= "&picker_date={$params['picker_date']}";
-            if (isset($params['prod_order_id'])) $paramUrl .= "&prod_order_id={$values['prod_order_id']}";
+            // if (isset($params['prod_order_id'])) $paramUrl .= "&prod_order_id={$values['prod_order_id']}";
             if (isset($params['prod_discipline_id'])) $paramUrl .= "&prod_discipline_id={$values['prod_discipline_id']}";
 
 
-            $values = Report::addHrefForValues($values, 'target_hours', $paramUrl);
-            $values = Report::addHrefForValues($values, 'target_man_power', $paramUrl);
-            $values = Report::addHrefForValues($values, 'target_man_hours', $paramUrl);
+            $values = Report::addHrefForValues($values, 'hours', $paramUrl);
+            $values = Report::addHrefForValues($values, 'man_power', $paramUrl);
+            $values = Report::addHrefForValues($values, 'man_hours', $paramUrl);
             $dataSource[$key] = $values;
         }
         // dd($dataSource);

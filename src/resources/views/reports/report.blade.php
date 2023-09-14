@@ -19,7 +19,7 @@
     <x-renderer.report.pivot-table 
                     modeType="{{$modeType}}"  
                     showNo={{true}} 
-                    :dataHeader="$tableDataHeader" 
+                    :tableDataHeader="$tableDataHeader" 
                     :tableColumns="$tableColumns" 
                     :params="$params" 
                     :dataSource="$tableDataSource"  

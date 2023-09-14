@@ -255,5 +255,17 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         // dd($dataSource);
         return $dataSource;
     }
+
+    // public function changeDataSource($dataSource, $params)
+    // {
+    //     foreach ($dataSource as $key => &$items) {
+    //         foreach ($items as &$values){
+    //             $values['prod_sequence_status'] = str_replace('_', ' ', $values['prod_sequence_status']);
+    //         }
+    //         dd($items);
+    //         $dataSource[$key] = $items;
+    //     }
+    //     return $dataSource;
+    // }
     
 }

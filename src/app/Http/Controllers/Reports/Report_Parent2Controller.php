@@ -240,7 +240,7 @@ abstract class Report_Parent2Controller extends Controller
         $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
         $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
         $valueOptionPrint =  $this->getValueOptionPrint();
-        // dd($dataSource);
+        // dd($tableDataHeader);
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,

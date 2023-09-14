@@ -25,7 +25,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     protected $maxH = 50;
     protected $typeView = 'report-pivot';
     protected $type = 'prod_sequence';
-    protected $pageLimit = 100;
+    protected $pageLimit = 10;
 
     // DataSource
     public function getSqlStr($params)
@@ -41,17 +41,32 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                         ,pr.id AS prod_routing_id    
                         ,pr.name AS prod_routing_name    
                         ,po.status AS pro_status
+                        ,pose.status AS prod_sequence_status
                         #,pose.total_hours AS total_hours
-                        ,prd.target_hours AS target_hours
-                        ,prd.target_man_hours AS target_man_hours
-                        ,prd.target_man_power AS target_man_power
+                        
+
+                        ,IF(prd.target_man_power,prd.target_man_power, NULL) AS target_man_power
+                        ,FORMAT(ROUND((pru.worker_number), 2),2) AS actual_man_power
+                        ,round((pru.worker_number - prd.target_man_power),2) AS vari_man_power
+                        ,round((pru.worker_number / prd.target_man_power)*100,2) AS percent_vari_man_power
+
+
+                        ,IF(prd.target_hours, prd.target_hours, NULL) AS target_hours
+                        ,FORMAT(ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2),2) AS actual_total_hours
+                        ,ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) - prd.target_hours),2) AS vari_hours
+                        ,ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) / prd.target_hours)*100,2) AS percent_vari_hours
+
+
+                        ,IF(prd.target_man_hours, prd.target_man_hours, NULL) AS target_man_hours
+                        ,FORMAT(ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2),2) AS actual_man_hours
+                        ,ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) - prd.target_man_hours),2) AS vari_man_hours
+                        ,ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2) AS percent_vari_man_hours
+
+                        
                         ,FORMAT(pose.total_man_hours,2) AS total_man_hours
                         ,pd.id AS prod_discipline_id
                         ,pd.name AS prod_discipline_name
 
-                        ,FORMAT(ROUND((pru.worker_number), 2),2) AS man_power
-                        ,FORMAT(ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2),2) AS total_hours
-                        ,FORMAT(ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2),2) AS man_hours
 
                     FROM sub_projects sp
                     JOIN prod_orders po ON po.sub_project_id = sp.id
@@ -68,9 +83,9 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     WHERE 1 = 1
                         AND sp.project_id = '{{project_id}}'
                         AND sp.id = {{sub_project_id}}";
-        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id = {{prod_order_id}}";
+        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
         if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
-                        $sql .= "\n AND pose.status IN ('in_progress', 'finished', 'on_hold')
+        $sql .= "\n AND pose.status IN ('in_progress', 'finished', 'on_hold')
                         AND po.status IN ('in_progress', 'finished', 'on_hold')
                         AND SUBSTR(pru.date, 1, 10) <= '{{picker_date}}'
                         AND pose.deleted_by IS NULL";
@@ -149,6 +164,26 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
         ];
     }
 
+    public function tableDataHeader($dataSource, $params)
+    {
+        return [
+            'actual_man_power' => 'Actual',
+            'target_man_power' => 'Target',
+            'vari_man_power' => 'Variance',
+            'percent_vari_man_power' => 'Var.%',
+
+            'actual_total_hours' => 'Actual',
+            'target_hours' => 'Target',
+            'vari_hours' => 'Variance',
+            'percent_vari_hours' => 'Var.%',
+
+            'actual_man_hours' => 'Actual',
+            'target_man_hours' => 'Target',
+            'vari_man_hours' => 'Variance',
+            'percent_vari_man_hours' => 'Var.%',
+        ];
+    }
+
     public function getTableColumns($params, $dataSource)
     {
         return
@@ -158,76 +193,129 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     "dataIndex" => "sub_project_name",
                     "align" => "left",
                     "width" => 100,
+                    'fixed' => 'left'
                 ],
                 [
                     "title" => "Production Order",
                     "dataIndex" => "prod_order_name",
                     "align" => "left",
-                    "width" => 100,
+                    "width" => 150,
+                    'fixed' => 'left',
                 ],
                 [
                     "title" => "Production Routing",
                     "dataIndex" => "prod_routing_name",
                     "align" => "left",
                     "width" => 250,
+                    'fixed' => 'left',
                 ],
                 [
                     "title" => "Discipline",
                     "dataIndex" => "prod_discipline_name",
                     "align" => "left",
                     "width" => 200,
+                    'fixed' => 'left',
                 ],
                 [
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
-                    "width" => 600,
+                    "width" => 300,
+                    'fixed' => 'left',
                 ],
                 [
+                    "title" => "Status",
+                    "dataIndex" => "prod_sequence_status",
+                    "align" => "left",
+                    "width" => 100,
+                    'fixed' => 'left',
+                ],
+                [
+                    "title" => "Man-power",
+                    "dataIndex" => "target_man_power",
+                    "align" => "right",
+                    "width" => 80,
+                    "colspan" => 4,
+                    'footer' => 'agg_sum',
+                ],
+                [
+                    "dataIndex" => "actual_man_power",
+                    "align" => "right",
+                    "width" => 80,
+                    'footer' => 'agg_sum',
+                ],
+                [
+                    "dataIndex" => "vari_man_power",
+                    "align" => "right",
+                    "width" => 80,
+                    'footer' => 'agg_sum',
+                ],
+                [
+                    "dataIndex" => "percent_vari_man_power",
+                    "align" => "right",
+                    "width" => 80,
+                    'footer' => 'agg_sum',
+                ],
+                [
+                    "title" => "Hours",
                     "dataIndex" => "target_hours",
                     "align" => "right",
                     "width" => 80,
                     'footer' => 'agg_sum',
+                    "colspan" => 4,
                 ],
                 [
-                    "dataIndex" => "target_man_hours", // filtering from static number in database
-                    "align" => "right",
-                    "width" => 80,
-                    'footer' => 'agg_sum'
-                ],
-                [
-                    "dataIndex" => "target_man_power",
-                    "align" => "right",
-                    "width" => 80,
-                    'footer' => 'agg_sum'
-                ],
-                [
-                    "dataIndex" => "total_man_hours",
+                    "dataIndex" => "actual_total_hours",
                     "align" => "right",
                     "width" => 80,
                     'footer' => 'agg_sum',
                 ],
                 [
-                    "title" => "Total Hours (Actual)", // for a prod_order
-                    "dataIndex" => "total_hours",
+                    "dataIndex" => "vari_hours",
                     "align" => "right",
                     "width" => 80,
                     'footer' => 'agg_sum',
                 ],
                 [
-                    "title" => "Man Power (Actual)",
-                    "dataIndex" => "man_power",
+                    "dataIndex" => "percent_vari_hours",
                     "align" => "right",
                     "width" => 80,
                     'footer' => 'agg_sum',
                 ],
                 [
-                    "title" => "Man Hours (Actual)",
-                    "dataIndex" => "man_hours",
+                    "title" => "Man-hours",
+                    "dataIndex" => "target_man_hours",
+                    "align" => "right",
+                    "width" => 80,
+                    'footer' => 'agg_sum',
+                    "colspan" => 4,
+                ],
+                [
+                    "dataIndex" => "actual_man_hours",
+                    "align" => "right",
+                    "width" => 80,
+                    'footer' => 'agg_sum',
+                ],
+                [
+                    "dataIndex" => "vari_man_hours",
+                    "align" => "right",
+                    "width" => 80,
+                    'footer' => 'agg_sum',
+                ],
+                [
+                    "dataIndex" => "percent_vari_man_hours",
                     "align" => "right",
                     "width" => 80,
                     'footer' => 'agg_sum',
                 ],
             ];
+    }
+    public function changeDataSource($dataSource, $params)
+    {
+        foreach ($dataSource as $key => &$values) {
+            $values['prod_sequence_status'] = str_replace('_', ' ', $values['prod_sequence_status']);
+            $dataSource[$key] = $values;
+        }
+        return $dataSource;
     }
 }

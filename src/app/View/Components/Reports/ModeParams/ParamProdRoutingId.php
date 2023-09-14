@@ -23,6 +23,7 @@ class ParamProdRoutingId extends ParentParamReports
             $array->{$this->referData1} = $chklstTmplIds;
             $result[] = $array;
         };
+        usort($result, function ($a, $b) { return strcmp($a->name, $b->name); });
         return $result;
     }
 }
