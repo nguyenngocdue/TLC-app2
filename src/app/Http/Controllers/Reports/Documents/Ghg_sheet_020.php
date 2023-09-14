@@ -63,7 +63,6 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 
 	public function getDataSource($params)
 	{
-		// dump($params);
 		$primaryData = (new Ghg_sheet_dataSource())->getDataSource($params);
 		return collect($primaryData);
 	}
@@ -165,7 +164,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			if (!is_numeric($key)) continue;
 			$scopeSummaryMonths[] = [
 				'scope_id' => $key,
-				'total_tco2e' => array_sum(Report::getLastArrayValuesByKey($value, 'total_months'))
+				'total_tco2e' => round(array_sum(Report::getLastArrayValuesByKey($value, 'total_months')),2)
 			];
 		}
 

@@ -107,7 +107,7 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
                 [
                     "title" => "User to Sign",
                     "dataIndex" => "user_name",
-                    "align" => "center"
+                    "align" => "left"
                 ],
                 [
                     "title" => "Latency (days)",
