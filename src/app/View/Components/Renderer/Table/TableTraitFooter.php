@@ -119,7 +119,7 @@ trait TableTraitFooter
     }
     private function makeOneFooter($result, $fieldName, $footer, $eloquentTable)
     {
-        $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr1-6 py-0";
+        $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr-2 py-0";
         $inputs = [];
 
         foreach ($this->aggList as $agg) {

@@ -399,12 +399,12 @@
         "name": "prod_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
-        "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "not_applicable": ""
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
     },
     "prod_manager_nz": {
         "name": "prod_manager_nz",
@@ -421,12 +421,12 @@
         "name": "prod_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
-        "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "not_applicable": ""
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
