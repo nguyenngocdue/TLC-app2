@@ -25,7 +25,7 @@ class MyOrgChartController extends Controller
     {
         return "dashboard";
     }
-    public function index(Request $request)
+    public function index()
     {
         $tree = BuildTree::getTree();
         $results = [];
