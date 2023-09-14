@@ -418,7 +418,7 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "new": "true",
+        "new": "",
         "pending_review": "",
         "assigned": "true",
         "assign_rejected": "",
