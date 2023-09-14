@@ -5,8 +5,10 @@ namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 use App\BigThink\Oracy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Prod_routing;
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class ProdRoutingFilter extends Component
 {
@@ -37,6 +39,11 @@ class ProdRoutingFilter extends Component
             ->orderBy('name')
             ->get();
         Oracy::attach("getSubProjects()", $db);
+
+        if (CurrentUser::isAdmin()) {
+            $db = $db->filter(fn ($item) => $item->isShowOnProdSequence());
+            // Log::info($db->pluck('id'));
+        }
 
         return $db;
     }
