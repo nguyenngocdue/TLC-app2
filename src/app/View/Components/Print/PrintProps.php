@@ -73,7 +73,7 @@ class PrintProps extends Component
 		$dataSource = [];
 		$dataModelCurrent = $this->trashed ? ($this->modelPath)::onlyTrashed()->findOrFail($this->id) : ($this->modelPath)::findOrFail($this->id);
         $propsTemp = $props;
-        if($propsDocId && !isset($propsTemp['_doc_id'])) $propsTemp['_doc_id'] = $propsDocId;
+        if(isset($propsDocId) && !isset($propsTemp['_doc_id'])) $propsTemp['_doc_id'] = $propsDocId;
 		foreach ($propsTemp as $key => $prop) {
 			if ($prop['column_type'] !== 'static') {
 				if (empty($prop['relationships'])) {
