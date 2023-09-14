@@ -12,7 +12,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -27,7 +28,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdRoutingLinks": {
         "name": "_getProdRoutingLinks",
@@ -42,7 +44,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getWirDescriptions()": {
         "name": "_getWirDescriptions()",
@@ -57,7 +60,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "12",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getChklstTmpls()": {
         "name": "_getChklstTmpls()",
@@ -72,7 +76,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getSubProjects()": {
         "name": "_getSubProjects()",
@@ -87,7 +92,24 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_getScreensShowRoutingOn()": {
+        "name": "_getScreensShowRoutingOn()",
+        "relationship": "getCheckedByField",
+        "control_name": "getScreensShowRoutingOn()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "field_id",
+        "filter_values": "194",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdOrders": {
         "name": "_getProdOrders",
@@ -102,7 +124,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdRoutingDetails": {
         "name": "_getProdRoutingDetails",
@@ -117,7 +140,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdSequences": {
         "name": "_getProdSequences",
@@ -132,6 +156,7 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }

@@ -4,7 +4,7 @@
 
 @section('content')
 <div>
-  
+
   <form class="mb-5" method="POST" action="{{route('updateUserSettings')}}">
     @method('PUT')
     @csrf
@@ -28,6 +28,9 @@
             <label class="ml-3">Show Workers
               <x-renderer.editable.checkbox name="show_options[time_keeping_type]" cell="{{$showOptions['time_keeping_type'] ?? ''}}"></x-renderer.editable.checkbox>
             </label>
+            <label class="ml-3">Show BOD
+                <x-renderer.editable.checkbox name="show_options[category]" cell="{{$showOptions['category'] ?? ''}}"></x-renderer.editable.checkbox>
+              </label>
           </div>
         </div>
         <x-renderer.button htmlType='submit' type="secondary" >Save</x-renderer.button>
@@ -41,7 +44,7 @@
       <div style="position: absolute; width: 1px; height: 1px;">JS ERROR</div>
     </div> --}}
   </div>
-  
+
   <script>
     nodeDataArray = @json($dataSource);
   </script>

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class BuildTree
 {
     protected static $key = 'my_company';
-    protected static $fillableUser = ['id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta', 'time_keeping_type', 'department', 'workplace'];
+    protected static $fillableUser = ['id', 'name', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta', 'time_keeping_type', 'department', 'workplace','category'];
     protected static $fillableUserDiscipline = ['id', 'name', 'def_assignee'];
     private static function buildTree(array &$elements, $parentId = 0)
     {
@@ -108,8 +108,8 @@ class BuildTree
             if (isset($node->children)) {
                 $value = static::flatten($node->children);
                 $flatArray = array_merge($flatArray, $value);
-                //<< cause unexpected behavior when get flattened and un-flattened in a same scope of function 
-                // unset($node->children); 
+                //<< cause unexpected behavior when get flattened and un-flattened in a same scope of function
+                // unset($node->children);
             }
             $flatArray[] = $node;
         }

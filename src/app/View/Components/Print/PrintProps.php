@@ -47,6 +47,7 @@ class PrintProps extends Component
 		$blackList = ['z_divider', 'z_page_break'];
 		$superProps = SuperProps::getFor($this->type);
 		$props = $superProps['props'];
+        if(isset($props['_doc_id'])) $propsDocId = $props['_doc_id'];
 		$hiddenPrintMode = $this->printMode == 'template' ? 'hidden_template_print' : 'hidden_print';
 		$props = array_filter($props, fn ($item) => ($item[$hiddenPrintMode] ?? false) != true);
 		$node = [];
@@ -71,7 +72,9 @@ class PrintProps extends Component
 		}
 		$dataSource = [];
 		$dataModelCurrent = $this->trashed ? ($this->modelPath)::onlyTrashed()->findOrFail($this->id) : ($this->modelPath)::findOrFail($this->id);
-		foreach ($props as $key => $prop) {
+        $propsTemp = $props;
+        if(isset($propsDocId) && !isset($propsTemp['_doc_id'])) $propsTemp['_doc_id'] = $propsDocId;
+		foreach ($propsTemp as $key => $prop) {
 			if ($prop['column_type'] !== 'static') {
 				if (empty($prop['relationships'])) {
 					$dataSource[$prop['column_name']] = $dataModelCurrent->{$prop['column_name']};
