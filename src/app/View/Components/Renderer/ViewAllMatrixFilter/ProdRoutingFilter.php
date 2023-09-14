@@ -41,8 +41,7 @@ class ProdRoutingFilter extends Component
         Oracy::attach("getSubProjects()", $db);
 
         if (CurrentUser::isAdmin()) {
-            $db = $db->filter(fn ($item) => $item->isShowOnProdSequence());
-            // Log::info($db->pluck('id'));
+            $db = $db->filter(fn ($item) => $item->isShowOnProdSequence())->values();
         }
 
         return $db;
