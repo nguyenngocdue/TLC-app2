@@ -53,7 +53,7 @@ $route = $routeName ? route($routeName) : "";
     }
 </script>
 
-<script>
+{{-- <script>
         // This script runs after the HTML document has fully loaded
         document.addEventListener("DOMContentLoaded", function() {
             // Check if a "reload" cookie exists
@@ -83,4 +83,4 @@ $route = $routeName ? route($routeName) : "";
             const expires = "expires=" + date.toUTCString();
             document.cookie = name + "=" + value + ";" + expires + ";path=/";
         }
-</script>
+</script> --}}

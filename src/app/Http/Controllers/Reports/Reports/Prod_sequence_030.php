@@ -21,7 +21,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     protected $projectId = 5;
     protected $subProjectId = 21;
     protected $prodRoutingId = 2;
-    protected $tableTrueWidth = false;
+    protected $tableTrueWidth = true;
     protected $maxH = 50;
     protected $typeView = 'report-pivot';
     protected $type = 'prod_sequence';
@@ -45,13 +45,13 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                         ,prd.target_hours AS target_hours
                         ,prd.target_man_hours AS target_man_hours
                         ,prd.target_man_power AS target_man_power
-                        ,pose.total_man_hours AS total_man_hours
+                        ,FORMAT(pose.total_man_hours,2) AS total_man_hours
                         ,pd.id AS prod_discipline_id
                         ,pd.name AS prod_discipline_name
 
-                        ,ROUND((pru.worker_number), 2) AS man_power
-                        ,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)) AS total_hours
-                        ,ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) AS man_hours
+                        ,FORMAT(ROUND((pru.worker_number), 2),2) AS man_power
+                        ,FORMAT(ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2),2) AS total_hours
+                        ,FORMAT(ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2),2) AS man_hours
 
                     FROM sub_projects sp
                     JOIN prod_orders po ON po.sub_project_id = sp.id
@@ -157,75 +157,75 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     "title" => "Sub Project",
                     "dataIndex" => "sub_project_name",
                     "align" => "left",
-                    // "width" => 100,
+                    "width" => 100,
                 ],
                 [
                     "title" => "Production Order",
                     "dataIndex" => "prod_order_name",
                     "align" => "left",
-                    // "width" => 100,
+                    "width" => 100,
                 ],
                 [
                     "title" => "Production Routing",
                     "dataIndex" => "prod_routing_name",
                     "align" => "left",
-                    // "width" => 100,
+                    "width" => 250,
                 ],
                 [
                     "title" => "Discipline",
                     "dataIndex" => "prod_discipline_name",
                     "align" => "left",
-                    // "width" => 100,
+                    "width" => 200,
                 ],
                 [
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
-                    // "width" => 100,
+                    "width" => 600,
                 ],
                 [
                     "dataIndex" => "target_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                     'footer' => 'agg_sum',
                 ],
                 [
                     "dataIndex" => "target_man_hours", // filtering from static number in database
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                     'footer' => 'agg_sum'
                 ],
                 [
                     "dataIndex" => "target_man_power",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                     'footer' => 'agg_sum'
                 ],
                 [
                     "dataIndex" => "total_man_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                     'footer' => 'agg_sum',
                 ],
                 [
                     "title" => "Total Hours (Actual)", // for a prod_order
                     "dataIndex" => "total_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                     'footer' => 'agg_sum',
                 ],
                 [
                     "title" => "Man Power (Actual)",
                     "dataIndex" => "man_power",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                     'footer' => 'agg_sum',
                 ],
                 [
                     "title" => "Man Hours (Actual)",
                     "dataIndex" => "man_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 80,
                     'footer' => 'agg_sum',
                 ],
             ];
