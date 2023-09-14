@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Models\Department;
 use App\Models\User;
+use App\Models\User_category;
 use App\Models\User_time_keep_type;
 use App\Models\Workplace;
 use App\Utils\Constant;
@@ -19,6 +20,9 @@ class MyOrgChartController extends Controller
     const ARRAY_RESIGNED = [0,1];
 
     const ARRAY_NONE_RESIGNED = [0];
+
+    const BOD_CATEGORY = [17];
+
 
     use TraitViewAllFunctions;
     public function getType()
@@ -71,7 +75,7 @@ class MyOrgChartController extends Controller
     }
     private function convertDataSource($value,$options){
         if(in_array($value->workplace,$options['workplace']) && in_array($value->resigned,$options['resigned'])
-            && in_array($value->time_keeping_type,$options['time_keeping_type'])){
+            && in_array($value->time_keeping_type,$options['time_keeping_type']) && in_array($value->category , $options['category'])){
             $id = $value->id;
             $user = User::findFromCache($id);
             $positionRendered = $user->position_rendered;
@@ -100,11 +104,15 @@ class MyOrgChartController extends Controller
     private function getIdsUserTimeKeepingType(){
         return User_time_keep_type::query()->get()->pluck('id')->toArray();
     }
+    private function getIdsUserCategories(){
+        return User_category::query()->get()->pluck('id')->toArray();
+    }
     private function getOptionsRenderByUserSetting($showOptions){
         $results = [
             'resigned' => $this::ARRAY_NONE_RESIGNED,
             'time_keeping_type' => $this::ARRAY_TSO_NONE,
             'workplace'=> $this->getIdsWorkplace(),
+            'category'=> $this->getIdsUserCategories(),
         ];
         foreach ($showOptions as $key => $value) {
                 switch ($key) {
@@ -117,6 +125,9 @@ class MyOrgChartController extends Controller
                     case 'workplace':
                         if(is_array($value)) $results['workplace'] = $value;
                             break;
+                    case 'category':
+                        if($value == 'true') $results['category'] = $this::BOD_CATEGORY;
+                        break;
                     default:
                         break;
             }
