@@ -55,6 +55,7 @@ class MenuProfile extends Component
         $userMenu = json_decode($navbarStr, true);
         $group = [];
         foreach ($userMenu as $value) {
+            if(!isset($value['group'])) continue;
             $group[$value['group']][] = $value;
         }
         return $group;
