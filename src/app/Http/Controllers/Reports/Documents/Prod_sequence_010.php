@@ -11,8 +11,6 @@ use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
-use App\Utils\Support\DocumentReport;
-use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +26,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
     protected $subProjectId = 21;
     protected $prodRoutingId = 2;
     protected $groupByLength = 1;
+    protected $pageLimit = 100000;
     protected $groupBy = 'prod_discipline_name';
     protected $viewName = 'document-prod-sequence-010';
     protected $type = 'prod_sequence';
@@ -255,17 +254,4 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         // dd($dataSource);
         return $dataSource;
     }
-
-    // public function changeDataSource($dataSource, $params)
-    // {
-    //     foreach ($dataSource as $key => &$items) {
-    //         foreach ($items as &$values){
-    //             $values['prod_sequence_status'] = str_replace('_', ' ', $values['prod_sequence_status']);
-    //         }
-    //         dd($items);
-    //         $dataSource[$key] = $items;
-    //     }
-    //     return $dataSource;
-    // }
-    
 }

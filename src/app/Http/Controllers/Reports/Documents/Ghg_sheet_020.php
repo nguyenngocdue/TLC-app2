@@ -8,7 +8,6 @@ use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Models\Term;
 use App\Utils\Support\DocumentReport;
-use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use App\Utils\Support\StringReport;
 use Illuminate\Support\Facades\DB;

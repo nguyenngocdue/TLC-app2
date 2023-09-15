@@ -25,9 +25,9 @@ abstract class Report_Parent2Controller extends Controller
     use TraitParamsSettingReport;
     use TraitFunctionsReport;
     use TraitLibPivotTableDataFields2;
+    use TraitUpdateBasicInfoDataSource;
     use TraitCreateSQL;
     use TraitGetOptionPrint;
-    use TraitShowTooltipForLines;
     use TraitSettingLayout;
 
     protected $mode = '010';

@@ -17,8 +17,8 @@
     @endphp
     @if($typeOfView === 'report-pivot')
     <x-renderer.report.pivot-table 
-                    modeType="{{$modeType}}"  
                     showNo={{true}} 
+                    modeType="{{$modeType}}"  
                     :tableDataHeader="$tableDataHeader" 
                     :tableColumns="$tableColumns" 
                     :params="$params" 
@@ -26,6 +26,7 @@
                     tableTrueWidth={{$tableTrueWidth?1:0}} 
                     page-limit="{{$pageLimit}}" 
                     headerTop=10
+                    maxH="{{$maxH}}" 
                     
                     showPaginationTop="true"
                     topLeftControl="{!!$tl!!}" 

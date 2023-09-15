@@ -82,7 +82,12 @@ $basicInfo = $basicInfoData[$key];
 
             <div class="">
                 <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Detail Report</h4>
-                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns" :dataSource="$data" />
+                <x-renderer.report.pivot-table 
+                    showNo={{true}} 
+                    :tableColumns="$tableColumns" 
+                    :dataSource="$data"
+                    page-limit="{{$pageLimit}}"                     
+                />
             </div>
         </div>
     </div>

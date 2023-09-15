@@ -6,15 +6,12 @@ use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
-use App\Http\Controllers\Reports\TraitShowTooltipForLines;
+use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
-use App\Utils\Support\DateReport;
-use App\Utils\Support\DocumentReport;
-use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +21,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     use TraitForwardModeReport;
     use TraitMenuTitle;
     use TraitParamsSettingReport;
-    use TraitShowTooltipForLines;
+    use TraitUpdateBasicInfoDataSource;
 
     protected $mode = '020';
     protected $projectId = 5;

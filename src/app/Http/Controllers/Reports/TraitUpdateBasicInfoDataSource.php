@@ -4,15 +4,19 @@ namespace App\Http\Controllers\Reports;
 
 use Illuminate\Support\Collection;
 
-trait TraitShowTooltipForLines
+trait TraitUpdateBasicInfoDataSource
 {
 
-    private static function addValues($values, $fields, $attrib)
+    private static function updateFieldsStatusAndValues($values, $fields, $attrib)
     {
         $values =  (array)$values;
         $fields = array_intersect($fields, array_keys((array)$values));
         foreach ($fields as $field) {
             if (isset($values[$field])) {
+                if(str_contains($field, 'status')){
+                    $values[$field] = str_replace('_', ' ', $values[$field]);
+                    continue;
+                }
                 $f = str_replace('name', 'desc', $field);
                 $cellTitle = isset($values[$f]) && !is_null($values[$f]) ? $values[$f] : 'Id: ' . $values[str_replace('name', 'id', $field)];
                 $cellHref = '';
@@ -46,17 +50,18 @@ trait TraitShowTooltipForLines
             'prod_routing_link_name',
             'department_name',
             'ecos_name',
+            'prod_sequence_status',
         ] + $fieldInputs;
         $attrib = [];
         foreach ($dataSource as $key => &$values) {
             if (isset($dataSet[$key])) $attrib = $dataSet[$key];
             if (($values instanceof Collection)) {
                 foreach ($values as $k => &$item) {
-                    $item = self::addValues($item, $fields, $attrib);
+                    $item = self::updateFieldsStatusAndValues($item, $fields, $attrib);
                     $values[$k] = $item;
                 }
             } else {
-                $values = self::addValues($values, $fields, $attrib);
+                $values = self::updateFieldsStatusAndValues($values, $fields, $attrib);
             }
             $dataSource[$key] = $values;
         }

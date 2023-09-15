@@ -22,7 +22,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     protected $subProjectId = 21;
     protected $prodRoutingId = 2;
     protected $tableTrueWidth = true;
-    protected $maxH = 50;
+    protected $maxH = 30;
     protected $typeView = 'report-pivot';
     protected $type = 'prod_sequence';
     protected $pageLimit = 10;
@@ -309,13 +309,5 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     'footer' => 'agg_sum',
                 ],
             ];
-    }
-    public function changeDataSource($dataSource, $params)
-    {
-        foreach ($dataSource as $key => &$values) {
-            $values['prod_sequence_status'] = str_replace('_', ' ', $values['prod_sequence_status']);
-            $dataSource[$key] = $values;
-        }
-        return $dataSource;
     }
 }
