@@ -12,6 +12,7 @@ use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
+use App\Utils\Support\ModificationDataReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
@@ -130,8 +131,8 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                                     JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
                                     JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id";
 
-                if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pose.prod_routing_link_id IN ({{prod_routing_link_id}})";
-                $sql .= "\n         WHERE 1 = 1
+        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pose.prod_routing_link_id IN ({{prod_routing_link_id}})";
+        $sql .= "\n         WHERE 1 = 1
                                     AND sp.project_id = '{{project_id}}'
                                     AND sp.id = '{{sub_project_id}}'
                                     AND po.prod_routing_id = '{{prod_routing_id}}'
@@ -346,20 +347,27 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
 
     public function changeDataSource($dataSource, $params)
     {
-        // dump($dataSource, );
         foreach ($dataSource as $key => $values) {
             $paramUrl = "?project_id={$values['project_id']}";
             $paramUrl .= "&sub_project_id={$values['sub_project_id']}";
             $paramUrl .= "&prod_routing_id={$values['prod_routing_id']}";
             $paramUrl .= "&prod_routing_link_id={$values['prod_routing_link_id']}";
             $paramUrl .= "&picker_date={$params['picker_date']}";
-            // if (isset($params['prod_order_id'])) $paramUrl .= "&prod_order_id={$values['prod_order_id']}";
             if (isset($params['prod_discipline_id'])) $paramUrl .= "&prod_discipline_id={$values['prod_discipline_id']}";
+            $url = route('report-prod_sequence_030').$paramUrl;
 
-
-            $values = Report::addHrefForValues($values, 'hours', $paramUrl);
-            $values = Report::addHrefForValues($values, 'man_power', $paramUrl);
-            $values = Report::addHrefForValues($values, 'man_hours', $paramUrl);
+            $array = [
+                "percent_vari_man_hours" => ["formula" => "({{man_power}} / {{target_man_power}})*100",],
+                "percent_vari_man_power" => ["formula" => "({{man_power}} / {{target_man_power}})*100",],
+                "percent_vari_hours" => ["formula" => "({{hours}} / {{target_hours}})*100",],
+                "vari_man_power" => ["formula" => "{{man_power}} - {{target_man_power}}",],
+                "vari_hours" => ["formula" => "{{hours}} - {{target_hours}}",],
+                "vari_man_hours" => ["formula" => "{{man_hours}} - {{target_man_hours}}",],
+                'hours' => ['href' => $url],
+                'man_power' => ['href' => $url],
+                'man_hours' => ['href' => $url],
+            ];
+            $values = ModificationDataReport::addFormulaForData($values, $array);
             $dataSource[$key] = $values;
         }
         // dd($dataSource);

@@ -199,7 +199,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     "title" => "Production Order",
                     "dataIndex" => "prod_order_name",
                     "align" => "left",
-                    "width" => 150,
+                    "width" => 100,
                     'fixed' => 'left',
                 ],
                 [

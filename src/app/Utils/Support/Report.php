@@ -312,12 +312,4 @@ class Report
         }
         return $resultArray;
     }
-    public static function addHrefForValues($values, $param1, $paramUrl){
-        $values[$param1] = (object)[
-            'value' => $values[$param1] ?? '',
-            'cell_class' => 'text-blue-800',
-            'cell_href' =>  $values[$param1] ? route('report-prod_sequence_030').$paramUrl : '',
-        ];
-        return $values;
-    }
 }
