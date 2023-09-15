@@ -115,6 +115,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                 'title' => 'Date',
                 'dataIndex' => 'picker_date',
                 'renderer' => 'picker_date',
+                'validation' => 'date_format:d/m/Y',
             ],
             [
                 'title' => 'Project',

@@ -205,7 +205,7 @@ if (isset($params['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
                 'dataIndex' => 'picker_date',
                 'renderer' => 'picker_date',
                 'allowClear' => true,
-                // 'validation' => 'date_format:d/m/Y',
+                'validation' => 'date_format:d/m/Y',
             ],
             [
                 'title' => 'User',

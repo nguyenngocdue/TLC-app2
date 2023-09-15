@@ -12,11 +12,12 @@
     @if ($errors->any())
             @foreach ($errors->getMessages() as $field => $message)
                 @if($field === $name || $field === 'star_date' || $field === 'end_date')
-                <span class="text-xs" role="alert">
-                    <ul class="mt-1.5 text-red-600 font-semibold">
-                        <li>{{last($message)}}</li>
-                    </ul>
-                </span>
+                    <span class="text-xs" role="alert">
+                        <ul class="mt-1.5 text-red-600 font-semibold">
+                            <li>{{last($message)}}</li>
+                        </ul>
+                    </span>
+                    @break
                 @endif
             @endforeach
     @endif

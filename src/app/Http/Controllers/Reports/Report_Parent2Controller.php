@@ -11,14 +11,12 @@ use App\Utils\ClassList;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
-use App\Utils\Support\DateReport;
 use App\Utils\Support\DocumentReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 abstract class Report_Parent2Controller extends Controller
@@ -28,6 +26,7 @@ abstract class Report_Parent2Controller extends Controller
     use TraitFunctionsReport;
     use TraitLibPivotTableDataFields2;
     use TraitUpdateBasicInfoDataSource;
+    use ValidationAdvancedFilterReport;
     use TraitCreateSQL;
     use TraitGetOptionPrint;
     use TraitSettingLayout;
@@ -199,26 +198,6 @@ abstract class Report_Parent2Controller extends Controller
         return [];
     }
 
-    private function checkValidationAdvancedFilter(Request $request)
-    {
-        $fields = array_column($this->getParamColumns([], ''),'validation', 'dataIndex');
-        if(empty($fields)) return [];
-
-        $values = $request->all();
-        if(isset($values['picker_date'])) {
-            $pickerDate = $values['picker_date'];
-            [$start, $end] =  DateReport::explodePickerDate($pickerDate);
-            $fields['start_date'] = "date_format:d/m/Y";
-            $fields['end_date'] = "date_format:d/m/Y";
-            $values['start_date'] = $start;
-            $values['end_date'] = $end;
-        }
-        // dd($fields, $values);
-        $validator = Validator::make($values, $fields);
-        if ($validator->fails()) {
-            return $validator;
-        }
-    }
 
     public function index(Request $request)
     {
@@ -227,7 +206,9 @@ abstract class Report_Parent2Controller extends Controller
         // Check Validations
         if ($input) {
             $validation = $this->checkValidationAdvancedFilter($request);
-            if ($validation->failed()) {
+            $failedVal = $validation ? $validation->failed() : [];
+            unset($failedVal['picker_date']);
+            if ($failedVal) {
                 $messages = $validation->getMessageBag()->toArray();
                 return back()
                 ->withErrors($messages)
