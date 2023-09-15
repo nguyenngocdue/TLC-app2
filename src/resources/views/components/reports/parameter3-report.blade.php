@@ -1,9 +1,10 @@
 @php
 $route = $routeName ? route($routeName) : "";
 @endphp
+
 <form action="{{$route}}" id="{{$entity}}" method="GET">
     <div class="grid grid-row-1 w-full">
-        <div class="grid grid-cols-12 gap-4 items-end">
+        <div class="grid grid-cols-12 gap-4 items-baseline">
             <input type="hidden" name='_entity' value="{{ $entity }}">
             <input type="hidden" name='action' value="updateReport{{Str::ucfirst($typeReport)}}">
             <input type="hidden" name='type_report' value="{{$typeReport}}">
@@ -30,9 +31,20 @@ $route = $routeName ? route($routeName) : "";
                 @switch($renderer)
                 @case("drop_down")
                 <x-reports.dropdown7 hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />
+                    @if ($errors->any())
+                            @foreach ($errors->getMessages() as $field => $message)
+                                @if($field === $name)
+                                <span class="text-xs" role="alert">
+                                    <ul class="mt-1.5 text-red-600 font-semibold">
+                                        <li>{{last($message)}}</li>
+                                    </ul>
+                                </span>
+                                @endif
+                            @endforeach
+                    @endif
                 @break
                 @case('picker_date')
-                <x-reports.picker-date1 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} value="{{$date}}" singleDatePicker='{{$singleDatePicker}}'/>
+                <x-reports.picker-date1 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} value="{{$date}}" singleDatePicker='{{$singleDatePicker}}' />
                 @break
                 @default
                 @endswitch
@@ -51,6 +63,7 @@ $route = $routeName ? route($routeName) : "";
     function resetFilter() {
         $('[id="' + "{{$entity}}" + '"]').append('<input type="hidden" name="form_type" value="resetParamsReport">')
     }
+
 </script>
 
 {{-- <script>
@@ -62,25 +75,25 @@ $route = $routeName ? route($routeName) : "";
             // If the "reload" cookie does not exist (page was not manually reloaded)
             if (!reloadCookie) {
                 // Submit the form with the ID specified in the {{$entity}} variable
-                document.getElementById("{{$entity}}").submit();
-                
-                // Create a "reload" cookie with a value of "1" (expires in 1 minute)
-                setCookie("reload", "1", 1);
-            }
-        });
+document.getElementById("{{$entity}}").submit();
 
-        // Function to retrieve the value of a specific cookie
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
+// Create a "reload" cookie with a value of "1" (expires in 1 minute)
+setCookie("reload", "1", 1);
+}
+});
 
-        // Function to create a new cookie
-        function setCookie(name, value, minutes) {
-            const date = new Date();
-            date.setTime(date.getTime() + (minutes * 60 * 1000));
-            const expires = "expires=" + date.toUTCString();
-            document.cookie = name + "=" + value + ";" + expires + ";path=/";
-        }
+// Function to retrieve the value of a specific cookie
+function getCookie(name) {
+const value = `; ${document.cookie}`;
+const parts = value.split(`; ${name}=`);
+if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+// Function to create a new cookie
+function setCookie(name, value, minutes) {
+const date = new Date();
+date.setTime(date.getTime() + (minutes * 60 * 1000));
+const expires = "expires=" + date.toUTCString();
+document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
 </script> --}}

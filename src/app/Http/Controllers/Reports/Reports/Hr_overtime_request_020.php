@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentReportController;
+use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
@@ -12,7 +12,7 @@ use App\Utils\Support\CurrentUser;
 use DateTime;
 use Illuminate\Support\Str;
 
-class Hr_overtime_request_020 extends Report_ParentReportController
+class Hr_overtime_request_020 extends Report_ParentReport2Controller
 {
     use TraitDynamicColumnsTableReport;
     use TraitModifyDataToExcelReport;
@@ -21,6 +21,7 @@ class Hr_overtime_request_020 extends Report_ParentReportController
     protected $groupBy = 'ot_date';
     protected $mode = '020';
     protected $maxH = 50;
+    protected $typeView = 'report-pivot';
 
     public function getSqlStr($params)
     {
@@ -196,7 +197,7 @@ if (isset($params['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
         ];
         return  $totalDataCol;
     }
-    protected function getParamColumns()
+    protected function getParamColumns($dataSource, $modeType)
     {
         return [
             [
@@ -204,6 +205,7 @@ if (isset($params['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
                 'dataIndex' => 'picker_date',
                 'renderer' => 'picker_date',
                 'allowClear' => true,
+                // 'validation' => 'date_format:d/m/Y',
             ],
             [
                 'title' => 'User',

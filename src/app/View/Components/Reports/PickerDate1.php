@@ -3,6 +3,7 @@
 namespace App\View\Components\Reports;
 
 use App\Utils\ClassList;
+use Illuminate\Support\Arr;
 use Illuminate\View\Component;
 
 class PickerDate1 extends Component
@@ -19,7 +20,6 @@ class PickerDate1 extends Component
         private $allowClear = false,
         private $singleDatePicker = false,
     ) {
-        //
     }
 
     /**

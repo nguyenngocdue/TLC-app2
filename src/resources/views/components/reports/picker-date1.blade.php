@@ -3,12 +3,23 @@
 </div>
 <div class="input-group">
     <div class="input-group-prepend">
-        <span class="input-group-text border border-gray-300 text-gray-900 rounded-md p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+        <span class="input-group-text border border-gray-300 text-gray-900 rounded-md  dark:placeholder-gray-400 block w-full  text-sm dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
             <i class="far fa-calendar-alt"></i>
         </span>
     </div>
-    <input name="{{$name}}" value="{{$value}}" placeholder={{$singleDatePicker ? "Select a date":"Start date  ->  End date"}} type="text" autocomplete="off" class="form-control float-right bg-white border border-gray-300 text-gray-900 rounded-md p-2.5 dark:placeholder-gray-400 block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" id="{{$name}}">
+    <input name="{{$name}}" value="{{old($name) ? old($name) : $value }}" placeholder={{$singleDatePicker ? "Select a date":"Start date  ->  End date"}} type="text" autocomplete="off" class="form-control float-right bg-white border border-gray-300 text-gray-900 rounded-md p-2.5 dark:placeholder-gray-400 block w-full  text-sm dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" id="{{$name}}">
 </div>
+    @if ($errors->any())
+            @foreach ($errors->getMessages() as $field => $message)
+                @if($field === $name || $field === 'star_date' || $field === 'end_date')
+                <span class="text-xs" role="alert">
+                    <ul class="mt-1.5 text-red-600 font-semibold">
+                        <li>{{last($message)}}</li>
+                    </ul>
+                </span>
+                @endif
+            @endforeach
+    @endif
 <script>
     function initializeDateRangePicker() {
 

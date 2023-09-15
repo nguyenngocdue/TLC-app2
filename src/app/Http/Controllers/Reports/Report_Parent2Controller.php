@@ -11,12 +11,14 @@ use App\Utils\ClassList;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\DocumentReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 abstract class Report_Parent2Controller extends Controller
@@ -39,7 +41,7 @@ abstract class Report_Parent2Controller extends Controller
     protected $rotate45Width = false;
     protected $viewName = '';
     protected $type = '';
-    
+
     public function getType()
     {
         return $this->getTable();
@@ -192,13 +194,46 @@ abstract class Report_Parent2Controller extends Controller
         return [];
     }
 
-    public function getDisplayValueColumns(){
+    public function getDisplayValueColumns()
+    {
         return [];
+    }
+
+    private function checkValidationAdvancedFilter(Request $request)
+    {
+        $fields = array_column($this->getParamColumns([], ''),'validation', 'dataIndex');
+        if(empty($fields)) return [];
+
+        $values = $request->all();
+        if(isset($values['picker_date'])) {
+            $pickerDate = $values['picker_date'];
+            [$start, $end] =  DateReport::explodePickerDate($pickerDate);
+            $fields['start_date'] = "date_format:d/m/Y";
+            $fields['end_date'] = "date_format:d/m/Y";
+            $values['start_date'] = $start;
+            $values['end_date'] = $end;
+        }
+        // dd($fields, $values);
+        $validator = Validator::make($values, $fields);
+        if ($validator->fails()) {
+            return $validator;
+        }
     }
 
     public function index(Request $request)
     {
+
         $input = $request->input();
+        // Check Validations
+        if ($input) {
+            $validation = $this->checkValidationAdvancedFilter($request);
+            if ($validation->failed()) {
+                $messages = $validation->getMessageBag()->toArray();
+                return back()
+                ->withErrors($messages)
+                ->withInput();
+            }
+        }
         $typeReport = CurrentPathInfo::getTypeReport($request);
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
@@ -209,7 +244,7 @@ abstract class Report_Parent2Controller extends Controller
             return $this->forwardToMode($request, $params);
         }
         $pageLimit = $this->getPageParam($typeReport, $entity);
-        
+
         $viewName =  CurrentPathInfo::getViewName($request);
         if ($this->viewName) $viewName = $this->viewName;
 
@@ -240,7 +275,7 @@ abstract class Report_Parent2Controller extends Controller
         $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
         $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
         $valueOptionPrint =  $this->getValueOptionPrint();
-        // dd($tableDataHeader);
+        // dd($dataSource);
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,

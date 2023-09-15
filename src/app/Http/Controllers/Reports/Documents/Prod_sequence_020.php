@@ -171,6 +171,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'dataIndex' => 'picker_date',
                 'renderer' => 'picker_date',
                 'singleDatePicker' => true,
+                'validation' => 'required|date_format:d/m/Y',
             ],
             [
                 'title' => 'Project',
@@ -185,12 +186,14 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'title' => 'Production Routing',
                 'dataIndex' => 'prod_routing_id',
                 'hasListenTo' => true,
+                'validation' => 'required',
             ],
             [
                 'title' => 'Production Discipline',
                 'dataIndex' => 'prod_discipline_id',
                 'allowClear' => true,
                 'multiple' => true,
+                'validation' => 'required',
             ],
             [
                 'title' => 'Production Routing Link',
@@ -198,7 +201,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'allowClear' => true,
                 'multiple' => true,
                 'hasListenTo' => true,
-
+                'validation' => 'required',
             ],
         ];
     }

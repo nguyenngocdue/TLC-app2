@@ -19,7 +19,7 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 	protected $viewName = 'document-ghg-summary-report';
 	protected $year = '2023';
 
-	public function getParamColumns($dataSource, $modeType)
+	public function getParamColumns($dataSource = [], $modeType = '')
 	{
 		return [
 			[
