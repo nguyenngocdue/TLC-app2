@@ -275,7 +275,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         return [
             'id' => $this->id,
             'full_name' => $this->full_name,
-            'name' => $this->name,
+            'name0' => $this->name0,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
@@ -295,7 +295,7 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     public static function findFromCache($id)
     {
-        // if(!isset(static::getCollection()[$id])) 
+        // if(!isset(static::getCollection()[$id]))
         return static::getCollection()[$id] ?? null;
     }
 
@@ -303,11 +303,11 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         // dump(join(",", $uids->toArray()));
         $uidsArray = join(",", $uids->toArray());
-        $sql = "SELECT line.user_id, left(tsw.ts_date,7) month0, sum(line.duration_in_min)/60 working_hours 
-        FROM 
-            `hr_timesheet_lines` line, 
+        $sql = "SELECT line.user_id, left(tsw.ts_date,7) month0, sum(line.duration_in_min)/60 working_hours
+        FROM
+            `hr_timesheet_lines` line,
             `hr_timesheet_workers` tsw
-        WHERE 1=1 
+        WHERE 1=1
             AND tsw.id = line.timesheetable_id
             AND timesheetable_type='App\\\\Models\\\\Hr_timesheet_worker'
             AND tsw.deleted_at IS NULL
@@ -330,12 +330,12 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         // dump(join(",", $uids->toArray()));
         $uidsArray = join(",", $uids->toArray());
-        $sql = "SELECT line.user_id, left(line.ot_date,7) month0, sum(line.total_time) ot_hours 
+        $sql = "SELECT line.user_id, left(line.ot_date,7) month0, sum(line.total_time) ot_hours
         FROM `hr_overtime_request_lines` line
-        WHERE 1=1 
+        WHERE 1=1
             AND line.deleted_at IS NULL
             AND line.user_id IN ($uidsArray)
-            AND LEFT(line.ot_date, 4) = '$year'            
+            AND LEFT(line.ot_date, 4) = '$year'
         GROUP BY month0, line.user_id
         ORDER BY ot_hours DESC
         ";
