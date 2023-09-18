@@ -341,7 +341,7 @@ abstract class ViewAllTypeMatrixParent extends Component
 
         //<< If current page of HLC is 12, but STW only have 1 page
         //Force the program to select the smallest page
-        $page = ($count) ? min(round($count / $perPage, 0), $page) : 1; //<< This line has bug
+        $page = ($count) ? min(ceil($count / $perPage), $page) : 1; //<< This line has bug
         // Log::info("Count $count, perPage: $perPage, Page: $page");
 
         return new LengthAwarePaginator($items->forPage($page, $perPage), $count, $perPage, $page, $options);
