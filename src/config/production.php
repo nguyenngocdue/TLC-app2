@@ -2,8 +2,9 @@
 
 return [
     "prod_routing" => [
-        "show_on_prod_sequence" => 347,
-        "show_on_qaqc_wir" => 346,
-        "show_on_qaqc_inspection" => 348,
+        "prod_sequences" => 347,
+        "qaqc_wirs" => 346,
+        "qaqc_insp_chklst_shts" => 348,
+        "qaqc_insp_chklsts" => 348,
     ],
 ];

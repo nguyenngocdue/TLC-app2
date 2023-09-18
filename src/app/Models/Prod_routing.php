@@ -29,24 +29,15 @@ class Prod_routing extends ModelExtended
         "getScreensShowRoutingOn()" => ["getCheckedByField", Term::class],
     ];
 
-    public function isShowOnQaqcInspection()
+    private static $showIsShowOn = false;
+    public function isShowOn($type)
     {
         $allow = $this->getScreensShowRoutingOn()->pluck('id')->toArray();
-        $config = config("production.prod_routing.show_on_qaqc_inspection");
-        return in_array($config, $allow);
-    }
-
-    public function isShowOnQaqcWir()
-    {
-        $allow = $this->getScreensShowRoutingOn()->pluck('id')->toArray();
-        $config = config("production.prod_routing.show_on_qaqc_wir");
-        return in_array($config, $allow);
-    }
-
-    public function isShowOnProdSequence()
-    {
-        $allow = $this->getScreensShowRoutingOn()->pluck('id')->toArray();
-        $config = config("production.prod_routing.show_on_prod_sequence");
+        $config = config("production.prod_routing.$type");
+        if (is_null($config) && !static::$showIsShowOn) {
+            static::$showIsShowOn = true;
+            dump($type . " is not registered for ProdRoutingFilter.");
+        }
         return in_array($config, $allow);
     }
 

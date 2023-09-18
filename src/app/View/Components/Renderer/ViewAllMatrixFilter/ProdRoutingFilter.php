@@ -5,6 +5,7 @@ namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 use App\BigThink\Oracy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Prod_routing;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
@@ -40,9 +41,9 @@ class ProdRoutingFilter extends Component
             ->get();
         Oracy::attach("getSubProjects()", $db);
 
-        if (CurrentUser::isAdmin()) {
-            $db = $db->filter(fn ($item) => $item->isShowOnProdSequence())->values();
-        }
+        // if (CurrentUser::isAdmin()) {
+        $db = $db->filter(fn ($item) => $item->isShowOn(CurrentRoute::getTypePlural()))->values();
+        // }
 
         return $db;
     }
