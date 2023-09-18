@@ -341,7 +341,8 @@ abstract class ViewAllTypeMatrixParent extends Component
 
         //<< If current page of HLC is 12, but STW only have 1 page
         //Force the program to select the smallest page
-        $page = ($count) ? min(floor($perPage / $count), $page) : 1;
+        $page = ($count) ? min(round($count / $perPage, 0), $page) : 1; //<< This line has bug
+        // Log::info("Count $count, perPage: $perPage, Page: $page");
 
         return new LengthAwarePaginator($items->forPage($page, $perPage), $count, $perPage, $page, $options);
     }
@@ -397,6 +398,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $dataSource = $this->paginate($dataSource, $per_page, $page);
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
+
         $filterRenderer = $this->getFilter();
 
         $actionButtons = Blade::render("<x-form.action-button-group-view-matrix 
@@ -407,7 +409,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             />", [
             'actionBtnList' => $this->actionBtnList,
         ]);
-
+        // dump($perPage);
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
             [
