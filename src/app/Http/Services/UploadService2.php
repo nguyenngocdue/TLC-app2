@@ -136,7 +136,8 @@ class UploadService2
             // dd($result);
             return $result;
         } catch (\Exception $e) {
-            Toastr::warning($e->getMessage(), 'Upload File Warning');
+            // Toastr::warning($e->getMessage(), 'Upload File Warning');
+            Toastr::warning($e, 'Upload File Warning');
         }
     }
 }
