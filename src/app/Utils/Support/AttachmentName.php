@@ -24,6 +24,19 @@ class AttachmentName
         return ($ofs - 1) >= 0 ? ($ofs - 1) : null;
     }
 
+    private static function getLastNumberInString($string)
+    {
+        // $string = "abc123def456ghi789";
+        $matches = [];
+
+        if (preg_match_all('/\d+/', $string, $matches)) {
+            $lastNumber = end($matches[0]);
+            return $lastNumber;
+        } else {
+            return 000;
+        }
+    }
+
     private static function getMaxNumberMediaName($tempData, $fileName, $extension = '')
     {
         $idx = self::indexCharacterInString('.', $fileName);
@@ -56,6 +69,7 @@ class AttachmentName
                 $baseName = $n;
             }
         }
+        $maxNumber = self::getLastNumberInString($maxNumber);
         // dd("-----------", $fileName, $tempData, $maxNumber);
         return [$baseName, $maxNumber];
     }
