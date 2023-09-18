@@ -24,13 +24,12 @@ trait HasCachedAvatar
         if (!isset(static::$avatarSingleton01[$objectType])) {
             $objectTypeEsc = str_replace('\\', '\\\\', $objectType);
             $sql = "SELECT u.id AS u_id, att.id AS att_id, att.url_thumbnail
-            FROM users u 
+            FROM users u
                 LEFT JOIN attachments att ON (
-                    u.id=att.object_id 
+                    u.id=att.object_id
                     AND att.object_type='$objectTypeEsc'
-                )";
+                ) WHERE att.deleted_at IS NULL";
             $result0 = DB::select($sql);
-            // dd($result);
             foreach ($result0 as $row) {
                 $uid = $row->u_id;
                 static::$avatarSingleton01[$objectType][$uid]  = $row->url_thumbnail;
