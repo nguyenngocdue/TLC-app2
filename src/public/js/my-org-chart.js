@@ -56,6 +56,15 @@ function init() {
       new go.Binding("visible", field, val => val !== undefined)
     ];
   }
+  function textStyleEmail(field) {
+    return [
+      {
+        font: "12px Roboto, sans-serif", stroke: "blue",
+        visible: false  // only show textblocks when there is corresponding data for them
+      },
+      new go.Binding("visible", field, val => val !== undefined)
+    ];
+  }
 
   // define Converters to be used for Bindings
   function theAvatarConverter(avatar) {
@@ -110,21 +119,21 @@ function init() {
                 row: 0, alignment: go.Spot.Left,
                 font: "16px Roboto, sans-serif",
                 stroke: "rgba(0, 0, 0, .87)",
-                minSize: new go.Size(150, NaN),
+                minSize: new go.Size(170, NaN),
               },
               new go.Binding("text", "name")
             ),
             $(go.TextBlock, textStyle("employeeid"),
               {
                 row: 1, alignment: go.Spot.Left,
-                minSize: new go.Size(150, NaN),
+                minSize: new go.Size(170, NaN),
               },
               new go.Binding("text", "employeeid")
             ),
             $(go.TextBlock, textStyle("title"),
               {
                 row: 2, alignment: go.Spot.Left,
-                minSize: new go.Size(150, NaN),
+                minSize: new go.Size(170, NaN),
               },
               new go.Binding("text", "title")
             ),

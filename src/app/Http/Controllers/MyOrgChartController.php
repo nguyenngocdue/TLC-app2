@@ -9,6 +9,7 @@ use App\Models\User_category;
 use App\Models\User_time_keep_type;
 use App\Models\Workplace;
 use App\Utils\Constant;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -96,7 +97,8 @@ class MyOrgChartController extends Controller
         }
     }
     private function getFillColor($item){
-        return $item->resigned == 1 ? '#d1d5db' : ($item->time_keeping_type == 3 ? "#fed7aa" : "#ffffff");
+        $color = CurrentUser::isAdmin() ?  '#fed7aa' : '#ffffff' ;
+        return $item->resigned == 1 ? '#d1d5db' : ($item->time_keeping_type == 3 ? $color : "#ffffff");
     }
     private function getIdsWorkplace(){
         return Workplace::query()->get()->pluck('id')->toArray();

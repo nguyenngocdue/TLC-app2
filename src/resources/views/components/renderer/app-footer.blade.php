@@ -3,7 +3,6 @@
     <x-elapse total=1/>
     TLC Modular App ©2017-2023. All rights reserved. Version {{config("version.app_version")}}
 </div>
-
 <script>
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
