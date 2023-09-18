@@ -58,7 +58,7 @@ trait TraitSupportPermissionGate
             $message[] = 'Edit denied';
             $message[] = $edit ? '' : 'You are not the document owner';
             $message[] = $editOther ? '' : "You are not in the approval tree";
-            if (!($edit || $editOther)) abort(403, join(' & ', $message));
+            if (!($edit || $editOther)) return redirect($this->type.'.show');//abort(403, join(' & ', $message));
         }
         return $model;
     }
