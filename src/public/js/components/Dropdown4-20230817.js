@@ -196,12 +196,14 @@ const onChangeDropdown4DateOffset = (listener, table01Name, rowIndex) => {
         const id = makeIdFrom(table01Name, column_name, rowIndex)
         if (debugListener) console.log(theValue)
 
-        const theValueDate = moment().add(theValue, 'days').format("DD/MM/YYYY HH:mm");
-        if (debugListener) console.log(theValueDate)
+        const twelveHoursLater = new Date((new Date()).getTime() + (theValue * 24 * 60 * 60 * 1000));
+        // const theValueDate = moment().add(theValue, 'days').format("DD/MM/YYYY HH:mm");
+        // if (debugListener) console.log(theValueDate)
 
-        getEById(id).val(theValueDate)
+        // getEById(id).val(theValueDate)
+        initFlatPickrDateTime(id).setDate(twelveHoursLater)
         getEById(id).trigger('change')
-        if (debugListener) console.log("Date Offset", id, "with value", theValueDate)
+        if (debugListener) console.log("Date Offset", id, "with value", twelveHoursLater)
     }
 }
 
