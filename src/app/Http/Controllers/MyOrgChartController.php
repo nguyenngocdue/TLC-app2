@@ -84,7 +84,7 @@ class MyOrgChartController extends Controller
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
             return [
                 'key' => $id,
-                'name' => $value->name,
+                'name' => $value->name0,
                 'employeeid' => $user->employeeid,
                 'parent' => $value->parent_id,
                 'phone' => $user->phone,
