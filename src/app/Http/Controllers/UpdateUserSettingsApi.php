@@ -9,6 +9,28 @@ use Illuminate\Http\Request;
 
 class UpdateUserSettingsApi extends Controller
 {
+    public function updateUserSettingsPerPageApi(Request $request){
+        try {
+            $entity = $request->input('entity');
+            $perPage = $request->input('per_page');
+            if ($entity) {
+                $user = CurrentUser::get();
+                $settings = $user->settings;
+                $settings[$entity][Constant::VIEW_ALL]['per_page'] = $perPage;
+                $user->settings = $settings;
+                $user->update();
+                return ResponseObject::responseSuccess(
+                    null,
+                    [],
+                    'Updated User Setting Per Page Successfully!'
+                );
+            }
+        } catch (\Throwable $th) {
+            return ResponseObject::responseFail(
+                $th->getMessage(),
+            );
+        }
+    }
     public function updateUserSettingsApi(Request $request)
     {
         try {

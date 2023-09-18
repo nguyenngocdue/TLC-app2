@@ -1,4 +1,4 @@
-<form action="{{$route}}" method="post">
+{{-- <form action="{{$route}}" method="post">
     @method('PUT')
     @csrf
     <div class="flex items-center lg:justify-end">
@@ -11,9 +11,41 @@
                 @endforeach
             </select>
         </div>
-        {{-- <div class="mt-2 dark:text-white">/page  </div> --}}
-        {{-- <div>
-            <x-renderer.button htmlType="submit" type="primary"><i class="fas fa-arrow-right"></i></x-renderer.button>
-        </div> --}}
+
     </div>
-</form>
+</form> --}}
+<div class="flex items-center lg:justify-end">
+    <div class="w-28">
+        <select id="select_per_page" name="per_page" class="{{$classList}}" onchange="submitPerPage('{{$route}}',this.value)">
+            @foreach([10,15,20,30,40,50,100] as $value)
+            <option class="text-sm" value="{{$value}}" @selected($perPage==$value)>{{$value}} / page</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+<script>
+    var entityPerPage = @json($type);
+    function submitPerPage(url,perPage){
+        if(perPage){
+            const data = {
+            entity: entityPerPage,
+            per_page:perPage,
+            }
+            $.ajax({
+            type: 'put',
+            url,
+            data: data,
+            success: function (response) {
+                if(response.success){
+                    toastr.success(response.message);
+                    window.location.reload();
+                }
+            },
+            error: function (jqXHR) {
+                toastr.error(jqXHR.responseJSON.message)
+                },
+            })
+        }
+    }
+</script>
+

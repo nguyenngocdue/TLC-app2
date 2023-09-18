@@ -27,10 +27,10 @@ class PerPage extends Component
      */
     public function render()
     {
-
+        $route = route('updateUserSettingsPerPageApi');
         return view('components.form.per-page', [
             'type' => $this->type,
-            'route' => $this->route,
+            'route' => $route,
             'perPage' => $this->perPage,
             'classList' => ClassList::DROPDOWN,
         ]);
