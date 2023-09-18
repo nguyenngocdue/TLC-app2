@@ -87,7 +87,7 @@ class AttachmentName
             $tempMediaNames = array_column($tempMedia, 'filename');
             $tempData =  array_merge($mediaNames, $tempMediaNames);
             [$baseName,  $maxNumber] =  self::getMaxNumberMediaName($tempData, $fileName, $extensionFile);
-            dump($maxNumber);
+            // dump($maxNumber);
             $fileName =  $baseName . '-' . $maxNumber + 1 . '.' . $extensionFile;
             return $fileName;
         }
