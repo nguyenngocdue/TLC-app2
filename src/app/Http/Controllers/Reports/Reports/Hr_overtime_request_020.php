@@ -37,7 +37,7 @@ class Hr_overtime_request_020 extends Report_ParentReport2Controller
         ,us.workplace us_workplace_id
         ,otline.id request_id,
         otline.user_id user_id,
-        us.name name_render,
+        us.name0 name_render,
         otline.employeeid employee_id
         ,otline.ot_date ot_date
         ,wm.name work_mode_name

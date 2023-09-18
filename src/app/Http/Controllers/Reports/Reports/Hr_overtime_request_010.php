@@ -35,7 +35,7 @@ class Hr_overtime_request_010 extends Report_ParentReportController
             SELECT 
                 wp.name AS ot_workplace_name,
                 rgt_ot.*,
-                us.name AS name_render,
+                us.name0 AS name_render,
                 200 - SUM(total_overtime_hours) OVER (PARTITION BY employee_id, years_month ORDER BY year_months ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS remaining_allowed_ot_hours_year
             FROM (
                 SELECT 

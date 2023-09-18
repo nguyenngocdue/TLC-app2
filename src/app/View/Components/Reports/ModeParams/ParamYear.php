@@ -3,10 +3,11 @@
 namespace App\View\Components\Reports\ModeParams;
 
 use App\Models\Sub_project;
+use App\View\Components\Reports\ParentParamReports;
 use App\View\Components\Reports\ParentTypeParamReport;
 use Illuminate\Support\Facades\DB;
 
-class ParamYear extends ParentTypeParamReport
+class ParamYear extends ParentParamReports
 {
     protected function getDataSource()
     {

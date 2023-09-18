@@ -17,7 +17,7 @@ class SqlForeignKey
         $key_a = $key_a ?? Str::singular($table_b) . "_id";
         $key_b = $key_b ?? "id";
 
-        $sql = "SELECT a.$key_a metric_id, b.name metric_name, count(a.id) metric_count
+        $sql = "SELECT a.$key_a metric_id, b.name0 metric_name, count(a.id) metric_count
             FROM $table_a a, $table_b b
             WHERE 1=1
                 AND $global_filter
