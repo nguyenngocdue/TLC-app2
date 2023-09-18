@@ -97,7 +97,7 @@
         "fn": "SqlForeignKeyWidget01",
         "section_title": "Non Conformance Reports",
         "widget_title": "by Assignee",
-        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"sub_project_id\",\"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name\"}"
+        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"sub_project_id\",\"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name0\"}"
     },
     "qaqc_ncr_discipline": {
         "name": "qaqc_ncr_discipline",
@@ -117,7 +117,7 @@
         "fn": "SqlForeignKeyWidget01",
         "section_title": "Non Conformance Reports",
         "widget_title": "by Creator",
-        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"sub_project_id\", \"key_a2\":\"owner_id\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name\", \"global_filter\":\"b.resigned != true\"}"
+        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"sub_project_id\", \"key_a2\":\"owner_id\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name0\", \"global_filter\":\"b.resigned != true\"}"
     },
     "qaqc_ncr_report_type": {
         "name": "qaqc_ncr_report_type",
@@ -147,7 +147,7 @@
         "fn": "SqlForeignKeyWidget01",
         "section_title": "Work Inspection Requests",
         "widget_title": "by Assignee",
-        "params": "{\"table_a\":\"qaqc_wirs\",\"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name\"}"
+        "params": "{\"table_a\":\"qaqc_wirs\",\"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name0\"}"
     },
     "qaqc_wir_status": {
         "name": "qaqc_wir_status",

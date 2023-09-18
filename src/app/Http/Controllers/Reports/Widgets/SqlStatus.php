@@ -59,7 +59,7 @@ class SqlStatus
                                         $condition
                             GROUP BY metric_name ) tb
                             ORDER BY metric_id";
-        // dd($params, $sql);
+        dd($params, $sql);
         return $sql;
     }
 }
