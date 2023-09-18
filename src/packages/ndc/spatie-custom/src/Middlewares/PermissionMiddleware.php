@@ -25,10 +25,7 @@ class PermissionMiddleware
             $action = CurrentRoute::getControllerAction();
             if($action == 'edit'){
                 $message = 'User does not have the right permissions.';
-                if (config('permission.display_permission_in_exception')) {
-                    $message .= ' Necessary permissions are '.implode(', ', $permissions);
-                }
-                Toastr::success($message, 'Permission denied.');
+                Toastr::warning($message, 'Permission denied.');
                 return redirect(route($type.'.show',$id));
             }
             throw UnauthorizedException::forPermissions($permissions);
