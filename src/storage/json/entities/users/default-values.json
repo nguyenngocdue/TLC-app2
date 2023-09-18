@@ -35,9 +35,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
+    "_gender": {
+        "name": "_gender",
+        "column_name": "gender",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_name0": {
+        "name": "_name0",
+        "column_name": "name0",
         "label": "",
         "validation": "required",
         "validation_regex": "",
@@ -554,6 +566,18 @@
     "_getOtTeams()": {
         "name": "_getOtTeams()",
         "column_name": "getOtTeams()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getSiteTeams()": {
+        "name": "_getSiteTeams()",
+        "column_name": "getSiteTeams()",
         "label": "",
         "validation": "",
         "validation_regex": "",

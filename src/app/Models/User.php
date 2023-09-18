@@ -56,7 +56,7 @@ class User extends Authenticatable implements LdapAuthenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        "name", "full_name", "name_suffix", "employeeid", "first_name",
+        "name0", "full_name", "name_suffix", "employeeid", "first_name",
         "last_name", "gender", "address", "phone", "time_keeping_type", "user_type", "workplace",
         "category", "date_of_birth", "first_date", "last_date", "title", "position_prefix", "position_1",
         "position_2", "position_3", "position_rendered", "discipline", "department", "show_on_beta",
@@ -72,7 +72,7 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     protected $touches = [];
     protected static $statusless = true;
-    public static $nameless = false;
+    public static $nameless = true;
     public function getNameAttribute($value)
     {
         $name = $value . ($this->resigned ? " (RESIGNED)" : "") . ($this->show_on_beta ? " (BETA)" : "");
@@ -230,22 +230,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    // public function productionRuns()
-    // {
-    //     $p = static::$eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
-    // }
 
-    // public function getQaqcInspChklsts()
-    // {
-    //     $p = static::$eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2]);
-    // }
-    // public static function getAllInspector()
-    // {
-    //     $disciplineInspector = 23;
-    //     return self::where('discipline', $disciplineInspector)->where('resigned', 0)->get();
-    // }
     public function getDepartment()
     {
         return Department::findFromCache($this->department)->name ?? '';
@@ -295,18 +280,6 @@ class User extends Authenticatable implements LdapAuthenticatable
             'email' => $this->email,
         ];
     }
-
-    // Override Model find
-
-    // static $userDbSingleton = [];
-    // public static function findFromCache($id)
-    // {
-    //     // return parent::find($id);
-    //     if (!isset(static::$userDbSingleton[$id])) {
-    //         static::$userDbSingleton[$id] = static::find($id);
-    //     }
-    //     return static::$userDbSingleton[$id];
-    // }
 
     static $singletonDbUserCollection = null;
     public static function getCollection()

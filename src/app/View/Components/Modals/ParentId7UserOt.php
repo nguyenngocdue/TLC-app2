@@ -42,7 +42,7 @@ class ParentId7UserOt extends Component
         $year0 = date(Constant::FORMAT_YEAR);
         $sql = "SELECT 
                     u.id AS id, 
-                    u.name AS name, 
+                    u.name0 AS name, 
                     u.employeeid AS description, 
                     ut.id AS 'ot_team_id',
                     vua.url_thumbnail AS avatar,
@@ -70,7 +70,7 @@ class ParentId7UserOt extends Component
                     AND u.resigned != 1
                     AND u.id=vua.u_id
                     
-                ORDER BY u.name
+                ORDER BY u.name0
                 ";
         // Log::info($sql);
         $result = DB::select($sql);

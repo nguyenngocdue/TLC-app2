@@ -87,9 +87,9 @@
         "frozen_left": "",
         "frozen_right": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
+    "_name0": {
+        "name": "_name0",
+        "column_name": "name0",
         "column_type": "varchar(255)",
         "label": "Name",
         "control": "text",

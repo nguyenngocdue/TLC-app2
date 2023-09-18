@@ -31,7 +31,7 @@ class AvatarUser extends Component
         }
         if (is_null($user)) return null;
 
-        $title = $shortForm ? ($slot->{"first_name"} ?? "") : ($slot->{'name'} ?? '');
+        $title = $shortForm ? ($slot->{"first_name"} ?? "") : ($slot->{'name0'} ?? '');
         $description = $shortForm ? "" : ($slot->{'position_rendered'} ?? '');
         $gray = $slot->{'resigned'} ?? '';
         $href = $slot->{'href'} ?? '';
