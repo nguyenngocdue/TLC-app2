@@ -64,7 +64,7 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 					$totalEmission[$k1][$time][] = $values[$time];
 				}
 			}
-            dd($totalEmission);
+            // dd($totalEmission);
 			foreach($totalEmission as $year => $items) {
 				foreach($items as $time => $values) {
 					if(is_array($values)){

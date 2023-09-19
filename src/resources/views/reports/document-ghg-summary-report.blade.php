@@ -117,7 +117,6 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                     {{-- End Row --}}
                     @php
                     $totalEmissions = $tableDataSource['total_emission'];
-                    dd($tableDataSource)
                     @endphp
                     <td class="bg-white border-t" colspan="2"></td>
                     <td class="{{$class1}} text-left border-t font-bold">Total Emissions</td>
