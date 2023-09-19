@@ -22,7 +22,9 @@ class MyOrgChartController extends Controller
 
     const ARRAY_NONE_RESIGNED = [0];
 
-    const BOD_CATEGORY = [17];
+    const IS_BOD = [1];
+
+    const ARRAY_BOD = [0,1];
 
 
     use TraitViewAllFunctions;
@@ -76,7 +78,7 @@ class MyOrgChartController extends Controller
     }
     private function convertDataSource($value,$options){
         if(in_array($value->workplace,$options['workplace']) && in_array($value->resigned,$options['resigned'])
-            && in_array($value->time_keeping_type,$options['time_keeping_type']) && in_array($value->category , $options['category'])){
+            && in_array($value->time_keeping_type,$options['time_keeping_type']) && in_array($value->is_bod ,$options['is_bod'])){
             $id = $value->id;
             $user = User::findFromCache($id);
             $positionRendered = $user->position_rendered;
@@ -114,7 +116,7 @@ class MyOrgChartController extends Controller
             'resigned' => $this::ARRAY_NONE_RESIGNED,
             'time_keeping_type' => $this::ARRAY_TSO_NONE,
             'workplace'=> $this->getIdsWorkplace(),
-            'category'=> $this->getIdsUserCategories(),
+            'is_bod'=> $this::ARRAY_BOD,
         ];
         foreach ($showOptions as $key => $value) {
                 switch ($key) {
@@ -127,8 +129,8 @@ class MyOrgChartController extends Controller
                     case 'workplace':
                         if(is_array($value)) $results['workplace'] = $value;
                             break;
-                    case 'category':
-                        if($value == 'true') $results['category'] = $this::BOD_CATEGORY;
+                    case 'is_bod':
+                        if($value == 'true') $results['is_bod'] = $this::IS_BOD;
                         break;
                     default:
                         break;
