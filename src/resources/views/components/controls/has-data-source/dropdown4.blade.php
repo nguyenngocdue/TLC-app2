@@ -12,7 +12,7 @@
         <div class="px-2" title="#{{$selected}}">{{$label[0]??""}}</div>
         <div id='div_{{$id}}' class="px-2" title="#{{$selected}}"></div>
         <script>
-            label = {{$nameless?"true":"false"}} ? "Nameless #{{$selected}}" : ki['{{$table}}'][{{$selected}}]['name'];
+            label = (l = ki['{{$table}}']?.[{{$selected}}]?.['name'] ) ? l : "Nameless #{{$selected}}"; ;
             $("[id='div_{{$id}}']").html(label)
         </script>
     @endif
