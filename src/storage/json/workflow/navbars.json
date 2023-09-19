@@ -107,7 +107,7 @@
     "clean_many_to_many_orphan": {
         "name": "clean_many_to_many_orphan",
         "group": "internal",
-        "title": "Clean Many To Many Orphan",
+        "title": "Clean Orphan-M2M",
         "href": "\/orphan\/many_to_many",
         "icon_fa": "fa-duotone fa-gauge"
     }

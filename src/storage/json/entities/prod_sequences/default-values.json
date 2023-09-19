@@ -59,9 +59,21 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_total_uom": {
-        "name": "_total_uom",
-        "column_name": "total_uom",
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_uom_input": {
+        "name": "_uom_input",
+        "column_name": "uom_input",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -83,6 +95,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_total_uom": {
+        "name": "_total_uom",
+        "column_name": "total_uom",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_getProdRuns": {
         "name": "_getProdRuns",
         "column_name": "getProdRuns",
@@ -92,6 +116,42 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_start_date": {
+        "name": "_start_date",
+        "column_name": "start_date",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_end_date": {
+        "name": "_end_date",
+        "column_name": "end_date",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_uom_agg": {
+        "name": "_uom_agg",
+        "column_name": "uom_agg",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "(For PPR Only)",
         "placeholder": "",
         "control_extra": ""
     },
@@ -155,6 +215,66 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_expected_start_at": {
+        "name": "_expected_start_at",
+        "column_name": "expected_start_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_expected_finish_at": {
+        "name": "_expected_finish_at",
+        "column_name": "expected_finish_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_priority": {
+        "name": "_priority",
+        "column_name": "priority",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_comment_on_hold_reason": {
+        "name": "_comment_on_hold_reason",
+        "column_name": "comment_on_hold_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_comment_cancel_reason": {
+        "name": "_comment_cancel_reason",
+        "column_name": "comment_cancel_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",
@@ -206,42 +326,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_expected_start_at": {
-        "name": "_expected_start_at",
-        "column_name": "expected_start_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_expected_finish_at": {
-        "name": "_expected_finish_at",
-        "column_name": "expected_finish_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_priority": {
-        "name": "_priority",
-        "column_name": "priority",
         "label": "",
         "validation": "",
         "validation_regex": "",

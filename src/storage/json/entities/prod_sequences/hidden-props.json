@@ -59,9 +59,9 @@
         "cancelled": "",
         "not_applicable": ""
     },
-    "_total_uom": {
-        "name": "_total_uom",
-        "column_name": "total_uom",
+    "_uom_input": {
+        "name": "_uom_input",
+        "column_name": "uom_input",
         "new": "",
         "in_progress": "",
         "finished": "",
@@ -78,6 +78,16 @@
         "on_hold": "",
         "cancelled": "",
         "not_applicable": ""
+    },
+    "_total_uom": {
+        "name": "_total_uom",
+        "column_name": "total_uom",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
     },
     "_getProdRuns": {
         "name": "_getProdRuns",
@@ -102,6 +112,16 @@
     "_end_date": {
         "name": "_end_date",
         "column_name": "end_date",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_uom_agg": {
+        "name": "_uom_agg",
+        "column_name": "uom_agg",
         "new": "",
         "in_progress": "",
         "finished": "",
@@ -159,56 +179,6 @@
         "cancelled": "",
         "not_applicable": ""
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true",
-        "in_progress": "true",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "not_applicable": "true"
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "new": "",
-        "in_progress": "",
-        "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "not_applicable": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "new": "",
-        "in_progress": "",
-        "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "not_applicable": ""
-    },
-    "_deleted_by": {
-        "name": "_deleted_by",
-        "column_name": "deleted_by",
-        "new": "",
-        "in_progress": "",
-        "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "not_applicable": ""
-    },
-    "_deleted_at": {
-        "name": "_deleted_at",
-        "column_name": "deleted_at",
-        "new": "",
-        "in_progress": "",
-        "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "not_applicable": ""
-    },
     "_expected_start_at": {
         "name": "_expected_start_at",
         "column_name": "expected_start_at",
@@ -258,5 +228,55 @@
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
     }
 }
