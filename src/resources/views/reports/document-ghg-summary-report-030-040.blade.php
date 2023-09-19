@@ -118,6 +118,7 @@ $years = $params['year'];
                    @for ($i = 0; $i < count($typeTimes); $i++) 
                             @foreach(array_values($values3[$columnName])[$i] as $value)
                                 <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
+                                {{-- @dd($value) --}}
                                     <div class='p-2'>{{$value}}</div>
                                 </td>
                             @endforeach
@@ -131,11 +132,12 @@ $years = $params['year'];
                     {{-- End Row --}}
                     @php
                     $totalEmissions = array_values($tableDataSource['total_emission']);
+                    #dd($totalEmissions, $typeTimes);
                     @endphp
                     <td class="bg-white border-t" colspan="2"></td>
                     <td class="{{$class1}} text-left border-t font-bold">Total Emissions</td>
                             @foreach(array_values($totalEmissions) as $value)
-                                @for ($i = 0; $i < count($typeTimes); $i++)
+                                @for ($i = 0; $i < count($years); $i++)
                                     <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
                                         <div class='p-2'>{{array_values($value)[$i]}}</div>
                                     </td>

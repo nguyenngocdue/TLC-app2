@@ -61,8 +61,9 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 				$values = (array)$values;
 				foreach ($fieldsTime as $time) {
 					$dataTimes[$values['ghg_tmpl_id']][$typeTime][$time][$k1] = $values[$time];
-					$totalEmission[$k1][$time][] = $values[$time];
+					$totalEmission[$time][$k1][] = $values[$time];
 				}
+                // dd($totalEmission);
 			}
             // dd($totalEmission);
 			foreach($totalEmission as $year => $items) {
@@ -73,7 +74,6 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 				}
 			}
 		}
-        // dump($totalEmission);
 		$dataSource = array_map(function ($items) use ($dataTimes, $typeTime) {
 			$items = (array)$items;
 			foreach (array_keys($dataTimes) as $id) {
@@ -92,6 +92,6 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 		$groupByScope = Report::groupArrayByKey($dataSource, 'scope_id');
 		$groupByScope = ['scopes' => array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope)];
 		$groupByScope['total_emission'] = $totalEmission;
-        return collect($groupByScope);
+        return $groupByScope;
     }
 }
