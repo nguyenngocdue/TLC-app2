@@ -9,15 +9,15 @@
     @php
     $item = $modelPath::find($id);
     @endphp
-    <x-print.print-props 
-        id="{{$id}}" 
-        type="{{$type}}" 
-        printMode="template" 
-        modelPath="{{$modelPath}}" 
-        trashed="{{$trashed}}" 
-        layout="{{$layout}}" 
+    <x-print.print-props
+        id="{{$id}}"
+        type="{{$type}}"
+        printMode="template"
+        modelPath="{{$modelPath}}"
+        trashed="{{$trashed}}"
+        layout="{{$layout}}"
         topTitle="{{$topTitle}}"
-        numberOfEmptyLines="{{$numberOfEmptyLines}}" 
+        numberOfEmptyLines="{{$numberOfEmptyLines}}"
         :item="$item"
     />
     <x-renderer.page-break />

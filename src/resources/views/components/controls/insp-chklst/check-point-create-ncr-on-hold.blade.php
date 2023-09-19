@@ -1,14 +1,19 @@
 <div component="check-point-create-ncr-on-hold">
     @if($relatedEntities && count($relatedEntities))
-        <div id="divRelatedNCRs"> 
+        <div id="divRelatedNCRs">
             Related {{$syntax}}(s):
             @foreach($relatedEntities as $value)
             <li>
+                @php
+                    $ownerName = 'Created by: ' .$value->getOwner->name0 ?? '';
+                    $workAreaName = $value->getWorkArea->name ?? '';
+                    $information = $ownerName . ' (' . $workAreaName .')';
+                @endphp
                 <x-renderer.button target="_blank" class="m-1" title="{!! $value->description !!} (#{{$value->id}})" href="{{route($nameShow, $value->id)}}">
-                    {{$value->name}} (<x-renderer.status>{{$value->status}}</x-renderer.status>)
+                    {{$value->name}}. {{$information}} <x-renderer.status>{{$value->status}}</x-renderer.status>
                 </x-renderer.button>
             </li>
-            @endforeach   
+            @endforeach
         </div>
     @endif
     <div id="divSubOptionNCR_{{$line->id}}" @class(['hidden' => !in_array($line->hse_insp_control_value_id,[2,6])])>
