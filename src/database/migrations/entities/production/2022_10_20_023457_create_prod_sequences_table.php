@@ -36,6 +36,8 @@ return new class extends Migration
             $table->dateTime('expected_start_at')->nullable();
             $table->dateTime('expected_finish_at')->nullable();
             $table->unsignedBigInteger('uom_id')->nullable();
+            $table->float('uom_input')->nullable();
+            $table->float('uom_agg')->nullable();
             $table->float('total_uom')->nullable();
             $table->appendCommonFields();
 

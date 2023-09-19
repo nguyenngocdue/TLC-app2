@@ -204,7 +204,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $doc = $cell[0];
         switch ($dataIndex) {
             case "total_uom":
-                return $doc->{$dataIndex};
+                return round($doc->{$dataIndex}, 2);
             case "start_date":
                 return ($date = $doc->{$dataIndex}) ? date(Constant::FORMAT_DATE_ASIAN, strtotime($date)) : "";
             case "end_date":
@@ -213,7 +213,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
                 }
                 return "";
             case "man_power":
-                return $doc->worker_number;
+                return round($doc->worker_number, 2);
             case "total_mins":
                 $target = $x['target_man_minutes'];
                 $actual = round($doc->total_hours * 60);

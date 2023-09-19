@@ -92,7 +92,7 @@
         "column_name": "name",
         "column_type": "varchar(255)",
         "label": "Name",
-        "control": "toggle",
+        "control": "text",
         "align": "",
         "col_span": "6",
         "width": "",
