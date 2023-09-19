@@ -113,9 +113,9 @@ class Hse_corrective_action extends ModelExtended
             ['dataIndex' => 'assignee_1', 'title' => 'Action by'],
             ['dataIndex' => 'priority_id',],
             ['dataIndex' => 'due_date'],
-            // ['dataIndex' => 'status',],
             ['dataIndex' => 'unsafe_action_type_id',],
             ['dataIndex' => 'remark',],
+            ['dataIndex' => 'status',],
         ];
     }
 
