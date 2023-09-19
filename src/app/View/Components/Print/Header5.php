@@ -4,6 +4,7 @@ namespace App\View\Components\Print;
 
 use App\Models\User;
 use App\Models\Work_area;
+use App\Models\Workplace;
 use Illuminate\View\Component;
 
 class Header5 extends Component
@@ -57,32 +58,29 @@ class Header5 extends Component
             case 'qaqc_insp_chklst':
                 return $this->contentHeaderQaqcChecklist();
                 break;
-            
+
             default:
                 # code...
                 break;
         }
-       
+
     }
     private function contentHeaderHseChecklist(){
         $dataSource = $this->dataSource;
-        $location = isset($dataSource->work_area_id) ? Work_area::findFromCache($dataSource->work_area_id)->name : '-';
+        $location = isset($dataSource->workplace_id) ? Workplace::findFromCache($dataSource->workplace_id)->name : '-';
         $inspector = User::findFromCache($dataSource->owner_id)->name ?? '-';
-        $startTime = $dataSource->start_time ?? '-';
-        $finishTime = $dataSource->finish_time ?? '-';
+        $startTime = $dataSource->start_date ?? '-';
         $personIncharge = User::findFromCache($dataSource->assignee_1)->name ?? '-';
         return "<div class='flex flex-1 justify-center'>
                         <div class='flex flex-col pr-2  font-medium text-base'>
                             <span>Location/Project:</span>
                             <span>Start Time:</span>
-                            <span>Finish Time:</span>
                             <span>Inspector:</span>
                             <span>Person Incharge:</span>
                         </div>
                         <div class='flex flex-col font-light text-base'>
                             <span>$location</span>
                             <span>$startTime</span>
-                            <span>$finishTime</span>
                             <span>$inspector</span>
                             <span>$personIncharge</span>
                         </div>

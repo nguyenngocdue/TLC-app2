@@ -2,6 +2,7 @@
 
 namespace App\BigThink;
 
+use App\Utils\Support\CurrentUser;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
@@ -82,7 +83,7 @@ trait HasCheckbox
             if (!isset(static::$singleton01[$key][$id])) {
                 if (!isset(static::$warnings01["{$id}_{$key}"])) {
                     static::$warnings01["{$id}_{$key}"] = true;
-                    dump("Cannot find [#$id] for [$modelPath].[$column_name] when run getWhereIn.");
+                    if (CurrentUser::isAdmin()) dump("ADMIN: Cannot find [#$id] for [$modelPath].[$column_name] when run getWhereIn.");
                 }
             } else {
                 $result[] = static::$singleton01[$key][$id];
@@ -181,7 +182,7 @@ trait HasCheckbox
                 // $tmp[$modelPath] = $model::whereIn('id', $ids0)->get();
                 $resultInverted0[$modelPath] = Arr::keyBy($tmp[$modelPath], 'id');
             } else {
-                dump("Class [$modelPath] does not exist, please double check [$rightType] in [many_to_many] table.");
+                if (CurrentUser::isAdmin()) dump("ADMIN: Class [$modelPath] does not exist, please double check [$rightType] in [many_to_many] table.");
             }
         }
 
@@ -198,7 +199,7 @@ trait HasCheckbox
                 ];
                 $result[] = $origin;
             } else {
-                dump("ID #{$item->{$rightId}} not found in [$modelPath] (HasCheckbox)");
+                if (CurrentUser::isAdmin()) dump("ADMIN: ID #{$item->{$rightId}} not found in [$modelPath] (HasCheckbox)");
             }
         }
 

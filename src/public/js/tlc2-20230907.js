@@ -112,7 +112,16 @@ const convertToServerTimezoneStr = (datetimeString) => {
 
 const initFlatPickrDateTimeParseDate = (dateString, format) => convertToLocalTimezone(dateString)
 
+const flatpickrHandleChange = (name, selectedDates) => {
+    // console.log(selectedDates)
+    const date = selectedDates[0]
+    const result = convertToServerTimezoneStr(date)
+    const hiddenInput = document.getElementById('hidden_' + name);
+    hiddenInput.value = result;
+}
+
 const initFlatPickrDateTime = (id, name) => {
+    if (name === undefined) console.error("initFlatPickrDateTime missing second argument")
     const element = document.getElementById(id)
     return flatpickr(element, {
         enableTime: true,
@@ -123,10 +132,7 @@ const initFlatPickrDateTime = (id, name) => {
         time_24hr: true,
         parseDate: initFlatPickrDateTimeParseDate,
         onChange: (selectedDates, dateStr, instance) => {
-            const date = selectedDates[0]
-            const result = convertToServerTimezoneStr(date)
-            const hiddenInput = document.getElementById('hidden_' + name);
-            hiddenInput.value = result;
+            flatpickrHandleChange(name, selectedDates)
         }
     });
 }

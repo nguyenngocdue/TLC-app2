@@ -16,12 +16,12 @@
                 break;
         }
 @endphp
-    <x-print.print-props 
-        id="{{$id}}" 
-        type="{{$type}}" 
-        modelPath="{{$modelPath}}" 
-        trashed="{{$trashed}}" 
-        layout="{{$layout}}" 
+    <x-print.print-props
+        id="{{$id}}"
+        type="{{$type}}"
+        modelPath="{{$modelPath}}"
+        trashed="{{$trashed}}"
+        layout="{{$layout}}"
         topTitle="{{$topTitle}}"
         :item="$item"
         />

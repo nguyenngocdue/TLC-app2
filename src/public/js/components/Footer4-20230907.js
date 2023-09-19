@@ -20,7 +20,7 @@ function onChangeDropdown4AggregateFromTable(id, value) {
                     initFlatPickrTime(targetName).setDate(value);
                     break;
                 case 'picker_datetime':
-                    const picker1 = initFlatPickrDateTime(targetName)
+                    const picker1 = initFlatPickrDateTime(targetName, targetName)
                     if (value === '1970-01-01 00:00:00') picker1.clear();
                     else picker1.setDate(value);
                     break;

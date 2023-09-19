@@ -19,7 +19,7 @@ trait TraitSupportEntityShow
             [
                 "dataIndex" => "response_type",
                 "align" => "center",
-                'width' => 500,
+                'width' => 600,
             ],
         ];
     }
@@ -47,6 +47,7 @@ trait TraitSupportEntityShow
         $str = '';
         if (!is_null($controlGroup)) {
             $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($item,$controlGroup) . "</tr>";
+            $str .=  $this->createStrHtmlCorrectiveAction($item);
             $str .= $this->createStrHtmlAttachment($item);
             $str .=  $this->createStrHtmlComment($item);
         } else {
@@ -69,8 +70,8 @@ trait TraitSupportEntityShow
                                         <p class='font-medium'>$inspectorName</p>
                                         <p>$updatedAt</p>
                                     @endif
-                                    </div> 
-                                    </div> 
+                                    </div>
+                                    </div>
                                 </div>
                                 ",
                     );
@@ -151,10 +152,34 @@ trait TraitSupportEntityShow
         }
         return '';
     }
-    private function formatCommentRender($item)
+    private function createStrHtmlCorrectiveAction($item)
+    {
+        if (isset($item->getCorrectiveActions) && !$item->getCorrectiveActions->isEmpty()) {
+            $td = "<td class='border p-1' colspan = 5 style='width:190px'>" . $this->formatCorrectiveAction($item->getCorrectiveActions) . "</td>";
+            return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+        }
+        return '';
+    }
+    private function formatCorrectiveAction($items){
+        $strCenter = "";
+        foreach ($items as $key => $correctiveAction ) {
+            $ownerName = ' Created by: ' .$correctiveAction->getOwner->name0 ?? '';
+            $workAreaName = $correctiveAction->getWorkArea->name ?? '';
+            $information = $ownerName . ' (' . $workAreaName .')';
+            $status = $correctiveAction->status ?? '';
+            $statusHtml = Blade::render("<x-renderer.status>$status</x-renderer.status>");
+            $informationHtml = ($key + 1).'. '. $correctiveAction->name. '.'. $information. ' ' .$statusHtml;
+            $title = $correctiveAction->description .'#' . $correctiveAction->id;
+            $href = route('hse_corrective_actions.show',$correctiveAction->id);
+            $buttonHtml = Blade::render("<x-renderer.button size='xs' target='_blank' class='m-1 text-left' title='$title' href='$href'>$informationHtml</x-renderer.button>");
+            $strCenter .= "$buttonHtml";
+        }
+        return $strCenter;
+    }
+    private function formatCommentRender($items)
     {
         $strCenter = "";
-        foreach ($item as  $comment) {
+        foreach ($items as  $comment) {
             $ownerComment = $comment->getOwner ?? '';
             $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $comment->updated_at);
             $ownerRender = Blade::render("<x-renderer.avatar-user verticalLayout='true'>$ownerComment</x-renderer.avatar-user>");
@@ -173,11 +198,11 @@ trait TraitSupportEntityShow
         return $strHead . $strCenter . $strTail;
     }
 
-    private function formatAttachmentRender($item)
+    private function formatAttachmentRender($items)
     {
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $strCenter = "";
-        foreach ($item as  $attachment) {
+        foreach ($items as  $attachment) {
             $urlThumbnail = $path . $attachment->url_thumbnail;
             $urlMedia = $path . $attachment->url_media;
             $fileName = $attachment->filename;

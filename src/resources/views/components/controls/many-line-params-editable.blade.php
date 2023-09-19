@@ -16,9 +16,11 @@
     tableObjectColName["{{$colName}}"] = {
         name:'{{$table01Name}}'
     };
+</script>
 
-
-const getLines = ({ tableId }) => {
+@once
+<script>
+const getLinesUnderTable = ({ tableId }) => {
     const team_id = getEById('team_id').val();
     const date = getEById('ts_date').val();
     const parent_id = getEById('entityParentId').val()
@@ -30,8 +32,8 @@ const getLines = ({ tableId }) => {
     callApiGetLines(url, data, [], ()=>alert("Get lines is done."))
     // callApiGetLines(url, data, [], ()=>location.reload())
 }
-
 </script>
+@endonce
 
 <div class="flex justify-between">
     <div>
@@ -43,7 +45,7 @@ const getLines = ({ tableId }) => {
             <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
         @endif
         @if(isset($tableSettings['button_get_lines']) && $tableSettings['button_get_lines'])
-        <x-renderer.button disabled="{{$readOnly}}" id="btnGetLines_{{$table01Name}}" type="success" onClick="getLines({tableId: '{{$table01Name}}'})">Get Lines</x-renderer.button>
+        <x-renderer.button disabled="{{$readOnly}}" id="btnGetLines_{{$table01Name}}" type="success" onClick="getLinesUnderTable({tableId: '{{$table01Name}}'})">Get Lines</x-renderer.button>
     @endif
     </div>
 

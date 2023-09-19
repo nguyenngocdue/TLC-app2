@@ -120,7 +120,7 @@ const convertStrToNumber = (varValue) => {
     if (varValue.includes(",")) type = "number_with_commas"
     else if (isNaN(varValue)) type = "datetime_string"
 
-    // console.log(varValue, isNaN(varValue))
+    // console.log(varValue, isNaN(varValue), type)
     if (varValue) {
         switch (type) {
             case "normal_number": break
@@ -131,17 +131,22 @@ const convertStrToNumber = (varValue) => {
                 const includedHour = varValue.includes(':')
                 const includedDateSlash = varValue.includes('/')
                 const includedDateDash = varValue.includes('-')
-                if (includedHour && includedDateSlash) {
+                if (includedHour && includedDateSlash) { /* 01/01/2023 12:34 */
                     const datetime = varValue.split(' ')
                     const date = datetime[0]
                     const time = datetime[1]
                     varValue = getDaysFromDateSlash(date) * 24 * 3600 + getSecondsFromTime(time)
+                } else if (includedHour && includedDateDash) { /* 2023-01-01 12:34 */
+                    const datetime = varValue.split(' ')
+                    const date = datetime[0]
+                    const time = datetime[1]
+                    varValue = getDaysFromDateDash(date) * 24 * 3600 + getSecondsFromTime(time)
                 } else {
-                    if (includedHour) {
+                    if (includedHour) {/* 12:34 */
                         varValue = getSecondsFromTime(varValue)
-                    } else if (includedDateSlash) {
+                    } else if (includedDateSlash) { /* 01/02/2023 */
                         varValue = getDaysFromDateSlash(varValue) * 24 * 3600
-                    } else if (includedDateDash) {
+                    } else if (includedDateDash) {/* 2023-01-01 */
                         varValue = getDaysFromDateDash(varValue) * 24 * 3600
                     }
                 }
@@ -301,8 +306,24 @@ const onChangeDropdown2Dot = (listener) => {
         const theValue = selectedObject[listen_to_attr]
         // console.log(theValue)
         if (debugListener) console.log(theValue)
+        const control = superProps['props']["_" + column_name]['control']
 
-        getEById(column_name).val(theValue)
+        switch (control) {
+            case "picker_date":
+                initFlatPickrDate(column_name).setDate(theValue)
+                break
+            //Haven't tested yet:
+            // case "picker_time":
+            //     initFlatPickrTime(column_name).setDate(theValue)
+            //     break
+            // case "picker_datetime":
+            //     initFlatPickrDateTime(column_name).setDate(theValue)
+            //     break
+            default:
+                getEById(column_name).val(theValue)
+                break
+        }
+
         getEById(column_name).trigger('change')
         if (debugListener)
             console.log('Dotting', column_name, 'with value', theValue)
@@ -320,12 +341,12 @@ const onChangeDropdown2DateOffset = (listener) => {
         const theValue = selectedObject[listen_to_attr]
         if (debugListener) console.log(theValue)
 
-        const theValueDate = moment().add(theValue, 'days').format('DD/MM/YYYY HH:mm')
-        if (debugListener) console.log(theValueDate)
+        const twelveHoursLater = new Date((new Date()).getTime() + (theValue * 24 * 60 * 60 * 1000));
+        initFlatPickrDateTime(column_name, column_name).setDate(twelveHoursLater)
+        flatpickrHandleChange(column_name, [twelveHoursLater])
 
-        getEById(column_name).val(theValueDate)
         getEById(column_name).trigger('change')
-        if (debugListener) console.log('Date Offset', column_name, 'with value', theValueDate)
+        if (debugListener) console.log('Date Offset', column_name, 'with value', twelveHoursLater)
     }
 }
 

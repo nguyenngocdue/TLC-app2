@@ -101,13 +101,13 @@
     "_first_date": {
         "name": "_first_date",
         "column_name": "first_date",
-        "new": "true",
-        "active": "true",
-        "pending_ack": "true",
-        "pending_review": "true",
-        "review_rejected": "true",
-        "pending_verification": "true",
-        "closed": "true"
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
     },
     "_injured_staff_cat_desc": {
         "name": "_injured_staff_cat_desc",
@@ -241,6 +241,17 @@
         "pending_verification": "",
         "closed": ""
     },
+    "_lost_unit_id": {
+        "name": "_lost_unit_id",
+        "column_name": "lost_unit_id",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
     "_number_injured_person": {
         "name": "_number_injured_person",
         "column_name": "number_injured_person",
@@ -362,6 +373,17 @@
         "pending_verification": "",
         "closed": ""
     },
+    "_need_to_transfer_position": {
+        "name": "_need_to_transfer_position",
+        "column_name": "need_to_transfer_position",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
     "_time_in_hospital": {
         "name": "_time_in_hospital",
         "column_name": "time_in_hospital",
@@ -376,17 +398,6 @@
     "_time_out_hospital": {
         "name": "_time_out_hospital",
         "column_name": "time_out_hospital",
-        "new": "",
-        "active": "",
-        "pending_ack": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_verification": "",
-        "closed": ""
-    },
-    "_need_to_transfer_position": {
-        "name": "_need_to_transfer_position",
-        "column_name": "need_to_transfer_position",
         "new": "",
         "active": "",
         "pending_ack": "",
