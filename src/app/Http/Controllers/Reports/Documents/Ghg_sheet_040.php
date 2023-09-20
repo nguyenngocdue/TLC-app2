@@ -68,8 +68,10 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 	protected function getDefaultValueParams($params, $request)
 	{
 		$a = 'year';
+		$b = 'only_month';
 		if (Report::isNullParams($params)) {
-			$params[$a] = $this->year;
+			$params[$a] = [2021,2022,2023];
+			$params[$b] = ['01', '02', '03', '04'];
 		}
 		return $params;
 	}
