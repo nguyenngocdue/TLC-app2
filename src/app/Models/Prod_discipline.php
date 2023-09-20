@@ -6,7 +6,10 @@ use App\BigThink\ModelExtended;
 
 class Prod_discipline extends ModelExtended
 {
-    public $fillable = ["id", "name", "description", "slug", "def_assignee", "owner_id"];
+    public $fillable = [
+        "id", "name", "description", "slug", "def_assignee", "owner_id",
+        "css_class"
+    ];
 
     protected $table = 'prod_disciplines';
     protected static $statusless = true;

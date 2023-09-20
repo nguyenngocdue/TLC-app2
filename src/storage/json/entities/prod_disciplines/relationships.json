@@ -3,29 +3,33 @@
         "name": "_getDefAssignee",
         "relationship": "belongsTo",
         "control_name": "def_assignee",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",
         "control_name": "owner_id",
         "renderer_view_all": "avatar_user",
-        "renderer_view_all_param": "name",
+        "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -39,21 +43,25 @@
         "control": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDefMonitors1()": {
         "name": "_getDefMonitors1()",
         "relationship": "getCheckedByField",
         "control_name": "getDefMonitors1()",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_view_all_unit": "",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "person",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdRoutingLink": {
         "name": "_getProdRoutingLink",
@@ -67,7 +75,9 @@
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDiscipline1s": {
         "name": "_getDiscipline1s",
@@ -81,7 +91,9 @@
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getErpRoutingLinks": {
         "name": "_getErpRoutingLinks",
@@ -95,7 +107,9 @@
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getWirDescriptions": {
         "name": "_getWirDescriptions",
@@ -109,6 +123,8 @@
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }
