@@ -42,11 +42,11 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 		];
 	}
 
+
 	public function getDataSource($params)
 	{
 		$dataSource = [];
-		$years =  $params['year'];
-		sort($years);
+		$years =  is_array($params['year']) ? $params['year'] : [$params['year']];
 		foreach ($years as $year) {
 			$params['year'] = $year;
 			$primaryData = (new Ghg_sheet_dataSource())->getDataSource($params)->toArray();
@@ -66,8 +66,10 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 	protected function getDefaultValueParams($params, $request)
 	{
 		$a = 'year';
+		$b = 'quarter_time';
 		if (Report::isNullParams($params)) {
-			$params[$a] = $this->year;
+			$params[$a] = [2021,2022,2023];
+			$params[$b] = ['1', '2', '3', '4'];
 		}
 		return $params;
 	}
