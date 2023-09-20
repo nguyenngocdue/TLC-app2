@@ -46,6 +46,7 @@ return new class extends Migration
             $table->unsignedBigInteger("position_3")->nullable();
             $table->string("position_rendered")->default("");
             $table->unsignedBigInteger("discipline")->nullable();
+            $table->unsignedBigInteger("org_chart")->nullable();
             $table->unsignedBigInteger("department")->nullable();
             $table->boolean("show_on_beta")->nullable(); //->default(false);
             $table->boolean("is_bod")->nullable();

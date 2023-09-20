@@ -17,6 +17,8 @@
     "_company": {
         "name": "_company",
         "profile_readonly": "true",
+        "profile_hidden": "true",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_created_at": {
@@ -93,6 +95,11 @@
         "profile_readonly": "true",
         "me_readonly": "true"
     },
+    "_gender": {
+        "name": "_gender",
+        "profile_readonly": "true",
+        "me_readonly": "true"
+    },
     "_getAvatar": {
         "name": "_getAvatar",
         "profile_readonly": "true",
@@ -116,6 +123,11 @@
         "profile_hidden": "true",
         "me_hidden": "true"
     },
+    "_getSiteTeams()": {
+        "name": "_getSiteTeams()",
+        "profile_readonly": "true",
+        "me_readonly": "true"
+    },
     "_getTshtTeams()": {
         "name": "_getTshtTeams()",
         "profile_readonly": "true",
@@ -132,6 +144,11 @@
         "profile_readonly": "true",
         "profile_hidden": "true",
         "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_is_bod": {
+        "name": "_is_bod",
+        "profile_readonly": "true",
         "me_readonly": "true"
     },
     "_last_date": {
@@ -153,6 +170,13 @@
     },
     "_name": {
         "name": "_name",
+        "profile_readonly": "true",
+        "profile_hidden": "true",
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_name0": {
+        "name": "_name0",
         "profile_readonly": "true",
         "me_readonly": "true"
     },
