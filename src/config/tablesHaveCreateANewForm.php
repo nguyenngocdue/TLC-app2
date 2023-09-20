@@ -19,6 +19,7 @@ return [
             'prod_discipline_id' => [],
             'prod_routing_id' => [],
             'prod_order_id' => [],
+            // 'button_recalculate' => true,
         ],
     ],
     'qaqc_insp_chklst_lines' => [

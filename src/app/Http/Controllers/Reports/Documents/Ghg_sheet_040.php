@@ -11,7 +11,7 @@ use App\Utils\Support\Report;
 use Illuminate\Support\Str;
 
 
-class Ghg_sheet_030 extends Report_ParentDocument2Controller
+class Ghg_sheet_040 extends Report_ParentDocument2Controller
 {
 
 	use TraitForwardModeReport;
@@ -19,9 +19,8 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 
 	protected $viewName = 'document-ghg-summary-report-030-040';
 	protected $year = '2023';
-	protected $mode = '030';
-	protected $typeTime = 'quarters';
-
+	protected $mode = '040';
+	protected $typeTime = 'months';
 
 	public function getParamColumns($dataSource = [], $modeType = '')
 	{
@@ -32,8 +31,8 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 				'multiple' => true,
 			],
 			[
-				'title' => 'Quarter',
-				'dataIndex' => 'quarter_time',
+				'title' => 'Month',
+				'dataIndex' => 'only_month',
 				'allowClear' => true,
 				'multiple' => true,
 
@@ -42,22 +41,25 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 		];
 	}
 
-
 	public function getDataSource($params)
 	{
 		$dataSource = [];
-		$years =  is_array($params['year']) ? $params['year'] : [$params['year']];
+		$years =  $params['year'];
 		foreach ($years as $year) {
 			$params['year'] = $year;
 			$primaryData = (new Ghg_sheet_dataSource())->getDataSource($params)->toArray();
 			$dataSource[$year] = $primaryData;
 		}
+		// dd($dataSource);
 		return collect($dataSource);
 	}
 
 	public function changeDataSource($dataSource, $params)
 	{
-		$fieldsTime = array_map(fn ($item) =>Str::singular($this->typeTime) . $item, $params['quarter_time']);
+		$fieldsTime = array_map(
+			fn ($item) => $item = strlen($item) < 2 ? '0' . $item : $item,
+			$params['only_month']
+		);
 		$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, $this->typeTime);
 		return collect($groupByScope);
 	}
@@ -66,10 +68,10 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 	protected function getDefaultValueParams($params, $request)
 	{
 		$a = 'year';
-		$b = 'quarter_time';
+		$b = 'only_month';
 		if (Report::isNullParams($params)) {
 			$params[$a] = [2021,2022,2023];
-			$params[$b] = ['1', '2', '3', '4'];
+			$params[$b] = ['01', '02', '03', '04'];
 		}
 		return $params;
 	}

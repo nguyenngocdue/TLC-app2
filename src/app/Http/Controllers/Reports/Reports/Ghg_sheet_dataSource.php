@@ -45,10 +45,14 @@ class Ghg_sheet_dataSource extends Controller
 		}
 		$strSumValue = str_replace(',', ' + ', trim($strSqlMonth, ','));
 		$year = $params['year'];
-		// dump($month, $strSumValue);
+		// dd($strSqlMonth, $strSumValue);
 
 		// SQL
 		$sql =  " SELECT infghgsh.*,$strSqlMonth ghgsh_totals.month_ghg_sheet_id,
+					    ghgsh_totals.quarter1,
+						ghgsh_totals.quarter2,
+						ghgsh_totals.quarter3,
+						ghgsh_totals.quarter4,
 						ROUND($strSumValue,2) AS total_months
 						FROM (SELECT 
 						term.id AS scope_id, term.name AS scope_name,
@@ -73,7 +77,11 @@ class Ghg_sheet_dataSource extends Controller
 							round(SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '09' THEN ghgsh.total ELSE 0 END)/1000,2) AS `09`,
 							round(SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '10' THEN ghgsh.total ELSE 0 END)/1000,2) AS `10`,
 							round(SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '11' THEN ghgsh.total ELSE 0 END)/1000,2) AS `11`,
-							round(SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '12' THEN ghgsh.total ELSE 0 END)/1000,2) AS `12`
+							round(SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) = '12' THEN ghgsh.total ELSE 0 END)/1000,2) AS `12`,
+							ROUND(SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) IN ('01', '02', '03') THEN ghgsh.total ELSE 0 END) / 1000, 2) AS quarter1,
+        					ROUND(SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) IN ('04', '05', '06') THEN ghgsh.total ELSE 0 END) / 1000, 2) AS quarter2,
+        					ROUND(SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) IN ('07', '08', '09') THEN ghgsh.total ELSE 0 END) / 1000, 2) AS quarter3,
+        					ROUND(SUM(CASE WHEN SUBSTR(ghgsh.ghg_month, 6, 2) IN ('10', '11', '12') THEN ghgsh.total ELSE 0 END) / 1000, 2) AS quarter4
 							FROM ghg_sheets ghgsh 
 							WHERE 1 = 1
 							AND ghgsh.deleted_by IS NULL

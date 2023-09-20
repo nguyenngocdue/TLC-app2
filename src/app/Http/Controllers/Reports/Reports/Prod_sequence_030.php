@@ -47,20 +47,26 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
 
                         ,IF(prd.target_man_power,prd.target_man_power, NULL) AS target_man_power
                         ,FORMAT(ROUND((pru.worker_number), 2),2) AS actual_man_power
-                        ,round((pru.worker_number - prd.target_man_power),2) AS vari_man_power
-                        ,round((pru.worker_number / prd.target_man_power)*100,2) AS percent_vari_man_power
+                        ,round((pru.worker_number - prd.target_man_power),2)*-1 AS vari_man_power
+                        ,IF(100 - round((pru.worker_number / prd.target_man_power)*100,2),
+                            100 - round((pru.worker_number / prd.target_man_power)*100,2),NULL
+                            ) AS percent_vari_man_power
 
 
                         ,IF(prd.target_hours, prd.target_hours, NULL) AS target_hours
                         ,FORMAT(ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2),2) AS actual_total_hours
-                        ,ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) - prd.target_hours),2) AS vari_hours
-                        ,ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) / prd.target_hours)*100,2) AS percent_vari_hours
+                        ,ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) - prd.target_hours),2)*-1 AS vari_hours
+                        ,IF(100 - ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) / prd.target_hours)*100,2),
+                            100 - ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) / prd.target_hours)*100,2),NULl
+                            ) AS percent_vari_hours
 
 
                         ,IF(prd.target_man_hours, prd.target_man_hours, NULL) AS target_man_hours
                         ,FORMAT(ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2),2) AS actual_man_hours
-                        ,ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) - prd.target_man_hours),2) AS vari_man_hours
-                        ,ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2) AS percent_vari_man_hours
+                        ,ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) - prd.target_man_hours),2)*-1 AS vari_man_hours
+                        ,IF(100 - ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2),
+                            100 - ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2) , NULL
+                            )AS percent_vari_man_hours
 
                         
                         ,FORMAT(pose.total_man_hours,2) AS total_man_hours
@@ -232,33 +238,34 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     'fixed' => 'left',
                 ],
                 [
-                    "title" => "Man-power",
+                    "title" => "Man-power  <br/>(AVG)",
                     "dataIndex" => "target_man_power",
                     "align" => "right",
                     "width" => 80,
                     "colspan" => 4,
-                    'footer' => 'agg_sum',
+                    'footer' => 'agg_avg',
                 ],
                 [
                     "dataIndex" => "actual_man_power",
                     "align" => "right",
                     "width" => 80,
-                    'footer' => 'agg_sum',
+                    'footer' => 'agg_avg',
+
                 ],
                 [
                     "dataIndex" => "vari_man_power",
                     "align" => "right",
                     "width" => 80,
-                    'footer' => 'agg_sum',
+                    'footer' => 'agg_avg',
                 ],
                 [
                     "dataIndex" => "percent_vari_man_power",
                     "align" => "right",
                     "width" => 80,
-                    'footer' => 'agg_sum',
+                    'footer' => 'agg_avg',
                 ],
                 [
-                    "title" => "Hours",
+                    "title" => "Hours <br/>(SUM)",
                     "dataIndex" => "target_hours",
                     "align" => "right",
                     "width" => 80,
@@ -284,7 +291,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     'footer' => 'agg_sum',
                 ],
                 [
-                    "title" => "Man-hours",
+                    "title" => "Man-hours  <br/>(SUM)",
                     "dataIndex" => "target_man_hours",
                     "align" => "right",
                     "width" => 80,

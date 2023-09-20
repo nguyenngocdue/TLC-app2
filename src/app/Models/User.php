@@ -11,7 +11,7 @@ use App\BigThink\TraitMenuTitle;
 use App\BigThink\TraitMetaForChart;
 use App\BigThink\TraitModelExtended;
 use App\BigThink\TraitMorphManyByFieldName;
-use App\Utils\OptimisticLocking\TraitOptimisticLocking;
+// use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,7 +41,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     use TraitMetaForChart;
     use TraitMenuTitle;
     use TraitMorphManyByFieldName;
-    use TraitOptimisticLocking;
+    // use TraitOptimisticLocking;
     use TraitModelExtended;
     use SoftDeletesWithDeletedBy;
 
@@ -62,7 +62,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "position_2", "position_3", "position_rendered", "discipline", "department", "show_on_beta",
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password",
         "settings", "provider", "user_id_passport", "user_pin", "company", "owner_id",
-        "is_bod",
+        "is_bod", "org_chart",
     ];
     /**
      * The attributes that should be hidden for serialization.

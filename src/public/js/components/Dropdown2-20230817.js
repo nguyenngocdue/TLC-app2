@@ -34,12 +34,16 @@ const getLetUserChooseWhenOneItem = (id) => !!(getEById(id).attr('letUserChooseW
 const getColSpanOfE = (id) => getEById(id).attr('colSpan')
 const getReadOnlyOfE = (id) => getEById(id).attr('readOnly')
 const getAllVariablesFromExpression = (str) => {
-    const regex = new RegExp('[a-zA-Z_]+[a-zA-Z0-9]*', 'gm'), result = []
+    const regex = new RegExp('["|\']?[a-zA-Z_]+[a-zA-Z0-9]*["|\']?', 'gm'), result = []
     let m
     while ((m = regex.exec(str)) !== null) {
         // This is necessary to avoid infinite loops with zero-width matches
         if (m.index === regex.lastIndex) regex.lastIndex++
-        m.forEach((match) => result.push(match))
+        m.forEach((match) => {
+            if (match[0] == '"' && match[match.length - 1] == '"') return; //remove "closed" or "new;pending"
+            if (match[0] == "'" && match[match.length - 1] == "'") return; //remove 'closed' or 'new;pending'
+            result.push(match)
+        })
     }
     // console.log(result)
     return result
@@ -367,7 +371,7 @@ const onChangeDropdown2Expression = (listener) => {
         expression1 = expression1.replace(varName, varValue)
     }
     const result = eval(expression1)
-    if (debugListener) console.log(column_name, '=', expression1, '=', result)
+    if (debugListener) console.log(column_name, ':(', expression1, ', result:', result, ')')
     getEById(column_name).val(result)
     getEById(column_name).trigger('change')
 }

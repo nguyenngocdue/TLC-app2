@@ -259,6 +259,23 @@ const refreshCalculation = (tableId) => {
     }
 }
 
+const refreshCalculationRO = (tableId) => {
+    const tableColumns = tableObjectColumns[tableId]//+ "RO"]
+    // console.log(tableColumns, tableId)
+    for (let i = 0; i < tableColumns.length; i++) {
+        if (tableColumns[i]['footer']) {
+            // console.log(tableColumns[i])
+            const { dataIndex } = tableColumns[i]
+            for (let j = 0; j < footerAggList.length; j++) {
+                const { eloquentFn } = tableObject[tableId]
+                const inputName = eloquentFn + '[footer][' + dataIndex + '][' + footerAggList[j] + ']'
+                console.log("trigger change for", inputName, dataIndex)
+                getEById(inputName).trigger('change')
+            }
+        }
+    }
+}
+
 const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
     // const debugEditable = true
     if (debugEditable) console.log(tableId)

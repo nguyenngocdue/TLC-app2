@@ -204,7 +204,6 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			}
 			$info[$k1] = $array;
 		}
-		// dd($info);
 		return $info;
 	}
 }

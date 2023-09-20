@@ -38,6 +38,9 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     // DataSource
     public function getSqlStr($params)
     {
+        $params = array_filter($params, function ($value) {
+            return !(isset($value[0]) &&  $value[0] === null && is_array($value));
+        });
         $sql = "SELECT
                         targetTb.project_name,
                         targetTb.sub_project_name,
@@ -51,19 +54,19 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         targetTb.sub_project_desc,
 
                         targetTb.target_hours,
-                        IF(actualTb.hours, actualTb.hours, NULL) AS hours,
-                        round(actualTb.hours - targetTb.target_hours,2) AS vari_hours,
-                        round((actualTb.hours / targetTb.target_hours)*100,2) AS percent_vari_hours,
+                        actualTb.hours AS hours,
+                        round(actualTb.hours - targetTb.target_hours,2)*-1 AS vari_hours,
+                        100 - round((actualTb.hours / targetTb.target_hours)*100,2) AS percent_vari_hours,
                     
                         targetTb.target_man_hours,
-                        IF(actualTb.man_hours, actualTb.man_hours, NULL) AS man_hours,
-                        round(actualTb.man_hours - targetTb.target_man_hours,2) AS vari_man_hours,
-                        round((actualTb.man_hours / targetTb.target_man_hours)*100,2) AS percent_vari_man_hours,
+                        actualTb.man_hours AS man_hours,
+                        round(actualTb.man_hours - targetTb.target_man_hours,2)*-1 AS vari_man_hours,
+                        100 - round((actualTb.man_hours / targetTb.target_man_hours)*100,2) AS percent_vari_man_hours,
                     
                         targetTb.target_man_power,
-                        IF(actualTb.man_power,actualTb.man_power, null) AS man_power,
-                        round(actualTb.man_power - targetTb.target_man_power,2) AS vari_man_power,
-                        round((actualTb.man_power / targetTb.target_man_power)*100,2) AS percent_vari_man_power
+                        actualTb.man_power AS man_power,
+                        round(actualTb.man_power - targetTb.target_man_power,2)*-1 AS vari_man_power,
+                        100 - round((actualTb.man_power / targetTb.target_man_power)*100,2) AS percent_vari_man_power
                     FROM
                         (SELECT
                         project_id, project_name,sub_project_id,prod_routing_link_desc, sub_project_desc, 
@@ -71,7 +74,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         ,prod_routing_link_id
                         ,SUM(target_hours) AS target_hours
                         ,SUM(target_man_hours) AS target_man_hours
-                        ,SUM(target_man_power) AS target_man_power
+                        ,AVG(target_man_power) AS target_man_power
                         FROM  (SELECT 
                                     sp.project_id,
                                     sp.id AS sub_project_id,
@@ -114,8 +117,8 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         (SELECT 
                         prod_routing_link_id
                         ,ROUND(AVG(man_power),2) AS man_power
-                        ,ROUND(AVG(hours),2) AS hours
-                        ,ROUND(AVG(man_hours),2) AS man_hours
+                        ,ROUND(AVG(hours)*COUNT(prod_order_id),2) AS hours
+                        ,ROUND(AVG(man_hours)*COUNT(prod_order_id),2) AS man_hours
                                 FROM (SELECT 
                                         sp.project_id,
                                         sp.id AS sub_project_id,
@@ -193,7 +196,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'dataIndex' => 'prod_discipline_id',
                 'allowClear' => true,
                 'multiple' => true,
-                'validation' => 'required',
+                // 'validation' => 'required',
             ],
             [
                 'title' => 'Production Routing Link',
@@ -201,7 +204,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'allowClear' => true,
                 'multiple' => true,
                 'hasListenTo' => true,
-                'validation' => 'required',
+                // 'validation' => 'required',
             ],
         ];
     }
@@ -225,7 +228,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     'fixed' => 'left'
                 ],
                 [
-                    "title" => "Man-power",
+                    "title" => "Man-power <br/>(AVG)",
                     "dataIndex" => "target_man_power",
                     "align" => "right",
                     "width" => 60,
@@ -251,7 +254,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 ],
 
                 [
-                    "title" => "Hours",
+                    "title" => "Hours <br/>(SUM)",
                     "dataIndex" => "target_hours",
                     "align" => "right",
                     "width" => 60,
@@ -273,7 +276,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "width" => 60,
                 ],
                 [
-                    "title" => "Man-hours",
+                    "title" => "Man-hours <br/>(SUM)",
                     "dataIndex" => "target_man_hours",
                     "align" => "right",
                     "width" => 60,
@@ -360,9 +363,9 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
             $url = route('report-prod_sequence_030').$paramUrl;
 
             $array = [
-                "percent_vari_man_hours" => ["formula" => "({{man_power}} / {{target_man_power}})*100",],
-                "percent_vari_man_power" => ["formula" => "({{man_power}} / {{target_man_power}})*100",],
-                "percent_vari_hours" => ["formula" => "({{hours}} / {{target_hours}})*100",],
+                "percent_vari_man_hours" => ["formula" => "100 - (({{man_hours}} / {{target_man_hours}})*100)",],
+                "percent_vari_man_power" => ["formula" => "100 - (({{man_power}} / {{target_man_power}})*100)",],
+                "percent_vari_hours" => ["formula" => "100 - (({{hours}} / {{target_hours}})*100)",],
                 "vari_man_power" => ["formula" => "{{man_power}} - {{target_man_power}}",],
                 "vari_hours" => ["formula" => "{{hours}} - {{target_hours}}",],
                 "vari_man_hours" => ["formula" => "{{man_hours}} - {{target_man_hours}}",],

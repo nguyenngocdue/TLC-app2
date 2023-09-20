@@ -1852,6 +1852,22 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "user_org_chart": {
+        "name": "user_org_chart",
+        "package_tab": "application",
+        "package": "system",
+        "sub_package": "user",
+        "title": "User Org Chart",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "user_position1": {
         "name": "user_position1",
         "package_tab": "application",

@@ -36,5 +36,10 @@ class DateReport
         return DateTime::createFromFormat('Y/m/d', $strDate)->format($typeFormat);
     }
 
+    public static function getMonthAbbreviation($month) {
+        $month = str_pad($month, 2, '0', STR_PAD_LEFT);
+        return date('M', strtotime("2023-$month-01"));
+    }
+
     
 }

@@ -54,8 +54,20 @@ const countUniqueValues = (arr) => {
     return Object.keys(valueCounts).length;
 }
 
+const footerAggList = [
+    'agg_none',
+    'agg_count_all',
+    'agg_sum',
+    'agg_avg',
+    'agg_median',
+    'agg_min',
+    'agg_max',
+    'agg_range',
+    'agg_count_unique_values',
+    'agg_unique_values',
+];
+
 function calculateFooterValue(table01Name, eloquentFn, fieldName, control) {
-    const aggList = ['agg_none', 'agg_count_all', 'agg_sum', 'agg_avg', 'agg_median', 'agg_min', 'agg_max', 'agg_range',];
     const count = getAllRows(table01Name).length
     // console.log(table01Name, fieldName, count)
     const array = []
@@ -124,8 +136,8 @@ function calculateFooterValue(table01Name, eloquentFn, fieldName, control) {
             break
     }
 
-    for (let i = 0; i < aggList.length; i++) {
-        const agg = aggList[i]
+    for (let i = 0; i < footerAggList.length; i++) {
+        const agg = footerAggList[i]
         const footerName = eloquentFn + "[footer][" + fieldName + "][" + agg + "]"
         // console.log(footerName, result[agg])
         getEById(footerName).val(agg == 'agg_none' ? '' : result[agg])
