@@ -36,7 +36,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
-        "closed": "",
+        "closed": "true",
         "not_applicable": ""
     },
     "_project_id": {
@@ -126,7 +126,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
-        "closed": "",
+        "closed": "true",
         "not_applicable": ""
     },
     "_priority_id": {
