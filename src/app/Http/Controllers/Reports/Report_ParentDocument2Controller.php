@@ -53,6 +53,31 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
         return $sqlStr;
     }
 
+	protected function calculateYearlyDifference($data){
+		$differences = [];
+		foreach($data as $id => $items) {
+			foreach ($items as $k1 => $values) {
+				foreach ($values as $k2 => $value) {
+					$count = count($value) - 1;
+					$years = array_keys($value);
+					$differences[reset($years)] = 0;
+					for ($i = $count; $i > 0; $i--) {
+						$currentYear = $years[$i];
+						$previousYear = $years[$i - 1];
+						$difference = $value[$currentYear] - $value[$previousYear];
+						$differences[$currentYear][] = $difference;
+					}
+					asort($differences);
+					dd($differences);
+
+				}
+
+			}
+
+		}
+		dd($differences);
+	}
+
     protected  function makeDataByTypeTime($fieldsTime, $dataSource, $typeTime) {
         $dataTimes = [];
 		$totalEmission = [];
@@ -60,11 +85,11 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 			foreach ($items as $values) {
 				$values = (array)$values;
 				foreach ($fieldsTime as $time) {
-					$dataTimes[$values['ghg_tmpl_id']][$typeTime][$time][$k1] = $values[$time];
+					$dataTimes[$values['ghg_tmpl_id']][$typeTime][$time][$k1] = $values[$time] ?  $values[$time] : null;
 					$totalEmission[$time][$k1][] = $values[$time];
 				}
-                // dd($totalEmission);
 			}
+
             // dd($totalEmission);
 			foreach($totalEmission as $year => $items) {
 				foreach($items as $time => $values) {
@@ -74,6 +99,11 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 				}
 			}
 		}
+
+		$yearlyDifference = $this->calculateYearlyDifference($dataTimes);
+		dd($dataTimes);
+
+
 		$dataSource = array_map(function ($items) use ($dataTimes, $typeTime) {
 			$items = (array)$items;
 			foreach (array_keys($dataTimes) as $id) {
@@ -92,6 +122,7 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 		$groupByScope = Report::groupArrayByKey($dataSource, 'scope_id');
 		$groupByScope = ['scopes' => array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope)];
 		$groupByScope['total_emission'] = $totalEmission;
+		dd($groupByScope);
         return $groupByScope;
     }
 }

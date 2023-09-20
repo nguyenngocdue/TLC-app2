@@ -38,6 +38,9 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     // DataSource
     public function getSqlStr($params)
     {
+        $params = array_filter($params, function ($value) {
+            return !(isset($value[0]) &&  $value[0] === null && is_array($value));
+        });
         $sql = "SELECT
                         targetTb.project_name,
                         targetTb.sub_project_name,
@@ -114,8 +117,8 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         (SELECT 
                         prod_routing_link_id
                         ,ROUND(AVG(man_power),2) AS man_power
-                        ,ROUND(AVG(hours),2) AS hours
-                        ,ROUND(AVG(man_hours),2) AS man_hours
+                        ,ROUND(AVG(hours)*COUNT(prod_order_id),2) AS hours
+                        ,ROUND(AVG(man_hours)*COUNT(prod_order_id),2) AS man_hours
                                 FROM (SELECT 
                                         sp.project_id,
                                         sp.id AS sub_project_id,
@@ -225,7 +228,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     'fixed' => 'left'
                 ],
                 [
-                    "title" => "Man-power",
+                    "title" => "Man-power <br/>(AVG)",
                     "dataIndex" => "target_man_power",
                     "align" => "right",
                     "width" => 60,
@@ -251,7 +254,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 ],
 
                 [
-                    "title" => "Hours",
+                    "title" => "Hours <br/>(SUM)",
                     "dataIndex" => "target_hours",
                     "align" => "right",
                     "width" => 60,
@@ -273,7 +276,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "width" => 60,
                 ],
                 [
-                    "title" => "Man-hours",
+                    "title" => "Man-hours <br/>(SUM)",
                     "dataIndex" => "target_man_hours",
                     "align" => "right",
                     "width" => 60,
