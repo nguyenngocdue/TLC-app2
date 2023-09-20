@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 Route::group([
     'middleware' => ['auth', 'impersonate',]
 ], function () {
-    $entities = Entities::getAll();
     Route::group([
         'prefix' => 'dashboard/admin',
         'middleware' => ['role_set:admin']
@@ -21,6 +20,7 @@ Route::group([
         Route::post('setroles/syncroles', [App\Http\Controllers\Admin\AdminSetRoleController::class, 'store2'])->name('setroles.store2');
         Route::resource('setrolesets', App\Http\Controllers\Admin\AdminSetRoleSetController::class);
         Route::post('setrolesets/syncrolesets', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'store2'])->name('setrolesets.store2');
+        Route::get('permissions_matrix', [App\Http\Controllers\Admin\AdminPermissionMatrixController::class, 'index'])->name('permissions_matrix');
 
         // Route::resource('permissions2', App\Http\Controllers\Permission\Permission::class);
     });

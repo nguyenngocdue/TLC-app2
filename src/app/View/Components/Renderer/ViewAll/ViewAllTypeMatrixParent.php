@@ -225,6 +225,8 @@ abstract class ViewAllTypeMatrixParent extends Component
     }
     function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel)
     {
+        // dump($xAxis);
+        // dd($yAxis);
         $dataSource = $this->reIndexDataSource($dataSource);
         $result = [];
         $api_url = route($this->type . '.' . $this->apiToCallWhenCreateNew);
@@ -401,14 +403,18 @@ abstract class ViewAllTypeMatrixParent extends Component
 
         $filterRenderer = $this->getFilter();
 
-        $actionButtons = Blade::render("<x-form.action-button-group-view-matrix 
-            type='$this->type' 
-            groupBy='$this->groupBy' 
-            groupByLength='$this->groupByLength' 
+        $actionButtons = Blade::render("<x-form.action-button-group-view-matrix
+            type='$this->type'
+            groupBy='$this->groupBy'
+            groupByLength='$this->groupByLength'
             :actionBtnList='\$actionBtnList'
             />", [
             'actionBtnList' => $this->actionBtnList,
         ]);
+        // dd($columns);
+        // dump($dataSource);
+
+
         // dump($perPage);
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
@@ -439,6 +445,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getMatrixDataSource($xAxis);
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel);
+        // dd($dataSource[0]);
         $columns = $this->getColumns($xAxis);
         return [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading];
     }

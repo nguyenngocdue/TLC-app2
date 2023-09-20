@@ -69,6 +69,7 @@ class RoleSet extends Model implements ContractsRoleSet
      */
     public function users(): BelongsToMany
     {
+        // dd($this);
         return $this->morphedByMany(
             getModelForGuard($this->attributes['guard_name']),
             'model',
@@ -184,13 +185,13 @@ class RoleSet extends Model implements ContractsRoleSet
         }
 
         if (is_int($role)) {
-            $role = $roleClass->findById($role, $this->getDefaultGuardName());
+            if($roleCache = Role::findFromCache($role))$role = $roleCache;
+            else $role = $roleClass->findById($role, $this->getDefaultGuardName());
         }
 
         if (!$this->getGuardNames()->contains($role->guard_name)) {
             throw GuardDoesNotMatch::create($role->guard_name, $this->getGuardNames());
         }
-
         return $this->roles->contains($role->getKeyName(), $role->getKey());
     }
 }
