@@ -57,11 +57,7 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
 	{
-		$fieldsTime = array_map(
-			fn ($item) =>
-			Str::singular($this->typeTime) . $item,
-			$params['quarter_time']
-		);
+		$fieldsTime = array_map(fn ($item) =>Str::singular($this->typeTime) . $item, $params['quarter_time']);
 		$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, $this->typeTime);
 		return collect($groupByScope);
 	}
