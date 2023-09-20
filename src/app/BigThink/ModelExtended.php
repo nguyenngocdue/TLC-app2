@@ -3,7 +3,7 @@
 namespace App\BigThink;
 
 use App\Models\User;
-use App\Utils\OptimisticLocking\TraitOptimisticLocking;
+// use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use App\Utils\Support\Json\SuperProps;
 use Database\Seeders\FieldSeeder;
@@ -18,7 +18,7 @@ abstract class ModelExtended extends Model
     use Searchable;
     use Notifiable;
     use HasFactory;
-    use TraitOptimisticLocking;
+    // use TraitOptimisticLocking;
 
     use HasStatus;
     use HasCheckbox;

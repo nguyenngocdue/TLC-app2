@@ -199,7 +199,9 @@ trait TraitEntityCRUDStoreUpdate2
 					$handledFields = array_merge($handledFields, $toBeOverrideAggregatedFields);
 					// Log::info($handledFields);
 				}
-				$theRow->updateWithOptimisticLocking($handledFields);
+				// $theRow->updateWithOptimisticLocking($handledFields);
+				$this->fill($handledFields);
+				$this->save();
 			}
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);

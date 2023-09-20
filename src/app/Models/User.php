@@ -11,7 +11,7 @@ use App\BigThink\TraitMenuTitle;
 use App\BigThink\TraitMetaForChart;
 use App\BigThink\TraitModelExtended;
 use App\BigThink\TraitMorphManyByFieldName;
-use App\Utils\OptimisticLocking\TraitOptimisticLocking;
+// use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,7 +41,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     use TraitMetaForChart;
     use TraitMenuTitle;
     use TraitMorphManyByFieldName;
-    use TraitOptimisticLocking;
+    // use TraitOptimisticLocking;
     use TraitModelExtended;
     use SoftDeletesWithDeletedBy;
 
