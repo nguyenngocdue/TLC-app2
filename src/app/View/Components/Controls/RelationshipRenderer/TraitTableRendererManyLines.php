@@ -5,6 +5,7 @@ namespace App\View\Components\Controls\RelationshipRenderer;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Facades\Blade;
 
 trait TraitTableRendererManyLines
 {
@@ -32,7 +33,9 @@ trait TraitTableRendererManyLines
         // $btnCmd = isset($this->tablesCallCmdBtn[$this->type]);
         // $btnCmdSettings = $btnCmd ? ($this->tablesCallCmdBtn[$this->type][$tableName] ?? []) : [];
 
-        $tableSettings = $editable ? $this->tablesInEditableMode[$this->type][$tableName] : [];
+        $tableSettingsOfEditable = $this->tablesInEditableMode[$this->type][$tableName] ?? [];
+        $tableSettingsOfRO = $this->tablesHaveCreateANewForm[$this->type][$tableName] ?? [];
+        $tableSettings = $editable ? $tableSettingsOfEditable : $tableSettingsOfRO;
 
         $sp = SuperProps::getFor($tableName);
         $dataSourceWithOld = $this->convertOldToDataSource($this->table01Name, $dataSource, $lineModelPath);
@@ -68,9 +71,9 @@ trait TraitTableRendererManyLines
         static::$cacheEloquentToTable01Name[$colName] = $this->table01Name;
         static::$cacheTable01NameToEloquent[$this->table01Name] = $colName;
 
-        return view('components.controls.' . $view, [
+        $params = [
             'readOnly' => $this->readOnly,
-            'table01ROName' => $this->table01Name . "RO",
+            'table01ROName' => $this->table01Name, //. "RO",
             'readOnlyColumns' => $roColumns,
             'dataSource' => $dataSource,
 
@@ -108,6 +111,10 @@ trait TraitTableRendererManyLines
             'showNo' => true,
             'showNoR' => false,
             'numberOfEmptyLines' => $numberOfEmptyLines,
-        ]);
+        ];
+
+        echo Blade::render('components.controls.many-line-params-common', $params);
+
+        return view('components.controls.' . $view, $params);
     }
 }

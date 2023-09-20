@@ -1,22 +1,4 @@
 <x-renderer.table tableName="{{$table01Name}}" :columns="$editableColumns" :dataHeader="$dataSource2ndThead" :dataSource="$dataSourceWithOld" showNo="{{$showNo?1:0}}" showNoR="{{$showNoR?1:0}}" footer="{{$tableFooter}}" maxH={{false}} tableDebug={{$tableDebug}} editable="{{$editable?1:0}}"/>
-<script>
-    editableColumns['{{$table01Name}}'] = @json($editableColumns);
-    dateTimeControls['{{$table01Name}}'] = @json($dateTimeColumns);
-    tableObject['{{$table01Name}}'] = {
-        // tableId:'{{$table01Name}}', 
-        columns: editableColumns['{{$table01Name}}']
-        , showNo: {{$showNo ? 1 : 0}}
-        , showNoR: {{$showNoR ? 1 : 0}}
-        , tableDebugJs: {{$tableDebug ? 1 : 0}}
-        , isOrderable: {{$isOrderable ? 1 : 0}}
-        , tableName: "{{$tableName}}"
-        , dateTimeControls: dateTimeControls['{{$table01Name}}']
-        , eloquentFn: "{{$colName}}"
-    };
-    tableObjectColName["{{$colName}}"] = {
-        name:'{{$table01Name}}'
-    };
-</script>
 
 @once
 <script>
