@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -203,6 +204,9 @@ trait TraitEntityCRUDStoreUpdate2
 				$theRow->fill($handledFields);
 				$theRow->save();
 			}
+		} catch (ValidationException $e) {
+			// dump($e->getMessage());
+			Toastr::error($e->getMessage(), "Constraint failed");
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
@@ -210,8 +214,6 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->dump1("Updated line ", $theRow->id, __LINE__);
 			return $theRow->id;
 		}
-
-		dump($this->type);
 
 		// if ($this->debugForStoreUpdate) 
 		// dd(__FUNCTION__ . " done");

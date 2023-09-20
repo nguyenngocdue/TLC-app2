@@ -6,6 +6,8 @@ use App\Events\StatusEnteredEvent;
 use App\Events\StatusLeavingEvent;
 use App\Http\Controllers\Workflow\LibStatuses;
 use Exception;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 
 trait HasStatus
 {
@@ -24,6 +26,17 @@ trait HasStatus
             throw new Exception("The status [$newStatus] is not available for $table. Availabilities are [" . join(", ", $available) . "]");
         }
 
+        // Log::info($newStatus . " " . $this->table . " " . $this->ncr_all_closed);
+        if ($this->table == 'qaqc_wirs') {
+            if ($newStatus == 'closed') {
+                if ($this->ncr_all_closed != 'true') {
+                    throw ValidationException::withMessages([
+                        "a" => "You cannot close this document as it has pending NCRs.",
+                    ]);
+                }
+            }
+        }
+
         $eventData = [
             'type' => $table,
             'id' => $this->id,
@@ -32,7 +45,6 @@ trait HasStatus
         ];
 
         event(new StatusLeavingEvent($eventData));
-
         $this->status = $newStatus;
         $savedSuccessfully = $this->save();
         if ($savedSuccessfully) {
