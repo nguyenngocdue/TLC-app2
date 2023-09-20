@@ -57,6 +57,14 @@ trait HasRoles
 
         return $this;
     }
+    public function getRoleClass()
+    {
+        if (! isset($this->roleClass)) {
+            $this->roleClass = app(RoleRegistrar::class)->getRoleClass();
+        }
+
+        return $this->roleClass;
+    }
     public function getRolesViaRoleSets(): Collection
     {
         return $this->loadMissing('roleSets', 'roleSets.roles')
