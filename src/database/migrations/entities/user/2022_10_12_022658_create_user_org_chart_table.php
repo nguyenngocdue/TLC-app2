@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('name');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('def_assignee')->nullable();
-            $table->string('slug')->unique();
+            // $table->string('slug')->unique();
             $table->appendCommonFields();
         });
         // Schema::create('user_org_charts', function (Blueprint $table) {

@@ -6,12 +6,12 @@ use App\BigThink\ModelExtended;
 
 class User_org_chart extends ModelExtended
 {
-    protected $fillable = ["name", "description", "def_assignee", "slug"];
+    protected $fillable = ["name", "description", "def_assignee", "owner_id"];
 
     protected static $statusless = true;
 
     public static $eloquentParams = [
-        "getUsers" => ['hasMany', User::class, 'discipline', 'id'],
+        "getUsers" => ['hasMany', User::class, 'org_chart', 'id'],
         "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],
     ];
 
