@@ -74,7 +74,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         ,prod_routing_link_id
                         ,SUM(target_hours) AS target_hours
                         ,SUM(target_man_hours) AS target_man_hours
-                        ,SUM(target_man_power) AS target_man_power
+                        ,AVG(target_man_power) AS target_man_power
                         FROM  (SELECT 
                                     sp.project_id,
                                     sp.id AS sub_project_id,
