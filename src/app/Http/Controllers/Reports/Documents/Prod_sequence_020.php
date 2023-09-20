@@ -193,7 +193,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'dataIndex' => 'prod_discipline_id',
                 'allowClear' => true,
                 'multiple' => true,
-                'validation' => 'required',
+                // 'validation' => 'required',
             ],
             [
                 'title' => 'Production Routing Link',
@@ -201,7 +201,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'allowClear' => true,
                 'multiple' => true,
                 'hasListenTo' => true,
-                'validation' => 'required',
+                // 'validation' => 'required',
             ],
         ];
     }
