@@ -200,8 +200,8 @@ trait TraitEntityCRUDStoreUpdate2
 					// Log::info($handledFields);
 				}
 				// $theRow->updateWithOptimisticLocking($handledFields);
-				$this->fill($handledFields);
-				$this->save();
+				$theRow->fill($handledFields);
+				$theRow->save();
 			}
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
@@ -210,6 +210,9 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->dump1("Updated line ", $theRow->id, __LINE__);
 			return $theRow->id;
 		}
+
+		dump($this->type);
+
 		// if ($this->debugForStoreUpdate) 
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
