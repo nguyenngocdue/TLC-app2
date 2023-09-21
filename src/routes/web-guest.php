@@ -9,8 +9,11 @@ use App\Http\Controllers\WelcomeCanhController;
 use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\WelcomeFortuneController;
 use App\Jobs\TestLogToFileJob;
+use App\Mail\TestMail;
 use App\Warehouse\Wh_report_data_1s;
 use App\Warehouse\Wh_user_sub_project_task;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
@@ -36,4 +39,10 @@ Route::get('wss-demo', function () {
 
 Route::get('test-queue', function () {
     TestLogToFileJob::dispatch();
+});
+Route::get('test-mail', function (Request $request) {
+    if(!$request->has('email')) return 'Please enter your email address on url params';
+    $email = $request->input('email');
+    Mail::to($email)->send(new TestMail());
+    return 'Test Mail Successful! Please check email test in mail '.$email;
 });

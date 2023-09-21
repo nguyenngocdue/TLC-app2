@@ -188,8 +188,8 @@ class AdminPermissionMatrixController extends Controller
         },$permissions);
         $bgColor = "";
         $textRender = "";
-        $missingInArr = array_diff($arrayCheckAllowed,$roleAllowedPermission);
-        $redundancyInArr = array_diff($roleAllowedPermission,$arrayCheckAllowed);
+        $missingInArr = array_diff($roleAllowedPermission,$arrayCheckAllowed);
+        $redundancyInArr = array_diff($arrayCheckAllowed,$roleAllowedPermission);
         [$bgColor,$textRender,$textPermission] = $this->getBackgroundColorAndTextRender($missingInArr,$redundancyInArr);
         $isCheckboxVisible = $this->getCheckboxVisible() ? 1 : 0;
         $isChecked = $this->handleCheckbox($document,$y);
