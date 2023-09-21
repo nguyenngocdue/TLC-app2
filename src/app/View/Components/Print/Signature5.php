@@ -37,7 +37,7 @@ class Signature5 extends Component
             [
                 "title" => 'Comment',
                 "dataIndex" => "comment",
-                "width" => 350,
+                "width" => 500,
             ],
             [
                 "title" => 'Date',
