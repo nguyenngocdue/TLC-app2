@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Http\Controllers\Workflow\LibApps;
-use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\JsonControls;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 trait TraitEntityFieldHandler2
 {
@@ -104,9 +104,24 @@ trait TraitEntityFieldHandler2
         return $dataSource;
     }
 
-    private function handleStatus($theRow, $newStatus)
+    private function handleStatus($theRow, $request, $newStatus)
     {
         if (!$newStatus) return;
+
+        // Log::info($newStatus . " " . $this->table . " " . $this->ncr_all_closed);
+        $input = $request->input();
+        if ($this->type == 'qaqc_wir') {
+            if ($newStatus == 'closed') {
+                $value = $input['ncr_status_unique_value'];
+                if (!in_array($value, ['"closed"', '""'])) {
+                    // $str = $this->ncr_status_unique_value . " " . $this->ncr_all_closed;
+                    throw ValidationException::withMessages([
+                        "a" => "You cannot close this document as it has pending NCRs.<br/>Current value: $value.",
+                    ]);
+                }
+            }
+        }
+
         $theRow->transitionTo($newStatus);
     }
 

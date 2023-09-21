@@ -61,7 +61,10 @@ Str::macro('limitWords', function (string $str, $count, $maxLen = 50) {
         if ($str[$i] === ' ' && ++$c === $count) return substr($str, 0, $i) . " ...";
         $i++;
     }
-    if (strlen($str) > $maxLen) $str = substr($str, 0, $maxLen) . " ...";
+    if (strlen($str) > $maxLen) {
+        $lastSpace = strrpos($str, ' ', $maxLen - 10);
+        $str = substr($str, 0, $lastSpace) . " ...";
+    }
     return $str;
 });
 

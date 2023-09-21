@@ -83,7 +83,7 @@ trait TraitEntityCRUDStoreUpdate2
 			[$toastrResult] = $this->handleEditableTables($request, $props['editable_table'], $objectId);
 		}
 		try {
-			$this->handleStatus($theRow, $newStatus);
+			$this->handleStatus($theRow, $request, $newStatus);
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
@@ -192,7 +192,7 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			//If all tables are created or updated, change the status of the item
 			if ($lineResult) {
-				$this->handleStatus($theRow, $newStatus);
+				$this->handleStatus($theRow, $request, $newStatus);
 				if (isset($toBeOverrideAggregatedFields)) {
 					//If there are aggregation fields, override them
 					// Log::info($toBeOverrideAggregatedFields);
@@ -207,6 +207,7 @@ trait TraitEntityCRUDStoreUpdate2
 		} catch (ValidationException $e) {
 			// dump($e->getMessage());
 			Toastr::error($e->getMessage(), "Constraint failed");
+			return $this->redirectCustomForUpdate2($request, $theRow);; // Skip status logger
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
 		}
