@@ -269,7 +269,7 @@ const refreshCalculationRO = (tableId) => {
             for (let j = 0; j < footerAggList.length; j++) {
                 const { eloquentFn } = tableObject[tableId]
                 const inputName = eloquentFn + '[footer][' + dataIndex + '][' + footerAggList[j] + ']'
-                console.log("trigger change for", inputName, dataIndex)
+                // console.log("trigger change for", inputName, dataIndex)
                 getEById(inputName).trigger('change')
             }
         }

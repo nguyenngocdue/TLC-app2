@@ -99,12 +99,10 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         $c = 'sub_project_id';
         $d = 'prod_routing_id';
         $pickerDate = Report::createDefaultPickerDate('-3 years');
-        if (Report::isNullParams($params)) {
-            $params[$a] = $pickerDate;
-            $params[$b] = $this->projectId;
-            $params[$c] = $this->subProjectId;
-            $params[$d] = $this->prodRoutingId;
-        }
+        $params[$a] = $pickerDate;
+        $params[$b] = $this->projectId;
+        $params[$c] = $this->subProjectId;
+        $params[$d] = $this->prodRoutingId;
         return $params;
     }
 
@@ -249,7 +247,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
             if (is_null($sql) || !$sql) return collect();
             // $sql = $this->getSql($params);
             $sqlData = DB::select(DB::raw($sql));
-            if(empty($sqlData)) continue;
+            if (empty($sqlData)) continue;
             $dataSource[$k] = collect($sqlData);
         }
         // dd($dataSource);

@@ -113,13 +113,11 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
         $c = 'sub_project_id';
         $d = 'prod_routing_id';
         $e = 'page_limit';
-        if (Report::isNullParams($params)) {
-            $params[$a] = date('d/m/Y');
-            $params[$b] = $this->projectId;
-            $params[$c] = $this->subProjectId;
-            $params[$d] = $this->prodRoutingId;
-            $params[$e] = $this->pageLimit;
-        }
+        $params[$a] = date('d/m/Y');
+        $params[$b] = $this->projectId;
+        $params[$c] = $this->subProjectId;
+        $params[$d] = $this->prodRoutingId;
+        $params[$e] = $this->pageLimit;
         return $params;
     }
 

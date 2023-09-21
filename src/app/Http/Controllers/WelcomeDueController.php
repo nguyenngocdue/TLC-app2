@@ -51,9 +51,7 @@ class WelcomeDueController extends Controller
             ]
         ];
           
-        return view("welcome-due-test-widget", [
-            // 'nodeTreeArray' => json_encode(array_values($taskTree))
-            'widget' =>$widget
+        return view("welcome-due", [
         ]);
     }
 }

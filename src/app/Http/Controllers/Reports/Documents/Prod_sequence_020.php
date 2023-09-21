@@ -38,9 +38,6 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     // DataSource
     public function getSqlStr($params)
     {
-        $params = array_filter($params, function ($value) {
-            return !(isset($value[0]) &&  $value[0] === null && is_array($value));
-        });
         $sql = "SELECT
                         targetTb.project_name,
                         targetTb.sub_project_name,
@@ -157,12 +154,10 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
         $b = 'project_id';
         $c = 'sub_project_id';
         $d = 'prod_routing_id';
-        if (Report::isNullParams($params)) {
-            $params[$a] = date('d/m/Y');
-            $params[$b] = $this->projectId;
-            $params[$c] = $this->subProjectId;
-            $params[$d] = $this->prodRoutingId;
-        }
+        $params[$a] = date('d/m/Y');
+        $params[$b] = $this->projectId;
+        $params[$c] = $this->subProjectId;
+        $params[$d] = $this->prodRoutingId;
         return $params;
     }
 
@@ -360,7 +355,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
             $paramUrl .= "&prod_routing_link_id={$values['prod_routing_link_id']}";
             $paramUrl .= "&picker_date={$params['picker_date']}";
             if (isset($params['prod_discipline_id'])) $paramUrl .= "&prod_discipline_id={$values['prod_discipline_id']}";
-            $url = route('report-prod_sequence_030').$paramUrl;
+            $url = route('report-prod_sequence_030') . $paramUrl;
 
             $array = [
                 "percent_vari_man_hours" => ["formula" => "100 - (({{man_hours}} / {{target_man_hours}})*100)",],

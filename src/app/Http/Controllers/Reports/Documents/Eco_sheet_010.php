@@ -132,7 +132,7 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
 
     public function getBasicInfoData($params)
     {
-        $month = $this->month ?? $params['month'] ?? date("Y-m");
+        $month = $params['month'] ?? $this->month ?? date("Y-m");
         $projectName = Project::find($params['project_id'] ?? $this->projectId)->name;
         return [
             'month' => $month,

@@ -141,7 +141,7 @@ trait TraitEntityListenDataSource
         foreach ($toBeLoaded as $table) {
             // $props = Props::getAllOf($table);
             $props = SuperProps::getFor($table)['props'];
-            $defaultColumns =  ['id', 'name', 'description'];
+            $defaultColumns =  ['id', 'name', 'description', 'employeeid'];
             if (isset($extraColumns[$table])) $defaultColumns = [...$defaultColumns, ...$extraColumns[$table]];
             //Make sure all columns in matrix is really exist in the Prop list
             $availableColumnNames = array_values(array_map(fn ($prop) => $prop['column_name'], $props));

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
+use Exception;
 use Illuminate\Support\Str;
 
 abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
@@ -91,6 +92,7 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 
 	protected  function makeDataByTypeTime($fieldsTime, $dataSource, $typeTime)
 	{
+		// dd($dataSource, $typeTime);
 		$dataTimes = [];
 		$totalEmission = [];
 		foreach ($dataSource as $k1 => $items) {
@@ -98,8 +100,13 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 			foreach ($items as $values) {
 				$values = (array)$values;
 				foreach ($fieldsTime as $time) {
-					$dataTimes[$values['ghg_tmpl_id']][$typeTime][$time]['tco2e'][$k1] = $values[$time] ?  round($values[$time], 2) : null;
-					$emissions[$time][$k1][] = $values[$time] ? $values[$time] : null;
+					try {
+						// dd($fieldsTime, $values[$time]);
+						$dataTimes[$values['ghg_tmpl_id']][$typeTime][$time]['tco2e'][$k1] = $values[$time] ?  round($values[$time], 2) : null;
+						$emissions[$time][$k1][] = $values[$time] ? $values[$time] : null;
+					} catch (Exception $e) {
+						continue;
+					}
 				}
 			}
 			foreach ($emissions as $field => $items) {
@@ -108,6 +115,7 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 				}
 			}
 		}
+		// dd($dataTimes);
 		// dd($dataTimes);
 		$yearDifferences = $this->calculateYearlyDifference($dataTimes);
 		$totalEmission = $this->calculateEachYears($totalEmission);

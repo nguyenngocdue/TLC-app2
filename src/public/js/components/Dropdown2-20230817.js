@@ -6,13 +6,16 @@ let k = {},
 const makeIdForNumber = (n) => '#' + String(n).padStart(6, '0').substring(0, 3) + '.' + String(n).padStart(6, '0').substring(3)
 const makeId = (n) => (isNaN(n) ? '' : makeIdForNumber(n))
 // const makePrefix = () => isNaN(state.id) ? state.id : makeId(state.id)
-const select2FormatState = (state) => !state.id ? state.text : $(
-    `<div class="flex justify-between px-1">
+const select2FormatState = (state) => {
+    // console.log(state)
+    return !state.title ? state.text : $(
+        `<div class="flex justify-between px-1">
         <span>${state.text}</span>
         <pre>   </pre>
-        <span></span>
+        <span>${state.title}</span>
     </div>`
-)
+    )
+}
 const getEById = (id) => $("[id='" + id + "']")
 const dumbIncludes2 = (array, item) => { for (let i = 0; i < array.length; i++) { if (array[i] == item) return true } return false }
 const smartFilter2 = (dataSource, column, value) => {
@@ -556,7 +559,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             if (letUserChooseWhenOneItem) { selectedStr = (dumbIncludes2(selected, item.id) ? 'selected' : '') }
             else { selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes2(selected, item.id) ? 'selected' : '') }
             // console.log(id, selected, item.id, selectedStr)
-            const title = item.description || (isNaN(item.id) ? item.id : makeId(item.id))
+            const title = item.employeeid || "" // || item.description || (isNaN(item.id) ? item.id : makeId(item.id))
             option = "<option value='" + item.id + "' title='" + title + "' " + selectedStr + ' >'
             option += item.name || 'Nameless #' + item.id
             option += '</option>'

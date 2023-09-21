@@ -128,8 +128,10 @@ class Report
     }
     public static function isNullParams($params)
     {
-        // dd($params);
-        return count(array_filter($params, fn ($value) => !is_null($value))) <= 0;
+        foreach (array_values($params) as $value) {
+            if(is_array($value) && is_null($value[0])) return true;
+        }
+        return false;
     }
     public static function getViewName($str)
     {
@@ -203,7 +205,6 @@ class Report
     public static function addMissingMonths($months)
     {
         $fullMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-
         $missingMonths = [];
         $year = null;
         if (!empty($months)) {
@@ -312,4 +313,13 @@ class Report
         }
         return $resultArray;
     }
+
+    public static function assignValues($params) {
+        $timeValues = isset($params['only_month']) ? $params['only_month']: (isset($params['quarter_time']) ? $params['quarter_time'] : $params['year']);
+        $topNameCol = isset($params['only_month']) ? '' : (isset($params['quarter_time']) ?  'QTR' : 'Year');
+        $columnName = isset($params['only_month']) ? 'months' : (isset($params['quarter_time']) ?  'quarters' : 'years');
+        
+        return compact('timeValues', 'topNameCol', 'columnName');
+    }
+    
 }

@@ -309,14 +309,12 @@ class Qaqc_insp_chklst_010 extends Report_ParentController
 		$z = 'check_sheet_id';
 		$l = 'checksheet_type_id';
 		$m = 'run_history_option_id';
-		$isNullParams = Report::isNullParams($params);
-		if ($isNullParams) {
-			$params[$x] = $this->sub_project_id;
-			$params[$y] = $this->prod_order_id;
-			$params[$z] = $this->check_sheet_id;
-			$params[$l] = $this->checksheet_type_id;
-			$params[$m] = $this->run_history_option_id;
-		}
+
+		$params[$x] = $this->sub_project_id;
+		$params[$y] = $this->prod_order_id;
+		$params[$z] = $this->check_sheet_id;
+		$params[$l] = $this->checksheet_type_id;
+		$params[$m] = $this->run_history_option_id;
 		// dd($params);
 		return $params;
 	}
