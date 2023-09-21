@@ -7,32 +7,34 @@
 
 
 @php
-$widthCell = 50;
-$class1 = "bg-white dark:border-gray-600 border-r";
+$widthCell = 88;
+$class1 = "p-2 bg-white dark:border-gray-600 border-r";
 $class2 =" bg-gray-100 px-4 py-3 border-gray-300 ";
 $typeTimes = isset($params['only_month']) ? $params['only_month']: $params['quarter_time'];
 $topNameCol = isset($params['only_month']) ? '' : 'QTR';
 $columnName = isset($params['only_month']) ? 'months' : 'quarters';
 $years = $params['year'];
+$layout = 'w-screen';
 @endphp
+
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout')
+    {{-- @include('components.reports.show-layout') --}}
 </div>
 
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div style='page-break-after:always!important' class=" items-center bg-white box-border p-8">
+        <div style='page-break-after:always!important' class="{{$layout}} overflow-x-auto relative items-center bg-white box-border p-8">
             <div class="flex justify-center bg-only-print">
 
-                <div class="border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
-                    <table class="tg whitespace-no-wrap w-full text-sm">
+                <div class="border rounded-lg border-gray-300 dark:border-gray-600  overflow-x-auto relative">
+                    <table class="tg whitespace-no-wrap w-full text-sm min-w-full">
                         <thead class='border-b'>
                             <tr>
-                                <th class=" w-20{{$class2}}" colspan=" 2">Category</th>
-                                <th class="w-[300px] p-2 {{$class2}} border-l ">Emission source category</th>
-                                <th class=" {{$class2}} border-l  ">Source</th>
+                                <th class="tracking-wide  w-20 {{$class2}} " colspan=" 2">Category</th>
+                                <th class="tracking-wide w-[300px] p-2 {{$class2}} ">Emission source category</th>
+                                <th class="tracking-wide border-l {{$class2}} ">Source</th>
 
                                 @foreach($typeTimes as $value)
                                 <th id="" colspan="{{count($years)}}" class="border bg-gray-100">
@@ -57,7 +59,7 @@ $years = $params['year'];
                                 <th></th>
                                 @for ($i = 0; $i < count($typeTimes); $i++) 
                                     @foreach ($years as $value) 
-                                        <th class="bg-gray-100 px-4 py-3 border-gray-300 border-l border-r border-t">{{ $value }}</th>
+                                        <th class="tracking-wide bg-gray-100 px-4 py-3 border-gray-300 border-l border-r border-t">{{ $value }}</th>
                                     @endforeach
                                 @endfor
                             </tr>
@@ -65,7 +67,7 @@ $years = $params['year'];
                         <tbody>
                             <tr>
                                 <td class="w-20 {{$class1}} text-center border-t" rowspan="20">
-                                    <div class="p-2 font-bold">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</div>
+                                    <div class=" font-bold w-30">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</div>
                                 </td>
                             </tr>
                             {{-- Begin Row --}}
@@ -87,13 +89,13 @@ $years = $params['year'];
                                 @endphp
                                 {{--Emission source category --}}
                                 <td class="{{$class1}} text-left border-t" rowspan="{{$rowSpanInside}}">
-                                    <div class='p-2'>
+                                    <div class=''>
                                         {{$firstItem['ghgcate_name']}}
                                     </div>
                                 </td>
                                 {{-- Source Column --}}
-                                <td class="{{$class1}} text-left border-t text-blue-800">
-                                    <div class='p-2'>
+                                <td class="{{$class1}} text-left border-t text-blue-800 w-96">
+                                    <div class=''>
                                         {!! $firstItem['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $ghgTmplId ?? 0) . "'>" . $firstItem['ghgtmpl_name'] . "</a>" : '' !!} </div>
                                 </td>
                                 {{-- Quarter Number --}}
@@ -110,7 +112,7 @@ $years = $params['year'];
                                     @endforeach
                                 @else
                                 <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
-                                    <div class='p-2'></div>
+                                    <div class=''></div>
                                 </td>
                                 @endif
                                 
@@ -118,8 +120,8 @@ $years = $params['year'];
                             </tr>
                             <tr>
                                 {{--Source--}}
-                                <td class="{{$class1}} text-left border-t text-blue-800">
-                                    <div class='p-2'>
+                                <td class="{{$class1}} text-left border-t text-blue-800 w-96">
+                                    <div class=''>
                                         {!! $values3['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $values3['ghg_tmpl_id'] ?? 0) . "'>" . $values3['ghgtmpl_name'] . "</a>" : '' !!} </div>
                                 </td>
                                 {{-- Quarter Number --}}
@@ -145,15 +147,15 @@ $years = $params['year'];
                                 @endphp
                                 <td class="bg-white border-t" colspan="2"></td>
                                 <td class="{{$class1}} text-left border-t font-bold">Total Emissions</td>
-                                        @foreach(array_values($totalEmissions) as $values)
-                                            @for ($i = 0; $i < count($years); $i++)
-                                                @php
-                                                    $tco2e=$values['tco2e'][$years[$i]]; 
-                                                    $difference=$values['differences'][$years[$i]]; 
-                                                @endphp
-                                                @include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference, 'fontBold' => 'font-bold'])
-                                            @endfor
-                                        @endforeach
+                                @foreach(array_values($totalEmissions) as $values)
+                                    @for ($i = 0; $i < count($years); $i++)
+                                        @php
+                                            $tco2e=$values['tco2e'][$years[$i]]; 
+                                            $difference=$values['differences'][$years[$i]]; 
+                                        @endphp
+                                        @include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference, 'fontBold' => 'font-bold'])
+                                    @endfor
+                                @endforeach
                             </tr>
                         </tbody>
                     </table>
