@@ -172,7 +172,7 @@ class AdminPermissionMatrixController extends Controller
     }
     protected function getCheckboxVisible()
     {
-        return true;
+        return false;
     }
     private function handleCheckbox($document,$y){
         if(!isset($document->id)) return '';
@@ -193,7 +193,7 @@ class AdminPermissionMatrixController extends Controller
         [$bgColor,$textRender,$textPermission] = $this->getBackgroundColorAndTextRender($missingInArr,$redundancyInArr);
         $isCheckboxVisible = $this->getCheckboxVisible() ? 1 : 0;
         $isChecked = $this->handleCheckbox($document,$y);
-        $className = $isCheckboxVisible ? "cursor-pointer view-all-matrix-checkbox-$id" : "cursor-not-allowed disabled:opacity-50";
+        $className = $isCheckboxVisible ? "cursor-pointer view-all-permission-matrix-checkbox-$id" : "cursor-pointer disabled:opacity-20";
         $disabledStr = $isCheckboxVisible ? "" : "disabled";
         $strMakeId = Str::makeId($id);
         $checkbox = "<input $disabledStr class='$className' title='$strMakeId | $permissionsStr' type='checkbox' $isChecked id='checkbox_$id' name='$id'/>";
@@ -222,7 +222,7 @@ class AdminPermissionMatrixController extends Controller
     }
     private function makeCaptionForCheckbox($textPermission,$textRender)
     {
-        return "<div title='$textPermission'>$textRender</div>";
+        return "<div class='cursor-pointer' title='$textPermission'>$textRender</div>";
     }
 
     private function getPreviousNameRole($ignoreName,$extraColumnName){
