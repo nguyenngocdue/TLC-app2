@@ -30,7 +30,7 @@ trait TableTraitFooter
         // 'agg_percent_not_empty',
     ];
 
-    function makeOneFooterRaw($fieldName, $control, $eloquentTable, $dataSource)
+    function makeOneFooterRaw($fieldName, $control, $eloquentTable, $dataSource, $needFormatNumber)
     {
         if (!$dataSource) return;
 
@@ -121,7 +121,8 @@ trait TableTraitFooter
                     //
                     break;
             }
-        } else {
+        } elseif ($needFormatNumber) {
+            //needFormatNumber: if called during update2, it must not have comma, otherwise truncate exception
             $result['agg_sum'] = number_format($result['agg_sum'], 2);
             $result['agg_avg'] = number_format($result['agg_avg'], 2);
             $result['agg_median'] = number_format($result['agg_median'], 2);
@@ -171,7 +172,7 @@ trait TableTraitFooter
                         $control = $column['properties']['control'] ?? "";
                         $footer = $column['footer'];
                         // $fieldName = $column['dataIndex'];
-                        $raw = $this->makeOneFooterRaw($fieldName, $control, $eloquentTable, $dataSource);
+                        $raw = $this->makeOneFooterRaw($fieldName, $control, $eloquentTable, $dataSource, true);
                         $inputs = $this->makeOneFooter($raw, $fieldName, $footer, $eloquentTable);
                         $result0[$column['dataIndex']] = $inputs;
                     } else {
