@@ -66,7 +66,7 @@ trait TraitEntityEditableTableFooter
                 $fieldName = $listener['tableColumn'];
                 $control = ($sp['props']["_" . $fieldName]['control']);
 
-                $allFooterLines = $this->makeOneFooterRaw($fieldName, $control, $fn, $dataSource);
+                $allFooterLines = $this->makeOneFooterRaw($fieldName, $control, $fn, $dataSource, false);
                 $aggName = $listener['aggName'];
                 $newValue = $allFooterLines[$aggName];
 
