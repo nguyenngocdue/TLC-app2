@@ -48,7 +48,6 @@ class AdminPermissionMatrixController extends Controller
         }
         return static::$singletonDbRoleGetAllPermissionCollection;
     }
-
     public static function getCollectionRoleSetGetAllRole()
     {
         if (!isset(static::$singletonDbRoleSetGetAllRoleCollection)) {
@@ -58,7 +57,6 @@ class AdminPermissionMatrixController extends Controller
         }
         return static::$singletonDbRoleSetGetAllRoleCollection;
     }
-
     public static function findFromCache($id)
     {
         return static::getCollection()[$id] ?? null;
@@ -69,16 +67,10 @@ class AdminPermissionMatrixController extends Controller
     public static function findRoleByRoleSetIdFromCache($id){
         return static::getCollectionRoleSetGetAllRole()[$id] ?? null;
     }
-
     public function getType()
     {
         return "permission_matrixes";
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         [$xAxis,$xExtraColumns] = $this->getXAxis($this->getMatrixDataSource());
