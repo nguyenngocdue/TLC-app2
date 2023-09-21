@@ -77,8 +77,8 @@ class User extends Authenticatable implements LdapAuthenticatable
     public function getNameAttribute($value)
     {
         $name = $this->name0 . ($this->resigned ? " (RESIGNED)" : "") . ($this->show_on_beta ? " (BETA)" : "");
-        Log::info(CurrentUser::isLoggedIn());
-        Log::info(CurrentUser::isAdmin());
+        Log::info("Is logged in: " . CurrentUser::isLoggedIn());
+        Log::info("IOs Admin: " . CurrentUser::isAdmin());
         if (CurrentUser::isLoggedIn() && CurrentUser::isAdmin()) $name .= " (#" . $this->id . ")";
         return $name;
     }
