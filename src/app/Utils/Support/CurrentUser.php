@@ -30,6 +30,11 @@ class CurrentUser
         }
         return $token;
     }
+    public static function isLoggedIn()
+    {
+        return !!Auth::user();
+    }
+
     private static function checkAuth()
     {
         $userAuth = Auth::user();
