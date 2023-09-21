@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Entities\TraitViewAllMatrixCommon;
+use App\Http\Controllers\Workflow\LibApps;
 use App\Models\Role;
 use App\Models\Role_set;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Entities;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -14,36 +17,97 @@ use Illuminate\Pagination\Paginator;
 
 class AdminPermissionMatrixController extends Controller
 {
+    use TraitViewAllMatrixCommon;
     private $nameColumnFixed = 'left';
+    private $rotate45Width = false;
+    private $groupBy = 'name_for_group_by';
+    private $groupByLength = 3;
+    private $type = 'permission_matrixes';
+    private $tableTrueWidth = false;
+
+    static $singletonDbRoleCollection = null;
+    static $singletonDbRoleGetAllPermissionCollection = null;
+    static $singletonDbRoleSetGetAllRoleCollection = null;
+    public static function getRole(){
+        return Role::all();
+    }
+    public static function getCollection()
+    {
+        if (!isset(static::$singletonDbRoleCollection)) {
+            $all = static::getRole();
+            foreach ($all as $item) $indexed[$item->id] = $item;
+            static::$singletonDbRoleCollection = collect($indexed);
+        }
+        return static::$singletonDbRoleCollection;
+    }
+    public static function getCollectionRoleGetAllPermission()
+    {
+        if (!isset(static::$singletonDbRoleGetAllPermissionCollection)) {
+            $all = static::getRole();
+            foreach ($all as $item) $indexed[$item->id] = $item->permissions;
+            static::$singletonDbRoleGetAllPermissionCollection = collect($indexed);
+        }
+        return static::$singletonDbRoleGetAllPermissionCollection;
+    }
+
+    public static function getCollectionRoleSetGetAllRole()
+    {
+        if (!isset(static::$singletonDbRoleSetGetAllRoleCollection)) {
+            $all = Role_set::all();
+            foreach ($all as $item) $indexed[$item->id] = $item->roles;
+            static::$singletonDbRoleSetGetAllRoleCollection = collect($indexed);
+        }
+        return static::$singletonDbRoleSetGetAllRoleCollection;
+    }
+
+    public static function findFromCache($id)
+    {
+        return static::getCollection()[$id] ?? null;
+    }
+    public static function findPermissionByRoleIdFromCache($id){
+        return static::getCollectionRoleGetAllPermission()[$id] ?? null;
+    }
+    public static function findRoleByRoleSetIdFromCache($id){
+        return static::getCollectionRoleSetGetAllRole()[$id] ?? null;
+    }
 
     public function getType()
     {
-        return "dashboard";
+        return "permission_matrixes";
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         [$xAxis,$xExtraColumns] = $this->getXAxis($this->getMatrixDataSource());
         $xAxis2ndHeading = $this->getXAxis2ndHeader($xAxis);
-        $yAxis = $this->paginate($this->getYAxis(), 10, 1)->getCollection();
+        $yAxis = $this->getYAxis();
         $columns = $this->getColumns($xAxis);
+        $yAxisTableName = $this->getTableNameYAxis();
         $dataSource = $this->mergeDataSource($xAxis, $yAxis,$xExtraColumns);
+        $settings = CurrentUser::getSettings();
+        $per_page = $settings[$this->type]['view_all']['per_page'] ?? 10;
+        $page = $settings[$this->type]['view_all']['matrix']['page'] ?? 1;
+        $dataSource = $this->paginate($dataSource, $per_page, $page);
+        $route = route('updateUserSettings');
+        $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
+        if ($r = $this->updateUserSettings($request)) return $r;
         return view(
             'admin.permission-matrix',
             [
+                'topTitle' => Str::headline($this->getType()),
                 'columns' => $columns,
                 'dataSource' => $dataSource,
                 'dataHeader' => $xAxis2ndHeading,
-                // 'footer' => $footer,
-                // 'perPage' => $perPage,
-                // 'rotate45Width' => $this->rotate45Width,
-                // 'groupBy' => $this->groupBy,
-                // 'groupByLength' => $this->groupByLength,
-                // 'tableTrueWidth' => $this->tableTrueWidth,
+                'footer' => $this->getFooter($yAxisTableName),
+                'perPage' => $perPage,
+                'rotate45Width' => $this->rotate45Width,
+                'groupBy' => $this->groupBy,
+                'groupByLength' => $this->groupByLength,
+                'tableTrueWidth' => $this->tableTrueWidth,
                 // 'actionButtons' => $actionButtons,
                 'headerTop' => 20,
                 // 'tableTopCenterControl' => $this->tableTopCenterControl,
@@ -51,19 +115,28 @@ class AdminPermissionMatrixController extends Controller
             ],
         );
     }
+    protected function getFooter($yAxisTableName)
+    {
+        $yAxisRoute = route($yAxisTableName . ".index");
+        $app = LibApps::getFor($yAxisTableName);
+        return "<div class='flex items-center justify-start'>
+                <span class='mr-1'>View all </span>
+                <a target='_blank' class='text-blue-400 cursor-pointer font-semibold' href='$yAxisRoute'> " . $app['title'] . "</a>
+            </div>";
+    }
     public function getMatrixDataSource()
     {
-        return  Role::query()->get();
+        return  self::getCollection();
     }
     public function getItemDataSourceById($id = null){
-        return Role::findById($id);
+        return Role::findFromCache($id);
     }
     protected function getColumns($extraColumns)
     {
         return  [
             ['dataIndex' => 'name_for_group_by', 'hidden' => true],
             ['dataIndex' => 'name', 'width' => 300, 'fixed' => $this->nameColumnFixed,],
-            ['dataIndex' => 'user', 'width' => 50, 'fixed' => $this->nameColumnFixed,],
+            ['dataIndex' => 'role', 'width' => 50, 'fixed' => $this->nameColumnFixed,],
             ...$this->getMetaColumns(),
             ...$extraColumns,
             ...$this->getRightMetaColumns(),
@@ -88,8 +161,8 @@ class AdminPermissionMatrixController extends Controller
                 'cell_title' => "(#" . $yId . ")",
                 'cell_class' => "text-blue-800 bg-white",
             ];
-            $line['user'] = (object)[
-                'value' => sizeof($y->roles) ?? 0,
+            $line['role'] = (object)[
+                'value' => sizeof(self::findRoleByRoleSetIdFromCache($yId)) ?? 0,
                 'cell_title' => "(#" . $yId . ")",
                 'cell_class' => "text-blue-800 bg-white",
             ];
@@ -103,7 +176,7 @@ class AdminPermissionMatrixController extends Controller
                         $key = $xId . "_" . $columnIndexName;
                         if(str_contains($key,'READ-DATA')) $key = $xId;
                         $cell = $y->roles->where('id',$column)->first();
-                        $value = $this->makeCheckbox($cell,$y,$column,$columnIndexName);
+                        $value = $this->makeCheckbox($cell,$y,$column,$columnIndexName,$mapIndex);
                         //<< convert to empty string for excel
                         $line[$key] = is_null($value) ? "" : $value;
                         }
@@ -121,31 +194,51 @@ class AdminPermissionMatrixController extends Controller
         if(!isset($document->id)) return '';
         return $y->hasRoleTo($document->id) ? 'checked' : '';
     }
-    protected function makeCheckbox($document, $y,$id,$columnIndexName)
+    protected function makeCheckbox($document, $y,$id,$columnIndexName,$mapIndex)
     {
         $roleAllowedPermission = $this->getRoleAllowedPermission($columnIndexName);
-        $dataCell = $this->getItemDataSourceById($id);
-        $permissions = $dataCell->permissions->pluck('name')->toArray();
-        $arrayCheckAllowed = array_map(function($item){
-            $a = explode('-',$item);
-            return array_shift($a);
+        $permissions = self::findPermissionByRoleIdFromCache($id)->pluck('name')->toArray();
+        $permissionsStr = join(",", $permissions);
+        $arrayCheckAllowed = array_map(function($item) use ($mapIndex){
+            return str_replace('-'.$mapIndex,'',$item);
         },$permissions);
         $bgColor = "";
-        if(!empty(array_diff($arrayCheckAllowed,$roleAllowedPermission))) $bgColor = 'bg-red-200';
+        $textRender = "";
+        $missingInArr = array_diff($arrayCheckAllowed,$roleAllowedPermission);
+        $redundancyInArr = array_diff($roleAllowedPermission,$arrayCheckAllowed);
+        [$bgColor,$textRender,$textPermission] = $this->getBackgroundColorAndTextRender($missingInArr,$redundancyInArr);
         $isCheckboxVisible = $this->getCheckboxVisible() ? 1 : 0;
         $isChecked = $this->handleCheckbox($document,$y);
         $className = $isCheckboxVisible ? "cursor-pointer view-all-matrix-checkbox-$id" : "cursor-not-allowed disabled:opacity-50";
         $disabledStr = $isCheckboxVisible ? "" : "disabled";
-        $checkbox = "<input $disabledStr class='$className' title='" . Str::makeId($id) . "' type='checkbox' $isChecked id='checkbox_$id' name='$id'/>";
+        $strMakeId = Str::makeId($id);
+        $checkbox = "<input $disabledStr class='$className' title='$strMakeId | $permissionsStr' type='checkbox' $isChecked id='checkbox_$id' name='$id'/>";
         $item = [
-            'value' => $checkbox . "<br/>" . $this->makeCaptionForCheckbox($document),
+            'value' => $checkbox . "<br/>" . $this->makeCaptionForCheckbox($textPermission,$textRender),
             'cell_class' => "$bgColor",
         ];
         return (object) $item;
     }
-    protected function makeCaptionForCheckbox($document)
+    private function getBackgroundColorAndTextRender($missingInArr,$redundancyInArr){
+        $bgColor = "";
+        $textRender = "...";
+        $textPermission = "";
+        if(!empty($missingInArr)){
+            $bgColor = 'bg-red-200';
+            $textRender = '-';
+            $textPermission = join(",",$missingInArr);
+        }
+        if(!empty($redundancyInArr)){
+            if($bgColor && $textRender) return ['bg-yellow-200','-+',join(',',array_merge($missingInArr,$redundancyInArr))];
+            $bgColor = 'bg-pink-200';
+            $textRender = '+';
+            $textPermission = join(",",$redundancyInArr);
+        }
+        return [$bgColor,$textRender,$textPermission];
+    }
+    private function makeCaptionForCheckbox($textPermission,$textRender)
     {
-        return "";
+        return "<div title='$textPermission'>$textRender</div>";
     }
     private function getXAxisPrimaryColumns()
     {

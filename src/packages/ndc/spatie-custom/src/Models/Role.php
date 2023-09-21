@@ -22,15 +22,15 @@ class Role extends Model implements ContractsRole
     use HasPermissions;
     use RefreshesPermissionCache;
     use TraitsHasRoleSets;
-    static $singletonDbUserCollection = null;
+    static $singletonDbRoleCollection = null;
     public static function getCollection()
     {
-        if (!isset(static::$singletonDbUserCollection)) {
+        if (!isset(static::$singletonDbRoleCollection)) {
             $all = static::all();
             foreach ($all as $item) $indexed[$item->id] = $item;
-            static::$singletonDbUserCollection = collect($indexed);
+            static::$singletonDbRoleCollection = collect($indexed);
         }
-        return static::$singletonDbUserCollection;
+        return static::$singletonDbRoleCollection;
     }
 
     public static function findFromCache($id)
