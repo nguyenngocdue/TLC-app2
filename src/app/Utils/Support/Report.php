@@ -128,8 +128,10 @@ class Report
     }
     public static function isNullParams($params)
     {
-        // dd($params);
-        return count(array_filter($params, fn ($value) => !is_null($value))) <= 0;
+        foreach (array_values($params) as $value) {
+            if(is_array($value) && is_null($value[0])) return true;
+        }
+        return false;
     }
     public static function getViewName($str)
     {
@@ -203,7 +205,6 @@ class Report
     public static function addMissingMonths($months)
     {
         $fullMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-
         $missingMonths = [];
         $year = null;
         if (!empty($months)) {
