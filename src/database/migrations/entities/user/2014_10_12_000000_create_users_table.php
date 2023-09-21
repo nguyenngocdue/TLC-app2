@@ -22,7 +22,8 @@ return new class extends Migration
         $schema->create('users', function (BlueprintExtended $table) {
             $table->id();
             $table->string("email")->unique();
-            $table->string("name");
+            $table->string("name")->nullable();
+            $table->string("name0")->default("New User");
             $table->string("full_name");
             $table->string("name_suffix")->nullable();
             $table->string("employeeid")->nullable();

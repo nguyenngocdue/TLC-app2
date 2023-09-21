@@ -1,1 +1,1 @@
-<p>Test mail</p>
+<p>Test mail server.</p>
