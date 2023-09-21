@@ -6,6 +6,7 @@ use App\Events\StatusEnteredEvent;
 use App\Events\StatusLeavingEvent;
 use App\Http\Controllers\Workflow\LibStatuses;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 trait HasStatus
 {
@@ -32,7 +33,6 @@ trait HasStatus
         ];
 
         event(new StatusLeavingEvent($eventData));
-
         $this->status = $newStatus;
         $savedSuccessfully = $this->save();
         if ($savedSuccessfully) {

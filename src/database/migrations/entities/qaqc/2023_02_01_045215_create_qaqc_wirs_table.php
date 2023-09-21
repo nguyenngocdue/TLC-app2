@@ -25,6 +25,8 @@ return new class extends Migration
             $table->unsignedInteger('doc_id');
             $table->text('description')->nullable();
             $table->string('slug')->unique();
+            $table->string('ncr_status_unique_value')->nullable();
+            $table->string('ncr_all_closed')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
             $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->unsignedBigInteger('prod_routing_id')->nullable();

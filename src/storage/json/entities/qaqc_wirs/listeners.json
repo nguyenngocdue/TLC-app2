@@ -1,4 +1,19 @@
 {
+    "_ncr_status_unique_value": {
+        "name": "_ncr_status_unique_value",
+        "column_name": "ncr_status_unique_value",
+        "listen_action": "aggregate_from_table",
+        "triggers": "getNcrs[footer][status][agg_unique_values]",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -39,6 +54,21 @@
         "columns_to_set": "",
         "attrs_to_compare": "id",
         "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_ncr_all_closed": {
+        "name": "_ncr_all_closed",
+        "column_name": "ncr_all_closed",
+        "listen_action": "expression",
+        "triggers": "ncr_status_unique_value",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "ncr_status_unique_value == \"closed\"",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
         "ajax_item_attributes": "",

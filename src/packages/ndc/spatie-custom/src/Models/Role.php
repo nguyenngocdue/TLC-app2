@@ -22,7 +22,22 @@ class Role extends Model implements ContractsRole
     use HasPermissions;
     use RefreshesPermissionCache;
     use TraitsHasRoleSets;
+    static $singletonDbRoleCollection = null;
+    public static function getCollection()
+    {
+        if (!isset(static::$singletonDbRoleCollection)) {
+            $all = static::all();
+            foreach ($all as $item) $indexed[$item->id] = $item;
+            static::$singletonDbRoleCollection = collect($indexed);
+        }
+        return static::$singletonDbRoleCollection;
+    }
 
+    public static function findFromCache($id)
+    {
+        // if(!isset(static::getCollection()[$id]))
+        return static::getCollection()[$id] ?? null;
+    }
     public function givePermissionTo(...$permissions)
     {
         $permissions = collect($permissions)
@@ -181,14 +196,13 @@ class Role extends Model implements ContractsRole
      */
     public static function findById($id, $guardName = null): ContractsRole
     {
+        $role = static::findFromCache($id);
+        if($role) return $role;
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
-
         $role = static::findByParam([(new static())->getKeyName() => $id, 'guard_name' => $guardName]);
-
         if (!$role) {
             throw RoleDoesNotExist::withId($id);
         }
-
         return $role;
     }
 

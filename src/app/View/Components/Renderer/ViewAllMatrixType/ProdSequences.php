@@ -101,7 +101,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         $result = [];
         $data = $this->getXAxisPrimaryColumns();
-        // dump($data[0]);
+        // dump($data);
         $extraColumns = $this->getXAxisExtraColumns();
         foreach ($data as $line) {
             $result[] = [

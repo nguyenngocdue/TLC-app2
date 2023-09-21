@@ -50,6 +50,7 @@ trait TraitEntityEditableTableFooter
         return $listenFooters;
     }
 
+    //This called when delete a line in table, all agg fields need to be updated
     private function recalculateAggregatedFields($tableName, $table01Name, $tableFnNames, $parentId)
     {
         $sp = SuperProps::getFor($tableName);

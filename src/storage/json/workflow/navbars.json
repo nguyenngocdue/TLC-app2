@@ -110,5 +110,12 @@
         "title": "Clean Orphan-M2M",
         "href": "\/orphan\/many_to_many",
         "icon_fa": "fa-duotone fa-gauge"
+    },
+    "permission_matrix": {
+        "name": "permission_matrix",
+        "group": "internal",
+        "title": "Permission Matrix",
+        "href": "\/dashboard\/admin\/permissions_matrix",
+        "icon_fa": "fa-duotone fa-gauge"
     }
 }

@@ -21,6 +21,7 @@ trait TableTraitFooter
         'agg_max',
         'agg_range',
         'agg_count_unique_values',
+        'agg_unique_values',
 
         // 'agg_count_values',
         // 'agg_count_empty',
@@ -71,6 +72,10 @@ trait TableTraitFooter
             $items = $items->map(fn ($item) => $item ? substr($item, 0, 4) : 0); //<< Incase year is a empty string, make it 0
         }
 
+        if ($fieldName == 'status') {
+            $result['agg_unique_values'] = '"' . $items->unique()->join(";") . '"';
+            return $result;
+        };
         // dump($items);
         try {
             $result['agg_sum'] = $items->sum();
@@ -129,7 +134,7 @@ trait TableTraitFooter
     }
     private function makeOneFooter($result, $fieldName, $footer, $eloquentTable)
     {
-        $class = "focus:outline-none border-0 bg-transparent w-full h-6 block text-right pr-2 py-0";
+        $class = "focus:outline-none border-0 bg-transparent h-6 text-left pr-2 py-0 w-full1";
         $inputs = [];
 
         foreach ($this->aggList as $agg) {
@@ -138,7 +143,12 @@ trait TableTraitFooter
             // $value = ($agg != 'agg_none') ? round($result[$agg], 2)  : "";
             $value = $result[$agg] ?? "";
             $onChange = "onChangeDropdown4AggregateFromTable('$id', this.value)";
-            $inputs[] = "<input id='$id' title='$agg' component='TraitFooter' value='$value' readonly class='$class $bg' onChange=\"$onChange\" />";
+            $input = "<input id='$id' title='$agg' component='TraitFooter' value='$value' readonly class='$class $bg' onChange=\"$onChange\" />";
+            if ($this->debugFooter) {
+                $inputs[] = "<div class='text-right'>$agg: $input</div>";
+            } else {
+                $inputs[] = $input;
+            }
         }
 
         $inputs = join("", $inputs);
