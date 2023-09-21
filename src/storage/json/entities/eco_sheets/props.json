@@ -765,7 +765,7 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "",
+        "new_line": "true",
         "frozen_left": "",
         "frozen_right": ""
     },
@@ -853,7 +853,7 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "",
+        "new_line": "true",
         "frozen_left": "",
         "frozen_right": ""
     },
