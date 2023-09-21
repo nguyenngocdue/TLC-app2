@@ -161,13 +161,14 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         ];
     }
 
-    protected function tableDataHeader($params, $dataSource) {
+    protected function tableDataHeader($params, $dataSource)
+    {
         $sheets = $this->transformSheetsDesc($params);
         $dataHeader = [];
         foreach ($sheets as $key => $id) {
             $users = Qaqc_insp_tmpl_sht::find($id)->getMonitors1()->pluck('name', 'id')->toArray();
             $lenUsers = count($users);
-            $icons = $lenUsers ? str_repeat("<i class='fa-duotone fa-user'></i>",$lenUsers):"";
+            $icons = $lenUsers ? str_repeat("<i class='fa-duotone fa-user'></i>", $lenUsers) : "";
             $dataHeader[$key] = $icons;
         }
         // dump($dataHeader);
@@ -278,11 +279,11 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
             }
             $items[$key] = $value;
             $items[$key]['sub_project_name'] = (object)[
-                'value' => $value['sub_project_name'], 
+                'value' => $value['sub_project_name'],
                 'cell_title' => 'ID: ' . $value['sub_project_id']
             ];
             $items[$key]['prod_order_name'] = (object)[
-                'value' => $value['prod_order_name'], 
+                'value' => $value['prod_order_name'],
                 'cell_title' => 'ID: ' . $value['prod_order_id']
             ];
             if (is_null($value['chklst_shts_id'])) {
@@ -308,12 +309,9 @@ class Qaqc_insp_chklst_020 extends Report_ParentRegisterController
         $x = 'sub_project_id';
         $y = 'prod_routing_id';
         $z = 'checksheet_type_id';
-        $isNullParams = Report::isNullParams($params);
-        if ($isNullParams) {
-            $params[$x] = $this->sub_project_id;
-            $params[$y] = $this->prod_routing_id;
-            $params[$z] = $this->checksheet_type_id;
-        }
+        $params[$x] = $this->sub_project_id;
+        $params[$y] = $this->prod_routing_id;
+        $params[$z] = $this->checksheet_type_id;
         return $params;
     }
 

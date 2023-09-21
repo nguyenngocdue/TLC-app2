@@ -107,12 +107,12 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$labels = [];
 		$index = 0;
 		foreach ($data as $scopeId => $items) {
-			if(is_null($items)) continue;
+			if (is_null($items)) continue;
 			foreach ($items as $value) {
-				if(!$value['ghgtmpl_name']) continue;
+				if (!$value['ghgtmpl_name']) continue;
 				$labels[$scopeId] = $value['scope_name'];
 				$val = $numbers;
-				$val[$index] = is_null($value['total_months']) ? 0 :$value['total_months'];
+				$val[$index] = is_null($value['total_months']) ? 0 : $value['total_months'];
 				// $val = StringReport::arrayToJsonWithSingleQuotes($val);
 				$datasets[] = (object)[
 					'label' => $value['ghgtmpl_name'],
@@ -125,7 +125,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$dataSource->put('pivot_chart_2', []);
 		$dataSource['pivot_chart_2'] = [
 			'meta' => [
-				'numbers' => $datasets, 
+				'numbers' => $datasets,
 				'labels' => StringReport::arrayToJsonWithSingleQuotes($labels),
 				'count' => count($numbers),
 				'max' => 1,
@@ -135,8 +135,9 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		return $dataSource;
 	}
 
-	private function addInfo($dataSource) {
-		if(isset($dataSource['tco2e_by_scope'])) {
+	private function addInfo($dataSource)
+	{
+		if (isset($dataSource['tco2e_by_scope'])) {
 			$directEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 335)[0]['total_tco2e'] ?? null;
 			$inDirectEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 336)[0]['total_tco2e'] ?? null;
 			$otherInDirectEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 337)[0]['total_tco2e'] ?? null;
@@ -163,7 +164,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			if (!is_numeric($key)) continue;
 			$scopeSummaryMonths[] = [
 				'scope_id' => $key,
-				'total_tco2e' => round(array_sum(Report::getLastArrayValuesByKey($value, 'total_months')),2)
+				'total_tco2e' => round(array_sum(Report::getLastArrayValuesByKey($value, 'total_months')), 2)
 			];
 		}
 
@@ -186,9 +187,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 	protected function getDefaultValueParams($params, $request)
 	{
 		$a = 'year';
-		if (Report::isNullParams($params)) {
-			$params[$a] = $this->year;
-		}
+		$params[$a] = $this->year;
 		return $params;
 	}
 

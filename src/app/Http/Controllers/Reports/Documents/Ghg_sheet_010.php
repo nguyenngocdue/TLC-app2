@@ -44,10 +44,10 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 	}
 
 	public function getDataSource($params)
-    {
-        $primaryData = (new Ghg_sheet_dataSource())->getDataSource($params);
-        return collect($primaryData);
-    }
+	{
+		$primaryData = (new Ghg_sheet_dataSource())->getDataSource($params);
+		return collect($primaryData);
+	}
 
 	public function changeDataSource($dataSource, $params)
 	{
@@ -64,7 +64,7 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 			$item['month_ghg_sheet_id'] = StringReport::parseKeyValueString($item['month_ghg_sheet_id']);
 		}
 		$groupByScope = Report::groupArrayByKey($dataSource, 'scope_id');
-		$groupByScope = ['scopes' =>array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope)];
+		$groupByScope = ['scopes' => array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope)];
 		$groupByScope['total_emission'] = $monthlyTotals;
 		// dd($groupByScope);
 		return collect($groupByScope);
@@ -74,9 +74,7 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 	protected function getDefaultValueParams($params, $request)
 	{
 		$a = 'year';
-		if (Report::isNullParams($params)) {
-			$params[$a] = $this->year;
-		}
+		$params[$a] = $this->year;
 		return $params;
 	}
 

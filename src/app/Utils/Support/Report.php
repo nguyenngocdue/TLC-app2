@@ -313,4 +313,13 @@ class Report
         }
         return $resultArray;
     }
+
+    public static function assignValues($params) {
+        $timeValues = isset($params['only_month']) ? $params['only_month']: (isset($params['quarter_time']) ? $params['quarter_time'] : $params['year']);
+        $topNameCol = isset($params['only_month']) ? '' : (isset($params['quarter_time']) ?  'QTR' : 'Year');
+        $columnName = isset($params['only_month']) ? 'months' : (isset($params['quarter_time']) ?  'quarters' : 'years');
+        
+        return compact('timeValues', 'topNameCol', 'columnName');
+    }
+    
 }

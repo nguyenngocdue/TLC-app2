@@ -58,10 +58,7 @@ abstract class Report_Parent2Controller extends Controller
     protected function getDefaultValueParams($params, $request)
     {
         $x = 'picker_date';
-        $isNullParams = Report::isNullParams($params);
-        if ($isNullParams) {
-            $params[$x] = PivotReport::defaultPickerDate();
-        }
+        $params[$x] = PivotReport::defaultPickerDate();
         return $params;
     }
 
@@ -211,8 +208,8 @@ abstract class Report_Parent2Controller extends Controller
             if ($failedVal) {
                 $messages = $validation->getMessageBag()->toArray();
                 return back()
-                ->withErrors($messages)
-                ->withInput();
+                    ->withErrors($messages)
+                    ->withInput();
             }
         }
         $typeReport = CurrentPathInfo::getTypeReport($request);
