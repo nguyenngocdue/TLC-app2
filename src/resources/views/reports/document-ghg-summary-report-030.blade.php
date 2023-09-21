@@ -25,7 +25,7 @@ $layout = 'w-screen';
 
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div style='page-break-after:always!important' class="{{$layout}} overflow-x-auto relative items-center bg-white box-border p-8">
+        <div style='page-break-after:always!important' class="{{$layout}} overflow-x-auto relative items-center box-border p-8">
             <div class="flex justify-center bg-only-print">
 
                 <div class="border rounded-lg border-gray-300 dark:border-gray-600  overflow-x-auto relative">
@@ -33,8 +33,8 @@ $layout = 'w-screen';
                         <thead class='border-b'>
                             <tr>
                                 <th class="tracking-wide  w-20 {{$class2}} " colspan=" 2">Category</th>
-                                <th class="tracking-wide w-[300px] p-2 {{$class2}} ">Emission source category</th>
-                                <th class="tracking-wide border-l {{$class2}} ">Source</th>
+                                <th class="tracking-wide w-[300px] p-2 border-l {{$class2}}">Emission source category</th>
+                                <th class="tracking-wide border-l {{$class2}}">Source</th>
 
                                 @foreach($typeTimes as $value)
                                 <th id="" colspan="{{count($years)}}" class="border bg-gray-100">
@@ -59,7 +59,7 @@ $layout = 'w-screen';
                                 <th></th>
                                 @for ($i = 0; $i < count($typeTimes); $i++) 
                                     @foreach ($years as $value) 
-                                        <th class="tracking-wide bg-gray-100 px-4 py-3 border-gray-300 border-l border-r border-t">{{ $value }}</th>
+                                        <th class=" bg-gray-100 px-4 py-3 border-gray-300 border-l border-r border-t text-base tracking-wide">{{ $value }}</th>
                                     @endforeach
                                 @endfor
                             </tr>
@@ -67,7 +67,7 @@ $layout = 'w-screen';
                         <tbody>
                             <tr>
                                 <td class="w-20 {{$class1}} text-center border-t" rowspan="20">
-                                    <div class=" font-bold w-30">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</div>
+                                    <div class=" font-bold">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</div>
                                 </td>
                             </tr>
                             {{-- Begin Row --}}
@@ -79,7 +79,7 @@ $layout = 'w-screen';
                             $scopeName = \App\Models\Term::find($keyScope)->toArray()['name'];
                             @endphp
                             <tr>
-                                <td class=" w-20 {{$class1}} text-center border-t" rowspan="{{$rowSpanOutSide}}">{{$scopeName}}</td>
+                                <td class=" w-26 {{$class1}} text-center border-t  text-base tracking-wide" rowspan="{{$rowSpanOutSide}}">{{$scopeName}}</td>
                                 @foreach($values as $ghgcateId => $values2)
                                 @php
                                 $rowSpanInside = count($values2);
@@ -88,14 +88,14 @@ $layout = 'w-screen';
                                 $remainingItem = array_splice($values2, 1);
                                 @endphp
                                 {{--Emission source category --}}
-                                <td class="{{$class1}} text-left border-t" rowspan="{{$rowSpanInside}}">
-                                    <div class=''>
+                                <td class="{{$class1}} text-left border-t text-base tracking-wide" rowspan="{{$rowSpanInside}}">
+                                    <div class='w-96'>
                                         {{$firstItem['ghgcate_name']}}
                                     </div>
                                 </td>
                                 {{-- Source Column --}}
-                                <td class="{{$class1}} text-left border-t text-blue-800 w-96">
-                                    <div class=''>
+                                <td class="{{$class1}}  text-left border-t text-base tracking-wide text-blue-800 w-96">
+                                    <div class='w-96'>
                                         {!! $firstItem['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $ghgTmplId ?? 0) . "'>" . $firstItem['ghgtmpl_name'] . "</a>" : '' !!} </div>
                                 </td>
                                 {{-- Quarter Number --}}
@@ -120,7 +120,7 @@ $layout = 'w-screen';
                             </tr>
                             <tr>
                                 {{--Source--}}
-                                <td class="{{$class1}} text-left border-t text-blue-800 w-96">
+                                <td class="{{$class1}} text-left border-t text-base tracking-wide text-blue-800 w-96">
                                     <div class=''>
                                         {!! $values3['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $values3['ghg_tmpl_id'] ?? 0) . "'>" . $values3['ghgtmpl_name'] . "</a>" : '' !!} </div>
                                 </td>
@@ -146,7 +146,7 @@ $layout = 'w-screen';
                                 #dd($totalEmissions, $typeTimes);
                                 @endphp
                                 <td class="bg-white border-t" colspan="2"></td>
-                                <td class="{{$class1}} text-left border-t font-bold">Total Emissions</td>
+                                <td class="{{$class1}} text-left border-t text-base tracking-wide font-bold">Total Emissions</td>
                                 @foreach(array_values($totalEmissions) as $values)
                                     @for ($i = 0; $i < count($years); $i++)
                                         @php

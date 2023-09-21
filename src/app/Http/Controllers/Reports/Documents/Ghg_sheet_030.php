@@ -17,10 +17,9 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 	use TraitForwardModeReport;
 	use TraitParamsSettingReport;
 
-	protected $viewName = 'document-ghg-summary-report-030-040';
+	protected $viewName = 'document-ghg-summary-report-030';
 	protected $year = '2023';
 	protected $mode = '030';
-	protected $typeTime = 'quarters';
 
 
 	public function getParamColumns($dataSource = [], $modeType = '')
@@ -38,6 +37,13 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 				'multiple' => true,
 
 			],
+			[
+				'title' => 'Month',
+				'dataIndex' => 'only_month',
+				'allowClear' => true,
+				'multiple' => true,
+				// 'hasListenTo' => true,
+			]
 
 		];
 	}
@@ -57,9 +63,18 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
 	{
-		$fieldsTime = array_map(fn ($item) =>Str::singular($this->typeTime) . $item, $params['quarter_time']);
-		$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, $this->typeTime);
-		return collect($groupByScope);
+		if (isset($params['only_month'])) {
+			$fieldsTime = array_map(
+				fn ($item) => $item = strlen($item) < 2 ? '0' . $item : $item,
+				$params['only_month']
+			);
+			$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'months');
+			return collect($groupByScope);
+		} elseif (isset($params['quarter_time'])) {
+			$fieldsTime = array_map(fn ($item) => Str::singular('quarters') . $item, $params['quarter_time']);
+			$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'quarters');
+			return collect($groupByScope);
+		}
 	}
 
 
@@ -67,10 +82,8 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 	{
 		$a = 'year';
 		$b = 'quarter_time';
-		if (Report::isNullParams($params)) {
-			$params[$a] = [2021,2022,2023];
-			$params[$b] = ['1', '2', '3', '4'];
-		}
+		$params[$a] = [2021, 2022, 2023];
+		$params[$b] = ['1', '2', '3', '4'];
 		return $params;
 	}
 
