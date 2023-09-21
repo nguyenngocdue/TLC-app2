@@ -124,13 +124,7 @@ class AdminPermissionMatrixController extends Controller
                 <a target='_blank' class='text-blue-400 cursor-pointer font-semibold' href='$yAxisRoute'> " . $app['title'] . "</a>
             </div>";
     }
-    public function getMatrixDataSource()
-    {
-        return  self::getCollection();
-    }
-    public function getItemDataSourceById($id = null){
-        return Role::findFromCache($id);
-    }
+
     protected function getColumns($extraColumns)
     {
         return  [
@@ -177,7 +171,6 @@ class AdminPermissionMatrixController extends Controller
                         if(str_contains($key,'READ-DATA')) $key = $xId;
                         $cell = $y->roles->where('id',$column)->first();
                         $value = $this->makeCheckbox($cell,$y,$column,$columnIndexName,$mapIndex);
-                        //<< convert to empty string for excel
                         $line[$key] = is_null($value) ? "" : $value;
                         }
                 }
@@ -240,10 +233,7 @@ class AdminPermissionMatrixController extends Controller
     {
         return "<div title='$textPermission'>$textRender</div>";
     }
-    private function getXAxisPrimaryColumns()
-    {
-        return $this->getEntities();
-    }
+
     private function getPreviousNameRole($ignoreName,$extraColumnName){
         return str_replace('-'.Str::upper($ignoreName),'',$extraColumnName);
     }
@@ -312,12 +302,7 @@ class AdminPermissionMatrixController extends Controller
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         if (is_array($items)) $items = collect($items);
         $count = $items->count();
-
-        //<< If current page of HLC is 12, but STW only have 1 page
-        //Force the program to select the smallest page
         $page = ($count) ? min(ceil($count / $perPage), $page) : 1; //<< This line has bug
-        // Log::info("Count $count, perPage: $perPage, Page: $page");
-
         return new LengthAwarePaginator($items->forPage($page, $perPage), $count, $perPage, $page, $options);
     }
     private function getEntities(){
@@ -336,5 +321,16 @@ class AdminPermissionMatrixController extends Controller
         return $this->modelYAxis()::query()
         ->orderBy('name')
         ->get();;
+    }
+    private function getXAxisPrimaryColumns()
+    {
+        return $this->getEntities();
+    }
+    public function getMatrixDataSource()
+    {
+        return  self::getCollection();
+    }
+    public function getItemDataSourceById($id = null){
+        return Role::findFromCache($id);
     }
 }
