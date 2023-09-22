@@ -69,7 +69,7 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 				$currentYear = $years[$i];
 				$previousYear = $years[$i - 1];
 				$difference = $tco2eYears[$previousYear] && !is_null($tco2eYears[$currentYear]) ?
-					round(-1 * (($tco2eYears[$currentYear] - $tco2eYears[$previousYear]) / $tco2eYears[$previousYear]) * 100, 2) : null;
+					round((($tco2eYears[$currentYear] - $tco2eYears[$previousYear]) / $tco2eYears[$previousYear]) * 100, 2) : null;
 				$differences[$currentYear] = $difference;
 			}
 			asort($differences);
