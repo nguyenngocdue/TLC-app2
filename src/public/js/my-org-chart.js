@@ -16,6 +16,7 @@ function init() {
   myDiagram =
     new go.Diagram("myDiagramDiv",  // the DIV HTML element
       {
+        "undoManager.isEnabled": true,
         // Put the diagram contents at the top center of the viewport
         initialDocumentSpot: go.Spot.Top,
         initialViewportSpot: go.Spot.Top,
@@ -70,7 +71,7 @@ function init() {
   function theAvatarConverter(avatar) {
     return avatar;
   }
-  function theResignedConverter(resigned){
+  function theResignedConverter(resigned) {
     return resigned == 1 ? '#d1d5db' : "#ffffff";
   }
 
@@ -79,29 +80,33 @@ function init() {
     $(go.Node, "Auto",
       {
         locationSpot: go.Spot.Top,
-        isShadowed: true, shadowBlur: 1,
+        isShadowed: true,
         cursor: "pointer",
+
+        shadowBlur: 1,
         shadowOffset: new go.Point(0, 1),
         shadowColor: "rgba(0, 0, 0, .14)",
+
         selectionAdornmentTemplate:  // selection adornment to match shape of nodes
           $(go.Adornment, "Auto",
             $(go.Shape, "RoundedRectangle", roundedRectangleParams,
               { fill: null, stroke: "#7986cb", strokeWidth: 3 }
             ),
             $(go.Placeholder)
-          ) , // end Adornment
+          ), // end Adornment
 
-          click: function(e, obj){
-            window.open(obj.part.data.url,'_blank');
-          },
-          toolTip:  // define a tooltip for each node that displays the color as text
+        click: function (e, obj) {
+          window.open(obj.part.data.url, '_blank');
+        },
+
+        toolTip:  // define a tooltip for each node that displays the color as text
           $("ToolTip",
             $(go.TextBlock, { margin: 4 },
               new go.Binding("text", "key"))
           )  // end of Adornment
       },
       $(go.Shape, "RoundedRectangle", roundedRectangleParams,
-        { name: "SHAPE", fill: "#ffffff", strokeWidth: 0 ,},
+        { name: "SHAPE", fill: "#ffffff", strokeWidth: 0, },
         // gold if highlighted, white otherwise
         new go.Binding("fill", "fill")
       ),
@@ -110,7 +115,7 @@ function init() {
           { margin: 8 },
           $(go.Picture,  // flag image, only visible if a nation is specified
             { margin: mr8, visible: false, desiredSize: new go.Size(50, 50) },
-            new go.Binding("source", "avatar",  theAvatarConverter()),
+            new go.Binding("source", "avatar", theAvatarConverter()),
             new go.Binding("visible", "avatar", avatar => avatar !== undefined)
           ),
           $(go.Panel, "Table",
@@ -161,18 +166,18 @@ function init() {
           ),
           $(go.TextBlock, textStyle("phone"),
 
-          new go.Binding("text", "phone", head => "Phone: " + head)
-            ),
-        //   $(go.TextBlock, textStyle("parent"),
-        //     new go.Binding("margin", "headOf", head => mt8), // some space above if there is also a headOf value
-        //     new go.Binding("text", "parent", parent => {
-        //       var parent = myDiagram.model.findNodeDataForKey(parent);
-        //       if (parent !== null) {
-        //         return "Reporting to: " + parent.name;
-        //       }
-        //       return "";
-        //     })
-        //   )
+            new go.Binding("text", "phone", head => "Phone: " + head)
+          ),
+          //   $(go.TextBlock, textStyle("parent"),
+          //     new go.Binding("margin", "headOf", head => mt8), // some space above if there is also a headOf value
+          //     new go.Binding("text", "parent", parent => {
+          //       var parent = myDiagram.model.findNodeDataForKey(parent);
+          //       if (parent !== null) {
+          //         return "Reporting to: " + parent.name;
+          //       }
+          //       return "";
+          //     })
+          //   )
         )
       )
     );
