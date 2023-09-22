@@ -1,4 +1,5 @@
 <td class='w-[{{$widthCell}}px] h-[60px]  {{$class1}} text-right border-t relative '>
+{{-- @dump($difference) --}}
     <div class="align-middle">
         <div class=' items-baseline flex justify-end'>
             <span class="{{$fontBold ?? ''}} items-center flex text-base">{{$tco2e > 0 ? (number_format($tco2e, 2)): ''}}
@@ -21,7 +22,7 @@
                 <span class='text-yellow-600  {{$fontBold ?? ''}}'>0%</span>
                 <br/>
             @else
-                <span class='text-white'>**</span>
+                <span class='text-white'><br/></span>
             @endif
         </div>
     </div>
