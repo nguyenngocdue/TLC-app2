@@ -10,9 +10,10 @@
 $widthCell = 88;
 $class1 = "p-2 bg-white dark:border-gray-600 border-r";
 $class2 =" bg-gray-100 px-4 py-3 border-gray-300 ";
-$timeValues =  App\Utils\Support\Report::assignValues($params)['timeValues'];
-$topNameCol =  App\Utils\Support\Report::assignValues($params)['topNameCol'];
-$columnName = App\Utils\Support\Report::assignValues($params)['columnName'];
+$modelLink =  App\Utils\Support\Report::assignValues($params);
+$timeValues =  $modelLink['timeValues'];
+$topNameCol =  $modelLink['topNameCol'];
+$columnName = $modelLink['columnName'];
 $years = $params['year'];
 #$layout = 'md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl';
 $layout = 'max-w-[1920px] ';
@@ -124,6 +125,7 @@ $layout = 'max-w-[1920px] ';
                                 </td>
                                 {{-- Quarter Number --}}
                                 @if(isset($firstItem[$columnName]))
+                                {{-- @dd($firstItem) --}}
                                     @foreach(array_values($firstItem[$columnName]) as $values)
                                             @for($j = 0; $j < count($years); $j++)
                                                 @php

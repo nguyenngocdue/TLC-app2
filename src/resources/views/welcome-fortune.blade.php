@@ -19,7 +19,6 @@
         </div>
       </div>
       @endforeach
-      
     </div>
     <br/>
 </div>
@@ -35,34 +34,30 @@ for(let i = 0; i < columns.length; i++){
   //   console.log("NULL")
   //   continue;
   // }
-  console.log(itemName)
+  // console.log(itemName)
   var sortable = Sortable.create(el,{
     animation: 150,
     group: 'shared',
-    // store:{
-    //   get: (sortable) => {
-    //     return ["A", "B","C"];
-    //   },
-    //   set: (sortable) => {
-    //     var order = sortable.toArray()
-    //     var instance = Sortable.get(sortable)
-    //     console.log(order, sortable,instance)
-    //   },
-    // },
+    store:{
+      set: (sortable) => {
+        var order = sortable.toArray()
+        console.log(order, sortable)
+      },
+    },
 
-    setData: (dataTransfer, dragEl) => dataTransfer.setData('Text', dragEl.textContent),
-    onChoose: (e) => console.log("onChoose", e, e.oldIndex),
-    onUnchoose: (e) => console.log("onUnchoose", e, e.oldIndex),
-    onStart: (e) => console.log("onStart", e, e.oldIndex),
-    onEnd: (e) => console.log("onEnd", e.item),
-    onAdd: (e) => console.log("onAdd", e.item),
-    onUpdate: (e) => console.log("onUpdate", e.item),
-    onSort: (e) => console.log("onSort", e.item),
-    onRemove: (e) => console.log("onRemove", e.item),
-    onFilter: (e) => console.log("onFilter", e.item),
-    onMove: (e, originalEvent) => console.log("onMove", e.item),
-    onClone: (e) => console.log("onClone", e.item, e.clone),
-    onChange: (e) => console.log("onChange", e.newIndex),
+    // setData: (dataTransfer, dragEl) => dataTransfer.setData('Text', dragEl.textContent),
+    // onChoose: (e) => console.log("onChoose", e, e.oldIndex),
+    // onUnchoose: (e) => console.log("onUnchoose", e, e.oldIndex),
+    // onStart: (e) => console.log("onStart", e, e.oldIndex),
+    // onEnd: (e) => console.log("onEnd", e.item),
+    // onAdd: (e) => console.log("onAdd", e.item),
+    // onUpdate: (e) => console.log("onUpdate", e.item),
+    // onSort: (e) => console.log("onSort", e.item),
+    // onRemove: (e) => console.log("onRemove", e.item),
+    // onFilter: (e) => console.log("onFilter", e.item),
+    // onMove: (e, originalEvent) => console.log("onMove", e.item),
+    // onClone: (e) => console.log("onClone", e.item, e.clone),
+    // onChange: (e) => console.log("onChange", e.newIndex),
     
   });
 }
