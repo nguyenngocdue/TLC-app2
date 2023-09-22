@@ -258,11 +258,10 @@ function searchDiagram() {  // called by button
     var regex = new RegExp(safe, "i");
     var results = myDiagram.findNodesByExample(
       { name: regex },
-      { title: regex },
+      { email: regex },
       { employeeid: regex });
     myDiagram.highlightCollection(results);
     // try to center the diagram at the first node that was found
-    console.log(results)
     if (results.count > 0) myDiagram.centerRect(results.first().actualBounds);
   } else {  // empty string only clears highlighteds collection
     myDiagram.clearHighlighteds();
