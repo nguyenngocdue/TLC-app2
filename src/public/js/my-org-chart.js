@@ -108,7 +108,8 @@ function init() {
       $(go.Shape, "RoundedRectangle", roundedRectangleParams,
         { name: "SHAPE", fill: "#ffffff", strokeWidth: 0, },
         // gold if highlighted, white otherwise
-        new go.Binding("fill", "fill")
+        // new go.Binding("fill", "fill")
+        new go.Binding("fill", "isHighlighted", h => h ? "gold" : "#ffffff").ofObject()
       ),
       $(go.Panel, "Vertical",
         $(go.Panel, "Horizontal",
@@ -246,6 +247,7 @@ function init() {
       { observed: myDiagram, contentAlignment: go.Spot.Center });   // tell it which Diagram to show and pan
 }
 
+var currentResultsIndex = -1;
 // the Search functionality highlights all of the nodes that have at least one data property match a RegExp
 function searchDiagram() {  // called by button
   var input = document.getElementById("mySearch");
@@ -259,12 +261,13 @@ function searchDiagram() {  // called by button
     // create a case insensitive RegExp from what the user typed
     var safe = input.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     var regex = new RegExp(safe, "i");
-    var results = myDiagram.findNodesByExample({ name: regex },
-      { nation: regex },
+    var results = myDiagram.findNodesByExample(
+      { name: regex },
       { title: regex },
-      { headOf: regex });
+      { employeeid: regex });
     myDiagram.highlightCollection(results);
     // try to center the diagram at the first node that was found
+    console.log(results)
     if (results.count > 0) myDiagram.centerRect(results.first().actualBounds);
   } else {  // empty string only clears highlighteds collection
     myDiagram.clearHighlighteds();

@@ -26,11 +26,18 @@ trait TraitParamsSettingReport
         $settings = CurrentUser::getSettings();
         if (isset($settings[$entity][$typeReport][$currentMode])) {
             $params = $settings[$entity][$typeReport][$currentMode];
-            if (Report::isNullParams($params)) {
-                return self::removeNullItems($params);
+            if (Report::isNullParams($params) || empty($params)) {
+                $params = self::removeNullItems($params);
+                $defaultParams = $this->getDefaultValueParams($params, $request);
+                foreach ($defaultParams as $key => $value) {
+                    if(!$params[$key]) {
+                        $params[$key] = $value;
+                    } 
+                }
+                return $params;
             }
             return $params;
         }
-        return [];
+        return $this->getDefaultValueParams([], $request);
     }
 }

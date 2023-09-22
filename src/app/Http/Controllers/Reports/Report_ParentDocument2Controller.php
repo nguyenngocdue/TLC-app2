@@ -69,7 +69,7 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 				$currentYear = $years[$i];
 				$previousYear = $years[$i - 1];
 				$difference = $tco2eYears[$previousYear] && !is_null($tco2eYears[$currentYear]) ?
-					round(-1 * (($tco2eYears[$currentYear] - $tco2eYears[$previousYear]) / $tco2eYears[$previousYear]) * 100, 2) : null;
+					round((($tco2eYears[$currentYear] - $tco2eYears[$previousYear]) / $tco2eYears[$previousYear]) * 100, 2) : null;
 				$differences[$currentYear] = $difference;
 			}
 			asort($differences);
@@ -101,7 +101,6 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 				$values = (array)$values;
 				foreach ($fieldsTime as $time) {
 					try {
-						// dd($fieldsTime, $values[$time]);
 						$dataTimes[$values['ghg_tmpl_id']][$typeTime][$time]['tco2e'][$k1] = $values[$time] ?  round($values[$time], 2) : null;
 						$emissions[$time][$k1][] = $values[$time] ? $values[$time] : null;
 					} catch (Exception $e) {

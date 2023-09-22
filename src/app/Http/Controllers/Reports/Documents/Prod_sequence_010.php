@@ -94,15 +94,11 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $a = 'picker_date';
-        $b = 'project_id';
-        $c = 'sub_project_id';
-        $d = 'prod_routing_id';
         $pickerDate = Report::createDefaultPickerDate('-3 years');
-        $params[$a] = $pickerDate;
-        $params[$b] = $this->projectId;
-        $params[$c] = $this->subProjectId;
-        $params[$d] = $this->prodRoutingId;
+        $params['picker_date'] = $pickerDate;
+        $params['project_id'] = $this->projectId;
+        $params['sub_project_id'] = $this->subProjectId;
+        $params['prod_routing_id'] = $this->prodRoutingId;
         return $params;
     }
 

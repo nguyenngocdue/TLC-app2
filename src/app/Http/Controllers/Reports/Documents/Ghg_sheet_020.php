@@ -186,8 +186,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 
 	protected function getDefaultValueParams($params, $request)
 	{
-		$a = 'year';
-		$params[$a] = $this->year;
+		$params['year'] = $this->year;
 		return $params;
 	}
 

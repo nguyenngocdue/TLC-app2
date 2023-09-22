@@ -14,8 +14,8 @@ $timeValues =  App\Utils\Support\Report::assignValues($params)['timeValues'];
 $topNameCol =  App\Utils\Support\Report::assignValues($params)['topNameCol'];
 $columnName = App\Utils\Support\Report::assignValues($params)['columnName'];
 $years = $params['year'];
-$layout = 'w-screen';
-#dd( App\Utils\Support\Report::assignValues($params));
+#$layout = 'md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl';
+$layout = 'max-w-[1920px] ';
 @endphp
 
 
@@ -38,22 +38,21 @@ $layout = 'w-screen';
                                 <th class="tracking-wide border-l {{$class2}}">Source</th>
                                 @switch($columnName)
                                     @case("years")
-                                        <th id="" colspan="{{count($years)}}" class="border bg-gray-100 py-2">
+                                        <th id="" colspan="{{count($years)}}" class="border-r border-l bg-gray-100 py-2 dark:border-gray-600 border-gray-300">
                                                 <div class="text-gray-700 dark:border-gray-600 ">
-                                                    <span>Year </br>(tCO2e)</span>
+                                                    <span>Year </br><p class="font-normal">(tCO2e)</p></span>
                                                 </div>
                                             </th>
                                         @break
                                     @case("months" || "quarter")
                                             @foreach($timeValues as $value)
-                                            <th id="" colspan="{{count($years)}}" class="border bg-gray-100 py-2">
+                                            <th id="" colspan="{{count($years)}}" class="border-r border-l bg-gray-100 py-2 dark:border-gray-600 border-gray-300">
                                                 <div class="text-gray-700 dark:border-gray-600 ">
-                                                    <span>
-                                                        {{$topNameCol}}
                                                         @php
                                                             $value = $topNameCol ? $value:  App\Utils\Support\DateReport::getMonthAbbreviation($value);
                                                         @endphp
-                                                        {{$value}}</br>(tCO2e)
+                                                    <span>
+                                                        {{$topNameCol}}{{$value}}</br><p class='font-normal'>(tCO2e)</p>
                                                     </span></div>
                                             </th>
                                             @endforeach

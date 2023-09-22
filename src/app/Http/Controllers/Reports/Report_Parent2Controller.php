@@ -216,7 +216,8 @@ abstract class Report_Parent2Controller extends Controller
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
         $params = $this->getParams($request);
-        $params = $this->getDefaultValueParams($params, $request);
+        // dd($params);
+        // $params = $this->getDefaultValueParams($params, $request);
 
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $params);
