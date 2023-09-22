@@ -26,14 +26,14 @@
                 <div class="col-span-3">
                 <label for="">Show Options</label>
                 <div>
-                    <label class="ml-3">BOD
+                    <label>BOD
                         <x-renderer.editable.checkbox name="show_options[is_bod]" cell="{{$showOptions['is_bod'] ?? ''}}"></x-renderer.editable.checkbox>
-                    </label>
-                    <label>Resigned
-                    <x-renderer.editable.checkbox name="show_options[resigned]" cell="{{$showOptions['resigned'] ?? ''}}"></x-renderer.editable.checkbox>
                     </label>
                     <label class="ml-3">Workers
                     <x-renderer.editable.checkbox name="show_options[time_keeping_type]" cell="{{$showOptions['time_keeping_type'] ?? ''}}"></x-renderer.editable.checkbox>
+                    </label>
+                    <label class="ml-3">Resigned
+                    <x-renderer.editable.checkbox name="show_options[resigned]" cell="{{$showOptions['resigned'] ?? ''}}"></x-renderer.editable.checkbox>
                     </label>
                 </div>
                 </div>
