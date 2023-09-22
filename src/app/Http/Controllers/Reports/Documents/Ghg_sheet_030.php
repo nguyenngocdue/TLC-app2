@@ -58,7 +58,6 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 			$params['year'] = $year;
 			$primaryData = (new Ghg_sheet_dataSource())->getDataSource($params)->toArray();
 			$valueOfYears[$year] = array_column(array_values($primaryData), $year);
-
 			$dataSource[$year] = $primaryData;
 		}
 		return collect($dataSource);
