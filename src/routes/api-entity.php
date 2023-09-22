@@ -18,6 +18,7 @@ Route::group([
         if ($app['storeEmpty_and_updateShort'] ?? false) Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");
         if ($app['changeStatusMultiple'] ?? false) Route::post("{$tableName}_changeStatusMultiple", [EntityCRUDControllerForApi::class, 'changeStatusMultiple'])->name($tableName . ".changeStatusMultiple");
         if ($app['getLines'] ?? false) Route::post("{$tableName}_getLines", [EntityCRUDControllerForApi::class, 'getLines'])->name($tableName . ".getLines");
+        // Route::post("{$tableName}_kanban", [EntityCRUDControllerForApi::class, 'kanban'])->name($tableName . ".kanban");
 
         if ($app['renderTableForPopupModals'] ?? false) Route::post("{$tableName}_renderTable", [EntityCRUDControllerForApiRenderer::class, 'renderTable'])->name($tableName . ".renderTable");
         if ($app['cloneTemplate_and_updateShort'] ?? false) Route::post("{$tableName}_cloneTemplate", [EntityCRUDControllerForApiClone::class, 'cloneTemplate'])->name($tableName . ".cloneTemplate");

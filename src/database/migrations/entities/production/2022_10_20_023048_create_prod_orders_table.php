@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('production_name');
             $table->string('compliance_name')->nullable();
+            $table->string('erp_name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('quantity')->nullable();
             $table->unsignedBigInteger('sub_project_id');

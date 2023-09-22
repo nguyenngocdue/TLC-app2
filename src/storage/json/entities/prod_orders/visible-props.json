@@ -44,6 +44,15 @@
         "finished": "true",
         "cancelled": "true"
     },
+    "_erp_name": {
+        "name": "_erp_name",
+        "column_name": "erp_name",
+        "new": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true",
+        "cancelled": "true"
+    },
     "_description": {
         "name": "_description",
         "column_name": "description",

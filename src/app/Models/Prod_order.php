@@ -7,9 +7,10 @@ use App\BigThink\ModelExtended;
 class Prod_order extends ModelExtended
 {
     protected $fillable = [
-        "id", "slug", "name", "status", "production_name", "compliance_name", "description", "quantity",
+        "id", "slug", "name", "status", "description", "quantity",
         "sub_project_id", "prod_routing_id", "status", "meta_type", "meta_id", "owner_id",
         "started_at", "finished_at", "total_hours", "total_man_hours", "room_type_id",
+        "production_name", "compliance_name", "erp_name",
     ];
 
     protected $table = 'prod_orders';
