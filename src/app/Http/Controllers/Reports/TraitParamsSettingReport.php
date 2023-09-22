@@ -28,7 +28,12 @@ trait TraitParamsSettingReport
             $params = $settings[$entity][$typeReport][$currentMode];
             if (Report::isNullParams($params) || empty($params)) {
                 $params = self::removeNullItems($params);
-                $params = $this->getDefaultValueParams($params, $request);
+                $defaultParams = $this->getDefaultValueParams($params, $request);
+                foreach ($defaultParams as $key => $value) {
+                    if(!$params[$key]) {
+                        $params[$key] = $value;
+                    } 
+                }
                 return $params;
             }
             return $params;

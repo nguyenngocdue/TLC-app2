@@ -101,7 +101,6 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 				$values = (array)$values;
 				foreach ($fieldsTime as $time) {
 					try {
-						// dd($fieldsTime, $values[$time]);
 						$dataTimes[$values['ghg_tmpl_id']][$typeTime][$time]['tco2e'][$k1] = $values[$time] ?  round($values[$time], 2) : null;
 						$emissions[$time][$k1][] = $values[$time] ? $values[$time] : null;
 					} catch (Exception $e) {
