@@ -64,34 +64,55 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 			$years = array_keys($tco2eYears);
 			$differences = [];
 			$count = count($tco2eYears) - 1;
-			$differences[reset($years)] = null;
-			if($typeTime !== 'years'){
-				for ($i = $count; $i > 0; $i--) {
-					$currentYear = $years[$i];
-					$previousYear = $years[$i - 1];
-					$difference = $tco2eYears[$previousYear] && !is_null($tco2eYears[$currentYear]) ?
-						round((($tco2eYears[$currentYear] - $tco2eYears[$previousYear]) / $tco2eYears[$previousYear]) * 100, 2) : null;
-					$differences[$currentYear] = $difference;
-				}
-				asort($differences);
-				$tco2es['differences'] = $differences;
-			} else{
-				$years = array_keys($data);
-				array_shift($years);
-				$count = count($years)-1;
-				for ($i = $count; $i > 0; $i--) {
-					$currentYear = $years[$i];
-					$previousYear = $years[$i - 1];
-					$tco2eYears1 = $data[$previousYear]['tco2e'][$previousYear];
-					$tco2eYears2 = $data[$currentYear]['tco2e'][$currentYear];
+			if ($typeTime !== 'years') {
+				if (count($years) > 1) {
+					$differences[reset($years)] = null;
+					for ($i = $count; $i > 0; $i--) {
+						$currentYear = $years[$i];
+						$previousYear = $years[$i - 1];
+						$difference = $tco2eYears[$previousYear] && !is_null($tco2eYears[$currentYear]) ?
+							round((($tco2eYears[$currentYear] - $tco2eYears[$previousYear]) / $tco2eYears[$previousYear]) * 100, 2) : null;
+						$differences[$currentYear] = $difference;
+					}
+					asort($differences);
+					$tco2es['differences'] = $differences;
+				} else {
+					$y = key($tco2es['tco2e']);// get one year
+					$years = array_keys($data);
+					$differences[reset($years)] = null;
 
-					$difference = $tco2eYears1  ? round(($tco2eYears2 - $tco2eYears1)*100 / $tco2eYears1, 2): null ;
-					$differences[$currentYear] = $difference;
+					$count = count($years) - 1;
+					for ($i = $count; $i > 0; $i--) {
+						$valCurrentYear = $years[$i];
+						// dd($valCurrentYear);
+						$valPreviousYear = $years[$i - 1];
+						$tco2eYears1 = $data[$valPreviousYear]['tco2e'][$y];
+						$tco2eYears2 = $data[$valCurrentYear]['tco2e'][$y];
+
+						$difference = $tco2eYears1  ? round(($tco2eYears2 - $tco2eYears1) * 100 / $tco2eYears1, 2) : null;
+						$differences[$valCurrentYear] = $difference;
+					}
+					$tco2es['differences'] = $differences;
+					// dd($years);
+				}
+			} else {
+				$years = array_keys($data);
+				$differences[reset($years)] = null;
+				// dd($differences);
+				$count = count($years) - 1;
+				for ($i = $count; $i > 0; $i--) {
+					$valCurrentYear = $years[$i];
+					$valPreviousYear = $years[$i - 1];
+					$tco2eYears1 = $data[$valPreviousYear]['tco2e'][$valPreviousYear];
+					$tco2eYears2 = $data[$valCurrentYear]['tco2e'][$valCurrentYear];
+
+					$difference = $tco2eYears1  ? round(($tco2eYears2 - $tco2eYears1) * 100 / $tco2eYears1, 2) : null;
+					$differences[$valCurrentYear] = $difference;
 				}
 				$tco2es['differences'] = $differences;
 			}
 		}
-		// dd($data);
+		// dump($data);
 		return $data;
 	}
 
@@ -108,11 +129,12 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 
 	protected  function makeDataByTypeTime($fieldsTime, $dataSource, $typeTime)
 	{
-		// dd($dataSource, $typeTime);
+		// dd($dataSource);
 		$dataTimes = [];
 		$totalEmission = [];
 		foreach ($dataSource as $k1 => $items) {
 			$emissions = [];
+			// dd($items);
 			foreach ($items as $values) {
 				$values = (array)$values;
 				foreach ($fieldsTime as $time) {
@@ -130,7 +152,6 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 				}
 			}
 		}
-		// dd($dataTimes);
 		// dd($dataTimes);
 		$yearDifferences = $this->calculateYearlyDifference($dataTimes, $typeTime);
 		// dd($yearDifferences);
