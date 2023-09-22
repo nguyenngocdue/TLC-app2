@@ -129,7 +129,7 @@ class Report
     public static function isNullParams($params)
     {
         foreach (array_values($params) as $value) {
-            if(is_array($value) && is_null($value[0])) return true;
+            if(is_array($value) && is_null($value[0]) || is_null($value)) return true;
         }
         return false;
     }

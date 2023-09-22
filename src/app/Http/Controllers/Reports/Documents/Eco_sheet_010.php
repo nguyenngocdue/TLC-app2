@@ -121,12 +121,8 @@ class Eco_sheet_010 extends Report_ParentDocument2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $a = 'month';
-        $b = 'project_id';
-        if (Report::isNullParams($params)) {
-            $params[$a] = $this->month ?? date("Y-m");
-            $params[$b] = $this->projectId;
-        }
+        $params['month'] = $this->month ?? date("Y-m");
+        $params['project_id'] = $this->projectId;
         return $params;
     }
 

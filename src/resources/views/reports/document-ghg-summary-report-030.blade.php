@@ -14,7 +14,7 @@ $timeValues =  App\Utils\Support\Report::assignValues($params)['timeValues'];
 $topNameCol =  App\Utils\Support\Report::assignValues($params)['topNameCol'];
 $columnName = App\Utils\Support\Report::assignValues($params)['columnName'];
 $years = $params['year'];
-$layout = 'w-screen';
+$layout = 'w-full md:w-auto ';
 #dd( App\Utils\Support\Report::assignValues($params));
 @endphp
 

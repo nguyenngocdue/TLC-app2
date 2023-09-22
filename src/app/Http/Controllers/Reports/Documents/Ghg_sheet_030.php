@@ -85,10 +85,7 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 
 	protected function getDefaultValueParams($params, $request)
 	{
-		$a = 'year';
-		$b = 'quarter_time';
-		$params[$a] = [2021, 2022, 2023];
-		// $params[$b] = ['1', '2', '3', '4'];
+		$params['year'] = [2023];
 		return $params;
 	}
 
