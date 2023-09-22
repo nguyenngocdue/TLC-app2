@@ -5,8 +5,8 @@
 @section('content')
 <div >
     <div>
-        <x-renderer.button href="/my-org-chart" type="{{$settingsView ? '' : 'secondary'}}">Org Chart </x-renderer.button>
-        <x-renderer.button href="/my-org-chart?approval-tree=true" type="{{$settingsView ? 'secondary' : ''}}">Org Chart ApprovalTree</x-renderer.button>
+        <x-renderer.button href="/my-org-chart" type="{{$settingsView ? '' : 'secondary'}}">Position Org Chart </x-renderer.button>
+        <x-renderer.button href="/my-org-chart?approval-tree=true" type="{{$settingsView ? 'secondary' : ''}}">Approval Tree Org Chart </x-renderer.button>
     </div>
     <div class="no-print">
         <form class="mb-5" method="POST" action="{{route('updateUserSettings')}}" >
