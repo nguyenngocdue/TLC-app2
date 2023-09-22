@@ -43,6 +43,28 @@
                 <x-print.comment5 :relationships="$relationships" :value="$value" />
             </div>
             @break
+        @case('signature_multi')
+            {{-- <div class='grid grid-cols-2 p-2  border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'> --}}
+                {{-- @dd($signature)
+                    <div class="border p-1">
+                        <div>
+                            {!!$signature['value']!!}
+                        </div>
+                        <p class="break-words">{!!$signature['signature_comment']!!}</p>
+                        <x-renderer.avatar-user size="xlarge" uid="{{$signature['owner_id']}}" flipped=1 content="{{$signature['created_at']}}"/>
+                    </div> --}}
+                <div class='p-2  border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
+                    @foreach($value as $signature)
+                        <x-print.signature5 :relationships="$relationships" :dataSource="$value" />
+                    @endforeach
+                </div>
+            {{-- </div> --}}
+            @break
+        @case('signature')
+            <div class='p-2  border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
+                <x-print.signature5 :relationships="$relationships" :dataSource="$value" />
+            </div>
+            @break
         @case('relationship_renderer')
             <div class='p1-2  border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
                 <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} :item="$item"  numberOfEmptyLines="{{$numberOfEmptyLines}}"/>
