@@ -12,7 +12,10 @@ class BuildTree
 {
     protected static $key = 'my_company';
     protected static $fillableUser = ['id', 'name0', 'discipline', 'viewport_uids', 'leaf_uids', 'resigned', 'show_on_beta', 'time_keeping_type', 'department', 'workplace','is_bod'];
-    protected static $fillableUserDiscipline = ['id', 'name', 'def_assignee'];
+    protected static $fillableDataRender = ['id', 'name', 'def_assignee'];
+    protected static $tableDataRender = 'user_disciplines';
+    protected static $keyTableQuery = 'discipline';
+
     private static function buildTree(array &$elements, $parentId = 0)
     {
         $branch = [];
@@ -30,7 +33,7 @@ class BuildTree
         }
         return $branch;
     }
-    private static function arrayGenKey(array $object)
+    public static function arrayGenKey(array $object)
     {
         $result = [];
         foreach ($object as $value) {
@@ -38,7 +41,7 @@ class BuildTree
         }
         return $result;
     }
-    private static function getDataUsers()
+    public static function getDataUsers()
     {
         $queryUsers =  DB::table('users')->select(static::$fillableUser)->get()->toArray();
 
@@ -50,21 +53,21 @@ class BuildTree
 
         return static::arrayGenKey($queryUsers);
     }
-    private static function getDataDisciplines()
+    private static function getDataRenderOrgChart()
     {
-        $queryUserDisciplines = DB::table('user_disciplines')->select(static::$fillableUserDiscipline)->get()->toArray();
+        $queryUserDisciplines = DB::table(static::$tableDataRender)->select(static::$fillableDataRender)->get()->toArray();
 
         return static::arrayGenKey($queryUserDisciplines);
     }
     private static function arrangeDataNow()
     {
-        $disciplines = static::getDataDisciplines();
+        $data = static::getDataRenderOrgChart();
         $users = static::getDataUsers();
         foreach ($users as &$value) {
-            $discipline = $value->discipline;
-            if ($discipline) {
-                $assignee = $disciplines[$discipline]->def_assignee;
-                $value->parent_id = is_numeric($assignee) ? $assignee : 0;
+            $index = $value->{static::$keyTableQuery};
+            if ($index) {
+                $valueParent = $data[$index]->def_assignee;
+                $value->parent_id = is_numeric($valueParent) ? $valueParent : 0;
             } else {
                 $value->parent_id = 0;
             }
