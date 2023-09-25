@@ -1,5 +1,9 @@
+console.log(nodeDataArray)
 function init() {
 
+  const maxW = 300;
+  const maxH = 160;
+  const avatarWidth = 75;
   // Since 2.2 you can also author concise templates with method chaining instead of GraphObject.make
   // For details, see https://gojs.net/latest/intro/buildingObjects.html
   const $ = go.GraphObject.make;  // for conciseness in defining templates
@@ -75,6 +79,119 @@ function init() {
     return resigned == 1 ? '#d1d5db' : "#ffffff";
   }
 
+  // const classicalNode = () => {
+  //   $(go.Panel, "Auto",
+
+  //     $(go.Shape, "RoundedRectangle", roundedRectangleParams,
+  //       { name: "SHAPE", fill: "#ffffff", strokeWidth: 0, },
+  //       // gold if highlighted, white otherwise
+  //       // new go.Binding("fill", "fill")
+  //       new go.Binding("fill", "isHighlighted", h => h ? "gold" : "#ffffff").ofObject()
+  //     ),
+  //     $(go.Panel, "Vertical",
+  //       $(go.Panel, "Horizontal",
+  //         { margin: 8 },
+  //         $(go.Picture,  // flag image, only visible if a nation is specified
+  //           { margin: mr8, visible: false, desiredSize: new go.Size(50, 50) },
+  //           new go.Binding("source", "avatar", theAvatarConverter()),
+  //           new go.Binding("visible", "avatar", avatar => avatar !== undefined)
+  //         ),
+  //         $(go.Panel, "Table",
+  //           $(go.TextBlock,
+  //             {
+  //               row: 0, alignment: go.Spot.Left,
+  //               font: "16px Roboto, sans-serif",
+  //               stroke: "rgba(0, 0, 0, .87)",
+  //               minSize: new go.Size(170, NaN),
+  //             },
+  //             new go.Binding("text", "name")
+  //           ),
+  //           $(go.TextBlock, textStyle("employeeid"),
+  //             {
+  //               row: 1, alignment: go.Spot.Left,
+  //               minSize: new go.Size(170, NaN),
+  //             },
+  //             new go.Binding("text", "employeeid")
+  //           ),
+  //           $(go.TextBlock, textStyle("title"),
+  //             {
+  //               row: 2, alignment: go.Spot.Left,
+  //               minSize: new go.Size(170, NaN),
+  //             },
+  //             new go.Binding("text", "title")
+  //           ),
+  //           // $("PanelExpanderButton", "INFO",
+  //           //   { row: 0, column: 1, rowSpan: 2, margin: ml8 }
+  //           // )
+  //         )
+  //       ),
+  //       $(go.Shape, "LineH",
+  //         {
+  //           stroke: "rgba(0, 0, 0, .60)", strokeWidth: 1,
+  //           height: 1, stretch: go.GraphObject.Horizontal
+  //         },
+  //         new go.Binding("visible").ofObject("INFO")  // only visible when info is expanded
+  //       ),
+  //       $(go.Panel, "Vertical",
+  //         {
+  //           name: "INFO",  // identify to the PanelExpanderButton
+  //           stretch: go.GraphObject.Horizontal,  // take up whole available width
+  //           margin: 8,
+  //           defaultAlignment: go.Spot.Left,  // thus no need to specify alignment on each element
+  //         },
+  //         $(go.TextBlock, textStyle("email"),
+  //           new go.Binding("text", "email", head => "Email: " + head)
+  //         ),
+  //         $(go.TextBlock, textStyle("phone"),
+
+  //           new go.Binding("text", "phone", head => "Phone: " + head)
+  //         )
+  //       )
+  //     )
+  //   )
+  // }
+
+  const modernNode = () => {
+    return $(go.Panel, "Spot",
+      $(go.Shape, "RoundedRectangle",
+        { fill: "#081d7d", stroke: null, width: maxW, height: maxH, },
+      ),
+      $(go.Panel, "Auto", { alignment: new go.Spot(0.5, 0), },
+        $(go.Panel, "Spot", { scale: 1 },
+          $(go.Shape, "Circle", { fill: "white", width: avatarWidth, strokeWidth: 4, stroke: '#081d7d' }),
+          $(go.Panel, "Spot",
+            { isClipping: true },
+            $(go.Shape, "Circle", { width: avatarWidth, strokeWidth: 0 }),
+            $(go.Picture, { width: avatarWidth, height: avatarWidth }, new go.Binding("source", "avatar",),)
+          )
+        )
+      ),
+      $(go.Panel, "Vertical",
+        $(go.Panel, "Vertical", { margin: 10, width: maxW - 10, },
+          $(go.TextBlock, "", { stroke: "white" },
+          ),
+          $(go.TextBlock, { stroke: "white", font: "bold 16pt sans-serif", text: "alignment: Center", textAlign: "center" },
+            new go.Binding("text", "name",)
+          ),
+          $(go.TextBlock, { stroke: "white" },
+            new go.Binding("text", "employeeid",),
+          ),
+        ),
+        $(go.Panel, "Vertical", { width: maxW - 10, },
+          $(go.TextBlock, { stroke: "white", font: "bold 12pt sans-serif", text: "alignment: Center", textAlign: "center" },
+            new go.Binding("text", "title",),
+          ),
+          $(go.TextBlock, { stroke: "white" },
+            new go.Binding("text", "email", email => "Email: " + email),
+          ),
+          $(go.TextBlock, { stroke: "white" },
+            new go.Binding("text", "phone", phone => "Phone: " + phone),
+          ),
+        ),
+      ),
+    )
+  }
+
   // define the Node template
   myDiagram.nodeTemplate =
     $(go.Node, "Auto",
@@ -105,82 +222,8 @@ function init() {
               new go.Binding("text", "key"))
           )  // end of Adornment
       },
-      $(go.Shape, "RoundedRectangle", roundedRectangleParams,
-        { name: "SHAPE", fill: "#ffffff", strokeWidth: 0, },
-        // gold if highlighted, white otherwise
-        // new go.Binding("fill", "fill")
-        new go.Binding("fill", "isHighlighted", h => h ? "gold" : "#ffffff").ofObject()
-      ),
-      $(go.Panel, "Vertical",
-        $(go.Panel, "Horizontal",
-          { margin: 8 },
-          $(go.Picture,  // flag image, only visible if a nation is specified
-            { margin: mr8, visible: false, desiredSize: new go.Size(50, 50) },
-            new go.Binding("source", "avatar", theAvatarConverter()),
-            new go.Binding("visible", "avatar", avatar => avatar !== undefined)
-          ),
-          $(go.Panel, "Table",
-            $(go.TextBlock,
-              {
-                row: 0, alignment: go.Spot.Left,
-                font: "16px Roboto, sans-serif",
-                stroke: "rgba(0, 0, 0, .87)",
-                minSize: new go.Size(170, NaN),
-              },
-              new go.Binding("text", "name")
-            ),
-            $(go.TextBlock, textStyle("employeeid"),
-              {
-                row: 1, alignment: go.Spot.Left,
-                minSize: new go.Size(170, NaN),
-              },
-              new go.Binding("text", "employeeid")
-            ),
-            $(go.TextBlock, textStyle("title"),
-              {
-                row: 2, alignment: go.Spot.Left,
-                minSize: new go.Size(170, NaN),
-              },
-              new go.Binding("text", "title")
-            ),
-            // $("PanelExpanderButton", "INFO",
-            //   { row: 0, column: 1, rowSpan: 2, margin: ml8 }
-            // )
-          )
-        ),
-        $(go.Shape, "LineH",
-          {
-            stroke: "rgba(0, 0, 0, .60)", strokeWidth: 1,
-            height: 1, stretch: go.GraphObject.Horizontal
-          },
-          new go.Binding("visible").ofObject("INFO")  // only visible when info is expanded
-        ),
-        $(go.Panel, "Vertical",
-          {
-            name: "INFO",  // identify to the PanelExpanderButton
-            stretch: go.GraphObject.Horizontal,  // take up whole available width
-            margin: 8,
-            defaultAlignment: go.Spot.Left,  // thus no need to specify alignment on each element
-          },
-          $(go.TextBlock, textStyle("email"),
-            new go.Binding("text", "email", head => "Email: " + head)
-          ),
-          $(go.TextBlock, textStyle("phone"),
-
-            new go.Binding("text", "phone", head => "Phone: " + head)
-          ),
-          //   $(go.TextBlock, textStyle("parent"),
-          //     new go.Binding("margin", "headOf", head => mt8), // some space above if there is also a headOf value
-          //     new go.Binding("text", "parent", parent => {
-          //       var parent = myDiagram.model.findNodeDataForKey(parent);
-          //       if (parent !== null) {
-          //         return "Reporting to: " + parent.name;
-          //       }
-          //       return "";
-          //     })
-          //   )
-        )
-      )
+      modernNode(),
+      // classicalNode(),
     );
 
   // define the Link template, a simple orthogonal line
