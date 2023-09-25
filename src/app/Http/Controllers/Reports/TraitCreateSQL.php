@@ -8,7 +8,9 @@ trait TraitCreateSQL
 {
     public function getSql($params)
     {
-        if(isset($params['picker_date']) && $x = $params['picker_date']) $params['picker_date'] = DateReport::formatDateString($x);
+        if(isset($params['picker_date']) && $x = $params['picker_date']) {
+            $params['picker_date'] = DateReport::formatDateString($x);
+        } 
         $sqlStr = $this->getSqlStr($params);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
