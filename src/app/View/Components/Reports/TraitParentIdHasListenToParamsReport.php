@@ -47,7 +47,7 @@ trait TraitParentIdHasListenToParamsReport
             'multiple' => $this->multiple ? true : false,
             'allowClear' => $this->allowClear,
         ];
-        // dump($this->selected, $tableName, $this->multiple, $params);
+        // dump($params);
         $this->renderJS2($tableName, $this->referData, $this->name);
         return $params;
     }

@@ -53,9 +53,11 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 	{
 		$dataSource = [];
 		$years =  is_array($params['year']) ? $params['year'] : [$params['year']];
+		$valueOfYears = [];
 		foreach ($years as $year) {
 			$params['year'] = $year;
 			$primaryData = (new Ghg_sheet_dataSource())->getDataSource($params)->toArray();
+			$valueOfYears[$year] = array_column(array_values($primaryData), $year);
 			$dataSource[$year] = $primaryData;
 		}
 		return collect($dataSource);
