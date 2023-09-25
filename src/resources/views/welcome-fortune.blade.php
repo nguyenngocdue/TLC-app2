@@ -8,14 +8,14 @@
 
 <div class="container1 mx-auto my-8">
   <div class="overflow-x-auto whitespace-no-wrap">
-    <input type="hidden1" id="category" value="{{$category}}" />
+    <input type="hidden" id="category" value="{{$category}}" />
     <div class="flex">
       @foreach($columns as $id => $column)
-      <div class="mx-1 bg-gray-200 p-4 rounded">
-        <h2 class="text-lg font-bold mb-1">{{$column['name'] . " ".$id  }}</h2>
-        <div id="{{$id}}" class="grid gap-1 w-80">
+      <div class="mx-1 bg-gray-200 p-2 rounded">
+        <h2 class="text-xs font-bold mb-1">{{$column['name'] . " ".$id  }}</h2>
+        <div id="{{$id}}" class="grid gap-1 w-60">
           @foreach($column['items'] as $item)
-            <div id="{{$item->id}}" class="bg-white p-4 shadow rounded">{{$item->name ?? "???"}}</div>
+            <div id="{{$item->id}}" class="bg-white p-1 shadow rounded text-xs">{{$item->name ?? "???"}}</div>
           @endforeach
         </div>
       </div>

@@ -13,12 +13,7 @@ const onEnd = (e) => {
         url: route,
         data: { category, itemId: item.id, newParentId: to.id },
         success: function (response) {
-            // if (callback) {
-            //     callback(response)
-            // } else {
-            toastr.success(response.message)
-            // window.location.href = response.hits[0]['redirect_edit_href']
-            // }
+            // toastr.success(response.message)
         },
         error: function (jqXHR) {
             toastr.error(jqXHR.responseJSON.message)

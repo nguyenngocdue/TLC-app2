@@ -20,7 +20,6 @@ class WelcomeFortuneController extends Controller
             ->get();
         // dump($dataSource[0]);
         $columns = [];
-        $itemIds = [];
         foreach ($dataSource as $item) {
             $id = ($project = $item->getProject) ? $project->id : 0;
             $name = ($project = $item->getProject) ? $project->name : "orphan";
