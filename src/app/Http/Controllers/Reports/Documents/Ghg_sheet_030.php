@@ -67,20 +67,20 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 	{
 		$groupByScope = [];
 		if (isset($params['only_month'])) {
-			$fieldsTime = array_map(fn ($item) => $item = strlen($item) < 2 ? '0' . $item : $item,
+			$fieldsTime = array_map(
+				fn ($item) => $item = strlen($item) < 2 ? '0' . $item : $item,
 				$params['only_month']
 			);
 			$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'months');
 		} elseif (isset($params['quarter_time'])) {
 			$fieldsTime = array_map(fn ($item) => Str::singular('quarters') . $item, $params['quarter_time']);
 			$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'quarters');
-		} else{
+		} else {
 			$fieldsTime = array_map(fn ($item) =>  $item, $params['year']);
 			$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'years');
 			// dd($groupByScope);
-
-			
 		}
+		// dd(collect($groupByScope));
 		return collect($groupByScope);
 	}
 
