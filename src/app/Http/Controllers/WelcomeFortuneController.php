@@ -28,12 +28,11 @@ class WelcomeFortuneController extends Controller
             $columns[$id]['items'][] = $item;
             // $itemIds[] = $item->id;
         }
-        // dump($columns);
-        // dump($columns[1]['items']);
+        $route = route("sub_projects.kanban");
         return view("welcome-fortune", [
-            // 'dataSources' => $dataSource,
             'columns' => $columns,
-            // 'itemIds' => $itemIds,
+            'category' => 'project_id',
+            'route' => $route,
         ]);
     }
 }

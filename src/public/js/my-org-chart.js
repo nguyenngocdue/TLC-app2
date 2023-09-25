@@ -30,7 +30,7 @@ function init() {
         //  var node = e.diagram.findNodeForKey(28);
         //  if (node !== null) e.diagram.commandHandler.scrollToPart(node);
         // },
-        initialScale: 0.5, // Set the initial scale 
+        initialScale: 0.7, // Set the initial scale 
         layout:
           $(go.TreeLayout,  // use a TreeLayout to position all of the nodes
             {
