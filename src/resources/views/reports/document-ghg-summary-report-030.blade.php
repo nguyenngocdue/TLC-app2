@@ -124,8 +124,7 @@ $layout = 'max-w-[1920px] ';
                                         {!! $firstItem['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $ghgTmplId ?? 0) . "'>" . $firstItem['ghgtmpl_name'] . "</a>" : '' !!} </div>
                                 </td>
                                 {{-- Quarter Number --}}
-                                @if(isset($firstItem[$columnName]))
-                                {{-- @dd($firstItem) --}}
+                                @if(isset($firstItem[$columnName]) && count($years) > 1)
                                     @foreach(array_values($firstItem[$columnName]) as $values)
                                             @for($j = 0; $j < count($years); $j++)
                                                 @php
@@ -138,7 +137,18 @@ $layout = 'max-w-[1920px] ';
                                                 @endphp 
                                                 @include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference])
                                             @endfor
-
+                                    @endforeach
+                                @elseif(isset($firstItem[$columnName]) &&  count($years) === 1)
+                                    @php
+                                        $data = $firstItem[$columnName];
+                                        $tco2es = array_map(fn($item) => $item['tco2e'], $data);
+                                    @endphp
+                                    @foreach($tco2es as $key => $values)
+                                                @php
+                                                    $tco2e = $values[$years[0]];
+                                                    $difference= $data[$key]['differences'][$key];
+                                                @endphp
+                                                @include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference])
                                     @endforeach
                                 @else
                                 <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
@@ -146,8 +156,8 @@ $layout = 'max-w-[1920px] ';
                                 </td>
                                 @endif
                                 
-                                @foreach(array_values($remainingItem) as $values3)
                             </tr>
+                                @foreach(array_values($remainingItem) as $values3)
                             <tr>
                                 {{--Source--}}
                                 <td class="{{$class1}} text-left border-t text-base tracking-wide text-blue-800 w-96">
@@ -155,19 +165,34 @@ $layout = 'max-w-[1920px] ';
                                         {!! $values3['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $values3['ghg_tmpl_id'] ?? 0) . "'>" . $values3['ghgtmpl_name'] . "</a>" : '' !!} </div>
                                 </td>
                                 {{-- Quarter Number --}}
-                                @foreach(array_values($values3[$columnName]) as $values)
-                                    @for($j = 0; $j < count($years); $j++) 
-                                        @php
-                                        try {
-                                            $tco2e=$values['tco2e'][$years[$j]];
-                                            $difference=$values['differences'][$years[$j]];
-                                        } catch (Exception $e){
-                                            continue;
-                                        }
-                                        @endphp 
-                                        @include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference])
-                                    @endfor
-                                @endforeach
+                                @if(isset($values3[$columnName]) && count($years) > 1)
+                                    @foreach(array_values($values3[$columnName]) as $values)
+                                        @for($j = 0; $j < count($years); $j++) 
+                                            @php
+                                            try {
+                                                $tco2e=$values['tco2e'][$years[$j]];
+                                                $difference=$values['differences'][$years[$j]];
+                                            } catch (Exception $e){
+                                                continue;
+                                            }
+                                            @endphp 
+                                            @include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference])
+                                        @endfor
+                                    @endforeach
+                                {{-- Year === 1 --}}
+                                @elseif(isset($values3[$columnName]) && count($years) === 1)
+                                 @php
+                                        $data = $values3[$columnName];
+                                        $tco2es = array_map(fn($item) => $item['tco2e'], $data);
+                                    @endphp
+                                    @foreach($tco2es as $key => $values)
+                                                @php
+                                                    $tco2e = $values[$years[0]];
+                                                    $difference= $data[$key]['differences'][$key];
+                                                @endphp
+                                                @include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference])
+                                    @endforeach
+                                @endif
                             </tr>
                             @endforeach
                             </tr>
@@ -175,25 +200,39 @@ $layout = 'max-w-[1920px] ';
                             @endforeach
                             <tr>
                                 {{-- End Row --}}
-                                @php
-                                $totalEmissions = array_values($tableDataSource['total_emission']);
-                                #dd($totalEmissions, $timeValues);
-                                @endphp
-                                <td class="bg-white border-t" colspan="2"></td>
-                                <td class="{{$class1}} text-left border-t text-base tracking-wide font-bold">Total Emissions</td>
-                                @foreach(array_values($totalEmissions) as $values)
-                                    @for ($i = 0; $i < count($years); $i++)
-                                        @php
-                                            try {
-                                                $tco2e=$values['tco2e'][$years[$i]]; 
-                                                $difference=$values['differences'][$years[$i]]; 
-                                            } catch (\Exception $e){
-                                                continue;
-                                            }
+                                    @php
+                                    $totalEmissions = array_values($tableDataSource['total_emission']);
+                                    @endphp
+                                    <td class="bg-white border-t" colspan="2"></td>
+                                    <td class="{{$class1}} text-left border-t text-base tracking-wide font-bold">Total Emissions</td>
+                                    @if(count($years) > 1)
+                                        @foreach(array_values($totalEmissions) as $values)
+                                            @for ($i = 0; $i < count($years); $i++)
+                                                @php
+                                                    try {
+                                                        $tco2e=$values['tco2e'][$years[$i]]; 
+                                                        $difference=$values['differences'][$years[$i]]; 
+                                                    } catch (\Exception $e){
+                                                        continue;
+                                                    }
+                                                @endphp
+                                                @include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference, 'fontBold' => 'font-bold'])
+                                            @endfor
+                                        @endforeach
+                                    @elseif(count($years) === 1)
+                                         @php
+                                        $totalEmissions = $tableDataSource['total_emission'];
+                                        $tco2es = array_map(fn($item) => $item['tco2e'], $totalEmissions);
                                         @endphp
-                                        @include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference, 'fontBold' => 'font-bold'])
-                                    @endfor
-                                @endforeach
+                                        @foreach($tco2es as $key => $values)
+                                                    @php
+                                                        $tco2e = $values[$years[0]];
+                                                        $difference= $totalEmissions[$key]['differences'][$key];
+                                                    @endphp
+                                                    @include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference])
+                                        @endforeach
+                                    @else
+                                    @endif
                             </tr>
                         </tbody>
                     </table>

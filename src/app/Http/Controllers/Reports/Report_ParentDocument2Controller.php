@@ -84,10 +84,10 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 					$count = count($years) - 1;
 					for ($i = $count; $i > 0; $i--) {
 						$valCurrentYear = $years[$i];
-						// dd($valCurrentYear);
 						$valPreviousYear = $years[$i - 1];
 						$tco2eYears1 = $data[$valPreviousYear]['tco2e'][$y];
 						$tco2eYears2 = $data[$valCurrentYear]['tco2e'][$y];
+						// dd($y);
 
 						$difference = $tco2eYears1  ? round(($tco2eYears2 - $tco2eYears1) * 100 / $tco2eYears1, 2) : null;
 						$differences[$valCurrentYear] = $difference;
@@ -130,31 +130,49 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 	protected  function makeDataByTypeTime($fieldsTime, $dataSource, $typeTime)
 	{
 		// dd($dataSource);
+		$years = array_keys($dataSource->toArray());
 		$dataTimes = [];
 		$totalEmission = [];
 		foreach ($dataSource as $k1 => $items) {
 			$emissions = [];
 			// dd($items);
 			foreach ($items as $values) {
-				$values = (array)$values;
-				foreach ($fieldsTime as $time) {
-					try {
-						$dataTimes[$values['ghg_tmpl_id']][$typeTime][$time]['tco2e'][$k1] = $values[$time] ?  round($values[$time], 2) : null;
-						$emissions[$time][$k1][] = $values[$time] ? $values[$time] : null;
-					} catch (Exception $e) {
-						continue;
+						if(count($years) > 0) {
+							$values = (array)$values;
+							foreach ($fieldsTime as $time) {
+								try {
+									$dataTimes[$values['ghg_tmpl_id']][$typeTime][$time]['tco2e'][$k1] = $values[$time] ?  round($values[$time], 2) : null;
+									$emissions[$time][$k1][] = $values[$time] ? $values[$time] : null;
+								} catch (Exception $e) {
+									continue;
+								}
+							}
+						} else{
+							foreach ($fieldsTime as $time) {
+								try {
+									$quarterKeys = array_flip(["quarter1", "quarter2", "quarter3", "quarter4"]);
+									$quarters = array_intersect_key($values, $quarterKeys);
+
+									$dataTimes[$values['ghg_tmpl_id']][$typeTime][$time]['tco2e'][$k1] = $values[$time] ?  round($values[$time], 2) : null;
+									$emissions[$time][$k1][] = $values[$time] ? $values[$time] : null;
+								} catch (Exception $e) {
+									continue;
+								}
+							}
+
+							// dd($fieldsTime);
+						}
 					}
-				}
-			}
-			foreach ($emissions as $field => $items) {
-				foreach ($items as $year => $values) {
-					$totalEmission[$field]['tco2e'][$year] = array_sum($values) ? array_sum($values) : null;
-				}
-			}
+					foreach ($emissions as $field => $items) {
+						foreach ($items as $year => $values) {
+							$totalEmission[$field]['tco2e'][$year] = array_sum($values) ? array_sum($values) : null;
+						}
+					}
+
 		}
 		// dd($dataTimes);
 		$yearDifferences = $this->calculateYearlyDifference($dataTimes, $typeTime);
-		// dd($yearDifferences);
+		// dump($yearDifferences);
 		$totalEmission = $this->calculateEachYears($totalEmission, $typeTime);
 		$dataSource = array_map(function ($items) use ($yearDifferences, $typeTime) {
 			$items = (array)$items;
