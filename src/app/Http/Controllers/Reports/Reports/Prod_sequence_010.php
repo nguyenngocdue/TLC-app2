@@ -13,8 +13,8 @@ class Prod_sequence_010 extends Report_Parent2Controller
     protected $maxH = 50;
     protected $typeView = 'report-pivot';
     protected $modeType = 'prod_sequence_010';
-    protected $tableTrueWidth = false;
     protected $mode='010';
+    protected $tableTrueWidth = false;
     protected $projectId = 5;
     protected $subProjectId = 21;
     protected $prodRoutingId = 2;
