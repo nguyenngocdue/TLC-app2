@@ -45,11 +45,12 @@ class Prod_sequence_dataSource extends Controller
                     ps.id AS prod_sequence_id,
                     SUBSTR(pru.date, 1, 7) AS `month`,
                     pru.date AS date_prod_run,
-                    pru.start,
-                    pru.end,
-                    ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/60/60, 2) AS hours,
-                    pru.worker_number AS pru_worker_number,
-                    ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/60/60, 2) * pru.worker_number AS man_hours
+                    #pru.start,
+                    #pru.end,
+                    #ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/60/60, 2) AS hours,
+                    #pru.worker_number AS pru_worker_number,
+                    #ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/60/60, 2) * pru.worker_number AS man_hours
+                    pru.total_man_hours AS man_hours
                     FROM 
                         sub_projects sp, 
                         prod_orders po, 
@@ -66,8 +67,10 @@ class Prod_sequence_dataSource extends Controller
         if ($sub = $valOfParams['prod_order_id']) $sql .= "\n AND ps.prod_order_id =  $sub";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prde.prod_routing_link_id IN ($prl)";
         if ($prl = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id IN ($prl)";
-        
+        if ($prl = $valOfParams['prod_discipline_id']) $sql .= "\n AND prde.erp_routing_link_id IN ($prl)";
+
         $sql .= "\n 
+                    #AND ps.id = 347
                     AND po.sub_project_id = sp.id
                     AND po.prod_routing_id = pr.id
                     AND ps.prod_order_id = po.id
