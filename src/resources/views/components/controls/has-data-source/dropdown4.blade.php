@@ -10,7 +10,7 @@
         @endphp
         <input id='{{$id}}' name='{{$name}}' class='{{$classList}} readonly' value="{{$selected}}" type="hidden" readonly/>
         <div class="px-2" title="#{{$selected}}">{{$label[0]??""}}</div>
-        <div id='div_{{$id}}' class="px-2" title="#{{$selected}}"></div>
+        <div id='div_{{$id}}' class="px-2 whitespace-nowrap" title="#{{$selected}}"></div>
         <script>
             label = (l = ki['{{$table}}']?.[{{$selected}}]?.['name'] ) ? l : "Nameless #{{$selected}}"; ;
             $("[id='div_{{$id}}']").html(label)

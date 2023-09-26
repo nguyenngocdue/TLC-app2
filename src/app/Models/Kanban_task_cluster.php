@@ -9,7 +9,7 @@ class Kanban_task_cluster extends ModelExtended
     protected $fillable = ['id', 'name', 'description', 'status', 'owner_id'];
 
     public static $eloquentParams = [
-        "getGroups" => ["hasMany", Kanban_task_group::class, "kanban_group_id"],
+        "getGroups" => ["hasMany", Kanban_task_group::class, "kanban_cluster_id"],
     ];
 
     public static $oracyParams = [];
