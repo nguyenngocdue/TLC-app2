@@ -50,8 +50,8 @@
         <x-renderer.button type="secondary" onClick="searchDiagram()" >Search</x-renderer.button>
     </div>
     <div class="relative">
-        <div id="myOverviewDiv" class="w-60 h-60 absolute top-1 left-1 z-30 border bg-gray-100 border-gray-100"
-        style="cursor: move;">
+        <div id="myOverviewDiv" class="w-60 h-60 absolute top-1 left-1 border bg-gray-100 border-gray-100"
+        style="cursor: move; z-index:19;">
             <canvas tabindex="0" width="198" height="98" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none; width: 198px; height: 98px; cursor: move;"></canvas>
             <div style="position: absolute; overflow: auto; width: 198px; height: 98px; z-index: 1;">
                 <div style="position: absolute; width: 1px; height: 1px;"></div>

@@ -1,0 +1,47 @@
+{
+    "new": {
+        "name": "new",
+        "location": "160.00 110.00",
+        "new": "",
+        "assigned": "true",
+        "rejected": "true",
+        "finished": "true",
+        "future": "true"
+    },
+    "assigned": {
+        "name": "assigned",
+        "location": "260.00 20.00",
+        "new": "true",
+        "assigned": "",
+        "rejected": "true",
+        "finished": "true",
+        "future": "true"
+    },
+    "rejected": {
+        "name": "rejected",
+        "location": "-140.00 60.00",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "",
+        "finished": "true",
+        "future": "true"
+    },
+    "finished": {
+        "name": "finished",
+        "location": "110.00 -70.00",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "finished": "",
+        "future": "true"
+    },
+    "future": {
+        "name": "future",
+        "location": "-240.00 -30.00",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "finished": "true",
+        "future": ""
+    }
+}

@@ -4,21 +4,24 @@ const setValue = (sortable) => {
     console.log(order, sortable.el)
 }
 
+function getCharactersAfterLastUnderscore(str) {
+    const lastUnderscoreIndex = str.lastIndexOf('_');
+    return (lastUnderscoreIndex !== -1) ? str.substring(lastUnderscoreIndex + 1) : str;
+
+}
+
 const onEnd = (e) => {
     const { /*from,*/ to, item } = e
     const category = $('#category').val()
     console.log(to.id, item.id, category)
+    const itemId = getCharactersAfterLastUnderscore(item.id)
+    const newParentId = getCharactersAfterLastUnderscore(to.id)
     $.ajax({
         method: "POST",
         url: route,
-        data: { category, itemId: item.id, newParentId: to.id },
+        data: { category, itemId, newParentId },
         success: function (response) {
-            // if (callback) {
-            //     callback(response)
-            // } else {
-            toastr.success(response.message)
-            // window.location.href = response.hits[0]['redirect_edit_href']
-            // }
+            // toastr.success(response.message)
         },
         error: function (jqXHR) {
             toastr.error(jqXHR.responseJSON.message)
@@ -27,17 +30,33 @@ const onEnd = (e) => {
 }
 
 const kanbanInit = (columns, route) => {
-    for (let i = 0; i < columns.length; i++) {
-        const itemName = columns[i]
-        var el = document.getElementById(itemName);
-        // if(!el) {
-        //   console.log("NULL")
-        //   continue;
-        // }
-        // console.log(itemName)
-        var sortable = Sortable.create(el, {
+
+    const wrappers = ["wrapper_0",]
+    for (let i = 0; i < wrappers.length; i++) {
+        const rowName = wrappers[i]
+        var el = document.getElementById(rowName);
+        Sortable.create(el, {
             animation: 150,
-            group: 'shared',
+            group: 'wrapperGroup',
+        });
+    }
+
+    const rows = ["row_0", "row_1", "row_2"]
+    for (let i = 0; i < rows.length; i++) {
+        const rowName = rows[i]
+        var el = document.getElementById(rowName);
+        Sortable.create(el, {
+            animation: 150,
+            group: 'rowGroup',
+        });
+    }
+
+    for (let i = 0; i < columns.length; i++) {
+        const itemName = "column_" + columns[i]
+        var el = document.getElementById(itemName);
+        Sortable.create(el, {
+            animation: 150,
+            group: 'columnGroup',
             // store: {
             //     set: setValue,
             // },
