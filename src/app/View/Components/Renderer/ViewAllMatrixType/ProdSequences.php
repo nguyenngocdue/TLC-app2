@@ -195,7 +195,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
             ],
             'quantity' => ($v = $y->quantity) ? $v : "",
             'status' => $status_object,
-            'room_type' => ($y->getRoomType) ? $y->getRoomType->name : "",
+            'room_type' => (object)[
+                'cell_div_class' => 'whitespace-nowrap',
+                'value' => ($y->getRoomType) ? $y->getRoomType->name : ""
+            ],
             'started_at' => substr($started_at, 0, 10),
             'finished_at' => $finished_at,
             // 'finished_at' => ($y->status === 'finished') ? substr($finished_at, 0, 10) : "",
