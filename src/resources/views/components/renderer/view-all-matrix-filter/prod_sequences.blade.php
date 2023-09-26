@@ -46,7 +46,7 @@
                     selected="{{$viewportParams['prod_discipline_id']}}"
                     />
             </div>
-            <div class="col-span-2">
+            {{-- <div class="col-span-2">
                 Production Routing Link
                 <x-renderer.view-all-matrix-filter.ProdRoutingLinkFilter 
                     tableName="prod_routing_links" 
@@ -57,7 +57,7 @@
                     :selected="$viewportParams['prod_routing_link_id']"
                     multiple="true"
                     />
-            </div>
+            </div> --}}
         </div>
         <x-renderer.button type='primary' htmlType="submit" icon="fa-sharp fa-solid fa-check">Apply Filter</x-renderer.button>
     </div>

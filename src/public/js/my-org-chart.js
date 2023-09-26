@@ -5,6 +5,7 @@ function init() {
   const maxH = 160;
   const avatarWidth = 100;
   const tlcBlue = "#081d7d";
+  const highlighted = "#b60612";
   // Since 2.2 you can also author concise templates with method chaining instead of GraphObject.make
   // For details, see https://gojs.net/latest/intro/buildingObjects.html
   const $ = go.GraphObject.make;  // for conciseness in defining templates
@@ -90,7 +91,7 @@ function init() {
     return $(go.Panel, "Spot",
       $(go.Shape, "RoundedRectangle",
         { fill: tlcBlue, stroke: null, width: maxW, height: maxH, },
-        new go.Binding("fill", "isHighlighted", h => h ? "gold" : tlcBlue).ofObject(),
+        new go.Binding("fill", "isHighlighted", h => h ? highlighted : tlcBlue).ofObject(),
       ),
       $(go.Panel, "Auto", { alignment: new go.Spot(0.5, 0), },
         $(go.Panel, "Spot", { scale: 1 },
