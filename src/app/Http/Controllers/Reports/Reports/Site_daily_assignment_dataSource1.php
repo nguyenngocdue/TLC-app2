@@ -48,6 +48,7 @@ class Site_daily_assignment_dataSource1 extends Controller
         if(isset($params['user_team_site_id'])) $sql .= "\n AND sda.site_team_id IN ({{user_team_site_id}})";
         if($startDate) $sql .= "\n AND sda.site_date >= '$startDate'";
         if($endDate) $sql .= "\n AND sda.site_date <= '$endDate'";
+        // dump($sql);
         return $sql;
     }
 

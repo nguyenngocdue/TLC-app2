@@ -8,6 +8,7 @@ trait TraitCreateSQL
 {
     public function getSql($params)
     {
+        // dd($params);
         if(isset($params['picker_date']) && $x = $params['picker_date']) {
             $params['picker_date'] = DateReport::formatDateString($x);
         } 

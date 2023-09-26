@@ -96,7 +96,7 @@
         "insert_column_row_fields": null,
         "column_fields": null,
         "data_fields": null,
-        "sort_by": "user_id{\"column\":\"users.name\"};",
+        "sort_by": "user_id{\"column\":\"users.name0\"};",
         "is_raw": "true"
     },
     "eco_labor_impact": {
@@ -120,47 +120,66 @@
     "hr_timesheet_line_employee_date": {
         "name": "hr_timesheet_line_employee_date",
         "filters": "category_id{ \"title\":\"Team\", \"allowClear\": true, \"multiple\":true }; user_id{ \"title\":\"User\", \"allowClear\":true, \"multiple\":true }; workplace_id{ \"title\" :\"Workplace\", \"allowClear\":true, \"multiple\":true }; department_id{ \"title\":\"Department\", \"allowClear\":true, \"multiple\":true }; picker_date{\"title\":\"Date\"};",
-        "row_fields": "staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name\", \"width\":200};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};department_id{\"column\":\"departments.name\"}",
+        "row_fields": "staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name0\", \"width\":200};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};department_id{\"column\":\"departments.name\"}",
         "insert_column_row_fields": null,
         "column_fields": "time_sheet_start_time{\"value_index\":\"time_sheet_durations\",\"title\":\"Timesheet Hours\", \"width\":50, \"align\": \"right\"}; time_sheet_start_time_wfh{\"value_index\":\"time_sheet_durations_wfh\",\"title\":\"Timesheet WFH\"}; time_sheet_start_time_otr{ \"value_index\":\"time_sheet_durations_otr\", \"title\":\"Timesheet OTR\"}",
         "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"}; time_sheet_durations_wfh{\"title\":\"Total WFH\",\"aggregation\":\"sum\"}; time_sheet_durations_otr{\"title\":\"Total OTR\",\"aggregation\":\"sum\"}",
-        "sort_by": "user_id{\"column\":\"users.name\" };"
+        "sort_by": "user_id{\"column\":\"users.name0\" };"
     },
     "hr_timesheet_line_employee_project": {
         "name": "hr_timesheet_line_employee_project",
         "filters": "user_id{ \"title\":\"User\", \"allowClear\":true, \"multiple\":true }; workplace_id{ \"title\" :\"Workplace\", \"allowClear\":true, \"multiple\":true }; category_id{ \"title\":\"Team\", \"allowClear\": true, \"multiple\":true }; sub_project_id{ \"title\" :\"Sub Project\", \"allowClear\":true, \"multiple\":true }; picker_date{ \"title\":\"Date\", \"allowClear\":true };",
-        "row_fields": "staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name\",\"width\":200};discipline_id{\"column\":\"user_disciplines.name\",\"width\":280};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};",
+        "row_fields": "staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name0\",\"width\":200};discipline_id{\"column\":\"user_disciplines.name\",\"width\":280};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};",
         "insert_column_row_fields": null,
         "column_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\"};",
         "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"};",
-        "sort_by": "user_id{\"column\":\"users.name\"};"
+        "sort_by": "user_id{\"column\":\"users.name0\"};"
     },
     "hr_timesheet_line_project_date": {
         "name": "hr_timesheet_line_project_date",
         "filters": "sub_project_id{ \"title\":\"Sub Project\", \"allowClear\": true, \"multiple\":true };department_id{ \"title\":\"Department\", \"allowClear\":true, \"multiple\":true };user_id{ \"title\":\"User\", \"allowClear\":true, \"multiple\":true }; workplace_id{ \"title\":\"Workplace\", \"allowClear\":true, \"multiple\":true };picker_date{\"title\":\"Month\", \"allowClear\":true};",
-        "row_fields": "sub_project_id{ \"column\":\"sub_projects.name\", \"title\":\"Sub Project\"};lod_id{\"column\":\"terms.name\",\"title\":\"LOD\"};department_id{\"column\":\"departments.name\"};staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name\",\"width\":200};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};discipline_id{\"column\":\"user_disciplines.name\",\"width\":280};pj_task_id{\"column\":\"pj_tasks.name\",\"title\":\"Task\",\"width\":200};",
+        "row_fields": "sub_project_id{ \"column\":\"sub_projects.name\", \"title\":\"Sub Project\"};lod_id{\"column\":\"terms.name\",\"title\":\"LOD\"};department_id{\"column\":\"departments.name\"};staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name0\",\"width\":200};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};discipline_id{\"column\":\"user_disciplines.name\",\"width\":280};pj_task_id{\"column\":\"pj_tasks.name\",\"title\":\"Task\",\"width\":200};",
         "insert_column_row_fields": null,
         "column_fields": "time_sheet_start_time{\"value_index\":\"time_sheet_durations\",\"title\":\"Timesheet Hours\", \"width\":50, \"align\": \"right\"};",
         "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"};",
-        "sort_by": "sub_project_id{\"column\":\"sub_projects.name\"}; user_id{\"column\":\"users.name\", \"order\":\"asc\"};"
+        "sort_by": "sub_project_id{\"column\":\"sub_projects.name\"}; user_id{\"column\":\"users.name0\", \"order\":\"asc\"};"
     },
     "hr_timesheet_line_team_project": {
         "name": "hr_timesheet_line_team_project",
         "filters": "category_id{ \"title\":\"Team\", \"allowClear\": true, \"multiple\":true }; workplace_id{ \"title\":\"Workplace\", \"allowClear\":true, \"multiple\":true }; sub_project_id{ \"title\":\"Sub Project\", \"allowClear\": true, \"multiple\":true }; picker_date{\"title\":\"Month\", \"allowClear\":true};",
         "row_fields": "workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};",
         "insert_column_row_fields": null,
-        "column_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\"};",
+        "column_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\", \"hidden\": true};",
         "data_fields": "time_sheet_durations{\"title\":\"Total\", \"aggregation\":\"sum\",\"with\":80,\"align\":\"right\"}",
-        "sort_by": "sub_project_id{\"column\":\"sub_projects.name\"}; user_id{\"column\":\"users.name\" };"
+        "sort_by": "sub_project_id{\"column\":\"sub_projects.name\"}; user_id{\"column\":\"users.name0\" };"
+    },
+    "prod_sequence_010": {
+        "name": "prod_sequence_010",
+        "filters": "month{ \"title\":\"Month\"};project_id{ \"title\":\"Project\"};sub_project_id{ \"title\":\"Sub Project\",\"allowClear\":true,\"hasListenTo\":true };prod_routing_id{ \"title\":\"Production Routing\",\"multiple\":true,\"hasListenTo\":true};prod_order_id{ \"title\":\"Production Order\",\"multiple\":true,\"hasListenTo\":true };erp_routing_link_id{\"title\":\"Erp Routing Link\",\"multiple\":true};prod_routing_link_id{\"title\":\"Prod Routing Link\",\"multiple\":true, \"hasListenTo\":true };prod_discipline_id{\"title\":\"Prod Discipline\",\"multiple\":true}",
+        "row_fields": "project_id{ \"column\":\"projects.name\",\"title\":\"Project\"};sub_project_id{\"column\":\"sub_projects.name\", \"title\":\"Sub Project\"};prod_routing_id{\"column\":\"prod_routings.name\", \"title\":\"Production Routing\"};prod_order_id{\"column\":\"prod_orders.name\", \"title\":\"Production Order\"};erp_routing_link_id{\"column\":\"erp_routing_links.name\",\"title\":\"ERP Routing Link\"};prod_routing_link_id{\"column\":\"prod_routing_links.name\", \"title\":\"Production Routing Link\"};prod_discipline_id{\"column\":\"prod_disciplines.name\", \"title\":\"Production Discipline\"};",
+        "insert_column_row_fields": null,
+        "column_fields": "man_hours{\"value_index\":\"man_hours\",\"title\":\"Man Hours\", \"width\":50, \"align\": \"right\",\"aggregation\":\"sum\",\"hidden\":true}",
+        "data_fields": "man_hours{ \"title\":\"Total Man Hours\",\"width\":60,\"align\":\"right\",\"aggregation\":\"sum\",\"align\":\"right\",\"value_index\":\"man_hours\"}",
+        "sort_by": null
+    },
+    "prod_sequence_110": {
+        "name": "prod_sequence_110",
+        "filters": "sub_project_id{ \"title\":\"Sub Project\", \"allowClear\": true, \"multiple\":true }",
+        "row_fields": "project_id{ \"column\":\"projects.name\",\"title\":\"Project\"};sub_project_id{\"column\":\"sub_projects.name\", \"title\":\"Sub Project\"};prod_routing_id{\"column\":\"prod_routings.name\", \"title\":\"Prod \"};prod_order_id{\"column\":\"prod_orders.name\", \"title\":\"Prod Order\"};",
+        "insert_column_row_fields": null,
+        "column_fields": null,
+        "data_fields": null,
+        "sort_by": null,
+        "is_raw": "true"
     },
     "site_daily_assignment_110": {
         "name": "site_daily_assignment_110",
         "filters": "picker_date{ \"title\":\"Date\"}; user_team_site_id{ \"title\":\"Team Site\", \"allowClear\": true, \"multiple\":true };",
-        "row_fields": "site_date{};site_daily_assignment_id{\"column\":\"site_daily_assignments.name\",\"title\":\"Site Daily Assignment\"}; site_daily_assignment_line_id{\"title\":\"Site Daily Assignment Line\"};site_daily_assignment_line_user_id{\"column\":\"users.name\",\"title\":\"User\",\"width\":200};site_team_id{\"column\":\"user_team_sites.name\",\"title\":\"Site Team\"};sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Project\"}",
+        "row_fields": "site_date{};site_daily_assignment_id{\"column\":\"site_daily_assignments.name\",\"title\":\"Site Daily Assignment\"}; site_daily_assignment_line_id{\"title\":\"Site Daily Assignment Line\"};site_daily_assignment_line_user_id{\"column\":\"users.name0\",\"title\":\"User\",\"width\":200};site_team_id{\"column\":\"user_team_sites.name\",\"title\":\"Site Team\"};sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Project\"}",
         "insert_column_row_fields": null,
         "column_fields": null,
         "data_fields": null,
-        "sort_by": "user_id{\"column\":\"users.name\"};",
+        "sort_by": "user_id{\"column\":\"users.name0\"};",
         "is_raw": "true"
     },
     "site_daily_assignment_120": {
@@ -185,7 +204,7 @@
     "site_daily_assignment_task_user": {
         "name": "site_daily_assignment_task_user",
         "filters": "picker_date{ \"title\":\"Date\"}; sub_project_id{ \"title\":\"Sub Project\", \"allowClear\": true, \"multiple\":true };prod_routing_id{ \"title\":\"Production Routing\", \"allowClear\": true} ;prod_routing_link_id{ \"title\":\"Task\", \"allowClear\": true, \"multiple\":true,\"hasListenTo\":true }; user_team_site_id{ \"title\":\"Team Site\", \"allowClear\": true, \"multiple\":true }; user_id{ \"title\":\"User\", \"allowClear\": true, \"multiple\":true };",
-        "row_fields": "site_date{\"title\":\"Date\",\"width\":70};sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Project\",\"value_index\":\"time_sheet_durations\",\"width\":70};prod_routing_link_id{\"column\":\"prod_routing_links.name\",\"width\":280,\"title\":\"Task\"};employeeid{ \"title\":\"Employee Id\" };user_id{\"column\":\"users.name\",\"width\":200};site_team_id{\"title\":\"Site Team\",\"column\":\"user_team_sites.name\",\"width\":200,\"href_from_field\":\"site_team_id\",\"route_name\":\"user_team_sites.edit\"};",
+        "row_fields": "site_date{\"title\":\"Date\",\"width\":70};sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Project\",\"value_index\":\"time_sheet_durations\",\"width\":70};prod_routing_link_id{\"column\":\"prod_routing_links.name\",\"width\":280,\"title\":\"Task\"};employeeid{ \"title\":\"Employee Id\" };user_id{\"column\":\"users.name0\",\"width\":200};site_team_id{\"title\":\"Site Team\",\"column\":\"user_team_sites.name\",\"width\":200,\"href_from_field\":\"site_team_id\",\"route_name\":\"user_team_sites.edit\"};",
         "insert_column_row_fields": null,
         "column_fields": null,
         "data_fields": null,

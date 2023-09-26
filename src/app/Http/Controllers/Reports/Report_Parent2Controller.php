@@ -138,7 +138,7 @@ abstract class Report_Parent2Controller extends Controller
 
     protected function getTableColumns($dataSource, $params)
     {
-        return [[]];
+        return [];
     }
 
     public function selectMonth($params)
@@ -235,7 +235,7 @@ abstract class Report_Parent2Controller extends Controller
 
         $tableColumns = $this->getTableColumns($params, $dataSource);
         $tableColumns = $this->typeView === 'report-pivot'
-            && empty($tableColumns) ? [] : $tableColumns;
+        && empty($tableColumns) ? [] : $tableColumns;
 
         $tableDataHeader = $this->tableDataHeader($dataSource, $params);
         echo $this->getJS();
@@ -254,7 +254,6 @@ abstract class Report_Parent2Controller extends Controller
         $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
         $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
         $valueOptionPrint =  $this->getValueOptionPrint();
-        // dd($dataSource);
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,

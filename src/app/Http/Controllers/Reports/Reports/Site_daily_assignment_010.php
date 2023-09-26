@@ -17,7 +17,6 @@ class Site_daily_assignment_010 extends Report_ParentReport2Controller
     public function getDataSource($params)
     {
         $primaryData = (new Site_daily_assignment_dataSource1())->getDataSource($params);
-        // dump($primaryData);
         return $primaryData;
     }
 }

@@ -28,7 +28,6 @@ class PivotTableController extends Controller
         foreach ($processedData as $k1 => $items) {
             foreach ($items as $k2 => $item) {
                 $dt = isset($calculatedData[$k1][$k2]) ? $calculatedData[$k1][$k2] : [];
-                // $dt2 = isset($transferredData[$k1][$k2]) ?$transferredData[$k1][$k2] : [];
                 $dataOutput[] = array_merge($dt, reset($item), $transferredData[$k1][$k2]);
             };
         }
@@ -186,6 +185,7 @@ class PivotTableController extends Controller
                 $dataFilters[$fieldFilter] = (array)$topParams[$fieldFilter];
             }
         }
+
         return $dataFilters;
     }
 
@@ -204,7 +204,6 @@ class PivotTableController extends Controller
         // Step 1: reduce lines from Filters array
         $keysFilters = $this->triggerFilters($topParams, $keysOfFilters);
         $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $keysFilters);
-        // dump($rowFields, $dataReduce);
 
         // Step 2: group lines by Row_Fields array
         if (!count($keysOfRowFields)) {
@@ -223,12 +222,9 @@ class PivotTableController extends Controller
         // Step 3: transfer data from lines to columns by
         // Column_Fields and Value_Index_Fields array 
         $transferredData = PivotReport::transferData2($processedData, $columnFields);
-        // dd($processedData, $transferredData);
 
-        
         //Step 4: Calculate data from Data Fields columns
         //The aggregated data are at the end of the items
-        // dd($columnFields);
         $calculatedData = PivotReportDataFields2::executeOperations($aggregations, $transferredData, $keysOfRowFields);
 
         $dataIdsOutput = $this->attachToDataSource($processedData, $calculatedData, $transferredData, $keysOfRowFields, $keysOfColumnFields);
