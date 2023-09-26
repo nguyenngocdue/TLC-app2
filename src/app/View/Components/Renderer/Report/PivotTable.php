@@ -129,6 +129,7 @@ class PivotTable extends Component
 
         if ($modeType && !$isRawData) {
             [$dataOutput, $tableColumns, $tableDataHeader] = $this->triggerDataFollowManagePivot($linesData, $modeType, $params);
+            // dd($dataOutput, $tableColumns);
             if (PivotReport::isEmptyArray($dataOutput)) {
                 $tableColumns = $this->makeTableColumnsWhenEmptyData($modeType);
             }
@@ -142,12 +143,12 @@ class PivotTable extends Component
             $tableColumns = $this->makeTableColumnsWhenRenderRawData($linesData, $libs);
             $dataOutput = $linesData;
         }
-        // dump($dataOutput);
         
         $dataOutput = $this->changeValueData($dataOutput, $isRawData, $linesData);
         $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
-        if(!empty($this->tableColumns)) $tableColumns = $this->tableColumns;
-
+        if(!empty($this->tableColumns)){
+            $tableColumns = $this->tableColumns;
+        } 
         return view("components.renderer.report.pivot-table", [
             'tableDataSource' => $dataRender,
             'tableColumns' => $tableColumns,

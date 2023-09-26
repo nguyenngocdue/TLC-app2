@@ -523,10 +523,5 @@ class PivotReport
         return empty($data);
     }
 
-    public static function getCurrentYearAndMonth()
-    {
-        $currentYear = date('Y');
-        $currentMonth = date('m');
-        return array('year' => $currentYear, 'month' => $currentMonth);
-    }
+   
 }

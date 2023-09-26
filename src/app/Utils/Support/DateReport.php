@@ -6,18 +6,19 @@ use DateTime;
 
 class DateReport
 {
-    public static function getShortDayOfWeek($dateString) {
+    public static function getShortDayOfWeek($dateString)
+    {
         $date = DateTime::createFromFormat('d/m/Y', $dateString);
         $dayOfWeek = $date->format('D');
         return $dayOfWeek;
     }
 
-    public static function explodePickerDate($pickerDate, $type='d/m/Y')
+    public static function explodePickerDate($pickerDate, $type = 'd/m/Y')
     {
         $pickerDate = array_map(fn ($item) => trim($item), explode('-', $pickerDate));
         $startDate = $pickerDate[0] ?? '01/01/2021';
         $endDate = $pickerDate[1] ?? '01/02/2021';
-        if($type === 'Y-m-d'){
+        if ($type === 'Y-m-d') {
             $startDate = self::formatDateString($startDate, 'Y-m-d');
             $endDate = self::formatDateString($endDate, 'Y-m-d');
         }
@@ -26,20 +27,27 @@ class DateReport
 
     public static function formatDateString($strDate, $typeFormat = 'Y-m-d')
     {
-        $strDate = str_replace(['-', '_'], '/', $strDate);
+        $strDateEdit = str_replace(['-', '_'], '/', $strDate);
         $dateTime = DateTime::createFromFormat('d/m/Y', $strDate);
-        // dd($strDate, $dateTime);
-        if (!$dateTime) return false;
+        if (!$dateTime) return $strDate;
         if ($dateTime) {
             return $dateTime->format($typeFormat);
         }
-        return DateTime::createFromFormat('Y/m/d', $strDate)->format($typeFormat);
+        return DateTime::createFromFormat('Y/m/d', $strDateEdit)->format($typeFormat);
     }
 
-    public static function getMonthAbbreviation($month) {
+    public static function getMonthAbbreviation($month)
+    {
         $month = str_pad($month, 2, '0', STR_PAD_LEFT);
         return date('M', strtotime("2023-$month-01"));
     }
 
-    
+    public static function getCurrentYearAndMonth($separate = false)
+    {
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        return $separate ? 
+            array('year' => $currentYear, 'month' => $currentMonth) :
+            $currentYear . '-' . $currentMonth;
+    }
 }
