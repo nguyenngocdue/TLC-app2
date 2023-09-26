@@ -241,6 +241,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'cell_title' => "(#" . $y->id . ")",
                 'cell_class' => "text-blue-800 bg-white",
                 'cell_href' => route($yAxisTableName . ".edit", $y->id),
+                'cell_div_class' => 'whitespace-nowrap',
             ];
             if ($this->allowCreation) {
                 $meta['caller'] = 'view-all-matrix';

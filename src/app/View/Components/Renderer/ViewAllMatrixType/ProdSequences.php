@@ -112,7 +112,9 @@ class ProdSequences extends ViewAllTypeMatrixParent
                 'width' => 40,
                 'prod_discipline_id' => $line->prod_discipline_id,
                 "colspan" => 1 + sizeof($extraColumns),
+
                 "target_man_minutes" => $line->pivot->target_man_hours * 60,
+                "target_man_power" => $line->pivot->target_man_power,
 
             ];
             foreach ($extraColumns as $column) {
@@ -184,7 +186,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
         $result = [
-            'production_name' => $y->production_name,
+            'production_name' => (object)[
+                'cell_div_class' => 'whitespace-nowrap',
+                'value' => $y->production_name
+            ],
             'quantity' => ($v = $y->quantity) ? $v : "",
             'status' => $status_object,
             'room_type' => ($y->getRoomType) ? $y->getRoomType->name : "",
@@ -204,7 +209,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $doc = $cell[0];
         switch ($dataIndex) {
             case "total_uom":
-                return round($doc->{$dataIndex}, 2);
+                return number_format(round($doc->{$dataIndex}, 2), 2);
             case "start_date":
                 return ($date = $doc->{$dataIndex}) ? date(Constant::FORMAT_DATE_ASIAN, strtotime($date)) : "";
             case "end_date":
@@ -215,20 +220,26 @@ class ProdSequences extends ViewAllTypeMatrixParent
             case "man_power":
                 return round($doc->worker_number, 2);
             case "total_mins":
-                $target = $x['target_man_minutes'];
+                $target_man_power = $x['target_man_power'] > 0 ? $x['target_man_power'] : 1;;
+                $target = $x['target_man_minutes'] / $target_man_power;
                 $actual = round($doc->total_hours * 60);
+
                 $color = $target >= $actual ? "green" : "red";
                 if ($actual == 0) return 0;
                 if (!$target) return $actual;
+                $percent = round(100 * ($target - $actual) / $target);
                 return (object)[
-                    "value" => $actual,
+                    "value" => number_format($actual, 0),
                     "cell_class" => "text-$color-700 bg-$color-300 font-bold",
-                    "cell_title" => "Target: " . $target . " - Variance: " . ($target - $actual),
+                    "cell_title" => "Target: " . $target . " - Variance: " . ($target - $actual) . " ($percent%)",
                 ];
             case "min_per_uom":
                 return ($doc->total_uom > 0) ? round($doc->total_hours * 60 / $doc->total_uom, 2) : '<i class="fa-solid fa-infinity" title="DIV 0"></i>';
             case "uom":
-                return $this->unit[$doc->uom_id]['name'] ?? "(unknown unit)";
+                return (object) [
+                    'cell_div_class' => 'whitespace-nowrap',
+                    "value" =>  $this->unit[$doc->uom_id]['name'] ?? "(unknown unit)"
+                ];
             default:
                 // if (isset($doc->{$dataIndex})) return $doc->{$dataIndex};
                 return "852. Not found " . $dataIndex;
