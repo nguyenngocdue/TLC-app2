@@ -59,6 +59,21 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_getRoutingLinks()": {
+        "name": "_getRoutingLinks()",
+        "column_name": "getRoutingLinks()",
+        "listen_action": "reduce",
+        "triggers": "prod_routing_id,prod_discipline_id",
+        "listen_to_fields": "getRoutingLinks(),getRoutingLinks()",
+        "listen_to_attrs": "prod_routing_id,prod_discipline_id",
+        "columns_to_set": "",
+        "attrs_to_compare": "id,id",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_id": {
         "name": "_id",
         "column_name": "id",

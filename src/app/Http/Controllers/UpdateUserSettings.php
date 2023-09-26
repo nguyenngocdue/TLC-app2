@@ -50,14 +50,8 @@ class UpdateUserSettings extends Controller
     private function updateViewAllMatrix($request, &$settings)
     {
         $type = $request->input("_entity");
-
-        $toBeSaved = [];
-        foreach ($request->input() as $key => $value) {
-            if (!in_array($key, ["_token", "_method", "_entity", "action"])) $toBeSaved[$key] = $value;
-        }
-        foreach ($toBeSaved as $key => $value) {
-            $settings[$type][Constant::VIEW_ALL]['matrix'][$key] = $value;
-        }
+        $toBeSaved = $request->except(["_token", "_method", "_entity", "action"]);
+        $settings[$type][Constant::VIEW_ALL]['matrix'] = $toBeSaved;
         return $settings;
     }
 

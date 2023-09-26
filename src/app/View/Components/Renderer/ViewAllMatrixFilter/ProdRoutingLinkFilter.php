@@ -33,14 +33,24 @@ class ProdRoutingLinkFilter extends Component
 
     private function getDataSource()
     {
-        $db = Prod_routing_link::select('id', 'name', 'description')
+        $db = Prod_routing_link::select('id', 'name', 'description', 'prod_discipline_id')
+            ->with('getProdRoutings')
             ->orderBy('name')
             ->get();
-        // Oracy::attach("getSubProjects()", $db);
 
-        // $db = $db->filter(fn ($item) => $item->isShowOn(CurrentRoute::getTypePlural()))->values();
+        $newDB = [];
+        foreach ($db as $item) {
+            $i = (object)[];
+            $i->id = $item->id;
+            $i->name = $item->name;
+            $i->description = $item->description;
+            $i->prod_discipline_id = $item->prod_discipline_id;
 
-        return $db;
+            $i->prod_routing_id = $item->getProdRoutings->pluck('id');
+            $newDB[] = $i;
+        }
+
+        return $newDB;
     }
 
     /**
