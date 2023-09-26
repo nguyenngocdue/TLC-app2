@@ -7,7 +7,8 @@ const makeIdForNumber = (n) => '#' + String(n).padStart(6, '0').substring(0, 3) 
 const makeId = (n) => (isNaN(n) ? '' : makeIdForNumber(n))
 // const makePrefix = () => isNaN(state.id) ? state.id : makeId(state.id)
 const select2FormatState = (state) => {
-    return !state.title ? state.text : $(
+
+    return !state.title ? $(`<div title="#${state.id}">${state.text}</div>`) : $(
         `<div class="flex justify-between px-1" title="#${state.id}">
         <span>${state.text}</span>
         <pre>   </pre>
