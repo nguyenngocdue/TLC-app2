@@ -19,11 +19,10 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('kanban_task_groups', function (BlueprintExtended $table) {
+        $schema->create('kanban_task_clusters', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('kanban_cluster_id')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();
@@ -37,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("kanban_task_groups");
+        Schema::dropIfExists("kanban_task_clusters");
     }
 };

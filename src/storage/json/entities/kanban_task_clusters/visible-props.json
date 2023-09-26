@@ -14,14 +14,9 @@
         "column_name": "description",
         "new": "true"
     },
-    "_getTasks": {
-        "name": "_getTasks",
-        "column_name": "getTasks",
-        "new": "true"
-    },
-    "_kanban_cluster_id": {
-        "name": "_kanban_cluster_id",
-        "column_name": "kanban_cluster_id",
+    "_getGroups": {
+        "name": "_getGroups",
+        "column_name": "getGroups",
         "new": "true"
     },
     "_order_no": {

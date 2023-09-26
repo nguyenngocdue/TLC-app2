@@ -828,6 +828,22 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "kanban_task_cluster": {
+        "name": "kanban_task_cluster",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "unit_test",
+        "title": "Kanban Task Cluster",
+        "nickname": "kbtc",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "kanban_task_group": {
         "name": "kanban_task_group",
         "package_tab": "application",
