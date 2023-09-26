@@ -812,6 +812,38 @@
         "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-person-walking\"><\/i>"
     },
+    "kanban_task": {
+        "name": "kanban_task",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "unit_test",
+        "title": "Kanban Tasks",
+        "nickname": "kbt",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
+    "kanban_task_group": {
+        "name": "kanban_task_group",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "unit_test",
+        "title": "Kanban Task Group",
+        "nickname": "kbtg",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "listener_config": {
         "name": "listener_config",
         "package_tab": "manage_admin",

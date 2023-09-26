@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 trait TraitKanban
 {
@@ -17,6 +18,9 @@ trait TraitKanban
 				'newParentId' => $newParentId,
 			] = $input;
 			$item = $this->modelPath::find($itemId);
+			if (!isset($item->{$category})) {
+				throw new \Exception("Category '$category' not found.");
+			}
 			$item->{$category} = $newParentId;
 			$item->save();
 		} catch (\Exception $e) {
