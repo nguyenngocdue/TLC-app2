@@ -28,6 +28,9 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_routing_id')->nullable();
             $table->unsignedBigInteger('qaqc_insp_tmpl_id')->nullable();
 
+            $table->unsignedBigInteger('prod_discipline_id')->nullable();
+            $table->unsignedBigInteger('prod_order_id')->nullable();
+
             $table->appendCommonFields();
         });
     }

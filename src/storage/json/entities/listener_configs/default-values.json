@@ -59,9 +59,45 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_prod_order_id": {
+        "name": "_prod_order_id",
+        "column_name": "prod_order_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_qaqc_insp_tmpl_id": {
         "name": "_qaqc_insp_tmpl_id",
         "column_name": "qaqc_insp_tmpl_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getRoutingLinks()": {
+        "name": "_getRoutingLinks()",
+        "column_name": "getRoutingLinks()",
         "label": "",
         "validation": "",
         "validation_regex": "",

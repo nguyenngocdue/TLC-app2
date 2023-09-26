@@ -9,6 +9,9 @@ class Listener_config extends ModelExtended
     protected $fillable = [
         'id', 'name', 'owner_id',
         'project_id', 'sub_project_id', 'prod_routing_id', 'qaqc_insp_tmpl_id',
+        // 'prod_routing_link_id', 
+        'prod_discipline_id', 'prod_order_id',
+
     ];
     protected static $statusless = true;
 
@@ -17,6 +20,13 @@ class Listener_config extends ModelExtended
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
         "getQaqcInspTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, "qaqc_insp_tmpl_id"],
+
+        "getDiscipline" => ["belongsTo", Prod_discipline::class, "prod_discipline_id"],
+        "getProdOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
+    ];
+
+    public static $oracyParams = [
+        "getRoutingLinks()" => ['getCheckedByField', Prod_routing_link::class,],
     ];
 
     public function getProject()
@@ -38,5 +48,21 @@ class Listener_config extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getDiscipline()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getProdOrder()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getRoutingLinks()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }
