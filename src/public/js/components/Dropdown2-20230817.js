@@ -7,9 +7,8 @@ const makeIdForNumber = (n) => '#' + String(n).padStart(6, '0').substring(0, 3) 
 const makeId = (n) => (isNaN(n) ? '' : makeIdForNumber(n))
 // const makePrefix = () => isNaN(state.id) ? state.id : makeId(state.id)
 const select2FormatState = (state) => {
-    // console.log(state)
     return !state.title ? state.text : $(
-        `<div class="flex justify-between px-1">
+        `<div class="flex justify-between px-1" title="${state.id}">
         <span>${state.text}</span>
         <pre>   </pre>
         <span>${state.title}</span>
@@ -520,7 +519,7 @@ const onChangeDropdown2 = ({ name, dropdownParams = {} }) => {
                         break
                     case 'trigger_change_all_lines':
                     case 'trigger_change_all_lines_except_current':
-                        // Do nothing, this is an action of table 
+                        // Do nothing, this is an action of table
                         break
                     case 'set_table_column':
                         onChangeSetTableColumn(listener, i)
