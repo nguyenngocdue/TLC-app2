@@ -149,6 +149,7 @@ class PivotTable extends Component
         if(!empty($this->tableColumns)){
             $tableColumns = $this->tableColumns;
         } 
+        // dd($tableColumns, $this->tableTrueWidth);
         return view("components.renderer.report.pivot-table", [
             'tableDataSource' => $dataRender,
             'tableColumns' => $tableColumns,

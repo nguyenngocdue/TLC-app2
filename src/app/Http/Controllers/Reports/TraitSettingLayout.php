@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Reports;
 
 trait TraitSettingLayout
 {
-    public function layout($valueOptionPrint)
+    public function layout($optionPrint)
     {
         $layout = '';
-        switch ($valueOptionPrint) {
+        switch ($optionPrint) {
             case 'landscape':
             $layout = 'w-[1400px] min-h-[1000px]';
             break;

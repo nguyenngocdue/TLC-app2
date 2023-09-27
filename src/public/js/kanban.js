@@ -1,6 +1,5 @@
 const setValue = (sortable) => {
     var order = sortable.toArray()
-
     console.log(order, sortable.el)
 }
 
@@ -10,10 +9,11 @@ function getCharactersAfterLastUnderscore(str) {
 
 }
 
-const onEnd = (e) => {
+const onEnd = (e, route, category) => {
+
     const { /*from,*/ to, item } = e
-    const category = $('#category').val()
-    console.log(to.id, item.id, category)
+    // const category = $('#category').val()
+    // console.log("To:", to.id, "itemId:", item.id, "Cat:", category)
     const itemId = getCharactersAfterLastUnderscore(item.id)
     const newParentId = getCharactersAfterLastUnderscore(to.id)
     $.ajax({
@@ -29,34 +29,18 @@ const onEnd = (e) => {
     })
 }
 
-const kanbanInit = (columns, route) => {
-
-    const wrappers = ["wrapper_0",]
-    for (let i = 0; i < wrappers.length; i++) {
-        const rowName = wrappers[i]
-        var el = document.getElementById(rowName);
-        Sortable.create(el, {
-            animation: 150,
-            group: 'wrapperGroup',
-        });
-    }
-
-    const rows = ["row_0", "row_1", "row_2"]
-    for (let i = 0; i < rows.length; i++) {
-        const rowName = rows[i]
-        var el = document.getElementById(rowName);
-        Sortable.create(el, {
-            animation: 150,
-            group: 'rowGroup',
-        });
-    }
-
+const kanbanInit1 = (prefix, columns, route, category) => {
     for (let i = 0; i < columns.length; i++) {
-        const itemName = "column_" + columns[i]
+        const itemName = prefix + columns[i]
+        // console.log("making kanban for", itemName)
         var el = document.getElementById(itemName);
+        if (el === null) {
+            console.error("EL", itemName, "is NULL")
+            continue
+        }
         Sortable.create(el, {
             animation: 150,
-            group: 'columnGroup',
+            group: prefix,
             // store: {
             //     set: setValue,
             // },
@@ -65,7 +49,7 @@ const kanbanInit = (columns, route) => {
             // onChoose: (e) => console.log("onChoose", e, e.oldIndex),
             // onUnchoose: (e) => console.log("onUnchoose", e, e.oldIndex),
             // onStart: (e) => console.log("onStart", e, e.oldIndex),
-            onEnd: (e) => onEnd(e, route),
+            onEnd: (e) => onEnd(e, route, category),
             // onAdd: (e) => console.log("onAdd", e.item),
             // onUpdate: (e) => console.log("onUpdate", e.item),
             // onSort: (e) => console.log("onSort", e.item),
@@ -78,3 +62,53 @@ const kanbanInit = (columns, route) => {
         });
     }
 }
+
+// const kanbanInit = (columns, route) => {
+
+//     const wrappers = ["wrapper_0",]
+//     for (let i = 0; i < wrappers.length; i++) {
+//         const rowName = wrappers[i]
+//         var el = document.getElementById(rowName);
+//         Sortable.create(el, {
+//             animation: 150,
+//             group: 'wrapperGroup',
+//         });
+//     }
+
+//     const rows = ["row_0", "row_1", "row_2"]
+//     for (let i = 0; i < rows.length; i++) {
+//         const rowName = rows[i]
+//         var el = document.getElementById(rowName);
+//         Sortable.create(el, {
+//             animation: 150,
+//             group: 'rowGroup',
+//         });
+//     }
+
+//     for (let i = 0; i < columns.length; i++) {
+//         const itemName = "column_" + columns[i]
+//         var el = document.getElementById(itemName);
+//         Sortable.create(el, {
+//             animation: 150,
+//             group: 'columnGroup',
+//             // store: {
+//             //     set: setValue,
+//             // },
+
+//             // setData: (dataTransfer, dragEl) => dataTransfer.setData('Text', dragEl.textContent),
+//             // onChoose: (e) => console.log("onChoose", e, e.oldIndex),
+//             // onUnchoose: (e) => console.log("onUnchoose", e, e.oldIndex),
+//             // onStart: (e) => console.log("onStart", e, e.oldIndex),
+//             onEnd: (e) => onEnd(e, route),
+//             // onAdd: (e) => console.log("onAdd", e.item),
+//             // onUpdate: (e) => console.log("onUpdate", e.item),
+//             // onSort: (e) => console.log("onSort", e.item),
+//             // onRemove: (e) => console.log("onRemove", e.item),
+//             // onFilter: (e) => console.log("onFilter", e.item),
+//             // onMove: (e, originalEvent) => console.log("onMove", e.item),
+//             // onClone: (e) => console.log("onClone", e.item, e.clone),
+//             // onChange: (e) => console.log("onChange", e.newIndex),
+
+//         });
+//     }
+// }

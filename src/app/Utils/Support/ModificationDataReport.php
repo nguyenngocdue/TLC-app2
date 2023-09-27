@@ -23,8 +23,9 @@ class ModificationDataReport
                     }
                 }
             }
+            $icon = isset($items['icon']) ? $items['icon'] :'';
             $data[$k] = (object)[
-                'value' => $data[$k] ?? '',
+                'value' => $data[$k].$icon ?? '',
                 'cell_href' => $href,
                 'cell_title' => $strFormulaByField,
                 'cell_class' => $color,

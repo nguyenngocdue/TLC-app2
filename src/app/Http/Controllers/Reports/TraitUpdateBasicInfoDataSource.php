@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Reports;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\Support\Collection;
 
 trait TraitUpdateBasicInfoDataSource
@@ -14,7 +15,12 @@ trait TraitUpdateBasicInfoDataSource
         foreach ($fields as $field) {
             if (isset($values[$field])) {
                 if(str_contains($field, 'status')){
-                    $values[$field] = str_replace('_', ' ', $values[$field]);
+                    $statusName = $values[$field];
+                    $libStatus = LibStatuses::getAll()[$statusName];
+                    $values[$field] = (object) [
+                        'value' => $libStatus['title'],
+                        'cell_class' =>  'text-'. $libStatus['text_color'],
+                    ];
                     continue;
                 }
                 $f = str_replace('name', 'desc', $field);
