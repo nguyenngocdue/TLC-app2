@@ -119,6 +119,7 @@ Arr::macro('normalizeSelected', function ($selected, $old = null) {
             else return "[" . $selected . "]";
         }
 
+        if (is_null($selected)) return "[]";
         dump("Unknown how to normalize selected [$selected]");
         // if (isset($selected[0])) {
         //     $selected =  ($selected[0] != '[') ? "[" . $selected . "]" : $selected;

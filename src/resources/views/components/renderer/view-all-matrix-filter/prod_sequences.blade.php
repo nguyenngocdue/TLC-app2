@@ -51,8 +51,9 @@
                 <x-renderer.view-all-matrix-filter.ProdRoutingLinkFilter 
                     tableName="prod_routing_links" 
                     name="prod_routing_link_id[]" 
-                    id="prod_routing_link_id" 
-                    typeToLoadListener="qaqc_wir" 
+                    {{-- name="getRoutingLinks()[]"  --}}
+                    id="getRoutingLinks()" 
+                    typeToLoadListener="listener_config" 
                     allowClear="true"
                     :selected="$viewportParams['prod_routing_link_id']"
                     multiple="true"

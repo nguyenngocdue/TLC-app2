@@ -43,7 +43,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $this->project = $this->project ? $this->project : 5;
         $this->subProject = $this->subProject ? $this->subProject : 21;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
-        $this->prodRoutingLink = $this->prodRoutingLink ? $this->prodRoutingLink : null;
+        $this->prodRoutingLink = $this->prodRoutingLink ? $this->prodRoutingLink : [];
         // $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
         // dump($this->project, $this->subProject, $this->prodRouting);
         $this->cacheUnit();
@@ -94,8 +94,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $data = Prod_routing::find($this->prodRouting)
             ->getProdRoutingLinks();
         if ($this->prodDiscipline) $data = $data->where('prod_discipline_id', $this->prodDiscipline);
-        $data = $data->orderBy('order_no')
-            ->get();
+        if ($this->prodRoutingLink) $data = $data->whereIn('prod_routing_link_id', $this->prodRoutingLink);
+        $data = $data->orderBy('order_no')->get();
         return $data;
     }
 
@@ -141,7 +141,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             ->where('sub_project_id', $this->subProject)
             ->where('prod_routing_id', $this->prodRouting);
         if ($this->prodDiscipline) $lines = $lines->where('prod_discipline_id', $this->prodDiscipline);
-        // ->with('getUomId')
+        if ($this->prodRoutingLink) $lines = $lines->whereIn('prod_routing_link_id', $this->prodRoutingLink);
         return $lines->get();
     }
 
