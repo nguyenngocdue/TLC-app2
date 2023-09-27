@@ -159,7 +159,7 @@
         "row_fields": "project_id{ \"column\":\"projects.name\",\"title\":\"Project\",\"width\":150,\"align\":\"left\" };sub_project_id{\"column\":\"sub_projects.name\", \"title\":\"Sub Project\",\"width\":150,\"align\":\"left\"};prod_routing_id{\"column\":\"prod_routings.name\", \"title\":\"Production Routing\",\"width\":250,\"align\":\"left\"};prod_order_id{\"column\":\"prod_orders.name\", \"title\":\"Production Order\",\"width\":150,\"align\":\"left\"};erp_routing_link_id{\"column\":\"erp_routing_links.name\",\"title\":\"ERP Routing Link\",\"width\":250,\"align\":\"left\"};prod_routing_link_id{\"column\":\"prod_routing_links.name\", \"title\":\"Production Routing Link\",\"width\":250,\"align\":\"left\"};prod_discipline_id{\"column\":\"prod_disciplines.name\", \"title\":\"Production Discipline\",\"width\":150,\"align\":\"left\"};",
         "insert_column_row_fields": null,
         "column_fields": "man_hours{\"value_index\":\"man_hours\",\"title\":\"Man Hours\", \"width\":50, \"align\": \"right\",\"aggregation\":\"sum\",\"hidden\":true}",
-        "data_fields": "man_hours{ \"title\":\"Total Man Hours\",\"width\":60,\"align\":\"right\",\"aggregation\":\"sum\",\"align\":\"right\",\"value_index\":\"man_hours\"}",
+        "data_fields": "man_hours{ \"title\":\"Total Man Hours\",\"width\":60,\"align\":\"right\",\"aggregation\":\"sum\",\"align\":\"right\",\"value_index\":\"man_hours\",\"footer\":\"agg_sum\"}",
         "sort_by": "sub_project_id{\"column\":\"sub_projects.name\"}"
     },
     "prod_sequence_110": {
