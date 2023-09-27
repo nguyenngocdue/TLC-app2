@@ -18,7 +18,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout')
+    @include('components.reports.show-layout', ['optionPrint' => $optionPrint])
 </div>
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
@@ -26,7 +26,8 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
             <x-print.header6 />
             {{-- BASIC INFORMATION --}}
-            <x-renderer.heading level=2 class='text-center'>Sequence-based Timesheet Target vs. Actual</x-renderer.heading>
+            <x-renderer.heading level=2 class='text-center'>Target vs. Actual</x-renderer.heading>
+            <x-renderer.heading level=3 class='text-center'>(Sequence-based Timesheet)</x-renderer.heading>
             <div class="grid grid-cols-12">
                 <div class="col-span-12 text-left">
                     <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Basic Information <p class="text-sm font-light italic"></p>
@@ -38,7 +39,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                     <div class="grid grid-cols-12 text-right ">
                         <label class="{{$class1}} col-start-1  col-span-3">Range Date</label>
                         <span class="{{$class2}}  col-start-4  col-span-9">from: 
-                            <strong class='px-2'>{{$basicInfoData['created_at']}}</strong>
+                            <strong class='px-2'>"the begining of project"</strong>
                             to:
                             <strong class='px-2'>{{$basicInfoData['date']}}</strong>
                         </span>

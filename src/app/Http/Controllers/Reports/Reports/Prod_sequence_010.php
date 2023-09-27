@@ -19,9 +19,6 @@ class Prod_sequence_010 extends Report_Parent2Controller
     protected $subProjectId = 21;
     protected $prodRoutingId = 2;
 
-
-
-
     public function getDataSource($params)
     {
         $primaryData = (new Prod_sequence_dataSource())->getDataSource($params);

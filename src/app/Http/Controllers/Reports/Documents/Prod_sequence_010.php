@@ -30,7 +30,8 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
     protected $groupBy = 'prod_discipline_name';
     protected $viewName = 'document-prod-sequence-010';
     protected $type = 'prod_sequence';
-
+    protected $optionPrint = "landscape";
+    protected $tableTrueWidth = false;
 
     // DataSource
     public function getSqlStr($params)
@@ -55,9 +56,9 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                     ,po.id AS prod_order_id
                     ,po.name AS prod_order_name
                     ,po.prod_routing_id AS prod_routing_id
-                    ,pr.worker_number AS man_power
-                    ,SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)) AS hours
-                    ,(pr.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)) AS man_hours 
+                    ,FORMAT(pr.worker_number,2) AS man_power
+                    ,FORMAT(SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)),2) AS hours
+                    ,FORMAT((pr.worker_number)*SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pr.end, pr.start))/ 60/60,2)),2) AS man_hours 
                     
                     FROM sub_projects sp
                     JOIN prod_orders po ON po.sub_project_id = sp.id
@@ -94,7 +95,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $pickerDate = Report::createDefaultPickerDate('-3 years');
+        $pickerDate = Report::createDefaultPickerDate('-2 years');
         $params['picker_date'] = $pickerDate;
         $params['project_id'] = $this->projectId;
         $params['sub_project_id'] = $this->subProjectId;
@@ -121,15 +122,15 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                 'hasListenTo' => true,
             ],
             [
+                'title' => 'Production Routing',
+                'dataIndex' => 'prod_routing_id',
+                'hasListenTo' => true,
+            ],
+            [
                 'title' => 'Production Order',
                 'dataIndex' => 'prod_order_id',
                 'hasListenTo' => true,
                 'multiple' => true,
-            ],
-            [
-                'title' => 'Production Routing',
-                'dataIndex' => 'prod_routing_id',
-                'hasListenTo' => true,
             ],
             [
                 'title' => 'Production Discipline',
@@ -156,13 +157,13 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                     "title" => "Production Order",
                     "dataIndex" => "prod_order_name",
                     "align" => "center",
-                    "width" => 100,
+                    "width" => 80,
                 ],
                 [
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
-                    "width" => 300,
+                    "width" => 460,
                 ],
                 [
                     "title" => "Status",
@@ -174,10 +175,10 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                     "title" => "Discipline",
                     "dataIndex" => "prod_discipline_name",
                     "align" => "left",
-                    "width" => 30,
+                    "width" => 220,
                 ],
                 [
-                    "title" => "Man Power",
+                    "title" => "Man-Power",
                     "dataIndex" => "man_power",
                     "align" => "right",
                     "width" => 30,
@@ -246,7 +247,6 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
             if (empty($sqlData)) continue;
             $dataSource[$k] = collect($sqlData);
         }
-        // dd($dataSource);
         return $dataSource;
     }
 }

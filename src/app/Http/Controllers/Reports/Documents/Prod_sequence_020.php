@@ -32,10 +32,10 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     protected $groupBy = 'prod_discipline_name';
     protected $viewName = 'document-prod-sequence-020';
     protected $type = 'prod_sequence';
-    protected $tableTrueWidth = false;
-    protected $pageLimit = 1000;
+    protected $tableTrueWidth = true;
+    protected $pageLimit = 100000;
+    protected $optionPrint = "landscape";
 
-    // DataSource
     public function getSqlStr($params)
     {
         $sql = "SELECT
@@ -50,20 +50,20 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         targetTb.prod_routing_link_desc,
                         targetTb.sub_project_desc,
 
-                        targetTb.target_hours,
-                        actualTb.hours AS hours,
-                        round(actualTb.hours - targetTb.target_hours,2)*-1 AS vari_hours,
-                        100 - round((actualTb.hours / targetTb.target_hours)*100,2) AS percent_vari_hours,
+                        FORMAT(targetTb.target_hours, 2) AS target_hours,
+                        FORMAT(actualTb.hours,2) AS hours,
+                        FORMAT(round(targetTb.target_hours - actualTb.hours,2),2) AS vari_hours,
+                        FORMAT(100 - round((actualTb.hours / targetTb.target_hours)*100,2),2) AS percent_vari_hours,
                     
-                        targetTb.target_man_hours,
-                        actualTb.man_hours AS man_hours,
-                        round(actualTb.man_hours - targetTb.target_man_hours,2)*-1 AS vari_man_hours,
-                        100 - round((actualTb.man_hours / targetTb.target_man_hours)*100,2) AS percent_vari_man_hours,
+                        FORMAT(targetTb.target_man_hours,2) AS target_man_hours,
+                        FORMAT(actualTb.man_hours,2) AS man_hours,
+                        FORMAT(round(targetTb.target_man_hours - actualTb.man_hours ,2),2) AS vari_man_hours,
+                        FORMAT(100 - round((actualTb.man_hours / targetTb.target_man_hours)*100,2),2) AS percent_vari_man_hours,
                     
-                        targetTb.target_man_power,
-                        actualTb.man_power AS man_power,
-                        round(actualTb.man_power - targetTb.target_man_power,2)*-1 AS vari_man_power,
-                        100 - round((actualTb.man_power / targetTb.target_man_power)*100,2) AS percent_vari_man_power
+                        FORMAT(targetTb.target_man_power,2) AS target_man_power,
+                        FORMAT(actualTb.man_power,2) AS man_power,
+                        FORMAT(round(targetTb.target_man_power - actualTb.man_power,2),2) AS vari_man_power,
+                        FORMAT(100 - round((actualTb.man_power / targetTb.target_man_power)*100,2),2) AS percent_vari_man_power
                     FROM
                         (SELECT
                         project_id, project_name,sub_project_id,prod_routing_link_desc, sub_project_desc, 
@@ -208,39 +208,39 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "title" => "Sub Project",
                     "dataIndex" => "sub_project_name",
                     "align" => "left",
-                    "width" => 110,
+                    "width" => 80,
                     'fixed' => 'left'
                 ],
                 [
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
-                    "width" => 220,
+                    "width" => 184,
                     'fixed' => 'left'
                 ],
                 [
                     "title" => "Man-power <br/>(AVG)",
                     "dataIndex" => "target_man_power",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 70,
                     "colspan" => 4,
 
                 ],
                 [
                     "dataIndex" => "man_power",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 70,
                 ],
                 [
                     "dataIndex" => "vari_man_power",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 70,
 
                 ],
                 [
                     "dataIndex" => "percent_vari_man_power",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 70,
 
                 ],
 
@@ -248,46 +248,46 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "title" => "Hours <br/>(SUM)",
                     "dataIndex" => "target_hours",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 90,
                     "colspan" => 4,
                 ],
                 [
                     "dataIndex" => "hours",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 90,
                 ],
                 [
                     "dataIndex" => "vari_hours",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 90,
                 ],
                 [
                     "dataIndex" => "percent_vari_hours",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 90,
                 ],
                 [
                     "title" => "Man-hours <br/>(SUM)",
                     "dataIndex" => "target_man_hours",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 95,
                     "colspan" => 4,
 
                 ],
                 [
                     "dataIndex" => "man_hours",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 95,
                 ],
                 [
                     "dataIndex" => "vari_man_hours",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 95,
                 ],
                 [
                     "dataIndex" => "percent_vari_man_hours",
                     "align" => "right",
-                    "width" => 60,
+                    "width" => 95,
                 ],
             ];
     }
@@ -342,6 +342,17 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
         return $basicInfoData;
     }
 
+    private function getIcon($value){
+        $value = (float)$value;
+        if ($value > 0) {
+            return '<i class="text-green-600 text-xs fa-solid fa-triangle fa-rotate-180 pr-1"></i>';
+        } elseif ($value < 0) {
+            return  '<i class="text-red-600 text-xs fa-solid fa-triangle pl-1"></i>';
+        } else {
+            return '<i class="text-yellow-600 fa-solid fa-minus fa-xl" style="transform: scale(0.7, 1.5);margin-right: -5px;" ></i>';
+        }
+    }
+
     public function changeDataSource($dataSource, $params)
     {
         foreach ($dataSource as $key => $values) {
@@ -353,17 +364,24 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
             if (isset($params['prod_discipline_id'])) $paramUrl .= "&prod_discipline_id={$values['prod_discipline_id']}";
             $url = route('report-prod_sequence_030') . $paramUrl;
 
+            // icons
+            $iconHours =  $this->getIcon($values['vari_hours']);
+            $iconManPower =  $this->getIcon($values['vari_man_power']);
+            $iconManHours =  $this->getIcon($values['vari_man_hours']);
+
+
             $array = [
                 "percent_vari_man_hours" => ["formula" => "100 - (({{man_hours}} / {{target_man_hours}})*100)",],
                 "percent_vari_man_power" => ["formula" => "100 - (({{man_power}} / {{target_man_power}})*100)",],
                 "percent_vari_hours" => ["formula" => "100 - (({{hours}} / {{target_hours}})*100)",],
-                "vari_man_power" => ["formula" => "{{man_power}} - {{target_man_power}}",],
-                "vari_hours" => ["formula" => "{{hours}} - {{target_hours}}",],
-                "vari_man_hours" => ["formula" => "{{man_hours}} - {{target_man_hours}}",],
-                'hours' => ['href' => $url],
-                'man_power' => ['href' => $url],
-                'man_hours' => ['href' => $url],
+                "vari_man_power" => ["formula" => "{{target_man_power}} - {{man_power}}",],
+                "vari_hours" => ["formula" => "{{target_hours}} - {{hours}}",],
+                "vari_man_hours" => ["formula" => "{{target_man_hours}} - {{man_hours}}",],
+                'hours' => ['href' => $url, 'icon' => $iconHours],
+                'man_power' => ['href' => $url, 'icon' => $iconManPower],
+                'man_hours' => ['href' => $url, 'icon' => $iconManHours],
             ];
+            // dd($array);
             $values = ModificationDataReport::addFormulaForData($values, $array);
             $dataSource[$key] = $values;
         }
