@@ -9,10 +9,9 @@
 $class1 = 'p-2 border h-full w-full flex border-gray-600 text-base font-medium bg-gray-50 items-center justify-end';
 $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left'
 @endphp
-
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout')
+    @include('components.reports.show-layout', ['optionPrint' => $optionPrint])
 </div>
 
 {{-- RENDER WHEN THERE ARE NO ITEMS --}}
@@ -86,7 +85,8 @@ $basicInfo = $basicInfoData[$key];
                     showNo={{true}} 
                     :tableColumns="$tableColumns" 
                     :dataSource="$data"
-                    page-limit="{{$pageLimit}}"                     
+                    page-limit="{{$pageLimit}}"
+                    tableTrueWidth={{$tableTrueWidth?1:0}} 
                 />
             </div>
         </div>

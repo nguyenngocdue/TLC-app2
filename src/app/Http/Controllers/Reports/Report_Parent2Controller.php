@@ -40,6 +40,7 @@ abstract class Report_Parent2Controller extends Controller
     protected $rotate45Width = false;
     protected $viewName = '';
     protected $type = '';
+    protected $optionPrint = 'landscape';
 
     public function getType()
     {
@@ -74,7 +75,7 @@ abstract class Report_Parent2Controller extends Controller
     protected function getPageParam($typeReport, $entity)
     {
         $settings = CurrentUser::getSettings();
-        if (!isset($settings[$entity])) return 10;
+        if (!isset($settings[$entity])) return $this->pageLimit;
         if (isset($settings[$entity][strtolower($typeReport)]['per_page'])) {
             $pageLimit = $settings[$entity][strtolower($typeReport)]['per_page'];
             return $pageLimit;
@@ -198,7 +199,7 @@ abstract class Report_Parent2Controller extends Controller
 
     public function index(Request $request)
     {
-
+        
         $input = $request->input();
         // Check Validations
         if ($input) {
@@ -253,7 +254,7 @@ abstract class Report_Parent2Controller extends Controller
 
         $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
         $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
-        $valueOptionPrint =  $this->getValueOptionPrint();
+        $optionPrint = CurrentUser::getSettings()[$entity]['view_all']['option_print_layout'] ?? $this->optionPrint;
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,
@@ -277,8 +278,8 @@ abstract class Report_Parent2Controller extends Controller
             'topTitle' => $this->getMenuTitle(),
             'settingComplexTable' => $settingComplexTable,
             'classListOptionPrint' => ClassList::DROPDOWN,
-            'valueOptionPrint' => $valueOptionPrint,
-            'layout' => $this->layout($valueOptionPrint),
+            'optionPrint' => $optionPrint,
+            'layout' => $this->layout($optionPrint),
         ] + $dataRenderDocReport);
     }
 
