@@ -13,6 +13,7 @@ class WelcomeFortuneController extends Controller
     private $clusterClass = Kanban_task_cluster::class;
     private $category_group = 'kanban_group_id';
     private $category_cluster = 'kanban_cluster_id';
+    private $debug = false;
 
     public function getType()
     {
@@ -33,13 +34,14 @@ class WelcomeFortuneController extends Controller
     public function index(Request $request)
     {
         if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
-
         $clusters = $this->getDataSourceClusters();
         $route_task = route(Kanban_task::getTableName() . ".kanban");
         $route_group = route(Kanban_task_group::getTableName() . ".kanban");
         $route_cluster = route(Kanban_task_cluster::getTableName() . ".kanban");
 
         return view("welcome-fortune", [
+            // 'debug' => $debug,
+            'hidden' => $this->debug ? "" : "hidden",
             'clusters' => $clusters,
 
             'route_task' => $route_task,

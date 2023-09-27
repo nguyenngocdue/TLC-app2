@@ -3,14 +3,25 @@ const setValue = (sortable) => {
     console.log(order, sortable.el)
 }
 
-function getCharactersAfterLastUnderscore(str) {
-    const lastUnderscoreIndex = str.lastIndexOf('_');
-    return (lastUnderscoreIndex !== -1) ? str.substring(lastUnderscoreIndex + 1) : str;
-
+const onClickToEdit = (id, lbl_type, txt_type) => {
+    const lbl = "#" + lbl_type + "_" + id
+    const txt = "#" + txt_type + "_" + id
+    // console.log("Hide", lbl, "show", txt)
+    $(lbl).hide()
+    $(txt).show().select()
 }
 
-const onEnd = (e, route, category) => {
+const onClickToCommit = (id, lbl_type, txt_type) => {
+    const lbl = "#" + lbl_type + "_" + id
+    const txt = "#" + txt_type + "_" + id
+    // console.log("Show", lbl, "hide", txt)
+    $(lbl).show()
+    $(txt).hide()
+}
 
+const getCharactersAfterLastUnderscore = (str) => (lastUnderscoreIndex = str.lastIndexOf('_') !== -1) ? str.substring(lastUnderscoreIndex + 1) : str;
+
+const onEnd = (e, route, category) => {
     const { /*from,*/ to, item } = e
     // const category = $('#category').val()
     // console.log("To:", to.id, "itemId:", item.id, "Cat:", category)
