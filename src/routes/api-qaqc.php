@@ -14,7 +14,7 @@ Route::group([
     'prefix' => 'v1/qaqc',
 ], function () {
     Route::group([
-        'middleware' => ['auth:sanctum'],
+        'middleware' => ['auth:sanctum','impersonate'],
     ], function () {
         Route::post('upload_file', [FileController::class, 'upload']);
         Route::post('delete_file', [FileController::class, 'delete']);
