@@ -22,28 +22,33 @@
         kanbanInit1("wrapper_", [0], route_cluster)
       </script>
       @foreach($clusters as $cluster)
-      <div class="cursor-grab">
-        <h2>{{$cluster->name}}</h2>
-          <div id="cluster_{{$cluster->id}}" class="flex bg-gray-50 m-2 border rounded cursor-grab p-2">
+      <div>
+        <h2><span title="Cluster {{$cluster->id}}" class="cursor-grab">#</span> {{$cluster->name}}</h2>
+          <div id="cluster_{{$cluster->id}}" class="flex bg-gray-50 m-2 border rounded p-2">
           <script>kanbanInit1("cluster_",  [{{$cluster->id}}], route_group, "{{$category_cluster}}")</script>
           @php $groups = $cluster->getGroups; @endphp
           @foreach($groups as $group)
           <div id="group_parent_{{$group->id}}" class="m-1 bg-gray-200 p-2 rounded">
-            <h2 class="text-xs font-bold mb-1">{{$group->name . " ".$group->id  }}</h2>
+            <h2 class="text-xs font-bold mb-1">
+              <span title="Group {{$group->id }}" class="cursor-grab">#</span> {{$group->name}}</h2>
             <div id="group_{{$group->id}}" class="grid gap-1 w-60">
               <script>kanbanInit1("group_", [ {{$group->id}} ], route_task, "{{$category_group}}")</script>
               @foreach($group->getTasks as $task)
               <div id="task_{{$task->id}}" class="bg-white p-1 shadow rounded text-xs">
-                {{$task->name ?? "???"}} task_{{$task->id}}
+                <span title="Task {{$task->id}}" class="cursor-grab">#<span> {{$task->name ?? "???"}} 
               </div>
+              <button class="text-xs border border-gray-300 rounded hover:bg-blue-200">+ Add a Card</button>
               @endforeach
             </div>
           </div>
           @endforeach
-
+          <div class="m-1 bg-gray-200 p-2 rounded h-11">
+            <button class="text-xs border border-gray-300 rounded hover:bg-blue-200 px-4">+ Add a List</button>
+          </div>
         </div>
       </div>
       @endforeach
+      <button class="text-xs border border-gray-300 rounded hover:bg-blue-200 px-4 ml-2">+ Add a Cluster</button>
     </div>
     <br/>
   </div>
