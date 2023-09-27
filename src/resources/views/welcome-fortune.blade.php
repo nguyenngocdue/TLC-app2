@@ -54,10 +54,10 @@
                 <button class="text-xs border border-gray-300 rounded hover:bg-blue-200 mt-2 {{$group_width}}">+ Add a Card</button>
               </div>
               @endforeach
-            </div>
-            <div class="m-1 bg-gray-200 p-2 rounded h-9">
-              <script>kanbanInit1("cluster_",  [{{$cluster->id}}], route_group, "{{$category_cluster}}")</script>
-              <button class="text-xs border border-gray-300 rounded hover:bg-blue-200 px-4 {{$group_width}}">+ Add a List</button>
+              <div class="m-1 bg-gray-200 p-2 rounded h-9">
+                <script>kanbanInit1("cluster_",  [{{$cluster->id}}], route_group, "{{$category_cluster}}")</script>
+                <button class="text-xs border border-gray-300 rounded hover:bg-blue-200 px-4 {{$group_width}}">+ Add a List</button>
+              </div>
             </div>
           </div>
           @endforeach
