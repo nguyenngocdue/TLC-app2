@@ -313,7 +313,10 @@ const onChangeDropdown2Dot = (listener) => {
         const theValue = selectedObject[listen_to_attr]
         // console.log(theValue)
         if (debugListener) console.log(theValue)
-        const control = superProps['props']["_" + column_name]['control']
+        // console.log(superProps['props']["_" + column_name], column_name)
+
+        //suffix here has not been implemented
+        const control = superProps['props']["_" + column_name]?.['control']
 
         switch (control) {
             case "picker_date":

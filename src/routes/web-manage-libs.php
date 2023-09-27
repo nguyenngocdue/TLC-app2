@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => 'dashboard/workflow',
     // 'middleware' => ['auth'],
-    'middleware' => ['role_set:admin']
+    'middleware' => ['role_set:admin','impersonate']
 ], function () {
     Route::resource('manageStatuses', ManageStatusesController::class)->only('index', 'store', 'create');
     Route::resource('manageWidgets', ManageWidgetsController::class)->only('index', 'store', 'create');

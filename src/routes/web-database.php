@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     // 'middleware' => ['auth'],
     'prefix' => 'database',
-    'middleware' => ['role_set:admin']
+    'middleware' => ['role_set:admin','impersonate']
 ], function () {
     Route::get('summary', [DatabaseSummaryController::class, 'index'])->name("database-summary.index");
     Route::get('diagrams', [DatabaseDiagramsController::class, 'index'])->name("database-diagrams.index");

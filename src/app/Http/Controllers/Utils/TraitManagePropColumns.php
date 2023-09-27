@@ -155,6 +155,13 @@ trait TraitManagePropColumns
                 "renderer" => "checkbox",
                 'width' => 10,
             ],
+            [
+                "dataIndex" => "nowrap_view_all",
+                "align" => "center",
+                "editable" => true,
+                "renderer" => "checkbox",
+                'width' => 10,
+            ],
         ];
     }
 }
