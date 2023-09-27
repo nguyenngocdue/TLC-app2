@@ -31,12 +31,29 @@ const onClickToEdit = (id, lbl_type, txt_type) => {
     $(txt).show().select()
 }
 
-const onClickToCommit = (id, lbl_type, txt_type) => {
+const onClickToCommit = (id, lbl_type, txt_type, caption_type, url) => {
     const lbl = "#" + lbl_type + "_" + id
+    const caption = "#" + caption_type + "_" + id
     const txt = "#" + txt_type + "_" + id
     // console.log("Show", lbl, "hide", txt)
-    $(lbl).show()
+    const newText = $(txt).val()
+
     $(txt).hide()
+    $(caption).html(newText)
+    $(lbl).show()
+
+    $.ajax({
+        method: "POST",
+        url,
+        data: { action: "changeName", newText, id },
+        success: function (response) {
+            // toastr.success(response.message)
+
+        },
+        error: function (jqXHR) {
+            toastr.error(jqXHR.responseJSON.message)
+        },
+    })
 }
 
 const getCharactersAfterLastUnderscore = (str) => {

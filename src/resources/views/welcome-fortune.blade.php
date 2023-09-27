@@ -24,28 +24,32 @@
 <input type="hidden" id="category_cluster" value="{{$category_cluster}}" />
 <div class="container1 mx-auto my-8">
   <div class="overflow-x-auto whitespace-no-wrap">
-    
     <div id="page_1">
       @foreach($clusters as $cluster)
       <div id="cluster_parent_{{$cluster->id}}" data-id="cluster_{{$cluster->id}}">
         <h2 id="lbl_cluster_{{$cluster->id}}" class="cursor-pointer" onclick="onClickToEdit({{$cluster->id}},'lbl_cluster', 'txt_cluster')">
           <span title="Cluster {{$cluster->id}}" class="cursor-grab">#</span> 
-          {{$cluster->name}}</h2>
-        <input id="txt_cluster_{{$cluster->id}}" value="{{$cluster->name}}" class="{{$class_cluster}} {{$hidden}}" onblur="onClickToCommit({{$cluster->id}},'lbl_cluster','txt_cluster')">
+          <span id="caption_cluster_{{$cluster->id}}">{{$cluster->name}}</span>
+        </h2>
+        <input id="txt_cluster_{{$cluster->id}}" value="{{$cluster->name}}" class="{{$class_cluster}} {{$hidden}}" onblur="onClickToCommit({{$cluster->id}},'lbl_cluster','txt_cluster','caption_cluster', route_cluster)">
         <div id="cluster_{{$cluster->id}}" data-id="cluster_{{$cluster->id}}" class="flex bg-gray-50 m-2 border rounded p-2">
           @php $groups = $cluster->getGroups; @endphp
           @foreach($groups as $group)
           <div id="group_parent_{{$group->id}}" data-id="group_{{$group->id}}" class="m-1 bg-gray-200 p-2 rounded">
             <h2 id="lbl_group_{{$group->id}}" class="text-xs font-bold my-2 cursor-pointer" onclick="onClickToEdit({{$group->id}},'lbl_group', 'txt_group')">
-              <span title="Group {{$group->id}}" class="cursor-grab">#</span> {{$group->name}}</h2>
-              <input id="txt_group_{{$group->id}}" value="{{$group->name}}" class="{{$class_group}} {{$hidden}}" onblur="onClickToCommit({{$group->id}},'lbl_group','txt_group')">
+              <span title="Group {{$group->id}}" class="cursor-grab">#</span> 
+              <span id="caption_group_{{$group->id}}">{{$group->name}}</span>
+            </h2>
+              <input id="txt_group_{{$group->id}}" value="{{$group->name}}" class="{{$class_group}} {{$hidden}}" onblur="onClickToCommit({{$group->id}},'lbl_group','txt_group','caption_group', route_group)">
               <div id="group_{{$group->id}}" data-id="group_{{$group->id}}" class="grid gap-1 {{$group_width}}">
                 @foreach($group->getTasks as $task)
                 <div id="task_{{$task->id}}" data-id="task_{{$task->id}}" class="bg-white p-2 shadow rounded text-xs my1-1" >
                   <div onclick="onClickToEdit({{$task->id}},'lbl_task', 'txt_task')" class="cursor-pointer">
-                    <span id="lbl_task_{{$task->id}}" title="Task {{$task->id}}" class="cursor-grab" >
-                      # {{$task->name ?? "???"}} </span>
-                      <input id="txt_task_{{$task->id}}" value="{{$task->name}}" class="{{$class_task}} {{$hidden}}" onblur="onClickToCommit({{$task->id}},'lbl_task','txt_task')">
+                    <h2 id="lbl_task_{{$task->id}}" title="Task {{$task->id}}" class="cursor-grab" >
+                      <span>#</span>
+                      <span id="caption_task_{{$task->id}}">{{$task->name ?? "???"}} </span>
+                    </h2>
+                      <input id="txt_task_{{$task->id}}" value="{{$task->name}}" class="{{$class_task}} {{$hidden}}" onblur="onClickToCommit({{$task->id}},'lbl_task','txt_task','caption_task', route_task)">
                     </div>
                   </div>
                   @endforeach

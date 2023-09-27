@@ -23,6 +23,7 @@ trait TraitKanban
 		}
 		return $characters_after_last_underscore;
 	}
+
 	function changeParent(Request $request)
 	{
 		try {
@@ -51,7 +52,7 @@ trait TraitKanban
 	{
 		try {
 			$orders = $request->input('order');
-			$table = $this->modelPath::getTableName();
+			// $table = $this->modelPath::getTableName();
 			// Log::info($table);
 			$orders = $this->getLastWord($orders);
 			// Log::info($orders);
@@ -66,12 +67,29 @@ trait TraitKanban
 		return ResponseObject::responseSuccess($orders, [], "Updated");
 	}
 
+	function changeName(Request $request)
+	{
+		try {
+			// Log::info($request->input());
+			$id = $request->input('id');
+			$newName = $request->input('newText');
+			$item = $this->modelPath::find($id);
+			$item->name = $newName;
+			// Log::info($item . " " . $newName);
+			$item->save();
+		} catch (\Exception $e) {
+			return ResponseObject::responseFail($e->getMessage() . " Line " . $e->getLine());
+		}
+		return ResponseObject::responseSuccess($newName, [], "Updated");
+	}
+
 	function kanban(Request $request)
 	{
 		$action = $request->input('action');
 		switch ($action) {
 			case "changeOrder":
 			case "changeParent":
+			case "changeName":
 				return $this->{$action}($request);
 				break;
 		}
