@@ -61,13 +61,13 @@ class Prod_sequence_dataSource extends Controller
                         prod_disciplines pd,
                         prod_runs pru
                     WHERE 1 = 1";
-        if ($sub = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $sub";
+        if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id =  $sub";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
-        if ($sub = $valOfParams['prod_order_id']) $sql .= "\n AND ps.prod_order_id IN($sub)";
+        if ($po = $valOfParams['prod_order_id']) $sql .= "\n AND ps.prod_order_id IN($po)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prde.prod_routing_link_id IN ($prl)";
-        if ($prl = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id IN ($prl)";
-        if ($prl = $valOfParams['prod_discipline_id']) $sql .= "\n AND prde.erp_routing_link_id IN ($prl)";
+        if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id = $pd";
+        if ($erp = $valOfParams['erp_routing_link_id']) $sql .= "\n AND prde.erp_routing_link_id IN ($erp)";
 
         $sql .= "\n 
                     #AND ps.id = 347
