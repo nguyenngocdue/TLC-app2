@@ -106,10 +106,11 @@ trait TraitViewAllTable
 
         $frozenLeft = ($prop["frozen_left"] ?? false) ? "left" : false;
         $frozenRight = ($prop["frozen_right"] ?? false) ? "right" : false;
+        $nowrap = ($prop["nowrap_view_all"] ?? false);
 
         if ($frozenLeft) $output['fixed'] = 'left';
         if ($frozenRight) $output['fixed'] = 'right';
-
+        if ($nowrap) $output['nowrap'] = true;
         return $output;
     }
 
