@@ -349,7 +349,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
         } elseif ($value < 0) {
             return  '<i class="text-red-600 text-xs fa-solid fa-triangle pl-1"></i>';
         } else {
-            return '<i class="text-yellow-600 fa-solid fa-minus fa-xl" style="transform: scale(0.7, 1.5); margin-top: 9px;" ></i>';
+            return '<i class="text-yellow-600 fa-solid fa-minus fa-xl" style="transform: scale(0.7, 1.5); margin-top: 9px; margin-right: -3px" ></i>';
         }
     }
 
