@@ -9,10 +9,17 @@ class Kanban_task_cluster extends ModelExtended
     protected $fillable = ['id', 'name', 'description', 'status', 'owner_id'];
 
     public static $eloquentParams = [
+        "getParent" => ["belongsTo", Kanban_task_page::class, "kanban_page_id"],
         "getGroups" => ["hasMany", Kanban_task_group::class, "kanban_cluster_id"],
     ];
 
     public static $oracyParams = [];
+
+    public function getParent()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getGroups()
     {

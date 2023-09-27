@@ -201,3 +201,14 @@
 <div class="z-30"></div>
 <div class="z-40"></div>
 <div class="z-50"></div>
+
+{{-- width for kanban --}}
+<div class="w-10"></div>
+<div class="w-20"></div>
+<div class="w-32"></div>
+<div class="w-40"></div>
+<div class="w-52"></div>
+<div class="w-60"></div>
+<div class="w-72"></div>
+<div class="w-80"></div>
+<div class="w-96"></div>
