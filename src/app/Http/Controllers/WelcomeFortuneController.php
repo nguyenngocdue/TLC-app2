@@ -24,11 +24,15 @@ class WelcomeFortuneController extends Controller
     private function getDataSourceClusters()
     {
         return $this->clusterClass::query()
-            ->with("getGroups.getTasks")
-            // ->with(["getGroups" => function ($query) {
-            //     $query->whereHas('getTasks', function ($query) {
-            //     });
-            // }])
+            // ->with("getGroups.getTasks")
+            ->with(["getGroups" => function ($query) {
+                $query->orderBy('order_no');
+
+                $query->with(["getTasks" => function ($query) {
+                    $query->orderBy('order_no');
+                }]);
+            }])
+            ->orderBy('order_no')
             ->get();
     }
 

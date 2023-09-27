@@ -26,27 +26,22 @@
   <div class="overflow-x-auto whitespace-no-wrap">
     
     <div id="page_1">
-      <script>
-        kanbanInit1("page_", [1], route_cluster, "{{$category_page}}")
-        </script>
       @foreach($clusters as $cluster)
-      <div id="cluster_parent_{{$cluster->id}}">
+      <div id="cluster_parent_{{$cluster->id}}" data-id="cluster_{{$cluster->id}}">
         <h2 id="lbl_cluster_{{$cluster->id}}" class="cursor-pointer" onclick="onClickToEdit({{$cluster->id}},'lbl_cluster', 'txt_cluster')">
           <span title="Cluster {{$cluster->id}}" class="cursor-grab">#</span> 
           {{$cluster->name}}</h2>
         <input id="txt_cluster_{{$cluster->id}}" value="{{$cluster->name}}" class="{{$class_cluster}} {{$hidden}}" onblur="onClickToCommit({{$cluster->id}},'lbl_cluster','txt_cluster')">
-        <div id="cluster_{{$cluster->id}}" class="flex bg-gray-50 m-2 border rounded p-2">
-          <script>kanbanInit1("cluster_",  [{{$cluster->id}}], route_group, "{{$category_cluster}}")</script>
+        <div id="cluster_{{$cluster->id}}" data-id="cluster_{{$cluster->id}}" class="flex bg-gray-50 m-2 border rounded p-2">
           @php $groups = $cluster->getGroups; @endphp
           @foreach($groups as $group)
-          <div id="group_parent_{{$group->id}}" class="m-1 bg-gray-200 p-2 rounded">
+          <div id="group_parent_{{$group->id}}" data-id="group_{{$group->id}}" class="m-1 bg-gray-200 p-2 rounded">
             <h2 id="lbl_group_{{$group->id}}" class="text-xs font-bold my-2 cursor-pointer" onclick="onClickToEdit({{$group->id}},'lbl_group', 'txt_group')">
               <span title="Group {{$group->id}}" class="cursor-grab">#</span> {{$group->name}}</h2>
               <input id="txt_group_{{$group->id}}" value="{{$group->name}}" class="{{$class_group}} {{$hidden}}" onblur="onClickToCommit({{$group->id}},'lbl_group','txt_group')">
-              <div id="group_{{$group->id}}" class="grid gap-1 {{$group_width}}">
-                <script>kanbanInit1("group_", [ {{$group->id}} ], route_task, "{{$category_group}}")</script>
+              <div id="group_{{$group->id}}" data-id="group_{{$group->id}}" class="grid gap-1 {{$group_width}}">
                 @foreach($group->getTasks as $task)
-                <div id="task_{{$task->id}}" class="bg-white p-2 shadow rounded text-xs my1-1" >
+                <div id="task_{{$task->id}}" data-id="task_{{$task->id}}" class="bg-white p-2 shadow rounded text-xs my1-1" >
                   <div onclick="onClickToEdit({{$task->id}},'lbl_task', 'txt_task')" class="cursor-pointer">
                     <span id="lbl_task_{{$task->id}}" title="Task {{$task->id}}" class="cursor-grab" >
                       # {{$task->name ?? "???"}} </span>
@@ -54,18 +49,21 @@
                     </div>
                   </div>
                   @endforeach
-                  <button class="text-xs border border-gray-300 rounded hover:bg-blue-200">+ Add a Card</button>
                 </div>
+                <script>kanbanInit1("group_", [ {{$group->id}} ], route_task, "{{$category_group}}")</script>
+                <button class="text-xs border border-gray-300 rounded hover:bg-blue-200 mt-2 {{$group_width}}">+ Add a Card</button>
               </div>
               @endforeach
-              <div class="m-1 bg-gray-200 p-2 rounded h-9">
-                <button class="text-xs border border-gray-300 rounded hover:bg-blue-200 px-4 {{$group_width}}">+ Add a List</button>
-              </div>
+            </div>
+            <div class="m-1 bg-gray-200 p-2 rounded h-9">
+              <script>kanbanInit1("cluster_",  [{{$cluster->id}}], route_group, "{{$category_cluster}}")</script>
+              <button class="text-xs border border-gray-300 rounded hover:bg-blue-200 px-4 {{$group_width}}">+ Add a List</button>
             </div>
           </div>
           @endforeach
-          <button class="text-xs border border-gray-300 rounded hover:bg-blue-200 px-4 ml-2">+ Add a Cluster</button>
         </div>
+        <script>kanbanInit1("page_", [1], route_cluster, "{{$category_page}}")</script>
+        <button class="text-xs border border-gray-300 rounded hover:bg-blue-200 px-4 ml-2">+ Add a Cluster</button>
         <br/>
       </div>
     </div>

@@ -1,6 +1,6 @@
 const setValue = (sortable) => {
     var order = sortable.toArray()
-    console.log(order, sortable.el)
+    console.log(order)
 }
 
 const onClickToEdit = (id, lbl_type, txt_type) => {
@@ -26,8 +26,9 @@ const getCharactersAfterLastUnderscore = (str) => {
 
 const onEnd = (e, route, category) => {
     const { /*from,*/ to, item } = e
-    // const category = $('#category').val()
-    console.log("To:", to.id, "itemId:", item.id, "Cat:", category)
+    // console.log(e)
+    // console.log(sortable[i].toArray())
+    // console.log("To:", to.id, "itemId:", item.id, "Cat:", category)
     const itemId = getCharactersAfterLastUnderscore(item.id)
     const newParentId = getCharactersAfterLastUnderscore(to.id)
     $.ajax({
@@ -46,7 +47,7 @@ const onEnd = (e, route, category) => {
 const kanbanInit1 = (prefix, columns, route, category) => {
     for (let i = 0; i < columns.length; i++) {
         const itemName = prefix + columns[i]
-        console.log("Making kanban for", itemName)
+        // console.log("Making kanban for", itemName)
         var el = document.getElementById(itemName);
         if (el === null) {
             console.error("EL", itemName, "is NULL")
@@ -55,9 +56,9 @@ const kanbanInit1 = (prefix, columns, route, category) => {
         Sortable.create(el, {
             animation: 150,
             group: prefix,
-            // store: {
-            //     set: setValue,
-            // },
+            store: {
+                set: setValue,
+            },
 
             // setData: (dataTransfer, dragEl) => dataTransfer.setData('Text', dragEl.textContent),
             // onChoose: (e) => console.log("onChoose", e, e.oldIndex),
