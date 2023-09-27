@@ -171,7 +171,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
             //     'multiple' => true,
             // ],
             [
-                'title' => 'Status (for Production Sequence)',
+                'title' => 'Status (for Production Routing Link)',
                 'dataIndex' => 'status',
                 'allowClear' => true,
                 'multiple' => true,
@@ -246,7 +246,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     'fixed' => 'left',
                 ],
                 [
-                    "title" => "Status <br> (Production Sequence)",
+                    "title" => "Status <br> (Production Routing Link)",
                     "dataIndex" => "prod_sequence_status",
                     "align" => "left",
                     "width" => 100,
