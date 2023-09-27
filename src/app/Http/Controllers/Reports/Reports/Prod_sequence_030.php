@@ -30,6 +30,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     // DataSource
     public function getSqlStr($params)
     {
+        // dd($params);
         $sql = "SELECT 
                         sp.project_id AS project_id
                         ,sp.id AS sub_project_id
@@ -40,7 +41,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                         ,prl.name AS prod_routing_link_name
                         ,pr.id AS prod_routing_id    
                         ,pr.name AS prod_routing_name    
-                        ,po.status AS pro_status
+                        ,po.status AS prod_order_status
                         ,pose.status AS prod_sequence_status
                         #,pose.total_hours AS total_hours
                         
@@ -91,8 +92,10 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                         AND sp.id = {{sub_project_id}}";
         if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
         if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
-        $sql .= "\n AND pose.status IN ('in_progress', 'finished', 'on_hold')
-                        AND po.status IN ('in_progress', 'finished', 'on_hold')
+        if (isset($params['status'])) $sql .= "\n  AND pose.status IN ({{status}})";
+        elseif (!isset($params['status'])) $sql .= "\n AND pose.status IN ('in_progress', 'finished', 'on_hold')";
+
+        $sql .= "\n     AND po.status IN ('in_progress', 'finished', 'on_hold')
                         AND SUBSTR(pru.date, 1, 10) <= '{{picker_date}}'
                         AND pose.deleted_by IS NULL";
 
@@ -102,22 +105,17 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     ,target_man_hours
                     ,target_man_power
                     ,total_man_hours
-                    ORDER BY sub_project_name, prod_order_name;";
+                    ORDER BY sub_project_name, prod_order_name";
         return $sql;
     }
 
     protected function getDefaultValueParams($params, $request)
     {
-        $a = 'picker_date';
-        $b = 'project_id';
-        $c = 'sub_project_id';
-        $d = 'prod_routing_id';
-        $e = 'page_limit';
-        $params[$a] = date('d/m/Y');
-        $params[$b] = $this->projectId;
-        $params[$c] = $this->subProjectId;
-        $params[$d] = $this->prodRoutingId;
-        $params[$e] = $this->pageLimit;
+        $params['picker_date'] = date('d/m/Y');
+        $params['project_id'] = $this->projectId;
+        $params['sub_project_id'] = $this->subProjectId;
+        $params['prod_routing_id'] = $this->prodRoutingId;
+        $params['page_limit'] = $this->pageLimit;
         return $params;
     }
 
@@ -166,6 +164,18 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                 'hasListenTo' => true,
 
             ],
+            // [
+            //     'title' => 'Status (for Production Order)',
+            //     'dataIndex' => 'status',
+            //     'allowClear' => true,
+            //     'multiple' => true,
+            // ],
+            [
+                'title' => 'Status (for Production Sequence)',
+                'dataIndex' => 'status',
+                'allowClear' => true,
+                'multiple' => true,
+            ],
         ];
     }
 
@@ -208,6 +218,13 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     'fixed' => 'left',
                 ],
                 [
+                    "title" => "Status <br/> (Production Order)",
+                    "dataIndex" => "prod_order_status",
+                    "align" => "left",
+                    "width" => 100,
+                    'fixed' => 'left',
+                ],
+                [
                     "title" => "Production Routing",
                     "dataIndex" => "prod_routing_name",
                     "align" => "left",
@@ -229,7 +246,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     'fixed' => 'left',
                 ],
                 [
-                    "title" => "Status",
+                    "title" => "Status <br> (Production Sequence)",
                     "dataIndex" => "prod_sequence_status",
                     "align" => "left",
                     "width" => 100,

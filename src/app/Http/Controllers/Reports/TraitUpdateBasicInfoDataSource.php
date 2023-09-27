@@ -21,6 +21,8 @@ trait TraitUpdateBasicInfoDataSource
                         'value' => $libStatus['title'],
                         'cell_class' =>  'text-'. $libStatus['text_color'],
                     ];
+                    // dd($libStatus, $values, $field);
+
                     continue;
                 }
                 $f = str_replace('name', 'desc', $field);
@@ -57,6 +59,7 @@ trait TraitUpdateBasicInfoDataSource
             'department_name',
             'ecos_name',
             'prod_sequence_status',
+            'prod_order_status',
         ] + $fieldInputs;
         $attrib = [];
         foreach ($dataSource as $key => &$values) {

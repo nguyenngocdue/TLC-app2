@@ -8,7 +8,7 @@ use App\View\Components\Reports\ParentParamReports;
 class ParamProdRoutingLinkId extends ParentParamReports
 {
     protected $referData = 'prod_routing_id';
-    // protected $referData1 = 'prod_discipline_id';
+    protected $referData1 = 'prod_discipline_id';
     protected function getDataSource()
     {
         $hasListenTo = $this->hasListenTo();
@@ -17,12 +17,14 @@ class ParamProdRoutingLinkId extends ParentParamReports
         $result = [];
         foreach ($prodRoutingLinks as $routing){
             $prodRoutingIds = $routing->getProdRoutings()->get()->pluck('id')->toArray();
-            // $disciplineIds = $routing->getDiscipline()->pluck('id')->toArray();
+            $disciplineIds = $routing->getDiscipline()->pluck('id')->toArray();
             $array = (object)[];
             $array->id = $routing->id;
             $array->name = $routing->name;
-            if($hasListenTo) $array->{$this->referData} = $prodRoutingIds;
-            // $array->{$this->referData1} = $disciplineIds;
+            if($hasListenTo) {
+                $array->{$this->referData} = $prodRoutingIds;
+                $array->{$this->referData1} = $disciplineIds;
+            } 
             $result[] = $array;
         };
         usort($result, function ($a, $b) { return strcmp($a->name, $b->name); });

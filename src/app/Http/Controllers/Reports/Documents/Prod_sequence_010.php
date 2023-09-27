@@ -31,7 +31,8 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
     protected $viewName = 'document-prod-sequence-010';
     protected $type = 'prod_sequence';
     protected $optionPrint = "landscape";
-    protected $tableTrueWidth = false;
+    protected $tableTrueWidth = true;
+    protected $overTableTrueWidth = true;
 
     // DataSource
     public function getSqlStr($params)
@@ -78,7 +79,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         if ($prodOrderIds) $sql .= "\n AND po.id IN ($prodOrderIds)";
 
         $sql .= "\n GROUP BY prod_discipline_name, prod_routing_link_id, po.id,pr.worker_number
-                    ORDER BY prod_order_name, prod_discipline_name";
+                    ORDER BY prod_routing_link_name,prod_order_name,prod_discipline_name ";
         // dump($sql);
         return $sql;
     }
@@ -154,22 +155,22 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         return
             [
                 [
-                    "title" => "Production Order",
-                    "dataIndex" => "prod_order_name",
-                    "align" => "center",
-                    "width" => 80,
-                ],
-                [
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
-                    "width" => 460,
+                    "width" => 358,
+                ],
+                [
+                    "title" => "Production Order",
+                    "dataIndex" => "prod_order_name",
+                    "align" => "center",
+                    "width" => 90,
                 ],
                 [
                     "title" => "Status",
                     "dataIndex" => "prod_sequence_status",
                     "align" => "left",
-                    "width" => 30,
+                    "width" => 110,
                 ],
                 [
                     "title" => "Discipline",
@@ -181,21 +182,21 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                     "title" => "Man-Power",
                     "dataIndex" => "man_power",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 35,
                     'footer' => "agg_sum"
                 ],
                 [
                     "title" => "Hours",
                     "dataIndex" => "hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 35,
                     'footer' => "agg_sum"
                 ],
                 [
                     "title" => "Man-Hours",
                     "dataIndex" => "man_hours",
                     "align" => "right",
-                    "width" => 30,
+                    "width" => 35,
                     'footer' => "agg_sum"
                 ]
             ];

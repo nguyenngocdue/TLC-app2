@@ -31,7 +31,7 @@ class Prod_sequence_010 extends Report_Parent2Controller
         $params['month'] = DateReport::getCurrentYearAndMonth();
         $params['project_id'] = $this->projectId;
         $params['sub_project_id'] = $this->subProjectId;
-       # $params['prod_routing_id'] = $this->prodRoutingId;
+        $params['prod_routing_id'] = $this->prodRoutingId;
         return $params;
     }
 

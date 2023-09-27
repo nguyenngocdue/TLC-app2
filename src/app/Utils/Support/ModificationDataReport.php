@@ -25,7 +25,7 @@ class ModificationDataReport
             }
             $icon = isset($items['icon']) ? $items['icon'] :'';
             $data[$k] = (object)[
-                'value' => $data[$k].$icon ?? '',
+                'value' => ($icon ?'<div class="flex justify-end items-center ">'.$data[$k].$icon.'</div>' :  $data[$k]) ?? '',
                 'cell_href' => $href,
                 'cell_title' => $strFormulaByField,
                 'cell_class' => $color,
