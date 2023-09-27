@@ -322,6 +322,7 @@ trait  PivotReportColumn2
                 'dataIndex' => $value->aggregation . '_' . $key,
                 'width' => $value->width ?? 50,
                 'align' => $value->align ?? 'right',
+                'footer' => $value->footer ?? '',
             ];
         };
         return $columnsOfAgg;

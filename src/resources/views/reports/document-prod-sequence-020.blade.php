@@ -39,7 +39,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                     <div class="grid grid-cols-12 text-right ">
                         <label class="{{$class1}} col-start-1  col-span-3">Range Date</label>
                         <span class="{{$class2}}  col-start-4  col-span-9">from: 
-                            <strong class='px-2'>"the begining of project"</strong>
+                            <strong class='px-2'>"the beginning of project"</strong>
                             to:
                             <strong class='px-2'>{{$basicInfoData['date']}}</strong>
                         </span>
