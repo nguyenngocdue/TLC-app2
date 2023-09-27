@@ -215,7 +215,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
-                    "width" => 184,
+                    "width" => 156,
                     'fixed' => 'left'
                 ],
                 [
@@ -248,46 +248,46 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "title" => "Hours <br/>(SUM)",
                     "dataIndex" => "target_hours",
                     "align" => "right",
-                    "width" => 90,
+                    "width" => 92,
                     "colspan" => 4,
                 ],
                 [
                     "dataIndex" => "hours",
                     "align" => "right",
-                    "width" => 90,
+                    "width" => 92,
                 ],
                 [
                     "dataIndex" => "vari_hours",
                     "align" => "right",
-                    "width" => 90,
+                    "width" => 92,
                 ],
                 [
                     "dataIndex" => "percent_vari_hours",
                     "align" => "right",
-                    "width" => 90,
+                    "width" => 92,
                 ],
                 [
                     "title" => "Man-hours <br/>(SUM)",
                     "dataIndex" => "target_man_hours",
                     "align" => "right",
-                    "width" => 95,
+                    "width" => 100,
                     "colspan" => 4,
 
                 ],
                 [
                     "dataIndex" => "man_hours",
                     "align" => "right",
-                    "width" => 95,
+                    "width" => 100,
                 ],
                 [
                     "dataIndex" => "vari_man_hours",
                     "align" => "right",
-                    "width" => 95,
+                    "width" => 100,
                 ],
                 [
                     "dataIndex" => "percent_vari_man_hours",
                     "align" => "right",
-                    "width" => 95,
+                    "width" => 100,
                 ],
             ];
     }
