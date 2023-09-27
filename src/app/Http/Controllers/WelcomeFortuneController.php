@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 class WelcomeFortuneController extends Controller
 {
     private $clusterClass = Kanban_task_cluster::class;
-    private $category_group = 'kanban_group_id';
+    private $category_page = 'kanban_page_id';
     private $category_cluster = 'kanban_cluster_id';
+    private $category_group = 'kanban_group_id';
     private $debug = false;
 
     public function getType()
@@ -23,11 +24,15 @@ class WelcomeFortuneController extends Controller
     private function getDataSourceClusters()
     {
         return $this->clusterClass::query()
-            ->with("getGroups.getTasks")
-            // ->with(["getGroups" => function ($query) {
-            //     $query->whereHas('getTasks', function ($query) {
-            //     });
-            // }])
+            // ->with("getGroups.getTasks")
+            ->with(["getGroups" => function ($query) {
+                $query->orderBy('order_no');
+
+                $query->with(["getTasks" => function ($query) {
+                    $query->orderBy('order_no');
+                }]);
+            }])
+            ->orderBy('order_no')
             ->get();
     }
 
@@ -51,6 +56,8 @@ class WelcomeFortuneController extends Controller
 
             'route_cluster' => $route_cluster,
             'category_cluster' => $this->category_cluster,
+
+            'category_page' => $this->category_page,
         ]);
     }
 }

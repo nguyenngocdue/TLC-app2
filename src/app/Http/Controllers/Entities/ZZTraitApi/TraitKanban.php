@@ -19,9 +19,9 @@ trait TraitKanban
 			] = $input;
 			$item = $this->modelPath::find($itemId);
 			$table = $this->modelPath::getTableName();
-			// Log::info($this->modelPath . " [" . $itemId . ']');
-			// Log::info($item);
 			if (!isset($item->{$category})) {
+				Log::info($this->modelPath . " [" . $itemId . ']' . "->" . $category);
+				Log::info($item);
 				throw new \Exception("Category '$category' not found in '$table'.");
 			}
 			$item->{$category} = $newParentId;
