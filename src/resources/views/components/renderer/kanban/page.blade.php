@@ -7,21 +7,19 @@
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <script src="{{ asset('js/kanban.js') }}"></script> --}}
 
-<script>const route_cluster = "{{$routeCluster}}";</script>
-<script>const route_group = "{{$routeGroup}}";</script>
-<script>const route_task = "{{$routeTask}}";</script>
-
-<div class="container1 mx-auto">
-    <div class="overflow-x-auto whitespace-no-wrap">
-        <div id="page_{{$pageId}}">
-            @foreach($clusters as $cluster)
-                <x-renderer.kanban.cluster :cluster="$cluster" hidden="{{$hidden}}" groupWidth="{{$groupWidth}}"/>
-            @endforeach
+<x-renderer.card titleId="divPageCard" title="{{$page->name}}">
+    <div class="container1 mx-auto">
+        <div class="overflow-x-auto whitespace-no-wrap">
+            <div id="page_{{$pageId}}">
+                @foreach($clusters as $cluster)
+                    <x-renderer.kanban.cluster :cluster="$cluster" hidden="{{$hidden}}" groupWidth="{{$groupWidth}}"/>
+                @endforeach
+            </div>
+            <script>kanbanInit1("page_", [{{$pageId}}], route_cluster, "{{$categoryPage}}")</script>
+            <button class="{{$classButton}} px-4 ml-2" type="button" onclick="addANewKanbanObj('page_', {{$pageId}}, route_cluster, '{{$groupWidth}}')">+ Add a Cluster</button>
+            <br/>
+            <br/>
+            <br/>
         </div>
-        <script>kanbanInit1("page_", [{{$pageId}}], route_cluster, "{{$categoryPage}}")</script>
-        <button class="{{$classButton}} px-4 ml-2" type="button" onclick="addANewKanbanObj('page_', {{$pageId}}, route_cluster, '{{$groupWidth}}')">+ Add a Cluster</button>
-        <br/>
-        <br/>
-        <br/>
     </div>
-</div>
+</x-renderer.card>

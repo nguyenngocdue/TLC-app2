@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Models\Kanban_task_page;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
@@ -133,6 +134,16 @@ trait TraitKanban
 		return ResponseObject::responseSuccess(['renderer' => $renderer], ['id' => $insertedId, 'item' => $insertedObj], "Inserted");
 	}
 
+	function loadPage(Request $request)
+	{
+		$id = $request->input('pageId');
+		$page = Kanban_task_page::find($id);
+		$renderer = Blade::render('<x-renderer.kanban.page :page="$page"/>', [
+			'page' => $page,
+		]);
+		return ResponseObject::responseSuccess(['renderer' => $renderer], [], "Inserted");
+	}
+
 	function kanban(Request $request)
 	{
 		try {
@@ -142,6 +153,7 @@ trait TraitKanban
 				case "changeParent":
 				case "changeName":
 				case "addNew":
+				case "loadPage":
 					return $this->{$action}($request);
 					break;
 			}

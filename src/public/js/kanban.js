@@ -147,3 +147,30 @@ const kanbanInit1 = (prefix, columns, route, category) => {
         });
     }
 }
+
+const kanbanLoadPage = (pageId, url, ids) => {
+
+    $("#divKanbanPage").slideUp("slow");
+
+    for (let i = 0; i < ids.length; i++) {
+        $("#iconOpen_" + ids[i]).hide()
+        $("#iconClose_" + ids[i]).show()
+    }
+    $("#iconClose_" + pageId).hide()
+    $("#iconOpen_" + pageId).show()
+
+    $.ajax({
+        method: 'POST',
+        url,
+        data: { action: "loadPage", pageId },
+        success: function (response) {
+            // toastr.success(response.message)
+            const { renderer } = response.hits
+            $("#divKanbanPage").html(renderer)
+            $("#divKanbanPage").slideDown("slow");
+        },
+        error: function (jqXHR) {
+            toastr.error(jqXHR.responseJSON.message)
+        },
+    })
+}

@@ -15,13 +15,12 @@
                             {{-- <span>#</span> --}}
                             <span id="caption_toc_{{$page->id}}" onclick="onClickToEdit({{$page->id}},'lbl_toc', 'txt_toc')" class="cursor-pointer">{{$page->name ?? "???"}} </span>
                         </h2>
-                        <input id="txt_toc_{{$page->id}}" value="{{$page->name}}" class="{{$classPage}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$page->id}},'lbl_toc','txt_toc','caption_toc', route_page)">
+                        <input id="txt_toc_{{$page->id}}" value="{{$page->name}}" class="{{$classPage}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$page->id}},'lbl_toc','txt_toc','caption_toc', route_page); $('#divPageCard').html($('#txt_toc_{{$page->id}}').val())">
                     </div>
-                    @if($page->id == $pageId)
-                    <a href=""><i class="fa-duotone fa-folder-open"></i></a>
-                    @else
-                    <a href=""><i class="fa-duotone fa-folder"></i></a>
-                    @endif
+                    <span class="cursor-pointer" onclick="kanbanLoadPage({{$page->id}}, route_page, {{$pageIds}})">
+                    <span id="iconOpen_{{$page->id}}" class="{{($page->id == $pageId)?'':'hidden'}}"><i class="fa-duotone fa-folder-open"></i></span>
+                    <span id="iconClose_{{$page->id}}" class="{{($page->id == $pageId)?'hidden':''}}"><i class="fa-duotone fa-folder"></i></span>
+                    </span>
                 </div>
             </div> 
             @endforeach

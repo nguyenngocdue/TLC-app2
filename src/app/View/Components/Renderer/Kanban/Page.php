@@ -2,9 +2,7 @@
 
 namespace App\View\Components\Renderer\Kanban;
 
-use App\Models\Kanban_task;
 use App\Models\Kanban_task_cluster;
-use App\Models\Kanban_task_group;
 use Illuminate\View\Component;
 
 class Page extends Component
@@ -35,20 +33,12 @@ class Page extends Component
 
     function render()
     {
-        $route_task = route(Kanban_task::getTableName() . ".kanban");
-        $route_group = route(Kanban_task_group::getTableName() . ".kanban");
-        $route_cluster = route(Kanban_task_cluster::getTableName() . ".kanban");
-
         return view("components.renderer.kanban.page", [
             'page' => $this->page,
             'pageId' => $this->page->id,
             'clusters' => $this->getDataSourceClusters(),
             'hidden' => $this->debug ? "" : "hidden",
             'groupWidth' => $this->groupWidth,
-
-            'routeTask' => $route_task,
-            'routeGroup' => $route_group,
-            'routeCluster' => $route_cluster,
         ]);
     }
 }

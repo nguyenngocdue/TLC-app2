@@ -9,6 +9,10 @@
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <script src="{{ asset('js/kanban.js') }}"></script>
 
+<script>const route_cluster = "{{route('App\\Models\\Kanban_task_cluster'::getTableName() . '.kanban');}}";</script>
+<script>const route_group = "{{route('App\\Models\\Kanban_task_group'::getTableName() . '.kanban')}}";</script>
+<script>const route_task = "{{route('App\\Models\\Kanban_task'::getTableName() . '.kanban')}}";</script>
+
 <div class="px-4 mt-2">
     <x-elapse title="Bootrap: " duration="{{$frameworkTook}}"/>   
     <x-elapse title="ViewAllController: "/> 
@@ -17,10 +21,8 @@
         <div class="col-span-2">
             <x-renderer.kanban.pages :page="$page" />
         </div>
-        <div class="col-span-10">
-            <x-renderer.card title="{{$page->name}}">
-                <x-renderer.kanban.page :page="$page"/>
-            </x-renderer.card>
+        <div id="divKanbanPage" class="col-span-10">
+            <x-renderer.kanban.page :page="$page"/>
         </div>
     </div>
 </div>

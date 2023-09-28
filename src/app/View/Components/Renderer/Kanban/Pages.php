@@ -18,10 +18,12 @@ class Pages extends Component
         $pages = Kanban_task_page::query()
             ->orderBy('order_no')
             ->get();
+        $pageIds = "[" . $pages->pluck('id')->join(",") . "]";
         return view("components.renderer.kanban.pages", [
             'pages' => $pages,
             'routePage' => $route_page,
             'pageId' => $this->page->id,
+            'pageIds' => $pageIds,
         ]);
     }
 }
