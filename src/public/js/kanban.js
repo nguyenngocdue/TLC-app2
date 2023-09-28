@@ -117,7 +117,7 @@ const onEnd = (e, url, category) => {
 const kanbanInit1 = (prefix, columns, route, category) => {
     for (let i = 0; i < columns.length; i++) {
         const itemName = prefix + columns[i]
-        console.log("Making kanban for", itemName)
+        // console.log("Making kanban for", itemName)
         var el = document.getElementById(itemName);
         if (el === null) {
             console.error("EL", itemName, "is NULL")
@@ -149,7 +149,7 @@ const kanbanInit1 = (prefix, columns, route, category) => {
 }
 
 const kanbanLoadPage = (pageId, url, ids) => {
-
+    $("#txtCurrentPage").val(pageId);
     $("#divKanbanPage").slideUp("slow");
 
     for (let i = 0; i < ids.length; i++) {
@@ -173,4 +173,13 @@ const kanbanLoadPage = (pageId, url, ids) => {
             toastr.error(jqXHR.responseJSON.message)
         },
     })
+}
+
+const renameCurrentPage = (pageId) => {
+    const currentPage = $("#txtCurrentPage").val()
+    const isSamePage = currentPage == pageId
+    console.log(currentPage, pageId, isSamePage)
+    if (isSamePage) {
+        $('#divPageCard').html($('#txt_toc_' + pageId).val())
+    }
 }

@@ -15,16 +15,17 @@
                             {{-- <span>#</span> --}}
                             <span id="caption_toc_{{$page->id}}" onclick="onClickToEdit({{$page->id}},'lbl_toc', 'txt_toc')" class="cursor-pointer">{{$page->name ?? "???"}} </span>
                         </h2>
-                        <input id="txt_toc_{{$page->id}}" value="{{$page->name}}" class="{{$classPage}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$page->id}},'lbl_toc','txt_toc','caption_toc', route_page); $('#divPageCard').html($('#txt_toc_{{$page->id}}').val())">
+                        <input id="txt_toc_{{$page->id}}" value="{{$page->name}}" class="{{$classPage}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$page->id}},'lbl_toc','txt_toc','caption_toc', route_page); renameCurrentPage({{$page->id}})">
                     </div>
                     <span class="cursor-pointer" onclick="kanbanLoadPage({{$page->id}}, route_page, {{$pageIds}})">
-                    <span id="iconOpen_{{$page->id}}" class="{{($page->id == $pageId)?'':'hidden'}}"><i class="fa-duotone fa-folder-open"></i></span>
-                    <span id="iconClose_{{$page->id}}" class="{{($page->id == $pageId)?'hidden':''}}"><i class="fa-duotone fa-folder"></i></span>
+                        <span id="iconOpen_{{$page->id}}" class="{{($page->id == $pageId)?'':'hidden'}}"><i class="fa-duotone fa-folder-open"></i></span>
+                        <span id="iconClose_{{$page->id}}" class="{{($page->id == $pageId)?'hidden':''}}"><i class="fa-duotone fa-folder"></i></span>
                     </span>
                 </div>
             </div> 
             @endforeach
         </div>
         <script>kanbanInit1("toc_group_", [1], route_page, "categoryGroup")</script>
+        <input id="txtCurrentPage" type="hidden" value="{{$pageId}}"/>
     </x-renderer.card>
 </div>
