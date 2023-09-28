@@ -55,7 +55,7 @@ trait TraitKanban
 		// Log::info($orders);
 		foreach ($orders as $index => $order) {
 			$item = $this->modelPath::find($order);
-			$item->order_no = $index * 10;
+			$item->order_no = $index;
 			$item->save();
 		}
 		return ResponseObject::responseSuccess($orders, [], "Updated");
@@ -78,6 +78,12 @@ trait TraitKanban
 		switch ($table) {
 			case "kanban_tasks":
 				return "kanban_group_id";
+			case "kanban_task_groups":
+				return "kanban_cluster_id";
+			case "kanban_task_clusters":
+				return "kanban_page_id";
+			default:
+				throw new \Exception("Unknown parent column of $table.");
 		}
 	}
 
@@ -87,12 +93,17 @@ trait TraitKanban
 		$parent_column = $this->getParentColumn($table);
 		$groupWidth = $request->input('groupWidth');
 
-		$insertedObj = $this->modelPath::create([
+		$item = [
 			'name' => "New Item",
 			$parent_column => $request->input('parent_id'),
 			'owner_id' => CurrentUser::id(),
-		]);
+		];
+		// Log::info($item);
+		$insertedObj = $this->modelPath::create($item);
+
 		$insertedId = $insertedObj->id;
+		$insertedObj->order_no = $insertedId;
+		$insertedObj->save();
 
 		$renderer = "";
 		switch ($table) {
@@ -119,7 +130,7 @@ trait TraitKanban
 				break;
 		}
 
-		return ResponseObject::responseSuccess(['renderer' => $renderer], ['id' => $insertedId], "Inserted");
+		return ResponseObject::responseSuccess(['renderer' => $renderer], ['id' => $insertedId, 'item' => $insertedObj], "Inserted");
 	}
 
 	function kanban(Request $request)

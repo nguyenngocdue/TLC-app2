@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class Kanban_task_cluster extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'description', 'status', 'owner_id'];
+    protected $fillable = ['id', 'name', 'description', 'status', 'owner_id', 'kanban_page_id'];
 
     public static $eloquentParams = [
         "getParent" => ["belongsTo", Kanban_task_page::class, "kanban_page_id"],

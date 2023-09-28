@@ -21,6 +21,7 @@ class Page extends Component
     {
         return Kanban_task_cluster::query()
             // ->with("getGroups.getTasks")
+            ->where('kanban_page_id', $this->pageId)
             ->with(["getGroups" => function ($query) {
                 $query->orderBy('order_no');
 
