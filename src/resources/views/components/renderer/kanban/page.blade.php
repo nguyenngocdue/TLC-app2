@@ -14,10 +14,12 @@
 <div class="container1 mx-auto my-8">
     <div class="overflow-x-auto whitespace-no-wrap">
         <div id="page_{{$pageId}}">
-            <x-renderer.kanban.cluster :clusters="$clusters" hidden="{{$hidden}}" groupWidth="{{$groupWidth}}"/>
+            @foreach($clusters as $cluster)
+                <x-renderer.kanban.cluster :cluster="$cluster" hidden="{{$hidden}}" groupWidth="{{$groupWidth}}"/>
+            @endforeach
         </div>
         <script>kanbanInit1("page_", [{{$pageId}}], route_cluster, "{{$categoryPage}}")</script>
-        <button class="{{$classButton}} px-4 ml-2" type="button" onclick="addANew({{$pageId}}, route_cluster)">+ Add a Cluster</button>
+        <button class="{{$classButton}} px-4 ml-2" type="button" onclick="addANewKanbanObj('page_', {{$pageId}}, route_cluster, '{{$groupWidth}}')">+ Add a Cluster</button>
         <br/>
     </div>
 </div>

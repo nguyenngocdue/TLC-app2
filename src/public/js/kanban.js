@@ -9,6 +9,15 @@ const getChildPrefix = (prefix) => {
     }
 }
 
+// const getParentPrefix = (prefix) => {
+//     switch (prefix) {
+//         case "cluster_": return "page_"
+//         case "group_": return "cluster_"
+//         case "task_": return "group_"
+//         default: console.error("Unknown parent of prefix", prefix)
+//     }
+// }
+
 const setValue = (sortable, url, prefix) => {
     var order = sortable.toArray().filter(a => a.startsWith(prefix))
     $.ajax({
@@ -25,16 +34,19 @@ const setValue = (sortable, url, prefix) => {
     console.log("setValue", order, prefix)
 }
 
-const addANew = (parent_id, url) => {
+const addANewKanbanObj = (prefix, parent_id, url, groupWidth) => {
     console.log(url, parent_id)
     $.ajax({
         method: "POST",
         url,
-        data: { action: "addNew", parent_id },
+        data: { action: "addNew", parent_id, groupWidth },
         success: function (response) {
             // toastr.success(response.message)
-            console.log(response)
-
+            // console.log(response)
+            const { renderer } = response.hits
+            const parentId = prefix + parent_id
+            // console.log(parentId, renderer)
+            $("#" + parentId).append(renderer)
         },
         error: function (jqXHR) {
             toastr.error(jqXHR.responseJSON.message)

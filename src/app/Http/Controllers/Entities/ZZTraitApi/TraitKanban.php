@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 
 trait TraitKanban
@@ -72,14 +73,53 @@ trait TraitKanban
 		return ResponseObject::responseSuccess($newName, [], "Updated");
 	}
 
+	function getParentColumn($table)
+	{
+		switch ($table) {
+			case "kanban_tasks":
+				return "kanban_group_id";
+		}
+	}
+
 	function addNew(Request $request)
 	{
+		$table = $this->modelPath::getTableName();
+		$parent_column = $this->getParentColumn($table);
+		$groupWidth = $request->input('groupWidth');
+
 		$insertedObj = $this->modelPath::create([
+			'name' => "New Item",
+			$parent_column => $request->input('parent_id'),
 			'owner_id' => CurrentUser::id(),
 		]);
 		$insertedId = $insertedObj->id;
 
-		return ResponseObject::responseSuccess($insertedObj, ['id' => $insertedId], "Inserted");
+		$renderer = "";
+		switch ($table) {
+			case 'kanban_tasks':
+				$renderer = Blade::render('<x-renderer.kanban.task :task="$task" groupWidth="{{$groupWidth}}"/>', [
+					'task' => $insertedObj,
+					'groupWidth' => $groupWidth,
+				]);
+				break;
+			case 'kanban_task_groups':
+				$renderer = Blade::render('<x-renderer.kanban.group :group="$group" groupWidth="{{$groupWidth}}"/>', [
+					'group' => $insertedObj,
+					'groupWidth' => $groupWidth,
+				]);
+				break;
+			case 'kanban_task_clusters':
+				$renderer = Blade::render('<x-renderer.kanban.cluster :cluster="$cluster" groupWidth="{{$groupWidth}}"/>', [
+					'cluster' => $insertedObj,
+					'groupWidth' => $groupWidth,
+				]);
+				break;
+			default:
+				$renderer = "Unknown how to render kanban for $table";
+				break;
+		}
+
+		return ResponseObject::responseSuccess(['renderer' => $renderer], ['id' => $insertedId], "Inserted");
 	}
 
 	function kanban(Request $request)
