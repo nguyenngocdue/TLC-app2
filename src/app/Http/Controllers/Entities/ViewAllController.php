@@ -25,6 +25,7 @@ class ViewAllController extends Controller
     use TraitViewAllMatrixController;
     use TraitViewAllMatrixPrintController;
     use TraitViewAllMatrixApproveMultiController;
+    use TraitViewAllKanbanController;
 
     protected $type = "";
     protected $typeModel = '';
@@ -49,9 +50,11 @@ class ViewAllController extends Controller
         $table = Str::plural($this->type);
         $calendar_apps = JsonControls::getAppsHaveViewAllCalendar();
         $matrix_apps = JsonControls::getAppsHaveViewAllMatrix();
+        $kanban_apps = JsonControls::getAppsHaveViewAllKanban();
 
         if (in_array($table, $calendar_apps)) return 'calendar';
         if (in_array($table, $matrix_apps)) return 'matrix';
+        if (in_array($table, $kanban_apps)) return 'kanban';
         return null;
     }
 
@@ -79,6 +82,8 @@ class ViewAllController extends Controller
                 return $this->indexViewAllMatrixPrint($request);
             case "matrix_approve_multi":
                 return $this->indexViewAllMatrixApproveMulti($request);
+            case "kanban":
+                return $this->indexViewAllKanban($request);
             case 'table':
             default:
                 return $this->indexViewAllTable($request, $trashed);
