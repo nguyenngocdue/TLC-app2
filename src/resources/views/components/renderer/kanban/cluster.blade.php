@@ -9,11 +9,13 @@
 @endonce
 
 <div id="cluster_parent_{{$cluster->id}}" data-id="cluster_{{$cluster->id}}">
-    <h2 id="lbl_cluster_{{$cluster->id}}" >
-        <span title="Cluster {{$cluster->id}}" class="cursor-grab">#</span> 
-        <span id="caption_cluster_{{$cluster->id}}" class="cursor-pointer" onclick="onClickToEdit({{$cluster->id}},'lbl_cluster', 'txt_cluster')">{{$cluster->name}}</span>
-    </h2>
-    <input id="txt_cluster_{{$cluster->id}}" value="{{$cluster->name}}" class="{{$classCluster}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$cluster->id}},'lbl_cluster','txt_cluster','caption_cluster', route_cluster)">
+    <div class="fixed1">
+        <h2 id="lbl_cluster_{{$cluster->id}}"  >
+            <span title="Cluster {{$cluster->id}}" class="cursor-grab">#</span> 
+            <span id="caption_cluster_{{$cluster->id}}" class="cursor-pointer" onclick="onClickToEdit({{$cluster->id}},'lbl_cluster', 'txt_cluster')">{{$cluster->name}}</span>
+        </h2>
+        <input id="txt_cluster_{{$cluster->id}}" value="{{$cluster->name}}" class="{{$classCluster}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$cluster->id}},'lbl_cluster','txt_cluster','caption_cluster', route_cluster)">
+    </div>
     <div class="flex w-max">
         <div id="cluster_{{$cluster->id}}" data-id="cluster_{{$cluster->id}}" class="flex bg-gray-50 m-2 border rounded p-2 min-w-[330px] ma1x-w-fit">
             @php $groups = $cluster->getGroups; @endphp

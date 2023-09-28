@@ -5,6 +5,7 @@ const getChildPrefix = (prefix) => {
         case "page_": return "cluster_"
         case "cluster_": return "group_"
         case "group_": return "task_"
+        case "toc_group_": return "toc_"
         default: console.error("Unknown child of prefix", prefix)
     }
 }
@@ -116,7 +117,7 @@ const onEnd = (e, url, category) => {
 const kanbanInit1 = (prefix, columns, route, category) => {
     for (let i = 0; i < columns.length; i++) {
         const itemName = prefix + columns[i]
-        // console.log("Making kanban for", itemName)
+        console.log("Making kanban for", itemName)
         var el = document.getElementById(itemName);
         if (el === null) {
             console.error("EL", itemName, "is NULL")
