@@ -1,6 +1,6 @@
 @php
     $categoryPage = 'kanban_page_id';
-    $classButton = "text-xs border border-gray-300 rounded hover:bg-blue-200";
+    $classButton = "text-xs border border-gray-300 rounded hover:bg-blue-200 shadow";
 @endphp
 
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.17.0/Sortable.min.css">

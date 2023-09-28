@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
+{{-- <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script> --}}
+
+<script src="{{ asset('js/jquery@3.7.1.min.js') }}"></script>
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 <script>
     function check() {

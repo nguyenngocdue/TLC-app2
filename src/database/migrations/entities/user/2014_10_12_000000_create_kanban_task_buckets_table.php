@@ -19,11 +19,11 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('kanban_task_pages', function (BlueprintExtended $table) {
+        $schema->create('kanban_task_buckets', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('kanban_bucket_id')->nullable();
+            // $table->unsignedBigInteger('kanban_page_id')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("kanban_task_pages");
+        Schema::dropIfExists("kanban_task_buckets");
     }
 };

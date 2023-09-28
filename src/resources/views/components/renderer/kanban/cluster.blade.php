@@ -1,7 +1,7 @@
 @php
     $categoryCluster = 'kanban_cluster_id';
     $classCluster = "bg-white p-1 shadow rounded text-xs w-full1 focus:border-1 bold my-1";
-    $classButton = "text-xs border border-gray-300 rounded hover:bg-blue-200";
+    $classButton = "text-xs border border-gray-300 rounded hover:bg-blue-200 shadow";
 @endphp
 
 @once
@@ -23,7 +23,7 @@
                 <x-renderer.kanban.group :group="$group" hidden="{{$hidden}}" groupWidth="{{$groupWidth}}"/>
             @endforeach
         </div>
-        <div class="m-1 bg-gray-200 p-2 rounded h-9">
+        <div class="m-1 bg-gray-200 p-2 rounded h-10">
             <script>kanbanInit1("cluster_",  [{{$cluster->id}}], route_group, "{{$categoryCluster}}")</script>
             <button class="{{$classButton}} px-4 {{$groupWidth}}" type="button" onclick="addANewKanbanObj('cluster_', {{$cluster->id}}, route_group, '{{$groupWidth}}')">+ Add a List</button>
         </div>

@@ -1,5 +1,5 @@
 @php
-    $classButton = "bg-white1 p-1 shadow rounded text-xs w-full focus:border-1 bold my1-1";
+    $classButton = "bg-gray-200 p-1 shadow rounded text-xs w-full focus:border-1 bold my1-1";
 @endphp
 
 <script>const route_page = "{{$routePage}}";</script>
@@ -8,11 +8,11 @@
     <x-renderer.card title="All Pages"> 
         <div id="toc_group_1" data-id="toc_group" class="grid gap-1">
             @foreach($pages as $page)
-                <x-renderer.kanban.toc :page="$page" pageId="$pageId"/>
+                <x-renderer.kanban.toc :page="$page" pageId="{{$pageId}}"/>
             @endforeach
         </div>
         <script>kanbanInit1("toc_group_", [1], route_page, "categoryGroup")</script>
         <button class="{{$classButton}} mt-2 w-full" type="button" onclick="addANewKanbanObj('toc_group_', 1, route_page, 'no-class')">+ Add a Page</button>
-        <input id="txtCurrentPage" type="hidden1" value="{{$pageId}}"/>
+        <input id="txtCurrentPage" type="hidden" value="{{$pageId}}"/>
     </x-renderer.card>
 </div>

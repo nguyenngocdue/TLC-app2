@@ -130,7 +130,6 @@ trait TraitKanban
 				]);
 				break;
 			case 'kanban_task_pages':
-				[$pageIds] = Pages::getPageIds();
 				$renderer = Blade::render('<x-renderer.kanban.toc :page="$page" />', [
 					'page' => $insertedObj,
 				]);
