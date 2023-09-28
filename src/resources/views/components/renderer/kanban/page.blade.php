@@ -16,7 +16,7 @@
                 @endforeach
             </div>
             <script>kanbanInit1("page_", [{{$pageId}}], route_cluster, "{{$categoryPage}}")</script>
-            <button class="{{$classButton}} px-4 ml-2" type="button" onclick="addANewKanbanObj('page_', {{$pageId}}, route_cluster, '{{$groupWidth}}')">+ Add a Cluster</button>
+            <button class="{{$classButton}} px-4 ml-2 w-80 h-20" type="button" onclick="addANewKanbanObj('page_', {{$pageId}}, route_cluster, '{{$groupWidth}}')">+ Add a Cluster</button>
             <br/>
             <br/>
             <br/>

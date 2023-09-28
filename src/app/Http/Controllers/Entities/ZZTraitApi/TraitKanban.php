@@ -87,7 +87,8 @@ trait TraitKanban
 				return "kanban_page_id";
 			case "kanban_task_pages":
 				return "kanban_bucket_id";
-				// case "kanban_task_pages":
+			case "kanban_task_buckets":
+				return "";
 			default:
 				throw new \Exception("Unknown parent column of $table.");
 		}
@@ -134,6 +135,11 @@ trait TraitKanban
 			case 'kanban_task_pages':
 				$renderer = Blade::render('<x-renderer.kanban.toc :page="$page" />', [
 					'page' => $insertedObj,
+				]);
+				break;
+			case "kanban_task_buckets":
+				$renderer = Blade::render('<x-renderer.kanban.bucket :bucket="$bucket" />', [
+					'bucket' => $insertedObj,
 				]);
 				break;
 			default:

@@ -9,10 +9,15 @@
 @endonce --}}
 
 <div id="bucket_parent_{{$bucket->id}}" data-id="bucket_{{$bucket->id}}" class="m-1 b1g-gray-200 p1-2 rounded">
-    <h2 id="lbl_bucket_{{$bucket->id}}" class="text-xs font-bold my-2 cursor-pointer" onclick="onClickToEdit({{$bucket->id}},'lbl_bucket', 'txt_bucket')">
-        <span title="Bucket {{$bucket->id}}" class="cursor-grab">#</span> 
-        <span id="caption_bucket_{{$bucket->id}}">{{$bucket->name}}</span>
-    </h2>
+    <div id="lbl_bucket_{{$bucket->id}}" class="flex text-xs font-bold mb-1 cursor-pointer justify-between">
+        <div>
+            <span title="Bucket {{$bucket->id}}" class="cursor-grab">#</span> 
+            <span id="caption_bucket_{{$bucket->id}}" onclick="onClickToEdit({{$bucket->id}},'lbl_bucket', 'txt_bucket')">{{$bucket->name}}</span>
+        </div>
+        <div>
+            <button class="{{$classButton}} px-2 whitespace-nowrap" type="button" onclick="addANewKanbanObj('bucket_', {{$bucket->id}}, route_page, '')">+ Page</button>
+        </div>
+    </div>
     <input id="txt_bucket_{{$bucket->id}}" value="{{$bucket->name}}" class="{{$classBucket}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$bucket->id}},'lbl_bucket','txt_bucket','caption_bucket', route_bucket)">
     <div id="bucket_{{$bucket->id}}" data-id="bucket_{{$bucket->id}}" class="grid gap-1 ">
         @foreach($bucket->getPages as $page)
@@ -20,6 +25,5 @@
         @endforeach
     </div>
     <script>kanbanInit1("bucket_", [ {{$bucket->id}} ], route_page, "{{$categoryBucket}}")</script>
-    <button class="{{$classButton}} mt-2 " type="button" onclick="addANewKanbanObj('bucket_', {{$bucket->id}}, route_page, '')">+ Add a Page</button>
     
 </div>

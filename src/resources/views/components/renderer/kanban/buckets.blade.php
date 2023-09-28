@@ -14,5 +14,6 @@
         <script>kanbanInit1("toc_group_", [1], route_bucket, "categoryGroup")</script>
         
         <input id="txtCurrentPage" type="hidden" value="{{$pageId}}"/>
+        <button class="{{$classButton}} px-4 " type="button" onclick="addANewKanbanObj('toc_group_', 1, route_bucket, '')">+ Add a Bucket</button>
     </x-renderer.card>
 </div>
