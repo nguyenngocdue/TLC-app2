@@ -60,7 +60,7 @@ const onClickToEdit = (id, lbl_type, txt_type) => {
     const txt = "#" + txt_type + "_" + id
     // console.log("Hide", lbl, "show", txt)
     $(lbl).hide()
-    $(txt).show().select()
+    $(txt).show().focus()//.select()
 }
 
 const onClickToCommit = (id, lbl_type, txt_type, caption_type, url) => {
@@ -148,9 +148,13 @@ const kanbanInit1 = (prefix, columns, route, category) => {
     }
 }
 
-const kanbanLoadPage = (pageId, url, ids) => {
+const kanbanLoadPage = (pageId, url) => {
     $("#txtCurrentPage").val(pageId);
     $("#divKanbanPage").slideUp("slow");
+
+    const ids = []
+    $("#toc_group_1").children().each((a, db) => ids.push(getCharactersAfterLastUnderscore(db.id)))
+    // console.log(x, ids)
 
     for (let i = 0; i < ids.length; i++) {
         $("#iconOpen_" + ids[i]).hide()

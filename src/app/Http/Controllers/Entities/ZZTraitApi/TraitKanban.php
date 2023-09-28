@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 use App\Models\Kanban_task_page;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\Api\ResponseObject;
+use App\View\Components\Renderer\Kanban\Pages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
@@ -83,6 +84,8 @@ trait TraitKanban
 				return "kanban_cluster_id";
 			case "kanban_task_clusters":
 				return "kanban_page_id";
+			case "kanban_task_pages":
+				return null;
 			default:
 				throw new \Exception("Unknown parent column of $table.");
 		}
@@ -124,6 +127,12 @@ trait TraitKanban
 				$renderer = Blade::render('<x-renderer.kanban.cluster :cluster="$cluster" groupWidth="{{$groupWidth}}"/>', [
 					'cluster' => $insertedObj,
 					'groupWidth' => $groupWidth,
+				]);
+				break;
+			case 'kanban_task_pages':
+				[$pageIds] = Pages::getPageIds();
+				$renderer = Blade::render('<x-renderer.kanban.toc :page="$page" />', [
+					'page' => $insertedObj,
 				]);
 				break;
 			default:
