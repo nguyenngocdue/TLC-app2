@@ -1,3 +1,5 @@
+
+
 const getChildPrefix = (prefix) => {
     switch (prefix) {
         case "page_": return "cluster_"
@@ -21,6 +23,23 @@ const setValue = (sortable, url, prefix) => {
         },
     })
     console.log("setValue", order, prefix)
+}
+
+const addANew = (parent_id, url) => {
+    console.log(url, parent_id)
+    $.ajax({
+        method: "POST",
+        url,
+        data: { action: "addNew", parent_id },
+        success: function (response) {
+            // toastr.success(response.message)
+            console.log(response)
+
+        },
+        error: function (jqXHR) {
+            toastr.error(jqXHR.responseJSON.message)
+        },
+    })
 }
 
 const onClickToEdit = (id, lbl_type, txt_type) => {

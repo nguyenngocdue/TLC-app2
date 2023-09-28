@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Utils\Support\CurrentUser;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -26,74 +27,76 @@ trait TraitKanban
 
 	function changeParent(Request $request)
 	{
-		try {
-			$input = $request->input();
-			[
-				'category' => $category,
-				'itemId' => $itemId,
-				'newParentId' => $newParentId,
-			] = $input;
-			$item = $this->modelPath::find($itemId);
-			$table = $this->modelPath::getTableName();
-			if (!isset($item->{$category})) {
-				Log::info($this->modelPath . " [" . $itemId . ']' . "->" . $category);
-				Log::info($item);
-				throw new \Exception("Category '$category' not found in '$table'.");
-			}
-			$item->{$category} = $newParentId;
-			$item->save();
-		} catch (\Exception $e) {
-			return ResponseObject::responseFail($e->getMessage() . " Line " . $e->getLine());
+		$input = $request->input();
+		[
+			'category' => $category,
+			'itemId' => $itemId,
+			'newParentId' => $newParentId,
+		] = $input;
+		$item = $this->modelPath::find($itemId);
+		$table = $this->modelPath::getTableName();
+		if (!isset($item->{$category})) {
+			Log::info($this->modelPath . " [" . $itemId . ']' . "->" . $category);
+			Log::info($item);
+			throw new \Exception("Category '$category' not found in '$table'.");
 		}
+		$item->{$category} = $newParentId;
+		$item->save();
 		return ResponseObject::responseSuccess([], [], "Updated");
 	}
 
 	function changeOrder(Request $request)
 	{
-		try {
-			$orders = $request->input('order');
-			// $table = $this->modelPath::getTableName();
-			// Log::info($table);
-			$orders = $this->getLastWord($orders);
-			// Log::info($orders);
-			foreach ($orders as $index => $order) {
-				$item = $this->modelPath::find($order);
-				$item->order_no = $index * 100;
-				$item->save();
-			}
-		} catch (\Exception $e) {
-			return ResponseObject::responseFail($e->getMessage() . " Line " . $e->getLine());
+		$orders = $request->input('order');
+		// $table = $this->modelPath::getTableName();
+		// Log::info($table);
+		$orders = $this->getLastWord($orders);
+		// Log::info($orders);
+		foreach ($orders as $index => $order) {
+			$item = $this->modelPath::find($order);
+			$item->order_no = $index * 10;
+			$item->save();
 		}
 		return ResponseObject::responseSuccess($orders, [], "Updated");
 	}
 
 	function changeName(Request $request)
 	{
-		try {
-			// Log::info($request->input());
-			$id = $request->input('id');
-			$newName = $request->input('newText');
-			$item = $this->modelPath::find($id);
-			$item->name = $newName;
-			// Log::info($item . " " . $newName);
-			$item->save();
-		} catch (\Exception $e) {
-			return ResponseObject::responseFail($e->getMessage() . " Line " . $e->getLine());
-		}
+		// Log::info($request->input());
+		$id = $request->input('id');
+		$newName = $request->input('newText');
+		$item = $this->modelPath::find($id);
+		$item->name = $newName;
+		// Log::info($item . " " . $newName);
+		$item->save();
 		return ResponseObject::responseSuccess($newName, [], "Updated");
+	}
+
+	function addNew(Request $request)
+	{
+		$insertedObj = $this->modelPath::create([
+			'owner_id' => CurrentUser::id(),
+		]);
+		$insertedId = $insertedObj->id;
+
+		return ResponseObject::responseSuccess($insertedObj, ['id' => $insertedId], "Inserted");
 	}
 
 	function kanban(Request $request)
 	{
-		$action = $request->input('action');
-		switch ($action) {
-			case "changeOrder":
-			case "changeParent":
-			case "changeName":
-				return $this->{$action}($request);
-				break;
+		try {
+			$action = $request->input('action');
+			switch ($action) {
+				case "changeOrder":
+				case "changeParent":
+				case "changeName":
+				case "addNew":
+					return $this->{$action}($request);
+					break;
+			}
+		} catch (\Exception $e) {
+			return ResponseObject::responseFail($e->getMessage() . " Line " . $e->getLine());
 		}
-		// throw new \Exception("Unknown kanban action " . $action);
 		return ResponseObject::responseFail("Unknown kanban action " . $action);
 	}
 }
