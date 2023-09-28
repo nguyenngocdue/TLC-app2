@@ -55,6 +55,7 @@ trait TraitKanban
 		// Log::info($table);
 		$orders = $this->getLastWord($orders);
 		// Log::info($orders);
+		// Log::info($this->modelPath);
 		foreach ($orders as $index => $order) {
 			$item = $this->modelPath::find($order);
 			$item->order_no = $index;
@@ -85,7 +86,8 @@ trait TraitKanban
 			case "kanban_task_clusters":
 				return "kanban_page_id";
 			case "kanban_task_pages":
-				return null;
+				return "kanban_bucket_id";
+				// case "kanban_task_pages":
 			default:
 				throw new \Exception("Unknown parent column of $table.");
 		}

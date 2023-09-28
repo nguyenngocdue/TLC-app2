@@ -12,6 +12,7 @@
 <script>const route_cluster = "{{route('App\\Models\\Kanban_task_cluster'::getTableName() . '.kanban');}}";</script>
 <script>const route_group = "{{route('App\\Models\\Kanban_task_group'::getTableName() . '.kanban')}}";</script>
 <script>const route_task = "{{route('App\\Models\\Kanban_task'::getTableName() . '.kanban')}}";</script>
+<script>const route_page = "{{route('App\\Models\\Kanban_task_page'::getTableName() . '.kanban')}}";</script>
 
 <div class="px-4 mt-2">
     <x-elapse title="Bootrap: " duration="{{$frameworkTook}}"/>   
@@ -19,7 +20,7 @@
     
     <div class="grid grid-cols-12 gap-2">
         <div class="col-span-2">
-            <x-renderer.kanban.pages :page="$page" />
+            <x-renderer.kanban.buckets :page="$page" />
         </div>
         <div id="divKanbanPage" class="col-span-10">
             <x-renderer.kanban.page :page="$page"/>

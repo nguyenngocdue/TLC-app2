@@ -5,7 +5,8 @@ const getChildPrefix = (prefix) => {
         case "page_": return "cluster_"
         case "cluster_": return "group_"
         case "group_": return "task_"
-        case "toc_group_": return "toc_"
+        case "bucket_": return "toc_"
+        case "toc_group_": return "bucket_"
         default: console.error("Unknown child of prefix", prefix)
     }
 }
@@ -21,6 +22,7 @@ const getChildPrefix = (prefix) => {
 
 const setValue = (sortable, url, prefix) => {
     var order = sortable.toArray().filter(a => a.startsWith(prefix))
+    console.log(order)
     $.ajax({
         method: "POST",
         url,
