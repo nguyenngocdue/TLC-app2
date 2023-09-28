@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use DateTime;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class Report
@@ -321,5 +322,18 @@ class Report
         
         return compact('timeValues', 'topNameCol', 'columnName');
     }
-    
+
+    public static function formatNumbersInDataSource($dataSource) {
+        if (!$dataSource instanceof Collection) $dataSource = collect($dataSource);
+        $data = $dataSource->map(function ($values) {
+        foreach ($values as $key => $value) {
+            if (is_numeric($value)) {
+                if(is_object($values)) $values -> $key = number_format($value, 2);
+                if (is_array($values))  $values[$key] = number_format($value, 2);
+                }
+            }
+            return $values;
+        });
+        return $data;
+    }
 }

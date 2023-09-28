@@ -197,7 +197,6 @@ abstract class Report_Parent2Controller extends Controller
         return [];
     }
 
-
     public function index(Request $request)
     {
         

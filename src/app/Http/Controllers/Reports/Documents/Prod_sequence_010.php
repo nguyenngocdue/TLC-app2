@@ -41,7 +41,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         $subProjectId =  $params['sub_project_id'] ?? $this->subProjectId;
         $prodRoutingId =  $params['prod_routing_id'] ?? $this->prodRoutingId;
         $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ? implode(',', $params['prod_routing_link_id']) : [];
-        $prodDisciplineIds = isset($params['prod_discipline_id']) ? implode(',', $params['prod_discipline_id']) : [];
+        $prodDisciplineIds = isset($params['prod_discipline_id']) ? $params['prod_discipline_id'] : '';
         $prodOrderIds =  isset($params['prod_order_id']) ? implode(',', $params['prod_order_id']) : [];
 
         $pickerDate = $params['picker_date'];
@@ -75,7 +75,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                     AND po.status IN ('in_progress', 'finished', 'on_hold')
                     AND SUBSTR(pr.date,1,10) = '$pickerDate'";
         if ($prodRoutingLinkIds) $sql .= "\n AND pose.prod_routing_link_id IN ($prodRoutingLinkIds)";
-        if ($prodDisciplineIds) $sql .= "\n AND prl.prod_discipline_id IN ($prodDisciplineIds)";
+        if ($prodDisciplineIds) $sql .= "\n AND prl.prod_discipline_id = $prodDisciplineIds";
         if ($prodOrderIds) $sql .= "\n AND po.id IN ($prodOrderIds)";
 
         $sql .= "\n GROUP BY prod_discipline_name, prod_routing_link_id, po.id,pr.worker_number
@@ -96,7 +96,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $pickerDate = Report::createDefaultPickerDate('-2 years');
+        $pickerDate = Report::createDefaultPickerDate('-1 years');
         $params['picker_date'] = $pickerDate;
         $params['project_id'] = $this->projectId;
         $params['sub_project_id'] = $this->subProjectId;
@@ -137,7 +137,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                 'title' => 'Production Discipline',
                 'dataIndex' => 'prod_discipline_id',
                 'allowClear' => true,
-                'multiple' => true,
+                #'multiple' => true,
             ],
             [
                 'title' => 'Production Routing Link',
@@ -209,7 +209,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         $prodPouting = Prod_routing::find($params['prod_routing_id'] ?? $this->prodRoutingId)->name;
 
         $prodDiscipline = isset($params['prod_discipline_id']) ?
-            implode(', ', Prod_discipline::whereIn('id', $params['prod_discipline_id'])
+            implode(', ', Prod_discipline::find($params['prod_discipline_id'])
                 ->pluck('name')
                 ->toArray()) :
             implode(', ', Prod_discipline::all()
