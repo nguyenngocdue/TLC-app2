@@ -2,6 +2,8 @@
     $classPage = "bg-gray-2001 p-1 shadow rounded text-xs w-full focus:border-1 bold my1-1";
 @endphp
 
+{{-- @dump($pageId, $page->id) --}}
+
 <div id="toc_{{$page->id}}" data-id="toc_{{$page->id}}" class="bg-blue-200 p-2 shadow rounded text-xs my1-1 cursor-grab" >
     <div class="flex justify-between">
         <div >

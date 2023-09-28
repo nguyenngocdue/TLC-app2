@@ -22,7 +22,7 @@ const getChildPrefix = (prefix) => {
 
 const setValue = (sortable, url, prefix) => {
     var order = sortable.toArray().filter(a => a.startsWith(prefix))
-    console.log(order)
+    // console.log(order)
     $.ajax({
         method: "POST",
         url,
@@ -34,7 +34,7 @@ const setValue = (sortable, url, prefix) => {
             toastr.error(jqXHR.responseJSON.message)
         },
     })
-    console.log("setValue", order, prefix)
+    // console.log("setValue", order, prefix)
 }
 
 const addANewKanbanObj = (prefix, parent_id, url, groupWidth) => {
@@ -151,12 +151,22 @@ const kanbanInit1 = (prefix, columns, route, category) => {
 }
 
 const kanbanLoadPage = (pageId, url) => {
+    const beginWith = "bucket_"
     $("#txtCurrentPage").val(pageId);
     $("#divKanbanPage").slideUp("slow");
 
     const ids = []
-    $("#toc_group_1").children().each((a, db) => ids.push(getCharactersAfterLastUnderscore(db.id)))
-    // console.log(x, ids)
+    $("#toc_group_1").children().each((a, db0) => {
+        $("#" + db0.id).children().each((a, db1) => {
+            // console.log(db1.id, beginWith)
+            if (db1.id.startsWith(beginWith)) {
+                $("#" + db1.id).children().each((a, db2) => {
+                    ids.push(getCharactersAfterLastUnderscore(db2.id))
+                })
+            }
+        })
+    })
+    // console.log(ids)
 
     for (let i = 0; i < ids.length; i++) {
         $("#iconOpen_" + ids[i]).hide()
@@ -184,7 +194,7 @@ const kanbanLoadPage = (pageId, url) => {
 const renameCurrentPage = (pageId) => {
     const currentPage = $("#txtCurrentPage").val()
     const isSamePage = currentPage == pageId
-    console.log(currentPage, pageId, isSamePage)
+    // console.log(currentPage, pageId, isSamePage)
     if (isSamePage) {
         $('#divPageCard').html($('#txt_toc_' + pageId).val())
     }
