@@ -1,3 +1,4 @@
+const table_order_no_step = 1;
 const debugEditable = false
 const editableColumns = {}, dateTimeControls = {}, tableObject = {}, tableObjectColName = {}, entityId = null
 const getNameIndexOfRowIndex = (tableId, rowIndex) => {
@@ -150,8 +151,8 @@ const moveUpEditableTable = (params) => {
     if (fingerPrint === firstRowFingerPrintValue) {
         const max = getMaxValueOfAColumn(tableId, "[order_no]")
         // if (debugEditable) console.log("FIRST ROW, max of order_no", max)
-        setCellValueByName(tableId, 'order_no', 0, max + 10)
-        if (debugEditable) console.log("First ROW, move up, make it to MAX=", max + 10)
+        setCellValueByName(tableId, 'order_no', 0, max + table_order_no_step)
+        if (debugEditable) console.log("First ROW, move up, make it to MAX=", max + table_order_no_step)
     } else {
         // if (debugEditable) console.log("NORMAL ROW")
         const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
@@ -180,8 +181,8 @@ const moveDownEditableTable = (params) => {
     if (fingerPrint === lastRowFingerPrintValue) {
         const min = getMinValueOfAColumn(tableId, "[order_no]")
         // console.log("FIRST ROW, min of order_by", min)
-        setCellValueByName(tableId, 'order_no', length - 1, min - 10)
-        if (debugEditable) console.log("First ROW, move up, make it to MIN=", min - 10)
+        setCellValueByName(tableId, 'order_no', length - 1, min - table_order_no_step)
+        if (debugEditable) console.log("First ROW, move up, make it to MIN=", min - table_order_no_step)
     } else {
         // console.log("NORMAL ROW")
         const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)

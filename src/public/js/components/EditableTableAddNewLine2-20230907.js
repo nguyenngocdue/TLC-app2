@@ -42,7 +42,7 @@ const addANewLine = (params) => {
     const { tableId, valuesOfOrigin = {}, isDuplicatedOrAddFromList = false, batchLength = 1, } = params
     const { tableName, dateTimeControls = [] } = tableObject[tableId]
     // console.log(params, tableName,)
-    const orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + 10
+    const orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + table_order_no_step
 
     const currentUser = getEById('currentUserId').val()
 
@@ -212,7 +212,7 @@ const addANewLineFull = (params) => {
         const id =
             tableId + '[' + column['dataIndex'] + '][' + newRowIndex + ']'
         if (column['dataIndex'] === 'action') {
-            fingerPrint = getMaxValueOfAColumn(tableId, '[finger_print]') + 10
+            fingerPrint = getMaxValueOfAColumn(tableId, '[finger_print]') + table_order_no_step
 
             const fingerPrintName =
                 tableId + '[finger_print][' + newRowIndex + ']'
@@ -342,7 +342,7 @@ const addANewLineFull = (params) => {
                     const { numericScale = 0 } = column
                     renderer = "<input id='" + id + "' name='" + id + "' component='editable/number4' " + (column['readOnly'] ? ' readonly' : '') + " class='" + column['classList'] + "' />"
                     if (column['dataIndex'] === 'order_no') {
-                        orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + 10
+                        orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + table_order_no_step
                         const reRenderFn = 'reRenderTableBaseOnNewOrder("' + tableId + '", dropdownParams)'
                         renderer += '<script>' + makeOnChangeAdvanced(reRenderFn) + '</script>'
                     } else {

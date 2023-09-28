@@ -1,6 +1,57 @@
-const setValue = (sortable) => {
-    var order = sortable.toArray()
-    console.log(order)
+
+
+const getChildPrefix = (prefix) => {
+    switch (prefix) {
+        case "page_": return "cluster_"
+        case "cluster_": return "group_"
+        case "group_": return "task_"
+        default: console.error("Unknown child of prefix", prefix)
+    }
+}
+
+// const getParentPrefix = (prefix) => {
+//     switch (prefix) {
+//         case "cluster_": return "page_"
+//         case "group_": return "cluster_"
+//         case "task_": return "group_"
+//         default: console.error("Unknown parent of prefix", prefix)
+//     }
+// }
+
+const setValue = (sortable, url, prefix) => {
+    var order = sortable.toArray().filter(a => a.startsWith(prefix))
+    $.ajax({
+        method: "POST",
+        url,
+        data: { action: "changeOrder", order, },
+        success: function (response) {
+            // toastr.success(response.message)
+        },
+        error: function (jqXHR) {
+            toastr.error(jqXHR.responseJSON.message)
+        },
+    })
+    console.log("setValue", order, prefix)
+}
+
+const addANewKanbanObj = (prefix, parent_id, url, groupWidth) => {
+    console.log(url, parent_id)
+    $.ajax({
+        method: "POST",
+        url,
+        data: { action: "addNew", parent_id, groupWidth },
+        success: function (response) {
+            // toastr.success(response.message)
+            // console.log(response)
+            const { renderer } = response.hits
+            const parentId = prefix + parent_id
+            // console.log(parentId, renderer)
+            $("#" + parentId).append(renderer)
+        },
+        error: function (jqXHR) {
+            toastr.error(jqXHR.responseJSON.message)
+        },
+    })
 }
 
 const onClickToEdit = (id, lbl_type, txt_type) => {
@@ -11,12 +62,29 @@ const onClickToEdit = (id, lbl_type, txt_type) => {
     $(txt).show().select()
 }
 
-const onClickToCommit = (id, lbl_type, txt_type) => {
+const onClickToCommit = (id, lbl_type, txt_type, caption_type, url) => {
     const lbl = "#" + lbl_type + "_" + id
+    const caption = "#" + caption_type + "_" + id
     const txt = "#" + txt_type + "_" + id
     // console.log("Show", lbl, "hide", txt)
-    $(lbl).show()
+    const newText = $(txt).val()
+
     $(txt).hide()
+    $(caption).html(newText)
+    $(lbl).show()
+
+    $.ajax({
+        method: "POST",
+        url,
+        data: { action: "changeName", newText, id },
+        success: function (response) {
+            // toastr.success(response.message)
+
+        },
+        error: function (jqXHR) {
+            toastr.error(jqXHR.responseJSON.message)
+        },
+    })
 }
 
 const getCharactersAfterLastUnderscore = (str) => {
@@ -24,17 +92,18 @@ const getCharactersAfterLastUnderscore = (str) => {
     return (lastUnderscoreIndex !== -1) ? str.substring(lastUnderscoreIndex + 1) : str;
 }
 
-const onEnd = (e, route, category) => {
-    const { /*from,*/ to, item } = e
+const onEnd = (e, url, category) => {
+    const { from, to, item } = e
     // console.log(e)
+    if (from.id === to.id) return //<<Only change order, parent doesn't change
     // console.log(sortable[i].toArray())
-    // console.log("To:", to.id, "itemId:", item.id, "Cat:", category)
+    // console.log("ON END - To:", to.id, "itemId:", item.id, "Cat:", category)
     const itemId = getCharactersAfterLastUnderscore(item.id)
     const newParentId = getCharactersAfterLastUnderscore(to.id)
     $.ajax({
         method: "POST",
-        url: route,
-        data: { category, itemId, newParentId },
+        url,
+        data: { action: "changeParent", category, itemId, newParentId },
         success: function (response) {
             // toastr.success(response.message)
         },
@@ -57,7 +126,7 @@ const kanbanInit1 = (prefix, columns, route, category) => {
             animation: 150,
             group: prefix,
             store: {
-                set: setValue,
+                set: (s) => setValue(s, route, getChildPrefix(prefix)),
             },
 
             // setData: (dataTransfer, dragEl) => dataTransfer.setData('Text', dragEl.textContent),
