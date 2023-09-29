@@ -876,10 +876,6 @@ video {
   margin-top: 15rem;
   margin-bottom: 15rem;
 }
-.my-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
 .-mb-4 {
   margin-bottom: -1rem;
 }
@@ -1639,9 +1635,6 @@ video {
 }
 .cursor-grab {
   cursor: grab;
-}
-.cursor-move {
-  cursor: move;
 }
 .cursor-not-allowed {
   cursor: not-allowed;
