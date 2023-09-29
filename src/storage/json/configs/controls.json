@@ -11,6 +11,9 @@
         "qaqc_insp_chklsts",
         "hse_insp_chklst_shts"
     ],
+    "apps_have_view_all_kanban": [
+        "kanban_task_pages"
+    ],
     "apps_have_view_all_matrix_print": [
         "prod_sequences"
     ],

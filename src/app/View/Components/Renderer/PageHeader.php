@@ -28,10 +28,13 @@ class PageHeader extends Component
     {
         $type = CurrentRoute::getTypePlural();
         $action = CurrentRoute::getControllerAction();
+        // dump($type);
+        $visible = ('kanban_task_pages' !== $type);
         return view('components.renderer.page-header', [
             'action' => $action,
             'superProps' => SuperProps::getFor($type),
             'superWorkflows' => SuperWorkflows::getFor($type),
+            'visible' => $visible,
         ]);
     }
 }

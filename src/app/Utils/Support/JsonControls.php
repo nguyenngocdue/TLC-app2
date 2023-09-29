@@ -127,6 +127,10 @@ class JsonControls
     {
         return self::getAll()['apps_have_view_all_matrix_approve_multi'];
     }
+    public static function getAppsHaveViewAllKanban()
+    {
+        return self::getAll()['apps_have_view_all_kanban'];
+    }
     public static function getAppsHaveAddNewByCloning()
     {
         return self::getAll()['apps_have_add_new_by_cloning'];

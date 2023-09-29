@@ -5,6 +5,8 @@ const getChildPrefix = (prefix) => {
         case "page_": return "cluster_"
         case "cluster_": return "group_"
         case "group_": return "task_"
+        case "bucket_": return "toc_"
+        case "toc_group_": return "bucket_"
         default: console.error("Unknown child of prefix", prefix)
     }
 }
@@ -20,6 +22,7 @@ const getChildPrefix = (prefix) => {
 
 const setValue = (sortable, url, prefix) => {
     var order = sortable.toArray().filter(a => a.startsWith(prefix))
+    // console.log(order)
     $.ajax({
         method: "POST",
         url,
@@ -31,7 +34,7 @@ const setValue = (sortable, url, prefix) => {
             toastr.error(jqXHR.responseJSON.message)
         },
     })
-    console.log("setValue", order, prefix)
+    // console.log("setValue", order, prefix)
 }
 
 const addANewKanbanObj = (prefix, parent_id, url, groupWidth) => {
@@ -59,7 +62,7 @@ const onClickToEdit = (id, lbl_type, txt_type) => {
     const txt = "#" + txt_type + "_" + id
     // console.log("Hide", lbl, "show", txt)
     $(lbl).hide()
-    $(txt).show().select()
+    $(txt).show().focus()//.select()
 }
 
 const onClickToCommit = (id, lbl_type, txt_type, caption_type, url) => {
@@ -144,5 +147,55 @@ const kanbanInit1 = (prefix, columns, route, category) => {
             // onChange: (e) => console.log("onChange", e.newIndex),
 
         });
+    }
+}
+
+const kanbanLoadPage = (pageId, url) => {
+    const beginWith = "bucket_"
+    $("#txtCurrentPage").val(pageId);
+    $("#divKanbanPage").slideUp("slow");
+
+    const ids = []
+    $("#toc_group_1").children().each((a, db0) => {
+        $("#" + db0.id).children().each((a, db1) => {
+            // console.log(db1.id, beginWith)
+            if (db1.id.startsWith(beginWith)) {
+                $("#" + db1.id).children().each((a, db2) => {
+                    ids.push(getCharactersAfterLastUnderscore(db2.id))
+                })
+            }
+        })
+    })
+    // console.log(ids)
+
+    for (let i = 0; i < ids.length; i++) {
+        $("#iconOpen_" + ids[i]).hide()
+        $("#iconClose_" + ids[i]).show()
+    }
+    $("#iconClose_" + pageId).hide()
+    $("#iconOpen_" + pageId).show()
+
+    $.ajax({
+        method: 'POST',
+        url,
+        data: { action: "loadPage", pageId },
+        success: function (response) {
+            // toastr.success(response.message)
+            const { renderer } = response.hits
+            $("#divKanbanPage").html(renderer)
+            $("#divKanbanPage").slideDown("slow");
+        },
+        error: function (jqXHR) {
+            toastr.error(jqXHR.responseJSON.message)
+        },
+    })
+}
+
+const renameCurrentPage = (pageId) => {
+    const currentPage = $("#txtCurrentPage").val()
+    const isSamePage = currentPage == pageId
+    // console.log(currentPage, pageId, isSamePage)
+    if (isSamePage) {
+        $('#divPageCard').html($('#txt_toc_' + pageId).val())
     }
 }

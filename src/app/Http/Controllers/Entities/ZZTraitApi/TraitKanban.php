@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Models\Kanban_task_page;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\Api\ResponseObject;
+use App\View\Components\Renderer\Kanban\Pages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
@@ -53,6 +55,7 @@ trait TraitKanban
 		// Log::info($table);
 		$orders = $this->getLastWord($orders);
 		// Log::info($orders);
+		// Log::info($this->modelPath);
 		foreach ($orders as $index => $order) {
 			$item = $this->modelPath::find($order);
 			$item->order_no = $index;
@@ -82,6 +85,10 @@ trait TraitKanban
 				return "kanban_cluster_id";
 			case "kanban_task_clusters":
 				return "kanban_page_id";
+			case "kanban_task_pages":
+				return "kanban_bucket_id";
+			case "kanban_task_buckets":
+				return "";
 			default:
 				throw new \Exception("Unknown parent column of $table.");
 		}
@@ -125,12 +132,32 @@ trait TraitKanban
 					'groupWidth' => $groupWidth,
 				]);
 				break;
+			case 'kanban_task_pages':
+				$renderer = Blade::render('<x-renderer.kanban.toc :page="$page" />', [
+					'page' => $insertedObj,
+				]);
+				break;
+			case "kanban_task_buckets":
+				$renderer = Blade::render('<x-renderer.kanban.bucket :bucket="$bucket" />', [
+					'bucket' => $insertedObj,
+				]);
+				break;
 			default:
 				$renderer = "Unknown how to render kanban for $table";
 				break;
 		}
 
 		return ResponseObject::responseSuccess(['renderer' => $renderer], ['id' => $insertedId, 'item' => $insertedObj], "Inserted");
+	}
+
+	function loadPage(Request $request)
+	{
+		$id = $request->input('pageId');
+		$page = Kanban_task_page::find($id);
+		$renderer = Blade::render('<x-renderer.kanban.page :page="$page"/>', [
+			'page' => $page,
+		]);
+		return ResponseObject::responseSuccess(['renderer' => $renderer], [], "Inserted");
 	}
 
 	function kanban(Request $request)
@@ -142,6 +169,7 @@ trait TraitKanban
 				case "changeParent":
 				case "changeName":
 				case "addNew":
+				case "loadPage":
 					return $this->{$action}($request);
 					break;
 			}

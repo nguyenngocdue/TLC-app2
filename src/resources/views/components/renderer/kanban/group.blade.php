@@ -1,7 +1,7 @@
 @php
     $categoryGroup = 'kanban_group_id';
     $classGroup = "bg-white p-1 shadow rounded text-xs w-full focus:border-1 bold my-1";
-    $classButton = "text-xs border border-gray-300 rounded hover:bg-blue-200";
+    $classButton = "text-xs border border-gray-300 rounded hover:bg-blue-200 shadow";
 @endphp
 
 @once

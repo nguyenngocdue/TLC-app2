@@ -6,3 +6,5 @@
 
 <x-renderer.kanban.page />
 <br/>
+
+@endsection

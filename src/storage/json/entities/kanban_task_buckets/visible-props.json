@@ -14,29 +14,19 @@
         "column_name": "description",
         "new": "true"
     },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true"
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
         "new": "true"
     },
-    "_getClusters": {
-        "name": "_getClusters",
-        "column_name": "getClusters",
-        "new": "true"
-    },
-    "_kanban_bucket_id": {
-        "name": "_kanban_bucket_id",
-        "column_name": "kanban_bucket_id",
-        "new": "true"
-    },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true"
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
         "new": "true"
     },
     "_created_at": {
@@ -57,6 +47,11 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "new": "true"
+    },
+    "_getPages": {
+        "name": "_getPages",
+        "column_name": "getPages",
         "new": "true"
     }
 }
