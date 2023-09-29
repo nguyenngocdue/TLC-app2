@@ -41,6 +41,13 @@
         "top_title": null,
         "title": "Target vs. Actual"
     },
+    "document-prod_sequence_050": {
+        "name": "document-prod_sequence_050",
+        "package_tab": "report",
+        "package": "project_management",
+        "top_title": null,
+        "title": "UoM"
+    },
     "register-qaqc_insp_chklst_020": {
         "name": "register-qaqc_insp_chklst_020",
         "package_tab": "report",
@@ -132,19 +139,19 @@
         "top_title": "HSE KPI Report",
         "title": "HSE Key Performance Indicator"
     },
-    "report-prod_sequence_010": {
-        "name": "report-prod_sequence_010",
-        "package_tab": "report",
-        "package": "project_management",
-        "top_title": null,
-        "title": "Labor Cost Timesheet"
-    },
     "report-prod_sequence_030": {
         "name": "report-prod_sequence_030",
         "package_tab": "report",
         "package": "project_management",
         "top_title": "Sequence-based Timesheet",
         "title": "Target vs. Actual Detail"
+    },
+    "report-prod_sequence_040": {
+        "name": "report-prod_sequence_040",
+        "package_tab": "report",
+        "package": "project_management",
+        "top_title": "Labor Cost Timesheet",
+        "title": "Labor Cost Timesheet"
     },
     "report-prod_sequence_110": {
         "name": "report-prod_sequence_110",
