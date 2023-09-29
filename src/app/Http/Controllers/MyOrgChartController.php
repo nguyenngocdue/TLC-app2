@@ -92,10 +92,12 @@ class MyOrgChartController extends Controller
             $positionRendered = $user->position_rendered;
             $email = $user->email;
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
+            $memberCount = isset($value->children) ? '('.sizeof($value->children).')' : '';
+            $workplace = isset($value->workplace) ? Workplace::findFromCache($value->workplace)->name : '';
             return [
                 'key' => $id,
                 'name' => $value->name0,
-                'employeeid' => $user->employeeid,
+                'employeeidAndWorkplace' => $user->employeeid . ($workplace ? (' - '.$workplace) : ''),
                 'parent' => $value->parent_id,
                 'phone' => $user->phone,
                 'avatar' => $avatar,
@@ -103,6 +105,7 @@ class MyOrgChartController extends Controller
                 'fill' => $this->getFillColor($value),
                 'title' => $positionRendered,
                 'url' => "/profile/$id",
+                'memberCount' => $memberCount,
             ];
         }
     }

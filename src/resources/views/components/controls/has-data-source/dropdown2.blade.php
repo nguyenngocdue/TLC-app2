@@ -1,11 +1,10 @@
 {{-- @php $selectedDecode =json_decode($selected); @endphp --}}
 
-<select id='{{$id}}' name='{{$name}}' {{$multipleStr}} {{$readOnly ? "readonly" : ""}} controlType='dropdown' 
-    allowClear={{$allowClear?'true':'false'}} 
-    letUserChooseWhenOneItem={{($letUserChooseWhenOneItem??false)?'true':'false'}} 
+<select id='{{$id}}' name='{{$name}}' {{$multipleStr}} {{$readOnly ? "readonly" : ""}} controlType='dropdown'
+    allowClear={{$allowClear?'true':'false'}}
+    letUserChooseWhenOneItem={{($letUserChooseWhenOneItem??false)?'true':'false'}}
     class='{{$classList}}'
     ></select>
-
 <script>
     params2 = {
         id: '{{$id}}'

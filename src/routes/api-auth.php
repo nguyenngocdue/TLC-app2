@@ -15,7 +15,7 @@ Route::group([
     Route::get('password/reset/{token}', [ResetPasswordController::class, 'tokenResetPassword']);
     Route::post('password/reset', [ResetPasswordController::class, 'reset']);
     Route::group([
-        'middleware' => ['auth:sanctum','impersonate'],
+        'middleware' => ['auth:sanctum',],
     ], function () {
         Route::get('logout', [AuthController::class, 'logout']);
         Route::get('user', [AuthController::class, 'user']);
