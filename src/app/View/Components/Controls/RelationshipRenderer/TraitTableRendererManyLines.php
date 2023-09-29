@@ -66,6 +66,10 @@ trait TraitTableRendererManyLines
                 $column['properties']['readOnly'] = true;
             }
         }
+        //ReadOnly from getManyLineParams
+        foreach ($editableColumns as &$column) {
+            if ($column['read_only_rr2'] ?? false) $column['properties']['readOnly'] = true;
+        }
         $dateTimeColumns = $sp['datetime_controls'];
 
         static::$cacheEloquentToTable01Name[$colName] = $this->table01Name;
