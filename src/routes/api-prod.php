@@ -8,7 +8,7 @@ Route::group([
     'prefix' => 'v1/prod',
 ], function () {
     Route::group([
-        'middleware' => ['auth:sanctum','impersonate'],
+        'middleware' => ['auth:sanctum'],
     ], function () {
         Route::get('sub_projects', [ProductionController::class, 'getSubProjects']);
         Route::get('prod_run_line/data', [ProductionController::class, 'getDataProductionLine']);

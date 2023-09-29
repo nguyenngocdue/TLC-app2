@@ -6,15 +6,15 @@ use App\Http\Controllers\Reports\Report_Parent2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Utils\Support\DateReport;
 
-class Prod_sequence_010 extends Report_Parent2Controller
+class Prod_sequence_040 extends Report_Parent2Controller
 
 {
     use TraitForwardModeReport;
-    protected $maxH = 50;
+    protected $mode='040';
+    protected $modeType = 'prod_sequence_040';
     protected $typeView = 'report-pivot';
-    protected $modeType = 'prod_sequence_010';
-    protected $mode='010';
     protected $tableTrueWidth = false;
+    protected $maxH = 50;
     protected $projectId = 5;
     protected $subProjectId = 21;
     protected $prodRoutingId = 2;

@@ -48,7 +48,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
 
                         ,IF(prd.target_man_power,prd.target_man_power, NULL) AS target_man_power
                         ,FORMAT(ROUND((pru.worker_number), 2),2) AS actual_man_power
-                        ,round((pru.worker_number - prd.target_man_power),2)*-1 AS vari_man_power
+                        ,FORMAT(round((pru.worker_number - prd.target_man_power),2)*-1,2) AS vari_man_power
                         ,IF(100 - round((pru.worker_number / prd.target_man_power)*100,2),
                             100 - round((pru.worker_number / prd.target_man_power)*100,2),NULL
                             ) AS percent_vari_man_power
@@ -93,6 +93,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
         if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
         if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
         if (isset($params['status'])) $sql .= "\n  AND pose.status IN ({{status}})";
+        if (isset($params['prod_discipline_id'])) $sql .= "\n  AND prl.prod_discipline_id = ({{prod_discipline_id}})";
         elseif (!isset($params['status'])) $sql .= "\n AND pose.status IN ('in_progress', 'finished', 'on_hold')";
 
         $sql .= "\n     AND po.status IN ('in_progress', 'finished', 'on_hold')
@@ -154,7 +155,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                 'title' => 'Production Discipline',
                 'dataIndex' => 'prod_discipline_id',
                 'allowClear' => true,
-                'multiple' => true,
+                // 'multiple' => true,
             ],
             [
                 'title' => 'Production Routing Link',

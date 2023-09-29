@@ -9,23 +9,23 @@
         <x-renderer.button href="/my-org-chart?approval-tree=true" type="{{$settingsView ? 'secondary' : ''}}">Approval Tree</x-renderer.button>
     </div>
     <div class="no-print">
-        <form class="mb-5" method="POST" action="{{route('updateUserSettings')}}" >
+        <form class="" method="POST" action="{{route('updateUserSettings')}}" >
             @method('PUT')
             @csrf
             <input type="hidden" name='action' value="updateShowOptionsOrgChart">
             <x-renderer.card title="Shows">
             <div class="justify-between grid grid-cols-12 gap-5 items-center">
-                <div class="col-span-4">
+                {{-- <div class="col-span-4">
                 <label for="">Workplace</label>
                     <x-utils.filter-workplace tableName="workplaces" multiple="true" name="show_options[workplace][]" id="workplace" typeToLoadListener="" :selected="$showOptions['workplace'] ?? []"></x-utils.filter-workplace>
-                </div>
-                <div class="col-span-4">
+                </div> --}}
+                <div class="col-span-6">
                 <label for="">Head of Department</label>
                 <x-utils.filter-head-of-department tableName="departments" name="show_options[department]" id="department" typeToLoadListener="" selected="{{$showOptions['department'] ?? ''}}"></x-utils.filter-head-of-department>
                 </div>
-                <div class="col-span-3">
+                <div class="col-span-5">
                 <label for="">Show Options</label>
-                <div>
+                <div class="justify-evenly flex">
                     <label>BOD
                         <x-renderer.editable.checkbox name="show_options[is_bod]" cell="{{$showOptions['is_bod'] ?? ''}}"></x-renderer.editable.checkbox>
                     </label>
@@ -57,7 +57,7 @@
                 <div style="position: absolute; width: 1px; height: 1px;"></div>
             </div>
         </div> <!-- Styled in a <style> tag at the top of the html page -->
-        <div id="myDiagramDiv" class="w-full h-screen bg-white" 
+        <div id="myDiagramDiv" class="w-full h-screen bg-white"
         style="border: 1px solid black; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);">
             <canvas tabindex="0"  111 class="w-full h-screen" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none;">This text is displayed if your browser does not support the Canvas HTML element.</canvas>
             {{-- <div style="position: absolute; overflow: auto; width: 398px; height: 398px; z-index: 1;">

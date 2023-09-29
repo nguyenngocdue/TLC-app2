@@ -10,16 +10,16 @@ class ModificationDataReport
         foreach ($arrayInfo as $k => $items) {
             $href = $items['href'] ?? null;
             $color = $href ? 'text-blue-800' : null;
-            $strFormulaByField = null;
-            if (isset($items['formula'])) {
-                $strFormulaByField = $items['formula'] ?? '';
-                preg_match_all('/{{([^}]*)}}/', $strFormulaByField, $matches);
+            $strCellTitle = null;
+            if (isset($items['cell_title'])) {
+                $strCellTitle = $items['cell_title'] ?? '';
+                preg_match_all('/{{([^}]*)}}/', $strCellTitle, $matches);
                 foreach (last($matches) as $k2 => $value) {
                     if (isset($data[$value])) {
                         $val =  $data[$value];
                         if (is_object($val)) $val = $val->value;
                         $searchStr = head($matches)[$k2];
-                        $strFormulaByField = str_replace($searchStr, $val, $strFormulaByField);
+                        $strCellTitle = str_replace($searchStr, $val, $strCellTitle);
                     }
                 }
             }
@@ -27,7 +27,7 @@ class ModificationDataReport
             $data[$k] = (object)[
                 'value' => ($icon ?'<div class="flex justify-end items-center ">'.$data[$k].$icon.'</div>' :  $data[$k]) ?? '',
                 'cell_href' => $href,
-                'cell_title' => $strFormulaByField,
+                'cell_title' => $strCellTitle,
                 'cell_class' => $color,
             ];
         }

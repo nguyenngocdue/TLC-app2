@@ -371,12 +371,12 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
 
 
             $array = [
-                "percent_vari_man_hours" => ["formula" => "100 - (({{man_hours}} / {{target_man_hours}})*100)",],
-                "percent_vari_man_power" => ["formula" => "100 - (({{man_power}} / {{target_man_power}})*100)",],
-                "percent_vari_hours" => ["formula" => "100 - (({{hours}} / {{target_hours}})*100)",],
-                "vari_man_power" => ["formula" => "{{target_man_power}} - {{man_power}}",],
-                "vari_hours" => ["formula" => "{{target_hours}} - {{hours}}",],
-                "vari_man_hours" => ["formula" => "{{target_man_hours}} - {{man_hours}}",],
+                "percent_vari_man_hours" => ["cell_title" => "100 - (({{man_hours}} / {{target_man_hours}})*100)",],
+                "percent_vari_man_power" => ["cell_title" => "100 - (({{man_power}} / {{target_man_power}})*100)",],
+                "percent_vari_hours" => ["cell_title" => "100 - (({{hours}} / {{target_hours}})*100)",],
+                "vari_man_power" => ["cell_title" => "{{target_man_power}} - {{man_power}}",],
+                "vari_hours" => ["cell_title" => "{{target_hours}} - {{hours}}",],
+                "vari_man_hours" => ["cell_title" => "{{target_man_hours}} - {{man_hours}}",],
                 'hours' => ['href' => $url, 'icon' => $iconHours],
                 'man_power' => ['href' => $url, 'icon' => $iconManPower],
                 'man_hours' => ['href' => $url, 'icon' => $iconManHours],

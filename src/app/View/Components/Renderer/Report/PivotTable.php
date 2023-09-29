@@ -145,11 +145,12 @@ class PivotTable extends Component
         }
         
         $dataOutput = $this->changeValueData($dataOutput, $isRawData, $linesData);
+        $dataOutput = Report::formatNumbersInDataSource($dataOutput);
         $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
         if(!empty($this->tableColumns)){
             $tableColumns = $this->tableColumns;
-        } 
-        // dd($tableColumns);
+        }
+        // dd($dataOutput);
         return view("components.renderer.report.pivot-table", [
             'tableDataSource' => $dataRender,
             'tableColumns' => $tableColumns,
