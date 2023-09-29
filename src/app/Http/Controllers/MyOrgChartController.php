@@ -92,8 +92,8 @@ class MyOrgChartController extends Controller
             $positionRendered = $user->position_rendered;
             $email = $user->email;
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
-            $memberCount = isset($value->children) ? '('.sizeof($value->children).')' : '';
-            $workplace = isset($value->workplace) ? Workplace::findFromCache($value->workplace)->name : '';
+            $memberCount = isset($value->children) ? '('.sprintf("%02d",sizeof($value->children)).')' : '';
+            $workplace = isset($value->workplace) ? Workplace::find($value->workplace)->name : '';
             return [
                 'key' => $id,
                 'name' => $value->name0,

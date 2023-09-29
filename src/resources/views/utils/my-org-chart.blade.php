@@ -19,25 +19,30 @@
                 <label for="">Workplace</label>
                     <x-utils.filter-workplace tableName="workplaces" multiple="true" name="show_options[workplace][]" id="workplace" typeToLoadListener="" :selected="$showOptions['workplace'] ?? []"></x-utils.filter-workplace>
                 </div> --}}
-                <div class="col-span-6">
+                <div class="col-span-4">
                 <label for="">Head of Department</label>
                 <x-utils.filter-head-of-department tableName="departments" name="show_options[department]" id="department" typeToLoadListener="" selected="{{$showOptions['department'] ?? ''}}"></x-utils.filter-head-of-department>
                 </div>
-                <div class="col-span-5">
+                <div class="col-span-1"></div>
+                <div class="col-span-4">
                 <label for="">Show Options</label>
-                <div class="justify-evenly flex">
-                    <label>BOD
-                        <x-renderer.editable.checkbox name="show_options[is_bod]" cell="{{$showOptions['is_bod'] ?? ''}}"></x-renderer.editable.checkbox>
-                    </label>
-                    <label class="ml-3">Workers
-                    <x-renderer.editable.checkbox name="show_options[time_keeping_type]" cell="{{$showOptions['time_keeping_type'] ?? ''}}"></x-renderer.editable.checkbox>
-                    </label>
-                    <label class="ml-3">Resigned
-                    <x-renderer.editable.checkbox name="show_options[resigned]" cell="{{$showOptions['resigned'] ?? ''}}"></x-renderer.editable.checkbox>
-                    </label>
+                <x-renderer.card title="" class="bg-white border p-2">
+                    <div class="justify-evenly flex">
+                        <label>BOD
+                            <x-renderer.editable.checkbox name="show_options[is_bod]" cell="{{$showOptions['is_bod'] ?? ''}}"></x-renderer.editable.checkbox>
+                        </label>
+                        <label class="ml-3">Workers
+                        <x-renderer.editable.checkbox name="show_options[time_keeping_type]" cell="{{$showOptions['time_keeping_type'] ?? ''}}"></x-renderer.editable.checkbox>
+                        </label>
+                        <label class="ml-3">Resigned
+                        <x-renderer.editable.checkbox name="show_options[resigned]" cell="{{$showOptions['resigned'] ?? ''}}"></x-renderer.editable.checkbox>
+                        </label>
+                    </div>
+                </x-renderer.card>
                 </div>
+                <div class="col-span-3 flex justify-end mt-5">
+                    <x-renderer.button htmlType='submit' type="secondary" class="w-20" >Save</x-renderer.button>
                 </div>
-                <x-renderer.button htmlType='submit' type="secondary" >Save</x-renderer.button>
             </div>
             </x-renderer.card>
         </form>
@@ -47,7 +52,7 @@
         <x-controls.text2 type="search" class="w-[550px] mr-1 my-2" name="mySearch"
         placeholder="Press ENTER to search, and Press SPACE to pan to the next result"
         value="" onkeypress="if (event.keyCode === 13) searchDiagram()" />
-        <x-renderer.button type="secondary" onClick="searchDiagram()" >Search</x-renderer.button>
+        <x-renderer.button type="secondary" onClick="searchDiagram()" class="w-20" >Search</x-renderer.button>
     </div>
     <div class="relative">
         <div id="myOverviewDiv" class="w-60 h-60 absolute top-1 left-1 border bg-gray-100 border-gray-100"

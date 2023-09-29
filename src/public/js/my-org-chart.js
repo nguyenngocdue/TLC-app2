@@ -103,7 +103,7 @@ function init() {
           )
         )
       ),
-      $(go.Panel, "Auto", { alignment: new go.Spot(0.95, 0.1), },
+      $(go.Panel, "Auto", { alignment: new go.Spot(0.93, 0.1), },
         $(go.Panel, "Spot", { scale: 1 },
 
             $(go.TextBlock,  { stroke: "white", font: "bold 10pt sans-serif", text: "alignment: Center", textAlign: "center" },
