@@ -30,7 +30,3 @@
         </div>
     </div>
 </div>
-
-@once
-    <x-modals.kanban.modal-cluster modalId='{{$modalId}}'/>
-@endonce

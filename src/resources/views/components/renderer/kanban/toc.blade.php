@@ -20,7 +20,3 @@
         </span>
     </div>
 </div> 
-
-@once
-    <x-modals.kanban.modal-page modalId='{{$modalId}}'/>
-@endonce

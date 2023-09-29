@@ -24,7 +24,3 @@
     <button class="{{$classButton}} mt-2 {{$groupWidth}}" type="button" onclick="addANewKanbanObj('group_', {{$group->id}}, route_task, '{{$groupWidth}}')">+ Add a Task</button>
     
 </div>
-
-@once
-    <x-modals.kanban.modal-group modalId='{{$modalId}}'/>
-@endonce

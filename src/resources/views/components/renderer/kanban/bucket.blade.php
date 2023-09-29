@@ -28,7 +28,3 @@
     <script>kanbanInit1("bucket_", [ {{$bucket->id}} ], route_page, "{{$categoryBucket}}")</script>
     
 </div>
-
-@once
-    <x-modals.kanban.modal-bucket modalId='{{$modalId}}'/>
-@endonce

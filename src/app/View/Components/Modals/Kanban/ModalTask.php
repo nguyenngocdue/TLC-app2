@@ -26,7 +26,9 @@ class ModalTask extends Component
     {
         return view(
             'components.modals.kanban.modal-task',
-            ['modalId' => $this->modalId]
+            [
+                'modalId' => $this->modalId,
+            ],
         );
     }
 }

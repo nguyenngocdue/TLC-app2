@@ -157,10 +157,16 @@ const kanbanLoadPage = (pageId, url) => {
 
     const ids = []
     $("#toc_group_1").children().each((a, db0) => {
+        if (db0.id === '') return
+        // console.log(db0.id)
         $("#" + db0.id).children().each((a, db1) => {
             // console.log(db1.id, beginWith)
             if (db1.id.startsWith(beginWith)) {
+                if (db1.id === '') return
+                // console.log(db1.id)
                 $("#" + db1.id).children().each((a, db2) => {
+                    if (db2.id === '') return
+                    // console.log(db2.id)
                     ids.push(getCharactersAfterLastUnderscore(db2.id))
                 })
             }

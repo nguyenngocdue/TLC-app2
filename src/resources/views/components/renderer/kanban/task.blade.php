@@ -12,7 +12,3 @@
         <input id="txt_task_{{$task->id}}" value="{{$task->name}}" class="{{$classTask}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$task->id}},'lbl_task','txt_task','caption_task', route_task)">
     </div>
 </div>
-
-@once
-    <x-modals.kanban.modal-task modalId='{{$modalId}}'/>
-@endonce

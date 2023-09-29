@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 
 use App\Models\Kanban_task_page;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
 use App\View\Components\Renderer\Kanban\Pages;
 use Illuminate\Http\Request;
@@ -160,6 +161,23 @@ trait TraitKanban
 		return ResponseObject::responseSuccess(['renderer' => $renderer], [], "Inserted");
 	}
 
+	function getItemRenderProps(Request $request)
+	{
+		$input = $request->input();
+		['id' => $id] = $input;
+
+		$item = $this->modelPath::find($id);
+		$props = SuperProps::getFor($this->modelPath::getTableName())['props'];
+
+		// $renderer = json_encode($props);
+		$renderer = json_encode($item);
+		return ResponseObject::responseSuccess(['renderer' => $renderer], [
+			'input' => $input,
+			'props' => $props,
+			'item' => $item,
+		], "Rendered");
+	}
+
 	function kanban(Request $request)
 	{
 		try {
@@ -170,6 +188,7 @@ trait TraitKanban
 				case "changeName":
 				case "addNew":
 				case "loadPage":
+				case "getItemRenderProps":
 					return $this->{$action}($request);
 					break;
 			}
