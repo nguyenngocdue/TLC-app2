@@ -85,6 +85,19 @@ class MyOrgChartController extends Controller
             }
         }
     }
+    private function getMemberCount($value,$options){
+        if(isset($value->children)){
+            if($options == $this::ARRAY_RESIGNED) return sizeof($value->children);
+            else{
+                $count = 0;
+                foreach ($value->children as $user) {
+                    if($user->resigned == 0) $count++;
+                }
+                return $count;
+            }
+        }
+        return '';
+    }
     private function convertDataSource($value,$options){
         if(in_array($value->workplace,$options['workplace']) && in_array($value->resigned,$options['resigned'])
             && in_array($value->time_keeping_type,$options['time_keeping_type']) && in_array($value->is_bod ,$options['is_bod'])){
@@ -93,7 +106,8 @@ class MyOrgChartController extends Controller
             $positionRendered = $user->position_rendered;
             $email = $user->email;
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
-            $memberCount = isset($value->children) ? '('.sprintf("%02d",sizeof($value->children)).')' : '';
+            $memberCount = $this->getMemberCount($value,$options['resigned']);
+            $memberCount = $memberCount ? '('.sprintf("%02d",$memberCount).')' : '';
             $workplace = isset($value->workplace) ? Workplace::find($value->workplace)->name : '';
             return [
                 'key' => $id,

@@ -4,7 +4,7 @@
 
 @section('content')
 <div >
-    @if(!$isAdmin)
+    @if($isAdmin)
     <div>
         <x-renderer.button href="/my-org-chart" type="{{$settingsView ? '' : 'secondary'}}">Position ORG Chart </x-renderer.button>
         <x-renderer.button href="/my-org-chart?approval-tree=true" type="{{$settingsView ? 'secondary' : ''}}">Approval Tree</x-renderer.button>
