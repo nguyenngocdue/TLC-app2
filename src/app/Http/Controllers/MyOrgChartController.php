@@ -49,7 +49,8 @@ class MyOrgChartController extends Controller
             'utils.my-org-chart',
             ['dataSource'=> $results,
             'showOptions'=>$showOptions,
-            'settingsView' => $settingsView
+            'settingsView' => $settingsView,
+            'isAdmin' => CurrentUser::isAdmin(),
             ]
         );
     }
