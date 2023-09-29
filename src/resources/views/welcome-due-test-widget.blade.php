@@ -4,108 +4,68 @@
 #dd($widget);
 @endphp
 
-{{-- <x-elapse title="Widget group: " />
-<div class="w80 h-80 bg-green-600 ">
-    <x-renderer.report.chart key="{{md5($widget['title_a'].$widget['title_b'])}}" chartType="{{$widget['chartType']}}" :meta="$widget['meta']" :metric="$widget['metric']" :widgetParams="$widget['params']" />
-</div>
-<x-dashboards.widget-groups /> --}}
-
-{{-- <x-renderer.card title="">
+ {{-- <x-renderer.card title="">
     <div class="mb-8 grid gap-6 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
         <x-renderer.card title="{{$widget['title_b']}}" tooltip="{{$widget['name']}}">
-<x-renderer.report.chart key="{{md5($widget['title_a'].$widget['title_b'])}}" chartType="{{$widget['chartType']}}" :meta="$widget['meta']" :metric="$widget['metric']" :widgetParams="$widget['params']" />
 </x-renderer.card>
 </div>
-</x-renderer.card> --}}
-{{-- <x-dashboards.widget-groups />  --}}
+</x-renderer.card> 
 
-<div class=" grid-rows-1 pt-2 flex justify-center">
-    <div class="w-1/2 h-1/2">
-        {{-- <x-renderer.report.pivot-chart key="carbon_footprint_1" :dataSource="$widget"></x-renderer.report.pivot-chart> --}}
-    </div>
+<x-dashboards.widget-groups /> --}}
 
-    <!-- Đối tượng canvas để vẽ biểu đồ -->
-    <canvas id="myChart" width="100" height="200"></canvas>
+<canvas id="myBarChart"></canvas>
+<script>
+// Lấy tham chiếu đến canvas và context
+var canvas = document.getElementById('myBarChart');
+var ctx = canvas.getContext('2d');
 
-    <script>
-        var data = {
-            labels: ["Scope 1", "Scope 2", "Scope 3"]
-            , datasets: [{
-                    label: "010. Gaseous Fuel"
-                    , data: [2.39, 0]
-                    , backgroundColor: "red"
-                }
-                , {
-                    label: "020. Refrigerants"
-                    , data: [0.69, 0]
-                    , backgroundColor: "blue"
-                }
-                , {
-                    label: "030. Own Passenger Vehicles"
-                    , data: [7.57, 0]
-                    , backgroundColor: "green"
-                }
-                , {
-                    label: "040. Delivery & Controlled Vehicles"
-                    , data: [17.42, 0]
-                    , backgroundColor: "orange"
-                }
-                , {
-                    label: "050. Electricity"
-                    , data: [0, 216.91]
-                    , backgroundColor: "purple"
-                }
-                , {
-                    label: "060. Water Supply & Treatment"
-                    , data: [0, 0, 100]
-                    , backgroundColor: "green"
-                }
-                , {
-                    label: "070. Materials"
-                    , data: [0, 0, 1017.47]
-                    , backgroundColor: "yellow"
-                }
-                , {
-                    label: "080. Waste Disposal"
-                    , data: [0, 0, 70]
-                    , backgroundColor: "red"
-                }
-            ]
-        };
-        // Lấy thẻ canvas và vẽ biểu đồ ngang
-        var ctx = document.getElementById("myChart").getContext("2d");
-        var myChart = new Chart(ctx, {
-            type: "bar"
-            , data: data
-            , options: {
-                scales: {
-                    x: {
-                        stacked: true
-                        , ticks: {
-                            font: {
-                                size: 20, // Đổi kích thước font cho trục x
-                                weight: 'bold' // Đổi độ đậm (bold) của font cho trục x
-                            }
-                        }
-                    }
-                    , y: {
-                        stacked: true
-                    }
-                }
-                , indexAxis: 'y'
-                , plugins: {
-                    legend: {
-                        labels: {
-                            color: 'blue' // Đổi màu chữ của các nhãn thành màu xanh
-                        }
-                    }
-                }
-            }
-        });
+// Dữ liệu cho biểu đồ
+var data = {
+    labels: ['New', 'Progress', 'On Hold'],
+    datasets: [{
+        label: 'New',
+        data: [30],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+    }, {
+        label: 'Progress',
+        data: [40],
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+    }, {
+        label: 'On Hold',
+        data: [50],
+        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+        borderColor: 'rgba(255, 206, 86, 1)',
+        borderWidth: 1
+    }]
+};
 
-    </script>
-</div>
-{{-- <x-dashboards.widget-groups /> --}}
+// Cấu hình biểu đồ
+var options = {
+    scales: {
+        y: {
+            beginAtZero: true
+        }
+    },
+    plugins: {
+        legend: {
+            display: true,
+            position: 'top' // Hiển thị legend ở trên cùng
+        }
+    }
+};
+
+// Tạo biểu đồ cột
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+});
+
+</script>
 
 
 

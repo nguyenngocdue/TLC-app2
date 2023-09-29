@@ -8,6 +8,8 @@
 @php
 $class1 = 'p-2 border h-full w-full flex border-gray-600 text-base font-medium bg-gray-50 items-center justify-end';
 $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left';
+$widget = $tableDataSource['widget_01'];
+$tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDataSource['tableDataSource']) : [];
 @endphp
 {{-- "Show utility"  --}}
 @php
@@ -20,10 +22,23 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     @include('components.reports.shared-parameter')
     @include('components.reports.show-layout', ['optionPrint' => $optionPrint])
 </div>
+
+
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
+            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Statistical Analysis of Job Completion Time by Day</x-renderer.heading>
+            <div class=" grid-rows-1 items-center">
+                    <x-renderer.report.chart-bar key="{{md5($widget['title_a'].$widget['title_b'])}}" chartType="{{$widget['chartType']}}" :meta="$widget['meta']" :metric="$widget['metric']" titleChart="{{$widget['titleChart']}}"/>
+                <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'> </x-renderer.heading>
+            </div>
+        </div>
+        <x-renderer.page-break />
+
+        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
+                {{-- Widget --}}
+
             <x-print.header6 />
             {{-- BASIC INFORMATION --}}
             <x-renderer.heading level=2 class='text-center'>UoM Report</x-renderer.heading>

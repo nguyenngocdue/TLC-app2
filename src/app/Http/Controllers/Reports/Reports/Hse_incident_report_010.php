@@ -388,11 +388,14 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 $value['work_hours'] = is_null($num) ? $workHours[$hseMonth] : $num;
                 $value['hse_month'] = $hseMonth;
                 // Calculate the total recordable incident rate (TRIR)
-                $totalRecIncidentRate = (($value['hseir_ltc_count_vote']
-                    + $value['hseir_rwc_count_vote']
-                    + $value['hseir_mtc_count_vote']
-                    + $value['hseir_incident_count_vote']
-                    + $value['hseir_near_miss_count_vote']) * 200000) / $value['work_hours'];
+                if($value['work_hours'] > 0) {
+                    $totalRecIncidentRate = (($value['hseir_ltc_count_vote']
+                        + $value['hseir_rwc_count_vote']
+                        + $value['hseir_mtc_count_vote']
+                        + $value['hseir_incident_count_vote']
+                        + $value['hseir_near_miss_count_vote']) * 200000) / $value['work_hours'];
+                }
+
                 $value['trir'] = ($num = round($totalRecIncidentRate, 2)) ? $num : null;
                 if (!in_array($hseMonth, $hseMonths)) {
                     $value['work_hours'] = round($value['work_hours'], 2);

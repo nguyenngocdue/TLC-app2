@@ -12,8 +12,10 @@ use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
+use App\Models\Term;
 use App\Utils\Support\ModificationDataReport;
 use App\Utils\Support\Report;
+use App\Utils\Support\StringReport;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -41,75 +43,75 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     public function getSqlStr($params)
     {
         $sql = "SELECT 	project_id,
-		project_name,
-        sub_project_id,
-        sub_project_name,
-        prod_routing_id,
-        prod_routing_name,
-        prod_routing_link_id,
-        prod_routing_link_name,
-        prod_discipline_id,
-        prod_discipline_name,
-        uom_name,
-        AVG(man_power) AS man_power,
-        AVG(total_uom) AS total_uom,
-        AVG(total_hours) AS total_hours,
-        SUM(count_pru_date) AS count_pru_date,
-        AVG(total_hours)*60 / SUM(count_pru_date) AS min_on_day,
-        AVG(total_hours)*60 / AVG(total_uom) AS min_on_set,
-        uom_name
-        FROM (SELECT
-            sp.project_id AS project_id,
-            pj.name AS project_name,
-            sp.id AS sub_project_id,
-            sp.name AS sub_project_name,
-            po.id AS pro_order_id,
-            pr.id AS prod_routing_id,
-            pr.name AS prod_routing_name,
-            prl.id AS prod_routing_link_id,
-            prl.name AS prod_routing_link_name,
-            pd.id AS prod_discipline_id, 
-            pd.name AS prod_discipline_name,
-            pse.total_hours AS total_hours,
-            pse.worker_number AS man_power,
-            pse.total_uom AS total_uom,
-            pse.total_man_hours AS total_man_hours,
-            COUNT(DISTINCT pru.date) AS count_pru_date,
-            terms.name AS uom_name
-            FROM
-                sub_projects sp
-            JOIN
-                projects pj ON pj.id = sp.project_id
-            JOIN
-                prod_orders po ON po.sub_project_id = sp.id
-            JOIN
-                prod_routings pr ON pr.id = po.prod_routing_id
-            LEFT JOIN
-                prod_sequences pse ON pse.prod_order_id = po.id
-            JOIN
-                prod_routing_links prl ON prl.id = pse.prod_routing_link_id
-            JOIN
-                prod_disciplines pd ON prl.prod_discipline_id = pd.id
-            LEFT JOIN
-                terms terms ON pse.uom_id = terms.id
-            LEFT JOIN prod_runs pru ON pru.prod_sequence_id = pse.id
-        WHERE 1 = 1
-            AND pse.deleted_by IS NULL
-            AND sp.project_id = {{project_id}}
-            AND sp.id = {{sub_project_id}}
-            AND pse.status IN ('in_progress', 'finished')";
+                    project_name,
+                    sub_project_id,
+                    sub_project_name,
+                    prod_routing_id,
+                    prod_routing_name,
+                    prod_routing_link_id,
+                    prod_routing_link_name,
+                    prod_discipline_id,
+                    prod_discipline_name,
+                    uom_name,
+                    FORMAT(AVG(man_power),2) AS man_power,
+                    AVG(total_uom) AS total_uom,
+                    AVG(total_hours) AS total_hours,
+                    SUM(count_pru_date) AS count_pru_date,
+                    AVG(total_hours)*60 / SUM(count_pru_date) AS min_on_day,
+                    AVG(total_hours)*60 / AVG(total_uom) AS min_on_set,
+                    uom_name
+                    FROM (SELECT
+                        sp.project_id AS project_id,
+                        pj.name AS project_name,
+                        sp.id AS sub_project_id,
+                        sp.name AS sub_project_name,
+                        po.id AS pro_order_id,
+                        pr.id AS prod_routing_id,
+                        pr.name AS prod_routing_name,
+                        prl.id AS prod_routing_link_id,
+                        prl.name AS prod_routing_link_name,
+                        pd.id AS prod_discipline_id, 
+                        pd.name AS prod_discipline_name,
+                        pse.total_hours AS total_hours,
+                        pse.worker_number AS man_power,
+                        pse.total_uom AS total_uom,
+                        pse.total_man_hours AS total_man_hours,
+                        COUNT(DISTINCT pru.date) AS count_pru_date,
+                        terms.name AS uom_name
+                        FROM
+                            sub_projects sp
+                        JOIN
+                            projects pj ON pj.id = sp.project_id
+                        JOIN
+                            prod_orders po ON po.sub_project_id = sp.id
+                        JOIN
+                            prod_routings pr ON pr.id = po.prod_routing_id
+                        LEFT JOIN
+                            prod_sequences pse ON pse.prod_order_id = po.id
+                        JOIN
+                            prod_routing_links prl ON prl.id = pse.prod_routing_link_id
+                        JOIN
+                            prod_disciplines pd ON prl.prod_discipline_id = pd.id
+                        LEFT JOIN
+                            terms terms ON pse.uom_id = terms.id
+                        LEFT JOIN prod_runs pru ON pru.prod_sequence_id = pse.id
+                    WHERE 1 = 1
+                        AND pse.deleted_by IS NULL
+                        AND sp.project_id = {{project_id}}
+                        AND sp.id = {{sub_project_id}}
+                        AND pse.status IN ('in_progress', 'finished')";
         if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
         if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pse.prod_routing_link_id = {{prod_routing_link_id}}";
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
 
         $sql .= "\n GROUP BY
-                        pj.name,
-                        sp.id,
-                        sp.name,
-                        po.id
-                        )AS tb1
-                    GROUP BY
-                        project_id, uom_name";
+                                    pj.name,
+                                    sp.id,
+                                    sp.name,
+                                    po.id
+                                    )AS tb1
+                                GROUP BY
+                                    project_id, uom_name";
         return $sql;
     }
 
@@ -119,6 +121,59 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         $params['sub_project_id'] = $this->subProjectId;
         $params['prod_routing_id'] = $this->prodRoutingId;
         return $params;
+    }
+
+    private function updateDataForPivotChart($data)
+    {
+        $values = array_values($data->toArray());
+        $primaryData = reset($values);
+        $unit = $primaryData['uom_name'];
+        $dataToRender = [
+            'man_power' => $primaryData['man_power'],
+            'total_uom' => $primaryData['total_uom'],
+            'min_on_day' => $primaryData['min_on_day'],
+            'min_on_set' => $primaryData['min_on_set'],
+        ];
+
+        // information for meta data
+        $labelName = ['Man-power', $unit.'/day', 'min/day', 'min/'.$unit];
+        $labels = StringReport::arrayToJsonWithSingleQuotes($labelName);
+        $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($dataToRender));
+        $max = max(array_values($dataToRender));
+        $count = count($dataToRender);
+        $meta = [
+            'labels' => $labels,
+            'numbers' => $numbers,
+            'max' => $max,
+            'count' => $count
+        ];
+
+        // information for metric data
+        $metric = [];
+        array_walk($dataToRender, function ($value, $key) use (&$metric) {
+            return $metric[] = (object) [
+                'meter_id' => $key,
+                'metric_name' => $value
+            ];
+        }, $dataToRender);
+
+
+        // Set data for widget
+        $widgetData =  [
+            "title_a" => "UoM",
+            "title_b" => "by Hours",
+            'meta' => $meta,
+            'metric' => $metric,
+            'chartType' =>'bar',
+            'titleChart' => 'UoM Chart',
+            
+        ];
+
+        // add widget to dataSource
+        $data = ['tableDataSource' => $data];
+        $data['widget_01'] = $widgetData;
+        // dump($data);
+        return $data;
     }
 
     protected function getParamColumns($dataSource, $modeType)
@@ -197,28 +252,28 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     "dataIndex" => "man_power",
                     "align" => "right",
                     "width" => 78,
-                    "footer" => "agg_sum",
+                    // "footer" => "agg_sum",
                 ],
                 [
                     "title" => $unit . "/day <br/>(AVG)",
                     "dataIndex" => "total_uom",
                     "align" => "right",
                     "width" => 75,
-                    "footer" => "agg_sum",
+                    // "footer" => "agg_sum",
                 ],
                 [
                     "title" => "min/day <br/>(AVG)",
                     "dataIndex" => "min_on_day",
                     "align" => "right",
                     "width" => 75,
-                    "footer" => "agg_sum",
+                    // "footer" => "agg_sum",
                 ],
                 [
                     "title" => "min/$unit <br/>(AVG)",
                     "dataIndex" => "min_on_set",
                     "align" => "right",
                     "width" =>  75,
-                    "footer" => "agg_sum",
+                    // "footer" => "agg_sum",
                 ]
             ];
     }
@@ -244,28 +299,12 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         return $basicInfoData;
     }
 
-    private function getIcon($value)
-    {
-        $value = (float)$value;
-        if ($value > 0) {
-            return '<i class="text-green-600 text-xs fa-solid fa-triangle fa-rotate-180 pr-1"></i>';
-        } elseif ($value < 0) {
-            return  '<i class="text-red-600 text-xs fa-solid fa-triangle pl-1"></i>';
-        } else {
-            return '<i class="text-yellow-600 fa-solid fa-minus fa-xl" style="transform: scale(0.7, 1.5); margin-top: 9px; margin-right: -3px" ></i>';
-        }
-    }
+
 
     public function changeDataSource($dataSource, $params)
     {
-        foreach ($dataSource as $key => $values) {
-            $array = [
-                'min_on_day' => ['cell_title' => "(total_hours*60)/SUM(DISTINCT day)= {{total_hours}}*60 / {{count_pru_date}}"]
-            ];
-            $values = ModificationDataReport::addFormulaForData($values, $array);
-            $dataSource[$key] = $values;
-        }
-        // dd($dataSource);
+        $dataSource = self::updateDataForPivotChart($dataSource);
+        // dump($dataSource);
         return $dataSource;
     }
 }

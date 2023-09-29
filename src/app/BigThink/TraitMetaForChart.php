@@ -46,6 +46,21 @@ trait TraitMetaForChart
         ];
     }
 
+    // function getMetaForChart($sqlClassName, $widget, $params)
+    // {
+    //     $className = "App\\Http\\Controllers\\Reports\\Widgets\\$sqlClassName";
+    //     // $sql = (new $className)($params);
+    //     // $result = DB::select($sql);
+    //     // $result = $this->makeOthers($result);
+
+    //     // $meta = $this->makeMeta($result);
+    //     return [
+    //         'meta' => [],
+    //         'metric' => [],
+    //         'chartType' => $widget['chart_type'],
+    //         'hidden' => $widget['hidden'],
+    //     ];
+    // }
     function getMetaForChart($sqlClassName, $widget, $params)
     {
         $className = "App\\Http\\Controllers\\Reports\\Widgets\\$sqlClassName";

@@ -326,10 +326,14 @@ class Report
     public static function formatNumbersInDataSource($dataSource) {
         if (!$dataSource instanceof Collection) $dataSource = collect($dataSource);
         $data = $dataSource->map(function ($values) {
-        foreach ($values as $key => $value) {
-            if (is_numeric($value)) {
-                if(is_object($values)) $values -> $key = number_format($value, 2);
-                if (is_array($values))  $values[$key] = number_format($value, 2);
+            if(!is_array($values)) {
+                if (is_numeric($values)) return number_format($values, 2);
+            }else{
+                foreach ($values as $key => $value) {
+                    if (is_numeric($value)) {
+                        if(is_object($values)) $values -> $key = number_format($value, 2);
+                        if (is_array($values))  $values[$key] = number_format($value, 2);
+                    }
                 }
             }
             return $values;
