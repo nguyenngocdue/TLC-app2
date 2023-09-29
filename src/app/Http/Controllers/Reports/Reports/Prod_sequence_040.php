@@ -10,11 +10,11 @@ class Prod_sequence_040 extends Report_Parent2Controller
 
 {
     use TraitForwardModeReport;
-    protected $maxH = 50;
-    protected $typeView = 'report-pivot';
+    protected $mode='040';
     protected $modeType = 'prod_sequence_040';
-    protected $mode='010';
+    protected $typeView = 'report-pivot';
     protected $tableTrueWidth = false;
+    protected $maxH = 50;
     protected $projectId = 5;
     protected $subProjectId = 21;
     protected $prodRoutingId = 2;
