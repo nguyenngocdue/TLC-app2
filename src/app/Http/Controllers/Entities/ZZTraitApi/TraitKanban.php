@@ -169,8 +169,12 @@ trait TraitKanban
 		$item = $this->modelPath::find($id);
 		$props = SuperProps::getFor($this->modelPath::getTableName())['props'];
 
-		// $renderer = json_encode($props);
-		$renderer = json_encode($item);
+		$component = '<x-renderer.kanban.item-renderer-modal :item="$item" :props="$props" />';
+		$renderer = Blade::render($component, [
+			'item' => $item,
+			'props' => $props,
+		]);
+		// $renderer = json_encode($item);
 		return ResponseObject::responseSuccess(['renderer' => $renderer], [
 			'input' => $input,
 			'props' => $props,

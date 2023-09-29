@@ -3,18 +3,19 @@
 @extends("modals.modal-medium")
 {{-- @extends("modals.modal-small") --}}
 
-@section($modalId.'-header', "Header")
+@section($modalId.'-header', "Edit Task")
 
 @section($modalId.'-body')
-    <input id="txtTaskId" type="hidden1" x-bind:value="modalParams['{{$modalId}}']['id']">
-    <div class="p-2">
-        Task Body
-    </div>
-    <div id="divTaskBody"></div>
+    <input id="txtTaskId" type="hidden" x-bind:value="modalParams['{{$modalId}}']['id']">
+    <div id="divTaskBody" class="my-4"></div>
 @endsection
 
-{{-- @section($modalId.'-footer')
-@endsection --}}
+@section($modalId.'-footer')
+<div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
+    <x-renderer.button click="closeModal('{{$modalId}}')">Cancel</x-renderer.button>
+    <x-renderer.button class="mx-2" type='success' icon="fa-duotone fa-floppy-disk">Save</x-renderer.button>
+</div>
+@endsection
 
 @section($modalId.'-javascript')
 <script>
