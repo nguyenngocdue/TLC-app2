@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('topTitle', 'Welcome')
+@section('topTitle', $topTitle)
 @section('title', '')
 
 @section('content')
 <div >
     @if($isAdmin)
-    <div>
+    <div class='p-2'>
         <x-renderer.button href="/my-org-chart" type="{{$settingsView ? '' : 'secondary'}}">Position ORG Chart </x-renderer.button>
         <x-renderer.button href="/my-org-chart?approval-tree=true" type="{{$settingsView ? 'secondary' : ''}}">Approval Tree</x-renderer.button>
     </div>
@@ -15,7 +15,7 @@
             @method('PUT')
             @csrf
             <input type="hidden" name='action' value="updateShowOptionsOrgChart">
-            <x-renderer.card title="Shows">
+            <x-renderer.card title="">
             <div class="justify-between grid grid-cols-12 gap-5 items-center">
                 {{-- <div class="col-span-4">
                 <label for="">Workplace</label>

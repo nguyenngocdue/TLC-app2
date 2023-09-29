@@ -51,6 +51,7 @@ class MyOrgChartController extends Controller
             'showOptions'=>$showOptions,
             'settingsView' => $settingsView,
             'isAdmin' => CurrentUser::isAdmin(),
+            'topTitle' => 'Company ORG Chart'
             ]
         );
     }
