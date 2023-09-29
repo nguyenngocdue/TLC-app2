@@ -71,6 +71,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_erp_prod_order_name": {
+        "name": "_erp_prod_order_name",
+        "column_name": "erp_prod_order_name",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "In case each Sequence is a Prod Order, fill its name here",
+        "control_extra": ""
+    },
     "_uom_input": {
         "name": "_uom_input",
         "column_name": "uom_input",

@@ -39,6 +39,8 @@ return new class extends Migration
             $table->float('uom_input')->nullable();
             $table->float('uom_agg')->nullable();
             $table->float('total_uom')->nullable();
+            $table->string('erp_prod_order_name')->nullable();
+
             $table->appendCommonFields();
 
             $table->unique(['prod_order_id', 'prod_routing_link_id']);
