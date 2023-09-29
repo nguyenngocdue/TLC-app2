@@ -1,14 +1,14 @@
 
-@extends("modals.modal-large")
-{{-- @extends("modals.modal-medium") --}}
+{{-- @extends("modals.modal-large") --}}
+@extends("modals.modal-medium")
 {{-- @extends("modals.modal-small") --}}
 
 @section($modalId.'-header', "Header")
 
 @section($modalId.'-body')
-    {{-- <input id="textToBeLoadedIds" type="hidden" x-bind:value="modalParams['{{$modalId}}']['ids']"> --}}
+    <input id="textToBeLoadedIds" type="hidden1" x-bind:value="modalParams['{{$modalId}}']['id']">
     <div class="p-2">
-        Body
+        Group Body
     </div>
 @endsection
 
