@@ -205,3 +205,40 @@ const renameCurrentPage = (pageId) => {
         $('#divPageCard').html($('#txt_toc_' + pageId).val())
     }
 }
+
+const kanbanLoadModalRenderer = (txtTypeId, divTypeBody, url) => {
+    const id = $("#" + txtTypeId).val()
+    console.log("Starting up #", id, url)
+    $.ajax({
+        method: "POST",
+        url,
+        data: { action: "editItemRenderProps", id, },
+        success: function (response) {
+            const { renderer } = response.hits
+            $("#" + divTypeBody).html(renderer)
+            //   console.log(response)
+        },
+        error: function (jqXHR) {
+            toastr.error(jqXHR.responseJSON.message)
+        },
+    })
+}
+
+const kanbanUpdateItem = (txtTypeId, url) => {
+    const id = $("#" + txtTypeId).val()
+    const formData = $("#frmTask").serialize()
+    console.log("Updating up #", id, url, formData)
+    $.ajax({
+        method: "POST",
+        url,
+        data: { action: "updateItemRenderProps", id, formData },
+        success: function (response) {
+            // const { renderer } = response.hits
+            // $("#" + divTypeBody).html(renderer)
+            console.log(response)
+        },
+        error: function (jqXHR) {
+            toastr.error(jqXHR.responseJSON.message)
+        },
+    })
+}

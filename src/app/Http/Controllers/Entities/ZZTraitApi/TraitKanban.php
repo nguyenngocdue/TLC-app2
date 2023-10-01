@@ -161,7 +161,7 @@ trait TraitKanban
 		return ResponseObject::responseSuccess(['renderer' => $renderer], [], "Inserted");
 	}
 
-	function getItemRenderProps(Request $request)
+	function editItemRenderProps(Request $request)
 	{
 		$input = $request->input();
 		['id' => $id] = $input;
@@ -182,6 +182,21 @@ trait TraitKanban
 		], "Rendered");
 	}
 
+	function updateItemRenderProps(Request $request)
+	{
+		$input = $request->input();
+		['id' => $id, 'formData' => $formData] = $input;
+		parse_str($formData, $newItem);
+
+		$item = $this->modelPath::find($id);
+
+		// Log::info("Input:");
+		// Log::info($newItem);
+
+		$item->update($newItem);
+		return ResponseObject::responseSuccess([], [], "Updated");
+	}
+
 	function kanban(Request $request)
 	{
 		try {
@@ -192,7 +207,8 @@ trait TraitKanban
 				case "changeName":
 				case "addNew":
 				case "loadPage":
-				case "getItemRenderProps":
+				case "editItemRenderProps":
+				case "updateItemRenderProps":
 					return $this->{$action}($request);
 					break;
 			}

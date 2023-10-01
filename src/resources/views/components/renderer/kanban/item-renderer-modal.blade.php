@@ -1,5 +1,5 @@
-<form action="">
-@php Log::info($item); @endphp
+<form id="frmTask" action="">
+{{-- @php Log::info($item); @endphp --}}
     <table class="w-full">
         @foreach($props as $prop)
             @if($prop['hidden_edit']) 
@@ -8,7 +8,7 @@
             
             <tr class="">
                 @php 
-                    Log::info($prop); 
+                    // Log::info($prop); 
                     $name = $prop['column_name'];
                     $value = $item->{$name}; 
                 @endphp

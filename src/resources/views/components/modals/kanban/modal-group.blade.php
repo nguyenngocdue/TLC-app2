@@ -6,17 +6,16 @@
 @section($modalId.'-header', "Header")
 
 @section($modalId.'-body')
-    <input id="textToBeLoadedIds" type="hidden1" x-bind:value="modalParams['{{$modalId}}']['id']">
-    <div class="p-2">
-        Group Body
-    </div>
+    <input id="txtGroupId" type="hidden" x-bind:value="modalParams['{{$modalId}}']['id']">
+    <div id="divGroupBody" class="my-4"></div>
 @endsection
 
-{{-- @section($modalId.'-footer')
-@endsection --}}
+@section($modalId.'-footer')
+    <x-modals.kanban.modal-footer modalId="{{$modalId}}" txtTypeId="txtGroupId" route="route_group"/>
+@endsection
 
 @section($modalId.'-javascript')
 <script>
-    
+    setTimeout(() => kanbanLoadModalRenderer('txtGroupId', 'divGroupBody', route_group), 100);
 </script>
 @endsection
