@@ -3,6 +3,7 @@
     $classCluster = "bg-white p-1 shadow rounded text-xs w-full1 focus:border-1 bold my-1";
     $classButton = "text-xs border border-gray-300 rounded hover:bg-blue-200 shadow";
     $modalId = "modal-cluster";
+    $title = "$cluster->description\n(#{$cluster->id})"
 @endphp
 
 @once
@@ -12,7 +13,7 @@
 <div id="cluster_parent_{{$cluster->id}}" data-id="cluster_{{$cluster->id}}">
     <div class="fixed1">
         <h2 id="lbl_cluster_{{$cluster->id}}"  >
-            <span id="caption_cluster_{{$cluster->id}}" class="cursor-pointer" onclick="onClickToEdit({{$cluster->id}},'lbl_cluster', 'txt_cluster')">{{$cluster->name}}</span>
+            <span id="caption_cluster_{{$cluster->id}}" title="{{$title}}" class="cursor-pointer" onclick="onClickToEdit({{$cluster->id}},'lbl_cluster', 'txt_cluster')">{{$cluster->name}}</span>
             <button class="fa-duotone fa-ellipsis {{App\Utils\ClassList::BUTTON_KANBAN_ELLIPSIS}}" @click="toggleModal('{{$modalId}}', {id: {{$cluster->id}}})" @keydown.escape="closeModal('{{$modalId}}')" ></button>
         </h2>
         <input id="txt_cluster_{{$cluster->id}}" value="{{$cluster->name}}" class="{{$classCluster}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$cluster->id}},'lbl_cluster','txt_cluster','caption_cluster', route_cluster)">

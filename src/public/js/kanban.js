@@ -224,18 +224,32 @@ const kanbanLoadModalRenderer = (txtTypeId, divTypeBody, url) => {
     })
 }
 
-const kanbanUpdateItem = (txtTypeId, url) => {
+const kanbanUpdateItem = (txtTypeId, url, caption_type, txt_type) => {
     const id = $("#" + txtTypeId).val()
     const formData = $("#frmTask").serialize()
-    console.log("Updating up #", id, url, formData)
+    const formDataArray = $("#frmTask").serializeArray()
+    // console.log("Updating up #", id, url, formData, formDataArray)
     $.ajax({
         method: "POST",
         url,
         data: { action: "updateItemRenderProps", id, formData },
         success: function (response) {
-            // const { renderer } = response.hits
-            // $("#" + divTypeBody).html(renderer)
-            console.log(response)
+            // console.log(response)
+
+            const item = {}
+            for (let i = 0; i < formDataArray.length; i++) item[formDataArray[i].name] = formDataArray[i].value
+            // console.log(item)
+            const { name, description } = item
+
+            const caption = "#" + caption_type + "_" + id
+            $(caption).html(name)
+            $(caption).attr("title", description + "\n(#" + id + ")")
+
+            const txtName = "#" + txt_type + "_" + id
+            $(txtName).val(name)
+
+
+
         },
         error: function (jqXHR) {
             toastr.error(jqXHR.responseJSON.message)
