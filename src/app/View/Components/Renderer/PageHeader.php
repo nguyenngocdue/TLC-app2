@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\Json\SuperWorkflows;
 use Illuminate\View\Component;
@@ -29,7 +30,8 @@ class PageHeader extends Component
         $type = CurrentRoute::getTypePlural();
         $action = CurrentRoute::getControllerAction();
         // dump($type);
-        $visible = ('kanban_task_pages' !== $type);
+        // $visible = ('kanban_task_pages' !== $type);
+        $visible = CurrentUser::isAdmin();
         return view('components.renderer.page-header', [
             'action' => $action,
             'superProps' => SuperProps::getFor($type),
