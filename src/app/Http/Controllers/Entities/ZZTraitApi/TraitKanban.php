@@ -197,6 +197,16 @@ trait TraitKanban
 		return ResponseObject::responseSuccess([], [], "Updated");
 	}
 
+	function deleteItemRenderProps(Request $request)
+	{
+		$input = $request->input();
+		['id' => $id] = $input;
+
+		$this->modelPath::destroy([$id]);
+
+		return ResponseObject::responseSuccess([], [], "Deleted");
+	}
+
 	function kanban(Request $request)
 	{
 		try {
@@ -209,6 +219,7 @@ trait TraitKanban
 				case "loadPage":
 				case "editItemRenderProps":
 				case "updateItemRenderProps":
+				case "deleteItemRenderProps":
 					return $this->{$action}($request);
 					break;
 			}

@@ -1,4 +1,4 @@
-<form id="frmTask" action="">
+<form id="frmKanbanItem" action="">
 {{-- @php Log::info($item); @endphp --}}
     <table class="w-full">
         @foreach($props as $prop)

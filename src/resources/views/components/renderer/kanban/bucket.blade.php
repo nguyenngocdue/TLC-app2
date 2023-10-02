@@ -10,7 +10,7 @@
     <input type="hidden" id="category_bucket" value="{{$categoryBucket}}" />
 @endonce --}}
 
-<div id="bucket_parent_{{$bucket->id}}" data-id="bucket_{{$bucket->id}}" class="m-1 b1g-gray-200 p1-2 rounded">
+<div id="bucket_parent_{{$bucket->id}}" data-id="bucket_{{$bucket->id}}" class="m-1 b1g-gray-200 p-1 rounded">
     <div id="lbl_bucket_{{$bucket->id}}" class="flex text-xs font-bold mb-1 cursor-pointer justify-between">
         <div>
             <span id="caption_bucket_{{$bucket->id}}" title="{{$title}}" onclick="onClickToEdit({{$bucket->id}},'lbl_bucket', 'txt_bucket')">{{$bucket->name}}</span>

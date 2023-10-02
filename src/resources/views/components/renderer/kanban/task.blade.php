@@ -4,7 +4,7 @@
  $title = "$task->description\n(#{$task->id})"
 @endphp
 
-<div id="task_{{$task->id}}" data-id="task_{{$task->id}}" class="bg-white p-2 shadow rounded text-xs my1-1" >
+<div id="task_parent_{{$task->id}}" data-id="task_{{$task->id}}" class="bg-white p-2 shadow rounded text-xs my1-1" >
     <div>
         <h2 id="lbl_task_{{$task->id}}" class="cursor-grab" >
             <span id="caption_task_{{$task->id}}" title="{{$title}}" onclick="onClickToEdit({{$task->id}},'lbl_task', 'txt_task')" class="cursor-pointer">{{$task->name ?? "???"}} </span>

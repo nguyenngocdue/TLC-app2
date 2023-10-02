@@ -6,7 +6,7 @@
 
 {{-- @dump($pageId, $page->id) --}}
 
-<div id="toc_{{$page->id}}" data-id="toc_{{$page->id}}" class="bg-blue-200 p-2 shadow rounded text-xs my1-1 cursor-grab" >
+<div id="toc_parent_{{$page->id}}" data-id="toc_{{$page->id}}" class="bg-blue-200 p-2 shadow rounded text-xs my1-1 cursor-grab" >
     <div class="flex justify-between">
         <div >
             <h2 id="lbl_toc_{{$page->id}}" title="page {{$page->id}}" >

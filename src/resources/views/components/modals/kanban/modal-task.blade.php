@@ -11,7 +11,14 @@
 @endsection
 
 @section($modalId.'-footer')
-    <x-modals.kanban.modal-footer modalId="{{$modalId}}" txtTypeId="txtTaskId" route="route_task" captionType="caption_task" txtType="txt_task"/>
+    <x-modals.kanban.modal-footer 
+        modalId="{{$modalId}}" 
+        txtTypeId="txtTaskId" 
+        route="route_task" 
+        captionType="caption_task" 
+        txtType="txt_task" 
+        prefix="task_parent_"
+        />
 @endsection
 
 @section($modalId.'-javascript')

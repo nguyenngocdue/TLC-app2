@@ -11,7 +11,14 @@
 @endsection
 
 @section($modalId.'-footer')
-    <x-modals.kanban.modal-footer modalId="{{$modalId}}" txtTypeId="txtClusterId" route="route_cluster" captionType="caption_cluster" txtType="txt_cluster"/>
+    <x-modals.kanban.modal-footer 
+        modalId="{{$modalId}}" 
+        txtTypeId="txtClusterId" 
+        route="route_cluster" 
+        captionType="caption_cluster" 
+        txtType="txt_cluster"
+        prefix="cluster_parent_"
+        />
 @endsection
 
 @section($modalId.'-javascript')
