@@ -56,6 +56,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware("web")
                 ->namespace($this->namespace)
                 ->group(base_path("routes/web.php"))
+                ->group(base_path("routes/web-auth.php"))
                 ->group(base_path("routes/web-backward-compatible.php"))
                 ->group(base_path("routes/web-manage-workflows.php"))
                 ->group(base_path("routes/web-manage-libs.php"))
