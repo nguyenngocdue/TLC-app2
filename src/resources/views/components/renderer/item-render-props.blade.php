@@ -72,10 +72,30 @@
                     @endif
                 </div>
                 <div class="{{$classColStart}} {{$classColSpanControl}} py-2 text-left">
+                    {{-- <x-renderer.item-render-control
+                        :item="$item"
+                        :prop="$prop"
+
+                        control="{{$control}}"
+                        columnName="{{$columnName}}"
+                        action="{{$action}}"
+                        value="{{$value}}"
+                        controlExtra="{{$controlExtra}}"
+                        type="{{$type}}"
+                        readOnly="{{$readOnly}}"
+                        label="{{$label}}"
+                        placeholder="{{$placeholder}}"
+                        numericScale="{{$numericScale}}"
+                        id="{{$id}}"
+                        modelPath="{{$modelPath}}"
+                        status="{{$status}}"
+                        defaultValue="{{$default_value}}"
+                        columnType="{{$columnType}}"
+                        /> --}}
                     @if (is_null($control))
                     <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                     @endif
-                    {{-- Invisible anchor for scrolling when users click on validation fail message --}}
+                    <!-- Invisible anchor for scrolling when users click on validation fail message -->
                     <strong class="scroll-mt-20 snap-start" id="scroll-{{$columnName}}"></strong>
                     @switch ($control)
                     @case('id')
@@ -140,17 +160,14 @@
                     @break
                     @case('picker_time')
                     <x-controls.picker-time2 name={{$columnName}} component="controls/picker_time2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
-                    {{-- <x-controls.text2 name={{$columnName}} component="controls/picker_time" value={{$value}} readOnly={{$readOnly}} placeholder="HH:MM" icon="fa-duotone fa-clock" /> --}}
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_datetime')
                     <x-controls.picker-datetime2 name={{$columnName}} component="controls/picker_datetime2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
-                    {{-- <x-controls.text2 name={{$columnName}} component="controls/picker_datetime" value={{$value}} readOnly={{$readOnly}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" /> --}}
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_date')
                     <x-controls.picker-date2 name={{$columnName}} component="controls/picker_date2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
-                    {{-- <x-controls.date-picker2 name={{$columnName}} component="controls/picker_date" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" /> --}}
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_week')
@@ -199,9 +216,6 @@
                     @case('parent_type')
                     <x-controls.parent_type2 type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}} />
                     @break
-                    {{-- @case('parent_id') --}}
-                    {{-- <x-controls.parent_id2 type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/> --}}
-                    {{-- @break --}}
 
                     @case('parent_link')
                     <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />
