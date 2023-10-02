@@ -1,4 +1,5 @@
 const mix = require('laravel-mix')
+const TerserPlugin = require('terser-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -16,7 +17,17 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('tailwindcss'),
         require('autoprefixer'),
-    ])
+    ]).webpackConfig({
+        plugins: [
+           new TerserPlugin({
+              terserOptions: {
+                 format: {
+                    semicolons: true,
+                 },
+              },
+           }),
+        ],
+     });
 mix.js('resources/js/antd-vue.js', 'public/js').vue()
 mix.js('resources/js/number-to-words.js', 'public/js')
 mix.js('resources/js/lazysizes.js', 'public/js')

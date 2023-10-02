@@ -31,9 +31,14 @@ class FilterHeadOfDepartment extends Component
 
     private function getDataSource()
     {
-        return Department::select('id', 'name', 'description')
+        $departments =  Department::select('id', 'name', 'description')
             ->orderBy('name')
             ->get();
+        $a = $departments[1];
+        $a->name = '--All Company --';
+        $departments->forget(1);
+        $departments = $departments->prepend($a);
+        return $departments;
     }
 
     /**
@@ -45,7 +50,6 @@ class FilterHeadOfDepartment extends Component
     {
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
-        // dump($params);
         return view('components.controls.has-data-source.dropdown2', $params);
     }
 }

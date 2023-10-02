@@ -115,18 +115,18 @@ abstract class ModelExtended extends Model
     static $singletonDbUserCollection = null;
     public static function getCollection()
     {
-        if (!isset(static::$singletonDbUserCollection)) {
+        if (!isset(static::$singletonDbUserCollection[static::class])) {
             $all = static::all();
             foreach ($all as $item) $indexed[$item->id] = $item;
-            static::$singletonDbUserCollection = collect($indexed);
+            static::$singletonDbUserCollection[static::class] = collect($indexed);
         }
         return static::$singletonDbUserCollection;
     }
 
     public static function findFromCache($id)
     {
-        // if(!isset(static::getCollection()[$id])) 
-        return static::getCollection()[$id] ?? null;
+        // if(!isset(static::getCollection()[$id]))
+        return static::getCollection()[static::class][$id] ?? null;
     }
     private static $singletonMorphMany = [];
 
@@ -146,7 +146,7 @@ abstract class ModelExtended extends Model
      *
      * @param array $ids
      * @param string $fieldNameCategory Field name category same eloquent params function
-     * @param bool $useTableField MorphMany table using table field key category 
+     * @param bool $useTableField MorphMany table using table field key category
      * @return mixed|array value MorphMany
      */
     public function getMorphManyByIds($ids = [], $fieldNameCategory = null, $useTableField = true)

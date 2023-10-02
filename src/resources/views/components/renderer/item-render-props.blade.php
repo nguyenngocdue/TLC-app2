@@ -12,39 +12,30 @@
             <div class='grid grid-cols-12 items-center content-start'>
                 @if($columnType === 'static')
                 <div class='col-span-12 text-left'>
-                    @switch($control)
-                    @case('z_page_break')
-                    <x-renderer.page-break />
-                    @case('z_h1')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" level=1 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_h2')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" level=2 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_h3')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" level=3 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_h4')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" level=4 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_h5')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" level=5 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_h6_base')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_divider')
-                    <x-renderer.divider />
-                    @break
-
-                    @default
-                    <x-feedback.alert type="warning" title="{{$title}}" message="The control [{{$control}}] is not available" />
-                    @break
-                    @endswitch
+                    <x-renderer.item-render-static 
+                            control="{{$control}}"
+                            label="{{$label}}"
+                            title="{{$title}}"
+                            xalign="{{$align}}"
+                            labelExtra="{{$labelExtra}}"
+                        />
                 </div>
                 @else
                 <div class='col-start-1 {{$classColSpanLabel}}  {{$prop['new_line'] === 'true' ? "text-left" : "text-right" }} '>
-                    @if(!$hiddenLabel)
+                    <x-renderer.item-render-label
+                            :item="$item"
+                            :prop="$prop"
+                            
+                            hiddenLabel="{{$hiddenLabel}}"
+                            title="{{$title}}"
+                            control="{{$control}}"
+                            action="{{$action}}"
+                            label="{{$label}}"
+                            isRequired="{{$isRequired}}"
+                            iconJson="{{$iconJson}}"
+                            labelExtra="{{$labelExtra}}"
+                    />
+                    {{-- @if(!$hiddenLabel)
                     <label class='text-gray-700 dark:text-gray-300  px-3 block text-base' title='{{$title}}'>
                         @if($control == 'relationship_renderer')
                         @if($action !== 'create')
@@ -55,7 +46,7 @@
                         @endphp
                         <a href="{{$href}}">{{$label}}</a>
                         @else
-                        {{-- Hide the label --}}
+                        <!-- Hide the label -->
                         @endif
                         @else
                         {{$label}}
@@ -69,13 +60,34 @@
                         @if(!$hiddenLabel)
                         <i>{{$labelExtra}}</i>
                     </label>
-                    @endif
+                    @endif --}}
                 </div>
                 <div class="{{$classColStart}} {{$classColSpanControl}} py-2 text-left">
-                    @if (is_null($control))
+                    <x-renderer.item-render-control
+                        :item="$item"
+                        :prop="$prop"
+                        :valueArray="$value"
+                        
+                        value="{{$value}}"
+                        control="{{$control}}"
+                        columnName="{{$columnName}}"
+                        action="{{$action}}"
+                        controlExtra="{{$controlExtra}}"
+                        type="{{$type}}"
+                        readOnly="{{$readOnly}}"
+                        label="{{$label}}"
+                        placeholder="{{$placeholder}}"
+                        numericScale="{{$numericScale}}"
+                        id="{{$id}}"
+                        modelPath="{{$modelPath}}"
+                        status="{{$status}}"
+                        defaultValue="{{$default_value}}"
+                        columnType="{{$columnType}}"
+                        />
+                    {{-- @if (is_null($control))
                     <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                     @endif
-                    {{-- Invisible anchor for scrolling when users click on validation fail message --}}
+                    <!-- Invisible anchor for scrolling when users click on validation fail message -->
                     <strong class="scroll-mt-20 snap-start" id="scroll-{{$columnName}}"></strong>
                     @switch ($control)
                     @case('id')
@@ -140,17 +152,14 @@
                     @break
                     @case('picker_time')
                     <x-controls.picker-time2 name={{$columnName}} component="controls/picker_time2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
-                    {{-- <x-controls.text2 name={{$columnName}} component="controls/picker_time" value={{$value}} readOnly={{$readOnly}} placeholder="HH:MM" icon="fa-duotone fa-clock" /> --}}
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_datetime')
                     <x-controls.picker-datetime2 name={{$columnName}} component="controls/picker_datetime2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
-                    {{-- <x-controls.text2 name={{$columnName}} component="controls/picker_datetime" value={{$value}} readOnly={{$readOnly}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" /> --}}
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_date')
                     <x-controls.picker-date2 name={{$columnName}} component="controls/picker_date2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
-                    {{-- <x-controls.date-picker2 name={{$columnName}} component="controls/picker_date" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" /> --}}
                     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
                     @break
                     @case('picker_week')
@@ -199,9 +208,6 @@
                     @case('parent_type')
                     <x-controls.parent_type2 type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}} />
                     @break
-                    {{-- @case('parent_id') --}}
-                    {{-- <x-controls.parent_id2 type={{$type}} name={{$columnName}} selected="{{$value}}" readOnly={{$readOnly}}/> --}}
-                    {{-- @break --}}
 
                     @case('parent_link')
                     <x-feedback.alert type="warning" title="Warning" message="{{$control}} suppose to show in View All screen only, please do not show in Edit screen." />
@@ -211,7 +217,7 @@
                     <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
                     @break
                     @endswitch
-                    <div component="control-extra" class="text-gray-600 text-sm">{{$controlExtra}}</div>
+                    <div component="control-extra" class="text-gray-600 text-sm">{{$controlExtra}}</div> --}}
                 </div>
                 @endif
             </div>

@@ -26,5 +26,6 @@
             <x-renderer.kanban.page :page="$page"/>
         </div>
     </div>
+    <x-renderer.kanban.modals />
 </div>
 @endsection

@@ -13,7 +13,9 @@ class Kanban_task_page extends ModelExtended
         "getClusters" => ["hasMany", Kanban_task_cluster::class, "kanban_page_id"],
     ];
 
-    public static $oracyParams = [];
+    public static $oracyParams = [
+        "getMonitors1()" => ["getCheckedByField", User::class],
+    ];
 
     public function getParent()
     {
@@ -25,5 +27,11 @@ class Kanban_task_page extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getMonitors1()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

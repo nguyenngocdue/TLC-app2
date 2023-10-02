@@ -1,4 +1,4 @@
-
+const onKanbanAjaxError = (jqXHR) => toastr.error(jqXHR.responseJSON.message)
 
 const getChildPrefix = (prefix) => {
     switch (prefix) {
@@ -30,9 +30,7 @@ const setValue = (sortable, url, prefix) => {
         success: function (response) {
             // toastr.success(response.message)
         },
-        error: function (jqXHR) {
-            toastr.error(jqXHR.responseJSON.message)
-        },
+        error: onKanbanAjaxError,
     })
     // console.log("setValue", order, prefix)
 }
@@ -51,9 +49,7 @@ const addANewKanbanObj = (prefix, parent_id, url, groupWidth) => {
             // console.log(parentId, renderer)
             $("#" + parentId).append(renderer)
         },
-        error: function (jqXHR) {
-            toastr.error(jqXHR.responseJSON.message)
-        },
+        error: onKanbanAjaxError,
     })
 }
 
@@ -84,9 +80,7 @@ const onClickToCommit = (id, lbl_type, txt_type, caption_type, url) => {
             // toastr.success(response.message)
 
         },
-        error: function (jqXHR) {
-            toastr.error(jqXHR.responseJSON.message)
-        },
+        error: onKanbanAjaxError,
     })
 }
 
@@ -110,9 +104,7 @@ const onEnd = (e, url, category) => {
         success: function (response) {
             // toastr.success(response.message)
         },
-        error: function (jqXHR) {
-            toastr.error(jqXHR.responseJSON.message)
-        },
+        error: onKanbanAjaxError,
     })
 }
 
@@ -157,10 +149,16 @@ const kanbanLoadPage = (pageId, url) => {
 
     const ids = []
     $("#toc_group_1").children().each((a, db0) => {
+        if (db0.id === '') return
+        // console.log(db0.id)
         $("#" + db0.id).children().each((a, db1) => {
             // console.log(db1.id, beginWith)
             if (db1.id.startsWith(beginWith)) {
+                if (db1.id === '') return
+                // console.log(db1.id)
                 $("#" + db1.id).children().each((a, db2) => {
+                    if (db2.id === '') return
+                    // console.log(db2.id)
                     ids.push(getCharactersAfterLastUnderscore(db2.id))
                 })
             }
@@ -185,9 +183,7 @@ const kanbanLoadPage = (pageId, url) => {
             $("#divKanbanPage").html(renderer)
             $("#divKanbanPage").slideDown("slow");
         },
-        error: function (jqXHR) {
-            toastr.error(jqXHR.responseJSON.message)
-        },
+        error: onKanbanAjaxError,
     })
 }
 
@@ -198,4 +194,83 @@ const renameCurrentPage = (pageId) => {
     if (isSamePage) {
         $('#divPageCard').html($('#txt_toc_' + pageId).val())
     }
+}
+
+const kanbanLoadModalRenderer = (txtTypeId, divTypeBody, url) => {
+    const id = $("#" + txtTypeId).val()
+    console.log("Starting up #", id, url)
+    $.ajax({
+        method: "POST",
+        url,
+        data: { action: "editItemRenderProps", id, },
+        success: function (response) {
+            const { renderer } = response.hits
+            $("#" + divTypeBody).html(renderer)
+            //   console.log(response)
+        },
+        error: onKanbanAjaxError,
+    })
+}
+
+const getItem = () => {
+    const formDataArray = $("#frmKanbanItem").serializeArray()
+    // console.log(formDataArray)
+    const item = {}
+    for (let i = 0; i < formDataArray.length; i++) item[formDataArray[i].name] = formDataArray[i].value
+    // console.log(item)
+    return item;
+}
+
+const kanbanUpdateItem = (txtTypeId, url, caption_type, txt_type) => {
+    const id = $("#" + txtTypeId).val()
+    const formData = $("#frmKanbanItem").serialize()
+    // console.log("Updating up #", id, url, formData, formDataArray)
+    const item = getItem() //<< This can't go inside $.ajax
+    $.ajax({
+        method: "POST",
+        url,
+        data: { action: "updateItemRenderProps", id, formData },
+        success: function (response) {
+            // console.log(response)
+            const { name, description } = item
+            const caption = "#" + caption_type + "_" + id
+            $(caption).html(name)
+            $(caption).attr("title", description + "\n(#" + id + ")")
+
+            const txtName = "#" + txt_type + "_" + id
+            $(txtName).val(name)
+        },
+        error: onKanbanAjaxError,
+    })
+}
+
+const kanbanDeleteItem = (txtTypeId, url, prefix) => {
+    const id = $("#" + txtTypeId).val()
+    const item = getItem() //<< This can't go inside $.ajax
+    Swal.fire({
+        title: 'Are you sure to delete:',
+        text: item.name,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Delete',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                method: "POST",
+                url,
+                data: { action: "deleteItemRenderProps", id },
+                success: function (response) {
+                    // console.log(response)
+                    $("#" + prefix + id)
+                        .removeClass("bg-white") //<< For task
+                        .addClass("bg-red-400 rounded")
+                        .fadeOut(1000)
+                    console.log("Deleted", prefix + id)
+                },
+                error: onKanbanAjaxError,
+            })
+        }
+    })
 }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => 'v1/entity',
     // 'middleware' => ['throttle:600,1'],
-    'middleware' => ['auth:sanctum', 'throttle:600,1','impersonate'],
+    'middleware' => ['auth:sanctum', 'throttle:600,1'],
 ], function () {
     $apps = LibApis::getAll();
     foreach ($apps as $app) {

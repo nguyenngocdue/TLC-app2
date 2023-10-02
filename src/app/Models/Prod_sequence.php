@@ -15,6 +15,7 @@ class Prod_sequence extends ModelExtended
         "total_hours", "worker_number", "total_man_hours",
         "start_date", "end_date", "prod_discipline_id",
         "total_uom", "uom_input", "uom_agg",
+        "erp_prod_order_name",
     ];
 
     protected $table = 'prod_sequences';
@@ -140,7 +141,8 @@ class Prod_sequence extends ModelExtended
             ["dataIndex" => "worker_number",],
             ["dataIndex" => "total_man_hours", "footer" => "agg_sum"],
             ["dataIndex" => "total_uom",],
-            ["dataIndex" => "uom_id",],
+            ["dataIndex" => "uom_id", 'read_only_rr2' => true],
+            ["dataIndex" => "status", 'read_only_rr2' => true],
         ];
     }
 

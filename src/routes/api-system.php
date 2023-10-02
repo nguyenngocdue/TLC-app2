@@ -17,7 +17,7 @@ Route::group([
 ], function () {
     Route::get('app_version', [VersionController::class, 'version']);
     Route::group([
-        'middleware' => ['auth:sanctum','impersonate'],
+        'middleware' => ['auth:sanctum'],
     ], function () {
         Route::get('notifications', [NotificationsController::class, 'notifications']);
         Route::get('notificationsRender', [NotificationsController::class, 'notificationsRender']);

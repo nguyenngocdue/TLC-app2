@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => 'v1/hr',
-    'middleware' => ['auth:sanctum', 'throttle:600,1','impersonate'],
+    'middleware' => ['auth:sanctum', 'throttle:600,1'],
 ], function () {
     Route::resource('timesheet_officers', TimeSheetOfficerController::class);
     Route::get('timesheet_officers_duplicate/{id}', [TimeSheetOfficerController::class, 'duplicate']);

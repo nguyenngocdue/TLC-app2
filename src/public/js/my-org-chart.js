@@ -31,7 +31,7 @@ function init() {
         //  var node = e.diagram.findNodeForKey(28);
         //  if (node !== null) e.diagram.commandHandler.scrollToPart(node);
         // },
-        initialScale: 0.7, // Set the initial scale 
+        initialScale: 0.7, // Set the initial scale
         layout:
           $(go.TreeLayout,  // use a TreeLayout to position all of the nodes
             {
@@ -103,6 +103,14 @@ function init() {
           )
         )
       ),
+      $(go.Panel, "Auto", { alignment: new go.Spot(0.93, 0.1), },
+        $(go.Panel, "Spot", { scale: 1 },
+
+            $(go.TextBlock,  { stroke: "white", font: "bold 10pt sans-serif", text: "alignment: Center", textAlign: "center" },
+            new go.Binding("text", "memberCount",),
+            )
+          )
+      ),
       $(go.Panel, "Vertical",
         $(go.Panel, "Vertical", { margin: 10, width: maxW - 10, },
           $(go.TextBlock, "", { stroke: "white" },),
@@ -111,7 +119,7 @@ function init() {
             new go.Binding("text", "name",)
           ),
           $(go.TextBlock, { stroke: "white" },
-            new go.Binding("text", "employeeid",),
+            new go.Binding("text", "employeeidAndWorkplace",),
           ),
         ),
         $(go.Panel, "Vertical", { width: maxW - 10, },

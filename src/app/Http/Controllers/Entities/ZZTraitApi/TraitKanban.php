@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 
 use App\Models\Kanban_task_page;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
 use App\View\Components\Renderer\Kanban\Pages;
 use Illuminate\Http\Request;
@@ -160,6 +161,52 @@ trait TraitKanban
 		return ResponseObject::responseSuccess(['renderer' => $renderer], [], "Inserted");
 	}
 
+	function editItemRenderProps(Request $request)
+	{
+		$input = $request->input();
+		['id' => $id] = $input;
+
+		$item = $this->modelPath::find($id);
+		$props = SuperProps::getFor($this->modelPath::getTableName())['props'];
+
+		$component = '<x-renderer.kanban.item-renderer-modal :item="$item" :props="$props" />';
+		$renderer = Blade::render($component, [
+			'item' => $item,
+			'props' => $props,
+		]);
+		// $renderer = json_encode($item);
+		return ResponseObject::responseSuccess(['renderer' => $renderer], [
+			'input' => $input,
+			'props' => $props,
+			'item' => $item,
+		], "Rendered");
+	}
+
+	function updateItemRenderProps(Request $request)
+	{
+		$input = $request->input();
+		['id' => $id, 'formData' => $formData] = $input;
+		parse_str($formData, $newItem);
+
+		$item = $this->modelPath::find($id);
+
+		// Log::info("Input:");
+		// Log::info($newItem);
+
+		$item->update($newItem);
+		return ResponseObject::responseSuccess([], [], "Updated");
+	}
+
+	function deleteItemRenderProps(Request $request)
+	{
+		$input = $request->input();
+		['id' => $id] = $input;
+
+		$this->modelPath::destroy([$id]);
+
+		return ResponseObject::responseSuccess([], [], "Deleted");
+	}
+
 	function kanban(Request $request)
 	{
 		try {
@@ -170,6 +217,9 @@ trait TraitKanban
 				case "changeName":
 				case "addNew":
 				case "loadPage":
+				case "editItemRenderProps":
+				case "updateItemRenderProps":
+				case "deleteItemRenderProps":
 					return $this->{$action}($request);
 					break;
 			}

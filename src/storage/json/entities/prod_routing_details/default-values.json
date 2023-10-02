@@ -71,9 +71,33 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_target_man_power": {
+        "name": "_target_man_power",
+        "column_name": "target_man_power",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_target_man_hours": {
         "name": "_target_man_hours",
         "column_name": "target_man_hours",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_target_min_uom": {
+        "name": "_target_min_uom",
+        "column_name": "target_min_uom",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -146,6 +170,18 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "label": "",
         "validation": "",
         "validation_regex": "",

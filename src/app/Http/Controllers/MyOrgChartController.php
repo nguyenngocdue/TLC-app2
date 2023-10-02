@@ -49,7 +49,9 @@ class MyOrgChartController extends Controller
             'utils.my-org-chart',
             ['dataSource'=> $results,
             'showOptions'=>$showOptions,
-            'settingsView' => $settingsView
+            'settingsView' => $settingsView,
+            'isAdmin' => CurrentUser::isAdmin(),
+            'topTitle' => 'Company ORG Chart'
             ]
         );
     }
@@ -84,6 +86,19 @@ class MyOrgChartController extends Controller
             }
         }
     }
+    private function getMemberCount($value,$options){
+        if(isset($value->children)){
+            if($options == $this::ARRAY_RESIGNED) return sizeof($value->children);
+            else{
+                $count = 0;
+                foreach ($value->children as $user) {
+                    if($user->resigned == 0) $count++;
+                }
+                return $count;
+            }
+        }
+        return '';
+    }
     private function convertDataSource($value,$options){
         if(in_array($value->workplace,$options['workplace']) && in_array($value->resigned,$options['resigned'])
             && in_array($value->time_keeping_type,$options['time_keeping_type']) && in_array($value->is_bod ,$options['is_bod'])){
@@ -92,10 +107,13 @@ class MyOrgChartController extends Controller
             $positionRendered = $user->position_rendered;
             $email = $user->email;
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
+            $memberCount = $this->getMemberCount($value,$options['resigned']);
+            $memberCount = $memberCount ? '('.sprintf("%02d",$memberCount).')' : '';
+            $workplace = isset($value->workplace) ? Workplace::find($value->workplace)->name : '';
             return [
                 'key' => $id,
                 'name' => $value->name0,
-                'employeeid' => $user->employeeid,
+                'employeeidAndWorkplace' => $user->employeeid . ($workplace ? (' - '.$workplace) : ''),
                 'parent' => $value->parent_id,
                 'phone' => $user->phone,
                 'avatar' => $avatar,
@@ -103,6 +121,7 @@ class MyOrgChartController extends Controller
                 'fill' => $this->getFillColor($value),
                 'title' => $positionRendered,
                 'url' => "/profile/$id",
+                'memberCount' => $memberCount,
             ];
         }
     }

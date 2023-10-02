@@ -28,7 +28,7 @@ class PrintedTimeZone extends Component
     {
         $currentUser = CurrentUser::get();
         $nameCurrentUser = $currentUser->name;
-        $timeZoneCurrentUser = $currentUser->time_zone;
+        $timeZoneCurrentUser = $currentUser->time_zone ?? 7;
         $timezone = $this->formatTimeZone($timeZoneCurrentUser);
         $timeNow = new DateTime('now', new DateTimeZone($timezone));
         $timeNow = $timeNow->format('d-m-Y H:i');

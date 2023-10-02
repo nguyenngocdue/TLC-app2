@@ -59,9 +59,9 @@
         "cancelled": "true",
         "not_applicable": "true"
     },
-    "_uom_agg": {
-        "name": "_uom_agg",
-        "column_name": "uom_agg",
+    "_erp_prod_order_name": {
+        "name": "_erp_prod_order_name",
+        "column_name": "erp_prod_order_name",
         "new": "true",
         "in_progress": "true",
         "finished": "true",
@@ -79,9 +79,9 @@
         "cancelled": "true",
         "not_applicable": "true"
     },
-    "_total_uom": {
-        "name": "_total_uom",
-        "column_name": "total_uom",
+    "_uom_id": {
+        "name": "_uom_id",
+        "column_name": "uom_id",
         "new": "true",
         "in_progress": "true",
         "finished": "true",
@@ -89,9 +89,9 @@
         "cancelled": "true",
         "not_applicable": "true"
     },
-    "_uom_id": {
-        "name": "_uom_id",
-        "column_name": "uom_id",
+    "_total_uom": {
+        "name": "_total_uom",
+        "column_name": "total_uom",
         "new": "true",
         "in_progress": "true",
         "finished": "true",
@@ -122,6 +122,16 @@
     "_end_date": {
         "name": "_end_date",
         "column_name": "end_date",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
+    "_uom_agg": {
+        "name": "_uom_agg",
+        "column_name": "uom_agg",
         "new": "true",
         "in_progress": "true",
         "finished": "true",
