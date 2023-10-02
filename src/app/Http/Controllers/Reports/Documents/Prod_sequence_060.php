@@ -19,7 +19,7 @@ use App\Utils\Support\StringReport;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class Prod_sequence_050 extends Report_ParentDocument2Controller
+class Prod_sequence_060 extends Report_ParentDocument2Controller
 {
 
     use TraitForwardModeReport;
@@ -27,13 +27,12 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     use TraitParamsSettingReport;
     use TraitUpdateBasicInfoDataSource;
 
-    protected $mode = '050';
-    protected $projectId = 5;
-    protected $subProjectId = 21;
-    protected $prodRoutingId = 2;
+    protected $mode = '060';
+    protected $projectId = 8;
+    protected $subProjectId = 107;
+    protected $prodRoutingId = 49;
     protected $groupByLength = 1;
-    protected $groupBy = 'prod_discipline_name';
-    protected $viewName = 'document-prod-sequence-050';
+    protected $viewName = 'document-prod-sequence-060';
     protected $type = 'prod_sequence';
     protected $tableTrueWidth = true;
     protected $overTableTrueWidth = false;
@@ -42,76 +41,65 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
     public function getSqlStr($params)
     {
-        $sql = "SELECT 	project_id,
-                    project_name,
-                    sub_project_id,
-                    sub_project_name,
-                    prod_routing_id,
-                    prod_routing_name,
-                    prod_routing_link_id,
-                    prod_routing_link_name,
-                    prod_discipline_id,
-                    prod_discipline_name,
-                    uom_name,
-                    FORMAT(AVG(man_power),2) AS man_power,
-                    AVG(total_uom) AS total_uom,
-                    AVG(total_hours) AS total_hours,
-                    SUM(count_pru_date) AS count_pru_date,
-                    AVG(total_hours)*60 / SUM(count_pru_date) AS min_on_day,
-                    AVG(total_hours)*60 / AVG(total_uom) AS min_on_set,
-                    uom_name
+        
+        $sql = "SELECT 
+                    tb1.*
+                    ,count_po_finished
+                    ,count_original_po
+                    ,FORMAT(count_po_finished*100/tb2.count_original_po,2) AS finished_progress
                     FROM (SELECT
-                        sp.project_id AS project_id,
-                        pj.name AS project_name,
-                        sp.id AS sub_project_id,
-                        sp.name AS sub_project_name,
-                        po.id AS pro_order_id,
-                        pr.id AS prod_routing_id,
-                        pr.name AS prod_routing_name,
-                        prl.id AS prod_routing_link_id,
-                        prl.name AS prod_routing_link_name,
-                        pd.id AS prod_discipline_id, 
-                        pd.name AS prod_discipline_name,
-                        pse.total_hours AS total_hours,
-                        pse.worker_number AS man_power,
-                        pse.total_uom AS total_uom,
-                        pse.total_man_hours AS total_man_hours,
-                        COUNT(DISTINCT pru.date) AS count_pru_date,
-                        terms.name AS uom_name
-                        FROM
-                            sub_projects sp
-                        JOIN
-                            projects pj ON pj.id = sp.project_id
-                        JOIN
-                            prod_orders po ON po.sub_project_id = sp.id
-                        JOIN
-                            prod_routings pr ON pr.id = po.prod_routing_id
-                        LEFT JOIN
-                            prod_sequences pse ON pse.prod_order_id = po.id
-                        JOIN
-                            prod_routing_links prl ON prl.id = pse.prod_routing_link_id
-                        JOIN
-                            prod_disciplines pd ON prl.prod_discipline_id = pd.id
-                        LEFT JOIN
-                            terms terms ON pse.uom_id = terms.id
-                        LEFT JOIN prod_runs pru ON pru.prod_sequence_id = pse.id
+                    pj.name AS project_name,
+                    sp.project_id AS project_id,
+                    sp.id AS sub_project_id,
+                    sp.name AS sub_project_name,
+                    GROUP_CONCAT(po.id, ',')  AS prod_order_id,
+                    pr.id AS prod_routing_id,
+                    pr.name AS prod_routing_name,
+                    ps.status AS prod_sequence_status,
+                    prl.id AS prod_routing_link_id,
+                    prl.name prod_routing_link_name,
+                    prl.prod_discipline_id AS prod_discipline_id,
+                    pdis.name AS prod_discipline_name,
+                    COUNT(DISTINCT po.id) AS count_po_finished
+                    FROM 
+                        sub_projects sp, 
+                        prod_orders po, 
+                        prod_routings pr,
+                        prod_sequences ps,
+                        prod_routing_links prl,
+                        prod_disciplines pdis,
+                        projects AS pj
                     WHERE 1 = 1
-                        AND pse.deleted_by IS NULL
-                        AND sp.project_id = {{project_id}}
-                        AND sp.id = {{sub_project_id}}
-                        AND pse.status IN ('in_progress', 'finished')";
+                    AND pj.id = sp.project_id";
+        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = {{sub_project_id}}";
+        if (isset($params['project_id'])) $sql .= "\n AND pj.id = {{project_id}}";
         if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
-        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pse.prod_routing_link_id = {{prod_routing_link_id}}";
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
+        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id IN( {{prod_routing_link_id}}) ";
 
-        $sql .= "\n GROUP BY
-                                    pj.name,
-                                    sp.id,
-                                    sp.name,
-                                    po.id
-                                    )AS tb1
-                                GROUP BY
-                                    project_id, uom_name";
+            $sql .="\n AND sp.project_id = 8
+                    AND ps.status = 'finished'
+                    AND po.sub_project_id = sp.id
+                    AND po.prod_routing_id = pr.id
+                    AND ps.prod_order_id = po.id
+                    AND prl.id = ps.prod_routing_link_id
+                    AND pdis.id = prl.prod_discipline_id
+                    GROUP BY prod_routing_link_id, prod_routing_id ) AS tb1
+                    LEFT JOIN (
+                            SELECT
+                                sp.id AS sub_project_id,
+                                po.prod_routing_id AS prod_routing_id, 
+                                COUNT(po.id)  AS count_original_po
+                                FROM 
+                                    sub_projects sp, 
+                                    prod_orders po
+                                WHERE 1 = 1
+                                AND po.sub_project_id = sp.id";
+            if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = {{sub_project_id}}";
+            if (isset($params['project_id'])) $sql .= "\n AND sp.project_id = {{project_id}}";
+                $sql .="\n  AND po.deleted_at IS NULL
+                            GROUP BY prod_routing_id) AS tb2 ON tb1.sub_project_id = tb2.sub_project_id
+                            AND tb1.prod_routing_id = tb2.prod_routing_id";
         return $sql;
     }
 
@@ -125,22 +113,14 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
     private function updateDataForPivotChart($data)
     {
-        $values = array_values($data->toArray());
-        $primaryData = reset($values);
-        $unit = $primaryData['uom_name'];
-        $dataToRender = [
-            'man_power' => $primaryData['man_power'],
-            'total_uom' => $primaryData['total_uom'],
-            'min_on_day' => $primaryData['min_on_day'],
-            'min_on_set' => $primaryData['min_on_set'],
-        ];
+        $items = array_values($data->toArray());
+        $infoRoutingLins = array_column($items, 'finished_progress','prod_routing_link_name');
 
         // information for meta data
-        $labelName = ['Man-power', $unit.'/day', 'min/day', 'min/'.$unit];
-        $labels = StringReport::arrayToJsonWithSingleQuotes($labelName);
-        $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($dataToRender));
-        $max = max(array_values($dataToRender));
-        $count = count($dataToRender);
+        $labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($infoRoutingLins));
+        $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($infoRoutingLins));
+        $max = max(array_keys($infoRoutingLins));
+        $count = count($infoRoutingLins);
         $meta = [
             'labels' => $labels,
             'numbers' => $numbers,
@@ -150,7 +130,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
         // information for metric data
         $metric = [];
-        array_walk($dataToRender, function ($value, $key) use (&$metric) {
+        array_walk($infoRoutingLins, function ($value, $key) use (&$metric) {
             return $metric[] = (object) [
                 'meter_id' => $key,
                 'metric_name' => $value
@@ -160,8 +140,8 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
         // Set data for widget
         $widgetData =  [
-            "title_a" => "UoM",
-            "title_b" => "by Hours",
+            "title_a" => "Production Routing Link",
+            "title_b" => "by progress",
             'meta' => $meta,
             'metric' => $metric,
             'chartType' =>'bar',
@@ -172,9 +152,11 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         // add widget to dataSource
         $data = ['tableDataSource' => $data];
         $data['widget_01'] = $widgetData;
-        // dump($data);
+        // dd($data);
+
         return $data;
     }
+
 
     protected function getParamColumns($dataSource, $modeType)
     {
@@ -204,6 +186,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                 'dataIndex' => 'prod_routing_link_id',
                 'allowClear' => true,
                 'hasListenTo' => true,
+                'multiple' => true,
             ],
 
         ];
@@ -211,23 +194,19 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
     public function getTableColumns($params, $dataSource)
     {
-        $data = $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
-        $data = reset($data);
-        $unit = isset($data['uom_name']) && ($x = $data['uom_name']) ? $x : '<small class="text-orange-300">Unknown Unit</small>';
-        $optionPrint = $params['optionPrint'] ?? $this->optionPrint;
         return
             [
                 [
                     "title" => "Project",
                     "dataIndex" => "project_name",
                     "align" => "left",
-                    "width" => 80,
+                    "width" => 110,
                 ],
                 [
                     "title" => "Sub Project",
                     "dataIndex" => "sub_project_name",
                     "align" => "left",
-                    "width" => 80,
+                    "width" => 110,
                 ],
                 [
                     "title" => "Production Routing",
@@ -239,42 +218,32 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     "title" => "Production Discipline",
                     "dataIndex" => "prod_discipline_name",
                     "align" => "left",
-                    "width" => 75,
+                    "width" => 150,
                 ],
                 [
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
-                    "width" => 145,
+                    "width" => 300,
                 ],
                 [
-                    "title" => "Man-power <br/>(AVG)",
-                    "dataIndex" => "man_power",
+                    "title" => "Total Production Orders",
+                    "dataIndex" => "count_original_po",
                     "align" => "right",
-                    "width" => 78,
-                    // "footer" => "agg_sum",
+                    "width" => 138,
                 ],
                 [
-                    "title" => $unit . "/day <br/>(AVG)",
-                    "dataIndex" => "total_uom",
+                    "title" => "Count Production Orders <br/>(status = finished)",
+                    "dataIndex" => "count_po_finished",
                     "align" => "right",
-                    "width" => 75,
-                    // "footer" => "agg_sum",
+                    "width" => 138,
                 ],
                 [
-                    "title" => "min/day <br/>(AVG)",
-                    "dataIndex" => "min_on_day",
+                    "title" => "% Complete",
+                    "dataIndex" => "finished_progress",
                     "align" => "right",
-                    "width" => 75,
-                    // "footer" => "agg_sum",
+                    "width" => 138,
                 ],
-                [
-                    "title" => "min/$unit <br/>(AVG)",
-                    "dataIndex" => "min_on_set",
-                    "align" => "right",
-                    "width" =>  75,
-                    // "footer" => "agg_sum",
-                ]
             ];
     }
 
@@ -304,7 +273,6 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     public function changeDataSource($dataSource, $params)
     {
         $dataSource = self::updateDataForPivotChart($dataSource);
-        // dump($dataSource);
         return $dataSource;
     }
 }
