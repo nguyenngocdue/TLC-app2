@@ -117,6 +117,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
 
                 "target_man_minutes" => $line->pivot->target_man_hours * 60,
                 "target_man_power" => $line->pivot->target_man_power,
+                "target_min_uom" => $line->pivot->target_min_uom,
 
             ];
             foreach ($extraColumns as $column) {
@@ -226,21 +227,36 @@ class ProdSequences extends ViewAllTypeMatrixParent
             case "man_power":
                 return round($doc->worker_number, 2);
             case "total_mins":
-                $target_man_power = $x['target_man_power'] > 0 ? $x['target_man_power'] : 1;;
-                $target = $x['target_man_minutes'] / $target_man_power;
-                $actual = round($doc->total_hours * 60);
+                return number_format(round($doc->total_hours * 60));
+                // $target_man_power = $x['target_man_power'] > 0 ? $x['target_man_power'] : 1;;
+                // $target = $x['target_man_minutes'] / $target_man_power;
+                // $actual = round($doc->total_hours * 60);
 
-                $color = $target >= $actual ? "green" : "red";
-                if ($actual == 0) return 0;
-                if (!$target) return $actual;
-                $percent = round(100 * ($target - $actual) / $target);
-                return (object)[
-                    "value" => number_format($actual, 0),
-                    "cell_class" => "text-$color-700 bg-$color-300 font-bold",
-                    "cell_title" => "Target: " . $target . " - Variance: " . ($target - $actual) . " ($percent%)",
-                ];
+                // $color = $target >= $actual ? "green" : "red";
+                // if ($actual == 0) return 0;
+                // if (!$target) return $actual;
+                // $percent = round(100 * ($target - $actual) / $target);
+                // return (object)[
+                //     "value" => number_format($actual, 0),
+                //     "cell_class" => "text-$color-700 bg-$color-300 font-bold",
+                //     "cell_title" => "Target: " . $target . " - Variance: " . ($target - $actual) . " ($percent%)",
+                // ];
             case "min_per_uom":
-                return ($doc->total_uom > 0) ? round($doc->total_hours * 60 / $doc->total_uom, 2) : '<i class="fa-solid fa-infinity" title="DIV 0"></i>';
+                if ($doc->total_uom > 0) {
+                    $value = round($doc->total_hours * 60 / $doc->total_uom, 2);
+                    $target = $x['target_min_uom'];
+                    if (!$target || !$value) return $value;
+
+                    $color = $target >= $value ? "green" : "red";
+                    $percent = round(100 * ($target - $value) / $target);
+                    return (object)[
+                        "value" => number_format($value, 2),
+                        "cell_class" => "text-$color-700 bg-$color-300 font-bold",
+                        "cell_title" => "Target: " . $target . " - Variance: " . ($target - $value) . " ($percent%)",
+                    ];
+                } else {
+                    return '<i class="fa-solid fa-infinity" title="DIV 0"></i>';
+                }
             case "uom":
                 return (object) [
                     'cell_div_class' => 'whitespace-nowrap',
