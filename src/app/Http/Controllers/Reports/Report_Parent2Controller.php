@@ -229,8 +229,8 @@ abstract class Report_Parent2Controller extends Controller
         if ($this->viewName) $viewName = $this->viewName;
 
         $dataSource = $this->getDataSource($params);
-        $dataSource  = $this->addTooltip($dataSource);
         $dataSource = $this->changeDataSource($dataSource, $params);
+        $dataSource  = $this->addTooltip($dataSource);
 
         $isEmptyAllDataSource = $this->isEmptyAllDataSource($dataSource);
 
