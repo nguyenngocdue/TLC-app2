@@ -14,6 +14,8 @@ use App\Services\Hr_timesheet_line\Hr_timesheet_lineService;
 use App\Services\Hr_timesheet_line\Hr_timesheet_lineServiceInterface;
 use App\Services\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigService;
 use App\Services\Qaqc_insp_chklst_sht_sig\Qaqc_insp_chklst_sht_sigServiceInterface;
+use App\Utils\System\Memory;
+use App\Utils\System\Timer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
@@ -67,5 +69,8 @@ class AppServiceProvider extends ServiceProvider
 
         include_once(__DIR__ . "/Macro/Arr.php");
         include_once(__DIR__ . "/Macro/App.php");
+
+        Timer::startTimeCounter();
+        Memory::startMemoryCounter();
     }
 }

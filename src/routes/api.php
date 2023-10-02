@@ -1,7 +1,7 @@
 <?php
 
-use App\Utils\System\Memory;
-use App\Utils\System\Timer;
+// use App\Utils\System\Memory;
+// use App\Utils\System\Timer;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +14,12 @@ use App\Utils\System\Timer;
 |
 */
 
-Timer::startTimeCounter();
-Memory::startMemoryCounter();
+// Timer::startTimeCounter();
+// Memory::startMemoryCounter();
 
-include_once(__DIR__ . "/api-auth.php");
-include_once(__DIR__ . "/api-entity.php");
-include_once(__DIR__ . "/api-hr.php");
-include_once(__DIR__ . "/api-prod.php");
-include_once(__DIR__ . "/api-qaqc.php");
-include_once(__DIR__ . "/api-system.php");
+// include_once(__DIR__ . "/api-auth.php");
+// include_once(__DIR__ . "/api-entity.php");
+// include_once(__DIR__ . "/api-hr.php");
+// include_once(__DIR__ . "/api-prod.php");
+// include_once(__DIR__ . "/api-qaqc.php");
+// include_once(__DIR__ . "/api-system.php");

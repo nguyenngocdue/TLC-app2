@@ -30,21 +30,58 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            if ($this->app->request->is('api/*')) {
-                Route::prefix("api")
-                    ->middleware("api")
-                    ->namespace($this->namespace)
-                    ->group(base_path("routes/api.php"));
-            } else {
-                Route::middleware("web")
-                    ->namespace($this->namespace)
-                    ->group(base_path("routes/web.php"));
 
-                Route::prefix("api")
-                    ->middleware("api")
-                    ->namespace($this->namespace)
-                    ->group(base_path("routes/api.php"));
-            }
+            // Route::prefix("api")
+            //     ->middleware("api")
+            //     ->namespace($this->namespace)
+            //     ->group(base_path("routes/api.php"));
+
+            // Route::middleware("web")
+            //     ->namespace($this->namespace)
+            //     ->group(base_path("routes/web.php"));
+
+            //This can cache the routes, but the timer will not work properly.
+
+            Route::prefix("api")
+                ->middleware("api")
+                ->namespace($this->namespace)
+                ->group(base_path("routes/api.php"))
+                ->group(base_path("routes/api-auth.php"))
+                ->group(base_path("routes/api-entity.php"))
+                ->group(base_path("routes/api-hr.php"))
+                ->group(base_path("routes/api-prod.php"))
+                ->group(base_path("routes/api-qaqc.php"))
+                ->group(base_path("routes/api-system.php"));
+
+            Route::middleware("web")
+                ->namespace($this->namespace)
+                ->group(base_path("routes/web.php"))
+                ->group(base_path("routes/web-backward-compatible.php"))
+                ->group(base_path("routes/web-manage-workflows.php"))
+                ->group(base_path("routes/web-manage-libs.php"))
+                ->group(base_path("routes/web-dashboard.php"))
+                ->group(base_path("routes/web-global.php"))
+                ->group(base_path("routes/web-database.php"))
+                ->group(base_path("routes/web-guest.php"))
+                ->group(base_path("routes/web-permission.php"))
+                ->group(base_path("routes/web-report.php"))
+                ->group(base_path("routes/web-pivot-report.php"));
+
+            // if ($this->app->request->is('api/*')) {
+            //     Route::prefix("api")
+            //         ->middleware("api")
+            //         ->namespace($this->namespace)
+            //         ->group(base_path("routes/api.php"));
+            // } else {
+            //     Route::middleware("web")
+            //         ->namespace($this->namespace)
+            //         ->group(base_path("routes/web.php"));
+
+            //     Route::prefix("api")
+            //         ->middleware("api")
+            //         ->namespace($this->namespace)
+            //         ->group(base_path("routes/api.php"));
+            // }
         });
     }
 
