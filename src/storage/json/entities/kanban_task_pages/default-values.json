@@ -59,6 +59,30 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_kanban_bucket_id": {
+        "name": "_kanban_bucket_id",
+        "column_name": "kanban_bucket_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",

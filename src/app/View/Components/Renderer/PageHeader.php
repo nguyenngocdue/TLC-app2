@@ -6,6 +6,7 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\Json\SuperWorkflows;
+use App\Utils\Support\JsonControls;
 use Illuminate\View\Component;
 
 class PageHeader extends Component
@@ -30,7 +31,8 @@ class PageHeader extends Component
         $type = CurrentRoute::getTypePlural();
         $action = CurrentRoute::getControllerAction();
         // dump($type);
-        $visible = ('kanban_task_pages' !== $type);
+        $hidden_apps = JsonControls::getAppsHaveViewAllKanban();
+        $visible = (!in_array($type, $hidden_apps));
         // $visible = CurrentUser::isAdmin();
         return view('components.renderer.page-header', [
             'action' => $action,
