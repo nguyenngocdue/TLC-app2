@@ -2,7 +2,9 @@ git pull && sudo chown 82:82 * -R && sudo chmod 777 storage/framework/* -R
 docker exec -it laravel102_php php artisan cache:clear
 docker exec -it laravel102_php php artisan view:clear
 docker exec -it laravel102_php php artisan config:clear
-docker exec -it laravel102_php php artisan route:clear
 docker exec -it laravel102_php php artisan event:clear
+
+docker exec -it laravel102_php php artisan route:clear
+docker exec -it laravel102_php php artisan route:cache
 
 echo "Don't forget to run php artisan migrate to have the latest version of DB"
