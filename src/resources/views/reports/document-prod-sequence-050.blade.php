@@ -28,20 +28,10 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
-            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Statistical Analysis of Job Completion Time by Day</x-renderer.heading>
-            <div class=" grid-rows-1 items-center">
-                    <x-renderer.report.chart-bar key="{{md5($widget['title_a'].$widget['title_b'])}}" chartType="{{$widget['chartType']}}" :meta="$widget['meta']" :metric="$widget['metric']" titleChart="{{$widget['titleChart']}}"/>
-                <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'> </x-renderer.heading>
-            </div>
-        </div>
-        <x-renderer.page-break />
-
-        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
                 {{-- Widget --}}
-
             <x-print.header6 />
             {{-- BASIC INFORMATION --}}
-            <x-renderer.heading level=2 class='text-center'>UoM Report</x-renderer.heading>
+            <x-renderer.heading level=2 class='text-center'>Report on Production Routing Links by Da</x-renderer.heading>
             <x-renderer.heading level=3 class='text-center'>(Sequence-based Timesheet)</x-renderer.heading>
             <div class="grid grid-cols-12">
                 <div class="col-span-12 text-left">
@@ -90,6 +80,14 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
                         topCenterControl="{!!$tc!!}"  --}}
                         />
             </div>
+
+                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Chart displaying job completion time statistics by day</x-renderer.heading>
+                <div class=" grid-rows-1 items-center">
+                    <x-renderer.report.chart-bar key="{{md5($widget['title_a'].$widget['title_b'])}}" chartType="{{$widget['chartType']}}" :meta="$widget['meta']" :metric="$widget['metric']" titleChart="{{$widget['titleChart']}}" />
+                    <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'> </x-renderer.heading>
+                </div>
+
+        </div>
         </div>
     </div>
 </div>
