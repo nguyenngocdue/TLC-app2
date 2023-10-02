@@ -5,42 +5,52 @@
 {{-- Invisible anchor for scrolling when users click on validation fail message --}}
 <strong class="scroll-mt-20 snap-start" id="scroll-{{$columnName}}"></strong>
 @switch ($control)
+
 @case('id')
 @case('doc_id')
 <x-controls.id2 name={{$columnName}} value="{{$action === 'edit' ? $value : 'to be generated'}}" />
 @break
+
 @case(App\Utils\Constant::NAME_LOCK_COLUMN)
 <x-controls.lock-version value={{$value}} />
 @break
+
 @case('hyperlink')
 @php $placeholder="https://www.google.com"; @endphp
+
 @case('text')
 @case('thumbnail')
 @case('parent_id')
 <x-controls.text2 name={{$columnName}} value={{$value}} placeholder="{{$placeholder}}" readOnly={{$readOnly}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('number')
 <x-controls.number2 name={{$columnName}} numericScale={{$numericScale}} value={{$value}} readOnly={{$readOnly}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('textarea')
 <x-controls.textarea2 name={{$columnName}} :value="$value" colType={{$columnType}} placeholder="{{$placeholder}}" readOnly={{$readOnly}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('toggle')
 <x-controls.toggle2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('signature')
 <x-controls.signature2 name={{$columnName}} value={{$value}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('status')
 @if($status)
 <x-controls.status-dropdown2 value={{$status}} name={{$columnName}} modelPath={{$modelPath}} readOnly={{$readOnly}} />
 @endif
 @break
+
 @case ('dropdown')
 @php
     $value = $value ? $value : $defaultValue;
@@ -48,10 +58,12 @@
 <x-controls.has-data-source.dropdown2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case ('radio')
 <x-controls.has-data-source.radio-or-checkbox2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case ('dropdown_multi')
 @if($columnName == 'getRoleSet')
 {{(isset($item->getRoleSet) && isset($item->getRoleSet[0]) )? $item->getRoleSet[0]->name : ""}}
@@ -61,10 +73,12 @@
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @endif
 @break
+
 @case('checkbox')
 <x-controls.has-data-source.radio-or-checkbox2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('picker_time')
 <x-controls.picker-time2 name={{$columnName}} component="controls/picker_time2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
 {{-- <x-controls.text2 name={{$columnName}} component="controls/picker_time" value={{$value}} readOnly={{$readOnly}} placeholder="HH:MM" icon="fa-duotone fa-clock" /> --}}
@@ -75,38 +89,43 @@
 {{-- <x-controls.text2 name={{$columnName}} component="controls/picker_datetime" value={{$value}} readOnly={{$readOnly}} placeholder="DD/MM/YYYY HH:MM" icon="fa-solid fa-calendar-day" /> --}}
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('picker_date')
 <x-controls.picker-date2 name={{$columnName}} component="controls/picker_date2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
 {{-- <x-controls.date-picker2 name={{$columnName}} component="controls/picker_date" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" /> --}}
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('picker_week')
 <x-controls.text2 name={{$columnName}} component="controls/picker_week" value={{$value}} readOnly={{$readOnly}} placeholder="W01/YYYY" icon="fa-solid fa-calendar-day" />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('picker_month')
 <x-controls.text2 name={{$columnName}} component="controls/picker_month" value={{$value}} readOnly={{$readOnly}} placeholder="MM/YYYY" icon="fa-solid fa-calendar-day" />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('picker_quarter')
 <x-controls.text2 name={{$columnName}} component="controls/picker_quarter" value={{$value}} readOnly={{$readOnly}} placeholder="Q1/YYYY" icon="fa-solid fa-calendar-day" />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('picker_year')
 <x-controls.text2 name={{$columnName}} component="controls/picker_year" value={{$value}} readOnly={{$readOnly}} placeholder="YYYY" icon="fa-solid fa-calendar-day" />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('attachment')
-@php
-$properties = $prop['properties'];
-@endphp
-<x-renderer.attachment2 name={{$columnName}} value={{$value}} :properties="$properties" readOnly={{$readOnly}} />
+<x-renderer.attachment2 name={{$columnName}} :value="$valueArray" :properties="$prop['properties']" readOnly={{$readOnly}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('comment')
 <x-controls.comment.comment-group2a commentableId={{$id}} commentableType="{{$type}}" category="{{$columnName}}" readOnly={{$readOnly}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
 @break
+
 @case('signature_multi')
 <x-controls.signature.signature-group2 :item="$item" signableId={{$id}} signableType="{{$type}}" category="{{$columnName}}" readOnly={{$readOnly}} />
 <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
@@ -137,5 +156,7 @@ $properties = $prop['properties'];
 @default
 <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
 @break
+
 @endswitch
+
 <div component="control-extra" class="text-gray-600 text-sm">{{$controlExtra}}</div>

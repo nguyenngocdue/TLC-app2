@@ -12,39 +12,30 @@
             <div class='grid grid-cols-12 items-center content-start'>
                 @if($columnType === 'static')
                 <div class='col-span-12 text-left'>
-                    @switch($control)
-                    @case('z_page_break')
-                    <x-renderer.page-break />
-                    @case('z_h1')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" level=1 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_h2')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" level=2 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_h3')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" level=3 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_h4')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" level=4 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_h5')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" level=5 xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_h6_base')
-                    <x-renderer.heading id="{{Str::slug($label)}}" title="{{$title}}" xalign="{{$align}}" labelExtra="{{$labelExtra}}">{{$label}}</x-renderer.heading>
-                    @break
-                    @case('z_divider')
-                    <x-renderer.divider />
-                    @break
-
-                    @default
-                    <x-feedback.alert type="warning" title="{{$title}}" message="The control [{{$control}}] is not available" />
-                    @break
-                    @endswitch
+                    <x-renderer.item-render-static 
+                            control="{{$control}}"
+                            label="{{$label}}"
+                            title="{{$title}}"
+                            xalign="{{$align}}"
+                            labelExtra="{{$labelExtra}}"
+                        />
                 </div>
                 @else
                 <div class='col-start-1 {{$classColSpanLabel}}  {{$prop['new_line'] === 'true' ? "text-left" : "text-right" }} '>
-                    @if(!$hiddenLabel)
+                    <x-renderer.item-render-label
+                            :item="$item"
+                            :prop="$prop"
+                            
+                            hiddenLabel="{{$hiddenLabel}}"
+                            title="{{$title}}"
+                            control="{{$control}}"
+                            action="{{$action}}"
+                            label="{{$label}}"
+                            isRequired="{{$isRequired}}"
+                            iconJson="{{$iconJson}}"
+                            labelExtra="{{$labelExtra}}"
+                    />
+                    {{-- @if(!$hiddenLabel)
                     <label class='text-gray-700 dark:text-gray-300  px-3 block text-base' title='{{$title}}'>
                         @if($control == 'relationship_renderer')
                         @if($action !== 'create')
@@ -55,7 +46,7 @@
                         @endphp
                         <a href="{{$href}}">{{$label}}</a>
                         @else
-                        {{-- Hide the label --}}
+                        <!-- Hide the label -->
                         @endif
                         @else
                         {{$label}}
@@ -69,17 +60,18 @@
                         @if(!$hiddenLabel)
                         <i>{{$labelExtra}}</i>
                     </label>
-                    @endif
+                    @endif --}}
                 </div>
                 <div class="{{$classColStart}} {{$classColSpanControl}} py-2 text-left">
-                    {{-- <x-renderer.item-render-control
+                    <x-renderer.item-render-control
                         :item="$item"
                         :prop="$prop"
-
+                        :valueArray="$value"
+                        
+                        value="{{$value}}"
                         control="{{$control}}"
                         columnName="{{$columnName}}"
                         action="{{$action}}"
-                        value="{{$value}}"
                         controlExtra="{{$controlExtra}}"
                         type="{{$type}}"
                         readOnly="{{$readOnly}}"
@@ -91,8 +83,8 @@
                         status="{{$status}}"
                         defaultValue="{{$default_value}}"
                         columnType="{{$columnType}}"
-                        /> --}}
-                    @if (is_null($control))
+                        />
+                    {{-- @if (is_null($control))
                     <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                     @endif
                     <!-- Invisible anchor for scrolling when users click on validation fail message -->
@@ -225,7 +217,7 @@
                     <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
                     @break
                     @endswitch
-                    <div component="control-extra" class="text-gray-600 text-sm">{{$controlExtra}}</div>
+                    <div component="control-extra" class="text-gray-600 text-sm">{{$controlExtra}}</div> --}}
                 </div>
                 @endif
             </div>
