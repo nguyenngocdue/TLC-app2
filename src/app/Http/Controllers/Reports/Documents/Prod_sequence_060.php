@@ -77,8 +77,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
         if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id IN( {{prod_routing_link_id}}) ";
 
-        $sql .= "\n AND sp.project_id = 8
-                    AND ps.status = 'finished'
+        $sql .= "\n AND ps.status = 'finished'
                     AND po.sub_project_id = sp.id
                     AND po.prod_routing_id = pr.id
                     AND ps.prod_order_id = po.id

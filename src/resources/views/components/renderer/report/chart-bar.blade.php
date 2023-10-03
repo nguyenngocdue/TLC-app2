@@ -45,7 +45,7 @@ var chartConfig = {
                 max: {!! $dimensions['scaleMaxY'] ?? 'null' !!} 
                 ,ticks: {
 						font: {
-                            size:  {!! $dimensions['fontSize'] ?? 14 !!} , 
+                            size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!} , 
                             weight: 'bold'
                         }
 				},
@@ -62,7 +62,7 @@ var chartConfig = {
             x: {
                 ticks: {
 						font: {
-                            size:  {!! $dimensions['fontSize'] ?? 14 !!} , 
+                            size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!} , 
                         }
 				},
                 title: {

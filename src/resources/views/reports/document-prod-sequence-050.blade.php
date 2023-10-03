@@ -82,7 +82,7 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
             </div>
 
                 <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Chart displaying job completion time statistics by day</x-renderer.heading>
-                <div class=" grid-rows-1 items-center">
+               <div class="p-10">
                     <x-renderer.report.chart-bar 
                                                 key="{{md5($widget['title_a'].$widget['title_b'])}}" 
                                                 chartType="{{$widget['chartType']}}" 
@@ -91,9 +91,8 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
                                                 titleChart="{{$widget['titleChart']}}" 
                                                 :dimensions="$widget['dimensions']"
                                                 />
-                    <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'> </x-renderer.heading>
+                    <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>The chart represents the completion percentage of each step in the production routing link on every production order.</x-renderer.heading>
                 </div>
-
         </div>
         </div>
     </div>

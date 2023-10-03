@@ -159,7 +159,10 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
         // relate to dimensions AxisX and AxisY
         $dimensions = [
-            'scaleMaxY' => null
+            'scaleMaxY' => null,
+            'fontSizeAxisXY' => 16,
+            'fontSize' => 14,
+            'titleY' => "",
         ];
 
         // Set data for widget
