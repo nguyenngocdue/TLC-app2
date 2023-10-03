@@ -115,17 +115,18 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         $sql = "SELECT 
                         prl.id AS prod_routing_link_id,
                         prl.name AS prod_routing_link_name
-                        FROM sub_projects sb, prod_orders po, prod_routing_details prd, prod_routing_links prl, prod_routings pr
-                        WHERE 1 = 1
-                        AND sb.id = 107
-                        AND sb.project_id = 8
-                        AND prd.prod_routing_id = 49
-                        AND pr.id = prd.prod_routing_id
-                        AND prl.id = prd.prod_routing_link_id
-                        AND po.prod_routing_id = pr.id
-                        AND sb.id = po.sub_project_id
-                        #AND prl.prod_discipline_id = 7
-                        GROUP BY prod_routing_link_id";
+                        FROM sub_projects sp, prod_orders po, prod_routing_details prd, prod_routing_links prl, prod_routings pr
+                        WHERE 1 = 1";
+                        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = {$params['sub_project_id']}";
+                        if (isset($params['project_id'])) $sql .= "\n AND sp.project_id = {$params['project_id']}";
+                        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {$params['prod_routing_id']}";
+                        if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {$params['prod_discipline_id']}";
+                        $sql .="\n 
+                                    AND pr.id = prd.prod_routing_id
+                                    AND prl.id = prd.prod_routing_link_id
+                                    AND po.prod_routing_id = pr.id
+                                    AND sp.id = po.sub_project_id
+                                    GROUP BY prod_routing_link_id";
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
         return $collection;
