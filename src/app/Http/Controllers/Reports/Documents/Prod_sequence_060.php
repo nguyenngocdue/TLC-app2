@@ -119,7 +119,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         // information for meta data
         $labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($infoRoutingLins));
         $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($infoRoutingLins));
-        $max = max(array_keys($infoRoutingLins));
+        $max = count(array_keys($infoRoutingLins));
         $count = count($infoRoutingLins);
         $meta = [
             'labels' => $labels,
