@@ -36,7 +36,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     protected $viewName = 'document-prod-sequence-050';
     protected $type = 'prod_sequence';
     protected $tableTrueWidth = true;
-    protected $overTableTrueWidth = false;
+    protected $overTableTrueWidth = true;
     protected $pageLimit = 100000;
     protected $optionPrint = "landscape";
 
@@ -127,12 +127,12 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     {
         $values = array_values($data->toArray());
         $primaryData = reset($values);
-        $unit = $primaryData['uom_name'];
+        $unit = isset($primaryData->uom_name) ? $primaryData->uom_name : "no name uom_name";
         $dataToRender = [
-            'man_power' => $primaryData['man_power'],
-            'total_uom' => $primaryData['total_uom'],
-            'min_on_day' => $primaryData['min_on_day'],
-            'min_on_set' => $primaryData['min_on_set'],
+            'man_power' => $primaryData->man_power,
+            'total_uom' => $primaryData->total_uom,
+            'min_on_day' => $primaryData->min_on_day,
+            'min_on_set' => $primaryData->min_on_set,
         ];
 
         // information for meta data
@@ -157,6 +157,10 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
             ];
         });
 
+        // relate to dimensions AxisX and AxisY
+        $dimensions = [
+            'scaleMaxY' => null
+        ];
 
         // Set data for widget
         $widgetData =  [
@@ -166,6 +170,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
             'metric' => $metric,
             'chartType' =>'bar',
             'titleChart' => '',
+            'dimensions' => $dimensions,
             
         ];
 

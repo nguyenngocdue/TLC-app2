@@ -55,8 +55,7 @@ abstract class Report_Parent2Controller extends Controller
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
         return $collection;
-    }
-
+    }    
     protected function getDefaultValueParams($params, $request)
     {
         $x = 'picker_date';

@@ -41,7 +41,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
 
     public function getSqlStr($params)
     {
-        
+
         $sql = "SELECT 
                     tb1.*
                     ,count_po_finished
@@ -77,7 +77,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
         if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id IN( {{prod_routing_link_id}}) ";
 
-            $sql .="\n AND sp.project_id = 8
+        $sql .= "\n AND sp.project_id = 8
                     AND ps.status = 'finished'
                     AND po.sub_project_id = sp.id
                     AND po.prod_routing_id = pr.id
@@ -95,9 +95,9 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                                     prod_orders po
                                 WHERE 1 = 1
                                 AND po.sub_project_id = sp.id";
-            if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = {{sub_project_id}}";
-            if (isset($params['project_id'])) $sql .= "\n AND sp.project_id = {{project_id}}";
-                $sql .="\n  AND po.deleted_at IS NULL
+        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = {{sub_project_id}}";
+        if (isset($params['project_id'])) $sql .= "\n AND sp.project_id = {{project_id}}";
+        $sql .= "\n  AND po.deleted_at IS NULL
                             GROUP BY prod_routing_id) AS tb2 ON tb1.sub_project_id = tb2.sub_project_id
                             AND tb1.prod_routing_id = tb2.prod_routing_id";
         return $sql;
@@ -114,7 +114,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
     private function updateDataForPivotChart($data)
     {
         $items = array_values($data->toArray());
-        $infoRoutingLins = array_column($items, 'finished_progress','prod_routing_link_name');
+        $infoRoutingLins = array_column($items, 'finished_progress', 'prod_routing_link_name');
 
         // information for meta data
         $labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($infoRoutingLins));
@@ -128,6 +128,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
             'count' => $count
         ];
 
+
         // information for metric data
         $metric = [];
         array_walk($infoRoutingLins, function ($value, $key) use (&$metric) {
@@ -137,6 +138,12 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
             ];
         });
 
+        // relate to dimensions AxisX and AxisY
+        $dimensions = [
+            'scaleMaxY' => 100,
+            'fontSize' => 14,
+            'titleY' => "% Progress"
+        ];
 
         // Set data for widget
         $widgetData =  [
@@ -144,9 +151,9 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
             "title_b" => "by progress",
             'meta' => $meta,
             'metric' => $metric,
-            'chartType' =>'bar',
+            'chartType' => 'bar',
             'titleChart' => '',
-            
+            'dimensions' => $dimensions,
         ];
 
         // add widget to dataSource

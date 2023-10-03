@@ -19,6 +19,7 @@ class ChartBar extends Component
         private $widgetParams = [],
         private $showValue  = false,
         private $titleChart = '',
+        private $dimensions = [],
     ) {
         //
     }
@@ -55,7 +56,8 @@ class ChartBar extends Component
                 'meta' => $meta,
                 'metric' => $metric,
                 'showValue' => $this->showValue,
-                'titleChart' => $this->titleChart
+                'titleChart' => $this->titleChart,
+                'dimensions' => $this->dimensions,
             ]
         );
     }

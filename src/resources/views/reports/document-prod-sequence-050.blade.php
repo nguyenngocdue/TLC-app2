@@ -83,7 +83,14 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
 
                 <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Chart displaying job completion time statistics by day</x-renderer.heading>
                 <div class=" grid-rows-1 items-center">
-                    <x-renderer.report.chart-bar key="{{md5($widget['title_a'].$widget['title_b'])}}" chartType="{{$widget['chartType']}}" :meta="$widget['meta']" :metric="$widget['metric']" titleChart="{{$widget['titleChart']}}" />
+                    <x-renderer.report.chart-bar 
+                                                key="{{md5($widget['title_a'].$widget['title_b'])}}" 
+                                                chartType="{{$widget['chartType']}}" 
+                                                :meta="$widget['meta']" 
+                                                :metric="$widget['metric']" 
+                                                titleChart="{{$widget['titleChart']}}" 
+                                                :dimensions="$widget['dimensions']"
+                                                />
                     <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'> </x-renderer.heading>
                 </div>
 

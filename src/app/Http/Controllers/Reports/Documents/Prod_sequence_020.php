@@ -91,7 +91,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         JOIN prod_orders po ON po.sub_project_id = sp.id";
         // if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
         $sql .= "\n LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
-                        LEFT JOIN prod_routings pr ON pr.prod_routing_link_idid = po.prod_routing_id
+                        LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
                         JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
                         LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id 
                                                         AND prd.prod_routing_id = pr.id
@@ -356,6 +356,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     public function changeDataSource($dataSource, $params)
     {
         foreach ($dataSource as $key => $values) {
+            $values = (array)$values;
             $paramUrl = "?project_id={$values['project_id']}";
             $paramUrl .= "&sub_project_id={$values['sub_project_id']}";
             $paramUrl .= "&prod_routing_id={$values['prod_routing_id']}";
