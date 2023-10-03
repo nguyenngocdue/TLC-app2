@@ -85,7 +85,7 @@ var chartConfig = {
                             return {
                                 text: label,
                                 fillStyle: datasets.backgroundColor[index],
-                                hidden: false,
+                                
                                 lineCap: 'round',
                                 index: index,
                             };

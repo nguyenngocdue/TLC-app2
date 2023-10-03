@@ -56,7 +56,7 @@ class WelcomeDueController extends Controller
         ];
 
           
-        return view("welcome-due-test-widget", [
+        return view("welcome-due", [
             'widget' => $widget
         ]);
     }

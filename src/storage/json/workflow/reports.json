@@ -48,6 +48,13 @@
         "top_title": null,
         "title": "UoM"
     },
+    "document-prod_sequence_060": {
+        "name": "document-prod_sequence_060",
+        "package_tab": "report",
+        "package": "project_management",
+        "top_title": null,
+        "title": "Work Completion Percentage Report Chart"
+    },
     "register-qaqc_insp_chklst_020": {
         "name": "register-qaqc_insp_chklst_020",
         "package_tab": "report",

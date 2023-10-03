@@ -31,7 +31,7 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
                 {{-- Widget --}}
             <x-print.header6 />
             {{-- BASIC INFORMATION --}}
-            <x-renderer.heading level=2 class='text-center'>Report on Production Routing Links by Da</x-renderer.heading>
+            <x-renderer.heading level=2 class='text-center'>Report on Production Routing Links by Day</x-renderer.heading>
             <x-renderer.heading level=3 class='text-center'>(Sequence-based Timesheet)</x-renderer.heading>
             <div class="grid grid-cols-12">
                 <div class="col-span-12 text-left">
