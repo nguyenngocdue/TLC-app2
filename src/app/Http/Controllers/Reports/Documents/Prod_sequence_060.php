@@ -224,7 +224,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                     "title" => "Production Discipline",
                     "dataIndex" => "prod_discipline_name",
                     "align" => "left",
-                    "width" => 150,
+                    "width" => 152,
                 ],
                 [
                     "title" => "Production Routing Link",
@@ -236,19 +236,19 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                     "title" => "Total Production Orders",
                     "dataIndex" => "count_original_po",
                     "align" => "right",
-                    "width" => 138,
+                    "width" => 137,
                 ],
                 [
                     "title" => "Count Production Orders <br/>(status = finished)",
                     "dataIndex" => "count_po_finished",
                     "align" => "right",
-                    "width" => 138,
+                    "width" => 137,
                 ],
                 [
                     "title" => "% Complete",
                     "dataIndex" => "finished_progress",
                     "align" => "right",
-                    "width" => 138,
+                    "width" => 137,
                 ],
             ];
     }
