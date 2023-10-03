@@ -125,11 +125,12 @@ class AdminSetRoleSetController extends Controller
             Session::put('impersonate', $user->id);
             Session::put('impersonate_admin', true);
         }
-        return redirect('dashboard/');
+        return redirect('/');
     }
-    public function stopImpersonate(){
+    public function stopImpersonate()
+    {
         Session::forget('impersonate');
         Session::forget('impersonate_admin');
-        return redirect('dashboard/');
+        return redirect('/');
     }
 }
