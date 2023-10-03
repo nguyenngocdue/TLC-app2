@@ -166,7 +166,6 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                 'metric_name' => $value
             ];
         });
-
         // relate to dimensions AxisX and AxisY
         $dimensions = [
             'scaleMaxY' => 100,
@@ -174,7 +173,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
             'titleX' => "% Progress",
             'indexAxis' => 'y',
             'width' => 400,
-            'height' => 1100,
+            'height' => $max/2*25,
         ];
 
         // Set data for widget
