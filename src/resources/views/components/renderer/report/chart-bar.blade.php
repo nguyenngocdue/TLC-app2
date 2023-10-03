@@ -79,30 +79,48 @@ var chartConfig = {
             legend: {
                 position: 'bottom',
                 display: true,
+                onClick: (evt, legendItem, legend) => {
+                    const index = legend.chart.data.labels.indexOf(legendItem.text);
+                    legend.chart.toggleDataVisibility(index);
+                    legend.chart.update();
+                },
                 labels: {
                     generateLabels: function(chart) {
+                        let visibility = [];
+                        for(let i = 0; i < chart.data.labels.length; i++) {
+                            if(chart.getDataVisibility(i) === true){
+                                visibility.push(false);
+                            } else{
+                                visibility.push(true)
+                            }
+                        };
                         return datasets.labels.map(function(label, index) {
                             return {
                                 text: label,
                                 fillStyle: datasets.backgroundColor[index],
-                                hidden: false,
+                                hidden: visibility[index],
                                 lineCap: 'round',
                                 index: index,
                             };
                         });
                     }
                 },
+               
                 
             },
 			datalabels:{
-				display: true
+				display: function(context) {
+				    return context.dataset.data[context.dataIndex] !== 0 && context.dataset.data[context.dataIndex] !== null;
+				}
                 ,anchor: 'end'
-				,align: 'top'
+				,align: '{!! $dimensions['dataLabelAlign'] ?? 'top' !!}'
 				,color: 'white'
 				,backgroundColor: 'rgba(0, 0, 0, 0.5)'
 				,borderColor: 'white'
 				,borderWidth: 1
 				,borderRadius: 6
+                ,offset: {!! $dimensions['dataLabelOffset'] ?? null !!}
+                
        		}
         },
     },

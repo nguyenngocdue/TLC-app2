@@ -174,6 +174,8 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
             'indexAxis' => 'y',
             'width' => 400,
             'height' => $max/2*25,
+            'dataLabelAlign' => 'start',
+            'dataLabelOffset' => 50,
         ];
 
         // Set data for widget
