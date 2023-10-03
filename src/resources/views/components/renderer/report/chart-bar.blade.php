@@ -1,6 +1,6 @@
 @props(['chartType'])
 
-<div class="block"><canvas id="{{$key}}"></canvas></div>
+<div class="block"><canvas id="{{$key}}" width={{$dimensions['width'] ?? null}} height={{$dimensions['height'] ?? null}}></canvas></div>
 
 {{-- @dump($meta) --}}
 {{-- @dump($metric) --}}
@@ -18,8 +18,6 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 <script>
 	var key = '{{$key}}';
 	var chartType = '{{$chartType}}';
-	var indexAxis = 'x'; // Giá trị mặc định
-
 	var datasets = {
 		labels: {!! $meta['labels'] !!},
 		numbers: {!! $meta['numbers'] !!},
@@ -39,6 +37,7 @@ var chartConfig = {
         }]
     },
     options: {
+        indexAxis: '{!! $dimensions['indexAxis'] ?? 'x' !!}',
         scales: {
             y: {
                 beginAtZero: true,
@@ -67,6 +66,7 @@ var chartConfig = {
 				},
                 title: {
                     display: true,
+                    text: '{!! $dimensions['titleX'] ?? null !!}',
                     font: {
                         size: {!! $dimensions['fontSize'] ?? 14 !!}, 
                         weight: 'bold' 
@@ -85,13 +85,14 @@ var chartConfig = {
                             return {
                                 text: label,
                                 fillStyle: datasets.backgroundColor[index],
-                                
+                                hidden: false,
                                 lineCap: 'round',
                                 index: index,
                             };
                         });
                     }
-                }
+                },
+                
             },
 			datalabels:{
 				display: true
@@ -103,24 +104,13 @@ var chartConfig = {
 				,borderWidth: 1
 				,borderRadius: 6
        		}
-        }
-    }
+        },
+    },
 };
 
 var chartElement = document.getElementById(key).getContext('2d');
 var myChart = new Chart(chartElement, chartConfig);
 
-// Thêm sự kiện click vào phần tử canvas để ẩn/hiện dữ liệu
-document.getElementById('{{$key}}').addEventListener('click', function(event) {
-    console.log('Click event fired!');
-    var activePoints = myChart.getElementsAtEvent(event);
-    var index = activePoints[0]?.index;
 
-    if (index !== undefined) {
-        var meta = myChart.getDatasetMeta(0);
-        meta.data[index].hidden = !meta.data[index].hidden; // Đảo ngược trạng thái ẩn/hiện
-        myChart.update();
-    }
-});
 </script>
 
