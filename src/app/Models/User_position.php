@@ -14,15 +14,8 @@ class User_position extends ModelExtended
     protected static $statusless = true;
     public static $nameless = true;
 
-    // protected $with = ['getPositionPrefix', 'getPosition1', 'getPosition2', 'getPosition3'];
-
     public function getNameAttribute($value)
     {
-        // $position_pres = ($this->getPositionPrefix) ? $this->getPositionPrefix->name : "";
-        // $position_1 = ($this->getPosition1) ? $this->getPosition1->name : "";
-        // $position_2 = ($this->getPosition2) ? $this->getPosition2->name : "";
-        // $position_3 = ($this->getPosition3) ? $this->getPosition3->name : "";
-
         $position_pres = User_position_pre::findFromCache($this->position_prefix);
         $position_pres = ($position_pres) ? $position_pres->name : "";
         $position_1 = User_position1::findFromCache($this->position_1);
@@ -40,18 +33,18 @@ class User_position extends ModelExtended
     }
 
     public static $eloquentParams = [
-        // "getUsers" => ['hasMany', User::class, 'position_1', 'id'],
+        "getUsers" => ['hasMany', User::class, 'position'],
         "getPositionPrefix" => ['belongsTo', User_position_pre::class, 'position_prefix'],
         "getPosition1" => ['belongsTo', User_position1::class, 'position_1'],
         "getPosition2" => ['belongsTo', User_position2::class, 'position_2'],
         "getPosition3" => ['belongsTo', User_position3::class, 'position_3'],
     ];
 
-    // public function getUsers()
-    // {
-    //     $p = static::$eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2]);
-    // }
+    public function getUsers()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getPositionPrefix()
     {

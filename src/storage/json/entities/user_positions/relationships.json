@@ -94,5 +94,21 @@
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
+    },
+    "_getUsers": {
+        "name": "_getUsers",
+        "relationship": "hasMany",
+        "control_name": "getUsers",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "person",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }
