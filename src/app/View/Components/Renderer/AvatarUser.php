@@ -3,7 +3,6 @@
 namespace App\View\Components\Renderer;
 
 use App\Models\User;
-use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class AvatarUser extends Component
@@ -32,7 +31,7 @@ class AvatarUser extends Component
         if (is_null($user)) return null;
 
         $title = $shortForm ? ($slot->{"first_name"} ?? "") : ($slot->{'name0'} ?? '');
-        $description = $shortForm ? "" : ($slot->{'position_rendered'} ?? '');
+        $description = $shortForm ? "" : ($slot->getPosition->name ?? '');
         $gray = $slot->{'resigned'} ?? '';
         $href = $slot->{'href'} ?? '';
 

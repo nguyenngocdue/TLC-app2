@@ -7,7 +7,7 @@
             <div class="md:col-span-3 flex">
                     <x-renderer.card class="w-full border bg-white p-2" title="Selected view">
                         <div class="flex">
-                            <x-renderer.avatar-user>{!!$userCurrentCalendar!!}</x-renderer.avatar-user>
+                            <x-renderer.avatar-user uid='{{$userCurrentCalendar->id}}'></x-renderer.avatar-user>
                             <x-renderer.button 
                                 class="w-40" 
                                 icon="fa-duotone fa-briefcase" 

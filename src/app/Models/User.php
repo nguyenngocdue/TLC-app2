@@ -113,10 +113,10 @@ class User extends Authenticatable implements LdapAuthenticatable
         "getUserCat" => ['belongsTo', User_category::class, 'category'],
         "getPosition" => ['belongsTo', User_position::class, 'position'],
 
-        "getPositionPrefix" => ['belongsTo', User_position_pre::class, 'position_prefix'],
-        "getPosition1" => ['belongsTo', User_position1::class, 'position_1'],
-        "getPosition2" => ['belongsTo', User_position2::class, 'position_2'],
-        "getPosition3" => ['belongsTo', User_position3::class, 'position_3'],
+        // "getPositionPrefix" => ['belongsTo', User_position_pre::class, 'position_prefix'],
+        // "getPosition1" => ['belongsTo', User_position1::class, 'position_1'],
+        // "getPosition2" => ['belongsTo', User_position2::class, 'position_2'],
+        // "getPosition3" => ['belongsTo', User_position3::class, 'position_3'],
 
         "getUserDiscipline" => ['belongsTo', User_discipline::class, 'discipline'],
         "getUserOrgChart" => ['belongsTo', User_org_chart::class, 'org_chart'],
@@ -199,26 +199,26 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getPositionPrefix()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getPosition1()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getPosition2()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getPosition3()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
+    // public function getPositionPrefix()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
+    // public function getPosition1()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
+    // public function getPosition2()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
+    // public function getPosition3()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
     public function getPosition()
     {
         $p = static::$eloquentParams[__FUNCTION__];

@@ -47,6 +47,18 @@
         "placeholder": "",
         "control_extra": ""
     },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
     "_name0": {
         "name": "_name0",
         "column_name": "name0",
@@ -263,66 +275,6 @@
         "placeholder": "",
         "control_extra": ""
     },
-    "_position_prefix": {
-        "name": "_position_prefix",
-        "column_name": "position_prefix",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_position_1": {
-        "name": "_position_1",
-        "column_name": "position_1",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_position_2": {
-        "name": "_position_2",
-        "column_name": "position_2",
-        "label": "",
-        "validation": "required",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_position_3": {
-        "name": "_position_3",
-        "column_name": "position_3",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_position_rendered": {
-        "name": "_position_rendered",
-        "column_name": "position_rendered",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "User_PositionRendered",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
     "_discipline": {
         "name": "_discipline",
         "column_name": "discipline",
@@ -340,6 +292,18 @@
         "column_name": "department",
         "label": "",
         "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_is_bod": {
+        "name": "_is_bod",
+        "column_name": "is_bod",
+        "label": "",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -578,6 +542,30 @@
     "_getSiteTeams()": {
         "name": "_getSiteTeams()",
         "column_name": "getSiteTeams()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_position": {
+        "name": "_position",
+        "column_name": "position",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": ""
+    },
+    "_org_chart": {
+        "name": "_org_chart",
+        "column_name": "org_chart",
         "label": "",
         "validation": "",
         "validation_regex": "",
