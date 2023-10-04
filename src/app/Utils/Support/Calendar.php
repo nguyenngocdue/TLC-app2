@@ -23,21 +23,18 @@ class Calendar
     }
     public static function renderTitle($item)
     {
-        if($item instanceof Public_holiday){
+        if ($item instanceof Public_holiday) {
             return "<div class='h-full'><div>"
-            . "<div class='font-semibold'>{$item->name}</div>"
-            . "</div>"
-            . "</div>";
+                . "<div class='font-semibold'>{$item->name}</div>"
+                . "</div>"
+                . "</div>";
         }
         $nameTask = Pj_task::findOrFail($item->task_id)->name;
         $nameSubTask = '';
         if ($item->sub_task_id) {
             $nameSubTask = Pj_sub_task::findOrFail($item->sub_task_id)->name ?? '';
         }
-        // if ($item->owner_id) {
-        //     $user = User::findFromCache($item->owner_id);
-        //     $avatar = Blade::render("<div class='mb-2'><x-renderer.avatar-user>$user</x-renderer.avatar-user></div>");
-        // }
+
         $remark = $item->remark ?? '';
         return "<div class='h-full'><div>"
             . "<div class='font-semibold'>{$nameTask}</div>"
@@ -48,7 +45,7 @@ class Calendar
     }
     public static function renderTagSubProject($item)
     {
-        if($item instanceof Public_holiday) return ;
+        if ($item instanceof Public_holiday) return;
         if ($item->sub_project_id) {
             $nameSubProject = Sub_project::findOrFail($item->sub_project_id)->name ?? '';
             $tagSubProject = Blade::render("<div class='flex items-end justify-between'><x-renderer.tag class='leading-none'>$nameSubProject</x-renderer.tag></div>");
@@ -57,7 +54,7 @@ class Calendar
     }
     public static function renderNameProject($item)
     {
-        if($item instanceof Public_holiday) return ;
+        if ($item instanceof Public_holiday) return;
         if ($item->project_id) {
             $nameProject = Project::findOrFail($item->project_id)->name ?? '';
         }

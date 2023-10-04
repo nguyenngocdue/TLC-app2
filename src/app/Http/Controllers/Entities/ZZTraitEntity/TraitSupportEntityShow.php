@@ -46,7 +46,7 @@ trait TraitSupportEntityShow
         $controlGroup = $item->getControlGroup->name ?? null;
         $str = '';
         if (!is_null($controlGroup)) {
-            $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($item,$controlGroup) . "</tr>";
+            $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($item, $controlGroup) . "</tr>";
             $str .=  $this->createStrHtmlCorrectiveAction($item);
             $str .= $this->createStrHtmlAttachment($item);
             $str .=  $this->createStrHtmlComment($item);
@@ -86,10 +86,10 @@ trait TraitSupportEntityShow
         }
         return $str;
     }
-    private function createStrHtmlGroupRadio($item,$controlGroup)
+    private function createStrHtmlGroupRadio($item, $controlGroup)
     {
         $arrayControl = explode('|', $controlGroup);
-        if(($this->type) == 'qaqc_insp_chklst_sht') array_pop($arrayControl);
+        if (($this->type) == 'qaqc_insp_chklst_sht') array_pop($arrayControl);
         $controlValue = $item->getControlValue->name ?? '';
         $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
         $str = "";
@@ -160,17 +160,18 @@ trait TraitSupportEntityShow
         }
         return '';
     }
-    private function formatCorrectiveAction($items){
+    private function formatCorrectiveAction($items)
+    {
         $strCenter = "";
-        foreach ($items as $key => $correctiveAction ) {
-            $ownerName = ' Created by: ' .$correctiveAction->getOwner->name0 ?? '';
+        foreach ($items as $key => $correctiveAction) {
+            $ownerName = ' Created by: ' . $correctiveAction->getOwner->name0 ?? '';
             $workAreaName = $correctiveAction->getWorkArea->name ?? '';
-            $information = $ownerName . ' (' . $workAreaName .')';
+            $information = $ownerName . ' (' . $workAreaName . ')';
             $status = $correctiveAction->status ?? '';
             $statusHtml = Blade::render("<x-renderer.status>$status</x-renderer.status>");
-            $informationHtml = ($key + 1).'. '. $correctiveAction->name. '.'. $information. ' ' .$statusHtml;
-            $title = $correctiveAction->description .'#' . $correctiveAction->id;
-            $href = route('hse_corrective_actions.show',$correctiveAction->id);
+            $informationHtml = ($key + 1) . '. ' . $correctiveAction->name . '.' . $information . ' ' . $statusHtml;
+            $title = $correctiveAction->description . '#' . $correctiveAction->id;
+            $href = route('hse_corrective_actions.show', $correctiveAction->id);
             $buttonHtml = Blade::render("<x-renderer.button size='xs' target='_blank' class='m-1 text-left' title='$title' href='$href'>$informationHtml</x-renderer.button>");
             $strCenter .= "$buttonHtml";
         }
@@ -182,7 +183,7 @@ trait TraitSupportEntityShow
         foreach ($items as  $comment) {
             $ownerComment = $comment->getOwner ?? '';
             $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $comment->updated_at);
-            $ownerRender = Blade::render("<x-renderer.avatar-user verticalLayout='true'>$ownerComment</x-renderer.avatar-user>");
+            $ownerRender = Blade::render("<x-renderer.avatar-user verticalLayout='true' uid='$ownerComment->id'></x-renderer.avatar-user>");
             $strCenter .= "<div class='mt-2 border-b'>
                                 $ownerRender
                                 <p class='text-xs font-normal text-center mt-1'>$updatedAt</p>
@@ -226,7 +227,8 @@ trait TraitSupportEntityShow
         $html = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $this->transFormLine($value) . "</tbody>" . "</table>";
         return $html;
     }
-    private function createDataSourceDescription($value){
+    private function createDataSourceDescription($value)
+    {
         return "<div>
                     <p>{$value->name}</p>
                     <i class='text-sm'>{$value->description}</i>

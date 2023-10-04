@@ -27,7 +27,8 @@ class AdminPermissionMatrixController extends Controller
     static $singletonDbRoleCollection = null;
     static $singletonDbRoleGetAllPermissionCollection = null;
     static $singletonDbRoleSetGetAllRoleCollection = null;
-    public static function getRole(){
+    public static function getRole()
+    {
         return Role::all();
     }
     public static function getCollection()
@@ -61,10 +62,12 @@ class AdminPermissionMatrixController extends Controller
     {
         return static::getCollection()[$id] ?? null;
     }
-    public static function findPermissionByRoleIdFromCache($id){
+    public static function findPermissionByRoleIdFromCache($id)
+    {
         return static::getCollectionRoleGetAllPermission()[$id] ?? null;
     }
-    public static function findRoleByRoleSetIdFromCache($id){
+    public static function findRoleByRoleSetIdFromCache($id)
+    {
         return static::getCollectionRoleSetGetAllRole()[$id] ?? null;
     }
     public function getType()
@@ -73,12 +76,12 @@ class AdminPermissionMatrixController extends Controller
     }
     public function index(Request $request)
     {
-        [$xAxis,$xExtraColumns] = $this->getXAxis($this->getMatrixDataSource());
+        [$xAxis, $xExtraColumns] = $this->getXAxis($this->getMatrixDataSource());
         $xAxis2ndHeading = $this->getXAxis2ndHeader($xAxis);
         $yAxis = $this->getYAxis();
         $columns = $this->getColumns($xAxis);
         $yAxisTableName = $this->getTableNameYAxis();
-        $dataSource = $this->mergeDataSource($xAxis, $yAxis,$xExtraColumns);
+        $dataSource = $this->mergeDataSource($xAxis, $yAxis, $xExtraColumns);
         $settings = CurrentUser::getSettings();
         $per_page = $settings[$this->type]['view_all']['per_page'] ?? 10;
         $page = $settings[$this->type]['view_all']['matrix']['page'] ?? 1;
@@ -127,14 +130,15 @@ class AdminPermissionMatrixController extends Controller
             ...$this->getRightMetaColumns(),
         ];
     }
-    private function getRightMetaColumns(){
+    private function getRightMetaColumns()
+    {
         return [];
     }
     protected function getMetaColumns()
     {
         return [];
     }
-    private function mergeDataSource($xAxis, $yAxis,$xExtraColumns)
+    private function mergeDataSource($xAxis, $yAxis, $xExtraColumns)
     {
         $result = [];
         foreach ($yAxis as $y) {
@@ -153,17 +157,17 @@ class AdminPermissionMatrixController extends Controller
             ];
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
-                if(isset($x['mapIndex'])){
+                if (isset($x['mapIndex'])) {
                     $mapIndex = $x['mapIndex'];
                     $extraColumns = $xExtraColumns[$mapIndex] ?? [];
                     foreach ($extraColumns as $key => $column) {
-                        $columnIndexName = $this->getPreviousNameRole($mapIndex,$key);
+                        $columnIndexName = $this->getPreviousNameRole($mapIndex, $key);
                         $key = $xId . "_" . $columnIndexName;
-                        if(str_contains($key,'READ-DATA')) $key = $xId;
-                        $cell = $y->roles->where('id',$column)->first();
-                        $value = $this->makeCheckbox($cell,$y,$column,$columnIndexName,$mapIndex);
+                        if (str_contains($key, 'READ-DATA')) $key = $xId;
+                        $cell = $y->roles->where('id', $column)->first();
+                        $value = $this->makeCheckbox($cell, $y, $column, $columnIndexName, $mapIndex);
                         $line[$key] = is_null($value) ? "" : $value;
-                        }
+                    }
                 }
             }
             $result[] = $line;
@@ -174,59 +178,62 @@ class AdminPermissionMatrixController extends Controller
     {
         return false;
     }
-    private function handleCheckbox($document,$y){
-        if(!isset($document->id)) return '';
+    private function handleCheckbox($document, $y)
+    {
+        if (!isset($document->id)) return '';
         return $y->hasRoleTo($document->id) ? 'checked' : '';
     }
-    protected function makeCheckbox($document, $y,$id,$columnIndexName,$mapIndex)
+    protected function makeCheckbox($document, $y, $id, $columnIndexName, $mapIndex)
     {
         $roleAllowedPermission = $this->getRoleAllowedPermission($columnIndexName);
         $permissions = self::findPermissionByRoleIdFromCache($id)->pluck('name')->toArray();
         $permissionsStr = join(",", $permissions);
-        $arrayCheckAllowed = array_map(function($item) use ($mapIndex){
-            return str_replace('-'.$mapIndex,'',$item);
-        },$permissions);
+        $arrayCheckAllowed = array_map(function ($item) use ($mapIndex) {
+            return str_replace('-' . $mapIndex, '', $item);
+        }, $permissions);
         $bgColor = "";
         $textRender = "";
-        $missingInArr = array_diff($roleAllowedPermission,$arrayCheckAllowed);
-        $redundancyInArr = array_diff($arrayCheckAllowed,$roleAllowedPermission);
-        [$bgColor,$textRender,$textPermission] = $this->getBackgroundColorAndTextRender($missingInArr,$redundancyInArr);
+        $missingInArr = array_diff($roleAllowedPermission, $arrayCheckAllowed);
+        $redundancyInArr = array_diff($arrayCheckAllowed, $roleAllowedPermission);
+        [$bgColor, $textRender, $textPermission] = $this->getBackgroundColorAndTextRender($missingInArr, $redundancyInArr);
         $isCheckboxVisible = $this->getCheckboxVisible() ? 1 : 0;
-        $isChecked = $this->handleCheckbox($document,$y);
-        $className = $isCheckboxVisible ? "cursor-pointer view-all-permission-matrix-checkbox-$id" : "cursor-pointer disabled:opacity-20";
+        $isChecked = $this->handleCheckbox($document, $y);
+        $className = $isCheckboxVisible ? "cursor-pointer view-all-permission-matrix-checkbox-$id" : "cursor-pointer disabled:opacity-100";
         $disabledStr = $isCheckboxVisible ? "" : "disabled";
         $strMakeId = Str::makeId($id);
         $checkbox = "<input $disabledStr class='$className' title='$strMakeId | $permissionsStr' type='checkbox' $isChecked id='checkbox_$id' name='$id'/>";
         $item = [
-            'value' => $checkbox . "<br/>" . $this->makeCaptionForCheckbox($textPermission,$textRender),
+            'value' => $checkbox . "<br/>" . $this->makeCaptionForCheckbox($textPermission, $textRender),
             'cell_class' => "$bgColor",
         ];
         return (object) $item;
     }
-    private function getBackgroundColorAndTextRender($missingInArr,$redundancyInArr){
+    private function getBackgroundColorAndTextRender($missingInArr, $redundancyInArr)
+    {
         $bgColor = "";
         $textRender = "...";
         $textPermission = "";
-        if(!empty($missingInArr)){
+        if (!empty($missingInArr)) {
             $bgColor = 'bg-red-200';
             $textRender = '-';
-            $textPermission = join(",",$missingInArr);
+            $textPermission = join(",", $missingInArr);
         }
-        if(!empty($redundancyInArr)){
-            if($bgColor && $textRender) return ['bg-yellow-200','-+',join(',',array_merge($missingInArr,$redundancyInArr))];
+        if (!empty($redundancyInArr)) {
+            if ($bgColor && $textRender) return ['bg-yellow-200', '-+', join(',', array_merge($missingInArr, $redundancyInArr))];
             $bgColor = 'bg-pink-200';
             $textRender = '+';
-            $textPermission = join(",",$redundancyInArr);
+            $textPermission = join(",", $redundancyInArr);
         }
-        return [$bgColor,$textRender,$textPermission];
+        return [$bgColor, $textRender, $textPermission];
     }
-    private function makeCaptionForCheckbox($textPermission,$textRender)
+    private function makeCaptionForCheckbox($textPermission, $textRender)
     {
         return "<div class='cursor-pointer' title='$textPermission'>$textRender</div>";
     }
 
-    private function getPreviousNameRole($ignoreName,$extraColumnName){
-        return str_replace('-'.Str::upper($ignoreName),'',$extraColumnName);
+    private function getPreviousNameRole($ignoreName, $extraColumnName)
+    {
+        return str_replace('-' . Str::upper($ignoreName), '', $extraColumnName);
     }
     private function getXAxis($dataSourceMatrix)
     {
@@ -235,14 +242,14 @@ class AdminPermissionMatrixController extends Controller
         $data = $this->getXAxisPrimaryColumns();
         foreach ($data as $key => $value) {
             $extraColumns = $dataSourceMatrix->filter(function ($item) use ($value) {
-                $arrayExplode = explode('-',$item->name);
+                $arrayExplode = explode('-', $item->name);
                 $check = end($arrayExplode);
                 return $check === Str::upper($value);
-            })->pluck('id','name')->toArray();
+            })->pluck('id', 'name')->toArray();
             $result2[$value] =  $extraColumns;
             foreach ($extraColumns as $extraColumnName => $extraColumnId) {
-                $columnIndex = $this->getPreviousNameRole($value,$extraColumnName);
-                if($columnIndex == 'READ-DATA'){
+                $columnIndex = $this->getPreviousNameRole($value, $extraColumnName);
+                if ($columnIndex == 'READ-DATA') {
                     $result[] = [
                         'dataIndex' => $key,
                         'dataIndexMap' => $extraColumnId,
@@ -253,7 +260,7 @@ class AdminPermissionMatrixController extends Controller
                         'width' => 40,
                         "colspan" => sizeof($extraColumns),
                     ];
-                }else{
+                } else {
                     $result[] = [
                         'dataIndex' => $key . "_" . $columnIndex,
                         'columnIndex' => Str::lower($columnIndex),
@@ -263,18 +270,19 @@ class AdminPermissionMatrixController extends Controller
                 }
             }
         }
-        return [$result,$result2];
+        return [$result, $result2];
     }
-    private function getRoleAllowedPermission($roleGroup){
+    private function getRoleAllowedPermission($roleGroup)
+    {
         switch ($roleGroup) {
             case 'READ-DATA':
                 return ['read'];
             case 'READ-WRITE-DATA':
-                return ['read','create','edit','edit-others'];
+                return ['read', 'create', 'edit', 'edit-others'];
             case 'ADMIN-DATA':
-                return ['read','create','edit','edit-others','delete','delete-others'];
+                return ['read', 'create', 'edit', 'edit-others', 'delete', 'delete-others'];
             default:
-            return [];
+                return [];
         }
     }
     private function getXAxis2ndHeader($xAxis)
@@ -296,22 +304,25 @@ class AdminPermissionMatrixController extends Controller
         $page = ($count) ? min(ceil($count / $perPage), $page) : 1; //<< This line has bug
         return new LengthAwarePaginator($items->forPage($page, $perPage), $count, $perPage, $page, $options);
     }
-    private function getEntities(){
-        return array_unique( array_map(function ($entity) {
+    private function getEntities()
+    {
+        return array_unique(array_map(function ($entity) {
             return $entity->getTable();
         }, Entities::getAll()));
     }
-    private function modelYAxis(){
+    private function modelYAxis()
+    {
         return Role_set::class;
     }
-    private function getTableNameYAxis(){
+    private function getTableNameYAxis()
+    {
         return $this->modelYAxis()::getTableName();
     }
     private function getYAxis()
     {
         return $this->modelYAxis()::query()
-        ->orderBy('name')
-        ->get();;
+            ->orderBy('name')
+            ->get();;
     }
     private function getXAxisPrimaryColumns()
     {
@@ -321,7 +332,8 @@ class AdminPermissionMatrixController extends Controller
     {
         return  self::getCollection();
     }
-    public function getItemDataSourceById($id = null){
+    public function getItemDataSourceById($id = null)
+    {
         return Role::findFromCache($id);
     }
 }

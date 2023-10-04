@@ -58,8 +58,11 @@ class User extends Authenticatable implements LdapAuthenticatable
     protected $fillable = [
         "name0", "full_name", "name_suffix", "employeeid", "first_name",
         "last_name", "gender", "address", "phone", "time_keeping_type", "user_type", "workplace",
-        "category", "date_of_birth", "first_date", "last_date", "title", "position_prefix", "position_1",
-        "position_2", "position_3", "position_rendered", "discipline", "department", "show_on_beta",
+        "category", "date_of_birth", "first_date", "last_date", "title",
+        // "position_prefix", "position_1", "position_2", "position_3",
+        // "position_rendered",
+        "position",
+        "discipline", "department", "show_on_beta",
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password",
         "settings", "provider", "user_id_passport", "user_pin", "company", "owner_id",
         "is_bod", "org_chart",
@@ -108,11 +111,16 @@ class User extends Authenticatable implements LdapAuthenticatable
         "getUserType" => ['belongsTo', User_type::class, 'user_type'],
         "getUserCompany" => ['belongsTo', User_company::class, 'company'],
         "getUserCat" => ['belongsTo', User_category::class, 'category'],
-        "getPositionPrefix" => ['belongsTo', User_position_pre::class, 'position_prefix'],
-        "getPosition1" => ['belongsTo', User_position1::class, 'position_1'],
-        "getPosition2" => ['belongsTo', User_position2::class, 'position_2'],
-        "getPosition3" => ['belongsTo', User_position3::class, 'position_3'],
+        "getPosition" => ['belongsTo', User_position::class, 'position'],
+
+        // "getPositionPrefix" => ['belongsTo', User_position_pre::class, 'position_prefix'],
+        // "getPosition1" => ['belongsTo', User_position1::class, 'position_1'],
+        // "getPosition2" => ['belongsTo', User_position2::class, 'position_2'],
+        // "getPosition3" => ['belongsTo', User_position3::class, 'position_3'],
+
         "getUserDiscipline" => ['belongsTo', User_discipline::class, 'discipline'],
+        "getUserOrgChart" => ['belongsTo', User_org_chart::class, 'org_chart'],
+
         "getUserDepartment" => ['belongsTo', Department::class, 'department'],
         "getTimeKeepType" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
         "getOwner" =>  ["belongsTo", User::class, "owner_id"],
@@ -191,27 +199,37 @@ class User extends Authenticatable implements LdapAuthenticatable
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getPositionPrefix()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getPosition1()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getPosition2()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function getPosition3()
+    // public function getPositionPrefix()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
+    // public function getPosition1()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
+    // public function getPosition2()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
+    // public function getPosition3()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
+    public function getPosition()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getUserDiscipline()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getUserOrgChart()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -3,7 +3,6 @@
 namespace App\View\Components\Renderer;
 
 use App\Models\User;
-use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class AvatarUser extends Component
@@ -32,7 +31,7 @@ class AvatarUser extends Component
         if (is_null($user)) return null;
 
         $title = $shortForm ? ($slot->{"first_name"} ?? "") : ($slot->{'name0'} ?? '');
-        $description = $shortForm ? "" : ($slot->{'position_rendered'} ?? '');
+        $description = $shortForm ? "" : ($slot->getPosition->name ?? '');
         $gray = $slot->{'resigned'} ?? '';
         $href = $slot->{'href'} ?? '';
 
@@ -44,7 +43,7 @@ class AvatarUser extends Component
         $user = User::findFromCache($this->uid);
         $avatar = $user->getAvatarThumbnailUrl();
         $title = $user->full_name;
-        $description = $user->position_rendered;
+        $description = $user->getPosition->name;
         $gray = $user->resigned;
         $href = "";
         return [$user, $avatar, $title, $description, $href, $gray];
@@ -62,7 +61,7 @@ class AvatarUser extends Component
 
         $verticalLayout = $this->verticalLayout;
         $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") . " (#$user->id)" : "";
-        if ($shortForm) $tooltip  = $user->name . "\n" . $user->position_rendered . "\n" . $tooltip;
+        if ($shortForm) $tooltip  = $user->name . "\n" . $user->getPosition->name . "\n" . $tooltip;
         $class = ($shortForm && $index >= 2) ? "-mt-4" : "";
         return "<x-renderer.avatar-item class='$class' flipped='$this->flipped' tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
     }
