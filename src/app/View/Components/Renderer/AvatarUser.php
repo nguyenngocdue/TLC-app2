@@ -43,7 +43,7 @@ class AvatarUser extends Component
         $user = User::findFromCache($this->uid);
         $avatar = $user->getAvatarThumbnailUrl();
         $title = $user->full_name;
-        $description = $user->getPosition->name;
+        $description = $user->getPosition->name ?? '';
         $gray = $user->resigned;
         $href = "";
         return [$user, $avatar, $title, $description, $href, $gray];
