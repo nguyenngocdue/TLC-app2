@@ -5,21 +5,23 @@
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00a950','#58595b','#8549ba'];
-</script>
 @endonce
 
 <script>
 var key = '{{$key}}';
 var chartType = '{{$chartType}}';
-chartData = {
+var chartData = {
     labels: {!! $meta['labels'] !!},
     numbers: {!! $meta['numbers'] !!},
     backgroundColor: Object.values(COLORS)
 };
 
+
+var numColors = chartData.labels.length;
+var generatedColors = generateColors(numColors);
+
 Chart.register(ChartDataLabels);
+Chart.register(ChartjsPluginStacked100.default);
 
 var chartConfig = {
     type: chartType,
@@ -28,7 +30,7 @@ var chartConfig = {
         datasets: [{
             label: "data",
             data: chartData.numbers,
-            backgroundColor: chartData.backgroundColor
+            backgroundColor: generatedColors
         }]
     },
     options: {
@@ -81,10 +83,11 @@ var chartConfig = {
                     legend.chart.update();
                 },
                 labels: {
+                        boxWidth: 40,
                         generateLabels: function(chart) {
                             const data = chart.data;
                             let visibility = [];
-                            for(let i = 0; i < data.datasets.length; i++) {
+                            for(let i = 0; i < data.labels.length; i++) {
 									if(chart.getDataVisibility(i) === true){
 										visibility.push(false);
 									} else{
@@ -93,17 +96,16 @@ var chartConfig = {
 								};
                             if (data.labels.length && data.datasets.length) {
                                 return data.labels.map(function(label, index) {
-                                    const dataset = data.datasets[0]; // Chúng ta chỉ sử dụng một dataset ở đây
+                                    const dataset = data.datasets[0];
                                     const backgroundColor = dataset.backgroundColor[index];
-									console.log( index)
-
-                                    // Tùy chỉnh nội dung của legend ở đây
+                                    //  legend modified here
                                     const legendText = `${label}`;
 
                                     return {
                                         text: legendText,
                                         fillStyle: backgroundColor,
-                                        hidden: isNaN(dataset.data[index]) || chart.getDatasetMeta(0).data[index].hidden,
+                                        strokeStyle: backgroundColor,
+                                        hidden: visibility[index],
                                         index: 0
                                     };
                                 });

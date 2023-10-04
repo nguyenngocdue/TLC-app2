@@ -33,7 +33,7 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
                         @php
                             $basicInfo = $widget['basicInfo'];
                         @endphp
-                        <div class="col-span-12 grid">
+                        <div class="col-span-12 grid border border-gray-600">
                             <div class="grid grid-rows-1">
                                 <div class="grid grid-cols-12 text-right">
                                     <label class="{{$class1}} col-start-1  col-span-3">Project</label>
@@ -84,7 +84,7 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
                     </h4>
                 </div>
             </div>
-             <div class="col-span-12 grid">
+             <div class="col-span-12 grid border border-gray-600">
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right">
                         <label class="{{$class1}} col-start-1  col-span-3">Project</label>
