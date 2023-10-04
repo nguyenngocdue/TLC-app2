@@ -8,8 +8,7 @@
 @php
 $class1 = 'p-2 border h-full w-full flex border-gray-600 text-base font-medium bg-gray-50 items-center justify-end';
 $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left';
-$widget = $tableDataSource['widget_01'];
-$tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDataSource['tableDataSource']) : [];
+$tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSource['tableDataSource']) : [];
 @endphp
 {{-- "Show utility"  --}}
 @php
@@ -25,22 +24,52 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
-            <x-print.header6 />
-            
-             <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Work Completion Percentage Report Chart</x-renderer.heading>
-            <div class="p-10">
-                    <x-renderer.report.chart-bar 
-                                                key="{{md5($widget['title_a'].$widget['title_b'])}}" 
-                                                chartType="{{$widget['chartType']}}" 
-                                                :meta="$widget['meta']" 
-                                                :metric="$widget['metric']" 
-                                                titleChart="{{$widget['titleChart']}}" 
-                                                :dimensions="$widget['dimensions']"
-                                                />
-                    <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>The chart represents the completion percentage of each step in the production routing link on every production order.</x-renderer.heading>
-            </div>
-        </div>
+        @foreach($tableDataSource as $key => $widget)
+                <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
+                    <x-print.header6 />
+                    
+                    <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Work Completion Percentage Report Chart</x-renderer.heading>
+                        @if(str_contains($key, 'widget'))
+                        @php
+                            $basicInfo = $widget['basicInfo'];
+                        @endphp
+                        <div class="col-span-12 grid">
+                            <div class="grid grid-rows-1">
+                                <div class="grid grid-cols-12 text-right">
+                                    <label class="{{$class1}} col-start-1  col-span-3">Project</label>
+                                    <span class="{{$class2}}  col-start-4  col-span-4">{{$basicInfo['project_name']}}</span>
+                                    <label class="{{$class1}} col-start-8  col-span-3 items-center">Sub-Project</label>
+                                    <span class="{{$class2}}  col-start-11 col-span-2">{{$basicInfo['sub_project_name']}}</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-rows-1">
+                                <div class="grid grid-cols-12 text-right ">
+                                    <label class="{{$class1}} col-start-1   col-span-3">Production Routing</label>
+                                    <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfo['prod_routing_name']}}</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-rows-1">
+                                <div class="grid grid-cols-12 text-right ">
+                                    <label class="{{$class1}} col-start-1   col-span-3">Production Discipline</label>
+                                    <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfo['prod_discipline_name']}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-10">
+                                <x-renderer.report.chart-bar 
+                                        key="{{md5($widget['title_a'].$widget['title_b'])}}" 
+                                        chartType="{{$widget['chartType']}}" 
+                                        :meta="$widget['meta']" 
+                                        :metric="$widget['metric']" 
+                                        titleChart="{{$widget['titleChart']}}" 
+                                        :dimensions="$widget['dimensions']"
+                                        />
+                                <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>The chart represents the completion percentage of each step in the production routing link on every production order.</x-renderer.heading>
+                        </div>
+                        @endif
+                </div>
+        <x-renderer.page-break />
+        @endforeach
 
         <x-renderer.page-break />
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
@@ -86,7 +115,7 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
                 <x-renderer.report.pivot-table 
                         showNo={{true}} 
                         :tableColumns="$tableColumns" 
-                        :dataSource="$tableDataSource" 
+                        :dataSource="$tableData" 
                         :tableDataHeader="$tableDataHeader" 
                         maxH='{{$maxH}}' 
                         page-limit="{{$pageLimit}}" 

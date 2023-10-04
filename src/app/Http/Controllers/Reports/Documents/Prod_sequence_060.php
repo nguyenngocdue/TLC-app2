@@ -16,6 +16,7 @@ use App\Models\Term;
 use App\Utils\Support\ModificationDataReport;
 use App\Utils\Support\Report;
 use App\Utils\Support\StringReport;
+use GraphQL\Executor\Values;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -114,8 +115,18 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
     private function getProdRoutingLinks($params){
         $sql = "SELECT 
                         prl.id AS prod_routing_link_id,
-                        prl.name AS prod_routing_link_name
-                        FROM sub_projects sp, prod_orders po, prod_routing_details prd, prod_routing_links prl, prod_routings pr
+                        prl.name AS prod_routing_link_name,
+                        pdisc.id AS prod_discipline_id,
+                        pdisc.name AS prod_discipline_name,
+                        pdisc.description AS prod_discipline_description,
+                        pr.id AS prod_routing_id,
+                        pr.name AS prod_routing_name,
+                        pr.description AS prod_routing_description
+
+                        FROM    sub_projects sp, prod_orders po, 
+                                prod_routing_details prd, 
+                                prod_routing_links prl, 
+                                prod_routings pr, prod_disciplines pdisc
                         WHERE 1 = 1";
                         if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = {$params['sub_project_id']}";
                         if (isset($params['project_id'])) $sql .= "\n AND sp.project_id = {$params['project_id']}";
@@ -126,75 +137,83 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                                     AND prl.id = prd.prod_routing_link_id
                                     AND po.prod_routing_id = pr.id
                                     AND sp.id = po.sub_project_id
-                                    GROUP BY prod_routing_link_id";
+                                    AND pdisc.id = prl.prod_discipline_id
+                                    GROUP BY prod_routing_link_id
+                                    ";
+                                    // dd($sql);
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
         return $collection;
     }
 
-    private function updateDataForPivotChart($data, $params)
+    private function updateDataForPivotChart($dataSource, $params)
     {
-
-        $items = array_values($data->toArray());
-        $infoRoutingLinks = array_column($items, 'finished_progress', 'prod_routing_link_name');
+        $items = array_values($dataSource->toArray());
+        $groupItems = Report::groupArrayByKey($items,'prod_discipline_id');
         
-        $prodRoutingLinks = $this->getProdRoutingLinks($params);
-        foreach ($prodRoutingLinks as $key => $value){
-            if(!isset($infoRoutingLinks[$value->prod_routing_link_name])){
-                $infoRoutingLinks[$value->prod_routing_link_name] = 0;
-            }
-        }
-        ksort($infoRoutingLinks);
-        // information for meta data
-        $labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($infoRoutingLinks));
-        $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($infoRoutingLinks));
-        $max = count(array_keys($infoRoutingLinks));
-        $count = count($infoRoutingLinks);
-        $meta = [
-            'labels' => $labels,
-            'numbers' => $numbers,
-            'max' => $max,
-            'count' => $count
-        ];
-
-
-        // information for metric data
-        $metric = [];
-        array_walk($infoRoutingLinks, function ($value, $key) use (&$metric) {
-            return $metric[] = (object) [
-                'meter_id' => $key,
-                'metric_name' => $value
+        foreach($groupItems as $key => $values){
+            $firstItem = reset($values);
+            $infoRoutingLinks = array_column($values, 'finished_progress', 'prod_routing_link_name');
+            ksort($infoRoutingLinks);
+            // information for meta data
+            $labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($infoRoutingLinks));
+            $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($infoRoutingLinks));
+            $max = count(array_keys($infoRoutingLinks));
+            $count = count($infoRoutingLinks);
+            $meta = [
+                'labels' => $labels,
+                'numbers' => $numbers,
+                'max' => $max,
+                'count' => $count
             ];
-        });
-        // relate to dimensions AxisX and AxisY
-        $dimensions = [
-            'scaleMaxY' => 100,
-            'fontSize' => 14,
-            'titleX' => "% Progress",
-            'indexAxis' => 'y',
-            'width' => 400,
-            'height' => $max/2*25,
-            'dataLabelAlign' => 'start',
-            'dataLabelOffset' => 50,
-        ];
+            
+            // information for metric data
+            $metric = [];
+            array_walk($infoRoutingLinks, function ($value, $key) use (&$metric) {
+                return $metric[] = (object) [
+                    'meter_id' => $key,
+                    'metric_name' => $value
+                ];
+            });
+            // relate to dimensions AxisX and AxisY
+            $dimensions = [
+                'scaleMaxX' => 100,
+                'fontSize' => 14,
+                'titleX' => "% Progress",
+                'indexAxis' => 'y',
+                'width' => 400,
+                'height' => $max/2*30,
+                'dataLabelAlign' => 'end',
+                'dataLabelOffset' => 10,
+            ];
+    
+            // Set data for widget
+            $widgetData =  [
+                "title_a" => "Production Routing Link".$key,
+                "title_b" => "by progress",
+                'meta' => $meta,
+                'metric' => $metric,
+                'chartType' => 'bar',
+                'titleChart' => '',
+                'dimensions' => $dimensions,
+                'basicInfo' => [
+                    "project_name" => $firstItem['project_name'],
+                    "sub_project_name" => $firstItem['sub_project_name'],
+                    "prod_routing_name" => $firstItem['prod_routing_name'],
+                    "prod_discipline_name" => $firstItem['prod_discipline_name']
+                ],
+            ];
+            $data['widget_'. $key] = $widgetData;
+            // dd($data);
+            
+        };
 
-        // Set data for widget
-        $widgetData =  [
-            "title_a" => "Production Routing Link",
-            "title_b" => "by progress",
-            'meta' => $meta,
-            'metric' => $metric,
-            'chartType' => 'bar',
-            'titleChart' => '',
-            'dimensions' => $dimensions,
-        ];
+
 
         // add widget to dataSource
-        $data = ['tableDataSource' => $data];
-        $data['widget_01'] = $widgetData;
+        $data['tableDataSource'] =  $dataSource;
         // dd($data);
-
-        return $data;
+        return collect($data);
     }
 
 
@@ -215,20 +234,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                 'dataIndex' => 'prod_routing_id',
                 'hasListenTo' => true,
                 'validation' => 'required',
-            ],
-            [
-                'title' => 'Production Discipline',
-                'dataIndex' => 'prod_discipline_id',
-                'allowClear' => true,
-            ],
-            [
-                'title' => 'Production Routing Link',
-                'dataIndex' => 'prod_routing_link_id',
-                'allowClear' => true,
-                'hasListenTo' => true,
-                'multiple' => true,
-            ],
-
+            ]
         ];
     }
 
@@ -312,7 +318,30 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
 
     public function changeDataSource($dataSource, $params)
     {
-        $dataSource = self::updateDataForPivotChart($dataSource, $params);
+        $data = $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
+        $prodRoutingLinkFinished = array_column($data, 'prod_routing_link_name', 'prod_routing_link_id');
+        // dd($prodRoutingLinkFinished);
+
+        $prodRoutingLinks = $this->getProdRoutingLinks($params);
+        $firstItem = reset($data);
+        foreach ($prodRoutingLinks as $key => $values){
+            if(!isset($prodRoutingLinkFinished[$values->prod_routing_link_id])){
+                // dd($values);
+                $values = (array)$values;
+                $firstItem = (array)$firstItem;
+                $firstItem['finished_progress'] = null;
+                $mergedData = array_replace_recursive($firstItem,$values);
+                $data[] = (object)$mergedData;
+            }
+        }
+        $data = collect($data)->sortBy([
+            ['project_name'],
+            ['sub_project_name'],
+            ['prod_routing_name'],
+            ['prod_discipline_name'],
+            ['prod_routing_link_name']
+        ]);
+        $dataSource = self::updateDataForPivotChart($data, $params);
         return $dataSource;
     }
 }
