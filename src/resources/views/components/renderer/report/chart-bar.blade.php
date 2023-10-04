@@ -76,7 +76,7 @@ var chartConfig = {
                 display: true,
                 onClick: (evt, legendItem, legend) => {
                     const index = legend.chart.data.labels.indexOf(legendItem.text);
-                    console..log(index);
+                    console.log(index);
                     legend.chart.toggleDataVisibility(index);
                     legend.chart.update();
                 },
