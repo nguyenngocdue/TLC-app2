@@ -9,3 +9,4 @@ function generateColors(numColors) {
 
     return colors;
 }
+const myChart = {};

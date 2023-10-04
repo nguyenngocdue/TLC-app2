@@ -25,11 +25,10 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         @foreach($tableDataSource as $key => $widget)
+            @if(str_contains($key, 'widget'))
                 <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
                     <x-print.header6 />
-                    
                     <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Work Completion Percentage Report Chart</x-renderer.heading>
-                        @if(str_contains($key, 'widget'))
                         @php
                             $basicInfo = $widget['basicInfo'];
                         @endphp
@@ -66,12 +65,11 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
                                         />
                                 <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>The chart represents the completion percentage of each step in the production routing link on every production order.</x-renderer.heading>
                         </div>
-                        @endif
                 </div>
+            @endif
         <x-renderer.page-break />
         @endforeach
-
-        <x-renderer.page-break />
+        
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
             <x-print.header6 />
             

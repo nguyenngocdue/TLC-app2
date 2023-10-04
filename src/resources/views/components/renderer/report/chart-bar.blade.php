@@ -5,6 +5,10 @@
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-stacked100@1.0.0"></script>
+<script>
+const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00a950','#58595b','#8549ba'];
+</script>
 @endonce
 
 <script>
@@ -34,6 +38,7 @@ var chartConfig = {
         }]
     },
     options: {
+        responsive: true,
         indexAxis: '{!! $dimensions['indexAxis'] ?? 'x' !!}',
         scales: {
             y: {
