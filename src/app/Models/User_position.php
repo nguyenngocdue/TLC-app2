@@ -14,12 +14,24 @@ class User_position extends ModelExtended
     protected static $statusless = true;
     public static $nameless = true;
 
+    // protected $with = ['getPositionPrefix', 'getPosition1', 'getPosition2', 'getPosition3'];
+
     public function getNameAttribute($value)
     {
-        $position_pres = ($this->getPositionPrefix) ? $this->getPositionPrefix->name : "";
-        $position_1 = ($this->getPosition1) ? $this->getPosition1->name : "";
-        $position_2 = ($this->getPosition2) ? $this->getPosition2->name : "";
-        $position_3 = ($this->getPosition3) ? $this->getPosition3->name : "";
+        // $position_pres = ($this->getPositionPrefix) ? $this->getPositionPrefix->name : "";
+        // $position_1 = ($this->getPosition1) ? $this->getPosition1->name : "";
+        // $position_2 = ($this->getPosition2) ? $this->getPosition2->name : "";
+        // $position_3 = ($this->getPosition3) ? $this->getPosition3->name : "";
+
+        $position_pres = User_position_pre::findFromCache($this->position_prefix);
+        $position_pres = ($position_pres) ? $position_pres->name : "";
+        $position_1 = User_position1::findFromCache($this->position_1);
+        $position_1 = ($position_1) ? $position_1->name : "";
+        $position_2 = User_position2::findFromCache($this->position_2);
+        $position_2 = ($position_2) ? $position_2->name : "";
+        $position_3 = User_position3::findFromCache($this->position_3);
+        $position_3 = ($position_3) ? $position_3->name : "";
+
         $position_3 = $position_3 ? "($position_3)" : "";
         $str = "$position_pres $position_1 $position_2 $position_3";
         $str = trim(str_replace("  ", " ", $str));
