@@ -44,7 +44,7 @@ class AvatarUser extends Component
         $user = User::findFromCache($this->uid);
         $avatar = $user->getAvatarThumbnailUrl();
         $title = $user->full_name;
-        $description = $user->position_rendered;
+        $description = $user->getPosition->name;
         $gray = $user->resigned;
         $href = "";
         return [$user, $avatar, $title, $description, $href, $gray];
@@ -62,7 +62,7 @@ class AvatarUser extends Component
 
         $verticalLayout = $this->verticalLayout;
         $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") . " (#$user->id)" : "";
-        if ($shortForm) $tooltip  = $user->name . "\n" . $user->position_rendered . "\n" . $tooltip;
+        if ($shortForm) $tooltip  = $user->name . "\n" . $user->getPosition->name . "\n" . $tooltip;
         $class = ($shortForm && $index >= 2) ? "-mt-4" : "";
         return "<x-renderer.avatar-item class='$class' flipped='$this->flipped' tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
     }

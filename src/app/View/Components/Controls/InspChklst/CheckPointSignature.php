@@ -37,7 +37,7 @@ class CheckPointSignature extends Component
             $user = [
                 'id' => $user->id,
                 'full_name' => $user->full_name,
-                'position_rendered' => $user->position_rendered,
+                'position_rendered' => $user->getPosition->name,
                 'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $this->line->created_at),
                 'avatar' => $user->getAvatarThumbnailUrl(),
             ];

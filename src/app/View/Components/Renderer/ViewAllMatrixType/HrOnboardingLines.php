@@ -114,7 +114,7 @@ class HrOnboardingLines extends ViewAllTypeMatrixParent
         return [
             'employee_id' => $y->employeeid,
             'employee_cat' => $y->getUserCat->name,
-            'employee_position' => $y->position_rendered,
+            'employee_position' => $y->getPosition->name,
             'report_to' => $y->getUserDiscipline->getDefAssignee->name,
             'department_of_trainee' => $y->getUserDepartment->name,
             'first_date' => DateTimeConcern::formatForLoading($y->first_date, Constant::FORMAT_DATE_MYSQL, Constant::FORMAT_DATE_ASIAN),

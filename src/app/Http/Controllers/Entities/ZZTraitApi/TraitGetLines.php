@@ -169,7 +169,7 @@ trait TraitGetLines
 				'hr_overtime_request_id' => $id,
 				'user_id' => $worker_id,
 				'employeeid' => $user->employeeid,
-				'position_rendered' => $user->position_rendered,
+				'position_rendered' => $user->getPosition->name,
 				'ot_date' => $date,
 				'from_time' => $from_time->format(Constant::FORMAT_TIME_MYSQL),
 				'to_time' => $to_time->format(Constant::FORMAT_TIME_MYSQL),

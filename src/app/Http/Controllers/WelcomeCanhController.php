@@ -62,101 +62,106 @@ class WelcomeCanhController extends Controller
         // });
         return view(
             'welcome-canh',
-            ['treeData'=> $this->getTreeData(),]
+            ['treeData' => $this->getTreeData(),]
         );
     }
-    private function getTreeData(){
+    private function getTreeData()
+    {
         return [
             [
-            "title" => 'parent 1',
-            "key" => '0-0',
-            "children" => [
-                [
-                "title" => 'parent 1-0',
-                "key" => '0-0-0',
+                "title" => 'parent 1',
+                "key" => '0-0',
                 "children" => [
                     [
-                    "title" => 'leaf',
-                    "key" => '0-0-0-0',
+                        "title" => 'parent 1-0',
+                        "key" => '0-0-0',
+                        "children" => [
+                            [
+                                "title" => 'leaf',
+                                "key" => '0-0-0-0',
+                            ],
+                            [
+                                "key" => '0-0-0-1',
+                            ],
+                            [
+                                "title" => 'leaf',
+                                "key" => '0-0-0-2',
+                            ]
+                        ],
                     ],
                     [
-                    "key" => '0-0-0-1',
-                    ], 
+                        "title" => 'parent 1-1',
+                        "key" => '0-0-1',
+                        "children" => [
+                            [
+                                "title" => 'leaf',
+                                "key" => '0-0-1-0',
+                            ]
+                        ],
+                    ],
                     [
-                    "title" => 'leaf',
-                    "key" => '0-0-0-2',
-                    ]
+                        "title" => 'parent 1-2',
+                        "key" => '0-0-2',
+                        "children" => [
+                            [
+                                "title" => 'leaf 1',
+                                "key" => '0-0-2-0',
+                            ],
+                            [
+                                "title" => 'leaf 2',
+                                "key" => '0-0-2-1',
+                            ]
+                        ],
                     ],
-                ], 
-                [
-                "title" => 'parent 1-1',
-                "key" => '0-0-1',
-                "children" => [
-                    [
-                    "title" => 'leaf',
-                    "key" => '0-0-1-0',
-                    ]
-                    ],
-                ], 
-                [
-                    "title" => 'parent 1-2',
-                    "key" => '0-0-2',
-                    "children" => [
-                        [
-                        "title" => 'leaf 1',
-                        "key" => '0-0-2-0',
-                        ], 
-                        [
-                        "title" => 'leaf 2',
-                        "key" => '0-0-2-1',
-                        ]
-                    ],
-                ], 
-            ]],
+                ]
+            ],
             [
                 "title" => 'parent 2',
                 "key" => '0-1',
                 "children" => [
                     [
-                    "title" => 'parent 2-0',
-                    "key" => '0-1-0',
-                    "children" => [
-                        [
-                        "title" => 'leaf',
-                        "key" => '0-1-0-0',
-                        ], 
-                        [
-                        "title" => 'leaf',
-                        "key" => '0-1-0-1',
-                        ]
+                        "title" => 'parent 2-0',
+                        "key" => '0-1-0',
+                        "children" => [
+                            [
+                                "title" => 'leaf',
+                                "key" => '0-1-0-0',
+                            ],
+                            [
+                                "title" => 'leaf',
+                                "key" => '0-1-0-1',
+                            ]
                         ],
                     ],
                 ],
             ]
-            ];
+        ];
     }
-    private function x($tree,&$results,$options){
+    private function x($tree, &$results, $options)
+    {
         foreach ($tree as $value) {
-            if(isset($value->children)){
-                $this->x($value->children,$results,$options);
+            if (isset($value->children)) {
+                $this->x($value->children, $results, $options);
             }
-            if(App::isProduction()) {
-                if($value->show_on_beta == 0){
-                    $a = $this->convertDataSource($value,$options);
-                    if($a)$results[] = $a;
+            if (App::isProduction()) {
+                if ($value->show_on_beta == 0) {
+                    $a = $this->convertDataSource($value, $options);
+                    if ($a) $results[] = $a;
                 }
-            }
-            else{ 
-                $a = $this->convertDataSource($value,$options);
-                if($a)$results[] = $a;
+            } else {
+                $a = $this->convertDataSource($value, $options);
+                if ($a) $results[] = $a;
             }
         }
     }
-    private function convertDataSource($value,$options){
-        if(in_array($value->resigned,$options['resigned']) 
-            && in_array($value->time_keeping_type,$options['time_keeping_type'])){
+    private function convertDataSource($value, $options)
+    {
+        if (
+            in_array($value->resigned, $options['resigned'])
+            && in_array($value->time_keeping_type, $options['time_keeping_type'])
+        ) {
             $user = User::findFromCache($value->id);
-            $positionRendered = $user->position_rendered;
+            $positionRendered = $user->getPosition->name;
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
             return [
                 'key' => $value->id,
@@ -168,24 +173,26 @@ class WelcomeCanhController extends Controller
             ];
         }
     }
-    private function getFillColor($item){
+    private function getFillColor($item)
+    {
         return $item->resigned == 1 ? '#d1d5db' : ($item->time_keeping_type == 3 ? "#fed7aa" : "#ffffff");
     }
-    private function getOptionsRenderByUserSetting($showOptions){
+    private function getOptionsRenderByUserSetting($showOptions)
+    {
         $results = [
             'resigned' => [0],
-            'time_keeping_type' => [2,3],
+            'time_keeping_type' => [2, 3],
         ];
         foreach ($showOptions as $key => $value) {
-                switch ($key) {
-                    case 'resigned':
-                        if($value == 'true') $results['resigned'] = [0,1];
-                        break;
-                    case 'time_keeping_type':
-                        if($value == 'true') $results['time_keeping_type'] = [1,2,3];
-                            break;
-                    default:
-                        break;
+            switch ($key) {
+                case 'resigned':
+                    if ($value == 'true') $results['resigned'] = [0, 1];
+                    break;
+                case 'time_keeping_type':
+                    if ($value == 'true') $results['time_keeping_type'] = [1, 2, 3];
+                    break;
+                default:
+                    break;
             }
         }
         return $results;

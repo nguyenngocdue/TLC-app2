@@ -60,7 +60,7 @@ class User extends Authenticatable implements LdapAuthenticatable
         "last_name", "gender", "address", "phone", "time_keeping_type", "user_type", "workplace",
         "category", "date_of_birth", "first_date", "last_date", "title",
         // "position_prefix", "position_1", "position_2", "position_3",
-        "position_rendered",
+        // "position_rendered",
         "position",
         "discipline", "department", "show_on_beta",
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password",
