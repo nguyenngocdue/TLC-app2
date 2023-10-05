@@ -179,7 +179,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
             $dimensions = [
                 'scaleMaxX' => 100,
                 'fontSize' => 14,
-                'titleX' => "% Progress",
+                'titleX' => "% Complete",
                 'indexAxis' => 'y',
                 'width' => 400,
                 'height' => $max/2*30,

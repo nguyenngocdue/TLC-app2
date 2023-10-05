@@ -8,7 +8,7 @@
 @php
 $class1 = 'p-2 border h-full w-full flex border-gray-600 text-base font-medium bg-gray-50 items-center justify-end';
 $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left';
-$widget = $tableDataSource['widget_01'];
+$widget = isset($tableDataSource['widget_01']) ? $tableDataSource['widget_01'] : [];
 $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDataSource['tableDataSource']) : [];
 @endphp
 {{-- "Show utility"  --}}
@@ -80,7 +80,7 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
                         topCenterControl="{!!$tc!!}"  --}}
                         />
             </div>
-
+                @if(!empty($widget))
                 <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Chart displaying job completion time statistics by day</x-renderer.heading>
                <div class="p-10">
                     <x-renderer.report.chart-bar 
@@ -93,6 +93,7 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
                                                 />
                     <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>The chart represents the completion percentage of each step in the production routing link on every production order.</x-renderer.heading>
                 </div>
+                @endif
         </div>
         </div>
     </div>
