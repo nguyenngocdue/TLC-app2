@@ -53,31 +53,30 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     prod_discipline_id,
                     prod_discipline_name,
                     uom_name,
-                    FORMAT(AVG(man_power),2) AS man_power,
-                    AVG(total_uom) AS total_uom,
-                    AVG(total_hours) AS total_hours,
+                    FORMAT((man_power),2) AS man_power,
+                    total_uom,
+                    total_hours,
                     SUM(count_pru_date) AS count_pru_date,
-                    AVG(total_hours)*60 / SUM(count_pru_date) AS min_on_day,
-                    AVG(total_hours)*60 / AVG(total_uom) AS min_on_set,
+                    FORMAT((total_hours)*60 / SUM(count_pru_date),2) AS min_on_day,
+                    FORMAT((total_hours)*60 / AVG(total_uom),2) AS min_on_set,
                     uom_name
                     FROM (SELECT
                         sp.project_id AS project_id,
                         pj.name AS project_name,
                         sp.id AS sub_project_id,
                         sp.name AS sub_project_name,
-                        po.id AS pro_order_id,
                         pr.id AS prod_routing_id,
                         pr.name AS prod_routing_name,
                         prl.id AS prod_routing_link_id,
                         prl.name AS prod_routing_link_name,
                         pd.id AS prod_discipline_id, 
                         pd.name AS prod_discipline_name,
-                        pse.total_hours AS total_hours,
-                        pse.worker_number AS man_power,
-                        pse.total_uom AS total_uom,
-                        pse.total_man_hours AS total_man_hours,
+                        AVG(pse.total_hours) AS total_hours,
+                        AVG(pse.worker_number) AS man_power,
+                        AVG(pse.total_uom) AS total_uom,
+                        AVG(pse.total_man_hours) AS total_man_hours,
                         COUNT(DISTINCT pru.date) AS count_pru_date,
-                        terms.name AS uom_name
+                        MAX(terms.name) AS uom_name
                         FROM
                             sub_projects sp
                         JOIN
@@ -105,13 +104,13 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
 
         $sql .= "\n GROUP BY
-                                    pj.name,
-                                    sp.id,
-                                    sp.name,
-                                    po.id
-                                    )AS tb1
+                                pj.name,
+                                sp.id,
+                                sp.name,
+                                prl.id
+                        ORDER BY pj.name, sp.name, pr.name, pd.name, prl.name )AS tb1
                                 GROUP BY
-                                    project_id, uom_name";
+                                    prod_routing_link_id";
         return $sql;
     }
 
@@ -126,8 +125,9 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     private function updateDataForPivotChart($data)
     {
         $values = array_values($data->toArray());
+        if(empty($values)) return $data;
         $primaryData = reset($values);
-        $unit = isset($primaryData->uom_name) ? $primaryData->uom_name : "no name uom_name";
+        $unit = isset($primaryData->uom_name) ? $primaryData->uom_name : "(Unknown Unit)";
         $dataToRender = [
             'man_power' => $primaryData->man_power,
             'total_uom' => $primaryData->total_uom,
@@ -163,6 +163,8 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
             'fontSizeAxisXY' => 16,
             'fontSize' => 14,
             'titleY' => "",
+            'height' => 800,
+            'scaleMaxY' => $max*1.2,
         ];
 
         // Set data for widget
@@ -223,6 +225,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         $data = reset($data);
         $unit = isset($data['uom_name']) && ($x = $data['uom_name']) ? $x : '<small class="text-orange-300">Unknown Unit</small>';
         $optionPrint = $params['optionPrint'] ?? $this->optionPrint;
+        // dump($optionPrint);
         return
             [
                 [
@@ -241,7 +244,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     "title" => "Production Routing",
                     "dataIndex" => "prod_routing_name",
                     "align" => "left",
-                    "width" => 200,
+                    "width" => 150,
                 ],
                 [
                     "title" => "Production Discipline",
