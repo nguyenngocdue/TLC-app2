@@ -42,59 +42,51 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
     public function getSqlStr($params)
     {
-        $sql = "SELECT 	project_id,
-                    project_name,
-                    sub_project_id,
-                    sub_project_name,
-                    prod_routing_id,
-                    prod_routing_name,
-                    prod_routing_link_id,
-                    prod_routing_link_name,
-                    prod_discipline_id,
-                    prod_discipline_name,
-                    uom_name,
-                    FORMAT((man_power),2) AS man_power,
-                    total_uom,
-                    total_hours,
-                    SUM(count_pru_date) AS count_pru_date,
-                    FORMAT((total_hours)*60 / SUM(count_pru_date),2) AS min_on_day,
-                    FORMAT((total_hours)*60 / AVG(total_uom),2) AS min_on_set,
-                    uom_name
-                    FROM (SELECT
-                        sp.project_id AS project_id,
-                        pj.name AS project_name,
-                        sp.id AS sub_project_id,
-                        sp.name AS sub_project_name,
-                        pr.id AS prod_routing_id,
-                        pr.name AS prod_routing_name,
-                        prl.id AS prod_routing_link_id,
-                        prl.name AS prod_routing_link_name,
-                        pd.id AS prod_discipline_id, 
-                        pd.name AS prod_discipline_name,
-                        AVG(pse.total_hours) AS total_hours,
-                        AVG(pse.worker_number) AS man_power,
-                        AVG(pse.total_uom) AS total_uom,
-                        AVG(pse.total_man_hours) AS total_man_hours,
-                        COUNT(DISTINCT pru.date) AS count_pru_date,
-                        MAX(terms.name) AS uom_name
-                        FROM
-                            sub_projects sp
-                        JOIN
-                            projects pj ON pj.id = sp.project_id
-                        JOIN
-                            prod_orders po ON po.sub_project_id = sp.id
-                        JOIN
-                            prod_routings pr ON pr.id = po.prod_routing_id
-                        LEFT JOIN
-                            prod_sequences pse ON pse.prod_order_id = po.id
-                        JOIN
-                            prod_routing_links prl ON prl.id = pse.prod_routing_link_id
-                        JOIN
-                            prod_disciplines pd ON prl.prod_discipline_id = pd.id
-                        LEFT JOIN
-                            terms terms ON pse.uom_id = terms.id
-                        LEFT JOIN prod_runs pru ON pru.prod_sequence_id = pse.id
-                    WHERE 1 = 1
+        $sql = "SELECT project_id,
+        project_name,
+        tb1.sub_project_id,
+        sub_project_name,
+        tb1.prod_routing_id,
+        prod_routing_name,
+        tb1.prod_routing_link_id,
+        prod_routing_link_name,
+        tb1.prod_discipline_id,
+        prod_discipline_name,
+        SUM(pse.total_hours) AS total_hours,
+           AVG(pse.worker_number) AS man_power,
+           AVG(pse.total_uom) AS total_uom,
+           SUM(pse.total_man_hours) AS total_man_hours,
+        terms.name AS uom_name,
+        FORMAT((SUM(pse.total_hours))*60 / SUM(count_pru_date),2) AS min_on_day,
+        FORMAT((SUM(pse.total_hours))*60 / AVG(pse.total_uom),2) AS min_on_set
+        FROM (SELECT
+                    sp.project_id AS project_id,
+                    pj.name AS project_name,
+                    sp.id AS sub_project_id,
+                    sp.name AS sub_project_name,
+                    pr.id AS prod_routing_id,
+                    pr.name AS prod_routing_name,
+                    prl.id AS prod_routing_link_id,
+                    prl.name AS prod_routing_link_name,
+                    pd.id AS prod_discipline_id, 
+                    pd.name AS prod_discipline_name,
+                    pse.id AS prod_sequences_id,
+                    COUNT(DISTINCT pru.date) AS count_pru_date
+                    FROM
+                        sub_projects sp
+                    JOIN
+                        projects pj ON pj.id = sp.project_id
+                    JOIN
+                        prod_orders po ON po.sub_project_id = sp.id
+                    JOIN
+                        prod_routings pr ON pr.id = po.prod_routing_id
+                    LEFT JOIN
+                        prod_sequences pse ON pse.prod_order_id = po.id
+                    JOIN
+                        prod_routing_links prl ON prl.id = pse.prod_routing_link_id
+                    JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
+                    LEFT JOIN prod_runs pru ON pru.prod_sequence_id = pse.id
+                WHERE 1 = 1
                         AND pse.deleted_by IS NULL
                         AND sp.project_id = {{project_id}}
                         AND sp.id = {{sub_project_id}}
@@ -104,13 +96,17 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
 
         $sql .= "\n GROUP BY
-                                pj.name,
-                                sp.id,
-                                sp.name,
-                                prl.id
+                            pj.name,
+                            sp.id,
+                            sp.name,
+                            prl.id,
+                            prod_sequences_id
                         ORDER BY pj.name, sp.name, pr.name, pd.name, prl.name )AS tb1
-                                GROUP BY
-                                    prod_routing_link_id";
+                        LEFT JOIN prod_sequences pse ON pse.id = tb1.prod_sequences_id
+                        LEFT JOIN terms terms ON pse.uom_id = terms.id
+                        GROUP BY
+                        prod_routing_link_id,uom_name";
+
         return $sql;
     }
 
@@ -221,8 +217,8 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
     public function getTableColumns($params, $dataSource)
     {
-        $data = $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
-        $data = reset($data);
+
+        $data = $dataSource instanceof Collection ? $dataSource['tableDataSource']->toArray() : $dataSource['tableDataSource']->first();
         $unit = isset($data['uom_name']) && ($x = $data['uom_name']) ? $x : '<small class="text-orange-300">Unknown Unit</small>';
         $optionPrint = $params['optionPrint'] ?? $this->optionPrint;
         // dump($optionPrint);
