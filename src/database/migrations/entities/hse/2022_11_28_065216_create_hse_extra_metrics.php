@@ -32,6 +32,8 @@ return new class extends Migration
             $table->float('total_third_party_insp_audit')->nullable();
             $table->float('total_drill')->nullable();
             $table->appendCommonFields();
+
+            $table->unique(['metric_month', 'workplace_id']);
         });
     }
 

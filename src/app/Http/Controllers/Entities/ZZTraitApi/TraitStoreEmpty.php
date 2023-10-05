@@ -128,6 +128,9 @@ trait TraitStoreEmpty
 									break;
 								case "picker_week":
 									break;
+								case "picker_month":
+									//Keep as is, 2023-08-01
+									break;
 								default:
 									dump("Unknown how to convert $controlType 777888");
 									break;

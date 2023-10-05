@@ -186,7 +186,9 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         $started_at = DateTimeConcern::convertForLoading("picker_datetime", $y->started_at);
         $finished_at = DateTimeConcern::convertForLoading("picker_datetime", $y->finished_at);
-        $finished_at = (in_array($y->status, ['finished'])) ? substr($finished_at, 0, 10) : "";
+        $finished_at = substr($finished_at, 0, 10);
+
+        $finished_at = (in_array($y->status, ['finished'])) ? $finished_at : "<span class='text-gray-300'>$finished_at</span>";
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
         $result = [
@@ -220,10 +222,11 @@ class ProdSequences extends ViewAllTypeMatrixParent
             case "start_date":
                 return ($date = $doc->{$dataIndex}) ? date(Constant::FORMAT_DATE_ASIAN, strtotime($date)) : "";
             case "end_date":
+                $text = ($date = $doc->{$dataIndex}) ? date(Constant::FORMAT_DATE_ASIAN, strtotime($date)) : "";
                 if (in_array($doc->status, ['finished'])) {
-                    return ($date = $doc->{$dataIndex}) ? date(Constant::FORMAT_DATE_ASIAN, strtotime($date)) : "";
+                    return $text;
                 }
-                return "";
+                return "<span class='text-gray-300'>$text</span>";
             case "man_power":
                 return round($doc->worker_number, 2);
             case "total_mins":
