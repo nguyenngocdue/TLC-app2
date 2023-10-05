@@ -11,21 +11,21 @@
         "package_tab": "report",
         "package": "compliance",
         "top_title": null,
-        "title": "GHG Summary Report"
+        "title": "CO2 Emission Summary Report"
     },
     "document-ghg_sheet_020": {
         "name": "document-ghg_sheet_020",
         "package_tab": "report",
         "package": "compliance",
         "top_title": null,
-        "title": "GHG CO2 Report"
+        "title": "CO2 Emission Report"
     },
     "document-ghg_sheet_030": {
         "name": "document-ghg_sheet_030",
         "package_tab": "report",
         "package": "project_management",
         "top_title": null,
-        "title": "Comparison Report"
+        "title": "CO2 Emission Comparison Report"
     },
     "document-prod_sequence_010": {
         "name": "document-prod_sequence_010",

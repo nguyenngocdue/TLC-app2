@@ -29,8 +29,8 @@ $info = $tableDataSource['info'];
 <br />
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
-            <x-print.header6 />
+        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8 relative">
+            <x-print.header6 :itemsShow="['logo']"/>
             <div class="py-5">
                 <x-renderer.heading level=1 xalign='center'>CO2 Report</x-renderer.heading>
                 <x-renderer.heading level=3 xalign='center'>for TLC Modular Construction Limited Liability Company</x-renderer.heading>
@@ -54,31 +54,43 @@ $info = $tableDataSource['info'];
                     </div>
                 </div>
             </div>
-            {{-- <x-renderer.heading level=3 xalign='left' class='text-blue-600 font-semibold'>Chart</x-renderer.heading> --}}
-        </div>
-        <x-renderer.page-break />
-        {{-- chart 1 --}}
-        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
-            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
-            <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
-                <div class="w-1/2">
-                    <x-renderer.report.pivot-chart key="carbon_footprint_1" :dataSource="$pivotChart1" showValue={{true}}></x-renderer.report.pivot-chart>
-                </div>
-                <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']}}</strong> tCO2e. Indirect emissions from purchased energy
-                    accounted for <strong>{{$info['indirect_emissions']}}</strong> tCO2e and other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']}}</strong> tCO2e.</x-renderer.heading>
+            <div class="items-center p-4   absolute bottom-0 ">
+                <x-print.header6 :itemsShow="['website']"/>
             </div>
         </div>
         <x-renderer.page-break />
-        {{-- chart 2 --}}
-        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
-            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
-            <div class=" grid-rows-1 pt-20 flex justify-center flex-col items-center">
-                <div class="w-full px-6">
-                {{-- @dump($pivotChart2) --}}
-                    <x-renderer.report.pivot-chart key="carbon_footprint_2" :dataSource="$pivotChart2"></x-renderer.report.pivot-chart>
+        {{-- chart 1 --}}
+        <div class="relative">
+            <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
+                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
+                <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
+                    <div class="w-1/2">
+                        <x-renderer.report.pivot-chart key="carbon_footprint_1" :dataSource="$pivotChart1" showValue={{true}}></x-renderer.report.pivot-chart>
+                    </div>
+                    <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']}}</strong> tCO2e. Indirect emissions from purchased energy
+                        accounted for <strong>{{$info['indirect_emissions']}}</strong> tCO2e and other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']}}</strong> tCO2e.</x-renderer.heading>
                 </div>
-                <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']}}</strong> tCO2e. Indirect emissions from purchased energy
-                    accounted for <strong>{{$info['indirect_emissions']}}</strong> tCO2e and other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']}}</strong> tCO2e.</x-renderer.heading>
+            </div>
+            <div class="items-center p-4 absolute bottom-0 ">
+                    <x-print.header6 :itemsShow="['website']"/>
+            </div>
+        </div>
+        <div class="relative">
+            <x-renderer.page-break />
+            {{-- chart 2 --}}
+            <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
+                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
+                <div class=" grid-rows-1 pt-20 flex justify-center flex-col items-center">
+                    <div class="w-full px-6">
+                    {{-- @dump($pivotChart2) --}}
+                        <x-renderer.report.pivot-chart key="carbon_footprint_2" :dataSource="$pivotChart2"></x-renderer.report.pivot-chart>
+                    </div>
+                    <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']}}</strong> tCO2e. Indirect emissions from purchased energy
+                        accounted for <strong>{{$info['indirect_emissions']}}</strong> tCO2e and other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']}}</strong> tCO2e.</x-renderer.heading>
+                </div>
+            </div>
+            <div class="items-center p-4 absolute bottom-0 ">
+                <x-print.header6 :itemsShow="['website']"/>
             </div>
         </div>
     </div>

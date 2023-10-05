@@ -28,9 +28,9 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     use TraitUpdateBasicInfoDataSource;
 
     protected $mode = '050';
-    protected $projectId = 5;
-    protected $subProjectId = 21;
-    protected $prodRoutingId = 2;
+    protected $projectId = 8;
+    protected $subProjectId = 107;
+    protected $prodRoutingId = 49;
     protected $groupByLength = 1;
     protected $groupBy = 'prod_discipline_name';
     protected $viewName = 'document-prod-sequence-050';
@@ -218,10 +218,12 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     public function getTableColumns($params, $dataSource)
     {
 
-        $data = $dataSource instanceof Collection ? $dataSource['tableDataSource']->toArray() : $dataSource['tableDataSource']->first();
-        $unit = isset($data['uom_name']) && ($x = $data['uom_name']) ? $x : '<small class="text-orange-300">Unknown Unit</small>';
-        $optionPrint = $params['optionPrint'] ?? $this->optionPrint;
-        // dump($optionPrint);
+        $unit = '<small class="text-orange-300">Unknown Unit</small>';
+        if(isset($dataSource['tableDataSource'])){
+            $data = $dataSource instanceof Collection ? $dataSource['tableDataSource']->toArray() : $dataSource['tableDataSource']->first();
+            $unit = isset($data['uom_name']) && ($x = $data['uom_name']) ? $x : $unit;
+        } 
+
         return
             [
                 [

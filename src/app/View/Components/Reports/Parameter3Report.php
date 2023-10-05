@@ -20,6 +20,7 @@ class Parameter3Report extends Component
         private $typeReport = '',
         private $modeOption = '',
         private $hasListenTo = false,
+        private $optionPrint = '',
     ) {
         //
     }
@@ -36,6 +37,7 @@ class Parameter3Report extends Component
             'columns' => $this->columns,
             'modeOption' => $this->modeOption,
             'hasListenTo' => $this->hasListenTo,
+            'optionPrint' => $this->optionPrint
         ]);
     }
 }

@@ -13,6 +13,7 @@ class Header6 extends Component
      */
     public function __construct(
         private $page = null,
+        private $itemsShow = [],
     ) {
         //
     }
@@ -28,6 +29,7 @@ class Header6 extends Component
         return view('components.print.header6', [
             'dataSource' => config("company.letter_head"),
             'page' => $this->page,
+            'itemsShow' => $this->itemsShow,
         ]);
     }
 }

@@ -20,7 +20,7 @@ $tableDataSource = isset($tableDataSource['tableDataSource']) ? collect($tableDa
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout', ['optionPrint' => $optionPrint])
+    @include('components.reports.show-layout2')
 </div>
 
 
