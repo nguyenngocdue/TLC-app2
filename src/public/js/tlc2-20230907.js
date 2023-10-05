@@ -13,7 +13,11 @@ const callApiStoreEmpty = (url, data, meta, callback = null) => {
                 callback(response)
             } else {
                 toastr.success(response.message)
-                window.location.href = response.hits[0]['redirect_edit_href']
+                const href = response?.hits?.[0]?.['redirect_edit_href']
+                if (href)
+                    window.location.href = href
+                else
+                    toastr.error("No redirect_edit_href found in hits[0]")
             }
         },
         error: function (jqXHR) {
