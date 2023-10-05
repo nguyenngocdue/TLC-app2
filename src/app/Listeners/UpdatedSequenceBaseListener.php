@@ -46,8 +46,11 @@ class UpdatedSequenceBaseListener
                 'total_hours' => $totalHours,
                 'total_man_hours' => $totalManHours,
             ];
-            if ($isFinished) $dataUpdated['status'] = 'finished';
-            else $dataUpdated['status'] = 'in_progress';
+            if ($isFinished) {
+                $dataUpdated['status'] = 'finished';
+            } else {
+                $dataUpdated['status'] = 'in_progress';
+            }
             $parentInstance->update($dataUpdated);
             Toastr::success("The Event Updated Time Successfully!", 'Event Update Successfully');
         } catch (\Throwable $th) {

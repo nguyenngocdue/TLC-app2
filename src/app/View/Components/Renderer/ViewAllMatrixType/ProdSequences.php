@@ -178,7 +178,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
             ['dataIndex' => 'room_type',  'align' => 'center', 'width' => 50, 'fixed' => 'left',],
             ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
             ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
-            ['dataIndex' => 'total_days', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
+
+            ['dataIndex' => 'total_calendar_days', 'align' => 'right', 'width' => 50, 'fixed' => 'left', "title" => "Total", 'colspan' => 3],
+            ['dataIndex' => 'net_working_days', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
+            ['dataIndex' => 'total_man_hours', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
         ];
     }
 
@@ -205,7 +208,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
             'started_at' => substr($started_at, 0, 10),
             'finished_at' => $finished_at,
             // 'finished_at' => ($y->status === 'finished') ? substr($finished_at, 0, 10) : "",
-            'total_days' => $y->finished_at ? Carbon::parse($y->finished_at)->diffInDays($y->started_at) : "",
+            'total_calendar_days' => $y->finished_at ? Carbon::parse($y->finished_at)->diffInDays($y->started_at) : "",
+
+            'net_working_days' => round($y->total_hours / 8, 2),
+            'total_man_hours' => $y->total_man_hours,
         ];
 
         return $result;
@@ -289,7 +295,9 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $result['room_type'] = "Product Type";
         $result['started_at'] = "Start";
         $result['finished_at'] = "Finish";
-        $result['total_days'] = "Total Days";
+        $result['total_calendar_days'] = "Total Calendar Days";
+        $result['net_working_days'] = "Net Working Days";
+        $result['total_man_hours'] = "Total ManHours";
 
         foreach ($result as &$row) {
             $row = "<div class='p-1 text-center'>" . $row . "</div>";
