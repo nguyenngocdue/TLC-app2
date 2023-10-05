@@ -268,12 +268,9 @@ class UpdateUserSettings extends Controller
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport") {
             return $this->resetParamsReport($request, $settings);
         }
-        
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "updateOptionPrintReport") {
             return $this->updateOptionPrintReport($request, $settings);
         }
-
-        
         $modeName = $inputValue['mode_option'];
         // Check case: select mode alternatively 
         $index = array_search($modeName, array_values($inputValue));
