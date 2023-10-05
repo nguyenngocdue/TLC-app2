@@ -88,7 +88,7 @@ class CommentGroup2a extends Component
             $user = $currentUser;
             $item = $this->getAnEmptyLine($counter, $index);
             $item['id']['value'] = null;
-            $item['position_rendered']['value'] = $user->getPosition->name;
+            $item['position_rendered']['value'] = $user->getPosition->name ?? '';
             $item['owner_id']['value'] = $user->id;
             $item['owner_id']['display_name'] = $user->name;
             $item['owner_id']['avatar'] =  $user->getAvatarThumbnailUrl();

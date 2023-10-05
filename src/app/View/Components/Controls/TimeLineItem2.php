@@ -42,7 +42,7 @@ class TimeLineItem2 extends Component
             $userId = $dataSource->user_id;
             $user = User::findFromCache($userId);
             $lastName = $user->last_name;
-            $positionRendered = $user->getPosition->name;
+            $positionRendered = $user->getPosition->name ?? '';
             $nameRender = $lastName . '(' . $positionRendered . ')';
         }
         $time = $dataSource->created_at;

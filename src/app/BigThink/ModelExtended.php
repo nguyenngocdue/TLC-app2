@@ -113,7 +113,7 @@ abstract class ModelExtended extends Model
         return $value;
     }
     static $singletonDbUserCollection = null;
-    public static function getCollection()
+    public static function getCollectionCache()
     {
         if (!isset(static::$singletonDbUserCollection[static::class])) {
             $all = static::all();
@@ -122,11 +122,13 @@ abstract class ModelExtended extends Model
         }
         return static::$singletonDbUserCollection;
     }
-
+    public static function getCollection(){
+        return static::getCollectionCache()[static::class] ?? collect();
+    }
     public static function findFromCache($id)
     {
         // if(!isset(static::getCollection()[$id]))
-        return static::getCollection()[static::class][$id] ?? null;
+        return static::getCollectionCache()[static::class][$id] ?? null;
     }
     private static $singletonMorphMany = [];
 
