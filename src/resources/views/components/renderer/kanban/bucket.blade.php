@@ -17,7 +17,7 @@
             <button class="fa-duotone fa-ellipsis {{App\Utils\ClassList::BUTTON_KANBAN_ELLIPSIS}}" @click="toggleModal('{{$modalId}}', {id: {{$bucket->id}}})" @keydown.escape="closeModal('{{$modalId}}')" ></button>
         </div>
         <div>
-            <button class="{{$classButton}} px-2 whitespace-nowrap" type="button" onclick="addANewKanbanObj('bucket_', {{$bucket->id}}, route_page, '')">+ Page</button>
+            <button class="{{$classButton}} px-2 whitespace-nowrap" type="button" onclick="addANewKanbanObj('bucket_', {{$bucket->id}}, route_page, '{{$groupWidth}}')">+ Page</button>
         </div>
     </div>
     <input id="txt_bucket_{{$bucket->id}}" value="{{$bucket->name}}" class="{{$classBucket}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$bucket->id}},'lbl_bucket','txt_bucket','caption_bucket', route_bucket)">
