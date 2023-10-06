@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Log;
 
 trait TraitKanban
 {
+	use TraitKanbanUpdate;
+
 	function getLastWord($strings)
 	{
 		$characters_after_last_underscore = [];
@@ -191,21 +193,6 @@ trait TraitKanban
 			'props' => $props,
 			'item' => $item,
 		], "Rendered");
-	}
-
-	function updateItemRenderProps(Request $request)
-	{
-		$input = $request->input();
-		['id' => $id, 'formData' => $formData] = $input;
-		parse_str($formData, $newItem);
-
-		$item = $this->modelPath::find($id);
-
-		// Log::info("Input:");
-		// Log::info($newItem);
-
-		$item->update($newItem);
-		return ResponseObject::responseSuccess([], [], "Updated");
 	}
 
 	function deleteItemRenderProps(Request $request)

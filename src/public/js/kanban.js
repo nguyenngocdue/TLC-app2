@@ -216,20 +216,29 @@ const getItem = () => {
     const formDataArray = $("#frmKanbanItem").serializeArray()
     // console.log(formDataArray)
     const item = {}
-    for (let i = 0; i < formDataArray.length; i++) item[formDataArray[i].name] = formDataArray[i].value
+    for (let i = 0; i < formDataArray.length; i++) {
+        const fieldName = formDataArray[i].name
+        const isMultiple = fieldName == 'getMonitors1()[]'
+        if (isMultiple) {
+            if (!item[fieldName]) item[fieldName] = []
+            item[fieldName].push(formDataArray[i].value)
+        } else {
+            item[fieldName] = formDataArray[i].value
+        }
+    }
     // console.log(item)
     return item;
 }
 
 const kanbanUpdateItem = (txtTypeId, url, caption_type, txt_type) => {
     const id = $("#" + txtTypeId).val()
-    const formData = $("#frmKanbanItem").serialize()
+    // const formData = $("#frmKanbanItem").serialize()
     // console.log("Updating up #", id, url, formData, formDataArray)
     const item = getItem() //<< This can't go inside $.ajax
     $.ajax({
         method: "POST",
         url,
-        data: { action: "updateItemRenderProps", id, formData },
+        data: { action: "updateItemRenderProps", id, ...item },
         success: function (response) {
             // console.log(response)
             const { name, description } = item

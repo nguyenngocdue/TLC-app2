@@ -15,9 +15,12 @@
             </h2>
             <input id="txt_toc_{{$page->id}}" value="{{$page->name}}" class="{{$classPage}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$page->id}},'lbl_toc','txt_toc','caption_toc', route_page); renameCurrentPage({{$page->id}})">
         </div>
-        <span class="cursor-pointer" onclick="kanbanLoadPage({{$page->id}}, route_page)">
-            <span id="iconOpen_{{$page->id}}" class="{{($page->id == ($pageId??false))?'':'hidden'}}"><i class="fa-duotone fa-folder-open"></i></span>
-            <span id="iconClose_{{$page->id}}" class="{{($page->id == ($pageId??false))?'hidden':''}}"><i class="fa-duotone fa-folder"></i></span>
-        </span>
+        <div>
+            {{-- <span class="bg-red-600 text-white rounded px-1 font-bold">3</span> --}}
+            <span class="cursor-pointer" onclick="kanbanLoadPage({{$page->id}}, route_page)">
+                <span id="iconOpen_{{$page->id}}" class="{{($page->id == ($pageId??false))?'':'hidden'}} text-[14px]"><i class="fa-duotone fa-folder-open"></i></span>
+                <span id="iconClose_{{$page->id}}" class="{{($page->id == ($pageId??false))?'hidden':''}} text-[14px]"><i class="fa-duotone fa-folder"></i></span>
+            </span>
+        </div>
     </div>
 </div> 
