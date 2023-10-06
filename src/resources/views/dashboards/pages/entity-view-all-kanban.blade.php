@@ -23,9 +23,9 @@
             <x-renderer.kanban.buckets :page="$page" />
         </div>
         <div id="divKanbanPage" class="col-span-12 md:col-span-8 lg:col-span-9 2xl:col-span-10">
-            <x-renderer.kanban.page :page="$page"/>
+            <x-renderer.kanban.page :page="$page" groupWidth="{{$groupWidth}}"/>
         </div>
     </div>
-    <x-renderer.kanban.modals />
+    <x-renderer.kanban.modals groupWidth="{{$groupWidth}}"/>
 </div>
 @endsection

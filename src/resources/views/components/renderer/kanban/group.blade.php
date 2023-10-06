@@ -18,7 +18,7 @@
     <input id="txt_group_{{$group->id}}" value="{{$group->name}}" class="{{$classGroup}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$group->id}},'lbl_group','txt_group','caption_group', route_group)">
     <div id="group_{{$group->id}}" data-id="group_{{$group->id}}" class="grid gap-1 {{$groupWidth}}">
         @foreach($group->getTasks as $task)
-            <x-renderer.kanban.task :task="$task" hidden="{{$hidden}}" groupWidth="{{$groupWidth}}"/>
+            <x-renderer.kanban.task :task="$task" hidden="{{$hidden??'hidden'}}" groupWidth="{{$groupWidth}}"/>
         @endforeach
     </div>
     <script>kanbanInit1("group_", [ {{$group->id}} ], route_task, "{{$categoryGroup}}")</script>

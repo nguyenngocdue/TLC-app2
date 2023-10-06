@@ -22,7 +22,7 @@
         <div id="cluster_{{$cluster->id}}" data-id="cluster_{{$cluster->id}}" class="flex bg-gray-50 m-2 border rounded p-2 min-w-[330px] ma1x-w-fit">
             @php $groups = $cluster->getGroups; @endphp
             @foreach($groups as $group)
-                <x-renderer.kanban.group :group="$group" hidden="{{$hidden}}" groupWidth="{{$groupWidth}}"/>
+                <x-renderer.kanban.group :group="$group" hidden="{{$hidden??'hidden'}}" groupWidth="{{$groupWidth}}"/>
             @endforeach
         </div>
         <div class="m-2 bg-gray-200 p-2 rounded h-10">

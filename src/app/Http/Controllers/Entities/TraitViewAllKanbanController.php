@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 
 trait TraitViewAllKanbanController
 {
+    private $groupWidth = "w-72"; //10, 20, 32, 40, 52, 60, 72, 80, 96,
+
     private function indexViewAllKanban($request)
     {
         $cu = CurrentUser::get();
@@ -26,6 +28,7 @@ trait TraitViewAllKanbanController
             // 'typeModel' => $this->typeModel,
             // 'trashed' => false,
             'frameworkTook' => $this->frameworkTook,
+            'groupWidth' => $this->groupWidth,
         ]);
     }
 }

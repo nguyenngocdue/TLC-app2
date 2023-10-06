@@ -230,7 +230,7 @@ const getItem = () => {
     return item;
 }
 
-const kanbanUpdateItem = (txtTypeId, url, caption_type, txt_type) => {
+const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
     const id = $("#" + txtTypeId).val()
     // const formData = $("#frmKanbanItem").serialize()
     // console.log("Updating up #", id, url, formData, formDataArray)
@@ -238,16 +238,17 @@ const kanbanUpdateItem = (txtTypeId, url, caption_type, txt_type) => {
     $.ajax({
         method: "POST",
         url,
-        data: { action: "updateItemRenderProps", id, ...item },
+        data: { action: "updateItemRenderProps", id, ...item, groupWidth },
         success: function (response) {
-            // console.log(response)
-            const { name, description } = item
-            const caption = "#" + caption_type + "_" + id
-            $(caption).html(name)
-            $(caption).attr("title", description + "\n(#" + id + ")")
+            const { renderer } = response.hits
+            const myId = prefix + id
+            const myDiv = $("#" + myId)
+            const myParent = myDiv.parent()
+            myDiv.fadeOut().remove()
 
-            const txtName = "#" + txt_type + "_" + id
-            $(txtName).val(name)
+            myParent.append(renderer)
+            const myNewDiv = $("#" + myId)
+            myNewDiv.hide().fadeIn()
         },
         error: onKanbanAjaxError,
     })

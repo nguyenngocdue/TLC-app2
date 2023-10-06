@@ -8,10 +8,10 @@ use Illuminate\View\Component;
 class Page extends Component
 {
     private $debug = false;
-    private $groupWidth = "w-72"; //10, 20, 32, 40, 52, 60, 72, 80, 96,
 
     function __construct(
         private $page = null,
+        private $groupWidth = null,
     ) {
     }
 
