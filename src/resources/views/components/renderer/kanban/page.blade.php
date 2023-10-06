@@ -1,13 +1,15 @@
 @php
     $categoryPage = 'kanban_page_id';
     $classButton = "text-xs border border-gray-300 rounded hover:bg-blue-200 shadow";
+    $isOwner = App\Utils\Support\CurrentUser::id() == ($page->owner_id ?? null);
+    $icon = $isOwner ? "fa-crown" : "fa-user";
 @endphp
 
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.17.0/Sortable.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <script src="{{ asset('js/kanban.js') }}"></script> --}}
 
-<x-renderer.card titleId="divPageCard" title="{{$page->name}}">
+<x-renderer.card titleId="divPageCard" title="{{$page->name}}" icon="fa-duotone text-yellow-600 {{$icon}}">
     <div class="container1 mx-auto">
         <div class="overflow-x-auto whitespace-no-wrap">
             <div id="page_{{$pageId}}">

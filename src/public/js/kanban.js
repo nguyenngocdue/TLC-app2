@@ -176,7 +176,7 @@ const kanbanLoadPage = (pageId, url) => {
     $.ajax({
         method: 'POST',
         url,
-        data: { action: "loadPage", pageId },
+        data: { action: "loadKanbanPage", pageId },
         success: function (response) {
             // toastr.success(response.message)
             const { renderer } = response.hits

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
 use App\Models\Kanban_task_page;
+use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
-use App\View\Components\Renderer\Kanban\Pages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
@@ -153,13 +153,25 @@ trait TraitKanban
 		return ResponseObject::responseSuccess(['renderer' => $renderer], ['id' => $insertedId, 'item' => $insertedObj], "Inserted");
 	}
 
-	function loadPage(Request $request)
+	private function saveUserSettings($pageId)
+	{
+		$user = CurrentUser::get();
+		// Log::info($user->settings);
+		$settings = $user->settings;
+		$settings[$this->type][Constant::VIEW_ALL]['current_page'] = $pageId;
+		$user->settings = $settings;
+		$user->save();
+	}
+
+	function loadKanbanPage(Request $request)
 	{
 		$id = $request->input('pageId');
 		$page = Kanban_task_page::find($id);
 		$renderer = Blade::render('<x-renderer.kanban.page :page="$page"/>', [
 			'page' => $page,
 		]);
+		$this->saveUserSettings($id);
+
 		return ResponseObject::responseSuccess(['renderer' => $renderer], [], "Inserted");
 	}
 
@@ -214,7 +226,7 @@ trait TraitKanban
 				case "changeParent":
 				case "changeName":
 				case "addNew":
-				case "loadPage":
+				case "loadKanbanPage":
 				case "editItemRenderProps":
 				case "updateItemRenderProps":
 				case "deleteItemRenderProps":
