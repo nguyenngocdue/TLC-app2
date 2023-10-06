@@ -200,6 +200,7 @@ abstract class Report_Parent2Controller extends Controller
     {
         
         $input = $request->input();
+        // dd($input);
         // Check Validations
         if ($input) {
             $validation = $this->checkValidationAdvancedFilter($request);
@@ -253,7 +254,7 @@ abstract class Report_Parent2Controller extends Controller
 
         $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
         $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
-        $optionPrint = CurrentUser::getSettings()[$entity]['view_all']['option_print_layout'] ?? $this->optionPrint;
+        $optionPrint = $params['optionPrintLayout'] ?? $this->optionPrint;
         $tableTrueWidth = $this->overTableTrueWidth && $optionPrint === 'landscape' ? 0 : $this->tableTrueWidth;
         return view('reports.' . $viewName, [
             'entity' => $entity,

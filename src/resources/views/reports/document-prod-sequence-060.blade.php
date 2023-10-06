@@ -19,7 +19,7 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout', ['optionPrint' => $optionPrint])
+    @include('components.reports.show-layout2')
 </div>
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">

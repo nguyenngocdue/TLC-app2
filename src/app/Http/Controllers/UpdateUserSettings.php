@@ -245,13 +245,31 @@ class UpdateUserSettings extends Controller
         return $settings;
     }
 
+    private function updateOptionPrintReport($request, $settings)
+    {
+        $inputValue = $request->all();
+        $entity = $request->input("_entity");
+        $typeReport = strtolower($request->input("type_report"));
+        $settingUser = CurrentUser::getSettings();
+        $modeOption = $inputValue['mode_option'];
+        if (isset($settingUser[$entity][$typeReport][$modeOption])) {
+            $paramsReset = $settingUser[$entity][$typeReport][$modeOption];
+            $paramsReset['optionPrintLayout'] = $inputValue['optionPrintLayout'];
+            $settings[$entity][$typeReport][$modeOption] = $paramsReset;
+        }
+        // dd($settings, $inputValue);
+        return $settings;
+    }
+
 
     private function updateReport($request, $settings)
     {
         $inputValue = $request->all();
-        // dd($inputValue);
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport") {
             return $this->resetParamsReport($request, $settings);
+        }
+        if (isset($inputValue['form_type']) && $inputValue['form_type'] === "updateOptionPrintReport") {
+            return $this->updateOptionPrintReport($request, $settings);
         }
         $modeName = $inputValue['mode_option'];
         // Check case: select mode alternatively 
@@ -280,6 +298,7 @@ class UpdateUserSettings extends Controller
     public function __invoke(Request $request, $redirectTo = null)
     {
         $action = $request->input('action');
+        // dd($action);
         $user = User::find(Auth::id());
         $settings = $user->settings;
         switch ($action) {

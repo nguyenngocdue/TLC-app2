@@ -46,7 +46,7 @@ class ItemRendererModal extends Component
         $original = $this->modelPath::find($this->id);
         $values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $this->props);
 
-        dump($values);
+        // dump($values);
         // Log::info($tableBluePrint);
         // Log::info($tableToLoadDataSource);
         // Log::info($listenerDataSource);
@@ -67,6 +67,7 @@ class ItemRendererModal extends Component
 
             'props' => $this->props,
             'item' => $this->item,
+            'values' => $values,
         ];
         return view('components.renderer.kanban.item-renderer-modal', $params);
     }
