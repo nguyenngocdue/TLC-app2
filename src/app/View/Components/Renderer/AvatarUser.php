@@ -16,6 +16,7 @@ class AvatarUser extends Component
         private $verticalLayout = false,
         private $flipped = false,
         private $uid = null,
+        private $icon = false,
     ) {
         //
     }
@@ -63,7 +64,11 @@ class AvatarUser extends Component
         $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") . " (#$user->id)" : "";
         if ($shortForm) $tooltip  = $user->name . "\n" . ($user->getPosition->name ?? "") . "\n" . $tooltip;
         $class = ($shortForm && $index >= 2) ? "-mt-4" : "";
-        return "<x-renderer.avatar-item class='$class' flipped='$this->flipped' tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
+        if ($this->icon) {
+            return "<div  style='width:{$this->icon}px; height:{$this->icon}px;' title='$title - $description $tooltip' ><img src='$avatar' class='rounded-full'/></div>";
+        } else {
+            return "<x-renderer.avatar-item class='$class' flipped='$this->flipped' tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
+        }
     }
 
     /**

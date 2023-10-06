@@ -47,8 +47,9 @@
                     readOnly="{{$prop['read_only']}}"
                     label="{{$prop['label']}}"
 
-                    placeholder="{{$prop['default-values']['placeholder']}}"
-                    controlExtra="{{$prop['default-values']['control_extra']}}"
+                    placeholder="{{$prop['default-values']['placeholder'] ?? ''}}"
+                    controlExtra="{{$prop['default-values']['control_extra'] ?? ''}}"
+                    defaultValue="{{$prop['default-values']['default_value'] ?? ''}}"
                     />
             </div>
         @endforeach
