@@ -3,6 +3,7 @@
     $modalId = "modal-page";
     $title = "$page->description\n(#{$page->id})";
     $isOwner = App\Utils\Support\CurrentUser::id() == $page->owner_id;
+    $pageId = App\Utils\Support\CurrentUser::get()->settings['kanban_task_page'][App\Utils\Constant::VIEW_ALL]['current_page'] ?? null;
 @endphp
 
 {{-- @dump($pageId, $page->id) --}}

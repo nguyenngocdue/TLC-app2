@@ -23,7 +23,7 @@
     <input id="txt_bucket_{{$bucket->id}}" value="{{$bucket->name}}" class="{{$classBucket}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$bucket->id}},'lbl_bucket','txt_bucket','caption_bucket', route_bucket)">
     <div id="bucket_{{$bucket->id}}" data-id="bucket_{{$bucket->id}}" class="grid gap-1 ">
         @foreach($bucket->getPages as $page)
-            <x-renderer.kanban.toc :page="$page" pageId="{{$pageId}}" hidden="{{$hidden??'hidden'}}" />
+            <x-renderer.kanban.toc :page="$page" hidden="{{$hidden??'hidden'}}" />
         @endforeach
     </div>
     <script>kanbanInit1("bucket_", [ {{$bucket->id}} ], route_page, "{{$categoryBucket}}")</script>

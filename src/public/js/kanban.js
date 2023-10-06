@@ -243,12 +243,7 @@ const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
             const { renderer } = response.hits
             const myId = prefix + id
             const myDiv = $("#" + myId)
-            const myParent = myDiv.parent()
-            myDiv.fadeOut().remove()
-
-            myParent.append(renderer)
-            const myNewDiv = $("#" + myId)
-            myNewDiv.hide().fadeIn()
+            myDiv.replaceWith(renderer)
         },
         error: onKanbanAjaxError,
     })
