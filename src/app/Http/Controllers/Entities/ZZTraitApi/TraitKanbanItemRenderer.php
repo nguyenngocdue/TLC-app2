@@ -30,13 +30,15 @@ trait TraitKanbanItemRenderer
 				]);
 				break;
 			case 'kanban_task_pages':
-				$renderer = Blade::render('<x-renderer.kanban.toc :page="$page" />', [
+				$renderer = Blade::render('<x-renderer.kanban.toc :page="$page" groupWidth="{{$groupWidth}}"/>', [
 					'page' => $insertedObj,
+					'groupWidth' => $groupWidth,
 				]);
 				break;
 			case "kanban_task_buckets":
-				$renderer = Blade::render('<x-renderer.kanban.bucket :bucket="$bucket" />', [
+				$renderer = Blade::render('<x-renderer.kanban.bucket :bucket="$bucket" groupWidth="{{$groupWidth}}"/>', [
 					'bucket' => $insertedObj,
+					'groupWidth' => $groupWidth,
 				]);
 				break;
 			default:

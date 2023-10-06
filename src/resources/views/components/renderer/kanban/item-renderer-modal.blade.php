@@ -39,7 +39,7 @@
                 <x-renderer.item-render-control
                     action="edit"
                     type="{{$table}}"
-                    value="{{$value}}"
+                    value="{!! $value !!}"
 
                     control="{{$prop['control']}}"
                     columnType="{{$prop['column_type']}}"
