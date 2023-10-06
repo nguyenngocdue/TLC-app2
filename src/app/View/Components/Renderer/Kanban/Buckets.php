@@ -11,6 +11,7 @@ class Buckets extends Component
 {
     function __construct(
         private $page = null,
+        private $groupWidth = null,
     ) {
     }
 
@@ -67,6 +68,7 @@ class Buckets extends Component
             'routePage' => $route_page,
             'routeBucket' => $route_bucket,
             'pageId' => $this->page ? $this->page->id : null,
+            'groupWidth' => $this->groupWidth,
         ]);
     }
 }

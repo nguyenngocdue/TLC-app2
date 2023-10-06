@@ -20,7 +20,7 @@
     
     <div class="grid grid-cols-12 gap-2">
         <div id="divKanbanSidebar" class="col-span-12 md:col-span-4 lg:col-span-3 2xl:col-span-2">
-            <x-renderer.kanban.buckets :page="$page" />
+            <x-renderer.kanban.buckets :page="$page" groupWidth="{{$groupWidth}}"/>
         </div>
         <div id="divKanbanPage" class="col-span-12 md:col-span-8 lg:col-span-9 2xl:col-span-10">
             <x-renderer.kanban.page :page="$page" groupWidth="{{$groupWidth}}"/>

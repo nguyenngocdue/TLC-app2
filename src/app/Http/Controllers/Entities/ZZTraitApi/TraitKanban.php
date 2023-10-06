@@ -133,9 +133,12 @@ trait TraitKanban
 	function loadKanbanPage(Request $request)
 	{
 		$id = $request->input('pageId');
+		$groupWidth = $request->input('groupWidth');
+
 		$page = Kanban_task_page::find($id);
-		$renderer = Blade::render('<x-renderer.kanban.page :page="$page"/>', [
+		$renderer = Blade::render('<x-renderer.kanban.page :page="$page" groupWidth="{{$groupWidth}}"/>', [
 			'page' => $page,
+			'groupWidth' => $groupWidth,
 		]);
 		$this->saveUserSettings($id);
 

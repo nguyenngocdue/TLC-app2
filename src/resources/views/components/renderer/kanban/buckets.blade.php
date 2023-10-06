@@ -8,7 +8,7 @@
     <x-renderer.card title="All Pages"> 
         <div id="toc_group_1" data-id="toc_group" class="grid gap-1">
             @foreach($buckets as $bucket)
-                <x-renderer.kanban.bucket :bucket="$bucket" />
+                <x-renderer.kanban.bucket :bucket="$bucket" groupWidth="{{$groupWidth}}" />
             @endforeach
         </div>
         <script>kanbanInit1("toc_group_", [1], route_bucket, "categoryGroup")</script>

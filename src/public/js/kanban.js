@@ -142,7 +142,7 @@ const kanbanInit1 = (prefix, columns, route, category) => {
     }
 }
 
-const kanbanLoadPage = (pageId, url) => {
+const kanbanLoadPage = (pageId, url, groupWidth) => {
     const beginWith = "bucket_"
     $("#txtCurrentPage").val(pageId);
     $("#divKanbanPage").slideUp("slow");
@@ -176,7 +176,7 @@ const kanbanLoadPage = (pageId, url) => {
     $.ajax({
         method: 'POST',
         url,
-        data: { action: "loadKanbanPage", pageId },
+        data: { action: "loadKanbanPage", pageId, groupWidth },
         success: function (response) {
             // toastr.success(response.message)
             const { renderer } = response.hits
