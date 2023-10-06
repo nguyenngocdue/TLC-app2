@@ -19,8 +19,13 @@ class StringReport
     public static function arrayToJsonWithSingleQuotes($array)
     {
         return '[' . implode(', ', array_map(function ($item) {
-            if(is_numeric($item)) return "$item";
-            return "'$item'"; 
+            if (is_object($item)){
+                if(is_numeric($item->value)) return "$item->value";
+                return "'$item->value'";
+            } else {
+                if(is_numeric($item)) return "$item";
+                return "'$item'"; 
+            }
         }, $array)) . ']';
     }
 }

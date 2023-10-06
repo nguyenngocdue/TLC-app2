@@ -30,13 +30,15 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     protected $mode = '050';
     protected $projectId = 8;
     protected $subProjectId = 107;
-    protected $prodRoutingId = 49;
+    protected $prodRoutingId = 62;
     protected $groupByLength = 1;
+    protected $prodDisciplineId = 1;
+
     protected $groupBy = 'prod_discipline_name';
     protected $viewName = 'document-prod-sequence-050';
     protected $type = 'prod_sequence';
     protected $tableTrueWidth = true;
-    protected $overTableTrueWidth = true;
+    protected $overTableTrueWidth = false;
     protected $pageLimit = 100000;
     protected $optionPrint = "landscape";
 
@@ -52,13 +54,14 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         prod_routing_link_name,
         tb1.prod_discipline_id,
         prod_discipline_name,
-        SUM(pse.total_hours) AS total_hours,
-           AVG(pse.worker_number) AS man_power,
-           AVG(pse.total_uom) AS total_uom,
-           SUM(pse.total_man_hours) AS total_man_hours,
+        tb1.prod_order_id,
+        prod_order_name,
+            FORMAT((pse.worker_number),2) AS man_power,
+			(pse.total_hours) AS total_hours,
+            FORMAT(IF((pse.total_uom)/count_pru_date, (pse.total_uom)/count_pru_date, NULL),2) AS total_uom,
         terms.name AS uom_name,
-        FORMAT((SUM(pse.total_hours))*60 / SUM(count_pru_date),2) AS min_on_day,
-        FORMAT((SUM(pse.total_hours))*60 / AVG(pse.total_uom),2) AS min_on_set
+        FORMAT(IF((pse.total_hours)*60 / count_pru_date, (pse.total_hours)*60 / count_pru_date, NULL),2) AS min_on_day,
+        FORMAT(IF((pse.total_hours)*60 / ((pse.total_uom)/count_pru_date), (pse.total_hours)*60 / ((pse.total_uom)/count_pru_date), NULL),2) AS min_on_set
         FROM (SELECT
                     sp.project_id AS project_id,
                     pj.name AS project_name,
@@ -71,6 +74,8 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     pd.id AS prod_discipline_id, 
                     pd.name AS prod_discipline_name,
                     pse.id AS prod_sequences_id,
+                    po.id AS prod_order_id,
+              		po.name AS prod_order_name,
                     COUNT(DISTINCT pru.date) AS count_pru_date
                     FROM
                         sub_projects sp
@@ -89,11 +94,11 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                 WHERE 1 = 1
                         AND pse.deleted_by IS NULL
                         AND sp.project_id = {{project_id}}
-                        AND sp.id = {{sub_project_id}}
-                        AND pse.status IN ('in_progress', 'finished')";
-        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
-        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pse.prod_routing_link_id = {{prod_routing_link_id}}";
+                        AND sp.id = {{sub_project_id}}";
+                        #AND pse.status IN ('in_progress', 'finished')";
+        if (isset($params['prod_routing_id'])                        ) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
+        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pse.prod_routing_link_id = {{prod_routing_link_id}}";
 
         $sql .= "\n GROUP BY
                             pj.name,
@@ -105,7 +110,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                         LEFT JOIN prod_sequences pse ON pse.id = tb1.prod_sequences_id
                         LEFT JOIN terms terms ON pse.uom_id = terms.id
                         GROUP BY
-                        prod_routing_link_id,uom_name";
+                        prod_routing_link_id,uom_name, tb1.prod_order_id";
 
         return $sql;
     }
@@ -115,71 +120,83 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         $params['project_id'] = $this->projectId;
         $params['sub_project_id'] = $this->subProjectId;
         $params['prod_routing_id'] = $this->prodRoutingId;
+        $params['prod_discipline_id'] = $this->prodDisciplineId;
         return $params;
     }
 
-    private function updateDataForPivotChart($data)
+    private function updateDataForPivotChart($dataSource)
     {
-        $values = array_values($data->toArray());
-        if(empty($values)) return $data;
-        $primaryData = reset($values);
-        $unit = isset($primaryData->uom_name) ? $primaryData->uom_name : "(Unknown Unit)";
-        $dataToRender = [
-            'man_power' => $primaryData->man_power,
-            'total_uom' => $primaryData->total_uom,
-            'min_on_day' => $primaryData->min_on_day,
-            'min_on_set' => $primaryData->min_on_set,
-        ];
+        $result = [];
+        foreach ($dataSource as $prodRoutingLinkId => $data) {
+            $items = array_values($data->toArray());
+            // if(empty($items)) continue;
+            $primaryData = reset($items);
+            $unit = isset($primaryData->uom_name) ? $primaryData->uom_name : "(Unknown Unit)";
 
-        // information for meta data
-        $labelName = ['Man-power', $unit.'/day', 'min/day', 'min/'.$unit];
-        $labels = StringReport::arrayToJsonWithSingleQuotes($labelName);
-        $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($dataToRender));
-        $max = max(array_values($dataToRender));
-        $count = count($dataToRender);
-        $meta = [
-            'labels' => $labels,
-            'numbers' => $numbers,
-            'max' => $max,
-            'count' => $count
-        ];
+            $typeCharts = ['man_power', 'total_uom', 'min_on_day', 'min_on_set'];
+            $titleCharts = ['Man Power (avg)', $unit.'/Day (avg)', 'min/Day (avg)', 'min/'.$unit .'(avg)'];
+            foreach($typeCharts as $key => $typeChart){
+                // information for meta data
+                $labelName = array_map(fn($item) => $item['prod_order_name'], $items);
+                $dataNumber = array_map(fn($item) => $item[$typeChart], $items);
+                $labels = StringReport::arrayToJsonWithSingleQuotes($labelName);
+                $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($dataNumber));
+                $max = max(array_values($dataNumber));
+                $count = count($dataNumber);
+                $meta = [
+                    'labels' => $labels,
+                    'numbers' => $numbers,
+                    'max' => $max,
+                    'count' => $count
+                ];
+    
+                // information for metric data
+                $metric = [];
+                array_walk($dataNumber, function ($value, $key) use (&$metric) {
+                    return $metric[] = (object) [
+                        'meter_id' => $key,
+                        'metric_name' => $value
+                    ];
+                });
+    
+                // relate to dimensions AxisX and AxisY
+                $dimensions = [
+                    'scaleMaxY' => null,
+                    'fontSizeAxisXY' => 16,
+                    'fontSize' => 14,
+                    'titleX' => "",
+                    'titleY' => "%WIP",
+                    #'height' => 200,
+                    #'width' => 400,
+                    'scaleMaxY' => ceil((int)$max*1.5),
+                    'titleChart' => $titleCharts[$key],
+                    'fontSizeTitleChart' => 20,
+                    'barPercentage' => 0.5,
+                    'widthBar' => 100,
 
-        // information for metric data
-        $metric = [];
-        array_walk($dataToRender, function ($value, $key) use (&$metric) {
-            return $metric[] = (object) [
-                'meter_id' => $key,
-                'metric_name' => $value
-            ];
-        });
+                ];
+    
+                // Set data for widget
+                $widgetData =  [
+                    "title_a" => $typeChart.'_'.$prodRoutingLinkId,
+                    "title_b" => $typeChart.$prodRoutingLinkId,
+                    'meta' => $meta,
+                    'metric' => $metric,
+                    'chartType' =>'bar',
+                    'dimensions' => $dimensions,
+                    
+                ];
+                $dataOutput['widget_'. $key] = $widgetData;
+                // dd($data);  
+                $dataOutput['tableDataSource'] =  $data;
+                $result[$prodRoutingLinkId] = $dataOutput;
+            };
+        }
+        // dd($result);
+        return collect($result);
 
-        // relate to dimensions AxisX and AxisY
-        $dimensions = [
-            'scaleMaxY' => null,
-            'fontSizeAxisXY' => 16,
-            'fontSize' => 14,
-            'titleY' => "",
-            'height' => 800,
-            'scaleMaxY' => $max*1.2,
-        ];
 
-        // Set data for widget
-        $widgetData =  [
-            "title_a" => "UoM",
-            "title_b" => "by Hours",
-            'meta' => $meta,
-            'metric' => $metric,
-            'chartType' =>'bar',
-            'titleChart' => '',
-            'dimensions' => $dimensions,
-            
-        ];
 
-        // add widget to dataSource
-        $data = ['tableDataSource' => $data];
-        $data['widget_01'] = $widgetData;
-        // dump($data);
-        return $data;
     }
 
     protected function getParamColumns($dataSource, $modeType)
@@ -199,17 +216,20 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                 'dataIndex' => 'prod_routing_id',
                 'hasListenTo' => true,
                 'validation' => 'required',
-            ],
+        ],
             [
                 'title' => 'Production Discipline',
                 'dataIndex' => 'prod_discipline_id',
                 'allowClear' => true,
+                'validation' => 'required',
+                'hasListenTo' => true,
             ],
             [
                 'title' => 'Production Routing Link',
                 'dataIndex' => 'prod_routing_link_id',
                 'allowClear' => true,
                 'hasListenTo' => true,
+                'multiple' => true,
             ],
 
         ];
@@ -222,8 +242,8 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         if(isset($dataSource['tableDataSource'])){
             $data = $dataSource instanceof Collection ? $dataSource['tableDataSource']->toArray() : $dataSource['tableDataSource']->first();
             $unit = isset($data['uom_name']) && ($x = $data['uom_name']) ? $x : $unit;
-        } 
-
+        }
+        $optionLayout = $params['optionPrintLayout'];
         return
             [
                 [
@@ -236,52 +256,59 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     "title" => "Sub Project",
                     "dataIndex" => "sub_project_name",
                     "align" => "left",
-                    "width" => 80,
+                    "width" =>  $optionLayout === 'portrait' ? 110: 80,
                 ],
                 [
                     "title" => "Production Routing",
                     "dataIndex" => "prod_routing_name",
                     "align" => "left",
-                    "width" => 150,
+                    "width" => $optionLayout === 'portrait' ? 250: 220,
                 ],
                 [
                     "title" => "Production Discipline",
                     "dataIndex" => "prod_discipline_name",
                     "align" => "left",
-                    "width" => 75,
+                    "width" => $optionLayout === 'portrait' ? 200: 75,
+                    "hasListenTo" => true,
                 ],
                 [
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
-                    "width" => 145,
+                    "width" => $optionLayout === 'portrait' ? 300: 250,
                 ],
                 [
-                    "title" => "Man-power <br/>(AVG)",
+                    "title" => "Production Order",
+                    "dataIndex" => "prod_order_name",
+                    "align" => "left",
+                    "width" =>  $optionLayout === 'portrait' ? 150: 138,
+                ],
+                [
+                    "title" => "Man Power <br/>(AVG)",
                     "dataIndex" => "man_power",
                     "align" => "right",
-                    "width" => 78,
+                    "width" => 110,
                     // "footer" => "agg_sum",
                 ],
                 [
-                    "title" => $unit . "/day <br/>(AVG)",
+                    "title" => $unit . "/Day <br/>(AVG)",
                     "dataIndex" => "total_uom",
                     "align" => "right",
-                    "width" => 75,
+                    "width" => 110,
                     // "footer" => "agg_sum",
                 ],
                 [
-                    "title" => "min/day <br/>(AVG)",
+                    "title" => "min/Day <br/>(AVG)",
                     "dataIndex" => "min_on_day",
                     "align" => "right",
-                    "width" => 75,
+                    "width" => 110,
                     // "footer" => "agg_sum",
                 ],
                 [
                     "title" => "min/$unit <br/>(AVG)",
                     "dataIndex" => "min_on_set",
                     "align" => "right",
-                    "width" =>  75,
+                    "width" =>  110,
                     // "footer" => "agg_sum",
                 ]
             ];
@@ -303,17 +330,45 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         $basicInfoData['project'] = $projectName;
         $basicInfoData['sub_project'] = $subProjectName->name;
         $basicInfoData['prod_routing'] = $prodPouting;
-        $basicInfoData['prod_routing_link'] = $prodRoutingLink;
         $basicInfoData['prod_discipline'] = $prodDiscipline;
         return $basicInfoData;
+    }
+
+    private function generateArraySqlFromSqlStr($prodRoutingLinkIds, $params) {
+        $arraySqlStr = [];
+        foreach ($prodRoutingLinkIds as $prodRoutingLinkId){
+            $params['prod_routing_link'] = $prodRoutingLinkId;
+            $arraySqlStr[$prodRoutingLinkId] = $this->getSqlStr($params);
+        }
+        return $arraySqlStr;
+    }
+
+    public function getDataSource($params)
+    {
+        $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ?
+        $params['prod_routing_link_id']:Prod_discipline::find($params['prod_discipline_id'])->getProdRoutingLink()->pluck('id')->toArray();
+
+        $arraySqlStr = $this->generateArraySqlFromSqlStr($prodRoutingLinkIds, $params);   
+        $dataSource = [];
+        foreach ($arraySqlStr as $k => $sql) {
+            if (is_null($sql) || !$sql) return collect();
+            $params['prod_routing_link_id'] = $k; // k is an id of prod_routing_link_id 
+            $sql = $this->getSql($params);
+            $sqlData = DB::select(DB::raw($sql));
+            if (empty($sqlData)) continue;
+            $dataSource[$k] = collect($sqlData);
+        }
+        return $dataSource;
     }
 
 
 
     public function changeDataSource($dataSource, $params)
     {
+        foreach ($dataSource as $k => $values){
+            $dataSource[$k] = $this->addTooltip($values);
+        }
         $dataSource = self::updateDataForPivotChart($dataSource);
-        // dump($dataSource);
         return $dataSource;
     }
 }

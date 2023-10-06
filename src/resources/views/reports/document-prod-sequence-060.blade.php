@@ -55,12 +55,12 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
                             </div>
                         </div>
                         <div class="p-10">
+                        {{-- @dump($widget) --}}
                                 <x-renderer.report.chart-bar 
                                         key="{{md5($widget['title_a'].$widget['title_b'])}}" 
                                         chartType="{{$widget['chartType']}}" 
                                         :meta="$widget['meta']" 
                                         :metric="$widget['metric']" 
-                                        titleChart="{{$widget['titleChart']}}" 
                                         :dimensions="$widget['dimensions']"
                                         />
                                 <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>The chart represents the completion percentage of each step in the production routing link on every production order.</x-renderer.heading>

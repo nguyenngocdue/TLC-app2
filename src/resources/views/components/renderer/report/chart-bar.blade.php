@@ -34,7 +34,8 @@ var chartConfig = {
         datasets: [{
             label: "data",
             data: chartData.numbers,
-            backgroundColor: generatedColors
+            backgroundColor: generatedColors,
+            barPercentage:  {!! $dimensions['barPercentage'] ?? 1 !!},
         }]
     },
     options: {
@@ -65,7 +66,11 @@ var chartConfig = {
                 ticks: {
                     font: {
                         size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
-                    }
+                    },
+                    // change legends on Y axis
+                    //callback: function(value, index, ticks) {
+                    //    return '$' + ticks;
+                    //}
                 },
                 title: {
                     display: true,
@@ -74,16 +79,24 @@ var chartConfig = {
                         size: {!! $dimensions['fontSize'] ?? 14 !!}, 
                         weight: 'bold' 
                     }
-                }
+                },
             }
         },
         plugins: {
+            title:{
+                display: true,
+                text:  '{!! $dimensions['titleChart'] ?? null !!}',
+                font:{
+                    size: {!! $dimensions['fontSizeTitleChart'] ?? 16 !!}, 
+                    weight: 'bold' 
+                }
+            },
             legend: {
                 position: 'bottom',
                 display: true,
                 onClick: (evt, legendItem, legend) => {
                     const index = legend.chart.data.labels.indexOf(legendItem.text);
-                    console.log(index);
+                    console.log(legendItem);
                     legend.chart.toggleDataVisibility(index);
                     legend.chart.update();
                 },
@@ -105,13 +118,14 @@ var chartConfig = {
                                     const backgroundColor = dataset.backgroundColor[index];
                                     //  legend modified here
                                     const legendText = `${label}`;
+                                    //console.log(visibility[index]);
 
                                     return {
                                         text: legendText,
                                         fillStyle: backgroundColor,
                                         strokeStyle: backgroundColor,
                                         hidden: visibility[index],
-                                        index: 0
+                                        //index: 0
                                     };
                                 });
                             }
@@ -133,11 +147,25 @@ var chartConfig = {
                 borderColor: 'white',
                 borderWidth: 1,
                 borderRadius: 6,
-                offset: '{!! $dimensions['dataLabelOffset'] ?? '0' !!}'
+                offset: '{!! $dimensions['dataLabelOffset'] ?? '0' !!}',
+                formatter: function(value, context) {
+            		return (value.toFixed(2))
+				}
             }
+        }
+    },
+      scales: {
+        x: {
+            barPercentage: 0.2, // Kích thước của các cột chỉ chiếm 70% chiều rộng của không gian giữa chúng
+        },
+        y: {
+            beginAtZero: true
         }
     }
 };
 var chartElement = document.getElementById(key).getContext('2d');
-new Chart(chartElement, chartConfig);
+var chartRendered = new Chart(chartElement, chartConfig);
+//chartRendered.data.datasets[0].barThickness = {!! $dimensions['widthBar'] ?? null !!};
+//chartRendered.update();
+console.log(chartRendered)
 </script>
