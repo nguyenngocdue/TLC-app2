@@ -3,14 +3,19 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Models\Kanban_task_page;
+use App\Utils\Constant;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Str;
 
 trait TraitViewAllKanbanController
 {
+    private $groupWidth = "w-72"; //10, 20, 32, 40, 52, 60, 72, 80, 96,
+
     private function indexViewAllKanban($request)
     {
-        $pageId = 1;
+        $cu = CurrentUser::get();
+        $pageId = $cu->settings['kanban_task_page'][Constant::VIEW_ALL]['current_page'] ?? null;
         $page = Kanban_task_page::find($pageId);
         // dd($page);
 
@@ -23,6 +28,7 @@ trait TraitViewAllKanbanController
             // 'typeModel' => $this->typeModel,
             // 'trashed' => false,
             'frameworkTook' => $this->frameworkTook,
+            'groupWidth' => $this->groupWidth,
         ]);
     }
 }

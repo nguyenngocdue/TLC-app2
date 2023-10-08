@@ -1,3 +1,4 @@
+@props(['groupWidth'])
 
 {{-- @extends("modals.modal-large") --}}
 @extends("modals.modal-medium")
@@ -13,10 +14,9 @@
 @section($modalId.'-footer')
     <x-modals.kanban.modal-footer 
         modalId="{{$modalId}}" 
+        groupWidth="{{$groupWidth}}"
         txtTypeId="txtGroupId" 
         route="route_group" 
-        captionType="caption_group" 
-        txtType="txt_group"
         prefix="group_parent_"
         />
 @endsection

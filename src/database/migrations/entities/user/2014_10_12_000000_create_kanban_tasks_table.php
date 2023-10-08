@@ -25,6 +25,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('kanban_group_id')->nullable();
 
+            $table->unsignedBigInteger('assignee_1')->nullable();
+
             $table->orderable();
             $table->appendCommonFields();
         });

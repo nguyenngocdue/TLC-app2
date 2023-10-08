@@ -12,7 +12,7 @@
         <x-renderer.button click="closeModal('{{$modalId}}')">Cancel</x-renderer.button>
         <x-renderer.button class="mx-2" type='success' icon="fa-duotone fa-floppy-disk" 
             click="
-                kanbanUpdateItem('{{$txtTypeId}}', {{$route}}, '{{$captionType}}', '{{$txtType}}');
+                kanbanUpdateItem('{{$txtTypeId}}', {{$route}}, '{{$prefix}}', '{{$groupWidth}}');
                 closeModal('{{$modalId}}');
                 ">
             Save

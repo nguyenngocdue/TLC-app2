@@ -142,7 +142,7 @@ const kanbanInit1 = (prefix, columns, route, category) => {
     }
 }
 
-const kanbanLoadPage = (pageId, url) => {
+const kanbanLoadPage = (pageId, url, groupWidth) => {
     const beginWith = "bucket_"
     $("#txtCurrentPage").val(pageId);
     $("#divKanbanPage").slideUp("slow");
@@ -176,7 +176,7 @@ const kanbanLoadPage = (pageId, url) => {
     $.ajax({
         method: 'POST',
         url,
-        data: { action: "loadPage", pageId },
+        data: { action: "loadKanbanPage", pageId, groupWidth },
         success: function (response) {
             // toastr.success(response.message)
             const { renderer } = response.hits
@@ -216,29 +216,34 @@ const getItem = () => {
     const formDataArray = $("#frmKanbanItem").serializeArray()
     // console.log(formDataArray)
     const item = {}
-    for (let i = 0; i < formDataArray.length; i++) item[formDataArray[i].name] = formDataArray[i].value
+    for (let i = 0; i < formDataArray.length; i++) {
+        const fieldName = formDataArray[i].name
+        const isMultiple = fieldName == 'getMonitors1()[]'
+        if (isMultiple) {
+            if (!item[fieldName]) item[fieldName] = []
+            item[fieldName].push(formDataArray[i].value)
+        } else {
+            item[fieldName] = formDataArray[i].value
+        }
+    }
     // console.log(item)
     return item;
 }
 
-const kanbanUpdateItem = (txtTypeId, url, caption_type, txt_type) => {
+const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
     const id = $("#" + txtTypeId).val()
-    const formData = $("#frmKanbanItem").serialize()
+    // const formData = $("#frmKanbanItem").serialize()
     // console.log("Updating up #", id, url, formData, formDataArray)
     const item = getItem() //<< This can't go inside $.ajax
     $.ajax({
         method: "POST",
         url,
-        data: { action: "updateItemRenderProps", id, formData },
+        data: { action: "updateItemRenderProps", id, ...item, groupWidth },
         success: function (response) {
-            // console.log(response)
-            const { name, description } = item
-            const caption = "#" + caption_type + "_" + id
-            $(caption).html(name)
-            $(caption).attr("title", description + "\n(#" + id + ")")
-
-            const txtName = "#" + txt_type + "_" + id
-            $(txtName).val(name)
+            const { renderer } = response.hits
+            const myId = prefix + id
+            const myDiv = $("#" + myId)
+            myDiv.replaceWith(renderer)
         },
         error: onKanbanAjaxError,
     })

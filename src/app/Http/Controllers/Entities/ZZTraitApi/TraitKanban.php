@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
 use App\Models\Kanban_task_page;
+use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
-use App\View\Components\Renderer\Kanban\Pages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 
 trait TraitKanban
 {
+	use TraitKanbanItemRenderer;
+	use TraitKanbanUpdate;
+
 	function getLastWord($strings)
 	{
 		$characters_after_last_underscore = [];
@@ -113,51 +116,32 @@ trait TraitKanban
 		$insertedObj->order_no = $insertedId;
 		$insertedObj->save();
 
-		$renderer = "";
-		switch ($table) {
-			case 'kanban_tasks':
-				$renderer = Blade::render('<x-renderer.kanban.task :task="$task" groupWidth="{{$groupWidth}}"/>', [
-					'task' => $insertedObj,
-					'groupWidth' => $groupWidth,
-				]);
-				break;
-			case 'kanban_task_groups':
-				$renderer = Blade::render('<x-renderer.kanban.group :group="$group" groupWidth="{{$groupWidth}}"/>', [
-					'group' => $insertedObj,
-					'groupWidth' => $groupWidth,
-				]);
-				break;
-			case 'kanban_task_clusters':
-				$renderer = Blade::render('<x-renderer.kanban.cluster :cluster="$cluster" groupWidth="{{$groupWidth}}"/>', [
-					'cluster' => $insertedObj,
-					'groupWidth' => $groupWidth,
-				]);
-				break;
-			case 'kanban_task_pages':
-				$renderer = Blade::render('<x-renderer.kanban.toc :page="$page" />', [
-					'page' => $insertedObj,
-				]);
-				break;
-			case "kanban_task_buckets":
-				$renderer = Blade::render('<x-renderer.kanban.bucket :bucket="$bucket" />', [
-					'bucket' => $insertedObj,
-				]);
-				break;
-			default:
-				$renderer = "Unknown how to render kanban for $table";
-				break;
-		}
-
+		$renderer = $this->renderKanbanItem($insertedObj, $groupWidth);
 		return ResponseObject::responseSuccess(['renderer' => $renderer], ['id' => $insertedId, 'item' => $insertedObj], "Inserted");
 	}
 
-	function loadPage(Request $request)
+	private function saveUserSettings($pageId)
+	{
+		$user = CurrentUser::get();
+		// Log::info($user->settings);
+		$settings = $user->settings;
+		$settings[$this->type][Constant::VIEW_ALL]['current_page'] = $pageId;
+		$user->settings = $settings;
+		$user->save();
+	}
+
+	function loadKanbanPage(Request $request)
 	{
 		$id = $request->input('pageId');
+		$groupWidth = $request->input('groupWidth');
+
 		$page = Kanban_task_page::find($id);
-		$renderer = Blade::render('<x-renderer.kanban.page :page="$page"/>', [
+		$renderer = Blade::render('<x-renderer.kanban.page :page="$page" groupWidth="{{$groupWidth}}"/>', [
 			'page' => $page,
+			'groupWidth' => $groupWidth,
 		]);
+		$this->saveUserSettings($id);
+
 		return ResponseObject::responseSuccess(['renderer' => $renderer], [], "Inserted");
 	}
 
@@ -193,21 +177,6 @@ trait TraitKanban
 		], "Rendered");
 	}
 
-	function updateItemRenderProps(Request $request)
-	{
-		$input = $request->input();
-		['id' => $id, 'formData' => $formData] = $input;
-		parse_str($formData, $newItem);
-
-		$item = $this->modelPath::find($id);
-
-		// Log::info("Input:");
-		// Log::info($newItem);
-
-		$item->update($newItem);
-		return ResponseObject::responseSuccess([], [], "Updated");
-	}
-
 	function deleteItemRenderProps(Request $request)
 	{
 		$input = $request->input();
@@ -227,7 +196,7 @@ trait TraitKanban
 				case "changeParent":
 				case "changeName":
 				case "addNew":
-				case "loadPage":
+				case "loadKanbanPage":
 				case "editItemRenderProps":
 				case "updateItemRenderProps":
 				case "deleteItemRenderProps":

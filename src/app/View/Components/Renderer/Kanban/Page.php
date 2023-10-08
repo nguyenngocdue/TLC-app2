@@ -8,10 +8,10 @@ use Illuminate\View\Component;
 class Page extends Component
 {
     private $debug = false;
-    private $groupWidth = "w-72"; //10, 20, 32, 40, 52, 60, 72, 80, 96,
 
     function __construct(
         private $page = null,
+        private $groupWidth = null,
     ) {
     }
 
@@ -19,7 +19,7 @@ class Page extends Component
     {
         return Kanban_task_cluster::query()
             // ->with("getGroups.getTasks")
-            ->where('kanban_page_id', $this->page->id)
+            ->where('kanban_page_id', $this->page ? $this->page->id : null)
             ->with(["getGroups" => function ($query) {
                 $query->orderBy('order_no');
 
@@ -33,9 +33,10 @@ class Page extends Component
 
     function render()
     {
+        if (is_null($this->page)) return "";
         return view("components.renderer.kanban.page", [
             'page' => $this->page,
-            'pageId' => $this->page->id,
+            'pageId' => $this->page ? $this->page->id : null,
             'clusters' => $this->getDataSourceClusters(),
             'hidden' => $this->debug ? "" : "hidden",
             'groupWidth' => $this->groupWidth,

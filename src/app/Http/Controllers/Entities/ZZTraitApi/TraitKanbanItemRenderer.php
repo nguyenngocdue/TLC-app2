@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Http\Controllers\Entities\ZZTraitApi;
+
+use Illuminate\Support\Facades\Blade;
+
+trait TraitKanbanItemRenderer
+{
+	function renderKanbanItem($insertedObj, $groupWidth)
+	{
+		$table = $this->modelPath::getTableName();
+		$renderer = "";
+		switch ($table) {
+			case 'kanban_tasks':
+				$renderer = Blade::render('<x-renderer.kanban.task :task="$task" groupWidth="{{$groupWidth}}"/>', [
+					'task' => $insertedObj,
+					'groupWidth' => $groupWidth,
+				]);
+				break;
+			case 'kanban_task_groups':
+				$renderer = Blade::render('<x-renderer.kanban.group :group="$group" groupWidth="{{$groupWidth}}"/>', [
+					'group' => $insertedObj,
+					'groupWidth' => $groupWidth,
+				]);
+				break;
+			case 'kanban_task_clusters':
+				$renderer = Blade::render('<x-renderer.kanban.cluster :cluster="$cluster" groupWidth="{{$groupWidth}}"/>', [
+					'cluster' => $insertedObj,
+					'groupWidth' => $groupWidth,
+				]);
+				break;
+			case 'kanban_task_pages':
+				$renderer = Blade::render('<x-renderer.kanban.toc :page="$page" groupWidth="{{$groupWidth}}"/>', [
+					'page' => $insertedObj,
+					'groupWidth' => $groupWidth,
+				]);
+				break;
+			case "kanban_task_buckets":
+				$renderer = Blade::render('<x-renderer.kanban.bucket :bucket="$bucket" groupWidth="{{$groupWidth}}"/>', [
+					'bucket' => $insertedObj,
+					'groupWidth' => $groupWidth,
+				]);
+				break;
+			default:
+				$renderer = "Unknown how to render kanban for $table";
+				break;
+		}
+
+		return $renderer;
+	}
+}

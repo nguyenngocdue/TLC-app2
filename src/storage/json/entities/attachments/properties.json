@@ -19,8 +19,8 @@
         "name": "_attachment_3",
         "field_id": "3",
         "field_name": "attachment_3",
-        "max_file_size": "1000",
-        "max_file_count": "1000",
+        "max_file_size": "",
+        "max_file_count": "",
         "allowed_file_types": "only_media"
     },
     "_attachment_4": {
@@ -38,6 +38,38 @@
         "max_file_size": "10",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
+    },
+    "_attachment_corrective_pdfs": {
+        "name": "_attachment_corrective_pdfs",
+        "field_id": "146",
+        "field_name": "attachment_corrective_pdfs",
+        "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media"
+    },
+    "_attachment_corrective_photos": {
+        "name": "_attachment_corrective_photos",
+        "field_id": "145",
+        "field_name": "attachment_corrective_photos",
+        "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_images"
+    },
+    "_attachment_defect_pdfs": {
+        "name": "_attachment_defect_pdfs",
+        "field_id": "144",
+        "field_name": "attachment_defect_pdfs",
+        "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media"
+    },
+    "_attachment_defect_photos": {
+        "name": "_attachment_defect_photos",
+        "field_id": "143",
+        "field_name": "attachment_defect_photos",
+        "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_images"
     },
     "_attachment_eco_sht": {
         "name": "_attachment_eco_sht",
@@ -186,7 +218,7 @@
     "_attachment_onboarding_course": {
         "name": "_attachment_onboarding_course",
         "field_id": "167",
-        "field_name": "attachment_onboarding_course",
+        "field_name": "attachment_training_course",
         "max_file_size": "10",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
