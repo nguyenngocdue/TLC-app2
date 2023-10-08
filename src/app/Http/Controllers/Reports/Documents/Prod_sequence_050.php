@@ -9,12 +9,8 @@ use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
-use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
-use App\Models\Term;
-use App\Utils\Support\ModificationDataReport;
-use App\Utils\Support\Report;
 use App\Utils\Support\StringReport;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -115,6 +111,46 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         return $sql;
     }
 
+    private function getAllProdOrders($params){
+        $sql = "SELECT
+                    sp.project_id,
+                    pj.name AS project_name,
+                    sp.id AS sub_project_id,
+                    sp.name AS sub_project_name,
+                    pr.id AS prod_routing_id,
+                    pr.name AS prod_routing_name,
+                    po.id AS prod_order_id,
+                    po.name AS prod_order_name,
+                    NULL AS man_power,
+                    NULL AS total_hours,
+                    NULL AS uom_name,
+                    NULL AS min_on_day,
+                    NULL AS min_on_set,
+                    NULL AS total_uom
+                FROM
+                    sub_projects sp
+                JOIN
+                    projects pj ON pj.id = sp.project_id
+                JOIN
+                    prod_orders po ON po.sub_project_id = sp.id
+                JOIN
+                    prod_routings pr ON pr.id = po.prod_routing_id
+                LEFT JOIN
+                    prod_sequences pse ON pse.prod_order_id = po.id
+                WHERE 1 = 1";
+            $sql .= "\n 
+                        AND pse.id IS NULL
+                        AND pse.deleted_by IS NULL
+                        AND sp.project_id = {{project_id}}
+                        AND sp.id = {{sub_project_id}}
+                        AND po.prod_routing_id = {{prod_routing_id}}
+                        ";
+
+        $sql = $this->preg_match_all($sql, $params);
+        $sqlData = DB::select(DB::raw($sql));
+        return ($sqlData);
+    }
+
     protected function getDefaultValueParams($params, $request)
     {
         $params['project_id'] = $this->projectId;
@@ -173,6 +209,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     'fontSizeTitleChart' => 20,
                     'barPercentage' => 0.5,
                     'widthBar' => 100,
+                    'dataLabelOffset' => 10,
 
                 ];
     
@@ -243,7 +280,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
             $data = $dataSource instanceof Collection ? $dataSource['tableDataSource']->toArray() : $dataSource['tableDataSource']->first();
             $unit = isset($data['uom_name']) && ($x = $data['uom_name']) ? $x : $unit;
         }
-        $optionLayout = $params['optionPrintLayout'];
+        $optionLayout = $params['optionPrintLayout'] ?? $this->optionPrint;
         return
             [
                 [
@@ -321,11 +358,6 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         $prodPouting = Prod_routing::find($params['prod_routing_id'] ?? $this->prodRoutingId)->name;
         $prodDiscipline = isset($params['prod_discipline_id']) ? Prod_discipline::find($params['prod_discipline_id'])->name : '';
 
-        $prodRoutingLink = isset($params['prod_routing_link_id']) ?
-            implode(',', Prod_routing_link::find($params['prod_routing_link_id'])
-                ->pluck('name')
-                ->toArray()) : '';
-
         $basicInfoData = [];
         $basicInfoData['project'] = $projectName;
         $basicInfoData['sub_project'] = $subProjectName->name;
@@ -347,27 +379,45 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     {
         $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ?
         $params['prod_routing_link_id']:Prod_discipline::find($params['prod_discipline_id'])->getProdRoutingLink()->pluck('id')->toArray();
-
+        
         $arraySqlStr = $this->generateArraySqlFromSqlStr($prodRoutingLinkIds, $params);   
-        $dataSource = [];
+        $data = [];
+        $allProdOrdersHaveNotSeq = $this->getAllProdOrders($params);
+
         foreach ($arraySqlStr as $k => $sql) {
             if (is_null($sql) || !$sql) return collect();
             $params['prod_routing_link_id'] = $k; // k is an id of prod_routing_link_id 
             $sql = $this->getSql($params);
             $sqlData = DB::select(DB::raw($sql));
-            if (empty($sqlData)) continue;
-            $dataSource[$k] = collect($sqlData);
+
+            if(empty($sqlData)) continue;
+            if(!empty($sqlData)) {
+                $firstSqlData = $sqlData[0];
+                $temps = [];
+                foreach ($allProdOrdersHaveNotSeq as $values) {
+                    $arr = [
+                        'prod_routing_link_name' => $firstSqlData->prod_routing_link_name,
+                        'prod_routing_link_id' => $firstSqlData->prod_routing_link_id,
+                        'prod_discipline_id' => $firstSqlData->prod_discipline_id,
+                        'prod_discipline_name' => $firstSqlData->prod_discipline_name,
+                        // ...other properties from $values
+                    ];
+                    $arr = array_merge((array)$values, $arr);
+                    $temps[] =  (object)$arr;
+                }
+    
+                $data[$k] = collect([...$sqlData, ...$temps]);  
+            }
+
         }
-        return $dataSource;
+        return $data;
     }
 
 
 
     public function changeDataSource($dataSource, $params)
     {
-        foreach ($dataSource as $k => $values){
-            $dataSource[$k] = $this->addTooltip($values);
-        }
+        foreach ($dataSource as $k => $values) $dataSource[$k] = $this->addTooltip($values);
         $dataSource = self::updateDataForPivotChart($dataSource);
         return $dataSource;
     }
