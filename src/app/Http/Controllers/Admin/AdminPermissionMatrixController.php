@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Log;
 
 class AdminPermissionMatrixController extends Controller
 {
@@ -151,11 +152,14 @@ class AdminPermissionMatrixController extends Controller
                 'cell_title' => "(#" . $yId . ")",
                 'cell_class' => "text-blue-800 bg-white",
             ];
+
+            $roles = self::findRoleByRoleSetIdFromCache($yId);
             $line['role'] = (object)[
-                'value' => sizeof(self::findRoleByRoleSetIdFromCache($yId)) ?? 0,
-                'cell_title' => "(#" . $yId . ")",
+                'value' => sizeof($roles) ?? 0,
+                'cell_title' => $roles->pluck('name')->join("\n"),
                 'cell_class' => "bg-white text-right",
             ];
+
             $userNames = [];
             foreach ($y->users as $i => $user) $userNames[] = (1 + $i) . ". " . $user->name . " (#" . $user->id . ")";
             $line['user_count'] = (object)[
@@ -163,6 +167,7 @@ class AdminPermissionMatrixController extends Controller
                 'cell_title' => join("\n", $userNames), // $y->users->pluck('name')->join("\n"),
                 'cell_class' => "bg-white text-right cursor-pointer",
             ];
+
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 if (isset($x['mapIndex'])) {
