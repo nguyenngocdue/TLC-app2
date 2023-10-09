@@ -142,4 +142,16 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
 
         return $result;
     }
+
+    protected function makeStatus($document, $forExcel, $route = null)
+    {
+        $params = [
+            'project_id' => $this->project,
+            'sub_project_id' => $this->subProject,
+            'prod_routing_id' => $this->prodRouting,
+            'qaqc_insp_tmpl_id' => $document->qaqc_insp_tmpl_id,
+        ];
+        $route = route("qaqc_insp_chklst_shts.index", $params);
+        return parent::makeStatus($document, $forExcel, $route);
+    }
 }

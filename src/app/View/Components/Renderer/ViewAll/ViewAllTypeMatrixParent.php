@@ -117,9 +117,12 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $value ? $value : '';
     }
 
-    protected function makeStatus($document, $forExcel)
+    protected function makeStatus($document, $forExcel, $route = null)
     {
         $status = $this->statuses[$document->status] ?? null;
+        if (is_null($route)) {
+            $route = route($this->type . ".edit", $document->id);
+        }
         if (!is_null($status)) {
             $value = $this->getValueToRender($status, $document, $forExcel);
             [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
@@ -127,14 +130,14 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'value' => $value,
                 'cell_title' => 'Open this document (' . $status['title'] . ')',
                 'cell_class' => "$bgColor $textColor",
-                'cell_href' => route($this->type . ".edit", $document->id),
+                'cell_href' => $route,
             ];
             return (object) $item;
         } else {
             // dump("Status not found: " . $document->status . " #" . $document->id);
             return (object)[
                 'value' => "unknown status [" . $document->status . "] ???",
-                'cell_href' => route($this->type . ".edit", $document->id),
+                'cell_href' => $route,
             ];
         }
     }
