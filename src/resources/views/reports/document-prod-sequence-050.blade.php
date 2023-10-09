@@ -47,7 +47,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                     </thead>
                                     <tbody>
                                         @foreach($tableOfContents as $key => $value)
-                                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-900 hover:bg-gray-100  text-gray-700 dark:text-gray-300 ">
                                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                     {{++$n}}
                                                 </th>
@@ -114,7 +114,6 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                         </div>
                                         @endif
                                     </div>
-
                                 {{-- TABLES --}}
                                     <div class="">
                                         <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Detail Report</h4>
@@ -129,32 +128,36 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                                 />
                                     </div>
                         </div>
+                            <x-renderer.page-break />
+                            <div style='' class="{{$layout}} items-center bg-white box-border p-8">
+                                <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
+                                    @foreach($data as $key => $items)
+                                                @if(str_contains($key, 'widget'))
+                                                    <div class="">
+                                                        <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>
+                                                            Comparing <strong>{{$items['dimensions']['titleChart']}} </strong>Across Production Orders
+                                                        </x-renderer.heading>
+                                                        {{-- @dump($items) --}}
+                                                        <div class="p-10">
+                                                                <x-renderer.report.chart-bar 
+                                                                        key="{{md5($items['title_a'].$items['title_b'])}}" 
+                                                                        chartType="{{$items['chartType']}}" 
+                                                                        :meta="$items['meta']" 
+                                                                        :metric="$items['metric']" 
+                                                                        :dimensions="$items['dimensions']"
+                                                                        />
+                                                                <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>
+                                                                                    The chart compares the 
+                                                                                    <strong>{{$items['dimensions']['titleChart']}}</strong> 
+                                                                                    values for each Production Order according to the <strong> Production Routing Link</strong>.
+                                                                </x-renderer.heading>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                    @endforeach
+                                </div>
+                            </div>
                         <x-renderer.page-break />
-                        @foreach($data as $key => $items)
-                                    @if(str_contains($key, 'widget'))
-                                        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
-                                            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>
-                                                Comparing <strong>{{$items['dimensions']['titleChart']}} </strong>Across Production Orders
-                                            </x-renderer.heading>
-                                            {{-- @dump($items) --}}
-                                            <div class="p-10">
-                                                    <x-renderer.report.chart-bar 
-                                                            key="{{md5($items['title_a'].$items['title_b'])}}" 
-                                                            chartType="{{$items['chartType']}}" 
-                                                            :meta="$items['meta']" 
-                                                            :metric="$items['metric']" 
-                                                            :dimensions="$items['dimensions']"
-                                                            />
-                                                    <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>
-                                                                        The chart compares the 
-                                                                        <strong>{{$items['dimensions']['titleChart']}}</strong> 
-                                                                        values for each Production Order according to the <strong> Production Routing Link</strong>.
-                                                    </x-renderer.heading>
-                                            </div>
-                                        </div>
-                                    @endif
-                                <x-renderer.page-break />
-                        @endforeach
                 @endforeach
 </div>
 @endsection
