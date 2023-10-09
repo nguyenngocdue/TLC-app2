@@ -38,11 +38,17 @@ class ItemRenderCheckSheet extends Component
         return false;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
+    function getShowHeader()
+    {
+        $result = 0;
+        foreach ($this->dataSource as $prop) {
+            if ($prop['hiddenRow'] !== 'hidden') {
+                $result++;
+            }
+        }
+        return $result;
+    }
+
     public function render()
     {
         $lines = $this->item->getLines;
@@ -55,9 +61,12 @@ class ItemRenderCheckSheet extends Component
         $props = SuperProps::getFor($this->type)['props'] ?? [];
         [$groupColumn, $groupNames] = $this->getGroups($lines);
         // dump($groupNames);
+        $showHeader = $this->getShowHeader();
+
         return view(
             'components.controls.insp-chklst.item-render-check-sheet',
             [
+                'showHeader' => $showHeader,
                 'dataSource' => $this->dataSource,
                 'action' => $this->action,
                 'modelPath' => $this->modelPath,

@@ -180,10 +180,11 @@
         "hour",
         "item",
         "line",
+        "page",
         "person",
+        "sheet",
         "signature",
-        "team",
-        "sheet"
+        "team"
     ],
     "ignore_duplicatable": [
         "id",
