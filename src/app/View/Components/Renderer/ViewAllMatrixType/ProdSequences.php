@@ -106,10 +106,12 @@ class ProdSequences extends ViewAllTypeMatrixParent
         // dump($data);
         $extraColumns = $this->getXAxisExtraColumns();
         foreach ($data as $line) {
+            $description = ($line->description ? "<br/>" . $line->description : "");
+            $standard_uom = ($line->standard_uom_id ? "<br/>(" . ($this->unit[$line->standard_uom_id]['name'] ?? "") . ")" : "");
             $result[] = [
                 'dataIndex' => $line->id,
                 'columnIndex' => "status",
-                'title' => $line->name . ($line->description ? "<br/>" . $line->description : ""),
+                'title' => $line->name . $description . $standard_uom,
                 'align' => 'center',
                 'width' => 40,
                 'prod_discipline_id' => $line->prod_discipline_id,

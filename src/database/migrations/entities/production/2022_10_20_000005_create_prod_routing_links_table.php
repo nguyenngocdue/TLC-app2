@@ -25,19 +25,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->unsignedBigInteger('prod_discipline_id');
+            $table->unsignedBigInteger('standard_uom_id');
             $table->appendCommonFields();
         });
-        // Schema::create('prod_routing_links', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->text('description')->nullable();
-        //     $table->string('slug')->unique();
-        //     $table->unsignedBigInteger('prod_discipline_id');
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**

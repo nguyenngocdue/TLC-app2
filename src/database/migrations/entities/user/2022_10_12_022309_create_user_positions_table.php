@@ -31,6 +31,8 @@ return new class extends Migration
             $table->unsignedBigInteger("position_3")->nullable();
 
             $table->appendCommonFields();
+
+            $table->unique(["position_prefix", "position_1", "position_2", "position_3"]);
         });
     }
 

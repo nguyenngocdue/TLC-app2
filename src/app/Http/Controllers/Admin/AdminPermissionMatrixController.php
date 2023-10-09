@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Log;
 
 class AdminPermissionMatrixController extends Controller
 {
@@ -29,7 +30,7 @@ class AdminPermissionMatrixController extends Controller
     static $singletonDbRoleSetGetAllRoleCollection = null;
     public static function getRole()
     {
-        return Role::all();
+        return Role::query()->with("permissions")->get();
     }
     public static function getCollection()
     {
@@ -52,7 +53,7 @@ class AdminPermissionMatrixController extends Controller
     public static function getCollectionRoleSetGetAllRole()
     {
         if (!isset(static::$singletonDbRoleSetGetAllRoleCollection)) {
-            $all = Role_set::all();
+            $all = Role_set::query()->with('roles')->get();
             foreach ($all as $item) $indexed[$item->id] = $item->roles;
             static::$singletonDbRoleSetGetAllRoleCollection = collect($indexed);
         }
@@ -123,8 +124,9 @@ class AdminPermissionMatrixController extends Controller
     {
         return  [
             ['dataIndex' => 'name_for_group_by', 'hidden' => true],
-            ['dataIndex' => 'name', 'width' => 300, 'fixed' => $this->nameColumnFixed,],
-            ['dataIndex' => 'role', 'width' => 50, 'fixed' => $this->nameColumnFixed,],
+            ['dataIndex' => 'name', 'title' => "Role", 'width' => 300, 'fixed' => $this->nameColumnFixed,],
+            ['dataIndex' => 'role', 'title' => "Capa Count", 'width' => 50, 'fixed' => $this->nameColumnFixed,],
+            ['dataIndex' => 'user_count', 'User Count', 'width' => 50, 'fixed' => $this->nameColumnFixed,],
             ...$this->getMetaColumns(),
             ...$extraColumns,
             ...$this->getRightMetaColumns(),
@@ -150,11 +152,22 @@ class AdminPermissionMatrixController extends Controller
                 'cell_title' => "(#" . $yId . ")",
                 'cell_class' => "text-blue-800 bg-white",
             ];
+
+            $roles = self::findRoleByRoleSetIdFromCache($yId);
             $line['role'] = (object)[
-                'value' => sizeof(self::findRoleByRoleSetIdFromCache($yId)) ?? 0,
-                'cell_title' => "(#" . $yId . ")",
-                'cell_class' => "text-blue-800 bg-white",
+                'value' => sizeof($roles) ?? 0,
+                'cell_title' => $roles->pluck('name')->join("\n"),
+                'cell_class' => "bg-white text-right",
             ];
+
+            $userNames = [];
+            foreach ($y->users as $i => $user) $userNames[] = (1 + $i) . ". " . $user->name . " (#" . $user->id . ")";
+            $line['user_count'] = (object)[
+                'value' => $y->users->count(),
+                'cell_title' => join("\n", $userNames), // $y->users->pluck('name')->join("\n"),
+                'cell_class' => "bg-white text-right cursor-pointer",
+            ];
+
             foreach ($xAxis as $x) {
                 $xId = $x['dataIndex'];
                 if (isset($x['mapIndex'])) {
@@ -321,8 +334,9 @@ class AdminPermissionMatrixController extends Controller
     private function getYAxis()
     {
         return $this->modelYAxis()::query()
+            ->with(['roles', 'users'])
             ->orderBy('name')
-            ->get();;
+            ->get();
     }
     private function getXAxisPrimaryColumns()
     {
