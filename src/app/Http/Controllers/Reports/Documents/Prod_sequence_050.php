@@ -171,7 +171,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
             $unit = isset($primaryData->uom_name) ? $primaryData->uom_name : "(Unknown Unit)";
 
             $typeCharts = ['man_power', 'total_uom', 'min_on_day', 'min_on_set'];
-            $titleCharts = ['Man Power (avg)', $unit.'/Day (avg)', 'min/Day (avg)', 'min/'.$unit .'(avg)'];
+            $titleCharts = ['Man Power (AVG)', $unit.'/Day (AVG)', 'min/Day (AVG)', 'min/'.$unit .'(AVG)'];
             foreach($typeCharts as $key => $typeChart){
                 // information for meta data
                 $labelName = array_map(fn($item) => $item['prod_order_name'], $items);
