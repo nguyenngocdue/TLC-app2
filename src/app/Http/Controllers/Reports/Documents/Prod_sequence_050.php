@@ -177,7 +177,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
 
             $typeCharts = ['man_power', 'total_uom', 'min_on_day', 'min_on_set'];
-            $titleCharts = ['Man Power (AVG)', $unit.'/Day (AVG)', 'min/Day (AVG)', 'min/'.$unit .'(AVG)'];
+            $titleCharts = ['Man Power (AVG)', $unit.'/Day (AVG)', 'min/Day (AVG)', 'min/'.$unit .' (AVG)'];
             foreach($typeCharts as $key => $typeChart){
                 // information for meta data
                 $labelName = array_map(fn($item) => $item['prod_order_name'], $items);
