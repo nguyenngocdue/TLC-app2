@@ -73,7 +73,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     pse.id AS prod_sequences_id,
                     po.id AS prod_order_id,
               		po.name AS prod_order_name,
-                    prl.standard_uom AS standard_uom,
+                    prl.standard_uom_id AS standard_uom_id,
                     COUNT(DISTINCT pru.date) AS count_pru_date
                     FROM
                         sub_projects sp
@@ -106,7 +106,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                             prod_sequences_id
                         ORDER BY pj.name, sp.name, pr.name, pd.name, prl.name )AS tb1
                         LEFT JOIN prod_sequences pse ON pse.id = tb1.prod_sequences_id
-                        LEFT JOIN terms terms ON tb1.standard_uom = terms.id
+                        LEFT JOIN terms terms ON tb1.standard_uom_id = terms.id
                         GROUP BY
                         prod_routing_link_id,uom_name, tb1.prod_order_id";
 
