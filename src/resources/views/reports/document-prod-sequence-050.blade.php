@@ -25,7 +25,45 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-                @foreach($tableDataSource as $key => $data)
+                <div style='page-break-after:always!important' class=" items-center  box-border p-8">
+                    {{-- TABLES --}}    
+                    @php
+                        $tableOfContents = $tableDataSource['table_of_contents'];
+                        $n = 0;
+                    @endphp
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">
+                                            No .
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Production Routing Link
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($tableOfContents as $key => $value)
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{++$n}}
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                <a href="#sheet{{$key}}" class="text-blue-600">{{$value}}</a>
+                                            </td>
+                                        </tr>
+
+                                    @endforeach                                    
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                </div>
+
+
+                @foreach($tableDataSource['render_pages'] as $key => $data)
                     @php
                         $dataTable = $data['tableDataSource'];
                         $prodRoutingLinkName = $dataTable->pluck('prod_routing_link_name')->first()->value;
@@ -41,7 +79,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                             </h4>
                                         </div>
                                     </div>
-                                    <div class="col-span-12 grid">
+                                    <div class="col-span-12 grid scroll-mt-80 snap-start" id="sheet{{$key}}">
                                         <div class="grid grid-rows-1">
                                             <div class="grid grid-cols-12 text-right">
                                                 <label class="{{$class1}} col-start- col-span-3">Project</label>
@@ -65,14 +103,15 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                         </div>
                                         @endif
                                         @if($prodRoutingLinkName)
-                                        <div class="grid grid-rows-1">
+                                        <div  class="grid grid-rows-1">
                                             <div class="grid grid-cols-12 text-right ">
                                                 <label class="{{$class1}} col-start-1 col-span-3">Production Routing Link</label>
-                                                <span class="{{$class2}}  col-start-4 col-span-9">{{$prodRoutingLinkName}}</span>
+                                                <span  class="{{$class2}}  col-start-4 col-span-9">{{$prodRoutingLinkName}}</span>
                                             </div>
                                         </div>
                                         @endif
                                     </div>
+
                                 {{-- TABLES --}}
                                     <div class="">
                                         <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Detail Report</h4>

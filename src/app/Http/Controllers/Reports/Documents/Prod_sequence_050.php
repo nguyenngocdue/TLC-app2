@@ -9,6 +9,7 @@ use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
+use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
 use App\Utils\Support\StringReport;
@@ -358,7 +359,6 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         $prodPouting = Prod_routing::find($params['prod_routing_id'] ?? $this->prodRoutingId)->name;
         $prodDiscipline = isset($params['prod_discipline_id']) ? Prod_discipline::find($params['prod_discipline_id'])->name : '';
 
-        $basicInfoData = [];
         $basicInfoData['project'] = $projectName;
         $basicInfoData['sub_project'] = $subProjectName->name;
         $basicInfoData['prod_routing'] = $prodPouting;
@@ -377,10 +377,8 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
     public function getDataSource($params)
     {
-        $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ?
-        $params['prod_routing_link_id']:Prod_discipline::find($params['prod_discipline_id'])->getProdRoutingLink()->pluck('id')->toArray();
-        
-        $arraySqlStr = $this->generateArraySqlFromSqlStr($prodRoutingLinkIds, $params);   
+        $prodRoutingLinkIds = array_keys($this->getProdRoutingLinks($params));
+        $arraySqlStr = $this->generateArraySqlFromSqlStr($prodRoutingLinkIds, $params);  
         $data = [];
         $allProdOrdersHaveNotSeq = $this->getAllProdOrders($params);
 
@@ -410,15 +408,30 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
             }
 
         }
+        // dd($data);
         return $data;
     }
+
+    private function getProdRoutingLinks($params){
+        $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ?
+        $params['prod_routing_link_id']:Prod_discipline::find($params['prod_discipline_id'])->getProdRoutingLink()->pluck('id')->toArray();
+        $prodRoutingLinks = Prod_routing_link::whereIn('id', $prodRoutingLinkIds)->get()->pluck('name', 'id')->toArray();
+        return $prodRoutingLinks;
+    }   
 
 
 
     public function changeDataSource($dataSource, $params)
     {
+        // dd($dataSource);
         foreach ($dataSource as $k => $values) $dataSource[$k] = $this->addTooltip($values);
         $dataSource = self::updateDataForPivotChart($dataSource);
-        return $dataSource;
+
+        $prodRoutingLinks = $this->getProdRoutingLinks($params);
+        $prodRoutingLinks = array_intersect_key($prodRoutingLinks, array_flip(array_keys($dataSource->toArray())));
+        $output['render_pages'] = $dataSource;
+        $output['table_of_contents'] = $prodRoutingLinks;
+
+        return $output;
     }
 }

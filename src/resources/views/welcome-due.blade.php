@@ -1,53 +1,31 @@
 @extends('layouts.app')
 @section('content')
+<!DOCTYPE html>
+<html lang="en">
 
-<canvas id="myChart" width="400" height="400"></canvas>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
-<script>
-// Lấy tham chiếu đến canvas
-var ctx = document.getElementById('myChart').getContext('2d');
-
-// Dữ liệu cho biểu đồ
-var data = {
-    labels: ['A', 'B', 'C'],
-    datasets: [
-        {
-            label: 'A',
-            data: [20],
-            backgroundColor: 'rgba(255, 99, 132, 0.5)'
-        },
-        {
-            label: 'B',
-            data: [30],
-            backgroundColor: 'rgba(54, 162, 235, 0.5)'
-        },
-        {
-            label: 'C',
-            data: [50],
-            backgroundColor: 'rgba(255, 206, 86, 0.5)'
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Example</title>
+    <style>
+        /* Thêm một phần margin để chúng ta có thể thấy được hiệu ứng scroll */
+        body {
+            margin-top: 200px;
         }
-    ]
-};
+    </style>
+</head>
 
-// Cấu hình cho biểu đồ
-var options = {
-    scales: {
-        yAxes: [{
-            ticks: {
-                beginAtZero: true
-            }
-        }]
-    }
-};
+<body>
+    <!-- Liên kết trỏ đến id của phần tử cần cuộn đến -->
+    <a href="#section2">Scroll to Section 2</a>
 
-// Tạo biểu đồ bar
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: options
-});
-</script>
+    <!-- Phần tử chúng ta muốn cuộn (scroll) đến -->
+    <div id="section2" style="height: 500px; background-color: lightgray;">
+        Section 2 Content
+    </div>
+</body>
+
+</html>
+
 
 @endsection
