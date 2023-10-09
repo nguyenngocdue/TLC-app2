@@ -25,7 +25,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-                <div style='page-break-after:always!important' class=" items-center  box-border p-8">
+                <div style='' class=" items-center  box-border p-8 no-print">
                     {{-- TABLES --}}    
                     @php
                         $tableOfContents = $tableDataSource['table_of_contents'];
@@ -71,7 +71,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                         $dataTable = $data['tableDataSource'];
                         $prodRoutingLinkName = $dataTable->pluck('prod_routing_link_name')->first()->value;
                     @endphp
-                        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
+                        <div style='' class="{{$layout}} items-center bg-white box-border p-8">
                                 <x-print.header6 />
                                 {{-- BASIC INFORMATION --}}
                                 <x-renderer.heading level=2 class='text-center'>Workload Report Across Each Production Order</x-renderer.heading>
