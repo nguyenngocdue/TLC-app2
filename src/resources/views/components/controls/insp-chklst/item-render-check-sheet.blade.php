@@ -1,7 +1,9 @@
 <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
-    <x-renderer.item-render-props id={{$id}} :item="$item" width='' :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
+    @if($showHeader)
+        <x-renderer.item-render-props id={{$id}} :item="$item" width='' :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
+        <hr/>
+    @endif
     {{-- <x-controls.insp-chklst.header-check-sheet :item="$item" :chklst="$chklst" :project="$project" :subProject="$subProject"/> --}}
-    <hr/>
     <x-renderer.heading level=4>
         <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{$item->name}}</span>
     </x-renderer.heading>

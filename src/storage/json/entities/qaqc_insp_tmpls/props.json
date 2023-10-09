@@ -98,7 +98,7 @@
         "name": "_getSheets",
         "column_name": "getSheets",
         "column_type": "eloquent_prop",
-        "label": "Template Sheets",
+        "label": "Template Pages",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",

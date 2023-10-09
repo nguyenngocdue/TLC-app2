@@ -7,6 +7,7 @@ use App\Utils\Constant;
 use App\Utils\Support\Json\SuperDefinitions;
 use App\Utils\Support\JsonControls;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -106,7 +107,10 @@ class ProjectOverview extends Component
         if (is_null($this->id)) {
             // $items = $items->where($id_column, $this->id);
         } else {
-            $items = $items->where($id_column, $this->id);
+            //<< ECO doesn't have sub_project_id column, only getSubProjectsOfEco()
+            if (!in_array($modelPath, ['App\Models\Eco_sheet'])) {
+                $items = $items->where($id_column, $this->id);
+            }
         }
         $items = $items->whereNotIn('status', $closedArray);
         // dump($items->toSql());
