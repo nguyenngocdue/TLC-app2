@@ -245,6 +245,22 @@ class UpdateUserSettings extends Controller
         return $settings;
     }
 
+    private function updateParamsReportForFirstSubmit($inputValue, $settings)
+    {
+        $modeName = $inputValue['mode_option'];
+        // Check case: select mode alternatively 
+        $index = array_search($modeName, array_values($inputValue));
+        if (empty(array_slice($inputValue, $index + 1, count($inputValue) - $index))) return $settings;
+        // Create date to update params into user_setting
+        unset($inputValue['mode_option']);
+        $entity = $inputValue["_entity"];
+        $typeReport = strtolower($inputValue["type_report"]);
+        $indexBreak = array_search("type_report", array_keys($inputValue));
+        $parameter = array_slice($inputValue, $indexBreak + 1, count($inputValue) - $indexBreak);
+        $settings[$entity][$typeReport][$modeName] = $parameter;
+        return $settings;
+    }
+
     private function updateOptionPrintReport($request, $settings)
     {
         $inputValue = $request->all();
@@ -256,8 +272,9 @@ class UpdateUserSettings extends Controller
             $paramsReset = $settingUser[$entity][$typeReport][$modeOption];
             $paramsReset['optionPrintLayout'] = $inputValue['optionPrintLayout'];
             $settings[$entity][$typeReport][$modeOption] = $paramsReset;
+        } else {
+            $settings = $this->updateParamsReportForFirstSubmit($inputValue, $settings);
         }
-        // dd($settings, $inputValue);
         return $settings;
     }
 
@@ -271,18 +288,7 @@ class UpdateUserSettings extends Controller
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "updateOptionPrintReport") {
             return $this->updateOptionPrintReport($request, $settings);
         }
-        $modeName = $inputValue['mode_option'];
-        // Check case: select mode alternatively 
-        $index = array_search($modeName, array_values($inputValue));
-        if (empty(array_slice($inputValue, $index + 1, count($inputValue) - $index))) return $settings;
-
-        // Create date to update params into user_setting
-        unset($inputValue['mode_option']);
-        $entity = $inputValue["_entity"];
-        $typeReport = strtolower($inputValue["type_report"]);
-        $indexBreak = array_search("type_report", array_keys($inputValue));
-        $parameter = array_slice($inputValue, $indexBreak + 1, count($inputValue) - $indexBreak);
-        $settings[$entity][$typeReport][$modeName] = $parameter;
+        $settings = $this->updateParamsReportForFirstSubmit($inputValue, $settings);
         return $settings;
     }
 

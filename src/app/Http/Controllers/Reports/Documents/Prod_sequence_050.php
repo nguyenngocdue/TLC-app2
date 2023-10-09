@@ -108,7 +108,9 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                         LEFT JOIN prod_sequences pse ON pse.id = tb1.prod_sequences_id
                         LEFT JOIN terms terms ON tb1.standard_uom_id = terms.id
                         GROUP BY
-                        prod_routing_link_id,uom_name, tb1.prod_order_id";
+                        prod_routing_link_id,uom_name, tb1.prod_order_id
+                        ORDER BY project_name, sub_project_name, prod_routing_name,
+                        prod_discipline_name, prod_routing_link_name, prod_order_name";
 
         return $sql;
     }
