@@ -22,6 +22,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 	protected $year = '2023';
 	protected $mode = '020';
 	protected $type = 'ghg_sheets';
+	protected $optionPrint = "landscape";
 
 	public function getParamColumns($dataSource, $modeType)
 	{
@@ -72,8 +73,13 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$max = 0;
 		$count = 1;
 		$scopeData = $data[$key];
+		$scopeNames = [];
 		foreach ($scopeData as $key => $scope) {
 			$scopeName = Term::find($scope['scope_id'])->toArray()['name'];
+			$scopeNames[] = [
+				'id'=> $scope['scope_id'],
+				'name' => $scopeName,
+			];
 			$array['meta']['labels'][] = $scopeName;
 			$array['meta']['numbers'][] = $scope['total_tco2e'];
 			$array['meta']['max'] =  $max + $scope['total_tco2e'];
@@ -85,22 +91,21 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			];
 			$max  = $scope['total_tco2e'];
 		}
-
 		foreach ($array as $key => &$value) {
 			if ($key === 'meta') {
 				$value['labels'] = StringReport::arrayToJsonWithSingleQuotes($value['labels']);
 				$value['numbers'] = $value['numbers'];
 			}
 		}
+		$array['scopeNames'] = $scopeNames;
 		$data['pivot_chart_1'] = $array;
-		// dump($data);
+		// dd($data);
 		return $data;
 	}
 
 	private function updateDataPivotHorizontalChart($dataSource)
 	{
 		$scopes = $dataSource['scopes'];
-		$data = [];
 		foreach ($scopes as $scopeId => $scope) $data[$scopeId] = array_merge(...$scope);
 		$datasets = [];
 		$numbers = array_fill(0, count($data), 0);
@@ -132,6 +137,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			],
 			'metric' => $metric,
 		];
+		// dd($dataSource);
 		return $dataSource;
 	}
 

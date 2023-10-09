@@ -15,9 +15,9 @@ class Prod_sequence_040 extends Report_Parent2Controller
     protected $typeView = 'report-pivot';
     protected $tableTrueWidth = false;
     protected $maxH = 50;
-    protected $projectId = 5;
-    protected $subProjectId = 21;
-    protected $prodRoutingId = 2;
+    protected $projectId = 8;
+    protected $subProjectId = 107;
+    protected $prodRoutingId = 62;
 
     public function getDataSource($params)
     {
@@ -32,6 +32,7 @@ class Prod_sequence_040 extends Report_Parent2Controller
         $params['project_id'] = $this->projectId;
         $params['sub_project_id'] = $this->subProjectId;
         $params['prod_routing_id'] = $this->prodRoutingId;
+        // dd($params);
         return $params;
     }
 

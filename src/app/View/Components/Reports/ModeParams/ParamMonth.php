@@ -9,18 +9,21 @@ use Illuminate\Support\Facades\DB;
 class ParamMonth extends ParentTypeParamReport
 {
     protected function getDataSource()
-    {
-        $sql = "SELECT DISTINCT(SUBSTR(otlineDate.otl_date,1, 7)) AS year_months
-                                FROM (SELECT 	otline.ot_date AS otl_date
-                                        FROM hr_overtime_request_lines otline
-                                        WHERE 1 =1 
-                                        AND otline.deleted_at IS NULL
-                                        AND otline.ot_date IS NOT NULL
-                                        GROUP BY otl_date) AS otlineDate
-                                        ORDER BY year_months DESC";
-        $sqlData = DB::select(DB::raw($sql));
-        $dataSource = [];
-        foreach ($sqlData as $item) $dataSource[] = ['id' => $item->year_months, 'name' => $item->year_months];
+    {        
+        $thisYear = date('Y');
+        $months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        $dataSource = []; 
+        
+        for ($year = 2021; $year <= $thisYear; $year++) {
+            foreach ($months as $month) {
+                $dataSource[] = ['id' => $year . '-' . $month, 'name' => $year . '-' . $month];
+            }
+        }
+        
+        usort($dataSource, function ($a, $b) {
+            return strtotime($b['id'] . '-01') - strtotime($a['id'] . '-01');
+        });
+        // dd($dataSource);
         return $dataSource;
     }
 }
