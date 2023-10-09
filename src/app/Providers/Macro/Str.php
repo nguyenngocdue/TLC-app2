@@ -107,7 +107,8 @@ Str::macro('humanReadable', function ($bytes, $base = 1000, $dec = 1) {
 });
 
 Str::macro('removeDuplicateSpaces', function ($str) {    // Use regular expression to remove duplicate spaces
-    $pattern = '/\s+/';
+    // $pattern = '/\s+/'; //<< This will also remove new line, which will make the div's title in one line
+    $pattern = '/[ \t]+/';
     $replacement = ' ';
     $result = preg_replace($pattern, $replacement, $str);
 

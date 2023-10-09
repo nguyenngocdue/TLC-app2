@@ -69,14 +69,23 @@ class RoleSet extends Model implements ContractsRoleSet
      */
     public function users(): BelongsToMany
     {
-        // dd($this);
         return $this->morphedByMany(
-            getModelForGuard($this->attributes['guard_name']),
-            'model',
-            config('permission.table_names.model_has_role_sets'),
-            RoleRegistrar::$pivotRoleSet,
-            config('permission.column_names.model_morph_key')
+            "App\Models\User",
+            "model",
+            'model_has_role_sets',
         );
+        // dd($this);
+        // dump(getModelForGuard($this->attributes['guard_name']));
+        // dump(config('permission.table_names.model_has_role_sets'));
+        // dump(RoleRegistrar::$pivotRoleSet);
+        // dump(config('permission.column_names.model_morph_key'));
+        // return $this->morphedByMany(
+        //     getModelForGuard($this->attributes['guard_name']),
+        //     'model',
+        //     config('permission.table_names.model_has_role_sets'),
+        //     RoleRegistrar::$pivotRoleSet,
+        //     config('permission.column_names.model_morph_key')
+        // );
     }
 
     /**
@@ -185,7 +194,7 @@ class RoleSet extends Model implements ContractsRoleSet
         }
 
         if (is_int($role)) {
-            if($roleCache = Role::findFromCache($role))$role = $roleCache;
+            if ($roleCache = Role::findFromCache($role)) $role = $roleCache;
             else $role = $roleClass->findById($role, $this->getDefaultGuardName());
         }
 
