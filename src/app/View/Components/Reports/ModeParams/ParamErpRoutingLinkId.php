@@ -27,7 +27,7 @@ class ParamErpRoutingLinkId extends ParentParamReports
                 ORDER BY erpl.name
         ";
         $result = DB::select($sql);
-        // dump($sql);
+        // dump($result);
         return $result;
     }
 }

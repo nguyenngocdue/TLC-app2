@@ -22,9 +22,9 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
     use TraitParamsSettingReport;
 
     protected $mode = '010';
-    protected $projectId = 5;
-    protected $subProjectId = 21;
-    protected $prodRoutingId = 2;
+    protected $projectId = 8;
+    protected $subProjectId = 107;
+    protected $prodRoutingId = 62;
     protected $groupByLength = 1;
     protected $pageLimit = 100000;
     protected $groupBy = 'prod_discipline_name';
@@ -152,6 +152,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
 
     public function getTableColumns($params, $dataSource)
     {
+        $optionLayout = $params['optionPrintLayout'] ?? $this->optionPrint;
         return
             [
                 [
@@ -164,7 +165,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                     "title" => "Production Order",
                     "dataIndex" => "prod_order_name",
                     "align" => "center",
-                    "width" => 90,
+                    "width" => $optionLayout === 'portrait' ? 90: 150,
                 ],
                 [
                     "title" => "Status",

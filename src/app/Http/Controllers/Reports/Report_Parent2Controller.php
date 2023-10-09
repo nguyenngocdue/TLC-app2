@@ -234,7 +234,9 @@ abstract class Report_Parent2Controller extends Controller
 
         $isEmptyAllDataSource = $this->isEmptyAllDataSource($dataSource);
 
+        // dd($dataSource);
         $tableColumns = $this->getTableColumns($params, $dataSource);
+
         $tableColumns = $this->typeView === 'report-pivot'
         && empty($tableColumns) ? [] : $tableColumns;
 

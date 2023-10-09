@@ -32,31 +32,34 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                         $n = 0;
                     @endphp
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3">
-                                            No .
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Production Routing Link
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($tableOfContents as $key => $value)
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{++$n}}
+                            <div class="bg-white">
+                                <x-renderer.heading level=5 class='w-full border-b text-sm text-left text-gray-500 dark:text-gray-400 bg-gray-50 p-3'>Table of Content:</x-renderer.heading>
+                                <table class="px-6 pt-4 py-3 w-full text-sm text-left  text-gray-500 dark:text-gray-400">
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3">
+                                                No .
                                             </th>
-                                            <td class="px-6 py-4">
-                                                <a href="#sheet{{$key}}" class="text-blue-600">{{$value}}</a>
-                                            </td>
+                                            <th scope="col" class="px-6 py-3">
+                                                Production Routing Link
+                                            </th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($tableOfContents as $key => $value)
+                                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    {{++$n}}
+                                                </th>
+                                                <td class="px-6 py-4">
+                                                    <a href="#sheet{{$key}}" class="text-blue-600">{{$value}}</a>
+                                                </td>
+                                            </tr>
 
-                                    @endforeach                                    
-                                </tbody>
-                            </table>
+                                        @endforeach                                    
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
 
@@ -117,7 +120,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                         <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Detail Report</h4>
                                         <x-renderer.report.pivot-table 
                                                 showNo={{true}} 
-                                                :tableColumns="$tableColumns" 
+                                                :tableColumns="$tableColumns[$key]" 
                                                 :dataSource="$dataTable" 
                                                 :tableDataHeader="$tableDataHeader" 
                                                 maxH='{{$maxH}}' 

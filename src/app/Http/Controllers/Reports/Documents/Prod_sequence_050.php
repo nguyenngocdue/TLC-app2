@@ -73,6 +73,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     pse.id AS prod_sequences_id,
                     po.id AS prod_order_id,
               		po.name AS prod_order_name,
+                    prl.standard_uom AS standard_uom,
                     COUNT(DISTINCT pru.date) AS count_pru_date
                     FROM
                         sub_projects sp
@@ -105,7 +106,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                             prod_sequences_id
                         ORDER BY pj.name, sp.name, pr.name, pd.name, prl.name )AS tb1
                         LEFT JOIN prod_sequences pse ON pse.id = tb1.prod_sequences_id
-                        LEFT JOIN terms terms ON pse.uom_id = terms.id
+                        LEFT JOIN terms terms ON tb1.standard_uom = terms.id
                         GROUP BY
                         prod_routing_link_id,uom_name, tb1.prod_order_id";
 
@@ -164,11 +165,14 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     private function updateDataForPivotChart($dataSource)
     {
         $result = [];
+        // dd($dataSource);
         foreach ($dataSource as $prodRoutingLinkId => $data) {
             $items = array_values($data->toArray());
             // if(empty($items)) continue;
             $primaryData = reset($items);
-            $unit = isset($primaryData->uom_name) ? $primaryData->uom_name : "(Unknown Unit)";
+            $unit = isset($primaryData['uom_name']) ? $primaryData['uom_name'] : "(Unknown Unit)";
+            // dump($unit);
+
 
             $typeCharts = ['man_power', 'total_uom', 'min_on_day', 'min_on_set'];
             $titleCharts = ['Man Power (AVG)', $unit.'/Day (AVG)', 'min/Day (AVG)', 'min/'.$unit .'(AVG)'];
@@ -276,80 +280,86 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     public function getTableColumns($params, $dataSource)
     {
 
-        $unit = '<small class="text-orange-300">Unknown Unit</small>';
-        if(isset($dataSource['tableDataSource'])){
-            $data = $dataSource instanceof Collection ? $dataSource['tableDataSource']->toArray() : $dataSource['tableDataSource']->first();
-            $unit = isset($data['uom_name']) && ($x = $data['uom_name']) ? $x : $unit;
-        }
         $optionLayout = $params['optionPrintLayout'] ?? $this->optionPrint;
-        return
-            [
-                [
-                    "title" => "Project",
-                    "dataIndex" => "project_name",
-                    "align" => "left",
-                    "width" => 80,
-                ],
-                [
-                    "title" => "Sub Project",
-                    "dataIndex" => "sub_project_name",
-                    "align" => "left",
-                    "width" =>  $optionLayout === 'portrait' ? 110: 80,
-                ],
-                [
-                    "title" => "Production Routing",
-                    "dataIndex" => "prod_routing_name",
-                    "align" => "left",
-                    "width" => $optionLayout === 'portrait' ? 250: 220,
-                ],
-                [
-                    "title" => "Production Discipline",
-                    "dataIndex" => "prod_discipline_name",
-                    "align" => "left",
-                    "width" => $optionLayout === 'portrait' ? 200: 75,
-                    "hasListenTo" => true,
-                ],
-                [
-                    "title" => "Production Routing Link",
-                    "dataIndex" => "prod_routing_link_name",
-                    "align" => "left",
-                    "width" => $optionLayout === 'portrait' ? 300: 250,
-                ],
-                [
-                    "title" => "Production Order",
-                    "dataIndex" => "prod_order_name",
-                    "align" => "left",
-                    "width" =>  $optionLayout === 'portrait' ? 150: 138,
-                ],
-                [
-                    "title" => "Man Power <br/>(AVG)",
-                    "dataIndex" => "man_power",
-                    "align" => "right",
-                    "width" => 110,
-                    // "footer" => "agg_sum",
-                ],
-                [
-                    "title" => $unit . "/Day <br/>(AVG)",
-                    "dataIndex" => "total_uom",
-                    "align" => "right",
-                    "width" => 110,
-                    // "footer" => "agg_sum",
-                ],
-                [
-                    "title" => "min/Day <br/>(AVG)",
-                    "dataIndex" => "min_on_day",
-                    "align" => "right",
-                    "width" => 110,
-                    // "footer" => "agg_sum",
-                ],
-                [
-                    "title" => "min/$unit <br/>(AVG)",
-                    "dataIndex" => "min_on_set",
-                    "align" => "right",
-                    "width" =>  110,
-                    // "footer" => "agg_sum",
-                ]
-            ];
+        $tableColumns = [];
+        if(isset($dataSource['render_pages'])){
+            $data = $dataSource['render_pages']->toArray();
+            foreach ($data as $key => $values){
+                    $item = $values instanceof Collection ? $values['tableDataSource']->toArray() : $values['tableDataSource']->first();
+                    $unit = isset($item['uom_name']) && (!is_null($item['uom_name'])) ? $item['uom_name'] : '<small class="text-orange-300">Unknown Unit</small>';
+                    $tableColumns[$key] =  [
+                        [
+                            "title" => "Project",
+                            "dataIndex" => "project_name",
+                            "align" => "left",
+                            "width" => 80,
+                        ],
+                        [
+                            "title" => "Sub Project",
+                            "dataIndex" => "sub_project_name",
+                            "align" => "left",
+                            "width" =>  $optionLayout === 'portrait' ? 110: 80,
+                        ],
+                        [
+                            "title" => "Production Routing",
+                            "dataIndex" => "prod_routing_name",
+                            "align" => "left",
+                            "width" => $optionLayout === 'portrait' ? 250: 220,
+                        ],
+                        [
+                            "title" => "Production Discipline",
+                            "dataIndex" => "prod_discipline_name",
+                            "align" => "left",
+                            "width" => $optionLayout === 'portrait' ? 200: 75,
+                            "hasListenTo" => true,
+                        ],
+                        [
+                            "title" => "Production Routing Link",
+                            "dataIndex" => "prod_routing_link_name",
+                            "align" => "left",
+                            "width" => $optionLayout === 'portrait' ? 300: 250,
+                        ],
+                        [
+                            "title" => "Production Order",
+                            "dataIndex" => "prod_order_name",
+                            "align" => "left",
+                            "width" =>  $optionLayout === 'portrait' ? 150: 138,
+                        ],
+                        [
+                            "title" => "Man Power <br/>(AVG)",
+                            "dataIndex" => "man_power",
+                            "align" => "right",
+                            "width" => 110,
+                            // "footer" => "agg_sum",
+                        ],
+                        [
+                            "title" => $unit . "/Day <br/>(AVG)",
+                            "dataIndex" => "total_uom",
+                            "align" => "right",
+                            "width" => 110,
+                            // "footer" => "agg_sum",
+                        ],
+                        [
+                            "title" => "min/Day <br/>(AVG)",
+                            "dataIndex" => "min_on_day",
+                            "align" => "right",
+                            "width" => 110,
+                            // "footer" => "agg_sum",
+                        ],
+                        [
+                            "title" => "min/$unit <br/>(AVG)",
+                            "dataIndex" => "min_on_set",
+                            "align" => "right",
+                            "width" =>  110,
+                            // "footer" => "agg_sum",
+                        ]
+                    ];
+                }
+        };
+
+        // dd($tableColumns);
+        return $tableColumns;
+           
     }
 
     public function getBasicInfoData($params)
