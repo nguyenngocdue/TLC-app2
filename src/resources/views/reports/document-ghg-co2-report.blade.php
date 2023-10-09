@@ -35,7 +35,7 @@ $info = $tableDataSource['info'];
             break;
             case 'portrait':
             default:
-                $layout = 'w-[1000px] min-h-[1360px]';
+                $layout = 'w-[1000px] min-h-[880px]';
                 break;
         }
 @endphp
@@ -44,7 +44,7 @@ $info = $tableDataSource['info'];
 <br />
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8 relative">
+        <div style='' class="{{$layout}} items-center bg-white box-border p-8 relative">
             <x-print.header6 :itemsShow="['logo']"/>
             <div class="py-5">
                 <x-renderer.heading level=1 xalign='center'>CO2 Emission Report</x-renderer.heading>
@@ -76,7 +76,7 @@ $info = $tableDataSource['info'];
         <x-renderer.page-break />
         {{-- chart 1 --}}
         <div class="relative">
-            <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
+            <div style='' class="{{$layout}} items-center bg-white box-border p-8">
                 <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
                 <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
                     <div class="w-full flex px-4">
