@@ -32,7 +32,7 @@ trait TraitYAxisDiscipline
                 if (isset($line['default_monitors'])) {
                     $count = $line['default_monitors']->count();
                     if ($count) {
-                        $value .= "<br/>(" . $count . ")";
+                        $value .= "<br/>(" . $count . '<i class="fa-duotone fa-user"></i>' . ")";
                     }
                     $cell_title = "Default 3rd Party to Sign Off:\n" . $line['default_monitors']->join("\n");
                 }
