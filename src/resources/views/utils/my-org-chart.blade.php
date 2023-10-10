@@ -5,7 +5,7 @@
 @section('content')
 <div >
     @if($isAdmin)
-    <div class='p-2'>
+    <div class='p-2 no-print'>
         <x-renderer.button href="/my-org-chart" type="{{$settingsView ? '' : 'secondary'}}">Position ORG Chart </x-renderer.button>
         <x-renderer.button href="/my-org-chart?approval-tree=true" type="{{$settingsView ? 'secondary' : ''}}">Approval Tree</x-renderer.button>
     </div>
@@ -50,14 +50,14 @@
         </form>
     </div>
     <script src="{{ asset('js/go_debug@2.3.8.js') }}"></script>
-    <div class="flex items-center justify-center">
+    <div class="flex items-center justify-center no-print">
         <x-controls.text2 type="search" class="w-[550px] mr-1 my-2" name="mySearch"
         placeholder="Press ENTER to search, and Press SPACE to pan to the next result"
         value="" onkeypress="if (event.keyCode === 13) searchDiagram()" />
         <x-renderer.button type="secondary" onClick="searchDiagram()" class="w-20" >Search</x-renderer.button>
     </div>
     <div class="relative">
-        <div id="myOverviewDiv" class="w-60 h-60 absolute top-1 left-1 border bg-gray-100 border-gray-100"
+        <div id="myOverviewDiv" class="no-print w-60 h-60 absolute top-1 left-1 border bg-gray-100 border-gray-100"
         style="cursor: move; z-index:19;">
             <canvas tabindex="0" width="198" height="98" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none; width: 198px; height: 98px; cursor: move;"></canvas>
             <div style="position: absolute; overflow: auto; width: 198px; height: 98px; z-index: 1;">

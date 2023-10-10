@@ -18,15 +18,10 @@ use Illuminate\Support\Facades\App;
 class MyOrgChartController extends Controller
 {
     const ARRAY_TSO_NONE = [2, 3];
-
     const ARRAY_RESIGNED = [0, 1];
-
     const ARRAY_NONE_RESIGNED = [0];
-
     const IS_BOD = [1];
-
     const ARRAY_BOD = [0, 1];
-
 
     use TraitViewAllFunctions;
     public function getType()
