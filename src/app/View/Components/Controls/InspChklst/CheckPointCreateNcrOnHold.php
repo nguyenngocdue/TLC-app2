@@ -54,7 +54,8 @@ class CheckPointCreateNcrOnHold extends Component
     private function getHrefCreateNCR()
     {
         $params = [
-            'correctable_type' => Str::modelPathFrom($this->line->getTable()),
+            // 'correctable_type' => Str::modelPathFrom($this->line->getTable()),
+            'parent_type' => Str::modelPathFrom($this->line->getTable()),
             'parent_id' => $this->line->id,
             'description' => "During " . $this->line->description . ", ",
         ];
@@ -63,7 +64,7 @@ class CheckPointCreateNcrOnHold extends Component
         if ($this->line->getProdRouting) $params['prod_routing_id'] = $this->line->getProdRouting->id;
         if ($this->line->getProdOrder) $params['prod_order_id'] = $this->line->getProdOrder->id;
         $href = route('qaqc_ncrs.create', $params);
-        $lineNcrs = $this->line->getMorphManyByIds($this->checkPointIds,'getNcrs',false);
+        $lineNcrs = $this->line->getMorphManyByIds($this->checkPointIds, 'getNcrs', false);
         return ['NCR', $href, 'Create a new NCR', $lineNcrs, 'qaqc_ncrs.show'];
     }
     private function getHrefHseCreateCAR()
@@ -73,7 +74,7 @@ class CheckPointCreateNcrOnHold extends Component
             'correctable_id' => $this->line->id,
         ];
         $href = route('hse_corrective_actions.create', $params);
-        $lineCorrectiveActions = $this->line->getMorphManyByIds($this->checkPointIds,'getCorrectiveActions',false);
+        $lineCorrectiveActions = $this->line->getMorphManyByIds($this->checkPointIds, 'getCorrectiveActions', false);
         return ['CAR', $href, 'Create a new Hse Corrective Action', $lineCorrectiveActions, 'hse_corrective_actions.show'];
     }
 }

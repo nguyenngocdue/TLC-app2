@@ -73,6 +73,7 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
                 'owner_id' => $ownerId,
                 'status' => 'new',
                 'progress' => 0,
+                'prod_discipline_id' => $inspTmplSht->prod_discipline_id,
                 'order_no' => $inspTmplSht->order_no,
             ]);
             $thirdPartyList = $inspTmplSht->getMonitors1();
