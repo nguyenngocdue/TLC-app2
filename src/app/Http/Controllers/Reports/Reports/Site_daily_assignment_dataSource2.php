@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Utils\Support\DateReport;
-use App\Utils\Support\PivotReport;
-use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
 class Site_daily_assignment_dataSource2 extends Controller
@@ -19,9 +17,9 @@ class Site_daily_assignment_dataSource2 extends Controller
 
     public function getSqlStr($params)
     {
-        $pickerDate = $params['picker_date'] ?? PivotReport::defaultPickerDate();
+        $pickerDate = $params['picker_date'] ?? DateReport::defaultPickerDate();
         [$startDate, $endDate] = DateReport::explodePickerDate($pickerDate, 'Y-m-d');
-        $valOfParams = Report::createValueForParams([
+        $valOfParams = DateReport::createValueForParams([
             'prod_routing_id',
             'prod_routing_link_id',
             'sub_project_id',

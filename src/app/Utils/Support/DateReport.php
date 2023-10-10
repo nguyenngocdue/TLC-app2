@@ -50,4 +50,38 @@ class DateReport
             array('year' => $currentYear, 'month' => $currentMonth) :
             $currentYear . '-' . $currentMonth;
     }
+
+    private static function separateStrPickerDate($strPickerDate){
+		$dates = explode("-", $strPickerDate);
+        return  ['start' => self::formatDateString(trim($dates[0])), 'end' =>self::formatDateString(trim($dates[1]))];
+    }
+
+    public static function createValueForParams($fields, $params)
+    {
+        // dd($fields, $params);
+        $valParams = [];
+        foreach ($fields as $field) {
+            if(isset($params[$field]) &&  is_array($params[$field])){
+                $valParams[$field] = isset($params[$field]) ? implode(',', $params[$field]) : '';
+            }
+            else {
+                $valParams[$field] = isset($params[$field]) ?  $params[$field] : '';
+            }
+            if($field = 'picker_date'){
+                $parseDate = self::separateStrPickerDate($params['picker_date']);
+                $valParams[$field] = $parseDate;
+            } 
+        }
+        return $valParams;
+    }
+
+    public static function defaultPickerDate()
+    {
+        $currentDate = new DateTime();
+        $targetDate = clone $currentDate;
+        $targetDate->modify('-6 months');
+        $targetDate->modify('-1 day');
+        return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
+    }
+
 }

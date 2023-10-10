@@ -22,7 +22,7 @@ class Hr_timesheet_line_dataSource extends Controller
 
     public function getSqlStr($params)
     {
-        $pickerDate = $params['picker_date'] ?? PivotReport::defaultPickerDate();
+        $pickerDate = $params['picker_date'] ?? DateReport::defaultPickerDate();
         [$startDate, $endDate] = DateReport::explodePickerDate($pickerDate, 'Y-m-d');
         $sql = "SELECT
                     DATE(tsl.start_time) AS time_sheet_start_time,

@@ -167,17 +167,16 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     private function updateDataForPivotChart($dataSource)
     {
         $result = [];
-        // dd($dataSource);
         foreach ($dataSource as $prodRoutingLinkId => $data) {
             $items = array_values($data->toArray());
-            // if(empty($items)) continue;
             $primaryData = reset($items);
             $unit = isset($primaryData['uom_name']) ? $primaryData['uom_name'] : "(Unknown Unit)";
-            // dump($unit);
 
-
+            // information for headings
             $typeCharts = ['man_power', 'total_uom', 'min_on_day', 'min_on_set'];
             $titleCharts = ['Man Power (AVG)', $unit.'/Day (AVG)', 'min/Day (AVG)', 'min/'.$unit .' (AVG)'];
+            $titleHeadingCharts = ['Man Power (AVG)', 'Efficiency', 'Time Efficiency', 'Productivity'];
+
             foreach($typeCharts as $key => $typeChart){
                 // information for meta data
                 $labelName = array_map(fn($item) => $item['prod_order_name'], $items);
@@ -208,11 +207,14 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     'fontSizeAxisXY' => 16,
                     'fontSize' => 14,
                     'titleX' => "",
-                    'titleY' => "%WIP",
+                    'titleY' => $titleCharts[$key],
                     #'height' => 200,
                     #'width' => 400,
                     'scaleMaxY' => ceil((int)$max*1.5),
                     'titleChart' => $titleCharts[$key],
+                    'displayTitleChart' => 0,
+                    'displayLegend' => 0,
+                    'titleHeading' => $titleHeadingCharts[$key],
                     'fontSizeTitleChart' => 20,
                     'barPercentage' => 0.5,
                     'widthBar' => 100,

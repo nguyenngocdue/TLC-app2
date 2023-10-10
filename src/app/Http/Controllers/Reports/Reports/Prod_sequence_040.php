@@ -22,13 +22,13 @@ class Prod_sequence_040 extends Report_Parent2Controller
     public function getDataSource($params)
     {
         $primaryData = (new Prod_sequence_dataSource())->getDataSource($params);
-        // dd($primaryData);
+        dump($primaryData);
         return collect($primaryData);
     }
 
     protected function getDefaultValueParams($params, $request)
     {
-        $params['month'] = DateReport::getCurrentYearAndMonth();
+        $params['picker_date'] =DateReport::defaultPickerDate();
         $params['project_id'] = $this->projectId;
         $params['sub_project_id'] = $this->subProjectId;
         $params['prod_routing_id'] = $this->prodRoutingId;

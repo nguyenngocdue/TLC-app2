@@ -84,7 +84,7 @@ var chartConfig = {
         },
         plugins: {
             title:{
-                display: true,
+                display: {!! $dimensions['displayTitleChart'] ?? 0 !!},
                 text:  '{!! $dimensions['titleChart'] ?? null !!}',
                 font:{
                     size: {!! $dimensions['fontSizeTitleChart'] ?? 16 !!}, 
@@ -93,7 +93,7 @@ var chartConfig = {
             },
             legend: {
                 position: 'bottom',
-                display: true,
+                display: {!! $dimensions['displayLegend'] ?? 0 !!},
                 onClick: (evt, legendItem, legend) => {
                     const index = legend.chart.data.labels.indexOf(legendItem.text);
                     console.log(legendItem);
@@ -167,5 +167,5 @@ var chartElement = document.getElementById(key).getContext('2d');
 var chartRendered = new Chart(chartElement, chartConfig);
 //chartRendered.data.datasets[0].barThickness = {!! $dimensions['widthBar'] ?? null !!};
 //chartRendered.update();
-console.log(chartRendered)
+//console.log(chartRendered)
 </script>
