@@ -49,7 +49,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -335,7 +335,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -346,7 +346,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -357,7 +357,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -401,7 +401,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -423,7 +423,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -445,7 +445,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -456,7 +456,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -478,7 +478,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -500,7 +500,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -577,7 +577,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "true",
+        "finished": "",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
