@@ -73,7 +73,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     pse.id AS prod_sequences_id,
                     po.id AS prod_order_id,
               		po.name AS prod_order_name,
-                    prl.standard_uom AS standard_uom,
+                    prl.standard_uom_id AS standard_uom_id,
                     COUNT(DISTINCT pru.date) AS count_pru_date
                     FROM
                         sub_projects sp
@@ -106,9 +106,11 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                             prod_sequences_id
                         ORDER BY pj.name, sp.name, pr.name, pd.name, prl.name )AS tb1
                         LEFT JOIN prod_sequences pse ON pse.id = tb1.prod_sequences_id
-                        LEFT JOIN terms terms ON tb1.standard_uom = terms.id
+                        LEFT JOIN terms terms ON tb1.standard_uom_id = terms.id
                         GROUP BY
-                        prod_routing_link_id,uom_name, tb1.prod_order_id";
+                        prod_routing_link_id,uom_name, tb1.prod_order_id
+                        ORDER BY project_name, sub_project_name, prod_routing_name,
+                        prod_discipline_name, prod_routing_link_name, prod_order_name";
 
         return $sql;
     }
@@ -165,17 +167,16 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     private function updateDataForPivotChart($dataSource)
     {
         $result = [];
-        // dd($dataSource);
         foreach ($dataSource as $prodRoutingLinkId => $data) {
             $items = array_values($data->toArray());
-            // if(empty($items)) continue;
             $primaryData = reset($items);
             $unit = isset($primaryData['uom_name']) ? $primaryData['uom_name'] : "(Unknown Unit)";
-            // dump($unit);
 
-
+            // information for headings
             $typeCharts = ['man_power', 'total_uom', 'min_on_day', 'min_on_set'];
-            $titleCharts = ['Man Power (AVG)', $unit.'/Day (AVG)', 'min/Day (AVG)', 'min/'.$unit .'(AVG)'];
+            $titleCharts = ['Man Power (AVG)', $unit.'/Day (AVG)', 'min/Day (AVG)', 'min/'.$unit .' (AVG)'];
+            $titleHeadingCharts = ['Man Power (AVG)', 'Efficiency', 'Time Efficiency', 'Productivity'];
+
             foreach($typeCharts as $key => $typeChart){
                 // information for meta data
                 $labelName = array_map(fn($item) => $item['prod_order_name'], $items);
@@ -206,11 +207,14 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     'fontSizeAxisXY' => 16,
                     'fontSize' => 14,
                     'titleX' => "",
-                    'titleY' => "%WIP",
+                    'titleY' => $titleCharts[$key],
                     #'height' => 200,
                     #'width' => 400,
                     'scaleMaxY' => ceil((int)$max*1.5),
                     'titleChart' => $titleCharts[$key],
+                    'displayTitleChart' => 0,
+                    'displayLegend' => 0,
+                    'titleHeading' => $titleHeadingCharts[$key],
                     'fontSizeTitleChart' => 20,
                     'barPercentage' => 0.5,
                     'widthBar' => 100,

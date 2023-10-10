@@ -50,7 +50,7 @@ class DisallowedDirectCreationChecker extends Component
 
             foreach ($requiredParams as $param) {
                 if (!$request->has($param)) {
-                    Log::info("Missing $param parameter during creation of $type");
+                    Log::info("Missing [$param] parameter during creation of $type");
                     return true;
                 }
             }

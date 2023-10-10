@@ -21,6 +21,7 @@ class ItemRenderProps extends Component
         private $item = null,
         private $hasReadOnly = false,
         private $width = null,
+        private $hiddenComponent = false,
     ) {
         //
     }
@@ -42,6 +43,7 @@ class ItemRenderProps extends Component
             'item' => $this->item,
             'hasReadOnly' => $this->hasReadOnly,
             'width' => $this->width,
+            'hiddenComponent' => $this->hiddenComponent ? "hidden" : "",
         ];
         return view('components.renderer.item-render-props', $params);
     }

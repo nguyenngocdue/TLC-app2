@@ -263,20 +263,6 @@ class Report
         return $beforeDate . ' - ' . $nowDate;
     }
 
-    public static function createValueForParams($fields, $params)
-    {
-        // dd($fields, $params);
-        $valParams = [];
-        foreach ($fields as $field) {
-            if(isset($params[$field]) &&  is_array($params[$field])){
-                $valParams[$field] = isset($params[$field]) ? implode(',', $params[$field]) : '';
-            } else {
-                $valParams[$field] = isset($params[$field]) ?  $params[$field] : '';
-            }
-        }
-        return $valParams;
-    }
-
     public static function transformDataItemByKey($data, $key, $dataType = 'array') {
         $transformData = [];
 		foreach ($data as $value){

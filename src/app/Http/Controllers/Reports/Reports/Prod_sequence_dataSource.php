@@ -19,8 +19,7 @@ class Prod_sequence_dataSource extends Controller
 
     public function getSqlStr($params)
     {
-
-        $valOfParams = Report::createValueForParams([
+        $valOfParams = DateReport::createValueForParams([
             'sub_project_id',
             'project_id',
             'prod_routing_id',
@@ -28,10 +27,10 @@ class Prod_sequence_dataSource extends Controller
             'prod_routing_link_id',
             'erp_routing_link_id',
             'prod_discipline_id',
-            'month'
+            'picker_date'
         ], $params);
 
-        // dump($valOfParams);
+        // dd($valOfParams);
         $sql = "SELECT tb1.*
                     FROM (SELECT
                     sp.project_id AS project_id,
@@ -43,6 +42,7 @@ class Prod_sequence_dataSource extends Controller
                     pd.id AS prod_discipline_id,
                     ps.total_man_hours AS total_man_hours,
                     ps.id AS prod_sequence_id,
+                    ps.erp_prod_order_name AS erp_prod_order_name,
                     SUBSTR(pru.date, 1, 7) AS `month`,
                     pru.date AS date_prod_run,
                     #pru.start,
@@ -80,7 +80,8 @@ class Prod_sequence_dataSource extends Controller
                     AND prde.prod_routing_link_id = prl.id
                     AND pd.id = prl.prod_discipline_id
                     AND pru.prod_sequence_id = ps.id
-                    AND  SUBSTR(pru.date, 1, 7) = '{$valOfParams["month"]}'
+                    AND  SUBSTR(pru.date, 1, 10) >= '{$valOfParams["picker_date"]["start"]}'
+                    AND  SUBSTR(pru.date, 1, 10) <= '{$valOfParams["picker_date"]["end"]}'
                     ) AS tb1";
         // dump($sql);
         return $sql;

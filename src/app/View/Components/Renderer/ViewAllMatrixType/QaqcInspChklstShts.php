@@ -8,12 +8,13 @@ use App\Models\Qaqc_insp_tmpl;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 {
-    // use TraitYAxisDiscipline;
+    use TraitYAxisDiscipline;
 
     private $project, $qaqcInspTmpl, $subProject, $prodRouting, $prodDiscipline;
     // protected $viewportMode = null;
@@ -38,9 +39,9 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         parent::__construct();
         [$this->project, $this->qaqcInspTmpl, $this->subProject, $this->prodRouting, $this->prodDiscipline] = $this->getUserSettings();
         $this->project = $this->project ? $this->project : 5;
-        $this->qaqcInspTmpl = $this->qaqcInspTmpl ? $this->qaqcInspTmpl : 5;
         $this->subProject = $this->subProject ? $this->subProject : 21;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
+        $this->qaqcInspTmpl = $this->qaqcInspTmpl ? $this->qaqcInspTmpl : null;
     }
 
     private function getUserSettings()
@@ -70,6 +71,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected function getXAxis()
     {
         $result = [];
+        if (is_null($this->qaqcInspTmpl)) {
+            echo Blade::render("<x-feedback.alert type='error' message='You must specify Checklist Type.'></x-feedback.alert>");
+            return [];
+        }
         $data = Qaqc_insp_tmpl::find($this->qaqcInspTmpl)
             ->getSheets()
             ->orderBy('order_no')
@@ -82,7 +87,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 'title' => $line->name,
                 'align' => 'center',
                 'width' => 40,
-                // 'prod_discipline_id' => $line->prod_discipline_id,
+                'prod_discipline_id' => $line->prod_discipline_id,
                 // "colspan" => 1 + sizeof($extraColumns),
 
             ];
@@ -96,7 +101,6 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $result = Qaqc_insp_chklst_sht::query()
             // ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmpl)
             ->get();
-        // dump($result);
         return $result;
     }
 

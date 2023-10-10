@@ -316,15 +316,6 @@ class PivotReport
         return $data;
     }
 
-    public static function defaultPickerDate()
-    {
-        $currentDate = new DateTime();
-        $targetDate = clone $currentDate;
-        $targetDate->modify('-6 months');
-        $targetDate->modify('-1 day');
-        return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
-    }
-
     public static function getDatesBetween($startDate, $endDate)
     {
         $dateList = array();

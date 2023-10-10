@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls\InspChklst;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -18,6 +19,7 @@ class CheckPointCreateNcrOnHold extends Component
         private $rowIndex,
         private $debug,
         private $checkPointIds = [],
+        private $sheet = null,
     ) {
         //
     }
@@ -54,16 +56,18 @@ class CheckPointCreateNcrOnHold extends Component
     private function getHrefCreateNCR()
     {
         $params = [
-            'correctable_type' => Str::modelPathFrom($this->line->getTable()),
+            // 'correctable_type' => Str::modelPathFrom($this->line->getTable()),
+            'parent_type' => Str::modelPathFrom($this->line->getTable()),
             'parent_id' => $this->line->id,
             'description' => "During " . $this->line->description . ", ",
+            'prod_discipline_id' => $this->sheet->prod_discipline_id,
         ];
         if ($this->line->getProject) $params['project_id'] = $this->line->getProject->id;
         if ($this->line->getSubProject) $params['sub_project_id'] = $this->line->getSubProject->id;
         if ($this->line->getProdRouting) $params['prod_routing_id'] = $this->line->getProdRouting->id;
         if ($this->line->getProdOrder) $params['prod_order_id'] = $this->line->getProdOrder->id;
         $href = route('qaqc_ncrs.create', $params);
-        $lineNcrs = $this->line->getMorphManyByIds($this->checkPointIds,'getNcrs',false);
+        $lineNcrs = $this->line->getMorphManyByIds($this->checkPointIds, 'getNcrs', false);
         return ['NCR', $href, 'Create a new NCR', $lineNcrs, 'qaqc_ncrs.show'];
     }
     private function getHrefHseCreateCAR()
@@ -73,7 +77,7 @@ class CheckPointCreateNcrOnHold extends Component
             'correctable_id' => $this->line->id,
         ];
         $href = route('hse_corrective_actions.create', $params);
-        $lineCorrectiveActions = $this->line->getMorphManyByIds($this->checkPointIds,'getCorrectiveActions',false);
-        return ['CAR', $href, 'Create a new Hse Corrective Action', $lineCorrectiveActions, 'hse_corrective_actions.show'];
+        $lineCorrectiveActions = $this->line->getMorphManyByIds($this->checkPointIds, 'getCorrectiveActions', false);
+        return ['CAR', $href, 'Create a new HSE Corrective Action', $lineCorrectiveActions, 'hse_corrective_actions.show'];
     }
 }

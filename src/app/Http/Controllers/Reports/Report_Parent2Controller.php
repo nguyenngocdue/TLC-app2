@@ -11,6 +11,7 @@ use App\Utils\ClassList;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\DocumentReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
@@ -59,7 +60,7 @@ abstract class Report_Parent2Controller extends Controller
     protected function getDefaultValueParams($params, $request)
     {
         $x = 'picker_date';
-        $params[$x] = PivotReport::defaultPickerDate();
+        $params[$x] = DateReport::defaultPickerDate();
         return $params;
     }
 

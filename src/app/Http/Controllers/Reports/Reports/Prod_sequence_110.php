@@ -29,7 +29,7 @@ class Prod_sequence_110 extends Report_Parent2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $params['month'] = DateReport::getCurrentYearAndMonth();
+        $params['picker_date'] =DateReport::defaultPickerDate();
         $params['project_id'] = $this->projectId;
         $params['sub_project_id'] = $this->subProjectId;
         return $params;

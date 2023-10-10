@@ -18,14 +18,15 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout2')
+    {{-- @include('components.reports.show-layout2') --}}
 </div>
+
 
 
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-                <div style='page-break-after:always!important' class=" items-center  box-border p-8">
+                <div style='' class=" items-center  box-border p-8 no-print">
                     {{-- TABLES --}}    
                     @php
                         $tableOfContents = $tableDataSource['table_of_contents'];
@@ -61,28 +62,25 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                 </table>
                             </div>
                         </div>
-
-
                 </div>
-
-
                 @foreach($tableDataSource['render_pages'] as $key => $data)
+                    {{-- @dd($tableDataSource) --}}
                     @php
                         $dataTable = $data['tableDataSource'];
                         $prodRoutingLinkName = $dataTable->pluck('prod_routing_link_name')->first()->value;
                     @endphp
-                        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
+                        <div style='' class="{{-- {{$layout}} --}} w-[1400px] min-h-[1000px] items-center bg-white box-border p-8">
                                 <x-print.header6 />
-                                {{-- BASIC INFORMATION --}}
-                                <x-renderer.heading level=2 class='text-center'>Workload Report Across Each Production Order</x-renderer.heading>
+                                <x-renderer.heading level=2 class='text-center pt-10'>{{$prodRoutingLinkName}} Process Analysis Report</x-renderer.heading>
                                 <x-renderer.heading level=3 class='text-center'>(Sequence-based Timesheet)</x-renderer.heading>
-                                    <div class="grid grid-cols-12">
+                                    <div class="grid grid-cols-12 ">
                                         <div class="col-span-12 text-left">
                                             <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Basic Information <p class="text-sm font-light italic"></p>
                                             </h4>
                                         </div>
                                     </div>
-                                    <div class="col-span-12 grid scroll-mt-80 snap-start" id="sheet{{$key}}">
+                                {{-- BASIC INFORMATION --}}
+                                    <div class="col-span-12 grid scroll-mt-80 snap-start border border-gray-600" id="sheet{{$key}}">
                                         <div class="grid grid-rows-1">
                                             <div class="grid grid-cols-12 text-right">
                                                 <label class="{{$class1}} col-start- col-span-3">Project</label>
@@ -116,7 +114,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                     </div>
                                 {{-- TABLES --}}
                                     <div class="">
-                                        <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300" id="" title="" style="scroll-margin-top: 90px;">Detail Report</h4>
+                                        <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300 pt-4" id="" title="" style="scroll-margin-top: 90px;">Detail Report</h4>
                                         <x-renderer.report.pivot-table 
                                                 showNo={{true}} 
                                                 :tableColumns="$tableColumns[$key]" 
@@ -128,36 +126,33 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                                 />
                                     </div>
                         </div>
-                            <x-renderer.page-break />
-                            <div style='' class="{{$layout}} items-center bg-white box-border p-8">
-                                <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
-                                    @foreach($data as $key => $items)
-                                                @if(str_contains($key, 'widget'))
-                                                    <div class="">
-                                                        <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>
-                                                            Comparing <strong>{{$items['dimensions']['titleChart']}} </strong>Across Production Orders
-                                                        </x-renderer.heading>
-                                                        {{-- @dump($items) --}}
-                                                        <div class="p-10">
-                                                                <x-renderer.report.chart-bar 
-                                                                        key="{{md5($items['title_a'].$items['title_b'])}}" 
-                                                                        chartType="{{$items['chartType']}}" 
-                                                                        :meta="$items['meta']" 
-                                                                        :metric="$items['metric']" 
-                                                                        :dimensions="$items['dimensions']"
-                                                                        />
-                                                                <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>
-                                                                                    The chart compares the 
-                                                                                    <strong>{{$items['dimensions']['titleChart']}}</strong> 
-                                                                                    values for each Production Order according to the <strong> Production Routing Link</strong>.
-                                                                </x-renderer.heading>
-                                                        </div>
+                        <x-renderer.page-break />
+                        {{-- Charts --}}
+                        <div style='' class="{{-- {{$layout}} --}} w-[1400px] min-h-[990px] items-center bg-white box-border p-8">
+                            <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
+                                @foreach($data as $key => $items)
+                                            @if(str_contains($key, 'widget'))
+                                                <div class="">
+                                                    <x-renderer.heading level=5 xalign='left' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>
+                                                        {{$prodRoutingLinkName}} {{$items['dimensions']['titleHeading']}} by Production Order
+                                                    </x-renderer.heading>
+                                                    {{-- @dump($items) --}}
+                                                    <div class="p-6">
+                                                            <x-renderer.report.chart-bar 
+                                                                    key="{{md5($items['title_a'].$items['title_b'])}}" 
+                                                                    chartType="{{$items['chartType']}}" 
+                                                                    :meta="$items['meta']" 
+                                                                    :metric="$items['metric']" 
+                                                                    :dimensions="$items['dimensions']"
+                                                                    />
                                                     </div>
-                                                @endif
-                                    @endforeach
-                                </div>
+                                                </div>
+                                            @endif
+                                @endforeach
                             </div>
+                        </div>
                         <x-renderer.page-break />
                 @endforeach
+
 </div>
 @endsection

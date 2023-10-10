@@ -1,11 +1,8 @@
 <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
-    @if($showHeader)
-        <x-renderer.item-render-props id={{$id}} :item="$item" width='' :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
-        <hr/>
-    @endif
+    <x-renderer.item-render-props hiddenComponent="{{$showHeader?0:1}}" id={{$id}} :item="$item" width='' :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
     {{-- <x-controls.insp-chklst.header-check-sheet :item="$item" :chklst="$chklst" :project="$project" :subProject="$subProject"/> --}}
-    <x-renderer.heading level=4>
-        <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{$item->name}}</span>
+    <x-renderer.heading level=4 xalign='center'>
+        <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{strtoupper($item->name)}}</span>
     </x-renderer.heading>
     @php
         $typeLine = str_replace('_shts','',$type);
@@ -24,7 +21,7 @@
             </x-renderer.heading>
             <x-renderer.card tooltip="#{{$groupId}}" titleClass="text-lg">
                 @foreach($lines as $rowIndex => $line)
-                <x-controls.insp-chklst.check-point :line="$line" :checkPointIds="$checkPointIds" table01Name="table01" :rowIndex="$rowIndex" type="{{$typeLine}}" />
+                <x-controls.insp-chklst.check-point :sheet="$item" :line="$line" :checkPointIds="$checkPointIds" table01Name="table01" :rowIndex="$rowIndex" type="{{$typeLine}}" />
                 @endforeach
             </x-renderer.card>
             <div class="mb-8"></div>

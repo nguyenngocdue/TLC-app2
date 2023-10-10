@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->unsignedBigInteger('qaqc_insp_chklst_id');
             $table->unsignedBigInteger('qaqc_insp_tmpl_sht_id');
+            $table->unsignedBigInteger('prod_discipline_id');
             $table->float('progress')->nullable(); //version 2
             $table->orderable();
             $table->appendCommonFields();
