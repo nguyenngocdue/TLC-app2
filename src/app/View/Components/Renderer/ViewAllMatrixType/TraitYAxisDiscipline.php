@@ -25,10 +25,21 @@ trait TraitYAxisDiscipline
         foreach ($xAxis as $line) {
             if (isset($line['prod_discipline_id'])) {
                 $discipline = $disciplines[$line['prod_discipline_id']];
+                $value = $discipline->description;
+                $cell_title = "";
+                $cell_class = $discipline->css_class . " align-top";
+
+                if (isset($line['default_monitors'])) {
+                    $count = $line['default_monitors']->count();
+                    if ($count) {
+                        $value .= "<br/>(" . $count . ")";
+                    }
+                    $cell_title = "Default 3rd Party to Sign Off:\n" . $line['default_monitors']->join("\n");
+                }
                 $result[$line['dataIndex']] = (object)[
-                    'value' => $discipline->description,
-                    'cell_title' => $discipline->name,
-                    'cell_class' => $discipline->css_class,
+                    'value' => $value,
+                    'cell_title' => $cell_title,
+                    'cell_class' => $cell_class,
                 ];
             }
         }
