@@ -43,7 +43,7 @@
                 </x-renderer.card>
                 </div>
                 <div class="col-span-3 flex justify-end mt-5">
-                    <x-renderer.button htmlType='submit' type="secondary" class="w-20" >Save</x-renderer.button>
+                    <x-renderer.button htmlType='submit' type="secondary" class="w-20" >Update ORG Chart</x-renderer.button>
                 </div>
             </div>
             </x-renderer.card>
