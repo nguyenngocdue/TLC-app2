@@ -14,7 +14,7 @@
             @case (4) {{-- 4 => "radio" --}}
             <div class="w-full">
                 <x-controls.insp_chklst.check-point-option :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" type="{{$type}}" />
-                <x-controls.insp_chklst.check-point-create-ncr-on-hold :line="$line" :checkPointIds="$checkPointIds" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
+                <x-controls.insp_chklst.check-point-create-ncr-on-hold :sheet="$sheet" :line="$line" :checkPointIds="$checkPointIds" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
             </div>
             @break
             @case (7) {{-- 7 => "signature" --}}

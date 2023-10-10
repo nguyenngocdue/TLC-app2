@@ -22,6 +22,7 @@ class CheckPoint extends Component
         private $rowIndex,
         private $debug = false,
         private $checkPointIds = [],
+        private $sheet = null,
     ) {
         //
     }
@@ -44,6 +45,7 @@ class CheckPoint extends Component
             'checkPointIds' => $this->checkPointIds,
             'debug' => $this->debug,
             'type' => $this->type,
+            'sheet' => $this->sheet,
         ]);
     }
 }
