@@ -8,7 +8,8 @@ class Qaqc_insp_chklst extends ModelExtended
 {
     protected $fillable = [
         "id", "prod_order_id", "name", "description", "owner_id", "slug",
-        "consent_number", "qaqc_insp_tmpl_id", "progress", "owner_id",
+        "consent_number",  "progress", "owner_id",
+        "qaqc_insp_tmpl_id", "sub_project_id",
         'status',
     ];
     protected $table = "qaqc_insp_chklsts";
@@ -18,6 +19,7 @@ class Qaqc_insp_chklst extends ModelExtended
         "getQaqcInspTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, "qaqc_insp_tmpl_id"],
 
         "getSheets" => ["hasMany", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_id"],
+        "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
     ];
 
     public function getProdOrder()
@@ -45,11 +47,17 @@ class Qaqc_insp_chklst extends ModelExtended
         return $relation;
     }
 
+    // public function getSubProject()
+    // {
+    //     $tmp = $this->getProdOrder;
+    //     $relation = $tmp->belongsTo(Sub_project::class, 'sub_project_id');
+    //     return $relation;
+    // }
+
     public function getSubProject()
     {
-        $tmp = $this->getProdOrder;
-        $relation = $tmp->belongsTo(Sub_project::class, 'sub_project_id');
-        return $relation;
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getManyLineParams()

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_order_id');
             $table->string('consent_number')->nullable();
             $table->unsignedBigInteger('qaqc_insp_tmpl_id');
+            $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->appendCommonFields();
         });
         // Schema::create('qaqc_insp_chklsts', function (Blueprint $table) {

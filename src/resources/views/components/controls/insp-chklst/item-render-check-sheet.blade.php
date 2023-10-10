@@ -27,12 +27,7 @@
             <div class="mb-8"></div>
         @endforeach
         
-
-        @php
-        $hasMonitors = $props['_getMonitors1()']['hidden_edit'] ?? false;
-        @endphp
-            
-        @if($hasMonitors)
+        @if($type==='qaqc_insp_chklst_shts')
             <x-renderer.card title="Nominated Third Party:">
                 @php
                     $selectedMonitors1 = $item->getMonitors1()->pluck('id')->toArray();
