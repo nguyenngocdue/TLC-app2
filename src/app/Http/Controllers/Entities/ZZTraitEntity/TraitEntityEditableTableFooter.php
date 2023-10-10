@@ -28,6 +28,9 @@ trait TraitEntityEditableTableFooter
 
     private function getListenFooter($tableName, $tableFnNames, $table01Name)
     {
+        //In case of item-renderer-checklist has no table
+        if (!isset($tableFnNames[$table01Name])) return [];
+
         $columnName = $tableFnNames[$table01Name];
         // Log::info($tableName . " " . $table01Name . " " . $columnName . " " . $this->type);
         $listener2 = $this->getListeners2($this->type);

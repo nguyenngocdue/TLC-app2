@@ -7,7 +7,8 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_chklst_sht extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "slug", "qaqc_insp_chklst_id", "qaqc_insp_tmpl_sht_id", "owner_id",
+        "id", "name", "description", "slug", "owner_id",
+        "qaqc_insp_chklst_id", "qaqc_insp_tmpl_sht_id", "prod_discipline_id",
         'progress', 'status', 'order_no'
     ];
     protected $table = "qaqc_insp_chklst_shts";
@@ -22,6 +23,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         'signature_qaqc_chklst_3rd_party' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
 
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
     ];
 
     public static $oracyParams = [
@@ -85,6 +87,12 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function getProdDiscipline()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getManyLineParams()

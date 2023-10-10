@@ -4,8 +4,8 @@
         <hr/>
     @endif
     {{-- <x-controls.insp-chklst.header-check-sheet :item="$item" :chklst="$chklst" :project="$project" :subProject="$subProject"/> --}}
-    <x-renderer.heading level=4>
-        <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{$item->name}}</span>
+    <x-renderer.heading level=4 xalign='center'>
+        <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{strtoupper($item->name)}}</span>
     </x-renderer.heading>
     @php
         $typeLine = str_replace('_shts','',$type);

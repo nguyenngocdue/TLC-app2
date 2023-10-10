@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 {
-    // use TraitYAxisDiscipline;
+    use TraitYAxisDiscipline;
 
     private $project, $qaqcInspTmpl, $subProject, $prodRouting, $prodDiscipline;
     // protected $viewportMode = null;
@@ -82,7 +82,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 'title' => $line->name,
                 'align' => 'center',
                 'width' => 40,
-                // 'prod_discipline_id' => $line->prod_discipline_id,
+                'prod_discipline_id' => $line->prod_discipline_id,
                 // "colspan" => 1 + sizeof($extraColumns),
 
             ];
@@ -96,7 +96,6 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $result = Qaqc_insp_chklst_sht::query()
             // ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmpl)
             ->get();
-        // dump($result);
         return $result;
     }
 

@@ -1,8 +1,53 @@
 {
+    "ghg_sheet": {
+        "name": "ghg_sheet",
+        "required_params": null,
+        "creation_links": null
+    },
+    "hr_onboarding_line": {
+        "name": "hr_onboarding_line",
+        "required_params": null,
+        "creation_links": null
+    },
+    "hr_timesheet_officer": {
+        "name": "hr_timesheet_officer",
+        "required_params": null,
+        "creation_links": null
+    },
+    "hr_timesheet_worker": {
+        "name": "hr_timesheet_worker",
+        "required_params": null,
+        "creation_links": null
+    },
+    "hse_corrective_action": {
+        "name": "hse_corrective_action",
+        "required_params": "correctable_type, correctable_id",
+        "creation_links": "HSE INSP, HSE Walkthrough, HSE Incident Report"
+    },
+    "hse_extra_metric": {
+        "name": "hse_extra_metric",
+        "required_params": null,
+        "creation_links": null
+    },
+    "hse_insp_chklst_sht": {
+        "name": "hse_insp_chklst_sht",
+        "required_params": null,
+        "creation_links": null
+    },
+    "prod_sequence": {
+        "name": "prod_sequence",
+        "required_params": null,
+        "creation_links": null
+    },
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
         "required_params": "parent_type, parent_id, project_id, sub_project_id, prod_discipline_id",
         "creation_links": "Prod Order"
+    },
+    "qaqc_insp_chklst_sht": {
+        "name": "qaqc_insp_chklst_sht",
+        "required_params": null,
+        "creation_links": null
     },
     "qaqc_ncr": {
         "name": "qaqc_ncr",
@@ -13,5 +58,20 @@
         "name": "qaqc_wir",
         "required_params": "project_id, sub_project_id, prod_routing_id, prod_order_id, prod_discipline_id, wir_description_id",
         "creation_links": "WIR Register"
+    },
+    "qaqc_wir_line": {
+        "name": "qaqc_wir_line",
+        "required_params": null,
+        "creation_links": null
+    },
+    "site_daily_assignment": {
+        "name": "site_daily_assignment",
+        "required_params": null,
+        "creation_links": null
+    },
+    "site_daily_assignment_line": {
+        "name": "site_daily_assignment_line",
+        "required_params": null,
+        "creation_links": null
     }
 }

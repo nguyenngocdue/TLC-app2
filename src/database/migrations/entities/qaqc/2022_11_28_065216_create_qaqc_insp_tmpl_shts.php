@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('slug')->nullable();
             $table->unsignedBigInteger('qaqc_insp_tmpl_id');
+            $table->unsignedBigInteger('prod_discipline_id');
             $table->orderable();
             $table->appendCommonFields();
         });
