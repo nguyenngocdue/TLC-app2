@@ -71,6 +71,18 @@
         "rejected": "true",
         "approved": "true"
     },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "new": "true",
+        "in_progress": "true",
+        "not_applicable": "true",
+        "passed": "true",
+        "inspected": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -122,18 +134,6 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "new": "true",
-        "in_progress": "true",
-        "not_applicable": "true",
-        "passed": "true",
-        "inspected": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
-    },
-    "_getShtSigs": {
-        "name": "_getShtSigs",
-        "column_name": "getShtSigs",
         "new": "true",
         "in_progress": "true",
         "not_applicable": "true",
@@ -206,6 +206,18 @@
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
+        "new": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "passed": "",
+        "inspected": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_signature_qaqc_chklst_3rd_party": {
+        "name": "_signature_qaqc_chklst_3rd_party",
+        "column_name": "signature_qaqc_chklst_3rd_party",
         "new": "",
         "in_progress": "",
         "not_applicable": "",

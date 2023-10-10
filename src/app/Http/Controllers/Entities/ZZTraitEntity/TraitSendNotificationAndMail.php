@@ -10,6 +10,7 @@ use App\Utils\Support\JsonControls;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 trait TraitSendNotificationAndMail
 {
@@ -101,8 +102,10 @@ trait TraitSendNotificationAndMail
                 break;
         }
         if ($isLogger) {
-            if(!isset($currentValue['id'])) Toastr::warning('Configuration is missing'
-            ,'Please check config prop id in workflow hidden and visible');
+            if (!isset($currentValue['id'])) Toastr::warning(
+                'Configuration is missing',
+                'Please check config prop id in workflow hidden and visible'
+            );
             Logger::create([
                 'loggable_type' => $modelPath,
                 'loggable_id' => $currentValue['id'] ?? null,
