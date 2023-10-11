@@ -197,6 +197,11 @@
         "editable-table": "zunit_test_01s",
         "button_add_a_new_line": "true"
     },
+    "zunit_test_11s_02": {
+        "name": "zunit_test_11s_02",
+        "entity-type": "zunit_test_11s",
+        "editable-table": "departments"
+    },
     "zunit_test_12s_01": {
         "name": "zunit_test_12s_01",
         "entity-type": "zunit_test_12s",

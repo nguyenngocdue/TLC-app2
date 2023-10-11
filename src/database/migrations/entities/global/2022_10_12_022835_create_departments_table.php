@@ -24,7 +24,9 @@ return new class extends Migration
             $table->text('name');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('head_of_department')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('slug')->unique();
+            $table->orderable();
             $table->appendCommonFields();
         });
         // Schema::create('departments', function (Blueprint $table) {
