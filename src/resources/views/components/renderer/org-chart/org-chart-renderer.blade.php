@@ -6,7 +6,7 @@
         <x-renderer.button type="secondary" onClick="searchDiagram({{$id}})" class="w-20" >Search</x-renderer.button>
     </div>
     <div class="relative">
-        <x-renderer.heading level=5 xalign="center">{{$department->name}}</x-renderer.heading>
+        <x-renderer.heading level=5 xalign="center">{{$department? $department->name : ""}}</x-renderer.heading>
         <div id="myOverviewDiv_{{$id}}" class="no-print w-60 h-60 absolute top-1 left-1 border bg-gray-100 border-gray-100"
         style="cursor: move; z-index:19;">
             <canvas tabindex="0" width="198" height="98" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none; width: 198px; height: 98px; cursor: move;"></canvas>
