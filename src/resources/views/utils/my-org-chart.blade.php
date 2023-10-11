@@ -16,8 +16,8 @@
     @endif
 
     <x-renderer.org-chart.org-chart-toolbar :showOptions="$showOptions"/>
-    <x-renderer.org-chart.org-chart-renderer id="0" :dataSource="$dataSource"/>
-    <x-renderer.org-chart.org-chart-renderer id="1" :dataSource="$dataSource"/>
+    <x-renderer.org-chart.org-chart-renderer id="0" departmentId='1' :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
+    <x-renderer.org-chart.org-chart-renderer id="1" departmentId='2' :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
    
 </div>
 @endsection
