@@ -31,7 +31,7 @@ class MyOrgChartController extends Controller
 
         $showOptions = $this->getUserSettingsViewOrgChart();
         $options = $this->getOptionsRenderByUserSetting($showOptions);
-        $departments = Department::query()->get();
+        $departments = Department::query()->orderBy('order_no')->get();
 
         return view(
             'utils.my-org-chart',
