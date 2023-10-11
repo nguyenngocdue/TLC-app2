@@ -30,12 +30,13 @@ class MyOrgChartController extends Controller
     }
     public function index(Request $request)
     {
-        $approvalView = $request->has('approval-tree');
-        $settingsView = $this->userSettings($approvalView);
-        $tree = $approvalView ? BuildTree::getTree() : BuildTreeOrgChart::getTree();
+        $isApprovalView = $request->has('approval-tree');
+        $isPrintMode = $request->has('print-mode');
+        $viewSettings = $this->getUserSettings($isApprovalView, $isPrintMode);
+        $tree = $isApprovalView ? BuildTree::getTree() : BuildTreeOrgChart::getTree();
         $results = [];
         $showOptions = $this->getUserSettingsViewOrgChart();
-        $this->transformDataTree($tree, $showOptions, $approvalView);
+        $this->transformDataTree($tree, $showOptions, $isApprovalView);
         $this->x($tree, $results, $this->getOptionsRenderByUserSetting($showOptions));
         usort($results, function ($a, $b) {
             return strcmp($a['name'], $b['name']);
@@ -45,25 +46,26 @@ class MyOrgChartController extends Controller
             [
                 'dataSource' => $results,
                 'showOptions' => $showOptions,
-                'settingsView' => $settingsView,
+                'viewSettings' => $viewSettings,
                 'isAdmin' => CurrentUser::isAdmin(),
                 'topTitle' => 'Company ORG Chart'
             ]
         );
     }
-    private function userSettings($approvalView)
+    private function getUserSettings($isApprovalView, $isPrintMode)
     {
         $settings = CurrentUser::getSettings();
-        $settings['org_chart']['approval_view'] = $approvalView;
-        return $settings['org_chart']['approval_view'] ?? false;
+        $settings['org_chart']['approval_view'] = $isApprovalView;
+        $settings['org_chart']['print_mode'] = $isPrintMode;
+        return $settings['org_chart'];
     }
-    private function transformDataTree(&$tree, $showOptions = [], $approvalView)
+    private function transformDataTree(&$tree, $showOptions = [], $isApprovalView)
     {
         if (isset($showOptions['department'])) {
             $department = Department::findFromCache($showOptions['department']);
             $headOfDepartmentId = $department->head_of_department;
             if ($headOfDepartmentId) {
-                $tree = $approvalView ? BuildTree::getTreeById($headOfDepartmentId) : BuildTreeOrgChart::getTreeById($headOfDepartmentId);
+                $tree = $isApprovalView ? BuildTree::getTreeById($headOfDepartmentId) : BuildTreeOrgChart::getTreeById($headOfDepartmentId);
             }
         }
     }
