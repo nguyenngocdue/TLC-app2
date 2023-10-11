@@ -16,14 +16,15 @@
     @endif
     
     <div class='p-2 no-print'>
-        <x-renderer.button href="/my-org-chart" type="{{$viewSettings['print_mode'] ? '' : 'secondary'}}">Interactive Mode</x-renderer.button>
-        <x-renderer.button href="/my-org-chart?print-mode=true" type="{{$viewSettings['print_mode'] ? 'secondary' : ''}}">Print Mode</x-renderer.button>
+        <x-renderer.button href="/my-org-chart" type="{{$viewSettings['advanced_mode'] ? '' : 'secondary'}}">Standard Mode</x-renderer.button>
+        <x-renderer.button href="/my-org-chart?advanced-mode=true" type="{{$viewSettings['advanced_mode'] ? 'secondary' : ''}}">Advanced Mode</x-renderer.button>
     </div>
 
     
-    @if($viewSettings['print_mode'])
-    @foreach($departments as $department)
-    <x-renderer.org-chart.org-chart-renderer id="{{$department->id}}" :departments="$departments" departmentId='{{$department->id}}' :options="$options" isPrintMode="{{$viewSettings['print_mode']}}" isApprovalView="{{$viewSettings['approval_view']}}" zoomToFit="{{true}}"/>
+    @if(!$viewSettings['advanced_mode'])
+        <x-renderer.org-chart.org-chart-renderer id="0" departmentId='2' :options="$bodOptions" isPrintMode="{{true}}" isApprovalView="{{$viewSettings['approval_view']}}" zoomToFit="{{true}}"/>
+        @foreach($departments as $department)
+            <x-renderer.org-chart.org-chart-renderer id="{{$department->id}}" :departments="$departments" departmentId='{{$department->id}}' :options="$printOptions" isPrintMode="{{true}}" isApprovalView="{{$viewSettings['approval_view']}}" zoomToFit="{{true}}"/>
         @endforeach
     @else
         <x-renderer.org-chart.org-chart-toolbar :showOptions="$showOptions"/>
@@ -33,7 +34,7 @@
             value="" onkeypress="if (event.keyCode === 13) searchDiagram(0)" />
             <x-renderer.button type="secondary" onClick="searchDiagram(0)" class="w-20" >Search</x-renderer.button>
         </div>
-        <x-renderer.org-chart.org-chart-renderer id="0" departmentId="{{$showOptions['department']??0}}" :options="$options" isPrintMode="{{$viewSettings['print_mode']}}" isApprovalView="{{$viewSettings['approval_view']}}" zoomToFit="{{false}}"/>
+        <x-renderer.org-chart.org-chart-renderer id="0" departmentId="{{$showOptions['department']??0}}" :options="$options" isPrintMode="{{false}}" isApprovalView="{{$viewSettings['approval_view']}}" zoomToFit="{{false}}"/>
     @endif
 </div>
 @endsection
