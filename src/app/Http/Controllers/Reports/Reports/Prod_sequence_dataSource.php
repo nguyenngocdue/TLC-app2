@@ -27,11 +27,12 @@ class Prod_sequence_dataSource extends Controller
             'prod_routing_link_id',
             'erp_routing_link_id',
             'prod_discipline_id',
-            'picker_date'
+            'picker_date',
+            'status',
         ], $params);
 
         // dd($valOfParams);
-        $sql = "SELECT tb1.*
+        $sql = "SELECT tb1.*, terms.name AS uom
                     FROM (SELECT
                     sp.project_id AS project_id,
                     sp.id AS sub_project_id,
@@ -40,17 +41,27 @@ class Prod_sequence_dataSource extends Controller
                     prde.prod_routing_link_id AS prod_routing_link_id,
                     prde.erp_routing_link_id AS erp_routing_link_id,
                     pd.id AS prod_discipline_id,
-                    ps.total_man_hours AS total_man_hours,
+                    #ps.total_man_hours AS total_man_hours,
                     ps.id AS prod_sequence_id,
                     ps.erp_prod_order_name AS erp_prod_order_name,
-                    SUBSTR(pru.date, 1, 7) AS `month`,
+                    ps.status AS prod_sequence_status,
+                    SUBSTR(pru.date, 1,7) AS month_prod_run,
                     pru.date AS date_prod_run,
                     #pru.start,
                     #pru.end,
-                    #ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/60/60, 2) AS hours,
+                    ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/60/60, 2) AS hours,
+                    ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/60/60, 2)*pru.worker_number AS total_man_hours,
                     #pru.worker_number AS pru_worker_number,
                     #ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/60/60, 2) * pru.worker_number AS man_hours
-                    pru.total_man_hours AS man_hours
+                    pru.total_man_hours AS man_hours,
+                    pru.start AS from_time,
+                    pru.end AS to_time,
+                    ps.total_hours AS total_hours,
+                    pru.worker_number AS man_power,
+                    ps.total_uom AS total_uom,
+                    prl.standard_uom_id AS standard_uom_id,
+                    pru.production_output AS production_output,
+                    pru.remark AS remark
                     FROM 
                         sub_projects sp, 
                         prod_orders po, 
@@ -68,6 +79,7 @@ class Prod_sequence_dataSource extends Controller
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prde.prod_routing_link_id IN ($prl)";
         if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id = $pd";
         if ($erp = $valOfParams['erp_routing_link_id']) $sql .= "\n AND prde.erp_routing_link_id IN ($erp)";
+        if($status = $valOfParams['status']) $sql .= "\n AND ps.status IN( $status )";
 
         $sql .= "\n 
                     #AND ps.id = 347
@@ -82,7 +94,8 @@ class Prod_sequence_dataSource extends Controller
                     AND pru.prod_sequence_id = ps.id
                     AND  SUBSTR(pru.date, 1, 10) >= '{$valOfParams["picker_date"]["start"]}'
                     AND  SUBSTR(pru.date, 1, 10) <= '{$valOfParams["picker_date"]["end"]}'
-                    ) AS tb1";
+                    ) AS tb1
+                    LEFT JOIN terms terms ON tb1.standard_uom_id = terms.id";
         // dump($sql);
         return $sql;
     }

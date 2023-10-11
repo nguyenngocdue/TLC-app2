@@ -238,8 +238,7 @@ abstract class Report_Parent2Controller extends Controller
         // dd($dataSource);
         $tableColumns = $this->getTableColumns($params, $dataSource);
 
-        $tableColumns = $this->typeView === 'report-pivot'
-        && empty($tableColumns) ? [] : $tableColumns;
+        $tableColumns = $this->typeView === 'report-pivot' && empty($tableColumns) ? [] : $tableColumns;
 
         $tableDataHeader = $this->tableDataHeader($dataSource, $params);
         echo $this->getJS();
@@ -299,8 +298,7 @@ abstract class Report_Parent2Controller extends Controller
 
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
         $params = $this->getParams($request, '_ep');
-        // dd($params);
-
+        
         $linesData = $this->getDataSource($params);
         $modeType = $this->modeType;
         // Pivot data before render 

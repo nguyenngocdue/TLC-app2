@@ -8,6 +8,7 @@ use App\Utils\Support\Report;
 use App\Utils\Support\PivotReport;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PivotTableController extends Controller
 {
@@ -40,18 +41,9 @@ class PivotTableController extends Controller
         return $dataOutput;
     }
 
-    private function getTablesNamesFromLibs($libs) {
-        $colData = array_merge($libs['row_fields'], $libs['column_fields']);
-        $columns = array_column($colData, 'column');
-        $tableName = [];
-        foreach($columns as $col) {
-            $str = substr($col, 0, strpos($col, '.'));
-            $tableName[] = $str; 
-        }
-        return $tableName;
-    }
 
-    private function attachInfoToDataSource($tables, $processedData, $columnFields, $rowFields)
+
+    public function attachInfoToDataSource($tables, $processedData, $columnFields, $rowFields)
     {
         $keysOfRowFields = array_keys($rowFields);
         // dd($processedData);
@@ -62,7 +54,7 @@ class PivotTableController extends Controller
                     try {
                         $infoAttr = $rowFields[$key]->column;
                         $tableName = substr($infoAttr, 0, strpos($infoAttr, '.'));
-                        $attributeName = substr($infoAttr,strpos($infoAttr, '.')+1);
+                        $attributeName = substr($infoAttr, strpos($infoAttr, '.') + 1);
                         $fieldName = $key . '_' . $tableName . '_' . $attributeName;
                         $items[$fieldName] = $tables[$tableName][$id]->$attributeName;
                     } catch (Exception $e) {
@@ -88,7 +80,7 @@ class PivotTableController extends Controller
                         $attr = substr($key, 0, $indexString + 3);
                         $infoAttr = $columnFields[$attr]->column;
                         $tableName = substr($infoAttr, 0, strpos($infoAttr, '.'));
-                        $attributeName = substr($infoAttr,strpos($infoAttr, '.')+1);
+                        $attributeName = substr($infoAttr, strpos($infoAttr, '.') + 1);
                         // dd($tables, $tableName, $attributeName);
                         $name = $id;
                         if (isset($tables[$tableName])) {
@@ -106,7 +98,7 @@ class PivotTableController extends Controller
     {
         $orders = [];
         foreach ($sortByFields as $key => $values) {
-            if(isset($values->column)){
+            if (isset($values->column)) {
                 $str = str_replace('.', '_', $values->column);
                 $orders[$key . '_' . $str] = $values->order ?? 'ASC';
             } else {
@@ -197,6 +189,7 @@ class PivotTableController extends Controller
         $columnFields = $libs['column_fields'];
         $rowFields = $libs['row_fields'];
         $aggregations = $libs['data_fields'];
+        $isRaw = isset($libs['is_render_row_fields']) ? end($libs['is_render_row_fields'])->is_dataSource : false;
         $tableName = $this->getTablesNamesFromLibs($libs);
 
         if (is_object($linesData)) $linesData = array_map(fn ($item) => (array)$item, $linesData->toArray());
@@ -204,20 +197,21 @@ class PivotTableController extends Controller
         // Step 1: reduce lines from Filters array
         $keysFilters = $this->triggerFilters($topParams, $keysOfFilters);
         $dataReduce = PivotReport::reduceDataByFilterColumn($linesData, $keysFilters);
-
+        // dd($dataReduce);
+        
+        
         // Step 2: group lines by Row_Fields array
         if (!count($keysOfRowFields)) {
             $processedData = PivotReport::groupBy($dataReduce, $keysOfColumnFields);
         } else {
             $processedData = PivotReport::groupBy($dataReduce, $keysOfRowFields);
         }
-
         //Remove all array keys by looping through all elements
         // $fieldsNeedToSum = $this->getFieldNeedToSum($columnFields);
-        
+
         // $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $fieldsNeedToSum), $processedData));
-        $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $columnFields), $processedData));
-        // dd($processedData);
+
+        $processedData = array_values(array_map(fn ($item) => PivotReport::getLastArray($item, $columnFields, $isRaw), $processedData));
 
         // Step 3: transfer data from lines to columns by
         // Column_Fields and Value_Index_Fields array 
@@ -234,7 +228,7 @@ class PivotTableController extends Controller
         $dataOutput = $this->attachInfoToDataSource($tables, $dataIdsOutput, $columnFields, $rowFields);
         // dd($dataOutput);
         $dataOutput = $this->makeTopTitle($dataOutput, $keysOfRowFields, $keysOfColumnFields);
-        
+
         $infoColumnFields = [];
         if (!$keysOfRowFields && $keysOfColumnFields) {
             $groupByColumnFields = Report::groupArrayByKey($dataOutput, $keysOfColumnFields[0]);
@@ -249,8 +243,8 @@ class PivotTableController extends Controller
         if (!$keysOfRowFields && $keysOfColumnFields) {
             $dataOutput[0]["info_column_field"] = $infoColumnFields;
         }
-        
-        
+
+
         $dataOutput = $this->updateResultOfAggregations($keysOfColumnFields, $aggregations, $dataOutput);
         return $dataOutput;
     }

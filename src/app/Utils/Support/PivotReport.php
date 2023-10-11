@@ -82,17 +82,26 @@ class PivotReport
     }
 
 
-    public static function getLastArray($data, $columnFields = [])
+    public static function getLastArray($data, $columnFields = [], $isRaw)
     {
-        // dd($data, $columnFields);
-            $outputArrays = [];
+        $outputArrays = [];
         foreach ($data as $key => $value) {
             if ($key === "items" && is_array($value)) {
-                //Sum the results of Value_Index_Fields that has the same value in a field
-                //Sum values before using Value Index Fields
-                $outputArrays[] = self::sumFieldsHaveTheSameValue($value, $columnFields);
+                if($isRaw) {
+                    if(count($value) > 1) {
+                        // add all of the items in the array 
+                        foreach ($value as $item) $outputArrays[][]= $item;
+                    } else{
+                        $outputArrays[] = $value;
+                    }
+                }else{
+                    //Sum the results of Value_Index_Fields that has the same value in a field
+                    //Sum values before using Value Index Fields
+                    $outputArrays[] = self::sumFieldsHaveTheSameValue($value, $columnFields);
+
+                }
             } elseif (is_array($value)) {
-                $nestedOutputArrays = self::getLastArray($value, $columnFields);
+                $nestedOutputArrays = self::getLastArray($value, $columnFields,$isRaw);
                 $outputArrays = array_merge($outputArrays, $nestedOutputArrays);
             }
         }
@@ -219,6 +228,7 @@ class PivotReport
             $lineMatchesFilter = true;
             foreach ($dataFilters as $field => $values) {
                 if ($field === 'picker_date') continue;
+                if($field === 'status') continue;
                 if (!isset($line[$field]) || !in_array($line[$field], $values)) {
                     $lineMatchesFilter = false;
                     break;
@@ -226,6 +236,7 @@ class PivotReport
             }
             return $lineMatchesFilter;
         });
+        // dd($result);
         return $result;
     }
     public static function groupBy($lineData, $rowFields)
@@ -249,8 +260,9 @@ class PivotReport
             }
             if (!isset($nestedArray['items'])) $nestedArray['items'] = [];
             $nestedArray['items'][] = $line;
+            // dump($nestedArray);
         }
-        // dd($dataOutput);
+        // dump($dataOutput);
         return $dataOutput;
     }
 
@@ -260,6 +272,7 @@ class PivotReport
         $array = [];
         $fieldIndex = $fieldsNeedToSum['field_indexes'] ?? [];
         $fieldsNeedToSum = $fieldsNeedToSum['value_field_indexes'] ?? [];
+        // dump($data);
 
         foreach ($data as $item) {
             $found = false;
@@ -283,7 +296,6 @@ class PivotReport
             }
             if (!$found) $array[] = $item;
         }
-        // dd($array);
         return $array;
     }
 
@@ -514,5 +526,4 @@ class PivotReport
         return empty($data);
     }
 
-   
 }

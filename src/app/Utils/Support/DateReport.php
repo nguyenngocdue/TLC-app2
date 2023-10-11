@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use DateTime;
+use Exception;
 
 class DateReport
 {
@@ -52,17 +53,21 @@ class DateReport
     }
 
     private static function separateStrPickerDate($strPickerDate){
-		$dates = explode("-", $strPickerDate);
-        return  ['start' => self::formatDateString(trim($dates[0])), 'end' =>self::formatDateString(trim($dates[1]))];
+        // dd($strPickerDate);
+        try {
+            $dates = explode("-", $strPickerDate);
+            return  ['start' => self::formatDateString(trim($dates[0])), 'end' =>self::formatDateString(trim($dates[1]))];
+        } catch (Exception $e){
+            dd($e, $strPickerDate);
+        }
     }
 
     public static function createValueForParams($fields, $params)
     {
-        // dd($fields, $params);
         $valParams = [];
         foreach ($fields as $field) {
             if(isset($params[$field]) &&  is_array($params[$field])){
-                $valParams[$field] = isset($params[$field]) ? implode(',', $params[$field]) : '';
+                $valParams[$field] = isset($params[$field]) ? StringReport::arrayToJsonWithSingleQuotes($params[$field],null,null): '';
             }
             else {
                 $valParams[$field] = isset($params[$field]) ?  $params[$field] : '';

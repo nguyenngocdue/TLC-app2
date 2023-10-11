@@ -2,12 +2,10 @@
 
 namespace App\Utils\Support;
 
-use App\Http\Controllers\Workflow\LibPivotTables;
 use DateInterval;
 use DatePeriod;
 use Illuminate\Support\Str;
 use DateTime;
-use Exception;
 
 class StringPivotTable
 {
@@ -77,7 +75,7 @@ class StringPivotTable
         }
         return $result;
     }
-    
+
     public function getDatesBetween($startDate, $endDate)
     {
         $dateList = array();
@@ -95,10 +93,33 @@ class StringPivotTable
         return $dateList;
     }
 
-    public static function retrieveStringBySign($string, $stringSearch, $location = 0) {
-        $posIndex = strpos($string,$stringSearch);
-        if($location) $posIndex = strrpos($string,$stringSearch);
-        if(!$posIndex) return $string;
-        return substr($string,0, $posIndex);
+    public static function retrieveStringBySign($string, $stringSearch, $location = 0)
+    {
+        $posIndex = strpos($string, $stringSearch);
+        if ($location) $posIndex = strrpos($string, $stringSearch);
+        if (!$posIndex) return $string;
+        return substr($string, 0, $posIndex);
+    }
+
+    public static function extractFields($inputString)
+    {
+        $pattern = '/{{(.*?)}}/';
+        preg_match_all($pattern, $inputString, $matches);
+        return $matches;
+    }
+
+    public static function replaceValuesWithPlaceholders($inputArray, $template)
+    {
+        foreach ($inputArray as $key => $value) {
+                if(is_array($value)) continue;
+                $placeholder = "{{" . $key . "}}";
+                $template = str_replace($placeholder, $value, $template);
+            }
+        return $template;
+    }
+
+    public static function makeFieldFromString($inputString)
+    {
+        return Str::singular(explode('.', $inputString)[0]) . '_name';
     }
 }

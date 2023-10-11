@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports;
 use App\Http\Controllers\Workflow\LibPivotTables2;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
+use App\Utils\Support\StringPivotTable;
 use DateTime;
 
 trait TraitChangeDataPivotTable2
@@ -45,29 +46,44 @@ trait TraitChangeDataPivotTable2
         return collect($linesData);
     }
 
-    private function makeHrefForColumnFields($endRowField,$dataReduce,$columnFields,$linesData, $valDateInDB){
+    private function makeHrefForColumnFields($endRowField, $dataReduce, $columnFields, $linesData, $valDateInDB)
+    {
         $href = null;
         foreach ($columnFields as $k1 => $valColFields) {
-            if(!isset($valColFields->href_from_field)) return $href;
-            $hrefToField = $valColFields->href_from_field;      
-                $f1 = $dataReduce[$endRowField];
-                foreach ($linesData as $line){
-                    if($line->$endRowField === $f1 && $line->$k1 === $valDateInDB) {
-                        $href = route($valColFields->route_name, $line->$hrefToField);
-                        break;
-                    }
+            if (!isset($valColFields->href_from_field)) return $href;
+            $hrefToField = $valColFields->href_from_field;
+            $f1 = $dataReduce[$endRowField];
+            foreach ($linesData as $line) {
+                if ($line->$endRowField === $f1 && $line->$k1 === $valDateInDB) {
+                    $href = route($valColFields->route_name, $line->$hrefToField);
+                    break;
                 }
+            }
         }
         return $href;
     }
 
-    private function makeHrefForRowFields($indexRowField, $values){
-        if(isset($indexRowField->href_from_field) && isset($indexRowField->route_name)){
-            return route($indexRowField->route_name,$values[$indexRowField->href_from_field]);
+    private function makeHrefForRowFields($indexRowField, $values)
+    {
+        if (isset($indexRowField->href_from_field) && isset($indexRowField->route_name)) {
+            return route($indexRowField->route_name, $values[$indexRowField->href_from_field]);
         }
     }
 
-    public function changeValueData($data, $isRawData, $linesData)
+    private function replaceKeysWithValues($url)
+    {
+        $params = explode('&', $url);
+        foreach ($params as &$param) {
+            $equalsPos = strpos($param, '=');
+            if ($equalsPos !== false) {
+                $param = substr($param, 0, $equalsPos + 1) . '{{' . substr($param, $equalsPos + 1) . '}}';
+            }
+        }
+        $newUrl = implode('&', $params);
+        return $newUrl;
+    }
+
+    public function changeValueData($data, $isRawData, $linesData, $params)
     {
         if ($isRawData) {
             $libs = LibPivotTables2::getFor($this->modeType);
@@ -79,10 +95,40 @@ trait TraitChangeDataPivotTable2
             $results = [];
             $libs = LibPivotTables2::getFor($this->modeType);
             $rowFields = $libs['row_fields'];
+            $dataFields = $libs['data_fields'];
             $fieldsUnShowTitle = ['staff_id'];
             $datesDoWork = [];
+
+            $dataFieldsHaveHref = [];
+            foreach ($dataFields as $items) {
+                if (isset($items->href_str) && $items->href_str) {
+                    $refRegex = $items->href_str;
+                    $refRegex = $this->replaceKeysWithValues($refRegex);
+                    $dataFieldsHaveHref[$items->aggregation . '_' . $items->value_index] = (object)[
+                        'href_regex' => $refRegex,
+                        'value_index' => $items->value_index,
+                        'route_name' => $items->route_name
+                    ];
+                }
+            };
+
             foreach ($data as $values) {
+                // dd($values,$dataFieldsHaveHref);
                 foreach ($values as $key => $value) {
+                    // Add link for DataField'columns
+                    if(isset($dataFieldsHaveHref[$key])) {
+                        $str = $dataFieldsHaveHref[$key] ->href_regex;
+                        $routeName = $dataFieldsHaveHref[$key] ->route_name;
+                        $fields = StringPivotTable::extractFields($str)[1];
+                        $valueOfFields = $params + array_intersect_key($values, array_flip($fields));
+                        $url = route($routeName). StringPivotTable::replaceValuesWithPlaceholders($valueOfFields, $str);
+                        $values[$key] = (object)[
+                            'value' => $value,
+                            'cell_class' => $url ? ' text-blue-800 ' : '',
+                            'cell_href' => $url
+                        ];
+                    }
+
                     $endRowField = ''; // to get key of row_field for filtering cell_href
                     foreach ($rowFields as $keyField => $attrs) {
                         $indexField = $keyField;
@@ -91,11 +137,11 @@ trait TraitChangeDataPivotTable2
                             $indexField .= '_' . str_replace('.', '_', $attrs->column);
                         }
                         if ($key === $indexField) {
-                            $href = $this->makeHrefForRowFields($rowFields[$keyField], $values);    
+                            $href = $this->makeHrefForRowFields($rowFields[$keyField], $values);
                             $values[$key] = (object) [
                                 'value' => $value,
                                 'cell_title' =>  in_array($keyField, $fieldsUnShowTitle) ? '' : 'ID: ' . (string)$values[$keyField],
-                                'cell_class' => $href ? ' text-blue-800 ':'',
+                                'cell_class' => $href ? ' text-blue-800 ' : '',
                                 'cell_href' => $href
                             ];
                         }
@@ -106,20 +152,20 @@ trait TraitChangeDataPivotTable2
                         $columnFields = $libs['column_fields'];
                         $titleDate = DateTime::createFromFormat('d/m/y', $date)->format('d-m-Y');
                         $valDateInDB = DateTime::createFromFormat('d/m/y', $date)->format('Y-m-d');
-                        $href = $this->makeHrefForColumnFields($endRowField,$values,$columnFields,$linesData,$valDateInDB);            
+                        $href = $this->makeHrefForColumnFields($endRowField, $values, $columnFields, $linesData, $valDateInDB);
                         $datesDoWork[$key] = $date;
                         $isSaturdaySunDay = PivotReport::isSaturdayOrSunday($date);
                         if ($isSaturdaySunDay) {
                             $values[$key] = (object) [
                                 'value' => $value,
-                                'cell_class' => $href ? $bgColor.' text-blue-800 ':$bgColor,
+                                'cell_class' => $href ? $bgColor . ' text-blue-800 ' : $bgColor,
                                 'cell_title' => 'Date: ' . $titleDate,
                                 'cell_href' => $href,
                             ];
                         } else {
                             $values[$key] = (object) [
                                 'value' => $value,
-                                'cell_class' =>  $href ? 'text-blue-800': '',
+                                'cell_class' =>  $href ? 'text-blue-800' : '',
                                 'cell_title' => 'Date: ' . $titleDate,
                                 'cell_href' => $href,
                             ];

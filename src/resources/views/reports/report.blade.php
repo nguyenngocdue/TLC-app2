@@ -15,7 +15,7 @@
         $tc = "<x-reports.utility-report routeName='$routeName'/>"; 
         $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
     @endphp
-    @if($typeOfView === 'report-pivot')
+    {{-- @if($typeOfView === 'report-pivot') --}}
     <x-renderer.report.pivot-table 
                     showNo={{true}} 
                     modeType="{{$modeType}}"  
@@ -33,7 +33,7 @@
                     topCenterControl="{!!$tc!!}" 
                     topRightControl="{!!$tr!!}" 
                     />
-    @else
+    {{-- @else
     <x-renderer.table 
                     showNo={{true}} 
                     :dataHeader="$tableDataHeader" 
@@ -49,7 +49,7 @@
                     topLeftControl="{!!$tl!!}" 
                     topCenterControl="{!!$tc!!}" 
                     topRightControl="{!!$tr!!}" 
-                    />
-    @endif
+                    /> --}}
+    {{-- @endif --}}
 </div>
 @endsection

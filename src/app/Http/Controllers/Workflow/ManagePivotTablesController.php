@@ -30,6 +30,14 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'width' => 50,
             ],
             [
+                'dataIndex' => 'is_render_row_fields',
+                'title' => 'Render Row Fields <br/>(Using When Checking Is Raw)',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 50,
+            ],
+            [
                 'dataIndex' => 'filters',
                 'renderer' => 'textarea4',
                 'editable' => true,

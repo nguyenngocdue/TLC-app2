@@ -139,6 +139,13 @@
         "top_title": "HSE KPI Report",
         "title": "HSE Key Performance Indicator"
     },
+    "report-prod_sequence_010": {
+        "name": "report-prod_sequence_010",
+        "package_tab": "report",
+        "package": "project_management",
+        "top_title": null,
+        "title": "Labor Cost Timesheet"
+    },
     "report-prod_sequence_030": {
         "name": "report-prod_sequence_030",
         "package_tab": "report",
@@ -150,8 +157,8 @@
         "name": "report-prod_sequence_040",
         "package_tab": "report",
         "package": "project_management",
-        "top_title": "Labor Cost Timesheet",
-        "title": "Labor Cost Timesheet"
+        "top_title": "Labor Cost Timesheet Detail",
+        "title": "Labor Cost Timesheet Detail"
     },
     "report-prod_sequence_110": {
         "name": "report-prod_sequence_110",
