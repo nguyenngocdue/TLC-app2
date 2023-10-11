@@ -37,6 +37,7 @@ class MyOrgChartController extends Controller
         $printOptions = $this->getOptionsRenderByUserSetting([]);
 
         $departments = Department::query()
+            ->where('hide_in_org_chart', 0)
             ->orderBy('order_no')
             ->get();
 
