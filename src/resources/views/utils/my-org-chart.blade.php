@@ -7,22 +7,33 @@
     <script src="{{ asset('js/my-org-chart.js') }}"></script>
 @endonce
 
-<div >
+<div class="px-4">
     @if($isAdmin)
-    <div class='p-2 no-print'>
+    {{-- <div class='p-2 no-print'>
         <x-renderer.button href="/my-org-chart" type="{{$viewSettings['approval_view'] ? '' : 'secondary'}}">Position ORG Chart </x-renderer.button>
         <x-renderer.button href="/my-org-chart?approval-tree=true" type="{{$viewSettings['approval_view'] ? 'secondary' : ''}}">Approval Tree</x-renderer.button>
-    </div>
+    </div> --}}
     @endif
+    
+    <div class='p-2 no-print'>
+        <x-renderer.button href="/my-org-chart" type="{{$viewSettings['print_mode'] ? '' : 'secondary'}}">Interactive Mode</x-renderer.button>
+        <x-renderer.button href="/my-org-chart?print-mode=true" type="{{$viewSettings['print_mode'] ? 'secondary' : ''}}">Print Mode</x-renderer.button>
+    </div>
 
-    <x-renderer.org-chart.org-chart-toolbar :showOptions="$showOptions"/>
-
-    @if(App::isLocal())
-        @foreach($departments as $department)
-            <x-renderer.org-chart.org-chart-renderer id="{{$department->id}}" :departments="$departments" departmentId='{{$department->id}}' :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
+    
+    @if($viewSettings['print_mode'])
+    @foreach($departments as $department)
+    <x-renderer.org-chart.org-chart-renderer id="{{$department->id}}" :departments="$departments" departmentId='{{$department->id}}' :options="$options" isPrintMode="{{$viewSettings['print_mode']}}" isApprovalView="{{$viewSettings['approval_view']}}"/>
         @endforeach
     @else
-        <x-renderer.org-chart.org-chart-renderer id="0" departmentId="{{$showOptions['department']??0}}" :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
+        <x-renderer.org-chart.org-chart-toolbar :showOptions="$showOptions"/>
+        <div class="flex items-center justify-center no-print">
+            <x-controls.text2 type="search" class="w-[550px] mr-1 my-2" name="mySearch_0"
+            placeholder="Press ENTER to search, and Press SPACE to pan to the next result"
+            value="" onkeypress="if (event.keyCode === 13) searchDiagram(0)" />
+            <x-renderer.button type="secondary" onClick="searchDiagram(0)" class="w-20" >Search</x-renderer.button>
+        </div>
+        <x-renderer.org-chart.org-chart-renderer id="0" departmentId="{{$showOptions['department']??0}}" :options="$options" isPrintMode="{{$viewSettings['print_mode']}}" isApprovalView="{{$viewSettings['approval_view']}}"/>
     @endif
 </div>
 @endsection

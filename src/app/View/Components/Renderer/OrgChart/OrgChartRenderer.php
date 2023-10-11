@@ -21,9 +21,11 @@ class OrgChartRenderer extends Component
         private $id,
         private $departmentId = null,
         private $options = null,
-        private $isApprovalView = null,
         private $departments = null,
         private $headIds = [],
+
+        private $isApprovalView = null,
+        private $isPrintMode = null,
     ) {
         // dd($departments);
     }

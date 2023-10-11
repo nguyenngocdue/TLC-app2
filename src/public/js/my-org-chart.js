@@ -157,7 +157,7 @@ function init(id, nodeDataArray) {
       { observed: myDiagram, contentAlignment: go.Spot.Center });   // tell it which Diagram to show and pan
   // myDiagram.toolManager.panningTool.isEnabled = false;
   myDiagram.commandHandler.zoomToFit();
-  myDiagram.commandHandler.decreaseZoom(0.9);
+  myDiagram.commandHandler.decreaseZoom(0.85);
   // var diagramContainer = document.getElementById('myDiagramDiv_' + id);
   // diagramContainer.style.overflow = 'hidden';
 }
