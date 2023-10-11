@@ -22,7 +22,10 @@ class OrgChartRenderer extends Component
         private $departmentId = null,
         private $options = null,
         private $isApprovalView = null,
+        private $departments = null,
+        private $headIds = [],
     ) {
+        // dd($departments);
     }
 
     private function getTreeByDepartment($departmentId, $options, $isApprovalView)
@@ -30,18 +33,28 @@ class OrgChartRenderer extends Component
         $tree = $isApprovalView ? BuildTree::getTree() : BuildTreeOrgChart::getTree();
         $this->setTreeByDepartment($tree, $departmentId, $isApprovalView);
         $results = [];
-        $this->restructureTree($tree, $results, $options);
+        if ($this->departments) {
+            $this->headIds = $this->departments->pluck('head_of_department')->toArray();
+        }
+        // dump($heads);
+        $this->restructureTree($tree, $results, $options, true);
         usort($results, function ($a, $b) {
             return strcmp($a['name'], $b['name']);
         });
         return $results;
     }
 
-    private function restructureTree($tree, &$results, $options)
+    private function restructureTree($tree, &$results, $options, $isRoot = false)
     {
         foreach ($tree as $value) {
             if (isset($value->children)) {
-                $this->restructureTree($value->children, $results, $options);
+                $isCurrentNodeAHOD = in_array($value->id, $this->headIds);
+                if ($isRoot) {
+                    $this->restructureTree($value->children, $results, $options);
+                } elseif (!$isCurrentNodeAHOD) {
+                    $this->restructureTree($value->children, $results, $options);
+                }
+                // $this->restructureTree($value->children, $results, $options);
             }
             if (App::isProduction()) {
                 if ($value->show_on_beta == 0) {

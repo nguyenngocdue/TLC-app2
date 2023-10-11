@@ -19,7 +19,7 @@
 
     @if(App::isLocal())
         @foreach($departments as $department)
-            <x-renderer.org-chart.org-chart-renderer id="{{$department->id}}" departmentId='{{$department->id}}' :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
+            <x-renderer.org-chart.org-chart-renderer id="{{$department->id}}" :departments="$departments" departmentId='{{$department->id}}' :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
         @endforeach
     @else
         <x-renderer.org-chart.org-chart-renderer id="0" departmentId="{{$showOptions['department']}}" :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
