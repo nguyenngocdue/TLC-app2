@@ -155,9 +155,14 @@ function init(id, nodeDataArray) {
   myOverview =
     new go.Overview("myOverviewDiv_" + id,  // the HTML DIV element for the Overview
       { observed: myDiagram, contentAlignment: go.Spot.Center });   // tell it which Diagram to show and pan
+  // myDiagram.toolManager.panningTool.isEnabled = false;
+  myDiagram.commandHandler.zoomToFit();
+  myDiagram.commandHandler.decreaseZoom(0.9);
+  // var diagramContainer = document.getElementById('myDiagramDiv_' + id);
+  // diagramContainer.style.overflow = 'hidden';
 }
 
-var currentResultsIndex = -1;
+// var currentResultsIndex = -1;
 // the Search functionality highlights all of the nodes that have at least one data property match a RegExp
 function searchDiagram(id) {  // called by button
   const myDiagram = go.Diagram.fromDiv("myDiagramDiv_" + id);
