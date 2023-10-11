@@ -8,7 +8,7 @@ class Department extends ModelExtended
 {
     protected $fillable = [
         "id", "owner_id", "name", "description",
-        "head_of_department", "show_in_org_chart",
+        "head_of_department", "hide_in_org_chart",
         "slug", "order_no", "parent_id",
     ];
 
@@ -45,7 +45,7 @@ class Department extends ModelExtended
             ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'name'],
-            ['dataIndex' => 'show_in_org_chart'],
+            ['dataIndex' => 'hide_in_org_chart'],
         ];
     }
 }

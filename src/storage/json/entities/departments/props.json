@@ -91,9 +91,9 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_show_in_org_chart": {
-        "name": "_show_in_org_chart",
-        "column_name": "show_in_org_chart",
+    "_hide_in_org_chart": {
+        "name": "_hide_in_org_chart",
+        "column_name": "hide_in_org_chart",
         "column_type": "tinyint(1)",
         "label": "Show In ORG Chart",
         "control": "toggle",
