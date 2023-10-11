@@ -16,8 +16,13 @@
     @endif
 
     <x-renderer.org-chart.org-chart-toolbar :showOptions="$showOptions"/>
-    <x-renderer.org-chart.org-chart-renderer id="0" departmentId='1' :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
-    <x-renderer.org-chart.org-chart-renderer id="1" departmentId='2' :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
-   
+
+    @if(App::isLocal())
+        @foreach($departments as $department)
+            <x-renderer.org-chart.org-chart-renderer id="{{$department->id}}" departmentId='{{$department->id}}' :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
+        @endforeach
+    @else
+        <x-renderer.org-chart.org-chart-renderer id="0" departmentId="{{$showOptions['department']}}" :options="$options" isApprovalView="{{$viewSettings['approval_view']}}"/>
+    @endif
 </div>
 @endsection

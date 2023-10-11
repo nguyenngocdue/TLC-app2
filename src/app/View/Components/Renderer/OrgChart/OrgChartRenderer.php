@@ -126,7 +126,7 @@ class OrgChartRenderer extends Component
         return view("components.renderer.org-chart.org-chart-renderer", [
             'id' => $this->id,
             'dataSource' => $tree,
-
+            'department' => Department::findFromCache($this->departmentId),
         ]);
     }
 }

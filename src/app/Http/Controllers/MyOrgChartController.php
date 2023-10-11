@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
+use App\Models\Department;
 use App\Models\User_category;
 use App\Models\User_time_keep_type;
 use App\Models\Workplace;
@@ -30,10 +31,12 @@ class MyOrgChartController extends Controller
 
         $showOptions = $this->getUserSettingsViewOrgChart();
         $options = $this->getOptionsRenderByUserSetting($showOptions);
+        $departments = Department::query()->get();
 
         return view(
             'utils.my-org-chart',
             [
+                'departments' => $departments,
                 'showOptions' => $showOptions,
                 'options' => $options,
                 'viewSettings' => $viewSettings,
