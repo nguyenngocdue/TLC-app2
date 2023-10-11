@@ -126,7 +126,7 @@ trait TraitEntityCRUDStoreUpdate2
 			// dump($newStatus);
 			$rules = $this->getValidationRules($oldStatus, $newStatus, __FUNCTION__, $isFakeRequest);
 			// if ($request['tableNames'] == 'fakeRequest') Log::info($rules);
-			// if ($request['tableNames'] !== 'fakeRequest') 
+			// if ($request['tableNames'] !== 'fakeRequest')
 			if (!$isFakeRequest) {
 				$this->makeUpTableFieldForRequired($request);
 			}
@@ -141,6 +141,7 @@ trait TraitEntityCRUDStoreUpdate2
 			//As if it was, the datetime picker would apply YYYY-MM-DD format and cause validation issues for the next submission
 			$toastrResult = [];
 			$lineResult = true;
+            // dd($isFakeRequest);
 			if (!$isFakeRequest) {
 				[$toastrResult, $lineResult, $toBeOverrideAggregatedFields] = $this->handleEditableTables($request, $props['editable_table'], $theRow->id);
 				// Log::info($toBeOverrideAggregatedFields);
@@ -216,7 +217,7 @@ trait TraitEntityCRUDStoreUpdate2
 			return $theRow->id;
 		}
 
-		// if ($this->debugForStoreUpdate) 
+		// if ($this->debugForStoreUpdate)
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"

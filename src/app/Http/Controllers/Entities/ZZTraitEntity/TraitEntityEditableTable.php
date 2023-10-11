@@ -74,7 +74,7 @@ trait TraitEntityEditableTable
                     if (isset($props[$table01Name])) { //<< if we hide the table in Manage Props
                         $line['idForScroll'] = substr($props[$table01Name], 1); //remove first "_"
                     }
-                    // dump($line);
+                    dump($line);
                     $fakeRequest->merge($line);
                     $this->distributeFileBag($request, $rowIndex, $fakeRequest);
 
