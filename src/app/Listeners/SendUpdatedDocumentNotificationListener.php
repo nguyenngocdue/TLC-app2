@@ -123,7 +123,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
             $listCc[] = $userAssigneePrevious;
             $isChangeAssignee = true;
         }
-        if($this->isArraysDiffer($userMonitorsPrevious, $userMonitorsCurrent)){
+        if($userMonitorsPrevious != $userMonitorsCurrent){
             $listCc = array_merge($listCc,$userMonitorsPrevious,$userMonitorsCurrent);
             $isChangeMonitors = true;
         }else {
@@ -166,7 +166,13 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
     }
     private function isArraysDiffer($array1 ,$array2){
         $diff = array_diff($array1,$array2);
+        dd($array1 == $array2);
         if(empty($diff)) return false;
         return true;
+    }
+    private function compareArrays($a, $b) {
+        sort($a);
+        sort($b);
+        return $a == $b;
     }
 }

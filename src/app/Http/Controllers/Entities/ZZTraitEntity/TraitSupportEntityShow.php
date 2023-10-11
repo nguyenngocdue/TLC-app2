@@ -55,26 +55,26 @@ trait TraitSupportEntityShow
             switch ($controlRender) {
                 case 'signature':
                     $valueSignature = $item->value;
+                    // dd($item->insp_comments);
                     $inspectorId = isset($item->getControlType->name) ? $item->inspector_id : $item->owner_id;
-                    $inspectorName = null;
-                    if ($inspectorId) {
-                        $inspectorName = User::findFromCache($inspectorId)->full_name;
-                    }
+                    // $inspectorName = null;
+                    // if ($inspectorId) {
+                    //     $inspectorName = User::findFromCache($inspectorId)->full_name;
+                    // }
                     $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $item->updated_at);
                     $str = Blade::render(
-                        "<div class='flex justify-center'>
-                                    <div>
+                        "<div class='flex pb-2 justify-between items-center'>
                                     <x-controls.signature2 name='signature' value='$valueSignature' updatable='{{false}}'/>
-                                    <div class='text-right mr-3'>
-                                    @if('$inspectorName')
-                                        <p class='font-medium'>$inspectorName</p>
-                                        <p>$updatedAt</p>
-                                    @endif
-                                    </div>
-                                    </div>
-                                </div>
-                                ",
+                                        <div class='text-right mr-5'>
+                                        <x-renderer.avatar-user uid='$inspectorId'></x-renderer.avatar-user>
+                                        @if($inspectorId)
+                                            <p>$updatedAt</p>
+                                        @endif
+                                        </div>
+                        </div>",
                     );
+                    $str .= $this->createStrHtmlAttachment($item);
+                    $str .=  $this->createStrHtmlComment($item);
                     break;
                 case 'text':
                     $str = "<p class='font-medium'>{$item->value}</p>";
@@ -138,8 +138,8 @@ trait TraitSupportEntityShow
     private function createStrHtmlAttachment($item)
     {
         if (isset($item->insp_photos) && !$item->insp_photos->isEmpty()) {
-            $td = '<td class="border" colspan=5 style="width:190px">'  . $this->formatAttachmentRender($item->insp_photos) . '</td>';
-            return "<tr  class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+            $td = '<td class="b1order" colspan=5 style="width:190px">'  . $this->formatAttachmentRender($item->insp_photos) . '</td>';
+            return "<tr  class=' bg-white bord1er-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
         }
         return '';
     }
@@ -147,8 +147,8 @@ trait TraitSupportEntityShow
     private function createStrHtmlComment($item)
     {
         if (isset($item->insp_comments) && !$item->insp_comments->isEmpty()) {
-            $td = "<td class='border p-3' colspan = 5 style='width:190px'>" . $this->formatCommentRender($item->insp_comments) . "</td>";
-            return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+            $td = "<td class='bor1der p-0' colspan = 5 style='width:190px'>" . $this->formatCommentRender($item->insp_comments) . "</td>";
+            return "<tr class=' bg-white bor1der-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
         }
         return '';
     }
@@ -179,48 +179,66 @@ trait TraitSupportEntityShow
     }
     private function formatCommentRender($items)
     {
-        $strCenter = "";
-        foreach ($items as  $comment) {
-            $ownerComment = $comment->getOwner ?? '';
-            $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $comment->updated_at);
-            $ownerRender = Blade::render("<x-renderer.avatar-user verticalLayout='true' uid='$ownerComment->id'></x-renderer.avatar-user>");
-            $strCenter .= "<div class='mt-2 border-b'>
-                                $ownerRender
-                                <p class='text-xs font-normal text-center mt-1'>$updatedAt</p>
-                            </div>
-                            <div class='col-span-3 border-b'>
-                                <p class='px-1'>{$comment->content}</p>
-                            </div>
-                            ";
-        }
-        $strHead = "<div class='flex flex-col w-full' >
-                    <div class='grid grid-cols-4 lg:gap-3 md:gap-2 sm:gap-1 '>";
-        $strTail = "</div></div>";
-        return $strHead . $strCenter . $strTail;
+        $value = $items->toArray();
+        $strCenter = Blade::render('<x-print.comment5 :value="$value" />',['value' => $value]);
+        return $strCenter;
+        // dd($strCenter);
+        // foreach ($items as  $comment) {
+        //     $ownerComment = $comment->getOwner ?? '';
+        //     $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $comment->updated_at);
+        //     $ownerRender = Blade::render("<x-renderer.avatar-user verticalLayout='true' uid='$ownerComment->id'></x-renderer.avatar-user>");
+        //     <x-print.comment5 :relationships="$relationships" :value="$value" />
+        //     $strCenter .= "<div class='mt-2 border-b'>
+        //                         $ownerRender
+        //                         <p class='text-xs font-normal text-center mt-1'>$updatedAt</p>
+        //                     </div>
+        //                     <div class='col-span-3 border-b'>
+        //                         <p class='px-1'>{$comment->content}</p>
+        //                     </div>
+        //                     ";
+        // }
+        // $strHead = "<div class='flex flex-col w-full' >
+        //             <div class='grid grid-cols-4 lg:gap-3 md:gap-2 sm:gap-1 '>";
+        // $strTail = "</div></div>";
+        // return $strHead . $strCenter . $strTail;
     }
 
     private function formatAttachmentRender($items)
     {
-        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
-        $strCenter = "";
-        foreach ($items as  $attachment) {
-            $urlThumbnail = $path . $attachment->url_thumbnail;
-            $urlMedia = $path . $attachment->url_media;
-            $fileName = $attachment->filename;
-            $strCenter .= "
-                            <div class='border-gray-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit'>
-                                <img class='' src='$urlThumbnail' alt='$fileName' />
-                                <div class='invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]'>
-                                        <a title='$fileName' href='$urlMedia' target='_blank' class='hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full'>
-                                            <span class='text-sm'><i class='fa-sharp fa-solid fa-eye text-2xl '></i></span>
-                                        </a>
-                                </div>
-                            </div>";
-        };
-        $strHead = "<div class='flex flex-col container mx-auto w-full' >
-                    <div class='grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 '>";
-        $strTail = "</div></div>";
-        return $strHead . $strCenter . $strTail;
+        $strCenter = '';
+        $isRenderSimple = $items->every(function($item){
+            return in_array($item->extension,['pdf','csv','zip']);
+        });
+        if($isRenderSimple){
+            $strCenter = Blade::render('<x-print.attachment-simple :dataSource="$value"/>',[
+                'value' => $items->toArray()
+            ]);
+        }else{
+            $strCenter = Blade::render('<x-renderer.attachment2 name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />',[
+                'value' => $items->toArray()
+            ]);
+        }
+        return $strCenter;
+        // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+        // $strCenter = "";
+        // foreach ($items as  $attachment) {
+        //     $urlThumbnail = $path . $attachment->url_thumbnail;
+        //     $urlMedia = $path . $attachment->url_media;
+        //     $fileName = $attachment->filename;
+        //     $strCenter .= "
+        //                     <div class='border-gray-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit'>
+        //                         <img class='' src='$urlThumbnail' alt='$fileName' />
+        //                         <div class='invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]'>
+        //                                 <a title='$fileName' href='$urlMedia' target='_blank' class='hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full'>
+        //                                     <span class='text-sm'><i class='fa-sharp fa-solid fa-eye text-2xl '></i></span>
+        //                                 </a>
+        //                         </div>
+        //                     </div>";
+        // };
+        // $strHead = "<div class='flex flex-col container mx-auto w-full' >
+        //             <div class='grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 '>";
+        // $strTail = "</div></div>";
+        // return $strHead . $strCenter . $strTail;
     }
     private function createDataSourceTableRun($value)
     {
