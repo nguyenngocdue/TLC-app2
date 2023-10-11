@@ -1299,6 +1299,15 @@ video {
 .min-h-\[700px\] {
   min-height: 700px;
 }
+.min-h-\[880px\] {
+  min-height: 880px;
+}
+.min-h-\[940px\] {
+  min-height: 940px;
+}
+.min-h-\[990px\] {
+  min-height: 990px;
+}
 .min-h-fit {
   min-height: -moz-fit-content;
   min-height: fit-content;
@@ -1660,6 +1669,9 @@ video {
 }
 .scroll-mt-20 {
   scroll-margin-top: 5rem;
+}
+.scroll-mt-80 {
+  scroll-margin-top: 20rem;
 }
 .list-inside {
   list-style-position: inside;
@@ -3837,6 +3849,9 @@ video {
 .pt-32 {
   padding-top: 8rem;
 }
+.pt-4 {
+  padding-top: 1rem;
+}
 .text-left {
   text-align: left;
 }
@@ -3851,6 +3866,9 @@ video {
 }
 .align-baseline {
   vertical-align: baseline;
+}
+.align-top {
+  vertical-align: top;
 }
 .align-middle {
   vertical-align: middle;
@@ -8013,6 +8031,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
+:is(.dark .dark\:hover\:bg-gray-900:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
 :is(.dark .dark\:hover\:bg-green-700:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(21 128 61 / var(--tw-bg-opacity));
@@ -8038,10 +8060,6 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 @media (min-width: 640px) {
-
-  .sm\:col-span-12 {
-    grid-column: span 12 / span 12;
-  }
 
   .sm\:m-4 {
     margin: 1rem;
@@ -8237,10 +8255,6 @@ video {
     grid-column: span 6 / span 6;
   }
 
-  .md\:col-span-9 {
-    grid-column: span 9 / span 9;
-  }
-
   .md\:col-span-8 {
     grid-column: span 8 / span 8;
   }
@@ -8422,6 +8436,10 @@ video {
     grid-column: span 2 / span 2;
   }
 
+  .lg\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
   .lg\:col-span-4 {
     grid-column: span 4 / span 4;
   }
@@ -8436,10 +8454,6 @@ video {
 
   .lg\:col-span-8 {
     grid-column: span 8 / span 8;
-  }
-
-  .lg\:col-span-3 {
-    grid-column: span 3 / span 3;
   }
 
   .lg\:col-span-9 {
@@ -8645,28 +8659,20 @@ video {
 }
 @media (min-width: 1536px) {
 
-  .\32xl\:col-span-5 {
-    grid-column: span 5 / span 5;
-  }
-
-  .\32xl\:col-span-7 {
-    grid-column: span 7 / span 7;
-  }
-
-  .\32xl\:col-span-1 {
-    grid-column: span 1 / span 1;
-  }
-
-  .\32xl\:col-span-11 {
-    grid-column: span 11 / span 11;
-  }
-
   .\32xl\:col-span-10 {
     grid-column: span 10 / span 10;
   }
 
   .\32xl\:col-span-2 {
     grid-column: span 2 / span 2;
+  }
+
+  .\32xl\:col-span-5 {
+    grid-column: span 5 / span 5;
+  }
+
+  .\32xl\:col-span-7 {
+    grid-column: span 7 / span 7;
   }
 
   .\32xl\:mx-20 {

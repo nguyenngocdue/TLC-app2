@@ -71,6 +71,18 @@
         "rejected": "",
         "approved": ""
     },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "new": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "passed": "",
+        "inspected": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -114,10 +126,10 @@
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
-        "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "inspected": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
@@ -130,18 +142,6 @@
         "pending_approval": "",
         "rejected": "",
         "approved": "true"
-    },
-    "_getShtSigs": {
-        "name": "_getShtSigs",
-        "column_name": "getShtSigs",
-        "new": "",
-        "in_progress": "",
-        "not_applicable": "",
-        "passed": "",
-        "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
     },
     "_status": {
         "name": "_status",
@@ -206,6 +206,18 @@
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
+        "new": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "passed": "",
+        "inspected": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_signature_qaqc_chklst_3rd_party": {
+        "name": "_signature_qaqc_chklst_3rd_party",
+        "column_name": "signature_qaqc_chklst_3rd_party",
         "new": "",
         "in_progress": "",
         "not_applicable": "",

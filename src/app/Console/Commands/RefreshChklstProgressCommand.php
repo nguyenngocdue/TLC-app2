@@ -30,17 +30,18 @@ class RefreshChklstProgressCommand extends Command
      */
     public function handle()
     {
-        try {
-            $subProjectId = $this->input->getOption('subProjectId');
-            if (!$subProjectId) {
-                $this->error('subProjectId is missing.');
-                return Command::FAILURE;
-            }
-            event(new UpdateChklstProgressEvent($subProjectId));
-            $this->info("Program event fired, and listeners are executed.");
-            return Command::SUCCESS;
-        } catch (\Exception $e) {
-            $this->error($e->getMessage());
-        }
+        $this->info("This command is OBSOLETE.");
+        // try {
+        //     $subProjectId = $this->input->getOption('subProjectId');
+        //     if (!$subProjectId) {
+        //         $this->error('subProjectId is missing.');
+        //         return Command::FAILURE;
+        //     }
+        //     event(new UpdateChklstProgressEvent($subProjectId));
+        //     $this->info("Program event fired, and listeners are executed.");
+        //     return Command::SUCCESS;
+        // } catch (\Exception $e) {
+        //     $this->error($e->getMessage());
+        // }
     }
 }

@@ -1360,9 +1360,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null,
-        "hidden": "true",
-        "hidden_navbar": "true"
+        "icon": null
     },
     "prod_routing_detail": {
         "name": "prod_routing_detail",
@@ -1376,9 +1374,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null,
-        "hidden": "true",
-        "hidden_navbar": "true"
+        "icon": null
     },
     "prod_routing_link": {
         "name": "prod_routing_link",
@@ -1392,9 +1388,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null,
-        "hidden": "true",
-        "hidden_navbar": "true"
+        "icon": null
     },
     "prod_run": {
         "name": "prod_run",

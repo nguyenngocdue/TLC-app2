@@ -14,7 +14,7 @@ class Comment5 extends Component
      */
     public function __construct(
         private $value,
-        private $relationships
+        private $relationships = null,
     ) {
         //
     }

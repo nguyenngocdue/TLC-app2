@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls\InspChklst;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -18,6 +19,7 @@ class CheckPointCreateNcrOnHold extends Component
         private $rowIndex,
         private $debug,
         private $checkPointIds = [],
+        private $sheet = null,
     ) {
         //
     }
@@ -58,6 +60,7 @@ class CheckPointCreateNcrOnHold extends Component
             'parent_type' => Str::modelPathFrom($this->line->getTable()),
             'parent_id' => $this->line->id,
             'description' => "During " . $this->line->description . ", ",
+            'prod_discipline_id' => $this->sheet->prod_discipline_id,
         ];
         if ($this->line->getProject) $params['project_id'] = $this->line->getProject->id;
         if ($this->line->getSubProject) $params['sub_project_id'] = $this->line->getSubProject->id;
@@ -75,6 +78,6 @@ class CheckPointCreateNcrOnHold extends Component
         ];
         $href = route('hse_corrective_actions.create', $params);
         $lineCorrectiveActions = $this->line->getMorphManyByIds($this->checkPointIds, 'getCorrectiveActions', false);
-        return ['CAR', $href, 'Create a new Hse Corrective Action', $lineCorrectiveActions, 'hse_corrective_actions.show'];
+        return ['CAR', $href, 'Create a new HSE Corrective Action', $lineCorrectiveActions, 'hse_corrective_actions.show'];
     }
 }

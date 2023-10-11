@@ -4,15 +4,10 @@ namespace App\Listeners;
 
 use App\Events\UpdateChklstProgressEvent;
 use App\Models\Qaqc_insp_chklst;
-use App\Models\Sub_project;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Console\Command;
-use Illuminate\Console\Concerns\InteractsWithIO;
+use Illuminate\Support\Facades\Log;
 
-class UpdateChklstProgressFromSheetListener implements ShouldQueue
+class UpdateChklstProgressFromSheetListener //implements ShouldQueue //<<No need to queue
 {
     use Queueable;
     /**
@@ -25,61 +20,34 @@ class UpdateChklstProgressFromSheetListener implements ShouldQueue
         //
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  object  $event
-     * @return void
-     */
-
-
-
-
-    private function calculateProgressOfSheets($idChklst)
-    {
-        $sql = "SELECT
-        SUM(count_line_in_sheet) AS total_line
-        ,SUM(line_percent) AS total_line_percent
-        ,(SUM(line_percent) / SUM(count_line_in_sheet)) AS progress_chklst
-        FROM (SELECT
-            chkl.qaqc_insp_chklst_sht_id AS sheet_id
-            ,chks.description AS sheet_description
-            ,chks.qaqc_insp_chklst_id AS chklst_id
-            ,COUNT(chkl.qaqc_insp_chklst_sht_id) AS count_line_in_sheet
-            ,chks.progress AS sheet_progress
-            ,ROUND(chks.progress*COUNT(chkl.qaqc_insp_chklst_sht_id)/100, 2)*chks.progress AS line_percent
-            FROM qaqc_insp_chklst_lines chkl, qaqc_insp_chklst_shts chks
-            WHERE 1 = 1
-            AND chkl.qaqc_insp_chklst_sht_id =  chks.id";
-        $sql .= "\n AND chks.qaqc_insp_chklst_id = " . $idChklst;
-        $sql .= "\n GROUP BY sheet_id) AS chkshtb1";
-        $sqlData = DB::select(DB::raw($sql));
-        return collect($sqlData);
-    }
-
-
-    private  function getIdChklst($subProjectId)
-    {
-        $prodOrder = Sub_project::find($subProjectId)->getProdOrders;
-        $result = [];
-        foreach ($prodOrder as $po) {
-            foreach ($po->getQaqcInspChklsts as $chklst) {
-                $result[] = $chklst->id;
-            }
-        }
-        return $result;
-    }
-
     public function handle(UpdateChklstProgressEvent $event)
     {
-        $ids = $this->getIdChklst($event->subProjectId);
-        $success = 0;
-        foreach ($ids as $idChklst) {
-            $chklst = Qaqc_insp_chklst::find($idChklst);
-            $sqlData = $this->calculateProgressOfSheets($idChklst);
-            $newProgress = $sqlData->toArray()[0]->progress_chklst;
-            if ($chklst->update(['progress' => $newProgress])) $success++;
-        }
+        // $ids = $this->getIdChklst($event->subProjectId);
+        $bookId = $event->sheet->qaqc_insp_chklst_id;
+        $book = Qaqc_insp_chklst::find($bookId);
+        // Log::info($book);
+
+        $theTemplate = $book->getQaqcInspTmpl()->first();
+        $allTemplateSheets = $theTemplate->getSheets()->get();
+        $allSheets = $book->getSheets()->get();
+        // Log::info($allTemplateSheets);
+        // Log::info($allSheets);
+
+        // Log::info($theTemplate);
+        $templateIds = $allTemplateSheets->pluck('id');
+        $sheetIds = $allSheets->pluck('progress', 'qaqc_insp_tmpl_sht_id',);
+        // Log::info($templateIds);
+        // Log::info($sheetIds);
+
+        $array = [];
+        foreach ($templateIds as $id) $array[$id] = 0;
+        foreach ($sheetIds as $tmplId => $progress) $array[$tmplId] = $progress;
+        // Log::info($array);
+        $newProgress = array_sum($array) / count($array);
+
+        $book->progress = $newProgress;
+        $book->save();
+
         //<<This will also output on the web, not only the command
         // $count = count($ids);
         // $result = $success . "/" . $count;
