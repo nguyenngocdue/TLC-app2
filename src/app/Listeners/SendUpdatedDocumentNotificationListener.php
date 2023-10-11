@@ -48,9 +48,9 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
             $ballInCourts = BallInCourts::getAllOf($type);
             $previousStatus = $previousValue['status'];
             $currentStatus = $currentValue['status'];
-            [$userAssigneePrevious,$userMonitorsPrevious,$userAssigneeCurrent,$userMonitorsCurrent] = 
+            [$userAssigneePrevious,$userMonitorsPrevious,$userAssigneeCurrent,$userMonitorsCurrent] =
                 $this->getUserIdsAssigneeAndMonitors($ballInCourts, $previousValue, $currentValue,$previousStatus,$currentStatus);
-            [$isChangeStatus,$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors] = 
+            [$isChangeStatus,$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors] =
                 $this->handleBallInCourtForAssigneeAndMonitors($previousStatus,$currentStatus,$userAssigneePrevious,
                 $userMonitorsPrevious,$userAssigneeCurrent,$userMonitorsCurrent);
                 if($isChangeStatus || $isChangeAssignee || $isChangeMonitors){
@@ -60,7 +60,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         } catch (\Throwable $th) {
             Toastr::warning($th->getMessage(), 'Send mail failed');
         }
-        
+
     }
     private function sendMail($isChangeStatus,$userAssigneeCurrent,$listCc,$isChangeAssignee,$isChangeMonitors
     ,$type,$id,$previousValue,$currentValue,$userAssigneePrevious,$userMonitorsPrevious,$userMonitorsCurrent){
@@ -122,7 +122,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         if($userAssigneePrevious != $userAssigneeCurrent){
             $listCc[] = $userAssigneePrevious;
             $isChangeAssignee = true;
-        }   
+        }
         if($this->isArraysDiffer($userMonitorsPrevious, $userMonitorsCurrent)){
             $listCc = array_merge($listCc,$userMonitorsPrevious,$userMonitorsCurrent);
             $isChangeMonitors = true;
@@ -134,7 +134,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
     }
     private function implodeNameMonitors($ids)
     {
-        return implode(',', array_values(User::whereIn('id', $ids)->pluck('name')->toArray()));
+        return implode(',', array_values(User::whereIn('id', $ids)->pluck('name0')->toArray()));
     }
     private function getRouteAndSubjectMail($type, $id)
     {
