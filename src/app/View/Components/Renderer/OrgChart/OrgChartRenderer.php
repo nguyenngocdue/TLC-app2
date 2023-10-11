@@ -26,8 +26,10 @@ class OrgChartRenderer extends Component
 
         private $isApprovalView = null,
         private $isPrintMode = null,
+        private $zoomToFit = null,
     ) {
         // dd($departments);
+        // dump($zoomToFit);
     }
 
     private function getTreeByDepartment($departmentId, $options, $isApprovalView)
@@ -138,10 +140,12 @@ class OrgChartRenderer extends Component
     public function render()
     {
         $tree = $this->getTreeByDepartment($this->departmentId, $this->options, $this->isApprovalView);
+        // dump($this->zoomToFit);
         return view("components.renderer.org-chart.org-chart-renderer", [
             'id' => $this->id,
             'dataSource' => $tree,
             'department' => Department::findFromCache($this->departmentId),
+            'zoomToFit' => $this->zoomToFit,
         ]);
     }
 }

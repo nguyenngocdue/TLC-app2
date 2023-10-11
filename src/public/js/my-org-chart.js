@@ -1,5 +1,4 @@
-function init(id, nodeDataArray) {
-  // console.log(nodeDataArray)
+function init(id, zoomToFit, nodeDataArray) {
 
   const maxW = 300;
   const maxH = 160;
@@ -156,8 +155,13 @@ function init(id, nodeDataArray) {
     new go.Overview("myOverviewDiv_" + id,  // the HTML DIV element for the Overview
       { observed: myDiagram, contentAlignment: go.Spot.Center });   // tell it which Diagram to show and pan
   // myDiagram.toolManager.panningTool.isEnabled = false;
-  myDiagram.commandHandler.zoomToFit();
-  myDiagram.commandHandler.decreaseZoom(0.85);
+  if (zoomToFit) {
+    myDiagram.commandHandler.zoomToFit();
+    myDiagram.commandHandler.decreaseZoom(0.85);
+  } else {
+    // myDiagram.commandHandler.decreaseZoom(0.5);
+  }
+
   // var diagramContainer = document.getElementById('myDiagramDiv_' + id);
   // diagramContainer.style.overflow = 'hidden';
 }

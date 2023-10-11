@@ -17,5 +17,5 @@
             </canvas>
         </div>
     </div>
-    <script>window.addEventListener('DOMContentLoaded', init({{$id}}, @json($dataSource)));</script>
+    <script>window.addEventListener('DOMContentLoaded', init({{$id}}, {{$zoomToFit?1:0}}, @json($dataSource)));</script>
 </div>

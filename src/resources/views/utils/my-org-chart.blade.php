@@ -23,7 +23,7 @@
     
     @if($viewSettings['print_mode'])
     @foreach($departments as $department)
-    <x-renderer.org-chart.org-chart-renderer id="{{$department->id}}" :departments="$departments" departmentId='{{$department->id}}' :options="$options" isPrintMode="{{$viewSettings['print_mode']}}" isApprovalView="{{$viewSettings['approval_view']}}"/>
+    <x-renderer.org-chart.org-chart-renderer id="{{$department->id}}" :departments="$departments" departmentId='{{$department->id}}' :options="$options" isPrintMode="{{$viewSettings['print_mode']}}" isApprovalView="{{$viewSettings['approval_view']}}" zoomToFit="{{true}}"/>
         @endforeach
     @else
         <x-renderer.org-chart.org-chart-toolbar :showOptions="$showOptions"/>
@@ -33,7 +33,7 @@
             value="" onkeypress="if (event.keyCode === 13) searchDiagram(0)" />
             <x-renderer.button type="secondary" onClick="searchDiagram(0)" class="w-20" >Search</x-renderer.button>
         </div>
-        <x-renderer.org-chart.org-chart-renderer id="0" departmentId="{{$showOptions['department']??0}}" :options="$options" isPrintMode="{{$viewSettings['print_mode']}}" isApprovalView="{{$viewSettings['approval_view']}}"/>
+        <x-renderer.org-chart.org-chart-renderer id="0" departmentId="{{$showOptions['department']??0}}" :options="$options" isPrintMode="{{$viewSettings['print_mode']}}" isApprovalView="{{$viewSettings['approval_view']}}" zoomToFit="{{false}}"/>
     @endif
 </div>
 @endsection
