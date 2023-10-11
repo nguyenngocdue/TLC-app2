@@ -1,5 +1,5 @@
-// console.log(nodeDataArray)
-function init() {
+function init(id, nodeDataArray) {
+  // console.log(nodeDataArray)
 
   const maxW = 300;
   const maxH = 160;
@@ -11,16 +11,16 @@ function init() {
   const $ = go.GraphObject.make;  // for conciseness in defining templates
 
   // some constants that will be reused within templates
-  var mt8 = new go.Margin(8, 0, 0, 0);
-  var mr8 = new go.Margin(0, 8, 0, 0);
-  var ml8 = new go.Margin(0, 0, 0, 8);
+  // var mt8 = new go.Margin(8, 0, 0, 0);
+  // var mr8 = new go.Margin(0, 8, 0, 0);
+  // var ml8 = new go.Margin(0, 0, 0, 8);
   var roundedRectangleParams = {
     parameter1: 2,  // set the rounded corner
     spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight  // make content go all the way to inside edges of rounded corners
   };
 
-  myDiagram =
-    new go.Diagram("myDiagramDiv",  // the DIV HTML element
+  const myDiagram =
+    new go.Diagram("myDiagramDiv_" + id,  // the DIV HTML element
       {
         "undoManager.isEnabled": true,
         // Put the diagram contents at the top center of the viewport
@@ -53,40 +53,6 @@ function init() {
             })
       });
 
-  // myDiagram.grid =
-  //   $(go.Panel, "Grid",
-  //     $(go.Shape, "LineH", { strokeWidth: 1, strokeDashArray: [0, 150, 0.5, 0] })
-  //   );
-
-  // This function provides a common style for most of the TextBlocks.
-  // Some of these values may be overridden in a particular TextBlock.
-  // function textStyle(field) {
-  //   return [
-  //     {
-  //       font: "12px Roboto, sans-serif", stroke: "rgba(0, 0, 0, .60)",
-  //       visible: false  // only show textblocks when there is corresponding data for them
-  //     },
-  //     new go.Binding("visible", field, val => val !== undefined)
-  //   ];
-  // }
-  // function textStyleEmail(field) {
-  //   return [
-  //     {
-  //       font: "12px Roboto, sans-serif", stroke: "blue",
-  //       visible: false  // only show textblocks when there is corresponding data for them
-  //     },
-  //     new go.Binding("visible", field, val => val !== undefined)
-  //   ];
-  // }
-
-  // define Converters to be used for Bindings
-  // function theAvatarConverter(avatar) {
-  //   return avatar;
-  // }
-  // function theResignedConverter(resigned) {
-  //   return resigned == 1 ? '#d1d5db' : "#ffffff";
-  // }
-
   const modernNode = () => {
     return $(go.Panel, "Spot",
       $(go.Shape, "RoundedRectangle",
@@ -106,10 +72,10 @@ function init() {
       $(go.Panel, "Auto", { alignment: new go.Spot(0.93, 0.1), },
         $(go.Panel, "Spot", { scale: 1 },
 
-            $(go.TextBlock,  { stroke: "white", font: "bold 10pt sans-serif", text: "alignment: Center", textAlign: "center" },
+          $(go.TextBlock, { stroke: "white", font: "bold 10pt sans-serif", text: "alignment: Center", textAlign: "center" },
             new go.Binding("text", "memberCount",),
-            )
           )
+        )
       ),
       $(go.Panel, "Vertical",
         $(go.Panel, "Vertical", { margin: 10, width: maxW - 10, },
@@ -187,14 +153,15 @@ function init() {
 
   // Overview
   myOverview =
-    new go.Overview("myOverviewDiv",  // the HTML DIV element for the Overview
+    new go.Overview("myOverviewDiv_" + id,  // the HTML DIV element for the Overview
       { observed: myDiagram, contentAlignment: go.Spot.Center });   // tell it which Diagram to show and pan
 }
 
 var currentResultsIndex = -1;
 // the Search functionality highlights all of the nodes that have at least one data property match a RegExp
-function searchDiagram() {  // called by button
-  var input = document.getElementById("mySearch");
+function searchDiagram(id) {  // called by button
+  const myDiagram = go.Diagram.fromDiv("myDiagramDiv_" + id);
+  var input = document.getElementById("mySearch_" + id);
   if (!input) return;
   myDiagram.focus();
 
@@ -218,4 +185,4 @@ function searchDiagram() {  // called by button
 
   myDiagram.commitTransaction("highlight search");
 }
-window.addEventListener('DOMContentLoaded', init);
+// window.addEventListener('DOMContentLoaded', init(1));
