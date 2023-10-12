@@ -21,6 +21,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEntityUpdateUserSettings;
 	use TraitUpdatedProdSequenceEvent;
 	use TraitHelperRedirect;
+	use TraitCloneRequest;
 
 	private $debugForStoreUpdate = false;
 
@@ -113,7 +114,15 @@ trait TraitEntityCRUDStoreUpdate2
 			$props = $this->getProps1();
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
-			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+			if (!$isFakeRequest) {
+				$newRequest = $this->cloneRequest($request);
+				$newRequest->files->remove("table01");
+				// dump("Uploading real request", $newRequest->files);
+				$uploadedIds = $this->uploadAttachmentWithoutParentId($newRequest);
+			} else {
+				// dump("Uploading fake request", $request->files);
+				$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+			}
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
@@ -141,7 +150,7 @@ trait TraitEntityCRUDStoreUpdate2
 			//As if it was, the datetime picker would apply YYYY-MM-DD format and cause validation issues for the next submission
 			$toastrResult = [];
 			$lineResult = true;
-            // dd($isFakeRequest);
+			// dd($isFakeRequest);
 			if (!$isFakeRequest) {
 				[$toastrResult, $lineResult, $toBeOverrideAggregatedFields] = $this->handleEditableTables($request, $props['editable_table'], $theRow->id);
 				// Log::info($toBeOverrideAggregatedFields);
