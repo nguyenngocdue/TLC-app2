@@ -13,6 +13,7 @@
     step='any' 
     type="text"
     placeholder="{{$placeholder}}" 
+    style="{{$style}}"
     class="{{$classList}} {{$bgColor}} {{$readOnly?"hidden1":""}}"
     >
 <script>

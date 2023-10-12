@@ -12,6 +12,7 @@
     value="{{$cell??$slot}}"
     type="text"
     placeholder="{{$placeholder}}" 
+    style="{{$style}}"
     class="{{$classList}} {{$readOnly?"readonly":""}} {{$readOnly?"hidden1":""}}"
 >
 

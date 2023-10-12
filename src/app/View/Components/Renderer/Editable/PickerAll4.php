@@ -25,6 +25,7 @@ class PickerAll4 extends Component
         private $saveOnChange = false,
         private $readOnly = false,
         private $control = 'picker_date',
+        private $style = "",
     ) {
         //In case of listeners, the data was parsed in to array
         if (is_array($this->cell)) {
@@ -57,6 +58,7 @@ class PickerAll4 extends Component
             'readOnly' => $this->readOnly,
             'control' => $this->control,
             'classList' => ClassList::TEXT,
+            'style' => $this->style,
         ]);
     }
 }

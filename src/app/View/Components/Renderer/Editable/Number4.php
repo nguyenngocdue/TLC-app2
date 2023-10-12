@@ -26,6 +26,7 @@ class Number4 extends Component
         private $icon = null,
         private $saveOnChange = false,
         private $readOnly = false,
+        private $style = "",
     ) {
     }
 
@@ -68,6 +69,7 @@ class Number4 extends Component
             'bgColor' => $bgColor,
             'classList' => ClassList::TEXT . " text-right",
             'onChange' => $this->onChange,
+            'style' => $this->style,
         ]);
     }
 }
