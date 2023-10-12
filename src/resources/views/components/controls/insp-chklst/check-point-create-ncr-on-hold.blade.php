@@ -2,15 +2,16 @@
     @if($relatedEntities && count($relatedEntities))
         <div id="divRelatedNCRs">
             Related {{$syntax}}(s):
-            @foreach($relatedEntities as $value)
+            @foreach($relatedEntities as $item)
             <li>
                 @php
-                    $ownerName = 'Created by: ' .$value->getOwner->name0 ?? '';
-                    $workAreaName = $value->getWorkArea->name ?? '';
-                    $information = $ownerName . ' (' . $workAreaName .')';
+                    $owner = $item->getOwner;
+                    $ownerName = 'Creator: ' . $owner->name0 . " ";
+                    $workAreaName = $item->getWorkArea->name ?? '';
+                    $information = $ownerName . ($workAreaName ? ' (' . $workAreaName .')' : '');
                 @endphp
-                <x-renderer.button target="_blank" class="m-1" title="{!! $value->description !!} (#{{$value->id}})" href="{{route($nameShow, $value->id)}}">
-                    {{$value->name}}. {{$information}} <x-renderer.status>{{$value->status}}</x-renderer.status>
+                <x-renderer.button target="_blank" class="m-1" title="{!! $item->description !!} (#{{$item->id}})" href="{{route($nameShow, $item->id)}}">
+                    {{$item->name}}. {{$information}}. <x-renderer.status>{{$item->status}}</x-renderer.status>
                 </x-renderer.button>
             </li>
             @endforeach
