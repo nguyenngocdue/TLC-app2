@@ -12,6 +12,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
 
 class UploadService2
@@ -135,8 +136,9 @@ class UploadService2
             }
             // dd($result);
             return $result;
+        } catch (ValidationException $ve) {
+            Toastr::warning($ve->getMessage() . "<br/>(You maybe upload more than the max allowed files.)", 'Upload File Problem');
         } catch (\Exception $e) {
-            // Toastr::warning($e->getMessage(), 'Upload File Warning');
             dd($e);
             // Toastr::warning($e, 'Upload File Warning');
         }

@@ -105,6 +105,8 @@ trait TraitEntityCRUDStoreUpdate2
 		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
 		// if (!$isFakeRequest) {
 		// 	dump($request->input());
+		// 	dump($request->files);
+		// 	dd();
 		// }
 		$this->updateUserSettings($request);
 		$this->reArrangeComments($request);
@@ -114,11 +116,15 @@ trait TraitEntityCRUDStoreUpdate2
 			$props = $this->getProps1();
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
+
 			if (!$isFakeRequest) {
-				$newRequest = $this->cloneRequest($request);
-				$newRequest->files->remove("table01");
-				// dump("Uploading real request", $newRequest->files);
-				$uploadedIds = $this->uploadAttachmentWithoutParentId($newRequest);
+				$allTable01Names = array_keys($request->input('tableNames'));
+				$requestWithoutAttachment = $this->cloneRequest($request);
+				foreach ($allTable01Names as $tableName) {
+					$requestWithoutAttachment->files->remove($tableName);
+				}
+				// dump("Uploading real request", $requestWithoutAttachment->files);
+				$uploadedIds = $this->uploadAttachmentWithoutParentId($requestWithoutAttachment);
 			} else {
 				// dump("Uploading fake request", $request->files);
 				$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
@@ -230,7 +236,7 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment']);
+		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment'], $isFakeRequest, $allTable01Names);
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
 		$this->eventUpdatedProdSequence($theRow->id);
 		return $this->redirectCustomForUpdate2($request, $theRow);
