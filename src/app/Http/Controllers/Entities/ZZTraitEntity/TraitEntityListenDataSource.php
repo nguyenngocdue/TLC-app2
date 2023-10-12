@@ -131,7 +131,7 @@ trait TraitEntityListenDataSource
         foreach ($types as $type) {
             [$extraColumns0, $toBeLoaded0] = $this->refineListenToFieldAndAttr($type);
             $extraColumns = $this->deepMerge($extraColumns, $extraColumns0);
-            // dump($extraColumns, $extraColumns0);
+            // Log::info($extraColumns, $extraColumns0);
             $toBeLoaded = array_unique([...$toBeLoaded, ...$toBeLoaded0]);
         }
         // dump($extraColumns, $toBeLoaded);
@@ -141,8 +141,11 @@ trait TraitEntityListenDataSource
         foreach ($toBeLoaded as $table) {
             // $props = Props::getAllOf($table);
             $props = SuperProps::getFor($table)['props'];
-            $defaultColumns =  ['id', 'name', 'description', 'employeeid'];
-            if (isset($extraColumns[$table])) $defaultColumns = [...$defaultColumns, ...$extraColumns[$table]];
+            $defaultColumns =  ['id', 'name', 'description', 'employeeid',];
+            if (isset($extraColumns[$table])) {
+                $defaultColumns = [...$defaultColumns, ...$extraColumns[$table]];
+                // Log::info($extraColumns[$table]);
+            }
             //Make sure all columns in matrix is really exist in the Prop list
             $availableColumnNames = array_values(array_map(fn ($prop) => $prop['column_name'], $props));
             $matrix[$table] = array_intersect($defaultColumns, $availableColumnNames);

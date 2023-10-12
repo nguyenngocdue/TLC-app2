@@ -193,7 +193,10 @@ class RelationshipRenderer2 extends Component
         // dump($this->tablesInEditableMode[$this->type]);
 
         $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, array_keys($this->tablesInEditableMode[$this->type]));
-        $showAll = ($renderer_edit === "many_icons" || ($renderer_edit === "many_lines" && $editable));
+        $showAll = ($renderer_edit === "many_icons" ||
+            ($renderer_edit === "many_lines" && $editable) ||
+            $this->noCss
+        );
 
         [$tableFooter, $columns,] = $this->loadColumnsFromRendererEditParam($props, $instance, $lineModelPath, $tableName);
 
