@@ -6,7 +6,11 @@ use App\BigThink\ModelExtended;
 
 class Department extends ModelExtended
 {
-    protected $fillable = ["id", "owner_id", "name", "description", "head_of_department", "slug", "order_no", "parent_id"];
+    protected $fillable = [
+        "id", "owner_id", "name", "description",
+        "head_of_department", "hide_in_org_chart",
+        "slug", "order_no", "parent_id",
+    ];
 
     protected $table = 'departments';
     protected static $statusless = true;
@@ -41,6 +45,7 @@ class Department extends ModelExtended
             ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'name'],
+            ['dataIndex' => 'hide_in_org_chart'],
         ];
     }
 }

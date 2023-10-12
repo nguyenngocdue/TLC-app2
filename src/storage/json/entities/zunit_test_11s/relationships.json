@@ -51,7 +51,7 @@
         "name": "_getDepartments",
         "relationship": "hasMany",
         "control_name": "getDepartments",
-        "renderer_view_all": "column",
+        "renderer_view_all": "agg_count",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "many_lines",

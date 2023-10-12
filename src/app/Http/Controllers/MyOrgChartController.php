@@ -9,6 +9,7 @@ use App\Models\User_time_keep_type;
 use App\Models\Workplace;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MyOrgChartController extends Controller
 {
@@ -26,19 +27,30 @@ class MyOrgChartController extends Controller
     public function index(Request $request)
     {
         $isApprovalView = $request->has('approval-tree');
-        $isPrintMode = $request->has('print-mode');
-        $viewSettings = $this->getUserSettings($isApprovalView, $isPrintMode);
+        $isAdvancedMode = $request->has('advanced-mode');
+        $viewSettings = $this->getUserSettings($isApprovalView, $isAdvancedMode);
 
         $showOptions = $this->getUserSettingsViewOrgChart();
         $options = $this->getOptionsRenderByUserSetting($showOptions);
-        $departments = Department::query()->orderBy('order_no')->get();
+
+        $bodOptions = $this->getOptionsRenderByUserSetting(['is_bod' => 'true']);
+        $printOptions = $this->getOptionsRenderByUserSetting([]);
+
+        $departments = Department::query()
+            ->where('hide_in_org_chart', 0)
+            ->orderBy('order_no')
+            ->get();
 
         return view(
             'utils.my-org-chart',
             [
-                'departments' => $departments,
                 'showOptions' => $showOptions,
                 'options' => $options,
+
+                'bodOptions' => $bodOptions,
+                'printOptions' => $printOptions,
+
+                'departments' => $departments,
                 'viewSettings' => $viewSettings,
                 'isAdmin' => CurrentUser::isAdmin(),
                 'topTitle' => 'Company ORG Chart'
@@ -46,11 +58,11 @@ class MyOrgChartController extends Controller
         );
     }
 
-    private function getUserSettings($isApprovalView, $isPrintMode)
+    private function getUserSettings($isApprovalView, $isAdvancedMode)
     {
         $settings = CurrentUser::getSettings();
         $settings['org_chart']['approval_view'] = $isApprovalView;
-        $settings['org_chart']['print_mode'] = $isPrintMode;
+        $settings['org_chart']['advanced_mode'] = $isAdvancedMode;
         return $settings['org_chart'];
     }
 
