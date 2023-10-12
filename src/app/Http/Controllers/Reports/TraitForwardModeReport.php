@@ -43,7 +43,7 @@ trait TraitForwardModeReport
         //     return redirect($request->getPathInfo());
         // }
         
-        $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport($request));
+        $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport2($request));
         $entityReport = CurrentPathInfo::getEntityReport($request);
         $params = [
             '_entity' => $entityReport,

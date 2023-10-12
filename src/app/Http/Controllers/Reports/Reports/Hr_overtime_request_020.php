@@ -237,7 +237,7 @@ if (isset($params['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
     {
         $input = $request->input();
         if (isset($input['month']) || isset($input['user_id'])) {
-            $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport($request));
+            $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport2($request));
             $entityReport = CurrentPathInfo::getEntityReport($request);
             // dd($typeReport, $entityReport);
             $params = [

@@ -39,6 +39,7 @@ class Dropdown7 extends Component
             $info .="\nmultiple: $strMultiple";
             $info .="\nhasListenTo: $strHasListenTo";
         }
+        // dump($selected);
         $str = "<span class='px-1' title='$info'>$title</span>
         <x-reports.mode-params.$viewName name='$this->name' selected='$selected' allowClear='$this->allowClear' multiple='$this->multiple' hasListenTo='$this->hasListenTo' />";
         echo  Blade::render($str);

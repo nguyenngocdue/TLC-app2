@@ -166,7 +166,7 @@ abstract class Report_ParentController extends Controller
     public function index(Request $request)
     {
         $input = $request->input();
-        $typeReport = CurrentPathInfo::getTypeReport($request);
+        $typeReport = CurrentPathInfo::getTypeReport2($request);
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
         $currentUserId = Auth::id();

@@ -21,7 +21,7 @@ trait TraitParamsSettingReport
     protected function getParams($request, $str = '')
     {
         $currentMode = $this->mode;
-        $typeReport = CurrentPathInfo::getTypeReport($request, $str);
+        $typeReport = CurrentPathInfo::getTypeReport2($request, $str);
         $entity = CurrentPathInfo::getEntityReport($request, $str);
         $settings = CurrentUser::getSettings();
         if (isset($settings[$entity][$typeReport][$currentMode])) {

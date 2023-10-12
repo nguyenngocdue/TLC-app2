@@ -160,6 +160,14 @@
         "top_title": "Sequence-based Timesheet",
         "title": "Target vs. Actual Detail"
     },
+    "report-prod_sequence_040": {
+        "name": "report-prod_sequence_040",
+        "package_tab": "report",
+        "package": null,
+        "top_title": null,
+        "title": null,
+        "hidden": "true"
+    },
     "report-prod_sequence_110": {
         "name": "report-prod_sequence_110",
         "package_tab": "report",

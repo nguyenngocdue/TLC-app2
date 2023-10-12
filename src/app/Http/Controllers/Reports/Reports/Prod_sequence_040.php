@@ -16,7 +16,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
     use TraitParamsSettingReport;
     use TraitForwardModeReport;
 
-    protected $mode = '030';
+    protected $mode = '040';
     protected $projectId = 5;
     protected $subProjectId = 21;
     protected $prodRoutingId = 2;

@@ -1,7 +1,6 @@
 @php
 $route = $routeName ? route($routeName) : "";
 @endphp
-
 <form action="{{$route}}" id="{{$entity}}" method="GET">
     <div class="grid grid-row-1 w-full">
         <div class="grid grid-cols-12 gap-4 items-baseline">

@@ -25,9 +25,9 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
     use TraitUpdateBasicInfoDataSource;
 
     protected $mode = '010';
-    protected $projectId = 5;
-    protected $subProjectId = 21;
-    protected $prodRoutingId = 2;
+    protected $projectId = 8;
+    protected $subProjectId = 107;
+    protected $prodRoutingId = 62;
     protected $groupByLength = 1;
     protected $groupBy = 'prod_discipline_name';
     protected $viewName = 'document-prod-sequence-010';
