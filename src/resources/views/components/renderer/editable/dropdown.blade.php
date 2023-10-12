@@ -7,6 +7,7 @@ echo Blade::render("<x-renderer.status>".$selected."</x-renderer.status>");
     id="{{$name}}" 
     name="{{$name}}" 
     component="editable/dropdown"
+    style="{{$style}}"
     class="{{$classList}} {{$readOnly?"hidden":""}}">
     @foreach($cbbDataSource as $line)
     <option 

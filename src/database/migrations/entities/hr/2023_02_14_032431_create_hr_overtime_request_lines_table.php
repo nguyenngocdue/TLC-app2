@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id")->nullable();
             $table->string("employeeid")->nullable();
             $table->string("position_rendered")->nullable();
+            $table->unsignedBigInteger("position_id")->nullable();
             $table->date("ot_date")->nullable();
             $table->time("from_time")->nullable();
             $table->time("to_time")->nullable();

@@ -39,6 +39,14 @@
         "rejected": "true",
         "approved": "true"
     },
+    "_position_id": {
+        "name": "_position_id",
+        "column_name": "position_id",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
     "_ot_date": {
         "name": "_ot_date",
         "column_name": "ot_date",
@@ -143,6 +151,22 @@
         "rejected": "true",
         "approved": "true"
     },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -159,20 +183,20 @@
         "rejected": "true",
         "approved": "true"
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
     }
 }

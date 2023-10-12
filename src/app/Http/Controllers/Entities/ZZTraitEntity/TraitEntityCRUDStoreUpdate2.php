@@ -21,6 +21,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEntityUpdateUserSettings;
 	use TraitUpdatedProdSequenceEvent;
 	use TraitHelperRedirect;
+	use TraitCloneRequest;
 
 	private $debugForStoreUpdate = false;
 
@@ -104,6 +105,8 @@ trait TraitEntityCRUDStoreUpdate2
 		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
 		// if (!$isFakeRequest) {
 		// 	dump($request->input());
+		// 	dump($request->files);
+		// 	dd();
 		// }
 		$this->updateUserSettings($request);
 		$this->reArrangeComments($request);
@@ -113,7 +116,19 @@ trait TraitEntityCRUDStoreUpdate2
 			$props = $this->getProps1();
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
-			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+
+			if (!$isFakeRequest) {
+				$allTable01Names = array_keys($request->input('tableNames'));
+				$requestWithoutAttachment = $this->cloneRequest($request);
+				foreach ($allTable01Names as $tableName) {
+					$requestWithoutAttachment->files->remove($tableName);
+				}
+				// dump("Uploading real request", $requestWithoutAttachment->files);
+				$uploadedIds = $this->uploadAttachmentWithoutParentId($requestWithoutAttachment);
+			} else {
+				// dump("Uploading fake request", $request->files);
+				$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
+			}
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 1);
 		}
@@ -141,7 +156,7 @@ trait TraitEntityCRUDStoreUpdate2
 			//As if it was, the datetime picker would apply YYYY-MM-DD format and cause validation issues for the next submission
 			$toastrResult = [];
 			$lineResult = true;
-            // dd($isFakeRequest);
+			// dd($isFakeRequest);
 			if (!$isFakeRequest) {
 				[$toastrResult, $lineResult, $toBeOverrideAggregatedFields] = $this->handleEditableTables($request, $props['editable_table'], $theRow->id);
 				// Log::info($toBeOverrideAggregatedFields);
@@ -221,7 +236,7 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment']);
+		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment'], $isFakeRequest, $allTable01Names);
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
 		$this->eventUpdatedProdSequence($theRow->id);
 		return $this->redirectCustomForUpdate2($request, $theRow);

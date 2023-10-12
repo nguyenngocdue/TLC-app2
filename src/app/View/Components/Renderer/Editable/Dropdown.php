@@ -22,6 +22,7 @@ class Dropdown extends Component
         private $strFn = false,
         private $cell = null,
         private $readOnly = false,
+        private $style = "",
     ) {
     }
 
@@ -71,6 +72,7 @@ class Dropdown extends Component
             'selected' => $this->selected,
             'classList' => ClassList::DROPDOWN,
             'readOnly' => $this->readOnly,
+            'style' => $this->style,
         ]);
     }
 }

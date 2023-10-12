@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\Table;
 
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -63,8 +64,12 @@ trait TableTraitApplyRender
         $onChange = isset($column['onChange']) ? "onChange='{$column['onChange']}'" : "";
 
         $attributes = "$name $attributeRender $propertyRender $typeRender $cbbDataSourceRender ";
-        $attributes .= "$dataLineRender $columnRender $cellRender $rendererParam $formatterName $onChange";
-        $attributes .= "$sortByRender $rowIndexRender";
+        $attributes .= "$dataLineRender $columnRender $cellRender $rendererParam $formatterName $onChange ";
+        $attributes .= "$sortByRender $rowIndexRender ";
+        if (env("CONTROL_TRUE_WIDTH")) {
+            $styleRender = isset($column['width']) ? 'style="width: ' . $column['width'] . 'px;"' : '';
+            $attributes .= "$styleRender ";
+        }
         $attributes = Str::of($attributes)->replaceMatches('/ {2,}/', ' '); //<< Remove double+ space
 
         $isEditable = (isset($column['editable']) && $column['editable'] == true);
@@ -79,6 +84,10 @@ trait TableTraitApplyRender
             $rawData = ($rawData instanceof EloquentCollection || $rawData instanceof SupportCollection) ? $rawData = $rawData->pluck('id') : [$rawData];
             $rawData = json_encode($rawData);
             $attributes = "$name $typeRender $multiple $deaf $propertyRender $rowIndexRender selected='$rawData' $saveOnChangeRenderer $batchLength";
+            // if (App::isLocal()) {
+            //     $styleRender = isset($column['width']) ? 'style="width: ' . $column['width'] . 'px;"' : '';
+            //     $attributes .= "$styleRender ";
+            // }
             $output = "<$tagName $attributes></$tagName>";
             // Log::info($output);
 
