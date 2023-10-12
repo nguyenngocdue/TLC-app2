@@ -99,28 +99,29 @@ trait TraitChangeDataPivotTable2
             $fieldsUnShowTitle = ['staff_id'];
             $datesDoWork = [];
 
-            $dataFieldsHaveHref = [];
+            $fieldsHaveHref = [];
             foreach ($dataFields as $items) {
                 if (isset($items->href_str) && $items->href_str) {
                     $refRegex = $items->href_str;
                     $refRegex = $this->replaceKeysWithValues($refRegex);
-                    $dataFieldsHaveHref[$items->aggregation . '_' . $items->value_index] = (object)[
+                    $fieldsHaveHref[$items->aggregation . '_' . $items->value_index] = (object)[
                         'href_regex' => $refRegex,
                         'value_index' => $items->value_index,
                         'route_name' => $items->route_name
                     ];
                 }
             };
-
             foreach ($data as $values) {
-                // dd($values,$dataFieldsHaveHref);
                 foreach ($values as $key => $value) {
                     // Add link for DataField'columns
-                    if(isset($dataFieldsHaveHref[$key])) {
-                        $str = $dataFieldsHaveHref[$key] ->href_regex;
-                        $routeName = $dataFieldsHaveHref[$key] ->route_name;
+                    if(isset($fieldsHaveHref[$key])) {
+                        $str = $fieldsHaveHref[$key] ->href_regex;
+                        $routeName = $fieldsHaveHref[$key] ->route_name;
                         $fields = StringPivotTable::extractFields($str)[1];
-                        $valueOfFields = $params + array_intersect_key($values, array_flip($fields));
+                        $valueOfFields = array_intersect_key($values, array_flip($fields));
+                        if (in_array('picker_date',array_keys($params)) && in_array('picker_date',array_values($fields))){
+                            $valueOfFields = array_merge($valueOfFields,['picker_date' => $params['picker_date']]);
+                        }
                         $url = route($routeName). StringPivotTable::replaceValuesWithPlaceholders($valueOfFields, $str);
                         $values[$key] = (object)[
                             'value' => $value,
