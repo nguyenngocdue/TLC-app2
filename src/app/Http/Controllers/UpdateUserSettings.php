@@ -304,7 +304,7 @@ class UpdateUserSettings extends Controller
     public function __invoke(Request $request, $redirectTo = null)
     {
         $action = $request->input('action');
-        // dd($action);
+        // dd($request);
         $user = User::find(Auth::id());
         $settings = $user->settings;
         switch ($action) {

@@ -214,7 +214,7 @@ abstract class Report_Parent2Controller extends Controller
                     ->withInput();
             }
         }
-        $typeReport = CurrentPathInfo::getTypeReport($request);
+        $typeReport = CurrentPathInfo::getTypeReport2($request);
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
         $params = $this->getParams($request);
