@@ -273,6 +273,7 @@ trait  PivotReportColumn2
                             $checkField =  PivotReport::isStringInItemsOfArray($columnsNeedToRender, $value);
                             if ($checkField) {
                                 $countRenderCol = 1;
+                                $align  = 'right';
                                 foreach ($groupItems as $keyGroup => $group) {
                                     if (str_contains($value, $keyGroup) && in_array($value, $group) && isset($columnFields[$keyGroup])) {
                                         $info = $columnFields[$keyGroup];

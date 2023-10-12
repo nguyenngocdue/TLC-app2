@@ -123,7 +123,8 @@ class PivotTable extends Component
 
                 if (isset($rowFields[$key]->title) && ($t = $rowFields[$key]->title)) $title['title'] = $t;
                 if (isset($rowFields[$key]->align) && ($align = $rowFields[$key]->align)) $align = $align;
-                $dataIndex = isset($rowFields[$key]->column) ? str_replace('_id', '_name', $key) : ($isRenderRowField->is_dataSource ? null : $key);
+                $dataIndex = isset($rowFields[$key]->column) ? str_replace('_id', '_name', $key) 
+                            : (isset($isRenderRowField->is_dataSource) && $isRenderRowField->is_dataSource ? null : $key);
                 $columnsData[] = [
                     'dataIndex' => $dataIndex,
                     'width' => 140,
