@@ -27,19 +27,19 @@
         "top_title": null,
         "title": "CO2 Emission Comparison Report"
     },
+    "document-prod_sequence_010": {
+        "name": "document-prod_sequence_010",
+        "package_tab": "report",
+        "package": null,
+        "top_title": "Target vs. Actual",
+        "title": "Target vs. Actual"
+    },
     "document-prod_sequence_020": {
         "name": "document-prod_sequence_020",
         "package_tab": "report",
         "package": "project_management",
-        "top_title": null,
-        "title": "Target vs. Actual"
-    },
-    "document-prod_sequence_050": {
-        "name": "document-prod_sequence_050",
-        "package_tab": "report",
-        "package": "project_management",
-        "top_title": "Process Analysis Report",
-        "title": "Process Analysis Report"
+        "top_title": "Process Analysis",
+        "title": "Process Analysis"
     },
     "document-prod_sequence_060": {
         "name": "document-prod_sequence_060",
@@ -143,8 +143,15 @@
         "name": "report-prod_sequence_010",
         "package_tab": "report",
         "package": "project_management",
-        "top_title": null,
+        "top_title": "Labor Cost Timesheet",
         "title": "Labor Cost Timesheet"
+    },
+    "report-prod_sequence_020": {
+        "name": "report-prod_sequence_020",
+        "package_tab": "report",
+        "package": null,
+        "top_title": "Labor Cost Timesheet Detail",
+        "title": "Labor Cost Timesheet Detail"
     },
     "report-prod_sequence_030": {
         "name": "report-prod_sequence_030",
@@ -152,13 +159,6 @@
         "package": "project_management",
         "top_title": "Sequence-based Timesheet",
         "title": "Target vs. Actual Detail"
-    },
-    "report-prod_sequence_040": {
-        "name": "report-prod_sequence_040",
-        "package_tab": "report",
-        "package": "project_management",
-        "top_title": "Labor Cost Timesheet Detail",
-        "title": "Labor Cost Timesheet Detail"
     },
     "report-prod_sequence_110": {
         "name": "report-prod_sequence_110",

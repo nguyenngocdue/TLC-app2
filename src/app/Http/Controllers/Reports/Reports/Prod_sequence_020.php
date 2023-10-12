@@ -10,7 +10,7 @@ use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
 use App\Utils\Support\DateReport;
 
 
-class Prod_sequence_040 extends Report_ParentReport2Controller
+class Prod_sequence_020 extends Report_ParentReport2Controller
 {
 
     use TraitForwardModeReport;
@@ -18,8 +18,8 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
     use TraitParamsSettingReport;
     use TraitUpdateBasicInfoDataSource;
 
-    protected $mode='040';
-    protected $modeType = 'prod_sequence_040';
+    protected $mode='020';
+    protected $modeType = 'prod_sequence_020';
     protected $typeView = 'report-pivot';
     protected $pageLimit = 10;
     protected $tableTrueWidth = true;
