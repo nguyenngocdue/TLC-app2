@@ -28,22 +28,24 @@ class Thumbnail extends Component
      */
     public function render()
     {
+        $supportedImages = [
+            'image/png',
+            'image/jpeg',
+        ];
+        switch (true) {
+            case $this->dataLine->mime_type == "application/pdf":
+                return '<div class="flex flex-row justify-center"><i class="text-3xl fa-duotone fa-file-pdf"></i></div>';
+            case $this->dataLine->mime_type == "application/zip":
+                return '<div class="flex flex-row justify-center"><i class="text-3xl fa-duotone fa-file-zipper"></i></div>';
+            case !in_array($this->dataLine->mime_type, $supportedImages):
+                return $this->dataLine->mime_type;
+        }
+
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
 
         $dataIndex = $this->column['dataIndex'];
         $cell = $this->dataLine->$dataIndex;
 
-        // $renderAnonymousAvatar = false;
-        // if (Str::contains($this->cell, "No dataIndex for",)) {
-        //     if ($this->column['dataIndex'] === 'avatar') {
-        //         $renderAnonymousAvatar = true;
-        //     } else {
-        //         return ""; //<<Render no image when no URL found
-        //     }
-        // }
-
-        // $cell = json_decode($this->cell);
-        // if ($renderAnonymousAvatar) {
         if (is_null($cell)) {
             $url_thumbnail = "/images/avatar.jpg";
             $url_media = "/images/avatar.jpg";
