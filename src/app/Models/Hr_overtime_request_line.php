@@ -12,6 +12,7 @@ class Hr_overtime_request_line extends ModelExtended
         "total_time", "sub_project_id", "work_mode_id", "remark", "status",
         "month_remaining_hours", "month_allowed_hours",
         "year_remaining_hours", "year_allowed_hours",
+        "position_id",
     ];
     protected $table = "hr_overtime_request_lines";
     public static $nameless = true;
@@ -21,6 +22,7 @@ class Hr_overtime_request_line extends ModelExtended
         "getUser" => ['belongsTo', User::class, 'user_id'],
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getWorkMode" => ['belongsTo', Work_mode::class, 'work_mode_id'],
+        "getPosition" => ['belongsTo', User_position::class, 'position_id'],
     ];
 
     public function getHrOtr()
@@ -47,6 +49,12 @@ class Hr_overtime_request_line extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getPosition()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
     public function getManyLineParams()
     {
         return [
@@ -55,7 +63,8 @@ class Hr_overtime_request_line extends ModelExtended
             ['dataIndex' => 'hr_overtime_request_id', 'title' => 'OT ID', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true, 'cloneable' => !true, 'deaf' => true],
             ['dataIndex' => 'employeeid'],
-            ['dataIndex' => 'position_rendered', 'title' => 'Position'],
+            // ['dataIndex' => 'position_rendered', 'title' => 'Position'],
+            ['dataIndex' => 'position_id', 'deaf' => true,],
             ['dataIndex' => 'ot_date', 'cloneable' => true],
             ['dataIndex' => 'month_allowed_hours', 'cloneable' => !true, 'invisible' => !true],
             ['dataIndex' => 'year_allowed_hours', 'cloneable' => !true, 'invisible' => !true],
