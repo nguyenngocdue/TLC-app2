@@ -6,6 +6,16 @@ use Illuminate\Support\Str;
 
 class CurrentPathInfo
 {
+    public static function getTypeReport2($request, $tail = '')
+    {
+        $pathInfo = $tail ? str_replace($tail, '', $request->getPathInfo()) : $request->getPathInfo();
+        // $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[0]);
+        $pathInfo =  [explode('/', trim($pathInfo, '/'))[1]][0];
+        $pathInfo =  [explode('-', trim($pathInfo, ' '))[0]];
+        $str = strtolower(Str::plural($pathInfo[0]));
+        return $str;
+    }
+
     public static function getTypeReport($request, $tail = '')
     {
         $pathInfo = $tail ? str_replace($tail, '', $request->getPathInfo()) : $request->getPathInfo();
@@ -18,6 +28,7 @@ class CurrentPathInfo
         }
         return $str;
     }
+
     public static function getEntityReport($request, $tail = '')
     {
         $pathInfo = $tail ? str_replace($tail, '', $request->getPathInfo()) : $request->getPathInfo();
