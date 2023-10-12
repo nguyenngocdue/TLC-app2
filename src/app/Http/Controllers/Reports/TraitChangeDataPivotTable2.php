@@ -7,6 +7,7 @@ use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
 use App\Utils\Support\StringPivotTable;
 use DateTime;
+use Exception;
 
 trait TraitChangeDataPivotTable2
 {
@@ -55,8 +56,8 @@ trait TraitChangeDataPivotTable2
             $f1 = $dataReduce[$endRowField];
             foreach ($linesData as $line) {
                 if ($line->$endRowField === $f1 && $line->$k1 === $valDateInDB) {
-                    $href = route($valColFields->route_name, $line->$hrefToField);
-                    break;
+                        $href = route($valColFields->route_name, $line->$hrefToField);
+                        break;
                 }
             }
         }
@@ -122,7 +123,11 @@ trait TraitChangeDataPivotTable2
                         if (in_array('picker_date',array_keys($params)) && in_array('picker_date',array_values($fields))){
                             $valueOfFields = array_merge($valueOfFields,['picker_date' => $params['picker_date']]);
                         }
-                        $url = route($routeName). StringPivotTable::replaceValuesWithPlaceholders($valueOfFields, $str);
+                        try {
+                            $url = route($routeName). StringPivotTable::replaceValuesWithPlaceholders($valueOfFields, $str);
+                        } catch (\Exception $e) {
+                            dd('Oops, Please check the name of route for the "'.$this->modeType.'" key in Manage Pivot!');
+                        }
                         $values[$key] = (object)[
                             'value' => $value,
                             'cell_class' => $url ? ' text-blue-800 ' : '',
@@ -138,7 +143,11 @@ trait TraitChangeDataPivotTable2
                             $indexField .= '_' . str_replace('.', '_', $attrs->column);
                         }
                         if ($key === $indexField) {
-                            $href = $this->makeHrefForRowFields($rowFields[$keyField], $values);
+                            try {
+                                $href = $this->makeHrefForRowFields($rowFields[$keyField], $values);
+                            } catch (\Exception $e) {
+                                return response()->json($e);
+                            }
                             $values[$key] = (object) [
                                 'value' => $value,
                                 'cell_title' =>  in_array($keyField, $fieldsUnShowTitle) ? '' : 'ID: ' . (string)$values[$keyField],
