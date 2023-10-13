@@ -1,42 +1,44 @@
 {
-    "new": {
-        "name": "new",
-        "label": "Revise to New",
-        "tooltip": ""
-    },
     "in_progress": {
         "name": "in_progress",
         "label": "Change to In Progress",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "not_applicable": {
         "name": "not_applicable",
         "label": "Change to N\/A",
-        "tooltip": ""
-    },
-    "passed": {
-        "name": "passed",
-        "label": "Ready for Internal Sign Off",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "inspected": {
         "name": "inspected",
-        "label": "Finish Internal Sign Off",
-        "tooltip": ""
+        "label": "Change to Inspected",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "passed": {
+        "name": "passed",
+        "label": "Change to Passed",
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "pending_approval": {
         "name": "pending_approval",
         "label": "Ready for Third Party Sign Off",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "rejected": {
         "name": "rejected",
         "label": "Reject Sign Off",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "approved": {
         "name": "approved",
         "label": "Approve",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     }
 }
