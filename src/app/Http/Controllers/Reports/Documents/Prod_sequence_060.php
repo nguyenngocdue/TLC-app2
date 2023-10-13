@@ -48,6 +48,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                     ,count_po_finished
                     ,count_original_po
                     ,FORMAT(count_po_finished*100/tb2.count_original_po,2) AS finished_progress
+                    ,prd.order_no AS order_no
                     FROM (SELECT
                     pj.name AS project_name,
                     sp.project_id AS project_id,
@@ -81,10 +82,12 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         $sql .= "\n AND ps.status = 'finished'
                     AND po.sub_project_id = sp.id
                     AND po.prod_routing_id = pr.id
+                    AND ps.prod_routing_link_id = prl.id
                     AND ps.prod_order_id = po.id
                     AND prl.id = ps.prod_routing_link_id
                     AND pdis.id = prl.prod_discipline_id
                     GROUP BY prod_routing_link_id, prod_routing_id ) AS tb1
+                    LEFT JOIN prod_routing_details prd ON prd.prod_routing_id = tb1.prod_routing_id AND prd.prod_routing_link_id = tb1.prod_routing_link_id
                     LEFT JOIN (
                             SELECT
                                 sp.id AS sub_project_id,
@@ -150,11 +153,15 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
     {
         $items = array_values($dataSource->toArray());
         $groupItems = Report::groupArrayByKey($items,'prod_discipline_id');
-        
+        array_walk($groupItems, function(&$item) {
+            uasort($item, function($a, $b){
+                return $a['order_no'] - $b['order_no'];
+            });
+        });
+        // dd($groupItems);
         foreach($groupItems as $key => $values){
             $firstItem = reset($values);
             $infoRoutingLinks = array_column($values, 'finished_progress', 'prod_routing_link_name');
-            ksort($infoRoutingLinks);
             // information for meta data
             $labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($infoRoutingLinks));
             $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($infoRoutingLinks));
@@ -320,7 +327,6 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
     {
         $data = $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
         $prodRoutingLinkFinished = array_column($data, 'prod_routing_link_name', 'prod_routing_link_id');
-        // dd($prodRoutingLinkFinished);
 
         $prodRoutingLinks = $this->getProdRoutingLinks($params);
         $firstItem = reset($data);
