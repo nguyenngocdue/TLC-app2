@@ -18,9 +18,9 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     use TraitForwardModeReport;
 
     protected $mode = '030';
-    protected $projectId = 5;
-    protected $subProjectId = 21;
-    protected $prodRoutingId = 2;
+    protected $projectId = 8;
+    protected $subProjectId = 107;
+    protected $prodRoutingId = 62;
     protected $tableTrueWidth = true;
     protected $maxH = 30;
     protected $typeView = 'report-pivot';
