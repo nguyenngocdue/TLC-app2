@@ -1,24 +1,11 @@
 {
-    "new": {
-        "name": "new",
-        "location": "0 0",
-        "new": "",
-        "in_progress": "true",
-        "not_applicable": "true",
-        "passed": "",
-        "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
-    },
     "in_progress": {
         "name": "in_progress",
-        "location": "100 0",
-        "new": "",
+        "location": "-30.00 -20.00",
         "in_progress": "",
-        "not_applicable": "",
-        "passed": "true",
-        "inspected": "",
+        "not_applicable": "true",
+        "inspected": "true",
+        "passed": "",
         "pending_approval": "",
         "rejected": "",
         "approved": ""
@@ -26,35 +13,32 @@
     "not_applicable": {
         "name": "not_applicable",
         "location": "0 -100",
-        "new": "true",
-        "in_progress": "",
-        "not_applicable": "",
-        "passed": "",
-        "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
-    },
-    "passed": {
-        "name": "passed",
-        "location": "200 0",
-        "new": "",
         "in_progress": "true",
         "not_applicable": "",
+        "inspected": "",
         "passed": "",
-        "inspected": "true",
         "pending_approval": "",
         "rejected": "",
         "approved": ""
     },
     "inspected": {
         "name": "inspected",
-        "location": "300 0",
-        "new": "",
+        "location": "110.00 -20.00",
+        "in_progress": "true",
+        "not_applicable": "",
+        "inspected": "",
+        "passed": "true",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "passed": {
+        "name": "passed",
+        "location": "270.00 0.00",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "true",
-        "inspected": "",
+        "inspected": "true",
+        "passed": "",
         "pending_approval": "true",
         "rejected": "",
         "approved": ""
@@ -62,11 +46,10 @@
     "pending_approval": {
         "name": "pending_approval",
         "location": "450 0",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
         "inspected": "",
+        "passed": "",
         "pending_approval": "",
         "rejected": "true",
         "approved": "true"
@@ -74,11 +57,10 @@
     "rejected": {
         "name": "rejected",
         "location": "300 -100",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
         "inspected": "",
+        "passed": "",
         "pending_approval": "true",
         "rejected": "",
         "approved": ""
@@ -86,11 +68,10 @@
     "approved": {
         "name": "approved",
         "location": "600 0",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
         "inspected": "",
+        "passed": "",
         "pending_approval": "",
         "rejected": "",
         "approved": ""
