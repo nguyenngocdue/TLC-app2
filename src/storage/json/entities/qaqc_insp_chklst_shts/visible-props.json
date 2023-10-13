@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -14,7 +14,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -26,7 +26,7 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -38,7 +38,7 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -50,7 +50,7 @@
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -62,7 +62,7 @@
     "_qaqc_insp_tmpl_sht_id": {
         "name": "_qaqc_insp_tmpl_sht_id",
         "column_name": "qaqc_insp_tmpl_sht_id",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -74,7 +74,7 @@
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
         "column_name": "prod_discipline_id",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -86,7 +86,7 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -98,7 +98,7 @@
     "_progress": {
         "name": "_progress",
         "column_name": "progress",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -110,7 +110,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -122,7 +122,7 @@
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -134,7 +134,7 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -146,7 +146,7 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -158,7 +158,7 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",
@@ -170,7 +170,7 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true",
+        "new": "",
         "in_progress": "true",
         "not_applicable": "true",
         "passed": "true",

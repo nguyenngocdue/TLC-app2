@@ -1,8 +1,8 @@
 {
     "new": {
         "name": "new",
-        "new": "true",
-        "in_progress": "",
+        "new": "",
+        "in_progress": "true",
         "not_applicable": "",
         "passed": "",
         "inspected": "",
@@ -37,7 +37,7 @@
         "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "passed": "true",
         "inspected": "",
         "pending_approval": "",
         "rejected": "",
