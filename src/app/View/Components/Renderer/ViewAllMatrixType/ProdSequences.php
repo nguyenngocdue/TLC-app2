@@ -257,13 +257,14 @@ class ProdSequences extends ViewAllTypeMatrixParent
                     $value = round($doc->total_hours * 60 / $doc->total_uom, 2);
                     $target = $x['target_min_uom'];
                     if (!$target || !$value) return $value;
+                    if (!in_array($doc->status, ['finished'])) return "<span class='text-gray-300'>" . $value . "</span>";
 
                     $color = $target >= $value ? "green" : "red";
                     $percent = round(100 * ($target - $value) / $target);
                     return (object)[
                         "value" => number_format($value, 2),
                         "cell_class" => "text-$color-700 bg-$color-300 font-bold",
-                        "cell_title" => "Target: " . $target . " - Variance: " . ($target - $value) . " ($percent%)",
+                        "cell_title" => "Target: " . $target . " - Variance: " . round($target - $value, 2) . " ($percent%)",
                     ];
                 } else {
                     return '<i class="fa-solid fa-infinity" title="DIV 0"></i>';
