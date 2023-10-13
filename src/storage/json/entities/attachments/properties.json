@@ -231,8 +231,8 @@
         "max_file_count": "1",
         "allowed_file_types": "only_images"
     },
-    "_insp_photo": {
-        "name": "_insp_photo",
+    "_insp_photos": {
+        "name": "_insp_photos",
         "field_id": "12",
         "field_name": "insp_photos",
         "max_file_size": "50",
