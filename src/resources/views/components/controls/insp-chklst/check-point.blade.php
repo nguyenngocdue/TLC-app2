@@ -32,7 +32,11 @@
         /> --}}
         <div id="group_attachment_comment_{{$rowIndex}}" @class([ 'hidden'=> $type == 'hse_insp_chklst'
             ])>
-            <x-renderer.attachment2 name="table01[insp_photos][{{$rowIndex}}]" :value="$attachments" />
+            <x-renderer.attachment2 
+                name="table01[insp_photos][{{$rowIndex}}]" 
+                :value="$attachments" 
+                :properties="$props['props']['_insp_photos']['properties']"
+                />
             <br />
             <x-controls.comment.comment-group2a :commentIds="$checkPointIds" category="insp_comments" commentableType="{{$type}}_line" commentableId="{{$line->id}}" />
         </div>

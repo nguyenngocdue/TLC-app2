@@ -3,13 +3,12 @@
 namespace App\View\Components\Controls\InspChklst;
 
 use App\Models\Control_type;
-use Database\Seeders\FieldSeeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Qaqc_insp_chklst_line;
+use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
 class CheckPoint extends Component
 {
-    private static $singletonAttachments = null;
     /**
      * Create a new component instance.
      *
@@ -36,6 +35,7 @@ class CheckPoint extends Component
     {
         $controlType = Control_type::getCollection()->pluck('name', 'id',) ?? Control_type::get()->pluck('name', 'id');
         $attachments = $this->line->getMorphManyByIds($this->checkPointIds, 'insp_photos');
+        $props = SuperProps::getFor(Qaqc_insp_chklst_line::getTableName());
         return view('components.controls.insp-chklst.check-point', [
             'line' => $this->line,
             'controlType' => $controlType,
@@ -46,6 +46,7 @@ class CheckPoint extends Component
             'debug' => $this->debug,
             'type' => $this->type,
             'sheet' => $this->sheet,
+            'props' => $props,
         ]);
     }
 }

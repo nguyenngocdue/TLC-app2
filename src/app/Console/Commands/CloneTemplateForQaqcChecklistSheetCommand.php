@@ -71,7 +71,7 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
                 'qaqc_insp_chklst_id' => $inspChklstId,
                 'qaqc_insp_tmpl_sht_id' => $inspTmplSht->id,
                 'owner_id' => $ownerId,
-                'status' => 'new',
+                'status' => 'in_progress',
                 'progress' => 0,
                 'prod_discipline_id' => $inspTmplSht->prod_discipline_id,
                 'order_no' => $inspTmplSht->order_no,

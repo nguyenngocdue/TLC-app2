@@ -113,7 +113,7 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
     {
         $params = parent::getCreateNewParams($x, $y);
         $shortName = $x['description'];
-        $params['name'] = $y->name . " ($shortName)";
+        $params['name'] = $y->name; //. " ($shortName)";
         $params['status'] =  'new';
         // $params['project_id'] =  $this->project;
         $params['sub_project_id'] =  $this->subProject;

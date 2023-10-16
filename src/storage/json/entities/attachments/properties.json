@@ -230,5 +230,13 @@
         "max_file_size": "10",
         "max_file_count": "1",
         "allowed_file_types": "only_images"
+    },
+    "_insp_photos": {
+        "name": "_insp_photos",
+        "field_id": "12",
+        "field_name": "insp_photos",
+        "max_file_size": "50",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported"
     }
 }
