@@ -131,7 +131,7 @@
         "filters": "user_id{ \"title\":\"User\", \"allowClear\":true, \"multiple\":true }; workplace_id{ \"title\" :\"Workplace\", \"allowClear\":true, \"multiple\":true }; category_id{ \"title\":\"Team\", \"allowClear\": true, \"multiple\":true }; sub_project_id{ \"title\" :\"Sub Project\", \"allowClear\":true, \"multiple\":true }; picker_date{ \"title\":\"Date\", \"allowClear\":true };",
         "row_fields": "staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name0\",\"width\":200};discipline_id{\"column\":\"user_disciplines.name\",\"width\":280};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};",
         "insert_column_row_fields": null,
-        "column_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\"};",
+        "column_fields": "sub_project_id{\"column\":\"sub_projects.name\",\"title\":\"Sub Projects\",\"value_index\":\"time_sheet_durations\",\"width\":70,\"align\":\"right\",\"hasHeaderTable\":true};",
         "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"};",
         "sort_by": "user_id{\"column\":\"users.name0\"};"
     },
@@ -140,7 +140,7 @@
         "filters": "sub_project_id{ \"title\":\"Sub Project\", \"allowClear\": true, \"multiple\":true };department_id{ \"title\":\"Department\", \"allowClear\":true, \"multiple\":true };user_id{ \"title\":\"User\", \"allowClear\":true, \"multiple\":true }; workplace_id{ \"title\":\"Workplace\", \"allowClear\":true, \"multiple\":true };picker_date{\"title\":\"Month\", \"allowClear\":true};",
         "row_fields": "sub_project_id{ \"column\":\"sub_projects.name\", \"title\":\"Sub Project\"};lod_id{\"column\":\"terms.name\",\"title\":\"LOD\"};department_id{\"column\":\"departments.name\"};staff_id{\"title\":\"Staff ID\"};user_id{\"column\":\"users.name0\",\"width\":200};workplace_id{\"column\":\"workplaces.name\"};category_id{\"column\":\"user_categories.name\"};type_id{\"column\":\"user_types.name\"};discipline_id{\"column\":\"user_disciplines.name\",\"width\":280};pj_task_id{\"column\":\"pj_tasks.name\",\"title\":\"Task\",\"width\":200};",
         "insert_column_row_fields": null,
-        "column_fields": "time_sheet_start_time{\"value_index\":\"time_sheet_durations\",\"title\":\"Timesheet Hours\", \"width\":50, \"align\": \"right\"};",
+        "column_fields": "time_sheet_start_time{\"value_index\":\"time_sheet_durations\",\"title\":\"Timesheet Hours\", \"width\":50, \"align\":\"right\",\"hasHeaderTable\":true}",
         "data_fields": "time_sheet_durations{\"title\":\"Total\",\"aggregation\":\"sum\"};",
         "sort_by": "sub_project_id{\"column\":\"sub_projects.name\"}; user_id{\"column\":\"users.name0\", \"order\":\"asc\"};"
     },

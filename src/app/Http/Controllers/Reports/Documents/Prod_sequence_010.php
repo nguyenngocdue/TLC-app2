@@ -49,6 +49,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                         targetTb.prod_discipline_id,
                         targetTb.prod_routing_link_desc,
                         targetTb.sub_project_desc,
+                        order_no,
 
                         FORMAT(targetTb.target_hours, 2) AS target_hours,
                         FORMAT(actualTb.hours,2) AS hours,
@@ -69,11 +70,13 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                         project_id, project_name,sub_project_id,prod_routing_link_desc, sub_project_desc, 
                         sub_project_name, prod_routing_id, prod_discipline_id, prod_routing_link_name
                         ,prod_routing_link_id
+                        ,order_no
                         ,SUM(target_hours) AS target_hours
                         ,SUM(target_man_hours) AS target_man_hours
                         ,AVG(target_man_power) AS target_man_power
                         FROM  (SELECT 
                                     sp.project_id,
+                                    prd.order_no AS order_no,
                                     sp.id AS sub_project_id,
                                     pj.name project_name,
                                     sp.name AS sub_project_name,
@@ -144,7 +147,9 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                                 GROUP BY prod_routing_link_id , po.id, pru.worker_number) AS tb2
                             GROUP BY prod_routing_link_id) AS actualTb
                     ON 
-                        actualTb.prod_routing_link_id = targetTb.prod_routing_link_id;";
+                        actualTb.prod_routing_link_id = targetTb.prod_routing_link_id
+                        ORDER BY order_no
+                        ;";
         return $sql;
     }
 

@@ -26,7 +26,6 @@ var generatedColors = generateColors(numColors);
 
 Chart.register(ChartDataLabels);
 Chart.register(ChartjsPluginStacked100.default);
-
 var chartConfig = {
     type: chartType,
     data: {
@@ -39,6 +38,10 @@ var chartConfig = {
         }]
     },
     options: {
+        //show title on columns of chart
+        //onHover: function(event, chart) {
+        //    console.log('Hello');
+        // },
         responsive: true,
         indexAxis: '{!! $dimensions['indexAxis'] ?? 'x' !!}',
         scales: {
@@ -69,7 +72,7 @@ var chartConfig = {
                     },
                     // change legends on Y axis
                     //callback: function(value, index, ticks) {
-                    //    return '$' + ticks;
+                    //    return '$';
                     //}
                 },
                 title: {
@@ -82,7 +85,15 @@ var chartConfig = {
                 },
             }
         },
-        plugins: {
+        plugins: { 
+            tooltip: {
+                enabled: true,
+                callbacks: {
+                    label: function(context) {
+                        //console.log(12345)
+                    }
+                },
+            },    
             title:{
                 display: {!! $dimensions['displayTitleChart'] ?? 0 !!},
                 text:  '{!! $dimensions['titleChart'] ?? null !!}',
@@ -96,7 +107,6 @@ var chartConfig = {
                 display: {!! $dimensions['displayLegend'] ?? 0 !!},
                 onClick: (evt, legendItem, legend) => {
                     const index = legend.chart.data.labels.indexOf(legendItem.text);
-                    console.log(legendItem);
                     legend.chart.toggleDataVisibility(index);
                     legend.chart.update();
                 },
