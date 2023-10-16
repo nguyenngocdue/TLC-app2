@@ -31,6 +31,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected $headerTop = 20;
     protected $groupBy = null;
     protected $mode = 'detail';
+
+    protected $showAdvancedDays = !true;
     /**
      * Create a new component instance.
      *
@@ -173,7 +175,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
 
     protected function getMetaColumns()
     {
-        return [
+        $columns = [
             ['dataIndex' => 'production_name',  'width' => 300, 'fixed' => 'left',],
             ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
             ['dataIndex' => 'status',  'align' => 'center', 'width' => 50, 'fixed' => 'left-no-bg', "title" => "Summary", 'colspan' => 4],
@@ -182,9 +184,24 @@ class ProdSequences extends ViewAllTypeMatrixParent
             ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
 
             ['dataIndex' => 'total_calendar_days', 'align' => 'right', 'width' => 50, 'fixed' => 'left', "title" => "Total", 'colspan' => 3],
+
             ['dataIndex' => 'net_working_days', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
             ['dataIndex' => 'total_man_hours', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
+
         ];
+
+        if ($this->showAdvancedDays) {
+            $advColumns =  [
+                ['dataIndex' => 'no_of_sundays', 'align' => 'right', 'width' => 50, 'fixed' => 'left', 'title' => "Advanced Metrics", 'colspan' => 5],
+                ['dataIndex' => 'no_of_ph_days', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
+                ['dataIndex' => 'total_days_no_sun_no_ph', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
+                ['dataIndex' => 'total_days_have_ts', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
+                ['dataIndex' => 'total_discrepancy_days', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
+            ];
+            $columns = [...$columns, ...$advColumns,];
+        }
+
+        return $columns;
     }
 
     function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
@@ -216,6 +233,20 @@ class ProdSequences extends ViewAllTypeMatrixParent
             'total_man_hours' => number_format($y->total_man_hours, 2),
         ];
 
+        $advColumns = [
+            'no_of_sundays' => $y->no_of_sundays,
+            'no_of_ph_days' => $y->no_of_ph_days,
+            'total_days_no_sun_no_ph' => $y->total_days_no_sun_no_ph,
+            'total_days_have_ts' => $y->total_days_have_ts,
+            'total_discrepancy_days' => $y->total_discrepancy_days,
+        ];
+
+        if ($this->showAdvancedDays) {
+            $result = $result + $advColumns;
+        }
+
+        // dump($result);
+
         return $result;
     }
 
@@ -239,19 +270,6 @@ class ProdSequences extends ViewAllTypeMatrixParent
                 return round($doc->worker_number, 2);
             case "total_mins":
                 return number_format(round($doc->total_hours * 60));
-                // $target_man_power = $x['target_man_power'] > 0 ? $x['target_man_power'] : 1;;
-                // $target = $x['target_man_minutes'] / $target_man_power;
-                // $actual = round($doc->total_hours * 60);
-
-                // $color = $target >= $actual ? "green" : "red";
-                // if ($actual == 0) return 0;
-                // if (!$target) return $actual;
-                // $percent = round(100 * ($target - $actual) / $target);
-                // return (object)[
-                //     "value" => number_format($actual, 0),
-                //     "cell_class" => "text-$color-700 bg-$color-300 font-bold",
-                //     "cell_title" => "Target: " . $target . " - Variance: " . ($target - $actual) . " ($percent%)",
-                // ];
             case "min_per_uom":
                 if ($doc->total_uom > 0) {
                     $value = round($doc->total_hours * 60 / $doc->total_uom, 2);
@@ -301,6 +319,14 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $result['total_calendar_days'] = "Total Calendar Days";
         $result['net_working_days'] = "Net Working Days";
         $result['total_man_hours'] = "Total ManHours";
+
+        if ($this->showAdvancedDays) {
+            $result['no_of_sundays'] = "No. Sundays";
+            $result['no_of_ph_days'] = "No. PH Days";
+            $result['total_days_no_sun_no_ph'] = "Total Working Days";
+            $result['total_days_have_ts'] = "Total Days Have TS";
+            $result['total_discrepancy_days'] = "Total Discrepancy Days";
+        }
 
         foreach ($result as &$row) {
             $row = "<div class='p-1 text-center'>" . $row . "</div>";
