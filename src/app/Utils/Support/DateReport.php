@@ -72,7 +72,7 @@ class DateReport
             else {
                 $valParams[$field] = isset($params[$field]) ?  $params[$field] : '';
             }
-            if($field = 'picker_date'){
+            if($field = 'picker_date' && isset($params['picker_date'])){
                 $parseDate = self::separateStrPickerDate($params['picker_date']);
                 $valParams[$field] = $parseDate;
             } 

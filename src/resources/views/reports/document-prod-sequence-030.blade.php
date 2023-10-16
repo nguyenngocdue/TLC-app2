@@ -21,6 +21,7 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
     @include('components.reports.shared-parameter')
     @include('components.reports.show-layout2')
 </div>
+{{-- @dd($tableDataSource) --}}
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports\Documents;
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitGenerateValuesFromParamsReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
 use App\Models\Prod_discipline;
@@ -12,28 +13,27 @@ use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
-use App\Models\Term;
-use App\Utils\Support\ModificationDataReport;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\Report;
 use App\Utils\Support\StringReport;
-use GraphQL\Executor\Values;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class Prod_sequence_060 extends Report_ParentDocument2Controller
+class Prod_sequence_030 extends Report_ParentDocument2Controller
 {
 
     use TraitForwardModeReport;
     use TraitMenuTitle;
     use TraitParamsSettingReport;
     use TraitUpdateBasicInfoDataSource;
+    use TraitGenerateValuesFromParamsReport;
 
-    protected $mode = '060';
+    protected $mode = '030';
     protected $projectId = 8;
     protected $subProjectId = 107;
     protected $prodRoutingId = 49;
     protected $groupByLength = 1;
-    protected $viewName = 'document-prod-sequence-060';
+    protected $viewName = 'document-prod-sequence-030';
     protected $type = 'prod_sequence';
     protected $tableTrueWidth = true;
     protected $overTableTrueWidth = false;
@@ -43,6 +43,8 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
     public function getSqlStr($params)
     {
 
+        $valOfParams = $this->generateValuesFromParamsReport($params);
+        // dd($valOfParams);
         $sql = "SELECT 
                     tb1.*
                     ,count_po_finished
@@ -73,11 +75,11 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                         projects AS pj
                     WHERE 1 = 1
                     AND pj.id = sp.project_id";
-        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = {{sub_project_id}}";
-        if (isset($params['project_id'])) $sql .= "\n AND pj.id = {{project_id}}";
-        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
-        if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
-        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id IN( {{prod_routing_link_id}}) ";
+        if (isset($valOfParams['sub_project_id'])) $sql .= "\n AND sp.id = {{sub_project_id}}";
+        if (isset($valOfParams['project_id'])) $sql .= "\n AND pj.id = {{project_id}}";
+        if (isset($valOfParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
+        if (Report::checkValueOfField($valOfParams, 'prod_discipline_id'))  $sql .= "\n AND prl.prod_discipline_id IN ({{prod_discipline_id}})";
+        // if (isset($valOfParams['prod_routing_link_id'])) $sql .= "\n AND prl.id IN({{prod_routing_link_id}}) ";
 
         $sql .= "\n AND ps.status = 'finished'
                     AND po.sub_project_id = sp.id
@@ -98,8 +100,8 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                                     prod_orders po
                                 WHERE 1 = 1
                                 AND po.sub_project_id = sp.id";
-        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = {{sub_project_id}}";
-        if (isset($params['project_id'])) $sql .= "\n AND sp.project_id = {{project_id}}";
+        if (isset($valOfParams['sub_project_id'])) $sql .= "\n AND sp.id = {{sub_project_id}}";
+        if (isset($valOfParams['project_id'])) $sql .= "\n AND sp.project_id = {{project_id}}";
         $sql .= "\n  AND po.deleted_at IS NULL
                             GROUP BY prod_routing_id) AS tb2 ON tb1.sub_project_id = tb2.sub_project_id
                             AND tb1.prod_routing_id = tb2.prod_routing_id";
@@ -116,6 +118,8 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
     }
 
     private function getProdRoutingLinks($params){
+        $valOfParams = $this->generateValuesFromParamsReport($params);
+        // dd($valOfParams);
         $sql = "SELECT 
                         prl.id AS prod_routing_link_id,
                         prl.name AS prod_routing_link_name,
@@ -131,10 +135,10 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                                 prod_routing_links prl, 
                                 prod_routings pr, prod_disciplines pdisc
                         WHERE 1 = 1";
-                        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id = {$params['sub_project_id']}";
-                        if (isset($params['project_id'])) $sql .= "\n AND sp.project_id = {$params['project_id']}";
-                        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {$params['prod_routing_id']}";
-                        if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {$params['prod_discipline_id']}";
+                        if (isset($valOfParams['sub_project_id'])) $sql .= "\n AND sp.id = {$valOfParams['sub_project_id']}";
+                        if (isset($valOfParams['project_id'])) $sql .= "\n AND sp.project_id = {$valOfParams['project_id']}";
+                        if (isset($valOfParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {$valOfParams['prod_routing_id']}";
+                        if (Report::checkValueOfField($valOfParams, 'prod_discipline_id'))  $sql .= "\n AND prl.prod_discipline_id IN ({$valOfParams['prod_discipline_id']})";
                         $sql .="\n 
                                     AND pr.id = prd.prod_routing_id
                                     AND prl.id = prd.prod_routing_link_id
@@ -160,6 +164,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         });
         // dd($groupItems);
         foreach($groupItems as $key => $values){
+            // dd($values);
             $firstItem = reset($values);
             $infoRoutingLinks = array_column($values, 'finished_progress', 'prod_routing_link_name');
             // information for meta data
@@ -216,8 +221,6 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
             
         };
 
-
-
         // add widget to dataSource
         $data['tableDataSource'] =  $dataSource;
         // dd($data);
@@ -242,7 +245,14 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                 'dataIndex' => 'prod_routing_id',
                 'hasListenTo' => true,
                 'validation' => 'required',
-            ]
+            ],
+            [
+                'title' => 'Production Discipline',
+                'dataIndex' => 'prod_discipline_id',
+                'allowClear' => true,
+                //'hasListenTo' => true,
+                'multiple' => true,
+            ],
         ];
     }
 
@@ -306,7 +316,14 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         $projectName = Project::find($params['project_id'] ?? $this->projectId)->name;
         $subProjectName = Sub_project::find($params['sub_project_id'] ?? $this->subProjectId);
         $prodPouting = Prod_routing::find($params['prod_routing_id'] ?? $this->prodRoutingId)->name;
-        $prodDiscipline = isset($params['prod_discipline_id']) ? Prod_discipline::find($params['prod_discipline_id'])->name : '';
+
+        $prodDiscipline = isset($params['prod_discipline_id']) ?
+        implode(', ', Prod_discipline::find($params['prod_discipline_id'])
+            ->pluck('name')
+            ->toArray()) :
+        implode(', ', Prod_discipline::all()
+            ->pluck('name')
+            ->toArray());
 
         $prodRoutingLink = isset($params['prod_routing_link_id']) ?
             implode(',', Prod_routing_link::find($params['prod_routing_link_id'])
@@ -319,6 +336,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         $basicInfoData['prod_routing'] = $prodPouting;
         $basicInfoData['prod_routing_link'] = $prodRoutingLink;
         $basicInfoData['prod_discipline'] = $prodDiscipline;
+        // dd($basicInfoData);
         return $basicInfoData;
     }
 
@@ -326,6 +344,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
 
     public function changeDataSource($dataSource, $params)
     {
+        // dd($dataSource);
         $data = $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
         $prodRoutingLinkFinished = array_column($data, 'prod_routing_link_name', 'prod_routing_link_id');
 
