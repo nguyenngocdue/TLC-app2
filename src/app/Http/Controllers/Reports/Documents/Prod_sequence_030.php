@@ -156,14 +156,15 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
     private function updateDataForPivotChart($dataSource, $params)
     {
         $items = array_values($dataSource->toArray());
+        // dd($dataSource);
         $groupItems = Report::groupArrayByKey($items,'prod_discipline_id');
-        array_walk($groupItems, function(&$item) {
-            uasort($item, function($a, $b){
-                return $a['order_no'] - $b['order_no'];
-            });
+        $collectionItems =  array_merge(...$groupItems);
+        uasort($collectionItems, function($a, $b){
+            return $a['order_no'] - $b['order_no'];
         });
-        // dd($groupItems);
-        foreach($groupItems as $key => $values){
+        $collectionItems = [implode('_',array_keys($groupItems)) => $collectionItems];
+
+        foreach($collectionItems as $key => $values){
             // dd($values);
             $firstItem = reset($values);
             $infoRoutingLinks = array_column($values, 'finished_progress', 'prod_routing_link_name');
@@ -209,12 +210,12 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 'chartType' => 'bar',
                 'titleChart' => '',
                 'dimensions' => $dimensions,
-                'basicInfo' => [
-                    "project_name" => $firstItem['project_name'],
-                    "sub_project_name" => $firstItem['sub_project_name'],
-                    "prod_routing_name" => $firstItem['prod_routing_name'],
-                    "prod_discipline_name" => $firstItem['prod_discipline_name']
-                ],
+                // 'basicInfo' => [
+                //     "project_name" => $firstItem['project_name'],
+                //     "sub_project_name" => $firstItem['sub_project_name'],
+                //     "prod_routing_name" => $firstItem['prod_routing_name'],
+                //     "prod_discipline_name" => $firstItem['prod_discipline_name']
+                // ],
             ];
             $data['widget_'. $key] = $widgetData;
             // dd($data);
@@ -331,11 +332,11 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 ->toArray()) : '';
 
         $basicInfoData = [];
-        $basicInfoData['project'] = $projectName;
-        $basicInfoData['sub_project'] = $subProjectName->name;
-        $basicInfoData['prod_routing'] = $prodPouting;
-        $basicInfoData['prod_routing_link'] = $prodRoutingLink;
-        $basicInfoData['prod_discipline'] = $prodDiscipline;
+        $basicInfoData['project_name'] = $projectName;
+        $basicInfoData['sub_project_name'] = $subProjectName->name;
+        $basicInfoData['prod_routing_name'] = $prodPouting;
+        $basicInfoData['prod_routing_link_name'] = $prodRoutingLink;
+        $basicInfoData['prod_discipline_name'] = $prodDiscipline;
         // dd($basicInfoData);
         return $basicInfoData;
     }
@@ -344,7 +345,7 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
 
     public function changeDataSource($dataSource, $params)
     {
-        // dd($dataSource);
+        // dump($dataSource);
         $data = $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
         $prodRoutingLinkFinished = array_column($data, 'prod_routing_link_name', 'prod_routing_link_id');
 
@@ -361,12 +362,14 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
             }
         }
         $data = collect($data)->sortBy([
-            ['project_name'],
-            ['sub_project_name'],
-            ['prod_routing_name'],
-            ['prod_discipline_name'],
-            ['prod_routing_link_name']
+            // ['project_name'],
+            // ['sub_project_name'],
+            // ['prod_routing_name'],
+            // ['prod_discipline_name'],
+            // ['prod_routing_link_name'],
+            ['order_no'],
         ]);
+        // dd($data);
         $dataSource = self::updateDataForPivotChart($data, $params);
         return $dataSource;
     }

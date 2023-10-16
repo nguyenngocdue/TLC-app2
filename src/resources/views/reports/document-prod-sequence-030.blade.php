@@ -21,7 +21,7 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
     @include('components.reports.shared-parameter')
     @include('components.reports.show-layout2')
 </div>
-{{-- @dd($tableDataSource) --}}
+{{-- @dd($tableDataSource, $basicInfoData) --}}
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
@@ -31,27 +31,27 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
                     <x-print.header6 />
                     <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Work Completion Percentage Report Chart</x-renderer.heading>
                         @php
-                            $basicInfo = $widget['basicInfo'];
+                            $basicInfo = $basicInfoData;
                         @endphp
                         <div class="col-span-12 grid border border-gray-600">
                             <div class="grid grid-rows-1">
                                 <div class="grid grid-cols-12 text-right">
                                     <label class="{{$class1}} col-start-1  col-span-3">Project</label>
-                                    <span class="{{$class2}}  col-start-4  col-span-4">{{$basicInfo['project_name']}}</span>
+                                    <span class="{{$class2}}  col-start-4  col-span-4">{{$basicInfoData['project_name']}}</span>
                                     <label class="{{$class1}} col-start-8  col-span-3 items-center">Sub-Project</label>
-                                    <span class="{{$class2}}  col-start-11 col-span-2">{{$basicInfo['sub_project_name']}}</span>
+                                    <span class="{{$class2}}  col-start-11 col-span-2">{{$basicInfoData['sub_project_name']}}</span>
                                 </div>
                             </div>
                             <div class="grid grid-rows-1">
                                 <div class="grid grid-cols-12 text-right ">
                                     <label class="{{$class1}} col-start-1   col-span-3">Production Routing</label>
-                                    <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfo['prod_routing_name']}}</span>
+                                    <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfoData['prod_routing_name']}}</span>
                                 </div>
                             </div>
                             <div class="grid grid-rows-1">
                                 <div class="grid grid-cols-12 text-right ">
                                     <label class="{{$class1}} col-start-1   col-span-3">Production Discipline</label>
-                                    <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfo['prod_discipline_name']}}</span>
+                                    <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfoData['prod_discipline_name']}}</span>
                                 </div>
                             </div>
                         </div>
@@ -87,22 +87,22 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right">
                         <label class="{{$class1}} col-start-1  col-span-3">Project</label>
-                        <span class="{{$class2}}  col-start-4  col-span-4">{{$basicInfoData['project']}}</span>
+                        <span class="{{$class2}}  col-start-4  col-span-4">{{$basicInfoData['project_name']}}</span>
                         <label class="{{$class1}} col-start-8  col-span-3 items-center">Sub-Project</label>
-                        <span class="{{$class2}}  col-start-11 col-span-2">{{$basicInfoData['sub_project']}}</span>
+                        <span class="{{$class2}}  col-start-11 col-span-2">{{$basicInfoData['sub_project_name']}}</span>
                     </div>
                 </div>
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right ">
                         <label class="{{$class1}} col-start-1   col-span-3">Production Routing</label>
-                        <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfoData['prod_routing']}}</span>
+                        <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfoData['prod_routing_name']}}</span>
                     </div>
                 </div>
-                @if(isset($basicInfoData['prod_discipline']) && $basicInfoData['prod_discipline'])
+                @if(isset($basicInfoData['prod_discipline_name']) && $basicInfoData['prod_discipline_name'])
                 <div class="grid grid-rows-1">
                     <div class="grid grid-cols-12 text-right ">
                         <label class="{{$class1}} col-start-1   col-span-3">Production Discipline</label>
-                        <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfoData['prod_discipline']}}</span>
+                        <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfoData['prod_discipline_name']}}</span>
                     </div>
                 </div>
                 @endif
