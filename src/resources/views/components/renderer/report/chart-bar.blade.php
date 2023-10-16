@@ -90,7 +90,10 @@ var chartConfig = {
                 enabled: true,
                 callbacks: {
                     label: function(context) {
-                        //console.log(12345)
+                        console.log(context);
+                            var label = '{!! $dimensions['tooltipLabel'] ?? 'data' !!}'; 
+                            var value =  context.raw;
+                            return label + ': ' + value;
                     }
                 },
             },    

@@ -206,8 +206,8 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 'height' => $max/2*30,
                 'dataLabelAlign' => 'end',
                 'dataLabelOffset' => 10,
-                'displayTitleOnTopCol' => 1,        // dd($collectionItems);
-
+                'displayTitleOnTopCol' => 1,
+                'tooltipLabel'=> '% Complete',        // dd($collectionItems);
             ];
     
             // Set data for widget
@@ -219,12 +219,6 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 'chartType' => 'bar',
                 'titleChart' => '',
                 'dimensions' => $dimensions,
-                // 'basicInfo' => [
-                //     "project_name" => $firstItem['project_name'],
-                //     "sub_project_name" => $firstItem['sub_project_name'],
-                //     "prod_routing_name" => $firstItem['prod_routing_name'],
-                //     "prod_discipline_name" => $firstItem['prod_discipline_name']
-                // ],
             ];
             $data['widget_'. $key] = $widgetData;
             // dd($data);
