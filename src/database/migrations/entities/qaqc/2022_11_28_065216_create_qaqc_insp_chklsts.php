@@ -30,23 +30,9 @@ return new class extends Migration
             $table->unsignedBigInteger('qaqc_insp_tmpl_id');
             $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->appendCommonFields();
-        });
-        // Schema::create('qaqc_insp_chklsts', function (Blueprint $table) {
-        //     $table->id();
 
-        //     $table->string('name');
-        //     $table->text('description')->nullable();
-        //     $table->string('slug')->unique();
-        //     $table->float('progress')->nullable();
-        //     $table->unsignedBigInteger('prod_order_id');
-        //     $table->string('consent_number')->nullable();
-        //     $table->unsignedBigInteger('qaqc_insp_tmpl_id');
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->string('status')->nullable();
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
+            $table->unique(['prod_order_id', 'qaqc_insp_tmpl_id']);
+        });
     }
 
     /**
