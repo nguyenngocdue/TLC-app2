@@ -64,7 +64,8 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                     prl.name prod_routing_link_name,
                     prl.prod_discipline_id AS prod_discipline_id,
                     pdis.name AS prod_discipline_name,
-                    COUNT(DISTINCT po.id) AS count_po_finished
+                    COUNT(DISTINCT po.id) AS count_po_finished,
+                    prd.order_no AS order_no
                     FROM 
                         sub_projects sp, 
                         prod_orders po, 
@@ -72,8 +73,11 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                         prod_sequences ps,
                         prod_routing_links prl,
                         prod_disciplines pdis,
-                        projects AS pj
+                        projects pj,
+                        prod_routing_details prd
                     WHERE 1 = 1
+                    AND prd.prod_routing_id = pr.id
+                    AND prd.prod_routing_link_id = prl.id
                     AND pj.id = sp.project_id";
         if (isset($valOfParams['sub_project_id'])) $sql .= "\n AND sp.id = {{sub_project_id}}";
         if (isset($valOfParams['project_id'])) $sql .= "\n AND pj.id = {{project_id}}";
@@ -128,8 +132,8 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                         pdisc.description AS prod_discipline_description,
                         pr.id AS prod_routing_id,
                         pr.name AS prod_routing_name,
-                        pr.description AS prod_routing_description
-
+                        pr.description AS prod_routing_description,
+                        prd.order_no  AS order_no 
                         FROM    sub_projects sp, prod_orders po, 
                                 prod_routing_details prd, 
                                 prod_routing_links prl, 
@@ -146,6 +150,7 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                                     AND sp.id = po.sub_project_id
                                     AND pdisc.id = prl.prod_discipline_id
                                     GROUP BY prod_routing_link_id
+                                    ORDER BY order_no
                                     ";
                                     // dd($sql);
         $sqlData = DB::select(DB::raw($sql));
@@ -155,13 +160,16 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
 
     private function updateDataForPivotChart($dataSource, $params)
     {
-        $items = array_values($dataSource->toArray());
         // dd($dataSource);
+        $items = array_values($dataSource->toArray());
+
         $groupItems = Report::groupArrayByKey($items,'prod_discipline_id');
         $collectionItems =  array_merge(...$groupItems);
         uasort($collectionItems, function($a, $b){
             return $a['order_no'] - $b['order_no'];
         });
+        // dd($collectionItems);
+
         $collectionItems = [implode('_',array_keys($groupItems)) => $collectionItems];
 
         foreach($collectionItems as $key => $values){
@@ -198,7 +206,8 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 'height' => $max/2*30,
                 'dataLabelAlign' => 'end',
                 'dataLabelOffset' => 10,
-                'displayTitleOnTopCol' => 1,
+                'displayTitleOnTopCol' => 1,        // dd($collectionItems);
+
             ];
     
             // Set data for widget
@@ -298,7 +307,7 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                     "width" => 137,
                 ],
                 [
-                    "title" => "Count Production Orders <br/>(status = finished)",
+                    "title" => "Number of Finished Production Orders",
                     "dataIndex" => "count_po_finished",
                     "align" => "right",
                     "width" => 137,
@@ -345,10 +354,10 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
 
     public function changeDataSource($dataSource, $params)
     {
-        // dump($dataSource);
+        if(empty($dataSource->toArray())) return [];
         $data = $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
         $prodRoutingLinkFinished = array_column($data, 'prod_routing_link_name', 'prod_routing_link_id');
-
+        
         $prodRoutingLinks = $this->getProdRoutingLinks($params);
         $firstItem = reset($data);
         foreach ($prodRoutingLinks as $key => $values){
@@ -361,16 +370,9 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 $data[] = (object)$mergedData;
             }
         }
-        $data = collect($data)->sortBy([
-            // ['project_name'],
-            // ['sub_project_name'],
-            // ['prod_routing_name'],
-            // ['prod_discipline_name'],
-            // ['prod_routing_link_name'],
-            ['order_no'],
-        ]);
-        // dd($data);
+        $data = collect($data);
         $dataSource = self::updateDataForPivotChart($data, $params);
+        // dd($dataSource);
         return $dataSource;
     }
 }
