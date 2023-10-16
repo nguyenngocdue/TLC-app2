@@ -52,6 +52,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
         tb1.prod_discipline_id,
         prod_discipline_name,
         tb1.prod_order_id,
+        order_no,
         prod_order_name,
             FORMAT((pse.worker_number),2) AS man_power,
 			(pse.total_hours) AS total_hours,
@@ -74,6 +75,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     po.id AS prod_order_id,
               		po.name AS prod_order_name,
                     prl.standard_uom_id AS standard_uom_id,
+                    prd.order_no AS order_no,
                     COUNT(DISTINCT pru.date) AS count_pru_date
                     FROM
                         sub_projects sp
@@ -89,6 +91,8 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         prod_routing_links prl ON prl.id = pse.prod_routing_link_id
                     JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
                     LEFT JOIN prod_runs pru ON pru.prod_sequence_id = pse.id
+                    LEFT JOIN prod_routing_details prd ON pr.id = prd.prod_routing_id
+                                                      AND prl.id = prd.prod_routing_link_id
                 WHERE 1 = 1
                         AND pse.deleted_by IS NULL
                         AND sp.project_id = {{project_id}}
@@ -125,6 +129,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     pr.name AS prod_routing_name,
                     po.id AS prod_order_id,
                     po.name AS prod_order_name,
+                    #prd.order_no AS order_no,
                     NULL AS man_power,
                     NULL AS total_hours,
                     NULL AS uom_name,
@@ -141,6 +146,8 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     prod_routings pr ON pr.id = po.prod_routing_id
                 LEFT JOIN
                     prod_sequences pse ON pse.prod_order_id = po.id
+                #LEFT JOIN prod_routing_details prd  ON {{prod_routing_id}} = prd.prod_routing_id
+                
                 WHERE 1 = 1";
             $sql .= "\n 
                         AND pse.id IS NULL
@@ -423,6 +430,11 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
             }
 
         }
+        // sort by order_no
+        uasort($data, function($a, $b) {
+            [$a , $b] = [$a->toArray(), $b->toArray()];
+            return reset($a)->order_no - reset($b)->order_no;
+        });
         // dd($data);
         return $data;
     }
@@ -438,15 +450,14 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
 
     public function changeDataSource($dataSource, $params)
     {
-        // dd($dataSource);
         foreach ($dataSource as $k => $values) $dataSource[$k] = $this->addTooltip($values);
         $dataSource = self::updateDataForPivotChart($dataSource);
 
         $prodRoutingLinks = $this->getProdRoutingLinks($params);
-        $prodRoutingLinks = array_intersect_key($prodRoutingLinks, array_flip(array_keys($dataSource->toArray())));
+        $tableOfContents = [];
+        foreach(array_keys($dataSource->toArray()) as $key) $tableOfContents[$key] = $prodRoutingLinks[$key];
         $output['render_pages'] = $dataSource;
-        $output['table_of_contents'] = $prodRoutingLinks;
-
+        $output['table_of_contents'] = $tableOfContents;
         return $output;
     }
 }
