@@ -17,6 +17,7 @@ class Dropdown7 extends Component
         private $allowClear = false,
         private $multiple = false,
         private $hasListenTo = false,
+        private $infoParam = [],
     ) {
     }
 
@@ -31,7 +32,8 @@ class Dropdown7 extends Component
 
         $strMultiple = $this->multiple ? 'true' : 'false';
         $strHasListenTo = $this->hasListenTo ? 'true' : 'false';
-
+        $infoParam = $this->infoParam;
+        $strStar = isset($infoParam['validation']) && $infoParam['validation'] ? "<span class='text-red-400'>*</span>": "";
         $info = "";
         if(!App::isProduction()) {
             $info = "dataIndex: $this->name";
@@ -40,7 +42,8 @@ class Dropdown7 extends Component
             $info .="\nhasListenTo: $strHasListenTo";
         }
         // dump($selected);
-        $str = "<span class='px-1' title='$info'>$title</span>
+        $str = "<span class='px-1' title='$info'>$title $strStar</span>
+        
         <x-reports.mode-params.$viewName name='$this->name' selected='$selected' allowClear='$this->allowClear' multiple='$this->multiple' hasListenTo='$this->hasListenTo' />";
         echo  Blade::render($str);
     }   

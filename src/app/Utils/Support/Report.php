@@ -326,6 +326,9 @@ class Report
         });
         return $data;
     }
+    public static function checkValueOfField($array, $fieldName){
+        return isset($array[$fieldName]) && $fieldName;
+    }
 
     
 }

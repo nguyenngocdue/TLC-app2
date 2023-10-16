@@ -25,18 +25,20 @@ $route = $routeName ? route($routeName) : "";
             $multiple = $value['multiple'] ?? false;
             $hasListenTo = $value['hasListenTo'] ?? false;
             $singleDatePicker = $value['singleDatePicker'] ?? false;
-            // dump($multiple, $date, $allowClear)
             @endphp
             <div class="col-span-3">
                 @switch($renderer)
                 @case("drop_down")
-                <x-reports.dropdown7 hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />
+                <x-reports.dropdown7 :infoParam="$value" hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />
                     @if ($errors->any())
                             @foreach ($errors->getMessages() as $field => $message)
                                 @if($field === $name)
                                 <span class="text-xs" role="alert">
                                     <ul class="mt-1.5 text-red-600 font-semibold">
-                                        <li>{{last($message)}}</li>
+                                    @php
+                                        $textValidation = App\Utils\Support\Report::checkValueOfField($value,'textValidation' ) ? $value['textValidation'] : last($message);
+                                    @endphp
+                                        <li>({{$textValidation}})</li>
                                     </ul>
                                 </span>
                                 @endif
@@ -65,35 +67,3 @@ $route = $routeName ? route($routeName) : "";
     }
 
 </script>
-
-{{-- <script>
-        // This script runs after the HTML document has fully loaded
-        document.addEventListener("DOMContentLoaded", function() {
-            // Check if a "reload" cookie exists
-            const reloadCookie = getCookie("reload");
-
-            // If the "reload" cookie does not exist (page was not manually reloaded)
-            if (!reloadCookie) {
-                // Submit the form with the ID specified in the {{$entity}} variable
-document.getElementById("{{$entity}}").submit();
-
-// Create a "reload" cookie with a value of "1" (expires in 1 minute)
-setCookie("reload", "1", 1);
-}
-});
-
-// Function to retrieve the value of a specific cookie
-function getCookie(name) {
-const value = `; ${document.cookie}`;
-const parts = value.split(`; ${name}=`);
-if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-// Function to create a new cookie
-function setCookie(name, value, minutes) {
-const date = new Date();
-date.setTime(date.getTime() + (minutes * 60 * 1000));
-const expires = "expires=" + date.toUTCString();
-document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-</script> --}}

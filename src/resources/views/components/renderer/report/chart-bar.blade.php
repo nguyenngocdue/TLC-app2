@@ -145,11 +145,11 @@ var chartConfig = {
 
             },
             datalabels: {
-                display: function(context) {
-                    return context.dataset.data[context.dataIndex] !== 0 
-                            && context.dataset.data[context.dataIndex] !== "" 
-                            && context.dataset.data[context.dataIndex] !== null;
-                },
+                display: {!! $dimensions['displayTitleOnTopCol'] ? 'function(context) {
+                            return context.dataset.data[context.dataIndex] !== 0 
+                                    && context.dataset.data[context.dataIndex] !== "" 
+                                    && context.dataset.data[context.dataIndex] !== null;
+                        }' : 'false' !!},
                 anchor: 'end',
                 align: '{!! $dimensions['dataLabelAlign'] ?? 'top' !!}',
                 color: 'white',
