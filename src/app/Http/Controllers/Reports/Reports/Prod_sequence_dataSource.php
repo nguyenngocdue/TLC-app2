@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports\Reports;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Http\Controllers\Reports\TraitGenerateValuesFromParamsReport;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
@@ -15,23 +16,13 @@ class Prod_sequence_dataSource extends Controller
 {
     use TraitDynamicColumnsTableReport;
     use TraitCreateSQL;
+    use TraitGenerateValuesFromParamsReport;
+
     protected $maxH = 50;
 
     public function getSqlStr($params)
     {
-        $valOfParams = DateReport::createValueForParams([
-            'sub_project_id',
-            'project_id',
-            'prod_routing_id',
-            'prod_order_id',
-            'prod_routing_link_id',
-            'erp_routing_link_id',
-            'prod_discipline_id',
-            'picker_date',
-            'status',
-        ], $params);
-
-        // dd($valOfParams);
+        $valOfParams = $this->generateValuesFromParamsReport($params);
         $sql = "SELECT tb1.*, terms.name AS uom
                     FROM (SELECT
                     sp.project_id AS project_id,
