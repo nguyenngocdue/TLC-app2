@@ -79,6 +79,7 @@
                                     status="{{$status}}"
                                     defaultValue="{{$default_value}}"
                                     columnType="{{$columnType}}"
+                                    textareaRows="{{$textareaRows}}"
                                     />
                                 {{-- @if (is_null($control))
                                 <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>

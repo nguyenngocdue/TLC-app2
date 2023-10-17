@@ -39,27 +39,14 @@ return new class extends Migration
             $table->double('total_hours')->nullable();
             $table->double('total_man_hours')->nullable();
 
+            $table->unsignedInteger('no_of_sundays')->nullable();
+            $table->unsignedInteger('no_of_ph_days')->nullable();
+            $table->unsignedInteger('total_days_no_sun_no_ph')->nullable();
+            $table->unsignedInteger('total_days_have_ts')->nullable();
+            $table->unsignedInteger('total_discrepancy_days')->nullable();
+
             $table->appendCommonFields();
         });
-        // Schema::create('prod_orders', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->string('slug')->unique();
-        //     $table->string('status')->nullable();
-        //     $table->string('production_name');
-        //     $table->string('compliance_name')->nullable();
-        //     $table->text('description')->nullable();
-        //     $table->unsignedBigInteger('quantity')->nullable();
-        //     $table->unsignedBigInteger('sub_project_id');
-        //     $table->unsignedBigInteger('prod_routing_id')->nullable();
-        //     $table->string('meta_type')->nullable();
-        //     $table->unsignedBigInteger('meta_id')->nullable();
-        //     $table->dateTime('started_at')->nullable();
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**

@@ -7,11 +7,14 @@ use App\BigThink\ModelExtended;
 class User_position extends ModelExtended
 {
     protected $fillable = [
-        "name", "description", "slug", "owner_id",
+        "name", "description", "slug", "owner_id", "status",
         "position_prefix", "position_1", "position_2", "position_3",
+        "report_to", "job_desc", "job_requirement",
+        "report_to_1", "job_desc_1", "job_requirement_1",
+        "assignee_1",
     ];
 
-    protected static $statusless = true;
+    // protected static $statusless = true;
     public static $nameless = true;
 
     public function getNameAttribute($value)
@@ -38,6 +41,11 @@ class User_position extends ModelExtended
         "getPosition1" => ['belongsTo', User_position1::class, 'position_1'],
         "getPosition2" => ['belongsTo', User_position2::class, 'position_2'],
         "getPosition3" => ['belongsTo', User_position3::class, 'position_3'],
+        'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
+    ];
+
+    public static $oracyParams = [
+        "getMonitors1()" => ["getCheckedByField", User::class],
     ];
 
     public function getUsers()
@@ -65,5 +73,16 @@ class User_position extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getAssignee1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getMonitors1()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

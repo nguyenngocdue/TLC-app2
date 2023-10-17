@@ -77,6 +77,12 @@ trait TraitManageDefaultValueColumns
                 "renderer" => "text4",
                 "editable" => true,
             ],
+            [
+                "dataIndex" => "textarea_rows",
+                "renderer" => "number4",
+                "editable" => true,
+                "properties" => ["placeholder" => 5],
+            ],
         ];
     }
 }
