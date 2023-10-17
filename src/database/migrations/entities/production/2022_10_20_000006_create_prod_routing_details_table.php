@@ -32,6 +32,11 @@ return new class extends Migration
             $table->double('target_man_hours')->nullable();
             $table->double('target_min_uom')->nullable();
 
+            $table->double("avg_man_power")->nullable();
+            $table->double("avg_total_uom")->nullable();
+            $table->double("avg_min")->nullable();
+            $table->double("avg_min_uom")->nullable();
+
             $table->orderable();
             $table->appendCommonFields();
 

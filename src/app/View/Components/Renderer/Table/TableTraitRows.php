@@ -102,7 +102,16 @@ trait TableTraitRows
                             $rawData = count($rawData) . " items";
                         }
                     }
-                    $valueOfRawData = (is_object($rawData) && isset($rawData->value)) ? $rawData->value : $rawData;
+
+                    if (is_object($rawData)) {
+                        if (isset($rawData->value)) {
+                            $valueOfRawData = $rawData->value;
+                        } else {
+                            $valueOfRawData = ""; //<< Render empty string when NULL or UNSET
+                        }
+                    } else {
+                        $valueOfRawData = $rawData;
+                    }
 
                     $cellDivClass = '';
                     if (is_object($rawData)) {

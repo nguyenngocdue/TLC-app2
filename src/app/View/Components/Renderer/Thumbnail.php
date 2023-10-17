@@ -3,7 +3,6 @@
 namespace App\View\Components\Renderer;
 
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Thumbnail extends Component
@@ -28,17 +27,19 @@ class Thumbnail extends Component
      */
     public function render()
     {
-        $supportedImages = [
-            'image/png',
-            'image/jpeg',
-        ];
-        switch (true) {
-            case $this->dataLine->mime_type == "application/pdf":
-                return '<div class="flex flex-row justify-center"><i class="text-3xl fa-duotone fa-file-pdf"></i></div>';
-            case $this->dataLine->mime_type == "application/zip":
-                return '<div class="flex flex-row justify-center"><i class="text-3xl fa-duotone fa-file-zipper"></i></div>';
-            case !in_array($this->dataLine->mime_type, $supportedImages):
-                return $this->dataLine->mime_type;
+        if ($this->dataLine instanceof \App\Models\Attachment) {
+            $supportedImages = [
+                'image/png',
+                'image/jpeg',
+            ];
+            switch (true) {
+                case $this->dataLine->mime_type == "application/pdf":
+                    return '<div class="flex flex-row justify-center"><i class="text-3xl fa-duotone fa-file-pdf"></i></div>';
+                case $this->dataLine->mime_type == "application/zip":
+                    return '<div class="flex flex-row justify-center"><i class="text-3xl fa-duotone fa-file-zipper"></i></div>';
+                case !in_array($this->dataLine->mime_type, $supportedImages):
+                    return $this->dataLine->mime_type;
+            }
         }
 
         $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';

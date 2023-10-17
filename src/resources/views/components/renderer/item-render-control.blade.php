@@ -152,4 +152,14 @@
 
 @endswitch
 
-<div component="control-extra" class="text-gray-600 text-sm">{{$controlExtra}}</div>
+@php
+    switch($controlExtra)
+    {
+        case '$link_to_user_position':
+            $link = route("user_positions.show", $value);
+            $controlExtra = "<a target='_blank' class='text-blue-800' href='$link'>Show this Job Description</a>";
+            break;
+    }
+@endphp
+
+<div component="control-extra" class="text-gray-600 text-sm">{!! $controlExtra !!}</div>
