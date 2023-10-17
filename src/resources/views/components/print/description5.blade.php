@@ -15,13 +15,14 @@
     <div class='grid grid-rows-1'>
         <div class='grid grid-cols-12 text-right '>
             @if ($newLine)
+            
                 @if(!$hiddenLabel)
-                    <label class='p-2 text-base font-medium h-full w-full flex col-span-{{$colSpan}} items-center justify-start col-start-1'>{{$label}}</label>
+                    <label class='p-2 text-base font-medium h-full w-full flex col-span-12 items-center justify-start col-start-1'>{{$label}}</label>
                 @endif
                 @if ($control == 'toggle')
-                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-{{$colSpan}} text-left'>{{$content == "1" ? "Yes" : "No"}}</span>
+                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>{{$content == "1" ? "Yes" : "No"}}</span>
                 @else
-                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-{{$colSpan}} text-left'>{{$content}}</span>
+                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>{{$content}}</span>
                 @endif
             @else
                 @if(!$hiddenLabel)
@@ -44,14 +45,14 @@
         <div class='grid grid-cols-12 text-right '>
             @if ($newLine)
                 @if(!$hiddenLabel)
-                    <label class='p-2 text-base font-medium h-full w-full flex col-span-{{$colSpan}} items-center justify-start col-start-1'>{{$label}}</label>
+                    <label class='p-2 text-base font-medium h-full w-full flex col-span-12 items-center justify-start col-start-1'>{{$label}}</label>
                 @endif
                 @if ($control == 'parent_link')
-                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-{{$colSpan}} text-left'>
+                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>
                     <x-print.parent-link5 :dataSource="$content"/>
                 </span>
                 @else
-                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-{{$colSpan}} text-left'>
+                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>
                     (None)
                 </span>
                 @endif
