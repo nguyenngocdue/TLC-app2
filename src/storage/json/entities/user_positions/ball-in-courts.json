@@ -1,0 +1,22 @@
+{
+    "new": {
+        "name": "new",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "getMonitors1()"
+    },
+    "draft": {
+        "name": "draft",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "getMonitors1()"
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": "getMonitors1()"
+    },
+    "active": {
+        "name": "active",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "getMonitors1()"
+    }
+}

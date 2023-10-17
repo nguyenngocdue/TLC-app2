@@ -1,0 +1,34 @@
+{
+    "new": {
+        "name": "new",
+        "location": "",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "",
+        "active": ""
+    },
+    "draft": {
+        "name": "draft",
+        "location": "",
+        "new": "",
+        "draft": "",
+        "pending_verification": "true",
+        "active": ""
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "location": "",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "",
+        "active": "true"
+    },
+    "active": {
+        "name": "active",
+        "location": "",
+        "new": "",
+        "draft": "",
+        "pending_verification": "",
+        "active": ""
+    }
+}
