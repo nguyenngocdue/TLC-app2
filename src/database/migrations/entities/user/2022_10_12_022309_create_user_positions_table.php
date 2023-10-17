@@ -37,6 +37,8 @@ return new class extends Migration
             $table->string("job_desc_1")->nullable();
             $table->string("job_requirement_1")->nullable();
 
+            $table->unsignedBigInteger("assignee_1")->nullable();
+
             $table->appendCommonFields();
 
             $table->unique(["position_prefix", "position_1", "position_2", "position_3"]);

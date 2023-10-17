@@ -50,7 +50,7 @@ class ProdSequenceService
     {
         $result = [];
         foreach ($allProdSequences as $prodSequence) {
-            $runs = $prodSequence->getProdRuns()->get();
+            $runs = $prodSequence->getProdRuns;
             foreach ($runs as $run) {
                 $result[] = $run->date;
             }
@@ -63,7 +63,9 @@ class ProdSequenceService
     {
         $instance = Prod_sequence::query()
             ->with(['getProdOrder' => function ($query) {
-                $query->with(['getProdSequences']);
+                $query->with(['getProdSequences' => function ($query) {
+                    $query->with(['getProdRuns']);
+                }]);
             }])
             ->find($id);
         $prodOrder = $instance->getProdOrder;
