@@ -29,20 +29,6 @@ trait TraitForwardModeReport
             return redirect(route($routeName . '_' . $mode));
         }
         
-        // if (isset($input['picker_date'])) {
-        //     $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport($request));
-        //     $entityReport = CurrentPathInfo::getEntityReport($request);
-        //     $params = [
-        //         '_entity' => $entityReport,
-        //         'action' => 'updateReport' . $typeReport,
-        //         'type_report' => $typeReport,
-        //         'mode_option' => $this->mode
-        //     ] + $input;
-        //     $request->replace($params);
-        //     (new UpdateUserSettings())($request);
-        //     return redirect($request->getPathInfo());
-        // }
-        
         $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport2($request));
         $entityReport = CurrentPathInfo::getEntityReport($request);
         $params = [

@@ -180,8 +180,8 @@
         "name": "report-qaqc_ncr_010",
         "package_tab": "report",
         "package": null,
-        "top_title": "NCR Report In Detail",
-        "title": "NCR Report In Detail"
+        "top_title": "NCR Report in Detail",
+        "title": "NCR Report in Detail"
     },
     "report-site_daily_assignment_010": {
         "name": "report-site_daily_assignment_010",

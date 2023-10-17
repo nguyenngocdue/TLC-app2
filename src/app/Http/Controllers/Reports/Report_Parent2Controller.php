@@ -31,6 +31,8 @@ abstract class Report_Parent2Controller extends Controller
     use TraitCreateSQL;
     use TraitGetOptionPrint;
     use TraitSettingLayout;
+    use TraitGenerateValuesFromParamsReport;
+    use TraitForwardModeReport;
 
     protected $mode = '010';
     protected $maxH = null;

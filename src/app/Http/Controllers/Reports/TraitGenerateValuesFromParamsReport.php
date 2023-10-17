@@ -17,6 +17,10 @@ trait TraitGenerateValuesFromParamsReport
             'prod_discipline_id',
             'picker_date',
             'status',
+            'report_type',
+            'user_team_ncr',
+            'optionPrintLayout',
+            'root_cause',
         ], $params);
         return $valOfParams;
     }

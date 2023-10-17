@@ -16,8 +16,9 @@ class StringReport
         return $result;
     }
 
-    public static function arrayToJsonWithSingleQuotes($array, $sign1='[', $sign2=']')
+    public static function arrayToJsonWithSingleQuotes($item, $sign1='[', $sign2=']')
     {
+        if(!is_array($item)) return is_numeric($item) ?  $item : "'$item'";
         return $sign1 . implode(', ', array_map(function ($item) {
             if (is_object($item)){
                 if(is_numeric($item->value)) return "$item->value";
@@ -26,6 +27,6 @@ class StringReport
                 if(is_numeric($item)) return "$item";
                 return "'$item'"; 
             }
-        }, $array)) . $sign2;
+        }, $item)) . $sign2;
     }
 }

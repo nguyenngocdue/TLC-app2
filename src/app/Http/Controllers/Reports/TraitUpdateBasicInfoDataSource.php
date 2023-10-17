@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Blade;
 
 trait TraitUpdateBasicInfoDataSource
 {
@@ -18,7 +19,7 @@ trait TraitUpdateBasicInfoDataSource
                     $statusName = $values[$field];
                     $libStatus = LibStatuses::getAll()[$statusName];
                     $values[$field] = (object) [
-                        'value' => $libStatus['title'],
+                        'value' => Blade::render("<x-renderer.status>" . $libStatus['name'] . "</x-renderer.status>"),
                         'cell_class' =>  'text-'. $libStatus['text_color'],
                     ];
                     // dd($libStatus, $values, $field);
@@ -60,6 +61,7 @@ trait TraitUpdateBasicInfoDataSource
             'ecos_name',
             'prod_sequence_status',
             'prod_order_status',
+            'ncr_status',
         ] + $fieldInputs;
         $attrib = [];
         foreach ($dataSource as $key => &$values) {

@@ -65,17 +65,21 @@ class DateReport
     public static function createValueForParams($fields, $params)
     {
         $valParams = [];
+
         foreach ($fields as $field) {
-            if(isset($params[$field]) &&  is_array($params[$field])){
-                $valParams[$field] = isset($params[$field]) ? StringReport::arrayToJsonWithSingleQuotes($params[$field],null,null): '';
+            $value = '';
+            if (isset($params[$field])) {
+                if ($field === 'picker_date') {
+                    $value = self::separateStrPickerDate($params[$field]);
+                } elseif ($field === 'status') {
+                    $value = StringReport::arrayToJsonWithSingleQuotes($params[$field], '', '');
+                } elseif (is_array($params[$field])) {
+                    $value = StringReport::arrayToJsonWithSingleQuotes($params[$field], '', '');
+                } else {
+                    $value = StringReport::arrayToJsonWithSingleQuotes($params[$field], '', '');
+                }
             }
-            else {
-                $valParams[$field] = isset($params[$field]) ?  $params[$field] : '';
-            }
-            if($field = 'picker_date' && isset($params['picker_date'])){
-                $parseDate = self::separateStrPickerDate($params['picker_date']);
-                $valParams['picker_date'] = $parseDate;
-            } 
+            $valParams[$field] = $value;
         }
         return $valParams;
     }
