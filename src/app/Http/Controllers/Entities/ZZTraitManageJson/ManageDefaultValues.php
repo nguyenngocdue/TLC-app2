@@ -32,6 +32,7 @@ class ManageDefaultValues extends Manage_Parent
                     'column_name' => $prop['column_name'],
                 ];
             }
+            if ($prop['control'] != 'textarea') $newItem['textarea_rows'] = 'DO_NOT_RENDER';
             $newItem['label'] = $prop['label'];
             if (isset($prop['column_type']) && $prop['column_type'] === 'static') $newItem['row_color'] = "amber";
             if (in_array($prop['name'], $standardDefaultValueKeys)) $newItem['row_color'] = "gray";

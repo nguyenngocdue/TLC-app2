@@ -1,7 +1,7 @@
 <textarea 
     id="{{$name}}" 
     name="{{$name}}" 
-    rows="5" 
+    rows="{{$rows}}" 
     component="controls/textarea2"
     class="{{$classList}} {{$readOnly ? 'readonly' : ''}}" 
     placeholder="Type here..."

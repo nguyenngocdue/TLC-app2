@@ -9,6 +9,8 @@ class User_position extends ModelExtended
     protected $fillable = [
         "name", "description", "slug", "owner_id",
         "position_prefix", "position_1", "position_2", "position_3",
+        "report_to", "job_desc", "job_requirement",
+        "report_to_1", "job_desc_1", "job_requirement_1",
     ];
 
     protected static $statusless = true;

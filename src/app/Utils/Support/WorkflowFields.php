@@ -177,9 +177,11 @@ class WorkflowFields
         $result['labelExtra'] = $defaultValue['label_extra'] ?? "";
         $result['placeholder'] = $defaultValue['placeholder'] ?? "";
         $result['controlExtra'] = $defaultValue['control_extra'] ?? "";
-        $realtime = $realtimes[$key] ?? [];
-        $result['realtimeType'] = $realtime["realtime_type"] ?? "";
-        $result['realtimeFn'] = $realtime["realtime_fn"] ?? "";
+        $result['textareaRows'] = $defaultValue['textarea_rows'] ?? 5;
+
+        // $realtime = $realtimes[$key] ?? [];
+        // $result['realtimeType'] = $realtime["realtime_type"] ?? "";
+        // $result['realtimeFn'] = $realtime["realtime_fn"] ?? "";
         $result['iconJson'] = $columnType === 'json' ? '<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
 
         $typeWorkflow ?  self::followWorkflow($result, $prop, $defaultValue, $hidden, $readonly, $required) : self::noneFollowWorkflow($result, $prop, $defaultValue);

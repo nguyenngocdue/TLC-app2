@@ -12,6 +12,7 @@ class Textarea2 extends Component
         private $value,
         private $colType = '',
         private $readOnly = false,
+        private $textareaRows = 5,
     ) {
     }
 
@@ -29,6 +30,7 @@ class Textarea2 extends Component
             'value' => $value,
             'readOnly' => $this->readOnly,
             'classList' => ClassList::TEXTAREA,
+            'rows' => $this->textareaRows,
         ]);
     }
 }
