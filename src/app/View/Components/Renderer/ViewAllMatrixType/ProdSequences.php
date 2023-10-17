@@ -255,6 +255,12 @@ class ProdSequences extends ViewAllTypeMatrixParent
         if (in_array($dataIndex, ['status', 'detail'])) return parent::cellRenderer($cell, $dataIndex, $x, $y, $forExcel);
         if ($dataIndex === 'checkbox_print') return parent::cellRenderer($cell, $dataIndex, $x, $y, $forExcel);
         $doc = $cell[0];
+        if ($doc->status === 'not_applicable') {
+            return (object)[
+                "value" => "",
+                "cell_class" => "bg-gray-300",
+            ];
+        }
         switch ($dataIndex) {
             case "total_uom":
                 return number_format(round($doc->{$dataIndex}, 2), 2);

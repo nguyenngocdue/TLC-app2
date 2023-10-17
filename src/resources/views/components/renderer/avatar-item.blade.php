@@ -1,6 +1,6 @@
 @php
 $avatar = $avatar ? $avatar : "/images/avatar.jpg";
-$bgGray = $gray ? "bg-gray-300 bg-opacity-30": "";
+$bgGray = $gray ? "bg-gray-900 bg-opacity-30": "";
 $textGray = $gray ? "text-gray-600" : "";
 $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
 @endphp
