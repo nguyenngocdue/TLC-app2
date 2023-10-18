@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 
@@ -17,14 +18,14 @@ trait TraitUpdateBasicInfoDataSource
             if (isset($values[$field])) {
                 if(str_contains($field, 'status')){
                     $statusName = $values[$field];
-                    $libStatus = LibStatuses::getAll()[$statusName];
-                    $values[$field] = (object) [
-                        'value' => Blade::render("<x-renderer.status>" . $libStatus['name'] . "</x-renderer.status>"),
-                        'cell_class' =>  'text-'. $libStatus['text_color'],
-                    ];
-                    // dd($libStatus, $values, $field);
-
-                    continue;
+                    if(is_array($statusName)) continue;
+                        if(isset(LibStatuses::getAll()[$statusName])){
+                            $libStatus = LibStatuses::getAll()[$statusName];
+                            $values[$field] = (object) [
+                                'value' => Blade::render("<x-renderer.status>" . $libStatus['name'] . "</x-renderer.status>"),
+                                'cell_class' =>  'text-'. $libStatus['text_color'],
+                            ];
+                        }
                 }
                 $f = str_replace('name', 'desc', $field);
                 $cellTitle = isset($values[$f]) && !is_null($values[$f]) ? $values[$f] : 'Id: ' . $values[str_replace('name', 'id', $field)];
@@ -64,7 +65,7 @@ trait TraitUpdateBasicInfoDataSource
         ] + $fieldInputs;
         $attrib = [];
         foreach ($dataSource as $key => &$values) {
-            if($key === 'tableDataSource') {
+            // if($key === 'tableDataSource') {
                 if (isset($dataSet[$key])) $attrib = $dataSet[$key];
                 if (($values instanceof Collection)) {
                     foreach ($values as $k => &$item) {
@@ -75,9 +76,11 @@ trait TraitUpdateBasicInfoDataSource
                     $values = self::updateFieldsStatusAndValues($values, $fields, $attrib);
                 }
                 $dataSource[$key] = $values;
-            };
+
+            // };
 
         }
+        // dd($dataSet, $dataSource);
         return $dataSource;
     }
 }
