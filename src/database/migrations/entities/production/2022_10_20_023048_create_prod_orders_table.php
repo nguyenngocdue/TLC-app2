@@ -43,7 +43,7 @@ return new class extends Migration
             $table->unsignedInteger('no_of_ph_days')->nullable();
             $table->unsignedInteger('total_days_no_sun_no_ph')->nullable();
             $table->unsignedInteger('total_days_have_ts')->nullable();
-            $table->unsignedInteger('total_discrepancy_days')->nullable();
+            $table->integer('total_discrepancy_days')->nullable();
 
             $table->appendCommonFields();
         });

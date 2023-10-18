@@ -28,6 +28,7 @@ class Prod_sequence extends ModelExtended
 
         "getProdRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
+        "getProdRoutingDetail" => ['belongsTo', Prod_routing_detail::class, "prod_routing_id", "prod_routing_id"],
 
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getProdRouting" => ['belongsTo', Prod_routing::class, "prod_routing_id"],
@@ -129,6 +130,15 @@ class Prod_sequence extends ModelExtended
         }
         return $relation;
     }
+
+    public function getProdRoutingDetail()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3])
+            ->where('prod_routing_link_id', $this->prod_routing_link_id);
+        return $relation;
+    }
+
 
     public function getManyLineParams()
     {

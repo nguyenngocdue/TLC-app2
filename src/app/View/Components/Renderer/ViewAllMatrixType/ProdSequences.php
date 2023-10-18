@@ -227,7 +227,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             'started_at' => substr($started_at, 0, 10),
             'finished_at' => $finished_at,
             // 'finished_at' => ($y->status === 'finished') ? substr($finished_at, 0, 10) : "",
-            'total_calendar_days' => $y->finished_at ? Carbon::parse($y->finished_at)->diffInDays($y->started_at) : "",
+            'total_calendar_days' => $y->finished_at ? 1 + Carbon::parse($y->finished_at)->diffInDays($y->started_at) : "",
 
             'net_working_days' => number_format($y->total_hours / 8, 2),
             'total_man_hours' => number_format($y->total_man_hours, 2),
