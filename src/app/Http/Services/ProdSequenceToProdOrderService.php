@@ -86,6 +86,7 @@ class ProdSequenceToProdOrderService
             return in_array($value, ['finished', 'not_applicable', 'cancelled']);
         });
 
+        $sheet_count = $allProdSequences->count();
         $total_calendar_days = Carbon::parse($minStartedAt)->diffInDays($maxFinishedAt) + 1;
         $allSundays = $this->getAllSundays($minStartedAt, $maxFinishedAt);
         $allPhDays = $this->getAllPhDays($minStartedAt, $maxFinishedAt);
@@ -98,6 +99,8 @@ class ProdSequenceToProdOrderService
             'total_hours' => $totalHours,
             'total_man_hours' => $totalManHours,
 
+            'sheet_count' => $sheet_count,
+            'total_calendar_days' => $total_calendar_days,
             'no_of_sundays' => $allSundays,
             'no_of_ph_days' => $allPhDays,
             'total_days_no_sun_no_ph' => $total_days_no_sun_no_ph,

@@ -39,6 +39,8 @@ return new class extends Migration
             $table->double('total_hours')->nullable();
             $table->double('total_man_hours')->nullable();
 
+            $table->unsignedInteger('sheet_count')->nullable();
+            $table->unsignedInteger('total_calendar_days')->nullable();
             $table->unsignedInteger('no_of_sundays')->nullable();
             $table->unsignedInteger('no_of_ph_days')->nullable();
             $table->unsignedInteger('total_days_no_sun_no_ph')->nullable();
