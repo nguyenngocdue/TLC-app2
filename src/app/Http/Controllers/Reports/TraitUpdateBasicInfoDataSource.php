@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 
@@ -15,15 +16,14 @@ trait TraitUpdateBasicInfoDataSource
         $fields = array_intersect($fields, array_keys((array)$values));
         foreach ($fields as $field) {
             if (isset($values[$field])) {
-                if(str_contains($field, 'status')){
+                if (str_contains($field, 'status')) {
                     $statusName = $values[$field];
+                    if (is_array($statusName)) continue;
                     $libStatus = LibStatuses::getAll()[$statusName];
                     $values[$field] = (object) [
                         'value' => Blade::render("<x-renderer.status>" . $libStatus['name'] . "</x-renderer.status>"),
-                        'cell_class' =>  'text-'. $libStatus['text_color'],
+                        'cell_class' =>  'text-' . $libStatus['text_color'],
                     ];
-                    // dd($libStatus, $values, $field);
-
                     continue;
                 }
                 $f = str_replace('name', 'desc', $field);
@@ -64,20 +64,22 @@ trait TraitUpdateBasicInfoDataSource
         ] + $fieldInputs;
         $attrib = [];
         foreach ($dataSource as $key => &$values) {
-            if($key === 'tableDataSource') {
-                if (isset($dataSet[$key])) $attrib = $dataSet[$key];
-                if (($values instanceof Collection)) {
-                    foreach ($values as $k => &$item) {
-                        $item = self::updateFieldsStatusAndValues($item, $fields, $attrib);
-                        $values[$k] = $item;
-                    }
-                } else {
-                    $values = self::updateFieldsStatusAndValues($values, $fields, $attrib);
+            // if($key === 'tableDataSource') {
+            if (isset($dataSet[$key])) $attrib = $dataSet[$key];
+            if (($values instanceof Collection)) {
+                foreach ($values as $k => &$item) {
+                    $item = self::updateFieldsStatusAndValues($item, $fields, $attrib);
+                    $values[$k] = $item;
                 }
-                $dataSource[$key] = $values;
-            };
+            } else {
+                $values = self::updateFieldsStatusAndValues($values, $fields, $attrib);
+            }
+            $dataSource[$key] = $values;
+
+            // };
 
         }
+        // dd($dataSet, $dataSource);
         return $dataSource;
     }
 }
