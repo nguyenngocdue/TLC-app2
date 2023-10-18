@@ -16,16 +16,15 @@ trait TraitUpdateBasicInfoDataSource
         $fields = array_intersect($fields, array_keys((array)$values));
         foreach ($fields as $field) {
             if (isset($values[$field])) {
-                if(str_contains($field, 'status')){
+                if (str_contains($field, 'status')) {
                     $statusName = $values[$field];
-                    if(is_array($statusName)) continue;
-                        if(isset(LibStatuses::getAll()[$statusName])){
-                            $libStatus = LibStatuses::getAll()[$statusName];
-                            $values[$field] = (object) [
-                                'value' => Blade::render("<x-renderer.status>" . $libStatus['name'] . "</x-renderer.status>"),
-                                'cell_class' =>  'text-'. $libStatus['text_color'],
-                            ];
-                        }
+                    if (is_array($statusName)) continue;
+                    $libStatus = LibStatuses::getAll()[$statusName];
+                    $values[$field] = (object) [
+                        'value' => Blade::render("<x-renderer.status>" . $libStatus['name'] . "</x-renderer.status>"),
+                        'cell_class' =>  'text-' . $libStatus['text_color'],
+                    ];
+                    continue;
                 }
                 $f = str_replace('name', 'desc', $field);
                 $cellTitle = isset($values[$f]) && !is_null($values[$f]) ? $values[$f] : 'Id: ' . $values[str_replace('name', 'id', $field)];
@@ -66,16 +65,16 @@ trait TraitUpdateBasicInfoDataSource
         $attrib = [];
         foreach ($dataSource as $key => &$values) {
             // if($key === 'tableDataSource') {
-                if (isset($dataSet[$key])) $attrib = $dataSet[$key];
-                if (($values instanceof Collection)) {
-                    foreach ($values as $k => &$item) {
-                        $item = self::updateFieldsStatusAndValues($item, $fields, $attrib);
-                        $values[$k] = $item;
-                    }
-                } else {
-                    $values = self::updateFieldsStatusAndValues($values, $fields, $attrib);
+            if (isset($dataSet[$key])) $attrib = $dataSet[$key];
+            if (($values instanceof Collection)) {
+                foreach ($values as $k => &$item) {
+                    $item = self::updateFieldsStatusAndValues($item, $fields, $attrib);
+                    $values[$k] = $item;
                 }
-                $dataSource[$key] = $values;
+            } else {
+                $values = self::updateFieldsStatusAndValues($values, $fields, $attrib);
+            }
+            $dataSource[$key] = $values;
 
             // };
 
