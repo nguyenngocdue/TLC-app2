@@ -6,7 +6,10 @@ use App\BigThink\ModelExtended;
 
 class Kanban_task_group extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'description', 'status', 'owner_id', "kanban_cluster_id",];
+    protected $fillable = [
+        'id', 'name', 'description', 'status', 'owner_id', "kanban_cluster_id",
+        // "time_keeping_type",
+    ];
 
     public static $eloquentParams = [
         "getParent" => ["belongsTo", Kanban_task_cluster::class, "kanban_cluster_id"],

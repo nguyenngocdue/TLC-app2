@@ -24,7 +24,9 @@ class Page extends Component
                 $query->orderBy('order_no');
 
                 $query->with(["getTasks" => function ($query) {
-                    $query->orderBy('order_no');
+                    $query
+                        ->with('getElapsed')
+                        ->orderBy('order_no');
                 }]);
             }])
             ->orderBy('order_no')

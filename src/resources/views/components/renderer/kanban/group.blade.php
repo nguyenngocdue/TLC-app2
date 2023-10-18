@@ -12,7 +12,7 @@
 
 <div id="group_parent_{{$group->id}}" data-id="group_{{$group->id}}" class="m-1 bg-gray-200 p-2 rounded">
     <h2 id="lbl_group_{{$group->id}}" class="text-xs font-bold my-2 cursor-pointer">
-        <span id="caption_group_{{$group->id}}" title="{{$title}}" onclick="onClickToEdit({{$group->id}},'lbl_group', 'txt_group')">{{$group->name}}</span>
+        <span id="caption_group_{{$group->id}}" title="{{$title}}" onclick="onClickToEdit({{$group->id}},'lbl_group', 'txt_group')">{{$group->name}} (#{{$group->id}})</span>
         <button class="fa-duotone fa-ellipsis {{App\Utils\ClassList::BUTTON_KANBAN_ELLIPSIS}}" @click="toggleModal('{{$modalId}}', {id: {{$group->id}}})" @keydown.escape="closeModal('{{$modalId}}')" ></button>
     </h2>
     <input id="txt_group_{{$group->id}}" value="{{$group->name}}" class="{{$classGroup}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$group->id}},'lbl_group','txt_group','caption_group', route_group)">
