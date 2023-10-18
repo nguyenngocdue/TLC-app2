@@ -8,7 +8,7 @@
         "section_title": "Carbon Report",
         "widget_title": "by Employee",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": null
+        "dimensions": "{}"
     },
     "carbon_footprint_2": {
         "name": "carbon_footprint_2",
@@ -19,7 +19,7 @@
         "section_title": "Carbon Report",
         "widget_title": "by Emission",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": null
+        "dimensions": "{}"
     },
     "carbon_footprint_3": {
         "name": "carbon_footprint_3",
@@ -30,51 +30,51 @@
         "section_title": "Carbon Report",
         "widget_title": "by Year",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": null
+        "dimensions": "{}"
     },
     "ncr_parent_type": {
         "name": "ncr_parent_type",
         "report_name": "document-ghg_sheet_030",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": null,
+        "fn": "SqlForeignKey",
         "section_title": null,
         "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Count of Source Form\",\r\n\"displayTitleChart\":1\r\n}"
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Count of Source Form\",\r\n\"displayTitleChart\":0\r\n}"
     },
     "ncr_priority": {
         "name": "ncr_priority",
         "report_name": "document-qaqc_ncr_010",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": null,
+        "fn": "SqlForeignKey",
         "section_title": null,
         "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"Priority of Open Issues\",\r\n\"displayTitleChart\":1,\r\n\"tooltipLabel\": \"Count\"\r\n}"
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Priority of Open Issues\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
     },
     "ncr_report_type": {
         "name": "ncr_report_type",
         "report_name": "document-qaqc_ncr_010",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": null,
+        "fn": "SqlForeignKey",
         "section_title": null,
         "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Count of Report Type\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\": \"bottom\"\r\n}"
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Count of Report Type\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\": \"bottom\"\r\n}"
     },
     "ncr_severity": {
         "name": "ncr_severity",
         "report_name": "document-qaqc_ncr_010",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": null,
+        "fn": "SqlForeignKey",
         "section_title": null,
         "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Severity of Open Issues\",\r\n\"displayTitleChart\":1\r\n}"
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"height\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Severity of Open Issues\",\r\n\"displayTitleChart\":0,\r\n\"displayDatalabel\":1\r\n}"
     },
     "ncr_status": {
         "name": "ncr_status",
@@ -85,17 +85,17 @@
         "section_title": "(TEST)",
         "widget_title": "by Status",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"scaleMaxY\":100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"height\":400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"titleChart\": \"All Issues by Status\",\r\n\"displayTitleChart\":1,\r\n\"tooltipLabel\": \"Count\"\r\n}"
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"height\":400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"titleChart\": \"All Issues by Status\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
     },
     "ncr_user_team": {
         "name": "ncr_user_team",
         "report_name": "document-ghg_sheet_030",
         "hidden": null,
         "chart_type": "bar",
-        "fn": null,
+        "fn": "SqlForeignKey",
         "section_title": null,
         "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"scaleMaxY\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"User Team\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Count of Responsible Teams\",\r\n\"displayTitleChart\":1,\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"height\":400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"positionTitleChart\": \"bottom\"\r\n}"
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"User Team\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Count of Responsible Teams\",\r\n\"displayTitleChart\":0,\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"height\":400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"tooltipLabel\": \"abc\",\r\n\"positionTitleChart\": \"bottom\"\r\n}"
     }
 }

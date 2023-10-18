@@ -1,6 +1,10 @@
 @props(['chartType'])
 
-<div class="block"><canvas id="{{$key}}"></canvas></div>
+<div class="flex justify-center">
+	<div class="block w-[{{$dimensions['width']}}px] h-[{{$dimensions['width']}}px]">
+		<canvas id="{{$key}}"></canvas>
+	</div>
+</div>
 
 @dump($meta)
 {{-- @dump($metric) --}}

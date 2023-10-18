@@ -1,6 +1,9 @@
 @props(['chartType'])
-
-<div class="block"><canvas id="{{$key}}"></canvas></div>
+<div class="flex justify-center">
+	<div class="block w-[{{$dimensions['width']}}px] h-[{{$dimensions['width']}}px]">
+		<canvas id="{{$key}}"></canvas>
+	</div>
+</div>
 
 {{-- @dump($meta) --}}
 {{-- @dump($metric) --}}
@@ -8,9 +11,6 @@
 {{-- @dump($showValue) --}}
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-<script>
-const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00a950','#58595b','#8549ba'];
-</script>
 @endonce
 
 <script>
@@ -71,7 +71,7 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 					}
 			},
 			datalabels:{
-				display: '{{$showValue}}'*1 ?? 0,
+				display: 0,
 				anchor: 'end'
 				,align: 'start'
 				,color: 'white'

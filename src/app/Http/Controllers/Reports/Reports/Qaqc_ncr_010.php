@@ -96,13 +96,13 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 "title" => "Create Date",
                 "dataIndex" => "create_date",
                 "align" => "right",
-                "width" => 120,
+                "width" => 100,
             ],
             [
                 "title" => "Source Form",
                 "dataIndex" => "parent_type",
                 "align" => "left",
-                "width" => 120,
+                "width" => 80,
             ],
             [
                 "title" => "Doc ID",
@@ -114,7 +114,7 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 "title" => "Title",
                 "dataIndex" => "ncr_name",
                 "align" => "left",
-                "width" => 200,
+                "width" => 400,
             ],
             [
                 "title" => "Project",
@@ -144,7 +144,7 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 "title" => "Production Discipline",
                 "dataIndex" => "prod_discipline_name",
                 "align" => "left",
-                "width" => 250,
+                "width" => 180,
             ],
             [
                 "title" => "Responsible Team",
@@ -162,7 +162,7 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 "title" => "Due Date",
                 "dataIndex" => "due_date",
                 "align" => "right",
-                "width" => 140,
+                "width" => 100,
             ],
             [
                 "title" => "Root Cause",
@@ -174,37 +174,37 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 "title" => "Disposition",
                 "dataIndex" => "disposition_name",
                 "align" => "left",
-                "width" => 150,
+                "width" => 100,
             ],
             [
                 "title" => "Severity",
                 "dataIndex" => "severity_name",
                 "align" => "left",
-                "width" => 150,
+                "width" => 100,
             ],
             [
                 "title" => "Report Type",
                 "dataIndex" => "report_type_name",
                 "align" => "left",
-                "width" => 150,
+                "width" => 100,
             ],
             [
                 "title" => "Qty Manpower",
                 "dataIndex" => "qty_man_power",
                 "align" => "right",
-                "width" => 150,
+                "width" => 100,
             ],
             [
                 "title" => "Hour/Man",
                 "dataIndex" => "hour_per_man",
                 "align" => "right",
-                "width" => 120,
+                "width" => 100,
             ],
             [
                 "title" => "Total Hours",
                 "dataIndex" => "total_hour",
                 "align" => "right",
-                "width" => 120,
+                "width" => 100,
             ],
             [
                 "title" => "Status",
@@ -216,7 +216,7 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 "title" => "Closed Date",
                 "dataIndex" => "closed_at",
                 "align" => "right",
-                "width" => 150,
+                "width" => 100,
             ],
         ];
     }
