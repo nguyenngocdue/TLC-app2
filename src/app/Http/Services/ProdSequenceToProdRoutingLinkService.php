@@ -60,22 +60,28 @@ class ProdSequenceToProdRoutingLinkService
         $allSequences = $this->getAllRelevantSequences($params);
         // Log::info($allSequences[0]);
         $sheet_count = $allSequences->count();
-        $avg_man_power = $allSequences->avg(function ($item) {
-            return $item['worker_number'];
-        });
-        $avg_total_uom = $allSequences->avg(function ($item) {
-            return $item['total_uom'];
-        });
-        $avg_min = $allSequences->avg(function ($item) {
-            return $item['total_hours'] * 60;
-        });
+        // Log::info($sheet_count);
+        $avg_man_power = 0;
+        $avg_total_uom = 0;
+        $avg_min = 0;
+        if ($sheet_count) {
+            $avg_man_power = $allSequences->avg(function ($item) {
+                return $item['worker_number'];
+            });
+            $avg_total_uom = $allSequences->avg(function ($item) {
+                return $item['total_uom'];
+            });
+            $avg_min = $allSequences->avg(function ($item) {
+                return $item['total_hours'] * 60;
+            });
+        }
 
         $params = [
             "sheet_count" => $sheet_count,
             "avg_man_power" => round($avg_man_power, 2),
             "avg_total_uom" => round($avg_total_uom, 2),
             "avg_min" => round($avg_min, 2),
-            "avg_min_uom" => round($avg_min / $avg_total_uom, 2),
+            "avg_min_uom" => $avg_total_uom ? round($avg_min / $avg_total_uom, 2) : 0,
         ];
         $item->update($params);
         // Log::info($item);
