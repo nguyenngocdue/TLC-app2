@@ -416,8 +416,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             'actionBtnList' => $this->actionBtnList,
         ]);
         // dd($columns);
-        // dump($dataSource);
-
+        // dump($dataSource[0]);
 
         // dump($perPage);
         return view(

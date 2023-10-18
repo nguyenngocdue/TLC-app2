@@ -1,0 +1,178 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_position_prefix": {
+        "name": "_position_prefix",
+        "column_name": "position_prefix",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_position_1": {
+        "name": "_position_1",
+        "column_name": "position_1",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_position_2": {
+        "name": "_position_2",
+        "column_name": "position_2",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_position_3": {
+        "name": "_position_3",
+        "column_name": "position_3",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_getUsers": {
+        "name": "_getUsers",
+        "column_name": "getUsers",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_report_to": {
+        "name": "_report_to",
+        "column_name": "report_to",
+        "new": "",
+        "draft": "",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_report_to_1": {
+        "name": "_report_to_1",
+        "column_name": "report_to_1",
+        "new": "",
+        "draft": "",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_job_desc": {
+        "name": "_job_desc",
+        "column_name": "job_desc",
+        "new": "",
+        "draft": "",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_job_desc_1": {
+        "name": "_job_desc_1",
+        "column_name": "job_desc_1",
+        "new": "",
+        "draft": "",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_job_requirement": {
+        "name": "_job_requirement",
+        "column_name": "job_requirement",
+        "new": "",
+        "draft": "",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_job_requirement_1": {
+        "name": "_job_requirement_1",
+        "column_name": "job_requirement_1",
+        "new": "",
+        "draft": "",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "",
+        "draft": "true",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "",
+        "draft": "",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "",
+        "draft": "",
+        "pending_verification": "true",
+        "active": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "",
+        "draft": "",
+        "pending_verification": "",
+        "active": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "draft": "",
+        "pending_verification": "",
+        "active": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "draft": "",
+        "pending_verification": "",
+        "active": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "draft": "",
+        "pending_verification": "",
+        "active": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "draft": "",
+        "pending_verification": "",
+        "active": ""
+    }
+}

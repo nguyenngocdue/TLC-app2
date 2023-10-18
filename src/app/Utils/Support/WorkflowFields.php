@@ -182,7 +182,8 @@ class WorkflowFields
         // $realtime = $realtimes[$key] ?? [];
         // $result['realtimeType'] = $realtime["realtime_type"] ?? "";
         // $result['realtimeFn'] = $realtime["realtime_fn"] ?? "";
-        $result['iconJson'] = $columnType === 'json' ? '<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
+        $result['iconJson'] = $columnType === 'json' ? '(JSON)' : "";
+        // $result['iconJson'] = $columnType === 'json' ? '<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
 
         $typeWorkflow ?  self::followWorkflow($result, $prop, $defaultValue, $hidden, $readonly, $required) : self::noneFollowWorkflow($result, $prop, $defaultValue);
     }

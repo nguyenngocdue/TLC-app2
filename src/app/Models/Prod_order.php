@@ -11,7 +11,7 @@ class Prod_order extends ModelExtended
         "sub_project_id", "prod_routing_id", "status", "meta_type", "meta_id", "owner_id",
         "started_at", "finished_at", "total_hours", "total_man_hours", "room_type_id",
         "production_name", "compliance_name", "erp_name",
-        "no_of_sundays", "no_of_ph_days", "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
+        "sheet_count", "total_calendar_days", "no_of_sundays", "no_of_ph_days", "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
     ];
 
     protected $table = 'prod_orders';

@@ -8,9 +8,8 @@ class Prod_routing_detail extends ModelExtended
 {
     protected $fillable = [
         "id", "prod_routing_id", "prod_routing_link_id", "erp_routing_link_id",
-        "wir_description_id", "owner_id",
+        "wir_description_id", "owner_id", "priority", "order_no",
         "target_hours", "target_man_power", "target_man_hours", "target_min_uom",
-        "priority", "order_no",
     ];
     protected $table = "prod_routing_details";
     public static $nameless = true;

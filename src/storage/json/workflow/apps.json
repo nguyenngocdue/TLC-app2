@@ -1954,9 +1954,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null,
-        "hidden": "true",
-        "hidden_navbar": "true"
+        "icon": null
     },
     "user_position1": {
         "name": "user_position1",

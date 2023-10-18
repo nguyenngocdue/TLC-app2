@@ -1,0 +1,26 @@
+{
+    "new": {
+        "name": "new",
+        "label": "New",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "draft": {
+        "name": "draft",
+        "label": "Draft",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "label": "Verify by HR",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "active": {
+        "name": "active",
+        "label": "Active",
+        "tooltip": "",
+        "change_status_multiple": ""
+    }
+}
