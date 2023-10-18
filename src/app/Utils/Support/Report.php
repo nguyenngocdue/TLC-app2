@@ -69,6 +69,12 @@ class Report
         return $groupedArray;
     }
 
+    public static function countValuesInArray($dataSource){
+        $result = [];
+        foreach ($dataSource as $key => $data) $result[$key] = count($data);
+        return $result;
+    }
+
 
     public static function groupArrayByKey2($dataSource, $key, $returnKey, $returnValue)
     {

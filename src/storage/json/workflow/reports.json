@@ -48,6 +48,13 @@
         "top_title": null,
         "title": "Work Completion Percentage"
     },
+    "document-qaqc_ncr_010": {
+        "name": "document-qaqc_ncr_010",
+        "package_tab": "report",
+        "package": null,
+        "top_title": null,
+        "title": "NCR Report"
+    },
     "register-qaqc_insp_chklst_020": {
         "name": "register-qaqc_insp_chklst_020",
         "package_tab": "report",

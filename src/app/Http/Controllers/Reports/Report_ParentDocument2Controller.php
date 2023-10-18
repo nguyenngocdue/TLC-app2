@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Reports;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
+use App\Utils\Support\StringReport;
 use Exception;
 use Illuminate\Support\Str;
 
 abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 {
+	use TraitForwardModeReport;
 	//select date in document-prod_routing_010
 	protected function createManyParamsFromDates($params)
 	{
@@ -194,5 +196,42 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 		$groupByScope['total_emission'] = $totalEmission;
 		// dd($groupByScope);
 		return $groupByScope;
+	}
+
+	protected function makeDataChart($dataSource, $chartType, $dimensions, $key) {
+		$labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($dataSource));
+		$numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($dataSource));
+		$max = count(array_values($dataSource));
+		$count = count($dataSource);
+		$meta = [
+			'labels' => $labels,
+			'numbers' => $numbers,
+			'max' => $max,
+			'count' => $count
+		];
+		// information for metric data
+		$metric = [];
+		array_walk($dataSource, function ($value, $key) use (&$metric) {
+			return $metric[] = (object) [
+				'meter_id' => $key,
+				'metric_name' => $value
+			];
+		});
+
+		// related to dimensions AxisX and AxisY
+		$dimensions['height'] = $max/2*30;
+
+		// Set data for widget
+		$widgetData =  [
+			"title_a" => "title_a".$key,
+			"title_b" => "title_b",
+			'meta' => $meta,
+			'metric' => $metric,
+			'chartType' => $chartType,
+			'titleChart' => '',
+			'dimensions' => $dimensions,
+		];
+		$data['widget_'. $key] = $widgetData;
+		return $data;
 	}
 }

@@ -49,7 +49,6 @@ trait TraitUpdateBasicInfoDataSource
     protected function addTooltip($dataSource, $fieldInputs = [])
     {
         $dataSet = $this->getDisplayValueColumns();
-        // dump($dataSet);
         $fields = [
             'user_name',
             'project_name',
@@ -65,16 +64,19 @@ trait TraitUpdateBasicInfoDataSource
         ] + $fieldInputs;
         $attrib = [];
         foreach ($dataSource as $key => &$values) {
-            if (isset($dataSet[$key])) $attrib = $dataSet[$key];
-            if (($values instanceof Collection)) {
-                foreach ($values as $k => &$item) {
-                    $item = self::updateFieldsStatusAndValues($item, $fields, $attrib);
-                    $values[$k] = $item;
+            if($key === 'tableDataSource') {
+                if (isset($dataSet[$key])) $attrib = $dataSet[$key];
+                if (($values instanceof Collection)) {
+                    foreach ($values as $k => &$item) {
+                        $item = self::updateFieldsStatusAndValues($item, $fields, $attrib);
+                        $values[$k] = $item;
+                    }
+                } else {
+                    $values = self::updateFieldsStatusAndValues($values, $fields, $attrib);
                 }
-            } else {
-                $values = self::updateFieldsStatusAndValues($values, $fields, $attrib);
-            }
-            $dataSource[$key] = $values;
+                $dataSource[$key] = $values;
+            };
+
         }
         return $dataSource;
     }

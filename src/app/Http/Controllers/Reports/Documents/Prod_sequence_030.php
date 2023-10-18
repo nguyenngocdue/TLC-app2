@@ -195,7 +195,7 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                     'metric_name' => $value
                 ];
             });
-            // relate to dimensions AxisX and AxisY
+            // related to dimensions AxisX and AxisY
             $dimensions = [
                 'scaleMaxX' => 100,
                 'fontSize' => 14,

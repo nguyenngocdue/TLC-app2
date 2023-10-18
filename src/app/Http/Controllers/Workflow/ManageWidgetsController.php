@@ -92,6 +92,12 @@ class ManageWidgetsController extends AbstractManageLibController
                 'editable' => true,
                 "width" => 500,
             ],
+            [
+                'dataIndex' => "dimensions",
+                'renderer' => 'textarea4',
+                'editable' => true,
+                "width" => 500,
+            ],
         ];
     }
 }

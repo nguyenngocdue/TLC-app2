@@ -21,9 +21,11 @@ class StringReport
         if(!is_array($item)) return is_numeric($item) ?  $item : "'$item'";
         return $sign1 . implode(', ', array_map(function ($item) {
             if (is_object($item)){
-                if(is_numeric($item->value)) return "$item->value";
-                return "'$item->value'";
+                $val = ucfirst($item->value);
+                if(is_numeric($val)) return "$val";
+                return "'$val'";
             } else {
+                $item = ucfirst($item);
                 if(is_numeric($item)) return "$item";
                 return "'$item'"; 
             }

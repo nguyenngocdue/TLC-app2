@@ -7,7 +7,8 @@
         "fn": "SqlForeignKey",
         "section_title": "Carbon Report",
         "widget_title": "by Employee",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "dimensions": null
     },
     "carbon_footprint_2": {
         "name": "carbon_footprint_2",
@@ -17,7 +18,8 @@
         "fn": "SqlForeignKey",
         "section_title": "Carbon Report",
         "widget_title": "by Emission",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "dimensions": null
     },
     "carbon_footprint_3": {
         "name": "carbon_footprint_3",
@@ -27,216 +29,73 @@
         "fn": "SqlForeignKey",
         "section_title": "Carbon Report",
         "widget_title": "by Year",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "dimensions": null
     },
-    "chklst_01": {
-        "name": "chklst_01",
-        "report_name": null,
+    "ncr_parent_type": {
+        "name": "ncr_parent_type",
+        "report_name": "document-ghg_sheet_030",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": null,
+        "section_title": null,
+        "widget_title": null,
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Count of Source Form\",\r\n\"displayTitleChart\":1\r\n}"
+    },
+    "ncr_priority": {
+        "name": "ncr_priority",
+        "report_name": "document-qaqc_ncr_010",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": null,
+        "section_title": null,
+        "widget_title": null,
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"Priority of Open Issues\",\r\n\"displayTitleChart\":1,\r\n\"tooltipLabel\": \"Count\"\r\n}"
+    },
+    "ncr_report_type": {
+        "name": "ncr_report_type",
+        "report_name": "document-qaqc_ncr_010",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": null,
+        "section_title": null,
+        "widget_title": null,
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Count of Report Type\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\": \"bottom\"\r\n}"
+    },
+    "ncr_severity": {
+        "name": "ncr_severity",
+        "report_name": "document-qaqc_ncr_010",
+        "hidden": null,
+        "chart_type": "doughnut",
+        "fn": null,
+        "section_title": null,
+        "widget_title": null,
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Severity of Open Issues\",\r\n\"displayTitleChart\":1\r\n}"
+    },
+    "ncr_status": {
+        "name": "ncr_status",
+        "report_name": "document-qaqc_ncr_010",
         "hidden": null,
         "chart_type": "bar",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Inspection Checklists",
-        "widget_title": "by Status (Inspection Checksheet (ISC))",
-        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"id\", \"table_b\":\"qaqc_insp_chklsts\",\"key_b1\":\"prod_order_id\", \"att_metric_name\":\"status\", \"qaqc_insp_tmpl_id\":\"1\"}"
-    },
-    "chklst_02": {
-        "name": "chklst_02",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "bar",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Inspection Checklists",
-        "widget_title": "by Status (Shipping Delivery Checksheet - Module (SDCM))",
-        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"id\", \"table_b\":\"qaqc_insp_chklsts\",\"key_b1\":\"prod_order_id\", \"att_metric_name\":\"status\", \"qaqc_insp_tmpl_id\":\"2\"}"
-    },
-    "chklst_03": {
-        "name": "chklst_03",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "bar",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Inspection Checklists",
-        "widget_title": "by Status (Shipping Delivery Checksheet - Container (SDCC))",
-        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"id\", \"table_b\":\"qaqc_insp_chklsts\",\"key_b1\":\"prod_order_id\", \"att_metric_name\":\"status\", \"qaqc_insp_tmpl_id\":\"3\"}"
-    },
-    "chklst_04": {
-        "name": "chklst_04",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "bar",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Inspection Checklists",
-        "widget_title": "by Status (Test Inspection Checksheet (TEST))",
-        "params": "{\"table_a\":\"prod_orders\", \"key_a1\":\"sub_project_id\", \"key_a2\":\"id\", \"table_b\":\"qaqc_insp_chklsts\",\"key_b1\":\"prod_order_id\", \"att_metric_name\":\"status\", \"qaqc_insp_tmpl_id\":\"4\"}"
-    },
-    "prod_order_routing": {
-        "name": "prod_order_routing",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "bar",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Production Orders",
-        "widget_title": "by Routing",
-        "params": "{\"table_a\":\"prod_orders\",\"key_a1\":\"sub_project_id\",\"key_a2\":\"prod_routing_id\", \"table_b\":\"prod_routings\" ,\"key_b1\":\"id\", \"att_metric_name\":\"name\"}"
-    },
-    "prod_order_status": {
-        "name": "prod_order_status",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "bar",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Production Orders",
+        "fn": "SqlStatus",
+        "section_title": "(TEST)",
         "widget_title": "by Status",
-        "params": "{\"table_a\":\"prod_orders\",\"key_a1\":\"sub_project_id\", \"att_metric_name\":\"status\"}"
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"scaleMaxY\":100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"height\":400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"titleChart\": \"All Issues by Status\",\r\n\"displayTitleChart\":1,\r\n\"tooltipLabel\": \"Count\"\r\n}"
     },
-    "qaqc_ncr_assignee": {
-        "name": "qaqc_ncr_assignee",
-        "report_name": null,
+    "ncr_user_team": {
+        "name": "ncr_user_team",
+        "report_name": "document-ghg_sheet_030",
         "hidden": null,
         "chart_type": "bar",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Assignee",
-        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"sub_project_id\",\"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name0\"}"
-    },
-    "qaqc_ncr_discipline": {
-        "name": "qaqc_ncr_discipline",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Discipline",
-        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"sub_project_id\",\"key_a2\":\"prod_discipline_id\", \"table_b\":\"prod_disciplines\", \"key_b1\":\"id\" , \"att_metric_name\":\"name\"}"
-    },
-    "qaqc_ncr_owner_id": {
-        "name": "qaqc_ncr_owner_id",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Creator",
-        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"sub_project_id\", \"key_a2\":\"owner_id\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name0\", \"global_filter\":\"b.resigned != true\"}"
-    },
-    "qaqc_ncr_report_type": {
-        "name": "qaqc_ncr_report_type",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Report Type",
-        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"sub_project_id\",\"key_a2\":\"defect_report_type\", \"table_b\":\"terms\", \"key_b1\":\"id\" , \"att_metric_name\":\"name\"}"
-    },
-    "qaqc_ncr_status": {
-        "name": "qaqc_ncr_status",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Non Conformance Reports",
-        "widget_title": "by Status",
-        "params": "{\"table_a\":\"qaqc_ncrs\",\"key_a1\":\"sub_project_id\", \"key_a2\":\"status\", \"att_metric_name\":\"status\"}"
-    },
-    "qaqc_wir_assignee": {
-        "name": "qaqc_wir_assignee",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Work Inspection Requests",
-        "widget_title": "by Assignee",
-        "params": "{\"table_a\":\"qaqc_wirs\",\"key_a1\":\"sub_project_id\", \"key_a2\":\"assignee_1\", \"table_b\":\"users\", \"key_b1\":\"id\" , \"att_metric_name\":\"name0\"}"
-    },
-    "qaqc_wir_status": {
-        "name": "qaqc_wir_status",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlForeignKeyWidget01",
-        "section_title": "Work Inspection Requests",
-        "widget_title": "by Status",
-        "params": "{\"table_a\":\"qaqc_wirs\", \"key_a1\":\"sub_project_id\",\"key_a2\":\"status\", \"att_metric_name\":\"status\"}"
-    },
-    "uom_01": {
-        "name": "uom_01",
-        "report_name": "document-prod_sequence_050",
-        "hidden": null,
-        "chart_type": "bar",
-        "fn": "SqlForeignKey",
-        "section_title": "UOM Chart",
-        "widget_title": "by Man-power",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
-    },
-    "users_1": {
-        "name": "users_1",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "pie",
-        "fn": "SqlForeignKey",
-        "section_title": "Users",
-        "widget_title": "by Workplace",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
-    },
-    "users_2": {
-        "name": "users_2",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "bar",
-        "fn": "SqlForeignKey",
-        "section_title": "Users",
-        "widget_title": "by Category",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"user_categories\", \"key_a\":\"category\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
-    },
-    "users_3": {
-        "name": "users_3",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
-        "section_title": "Users",
-        "widget_title": "by Type",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"user_types\", \"key_a\":\"user_type\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
-    },
-    "users_4": {
-        "name": "users_4",
-        "report_name": null,
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
-        "section_title": "Users",
-        "widget_title": "by Position 1",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"user_position1s\", \"key_a\":\"position_1\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
-    },
-    "users_5": {
-        "name": "users_5",
-        "report_name": null,
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
-        "section_title": "Users",
-        "widget_title": "by Position 2",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"user_position2s\", \"key_a\":\"position_2\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
-    },
-    "users_6": {
-        "name": "users_6",
-        "report_name": null,
-        "hidden": "true",
-        "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
-        "section_title": "Users",
-        "widget_title": "by Position 3",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"user_disciplines\", \"key_a\":\"discipline\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
-    },
-    "users_7": {
-        "name": "users_7",
-        "report_name": null,
-        "hidden": null,
-        "chart_type": "line",
-        "fn": "SqlForeignKey",
-        "section_title": "Users",
-        "widget_title": "by Department",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"departments\", \"key_a\":\"department\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }"
+        "fn": null,
+        "section_title": null,
+        "widget_title": null,
+        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"scaleMaxY\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"User Team\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Count of Responsible Teams\",\r\n\"displayTitleChart\":1,\r\n\"indexAxis\":\"x\",\r\n\"width\": 400,\r\n\"height\":400,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"positionTitleChart\": \"bottom\"\r\n}"
     }
 }
