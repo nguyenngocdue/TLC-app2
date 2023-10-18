@@ -27,7 +27,7 @@
         "php": "^8.0.2",
         "brian2694/laravel-toastr": "^5.57",
         "darkaonline/l5-swagger": "^8.5",
-        "directorytree/ldaprecord-laravel": "^2.5.6",
+        "directorytree/ldaprecord-laravel": "^2.7.3",
         "doctrine/dbal": "^3.4",
         "fortune/font-beauty": "@dev",
         "fruitcake/laravel-cors": "^2.0.5",

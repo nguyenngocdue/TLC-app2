@@ -123,7 +123,7 @@ class AuthController extends Controller
     protected function credentials(Request $request)
     {
         return [
-            'mail' => $request->email,
+            'userprincipalname' => $request->email,
             'password' => $request->password,
             'fallback' => [
                 'email' => $request->email,
