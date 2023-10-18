@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -30,30 +31,19 @@ Route::group([
         // Route::resource('permissions2', App\Http\Controllers\Permission\Permission::class);
 
         Route::get('ldap-check-email',function(Request $request){
-            $credentials = [
-                'userprincipalname' => $request->email,
-                'password' => '123456789',
-                'fallback' => [
-                    'email' => $request->email,
-                    'password' => '123456789',
-                ],
-            ];
+            $emails = User::query()->where('email','LIKE','%@tlcmodular.com')->pluck('email');
             $query = (new LdapUserRepository('LdapRecord\Models\ActiveDirectory\User'))->query();
-            foreach ($credentials as $key => $value) {
-                if (Str::contains($key, ['password', 'fallback'])) {
-                    continue;
-                }
-                if (is_array($value) || $value instanceof Arrayable) {
-                    $query->whereIn($key, $value);
-                } else {
-                    // check faild password
-                    $query->where($key, $value);
+            $emailsNotFound = [];
+            foreach ($emails as $value) {
+                // check faild password
+                $query->where('userprincipalname', $value);
+                if (is_null($query->first())) {
+                    $emailsNotFound[] = $value;
                 }
             }
-            if (is_null($query->first())) {
-                return response()->json('Email Address not found');
-            }
-            return response()->json('Email Address:'.$request->email);
+            return response()->json([
+                'Email Not Found' => $emailsNotFound,
+            ]);
         });
     });
 });
