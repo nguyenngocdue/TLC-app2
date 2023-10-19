@@ -1,14 +1,17 @@
 @props(['chartType'])
-{{-- @dd($dimensions) --}}
-<div class="block"><canvas id="{{$key}}" width={{$dimensions['width'] ?? null}} height={{$dimensions['height'] ?? null}}></canvas></div>
+<div class="flex justify-center">
+	<div class="block">
+		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
+	</div>
+</div>
 
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-stacked100@1.0.0"></script>
-<script>
+{{-- <script>
 const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00a950','#58595b','#8549ba'];
-</script>
+</script> --}}
 @endonce
 
 <script>
@@ -17,12 +20,12 @@ var chartType = '{{$chartType}}';
 var chartData = {
     labels: {!! $meta['labels'] !!},
     numbers: {!! $meta['numbers'] !!},
-    backgroundColor: Object.values(COLORS)
 };
-
 
 var numColors = chartData.labels.length;
 var generatedColors = generateColors(numColors);
+//console.log(generatedColors);
+
 
 Chart.register(ChartDataLabels);
 Chart.register(ChartjsPluginStacked100.default);

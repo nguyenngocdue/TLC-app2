@@ -40,7 +40,7 @@ class PivotChart2 extends Component
 
         $labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($dataSource));
 		$numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($dataSource));
-		$max = count(array_values($dataSource));
+		$max = max(array_values($dataSource));
 		$count = count($dataSource);
 		$meta = [
 			'labels' => $labels,
@@ -68,7 +68,7 @@ class PivotChart2 extends Component
 		// Set data for widget
 		$widgetData =  [
 			"title_a" => "title_a".$key,
-			"title_b" => "title_b",
+			"title_b" => "title_b".$key,
 			'meta' => $meta,
 			'metric' => $metric,
 			'chartType' => $widgets['chart_type'],

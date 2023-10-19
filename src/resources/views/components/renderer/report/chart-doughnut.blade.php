@@ -1,7 +1,7 @@
 @props(['chartType'])
 <div class="flex justify-center">
-	<div class="block w-[{{$dimensions['width']}}px] h-[{{$dimensions['width']}}px]">
-		<canvas id="{{$key}}"></canvas>
+	<div class="block">
+		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
 </div>
 
@@ -10,7 +10,9 @@
 {{-- @dump($chartType) --}}
 {{-- @dump($showValue) --}}
 @once
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0/dist/chartjs-plugin-datalabels.js"></script>
 @endonce
 
 <script>
@@ -19,21 +21,19 @@
 	var chartData = {
 		labels: {!! $meta['labels'] !!},
 		numbers: {!! $meta['numbers'] !!},
-		backgroundColor: Object.values(COLORS)
 	};
 
 
 	var numColors = chartData.labels.length;
 	var generatedColors = generateColors(numColors);
 
-	Chart.register(ChartDataLabels);
-  // Create the Chart.js configuration
+	//Chart.register(ChartDataLabels);
+	// Create the Chart.js configuration
 	var chartConfig  = {
-		type: chartType,
+		type: 'doughnut',
 		data: {
 			labels: chartData.labels,
 			datasets: [{
-				label: "data",
 				data: chartData.numbers,
 				backgroundColor: generatedColors,
 			}]
@@ -71,7 +71,11 @@
 					}
 			},
 			datalabels:{
-				display: 0,
+				display: {!! $dimensions['displayTitleOnTopCol'] ? 'function(context) {
+                            return context.dataset.data[context.dataIndex] !== 0 
+                                    && context.dataset.data[context.dataIndex] !== "" 
+                                    && context.dataset.data[context.dataIndex] !== null;
+                        }' : 'false' !!},
 				anchor: 'end'
 				,align: 'start'
 				,color: 'white'
@@ -81,7 +85,10 @@
 				,borderRadius: 6
 				,font: {
 					size: 16
-				}
+				},
+				formatter: function(value, context) {
+                    return (value.toFixed(2));
+                }
 			}
 		}
 		}
@@ -89,6 +96,7 @@
 
   // Get the DOM element with the specified '{{$key}}' ID
   var chartElement = document.getElementById('{{$key}}');
+  console.log(chartElement);
 
   // Create a new Chart.js chart with the specified element and configuration
   new Chart(chartElement, chartConfig);

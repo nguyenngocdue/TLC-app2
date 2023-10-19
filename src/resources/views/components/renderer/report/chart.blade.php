@@ -54,7 +54,7 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 			backgroundColor: Object.values(COLORS)
 			});
 		}
-	//console.log(datasets)
+	//console.log(datasets.data)
 	Chart.register(ChartDataLabels);
   // Create the Chart.js configuration
 	var chartConfig  = {
