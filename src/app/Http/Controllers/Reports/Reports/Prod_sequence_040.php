@@ -17,9 +17,9 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
     use TraitForwardModeReport;
 
     protected $mode = '040';
-    protected $projectId = 5;
-    protected $subProjectId = 21;
-    protected $prodRoutingId = 2;
+    protected $projectId = 8;
+    protected $subProjectId = 107;
+    protected $prodRoutingId = 49;
     protected $tableTrueWidth = true;
     protected $maxH = 30;
     protected $typeView = 'report-pivot';
@@ -43,11 +43,16 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
         
         // dd($valOfParams, $params);
         $sql = "SELECT 
+                        DATE_FORMAT(SUBSTR(po.started_at, 1, 10), '%d/%m/%Y') AS started_at_prod_order,
+                        DATE_FORMAT(SUBSTR(po.finished_at, 1, 10), '%d/%m/%Y') AS finished_at_prod_order,
                         sp.project_id AS project_id
+                        ,pj.name AS project_name
                         ,sp.id AS sub_project_id
                         ,sp.name AS sub_project_name
                         ,po.id AS prod_order_id
                         ,po.name AS prod_order_name
+                        ,po.production_name AS production_name
+                        ,po.quantity AS prod_order_quantity
                         ,prl.id AS prod_routing_link_id
                         ,prl.name AS prod_routing_link_name
                         ,pr.id AS prod_routing_id    
@@ -57,14 +62,15 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                         #,pose.total_hours AS total_hours
                         ,pd.id AS prod_discipline_id
                         ,pd.name AS prod_discipline_name
-                        ,null AS total_calendar_days
-                        ,null AS independent_holiday_sunday_day
-                        ,null AS net_working_day
-                        ,null AS downtime_day
-
-                    FROM sub_projects sp
+                        ,po.total_calendar_days AS total_calendar_days
+                        ,po.total_days_no_sun_no_ph AS independent_holiday_sunday_day
+                        ,po.total_hours*60 AS net_working_day
+                        ,po.total_days_have_ts AS total_days_have_ts
+                        ,po.total_discrepancy_days AS total_discrepancy_days";
+                    $sql .= "\n FROM sub_projects sp
                     JOIN prod_orders po ON po.sub_project_id = sp.id
                     LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
+                    LEFT JOIN projects pj ON sp.project_id = pj.id
 
 
                     LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
@@ -79,17 +85,21 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                         AND sp.id = {{sub_project_id}}";
         if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
         if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
-        if (isset($params['status'])) $sql .= "\n  AND pose.status IN ({{status}})";
+        #if (isset($params['status'])) $sql .= "\n  AND pose.status IN ({{status}})";
         if (isset($params['prod_discipline_id'])) $sql .= "\n  AND prl.prod_discipline_id = ({{prod_discipline_id}})";
-        elseif (!isset($params['status'])) $sql .= "\n AND pose.status IN ('in_progress', 'finished', 'on_hold')";
-
-        $sql .= "\n     AND po.status IN ('in_progress', 'finished', 'on_hold')
+        elseif (!isset($params['status'])) $sql .= "\n AND po.status IN ('in_progress', 'finished', 'on_hold')";
+        if(isset($params['status'])){
+            foreach ($params['status'] as $status) {
+                $sql .= "\n AND po.status = '$status'";
+            }
+        }
+        $sql .= "\n
                         AND  SUBSTR(pru.date, 1, 10) >= '{$valOfParams["picker_date"]["start"]}'
                         AND  SUBSTR(pru.date, 1, 10) <= '{$valOfParams["picker_date"]["end"]}'
                         AND pose.deleted_by IS NULL";
 
-        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id = {{prod_routing_link_id}}";
-        $sql .= "\n GROUP BY project_id, sub_project_name, prod_order_id, prod_order_name, sub_project_id,prod_routing_link_id,pru.worker_number
+        // if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id = {{prod_routing_link_id}}";
+        $sql .= "\n GROUP BY project_id, sub_project_name, prod_order_id, prod_order_name, sub_project_id,prod_routing_link_id
                     ORDER BY sub_project_name, prod_order_name";
         return $sql;
     }
@@ -99,7 +109,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
         $params['picker_date'] =DateReport::defaultPickerDate();
         $params['project_id'] = $this->projectId;
         $params['sub_project_id'] = $this->subProjectId;
-        $params['prod_routing_id'] = $this->prodRoutingId;
+        // $params['prod_routing_id'] = $this->prodRoutingId;
         $params['page_limit'] = $this->pageLimit;
         return $params;
     }
@@ -107,13 +117,6 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
     protected function getParamColumns($dataSource, $modeType)
     {
         return [
-            [
-                'title' => 'Date',
-                'dataIndex' => 'picker_date',
-                'renderer' => 'picker_date',
-                'singleDatePicker' => false,
-                'validation' => 'required|date_format:d/m/Y',
-            ],
             [
                 'title' => 'Project',
                 'dataIndex' => 'project_id',
@@ -136,27 +139,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                 'multiple' => true,
             ],
             [
-                'title' => 'Production Discipline',
-                'dataIndex' => 'prod_discipline_id',
-                'allowClear' => true,
-                // 'multiple' => true,
-            ],
-            [
-                'title' => 'Production Routing Link',
-                'dataIndex' => 'prod_routing_link_id',
-                'allowClear' => true,
-                'multiple' => true,
-                'hasListenTo' => true,
-
-            ],
-            // [
-            //     'title' => 'Status (for Production Order)',
-            //     'dataIndex' => 'status',
-            //     'allowClear' => true,
-            //     'multiple' => true,
-            // ],
-            [
-                'title' => 'Status (for Production Routing Link)',
+                'title' => 'Status',
                 'dataIndex' => 'status',
                 'allowClear' => true,
                 'multiple' => true,
@@ -169,75 +152,104 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
         return
             [
                 [
-                    "title" => "Sub Project",
-                    "dataIndex" => "sub_project_name",
+                    "title" => "Start",
+                    "dataIndex" => "started_at_prod_order",
                     "align" => "left",
                     "width" => 100,
                     'fixed' => 'left'
                 ],
                 [
-                    "title" => "Production Order",
-                    "dataIndex" => "prod_order_name",
+                    "title" => "Finish",
+                    "dataIndex" => "finished_at_prod_order",
                     "align" => "left",
                     "width" => 100,
-                    'fixed' => 'left',
+                    'fixed' => 'left'
                 ],
                 [
-                    "title" => "Status <br/> (Production Order)",
-                    "dataIndex" => "prod_order_status",
+                    "title" => "Project",
+                    "dataIndex" => "project_name",
                     "align" => "left",
                     "width" => 100,
-                    'fixed' => 'left',
+                    'fixed' => 'left'
+                ],
+                [
+                    "title" => "Sub Project",
+                    "dataIndex" => "sub_project_name",
+                    "align" => "left",
+                    "width" => 120,
+                    'fixed' => 'left'
                 ],
                 [
                     "title" => "Production Routing",
                     "dataIndex" => "prod_routing_name",
                     "align" => "left",
-                    "width" => 250,
-                    'fixed' => 'left',
-                ],
-                [
-                    "title" => "Discipline",
-                    "dataIndex" => "prod_discipline_name",
-                    "align" => "left",
                     "width" => 200,
                     'fixed' => 'left',
                 ],
                 [
-                    "title" => "Production Routing Link",
-                    "dataIndex" => "prod_routing_link_name",
+                    "title" => "Production Order",
+                    "dataIndex" => "prod_order_name",
                     "align" => "left",
-                    "width" => 300,
+                    "width" => 250,
+                    'fixed' => 'left',
+
                 ],
                 [
-                    "title" => "Status <br> (Production Routing Link)",
-                    "dataIndex" => "prod_sequence_status",
+                    "title" => "Production Order Name",
+                    "dataIndex" => "production_name",
                     "align" => "left",
-                    "width" => 100,
+                    "width" => 250,
+                    'fixed' => 'left',
+
+                ],
+                [
+                    "title" => "Status",
+                    "dataIndex" => "prod_order_status",
+                    "align" => "center",
+                    "width" => 150,
+                ],
+                
+                [
+                    "title" => "Quantity",
+                    "dataIndex" => "prod_order_quantity",
+                    "align" => "right",
+                    "width" => 150,
+                    "footer" => "agg_sum"
                 ],
                 [
                     "title" => "Total Calendar Days",
                     "dataIndex" => "total_calendar_days",
-                    "align" => "left",
-                    "width" => 300,
+                    "align" => "right",
+                    "width" => 150,
+                    "footer" => "agg_sum"
                 ],
                 [
-                    "title" => "Days <br/> (independent holiday and sunday)",
+                    "title" => "Non-Sunday & Non-Holiday Workdays",
                     "dataIndex" => "independent_holiday_sunday_day",
-                    "align" => "left",
-                    "width" => 300,
+                    "align" => "right",
+                    "width" => 150,
+                    "footer" => "agg_sum"
+                ],
+                [
+                    "title" => "Non-Stop Workdays",
+                    "dataIndex" => "total_days_have_ts",
+                    "align" => "right",
+                    "width" => 150,
+                    "footer" => "agg_sum"
                 ],
                 [
                     "title" => "Net Working Days",
                     "dataIndex" => "net_working_day",
-                    "align" => "left",
-                    "width" => 300,
+                    "align" => "right",
+                    "width" => 150,
+                    "footer" => "agg_sum"
                 ],
                 [
                     "title" => "Downtime Days",
-                    "dataIndex" => "downtime_day",
-                    "align" => "left",
-                    "width" => 300,
+                    "dataIndex" => "total_discrepancy_days",
+                    "align" => "right",
+                    "width" => 150,
+                    "footer" => "agg_sum"
                 ],
                
             ];
