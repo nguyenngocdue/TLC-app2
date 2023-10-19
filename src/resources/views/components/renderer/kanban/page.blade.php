@@ -25,3 +25,23 @@
         </div>
     </div>
 </x-renderer.card>
+
+@php
+    echo "<script>const currentElapsed = {};";
+    foreach($clusters as $cluster){
+        foreach($cluster->getGroups as $group){
+            echo "currentElapsed[$group->id]={};";
+        }
+        foreach($cluster->getGroups as $group){
+            foreach($group->getTasks as $task){
+                foreach($task->getElapsed as $elapsed){
+                    $elapsed_seconds = $elapsed->elapsed_seconds;
+                    $task_id = $elapsed->kanban_task_id;
+                    $group_id = $elapsed->kanban_group_id;
+                    echo "currentElapsed[$group_id][$task_id] = $elapsed_seconds;";
+                }
+            }
+        }
+    }
+    echo "</script>";
+@endphp

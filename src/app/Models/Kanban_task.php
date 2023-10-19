@@ -11,6 +11,7 @@ class Kanban_task extends ModelExtended
     public static $eloquentParams = [
         "getParent" => ["belongsTo", Kanban_task_group::class, "kanban_group_id"],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
+        "getElapsed" => ["hasMany", Kanban_task_elapse::class, "kanban_task_id"],
     ];
 
     public static $oracyParams = [
@@ -24,6 +25,12 @@ class Kanban_task extends ModelExtended
     }
 
     public function getAssignee1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getElapsed()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

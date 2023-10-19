@@ -49,7 +49,11 @@ trait TraitKanban
 		}
 		$item->{$category} = $newParentId;
 		$item->save();
-		return ResponseObject::responseSuccess([], [], "Updated");
+		return ResponseObject::responseSuccess([], [
+			'id' => $itemId,
+			'table' => $table,
+			'newParentId' => $newParentId,
+		], "Updated");
 	}
 
 	function changeOrder(Request $request)

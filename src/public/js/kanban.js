@@ -91,7 +91,7 @@ const getCharactersAfterLastUnderscore = (str) => {
 
 const onEnd = (e, url, category) => {
     const { from, to, item } = e
-    // console.log(e)
+    // console.log(e, url, category)
     if (from.id === to.id) return //<<Only change order, parent doesn't change
     // console.log(sortable[i].toArray())
     // console.log("ON END - To:", to.id, "itemId:", item.id, "Cat:", category)
@@ -102,7 +102,15 @@ const onEnd = (e, url, category) => {
         url,
         data: { action: "changeParent", category, itemId, newParentId },
         success: function (response) {
-            // toastr.success(response.message)
+            toastr.success(response.message)
+            // console.log(response)
+            const { meta } = response
+            switch (meta.table) {
+                case "kanban_tasks":
+                    // console.log(meta.newParentId)
+                    $("#taskParentId_" + meta.id).val(meta.newParentId)
+                    break;
+            }
         },
         error: onKanbanAjaxError,
     })

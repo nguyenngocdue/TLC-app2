@@ -70,7 +70,7 @@ return [
                 'sync_attributes' => [
                     // 'name' => 'cn', => login overwrite database
                     // 'full_name' => 'cn',
-                    'email' => 'mail',
+                    'email' => 'userprincipalname',
                     // 'first_name' => 'sn',
                     // 'last_name' => 'givenname',
                     // 'title' => 'title',
@@ -79,7 +79,7 @@ return [
                     // 'settings' => [],
                 ],
                 'sync_existing' => [
-                    'email' => 'mail',
+                    'email' => 'userprincipalname',
                 ],
                 'password_column' => 'password',
             ],
