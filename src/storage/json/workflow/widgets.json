@@ -41,7 +41,7 @@
         "section_title": null,
         "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"Count of Source Form\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
+        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"Count of Source Form\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
     },
     "ncr_priority": {
         "name": "ncr_priority",
@@ -85,7 +85,7 @@
         "section_title": "(TEST)",
         "widget_title": "by Status",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"All Issues by Status\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
+        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"All Issues by Status\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
     },
     "ncr_user_team": {
         "name": "ncr_user_team",
@@ -96,6 +96,6 @@
         "section_title": null,
         "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"titleX\" : \"User Team\",\r\n\"displayTitleX\": 0,\r\n\"titleY\" : \"Issues\",\r\n\"titleChart\": \"Count of Responsible Teams\",\r\n\"displayTitleChart\":0,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"positionTitleChart\": \"bottom\"\r\n}"
+        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"titleX\" : \"User Team\",\r\n\"displayTitleX\": 0,\r\n\"titleY\" : \"Issues (qty)\",\r\n\"titleChart\": \"Count of Responsible Teams\",\r\n\"displayTitleChart\":0,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"positionTitleChart\": \"bottom\"\r\n}"
     }
 }

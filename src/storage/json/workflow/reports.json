@@ -52,8 +52,8 @@
         "name": "document-qaqc_ncr_010",
         "package_tab": "report",
         "package": null,
-        "top_title": null,
-        "title": "NCR Report"
+        "top_title": "NCR Report in Chart",
+        "title": "NCR Report in Chart"
     },
     "register-qaqc_insp_chklst_020": {
         "name": "register-qaqc_insp_chklst_020",

@@ -87,7 +87,9 @@
 					size: 16
 				},
 				formatter: function(value, context) {
-                    return (value.toFixed(2));
+					var values = chartData.numbers;
+					var total = values.reduce(function(a, b) {return a + b;}, 0);
+                    return ((value*100/total).toFixed(2)) +"%";
                 }
 			}
 		}
@@ -96,7 +98,6 @@
 
   // Get the DOM element with the specified '{{$key}}' ID
   var chartElement = document.getElementById('{{$key}}');
-  console.log(chartElement);
 
   // Create a new Chart.js chart with the specified element and configuration
   new Chart(chartElement, chartConfig);

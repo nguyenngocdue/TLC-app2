@@ -54,12 +54,12 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                              <x-renderer.heading level=6 xalign='center' class='text-gray-600 font-semibold '>Count the number of issues based on <strong>statuses of the NCR</strong></x-renderer.heading>
                         </div>
                         <div class="flex flex-col justify-between">
-                            <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Count of Responsible Teams</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>All Issues by Responsible Teams</x-renderer.heading>
                             <x-renderer.report.pivot-chart2 key="ncr_user_team" :data="$widgets['ncr_user_team']" ></x-renderer.report.pivot-chart2>
                              <x-renderer.heading level=6 xalign='center' class='text-gray-600 font-semibold '>Count the number of issues based on <strong>user team NCR</strong></x-renderer.heading>
                         </div>
                         <div class="flex flex-col justify-between">
-                            <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Count of Source Form</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>All Issues of Source Form</x-renderer.heading>
                             <x-renderer.report.pivot-chart2 key="ncr_parent_type" :data="$widgets['ncr_parent_type']" ></x-renderer.report.pivot-chart2>
                              <x-renderer.heading level=6 xalign='center' class='text-gray-600 font-semibold '>Count the number of issues based on <strong>the type of other forms</strong></x-renderer.heading>
                         </div>
@@ -79,7 +79,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
                          <div class="p-6">
-                            <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Count of Report Type</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Type of Open Issues</x-renderer.heading>
                             <x-renderer.report.pivot-chart2 key="ncr_report_type" :data="$widgets['ncr_report_type']" ></x-renderer.report.pivot-chart2>
                             <x-renderer.heading level=6 xalign='center' class='text-gray-600 font-semibold '>Count the number of <strong>Report Type</strong></x-renderer.heading>
                         </div>

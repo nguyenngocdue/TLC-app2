@@ -193,18 +193,21 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 "dataIndex" => "qty_man_power",
                 "align" => "right",
                 "width" => 100,
+                "footer" => "agg_sum",
             ],
             [
                 "title" => "Hour/Man",
                 "dataIndex" => "hour_per_man",
                 "align" => "right",
                 "width" => 100,
+                "footer" => "agg_sum",
             ],
             [
                 "title" => "Total Hours",
                 "dataIndex" => "total_hour",
                 "align" => "right",
                 "width" => 100,
+                "footer" => "agg_sum",
             ],
             [
                 "title" => "Status",
