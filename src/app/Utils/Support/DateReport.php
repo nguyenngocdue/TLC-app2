@@ -72,11 +72,11 @@ class DateReport
                 if ($field === 'picker_date') {
                     $value = self::separateStrPickerDate($params[$field]);
                 } elseif ($field === 'status') {
-                    $value = StringReport::arrayToJsonWithSingleQuotes($params[$field], '', '');
+                    $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field]);
                 } elseif (is_array($params[$field])) {
-                    $value = StringReport::arrayToJsonWithSingleQuotes($params[$field], '', '');
+                    $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field]);
                 } else {
-                    $value = StringReport::arrayToJsonWithSingleQuotes($params[$field], '', '');
+                    $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field]);
                 }
             }
             $valParams[$field] = $value;

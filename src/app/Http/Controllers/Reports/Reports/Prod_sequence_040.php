@@ -29,17 +29,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
     // DataSource
     public function getSqlStr($params)
     {
-        $valOfParams = DateReport::createValueForParams([
-            'sub_project_id',
-            'project_id',
-            'prod_routing_id',
-            'prod_order_id',
-            'prod_routing_link_id',
-            'erp_routing_link_id',
-            'prod_discipline_id',
-            'picker_date',
-            'status',
-        ], $params);
+        $valOfParams = $this->generateValuesFromParamsReport($params);
         
         // dd($valOfParams, $params);
         $sql = "SELECT 
@@ -53,15 +43,9 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                         ,po.name AS prod_order_name
                         ,po.production_name AS production_name
                         ,po.quantity AS prod_order_quantity
-                        ,prl.id AS prod_routing_link_id
-                        ,prl.name AS prod_routing_link_name
                         ,pr.id AS prod_routing_id    
                         ,pr.name AS prod_routing_name    
                         ,po.status AS prod_order_status
-                        ,pose.status AS prod_sequence_status
-                        #,pose.total_hours AS total_hours
-                        ,pd.id AS prod_discipline_id
-                        ,pd.name AS prod_discipline_name
                         ,po.total_calendar_days AS total_calendar_days
                         ,po.total_days_no_sun_no_ph AS independent_holiday_sunday_day
                         ,po.total_hours*60 AS net_working_day
@@ -71,45 +55,24 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                     JOIN prod_orders po ON po.sub_project_id = sp.id
                     LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
                     LEFT JOIN projects pj ON sp.project_id = pj.id
-
-
-                    LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
-                    LEFT JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
-                    LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id AND prd.prod_routing_id = pr.id
-
-                    JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
-                    JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
-
                     WHERE 1 = 1
                         AND sp.project_id = '{{project_id}}'
                         AND sp.id = {{sub_project_id}}";
-        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
-        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
-        #if (isset($params['status'])) $sql .= "\n  AND pose.status IN ({{status}})";
-        if (isset($params['prod_discipline_id'])) $sql .= "\n  AND prl.prod_discipline_id = ({{prod_discipline_id}})";
+        if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
+        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id =  $sub";
+        if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
+        if ($prodOrder = $valOfParams['prod_order_id']) $sql .= "\n AND po.id IN ($prodOrder)";
+        if($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
         elseif (!isset($params['status'])) $sql .= "\n AND po.status IN ('in_progress', 'finished', 'on_hold')";
-        if(isset($params['status'])){
-            foreach ($params['status'] as $status) {
-                $sql .= "\n AND po.status = '$status'";
-            }
-        }
-        $sql .= "\n
-                        AND  SUBSTR(pru.date, 1, 10) >= '{$valOfParams["picker_date"]["start"]}'
-                        AND  SUBSTR(pru.date, 1, 10) <= '{$valOfParams["picker_date"]["end"]}'
-                        AND pose.deleted_by IS NULL";
-
-        // if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id = {{prod_routing_link_id}}";
-        $sql .= "\n GROUP BY project_id, sub_project_name, prod_order_id, prod_order_name, sub_project_id,prod_routing_link_id
-                    ORDER BY sub_project_name, prod_order_name";
+        $sql .= "\n ORDER BY sub_project_name, prod_order_name";
         return $sql;
     }
 
     protected function getDefaultValueParams($params, $request)
     {
-        $params['picker_date'] =DateReport::defaultPickerDate();
         $params['project_id'] = $this->projectId;
         $params['sub_project_id'] = $this->subProjectId;
-        // $params['prod_routing_id'] = $this->prodRoutingId;
+        $params['prod_routing_id'] = $this->prodRoutingId;
         $params['page_limit'] = $this->pageLimit;
         return $params;
     }
@@ -183,7 +146,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                     "title" => "Production Routing",
                     "dataIndex" => "prod_routing_name",
                     "align" => "left",
-                    "width" => 200,
+                    "width" => 250,
                     'fixed' => 'left',
                 ],
                 [
@@ -199,8 +162,6 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                     "dataIndex" => "production_name",
                     "align" => "left",
                     "width" => 250,
-                    'fixed' => 'left',
-
                 ],
                 [
                     "title" => "Status",

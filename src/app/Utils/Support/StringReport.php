@@ -31,4 +31,19 @@ class StringReport
             }
         }, $item)) . $sign2;
     }
+
+    public static function arrayToJsonWithSingleQuotes2($item)
+    {
+        if(!is_array($item)) return is_numeric($item) ?  $item : "'$item'";
+        return  implode(', ', array_map(function ($item){
+            if (is_object($item)){
+                $val =  $item->value;
+                if(is_numeric($val)) return "$val";
+                return "'$val'";
+            } else {
+                if(is_numeric($item)) return "$item";
+                return "'$item'"; 
+            }
+        }, $item));
+    }
 }
