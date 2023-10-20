@@ -341,28 +341,28 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                             "dataIndex" => "man_power",
                             "align" => "right",
                             "width" => 90,
-                            // "footer" => "agg_sum",
+                            "footer" => "agg_avg",
                         ],
                         [
                             "title" => $unit . "/Day <br/>(AVG)",
                             "dataIndex" => "total_uom",
                             "align" => "right",
                             "width" => 90,
-                            // "footer" => "agg_sum",
+                            "footer" => "agg_sum",
                         ],
                         [
                             "title" => "min/Day <br/>(AVG)",
                             "dataIndex" => "min_on_day",
                             "align" => "right",
                             "width" => 90,
-                            // "footer" => "agg_sum",
+                            "footer" => "agg_sum",
                         ],
                         [
                             "title" => "min/$unit <br/>(AVG)",
                             "dataIndex" => "min_on_set",
                             "align" => "right",
                             "width" =>  90,
-                            // "footer" => "agg_sum",
+                            "footer" => "agg_sum",
                         ]
                     ];
                 }

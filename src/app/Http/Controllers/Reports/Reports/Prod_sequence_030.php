@@ -208,21 +208,21 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     "title" => "Sub Project",
                     "dataIndex" => "sub_project_name",
                     "align" => "left",
-                    "width" => 100,
+                    "width" => 120,
                     'fixed' => 'left'
                 ],
                 [
                     "title" => "Production Order",
                     "dataIndex" => "prod_order_name",
                     "align" => "left",
-                    "width" => 100,
+                    "width" => 150,
                     'fixed' => 'left',
                 ],
                 [
                     "title" => "Status <br/> (Production Order)",
                     "dataIndex" => "prod_order_status",
-                    "align" => "left",
-                    "width" => 100,
+                    "align" => "center",
+                    "width" => 130,
                     'fixed' => 'left',
                 ],
                 [
@@ -249,8 +249,8 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                 [
                     "title" => "Status <br> (Production Routing Link)",
                     "dataIndex" => "prod_sequence_status",
-                    "align" => "left",
-                    "width" => 100,
+                    "align" => "center",
+                    "width" => 130,
                     'fixed' => 'left',
                 ],
                 [

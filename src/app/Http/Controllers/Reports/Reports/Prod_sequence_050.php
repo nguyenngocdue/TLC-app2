@@ -20,7 +20,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
     protected $projectId = 8;
     protected $subProjectId = 107;
     protected $prodRoutingId = 49;
-    protected $tableTrueWidth = false;
+    protected $tableTrueWidth = true;
     protected $maxH = 30;
     protected $typeView = 'report-pivot';
     protected $type = 'prod_sequence';
@@ -45,6 +45,8 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
                     ,FORMAT(IF(AVG(pose.worker_number),AVG(pose.worker_number), NULL),2) AS avg_man_power
                     ,FORMAT(IF(SUM(pose.total_hours)*AVG(pose.worker_number), SUM(pose.total_hours)*AVG(pose.worker_number), NULL),2) AS hours
                     ,SUM(DATEDIFF(pose.end_date, pose.start_date)) AS number_of_days_prod_routing_link
+                    ,DATE_FORMAT(SUBSTR(MIN(pose.start_date), 1, 10), '%d/%m/%Y') AS from_date
+                    ,DATE_FORMAT(SUBSTR(MAX(pose.end_date), 1, 10), '%d/%m/%Y') AS to_date
                     FROM sub_projects sp
                         JOIN prod_orders po ON po.sub_project_id = sp.id
                         LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
@@ -59,7 +61,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ($prl)";
         
-        if($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
+        // if($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
                             $sql .="\n AND pose.deleted_by IS NULL
                         GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id";
         return $sql;
@@ -94,22 +96,22 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
             ],
             [
                 'title' => 'Production Discipline',
-                'dataIndex' => 'prod_routing_id',
+                'dataIndex' => 'prod_discipline_id',
                 'hasListenTo' => true,
                 'allowClear' => true,
             ],
             [
                 'title' => 'Production Routing Link',
-                'dataIndex' => 'prod_order_id',
+                'dataIndex' => 'prod_routing_link_id',
                 'hasListenTo' => true,
                 'multiple' => true,
             ],
-            [
-                'title' => 'Status',
-                'dataIndex' => 'status',
-                'allowClear' => true,
-                'multiple' => true,
-            ],
+            // [
+            //     'title' => 'Status',
+            //     'dataIndex' => 'status',
+            //     'allowClear' => true,
+            //     'multiple' => true,
+            // ],
         ];
     }
 
@@ -118,22 +120,39 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
         return
             [
                 [
+                    "title" => "From Date",
+                    "dataIndex" => "from_date",
+                    "align" => "left",
+                    "width" => 100,
+                    'fixed' => 'left'
+                ],
+                [
+                    "title" => "To Date",
+                    "dataIndex" => "to_date",
+                    "align" => "left",
+                    "width" => 100,
+                    'fixed' => 'left'
+                ],
+                [
                     "title" => "Project",
                     "dataIndex" => "project_name",
                     "align" => "left",
                     "width" => 100,
+                    'fixed' => 'left'
                 ],
                 [
                     "title" => "Sub Project",
                     "dataIndex" => "sub_project_name",
                     "align" => "left",
                     "width" => 120,
+                    'fixed' => 'left'
                 ],
                 [
                     "title" => "Production Routing",
                     "dataIndex" => "prod_routing_name",
                     "align" => "left",
                     "width" => 250,
+                    'fixed' => 'left'
                 ],
                 [
                     "title" => "Production Discipline",
@@ -162,7 +181,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
                     "footer" => "agg_sum"
                 ],
                 [
-                    "title" => "Man Power<br/>(AVG)",
+                    "title" => "Man Power",
                     "dataIndex" => "avg_man_power",
                     "align" => "right",
                     "width" => 120,

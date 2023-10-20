@@ -324,9 +324,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
         $prodPouting = Prod_routing::find($params['prod_routing_id'] ?? $this->prodRoutingId)->name;
 
         $prodDiscipline = isset($params['prod_discipline_id']) ?
-            implode(', ', Prod_discipline::find($params['prod_discipline_id'])
-                ->pluck('name')
-                ->toArray()) :
+            Prod_discipline::find($params['prod_discipline_id'])->name:
             implode(', ', Prod_discipline::all()
                 ->pluck('name')
                 ->toArray());

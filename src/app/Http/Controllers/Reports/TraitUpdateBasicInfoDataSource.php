@@ -56,6 +56,7 @@ trait TraitUpdateBasicInfoDataSource
             'prod_order_name',
             'prod_routing_name',
             'prod_routing_link_name',
+            'prod_discipline_name',
             'department_name',
             'ecos_name',
             'prod_sequence_status',

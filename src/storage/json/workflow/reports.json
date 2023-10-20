@@ -171,9 +171,15 @@
         "name": "report-prod_sequence_040",
         "package_tab": "report",
         "package": null,
-        "top_title": null,
-        "title": null,
-        "hidden": "true"
+        "top_title": "Production Orders Duration Stats",
+        "title": "Production Orders Duration Stats"
+    },
+    "report-prod_sequence_050": {
+        "name": "report-prod_sequence_050",
+        "package_tab": "report",
+        "package": "project_management",
+        "top_title": "Production Routing Links Duration Stats",
+        "title": "Production Routing Links Duration Stats"
     },
     "report-prod_sequence_110": {
         "name": "report-prod_sequence_110",
