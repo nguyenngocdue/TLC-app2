@@ -125,7 +125,7 @@ $info = $tableDataSource['info'];
                 <div class=" grid-rows-1 pt-4 flex justify-center flex-col items-center">
                     <div class="w-full px-6">
                     {{-- @dump($pivotChart2) --}}
-                        {{-- <x-renderer.report.pivot-chart key="carbon_footprint_2" :dataSource="$pivotChart2"></x-renderer.report.pivot-chart> --}}
+                        <x-renderer.report.pivot-chart key="carbon_footprint_2" :dataSource="$pivotChart2"></x-renderer.report.pivot-chart>
                     </div>
                     <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold px-4'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']}}</strong> tCO2e. Indirect emissions from purchased energy
                         accounted for <strong>{{$info['indirect_emissions']}}</strong> tCO2e and other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']}}</strong> tCO2e.</x-renderer.heading>
