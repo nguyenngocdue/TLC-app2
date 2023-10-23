@@ -60,6 +60,7 @@ trait TraitUpdateBasicInfoDataSource
             'department_name',
             'ecos_name',
             'prod_sequence_status',
+            'sub_project_status',
             'prod_order_status',
             'ncr_status',
         ] + $fieldInputs;

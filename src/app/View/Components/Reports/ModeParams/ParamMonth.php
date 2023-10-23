@@ -2,9 +2,7 @@
 
 namespace App\View\Components\Reports\ModeParams;
 
-use App\View\Components\Reports\ParentParamReports;
 use App\View\Components\Reports\ParentTypeParamReport;
-use Illuminate\Support\Facades\DB;
 
 class ParamMonth extends ParentTypeParamReport
 {
