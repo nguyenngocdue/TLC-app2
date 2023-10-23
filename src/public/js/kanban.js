@@ -110,6 +110,7 @@ const onEnd = (e, url, category) => {
                 case "kanban_tasks":
                     // console.log(meta.newParentId)
                     $("#taskParentId_" + meta.id).val(meta.newParentId)
+                    $("#taskParentTimeCountingType_" + meta.id).val(meta.parentCountingType)
                     break;
             }
         },

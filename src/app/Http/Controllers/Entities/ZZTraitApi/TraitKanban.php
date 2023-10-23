@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Models\Kanban_task_group;
 use App\Models\Kanban_task_page;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
@@ -50,9 +51,12 @@ trait TraitKanban
 		}
 		$item->{$category} = $newParentId;
 
+		$parentCountingType = null;
 		if ($table == 'kanban_tasks') {
 			$newTransitionId = $this->setTransitionLog($item, $newParentId);
 			$item->kanban_task_transition_id = $newTransitionId;
+
+			$parentCountingType = Kanban_task_group::find($newParentId)->time_counting_type;
 		}
 
 		$item->save();
@@ -60,6 +64,7 @@ trait TraitKanban
 			'id' => $itemId,
 			'table' => $table,
 			'newParentId' => $newParentId,
+			'parentCountingType' => $parentCountingType,
 		], "Updated");
 	}
 
