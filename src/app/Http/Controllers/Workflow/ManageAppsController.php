@@ -32,6 +32,7 @@ class ManageAppsController extends AbstractManageLibController
                 "cbbDataSource" => ['', 'application', 'manage_admin',],
                 // "sortBy" => "value",
                 // "properties" => ["strFn" => "appTitle"],
+                'width' => 100,
             ],
             [
                 'dataIndex' => "package",
@@ -40,6 +41,7 @@ class ManageAppsController extends AbstractManageLibController
                 "cbbDataSource" => $packages,
                 // "sortBy" => "value",
                 "properties" => ["strFn" => "appTitle"],
+                'width' => 100,
             ],
             [
                 'dataIndex' => "sub_package",
@@ -53,6 +55,7 @@ class ManageAppsController extends AbstractManageLibController
                 'dataIndex' => 'title',
                 'renderer' => 'text4',
                 'editable' => true,
+                'width' => 200,
             ],
             [
                 'dataIndex' => 'nickname',
@@ -94,7 +97,7 @@ class ManageAppsController extends AbstractManageLibController
                     'qr-app-renderer',
                 ],
             ],
-            
+
             [
                 'dataIndex' => 'do_not_send_notification_mails',
                 'renderer' => 'checkbox',
