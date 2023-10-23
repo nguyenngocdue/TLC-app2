@@ -6,12 +6,15 @@ use App\BigThink\ModelExtended;
 
 class Kanban_task extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'description', 'status', 'owner_id', "kanban_group_id", 'assignee_1'];
+    protected $fillable = [
+        'id', 'name', 'description', 'status', 'owner_id',
+        "kanban_group_id", 'assignee_1', "kanban_task_transition_id"
+    ];
 
     public static $eloquentParams = [
         "getParent" => ["belongsTo", Kanban_task_group::class, "kanban_group_id"],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
-        "getElapsed" => ["hasMany", Kanban_task_elapse::class, "kanban_task_id"],
+        "getTransitions" => ["hasMany", Kanban_task_transition::class, "kanban_task_id"],
     ];
 
     public static $oracyParams = [
@@ -30,7 +33,7 @@ class Kanban_task extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getElapsed()
+    public function getTransitions()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

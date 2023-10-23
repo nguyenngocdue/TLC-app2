@@ -36,6 +36,7 @@
 
     const taskInterval = (taskId) => {
         const groupId = $("#taskParentId_" + taskId).val()
+        if(undefined === currentElapsed[groupId]) currentElapsed[groupId]={}
         if(!currentElapsed[groupId][taskId]) currentElapsed[groupId][taskId] = 0
         currentElapsed[groupId][taskId]++
         // console.log(taskId, currentElapsed[taskId])
