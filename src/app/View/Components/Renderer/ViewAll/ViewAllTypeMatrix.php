@@ -42,6 +42,8 @@ class ViewAllTypeMatrix extends Component
             case "prod_sequences":
                 if ($this->view == 'print') return Blade::render("<x-renderer.view-all-matrix-type.ProdSequencesPrint/>");
                 return Blade::render("<x-renderer.view-all-matrix-type.ProdSequences/>");
+            case "prod_orders":
+                return Blade::render("<x-renderer.view-all-matrix-type.ProdOrders/>");
             case "ghg_sheets":
                 return Blade::render("<x-renderer.view-all-matrix-type.GhgSheets/>");
             case "site_daily_assignments":
