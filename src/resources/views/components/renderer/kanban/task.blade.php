@@ -23,29 +23,6 @@
     </div>
 </div>
 
-@once
 <script>
-    const convertSecondsToTime = (seconds) => {
-        const hours = Math.floor(seconds / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
-        const remainingSeconds = seconds % 60;
-
-        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
-
-    }
-
-    const taskInterval = (taskId) => {
-        const groupId = $("#taskParentId_" + taskId).val()
-        if(undefined === currentElapsed[groupId]) currentElapsed[groupId]={}
-        if(!currentElapsed[groupId][taskId]) currentElapsed[groupId][taskId] = 0
-        currentElapsed[groupId][taskId]++
-        // console.log(taskId, currentElapsed[taskId])
-        const time = convertSecondsToTime(currentElapsed[groupId][taskId])
-        $('#elapse_'+taskId).html(time)
-    }
-</script>
-@endonce
-
-<script>
-    setInterval(() => taskInterval("{{$task->id}}"), 1000);
+    globalInterval.push(setInterval(() => taskInterval("{{$task->id}}"), 1000));
 </script>

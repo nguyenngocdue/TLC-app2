@@ -1,3 +1,4 @@
+const globalInterval = []
 const onKanbanAjaxError = (jqXHR) => toastr.error(jqXHR.responseJSON.message)
 
 const getChildPrefix = (prefix) => {
@@ -154,6 +155,9 @@ const kanbanLoadPage = (pageId, url, groupWidth) => {
     const beginWith = "bucket_"
     $("#txtCurrentPage").val(pageId);
     $("#divKanbanPage").slideUp("slow");
+
+    globalInterval.forEach((interval) => clearInterval(interval));
+    globalInterval.length = 0;
 
     const ids = []
     $("#toc_group_1").children().each((a, db0) => {

@@ -27,7 +27,7 @@
 </x-renderer.card>
 
 @php
-    echo "<script>const currentElapsed = {};";
+    echo "<script>";
     foreach($clusters as $cluster){
         foreach($cluster->getGroups as $group){
             echo "currentElapsed[$group->id]={};";
