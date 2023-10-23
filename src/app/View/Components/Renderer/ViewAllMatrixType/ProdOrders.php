@@ -94,7 +94,7 @@ class ProdOrders extends ViewAllTypeMatrixParent
         $data = Prod_routing::query();
         // if ($this->prodDiscipline) $data = $data->where('prod_discipline_id', $this->prodDiscipline);
         // if ($this->prodRoutingLink) $data = $data->whereIn('prod_routing_link_id', $this->prodRoutingLink);
-        $data = $data->get();
+        $data = $data->orderBy('name')->get();
         return $data;
     }
 
@@ -160,7 +160,18 @@ class ProdOrders extends ViewAllTypeMatrixParent
 
     function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false)
     {
-        if (count($cell) > 10) return  count($cell) . " items";
-        return parent::cellRenderer($cell, $dataIndex, $x, $y, $forExcel);
+        if (count($cell) > 10)
+            return "<div class='whitespace-nowrap'>(" . count($cell) . " items)</div>";
+
+        $result = [];
+        foreach ($cell as $prodOrder) {
+            $item = $prodOrder->name;
+            $result[] = "<li>" . $item . "</li>";
+        }
+        sort($result);
+        $ol = "<ol>" . join("", $result) . "</ol>";
+        $ol = "<div class='whitespace-nowrap'>$ol</div>";
+        return $ol;
+        // return parent::cellRenderer($cell, $dataIndex, $x, $y, $forExcel);
     }
 }
