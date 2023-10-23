@@ -36,14 +36,14 @@
             foreach($group->getTasks as $task){
                 $totalElapse = [];
                 foreach($task->getTransitions as $transition){
-                    $elapsed_seconds = $transition->elapsed_seconds ? $transition->elapsed_seconds : 0;
-                    if(!isset($totalElapse[$transition->kanban_group_id])){
-                        $totalElapse[$transition->kanban_group_id] = [];
+                    if($transition->elapsed_seconds){
+                        $elapsed_seconds = $transition->elapsed_seconds;
+                    } else {
+                        $elapsed_seconds = \Carbon\Carbon::now()->diffInSeconds($transition->start_at);
                     }
-                    if(!isset( $totalElapse[$transition->kanban_group_id][$transition->kanban_task_id]))
-                    {
-                        $totalElapse[$transition->kanban_group_id][$transition->kanban_task_id]=0;
-                    }
+
+                    if(!isset($totalElapse[$transition->kanban_group_id]))$totalElapse[$transition->kanban_group_id] = [];
+                    if(!isset( $totalElapse[$transition->kanban_group_id][$transition->kanban_task_id]))$totalElapse[$transition->kanban_group_id][$transition->kanban_task_id]=0;
                     $totalElapse[$transition->kanban_group_id][$transition->kanban_task_id] += $elapsed_seconds;
                     
                 }
