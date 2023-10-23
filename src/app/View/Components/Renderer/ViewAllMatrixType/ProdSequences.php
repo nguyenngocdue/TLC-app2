@@ -12,6 +12,7 @@ use App\Utils\Support\DateTimeConcern;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -43,8 +44,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
         parent::__construct();
         [$this->project, $this->subProject, $this->prodRouting, $this->prodRoutingLink, $this->prodDiscipline] = $this->getUserSettings();
         $this->project = $this->project ? $this->project : 5;
-        $this->subProject = $this->subProject ? $this->subProject : 21;
-        $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
+        $this->subProject = $this->subProject ? $this->subProject : null;
+        $this->prodRouting = $this->prodRouting ? $this->prodRouting : null;
         $this->prodRoutingLink = $this->prodRoutingLink ? $this->prodRoutingLink : [];
         // $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
         // dump($this->project, $this->subProject, $this->prodRouting);
@@ -104,6 +105,14 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected function getXAxis()
     {
         $result = [];
+        if (is_null($this->subProject)) {
+            echo Blade::render("<x-feedback.alert type='error' message='You must specify Sub-Project.'></x-feedback.alert>");
+            return [];
+        }
+        if (is_null($this->prodRouting)) {
+            echo Blade::render("<x-feedback.alert type='error' message='You must specify Prod Routing.'></x-feedback.alert>");
+            return [];
+        }
         $data = $this->getXAxisPrimaryColumns();
         // dump($data);
         $extraColumns = $this->getXAxisExtraColumns();
