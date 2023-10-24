@@ -21,6 +21,7 @@
 @once
 <script>
     const convertSecondsToTime = (seconds) => {
+        if(undefined === seconds) return "unknown";
         const hourPerDay = 8.5
         const days = Math.floor(seconds / (3600 * hourPerDay));
         const hours = Math.floor((seconds % (3600 * hourPerDay)) / 3600);
@@ -29,7 +30,7 @@
 
         let result = '';
         if (days > 0) {
-            result += `${days} days + `;
+            result += `${days} ${days==1?'day':'days'} + `;
         }
 
         result += `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;

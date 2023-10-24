@@ -16,6 +16,7 @@
         <input id="taskParentId_{{$task->id}}" class="bg-gray-300 rounded px-2" type="{{$hidden??"hidden"}}" value="{{$task->kanban_group_id}}"/>
         <input id="taskParentTimeCountingType_{{$task->id}}" class="bg-gray-300 rounded px-2" type="{{$hidden??"hidden"}}" value="{{$group->time_counting_type}}"/>
         <input id="taskParentPreviousGroupId_{{$task->id}}" class="bg-gray-300 rounded px-2" type="{{$hidden??"hidden"}}" value="{{$group->previous_group_id}}"/>
+        <input id="taskParentRectifiedGroupId_{{$task->id}}" class="bg-gray-300 rounded px-2" type="{{$hidden??"hidden"}}" value="{{$group->rectified_group_id}}"/>
         <input id="intervalId_{{$task->id}}" class="bg-gray-300 rounded px-2" type="{{$hidden??"hidden"}}"/>
         
         <div id="taskElapseTxt_{{$task->id}}"></div>

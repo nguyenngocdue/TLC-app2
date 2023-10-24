@@ -8,7 +8,7 @@ class Kanban_task_group extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'description', 'status', 'owner_id', "kanban_cluster_id",
-        "time_counting_type", "assignee_1", "previous_group_id",
+        "time_counting_type", "assignee_1", "previous_group_id", "rectified_group_id",
     ];
 
     public static $eloquentParams = [

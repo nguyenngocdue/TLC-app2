@@ -59,6 +59,7 @@ trait TraitKanban
 			$parent = Kanban_task_group::find($newParentId);
 			$parentCountingType = $parent->time_counting_type;
 			$parentPreviousGroupId = $parent->previous_group_id;
+			$parentRectifiedGroupId = $parent->rectified_group_id;
 		}
 
 		$item->save();
@@ -68,6 +69,7 @@ trait TraitKanban
 			'newParentId' => $newParentId,
 			'parentCountingType' => $parentCountingType,
 			'parentPreviousGroupId' => $parentPreviousGroupId,
+			'parentRectifiedGroupId' => $parentRectifiedGroupId,
 		], "Updated");
 	}
 
