@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 
 trait TraitKanbanTransition
 {
+	use TraitKanbanWorkingShift;
+
 	function leavingGroup($item)
 	{
 		$kanban_task_transition_id = $item->kanban_task_transition_id;
@@ -16,8 +18,14 @@ trait TraitKanbanTransition
 		$transition = Kanban_task_transition::find($kanban_task_transition_id);
 		if (is_null($transition)) return;
 		$transition->end_at = now();
-		$start_at = Carbon::parse($transition->start_at);
-		$transition->elapsed_seconds = Carbon::now()->diffInSeconds($start_at);
+		// $start_at = Carbon::parse($transition->start_at);
+		// $transition->elapsed_seconds = Carbon::now()->diffInSeconds($start_at);
+
+		$uid = $item->assignee_1;
+		['shift_seconds' => $elapse, 'non_shift_seconds' => $excluded] = $this->calculateShiftDurationByUser($transition->start_at, now(), $uid);
+		$transition->elapsed_seconds = $elapse;
+		$transition->excluded_seconds = $excluded;
+
 		$transition->save();
 	}
 
