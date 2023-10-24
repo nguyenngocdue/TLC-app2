@@ -14,6 +14,7 @@
         </h2>
         <input id="taskParentId_{{$task->id}}" class="bg-gray-300 rounded px-2" type="{{$hidden??"hidden"}}" value="{{$task->kanban_group_id}}"/>
         <input id="taskParentTimeCountingType_{{$task->id}}" class="bg-gray-300 rounded px-2" type="{{$hidden??"hidden"}}" value="{{$group->time_counting_type}}"/>
+        <input id="intervalId_{{$task->id}}" class="bg-gray-300 rounded px-2" type="{{$hidden??"hidden"}}"/>
         <div id="taskElapseTxt_{{$task->id}}"></div>
         <textarea id="txt_task_{{$task->id}}" value="{{$task->name}}" class="{{$classTask}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$task->id}},'lbl_task','txt_task','caption_task', route_task)">{{$task->name}}</textarea>
     </div>
@@ -25,5 +26,7 @@
 </div>
 
 <script>
-    globalInterval.push(setInterval(() => taskInterval("{{$task->id}}"), 1000));
+    intervalId = setInterval(() => taskInterval("{{$task->id}}"), 1000)
+    $("#intervalId_{{$task->id}}").val(intervalId)
+    globalInterval.push(intervalId)
 </script>

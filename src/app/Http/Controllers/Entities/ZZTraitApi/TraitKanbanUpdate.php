@@ -56,12 +56,13 @@ trait TraitKanbanUpdate
         $props = $this->getProps1();
 
         $item = $this->modelPath::find($id);
+        $table = $this->modelPath::getTableName();
         $item->update($input);
         $this->handleCheckboxAndDropdownMulti($request, $item, $props['oracy_prop']);
 
         $orderedItem = $this->getOrderedDataSource($id, $item);
         $renderer = $this->renderKanbanItem($orderedItem, $groupWidth);
 
-        return ResponseObject::responseSuccess(['renderer' => $renderer], [], "Updated");
+        return ResponseObject::responseSuccess(['renderer' => $renderer], ['table' => $table], "Updated");
     }
 }

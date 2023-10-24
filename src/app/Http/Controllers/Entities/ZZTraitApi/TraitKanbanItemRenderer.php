@@ -12,9 +12,11 @@ trait TraitKanbanItemRenderer
 		$renderer = "";
 		switch ($table) {
 			case 'kanban_tasks':
-				$renderer = Blade::render('<x-renderer.kanban.task :task="$task" groupWidth="{{$groupWidth}}"/>', [
+				$group = $insertedObj->getParent;
+				$renderer = Blade::render('<x-renderer.kanban.task :task="$task" :group="$group" groupWidth="{{$groupWidth}}"/>', [
 					'task' => $insertedObj,
 					'groupWidth' => $groupWidth,
+					'group' => $group,
 				]);
 				break;
 			case 'kanban_task_groups':
