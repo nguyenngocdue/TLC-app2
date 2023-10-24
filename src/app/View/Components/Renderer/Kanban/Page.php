@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 
 class Page extends Component
 {
-    private $debug = !false;
+    private $debug = false;
 
     function __construct(
         private $page = null,

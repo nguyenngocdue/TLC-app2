@@ -14,9 +14,7 @@
         </h2>
         <input id="taskParentId_{{$task->id}}" class="bg-gray-300 rounded px-2" type="{{$hidden??"hidden"}}" value="{{$task->kanban_group_id}}"/>
         <input id="taskParentTimeCountingType_{{$task->id}}" class="bg-gray-300 rounded px-2" type="{{$hidden??"hidden"}}" value="{{$group->time_counting_type}}"/>
-        <div class="$('#taskParentTimeCountingType_{{$task->id}}').val() === '0' ? 'hidden' : ''">
-            Elapsed: <span class="text-blue-600" id="elapse_{{$task->id}}"></span>
-        </div>
+        <div id="taskElapseTxt_{{$task->id}}"></div>
         <textarea id="txt_task_{{$task->id}}" value="{{$task->name}}" class="{{$classTask}} {{$hidden??"hidden"}}" onblur="onClickToCommit({{$task->id}},'lbl_task','txt_task','caption_task', route_task)">{{$task->name}}</textarea>
     </div>
     <div>

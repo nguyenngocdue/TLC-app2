@@ -30,13 +30,24 @@
     }
 
     const taskInterval = (taskId) => {
-        const groupId = $("#taskParentId_" + taskId).val()
-        if(undefined === currentElapsed[groupId]) currentElapsed[groupId]={}
-        if(!currentElapsed[groupId][taskId]) currentElapsed[groupId][taskId] = 0
-        currentElapsed[groupId][taskId]++
+        const timeCountingType = $('#taskParentTimeCountingType_' + taskId).val()
+        let result = ""
+        switch(timeCountingType)
+        {
+            case '1': 
+                const groupId = $("#taskParentId_" + taskId).val()
+                if(undefined === currentElapsed[groupId]) currentElapsed[groupId]={}
+                if(!currentElapsed[groupId][taskId]) currentElapsed[groupId][taskId] = 0
+                currentElapsed[groupId][taskId]++
+                elapse = convertSecondsToTime(currentElapsed[groupId][taskId])
+                result = "Elapsed: <span class='text-blue-600'>" + elapse + "<span>"
+                break;
+            default:
+                break;
+        }
         // console.log(taskId, currentElapsed[taskId])
-        const time = convertSecondsToTime(currentElapsed[groupId][taskId])
-        $('#elapse_'+taskId).html(time)
+        $("#taskElapseTxt_"+taskId).html(result)
+        // $('#elapse_'+taskId).html(result)
     }
 
     const currentElapsed = {};
