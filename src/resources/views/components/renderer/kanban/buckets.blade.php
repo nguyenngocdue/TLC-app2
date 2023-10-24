@@ -55,7 +55,13 @@
             case '2':
                 groupId = $("#taskParentPreviousGroupId_" + taskId).val()
                 elapse = convertSecondsToTime(currentElapsed[groupId][taskId])
-                result = "Took: <span class='text-blue-800 font-bold'>" + elapse + "<span>"
+                
+                groupId = $("#taskParentRectifiedGroupId_" + taskId).val()
+                rectified = convertSecondsToTime(currentElapsed[groupId][taskId])
+
+                result = "Took: <span class='text-blue-800 font-bold'>" + elapse + "</span>"
+                result += "<br/>Rectified: " + rectified;
+
                 break;
             default:
                 break;
