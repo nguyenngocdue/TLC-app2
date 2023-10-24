@@ -1,3 +1,4 @@
+const globalInterval = []
 const onKanbanAjaxError = (jqXHR) => toastr.error(jqXHR.responseJSON.message)
 
 const getChildPrefix = (prefix) => {
@@ -109,6 +110,7 @@ const onEnd = (e, url, category) => {
                 case "kanban_tasks":
                     // console.log(meta.newParentId)
                     $("#taskParentId_" + meta.id).val(meta.newParentId)
+                    $("#taskParentTimeCountingType_" + meta.id).val(meta.parentCountingType)
                     break;
             }
         },
@@ -154,6 +156,9 @@ const kanbanLoadPage = (pageId, url, groupWidth) => {
     const beginWith = "bucket_"
     $("#txtCurrentPage").val(pageId);
     $("#divKanbanPage").slideUp("slow");
+
+    globalInterval.forEach((interval) => clearInterval(interval));
+    globalInterval.length = 0;
 
     const ids = []
     $("#toc_group_1").children().each((a, db0) => {

@@ -27,18 +27,30 @@
 </x-renderer.card>
 
 @php
-    echo "<script>const currentElapsed = {};";
+    echo "<script>";
     foreach($clusters as $cluster){
         foreach($cluster->getGroups as $group){
             echo "currentElapsed[$group->id]={};";
         }
         foreach($cluster->getGroups as $group){
             foreach($group->getTasks as $task){
-                foreach($task->getElapsed as $elapsed){
-                    $elapsed_seconds = $elapsed->elapsed_seconds;
-                    $task_id = $elapsed->kanban_task_id;
-                    $group_id = $elapsed->kanban_group_id;
-                    echo "currentElapsed[$group_id][$task_id] = $elapsed_seconds;";
+                $totalElapse = [];
+                foreach($task->getTransitions as $transition){
+                    if($transition->elapsed_seconds){
+                        $elapsed_seconds = $transition->elapsed_seconds;
+                    } else {
+                        $elapsed_seconds = \Carbon\Carbon::now()->diffInSeconds($transition->start_at);
+                    }
+
+                    if(!isset($totalElapse[$transition->kanban_group_id]))$totalElapse[$transition->kanban_group_id] = [];
+                    if(!isset( $totalElapse[$transition->kanban_group_id][$transition->kanban_task_id]))$totalElapse[$transition->kanban_group_id][$transition->kanban_task_id]=0;
+                    $totalElapse[$transition->kanban_group_id][$transition->kanban_task_id] += $elapsed_seconds;
+                    
+                }
+                foreach($totalElapse as $group_id => $subGroups){
+                    foreach($subGroups as $task_id => $value){
+                        echo "currentElapsed[$group_id][$task_id]=$value;";
+                    }
                 }
             }
         }

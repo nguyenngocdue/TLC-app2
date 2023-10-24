@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Models\Kanban_task_group;
 use App\Models\Kanban_task_page;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
@@ -15,6 +16,7 @@ trait TraitKanban
 {
 	use TraitKanbanItemRenderer;
 	use TraitKanbanUpdate;
+	use TraitKanbanTransition;
 
 	function getLastWord($strings)
 	{
@@ -48,11 +50,21 @@ trait TraitKanban
 			throw new \Exception("Category '$category' not found in '$table'.");
 		}
 		$item->{$category} = $newParentId;
+
+		$parentCountingType = null;
+		if ($table == 'kanban_tasks') {
+			$newTransitionId = $this->setTransitionLog($item, $newParentId);
+			$item->kanban_task_transition_id = $newTransitionId;
+
+			$parentCountingType = Kanban_task_group::find($newParentId)->time_counting_type;
+		}
+
 		$item->save();
 		return ResponseObject::responseSuccess([], [
 			'id' => $itemId,
 			'table' => $table,
 			'newParentId' => $newParentId,
+			'parentCountingType' => $parentCountingType,
 		], "Updated");
 	}
 
@@ -106,18 +118,26 @@ trait TraitKanban
 	{
 		$table = $this->modelPath::getTableName();
 		$parent_column = $this->getParentColumn($table);
+		$parent_id =  $request->input('parent_id');
 		$groupWidth = $request->input('groupWidth');
+		$cuid = CurrentUser::id();
 
 		$item = [
 			'name' => "New Item",
-			$parent_column => $request->input('parent_id'),
-			'owner_id' => CurrentUser::id(),
+			$parent_column => $parent_id,
+			'owner_id' => $cuid,
 		];
 		// Log::info($item);
 		$insertedObj = $this->modelPath::create($item);
 
 		$insertedId = $insertedObj->id;
 		$insertedObj->order_no = $insertedId;
+
+		if ($table === 'kanban_tasks') {
+			$transitionId = $this->enteringGroup($insertedObj, $parent_id);
+			$insertedObj->kanban_task_transition_id = $transitionId;
+		}
+
 		$insertedObj->save();
 
 		$renderer = $this->renderKanbanItem($insertedObj, $groupWidth);

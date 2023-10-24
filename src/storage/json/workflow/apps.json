@@ -881,16 +881,14 @@
         "package_tab": "application",
         "package": "project_management",
         "sub_package": "unit_test",
-        "title": "Kanban Task Pages",
+        "title": "Kanban Task Management",
         "nickname": "kbtp",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null,
-        "hidden": "true",
-        "hidden_navbar": "true"
+        "icon": null
     },
     "listener_config": {
         "name": "listener_config",

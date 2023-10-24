@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('kanban_cluster_id')->nullable();
+            $table->unsignedBigInteger('assignee_1')->nullable();
+            $table->string('time_counting_type')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();
