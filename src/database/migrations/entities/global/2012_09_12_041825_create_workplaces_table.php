@@ -30,6 +30,7 @@ return new class extends Migration
             $table->float('break_duration_in_min')->nullable();
             $table->time('standard_start_time')->nullable();
             $table->time('standard_start_break')->nullable();
+            $table->string('weekend_days')->nullable();
             $table->string('slug')->unique();
             $table->appendCommonFields();
         });

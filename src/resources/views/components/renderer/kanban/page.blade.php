@@ -29,28 +29,41 @@
 @php
     echo "<script>";
     foreach($clusters as $cluster){
-        foreach($cluster->getGroups as $group){
-            echo "currentElapsed[$group->id]={};";
-        }
+        $totalElapse = [];
         foreach($cluster->getGroups as $group){
             foreach($group->getTasks as $task){
-                $totalElapse = [];
+                $totalElapse[$task->id] = [];
                 foreach($task->getTransitions as $transition){
                     if($transition->elapsed_seconds){
                         $elapsed_seconds = $transition->elapsed_seconds;
                     } else {
-                        $elapsed_seconds = \Carbon\Carbon::now()->diffInSeconds($transition->start_at);
+                        // $elapsed_seconds = \Carbon\Carbon::now()->diffInSeconds($transition->start_at);
+                        $workingShiftService = new \App\Http\Services\WorkingShiftService();
+                        $result = $workingShiftService->calculateShiftDurationByUser($transition->start_at, now(), $task->assignee_1);
+                        // Log::info("A");
+                        ['shift_seconds'=>$elapsed_seconds ]= $result;
                     }
 
-                    if(!isset($totalElapse[$transition->kanban_group_id]))$totalElapse[$transition->kanban_group_id] = [];
-                    if(!isset( $totalElapse[$transition->kanban_group_id][$transition->kanban_task_id]))$totalElapse[$transition->kanban_group_id][$transition->kanban_task_id]=0;
-                    $totalElapse[$transition->kanban_group_id][$transition->kanban_task_id] += $elapsed_seconds;
+                    if(!isset($totalElapse[$task->id][$transition->kanban_group_id]))$totalElapse[$task->id][$transition->kanban_group_id] = [];
+                    if(!isset( $totalElapse[$task->id][$transition->kanban_group_id][$transition->kanban_task_id]))$totalElapse[$task->id][$transition->kanban_group_id][$transition->kanban_task_id]=0;
+                    $totalElapse[$task->id][$transition->kanban_group_id][$transition->kanban_task_id] += $elapsed_seconds;
                     
                 }
-                foreach($totalElapse as $group_id => $subGroups){
-                    foreach($subGroups as $task_id => $value){
-                        echo "currentElapsed[$group_id][$task_id]=$value;";
-                    }
+            }
+        }
+        // dump($totalElapse);
+        $groups = [];
+        foreach($totalElapse as $elapses){
+            $groups = [...$groups, ...array_keys($elapses)];
+        }
+        $groups = array_unique($groups);
+        foreach($groups as $group_id){
+            echo "currentElapsed[$group_id]={};";
+        }
+        foreach($totalElapse as $elapses){
+            foreach($elapses as $group_id => $groups){
+                foreach($groups as $task_id => $value){
+                    echo "currentElapsed[$group_id][$task_id]=$value;";
                 }
             }
         }

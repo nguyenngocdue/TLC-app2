@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Http\Services\WorkingShiftService;
 use App\Models\Kanban_task_transition;
 use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
@@ -16,8 +17,16 @@ trait TraitKanbanTransition
 		$transition = Kanban_task_transition::find($kanban_task_transition_id);
 		if (is_null($transition)) return;
 		$transition->end_at = now();
-		$start_at = Carbon::parse($transition->start_at);
-		$transition->elapsed_seconds = Carbon::now()->diffInSeconds($start_at);
+		// $start_at = Carbon::parse($transition->start_at);
+		// $transition->elapsed_seconds = Carbon::now()->diffInSeconds($start_at);
+
+		$uid = $item->assignee_1;
+		$workingShiftService = new WorkingShiftService();
+		$result =  $workingShiftService->calculateShiftDurationByUser($transition->start_at, now(), $uid);
+		['shift_seconds' => $elapse, 'non_shift_seconds' => $excluded] = $result;
+		$transition->elapsed_seconds = $elapse;
+		$transition->excluded_seconds = $excluded;
+
 		$transition->save();
 	}
 

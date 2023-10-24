@@ -1,4 +1,4 @@
-const globalInterval = []
+let globalInterval = [] // not a constant as it needs to be filtered
 const onKanbanAjaxError = (jqXHR) => toastr.error(jqXHR.responseJSON.message)
 
 const getChildPrefix = (prefix) => {
@@ -243,6 +243,27 @@ const getItem = () => {
     return item;
 }
 
+const clearChildrenInterval = (table, id) => {
+    let children
+    switch (table) {
+        case "kanban_tasks":
+            //has to be parent as task_ is same level and can't get children of itself
+            children = $('#task_parent_' + id).find('[id^="intervalId"]');
+            break;
+        case "kanban_task_groups":
+            children = $('#group_' + id).find('[id^="intervalId"]');
+            break;
+        case "kanban_task_clusters":
+            children = $('#cluster_' + id).find('[id^="intervalId"]');
+            break;
+    }
+    for (let i = 0; i < children.length; i++) {
+        const intervalId = children[i].value
+        clearInterval(intervalId)
+        globalInterval = globalInterval.filter(i => i != intervalId)
+    }
+}
+
 const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
     const id = $("#" + txtTypeId).val()
     // const formData = $("#frmKanbanItem").serialize()
@@ -254,6 +275,8 @@ const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
         data: { action: "updateItemRenderProps", id, ...item, groupWidth },
         success: function (response) {
             const { renderer } = response.hits
+            clearChildrenInterval(response.meta.table, id)
+
             const myId = prefix + id
             const myDiv = $("#" + myId)
             myDiv.replaceWith(renderer)
