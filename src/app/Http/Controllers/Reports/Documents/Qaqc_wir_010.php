@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports\Documents;
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\Reports\Qaqc_ncr_dataSource;
 use App\Utils\Support\Report;
+use App\Utils\Support\StringReport;
 
 class Qaqc_wir_010 extends Report_ParentDocument2Controller
 {
@@ -27,22 +28,22 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $previousMonth = str_pad($m, '2','0', STR_PAD_LEFT);
         $previousDate = $y."-".$previousMonth."-25";
 
-        $lastDate = $month.'-'."25";
-        if($lastDate > date("Y-m-d")) {
-            $lastDate = date("Y-m-d");
-            $previousDate = date("Y-m", strtotime($lastDate . " -1 month"))."-25";
+        $latestDate = $month.'-'."25";
+        if($latestDate > date("Y-m-d")) {
+            $latestDate = date("Y-m-d");
+            $previousDate = date("Y-m", strtotime($latestDate . " -1 month"))."-25";
         }
-        return [$previousDate, $lastDate]; 
+        return [$previousDate, $latestDate]; 
     }
 
     public function getSqlStr($params)
     {
         $valOfParams = $this->generateValuesFromParamsReport($params);
-        [$previousDate, $lastDate] = $this->generateCurrentAndPreviousDate($params['month']);
+        [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         $sql = " SELECT *
                             ,IF(total_prod_order_have_wir*100/(total_prod_order_on_sub_project*count_wir_description),
                                 FORMAT(total_prod_order_have_wir*100/(total_prod_order_on_sub_project*count_wir_description),2)
-                                ,NULL) AS last_acceptance_percent
+                                ,NULL) AS latest_acceptance_percent
                             ,IF(total_prod_order_have_wir2*100/(total_prod_order_on_sub_project*count_wir_description),
                                 FORMAT(total_prod_order_have_wir2*100/(total_prod_order_on_sub_project*count_wir_description), 2)
                                 ,NULL) AS previous_acceptance_percent
@@ -66,7 +67,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                                             AND wir.prod_routing_id = pr.id
                                                                             AND wir.sub_project_id = sp.id
                                                                             AND wir.status IN ('closed', 'N\A')
-                                                                            AND SUBSTR(wir.closed_at, 1, 10) <= '$lastDate'
+                                                                            AND SUBSTR(wir.closed_at, 1, 10) <= '$latestDate'
                                                     WHERE 1 = 1";
 
         if (Report::checkValueOfField($valOfParams, 'project_id')) $sql .= "\n AND sp.project_id IN ({$valOfParams['project_id']})";
@@ -140,7 +141,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                 'title' => 'Module QTY',
                 'dataIndex' => 'total_prod_order_on_sub_project',
                 'align' => 'right',
-                'width' => 100,
+                'width' => 180,
                 'footer' => 'agg_sum',
             ],
             [
@@ -152,7 +153,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             ],
             [
                 'title' => 'This month QC Acceptance (%)',
-                'dataIndex' => 'last_acceptance_percent',
+                'dataIndex' => 'latest_acceptance_percent',
                 'align' => 'right',
                 'width' => 180,
                 'footer' => 'agg_sum',
@@ -174,9 +175,9 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     public function getBasicInfoData($params)
     {
-        [$previousDate, $lastDate] = $this->generateCurrentAndPreviousDate($params['month']);
+        [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         return [
-            "date_of_update" => $lastDate
+            "date_of_update" => $latestDate
         ];
     }
 }

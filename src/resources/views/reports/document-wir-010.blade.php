@@ -15,7 +15,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     $tc = "<x-reports.utility-report routeName='$routeName'/>"; 
     $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
 @endphp
-
+{{-- @dd($tableDataSource); --}}
 <div class="px-4">
     @include('components.reports.shared-parameter')
     @include('components.reports.show-layout2')
@@ -25,9 +25,14 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
             <x-print.header6 />
             <x-renderer.heading level=2 class='text-center pt-4'>QAQC Acceptance Report</x-renderer.heading>
+            {{-- RENDER WIDGET --}}
+            <div class="pt-4"></>
+            <div class="p-4 border">
+                <x-renderer.report.pivot-chart3 key="qaqc_wir_overall_compelete_status" :data="$tableDataSource" ></x-renderer.report.pivot-chart3>
+            </div>
             {{-- RENDER TABLES --}}
             <div class="pt-4">
-                <x-renderer.heading level=6 class='text-right italic'>Date od Update: <strong>{{$basicInfoData['date_of_update']}} </strong></x-renderer.heading>
+                <x-renderer.heading level=6 class='text-right italic px-10'>Date od Update: <strong>{{$basicInfoData['date_of_update']}} </strong></x-renderer.heading>
                 <x-renderer.report.pivot-table 
                     showNo={{true}} 
                     :tableColumns="$tableColumns" 
@@ -36,8 +41,6 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                      />
             </div>
         </div>
-
-
     </div>
 </div>
 @endsection

@@ -58,7 +58,7 @@
         "name": "ncr_report_type",
         "report_name": "document-qaqc_ncr_010",
         "hidden": null,
-        "chart_type": "doughnut",
+        "chart_type": null,
         "fn": "SqlForeignKey",
         "section_title": null,
         "widget_title": null,
@@ -97,5 +97,16 @@
         "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
         "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"titleX\" : \"User Team\",\r\n\"displayTitleX\": 0,\r\n\"titleY\" : \"Issues (qty)\",\r\n\"titleChart\": \"Count of Responsible Teams\",\r\n\"displayTitleChart\":0,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"positionTitleChart\": \"bottom\"\r\n}"
+    },
+    "qaqc_wir_overall_compelete_status": {
+        "name": "qaqc_wir_overall_compelete_status",
+        "report_name": "document-qaqc_wir_010",
+        "hidden": null,
+        "chart_type": "bar_two_columns",
+        "fn": "SqlForeignKey",
+        "section_title": "A",
+        "widget_title": "B",
+        "params": "{\"labels\":\"prod_routing_name\",\r\n\"meta_data_1\":\"latest_acceptance_percent\",\r\n\"meta_data_2\":\"previous_acceptance_percent\"\r\n}",
+        "dimensions": "{\r\n\"width\": 1200,\r\n\"height\":500,\r\n\"scaleMaxX\": 100,\r\n\"scaleMaxY\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"OVERALL COMPLETE STATUS\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"QC Acceptance (%)\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"Last month QC Acceptance (%)\",\r\n\"dataName2\": \"This month QC Acceptance (%)\"\r\n}"
     }
 }
