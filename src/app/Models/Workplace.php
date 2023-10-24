@@ -11,7 +11,7 @@ class Workplace extends ModelExtended
         "name", "description",
         "standard_working_hour", "standard_start_time", "standard_start_break",
         "break_duration_in_min", "def_assignee", "slug",
-        "travel_place_id"
+        "travel_place_id", "weekend_days",
     ];
 
     protected $table = 'workplaces';

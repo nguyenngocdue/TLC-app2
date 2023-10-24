@@ -247,6 +247,7 @@ const clearChildrenInterval = (table, id) => {
     let children
     switch (table) {
         case "kanban_tasks":
+            //has to be parent as task_ is same level and can't get children of itself
             children = $('#task_parent_' + id).find('[id^="intervalId"]');
             break;
         case "kanban_task_groups":
