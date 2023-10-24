@@ -40,15 +40,21 @@
     const taskInterval = (taskId) => {
         const timeCountingType = $('#taskParentTimeCountingType_' + taskId).val()
         let result = ""
+        let groupId = 0
         switch(timeCountingType)
         {
             case '1': 
-                const groupId = $("#taskParentId_" + taskId).val()
+                groupId = $("#taskParentId_" + taskId).val()
                 if(undefined === currentElapsed[groupId]) currentElapsed[groupId]={}
                 if(!currentElapsed[groupId][taskId]) currentElapsed[groupId][taskId] = 0
                 currentElapsed[groupId][taskId]++
                 elapse = convertSecondsToTime(currentElapsed[groupId][taskId])
                 result = "Elapsed: <span class='text-blue-600'>" + elapse + "<span>"
+                break;
+            case '2':
+                groupId = $("#taskParentPreviousGroupId_" + taskId).val()
+                elapse = convertSecondsToTime(currentElapsed[groupId][taskId])
+                result = "Took: <span class='text-blue-800 font-bold'>" + elapse + "<span>"
                 break;
             default:
                 break;

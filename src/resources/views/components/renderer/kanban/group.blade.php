@@ -5,7 +5,8 @@
     $modalId = "modal-group";
     $title = "$group->description\n(#{$group->id})";
     $isAdmin = (\App\Utils\Support\CurrentUser::isAdmin());
-    $groupName = $group->name. ($isAdmin ? " (#".$group->id.")" : "");
+    $groupName = $group->name;
+    // $groupName = $group->name. ($isAdmin ? " (#".$group->id.")" : "");
 @endphp
 
 @once
