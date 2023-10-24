@@ -21,7 +21,7 @@ class WorkingShiftService
             return $user->getWorkplace;
         } else {
             return Workplace::query()
-                ->with('getPublicHolidays')->get();
+                ->with('getPublicHolidays')->find(1);
         }
     }
 
