@@ -3,12 +3,13 @@
 namespace App\Http\Services;
 
 use App\Models\User;
+use App\Models\Workplace;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class WorkingShiftService
 {
-    public function calculateShiftDurationByUser($start_at0, $end_at0, $uid)
+    private function getWorkplace($uid)
     {
         $user = User::query()
             ->with(["getWorkplace" => function ($query) {
@@ -16,7 +17,17 @@ class WorkingShiftService
             }])
             ->find($uid);
 
-        $workplace = $user->getWorkplace;
+        if ($user) {
+            return $user->getWorkplace;
+        } else {
+            return Workplace::query()
+                ->with('getPublicHolidays')->get();
+        }
+    }
+
+    public function calculateShiftDurationByUser($start_at0, $end_at0, $uid)
+    {
+        $workplace = $this->getWorkplace($uid);
         $weekendDays = explode(",", $workplace->weekend_days);
 
         $standard_start_time = $workplace->standard_start_time;
@@ -93,7 +104,7 @@ class WorkingShiftService
             'shift_seconds' => $shiftSeconds,
             'non_shift_seconds' => $nonShiftSeconds,
         ];
-        Log::info($result);
+        // Log::info($result);
         return $result;
     }
 }
