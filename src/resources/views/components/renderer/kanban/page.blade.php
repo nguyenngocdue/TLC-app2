@@ -37,7 +37,11 @@
                     if($transition->elapsed_seconds){
                         $elapsed_seconds = $transition->elapsed_seconds;
                     } else {
-                        $elapsed_seconds = \Carbon\Carbon::now()->diffInSeconds($transition->start_at);
+                        // $elapsed_seconds = \Carbon\Carbon::now()->diffInSeconds($transition->start_at);
+                        $workingShiftService = new \App\Http\Services\WorkingShiftService();
+                        $result = $workingShiftService->calculateShiftDurationByUser($transition->start_at, now(), $task->assignee_1);
+                        // Log::info("A");
+                        ['shift_seconds'=>$elapsed_seconds ]= $result;
                     }
 
                     if(!isset($totalElapse[$task->id][$transition->kanban_group_id]))$totalElapse[$task->id][$transition->kanban_group_id] = [];

@@ -21,8 +21,9 @@
 @once
 <script>
     const convertSecondsToTime = (seconds) => {
-        const days = Math.floor(seconds / (3600 * 24));
-        const hours = Math.floor((seconds % (3600 * 24)) / 3600);
+        const hourPerDay = 8.5
+        const days = Math.floor(seconds / (3600 * hourPerDay));
+        const hours = Math.floor((seconds % (3600 * hourPerDay)) / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
         const remainingSeconds = seconds % 60;
 
