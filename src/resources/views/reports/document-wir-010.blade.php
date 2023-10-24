@@ -28,11 +28,16 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
             {{-- RENDER WIDGET --}}
             <div class="pt-4"></>
             <div class="p-4 border">
-                <x-renderer.report.pivot-chart3 key="qaqc_wir_overall_compelete_status" :data="$tableDataSource" ></x-renderer.report.pivot-chart3>
+                <x-renderer.report.pivot-chart3 
+                    key="qaqc_wir_overall_complete_status" 
+                    :data="$tableDataSource"
+                    optionPrint="{{$optionPrint}}"
+                    :paramFilters="$params"
+                ></x-renderer.report.pivot-chart3>
             </div>
             {{-- RENDER TABLES --}}
             <div class="pt-4">
-                <x-renderer.heading level=6 class='text-right italic px-10'>Date od Update: <strong>{{$basicInfoData['date_of_update']}} </strong></x-renderer.heading>
+                <x-renderer.heading level=6 class='text-right italic px-10'>Date of Update: <strong>{{$basicInfoData['date_of_update']}} </strong></x-renderer.heading>
                 <x-renderer.report.pivot-table 
                     showNo={{true}} 
                     :tableColumns="$tableColumns" 

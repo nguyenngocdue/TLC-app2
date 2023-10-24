@@ -24,7 +24,6 @@
                 />
         @break
     @case('bar_two_columns')
-    {{-- @dd($dataWidgets); --}}
         <x-renderer.report.chart-bar3 
             key="{{md5($dataWidgets['title_a'].$dataWidgets['title_b'])}}" 
             :meta="$dataWidgets['meta']" 

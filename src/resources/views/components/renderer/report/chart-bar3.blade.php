@@ -4,6 +4,11 @@
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
 </div>
+@if(isset($dimensions['resetZoom']))
+	<div class="no-print">
+		<x-renderer.button type="info" id="resetZoom">Reset Zoom</x-renderer.button>
+	</div>
+@endif
 
 {{-- @dump($dimensions) --}}
 {{-- @dump($meta) --}}
@@ -13,13 +18,15 @@
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
 @endonce
 
 <script>
 	var key = '{{$key}}'
 	var chartType = '{{$chartType}}';
 	var datasets = [];
-	var indexAxis = 'x'; // Default value
+	var indexAxis = 'x';
 	var scales = {};
 	var meta = {!! json_encode($meta) !!}
 		if ('{{$chartType}}' === 'bar_two_columns' || '{{$chartType}}' === 'horizontal_bar') {
@@ -105,6 +112,7 @@
                     weight: 'bold' 
                 }, 
 				position: '{!! $dimensions['positionTitleChart'] ?? 'bottom' !!}',
+				padding: 30,
             },
 			tooltip: {
                 enabled: true,
@@ -147,16 +155,32 @@
 				formatter: function(value, context) {
                     return value +'%';
                 }
-			}
+			},
+			zoom: {
+					zoom: {
+					wheel: {
+						enabled: {!! $dimensions['zoomWheelEnabled'] ?? 0 !!},
+					},
+					pinch: {
+						enabled: {!! $dimensions['zoomPinchEnabled'] ?? 0 !!},
+					},
+					mode: '{!! $dimensions['zoomMode'] ?? 'xy' !!}',
+					}
+			},
 		}
 		}
 	};
 
-  // Get the DOM element with the specified '{{$key}}' ID
-  var chartElement = document.getElementById('{{$key}}');
+	// Get the DOM element with the specified '{{$key}}' ID
+	var chartElement = document.getElementById('{{$key}}');
 
-  // Create a new Chart.js chart with the specified element and configuration
-  new Chart(chartElement, chartConfig);
+	// Create a new Chart.js chart with the specified element and configuration
+	var chart = new Chart(chartElement, chartConfig);
+
+	// Reset Zoom configuration
+    document.getElementById('resetZoom').addEventListener('click', function () {
+        chart.resetZoom();
+    });
 </script>
 
 

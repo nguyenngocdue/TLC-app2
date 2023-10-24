@@ -46,4 +46,19 @@ class StringReport
             }
         }, $item));
     }
+
+    public static function separateStringsByDot($data)
+	{
+		array_walk($data, function (&$value, $key) {
+			if (str_contains($value, '.')) {
+				$items = explode('.', $value);
+				$array = [];
+				foreach ($items as $k => $val) {
+					$array['param_' . $k] = $val;
+				}
+				$value = $array;
+			}
+		});
+		return $data;
+	}
 }

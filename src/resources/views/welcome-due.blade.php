@@ -3,62 +3,66 @@
 @section('content')
 
 @once
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0/dist/chartjs-plugin-datalabels.js"></script>
-<script>
-const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00a950','#58595b','#8549ba','#FF5733','#FFD700','#FF1493','#00FF00','#FF4500','#FF69B4','#FFFF00','#9400D3','#00CED1','#FF7F50'];
-</script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
 @endonce
 
-<canvas id="myBarChart"></canvas>
+<div class="flex justify-center">
+	<div class="block">
+		<canvas id="myChart" width=400 height=400></canvas>
+	</div>
+	<button class="bg-slate-400" type="button" id="resetZoom">reset zoom</button>
+</div>
+
+@once
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
+
+@endonce
 
 <script>
-var ctx = document.getElementById('myBarChart').getContext('2d');
-var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['A', 'B', 'C'],
-        datasets: [{
-            label: 'Thể Hiện 1',
-            data: [20, 30, 80],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1
-        },
-        {
-            label: 'Thể Hiện 2',
-            data: [30, 50, 100],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }],
-            xAxes: [{
-                categoryPercentage: 0.7, // Tỷ lệ giữa các cột
-                barPercentage: 0.5, // 100% chiều rộng của các cột được sử dụng, không có khoảng trống
-                barThickness: 40 // Đặt giá trị tối đa cho bề rộng của các cột thành 40 pixel
+    const ctx = document.getElementById('myChart');
+
+    var chart = new Chart(ctx, {
+        type: 'bar'
+        , data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange',
+			'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']
+            , datasets: [{
+                label: '# of Votes'
+                , data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3]
+                , borderWidth: 1
             }]
-        },
-        plugins: {
-            datalabels: {
-                display: true,
-                color: 'white',
-                font: {
-                    size: 16
+        }
+        , options: {
+			plugins:{
+				zoom: {
+					zoom: {
+					wheel: {
+						enabled: true,
+					},
+					pinch: {
+						enabled: true
+					},
+					mode: 'xy',
+					}
+				},
+			},
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
         }
-    }
-});
-
+    });
+	 document.getElementById('resetZoom').addEventListener('click', function () {
+        chart.resetZoom(); // Gửi lệnh phục hồi zoom
+    });
 
 </script>
 
+
 @endsection
+

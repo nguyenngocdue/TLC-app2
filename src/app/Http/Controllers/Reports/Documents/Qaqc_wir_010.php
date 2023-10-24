@@ -53,18 +53,35 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                 pj.name AS project_name,
                                 sp.id AS sub_project_id,
                                 sp.name AS sub_project_name,
-                                pr.id AS prod_routing_id,
-                                pr.name AS prod_routing_name,
+                                pr.prod_routing_id AS prod_routing_id,
+                                pr.prod_routing_name AS prod_routing_name,
                                 COUNT( DISTINCT CASE WHEN  po.id THEN po.id ELSE NULL END) AS total_prod_order_on_sub_project,
                                 COUNT(CASE WHEN wir.status IS NOT NULL THEN wir.status ELSE NULL END) AS total_prod_order_have_wir,
                                 COUNT(CASE WHEN SUBSTR(wir.closed_at, 1, 10) <= '$previousDate' AND wir.status IN ('closed', 'N\A')  THEN wir.status ELSE NULL END) AS total_prod_order_have_wir2
                                                         
                                                 FROM sub_projects sp
                                                     JOIN prod_orders po ON po.sub_project_id = sp.id
-                                                    LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
+                                                    LEFT JOIN (
+                                                                SELECT 
+                                                                    DISTINCT mtm1.term_id AS prod_routing_id,
+                                                                    _pr.name AS prod_routing_name
+                                                                    FROM (
+                                                                        SELECT mtm.term_id
+                                                                        FROM many_to_many mtm
+                                                                        WHERE mtm.doc_type = 'App\\\Models\\\Wir_description'
+                                                                        AND mtm.term_type = 'App\\\Models\\\Prod_routing'
+                                                                    ) AS mtm1
+                                                                    LEFT JOIN (
+                                                                        SELECT mtm.doc_id
+                                                                        FROM many_to_many mtm
+                                                                        WHERE mtm.doc_type = 'App\\\Models\\\Prod_routing'
+                                                                        AND mtm.term_id = 346
+                                                                    ) AS mtm2 ON mtm1.term_id = mtm2.doc_id
+                                                                    LEFT JOIN prod_routings _pr ON _pr.id = mtm1.term_id
+                                                    ) pr ON pr.prod_routing_id = po.prod_routing_id
                                                     LEFT JOIN projects pj ON sp.project_id = pj.id
                                                     LEFT JOIN qaqc_wirs wir ON wir.prod_order_id = po.id 
-                                                                            AND wir.prod_routing_id = pr.id
+                                                                            AND wir.prod_routing_id = pr.prod_routing_id
                                                                             AND wir.sub_project_id = sp.id
                                                                             AND wir.status IN ('closed', 'N\A')
                                                                             AND SUBSTR(wir.closed_at, 1, 10) <= '$latestDate'
@@ -72,12 +89,13 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
         if (Report::checkValueOfField($valOfParams, 'project_id')) $sql .= "\n AND sp.project_id IN ({$valOfParams['project_id']})";
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND sp.id IN ({$valOfParams['sub_project_id']})";
-        if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND pr.id IN ({$valOfParams['prod_routing_id']})";
+        if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND pr.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
 
                                             $sql .= "   #AND sp.project_id = 8
                                                         #AND sp.id = 107
                                                         #AND po.id = 1325
                                                         #AND pr.id = 49
+                                                        AND pr.prod_routing_name != '-- available'
                                                     GROUP BY #project_id, 
                                                             sub_project_id, 
                                                             prod_routing_id ) AS tb1
@@ -170,6 +188,10 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
     protected function getDefaultValueParams($params, $request)
     {
         $params['month'] = date("Y-m");
+        $params['sub_project_id'] = $this->subProjectId;
+        [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
+        $params['previous_month'] =  substr($previousDate, 0, 7);
+        $params['latest_month'] =  substr($latestDate, 0, 7);
         return $params;
     }
 

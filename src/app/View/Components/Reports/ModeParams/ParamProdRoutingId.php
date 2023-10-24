@@ -18,6 +18,7 @@ class ParamProdRoutingId extends ParentParamReports
             $chklstTmplIds = $routing->getChklstTmpls()->pluck('id')->toArray();
             $array = (object)[];
             $array->id = $routing->id;
+            if($routing->name === '-- available') continue;
             $array->name = $routing->name;
             $array->{$this->referData} = $subProjectIds;
             $array->{$this->referData1} = $chklstTmplIds;
