@@ -3,9 +3,8 @@
 namespace App\View\Components\Controls\InspChklst;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetGroupChkSht;
-use App\Models\Hse_insp_group;
-use App\Models\Qaqc_insp_group;
 use App\Utils\Support\Json\SuperProps;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class ItemRenderCheckSheet extends Component
@@ -51,7 +50,7 @@ class ItemRenderCheckSheet extends Component
 
     public function render()
     {
-        $lines = $this->item->getLines;
+        $lines = $this->item->getLines()->orderBy('order_no')->get();
         $chklst = $this->item->getChklst;
 
         $prodOrder = is_null($chklst) ? null : $chklst->getProdOrder;

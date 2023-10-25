@@ -31,6 +31,7 @@ return new class extends Migration
             $table->unsignedBigInteger('qaqc_insp_control_value_id')->nullable();
             $table->unsignedBigInteger('qaqc_insp_control_group_id');
             $table->unsignedBigInteger('inspector_id')->nullable();
+            $table->orderable();
             $table->appendCommonFields();
         });
         // Schema::create('qaqc_insp_chklst_lines', function (Blueprint $table) {

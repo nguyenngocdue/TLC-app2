@@ -78,7 +78,8 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
             ]);
             $thirdPartyList = $inspTmplSht->getMonitors1();
             $newSheet->syncCheck("getMonitors1", "App\Models\User", $thirdPartyList->pluck('id')->toArray());
-            foreach ($inspTmplSht->getLines as $qaqcInspTmplLine) {
+            $lines = $inspTmplSht->getLines;
+            foreach ($lines as $qaqcInspTmplLine) {
                 Qaqc_insp_chklst_line::create([
                     'name' => $qaqcInspTmplLine->name,
                     'description' => $qaqcInspTmplLine->description,
@@ -86,6 +87,7 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
                     'qaqc_insp_group_id' => $qaqcInspTmplLine->qaqc_insp_group_id,
                     'qaqc_insp_control_group_id' => $qaqcInspTmplLine->qaqc_insp_control_group_id,
                     'qaqc_insp_chklst_sht_id' => $newSheet->id,
+                    'order_no' => $qaqcInspTmplLine->order_no,
                     'owner_id' => $ownerId,
                 ]);
             }
