@@ -41,6 +41,14 @@ return new class extends Migration
             $table->float('total_uom')->nullable();
             $table->string('erp_prod_order_name')->nullable();
 
+            // $table->unsignedInteger('sheet_count')->nullable();
+            $table->unsignedInteger('total_calendar_days')->nullable();
+            $table->unsignedInteger('no_of_sundays')->nullable();
+            $table->unsignedInteger('no_of_ph_days')->nullable();
+            $table->unsignedInteger('total_days_no_sun_no_ph')->nullable();
+            $table->unsignedInteger('total_days_have_ts')->nullable();
+            $table->integer('total_discrepancy_days')->nullable();
+
             $table->appendCommonFields();
 
             $table->unique(['prod_order_id', 'prod_routing_link_id']);

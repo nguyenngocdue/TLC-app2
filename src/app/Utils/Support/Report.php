@@ -127,6 +127,12 @@ class Report
         }
         return $convertedData;
     }
+
+    public static function getItemsFromDataSource($dataSource){
+        return $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
+    }
+
+
     public static function replaceAndUcwords($string)
     {
         $str = str_replace('_', " ", $string);
