@@ -115,8 +115,10 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
         $stringIcon = "class='text-base fa-duotone fa-circle-question hover:bg-blue-400 rounded'></i>";
         $notes = [
             'total_calendar_days' => "<br/><i title='The total number of days counted from the start date to the finish date of a production order (please note: consider the status of that production order).'" . $stringIcon,
-            'independent_holiday_sunday_day' => "<br/><i title='The working days excluding Sundays and public holidays..'" . $stringIcon,
+            'independent_holiday_sunday_day' => "<br/><i title='The working days excluding Sundays and public holidays.'" . $stringIcon,
+            'total_days_have_ts' => "<br/><i title='The working days excluding Sundays and public holidays without downtime.'" . $stringIcon,
             'net_working_day' => "<br/><i title='The net working days refer to the regular workdays in a standard work schedule, excluding public holidays, weekends (typically Saturday and Sunday), and any other designated company holidays.'" . $stringIcon,
+            'total_discrepancy_days' => "<br/><i title='Days off from that Production Routing Link.'" . $stringIcon,
         ];
 
         return
@@ -199,7 +201,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                     "footer" => "agg_sum"
                 ],
                 [
-                    "title" => "Working Days without Downtime",
+                    "title" => "Working Days without Downtime {$notes['total_days_have_ts']}",
                     "dataIndex" => "total_days_have_ts",
                     "align" => "right",
                     "width" => 150,
@@ -213,7 +215,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                     "footer" => "agg_sum"
                 ],
                 [
-                    "title" => "Downtime Days",
+                    "title" => "Downtime Days  {$notes['total_discrepancy_days']}",
                     "dataIndex" => "total_discrepancy_days",
                     "align" => "right",
                     "width" => 150,
