@@ -21,6 +21,7 @@
 @once
 <script>
     const convertSecondsToTime = (seconds) => {
+        if(undefined === seconds) return "unknown";
         const hourPerDay = 8.5
         const days = Math.floor(seconds / (3600 * hourPerDay));
         const hours = Math.floor((seconds % (3600 * hourPerDay)) / 3600);
@@ -29,7 +30,7 @@
 
         let result = '';
         if (days > 0) {
-            result += `${days} days + `;
+            result += `${days} ${days==1?'day':'days'} + `;
         }
 
         result += `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
@@ -40,15 +41,27 @@
     const taskInterval = (taskId) => {
         const timeCountingType = $('#taskParentTimeCountingType_' + taskId).val()
         let result = ""
+        let groupId = 0
         switch(timeCountingType)
         {
             case '1': 
-                const groupId = $("#taskParentId_" + taskId).val()
+                groupId = $("#taskParentId_" + taskId).val()
                 if(undefined === currentElapsed[groupId]) currentElapsed[groupId]={}
                 if(!currentElapsed[groupId][taskId]) currentElapsed[groupId][taskId] = 0
                 currentElapsed[groupId][taskId]++
                 elapse = convertSecondsToTime(currentElapsed[groupId][taskId])
                 result = "Elapsed: <span class='text-blue-600'>" + elapse + "<span>"
+                break;
+            case '2':
+                groupId = $("#taskParentPreviousGroupId_" + taskId).val()
+                elapse = convertSecondsToTime(currentElapsed[groupId][taskId])
+                
+                groupId = $("#taskParentRectifiedGroupId_" + taskId).val()
+                rectified = convertSecondsToTime(currentElapsed[groupId][taskId])
+
+                result = "Took: <span class='text-blue-800 font-bold'>" + elapse + "</span>"
+                result += "<br/>Rectified: " + rectified;
+
                 break;
             default:
                 break;

@@ -111,6 +111,7 @@ const onEnd = (e, url, category) => {
                     // console.log(meta.newParentId)
                     $("#taskParentId_" + meta.id).val(meta.newParentId)
                     $("#taskParentTimeCountingType_" + meta.id).val(meta.parentCountingType)
+                    $("#taskParentPreviousGroupId_" + meta.id).val(meta.parentPreviousGroupId)
                     break;
             }
         },

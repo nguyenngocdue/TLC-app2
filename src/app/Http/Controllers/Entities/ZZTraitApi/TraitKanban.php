@@ -56,7 +56,10 @@ trait TraitKanban
 			$newTransitionId = $this->setTransitionLog($item, $newParentId);
 			$item->kanban_task_transition_id = $newTransitionId;
 
-			$parentCountingType = Kanban_task_group::find($newParentId)->time_counting_type;
+			$parent = Kanban_task_group::find($newParentId);
+			$parentCountingType = $parent->time_counting_type;
+			$parentPreviousGroupId = $parent->previous_group_id;
+			$parentRectifiedGroupId = $parent->rectified_group_id;
 		}
 
 		$item->save();
@@ -65,6 +68,8 @@ trait TraitKanban
 			'table' => $table,
 			'newParentId' => $newParentId,
 			'parentCountingType' => $parentCountingType,
+			'parentPreviousGroupId' => $parentPreviousGroupId,
+			'parentRectifiedGroupId' => $parentRectifiedGroupId,
 		], "Updated");
 	}
 
