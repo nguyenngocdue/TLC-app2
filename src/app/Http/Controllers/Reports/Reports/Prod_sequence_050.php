@@ -52,7 +52,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
                     ,IF(pose.total_days_no_sun_no_ph, pose.total_days_no_sun_no_ph, NULL) AS independent_holiday_sunday_day
                     ,IF(pose.total_hours, FORMAT(pose.total_hours/8,2), NULL) AS net_working_day
                     ,IF(pose.total_days_have_ts, pose.total_days_have_ts, NULL) AS total_days_have_ts
-                    ,IF(pose.total_discrepancy_days, pose.total_discrepancy_days, NULL) AS total_discrepancy_days
+                    ,pose.total_discrepancy_days AS total_discrepancy_days
                     ,pose.status AS prod_sequence_status
 
                     #,SUM(po.total_calendar_days) AS total_calendar_days
