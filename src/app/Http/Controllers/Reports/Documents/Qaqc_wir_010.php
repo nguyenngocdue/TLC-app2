@@ -25,7 +25,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             $y = $y - 1;
             $m = 12;
         };
-        $previousMonth = str_pad($m, '2','0', STR_PAD_LEFT);
+        $previousMonth = str_pad($m-1, '2','0', STR_PAD_LEFT);
         $previousDate = $y."-".$previousMonth."-25";
 
         $latestDate = $month.'-'."25";
@@ -192,6 +192,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         $params['previous_month'] =  substr($previousDate, 0, 7);
         $params['latest_month'] =  substr($latestDate, 0, 7);
+        // dd($previousDate, $latestDate);
         return $params;
     }
 
