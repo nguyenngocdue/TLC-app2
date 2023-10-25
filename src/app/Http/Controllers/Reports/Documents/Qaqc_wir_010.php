@@ -143,7 +143,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         ];
     }
 
-    protected function getTableColumns($dataSource, $modeType)
+    protected function getTableColumns($params, $dataSource)
     {
         return [
             [
@@ -163,14 +163,14 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                 'footer' => 'agg_sum',
             ],
             [
-                'title' => 'Last month QC Acceptance (%)',
+                'title' => $params['previous_month'].'<br/>QC Acceptance (%)',
                 'dataIndex' => 'previous_acceptance_percent',
                 'align' => 'right',
                 'width' => 180,
                 'footer' => 'agg_sum',
             ],
             [
-                'title' => 'This month QC Acceptance (%)',
+                'title' => $params['latest_month'].'<br/>QC Acceptance (%)',
                 'dataIndex' => 'latest_acceptance_percent',
                 'align' => 'right',
                 'width' => 180,
