@@ -4,6 +4,7 @@
 <script src="{{ asset('js/jquery@3.7.1.min.js') }}"></script>
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 <script>
+    let wsClientId
     function check() {
         const host = window.location.hostname
         const url = 'https://' + host + '/api/v1/system/app_version'
@@ -13,6 +14,7 @@
                     success: function (response) {
                         if (response.success) {
                             const versionServer = response.hits
+                            wsClientId = response.meta.ws_client_id
                             if (window.localStorage.getItem('version')) {
                                 const versionLocal = window.localStorage.getItem('version')
                                 if(versionLocal != versionServer){

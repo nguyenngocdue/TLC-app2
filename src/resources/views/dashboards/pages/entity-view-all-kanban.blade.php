@@ -28,4 +28,14 @@
     </div>
     <x-renderer.kanban.modals groupWidth="{{$groupWidth}}"/>
 </div>
+
+<script>
+window.Echo.channel('wss-kanban-channel').listen('WssKanbanChannel', (e) => {
+    wsClientId1 = e.data.wsClientId
+    if(wsClientId == wsClientId1) return //<<Ignore current tab.
+    console.log("WssKanbanChannel", e.data, wsClientId1);
+    
+})
+</script>
+
 @endsection

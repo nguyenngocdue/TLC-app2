@@ -34,15 +34,15 @@ Route::get('redis', [RedisController::class, 'index']);
 Route::get('login/google', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('login/google/callback', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'handleGoogleCallback']);
 Route::get('wss-demo', function () {
-    broadcast(new WssDemoChannel(['name' => 'wss-demo']));
+    broadcast(new WssDemoChannel(['name' => 'wss-demo-822553']));
 });
 
 Route::get('test-queue', function () {
     TestLogToFileJob::dispatch();
 });
 Route::get('test-mail', function (Request $request) {
-    if(!$request->has('email')) return 'Please enter your email address on url params';
+    if (!$request->has('email')) return 'Please enter your email address on url params';
     $email = $request->input('email');
     Mail::to($email)->send(new TestMail());
-    return 'Test Mail Successful! Please check email test in mail '.$email;
+    return 'Test Mail Successful! Please check email test in mail ' . $email;
 });

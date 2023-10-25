@@ -27,7 +27,7 @@ const setValue = (sortable, url, prefix) => {
     $.ajax({
         method: "POST",
         url,
-        data: { action: "changeOrder", order, },
+        data: { wsClientId, action: "changeOrder", order, },
         success: function (response) {
             // toastr.success(response.message)
         },
@@ -41,7 +41,7 @@ const addANewKanbanObj = (prefix, parent_id, url, groupWidth) => {
     $.ajax({
         method: "POST",
         url,
-        data: { action: "addNew", parent_id, groupWidth },
+        data: { wsClientId, action: "addANewItem", parent_id, groupWidth },
         success: function (response) {
             // toastr.success(response.message)
             // console.log(response)
@@ -76,7 +76,7 @@ const onClickToCommit = (id, lbl_type, txt_type, caption_type, url) => {
     $.ajax({
         method: "POST",
         url,
-        data: { action: "changeName", newText, id },
+        data: { wsClientId, action: "changeName", newText, id },
         success: function (response) {
             // toastr.success(response.message)
 
@@ -101,7 +101,7 @@ const onEnd = (e, url, category) => {
     $.ajax({
         method: "POST",
         url,
-        data: { action: "changeParent", category, itemId, newParentId },
+        data: { wsClientId, action: "changeParent", category, itemId, newParentId },
         success: function (response) {
             toastr.success(response.message)
             // console.log(response)
@@ -190,7 +190,7 @@ const kanbanLoadPage = (pageId, url, groupWidth) => {
     $.ajax({
         method: 'POST',
         url,
-        data: { action: "loadKanbanPage", pageId, groupWidth },
+        data: { wsClientId, action: "loadKanbanPage", pageId, groupWidth },
         success: function (response) {
             // toastr.success(response.message)
             const { renderer } = response.hits
@@ -216,7 +216,7 @@ const kanbanLoadModalRenderer = (txtTypeId, divTypeBody, url) => {
     $.ajax({
         method: "POST",
         url,
-        data: { action: "editItemRenderProps", id, },
+        data: { wsClientId, action: "editItemRenderProps", id, },
         success: function (response) {
             const { renderer } = response.hits
             $("#" + divTypeBody).html(renderer)
@@ -273,7 +273,7 @@ const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
     $.ajax({
         method: "POST",
         url,
-        data: { action: "updateItemRenderProps", id, ...item, groupWidth },
+        data: { wsClientId, action: "updateItemRenderProps", id, ...item, groupWidth },
         success: function (response) {
             const { renderer } = response.hits
             clearChildrenInterval(response.meta.table, id)
@@ -302,7 +302,7 @@ const kanbanDeleteItem = (txtTypeId, url, prefix) => {
             $.ajax({
                 method: "POST",
                 url,
-                data: { action: "deleteItemRenderProps", id },
+                data: { wsClientId, action: "deleteItemRenderProps", id },
                 success: function (response) {
                     // console.log(response)
                     $("#" + prefix + id)
