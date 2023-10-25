@@ -49,7 +49,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
