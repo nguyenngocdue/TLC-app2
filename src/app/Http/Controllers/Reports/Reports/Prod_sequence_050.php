@@ -6,7 +6,8 @@ use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
-use App\Utils\Support\DateReport;
+use App\Utils\Support\Report;
+use Illuminate\Support\Collection;
 
 class Prod_sequence_050 extends Report_ParentReport2Controller
 {
@@ -41,10 +42,24 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
                     ,pr.name AS prod_routing_name
                     ,pd.id AS prod_discipline_id
                     ,pd.name AS prod_discipline_name
-                    ,FORMAT(IF(SUM(pose.total_hours),SUM(pose.total_hours), NULL) ,2) AS sum_total_hours
+                    ,po.name AS prod_order_name
+                    ,po.production_name AS prod_name
+                    ,po.id AS prod_order_id
+                    ,po.status AS prod_order_status
+
+
+                    ,IF(pose.total_calendar_days, pose.total_calendar_days, NULL) AS total_calendar_days
+                    ,IF(pose.total_days_no_sun_no_ph, pose.total_days_no_sun_no_ph, NULL) AS independent_holiday_sunday_day
+                    ,IF(pose.total_hours, FORMAT(pose.total_hours/8,2), NULL) AS net_working_day
+                    ,IF(pose.total_days_have_ts, pose.total_days_have_ts, NULL) AS total_days_have_ts
+                    ,IF(pose.total_discrepancy_days, pose.total_discrepancy_days, NULL) AS total_discrepancy_days
+                    ,pose.status AS prod_sequence_status
+
+                    #,SUM(po.total_calendar_days) AS total_calendar_days
+                    ,FORMAT(IF(SUM(pose.total_hours),pose.total_hours, NULL) ,2) AS sum_total_hours
                     ,FORMAT(IF(AVG(pose.worker_number),AVG(pose.worker_number), NULL),2) AS avg_man_power
                     ,FORMAT(IF(SUM(pose.total_hours)*AVG(pose.worker_number), SUM(pose.total_hours)*AVG(pose.worker_number), NULL),2) AS hours
-                    ,SUM(DATEDIFF(pose.end_date, pose.start_date)) AS number_of_days_prod_routing_link
+                    ,SUM(DATEDIFF(pose.end_date, pose.start_date) + 1) AS number_of_days_prod_routing_link
                     ,DATE_FORMAT(SUBSTR(MIN(pose.start_date), 1, 10), '%d/%m/%Y') AS from_date
                     ,DATE_FORMAT(SUBSTR(MAX(pose.end_date), 1, 10), '%d/%m/%Y') AS to_date
                     FROM sub_projects sp
@@ -60,10 +75,11 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id =  $sub";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ($prl)";
+        if ($po = $valOfParams['prod_order_id']) $sql .= "\n AND po.id IN ($po)";
         
         // if($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
                             $sql .="\n AND pose.deleted_by IS NULL
-                        GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id";
+                        GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id,po.id, po.name,po.production_name";
         return $sql;
     }
 
@@ -101,22 +117,31 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
                 'allowClear' => true,
             ],
             [
+                'title' => 'Production Order',
+                'dataIndex' => 'prod_order_id',
+                'hasListenTo' => true,
+                'multiple' => true,
+            ],
+            [
                 'title' => 'Production Routing Link',
                 'dataIndex' => 'prod_routing_link_id',
                 'hasListenTo' => true,
                 'multiple' => true,
-            ],
-            // [
-            //     'title' => 'Status',
-            //     'dataIndex' => 'status',
-            //     'allowClear' => true,
-            //     'multiple' => true,
-            // ],
+            ]
         ];
     }
 
     public function getTableColumns($params, $dataSource)
     {
+        $stringIcon = "class='text-base fa-duotone fa-circle-question hover:bg-blue-400 rounded'></i>";
+        $notes = [
+            'total_calendar_days' => "<br/><i title='The total number of days counted from the start date to the finish date of a production order (please note: consider the status of that production order).'" . $stringIcon,
+            'independent_holiday_sunday_day' => "<br/><i title='The working days excluding Sundays and public holidays.'" . $stringIcon,
+            'total_days_have_ts' => "<br/><i title='The working days excluding Sundays and public holidays without downtime.'" . $stringIcon,
+            'net_working_day' => "<br/><i title='The net working days refer to the regular workdays in a standard work schedule, excluding public holidays, weekends (typically Saturday and Sunday), and any other designated company holidays.'" . $stringIcon,
+            'total_discrepancy_days' => "<br/><i title='Days off from that Production Routing Link.'" . $stringIcon,
+        ];
+
         return
             [
                 [
@@ -161,16 +186,68 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
                     "width" => 250,
                 ],
                 [
+                    "title" => "Production Order",
+                    "dataIndex" => "prod_order_name",
+                    "align" => "left",
+                    "width" => 250,
+                ],
+                [
+                    "title" => "Production Order Name",
+                    "dataIndex" => "prod_name",
+                    "align" => "left",
+                    "width" => 250,
+                ],
+                [
+                    "title" => "Status <br/>(Production Order)",
+                    "dataIndex" => "prod_order_status",
+                    "align" => "center",
+                    "width" => 150,
+                ],
+                [
                     "title" => "Production Routing Link",
                     "dataIndex" => "prod_routing_link_name",
                     "align" => "left",
                     "width" => 400,
                 ],
                 [
-                    "title" => "Total Days",
-                    "dataIndex" => "number_of_days_prod_routing_link",
+                    "title" => "Status <br/>(Production Routing Link)",
+                    "dataIndex" => "prod_sequence_status",
+                    "align" => "center",
+                    "width" => 150,
+                ],
+                [
+                    "title" => "Total Calendar Days {$notes['total_calendar_days']}",
+                    "dataIndex" => "total_calendar_days",
                     "align" => "right",
-                    "width" => 140,
+                    "width" => 150,
+                    "footer" => "agg_sum"
+                ],
+                [
+                    "title" => "Working Days {$notes['independent_holiday_sunday_day']}",
+                    "dataIndex" => "independent_holiday_sunday_day",
+                    "align" => "right",
+                    "width" => 150,
+                    "footer" => "agg_sum"
+                ],
+                [
+                    "title" => "Working Days without Downtime {$notes['total_days_have_ts']}",
+                    "dataIndex" => "total_days_have_ts",
+                    "align" => "right",
+                    "width" => 150,
+                    "footer" => "agg_sum"
+                ],
+                [
+                    "title" => "Net Working Days {$notes['net_working_day']}",
+                    "dataIndex" => "net_working_day",
+                    "align" => "right",
+                    "width" => 150,
+                    "footer" => "agg_sum"
+                ],
+                [
+                    "title" => "Downtime Days  {$notes['total_discrepancy_days']}",
+                    "dataIndex" => "total_discrepancy_days",
+                    "align" => "right",
+                    "width" => 150,
                     "footer" => "agg_sum"
                 ],
                 [
@@ -193,8 +270,13 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
                     "align" => "right",
                     "width" => 120,
                     "footer" => "agg_sum"
-                ],
+                ]
               
             ];
     }
+    // public function changeDataSource($dataSource, $params)
+    // {
+    //     $dataSource = Report::getItemsFromDataSource($dataSource);
+    //     dd($dataSource);
+    // }
 }

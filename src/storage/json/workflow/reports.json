@@ -178,22 +178,23 @@
         "name": "report-prod_sequence_040",
         "package_tab": "report",
         "package": null,
-        "top_title": "Production Orders Duration Statistic",
-        "title": "Production Orders Duration Statistic"
+        "top_title": "Production Orders Completion Time Statistics",
+        "title": "Production Orders Completion Time Statistics"
     },
     "report-prod_sequence_050": {
         "name": "report-prod_sequence_050",
         "package_tab": "report",
         "package": "project_management",
-        "top_title": "Production Routing Links Duration Statistic",
-        "title": "Production Routing Links Duration Statistic"
+        "top_title": "Production Routing Links Completion Time Statistics",
+        "title": "Production Routing Links Completion Time Statistics"
     },
     "report-prod_sequence_060": {
         "name": "report-prod_sequence_060",
         "package_tab": "report",
         "package": null,
         "top_title": null,
-        "title": null
+        "title": null,
+        "hidden": "true"
     },
     "report-prod_sequence_110": {
         "name": "report-prod_sequence_110",

@@ -228,12 +228,29 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
     public function changeDataSource($dataSource, $params)
     {
         $dataSource = Report::getItemsFromDataSource($dataSource);
+        $route = route('report-prod_sequence_050');
         foreach ($dataSource  as $key => &$items){
             if($items->prod_order_status !== 'closed') {
                 $items->finished_at_prod_order = (object)[
                     'value' => $items->finished_at_prod_order,
                     'cell_class' => 'text-gray-300'
                 ];                
+            }
+            if(isset($items->net_working_day)){
+                $projectId = $items->project_id;
+                $subProjectId = $items->sub_project_id;
+                $prodOrderId = $items->prod_order_id;
+                $prodRoutingId = $items->prod_routing_id;
+                $route = $route.'?'
+                                .'project_id='.$projectId
+                                .'&sub_project_id='.$subProjectId
+                                .'&prod_order_id=' .$prodOrderId
+                                .'&prod_routing_id=' .$prodRoutingId;
+                $items->net_working_day = (object)[
+                    'value' => $items->net_working_day,
+                    'cell_class' => 'text-blue-700',
+                    'cell_href' => $route,
+                ];   
             }
         }
         return collect($dataSource);
