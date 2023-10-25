@@ -26,7 +26,7 @@ class Kanban_task_page extends ModelExtended
     public function getClusters()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2])->orderBy('order_no');
     }
 
     public function getMonitors1()

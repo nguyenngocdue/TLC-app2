@@ -18,6 +18,6 @@ class Kanban_task_bucket extends ModelExtended
     public function getPages()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2])->orderBy('order_no');
     }
 }

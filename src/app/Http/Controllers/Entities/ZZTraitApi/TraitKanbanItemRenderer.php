@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Blade;
 
 trait TraitKanbanItemRenderer
 {
-	function renderKanbanItem($insertedObj, $groupWidth)
+	function renderKanbanItem($table, $insertedObj, $groupWidth = 'w-72')
 	{
-		$table = $this->modelPath::getTableName();
 		$renderer = "";
 		switch ($table) {
 			case 'kanban_tasks':
@@ -32,6 +31,12 @@ trait TraitKanbanItemRenderer
 				]);
 				break;
 			case 'kanban_task_pages':
+				$renderer = Blade::render('<x-renderer.kanban.page :page="$page" groupWidth="{{$groupWidth}}"/>', [
+					'page' => $insertedObj,
+					'groupWidth' => $groupWidth,
+				]);
+				break;
+			case 'kanban_task_tocs': //<< This is a fake table
 				$renderer = Blade::render('<x-renderer.kanban.toc :page="$page" groupWidth="{{$groupWidth}}"/>', [
 					'page' => $insertedObj,
 					'groupWidth' => $groupWidth,
@@ -43,6 +48,12 @@ trait TraitKanbanItemRenderer
 					'groupWidth' => $groupWidth,
 				]);
 				break;
+				// case "all_buckets":
+				// 	$renderer = Blade::render('<x-renderer.kanban.buckets :page="$page" groupWidth="{{$groupWidth}}"/>', [
+				// 		'page' => $insertedObj,
+				// 		'groupWidth' => $groupWidth,
+				// 	]);
+				// 	break;
 			default:
 				$renderer = "Unknown how to render kanban for $table";
 				break;

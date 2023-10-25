@@ -28,7 +28,7 @@ class Kanban_task_group extends ModelExtended
     public function getTasks()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2])->orderBy('order_no');
     }
 
     public function getAssignee1()

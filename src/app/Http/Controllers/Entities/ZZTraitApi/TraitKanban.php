@@ -18,6 +18,7 @@ trait TraitKanban
 	use TraitKanbanItemRenderer;
 	use TraitKanbanUpdate;
 	use TraitKanbanTransition;
+	use TraitKanbanWsResponse;
 
 	function getLastWord($strings)
 	{
@@ -64,14 +65,20 @@ trait TraitKanban
 		}
 
 		$item->save();
-		return ResponseObject::responseSuccess([], [
+		$meta = [
 			'id' => $itemId,
 			'table' => $table,
 			'newParentId' => $newParentId,
 			'parentCountingType' => $parentCountingType,
-			'parentPreviousGroupId' => $parentPreviousGroupId,
-			'parentRectifiedGroupId' => $parentRectifiedGroupId,
-		], "Updated");
+
+		];
+		if ($table == 'kanban_tasks') {
+			$meta += 	[
+				'parentPreviousGroupId' => $parentPreviousGroupId,
+				'parentRectifiedGroupId' => $parentRectifiedGroupId,
+			];
+		}
+		return ResponseObject::responseSuccess([], $meta, "Updated");
 	}
 
 	function changeOrder(Request $request)
@@ -146,7 +153,8 @@ trait TraitKanban
 
 		$insertedObj->save();
 
-		$renderer = $this->renderKanbanItem($insertedObj, $groupWidth);
+		$table = ($table == 'kanban_task_pages') ? 'kanban_task_tocs' : $table;
+		$renderer = $this->renderKanbanItem($table, $insertedObj, $groupWidth);
 		return ResponseObject::responseSuccess(['renderer' => $renderer], ['id' => $insertedId, 'item' => $insertedObj], "Inserted");
 	}
 
@@ -221,18 +229,20 @@ trait TraitKanban
 	{
 		try {
 			$action = $request->input('action');
-			$wsClientId = $request->input('wsClientId');
-			broadcast(new WssKanbanChannel(['wsClientId' => $wsClientId, 'action' => $action]));
 			switch ($action) {
 				case "changeOrder":
 				case "changeParent":
 				case "changeName":
 				case "addANewItem":
-				case "loadKanbanPage":
-				case "editItemRenderProps":
 				case "updateItemRenderProps":
 				case "deleteItemRenderProps":
-					return $this->{$action}($request);
+
+				case "loadKanbanPage":
+				case "editItemRenderProps":
+					$result = $this->{$action}($request);
+
+					$this->kanbanBroadcast($request);
+					return $result;
 					break;
 			}
 		} catch (\Exception $e) {

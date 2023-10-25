@@ -61,7 +61,9 @@ trait TraitKanbanUpdate
         $this->handleCheckboxAndDropdownMulti($request, $item, $props['oracy_prop']);
 
         $orderedItem = $this->getOrderedDataSource($id, $item);
-        $renderer = $this->renderKanbanItem($orderedItem, $groupWidth);
+
+        $table = ($table == 'kanban_task_pages') ? 'kanban_task_tocs' : $table;
+        $renderer = $this->renderKanbanItem($table, $orderedItem, $groupWidth);
 
         return ResponseObject::responseSuccess(['renderer' => $renderer], ['table' => $table], "Updated");
     }

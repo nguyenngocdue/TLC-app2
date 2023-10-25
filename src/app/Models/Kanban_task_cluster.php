@@ -24,6 +24,6 @@ class Kanban_task_cluster extends ModelExtended
     public function getGroups()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2])->orderBy('order_no');
     }
 }

@@ -33,8 +33,19 @@
 window.Echo.channel('wss-kanban-channel').listen('WssKanbanChannel', (e) => {
     wsClientId1 = e.data.wsClientId
     if(wsClientId == wsClientId1) return //<<Ignore current tab.
-    console.log("WssKanbanChannel", e.data, wsClientId1);
-    
+    switch(e.data.action){
+        case "changeOrder":
+            const { renderer, divParentId, parentId } = e.data
+            $("#" + divParentId ).replaceWith(renderer)
+            break;
+        case "changeParent":
+            //It will have no impact onto any other clients
+            break;
+        default: 
+            console.log("Unknown how to deal with action [",e.data.action,"]")
+            console.log("WssKanbanChannel", e.data, wsClientId1);
+            break;
+    }
 })
 </script>
 

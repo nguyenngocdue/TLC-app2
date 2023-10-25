@@ -24,10 +24,11 @@ const getChildPrefix = (prefix) => {
 const setValue = (sortable, url, prefix) => {
     var order = sortable.toArray().filter(a => a.startsWith(prefix))
     // console.log(order)
+    const parentId = getLastWord(sortable.el.id)
     $.ajax({
         method: "POST",
         url,
-        data: { wsClientId, action: "changeOrder", order, },
+        data: { wsClientId, action: "changeOrder", order, parentId },
         success: function (response) {
             // toastr.success(response.message)
         },
@@ -85,7 +86,7 @@ const onClickToCommit = (id, lbl_type, txt_type, caption_type, url) => {
     })
 }
 
-const getCharactersAfterLastUnderscore = (str) => {
+const getLastWord = (str) => {
     const lastUnderscoreIndex = str.lastIndexOf('_');
     return (lastUnderscoreIndex !== -1) ? str.substring(lastUnderscoreIndex + 1) : str;
 }
@@ -96,8 +97,8 @@ const onEnd = (e, url, category) => {
     if (from.id === to.id) return //<<Only change order, parent doesn't change
     // console.log(sortable[i].toArray())
     // console.log("ON END - To:", to.id, "itemId:", item.id, "Cat:", category)
-    const itemId = getCharactersAfterLastUnderscore(item.id)
-    const newParentId = getCharactersAfterLastUnderscore(to.id)
+    const itemId = getLastWord(item.id)
+    const newParentId = getLastWord(to.id)
     $.ajax({
         method: "POST",
         url,
@@ -173,7 +174,7 @@ const kanbanLoadPage = (pageId, url, groupWidth) => {
                 $("#" + db1.id).children().each((a, db2) => {
                     if (db2.id === '') return
                     // console.log(db2.id)
-                    ids.push(getCharactersAfterLastUnderscore(db2.id))
+                    ids.push(getLastWord(db2.id))
                 })
             }
         })
@@ -245,7 +246,7 @@ const getItem = () => {
 }
 
 const clearChildrenInterval = (table, id) => {
-    let children
+    let children = null
     switch (table) {
         case "kanban_tasks":
             //has to be parent as task_ is same level and can't get children of itself
@@ -258,10 +259,12 @@ const clearChildrenInterval = (table, id) => {
             children = $('#cluster_' + id).find('[id^="intervalId"]');
             break;
     }
-    for (let i = 0; i < children.length; i++) {
-        const intervalId = children[i].value
-        clearInterval(intervalId)
-        globalInterval = globalInterval.filter(i => i != intervalId)
+    if (children) {
+        for (let i = 0; i < children.length; i++) {
+            const intervalId = children[i].value
+            clearInterval(intervalId)
+            globalInterval = globalInterval.filter(i => i != intervalId)
+        }
     }
 }
 
