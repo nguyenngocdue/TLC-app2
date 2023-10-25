@@ -32,81 +32,83 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     {
         // dd($params);
         $sql = "SELECT 
-                        sp.project_id AS project_id
-                        ,sp.id AS sub_project_id
-                        ,sp.name AS sub_project_name
-                        ,po.id AS prod_order_id
-                        ,po.name AS prod_order_name
-                        ,prl.id AS prod_routing_link_id
-                        ,prl.name AS prod_routing_link_name
-                        ,pr.id AS prod_routing_id    
-                        ,pr.name AS prod_routing_name    
-                        ,po.status AS prod_order_status
-                        ,pose.status AS prod_sequence_status
-                        #,pose.total_hours AS total_hours
-                        
+                    sp.project_id AS project_id
+                    ,sp.id AS sub_project_id
+                    ,sp.name AS sub_project_name
+                    ,po.id AS prod_order_id
+                    ,po.name AS prod_order_name
+                    ,prl.id AS prod_routing_link_id
+                    ,prl.name AS prod_routing_link_name
+                    ,pr.id AS prod_routing_id    
+                    ,pr.name AS prod_routing_name    
+                    ,po.status AS prod_order_status
+                    ,pose.status AS prod_sequence_status
+                    #,pose.total_hours AS total_hours
+                    ,erprl.name AS erp_routing_link_name
+                    ,pose.erp_prod_order_name AS erp_prod_order_name
 
-                        ,IF(prd.target_man_power,prd.target_man_power, NULL) AS target_man_power
-                        ,FORMAT(ROUND((pru.worker_number), 2),2) AS actual_man_power
-                        ,FORMAT(round((pru.worker_number - prd.target_man_power),2)*-1,2) AS vari_man_power
-                        ,IF(100 - round((pru.worker_number / prd.target_man_power)*100,2),
-                            100 - round((pru.worker_number / prd.target_man_power)*100,2),NULL
-                            ) AS percent_vari_man_power
-
-
-                        ,IF(prd.target_hours, prd.target_hours, NULL) AS target_hours
-                        ,FORMAT(ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2),2) AS actual_total_hours
-                        ,ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) - prd.target_hours),2)*-1 AS vari_hours
-                        ,IF(100 - ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) / prd.target_hours)*100,2),
-                            100 - ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) / prd.target_hours)*100,2),NULl
-                            ) AS percent_vari_hours
+                    ,IF(prd.target_man_power,prd.target_man_power, NULL) AS target_man_power
+                    ,FORMAT(ROUND((pru.worker_number), 2),2) AS actual_man_power
+                    ,FORMAT(round((pru.worker_number - prd.target_man_power),2)*-1,2) AS vari_man_power
+                    ,IF(100 - round((pru.worker_number / prd.target_man_power)*100,2),
+                        100 - round((pru.worker_number / prd.target_man_power)*100,2),NULL
+                        ) AS percent_vari_man_power
 
 
-                        ,IF(prd.target_man_hours, prd.target_man_hours, NULL) AS target_man_hours
-                        ,FORMAT(ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2),2) AS actual_man_hours
-                        ,ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) - prd.target_man_hours),2)*-1 AS vari_man_hours
-                        ,IF(100 - ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2),
-                            100 - ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2) , NULL
-                            )AS percent_vari_man_hours
-
-                        
-                        ,FORMAT(pose.total_man_hours,2) AS total_man_hours
-                        ,pd.id AS prod_discipline_id
-                        ,pd.name AS prod_discipline_name
+                    ,IF(prd.target_hours, prd.target_hours, NULL) AS target_hours
+                    ,FORMAT(ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2),2) AS actual_total_hours
+                    ,ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) - prd.target_hours),2)*-1 AS vari_hours
+                    ,IF(100 - ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) / prd.target_hours)*100,2),
+                        100 - ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) / prd.target_hours)*100,2),NULl
+                        ) AS percent_vari_hours
 
 
-                    FROM sub_projects sp
-                    JOIN prod_orders po ON po.sub_project_id = sp.id
-                    LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
+                    ,IF(prd.target_man_hours, prd.target_man_hours, NULL) AS target_man_hours
+                    ,FORMAT(ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2),2) AS actual_man_hours
+                    ,ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) - prd.target_man_hours),2)*-1 AS vari_man_hours
+                    ,IF(100 - ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2),
+                        100 - ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2) , NULL
+                        )AS percent_vari_man_hours
+
+                    
+                    ,FORMAT(pose.total_man_hours,2) AS total_man_hours
+                    ,pd.id AS prod_discipline_id
+                    ,pd.name AS prod_discipline_name
 
 
-                    LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
-                    LEFT JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
-                    LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id AND prd.prod_routing_id = pr.id
+                FROM sub_projects sp
+                JOIN prod_orders po ON po.sub_project_id = sp.id
+                LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
 
-                    JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
-                    JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
 
-                    WHERE 1 = 1
-                        AND sp.project_id = '{{project_id}}'
-                        AND sp.id = {{sub_project_id}}";
-        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
-        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
-        if (isset($params['status'])) $sql .= "\n  AND pose.status IN ({{status}})";
-        if (isset($params['prod_discipline_id'])) $sql .= "\n  AND prl.prod_discipline_id = ({{prod_discipline_id}})";
-        elseif (!isset($params['status'])) $sql .= "\n AND pose.status IN ('in_progress', 'finished', 'on_hold')";
+                LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
+                LEFT JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
+                LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id AND prd.prod_routing_id = pr.id
+                LEFT JOIN erp_routing_links erprl ON erprl.id = prd.erp_routing_link_id
 
-        $sql .= "\n     AND po.status IN ('in_progress', 'finished', 'on_hold')
-                        AND SUBSTR(pru.date, 1, 10) <= '{{picker_date}}'
-                        AND pose.deleted_by IS NULL";
+                JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
+                JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
 
-        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id = {{prod_routing_link_id}}";
-        $sql .= "\n GROUP BY project_id, sub_project_name, prod_order_id, prod_order_name, sub_project_id,prod_routing_link_id,pru.worker_number
-                    ,target_hours
-                    ,target_man_hours
-                    ,target_man_power
-                    ,total_man_hours
-                    ORDER BY sub_project_name, prod_order_name";
+                WHERE 1 = 1
+                    AND sp.project_id = '{{project_id}}'
+                    AND sp.id = {{sub_project_id}}";
+    if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
+    if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
+    if (isset($params['status'])) $sql .= "\n  AND pose.status IN ({{status}})";
+    if (isset($params['prod_discipline_id'])) $sql .= "\n  AND prl.prod_discipline_id = ({{prod_discipline_id}})";
+    elseif (!isset($params['status'])) $sql .= "\n AND pose.status IN ('in_progress', 'finished', 'on_hold')";
+
+    $sql .= "\n     AND po.status IN ('in_progress', 'finished', 'on_hold')
+                    AND SUBSTR(pru.date, 1, 10) <= '{{picker_date}}'
+                    AND pose.deleted_by IS NULL";
+
+    if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id = {{prod_routing_link_id}}";
+    $sql .= "\n GROUP BY project_id, sub_project_name, prod_order_id, prod_order_name, sub_project_id,prod_routing_link_id,pru.worker_number
+                ,target_hours
+                ,target_man_hours
+                ,target_man_power
+                ,total_man_hours
+                ORDER BY sub_project_name, prod_order_name";
         return $sql;
     }
 
@@ -252,6 +254,18 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     "align" => "center",
                     "width" => 130,
                     'fixed' => 'left',
+                ],
+                [
+                    "title" => "ERP Routing Link",
+                    "dataIndex" => "erp_routing_link_name",
+                    "align" => "left",
+                    "width" => 200,
+                ],
+                [
+                    "title" => "ERP Production Order",
+                    "dataIndex" => "erp_prod_order_name",
+                    "align" => "left",
+                    "width" => 200,
                 ],
                 [
                     "title" => "Man-power  <br/>(AVG)",

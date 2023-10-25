@@ -7,6 +7,7 @@ use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Utils\Support\DateReport;
+use App\Utils\Support\Report;
 
 class Prod_sequence_040 extends Report_ParentReport2Controller
 {
@@ -48,18 +49,16 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                         ,po.status AS prod_order_status
                         ,po.total_calendar_days AS total_calendar_days
                         ,po.total_days_no_sun_no_ph AS independent_holiday_sunday_day
-                        ,po.total_hours*60 AS net_working_day
+                        ,FORMAT(po.total_hours/8,2) AS net_working_day
                         ,po.total_days_have_ts AS total_days_have_ts
                         ,po.total_discrepancy_days AS total_discrepancy_days";
                     $sql .= "\n FROM sub_projects sp
                     JOIN prod_orders po ON po.sub_project_id = sp.id
                     LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
                     LEFT JOIN projects pj ON sp.project_id = pj.id
-                    WHERE 1 = 1
-                        AND sp.project_id = '{{project_id}}'
-                        AND sp.id = {{sub_project_id}}";
+                    WHERE 1 = 1";
         if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
-        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id =  $sub";
+        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
         if ($prodOrder = $valOfParams['prod_order_id']) $sql .= "\n AND po.id IN ($prodOrder)";
         if($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
@@ -185,14 +184,14 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                     "footer" => "agg_sum"
                 ],
                 [
-                    "title" => "Non-Sunday & Non-Holiday Workdays",
+                    "title" => "Working Days",
                     "dataIndex" => "independent_holiday_sunday_day",
                     "align" => "right",
                     "width" => 150,
                     "footer" => "agg_sum"
                 ],
                 [
-                    "title" => "Non-Stop Workdays",
+                    "title" => "Working Days without Downtime",
                     "dataIndex" => "total_days_have_ts",
                     "align" => "right",
                     "width" => 150,
