@@ -13,7 +13,9 @@ class VersionController extends Controller
         $version = config('version.app_version');
         return ResponseObject::responseSuccess(
             $version,
-            [],
+            [
+                'ws_client_id' => uniqid(),
+            ],
             "Get version app successfully!"
         );
     }

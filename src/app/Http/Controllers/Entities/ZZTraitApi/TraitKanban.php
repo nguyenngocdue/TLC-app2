@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Events\WssKanbanChannel;
 use App\Models\Kanban_task_group;
 use App\Models\Kanban_task_page;
 use App\Utils\Constant;
@@ -119,7 +120,7 @@ trait TraitKanban
 		}
 	}
 
-	function addNew(Request $request)
+	function addANewItem(Request $request)
 	{
 		$table = $this->modelPath::getTableName();
 		$parent_column = $this->getParentColumn($table);
@@ -220,11 +221,13 @@ trait TraitKanban
 	{
 		try {
 			$action = $request->input('action');
+			$wsClientId = $request->input('wsClientId');
+			broadcast(new WssKanbanChannel(['wsClientId' => $wsClientId, 'action' => $action]));
 			switch ($action) {
 				case "changeOrder":
 				case "changeParent":
 				case "changeName":
-				case "addNew":
+				case "addANewItem":
 				case "loadKanbanPage":
 				case "editItemRenderProps":
 				case "updateItemRenderProps":
