@@ -79,9 +79,11 @@ trait TraitKanbanWsResponse
 					$wsResponse = new WssKanbanChannel($params + $params1);
 					broadcast($wsResponse);
 					break;
-				case "changeName":
-				case "addANewItem":
 				case "updateItemRenderProps":
+				case "changeName":
+
+					break;
+				case "addANewItem":
 				case "deleteItemRenderProps":
 					$wsResponse = new WssKanbanChannel($params);
 					broadcast($wsResponse);

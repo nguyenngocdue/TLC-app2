@@ -30,7 +30,8 @@
 </div>
 
 <script>
-window.Echo.channel('wss-kanban-channel').listen('WssKanbanChannel', (e) => {
+const app_env = '{{env('APP_URL')}}';
+window.Echo.channel(app_env + '-wss-kanban-channel').listen('WssKanbanChannel', (e) => {
     wsClientId1 = e.data.wsClientId
     if(wsClientId == wsClientId1) return //<<Ignore current tab.
     switch(e.data.action){

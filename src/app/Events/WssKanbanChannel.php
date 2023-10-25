@@ -29,6 +29,6 @@ class WssKanbanChannel implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('wss-kanban-channel');
+        return new Channel(env('APP_URL') . '-wss-kanban-channel');
     }
 }
