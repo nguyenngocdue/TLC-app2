@@ -31,4 +31,10 @@ class WssKanbanChannel implements ShouldBroadcast
     {
         return new Channel('wss-kanban-channel-' . env('APP_DOMAIN'));
     }
+
+    // Set the delay in milliseconds
+    public function delay()
+    {
+        return now()->addMilliseconds(100);
+    }
 }
