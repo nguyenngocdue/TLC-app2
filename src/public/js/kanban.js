@@ -213,7 +213,7 @@ const renameCurrentPage = (pageId) => {
 
 const kanbanLoadModalRenderer = (txtTypeId, divTypeBody, url) => {
     const id = $("#" + txtTypeId).val()
-    console.log("Starting up #", id, url)
+    // console.log("Starting up #", id, url)
     $.ajax({
         method: "POST",
         url,
@@ -269,7 +269,7 @@ const clearChildrenInterval = (table, id) => {
 }
 
 const kanbanReRender = (table, prefix, id, guiType, renderer) => {
-    console.log('kanbanReRender', table, prefix, id, guiType)
+    // console.log('kanbanReRender', table, prefix, id, guiType)
     clearChildrenInterval(table, id)
 
     if (prefix === 'cardPage000') {

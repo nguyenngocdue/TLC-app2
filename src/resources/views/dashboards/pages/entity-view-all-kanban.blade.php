@@ -49,7 +49,7 @@ const getPrefix = {
 const reRenderItem = (table, id, guiType='') => {
     const prefix = getPrefix[table + guiType] ?? "Unknown prefix of "+ table+guiType
     const url = getRouteByTable[table] ?? "Unknown route of "+ table
-    console.log("replacing", table, id, guiType, "with new renderer.")
+    // console.log("replacing", table, id, guiType, "with new renderer.")
     $.ajax({
         method: "POST",
         url,
