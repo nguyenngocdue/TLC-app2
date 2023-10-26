@@ -56,7 +56,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_workplace_id": {
         "name": "_workplace_id",
@@ -115,7 +116,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_user_team_ot_id": {
         "name": "_user_team_ot_id",
@@ -174,7 +176,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_name": {
         "name": "_name",
@@ -233,7 +236,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_description": {
         "name": "_description",
@@ -292,12 +296,13 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_getHrOtrLines": {
         "name": "_getHrOtrLines",
         "column_name": "getHrOtrLines",
-        "admin": "",
+        "admin": "true",
         "acct_manager": "",
         "acct_member": "",
         "bd_manager": "",
@@ -351,7 +356,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -410,7 +416,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -469,7 +476,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_total_hours": {
         "name": "_total_hours",
@@ -528,7 +536,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -587,7 +596,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
@@ -646,7 +656,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_status": {
         "name": "_status",
@@ -705,7 +716,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -764,7 +776,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -823,7 +836,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -882,7 +896,8 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -941,6 +956,7 @@
         "proj_admin": "",
         "ppc_admin": "",
         "ppc_manager": "",
-        "ppc_member": ""
+        "ppc_member": "",
+        "proj_supervisor_nz": ""
     }
 }
