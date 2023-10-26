@@ -293,10 +293,18 @@ const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
         success: function (response) {
             const { renderer } = response.hits
             const { table, guiType } = response.meta
-            kanbanReRender(table, prefix, id, renderer, guiType)
+            kanbanReRender(table, prefix, id, guiType, renderer,)
         },
         error: onKanbanAjaxError,
     })
+}
+
+const kanbanDeleteItemGui = (prefix, id) => {
+    $("#" + prefix + id)
+        .removeClass("bg-white") //<< For task
+        .addClass("bg-red-400 rounded")
+        .fadeOut(1000)
+    console.log("Deleted", prefix + id)
 }
 
 const kanbanDeleteItem = (txtTypeId, url, prefix) => {
@@ -315,14 +323,10 @@ const kanbanDeleteItem = (txtTypeId, url, prefix) => {
             $.ajax({
                 method: "POST",
                 url,
-                data: { wsClientId, action: "deleteItemRenderProps", id },
+                data: { wsClientId, action: "deleteItemRenderProps", id, prefix },
                 success: function (response) {
                     // console.log(response)
-                    $("#" + prefix + id)
-                        .removeClass("bg-white") //<< For task
-                        .addClass("bg-red-400 rounded")
-                        .fadeOut(1000)
-                    console.log("Deleted", prefix + id)
+                    kanbanDeleteItemGui(prefix, id)
                 },
                 error: onKanbanAjaxError,
             })

@@ -39,28 +39,27 @@ trait TraitKanbanWsResponse
 		try {
 			$action = $request->input('action');
 			$tableName = $this->modelPath::getTableName();
-			$params = $request->input() + ['tableName' => $tableName];
+			$parentType = $this->getParentTable($tableName);
+			$params = $request->input() + ['tableName' => $tableName, 'parentType' => $parentType];
 			switch ($action) {
 				case "changeOrder":
 					$parentId = $params['parentId'];
-					$parentType = $this->getParentTable($tableName);
 					$params1 = [
-						'parentType' => $parentType,
 						'parentId' => $parentId,
-						'guiType' => '',
+						//Only TOC can be changed order.
+						'guiType' => ($parentType == 'kanban_task_pages') ? 'cardPage' : '',
 					];
-					//Only TOC can be changed order.
-					if ($parentType == 'kanban_task_pages') $params1['guiType'] = 'cardPage';
 					$wsResponse = new WssKanbanChannel($params + $params1);
 					broadcast($wsResponse);
 					break;
 				case "updateItemRenderProps":
 				case "changeName":
-
-					break;
 				case "addANewItem":
-				case "deleteItemRenderProps":
 					$wsResponse = new WssKanbanChannel($params);
+					broadcast($wsResponse);
+					break;
+				case "deleteItemRenderProps":
+					$wsResponse = new WssKanbanChannel($params + ['prefix' => $request->input('prefix')]);
 					broadcast($wsResponse);
 					break;
 				case "changeParent":

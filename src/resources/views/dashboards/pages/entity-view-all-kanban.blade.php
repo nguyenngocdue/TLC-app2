@@ -71,6 +71,19 @@ window.Echo.channel('wss-kanban-channel-' + app_env).listen('WssKanbanChannel', 
             const { parentType, parentId, guiType } = e.data
             reRenderItem(parentType, parentId, guiType)
             break;
+        case "updateItemRenderProps":
+        case "changeName":
+            const {tableName, id} = e.data
+            reRenderItem(tableName, id)
+            break;
+        case "addANewItem":
+            const parent_type = e.data.parentType
+            const parent_id = e.data.parent_id
+            reRenderItem(parent_type, parent_id)
+            break;
+        case "deleteItemRenderProps":
+            kanbanDeleteItemGui(e.data.prefix, e.data.id )
+            break;
         case "changeParent":
             //It will have no impact onto any other clients
             break;
