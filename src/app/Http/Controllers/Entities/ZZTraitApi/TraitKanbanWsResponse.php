@@ -77,6 +77,7 @@ trait TraitKanbanWsResponse
 						'divParentId' => $divParentId,
 					];
 					$wsResponse = new WssKanbanChannel($params + $params1);
+					sleep(1);
 					broadcast($wsResponse);
 					break;
 				case "updateItemRenderProps":
