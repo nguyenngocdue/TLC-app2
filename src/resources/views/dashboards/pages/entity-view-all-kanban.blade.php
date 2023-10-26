@@ -38,6 +38,7 @@ window.Echo.channel('wss-kanban-channel-' + app_env).listen('WssKanbanChannel', 
         case "changeOrder":
             const { renderer, divParentId, parentId } = e.data
             $("#" + divParentId ).replaceWith(renderer)
+            console.log("replacing", divParentId,"with new renderer.")
             break;
         case "changeParent":
             //It will have no impact onto any other clients
