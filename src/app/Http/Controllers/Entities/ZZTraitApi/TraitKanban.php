@@ -151,6 +151,21 @@ trait TraitKanban
 			$insertedObj->kanban_task_transition_id = $transitionId;
 		}
 
+		if ($table === 'kanban_task_clusters') {
+			$parentPage = $insertedObj->getParent;
+			$defaultStatuses = $parentPage->default_statuses;
+			$statuses = explode(",", $defaultStatuses);
+			$statuses = array_map(fn ($i) => trim($i), $statuses);
+			// Log::info($statuses);
+			foreach ($statuses as $status) {
+				Kanban_task_group::create([
+					'name' => $status,
+					'owner_id' => CurrentUser::id(),
+					'kanban_cluster_id' => $insertedId,
+				]);
+			}
+		}
+
 		$insertedObj->save();
 
 		$table = ($table == 'kanban_task_pages') ? 'kanban_task_tocs' : $table;
