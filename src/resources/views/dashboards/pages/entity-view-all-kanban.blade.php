@@ -40,7 +40,7 @@ const getPrefix = {
     "kanban_tasks": "task_parent_",
     "kanban_task_groups": "group_parent_",
     "kanban_task_clusters": "cluster_parent_",
-    "kanban_task_pages": "task_parent_",
+    "kanban_task_pages": "cardPage000",
 }
 
 const reRenderItem = (table, id) => {

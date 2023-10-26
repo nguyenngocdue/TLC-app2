@@ -272,8 +272,12 @@ const kanbanReRender = (table, prefix, id, renderer) => {
     console.log('kanbanReRender', table, prefix, id)
     clearChildrenInterval(table, id)
 
-    const myId = prefix + id
-    const myDiv = $("#" + myId)
+    if (prefix === 'cardPage000') {
+        myDiv = $("#" + prefix)
+    } else {
+        myDiv = $("#" + prefix + id)
+    }
+
     myDiv.replaceWith(renderer)
 }
 

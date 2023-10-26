@@ -232,10 +232,10 @@ trait TraitKanban
 		$modelPath = Str::modelPathFrom($table);
 		$item = $modelPath::find($id);
 
-		$table = ($table == 'kanban_task_pages') ? 'kanban_task_tocs' : $table;
+		// $table = ($table == 'kanban_task_pages') ? 'kanban_task_tocs' : $table;
 		$renderer = $this->renderKanbanItem($table, $item);
 
-		return ResponseObject::responseSuccess(['renderer' => $renderer], $request->input(), "Re-render");
+		return ResponseObject::responseSuccess(['renderer' => $renderer, 'item' => $item, 'modelPath' => $modelPath], $request->input(), "Re-render");
 	}
 
 	function kanban(Request $request)
