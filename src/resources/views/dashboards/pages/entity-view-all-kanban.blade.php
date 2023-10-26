@@ -30,15 +30,43 @@
 </div>
 
 <script>
+const getRouteByTable = {
+    "kanban_tasks": route_task,
+    "kanban_task_groups": route_group,
+    "kanban_task_clusters": route_cluster,
+    "kanban_task_pages": route_page,
+}
+const getPrefix = {
+    "kanban_tasks": "task_parent_",
+    "kanban_task_groups": "group_parent_",
+    "kanban_task_clusters": "cluster_parent_",
+    "kanban_task_pages": "task_parent_",
+}
+
+const reRenderItem = (table, id) => {
+    const prefix = getPrefix[table] ?? "Unknown prefix of "+ table
+    const url = getRouteByTable[table] ?? "Unknown route of "+ table
+    console.log("replacing", table, id,"with new renderer.")
+    $.ajax({
+        method: "POST",
+        url,
+        data: { action: "reRenderKanbanItem", id, table },
+        success: function (response) {
+            const { renderer } = response.hits
+            kanbanReRender(table, prefix, id, renderer)
+        },
+        error: onKanbanAjaxError,
+    })
+}
+
 const app_env = '{{env('APP_DOMAIN')}}';
 window.Echo.channel('wss-kanban-channel-' + app_env).listen('WssKanbanChannel', (e) => {
     wsClientId1 = e.data.wsClientId
     if(wsClientId == wsClientId1) return //<<Ignore current tab.
     switch(e.data.action){
         case "changeOrder":
-            const { renderer, divParentId, parentId } = e.data
-            $("#" + divParentId ).replaceWith(renderer)
-            console.log("replacing", divParentId,"with new renderer.", renderer)
+            const { parentType, parentId } = e.data
+            reRenderItem(parentType, parentId)
             break;
         case "changeParent":
             //It will have no impact onto any other clients

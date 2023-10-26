@@ -268,6 +268,15 @@ const clearChildrenInterval = (table, id) => {
     }
 }
 
+const kanbanReRender = (table, prefix, id, renderer) => {
+    console.log('kanbanReRender', table, prefix, id)
+    clearChildrenInterval(table, id)
+
+    const myId = prefix + id
+    const myDiv = $("#" + myId)
+    myDiv.replaceWith(renderer)
+}
+
 const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
     const id = $("#" + txtTypeId).val()
     // const formData = $("#frmKanbanItem").serialize()
@@ -279,11 +288,8 @@ const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
         data: { wsClientId, action: "updateItemRenderProps", id, ...item, groupWidth },
         success: function (response) {
             const { renderer } = response.hits
-            clearChildrenInterval(response.meta.table, id)
-
-            const myId = prefix + id
-            const myDiv = $("#" + myId)
-            myDiv.replaceWith(renderer)
+            const { table } = response.meta
+            kanbanReRender(table, prefix, id, renderer)
         },
         error: onKanbanAjaxError,
     })

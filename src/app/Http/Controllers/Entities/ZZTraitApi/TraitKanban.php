@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
-use App\Events\WssKanbanChannel;
 use App\Models\Kanban_task_group;
 use App\Models\Kanban_task_page;
 use App\Utils\Constant;
@@ -12,6 +11,7 @@ use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 trait TraitKanban
 {
@@ -225,11 +225,26 @@ trait TraitKanban
 		return ResponseObject::responseSuccess([], [], "Deleted");
 	}
 
+	function reRenderKanbanItem(Request $request)
+	{
+		$table = $request->input('table');
+		$id = $request->input('id');
+		$modelPath = Str::modelPathFrom($table);
+		$item = $modelPath::find($id);
+
+		$table = ($table == 'kanban_task_pages') ? 'kanban_task_tocs' : $table;
+		$renderer = $this->renderKanbanItem($table, $item);
+
+		return ResponseObject::responseSuccess(['renderer' => $renderer], $request->input(), "Re-render");
+	}
+
 	function kanban(Request $request)
 	{
 		try {
 			$action = $request->input('action');
 			switch ($action) {
+				case "reRenderKanbanItem":
+					return $this->{$action}($request);
 				case "changeOrder":
 				case "changeParent":
 				case "changeName":
@@ -243,7 +258,6 @@ trait TraitKanban
 
 					$this->kanbanBroadcast($request);
 					return $result;
-					break;
 			}
 		} catch (\Exception $e) {
 			return ResponseObject::responseFail($e->getMessage() . " Line " . $e->getLine());

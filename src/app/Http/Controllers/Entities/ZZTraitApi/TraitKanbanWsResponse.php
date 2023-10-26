@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 use App\Events\WssKanbanChannel;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+
 
 trait TraitKanbanWsResponse
 {
@@ -31,23 +30,23 @@ trait TraitKanbanWsResponse
 		}
 	}
 
-	function getDivParentId($table, $parentId)
-	{
-		switch ($table) {
-			case "kanban_tasks":
-				return "group_parent_" . $parentId;
-			case "kanban_task_groups":
-				return "cluster_parent_" . $parentId;
-			case "kanban_task_clusters":
-				return "cardPage000";
-			case "kanban_task_pages":
-				return "bucket_parent_" . $parentId;
-				// case "kanban_task_buckets":
-				// 	return "all_buckets";
-			default:
-				throw new \Exception("Unknown parent table of $table.");
-		}
-	}
+	// function getDivParentId($table, $parentId)
+	// {
+	// 	switch ($table) {
+	// 		case "kanban_tasks":
+	// 			return "group_parent_" . $parentId;
+	// 		case "kanban_task_groups":
+	// 			return "cluster_parent_" . $parentId;
+	// 		case "kanban_task_clusters":
+	// 			return "cardPage000";
+	// 		case "kanban_task_pages":
+	// 			return "bucket_parent_" . $parentId;
+	// 			// case "kanban_task_buckets":
+	// 			// 	return "all_buckets";
+	// 		default:
+	// 			throw new \Exception("Unknown parent table of $table.");
+	// 	}
+	// }
 
 	function kanbanBroadcast(Request $request)
 	{
@@ -63,21 +62,11 @@ trait TraitKanbanWsResponse
 				case "changeOrder":
 					$parentId = $params['parentId'];
 					$parentType = $this->getParentTable($tableName);
-					$divParentId = $this->getDivParentId($tableName, $parentId);
-					if ($parentType == 'all_buckets') {
-						$renderer = "Unsupported sync for buckets"; //$this->renderKanbanItem($parentType, []);
-					} else {
-						$model = Str::modelPathFrom($parentType);
-						$item = $model::find($parentId);
-						$renderer = $this->renderKanbanItem($parentType, $item);
-					}
 					$params1 = [
 						'parentType' => $parentType,
-						'renderer' => $renderer,
-						'divParentId' => $divParentId,
+						'parentId' => $parentId,
 					];
 					$wsResponse = new WssKanbanChannel($params + $params1);
-					sleep(1);
 					broadcast($wsResponse);
 					break;
 				case "updateItemRenderProps":
