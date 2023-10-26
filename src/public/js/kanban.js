@@ -268,8 +268,8 @@ const clearChildrenInterval = (table, id) => {
     }
 }
 
-const kanbanReRender = (table, prefix, id, renderer) => {
-    console.log('kanbanReRender', table, prefix, id)
+const kanbanReRender = (table, prefix, id, guiType, renderer) => {
+    console.log('kanbanReRender', table, prefix, id, guiType)
     clearChildrenInterval(table, id)
 
     if (prefix === 'cardPage000') {
@@ -292,8 +292,8 @@ const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
         data: { wsClientId, action: "updateItemRenderProps", id, ...item, groupWidth },
         success: function (response) {
             const { renderer } = response.hits
-            const { table } = response.meta
-            kanbanReRender(table, prefix, id, renderer)
+            const { table, guiType } = response.meta
+            kanbanReRender(table, prefix, id, renderer, guiType)
         },
         error: onKanbanAjaxError,
     })

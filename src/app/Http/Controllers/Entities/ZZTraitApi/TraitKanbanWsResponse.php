@@ -30,24 +30,6 @@ trait TraitKanbanWsResponse
 		}
 	}
 
-	// function getDivParentId($table, $parentId)
-	// {
-	// 	switch ($table) {
-	// 		case "kanban_tasks":
-	// 			return "group_parent_" . $parentId;
-	// 		case "kanban_task_groups":
-	// 			return "cluster_parent_" . $parentId;
-	// 		case "kanban_task_clusters":
-	// 			return "cardPage000";
-	// 		case "kanban_task_pages":
-	// 			return "bucket_parent_" . $parentId;
-	// 			// case "kanban_task_buckets":
-	// 			// 	return "all_buckets";
-	// 		default:
-	// 			throw new \Exception("Unknown parent table of $table.");
-	// 	}
-	// }
-
 	function kanbanBroadcast(Request $request)
 	{
 		$action = $request->input('action');
@@ -65,7 +47,10 @@ trait TraitKanbanWsResponse
 					$params1 = [
 						'parentType' => $parentType,
 						'parentId' => $parentId,
+						'guiType' => '',
 					];
+					//Only TOC can be changed order.
+					if ($parentType == 'kanban_task_pages') $params1['guiType'] = 'cardPage';
 					$wsResponse = new WssKanbanChannel($params + $params1);
 					broadcast($wsResponse);
 					break;

@@ -229,10 +229,16 @@ trait TraitKanban
 	{
 		$table = $request->input('table');
 		$id = $request->input('id');
+		$guiType = $request->input('guiType');
+
 		$modelPath = Str::modelPathFrom($table);
 		$item = $modelPath::find($id);
 
-		// $table = ($table == 'kanban_task_pages') ? 'kanban_task_tocs' : $table;
+		if ($guiType !== 'cardPage') {
+			if ($table === 'kanban_task_pages') {
+				$table = 'kanban_task_tocs'; //<< This is a fake table
+			}
+		}
 		$renderer = $this->renderKanbanItem($table, $item);
 
 		return ResponseObject::responseSuccess(['renderer' => $renderer, 'item' => $item, 'modelPath' => $modelPath], $request->input(), "Re-render");
