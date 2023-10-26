@@ -33,7 +33,7 @@ Route::get('redis', [RedisController::class, 'index']);
 
 Route::get('login/google', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('login/google/callback', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'handleGoogleCallback']);
-Route::get('wss-demo', function () {
+Route::get('test-wss', function () {
     broadcast(new WssDemoChannel(['name' => 'wss-demo-822553']));
 });
 
