@@ -50,6 +50,7 @@
                     placeholder="{{$prop['default-values']['placeholder'] ?? ''}}"
                     controlExtra="{{$prop['default-values']['control_extra'] ?? ''}}"
                     defaultValue="{{$prop['default-values']['default_value'] ?? ''}}"
+                    numericScale="{{$prop['numeric_scale']}}"
                     />
             </div>
         @endforeach

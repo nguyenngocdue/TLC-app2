@@ -23,6 +23,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
+            $table->float('target_hours')->nullable();
             $table->unsignedBigInteger('kanban_group_id')->nullable();
             $table->unsignedBigInteger('kanban_task_transition_id')->nullable();
 
