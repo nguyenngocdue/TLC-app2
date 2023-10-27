@@ -343,6 +343,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                ];
         }
         $data['table_of_contents'] = $tableOfContents;
+        // dump($data);
         return $data;
     }
 }
