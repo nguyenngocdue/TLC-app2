@@ -21,10 +21,15 @@ trait TraitCreateSQL
                         });
                         $valueParam = trim($str, ",");
                     }
-                } 
+                }      
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
+        }
+        if(isset($params['picker_date'])) {
+            $dates = DateReport::separateStrPickerDate($params['picker_date']);
+            $sqlStr = str_replace('{{end_date}}', $dates['end'], $sqlStr);
+            $sqlStr = str_replace('{{start_date}}', $dates['start'], $sqlStr);
         }
         return $sqlStr;
 
@@ -34,7 +39,6 @@ trait TraitCreateSQL
         if(isset($params['picker_date']) && $x = $params['picker_date']) {
             $params['picker_date'] = DateReport::formatDateString($x);
         }
-
         $sqlStr = $this->getSqlStr($params);
         $sqlStr = $this->preg_match_all($sqlStr, $params);
         // dd($sqlStr);
