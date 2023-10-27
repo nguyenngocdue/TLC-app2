@@ -586,23 +586,23 @@
         "name": "whs_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
+        "new": "true",
+        "in_progress": "true",
         "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "not_applicable": ""
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
     },
     "whs_member": {
         "name": "whs_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
+        "new": "true",
+        "in_progress": "true",
         "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "not_applicable": ""
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
     },
     "worker": {
         "name": "worker",

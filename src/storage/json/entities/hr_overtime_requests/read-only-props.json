@@ -45,7 +45,7 @@
         "new": "",
         "pending_approval": "",
         "rejected": "",
-        "approved": ""
+        "approved": "true"
     },
     "_owner_id": {
         "name": "_owner_id",

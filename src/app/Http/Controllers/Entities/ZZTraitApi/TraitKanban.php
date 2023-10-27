@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
-use App\Events\WssKanbanChannel;
 use App\Models\Kanban_task_group;
 use App\Models\Kanban_task_page;
 use App\Utils\Constant;
@@ -12,12 +11,14 @@ use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 trait TraitKanban
 {
 	use TraitKanbanItemRenderer;
 	use TraitKanbanUpdate;
 	use TraitKanbanTransition;
+	use TraitKanbanWsResponse;
 
 	function getLastWord($strings)
 	{
@@ -64,14 +65,20 @@ trait TraitKanban
 		}
 
 		$item->save();
-		return ResponseObject::responseSuccess([], [
+		$meta = [
 			'id' => $itemId,
 			'table' => $table,
 			'newParentId' => $newParentId,
 			'parentCountingType' => $parentCountingType,
-			'parentPreviousGroupId' => $parentPreviousGroupId,
-			'parentRectifiedGroupId' => $parentRectifiedGroupId,
-		], "Updated");
+
+		];
+		if ($table == 'kanban_tasks') {
+			$meta += 	[
+				'parentPreviousGroupId' => $parentPreviousGroupId,
+				'parentRectifiedGroupId' => $parentRectifiedGroupId,
+			];
+		}
+		return ResponseObject::responseSuccess([], $meta, "Updated");
 	}
 
 	function changeOrder(Request $request)
@@ -144,9 +151,25 @@ trait TraitKanban
 			$insertedObj->kanban_task_transition_id = $transitionId;
 		}
 
+		if ($table === 'kanban_task_clusters') {
+			$parentPage = $insertedObj->getParent;
+			$defaultStatuses = $parentPage->default_statuses;
+			$statuses = explode(",", $defaultStatuses);
+			$statuses = array_map(fn ($i) => trim($i), $statuses);
+			// Log::info($statuses);
+			foreach ($statuses as $status) {
+				Kanban_task_group::create([
+					'name' => $status,
+					'owner_id' => CurrentUser::id(),
+					'kanban_cluster_id' => $insertedId,
+				]);
+			}
+		}
+
 		$insertedObj->save();
 
-		$renderer = $this->renderKanbanItem($insertedObj, $groupWidth);
+		$table = ($table == 'kanban_task_pages') ? 'kanban_task_tocs' : $table;
+		$renderer = $this->renderKanbanItem($table, $insertedObj, $groupWidth);
 		return ResponseObject::responseSuccess(['renderer' => $renderer], ['id' => $insertedId, 'item' => $insertedObj], "Inserted");
 	}
 
@@ -217,23 +240,45 @@ trait TraitKanban
 		return ResponseObject::responseSuccess([], [], "Deleted");
 	}
 
+	function reRenderKanbanItem(Request $request)
+	{
+		$table = $request->input('table');
+		$id = $request->input('id');
+		$guiType = $request->input('guiType');
+
+		$modelPath = Str::modelPathFrom($table);
+		$item = $modelPath::find($id);
+
+		if ($guiType !== 'cardPage') {
+			if ($table === 'kanban_task_pages') {
+				$table = 'kanban_task_tocs'; //<< This is a fake table
+			}
+		}
+		$renderer = $this->renderKanbanItem($table, $item);
+
+		return ResponseObject::responseSuccess(['renderer' => $renderer, 'item' => $item, 'modelPath' => $modelPath], $request->input(), "Re-render");
+	}
+
 	function kanban(Request $request)
 	{
 		try {
 			$action = $request->input('action');
-			$wsClientId = $request->input('wsClientId');
-			broadcast(new WssKanbanChannel(['wsClientId' => $wsClientId, 'action' => $action]));
 			switch ($action) {
+				case "reRenderKanbanItem":
+					return $this->{$action}($request);
 				case "changeOrder":
 				case "changeParent":
 				case "changeName":
 				case "addANewItem":
-				case "loadKanbanPage":
-				case "editItemRenderProps":
 				case "updateItemRenderProps":
 				case "deleteItemRenderProps":
-					return $this->{$action}($request);
-					break;
+
+				case "loadKanbanPage":
+				case "editItemRenderProps":
+					$result = $this->{$action}($request);
+
+					$this->kanbanBroadcast($request);
+					return $result;
 			}
 		} catch (\Exception $e) {
 			return ResponseObject::responseFail($e->getMessage() . " Line " . $e->getLine());

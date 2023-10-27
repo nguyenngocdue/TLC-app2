@@ -180,24 +180,24 @@ class SuperProps
         static::attachJson("properties", $allProps, static::attachProperty($type));
         return $allProps;
     }
-    private static function attachJsonProps(&$prop)
+    private static function getDecimalScale($columnType)
     {
-        $common = in_array($prop['column_type'], ['int', 'float', 'double']);
-        $isDecimal = str_contains($prop['column_type'], 'decimal');
-        $isDouble = str_contains($prop['column_type'], 'double');
+        $common = in_array($columnType, ['int', 'float', 'double']);
+        $isDecimal = str_contains($columnType, 'decimal');
+        $isDouble = str_contains($columnType, 'double');
         if ($common || $isDecimal || $isDouble) {
             $value = 0;
             switch (true) {
-                case $prop['column_type'] == 'float':
-                    // case $prop['column_type'] == 'double(8,2)':
+                case $columnType == 'float':
+                    // case $columnType == 'double(8,2)':
                     $value = 2;
                     break;
-                case $prop['column_type'] == 'double':
+                case $columnType == 'double':
                     $value = 3;
                     break;
-                case str_contains($prop['column_type'], 'decimal'):
-                case str_contains($prop['column_type'], 'double'):
-                    $array = explode(',', $prop['column_type']);
+                case str_contains($columnType, 'decimal'):
+                case str_contains($columnType, 'double'):
+                    $array = explode(',', $columnType);
                     $result = str_replace(')', '', $array[1]) ?? 0;
                     $value = $result;
                     break;
@@ -205,10 +205,13 @@ class SuperProps
                     # code...
                     break;
             }
-            $prop['numeric_scale'] = $value;
-        } else {
-            $prop['numeric_scale'] = "";
+            return $value;
         }
+        return "";
+    }
+    private static function attachJsonProps(&$prop)
+    {
+        $prop['numeric_scale'] = static::getDecimalScale($prop['column_type']);
     }
 
     private static function loadCapa($type)

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('kanban_bucket_id')->nullable();
+            $table->string('default_statuses')->nullable()->default("TODO,ASSIGNED,IN PROGRESS,READY TO REVIEW,NEED TO RECTIFY,DONE");
 
             $table->orderable();
             $table->appendCommonFields();

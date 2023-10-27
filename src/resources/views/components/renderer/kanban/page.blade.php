@@ -9,7 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <script src="{{ asset('js/kanban.js') }}"></script> --}}
 
-<x-renderer.card titleId="divPageCard" title="{{$page->name}}" icon="fa-duotone text-yellow-600 {{$icon}}">
+<x-renderer.card idHtml="cardPage000" titleId="divPageCard" title="{{$page->name}}" icon="fa-duotone text-yellow-600 {{$icon}}">
     <div class="container1 mx-auto">
         <div class="overflow-x-auto whitespace-no-wrap">
             <div id="page_{{$pageId}}">
