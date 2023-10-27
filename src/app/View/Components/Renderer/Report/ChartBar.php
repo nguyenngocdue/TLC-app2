@@ -37,18 +37,6 @@ class ChartBar extends Component
 
         $count = $meta['count'];
         if ($count == 0) return "<x-renderer.emptiness />";
-
-        $result = [];
-        foreach ($metric as $value) {
-            #$type = $widgetParams['table_a'];
-            #$filed = $widgetParams['key_a'] ?? null;
-            #$routeDefault = route($type . '.index');
-            // $href = $routeDefault . '?_entity=' . $type . '&' . $filed . '%5B%5D=' . $value->metric_id . '&action=updateAdvanceFilter';
-            // $result[] = $href;
-        }
-        // $meta['href'] = '[' . join(", ", array_map(fn ($item) =>  "'" . $item . "'", $result)) . ']';
-
-        // dd($this->key,$metric, $meta);
         return view(
             'components.renderer.report.chart-bar',
             [

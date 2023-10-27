@@ -41,7 +41,7 @@ class WidgetGroups extends Component
             // "title_b" => $app[$widget["widget_title"]]['title'],
             "meta" => $meta_and_metric['meta'],
             "metric" => $meta_and_metric['metric'],
-            "chartType" => $meta_and_metric['chartType'],
+            "chartType" => $meta_and_metric['chart_type'],
             "hidden" => $meta_and_metric['hidden'],
         ];
         // dump($result);

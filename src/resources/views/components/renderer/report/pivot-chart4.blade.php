@@ -1,7 +1,6 @@
 @php
-    $chartType = $dataWidgets['chart_type'];
+    $chartType = $dataSource['chart_type'];
 @endphp
-
 @switch($chartType)
     @case('doughnut')
     {{-- @dump($dataWidgets) --}}
@@ -14,14 +13,16 @@
                 />
         @break
     @case('bar')
-    {{-- @dump($chartType, $dataWidgets) --}}
-        <x-renderer.report.chart-bar2 
-                key="{{md5($dataWidgets['title_a'].$dataWidgets['title_b'])}}" 
-                :meta="$dataWidgets['meta']" 
-                :metric="$dataWidgets['metric']"
-                chartType="{{$chartType}}" 
-                :dimensions="$dataWidgets['dimensions']"
-                />
+    {{-- @dd($dataWidgets) --}}
+        <x-renderer.report.chart-bar2v2 
+                :dataSource="$dataSource"
+            />
+        @break
+    @case('bar_two_columns')
+        <x-renderer.report.chart-bar3 
+            :dataSource="$dataSource"
+            :dataWidgets="$dataWidgets"
+            />
         @break
     @default
         @break

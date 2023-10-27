@@ -72,7 +72,7 @@ trait TraitMetaForChart
         return [
             'meta' => $meta,
             'metric' => $result,
-            'chartType' => $widget['chart_type'],
+            'chart_type' => $widget['chart_type'],
             'hidden' => $widget['hidden'],
         ];
     }

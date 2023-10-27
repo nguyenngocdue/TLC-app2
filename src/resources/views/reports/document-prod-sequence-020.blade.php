@@ -132,6 +132,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                             <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
                                 @foreach($data as $key => $items)
                                             @if(str_contains($key, 'widget'))
+                                            {{-- @dd($items) --}}
                                                 <div class="">
                                                     <x-renderer.heading level=5 xalign='left' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>
                                                         {{$prodRoutingLinkName}} {{$items['dimensions']['titleHeading']}} by Production Order
@@ -140,7 +141,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                                     <div class="p-6">
                                                             <x-renderer.report.chart-bar 
                                                                     key="{{md5($items['title_a'].$items['title_b'])}}" 
-                                                                    chartType="{{$items['chartType']}}" 
+                                                                    chartType="{{$items['chart_type']}}" 
                                                                     :meta="$items['meta']" 
                                                                     :metric="$items['metric']" 
                                                                     :dimensions="$items['dimensions']"

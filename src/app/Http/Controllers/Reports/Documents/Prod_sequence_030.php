@@ -215,7 +215,7 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 "title_b" => "by progress",
                 'meta' => $meta,
                 'metric' => $metric,
-                'chartType' => 'bar',
+                'chart_type' => 'bar',
                 'titleChart' => '',
                 'dimensions' => $dimensions,
             ];

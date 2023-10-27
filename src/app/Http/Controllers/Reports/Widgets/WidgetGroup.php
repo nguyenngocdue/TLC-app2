@@ -19,7 +19,7 @@ class WidgetGroup
 
         $widget[''] = $projectId;
         $fn = $widget['fn'];
-        $table_a = $widget['params']['table_a'];
+        // $table_a = $widget['params']['table_a'];
         // $model_a = DBTable::fromNameToModel($table_a);
         // $meta_and_metric = $model_a->getMetaForChart($fn, $widget, $widget['params']);
         // $app = LibApps::getAll();

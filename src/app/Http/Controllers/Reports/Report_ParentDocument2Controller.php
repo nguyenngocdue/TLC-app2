@@ -227,8 +227,8 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 			"title_b" => "title_b",
 			'meta' => $meta,
 			'metric' => $metric,
-			'chartType' => $chartType,
-			'titleChart' => '',
+			'chart_type' => $chartType,
+			'title_chart' => '',
 			'dimensions' => $dimensions,
 		];
 		$data['widget_'. $key] = $widgetData;

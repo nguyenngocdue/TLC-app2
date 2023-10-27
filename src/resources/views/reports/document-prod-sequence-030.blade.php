@@ -59,7 +59,7 @@ $tableData = isset($tableDataSource['tableDataSource']) ? collect($tableDataSour
                         {{-- @dump($widget) --}}
                                 <x-renderer.report.chart-bar 
                                         key="{{md5($widget['title_a'].$widget['title_b'])}}" 
-                                        chartType="{{$widget['chartType']}}" 
+                                        chartType="{{$widget['chart_type']}}" 
                                         :meta="$widget['meta']" 
                                         :metric="$widget['metric']" 
                                         :dimensions="$widget['dimensions']"

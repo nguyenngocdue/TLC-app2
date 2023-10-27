@@ -71,7 +71,7 @@ class PivotChart2 extends Component
 			"title_b" => "title_b".$key,
 			'meta' => $meta,
 			'metric' => $metric,
-			'chartType' => $widgets['chart_type'],
+			'chart_type' => $widgets['chart_type'],
 			'titleChart' => '',
 			'dimensions' => $widgets['dimensions'],
 		];

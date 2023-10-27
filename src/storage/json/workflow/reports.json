@@ -45,8 +45,15 @@
         "name": "document-prod_sequence_030",
         "package_tab": "report",
         "package": "project_management",
-        "top_title": null,
+        "top_title": "Work Completion Percentage",
         "title": "Work Completion Percentage"
+    },
+    "document-prod_sequence_040": {
+        "name": "document-prod_sequence_040",
+        "package_tab": "report",
+        "package": "project_management",
+        "top_title": "Benchmark Report",
+        "title": "Benchmark Report"
     },
     "document-qaqc_ncr_010": {
         "name": "document-qaqc_ncr_010",

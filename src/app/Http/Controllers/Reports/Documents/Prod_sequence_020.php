@@ -98,7 +98,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         AND sp.project_id = {{project_id}}
                         AND sp.id = {{sub_project_id}}";
                         #AND pse.status IN ('in_progress', 'finished')";
-        if (isset($params['prod_routing_id'])                        ) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
+        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
         if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pse.prod_routing_link_id = {{prod_routing_link_id}}";
 
@@ -236,7 +236,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     "title_b" => $typeChart.$prodRoutingLinkId,
                     'meta' => $meta,
                     'metric' => $metric,
-                    'chartType' =>'bar',
+                    'chart_type' =>'bar',
                     'dimensions' => $dimensions,
                     
                 ];

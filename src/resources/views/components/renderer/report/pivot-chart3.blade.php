@@ -1,5 +1,5 @@
 @php
-    $chartType = $dataWidgets['chartType'];
+    $chartType = $dataWidgets['chart_type'];
 @endphp
 
 @switch($chartType)
