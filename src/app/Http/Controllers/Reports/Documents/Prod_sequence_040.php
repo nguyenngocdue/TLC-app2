@@ -27,8 +27,8 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
     use TraitCreateDataSourceWidget;
 
     protected $mode = '040';
-    protected $subProjectId = [82, 21];
-    protected $prodRoutingId = 6;
+    protected $subProjectId = [82, 21, 107];
+    protected $prodRoutingId = 62;
     protected $groupByLength = 1;
 
     protected $viewName = 'document-prod-sequence-040';
@@ -117,7 +117,7 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
                 'title' => 'Production Routing Link',
                 'dataIndex' => 'prod_routing_link_id',
                 'allowClear' => true,
-                // 'hasListenTo' => true,
+                'hasListenTo' => true,
                 'multiple' => true,
             ],
             
@@ -195,9 +195,9 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
         $prodDiscipline = isset($params['prod_discipline_id']) ? Prod_discipline::find($params['prod_discipline_id'])->name : '';
 
         $subProjectName = isset($params['sub_project_id']) ?
-        implode(',', Sub_project::whereIn('id', $params['sub_project_id'])
+        str_replace(',', ', ',implode(',', Sub_project::whereIn('id', $params['sub_project_id'])
             ->pluck('name')
-            ->toArray()) : '';
+            ->toArray())) : '';
 
         $basicInfoData['sub_project_name'] = $subProjectName;
         $basicInfoData['prod_routing_name'] = $prodPouting;

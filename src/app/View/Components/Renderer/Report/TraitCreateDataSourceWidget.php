@@ -28,24 +28,25 @@ trait TraitCreateDataSourceWidget
         $dataByParamCol = $this->getValuesByField($dataSource,$paramCol);
 		$paramLabelCol = $dataWidgets['params']['label_meta_data_1'];
         $dataByParamLabelCol = $this->getValuesByField($dataSource,$paramLabelCol);
-
 		$labels = $this->makeLabels($dataSource, $dataWidgets);
         $numbers = StringReport::arrayToJsonWithSingleQuotes($dataByParamCol);
         
-        $max = (int)max(array_values($dataByParamCol));
+        $max = (float)max(array_values($dataByParamCol));
         $count = count($dataByParamLabelCol);
         $meta = [
             'numbers' => $numbers,
             'labels' => $labels,
             'max' => $max,
-            'count' => $count
+            'count' => $count,
         ];
         // information for metric data
         $metric = [];
-        array_walk($dataSource, function ($value, $key) use (&$metric) {
-            return $metric[] = (object) [
-            ];
-        });
+
+        //add label for XAxis
+        $fieldOfUnit = $dataWidgets['params']['index_unit']  ?? "";
+        $prefixUnit = $dataWidgets['params']['prefix_unit_text']  ?? "";
+        $suffixUnit = $dataWidgets['params']['suffix_unit_text']  ?? "";
+        if($fieldOfUnit) $dataWidgets['dimensions']['titleY'] = $prefixUnit.(isset(last($dataSource)[$fieldOfUnit]) ? last($dataSource)[$fieldOfUnit] : "").$suffixUnit;
         // related to dimensions AxisX and AxisY
         $params = [
             'height' => $max / 2 * 30,
@@ -53,6 +54,7 @@ trait TraitCreateDataSourceWidget
             'scaleMaxY' => $max * 2,
         ];
         $dataWidgets['dimensions'] = array_merge($params, $dataWidgets['dimensions']);
+        // dd($dataWidgets);
       // Set data for widget
 		$result =  [
             'key' => $dataWidgets['key_md5'].$key,
@@ -64,6 +66,7 @@ trait TraitCreateDataSourceWidget
 			'title_chart' => '',
 			'dimensions' => $dataWidgets['dimensions'],
 		];
+        // dd($result);
         return $result;
     }
 

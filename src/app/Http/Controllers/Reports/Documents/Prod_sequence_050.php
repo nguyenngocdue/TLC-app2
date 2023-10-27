@@ -65,11 +65,11 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     #po.name AS prod_order_name,
                     prd.order_no AS order_no,
                     MAX(pru.date) AS pru_date,
-                    prl.standard_uom_id AS standard_uom_id,
+                    terms.name AS uom_name,
                     ROUND(AVG(pru.worker_number),2) AS man_power_on_day,
-                    ROUND(AVG(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)))/60,2) AS min_on_day,
-                    AVG(pse.total_uom) AS total_uom_on_day,
-                    ROUND((AVG(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)))/60)/ AVG(pse.total_uom),2) AS min_on_set_on_day
+                    ROUND(SUM(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)))/60,2) AS min_on_day,
+                    SUM(pru.production_output) AS total_uom_on_day,
+                    ROUND((AVG(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)))/60)/ SUM(pru.production_output),2) AS min_on_set_on_day
                     FROM
                         sub_projects sp
                     JOIN projects pj ON pj.id = sp.project_id
@@ -82,6 +82,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     LEFT JOIN prod_runs pru ON pru.prod_sequence_id = pse.id
                     LEFT JOIN prod_routing_details prd ON pr.id = prd.prod_routing_id
                                                     AND prl.id = prd.prod_routing_link_id
+                    LEFT JOIN terms terms ON prl.standard_uom_id = terms.id
                 WHERE 1 = 1
                         AND pse.deleted_by IS NULL
                         #AND sp.project_id = 8
@@ -208,7 +209,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
             $data = $dataSource['render_pages'];
             foreach ($data as $key => $values){
                     $item = $values instanceof Collection ? $values['tableDataSource']->toArray() : $values['tableDataSource']->first();
-                    $unit = isset($item['standard_uom_id']) && (!is_null($item['standard_uom_id'])) ? Term::find($item['standard_uom_id'])->name : '<small class="text-orange-300">Unknown Unit</small>';
+                    $unit = isset($item['uom_name']) && (!is_null($item['uom_name'])) ? $item['uom_name'] : '<small class="text-orange-300">Unknown Unit</small>';
                     $tableColumns[$key] =  [
                         [
                             "title" => "Project",

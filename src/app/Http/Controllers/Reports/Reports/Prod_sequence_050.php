@@ -139,7 +139,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
             'independent_holiday_sunday_day' => "<br/><i title='Working Days is calculated by counting the normal working days (by deducting Sundays and Public Holidays from Total Calender Days).'" . $stringIcon,
             'total_days_have_ts' => "<br/><i title='Working Days without Downtime Days is calculated by counting the normal working days without downtime days (by Column Working Days deducts the number of days with no production activity of the production order).'" . $stringIcon,
             'net_working_day' => "<br/><i title='Net Working Days is the number of days which is calculated based on the actual working hours of the production order.'" . $stringIcon,
-            'total_discrepancy_days' => "<br/><i title='Downtime Days	is the number of days with no production activity for the production order (Column \"Working Days\" deducts Column \"Working Days without Downtime\").'" . $stringIcon,
+            'total_discrepancy_days' => "<br/><i title='Downtime Days is the number of days with no production activity for the production order (Column \"Working Days\" deducts Column \"Working Days without Downtime\").'" . $stringIcon,
         ];
         
 
@@ -266,7 +266,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
                     "footer" => "agg_sum"
                 ],
                 [
-                    "title" => "Hours",
+                    "title" => "Total Man Hours",
                     "dataIndex" => "hours",
                     "align" => "right",
                     "width" => 120,
