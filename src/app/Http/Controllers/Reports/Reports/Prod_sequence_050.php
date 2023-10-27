@@ -135,12 +135,13 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
     {
         $stringIcon = "class='text-base fa-duotone fa-circle-question hover:bg-blue-400 rounded'></i>";
         $notes = [
-            'total_calendar_days' => "<br/><i title='The total number of days counted from the start date to the finish date of a production order (please note: consider the status of that production order).'" . $stringIcon,
-            'independent_holiday_sunday_day' => "<br/><i title='The working days excluding Sundays and public holidays.'" . $stringIcon,
-            'total_days_have_ts' => "<br/><i title='The working days excluding Sundays and public holidays without downtime.'" . $stringIcon,
-            'net_working_day' => "<br/><i title='The net working days refer to the regular workdays in a standard work schedule, excluding public holidays, weekends (typically Saturday and Sunday), and any other designated company holidays.'" . $stringIcon,
-            'total_discrepancy_days' => "<br/><i title='Days off from that Production Routing Link.'" . $stringIcon,
+            'total_calendar_days' => "<br/><i title='Total Calender Days is calculated by counting the days from the start date to the finish date of a production order (note: please check the column \"Status of Production Order\" to know whether the production order is finished or not).'" . $stringIcon,
+            'independent_holiday_sunday_day' => "<br/><i title='Working Days is calculated by counting the normal working days (by deducting Sundays and Public Holidays from Total Calender Days).'" . $stringIcon,
+            'total_days_have_ts' => "<br/><i title='Working Days without Downtime Days is calculated by counting the normal working days without downtime days (by Column Working Days deducts the number of days with no production activity of the production order).'" . $stringIcon,
+            'net_working_day' => "<br/><i title='Net Working Days is the number of days which is calculated based on the actual working hours of the production order.'" . $stringIcon,
+            'total_discrepancy_days' => "<br/><i title='Downtime Days	is the number of days with no production activity for the production order (Column \"Working Days\" deducts Column \"Working Days without Downtime\").'" . $stringIcon,
         ];
+        
 
         return
             [

@@ -52,7 +52,7 @@ class DateReport
             $currentYear . '-' . $currentMonth;
     }
 
-    private static function separateStrPickerDate($strPickerDate){
+    public static function separateStrPickerDate($strPickerDate){
         // dd($strPickerDate);
         try {
             $dates = explode("-", $strPickerDate);
@@ -84,11 +84,11 @@ class DateReport
         return $valParams;
     }
 
-    public static function defaultPickerDate()
+    public static function defaultPickerDate($targetMonth = '-6 months')
     {
         $currentDate = new DateTime();
         $targetDate = clone $currentDate;
-        $targetDate->modify('-6 months');
+        $targetDate->modify($targetMonth);
         $targetDate->modify('-1 day');
         return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
     }

@@ -26,7 +26,7 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
     use TraitParamsInManageWidget;
     use TraitCreateDataSourceWidget;
 
-    protected $mode = '020';
+    protected $mode = '040';
     protected $subProjectId = [82, 21];
     protected $prodRoutingId = 6;
     protected $groupByLength = 1;
