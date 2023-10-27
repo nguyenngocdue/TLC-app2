@@ -274,8 +274,8 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'title' => 'Production Discipline',
                 'dataIndex' => 'prod_discipline_id',
                 'allowClear' => false,
-                'validation' => 'required',
-                'textValidation' => 'Select A Production Discipline',
+                // 'validation' => 'required',
+                // 'textValidation' => 'Select A Production Discipline',
             ],
             [
                 'title' => 'Production Routing Link',

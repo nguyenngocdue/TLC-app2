@@ -21,47 +21,15 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     {{-- @include('components.reports.show-layout2') --}}
 </div>
 
-{{-- @dd($tableDataSource) --}}
 {{-- RENDER TABLES --}}
+@php
+    $routeName = $routeName;
+    $tableOfContents = $tableDataSource['table_of_contents'];
+@endphp
+<x-reports.table-of-contents-report routeName="$routeName" :dataSource="$tableOfContents"/>
+
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-                <div style='' class=" items-center  box-border p-8 no-print">
-                    {{-- TABLES --}}    
-                    @php
-                        $tableOfContents = $tableDataSource['table_of_contents'];
-                        $n = 0;
-                    @endphp
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                            <div class="bg-white">
-                                <x-renderer.heading level=5 class='w-full border-b text-sm text-left text-gray-500 dark:text-gray-400 bg-gray-50 p-3'>Table of Content:</x-renderer.heading>
-                                <table class="px-6 pt-4 py-3 w-full text-sm text-left  text-gray-500 dark:text-gray-400">
-                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                        <tr>
-                                            <th scope="col" class="px-6 py-3">
-                                                No .
-                                            </th>
-                                            <th scope="col" class="px-6 py-3">
-                                                Production Routing Link
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($tableOfContents as $key => $value)
-                                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-900 hover:bg-gray-100  text-gray-700 dark:text-gray-300 ">
-                                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                    {{++$n}}
-                                                </th>
-                                                <td class="px-6 py-4">
-                                                    <a href="#sheet{{$key}}" class="text-blue-600">{{$value}}</a>
-                                                </td>
-                                            </tr>
-
-                                        @endforeach                                    
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                </div>
                 @foreach($tableDataSource['render_pages'] as $key => $data)
                     {{-- @dd($tableDataSource) --}}
                     @php
