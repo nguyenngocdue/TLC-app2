@@ -10,14 +10,16 @@ trait TraitProdSequenceAdvancedMetrics
     private function getTotalDaysHaveTimesheet($allProdSequences)
     {
         $result = [];
+        $totalRuns = 0;
         foreach ($allProdSequences as $prodSequence) {
             $runs = $prodSequence->getProdRuns;
+            $totalRuns += sizeof($runs);
             foreach ($runs as $run) {
                 $result[] = $run->date;
             }
         }
         $result = array_unique($result);
-        return count($result);
+        return [count($result), $totalRuns];
     }
 
     private function getAllSundays($startDate, $endDate)
@@ -60,8 +62,12 @@ trait TraitProdSequenceAdvancedMetrics
 
     function get6Metrics($prodSequences, $minStartedAt, $maxFinishedAt)
     {
-        $total_days_have_ts = $this->getTotalDaysHaveTimesheet($prodSequences);
-        $total_calendar_days = Carbon::parse($minStartedAt)->diffInDays($maxFinishedAt) + 1;
+        [$total_days_have_ts, $total_runs] = $this->getTotalDaysHaveTimesheet($prodSequences);
+        if ($total_runs == 0) {
+            $total_calendar_days = 0; // when no line in all sheets, it will always return 1, make it 0
+        } else {
+            $total_calendar_days = Carbon::parse($minStartedAt)->diffInDays($maxFinishedAt) + 1;
+        }
         $allSundays = $this->getAllSundays($minStartedAt, $maxFinishedAt);
         $allPhDays = $this->getAllPhDays($minStartedAt, $maxFinishedAt);
         $total_days_no_sun_no_ph =  $total_calendar_days - $allSundays - $allPhDays;
