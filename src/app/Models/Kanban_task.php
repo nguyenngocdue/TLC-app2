@@ -15,11 +15,10 @@ class Kanban_task extends ModelExtended
         "getParent" => ["belongsTo", Kanban_task_group::class, "kanban_group_id"],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         "getTransitions" => ["hasMany", Kanban_task_transition::class, "kanban_task_id"],
+        "attachment_kanban_task" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
-    public static $oracyParams = [
-        // "getMonitors1()" => ["getCheckedByField", User::class],
-    ];
+    public static $oracyParams = [];
 
     public function getParent()
     {
@@ -39,9 +38,10 @@ class Kanban_task extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    // public function getMonitors1()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
+    public function attachment_1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
 }

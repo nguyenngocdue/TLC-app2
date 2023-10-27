@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStoreUpdate2;
+use App\Http\Services\UploadService2;
 use App\Models\Kanban_task_bucket;
 use App\Models\Kanban_task_cluster;
 use App\Models\Kanban_task_group;
@@ -59,6 +60,9 @@ trait TraitKanbanUpdate
         $table = $this->modelPath::getTableName();
         $item->update($input);
         $this->handleCheckboxAndDropdownMulti($request, $item, $props['oracy_prop']);
+
+        // $uploadService2 = new UploadService2($this->modelPath);
+        // $uploadService2->store($request);
 
         $orderedItem = $this->getOrderedDataSource($id, $item);
 

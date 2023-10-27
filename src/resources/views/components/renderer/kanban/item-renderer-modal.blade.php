@@ -40,6 +40,9 @@
                     action="edit"
                     type="{{$table}}"
                     value="{!! $value !!}"
+                    
+                    {{-- :prop="$prop"
+                    :valueArray="$value" --}}
 
                     control="{{$prop['control']}}"
                     columnType="{{$prop['column_type']}}"

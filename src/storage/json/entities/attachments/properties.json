@@ -52,7 +52,7 @@
         "field_id": "145",
         "field_name": "attachment_corrective_photos",
         "max_file_size": "10",
-        "max_file_count": "10",
+        "max_file_count": "50",
         "allowed_file_types": "only_images"
     },
     "_attachment_defect_pdfs": {
@@ -68,7 +68,7 @@
         "field_id": "143",
         "field_name": "attachment_defect_photos",
         "max_file_size": "10",
-        "max_file_count": "10",
+        "max_file_count": "50",
         "allowed_file_types": "only_images"
     },
     "_attachment_eco_sht": {
