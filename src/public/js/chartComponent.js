@@ -3,10 +3,11 @@ function generateColors(numColors) {
     const colors = [];
 
     for (let i = 0; i < numColors; i++) {
-        const index = i % baseColors.length; // Lặp lại các màu trong baseColors nếu numColors lớn hơn độ dài của baseColors
+        const index = i % baseColors.length; 
         colors.push(baseColors[index]);
     }
 
     return colors;
 }
+
 const myChart = {};
