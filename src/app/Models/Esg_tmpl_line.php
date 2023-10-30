@@ -11,7 +11,7 @@ class Esg_tmpl_line extends ModelExtended
         "esg_metric_type_id",
         // "ghg_metric_type_1_id", "ghg_metric_type_2_id",
         "unit", "remark",
-        "status", "esg_code", "state",
+        "status", "esg_code", "esg_state",
     ];
     // protected $table = "ghg_tmpl_lines";
 
@@ -21,7 +21,7 @@ class Esg_tmpl_line extends ModelExtended
         // "getGhgMetricType1" => ['belongsTo', Ghg_metric_type_1::class, 'ghg_metric_type_1_id'],
         // "getGhgMetricType2" => ['belongsTo', Ghg_metric_type_2::class, 'ghg_metric_type_2_id'],
         "getUnit" => ['belongsTo', Term::class, 'unit'],
-        "getState" => ['belongsTo', Term::class, 'state'],
+        "getState" => ['belongsTo', Term::class, 'esg_state'],
     ];
 
     public function getEsgTmpl()
@@ -70,7 +70,7 @@ class Esg_tmpl_line extends ModelExtended
 
             // ['dataIndex' => 'factor'],
             ['dataIndex' => 'esg_code',],
-            ['dataIndex' => 'state'],
+            ['dataIndex' => 'esg_state'],
             ['dataIndex' => 'unit'],
             ['dataIndex' => 'remark'],
         ];
