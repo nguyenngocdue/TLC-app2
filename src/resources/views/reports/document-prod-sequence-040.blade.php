@@ -16,10 +16,17 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
 @endphp
 
+
+
 <div class="px-4">
     @include('components.reports.shared-parameter')
     {{-- @include('components.reports.show-layout2') --}}
 </div>
+@php
+    $routeName = $routeName;
+    $tableOfContents = $tableDataSource['table_of_contents'];
+@endphp
+<x-reports.table-of-contents-report routeName="$routeName" :dataSource="$tableOfContents"/>
 {{-- @dump($tableDataSource['dataWidgets']) --}}
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
@@ -74,7 +81,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
             $prodRoutingLink = App\Models\Prod_routing_link::pluck('name', 'id')->toArray();
         @endphp
             @foreach($dataWidgets as $idRoutingLink => $widgets)
-                <div style='' class="w-[1400px] min-h-[990px] items-center bg-white box-border p-8">
+                <div id="page{{$idRoutingLink}}" style='' class="w-[1400px] min-h-[990px] items-center bg-white box-border p-8">
                     <div class="pt-5">
                         <x-print.header6 />
                         <x-renderer.heading level=5 xalign='left' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>

@@ -24,7 +24,7 @@
                     <div class="block ml-2">
 						@foreach($dataSource as $id => $name)
 							<div class="pr-1 py-1 text-sm">
-								<a href="#sheet{{$id}}" class="text-blue-500">{{$name}}</a>
+								<a href="#page{{$id}}" class="text-blue-500">{{$name}}</a>
 							</div>
 						@endforeach
                     </div>

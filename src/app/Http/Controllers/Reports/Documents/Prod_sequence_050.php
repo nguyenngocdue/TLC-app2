@@ -302,12 +302,12 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         return $arraySqlStr;
     }
 
-    private function getProdRoutingLinks($params){
-        $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ?
-        $params['prod_routing_link_id']:Prod_discipline::find($params['prod_discipline_id'])->getProdRoutingLink()->pluck('id')->toArray();
-        $prodRoutingLinks = Prod_routing_link::whereIn('id', $prodRoutingLinkIds)->get()->pluck('name', 'id')->toArray();
-        return $prodRoutingLinks;
-    }   
+    // private function getProdRoutingLinks($params){
+    //     $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ?
+    //     $params['prod_routing_link_id']:Prod_discipline::find($params['prod_discipline_id'])->getProdRoutingLink()->pluck('id')->toArray();
+    //     $prodRoutingLinks = Prod_routing_link::whereIn('id', $prodRoutingLinkIds)->get()->pluck('name', 'id')->toArray();
+    //     return $prodRoutingLinks;
+    // }   
 
     private function makeDataWidget($dataSource, $params){
         $dataOfManageWidget = $this->makeParamsInManageWidgets($params);

@@ -121,7 +121,7 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
         return $params;
     }
 
-    private function getProdRoutingLinks($params){
+    public function getProdRoutingLinks($params){
         $valOfParams = $this->generateValuesFromParamsReport($params);
         $sql = "SELECT 
                         prl.id AS prod_routing_link_id,

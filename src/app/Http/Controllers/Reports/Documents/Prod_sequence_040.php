@@ -221,13 +221,21 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
         return $dataWidgets;
     }
 
+    public function getProdRoutingLinks($data){
+        if(empty($data)) return [];
+        return array_column($data,'prod_routing_link_name', 'prod_routing_link_id' );
+    }
+
     public function changeDataSource($dataSource, $params)
     {
         // $output['tableDataSource'] = $dataSource;
         $items = Report::getItemsFromDataSource($dataSource);
+        $prodRoutingLinks = $this->getProdRoutingLinks($items);
+
         $groupItems = Report::groupArrayByKey($items,'prod_routing_link_id');
         $data['tableDataSource'] = $dataSource;
         $data['dataWidgets'] = $this->makeDataWidget($groupItems, $params);
+        $data['table_of_contents'] = $prodRoutingLinks;
         return collect($data);
     }
 

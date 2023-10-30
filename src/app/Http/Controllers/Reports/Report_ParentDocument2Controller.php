@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Reports;
 
+use App\Models\Prod_discipline;
+use App\Models\Prod_routing_link;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\PivotReport;
 use App\Utils\Support\Report;
@@ -234,4 +236,12 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
 		$data['widget_'. $key] = $widgetData;
 		return $data;
 	}
+
+	public function getProdRoutingLinks($params){
+        $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ?
+        $params['prod_routing_link_id']:Prod_discipline::find($params['prod_discipline_id'])->getProdRoutingLink()->pluck('id')->toArray();
+        $prodRoutingLinks = Prod_routing_link::whereIn('id', $prodRoutingLinkIds)->get()->pluck('name', 'id')->toArray();
+        return $prodRoutingLinks;
+    }   
+
 }
