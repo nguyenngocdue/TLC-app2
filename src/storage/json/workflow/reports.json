@@ -39,7 +39,7 @@
         "package_tab": "report",
         "package": "project_management",
         "top_title": "Process Analysis for Production Order",
-        "title": "Process Analysis for Production Order"
+        "title": "Process Analysis by Production Order"
     },
     "document-prod_sequence_030": {
         "name": "document-prod_sequence_030",
@@ -60,7 +60,7 @@
         "package_tab": "report",
         "package": "project_management",
         "top_title": "Process Analysis for Production Routing Link",
-        "title": "Process Analysis for Production Routing Link"
+        "title": "Process Analysis by Production Routing Link"
     },
     "document-qaqc_ncr_010": {
         "name": "document-qaqc_ncr_010",
