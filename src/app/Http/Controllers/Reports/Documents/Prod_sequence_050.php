@@ -69,7 +69,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     ROUND(AVG(pru.worker_number),2) AS man_power_on_day,
                     ROUND(SUM(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)))/60,2) AS min_on_day,
                     SUM(pru.production_output) AS total_uom_on_day,
-                    ROUND((AVG(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)))/60)/ SUM(pru.production_output),2) AS min_on_set_on_day
+                    ROUND((SUM(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)))/60)/ SUM(pru.production_output),2) AS min_on_set_on_day
                     FROM
                         sub_projects sp
                     JOIN projects pj ON pj.id = sp.project_id
