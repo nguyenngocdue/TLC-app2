@@ -204,7 +204,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
             'hrt_line_count' => "<br/><i title='HSE Training:\nHSE induction,HSE on jobs training,Third party training.'" . $stringIcon,
             'third_party_inspection_audit' => "<br/><i title='Third party inspections:\nGovernment, ISO,Smecta,other inspections of third party or client related to HSE.'" . $stringIcon,
             'hseca_line_count' => "<br/><i title='Safety Observations Frequency Rating:\nIf we are to eliminate injuries, damage or near miss incidents, we need to focus on at-risk acts and unsafe conditions, which have not yet caused loss or harm but have the potential to. Thus we need a systematic approach to observing, correcting and recording such at-risk behaviour or unsafe situations.\nThis is generally called safety observation (or hazard observation). The expected result is that by increasing safety observation, there would be a reduction in injuries, damage or near misses – the undesired events Number of safety observations x 200,000 / Total man-hours Safety Observation Report identifying at-risk behaviour, or an unsafe condition to prevent loss or harm e.g. ACT / ROC /STOP card or similar.'" . $stringIcon,
-            'hse_issues' => "<br/><i title='Count the lines in HSE Corrective Actions table where Parent is either HSE Walkthroughs or HSE Inspection Checklist Lines.'" . $stringIcon,
+            'hse_issues' => "<br/><i title='HSE Issues: \nare the unsafe practices which are counted from the HSE Inspections and HSE Walkthrough.'" . $stringIcon,
         ];
 
 
