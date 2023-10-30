@@ -8,7 +8,7 @@ class Prod_routing_link extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "parent", "description", "slug",  'owner_id',
-        'prod_discipline_id', 'standard_uom_id',
+        'prod_discipline_id', 'standard_uom_id', "workplace_id",
     ];
 
     protected $table = 'prod_routing_links';
@@ -19,6 +19,7 @@ class Prod_routing_link extends ModelExtended
         "getDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
         "getProdSequences" => ['hasMany', Prod_sequence::class, 'prod_routing_link_id'],
         "getProdRoutings" => ['belongsToMany', Prod_routing::class, 'prod_routing_details', 'prod_routing_link_id', 'prod_routing_id'],
+        'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
     ];
 
     public function getStandardUom()
@@ -40,6 +41,12 @@ class Prod_routing_link extends ModelExtended
     }
 
     public function getDiscipline()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getWorkplace()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
