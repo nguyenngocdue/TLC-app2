@@ -74,6 +74,9 @@
     "erp_routing_links": {
         "name": "erp_routing_links"
     },
+    "esg_master_sheets": {
+        "name": "esg_master_sheets"
+    },
     "esg_metric_types": {
         "name": "esg_metric_types"
     },
@@ -82,7 +85,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "esg_sheets": {
-        "name": "esg_sheets"
+        "name": "esg_sheets",
+        "storeEmpty_and_updateShort": "true"
     },
     "esg_tmpl_lines": {
         "name": "esg_tmpl_lines",

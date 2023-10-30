@@ -339,6 +339,20 @@
         "icon": "<i class=\"fa-solid fa-conveyor-belt-boxes\"><\/i>",
         "hidden_navbar": "true"
     },
+    "esg_master_sheet": {
+        "name": "esg_master_sheet",
+        "package_tab": "application",
+        "package": "compliance",
+        "sub_package": "esg",
+        "title": "ESG Master Sheets",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null
+    },
     "esg_metric_type": {
         "name": "esg_metric_type",
         "package_tab": "application",
@@ -367,7 +381,9 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
     },
     "esg_sheet_line": {
         "name": "esg_sheet_line",

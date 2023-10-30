@@ -8,8 +8,10 @@ use App\Utils\Support\DateTimeConcern;
 class Esg_sheet extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "status", "workplace_id",
-        "esg_month", "owner_id", "esg_tmpl_id", "total",
+        "id", "name", "description", "status", "order_no",
+        // "workplace_id", 
+        "esg_month", "owner_id", "esg_tmpl_id", "total", "esg_date",
+        "esg_master_sheet_id",
     ];
 
     public static $nameless = true;
@@ -21,11 +23,18 @@ class Esg_sheet extends ModelExtended
 
     public static $eloquentParams = [
         "getEsgTmpl" => ["belongsTo", Esg_tmpl::class, "esg_tmpl_id"],
+        "getMasterSheet" => ["belongsTo", Esg_master_sheet::class, "esg_master_sheet_id"],
         "getLines" => ["hasMany", Esg_sheet_line::class, "esg_sheet_id"],
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
     ];
 
     public function getWorkplace()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getMasterSheet()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -41,5 +50,16 @@ class Esg_sheet extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getManyLineParams()
+    {
+        return [
+            ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
+            ["dataIndex" => 'id', 'title' => 'Sheet ID', 'no_print' => true, 'invisible' => !true],
+            ['dataIndex' => 'esg_master_sheet_id', 'invisible' => true, 'value_as_parent_id' => true],
+            ["dataIndex" => 'esg_date', 'read_only_rr2' => true,],
+            ["dataIndex" => 'total', 'footer' => 'agg_sum',],
+        ];
     }
 }

@@ -15,10 +15,10 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getMasterSheet": {
-        "name": "_getMasterSheet",
+    "_getWorkplace": {
+        "name": "_getWorkplace",
         "relationship": "belongsTo",
-        "control_name": "esg_master_sheet_id",
+        "control_name": "workplace_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
@@ -63,13 +63,13 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getLines": {
-        "name": "_getLines",
+    "_getSheets": {
+        "name": "_getSheets",
         "relationship": "hasMany",
-        "control_name": "getLines",
+        "control_name": "getSheets",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
-        "renderer_view_all_unit": "line",
+        "renderer_view_all_unit": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",

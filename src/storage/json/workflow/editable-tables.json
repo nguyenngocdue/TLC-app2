@@ -47,6 +47,13 @@
         "editable-table": "eco_material_impact_removes",
         "button_add_a_new_line": "true"
     },
+    "esg_master_sheets_01": {
+        "name": "esg_master_sheets_01",
+        "entity-type": "esg_master_sheets",
+        "editable-table": "esg_sheets",
+        "button_add_a_new_line": "true",
+        "button_recalculate": "true"
+    },
     "esg_sheets_01": {
         "name": "esg_sheets_01",
         "entity-type": "esg_sheets",
@@ -94,8 +101,8 @@
         "entity-type": "hr_overtime_requests",
         "editable-table": "hr_overtime_request_lines",
         "button_add_a_new_line": "true",
-        "button_add_from_a_list": "true",
-        "button_recalculate": "true"
+        "button_recalculate": "true",
+        "button_add_from_a_list": "true"
     },
     "hr_timesheet_officers_01": {
         "name": "hr_timesheet_officers_01",
@@ -108,8 +115,8 @@
         "entity-type": "hr_timesheet_workers",
         "editable-table": "hr_timesheet_lines",
         "button_add_a_new_line": "true",
-        "button_add_from_a_list": "true",
         "button_recalculate": "true",
+        "button_add_from_a_list": "true",
         "button_get_lines": "true"
     },
     "hse_incident_reports_01": {

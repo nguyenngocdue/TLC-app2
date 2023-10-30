@@ -14,6 +14,8 @@ class Textarea2 extends Component
         private $readOnly = false,
         private $textareaRows = 5,
     ) {
+        if (!$textareaRows) $this->textareaRows = 5;
+        // dump($textareaRows);
     }
 
     public function render()
