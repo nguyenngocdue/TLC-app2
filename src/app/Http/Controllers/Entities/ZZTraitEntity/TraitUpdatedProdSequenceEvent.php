@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Events\UpdatedSequenceBaseEvent;
+use App\Events\UpdatedEsgSheetEvent;
+use App\Events\UpdatedProdSequenceEvent;
+use Illuminate\Support\Facades\Log;
 
 trait TraitUpdatedProdSequenceEvent
 {
-
-    public function eventUpdatedProdSequence($id)
+    public function emitPostUpdateEvent($id)
     {
-        if ($this->type == 'prod_sequence') event(new UpdatedSequenceBaseEvent($this->modelPath, $id));
+        switch ($this->type) {
+            case 'prod_sequence':
+                event(new UpdatedProdSequenceEvent($this->modelPath, $id));
+                break;
+            case 'esg_sheet':
+                event(new UpdatedEsgSheetEvent($id));
+                break;
+        }
     }
 }

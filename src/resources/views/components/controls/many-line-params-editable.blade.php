@@ -25,7 +25,13 @@ const getLinesUnderTable = ({ tableId }) => {
         @if(isset($tableSettings['button_clone_from_tmpl']) && $tableSettings['button_clone_from_tmpl'])
             @php
                 $route = route($tableName.".cloneTemplate");
-                $href = "javascript:callApiCloneTemplate('$route', [{esg_tmpl_id: 1, esg_master_sheet_id: 1}])";
+                $params = [
+                    'esg_tmpl_id' => $item['esg_tmpl_id'],
+                    'esg_master_sheet_id' => $item['id'],
+                ];
+                $paramStr = json_encode($params);
+                $href = "javascript:callApiCloneTemplate('$route', [$paramStr])";
+                // dump($item);
             @endphp
             <x-renderer.button disabled="{{$readOnly}}" type="success" href="{!! $href !!}">Clone From Template</x-renderer.button>
         @endif

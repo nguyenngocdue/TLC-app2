@@ -2,19 +2,22 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
+use App\Models\Esg_master_sheet;
 use App\Models\Esg_tmpl;
-use App\Models\Prod_order;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
+use App\View\Components\Renderer\ViewAllMatrixFilter\TraitFilterMonth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class EsgMasterSheets extends ViewAllTypeMatrixParent
 {
+    use TraitFilterMonth;
     use TraitXAxisMonthly;
 
-    private $project, $subProject, $prodRouting, $prodRoutingLink, $prodDiscipline;
+    private $workplaceId;
     protected $viewportDate = null;
     // protected $viewportMode = null;
 
@@ -36,23 +39,21 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
     public function __construct()
     {
         parent::__construct();
-        [$this->project, $this->subProject, $this->prodRouting, $this->prodRoutingLink, $this->prodDiscipline] = $this->getUserSettings();
-        $this->project = $this->project ? $this->project : 5;
-        $this->subProject = $this->subProject ? $this->subProject : null;
-        $this->prodRouting = $this->prodRouting ? $this->prodRouting : null;
-        $this->prodRoutingLink = $this->prodRoutingLink ? $this->prodRoutingLink : [];
+        [$this->workplaceId, $this->viewportDate] = $this->getUserSettings();
+        $this->viewportDate = strtotime($this->viewportDate ? $this->viewportDate : now());
+        // $this->project = $this->project ? $this->project : 5;
+        // $this->subProject = $this->subProject ? $this->subProject : null;
+        // $this->prodRouting = $this->prodRouting ? $this->prodRouting : null;
+        // $this->prodRoutingLink = $this->prodRoutingLink ? $this->prodRoutingLink : [];
     }
 
     private function getUserSettings()
     {
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
-        $project = $settings[$type][Constant::VIEW_ALL]['matrix']['project_id'] ?? null;
-        $subProject = $settings[$type][Constant::VIEW_ALL]['matrix']['sub_project_id'] ?? null;
-        $prodRouting = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] ?? null;
-        $prodRoutingLink = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_link_id'] ?? null;
-        $prodDiscipline = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_discipline_id'] ?? null;
-        return [$project, $subProject, $prodRouting, $prodRoutingLink, $prodDiscipline];
+        $workplaceId = $settings[$type][Constant::VIEW_ALL]['matrix']['workplace_id'] ?? null;
+        $viewportDate = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] ?? null;
+        return [$workplaceId, $viewportDate];
     }
 
     public function getYAxis()
@@ -67,44 +68,13 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
         return $yAxis;
     }
 
-    // protected function getXAxisPrimaryColumns()
-    // {
-    //     $data = Prod_routing::query();
-    //     // if ($this->prodDiscipline) $data = $data->where('prod_discipline_id', $this->prodDiscipline);
-    //     // if ($this->prodRoutingLink) $data = $data->whereIn('prod_routing_link_id', $this->prodRoutingLink);
-    //     $data = $data->orderBy('name')->get();
-    //     return $data;
-    // }
-
-    // protected function getXAxis()
-    // {
-    //     $result = [];
-    //     // if (is_null($this->subProject)) {
-    //     //     echo Blade::render("<x-feedback.alert type='error' message='You must specify Sub-Project.'></x-feedback.alert>");
-    //     //     return [];
-    //     // }
-    //     $data = $this->getXAxisPrimaryColumns();
-    //     // dump($data);
-    //     foreach ($data as $line) {
-    //         $item = [
-    //             'dataIndex' => $line->id,
-    //             'columnIndex' => "status",
-    //             'title' => $line->name,
-    //         ];
-    //         $result[] = $item;
-    //     }
-    //     return $result;
-    //     // usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
-    //     // return $result;
-    // }
-
     public function getMatrixDataSource($xAxis)
     {
-        $lines = Prod_order::query()->get();
-        // ->where('sub_project_id', $this->subProject)
-        // ->where('prod_routing_id', $this->prodRouting);
-        // if ($this->prodDiscipline) $lines = $lines->where('prod_discipline_id', $this->prodDiscipline);
-        // if ($this->prodRoutingLink) $lines = $lines->whereIn('prod_routing_link_id', $this->prodRoutingLink);
+        $selectedYear = date('Y', $this->viewportDate);
+        $lines = Esg_master_sheet::query()
+            ->whereYear('esg_month', $selectedYear)
+            ->select(["*", DB::raw(" substr(esg_month,1,7) as esg_month")])
+            ->get();
         // dump($lines[0]);
         return $lines;
     }
@@ -112,11 +82,7 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
     protected function getViewportParams()
     {
         return [
-            'project_id' => $this->project,
-            'sub_project_id' => $this->subProject,
-            'prod_routing_id' => $this->prodRouting,
-            'prod_routing_link_id' => $this->prodRoutingLink,
-            'prod_discipline_id' => $this->prodDiscipline,
+            'workplace_id' => $this->workplaceId,
         ];
     }
 

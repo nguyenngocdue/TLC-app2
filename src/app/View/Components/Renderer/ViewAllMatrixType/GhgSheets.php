@@ -4,8 +4,6 @@ namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Models\Ghg_sheet;
 use App\Models\Ghg_tmpl;
-use App\Models\Hse_extra_metric;
-use App\Models\Workplace;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;

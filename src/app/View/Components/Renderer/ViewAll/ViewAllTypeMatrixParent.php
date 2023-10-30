@@ -371,6 +371,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $params = ["type" => $this->type, "dataSource" => $filterDataSource, "viewportParams" => $viewportParams,];
         $filterName = "";
         switch ($this->type) {
+            case "esg_master_sheets":
             case "ghg_sheets":
             case "hse_extra_metrics":
             case "hse_insp_chklst_shts":

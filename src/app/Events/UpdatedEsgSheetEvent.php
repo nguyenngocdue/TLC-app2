@@ -9,8 +9,9 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-class UpdatedSequenceBaseEvent
+class UpdatedEsgSheetEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,9 +20,10 @@ class UpdatedSequenceBaseEvent
      *
      * @return void
      */
-    public function __construct(public $modelPathChildren,public $idChildren)
-    {
-        //
+    public function __construct(
+        public $sheetId,
+    ) {
+        Log::info("Construct of Event " . $sheetId);
     }
 
     /**

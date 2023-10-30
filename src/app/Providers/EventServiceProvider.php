@@ -12,8 +12,9 @@ use App\Events\SendEmailItemCreated;
 use App\Events\SendMailForInspector;
 use App\Events\UpdateChklstProgressEvent;
 use App\Events\UpdatedDocumentEvent;
-use App\Events\UpdatedSequenceBaseEvent;
+use App\Events\UpdatedProdSequenceEvent;
 use App\Events\UpdateStatusChklstRunEvent;
+//------------
 use App\Listeners\InspChklstListener;
 use App\Listeners\LoggedUserSignInHistoriesListener;
 use App\Listeners\RemindSignOffListener;
@@ -24,8 +25,10 @@ use App\Listeners\SendUpdatedDocumentNotificationListener;
 use App\Listeners\ShouldUpdateFieldsListener;
 use App\Listeners\UpdateChklstProgressFromSheetListener;
 use App\Listeners\UpdateChklstSheetProgressListener;
-use App\Listeners\UpdatedSequenceBaseListener;
+use App\Listeners\UpdatedEsgSheetListener;
+use App\Listeners\UpdatedProdSequenceListener;
 use App\Listeners\UpdateStatusChklstRunListener;
+//------------
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -52,8 +55,10 @@ class EventServiceProvider extends ServiceProvider
         SendMailForInspector::class => [SendMailForInspectorListener::class],
         BroadcastRemindSignOffEvent::class => [RemindSignOffListener::class],
         InspChklstEvent::class => [InspChklstListener::class],
-        LoggedUserSignInHistoriesEvent::class => [LoggedUserSignInHistoriesListener::class,],
-        UpdatedSequenceBaseEvent::class => [UpdatedSequenceBaseListener::class,]
+        LoggedUserSignInHistoriesEvent::class => [LoggedUserSignInHistoriesListener::class],
+
+        UpdatedProdSequenceEvent::class => [UpdatedProdSequenceListener::class],
+        UpdatedEsgSheetEvent::class => [UpdatedEsgSheetListener::class],
 
     ];
 

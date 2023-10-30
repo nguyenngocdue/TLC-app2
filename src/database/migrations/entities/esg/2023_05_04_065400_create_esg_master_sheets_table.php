@@ -29,7 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('esg_tmpl_id')->nullable();
             $table->appendCommonFields();
 
-            $table->unique(['esg_month', 'esg_tmpl_id']);
+            $table->unique(['esg_month', 'esg_tmpl_id', 'workplace_id']);
         });
     }
 
