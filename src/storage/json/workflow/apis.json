@@ -75,7 +75,8 @@
         "name": "erp_routing_links"
     },
     "esg_master_sheets": {
-        "name": "esg_master_sheets"
+        "name": "esg_master_sheets",
+        "storeEmpty_and_updateShort": "true"
     },
     "esg_metric_types": {
         "name": "esg_metric_types"
