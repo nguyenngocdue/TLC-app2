@@ -30,7 +30,7 @@ return new class extends Migration
             // $table->unsignedBigInteger('ghg_metric_type_2_id')->nullable();
 
             $table->string('esg_code')->nullable();
-            $table->unsignedBigInteger('state')->nullable();
+            $table->unsignedBigInteger('esg_state')->nullable();
             $table->unsignedBigInteger('unit')->nullable();
             // $table->decimal('factor', 10, 4)->nullable();
             $table->string('remark')->nullable();

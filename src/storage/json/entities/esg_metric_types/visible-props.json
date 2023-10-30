@@ -4,6 +4,11 @@
         "column_name": "id",
         "new": "true"
     },
+    "_esg_tmpl_id": {
+        "name": "_esg_tmpl_id",
+        "column_name": "esg_tmpl_id",
+        "new": "true"
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",
@@ -14,9 +19,19 @@
         "column_name": "description",
         "new": "true"
     },
-    "_esg_tmpl_id": {
-        "name": "_esg_tmpl_id",
-        "column_name": "esg_tmpl_id",
+    "_esg_code": {
+        "name": "_esg_code",
+        "column_name": "esg_code",
+        "new": "true"
+    },
+    "_esg_state": {
+        "name": "_esg_state",
+        "column_name": "esg_state",
+        "new": "true"
+    },
+    "_unit": {
+        "name": "_unit",
+        "column_name": "unit",
         "new": "true"
     },
     "_owner_id": {

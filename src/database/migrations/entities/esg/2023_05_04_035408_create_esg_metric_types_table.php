@@ -25,6 +25,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('esg_tmpl_id')->nullable();
 
+            $table->string('esg_code')->nullable();
+            $table->unsignedBigInteger('esg_state')->nullable();
+            $table->unsignedBigInteger('unit')->nullable();
+
             $table->appendCommonFields();
         });
     }

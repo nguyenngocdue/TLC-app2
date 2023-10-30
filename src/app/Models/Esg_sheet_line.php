@@ -10,7 +10,7 @@ class Esg_sheet_line extends ModelExtended
         "id",  "owner_id", "order_no", "esg_tmpl_id",
         "esg_metric_type_id",
         // "ghg_metric_type_1_id", "ghg_metric_type_2_id",
-        "esg_code", "state", "unit",
+        "esg_code", "esg_state", "unit",
         "esg_sheet_id", "value",
         // "factor", "total",
         "remark", "status",
@@ -25,7 +25,7 @@ class Esg_sheet_line extends ModelExtended
         // "getGhgMetricType1" => ['belongsTo', Ghg_metric_type_1::class, 'ghg_metric_type_1_id'],
         // "getGhgMetricType2" => ['belongsTo', Ghg_metric_type_2::class, 'ghg_metric_type_2_id'],
         "getUnit" => ['belongsTo', Term::class, 'unit'],
-        "getState" => ['belongsTo', Term::class, 'state'],
+        "getState" => ['belongsTo', Term::class, 'esg_state'],
     ];
     public function getEsgSheet()
     {
@@ -78,7 +78,7 @@ class Esg_sheet_line extends ModelExtended
 
             // ['dataIndex' => 'factor', 'invisible' => true,],
             ['dataIndex' => 'esg_code'],
-            ['dataIndex' => 'state'],
+            ['dataIndex' => 'esg_state'],
             ['dataIndex' => 'unit'],
             ['dataIndex' => 'value', 'footer' => "agg_sum",],
             // ['dataIndex' => 'total', 'footer' => "agg_sum",],
