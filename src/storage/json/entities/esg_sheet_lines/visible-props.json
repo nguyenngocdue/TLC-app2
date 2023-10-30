@@ -1,0 +1,82 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_esg_sheet_id": {
+        "name": "_esg_sheet_id",
+        "column_name": "esg_sheet_id",
+        "new": "true"
+    },
+    "_esg_tmpl_id": {
+        "name": "_esg_tmpl_id",
+        "column_name": "esg_tmpl_id",
+        "new": "true"
+    },
+    "_esg_metric_type_id": {
+        "name": "_esg_metric_type_id",
+        "column_name": "esg_metric_type_id",
+        "new": "true"
+    },
+    "_esg_code": {
+        "name": "_esg_code",
+        "column_name": "esg_code",
+        "new": "true"
+    },
+    "_state": {
+        "name": "_state",
+        "column_name": "state",
+        "new": "true"
+    },
+    "_unit": {
+        "name": "_unit",
+        "column_name": "unit",
+        "new": "true"
+    },
+    "_value": {
+        "name": "_value",
+        "column_name": "value",
+        "new": "true"
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "new": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    }
+}

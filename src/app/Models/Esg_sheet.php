@@ -8,23 +8,30 @@ use App\Utils\Support\DateTimeConcern;
 class Esg_sheet extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "status",
-        "ghg_month", "owner_id", "ghg_tmpl_id", "total",
+        "id", "name", "description", "status", "workplace_id",
+        "esg_month", "owner_id", "esg_tmpl_id", "total",
     ];
 
     public static $nameless = true;
     public function getNameAttribute($value)
     {
-        $template = $this->getGhgTmpl;
-        return ($template->name ?? "Template?") . " - " . DateTimeConcern::convertForLoading("picker_month", $this->ghg_month);
+        $template = $this->getEsgTmpl;
+        return ($template->name ?? "Template?") . " - " . DateTimeConcern::convertForLoading("picker_month", $this->esg_month);
     }
 
     public static $eloquentParams = [
-        "getGhgTmpl" => ["belongsTo", Ghg_tmpl::class, "ghg_tmpl_id"],
-        "getLines" => ["hasMany", Ghg_sheet_line::class, "ghg_sheet_id"],
+        "getEsgTmpl" => ["belongsTo", Esg_tmpl::class, "esg_tmpl_id"],
+        "getLines" => ["hasMany", Esg_sheet_line::class, "esg_sheet_id"],
+        'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
     ];
 
-    public function getGhgTmpl()
+    public function getWorkplace()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getEsgTmpl()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
