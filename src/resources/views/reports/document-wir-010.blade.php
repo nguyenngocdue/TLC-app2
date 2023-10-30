@@ -24,7 +24,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     <div class="md:px-4">
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
             <x-print.header6 />
-            <x-renderer.heading level=2 class='text-center pt-4'>QAQC Acceptance Report</x-renderer.heading>
+            <x-renderer.heading level=2 class='text-center pt-4'>QC Acceptance Report</x-renderer.heading>
             {{-- RENDER WIDGET --}}
             <div class="pt-4"></>
             <div class="p-4 border">

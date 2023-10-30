@@ -50,6 +50,7 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                     ,count_po_finished
                     ,count_original_po
                     ,FORMAT(count_po_finished*100/tb2.count_original_po,2) AS finished_progress
+                    #,100 AS finished_progress
                     ,prd.order_no AS order_no
                     FROM (SELECT
                     pj.name AS project_name,
@@ -197,16 +198,18 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
             });
             // related to dimensions AxisX and AxisY
             $dimensions = [
-                'scaleMaxX' => 100,
+                'scaleMaxX' => 110,
+                'bellow100' => 1,
                 'fontSize' => 14,
                 'titleX' => "% Complete",
                 'indexAxis' => 'y',
-                'width' => 400,
-                'height' => $max/2*30,
+                'width' => 1250,
+                'height' => $max*30,
                 'dataLabelAlign' => 'end',
                 'dataLabelOffset' => 10,
                 'displayTitleOnTopCol' => 1,
-                'tooltipLabel'=> '% Complete',        // dd($collectionItems);
+                'tooltipLabel'=> '% Complete', 
+                'dataLabelOffset' => 2,
             ];
     
             // Set data for widget

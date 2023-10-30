@@ -1,6 +1,10 @@
 @props(['chartType'])
 
-<div class="block"><canvas id="{{$key}}" width={{$dimensions['width'] ?? null}} height={{$dimensions['height'] ?? null}}></canvas></div>
+<div class="flex justify-center">
+	<div class="block">
+		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
+	</div>
+</div>
 
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
@@ -65,11 +69,13 @@ var chartConfig = {
                 }
             },
             x: {
+                barPercentage: 0.8,
                 max: {!! $dimensions['scaleMaxX'] ?? 'null' !!}, 
                 ticks: {
                     font: {
                         size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
                     },
+                    callback: {!! $dimensions['bellow100'] ? 'customXAxisTickCallback' : 'null' !!}, 
                     // change legends on Y axis
                     //callback: function(value, index, ticks) {
                     //    return '$';
@@ -161,6 +167,7 @@ var chartConfig = {
                 borderWidth: 1,
                 borderRadius: 6,
                 offset: '{!! $dimensions['dataLabelOffset'] ?? '0' !!}',
+                clamp: true,
                 formatter: function(value, context) {
             		return (value.toFixed(2))
 				}
@@ -181,4 +188,10 @@ var chartRendered = new Chart(chartElement, chartConfig);
 //chartRendered.data.datasets[0].barThickness = {!! $dimensions['widthBar'] ?? null !!};
 //chartRendered.update();
 //console.log(chartRendered)
+function customXAxisTickCallback(value, index, values) {
+    if (value > 100) {
+        return ''; // Trả về một chuỗi trống để ẩn giá trị 120
+    }
+    return value;
+}
 </script>

@@ -207,13 +207,13 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                     "width" => 150,
                     "footer" => "agg_sum"
                 ],
-                [
-                    "title" => "Net Working Days {$notes['net_working_day']}",
-                    "dataIndex" => "net_working_day",
-                    "align" => "right",
-                    "width" => 150,
-                    "footer" => "agg_sum"
-                ],
+                // [
+                //     "title" => "Net Working Days {$notes['net_working_day']}",
+                //     "dataIndex" => "net_working_day",
+                //     "align" => "right",
+                //     "width" => 150,
+                //     "footer" => "agg_sum"
+                // ],
                 [
                     "title" => "Downtime Days  {$notes['total_discrepancy_days']}",
                     "dataIndex" => "total_discrepancy_days",
@@ -236,7 +236,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                     'cell_class' => 'text-gray-300'
                 ];                
             }
-            if(isset($items->net_working_day)){
+            if(isset($items->independent_holiday_sunday_day)){
                 $projectId = $items->project_id;
                 $subProjectId = $items->sub_project_id;
                 $prodOrderId = $items->prod_order_id;
@@ -246,7 +246,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                                 .'&sub_project_id='.$subProjectId
                                 .'&prod_order_id=' .$prodOrderId
                                 .'&prod_routing_id=' .$prodRoutingId;
-                $items->net_working_day = (object)[
+                $items->independent_holiday_sunday_day = (object)[
                     'value' => $items->net_working_day,
                     'cell_class' => 'text-blue-700',
                     'cell_href' => $route,

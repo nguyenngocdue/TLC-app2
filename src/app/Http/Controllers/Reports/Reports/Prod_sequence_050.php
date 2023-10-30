@@ -79,7 +79,8 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
         
         // if($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
                             $sql .="\n AND pose.deleted_by IS NULL
-                        GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id,po.id, po.name,po.production_name";
+                        GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id,po.id, po.name,po.production_name
+                        ORDER BY project_name, sub_project_name, prod_routing_name, prod_discipline_name, prod_routing_link_name, prod_order_name";
         return $sql;
     }
 

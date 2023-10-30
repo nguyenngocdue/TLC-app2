@@ -73,8 +73,8 @@
         "name": "document-qaqc_wir_010",
         "package_tab": "report",
         "package": "project_management",
-        "top_title": "QAQC Acceptance Report",
-        "title": "QAQC Acceptance Report"
+        "top_title": "QC Acceptance Report",
+        "title": "QC Acceptance Report"
     },
     "register-qaqc_insp_chklst_020": {
         "name": "register-qaqc_insp_chklst_020",
