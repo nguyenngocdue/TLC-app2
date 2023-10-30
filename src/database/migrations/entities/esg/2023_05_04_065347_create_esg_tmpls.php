@@ -19,20 +19,12 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('esg_sheets', function (BlueprintExtended $table) {
+        $schema->create('esg_tmpls', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
-            $table->date('esg_date')->nullable();
-            // $table->unsignedBigInteger('workplace_id');
-            $table->double("total")->nullable();
-            $table->unsignedBigInteger('esg_tmpl_id')->nullable();
-            $table->unsignedBigInteger('esg_master_sheet_id')->nullable();
-
-            $table->orderable();
+            $table->string("name")->nullable();
+            $table->text('description')->nullable();
+            // $table->unsignedBigInteger('ghg_cat_id')->nullable();
             $table->appendCommonFields();
-
-            $table->unique(['esg_date', 'esg_tmpl_id']);
         });
     }
 
@@ -43,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('esg_sheets');
+        Schema::dropIfExists('esg_tmpls');
     }
 };

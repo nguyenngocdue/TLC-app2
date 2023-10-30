@@ -257,6 +257,7 @@ const refreshCalculation = (tableId) => {
     for (let i = 0; i < length; i++) {
         const id = makeIdFrom(tableId, 'id', i)
         getEById(id).trigger('change', { batchLength: length })
+        if (debugEditable) console.log("Triggered change", id)
     }
 }
 
