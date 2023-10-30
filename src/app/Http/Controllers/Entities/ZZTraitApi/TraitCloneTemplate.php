@@ -60,6 +60,12 @@ trait TraitCloneTemplate
 					$command = "ndc:cloneQaqcSheet";
 					$result = $this->getResult($command, $params, $plural, $tmpl_id);
 					break;
+				case "esg_sheets":
+					['esg_tmpl_id' => $tmpl_id, "esg_master_sheet_id" => $master_sheet_id] = $line;
+					$params = ['--ownerId' => $ownerId, '--tmplId' => $tmpl_id, '--masterSheetId' => $master_sheet_id];
+					$command = "ndc:cloneEsgSheet";
+					$result = $this->getResult($command, $params, $plural, $tmpl_id);
+					break;
 				default:
 					$result = [
 						'message' => "[$plural] is not in the switch",

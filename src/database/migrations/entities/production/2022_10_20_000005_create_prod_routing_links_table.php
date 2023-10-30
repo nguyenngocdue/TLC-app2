@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->unsignedBigInteger('prod_discipline_id');
             $table->unsignedBigInteger('standard_uom_id');
+            $table->unsignedBigInteger('workplace_id');
             $table->appendCommonFields();
         });
     }

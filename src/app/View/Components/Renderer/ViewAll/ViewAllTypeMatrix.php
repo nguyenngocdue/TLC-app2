@@ -54,6 +54,8 @@ class ViewAllTypeMatrix extends Component
                 return Blade::render("<x-renderer.view-all-matrix-type.QaqcInspChklsts/>");
             case "hse_insp_chklst_shts":
                 return Blade::render("<x-renderer.view-all-matrix-type.HseInspChklstShts/>");
+            case "esg_master_sheets":
+                return Blade::render("<x-renderer.view-all-matrix-type.EsgMasterSheets/>");
             default:
                 return "Unknown how to render matrix view for " . $this->type . " (ViewAllTypeMatrix).";
         }
