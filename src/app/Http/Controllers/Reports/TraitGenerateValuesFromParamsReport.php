@@ -21,6 +21,8 @@ trait TraitGenerateValuesFromParamsReport
             'user_team_ncr',
             'optionPrintLayout',
             'root_cause',
+            "ghg_tmpl",
+            "month"
         ], $params);
         return $valOfParams;
     }

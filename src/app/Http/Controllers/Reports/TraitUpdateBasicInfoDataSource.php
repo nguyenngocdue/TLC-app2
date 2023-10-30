@@ -13,6 +13,7 @@ trait TraitUpdateBasicInfoDataSource
     private static function updateFieldsStatusAndValues($values, $fields, $attrib)
     {
         $values =  (array)$values;
+        // dd($fields, $values, $attrib);
         $fields = array_intersect($fields, array_keys((array)$values));
         foreach ($fields as $field) {
             if (isset($values[$field])) {
@@ -63,11 +64,15 @@ trait TraitUpdateBasicInfoDataSource
             'sub_project_status',
             'prod_order_status',
             'ncr_status',
+            'ghg_sheet_name',
+            'ghg_metric_type_1_name',
+            'ghg_metric_type_2_name',
         ] + $fieldInputs;
         $attrib = [];
         foreach ($dataSource as $key => &$values) {
             // if($key === 'tableDataSource') {
             if (isset($dataSet[$key])) $attrib = $dataSet[$key];
+            // dd($attrib);
             if (($values instanceof Collection)) {
                 foreach ($values as $k => &$item) {
                     $item = self::updateFieldsStatusAndValues($item, $fields, $attrib);
