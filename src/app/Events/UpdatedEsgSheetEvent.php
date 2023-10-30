@@ -23,7 +23,6 @@ class UpdatedEsgSheetEvent
     public function __construct(
         public $sheetId,
     ) {
-        Log::info("Construct of Event " . $sheetId);
     }
 
     /**

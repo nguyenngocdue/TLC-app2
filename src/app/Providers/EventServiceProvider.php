@@ -12,6 +12,7 @@ use App\Events\SendEmailItemCreated;
 use App\Events\SendMailForInspector;
 use App\Events\UpdateChklstProgressEvent;
 use App\Events\UpdatedDocumentEvent;
+use App\Events\UpdatedEsgSheetEvent;
 use App\Events\UpdatedProdSequenceEvent;
 use App\Events\UpdateStatusChklstRunEvent;
 //------------
