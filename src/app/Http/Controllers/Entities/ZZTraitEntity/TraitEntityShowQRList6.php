@@ -16,7 +16,7 @@ trait TraitEntityShowQRList6
 		$routeExits =  (Route::has($routeName));
 		$dataSource = array_map(function ($item) use ($routeExits, $routeName) {
 			return [
-				'href' => $routeExits ? route($routeName, $item['id']) : "#",
+				'href' => $routeExits ? route($routeName, $item['slug']) : "#",
 				'name' => $item['name'] ?? $item['filename'] ?? '',
 			];
 		}, $dataSource->toArray());
