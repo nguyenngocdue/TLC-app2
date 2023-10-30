@@ -22,6 +22,13 @@ const getLinesUnderTable = ({ tableId }) => {
         @if(isset($tableSettings['button_add_a_new_line']) && $tableSettings['button_add_a_new_line'])
             <x-renderer.button disabled="{{$readOnly}}" id="btnAddANewLine_{{$table01Name}}" type="success" onClick="addANewLine({tableId: '{{$table01Name}}'})">Add A New Item</x-renderer.button>
         @endif
+        @if(isset($tableSettings['button_clone_from_tmpl']) && $tableSettings['button_clone_from_tmpl'])
+            @php
+                $route = route($tableName.".cloneTemplate");
+                $href = "javascript:callApiCloneTemplate('$route', [{esg_tmpl_id: 1, esg_master_sheet_id: 1}])";
+            @endphp
+            <x-renderer.button disabled="{{$readOnly}}" type="success" href="{!! $href !!}">Clone From Template</x-renderer.button>
+        @endif
         @if(isset($tableSettings['button_add_from_a_list']) && $tableSettings['button_add_from_a_list'])
             <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('{{$table01Name}}')" keydownEscape="closeModal('{{$table01Name}}')" type="success">Add From A List</x-renderer.button>
             <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />

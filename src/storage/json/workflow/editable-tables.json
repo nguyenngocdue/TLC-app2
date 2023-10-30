@@ -52,6 +52,7 @@
         "entity-type": "esg_master_sheets",
         "editable-table": "esg_sheets",
         "button_add_a_new_line": "true",
+        "button_clone_from_tmpl": "true",
         "button_recalculate": "true"
     },
     "esg_sheets_01": {

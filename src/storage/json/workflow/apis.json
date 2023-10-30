@@ -87,7 +87,7 @@
     },
     "esg_sheets": {
         "name": "esg_sheets",
-        "storeEmpty_and_updateShort": "true"
+        "cloneTemplate_and_updateShort": "true"
     },
     "esg_tmpl_lines": {
         "name": "esg_tmpl_lines",
