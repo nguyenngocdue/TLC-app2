@@ -50,35 +50,43 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                     {{-- BASIC INFORMATION --}}
                                         <div class="col-span-12 grid scroll-mt-80 snap-start border border-gray-600" id="page{{$key}}">
                                             <div class="grid grid-rows-1">
+                                                <div class="grid grid-cols-12 text-right ">
+                                                    <label class="{{$class1}} col-start-1  col-span-3">Range Date</label>
+                                                    <span class="{{$class2}}  col-start-4  col-span-9">from: 
+                                                        <strong class='px-2'>{{$basicInfoData['from_date']}}</strong>
+                                                        to:
+                                                        <strong class='px-2'>{{$basicInfoData['to_date']}}</strong>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="grid grid-rows-1">
                                                 <div class="grid grid-cols-12 text-right">
                                                     <label class="{{$class1}} col-start- col-span-3">Project</label>
-                                                    <span class="{{$class2}}  col-start-4  col-span-4">{{$basicInfoData['project']}}</span>
+                                                    <span class="{{$class2}}  col-start-4  col-span-4">{{$basicInfoData['project_name']}}</span>
                                                     <label class="{{$class1}} col-start-8  col-span-3 items-center">Sub-Project</label>
-                                                    <span class="{{$class2}}  col-start-11 col-span-2">{{$basicInfoData['sub_project']}}</span>
+                                                    <span class="{{$class2}}  col-start-11 col-span-2">{{$basicInfoData['sub_project_name']}}</span>
                                                 </div>
                                             </div>
                                             <div class="grid grid-rows-1">
                                                 <div class="grid grid-cols-12 text-right ">
                                                     <label class="{{$class1}} col-start-1 col-span-3">Production Routing</label>
-                                                    <span class="{{$class2}}  col-start-4 col-span-9">{{$basicInfoData['prod_routing']}}</span>
+                                                    <span class="{{$class2}}  col-start-4 col-span-9">{{$basicInfoData['prod_routing_name']}}</span>
                                                 </div>
                                             </div>
-                                            @if(isset($basicInfoData['prod_discipline']))
-                                            <div class="grid grid-rows-1">
-                                                <div class="grid grid-cols-12 text-right ">
-                                                    <label class="{{$class1}} col-start-1 col-span-3">Production Discipline</label>
-                                                    <span class="{{$class2}}  col-start-4 col-span-9">{{$basicInfoData['prod_discipline']}}</span>
-                                                </div>
+                                           
+                                           <div class="grid grid-rows-1">
+                                                    @if($basicInfoData['prod_discipline_name'])
+                                                        <div class="grid grid-cols-12 text-right">
+                                                            <label class="{{$class1}} col-start-1  col-span-3 items-center">Production Discipline</label>
+                                                            <span class="{{$class2}}  col-start-4 col-span-4">{{$basicInfoData['prod_discipline_name']}}</span>
+                                                            @if($prodRoutingLinkName)
+                                                            <label class="{{$class1}} ccol-start-8  col-span-3">Production Routing Link</label>
+                                                            <span class="{{$class2}}  col-start-11  col-span-2">{{$prodRoutingLinkName}}</span>
+                                                            @endif
+
+                                                        </div>
+                                                    @endif
                                             </div>
-                                            @endif
-                                            @if($prodRoutingLinkName)
-                                            <div  class="grid grid-rows-1">
-                                                <div class="grid grid-cols-12 text-right ">
-                                                    <label class="{{$class1}} col-start-1 col-span-3">Production Routing Link</label>
-                                                    <span  class="{{$class2}}  col-start-4 col-span-9">{{$prodRoutingLinkName}}</span>
-                                                </div>
-                                            </div>
-                                            @endif
                                         </div>
                                     {{-- TABLES --}}
                                         <div class="">

@@ -286,10 +286,14 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         $prodPouting = Prod_routing::find($params['prod_routing_id'] ?? $this->prodRoutingId)->name;
         $prodDiscipline = isset($params['prod_discipline_id']) ? Prod_discipline::find($params['prod_discipline_id'])->name : '';
 
-        $basicInfoData['project'] = $projectName;
-        $basicInfoData['sub_project'] = $subProjectName->name;
-        $basicInfoData['prod_routing'] = $prodPouting;
-        $basicInfoData['prod_discipline'] = $prodDiscipline;
+
+        $basicInfoData['project_name'] = $projectName;
+        $basicInfoData['sub_project_name'] = $subProjectName->name;
+        $basicInfoData['prod_routing_name'] = $prodPouting;
+        $basicInfoData['prod_discipline_name'] = $prodDiscipline;
+        [$fromDate, $toDate] = explode('-', $params['picker_date']);
+        $basicInfoData['from_date'] = $fromDate;
+        $basicInfoData['to_date'] = $toDate;
         return $basicInfoData;
     }
 
@@ -302,12 +306,6 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         return $arraySqlStr;
     }
 
-    // private function getProdRoutingLinks($params){
-    //     $prodRoutingLinkIds = isset($params['prod_routing_link_id']) ?
-    //     $params['prod_routing_link_id']:Prod_discipline::find($params['prod_discipline_id'])->getProdRoutingLink()->pluck('id')->toArray();
-    //     $prodRoutingLinks = Prod_routing_link::whereIn('id', $prodRoutingLinkIds)->get()->pluck('name', 'id')->toArray();
-    //     return $prodRoutingLinks;
-    // }   
 
     private function makeDataWidget($dataSource, $params){
         $dataOfManageWidget = $this->makeParamsInManageWidgets($params);
