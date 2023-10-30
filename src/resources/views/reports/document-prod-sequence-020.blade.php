@@ -47,7 +47,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                         </div>
                                     </div>
                                 {{-- BASIC INFORMATION --}}
-                                    <div class="col-span-12 grid scroll-mt-80 snap-start border border-gray-600" id="sheet{{$key}}">
+                                    <div class="col-span-12 grid scroll-mt-80 snap-start border border-gray-600" id="page{{$key}}">
                                         <div class="grid grid-rows-1">
                                             <div class="grid grid-cols-12 text-right">
                                                 <label class="{{$class1}} col-start- col-span-3">Project</label>
