@@ -137,9 +137,9 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_state": {
-        "name": "_state",
-        "column_name": "state",
+    "_esg_state": {
+        "name": "_esg_state",
+        "column_name": "esg_state",
         "column_type": "bigint unsigned",
         "label": "State",
         "control": "dropdown",
