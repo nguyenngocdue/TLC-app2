@@ -57,22 +57,24 @@ trait TraitSupportEntityShow
                     $valueSignature = $item->value;
                     // dd($item->insp_comments);
                     $inspectorId = isset($item->getControlType->name) ? $item->inspector_id : $item->owner_id;
+                    $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $item->updated_at);
+                    $renderInspector = $inspectorId ? "<div class='text-right mr-5'>
+                    <x-renderer.avatar-user uid='$inspectorId'></x-renderer.avatar-user>
+                    @if($inspectorId)
+                        <p>$updatedAt</p>
+                    @endif
+                    </div>" : "";
                     // $inspectorName = null;
                     // if ($inspectorId) {
                     //     $inspectorName = User::findFromCache($inspectorId)->full_name;
                     // }
-                    $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $item->updated_at);
                     $str = Blade::render(
                         "<div class='flex pb-2 justify-between items-center'>
                                     <x-controls.signature2 name='signature' value='$valueSignature' updatable='{{false}}'/>
-                                        <div class='text-right mr-5'>
-                                        <x-renderer.avatar-user uid='$inspectorId'></x-renderer.avatar-user>
-                                        @if($inspectorId)
-                                            <p>$updatedAt</p>
-                                        @endif
-                                        </div>
+                                        $renderInspector
                         </div>",
                     );
+                   
                     $str .= $this->createStrHtmlAttachment($item);
                     $str .=  $this->createStrHtmlComment($item);
                     break;
