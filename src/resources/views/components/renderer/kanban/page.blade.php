@@ -63,7 +63,7 @@
         foreach($totalElapse as $elapses){
             foreach($elapses as $group_id => $groups){
                 foreach($groups as $task_id => $value){
-                    echo "currentElapsed[$group_id][$task_id]=$value;";
+                    echo "currentElapsed[$group_id][$task_id]={elapsed: $value};";
                 }
             }
         }
