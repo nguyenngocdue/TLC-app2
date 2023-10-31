@@ -90,9 +90,13 @@ trait TraitSendNotificationAndMail
         $isLogger = false;
         switch ($action) {
             case 'update':
-                $isLogger = ($previousValue['status'] !== $currentValue['status']);
-                $type = 'updated_field';
-                $key = 'entity_status';
+                if (isset($previousValue['status']) && isset($currentValue['status'])) {
+                    $isLogger = ($previousValue['status'] !== $currentValue['status']);
+                    $type = 'updated_field';
+                    $key = 'entity_status';
+                } else {
+                    Log::error("Status of $modelPath not found. Cancelled Logger.");
+                }
                 break;
             case 'create':
             default:
