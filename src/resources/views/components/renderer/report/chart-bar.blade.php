@@ -18,6 +18,8 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 <script>
 var key = '{{$key}}';
 var chartType = '{{$chartType}}';
+var lessThen100 =  {!! json_encode($dimensions['lessThen100'] ?? false)  !!}
+//console.log(lessThen100);
 var chartData = {
     labels: {!! $meta['labels'] !!},
     numbers: {!! $meta['numbers'] !!},
@@ -75,11 +77,8 @@ var chartConfig = {
                     font: {
                         size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
                     },
-                    callback: {!! $dimensions['bellow100'] ? 'customXAxisTickCallback' : 'null' !!}, 
-                    // change legends on Y axis
-                    //callback: function(value, index, ticks) {
-                    //    return '$';
-                    //}
+                    // change legends on X axis
+                    callback: {!! isset($dimensions['legendX']) && $dimensions['legendX'] ? "customXAxisTickCallback"  : 'null' !!}, 
                 },
                 title: {
                     display: true,
@@ -189,9 +188,13 @@ var chartRendered = new Chart(chartElement, chartConfig);
 //chartRendered.update();
 //console.log(chartRendered)
 function customXAxisTickCallback(value, index, values) {
-    if (value > 100) {
-        return ''; // Trả về một chuỗi trống để ẩn giá trị 120
+    if(lessThen100){
+        console.log(lessThen100, value)
+        if (value <= 100) {
+            return value; // Trả về một chuỗi trống để ẩn giá trị 120
+        }
+    } else{
+        return chartData.labels[index];
     }
-    return value;
 }
 </script>

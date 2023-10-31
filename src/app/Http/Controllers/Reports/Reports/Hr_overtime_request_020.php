@@ -25,6 +25,9 @@ class Hr_overtime_request_020 extends Report_ParentReport2Controller
 
     public function getSqlStr($params)
     {
+        $valOfParams = $this->generateValuesFromParamsReport($params);
+
+        // dd($params);
         $pickerDate =  isset($params['picker_date']) ? $params['picker_date'] : '';
         // dd($fromDate);
         $sql = "SELECT 	uswp.name workplace_name,tb1.*
@@ -85,7 +88,7 @@ if (isset($params['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
         if (isset($params['ot_workplace_id'])) $sql .= "\n AND otr.workplace_id = '{{ot_workplace_id}}'";
         $sql .= " \n  ) AS tb1
                     LEFT JOIN workplaces uswp ON uswp.id = tb1.us_workplace_id ";
-        if (isset($params['month'])) $sql .= "\n WHERE tb1.years_month  = '{{month}}'";
+        if (isset($params['month'])) $sql .= "\n WHERE tb1.years_month  = {{month}}";
         $sql .= "\n ORDER BY name_render, employee_id, ot_date DESC";
         return $sql;
     }

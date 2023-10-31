@@ -27,17 +27,22 @@ class Prod_sequence_dataSource extends Controller
                     FROM (SELECT
                     sp.project_id AS project_id,
                     sp.id AS sub_project_id,
+                    sp.name AS sub_project_name,
                     pr.id AS prod_routing_id,
+                    pr.name AS prod_routing_name,
                     po.id  AS prod_order_id,
+                    po.name  AS prod_order_name,
                     prde.prod_routing_link_id AS prod_routing_link_id,
                     prde.erp_routing_link_id AS erp_routing_link_id,
                     pd.id AS prod_discipline_id,
+                    pd.name AS prod_discipline_name,
                     #ps.total_man_hours AS total_man_hours,
                     ps.id AS prod_sequence_id,
                     ps.erp_prod_order_name AS erp_prod_order_name,
                     ps.status AS prod_sequence_status,
                     SUBSTR(pru.date, 1,7) AS month_prod_run,
                     pru.date AS date_prod_run,
+                    prde.order_no AS order_no,
                     #pru.start,
                     #pru.end,
                     ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/60/60, 2) AS hours,
@@ -86,7 +91,9 @@ class Prod_sequence_dataSource extends Controller
                     AND  SUBSTR(pru.date, 1, 10) >= '{$valOfParams["picker_date"]["start"]}'
                     AND  SUBSTR(pru.date, 1, 10) <= '{$valOfParams["picker_date"]["end"]}'
                     ) AS tb1
-                    LEFT JOIN terms terms ON tb1.standard_uom_id = terms.id";
+                    LEFT JOIN terms terms ON tb1.standard_uom_id = terms.id
+                    ORDER BY sub_project_name, prod_routing_name, prod_discipline_name, order_no, prod_order_name
+                    ";
         // dump($sql);
         return $sql;
     }

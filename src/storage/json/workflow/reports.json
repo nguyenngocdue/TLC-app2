@@ -4,7 +4,7 @@
         "package_tab": "report",
         "package": "project_management",
         "top_title": null,
-        "title": "ECO Summary Report"
+        "title": "CO2 Emission Report"
     },
     "document-ghg_sheet_010": {
         "name": "document-ghg_sheet_010",
@@ -18,7 +18,7 @@
         "package_tab": "report",
         "package": "compliance",
         "top_title": "CO2 Report",
-        "title": "CO2 Emission Report"
+        "title": "Annual CO2 Emission Report"
     },
     "document-ghg_sheet_030": {
         "name": "document-ghg_sheet_030",
@@ -116,7 +116,7 @@
         "package_tab": "report",
         "package": "project_management",
         "top_title": "CO2 Emission Report",
-        "title": "CO2 Emission Report"
+        "title": "Monthly CO2 Emission Report"
     },
     "report-hr_overtime_request_010": {
         "name": "report-hr_overtime_request_010",

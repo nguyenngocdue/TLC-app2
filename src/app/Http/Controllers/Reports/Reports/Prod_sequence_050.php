@@ -46,6 +46,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
                     ,po.production_name AS prod_name
                     ,po.id AS prod_order_id
                     ,po.status AS prod_order_status
+                    ,prd.order_no AS order_no
 
 
                     ,IF(pose.total_calendar_days, pose.total_calendar_days, NULL) AS total_calendar_days
@@ -80,7 +81,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
         // if($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
                             $sql .="\n AND pose.deleted_by IS NULL
                         GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id,po.id, po.name,po.production_name
-                        ORDER BY project_name, sub_project_name, prod_routing_name, prod_discipline_name, prod_routing_link_name, prod_order_name";
+                        ORDER BY project_name, sub_project_name, prod_routing_name, prod_discipline_name, order_no, prod_order_name";
         return $sql;
     }
 

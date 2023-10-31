@@ -39,6 +39,11 @@ class PivotTable extends Component
         protected $tableDataHeader = [],
         protected $maxH = false,
 
+        protected $showPaginationTop= true,
+        protected $topLeftControl= '' ,
+        protected $topCenterControl='' ,
+        protected $topRightControl='' ,
+
     ) {
     }
 
@@ -200,6 +205,11 @@ class PivotTable extends Component
             'tableDataHeader' => $tableDataHeader,
             'tableTrueWidth' => $this->tableTrueWidth,
             'maxH' => $this->maxH,
+            
+            'showPaginationTop'=>$this->showPaginationTop,
+            'topLeftControl'=> $this->topLeftControl ,
+            'topCenterControl'=>$this->topCenterControl, 
+            'topRightControl'=>$this->topRightControl ,
         ]);
     }
 }

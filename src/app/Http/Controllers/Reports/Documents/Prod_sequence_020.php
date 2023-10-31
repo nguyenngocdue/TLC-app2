@@ -227,6 +227,8 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     'barPercentage' => 0.5,
                     'widthBar' => 100,
                     'dataLabelOffset' => 10,
+                    'lessThen100' =>false,
+                    'legendX'=>true
 
                 ];
     
