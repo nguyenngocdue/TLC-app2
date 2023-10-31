@@ -372,6 +372,8 @@ abstract class ViewAllTypeMatrixParent extends Component
         $filterName = "";
         switch ($this->type) {
             case "esg_master_sheets":
+                $filterName = "select_year_and_workplace";
+                break;
             case "ghg_sheets":
             case "hse_extra_metrics":
             case "hse_insp_chklst_shts":

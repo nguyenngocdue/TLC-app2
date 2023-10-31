@@ -42,10 +42,6 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
         parent::__construct();
         [$this->workplaceId, $this->viewportDate] = $this->getUserSettings();
         $this->viewportDate = strtotime($this->viewportDate ? $this->viewportDate : now());
-        // $this->project = $this->project ? $this->project : 5;
-        // $this->subProject = $this->subProject ? $this->subProject : null;
-        // $this->prodRouting = $this->prodRouting ? $this->prodRouting : null;
-        // $this->prodRoutingLink = $this->prodRoutingLink ? $this->prodRoutingLink : [];
     }
 
     private function getUserSettings()
@@ -75,6 +71,7 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
         $selectedYear = date('Y', $this->viewportDate);
         $lines = Esg_master_sheet::query()
             ->whereYear('esg_month', $selectedYear)
+            ->where('workplace_id', $this->workplaceId)
             ->select(["*", DB::raw(" substr(esg_month,1,7) as esg_month")])
             ->get();
         // dump($lines[0]);
@@ -93,12 +90,7 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
         $params = parent::getCreateNewParams($x, $y);
         $params['status'] =  'new';
         $params['esg_month'] .=  '-01';
-        $params['workplace_id'] = 1;
-        // $params['project_id'] =  $this->project;
-        // $params['sub_project_id'] =  $this->subProject;
-        // $params['prod_routing_id'] =  $this->prodRouting;
-
-        // $params['prod_discipline_id'] =  $x['prod_discipline_id'];
+        $params['workplace_id'] = $this->workplaceId;
         return $params;
     }
 
