@@ -38,6 +38,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $checkboxCaptionColumn = null;
     protected $apiCallback = 'null'; //<<JS String
     protected $nameColumnFixed = 'left';
+    protected $cellAgg = null;
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -443,6 +444,24 @@ abstract class ViewAllTypeMatrixParent extends Component
             ],
         );
     }
+    private function aggArrayOfCells($dataSource)
+    {
+        if ($this->cellAgg) {
+            foreach ($dataSource as &$row) {
+                foreach ($row as &$cells) {
+                    if (is_array($cells)) {
+                        $agg_value = 0;
+                        foreach ($cells as $cell) {
+                            $agg_value += $cell->value;
+                        }
+                        $cells = $cells[0];
+                        $cells->value = number_format($agg_value, 2);
+                    }
+                }
+            }
+        }
+        return $dataSource;
+    }
     public function getViewAllMatrixParams($forExcel = false)
     {
         $xAxis = $this->getXAxis();
@@ -451,6 +470,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getMatrixDataSource($xAxis);
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel);
+        $dataSource = $this->aggArrayOfCells($dataSource);
         // dd($dataSource[0]);
         $columns = $this->getColumns($xAxis);
         return [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading];

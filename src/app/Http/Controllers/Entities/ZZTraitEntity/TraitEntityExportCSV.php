@@ -179,7 +179,7 @@ trait TraitEntityExportCSV
         }
         return $rows;
     }
-    private function sortDataValueFollowColumns($columns, $dataSource)
+    private function sortDataValueByColumns($columns, $dataSource)
     {
         $columns = array_column($columns, 'dataIndex');
         $result = [];

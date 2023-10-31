@@ -59,7 +59,7 @@ class ViewAllInvokerController extends Controller
         try {
             $modelPath = $this->getModelPath();
             [, $columns, $dataSource] = (new ($modelPath))->getViewAllMatrixParams(true);
-            $dataSource = $this->sortDataValueFollowColumns($columns, $dataSource);
+            $dataSource = $this->sortDataValueByColumns($columns, $dataSource);
             $dataSource = $this->groupByDataSource($request, $dataSource);
             $columns = array_filter($columns, fn ($item) => !isset($item['hidden']));
             $columns = array_values(array_map(fn ($item) => (isset($item['title']) ?

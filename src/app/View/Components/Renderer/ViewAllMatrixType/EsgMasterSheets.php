@@ -31,6 +31,7 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
     protected $groupBy = null;
     // protected $mode = 'status';
     protected $attOfCellToRender = "total";
+    protected $cellAgg = "agg_sum";
 
     /**
      * Create a new component instance.
@@ -42,6 +43,7 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
         parent::__construct();
         [$this->workplaceId, $this->viewportDate] = $this->getUserSettings();
         $this->viewportDate = strtotime($this->viewportDate ? $this->viewportDate : now());
+        $this->allowCreation = !!$this->workplaceId;
     }
 
     private function getUserSettings()
