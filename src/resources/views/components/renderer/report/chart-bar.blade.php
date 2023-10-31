@@ -10,6 +10,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-stacked100@1.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
+
 <script>
 const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00a950','#58595b','#8549ba'];
 </script>
@@ -58,7 +61,8 @@ var chartConfig = {
                     font: {
                         size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
                         weight: 'bold'
-                    }
+                    },
+                    stepSize: {!! $dimensions['stepSizeY'] ?? 'null' !!},
                 },
                 title: {
                     position: 'top',
@@ -77,6 +81,7 @@ var chartConfig = {
                     font: {
                         size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
                     },
+                    stepSize: {!! $dimensions['stepSizeX'] ?? 'null' !!},
                     // change legends on X axis
                     callback: {!! isset($dimensions['legendX']) && $dimensions['legendX'] ? "customXAxisTickCallback"  : 'null' !!}, 
                 },
@@ -170,7 +175,7 @@ var chartConfig = {
                 formatter: function(value, context) {
             		return (value.toFixed(2))
 				}
-            }
+            },
         }
     },
       scales: {

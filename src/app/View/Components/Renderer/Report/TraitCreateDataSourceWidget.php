@@ -32,6 +32,7 @@ trait TraitCreateDataSourceWidget
         $numbers = StringReport::arrayToJsonWithSingleQuotes($dataByParamCol);
         
         $max = (float)max(array_values($dataByParamCol));
+        // dump(array_values($dataByParamCol));
         $count = count($dataByParamLabelCol);
         $meta = [
             'numbers' => $numbers,
