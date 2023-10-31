@@ -3,8 +3,8 @@
         "name": "document-eco_sheet_010",
         "package_tab": "report",
         "package": "project_management",
-        "top_title": null,
-        "title": "CO2 Emission Report"
+        "top_title": "ECO Summary Report",
+        "title": "ECO Summary Report"
     },
     "document-ghg_sheet_010": {
         "name": "document-ghg_sheet_010",
