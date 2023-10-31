@@ -456,6 +456,12 @@ abstract class ViewAllTypeMatrixParent extends Component
                         }
                         $cells = $cells[0];
                         $cells->value = number_format($agg_value, 2);
+                        $cells->cell_href = "";
+                        $cells->cell_title = "";
+                    }
+                    if (is_object($cells)) {
+                        $cells->cell_href = "";
+                        $cells->cell_title = "";
                     }
                 }
             }
