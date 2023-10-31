@@ -50,7 +50,8 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
         $settings = CurrentUser::getSettings();
         $workplaceId = $settings[$type][Constant::VIEW_ALL]['matrix']['workplace_id'] ?? null;
         $viewportDate = $settings[$type][Constant::VIEW_ALL]['matrix']['viewport_date'] ?? null;
-        return [$workplaceId, $viewportDate];
+        $result = [$workplaceId, $viewportDate];
+        return $result;
     }
 
     public function getYAxis()
@@ -70,9 +71,10 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
     {
         $selectedYear = date('Y', $this->viewportDate);
         $lines = Esg_master_sheet::query()
-            ->whereYear('esg_month', $selectedYear)
-            ->where('workplace_id', $this->workplaceId)
-            ->select(["*", DB::raw(" substr(esg_month,1,7) as esg_month")])
+            ->whereYear('esg_month', $selectedYear);
+        // Log::info($this->workplaceId);
+        if ($this->workplaceId) $lines = $lines->where('workplace_id', $this->workplaceId);
+        $lines = $lines->select(["*", DB::raw(" substr(esg_month,1,7) as esg_month")])
             ->get();
         // dump($lines[0]);
         return $lines;

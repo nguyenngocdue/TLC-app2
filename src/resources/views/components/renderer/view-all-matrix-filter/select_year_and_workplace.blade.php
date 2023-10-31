@@ -12,6 +12,7 @@
                          tableName="workplaces" 
                          name="workplace_id" 
                          id="workplace_id" 
+                         allowClear="true"
                          {{-- typeToLoadListener="qaqc_wir"  --}}
                          selected="{{$viewportParams['workplace_id']}}"
                          />
