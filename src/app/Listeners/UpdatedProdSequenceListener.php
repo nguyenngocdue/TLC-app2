@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\UpdatedSequenceBaseEvent;
+use App\Events\UpdatedProdSequenceEvent;
 use App\Http\Services\ProdSequenceService;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
 
-class UpdatedSequenceBaseListener
+class UpdatedProdSequenceListener
 {
     public function __construct(
         protected ProdSequenceService $prodSequenceService,
@@ -15,7 +15,7 @@ class UpdatedSequenceBaseListener
         //
     }
 
-    public function handle(UpdatedSequenceBaseEvent $event)
+    public function handle(UpdatedProdSequenceEvent $event)
     {
         try {
             $id = $event->{'idChildren'};

@@ -51,7 +51,12 @@ class UpdateUserSettings extends Controller
     {
         $type = $request->input("_entity");
         $toBeSaved = $request->except(["_token", "_method", "_entity", "action"]);
-        $settings[$type][Constant::VIEW_ALL]['matrix'] = $toBeSaved;
+        // $settings[$type][Constant::VIEW_ALL]['matrix'] = $toBeSaved;
+        $values = $settings[$type][Constant::VIEW_ALL]['matrix'];
+        foreach ($toBeSaved as $key => $value) {
+            $values[$key] = $value;
+        }
+        $settings[$type][Constant::VIEW_ALL]['matrix'] = $values;
         return $settings;
     }
 

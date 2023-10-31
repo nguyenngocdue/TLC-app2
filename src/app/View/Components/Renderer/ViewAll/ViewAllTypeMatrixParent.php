@@ -38,6 +38,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $checkboxCaptionColumn = null;
     protected $apiCallback = 'null'; //<<JS String
     protected $nameColumnFixed = 'left';
+    protected $cellAgg = null;
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -371,6 +372,9 @@ abstract class ViewAllTypeMatrixParent extends Component
         $params = ["type" => $this->type, "dataSource" => $filterDataSource, "viewportParams" => $viewportParams,];
         $filterName = "";
         switch ($this->type) {
+            case "esg_master_sheets":
+                $filterName = "select_year_and_workplace";
+                break;
             case "ghg_sheets":
             case "hse_extra_metrics":
             case "hse_insp_chklst_shts":
@@ -440,6 +444,32 @@ abstract class ViewAllTypeMatrixParent extends Component
             ],
         );
     }
+    private function aggArrayOfCells($dataSource)
+    {
+        if ($this->cellAgg) {
+            if (!$this->allowCreation) {
+                foreach ($dataSource as &$row) {
+                    foreach ($row as &$cells) {
+                        if (is_array($cells)) {
+                            $agg_value = 0;
+                            foreach ($cells as $cell) {
+                                $agg_value += $cell->value;
+                            }
+                            $cells = $cells[0];
+                            $cells->value = number_format($agg_value, 2);
+                            $cells->cell_href = "";
+                            $cells->cell_title = "";
+                        }
+                        if (is_object($cells)) {
+                            $cells->cell_href = "";
+                            $cells->cell_title = "";
+                        }
+                    }
+                }
+            }
+        }
+        return $dataSource;
+    }
     public function getViewAllMatrixParams($forExcel = false)
     {
         $xAxis = $this->getXAxis();
@@ -448,6 +478,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getMatrixDataSource($xAxis);
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel);
+        $dataSource = $this->aggArrayOfCells($dataSource);
         // dd($dataSource[0]);
         $columns = $this->getColumns($xAxis);
         return [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading];

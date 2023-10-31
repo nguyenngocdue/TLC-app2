@@ -171,6 +171,21 @@
 <span class="max-h-[50rem] "></span>
 <span class="max-h-[55rem] "></span>
 <span class="max-h-[60rem] "></span>
+
+<span class="min-h-[100px] "></span>
+<span class="min-h-[200px] "></span>
+<span class="min-h-[300px] "></span>
+<span class="min-h-[400px] "></span>
+<span class="min-h-[500px] "></span>
+
+<span class="max-h-[100px] "></span>
+<span class="max-h-[200px] "></span>
+<span class="max-h-[300px] "></span>
+<span class="max-h-[400px] "></span>
+<span class="max-h-[500px] "></span>
+
+
+{{-- <span class="h-[50vh]"></span> 50% of the screen height --}}
 <!-- FOR ALERT -->
 <span class="text-green-700 border-green-300 bg-green-50 dark:bg-green-200"></span>
 <span class="text-blue-700 border-blue-300 bg-blue-50 dark:bg-blue-200"></span>

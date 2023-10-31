@@ -140,6 +140,9 @@ class Breadcrumb extends Component
     }
     private function showButtonViewAll($type)
     {
+        if ($type === 'esg_sheets') {
+            $type = 'esg_master_sheets';
+        }
         $this->links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
     }
     private function showButtonAddNew($type)

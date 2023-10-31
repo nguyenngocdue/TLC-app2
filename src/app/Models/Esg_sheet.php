@@ -9,7 +9,6 @@ class Esg_sheet extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "status", "order_no",
-        // "workplace_id", 
         "esg_month", "owner_id", "esg_tmpl_id", "total", "esg_date",
         "esg_master_sheet_id",
     ];

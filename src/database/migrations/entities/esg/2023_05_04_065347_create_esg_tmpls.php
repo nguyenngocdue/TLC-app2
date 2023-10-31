@@ -23,6 +23,7 @@ return new class extends Migration
             $table->id();
             $table->string("name")->nullable();
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('unit')->nullable();
             // $table->unsignedBigInteger('ghg_cat_id')->nullable();
             $table->appendCommonFields();
         });

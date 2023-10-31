@@ -1020,6 +1020,9 @@ video {
 .mt-\[3px\] {
   margin-top: 3px;
 }
+.mt-auto {
+  margin-top: auto;
+}
 .box-border {
   box-sizing: border-box;
 }
@@ -1152,6 +1155,9 @@ video {
 .h-\[500px\] {
   height: 500px;
 }
+.h-\[50vh\] {
+  height: 50vh;
+}
 .h-\[550px\] {
   height: 550px;
 }
@@ -1200,6 +1206,9 @@ video {
 .max-h-60 {
   max-height: 15rem;
 }
+.max-h-\[100px\] {
+  max-height: 100px;
+}
 .max-h-\[10rem\] {
   max-height: 10rem;
 }
@@ -1220,6 +1229,9 @@ video {
 }
 .max-h-\[20rem\] {
   max-height: 20rem;
+}
+.max-h-\[300px\] {
+  max-height: 300px;
 }
 .max-h-\[30rem\] {
   max-height: 30rem;
@@ -1248,6 +1260,9 @@ video {
 .max-h-\[38rem\] {
   max-height: 38rem;
 }
+.max-h-\[400px\] {
+  max-height: 400px;
+}
 .max-h-\[40rem\] {
   max-height: 40rem;
 }
@@ -1256,6 +1271,9 @@ video {
 }
 .max-h-\[45rem\] {
   max-height: 45rem;
+}
+.max-h-\[500px\] {
+  max-height: 500px;
 }
 .max-h-\[50rem\] {
   max-height: 50rem;
@@ -1271,6 +1289,9 @@ video {
 }
 .min-h-\[1000px\] {
   min-height: 1000px;
+}
+.min-h-\[100px\] {
+  min-height: 100px;
 }
 .min-h-\[1100px\] {
   min-height: 1100px;
@@ -1293,8 +1314,20 @@ video {
 .min-h-\[150px\] {
   min-height: 150px;
 }
+.min-h-\[200px\] {
+  min-height: 200px;
+}
+.min-h-\[300px\] {
+  min-height: 300px;
+}
 .min-h-\[36px\] {
   min-height: 36px;
+}
+.min-h-\[400px\] {
+  min-height: 400px;
+}
+.min-h-\[500px\] {
+  min-height: 500px;
 }
 .min-h-\[700px\] {
   min-height: 700px;
@@ -1539,6 +1572,9 @@ video {
 .flex-shrink-0 {
   flex-shrink: 0;
 }
+.shrink {
+  flex-shrink: 1;
+}
 .shrink-0 {
   flex-shrink: 0;
 }
@@ -1614,6 +1650,9 @@ video {
 }
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.transform-none {
+  transform: none;
 }
 @keyframes bounce {
 
@@ -3851,6 +3890,9 @@ video {
 }
 .pt-4 {
   padding-top: 1rem;
+}
+.pt-5 {
+  padding-top: 1.25rem;
 }
 .text-left {
   text-align: left;
@@ -8030,10 +8072,6 @@ video {
 :is(.dark .dark\:hover\:bg-gray-800:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
-}
-:is(.dark .dark\:hover\:bg-gray-900:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
 :is(.dark .dark\:hover\:bg-green-700:hover) {
   --tw-bg-opacity: 1;

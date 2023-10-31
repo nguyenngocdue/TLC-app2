@@ -29,6 +29,8 @@ return new class extends Migration
             $table->unsignedBigInteger('hse_insp_group_id');
             $table->unsignedBigInteger('hse_insp_control_value_id')->nullable();
             $table->unsignedBigInteger('hse_insp_control_group_id');
+
+            $table->orderable();
             $table->appendCommonFields();
         });
     }

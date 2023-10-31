@@ -14,6 +14,16 @@
         "column_name": "description",
         "new": "true"
     },
+    "_unit": {
+        "name": "_unit",
+        "column_name": "unit",
+        "new": "true"
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "new": "true"
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -42,11 +52,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true"
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
         "new": "true"
     }
 }

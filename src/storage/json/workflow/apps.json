@@ -344,14 +344,14 @@
         "package_tab": "application",
         "package": "compliance",
         "sub_package": "esg",
-        "title": "ESG Master Sheets",
+        "title": "Compliance Master Data Sheets",
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null
+        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
     },
     "esg_metric_type": {
         "name": "esg_metric_type",

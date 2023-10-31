@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UpdatedSequenceBaseEvent
+class UpdatedProdSequenceEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,8 +19,10 @@ class UpdatedSequenceBaseEvent
      *
      * @return void
      */
-    public function __construct(public $modelPathChildren,public $idChildren)
-    {
+    public function __construct(
+        public $modelPathChildren,
+        public $idChildren,
+    ) {
         //
     }
 
