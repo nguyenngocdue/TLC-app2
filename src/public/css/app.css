@@ -891,6 +891,9 @@ video {
 .-ml-14 {
   margin-left: -3.5rem;
 }
+.-ml-2 {
+  margin-left: -0.5rem;
+}
 .-mt-4 {
   margin-top: -1rem;
 }
@@ -1019,9 +1022,6 @@ video {
 }
 .mt-\[3px\] {
   margin-top: 3px;
-}
-.mt-auto {
-  margin-top: auto;
 }
 .box-border {
   box-sizing: border-box;
@@ -1571,9 +1571,6 @@ video {
 }
 .flex-shrink-0 {
   flex-shrink: 0;
-}
-.shrink {
-  flex-shrink: 1;
 }
 .shrink-0 {
   flex-shrink: 0;

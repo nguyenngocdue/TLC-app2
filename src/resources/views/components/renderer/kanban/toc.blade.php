@@ -32,4 +32,22 @@
             </span>
         </div>
     </div>
+    <div class="flex ml-2 cursor-pointer">
+        @php
+        $members = $page->getMonitors1();
+        $first_10_members = $members->slice(0,10);
+        $rest_of_members = $members->slice(10);
+        $rest_of_member_names = $rest_of_members->map(fn($u)=>$u->full_name." - ".$u->getPosition->name." (#".$u->id.")")->join("\n");
+
+        @endphp
+        @foreach($first_10_members as $u)
+            <div class="-ml-2">
+                <x-renderer.avatar-user uid='{{$u["id"]}}' icon="30"></x-renderer.avatar-user>
+            </div>
+        @endforeach
+
+    </div>
+    @if(!$rest_of_members->isEmpty())
+    <div class="text-blue-800 cursor-pointer" title="{!! $rest_of_member_names !!}">+{{sizeof($rest_of_members)}} more</div>
+    @endif
 </div> 

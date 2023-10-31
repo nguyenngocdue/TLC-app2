@@ -980,7 +980,7 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-newspaper\"><\/i>"
     },
     "listener_config": {
         "name": "listener_config",
