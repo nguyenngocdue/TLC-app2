@@ -229,11 +229,14 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     'dataLabelOffset' => 10,
                     'lessThen100' =>false,
                     'legendX'=>true,
-                    'zoomWheelEnabled' => 1,
+                    'zoomWheelEnabled' => 0,
                     'zoomMode' => 'xx',
                     'stepSizeY' => 2,
                     'stepSizeX' => null,
-
+                    //'legendY' => 1,
+                    // 'lessThen100'=>false,
+                    'legendX'=>1,
+                    'lessThen100'=>false,
                 ];
     
                 // Set data for widget

@@ -58,6 +58,7 @@ var chartConfig = {
                 beginAtZero: true,
                 max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
                 ticks: {
+                    //callback: {!! isset($dimensions['legendY']) && $dimensions['legendY'] ? "customXAxisTickCallback"  : 'null' !!}, 
                     font: {
                         size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
                         weight: 'bold'
@@ -176,7 +177,19 @@ var chartConfig = {
             		return (value.toFixed(2))
 				}
             },
-        }
+              zoom: {
+					zoom: {
+					wheel: {
+						enabled: {!! $dimensions['zoomWheelEnabled'] ?? 0 !!},
+					},
+					pinch: {
+						enabled: {!! $dimensions['zoomPinchEnabled'] ?? 0 !!},
+					},
+					mode: '{!! $dimensions['zoomMode'] ?? 'xy' !!}',
+					}
+			},
+        },
+        
     },
       scales: {
         x: {
@@ -193,8 +206,8 @@ var chartRendered = new Chart(chartElement, chartConfig);
 //chartRendered.update();
 //console.log(chartRendered)
 function customXAxisTickCallback(value, index, values) {
+        //console.log(lessThen100, chartData.labels[index])
     if(lessThen100){
-        console.log(lessThen100, value)
         if (value <= 100) {
             return value; // Trả về một chuỗi trống để ẩn giá trị 120
         }

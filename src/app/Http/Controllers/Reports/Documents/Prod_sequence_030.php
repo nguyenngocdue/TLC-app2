@@ -213,7 +213,7 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 'lessThen100'=> true,
                 'legendX'=>true,
                 'stepSizeY' => null,
-                'stepSizeX' => null,
+                'stepSizeX' => 10,
             ];
     
             // Set data for widget
