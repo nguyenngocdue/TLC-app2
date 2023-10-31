@@ -86,7 +86,7 @@ class Hr_overtime_request_010 extends Report_ParentReportController
         $sql .= "\n JOIN users us ON us.id = rgt_ot.user_id) AS tb3
                     JOIN workplaces wpus ON tb3.user_workplace_id = wpus.id";
 
-        if (isset($params['month'])) $sql .= "\n AND year_months = '{{month}}'";
+        if (isset($params['month'])) $sql .= "\n AND year_months = {{month}}";
         $sql .= "\n ORDER BY name_render, employee_id,  year_months DESC";
         return $sql;
     }

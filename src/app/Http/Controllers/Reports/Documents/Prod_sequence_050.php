@@ -9,13 +9,10 @@ use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
-use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
-use App\Models\Term;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\Report;
-use App\Utils\Support\StringReport;
 use App\View\Components\Renderer\Report\TraitCreateDataSourceWidget;
 use App\View\Components\Renderer\Report\TraitParamsInManageWidget;
 use Illuminate\Support\Collection;
@@ -49,6 +46,9 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
     public function getSqlStr($params)
     {
+        $valOfParams = $this->generateValuesFromParamsReport($params);
+        $endDate = $valOfParams['picker_date']['end'];
+        $startDate = $valOfParams['picker_date']['start'];
         $sql = "SELECT
                     sp.project_id AS project_id,
                     pj.name AS project_name,
@@ -92,8 +92,8 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                         #AND pse.prod_routing_link_id = 307
                         AND sp.project_id = {{project_id}}
                         AND sp.id = {{sub_project_id}}
-                        AND SUBSTR(pru.date, 1, 10) <= '{{end_date}}'
-                        AND SUBSTR(pru.date, 1, 10) >= '{{start_date}}'
+                        AND SUBSTR(pru.date, 1, 10) <= '$endDate'
+                        AND SUBSTR(pru.date, 1, 10) >= '$startDate'
                         ";
                 // if(isset($params['picker_date'])) $sql .= "\n AND pru.date >= $params['picker_date']['start']";
                 if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
@@ -183,7 +183,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                 'title' => 'Production Routing',
                 'dataIndex' => 'prod_routing_id',
                 'hasListenTo' => true,
-        ],
+            ],
             [
                 'title' => 'Production Discipline',
                 'dataIndex' => 'prod_discipline_id',
@@ -308,7 +308,9 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
 
     private function makeDataWidget($dataSource, $params){
+        // dd($params);
         $dataOfManageWidget = $this->makeParamsInManageWidgets($params);
+        // dd($dataOfManageWidget);
         $dataWidgets = [];
         foreach ($dataSource as $key => $items){
             $array = [];
@@ -334,6 +336,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         foreach(array_keys($groupItems) as $key) $tableOfContents[$key] = $prodRoutingLinks[$key];
 
         $dataWidgets = $this->makeDataWidget($groupItems, $params);
+        // dd($dataWidgets);
         $data= [];
         foreach ($groupItems as $key => $values){
             $data['render_pages'][$key] = [

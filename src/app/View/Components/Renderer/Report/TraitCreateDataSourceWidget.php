@@ -46,7 +46,8 @@ trait TraitCreateDataSourceWidget
         $fieldOfUnit = $dataWidgets['params']['index_unit']  ?? "";
         $prefixUnit = $dataWidgets['params']['prefix_unit_text']  ?? "";
         $suffixUnit = $dataWidgets['params']['suffix_unit_text']  ?? "";
-        if($fieldOfUnit) $dataWidgets['dimensions']['titleY'] = $prefixUnit.(isset(last($dataSource)[$fieldOfUnit]) ? last($dataSource)[$fieldOfUnit] : "").$suffixUnit;
+        $middleUnit = isset(last($dataSource)[$fieldOfUnit]) ? last($dataSource)[$fieldOfUnit] : "";
+        $dataWidgets['dimensions']['titleY'] = $prefixUnit.$middleUnit.$suffixUnit;
         // related to dimensions AxisX and AxisY
         $params = [
             'height' => $max / 2 * 30,

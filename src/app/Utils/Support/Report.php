@@ -341,6 +341,9 @@ class Report
     public static function checkValueOfField($array, $fieldName){
         return isset($array[$fieldName]) && $array[$fieldName] !== "";
     }
+    public static function checkParam($array, $fieldName){
+        return isset($array[$fieldName]) && $array[$fieldName];
+    }
 
     
 }

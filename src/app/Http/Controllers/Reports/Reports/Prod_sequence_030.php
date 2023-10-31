@@ -30,7 +30,9 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     // DataSource
     public function getSqlStr($params)
     {
-        // dd($params);
+        // dump($params);
+        $valOfParams = $this->generateValuesFromParamsReport($params);
+        // dd($valOfParams);
         $sql = "SELECT 
                     sp.project_id AS project_id
                     ,sp.id AS sub_project_id
@@ -46,6 +48,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     #,pose.total_hours AS total_hours
                     ,erprl.name AS erp_routing_link_name
                     ,pose.erp_prod_order_name AS erp_prod_order_name
+
 
                     ,IF(prd.target_man_power,prd.target_man_power, NULL) AS target_man_power
                     ,FORMAT(ROUND((pru.worker_number), 2),2) AS actual_man_power
@@ -74,6 +77,8 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     ,FORMAT(pose.total_man_hours,2) AS total_man_hours
                     ,pd.id AS prod_discipline_id
                     ,pd.name AS prod_discipline_name
+
+                    ,prd.order_no AS order_no
 
 
                 FROM sub_projects sp
@@ -108,7 +113,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                 ,target_man_hours
                 ,target_man_power
                 ,total_man_hours
-                ORDER BY sub_project_name, prod_order_name";
+                ORDER BY sub_project_name, prod_routing_name, order_no, prod_order_name";
         return $sql;
     }
 

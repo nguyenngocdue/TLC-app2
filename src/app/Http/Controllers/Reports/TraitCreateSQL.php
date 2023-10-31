@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Reports;
 
 use App\Utils\Support\DateReport;
+use App\Utils\Support\Report;
 
 trait TraitCreateSQL
 {
+    use TraitGenerateValuesFromParamsReport;
+
     public function preg_match_all($sqlStr, $params){
+        $params = $this->generateValuesFromParamsReport($params);
+        // dd($params);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
             if (isset($params[$value])) {
@@ -21,12 +26,14 @@ trait TraitCreateSQL
                         });
                         $valueParam = trim($str, ",");
                     }
-                }      
+                }
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
         }
-        if(isset($params['picker_date'])) {
+        // dd($params);
+        if(Report::checkParam($params,'picker_date') ) {
+            // dd($params);
             $dates = DateReport::separateStrPickerDate($params['picker_date']);
             $sqlStr = str_replace('{{end_date}}', $dates['end'], $sqlStr);
             $sqlStr = str_replace('{{start_date}}', $dates['start'], $sqlStr);
@@ -41,7 +48,7 @@ trait TraitCreateSQL
         }
         $sqlStr = $this->getSqlStr($params);
         $sqlStr = $this->preg_match_all($sqlStr, $params);
-        // dd($sqlStr);
+        // dump($sqlStr);
         return $sqlStr;
     }
 }

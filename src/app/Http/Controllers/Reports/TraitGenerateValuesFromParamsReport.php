@@ -22,7 +22,9 @@ trait TraitGenerateValuesFromParamsReport
             'optionPrintLayout',
             'root_cause',
             "ghg_tmpl",
-            "month"
+            "month",
+            'only_month',
+            'year',
         ], $params);
         return $valOfParams;
     }

@@ -53,14 +53,19 @@ class DateReport
     }
 
     public static function separateStrPickerDate($strPickerDate){
-        // dd($strPickerDate);
         try {
+            if(!is_string($strPickerDate)) return ['start' =>null, 'end' => null];
             $dates = explode("-", $strPickerDate);
             return  ['start' => self::formatDateString(trim($dates[0])), 'end' =>self::formatDateString(trim($dates[1]))];
         } catch (Exception $e){
             dd($e, $strPickerDate);
         }
     }
+    private static function isValidDateFormat($dateString) {
+        $date = DateTime::createFromFormat('Y-m-d', $dateString);
+        return ($date !== false && !array_sum($date::getLastErrors()));
+    }
+    
 
     public static function createValueForParams($fields, $params)
     {
@@ -70,17 +75,30 @@ class DateReport
             $value = '';
             if (isset($params[$field])) {
                 if ($field === 'picker_date') {
-                    $value = self::separateStrPickerDate($params[$field]);
-                } elseif ($field === 'status') {
+                    if(self::isValidDateFormat($params[$field])) {
+                        $value = $params[$field];
+                    } else {
+                        $value = self::separateStrPickerDate($params[$field]);
+                        // dd($value);
+                    }
+                }elseif($field === 'only_month') {
+                    $months = array_map(fn($item) => STR_PAD($item, 2,"0", STR_PAD_LEFT), $params[$field]);
+                    $value = StringReport::arrayToJsonWithSingleQuotes2($months, true);
+                }elseif($field === 'year') {
+                    $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field], true);
+                } 
+                elseif ($field === 'status') {
                     $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field]);
                 } elseif (is_array($params[$field])) {
                     $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field]);
-                } else {
+                }
+                else {
                     $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field]);
                 }
             }
             $valParams[$field] = $value;
         }
+        $valParams = array_merge($params, $valParams);        
         return $valParams;
     }
 

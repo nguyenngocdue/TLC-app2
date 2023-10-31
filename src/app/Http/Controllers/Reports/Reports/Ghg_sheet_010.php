@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
+use App\Utils\Support\Report;
 
 class Ghg_sheet_010 extends Report_ParentReport2Controller
 {
     protected $mode='010';
     protected $maxH = 50;
+    protected $typeView = 'report-pivot';
     protected $tableTrueWidth = false;
 
     public function getSqlStr($params)
     {
         $valOfParams = $this->generateValuesFromParamsReport($params);
+        // dd($valOfParams['only_month']);
         $sql = "SELECT
                     ghgtmpls.id  AS ghg_sheet_id,
                     ghgtmpls.name  AS ghg_sheet_name,
@@ -36,10 +39,11 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                     LEFT JOIN ghg_metric_type_1s ghgmt1 ON ghgmt1.id = ghgsl.ghg_metric_type_1_id
                     LEFT JOIN terms terms ON terms.id = ghgsl.unit
                     WHERE 1 = 1";
-    if(isset($valOfParams['ghg_tmpl']) && $valOfParams['ghg_tmpl']) $sql .= "\n AND ghgtmpls.id IN ({{ghg_tmpl}})";
-    if(isset($valOfParams['month']) && $valOfParams['month']) $sql .= "\n AND SUBSTR(ghgs.ghg_month, 1 , 7) =  '{{month}}'";
+    if(Report::checkParam($valOfParams, 'ghg_tmpl')) $sql .= "\n AND ghgtmpls.id IN ({{ghg_tmpl}})";
+    if(Report::checkParam($valOfParams, 'only_month')) $sql .= "\n AND SUBSTR(ghgs.ghg_month, 6 , 2) IN ({{only_month}})";
+    if(Report::checkParam($valOfParams, 'year')) $sql .= "\n AND SUBSTR(ghgs.ghg_month, 1 , 4) IN ({{year}})";
         // dump($sql);
-        $sql .= "\n ORDER BY ghg_month DESC, ghg_sheet_name";
+        $sql .= "\n ORDER BY ghg_month, ghg_sheet_name";
         return $sql;
     }
 
@@ -47,9 +51,16 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
     {
         return [
             [
-                'title' => 'Month',
-                'dataIndex' => 'month',
-            ],
+				'title' => 'Year',
+				'dataIndex' => 'year',
+                'multiple' => true,
+			],
+			[
+				'title' => 'Month',
+				'dataIndex' => 'only_month',
+				'allowClear' => true,
+				'multiple' => true,
+			],
             [
                 'title' => 'CO2 Emission Sheet',
                 'dataIndex' => 'ghg_tmpl',
@@ -132,6 +143,7 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
     protected function getDefaultValueParams($params, $request)
     {
         $params['month'] = date("Y-m");
+        $params['year'] = date("Y");
         return $params;
     }
 

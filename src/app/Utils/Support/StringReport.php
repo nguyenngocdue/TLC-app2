@@ -32,16 +32,22 @@ class StringReport
         }, $item)) . $sign2;
     }
 
-    public static function arrayToJsonWithSingleQuotes2($item)
+    public static function arrayToJsonWithSingleQuotes2($item, $apostrophe=false)
     {
         if(!is_array($item)) return is_numeric($item) ?  $item : "'$item'";
-        return  implode(', ', array_map(function ($item){
+        return  implode(', ', array_map(function ($item) use($apostrophe){
             if (is_object($item)){
                 $val =  $item->value;
                 if(is_numeric($val)) return "$val";
                 return "'$val'";
             } else {
-                if(is_numeric($item)) return "$item";
+                if(is_numeric($item)) {
+                    if($apostrophe){
+                        return "'$item'";
+                    } else{
+                        return "$item";
+                    }
+                } ;
                 return "'$item'"; 
             }
         }, $item));

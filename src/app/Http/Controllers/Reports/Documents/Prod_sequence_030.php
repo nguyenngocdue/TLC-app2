@@ -210,6 +210,8 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 'displayTitleOnTopCol' => 1,
                 'tooltipLabel'=> '% Complete', 
                 'dataLabelOffset' => 2,
+                'lessThen100'=> true,
+                'legendX'=>true,
             ];
     
             // Set data for widget
