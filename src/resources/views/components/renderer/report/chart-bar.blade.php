@@ -209,7 +209,7 @@ function customXAxisTickCallback(value, index, values) {
         //console.log(lessThen100, chartData.labels[index])
     if(lessThen100){
         if (value <= 100) {
-            return value; // Trả về một chuỗi trống để ẩn giá trị 120
+            return value; // to hidden value of legend > 100
         }
     } else{
         return chartData.labels[index];
