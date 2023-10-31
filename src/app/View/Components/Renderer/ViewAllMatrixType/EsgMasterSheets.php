@@ -26,10 +26,11 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
     protected $yAxis = Esg_tmpl::class;
     protected $dataIndexY = "esg_tmpl_id";
     // protected $rotate45Width = 400;
-    protected $tableTrueWidth = true;
+    // protected $tableTrueWidth = true;
     protected $headerTop = 20;
     protected $groupBy = null;
     // protected $mode = 'status';
+    protected $attOfCellToRender = "total";
 
     /**
      * Create a new component instance.
@@ -59,6 +60,7 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
     public function getYAxis()
     {
         $yAxis = $this->yAxis::query()
+            ->with('getUnit')
             // ->where('sub_project_id', $this->subProject)
             // ->where('prod_routing_id', $this->prodRouting)
             // ->with('getRoomType')
@@ -98,5 +100,37 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
 
         // $params['prod_discipline_id'] =  $x['prod_discipline_id'];
         return $params;
+    }
+
+    protected function getRightMetaColumns()
+    {
+        return [
+            ['dataIndex' => 'ytd', 'title' => 'YTD', "align" => "right", 'width' => 100,],
+        ];
+    }
+
+    protected function getMetaColumns()
+    {
+        return [
+            ['dataIndex' => 'unit', 'align' => 'center', 'width' => 100],
+        ];
+    }
+
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    {
+        $line = $dataSource[$y->id] ?? [];
+        $ytd = 0;
+        foreach ($line as $month) {
+            foreach ($month as $doc) {
+                $ytd += $doc->total;
+            }
+        }
+        return [
+            'unit' => ($y->getUnit) ? $y->getUnit->name : "",
+            'ytd' => (object) [
+                'value' => number_format($ytd, 2),
+                'cell_class' => "bg-text-400 text-right1",
+            ],
+        ];
     }
 }
