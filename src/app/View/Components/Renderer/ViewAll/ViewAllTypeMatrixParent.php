@@ -459,10 +459,10 @@ abstract class ViewAllTypeMatrixParent extends Component
                         $cells->cell_href = "";
                         $cells->cell_title = "";
                     }
-                    if (is_object($cells)) {
-                        $cells->cell_href = "";
-                        $cells->cell_title = "";
-                    }
+                    // if (is_object($cells)) {
+                    //     $cells->cell_href = "";
+                    //     $cells->cell_title = "";
+                    // }
                 }
             }
         }
