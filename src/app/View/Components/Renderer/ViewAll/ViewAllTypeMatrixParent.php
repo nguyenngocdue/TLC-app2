@@ -447,22 +447,24 @@ abstract class ViewAllTypeMatrixParent extends Component
     private function aggArrayOfCells($dataSource)
     {
         if ($this->cellAgg) {
-            foreach ($dataSource as &$row) {
-                foreach ($row as &$cells) {
-                    if (is_array($cells)) {
-                        $agg_value = 0;
-                        foreach ($cells as $cell) {
-                            $agg_value += $cell->value;
+            if (!$this->allowCreation) {
+                foreach ($dataSource as &$row) {
+                    foreach ($row as &$cells) {
+                        if (is_array($cells)) {
+                            $agg_value = 0;
+                            foreach ($cells as $cell) {
+                                $agg_value += $cell->value;
+                            }
+                            $cells = $cells[0];
+                            $cells->value = number_format($agg_value, 2);
+                            $cells->cell_href = "";
+                            $cells->cell_title = "";
                         }
-                        $cells = $cells[0];
-                        $cells->value = number_format($agg_value, 2);
-                        $cells->cell_href = "";
-                        $cells->cell_title = "";
+                        if (is_object($cells)) {
+                            $cells->cell_href = "";
+                            $cells->cell_title = "";
+                        }
                     }
-                    // if (is_object($cells)) {
-                    //     $cells->cell_href = "";
-                    //     $cells->cell_title = "";
-                    // }
                 }
             }
         }
