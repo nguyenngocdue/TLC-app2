@@ -25,7 +25,17 @@
         @endif
     </div>
     <div id="group_{{$group->id}}" data-id="group_{{$group->id}}" class="grid gap-1 {{$groupWidth}}">
-        @foreach($group->getTasks as $task)
+        @php
+        $mode = $group->time_counting_type;
+        $count = 5;
+        $tasks0 = $group->getTasks;
+        if($mode == 3){
+            $all = $tasks0->count();
+            echo "<div class='text-xs text-center'>Show only last $count/$all tasks</div>";
+            $tasks0 = $group->getTasks->sortByDesc('updated_at')->take($count);
+        }
+        @endphp
+        @foreach($tasks0 as $task)
             <x-renderer.kanban.task :task="$task" :group="$group" hidden="{{$hidden??'hidden'}}" groupWidth="{{$groupWidth}}"/>
         @endforeach
     </div>

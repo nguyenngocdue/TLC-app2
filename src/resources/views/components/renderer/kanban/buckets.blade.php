@@ -47,23 +47,32 @@
             case '1': 
                 groupId = $("#taskParentId_" + taskId).val()
                 if(undefined === currentElapsed[groupId]) currentElapsed[groupId]={}
-                if(!currentElapsed[groupId][taskId]) currentElapsed[groupId][taskId] = 0
-                currentElapsed[groupId][taskId]++
-                elapse = convertSecondsToTime(currentElapsed[groupId][taskId])
+                if(!currentElapsed[groupId][taskId]) currentElapsed[groupId][taskId] = {}
+                if(!currentElapsed[groupId][taskId]['elapsed']) currentElapsed[groupId][taskId]['elapsed'] = 0
+                currentElapsed[groupId][taskId]['elapsed']++
+                elapse = convertSecondsToTime(currentElapsed[groupId][taskId]['elapsed'])
                 result = "Elapsed: <span class='text-blue-600'>" + elapse + "<span>"
                 break;
             case '2':
                 groupId = $("#taskParentPreviousGroupId_" + taskId).val()
-                elapse = convertSecondsToTime(currentElapsed[groupId][taskId])
+                elapse = convertSecondsToTime(currentElapsed[groupId][taskId]['elapsed'])
                 result = "Took: <span class='text-blue-800 font-bold'>" + elapse + "</span>"
                 
                 groupId = $("#taskParentRectifiedGroupId_" + taskId).val()
                 // console.log(groupId, currentElapsed[groupId])
                 if(currentElapsed[groupId]){ // Never rectified before
-                    rectified = convertSecondsToTime(currentElapsed[groupId][taskId])
+                    rectified = convertSecondsToTime(currentElapsed[groupId][taskId]['elapsed'])
                     result += "<br/>Rectified: " + rectified;
                 }
                 break;
+            // case '3':
+            //     groupId = $("#taskParentId_" + taskId).val()
+            //     if(undefined === currentElapsed[groupId]) currentElapsed[groupId]={}
+            //     if(!currentElapsed[groupId][taskId]) currentElapsed[groupId][taskId] = 0
+            //     // currentElapsed[groupId][taskId]++
+            //     elapse = convertSecondsToTime(currentElapsed[groupId][taskId])
+            //     result = "Closed: <span class='text-blue-600'>" + elapse + "<span>"
+            //     break;
             default:
                 break;
         }
