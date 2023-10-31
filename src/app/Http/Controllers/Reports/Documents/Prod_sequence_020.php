@@ -215,9 +215,9 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     'fontSize' => 14,
                     'titleX' => "",
                     'titleY' => $titleCharts[$key],
-                    #'height' => 200,
-                    #'width' => 400,
-                    'scaleMaxY' => ceil((int)$max*1.5),
+                    'height' => 500,
+                    'width' => 600,
+                    'scaleMaxY' => (int)$max*2,
                     'titleChart' => $titleCharts[$key],
                     'displayTitleChart' => 0,
                     'displayLegend' => 0,
@@ -228,7 +228,11 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     'widthBar' => 100,
                     'dataLabelOffset' => 10,
                     'lessThen100' =>false,
-                    'legendX'=>true
+                    'legendX'=>true,
+                    'zoomWheelEnabled' => 1,
+                    'zoomMode' => 'xx',
+                    'stepSizeY' => 2,
+                    'stepSizeX' => null,
 
                 ];
     
