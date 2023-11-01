@@ -55,8 +55,9 @@ var chartConfig = {
         indexAxis: '{!! $dimensions['indexAxis'] ?? 'x' !!}',
         scales: {
             y: {
+                suggestedMax: {!! $dimensions['scaleMaxY'] ?? 'null' !!},
                 beginAtZero: true,
-                max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
+               // max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
                 ticks: {
                     //callback: {!! isset($dimensions['legendY']) && $dimensions['legendY'] ? "customXAxisTickCallback"  : 'null' !!}, 
                     font: {

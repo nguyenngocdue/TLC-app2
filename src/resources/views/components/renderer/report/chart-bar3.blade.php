@@ -10,10 +10,6 @@
 	</div>
 @endif
 
-{{-- @dump($dimensions) --}}
-{{-- @dump($meta) --}}
-{{-- @dump($metric) --}}
-{{-- @dump($chartType) --}}
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
@@ -27,6 +23,7 @@
 	var datasets = [];
 	var indexAxis = 'x';
 	var scales = {};
+	var lessThen100 =  {!! json_encode($dimensions['lessThen100'] ?? false)  !!}
 	var meta = {!! json_encode($meta) !!}
 		if ('{{$chartType}}' === 'bar_two_columns' || '{{$chartType}}' === 'horizontal_bar') {
 			datasets = {!! json_encode($meta['numbers']) !!};
@@ -56,15 +53,19 @@
 						},
 					},
 				y: {
+					suggestedMax: {!! $dimensions['scaleMaxY'] ?? 'null' !!},
 					barPercentage: 0.8,
 					stacked:  {!! $dimensions['stackY'] ?? 0 !!},
 					beginAtZero: true,
-					max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
+					//max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
 					ticks: {
 						font: {
 							size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
 							weight: 'bold'
-						}
+						},
+						stepSize: {!! $dimensions['stepSizeY'] ?? 'null' !!},
+                    	callback: {!! isset($dimensions['legendY']) && $dimensions['legendY'] ? "customXAxisTickCallback"  : 'null' !!}, 
+
 					},
 					title: {
 						position: 'top',
@@ -180,6 +181,17 @@
     document.getElementById('resetZoom').addEventListener('click', function () {
         chart.resetZoom();
     });
+
+function customXAxisTickCallback(value, index, values) {
+        //console.log(lessThen100, chartData.labels[index])
+    if(lessThen100){
+        if (value <= 100) {
+            return value; // to hidden value of legend > 100
+        }
+    } else{
+        return chartData.labels[index];
+    }
+}
 </script>
 
 

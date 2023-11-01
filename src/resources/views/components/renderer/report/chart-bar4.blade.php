@@ -55,10 +55,11 @@
 						},
 					},
 				y: {
+					suggestedMax: {!! $dimensions['scaleMaxY'] ?? 'null' !!},
 					barPercentage: 0.8,
 					stacked:  {!! $dimensions['stackY'] ?? 0 !!},
 					beginAtZero: true,
-					max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
+					//max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
 					ticks: {
 						font: {
 							size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 

@@ -1,5 +1,6 @@
+
 <div class="flex justify-center">
-	<div class="block">
+	<div class="block" title="{{$titleTooltip}}">
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
 </div>
@@ -47,8 +48,9 @@ var chartConfig = {
         indexAxis: '{!! $dimensions['indexAxis'] ?? 'x' !!}',
         scales: {
             y: {
+                suggestedMax: {!! $dimensions['scaleMaxY'] ?? 'null' !!},
                 beginAtZero: true,
-                max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
+                //max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
                 ticks: {
                     font: {
                         size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 

@@ -49,8 +49,9 @@ var chartConfig = {
         indexAxis: '{!! $dimensions['indexAxis'] ?? 'x' !!}',
         scales: {
             y: {
+                suggestedMax: {!! $dimensions['scaleMaxY'] ?? 'null'!!},
                 beginAtZero: true,
-                max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
+                //max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
                 ticks: {
                     font: {
                         size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 

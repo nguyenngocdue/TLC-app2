@@ -95,7 +95,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                         </div>
                         <x-renderer.page-break />
                         {{-- Charts --}}
-                        <div style='' class="{{-- {{$layout}} --}} w-[1400px] min-h-[990px] items-center bg-white box-border p-8">
+                        <div style='' class="{{-- {{$layout}} --}} w-[1400px] min-h-[1000px] items-center bg-white box-border p-8">
                             <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
                                 @foreach($data as $key => $items)
                                             @if(str_contains($key, 'widget'))

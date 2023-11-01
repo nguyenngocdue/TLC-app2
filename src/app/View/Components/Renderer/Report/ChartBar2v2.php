@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Report;
 
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use App\Utils\Support\StringReport;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,8 @@ class ChartBar2v2 extends Component
     {
         $dataWidgets = $this->dataSource;
         $count = $dataWidgets['meta']['count'];
+       $titleTooltip =  CurrentUser::isAdmin() ? $dataWidgets['key_name'] : null;
+
         if ($count == 0) return "<x-renderer.emptiness />";
         return view(
             'components.renderer.report.chart-bar2-v2',
@@ -28,6 +31,7 @@ class ChartBar2v2 extends Component
                 'meta' => $dataWidgets['meta'],
                 'metric' => $dataWidgets['metric'],
                 'dimensions' => $dataWidgets['dimensions'],
+                'titleTooltip' => $titleTooltip,
             ]
         );
     }

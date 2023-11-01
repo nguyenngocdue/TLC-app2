@@ -262,9 +262,8 @@ if (isset($params['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
             return redirect($request->getPathInfo());
         }
         if (isset($input['mode_option'])) {
-            $mode = $input['mode_option'];
             $routeName = explode('/', $request->getPathInfo())[2];
-            return redirect(route($routeName . '_' . $mode));
+            return redirect(route($routeName));
         }
     }
 }

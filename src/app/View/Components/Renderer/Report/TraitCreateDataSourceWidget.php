@@ -67,6 +67,7 @@ trait TraitCreateDataSourceWidget
 			'chart_type' => $dataWidgets['chart_type'],
 			'title_chart' => '',
 			'dimensions' => $dataWidgets['dimensions'],
+            'key_name' => $dataWidgets['key_name'],
 		];
         // dd($result);
         return $result;

@@ -16,7 +16,6 @@ class ChartBar extends Component
         private $meta = [],
         private $metric = [],
         private $key = "",
-        private $widgetParams = [],
         private $showValue  = false,
         private $titleChart = '',
         private $dimensions = [],
@@ -33,8 +32,6 @@ class ChartBar extends Component
     {
         $metric = $this->metric;
         $meta = $this->meta;
-        $widgetParams = $this->widgetParams;
-
         $count = $meta['count'];
         if ($count == 0) return "<x-renderer.emptiness />";
         return view(
