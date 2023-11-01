@@ -55,7 +55,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                 sp.name AS sub_project_name,
                                 pr.prod_routing_id AS prod_routing_id,
                                 pr.prod_routing_name AS prod_routing_name,
-                                COUNT( DISTINCT CASE WHEN  po.id THEN po.id ELSE NULL END) AS total_prod_order_on_sub_project,
+                                tb_count_order.prod_order_qty AS total_prod_order_on_sub_project,
                                 COUNT(CASE WHEN wir.status IS NOT NULL THEN wir.status ELSE NULL END) AS total_prod_order_have_wir,
                                 COUNT(CASE WHEN SUBSTR(wir.closed_at, 1, 10) <= '$previousDate' AND wir.status IN ('closed', 'N\A')  THEN wir.status ELSE NULL END) AS total_prod_order_have_wir2
                                                         
@@ -85,6 +85,18 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                                             AND wir.sub_project_id = sp.id
                                                                             AND wir.status IN ('closed', 'N\A')
                                                                             AND SUBSTR(wir.closed_at, 1, 10) <= '$latestDate'
+                                                                            LEFT JOIN (
+                                                    	SELECT DISTINCT pr.id AS prod_routing_id, SUM(po.quantity) AS prod_order_qty
+                                                              FROM prod_orders po, sub_projects sp, prod_routings pr
+                                                                WHERE 1 = 1
+                                                                    AND po.sub_project_id = sp.id
+                                                                    AND pr.id = po.prod_routing_id
+                                                                    AND pr.name != '-- available'";
+        if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND pr.id IN ({$valOfParams['prod_routing_id']})";
+        if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND sp.id IN ({$valOfParams['sub_project_id']})";
+        if (Report::checkValueOfField($valOfParams, 'project_id')) $sql .= "\n AND sp.project_id IN ({$valOfParams['project_id']})";
+
+                                                                $sql .= "\n GROUP BY prod_routing_id ) tb_count_order ON tb_count_order.prod_routing_id = pr.prod_routing_id
                                                     WHERE 1 = 1";
 
         if (Report::checkValueOfField($valOfParams, 'project_id')) $sql .= "\n AND sp.project_id IN ({$valOfParams['project_id']})";
@@ -98,7 +110,8 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                         AND pr.prod_routing_name != '-- available'
                                                     GROUP BY #project_id, 
                                                             sub_project_id, 
-                                                            prod_routing_id ) AS tb1
+                                                            prod_routing_id
+                                                            ) AS tb1
                                                 LEFT JOIN (
                                                     SELECT
                                                         mtm.term_id AS prod_routing_id,

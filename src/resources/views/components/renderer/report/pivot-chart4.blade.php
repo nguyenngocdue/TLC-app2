@@ -18,12 +18,12 @@
                 :dataSource="$dataSource"
             />
         @break
-    @case('bar_two_columns')
+    {{-- @case('bar_two_columns')
         <x-renderer.report.chart-bar3 
             :dataSource="$dataSource"
             :dataWidgets="$dataWidgets"
             />
-        @break
+        @break --}}
     @default
         @break
         
