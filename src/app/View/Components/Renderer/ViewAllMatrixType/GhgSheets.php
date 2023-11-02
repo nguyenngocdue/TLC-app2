@@ -84,7 +84,7 @@ class GhgSheets extends ViewAllTypeMatrixParent
     protected function getRightMetaColumns()
     {
         return [
-            ['dataIndex' => 'ytd', 'title' => 'YTD', "align" => "right", 'width' => 100,],
+            ['dataIndex' => 'ytd', 'title' => 'YTD (KgCO2/Unit)', "align" => "right", 'width' => 100,],
         ];
     }
 

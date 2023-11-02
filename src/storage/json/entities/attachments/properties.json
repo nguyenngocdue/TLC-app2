@@ -79,6 +79,14 @@
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
+    "_attachment_esg_sheet": {
+        "name": "_attachment_esg_sheet",
+        "field_id": "199",
+        "field_name": "attachment_esg_sheet",
+        "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported"
+    },
     "_attachment_hse_hr_decision": {
         "name": "_attachment_hse_hr_decision",
         "field_id": "150",

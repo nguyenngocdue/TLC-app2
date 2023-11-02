@@ -56,6 +56,14 @@ class UpdateUserSettings extends Controller
         foreach ($toBeSaved as $key => $value) {
             $values[$key] = $value;
         }
+        //Remove empty array
+        foreach ($values as $key => $value) {
+            if (is_array($value)) {
+                if (sizeof($value) == 1 && is_null($value[0])) { //isset($value[0]) is false
+                    unset($values[$key]);
+                }
+            }
+        }
         $settings[$type][Constant::VIEW_ALL]['matrix'] = $values;
         return $settings;
     }

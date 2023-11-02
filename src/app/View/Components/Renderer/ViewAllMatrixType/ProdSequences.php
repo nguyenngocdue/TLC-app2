@@ -73,7 +73,9 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $prodRouting = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] ?? null;
         $prodRoutingLink = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_link_id'] ?? null;
         $prodDiscipline = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_discipline_id'] ?? null;
-        return [$project, $subProject, $prodRouting, $prodRoutingLink, $prodDiscipline];
+        $result = [$project, $subProject, $prodRouting, $prodRoutingLink, $prodDiscipline];
+        // Log::info($result);
+        return $result;
     }
 
     public function getYAxis()
