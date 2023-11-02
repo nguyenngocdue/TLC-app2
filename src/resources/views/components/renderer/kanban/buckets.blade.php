@@ -54,9 +54,13 @@
                 result = "Elapsed: <span class='text-blue-600'>" + elapse + "<span>"
                 break;
             case '2':
+            case '3':
                 groupId = $("#taskParentPreviousGroupId_" + taskId).val()
-                elapse = convertSecondsToTime(currentElapsed[groupId][taskId]['elapsed'])
-                result = "Took: <span class='text-blue-800 font-bold'>" + elapse + "</span>"
+                
+                if(currentElapsed[groupId] && currentElapsed[groupId][taskId]){ 
+                    elapse = convertSecondsToTime(currentElapsed[groupId][taskId]['elapsed'])
+                    result = "Took: <span class='text-blue-800 font-bold'>" + elapse + "</span>"
+                }
                 
                 groupId = $("#taskParentRectifiedGroupId_" + taskId).val()
                 // console.log(groupId, currentElapsed[groupId])

@@ -24,8 +24,7 @@
             <x-renderer.avatar-user uid="{{$group->assignee_1}}" icon="30"/>
         @endif
     </div>
-    <div id="group_{{$group->id}}" data-id="group_{{$group->id}}" class="grid gap-1 {{$groupWidth}}">
-        @php
+    @php
         $mode = $group->time_counting_type;
         $count = 5;
         $tasks0 = $group->getTasks;
@@ -34,7 +33,8 @@
             echo "<div class='text-xs text-center'>Show only last $count/$all tasks</div>";
             $tasks0 = $group->getTasks->sortByDesc('updated_at')->take($count);
         }
-        @endphp
+    @endphp
+    <div id="group_{{$group->id}}" data-id="group_{{$group->id}}" class="grid gap-1 {{$groupWidth}}">
         @foreach($tasks0 as $task)
             <x-renderer.kanban.task :task="$task" :group="$group" hidden="{{$hidden??'hidden'}}" groupWidth="{{$groupWidth}}"/>
         @endforeach
