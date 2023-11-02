@@ -22,6 +22,23 @@ class Prod_routing_link extends ModelExtended
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
     ];
 
+    public static $oracyParams = [
+        "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
+    ];
+
+    private static $showIsShowOn = false;
+    public function isShowOn($type)
+    {
+        $tableName = $this->getTable();
+        $allow = $this->getScreensShowMeOn()->pluck('id')->toArray();
+        $config = config("production.$tableName.$type");
+        if (is_null($config) && !static::$showIsShowOn) {
+            static::$showIsShowOn = true;
+            dump($type . " is not registered for Filter of [$tableName].");
+        }
+        return in_array($config, $allow);
+    }
+
     public function getStandardUom()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -50,6 +67,12 @@ class Prod_routing_link extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getScreensShowMeOn()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
     public function getManyLineParams()
