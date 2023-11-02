@@ -9,7 +9,7 @@ return [
         "qaqc_insp_chklsts" => 348,
     ],
     "prod_routing_links" => [
-        "report_a" => 367,
-        "report_b" => 368,
+        "place_holder" => 364,
+        "report_a" => 365,
     ],
 ];
