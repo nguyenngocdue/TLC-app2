@@ -2035,7 +2035,7 @@
     "user_position": {
         "name": "user_position",
         "package_tab": "application",
-        "package": "system",
+        "package": "hr_&_admin",
         "sub_package": "user",
         "title": "Job Description",
         "nickname": null,
