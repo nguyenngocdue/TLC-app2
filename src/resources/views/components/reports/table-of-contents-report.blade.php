@@ -40,4 +40,23 @@
         //drawer.style.left = drawer.classList.contains('hidden') ? '-200px' : '0';
 	}
  </script>
+
+ <script>
+    var drawer = document.getElementById('drawer-left');
+
+    // Add scroll event listener
+    window.addEventListener('scroll', function() {
+        // Get the current scroll position
+        var scrollPosition = window.scrollY || document.documentElement.scrollTop;
+
+        // Check if the scroll position is greater than or equal to one-third of the window height
+        if (scrollPosition >= window.innerHeight / 3.5) {
+            // Set the top property of the drawer to 70px
+            drawer.style.top = '70px';
+        } else {
+            // Set the top property of the drawer to the initial value (here it's top-[340px])
+            drawer.style.top = '340px';
+        }
+    });
+ </script>
  
