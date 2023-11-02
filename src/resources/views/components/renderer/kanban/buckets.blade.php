@@ -60,7 +60,7 @@
                 
                 groupId = $("#taskParentRectifiedGroupId_" + taskId).val()
                 // console.log(groupId, currentElapsed[groupId])
-                if(currentElapsed[groupId]){ // Never rectified before
+                if(currentElapsed[groupId] && currentElapsed[groupId][taskId]){ // Never rectified before
                     rectified = convertSecondsToTime(currentElapsed[groupId][taskId]['elapsed'])
                     result += "<br/>Rectified: " + rectified;
                 }
