@@ -62,7 +62,7 @@
         "fn": null,
         "section_title": null,
         "widget_title": null,
-        "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_total_uom\"\r\n}",
+        "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_min\"\r\n}",
         "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"min (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
     },
     "benchmark_avg_min_uom": {
@@ -73,18 +73,18 @@
         "fn": null,
         "section_title": null,
         "widget_title": null,
-        "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_min\"\r\n}",
+        "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_min_uom\"\r\n}",
         "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"min\/Uom (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
     },
     "benchmark_avg_total_uom": {
         "name": "benchmark_avg_total_uom",
         "report_name": "document-prod_sequence_040",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "bar",
         "fn": null,
         "section_title": null,
         "widget_title": null,
-        "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_min_uom\"\r\n}",
+        "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_total_uom\"\r\n}",
         "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Total UoM (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
     },
     "carbon_footprint_1": {
@@ -185,6 +185,28 @@
         "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
         "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"titleX\" : \"User Team\",\r\n\"displayTitleX\": 0,\r\n\"titleY\" : \"Issues (qty)\",\r\n\"titleChart\": \"Count of Responsible Teams\",\r\n\"displayTitleChart\":0,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"positionTitleChart\": \"bottom\"\r\n}"
+    },
+    "percent_downtime_tf1": {
+        "name": "percent_downtime_tf1",
+        "report_name": "document-prod_sequence_060",
+        "hidden": null,
+        "chart_type": "bar_two_columns",
+        "fn": null,
+        "section_title": null,
+        "widget_title": null,
+        "params": "{\"label_meta_data_1\":\"month\",\r\n\"meta_data_1\":\"head_count\", \"meta_data_2\":\"hours\"}",
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":500,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"OVERALL COMPLETE STATUS\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"QC Acceptance (%)\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"Last month QC Acceptance (%)\",\r\n\"dataName2\": \"This month QC Acceptance (%)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"legendY\": 1 ,\r\n\"lessThen100\":1,\r\n\"stepSizeY\":10\r\n}"
+    },
+    "percent_downtime_tf2": {
+        "name": "percent_downtime_tf2",
+        "report_name": "document-prod_sequence_060",
+        "hidden": null,
+        "chart_type": "bar_two_columns",
+        "fn": null,
+        "section_title": null,
+        "widget_title": null,
+        "params": "{\"label_meta_data_1\":\"month\",\r\n\"meta_data_1\":\"head_count\",\r\n\"meta_data_2\":\"hours\"}",
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":500,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"OVERALL COMPLETE STATUS\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"QC Acceptance (%)\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"Last month QC Acceptance (%)\",\r\n\"dataName2\": \"This month QC Acceptance (%)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"legendY\": 1 ,\r\n\"lessThen100\":1,\r\n\"stepSizeY\":10\r\n}"
     },
     "qaqc_wir_overall_complete_status": {
         "name": "qaqc_wir_overall_complete_status",
