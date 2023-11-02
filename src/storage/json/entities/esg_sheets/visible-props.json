@@ -9,11 +9,6 @@
         "column_name": "name",
         "new": "true"
     },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "new": "true"
-    },
     "_esg_tmpl_id": {
         "name": "_esg_tmpl_id",
         "column_name": "esg_tmpl_id",
@@ -29,9 +24,19 @@
         "column_name": "esg_date",
         "new": "true"
     },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
+        "new": "true"
+    },
+    "_attachment_esg_sheet": {
+        "name": "_attachment_esg_sheet",
+        "column_name": "attachment_esg_sheet",
         "new": "true"
     },
     "_total": {
