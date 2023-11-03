@@ -39,7 +39,8 @@
         "package_tab": "report",
         "package": "project_management",
         "top_title": "Process Analysis for Production Order",
-        "title": "Process Analysis by Production Order"
+        "title": "Process Analysis by Production Order",
+        "hidden": "true"
     },
     "document-prod_sequence_030": {
         "name": "document-prod_sequence_030",

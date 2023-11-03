@@ -4,10 +4,8 @@
         "report_name": "document-prod_sequence_050",
         "hidden": null,
         "chart_type": "bar",
-        "fn": "SqlForeignKey",
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"label_meta_data_1\":\"pru_date\",\"meta_data_1\":\"man_power_on_day\",\"prefix_unit_text\":\"Man Power (AVG)\"\r\n}",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"scaleMaxX\": 1000,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 1,\r\n\"displayTitleY\": 1,\r\n\"titleY\": \"Man Power (AVG)\",\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Man Power (AVG)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
     },
     "02_process_analysis_prod_routing_link_total_uom": {
@@ -15,10 +13,8 @@
         "report_name": "document-prod_sequence_050",
         "hidden": null,
         "chart_type": "bar",
-        "fn": "SqlForeignKey",
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"label_meta_data_1\": \"pru_date\",\"meta_data_1\":\"total_uom_on_day\",\"index_unit\":\"uom_name\",\"suffix_unit_text\":\"\/Day (AVG)\"}",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"scaleMaxX\": 1000,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Efficiency\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
     },
     "03_process_analysis_prod_routing_link_min": {
@@ -26,10 +22,8 @@
         "report_name": "document-prod_sequence_050",
         "hidden": null,
         "chart_type": "bar",
-        "fn": "SqlForeignKey",
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"label_meta_data_1\":\"pru_date\",\"meta_data_1\":\"min_on_day\",\"prefix_unit_text\":\"min\",\"suffix_unit_text\":\"\/Day (AVG)\"}",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"scaleMaxX\": 1000,\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Time Efficiency\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
     },
     "04_process_analysis_prod_routing_link_min_on_set": {
@@ -37,10 +31,8 @@
         "report_name": "document-prod_sequence_050",
         "hidden": null,
         "chart_type": "bar",
-        "fn": "SqlForeignKey",
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"label_meta_data_1\":\"pru_date\",\"meta_data_1\":\"min_on_set_on_day\",\"index_unit\":\"uom_name\",\"prefix_unit_text\":\"min\/\",\"suffix_unit_text\":\" (AVG)\"}",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"displayTitleY\": 1,\r\n\"titleY\": \"min\/Day (AVG)\",\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"scaleMaxX\": 1000,\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Productivity\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
     },
     "benchmark_avg_man_power": {
@@ -48,10 +40,8 @@
         "report_name": "document-prod_sequence_040",
         "hidden": null,
         "chart_type": "bar",
-        "fn": null,
-        "section_title": null,
-        "widget_title": null,
         "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_worker_number\"}",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
     },
     "benchmark_avg_min": {
@@ -59,10 +49,8 @@
         "report_name": "document-prod_sequence_040",
         "hidden": null,
         "chart_type": "bar",
-        "fn": null,
-        "section_title": null,
-        "widget_title": null,
         "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_min\"\r\n}",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"min (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
     },
     "benchmark_avg_min_uom": {
@@ -70,10 +58,8 @@
         "report_name": "document-prod_sequence_040",
         "hidden": null,
         "chart_type": "bar",
-        "fn": null,
-        "section_title": null,
-        "widget_title": null,
         "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_min_uom\"\r\n}",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"min\/Uom (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
     },
     "benchmark_avg_total_uom": {
@@ -81,10 +67,8 @@
         "report_name": "document-prod_sequence_040",
         "hidden": "true",
         "chart_type": "bar",
-        "fn": null,
-        "section_title": null,
-        "widget_title": null,
         "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_total_uom\"\r\n}",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Total UoM (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
     },
     "carbon_footprint_1": {
@@ -92,10 +76,8 @@
         "report_name": "document-ghg_sheet_010",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
-        "section_title": "Carbon Report",
-        "widget_title": "by Employee",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "line_series": null,
         "dimensions": "{}"
     },
     "carbon_footprint_2": {
@@ -103,10 +85,8 @@
         "report_name": "document-ghg_sheet_010",
         "hidden": null,
         "chart_type": "horizontal_bar",
-        "fn": "SqlForeignKey",
-        "section_title": "Carbon Report",
-        "widget_title": "by Emission",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "line_series": null,
         "dimensions": "{}"
     },
     "carbon_footprint_3": {
@@ -114,10 +94,8 @@
         "report_name": "document-ghg_sheet_020",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
-        "section_title": "Carbon Report",
-        "widget_title": "by Year",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "line_series": null,
         "dimensions": "{}"
     },
     "ncr_parent_type": {
@@ -125,10 +103,8 @@
         "report_name": "document-ghg_sheet_030",
         "hidden": null,
         "chart_type": "bar",
-        "fn": "SqlForeignKey",
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"Count of Source Form\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
     },
     "ncr_priority": {
@@ -136,10 +112,8 @@
         "report_name": "document-qaqc_ncr_010",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "line_series": null,
         "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 300,\r\n\"height\": 300,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Priority of Open Issues\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
     },
     "ncr_report_type": {
@@ -147,10 +121,8 @@
         "report_name": "document-qaqc_ncr_010",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "line_series": null,
         "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 300,\r\n\"height\": 300,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Count of Report Type\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\": \"bottom\"\r\n}"
     },
     "ncr_severity": {
@@ -158,10 +130,8 @@
         "report_name": "document-qaqc_ncr_010",
         "hidden": null,
         "chart_type": "doughnut",
-        "fn": "SqlForeignKey",
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "line_series": null,
         "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 300,\r\n\"height\": 250,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Severity of Open Issues\",\r\n\"displayTitleChart\":0,\r\n\"displayDatalabel\":1\r\n}"
     },
     "ncr_status": {
@@ -169,10 +139,8 @@
         "report_name": "document-qaqc_ncr_010",
         "hidden": null,
         "chart_type": "bar",
-        "fn": "SqlStatus",
-        "section_title": "(TEST)",
-        "widget_title": "by Status",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"All Issues by Status\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
     },
     "ncr_user_team": {
@@ -180,43 +148,35 @@
         "report_name": "document-ghg_sheet_030",
         "hidden": null,
         "chart_type": "bar",
-        "fn": "SqlForeignKey",
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"titleX\" : \"User Team\",\r\n\"displayTitleX\": 0,\r\n\"titleY\" : \"Issues (qty)\",\r\n\"titleChart\": \"Count of Responsible Teams\",\r\n\"displayTitleChart\":0,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"positionTitleChart\": \"bottom\"\r\n}"
     },
-    "percent_downtime_tf1": {
-        "name": "percent_downtime_tf1",
+    "percent_downtime_each_workplace": {
+        "name": "percent_downtime_each_workplace",
         "report_name": "document-prod_sequence_060",
         "hidden": null,
         "chart_type": "bar_two_columns",
-        "fn": null,
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"label_meta_data_1\":\"month\",\r\n\"meta_data_1\":\"head_count\", \"meta_data_2\":\"hours\"}",
-        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":500,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"OVERALL COMPLETE STATUS\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"QC Acceptance (%)\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"Last month QC Acceptance (%)\",\r\n\"dataName2\": \"This month QC Acceptance (%)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"legendY\": 1 ,\r\n\"lessThen100\":1,\r\n\"stepSizeY\":10\r\n}"
+        "line_series": "line1{\r\n\"data_field\": \"percent_downtime\",\r\n\"yAxisID\":\"y1\",\r\n\"type\": \"line\",\r\n\"fill\": false, \r\n\"tension\": 0,\r\n\"borderWidth\": 0.5,\r\n\"data_label\": \"% Percent Downtime\",\"grid_display\":false,\r\n\"line_color\":\"#10ee50\",\r\n\"borderWidth\":1,\r\n\"data_label\":\"% Downtime\" ,\r\n\"pointBackgroundColor\":\"#4131c9\",\r\n\"fill\":false,\r\n\"backgroundColor\": \"#4131c9\"\r\n}",
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":500,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": false,\r\n\"tooltipLabel\": \"Value\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"Head Count\",\r\n\"dataName2\": \"Worker Hours\",\r\n\"resetZoom\": false,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"legendY\": 1 ,\r\n\"lessThen100\":1,\r\n\"stepSizeY\":10,\r\n\"titleHeading\":\"Head Count\",\r\n\"displayLegend\": true,\r\n\"scale_max_y1\": 100\r\n}"
     },
     "percent_downtime_tf2": {
         "name": "percent_downtime_tf2",
         "report_name": "document-prod_sequence_060",
         "hidden": null,
         "chart_type": "bar_two_columns",
-        "fn": null,
-        "section_title": null,
-        "widget_title": null,
         "params": "{\"label_meta_data_1\":\"month\",\r\n\"meta_data_1\":\"head_count\",\r\n\"meta_data_2\":\"hours\"}",
-        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":500,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"OVERALL COMPLETE STATUS\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"QC Acceptance (%)\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"Last month QC Acceptance (%)\",\r\n\"dataName2\": \"This month QC Acceptance (%)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"legendY\": 1 ,\r\n\"lessThen100\":1,\r\n\"stepSizeY\":10\r\n}"
+        "line_series": "line1{\r\n\"data_field\": \"percent_downtime\",\r\n\"yAxisID\":\"y1\",\r\n\"type\": \"line\",\r\n\"fill\": false, \r\n\"tension\": 0.4,\r\n\"borderWidth\": 1,\r\n\"line_color\":\"#2986cc\"\r\n};\r\nline2{\r\n\"data_field\": \"hours\",\r\n\"yAxisID\":\"y1\",\r\n\"type\": \"line\",\r\n\"grid_display\": false,\r\n\"line_color\":\"#096b25\",\r\n\"borderWidth\":1\r\n}",
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":500,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"tooltipLabel\": \"Value\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"Head Count\",\r\n\"dataName2\": \"Worker Hours\",\r\n\"resetZoom\": false,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"legendY\": 1 ,\r\n\"lessThen100\":1,\r\n\"stepSizeY\":10,\r\n\"titleHeading\":\"Man Hours\"\r\n}"
     },
     "qaqc_wir_overall_complete_status": {
         "name": "qaqc_wir_overall_complete_status",
         "report_name": "document-qaqc_wir_010",
         "hidden": null,
         "chart_type": "bar_two_columns",
-        "fn": "SqlForeignKey",
-        "section_title": "A",
-        "widget_title": "B",
         "params": "{\"label_meta_data_1\":\"prod_routing_name\",\r\n\"meta_data_1\":\"latest_acceptance_percent\",\r\n\"meta_data_2\":\"previous_acceptance_percent\",\r\n\"map_labels\":\"sub_project_name.prod_routing_name\",\r\n\"overrideDataName1\":\"previous_month\",\r\n\"overrideDataName2\":\"latest_month\"\r\n}",
+        "line_series": null,
         "dimensions": "{\r\n\"width\": 1200,\r\n\"height\":500,\r\n\"scaleMaxX\": 100,\r\n\"scaleMaxY\": 110,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"OVERALL COMPLETE STATUS\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"QC Acceptance (%)\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"Last month QC Acceptance (%)\",\r\n\"dataName2\": \"This month QC Acceptance (%)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"legendY\": 1 ,\r\n\"lessThen100\":1,\r\n\"stepSizeY\":10\r\n}"
     }
 }
