@@ -27,6 +27,9 @@
             @endif
         </div>
     </div>
+    @if($task->target_hours)
+    Target hour: {{$task->target_hours}}
+    @endif
     <hr class=""/>
     <div class="flex justify-between pt-1">
         <div id="taskElapseTxt_{{$task->id}}"></div>
