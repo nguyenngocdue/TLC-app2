@@ -31,6 +31,7 @@ trait TraitParamsInManageWidget
 			$widget['dimensions'] = (array)json_decode($widget['dimensions']);
 			$widget['params'] = StringReport::separateStringsByDot((array)json_decode($widget['params']));
 			$widget['line_series'] = self::parseArrayWithJson($widget['line_series'], ';');
+			$widget['param_meta'] = self::parseArrayWithJson($widget['param_meta'], ';');
 			$widget['key_md5'] = md5($key);
 			$widget['key_name'] = $key;
 			$widget['param_filters'] = $params;

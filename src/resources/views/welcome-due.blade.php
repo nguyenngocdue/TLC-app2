@@ -36,7 +36,7 @@ var chartConfig  = {
                             pointBackgroundColor: '#fff',
                         },
                         {
-                            type: 'bar', // Loại biểu đồ là 'line'
+                            type: 'line', // Loại biểu đồ là 'line'
                             yAxisID: 'y1', // Sử dụng trục y bên phải cho đường
                             data: [84, 75, 62, 22], // Dữ liệu của đường
                             borderColor: '#ff0000', // Màu sắc của đường

@@ -82,6 +82,12 @@ class ManageWidgetsController extends AbstractManageLibController
                 "width" => 500,
             ],
             [
+                'dataIndex' => "param_meta",
+                'renderer' => 'textarea4',
+                'editable' => true,
+                "width" => 500,
+            ],
+            [
                 'dataIndex' => "line_series",
                 'renderer' => 'textarea4',
                 'editable' => true,

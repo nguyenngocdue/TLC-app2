@@ -341,9 +341,21 @@ class Report
     public static function checkValueOfField($array, $fieldName){
         return isset($array[$fieldName]) && $array[$fieldName] !== "";
     }
+
     public static function checkParam($array, $fieldName){
         return isset($array[$fieldName]) && $array[$fieldName];
     }
 
-    
+    public static function getValuesByField($dataSource, $fieldName) {
+		$valuesOfFiled = [];
+		foreach ($dataSource as $item) {
+            $item = (array)$item;
+			if (is_array($item) && isset($item[$fieldName])) {
+				$valuesOfFiled[] = $item[$fieldName];
+			} elseif (is_array($item)) {
+				$valuesOfFiled = array_merge($valuesOfFiled, self::getValuesByField($item, $fieldName));
+			}
+		}
+		return $valuesOfFiled;
+	} 
 }

@@ -31,10 +31,9 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                             $dataTable = $tableDataSource['tableDataSource'];
                             $workplace = $dataTable->pluck('workplace_name')->first();
                         @endphp
-                            <div style='' class="{{-- {{$layout}} --}} w-[1400px] min-h-[1000px] items-center bg-white box-border p-8">
+                            <div style='' class="{{$layout}} w-[1400px] min-h-[1000px] items-center bg-white box-border p-8">
                                     <x-print.header6 />
                                     <x-renderer.heading level=2 class='text-center pt-10'>Calculate Working Hours for Each Workplace</x-renderer.heading>
-                                    {{-- TABLES --}}
                                         <div class="">
                                             <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300 pt-4" id="" title="" style="scroll-margin-top: 90px;">Detail Report</h4>
                                             <x-renderer.report.pivot-table 
@@ -78,6 +77,21 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                             <x-renderer.page-break />
                         @endforeach
                 {{-- RENDER WHEN THERE ARE NO ITEMS --}}
+
+                <div style='' class="w-[1400px] min-h-[990px] items-center bg-white box-border p-8">
+                    <div class="pt-5">
+                        <x-print.header6 />
+                            <div>
+                                <x-renderer.heading level=5 xalign='left' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>...........</x-renderer.heading>
+                                <div class="p-6">
+                                    @php
+                                        $values = $tableDataSource['dataWidgetsComparison']['percent_downtime_comparison'];
+                                    @endphp
+                                    <x-renderer.report.pivot-chart4 :data="$values"/>
+                                </div>
+                            </div>
+                    </div>
+                </div>
                 @else
                     <x-reports.empty-data-report layout="{{$layout}}" />
                 @endif

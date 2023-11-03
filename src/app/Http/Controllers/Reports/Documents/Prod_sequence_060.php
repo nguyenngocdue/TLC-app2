@@ -53,7 +53,8 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                         #prl.id AS prod_routing_link_id,
                         SUBSTR(pru.date, 1,7) AS month,
                         prl.workplace_id AS workplace_id,
-                        8 AS downtime_hours,
+                        ROUND(RAND()*100,2) AS downtime_hours,
+
                         300 AS head_count,
                         wp.name AS workplace_name,
                         ROUND(SUM(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start))/60/60),2) AS hours,
@@ -188,18 +189,21 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
     }
 
     private function makeDataWidget($dataSource, $params){
-        // dd($params);
         $dataOfManageWidget = $this->makeParamsInManageWidgets($params);
-        // dd($dataSource);
+        $isLineSeresStandard = $dataWidgets['line_series']['standard'] ?? null;
         $dataWidgets = [];
+        //two column on chart
         foreach ($dataSource as $key => $items){
             $array = [];
             foreach ($dataOfManageWidget as $keyInManage => $paramsWidget){
-                $result = $this->createDataSourceWidgets2Columns($key, $items, $paramsWidget);
-                $array[$keyInManage] = $result;
+                $isLineSeresStandard = $paramsWidget['line_series']['standard'] ?? null;
+                if(!$isLineSeresStandard){
+                    $result = $this->createDataWidgets2Columns($key, $items, $paramsWidget);
+                    $array[$keyInManage] = $result;
+                }
             }
             $dataWidgets[$key] = $array; 
-
+            
         }
         // line series chart
         array_walk($dataWidgets, function($values, $key) use(&$dataWidgets,$dataSource, $dataOfManageWidget) {
@@ -232,8 +236,22 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
             }
             $dataWidgets[$key] = $values;
         });
+        // dd($dataWidgets);
+        return $dataWidgets;
+    }
 
-        
+    private function createWidgetManyColumns($dataSource, $params){
+        $dataOfManageWidget = $this->makeParamsInManageWidgets($params);
+        $isLineSeresStandard = $dataWidgets['line_series']['standard'] ?? null;
+        $dataWidgets = [];
+
+        foreach ($dataOfManageWidget as $keyInManage => $paramsWidget){
+            $isLineSeresStandard = $paramsWidget['line_series']['standard'] ?? null;
+            if($isLineSeresStandard){
+                $dataForManyColumns = $this->createDataWidgetForManyColumns($dataSource, $paramsWidget);
+                $dataWidgets[$keyInManage] = $dataForManyColumns;
+            }
+        }
         // dd($dataWidgets);
         return $dataWidgets;
     }
@@ -253,6 +271,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
             ];
         }
         $data['tableDataSource'] = collect($items);
+        $data['dataWidgetsComparison'] = $this->createWidgetManyColumns($items, $params);
         // dd($data);
         return $data;
     }
