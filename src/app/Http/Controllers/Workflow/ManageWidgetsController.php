@@ -59,35 +59,30 @@ class ManageWidgetsController extends AbstractManageLibController
                 'sortBy' => 'value',
                 "width" => 100,
             ],
-            [
-                'dataIndex' => "fn",
-                'renderer' => 'dropdown',
-                'editable' => true,
-                "width" => 100,
-                'cbbDataSource' => [
-                    '',
-                    'SqlForeignKey',
-                    'SqlForeignKeyWidget01',
-                    'SqlTest',
-                    'SqlStatus',
+           
+            // [
+            //     'dataIndex' => "fn",
+            //     'renderer' => 'dropdown',
+            //     'editable' => true,
+            //     "width" => 100,
+            //     'cbbDataSource' => [
+            //         '',
+            //         'SqlForeignKey',
+            //         'SqlForeignKeyWidget01',
+            //         'SqlTest',
+            //         'SqlStatus',
 
-                ],
-                "properties" => ['strFn' => 'same'],
-            ],
-            [
-                'dataIndex' => "section_title",
-                'renderer' => 'text4',
-                'editable' => true,
-                "width" => 150,
-            ],
-            [
-                'dataIndex' => "widget_title",
-                'renderer' => 'text4',
-                'editable' => true,
-                "width" => 250,
-            ],
+            //     ],
+            //     "properties" => ['strFn' => 'same'],
+            // ],
             [
                 'dataIndex' => "params",
+                'renderer' => 'textarea4',
+                'editable' => true,
+                "width" => 500,
+            ],
+            [
+                'dataIndex' => "line_series",
                 'renderer' => 'textarea4',
                 'editable' => true,
                 "width" => 500,

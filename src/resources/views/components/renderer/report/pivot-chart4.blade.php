@@ -14,16 +14,11 @@
         @break
     @case('bar')
     {{-- @dd($dataWidgets) --}}
-        <x-renderer.report.chart-bar2v2 
-                :dataSource="$dataSource"
-            />
+        <x-renderer.report.chart-bar2v2 :dataSource="$dataSource"/>
         @break
-    {{-- @case('bar_two_columns')
-        <x-renderer.report.chart-bar3 
-            :dataSource="$dataSource"
-            :dataWidgets="$dataWidgets"
-            />
-        @break --}}
+    @case('bar_two_columns')
+        <x-renderer.report.chart-bar3v2 :dataSource="$dataSource"/>
+        @break
     @default
         @break
         

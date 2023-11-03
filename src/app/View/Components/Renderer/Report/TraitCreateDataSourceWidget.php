@@ -59,9 +59,9 @@ trait TraitCreateDataSourceWidget
         // dd($dataWidgets);
       // Set data for widget
 		$result =  [
-            'key' => $dataWidgets['key_md5'].$key,
-			"title_a" => "title_a" . $dataWidgets['key_md5'],
-			"title_b" => "title_b" . $dataWidgets['key_md5'],
+            'key' => $key.'_'.$dataWidgets['key_md5'],
+			"title_a" => "title_a" .'_'. $dataWidgets['key_md5'],
+			"title_b" => "title_b" .'_'. $dataWidgets['key_md5'],
 			'meta' => $meta,
 			'metric' => $metric,
 			'chart_type' => $dataWidgets['chart_type'],
