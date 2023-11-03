@@ -45,13 +45,18 @@ class Prod_sequence extends ModelExtended
         return [52, 55, 56];
     }
 
-    public function getRoutingsHavePprItems()
+    public function getRoutingsNeedProdOutputQty()
     {
         //62: PPR Monthly timesheet, 
-        //63: Factory Upgrade,
+        //63: Factory Upgrade -> non production activities,
         return [62];
     }
 
+    public function getDisciplinesNeedProdOutputQty()
+    {
+        //9: PPR-MEPF discipline
+        return [9];
+    }
 
     public function getProdOrder()
     {

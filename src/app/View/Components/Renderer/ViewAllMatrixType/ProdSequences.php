@@ -98,7 +98,12 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         $data = Prod_routing::find($this->prodRouting)
             ->getProdRoutingLinks();
-        if ($this->prodDiscipline) $data = $data->where('prod_discipline_id', $this->prodDiscipline);
+        if ($this->prodDiscipline) {
+            $data = $data->where('prod_discipline_id', $this->prodDiscipline);
+        } else { //In case if empty is provided, do not return PPR-MEPF
+            $ppr_mepf = 9;
+            $data = $data->whereNotIn('prod_discipline_id', [$ppr_mepf]);
+        }
         if ($this->prodRoutingLink) $data = $data->whereIn('prod_routing_link_id', $this->prodRoutingLink);
         $data = $data->orderBy('order_no')->get();
         return $data;

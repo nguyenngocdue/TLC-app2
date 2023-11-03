@@ -26,17 +26,18 @@ class Prod_routing extends ModelExtended
         "getWirDescriptions()" => ["getCheckedByField", Wir_description::class],
         "getChklstTmpls()" => ["getCheckedByField", Qaqc_insp_tmpl::class],
         "getSubProjects()" => ["getCheckedByField", Sub_project::class],
-        "getScreensShowRoutingOn()" => ["getCheckedByField", Term::class],
+        "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
     ];
 
     private static $showIsShowOn = false;
     public function isShowOn($type)
     {
-        $allow = $this->getScreensShowRoutingOn()->pluck('id')->toArray();
-        $config = config("production.prod_routing.$type");
+        $tableName = $this->getTable();
+        $allow = $this->getScreensShowMeOn()->pluck('id')->toArray();
+        $config = config("production.$tableName.$type");
         if (is_null($config) && !static::$showIsShowOn) {
             static::$showIsShowOn = true;
-            dump($type . " is not registered for ProdRoutingFilter.");
+            dump($type . " is not registered for Filter of [$tableName].");
         }
         return in_array($config, $allow);
     }
@@ -83,7 +84,7 @@ class Prod_routing extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function getScreensShowRoutingOn()
+    public function getScreensShowMeOn()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

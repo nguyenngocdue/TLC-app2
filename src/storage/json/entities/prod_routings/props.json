@@ -19,7 +19,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_name": {
         "name": "_name",
@@ -41,7 +42,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_description": {
         "name": "_description",
@@ -63,7 +65,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_slug": {
         "name": "_slug",
@@ -85,7 +88,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getSubProjects()": {
         "name": "_getSubProjects()",
@@ -107,11 +111,12 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_getScreensShowRoutingOn()": {
-        "name": "_getScreensShowRoutingOn()",
-        "column_name": "getScreensShowRoutingOn()",
+    "_getScreensShowMeOn()": {
+        "name": "_getScreensShowMeOn()",
+        "column_name": "getScreensShowMeOn()",
         "column_type": "oracy_prop",
         "label": "Show On Screens",
         "control": "dropdown_multi",
@@ -129,7 +134,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getChklstTmpls()": {
         "name": "_getChklstTmpls()",
@@ -151,7 +157,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -173,7 +180,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getProdRoutingLinks": {
         "name": "_getProdRoutingLinks",
@@ -195,7 +203,8 @@
         "duplicatable": "",
         "new_line": "true",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getProdOrders": {
         "name": "_getProdOrders",
@@ -217,7 +226,8 @@
         "duplicatable": "",
         "new_line": "true",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getProdSequences": {
         "name": "_getProdSequences",
@@ -239,7 +249,8 @@
         "duplicatable": "",
         "new_line": "true",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getProdRoutingDetails": {
         "name": "_getProdRoutingDetails",
@@ -261,7 +272,8 @@
         "duplicatable": "",
         "new_line": "true",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getWirDescriptions()": {
         "name": "_getWirDescriptions()",
@@ -283,7 +295,8 @@
         "duplicatable": "",
         "new_line": "true",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -305,7 +318,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -327,7 +341,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -349,7 +364,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -371,6 +387,7 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

@@ -95,10 +95,10 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getScreensShowRoutingOn()": {
-        "name": "_getScreensShowRoutingOn()",
+    "_getScreensShowMeOn()": {
+        "name": "_getScreensShowMeOn()",
         "relationship": "getCheckedByField",
-        "control_name": "getScreensShowRoutingOn()",
+        "control_name": "getScreensShowMeOn()",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
