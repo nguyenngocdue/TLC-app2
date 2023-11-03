@@ -697,6 +697,9 @@ video {
 .top-9 {
   top: 2.25rem;
 }
+.top-\[340px\] {
+  top: 340px;
+}
 .top-\[50\%\] {
   top: 50%;
 }
@@ -4945,6 +4948,9 @@ video {
 }
 .duration-500 {
   transition-duration: 500ms;
+}
+.duration-\[3000ms\] {
+  transition-duration: 3000ms;
 }
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);

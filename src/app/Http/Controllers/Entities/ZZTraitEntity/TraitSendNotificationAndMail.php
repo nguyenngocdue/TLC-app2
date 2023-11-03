@@ -20,10 +20,10 @@ trait TraitSendNotificationAndMail
         if (!$modelPath) return;
         if (($modelPath)::isStatusless()) return;
         if ($status && empty($toastrResult)) {
-            $fields = $this->addEntityType($fields, 'id', $id);
-            $fields = $this->addEntityType($fields, 'status', $status);
+            $fields = $this->addEntityValue($fields, 'id', $id);
+            $fields = $this->addEntityValue($fields, 'status', $status);
             try {
-                $currentValue = $this->addEntityType($fields, 'entity_type', $this->type);
+                $currentValue = $this->addEntityValue($fields, 'entity_type', $this->type);
                 $this->insertLogger($currentValue, null, Auth::id(), ($modelPath));
                 if (!($this->ignoreSendMail())) {
                     event(new CreateNewDocumentEvent($currentValue = $currentValue, $this->type, ($modelPath)));
@@ -39,8 +39,8 @@ trait TraitSendNotificationAndMail
         if (($this->modelPath)::isStatusless()) return;
         if ($status && empty($toastrResult)) {
             try {
-                $previousValue = $this->addEntityType($previousValue, 'entity_type', $this->type);
-                $currentValue = $this->addEntityType($fields, 'entity_type',  $this->type);
+                $previousValue = $this->addEntityValue($previousValue, 'entity_type', $this->type);
+                $currentValue = $this->addEntityValue($fields, 'entity_type',  $this->type);
                 $userCurrentId = Auth::id();
                 $this->insertLogger($currentValue, $previousValue, $userCurrentId, $this->modelPath, 'update');
                 if (!($this->ignoreSendMail())) {
