@@ -204,7 +204,7 @@ trait TraitEntityFieldHandler2
     //     $request->replace($newRequest);
     // }
 
-    private function addEntityType($array, $key, $value)
+    private function addEntityValue($array, $key, $value)
     {
         $array[$key] = $value;
         return $array;

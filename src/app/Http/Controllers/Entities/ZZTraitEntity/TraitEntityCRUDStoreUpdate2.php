@@ -135,8 +135,21 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			//Get newStatus before it get removed by handleFields
 			$theRow = $this->modelPath::find($id);
+			$objectType = Str::modelPathFrom($theRow->getTable());
+			$objectId = $theRow->id;
 			$oldStatus = $theRow['status'];
 			$newStatus = $request['status'];
+
+			//Move attachments, comments, signatures, and oracy here
+			//As when table fail to validate, it will throw an exception and skip all of these
+			if ($uploadedIds) {
+				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
+			}
+			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
+			$this->processComments($request);
+			$this->processSignatures($request);
+			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
+
 			// dump($oldStatus);
 			// dump($newStatus);
 			$rules = $this->getValidationRules($oldStatus, $newStatus, __FUNCTION__, $isFakeRequest);
@@ -178,21 +191,13 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			$fields = $this->handleFields($request, __FUNCTION__);
-			$handledFields = $this->addEntityType($fields, 'status', $newStatus);
+			$handledFields = $this->addEntityValue($fields, 'status', $newStatus);
 			$previousValue = $this->getPreviousValue($handledFields, $theRow);
-			$fieldForEmailHandler = $this->addEntityType($handledFields, 'created_at', $theRow->getAttributes()['created_at']);
-			$fieldForEmailHandler = $this->addEntityType($fieldForEmailHandler, 'updated_at', $theRow->getAttributes()['updated_at']);
-			$objectType = Str::modelPathFrom($theRow->getTable());
-			$objectId = $theRow->id;
-			if ($uploadedIds) {
-				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
-			}
+			$fieldForEmailHandler = $this->addEntityValue($handledFields, 'created_at', $theRow->getAttributes()['created_at']);
+			$fieldForEmailHandler = $this->addEntityValue($fieldForEmailHandler, 'updated_at', $theRow->getAttributes()['updated_at']);
+
 			//Fire the event "Send Mail give Monitors No and Comment"
 			$this->fireEventInspChklst($request, $id);
-			$this->processComments($request);
-			$this->processSignatures($request);
-			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
-			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}

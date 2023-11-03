@@ -13,7 +13,7 @@
         @if($hasOrphan)
         <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
         @endif
-        <div name='{{$name}}' title="{{$title}}" class="border-{{$border}}-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit">
+        <div name='{{$name}}' title="{{$title}}" class="border-{{$border}}-300 relative h-full flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
             {{-- This is the image --}}
             @if(in_array($extension,["png","gif","jpg","jpeg","webp"]))
             <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />

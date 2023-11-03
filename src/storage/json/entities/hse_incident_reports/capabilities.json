@@ -282,7 +282,7 @@
         "new": "true",
         "active": "true",
         "pending_ack": "true",
-        "pending_review": "",
+        "pending_review": "true",
         "review_rejected": "true",
         "pending_verification": "true",
         "closed": ""
@@ -349,6 +349,42 @@
     },
     "pln_admin": {
         "name": "pln_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "ppc_admin": {
+        "name": "ppc_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "ppc_manager": {
+        "name": "ppc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "ppc_member": {
+        "name": "ppc_member",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -493,6 +529,18 @@
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "proj_supervisor_nz": {
+        "name": "proj_supervisor_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "",
