@@ -59,10 +59,13 @@ class Prod_run extends ModelExtended
         return false;
     }
 
-    private function isPPRTimeSheet($parentItem)
+    private function needToShowProdOutputQty($parentItem)
     {
-        $a = $parentItem->getRoutingsHavePprItems();
+        $a = $parentItem->getRoutingsNeedProdOutputQty();
         if (in_array($parentItem->prod_routing_id, $a)) return true;
+
+        $a = $parentItem->getDisciplinesNeedProdOutputQty();
+        if (in_array($parentItem->prod_discipline_id, $a)) return true;
         return false;
     }
 
@@ -70,8 +73,8 @@ class Prod_run extends ModelExtended
     {
         $isNZ = $this->isNZ($parentItem);
         // echo "IS NZ: $isNZ";
-        $isPPRTimeSheet = $this->isPPRTimeSheet($parentItem);
-        // echo "IS PPR: $isPPRTimeSheet";
+        $needToShowProdOutputQty = $this->needToShowProdOutputQty($parentItem);
+        // echo "IS PPR: $needToShowProdOutputQty";
 
         $result = [
             ['dataIndex' => 'id', 'invisible' => true,],
@@ -92,7 +95,7 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'worker_number',  'footer' => 'agg_avg', 'no_print' => true,],
             ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum', 'no_print' => true,],
         ];
-        if ($isPPRTimeSheet) {
+        if ($needToShowProdOutputQty) {
             $result[] = ['dataIndex' => 'production_output',  'footer' => 'agg_sum', 'no_print' => true,];
             // $result[] = ['dataIndex' => 'getItemsOfProdOutput()', 'no_print' => true,];
         }
