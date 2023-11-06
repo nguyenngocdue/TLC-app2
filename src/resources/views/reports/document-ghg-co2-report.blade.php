@@ -159,13 +159,13 @@ $info = $tableDataSource['info'];
         </div>
         <x-renderer.page-break />
         {{-- CO2 Emission Summary Report --}}
-        <div class="{{-- {{$layout}} --}}relative w-[1400px] min-h-[990px] items-center bg-white box-border px-8 py-6 ">
+        <div class="{{-- {{$layout}} --}}{{-- relative --}} w-[1400px] min-h-[990px] items-center bg-white box-border px-8 py-6 ">
             <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>CO2 Emission Summary Report</x-renderer.heading>
             <div class="">
                 @include('reports.document-ghg-summary-report-only-table')
-                <div class="w-full absolute  pb-4 bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
+                {{-- <div class="w-full absolute  pb-4 bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
                     <x-print.header6 :itemsShow="['website']"/>
-                </div>
+                </div> --}}
             </div>
         </div>
         
