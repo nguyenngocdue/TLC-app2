@@ -165,6 +165,13 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
 	{
+
+		$report010 = new Ghg_sheet_010();
+		$dataSource010 = $report010->getDataSource($params);
+		$dataSource010 = $report010->changeDataSource($dataSource010, $params);
+		// dd($dataSource010);
+
+		
 		$dataSource =  Report::convertToType($dataSource);
 		$data = (new Ghg_sheet_010())->changeDataSource($dataSource, $params);
 		$c02FootprintInfo = (array)$this->getNumberOfUserOfYear($params)->toArray();
@@ -193,6 +200,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$data = self::updateDataForPivotChart($data, 'tco2e_by_scope');
 		$data = self::updateDataPivotHorizontalChart($data);
 		$data = self::addInfo($data);
+		$data->put('document_ghg_sheet_010', $dataSource010);
 		// dd($data);
 		return collect($data);
 	}

@@ -1,3 +1,4 @@
+{{-- @props(["a"]); --}}
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
@@ -22,7 +23,7 @@ $info = $tableDataSource['info'];
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout2')
+    {{-- @include('components.reports.show-layout2') --}}
 </div>
 @php
         $layout = '';
@@ -48,7 +49,7 @@ $info = $tableDataSource['info'];
                 <x-renderer.heading level=1 xalign='center'>CO2 Emission Report</x-renderer.heading>
                 <x-renderer.heading level=3 xalign='center'>for TLC Modular Construction Limited Liability Company</x-renderer.heading>
             </div>
-            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Company's carbon footprint in the year {{$year}}</x-renderer.heading>
+            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Company's carbon footprint in the year {{$year}}</x-renderer.heading>
             <div class="grid grid-rows-1 pt-20">
                 <div class="grid grid-cols-12 text-center">
                     <div class="col-span-6 m-auto">
@@ -75,7 +76,7 @@ $info = $tableDataSource['info'];
         {{-- chart 1 --}}
         <div class="relative {{$layout}} items-center bg-white box-border p-8">
             <div style='' class="">
-                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
+                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Emission source category chart</x-renderer.heading>
                 <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
                     <div class="w-full flex px-4">
                         <div class="w-1/2 px-4">
@@ -122,7 +123,7 @@ $info = $tableDataSource['info'];
         <div class="relative {{$layout}} items-center bg-white box-border p-8 ">
             {{-- chart 2 --}}
             <div style='' class="">
-                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
+                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Emission source category chart</x-renderer.heading>
                 <div class=" grid-rows-1 pt-4 flex justify-center flex-col items-center">
                     <div class="w-full px-6">
                     {{-- @dump($pivotChart2) --}}
@@ -132,10 +133,22 @@ $info = $tableDataSource['info'];
                         accounted for <strong>{{$info['indirect_emissions']}}</strong> tCO2e and other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']}}</strong> tCO2e.</x-renderer.heading>
                 </div>
             </div>
-            <div class="w-full pb-0 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
+            <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
                 <x-print.header6 :itemsShow="['website']"/>
             </div>
         </div>
+        <x-renderer.page-break />
+        {{-- CO2 Emission Summary Report --}}
+        <div class="{{-- {{$layout}} --}} w-[1400px] min-h-[950px] items-center bg-white box-border p-8 ">
+            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>CO2 Emission Summary Report</x-renderer.heading>
+            <div class="relative">
+                @include('reports.document-ghg-summary-report-only-table')
+                <div class="w-full absolute  py-2 flex flex-row-reverse justify-center">
+                    <x-print.header6 :itemsShow="['website']"/>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
 @endsection
