@@ -43,6 +43,9 @@ class Breadcrumb extends Component
                 ];
             }
         }
+        foreach ($result as $breadcrumbGroup => &$reports) {
+            usort($reports, fn ($a, $b) => $a["title"] <=> $b["title"]);
+        }
         return $result;
     }
     private function getTitleAndIconForPrintButton($show_renderer)
