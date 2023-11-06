@@ -23,7 +23,9 @@ class PivotChart extends Component
         $allWidgets = WidgetGroup::getAllGroupWidgets();
         $dataSource = $this->dataSource;
         $widget = $allWidgets[$this->key];
-
+        // dd($widget, $this->key);
+        $widget['title_a'] = $this->key;
+        $widget['title_b'] = $this->key;
         // change (meta + metric) value by key
         $widget['meta'] = $dataSource['meta'];
         $widget['metric'] = $dataSource['metric'];

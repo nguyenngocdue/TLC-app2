@@ -105,7 +105,7 @@
         "hidden": null,
         "chart_type": "doughnut",
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
-        "param_meta": null,
+        "param_meta": "{}",
         "line_series": null,
         "dimensions": "{}"
     },
