@@ -170,8 +170,6 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$dataSource010 = $report010->getDataSource($params);
 		$dataSource010 = $report010->changeDataSource($dataSource010, $params);
 		// dd($dataSource010);
-
-		
 		$dataSource =  Report::convertToType($dataSource);
 		$data = (new Ghg_sheet_010())->changeDataSource($dataSource, $params);
 		$c02FootprintInfo = (array)$this->getNumberOfUserOfYear($params)->toArray();
