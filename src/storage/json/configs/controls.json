@@ -154,7 +154,8 @@
         "hr",
         "system_configuration",
         "system_permission",
-        "dashboard"
+        "dashboard",
+        "task_management"
     ],
     "assignees": [
         "assignee_1",
