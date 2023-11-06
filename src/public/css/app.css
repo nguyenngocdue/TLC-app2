@@ -1314,6 +1314,9 @@ video {
 .min-h-\[1415px\] {
   min-height: 1415px;
 }
+.min-h-\[1450px\] {
+  min-height: 1450px;
+}
 .min-h-\[150px\] {
   min-height: 150px;
 }
@@ -3821,6 +3824,9 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.pb-0 {
+  padding-bottom: 0px;
 }
 .pb-4 {
   padding-bottom: 1rem;
