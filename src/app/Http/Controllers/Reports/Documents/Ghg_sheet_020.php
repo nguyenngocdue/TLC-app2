@@ -30,6 +30,11 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			[
 				'title' => 'Year',
 				'dataIndex' => 'year',
+			],
+			[
+				'title' => 'Month',
+				'dataIndex' => 'only_month',
+				'multiple' => true,
 			]
 		];
 	}
@@ -63,6 +68,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 
 	public function getDataSource($params)
 	{
+		// dd($params);
 		$primaryData = (new Ghg_sheet_dataSource())->getDataSource($params);
 		return collect($primaryData);
 	}
@@ -187,6 +193,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$data = self::updateDataForPivotChart($data, 'tco2e_by_scope');
 		$data = self::updateDataPivotHorizontalChart($data);
 		$data = self::addInfo($data);
+		// dd($data);
 		return collect($data);
 	}
 
