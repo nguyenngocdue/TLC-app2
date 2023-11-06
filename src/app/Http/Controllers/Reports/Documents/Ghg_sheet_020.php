@@ -95,7 +95,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 				'metric_name' => $scopeName,
 				'metric_count' => $scope['total_tco2e']
 			];
-			$max  = $scope['total_tco2e'];
+			$max  = $max + $scope['total_tco2e'];
 		}
 		foreach ($array as $key => &$value) {
 			if ($key === 'meta') {
@@ -149,16 +149,29 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 
 	private function addInfo($dataSource)
 	{
+		// dd($dataSource);
 		if (isset($dataSource['tco2e_by_scope'])) {
 			$directEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 335)[0]['total_tco2e'] ?? null;
 			$inDirectEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 336)[0]['total_tco2e'] ?? null;
 			$otherInDirectEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 337)[0]['total_tco2e'] ?? null;
+			
+			$max = $dataSource['pivot_chart_1']['meta']['max'];
 			$array = [
-				'direct_emissions' => $directEmissions,
-				'indirect_emissions' => $inDirectEmissions,
-				'other_indirect_emissions' => $otherInDirectEmissions
+				'direct_emissions' => [
+					'tco2e' =>$directEmissions,
+					'percent' =>round($directEmissions*100/$max,2)
+				] ,
+				'indirect_emissions' => [
+					'tco2e' =>$inDirectEmissions,
+					'percent' =>round($inDirectEmissions*100/$max,2)
+				],
+				'other_indirect_emissions' => [
+					'tco2e' =>$otherInDirectEmissions,
+					'percent' =>round($otherInDirectEmissions*100/$max,2)
+				]
 			];
 			$dataSource->put('info', $this->addInfo($array));
+			// dd($dataSource);
 		}
 		return $dataSource;
 	}
