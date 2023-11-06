@@ -14,6 +14,7 @@ class ManageReportsController extends AbstractManageLibController
     protected function getColumns()
     {
         $packages = JsonControls::getPackages();
+        $breadcrumbGroups = JsonControls::getBreadcrumbGroup();
         // $subPackages = JsonControls::getSubPackages();
         // $subPackages = Entities::getAllPluralNames();
         return   [
@@ -41,6 +42,12 @@ class ManageReportsController extends AbstractManageLibController
                 "cbbDataSource" => $packages,
                 // "sortBy" => "value",
                 "properties" => ["strFn" => "appTitle"],
+            ],
+            [
+                'dataIndex' => "breadcrumb-group",
+                'renderer' => 'dropdown',
+                'editable' => true,
+                "cbbDataSource" => $breadcrumbGroups,
             ],
             [
                 'dataIndex' => 'top_title',

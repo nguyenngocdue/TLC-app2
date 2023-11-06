@@ -224,5 +224,12 @@
         "pj_shipment",
         "pj_unit"
     ],
-    "view_all_tab_taxonomy": "status"
+    "view_all_tab_taxonomy": "status",
+    "breadcrumb_group": [
+        "",
+        "production",
+        "accounting",
+        "finance",
+        "planning"
+    ]
 }

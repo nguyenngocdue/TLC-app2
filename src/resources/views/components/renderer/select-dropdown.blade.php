@@ -8,7 +8,10 @@
             </div>
             @foreach( $lines as $line)
                 <li title="{{$line['tooltip'] ?? ''}}">
-                    <a href="{{$line['href']}}" class="text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{$line['title']}}</a>
+                    <a href="{{$line['href']}}" class="text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                        <i class="{{$line['icon']}}"></i>
+                        {{$line['title']}}
+                    </a>
                 </li>
             @endforeach
         @endforeach

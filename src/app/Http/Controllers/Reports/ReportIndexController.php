@@ -28,10 +28,13 @@ class ReportIndexController extends Controller
         $routes = array_filter($reports, fn ($i) => $i['singular'] == $singular);
         $result = [];
         foreach ($routes as $route) {
-            if ($lib[$route['name']]['hidden'] ?? false) continue;
+            $itemConfig = $lib[$route['name']];
+
+            if ($itemConfig['hidden'] ?? false) continue;
             $result[$route['reportType']][$route['mode']] = [
                 "path" => $route['name'],
-                "title" => $lib[$route['name']]['title'] ?? "Untitled Report",
+                "title" => $itemConfig['title'] ?? "Untitled Report",
+                "breadcrumbGroup" => $itemConfig["breadcrumb-group"],
             ];
         }
         return $result;

@@ -3,6 +3,7 @@
         "name": "document-eco_sheet_010",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "ECO Summary Report",
         "title": "ECO Summary Report"
     },
@@ -10,6 +11,7 @@
         "name": "document-ghg_sheet_010",
         "package_tab": "report",
         "package": "compliance",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "CO2 Emission Summary Report"
     },
@@ -17,6 +19,7 @@
         "name": "document-ghg_sheet_020",
         "package_tab": "report",
         "package": "compliance",
+        "breadcrumb-group": null,
         "top_title": "CO2 Report",
         "title": "Annual CO2 Emission Report"
     },
@@ -24,6 +27,7 @@
         "name": "document-ghg_sheet_030",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "CO2 Emission Comparison Report"
     },
@@ -31,6 +35,7 @@
         "name": "document-prod_sequence_010",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": "finance",
         "top_title": "Target vs. Actual",
         "title": "Target vs. Actual"
     },
@@ -38,14 +43,16 @@
         "name": "document-prod_sequence_020",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "Process Analysis for Production Order",
-        "title": "Process Analysis by Production Order",
+        "title": "(OBSOLETE) Process Analysis by Production Order",
         "hidden": "true"
     },
     "document-prod_sequence_030": {
         "name": "document-prod_sequence_030",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": "production",
         "top_title": "Work Completion Percentage",
         "title": "Work Completion Percentage"
     },
@@ -53,6 +60,7 @@
         "name": "document-prod_sequence_040",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": "production",
         "top_title": "Benchmark Report",
         "title": "Benchmark Report"
     },
@@ -60,6 +68,7 @@
         "name": "document-prod_sequence_050",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": "production",
         "top_title": "Process Analysis for Production Routing Link",
         "title": "Process Analysis by Production Routing Link"
     },
@@ -67,6 +76,7 @@
         "name": "document-prod_sequence_060",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": null,
         "hidden": "true"
@@ -75,6 +85,7 @@
         "name": "document-qaqc_ncr_010",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "NCR Report in Chart",
         "title": "NCR Report in Chart"
     },
@@ -82,6 +93,7 @@
         "name": "document-qaqc_wir_010",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "QC Acceptance Report",
         "title": "QC Acceptance Report"
     },
@@ -89,6 +101,7 @@
         "name": "register-qaqc_insp_chklst_020",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "Inspection Matrix"
     },
@@ -96,6 +109,7 @@
         "name": "report-eco_sheet_110",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "ECO Labor Impacts"
     },
@@ -103,6 +117,7 @@
         "name": "report-eco_sheet_120",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "ECO Material Add"
     },
@@ -110,6 +125,7 @@
         "name": "report-eco_sheet_130",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "ECO Material Remove"
     },
@@ -117,6 +133,7 @@
         "name": "report-eco_sheet_140",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "ECO Sign Off"
     },
@@ -124,6 +141,7 @@
         "name": "report-ghg_sheet_010",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "CO2 Emission Report",
         "title": "Monthly CO2 Emission Report"
     },
@@ -131,6 +149,7 @@
         "name": "report-hr_overtime_request_010",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "Overtime Monthly Report"
     },
@@ -138,6 +157,7 @@
         "name": "report-hr_overtime_request_020",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "Overtime Daily Report"
     },
@@ -145,6 +165,7 @@
         "name": "report-hr_timesheet_line_010",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "Project\/Date"
     },
@@ -152,6 +173,7 @@
         "name": "report-hr_timesheet_line_020",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "Employee\/Project"
     },
@@ -159,6 +181,7 @@
         "name": "report-hr_timesheet_line_030",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "Employee\/Date"
     },
@@ -166,6 +189,7 @@
         "name": "report-hr_timesheet_line_040",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "Team\/Project"
     },
@@ -173,6 +197,7 @@
         "name": "report-hr_timesheet_line_100",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "Timesheet Lines"
     },
@@ -180,6 +205,7 @@
         "name": "report-hse_incident_report_010",
         "package_tab": "report",
         "package": "hr_&_admin",
+        "breadcrumb-group": null,
         "top_title": "HSE KPI Report",
         "title": "HSE Key Performance Indicator"
     },
@@ -187,6 +213,7 @@
         "name": "report-prod_sequence_010",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": "accounting",
         "top_title": "Labor Cost Timesheet",
         "title": "Labor Cost Timesheet"
     },
@@ -194,6 +221,7 @@
         "name": "report-prod_sequence_020",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": "accounting",
         "top_title": "Labor Cost Timesheet Detail",
         "title": "Labor Cost Timesheet Detail"
     },
@@ -201,6 +229,7 @@
         "name": "report-prod_sequence_030",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": "finance",
         "top_title": "Sequence-based Timesheet",
         "title": "Target vs. Actual Detail"
     },
@@ -208,6 +237,7 @@
         "name": "report-prod_sequence_040",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": "planning",
         "top_title": "Production Orders Completion Time Statistics",
         "title": "Production Orders Completion Time Statistics"
     },
@@ -215,6 +245,7 @@
         "name": "report-prod_sequence_050",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": "planning",
         "top_title": "Production Routing Links Completion Time Statistics",
         "title": "Production Routing Links Completion Time Statistics"
     },
@@ -222,6 +253,7 @@
         "name": "report-prod_sequence_060",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": null,
         "hidden": "true"
@@ -230,6 +262,7 @@
         "name": "report-prod_sequence_110",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "Labor Cost Timesheet Line",
         "hidden": "true"
@@ -238,6 +271,7 @@
         "name": "report-qaqc_ncr_010",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "NCR Report in Detail",
         "title": "NCR Report in Detail"
     },
@@ -245,6 +279,7 @@
         "name": "report-site_daily_assignment_010",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "Site Daily Assignment",
         "title": "Site Team\/Date"
     },
@@ -252,6 +287,7 @@
         "name": "report-site_daily_assignment_020",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "Site Daily Assignment",
         "title": "Task\/Employee"
     },
@@ -259,6 +295,7 @@
         "name": "report-site_daily_assignment_110",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "Site Daily Assignment",
         "title": "Site Daily Assignment Lines 01",
         "hidden": "true"
@@ -267,6 +304,7 @@
         "name": "report-site_daily_assignment_120",
         "package_tab": "report",
         "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "Site Daily Assignment",
         "title": "Site Daily Assignment Lines 02",
         "hidden": "true"

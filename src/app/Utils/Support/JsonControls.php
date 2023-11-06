@@ -34,6 +34,10 @@ class JsonControls
     {
         return self::getAll()['packages'];
     }
+    public static function getBreadcrumbGroup()
+    {
+        return self::getAll()['breadcrumb_group'];
+    }
     public static function getSubPackages()
     {
         return self::getAll()['sub_packages'];

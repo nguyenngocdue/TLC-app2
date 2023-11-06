@@ -31,14 +31,15 @@ class Breadcrumb extends Component
     private function makeUpReports($allReports)
     {
         if (empty($allReports)) return [];
-        // dump($allReports);
         $result = [];
         foreach ($allReports as $reportType => $reports) {
             foreach ($reports as $mode => $report) {
-                $result[$reportType][] = [
+                $breadcrumbGroup = $report['breadcrumbGroup'] ?: "General";
+                $result[$breadcrumbGroup][] = [
                     'title' => $report['title'],
                     'href' => route($report['path']),
                     'mode' => $reportType . " " . $mode,
+                    'icon' => $reportType == 'report' ? "fa-duotone fa-table-cells text-green-400" : "fa-duotone fa-file-chart-column text-blue-400",
                 ];
             }
         }
