@@ -69,8 +69,8 @@
         "package_tab": "report",
         "package": "project_management",
         "breadcrumb-group": "production",
-        "top_title": "Process Analysis for Production Routing Link",
-        "title": "Process Analysis by Production Routing Link"
+        "top_title": "PPR Analysis",
+        "title": "PPR Analysis"
     },
     "document-prod_sequence_060": {
         "name": "document-prod_sequence_060",
