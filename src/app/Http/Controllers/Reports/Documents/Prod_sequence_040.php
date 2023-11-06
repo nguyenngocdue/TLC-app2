@@ -15,6 +15,7 @@ use App\Models\Sub_project;
 use App\Utils\Support\Report;
 use App\View\Components\Renderer\Report\TraitCreateDataSourceWidget;
 use App\View\Components\Renderer\Report\TraitParamsInManageWidget;
+use App\View\Components\Renderer\ViewAllMatrixFilter\ProdRoutingFilter;
 
 class Prod_sequence_040 extends Report_ParentDocument2Controller
 {
@@ -38,50 +39,60 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
     protected $pageLimit = 100000;
     protected $optionPrint = "landscape";
 
+
     public function getSqlStr($params)
     {
     
-    $valOfParams = $this->generateValuesFromParamsReport($params);
-    // dd($valOfParams);
-    $sql = "    SELECT
-                    sp.project_id AS project_id
-                    ,sp.id AS sub_project_id
-                    ,pj.name AS project_name
-                    ,sp.name AS sub_project_name
-                    ,prl.id AS prod_routing_link_id
-                    ,prl.name AS prod_routing_link_name
-                    ,pr.id AS prod_routing_id
-                    ,pr.name AS prod_routing_name
-                    ,pd.id AS prod_discipline_id
-                    ,pd.name AS prod_discipline_name
-                    
-                    ,ROUND(AVG(pose.worker_number),2) AS avg_worker_number
-                    ,ROUND(AVG(pose.total_uom),2) AS avg_total_uom
-                    ,ROUND(AVG(pose.total_hours*60),2) AS avg_min
-                    ,ROUND(AVG(pose.total_hours*60/(pose.total_uom)),2) AS avg_min_uom
+        $valOfParams = $this->generateValuesFromParamsReport($params);
+        
+        $prodRoutingLinks = Prod_routing_link::all();
+        $indexProdRoutingLinks = [];
+        foreach($prodRoutingLinks as $items){
+            if($items->getScreensShowMeOn()->toArray())$indexProdRoutingLinks[$items->id] = $items->name;
+        }
+        $idRoutingLinks = array_keys($indexProdRoutingLinks);
+        $strIdRoutingLinks = implode(', ', $idRoutingLinks);
 
-                    FROM sub_projects sp
-                        JOIN projects pj ON pj.id = sp.project_id
-                        JOIN prod_orders po ON po.sub_project_id = sp.id
-                        LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
-                        LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
-                        LEFT JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
-                        LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id AND prd.prod_routing_id = pr.id
-                        JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
-                        WHERE 1 = 1
-                        #AND po.sub_project_id IN  (82, 21)
-                       # AND pr.id IN (6)
-                        #AND prl.id IN (11)
-                        AND pose.deleted_by IS NULL";
+        self::getProdRoutingLinks([]);
+        $sql = "    SELECT
+                        sp.project_id AS project_id
+                        ,sp.id AS sub_project_id
+                        ,pj.name AS project_name
+                        ,sp.name AS sub_project_name
+                        ,prl.id AS prod_routing_link_id
+                        ,prl.name AS prod_routing_link_name
+                        ,pr.id AS prod_routing_id
+                        ,pr.name AS prod_routing_name
+                        ,pd.id AS prod_discipline_id
+                        ,pd.name AS prod_discipline_name
+                        
+                        ,ROUND(AVG(pose.worker_number),2) AS avg_worker_number
+                        ,ROUND(AVG(pose.total_uom),2) AS avg_total_uom
+                        ,ROUND(AVG(pose.total_hours*60),2) AS avg_min
+                        ,ROUND(AVG(pose.total_hours*60/(pose.total_uom)),2) AS avg_min_uom
 
- if (isset($valOfParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id IN ({{sub_project_id}})";
- if (isset($valOfParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id IN ({{prod_routing_id}})";
- if (isset($valOfParams['prod_discipline_id']) && $valOfParams['prod_discipline_id']) $sql .= "\n AND pd.id IN ({{prod_discipline_id}})";
- if (isset($valOfParams['prod_routing_link_id']) && $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ({{prod_routing_link_id}})";
+                        FROM sub_projects sp
+                            JOIN projects pj ON pj.id = sp.project_id
+                            JOIN prod_orders po ON po.sub_project_id = sp.id
+                            LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
+                            LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
+                            LEFT JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
+                            LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id AND prd.prod_routing_id = pr.id
+                            JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
+                            WHERE 1 = 1
+                            #AND po.sub_project_id IN  (82, 21)
+                            # AND pr.id IN (6)
+                            #AND prl.id IN (11)
+                            AND pose.deleted_by IS NULL
+                            AND prl.id IN ($strIdRoutingLinks)";
+    if (isset($valOfParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id IN ({{sub_project_id}})";
+    if (isset($valOfParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id IN ({{prod_routing_id}})";
+    if (isset($valOfParams['prod_discipline_id']) && $valOfParams['prod_discipline_id']) $sql .= "\n AND pd.id IN ({{prod_discipline_id}})";
+    if (isset($valOfParams['prod_routing_link_id']) && $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ({{prod_routing_link_id}})";
 
-                $sql .= "\n GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id
-                ORDER BY project_name, sub_project_name, prod_discipline_name, prod_routing_link_name";
-        return $sql;
+                    $sql .= "\n GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id
+                    ORDER BY project_name, sub_project_name, prod_discipline_name, prod_routing_link_name";
+            return $sql;
     }
 
 
@@ -222,6 +233,7 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
     }
 
     public function getProdRoutingLinks($data){
+
         if(empty($data)) return [];
         return array_column($data,'prod_routing_link_name', 'prod_routing_link_id' );
     }
