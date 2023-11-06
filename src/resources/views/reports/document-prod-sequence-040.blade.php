@@ -87,7 +87,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                         <x-renderer.heading level=5 xalign='left' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>
                           Production Routing Link: <strong>{{$prodRoutingLink[$idRoutingLink]}}</strong></x-renderer.heading>
                     </div>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-3 gap-2">
                         @foreach($widgets as $keyInManage => $values)
                             <div class="col-span-1">
                                 <div class="p-6">

@@ -54,7 +54,8 @@
         "package": "project_management",
         "breadcrumb-group": "production",
         "top_title": "Work Completion Percentage",
-        "title": "Work Completion Percentage"
+        "title": "Work Completion Percentage",
+        "hidden": "true"
     },
     "document-prod_sequence_040": {
         "name": "document-prod_sequence_040",
@@ -69,8 +70,8 @@
         "package_tab": "report",
         "package": "project_management",
         "breadcrumb-group": "production",
-        "top_title": "Process Analysis for Production Routing Link",
-        "title": "Process Analysis by Production Routing Link"
+        "top_title": "PPR Analysis",
+        "title": "PPR Analysis"
     },
     "document-prod_sequence_060": {
         "name": "document-prod_sequence_060",

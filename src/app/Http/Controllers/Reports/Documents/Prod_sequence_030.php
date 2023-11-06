@@ -49,15 +49,18 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                     tb1.*
                     ,count_po_finished
                     ,count_original_po
+                    ,count_po_not_applicable
+                    ,count_original_po - count_po_not_applicable AS total_prod_order_finished
                     ,FORMAT(count_po_finished*100/tb2.count_original_po,2) AS finished_progress
                     #,100 AS finished_progress
                     ,prd.order_no AS order_no
+                    ,prod_sequence_status
                     FROM (SELECT
                     pj.name AS project_name,
                     sp.project_id AS project_id,
                     sp.id AS sub_project_id,
                     sp.name AS sub_project_name,
-                    GROUP_CONCAT(po.id, ',')  AS prod_order_id,
+                    GROUP_CONCAT(po.id)  AS prod_order_id,
                     pr.id AS prod_routing_id,
                     pr.name AS prod_routing_name,
                     ps.status AS prod_sequence_status,
@@ -65,7 +68,8 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                     prl.name prod_routing_link_name,
                     prl.prod_discipline_id AS prod_discipline_id,
                     pdis.name AS prod_discipline_name,
-                    COUNT(DISTINCT po.id) AS count_po_finished,
+                    COUNT(DISTINCT po.id)  AS count_po_finished,
+                    COUNT(CASE WHEN ps.status = 'not_applicable' THEN ps.status ELSE 0 END ) AS count_po_not_applicable,
                     prd.order_no AS order_no
                     FROM 
                         sub_projects sp, 
@@ -86,14 +90,14 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
         if (Report::checkValueOfField($valOfParams, 'prod_discipline_id'))  $sql .= "\n AND prl.prod_discipline_id IN ({{prod_discipline_id}})";
         // if (isset($valOfParams['prod_routing_link_id'])) $sql .= "\n AND prl.id IN({{prod_routing_link_id}}) ";
 
-        $sql .= "\n AND ps.status = 'finished'
+        $sql .= "\n AND ps.status IN ('finished', 'not_applicable')
                     AND po.sub_project_id = sp.id
                     AND po.prod_routing_id = pr.id
                     AND ps.prod_routing_link_id = prl.id
                     AND ps.prod_order_id = po.id
                     AND prl.id = ps.prod_routing_link_id
                     AND pdis.id = prl.prod_discipline_id
-                    GROUP BY prod_routing_link_id, prod_routing_id ) AS tb1
+                    GROUP BY prod_routing_link_id, prod_routing_id, prod_sequence_status ) AS tb1
                     LEFT JOIN prod_routing_details prd ON prd.prod_routing_id = tb1.prod_routing_id AND prd.prod_routing_link_id = tb1.prod_routing_link_id
                     LEFT JOIN (
                             SELECT
@@ -160,7 +164,7 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
 
     private function updateDataForPivotChart($dataSource, $params)
     {
-        // dd($dataSource);
+        // dump($dataSource);
         $items = array_values($dataSource->toArray());
 
         $groupItems = Report::groupArrayByKey($items,'prod_discipline_id');
@@ -173,9 +177,8 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
         $collectionItems = [implode('_',array_keys($groupItems)) => $collectionItems];
 
         foreach($collectionItems as $key => $values){
-            // dd($values);
-            $firstItem = reset($values);
             $infoRoutingLinks = array_column($values, 'finished_progress', 'prod_routing_link_name');
+            // dd($infoRoutingLinks);
             // information for meta data
             $labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($infoRoutingLinks));
             $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($infoRoutingLinks));
@@ -301,10 +304,26 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                     "width" => 300,
                 ],
                 [
+                    "title" => "Status",
+                    "dataIndex" => "prod_sequence_status",
+                    "align" => "left",
+                    "width" => 300,
+                ],
+                [
                     "title" => "Total Production Orders",
                     "dataIndex" => "count_original_po",
                     "align" => "right",
                     "width" => 137,
+                ],
+                [
+                    "dataIndex" => "total_prod_order_finished",
+                    "align" => "right",
+                    "width" => 50,
+                ],
+                [
+                    "dataIndex" => "count_po_not_applicable",
+                    "align" => "right",
+                    "width" => 50,
                 ],
                 [
                     "title" => "Number of Finished Production Orders",
@@ -354,9 +373,11 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
 
     public function changeDataSource($dataSource, $params)
     {
+        // dump($dataSource);
         if(empty($dataSource->toArray())) return [];
         $data = $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
         $prodRoutingLinkFinished = array_column($data, 'prod_routing_link_name', 'prod_routing_link_id');
+
         
         $prodRoutingLinks = $this->getProdRoutingLinks($params);
         $firstItem = reset($data);
@@ -372,7 +393,15 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
         }
         $data = collect($data);
         $dataSource = self::updateDataForPivotChart($data, $params);
-        // dd($dataSource);
+        
+
+        $arrayNA = [];
+        foreach($data as $item){
+            if ($item->count_original_po === $item->count_po_finished && $item->prod_sequence_status === 'not_applicable'){
+                $arrayNA[] =  $item;
+            }
+        }
+        // dd($arrayNA);
         return $dataSource;
     }
 }
