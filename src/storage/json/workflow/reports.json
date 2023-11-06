@@ -35,7 +35,7 @@
         "name": "document-prod_sequence_010",
         "package_tab": "report",
         "package": "project_management",
-        "breadcrumb-group": "finance",
+        "breadcrumb-group": "production",
         "top_title": "Target vs. Actual",
         "title": "Target vs. Actual"
     },
@@ -62,16 +62,16 @@
         "package_tab": "report",
         "package": "project_management",
         "breadcrumb-group": "production",
-        "top_title": "Benchmark Report",
-        "title": "Benchmark Report"
+        "top_title": "Project Benchmark Report",
+        "title": "Project Benchmark Report"
     },
     "document-prod_sequence_050": {
         "name": "document-prod_sequence_050",
         "package_tab": "report",
         "package": "project_management",
         "breadcrumb-group": "production",
-        "top_title": "PPR Analysis",
-        "title": "PPR Analysis"
+        "top_title": "PPR Daily Progress",
+        "title": "PPR Daily Progress"
     },
     "document-prod_sequence_060": {
         "name": "document-prod_sequence_060",
