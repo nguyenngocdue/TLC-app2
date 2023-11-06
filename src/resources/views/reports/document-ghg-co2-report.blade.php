@@ -31,8 +31,9 @@ $info = $tableDataSource['info'];
             $layout = 'w-[1400px] min-h-[940px]';
             break;
             case 'portrait':
+                $layout = 'w-[1000px] min-h-[1450px]';
+                break;
             default:
-                $layout = 'w-[1000px] min-h-[880px]';
                 break;
         }
 @endphp
@@ -72,8 +73,8 @@ $info = $tableDataSource['info'];
         </div>
         <x-renderer.page-break />
         {{-- chart 1 --}}
-        <div class="relative">
-            <div style='' class="{{$layout}} items-center bg-white box-border p-8">
+        <div class="relative {{$layout}} items-center bg-white box-border p-8">
+            <div style='' class="">
                 <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
                 <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
                     <div class="w-full flex px-4">
@@ -117,10 +118,10 @@ $info = $tableDataSource['info'];
                     <x-print.header6 :itemsShow="['website']"/>
             </div>
         </div>
-        <div class="relative">
             <x-renderer.page-break />
+        <div class="relative {{$layout}} items-center bg-white box-border p-8 ">
             {{-- chart 2 --}}
-            <div style='' class="{{$layout}} items-center bg-white box-border p-8 ">
+            <div style='' class="">
                 <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
                 <div class=" grid-rows-1 pt-4 flex justify-center flex-col items-center">
                     <div class="w-full px-6">
@@ -131,7 +132,7 @@ $info = $tableDataSource['info'];
                         accounted for <strong>{{$info['indirect_emissions']}}</strong> tCO2e and other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']}}</strong> tCO2e.</x-renderer.heading>
                 </div>
             </div>
-            <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
+            <div class="w-full pb-0 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
                 <x-print.header6 :itemsShow="['website']"/>
             </div>
         </div>
