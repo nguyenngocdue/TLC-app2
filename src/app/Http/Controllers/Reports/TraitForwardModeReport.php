@@ -26,7 +26,8 @@ trait TraitForwardModeReport
                 (new UpdateUserSettings())($request);
                 return redirect($request->getPathInfo());
             }
-            return redirect(route($routeName . '_' . $mode));
+            // return redirect(route($routeName . '_' . $mode));
+            return redirect(route($routeName));
         }
         
         $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport2($request));

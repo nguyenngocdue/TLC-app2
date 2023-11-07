@@ -34,6 +34,7 @@ abstract class ParentParamReports extends Component
     {
         $hasListenTo = $this->hasListenTo;
         if($hasListenTo) {
+            // dump($this->selected);
             $params = $this->getListenToParamsReport();
             return view('components.controls.has-data-source.' . $this->control, $params);
         } else {

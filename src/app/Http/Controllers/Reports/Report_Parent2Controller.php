@@ -220,8 +220,7 @@ abstract class Report_Parent2Controller extends Controller
         $routeName = $request->route()->action['as'];
         $entity = CurrentPathInfo::getEntityReport($request);
         $params = $this->getParams($request);
-        // dd($params);
-        // $params = $this->getDefaultValueParams($params, $request);
+        // dump($params);
 
         if (!$request->input('page') && !empty($input)) {
             return $this->forwardToMode($request, $params);
@@ -260,6 +259,7 @@ abstract class Report_Parent2Controller extends Controller
         $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
         $optionPrint = $params['optionPrintLayout'] ?? $this->optionPrint;
         $tableTrueWidth = $this->overTableTrueWidth && $optionPrint === 'landscape' ? 0 : $this->tableTrueWidth;
+        // dump($params);
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,
@@ -285,6 +285,7 @@ abstract class Report_Parent2Controller extends Controller
             'classListOptionPrint' => ClassList::DROPDOWN,
             'optionPrint' => $optionPrint,
             'layout' => $this->layout($optionPrint),
+            'childrenMode' => $params['children_mode'] ?? 'not_children',
         ] + $dataRenderDocReport);
     }
 

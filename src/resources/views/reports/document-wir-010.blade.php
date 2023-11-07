@@ -16,10 +16,50 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
 @endphp
 {{-- @dd($tableDataSource); --}}
-<div class="px-4">
-    @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout2')
+{{-- @dd($params) --}}
+<div class="grid grid-cols-12 gap-1">
+        <div class="col-span-2">
+            <div class="no-print justify-end pl-4 pt-5">
+                <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
+                    <x-reports.dropdown6    
+                        title="Mode" 
+                        name="children_mode" 
+                        routeName="{{$routeName}}"
+                        :allowClear="false"
+                        :dataSource="['filter_by_year' => 'Filter by Year','filter_by_month' => 'Filter by Month']" 
+                        typeReport='{{$typeReport}}'
+                        entity='{{$entity}}'
+                        modeOption='{{$mode}}'
+                        :itemsSelected="$params" 
+                        />
+                </div>
+            </div>
+        </div>
+
+<script type="text/javascript">
+    var param = {!! json_encode($params) !!}
+    var childrenMode = param.children_mode
+    document.addEventListener('DOMContentLoaded', function() {
+        if (childrenMode == 'filter_by_month') {
+            const year = document.getElementById('name_year');
+            const week = document.getElementById('name_weeks_of_year');
+            year.style.display = 'none';
+            week.style.display = 'none';
+        } else {
+            const month = document.getElementById('name_month');
+            month.style.display = 'none';
+        }
+    });
+</script>
+        <div class="col-span-10">
+            <div class="px-4">
+                @include('components.reports.shared-parameter')
+                @include('components.reports.show-layout2')
+            </div>
+        </div>
 </div>
+
+
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
@@ -49,3 +89,19 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     </div>
 </div>
 @endsection
+
+{{-- <script type="text/javascript">
+    var param = {!! json_encode($params) !!}
+    var modeSelect = param.mode_select
+    document.addEventListener('DOMContentLoaded', function() {
+        if (modeSelect == 1) {
+            const year = document.getElementById('name_year');
+            const week = document.getElementById('name_weeks_of_year');
+            year.style.display = 'none';
+            week.style.display = 'none';
+        } else {
+            const month = document.getElementById('name_month');
+            month.style.display = 'none';
+        }
+    });
+</script> --}}

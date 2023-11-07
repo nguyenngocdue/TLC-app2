@@ -1,5 +1,6 @@
 @php
 $route = $routeName ? route($routeName) : "";
+//dump($modeSelect)
 @endphp
 <form action="{{$route}}" id="{{$entity}}" method="GET">
     <div class="grid grid-row-1 w-full">
@@ -10,6 +11,9 @@ $route = $routeName ? route($routeName) : "";
             <input type="hidden" name='mode_option' value="{{$modeOption}}">
             <input type="hidden" name='form_type' value="updateParamsReport">
             <input type="hidden" name='optionPrintLayout' value="{{$optionPrint}}">
+            {{-- set value when param has slect mode --}}
+            <input type="hidden" name='children_mode' value="{{$childrenMode}}">
+            
             @if (!reset($columns))
             <div class="col-span-12">
                 <x-feedback.alert type='warning' message="There are no filters to render here."></x-feedback.alert>
@@ -26,7 +30,7 @@ $route = $routeName ? route($routeName) : "";
             $hasListenTo = $value['hasListenTo'] ?? false;
             $singleDatePicker = $value['singleDatePicker'] ?? false;
             @endphp
-            <div class="col-span-3">
+            <div id="name_{{$name}}" class="col-span-3 {{$name}}">
                 @switch($renderer)
                 @case("drop_down")
                 <x-reports.dropdown7 :infoParam="$value" hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />
@@ -65,5 +69,4 @@ $route = $routeName ? route($routeName) : "";
     function resetFilter() {
         $('[id="' + "{{$entity}}" + '"]').append('<input type="hidden" name="form_type" value="resetParamsReport">')
     }
-
 </script>

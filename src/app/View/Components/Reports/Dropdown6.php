@@ -13,13 +13,19 @@ class Dropdown6 extends Component
         private $itemsSelected = [],
         private $title = "No title",
         private $allowClear = false,
-        private $formName = ''
+        private $formName = '',
+        private $typeReport = '',
+        private $entity ='',
+        private $routeName = '',
+        private $modeOption ='',
+
     ) {
     }
 
 
     public function render()
     {
+        // dd($this->name);
         return view('components.reports.dropdown6', [
             'dataSource' =>  $this->dataSource,
             'name' => $this->name,
@@ -27,8 +33,11 @@ class Dropdown6 extends Component
             'name' => $this->name,
             'title' => $this->title,
             'allowClear' => $this->allowClear,
-            'formName' => $this->formName
-
+            'formName' => $this->formName,
+            'typeReport' => $this->typeReport,
+            'routeName' => $this->routeName,
+            'modeOption' => $this->modeOption,
+            'entity' => $this->entity
         ]);
     }
 }
