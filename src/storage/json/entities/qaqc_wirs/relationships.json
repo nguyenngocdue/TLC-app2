@@ -12,7 +12,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getSubProject": {
         "name": "_getSubProject",
@@ -27,7 +28,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdRouting": {
         "name": "_getProdRouting",
@@ -42,7 +44,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getProdOrder": {
         "name": "_getProdOrder",
@@ -57,7 +60,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDiscipline": {
         "name": "_getDiscipline",
@@ -72,7 +76,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getWirDescription": {
         "name": "_getWirDescription",
@@ -87,7 +92,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getPriority": {
         "name": "_getPriority",
@@ -102,7 +108,8 @@
         "filter_columns": "field_id",
         "filter_values": "135",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getAssignee1": {
         "name": "_getAssignee1",
@@ -117,7 +124,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -132,7 +140,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -147,7 +156,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -162,7 +172,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getLines": {
         "name": "_getLines",
@@ -177,7 +188,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
@@ -192,7 +204,8 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_comment_inspector_decision": {
         "name": "_comment_inspector_decision",
@@ -207,13 +220,14 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getNcrs": {
         "name": "_getNcrs",
         "relationship": "morphMany",
         "control_name": "getNcrs",
-        "renderer_view_all": "agg_count",
+        "renderer_view_all": "id_status_link",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "many_lines",
@@ -222,6 +236,7 @@
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": ""
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }

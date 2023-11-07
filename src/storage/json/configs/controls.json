@@ -80,6 +80,7 @@
         "avatar_user",
         "column",
         "column_link",
+        "id_status_link",
         "parent_link",
         "thumbnails"
     ],

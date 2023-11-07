@@ -6,7 +6,11 @@ use App\BigThink\ModelExtended;
 
 class Wir_description extends ModelExtended
 {
-    protected $fillable = ["name", "description", "slug", "prod_discipline_id", "def_assignee", "owner_id"];
+    protected $fillable = [
+        "name", "description", "slug",
+        "prod_discipline_id", "def_assignee", "owner_id",
+        "wir_weight",
+    ];
     protected $table = "wir_descriptions";
     protected static $statusless = true;
 

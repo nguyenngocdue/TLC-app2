@@ -11,18 +11,20 @@
         </div>
     </div>
 @elseif (is_string($content) | is_numeric($content))
+@php
+    $content = str_replace("\n", "<br/>", $content);
+@endphp
 <div class='col-span-{{$colSpan}} grid'>
     <div class='grid grid-rows-1'>
         <div class='grid grid-cols-12 text-right '>
             @if ($newLine)
-            
                 @if(!$hiddenLabel)
                     <label class='p-2 text-base font-medium h-full w-full flex col-span-12 items-center justify-start col-start-1'>{{$label}}</label>
                 @endif
                 @if ($control == 'toggle')
                 <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>{{$content == "1" ? "Yes" : "No"}}</span>
                 @else
-                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>{{$content}}</span>
+                <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>{!!$content!!}</span>
                 @endif
             @else
                 @if(!$hiddenLabel)
@@ -31,7 +33,7 @@
                 @if ($control == 'toggle')
                     <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>{{$content == "1" ? "Yes" : "No"}}</span>
                 @else
-                    <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>{{$content}}</span>
+                    <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>{!!$content!!}</span>
                 @endif
             @endif
 

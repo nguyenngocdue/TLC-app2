@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->unsignedBigInteger('prod_discipline_id')->nullable();
+            $table->unsignedInteger('wir_weight');
             $table->unsignedBigInteger('def_assignee');
             $table->appendCommonFields();
         });

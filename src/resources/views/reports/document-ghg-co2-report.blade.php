@@ -23,7 +23,7 @@ $info = $tableDataSource['info'];
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    {{-- @include('components.reports.show-layout2') --}}
+    @include('components.reports.show-layout2')
 </div>
 @php
         $layout = '';
@@ -142,13 +142,14 @@ $info = $tableDataSource['info'];
                     </div>
                     <ul class="list-disc flex flex-col items-start">
                         <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e.</x-renderer.heading>
+                        {{-- @dd($info) --}}
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['direct_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                         <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Indirect emissions from purchased energy accounted for <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e.</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Indirect emissions from purchased energy accounted for <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                         <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e.</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['other_indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                     </ul>
                 </div>
@@ -159,7 +160,7 @@ $info = $tableDataSource['info'];
         </div>
         <x-renderer.page-break />
         {{-- CO2 Emission Summary Report --}}
-        <div class="{{-- {{$layout}} --}}{{-- relative --}} w-[1400px] min-h-[990px] items-center bg-white box-border px-8 py-6 ">
+        <div class="{{-- {{$layout}} --}}{{-- relative --}} w-[1400px] min-h-[940px] items-center bg-white box-border px-8 py-6 ">
             <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>CO2 Emission Summary Report</x-renderer.heading>
             <div class="">
                 @include('reports.document-ghg-summary-report-only-table')
