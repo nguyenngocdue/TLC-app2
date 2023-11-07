@@ -1,3 +1,4 @@
+{{-- @props(["a"]); --}}
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
@@ -22,7 +23,7 @@ $info = $tableDataSource['info'];
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout2')
+    {{-- @include('components.reports.show-layout2') --}}
 </div>
 @php
         $layout = '';
@@ -42,24 +43,24 @@ $info = $tableDataSource['info'];
 <br />
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div style='' class="{{$layout}} items-center bg-white box-border p-8 relative">
+        <div style='' class="{{$layout}} items-center bg-white box-border px-8 py-6 relative">
             <x-print.header6 :itemsShow="['logo']"/>
             <div class="py-5">
                 <x-renderer.heading level=1 xalign='center'>CO2 Emission Report</x-renderer.heading>
                 <x-renderer.heading level=3 xalign='center'>for TLC Modular Construction Limited Liability Company</x-renderer.heading>
             </div>
-            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Company's carbon footprint in the year {{$year}}</x-renderer.heading>
+            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Company's carbon footprint in the year {{$year}}</x-renderer.heading>
             <div class="grid grid-rows-1 pt-20">
                 <div class="grid grid-cols-12 text-center">
                     <div class="col-span-6 m-auto">
-                        <div class='w-96 h-96 bg-green-700 p-3 flex justify-between flex-col '>
+                        <div class='w-96 h-96 border-2 bg-green-700 p-3 flex justify-between flex-col '>
                             <h3 class='text-3xl font-semibold text-white'>Company Carbon Footprint</h3>
                             <h4 class='text-6xl font-semibold text-white'>{{$data['total_emission']}}</h4>
                             <h2 class='text-lg text-white'>tCO2e</h2>
                         </div>
                     </div>
                     <div class="col-span-6 m-auto">
-                        <div class='w-96 h-96 bg-violet-600 p-3 flex justify-between flex-col '>
+                        <div class='w-96 h-96 border-2 bg-violet-600 p-3 flex justify-between flex-col '>
                             <h3 class='text-3xl font-semibold text-white'>Carbon Footprint per Employee</h3>
                             <h4 class='text-6xl font-semibold text-white'>{{$data['co2_footprint_employee']}}</h4>
                             <h2 class='text-lg text-white'>average tCO2e/FTE</h2>
@@ -73,13 +74,13 @@ $info = $tableDataSource['info'];
         </div>
         <x-renderer.page-break />
         {{-- chart 1 --}}
-        <div class="relative {{$layout}} items-center bg-white box-border p-8">
+        <div class="relative {{$layout}} items-center bg-white box-border px-8 py-6">
             <div style='' class="">
-                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
+                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Emission source category chart</x-renderer.heading>
                 <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
                     <div class="w-full flex px-4">
                         <div class="w-1/2 px-4">
-                            <x-renderer.report.pivot-chart key="carbon_footprint_1" :dataSource="$pivotChart1" showValue={{true}}></x-renderer.report.pivot-chart>
+                            <x-renderer.report.pivot-chart key="carbon_footprint_1" :dataSource="$pivotChart1" showValue={{false}}></x-renderer.report.pivot-chart>
                         </div>
                         <div class="m-auto">
                             @php
@@ -110,8 +111,19 @@ $info = $tableDataSource['info'];
                             </x-renderer.card>
                         </div>
                     </div>
-                    <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold p-4'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']}}</strong> tCO2e. Indirect emissions from purchased energy
-                        accounted for <strong>{{$info['indirect_emissions']}}</strong> tCO2e and other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']}}</strong> tCO2e.</x-renderer.heading>
+
+                     <ul class="list-disc flex flex-col items-start">
+                        <li>
+                        {{-- @dd($info) --}}
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['direct_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                        </li>
+                        <li>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Indirect emissions from purchased energy accounted for <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                        </li>
+                        <li>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['other_indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
@@ -119,23 +131,44 @@ $info = $tableDataSource['info'];
             </div>
         </div>
             <x-renderer.page-break />
-        <div class="relative {{$layout}} items-center bg-white box-border p-8 ">
+        <div class="relative {{$layout}} items-center bg-white box-border px-8 py-6 ">
             {{-- chart 2 --}}
             <div style='' class="">
-                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Emission source category chart</x-renderer.heading>
+                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Emission source category chart</x-renderer.heading>
                 <div class=" grid-rows-1 pt-4 flex justify-center flex-col items-center">
                     <div class="w-full px-6">
                     {{-- @dump($pivotChart2) --}}
                         <x-renderer.report.pivot-chart key="carbon_footprint_2" :dataSource="$pivotChart2"></x-renderer.report.pivot-chart>
                     </div>
-                    <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold px-4'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']}}</strong> tCO2e. Indirect emissions from purchased energy
-                        accounted for <strong>{{$info['indirect_emissions']}}</strong> tCO2e and other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']}}</strong> tCO2e.</x-renderer.heading>
+                    <ul class="list-disc flex flex-col items-start">
+                        <li>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e.</x-renderer.heading>
+                        </li>
+                        <li>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Indirect emissions from purchased energy accounted for <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e.</x-renderer.heading>
+                        </li>
+                        <li>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e.</x-renderer.heading>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="w-full pb-0 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
+            <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
                 <x-print.header6 :itemsShow="['website']"/>
             </div>
         </div>
+        <x-renderer.page-break />
+        {{-- CO2 Emission Summary Report --}}
+        <div class="{{-- {{$layout}} --}}{{-- relative --}} w-[1400px] min-h-[990px] items-center bg-white box-border px-8 py-6 ">
+            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>CO2 Emission Summary Report</x-renderer.heading>
+            <div class="">
+                @include('reports.document-ghg-summary-report-only-table')
+                {{-- <div class="w-full absolute  pb-4 bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
+                    <x-print.header6 :itemsShow="['website']"/>
+                </div> --}}
+            </div>
+        </div>
+        
     </div>
 </div>
 @endsection
