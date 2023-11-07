@@ -9,6 +9,7 @@ use App\Models\Qaqc_wir;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -37,7 +38,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         [$this->project, $this->subProject, $this->prodRouting, $this->prodDiscipline] = $this->getUserSettings();
         $this->project = $this->project ? $this->project : 5;
         $this->subProject = $this->subProject ? $this->subProject : 21;
-        $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
+        // $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
         // $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
         // dump($this->project, $this->subProject, $this->prodRouting);
     }
@@ -56,6 +57,10 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     protected function getXAxis()
     {
         $result = [];
+        if (is_null($this->prodRouting)) {
+            echo Blade::render("<x-feedback.alert type='error' message='You must specify Production Routing.'></x-feedback.alert>");
+            return [];
+        }
         $data = Prod_routing::find($this->prodRouting)->getWirDescriptions();
         foreach ($data as $line) {
             if ($this->prodDiscipline && ($line->prod_discipline_id != $this->prodDiscipline)) continue;
