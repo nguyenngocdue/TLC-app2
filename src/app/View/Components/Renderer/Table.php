@@ -39,6 +39,7 @@ class Table extends Component
     // private $editable = false,
     private $tableDebug = false,
     private $rotate45Width = false,
+    private $rotate45Height = false,
     private $noCss = false,
     private $showPaginationTop = false,
     private $showPaginationBottom = true,

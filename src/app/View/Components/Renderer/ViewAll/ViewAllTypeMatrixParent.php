@@ -145,14 +145,9 @@ abstract class ViewAllTypeMatrixParent extends Component
     private function getBackgroundColorAndTextColor($document)
     {
         $status = $this->statuses[$document->status] ?? null;
-        if (!is_null($status)) {
-            $bgColor = "bg-" . $status['color'] . "-" . $status['color_index'];
-            $textColor = "text-" . $status['color'] . "-" . (1000 - $status['color_index']);
-        }
-        $bgColor = $bgColor ?? '';
-        $textColor = $textColor ?? '';
-        return [$bgColor, $textColor];
+        return ['bg-' . $status['bg_color'], 'text-' . $status['text_color']];
     }
+
     protected function makeCaptionForCheckbox($document)
     {
         if (is_null($this->checkboxCaptionColumn)) return "";

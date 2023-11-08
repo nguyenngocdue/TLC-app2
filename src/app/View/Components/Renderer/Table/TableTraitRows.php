@@ -135,7 +135,7 @@ trait TableTraitRows
             $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
             $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
             $hidden = $this->isInvisible($column) ? "hidden" : "";
-            $styleStr = $this->getStyleStr($column);
+            $styleStr = $this->getStyleStr(['width' => ($column['width'] ?? 100) . "px", 'a' => 3]);
             $rendered = ($tableDebug && ($renderer != 'no.') ? $name : "") . $rendered;
 
             [$cellClassList, $cellTitle, $cellHref, $cellOnClick] = $this->parseCellObject($rawData);

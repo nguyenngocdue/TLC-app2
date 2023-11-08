@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\WorkingShiftService;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 
 class WelcomeFortuneController extends Controller
 {
@@ -21,10 +22,7 @@ class WelcomeFortuneController extends Controller
     {
         if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
 
-        $start_at0 = '2023-10-17 01:00:00';
-        $end_at0 = '2023-10-18 10:30:00';
-        $r = $this->wss->calculateShiftDurationByUser($start_at0, $end_at0, 38);
-        dump($r);
+        // return Blade::render('<x-renderer.MatrixForReport.QaqcWirs />');
 
         // return view("welcome-fortune", []);
     }
