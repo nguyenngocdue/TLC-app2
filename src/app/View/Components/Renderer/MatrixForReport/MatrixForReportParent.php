@@ -27,37 +27,46 @@ abstract class MatrixForReportParent extends Component
 
     function cellRenderer($cell, $xAxis, $yAxis, $dataSource)
     {
-        $status = $cell->status;
-        $statusObj = $this->statuses[$status];
-        $value = $statusObj['icon'];
-        $cellClass = 'bg-' . $statusObj['bg_color'] . " text-" . $statusObj['text_color'];
-        return (object)[
-            "value" => $value,
-            'cell_class' => $cellClass,
-        ];
+        if (isset($cell->status)) {
+
+            $id = $cell->id;
+            $name = $cell->name;
+            $href = route($this->type . ".edit", $id);
+
+            $status = $cell->status;
+            $statusObj = $this->statuses[$status];
+            $value = $statusObj['icon'];
+            $cellClass = 'bg-' . $statusObj['bg_color'] . " text-" . $statusObj['text_color'];
+            return (object)[
+                "value" => $value,
+                'cell_class' => "$cellClass text-center cursor-pointer",
+                'cell_title' => $name . " (" . $statusObj['title'] . ")",
+                'cell_href' => $href,
+            ];
+        }
+        return $cell;
     }
 
     function mergeDataSource($xAxis, $yAxis, $dataSource)
     {
-        // dump($xAxis[0]);
-        // dump($yAxis[0]);
-        // dump($dataSource[0]);
-
         $items = [];
-        $result = [];
         foreach ($dataSource as $line) {
             $xId = $line->{$this->dataIndexX};
             $yId = $line->{$this->dataIndexY};
 
             $items[$yId][$xId] = $line;
         }
+        return $items;
+    }
 
-        foreach ($items as $yId => $columns) {
+    function renderCell($xAxis, $yAxis, $dataSource)
+    {
+        $result = [];
+        foreach ($dataSource as $yId => $columns) {
             foreach ($columns as $xId => $item) {
                 $result[$yId][$xId] = $this->cellRenderer($item, $xAxis, $yAxis, $dataSource);
             }
         }
-        // dump($result);
         return $result;
     }
 
@@ -65,6 +74,7 @@ abstract class MatrixForReportParent extends Component
     {
         return [
             ['dataIndex' => 'name',],
+            ['dataIndex' => 'progress',],
         ];
     }
 
@@ -94,9 +104,29 @@ abstract class MatrixForReportParent extends Component
 
     function sortBy($column, $dataSource)
     {
-        usort($dataSource, function ($a, $b) {
-            return $a['name'] <=> $b['name'];
-        });
+        usort($dataSource, fn ($a, $b) => $a[$column] <=> $b[$column]);
+        return $dataSource;
+    }
+
+    function calculateProgress($xAxis, $yAxis, $dataSource)
+    {
+        $finished = ['closed', 'not_applicable', 'cancelled'];
+        $result = [];
+        foreach ($dataSource as $id => $line) {
+            $result[$id]['progress'] = 0;
+            foreach ($line as $cell) {
+                if (in_array($cell->status, $finished)) {
+                    $result[$id]['progress'] += 1;
+                }
+            }
+        }
+        // dump($dataSource);
+        foreach ($dataSource as $id => &$line) {
+            $line['progress'] = (object)[
+                'value' => $result[$id]['progress'],
+                'cell_class' => 'text-right',
+            ];
+        }
         return $dataSource;
     }
 
@@ -111,8 +141,11 @@ abstract class MatrixForReportParent extends Component
             ...$this->getColumns($xAxis),
         ];
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $dataSource);
+        $dataSource = $this->calculateProgress($xAxis, $yAxis, $dataSource);
         $dataSource = $this->attachMeta($xAxis, $yAxis, $dataSource);
         $dataSource = $this->sortBy('name', $dataSource);
+        $dataSource = $this->renderCell($xAxis, $yAxis, $dataSource);
+        // dump($dataSource);
 
         return view('components.renderer.matrix-for-report.matrix-for-report-parent', [
             'columns' => $columns,
