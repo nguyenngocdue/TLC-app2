@@ -38,7 +38,7 @@ class QaqcWirs extends MatrixForReportParent
         return $result;
     }
 
-    function getDataSource()
+    function getDataSource($xAxis, $yAxis)
     {
         $result = Qaqc_wir::query()
             ->where('sub_project_id', $this->subProjectId)

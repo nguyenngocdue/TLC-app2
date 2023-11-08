@@ -129,3 +129,7 @@ Arr::macro('normalizeSelected', function ($selected, $old = null) {
     }
     // return $selected;
 });
+Arr::macro('allElementsAre', function ($array, $x) {
+    foreach ($array as $value) if ($value !== $x) return false;
+    return true;
+});
