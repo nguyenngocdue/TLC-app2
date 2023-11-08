@@ -123,7 +123,7 @@ class DateReport
             $startOfWeek = clone $date; // Clone the DateTime object to avoid modifying the original object
             $endOfWeek = clone $date->modify('+6 days'); // Modify the cloned object to get the end of the week
             
-            $weeks[$weekNumber] = [
+            $weeks[(int)$weekNumber] = [
                 'start_date' => $startOfWeek->format('Y-m-d'),
                 'end_date' => $endOfWeek->format('Y-m-d')
             ];

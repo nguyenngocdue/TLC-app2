@@ -1,6 +1,6 @@
 <div class="w-full flex flex-col">
     <div class="text-left whitespace-nowrap">
-        <span class="px-1 ">{{$title}}</span>
+        <span class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">{!!$title!!}</span>
     </div>
     {{-- @dd($itemsSelected) --}}
     <form id="myForm" action="{{$routeName}}" method="GET">
@@ -14,7 +14,7 @@
             <option class="py-10 w-full " value="" selected>Select your option...</option>
             @foreach($dataSource as $key => $value)
             @php
-            $value = ucwords(str_replace('_', " ", $value));
+            $value = str_replace('_', " ", $value);
             $selected = "";
             if (isset($itemsSelected[$name])) {
             if (is_numeric($key) && is_numeric($itemsSelected[$name])) {
@@ -24,7 +24,7 @@
                 }
             }
             @endphp
-            <option class="py-10 w-full " value="{{$key}}" {{$selected}} title="ID : {{$key}}">{{$value}}</option>
+            <option class="py-10 w-full " value="{{$key}}" {{$selected}} title="#{{$key}}">{{$value}}</option>
             @endforeach
         </select>
     </form>

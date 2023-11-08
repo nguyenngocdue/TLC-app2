@@ -7,7 +7,7 @@ use App\View\Components\Reports\ParentParamReports;
 use App\View\Components\Reports\ParentTypeParamReport;
 use DateTime;
 
-class ParamWeeksOfYear extends ParentTypeParamReport
+class ParamWeeksOfYear extends ParentParamReports
 {
     protected $referData = 'year';
     protected function getDataSource()
@@ -23,8 +23,10 @@ class ParamWeeksOfYear extends ParentTypeParamReport
                     $formattedDate = $dateTime->format('d/m');
                     $dayAndMonths[$key] = $formattedDate;
                 }
+                $keyWeek = str_pad($keyWeek, 2, '0', STR_PAD_LEFT);
                 $weeks[] = (object)[
-                    'id' =>'W'.$keyWeek.'-'.substr($year, -2),
+                    // 'id' =>'W'.$keyWeek.'-'.substr($year, -2),
+                    'id' =>(int)$keyWeek,
                     'name'=> 'W'.$keyWeek.'/'.$year.' '.'('.$dayAndMonths['start_date']. '-'.$dayAndMonths['end_date'].')',
                     $this->referData => $year,
                 ];

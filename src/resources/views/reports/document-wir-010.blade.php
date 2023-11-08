@@ -16,7 +16,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
 @endphp
 {{-- @dd($tableDataSource); --}}
-{{-- @dd($params) --}}
+{{-- @dump($params) --}}
 <div class="grid grid-cols-12 gap-1">
         <div class="col-span-2">
             <div class="no-print justify-end pl-4 pt-5">
@@ -36,21 +36,6 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
             </div>
         </div>
 
-<script type="text/javascript">
-    var param = {!! json_encode($params) !!}
-    var childrenMode = param.children_mode
-    document.addEventListener('DOMContentLoaded', function() {
-        if (childrenMode == 'filter_by_month') {
-            const year = document.getElementById('name_year');
-            const week = document.getElementById('name_weeks_of_year');
-            year.style.display = 'none';
-            week.style.display = 'none';
-        } else {
-            const month = document.getElementById('name_month');
-            month.style.display = 'none';
-        }
-    });
-</script>
         <div class="col-span-10">
             <div class="px-4">
                 @include('components.reports.shared-parameter')
@@ -77,7 +62,9 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
             </div>
             {{-- RENDER TABLES --}}
             <div class="pt-4">
-                <x-renderer.heading level=6 class='text-right italic px-10'>Date of Update: <strong>{{$basicInfoData['date_of_update']}} </strong></x-renderer.heading>
+                @if($params['children_mode'] === 'filter_by_year')
+                    <x-renderer.heading level=6 class='text-right italic px-10'>Date of Update: <strong>{{$basicInfoData['date_of_update']}} </strong></x-renderer.heading>
+                @endif
                 <x-renderer.report.pivot-table 
                     showNo={{true}} 
                     :tableColumns="$tableColumns" 
@@ -90,18 +77,19 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
 </div>
 @endsection
 
-{{-- <script type="text/javascript">
+<script type="text/javascript">
     var param = {!! json_encode($params) !!}
-    var modeSelect = param.mode_select
+    var childrenMode = param.children_mode
+    console.log(childrenMode)
     document.addEventListener('DOMContentLoaded', function() {
-        if (modeSelect == 1) {
+        if (childrenMode == 'filter_by_month') {
+            const month = document.getElementById('name_month');
+            month.classList.remove('hidden');
+        } else {
             const year = document.getElementById('name_year');
             const week = document.getElementById('name_weeks_of_year');
-            year.style.display = 'none';
-            week.style.display = 'none';
-        } else {
-            const month = document.getElementById('name_month');
-            month.style.display = 'none';
+            year.classList.remove('hidden');
+            week.classList.remove('hidden');
         }
     });
-</script> --}}
+</script>

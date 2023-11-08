@@ -29,8 +29,9 @@ $route = $routeName ? route($routeName) : "";
             $multiple = $value['multiple'] ?? false;
             $hasListenTo = $value['hasListenTo'] ?? false;
             $singleDatePicker = $value['singleDatePicker'] ?? false;
+            $firstHidden = isset($value['firstHidden']) ? 'hidden' : ''?? '';
             @endphp
-            <div id="name_{{$name}}" class="col-span-3 {{$name}}">
+            <div id="name_{{$name}}" class="col-span-3 {{$name}} {{$firstHidden}}">
                 @switch($renderer)
                 @case("drop_down")
                 <x-reports.dropdown7 :infoParam="$value" hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />

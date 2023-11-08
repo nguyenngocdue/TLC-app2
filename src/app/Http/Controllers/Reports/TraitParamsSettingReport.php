@@ -25,8 +25,10 @@ trait TraitParamsSettingReport
         $entity = CurrentPathInfo::getEntityReport($request, $str);
         $settings = CurrentUser::getSettings();
         // dd($settings, $currentMode);
+
         if (isset($settings[$entity][$typeReport][$currentMode])) {
             $params = $settings[$entity][$typeReport][$currentMode];
+
             $params = self::removeNullItems($params);
             $defaultParams = $this->getDefaultValueParams($params, $request);
             $diffFields = array_diff( array_keys($defaultParams), array_keys($params));
