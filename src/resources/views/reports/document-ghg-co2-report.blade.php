@@ -18,6 +18,9 @@ $data = $tableDataSource['carbon_footprint'][$year];
 $pivotChart1 = $tableDataSource['pivot_chart_1'];
 $pivotChart2 = $tableDataSource['pivot_chart_2'];
 $info = $tableDataSource['info'];
+$text = isset($params['only_month']) ? implode(',',App\Utils\Support\StringReport::stringsPad($params['only_month'])).'/'.$year: $year;
+$text = isset($params['quarter_time']) && !isset($params['only_month']) ? 'QTR'.$params['quarter_time'].'/'.$text: $text;
+#dump($text);
 @endphp
 {{-- @dump($tableDataSource) --}}
 
@@ -49,7 +52,7 @@ $info = $tableDataSource['info'];
                 <x-renderer.heading level=1 xalign='center'>CO2 Emission Report</x-renderer.heading>
                 <x-renderer.heading level=3 xalign='center'>for TLC Modular Construction Limited Liability Company</x-renderer.heading>
             </div>
-            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Company's carbon footprint in the year {{$year}}</x-renderer.heading>
+            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Company's carbon footprint in {{$text}}</x-renderer.heading>
             <div class="grid grid-rows-1 pt-20">
                 <div class="grid grid-cols-12 text-center">
                     <div class="col-span-6 m-auto">
@@ -115,13 +118,13 @@ $info = $tableDataSource['info'];
                      <ul class="list-disc flex flex-col items-start">
                         <li>
                         {{-- @dd($info) --}}
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['direct_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 1: <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['direct_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                         <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Indirect emissions from purchased energy accounted for <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 2: <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                         <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['other_indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 3: <strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['other_indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                     </ul>
                 </div>
@@ -161,7 +164,7 @@ $info = $tableDataSource['info'];
         <x-renderer.page-break />
         {{-- CO2 Emission Summary Report --}}
         <div class="{{-- {{$layout}} --}}{{-- relative --}} w-[1400px] min-h-[940px] items-center bg-white box-border px-8 py-6 ">
-            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>CO2 Emission Summary Report</x-renderer.heading>
+            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Data Summary Report</x-renderer.heading>
             <div class="">
                 @include('reports.document-ghg-summary-report-only-table')
                 {{-- <div class="w-full absolute  pb-4 bottom-0 right-0 left-0 flex flex-row-reverse justify-center">

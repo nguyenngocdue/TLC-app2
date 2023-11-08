@@ -44,7 +44,7 @@
         root.classList.add('dark');
     }
 </script>
-<html :class="{ 'dar1k': dar1k }" x-data="alpineData()" lang="en">
+{{-- <html :class="{ 'dar1k': dar1k }" x-data="alpineData()" lang="en"> --}}
 
 @include("layouts/head")
 

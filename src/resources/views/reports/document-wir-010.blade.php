@@ -62,7 +62,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
             </div>
             {{-- RENDER TABLES --}}
             <div class="pt-4">
-                @if($params['children_mode'] === 'filter_by_year')
+                @if($params['children_mode'] === 'filter_by_month')
                     <x-renderer.heading level=6 class='text-right italic px-10'>Date of Update: <strong>{{$basicInfoData['date_of_update']}} </strong></x-renderer.heading>
                 @endif
                 <x-renderer.report.pivot-table 

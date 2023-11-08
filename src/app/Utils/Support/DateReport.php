@@ -37,6 +37,11 @@ class DateReport
         return DateTime::createFromFormat('Y/m/d', $strDateEdit)->format($typeFormat);
     }
 
+    public static function basicFormatDateString($strDate, $typeFormat = 'Y-m-d'){
+        $dateTime = new DateTime($strDate);
+        return $dateTime->format($typeFormat);
+    }
+
     public static function getMonthAbbreviation($month)
     {
         $month = str_pad($month, 2, '0', STR_PAD_LEFT);
@@ -131,6 +136,39 @@ class DateReport
             $date->modify('+1 days');
         }
         return $weeks;
+    }
+
+    public static function getHalfYearPeriods($year) {
+        $firstHalfStart = strtotime($year . '-01-01');
+        $firstHalfEnd = strtotime($year . '-06-30');
+        $secondHalfStart = strtotime($year . '-07-01');
+        $secondHalfEnd = strtotime($year . '-12-31');
+        
+        // Format the dates as strings in 'Y-m-d' format
+        $firstHalfStartFormatted = date('Y-m-d', $firstHalfStart);
+        $firstHalfEndFormatted = date('Y-m-d', $firstHalfEnd);
+        $secondHalfStartFormatted = date('Y-m-d', $secondHalfStart);
+        $secondHalfEndFormatted = date('Y-m-d', $secondHalfEnd);
+        
+        return [
+            'start_half_year' => $firstHalfStartFormatted . '/' . $firstHalfEndFormatted,
+            'end_half_year' => $secondHalfStartFormatted . '/' .$secondHalfEndFormatted
+        ];
+    }
+    
+    public static function getMonthsByQuarter($quarter){
+        switch ($quarter) {
+            case 1:
+                return ['01','02','03'];
+            case 2:
+                return ['04','05','06'];
+            case 3:
+                return ['07','08','09'];
+            case 4:
+                return ['10','11','12'];
+            default:
+                return "invalid";
+        }
     }
 
 }

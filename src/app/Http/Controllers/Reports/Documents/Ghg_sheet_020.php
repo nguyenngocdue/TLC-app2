@@ -35,7 +35,20 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 				'title' => 'Month',
 				'dataIndex' => 'only_month',
 				'multiple' => true,
-			]
+				'allowClear' => true,
+			],
+			[
+				'title' => 'Half Year',
+				'dataIndex' => 'half_year',
+				// 'multiple' => true,
+				'hasListenTo' => true,
+			],
+			[
+				'title' => 'Quarter',
+				'dataIndex' => 'quarter_time',
+				// 'multiple' => true,
+				'allowClear' => true,
+			],
 		];
 	}
 
@@ -126,7 +139,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 				$val[$index] = is_null($value['total_months']) ? 0 : $value['total_months'];
 				// $val = StringReport::arrayToJsonWithSingleQuotes($val);
 				$datasets[] = (object)[
-					'label' => $value['ghgtmpl_name'],
+					'label' => trim(substr($value['ghgtmpl_name'],5)),
 					'data' =>  $val,
 				];
 			}

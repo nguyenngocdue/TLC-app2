@@ -67,4 +67,8 @@ class StringReport
 		});
 		return $data;
 	}
+
+    public static function stringsPad($array){
+        return array_map(fn($item) => str_pad($item, 2, '0', STR_PAD_LEFT), $array);
+    }
 }

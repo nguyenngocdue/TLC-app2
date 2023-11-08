@@ -227,12 +227,21 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         ];
     }
 
+    public function getBasicInfoData($params)
+    {
+        [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
+        return [
+            'from_date' => $previousDate,
+            "date_of_update" => $latestDate
+        ];
+    }
+
     protected function getDefaultValueParams($params, $request)
     {
         $params['sub_project_id'] = $this->subProjectId;
+        $params['year'] = date('Y');
         if (in_array('children_mode',array_keys($params)) && is_null($params['children_mode']) || empty($params)) {
             $params['children_mode'] = 'filter_by_year';
-            $params['year'] = date('Y');
             $params['month'] = date("Y-m");
     
             if ($params['children_mode'] === 'filter_by_year') {
@@ -275,16 +284,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             }
     
         }
-        // dump($params);
+        dump($params);
         return $params;
-    }
-    
-    public function getBasicInfoData($params)
-    {
-        [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
-        return [
-            'from_date' => $previousDate,
-            "date_of_update" => $latestDate
-        ];
     }
 }

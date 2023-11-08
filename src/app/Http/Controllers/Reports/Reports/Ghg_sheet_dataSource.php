@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports\Reports;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
@@ -47,6 +48,13 @@ class Ghg_sheet_dataSource extends Controller
 		$year = $params['year'];
 		// dd($strSqlMonth, $strSumValue);
 
+		if(isset($params['half_year']) && $params['year']) {
+			$key = $params['half_year'];
+			$strDate = DateReport::getHalfYearPeriods($params['year'])[$key];
+			[$start_date, $end_date] = explode('/',$strDate);
+		}
+
+
 		// SQL
 		$sql =  " SELECT infghgsh.*,$strSqlMonth ghgsh_totals.month_ghg_sheet_id,
 					    ghgsh_totals.quarter1,
@@ -86,8 +94,8 @@ class Ghg_sheet_dataSource extends Controller
 							FROM ghg_sheets ghgsh 
 							WHERE 1 = 1
 							AND ghgsh.deleted_by IS NULL
-							AND SUBSTR(ghgsh.ghg_month, 1, 4) = '$year'
-							GROUP BY ghgsh_tmpl_id
+							AND SUBSTR(ghgsh.ghg_month, 1, 4) = '$year'";
+				$sql .="\n GROUP BY ghgsh_tmpl_id
 						) ghgsh_totals ON infghgsh.ghg_tmpl_id = ghgsh_totals.ghgsh_tmpl_id
 						ORDER BY ghgcate_id, ghg_tmpl_id
 					";
