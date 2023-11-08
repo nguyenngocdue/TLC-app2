@@ -232,6 +232,7 @@ abstract class MatrixForReportParent extends Component
             'dataSource' => $dataSource,
             'rotate45Width' => $this->rotate45Width,
             'rotate45Height' => $this->rotate45Height,
+            'type' => $this->type,
         ]);
     }
 }
