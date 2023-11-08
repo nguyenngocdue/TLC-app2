@@ -131,6 +131,7 @@ class PivotChart3 extends Component
 	public function render()
 	{
 		$dataWidgets = $this->makeDataSource($this->data, $this->key, $this->paramFilters);
+		// dd($this->paramFilters);
 		return view("components.renderer.report.pivot-chart3", [
 			'dataWidgets' => $dataWidgets,
 			'key'=>$this->key,

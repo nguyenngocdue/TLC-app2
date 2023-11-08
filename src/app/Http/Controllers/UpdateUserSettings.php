@@ -261,6 +261,7 @@ class UpdateUserSettings extends Controller
     private function updateParamsReportForFirstSubmit($inputValue, $settings)
     {
         $modeName = $inputValue['mode_option'];
+        // dd($inputValue);
         // Check case: select mode alternatively 
         $index = array_search($modeName, array_values($inputValue));
         if (empty(array_slice($inputValue, $index + 1, count($inputValue) - $index))) return $settings;
@@ -270,7 +271,13 @@ class UpdateUserSettings extends Controller
         $typeReport = strtolower($inputValue["type_report"]);
         $indexBreak = array_search("type_report", array_keys($inputValue));
         $parameter = array_slice($inputValue, $indexBreak + 1, count($inputValue) - $indexBreak);
-        $settings[$entity][$typeReport][$modeName] = $parameter;
+
+        if(isset($inputValue['children_mode']) && $inputValue['children_mode'] !== 'not_children'){
+            $modeSelect = $inputValue['children_mode'];
+            $settings[$entity][$typeReport][$modeName][$modeSelect] = $parameter;
+        } else{
+            $settings[$entity][$typeReport][$modeName] = $parameter;
+        }
         return $settings;
     }
 
@@ -291,6 +298,18 @@ class UpdateUserSettings extends Controller
         return $settings;
     }
 
+    private function switchParamsReport($request, $settings)
+    {
+        $inputValue = $request->all();
+        $entity = $request->input("_entity");
+        $typeReport = strtolower($request->input("type_report"));
+        $modeOption = $inputValue['mode_option'];
+        if(isset($inputValue['children_mode'])){
+            $modeSelect = $inputValue['children_mode'];
+            $settings[$entity][$typeReport][$modeOption]['children_mode'] = $modeSelect;
+        }
+        return $settings;
+    }
 
     private function updateReport($request, $settings)
     {
@@ -388,6 +407,9 @@ class UpdateUserSettings extends Controller
             case 'updatePerPagePivot-reports':
                 $settings = $this->updatePerPageReports($request, $settings);
                 break;
+            case 'switchParamsReport':
+                    $settings = $this->switchParamsReport($request, $settings);
+                    break;
             case 'updatePerPageDocuments':
                 $settings = $this->updatePerPageReports($request, $settings);
                 break;

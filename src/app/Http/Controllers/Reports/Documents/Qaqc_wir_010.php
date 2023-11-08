@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
-use App\Http\Controllers\Reports\Reports\Qaqc_ncr_dataSource;
+use App\Utils\Support\CurrentPathInfo;
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\Report;
-use App\Utils\Support\StringReport;
+use Exception;
 
 class Qaqc_wir_010 extends Report_ParentDocument2Controller
 {
@@ -19,27 +21,47 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
     protected $pageLimit = 100000;
 
 
-    private function generateCurrentAndPreviousDate($month){
+    private function generateCurrentAndPreviousDate($month)
+    {
         [$y, $m] = explode('-', $month);
-        if($m === '01'){
+        if ($m === '01') {
             $y = $y - 1;
             $m = 12;
         };
-        $previousMonth = str_pad($m-1, '2','0', STR_PAD_LEFT);
-        $previousDate = $y."-".$previousMonth."-25";
+        $previousMonth = str_pad($m - 1, '2', '0', STR_PAD_LEFT);
+        $previousDate = $y . "-" . $previousMonth . "-25";
 
-        $latestDate = $month.'-'."25";
-        if($latestDate > date("Y-m-d")) {
+        $latestDate = $month . '-' . "25";
+        if ($latestDate > date("Y-m-d")) {
             $latestDate = date("Y-m-d");
-            $previousDate = date("Y-m", strtotime($latestDate . " -1 month"))."-25";
+            $previousDate = date("Y-m", strtotime($latestDate . " -1 month")) . "-25";
         }
-        return [$previousDate, $latestDate]; 
+        return [$previousDate, $latestDate];
+    }
+
+    private function generateStartAndDayOfWeek($params){
+        try{
+            $year = $params['year'];
+            $weeksData = DateReport::getWeeksInYear($year);
+            $indexDates = $weeksData[$params['weeks_of_year']];
+            $previousDate = $indexDates['start_date'];
+            $latestDate = $indexDates['end_date'];
+            return [$previousDate, $latestDate];
+        } catch (Exception $e){
+            dd($e->getMessage(), $params);
+        }
     }
 
     public function getSqlStr($params)
     {
+        // dump($params);
+        if ($params['children_mode'] === 'filter_by_year') {
+            [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
+        } else {
+            [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
+        }
+
         $valOfParams = $this->generateValuesFromParamsReport($params);
-        [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         $sql = " SELECT *
                             ,IF(total_prod_order_have_wir*100/(total_prod_order_on_sub_project*count_wir_description),
                                 FORMAT(total_prod_order_have_wir*100/(total_prod_order_on_sub_project*count_wir_description),2)
@@ -96,14 +118,14 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND sp.id IN ({$valOfParams['sub_project_id']})";
         if (Report::checkValueOfField($valOfParams, 'project_id')) $sql .= "\n AND sp.project_id IN ({$valOfParams['project_id']})";
 
-                                                                $sql .= "\n GROUP BY prod_routing_id ) tb_count_order ON tb_count_order.prod_routing_id = pr.prod_routing_id
+        $sql .= "\n GROUP BY prod_routing_id ) tb_count_order ON tb_count_order.prod_routing_id = pr.prod_routing_id
                                                     WHERE 1 = 1";
 
         if (Report::checkValueOfField($valOfParams, 'project_id')) $sql .= "\n AND sp.project_id IN ({$valOfParams['project_id']})";
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND sp.id IN ({$valOfParams['sub_project_id']})";
         if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND pr.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
 
-                                            $sql .= "   #AND sp.project_id = 8
+        $sql .= "   #AND sp.project_id = 8
                                                         #AND sp.id = 107
                                                         #AND po.id = 1325
                                                         #AND pr.id = 49
@@ -132,13 +154,20 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             [
                 'title' => 'Month',
                 'dataIndex' => 'month',
+                "firstHidden" => true,
             ],
-            // [
-            //     "title" => "Project",
-            //     "dataIndex" => "project_id",
-            //     "allowClear" => true,
-            //     "multiple" => true,
-            // ],
+            [
+                'title' => 'Year',
+                'dataIndex' => 'year',
+                "firstHidden" => true,
+            ],
+            [
+                "title" => "Week",
+                "dataIndex" => "weeks_of_year",
+                #"allowClear" => true,
+                "hasListenTo" => true,
+                "firstHidden" => true,
+            ],
             [
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_id",
@@ -176,14 +205,14 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                 'footer' => 'agg_sum',
             ],
             [
-                'title' => $params['previous_month'].'<br/>QC Acceptance (%)',
+                'title' => $params['previous_month'] . '<br/>QC Acceptance (%)',
                 'dataIndex' => 'previous_acceptance_percent',
                 'align' => 'right',
                 'width' => 180,
                 'footer' => 'agg_sum',
             ],
             [
-                'title' => $params['latest_month'].'<br/>QC Acceptance (%)',
+                'title' => $params['latest_month'] . '<br/>QC Acceptance (%)',
                 'dataIndex' => 'latest_acceptance_percent',
                 'align' => 'right',
                 'width' => 180,
@@ -200,19 +229,61 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $params['month'] = date("Y-m");
         $params['sub_project_id'] = $this->subProjectId;
-        [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
-        $params['previous_month'] =  substr($previousDate, 0, 7);
-        $params['latest_month'] =  substr($latestDate, 0, 7);
-        // dd($previousDate, $latestDate);
+        if (in_array('children_mode',array_keys($params)) && is_null($params['children_mode']) || empty($params)) {
+            $params['children_mode'] = 'filter_by_year';
+            $params['year'] = date('Y');
+            $params['month'] = date("Y-m");
+    
+            if ($params['children_mode'] === 'filter_by_year') {
+                $currentWeek = str_pad(date('W'), 2, '0', STR_PAD_LEFT);
+                $previousWeek = str_pad(date('W') - 1, 2, '0', STR_PAD_LEFT);
+    
+                $params['weeks_of_year'] = $currentWeek;
+                [$start_date, $end_date] = $this->generateStartAndDayOfWeek($params);
+                $params['previous_month'] = 'W' . $previousWeek . '-' . substr(date('Y'), -2) . ' (' . $start_date . ')';
+                $params['latest_month'] = 'W' . $currentWeek . '-' . substr(date('Y'), -2) . ' (' . $end_date . ')';
+            } else {
+
+                [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
+                $params['previous_month'] = substr($previousDate, 0, 7);
+                $params['latest_month'] = substr($latestDate, 0, 7);
+            }
+        }
+        if (Report::checkValueOfField($params, 'children_mode')) {
+            $settings = CurrentUser::getSettings();
+            $indexMode = $params['children_mode'];
+            $typeReport = CurrentPathInfo::getTypeReport2($request);
+            if(isset($settings[$this->getTable()][$typeReport][$this->mode][$indexMode])){
+                // get params in user settings
+                $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
+            } else{
+                // set default params when don't find params in user settings
+                $currentWeek = str_pad(date('W'), 2, '0', STR_PAD_LEFT);
+                $params['weeks_of_year'] = $currentWeek;
+                $params['month'] = date("Y-m");
+                $params['year'] = date('Y');
+            }
+            if ($params['children_mode'] === 'filter_by_year') {
+                [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
+                $params['previous_month'] = $previousDate;
+                $params['latest_month'] = $latestDate;
+            } else {
+                [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
+                $params['previous_month'] = substr($previousDate, 0, 7);
+                $params['latest_month'] = substr($latestDate, 0, 7);
+            }
+    
+        }
+        // dump($params);
         return $params;
     }
-
+    
     public function getBasicInfoData($params)
     {
         [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         return [
+            'from_date' => $previousDate,
             "date_of_update" => $latestDate
         ];
     }

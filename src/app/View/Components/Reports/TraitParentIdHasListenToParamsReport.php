@@ -45,7 +45,7 @@ trait TraitParentIdHasListenToParamsReport
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
             'multiple' => $this->multiple ? true : false,
-            'allowClear' => $this->allowClear,
+            'allowClear' => $this->allowClear ? $this->allowClear :0,
         ];
         // dump($params);
         $this->renderJS2($tableName, $this->referData, $this->name);

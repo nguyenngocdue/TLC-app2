@@ -11,7 +11,14 @@ class ParamProdRoutingId extends ParentParamReports
     protected $referData1 = 'checksheet_type_id';
     protected function getDataSource()
     {
-        $prodRoutings = Prod_routing::whereNull('deleted_by')->get();
+        $uri = $_SERVER['REQUEST_URI'];
+        $reportName =last(explode('/',$uri));
+        $ids = config("report.".$reportName)?? [];
+        $prodRoutings = Prod_routing::whereNull('deleted_by')
+                        ->when(count($ids), function($query) use ($ids) {
+                            return $query->whereIn('id', $ids);
+                        })
+                        ->get();
         $result = [];
         foreach ($prodRoutings as $routing){
             $subProjectIds = $routing->getSubProjects()->pluck('id')->toArray();

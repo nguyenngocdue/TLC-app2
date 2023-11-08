@@ -21,13 +21,14 @@ class Parameter3Report extends Component
         private $modeOption = '',
         private $hasListenTo = false,
         private $optionPrint = '',
+        private $childrenMode = '',
     ) {
         //
     }
 
     public function render()
     {
-        // dd($this->itemsSelected);
+        // dd($this->modeSelect);
         return view('components.reports.parameter3-report', [
             'itemsSelected' => $this->itemsSelected,
             'hiddenItems' => $this->hiddenItems,
@@ -37,7 +38,8 @@ class Parameter3Report extends Component
             'columns' => $this->columns,
             'modeOption' => $this->modeOption,
             'hasListenTo' => $this->hasListenTo,
-            'optionPrint' => $this->optionPrint
+            'optionPrint' => $this->optionPrint,
+            'childrenMode' =>$this->childrenMode
         ]);
     }
 }

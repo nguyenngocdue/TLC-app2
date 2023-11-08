@@ -222,6 +222,7 @@ abstract class Report_ParentController extends Controller
             'legendColors' => $this->getColorLegends(),
             'tableTrueWidth' => $this->tableTrueWidth,
             'optionPrint' => $this->optionPrint,
+            'childrenMode' => $params['children_mode'] ?? 'not_children',
         ] + $dataRenderDocReport);
     }
     protected function modifyDataToExportCSV($dataSource)

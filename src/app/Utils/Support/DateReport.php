@@ -63,7 +63,7 @@ class DateReport
     }
     private static function isValidDateFormat($dateString) {
         $date = DateTime::createFromFormat('Y-m-d', $dateString);
-        return ($date !== false && !array_sum($date::getLastErrors()));
+        return ($date !== false /* && !array_sum($date::getLastErrors()) */);
     }
     
 
@@ -109,6 +109,28 @@ class DateReport
         $targetDate->modify($targetMonth);
         $targetDate->modify('-1 day');
         return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
+    }
+
+    public static function getWeeksInYear($year) {
+        $weeks = [];
+        $date = new DateTime();
+        $date->setISODate($year, 1); // Set the date to the first day of the specified year
+    
+        $endOfYear = new DateTime();
+        $endOfYear->setISODate($year, 53); // Set the date to the last day of the specified year
+        while ($date <= $endOfYear) {
+            $weekNumber = $date->format('W');
+            $startOfWeek = clone $date; // Clone the DateTime object to avoid modifying the original object
+            $endOfWeek = clone $date->modify('+6 days'); // Modify the cloned object to get the end of the week
+            
+            $weeks[(int)$weekNumber] = [
+                'start_date' => $startOfWeek->format('Y-m-d'),
+                'end_date' => $endOfWeek->format('Y-m-d')
+            ];
+            // Move to the next week
+            $date->modify('+1 days');
+        }
+        return $weeks;
     }
 
 }
