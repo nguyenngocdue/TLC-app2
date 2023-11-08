@@ -20,8 +20,8 @@ class ParamHalfYear extends ParentTypeParamReport
                 $result[] = (object)[
                     'id' => $key,
                     'name' => $key === 'start_half_year' 
-                                ? 'January to June' 
-                                : 'July to December',
+                                ? 'Jan to Jun' 
+                                : 'Jul to Dec',
                 ];
             }
         }

@@ -10,6 +10,7 @@
 $widthCell = 50;
 $class1 = "bg-white dark:border-gray-600 border-r";
 $class2 =" bg-gray-100 px-4 py-3 border-gray-300 ";
+
 $titleColName = isset($params['quarter_time']) ? 'QTR'.implode(',',$params['quarter_time']) : 'YTD';
 $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
 $year = $params['year'];
@@ -17,9 +18,18 @@ $data = $tableDataSource['carbon_footprint'][$year];
 $pivotChart1 = $tableDataSource['pivot_chart_1'];
 $pivotChart2 = $tableDataSource['pivot_chart_2'];
 $info = $tableDataSource['info'];
-$text = isset($params['only_month']) ? implode(',',App\Utils\Support\StringReport::stringsPad($params['only_month'])).'/'.$year: $year;
-$text = isset($params['quarter_time']) && !isset($params['only_month']) ? 'QTR'.implode(',',$params['quarter_time']).'/'.$text: $text;
-#dump($text);
+
+$text = isset($params['half_year']) ? ($params['half_year'] === 'start_half_year' ? 'Jan-Jun/'.$year : 'Jul-Dec/'.$year) 
+                                        : $year;
+
+$text = isset($params['only_month']) ? implode(',',App\Utils\Support\StringReport::stringsPad($params['only_month'])).'/'.$year: $text;
+
+
+$text = isset($params['quarter_time']) && !isset($params['only_month']) 
+                                    ? 'QTR'.implode(',',$params['quarter_time']).'/'.$text: $text;
+
+
+
 @endphp
 {{-- @dump($tableDataSource) --}}
 
@@ -82,7 +92,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month']) ? 'QTR'.
                 <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
                     <div class="w-full flex px-4">
                         <div class="w-1/2 px-4">
-                            <x-renderer.report.pivot-chart key="carbon_footprint_1" :dataSource="$pivotChart1" showValue={{false}}></x-renderer.report.pivot-chart>
+                            <x-renderer.report.pivot-chart key="carbon_footprint_1" :dataSource="$pivotChart1" showValue={{true}}></x-renderer.report.pivot-chart>
                         </div>
                         <div class="m-auto">
                             @php
@@ -114,16 +124,16 @@ $text = isset($params['quarter_time']) && !isset($params['only_month']) ? 'QTR'.
                         </div>
                     </div>
 
-                     <ul class="list-disc flex flex-col items-start">
+                    <ul class="list-disc flex flex-col items-start">
                         <li>
                         {{-- @dd($info) --}}
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 1: <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['direct_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 1: <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['direct_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                         <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 2: <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 2: <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                         <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 3: <strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['other_indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 3: <strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['other_indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                     </ul>
                 </div>
@@ -145,13 +155,13 @@ $text = isset($params['quarter_time']) && !isset($params['only_month']) ? 'QTR'.
                     <ul class="list-disc flex flex-col items-start">
                         <li>
                         {{-- @dd($info) --}}
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Company's direct emissions in the year amounted to <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['direct_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 1: <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['direct_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                         <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Indirect emissions from purchased energy accounted for <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 2: <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                         <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Other indirect emissions generated in the company's value chain were <strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e ( <strong>{{$info['other_indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
+                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 3:<strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['other_indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
                         </li>
                     </ul>
                 </div>
