@@ -22,8 +22,5 @@
         $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
     @endphp
         <x-renderer.matrix-for-report.qaqc_wirs subProjectId="{{$subProjectId}}" prodRoutingId="{{$prodRoutingId}}" />
-         @if(!empty($legendColors))
-            <x-reports.color-legend-report :dataSource="$legendColors" />
-        @endif
 </div>
 @endsection

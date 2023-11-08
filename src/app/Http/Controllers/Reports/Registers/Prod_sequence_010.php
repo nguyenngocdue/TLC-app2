@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Reports\Registers;
 
 use App\BigThink\HasStatus;
-use App\Http\Controllers\Reports\Report_ParentRegisterController;
+use App\Http\Controllers\Reports\Report_ParentRegister2Controller;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitLegendReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Workflow\LibStatuses;
 
-class Prod_sequence_010 extends Report_ParentRegisterController
+class Prod_sequence_010 extends Report_ParentRegister2Controller
 
 {
     use TraitDynamicColumnsTableReport;
@@ -21,8 +21,8 @@ class Prod_sequence_010 extends Report_ParentRegisterController
     protected $rotate45Width = 300;
     protected  $project_id = 8;
     protected  $sub_project_id = 107;
-    protected  $prod_routing_id = 62;
-    protected $mode = '020';
+    protected  $prod_routing_id = 49;
+    protected $mode = '010';
     protected $maxH = 45;
     protected $viewName="register-prod-sequence-010";
 
@@ -36,7 +36,7 @@ class Prod_sequence_010 extends Report_ParentRegisterController
         return [[]];
     }
 
-    protected function getParamColumns()
+    protected function getParamColumns($dataSource, $modeType)
     {
         return [
             [

@@ -238,9 +238,10 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $params['sub_project_id'] = $this->subProjectId;
-        $params['year'] = date('Y');
+        // dd($params);
         if (in_array('children_mode',array_keys($params)) && is_null($params['children_mode']) || empty($params)) {
+            $params['sub_project_id'] = $this->subProjectId;
+            $params['year'] = date('Y');
             $params['children_mode'] = 'filter_by_year';
             $params['month'] = date("Y-m");
     
@@ -274,17 +275,19 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                 $params['year'] = date('Y');
             }
             if ($params['children_mode'] === 'filter_by_year') {
+                $currentWeek = str_pad($params['weeks_of_year'], 2, '0', STR_PAD_LEFT);
+                $year = $params['year'];
                 [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
-                $params['previous_month'] = $previousDate;
-                $params['latest_month'] = $latestDate;
+                $params['previous_month'] = 'W'.$currentWeek.'/'.$year.'('. $previousDate.')';
+                $params['latest_month'] = 'W'.$currentWeek.'('.$latestDate.')';
             } else {
                 [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
-                $params['previous_month'] = substr($previousDate, 0, 7);
-                $params['latest_month'] = substr($latestDate, 0, 7);
+                $params['previous_month'] = substr($previousDate, 1, 7);
+                $params['latest_month'] = substr($latestDate, 1, 7);
             }
     
         }
-        dump($params);
+        // dump($params);
         return $params;
     }
 }
