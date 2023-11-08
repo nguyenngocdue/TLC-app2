@@ -49,12 +49,15 @@ class ProdSequences extends MatrixForReportParent
         return $result;
     }
 
-    function getDataSource()
+    function getDataSource($xAxis, $yAxis)
     {
+        $routingLinkIds = $xAxis->pluck('id')->toArray();
         $result = Prod_sequence::query()
             ->where('sub_project_id', $this->subProjectId)
             ->where('prod_routing_id', $this->prodRoutingId)
+            ->whereIn('prod_routing_link_id', $routingLinkIds)
             ->get();
+        // dump(sizeof($result));
         return $result;
     }
 }

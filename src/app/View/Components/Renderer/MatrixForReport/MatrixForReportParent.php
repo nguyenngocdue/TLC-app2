@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer\MatrixForReport;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use Illuminate\Support\Arr;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Log;
 
@@ -15,6 +16,9 @@ abstract class MatrixForReportParent extends Component
 
     protected $statuses;
 
+    protected $finishedArray = ['closed', 'finished'];
+    protected $naArray = ['not_applicable', 'cancelled'];
+
     function __construct(
         private $type,
     ) {
@@ -23,12 +27,12 @@ abstract class MatrixForReportParent extends Component
 
     abstract function getXAxis();
     abstract function getYAxis();
-    abstract function getDataSource();
+    abstract function getDataSource($xAxis, $yAxis);
 
+    private $once = true;
     function cellRenderer($cell, $xAxis, $yAxis, $dataSource)
     {
         if (isset($cell->status)) {
-
             $id = $cell->id;
             $name = $cell->name;
             $href = route($this->type . ".edit", $id);
@@ -38,7 +42,7 @@ abstract class MatrixForReportParent extends Component
             $value = $statusObj['icon'];
             $cellClass = 'bg-' . $statusObj['bg_color'] . " text-" . $statusObj['text_color'];
             return (object)[
-                "value" => $value,
+                "value" => $value, //. " " . $cell->{$this->dataIndexX},
                 'cell_class' => "$cellClass text-center cursor-pointer",
                 'cell_title' => $name . " (" . $statusObj['title'] . ")",
                 'cell_href' => $href,
@@ -97,6 +101,7 @@ abstract class MatrixForReportParent extends Component
             $dataSource[$y->id]['name'] = (object)[
                 'value' => $y->name,
                 'cell_class' => "whitespace-nowrap",
+                'cell_title' => $y->id,
             ];
         }
         return $dataSource;
@@ -108,22 +113,49 @@ abstract class MatrixForReportParent extends Component
         return $dataSource;
     }
 
+    function getWeightArray($xAxis, $yAxis, $dataSource)
+    {
+        $result = $xAxis->pluck('wir_weight', 'id')->toArray();
+        $allNull = Arr::allElementsAre($result, null);
+        if ($allNull) {
+            foreach (array_keys($result) as $key) $result[$key] = 1;
+        }
+
+        // dump($result);
+        return $result;
+    }
+
+    function removeWeightOfNA($wa, $line)
+    {
+        foreach ($line as $cell) if (in_array($cell->status, $this->naArray)) unset($wa[$cell->{$this->dataIndexX}]);
+        return $wa;
+    }
+
     function calculateProgress($xAxis, $yAxis, $dataSource)
     {
-        $finished = ['closed', 'not_applicable', 'cancelled'];
+        $weightArray = $this->getWeightArray($xAxis, $yAxis, $dataSource);
+
         $result = [];
+        // dump($dataSource);
+        // dump(array_pop($dataSource));
         foreach ($dataSource as $id => $line) {
+            $wa = $this->removeWeightOfNA($weightArray, $line);
+            $totalWa = array_sum($wa);
+            // dump($wa);
             $result[$id]['progress'] = 0;
+            // dump($line);
             foreach ($line as $cell) {
-                if (in_array($cell->status, $finished)) {
-                    $result[$id]['progress'] += 1;
+                if (in_array($cell->status, $this->finishedArray)) {
+                    $value = $wa[$cell->{$this->dataIndexX}] ?? 0;
+                    $result[$id]['progress'] += 100 * $value / $totalWa;
                 }
             }
         }
+
         // dump($dataSource);
         foreach ($dataSource as $id => &$line) {
             $line['progress'] = (object)[
-                'value' => $result[$id]['progress'],
+                'value' => number_format($result[$id]['progress'], 2) . '%',
                 'cell_class' => 'text-right',
             ];
         }
@@ -134,13 +166,14 @@ abstract class MatrixForReportParent extends Component
     {
         $xAxis = $this->getXAxis();
         $yAxis = $this->getYAxis();
-        $dataSource = $this->getDataSource();
+        $dataSource = $this->getDataSource($xAxis, $yAxis);
 
         $columns = [
             ...$this->getLeftColumns($xAxis, $yAxis, $dataSource),
             ...$this->getColumns($xAxis),
         ];
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $dataSource);
+
         $dataSource = $this->calculateProgress($xAxis, $yAxis, $dataSource);
         $dataSource = $this->attachMeta($xAxis, $yAxis, $dataSource);
         $dataSource = $this->sortBy('name', $dataSource);
