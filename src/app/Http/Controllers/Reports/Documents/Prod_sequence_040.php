@@ -65,6 +65,7 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
                         ,pr.name AS prod_routing_name
                         ,pd.id AS prod_discipline_id
                         ,pd.name AS prod_discipline_name
+                        ,prd.order_no AS order_no
                         
                         ,ROUND(AVG(pose.worker_number),2) AS avg_worker_number
                         ,ROUND(AVG(pose.total_uom),2) AS avg_total_uom
@@ -91,7 +92,7 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
     if (isset($valOfParams['prod_routing_link_id']) && $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ({{prod_routing_link_id}})";
 
                     $sql .= "\n GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id
-                    ORDER BY project_name, sub_project_name, prod_discipline_name, prod_routing_link_name";
+                    ORDER BY project_name, sub_project_name, prod_discipline_name, order_no";
             return $sql;
     }
 

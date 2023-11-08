@@ -39,15 +39,16 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         return [$previousDate, $latestDate];
     }
 
-    private function generateStartAndDayOfWeek($params){
-        try{
+    private function generateStartAndDayOfWeek($params)
+    {
+        try {
             $year = $params['year'];
             $weeksData = DateReport::getWeeksInYear($year);
             $indexDates = $weeksData[$params['weeks_of_year']];
             $previousDate = $indexDates['start_date'];
             $latestDate = $indexDates['end_date'];
             return [$previousDate, $latestDate];
-        } catch (Exception $e){
+        } catch (Exception $e) {
             dd($e->getMessage(), $params);
         }
     }
@@ -238,56 +239,83 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        // dd($params);
-        if (in_array('children_mode',array_keys($params)) && is_null($params['children_mode']) || empty($params)) {
-            $params['sub_project_id'] = $this->subProjectId;
-            $params['year'] = date('Y');
-            $params['children_mode'] = 'filter_by_year';
-            $params['month'] = date("Y-m");
-    
-            if ($params['children_mode'] === 'filter_by_year') {
-                $currentWeek = str_pad(date('W'), 2, '0', STR_PAD_LEFT);
-                $previousWeek = str_pad(date('W') - 1, 2, '0', STR_PAD_LEFT);
-    
-                $params['weeks_of_year'] = $currentWeek;
-                [$start_date, $end_date] = $this->generateStartAndDayOfWeek($params);
-                $params['previous_month'] = 'W' . $previousWeek . '-' . substr(date('Y'), -2) . ' (' . $start_date . ')';
-                $params['latest_month'] = 'W' . $currentWeek . '-' . substr(date('Y'), -2) . ' (' . $end_date . ')';
-            } else {
+        if (!$this->hasChildrenMode($params) || empty($params)) {
+            $params = $this->getDefaultParamsForFilterByYear();
+        } elseif (Report::checkValueOfField($params, 'children_mode')) {
+            $params = $this->getParamsFromUserSettings($params, $request);
+        }
 
-                [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
-                $params['previous_month'] = substr($previousDate, 0, 7);
-                $params['latest_month'] = substr($latestDate, 0, 7);
-            }
-        }
-        if (Report::checkValueOfField($params, 'children_mode')) {
-            $settings = CurrentUser::getSettings();
-            $indexMode = $params['children_mode'];
-            $typeReport = CurrentPathInfo::getTypeReport2($request);
-            if(isset($settings[$this->getTable()][$typeReport][$this->mode][$indexMode])){
-                // get params in user settings
-                $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
-            } else{
-                // set default params when don't find params in user settings
-                $currentWeek = str_pad(date('W'), 2, '0', STR_PAD_LEFT);
-                $params['weeks_of_year'] = $currentWeek;
-                $params['month'] = date("Y-m");
-                $params['year'] = date('Y');
-            }
-            if ($params['children_mode'] === 'filter_by_year') {
-                $currentWeek = str_pad($params['weeks_of_year'], 2, '0', STR_PAD_LEFT);
-                $year = $params['year'];
-                [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
-                $params['previous_month'] = 'W'.($currentWeek-1).'/'.$year.'('. $previousDate.')';
-                $params['latest_month'] = 'W'.$currentWeek.'('.$latestDate.')';
-            } else {
-                [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
-                $params['previous_month'] = substr($previousDate, 1, 7);
-                $params['latest_month'] = substr($latestDate, 1, 7);
-            }
+        return $params;
+    }
+
+    protected function hasChildrenMode($params)
+    {
+        return isset($params['children_mode']) && !is_null($params['children_mode']);
+    }
     
+
+    protected function getDefaultParamsForFilterByYear()
+    {
+        $params['sub_project_id'] = $this->subProjectId;
+        $params['year'] = date('Y');
+        $params['children_mode'] = 'filter_by_year';
+        $params['month'] = date("Y-m");
+
+        if ($params['children_mode'] === 'filter_by_year') {
+            $currentWeek = str_pad(date('W'), 2, '0', STR_PAD_LEFT);
+            $previousWeek = str_pad(date('W') - 1, 2, '0', STR_PAD_LEFT);
+
+            $params['weeks_of_year'] = $currentWeek;
+            [$start_date, $end_date] = $this->generateStartAndDayOfWeek($params);
+            $params['previous_month'] = 'W' . $previousWeek . '-' . substr(date('Y'), -2) . ' (' . $start_date . ')';
+            $params['latest_month'] = 'W' . $currentWeek . '-' . substr(date('Y'), -2) . ' (' . $end_date . ')';
+        } else {
+
+            [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
+            $params['previous_month'] = substr($previousDate, 0, 7);
+            $params['latest_month'] = substr($latestDate, 0, 7);
         }
-        // dump($params);
+        return $params;
+    }
+
+    protected function getParamsFromUserSettings($params, $request)
+    {
+        $settings = CurrentUser::getSettings();
+        $indexMode = $params['children_mode'];
+        $typeReport = CurrentPathInfo::getTypeReport2($request);
+
+        if (isset($settings[$this->getTable()][$typeReport][$this->mode][$indexMode])) {
+            $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
+        } else {
+            $params = $this->getDefaultParamsForFilterByYear();
+        }
+
+        if ($params['children_mode'] === 'filter_by_year') {
+            $params = $this->updateParamsForFilterByYear($params);
+        } else {
+            $params = $this->updateParamsForOtherModes($params);
+        }
+
+        return $params;
+    }
+
+    protected function updateParamsForFilterByYear($params)
+    {
+        $currentWeek = str_pad($params['weeks_of_year'], 2, '0', STR_PAD_LEFT);
+        $year = $params['year'];
+        [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
+        $params['previous_month'] = 'W' . ($currentWeek - 1) . '/' . $year . '(' . $previousDate . ')';
+        $params['latest_month'] = 'W' . $currentWeek . '(' . $latestDate . ')';
+
+        return $params;
+    }
+
+    protected function updateParamsForOtherModes($params)
+    {
+        [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
+        $params['previous_month'] = substr($previousDate, 1, 7);
+        $params['latest_month'] = substr($latestDate, 1, 7);
+
         return $params;
     }
 }

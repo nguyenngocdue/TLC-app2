@@ -15,8 +15,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     $tc = "<x-reports.utility-report routeName='$routeName'/>"; 
     $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
 @endphp
-{{-- @dd($tableDataSource); --}}
-{{-- @dump($params) --}}
+
 <div class="grid grid-cols-12 gap-1">
         <div class="col-span-2">
             <div class="no-print justify-end pl-4 pt-5">
