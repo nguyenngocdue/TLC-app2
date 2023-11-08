@@ -29,7 +29,6 @@ abstract class MatrixForReportParent extends Component
     abstract function getYAxis();
     abstract function getDataSource($xAxis, $yAxis);
 
-    private $once = true;
     function cellRenderer($cell, $xAxis, $yAxis, $dataSource)
     {
         if (isset($cell->status)) {
@@ -109,7 +108,15 @@ abstract class MatrixForReportParent extends Component
 
     function sortBy($column, $dataSource)
     {
-        usort($dataSource, fn ($a, $b) => $a[$column] <=> $b[$column]);
+        // try {
+        usort($dataSource, function ($a, $b) use ($column) {
+            $x = $a[$column] ?? 0;
+            $y = $b[$column] ?? 0;
+            return $x <=> $y;
+        });
+        // } catch (\Exception $e) {
+        //     dd($dataSource);
+        // }
         return $dataSource;
     }
 
@@ -131,7 +138,7 @@ abstract class MatrixForReportParent extends Component
         return $wa;
     }
 
-    function calculateProgress($xAxis, $yAxis, $dataSource)
+    function calculateProgressForRows($xAxis, $yAxis, $dataSource)
     {
         $weightArray = $this->getWeightArray($xAxis, $yAxis, $dataSource);
 
@@ -162,6 +169,45 @@ abstract class MatrixForReportParent extends Component
         return $dataSource;
     }
 
+    function calculateProgressForColumns($xAxis, $yAxis, $dataSource)
+    {
+        $result = [];
+        foreach ($xAxis as $x) $result[$x->id] = 0;
+        $totalProgress = 0;
+        foreach ($dataSource as $line) {
+            foreach ($line as $cell) {
+                if (isset($cell->status)) { // row progress is a number
+                    if (in_array($cell->status, $this->finishedArray)) {
+                        $result[$cell->{$this->dataIndexX}] += 1;
+                    }
+                }
+            }
+            $v = $line['progress']->value ?? '0%';
+            $totalProgress += substr($v, 0, strlen($v) - 1);
+        }
+
+        $totalProgress /= sizeof($yAxis);
+
+        foreach ($result as &$line) {
+            $line = (object)[
+                'value' => number_format(100 * $line / 32) . '%',
+                'cell_class' => "text-right",
+            ];
+        }
+
+        $result['progress'] = (object)[
+            'value' => number_format($totalProgress, 2) . '%',
+            'cell_class' => 'text-right font-bold bg-gray-100',
+        ];
+        $result['name'] = (object)[
+            'value' => "Total",
+            'cell_class' => 'text-center font-bold bg-gray-100',
+        ];
+        $dataSource[] = $result;
+        // dump($dataSource);
+        return $dataSource;
+    }
+
     function render()
     {
         $xAxis = $this->getXAxis();
@@ -174,9 +220,10 @@ abstract class MatrixForReportParent extends Component
         ];
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $dataSource);
 
-        $dataSource = $this->calculateProgress($xAxis, $yAxis, $dataSource);
+        $dataSource = $this->calculateProgressForRows($xAxis, $yAxis, $dataSource);
         $dataSource = $this->attachMeta($xAxis, $yAxis, $dataSource);
         $dataSource = $this->sortBy('name', $dataSource);
+        $dataSource = $this->calculateProgressForColumns($xAxis, $yAxis, $dataSource);
         $dataSource = $this->renderCell($xAxis, $yAxis, $dataSource);
         // dump($dataSource);
 
