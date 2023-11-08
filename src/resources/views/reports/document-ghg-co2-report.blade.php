@@ -5,13 +5,12 @@
 @section('title', $titleReport)
 @section('tooltip', Str::ucfirst($typeReport)." ".$currentMode)
 @section('content')
-
 {{-- PARAMETERS --}}
 @php
 $widthCell = 50;
 $class1 = "bg-white dark:border-gray-600 border-r";
 $class2 =" bg-gray-100 px-4 py-3 border-gray-300 ";
-$titleColName = isset($params['quarter_time']) ? 'QTR'.$params['quarter_time'] : 'YTD';
+$titleColName = isset($params['quarter_time']) ? 'QTR'.implode(',',$params['quarter_time']) : 'YTD';
 $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
 $year = $params['year'];
 $data = $tableDataSource['carbon_footprint'][$year];
@@ -19,7 +18,7 @@ $pivotChart1 = $tableDataSource['pivot_chart_1'];
 $pivotChart2 = $tableDataSource['pivot_chart_2'];
 $info = $tableDataSource['info'];
 $text = isset($params['only_month']) ? implode(',',App\Utils\Support\StringReport::stringsPad($params['only_month'])).'/'.$year: $year;
-$text = isset($params['quarter_time']) && !isset($params['only_month']) ? 'QTR'.$params['quarter_time'].'/'.$text: $text;
+$text = isset($params['quarter_time']) && !isset($params['only_month']) ? 'QTR'.implode(',',$params['quarter_time']).'/'.$text: $text;
 #dump($text);
 @endphp
 {{-- @dump($tableDataSource) --}}

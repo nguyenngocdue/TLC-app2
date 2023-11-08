@@ -32,21 +32,22 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 				'dataIndex' => 'year',
 			],
 			[
-				'title' => 'Month',
-				'dataIndex' => 'only_month',
-				'multiple' => true,
-				'allowClear' => true,
-			],
-			[
 				'title' => 'Half Year',
 				'dataIndex' => 'half_year',
 				// 'multiple' => true,
 				'hasListenTo' => true,
+				'allowClear' => true,
 			],
 			[
 				'title' => 'Quarter',
 				'dataIndex' => 'quarter_time',
-				// 'multiple' => true,
+				'multiple' => true,
+				'allowClear' => true,
+			],
+			[
+				'title' => 'Month',
+				'dataIndex' => 'only_month',
+				'multiple' => true,
 				'allowClear' => true,
 			],
 		];

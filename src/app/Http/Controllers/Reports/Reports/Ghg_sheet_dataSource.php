@@ -20,6 +20,16 @@ class Ghg_sheet_dataSource extends Controller
 	{
 		// GET MONTHS TO SHOW ON TABLE
 		$months = range(1, 12);
+		if(Report::checkValueOfField($params, 'half_year')){
+			$months = $params['half_year']  === 'start_half_year' 
+						? range(1, 6): range(7,12);
+		}
+		if(Report::checkValueOfField($params, 'quarter_time')){
+			$quarterTimes = $params['quarter_time'];
+			$months = array_merge(...array_map(fn($item) => DateReport::getMonthsByQuarter($item), $quarterTimes));
+		}
+
+
 		if (isset($params['quarter_time'])) {
 			$quarter = $params['quarter_time'];
 			if ($quarter === '1') {
@@ -48,13 +58,14 @@ class Ghg_sheet_dataSource extends Controller
 		$year = $params['year'];
 		// dd($strSqlMonth, $strSumValue);
 
+		// Set half year
+		$start_date = $year.'-01-01';
+		$end_date = $year.'-12-31';
 		if(isset($params['half_year']) && $params['year']) {
 			$key = $params['half_year'];
 			$strDate = DateReport::getHalfYearPeriods($params['year'])[$key];
 			[$start_date, $end_date] = explode('/',$strDate);
 		}
-
-
 		// SQL
 		$sql =  " SELECT infghgsh.*,$strSqlMonth ghgsh_totals.month_ghg_sheet_id,
 					    ghgsh_totals.quarter1,
@@ -95,6 +106,9 @@ class Ghg_sheet_dataSource extends Controller
 							WHERE 1 = 1
 							AND ghgsh.deleted_by IS NULL
 							AND SUBSTR(ghgsh.ghg_month, 1, 4) = '$year'";
+				if(isset($params['half_year']) && $start_date) $sql .=" \n AND SUBSTR(ghgsh.ghg_month, 1, 10) >= '$start_date'";
+				if(isset($params['half_year']) && $end_date) $sql .=" \n AND SUBSTR(ghgsh.ghg_month, 1, 10) <= '$end_date'";
+
 				$sql .="\n GROUP BY ghgsh_tmpl_id
 						) ghgsh_totals ON infghgsh.ghg_tmpl_id = ghgsh_totals.ghgsh_tmpl_id
 						ORDER BY ghgcate_id, ghg_tmpl_id
