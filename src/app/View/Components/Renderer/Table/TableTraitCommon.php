@@ -4,10 +4,19 @@ namespace App\View\Components\Renderer\Table;
 
 trait TableTraitCommon
 {
-    private function getStyleStr($column)
+    // private function getStyleStr($column)
+    // {
+    //     $width = (isset($column['width']) && $column['width'] != '') ? $column['width'] : 100;
+    //     return "style='width:" . $width . "px'";
+    // }
+
+    private function getStyleStr($params)
     {
-        $width = (isset($column['width']) && $column['width'] != '') ? $column['width'] : 100;
-        return "style='width:" . $width . "px'";
+        $result = [];
+        foreach ($params as $key => $value) {
+            $result[] = "$key: $value";
+        }
+        return "style='" . join(";", $result) . "'";
     }
 
     private function isInvisible($column)

@@ -63,26 +63,36 @@ trait TableTraitColumns
         $tooltip .= "+ Colspan: $colspan\n";
         $tooltip .= "+ Took: {$elapse}ms";
 
-        $styleStr = $this->getStyleStr($column);
         $iconJson = $columnType === 'json' ? '<br/><i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
         if ($columnType === 'json') $title .= $iconJson;
         // if (env('SHOW_ELAPSE'))  $title .= "<br/><span title='Elapse time'>({$elapse}ms)</span>";
         // if ((env('SHOW_ELAPSE') && !app()->isProduction()) || (in_array(CurrentUser::id(), [35, 38]))) $title .= "<br/><span title='Elapse time'>({$elapse}ms)</span>";
         $rotate45Width = $this->rotate45Width;
-        $rotate45Height = ($this->rotate45Width) ? $rotate45Width - 100 : false;
-        $classTh = ($this->rotate45Width) ? "rotated-title-th h-[{$rotate45Height}px]" : "";
-        $classDiv = ($this->rotate45Width) ? "rotated-title-div text-right w-[{$rotate45Width}px]" : "";
+        $rotate45Height = $this->rotate45Height ?: (($this->rotate45Width) ? $rotate45Width - 100 : false);
+
+        $thStyleStr = $this->getStyleStr([
+            'a' => 1,
+            'width' => ($column['width'] ?? 100) . "px",
+            'height' => $rotate45Height . "px",
+        ]);
+
+        $divStyleStr = $this->getStyleStr([
+            'width' => $rotate45Width . "px",
+        ]);
+
+        $classTh = ($this->rotate45Width) ? "rotated-title-th" : "";
+        $classDiv = ($this->rotate45Width) ? "rotated-title-div text-right" : "";
         $borderRight = $isLastColumn ? "" : "border1 border-r";
         $borderRight = ($this->rotate45Width) ? "" : $borderRight;
         $tinyText = $this->noCss ? "text-xs" : "";
         $colspanStr = ($colspan > 1) ? "colspan=$colspan" : "";
         $hiddenStr = $hidden ? "hidden" : "";
         $th = "";
-        $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr $styleStr ";
+        $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr $thStyleStr ";
         $th .= "class='$fixedLeft $fixedRight bg-gray-100 px-4 py-3 border-b border-gray-300 $borderRight $classTh $hiddenStr' ";
         $th .= "title='$tooltip' ";
         $th .= ">";
-        $th .= "<div class='$classDiv $tinyText text-gray-700 dark:text-gray-300'>";
+        $th .= "<div class='$classDiv $tinyText text-gray-700 dark:text-gray-300' $divStyleStr>";
         $th .= "<span>" . $title . "</span>";
         $th .= "</div>";
         $th .= "</th>";
@@ -152,7 +162,7 @@ trait TableTraitColumns
             if ($this->isInvisible($column)) continue;
             $fixedLeft = $this->getFixedLeftOrRight($column, $index, "left", "th");
             $fixedRight = $this->getFixedLeftOrRight($column, $index, "right", "th");
-            $styleStr = $this->getStyleStr($column);
+            $styleStr = $this->getStyleStr(['width' => ($column['width'] ?? 100) . "px", 'a' => 2]);
             $dataIndex = $column['dataIndex'];
             $borderR = $index < (sizeof($columns) - 1) ? 'border-r' : "";
             if (isset($dataHeader[$dataIndex])) {
