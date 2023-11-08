@@ -4,6 +4,11 @@
 @section('title', $titleReport)
 @section('tooltip', Str::ucfirst($typeReport)." ".$mode)
 @section('content')
+@php
+    $projectId = $params['project_id'];
+    $subProjectId = $params['sub_project_id'];
+    $prodRoutingId = $params['prod_routing_id'];
+@endphp
 
 <div class="px-4 ">
     <div class="justify-end pb-5"></div>
@@ -16,13 +21,9 @@
         $tc = "<x-reports.utility-report routeName='$routeName'/>"; 
         $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
     @endphp
-    <div class="px-10 bg-white">
-        <x-renderer.matrix-for-report.qaqc_wirs  project="8"  subProjectId="107" prodRoutingId="62" />
+        <x-renderer.matrix-for-report.prod_sequences subProjectId="{{$subProjectId}}" prodRoutingId="{{$prodRoutingId}}" />
          @if(!empty($legendColors))
-            <x-renderer.card class="mb-5">
-                <x-reports.color-legend-report :dataSource="$legendColors" />
-            </x-renderer.card>
+            <x-reports.color-legend-report :dataSource="$legendColors" />
         @endif
-    </div>
 </div>
 @endsection

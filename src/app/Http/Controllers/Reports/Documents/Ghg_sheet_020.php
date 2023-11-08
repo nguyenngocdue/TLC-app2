@@ -173,15 +173,15 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			$array = [
 				'direct_emissions' => [
 					'tco2e' =>$directEmissions,
-					'percent' =>round($directEmissions*100/$max,2)
+					'percent' =>$max ? round($directEmissions*100/$max,2): null
 				] ,
 				'indirect_emissions' => [
 					'tco2e' =>$inDirectEmissions,
-					'percent' =>round($inDirectEmissions*100/$max,2)
+					'percent' =>$max ? round($inDirectEmissions*100/$max,2) : null
 				],
 				'other_indirect_emissions' => [
 					'tco2e' =>$otherInDirectEmissions,
-					'percent' =>round($otherInDirectEmissions*100/$max,2)
+					'percent' =>$max ? round($otherInDirectEmissions*100/$max,2) : null
 				]
 			];
 			$dataSource->put('info', $this->addInfo($array));

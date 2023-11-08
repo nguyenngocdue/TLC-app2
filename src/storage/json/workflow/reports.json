@@ -98,13 +98,21 @@
         "top_title": "QC Acceptance Report",
         "title": "QC Acceptance Report"
     },
-    "register-qaqc_insp_chklst_020": {
-        "name": "register-qaqc_insp_chklst_020",
+    "register-prod_sequence_010": {
+        "name": "register-prod_sequence_010",
         "package_tab": "report",
         "package": "project_management",
-        "breadcrumb-group": null,
-        "top_title": null,
-        "title": "Inspection Matrix"
+        "breadcrumb-group": "production",
+        "top_title": "Sequence Register",
+        "title": "Sequence Register"
+    },
+    "register-qaqc_wir_010": {
+        "name": "register-qaqc_wir_010",
+        "package_tab": "report",
+        "package": "project_management",
+        "breadcrumb-group": "production",
+        "top_title": "QAQC WIR Register",
+        "title": "QAQC WIR Register"
     },
     "report-eco_sheet_110": {
         "name": "report-eco_sheet_110",
