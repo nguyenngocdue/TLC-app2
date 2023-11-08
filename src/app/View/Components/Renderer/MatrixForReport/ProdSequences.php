@@ -20,6 +20,7 @@ class ProdSequences extends MatrixForReportParent
         private $subProjectId = 107,
     ) {
         parent::__construct("prod_sequences");
+        // echo ($prodRoutingId . " - " . $subProjectId);
     }
 
     function getXAxis()

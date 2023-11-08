@@ -17,6 +17,7 @@ class QaqcWirs extends MatrixForReportParent
         private $subProjectId = 107,
     ) {
         parent::__construct("qaqc_wirs");
+        // echo ($prodRoutingId . " - " . $subProjectId);
     }
 
     function getXAxis()

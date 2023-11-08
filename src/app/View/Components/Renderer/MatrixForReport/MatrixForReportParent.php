@@ -182,7 +182,7 @@ abstract class MatrixForReportParent extends Component
                     }
                 }
             }
-            $v = $line['progress']->value;
+            $v = $line['progress']->value ?? '0%';
             $totalProgress += substr($v, 0, strlen($v) - 1);
         }
 
