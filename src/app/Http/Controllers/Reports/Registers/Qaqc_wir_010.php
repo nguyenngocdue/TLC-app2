@@ -24,7 +24,7 @@ class Qaqc_wir_010 extends Report_ParentRegisterController
     protected  $prod_routing_id = 62;
     protected $mode = '020';
     protected $maxH = 45;
-    protected $viewName="register-qaqc_wir_010";
+    protected $viewName="register-qaqc-wir-010";
 
     public function getSqlStr($params)
     {
