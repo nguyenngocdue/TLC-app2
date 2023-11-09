@@ -25,6 +25,8 @@ trait TraitGenerateValuesFromParamsReport
             "month",
             'only_month',
             'year',
+            'metric_type1',
+            'metric_type2',
         ], $params);
         return $valOfParams;
     }

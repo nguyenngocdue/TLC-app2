@@ -15,7 +15,6 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
     public function getSqlStr($params)
     {
         $valOfParams = $this->generateValuesFromParamsReport($params);
-        // dd($valOfParams['only_month']);
         $sql = "SELECT
                     ghgtmpls.id  AS ghg_sheet_id,
                     ghgtmpls.name  AS ghg_sheet_name,
@@ -30,7 +29,7 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                     ghgsl.factor AS factor,
                     ghgsl.value AS value,
                     ghgsl.total AS total,
-                    ROUND(ghgsl.total/1000,2) AS tCo2e,
+                    ROUND(ghgsl.total/1000,3) AS tCo2e,
                     ghgsl.remark AS remark
                     FROM  ghg_sheets ghgs
                     JOIN ghg_tmpls ghgtmpls ON ghgs.ghg_tmpl_id = ghgtmpls.id
@@ -39,6 +38,9 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                     LEFT JOIN ghg_metric_type_1s ghgmt1 ON ghgmt1.id = ghgsl.ghg_metric_type_1_id
                     LEFT JOIN terms terms ON terms.id = ghgsl.unit
                     WHERE 1 = 1";
+    if(Report::checkParam($valOfParams, 'metric_type1')) $sql .= "\n AND ghgmt1.id = {{metric_type1}}";
+    if(Report::checkParam($valOfParams, 'metric_type2')) $sql .= "\n AND ghgmt2.id = {{metric_type2}}";
+
     if(Report::checkParam($valOfParams, 'ghg_tmpl')) $sql .= "\n AND ghgtmpls.id IN ({{ghg_tmpl}})";
     if(Report::checkParam($valOfParams, 'only_month')) $sql .= "\n AND SUBSTR(ghgs.ghg_month, 6 , 2) IN ({{only_month}})";
     if(Report::checkParam($valOfParams, 'year')) $sql .= "\n AND SUBSTR(ghgs.ghg_month, 1 , 4) IN ({{year}})";
@@ -64,8 +66,20 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
             [
                 'title' => 'CO2 Emission Sheet',
                 'dataIndex' => 'ghg_tmpl',
-                'multiple' => true,
+                // 'multiple' => true,
                 'allowClear' => true,
+            ],
+            [
+                'title' => 'Metric Type 1',
+                'dataIndex' => 'metric_type1',
+                'allowClear' => true,
+                'hasListenTo' => true,
+            ],
+            [
+                'title' => 'Metric Type 2',
+                'dataIndex' => 'metric_type2',
+                'allowClear' => true,
+                'hasListenTo' => true,
             ]
         ];
     }
@@ -81,7 +95,7 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                 "width" =>150,
             ],
             [
-                "title" => "Name",
+                "title" => "CO2 Emission Sheet",
                 "dataIndex" => "ghg_sheet_name",
                 "align" => "left",
                 "width" =>300,
@@ -118,14 +132,14 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                 "footer" => "agg_sum"
             ],
             [
-                "title" => "Total",
+                "title" => "Total <br/>(Kg/CO2)",
                 "dataIndex" => "total",
                 "align" => "right",
                 "width" =>100,
                 "footer" => "agg_sum"
             ],
             [
-                "title" => "tCO2e",
+                "title" => "Total <br/>(tCO2e)",
                 "dataIndex" => "tCo2e",
                 "align" => "right",
                 "width" =>100,
@@ -162,5 +176,16 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                 ],
             ]
         ];
+    }
+    public  function changeDataSource($dataSource, $params)
+    {
+        //Remove numbers in front of names
+        foreach ($dataSource as $key => &$item) {
+            $indexDot1 = strpos($item->ghg_name, '.')-1;
+            $indexDot2 = strpos($item->ghg_sheet_name, '.')-1;
+            $item->ghg_name = trim(substr($item->ghg_name, $indexDot1));
+            $item->ghg_sheet_name = trim(substr($item->ghg_name, $indexDot2));
+        }
+        return $dataSource;
     }
 }

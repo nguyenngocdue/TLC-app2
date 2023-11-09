@@ -259,7 +259,7 @@ abstract class Report_Parent2Controller extends Controller
         $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
         $optionPrint = $params['optionPrintLayout'] ?? $this->optionPrint;
         $tableTrueWidth = $this->overTableTrueWidth && $optionPrint === 'landscape' ? 0 : $this->tableTrueWidth;
-        // dump($params);
+        // dump($dataSource);
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,
