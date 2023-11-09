@@ -27,6 +27,24 @@
             @endif
         </div>
     </div>
+    @switch($task->task_priority)
+        @case(367)
+            <span class="text-green-600">▼</span>
+        @break
+        @case(368)
+            <span class="text-green-300">▼</span>
+        @break
+        @case(369)
+            <span class="text-blue-500">—</span>
+        @break
+        @case(370)
+            <span class="text-red-300">▲</span>
+        @break
+        @case(371)
+            <span class="text-red-600">▲</span>
+        @break
+    @endswitch
+    
     @if($task->target_hours)
     Target hour: {{$task->target_hours}}
     @endif
