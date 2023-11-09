@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
+use App\Http\Controllers\Reports\TraitConversionFieldNameGhgReport;
 use App\Utils\Support\Report;
 
 class Ghg_sheet_010 extends Report_ParentReport2Controller
 {
+	use TraitConversionFieldNameGhgReport;
     protected $mode='010';
     protected $maxH = 50;
     protected $typeView = 'report-pivot';
@@ -179,13 +181,7 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
     }
     public  function changeDataSource($dataSource, $params)
     {
-        //Remove numbers in front of names
-        foreach ($dataSource as $key => &$item) {
-            $indexDot1 = strpos($item->ghg_name, '.')-1;
-            $indexDot2 = strpos($item->ghg_sheet_name, '.')-1;
-            $item->ghg_name = trim(substr($item->ghg_name, $indexDot1));
-            $item->ghg_sheet_name = trim(substr($item->ghg_name, $indexDot2));
-        }
+        $dataSource = $this->convertNames($dataSource);
         return $dataSource;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\Reports\Ghg_sheet_dataSource;
+use App\Http\Controllers\Reports\TraitConversionFieldNameGhgReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Utils\Support\DocumentReport;
@@ -48,7 +49,6 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 		];
 	}
 
-
 	public function getDataSource($params)
 	{
 		$dataSource = [];
@@ -60,6 +60,8 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 			$valueOfYears[$year] = array_column(array_values($primaryData), $year);
 			$dataSource[$year] = $primaryData;
 		}
+
+				
 		return collect($dataSource);
 	}
 

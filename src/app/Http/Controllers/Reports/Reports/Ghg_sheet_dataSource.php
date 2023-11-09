@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Reports\TraitConversionFieldNameGhgReport;
 use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Utils\Support\DateReport;
@@ -14,6 +15,7 @@ class Ghg_sheet_dataSource extends Controller
 {
     use TraitDynamicColumnsTableReport;
     use TraitCreateSQL;
+	use TraitConversionFieldNameGhgReport;
     protected $year = '2023';
 
 	public function getSqlStr($params)
@@ -122,6 +124,7 @@ class Ghg_sheet_dataSource extends Controller
         if (is_null($sql) || !$sql) return collect();
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
+		$collection = $this->convertNames($collection);
         return $collection;
     }
 
