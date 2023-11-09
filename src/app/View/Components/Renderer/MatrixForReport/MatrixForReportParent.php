@@ -172,13 +172,20 @@ abstract class MatrixForReportParent extends Component
     function calculateProgressForColumns($xAxis, $yAxis, $dataSource)
     {
         $result = [];
-        foreach ($xAxis as $x) $result[$x->id] = 0;
+        $count = [];
+        foreach ($xAxis as $x) {
+            $result[$x->id] = 0;
+            $count[$x->id] = 0;
+        }
         $totalProgress = 0;
         foreach ($dataSource as $line) {
             foreach ($line as $cell) {
                 if (isset($cell->status)) { // row progress is a number
                     if (in_array($cell->status, $this->finishedArray)) {
-                        $result[$cell->{$this->dataIndexX}] += 1;
+                        $result[$cell->{$this->dataIndexX}]++;
+                    }
+                    if (in_array($cell->status, $this->naArray)) {
+                        $count[$cell->{$this->dataIndexX}]++;
                     }
                 }
             }
@@ -186,15 +193,17 @@ abstract class MatrixForReportParent extends Component
             $totalProgress += substr($v, 0, strlen($v) - 1);
         }
 
-        $totalProgress /= sizeof($yAxis);
+        $totalRows = count($yAxis);
 
-        foreach ($result as &$line) {
+        foreach ($result as $xId => &$line) {
             $line = (object)[
-                'value' => number_format(100 * $line / 32) . '%',
-                'cell_class' => "text-right",
+                // 'value' => number_format(100 * $line / 32) . '%',
+                'value' => $line . '<hr class="text-black"/>' . ($totalRows - $count[$xId]),
+                'cell_class' => "text-center",
             ];
         }
 
+        $totalProgress /= sizeof($yAxis);
         $result['progress'] = (object)[
             'value' => number_format($totalProgress, 2) . '%',
             'cell_class' => 'text-right font-bold bg-gray-100',
