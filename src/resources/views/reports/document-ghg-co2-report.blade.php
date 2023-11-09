@@ -185,3 +185,10 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
     </div>
 </div>
 @endsection
+
+<script>
+$('.js-example-basic-single').select2({
+  placeholder: 'Select an option'
+});
+
+</script>
