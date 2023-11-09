@@ -14,6 +14,9 @@
                     $month = array_slice($tableDataSource['total_emission'],1, null, true);
                     @endphp
                     @foreach(array_keys($month) as $value)
+                    @php
+                        $value = App\Utils\Support\DateReport::getMonthAbbreviation2((int)$value);
+                    @endphp
                     <th class="{{$class2}} border-l">{{$value}}</th>
                     @endforeach
                 </tr>

@@ -192,7 +192,6 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
 	{
-
 		$report010 = new Ghg_sheet_010();
 		$dataSource010 = $report010->getDataSource($params);
 		$dataSource010 = $report010->changeDataSource($dataSource010, $params);
