@@ -33,8 +33,9 @@ class SubProjectFilter extends Component
 
     private function getDataSource()
     {
+        $statuses = config("project.active_statuses.sub_projects");
         $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')
-            ->whereIn('status', ['manufacturing', 'construction_site'])
+            ->whereIn('status', $statuses)
             ->orderBy('name')
             ->get();
         return $dataSource;

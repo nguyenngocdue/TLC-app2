@@ -33,7 +33,6 @@ class ProdDisciplineFilter extends Component
     private function getDataSource()
     {
         return Prod_discipline::select('id', 'name', 'description')
-            // ->whereIn('status', ['manufacturing', 'construction_site'])
             ->orderBy('name')
             ->get();
     }

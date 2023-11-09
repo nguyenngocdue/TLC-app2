@@ -63,7 +63,6 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
             // ->where('sub_project_id', $this->subProject)
             // ->where('prod_routing_id', $this->prodRouting)
             // ->with('getRoomType')
-            // ->whereIn('status', ['manufacturing', 'construction_site',])
             ->orderBy('name')
             ->get();
         return $yAxis;

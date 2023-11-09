@@ -45,7 +45,8 @@ class Project extends ModelExtended
 
     public static function getAllProjectByCondition()
     {
-        return self::whereIn('status', ['manufacturing', 'construction_site'])->get();
+        $status = config("project.active_statuses." . static::getTableName());
+        return self::whereIn('status', $status)->get();
     }
     public function featured_image()
     {
