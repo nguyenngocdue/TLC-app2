@@ -103,16 +103,16 @@
         "package_tab": "report",
         "package": "project_management",
         "breadcrumb-group": "production",
-        "top_title": "Sequence Register",
-        "title": "Sequence Register"
+        "top_title": null,
+        "title": "Completion Matrix"
     },
     "register-qaqc_wir_010": {
         "name": "register-qaqc_wir_010",
         "package_tab": "report",
         "package": "project_management",
         "breadcrumb-group": "production",
-        "top_title": "QAQC WIR Register",
-        "title": "QAQC WIR Register"
+        "top_title": null,
+        "title": "Completion Matrix"
     },
     "report-eco_sheet_110": {
         "name": "report-eco_sheet_110",
