@@ -46,4 +46,10 @@ class CurrentPathInfo
         $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[1]);
         return $pathInfo[0];
     }
+
+    public static function getModeKey($request){
+        $pathInfo = $request->getPathInfo();
+        $pathInfo = explode('-', explode('/', trim($pathInfo, '/'))[1]);
+        return $pathInfo[1];
+    }
 }

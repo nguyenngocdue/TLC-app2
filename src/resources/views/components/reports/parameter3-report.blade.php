@@ -37,21 +37,25 @@ $route = $routeName ? route($routeName) : "";
                 <x-reports.dropdown7 :infoParam="$value" hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />
                     @if ($errors->any())
                             @foreach ($errors->getMessages() as $field => $message)
-                                @if($field === $name)
-                                <span class="text-xs" role="alert">
-                                    <ul class="mt-1.5 text-red-600 font-semibold">
-                                    @php
-                                        $textValidation = App\Utils\Support\Report::checkValueOfField($value,'textValidation' ) ? $value['textValidation'] : last($message);
-                                    @endphp
-                                        <li>({{$textValidation}})</li>
-                                    </ul>
-                                </span>
+                                @if($field === $name && $field !== 'end_date' && $field !== 'end_date')
+                                    <span class="text-xs" role="alert">
+                                        <p class="mt-1.5 text-red-600 font-semibold">(Please choose the correct format <strong>{{ucwords(str_replace('_', ' ', $field))}}</strong>)</p>
+                                    </span>
                                 @endif
                             @endforeach
                     @endif
                 @break
                 @case('picker_date')
                 <x-reports.picker-date1 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} value="{{$date}}" singleDatePicker='{{$singleDatePicker}}' />
+                      @if ($errors->any())
+                            @foreach ($errors->getMessages() as $field => $message)
+                                @if($field === 'start_date' || $field === 'end_date')
+                                 <span class="text-xs" role="alert">
+                                     <p class="mt-1.5 text-red-600 font-semibold">(Please choose the correct format <strong>{{ucwords(str_replace('_', ' ', $field))}}</strong>)</p>
+                                 </span>
+                                @endif
+                            @endforeach
+                    @endif
                 @break
                 @default
                 @endswitch
