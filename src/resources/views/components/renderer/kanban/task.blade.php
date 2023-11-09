@@ -29,19 +29,19 @@
     </div>
     @switch($task->task_priority)
         @case(366)
-            <span class="text-green-600">▼</span>
+            <span class="text-green-600" title="Very Low">▼</span>
         @break
         @case(367)
-            <span class="text-green-300">▼</span>
+            <span class="text-green-300" title="Low">▼</span>
         @break
         @case(368)
-            <span class="text-blue-500">—</span>
+            <span class="text-blue-500" title="Medium">—</span>
         @break
         @case(369)
-            <span class="text-red-300">▲</span>
+            <span class="text-red-300" title="High">▲</span>
         @break
         @case(370)
-            <span class="text-red-600">▲</span>
+            <span class="text-red-600" title="Very High">▲</span>
         @break
     @endswitch
     
