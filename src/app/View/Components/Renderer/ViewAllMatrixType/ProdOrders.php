@@ -79,11 +79,9 @@ class ProdOrders extends ViewAllTypeMatrixParent
 
     public function getYAxis()
     {
+        $statuses = config("project.active_statuses.sub_projects");
         $yAxis = $this->yAxis::query()
-            // ->where('sub_project_id', $this->subProject)
-            // ->where('prod_routing_id', $this->prodRouting)
-            // ->with('getRoomType')
-            ->whereIn('status', ['manufacturing', 'construction_site',])
+            ->whereIn('status', $statuses)
             ->orderBy('name')
             ->get();
         return $yAxis;
