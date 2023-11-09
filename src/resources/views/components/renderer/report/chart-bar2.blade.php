@@ -9,9 +9,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-stacked100@1.0.0"></script>
-{{-- <script>
-const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00a950','#58595b','#8549ba'];
-</script> --}}
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@1.2.0"></script>
+
 @endonce
 
 <script>
@@ -89,7 +88,22 @@ var chartConfig = {
                 },
             }
         },
-        plugins: { 
+        plugins: {
+            interaction: {
+                crosshair: {
+                    line: {
+                        color: '#F00',  // Crosshair line color
+                        width: 2,       // Crosshair line width
+                        dashPattern: [], // Crosshair line dash pattern
+                    },
+                    sync: {
+                        enabled: true,  // Enable crosshair synchronization across charts
+                    },
+                    zoom: {
+                        enabled: true  // Disable zoom on crosshair
+                    }
+                }
+            },
             tooltip: {
                 enabled: true,
                 callbacks: {
