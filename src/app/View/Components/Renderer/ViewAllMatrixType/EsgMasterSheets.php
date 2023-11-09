@@ -14,7 +14,6 @@ use Illuminate\Support\Str;
 
 class EsgMasterSheets extends ViewAllTypeMatrixParent
 {
-    use TraitFilterMonth;
     use TraitXAxisMonthly;
 
     private $workplaceId;
@@ -42,6 +41,7 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
     {
         parent::__construct();
         [$this->workplaceId, $this->viewportDate] = $this->getUserSettings();
+        $this->viewportDate .= '-01-01';
         $this->viewportDate = strtotime($this->viewportDate ? $this->viewportDate : now());
         $this->allowCreation = !!$this->workplaceId;
     }
@@ -85,6 +85,7 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
     {
         return [
             'workplace_id' => $this->workplaceId,
+            'viewport_date' => $this->viewportDate,
         ];
     }
 
@@ -104,13 +105,6 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
             ['dataIndex' => 'unit', 'align' => 'center', 'width' => 100],
         ];
     }
-
-    // protected function getMetaColumns()
-    // {
-    //     return [
-
-    //     ];
-    // }
 
     function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     {
