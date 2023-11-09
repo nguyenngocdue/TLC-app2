@@ -37,7 +37,7 @@
         "package": "project_management",
         "breadcrumb-group": "production",
         "top_title": "Target vs. Actual",
-        "title": "Target vs. Actual"
+        "title": "4. Target vs. Actual"
     },
     "document-prod_sequence_020": {
         "name": "document-prod_sequence_020",
@@ -54,7 +54,7 @@
         "package": "project_management",
         "breadcrumb-group": "production",
         "top_title": "Work Completion Percentage",
-        "title": "Work Completion Percentage",
+        "title": "(OBSOLETE) Work Completion Percentage",
         "hidden": "true"
     },
     "document-prod_sequence_040": {
@@ -63,7 +63,7 @@
         "package": "project_management",
         "breadcrumb-group": "production",
         "top_title": "Project Benchmark Report",
-        "title": "Project Benchmark Report"
+        "title": "3. Benchmark Report"
     },
     "document-prod_sequence_050": {
         "name": "document-prod_sequence_050",
@@ -71,7 +71,7 @@
         "package": "project_management",
         "breadcrumb-group": "production",
         "top_title": "PPR Daily Progress",
-        "title": "PPR Daily Progress"
+        "title": "1. PPR Daily Progress"
     },
     "document-prod_sequence_060": {
         "name": "document-prod_sequence_060",
@@ -104,13 +104,13 @@
         "package": "project_management",
         "breadcrumb-group": "production",
         "top_title": null,
-        "title": "Completion Matrix"
+        "title": "2. Completion Matrix"
     },
     "register-qaqc_wir_010": {
         "name": "register-qaqc_wir_010",
         "package_tab": "report",
         "package": "project_management",
-        "breadcrumb-group": "production",
+        "breadcrumb-group": null,
         "top_title": null,
         "title": "Completion Matrix"
     },
@@ -248,7 +248,7 @@
         "package": "project_management",
         "breadcrumb-group": "planning",
         "top_title": "Production Orders Completion Time Statistics",
-        "title": "Production Orders Completion Time Statistics"
+        "title": "ProdOrder Completion Statistics"
     },
     "report-prod_sequence_050": {
         "name": "report-prod_sequence_050",
@@ -256,7 +256,7 @@
         "package": "project_management",
         "breadcrumb-group": "planning",
         "top_title": "Production Routing Links Completion Time Statistics",
-        "title": "Production Routing Links Completion Time Statistics"
+        "title": "ProdRoutingLink Completion Statistics"
     },
     "report-prod_sequence_060": {
         "name": "report-prod_sequence_060",
