@@ -24,7 +24,7 @@ class Ghg_sheet_dataSource extends Controller
 			$months = $params['half_year']  === 'start_half_year' 
 						? range(1, 6): range(7,12);
 		}
-		if(Report::checkValueOfField($params, 'quarter_time')){
+		if(Report::checkValueOfField($params, 'quarter_time') && is_array($params['quarter_time'])){
 			$quarterTimes = $params['quarter_time'];
 			$months = array_merge(...array_map(fn($item) => DateReport::getMonthsByQuarter($item), $quarterTimes));
 		}

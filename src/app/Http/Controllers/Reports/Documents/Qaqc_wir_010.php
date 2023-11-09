@@ -284,16 +284,18 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $indexMode = $params['children_mode'];
         $typeReport = CurrentPathInfo::getTypeReport2($request);
 
+        // get param when user has already submitted
         if (isset($settings[$this->getTable()][$typeReport][$this->mode][$indexMode])) {
             $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
         } else {
+            //Set default when params is empty
             $params = $this->getDefaultParamsForFilterByYear();
         }
-
+        // update prams into user setting
         if ($params['children_mode'] === 'filter_by_year') {
             $params = $this->updateParamsForFilterByYear($params);
         } else {
-            $params = $this->updateParamsForOtherModes($params);
+            $params = $this->updateParamsForMonths($params);
         }
 
         return $params;
@@ -310,7 +312,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         return $params;
     }
 
-    protected function updateParamsForOtherModes($params)
+    protected function updateParamsForMonths($params)
     {
         [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         $params['previous_month'] = substr($previousDate, 1, 7);
