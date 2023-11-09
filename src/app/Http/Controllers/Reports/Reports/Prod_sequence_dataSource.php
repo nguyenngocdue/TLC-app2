@@ -23,6 +23,12 @@ class Prod_sequence_dataSource extends Controller
     public function getSqlStr($params)
     {
         $valOfParams = $this->generateValuesFromParamsReport($params);
+
+        if(isset($valOfParams['picker_date']) && is_string($valOfParams['picker_date'])){
+            $strDate = DateReport::defaultPickerDate();
+            $pickerDate = DateReport::separateStrPickerDate($strDate);
+            $valOfParams['picker_date'] = $pickerDate;
+        }
         $sql = "SELECT tb1.*, terms.name AS uom
                     FROM (SELECT
                     sp.project_id AS project_id,
