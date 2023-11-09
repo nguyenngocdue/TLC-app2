@@ -26,6 +26,15 @@
         "finished": "true",
         "future": "true"
     },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "finished": "true",
+        "future": "true"
+    },
     "_kanban_group_id": {
         "name": "_kanban_group_id",
         "column_name": "kanban_group_id",
@@ -35,9 +44,45 @@
         "finished": "true",
         "future": "true"
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
+    "_getTransitions": {
+        "name": "_getTransitions",
+        "column_name": "getTransitions",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "finished": "true",
+        "future": "true"
+    },
+    "_kanban_task_transition_id": {
+        "name": "_kanban_task_transition_id",
+        "column_name": "kanban_task_transition_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "finished": "true",
+        "future": "true"
+    },
+    "_target_hours": {
+        "name": "_target_hours",
+        "column_name": "target_hours",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "finished": "true",
+        "future": "true"
+    },
+    "_task_priority": {
+        "name": "_task_priority",
+        "column_name": "task_priority",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "finished": "true",
+        "future": "true"
+    },
+    "_attachment_kanban_task": {
+        "name": "_attachment_kanban_task",
+        "column_name": "attachment_kanban_task",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
@@ -47,6 +92,15 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "finished": "true",
+        "future": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "new": "true",
         "assigned": "true",
         "rejected": "true",

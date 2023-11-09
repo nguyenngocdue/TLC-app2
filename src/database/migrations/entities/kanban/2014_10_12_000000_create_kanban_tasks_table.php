@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->float('target_hours')->nullable();
+            $table->unsignedInteger('task_priority')->nullable()->default(369); // 369: Medium
             $table->unsignedBigInteger('kanban_group_id')->nullable();
             $table->unsignedBigInteger('kanban_task_transition_id')->nullable();
 

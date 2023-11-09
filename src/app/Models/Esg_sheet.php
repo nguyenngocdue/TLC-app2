@@ -24,15 +24,15 @@ class Esg_sheet extends ModelExtended
         "getEsgTmpl" => ["belongsTo", Esg_tmpl::class, "esg_tmpl_id"],
         "getMasterSheet" => ["belongsTo", Esg_master_sheet::class, "esg_master_sheet_id"],
         "getLines" => ["hasMany", Esg_sheet_line::class, "esg_sheet_id"],
-        'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
+        // 'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
         "attachment_esg_sheet" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
-    public function getWorkplace()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
+    // public function getWorkplace()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
 
     public function getMasterSheet()
     {

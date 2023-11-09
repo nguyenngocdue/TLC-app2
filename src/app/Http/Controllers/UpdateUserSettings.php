@@ -51,20 +51,20 @@ class UpdateUserSettings extends Controller
     {
         $type = $request->input("_entity");
         $toBeSaved = $request->except(["_token", "_method", "_entity", "action"]);
-        // $settings[$type][Constant::VIEW_ALL]['matrix'] = $toBeSaved;
-        $values = $settings[$type][Constant::VIEW_ALL]['matrix'] ?? [];
-        foreach ($toBeSaved as $key => $value) {
-            $values[$key] = $value;
-        }
-        //Remove empty array
-        foreach ($values as $key => $value) {
-            if (is_array($value)) {
-                if (sizeof($value) == 1 && is_null($value[0])) { //isset($value[0]) is false
-                    unset($values[$key]);
-                }
-            }
-        }
-        $settings[$type][Constant::VIEW_ALL]['matrix'] = $values;
+        $settings[$type][Constant::VIEW_ALL]['matrix'] = $toBeSaved;
+        // $values = $settings[$type][Constant::VIEW_ALL]['matrix'] ?? [];
+        // foreach ($toBeSaved as $key => $value) {
+        //     $values[$key] = $value;
+        // }
+        // //Remove empty array
+        // foreach ($values as $key => $value) {
+        //     if (is_array($value)) {
+        //         if (sizeof($value) == 1 && is_null($value[0])) { //isset($value[0]) is false
+        //             unset($values[$key]);
+        //         }
+        //     }
+        // }
+        // $settings[$type][Constant::VIEW_ALL]['matrix'] = $values;
         return $settings;
     }
 
@@ -272,10 +272,10 @@ class UpdateUserSettings extends Controller
         $indexBreak = array_search("type_report", array_keys($inputValue));
         $parameter = array_slice($inputValue, $indexBreak + 1, count($inputValue) - $indexBreak);
 
-        if(isset($inputValue['children_mode']) && $inputValue['children_mode'] !== 'not_children'){
+        if (isset($inputValue['children_mode']) && $inputValue['children_mode'] !== 'not_children') {
             $modeSelect = $inputValue['children_mode'];
             $settings[$entity][$typeReport][$modeName][$modeSelect] = $parameter;
-        } else{
+        } else {
             $settings[$entity][$typeReport][$modeName] = $parameter;
         }
         return $settings;
@@ -304,7 +304,7 @@ class UpdateUserSettings extends Controller
         $entity = $request->input("_entity");
         $typeReport = strtolower($request->input("type_report"));
         $modeOption = $inputValue['mode_option'];
-        if(isset($inputValue['children_mode'])){
+        if (isset($inputValue['children_mode'])) {
             $modeSelect = $inputValue['children_mode'];
             $settings[$entity][$typeReport][$modeOption]['children_mode'] = $modeSelect;
         }
@@ -408,8 +408,8 @@ class UpdateUserSettings extends Controller
                 $settings = $this->updatePerPageReports($request, $settings);
                 break;
             case 'switchParamsReport':
-                    $settings = $this->switchParamsReport($request, $settings);
-                    break;
+                $settings = $this->switchParamsReport($request, $settings);
+                break;
             case 'updatePerPageDocuments':
                 $settings = $this->updatePerPageReports($request, $settings);
                 break;
