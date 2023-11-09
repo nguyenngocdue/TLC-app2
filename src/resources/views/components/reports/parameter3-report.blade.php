@@ -39,7 +39,7 @@ $route = $routeName ? route($routeName) : "";
                             @foreach ($errors->getMessages() as $field => $message)
                                 @if($field === $name && $field !== 'end_date' && $field !== 'end_date')
                                     <span class="text-xs" role="alert">
-                                        <p class="mt-1.5 text-red-600 font-semibold">(Please choose the correct format <strong>{{ucwords(str_replace('_', ' ', $field))}}</strong>)</p>
+                                        <p class="mt-1.5 text-red-600 font-semibold">(Please select the correct <strong>{{ucwords(str_replace('_', ' ', $field))}}</strong> format)</p>
                                     </span>
                                 @endif
                             @endforeach
@@ -51,7 +51,7 @@ $route = $routeName ? route($routeName) : "";
                             @foreach ($errors->getMessages() as $field => $message)
                                 @if($field === 'start_date' || $field === 'end_date')
                                  <span class="text-xs" role="alert">
-                                     <p class="mt-1.5 text-red-600 font-semibold">(Please choose the correct format <strong>{{ucwords(str_replace('_', ' ', $field))}}</strong>)</p>
+                                     <p class="mt-1.5 text-red-600 font-semibold">(Please select the correct <strong>{{ucwords(str_replace('_', ' ', $field))}}</strong> format)</p>
                                  </span>
                                 @endif
                             @endforeach
