@@ -156,7 +156,6 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                 "align" => "right",
                 "width" =>100,
                 "footer" => "agg_sum",
-                'decimal' => "3"
             ],
             [
                 "title" => "Total <br/>(tCO2e)",

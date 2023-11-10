@@ -331,6 +331,7 @@ class Report
                 if (is_numeric($values)) return number_format($values, 2);
             }else{
                 foreach ($values as $key => $value) {
+                    if(str_contains($key, '_id')) continue;
                     $decimal = isset($decimalFields[$key]) ? $decimalFields[$key] : 2;
                     if (is_numeric($value)) {
                         if(is_object($values)) $values -> $key = number_format($value, $decimal);
