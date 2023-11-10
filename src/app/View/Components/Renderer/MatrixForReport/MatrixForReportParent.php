@@ -226,12 +226,15 @@ abstract class MatrixForReportParent extends Component
             'cell_class' => 'text-center font-bold bg-gray-100',
         ];
 
-        $totalProgress /= sizeof($yAxis);
-        $result['progress'] = (object)[
-            'value' => number_format($totalProgress, 2) . '%',
-            'cell_class' => 'text-right font-bold bg-gray-100',
-        ];
-        $dataSource[] = $result;
+        $size = sizeof($yAxis);
+        if ($size) {
+            $totalProgress /= $size;
+            $result['progress'] = (object)[
+                'value' => number_format($totalProgress, 2) . '%',
+                'cell_class' => 'text-right font-bold bg-gray-100',
+            ];
+            $dataSource[] = $result;
+        }
         // dump($dataSource);
         return $dataSource;
     }
