@@ -44,6 +44,7 @@ class PivotTable extends Component
         protected $topCenterControl='' ,
         protected $topRightControl='' ,
 
+
     ) {
     }
 
@@ -194,7 +195,7 @@ class PivotTable extends Component
         }
 
         $dataOutput = $this->changeValueData($dataOutput, $isRawData, $linesData, $params);
-        $dataOutput = Report::formatNumbersInDataSource($dataOutput);
+        // $dataOutput = Report::formatNumbersInDataSource($dataOutput, $decimal = 2);
         $dataRender = $this->paginateDataSource($dataOutput, $pageLimit);
         if (!empty($this->tableColumns)) {
             $tableColumns = $this->tableColumns;

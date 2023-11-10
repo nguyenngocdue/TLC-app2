@@ -1,11 +1,12 @@
 @props(['chartType'])
 
-<div class="block"><canvas id="{{$key}}"></canvas></div>
-
+<div class="flex justify-center">
+	<div class="block">
+		<canvas id="{{$key}}" width={{$width ?? 400}} height={{$height ?? 400}}></canvas>
+	</div>
+</div>
 {{-- @dump($meta) --}}
-{{-- @dump($metric) --}}
-{{-- @dump($chartType) --}}
-{{-- @dump($showValue) --}}
+
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script>
@@ -17,6 +18,12 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 	var chartType = '{{$chartType}}';
 	var datasets = [];
 	var indexAxis = 'x'; // Default value
+
+	var meta = {!! json_encode($meta) !!}
+	var colors = generateColors(meta.count);
+	console.log(colors);
+
+
 	var scales = {};
 		if ('{{$chartType}}' === 'horizontal_bar') {
 			datasets = {!! json_encode($meta['numbers']) !!};
@@ -43,7 +50,8 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 				}
 			};
 			datasets.forEach(function(dataset, index) {
-				dataset.backgroundColor = COLORS[index];
+				dataset.backgroundColor = colors[index]
+				//console.log(datasets, colors)
 			});
 
 		} else {
@@ -53,6 +61,7 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 			data: {!! json_encode($meta['numbers']) !!},
 			backgroundColor: Object.values(COLORS)
 			});
+			
 		}
 	//console.log(datasets.data)
 	Chart.register(ChartDataLabels);
@@ -68,7 +77,8 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 		scales: scales,
 		indexAxis: indexAxis,
 		plugins: {
-			legend: { 
+			legend: {
+					display: '{{$showDataLabel}}'*1 ?? 0,
 					position: 'bottom'
 					,labels: {
 						color: 'rgba(0, 0, 0, 0.7)'

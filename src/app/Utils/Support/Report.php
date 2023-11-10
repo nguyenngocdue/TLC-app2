@@ -321,21 +321,26 @@ class Report
         return compact('timeValues', 'topNameCol', 'columnName');
     }
 
-    public static function formatNumbersInDataSource($dataSource) {
+    public static function formatNumbersInDataSource($dataSource,$tableColumns) {
+
+        $decimalFields = array_column($tableColumns, 'decimal', 'dataIndex');
+
         if (!$dataSource instanceof Collection) $dataSource = collect($dataSource);
-        $data = $dataSource->map(function ($values) {
-            if(!is_array($values)) {
+        $data = $dataSource->map(function ($values) use ($decimalFields) {
+            if(!is_array((array)$values)) {
                 if (is_numeric($values)) return number_format($values, 2);
             }else{
                 foreach ($values as $key => $value) {
+                    $decimal = isset($decimalFields[$key]) ? $decimalFields[$key] : 2;
                     if (is_numeric($value)) {
-                        if(is_object($values)) $values -> $key = number_format($value, 2);
-                        if (is_array($values))  $values[$key] = number_format($value, 2);
+                        if(is_object($values)) $values -> $key = number_format($value, $decimal);
+                        if (is_array($values))  $values[$key] = number_format($value, $decimal);
                     }
                 }
             }
             return $values;
         });
+        // dd($data);
         return $data;
     }
     public static function checkValueOfField($array, $fieldName){
