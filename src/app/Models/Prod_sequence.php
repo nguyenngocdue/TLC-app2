@@ -54,8 +54,7 @@ class Prod_sequence extends ModelExtended
 
     public function getDisciplinesNeedProdOutputQty()
     {
-        //9: PPR-MEPF discipline
-        return [9];
+        return config('prod_discipline.to_hide');
     }
 
     public function getProdOrder()
