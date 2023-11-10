@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ParamMetricType1 extends ParentParamReports
 {
-    protected $referData = 'ghg_tmpl';
+    protected $referData = 'metric_type';
     protected function getDataSource()
     {
         $list = Ghg_metric_type_1::where('deleted_at', NULL)->get()->toArray();
@@ -18,7 +18,7 @@ class ParamMetricType1 extends ParentParamReports
         foreach ($list as $item) {
             $dataSource[] = ['id' => $item['id'], 
                             'name' => $item['name'], 
-                            'ghg_tmpl'=> $item['ghg_metric_type_id']];
+                            $this->referData => $item['ghg_metric_type_id']];
         } 
         // dd($dataSource);
 

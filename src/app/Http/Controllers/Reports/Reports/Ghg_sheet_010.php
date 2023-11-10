@@ -26,6 +26,7 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                     SUBSTR(ghgs.ghg_month,1,7) AS ghg_month,
                     ghgs.name AS ghg_name,
                     ghgsl.ghg_sheet_id AS ghg_sheet_id_,
+                    ghgmt.id AS ghg_metric_type_id,
                     ghgsl.ghg_metric_type_1_id AS ghg_metric_type_1_id,
                     ghgsl.ghg_metric_type_2_id AS ghg_metric_type_2_id,
                     terms.name AS unit,
@@ -43,6 +44,7 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                     LEFT JOIN ghg_metric_type_2s ghgmt2 ON ghgmt2.id = ghgsl.ghg_metric_type_2_id
                     LEFT JOIN terms terms ON terms.id = ghgsl.unit
                     WHERE 1 = 1";
+    if(Report::checkParam($valOfParams, 'metric_type')) $sql .= "\n AND ghgmt.id = {{metric_type}}";
     if(Report::checkParam($valOfParams, 'metric_type1')) $sql .= "\n AND ghgmt1.id = {{metric_type1}}";
     if(Report::checkParam($valOfParams, 'metric_type2')) $sql .= "\n AND ghgmt2.id = {{metric_type2}}";
 
@@ -153,14 +155,16 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                 "dataIndex" => "total",
                 "align" => "right",
                 "width" =>100,
-                "footer" => "agg_sum"
+                "footer" => "agg_sum",
+                'decimal' => "3"
             ],
             [
                 "title" => "Total <br/>(tCO2e)",
                 "dataIndex" => "tCo2e",
                 "align" => "right",
                 "width" =>100,
-                "footer" => "agg_sum"
+                "footer" => "agg_sum",
+                'decimal' => "3"
             ],
             [
                 "title" => "Remark",

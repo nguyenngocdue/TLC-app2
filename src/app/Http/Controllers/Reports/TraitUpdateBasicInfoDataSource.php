@@ -65,6 +65,7 @@ trait TraitUpdateBasicInfoDataSource
             'prod_order_status',
             'ncr_status',
             'ghg_sheet_name',
+            'ghg_metric_type_name',
             'ghg_metric_type_1_name',
             'ghg_metric_type_2_name',
         ] + $fieldInputs;

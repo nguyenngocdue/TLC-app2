@@ -231,6 +231,8 @@ abstract class Report_Parent2Controller extends Controller
         if ($this->viewName) $viewName = $this->viewName;
 
         $dataSource = $this->getDataSource($params);
+        $tableColumns = $this->getTableColumns($dataSource, $params);
+        $dataSource = Report::formatNumbersInDataSource($dataSource, $tableColumns);
         $dataSource = $this->changeDataSource($dataSource, $params);
         $dataSource  = $this->addTooltip($dataSource);
 
