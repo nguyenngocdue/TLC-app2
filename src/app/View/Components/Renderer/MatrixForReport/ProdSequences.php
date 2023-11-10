@@ -66,10 +66,12 @@ class ProdSequences extends MatrixForReportParent
     function getLeftColumns($xAxis, $yAxis, $dataSource)
     {
         $result = parent::getLeftColumns($xAxis, $yAxis, $dataSource);
-        $result[] = [
-            'dataIndex' => 'production_name',
+        $columns = [
+            ['dataIndex' => 'production_name'],
+            ['dataIndex' => 'quantity'],
         ];
-        return $result;
+
+        return [...$result, ...$columns];
     }
 
     function attachMeta($xAxis, $yAxis, $dataSource)
@@ -79,7 +81,10 @@ class ProdSequences extends MatrixForReportParent
             $result[$y->id]['production_name'] = (object)[
                 'value' => $y->production_name,
                 'cell_class' => "whitespace-nowrap",
-                // 'cell_title' => $y->id,
+            ];
+            $result[$y->id]['quantity'] = (object)[
+                'value' => $y->quantity,
+                'cell_class' => "whitespace-nowrap text-right",
             ];
         }
         return $result;

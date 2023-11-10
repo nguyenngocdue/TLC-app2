@@ -217,7 +217,7 @@ abstract class MatrixForReportParent extends Component
 
         $result['name'] = (object)[
             'value' => "",
-            'cell_class' => 'text-center font-bold bg-gray-100',
+            'cell_class' => 'text-center font-bold',
         ];
 
         $dataIndex = end($leftColumns)['dataIndex'];
