@@ -62,4 +62,26 @@ class ProdSequences extends MatrixForReportParent
         // dump(sizeof($result));
         return $result;
     }
+
+    function getLeftColumns($xAxis, $yAxis, $dataSource)
+    {
+        $result = parent::getLeftColumns($xAxis, $yAxis, $dataSource);
+        $result[] = [
+            'dataIndex' => 'production_name',
+        ];
+        return $result;
+    }
+
+    function attachMeta($xAxis, $yAxis, $dataSource)
+    {
+        $result = parent::attachMeta($xAxis, $yAxis, $dataSource);
+        foreach ($yAxis as $y) {
+            $result[$y->id]['production_name'] = (object)[
+                'value' => $y->production_name,
+                'cell_class' => "whitespace-nowrap",
+                // 'cell_title' => $y->id,
+            ];
+        }
+        return $result;
+    }
 }

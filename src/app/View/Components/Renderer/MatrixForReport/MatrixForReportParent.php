@@ -88,13 +88,14 @@ abstract class MatrixForReportParent extends Component
     {
         return [
             ['dataIndex' => 'name',],
-            ['dataIndex' => 'progress',],
         ];
     }
 
     function getColumns($xAxis)
     {
-        $result = [];
+        $result = [
+            ['dataIndex' => 'progress',],
+        ];
         foreach ($xAxis as $x) {
             $column = [
                 'dataIndex' => $x->id,
@@ -180,7 +181,7 @@ abstract class MatrixForReportParent extends Component
         return $dataSource;
     }
 
-    function calculateProgressForColumns($xAxis, $yAxis, $dataSource)
+    function calculateProgressForColumns($xAxis, $yAxis, $dataSource, $leftColumns)
     {
         $result = [];
         $count = [];
@@ -214,14 +215,21 @@ abstract class MatrixForReportParent extends Component
             ];
         }
 
+        $result['name'] = (object)[
+            'value' => "",
+            'cell_class' => 'text-center font-bold bg-gray-100',
+        ];
+
+        $dataIndex = end($leftColumns)['dataIndex'];
+        $result[$dataIndex] = (object)[
+            'value' => "Total",
+            'cell_class' => 'text-center font-bold bg-gray-100',
+        ];
+
         $totalProgress /= sizeof($yAxis);
         $result['progress'] = (object)[
             'value' => number_format($totalProgress, 2) . '%',
             'cell_class' => 'text-right font-bold bg-gray-100',
-        ];
-        $result['name'] = (object)[
-            'value' => "Total",
-            'cell_class' => 'text-center font-bold bg-gray-100',
         ];
         $dataSource[] = $result;
         // dump($dataSource);
@@ -234,8 +242,9 @@ abstract class MatrixForReportParent extends Component
         $yAxis = $this->getYAxis();
         $dataSource = $this->getDataSource($xAxis, $yAxis);
 
+        $leftColumns = $this->getLeftColumns($xAxis, $yAxis, $dataSource);
         $columns = [
-            ...$this->getLeftColumns($xAxis, $yAxis, $dataSource),
+            ...$leftColumns,
             ...$this->getColumns($xAxis),
         ];
         $dataSource = $this->mergeDataSource($xAxis, $yAxis, $dataSource);
@@ -243,7 +252,7 @@ abstract class MatrixForReportParent extends Component
         $dataSource = $this->calculateProgressForRows($xAxis, $yAxis, $dataSource);
         $dataSource = $this->attachMeta($xAxis, $yAxis, $dataSource);
         $dataSource = $this->sortBy('name', $dataSource);
-        $dataSource = $this->calculateProgressForColumns($xAxis, $yAxis, $dataSource);
+        $dataSource = $this->calculateProgressForColumns($xAxis, $yAxis, $dataSource, $leftColumns);
         $dataSource = $this->renderCell($xAxis, $yAxis, $dataSource);
         // dump($dataSource);
 
