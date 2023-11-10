@@ -1,8 +1,9 @@
 {{-- https://github.com/szimek/signature_pad --}}
 @php $w=340; $h=140; /* ORI 220 x 90*/ @endphp 
 @if($value_decoded !== '')
-    <div id="div1{{$name}}" class="relative border rounded-md border-gray-300 w-[340px] h-[140px]">
-        @if($updatable)
+<div id="div1{{$name}}" class="relative border rounded-md border-gray-300 w-[340px] h-[140px]">
+    @if($updatable)
+    <div class="text-left">Please sign here:</div>
             <button type="button" id="btnReset1_{{$count}}" class="no-print w-10 h-10 top-1 right-2 absolute">
                 <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
             </button>
@@ -15,37 +16,33 @@
 <div id="div2{{$name}}" class="{{$value_decoded == '' ? "" : "hidden"}} signature-pad--body">
     <div class="relative border rounded-md border-gray-300 w-[340px] h-[140px]">
         @if($updatable)
+        <div class="text-left">Please sign here:</div>
             <button type="button" id="btnReset2_{{$count}}" class="w-10 h-10 top-1 right-2 absolute">
                 <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
             </button>
         @endif
         <canvas width="{{$w}}" height="{{$h}}" id="canvas_{{$name}}" style="touch-action: none; user-select: none;" ></canvas>
     </div>
+    <div class="text-left">Comment:</div>
     @if(!is_null($signatureCommentColumnName))
     {{$debug ? $signatureCommentColumnName : ""}}
-    <input type="text" class="border-2 rounded w-full" name="{{$signatureCommentColumnName}}" id="{{$signatureCommentColumnName}}" value="{{$signatureComment}}" 
+    <input type="text" class="border-2 rounded w-full" 
+            name="{{$signatureCommentColumnName}}" 
+            id="{{$signatureCommentColumnName}}" 
+            value="{{$signatureComment}}" 
             placeholder="Input your comment here..."    
-            title="Common comments:
-    • Reviewed and confirmed.
-    • Approved and accepted.
-    • Endorsed and acknowledged.
-    • Agreed and authorized.
-    • Confirmed and validated.
-    • Consented and approved.
-    • Endorsed as accurate and complete.
-    • Acknowledged and supported."
     />
     @endif
 
     {{$debug ? $name : ""}}
     <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$name}}" id="{{$name}}" value='{!! $value !!}' />
-    
+
     {{$debug ? $categoryColumnName : ""}}
     <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$categoryColumnName}}" id="{{$categoryColumnName}}" value='{!! $category !!}' />
-    
+
     {{$debug ? $signableTypeColumnName : ""}}
     <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$signableTypeColumnName}}" id="{{$signableTypeColumnName}}" value='{!! $signableType !!}' />
-    
+
     {{$debug ? $ownerIdColumnName : ""}}
     <input type="{{$input_or_hidden}}" class="border-2 rounded w-full" name="{{$ownerIdColumnName}}" id="{{$ownerIdColumnName}}" value='{!! $signedPersonId !!}'/>
 </div>
