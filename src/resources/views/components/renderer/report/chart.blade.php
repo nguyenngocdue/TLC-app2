@@ -5,6 +5,7 @@
 		<canvas id="{{$key}}" width={{$width ?? 400}} height={{$height ?? 400}}></canvas>
 	</div>
 </div>
+{{-- @dump($meta) --}}
 
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
@@ -19,7 +20,8 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 	var indexAxis = 'x'; // Default value
 
 	var meta = {!! json_encode($meta) !!}
-	var colors = generateColors(1000);
+	var colors = generateColors(meta.count);
+	console.log(colors);
 
 
 	var scales = {};
@@ -49,6 +51,7 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 			};
 			datasets.forEach(function(dataset, index) {
 				dataset.backgroundColor = colors[index]
+				//console.log(datasets, colors)
 			});
 
 		} else {

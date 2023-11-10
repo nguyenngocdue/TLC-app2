@@ -155,12 +155,11 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			'meta' => [
 				'numbers' => $datasets,
 				'labels' => StringReport::arrayToJsonWithSingleQuotes($labels),
-				'count' => count($numbers),
+				'count' => count($datasets),
 				'max' => 1,
 			],
 			'metric' => $metric,
 		];
-		// dd($dataSource);
 		return $dataSource;
 	}
 

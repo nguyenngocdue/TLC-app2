@@ -156,7 +156,10 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                 </div>
                 {{-- Legen for chart 1 --}}
                     <div class="bg-white border p-4 break-normal min-w-0 dark:bg-gray-800 dark:border-gray-600 rounded shadow-xs">
-                        @include('components.reports.under-legend-ghgco2-chart')
+                        @php
+                            $hidden = ''
+                        @endphp
+                        @include('components.reports.under-legend-ghgco2-chart', ['hidden' => $hidden])
                     </div>
                 </div>
             <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
@@ -194,7 +197,10 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
             <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60]"/>
             <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Data Summary Report</x-renderer.heading>
             <div class="">
-                @include('reports.document-ghg-summary-report-only-table')
+            @php
+                $hidden = "hidden";
+            @endphp
+                @include('reports.document-ghg-summary-report-only-table', ['hidden' => $hidden])
                 {{-- <div class="w-full absolute  pb-4 bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
                     <x-print.header6 :itemsShow="['website']"/>
                 </div> --}}
@@ -204,10 +210,3 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
     </div>
 </div>
 @endsection
-
-<script>
-$('.js-example-basic-single').select2({
-  placeholder: 'Select an option'
-});
-
-</script>
