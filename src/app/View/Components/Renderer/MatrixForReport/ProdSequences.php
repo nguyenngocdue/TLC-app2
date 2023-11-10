@@ -12,6 +12,7 @@ class ProdSequences extends MatrixForReportParent
     protected $dataIndexY = "prod_order_id";
     protected $rotate45Width = 200;
     protected $rotate45Height = 150;
+    protected $closedDateColumn = 'end_date';
 
     private $showInReportToc = 365; // term_id of report_toc
 
@@ -59,6 +60,33 @@ class ProdSequences extends MatrixForReportParent
             ->whereIn('prod_routing_link_id', $routingLinkIds)
             ->get();
         // dump(sizeof($result));
+        return $result;
+    }
+
+    function getLeftColumns($xAxis, $yAxis, $dataSource)
+    {
+        $result = parent::getLeftColumns($xAxis, $yAxis, $dataSource);
+        $columns = [
+            ['dataIndex' => 'production_name'],
+            ['dataIndex' => 'quantity'],
+        ];
+
+        return [...$result, ...$columns];
+    }
+
+    function attachMeta($xAxis, $yAxis, $dataSource)
+    {
+        $result = parent::attachMeta($xAxis, $yAxis, $dataSource);
+        foreach ($yAxis as $y) {
+            $result[$y->id]['production_name'] = (object)[
+                'value' => $y->production_name,
+                'cell_class' => "whitespace-nowrap",
+            ];
+            $result[$y->id]['quantity'] = (object)[
+                'value' => $y->quantity,
+                'cell_class' => "whitespace-nowrap text-right",
+            ];
+        }
         return $result;
     }
 }

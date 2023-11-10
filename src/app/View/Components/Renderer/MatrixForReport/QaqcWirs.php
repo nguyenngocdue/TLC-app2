@@ -47,4 +47,31 @@ class QaqcWirs extends MatrixForReportParent
             ->get();
         return $result;
     }
+
+    function getLeftColumns($xAxis, $yAxis, $dataSource)
+    {
+        $result = parent::getLeftColumns($xAxis, $yAxis, $dataSource);
+        $columns = [
+            ['dataIndex' => 'production_name'],
+            ['dataIndex' => 'quantity'],
+        ];
+
+        return [...$result, ...$columns];
+    }
+
+    function attachMeta($xAxis, $yAxis, $dataSource)
+    {
+        $result = parent::attachMeta($xAxis, $yAxis, $dataSource);
+        foreach ($yAxis as $y) {
+            $result[$y->id]['production_name'] = (object)[
+                'value' => $y->production_name,
+                'cell_class' => "whitespace-nowrap",
+            ];
+            $result[$y->id]['quantity'] = (object)[
+                'value' => $y->quantity,
+                'cell_class' => "whitespace-nowrap text-right",
+            ];
+        }
+        return $result;
+    }
 }

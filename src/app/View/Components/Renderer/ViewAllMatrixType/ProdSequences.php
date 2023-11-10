@@ -101,8 +101,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
         if ($this->prodDiscipline) {
             $data = $data->where('prod_discipline_id', $this->prodDiscipline);
         } else { //In case if empty is provided, do not return PPR-MEPF
-            $ppr_mepf = 9;
-            $data = $data->whereNotIn('prod_discipline_id', [$ppr_mepf]);
+            $toHide = config('prod_discipline.to_hide');
+            $data = $data->whereNotIn('prod_discipline_id', $toHide);
         }
         if ($this->prodRoutingLink) $data = $data->whereIn('prod_routing_link_id', $this->prodRoutingLink);
         $data = $data->orderBy('order_no')->get();
