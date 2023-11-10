@@ -19,10 +19,9 @@ class StatusEnteredEvent
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct(public $data)
     {
         //
-        $this->data1 = $data;
     }
 
     /**

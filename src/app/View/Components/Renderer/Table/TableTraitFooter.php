@@ -78,7 +78,8 @@ trait TableTraitFooter
         };
         // dump($items);
         try {
-            $result['agg_sum'] = $items->sum();
+            // $result['agg_sum'] = $items->sum();
+            $result['agg_sum'] = $items->map(fn ($item) => (float) str_replace(',', '', $item))->sum();
             $result['agg_avg'] = ($a = $items->avg()) ? $a : null;
             $result['agg_median'] = ($a = $items->median()) ? $a : null;
             $result['agg_min'] = ($a = $items->min()) ? $a : null;
