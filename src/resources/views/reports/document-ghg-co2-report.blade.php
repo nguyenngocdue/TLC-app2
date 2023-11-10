@@ -89,7 +89,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         {{-- METHODOLOGY --}}
         <div style='' class="{{$layout}} items-center bg-white box-border px-8 py-6 relative">
             <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60]"/>
-            <x-renderer.heading level=2 xalign='left' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Methodology</x-renderer.heading>
+            <x-renderer.heading level=2 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Methodology</x-renderer.heading>
             <div class="px-4">
                 <x-renderer.heading level=5 xalign='left' class='text-blue-800 p-2'>
                     For this analysis, we include in the calculation all sources of direct emissions and indirect emissions from purchased energy. 
