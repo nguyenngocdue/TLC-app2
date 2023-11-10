@@ -117,6 +117,9 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 				$value['numbers'] = $value['numbers'];
 			}
 		}
+		$array['dimensions'] = [
+			'showLegend' => true,
+		];
 		$array['scopeNames'] = $scopeNames;
 		$data['pivot_chart_1'] = $array;
 		// dd($data);
@@ -140,7 +143,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 				$val[$index] = is_null($value['total_months']) ? 0 : $value['total_months'];
 				// $val = StringReport::arrayToJsonWithSingleQuotes($val);
 				$datasets[] = (object)[
-					'label' => trim(substr($value['ghgtmpl_name'],5)),
+					'label' => $value['ghgtmpl_name'],
 					'data' =>  $val,
 				];
 			}

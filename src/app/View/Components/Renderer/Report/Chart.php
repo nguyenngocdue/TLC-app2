@@ -18,6 +18,9 @@ class Chart extends Component
         private $key = "",
         private $widgetParams = [],
         private $showValue  = false,
+        private $showDataLabel = true,
+        private $width = '',
+        private $height = '',
     ) {
         //
     }
@@ -32,6 +35,7 @@ class Chart extends Component
         $metric = $this->metric;
         $meta = $this->meta;
         $widgetParams = $this->widgetParams;
+        // dump($this->widgetParams);
 
         $count = $meta['count'];
         if ($count == 0) return "<x-renderer.emptiness />";
@@ -53,7 +57,11 @@ class Chart extends Component
                 'key' => $this->key,
                 'meta' => $meta,
                 'metric' => $metric,
-                'showValue' => $this->showValue
+                'showValue' => $this->showValue,
+                'showDataLabel' => $this->showDataLabel,
+                'width' => $this->width,
+                'height' => $this->height,
+
             ]
         );
     }

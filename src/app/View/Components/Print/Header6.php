@@ -14,6 +14,8 @@ class Header6 extends Component
     public function __construct(
         private $page = null,
         private $itemsShow = [],
+        private $class = "",
+        private $dimensionImg = ""
     ) {
         //
     }
@@ -25,11 +27,12 @@ class Header6 extends Component
      */
     public function render()
     {
-        
         return view('components.print.header6', [
             'dataSource' => config("company.letter_head"),
             'page' => $this->page,
             'itemsShow' => $this->itemsShow,
+            'class' => $this->class,
+            'dimensionImg' => $this->dimensionImg
         ]);
     }
 }

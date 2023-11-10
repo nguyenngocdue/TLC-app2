@@ -14,6 +14,9 @@ class PivotChart extends Component
         private $key = '',
         private $dataSource = [],
         private $showValue = false,
+        private $showDataLabel = true,
+        private $width ='',
+        private $height ='',
     ) {
     }
 
@@ -32,7 +35,10 @@ class PivotChart extends Component
         // dd($widget);
         return view("components.renderer.report.pivot-chart", [
             'widget' => $widget,
-            'showValue' => $this->showValue
+            'showValue' => $this->showValue,
+            'showDataLabel' => $this->showDataLabel,
+            'width' => $this->width,
+            'height' => $this->height,
         ]);
     }
 }

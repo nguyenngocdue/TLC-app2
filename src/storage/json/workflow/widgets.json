@@ -87,7 +87,7 @@
         "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{}"
+        "dimensions": "{\r\n\"displayDataLabel\": false\r\n}"
     },
     "carbon_footprint_2": {
         "name": "carbon_footprint_2",

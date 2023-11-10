@@ -56,12 +56,12 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         <div style='' class="{{$layout}} items-center bg-white box-border px-8 py-6 relative">
-            <x-print.header6 :itemsShow="['logo']"/>
-            <div class="py-5">
+            <x-print.header6 :itemsShow="['logo']" dimensionImg="w-[195px] h-[60]" class="justify-end border-none"/>
+            <div class="pb-2">
                 <x-renderer.heading level=1 xalign='center'>CO2 Emission Report</x-renderer.heading>
                 <x-renderer.heading level=3 xalign='center'>for TLC Modular Construction Limited Liability Company</x-renderer.heading>
             </div>
-            <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Company's carbon footprint in {{$text}}</x-renderer.heading>
+            <x-renderer.heading level=2 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Company's carbon footprint in {{$text}}</x-renderer.heading>
             <div class="grid grid-rows-1 pt-20">
                 <div class="grid grid-cols-12 text-center">
                     <div class="col-span-6 m-auto">
@@ -81,98 +81,117 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                 </div>
             </div>
             <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
-                <x-print.header6 :itemsShow="['website']"/>
+                <x-print.header6 :itemsShow="['website']" dimensionImg="w-[195px] h-[60]"/>
             </div>
         </div>
         <x-renderer.page-break />
-        {{-- chart 1 --}}
-        <div class="relative {{$layout}} items-center bg-white box-border px-8 py-6">
-            <div style='' class="">
-                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Emission source category chart</x-renderer.heading>
-                <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
-                    <div class="w-full flex px-4">
-                        <div class="w-1/2 px-4">
-                            <x-renderer.report.pivot-chart key="carbon_footprint_1" :dataSource="$pivotChart1" showValue={{true}}></x-renderer.report.pivot-chart>
-                        </div>
-                        <div class="m-auto">
-                            @php
-                                $scopeNames = array_column($pivotChart1['scopeNames'], 'name');
-                            @endphp
 
-                            <x-renderer.card title="Carbon Emissions" tooltip="">
-                                @if(in_array('Scope 1', $scopeNames))
-                                    <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Scope 1 (Direct Emission)</h5>
-                                    <p class="font-normal text-gray-700 dark:text-gray-400">
-                                        Emissions from sources that an organisation owns or controls directly.
-                                    </p>
-                                @endif
-
-                                @if(in_array('Scope 2', $scopeNames))
-                                    <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Scope 2 (Indirect Emission)</h5>
-                                    <p class="font-normal text-gray-700 dark:text-gray-400">
-                                        Emissions a company causes indirectly that come from where the energy it purchases and uses is produced.
-                                    </p>
-                                @endif
-
-                                @if(in_array('Scope 3', $scopeNames))
-                                    <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Scope 3 (Indirect Emission)</h5>
-                                    <p class="font-normal text-gray-700 dark:text-gray-400">
-                                        All emissions not covered in scope 1 or 2, created by a company's value chain.
-                                    </p>
-                                @endif
-                            </x-renderer.card>
-                        </div>
-                    </div>
-
-                    <ul class="list-disc flex flex-col items-start">
-                        <li>
-                        {{-- @dd($info) --}}
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 1: <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['direct_emissions']['percent']}}%</strong>).</x-renderer.heading>
-                        </li>
-                        <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 2: <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
-                        </li>
-                        <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 3: <strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['other_indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
-                        </li>
-                    </ul>
+        {{-- METHODOLOGY --}}
+        <div style='' class="{{$layout}} items-center bg-white box-border px-8 py-6 relative">
+            <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60]"/>
+            <x-renderer.heading level=2 xalign='left' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Methodology</x-renderer.heading>
+            <div class="px-4">
+                <x-renderer.heading level=5 xalign='left' class='text-blue-800 p-2'>
+                    For this analysis, we include in the calculation all sources of direct emissions and indirect emissions from purchased energy. 
+                    We follow the GHG Protocol - a standard for calculating carbon footprints that not only allows emissions to be measured, but also helps the company plan and manage their gradual reduction. 
+                    The standard is in accordance with ISO 14064. 
+                    In accordance with the GHG Protocol standard, we divided the amount of greenhouse gases produced by the company's direct and indirect activities into three areas (ranges):
+                </x-renderer.heading>
+                <div class='flex justify-center'>
+                    <img  src="{{ asset('images/ghgCo2.jpg') }}" class="w-3/4"/>
                 </div>
             </div>
             <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
                     <x-print.header6 :itemsShow="['website']"/>
             </div>
         </div>
+        <x-renderer.page-break />
+
+        {{-- chart 1 --}}
+        <div class="relative {{$layout}} items-center bg-white box-border px-8 py-6">
+                <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60]" />
+                <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Emission source category chart</x-renderer.heading>
+                <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
+                    <div class="w-full flex px-4">
+                        <div class="w-1/2 px-4">
+                            <x-renderer.report.pivot-chart key="carbon_footprint_1" 
+                                :dataSource="$pivotChart1" 
+                                showValue={{true}} 
+                                showDataLabel={{false}}
+                                width="600"
+                                height="500"
+                            ></x-renderer.report.pivot-chart>
+                        <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
+                            <x-print.header6 :itemsShow="['website']" dimensionImg="w-[195px] h-[60]" />
+                        </div>
+                    </div>
+                    <div class="m-auto">
+                        @php
+                            $scopeNames = array_column($pivotChart1['scopeNames'], 'name');
+                        @endphp
+
+                        <x-renderer.card title="Carbon Emissions" tooltip="">
+                            @if(in_array('Scope 1', $scopeNames))
+                                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Scope 1 (Direct Emission)</h5>
+                                <p class="font-normal text-gray-700 dark:text-gray-400">
+                                    Emissions from sources that an organisation owns or controls directly.
+                                </p>
+                            @endif
+
+                            @if(in_array('Scope 2', $scopeNames))
+                                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Scope 2 (Indirect Emission)</h5>
+                                <p class="font-normal text-gray-700 dark:text-gray-400">
+                                    Emissions a company causes indirectly that come from where the energy it purchases and uses is produced.
+                                </p>
+                            @endif
+
+                            @if(in_array('Scope 3', $scopeNames))
+                                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Scope 3 (Indirect Emission)</h5>
+                                <p class="font-normal text-gray-700 dark:text-gray-400">
+                                    All emissions not covered in scope 1 or 2, created by a company's value chain.
+                                </p>
+                            @endif
+                        </x-renderer.card>
+                    </div>
+                </div>
+                {{-- Legen for chart 1 --}}
+                    <div class="bg-white border p-4 break-normal min-w-0 dark:bg-gray-800 dark:border-gray-600 rounded shadow-xs">
+                        @include('components.reports.under-legend-ghgco2-chart')
+                    </div>
+                </div>
+            <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
+                    <x-print.header6 :itemsShow="['website']"dimensionImg="w-[195px] h-[60]" />
+            </div>
+        </div>
             <x-renderer.page-break />
         <div class="relative {{$layout}} items-center bg-white box-border px-8 py-6 ">
             {{-- chart 2 --}}
-            <div style='' class="">
+                <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60]"/>
                 <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Emission source category chart</x-renderer.heading>
-                <div class=" grid-rows-1 pt-4 flex justify-center flex-col items-center">
+                <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
                     <div class="w-full px-6">
-                    {{-- @dump($pivotChart2) --}}
-                        <x-renderer.report.pivot-chart key="carbon_footprint_2" :dataSource="$pivotChart2"></x-renderer.report.pivot-chart>
+                        <x-renderer.report.pivot-chart 
+                            key="carbon_footprint_2" 
+                            :dataSource="$pivotChart2"
+                            width="1200"
+                            height="600"
+                        >
+                        </x-renderer.report.pivot-chart>
                     </div>
-                    <ul class="list-disc flex flex-col items-start">
-                        <li>
-                        {{-- @dd($info) --}}
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 1: <strong>{{$info['direct_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['direct_emissions']['percent']}}%</strong>).</x-renderer.heading>
-                        </li>
-                        <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 2: <strong>{{$info['indirect_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
-                        </li>
-                        <li>
-                            <x-renderer.heading level=5 xalign='center' class='text-gray-600 font-semibold'>Scope 3:<strong>{{$info['other_indirect_emissions']['tco2e']}}</strong> tCO2e (<strong>{{$info['other_indirect_emissions']['percent']}}%</strong>).</x-renderer.heading>
-                        </li>
-                    </ul>
+                    <div class="bg-white border p-4 break-normal min-w-0 dark:bg-gray-800 dark:border-gray-600 rounded shadow-xs">
+                        @include('components.reports.under-legend-ghgco2-chart')
+                    </div>
+                    
                 </div>
-            </div>
+            {{-- Legen for chart 2 --}}
             <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
-                <x-print.header6 :itemsShow="['website']"/>
+                <x-print.header6 :itemsShow="['website']" dimensionImg="w-[195px] h-[60]"/>
             </div>
         </div>
         <x-renderer.page-break />
         {{-- CO2 Emission Summary Report --}}
         <div class="{{-- {{$layout}} --}}{{-- relative --}} w-[1400px] min-h-[940px] items-center bg-white box-border px-8 py-6 ">
+            <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60]"/>
             <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Data Summary Report</x-renderer.heading>
             <div class="">
                 @include('reports.document-ghg-summary-report-only-table')
