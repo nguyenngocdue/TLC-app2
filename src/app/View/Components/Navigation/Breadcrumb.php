@@ -116,15 +116,22 @@ class Breadcrumb extends Component
     }
     private function showButtonPrintOrEditOrQRApp($singular, $type)
     {
+        $printNow = ['href' => null, 'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
         $id = CurrentRoute::getEntityId($singular);
+
+        $controller = CurrentRoute::getControllerAs();
+        $isReportScreen = $this->action == 'index' && !str_contains($controller, '.index');
+
+        if ($isReportScreen) $this->links[] = $printNow;
+
         switch ($this->action) {
             case 'show':
                 // $this->links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
-                $this->links[] = ['href' => null, 'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                $this->links[] =  $printNow;
                 $this->links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
             case 'print':
-                $this->links[] = ['href' => null, 'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                $this->links[] =  $printNow;
                 break;
             case 'showQRApp':
                 $slug = CurrentRoute::getEntitySlug($singular);
