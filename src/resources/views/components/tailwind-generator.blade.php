@@ -210,6 +210,12 @@
 {{-- avatar user --}}
 <div class="-mt-4 bg-opacity-30"></div>
 
+<div class="bg-opacity-0"></div>
+<div class="bg-opacity-5"></div>
+<div class="bg-opacity-10"></div>
+<div class="bg-opacity-20"></div>
+<div class="bg-opacity-25"></div>
+
 {{-- popover / general --}}
 <div class="z-10"></div>
 <div class="z-20"></div>

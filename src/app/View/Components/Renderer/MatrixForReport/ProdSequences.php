@@ -12,6 +12,7 @@ class ProdSequences extends MatrixForReportParent
     protected $dataIndexY = "prod_order_id";
     protected $rotate45Width = 200;
     protected $rotate45Height = 150;
+    protected $closedDateColumn = 'end_date';
 
     private $showInReportToc = 365; // term_id of report_toc
 

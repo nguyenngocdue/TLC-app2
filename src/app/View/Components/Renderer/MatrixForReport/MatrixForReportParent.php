@@ -14,6 +14,10 @@ abstract class MatrixForReportParent extends Component
     protected $rotate45Width = 400;
     protected $rotate45Height = null;
 
+    // protected $dateToCompare = '2023-10-01';
+    protected $dateToCompare = null;
+    protected $closedDateColumn = 'closed_at';
+
     protected $statuses;
 
     protected $finishedArray = ['closed', 'finished'];
@@ -40,6 +44,13 @@ abstract class MatrixForReportParent extends Component
             $statusObj = $this->statuses[$status];
             $value = $statusObj['icon'];
             $cellClass = 'bg-' . $statusObj['bg_color'] . " text-" . $statusObj['text_color'];
+
+            if (($endDate = $cell->{$this->closedDateColumn}) && $this->dateToCompare) {
+                if ($endDate < $this->dateToCompare) {
+                    $cellClass .= ' bg-opacity-20';
+                }
+            }
+
             return (object)[
                 "value" => $value, //. " " . $cell->{$this->dataIndexX},
                 'cell_class' => "$cellClass text-center cursor-pointer",
