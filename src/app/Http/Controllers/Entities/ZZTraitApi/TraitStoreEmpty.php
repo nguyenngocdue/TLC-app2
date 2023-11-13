@@ -171,7 +171,7 @@ trait TraitStoreEmpty
 							return $a['employeeid'] <=> $b['employeeid'];
 						});
 
-						foreach ($workers as $worker) {
+						foreach ($workers as $index => $worker) {
 							Hr_timesheet_line::create([
 								'timesheetable_type' => Hr_timesheet_worker::class,
 								'timesheetable_id' => $row->id,
@@ -182,6 +182,7 @@ trait TraitStoreEmpty
 								'work_mode_id' => 2, //2 = office/workshop
 								'duration_in_hour' => 8,
 								'duration_in_min' => 480, //480 = 8 * 60
+								'order_no' => $index,
 							]);
 						}
 						$totalInsertedRows  += count($workers);
