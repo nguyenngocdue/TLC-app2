@@ -1,12 +1,13 @@
 <div class=" md:scroll-mt-20 sm:py-0 rounded-lg bg-white dark:border-gray-600">
     <div class="border-b p-0 font-medium flex items-center justify-left {{$class}} ">
         @php
-            $hw = $dimensionImg ? '' : "h-20 w-56"
+            $hw = $dimensionImg ? '' : "h-20 w-56";
+            $dimensionImg = $dimensionImg ? $dimensionImg : "h-full w-full";
         @endphp
         @if(empty($itemsShow))
         <div>
             <div class="{{$hw}} ">
-                <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class="h-full w-full  {{$dimensionImg}}">
+                <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class="  {{$dimensionImg}}">
             </div>
         </div>
         <div class="text-sm font-normal">
@@ -19,7 +20,7 @@
         @elseif(in_array('logo', $itemsShow))
             <div>
                 <div class="{{$hw}}">
-                    <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class="h-full w-full {{$dimensionImg}}">
+                    <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class=" {{$dimensionImg}}">
                 </div>
             </div>
         @elseif(in_array('website', $itemsShow))
