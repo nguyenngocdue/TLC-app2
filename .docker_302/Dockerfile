@@ -32,6 +32,9 @@ RUN docker-php-ext-install gd && \
 
 RUN docker-php-ext-install pcntl
 
+RUN apk add build-base autoconf
+RUN pecl install apcu 
+
 COPY ./configs/php.ini /usr/local/etc/php/
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
@@ -57,4 +60,5 @@ USER ndc
 # ENTRYPOINT ["sh", "/var/www/app/docker-entrypoint.sh"]
 
 # CMD ["supervisord -n -c /etc/supervisord.conf"]
-RUN rm -rf /var/cache/apk/*
+
+#RUN rm -rf /var/cache/apk/*

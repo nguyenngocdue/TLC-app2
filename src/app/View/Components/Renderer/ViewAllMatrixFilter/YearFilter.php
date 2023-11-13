@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class YearFilter extends Component
@@ -34,7 +35,8 @@ class YearFilter extends Component
         $selectedYear = $this->selected;
         $result = [];
         for ($i = $selectedYear - 2; $i < $selectedYear + 3; $i++) $result[$i] = $i;
-        $result[$thisYear] = $thisYear . ".";
+        $result[$thisYear] = $thisYear;
+        if (CurrentUser::isAdmin()) $result[$thisYear] .= ".";
         return $result;
     }
 

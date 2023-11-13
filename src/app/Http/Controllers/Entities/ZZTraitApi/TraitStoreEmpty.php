@@ -165,17 +165,24 @@ trait TraitStoreEmpty
 					foreach ($theRows as $row) {
 						$team = User_team_tsht::find($row->team_id);
 						$workers = $team->getTshtMembers();
-						foreach ($workers as $worker) {
+
+						$workers = $workers->toArray();
+						usort($workers, function ($a, $b) {
+							return $a['employeeid'] <=> $b['employeeid'];
+						});
+
+						foreach ($workers as $index => $worker) {
 							Hr_timesheet_line::create([
 								'timesheetable_type' => Hr_timesheet_worker::class,
 								'timesheetable_id' => $row->id,
 								'owner_id' => $row->owner_id,
-								'user_id' => $worker->id,
-								'discipline_id' => $worker->discipline,
+								'user_id' => $worker['id'],
+								'discipline_id' => $worker['discipline'],
 								'task_id' => 357, //357 = on the floor
 								'work_mode_id' => 2, //2 = office/workshop
 								'duration_in_hour' => 8,
 								'duration_in_min' => 480, //480 = 8 * 60
+								'order_no' => $index,
 							]);
 						}
 						$totalInsertedRows  += count($workers);

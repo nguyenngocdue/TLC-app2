@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
-use App\Events\BroadcastEvents\BroadcastRemindSignOffEvent;
 use App\Events\CreateNewDocumentEvent;
 use App\Events\EntityCreatedEvent;
 use App\Events\EntityUpdatedEvent;
 use App\Events\InspChklstEvent;
 use App\Events\LoggedUserSignInHistoriesEvent;
 use App\Events\SendEmailItemCreated;
+use App\Events\SendEmailRequestSignOffEvent;
 use App\Events\SendMailForInspector;
 use App\Events\UpdateChklstProgressEvent;
 use App\Events\UpdatedDocumentEvent;
@@ -18,9 +18,9 @@ use App\Events\UpdateStatusChklstRunEvent;
 //------------
 use App\Listeners\InspChklstListener;
 use App\Listeners\LoggedUserSignInHistoriesListener;
-use App\Listeners\RemindSignOffListener;
 use App\Listeners\SendCreateNewDocumentNotificationListener;
 use App\Listeners\SendEmailListener;
+use App\Listeners\SendEmailRequestSignOffListener;
 use App\Listeners\SendMailForInspectorListener;
 use App\Listeners\SendUpdatedDocumentNotificationListener;
 use App\Listeners\ShouldUpdateFieldsListener;
@@ -54,13 +54,14 @@ class EventServiceProvider extends ServiceProvider
         UpdateChklstProgressEvent::class => [UpdateChklstProgressFromSheetListener::class],
         CreateNewDocumentEvent::class => [SendCreateNewDocumentNotificationListener::class],
         SendMailForInspector::class => [SendMailForInspectorListener::class],
-        BroadcastRemindSignOffEvent::class => [RemindSignOffListener::class],
+        // BroadcastRemindSignOffEvent::class => [RemindSignOffListener::class],
         InspChklstEvent::class => [InspChklstListener::class],
         LoggedUserSignInHistoriesEvent::class => [LoggedUserSignInHistoriesListener::class],
 
         UpdatedProdSequenceEvent::class => [UpdatedProdSequenceListener::class],
         UpdatedEsgSheetEvent::class => [UpdatedEsgSheetListener::class],
 
+        SendEmailRequestSignOffEvent::class => [SendEmailRequestSignOffListener::class],
     ];
 
     /**
