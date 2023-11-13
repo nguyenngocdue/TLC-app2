@@ -2,6 +2,6 @@
     "new": {
         "name": "new",
         "ball-in-court-assignee": "",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "getMonitors1()"
     }
 }
