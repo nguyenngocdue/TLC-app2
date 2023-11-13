@@ -64,6 +64,7 @@ return new class extends Migration
             $table->string("provider")->nullable();
             $table->string("password")->nullable();
             $table->string("time_zone")->nullable();
+            $table->text("signature")->nullable();
             $table->json("settings");
             $table->rememberToken();
             $table->appendCommonFields();
