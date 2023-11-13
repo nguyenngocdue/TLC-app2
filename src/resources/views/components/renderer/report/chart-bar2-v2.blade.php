@@ -5,6 +5,8 @@
 	</div>
 </div>
 
+{{-- @dd($meta) --}}
+ 
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -47,47 +49,49 @@ var chartConfig = {
         responsive: true,
         indexAxis: '{!! $dimensions['indexAxis'] ?? 'x' !!}',
         scales: {
-            y: {
-                suggestedMax: {!! $dimensions['scaleMaxY'] ?? 'null' !!},
-                beginAtZero: true,
-                //max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
-                ticks: {
-                    font: {
-                        size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
-                        weight: 'bold'
+                y: {
+                    suggestedMax: {!! $dimensions['scaleMaxY'] ?? 'null' !!},
+                    beginAtZero: true,
+                    //max: {!! $dimensions['scaleMaxY'] ?? 'null' !!}, 
+                    ticks: {
+                        display: {!! json_encode($dimensions['displayTicksY'] ?? true) !!},
+                        font: {
+                            size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
+                            weight: 'bold'
+                        }
+                    },
+                    title: {
+                        position: 'top',
+                        display: {!! $dimensions['displayTitleY'] ?? 1 !!},
+                        text: '{!! $dimensions['titleY'] ?? null !!}', 
+                        font: {
+                            size: {!! $dimensions['fontSize'] ?? 14 !!}, 
+                            weight: 'bold' 
+                        }
                     }
                 },
-                title: {
-                    position: 'top',
-                    display: {!! $dimensions['displayTitleY'] ?? 1 !!},
-                    text: '{!! $dimensions['titleY'] ?? null !!}', 
-                    font: {
-                        size: {!! $dimensions['fontSize'] ?? 14 !!}, 
-                        weight: 'bold' 
-                    }
+                x: {
+                    max: {!! $dimensions['scaleMaxX'] ?? 'null' !!}, 
+                    ticks: {
+                        display: {!! json_encode($dimensions['displayTicksX'] ?? true) !!},
+                        font: {
+                            size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
+                        },
+                        // change legends on Y axis
+                        //callback: function(value, index, ticks) {
+                        //    return '$';
+                        //}
+                    },
+                    title: {
+                        display: {!! $dimensions['displayTitleX'] ?? 1 !!},
+                        text: '{!! $dimensions['titleX'] ?? null !!}',
+                        font: {
+                            size: {!! $dimensions['fontSize'] ?? 14 !!}, 
+                            weight: 'bold' 
+                        }
+                    },
                 }
             },
-            x: {
-                max: {!! $dimensions['scaleMaxX'] ?? 'null' !!}, 
-                ticks: {
-                    font: {
-                        size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
-                    },
-                    // change legends on Y axis
-                    //callback: function(value, index, ticks) {
-                    //    return '$';
-                    //}
-                },
-                title: {
-                    display: {!! $dimensions['displayTitleX'] ?? 1 !!},
-                    text: '{!! $dimensions['titleX'] ?? null !!}',
-                    font: {
-                        size: {!! $dimensions['fontSize'] ?? 14 !!}, 
-                        weight: 'bold' 
-                    }
-                },
-            }
-        },
         plugins: { 
             tooltip: {
                 enabled: true,

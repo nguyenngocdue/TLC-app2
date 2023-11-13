@@ -88,6 +88,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                           Production Routing Link: <strong>{{$prodRoutingLink[$idRoutingLink]}}</strong></x-renderer.heading>
                     </div>
                     <div class="grid grid-cols-3 gap-2">
+                    {{-- @dd($widgets) --}}
                         @foreach($widgets as $keyInManage => $values)
                             <div class="col-span-1">
                                 <div class="p-6">

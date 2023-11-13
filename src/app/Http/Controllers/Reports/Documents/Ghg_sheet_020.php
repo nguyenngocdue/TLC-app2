@@ -194,10 +194,19 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
 	{
+		// DataSource for Ghg_sheet_010
 		$report010 = new Ghg_sheet_010();
 		$dataSource010 = $report010->getDataSource($params);
 		$dataSource010 = $report010->changeDataSource($dataSource010, $params);
 		// dd($dataSource010);
+
+
+		// DataSource for GHGRP Basin Production & Emissions
+		$report040 = new Ghg_sheet_040();
+		$dataSource040 = $report040->getDataSource($params);
+		// dd($dataSource040);
+
+
 		$dataSource =  Report::convertToType($dataSource);
 		$data = (new Ghg_sheet_010())->changeDataSource($dataSource, $params);
 		$c02FootprintInfo = (array)$this->getNumberOfUserOfYear($params)->toArray();
@@ -227,7 +236,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$data = self::updateDataPivotHorizontalChart($data);
 		$data = self::addInfo($data);
 		$data->put('document_ghg_sheet_010', $dataSource010);
-		// dd($data);
+
 		return collect($data);
 	}
 
