@@ -113,6 +113,13 @@
                     console.log(e.data);
                 })
         </script>
+        <script>
+            const app_env = '{{env('APP_DOMAIN')}}';
+            window.Echo.channel('wss-toastr-message-channel-' + app_env)
+                .listen('WssToastrMessageChannel', (e) => {
+                    toastr.success(e.data.message, e.data.code)
+                })
+        </script>
 </body>
 </html>
 
