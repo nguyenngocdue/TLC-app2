@@ -56,7 +56,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         <div style='' class="{{$layout}} items-center bg-white box-border px-8 py-6 relative">
-            <x-print.header6 :itemsShow="['logo']" dimensionImg="w-[195px] h-[60]" class="justify-end border-none"/>
+            <x-print.header6 :itemsShow="['logo']" dimensionImg="w-[195px] h-[60px]" class="justify-end border-none"/>
             <div class="pb-2">
                 <x-renderer.heading level=1 xalign='center'>CO2 Emission Report</x-renderer.heading>
                 <x-renderer.heading level=3 xalign='center'>for TLC Modular Construction Limited Liability Company</x-renderer.heading>
@@ -81,14 +81,14 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                 </div>
             </div>
             <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
-                <x-print.header6 :itemsShow="['website']" dimensionImg="w-[195px] h-[60]"/>
+                <x-print.header6 :itemsShow="['website']" dimensionImg="w-[195px] h-[60px]"/>
             </div>
         </div>
         <x-renderer.page-break />
 
         {{-- METHODOLOGY --}}
         <div style='' class="{{$layout}} items-center bg-white box-border px-8 py-6 relative">
-            <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60]"/>
+            <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60px]"/>
             <x-renderer.heading level=2 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Methodology</x-renderer.heading>
             <div class="px-4">
                 <x-renderer.heading level=5 xalign='left' class='text-blue-800 p-2'>
@@ -109,7 +109,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
         {{-- chart 1 --}}
         <div class="relative {{$layout}} items-center bg-white box-border px-8 py-6">
-                <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60]" />
+                <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60px]" />
                 <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Emission source category chart</x-renderer.heading>
                 <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
                     <div class="w-full flex px-4">
@@ -122,7 +122,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                 height="500"
                             ></x-renderer.report.pivot-chart>
                         <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
-                            <x-print.header6 :itemsShow="['website']" dimensionImg="w-[195px] h-[60]" />
+                            <x-print.header6 :itemsShow="['website']" dimensionImg="w-[195px] h-[60px]" />
                         </div>
                     </div>
                     <div class="m-auto">
@@ -163,13 +163,13 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                     </div>
                 </div>
             <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
-                    <x-print.header6 :itemsShow="['website']"dimensionImg="w-[195px] h-[60]" />
+                    <x-print.header6 :itemsShow="['website']"dimensionImg="w-[195px] h-[60px]" />
             </div>
         </div>
             <x-renderer.page-break />
         <div class="relative {{$layout}} items-center bg-white box-border px-8 py-6 ">
             {{-- chart 2 --}}
-                <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60]"/>
+                <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60px]"/>
                 <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Emission source category chart</x-renderer.heading>
                 <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
                     <div class="w-full px-6">
@@ -188,13 +188,13 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                 </div>
             {{-- Legen for chart 2 --}}
             <div class="w-full pb-4 absolute bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
-                <x-print.header6 :itemsShow="['website']" dimensionImg="w-[195px] h-[60]"/>
+                <x-print.header6 :itemsShow="['website']" dimensionImg="w-[195px] h-[60px]"/>
             </div>
         </div>
         <x-renderer.page-break />
         {{-- CO2 Emission Summary Report --}}
         <div class="{{-- {{$layout}} --}}{{-- relative --}} w-[1400px] min-h-[940px] items-center bg-white box-border px-8 py-6 ">
-            <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60]"/>
+            <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60px]"/>
             <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Data Summary Report</x-renderer.heading>
             <div class="">
             @php

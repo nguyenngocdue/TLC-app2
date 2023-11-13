@@ -68,6 +68,7 @@ class Ghg_sheet_dataSource extends Controller
 			$strDate = DateReport::getHalfYearPeriods($params['year'])[$key];
 			[$start_date, $end_date] = explode('/',$strDate);
 		}
+		// dump($strSqlMonth);
 		// SQL
 		$sql =  " SELECT infghgsh.*,$strSqlMonth ghgsh_totals.month_ghg_sheet_id,
 					    ghgsh_totals.quarter1,
@@ -75,7 +76,8 @@ class Ghg_sheet_dataSource extends Controller
 						ghgsh_totals.quarter3,
 						ghgsh_totals.quarter4,
 						ROUND($strSumValue,2) AS total_months,
-						ROUND($strSumValue,2) AS `$year`
+						ROUND($strSumValue,2) AS `$year`,
+						ROUND($strSumValue,2) AS 'year'
 						FROM (SELECT 
 						term.id AS scope_id, term.name AS scope_name,
 						ghgcate.id AS ghgcate_id, ghgcate.name AS ghgcate_name,

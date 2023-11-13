@@ -31,6 +31,15 @@
         "top_title": null,
         "title": "CO2 Emission Comparison Report"
     },
+    "document-ghg_sheet_040": {
+        "name": "document-ghg_sheet_040",
+        "package_tab": "report",
+        "package": "project_management",
+        "breadcrumb-group": "production",
+        "top_title": "GHGRP Basin Production & Emission",
+        "title": "GHGRP Basin Production & Emission",
+        "hidden": "true"
+    },
     "document-prod_sequence_010": {
         "name": "document-prod_sequence_010",
         "package_tab": "report",

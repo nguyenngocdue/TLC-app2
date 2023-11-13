@@ -24,6 +24,7 @@ trait TraitCreateDataSourceWidget
 
 		$paramCol = $dataWidgets['params']['meta_data_1'];
         $dataSource = Report::getItemsFromDataSource($dataSource);
+        $dataSource = Report::convertToType($dataSource);
 
         $dataByParamCol = $this->getValuesByField($dataSource,$paramCol);
 		$paramLabelCol = $dataWidgets['params']['label_meta_data_1'];
