@@ -1,7 +1,7 @@
 {
     "new": {
         "name": "new",
-        "ball-in-court-assignee": "",
+        "ball-in-court-assignee": "owner_id",
         "ball-in-court-monitors": ""
     }
 }
