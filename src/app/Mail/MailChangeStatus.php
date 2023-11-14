@@ -37,7 +37,7 @@ class MailChangeStatus extends Mailable
         $isChangeStatus = $data['isChangeStatus'];
         $changeAssignee = $data['changeAssignee'];
         $changeMonitor = $data['changeMonitor'];
-        return $this->subject($data['subject'])->markdown('mails.mail-change-status', [
+        return $this->markdown('mails.mail-change-status', [
             'appName' => $appName,
             'name' => $data['name'],
             'action' => $data['action'],

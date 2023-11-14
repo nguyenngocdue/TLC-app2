@@ -60,13 +60,12 @@ class CreateNewNotification extends Notification
         $nickNameEntity = strtoupper($libApps['nickname'] ?? $type);
         $titleEntity = $libApps['title'];
         $subjectMail = '[' . $nickNameEntity . '/' . $id . '] ' . $nameUserCreated . ' - ' . $titleEntity . ' - ' . config("company.name") . ' APP';
-        return (new MailCreateNew([
-            'name' => $nameUserCreated,
-            'url' => $url,
-        ]))
+
+        $mail = (new MailCreateNew(['name' => $nameUserCreated, 'url' => $url,]))
             ->to($notifiable['email'])
             ->subject($subjectMail)
-            ->bcc(env('MAIL_ARCHIVE_BCC', 'info@gamil.com'));
+            ->bcc(env('MAIL_ARCHIVE_BCC'));
+        return $mail;
     }
 
     /**

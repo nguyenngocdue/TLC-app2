@@ -99,20 +99,22 @@ class UpdatedDocumentListener implements ShouldQueue
         $nameOldAssignee = User::findFromCache($userAssigneePrevious)->name ?? '';
         $stringNameMonitorsPrevious = $this->implodeNameMonitors($userMonitorsPrevious);
         $stringNameMonitorsCurrent = $this->implodeNameMonitors($userMonitorsCurrent);
+        $mail = new MailChangeStatus([
+            'type' => $type,
+            'name' => $user['name'],
+            // 'subject' => $subjectMail,
+            'action' => url($href),
+            'isChangeStatus' => $isChangeStatus,
+            'changeAssignee' => $isChangeAssignee ? ['previous' => $nameOldAssignee, 'current' => $user['name']] : null,
+            'changeMonitor' => $isChangeMonitors ? ['previous' => $stringNameMonitorsPrevious, 'current' => $stringNameMonitorsCurrent] : null,
+            'currentValue' => $currentValue,
+            'previousValue' => $previousValue,
+        ]);
+        $mail->subject($subjectMail);
         Mail::to($user)
             ->cc($this->getAddressCc($listCc, $user, $currentValue))
             ->bcc($this->getMailBcc())
-            ->send(new MailChangeStatus([
-                'type' => $type,
-                'name' => $user['name'],
-                'subject' => $subjectMail,
-                'action' => url($href),
-                'isChangeStatus' => $isChangeStatus,
-                'changeAssignee' => $isChangeAssignee ? ['previous' => $nameOldAssignee, 'current' => $user['name']] : null,
-                'changeMonitor' => $isChangeMonitors ? ['previous' => $stringNameMonitorsPrevious, 'current' => $stringNameMonitorsCurrent] : null,
-                'currentValue' => $currentValue,
-                'previousValue' => $previousValue,
-            ]));
+            ->send($mail);
     }
     private function getUserIdsAssigneeAndMonitors($ballInCourts, $previousValue, $currentValue, $previousStatus, $currentStatus)
     {
