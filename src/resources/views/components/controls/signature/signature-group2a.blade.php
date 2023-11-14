@@ -61,7 +61,7 @@ const requestSignOff = (signableType, signableId, person2request) => {
         },
         success: (response) => {
             toastr.success(response.message)
-            $("#btnRequest_" + person2request).replaceWith("Request Sent")
+            $("#btnRequest_" + person2request).replaceWith("Request Sent just now.")
         },
         error: (response)=>{
             // console.log(response)

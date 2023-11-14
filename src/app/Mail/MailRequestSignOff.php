@@ -7,9 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class MailTest extends Mailable //implements ShouldQueue
+class MailRequestSignOff extends Mailable
 {
-    // use Queueable, SerializesModels;
+    use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
@@ -28,6 +28,6 @@ class MailTest extends Mailable //implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('Test Mail')->view('mails.mail-test');
+        return $this->markdown('mails.mail-request-sign-off');
     }
 }

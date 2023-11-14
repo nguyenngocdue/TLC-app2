@@ -14,6 +14,6 @@ class RequestSignOffController extends Controller
         $signableId = $request->input('signableId');
         $signableType = $request->input('signableType');
         event(new RequestSignOffEvent($uids, $signableId, $signableType));
-        return ['code' => 200, 'message' => 'Request emails have been sent successfully.'];
+        // return ['code' => 200, 'message' => 'Request emails have been sent successfully.'];
     }
 }

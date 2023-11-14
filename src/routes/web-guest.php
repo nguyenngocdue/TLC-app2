@@ -43,7 +43,10 @@ Route::get('test-queue', function () {
 Route::get('test-mail', function (Request $request) {
     if (!$request->has('email')) return 'Please enter your email address on url params';
     $email = $request->input('email');
-    $result = Mail::to($email)->send(new MailTest());
-    dump($result);
+    try {
+        Mail::to($email)->send(new MailTest());
+    } catch (\Exception $e) {
+        return "Mail Failed to send. Message: " . $e->getMessage();
+    }
     return 'Test Mail Successful! Please check email test in mail ' . $email;
 });
