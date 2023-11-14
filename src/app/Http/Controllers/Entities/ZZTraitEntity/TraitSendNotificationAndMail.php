@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Events\CreateNewDocumentEvent;
+use App\Events\CreatedDocumentEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Models\Logger;
@@ -26,7 +26,7 @@ trait TraitSendNotificationAndMail
                 $currentValue = $this->addEntityValue($fields, 'entity_type', $this->type);
                 $this->insertLogger($currentValue, null, Auth::id(), ($modelPath));
                 if (!($this->ignoreSendMail())) {
-                    event(new CreateNewDocumentEvent($currentValue = $currentValue, $this->type, ($modelPath)));
+                    event(new CreatedDocumentEvent($currentValue = $currentValue, $this->type, ($modelPath)));
                 }
             } catch (\Throwable $th) {
                 // dd($th->getMessage());

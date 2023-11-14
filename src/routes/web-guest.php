@@ -9,7 +9,7 @@ use App\Http\Controllers\WelcomeCanhController;
 use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\WelcomeFortuneController;
 use App\Jobs\TestLogToFileJob;
-use App\Mail\TestMail;
+use App\Mail\MailTest;
 use App\Warehouse\Wh_report_data_1s;
 use App\Warehouse\Wh_user_sub_project_task;
 use Illuminate\Http\Request;
@@ -43,6 +43,10 @@ Route::get('test-queue', function () {
 Route::get('test-mail', function (Request $request) {
     if (!$request->has('email')) return 'Please enter your email address on url params';
     $email = $request->input('email');
-    Mail::to($email)->send(new TestMail());
+    try {
+        Mail::to($email)->send(new MailTest());
+    } catch (\Exception $e) {
+        return "Mail Failed to send. Message: " . $e->getMessage();
+    }
     return 'Test Mail Successful! Please check email test in mail ' . $email;
 });

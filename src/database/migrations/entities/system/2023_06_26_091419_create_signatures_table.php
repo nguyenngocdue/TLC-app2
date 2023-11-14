@@ -22,6 +22,7 @@ return new class extends Migration
         $schema->create('signatures', function (BlueprintExtended $table) {
             $table->id();
             $table->text('value')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->text('signature_comment')->nullable();
             $table->string('signable_type')->nullable();;
             $table->unsignedBigInteger('signable_id')->nullable();

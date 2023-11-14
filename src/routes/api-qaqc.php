@@ -1,11 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\v1\FileController;
-use App\Http\Controllers\Api\v1\qaqc\CloneTemplateForQaqcChecklistController;
 use App\Http\Controllers\Api\v1\qaqc\CommentApiController;
 use App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_lineController;
 use App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_sht_sigController;
-use App\Http\Controllers\Api\v1\qaqc\RemindSignOffController;
+use App\Http\Controllers\Api\v1\qaqc\RequestSignOffController;
 use App\Http\Controllers\Api\v1\qaqc\SubmitFormAndUploadFileController;
 use App\Http\Controllers\Api\v1\qaqc\WirLineController;
 use Illuminate\Support\Facades\Route;
@@ -34,8 +33,9 @@ Route::group([
     'prefix' => 'v1/qaqc',
     // 'middleware' => 'auth'
 ], function () {
-    Route::post("remind_sign_off", [RemindSignOffController::class, 'remind']);
-    Route::post("clone_chklst_from_tmpl", [CloneTemplateForQaqcChecklistController::class, 'clone']);
+    // Route::post("remind_sign_off", [RemindSignOffController::class, 'remind']);
+    // Route::post("clone_chklst_from_tmpl", [CloneTemplateForQaqcChecklistController::class, 'clone']);
+    Route::post("request_to_sign_off", [RequestSignOffController::class, 'requestSignOff']);
 });
 
 

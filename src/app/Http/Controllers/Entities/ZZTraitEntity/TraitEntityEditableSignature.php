@@ -17,6 +17,8 @@ trait TraitEntityEditableSignature
         $currentUser = CurrentUser::get();
 
         foreach ($signatures as $line) {
+            // dump($line['id']);
+            // dump($line['value']);
             if (is_null($line['id']) && is_null($line['value'])) continue;
             // dump($line);
             if (is_null($line['id'])) {
@@ -28,13 +30,13 @@ trait TraitEntityEditableSignature
                 $signature = Signature::find($line['id']);
                 // dump($line);
                 if ($signature && $signature['owner_id'] == $currentUser->id) {
-                    if (is_null($line['value'])) {
-                        // Log::info("Deleted " . $line['id']);
-                        $signature->delete();
-                    } else {
-                        // Log::info("Updated " . $line['id']);
-                        $signature->update($line);
-                    }
+                    // if (is_null($line['value'])) {
+                    //     // Log::info("Deleted " . $line['id']);
+                    //     // $signature->delete();
+                    // } else {
+                    //     // Log::info("Updated " . $line['id']);
+                    // }
+                    $signature->update($line);
                 }
             }
         }

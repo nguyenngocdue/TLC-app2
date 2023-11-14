@@ -3,6 +3,7 @@
 namespace App\View\Components\Controls\InspChklst;
 
 use App\Models\User;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\View\Component;
 
@@ -29,25 +30,16 @@ class CheckPointSignature extends Component
     public function render()
     {
         $uid = $this->line->inspector_id;
-        $user = null;
-        if ($uid) {
-            $user = User::findFromCache($uid);
-            // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
-            // dd($user);
-            $user = [
-                'id' => $user->id,
-                'full_name' => $user->full_name,
-                'position_rendered' => $user->getPosition->name,
-                'timestamp' => DateTimeConcern::convertForLoading("picker_datetime", $this->line->created_at),
-                'avatar' => $user->getAvatarThumbnailUrl(),
-            ];
-        }
-        // dump($user);
+        $timestamp = DateTimeConcern::convertForLoading("picker_datetime", $this->line->created_at);
+        $cuid = CurrentUser::id();
+
         return view('components.controls.insp-chklst.check-point-signature', [
             'table01Name' => $this->table01Name,
             'rowIndex' => $this->rowIndex,
             'line' => $this->line,
-            'user' => $user,
+            'uid' => $uid,
+            'timestamp' => $timestamp,
+            'cuid' => $cuid,
         ]);
     }
 }

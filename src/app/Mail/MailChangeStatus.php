@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendMailChangeStatus extends Mailable
+class MailChangeStatus extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -37,7 +37,7 @@ class SendMailChangeStatus extends Mailable
         $isChangeStatus = $data['isChangeStatus'];
         $changeAssignee = $data['changeAssignee'];
         $changeMonitor = $data['changeMonitor'];
-        return $this->subject($data['subject'])->markdown('emails.mail-change-status', [
+        return $this->markdown('mails.mail-change-status', [
             'appName' => $appName,
             'name' => $data['name'],
             'action' => $data['action'],

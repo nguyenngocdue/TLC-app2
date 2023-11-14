@@ -2,16 +2,13 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class UpdatedDocumentEvent
+class UpdatedQaqcChklstSheetEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,9 +17,10 @@ class UpdatedDocumentEvent
      *
      * @return void
      */
-    public function __construct(public $previousValue, public $currentValue, public $type, public $modelPath, public $userCurrentId)
+    public function __construct(public $sheet)
     {
-        // Log::info("Updated Doc Event");
+        //
+        // Log::info("UpdatedQaqcChklstSheetEvent " . $sheet);
     }
 
     /**

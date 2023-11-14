@@ -5,23 +5,17 @@
         "tooltip": "",
         "change_status_multiple": ""
     },
-    "pending_review": {
-        "name": "pending_review",
-        "label": "Pending Review",
-        "tooltip": "",
-        "change_status_multiple": ""
-    },
-    "review_rejected": {
-        "name": "review_rejected",
-        "label": "Review Rejected",
-        "tooltip": "",
-        "change_status_multiple": ""
-    },
     "pending_approval": {
         "name": "pending_approval",
-        "label": "Pending Approval",
+        "label": "Submit for Approval",
         "tooltip": "",
         "change_status_multiple": "true"
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "label": "Reject Approval",
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "approved": {
         "name": "approved",

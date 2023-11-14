@@ -1,16 +1,19 @@
 <div class="flex justify-center">
      <div>
           <div class="w-[340px] mx-auto">
-               <x-controls.signature2 
-                    id="{{$table01Name}}[value][{{$rowIndex}}]"  
+               <x-controls.signature.signature2a
                     name="{{$table01Name}}[value][{{$rowIndex}}]"  
-                    ownerIdColumnName="{{$table01Name}}[inspector_id][{{$rowIndex}}]"
                     value="{{$line->value}}"
-                    signedPersonId="{{$line->inspector_id}}"
+                    signatureUserId="{{$uid}}"
+
+                    readOnly="{{$line->value && ($cuid != $uid)}}"
                />
-               {{-- When user hasnt signed yet --}}
-               @if($user) 
-                    <x-renderer.avatar-user size="xlarge" uid="{{$user['id']}}" flipped=1 content="Signed at {{$user['timestamp']}}"></x-renderer.avatar-user> 
+               @if(!$line->value)
+               <input type="hidden" name="{{$table01Name}}[inspector_id][{{$rowIndex}}]" value="{{$cuid}}" />
+               @endif
+
+               @if($line->value && $uid) 
+                    <x-renderer.avatar-user size="xlarge" uid="{{$uid}}" flipped=1 content="Signed at {{$timestamp}}"></x-renderer.avatar-user> 
                @endif
           </div>
      </div>

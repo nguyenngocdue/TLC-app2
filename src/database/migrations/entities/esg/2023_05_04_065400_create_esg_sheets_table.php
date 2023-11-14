@@ -32,7 +32,10 @@ return new class extends Migration
             $table->orderable();
             $table->appendCommonFields();
 
-            $table->unique(['esg_date', 'esg_tmpl_id']);
+            // $table->unique(['esg_date', 'esg_tmpl_id']); 
+            //<< User can soft delete on form of esg_master_sheet
+            //<< And then create another in the correct month
+            //<< It will cause duplicate exception
         });
     }
 

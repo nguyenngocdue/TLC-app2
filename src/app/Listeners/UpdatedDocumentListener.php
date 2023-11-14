@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\UpdatedDocumentEvent;
 use App\Http\Controllers\Workflow\LibApps;
-use App\Mail\SendMailChangeStatus;
+use App\Mail\MailChangeStatus;
 use App\Models\User;
 use App\Utils\SendMaiAndNotification\CheckDefinitionsNew;
 use App\Utils\Support\Json\BallInCourts;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-class SendUpdatedDocumentNotificationListener implements ShouldQueue
+class UpdatedDocumentListener implements ShouldQueue
 {
     use CheckDefinitionsNew;
     /**
@@ -27,6 +27,7 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
     public function __construct()
     {
         //
+        // Log::info("UpdatedDocumentListener");
     }
     /**
      * Handle the event.
@@ -98,20 +99,22 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
         $nameOldAssignee = User::findFromCache($userAssigneePrevious)->name ?? '';
         $stringNameMonitorsPrevious = $this->implodeNameMonitors($userMonitorsPrevious);
         $stringNameMonitorsCurrent = $this->implodeNameMonitors($userMonitorsCurrent);
+        $mail = new MailChangeStatus([
+            'type' => $type,
+            'name' => $user['name'],
+            // 'subject' => $subjectMail,
+            'action' => url($href),
+            'isChangeStatus' => $isChangeStatus,
+            'changeAssignee' => $isChangeAssignee ? ['previous' => $nameOldAssignee, 'current' => $user['name']] : null,
+            'changeMonitor' => $isChangeMonitors ? ['previous' => $stringNameMonitorsPrevious, 'current' => $stringNameMonitorsCurrent] : null,
+            'currentValue' => $currentValue,
+            'previousValue' => $previousValue,
+        ]);
+        $mail->subject($subjectMail);
         Mail::to($user)
             ->cc($this->getAddressCc($listCc, $user, $currentValue))
             ->bcc($this->getMailBcc())
-            ->send(new SendMailChangeStatus([
-                'type' => $type,
-                'name' => $user['name'],
-                'subject' => $subjectMail,
-                'action' => url($href),
-                'isChangeStatus' => $isChangeStatus,
-                'changeAssignee' => $isChangeAssignee ? ['previous' => $nameOldAssignee, 'current' => $user['name']] : null,
-                'changeMonitor' => $isChangeMonitors ? ['previous' => $stringNameMonitorsPrevious, 'current' => $stringNameMonitorsCurrent] : null,
-                'currentValue' => $currentValue,
-                'previousValue' => $previousValue,
-            ]));
+            ->send($mail);
     }
     private function getUserIdsAssigneeAndMonitors($ballInCourts, $previousValue, $currentValue, $previousStatus, $currentStatus)
     {
@@ -218,19 +221,19 @@ class SendUpdatedDocumentNotificationListener implements ShouldQueue
     }
     private function getMailBcc()
     {
-        return env('MAIL_ARCHIVE_BCC', 'info@gamil.com');
+        return env('MAIL_ARCHIVE_BCC');
     }
-    private function isArraysDiffer($array1, $array2)
-    {
-        $diff = array_diff($array1, $array2);
-        dd($array1 == $array2);
-        if (empty($diff)) return false;
-        return true;
-    }
-    private function compareArrays($a, $b)
-    {
-        sort($a);
-        sort($b);
-        return $a == $b;
-    }
+    // private function isArraysDiffer($array1, $array2)
+    // {
+    //     $diff = array_diff($array1, $array2);
+    //     dd($array1 == $array2);
+    //     if (empty($diff)) return false;
+    //     return true;
+    // }
+    // private function compareArrays($a, $b)
+    // {
+    //     sort($a);
+    //     sort($b);
+    //     return $a == $b;
+    // }
 }

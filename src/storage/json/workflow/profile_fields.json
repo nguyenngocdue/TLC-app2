@@ -185,6 +185,11 @@
         "profile_readonly": "true",
         "me_readonly": "true"
     },
+    "_org_chart": {
+        "name": "_org_chart",
+        "profile_readonly": "true",
+        "me_readonly": "true"
+    },
     "_owner_id": {
         "name": "_owner_id",
         "profile_readonly": "true",
@@ -201,33 +206,44 @@
         "name": "_phone",
         "profile_readonly": "true"
     },
+    "_position": {
+        "name": "_position",
+        "profile_readonly": "true",
+        "me_readonly": "true"
+    },
     "_position_1": {
         "name": "_position_1",
         "profile_readonly": "true",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_position_2": {
         "name": "_position_2",
         "profile_readonly": "true",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_position_3": {
         "name": "_position_3",
         "profile_readonly": "true",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_position_prefix": {
         "name": "_position_prefix",
         "profile_readonly": "true",
         "profile_hidden": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_position_rendered": {
         "name": "_position_rendered",
         "profile_readonly": "true",
+        "profile_hidden": "true",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_provider": {
@@ -259,6 +275,10 @@
         "profile_readonly": "true",
         "profile_hidden": "true",
         "me_hidden": "true"
+    },
+    "_signature": {
+        "name": "_signature",
+        "profile_readonly": "true"
     },
     "_time_keeping_type": {
         "name": "_time_keeping_type",

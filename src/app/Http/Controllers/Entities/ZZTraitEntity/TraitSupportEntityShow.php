@@ -68,13 +68,16 @@ trait TraitSupportEntityShow
                     // if ($inspectorId) {
                     //     $inspectorName = User::findFromCache($inspectorId)->full_name;
                     // }
+
+                    $valueSignature = htmlspecialchars($valueSignature);
+
                     $str = Blade::render(
                         "<div class='flex pb-2 justify-between items-center'>
-                                    <x-controls.signature2 name='signature' value='$valueSignature' updatable='{{false}}'/>
-                                        $renderInspector
+                            <x-controls.signature.signature2a name='signature' value='$valueSignature' readOnly=1 />
+                            $renderInspector
                         </div>",
                     );
-                   
+
                     $str .= $this->createStrHtmlAttachment($item);
                     $str .=  $this->createStrHtmlComment($item);
                     break;
@@ -182,7 +185,7 @@ trait TraitSupportEntityShow
     private function formatCommentRender($items)
     {
         $value = $items->toArray();
-        $strCenter = Blade::render('<x-print.comment5 :value="$value" />',['value' => $value]);
+        $strCenter = Blade::render('<x-print.comment5 :value="$value" />', ['value' => $value]);
         return $strCenter;
         // dd($strCenter);
         // foreach ($items as  $comment) {
@@ -208,15 +211,15 @@ trait TraitSupportEntityShow
     private function formatAttachmentRender($items)
     {
         $strCenter = '';
-        $isRenderSimple = $items->every(function($item){
-            return in_array($item->extension,['pdf','csv','zip']);
+        $isRenderSimple = $items->every(function ($item) {
+            return in_array($item->extension, ['pdf', 'csv', 'zip']);
         });
-        if($isRenderSimple){
-            $strCenter = Blade::render('<x-print.attachment-simple :dataSource="$value"/>',[
+        if ($isRenderSimple) {
+            $strCenter = Blade::render('<x-print.attachment-simple :dataSource="$value"/>', [
                 'value' => $items->toArray()
             ]);
-        }else{
-            $strCenter = Blade::render('<x-renderer.attachment2 name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />',[
+        } else {
+            $strCenter = Blade::render('<x-renderer.attachment2 name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />', [
                 'value' => $items->toArray()
             ]);
         }

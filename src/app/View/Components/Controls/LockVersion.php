@@ -14,7 +14,7 @@ class LockVersion extends Component
      */
     public function __construct(
         private $name = Constant::NAME_LOCK_COLUMN,
-        private $value,
+        private $value = null,
     ) {
         //
     }

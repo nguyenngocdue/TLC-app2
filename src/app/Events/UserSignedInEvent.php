@@ -9,9 +9,8 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
-class UpdatedDocumentEvent
+class UserSignedInEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,9 +19,9 @@ class UpdatedDocumentEvent
      *
      * @return void
      */
-    public function __construct(public $previousValue, public $currentValue, public $type, public $modelPath, public $userCurrentId)
+    public function __construct(public $uid, public $ip, public $time, public $info)
     {
-        // Log::info("Updated Doc Event");
+        //
     }
 
     /**

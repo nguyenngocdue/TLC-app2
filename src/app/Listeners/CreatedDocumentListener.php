@@ -2,18 +2,17 @@
 
 namespace App\Listeners;
 
-use App\Events\CreateNewDocumentEvent;
-use App\Models\Logger;
+use App\Events\CreatedDocumentEvent;
 use App\Models\User;
 use App\Notifications\CreateNewNotification;
-use App\Utils\Constant;
 use App\Utils\Support\Json\BallInCourts;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 
-class SendCreateNewDocumentNotificationListener implements ShouldQueue
+class CreatedDocumentListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -25,13 +24,7 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
         //
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  \App\Events\CreateNewDocumentEvent  $event
-     * @return void
-     */
-    public function handle(CreateNewDocumentEvent $event)
+    public function handle(CreatedDocumentEvent $event)
     {
         $createNotification = [];
         $currentValue = $event->{'currentValue'};
@@ -47,7 +40,7 @@ class SendCreateNewDocumentNotificationListener implements ShouldQueue
         }
         $ballInCourts = BallInCourts::getAllOf($type);
         $keySendMailCreate = 'owner_id';
-        if(isset($ballInCourts['new'])){
+        if (isset($ballInCourts['new'])) {
             $keySendMailCreate = $ballInCourts['new']['ball-in-court-assignee'] ?? 'owner_id';
         }
         foreach ($currentValue as $key => $value) {

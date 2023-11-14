@@ -43,7 +43,7 @@ class SendMailChangeStatus extends Mailable implements ShouldQueue
         $appName = config("company.name");
         $changeAssignee = $data['changeAssignee'];
         $changeMonitor = $data['changeMonitor'];
-        return $this->subject($data['subject'])->view('emails.mail-change-status', [
+        return $this->subject($data['subject'])->view('mails.mail-change-status', [
             'appName' => $appName,
             'name' => $data['name'],
             'action' => $data['action'],

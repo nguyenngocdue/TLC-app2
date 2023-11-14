@@ -9,9 +9,8 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
-class UpdatedDocumentEvent
+class WssToastrMessageChannel implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,11 +19,9 @@ class UpdatedDocumentEvent
      *
      * @return void
      */
-    public function __construct(public $previousValue, public $currentValue, public $type, public $modelPath, public $userCurrentId)
+    public function __construct(public $data)
     {
-        // Log::info("Updated Doc Event");
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
@@ -32,6 +29,6 @@ class UpdatedDocumentEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new Channel('wss-toastr-message-channel-' . env('APP_DOMAIN'));
     }
 }
