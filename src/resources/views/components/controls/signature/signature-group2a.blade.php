@@ -36,10 +36,31 @@
                 @if($value =='' && $signatureId)
                     Request sent on {{$sentDate}}
                 @else
-                    <x-renderer.button type="primary" class="my-2">Request to Sign Off</x-renderer.button>
+                    <x-renderer.button id="btnRequest_{{$signatureUserId}}" type="primary" class="my-2" onClick="requestSignOff('{{$signableType}}', {{$signableId}}, {{$signatureUserId}})">Request to Sign Off</x-renderer.button>
                 @endif
             @endif
         </div>
         <x-renderer.avatar-user size="xlarge" uid="{{$user->id}}" flipped=1 content=""/>
     </div>
 @endforeach
+
+@once
+<script>
+
+const requestSignOff = (signableType, signableId, person2request) => {
+    console.log(signableType, signableId, person2request)
+    $("#btnRequest_" + person2request).prop('disabled', true);
+
+    $.ajax({
+        method:'POST',
+        url: '/api/v1/qaqc/request_to_sign_off',
+        data:{
+            signableType, 
+            signableId, 
+            person2request,
+        }
+    })
+}
+</script>
+@endonce
+

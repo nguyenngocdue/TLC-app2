@@ -15,14 +15,17 @@ class SignatureGroup2a extends Component
     public function __construct(
         private $category,
         private $signableType,
+        private $signableId,
         private $item,
         private $readOnly = false,
         private $debug = !true,
         private $title = "Sign Off",
         private $signOffOracy = "getMonitors1",
+
     ) {
         // dump($item);
         // dump($category);
+        // dump($signableType, $signableId);
     }
 
     private function mergeUserAndSignature($nominatedList, $signatureList)
@@ -55,6 +58,9 @@ class SignatureGroup2a extends Component
             'input_or_hidden' => $this->debug ? "text" : "hidden",
 
             'cuid' => $cuid,
+
+            'signableType' => $this->signableType,
+            'signableId' => $this->signableId,
         ];
         return view('components.controls.signature.signature-group2a', $params);
     }

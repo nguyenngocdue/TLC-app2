@@ -41,6 +41,7 @@
             title="Third Party Sign Off"
             category="signature_qaqc_chklst_3rd_party" 
             signableType='{{$type}}'
+            signableId='{{$id}}'
             :type="$type" 
             :item="$item"
             />
