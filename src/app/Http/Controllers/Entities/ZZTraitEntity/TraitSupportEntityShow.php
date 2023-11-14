@@ -68,9 +68,12 @@ trait TraitSupportEntityShow
                     // if ($inspectorId) {
                     //     $inspectorName = User::findFromCache($inspectorId)->full_name;
                     // }
+
+                    $valueSignature = htmlspecialchars($valueSignature);
+
                     $str = Blade::render(
                         "<div class='flex pb-2 justify-between items-center'>
-                            <x-controls.signature.signature2a name='signature' value='$valueSignature'/>
+                            <x-controls.signature.signature2a name='signature' value='$valueSignature' readOnly=1 />
                             $renderInspector
                         </div>",
                     );

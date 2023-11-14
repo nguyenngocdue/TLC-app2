@@ -16,7 +16,7 @@ class Signature2a extends Component
     public function __construct(
         private $name,
         private $readOnly = false,
-        private $debug = !false,
+        private $debug = !true,
         private $value = null,
         private $comment = '',
         private $showCommentBox = false,
