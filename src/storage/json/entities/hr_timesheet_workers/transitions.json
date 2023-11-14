@@ -1,47 +1,34 @@
 {
     "new": {
         "name": "new",
-        "location": "-390.00 -20.00",
+        "location": "-250.00 -20.00",
         "new": "",
-        "pending_review": "true",
-        "review_rejected": "",
-        "pending_approval": "",
-        "approved": ""
-    },
-    "pending_review": {
-        "name": "pending_review",
-        "location": "-150.00 -20.00",
-        "new": "",
-        "pending_review": "",
-        "review_rejected": "true",
         "pending_approval": "true",
-        "approved": ""
-    },
-    "review_rejected": {
-        "name": "review_rejected",
-        "location": "-380.00 50.00",
-        "new": "",
-        "pending_review": "true",
-        "review_rejected": "",
-        "pending_approval": "",
+        "approval_rejected": "",
         "approved": ""
     },
     "pending_approval": {
         "name": "pending_approval",
-        "location": "70.00 -50.00",
+        "location": "0.00 -30.00",
         "new": "",
-        "pending_review": "",
-        "review_rejected": "",
         "pending_approval": "",
+        "approval_rejected": "true",
         "approved": "true"
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "location": "-250.00 -90.00",
+        "new": "",
+        "pending_approval": "true",
+        "approval_rejected": "",
+        "approved": ""
     },
     "approved": {
         "name": "approved",
         "location": "290.00 -50.00",
         "new": "",
-        "pending_review": "",
-        "review_rejected": "",
         "pending_approval": "",
+        "approval_rejected": "",
         "approved": ""
     }
 }
