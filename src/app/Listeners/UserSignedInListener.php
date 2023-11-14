@@ -2,14 +2,14 @@
 
 namespace App\Listeners;
 
-use App\Events\LoggedUserSignInHistoriesEvent;
+use App\Events\UserSignedInEvent;
 use App\Models\User_sign_in_history;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class LoggedUserSignInHistoriesListener implements ShouldQueue
+class UserSignedInListener //implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -21,13 +21,7 @@ class LoggedUserSignInHistoriesListener implements ShouldQueue
         //
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  \App\Events\LoggedUserSignInHistoriesEvent  $event
-     * @return void
-     */
-    public function handle(LoggedUserSignInHistoriesEvent $event)
+    public function handle(UserSignedInEvent $event)
     {
         $uid = $event->{'uid'};
         $ip = $event->{'ip'};

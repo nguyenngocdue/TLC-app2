@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Events\InspChklstEvent;
-use App\Events\LoggedUserSignInHistoriesEvent;
 use App\Events\CreatedDocumentEvent;
 use App\Events\RequestSignOffEvent;
 
@@ -12,16 +10,16 @@ use App\Events\UpdatedEsgSheetEvent;
 use App\Events\UpdatedProdSequenceEvent;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
+use App\Events\UserSignedInEvent;
 //------------
 use App\Listeners\CreatedDocumentListener;
-use App\Listeners\InspChklstListener;
-use App\Listeners\LoggedUserSignInHistoriesListener;
 use App\Listeners\RequestSignOffListener;
 use App\Listeners\UpdatedDocumentListener;
 use App\Listeners\UpdatedEsgSheetListener;
 use App\Listeners\UpdatedProdSequenceListener;
 use App\Listeners\UpdatedQaqcChklstListener;
 use App\Listeners\UpdatedQaqcChklstSheetListener;
+use App\Listeners\UserSignedInListener;
 //------------
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -37,19 +35,10 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         //Auth
         Registered::class => [SendEmailVerificationNotification::class],
-        LoggedUserSignInHistoriesEvent::class => [LoggedUserSignInHistoriesListener::class],
-        // EntityCreatedEvent::class => [ShouldUpdateFieldsListener::class],
-        // EntityUpdatedEvent::class => [ShouldUpdateFieldsListener::class],
-        // SendEmailItemCreated::class => [SendEmailListener::class],
-        // UpdateStatusChklstRunEvent::class => [UpdateStatusChklstRunListener::class],
-        // SendMailForInspector::class => [SendMailForInspectorListener::class],
-        // SendEmailRequestSignOffEvent::class => [SendEmailRequestSignOffListener::class],
+        UserSignedInEvent::class => [UserSignedInListener::class],
 
-        // ????????????????
         CreatedDocumentEvent::class => [CreatedDocumentListener::class],
         UpdatedDocumentEvent::class => [UpdatedDocumentListener::class,],
-        InspChklstEvent::class => [InspChklstListener::class],
-        // ????????????????
 
         UpdatedQaqcChklstSheetEvent::class => [UpdatedQaqcChklstSheetListener::class],
         UpdatedQaqcChklstEvent::class => [UpdatedQaqcChklstListener::class],

@@ -9,6 +9,7 @@ use App\Utils\Support\Json\BallInCourts;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 
 class CreatedDocumentListener implements ShouldQueue

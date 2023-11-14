@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\LoggedUserSignInHistoriesEvent;
+use App\Events\UserSignedInEvent;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -144,10 +144,10 @@ class LoginController extends Controller
             $location = Location::get($ipAddress);
             $cityName = 'internal';
             $countryName = 'internal';
-            if($location){
+            if ($location) {
                 $countryName = $location->countryName ?? $location->countryCode;
                 $cityName = $location->cityName ?? $location->regionName;
-            } 
+            }
             $infoBrowser = [
                 'city_name' => $cityName,
                 'country_name' => $countryName,
@@ -157,13 +157,13 @@ class LoginController extends Controller
                 'device' => $agent->device(),
             ];
             $time = $request->server('REQUEST_TIME');
-            event(new LoggedUserSignInHistoriesEvent(Auth::id(), $ipAddress, $time, $infoBrowser));
+            event(new UserSignedInEvent(Auth::id(), $ipAddress, $time, $infoBrowser));
         } catch (\Throwable $th) {
-           dump($th->getMessage());
+            dump($th->getMessage());
         }
     }
 
-     /**
+    /**
      * Generate a human validation error for LDAP bind failures.
      *
      * @param string      $errorMessage
@@ -197,7 +197,7 @@ class LoginController extends Controller
     {
         $username = $request->{$this->username()};
         $user = User::where('email', $username)->first();
-        if(!$user){
+        if (!$user) {
             return throw ValidationException::withMessages([
                 $this->username() => [trans('auth.failed_email')],
             ]);
@@ -206,7 +206,8 @@ class LoginController extends Controller
             $this->password() => [trans('auth.failed_password')],
         ]);
     }
-    private function password(){
+    private function password()
+    {
         return 'password';
     }
 }

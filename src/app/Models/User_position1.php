@@ -6,7 +6,7 @@ use App\BigThink\ModelExtended;
 
 class User_position1 extends ModelExtended
 {
-    protected $fillable = ["name", "description", "slug"];
+    protected $fillable = ["name", "description", "slug", "owner_id"];
 
     protected $table = 'user_position1s';
     protected static $statusless = true;

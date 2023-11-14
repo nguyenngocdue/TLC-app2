@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class LoggedUserSignInHistoriesEvent
+class UserSignedInEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,7 +19,7 @@ class LoggedUserSignInHistoriesEvent
      *
      * @return void
      */
-    public function __construct(public $uid,public $ip,public $time,public $info)
+    public function __construct(public $uid, public $ip, public $time, public $info)
     {
         //
     }

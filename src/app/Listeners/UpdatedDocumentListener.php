@@ -27,6 +27,7 @@ class UpdatedDocumentListener implements ShouldQueue
     public function __construct()
     {
         //
+        // Log::info("UpdatedDocumentListener");
     }
     /**
      * Handle the event.
@@ -218,19 +219,19 @@ class UpdatedDocumentListener implements ShouldQueue
     }
     private function getMailBcc()
     {
-        return env('MAIL_ARCHIVE_BCC', 'info@gamil.com');
+        return env('MAIL_ARCHIVE_BCC');
     }
-    private function isArraysDiffer($array1, $array2)
-    {
-        $diff = array_diff($array1, $array2);
-        dd($array1 == $array2);
-        if (empty($diff)) return false;
-        return true;
-    }
-    private function compareArrays($a, $b)
-    {
-        sort($a);
-        sort($b);
-        return $a == $b;
-    }
+    // private function isArraysDiffer($array1, $array2)
+    // {
+    //     $diff = array_diff($array1, $array2);
+    //     dd($array1 == $array2);
+    //     if (empty($diff)) return false;
+    //     return true;
+    // }
+    // private function compareArrays($a, $b)
+    // {
+    //     sort($a);
+    //     sort($b);
+    //     return $a == $b;
+    // }
 }
