@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\UpdatedDocumentEvent;
 use App\Http\Controllers\Workflow\LibApps;
-use App\Mail\SendMailChangeStatus;
+use App\Mail\MailChangeStatus;
 use App\Models\User;
 use App\Utils\SendMaiAndNotification\CheckDefinitionsNew;
 use App\Utils\Support\Json\BallInCourts;
@@ -102,7 +102,7 @@ class UpdatedDocumentListener implements ShouldQueue
         Mail::to($user)
             ->cc($this->getAddressCc($listCc, $user, $currentValue))
             ->bcc($this->getMailBcc())
-            ->send(new SendMailChangeStatus([
+            ->send(new MailChangeStatus([
                 'type' => $type,
                 'name' => $user['name'],
                 'subject' => $subjectMail,

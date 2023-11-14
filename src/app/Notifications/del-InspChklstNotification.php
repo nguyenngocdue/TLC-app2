@@ -64,7 +64,7 @@ class InspChklstNotification extends Notification
             ->line('You have send a request to you to sign off a document.')
             ->line('Please click the button below to open the Insp Checklist Sheet page.')
             ->action('Sign Off Now', url($this->url))
-            ->markdown('emails.insp-chklst', $data)
+            ->markdown('mails.insp-chklst', $data)
             ->line('Thank you for using our application!');
     }
 

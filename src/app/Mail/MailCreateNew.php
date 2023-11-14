@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class TestMail extends Mailable implements ShouldQueue
+class MailCreateNew extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,7 +16,7 @@ class TestMail extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public $data)
     {
         //
     }
@@ -28,6 +28,7 @@ class TestMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('Test Mail')->view('emails.test-mail');
+
+        return $this->markdown('mails.mail-create-new', $this->data);
     }
 }
