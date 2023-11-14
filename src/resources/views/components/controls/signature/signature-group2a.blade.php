@@ -57,7 +57,16 @@ const requestSignOff = (signableType, signableId, person2request) => {
         data:{
             signableType, 
             signableId, 
-            person2request,
+            uids: [person2request],
+        },
+        success: (response) => {
+            toastr.success(response.message)
+            $("#btnRequest_" + person2request).replaceWith("Request Sent")
+        },
+        error: (response)=>{
+            // console.log(response)
+            toastr.error(response.responseJSON.message, "Send emails failed.")
+            $("#btnRequest_" + person2request).prop('disabled', false);
         }
     })
 }

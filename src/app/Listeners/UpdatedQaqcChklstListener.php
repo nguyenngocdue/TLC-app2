@@ -2,14 +2,14 @@
 
 namespace App\Listeners;
 
-use App\Events\UpdateChklstProgressEvent;
+use App\Events\UpdatedQaqcChklstEvent;
 use App\Models\Qaqc_insp_chklst;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Log;
 
-class UpdateChklstProgressFromSheetListener //implements ShouldQueue //<<No need to queue
+class UpdatedQaqcChklstListener //implements ShouldQueue //<<No need to queue
 {
-    use Queueable;
+    // use Queueable;
     /**
      * Create the event listener.
      *
@@ -20,7 +20,7 @@ class UpdateChklstProgressFromSheetListener //implements ShouldQueue //<<No need
         //
     }
 
-    public function handle(UpdateChklstProgressEvent $event)
+    public function handle(UpdatedQaqcChklstEvent $event)
     {
         // $ids = $this->getIdChklst($event->subProjectId);
         $bookId = $event->sheet->qaqc_insp_chklst_id;

@@ -4,11 +4,13 @@ namespace App\Listeners;
 
 use App\Events\UpdateChklstProgressEvent;
 use App\Events\UpdatedDocumentEvent;
+use App\Events\UpdatedQaqcChklstEvent;
+use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Facades\Log;
 
-class UpdateChklstSheetProgressListener
+class UpdatedQaqcChklstSheetListener
 {
     const YES = 1, NO = 2, NA_1 = 3, ON_HOLD_1 = 4, PASS = 5, FAIL = 6, NA_2 = 7, ON_HOLD_2 = 8;
     const TEXT = 1, TEXTAREA = 2, CHECKBOX = 3, RADIO = 4, DATETIME = 5, DROPDOWN = 6, SIGNATURE = 7;
@@ -25,13 +27,13 @@ class UpdateChklstSheetProgressListener
     /**
      * Handle the event.
      *
-     * @param  \App\Events\UpdatedDocumentEvent  $event
+     * @param  \App\Events\UpdatedQaqcChklstSheetEvent  $event
      * @return void
      */
-    public function handle(UpdatedDocumentEvent $event)
+    public function handle(UpdatedQaqcChklstSheetEvent $event)
     {
-        if (CurrentRoute::getTypeSingular() !== 'qaqc_insp_chklst_sht') return false;
-        $sheetId = $event->currentValue['id'];
+        // if (CurrentRoute::getTypeSingular() !== 'qaqc_insp_chklst_sht') return false;
+        $sheetId = $event->sheet;
         $sheet = Qaqc_insp_chklst_sht::find($sheetId);
         $sheetLines = $sheet->getLines()->get()->toArray();
 
@@ -60,6 +62,6 @@ class UpdateChklstSheetProgressListener
 
         // $idChklst =  $event->currentValue['qaqc_insp_chklst_id'];
         // $subProjectId = $sheet->getSubProject()->pluck('id')->toArray()[0];
-        event(new UpdateChklstProgressEvent($sheet));
+        event(new UpdatedQaqcChklstEvent($sheet));
     }
 }

@@ -27,6 +27,11 @@ class RequestSignOffListener
      */
     public function handle(RequestSignOffEvent $event)
     {
-        Log::info("Email sent");
+        Log::info($event->uids);
+        Log::info($event->signableId);
+        Log::info($event->signableType);
+
+
+        // Log::info("Email sent");
     }
 }
