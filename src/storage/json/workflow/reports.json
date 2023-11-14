@@ -40,6 +40,15 @@
         "title": "GHGRP Basin Production & Emission",
         "hidden": "true"
     },
+    "document-ghg_sheet_050": {
+        "name": "document-ghg_sheet_050",
+        "package_tab": "report",
+        "package": "project_management",
+        "breadcrumb-group": "production",
+        "top_title": "ECO Report Detail",
+        "title": "ECO Report Detail",
+        "hidden": "true"
+    },
     "document-prod_sequence_010": {
         "name": "document-prod_sequence_010",
         "package_tab": "report",

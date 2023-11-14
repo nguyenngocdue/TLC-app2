@@ -34,10 +34,12 @@
 	console.log(datasets);
 	scales = {
 		x: {
+				suggestedMax: {!! json_encode($dimensions['scaleMaxX'] ?? null) !!},
 				barPercentage: 0.5,
 				stacked: {!! $dimensions['stackX'] ?? 'false' !!},
-				max: {!! $dimensions['scaleMaxX'] ?? 'null' !!}, 
+				//max: {!! $dimensions['scaleMaxX'] ?? 'null' !!}, 
 				ticks: {
+					stepSize: {!! json_encode($dimensions['stepSizeX'] ?? null)!!},
 					display: {!! json_encode($dimensions['displayTicksX'] ?? true) !!},
 					font: {
 						size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
@@ -78,12 +80,13 @@
 			}
 		},
 		y1: {
-			barPercentage: 0.5,
+			//barPercentage: 0.5,
 			display: true,
 			position: 'right',
 			min: 0, 
 			max: {!! json_encode($dimensions['scale_max_y1'] ?? 100) !!},
 			ticks: {
+				stepSize: 10,
 				display: {!! json_encode($dimensions['displayTicksY1'] ?? false) !!},
 				callback: function(value, index, values) {
 					return value;
@@ -150,17 +153,17 @@
                                     && context.dataset.data[context.dataIndex] !== null;
                         }' : 'false' !!}
 				,anchor: 'end'
-				,align: 'start'
-				,color: 'white'
-				,backgroundColor: 'rgba(0, 0, 0, 0.5)'
-				,borderColor: 'white'
-				,borderWidth: 1
-				,borderRadius: 6
+				,align: 'center'
+				,color: '#000000'
+				,backgroundColor: {!! json_encode($dimensions['backgroundColor'] ?? null) !!}
+				,borderColor: {!! json_encode($dimensions['borderColor'] ?? '#000000') !!}
+				,borderWidth: {!! json_encode($dimensions['borderWidth'] ?? 0) !!}
+				,borderRadius:  {!! json_encode($dimensions['borderRadius'] ?? 0) !!}
 				,font: {
-					size: 16
+					size: {!! json_encode($dimensions['dataLabelsSize'] ?? 14) !!}
 				},
-				rotation:  {!! $dimensions['dataLabelRotation'] ?? 0 !!},
-				offset: {!! $dimensions['dataLabelOffset'] ?? 0 !!},
+				rotation:  {!! json_encode($dimensions['dataLabelRotation'] ?? 0) !!},
+				offset: {!! json_encode($dimensions['dataLabelOffset'] ?? 0) !!},
 				formatter: function(value, context) {
                     return value;
                 }
