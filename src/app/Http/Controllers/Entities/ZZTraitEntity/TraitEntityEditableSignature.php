@@ -30,13 +30,13 @@ trait TraitEntityEditableSignature
                 $signature = Signature::find($line['id']);
                 // dump($line);
                 if ($signature && $signature['owner_id'] == $currentUser->id) {
-                    if (is_null($line['value'])) {
-                        // Log::info("Deleted " . $line['id']);
-                        $signature->delete();
-                    } else {
-                        // Log::info("Updated " . $line['id']);
-                        $signature->update($line);
-                    }
+                    // if (is_null($line['value'])) {
+                    //     // Log::info("Deleted " . $line['id']);
+                    //     // $signature->delete();
+                    // } else {
+                    //     // Log::info("Updated " . $line['id']);
+                    // }
+                    $signature->update($line);
                 }
             }
         }

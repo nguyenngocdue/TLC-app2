@@ -2,11 +2,10 @@
      <div>
           <div class="w-[340px] mx-auto">
                <x-controls.signature.signature2a
-                    id="{{$table01Name}}[value][{{$rowIndex}}]"  
                     name="{{$table01Name}}[value][{{$rowIndex}}]"  
-                    ownerIdColumnName="{{$table01Name}}[inspector_id][{{$rowIndex}}]"
+
                     value="{{$line->value}}"
-                    signedPersonId="{{$line->inspector_id}}"
+                    signatureUserId="{{$line->inspector_id}}"
                />
                {{-- When user hasnt signed yet --}}
                @if($user) 

@@ -17,7 +17,7 @@ class SignatureGroup2a extends Component
         private $signableType,
         private $item,
         private $readOnly = false,
-        private $debug = true,
+        private $debug = !true,
         private $title = "Sign Off",
         private $signOffOracy = "getMonitors1",
     ) {
@@ -50,7 +50,10 @@ class SignatureGroup2a extends Component
         $params = [
             'category' => $this->category,
             'signatures' => $signatures,
+
             'debug' => $this->debug,
+            'input_or_hidden' => $this->debug ? "text" : "hidden",
+
             'cuid' => $cuid,
         ];
         return view('components.controls.signature.signature-group2a', $params);

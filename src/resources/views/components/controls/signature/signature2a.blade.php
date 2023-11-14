@@ -12,7 +12,7 @@
         @if($readOnly)
         <div>{!! $value_decoded !!}</div>
         @else
-        <canvas width="{{$w}}" height="{{$h}}" id="canvas_{{$name}}" 
+        <canvas width="{{$w}}" height="{{$h}}" id="canvas_{{$id}}" 
                 class="bg-gray1-200"
                 style="touch-action: none; user-select: none;" ></canvas>
         @endif
@@ -34,12 +34,20 @@
 
 @once
 <script>
-const registerSignature = (name, count, readOnly) => {
+const registerSignature = (id, name, count, readOnly, svgContent) => {
+    const canvasId = "canvas_"+id
+    // console.log(id,name, canvasId)
+    const signaturePad = new SignaturePad(getEById(canvasId)[0])
+    if(svgContent){
+        var svgDataUrl = 'data:image/svg+xml;base64,' + btoa(svgContent);
+        signaturePad.fromDataURL(svgDataUrl);
+        // drawSvgInCanvas(canvasId, svgContent)
+        signaturePad.off()
+    }
     if(!readOnly){
-        const signaturePad = new SignaturePad(getEById("canvas_"+name)[0])
-        // signaturePad.off()
         $("#btnReset1_" + count).click(()=>{
             signaturePad.clear()
+            signaturePad.on()
             getEById(name).val('')
         })
         signaturePad.addEventListener("endStroke", () => {
@@ -52,5 +60,6 @@ const registerSignature = (name, count, readOnly) => {
 @endonce
 
 <script>
-    registerSignature('{{$name}}', {{$count}}, {{$readOnly ? 'true' : 'false'}})
+    svgContent = '{!! $value_decoded !!}'
+    registerSignature('{{$id}}','{{$name}}', {{$count}}, {{$readOnly ? 'true' : 'false'}}, svgContent)
 </script>

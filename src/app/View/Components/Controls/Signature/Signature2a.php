@@ -20,10 +20,9 @@ class Signature2a extends Component
         private $value = null,
         private $comment = '',
         private $showCommentBox = false,
+        // private $signatureUserId = null,
     ) {
-        //
         static::$count++;
-        // dump($name, static::$count);
         $this->debug = !!$debug;
     }
 
@@ -38,18 +37,23 @@ class Signature2a extends Component
         // dump("ReadOnly: " . $this->readOnly);
         // dump("Count: " . static::$count);
         $value_decoded = (htmlspecialchars_decode($this->value));
+        // $mine_signature = CurrentUser::id() == $this->signatureUserId;
+
+        $readOnly = $this->readOnly; //|| (!$mine_signature);
         return view(
             'components.controls.signature.signature2a',
             [
+                'id' => $this->name,
                 'name' => $this->name,
                 'count' => static::$count,
-                'readOnly' => $this->readOnly ? 1 : 0,
+                'readOnly' => $readOnly ? 1 : 0,
                 'debug' => $this->debug,
                 'input_or_hidden' => $this->debug ? "text" : "hidden",
                 'value' => $this->value,
                 'comment' => $this->comment,
                 'value_decoded' => $value_decoded,
                 'showCommentBox' => $this->showCommentBox,
+
             ]
         );
     }

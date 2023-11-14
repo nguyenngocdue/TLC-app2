@@ -70,7 +70,7 @@ trait TraitSupportEntityShow
                     // }
                     $str = Blade::render(
                         "<div class='flex pb-2 justify-between items-center'>
-                            <x-controls.signature.signature2a name='signature' value='$valueSignature' updatable='{{false}}'/>
+                            <x-controls.signature.signature2a name='signature' value='$valueSignature'/>
                             $renderInspector
                         </div>",
                     );
