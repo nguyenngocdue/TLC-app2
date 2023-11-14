@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-class SendUpdatedDocumentNotificationListener implements ShouldQueue
+class UpdatedDocumentListener implements ShouldQueue
 {
     use CheckDefinitionsNew;
     /**

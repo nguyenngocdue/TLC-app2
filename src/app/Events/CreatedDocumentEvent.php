@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class CreateNewDocumentEvent
+class CreatedDocumentEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     /**
@@ -18,7 +18,7 @@ class CreateNewDocumentEvent
      *
      * @return void
      */
-    public function __construct(public $currentValue,public $type, public $modelPath)
+    public function __construct(public $currentValue, public $type, public $modelPath)
     {
     }
 

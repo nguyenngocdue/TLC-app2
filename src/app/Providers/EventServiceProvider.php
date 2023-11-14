@@ -2,11 +2,10 @@
 
 namespace App\Providers;
 
-use App\Events\CreateNewDocumentEvent;
 use App\Events\InspChklstEvent;
 use App\Events\LoggedUserSignInHistoriesEvent;
+use App\Events\CreatedDocumentEvent;
 use App\Events\RequestSignOffEvent;
-
 
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdatedEsgSheetEvent;
@@ -14,13 +13,11 @@ use App\Events\UpdatedProdSequenceEvent;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 //------------
+use App\Listeners\CreatedDocumentListener;
 use App\Listeners\InspChklstListener;
 use App\Listeners\LoggedUserSignInHistoriesListener;
 use App\Listeners\RequestSignOffListener;
-use App\Listeners\SendCreateNewDocumentNotificationListener;
-use App\Listeners\SendUpdatedDocumentNotificationListener;
-use App\Listeners\UpdateChklstProgressFromSheetListener;
-use App\Listeners\UpdateChklstSheetProgressListener;
+use App\Listeners\UpdatedDocumentListener;
 use App\Listeners\UpdatedEsgSheetListener;
 use App\Listeners\UpdatedProdSequenceListener;
 use App\Listeners\UpdatedQaqcChklstListener;
@@ -49,8 +46,8 @@ class EventServiceProvider extends ServiceProvider
         // SendEmailRequestSignOffEvent::class => [SendEmailRequestSignOffListener::class],
 
         // ????????????????
-        UpdatedDocumentEvent::class => [SendUpdatedDocumentNotificationListener::class,],
-        CreateNewDocumentEvent::class => [SendCreateNewDocumentNotificationListener::class],
+        CreatedDocumentEvent::class => [CreatedDocumentListener::class],
+        UpdatedDocumentEvent::class => [UpdatedDocumentListener::class,],
         InspChklstEvent::class => [InspChklstListener::class],
         // ????????????????
 
