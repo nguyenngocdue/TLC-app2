@@ -23,6 +23,7 @@ trait TraitCreateDataSourceWidget2
 
 	private function createDataSets($paramMeta, $paramMetaData, $dataManage)
     {
+        // dd($dataManage);
         $array = [];
         $indexDataSource = [];
         $numbers = [];
@@ -47,9 +48,11 @@ trait TraitCreateDataSourceWidget2
                     $dataSets['yAxisID'] = $params['y_axis_id'];
                     $dataSets['tension'] = $params['tension'] ?? 0;
                     $dataSets['label'] = $params['data_label'] ?? "undefined";
-                    $dataSets['borderWidth'] = $params['borderWidth'] ?? 0.5;
+                    $dataSets['borderWidth'] = $params['borderWidth'] ?? 0;
                     $dataSets['borderColor'] = $params["line_color"] ?? "";
-                    $dataSets['backgroundColor'] = $this->generateColors(count($numbers));
+                    if($params['chart_type'] === 'bar') {
+                        $dataSets['backgroundColor'] = $this->generateColors(count($numbers));
+                    }
                 };
                 $array[$key] = (object)$dataSets;
             }
@@ -64,13 +67,18 @@ trait TraitCreateDataSourceWidget2
         $data['datasets'] =  array_values($array);
         $data['labels'] = $labels;
         
-        $max = (int)max($numbers);
+        $max = max($numbers);
+        // dump($max);
+        $dimensions = $dataManage['dimensions'];
+        $scaleMaxX = $dimensions['scaleMaxX'] ?? 10;
+        // dd($scaleMaxX + $max);
+        
         $params = [
-            'height' => $max + 10,
-            'scaleMaxX' => $max + 100,
-            'scaleMaxY' => $max + 100,
+            //'height' => $max + $scaleMaxX,
+            'scaleMaxX' => $max + $scaleMaxX,
+            'scaleMaxY' => $max + $scaleMaxX,
         ];
-        $dataManage['dimensions'] = array_merge($params, $dataManage['dimensions']);
+        $dataManage['dimensions'] = array_merge($dataManage['dimensions'], $params);
       // Set data for widget
         $result =  [
             'key' => $key.'_'.$dataManage['key_md5'],
