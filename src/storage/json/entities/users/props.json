@@ -1333,9 +1333,9 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_signature": {
-        "name": "_signature",
-        "column_name": "signature",
+    "_standard_signature": {
+        "name": "_standard_signature",
+        "column_name": "standard_signature",
         "column_type": "text",
         "label": "Standard Signature",
         "control": "signature",

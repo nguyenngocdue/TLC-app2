@@ -37,7 +37,7 @@
             </x-renderer.card>
             
             @if($showSignOff)
-            <x-controls.signature.signature-group2 
+            <x-controls.signature.signature-group2a
             title="Third Party Sign Off"
             category="signature_qaqc_chklst_3rd_party" 
             signableType='{{$type}}'

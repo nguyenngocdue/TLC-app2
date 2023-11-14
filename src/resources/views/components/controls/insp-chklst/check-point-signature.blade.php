@@ -1,7 +1,7 @@
 <div class="flex justify-center">
      <div>
           <div class="w-[340px] mx-auto">
-               <x-controls.signature2 
+               <x-controls.signature.signature2a
                     id="{{$table01Name}}[value][{{$rowIndex}}]"  
                     name="{{$table01Name}}[value][{{$rowIndex}}]"  
                     ownerIdColumnName="{{$table01Name}}[inspector_id][{{$rowIndex}}]"
