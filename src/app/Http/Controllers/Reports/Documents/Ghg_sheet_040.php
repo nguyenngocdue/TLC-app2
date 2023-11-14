@@ -31,21 +31,23 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
     }
 
 	private function getTargetEmission($dataSource){
+		// dd($dataSource);
 		foreach ($dataSource as $key => &$items){
 			if(isset($items->scope_name) && $items->scope_name === 'Scope 1'){
-				$items->year = round(($items->year*30)/100,2);
+				$items->year = round((($items->year))*70/100,2);
 			}
-			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 2'){
-				$items->year = round(($items->year*35)/100,2);
+			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 2' && $items->ghg_tmpl_id === 5){
+				$items->year = round(($items->year/100)*65,2);
 			}
 			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 3' && $items->ghg_tmpl_id === 6){
-				$items->year = round(($items->year*20)/100,2);
+				$items->year = round(($items->year/100)*80,2);
 			}
 			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 3'){
 				// dd($items);
-				$items->year = round(($items->year*30)/100,2);
+				$items->year = round(($items->year/100)*70,2);
 			}
 		}
+		// dd($dataSource);
 		return $dataSource;
 	}
 
@@ -55,7 +57,6 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 		unset($yearParams['only_month']);
 		unset($yearParams['quarter_time']);
 		$primaryData = (new Ghg_sheet_dataSource())->getDataSource($yearParams);
-		// dd($primaryData);
 		return collect($primaryData);
 	}
 
@@ -70,8 +71,8 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 			'ghgrp_basin_production_and_emissions_all_year' =>[
 				'meta_bar' => $emissionAllYearData],
 				'ghgrp_basin_production_and_emissions_by_months' => [
-					'meta_bar' => $targetEmissionData,
-					'meta_bar2' => $currentPeriodData,
+					'meta_bar' => $currentPeriodData,
+					'meta_bar2' => $targetEmissionData,
 					]
 				];
 
