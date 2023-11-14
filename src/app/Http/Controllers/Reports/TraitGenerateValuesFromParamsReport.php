@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports;
 
 use App\Utils\Support\DateReport;
+use App\Utils\Support\Report;
 
 trait TraitGenerateValuesFromParamsReport
 {
@@ -30,4 +31,55 @@ trait TraitGenerateValuesFromParamsReport
         ], $params);
         return $valOfParams;
     }
+
+    public function createValuesForDateParam($params){
+		// GET MONTHS TO SHOW ON TABLE
+		$months = range(1, 12);
+		if(Report::checkValueOfField($params, 'half_year')){
+			$months = $params['half_year']  === 'start_half_year' 
+						? range(1, 6): range(7,12);
+		}
+		if(Report::checkValueOfField($params, 'quarter_time') && is_array($params['quarter_time'])){
+			$quarterTimes = $params['quarter_time'];
+			$months = array_merge(...array_map(fn($item) => DateReport::getMonthsByQuarter($item), $quarterTimes));
+		}
+
+		if (isset($params['quarter_time'])) {
+			$quarter = $params['quarter_time'];
+			if ($quarter === '1') {
+				$months = range(1, 3);
+			} elseif ($quarter === '2') {
+				$months = range(4, 6);
+			} elseif ($quarter === '3') {
+				$months = range(7, 9);
+			} elseif ($quarter === '4') {
+				$months = range(10, 12);
+			}
+		}
+		if (isset($params['only_month'])) {
+			$months = $params['only_month'];
+			if (is_null($params['only_month'][0])) {
+				$months = range(1, 12);
+			}
+		}
+		$strSqlMonth = '';
+		foreach ($months as $month) {
+			$tableName = 'ghgsh_totals';
+			$month = strlen($month) > 1 ? $month : '0' . $month;
+			$strSqlMonth .= $tableName . '.' . $month . ',';
+		}
+		$strSumValue = str_replace(',', ' + ', trim($strSqlMonth, ','));
+		$year = $params['year'];
+		// dd($strSqlMonth, $strSumValue);
+
+		// Set half year
+		$start_date = $year.'-01-01';
+		$end_date = $year.'-12-31';
+		if(isset($params['half_year']) && $params['year']) {
+			$key = $params['half_year'];
+			$strDate = DateReport::getHalfYearPeriods($params['year'])[$key];
+			[$start_date, $end_date] = explode('/',$strDate);
+		}
+		return [$start_date, $end_date, $year, $strSqlMonth, $strSumValue];
+	}
 }

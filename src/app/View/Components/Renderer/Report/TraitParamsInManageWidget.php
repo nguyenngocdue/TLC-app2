@@ -42,7 +42,7 @@ trait TraitParamsInManageWidget
     public function makeParamsInManageWidgets($params){
 
 		$uri = $_SERVER['REQUEST_URI'];
-        $reportName =last(explode('/',$uri));
+        $reportName = $params['report_name'] ?? last(explode('/',$uri));
         $allWidgets = LibWidgets::getAll();
         $widgetsOfReports = array_filter($allWidgets, function($widget) use($reportName) {
 			return isset($widget['report_name']) && !$widget['hidden'] ?  $widget['report_name'] === $reportName : false;

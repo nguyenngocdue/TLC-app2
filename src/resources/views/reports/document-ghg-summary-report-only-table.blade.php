@@ -53,7 +53,8 @@
                     {{-- Source Column --}}
                     <td class="{{$class1}} text-left border-t text-blue-800">
                          <div class='p-2'>
-                            {!! $firstItem['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $ghgTmplId ?? 0) . "'>" . $firstItem['ghgtmpl_name'] . "</a>" : '' !!} </div>
+                            {!! $firstItem['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $ghgTmplId ?? 0) . "'>" . $firstItem['ghgtmpl_name'] . "</a>" : '' !!} 
+                        </div>
                     </td>
                     {{-- Value --}}
                     <td class="{{$class1}} text-right border-t">

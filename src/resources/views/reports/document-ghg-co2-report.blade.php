@@ -197,16 +197,24 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
             <x-print.header6 :itemsShow="['logo']" class="justify-end border-none" dimensionImg="w-[195px] h-[60px]"/>
             <x-renderer.heading level=3 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-2'>Data Summary Report</x-renderer.heading>
             <div class="">
-            @php
-                $hidden = "hidden";
-            @endphp
-                @include('reports.document-ghg-summary-report-only-table', ['hidden' => $hidden])
-                {{-- <div class="w-full absolute  pb-4 bottom-0 right-0 left-0 flex flex-row-reverse justify-center">
-                    <x-print.header6 :itemsShow="['website']"/>
-                </div> --}}
+                @include('reports.document-ghg-summary-report-only-table')
             </div>
         </div>
-        
+
+        <x-renderer.page-break />
+        @php
+            $tableDataSource = $tableDataSource->toArray();
+        @endphp
+        <div class="w-[1400px] min-h-[940px] items-center bg-white box-border px-8 py-6 ">
+            @include('reports.include-document-ghg-sheet-040', ['tableDataSource' => $tableDataSource['document_ghg_sheet_040']])
+        </div>
+
+        <x-renderer.page-break />
+        <div class="w-[1400px] min-h-[940px] items-center bg-white box-border px-8 py-6 ">
+            @include('reports.include-document-ghg-sheet-050', ['tableDataSource' => $tableDataSource['document_ghg_sheet_050']])
+        </div>
+
+
     </div>
 </div>
 @endsection

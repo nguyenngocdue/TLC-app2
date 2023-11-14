@@ -97,7 +97,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		foreach ($scopeData as $key => $scope) {
 			$scopeName = Term::find($scope['scope_id'])->toArray()['name'];
 			$scopeNames[] = [
-				'id'=> $scope['scope_id'],
+				'id' => $scope['scope_id'],
 				'name' => $scopeName,
 			];
 			$array['meta']['labels'][] = $scopeName;
@@ -170,20 +170,20 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			$directEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 335)[0]['total_tco2e'] ?? null;
 			$inDirectEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 336)[0]['total_tco2e'] ?? null;
 			$otherInDirectEmissions = Report::filterItemByKeyAndValue($dataSource['tco2e_by_scope'], 'scope_id', 337)[0]['total_tco2e'] ?? null;
-			
+
 			$max = $dataSource['pivot_chart_1']['meta']['max'];
 			$array = [
 				'direct_emissions' => [
-					'tco2e' =>$directEmissions,
-					'percent' =>$max ? round($directEmissions*100/$max,2): null
-				] ,
+					'tco2e' => $directEmissions,
+					'percent' => $max ? round($directEmissions * 100 / $max, 2) : null
+				],
 				'indirect_emissions' => [
-					'tco2e' =>$inDirectEmissions,
-					'percent' =>$max ? round($inDirectEmissions*100/$max,2) : null
+					'tco2e' => $inDirectEmissions,
+					'percent' => $max ? round($inDirectEmissions * 100 / $max, 2) : null
 				],
 				'other_indirect_emissions' => [
-					'tco2e' =>$otherInDirectEmissions,
-					'percent' =>$max ? round($otherInDirectEmissions*100/$max,2) : null
+					'tco2e' => $otherInDirectEmissions,
+					'percent' => $max ? round($otherInDirectEmissions * 100 / $max, 2) : null
 				]
 			];
 			$dataSource->put('info', $this->addInfo($array));
@@ -237,6 +237,19 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$data = self::addInfo($data);
 		$data->put('document_ghg_sheet_010', $dataSource010);
 
+
+		//document_ghg_sheet_050
+		$report050 = new Ghg_sheet_050();
+		$dataSource050 = $report050->getDataSource($params);
+		$dataSource050 = $report050->changeDataSource($dataSource050, $params);
+		$data->put('document_ghg_sheet_050', $dataSource050);
+
+
+		//document_ghg_sheet_040
+		$report040 = new Ghg_sheet_040();
+		$dataSource040 = $report040->getDataSource($params);
+		$dataSource040 = $report040->changeDataSource($dataSource040, $params);
+		$data->put('document_ghg_sheet_040', $dataSource040);
 		return collect($data);
 	}
 

@@ -1,28 +1,3 @@
-@extends('layouts.app')
-
-@section('topTitle', $topTitle)
-@section('title', $titleReport)
-@section('tooltip', Str::ucfirst($typeReport)." ".$currentMode)
-@section('content')
-
-{{-- PARAMETERS --}}
-@php
-$widthCell = 50;
-$class1 = "bg-white dark:border-gray-600 border-r";
-$class2 =" bg-gray-100 px-4 py-3 border-gray-300 ";
-$titleColName = isset($params['quarter_time']) ? 'QTR'.$params['quarter_time'] : 'YTD';
-$titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
-@endphp
-
-
-<div class="px-4">
-    @include('components.reports.shared-parameter')
-</div>
-<br />
-{{-- @dd($tableDataSource) --}}
-
-
-
 <div class="flex justify-center bg-only-print">
     <div class="border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
         <table class="tg whitespace-no-wrap w-full text-sm">
@@ -90,34 +65,38 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                         {{-- Metric Type --}}
                         <td class="{{$class1}} text-center bg-white">
                             @foreach($childrenMetrics as $child => $metric)
-                                    <div class='p-2 dark:border-gray-600 border-t'>
-                                        {{$metric['ghg_metric_type_name'] ?? 'Null'}}
-                                    </div>
+                                <div class='p-2 dark:border-gray-600 border-b h-full'>
+                                            {!! $metric['ghg_metric_type_name'] ?? '<i class="fa-solid fa-minus"></i>' !!}
+                                </div>
                             @endforeach 
                         </td>
                         {{-- Metric Type 1 --}}
                         <td class="{{$class1}} text-center bg-white">
-                                @foreach($childrenMetrics as $child => $metric)
-                                        <div class='p-2 dark:border-gray-600 border-t'>
-                                            {{$metric['ghg_metric_type_1_name'] ?? 'Null'}}
+                            @foreach($childrenMetrics as $child => $metric)
+                                        <div class='p-2 dark:border-gray-600 border-b h-full'>
+                                            {!! $metric['ghg_metric_type_1_name'] ?? '<i class="fa-solid fa-minus"></i>' !!}
                                         </div>
-                                @endforeach 
+                            @endforeach 
                         </td>
                         {{-- Metric Type 2 --}}
                         <td class="{{$class1}} text-center bg-white">
                                 @foreach($childrenMetrics as $child => $metric)
-                                        <div class='p-2 dark:border-gray-600 border-t'>
-                                            {{$metric['ghg_metric_type_2_name'] ?? 'Null'}}
-                                        </div>
+                                    <div class='p-2 dark:border-gray-600 border-b h-full'>
+                                        {!! $metric['ghg_metric_type_2_name'] ?? '<i class="fa-solid fa-minus"></i>' !!}
+                                    </div>
                                 @endforeach 
                         </td>
 
                     {{-- Total Month (YTD) --}}
                         <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
                             @foreach($childrenMetrics as $key => $value)
-                                    <div class='p-2 font-bold'>
-                                        {{(string)$value['total_months'] === '0' ? '': $value['total_months']}}
-                                    </div>
+                                <div class='p-2 font-bold dark:border-gray-600 border-t'>
+                                    @if((string)$value['total_months'] === '0')
+                                        <i class="fa-solid fa-minus"></i>
+                                    @else
+                                        {{ $value['total_months'] }}
+                                    @endif
+                                </div>
                             @endforeach
                         </td>
 
@@ -130,9 +109,13 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                             @foreach($monthData as $m => $val)
                             <td class='w-{{$widthCell}} {{$class1}} text-right border-t text-blue-800'>
                                 @foreach($d as $k => $item)
-                                        <div class='p-2'>
-                                            {{$item['months'][$m] ?? '0.00'}}
-                                        </div>
+                                    <div class='p-2 font-bold dark:border-gray-600 border-t'>
+                                        @if((string)$item['months'][$m] === '0')
+                                            <i class="fa-solid fa-minus"></i>
+                                        @else
+                                           {{$item['months'][$m]}}
+                                        @endif
+                                    </div>
                                 @endforeach
                             </td>
                             @endforeach
@@ -154,7 +137,7 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                         {{-- Metric Type --}}
                         <td class="{{$class1}} text-center bg-white">
                             @foreach($childrenMetrics as $child => $metric)
-                                    <div class='p-2 dark:border-gray-600 border-t'>
+                                    <div class='p-2 dark:border-gray-600 border-b h-full'>
                                         {{$metric['ghg_metric_type_name'] ?? 'NUll'}}
                                     </div>
                             @endforeach 
@@ -162,7 +145,7 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                         {{-- Metric Type 1 --}}
                         <td class="{{$class1}} text-center bg-white">
                                 @foreach($childrenMetrics as $child => $metric)
-                                        <div class='p-2 dark:border-gray-600 border-t'>
+                                        <div class='p-2 dark:border-gray-600 border-b h-full'>
                                             {{$metric['ghg_metric_type_1_name'] ?? 'Null'}}
                                         </div>
                                 @endforeach 
@@ -170,7 +153,7 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                         {{-- Metric Type 2 --}}
                         <td class="{{$class1}} text-center bg-white">
                                 @foreach($childrenMetrics as $child => $metric)
-                                        <div class='p-2 dark:border-gray-600 border-t'>
+                                        <div class='p-2 dark:border-gray-600 border-b h-full'>
                                              {{$metric['ghg_metric_type_2_name'] ?? 'Null'}}
                                         </div>
                                 @endforeach 
@@ -181,9 +164,13 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                         {{-- Total Month (YTD) --}}
                         <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
                             @foreach($values3['children_metrics'] as $key => $value)
-                                    <div class='p-2 font-bold'>
-                                        {{(string)$value['total_months'] === '0' ? '0.00': $value['total_months']}}
-                                    </div>
+                                <div class='p-2 font-bold dark:border-gray-600 border-t'>
+                                        @if((string)$value['total_months'] === '0')
+                                            <i class="fa-solid fa-minus"></i>
+                                        @else
+                                            {{ $value['total_months']}}
+                                        @endif
+                                </div>
                             @endforeach
                         </td>
                     
@@ -195,8 +182,12 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                             @foreach($monthData as $m => $val)
                             <td class='w-{{$widthCell}} {{$class1}} text-right border-t text-blue-800'>
                                 @foreach($childrenMetricsVal3 as $k => $item)
-                                        <div class='p-2'>
-                                            {{$item['months'][$m]}}
+                                         <div class='p-2 font-bold dark:border-gray-600 border-t'>
+                                            @if((string)$item['months'][$m] === '0')
+                                                <i class="fa-solid fa-minus"></i>
+                                            @else
+                                                {{$item['months'][$m]}}
+                                            @endif
                                         </div>
                                 @endforeach
                             </td>
@@ -216,7 +207,7 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
                     @php
                     $totalEmissions = $tableDataSource['total_emission'];
                     @endphp
-                    <td class="bg-white border-t" colspan="2"></td>
+                    <td class="bg-white border-t" colspan="5"></td>
                     <td class="{{$class1}} text-left border-t font-bold">Total Emissions</td>
                     @foreach($totalEmissions as $value)
                     <td class="{{$class1}} text-right border-t">
@@ -230,9 +221,3 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
         </table>
     </div>
 </div>
-
-
-
-
-
-@endsection

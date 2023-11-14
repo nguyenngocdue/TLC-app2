@@ -25,6 +25,7 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 	protected $optionPrint = "landscape";
 
 	private function makeDataWidget($keyData, $dataSource, $dataManage, $params){
+		$params['report_name'] = 'document-ghg_sheet_040';
 		$paramMeta = $this->makeParamsInManageWidgets($params)[$keyData]['param_meta'];
 		$result = $this->createDataSets($paramMeta, $dataSource, $dataManage);
         return $result;
@@ -62,6 +63,7 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
     {
+		// dd($params);
 		$emissionAllYearData = Report::convertToType($dataSource);
 		$targetEmissionData = Report::convertToType($this->getTargetEmission($dataSource)->toArray());
 		$currentPeriodData =  Report::convertToType((new Ghg_sheet_dataSource())->getDataSource($params)->toArray());
@@ -76,9 +78,10 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 					]
 				];
 
-		// dump($groupData);
+		// dd($groupData, $dataSource);
 
 		$output = [];
+		$params['report_name'] = 'document-ghg_sheet_040';
 		$dataOfManageWidget = $this->makeParamsInManageWidgets($params);
 		// dd($dataOfManageWidget);
 		foreach ($groupData as $keyData => $data)
