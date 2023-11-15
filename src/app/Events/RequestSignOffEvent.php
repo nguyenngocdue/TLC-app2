@@ -20,11 +20,7 @@ class RequestSignOffEvent
      * @return void
      */
     public function __construct(
-        public $uids,
-        public $signableId,
-        public $tableName,
-        public $requesterId,
-        public $category,
+        public $data,
     ) {
         //
     }

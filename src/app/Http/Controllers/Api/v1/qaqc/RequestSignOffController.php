@@ -12,11 +12,8 @@ class RequestSignOffController extends Controller
     public function requestSignOff(Request $request)
     {
         $cuid = CurrentUser::id();
-        $uids = $request->input('uids');
-        $signableId = $request->input('signableId');
-        $tableName = $request->input('tableName');
-        $category = $request->input('category');
-        event(new RequestSignOffEvent($uids, $signableId, $tableName, $cuid, $category));
+        $request->merge(['requesterId' => $cuid]);
+        event(new RequestSignOffEvent($request->input()));
         // return ['code' => 200, 'message' => 'Request email is queued.'];
     }
 }

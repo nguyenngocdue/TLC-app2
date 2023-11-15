@@ -34,13 +34,14 @@ class RequestSignOffListener
      */
     public function handle(RequestSignOffEvent $event)
     {
-        $requesterId = $event->requesterId;
+        $data = $event->data;
+        $requesterId = $data['requesterId'];
         $requester = User::find($requesterId);
 
-        $receiverId = $event->uids[0];
+        $receiverId = $data['uids'][0];
         $receiver = User::find($receiverId);
 
-        $category_id = FieldSeeder::getIdFromFieldName($event->category);
+        $category_id = FieldSeeder::getIdFromFieldName($data['category']);
 
         try {
             Mail::to($receiver->email)->send(new MailRequestSignOff([
@@ -65,8 +66,8 @@ class RequestSignOffListener
         Signature::create([
             'user_id' => $receiverId,
             'owner_id' => $requesterId,
-            'signable_type' => Str::modelPathFrom($event->tableName),
-            'signable_id' => $event->signableId,
+            'signable_type' => Str::modelPathFrom($data['tableName']),
+            'signable_id' => $data['signableId'],
             'category' => $category_id,
         ]);
         broadcast(new WssToastrMessageChannel([
