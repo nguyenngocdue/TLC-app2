@@ -1,3 +1,6 @@
+@php
+     $readOnly = $readOnly || ($line->value && ($cuid != $uid));
+@endphp
 <div class="flex justify-center">
      <div>
           <div class="w-[340px] mx-auto">
@@ -6,7 +9,7 @@
                     value="{{$line->value}}"
                     signatureUserId="{{$uid}}"
 
-                    readOnly="{{$line->value && ($cuid != $uid)}}"
+                    readOnly="{{$readOnly}}"
                />
                @if(!$line->value)
                <input type="hidden" name="{{$table01Name}}[inspector_id][{{$rowIndex}}]" value="{{$cuid}}" />

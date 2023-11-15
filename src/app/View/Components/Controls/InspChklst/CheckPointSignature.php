@@ -18,6 +18,7 @@ class CheckPointSignature extends Component
         private $table01Name,
         private $rowIndex,
         private $line,
+        private $readOnly = false,
     ) {
         //
     }
@@ -40,6 +41,7 @@ class CheckPointSignature extends Component
             'uid' => $uid,
             'timestamp' => $timestamp,
             'cuid' => $cuid,
+            'readOnly' => $this->readOnly,
         ]);
     }
 }
