@@ -80,7 +80,8 @@ class ItemRenderCheckSheet extends Component
                 'props' => $props,
                 'groupColumn' => $groupColumn,
                 'groupNames' => $groupNames,
-                'showSignOff' => $this->hasSignatureMulti(),
+                'hasSignatureMulti' => $this->hasSignatureMulti(),
+                'showSignOff' => in_array($status, [/*'passed',*/'pending_approval', 'approved', 'rejected']),
             ]
         );
     }
