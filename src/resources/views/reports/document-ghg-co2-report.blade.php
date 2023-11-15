@@ -160,7 +160,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                             </div>
                         </div>
                     </div>
-                    <div class="absolute top-0 opacity-30 z-0">
+                    <div class="absolute top-8 right-8 left-8 opacity-20 z-10">
                         <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                     </div>
                 </div>
@@ -201,7 +201,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                         </div>
                     </div>
                 </div>
-                <div class="absolute top-0 opacity-20 z-10">
+                <div class="absolute top-8 right-8 left-8 opacity-20 z-0">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class=" "/>
                 </div>
         </div>
@@ -211,14 +211,14 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         
         {{-- PAGE 6 :Data Summary Report --}}
         <div class=" w-[1400px] min-h-[940px] m-auto flex items-center bg-white box-border p-8 relative"> 
-            <div class='flex justify-center'> 
+            <div class='flex justify-center m-auto'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
-                        <x-renderer.heading level=3 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>GHGRP Basin Production & Emissions</x-renderer.heading>
+                        <x-renderer.heading level=3 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Summary Report</x-renderer.heading>
                             <div class="border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
                                 @include('reports.document-ghg-summary-report-only-table')
                             </div>
                     </div>
-                <div class="absolute top-0 right-0 left-0 opacity-30 z-0">
+                <div class="absolute top-8 right-8 left-8 opacity-20 z-0">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
@@ -260,7 +260,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                 </div>
                             </div>
                     </div>
-                <div class="absolute top-0 right-0 left-0 opacity-30 z-0">
+                <div class="absolute top-8 right-8 left-8 opacity-20 z-0">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
@@ -269,18 +269,18 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
 
-        {{-- PAGE 8: GHGRP Basin Production & Emissions --}}
-        <div class=" w-min-[1400px] flex items-center bg-white box-border p-8 "> 
-            <div class='flex justify-center relative'> 
+        {{-- PAGE 8: Data Detail Report  --}}
+        <div class=" w-min-[1400px] flex items-center bg-white box-border p-8 relative"> 
+            <div class='flex justify-center m-auto'> 
                 <div class="z-2 pt-20">
                     <div class="grid grid-rows-1">
-                        <x-renderer.heading level=3 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>GHGRP Basin Production & Emissions</x-renderer.heading>
+                        <x-renderer.heading level=3 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Detail Report</x-renderer.heading>
                             <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
                                 @include('reports.include-document-ghg-sheet-050', ['tableDataSource' => $tableDataSource['document_ghg_sheet_050']])
                             </div>
                     </div>
                 </div>
-                <div class="absolute top-0 right-0 left-0 opacity-30">
+                <div class="absolute top-8 right-8 left-8 opacity-20 z-10">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
