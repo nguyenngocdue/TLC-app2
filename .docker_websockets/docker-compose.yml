@@ -4,20 +4,6 @@ networks:
   ws:
     driver: bridge
 services:
-  nginx:
-    image: nginx:alpine
-    container_name: websockets_nginx
-    restart: unless-stopped
-    tty: true
-    environment:
-      - NGINX_WEBSOCKET_HOST=${WEBSOCKET_DOMAIN_NAME}
-    ports:
-      - "6002:6002"
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ../.docker_configs/certs:/etc/nginx/certs
-    networks:
-      - ws
   redis:
     image: redis
     container_name: websockets_redis
@@ -40,10 +26,26 @@ services:
       SOKETI_DEFAULT_APP_SECRET: "tlc-secret"
       # SOKETI_SSL_CERT: "/path/to/certs/public.crt"
       # SOKETI_SSL_KEY: "/path/to/certs/private.key"
-    # volumes:
+      # volumes:
       # - ../.docker_configs/certs:/path/to/certs
     ports:
       - "6001:6001"
       - "9601:9601"
     networks:
       - ws
+  nginx:
+    image: nginx:alpine
+    container_name: websockets_nginx
+    restart: unless-stopped
+    tty: true
+    environment:
+      - NGINX_WEBSOCKET_HOST=${WEBSOCKET_DOMAIN_NAME}
+    ports:
+      - "6002:6002"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../.docker_configs/certs:/etc/nginx/certs
+    networks:
+      - ws
+    depends_on:
+      - soketi
