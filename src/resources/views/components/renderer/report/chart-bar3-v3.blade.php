@@ -31,7 +31,6 @@
 	var colors = generateColors(meta.count);
 
 	datasets = {!! json_encode($meta['datasets']) !!};
-	console.log(datasets);
 	scales = {
 		x: {
 				suggestedMax: {!! json_encode($dimensions['scaleMaxX'] ?? null) !!},
@@ -46,7 +45,7 @@
 					},
 				},
 				title: {
-					display: true,
+					display: {!! json_encode($dimensions['displayTitleX'] ?? true) !!},
 					text: '{!! $dimensions['titleX'] ?? null !!}',
 					font: {
 						size: {!! $dimensions['fontSize'] ?? 14 !!}, 
@@ -55,7 +54,7 @@
 				},
 			},
 		y: {
-			//barPercentage: 0.5,
+			barPercentage: 0.5,
 			suggestedMax: {!! $dimensions['scaleMaxY'] ?? 'null' !!},
 			stacked:  {!! $dimensions['stackY'] ?? 0 !!},
 			beginAtZero: true,
@@ -80,7 +79,7 @@
 			}
 		},
 		y1: {
-			//barPercentage: 0.5,
+			barPercentage: 0.5,
 			display: true,
 			position: 'right',
 			min: 0, 
@@ -148,12 +147,14 @@
 			},
 			datalabels:{	
 				display: {!! ($dimensions['displayTitleOnTopCol'] ?? false) ? 'function(context) {
-                            return context.dataset.data[context.dataIndex] !== 0 
+							
+                            return  context.dataset.type !== "line"
+									&& context.dataset.data[context.dataIndex] !== 0 
                                     && context.dataset.data[context.dataIndex] !== "" 
                                     && context.dataset.data[context.dataIndex] !== null;
                         }' : 'false' !!}
 				,anchor: 'end'
-				,align: 'center'
+				,align: 'start'
 				,color: '#000000'
 				,backgroundColor: {!! json_encode($dimensions['backgroundColor'] ?? null) !!}
 				,borderColor: {!! json_encode($dimensions['borderColor'] ?? '#000000') !!}
@@ -163,9 +164,15 @@
 					size: {!! json_encode($dimensions['dataLabelsSize'] ?? 14) !!}
 				},
 				rotation:  {!! json_encode($dimensions['dataLabelRotation'] ?? 0) !!},
-				offset: {!! json_encode($dimensions['dataLabelOffset'] ?? 0) !!},
+				offset: function(context) {
+					if(context.dataset.type === 'line'){
+						return 0
+					} else{
+						return -45
+					}
+                },
 				formatter: function(value, context) {
-                    return value;
+                    return value.toFixed(2);
                 }
 			},
 			zoom: {

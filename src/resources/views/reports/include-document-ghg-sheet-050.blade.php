@@ -5,10 +5,10 @@
                 <tr class="">
                     <th class=" w-20{{$class2}}" colspan=" 2">Category</th>
                     <th class="w-[300px] p-2 {{$class2}} border-l ">Emission source category</th>
-                    <th class=" {{$class2}} border-l  ">Source</th>
-                    <th class=" {{$class2}} border-l  ">Metric 0</th>
+                    <th class=" {{$class2}} border-l  " >Source</th>
+                    <th class=" {{$class2}} border-l  " >Metric 0</th>
                     <th class=" {{$class2}} border-l  ">Metric Type 1</th>
-                    <th class=" {{$class2}} border-l  ">Metric Type 2</th>
+                    <th class=" {{$class2}} border-l  w-60">Metric Type 2</th>
                     <th class=" {{$class2}} border-l">
                         {{$titleColName}}<br>(tCO2e)</br>
                     </th>
@@ -53,7 +53,7 @@
                         </div>
                     </td>
                     {{-- Source Column --}}
-                    <td class="{{$class1}} text-left border-t text-blue-800">
+                    <td class="{{$class1}} text-left border-t text-blue-800" rowspan="1">
                          <div class='p-2'>
                             {!! $firstItem['ghgtmpl_name'] ? "<a href='" . route('ghg_tmpls.edit', $ghgTmplId ?? 0) . "'>" . $firstItem['ghgtmpl_name'] . "</a>" : '' !!} </div>
                     </td>
@@ -61,31 +61,39 @@
                     {{-- Render Detail for Metric --}}
                     @php
                         $childrenMetrics = $firstItem['children_metrics'] ?? [];
+                        //dd($childrenMetrics);
                     @endphp
                         {{-- Metric Type --}}
-                        <td class="{{$class1}} text-center bg-white">
-                            @foreach($childrenMetrics as $child => $metric)
-                                <div class='p-2 dark:border-gray-600 border-b h-full'>
+                        <td class="{{$class1}} text-center bg-white relative border" rowspan="1">
+                                <div class=" absolute top-0  left-0 right-0 bottom-0 flex flex-col justify-between">
+                                    @foreach($childrenMetrics as $child => $metric)
+                                        <div class='flex-1 flex justify-start items-center p-2 dark:border-gray-600 border-b'>
                                             {!! $metric['ghg_metric_type_name'] ?? '<i class="fa-solid fa-minus"></i>' !!}
+                                        </div>
+                                    @endforeach 
                                 </div>
-                            @endforeach 
                         </td>
                         {{-- Metric Type 1 --}}
-                        <td class="{{$class1}} text-center bg-white">
-                            @foreach($childrenMetrics as $child => $metric)
-                                        <div class='p-2 dark:border-gray-600 border-b h-full'>
+                        <td class="{{$class1}} text-center bg-white relative"  rowspan="1">
+                                <div class=" absolute top-0  left-0 right-0 bottom-0 flex flex-col justify-between">
+                                    @foreach($childrenMetrics as $child => $metric)
+                                        <div class='flex-1 flex justify-start items-center p-2 dark:border-gray-600 border-b'>
                                             {!! $metric['ghg_metric_type_1_name'] ?? '<i class="fa-solid fa-minus"></i>' !!}
                                         </div>
-                            @endforeach 
+                                    @endforeach 
+                                </div>
                         </td>
                         {{-- Metric Type 2 --}}
-                        <td class="{{$class1}} text-center bg-white">
-                                @foreach($childrenMetrics as $child => $metric)
-                                    <div class='p-2 dark:border-gray-600 border-b h-full'>
-                                        {!! $metric['ghg_metric_type_2_name'] ?? '<i class="fa-solid fa-minus"></i>' !!}
-                                    </div>
-                                @endforeach 
+                         <td class="{{$class1}} text-center bg-white relative"  rowspan="1">
+                                <div class=" absolute top-0  left-0 right-0 bottom-0 flex flex-col justify-between">
+                                    @foreach($childrenMetrics as $child => $metric)
+                                        <div class='flex-1 flex justify-start items-center p-2 dark:border-gray-600 border-b'>
+                                            {!! $metric['ghg_metric_type_2_name'] ?? '<i class="fa-solid fa-minus"></i>' !!}
+                                        </div>
+                                    @endforeach 
+                                </div>
                         </td>
+                        {{-- END     --}}
 
                     {{-- Total Month (YTD) --}}
                         <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
@@ -107,9 +115,9 @@
                             $monthData = last($d)['months'];
                         @endphp
                             @foreach($monthData as $m => $val)
-                            <td class='w-{{$widthCell}} {{$class1}} text-right border-t text-blue-800'>
+                            <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
                                 @foreach($d as $k => $item)
-                                    <div class='p-2 font-bold dark:border-gray-600 border-t'>
+                                    <div class='p-2 dark:border-gray-600 border-t'>
                                         @if((string)$item['months'][$m] === '0')
                                             <i class="fa-solid fa-minus"></i>
                                         @else
@@ -180,9 +188,9 @@
                             $monthData = last($childrenMetricsVal3)['months'];
                         @endphp
                             @foreach($monthData as $m => $val)
-                            <td class='w-{{$widthCell}} {{$class1}} text-right border-t text-blue-800'>
+                            <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
                                 @foreach($childrenMetricsVal3 as $k => $item)
-                                         <div class='p-2 font-bold dark:border-gray-600 border-t'>
+                                         <div class='p-2 dark:border-gray-600 border-t'>
                                             @if((string)$item['months'][$m] === '0')
                                                 <i class="fa-solid fa-minus"></i>
                                             @else

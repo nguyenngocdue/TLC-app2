@@ -30,7 +30,7 @@ class Ghg_sheet_dataSource extends Controller
 						ghgsh_totals.quarter2,
 						ghgsh_totals.quarter3,
 						ghgsh_totals.quarter4,
-						ROUND($strSumValue,2) AS total_months,
+						$strSumValue,2 AS total_months,
 						ROUND($strSumValue,2) AS `$year`,
 						ROUND($strSumValue,2) AS 'year'
 						FROM (SELECT 

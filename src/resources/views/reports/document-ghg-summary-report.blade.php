@@ -19,5 +19,9 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
     @include('components.reports.shared-parameter')
 </div>
 <br />
-@include('reports.document-ghg-summary-report-only-table')
+<div class="flex justify-center bg-only-print">
+    <div class="border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
+        @include('reports.document-ghg-summary-report-only-table')
+    </div>
+</div>
 @endsection
