@@ -22,7 +22,8 @@ class RequestSignOffEvent
     public function __construct(
         public $uids,
         public $signableId,
-        public $signableType
+        public $signableType,
+        public $requesterId,
     ) {
         //
     }

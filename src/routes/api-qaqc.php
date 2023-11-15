@@ -31,6 +31,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'v1/qaqc',
+    'middleware' => ['auth:sanctum'],
     // 'middleware' => 'auth'
 ], function () {
     // Route::post("remind_sign_off", [RemindSignOffController::class, 'remind']);

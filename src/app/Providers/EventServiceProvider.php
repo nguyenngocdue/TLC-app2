@@ -37,14 +37,17 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [SendEmailVerificationNotification::class],
         UserSignedInEvent::class => [UserSignedInListener::class],
 
+        //Create and Update generic documents
         CreatedDocumentEvent::class => [CreatedDocumentListener::class],
         UpdatedDocumentEvent::class => [UpdatedDocumentListener::class,],
 
+        //Update specific entities
         UpdatedQaqcChklstSheetEvent::class => [UpdatedQaqcChklstSheetListener::class],
         UpdatedQaqcChklstEvent::class => [UpdatedQaqcChklstListener::class],
         UpdatedProdSequenceEvent::class => [UpdatedProdSequenceListener::class],
         UpdatedEsgSheetEvent::class => [UpdatedEsgSheetListener::class],
 
+        //Specific actions
         RequestSignOffEvent::class => [RequestSignOffListener::class],
     ];
 
