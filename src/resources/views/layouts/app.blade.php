@@ -117,7 +117,18 @@
             const app_env = '{{env('APP_DOMAIN')}}';
             window.Echo.channel('wss-toastr-message-channel-' + app_env)
                 .listen('WssToastrMessageChannel', (e) => {
-                    toastr.success(e.data.message, e.data.code)
+                    switch (e.data.type){
+                        case "success":
+                            toastr.success(e.data.message, e.data.code)
+                            break
+                        case "error":
+                            toastr.error(e.data.message, e.data.code)
+                            break
+                        default:
+                        case "info":
+                            toastr.info(e.data.message, e.data.code)
+                            break
+                    }
                 })
         </script>
 </body>

@@ -23,7 +23,8 @@
                             </svg>
                             <span class="sr-only">Info</span>
                             <div>
-                                <span class="font-medium">Success alert!</span> {{ session('status') }}
+                                <span class="font-medium">The reset password email is sent.</span> 
+                                {{-- {{ session('status') }} --}}
                             </div>
                         </div>
                     @endif

@@ -16,7 +16,7 @@ class MailRequestSignOff extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private $data)
     {
         //
     }
@@ -28,6 +28,6 @@ class MailRequestSignOff extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.mail-request-sign-off');
+        return $this->markdown('mails.mail-request-sign-off', $this->data);
     }
 }

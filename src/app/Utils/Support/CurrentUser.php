@@ -137,8 +137,10 @@ class CurrentUser
 
     public static function getViewSuffix()
     {
+        //table: User_discipline
+
         $db = [
-            '-thirdparty' => [138],
+            '-external-inspector' => [138], //138: External Inspector
             '-vendor' => [],
             '-client' => [],
             '-subcontractor' => [],

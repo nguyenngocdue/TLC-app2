@@ -36,7 +36,8 @@
                 @if($value =='' && $signatureId)
                     Request sent on {{$sentDate}}
                 @else
-                    <x-renderer.button id="btnRequest_{{$signatureUserId}}" type="primary" class="my-2" onClick="requestSignOff('{{$signableType}}', {{$signableId}}, {{$signatureUserId}})">Request to Sign Off</x-renderer.button>
+                    <x-renderer.button id="btnRequest_{{$signatureUserId}}" type="primary" class="my-2" 
+                        onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', {{$signatureUserId}})">Request to Sign Off</x-renderer.button>
                 @endif
             @endif
         </div>
@@ -46,21 +47,21 @@
 
 @once
 <script>
-
-const requestSignOff = (signableType, signableId, person2request) => {
-    console.log(signableType, signableId, person2request)
+const requestSignOff = (tableName, signableId, category, person2request) => {
+    console.log(tableName, signableId, person2request)
     $("#btnRequest_" + person2request).prop('disabled', true);
 
     $.ajax({
         method:'POST',
         url: '/api/v1/qaqc/request_to_sign_off',
         data:{
-            signableType, 
+            tableName, 
             signableId, 
             uids: [person2request],
+            category,
         },
         success: (response) => {
-            toastr.success(response.message)
+            // toastr.success(response.message)
             $("#btnRequest_" + person2request).replaceWith("Request Sent just now.")
         },
         error: (response)=>{
