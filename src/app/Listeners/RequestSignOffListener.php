@@ -26,36 +26,54 @@ class RequestSignOffListener
         //
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  \App\Events\RequestSignOffEvent  $event
-     * @return void
-     */
+    private function getMeta($data)
+    {
+        // Log::info($data);
+        $tableName = $data['tableName'];
+        $signableId = $data['signableId'];
+
+        $modelPath = Str::modelPathFrom($tableName);
+        $sheet = $modelPath::find($signableId);
+        $chklst = $sheet->getChklst;
+        // Log::info($chklst);
+        $prodOrder = $chklst->getProdOrder;
+        $subProject = $chklst->getSubProject;
+        $project = $subProject->getProject;
+        // Log::info($prodOrder);
+
+        $result = [
+            "projectName" => $project->name,
+            "subProjectName" => $subProject->name,
+            "moduleName" => $prodOrder->production_name . " (" . $prodOrder->name . ")",
+            "disciplineName" => $sheet->getProdDiscipline->name,
+            "checksheetName" => $sheet->name,
+            'url' => route($tableName . ".edit", $signableId),
+        ];
+        // Log::info($result);
+        return $result;
+    }
+
+    private function getUsers($data)
+    {
+        $requester = User::find($data['requesterId']);
+        $receiver = User::find($data['uids'][0]);
+        $category_id = FieldSeeder::getIdFromFieldName($data['category']);
+        return [$requester, $receiver, $category_id];
+    }
+
     public function handle(RequestSignOffEvent $event)
     {
         $data = $event->data;
-        $requesterId = $data['requesterId'];
-        $requester = User::find($requesterId);
-
-        $receiverId = $data['uids'][0];
-        $receiver = User::find($receiverId);
-
-        $category_id = FieldSeeder::getIdFromFieldName($data['category']);
+        [$requester, $receiver, $category_id] = $this->getUsers($data);
 
         try {
-            Mail::to($receiver->email)->send(new MailRequestSignOff([
-                'receiverName' => $receiver->name,
-                'requesterName' => $requester->name,
-                "projectName" => "STW",
-                "subProjectName" => "STW1",
-                "moduleName" => "STW1-SANDBOX-01",
-                "disciplineName" => "Discipline",
-                "checksheetName" => "Checksheet",
-            ]));
+            $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
+            $params += $this->getMeta($data);
+            Mail::to($receiver->email)->send(new MailRequestSignOff($params));
         } catch (\Exception $e) {
-            $msg = "Mail to <b>{$receiver->email}</b> Failed.<br/>" . $e->getMessage();
-            // Log::error($msg);
+            $msg = "Mail to <b>{$receiver->email}</b> failed.<br/>";
+            $msg .= $e->getMessage();
+            $msg .= $e->getFile() . " (Line: " . $e->getLine() . ")";
             broadcast(new WssToastrMessageChannel([
                 'type' => 'error',
                 'message' => $msg,
@@ -64,8 +82,8 @@ class RequestSignOffListener
         }
 
         Signature::create([
-            'user_id' => $receiverId,
-            'owner_id' => $requesterId,
+            'user_id' => $receiver->id,
+            'owner_id' => $requester->id,
             'signable_type' => Str::modelPathFrom($data['tableName']),
             'signable_id' => $data['signableId'],
             'category' => $category_id,
