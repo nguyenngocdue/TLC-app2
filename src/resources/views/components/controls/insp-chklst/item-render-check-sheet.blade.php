@@ -4,6 +4,19 @@
     <x-renderer.heading level=4 xalign='center'>
         <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{strtoupper($item->name)}}</span>
     </x-renderer.heading>
+    
+    @if($type == 'qaqc_insp_chklst_shts')
+    <div class="flex justify-between border bg-white rounded py-2">
+        <div class="mx-4">
+            <p>Project: {{$item->getChklst->getSubProject->name}}</p>
+            <p>Module: {{$item->getChklst->getProdOrder->production_name}}</p>
+        </div>
+        <div class="mx-4">
+            <img class="w-40" src="{{asset('logo/tlc.png')}}" />
+        </div>
+    </div>
+    @endif
+
     @php
         $typeLine = str_replace('_shts','',$type);
         $idName = $typeLine.'_id';
