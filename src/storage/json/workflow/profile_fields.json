@@ -276,9 +276,10 @@
         "profile_hidden": "true",
         "me_hidden": "true"
     },
-    "_signature": {
-        "name": "_signature",
-        "profile_readonly": "true"
+    "_standard_signature": {
+        "name": "_standard_signature",
+        "profile_readonly": "true",
+        "profile_hidden": "true"
     },
     "_time_keeping_type": {
         "name": "_time_keeping_type",
