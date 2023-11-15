@@ -30,6 +30,7 @@
                     
                     showCommentBox=1
                     comment="{{$comment}}"
+                    commentName="signatures[{{$category}}_{{$index}}][signature_comment]"
                     />
                 </div>
             @else
