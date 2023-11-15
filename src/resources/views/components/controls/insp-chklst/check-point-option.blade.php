@@ -63,15 +63,16 @@ function registerListen(lineId, id){
     @foreach($options as $id => $option)
         <div>
             <input type="radio" 
-                    name="{{$table01Name}}[{{$keyIdModelControlValue}}][{{$rowIndex}}]" 
-                    id="radio_{{$line->id}}_{{$id}}" 
-                    class="peer hidden" 
-                    @checked($line->{$keyIdModelControlValue}==$id)  
-                    value="{{$id}}"
-                    />
-                    @if(in_array($option, ['No','Fail']))
-                    <input id="radio_{{$line->id}}_hidden" name="{{$table01Name}}[control_fail_current_session_ids][{{$rowIndex}}]" type="hidden">
-                    @endif
+                name="{{$table01Name}}[{{$keyIdModelControlValue}}][{{$rowIndex}}]" 
+                id="radio_{{$line->id}}_{{$id}}" 
+                class="peer hidden" 
+                @checked($line->{$keyIdModelControlValue}==$id)  
+                @disabled($readOnly)
+                value="{{$id}}"
+            />
+            @if(in_array($option, ['No','Fail']))
+            <input id="radio_{{$line->id}}_hidden" name="{{$table01Name}}[control_fail_current_session_ids][{{$rowIndex}}]" type="hidden">
+            @endif
             <label for="radio_{{$line->id}}_{{$id}}" 
                 class="{{$class[$id] ?? $class[1]}} block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
                 title="#{{$id}}"

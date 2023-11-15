@@ -34,7 +34,15 @@
             </x-renderer.heading>
             <x-renderer.card tooltip="#{{$groupId}}" titleClass="text-lg">
                 @foreach($lines as $rowIndex => $line)
-                <x-controls.insp-chklst.check-point :sheet="$item" :line="$line" :checkPointIds="$checkPointIds" table01Name="table01" :rowIndex="$rowIndex" type="{{$typeLine}}" />
+                <x-controls.insp-chklst.check-point 
+                    :sheet="$item" 
+                    :line="$line" 
+                    :checkPointIds="$checkPointIds" 
+                    table01Name="table01" 
+                    :rowIndex="$rowIndex" 
+                    type="{{$typeLine}}"
+                    readOnly="{{$isExternalInspector}}"
+                />
                 @endforeach
             </x-renderer.card>
             <div class="mb-8"></div>

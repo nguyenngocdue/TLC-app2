@@ -15,8 +15,10 @@ class CheckPointText extends Component
         private $line,
         private $table01Name,
         private $rowIndex,
+        private $readOnly = false,
     ) {
         //
+        // dump($readOnly);
     }
 
     /**
@@ -32,6 +34,7 @@ class CheckPointText extends Component
                 'line' => $this->line,
                 'table01Name' => $this->table01Name,
                 'rowIndex' => $this->rowIndex,
+                'readOnly' => $this->readOnly,
             ]
         );
     }

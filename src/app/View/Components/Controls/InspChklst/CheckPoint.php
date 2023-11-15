@@ -22,8 +22,10 @@ class CheckPoint extends Component
         private $debug = false,
         private $checkPointIds = [],
         private $sheet = null,
+        private $readOnly = false,
     ) {
         //
+        // dump($readOnly);
     }
 
     /**
@@ -47,6 +49,7 @@ class CheckPoint extends Component
             'type' => $this->type,
             'sheet' => $this->sheet,
             'props' => $props,
+            'readOnly' => $this->readOnly,
         ]);
     }
 }
