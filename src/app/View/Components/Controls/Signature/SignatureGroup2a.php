@@ -14,9 +14,9 @@ class SignatureGroup2a extends Component
      */
     public function __construct(
         private $category,
-        private $signableType,
         private $signableId,
         private $item,
+        private $type,
         private $readOnly = false,
         private $debug = !true,
         private $title = "Sign Off",
@@ -59,7 +59,7 @@ class SignatureGroup2a extends Component
 
             'cuid' => $cuid,
 
-            'signableType' => $this->signableType,
+            'tableName' => $this->type,
             'signableId' => $this->signableId,
         ];
         return view('components.controls.signature.signature-group2a', $params);

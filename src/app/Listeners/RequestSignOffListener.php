@@ -3,13 +3,16 @@
 namespace App\Listeners;
 
 use App\Events\RequestSignOffEvent;
+use App\Events\WssToastrMessageChannel;
 use App\Mail\MailRequestSignOff;
 use App\Models\Signature;
 use App\Models\User;
+use Database\Seeders\FieldSeeder;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class RequestSignOffListener
 {
@@ -37,6 +40,8 @@ class RequestSignOffListener
         $receiverId = $event->uids[0];
         $receiver = User::find($receiverId);
 
+        $category_id = FieldSeeder::getIdFromFieldName($event->category);
+
         try {
             Mail::to($receiver->email)->send(new MailRequestSignOff([
                 'receiverName' => $receiver->name,
@@ -48,18 +53,25 @@ class RequestSignOffListener
                 "checksheetName" => "Checksheet",
             ]));
         } catch (\Exception $e) {
-            $msg = "Mail Failed to send. Message: " . $e->getMessage();
-            Log::error($msg);
+            $msg = "Mail to <b>{$receiver->email}</b> Failed.<br/>" . $e->getMessage();
+            // Log::error($msg);
+            broadcast(new WssToastrMessageChannel([
+                'type' => 'error',
+                'message' => $msg,
+            ]));
             return $msg;
         }
 
-        $id = Signature::create([
+        Signature::create([
             'user_id' => $receiverId,
             'owner_id' => $requesterId,
-            'signable_type' => "App\\Models\\Qaqc_insp_chklst_sht",
-            'signable_id' => 20033,
-            'category' => 159,
+            'signable_type' => Str::modelPathFrom($event->tableName),
+            'signable_id' => $event->signableId,
+            'category' => $category_id,
         ]);
-        Log::info("Signature created: " . $id);
+        broadcast(new WssToastrMessageChannel([
+            'type' => 'success',
+            'message' => "Email to <b>{$receiver->email}</b> sent successfully.",
+        ]));
     }
 }
