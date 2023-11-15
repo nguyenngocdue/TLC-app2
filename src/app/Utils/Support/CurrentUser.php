@@ -135,25 +135,25 @@ class CurrentUser
         return $bookmarkSettings;
     }
 
+    public static function isExternalInspector()
+    {
+        return in_array(CurrentUser::get()->discipline, [138]); //138: External Inspector
+    }
+
+    public static function isClient()
+    {
+        return in_array(CurrentUser::get()->discipline, []); //: Client
+    }
+
     public static function getViewSuffix()
     {
-        //table: User_discipline
-
-        $db = [
-            '-external-inspector' => [138], //138: External Inspector
-            '-vendor' => [],
-            '-client' => [],
-            '-subcontractor' => [],
-        ];
-        $cu = CurrentUser::get();
-        $discipline = $cu->discipline;
-        $viewSuffix = "";
-        foreach ($db as $key => $arrayValue) {
-            if (in_array($discipline, $arrayValue)) {
-                $viewSuffix = $key;
-                break;
-            }
+        switch (true) {
+            case static::isClient():
+                return "-client";
+            case static::isExternalInspector():
+                return "-external-inspector";
+            default:
+                return "";
         }
-        return $viewSuffix;
     }
 }
