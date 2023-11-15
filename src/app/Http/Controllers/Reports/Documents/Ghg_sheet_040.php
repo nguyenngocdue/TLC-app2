@@ -35,17 +35,17 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 		// dd($dataSource);
 		foreach ($dataSource as $key => &$items){
 			if(isset($items->scope_name) && $items->scope_name === 'Scope 1'){
-				$items->year = round((($items->year))*70/100,2);
+				$items->year = number_format(($items->year/100)*70,2);
 			}
 			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 2' && $items->ghg_tmpl_id === 5){
-				$items->year = round(($items->year/100)*65,2);
+				$items->year = number_format(($items->year/100)*65,2);
 			}
 			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 3' && $items->ghg_tmpl_id === 6){
-				$items->year = round(($items->year/100)*80,2);
+				$items->year = number_format(($items->year/100)*80,2);
 			}
 			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 3'){
 				// dd($items);
-				$items->year = round(($items->year/100)*70,2);
+				$items->year = number_format(($items->year/100)*70,2);
 			}
 		}
 		// dd($dataSource);
