@@ -8,7 +8,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
 @if($href)
 <a href="{{$href}}" class="w-full">
 @endif
-
+AAA
 @if($verticalLayout)
 <div class="{{$bgGray}} {{$class}} min-h-[36px] rounded" title="{{$tooltip}}" component="avatar-item-vertical">
     <div class="flex justify-center">
@@ -32,7 +32,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
         <i>{{$content}}</i>
     </span>
     <div class="{{$sizeStr}} ml-2">
-        <span class="relative hidden {{$sizeStr}} rounded-full md:block">
+        <span class="relative hidden {{$sizeStr}} rounded-full sm:block">
             <img class="object-cover w-full h-full {{$shape}}" src="{{$avatar}}" loading="lazy">
         </span>
     </div>
@@ -40,7 +40,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
 @else
 <div class="{{$bgGray}} {{$class}} min-h-[36px] flex items-center text-sm rounded px-1 w-full " title="{{$tooltip}}" component="avatar-item-normal">
     <div class="{{$sizeStr}} mr-2">
-        <span class="relat1ive hidden {{$sizeStr}} rounded-full md:block">
+        <span class="relat1ive hidden {{$sizeStr}} rounded-full sm:block">
             <img class="object-cover w-full h-full {{$shape}}" src="{{$avatar}}" loading="lazy">
         </span>
     </div>
