@@ -42,9 +42,18 @@
             @else
                 @if($value =='' && $signatureId)
                 <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
-                @else                    
-                    <x-renderer.button id="btnRequest_{{$signatureUserId}}" type="secondary" class="my-2" 
-                        onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', {{$signatureUserId}})">Request to Sign Off</x-renderer.button>
+                @else
+                    @if($isExternalInspector)
+                        Request not yet sent
+                    @else
+                        <x-renderer.button 
+                            id="btnRequest_{{$signatureUserId}}" 
+                            type="secondary" 
+                            class="my-2" 
+                            onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', {{$signatureUserId}})">
+                            Request to Sign Off
+                        </x-renderer.button>
+                    @endif
                 @endif
             @endif
         </div>

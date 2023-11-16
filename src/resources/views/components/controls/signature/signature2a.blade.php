@@ -58,7 +58,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
                 </div>
             @endforeach
         </div>
-        <x-renderer.button htmlType="submit" class="rounded-xl" icon="fa-duotone fa-floppy-disk">Save</x-renderer.button>
+        <x-renderer.button htmlType="submit" type="primary" class="rounded-xl" >SUBMIT</x-renderer.button>
     </div>
     @endif
 </div>
