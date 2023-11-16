@@ -106,7 +106,7 @@
             @foreach($totalEmissions as $value)
             <td class="{{$class1}} text-right border-t">
                 <div class='p-2 font-bold text-red-600'>
-                    {{(float)$value <= 0 ? "<i class='fa-light fa-minus'></i>": $value}}
+                    {!! (float)$value <= 0 ? "<i class='fa-light fa-minus'></i>": $value !!}
                 </div>
             </td>
             @endforeach
