@@ -239,6 +239,11 @@ abstract class MatrixForReportParent extends Component
         return $dataSource;
     }
 
+    function getXAxis2ndHeader($xAxis)
+    {
+        return [];
+    }
+
     function render()
     {
         $xAxis = $this->getXAxis();
@@ -259,9 +264,12 @@ abstract class MatrixForReportParent extends Component
         $dataSource = $this->renderCell($xAxis, $yAxis, $dataSource);
         // dump($dataSource);
 
+        $xAxis2ndHeading = $this->getXAxis2ndHeader($xAxis);
+
         return view('components.renderer.matrix-for-report.matrix-for-report-parent', [
             'columns' => $columns,
             'dataSource' => $dataSource,
+            'dataHeader' => $xAxis2ndHeading,
             'rotate45Width' => $this->rotate45Width,
             'rotate45Height' => $this->rotate45Height,
             'type' => $this->type,

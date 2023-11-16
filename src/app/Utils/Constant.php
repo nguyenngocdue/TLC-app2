@@ -30,9 +30,8 @@ class Constant
     const VIEW_EDIT = 'view_edit';
     const VIEW_ORG_CHART = 'view_org_chart';
 
-    const DASHBOARD_CLIENT = "-client";
+    const DASHBOARD_PROJECT_CLIENT = "-project-client";
     const DASHBOARD_EXTERNAL_INSPECTOR = "-external-inspector";
-    const DASHBOARD_SHIPPING_AGENT = "-shipping-agent";
     const DASHBOARD_APARTMENT_OWNER = "-apartment-owner";
 
     const EXTENSIONS_OF_FILE_GALLERY = ['mp4', 'MP4', 'mov', 'MOV', 'png', 'jpeg', 'gif', 'jpg', 'svg', 'webp', 'pdf'];

@@ -5,9 +5,10 @@ namespace App\Listeners;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Models\Qaqc_insp_chklst;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
 
-class UpdatedQaqcChklstListener //implements ShouldQueue //<<No need to queue
+class UpdatedQaqcChklstListener implements ShouldQueue //<<No need to queue
 {
     // use Queueable;
     /**

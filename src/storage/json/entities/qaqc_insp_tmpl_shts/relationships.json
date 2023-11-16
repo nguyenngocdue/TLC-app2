@@ -69,7 +69,7 @@
         "control_name": "getMonitors1()",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
+        "renderer_view_all_unit": "person",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown_multi",

@@ -17,13 +17,13 @@ class QaqcInspChklstShts extends MatrixForReportParent
         private $qaqcInspTmplId = 1007,
     ) {
         parent::__construct("qaqc_insp_chklst_shts");
-        // echo ($prodRoutingId . " - " . $subProjectId);
     }
 
     function getXAxis()
     {
         $result = Qaqc_insp_tmpl_sht::query()
             ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmplId)
+            ->with(['getProdDiscipline'])
             ->orderBy('order_no')
             ->get();
         return $result;
@@ -33,47 +33,28 @@ class QaqcInspChklstShts extends MatrixForReportParent
     {
         $result = Qaqc_insp_chklst::query()
             ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmplId)
-            // ->where('sub_project_id', $this->subProjectId)
-            // ->where('prod_routing_id', $this->prodRoutingId)
             ->orderBy('name')
             ->get();
+        return $result;
+    }
+
+    function getXAxis2ndHeader($xAxis)
+    {
+        $result = [];
+        foreach ($xAxis as $x) {
+            $item = (object)[
+                'value' => $x->getProdDiscipline->description,
+                'cell_class' => $x->getProdDiscipline->css_class,
+            ];
+            $result[$x->id] = $item;
+        }
         return $result;
     }
 
     function getDataSource($xAxis, $yAxis)
     {
         $result = Qaqc_insp_chklst_sht::query()
-            // ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmplId)
-            // ->where('sub_project_id', $this->subProjectId)
-            // ->where('prod_routing_id', $this->prodRoutingId)
             ->get();
-        return $result;
-    }
-
-    function getLeftColumns($xAxis, $yAxis, $dataSource)
-    {
-        $result = parent::getLeftColumns($xAxis, $yAxis, $dataSource);
-        $columns = [
-            ['dataIndex' => 'production_name'],
-            ['dataIndex' => 'quantity'],
-        ];
-
-        return [...$result, ...$columns];
-    }
-
-    function attachMeta($xAxis, $yAxis, $dataSource)
-    {
-        $result = parent::attachMeta($xAxis, $yAxis, $dataSource);
-        foreach ($yAxis as $y) {
-            $result[$y->id]['production_name'] = (object)[
-                'value' => $y->production_name,
-                'cell_class' => "whitespace-nowrap",
-            ];
-            $result[$y->id]['quantity'] = (object)[
-                'value' => $y->quantity,
-                'cell_class' => "whitespace-nowrap text-right",
-            ];
-        }
         return $result;
     }
 }
