@@ -64,10 +64,12 @@ trait TableTraitRows
             $name = isset($column['dataIndex']) ? "{$this->tableName}[$columnName][$dataLineIndex]" : "";
 
             $rawData = null;
+            $rendered = '';
             switch ($renderer) {
                 case  'no.':
                     // dd($start, $no);
-                    $rendered = "<p class='p-2'>" . $no . "</p>";
+                    if ($batchLength - $this->lineIgnoreNo >= $no)
+                        $rendered = "<p class='p-2'>" . $no . "</p>";
                     break;
                 default:
                     $dataIndex = $column['dataIndex'];

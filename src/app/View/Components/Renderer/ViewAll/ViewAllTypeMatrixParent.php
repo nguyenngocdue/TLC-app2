@@ -416,7 +416,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         ]);
         // dd($columns);
         // dump($dataSource[0]);
-
+        // dump($xAxis2ndHeading);
         // dump($perPage);
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',

@@ -52,6 +52,7 @@ class Table extends Component
     private $tableTrueWidth = false,
     private $editable = false,
     private $numberOfEmptyLines = 0,
+    private $lineIgnoreNo = 0,
   ) {
   }
 
@@ -126,6 +127,7 @@ class Table extends Component
       'bottomCenterControl' => $this->bottomCenterControl,
       'bottomRightControl' => $this->bottomRightControl,
       'numberOfEmptyLines' => $this->numberOfEmptyLines,
+      'lineIgnoreNo' => $this->lineIgnoreNo,
     ]);
   }
 }

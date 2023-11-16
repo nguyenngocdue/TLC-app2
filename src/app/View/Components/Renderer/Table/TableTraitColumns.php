@@ -167,8 +167,8 @@ trait TableTraitColumns
             $borderR = $index < (sizeof($columns) - 1) ? 'border-r' : "";
             if (isset($dataHeader[$dataIndex])) {
                 if (is_object($dataHeader[$dataIndex])) {
-                    $cell_class = $dataHeader[$dataIndex]->cell_class;
-                    $cell_title = $dataHeader[$dataIndex]->cell_title;
+                    $cell_class = $dataHeader[$dataIndex]->cell_class ?? "";
+                    $cell_title = $dataHeader[$dataIndex]->cell_title ?? "";
                     $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b bg-gray-100 $cell_class' title='$cell_title'>" . $dataHeader[$dataIndex]->value . "</th>";
                 } else {
                     $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b bg-gray-100'>" . $dataHeader[$dataIndex] . "</th>";
