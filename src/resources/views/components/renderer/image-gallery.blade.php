@@ -12,7 +12,7 @@
     padding: 5px;
     }
 </style>
-AHIHI
+
 <div class="container-sm hidden">
     <div class="row justify-content-center">
         <div class="col col-md-10">
