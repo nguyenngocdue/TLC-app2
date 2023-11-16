@@ -4,10 +4,6 @@ namespace App\Utils;
 
 class Constant
 {
-    /** ATTACHMENT */
-    // const ORPHAN_MEDIA = "ORPHAN_MEDIA_014";
-    // const PATH = "env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/'";
-
     /** DATE TIME FORMAT */
     const FORMAT_DATE_MYSQL = "Y-m-d";
     const FORMAT_DATE_ASIAN = "d/m/Y";
@@ -30,20 +26,14 @@ class Constant
     const FORMAT_YEAR_MONTH = "Y/m"; //<< Please do not change this format, for create Media Folder
     const FORMAT_YEAR_MONTH0 = "Y-m"; //<< Please do not change this format, for SQL Comparison
 
-    const OWNER_ID = 'owner_id';
-
     const VIEW_ALL = 'view_all';
-
-    const VIEW_CREATE_THUMBNAIL = 'view_create_thumbnail';
-
     const VIEW_EDIT = 'view_edit';
-
     const VIEW_ORG_CHART = 'view_org_chart';
 
-    const NAME_LOCK_COLUMN = 'lock_version';
+    const DASHBOARD_CLIENT = "-client";
+    const DASHBOARD_EXTERNAL_INSPECTOR = "-external-inspector";
+    const DASHBOARD_SHIPPING_AGENT = "-shipping-agent";
+    const DASHBOARD_APARTMENT_OWNER = "-apartment-owner";
 
-    const NAME_LOCK_COLUMN_DEFAULT = 'updated_at';
-
-    const EXTENSIONS_OF_FILE_GALLERY = ['mp4','MP4','mov','MOV','png','jpeg','gif','jpg','svg','webp','pdf'];
-
+    const EXTENSIONS_OF_FILE_GALLERY = ['mp4', 'MP4', 'mov', 'MOV', 'png', 'jpeg', 'gif', 'jpg', 'svg', 'webp', 'pdf'];
 }

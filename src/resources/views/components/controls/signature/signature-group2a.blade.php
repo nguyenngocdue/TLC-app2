@@ -5,6 +5,7 @@
 
     $value = $as ? $as->value : "";
     $comment = $as ? $as->signature_comment : "";
+    $decision = $as ? $as->signature_decision : "";
     $signatureId = $as ? $as->id : "";
     $sentDate = $as ? $as->created_at->format('d/m/Y') : "";
 
@@ -26,19 +27,33 @@
                     value="{{$value}}"
                     debug="{{$debug ? 1 : 0}}"
                     readOnly="{{$mineSignature ? 0 : 1}}"
+                    title="#{{$signatureId}}"
                     {{-- signatureUserId="{{$signatureUserId}}" --}}
                     
-                    showCommentBox=1
-                    comment="{{$comment}}"
+                    showCommentBox=1                    
                     commentName="signatures[{{$category}}_{{$index}}][signature_comment]"
+                    commentValue="{{$comment}}"
+
+                    showDecisionBox=1
+                    decisionName="signatures[{{$category}}_{{$index}}][signature_decision]"
+                    decisionValue="{{$decision}}"
                     />
                 </div>
             @else
                 @if($value =='' && $signatureId)
-                    Request sent on {{$sentDate}}
+                <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
                 @else
-                    <x-renderer.button id="btnRequest_{{$signatureUserId}}" type="primary" class="my-2" 
-                        onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', {{$signatureUserId}})">Request to Sign Off</x-renderer.button>
+                    @if($isExternalInspector)
+                        Request not yet sent
+                    @else
+                        <x-renderer.button 
+                            id="btnRequest_{{$signatureUserId}}" 
+                            type="secondary" 
+                            class="my-2" 
+                            onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', {{$signatureUserId}})">
+                            Request to Sign Off
+                        </x-renderer.button>
+                    @endif
                 @endif
             @endif
         </div>

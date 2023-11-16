@@ -18,10 +18,15 @@ class Signature2a extends Component
         private $readOnly = false,
         private $debug = !true,
         private $value = null,
+        private $title = '',
 
         private $showCommentBox = false,
-        private $comment = '',
         private $commentName = '',
+        private $commentValue = '',
+
+        private $showDecisionBox = false,
+        private $decisionName = '',
+        private $decisionValue = '',
         // private $signatureUserId = null,
     ) {
         static::$count++;
@@ -53,11 +58,18 @@ class Signature2a extends Component
                 'readOnly' => $readOnly ? 1 : 0,
                 'debug' => $this->debug,
                 'input_or_hidden' => $this->debug ? "text" : "hidden",
+                'title' => $this->title,
+
                 'value' => $this->value,
-                'comment' => $this->comment,
                 'value_decoded' => $value_decoded,
+
                 'showCommentBox' => $this->showCommentBox,
                 'commentName' => $this->commentName,
+                'commentValue' => $this->commentValue,
+
+                'showDecisionBox' => $this->showDecisionBox,
+                'decisionName' => $this->decisionName,
+                'decisionValue' => $this->decisionValue,
             ]
         );
     }

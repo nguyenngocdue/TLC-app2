@@ -48,6 +48,7 @@ class SignatureGroup2a extends Component
         $signatureList = $this->item->{$this->category};
         $nominatedList = $this->item->{$this->signOffOracy}();
         $cuid = CurrentUser::id();
+        $isExternalInspector = CurrentUser::isExternalInspector();
 
         $signatures = $this->mergeUserAndSignature($nominatedList, $signatureList);
         $params = [
@@ -58,6 +59,7 @@ class SignatureGroup2a extends Component
             'input_or_hidden' => $this->debug ? "text" : "hidden",
 
             'cuid' => $cuid,
+            'isExternalInspector' => $isExternalInspector,
 
             'tableName' => $this->type,
             'signableId' => $this->signableId,

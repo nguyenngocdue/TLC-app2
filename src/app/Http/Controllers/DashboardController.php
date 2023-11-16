@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 
 class DashboardController extends Controller
@@ -27,7 +28,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $view = "dashboard" . CurrentUser::getViewSuffix();
-        return view('dashboards.' . $view);
+        $params = [];
+        $subView = CurrentUser::getViewSuffix();
+        switch ($subView) {
+            case Constant::DASHBOARD_EXTERNAL_INSPECTOR:
+                $params = [
+                    'projectId' => 72,
+                    'subProjectId' => 112,
+                    'prodRoutingId' => 49,
+                ];
+                break;
+        }
+        $view = "dashboard$subView";
+        return view('dashboards.' . $view, $params);
     }
 }

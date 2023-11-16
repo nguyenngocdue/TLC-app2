@@ -45,15 +45,15 @@ function registerListen(lineId, id){
         }
         document.getElementById(name).value = objIds[name]
     }
-    function showOrHiddenGroupAttachmentAndComment(valueId,rowIndex,type){
-        if(type !== 'hse_insp_chklst') return;
-        if([2,6].includes(valueId)){
-            $(`#group_attachment_comment_${rowIndex}`).hide();
-        }else{
-            $(`#group_attachment_comment_${rowIndex}`).show();
-        }
+    // function showOrHiddenGroupAttachmentAndComment(valueId,rowIndex,type){
+    //     if(type !== 'hse_insp_chklst') return;
+    //     if([2,6].includes(valueId)){
+    //         $(`#group_attachment_comment_${rowIndex}`).hide();
+    //     }else{
+    //         $(`#group_attachment_comment_${rowIndex}`).show();
+    //     }
 
-    }
+    // }
 </script>
 @endonce
 @php

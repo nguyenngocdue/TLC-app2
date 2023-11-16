@@ -17,6 +17,7 @@ class AvatarUser extends Component
         private $flipped = false,
         private $uid = null,
         private $icon = false,
+        private $description = null,
     ) {
         //
     }
@@ -59,6 +60,8 @@ class AvatarUser extends Component
             $array = $this->renderOneUserByAttribute();
         }
         [$user, $avatar, $title, $description, $href, $gray]  = $array;
+
+        if ($this->description) $description = $this->description;
 
         $verticalLayout = $this->verticalLayout;
         $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") . " (#$user->id)" : "";

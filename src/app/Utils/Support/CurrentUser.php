@@ -7,6 +7,7 @@ use App\Utils\System\GetSetCookie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Ndc\SpatieCustom\Exceptions\UnauthorizedException;
+use Illuminate\Support\Str;
 
 class CurrentUser
 {
@@ -145,6 +146,16 @@ class CurrentUser
         return in_array(CurrentUser::get()->discipline, []); //: Client
     }
 
+    public static function isShippingAgent()
+    {
+        return in_array(CurrentUser::get()->discipline, []); //: 
+    }
+
+    public static function isApartmentOwner()
+    {
+        return in_array(CurrentUser::get()->discipline, []); //: 
+    }
+
     public static function getViewSuffix()
     {
         switch (true) {
@@ -152,8 +163,22 @@ class CurrentUser
                 return "-client";
             case static::isExternalInspector():
                 return "-external-inspector";
+            case static::isShippingAgent():
+                return "-shipping-agent";
+            case static::isApartmentOwner():
+                return "-apartment-owner";
             default:
                 return "";
         }
+    }
+
+    public static function is3rdParty()
+    {
+        return static::getViewSuffix() != '';
+    }
+
+    public static function get3rdPartyType()
+    {
+        return Str::headline(static::getViewSuffix());
     }
 }

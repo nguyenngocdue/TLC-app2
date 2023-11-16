@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class ActionButtons extends Component
@@ -28,6 +29,7 @@ class ActionButtons extends Component
      */
     public function render()
     {
+        if (CurrentUser::isExternalInspector()) return "";
         return view('components.controls.action-buttons', [
             'buttonSave' => $this->buttonSave,
             'action' => $this->action,

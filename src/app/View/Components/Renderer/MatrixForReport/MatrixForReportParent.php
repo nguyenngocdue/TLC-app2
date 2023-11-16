@@ -20,7 +20,7 @@ abstract class MatrixForReportParent extends Component
 
     protected $statuses;
 
-    protected $finishedArray = ['closed', 'finished'];
+    protected $finishedArray = ['closed', 'finished', 'approved'];
     protected $naArray = ['not_applicable', 'cancelled'];
 
     function __construct(
