@@ -766,6 +766,9 @@ video {
 .col-start-11 {
   grid-column-start: 11;
 }
+.col-start-2 {
+  grid-column-start: 2;
+}
 .col-start-4 {
   grid-column-start: 4;
 }
@@ -3874,10 +3877,6 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-.px-9 {
-  padding-left: 2.25rem;
-  padding-right: 2.25rem;
 }
 .pb-2 {
   padding-bottom: 0.5rem;
@@ -8342,14 +8341,6 @@ video {
 }
 @media (min-width: 768px) {
 
-  .md\:col-span-1 {
-    grid-column: span 1 / span 1;
-  }
-
-  .md\:col-span-10 {
-    grid-column: span 10 / span 10;
-  }
-
   .md\:col-span-12 {
     grid-column: span 12 / span 12;
   }
@@ -8372,10 +8363,6 @@ video {
 
   .md\:col-span-8 {
     grid-column: span 8 / span 8;
-  }
-
-  .md\:col-start-2 {
-    grid-column-start: 2;
   }
 
   .md\:mx-10 {

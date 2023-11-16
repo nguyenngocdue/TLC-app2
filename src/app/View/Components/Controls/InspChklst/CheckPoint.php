@@ -36,7 +36,7 @@ class CheckPoint extends Component
     public function render()
     {
         $controlType = Control_type::getCollection()->pluck('name', 'id',) ?? Control_type::get()->pluck('name', 'id');
-        $attachments = $this->line->getMorphManyByIds($this->checkPointIds, 'insp_photos');
+        $attachments = $this->line->getMorphManyByIds($this->checkPointIds, 'insp_photos'); // cache attachments
         $props = SuperProps::getFor(Qaqc_insp_chklst_line::getTableName());
         return view('components.controls.insp-chklst.check-point', [
             'line' => $this->line,

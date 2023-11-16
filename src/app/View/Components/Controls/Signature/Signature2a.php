@@ -42,9 +42,11 @@ class Signature2a extends Component
         // $mine_signature = CurrentUser::id() == $this->signatureUserId;
 
         $readOnly = $this->readOnly; //|| (!$mine_signature);
+        // $id = str_replace(['[', ']'], "_", $this->name);
         return view(
             'components.controls.signature.signature2a',
             [
+                // 'id' => $id,
                 'id' => $this->name,
                 'name' => $this->name,
                 'count' => static::$count,

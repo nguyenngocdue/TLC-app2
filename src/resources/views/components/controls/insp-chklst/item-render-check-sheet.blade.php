@@ -16,11 +16,12 @@
         </div>
     </div>
     @endif
-
     @php
+
         $typeLine = str_replace('_shts','',$type);
         $idName = $typeLine.'_id';
         $value = $item->$idName;
+        $linesTmp = $lines;
         $checkPointIds = $lines->pluck('id');
         $lineIds = $lines->pluck('id');
         $groupedLines = $lines->groupBy($groupColumn,true);
@@ -76,4 +77,4 @@
         <input type="hidden" name="status" id='status' value="{{$status}}"> 
         {{-- <input type="hidden" name="id" value="{{$item->id}}"> --}}
 </div>
-        
+<x-renderer.image-gallery-check-sheet :checkPointIds="$checkPointIds" :dataSource="$linesTmp" action='edit' />
