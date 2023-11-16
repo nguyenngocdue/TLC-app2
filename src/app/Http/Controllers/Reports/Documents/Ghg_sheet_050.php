@@ -144,7 +144,7 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 				'dataIndex' => 'only_month',
 				'allowClear' => true,
 				'multiple' => true,
-				'hasListenTo' => true,
+				// 'hasListenTo' => true,
 			],
 		];
 	}
@@ -154,13 +154,26 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 			for ($i = 1; $i <= 12; $i++) {
 				$monthKey = str_pad($i, 2, '0', STR_PAD_LEFT);
 				if(!isset($value[$monthKey])) continue;
-				$value['months'][$monthKey] = $value[$monthKey];
+				$value['months'][$monthKey] = (float)str_replace(',', '', $value[$monthKey]);
 				unset($value[$monthKey]); 
 			}
-			//summary values of months
 			$value['total_months'] = array_sum($value['months']);
 		}	
 		return $data;	
+	}
+
+	private function sumColumns($data)
+	{
+		$result = [];
+		foreach ($data as $row) {
+			foreach ($row as $key => $value) {
+				if (!isset($result[$key])) {
+					$result[$key] = 0;
+				}
+				$result[$key] += (float)str_replace(',', '', $value);
+			}
+		}
+		return $result;
 	}
 
 
@@ -170,21 +183,27 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 		$primaryData =  Report::convertToType($primaryData);
 		$groupByGhgTmplId =  Report::groupArrayByKey($dataSource, 'ghg_tmpls_id');
 		// dd($groupByGhgTmplId);
-
+		$totalMonthsOfMetricType = [];
+		$dataOfEachMonths = [];
 		foreach ($primaryData as $key => &$items){
 			if (isset($items['ghg_tmpl_id'])){
 				if(isset($groupByGhgTmplId[$items['ghg_tmpl_id']])){
 					$dataIndex = $groupByGhgTmplId[$items['ghg_tmpl_id']];
 					$dataIndex = self::groupValuesOfMonth($dataIndex);
-					// dd($dataIndex);
+					$totalMonths = array_sum(array_column($dataIndex, 'total_months'));
+					$dataOfEachMonths[] = array_column($dataIndex, 'months');
+					
+					$totalMonthsOfMetricType[] = $totalMonths;
 					$items['children_metrics'] = $dataIndex;
 				}
 			}
 		}
- 
-
+		$dataOfEachMonths = array_merge(...$dataOfEachMonths);
+		$totalValueEachMonth = $this->sumColumns($dataOfEachMonths);
+			
 		// dd($primaryData);
 		$dataSource = $primaryData;
+		// dd($primaryData);
 		
 		$dataSource =  Report::convertToType($dataSource);
 		$dataSource = DocumentReport::groupMonths($dataSource);
@@ -201,8 +220,13 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 		$groupByScope = Report::groupArrayByKey($dataSource, 'scope_id');
 		$groupByScope = ['scopes' => array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope)];
 		$groupByScope['total_emission'] = $monthlyTotals;
+		$groupByScope['totalEmissionMetricType'] = array_sum($totalMonthsOfMetricType);
+		$groupByScope['totalEmissionMetricTypeEachMonth'] = $totalValueEachMonth;
+
+
 		$data['tableDataSource'] = $groupByScope;
 		$data['tableSetting'] = $this->createInfoToRenderTable($groupByScope);
+		// dd($data);
 		return collect($data);
 	}
 
@@ -218,7 +242,7 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 	{
 		if(!isset($dataSource['scopes'])) return [];
 		$info = [];
-		$totalLine = 1;
+		$totalLine = 2;
 		foreach ($dataSource['scopes'] as $k => $items) {
 			$num = 0;
 			$emptyChildrenMetrics = 0;
@@ -245,7 +269,7 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 			$totalLine += $num + $emptyChildrenMetrics;
 		}
 		$info['total_line'] = $totalLine;
-		dump($info, $dataSource);
+		// dump($info, $dataSource);
 		return $info;
 	}
 }
