@@ -24,13 +24,12 @@ class Ghg_sheet_dataSource extends Controller
 	public function getSqlStr($params)
 	{
 		[$start_date, $end_date, $year, $strSqlMonth, $strSumValue] = $this->createValuesForDateParam($params);
-		// dump($strSumValue);
 		$sql =  " SELECT infghgsh.*,$strSqlMonth ghgsh_totals.month_ghg_sheet_id,
 					    ghgsh_totals.quarter1,
 						ghgsh_totals.quarter2,
 						ghgsh_totals.quarter3,
 						ghgsh_totals.quarter4,
-						$strSumValue,2 AS total_months,
+						ROUND($strSumValue,2) AS total_months,
 						ROUND($strSumValue,2) AS `$year`,
 						ROUND($strSumValue,2) AS 'year'
 						FROM (SELECT 

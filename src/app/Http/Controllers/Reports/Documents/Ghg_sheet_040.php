@@ -92,7 +92,7 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 				}
 		}
         $result['dataWidgets'] = $output;
-		// dd($result);
+		// dump($result);
         return $result;
     }
 

@@ -17,7 +17,7 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 	use TraitForwardModeReport;
 	use TraitParamsSettingReport;
 
-	protected $viewName = 'document-ghg-summary-report';
+	protected $viewName = 'document-ghg-sheet-010';
 	protected $year = '2023';
 
 	public function getParamColumns($dataSource = [], $modeType = '')
@@ -47,6 +47,7 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 	public function getDataSource($params)
 	{
 		$primaryData = (new Ghg_sheet_dataSource())->getDataSource($params);
+		// dd($primaryData);
 		return collect($primaryData);
 	}
 
@@ -57,7 +58,9 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 		$months = reset($dataSource)['months'];
 		$monthlyTotals = ['sum_total_months' => 0.0] + array_fill_keys(array_keys($months), 0.0);
 		foreach ($dataSource as $key => &$item) {
-			$monthlyTotals['sum_total_months'] += $item['total_months'];
+			if(!is_null($item['total_months'])){
+				$monthlyTotals['sum_total_months'] += (float)$item['total_months'];
+			}
 			foreach ($item['months'] as $month => $value) {
 				$monthlyTotals[(string)$month] += (int)$value;
 				unset($item[$month]);
@@ -67,7 +70,6 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 		$groupByScope = Report::groupArrayByKey($dataSource, 'scope_id');
 		$groupByScope = ['scopes' => array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope)];
 		$groupByScope['total_emission'] = $monthlyTotals;
-		// dd($groupByScope);
 		return collect($groupByScope);
 	}
 
@@ -90,6 +92,7 @@ class Ghg_sheet_010 extends Report_ParentDocument2Controller
 			}
 			$info[$k1] = $array;
 		}
+		// dd($info);
 		return $info;
 	}
 }

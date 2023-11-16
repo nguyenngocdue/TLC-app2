@@ -127,10 +127,16 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 				'dataIndex' => 'year',
 			],
 			[
+				'title' => 'Half Year',
+				'dataIndex' => 'half_year',
+				'hasListenTo' => true,
+				'allowClear' => true,
+			],
+			[
 				'title' => 'Quarter',
 				'dataIndex' => 'quarter_time',
 				'allowClear' => true,
-				// 'multiple' => true,
+				'multiple' => true,
 
 			],
 			[
@@ -160,7 +166,6 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
 	{
-		
 		$primaryData = (new Ghg_sheet_dataSource())->getDataSource($params);
 		$primaryData =  Report::convertToType($primaryData);
 		$groupByGhgTmplId =  Report::groupArrayByKey($dataSource, 'ghg_tmpls_id');
@@ -196,9 +201,9 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 		$groupByScope = Report::groupArrayByKey($dataSource, 'scope_id');
 		$groupByScope = ['scopes' => array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope)];
 		$groupByScope['total_emission'] = $monthlyTotals;
-		// dd($groupByScope);
-
-		return collect($groupByScope);
+		$data['tableDataSource'] = $groupByScope;
+		$data['tableSetting'] = $this->createInfoToRenderTable($groupByScope);
+		return collect($data);
 	}
 
 
@@ -208,18 +213,35 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 		return $params;
 	}
 
+
 	public function createInfoToRenderTable($dataSource)
 	{
 		$info = [];
-		foreach ($dataSource['scopes'] as $k1 => $values1) {
-			$array = [];
-			$array['scope_rowspan'] = DocumentReport::countLastItems($values1);
-			foreach (array_values($values1) as $values2) {
-				if (!isset($values2['months'])) continue;
-				$array['months'] = array_keys(reset($values2)['months']);
+		$totalLine = 0;
+		foreach ($dataSource['scopes'] as $k => $items) {
+			$num = 0;
+			foreach ($items as $values){
+				$item = last($values);
+				$ghgcate_id = $item['ghgcate_id'];
+				$countLv2 = Report::countChildrenMetrics($values);
+				$info[$k][$ghgcate_id]['scope_rowspan_lv2'] = $countLv2;
+				foreach ($values  as $index => $val){
+					$item = $val['children_metrics'] ?? [];
+					$ghg_tmpl_id = $val['ghg_tmpl_id'];
+					$info[$k][$ghgcate_id][$ghg_tmpl_id]['scope_rowspan_lv3'] = count($item);
+					$info[$k][$ghgcate_id][$ghg_tmpl_id]['index_children_metric'] = $index;
+
+					if(isset($val['children_metrics'])) {
+						$count = count($val['children_metrics']);
+						$num += $count;
+					}
+				}
 			}
-			$info[$k1] = $array;
+			$info[$k]['scope_rowspan_lv1'] = $num;
+			$totalLine += $num;
 		}
+		$info['total_line'] = $totalLine;
+		// dd($info);
 		return $info;
 	}
 }

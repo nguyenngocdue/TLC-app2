@@ -363,5 +363,15 @@ class Report
 			}
 		}
 		return $valuesOfFiled;
-	} 
+	}
+
+    public static function countChildrenMetrics($data){
+        $num = 0;
+        foreach ($data as $value){
+            if(isset($value['children_metrics'])) {
+                $num = $num + count($value['children_metrics']); 
+            }
+        }
+        return $num;
+    }
 }
