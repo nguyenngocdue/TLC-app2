@@ -2,15 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\UpdateChklstProgressEvent;
-use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Models\Qaqc_insp_chklst_sht;
-use App\Utils\Support\CurrentRoute;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
 
-class UpdatedQaqcChklstSheetListener
+class UpdatedQaqcChklstSheetListener implements ShouldQueue
 {
     const YES = 1, NO = 2, NA_1 = 3, ON_HOLD_1 = 4, PASS = 5, FAIL = 6, NA_2 = 7, ON_HOLD_2 = 8;
     const TEXT = 1, TEXTAREA = 2, CHECKBOX = 3, RADIO = 4, DATETIME = 5, DROPDOWN = 6, SIGNATURE = 7;

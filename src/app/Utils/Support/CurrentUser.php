@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use App\Models\User;
+use App\Utils\Constant;
 use App\Utils\System\GetSetCookie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -141,14 +142,9 @@ class CurrentUser
         return in_array(CurrentUser::get()->discipline, [138]); //138: External Inspector
     }
 
-    public static function isClient()
+    public static function isProjectClient()
     {
         return in_array(CurrentUser::get()->discipline, []); //: Client
-    }
-
-    public static function isShippingAgent()
-    {
-        return in_array(CurrentUser::get()->discipline, []); //: 
     }
 
     public static function isApartmentOwner()
@@ -159,14 +155,12 @@ class CurrentUser
     public static function getViewSuffix()
     {
         switch (true) {
-            case static::isClient():
-                return "-client";
+            case static::isProjectClient():
+                return Constant::DASHBOARD_PROJECT_CLIENT;
             case static::isExternalInspector():
-                return "-external-inspector";
-            case static::isShippingAgent():
-                return "-shipping-agent";
+                return Constant::DASHBOARD_EXTERNAL_INSPECTOR;
             case static::isApartmentOwner():
-                return "-apartment-owner";
+                return Constant::DASHBOARD_APARTMENT_OWNER;
             default:
                 return "";
         }

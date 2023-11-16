@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Utils\System\Timer;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -102,6 +103,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
+		Timer::getTimeElapseFromLastAccess();
 		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
 		// if (!$isFakeRequest) {
 		// 	dump($request->input());
@@ -244,6 +246,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment'], $isFakeRequest, $allTable01Names);
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
 		$this->emitPostUpdateEvent($theRow->id);
+		Log::info(Timer::getTimeElapseFromLastAccess());
 		return $this->redirectCustomForUpdate2($request, $theRow);
 	}
 }
