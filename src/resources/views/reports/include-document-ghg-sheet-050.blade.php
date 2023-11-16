@@ -111,22 +111,26 @@
 										<td class="p-2">
 											{!! $idMetricType2 !== '0' ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : '' !!} 
 										</td>
-										<td class="p-2 font-bold text-right">{{$childrenMetric[0]['total_months']}}</td>
+										<td class="p-2 font-bold text-right">
+											{!! (float)$childrenMetric[0]['total_months'] <= 0 ? "<i class='fa-light fa-minus'></i>" : $childrenMetric[0]['total_months'] !!}
+										</td>
 											@foreach($months as $month => $valMonth)
-												<td class="p-2 text-right">{{$valMonth}}</td>
+												<td class="p-2 text-right">
+													{!! (float)$valMonth <= 0 ? "<i class='fa-light fa-minus'></i>" : $valMonth !!}
+												</td>
 											@endforeach
 										{{-- add empty cell --}}
 										@elseif(!isset($childrenMetric[0]['ghg_metric_type_id']))
-												<td></td>
+												<td class="text-left"><i class="fa-light fa-minus"></i></td>
 											@if(!isset($childrenMetric[0]['ghg_metric_type_1_id']))
-													<td></td>
+													<td class="text-left"><i class="fa-light fa-minus"></i></td>
 												@if(!isset($childrenMetric[0]['ghg_metric_type_2_id']))
-													<td></td>
+													<td class="text-left"><i class="fa-light fa-minus"></i></td>
 														@php
 															$numOfMonths = count($months);
 														@endphp
 														@for($i = 0; $i <= $numOfMonths; $i++)
-															<td></td>
+															<td class="text-center"><i class="fa-light fa-minus"></i></td>
 														@endfor
 												@endif
 											@endif
@@ -156,13 +160,16 @@
 													<td class="p-2">
 														{!! $idMetricType2 !== '0' ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : '' !!} 
 													</td>
-													<td class="p-2 font-bold text-right">{{$childrenMetric[$i]['total_months']}}</td>
-
+													<td class="p-2 font-bold text-right">
+															{!! (float)$childrenMetric[$i]['total_months'] <= 0 ? "<i class='fa-light fa-minus'></i>" : $childrenMetric[$i]['total_months'] !!}
+													</td>
 													@php
 														$months = $childrenMetric[$i]['months'] ?? [];
 													@endphp
 													@foreach($months as $month => $valMonth)
-														<td class="p-2 text-right">{{$valMonth}}</td>
+														<td class="p-2 text-right">
+															{!! (float)$valMonth <= 0 ? "<i class='fa-light fa-minus'></i>" : $valMonth !!}
+														</td>
 													@endforeach
 												</tr>				
 											@endif

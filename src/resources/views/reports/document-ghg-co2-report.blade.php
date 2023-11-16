@@ -71,7 +71,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div class="w-[1400px] min-h-[1260px] flex m-auto items-center bg-white box-border p-8 relative"> 
             <div class='flex justify-center m-auto'> 
                 <div class="z-10">
-                   <x-renderer.heading level=2 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold pt-10'>Company's carbon footprint in {{$text}}</x-renderer.heading>
+                   <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold pt-10'>Company's carbon footprint in {{$text}}</x-renderer.heading>
                     <div class="grid grid-rows-1 pt-32 ">
                         <div class="grid grid-cols-12 gap-28 text-center">
                             <div class="col-span-6 m-auto relative">
@@ -113,7 +113,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div class="w-[1400px] min-h-[1260px] flex m-auto items-center bg-white box-border p-8 relative"> 
             <div class='flex justify-center'> 
                 <div class="grid grid-rows-1">
-                    <x-renderer.heading level=3 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Emission source category chart</x-renderer.heading>
+                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Emission source category chart</x-renderer.heading>
                     <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
                         <div class="w-full flex px-4 z-10">
                             <div class="w-1/2 px-4">
@@ -173,7 +173,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div class="w-[1400px] min-h-[1200px] flex m-auto items-center bg-white box-border p-8 relative"> 
             <div class='flex justify-center'> 
                 <div class="grid grid-rows-1 z-20">
-                    <x-renderer.heading level=3 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Emission source category chart</x-renderer.heading>
+                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Emission source category chart</x-renderer.heading>
                     <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
                         <div class="w-full px-4">
                             <div class="">
@@ -213,7 +213,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div class=" w-[1400px] min-h-[1000px] m-auto flex items-center bg-white box-border p-4 relative"> 
             <div class='flex justify-center m-auto'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
-                        <x-renderer.heading level=3 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Summary Report</x-renderer.heading>
+                        <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Summary Report</x-renderer.heading>
                             <div class="border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
                                 @include('reports.document-ghg-summary-report-only-table')
                             </div>
@@ -230,7 +230,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div class=" w-min-[1400px] min-h-[1000px] flex items-center bg-white box-border p-8 relative"> 
             <div class='flex justify-center m-auto'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
-                        <x-renderer.heading level=3 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>GHGRP Basin Production & Emissions</x-renderer.heading>
+                        <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>GHGRP Basin Production & Emissions</x-renderer.heading>
                             @php
                                 $tableDataSource = $tableDataSource->toArray();
                             @endphp
@@ -272,16 +272,16 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         {{-- PAGE 8: Data Detail Report  --}}
         <div class=" w-min-[1400px] flex items-center bg-white box-border p-8 relative"> 
             <div class='flex justify-center m-auto'> 
-                <div class="z-2 pt-20">
+                <div class="pt-20 z-10">
                     <div class="grid grid-rows-1">
                         <x-renderer.heading level=3 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Detail Report</x-renderer.heading>
-                            <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
+                            <div class=" border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
                                 @include('reports.include-document-ghg-sheet-050', ['tableDataSource' => $tableDataSource['document_ghg_sheet_050']])
                             </div>
                     </div>
                 </div>
                 <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
-                    {{-- <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/> --}}
+                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
         </div>

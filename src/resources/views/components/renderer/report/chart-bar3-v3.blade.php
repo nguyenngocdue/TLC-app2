@@ -54,7 +54,7 @@
 				},
 			},
 		y: {
-			barPercentage: 0.5,
+			barPercentage: 1,
 			suggestedMax: {!! $dimensions['scaleMaxY'] ?? 'null' !!},
 			stacked:  {!! $dimensions['stackY'] ?? 0 !!},
 			beginAtZero: true,
@@ -79,7 +79,7 @@
 			}
 		},
 		y1: {
-			barPercentage: 0.5,
+			barPercentage: 1,
 			display: true,
 			position: 'right',
 			min: 0, 

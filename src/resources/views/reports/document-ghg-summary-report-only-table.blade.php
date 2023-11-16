@@ -58,7 +58,7 @@
             {{-- Value --}}
             <td class="{{$class1}} text-right border-t">
                 <div class='p-2 font-bold'>
-                    {{(string)$firstItem['total_months'] === '0' ? '': $firstItem['total_months']}}
+                    {!! is_null($firstItem['total_months']) ? "<i class='fa-light fa-minus'></i>": $firstItem['total_months'] !!}
                 </div>
             </td>
 
@@ -66,7 +66,7 @@
             @foreach($firstItem['months'] as $key => $value)
             <td class='w-{{$widthCell}} {{$class1}} text-right border-t text-blue-800'>
                 <div class='p-2'>
-                    {!! $value !== '0' ? "<a href='" . route('ghg_sheets.edit', $firstItem['month_ghg_sheet_id'][$key] ?? 0) . "'>" . $value . "</a>" : '' !!} 
+                    {!! (float)$value <= 0 ? "<i class='fa-light fa-minus'></i>" :"<a href='" . route('ghg_sheets.edit', $firstItem['month_ghg_sheet_id'][$key] ?? 0) . "'>" . $value . "</a>"  !!} 
                 </div>
             </td>
             @endforeach
@@ -80,7 +80,7 @@
             {{-- Total Month (YTD) --}}
             <td class='w-{{$widthCell}} {{$class1}} text-right border-t'>
                 <div class='p-2 font-bold'>
-                    {{(string)$values3['total_months'] === '0' ? '': $values3['total_months']}}
+                    {!! (float)$values3['total_months'] <= 0 ? "<i class='fa-light fa-minus'></i>": $values3['total_months'] !!}
                 </div>
 
             </td>
@@ -88,7 +88,7 @@
             @foreach($values3['months'] as $k3 => $value)
             <td class='w-{{$widthCell}} {{$class1}} text-right border-t text-blue-800'>
                 <div class='p-2'>
-                    {!! $value === '0' ? '' : "<a href='" . route('ghg_sheets.edit', $values3['month_ghg_sheet_id'][$k3] ?? 0) . "'>$value</a>" !!} </div>
+                    {!! (float)$value <= 0 ? "<i class='fa-light fa-minus'></i>" : "<a href='" . route('ghg_sheets.edit', $values3['month_ghg_sheet_id'][$k3] ?? 0) . "'>$value</a>" !!} </div>
             </td>
             @endforeach
         </tr>
@@ -106,7 +106,7 @@
             @foreach($totalEmissions as $value)
             <td class="{{$class1}} text-right border-t">
                 <div class='p-2 font-bold text-red-600'>
-                    {{(string)$value === '0'? '': $value}}
+                    {{(float)$value <= 0 ? "<i class='fa-light fa-minus'></i>": $value}}
                 </div>
             </td>
             @endforeach
