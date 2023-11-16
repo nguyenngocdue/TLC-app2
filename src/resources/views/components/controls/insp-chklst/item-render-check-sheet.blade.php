@@ -77,3 +77,4 @@
         {{-- <input type="hidden" name="id" value="{{$item->id}}"> --}}
 </div>
         
+<x-renderer.image-gallery :dataSource="$props" action='edit' />
