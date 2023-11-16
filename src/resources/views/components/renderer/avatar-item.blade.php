@@ -8,7 +8,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
 @if($href)
 <a href="{{$href}}" class="w-full">
 @endif
-AAA
+
 @if($verticalLayout)
 <div class="{{$bgGray}} {{$class}} min-h-[36px] rounded" title="{{$tooltip}}" component="avatar-item-vertical">
     <div class="flex justify-center">
