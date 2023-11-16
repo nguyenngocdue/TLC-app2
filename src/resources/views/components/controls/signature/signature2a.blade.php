@@ -27,7 +27,7 @@
                 <div class="text-gray-500">(no comment)</div>
             @endif
         @else
-        <textarea class="border border-gray-200 rounded w-full" name="comment{{$name}}" id="comment{{$name}}" placeholder="Comment here...">{!! $comment !!}</textarea>
+        <textarea class="border border-gray-200 rounded w-full" name="{{$commentName}}" id="{{$commentName}}" placeholder="Comment here...">{!! $comment !!}</textarea>
         @endif
     @endif
 </div>

@@ -55,7 +55,7 @@ class MenuProfile extends Component
         $userMenu = json_decode($navbarStr, true);
         $group = [];
         foreach ($userMenu as $value) {
-            if(!isset($value['group'])) continue;
+            if (!isset($value['group'])) continue;
             $group[$value['group']][] = $value;
         }
         return $group;
@@ -71,10 +71,12 @@ class MenuProfile extends Component
         $user = CurrentUser::get();
         $isAdmin = CurrentUser::isAdmin();
         $stopImpersonate = session()->has('impersonate');
+        $isExternal = $user->department == 36; //36: 3rd-party
         return view('components.homepage.menu-profile', [
             'userMenu' => $this->getUserMenu(),
             'user' => $user,
             'isAdmin' => $isAdmin,
+            'isExternal' => $isExternal,
             'stopImpersonate' => $stopImpersonate,
         ]);
     }

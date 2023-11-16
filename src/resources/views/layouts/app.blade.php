@@ -117,6 +117,8 @@
             const app_env = '{{env('APP_DOMAIN')}}';
             window.Echo.channel('wss-toastr-message-channel-' + app_env)
                 .listen('WssToastrMessageChannel', (e) => {
+                    wsClientId1 = e.data.wsClientId
+                    if(wsClientId !== wsClientId1) return //<<Fire only on current tab.
                     switch (e.data.type){
                         case "success":
                             toastr.success(e.data.message, e.data.code)

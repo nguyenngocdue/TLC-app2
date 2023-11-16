@@ -28,14 +28,7 @@ trait TraitEntityEditableSignature
                 // Log::info("Created " . $newId);
             } else { //Update or Delete
                 $signature = Signature::find($line['id']);
-                // dump($line);
-                if ($signature && $signature['owner_id'] == $currentUser->id) {
-                    // if (is_null($line['value'])) {
-                    //     // Log::info("Deleted " . $line['id']);
-                    //     // $signature->delete();
-                    // } else {
-                    //     // Log::info("Updated " . $line['id']);
-                    // }
+                if ($signature && $signature['user_id'] == $currentUser->id) {
                     $signature->update($line);
                 }
             }

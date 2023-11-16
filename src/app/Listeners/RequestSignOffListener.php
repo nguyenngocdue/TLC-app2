@@ -75,6 +75,7 @@ class RequestSignOffListener
             $msg .= $e->getMessage();
             $msg .= $e->getFile() . " (Line: " . $e->getLine() . ")";
             broadcast(new WssToastrMessageChannel([
+                'wsClientId' => $data['wsClientId'],
                 'type' => 'error',
                 'message' => $msg,
             ]));
@@ -89,6 +90,7 @@ class RequestSignOffListener
             'category' => $category_id,
         ]);
         broadcast(new WssToastrMessageChannel([
+            'wsClientId' => $data['wsClientId'],
             'type' => 'success',
             'message' => "Email to <b>{$receiver->email}</b> sent successfully.",
         ]));

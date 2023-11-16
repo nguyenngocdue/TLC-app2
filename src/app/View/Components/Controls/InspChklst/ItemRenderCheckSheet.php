@@ -3,6 +3,7 @@
 namespace App\View\Components\Controls\InspChklst;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetGroupChkSht;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
@@ -80,7 +81,9 @@ class ItemRenderCheckSheet extends Component
                 'props' => $props,
                 'groupColumn' => $groupColumn,
                 'groupNames' => $groupNames,
-                'showSignOff' => $this->hasSignatureMulti(),
+                'hasSignatureMulti' => $this->hasSignatureMulti(),
+                'showSignOff' => in_array($status, [/*'passed',*/'pending_approval', 'approved', 'rejected']),
+                'isExternalInspector' => CurrentUser::isExternalInspector(),
             ]
         );
     }

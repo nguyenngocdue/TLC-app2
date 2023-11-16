@@ -80,7 +80,8 @@ trait TraitEntityFieldHandler2
         foreach ($this->superProps['props'] as $prop) {
             if ($prop['control'] === 'toggle') {
                 $column_name = $prop['column_name'];
-                $dataSource[$column_name] = isset($dataSource[$column_name]);
+                $value = isset($dataSource[$column_name]) && $dataSource[$column_name];
+                $dataSource[$column_name] = $value;
             }
         }
         return $dataSource;

@@ -18,8 +18,10 @@ class Signature2a extends Component
         private $readOnly = false,
         private $debug = !true,
         private $value = null,
-        private $comment = '',
+
         private $showCommentBox = false,
+        private $comment = '',
+        private $commentName = '',
         // private $signatureUserId = null,
     ) {
         static::$count++;
@@ -53,7 +55,7 @@ class Signature2a extends Component
                 'comment' => $this->comment,
                 'value_decoded' => $value_decoded,
                 'showCommentBox' => $this->showCommentBox,
-
+                'commentName' => $this->commentName,
             ]
         );
     }

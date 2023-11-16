@@ -20,6 +20,7 @@ class CheckPointOption extends Component
         private $rowIndex,
         private $debug,
         private $type,
+        private $readOnly = false,
     ) {
         //
     }
@@ -70,6 +71,7 @@ class CheckPointOption extends Component
                 'class' => $class,
                 'keyIdModelControlValue' => $keyIdModelControlValue ?? '',
                 'type' => $this->type,
+                'readOnly' => $this->readOnly,
             ]
         );
     }

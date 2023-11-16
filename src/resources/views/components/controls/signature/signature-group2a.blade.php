@@ -30,6 +30,7 @@
                     
                     showCommentBox=1
                     comment="{{$comment}}"
+                    commentName="signatures[{{$category}}_{{$index}}][signature_comment]"
                     />
                 </div>
             @else
@@ -59,6 +60,7 @@ const requestSignOff = (tableName, signableId, category, person2request) => {
             signableId, 
             uids: [person2request],
             category,
+            wsClientId,
         },
         success: (response) => {
             // toastr.success(response.message)
