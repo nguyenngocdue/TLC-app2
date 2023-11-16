@@ -1,178 +1,113 @@
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}
-.tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
-.tg .tg-jxgv{background-color:#FFF;border-color:inherit;text-align:left;vertical-align:top}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-.tg .tg-wwrc{background-color:#FFF;border-color:inherit;color:#1E40AF;text-align:left;vertical-align:top}
-</style>
-<table class="tg">
-<thead>
-  <tr>
-    <th class="tg-0pky" colspan="2"><span style="font-weight:700;font-style:normal">Category</span></th>
-    <th class="tg-0pky"><span style="font-weight:700;font-style:normal">Emission source category</span></th>
-    <th class="tg-0pky"><span style="font-weight:700;font-style:normal">Source</span></th>
-    <th class="tg-0pky">Metric 0</th>
-    <th class="tg-0pky">Metric 1</th>
-    <th class="tg-0pky">Metric 2</th>
-    <th class="tg-0pky"><span style="font-style:normal">YTD</span><br>(tCO2e)<br></th>
-    <th class="tg-0pky"><span style="font-style:normal">Jan</span></th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-lboi" rowspan="18"><span style="font-weight:700;font-style:normal">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</span></td>
-    <td class="tg-9wq8" rowspan="9"><span style="font-weight:400;font-style:normal">Scope 1</span></td>
-    <td class="tg-lboi" rowspan="7"><span style="font-weight:400;font-style:normal">1.1 Direct emissions arising from owned or controlled stationary sources that use fossil fuels and/or emit fugitive emissions</span></td>
-    <td class="tg-0pky" rowspan="5"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/1/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Gaseous Fuel</span></a><br></td>
-    <td class="tg-0pky">l1</td>
-    <td class="tg-0pky">l2</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">l2</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">l3</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">l4</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">l5</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky" rowspan="2"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/2/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Refrigerants</span></a><br></td>
-    <td class="tg-0pky">l6</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">l7</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-lboi" rowspan="2"><span style="font-weight:400;font-style:normal">1.2 Direct emissions from owned or controlled mobile sources</span></td>
-    <td class="tg-0pky"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/3/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Own Passenger Vehicles</span></a></td>
-    <td class="tg-0pky">l8</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/4/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Delivery Controlled Vehicles</span></a></td>
-    <td class="tg-0pky">l9</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"><span style="font-weight:400;font-style:normal">Scope 2</span></td>
-    <td class="tg-0pky"><span style="font-weight:400;font-style:normal">2.1 Location-based emissions from the generation of purchased electricity and transmission &amp; distrubution loss</span></td>
-    <td class="tg-0pky"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/5/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Electricity</span></a></td>
-    <td class="tg-0pky">l10</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-lboi" rowspan="8">Scope 3</td>
-    <td class="tg-lboi" rowspan="2"><span style="font-weight:400;font-style:normal">3.1 Purchased goods</span></td>
-    <td class="tg-0pky"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/6/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Water Supply Treatment</span></a></td>
-    <td class="tg-0pky">l11</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/7/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Materials</span></a></td>
-    <td class="tg-0pky">l12</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"><span style="font-weight:400;font-style:normal">3.2 Waste generated in operations</span></td>
-    <td class="tg-0pky"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/8/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Waste Disposal</span></a></td>
-    <td class="tg-0pky">l13</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-lboi" rowspan="3"><span style="font-weight:400;font-style:normal">3.3 Business travel</span></td>
-    <td class="tg-wwrc"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/9/edit" target="_blank" rel="noopener noreferrer"><span style="text-decoration:inherit;color:inherit">Bussiness Travel Land Sea</span></a></td>
-    <td class="tg-jxgv">l14</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/10/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Hotel Stay</span></a></td>
-    <td class="tg-0pky">l15</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/15/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Business Travel Air</span></a></td>
-    <td class="tg-0pky">l16</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-lboi" rowspan="2"><span style="font-weight:400;font-style:normal">3.4 Upstream transportation and distribution</span></td>
-    <td class="tg-0pky"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/11/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Freighting goods Land Sea</span></a></td>
-    <td class="tg-0pky">l17</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"><a href="https://127.0.0.1:38002/dashboard/ghg_tmpls/16/edit" target="_blank" rel="noopener noreferrer"><span style="font-weight:400;font-style:normal;text-decoration:inherit">Freight Goods Air</span></a></td>
-    <td class="tg-0pky">l18</td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-</tbody>
-</table>
+@extends('layouts.app')
+
+@section('content')
+
+<div class="flex justify-center">
+    <div class="block">
+        <canvas id="myChart" width="1000" height="500"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+<script>
+	var key = 'myChart'
+	var chartType = 'bar';
+	var datasets = [];
+	var scales = {};
+//console.log(datasets.data)
+Chart.register(ChartDataLabels);
+
+var chartConfig  = {
+		type: 'bar',
+		data: {
+            labels: ['STW1 (PAS Packing and Shipping)', 'STW1 (STW Corner Block)', 'STW1 (STW Modular)', 'STW1 (STW Roof)', 'STW1 (STW Staircase)'],
+            datasets: [
+                        {
+                            yAxisID: 'y', // Sử dụng trục y bên trái
+                            data: [10, 10, 50, 70],
+                            backgroundColor: ['#4dc9f6', '#f67019', '#f53794', '#f53794', '#537bc4']
+                        }, 
+                        {
+                            yAxisID: 'y', // Sử dụng trục y bên trái
+                            data: [20, 30, 10, 20], 
+                            backgroundColor: ['#4dc9f6', '#f67019', '#f53794', '#f53794', '#537bc4']
+                        },
+                        {
+                            yAxisID: 'y1', // Sử dụng trục y bên trái
+                            data: [90, 13, 27, 30],
+                            backgroundColor: ['#4dc9f9', '#f67019', '#f53799', '#f53799', '#507bc9']
+                        }, 
+                        {
+                            yAxisID: 'y1', // Sử dụng trục y bên phải
+                            data: [90, 13, 27, 30], 
+                            backgroundColor: ['#4dc9f6', '#f67019', '#f53794', '#f53794', '#507bc4']
+                        }
+                ]
+		},
+		options: {
+		responsive: true,
+
+		scales: {
+                y: {
+                    max: 200,
+                    type: 'linear', // Kiểu của trục y (linear cho số hoặc logarithmic cho logarit)
+                    position: 'left', // Vị trí của trục y (left cho trục bên trái, right cho trục bên phải)
+                },
+                y1: {
+                    barPercentage: 0.7,
+                    type: 'linear',
+                    position: 'right', // Đặt vị trí của trục y bên phải
+                    min: 0, // Giá trị tối thiểu trên trục y bên phải
+                    max: 100, // Giá trị tối đa trên trục y bên phải (ở đây là 100 để hiển thị phần trăm)
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return value + '%'; // Thêm ký tự phần trăm vào giá trị trục y
+                        }
+                    }
+                }
+        },
+		indexAxis: 'y',
+		plugins: {
+			title:{
+                display: {!! $dimensions['displayTitleChart'] ?? 0 !!},
+                text:  '{!! $dimensions['titleChart'] ?? null !!}',
+                font:{
+                    size: {!! $dimensions['fontSizeTitleChart'] ?? 16 !!}, 
+                    weight: 'bold' 
+                }, 
+				position: '{!! $dimensions['positionTitleChart'] ?? 'bottom' !!}',
+				padding: 30,
+            },
+			tooltip: {
+                enabled: true,
+                 callbacks: {
+                    label: function(context) {
+                            var label = '{!! $dimensions['tooltipLabel'] ?? 'data' !!}'; 
+                            var value =  context.raw;
+                            return label + ': ' + value;
+                    }
+                },
+            }, 
+			legend: { 
+					position: 'bottom'
+					,labels: {
+						color: 'rgba(0, 0, 0, 0.7)'
+						,font: {
+							size: 16,
+						}
+						,padding: 16
+					}
+			},
+		}
+		}
+	};
+var chartElement = document.getElementById('myChart');
+// Create a new Chart.js chart with the specified element and configuration
+var chart = new Chart(chartElement, chartConfig);
+
+</script>
+
+@endsection

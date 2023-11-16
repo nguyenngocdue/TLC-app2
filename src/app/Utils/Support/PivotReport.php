@@ -82,7 +82,7 @@ class PivotReport
     }
 
 
-    public static function getLastArray($data, $columnFields = [], $isRaw)
+    public static function getLastArray($data, $columnFields = [], $isRaw=false)
     {
         $outputArrays = [];
         foreach ($data as $key => $value) {
