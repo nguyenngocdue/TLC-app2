@@ -9,13 +9,9 @@
             </button>
         @endif
         
-        @if($readOnly)
-        <div>{!! $value_decoded !!}</div>
-        @else
         <canvas width="{{$w}}" height="{{$h}}" id="canvas_{{$id}}" 
                 class="bg-gray1-200"
                 style="touch-action: none; user-select: none;" ></canvas>
-        @endif
     </div>
     <input type="{{$input_or_hidden}}" class="border rounded w-full border-gray-200" name="{{$name}}" id="{{$name}}" value="{!! $value !!}" />
     @if($showCommentBox)
@@ -36,7 +32,7 @@
 <script>
 const registerSignature = (id, name, count, readOnly, svgContent) => {
     const canvasId = "canvas_"+id
-    // console.log(id,name, canvasId)
+    console.log(name, id, canvasId)
     const signaturePad = new SignaturePad(getEById(canvasId)[0])
     if(svgContent){
         var svgDataUrl = 'data:image/svg+xml;base64,' + btoa(svgContent);

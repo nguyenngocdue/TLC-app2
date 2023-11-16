@@ -58,6 +58,7 @@ function registerListen(lineId, id){
 @endonce
 @php
     $gridCols = isset($options) ? count($options) : 1;
+    $cursor = $readOnly ? "cursor-not-allowed" : "cursor-pointer";
 @endphp
 <div class="grid w-full grid-cols-{{$gridCols}} space-x-2 rounded-xl bg-gray-200 p-2">
     @foreach($options as $id => $option)
@@ -74,7 +75,7 @@ function registerListen(lineId, id){
             <input id="radio_{{$line->id}}_hidden" name="{{$table01Name}}[control_fail_current_session_ids][{{$rowIndex}}]" type="hidden">
             @endif
             <label for="radio_{{$line->id}}_{{$id}}" 
-                class="{{$class[$id] ?? $class[1]}} block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
+                class="{{$class[$id] ?? $class[1]}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
                 title="#{{$id}}"
                 onclick="updateIdsOfFail({{$line->id}}, 'radio_{{$line->id}}_hidden',{{$id}},{{$rowIndex}},'{{$type}}')"
                 >{{$option}}</label>
