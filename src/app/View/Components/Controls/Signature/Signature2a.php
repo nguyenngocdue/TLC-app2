@@ -18,6 +18,7 @@ class Signature2a extends Component
         private $readOnly = false,
         private $debug = !true,
         private $value = null,
+        private $title = '',
 
         private $showCommentBox = false,
         private $commentName = '',
@@ -57,6 +58,8 @@ class Signature2a extends Component
                 'readOnly' => $readOnly ? 1 : 0,
                 'debug' => $this->debug,
                 'input_or_hidden' => $this->debug ? "text" : "hidden",
+                'title' => $this->title,
+
                 'value' => $this->value,
                 'value_decoded' => $value_decoded,
 

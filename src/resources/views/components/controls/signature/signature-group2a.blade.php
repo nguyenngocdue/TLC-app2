@@ -27,6 +27,7 @@
                     value="{{$value}}"
                     debug="{{$debug ? 1 : 0}}"
                     readOnly="{{$mineSignature ? 0 : 1}}"
+                    title="#{{$signatureId}}"
                     {{-- signatureUserId="{{$signatureUserId}}" --}}
                     
                     showCommentBox=1                    
@@ -40,16 +41,14 @@
                 </div>
             @else
                 @if($value =='' && $signatureId)
-                    Request sent on {{$sentDate}}
-                @else
-                    <x-renderer.button id="btnRequest_{{$signatureUserId}}" type="primary" class="my-2" 
+                <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
+                @else                    
+                    <x-renderer.button id="btnRequest_{{$signatureUserId}}" type="secondary" class="my-2" 
                         onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', {{$signatureUserId}})">Request to Sign Off</x-renderer.button>
                 @endif
             @endif
         </div>
         <x-renderer.avatar-user size="xlarge" uid="{{$user->id}}" flipped=1 content=""/>
-            
-        {{-- <div title="#{{$signatureId}}" class="border">#{{$signatureId}}</div> --}}
     </div>
 @endforeach
 

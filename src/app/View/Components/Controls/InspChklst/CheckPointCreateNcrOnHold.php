@@ -20,6 +20,7 @@ class CheckPointCreateNcrOnHold extends Component
         private $debug,
         private $checkPointIds = [],
         private $sheet = null,
+        private $readOnly = false,
     ) {
         //
     }
@@ -51,6 +52,7 @@ class CheckPointCreateNcrOnHold extends Component
             'nameButton' => $nameButton,
             'nameShow' => $nameShow,
             'syntax' => $syntax,
+            'readOnly' => $this->readOnly,
         ]);
     }
     private function getHrefCreateNCR()

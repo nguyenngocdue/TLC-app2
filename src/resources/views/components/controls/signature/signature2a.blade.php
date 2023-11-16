@@ -4,7 +4,7 @@ $w=340; $h=140; /* ORI 220 x 90*/
 $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
 @endphp 
 <div class=" w-[340px]">
-    Sign here:
+    <div title="{{$title}}">Sign here:</div>
     <div id="div1{{$name}}" class="relative border rounded h-[140px]">
         @if(!$readOnly)
             <button type="button" id="btnReset1_{{$count}}" class="no-print w-10 h-10 top-1 right-2 absolute">
@@ -39,23 +39,26 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
     $cursor = $readOnly ? "cursor-not-allowed" : "cursor-pointer";
     $selected = $decisionValue;
     @endphp
-    <div class="grid w-full grid-cols-2 space-x-2 rounded-xl bg-gray-200 p-2">
-        @foreach([1=>'Approve', 2=>'Reject'] as $decisionId => $option)
-            <div>
-                <input type="radio" 
-                    name="{{$decisionName}}" 
-                    id="{{$decisionName}}_{{$decisionId}}" 
-                    class="peer hidden" 
-                    @checked($selected==$decisionId)  
-                    @disabled($readOnly)
-                    value="{{$decisionId}}"
-                />
-                <label for="{{$decisionName}}_{{$decisionId}}" 
-                    class="{{$class[$decisionId]}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
-                    title="#{{$decisionId}}"
-                    >{{$option}}</label>
-            </div>
-        @endforeach
+    <div class="flex gap-2">
+        <div class="grid w-full grid-cols-2 space-x-2 rounded-xl bg-gray-200 p-2">
+            @foreach([1=>'Approve', 2=>'Reject'] as $decisionId => $option)
+                <div>
+                    <input type="radio" 
+                        name="{{$decisionName}}" 
+                        id="{{$decisionName}}_{{$decisionId}}" 
+                        class="peer hidden" 
+                        @checked($selected==$decisionId)  
+                        @disabled($readOnly)
+                        value="{{$decisionId}}"
+                    />
+                    <label for="{{$decisionName}}_{{$decisionId}}" 
+                        class="{{$class[$decisionId]}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
+                        title="#{{$decisionId}}"
+                        >{{$option}}</label>
+                </div>
+            @endforeach
+        </div>
+        <x-renderer.button htmlType="submit" class="rounded-xl" icon="fa-duotone fa-floppy-disk">Save</x-renderer.button>
     </div>
     @endif
 </div>
