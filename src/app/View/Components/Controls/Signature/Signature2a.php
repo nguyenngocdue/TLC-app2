@@ -20,8 +20,12 @@ class Signature2a extends Component
         private $value = null,
 
         private $showCommentBox = false,
-        private $comment = '',
         private $commentName = '',
+        private $commentValue = '',
+
+        private $showDecisionBox = false,
+        private $decisionName = '',
+        private $decisionValue = '',
         // private $signatureUserId = null,
     ) {
         static::$count++;
@@ -54,10 +58,15 @@ class Signature2a extends Component
                 'debug' => $this->debug,
                 'input_or_hidden' => $this->debug ? "text" : "hidden",
                 'value' => $this->value,
-                'comment' => $this->comment,
                 'value_decoded' => $value_decoded,
+
                 'showCommentBox' => $this->showCommentBox,
                 'commentName' => $this->commentName,
+                'commentValue' => $this->commentValue,
+
+                'showDecisionBox' => $this->showDecisionBox,
+                'decisionName' => $this->decisionName,
+                'decisionValue' => $this->decisionValue,
             ]
         );
     }

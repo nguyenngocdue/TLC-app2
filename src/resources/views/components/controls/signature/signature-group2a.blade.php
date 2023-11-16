@@ -5,6 +5,7 @@
 
     $value = $as ? $as->value : "";
     $comment = $as ? $as->signature_comment : "";
+    $decision = $as ? $as->signature_decision : "";
     $signatureId = $as ? $as->id : "";
     $sentDate = $as ? $as->created_at->format('d/m/Y') : "";
 
@@ -28,9 +29,13 @@
                     readOnly="{{$mineSignature ? 0 : 1}}"
                     {{-- signatureUserId="{{$signatureUserId}}" --}}
                     
-                    showCommentBox=1
-                    comment="{{$comment}}"
+                    showCommentBox=1                    
                     commentName="signatures[{{$category}}_{{$index}}][signature_comment]"
+                    commentValue="{{$comment}}"
+
+                    showDecisionBox=1
+                    decisionName="signatures[{{$category}}_{{$index}}][signature_decision]"
+                    decisionValue="{{$decision}}"
                     />
                 </div>
             @else
@@ -43,6 +48,8 @@
             @endif
         </div>
         <x-renderer.avatar-user size="xlarge" uid="{{$user->id}}" flipped=1 content=""/>
+            
+        {{-- <div title="#{{$signatureId}}" class="border">#{{$signatureId}}</div> --}}
     </div>
 @endforeach
 
