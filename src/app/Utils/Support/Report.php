@@ -370,6 +370,8 @@ class Report
         foreach ($data as $value){
             if(isset($value['children_metrics'])) {
                 $num = $num + count($value['children_metrics']); 
+            } else{
+                $num += 1;
             }
         }
         return $num;

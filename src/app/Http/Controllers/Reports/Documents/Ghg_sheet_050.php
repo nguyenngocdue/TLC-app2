@@ -216,10 +216,12 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 
 	public function createInfoToRenderTable($dataSource)
 	{
+		if(!isset($dataSource['scopes'])) return [];
 		$info = [];
-		$totalLine = 0;
+		$totalLine = 1;
 		foreach ($dataSource['scopes'] as $k => $items) {
 			$num = 0;
+			$emptyChildrenMetrics = 0;
 			foreach ($items as $values){
 				$item = last($values);
 				$ghgcate_id = $item['ghgcate_id'];
@@ -228,20 +230,22 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 				foreach ($values  as $index => $val){
 					$item = $val['children_metrics'] ?? [];
 					$ghg_tmpl_id = $val['ghg_tmpl_id'];
-					$info[$k][$ghgcate_id][$ghg_tmpl_id]['scope_rowspan_lv3'] = count($item);
+					$info[$k][$ghgcate_id][$ghg_tmpl_id]['scope_rowspan_lv3'] = (count($item) ? count($item) : 1);
 					$info[$k][$ghgcate_id][$ghg_tmpl_id]['index_children_metric'] = $index;
 
 					if(isset($val['children_metrics'])) {
 						$count = count($val['children_metrics']);
 						$num += $count;
+					} else{
+						$emptyChildrenMetrics += 1;
 					}
 				}
 			}
-			$info[$k]['scope_rowspan_lv1'] = $num;
-			$totalLine += $num;
+			$info[$k]['scope_rowspan_lv1'] = $num +$emptyChildrenMetrics;
+			$totalLine += $num + $emptyChildrenMetrics;
 		}
 		$info['total_line'] = $totalLine;
-		// dd($info);
+		dump($info, $dataSource);
 		return $info;
 	}
 }

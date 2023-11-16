@@ -4,8 +4,6 @@
 	border-spacing:0;
 }
 .tg td{
-	border-color:black;
-	border-style:solid;
 	border-width:1px;
 	font-family:Arial, sans-serif;
 	font-size:14px;
@@ -15,9 +13,6 @@
 	background: white;
 }
 .tg th{
-	border-color:black;
-	border-style:solid;
-	border-width:1px;
 	font-family:Arial, sans-serif;
 	font-size:14px;
 	overflow:hidden;
@@ -25,13 +20,11 @@
 }
 .tg td a {
     color: blue;
-
 }
 
 </style>
 
 @php
-    //dump($tableDataSource, $complexSettingTable);
 	$complexSettingTable = $tableDataSource['tableSetting'];
 	$tableDataSource = $tableDataSource['tableDataSource'];
     $totalSpan = $complexSettingTable['total_line'];
@@ -52,14 +45,12 @@
 		<th class="{{$class2}} border-l">Metric 1</th>
 		<th class="{{$class2}} border-l">Metric 2</th>
 		<th class="{{$class2}} border-l">Total </br>(tCO2e)</th>
-
-		{{-- <th class="tg-0pky"><span style="font-style:normal">YTD</span><br>(tCO2e)<br></th> --}}
 		@foreach($months as $key => $value)
 			@if(is_numeric($key))
 				@php
 					$strMonth = App\Utils\Support\DateReport::getMonthAbbreviation2((int)$key);
 				@endphp
-				<th class="p-2 font-bold">{{$strMonth}}</th>
+				<th class="p-2 font-bold bg-gray-100">{{$strMonth}}</th>
 			@endif
 		@endforeach
 	</tr>
@@ -74,7 +65,7 @@
 							$rowSpanLv1 = $val1['scope_rowspan_lv1'];
 							$scopeName = \App\Models\Term::find($k1)->toArray()['name'];
 						@endphp
-						<td class="p-2" rowspan="{{$rowSpanLv1 ? $rowSpanLv1 : 1}}">{{$scopeName}}</td>
+						<td class="p-2 text-center" rowspan="{{$rowSpanLv1 ? $rowSpanLv1 : 1}}">{{$scopeName}}</td>
 					{{-- </tr> --}}
 					@foreach($val1 as $k2 => $val2)
 						@if(isset($val2['scope_rowspan_lv2']))
@@ -83,29 +74,32 @@
 								$ghgcateName = \App\Models\Ghg_cat::find($k2)->toArray()['name'];
 							@endphp
 							{{-- <tr> --}}
-								<td class="p-2" rowspan="{{$rowSpanLv2 ? $rowSpanLv2: 1}}">{{$ghgcateName}}</td>
+								<td class="p-2"  title="#{{$k2}}" rowspan="{{$rowSpanLv2 ? $rowSpanLv2: 1}}">{{$ghgcateName}}</td>
 							@foreach($val2 as $k3 => $val3)
 								@if( is_numeric($k3) && isset($val3['scope_rowspan_lv3']))
 									@php 
 										$rowSpanLv3 = $val3['scope_rowspan_lv3'] ?  $val3['scope_rowspan_lv3'] : 1;
-										$ghgTmplName = \App\Models\Ghg_tmpl::find($k3)->toArray()['name'];
+										$ghgTmplName =  \App\Models\Ghg_tmpl::find($k3)->toArray()['name'];
+										$ghgTmplName =  \App\Utils\Support\StringReport::removeNumbersAndChars($ghgTmplName);
 										$indexChildrenMetric = $val3['index_children_metric'];
 										$childrenMetric = $tableDataSource['scopes'][$k1][$k2][$indexChildrenMetric]['children_metrics'] ?? [];
 										//dd($childrenMetric);
 									@endphp
-									<td class="p-2" rowspan="{{$rowSpanLv3}}">
+									<td class="p-2" title="#{{$k3}}" rowspan="{{$rowSpanLv3}}">
 										{!! $k3 !== '0' ? "<a href='" . route('ghg_tmpls.edit', $k3 ?? 0) . "'>" . $ghgTmplName . "</a>" : '' !!} 
 									</td>
 									@if(isset($childrenMetric[0]['ghg_tmpls_name']))
 									@php
 										$months = $childrenMetric[0]['months'] ?? [];
 									@endphp
+									{{-- Metric 0: first line --}}
 									<td class="p-2">
 										@php 
 											$idMetricType0 = $childrenMetric[0]['ghg_metric_type_id'] ?? 0;
 											$idMetricType1 = $childrenMetric[0]['ghg_metric_type_1_id'] ?? 0;
 											$idMetricType2 = $childrenMetric[0]['ghg_metric_type_2_id'] ?? 0;
 											$nameMetricType0 = $childrenMetric[0]['ghg_tmpls_name'];
+											$nameMetricType0 =  \App\Utils\Support\StringReport::removeNumbersAndChars($nameMetricType0);
 											$nameMetricType1 = $childrenMetric[0]['ghg_metric_type_2_name'];
 											$nameMetricType2 = $childrenMetric[0]['ghg_metric_type_2_name'];
 										@endphp
@@ -121,17 +115,34 @@
 										@foreach($months as $month => $valMonth)
 											<td class="p-2 text-right">{{$valMonth}}</td>
 										@endforeach
+									{{-- add empty cell --}}
+									@elseif(!isset($childrenMetric[0]['ghg_metric_type_id']))
+											<td></td>
+										@if(!isset($childrenMetric[0]['ghg_metric_type_1_id']))
+												<td></td>
+											@if(!isset($childrenMetric[0]['ghg_metric_type_2_id']))
+												<td></td>
+													@php
+														$numOfMonths = count($months);
+													@endphp
+													@for($i = 0; $i <= $numOfMonths; $i++)
+														<td></td>
+													@endfor
+											@endif
+										@endif
 									@endif
 								</tr>
 								{{-- </tr> --}}
 									@for($i = 1; $i < $rowSpanLv3; $i++)
 										@if(isset($childrenMetric[$i]['ghg_tmpls_name']))
+											{{-- Metric 0: start second line --}}
 											<tr>
 												@php 
 													$idMetricType0 = $childrenMetric[$i]['ghg_metric_type_id'] ?? 0;
 													$idMetricType1 = $childrenMetric[$i]['ghg_metric_type_1_id'] ?? 0;
 													$idMetricType2 = $childrenMetric[$i]['ghg_metric_type_2_id'] ?? 0;
 													$nameMetricType0 = $childrenMetric[$i]['ghg_tmpls_name'];
+													$nameMetricType0 =  \App\Utils\Support\StringReport::removeNumbersAndChars($nameMetricType0);
 													$nameMetricType1 = $childrenMetric[$i]['ghg_metric_type_1_name'];
 													$nameMetricType2 = $childrenMetric[$i]['ghg_metric_type_2_name'];
 												@endphp
@@ -153,7 +164,7 @@
 												@foreach($months as $month => $valMonth)
 													<td class="p-2 text-right">{{$valMonth}}</td>
 												@endforeach
-											</tr>
+											</tr>				
 										@endif
 									@endfor
 								@endif
