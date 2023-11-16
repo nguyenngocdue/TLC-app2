@@ -12,8 +12,9 @@
     {{-- <x-dashboards.my-view-groups /> --}}
     {{-- <x-elapse title="My View: "/> --}}
     <div class="grid grid-cols-12 gap-3 my-5">
-        <div class="col-start-4 col-span-6">
-            <x-dashboards.my-view title="Monitored by Me" viewType="monitored_by_me"  />
+        <div class="col-span-10">
+            {{-- <x-dashboards.my-view title="Monitored by Me" viewType="monitored_by_me"  /> --}}
+            <x-renderer.matrix-for-report.qaqc_insp_chklst_shts subProjectId="{{$subProjectId}}" prodRoutingId="{{$prodRoutingId}}" />
         </div>
     </div>
 </div>

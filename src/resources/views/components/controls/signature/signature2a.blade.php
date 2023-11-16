@@ -1,6 +1,6 @@
 {{-- https://github.com/szimek/signature_pad --}}
 @php 
-$w=340; $h=140; /* ORI 220 x 90*/ 
+$w=338; $h=138; /* ORI 220 x 90*/ 
 $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
 @endphp 
 <div class=" w-[340px]">
