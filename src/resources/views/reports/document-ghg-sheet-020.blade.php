@@ -241,19 +241,19 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                         <li class="flex items-center pb-2">
                                             <div class="w-12 h-4 bg-[#4dc9f6]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
-                                                The amount of CO2 emissions based on the results for the entire year.
+                                                The total CO2 emissions from the previous year.
                                             </p>
                                         </li>
                                         <li class="flex items-center pb-2">
                                             <div class="w-12 h-4  bg-[#f67019]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
-                                                The amount of CO2 up to the selected moment.
+                                                The total CO2 emissions up to the selected period of time.
                                             </p>
                                         </li>
                                         <li class="flex items-center pb-2">
-                                            <div class="w-12 h-4  bg-[#6a329f]"></div>
+                                            <div class="w-12 h-1 border rounded bg-[#6a329f]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
-                                                Standard CO2 levels.
+                                                Standard CO2 levels based on the results from the previous year.
                                             </p>
                                         </li>
                                     </ul>

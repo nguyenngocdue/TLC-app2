@@ -160,7 +160,7 @@
 													<td class="p-2">
 														{!! $idMetricType2 !== '0' ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : '' !!} 
 													</td>
-													<td class="p-2 font-bold text-right">
+													<td class="p-2 font-bold text-right ">
 															{!! (float)$childrenMetric[$i]['total_months'] <= 0 ? "<i class='fa-light fa-minus'></i>" : $childrenMetric[$i]['total_months'] !!}
 													</td>
 													@php
@@ -186,9 +186,9 @@
 			$totalEmissionMetricTypeEachMonth = $tableDataSource['totalEmissionMetricTypeEachMonth'];
 		@endphp
 		<td class="p-2 text-right font-bold"  colspan="6">Total Emissions</td>
-		<td class="p-2 text-right font-bold"  colspan="1">{{$totalEmissionMetricType}}</td>
+		<td class="p-2 text-right font-bold text-red-600"  colspan="1">{{$totalEmissionMetricType}}</td>
 		@foreach($totalEmissionMetricTypeEachMonth as $key => $value)
-			<td class="p-2 text-right font-bold">{{$value}}</td>
+			<td class="p-2 text-right font-bold text-red-600">{{$value}}</td>
 		@endforeach
 	</tr>
 	</tbody>
