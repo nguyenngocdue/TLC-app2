@@ -283,7 +283,8 @@ trait HasCheckbox
         $toBeKeptList = array_diff(array_diff($currentIds, $toBeDeletedList), $toBeAddedList);
         array_push($toBeAddedList, ...$toBeKeptList);
         array_push($toBeDeletedList, ...$toBeKeptList);
-        // dd($toBeAddedList);
+        // dump($toBeAddedList);
+        // dump($toBeDeletedList);
 
         //This section is to enrich the to be added list
         $arrAssoc = Arr::toAssoc($ids);

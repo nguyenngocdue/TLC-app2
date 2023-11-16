@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\UpdatedQaqcChklstEvent;
+use App\Events\UpdatedSubProjectEvent;
 use App\Models\Qaqc_insp_chklst;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -49,9 +50,6 @@ class UpdatedQaqcChklstListener implements ShouldQueue //<<No need to queue
         $book->progress = $newProgress;
         $book->save();
 
-        //<<This will also output on the web, not only the command
-        // $count = count($ids);
-        // $result = $success . "/" . $count;
-        // if ($success || $count) echo ("The progress of Inspection Checklists have been successfully updated: $result \n");
+        event(new UpdatedSubProjectEvent($book));
     }
 }

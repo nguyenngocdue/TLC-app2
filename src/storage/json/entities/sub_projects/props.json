@@ -336,7 +336,7 @@
         "hidden_filter": "",
         "hidden_print": "",
         "hidden_template_print": "",
-        "read_only": "true",
+        "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
