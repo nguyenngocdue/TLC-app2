@@ -29,9 +29,15 @@ class DashboardController extends Controller
     public function index()
     {
         $params = [];
+        $cu = CurrentUser::get();
         $subView = CurrentUser::getViewSuffix();
         switch ($subView) {
             case Constant::DASHBOARD_EXTERNAL_INSPECTOR:
+                $subProjects = $cu->getSubProjectsOfExternalInspector();
+                dump($subProjects);
+
+                $qaqcInspTmpls = $cu->getQaqcInspTmplsOfExternalInspector();
+                dump($qaqcInspTmpls);
 
                 $params = [
                     'projectId' => 72,

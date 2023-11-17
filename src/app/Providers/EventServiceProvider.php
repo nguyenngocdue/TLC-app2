@@ -10,7 +10,6 @@ use App\Events\UpdatedEsgSheetEvent;
 use App\Events\UpdatedProdSequenceEvent;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
-use App\Events\UpdatedSubProjectEvent;
 use App\Events\UserSignedInEvent;
 //------------
 use App\Listeners\CreatedDocumentListener;
@@ -20,7 +19,6 @@ use App\Listeners\UpdatedEsgSheetListener;
 use App\Listeners\UpdatedProdSequenceListener;
 use App\Listeners\UpdatedQaqcChklstListener;
 use App\Listeners\UpdatedQaqcChklstSheetListener;
-use App\Listeners\UpdatedSubProjectListener;
 use App\Listeners\UserSignedInListener;
 //------------
 use Illuminate\Auth\Events\Registered;
@@ -44,7 +42,6 @@ class EventServiceProvider extends ServiceProvider
         UpdatedDocumentEvent::class => [UpdatedDocumentListener::class,],
 
         //Update specific entities
-        UpdatedSubProjectEvent::class => [UpdatedSubProjectListener::class],
         UpdatedQaqcChklstSheetEvent::class => [UpdatedQaqcChklstSheetListener::class],
         UpdatedQaqcChklstEvent::class => [UpdatedQaqcChklstListener::class],
         UpdatedProdSequenceEvent::class => [UpdatedProdSequenceListener::class],

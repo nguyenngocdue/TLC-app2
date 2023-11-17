@@ -18,7 +18,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEntityEditableSignature;
 	use TraitValidation;
 	use TraitSendNotificationAndMail;
-	use TraitEventInspChklst;
+	// use TraitEventInspChklst;
 	use TraitEntityUpdateUserSettings;
 	use TraitUpdatedProdSequenceEvent;
 	use TraitHelperRedirect;
@@ -105,6 +105,7 @@ trait TraitEntityCRUDStoreUpdate2
 	{
 		Timer::getTimeElapseFromLastAccess();
 		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
+		// if (!$isFakeRequest) dump($request);
 		// if (!$isFakeRequest) {
 		// 	dump($request->input());
 		// 	dump($request->files);
@@ -197,9 +198,8 @@ trait TraitEntityCRUDStoreUpdate2
 			$previousValue = $this->getPreviousValue($handledFields, $theRow);
 			$fieldForEmailHandler = $this->addEntityValue($handledFields, 'created_at', $theRow->getAttributes()['created_at']);
 			$fieldForEmailHandler = $this->addEntityValue($fieldForEmailHandler, 'updated_at', $theRow->getAttributes()['updated_at']);
-
 			//Fire the event "Send Mail give Monitors No and Comment"
-			$this->fireEventInspChklst($request, $id);
+			// $this->fireEventInspChklst($request, $id);
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
@@ -245,6 +245,7 @@ trait TraitEntityCRUDStoreUpdate2
 		//Fire the event "Updated New Document"
 		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment'], $isFakeRequest, $allTable01Names);
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
+		// dump($previousValue, $fieldForEmailHandler);
 		$this->emitPostUpdateEvent($theRow->id);
 		Log::info(Timer::getTimeElapseFromLastAccess());
 		return $this->redirectCustomForUpdate2($request, $theRow);
