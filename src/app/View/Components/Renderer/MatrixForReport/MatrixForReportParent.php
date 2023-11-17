@@ -14,8 +14,6 @@ abstract class MatrixForReportParent extends Component
     protected $rotate45Width = 400;
     protected $rotate45Height = null;
 
-    // protected $dateToCompare = '2023-10-01';
-    protected $dateToCompare = null;
     protected $closedDateColumn = 'closed_at';
 
     protected $statuses;
@@ -25,6 +23,8 @@ abstract class MatrixForReportParent extends Component
 
     function __construct(
         private $type,
+        private $dateToCompare = null,
+        // private $dateToCompare = '2023-10-01',
     ) {
         $this->statuses = LibStatuses::getFor($type);
     }
