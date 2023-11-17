@@ -18,7 +18,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEntityEditableSignature;
 	use TraitValidation;
 	use TraitSendNotificationAndMail;
-	use TraitEventInspChklst;
+	// use TraitEventInspChklst;
 	use TraitEntityUpdateUserSettings;
 	use TraitUpdatedProdSequenceEvent;
 	use TraitHelperRedirect;
