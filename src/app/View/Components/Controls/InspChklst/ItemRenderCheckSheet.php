@@ -62,6 +62,8 @@ class ItemRenderCheckSheet extends Component
         [$groupColumn, $groupNames] = $this->getGroups($lines);
         // dump($groupNames);
         $showHeader = $this->getShowHeader();
+        //Remove _getMonitors1(), as it will be double submit to Update2
+        unset($this->dataSource["_getMonitors1()"]);
 
         return view(
             'components.controls.insp-chklst.item-render-check-sheet',
