@@ -22,7 +22,7 @@ class UpdatedSubProjectListener implements ShouldQueue
         //
     }
 
-    function reloadExternalInspectors($subProjectId)
+    static function reloadExternalInspectors($subProjectId)
     {
         $allLists = Qaqc_insp_chklst::query()
             ->where("sub_project_id", $subProjectId)
@@ -46,6 +46,6 @@ class UpdatedSubProjectListener implements ShouldQueue
     public function handle(UpdatedSubProjectEvent $event)
     {
         $subProject = $event->book->sub_project_id;
-        $this->reloadExternalInspectors($subProject);
+        static::reloadExternalInspectors($subProject);
     }
 }

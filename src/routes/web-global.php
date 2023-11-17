@@ -23,10 +23,6 @@ Route::group([
     'middleware' => ['auth', 'impersonate']
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    //<<This cause route::cache issues
-    // Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    //<<This cause route::cache issues
-    // Route::resource('posts', PostController::class)->only(['store','update','destroy']);
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::get('my-org-chart', [MyOrgChartController::class, 'index'])->name('myOrgChart.index');
     Route::get('profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');
@@ -38,10 +34,8 @@ Route::group([
     Route::put('updateUserSettingsFilterApi', [UpdateUserSettingsApi::class, 'updateUserSettingsFilterApi'])->name('updateUserSettingsFilterApi');
     Route::get('impersonate/user/{id}', [AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
     Route::get('impersonate/stop', [AdminSetRoleSetController::class, 'stopImpersonate'])->name('setrolesets.stopImpersonate');
-    // Route::get('app-menu', [AppMenuController::class, 'index']);
     Route::get('my-company', [MyCompanyController::class, 'index'])->name("my-company.index");
     Route::get('reset', fn () => (new UpdateUserSettings())(new Request(['action' => 'resetAllSettings']), '/'));
-    // Route::get('gitpull202', fn () => Log::info("WebHook Called"));
     Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');
     Route::get('notifications/{type}/{id}/{idNotification}', [NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('system/notifications', [SystemNotificationsController::class, 'notifications']);
@@ -50,7 +44,4 @@ Route::group([
     Route::post('utils/createThumbnail', [ThumbnailController::class, 'create'])->name('createThumbnail.create');
     Route::get('orphan/many_to_many', [OrphanManyToManyController::class, 'get'])->name('orphan.index');
     Route::post('orphan/many_to_many', [OrphanManyToManyController::class, 'destroy'])->name('orphan.destroy');
-    // Route::get('test', function () {
-    //     event(new Test(['DinhCanh', '30031997']));
-    // });
 });

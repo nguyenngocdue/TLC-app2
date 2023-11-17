@@ -72,14 +72,14 @@ class MenuProfile extends Component
         $isAdmin = CurrentUser::isAdmin();
         $stopImpersonate = session()->has('impersonate');
         $is3rdParty = CurrentUser::is3rdParty();
-        $rdPartyType = CurrentUser::get3rdPartyType();
+        // $rdPartyType = CurrentUser::get3rdPartyType();
         return view('components.homepage.menu-profile', [
             'userMenu' => $this->getUserMenu(),
             'user' => $user,
             'isAdmin' => $isAdmin,
             'is3rdParty' => $is3rdParty,
             'stopImpersonate' => $stopImpersonate,
-            'rdPartyType' => $rdPartyType,
+            // 'rdPartyType' => $rdPartyType,
         ]);
     }
 }

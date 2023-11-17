@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\WorkingShiftService;
+use App\Listeners\UpdatedSubProjectListener;
 use App\Utils\Support\CurrentUser;
+use App\Utils\System\Timer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 
@@ -21,9 +23,10 @@ class WelcomeFortuneController extends Controller
     public function index(Request $request)
     {
         if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
+        Timer::getTimeElapseFromLastAccess();
+        UpdatedSubProjectListener::reloadExternalInspectors(112);
 
-        // return Blade::render('<x-renderer.MatrixForReport.QaqcWirs />');
-
-        // return view("welcome-fortune", []);
+        echo Timer::getTimeElapseFromLastAccess();;
+        return "";
     }
 }

@@ -171,8 +171,8 @@ class CurrentUser
         return static::getViewSuffix() != '';
     }
 
-    public static function get3rdPartyType()
-    {
-        return Str::headline(static::getViewSuffix());
-    }
+    // public static function get3rdPartyType()
+    // {
+    //     return Str::headline(static::getViewSuffix());
+    // }
 }

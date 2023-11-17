@@ -9,11 +9,11 @@ class Role extends ModelsRole
 {
     use Searchable;
 
-    public function toSearchableArray()
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-        ];
-    }
+    // public function toSearchableArray()
+    // {
+    //     return [
+    //         'id' => $this->id,
+    //         'name' => $this->name,
+    //     ];
+    // }
 }

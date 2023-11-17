@@ -3,7 +3,6 @@
 namespace App\BigThink;
 
 use App\Models\User;
-// use App\Utils\OptimisticLocking\TraitOptimisticLocking;
 use App\Utils\PermissionTraits\CheckPermissionEntities;
 use App\Utils\Support\Json\SuperProps;
 use Database\Seeders\FieldSeeder;
@@ -11,11 +10,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
+// use Laravel\Scout\Searchable;
 
 abstract class ModelExtended extends Model
 {
-    use Searchable;
+    // use Searchable;
     use Notifiable;
     use HasFactory;
     // use TraitOptimisticLocking;
@@ -50,15 +49,15 @@ abstract class ModelExtended extends Model
         static::$eloquentParams['getDeletedBy'] =  ["belongsTo", User::class, "deleted_by"];
     }
 
-    public function toSearchableArray()
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            // 'description' => $this->description,
-            // 'slug' => $this->slug,
-        ];
-    }
+    // public function toSearchableArray()
+    // {
+    //     return [
+    //         'id' => $this->id,
+    //         'name' => $this->name,
+    //         // 'description' => $this->description,
+    //         // 'slug' => $this->slug,
+    //     ];
+    // }
 
     function getOwner()
     {
@@ -122,7 +121,8 @@ abstract class ModelExtended extends Model
         }
         return static::$singletonDbUserCollection;
     }
-    public static function getCollection(){
+    public static function getCollection()
+    {
         return static::getCollectionCache()[static::class] ?? collect();
     }
     public static function findFromCache($id)

@@ -42,11 +42,11 @@ class Attachment extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
 
-    public function toSearchableArray()
-    {
-        return [
-            'id' => $this->id,
-            'filename' => $this->title,
-        ];
-    }
+    // public function toSearchableArray()
+    // {
+    //     return [
+    //         'id' => $this->id,
+    //         'filename' => $this->title,
+    //     ];
+    // }
 }

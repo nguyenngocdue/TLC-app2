@@ -1,5 +1,5 @@
 <button class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none" @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
-    <x-renderer.avatar-user uid='{{$user->id}}' description="{{$rdPartyType}}"></x-renderer.avatar-user>
+    <x-renderer.avatar-user uid='{{$user->id}}' description1="{{$rdPartyType}}"></x-renderer.avatar-user>
 </button>
 <template x-if="isProfileMenuOpen">
     <ul x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeProfileMenu" @keydown.escape="closeProfileMenu" class="absolute right-0 {{$isAdmin ? ' w-[450px]' : 'w-64'}} p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-600 dark:text-gray-300 dark:bg-gray-700" aria-label="submenu">
