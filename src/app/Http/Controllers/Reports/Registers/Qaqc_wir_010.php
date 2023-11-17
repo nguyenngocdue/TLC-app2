@@ -83,6 +83,8 @@ class Qaqc_wir_010 extends Report_ParentRegister2Controller
         $params['project_id'] = $this->project_id;
         $params['sub_project_id'] = $this->sub_project_id;
         $params['prod_routing_id'] = $this->prod_routing_id;
+        $params['picker_date'] = date('Y-m-d');
+
         return $params;
     }
 }
