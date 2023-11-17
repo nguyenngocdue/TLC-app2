@@ -101,7 +101,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                 </div>
                 <div class="pt-50"></div>
                 
-                <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                         <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
@@ -160,7 +160,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                             </div>
                         </div>
                     </div>
-                    <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                    <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                         <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                     </div>
                 </div>
@@ -201,7 +201,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                         </div>
                     </div>
                 </div>
-                <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class=" "/>
                 </div>
         </div>
@@ -210,7 +210,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
         
         {{-- PAGE 6 :Data Summary Report --}}
-        <div class=" {{$layout}} m-auto flex items-center bg-white box-border p-4 relative"> 
+        <div class=" {{$layout}} m-auto flex items-center bg-white box-border px-8 relative"> 
             <div class='flex justify-center m-auto'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
                         <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Summary Report</x-renderer.heading>
@@ -218,7 +218,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                 @include('reports.document-ghg-summary-report-only-table')
                             </div>
                     </div>
-                <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
@@ -260,7 +260,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                 </div>
                             </div>
                     </div>
-                <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
@@ -270,7 +270,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
 
         {{-- PAGE 8: Data Detail Report  --}}
-        <div class=" w-min-[1400px] flex items-center bg-white box-border relative"> 
+        <div class=" w-min-[1400px] flex items-center bg-white box-border relative px-8"> 
             <div class='flex justify-center m-auto'> 
                 <div class="pt-20 z-10">
                     <div class="grid grid-rows-1">
@@ -280,7 +280,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                             </div>
                     </div>
                 </div>
-                <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
