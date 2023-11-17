@@ -30,6 +30,9 @@ RUN docker-php-ext-install gd && \
 
 RUN docker-php-ext-install pcntl
 
+RUN apk add build-base autoconf
+RUN pecl install apcu 
+
 COPY ./configs/php.ini /usr/local/etc/php/
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
