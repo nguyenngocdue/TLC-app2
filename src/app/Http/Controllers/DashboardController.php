@@ -33,11 +33,11 @@ class DashboardController extends Controller
         $subView = CurrentUser::getViewSuffix();
         switch ($subView) {
             case Constant::DASHBOARD_EXTERNAL_INSPECTOR:
-                $subProjects = $cu->getSubProjectsOfExternalInspector();
-                dump($subProjects);
+                // $subProjects = $cu->getSubProjectsOfExternalInspector();
+                // dump($subProjects);
 
-                $qaqcInspTmpls = $cu->getQaqcInspTmplsOfExternalInspector();
-                dump($qaqcInspTmpls);
+                // $qaqcInspTmpls = $cu->getQaqcInspTmplsOfExternalInspector();
+                // dump($qaqcInspTmpls);
 
                 $params = [
                     'projectId' => 72,
