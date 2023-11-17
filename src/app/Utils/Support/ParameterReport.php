@@ -6,10 +6,16 @@ use App\Models\Attachment;
 
 class ParameterReport
 {
-    public static function getConfigByName($name = "report"){
+    public static function getConfigByName($typeParam){
         $uri = $_SERVER['REQUEST_URI'];
         $reportName =last(explode('/',$uri));
-        $configData = config($name.".".$reportName)?? [];
+        $configData = config("report.".$reportName)?? [];
+        $configData = array_map(function($item) use ($typeParam) {
+            if(isset($item[$typeParam])) {
+                return $item[$typeParam];
+            } else return [];
+        }, $configData);
+        // dd($configData);
         return $configData;
     }
     public static function getTargetIds($configData){

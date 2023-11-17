@@ -12,7 +12,7 @@ class ParamProdRoutingId extends ParentParamReports
     protected $referData1 = 'checksheet_type_id';
     protected function getDataSource()
     {
-        $configData = ParameterReport::getConfigByName();
+        $configData = ParameterReport::getConfigByName('prod_routing_id');
         $targetIds = ParameterReport::getTargetIds($configData);
         $prodRoutings = ParameterReport::getDBParameter($targetIds, 'Prod_routing');
         $result = [];

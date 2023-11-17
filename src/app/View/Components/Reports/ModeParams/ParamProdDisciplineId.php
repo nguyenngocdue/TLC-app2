@@ -2,8 +2,6 @@
 
 namespace App\View\Components\Reports\ModeParams;
 
-use App\Models\Prod_discipline;
-use App\Models\Prod_routing_link;
 use App\Utils\Support\ParameterReport;
 use App\View\Components\Reports\ParentParamReports;
 
@@ -11,7 +9,7 @@ class ParamProdDisciplineId extends ParentParamReports
 {
     protected function getDataSource()
     {
-        $configData = ParameterReport::getConfigByName();
+        $configData = ParameterReport::getConfigByName('prod_discipline_id');
         $targetIds = ParameterReport::getTargetIds($configData);
         $list = ParameterReport::getDBParameter($targetIds, 'Prod_discipline', true);
         $dataSource = [];

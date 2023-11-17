@@ -104,7 +104,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                        $sql .="\n GROUP BY
                             project_id, sub_project_id, prod_routing_id, prod_routing_link_id, pru.date
                             #, prod_sequences_id
-                        ORDER BY  pru.date";
+                        ORDER BY  order_no";
 
         return $sql;
     }
@@ -212,6 +212,12 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                     $unit = isset($item['uom_name']) && (!is_null($item['uom_name'])) ? $item['uom_name'] : '<small class="text-orange-300">Unknown Unit</small>';
                     $tableColumns[$key] =  [
                         [
+                            "title" => "Date",
+                            "dataIndex" => "pru_date",
+                            "align" => "center",
+                            "width" => 120,
+                        ],
+                        [
                             "title" => "Project",
                             "dataIndex" => "project_name",
                             "align" => "left",
@@ -227,20 +233,20 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                             "title" => "Production Routing",
                             "dataIndex" => "prod_routing_name",
                             "align" => "left",
-                            "width" => $optionLayout === 'portrait' ? 250: 220,
+                            "width" => $optionLayout === 'portrait' ? 250: 280,
                         ],
-                        [
-                            "title" => "Production Discipline",
-                            "dataIndex" => "prod_discipline_name",
-                            "align" => "left",
-                            "width" => $optionLayout === 'portrait' ? 200: 193,
-                            "hasListenTo" => true,
-                        ],
+                        // [
+                        //     "title" => "Production Discipline",
+                        //     "dataIndex" => "prod_discipline_name",
+                        //     "align" => "left",
+                        //     "width" => $optionLayout === 'portrait' ? 200: 193,
+                        //     "hasListenTo" => true,
+                        // ],
                         [
                             "title" => "Production Routing Link",
                             "dataIndex" => "prod_routing_link_name",
                             "align" => "left",
-                            "width" => $optionLayout === 'portrait' ? 300: 250,
+                            "width" => $optionLayout === 'portrait' ? 300: 263,
                         ],
                         [
                             "title" => "Man Power <br/>(AVG)",
@@ -254,21 +260,21 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                             "dataIndex" => "total_uom_on_day",
                             "align" => "right",
                             "width" => 110,
-                            "footer" => "agg_sum",
+                            "footer" => "agg_avg",
                         ],
                         [
                             "title" => "min/Day <br/>(AVG)",
                             "dataIndex" => "min_on_day",
                             "align" => "right",
                             "width" => 110,
-                            "footer" => "agg_sum",
+                            "footer" => "agg_avg",
                         ],
                         [
                             "title" => "min/$unit <br/>(AVG)",
                             "dataIndex" => "min_on_set_on_day",
                             "align" => "right",
                             "width" =>  90,
-                            "footer" => "agg_sum",
+                            "footer" => "agg_avg",
                         ]
                     ];
                 }
