@@ -71,8 +71,8 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div class="{{$layout}} flex m-auto items-center bg-white box-border relative"> 
             <div class='flex justify-center m-auto'> 
                 <div class="z-10">
-                   <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold pt-10'>Company's carbon footprint in {{$text}}</x-renderer.heading>
-                    <div class="grid grid-rows-1 pt-32 ">
+                   <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold mt-[-100px]'>Company's carbon footprint in {{$text}}</x-renderer.heading>
+                    <div class="grid grid-rows-1 pt-10 ">
                         <div class="grid grid-cols-12 gap-28 text-center">
                             <div class="col-span-6 m-auto relative">
                                 <div class='w-96 h-96 border-2 opacity-80 bg-green-700 p-3 flex justify-between flex-col '>
@@ -113,8 +113,8 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
             <div class='flex justify-center m-auto'> 
                 <div class="grid grid-rows-1">
-                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold '>Emission source category chart</x-renderer.heading>
-                    <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
+                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold mt-[-100px] '>Emission source category chart</x-renderer.heading>
+                    <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
                         <div class="w-full flex px-4 z-10">
                             <div class="w-1/2 px-4">
                                 <x-renderer.report.pivot-chart key="carbon_footprint_1" 
