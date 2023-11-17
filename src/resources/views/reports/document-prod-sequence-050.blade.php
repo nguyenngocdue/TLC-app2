@@ -114,8 +114,8 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                                     @endphp
                                         @foreach($dataWidgets as $keyInManage => $values)
                                         <div>
-                                            <x-renderer.heading {{-- title="{{$keyInManage}}" --}} level=5 xalign='left' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>
-                                                            {{$prodRoutingLinkName}} {{$values['dimensions']['titleHeading']}} by Production Routing Link
+                                            <x-renderer.heading {{-- title="{{$keyInManage}}" --}} level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>
+                                                            {{$prodRoutingLinkName}} {{$values['dimensions']['titleHeading']}}
                                             </x-renderer.heading>
                                             <div class="p-6">
                                                 <x-renderer.report.pivot-chart4 :data="$values"/>

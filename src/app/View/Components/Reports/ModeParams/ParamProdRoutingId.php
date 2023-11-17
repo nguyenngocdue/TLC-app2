@@ -3,6 +3,7 @@
 namespace App\View\Components\Reports\ModeParams;
 
 use App\Models\Prod_routing;
+use App\Utils\Support\ParameterReport;
 use App\View\Components\Reports\ParentParamReports;
 
 class ParamProdRoutingId extends ParentParamReports
@@ -11,15 +12,11 @@ class ParamProdRoutingId extends ParentParamReports
     protected $referData1 = 'checksheet_type_id';
     protected function getDataSource()
     {
-        $uri = $_SERVER['REQUEST_URI'];
-        $reportName =last(explode('/',$uri));
-        $ids = config("report.".$reportName)?? [];
-        $prodRoutings = Prod_routing::whereNull('deleted_by')
-                        ->when(count($ids), function($query) use ($ids) {
-                            return $query->whereIn('id', $ids);
-                        })
-                        ->get();
+        $configData = ParameterReport::getConfigByName();
+        $targetIds = ParameterReport::getTargetIds($configData);
+        $prodRoutings = ParameterReport::getDBParameter($targetIds, 'Prod_routing');
         $result = [];
+        
         foreach ($prodRoutings as $routing){
             $subProjectIds = $routing->getSubProjects()->pluck('id')->toArray();
             $chklstTmplIds = $routing->getChklstTmpls()->pluck('id')->toArray();
