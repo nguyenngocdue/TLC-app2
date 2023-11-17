@@ -275,17 +275,17 @@ class User extends Authenticatable implements LdapAuthenticatable
             ['dataIndex' => 'resigned'],
         ];
     }
-    // public function toSearchableArray()
-    // {
-    //     return [
-    //         'id' => $this->id,
-    //         'full_name' => $this->full_name,
-    //         'name0' => $this->name0,
-    //         'first_name' => $this->first_name,
-    //         'last_name' => $this->last_name,
-    //         'email' => $this->email,
-    //     ];
-    // }
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'full_name' => $this->full_name,
+            'name0' => $this->name0,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email,
+        ];
+    }
 
     static $singletonDbUserCollection = null;
     public static function getCollection()
