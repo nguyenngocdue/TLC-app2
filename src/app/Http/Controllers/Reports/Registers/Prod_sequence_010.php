@@ -9,6 +9,7 @@ use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitLegendReport;
 use App\Http\Controllers\Reports\TraitModifyDataToExcelReport;
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\Support\DateReport;
 
 class Prod_sequence_010 extends Report_ParentRegister2Controller
 
@@ -39,6 +40,13 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
     protected function getParamColumns($dataSource, $modeType)
     {
         return [
+            [
+                'title' => 'Date',
+                'dataIndex' => 'picker_date',
+                'renderer' => 'picker_date',
+                'singleDatePicker' => true,
+                'validation' => 'required|date_format:d/m/Y',
+            ],
             [
                 'title' => 'Project',
                 'dataIndex' => 'project_id',
