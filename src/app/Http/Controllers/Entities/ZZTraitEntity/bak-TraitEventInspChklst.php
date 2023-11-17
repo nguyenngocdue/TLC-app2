@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Events\InspChklstEvent;
+// use App\Events\InspChklstEvent;
 use App\Models\Qaqc_insp_chklst_line;
 use App\Models\Qaqc_insp_chklst_sht;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ trait TraitEventInspChklst
                         }, $dataCommentCreate);
                         $data['comment'] = $dataCommentCreate;
                     }
-                    event(new InspChklstEvent($data, $id, $this->type));
+                    // event(new InspChklstEvent($data, $id, $this->type));
                 }
             }
         }
