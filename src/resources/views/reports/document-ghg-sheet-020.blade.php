@@ -210,7 +210,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
         
         {{-- PAGE 6 :Data Summary Report --}}
-        <div class=" {{$layout}} m-auto flex items-center bg-white box-border px-8 relative"> 
+        <div class=" {{$layout}} m-auto flex items-center bg-white box-border px-8 pb-8 relative"> 
             <div class='flex justify-center m-auto'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
                         <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Summary Report</x-renderer.heading>
@@ -227,24 +227,24 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
          {{-- PAGE 7: GHGRP Basin Production & Emissions --}}
-        <div class=" w-[1450px] min-h-[790px] flex m-auto items-center bg-white box-border relative pb-2"> 
+        <div class=" w-[1700px] min-h-[790px] flex m-auto items-center bg-white box-border relative pb-8"> 
             <div class='flex justify-center m-auto'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
-                        <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold'>GHGRP Basin Production & Emissions</x-renderer.heading>
+                        <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold bg-white'>GHGRP Basin Production & Emissions</x-renderer.heading>
                             @php
                                 $tableDataSource = $tableDataSource->toArray();
                             @endphp
                             <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
-                                @include('reports.include-document-ghg-sheet-040', ['tableDataSource' => $tableDataSource['document_ghg_sheet_040']])
+                                    @include('reports.include-document-ghg-sheet-040', ['tableDataSource' => $tableDataSource['document_ghg_sheet_040']])
                                 <div class="bg-white border p-4 mt-2 break-normal min-w-0 dark:bg-gray-800 dark:border-gray-600 rounded shadow-xs">
-                                    <ul class=" flex flex-col items-start">
-                                        <li class="flex items-center pb-2">
+                                    <ul class=" w-full flex  justify-between">
+                                        <li class="flex items-center pb-2 pr-4 ">
                                             <div class="w-12 h-4 bg-[#4dc9f6]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
                                                 The total CO2 emissions from the previous year.
                                             </p>
                                         </li>
-                                        <li class="flex items-center pb-2">
+                                        <li class="flex items-center pb-2 pr-4">
                                             <div class="w-12 h-4  bg-[#f67019]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
                                                 The total CO2 emissions up to the selected period of time.
@@ -261,7 +261,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                             </div>
                     </div>
                 <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
-                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
+                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class=" object-cover"/>
                 </div>
             </div>
         </div>

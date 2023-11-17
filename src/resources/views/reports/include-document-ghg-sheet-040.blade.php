@@ -6,12 +6,12 @@
             @endphp
             <div class="grid grid-cols-12 gap-2">
                 <div class=" col-span-6 flex flex-col">
-                    <x-renderer.heading level=4  xalign="center" class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Based on the data for the entire year  - {{$year-1}}</x-renderer.heading>
                     <x-renderer.report.chart-bar3v3 :dataSource="$ghgrp_1"/>
+                    <p class='text-blue-600 font-bold text-lg pt-2 pl-80'>Based on the data for the entire year  - {{$year-1}}</p>
                 </div>
                 <div class=" col-span-6 flex flex-col justify-self-start">
-                    <x-renderer.heading level=4 class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Based on the data up to the selected period of time</x-renderer.heading>
                     <x-renderer.report.chart-bar3v3 :dataSource="$ghgrp_2"/>
+                    <p class='text-blue-600 font-bold text-lg  pt-2 pl-28'>Based on the data up to the selected period of time</p>
                 </div>
             </div>
     </div>
