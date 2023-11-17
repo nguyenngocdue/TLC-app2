@@ -44,7 +44,6 @@ class Qaqc_wir_010 extends Report_ParentRegister2Controller
                 'dataIndex' => 'picker_date',
                 'renderer' => 'picker_date',
                 'singleDatePicker' => true,
-                'validation' => 'required|date_format:d/m/Y',
             ],
             [
                 'title' => 'Project',
