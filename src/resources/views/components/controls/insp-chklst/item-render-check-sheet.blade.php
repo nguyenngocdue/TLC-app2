@@ -1,10 +1,24 @@
+@php
+    $typeLine = str_replace('_shts','',$type);
+    $idName = $typeLine.'_id';
+    $value = $item->$idName;
+@endphp
+
 <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
+    <input type="hidden" name="tableNames[table01]" value="{{$typeLine}}_lines">
+    {{-- Those are for main body, not the table --}}
+    <input type="hidden" name="name" value="{{$item->name}}">
+    <input type="hidden" name="{{$idName}}" value="{{$value}}">
+    {{-- status id is for change status submit button --}}
+    <input type="hidden" name="status" id='status' value="{{$status}}"> 
+
     <x-renderer.item-render-props hiddenComponent="{{$showHeader?0:1}}" id={{$id}} :item="$item" width='' :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
     {{-- <x-controls.insp-chklst.header-check-sheet :item="$item" :chklst="$chklst" :project="$project" :subProject="$subProject"/> --}}
     <x-renderer.heading level=4 xalign='center'>
         <span title="Checklist Sheet #{{$item->id}} ({{$item->description}})">{{strtoupper($item->name)}}</span>
     </x-renderer.heading>
     
+
     @if($type === 'qaqc_insp_chklst_shts')
     <div class="flex justify-between border bg-white rounded py-2">
         <div class="mx-4">
@@ -17,10 +31,6 @@
     </div>
     @endif
     @php
-
-        $typeLine = str_replace('_shts','',$type);
-        $idName = $typeLine.'_id';
-        $value = $item->$idName;
         $linesTmp = $lines;
         $checkPointIds = $lines->pluck('id');
         $lineIds = $lines->pluck('id');
@@ -69,12 +79,6 @@
             @endif
         @endif
             
-        <input type="hidden" name="tableNames[table01]" value="{{$typeLine}}_lines">
-        {{-- Those are for main body, not the table --}}
-        <input type="hidden" name="name" value="{{$item->name}}">
-        <input type="hidden" name="{{$idName}}" value="{{$value}}">
-        {{-- status id is for change status submit button --}}
-        <input type="hidden" name="status" id='status' value="{{$status}}"> 
-        {{-- <input type="hidden" name="id" value="{{$item->id}}"> --}}
+        
 </div>
 <x-renderer.image-gallery-check-sheet :checkPointIds="$checkPointIds" :dataSource="$linesTmp" action='edit' />
