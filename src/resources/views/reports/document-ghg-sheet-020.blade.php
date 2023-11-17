@@ -54,25 +54,25 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         {{-- PAGE 1 --}}
-        <div class="w-[1400px] min-h-[790px] flex m-auto items-center bg-white box-border p-8 relative"> 
+        <div class="{{$layout}} flex m-auto items-center bg-white box-border relative"> 
                 <img src="{{ asset('images/report/Green and white Sustainability modern presentation-1.png') }}" class="w-full h-full object-cover"/>
         </div>
         {{-- END --}}
         <x-renderer.page-break />
 
         {{-- PAGE 2 --}}
-        <div class="w-[1400px] min-h-[790px] flex m-auto items-center bg-white box-border p-8 relative overflow-hidden"> 
+        <div class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
                 <img src="{{ asset('images/report/Green and white Sustainability modern presentation-2.png') }}" class="w-full h-full object-cover"/>
         </div>
         {{-- END --}}
         <x-renderer.page-break />
 
         {{-- PAGE 3 --}}
-        <div class="w-[1400px] min-h-[1260px] flex m-auto items-center bg-white box-border p-8 relative"> 
+        <div class="{{$layout}} flex m-auto items-center bg-white box-border relative"> 
             <div class='flex justify-center m-auto'> 
                 <div class="z-10">
-                   <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold pt-10'>Company's carbon footprint in {{$text}}</x-renderer.heading>
-                    <div class="grid grid-rows-1 pt-32 ">
+                   <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold mt-[-100px]'>Company's carbon footprint in {{$text}}</x-renderer.heading>
+                    <div class="grid grid-rows-1 pt-10 ">
                         <div class="grid grid-cols-12 gap-28 text-center">
                             <div class="col-span-6 m-auto relative">
                                 <div class='w-96 h-96 border-2 opacity-80 bg-green-700 p-3 flex justify-between flex-col '>
@@ -101,7 +101,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                 </div>
                 <div class="pt-50"></div>
                 
-                <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                         <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
@@ -110,19 +110,19 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
         {{-- PAGE 4: Emission source category chart  --}}
-        <div class="w-[1400px] min-h-[1260px] flex m-auto items-center bg-white box-border p-8 relative"> 
-            <div class='flex justify-center'> 
+        <div class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
+            <div class='flex justify-center m-auto'> 
                 <div class="grid grid-rows-1">
-                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Emission source category chart</x-renderer.heading>
-                    <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
+                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold mt-[-100px] '>Emission source category chart</x-renderer.heading>
+                    <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
                         <div class="w-full flex px-4 z-10">
                             <div class="w-1/2 px-4">
                                 <x-renderer.report.pivot-chart key="carbon_footprint_1" 
                                     :dataSource="$pivotChart1" 
                                     showValue={{true}} 
                                     showDataLabel={{false}}
-                                    width="600"
-                                    height="500"
+                                    width="400"
+                                    height="400"
                                 ></x-renderer.report.pivot-chart>
                             </div>
                             <div class="m-auto">
@@ -160,7 +160,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                             </div>
                         </div>
                     </div>
-                    <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                    <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                         <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                     </div>
                 </div>
@@ -170,8 +170,8 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
         {{-- PAGE 5: Emission source category chart --}}
-        <div class="w-[1400px] min-h-[1200px] flex m-auto items-center bg-white box-border p-8 relative"> 
-            <div class='flex justify-center'> 
+        <div class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
+            <div class='flex justify-center m-auto'> 
                 <div class="grid grid-rows-1 z-20">
                     <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Emission source category chart</x-renderer.heading>
                     <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
@@ -181,7 +181,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                         key="carbon_footprint_2" 
                                         :dataSource="$pivotChart2"
                                         width="1200"
-                                        height="500"
+                                        height="400"
                                     />
                             </div>
                             <div class="m-auto ">
@@ -201,7 +201,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                         </div>
                     </div>
                 </div>
-                <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class=" "/>
                 </div>
         </div>
@@ -210,7 +210,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
         
         {{-- PAGE 6 :Data Summary Report --}}
-        <div class=" w-[1400px] min-h-[1000px] m-auto flex items-center bg-white box-border p-4 relative"> 
+        <div class=" {{$layout}} m-auto flex items-center bg-white box-border px-8 pb-8 relative"> 
             <div class='flex justify-center m-auto'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
                         <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Summary Report</x-renderer.heading>
@@ -218,7 +218,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                 @include('reports.document-ghg-summary-report-only-table')
                             </div>
                     </div>
-                <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
@@ -227,41 +227,41 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
          {{-- PAGE 7: GHGRP Basin Production & Emissions --}}
-        <div class=" w-min-[1400px] min-h-[1000px] flex items-center bg-white box-border p-8 relative"> 
+        <div class=" w-[1700px] min-h-[790px] flex m-auto items-center bg-white box-border relative pb-8"> 
             <div class='flex justify-center m-auto'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
-                        <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>GHGRP Basin Production & Emissions</x-renderer.heading>
+                        <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold bg-white'>GHGRP Basin Production & Emissions</x-renderer.heading>
                             @php
                                 $tableDataSource = $tableDataSource->toArray();
                             @endphp
                             <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
-                                @include('reports.include-document-ghg-sheet-040', ['tableDataSource' => $tableDataSource['document_ghg_sheet_040']])
+                                    @include('reports.include-document-ghg-sheet-040', ['tableDataSource' => $tableDataSource['document_ghg_sheet_040']])
                                 <div class="bg-white border p-4 mt-2 break-normal min-w-0 dark:bg-gray-800 dark:border-gray-600 rounded shadow-xs">
-                                    <ul class=" flex flex-col items-start">
-                                        <li class="flex items-center pb-2">
+                                    <ul class=" w-full flex  justify-between">
+                                        <li class="flex items-center pb-2 pr-4 ">
                                             <div class="w-12 h-4 bg-[#4dc9f6]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
-                                                The amount of CO2 emissions based on the results for the entire year.
+                                                The total CO2 emissions from the previous year.
                                             </p>
                                         </li>
-                                        <li class="flex items-center pb-2">
+                                        <li class="flex items-center pb-2 pr-4">
                                             <div class="w-12 h-4  bg-[#f67019]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
-                                                The amount of CO2 up to the selected moment.
+                                                The total CO2 emissions up to the selected period of time.
                                             </p>
                                         </li>
                                         <li class="flex items-center pb-2">
-                                            <div class="w-12 h-4  bg-[#6a329f]"></div>
+                                            <div class="w-12 h-1 border rounded bg-[#6a329f]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
-                                                Standard CO2 levels.
+                                                Standard CO2 levels based on the results from the previous year.
                                             </p>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                     </div>
-                <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
-                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
+                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class=" object-cover"/>
                 </div>
             </div>
         </div>
@@ -270,7 +270,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
 
         {{-- PAGE 8: Data Detail Report  --}}
-        <div class=" w-min-[1400px] flex items-center bg-white box-border p-8 relative"> 
+        <div class=" w-min-[1400px] flex items-center bg-white box-border relative px-8"> 
             <div class='flex justify-center m-auto'> 
                 <div class="pt-20 z-10">
                     <div class="grid grid-rows-1">
@@ -280,7 +280,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                             </div>
                     </div>
                 </div>
-                <div class="absolute top-4 right-4 left-4 opacity-20 z-0">
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>

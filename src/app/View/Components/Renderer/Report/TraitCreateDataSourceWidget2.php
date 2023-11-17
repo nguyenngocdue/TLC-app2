@@ -50,6 +50,7 @@ trait TraitCreateDataSourceWidget2
                     $dataSets['label'] = $params['data_label'] ?? "undefined";
                     $dataSets['borderWidth'] = $params['borderWidth'] ?? 0;
                     $dataSets['borderColor'] = $params["line_color"] ?? "";
+                    $dataSets['pointStyle'] = $params["pointStyle"] ?? "circle";
                     if($params['chart_type'] === 'bar') {
                         $dataSets['backgroundColor'] = $this->generateColors(count($numbers));
                     }
@@ -57,7 +58,6 @@ trait TraitCreateDataSourceWidget2
                 $array[$key] = (object)$dataSets;
             }
         }
-        // dd($array);
         // get a dataSource to get dimensions
         $indexData =  (array)last($paramMeta);
         $fieldDataLabels = $indexData['field_data_label'];
@@ -75,10 +75,20 @@ trait TraitCreateDataSourceWidget2
         
         $params = [
             //'height' => $max + $scaleMaxX,
-            'scaleMaxX' => $max + $scaleMaxX,
-            'scaleMaxY' => $max + $scaleMaxX,
+            'scaleMaxX' => (int)($max + $scaleMaxX),
+            'scaleMaxY' => (int)($max + $scaleMaxX),
         ];
         $dataManage['dimensions'] = array_merge($dataManage['dimensions'], $params);
+
+        // titleChart
+        $titleChart = $dataManage['dimensions']['titleChart'];
+        // if(isset($dataManage['params'])){
+        //     $paramsManage = $dataManage['params'];
+        //     dump($paramMetaData);
+        // }
+
+
+        // dd($dataManage);
       // Set data for widget
         $result =  [
             'key' => $key.'_'.$dataManage['key_md5'],
@@ -90,6 +100,7 @@ trait TraitCreateDataSourceWidget2
             'title_chart' => '',
             'dimensions' => $dataManage['dimensions'],
             'key_name' => $dataManage['key_name'],
+            'tempScaleMaxX' => $dataManage['dimensions']['scaleMaxX'],
         ];
         // dd($result);
         return $result;

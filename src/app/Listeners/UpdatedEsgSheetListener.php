@@ -5,9 +5,10 @@ namespace App\Listeners;
 use App\Events\UpdatedEsgSheetEvent;
 use App\Models\Esg_sheet;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
 
-class UpdatedEsgSheetListener
+class UpdatedEsgSheetListener implements ShouldQueue
 {
     public function __construct()
     {

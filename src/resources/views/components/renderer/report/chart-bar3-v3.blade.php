@@ -46,7 +46,7 @@
 				},
 				title: {
 					display: {!! json_encode($dimensions['displayTitleX'] ?? true) !!},
-					text: '{!! $dimensions['titleX'] ?? null !!}',
+					text:  {!! json_encode($dimensions['titleX'] ?? true) !!},
 					font: {
 						size: {!! $dimensions['fontSize'] ?? 14 !!}, 
 						weight: 'bold' 
@@ -79,13 +79,14 @@
 			}
 		},
 		y1: {
+			suggestedMax: {!! $dimensions['scaleMaxY1'] ?? 'null' !!},
 			barPercentage: 1,
 			display: true,
 			position: 'right',
 			min: 0, 
-			max: {!! json_encode($dimensions['scale_max_y1'] ?? 100) !!},
+			//max: {!! json_encode($dimensions['scale_max_y1'] ?? 100) !!},
 			ticks: {
-				stepSize: 10,
+				stepSize: {!! $dimensions['stepSizeY1'] ?? 'null' !!},
 				display: {!! json_encode($dimensions['displayTicksY1'] ?? false) !!},
 				callback: function(value, index, values) {
 					return value;
@@ -164,11 +165,17 @@
 					size: {!! json_encode($dimensions['dataLabelsSize'] ?? 14) !!}
 				},
 				rotation:  {!! json_encode($dimensions['dataLabelRotation'] ?? 0) !!},
-				offset: function(context) {
+				offset: function(context, index) {
 					if(context.dataset.type === 'line'){
 						return 0
 					} else{
-						return -45
+						let val = parseInt(context.dataset.data[context.dataIndex]);
+						let l = String(val).length;
+						if (l > 3){
+							let num = {!! json_encode($dimensions['dataLabelOffset']) -15 !!};
+							return num
+						}
+						return {!! json_encode($dimensions['dataLabelOffset'] ?? -100) !!}
 					}
                 },
 				formatter: function(value, context) {

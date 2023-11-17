@@ -32,29 +32,29 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
     }
 
 	private function getTargetEmission($dataSource){
-		// dd($dataSource);
-		foreach ($dataSource as $key => &$items){
+		// dump($dataSource);
+		foreach ($dataSource as  &$items){
+			$valOfYear = (float)str_replace(',', '', $items->year);
 			if(isset($items->scope_name) && $items->scope_name === 'Scope 1'){
-				$items->year = number_format(($items->year/100)*70,2);
+				$items->year = (float)str_replace(',', '',number_format(($valOfYear/100)*70,2));
 			}
 			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 2' && $items->ghg_tmpl_id === 5){
-				$items->year = number_format(($items->year/100)*65,2);
+				$items->year = (float)str_replace(',', '',number_format(($valOfYear/100)*65,2));
 			}
 			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 3' && $items->ghg_tmpl_id === 6){
-				$items->year = number_format(($items->year/100)*80,2);
+				$items->year = (float)str_replace(',', '',number_format(($valOfYear/100)*80,2));
 			}
 			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 3'){
-				// dd($items);
-				$items->year = number_format(($items->year/100)*70,2);
+				$items->year = (float)str_replace(',', '',number_format(($valOfYear/100)*70,2));
 			}
 		}
-		// dd($dataSource);
 		return $dataSource;
 	}
 
 	public function getDataSource($params)
 	{
 		$yearParams = $params;
+		$yearParams['year'] = $yearParams['year'] - 1;
 		unset($yearParams['only_month']);
 		unset($yearParams['quarter_time']);
 		$primaryData = (new Ghg_sheet_dataSource())->getDataSource($yearParams);
@@ -63,12 +63,12 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
     {
-		// dd($params);
 		$emissionAllYearData = Report::convertToType($dataSource);
+		$currentDataSource = (new Ghg_sheet_dataSource())->getDataSource($params);
 		$targetEmissionData = Report::convertToType($this->getTargetEmission($dataSource)->toArray());
-		$currentPeriodData =  Report::convertToType((new Ghg_sheet_dataSource())->getDataSource($params)->toArray());
+		$currentPeriodData =  Report::convertToType($currentDataSource);
 		// dd($emissionAllYearData, $targetEmissionData,$currentPeriodData, $params );
-	
+		
 		$groupData = [
 			'ghgrp_basin_production_and_emissions_all_year' =>[
 				'meta_bar' => $emissionAllYearData],
@@ -83,16 +83,28 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 		$output = [];
 		$params['report_name'] = 'document-ghg_sheet_040';
 		$dataOfManageWidget = $this->makeParamsInManageWidgets($params);
-		// dd($dataOfManageWidget);
-		foreach ($groupData as $keyData => $data)
+		$arrayMax  = []; // to set width of X Axis
+		$tempScaleMaxX = 0;
+		foreach ($groupData as $keyData => $data) {
 			foreach($dataOfManageWidget as $keyInManage => $dataManage){
 				if($keyData === $keyInManage){
 					$dataWidgets = $this->makeDataWidget($keyData, $data, $dataManage, $params);
 					$output[$keyData] = $dataWidgets;
+					if($dataWidgets['tempScaleMaxX'] > $tempScaleMaxX){
+						$tempScaleMaxX = $dataWidgets['tempScaleMaxX'];
+					}
 				}
+			}
+			$arrayMax[$keyData] = $tempScaleMaxX;
 		}
+		
+		// set max scale for dimension in data widgets
+		foreach ($output as $keyData => &$data){
+			$data['dimensions']['scaleMaxX'] = $arrayMax[$keyData];
+			$data['dimensions']['scaleMaxY'] = $arrayMax[$keyData];
+		}
+
         $result['dataWidgets'] = $output;
-		// dump($result);
         return $result;
     }
 

@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use App\Http\Controllers\Workflow\LibApps;
+use BadMethodCallException;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -15,7 +16,11 @@ class CurrentRoute
 
     public static function getTypeSingular()
     {
-        $type = Route::current()->getController()->getType();
+        try {
+            $type = Route::current()->getController()->getType();
+        } catch (BadMethodCallException $e) {
+            return "Unknown getTypeSingular, please define \"getType\".";
+        }
         return Str::singular($type);
     }
 
