@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class RequestSignOffListener
+class RequestSignOffListener implements ShouldQueue
 {
     /**
      * Create the event listener.
