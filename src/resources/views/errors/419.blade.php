@@ -1,5 +1,14 @@
-@extends('errors::minimal')
+@php
+$minutes = env("SESSION_LIFETIME");  
+$message = "There is no activity in $minutes minutes.";
+$message .= "<br/>For security purposes, you need to login again.";
+$message .= "<br/>Redirecting to the Login Page...";
+@endphp
 
-@section('title', __('Page Expired'))
-@section('code', '419')
-@section('message', __('Page Expired'))
+<x-feedback.result
+    type="warning"
+    title="Session Expires"    
+    message="{!! $message !!}"
+></x-feedback.result>
+
+<script>setTimeout(() => {window.location.href = "/";}, 100);</script>
