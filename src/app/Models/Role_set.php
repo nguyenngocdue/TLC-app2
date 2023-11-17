@@ -14,13 +14,13 @@ class Role_set extends ModelsRoleSet
     //     return $this->name;
     // }
 
-    // public function toSearchableArray()
-    // {
-    //     return [
-    //         'id' => $this->id,
-    //         'name' => $this->name,
-    //     ];
-    // }
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
     public static function getTableName()
     {
         return (new static())->getTable();
