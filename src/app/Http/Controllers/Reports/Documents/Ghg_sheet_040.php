@@ -63,12 +63,19 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
     {
-		$emissionAllYearData = Report::convertToType($dataSource);
 		$currentDataSource = (new Ghg_sheet_dataSource())->getDataSource($params);
 		$targetEmissionData = Report::convertToType($this->getTargetEmission($dataSource)->toArray());
 		$currentPeriodData =  Report::convertToType($currentDataSource);
 		// dd($emissionAllYearData, $targetEmissionData,$currentPeriodData, $params );
 		
+		// year is a fix value for left chart
+		$newParams = $params;
+		unset($newParams['only_month']);
+		unset($newParams['quarter_time']);
+		unset($newParams['half_year']);
+		$emissionAllYearData =(new Ghg_sheet_dataSource())->getDataSource($newParams);
+		$emissionAllYearData =  Report::convertToType($emissionAllYearData);
+
 		$groupData = [
 			'ghgrp_basin_production_and_emissions_all_year' =>[
 				'meta_bar' => $emissionAllYearData],
@@ -104,7 +111,16 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 			$data['dimensions']['scaleMaxY'] = $arrayMax[$keyData];
 		}
 
+		// Table of contents
+		// $tableOfContent = [
+		// 	'co2_emission_report' => 'Co2 Emission Report',
+		// 	'methodology' => 'Methodology',
+
+		// ]
+
         $result['dataWidgets'] = $output;
+
+
         return $result;
     }
 

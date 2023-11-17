@@ -7,7 +7,7 @@
         "params": "{\"label_meta_data_1\":\"pru_date\",\"meta_data_1\":\"man_power_on_day\",\"prefix_unit_text\":\"Man Power (AVG)\"\r\n}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"scaleMaxX\": 1000,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 1,\r\n\"displayTitleY\": 1,\r\n\"titleY\": \"Man Power (AVG)\",\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Man Power (AVG)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"scaleMaxX\": 1000,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 1,\r\n\"displayTitleY\": 1,\r\n\"titleY\": \"Man Power (AVG)\",\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Man Power (AVG)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
     },
     "02_process_analysis_prod_routing_link_total_uom": {
         "name": "02_process_analysis_prod_routing_link_total_uom",
@@ -17,7 +17,7 @@
         "params": "{\"label_meta_data_1\": \"pru_date\",\"meta_data_1\":\"total_uom_on_day\",\"index_unit\":\"uom_name\",\"suffix_unit_text\":\"\/Day (AVG)\"}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"scaleMaxX\": 1000,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Efficiency\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"scaleMaxX\": 1000,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Efficiency\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
     },
     "03_process_analysis_prod_routing_link_min": {
         "name": "03_process_analysis_prod_routing_link_min",
@@ -27,7 +27,7 @@
         "params": "{\"label_meta_data_1\":\"pru_date\",\"meta_data_1\":\"min_on_day\",\"prefix_unit_text\":\"min\",\"suffix_unit_text\":\"\/Day (AVG)\"}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"scaleMaxX\": 1000,\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Time Efficiency\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"scaleMaxX\": 1000,\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Time Efficiency\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
     },
     "04_process_analysis_prod_routing_link_min_on_set": {
         "name": "04_process_analysis_prod_routing_link_min_on_set",
@@ -37,7 +37,7 @@
         "params": "{\"label_meta_data_1\":\"pru_date\",\"meta_data_1\":\"min_on_set_on_day\",\"index_unit\":\"uom_name\",\"prefix_unit_text\":\"min\/\",\"suffix_unit_text\":\" (AVG)\"}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"displayTitleY\": 1,\r\n\"titleY\": \"min\/Day (AVG)\",\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"scaleMaxX\": 1000,\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 0,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Productivity\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"displayTitleY\": 1,\r\n\"titleY\": \"min\/Day (AVG)\",\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"scaleMaxX\": 1000,\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Productivity\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
     },
     "benchmark_avg_man_power": {
         "name": "benchmark_avg_man_power",

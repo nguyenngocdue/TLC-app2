@@ -207,19 +207,9 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 		
 		$dataSource =  Report::convertToType($dataSource);
 		$dataSource = DocumentReport::groupMonths($dataSource);
-		$months = reset($dataSource)['months'];
-		$monthlyTotals = ['sum_total_months' => 0.0] + array_fill_keys(array_keys($months), 0.0);
-		foreach ($dataSource as $key => &$item) {
-			$monthlyTotals['sum_total_months'] += $item['total_months'];
-			foreach ($item['months'] as $month => $value) {
-				$monthlyTotals[(string)$month] += (int)$value;
-				unset($item[$month]);
-			}
-			$item['month_ghg_sheet_id'] = StringReport::parseKeyValueString($item['month_ghg_sheet_id']);
-		}
+
 		$groupByScope = Report::groupArrayByKey($dataSource, 'scope_id');
 		$groupByScope = ['scopes' => array_map(fn ($item) => Report::groupArrayByKey($item, 'ghgcate_id'), $groupByScope)];
-		$groupByScope['total_emission'] = $monthlyTotals;
 		$groupByScope['totalEmissionMetricType'] = array_sum($totalMonthsOfMetricType);
 		$groupByScope['totalEmissionMetricTypeEachMonth'] = $totalValueEachMonth;
 

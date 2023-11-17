@@ -31,7 +31,7 @@
     $rowSpanScope1 = $complexSettingTable[335]['scope_rowspan_lv1']+1;
     $rowSpanScope2 = $complexSettingTable[336]['scope_rowspan_lv1'];
     $rowSpanScope3 = $complexSettingTable[337]['scope_rowspan_lv1'];
-	$months = $tableDataSource['total_emission'];
+	$months = array_keys($tableDataSource['totalEmissionMetricTypeEachMonth']);
 @endphp
 
 
