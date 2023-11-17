@@ -15,8 +15,9 @@ class QaqcWirs extends MatrixForReportParent
     function __construct(
         private $prodRoutingId = 49,
         private $subProjectId = 107,
+        private $dateToCompare = null,
     ) {
-        parent::__construct("qaqc_wirs");
+        parent::__construct("qaqc_wirs", $this->dateToCompare);
         // echo ($prodRoutingId . " - " . $subProjectId);
     }
 

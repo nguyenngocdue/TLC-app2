@@ -19,8 +19,9 @@ class ProdSequences extends MatrixForReportParent
     function __construct(
         private $prodRoutingId = 49,
         private $subProjectId = 107,
+        private $dateToCompare = null,
     ) {
-        parent::__construct("prod_sequences");
+        parent::__construct("prod_sequences", $dateToCompare);
         // echo ($prodRoutingId . " - " . $subProjectId);
     }
 
