@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\WorkingShiftService;
-use App\Listeners\UpdatedSubProjectListener;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\Timer;
 use Illuminate\Http\Request;
@@ -24,7 +23,6 @@ class WelcomeFortuneController extends Controller
     {
         if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
         Timer::getTimeElapseFromLastAccess();
-        UpdatedSubProjectListener::reloadExternalInspectors(112);
 
         echo Timer::getTimeElapseFromLastAccess();;
         return "";

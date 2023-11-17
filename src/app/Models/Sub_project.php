@@ -21,7 +21,7 @@ class Sub_project extends ModelExtended
 
         "getProjectClientsOfSubProject()" => ['getCheckedByField', User::class],
         "getExternalInspectorsOfSubProject()" => ['getCheckedByField', User::class],
-        "getApartmentOwnersOfSubProject()" => ['getCheckedByField', User::class],
+        // "getApartmentOwnersOfSubProject()" => ['getCheckedByField', User::class],
     ];
 
     public function getProjectMembers()
@@ -46,11 +46,11 @@ class Sub_project extends ModelExtended
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function getApartmentOwnersOfSubProject()
-    {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
+    // public function getApartmentOwnersOfSubProject()
+    // {
+    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
 
     public function getProdOrders()
     {

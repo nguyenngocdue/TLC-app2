@@ -90,19 +90,6 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getProjectMembers()": {
-        "name": "_getProjectMembers()",
-        "column_name": "getProjectMembers()",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
     "_lod_id": {
         "name": "_lod_id",
         "column_name": "lod_id",
@@ -194,19 +181,6 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getProjectClientsOfSubProject()": {
-        "name": "_getProjectClientsOfSubProject()",
-        "column_name": "getProjectClientsOfSubProject()",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
     "_getExternalInspectorsOfSubProject()": {
         "name": "_getExternalInspectorsOfSubProject()",
         "column_name": "getExternalInspectorsOfSubProject()",
@@ -220,9 +194,22 @@
         "control_extra": "This data is aggregated from QAQC Inspection Check Sheet",
         "textarea_rows": ""
     },
-    "_getApartmentOwnersOfSubProject()": {
-        "name": "_getApartmentOwnersOfSubProject()",
-        "column_name": "getApartmentOwnersOfSubProject()",
+    "_getProjectMembers()": {
+        "name": "_getProjectMembers()",
+        "column_name": "getProjectMembers()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getProjectClientsOfSubProject()": {
+        "name": "_getProjectClientsOfSubProject()",
+        "column_name": "getProjectClientsOfSubProject()",
         "label": "",
         "validation": "",
         "validation_regex": "",

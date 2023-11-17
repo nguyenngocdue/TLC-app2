@@ -223,6 +223,38 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_getSubProjectsOfExternalInspector()": {
+        "name": "_getSubProjectsOfExternalInspector()",
+        "relationship": "getCheckedByField",
+        "control_name": "getSubProjectsOfExternalInspector()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_getQaqcInspTmplsOfExternalInspector()": {
+        "name": "_getQaqcInspTmplsOfExternalInspector()",
+        "relationship": "getCheckedByField",
+        "control_name": "getQaqcInspTmplsOfExternalInspector()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_getPosts": {
         "name": "_getPosts",
         "relationship": "hasMany",
