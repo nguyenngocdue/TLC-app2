@@ -81,19 +81,6 @@ services:
     command: mysqld --log-bin-trust-function-creators=1
     networks:
       - laravel302
-  # websockets:
-  #   build:
-  #     context: ./websockets
-  #     dockerfile: Dockerfile
-  #   container_name: laravel302_websockets
-  #   restart: unless-stopped
-  #   working_dir: /var/www/app
-  #   volumes:
-  #     - ../src:/var/www/app
-  #   ports:
-  #     - "6001:6001"
-  #   networks:
-  #     - laravel302
   php:
     build:
       context: .
@@ -107,5 +94,16 @@ services:
       - ../.docker_configs/certs:/etc/nginx/certs
     ports:
       - "39002:9000"
+    networks:
+      - laravel302
+  meilisearch:
+    image: getmeili/meilisearch:latest # You can specify a particular version instead of `latest`
+    container_name: laravel302_meilisearch
+    environment:
+      MEILI_MASTER_KEY: "I_LOVE_MEILISEARCH" # Replace with your desired master key
+    volumes:
+      - ../meilisearch_data:/data.ms
+    ports:
+      - "37702:7700" # Change ports if needed
     networks:
       - laravel302
