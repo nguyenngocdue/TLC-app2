@@ -186,8 +186,9 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         ];
     }
 
-    protected function getTableColumns($params, $dataSource)
+    protected function getTableColumns($dataSource, $params)
     {
+        // dd($params);
         return [
             [
                 'title' => 'Sub Project',
@@ -206,14 +207,14 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                 'footer' => 'agg_sum',
             ],
             [
-                'title' => $params['previous_month'] . '<br/>QC Acceptance (%)',
+                'title' => (isset($params['previous_month']) ? $params['previous_month']: "") . '<br/>QC Acceptance (%)',
                 'dataIndex' => 'previous_acceptance_percent',
                 'align' => 'right',
                 'width' => 180,
                 'footer' => 'agg_sum',
             ],
             [
-                'title' => $params['latest_month'] . '<br/>QC Acceptance (%)',
+                'title' => (isset($params['latest_month']) ? $params['latest_month']: "") . '<br/>QC Acceptance (%)',
                 'dataIndex' => 'latest_acceptance_percent',
                 'align' => 'right',
                 'width' => 180,

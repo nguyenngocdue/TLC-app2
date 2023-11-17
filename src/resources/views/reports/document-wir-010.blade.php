@@ -25,7 +25,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                         name="children_mode" 
                         routeName="{{$routeName}}"
                         :allowClear="false"
-                        :dataSource="['filter_by_year' => 'Filter by Year','filter_by_month' => 'Filter by Month']" 
+                        :dataSource="['filter_by_year' => 'Filter by Week','filter_by_month' => 'Filter by Month']" 
                         typeReport='{{$typeReport}}'
                         entity='{{$entity}}'
                         modeOption='{{$mode}}'
