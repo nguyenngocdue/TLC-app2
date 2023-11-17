@@ -79,6 +79,16 @@ trait TraitCreateDataSourceWidget2
             'scaleMaxY' => (int)($max + $scaleMaxX),
         ];
         $dataManage['dimensions'] = array_merge($dataManage['dimensions'], $params);
+
+        // titleChart
+        $titleChart = $dataManage['dimensions']['titleChart'];
+        // if(isset($dataManage['params'])){
+        //     $paramsManage = $dataManage['params'];
+        //     dump($paramMetaData);
+        // }
+
+
+        // dd($dataManage);
       // Set data for widget
         $result =  [
             'key' => $key.'_'.$dataManage['key_md5'],

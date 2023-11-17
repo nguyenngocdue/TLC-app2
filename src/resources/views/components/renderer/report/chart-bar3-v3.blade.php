@@ -46,7 +46,7 @@
 				},
 				title: {
 					display: {!! json_encode($dimensions['displayTitleX'] ?? true) !!},
-					text: '{!! $dimensions['titleX'] ?? null !!}',
+					text:  {!! json_encode($dimensions['titleX'] ?? true) !!},
 					font: {
 						size: {!! $dimensions['fontSize'] ?? 14 !!}, 
 						weight: 'bold' 

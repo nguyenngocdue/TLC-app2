@@ -26,7 +26,7 @@
     "document-ghg_sheet_030": {
         "name": "document-ghg_sheet_030",
         "package_tab": "report",
-        "package": "project_management",
+        "package": "compliance",
         "breadcrumb-group": null,
         "top_title": null,
         "title": "CO2 Emission Comparison Report"
@@ -34,8 +34,8 @@
     "document-ghg_sheet_040": {
         "name": "document-ghg_sheet_040",
         "package_tab": "report",
-        "package": "project_management",
-        "breadcrumb-group": "production",
+        "package": "compliance",
+        "breadcrumb-group": null,
         "top_title": "GHGRP Basin Production & Emission",
         "title": "GHGRP Basin Production & Emission",
         "hidden": "true"
@@ -43,8 +43,8 @@
     "document-ghg_sheet_050": {
         "name": "document-ghg_sheet_050",
         "package_tab": "report",
-        "package": "project_management",
-        "breadcrumb-group": "production",
+        "package": "compliance",
+        "breadcrumb-group": null,
         "top_title": "ECO Report Detail",
         "title": "ECO Report Detail",
         "hidden": "true"

@@ -54,21 +54,21 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         {{-- PAGE 1 --}}
-        <div class="w-[1400px] min-h-[790px] flex m-auto items-center bg-white box-border p-8 relative"> 
+        <div class="{{$layout}} flex m-auto items-center bg-white box-border relative"> 
                 <img src="{{ asset('images/report/Green and white Sustainability modern presentation-1.png') }}" class="w-full h-full object-cover"/>
         </div>
         {{-- END --}}
         <x-renderer.page-break />
 
         {{-- PAGE 2 --}}
-        <div class="w-[1400px] min-h-[790px] flex m-auto items-center bg-white box-border p-8 relative overflow-hidden"> 
+        <div class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
                 <img src="{{ asset('images/report/Green and white Sustainability modern presentation-2.png') }}" class="w-full h-full object-cover"/>
         </div>
         {{-- END --}}
         <x-renderer.page-break />
 
         {{-- PAGE 3 --}}
-        <div class="w-[1400px] min-h-[1260px] flex m-auto items-center bg-white box-border p-8 relative"> 
+        <div class="{{$layout}} flex m-auto items-center bg-white box-border relative"> 
             <div class='flex justify-center m-auto'> 
                 <div class="z-10">
                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold pt-10'>Company's carbon footprint in {{$text}}</x-renderer.heading>
@@ -110,10 +110,10 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
         {{-- PAGE 4: Emission source category chart  --}}
-        <div class="w-[1400px] min-h-[1260px] flex m-auto items-center bg-white box-border p-8 relative"> 
-            <div class='flex justify-center'> 
+        <div class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
+            <div class='flex justify-center m-auto'> 
                 <div class="grid grid-rows-1">
-                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Emission source category chart</x-renderer.heading>
+                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold '>Emission source category chart</x-renderer.heading>
                     <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
                         <div class="w-full flex px-4 z-10">
                             <div class="w-1/2 px-4">
@@ -121,8 +121,8 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                     :dataSource="$pivotChart1" 
                                     showValue={{true}} 
                                     showDataLabel={{false}}
-                                    width="600"
-                                    height="500"
+                                    width="400"
+                                    height="400"
                                 ></x-renderer.report.pivot-chart>
                             </div>
                             <div class="m-auto">
@@ -170,8 +170,8 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
         {{-- PAGE 5: Emission source category chart --}}
-        <div class="w-[1400px] min-h-[1200px] flex m-auto items-center bg-white box-border p-8 relative"> 
-            <div class='flex justify-center'> 
+        <div class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
+            <div class='flex justify-center m-auto'> 
                 <div class="grid grid-rows-1 z-20">
                     <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Emission source category chart</x-renderer.heading>
                     <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
@@ -181,7 +181,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                         key="carbon_footprint_2" 
                                         :dataSource="$pivotChart2"
                                         width="1200"
-                                        height="500"
+                                        height="400"
                                     />
                             </div>
                             <div class="m-auto ">
@@ -210,7 +210,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
         
         {{-- PAGE 6 :Data Summary Report --}}
-        <div class=" w-[1400px] min-h-[1000px] m-auto flex items-center bg-white box-border p-4 relative"> 
+        <div class=" {{$layout}} m-auto flex items-center bg-white box-border p-4 relative"> 
             <div class='flex justify-center m-auto'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
                         <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Summary Report</x-renderer.heading>
@@ -227,10 +227,10 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
          {{-- PAGE 7: GHGRP Basin Production & Emissions --}}
-        <div class=" w-min-[1400px] min-h-[1000px] flex items-center bg-white box-border p-8 relative"> 
+        <div class=" w-[1450px] min-h-[790px] flex m-auto items-center bg-white box-border relative pb-2"> 
             <div class='flex justify-center m-auto'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
-                        <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>GHGRP Basin Production & Emissions</x-renderer.heading>
+                        <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold'>GHGRP Basin Production & Emissions</x-renderer.heading>
                             @php
                                 $tableDataSource = $tableDataSource->toArray();
                             @endphp
@@ -270,7 +270,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
 
         {{-- PAGE 8: Data Detail Report  --}}
-        <div class=" w-min-[1400px] flex items-center bg-white box-border p-8 relative"> 
+        <div class=" w-min-[1400px] flex items-center bg-white box-border relative"> 
             <div class='flex justify-center m-auto'> 
                 <div class="pt-20 z-10">
                     <div class="grid grid-rows-1">

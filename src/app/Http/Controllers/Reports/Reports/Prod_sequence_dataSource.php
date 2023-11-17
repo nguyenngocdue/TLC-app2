@@ -24,6 +24,7 @@ class Prod_sequence_dataSource extends Controller
     {
         $valOfParams = $this->generateValuesFromParamsReport($params);
 
+        // dd($valOfParams);
         if(isset($valOfParams['picker_date']) && is_string($valOfParams['picker_date'])){
             $strDate = DateReport::defaultPickerDate();
             $pickerDate = DateReport::separateStrPickerDate($strDate);
@@ -48,6 +49,12 @@ class Prod_sequence_dataSource extends Controller
                     ps.status AS prod_sequence_status,
                     SUBSTR(pru.date, 1,7) AS month_prod_run,
                     pru.date AS date_prod_run,
+                    '{$valOfParams["picker_date"]["start"]}' AS from_date,
+                    '{$valOfParams["picker_date"]["end"]}' AS to_date,
+
+                    #MIN(pru.date) AS from_date,
+                    #MAX(pru.date) AS to_date,
+
                     prde.order_no AS order_no,
                     #pru.start,
                     #pru.end,

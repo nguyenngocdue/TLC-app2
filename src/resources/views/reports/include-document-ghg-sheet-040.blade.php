@@ -10,7 +10,7 @@
                     <x-renderer.report.chart-bar3v3 :dataSource="$ghgrp_1"/>
                 </div>
                 <div class=" col-span-6 flex flex-col justify-self-start">
-                    <x-renderer.heading level=4 class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Based on the data up to the selected period of time.</x-renderer.heading>
+                    <x-renderer.heading level=4 class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>Based on the data up to the selected period of time</x-renderer.heading>
                     <x-renderer.report.chart-bar3v3 :dataSource="$ghgrp_2"/>
                 </div>
             </div>
