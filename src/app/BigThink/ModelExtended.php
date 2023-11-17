@@ -10,14 +10,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-// use Laravel\Scout\Searchable;
+use Laravel\Scout\Searchable;
 
 abstract class ModelExtended extends Model
 {
-    // use Searchable;
+    use Searchable;
     use Notifiable;
     use HasFactory;
-    // use TraitOptimisticLocking;
 
     use HasStatus;
     use HasCheckbox;
