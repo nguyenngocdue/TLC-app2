@@ -10,11 +10,11 @@ class Permission extends ModelsPermission
 {
     use Searchable;
 
-    // public function toSearchableArray()
-    // {
-    //     return [
-    //         'id' => $this->id,
-    //         'name' => $this->name,
-    //     ];
-    // }
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
 }
