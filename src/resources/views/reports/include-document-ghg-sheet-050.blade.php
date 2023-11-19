@@ -151,14 +151,14 @@
 														$nameMetricType2 = $childrenMetric[$i]['ghg_metric_type_2_name'];
 													@endphp
 													<td class="p-2">
-														{!! $idMetricType0 !== '0' ? "<a href='" . route('ghg_metric_types.edit', $idMetricType0 ?? 0) . "'>" . $nameMetricType0 . "</a>" : '' !!} 
+														{!! (float)$idMetricType0 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType0 ?? 0) . "'>" . $nameMetricType0 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 													</td>
 													
 													<td class="p-2">
-														{!! $idMetricType1 !== '0' ? "<a href='" . route('ghg_metric_types.edit', $idMetricType1 ?? 0) . "'>" . $nameMetricType1 . "</a>" : '' !!} 
+														{!! (float)$idMetricType1 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType1 ?? 0) . "'>" . $nameMetricType1 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 													</td>
 													<td class="p-2">
-														{!! $idMetricType2 !== '0' ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : '' !!} 
+														{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 													</td>
 													<td class="p-2 font-bold text-right ">
 															{!! (float)$childrenMetric[$i]['total_months'] <= 0 ? "<i class='fa-light fa-minus'></i>" : $childrenMetric[$i]['total_months'] !!}

@@ -34,7 +34,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 {{-- @dd($tableDataSource) --}}
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout2')
+    {{-- @include('components.reports.show-layout2') --}}
 </div>
 <x-reports.table-of-contents-report routeName="$routeName" :dataSource="$tableOfContents"/>
 @php
@@ -293,19 +293,19 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
         {{-- PAGE 8: Data Detail Report  --}}
         <div id="pagedata_detail_report" class=" w-min-[1400px] min-h-[790px] flex items-center bg-white box-border relative px-8">
-            <div class="z-10">
+            <div class="z-5">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
                 <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report</x-renderer.heading>
             </div>
             <div class='flex justify-center m-auto pt-20 pb-8'> 
-                <div class="pt-20 z-10">
+                <div class="pt-20 z-5">
                     <div class="grid grid-rows-1">
                             <div class=" border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
                                 @include('reports.include-document-ghg-sheet-050', ['tableDataSource' => $tableDataSource['document_ghg_sheet_050']])
                             </div>
                     </div>
                 </div>
-                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0 hidden">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
