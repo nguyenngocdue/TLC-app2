@@ -249,7 +249,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$report040 = new Ghg_sheet_040();
 		$dataSource040 = $report040->getDataSource($params);
 		$dataSource040 = $report040->changeDataSource($dataSource040, $params);
-		$data->put('document_ghg_sheet_040', $dataSource040);
+		$data->put('document_ghg_sheet_040', collect($dataSource040));
 
 
 		#Table of contents
@@ -263,7 +263,6 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			'ghgrp_basin_production_emissions' => "GHGRP Basin Production & Emissions",
 			'data_detail_report' => "Data Detail Report",
 		];
-
 		$data->put('table_of_contents', $tableOfContent);
 		return collect($data);
 	}

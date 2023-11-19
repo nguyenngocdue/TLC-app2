@@ -45,10 +45,11 @@
 		<th class="{{$class2}} border-l">Metric 1</th>
 		<th class="{{$class2}} border-l">Metric 2</th>
 		<th class="{{$class2}} border-l">Total </br>(tCO2e)</th>
+		{{-- @dd($months) --}}
 		@foreach($months as $key => $value)
 			@if(is_numeric($key))
 				@php
-					$strMonth = App\Utils\Support\DateReport::getMonthAbbreviation2((int)$key);
+					$strMonth = App\Utils\Support\DateReport::getMonthAbbreviation2((int)$value);
 				@endphp
 				<th class="p-2 font-bold bg-gray-100 border-l">{{$strMonth}}</th>
 			@endif
@@ -103,13 +104,13 @@
 												$nameMetricType1 = $childrenMetric[0]['ghg_metric_type_2_name'];
 												$nameMetricType2 = $childrenMetric[0]['ghg_metric_type_2_name'];
 											@endphp
-											{!! $idMetricType0 !== '0' ? "<a href='" . route('ghg_metric_types.edit', $idMetricType0 ?? 0) . "'>" . $nameMetricType0 . "</a>" : '' !!} 
+											{!! (float)$idMetricType0 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType0 ?? 0) . "'>" . $nameMetricType0 . "</a>" : '' !!} 
 										</td>
 										<td class="p-2">
-											{!! $idMetricType1 !== '0' ? "<a href='" . route('ghg_metric_types.edit', $idMetricType1 ?? 0) . "'>" . $nameMetricType1 . "</a>" : '' !!} 
+											{!! (float)$idMetricType1  > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType1 ?? 0) . "'>" . $nameMetricType1 . "</a>" : '' !!} 
 										</td>
 										<td class="p-2">
-											{!! $idMetricType2 !== '0' ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : '' !!} 
+											{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : '' !!} 
 										</td>
 										<td class="p-2 font-bold text-right">
 											{!! (float)$childrenMetric[0]['total_months'] <= 0 ? "<i class='fa-light fa-minus'></i>" : $childrenMetric[0]['total_months'] !!}

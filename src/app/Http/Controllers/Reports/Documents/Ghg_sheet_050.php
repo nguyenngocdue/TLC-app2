@@ -216,7 +216,7 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 
 		$data['tableDataSource'] = $groupByScope;
 		$data['tableSetting'] = $this->createInfoToRenderTable($groupByScope);
-		// dd($data);
+		// dd($data);	
 		return collect($data);
 	}
 
