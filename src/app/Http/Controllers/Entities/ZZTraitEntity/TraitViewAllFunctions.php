@@ -42,7 +42,8 @@ trait TraitViewAllFunctions
         $viewAllMode = $settings[$type][Constant::VIEW_ALL]['view_all_mode'] ?? null;
         return [$viewAllMode, $filterViewAllCalendar, $viewAllCalendarShowAllChildren];
     }
-    private function getUserSettingsViewOrgChart(){
+    private function getUserSettingsViewOrgChart()
+    {
         $settings = CurrentUser::getSettings();
         return $settings[Constant::VIEW_ORG_CHART]['show_options'] ?? [];
     }
@@ -79,16 +80,14 @@ trait TraitViewAllFunctions
         $propsFilters = $this->advanceFilter();
         $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);
         $model = $this->typeModel;
-        $search = request('search');
         $instance = App::make($model);
         $eloquentParams = $model::$eloquentParams;
         $eagerLoadParams = $this->getEagerLoadParams($eloquentParams);
-        $relation = $instance->search($search);
         if (!CurrentUser::isAdmin()) {
             $isUseTree = $this->isUseTree($this->type);
             if ($isUseTree) {
                 $ids = $this->getListOwnerIds(auth()->user());
-                $result = $relation
+                $result = $instance
                     ->query(function ($q) use ($ids, $advanceFilters, $propsFilters, $eagerLoadParams, $trash) {
                         if ($trash) {
                             $q->onlyTrashed();
@@ -102,7 +101,7 @@ trait TraitViewAllFunctions
                 return $result;
             }
         }
-        $result = $relation
+        $result = $instance
             ->query(function ($q) use ($advanceFilters, $propsFilters, $eagerLoadParams, $trash) {
                 if ($trash) {
                     $q->onlyTrashed();

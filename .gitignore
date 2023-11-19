@@ -25,9 +25,10 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
-mysql/
-redis/
+/mysql/
+/redis/
 /database/
+/meilisearch_data/
 
 #for mac os
 .DS_Store
