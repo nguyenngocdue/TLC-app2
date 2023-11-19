@@ -313,6 +313,28 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         {{-- END --}}
         <x-renderer.page-break />
 
+        {{-- PAGE 9: Data Detail Report on Metric 2 --}}
+        <div id="pagedata_detail_report" class=" w-min-[1400px] min-h-[790px] flex items-center bg-white box-border relative px-8">
+            <div class="z-5">
+                <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report</x-renderer.heading>
+            </div>
+            <div class='flex justify-center m-auto pt-20 pb-8'> 
+                <div class="pt-20 z-5">
+                    <div class="grid grid-rows-1">
+                            <div class=" border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
+                                @include('reports.include-document-ghg-sheet-060', ['tableDataSource' => $tableDataSource['document_ghg_sheet_060']])
+                            </div>
+                    </div>
+                </div>
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0 hidden">
+                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class="w-full h-full object-cover"/>
+                </div>
+            </div>
+        </div>
+        {{-- END --}}
+        <x-renderer.page-break />
+
     </div>
 </div>
 @endsection

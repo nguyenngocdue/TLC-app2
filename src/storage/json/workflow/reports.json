@@ -49,6 +49,15 @@
         "title": "ECO Report Detail",
         "hidden": "true"
     },
+    "document-ghg_sheet_060": {
+        "name": "document-ghg_sheet_060",
+        "package_tab": "report",
+        "package": "compliance",
+        "breadcrumb-group": null,
+        "top_title": "ECO Report Detail - Remove Metric  0 1 2",
+        "title": "ECO Report Detail - Remove Metric  0 1 2",
+        "hidden": "true"
+    },
     "document-prod_sequence_010": {
         "name": "document-prod_sequence_010",
         "package_tab": "report",

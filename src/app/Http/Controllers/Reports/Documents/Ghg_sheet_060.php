@@ -15,14 +15,14 @@ use App\Utils\Support\DocumentReport;
 use App\Utils\Support\Report;
 use App\Utils\Support\StringReport;
 
-class Ghg_sheet_050 extends Report_ParentDocument2Controller
+class Ghg_sheet_060 extends Report_ParentDocument2Controller
 {
 
 	use TraitForwardModeReport;
 	use TraitParamsSettingReport;
 	use TraitGenerateValuesFromParamsReport;
 
-	protected $viewName = 'document-ghg-sheet-050';
+	protected $viewName = 'document-ghg-sheet-060';
 	protected $year = '2023';
 
 	public function getSqlStr($params)
@@ -184,10 +184,11 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 				$dataIndexByMonths = array_column($items, 'months');
 				$lastItem = end($items);
 				$lastItem['months'] = ArrayReport::sumAndMergeItems($dataIndexByMonths);
-				$lastItem['total_months'] = array_sum($dataIndexByMonths);
-				$items = $lastItem;
-			}
+				$lastItem['total_months'] = array_sum(ArrayReport::sumAndMergeItems($dataIndexByMonths));
+				$data[$key] = [$lastItem];
+			} 
 		}
+
 		return $data;
 	}
 
@@ -205,24 +206,25 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 				if(isset($groupByGhgTmplId[$items['ghg_tmpl_id']])){
 					$dataIndex = $groupByGhgTmplId[$items['ghg_tmpl_id']];
 					$dataIndex = self::groupValuesOfMonth($dataIndex);
-					$totalMonths = array_sum(array_column($dataIndex, 'total_months'));
 					$dataOfEachMonths[] = array_column($dataIndex, 'months');
 					
+					$totalMonths = array_sum(array_column($dataIndex, 'total_months'));
 					$totalMonthsOfMetricType[] = $totalMonths;
-
+					
 					$items['children_metrics'] = $dataIndex;
-
+					
 					// group by ghg_metric_type_2_name
 					$groupByMetric0and1 = Report::groupArrayByKey($dataIndex, 'ghg_metric_type_2_name');
 					$groupByMetric0and1 = $this->sumValueInMetricGroup($groupByMetric0and1);
-					$items['group_by_metric0and1'] = array_values($groupByMetric0and1);
+					// dump($groupByMetric0and1);
+					$groupByMetric0and1 = array_values(array_map(fn($item) => last($item), $groupByMetric0and1));
+					$items['group_by_metric0and1'] = $groupByMetric0and1;
 				}
-			}
-		}
+			}	
+		}	
 		$dataOfEachMonths = array_merge(...$dataOfEachMonths);
 		$totalValueEachMonth = $this->sumColumns($dataOfEachMonths);
 			
-		// dd($primaryData);
 		$dataSource = $primaryData;
 		// dd($primaryData);
 		
@@ -237,7 +239,7 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 
 		$data['tableDataSource'] = $groupByScope;
 		$data['tableSetting'] = $this->createInfoToRenderTable($groupByScope);
-		// dd($data);	
+		// dump($data);
 		return collect($data);
 	}
 
@@ -251,6 +253,7 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 
 	public function createInfoToRenderTable($dataSource)
 	{
+
 		if(!isset($dataSource['scopes'])) return [];
 		$info = [];
 		$totalLine = 2;
@@ -260,16 +263,17 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 			foreach ($items as $values){
 				$item = last($values);
 				$ghgcate_id = $item['ghgcate_id'];
-				$countLv2 = Report::countChildrenItemsByKey($values);
+				$countLv2 = Report::countChildrenItemsByKey($values, 'group_by_metric0and1');
 				$info[$k][$ghgcate_id]['scope_rowspan_lv2'] = $countLv2;
 				foreach ($values  as $index => $val){
-					$item = $val['children_metrics'] ?? [];
+					$item = $val['group_by_metric0and1'] ?? [];
 					$ghg_tmpl_id = $val['ghg_tmpl_id'];
 					$info[$k][$ghgcate_id][$ghg_tmpl_id]['scope_rowspan_lv3'] = (count($item) ? count($item) : 1);
 					$info[$k][$ghgcate_id][$ghg_tmpl_id]['index_children_metric'] = $index;
+					// dd($values);
 
-					if(isset($val['children_metrics'])) {
-						$count = count($val['children_metrics']);
+					if(isset($val['group_by_metric0and1'])) {
+						$count = count($val['group_by_metric0and1']);	
 						$num += $count;
 					} else{
 						$emptyChildrenMetrics += 1;
@@ -280,7 +284,6 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 			$totalLine += $num + $emptyChildrenMetrics;
 		}
 		$info['total_line'] = $totalLine;
-		// dump($info, $dataSource);
 		return $info;
 	}
 }

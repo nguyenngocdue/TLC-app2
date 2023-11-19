@@ -237,6 +237,11 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$data = self::addInfo($data);
 		$data->put('document_ghg_sheet_010', $dataSource010);
 
+		//document_ghg_sheet_040
+		$report040 = new Ghg_sheet_040();
+		$dataSource040 = $report040->getDataSource($params);
+		$dataSource040 = $report040->changeDataSource($dataSource040, $params);
+		$data->put('document_ghg_sheet_040', collect($dataSource040));
 
 		//document_ghg_sheet_050
 		$report050 = new Ghg_sheet_050();
@@ -244,12 +249,13 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$dataSource050 = $report050->changeDataSource($dataSource050, $params);
 		$data->put('document_ghg_sheet_050', $dataSource050);
 
+		//document_ghg_sheet_060
+		$report060 = new Ghg_sheet_060();
+		$dataSource060 = $report060->getDataSource($params);
+		$dataSource060 = $report060->changeDataSource($dataSource060, $params);
+		$data->put('document_ghg_sheet_060', $dataSource060);
 
-		//document_ghg_sheet_040
-		$report040 = new Ghg_sheet_040();
-		$dataSource040 = $report040->getDataSource($params);
-		$dataSource040 = $report040->changeDataSource($dataSource040, $params);
-		$data->put('document_ghg_sheet_040', collect($dataSource040));
+
 
 
 		#Table of contents

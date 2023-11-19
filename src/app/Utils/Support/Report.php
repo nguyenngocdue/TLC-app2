@@ -364,11 +364,11 @@ class Report
 		return $valuesOfFiled;
 	}
 
-    public static function countChildrenMetrics($data){
+    public static function countChildrenItemsByKey($data , $key="children_metrics"){
         $num = 0;
         foreach ($data as $value){
-            if(isset($value['children_metrics'])) {
-                $num = $num + count($value['children_metrics']); 
+            if(isset($value[$key])) {
+                $num = $num + count($value[$key]); 
             } else{
                 $num += 1;
             }
