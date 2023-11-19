@@ -10,6 +10,7 @@
 $widthCell = 50;
 $class1 = "bg-white dark:border-gray-600 border-r";
 $class2 =" bg-gray-100 px-4 py-3 border-gray-300 ";
+$classTextHeading = "text-[#1a401e] text-4xl font-roboto mt-[-100px] pl-20 text-bold font-semibold";
 
 $titleColName = isset($params['quarter_time']) ? 'QTR'.implode(',',$params['quarter_time']) : 'YTD';
 $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
@@ -18,6 +19,7 @@ $data = $tableDataSource['carbon_footprint'][$year];
 $pivotChart1 = $tableDataSource['pivot_chart_1'];
 $pivotChart2 = $tableDataSource['pivot_chart_2'];
 $info = $tableDataSource['info'];
+$tableOfContents = $tableDataSource['table_of_contents'];
 
 $text = isset($params['half_year']) ? ($params['half_year'] === 'start_half_year' ? 'Jan-Jun/'.$year : 'Jul-Dec/'.$year) 
                                         : $year;
@@ -30,11 +32,11 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
 @endphp
 {{-- @dd($tableDataSource) --}}
-
 <div class="px-4">
     @include('components.reports.shared-parameter')
     @include('components.reports.show-layout2')
 </div>
+<x-reports.table-of-contents-report routeName="$routeName" :dataSource="$tableOfContents"/>
 @php
         $layout = '';
         switch ($optionPrint) {
@@ -54,55 +56,64 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         {{-- PAGE 1 --}}
-        <div class="{{$layout}} flex m-auto items-center bg-white box-border relative"> 
+        <div id="pageco2_emission_report" class="{{$layout}} flex m-auto items-center bg-white box-border relative">
                 <img src="{{ asset('images/report/Green and white Sustainability modern presentation-1.png') }}" class="w-full h-full object-cover"/>
         </div>
         {{-- END --}}
         <x-renderer.page-break />
 
         {{-- PAGE 2 --}}
-        <div class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
-                <img src="{{ asset('images/report/Green and white Sustainability modern presentation-2.png') }}" class="w-full h-full object-cover"/>
+        <div id="pagemethodology" class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
+                <div class="z-10">
+                    <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                    <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Methodology</x-renderer.heading>
+                </div>
+                <div class="absolute top-0 right-0 left-0  z-0">
+                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-2.jpeg') }}" class="w-full h-full object-cover"/>
+                </div>
         </div>
         {{-- END --}}
         <x-renderer.page-break />
 
         {{-- PAGE 3 --}}
-        <div class="{{$layout}} flex m-auto items-center bg-white box-border relative"> 
-            <div class='flex justify-center m-auto'> 
+        
+        <div id="pagecompany_carbon_footprint" class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
                 <div class="z-10">
-                   <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold mt-[-100px]'>Company's carbon footprint in {{$text}}</x-renderer.heading>
-                    <div class="grid grid-rows-1 pt-10 ">
-                        <div class="grid grid-cols-12 gap-28 text-center">
-                            <div class="col-span-6 m-auto relative">
-                                <div class='w-96 h-96 border-2 opacity-80 bg-green-700 p-3 flex justify-between flex-col '>
+                    <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                    <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Company's Carbon Footprint in {{$text}}</x-renderer.heading>
+                </div>
+            <div class='flex justify-center'>
+                <div class="z-10 absolute left-[285px] top-[276px]">
+                            <div class="flex  m-auto">
+                                <div class="relative ">
+                                    <div class='w-[370px] h-[313px] border-2  p-3 flex justify-between flex-col '>
+                                    </div>
+                                    <div class="absolute top-0 right-0 left-0 bottom-0">
+                                        <div class="flex flex-col justify-between items-center h-full p-4">
+                                            <h3 class='text-3xl font-roboto  text-white text-center'>Company Carbon Footprint</h3>
+                                            <h4 class='text-6xl font-roboto  text-white'>{{$data['total_emission']}}</h4>
+                                            <h2 class='text-lg text-white'>tCO2e</h2>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="absolute top-0 right-0 left-0 bottom-0">
-                                    <div class="flex flex-col justify-between h-full p-4">
-                                        <h3 class='text-3xl font-roboto  text-white'>Company Carbon Footprint</h3>
-                                        <h4 class='text-6xl font-roboto  text-white'>{{$data['total_emission']}}</h4>
-                                        <h2 class='text-lg text-white'>tCO2e</h2>
+
+                                <div class="relative ml-[90px]">
+                                    <div class='w-[370px] h-[314px] border-2   flex justify-between flex-col '>
+                                    </div>
+                                    <div class="absolute top-0 right-0 left-0 bottom-0">
+                                        <div class="flex flex-col justify-between items-center h-full p-4">
+                                            <h3 class='text-3xl font-roboto  text-white text-center'>Carbon Footprint per Employee</h3>
+                                            <h4 class='text-6xl font-roboto  text-white'>{{$data['co2_footprint_employee']}}</h4>
+                                            <h2 class='text-lg text-white'>average tCO2e/FTE</h2>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                             <div class="col-span-6 m-auto  relative">
-                                <div class='w-96 h-96 border-2 opacity-80 bg-violet-600 flex justify-between flex-col '>
-                                </div>
-                                <div class="absolute top-0 right-0 left-0 bottom-0">
-                                    <div class="flex flex-col justify-between h-full p-4">
-                                        <h3 class='text-3xl font-roboto  text-white'>Carbon Footprint per Employee</h3>
-                                        <h4 class='text-6xl font-roboto  text-white'>{{$data['co2_footprint_employee']}}</h4>
-                                        <h2 class='text-lg text-white'>average tCO2e/FTE</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="pt-50"></div>
                 
-                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
-                        <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
+                <div class="absolute top-0 right-0 left-0  z-0">
+                        <img src="{{ asset('images/report/Green and white Sustainability modern presentation-4.jpeg') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
         </div>
@@ -110,10 +121,13 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
         {{-- PAGE 4: Emission source category chart  --}}
-        <div class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
+        <div id="pageemission_category_chart" class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
+            <div class="z-10">
+                <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Emission Category Chart</x-renderer.heading>
+            </div>
             <div class='flex justify-center m-auto'> 
                 <div class="grid grid-rows-1">
-                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold mt-[-100px] '>Emission source category chart</x-renderer.heading>
                     <div class=" grid-rows-1 pt-10 flex justify-center flex-col items-center">
                         <div class="w-full flex px-4 z-10">
                             <div class="w-1/2 px-4">
@@ -161,7 +175,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                         </div>
                     </div>
                     <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
-                        <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
+                        <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class="w-full h-full object-cover"/>
                     </div>
                 </div>
             </div>
@@ -170,10 +184,13 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
         {{-- PAGE 5: Emission source category chart --}}
-        <div class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
+        <div id="pageemission_source_category_chart" class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
+            <div class="z-10">
+                <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Emission Source Category Chart</x-renderer.heading>
+            </div>
             <div class='flex justify-center m-auto'> 
                 <div class="grid grid-rows-1 z-20">
-                    <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Emission source category chart</x-renderer.heading>
                     <div class=" grid-rows-1 pt-2 flex justify-center flex-col items-center">
                         <div class="w-full px-4">
                             <div class="">
@@ -202,7 +219,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                     </div>
                 </div>
                 <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
-                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class=" "/>
+                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class=" "/>
                 </div>
         </div>
         {{-- END --}}
@@ -210,27 +227,32 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
         
         {{-- PAGE 6 :Data Summary Report --}}
-        <div class=" {{$layout}} m-auto flex items-center bg-white box-border px-8 pb-8 relative"> 
-            <div class='flex justify-center m-auto'> 
-                    <div class="grid grid-rows-1 z-10 pt-10">
-                        <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Summary Report</x-renderer.heading>
-                            <div class="border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
-                                @include('reports.document-ghg-summary-report-only-table')
-                            </div>
-                    </div>
-                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
-                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
+        <div  id="pagedata_summary_report" class=" w-[1400px] min-h-[790px] m-auto flex items-center bg-white box-border px-8 pb-8 relative">
+            <div class="z-10">
+                <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Summary Report</x-renderer.heading>
+            </div>
+            <div class='flex justify-center m-auto pt-40'> 
+                <div class=" border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
+                    @include('reports.document-ghg-summary-report-only-table')
                 </div>
             </div>
+                <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
+                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class="w-full h-full object-cover"/>
+                </div>
         </div>
         {{-- END --}}
         <x-renderer.page-break />
 
          {{-- PAGE 7: GHGRP Basin Production & Emissions --}}
-        <div class=" w-[1700px] min-h-[790px] flex m-auto items-center bg-white box-border relative pb-8"> 
-            <div class='flex justify-center m-auto'> 
+        <div id="pageghgrp_basin_production_emissions" class=" w-[1700px] min-h-[790px] flex m-auto items-center bg-white box-border relative pb-8"> 
+            <div class="z-10">
+                <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>GHGRP Basin Production & Emissions</x-renderer.heading>
+            </div>
+            
+            <div class='flex justify-center m-auto pt-28'> 
                     <div class="grid grid-rows-1 z-10 pt-10">
-                        <x-renderer.heading level=1 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold bg-white'>GHGRP Basin Production & Emissions</x-renderer.heading>
                             @php
                                 $tableDataSource = $tableDataSource->toArray();
                             @endphp
@@ -261,7 +283,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                             </div>
                     </div>
                 <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
-                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class=" object-cover"/>
+                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class=" object-cover"/>
                 </div>
             </div>
         </div>
@@ -270,18 +292,21 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
 
         {{-- PAGE 8: Data Detail Report  --}}
-        <div class=" w-min-[1400px] flex items-center bg-white box-border relative px-8"> 
-            <div class='flex justify-center m-auto'> 
+        <div id="pagedata_detail_report" class=" w-min-[1400px] min-h-[790px] flex items-center bg-white box-border relative px-8">
+            <div class="z-10">
+                <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report</x-renderer.heading>
+            </div>
+            <div class='flex justify-center m-auto pt-20 pb-8'> 
                 <div class="pt-20 z-10">
                     <div class="grid grid-rows-1">
-                        <x-renderer.heading level=3 xalign='center' class='text-[#1a401e] text-4xl font-roboto font-bold p-2'>Data Detail Report</x-renderer.heading>
                             <div class=" border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
                                 @include('reports.include-document-ghg-sheet-050', ['tableDataSource' => $tableDataSource['document_ghg_sheet_050']])
                             </div>
                     </div>
                 </div>
                 <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
-                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.png') }}" class="w-full h-full object-cover"/>
+                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
         </div>

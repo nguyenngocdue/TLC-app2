@@ -15,7 +15,8 @@ class Header6 extends Component
         private $page = null,
         private $itemsShow = [],
         private $class = "",
-        private $dimensionImg = ""
+        private $classImg = "",
+        private $dimensionImg = "",
     ) {
         //
     }
@@ -32,6 +33,7 @@ class Header6 extends Component
             'page' => $this->page,
             'itemsShow' => $this->itemsShow,
             'class' => $this->class,
+            'classImg' => $this->classImg,
             'dimensionImg' => $this->dimensionImg
         ]);
     }

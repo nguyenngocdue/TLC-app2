@@ -70,6 +70,7 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 		
 		// year is a fix value for left chart
 		$newParams = $params;
+		$newParams['year'] = $newParams['year'] -1;
 		unset($newParams['only_month']);
 		unset($newParams['quarter_time']);
 		unset($newParams['half_year']);
@@ -111,16 +112,7 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 			$data['dimensions']['scaleMaxY'] = $arrayMax[$keyData];
 		}
 
-		// Table of contents
-		// $tableOfContent = [
-		// 	'co2_emission_report' => 'Co2 Emission Report',
-		// 	'methodology' => 'Methodology',
-
-		// ]
-
         $result['dataWidgets'] = $output;
-
-
         return $result;
     }
 

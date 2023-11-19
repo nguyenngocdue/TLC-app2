@@ -35,7 +35,7 @@ $route = $routeName ? route($routeName) : "";
                 @switch($renderer)
                 @case("drop_down")
                 <x-reports.dropdown7 :infoParam="$value" hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />
-                  {{--   @if ($errors->any())
+                    @if ($errors->any())
                             @foreach ($errors->getMessages() as $field => $message)
                                 @if($field === $name && $field !== 'end_date' && $field !== 'end_date')
                                     <span class="text-xs" role="alert">
@@ -43,11 +43,11 @@ $route = $routeName ? route($routeName) : "";
                                     </span>
                                 @endif
                             @endforeach
-                    @endif --}}
+                    @endif
                 @break
                 @case('picker_date')
                 <x-reports.picker-date1 title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} value="{{$date}}" singleDatePicker='{{$singleDatePicker}}' />
-                     {{--  @if ($errors->any())
+                      @if ($errors->any())
                             @foreach ($errors->getMessages() as $field => $message)
                                 @if($field === 'start_date' || $field === 'end_date')
                                  <span class="text-xs" role="alert">
@@ -55,7 +55,7 @@ $route = $routeName ? route($routeName) : "";
                                  </span>
                                 @endif
                             @endforeach
-                    @endif --}}
+                    @endif
                 @break
                 @default
                 @endswitch

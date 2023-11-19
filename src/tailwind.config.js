@@ -75,6 +75,9 @@ module.exports = {
                 'Segoe UI Symbol',
                 'Noto Color Emoji',
             ],
+            roboto:[
+                'Roboto', 'sans-serif'
+            ],
         },
     },
     variants: {

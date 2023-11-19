@@ -250,6 +250,21 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 		$dataSource040 = $report040->getDataSource($params);
 		$dataSource040 = $report040->changeDataSource($dataSource040, $params);
 		$data->put('document_ghg_sheet_040', $dataSource040);
+
+
+		#Table of contents
+		$tableOfContent = [
+			'co2_emission_report' => 'Co2 Emission Report',
+			'methodology' => 'Methodology',
+			'company_carbon_footprint' => "Company's Carbon Footprint by Year",
+			'emission_category_chart' => "Emission Category Chart",
+			'emission_source_category_chart' => "Emission Source Category Chart",
+			'data_summary_report' => "Data Summary Report",
+			'ghgrp_basin_production_emissions' => "GHGRP Basin Production & Emissions",
+			'data_detail_report' => "Data Detail Report",
+		];
+
+		$data->put('table_of_contents', $tableOfContent);
 		return collect($data);
 	}
 
