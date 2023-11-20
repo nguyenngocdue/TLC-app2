@@ -32,50 +32,47 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
     }
 
 	private function getTargetEmission($dataSource){
-		// dump($dataSource);
-		foreach ($dataSource as  &$items){
-			$valOfYear = (float)str_replace(',', '', $items->year);
-			if(isset($items->scope_name) && $items->scope_name === 'Scope 1'){
-				$items->year = (float)str_replace(',', '',number_format(($valOfYear/100)*70,2));
+		$result = [];
+		foreach ($dataSource as  $key => $items){
+			$valOfYear = (float)str_replace(',', '', $items['year']);
+			if(isset($items['scope_name']) && $items['scope_name'] === 'Scope 1'){
+				$items['year'] = (float)str_replace(',', '',number_format(($valOfYear/100)*70,2));
 			}
-			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 2' && $items->ghg_tmpl_id === 5){
-				$items->year = (float)str_replace(',', '',number_format(($valOfYear/100)*65,2));
+			elseif(isset($items['scope_name']) && $items['scope_name'] === 'Scope 2' && $items['ghg_tmpl_id'] === 5){
+				$items['year'] = (float)str_replace(',', '',number_format(($valOfYear/100)*65,2));
 			}
-			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 3' && $items->ghg_tmpl_id === 6){
-				$items->year = (float)str_replace(',', '',number_format(($valOfYear/100)*80,2));
+			elseif(isset($items['scope_name']) && $items['scope_name'] === 'Scope 3' && $items['ghg_tmpl_id'] === 6){
+				$items['year'] = (float)str_replace(',', '',number_format(($valOfYear/100)*80,2));
 			}
-			elseif(isset($items->scope_name) && $items->scope_name === 'Scope 3'){
-				$items->year = (float)str_replace(',', '',number_format(($valOfYear/100)*70,2));
+			elseif(isset($items['scope_name']) && $items['scope_name'] === 'Scope 3'){
+				$items['year'] = (float)str_replace(',', '',number_format(($valOfYear/100)*70,2));
 			}
+			$result[$key] = $items;
 		}
-		return $dataSource;
+		// dd($result);
+		return $result;
 	}
 
 	public function getDataSource($params)
 	{
-		$yearParams = $params;
-		$yearParams['year'] = $yearParams['year'] - 1;
-		unset($yearParams['only_month']);
-		unset($yearParams['quarter_time']);
-		$primaryData = (new Ghg_sheet_dataSource())->getDataSource($yearParams);
-		return collect($primaryData);
-	}
-
-	public function changeDataSource($dataSource, $params)
-    {
-		$currentDataSource = (new Ghg_sheet_dataSource())->getDataSource($params);
-		$targetEmissionData = Report::convertToType($this->getTargetEmission($dataSource)->toArray());
-		$currentPeriodData =  Report::convertToType($currentDataSource);
-		// dd($emissionAllYearData, $targetEmissionData,$currentPeriodData, $params );
-		
-		// year is a fix value for left chart
 		$newParams = $params;
 		$newParams['year'] = $newParams['year'] -1;
 		unset($newParams['only_month']);
 		unset($newParams['quarter_time']);
 		unset($newParams['half_year']);
-		$emissionAllYearData =(new Ghg_sheet_dataSource())->getDataSource($newParams);
-		$emissionAllYearData =  Report::convertToType($emissionAllYearData);
+		$primaryData = (new Ghg_sheet_dataSource())->getDataSource($newParams);
+		return collect($primaryData);
+	}
+
+	public function changeDataSource($dataSource, $params)
+    {
+		// year is a fix value for left chart
+		$emissionAllYearData =  Report::convertToType($dataSource);
+
+		$currentDataSource = (new Ghg_sheet_dataSource())->getDataSource($params);
+		$targetEmissionData = $this->getTargetEmission($emissionAllYearData);
+
+		$currentPeriodData =  Report::convertToType($currentDataSource);
 
 		$groupData = [
 			'ghgrp_basin_production_and_emissions_all_year' =>[

@@ -33,7 +33,7 @@
 	datasets = {!! json_encode($meta['datasets']) !!};
 	scales = {
 		x: {
-				suggestedMax: {!! json_encode($dimensions['scaleMaxX'] ?? null) !!},
+				//suggestedMax: {!! json_encode($dimensions['scaleMaxX'] ?? null) !!},
 				barPercentage: 0.5,
 				stacked: {!! $dimensions['stackX'] ?? 'false' !!},
 				//max: {!! $dimensions['scaleMaxX'] ?? 'null' !!}, 
@@ -43,6 +43,8 @@
 					font: {
 						size:  {!! $dimensions['fontSizeAxisXY'] ?? 14 !!}, 
 					},
+					//maxRotation: {!! $dimensions['maxRotationX'] ?? 45 !!},
+        			//minRotation: {!! $dimensions['minRotationX'] ?? 0 !!},
 				},
 				title: {
 					display: {!! json_encode($dimensions['displayTitleX'] ?? true) !!},
@@ -65,7 +67,8 @@
 					weight: 'bold'
 				},
 				stepSize: {!! $dimensions['stepSizeY'] ?? 'null' !!},
-				//callback: {!! isset($dimensions['legendY']) && $dimensions['legendY'] ? "customXAxisTickCallback"  : 'null' !!}, 
+				//maxRotation: {!! $dimensions['maxRotationY'] ?? 45 !!},
+        		//minRotation: {!! $dimensions['minRotationY'] ?? 0 !!},
 
 			},
 			title: {

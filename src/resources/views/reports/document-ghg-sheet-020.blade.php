@@ -249,7 +249,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
          {{-- PAGE 7: GHGRP Basin Production & Emissions --}}
-        <div id="pageghgrp_basin_production_emissions"  style='page-break-after:always!important'  class=" w-[1700px] min-h-[790px] flex m-auto items-center bg-white box-border relative pb-8"> 
+        <div id="pageghgrp_basin_production_emissions"  style='page-break-after:always!important'  class=" {{$layout}} flex m-auto items-center bg-white box-border relative pb-8"> 
             <div class="z-10">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
                 <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
