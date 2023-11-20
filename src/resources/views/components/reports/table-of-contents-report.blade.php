@@ -23,12 +23,12 @@
        <div class="overflow-y-auto">
                     <div class="block ml-2">
 						@foreach($dataSource as $id => $name)
-							<div class="pr-1 py-1 text-sm">
-								<a href="#page{{$id}}" class="text-blue-500">{{$name}}</a>
+							<div class="pr-1 py-1 text-sm  focus:ring-4 hover:border-b hover:border-gray-200">
+								<a href="#page{{$id}}" class="text-blue-500 font-roboto font-bold">{{$name}}</a>
 							</div>
 						@endforeach
                     </div>
-                </div>
+        </div>
     </div>
     
  </div>
