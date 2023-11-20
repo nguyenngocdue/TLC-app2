@@ -36,6 +36,8 @@ class DashboardController extends Controller
         switch ($controller) {
             case "-external-inspector":
                 return (new DashboardExternalInspectorController())->index($request);
+            case "-project-client":
+                return (new DashboardProjectClientController())->index($request);
             case "":
                 return view('dashboards.dashboard', []);
             default:

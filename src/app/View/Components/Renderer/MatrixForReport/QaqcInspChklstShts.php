@@ -18,6 +18,7 @@ class QaqcInspChklstShts extends MatrixForReportParent
         private $prodRoutingId = 49,
         private $subProjectId = 107,
         private $qaqcInspTmplId = 1007,
+        private $showOnlyInvolved = false,
     ) {
         parent::__construct("qaqc_insp_chklst_shts");
 
@@ -28,9 +29,9 @@ class QaqcInspChklstShts extends MatrixForReportParent
     {
         $list = array_map(fn ($i) => $i->qaqc_insp_tmpl_sht_id, $this->dataSource);
         $result = Qaqc_insp_tmpl_sht::query()
-            ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmplId)
-            ->whereIn('id', $list)
-            ->with(['getProdDiscipline'])
+            ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmplId);
+        if ($this->showOnlyInvolved) $result = $result->whereIn('id', $list);
+        $result = $result->with(['getProdDiscipline'])
             ->orderBy('order_no')
             ->get();
         return $result;

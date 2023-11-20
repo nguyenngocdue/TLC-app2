@@ -144,7 +144,7 @@ class CurrentUser
 
     public static function isProjectClient()
     {
-        return in_array(CurrentUser::get()->discipline, []); //: Client
+        return in_array(CurrentUser::get()->discipline, [128]); //128: Project Client
     }
 
     public static function isApartmentOwner()
