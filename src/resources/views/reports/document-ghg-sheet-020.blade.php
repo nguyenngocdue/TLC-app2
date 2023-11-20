@@ -274,13 +274,13 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                         <li class="flex items-center pb-2 pr-4">
                                             <div class="w-12 h-4  bg-[#f67019]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
-                                                The total CO2 emissions up to the selected period of time.
+                                                The total CO2 emissions of the selected period.
                                             </p>
                                         </li>
                                         <li class="flex items-center pb-2">
                                             <div class="w-12 h-1 border rounded bg-[#6a329f]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
-                                                Standard CO2 levels based on the results from the previous year.
+                                                Standard CO2 levels based on the previous year.
                                             </p>
                                         </li>
                                     </ul>
@@ -323,7 +323,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
             <div class="z-5">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
                 <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
-                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report On Metric</x-renderer.heading>
+                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report</x-renderer.heading>
             </div>
             <div class='flex justify-center m-auto pt-20 pb-8'> 
                 <div class="pt-20 z-5">

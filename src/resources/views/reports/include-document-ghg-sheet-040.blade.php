@@ -7,11 +7,11 @@
             <div class="grid grid-cols-12 gap-2">
                 <div class=" col-span-6 flex flex-col">
                     <x-renderer.report.chart-bar3v3 :dataSource="$ghgrp_1"/>
-                    <p class='text-blue-600 font-bold text-lg pt-2 pl-80'>Based on the data throughout the year {{$year-1}}</p>
+                    <p class='text-blue-600 font-bold text-lg pt-2 pl-80'>The entire previous year - {{$year-1}}</p>
                 </div>
                 <div class=" col-span-6 flex flex-col justify-self-start">
                     <x-renderer.report.chart-bar3v3 :dataSource="$ghgrp_2"/>
-                    <p class='text-blue-600 font-bold text-lg  pt-2 pl-28'>Using data up to the chosen time period ({{$text}})</p>
+                    <p class='text-blue-600 font-bold text-lg  pt-2 pl-28'>The selected period - ({{$text}})</p>
                 </div>
             </div>
     </div>

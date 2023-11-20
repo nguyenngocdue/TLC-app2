@@ -1,5 +1,4 @@
 
-
 <table class="tg whitespace-no-wrap w-full text-sm">
     <thead class=''>
         <tr class="">
@@ -16,7 +15,7 @@
             @php
                 $value = App\Utils\Support\DateReport::getMonthAbbreviation2((int)$value);
             @endphp
-            <th class="{{$class2}} border-l">{{$value}}</th>
+            <th class="{{$class2}} border-l">{{$value}} <br/>{{$params['year']}}</th>
             @endforeach
         </tr>
     </thead>

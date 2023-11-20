@@ -268,7 +268,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			'data_summary_report' => "Data Summary Report",
 			'ghgrp_basin_production_emissions' => "GHGRP Basin Production & Emissions",
 			'data_detail_report' => "Data Detail Report",
-			'data_detail_report_on_metric2' => "Data Detail Report on Metric",
+			'data_detail_report_on_metric2' => "Data Detail Report",
 		];
 		$data->put('table_of_contents', $tableOfContent);
 		return collect($data);
