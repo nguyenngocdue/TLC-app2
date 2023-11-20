@@ -79,7 +79,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         
         <div id="pagecompany_carbon_footprint" class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
                 <div class="z-10">
-                    <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="" class="border-none absolute right-0"/>
+                    <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="" class="border-none absolute right-0 top-0"/>
                     <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
                     <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Company's Carbon Footprint in {{$text}}</x-renderer.heading>
                 </div>
