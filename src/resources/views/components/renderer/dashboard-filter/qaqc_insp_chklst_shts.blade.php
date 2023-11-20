@@ -11,7 +11,7 @@
                     tableName="sub_projects" 
                     name="sub_project_id" 
                     id="sub_project_id" 
-                    {{-- typeToLoadListener="qaqc_wir"  --}}
+                    typeToLoadListener="listener_config" 
                     selected="{{$viewportParams['sub_project_id']}}"
                     :dataSource="$dataSource['sub_projects']"
                 />
@@ -23,7 +23,7 @@
                     tableName="prod_routings" 
                     name="prod_routing_id" 
                     id="prod_routing_id" 
-                    {{-- typeToLoadListener="qaqc_wir"  --}}
+                    typeToLoadListener="listener_config" 
                     selected="{{$viewportParams['prod_routing_id']}}"
                     :dataSource="$dataSource['prod_routings']"
                     />
@@ -35,7 +35,7 @@
                     tableName="qaqc_insp_tmpls" 
                     name="qaqc_insp_tmpl_id" 
                     id="qaqc_insp_tmpl_id" 
-                    {{-- typeToLoadListener="qaqc_wir"  --}}
+                    typeToLoadListener="listener_config" 
                     selected="{{$viewportParams['qaqc_insp_tmpl_id']}}"
                     :dataSource="$dataSource['qaqc_insp_tmpls']"
                     />
