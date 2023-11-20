@@ -242,7 +242,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                 </div>
             </div>
                 <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
-                    <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class="w-full h-full object-cover"/>
+                    {{-- <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class="w-full h-full object-cover"/> --}}
                 </div>
         </div>
         {{-- END --}}

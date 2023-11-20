@@ -81,22 +81,22 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 							#ghgsl.total AS total,
 							SUBSTRING(ghgs.ghg_month, 1, 4) AS ghg_year,
 							SUBSTRING(ghgs.ghg_month, 6, 2) AS ghg_month,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '01' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `01`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '02' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `02`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '03' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `03`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '04' THEN ghgsl.total ELSE 0 END)/1000, 2) AS `04`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '05' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `05`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '06' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `06`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '07' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `07`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '08' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `08`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '09' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `09`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '10' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `10`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '11' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `11`,
-							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '12' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `12`
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '01' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `01`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '02' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `02`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '03' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `03`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '04' THEN ghgsl.total ELSE 0 END)/1000, 3) AS `04`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '05' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `05`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '06' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `06`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '07' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `07`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '08' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `08`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '09' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `09`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '10' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `10`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '11' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `11`,
+							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '12' THEN ghgsl.total ELSE 0 END)/1000 , 3) AS `12`
 							FROM  
 								ghg_sheets ghgs
 							JOIN ghg_tmpls ghgtmpls ON ghgs.ghg_tmpl_id = ghgtmpls.id
-							JOIN ghg_sheet_lines ghgsl ON ghgsl.ghg_sheet_id = ghgs.id
+							JOIN ghg_sheet_lines ghgsl ON ghgsl.ghg_sheet_id = ghgs.id AND ghgsl.deleted_by is NULL
 							LEFT JOIN ghg_metric_type_1s ghgmt1 ON ghgmt1.id = ghgsl.ghg_metric_type_1_id
 							JOIN ghg_metric_types ghgmt ON ghgmt1.ghg_metric_type_id = ghgmt.id
 							LEFT JOIN ghg_metric_type_2s ghgmt2 ON ghgmt2.id = ghgsl.ghg_metric_type_2_id
