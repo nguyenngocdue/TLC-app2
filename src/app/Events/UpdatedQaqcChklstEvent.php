@@ -6,6 +6,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class UpdatedQaqcChklstEvent
 {
@@ -19,6 +20,7 @@ class UpdatedQaqcChklstEvent
     public function __construct(public $sheet)
     {
         //
+        // Log::info('UpdatedQaqcChklstEvent');
     }
 
     /**

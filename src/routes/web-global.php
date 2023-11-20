@@ -1,11 +1,12 @@
 <?php
 
 // use App\Events\Test;
+
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\AdminSetRoleSetController;
 // use App\Http\Controllers\Api\v1\Social\PostController;
 use App\Http\Controllers\Api\v1\System\NotificationsController as SystemNotificationsController;
 use App\Http\Controllers\BookmarkController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MyOrgChartController;
 use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\ProfileController;

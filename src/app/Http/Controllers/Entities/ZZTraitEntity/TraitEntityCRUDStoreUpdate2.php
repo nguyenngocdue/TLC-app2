@@ -194,6 +194,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			$fields = $this->handleFields($request, __FUNCTION__);
+			// Log::info($fields);
 			$handledFields = $this->addEntityValue($fields, 'status', $newStatus);
 			$previousValue = $this->getPreviousValue($handledFields, $theRow);
 			$fieldForEmailHandler = $this->addEntityValue($handledFields, 'created_at', $theRow->getAttributes()['created_at']);

@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\UpdatedQaqcChklstEvent;
-use App\Http\Services\UpdateQaqcInspTmplService;
-use App\Http\Services\UpdateSubProjectService;
+use App\Http\Services\ExternalInspector\UpdateQaqcInspTmplService;
+use App\Http\Services\ExternalInspector\UpdateSubProjectService;
 use App\Models\Qaqc_insp_chklst;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -23,6 +23,7 @@ class UpdatedQaqcChklstListener implements ShouldQueue //<<No need to queue
         private UpdateQaqcInspTmplService $qaqcInspTmplService,
     ) {
         //
+        // Log::info('UpdatedQaqcChklstListener constructor');
     }
 
     public function handle(UpdatedQaqcChklstEvent $event)
@@ -53,6 +54,7 @@ class UpdatedQaqcChklstListener implements ShouldQueue //<<No need to queue
         $book->progress = $newProgress;
         $book->save();
 
+        // Log::info('UpdatedQaqcChklstListener Service calling...');
         $this->subProjectService->update($book->sub_project_id);
         $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id);
     }

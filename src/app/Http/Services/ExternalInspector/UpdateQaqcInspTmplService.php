@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\Services\ExternalInspector;
 
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_tmpl;
-use App\Models\Sub_project;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class UpdateQaqcInspTmplService
 {
@@ -19,6 +19,7 @@ class UpdateQaqcInspTmplService
         $result = [];
         foreach ($allLists as $list) {
             $allSheets = $list->getSheets;
+            // Oracy::attach("getMonitors1()", $allSheets);
             foreach ($allSheets as $sheet) {
                 $result[] = $sheet->getMonitors1()->pluck('id')->toArray();
             }
@@ -28,5 +29,7 @@ class UpdateQaqcInspTmplService
 
         $sp = Qaqc_insp_tmpl::find($qaqcInspTmplId);
         $sp->syncCheck("getExternalInspectorsOfQaqcInspTmpl", \App\Models\User::class, $result);
+        // Log::info("UpdateQaqcInspTmplService" . $qaqcInspTmplId);
+        // Log::info($result);
     }
 }
