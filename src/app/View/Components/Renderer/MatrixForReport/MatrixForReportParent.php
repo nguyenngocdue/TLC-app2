@@ -124,6 +124,8 @@ abstract class MatrixForReportParent extends Component
         usort($dataSource, function ($a, $b) use ($column) {
             $x = $a[$column] ?? 0;
             $y = $b[$column] ?? 0;
+            if (is_object($x)) $x = $x->value;
+            if (is_object($y)) $y = $y->value;
             return $x <=> $y;
         });
         // } catch (\Exception $e) {

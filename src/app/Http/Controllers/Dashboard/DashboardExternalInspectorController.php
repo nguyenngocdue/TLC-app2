@@ -9,6 +9,9 @@ class DashboardExternalInspectorController extends DashboardController
 {
     public function index(Request $request)
     {
+        $userSettings = $this->getUserSettings();
+        // dump($userSettings);
+        [$sub_project_id, $prod_routing_id, $qaqc_insp_tmpl_id] = $userSettings;
         $cu = CurrentUser::get();
         $subProjects = $cu->getSubProjectsOfExternalInspector();
         // dump($subProjects);
@@ -21,9 +24,9 @@ class DashboardExternalInspectorController extends DashboardController
 
         $params = [
             'viewportParams' => [
-                'sub_project_id' => 112,
-                'qaqc_insp_tmpl_id' => 49,
-                'prod_routing_id' => 49,
+                'sub_project_id' => $sub_project_id,
+                'qaqc_insp_tmpl_id' => $qaqc_insp_tmpl_id,
+                'prod_routing_id' => $prod_routing_id,
             ],
             'dataSource' => [
                 'sub_projects' => $subProjects,
@@ -31,14 +34,6 @@ class DashboardExternalInspectorController extends DashboardController
                 'prod_routings' => $prodRoutings,
             ],
         ];
-        $visible = false;
-        foreach ($params['dataSource'] as $tableName => $dataSource) {
-            $value = sizeof($dataSource) < 2;
-            $params['hidden'][$tableName] = $value;
-            if (!$value) $visible = true;
-        }
-        $params['visible'] = $visible;
-        // dump($params);
 
         return view('dashboards.dashboard-external-inspector', $params);
     }

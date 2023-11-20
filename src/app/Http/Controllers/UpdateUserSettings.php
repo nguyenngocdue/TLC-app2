@@ -52,19 +52,14 @@ class UpdateUserSettings extends Controller
         $type = $request->input("_entity");
         $toBeSaved = $request->except(["_token", "_method", "_entity", "action"]);
         $settings[$type][Constant::VIEW_ALL]['matrix'] = $toBeSaved;
-        // $values = $settings[$type][Constant::VIEW_ALL]['matrix'] ?? [];
-        // foreach ($toBeSaved as $key => $value) {
-        //     $values[$key] = $value;
-        // }
-        // //Remove empty array
-        // foreach ($values as $key => $value) {
-        //     if (is_array($value)) {
-        //         if (sizeof($value) == 1 && is_null($value[0])) { //isset($value[0]) is false
-        //             unset($values[$key]);
-        //         }
-        //     }
-        // }
-        // $settings[$type][Constant::VIEW_ALL]['matrix'] = $values;
+        return $settings;
+    }
+
+    private function updateDashboardMatrix($request, &$settings)
+    {
+        $type = $request->input("_entity");
+        $toBeSaved = $request->except(["_token", "_method", "_entity", "action"]);
+        $settings[$type][Constant::VIEW_ALL]['dashboard_matrix'] = $toBeSaved;
         return $settings;
     }
 
@@ -351,6 +346,9 @@ class UpdateUserSettings extends Controller
                 break;
             case 'updateViewAllMatrix':
                 $settings = $this->updateViewAllMatrix($request, $settings);
+                break;
+            case 'updateDashboardMatrix':
+                $settings = $this->updateDashboardMatrix($request, $settings);
                 break;
             case 'updatePerPage':
                 $settings = $this->updatePerPage($request, $settings);
