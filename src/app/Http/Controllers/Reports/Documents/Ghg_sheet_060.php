@@ -3,17 +3,13 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
-use App\Http\Controllers\Reports\Reports\Ghg_sheet_010;
 use App\Http\Controllers\Reports\Reports\Ghg_sheet_dataSource;
-use App\Http\Controllers\Reports\TraitConversionFieldNameGhgReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitGenerateValuesFromParamsReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Utils\Support\ArrayReport;
-use App\Utils\Support\DateReport;
 use App\Utils\Support\DocumentReport;
 use App\Utils\Support\Report;
-use App\Utils\Support\StringReport;
 
 class Ghg_sheet_060 extends Report_ParentDocument2Controller
 {
@@ -206,6 +202,8 @@ class Ghg_sheet_060 extends Report_ParentDocument2Controller
 				if(isset($groupByGhgTmplId[$items['ghg_tmpl_id']])){
 					$dataIndex = $groupByGhgTmplId[$items['ghg_tmpl_id']];
 					$dataIndex = self::groupValuesOfMonth($dataIndex);
+					$dataIndex = array_filter($dataIndex, fn($item) => !is_null($item['ghg_metric_type_2_name']));
+					// dd($dataIndex);
 					$dataOfEachMonths[] = array_column($dataIndex, 'months');
 					
 					$totalMonths = array_sum(array_column($dataIndex, 'total_months'));
@@ -216,7 +214,6 @@ class Ghg_sheet_060 extends Report_ParentDocument2Controller
 					// group by ghg_metric_type_2_name
 					$groupByMetric0and1 = Report::groupArrayByKey($dataIndex, 'ghg_metric_type_2_name');
 					$groupByMetric0and1 = $this->sumValueInMetricGroup($groupByMetric0and1);
-					// dump($groupByMetric0and1);
 					$groupByMetric0and1 = array_values(array_map(fn($item) => last($item), $groupByMetric0and1));
 					$items['group_by_metric0and1'] = $groupByMetric0and1;
 				}

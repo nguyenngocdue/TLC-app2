@@ -260,7 +260,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 
 		#Table of contents
 		$tableOfContent = [
-			'co2_emission_report' => 'Co2 Emission Report',
+			'co2_emission_report' => 'CO2 Emission Report',
 			'methodology' => 'Methodology',
 			'company_carbon_footprint' => "Company's Carbon Footprint by Year",
 			'emission_category_chart' => "Emission Category Chart",
@@ -268,6 +268,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 			'data_summary_report' => "Data Summary Report",
 			'ghgrp_basin_production_emissions' => "GHGRP Basin Production & Emissions",
 			'data_detail_report' => "Data Detail Report",
+			'data_detail_report_on_metric2' => "Data Detail Report on Metric",
 		];
 		$data->put('table_of_contents', $tableOfContent);
 		return collect($data);

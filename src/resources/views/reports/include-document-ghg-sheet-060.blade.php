@@ -41,7 +41,7 @@
 		<th class="w-20 {{$class2}}" colspan="2">Category</th>
 		<th class="w-[300px] p-2 {{$class2}} border-l ">Emission source category</th>
 		<th class="{{$class2}} border-l">Source</th>
-		<th class="{{$class2}} border-l">Metric 2</th>
+		<th class="{{$class2}} border-l">Metric</th>
 		<th class="{{$class2}} border-l">Total </br>(tCO2e)</th>
 		{{-- @dd($months) --}}
 		@foreach($months as $key => $value)
@@ -49,7 +49,7 @@
 				@php
 					$strMonth = App\Utils\Support\DateReport::getMonthAbbreviation2((int)$value);
 				@endphp
-				<th class="p-2 font-bold bg-gray-100 border-l">{{$strMonth}}</th>
+				<th class="p-2 font-bold bg-gray-100 border-l">{{$strMonth}} <br/>{{$year}}</th>
 			@endif
 		@endforeach
 	</tr>

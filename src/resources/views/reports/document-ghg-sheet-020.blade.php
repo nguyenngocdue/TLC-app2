@@ -314,10 +314,10 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
         {{-- PAGE 9: Data Detail Report on Metric 2 --}}
-        <div id="pagedata_detail_report" class=" w-min-[1400px] min-h-[790px] flex items-center bg-white box-border relative px-8">
+        <div id="pagedata_detail_report_on_metric2" class=" w-min-[1400px] min-h-[790px] flex items-center bg-white box-border relative px-8">
             <div class="z-5">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
-                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report</x-renderer.heading>
+                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report On Metric</x-renderer.heading>
             </div>
             <div class='flex justify-center m-auto pt-20 pb-8'> 
                 <div class="pt-20 z-5">
