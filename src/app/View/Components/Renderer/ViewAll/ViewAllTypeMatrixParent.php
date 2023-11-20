@@ -448,7 +448,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                         if (is_array($cells)) {
                             $agg_value = 0;
                             foreach ($cells as $cell) {
-                                $agg_value += $cell->value;
+                                $agg_value += (1 * intval(str_replace(",", "", $cell->value)));
                             }
                             $cells = $cells[0];
                             $cells->value = number_format($agg_value, 2);
