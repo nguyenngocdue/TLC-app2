@@ -5,13 +5,6 @@
 @endphp
 
 <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
-    <input type="hidden" name="tableNames[table01]" value="{{$typeLine}}_lines">
-    {{-- Those are for main body, not the table --}}
-    <input type="hidden" name="name" value="{{$item->name}}">
-    <input type="hidden" name="{{$idName}}" value="{{$value}}">
-    {{-- status id is for change status submit button --}}
-    <input type="hidden" name="status" id='status' value="{{$status}}"> 
-
     <x-renderer.item-render-props hiddenComponent="{{$showHeader?0:1}}" id={{$id}} :item="$item" width='' :dataSource="$dataSource" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
     {{-- <x-controls.insp-chklst.header-check-sheet :item="$item" :chklst="$chklst" :project="$project" :subProject="$subProject"/> --}}
     <x-renderer.heading level=4 xalign='center'>
@@ -78,7 +71,14 @@
             />
             @endif
         @endif
-            
+
+        {{-- has to be after the item-render-prop to override status and other values --}}
+        <input type="hidden" name="tableNames[table01]" value="{{$typeLine}}_lines">
+        {{-- Those are for main body, not the table --}}
+        <input type="hidden" name="name" value="{{$item->name}}">
+        <input type="hidden" name="{{$idName}}" value="{{$value}}">
+        {{-- status id is for change status submit button --}}
+        <input type="hidden" name="status" id='status' value="{{$status}}">        
         
 </div>
 <x-renderer.image-gallery-check-sheet :checkPointIds="$checkPointIds" :dataSource="$linesTmp" action='edit' />

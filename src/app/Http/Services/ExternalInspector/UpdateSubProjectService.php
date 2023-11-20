@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\Services\ExternalInspector;
 
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Sub_project;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class UpdateSubProjectService
 {
@@ -18,6 +19,7 @@ class UpdateSubProjectService
         $result = [];
         foreach ($allLists as $list) {
             $allSheets = $list->getSheets;
+            // Oracy::attach("getMonitors1()", $allSheets);
             foreach ($allSheets as $sheet) {
                 $result[] = $sheet->getMonitors1()->pluck('id')->toArray();
             }
@@ -27,5 +29,7 @@ class UpdateSubProjectService
 
         $sp = Sub_project::find($subProjectId);
         $sp->syncCheck("getExternalInspectorsOfSubProject", \App\Models\User::class, $result);
+        // Log::info("UpdateSubProjectService" . $subProjectId);
+        // Log::info($result);
     }
 }
