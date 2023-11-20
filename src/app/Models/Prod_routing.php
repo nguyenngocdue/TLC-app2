@@ -27,7 +27,7 @@ class Prod_routing extends ModelExtended
         "getChklstTmpls()" => ["getCheckedByField", Qaqc_insp_tmpl::class],
         "getSubProjects()" => ["getCheckedByField", Sub_project::class],
         "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
-        "getExternalInspectorsOfProdRouting()" => ['getCheckedByField', Prod_routing::class],
+        "getExternalInspectorsOfProdRouting()" => ['getCheckedByField', User::class],
     ];
 
     private static $showIsShowOn = false;

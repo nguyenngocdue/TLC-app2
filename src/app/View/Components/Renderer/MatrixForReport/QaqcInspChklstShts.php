@@ -33,6 +33,7 @@ class QaqcInspChklstShts extends MatrixForReportParent
     {
         $result = Qaqc_insp_chklst::query()
             ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmplId)
+            ->where('sub_project_id', $this->subProjectId)
             ->orderBy('name')
             ->get();
         return $result;
@@ -54,7 +55,13 @@ class QaqcInspChklstShts extends MatrixForReportParent
     function getDataSource($xAxis, $yAxis)
     {
         $result = Qaqc_insp_chklst_sht::query()
+            ->whereHas('getChklst', function ($q) {
+                $q->where('sub_project_id', $this->subProjectId)
+                    ->where('prod_routing_id', $this->prodRoutingId)
+                    ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmplId);
+            })
             ->get();
+        // dump($result);
         return $result;
     }
 }
