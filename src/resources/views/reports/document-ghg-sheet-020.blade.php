@@ -79,7 +79,8 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         
         <div id="pagecompany_carbon_footprint" class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
                 <div class="z-10">
-                    <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                    <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="" class="border-none absolute right-0 top-0"/>
+                    <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
                     <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Company's Carbon Footprint in {{$text}}</x-renderer.heading>
                 </div>
             <div class='flex justify-center'>
@@ -124,6 +125,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div id="pageemission_category_chart" class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
             <div class="z-10">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
                 <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Emission Category Chart</x-renderer.heading>
             </div>
             <div class='flex justify-center m-auto'> 
@@ -187,6 +189,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div id="pageemission_source_category_chart" class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
             <div class="z-10">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
                 <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Emission Source Category Chart</x-renderer.heading>
             </div>
             <div class='flex justify-center m-auto'> 
@@ -230,9 +233,10 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div  id="pagedata_summary_report" class=" w-[1400px] min-h-[790px] m-auto flex items-center bg-white box-border px-8 pb-8 relative">
             <div class="z-10">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
                 <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Summary Report</x-renderer.heading>
             </div>
-            <div class='flex justify-center m-auto pt-40'> 
+            <div class='flex justify-center m-auto pt-40 pb-4'> 
                 <div class=" border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
                     @include('reports.document-ghg-summary-report-only-table')
                 </div>
@@ -248,6 +252,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div id="pageghgrp_basin_production_emissions" class=" w-[1700px] min-h-[790px] flex m-auto items-center bg-white box-border relative pb-8"> 
             <div class="z-10">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
                 <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>GHGRP Basin Production & Emissions</x-renderer.heading>
             </div>
             
@@ -280,6 +285,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                         </li>
                                     </ul>
                                 </div>
+                                <div class="pb-4"></div>
                             </div>
                     </div>
                 <div class="absolute top-0 right-0 left-0 opacity-20 z-0">
@@ -295,14 +301,13 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <div id="pagedata_detail_report" class=" w-min-[1400px] min-h-[790px] flex items-center bg-white box-border relative px-8">
             <div class="z-5">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
+                <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
                 <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report</x-renderer.heading>
             </div>
             <div class='flex justify-center m-auto pt-20 pb-8'> 
                 <div class="pt-20 z-5">
                     <div class="grid grid-rows-1">
-                            <div class=" border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
-                                @include('reports.include-document-ghg-sheet-050', ['tableDataSource' => $tableDataSource['document_ghg_sheet_050']])
-                            </div>
+                        @include('reports.include-document-ghg-sheet-050', ['tableDataSource' => $tableDataSource['document_ghg_sheet_050']])
                     </div>
                 </div>
                 <div class="absolute top-0 right-0 left-0 opacity-20 z-0 hidden">
@@ -314,17 +319,16 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
         {{-- PAGE 9: Data Detail Report on Metric 2 --}}
-        <div id="pagedata_detail_report" class=" w-min-[1400px] min-h-[790px] flex items-center bg-white box-border relative px-8">
+        <div id="pagedata_detail_report_on_metric2" class=" w-min-[1400px] min-h-[790px] flex items-center bg-white box-border relative px-8">
             <div class="z-5">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
-                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report</x-renderer.heading>
+                <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
+                <x-renderer.heading level=1 xalign='left' class='absolute top-16 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report On Metric</x-renderer.heading>
             </div>
             <div class='flex justify-center m-auto pt-20 pb-8'> 
                 <div class="pt-20 z-5">
                     <div class="grid grid-rows-1">
-                            <div class=" border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
-                                @include('reports.include-document-ghg-sheet-060', ['tableDataSource' => $tableDataSource['document_ghg_sheet_060']])
-                            </div>
+                            @include('reports.include-document-ghg-sheet-060', ['tableDataSource' => $tableDataSource['document_ghg_sheet_060']])
                     </div>
                 </div>
                 <div class="absolute top-0 right-0 left-0 opacity-20 z-0 hidden">
