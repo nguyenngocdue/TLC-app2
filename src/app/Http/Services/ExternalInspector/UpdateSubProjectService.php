@@ -27,8 +27,8 @@ class UpdateSubProjectService
 
         $result = array_values(array_unique(Arr::flatten($result)));
 
-        $sp = Sub_project::find($subProjectId);
-        $sp->syncCheck("getExternalInspectorsOfSubProject", \App\Models\User::class, $result);
+        $item = Sub_project::find($subProjectId);
+        $item->syncCheck("getExternalInspectorsOfSubProject", \App\Models\User::class, $result);
         // Log::info("UpdateSubProjectService" . $subProjectId);
         // Log::info($result);
     }

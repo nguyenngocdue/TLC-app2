@@ -15,7 +15,7 @@
                 :viewportParams="$viewportParams"
                 :dataSource="$dataSource"
             />
-            <x-renderer.matrix-for-report.qaqc_insp_chklst_shts 
+            <x-renderer.matrix-for-report.QaqcInspChklstShts 
                 subProjectId="{{$viewportParams['sub_project_id']}}" 
                 prodRoutingId="{{$viewportParams['prod_routing_id']}}" 
                 />

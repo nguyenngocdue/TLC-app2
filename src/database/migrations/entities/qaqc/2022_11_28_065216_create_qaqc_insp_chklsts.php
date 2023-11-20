@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->float('progress')->nullable();
             $table->unsignedBigInteger('prod_order_id');
+            $table->unsignedBigInteger('prod_routing_id');
             $table->string('consent_number')->nullable();
             $table->unsignedBigInteger('qaqc_insp_tmpl_id');
             $table->unsignedBigInteger('sub_project_id')->nullable();

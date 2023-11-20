@@ -9,6 +9,9 @@ class DashboardExternalInspectorController extends DashboardController
 {
     public function index(Request $request)
     {
+        $userSettings = $this->getUserSettings();
+        // dump($userSettings);
+        [$sub_project_id, $prod_routing_id, $qaqc_insp_tmpl_id] = $userSettings;
         $cu = CurrentUser::get();
         $subProjects = $cu->getSubProjectsOfExternalInspector();
         // dump($subProjects);
@@ -16,15 +19,19 @@ class DashboardExternalInspectorController extends DashboardController
         $qaqcInspTmpls = $cu->getQaqcInspTmplsOfExternalInspector();
         // dump($qaqcInspTmpls);
 
+        $prodRoutings = $cu->getProdRoutingsOfExternalInspector();
+        // dump($prodRoutings);
+
         $params = [
             'viewportParams' => [
-                'sub_project_id' => 112,
-                'qaqc_insp_tmpl_id' => 49,
-                'prod_routing_id' => 49,
+                'sub_project_id' => $sub_project_id,
+                'qaqc_insp_tmpl_id' => $qaqc_insp_tmpl_id,
+                'prod_routing_id' => $prod_routing_id,
             ],
             'dataSource' => [
                 'sub_projects' => $subProjects,
                 'qaqc_insp_tmpls' => $qaqcInspTmpls,
+                'prod_routings' => $prodRoutings,
             ],
         ];
 

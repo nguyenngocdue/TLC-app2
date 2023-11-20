@@ -133,6 +133,7 @@ class User extends Authenticatable implements LdapAuthenticatable
 
         "getSubProjectsOfExternalInspector()" => ['getCheckedByField', Sub_project::class],
         "getQaqcInspTmplsOfExternalInspector()" => ['getCheckedByField', Qaqc_insp_tmpl::class],
+        "getProdRoutingsOfExternalInspector()" => ['getCheckedByField', Prod_routing::class],
     ];
 
     public function getOtTeams()
@@ -160,6 +161,12 @@ class User extends Authenticatable implements LdapAuthenticatable
     }
 
     function getQaqcInspTmplsOfExternalInspector()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    function getProdRoutingsOfExternalInspector()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

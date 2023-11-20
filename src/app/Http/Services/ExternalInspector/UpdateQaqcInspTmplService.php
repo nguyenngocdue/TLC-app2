@@ -27,8 +27,8 @@ class UpdateQaqcInspTmplService
 
         $result = array_values(array_unique(Arr::flatten($result)));
 
-        $sp = Qaqc_insp_tmpl::find($qaqcInspTmplId);
-        $sp->syncCheck("getExternalInspectorsOfQaqcInspTmpl", \App\Models\User::class, $result);
+        $item = Qaqc_insp_tmpl::find($qaqcInspTmplId);
+        $item->syncCheck("getExternalInspectorsOfQaqcInspTmpl", \App\Models\User::class, $result);
         // Log::info("UpdateQaqcInspTmplService" . $qaqcInspTmplId);
         // Log::info($result);
     }

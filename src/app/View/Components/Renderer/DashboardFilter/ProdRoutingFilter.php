@@ -7,7 +7,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class SubProjectFilter extends Component
+class ProdRoutingFilter extends Component
 {
     use TraitListenerControl;
     use TraitGetSuffixListenerControl;

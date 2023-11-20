@@ -81,6 +81,7 @@ trait TraitViewAllFunctions
         $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);
         $model = $this->typeModel;
         $instance = App::make($model);
+        $instance = $instance->search(); //<< has to be here even scout is database
         $eloquentParams = $model::$eloquentParams;
         $eagerLoadParams = $this->getEagerLoadParams($eloquentParams);
         if (!CurrentUser::isAdmin()) {
