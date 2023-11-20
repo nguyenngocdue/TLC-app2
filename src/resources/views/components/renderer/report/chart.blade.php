@@ -21,7 +21,6 @@ const COLORS = ['#4dc9f6','#f67019','#f53794','#537bc4','#acc236','#166a8f','#00
 
 	var meta = {!! json_encode($meta) !!}
 	var colors = generateColors(meta.count);
-	console.log(colors);
 
 
 	var scales = {};
