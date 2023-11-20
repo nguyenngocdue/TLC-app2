@@ -27,6 +27,7 @@ class Prod_routing extends ModelExtended
         "getChklstTmpls()" => ["getCheckedByField", Qaqc_insp_tmpl::class],
         "getSubProjects()" => ["getCheckedByField", Sub_project::class],
         "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
+        "getExternalInspectorsOfProdRouting()" => ['getCheckedByField', Prod_routing::class],
     ];
 
     private static $showIsShowOn = false;
@@ -79,6 +80,12 @@ class Prod_routing extends ModelExtended
     }
 
     public function getSubProjects()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getExternalInspectorsOfProdRouting()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
