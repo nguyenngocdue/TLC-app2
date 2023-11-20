@@ -90,9 +90,10 @@
 			//max: {!! json_encode($dimensions['scale_max_y1'] ?? 100) !!},
 			ticks: {
 				stepSize: {!! $dimensions['stepSizeY1'] ?? 'null' !!},
-				display: {!! json_encode($dimensions['displayTicksY1'] ?? false) !!},
+				//display: {!! json_encode($dimensions['displayTicksY1'] ?? false) !!},
+				display: true,
 				callback: function(value, index, values) {
-					return value;
+					return '';
 				}
 			},
 			grid:{
