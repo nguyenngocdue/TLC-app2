@@ -11,7 +11,7 @@
                 </div>
                 <div class=" col-span-6 flex flex-col justify-self-start">
                     <x-renderer.report.chart-bar3v3 :dataSource="$ghgrp_2"/>
-                    <p class='text-blue-600 font-bold text-lg  pt-2 pl-28'>The selected period - ({{$text}})</p>
+                    <p class='text-blue-600 font-bold text-lg  pt-2 pl-28'>The selected period ({{$text}})</p>
                 </div>
             </div>
     </div>
