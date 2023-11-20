@@ -7,15 +7,17 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_chklst extends ModelExtended
 {
     protected $fillable = [
-        "id", "prod_order_id", "name", "description", "owner_id", "slug",
+        "id", "name", "description", "owner_id", "slug",
         "consent_number",  "progress", "owner_id",
         "qaqc_insp_tmpl_id", "sub_project_id",
+        "prod_order_id", "prod_routing_id",
         'status',
     ];
     protected $table = "qaqc_insp_chklsts";
 
     public static $eloquentParams = [
         "getProdOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
+        "getProdRouting" => ["belongsTo", Prod_routing::class, "prod_routing_id"],
         "getQaqcInspTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, "qaqc_insp_tmpl_id"],
 
         "getSheets" => ["hasMany", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_id"],
@@ -23,6 +25,12 @@ class Qaqc_insp_chklst extends ModelExtended
     ];
 
     public function getProdOrder()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getProdRouting()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

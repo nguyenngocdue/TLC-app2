@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\UpdatedQaqcChklstEvent;
+use App\Http\Services\ExternalInspector\UpdateProdRoutingService;
 use App\Http\Services\ExternalInspector\UpdateQaqcInspTmplService;
 use App\Http\Services\ExternalInspector\UpdateSubProjectService;
 use App\Models\Qaqc_insp_chklst;
@@ -21,6 +22,7 @@ class UpdatedQaqcChklstListener implements ShouldQueue //<<No need to queue
     public function __construct(
         private UpdateSubProjectService $subProjectService,
         private UpdateQaqcInspTmplService $qaqcInspTmplService,
+        private UpdateProdRoutingService $prodRoutingService,
     ) {
         //
         // Log::info('UpdatedQaqcChklstListener constructor');
@@ -34,15 +36,15 @@ class UpdatedQaqcChklstListener implements ShouldQueue //<<No need to queue
         // Log::info($book);
 
         $theTemplate = $book->getQaqcInspTmpl()->first();
+        // Log::info($theTemplate);
         $allTemplateSheets = $theTemplate->getSheets()->get();
-        $allSheets = $book->getSheets()->get();
         // Log::info($allTemplateSheets);
+        $allSheets = $book->getSheets()->get();
         // Log::info($allSheets);
 
-        // Log::info($theTemplate);
         $templateIds = $allTemplateSheets->pluck('id');
-        $sheetIds = $allSheets->pluck('progress', 'qaqc_insp_tmpl_sht_id',);
         // Log::info($templateIds);
+        $sheetIds = $allSheets->pluck('progress', 'qaqc_insp_tmpl_sht_id',);
         // Log::info($sheetIds);
 
         $array = [];
@@ -54,8 +56,10 @@ class UpdatedQaqcChklstListener implements ShouldQueue //<<No need to queue
         $book->progress = $newProgress;
         $book->save();
 
-        // Log::info('UpdatedQaqcChklstListener Service calling...');
+        Log::info('UpdatedQaqcChklstListener Service calling...');
         $this->subProjectService->update($book->sub_project_id);
         $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id);
+
+        $this->prodRoutingService->update($book->getProdOrder->prod_routing_id);
     }
 }

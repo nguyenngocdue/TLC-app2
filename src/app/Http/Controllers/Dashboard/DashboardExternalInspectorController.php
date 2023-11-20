@@ -16,6 +16,9 @@ class DashboardExternalInspectorController extends DashboardController
         $qaqcInspTmpls = $cu->getQaqcInspTmplsOfExternalInspector();
         // dump($qaqcInspTmpls);
 
+        $prodRoutings = $cu->getProdRoutingsOfExternalInspector();
+        // dump($prodRoutings);
+
         $params = [
             'viewportParams' => [
                 'sub_project_id' => 112,
@@ -25,8 +28,17 @@ class DashboardExternalInspectorController extends DashboardController
             'dataSource' => [
                 'sub_projects' => $subProjects,
                 'qaqc_insp_tmpls' => $qaqcInspTmpls,
+                'prod_routings' => $prodRoutings,
             ],
         ];
+        $visible = false;
+        foreach ($params['dataSource'] as $tableName => $dataSource) {
+            $value = sizeof($dataSource) < 2;
+            $params['hidden'][$tableName] = $value;
+            if (!$value) $visible = true;
+        }
+        $params['visible'] = $visible;
+        // dump($params);
 
         return view('dashboards.dashboard-external-inspector', $params);
     }

@@ -14,6 +14,8 @@
                 type="qaqc_insp_chklst_shts"
                 :viewportParams="$viewportParams"
                 :dataSource="$dataSource"
+                :hidden="$hidden"
+                visible="{{$visible}}"
             />
             <x-renderer.matrix-for-report.qaqc_insp_chklst_shts 
                 subProjectId="{{$viewportParams['sub_project_id']}}" 

@@ -33,7 +33,7 @@ class QaqcInspTmplFilter extends Component
 
     private function getDataSource()
     {
-        return $this->dataSource[$this->tableName];
+        return $this->dataSource;
     }
 
     /**

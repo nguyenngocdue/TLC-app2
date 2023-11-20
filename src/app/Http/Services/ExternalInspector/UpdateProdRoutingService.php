@@ -2,16 +2,17 @@
 
 namespace App\Http\Services\ExternalInspector;
 
+use App\Models\Prod_routing;
 use App\Models\Qaqc_insp_chklst;
-use App\Models\Sub_project;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
-class UpdateSubProjectService
+class UpdateProdRoutingService
 {
-    function update($subProjectId)
+    function update($prod_routing_id)
     {
         $allLists = Qaqc_insp_chklst::query()
-            ->where("sub_project_id", $subProjectId)
+            ->where("prod_routing_id", $prod_routing_id)
             ->with(['getSheets'])
             ->get();
 
@@ -25,7 +26,9 @@ class UpdateSubProjectService
 
         $result = array_values(array_unique(Arr::flatten($result)));
 
-        $sp = Sub_project::find($subProjectId);
-        $sp->syncCheck("getExternalInspectorsOfSubProject", \App\Models\User::class, $result);
+        $item = Prod_routing::find($prod_routing_id);
+        $item->syncCheck("getExternalInspectorsOfProdRouting", \App\Models\User::class, $result);
+        // Log::info("UpdateProdRoutingService" . $prod_routing_id);
+        // Log::info($result);
     }
 }
