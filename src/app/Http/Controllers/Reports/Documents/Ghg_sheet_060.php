@@ -76,7 +76,7 @@ class Ghg_sheet_060 extends Report_ParentDocument2Controller
 							terms.name AS unit,
 							#ghgsl.total AS total,
 							SUBSTRING(ghgs.ghg_month, 1, 4) AS ghg_year,
-							SUBSTRING(ghgs.ghg_month, 6, 2) AS ghg_month,
+							SUBSTRING(ghgs.ghg_month, 6, 3) AS ghg_month,
 							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '01' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `01`,
 							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '02' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `02`,
 							ROUND(SUM(CASE WHEN SUBSTRING(ghgs.ghg_month, 6, 2) = '03' THEN ghgsl.total ELSE 0 END)/1000 , 2) AS `03`,
@@ -92,7 +92,7 @@ class Ghg_sheet_060 extends Report_ParentDocument2Controller
 							FROM  
 								ghg_sheets ghgs
 							JOIN ghg_tmpls ghgtmpls ON ghgs.ghg_tmpl_id = ghgtmpls.id
-							JOIN ghg_sheet_lines ghgsl ON ghgsl.ghg_sheet_id = ghgs.id
+							JOIN ghg_sheet_lines ghgsl ON ghgsl.ghg_sheet_id = ghgs.id AND ghgsl.deleted_by is NULL
 							LEFT JOIN ghg_metric_type_1s ghgmt1 ON ghgmt1.id = ghgsl.ghg_metric_type_1_id
 							JOIN ghg_metric_types ghgmt ON ghgmt1.ghg_metric_type_id = ghgmt.id
 							LEFT JOIN ghg_metric_type_2s ghgmt2 ON ghgmt2.id = ghgsl.ghg_metric_type_2_id

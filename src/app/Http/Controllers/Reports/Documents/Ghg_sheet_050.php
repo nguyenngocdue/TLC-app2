@@ -96,7 +96,7 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 							FROM  
 								ghg_sheets ghgs
 							JOIN ghg_tmpls ghgtmpls ON ghgs.ghg_tmpl_id = ghgtmpls.id
-							JOIN ghg_sheet_lines ghgsl ON ghgsl.ghg_sheet_id = ghgs.id
+							JOIN ghg_sheet_lines ghgsl ON ghgsl.ghg_sheet_id = ghgs.id AND ghgsl.deleted_by is NULL
 							LEFT JOIN ghg_metric_type_1s ghgmt1 ON ghgmt1.id = ghgsl.ghg_metric_type_1_id
 							JOIN ghg_metric_types ghgmt ON ghgmt1.ghg_metric_type_id = ghgmt.id
 							LEFT JOIN ghg_metric_type_2s ghgmt2 ON ghgmt2.id = ghgsl.ghg_metric_type_2_id
