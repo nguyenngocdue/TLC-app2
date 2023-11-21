@@ -56,7 +56,7 @@ class UpdatedQaqcChklstListener implements ShouldQueue //<<No need to queue
         $book->progress = $newProgress;
         $book->save();
 
-        Log::info('UpdatedQaqcChklstListener Service calling...');
+        // Log::info('UpdatedQaqcChklstListener Service calling...');
         $this->subProjectService->update($book->sub_project_id);
         $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id);
 

@@ -18,6 +18,8 @@
             <x-renderer.matrix-for-report.QaqcInspChklstShts 
                 subProjectId="{{$viewportParams['sub_project_id']}}" 
                 prodRoutingId="{{$viewportParams['prod_routing_id']}}" 
+                qaqcInspTmplId="{{$viewportParams['qaqc_insp_tmpl_id']}}" 
+                showOnlyInvolved="{{$showOnlyInvolved ?? false}}"
                 />
         </div>
     </div>

@@ -248,7 +248,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
 		// dump($previousValue, $fieldForEmailHandler);
 		$this->emitPostUpdateEvent($theRow->id);
-		Log::info($this->type . ": " . Timer::getTimeElapseFromLastAccess());
+		Log::info($this->type . " update2 elapsed ms: " . Timer::getTimeElapseFromLastAccess());
 		return $this->redirectCustomForUpdate2($request, $theRow);
 	}
 }

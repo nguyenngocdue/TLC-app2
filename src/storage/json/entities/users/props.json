@@ -1424,5 +1424,28 @@
         "frozen_left": "",
         "frozen_right": "",
         "nowrap_view_all": ""
+    },
+    "_getSubProjectsOfProjectClient()": {
+        "name": "_getSubProjectsOfProjectClient()",
+        "column_name": "getSubProjectsOfProjectClient()",
+        "column_type": "oracy_prop",
+        "label": "Project Clients of Sub Project",
+        "control": "dropdown_multi",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "hidden_template_print": "",
+        "read_only": "true",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

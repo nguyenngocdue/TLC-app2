@@ -28,6 +28,8 @@ return new class extends Migration
             $table->unsignedBigInteger('qaqc_insp_tmpl_sht_id');
             $table->unsignedBigInteger('prod_discipline_id');
             $table->float('progress')->nullable(); //version 2
+            $table->unsignedBigInteger('assignee_1')->nullable();
+            $table->unsignedBigInteger('assignee_2')->nullable();
             $table->orderable();
             $table->appendCommonFields();
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Prod_routing;
+use App\Models\Qaqc_insp_tmpl;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 
-class DashboardExternalInspectorController extends DashboardController
+class DashboardProjectClientController extends DashboardController
 {
     public function index(Request $request)
     {
@@ -13,13 +15,14 @@ class DashboardExternalInspectorController extends DashboardController
         // dump($userSettings);
         [$sub_project_id, $prod_routing_id, $qaqc_insp_tmpl_id] = $userSettings;
         $cu = CurrentUser::get();
-        $subProjects = $cu->getSubProjectsOfExternalInspector();
+        $subProjects = $cu->getSubProjectsOfProjectClient();
         // dump($subProjects);
 
-        $qaqcInspTmpls = $cu->getQaqcInspTmplsOfExternalInspector();
-        // dump($qaqcInspTmpls);
+        $qaqcInspTmpls = Qaqc_insp_tmpl::query()->get();
+        // dump($qaqcInspTmpls); 
 
-        $prodRoutings = $cu->getProdRoutingsOfExternalInspector();
+        $prodRoutings = Prod_routing::query()->get();
+        $prodRoutings = $prodRoutings->filter(fn ($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
         // dump($prodRoutings);
 
         $params = [
@@ -33,7 +36,6 @@ class DashboardExternalInspectorController extends DashboardController
                 'qaqc_insp_tmpls' => $qaqcInspTmpls,
                 'prod_routings' => $prodRoutings,
             ],
-            'showOnlyInvolved' => true,
         ];
 
         return view('dashboards.dashboard-external-inspector', $params);

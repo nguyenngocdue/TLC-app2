@@ -27,7 +27,7 @@ class Prod_routing extends ModelExtended
         "getChklstTmpls()" => ["getCheckedByField", Qaqc_insp_tmpl::class],
         "getSubProjects()" => ["getCheckedByField", Sub_project::class],
         "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
-        "getExternalInspectorsOfProdRouting()" => ['getCheckedByField', Prod_routing::class],
+        "getExternalInspectorsOfProdRouting()" => ['getCheckedByField', User::class],
     ];
 
     private static $showIsShowOn = false;
@@ -35,7 +35,8 @@ class Prod_routing extends ModelExtended
     {
         $tableName = $this->getTable();
         $allow = $this->getScreensShowMeOn()->pluck('id')->toArray();
-        $config = config("production.$tableName.$type");
+        $key = "production.$tableName.$type";
+        $config = config($key);
         if (is_null($config) && !static::$showIsShowOn) {
             static::$showIsShowOn = true;
             dump($type . " is not registered for Filter of [$tableName].");

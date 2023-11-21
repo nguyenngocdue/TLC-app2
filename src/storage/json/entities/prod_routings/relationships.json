@@ -111,6 +111,22 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_getExternalInspectorsOfProdRouting()": {
+        "name": "_getExternalInspectorsOfProdRouting()",
+        "relationship": "getCheckedByField",
+        "control_name": "getExternalInspectorsOfProdRouting()",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_getProdOrders": {
         "name": "_getProdOrders",
         "relationship": "hasMany",
