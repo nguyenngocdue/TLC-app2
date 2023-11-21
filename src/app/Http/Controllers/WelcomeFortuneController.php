@@ -24,7 +24,12 @@ class WelcomeFortuneController extends Controller
     public function index(Request $request)
     {
         if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
-        $r = User::find(1)->notify(new SampleNotification(123));
+        $r = User::find(1)->notify(new SampleNotification([
+            'object_type' => 'App\\Models\\User',
+            'object_id' => 1,
+            'sender_id' => 444,
+            'content' => "<b>Fortune</b> has view checklist of Structure of STW1-11",
+        ]));
         dump($r);
         return "";
     }
