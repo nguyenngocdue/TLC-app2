@@ -24,23 +24,26 @@ class UpdatedDocumentListener2 implements ShouldQueue
      */
     public function __construct()
     {
-        // Log::info("UpdatedDocumentListener");
+        // Log::info("UpdatedDocumentListener constructor");
     }
 
     private function getValues(array $obj, array $bic)
     {
         $status = $obj['status'];
-        $bic_assignee = $bic[$status]['ball-in-court-assignee'];
-        $bic_monitors = $bic[$status]['ball-in-court-monitors'];
+        $bic_assignee = $bic[$status]['ball-in-court-assignee'] ?: '';
+        $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1()";
+        $monitor_ids = $obj[$bic_monitors];
 
         $result = [
             'status' => $status,
+
             'bic_assignee' => $bic_assignee,
-            'bic_monitors' => $bic_monitors,
             'bic_assignee_uid' => $obj[$bic_assignee] * 1,
-            'bic_monitors_uids' => array_map(fn ($i) => $i * 1, $obj[$bic_monitors]),
             'bic_assignee_name' => User::findFromCache($obj[$bic_assignee])->name,
-            'bic_monitors_names' => array_map(fn ($i) => User::findFromCache($i * 1)->name, $obj[$bic_monitors]),
+
+            'bic_monitors' => $bic_monitors,
+            'bic_monitors_uids' => array_map(fn ($i) => $i * 1, $monitor_ids),
+            'bic_monitors_names' => array_map(fn ($i) => User::findFromCache($i * 1)->name, $monitor_ids),
         ];
 
         return $result;
