@@ -32,7 +32,7 @@
 <template x-if="isNotificationsMenuOpen">
     <div x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeNotificationsMenu" @keydown.escape="closeNotificationsMenu" class="absolute right-0 w-[500px] h-[calc(100vh-100px)] overflow-y-auto text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">
             <div>
-                <h1 class="p-3 text-2xl font-semibold">Notifications</h1>
+                <h1 class="p-3 text-xl font-semibold">My Notifications</h1>
                 <div class="flex">
                     <ul id="tabs-notificationsall123456789" class="inline-flex px-1 w-full border-b text-base">
                         <li class="px-3 text-gray-800 font-semibold py-1 rounded-t bg-white border-t border-r border-l -mb-px"><a href="#allNotifications">All</a></li>

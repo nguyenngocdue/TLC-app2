@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\WorkingShiftService;
+use App\Models\User;
+use App\Notifications\SampleNotification;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\Timer;
 use Illuminate\Http\Request;
@@ -22,9 +24,8 @@ class WelcomeFortuneController extends Controller
     public function index(Request $request)
     {
         if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
-        Timer::getTimeElapseFromLastAccess();
-
-        echo Timer::getTimeElapseFromLastAccess();;
+        $r = User::find(1)->notify(new SampleNotification(123));
+        dump($r);
         return "";
     }
 }
