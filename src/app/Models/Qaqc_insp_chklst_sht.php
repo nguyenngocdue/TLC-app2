@@ -9,7 +9,8 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     protected $fillable = [
         "id", "name", "description", "slug", "owner_id",
         "qaqc_insp_chklst_id", "qaqc_insp_tmpl_sht_id", "prod_discipline_id",
-        'progress', 'status', 'order_no'
+        'progress', 'status', 'order_no',
+        "assignee_1", "assignee_2",
     ];
     protected $table = "qaqc_insp_chklst_shts";
 
@@ -18,12 +19,13 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         "getTmplSheet" => ["belongsTo", Qaqc_insp_tmpl_sht::class, 'qaqc_insp_tmpl_sht_id'],
 
         "getLines" => ["hasMany", Qaqc_insp_chklst_line::class, "qaqc_insp_chklst_sht_id"],
-        // "getShtSigs" => ["hasMany", Qaqc_insp_chklst_sht_sig::class, "qaqc_insp_chklst_sht_id"],
-
         'signature_qaqc_chklst_3rd_party' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
 
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
+
+        'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
+        'getAssignee2' => ['belongsTo', User::class, 'assignee_2'],
     ];
 
     public static $oracyParams = [
