@@ -1,4 +1,4 @@
-<td class='w-[{{$widthCell}}px] h-[60px]  {{$class1}} text-right border-t relative '>
+<td class='w-[{{$widthCell}}px] h-[60px] text-right border-t border-l p-2 border-gray-600 relative '>
     <div class="align-middle">
         <div class=' items-baseline flex justify-end'>
         {{-- @dump($tco2e) --}}

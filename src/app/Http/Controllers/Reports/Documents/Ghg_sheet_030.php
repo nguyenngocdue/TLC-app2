@@ -18,7 +18,7 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 	use TraitForwardModeReport;
 	use TraitParamsSettingReport;
 
-	protected $viewName = 'document-ghg-summary-report-030';
+	protected $viewName = 'document-ghg-sheet-030';
 	protected $year = '2023';
 	protected $mode = '030';
 

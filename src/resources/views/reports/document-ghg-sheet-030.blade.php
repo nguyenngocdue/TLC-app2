@@ -7,16 +7,16 @@
 
 
 @php
-$widthCell = 88;
-$class1 = "p-2 bg-white dark:border-gray-600 border-r";
-$class2 =" bg-gray-100 px-4 py-3 border-gray-300 ";
-$modelLink =  App\Utils\Support\Report::assignValues($params);
-$timeValues =  $modelLink['timeValues'];
-$topNameCol =  $modelLink['topNameCol'];
-$columnName = $modelLink['columnName'];
-$years = $params['year'];
-#$layout = 'md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl';
-$layout = 'max-w-[1920px] ';
+    $widthCell = 88;
+    $class1 = "bg-white border-gray-600 border-l border-b p-2";
+    $class2 =" bg-gray-100 px-4 py-3 border-gray-600 p-2";
+    $modelLink =  App\Utils\Support\Report::assignValues($params);
+    $timeValues =  $modelLink['timeValues'];
+    $topNameCol =  $modelLink['topNameCol'];
+    $columnName = $modelLink['columnName'];
+    $years = $params['year'];
+    #$layout = 'md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl';
+    $layout = 'max-w-[1920px] ';
 @endphp
 
 
@@ -27,19 +27,18 @@ $layout = 'max-w-[1920px] ';
 
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div style='page-break-after:always!important' class="{{$layout}} overflow-x-auto relative items-center box-border p-8">
+        <div style='' class="w-[1400px] min-h-[990px] items-center bg-white box-border p-8">
             <div class="flex justify-center bg-only-print">
-
-                <div class="border rounded-lg border-gray-300 dark:border-gray-600  overflow-x-auto relative">
-                    <table class="tg whitespace-no-wrap w-full text-sm min-w-full">
+                    <div class="rounded-lg border-gray-950 border overflow-hidden">
+                        <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
                         <thead class='border-b'>
                             <tr>
-                                <th class="tracking-wide  w-20 {{$class2}} " colspan=" 2">Category</th>
-                                <th class="tracking-wide w-[300px] p-2 border-l {{$class2}}">Emission source category</th>
-                                <th class="tracking-wide border-l {{$class2}}">Source</th>
+                                <th class="tracking-wide  w-20 {{$class2}} border-b" colspan=" 2">Category</th>
+                                <th class="tracking-wide w-[300px] p-2 border-l {{$class2}} border-b">Emission source category</th>
+                                <th class="tracking-wide border-l {{$class2}} border-b">Source</th>
                                 @switch($columnName)
                                     @case("years")
-                                        <th id="" colspan="{{count($years)}}" class="border-r border-l bg-gray-100 py-2 dark:border-gray-600 border-gray-300">
+                                        <th id="" colspan="{{count($years)}}" class=" border-l bg-gray-100 py-2 border-gray-600 border-b">
                                                 <div class="text-gray-700 dark:border-gray-600 ">
                                                     <span>Year </br><p class="font-normal">(tCO2e)</p></span>
                                                 </div>
@@ -47,7 +46,7 @@ $layout = 'max-w-[1920px] ';
                                         @break
                                     @case("months" || "quarter")
                                             @foreach($timeValues as $value)
-                                            <th id="" colspan="{{count($years)}}" class="border-r border-l bg-gray-100 py-2 dark:border-gray-600 border-gray-300">
+                                            <th id="" colspan="{{count($years)}}" class=" border-l bg-gray-100 py-2 border-gray-600 border-b">
                                                 <div class="text-gray-700 dark:border-gray-600 ">
                                                         @php
                                                             $value = $topNameCol ? $value:  App\Utils\Support\DateReport::getMonthAbbreviation($value);
@@ -66,7 +65,7 @@ $layout = 'max-w-[1920px] ';
                         </thead>
 
                         <thead class="sticky z-10 top-10">
-                            <tr class="bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                            <tr class="bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 border">
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -80,7 +79,7 @@ $layout = 'max-w-[1920px] ';
                                     @case("months" || "quarters")
                                             @for ($i = 0; $i < count($timeValues); $i++) 
                                                 @foreach ($years as $value) 
-                                                    <th class=" bg-gray-100 px-4 py-3 border-gray-300 border-l border-r border-t text-base tracking-wide">{{ $value }}</th>
+                                                    <th class=" bg-gray-100 px-4 py-3 border-gray-600 border-l border-t text-base tracking-wide">{{ $value }}</th>
                                                 @endforeach
                                             @endfor
                                         @break
@@ -91,7 +90,7 @@ $layout = 'max-w-[1920px] ';
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="w-20 {{$class1}} text-center border-t" rowspan="20">
+                                <td class="w-20 text-center border-t border-gray-600" rowspan="20">
                                     <div class=" font-bold">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</div>
                                 </td>
                             </tr>
@@ -203,8 +202,8 @@ $layout = 'max-w-[1920px] ';
                                     @php
                                     $totalEmissions = array_values($tableDataSource['total_emission']);
                                     @endphp
-                                    <td class="bg-white border-t" colspan="2"></td>
-                                    <td class="{{$class1}} text-left border-t text-base tracking-wide font-bold">Total Emissions</td>
+                                    <td class="bg-white border-l border-gray-600 " colspan="2"></td>
+                                    <td class=" text-left text-base tracking-wide font-bold">Total Emissions</td>
                                     @if(count($years) > 1)
                                         @foreach(array_values($totalEmissions) as $values)
                                             @for ($i = 0; $i < count($years); $i++)
