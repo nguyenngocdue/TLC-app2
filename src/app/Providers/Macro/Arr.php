@@ -136,6 +136,6 @@ Arr::macro('allElementsAre', function ($array, $x) {
 Arr::macro('sameContent', function (array $array1, array $array2) {
     return (empty(array_diff($array1, $array2)) && empty(array_diff($array2, $array1)));
 });
-Arr::macro('isTraversable', function ($array_or_collection) {
-    return is_array($array_or_collection) || $array_or_collection instanceof \Traversable;
-});
+// Arr::macro('isTraversable', function ($array_or_collection) {
+//     return is_array($array_or_collection) || $array_or_collection instanceof \Traversable;
+// });
