@@ -8,8 +8,8 @@
 {{-- PARAMETERS --}}
 @php
 $widthCell = 50;
-$class1 = "bg-white dark:border-gray-600 border-r";
-$class2 =" bg-gray-100 px-4 py-3 border-gray-300 ";
+$class1 = "bg-white border-gray-600 border-l";
+$class2 =" bg-gray-100 px-4 py-3 border-gray-600 ";
 $titleColName = isset($params['quarter_time']) ? 'QTR'.$params['quarter_time'] : 'YTD';
 $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
 @endphp
@@ -19,9 +19,8 @@ $titleColName = isset($params['only_month']) ? 'Total Quantity': $titleColName;
     @include('components.reports.shared-parameter')
 </div>
 <br />
-<div class="flex justify-center bg-only-print">
-    <div class="border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
+    <div  id="pagedata_summary_report"  style='page-break-after:always!important'  class=" w-[1400px] min-h-[790px] m-auto flex items-center bg-white box-border p-8 relative">
         @include('reports.document-ghg-summary-report-only-table')
     </div>
-</div>
+
 @endsection

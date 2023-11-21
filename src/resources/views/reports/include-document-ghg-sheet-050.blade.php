@@ -4,18 +4,10 @@
 	border-spacing:0;
 }
 .tg td{
-	border-width:1px;
-	font-family:Arial, sans-serif;
-	font-size:14px;
-  	overflow:hidden;
 	padding:8px;
-	word-break:normal;
 	background: white;
 }
 .tg th {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    overflow: hidden;
     padding: 8px;
 }
 .tg td a {
@@ -25,6 +17,8 @@
 </style>
 
 @php
+	$class1 = "bg-white border-gray-600 border-l border-b";
+	$class2 =" bg-gray-100 px-4 py-3 border-gray-600 ";
 	$complexSettingTable = $tableDataSource['tableSetting'];
 	$tableDataSource = $tableDataSource['tableDataSource'];
     $totalSpan = $complexSettingTable['total_line'];
@@ -34,32 +28,34 @@
 	$months = array_keys($tableDataSource['totalEmissionMetricTypeEachMonth']);
 @endphp
 
-<div class="pb-4">
-<div class="border rounded-lg border-gray-300 dark:border-gray-600 overflow-hidden">
-	<table class="tg whitespace-no-wrap w-full text-sm">
+
+
+
+<div class="border rounded-lg border-gray-600 overflow-hidden">
+    <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
 		<thead>
-		<tr>
-			<th class="w-20 {{$class2}}" colspan="2">Category</th>
-			<th class="w-[300px] p-2 {{$class2}} border-l ">Emission source category</th>
-			<th class="{{$class2}} border-l">Source</th>
-			<th class="{{$class2}} border-l">Metric 0</th>
-			<th class="{{$class2}} border-l">Metric 1</th>
-			<th class="{{$class2}} border-l">Metric 2</th>
-			<th class="{{$class2}} border-l">Total </br>(tCO2e)</th>
+		<tr class="rounded-t-lg bg-gray-100 border">
+			<th class="w-20 {{$class2}} border-b" colspan="2">Category</th>
+			<th class="w-[300px] p-2 {{$class2}} border-l border-b">Emission source category</th>
+			<th class="w-20 {{$class2}} border-l  border-b">Source</th>
+			<th class="w-20 {{$class2}} border-l  border-b">Metric 0</th>
+			<th class="w-20 {{$class2}} border-l  border-b">Metric 1</th>
+			<th class="w-20 {{$class2}} border-l  border-b">Metric 2</th>
+			<th class="w-20 {{$class2}} border-l  border-b">Total </br>(tCO2e)</th>
 			{{-- @dd($months) --}}
 			@foreach($months as $key => $value)
 				@if(is_numeric($key))
 					@php
 						$strMonth = App\Utils\Support\DateReport::getMonthAbbreviation2((int)$value);
 					@endphp
-					<th class="p-2 font-bold bg-gray-100 border-l">{{$strMonth}}<br/>{{$year}}</th>
+					<th class="p-2 font-bold bg-gray-100 border-l  border-b border-gray-600">{{$strMonth}}<br/>{{$params['year']}}</th>
 				@endif
 			@endforeach
 		</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td class="w-20 {{$class1}} text-center border-t" rowspan="{{$totalSpan}}"><span style="font-weight:700;font-style:normal">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</span></td>
+				<td class="w-20 text-center border-r border-gray-600" rowspan="{{$totalSpan}}"><span style="font-weight:700;font-style:normal">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</span></td>
 				@foreach($complexSettingTable as $k1 => $val1)
 						@if(isset($val1['scope_rowspan_lv1']))
 							<tr>
@@ -67,7 +63,7 @@
 									$rowSpanLv1 = $val1['scope_rowspan_lv1'];
 									$scopeName = \App\Models\Term::find($k1)->toArray()['name'];
 								@endphp
-								<td class="p-2 text-center" rowspan="{{$rowSpanLv1 ? $rowSpanLv1 : 1}}">{{$scopeName}}</td>
+								<td class="p-2 text-center border-b border-gray-600" rowspan="{{$rowSpanLv1 ? $rowSpanLv1 : 1}}">{{$scopeName}}</td>
 							{{-- </tr> --}}
 							@foreach($val1 as $k2 => $val2)
 								@if(isset($val2['scope_rowspan_lv2']))
@@ -76,7 +72,7 @@
 										$ghgcateName = \App\Models\Ghg_cat::find($k2)->toArray()['name'];
 									@endphp
 									{{-- <tr> --}}
-										<td class="p-2"  title="#{{$k2}}" rowspan="{{$rowSpanLv2 ? $rowSpanLv2: 1}}">{{$ghgcateName}}</td>
+										<td class="p-2 {{$class1}}"  title="#{{$k2}}" rowspan="{{$rowSpanLv2 ? $rowSpanLv2: 1}}">{{$ghgcateName}}</td>
 									@foreach($val2 as $k3 => $val3)
 										@if( is_numeric($k3) && isset($val3['scope_rowspan_lv3']))
 											@php 
@@ -87,7 +83,7 @@
 												$childrenMetric = $tableDataSource['scopes'][$k1][$k2][$indexChildrenMetric]['children_metrics'] ?? [];
 												//dd($childrenMetric);
 											@endphp
-											<td class="p-2" title="#{{$k3}}" rowspan="{{$rowSpanLv3}}">
+											<td class="p-2 {{$class1}}" title="#{{$k3}}" rowspan="{{$rowSpanLv3}}">
 												{!! $k3 !== '0' ? "<a href='" . route('ghg_tmpls.edit', $k3 ?? 0) . "'>" . $ghgTmplName . "</a>" : '' !!} 
 											</td>
 											@if(isset($childrenMetric[0]['ghg_tmpls_name']))
@@ -95,7 +91,7 @@
 												$months = $childrenMetric[0]['months'] ?? [];
 											@endphp
 											{{-- Metric 0: first line --}}
-											<td class="p-2">
+											<td class="p-2 {{$class1}}">
 												@php 
 													$idMetricType0 = $childrenMetric[0]['ghg_metric_type_id'] ?? 0;
 													$idMetricType1 = $childrenMetric[0]['ghg_metric_type_1_id'] ?? 0;
@@ -107,32 +103,32 @@
 												@endphp
 												{!! (float)$idMetricType0 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType0 ?? 0) . "'>" . $nameMetricType0 . "</a>" : '' !!} 
 											</td>
-											<td class="p-2">
+											<td class="p-2 {{$class1}}">
 												{!! (float)$idMetricType1  > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType1 ?? 0) . "'>" . $nameMetricType1 . "</a>" : '' !!} 
 											</td>
-											<td class="p-2">
+											<td class="p-2 {{$class1}}">
 												{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : '' !!} 
 											</td>
-											<td class="p-2 font-bold text-right">
+											<td class="p-2 font-bold text-right {{$class1}}">
 												{!! (float)$childrenMetric[0]['total_months'] <= 0 ? "<i class='fa-light fa-minus'></i>" : $childrenMetric[0]['total_months'] !!}
 											</td>
 												@foreach($months as $month => $valMonth)
-													<td class="p-2 text-right">
+													<td class="p-2 text-right {{$class1}}">
 														{!! (float)$valMonth <= 0 ? "<i class='fa-light fa-minus'></i>" : $valMonth !!}
 													</td>
 												@endforeach
 											{{-- add empty cell --}}
 											@elseif(!isset($childrenMetric[0]['ghg_metric_type_id']))
-													<td class="text-left"><i class="fa-light fa-minus"></i></td>
+													<td class="text-left {{$class1}}"><i class="fa-light fa-minus"></i></td>
 												@if(!isset($childrenMetric[0]['ghg_metric_type_1_id']))
-														<td class="text-left"><i class="fa-light fa-minus"></i></td>
+														<td class="text-left {{$class1}}"><i class="fa-light fa-minus"></i></td>
 													@if(!isset($childrenMetric[0]['ghg_metric_type_2_id']))
-														<td class="text-left"><i class="fa-light fa-minus"></i></td>
+														<td class="text-left {{$class1}}"><i class="fa-light fa-minus"></i></td>
 															@php
 																$numOfMonths = count($months);
 															@endphp
 															@for($i = 0; $i <= $numOfMonths; $i++)
-																<td class="text-center"><i class="fa-light fa-minus"></i></td>
+																<td class="text-center {{$class1}}"><i class="fa-light fa-minus"></i></td>
 															@endfor
 													@endif
 												@endif
@@ -152,24 +148,24 @@
 															$nameMetricType1 = $childrenMetric[$i]['ghg_metric_type_1_name'];
 															$nameMetricType2 = $childrenMetric[$i]['ghg_metric_type_2_name'];
 														@endphp
-														<td class="p-2">
+														<td class="p-2 {{$class1}}">
 															{!! (float)$idMetricType0 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType0 ?? 0) . "'>" . $nameMetricType0 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 														</td>
 														
-														<td class="p-2">
+														<td class="p-2 {{$class1}}">
 															{!! (float)$idMetricType1 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType1 ?? 0) . "'>" . $nameMetricType1 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 														</td>
-														<td class="p-2">
+														<td class="p-2 {{$class1}}">
 															{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 														</td>
-														<td class="p-2 font-bold text-right ">
+														<td class="p-2 font-bold text-right {{$class1}}">
 																{!! (float)$childrenMetric[$i]['total_months'] <= 0 ? "<i class='fa-light fa-minus'></i>" : $childrenMetric[$i]['total_months'] !!}
 														</td>
 														@php
 															$months = $childrenMetric[$i]['months'] ?? [];
 														@endphp
 														@foreach($months as $month => $valMonth)
-															<td class="p-2 text-right">
+															<td class="p-2 text-right {{$class1}}">
 																{!! (float)$valMonth <= 0 ? "<i class='fa-light fa-minus'></i>" : $valMonth !!}
 															</td>
 														@endforeach
@@ -187,13 +183,12 @@
 				$totalEmissionMetricType = $tableDataSource['totalEmissionMetricType'];
 				$totalEmissionMetricTypeEachMonth = $tableDataSource['totalEmissionMetricTypeEachMonth'];
 			@endphp
-			<td class="p-2 text-right font-bold"  colspan="6">Total Emissions</td>
-			<td class="p-2 text-right font-bold text-red-600"  colspan="1">{{$totalEmissionMetricType}}</td>
+			<td class="p-2 text-right font-bold border-r border-gray-600"  colspan="6">Total Emissions</td>
+			<td class="p-2 text-right font-bold text-red-600 "  colspan="1">{{$totalEmissionMetricType}}</td>
 			@foreach($totalEmissionMetricTypeEachMonth as $key => $value)
-				<td class="p-2 text-right font-bold text-red-600">{{$value}}</td>
+				<td class="p-2 text-right font-bold text-red-600 border-l border-gray-600">{{$value}}</td>
 			@endforeach
 		</tr>
 		</tbody>
 	</table>
-</div>
 </div>
