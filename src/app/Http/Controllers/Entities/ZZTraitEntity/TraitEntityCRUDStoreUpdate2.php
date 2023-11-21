@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-// use App\Events\CreatedDocumentEvent;
 use App\Events\CreatedDocumentEvent2;
 use App\Events\UpdatedDocumentEvent;
 use App\Http\Services\LoggerForTimelineService;

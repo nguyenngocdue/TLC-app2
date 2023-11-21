@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Events\CreatedDocumentEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Models\Logger;
