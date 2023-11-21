@@ -11,23 +11,23 @@
     </div>
 </button>
 <script type="text/javascript">
-    // window.Echo.channel('notifications')
-    //    .listen('.BroadcastNotificationEvent', (data) => {
-    //     $.ajax({
-    //         method: "GET",
-    //         url: "/system/notifications",
-    //         dataType: "json",
-    //         success: (response) => {
-    //             var unreadNotifications = response['meta']['unread'];
-    //             var count = unreadNotifications.length;
-    //             console.log(count);
-    //             document.getElementById("countUread").innerHTML = count;
-    //         },
-    //         error: (error) => {
-    //             console.log(error);
-    //         }
-    //     });
-    //    });
+    window.Echo.channel('notifications')
+       .listen('.BroadcastNotificationEvent', (data) => {
+        $.ajax({
+            method: "GET",
+            url: "/system/notifications",
+            dataType: "json",
+            success: (response) => {
+                var unreadNotifications = response['meta']['unread'];
+                var count = unreadNotifications.length;
+                console.log(count);
+                document.getElementById("countUread").innerHTML = count;
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        });
+       });
 </script>
 <template x-if="isNotificationsMenuOpen">
     <div x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeNotificationsMenu" @keydown.escape="closeNotificationsMenu" class="absolute right-0 w-[500px] h-[calc(100vh-100px)] overflow-y-auto text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">
