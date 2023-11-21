@@ -1,6 +1,6 @@
 
-<div class="border rounded-lg border-gray-600 overflow-hidden">
-    <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
+<div class=" rounded-lg border-gray-950 border-2 overflow-hidden">
+    <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden">
         <thead class=''>
             <tr class="">
                 <th class=" w-20{{$class2}} border-r" colspan=" 2">Category</th>

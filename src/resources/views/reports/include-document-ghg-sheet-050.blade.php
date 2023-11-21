@@ -31,7 +31,7 @@
 
 
 
-<div class="border rounded-lg border-gray-600 overflow-hidden">
+<div class="rounded-lg border-gray-950 border-2 overflow-hidden">
     <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
 		<thead>
 		<tr class="rounded-t-lg bg-gray-100 border">
