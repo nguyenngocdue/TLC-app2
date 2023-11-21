@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 use App\Events\CreatedDocumentEvent2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFieldHandler2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitSendNotificationAndMail;
+use App\Http\Services\LoggerForTimelineService;
 use App\Models\Hr_timesheet_line;
 use App\Models\Hr_timesheet_worker;
 use App\Models\Site_daily_assignment_line;
 use App\Models\User_team_site;
 use App\Models\User_team_tsht;
 use App\Utils\Constant;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
@@ -154,8 +156,9 @@ trait TraitStoreEmpty
 				// Log::info("Store empty");
 				// Log::info($createdItem);
 
-				$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
-				// event(new CreatedDocumentEvent2($this->modelPath, $this->type, $createdItem->id));
+				// $this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
+				(new LoggerForTimelineService())->insertForCreate($createdItem, CurrentUser::id(), $this->modelPath);
+				event(new CreatedDocumentEvent2($this->modelPath, $this->type, $createdItem->id));
 				$tableName = Str::plural($this->type);
 				$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
 				$theRows[] = $createdItem;

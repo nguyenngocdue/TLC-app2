@@ -43,7 +43,7 @@ class EventServiceProvider extends ServiceProvider
         // CreatedDocumentEvent::class => [CreatedDocumentListener::class],
         CreatedDocumentEvent2::class => [CreatedDocumentListener2::class],
         UpdatedDocumentEvent::class => [
-            UpdatedDocumentListener::class,
+            // UpdatedDocumentListener::class,
             UpdatedDocumentListener2::class,
         ],
 

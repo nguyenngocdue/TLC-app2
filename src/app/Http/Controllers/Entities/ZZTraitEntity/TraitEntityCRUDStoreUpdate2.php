@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 // use App\Events\CreatedDocumentEvent;
 use App\Events\CreatedDocumentEvent2;
 use App\Events\UpdatedDocumentEvent;
+use App\Http\Services\LoggerForTimelineService;
+use App\Utils\Support\CurrentUser;
 use App\Utils\System\Timer;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -100,8 +102,9 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Created New Document"
-		$this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $toastrResult);
-		// event(new CreatedDocumentEvent2($this->modelPath, $this->type, $theRow->id));
+		// $this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $toastrResult);
+		(new LoggerForTimelineService())->insertForCreate($theRow, CurrentUser::id(), $this->modelPath);
+		event(new CreatedDocumentEvent2($this->modelPath, $this->type, $theRow->id));
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -249,9 +252,10 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
 		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment'], $isFakeRequest, $allTable01Names);
-		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
-		// event(new UpdatedDocumentEvent($previousValue, $currentValue, $type, $modelPath, $cuid));
+		// $this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
 		// dump($previousValue, $fieldForEmailHandler);
+		(new LoggerForTimelineService())->insertForUpdate($theRow, $previousValue, CurrentUser::id(), $this->modelPath);
+		event(new UpdatedDocumentEvent($previousValue, $fieldForEmailHandler, $this->type, $this->modelPath, CurrentUser::id()));
 		$this->emitPostUpdateEvent($theRow->id);
 		Log::info($this->type . " update2 elapsed ms: " . Timer::getTimeElapseFromLastAccess());
 		return $this->redirectCustomForUpdate2($request, $theRow);
