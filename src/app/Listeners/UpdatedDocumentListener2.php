@@ -30,16 +30,18 @@ class UpdatedDocumentListener2 implements ShouldQueue
     private function getValues(array $obj, array $bic)
     {
         $status = $obj['status'];
-        $bic_assignee = $bic[$status]['ball-in-court-assignee'] ?: '';
+        $bic_assignee = $bic[$status]['ball-in-court-assignee'] ?: 'owner_id';
         $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1()";
+
+        $bic_id = 1 * $obj[$bic_assignee];
         $monitor_ids = $obj[$bic_monitors];
 
         $result = [
             'status' => $status,
 
             'bic_assignee' => $bic_assignee,
-            'bic_assignee_uid' => $obj[$bic_assignee] * 1,
-            'bic_assignee_name' => User::findFromCache($obj[$bic_assignee])->name,
+            'bic_assignee_uid' => $bic_id,
+            'bic_assignee_name' => User::findFromCache($bic_id)->name,
 
             'bic_monitors' => $bic_monitors,
             'bic_monitors_uids' => array_map(fn ($i) => $i * 1, $monitor_ids),
