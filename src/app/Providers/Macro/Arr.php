@@ -133,3 +133,6 @@ Arr::macro('allElementsAre', function ($array, $x) {
     foreach ($array as $value) if ($value !== $x) return false;
     return true;
 });
+Arr::macro('sameContent', function (array $array1, array $array2) {
+    return (empty(array_diff($array1, $array2)) && empty(array_diff($array2, $array1)));
+});

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RemindSignOffNotification extends Notification
+class SampleNotification extends Notification
 {
     use Queueable;
 
@@ -16,10 +16,9 @@ class RemindSignOffNotification extends Notification
      *
      * @return void
      */
-    public function __construct(
-        public $doc,
-    ) {
-        //
+    public function __construct($id)
+    {
+        // $this->id = $id;
     }
 
     /**
@@ -30,8 +29,6 @@ class RemindSignOffNotification extends Notification
      */
     public function via($notifiable)
     {
-        // dump($notifiable);
-        // dd($this->data);
         return ['mail'];
     }
 
@@ -43,22 +40,9 @@ class RemindSignOffNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $name = $notifiable->name;
-        [
-            'signable_type' => $signable_type,
-            'signable_id' => $signable_id,
-            'requester' => $requester,
-        ] = $this->doc;
-        // dump($requester);
         return (new MailMessage)
-            ->cc($requester['email'])
-            ->bcc(env('MAIL_ARCHIVE_BCC'))
-
-            ->subject("[ICS/$signable_id] Inspection Checklist - " . config("company.name") . " APP")
-            ->greeting("Dear $name,")
-            ->line($requester['name'] . ' have send a request to you to sign off a document.')
-            ->line('Please click the button below to open the sign off page.')
-            ->action('Sign Off Now', url("/dashboard/$signable_type/$signable_id/edit"))
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
     }
 
@@ -70,8 +54,6 @@ class RemindSignOffNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        return [$notifiable];
     }
 }

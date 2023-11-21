@@ -11,23 +11,20 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class UpdatedDocumentEvent
+class CreatedDocumentEvent2
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
     /**
      * Create a new event instance.
      *
      * @return void
      */
     public function __construct(
-        public $previousValue,
-        public $currentValue,
-        public $type,
         public $modelPath,
-        public $userCurrentId,
+        public $type,
+        public $id,
     ) {
-        // Log::info("Updated Doc Event");
+        // Log::info("CreatedDocumentEvent2");
     }
 
     /**
