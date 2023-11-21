@@ -20,7 +20,7 @@ class Ghg_sheet_040 extends Report_ParentDocument2Controller
 
 	protected $viewName = 'document-ghg-sheet-040';
 	protected $year = '2023';
-	protected $mode = '020';
+	protected $mode = '040';
 	protected $type = 'ghg_sheets';
 	protected $optionPrint = "landscape";
 

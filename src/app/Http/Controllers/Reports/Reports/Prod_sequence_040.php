@@ -247,7 +247,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                                 .'&prod_order_id=' .$prodOrderId
                                 .'&prod_routing_id=' .$prodRoutingId;
                 $items->independent_holiday_sunday_day = (object)[
-                    'value' => $items->net_working_day,
+                    'value' => $items->independent_holiday_sunday_day,
                     'cell_class' => 'text-blue-700',
                     'cell_href' => $route,
                 ];   

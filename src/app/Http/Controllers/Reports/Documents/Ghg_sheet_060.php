@@ -20,6 +20,8 @@ class Ghg_sheet_060 extends Report_ParentDocument2Controller
 
 	protected $viewName = 'document-ghg-sheet-060';
 	protected $year = '2023';
+	protected $mode = '060';
+
 
 	public function getSqlStr($params)
     {

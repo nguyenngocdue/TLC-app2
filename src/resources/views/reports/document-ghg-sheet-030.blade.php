@@ -27,7 +27,7 @@
 
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div style='' class="w-[1400px] min-h-[990px] items-center bg-white box-border p-8">
+        <div style='' class="min-w-[1400px] min-h-[990px] items-center bg-white box-border p-8">
             <div class="flex justify-center bg-only-print">
                     <div class="rounded-lg border-gray-950 border overflow-hidden">
                         <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
@@ -73,7 +73,7 @@
                                  @switch($columnName)
                                     @case("years")
                                             @for ($i = 0; $i < count($timeValues); $i++) 
-                                                <th class=" bg-gray-100 px-4 py-3 border-gray-300 border-l border-r border-t text-base tracking-wide">{{ $years[$i] }}</th>
+                                                <th class=" bg-gray-100 px-4 py-3 border-gray-600 border-l border-t text-base tracking-wide">{{ $years[$i] }}</th>
                                             @endfor
                                         @break
                                     @case("months" || "quarters")
