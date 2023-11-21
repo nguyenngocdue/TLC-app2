@@ -63,7 +63,14 @@ class UpdatedDocumentListener2 implements ShouldQueue
     private function sendMail($previousValue, $currentValue, $diff, $type, $id)
     {
         $app = LibApps::getFor($type);
-        if ($app['do_not_send_notification_mails'] ?? false) return;
+        if ($app['do_not_send_notification_mails'] ?? false) {
+            Log::info("UpdatedDocumentListener2: There is an update event fired, but do_not_send_notification_mails so no mail sent.");
+            return;
+        }
+        if (Arr::allElementsAre($diff, false)) {
+            Log::info("UpdatedDocumentListener2: There is an update event fired, but no changes so no mail sent.");
+            return;
+        }
 
         $nickname = strtoupper($app['nickname']);
         $appTitle = $app['title'];

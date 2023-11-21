@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 
 use App\Events\CreatedDocumentEvent2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFieldHandler2;
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitSendNotificationAndMail;
 use App\Http\Services\LoggerForTimelineService;
 use App\Models\Hr_timesheet_line;
 use App\Models\Hr_timesheet_worker;
@@ -23,7 +22,6 @@ use Illuminate\Support\Str;
 
 trait TraitStoreEmpty
 {
-	use TraitSendNotificationAndMail;
 	use TraitEntityFieldHandler2;
 	use TraitFailObject;
 

@@ -16,9 +16,13 @@ This document change assignee from
 @endif
 @if($diff['bic_monitors_uids'])
 This document change monitors from 
-<x-mail::status>{{$previousValue['bic_monitors_names']}}</x-mail::status> 
- to   
-<x-mail::status>{{$currentValue['bic_monitors_names']}}</x-mail::status>
+@foreach($previousValue['bic_monitors_names'] as $name)
+<x-mail::status>{{$name}}</x-mail::status> 
+@endforeach
+ to 
+@foreach($currentValue['bic_monitors_names'] as $name)
+<x-mail::status>{{$name}}</x-mail::status>
+@endforeach
 <br>
 @endif
 <x-mail::button :url="$action">

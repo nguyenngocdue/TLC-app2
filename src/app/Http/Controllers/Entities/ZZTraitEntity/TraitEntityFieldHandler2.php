@@ -205,12 +205,6 @@ trait TraitEntityFieldHandler2
     //     $request->replace($newRequest);
     // }
 
-    private function addEntityValue($array, $key, $value)
-    {
-        $array[$key] = $value;
-        return $array;
-    }
-
     private function makeUpTableFieldForRequired(Request $request)
     {
         $tableNames = $request->input('tableNames');
