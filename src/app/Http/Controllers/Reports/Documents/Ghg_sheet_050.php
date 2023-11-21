@@ -3,17 +3,13 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
-use App\Http\Controllers\Reports\Reports\Ghg_sheet_010;
 use App\Http\Controllers\Reports\Reports\Ghg_sheet_dataSource;
-use App\Http\Controllers\Reports\TraitConversionFieldNameGhgReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitGenerateValuesFromParamsReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Utils\Support\ArrayReport;
-use App\Utils\Support\DateReport;
 use App\Utils\Support\DocumentReport;
 use App\Utils\Support\Report;
-use App\Utils\Support\StringReport;
 
 class Ghg_sheet_050 extends Report_ParentDocument2Controller
 {
@@ -24,6 +20,7 @@ class Ghg_sheet_050 extends Report_ParentDocument2Controller
 
 	protected $viewName = 'document-ghg-sheet-050';
 	protected $year = '2023';
+	protected $mode = '050';
 
 	public function getSqlStr($params)
     {

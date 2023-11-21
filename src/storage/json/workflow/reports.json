@@ -54,8 +54,17 @@
         "package_tab": "report",
         "package": "compliance",
         "breadcrumb-group": null,
-        "top_title": "ECO Report Detail - Remove Metric  0 1 2",
-        "title": "ECO Report Detail - Remove Metric  0 1 2",
+        "top_title": "ECO Report Detail - Remove Metric 0 1 2",
+        "title": "ECO Report Detail - Remove Metric 0 1 2",
+        "hidden": "true"
+    },
+    "document-ghg_sheet_070": {
+        "name": "document-ghg_sheet_070",
+        "package_tab": "report",
+        "package": "compliance",
+        "breadcrumb-group": null,
+        "top_title": "CO2 Emission Comparison by Metric 2 Report",
+        "title": "CO2 Emission Comparison by Metric 2 Report",
         "hidden": "true"
     },
     "document-prod_sequence_010": {
