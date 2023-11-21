@@ -9,7 +9,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_name": {
         "name": "_name",
@@ -21,7 +22,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_description": {
         "name": "_description",
@@ -33,7 +35,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_slug": {
         "name": "_slug",
@@ -45,7 +48,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
@@ -57,7 +61,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_qaqc_insp_tmpl_sht_id": {
         "name": "_qaqc_insp_tmpl_sht_id",
@@ -69,7 +74,21 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -81,7 +100,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_progress": {
         "name": "_progress",
@@ -93,7 +113,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getLines": {
         "name": "_getLines",
@@ -105,7 +126,34 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "17",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "696",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -117,7 +165,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
@@ -129,79 +178,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_deleted_by": {
-        "name": "_deleted_by",
-        "column_name": "deleted_by",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_deleted_at": {
-        "name": "_deleted_at",
-        "column_name": "deleted_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_signature_qaqc_chklst_3rd_party": {
         "name": "_signature_qaqc_chklst_3rd_party",
@@ -213,6 +191,85 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     }
 }

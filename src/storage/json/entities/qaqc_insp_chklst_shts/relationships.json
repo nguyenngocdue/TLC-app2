@@ -47,6 +47,38 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_getAssignee1": {
+        "name": "_getAssignee1",
+        "relationship": "belongsTo",
+        "control_name": "assignee_1",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_getAssignee2": {
+        "name": "_getAssignee2",
+        "relationship": "belongsTo",
+        "control_name": "assignee_2",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",
