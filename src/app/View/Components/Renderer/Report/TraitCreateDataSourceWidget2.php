@@ -41,13 +41,13 @@ trait TraitCreateDataSourceWidget2
                 $numbers = $dataByParamCol;
                 
                 if($params['chart_type'] === 'bar' || $params['chart_type'] === 'line') {
+                    $dataSets['label'] = $params['data_label'] ?? "undefined";
+                    $dataSets['type'] = $params['chart_type'];
+                    $dataSets['yAxisID'] = $params['y_axis_id'];
                     $dataSets['data'] = $dataByParamCol;
                     $dataSets['count'] = count($dataByParamCol);
                     $dataSets['max'] = max($dataByParamCol);
-                    $dataSets['type'] = $params['chart_type'];
-                    $dataSets['yAxisID'] = $params['y_axis_id'];
                     $dataSets['tension'] = $params['tension'] ?? 0;
-                    $dataSets['label'] = $params['data_label'] ?? "undefined";
                     $dataSets['borderWidth'] = $params['borderWidth'] ?? 0;
                     $dataSets['borderColor'] = $params["line_color"] ?? "";
                     $dataSets['pointStyle'] = $params["pointStyle"] ?? "circle";
@@ -102,7 +102,7 @@ trait TraitCreateDataSourceWidget2
             'key_name' => $dataManage['key_name'],
             'tempScaleMaxX' => $dataManage['dimensions']['scaleMaxX'],
         ];
-        // dd($result);
+        // dump($result);
         return $result;
     }
 
