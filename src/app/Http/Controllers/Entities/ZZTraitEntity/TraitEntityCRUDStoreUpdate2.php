@@ -121,7 +121,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->reArrangeComments($request);
 
 		$previousValue = $this->modelPath::find($id);
-		Oracy::attach("getMonitors1()", $previousValue, true);
+		Oracy::attach("getMonitors1()", [$previousValue], true);
 		$previousValue = $previousValue->getAttributes();
 		// $previousValue = $this->getPreviousValue($currentValue, $theRow);
 
