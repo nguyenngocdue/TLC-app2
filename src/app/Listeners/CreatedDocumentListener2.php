@@ -4,7 +4,6 @@ namespace App\Listeners;
 
 use App\Events\CreatedDocumentEvent2;
 use App\Http\Controllers\Workflow\LibApps;
-use App\Http\Services\LoggerForTimelineService;
 use App\Mail\MailCreateNew;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -12,16 +11,15 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class CreatedDocumentListener2 //implements ShouldQueue
+class CreatedDocumentListener2 implements ShouldQueue
 {
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct(
-        private LoggerForTimelineService $logger,
-    ) {
+    public function __construct()
+    {
         //
     }
 
@@ -30,7 +28,7 @@ class CreatedDocumentListener2 //implements ShouldQueue
         $app = LibApps::getFor($type);
         if ($app['do_not_send_notification_mails'] ?? false) return;
 
-        $nickname = strtoupper($app['nickname']);
+        $nickname = strtoupper($app['nickname'] ?: $app['name']);
         $appTitle = $app['title'];
         $subject = "[$nickname/$id] - $appTitle - " . env("APP_NAME");
 
@@ -53,9 +51,6 @@ class CreatedDocumentListener2 //implements ShouldQueue
         $id = $event->id;
         $type = $event->type;
         $item = $modelPath::find($id);
-
-        // $this->logger->insert();
-
         $this->sendMail($item, $type, $id);
     }
 }

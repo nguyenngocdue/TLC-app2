@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class UpdatedDocumentListener2 //implements ShouldQueue
+class UpdatedDocumentListener2 implements ShouldQueue
 {
     use CheckDefinitionsNew;
     /**
@@ -24,23 +24,28 @@ class UpdatedDocumentListener2 //implements ShouldQueue
      */
     public function __construct()
     {
-        // Log::info("UpdatedDocumentListener");
+        // Log::info("UpdatedDocumentListener constructor");
     }
 
     private function getValues(array $obj, array $bic)
     {
         $status = $obj['status'];
-        $bic_assignee = $bic[$status]['ball-in-court-assignee'];
-        $bic_monitors = $bic[$status]['ball-in-court-monitors'];
+        $bic_assignee = $bic[$status]['ball-in-court-assignee'] ?: 'owner_id';
+        $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1()";
+
+        $bic_id = 1 * $obj[$bic_assignee];
+        $monitor_ids = $obj[$bic_monitors];
 
         $result = [
             'status' => $status,
+
             'bic_assignee' => $bic_assignee,
+            'bic_assignee_uid' => $bic_id,
+            'bic_assignee_name' => User::findFromCache($bic_id)->name,
+
             'bic_monitors' => $bic_monitors,
-            'bic_assignee_uid' => $obj[$bic_assignee] * 1,
-            'bic_monitors_uids' => array_map(fn ($i) => $i * 1, $obj[$bic_monitors]),
-            'bic_assignee_name' => User::findFromCache($obj[$bic_assignee])->name,
-            'bic_monitors_names' => array_map(fn ($i) => User::findFromCache($i * 1)->name, $obj[$bic_monitors]),
+            'bic_monitors_uids' => array_map(fn ($i) => $i * 1, $monitor_ids),
+            'bic_monitors_names' => array_map(fn ($i) => User::findFromCache($i * 1)->name, $monitor_ids),
         ];
 
         return $result;
@@ -58,7 +63,14 @@ class UpdatedDocumentListener2 //implements ShouldQueue
     private function sendMail($previousValue, $currentValue, $diff, $type, $id)
     {
         $app = LibApps::getFor($type);
-        if ($app['do_not_send_notification_mails'] ?? false) return;
+        if ($app['do_not_send_notification_mails'] ?? false) {
+            Log::info("UpdatedDocumentListener2: There is an update event fired, but do_not_send_notification_mails so no mail sent.");
+            return;
+        }
+        if (Arr::allElementsAre($diff, false)) {
+            Log::info("UpdatedDocumentListener2: There is an update event fired, but no changes so no mail sent.");
+            return;
+        }
 
         $nickname = strtoupper($app['nickname']);
         $appTitle = $app['title'];

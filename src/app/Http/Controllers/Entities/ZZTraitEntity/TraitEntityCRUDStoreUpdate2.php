@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-// use App\Events\CreatedDocumentEvent;
+use App\BigThink\Oracy;
 use App\Events\CreatedDocumentEvent2;
 use App\Events\UpdatedDocumentEvent;
+use App\Http\Services\LoggerForTimelineService;
+use App\Utils\Support\CurrentUser;
 use App\Utils\System\Timer;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -100,8 +101,9 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Created New Document"
-		$this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $toastrResult);
-		// event(new CreatedDocumentEvent2($this->modelPath, $this->type, $theRow->id));
+		// $this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $toastrResult);
+		(new LoggerForTimelineService())->insertForCreate($theRow, CurrentUser::id(), $this->modelPath);
+		event(new CreatedDocumentEvent2($this->modelPath, $this->type, $theRow->id));
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -117,6 +119,11 @@ trait TraitEntityCRUDStoreUpdate2
 		// }
 		$this->updateUserSettings($request);
 		$this->reArrangeComments($request);
+
+		$previousValue = $this->modelPath::find($id);
+		Oracy::attach("getMonitors1()", $previousValue, true);
+		$previousValue = $previousValue->getAttributes();
+		// $previousValue = $this->getPreviousValue($currentValue, $theRow);
 
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
@@ -197,12 +204,8 @@ trait TraitEntityCRUDStoreUpdate2
 			throw $e; //<<This is for form's fields
 		}
 		try {
-			$fields = $this->handleFields($request, __FUNCTION__);
-			// Log::info($fields);
-			$handledFields = $this->addEntityValue($fields, 'status', $newStatus);
-			$previousValue = $this->getPreviousValue($handledFields, $theRow);
-			$fieldForEmailHandler = $this->addEntityValue($handledFields, 'created_at', $theRow->getAttributes()['created_at']);
-			$fieldForEmailHandler = $this->addEntityValue($fieldForEmailHandler, 'updated_at', $theRow->getAttributes()['updated_at']);
+			$currentValue = $this->handleFields($request, __FUNCTION__);
+			$currentValue['status'] = $newStatus;
 			//Fire the event "Send Mail give Monitors No and Comment"
 			// $this->fireEventInspChklst($request, $id);
 		} catch (\Exception $e) {
@@ -224,17 +227,17 @@ trait TraitEntityCRUDStoreUpdate2
 				if (isset($toBeOverrideAggregatedFields)) {
 					//If there are aggregation fields, override them
 					// Log::info($toBeOverrideAggregatedFields);
-					// Log::info($handledFields);
-					$handledFields = array_merge($handledFields, $toBeOverrideAggregatedFields);
-					// Log::info($handledFields);
+					// Log::info($currentValue);
+					$currentValue = array_merge($currentValue, $toBeOverrideAggregatedFields);
+					// Log::info($currentValue);
 				}
-				// $theRow->updateWithOptimisticLocking($handledFields);
-				$theRow->fill($handledFields);
+				// $theRow->updateWithOptimisticLocking($currentValue);
+				$theRow->fill($currentValue);
 				$theRow->save();
 			}
 		} catch (ValidationException $e) {
 			// dump($e->getMessage());
-			Toastr::error($e->getMessage(), "Constraint failed");
+			toastr()->error($e->getMessage(), "Constraint failed");
 			return $this->redirectCustomForUpdate2($request, $theRow);; // Skip status logger
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 3);
@@ -248,10 +251,12 @@ trait TraitEntityCRUDStoreUpdate2
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Updated New Document"
-		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment'], $isFakeRequest, $allTable01Names);
-		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
-		// event(new UpdatedDocumentEvent($previousValue, $currentValue, $type, $modelPath, $cuid));
-		// dump($previousValue, $fieldForEmailHandler);
+		$this->removeAttachmentForFields($currentValue, $props['attachment'], $isFakeRequest, $allTable01Names);
+		// $this->eventUpdatedNotificationAndMail($previousValue, $currentValue, $newStatus, $toastrResult);
+		// dump($previousValue, $currentValue);
+		// dd();
+		(new LoggerForTimelineService())->insertForUpdate($theRow, $previousValue, CurrentUser::id(), $this->modelPath);
+		event(new UpdatedDocumentEvent($previousValue, $currentValue, $this->type, $this->modelPath, CurrentUser::id()));
 		$this->emitPostUpdateEvent($theRow->id);
 		Log::info($this->type . " update2 elapsed ms: " . Timer::getTimeElapseFromLastAccess());
 		return $this->redirectCustomForUpdate2($request, $theRow);

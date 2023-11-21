@@ -16,9 +16,8 @@ class SampleNotification extends Notification
      *
      * @return void
      */
-    public function __construct($id)
+    public function __construct(private $data)
     {
-        // $this->id = $id;
     }
 
     /**
@@ -29,7 +28,7 @@ class SampleNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -54,6 +53,6 @@ class SampleNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [$notifiable];
+        return [$this->data];
     }
 }

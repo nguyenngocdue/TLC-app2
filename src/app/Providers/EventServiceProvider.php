@@ -12,10 +12,8 @@ use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Events\UserSignedInEvent;
 //------------
-use App\Listeners\CreatedDocumentListener;
 use App\Listeners\CreatedDocumentListener2;
 use App\Listeners\RequestSignOffListener;
-use App\Listeners\UpdatedDocumentListener;
 use App\Listeners\UpdatedDocumentListener2;
 use App\Listeners\UpdatedEsgSheetListener;
 use App\Listeners\UpdatedProdSequenceListener;
@@ -40,12 +38,8 @@ class EventServiceProvider extends ServiceProvider
         UserSignedInEvent::class => [UserSignedInListener::class],
 
         //Create and Update generic documents
-        // CreatedDocumentEvent::class => [CreatedDocumentListener::class],
         CreatedDocumentEvent2::class => [CreatedDocumentListener2::class],
-        UpdatedDocumentEvent::class => [
-            UpdatedDocumentListener::class,
-            UpdatedDocumentListener2::class,
-        ],
+        UpdatedDocumentEvent::class => [UpdatedDocumentListener2::class,],
 
         //Update specific entities
         UpdatedQaqcChklstSheetEvent::class => [UpdatedQaqcChklstSheetListener::class],
