@@ -64,12 +64,19 @@ class RequestSignOffListener implements ShouldQueue
     public function handle(RequestSignOffEvent $event)
     {
         $data = $event->data;
+        $signableId = $data['signableId'];
         [$requester, $receiver, $category_id] = $this->getUsers($data);
 
         try {
             $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
             $params += $this->getMeta($data);
-            Mail::to($receiver->email)->send(new MailRequestSignOff($params));
+            $mail = new MailRequestSignOff($params);
+            $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
+            $mail->subject($subject);
+            Mail::to($receiver->email)
+                ->cc($requester->email)
+                ->bcc(env('MAIL_ARCHIVE_BCC'))
+                ->send($mail);
         } catch (\Exception $e) {
             $msg = "Mail to <b>{$receiver->email}</b> failed.<br/>";
             $msg .= $e->getMessage();

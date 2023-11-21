@@ -113,7 +113,7 @@ class UpdatedDocumentListener implements ShouldQueue
         $mail->subject($subjectMail);
         Mail::to($user)
             ->cc($this->getAddressCc($listCc, $user, $currentValue))
-            ->bcc($this->getMailBcc())
+            ->bcc(env('MAIL_ARCHIVE_BCC'))
             ->send($mail);
     }
     private function getUserIdsAssigneeAndMonitors($ballInCourts, $previousValue, $currentValue, $previousStatus, $currentStatus)
@@ -219,10 +219,10 @@ class UpdatedDocumentListener implements ShouldQueue
     {
         return array_filter($cc, fn ($item) => $item !== $user['email']);
     }
-    private function getMailBcc()
-    {
-        return env('MAIL_ARCHIVE_BCC');
-    }
+    // private function getMailBcc()
+    // {
+    //     return env('MAIL_ARCHIVE_BCC');
+    // }
     // private function isArraysDiffer($array1, $array2)
     // {
     //     $diff = array_diff($array1, $array2);

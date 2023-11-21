@@ -119,7 +119,7 @@
     @break
 
     @case('signature_multi')
-    <x-controls.signature.signature-group2 :item="$item" signableId={{$id}} type="{{$type}}" category="{{$columnName}}" readOnly={{$readOnly}} />
+    <x-controls.signature.signature-group2a :item="$item" signableId={{$id}} type="{{$type}}" category="{{$columnName}}" readOnly={{$readOnly}} />
     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
     @break
 

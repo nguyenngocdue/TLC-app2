@@ -36,6 +36,6 @@ The body of your message.
 </x-mail::table>
 @endempty
 
-Thank you for using our application!<br>
-{{ config('app.name') }} Modular
+Best Regard,<br>
+{{ config('app.name') }}
 </x-mail::message>

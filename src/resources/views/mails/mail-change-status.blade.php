@@ -25,6 +25,6 @@ This document change monitors from
     View Document
 </x-mail::button>
 
-Thank you for using our application!<br>
-{{ config('app.name') }} Modular
+Best Regard,<br>
+{{ config('app.name') }}
 </x-mail::message>

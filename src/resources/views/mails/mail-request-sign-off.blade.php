@@ -1,6 +1,6 @@
 <x-mail::message>
 Hi **{{$receiverName}}**,  
-**{{$requesterName}}** sent you a sign off request.  
+**{{$requesterName}}** sent you a sign off request:  
 
 + Project: **{{$projectName}}/{{$subProjectName}}**  
 + Module: **{{$moduleName}}** 

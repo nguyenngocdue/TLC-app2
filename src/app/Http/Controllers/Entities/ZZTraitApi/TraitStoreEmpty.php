@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Events\CreatedDocumentEvent2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFieldHandler2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitSendNotificationAndMail;
 use App\Models\Hr_timesheet_line;
@@ -154,6 +155,7 @@ trait TraitStoreEmpty
 				// Log::info($createdItem);
 
 				$this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
+				// event(new CreatedDocumentEvent2($this->modelPath, $this->type, $createdItem->id));
 				$tableName = Str::plural($this->type);
 				$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
 				$theRows[] = $createdItem;

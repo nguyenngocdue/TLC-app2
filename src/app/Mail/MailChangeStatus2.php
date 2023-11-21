@@ -2,13 +2,15 @@
 
 namespace App\Mail;
 
+// use App\Http\Controllers\Workflow\LibStatuses;
+// use App\Utils\ConvertColorTailwind;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class MailCreateNew extends Mailable
+class MailChangeStatus2 extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,6 +31,14 @@ class MailCreateNew extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.mail-create-new', $this->data);
+        // Log::info($this->data);
+        return $this->markdown('mails.mail-change-status2', [
+            'name' => $this->data['name'],
+            'action' => $this->data['action'],
+
+            'previousValue' => $this->data['previousValue'],
+            'currentValue' => $this->data['currentValue'],
+            'diff' => $this->data['diff'],
+        ]);
     }
 }

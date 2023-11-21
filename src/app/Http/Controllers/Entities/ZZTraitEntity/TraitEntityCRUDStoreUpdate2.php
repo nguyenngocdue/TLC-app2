@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+// use App\Events\CreatedDocumentEvent;
+use App\Events\CreatedDocumentEvent2;
+use App\Events\UpdatedDocumentEvent;
 use App\Utils\System\Timer;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -69,13 +72,13 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			$fields = $this->handleFields($request, __FUNCTION__);
 			$theRow = $this->modelPath::create($fields);
-			$objectType = Str::modelPathFrom($theRow->getTable());
+			$modelPath = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
 			if ($uploadedIds) {
-				$this->updateAttachmentParentId($uploadedIds, $objectType, $objectId);
+				$this->updateAttachmentParentId($uploadedIds, $modelPath, $objectId);
 			}
 			$this->processComments($request, $objectId);
-			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
+			$this->attachOrphan($props['attachment'], $request, $modelPath, $objectId);
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
@@ -98,6 +101,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
 		//Fire the event "Created New Document"
 		$this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $toastrResult);
+		// event(new CreatedDocumentEvent2($this->modelPath, $this->type, $theRow->id));
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
@@ -246,6 +250,7 @@ trait TraitEntityCRUDStoreUpdate2
 		//Fire the event "Updated New Document"
 		$this->removeAttachmentForFields($fieldForEmailHandler, $props['attachment'], $isFakeRequest, $allTable01Names);
 		$this->eventUpdatedNotificationAndMail($previousValue, $fieldForEmailHandler, $newStatus, $toastrResult);
+		// event(new UpdatedDocumentEvent($previousValue, $currentValue, $type, $modelPath, $cuid));
 		// dump($previousValue, $fieldForEmailHandler);
 		$this->emitPostUpdateEvent($theRow->id);
 		Log::info($this->type . " update2 elapsed ms: " . Timer::getTimeElapseFromLastAccess());
