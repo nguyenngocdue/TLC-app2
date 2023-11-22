@@ -4,10 +4,7 @@ namespace App\Http\Controllers\Notifications;
 
 use App\Http\Controllers\Controller;
 use App\Utils\Support\CurrentUser;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 
 
 class NotificationsController extends Controller
@@ -32,13 +29,16 @@ class NotificationsController extends Controller
         $typeEntity = (new ($type))->getTable();
         $routeName = "{$typeEntity}.edit";
         $routeExits =  (Route::has($routeName));
-        $href =  $routeExits ? route($routeName, $id) : "#";
-        CurrentUser::get()
-            ->unreadNotifications
+        $theNotification = CurrentUser::get()
+            ->notifications
             ->when($idNotification, function ($query) use ($idNotification) {
                 return $query->where('id', $idNotification);
-            })
-            ->markAsRead();
+            });
+        // dump($theNotification);
+        $theNotification->markAsRead();
+        $scrollTo = $theNotification->first()->scroll_to;
+        $href = $routeExits ? route($routeName, $id) . "#" . $scrollTo : "#";
+
         return redirect($href);
     }
 }

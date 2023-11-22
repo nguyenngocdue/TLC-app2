@@ -32,6 +32,7 @@ class NotificationItemRender extends Component
         $id = $dataSource['id'] ?? null;
         $objectType = $dataSource['object_type'] ?? null;
         $objectId = $dataSource['object_id'] ?? null;
+        $scrollTo = $dataSource['scroll_to'] ?? null;
         return view('components.renderer.notification.notification-item-render', [
             "message" => $message,
             "senderId"  => $senderId,
@@ -39,7 +40,8 @@ class NotificationItemRender extends Component
             "timeAgo" => $timeAgo,
             "id" => $id,
             "objectType" => $objectType,
-            "objectId" => $objectId
+            "scrollTo" => $scrollTo,
+            "objectId" => $objectId,
         ]);
     }
 }

@@ -26,7 +26,7 @@ class MenuNotification extends Component
     {
         $user = CurrentUser::get();
         $notifications = $user->notifications;
-        $unreadNotifications = $user->unreadNotifications;
+        $unreadNotifications = $notifications->whereNull('read_at');
         return view('components.homepage.menu-notification', [
             'notifications' => $notifications,
             'unreadNotifications' => $unreadNotifications,

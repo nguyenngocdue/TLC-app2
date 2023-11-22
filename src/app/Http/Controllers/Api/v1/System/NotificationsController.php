@@ -36,7 +36,7 @@ class NotificationsController extends Controller
     private function getDataSource()
     {
         $notifications = auth()->user()->notifications;
-        $unreadNotifications = auth()->user()->unreadNotifications;
+        $unreadNotifications = $notifications->whereNull('read_at');
         return [$notifications, $unreadNotifications];
     }
 }

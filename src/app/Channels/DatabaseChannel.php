@@ -15,12 +15,13 @@ class DatabaseChannel extends IlluminateDatabaseChannel
             'object_type' => $object_type,
             'object_id' => $object_id,
             'group_name' => $group_name,
-            'message' => $message,
+            'scroll_to' => $scroll_to,
         ] = $data;
         unset($data['sender_id']);
         unset($data['object_type']);
         unset($data['object_id']);
         unset($data['group_name']);
+        unset($data['scroll_to']);
         return $notifiable->routeNotificationFor('database')->create([
             'id'      => $notification->id,
             'type'    => get_class($notification),
@@ -29,6 +30,7 @@ class DatabaseChannel extends IlluminateDatabaseChannel
             'object_type' => $object_type ?? null,
             'object_id' => $object_id ?? null,
             'group_name' => $group_name ?? null,
+            'scroll_to' => $scroll_to ?? null,
             'read_at' => null,
         ]);
     }

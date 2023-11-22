@@ -790,6 +790,9 @@ video {
 .m-2 {
   margin: 0.5rem;
 }
+.m-3 {
+  margin: 0.75rem;
+}
 .m-4 {
   margin: 1rem;
 }
@@ -1026,6 +1029,9 @@ video {
 }
 .mt-4 {
   margin-top: 1rem;
+}
+.mt-40 {
+  margin-top: 10rem;
 }
 .mt-5 {
   margin-top: 1.25rem;
@@ -4912,6 +4918,9 @@ video {
 .text-zinc-900 {
   --tw-text-opacity: 1;
   color: rgb(24 24 27 / var(--tw-text-opacity));
+}
+.text-opacity-50 {
+  --tw-text-opacity: 0.5;
 }
 .underline {
   text-decoration-line: underline;
