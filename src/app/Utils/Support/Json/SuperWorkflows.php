@@ -135,7 +135,7 @@ class SuperWorkflows
 
     public static function isAllowed($status, $type)
     {
-        if ($status === '') return false;
+        if ($status === '' || $status === null) return false;
         $currentRoleSet = CurrentUser::getRoleSet();
         $sw = static::getFor($type, $currentRoleSet);
         if (!isset($sw['workflows'][$status])) {

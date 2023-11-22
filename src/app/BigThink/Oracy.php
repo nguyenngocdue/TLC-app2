@@ -15,8 +15,8 @@ class Oracy
                 if (method_exists($item, $fn)) {
                     $values = $toArray ? $item->$fn()->pluck('id')->toArray() : $item->$fn()->pluck('id');
                     $item->{$fnNameWithParenthesis} = $values;
-                } else {
-                    dump($fn . " is not found, oracy attachment is skipped.");
+                    // } else {
+                    //     dump($fn . " is not found, oracy attachment is skipped.");
                 }
             }
         }

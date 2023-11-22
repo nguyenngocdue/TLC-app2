@@ -109,8 +109,10 @@ trait TraitEntityCRUDStoreUpdate2
 
 	private function attachMonitors(&$array, $item)
 	{
-		$values = $item->getMonitors1()->pluck('id')->toArray();
-		$array['getMonitors1()'] = $values;
+		if (method_exists($item, "getMonitors1")) {
+			$values = $item->getMonitors1()->pluck('id')->toArray();
+			$array['getMonitors1()'] = $values;
+		}
 	}
 
 	public function update(Request $request, $id)

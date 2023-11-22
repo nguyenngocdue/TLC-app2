@@ -26,8 +26,8 @@ class WelcomeFortuneController extends Controller
         if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
         $r = User::find(1)->notify(new SampleNotification(
             [
-                "message" => "<b>Fortune</b> has view checklist of Structure of STW1-11",
-                "group_name" =>     'example_group',
+                "message" => "<b>Fortune 123</b> has view checklist of Structure of STW1-11",
+                "group_name" =>     'Inspection Check Sheet Observer',
                 "sender_id" =>     1,
                 "object_type" =>     "App\\Models\\User",
                 "object_id" =>     1,
