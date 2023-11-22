@@ -30,7 +30,7 @@
 @endphp
 
 
-<div class="rounded-lg border-gray-950 border-2 overflow-hidden">
+<div class="rounded-lg border-gray-950 border-2 overflow-hidden w-full">
     <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
 			<thead>
 			<tr>

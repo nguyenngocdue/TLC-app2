@@ -254,7 +254,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         <x-renderer.page-break />
 
          {{-- PAGE 7: GHGRP Basin Production & Emissions --}}
-        <div  id="pageghgrp_basin_production_emissions"  style='page-break-after:always!important'  class=" w-[1400px] min-h-[790px] m-auto flex items-center bg-white box-border px-8 pb-8 relative">
+        <div  id="pageghgrp_basin_production_emissions"  style='page-break-after:always!important'  class="w-[1400px] min-h-[790px] m-auto flex items-center bg-white box-border px-8 pb-8 relative">
             <div class="z-10">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
                 <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
@@ -302,7 +302,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         {{-- END --}}
         <x-renderer.page-break />
         {{-- PAGE 8: Data Detail Report on Metric 2 --}}
-        <div id="pagedata_detail_report_on_metric2"  style='page-break-after:always!important'  class="max-w-[1856px] min-h-[790px] flex flex-col items-center bg-white box-border relative px-8 m-auto">
+        <div id="pagedata_detail_report_on_metric2"  style='page-break-after:always!important'  class="w-[1400px] min-h-[790px] flex flex-col items-center bg-white box-border relative px-8 m-auto">
             <div class="z-5">
                 <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">7/8</div>
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
@@ -325,25 +325,24 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
 
         {{-- PAGE 9: Data Detail Report  --}}
-        <div id="pagedata_detail_report"  style='page-break-after:always!important'  class="max-w-[1856px] min-h-[790px] flex flex-col items-center bg-white box-border relative px-8 m-auto">
+        <div id="pagedata_detail_report_on_metric2"  style='page-break-after:always!important'  class="min-h-[790px] flex flex-col items-center box-border relative px-8 m-auto bg-white">
             <div class="z-5">
                 <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">8/8</div>
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
                 <x-renderer.heading level=2 xalign='left' class='absolute top-6 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Data Detail Report</x-renderer.heading>
             </div>
-            <div class='flex justify-center m-auto pt-20 pb-8'> 
+            <div class='flex justify-center m-auto pt-20 pb-8 bg-white'> 
                 <div class="pt-20 z-5">
-                    <div class="grid grid-rows-1">
-                        @include('reports.include-document-ghg-sheet-050', ['tableDataSource' => $tableDataSource['document_ghg_sheet_050']])
+                    <div class="">
+                            @include('reports.include-document-ghg-sheet-050', ['tableDataSource' => $tableDataSource['document_ghg_sheet_050']])
                     </div>
                 </div>
                 <div class="absolute top-0 right-0 left-0 opacity-20 z-0 hidden">
                     <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class="w-full h-full object-cover"/>
                 </div>
             </div>
-            <x-print.header6 :itemsShow='["website"]' class="border-none bottom-0 left-0 right-0 justify-center mb-4"/>
+                <x-print.header6 :itemsShow='["website"]' class="border-none justify-center mb-4"/>
         </div>
-        
         {{-- END --}}
         <x-renderer.page-break />
     </div>
