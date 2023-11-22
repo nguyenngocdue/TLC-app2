@@ -9,6 +9,7 @@ $allProps = $superProps['props'];
 $tmp = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$hasStatusColumn,$ownerId);
 [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = $tmp;
 $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
+$allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
 @endphp
 
 @section('topTitle', $topTitle)
@@ -28,7 +29,7 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 </script>
 <div class="px-4 mt-2 readonly">
     <x-elapse />
-    <x-controls.workflow403-checker action="{{$action}}" type="{{$type}}" status="{{$status}}" />
+    <x-controls.workflow403-checker allowed="{{$allowed}}" status="{{$status}}"/>
     <x-controls.header-alert-validation :strProps="$allProps" />
     <x-renderer.test-status-and-accessible :item="$item" type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :dryRunToken="$dryRunToken" :statuses="$statuses" />
     <x-controls.status-visibility-checker :propsOfMainPage="$propsOfMainPage" :allProps="$allProps" />
@@ -39,44 +40,45 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
         <input name="redirect_back_to_last_page" value="{{$redirect}}" type='hidden' />  {{-- This line is required for profile and me --}}
         @method($action === "create" ? 'POST' : 'PUT')
         @switch($app['edit_renderer'])
-        @case ('props-renderer')
-        <div class="px-2 flex justify-center">
-            <div class="fixed left-0">
-                <div class="text-center">
-                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" data-drawer-body-scrolling="true" data-drawer-backdrop="false">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
+        
+            @case ('props-renderer')
+            <div class="px-2 flex justify-center">
+                <div class="fixed left-0">
+                    <div class="text-center">
+                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" data-drawer-body-scrolling="true" data-drawer-backdrop="false">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
                 </div>
+                <x-renderer.item-render-props width='md:w-3/4 xl:w-3/4' id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
+                @if(!$hasReadOnly)
+                    <div class="fixed right-0">
+                        <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
+                    </div>
+                @endif
             </div>
-            <x-renderer.item-render-props width='md:w-3/4 xl:w-3/4' id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
-            @if(!$hasReadOnly)
+            @break
+
+            @case ('checklist-sheet-renderer')
+            <div class="px-2 flex justify-center">
+                <div class="fixed left-0">
+                    <div class="text-center">
+                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" data-drawer-body-scrolling="true" data-drawer-backdrop="false">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+                <x-controls.insp-chklst.item-render-check-sheet allowed="{{$allowed}}" id={{$id}} :item="$item" :type="$type" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
                 <div class="fixed right-0">
                     <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
                 </div>
-            @endif
-        </div>
-        @break
-        @case ('checklist-sheet-renderer')
-        <div class="px-2 flex justify-center">
-            <div class="fixed left-0">
-                <div class="text-center">
-                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" data-drawer-body-scrolling="true" data-drawer-backdrop="false">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
-                </div>
             </div>
-            <x-controls.insp-chklst.item-render-check-sheet id={{$id}} :item="$item" :type="$type" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
-            <div class="fixed right-0">
-                <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
-            </div>
-        </div>
-        @break
-        @case ('ghg-sheet-renderer')
-        <x-feedback.alert type="warning" message="{{$app['edit_renderer']}} in entity-create-edit need to be implemented." />
-        @break
-        @default
-        <x-feedback.alert type="error" message="Unknown how to render [{{$app['edit_renderer']}}] in entity-create-edit." />
-        @break
+            @break
+
+            @default
+            <x-feedback.alert type="error" message="Unknown how to render [{{$app['edit_renderer']}}] in entity-create-edit." />
+            @break
+
         @endswitch
         <x-elapse />
         @foreach($propsIntermediate as $key => $props)

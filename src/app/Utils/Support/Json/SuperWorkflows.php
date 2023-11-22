@@ -132,4 +132,17 @@ class SuperWorkflows
         // Cache::forget($key);
         CacheToRamForThisSection::forget($key, 'roleSet(to trigger tag mode)');
     }
+
+    public static function isAllowed($status, $type)
+    {
+        if ($status === '') return false;
+        $currentRoleSet = CurrentUser::getRoleSet();
+        $sw = static::getFor($type, $currentRoleSet);
+        if (!isset($sw['workflows'][$status])) {
+            dump("Orphan status [{$status}] detected, please fix this or you will not be able to edit this document.");
+            return false;
+        } else {
+            return $sw['workflows'][$status]['capabilities'];
+        }
+    }
 }

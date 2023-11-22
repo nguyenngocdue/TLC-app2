@@ -45,7 +45,7 @@
                     table01Name="table01" 
                     :rowIndex="$rowIndex" 
                     type="{{$typeLine}}"
-                    readOnly="{{$isExternalInspector}}"
+                    readOnly="{{!$allowed || $isExternalInspector}}"
                 />
                 @endforeach
             </x-renderer.card>
@@ -58,7 +58,12 @@
                     $selectedMonitors1 = $item->getMonitors1()->pluck('id')->toArray();
                     $selectedMonitors1 = "[". join(",",$selectedMonitors1)."]";
                     @endphp
-                <x-controls.has-data-source.dropdown2 readOnly={{$isExternalInspector?1:0}} type={{$type}} name='getMonitors1()' :selected="$selectedMonitors1" multiple={{true}}  />
+                <x-controls.has-data-source.dropdown2 
+                    readOnly={{(!$allowed || $isExternalInspector)?1:0}} 
+                    type={{$type}} name='getMonitors1()' 
+                    :selected="$selectedMonitors1" 
+                    multiple={{true}}  
+                />
             </x-renderer.card>
             
             @if($hasSignatureMulti)
@@ -68,6 +73,7 @@
                 signableId='{{$id}}'
                 :type="$type" 
                 :item="$item"
+                readOnly="{{!$allowed}}"
             />
             @endif
         @endif
