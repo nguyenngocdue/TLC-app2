@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\CreatedDocumentEvent2;
+use App\Events\OpenedDocumentEvent;
 use App\Events\RequestSignOffEvent;
 
 use App\Events\UpdatedDocumentEvent;
@@ -13,6 +14,7 @@ use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Events\UserSignedInEvent;
 //------------
 use App\Listeners\CreatedDocumentListener2;
+use App\Listeners\OpenedDocumentListener;
 use App\Listeners\RequestSignOffListener;
 use App\Listeners\UpdatedDocumentListener2;
 use App\Listeners\UpdatedEsgSheetListener;
@@ -36,6 +38,9 @@ class EventServiceProvider extends ServiceProvider
         //Auth
         Registered::class => [SendEmailVerificationNotification::class],
         UserSignedInEvent::class => [UserSignedInListener::class],
+
+        //Open generic documents
+        OpenedDocumentEvent::class => [OpenedDocumentListener::class],
 
         //Create and Update generic documents
         CreatedDocumentEvent2::class => [CreatedDocumentListener2::class],
