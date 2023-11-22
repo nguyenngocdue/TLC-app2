@@ -12,11 +12,15 @@
             {{-- Hide the label --}}
         @endif
     @else
-        {{$label}}
+       {!! $label !!}  {{-- &amp handled by !! --}}
     @endif
+    
+    {!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
+    {{-- @if(!$hiddenLabel)  --}}
+    <br /> 
+    {{-- @endif --}}
+    <span class="flex justify-end">{!!$iconJson!!}</span>
+    {{-- @if(!$hiddenLabel)  --}}
+    <i>{{$labelExtra}}</i> </label>
+    {{-- @endif --}}
 @endif
-
-{!!$isRequired ? "<span class='text-red-400'>*</span>" : "" !!}
-@if(!$hiddenLabel) <br /> @endif
-<span class="flex justify-end">{!!$iconJson!!}</span>
-@if(!$hiddenLabel) <i>{{$labelExtra}}</i> </label> @endif
