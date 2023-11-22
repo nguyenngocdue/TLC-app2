@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Events\CreatedDocumentEvent2;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ trait TraitCloneTemplate
 		} else {
 			$insertedId = trim($artisanOutput);
 			$result = [
+				'insertedId' => $insertedId,
 				"message" => "Cloned $plural from template #$tmpl_id",
 				"result" => [['redirect_edit_href' => route($plural . '.edit', $insertedId),]]
 			];
@@ -73,6 +75,8 @@ trait TraitCloneTemplate
 					];
 					break;
 			}
+
+			event(new CreatedDocumentEvent2($this->type, $result['insertedId']));
 
 			$hits = $result['result'];
 			$message = $result['message'];

@@ -63,6 +63,7 @@ class SignatureGroup2a extends Component
 
             'tableName' => $this->type,
             'signableId' => $this->signableId,
+            'readOnly' => $this->readOnly,
         ];
         return view('components.controls.signature.signature-group2a', $params);
     }

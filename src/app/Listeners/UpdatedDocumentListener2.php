@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\UpdatedDocumentEvent;
 use App\Http\Controllers\Workflow\LibApps;
-use App\Mail\MailChangeStatus2;
+use App\Mail\MailUpdatedDocument;
 use App\Models\User;
 use App\Utils\SendMaiAndNotification\CheckDefinitionsNew;
 use App\Utils\Support\Json\BallInCourts;
@@ -33,8 +33,18 @@ class UpdatedDocumentListener2 implements ShouldQueue
         $bic_assignee = $bic[$status]['ball-in-court-assignee'] ?: 'owner_id';
         $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1()";
 
-        if (!isset($obj[$bic_assignee])) dd($bic_assignee . " is not found in $type (UpdatedDocumentListener2).");
-        if (!isset($obj[$bic_monitors])) dd($bic_monitors . " is not found in $type (UpdatedDocumentListener2).");
+        if (!isset($obj[$bic_assignee]) || is_null($obj[$bic_assignee])) {
+            $msg = $bic_assignee . " is not found in $type (UpdatedDocumentListener2).";
+            Log::error($msg);
+            dump($obj);
+            dd($msg); //If in QUEUE, this will never show on screen.
+        }
+        if (!isset($obj[$bic_monitors]) || is_null($obj[$bic_monitors])) {
+            $msg = $bic_monitors . " is not found in $type (UpdatedDocumentListener2).";
+            Log::error($msg);
+            dump($obj);
+            dd($msg); //If in QUEUE, this will never show on screen.
+        }
 
         $bic_id = 1 * $obj[$bic_assignee];
         $monitor_ids = $obj[$bic_monitors];
@@ -80,7 +90,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
         $subject = "[$nickname/$id] - $appTitle - " . env("APP_NAME");
 
         $receiver = User::find($currentValue['bic_assignee_uid']);
-        $mail = new MailChangeStatus2([
+        $mail = new MailUpdatedDocument([
             'previousValue' => $previousValue,
             'currentValue' => $currentValue,
             'diff' => $diff,
@@ -106,6 +116,9 @@ class UpdatedDocumentListener2 implements ShouldQueue
         $type = $event->type;
         $id = $currentValue['id'];
         $bic = BallInCourts::getAllOf($type);
+
+        // Log::info($previousValue);
+        // Log::info($currentValue);
 
         $previousValue = $this->getValues($previousValue, $bic, $type);
         $currentValue = $this->getValues($currentValue, $bic, $type);

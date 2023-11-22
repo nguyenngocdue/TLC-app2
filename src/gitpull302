@@ -10,3 +10,4 @@ docker exec -it laravel302_php php artisan route:clear
 docker exec -it laravel302_php php artisan route:cache
 
 echo "Don't forget to run php artisan migrate to have the latest version of DB"
+echo "If any change in Listeners, please run \"supervisorctl restart all\" to reset code in horizon"

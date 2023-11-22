@@ -58,7 +58,8 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
                 </div>
             @endforeach
         </div>
-        <x-renderer.button htmlType="submit" type="primary" class="rounded-xl" >SUBMIT</x-renderer.button>
+        {{-- {{$readOnly?'disabled':'no-disabled'}} --}}
+        <x-renderer.button htmlType="submit" type="primary" class="rounded-xl" disabled="{{$readOnly}}" >SUBMIT</x-renderer.button>
     </div>
     @endif
 </div>

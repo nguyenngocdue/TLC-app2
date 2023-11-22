@@ -48,8 +48,9 @@ trait TableTraitRows
         return [$cellClassList, $cellTitle, $cellHref, $cellOnClick, $value];
     }
 
-    private function makeTd($columns, $dataLineObj, $no, $dataLineIndex, $batchLength, $tableDebug)
+    private function makeTd($columns, $dataLineObj, $start, $no, $dataLineIndex, $batchLength, $tableDebug)
     {
+        $no += $start;
         $tds = [];
         $columnCount = sizeof($columns);
         // Log::info($columns);
@@ -67,8 +68,8 @@ trait TableTraitRows
             $rendered = '';
             switch ($renderer) {
                 case  'no.':
-                    // dd($start, $no);
-                    if ($batchLength - $this->lineIgnoreNo >= $no)
+                    // dump($start + $batchLength - $this->lineIgnoreNo . " vs " . $no);
+                    if ($start + $batchLength - $this->lineIgnoreNo >= $no)
                         $rendered = "<p class='p-2'>" . $no . "</p>";
                     break;
                 default:
@@ -189,7 +190,7 @@ trait TableTraitRows
         $lineNo = 0;
         foreach ($dataSource as $dataLineIndex => $dataLine) {
             $dataLineObj = is_object($dataLine) ? $dataLine : (object)$dataLine;
-            $tds = $this->makeTd($columns, $dataLineObj, $start + $lineNo++ + 1, $dataLineIndex, sizeof($dataSource), $tableDebug);
+            $tds = $this->makeTd($columns, $dataLineObj, $start, $lineNo++ + 1, $dataLineIndex, sizeof($dataSource), $tableDebug);
 
             if ($this->groupBy) {
                 $groupBy = $this->groupBy;

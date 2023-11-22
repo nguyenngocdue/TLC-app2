@@ -9,7 +9,7 @@
     $signatureId = $as ? $as->id : "";
     $sentDate = $as ? $as->created_at->format('d/m/Y') : "";
 
-    $mineSignature = $cuid == $user->id;
+    $otherSignature = $cuid != $user->id;
     $signatureUserId = $user->id;
     $bgColor = "bg-blue-200";
     if($value != '') $bgColor = "bg-lime-200";
@@ -26,7 +26,7 @@
                     name="signatures[{{$category}}_{{$index}}][value]"
                     value="{{$value}}"
                     debug="{{$debug ? 1 : 0}}"
-                    readOnly="{{$mineSignature ? 0 : 1}}"
+                    readOnly="{{($readOnly || $otherSignature) ? 1 : 0}}"
                     title="#{{$signatureId}}"
                     {{-- signatureUserId="{{$signatureUserId}}" --}}
                     
@@ -50,6 +50,7 @@
                             id="btnRequest_{{$signatureUserId}}" 
                             type="secondary" 
                             class="my-2" 
+                            disabled="{{$readOnly}}"
                             onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', {{$signatureUserId}})">
                             Request to Sign Off
                         </x-renderer.button>

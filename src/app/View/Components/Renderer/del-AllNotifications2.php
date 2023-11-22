@@ -4,7 +4,7 @@ namespace App\View\Components\Renderer;
 
 use Illuminate\View\Component;
 
-class AllNotifications extends Component
+class AllNotifications2 extends Component
 {
     /**
      * Create a new component instance.
@@ -24,30 +24,10 @@ class AllNotifications extends Component
     public function render()
     {
         $notifications = $this->dataSource;
+        dd($notifications);
         $assigneeNotifications = [];
         $monitorNotifications = [];
         $createdNotifications = [];
-        foreach ($notifications as $key => $value) {
-            switch ($value['data']['type']) {
-                case 'assignee':
-                    $assigneeNotifications[] = $value;
-                    break;
-                case 'assignee_status_change':
-                    $assigneeNotifications[] = $value;
-                    break;
-                case 'monitors':
-                    $monitorNotifications[] = $value;
-                    break;
-                case 'monitor_status_change':
-                    $monitorNotifications[] = $value;
-                    break;
-                case 'created':
-                    $createdNotifications[] = $value;
-                    break;
-                default:
-                    break;
-            }
-        }
         $totalAssigneeNotifications = sizeof($assigneeNotifications);
         $totalCreatedNotifications = sizeof($createdNotifications);
         $totalMonitorNotifications = sizeof($monitorNotifications);

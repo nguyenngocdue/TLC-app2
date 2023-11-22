@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class MailChangeStatus2 extends Mailable
+class MailUpdatedDocument extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,7 +32,7 @@ class MailChangeStatus2 extends Mailable
     public function build()
     {
         // Log::info($this->data);
-        return $this->markdown('mails.mail-change-status2', [
+        return $this->markdown('mails.mail-updated-document', [
             'name' => $this->data['name'],
             'action' => $this->data['action'],
 

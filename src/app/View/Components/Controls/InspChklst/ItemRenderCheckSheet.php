@@ -24,6 +24,7 @@ class ItemRenderCheckSheet extends Component
         private $status = null,
         private $id = null,
         private $item = null,
+        private $allowed = false,
     ) {
         // dump($item);
     }
@@ -86,6 +87,7 @@ class ItemRenderCheckSheet extends Component
                 'hasSignatureMulti' => $this->hasSignatureMulti(),
                 'showSignOff' => in_array($status, [/*'passed',*/'pending_approval', 'approved', 'rejected']),
                 'isExternalInspector' => CurrentUser::isExternalInspector(),
+                "allowed" => !!$this->allowed,
             ]
         );
     }

@@ -27,10 +27,8 @@ class LibApps extends AbstractLib
                 if (CurrentUser::isAdmin() || static::checkEntityHasPermission('read', $key, $permissions)) {
                     $app['package_rendered'] = isset($app['package']) ? Str::appTitle($app['package']) : "unknown package";
                     $app['sub_package_rendered'] = isset($app['sub_package']) ? Str::appTitle($app['sub_package']) : "unknown sub_package";
-
                     $route = Str::plural($app['name']) . ".index";
                     $app['href'] = Route::has($route) ? route($route) : "#RouteNotFound1:$route";
-
                     $routeCreate = Str::plural($app['name']) . ".create";
                     if (static::checkEntityHasPermission('create', $key, $permissions)) {
                         $app['href_create'] = Route::has($routeCreate) ? route($routeCreate) : "#RouteNotFound2:$routeCreate";
@@ -44,18 +42,19 @@ class LibApps extends AbstractLib
                 $name = $route['name'];
                 $lib = $libReport[$name];
                 if ($lib['hidden'] ?? false) continue;
-
                 $reportType = ucfirst(substr($lib['name'], 0, strpos($lib['name'], "-")));
-                $item = [
-                    'name' => $name,
-                    'package_tab' => isset($lib['package_tab']) ? $lib['package_tab'] : "unknown package",
-                    'package_rendered' => isset($lib['package']) ? Str::appTitle($lib['package']) : "unknown package",
-                    'sub_package_rendered' => isset($lib['sub_package']) ? Str::appTitle($lib['sub_package']) : "unknown sub_package",
-                    'title' =>  $reportType . ": " . ($lib['title'] ?? "Untitled"),
-                    'href' => route($route['name']),
-                    'icon' => '<i class="fa-duotone fa-file-chart-column"></i>',
-                ];
-                $result[$name] = $item;
+                if (CurrentUser::isAdmin() || static::checkEntityHasPermission('read', $route['singular'], $permissions)) {
+                    $item = [
+                        'name' => $name,
+                        'package_tab' => isset($lib['package_tab']) ? $lib['package_tab'] : "unknown package",
+                        'package_rendered' => isset($lib['package']) ? Str::appTitle($lib['package']) : "unknown package",
+                        'sub_package_rendered' => isset($lib['sub_package']) ? Str::appTitle($lib['sub_package']) : "unknown sub_package",
+                        'title' =>  $reportType . ": " . ($lib['title'] ?? "Untitled"),
+                        'href' => Route::has($route['name']) ? route($route['name']) : "#RouteNotFound1:$route",
+                        'icon' => '<i class="fa-duotone fa-file-chart-column"></i>',
+                    ];
+                    $result[$name] = $item;
+                }
             }
             static::$singleton_permission = $result;
             // dump($result);
