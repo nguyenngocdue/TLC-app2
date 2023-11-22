@@ -45,7 +45,7 @@
 						@php
 							$strMonth = App\Utils\Support\DateReport::getMonthAbbreviation2((int)$value);
 						@endphp
-						<th class="p-2 font-bold bg-gray-100 border-l border-gray-600 border-b">{{$strMonth}} <br/>{{$year}}</th>
+						<th class="p-2 font-bold bg-gray-100 border-l border-gray-600 border-b">{{$strMonth}} <br/>{{$params['year']}}</th>
 					@endif
 				@endforeach
 			</tr>

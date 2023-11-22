@@ -6,6 +6,8 @@ use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitGenerateValuesFromParamsReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
+use App\Utils\Support\ArrayReport;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\Report;
 
 class Ghg_sheet_070 extends Report_ParentDocument2Controller
@@ -63,27 +65,137 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 			],
 		];
 	}
+	private function getValidValueByIndex($data, $index){
+		foreach($data as $key => $items){
+			if(Report::checkValueOfField($items, $index)) {
+				return $items[$index];
+			}
+		}
+		return [];
+	}
 
+	private function calculatePercentForQuarter($dataBefore, $dataAfter) {
+		$result = [];
+		foreach($dataBefore as $key => $value){
+			$result[$key] = $dataBefore[$key] ? ($dataAfter[$key] - $dataBefore[$key])/ $dataBefore[$key] : $dataAfter[$key];
+		}
+		return $result;
+	}
 
-	public function changeDataSource($dataSource, $params)
-	{
-		$years =  is_array($params['year']) ? $params['year'] : [$params['year']];
-		$scopes = $dataSource[last($years)]->toArray()['tableDataSource']['scopes'];
-		dd($scopes);
-		$existingData = [];
-		$dataChildrenMetrics = [];
-		foreach ($years as $year) {
-			$dt = $dataSource[$year]->toArray()['tableDataSource']['scopes'];
-			foreach ($dt as $k1 => $values) {
-				foreach ($values as $k2 => $items) {
-					$childrenMetrics = array_column($items, 'children_metrics');
+	private function calculatePercentForYear($dataBefore, $dataAfter) {
+		return $dataBefore ? ($dataAfter - $dataBefore)/$dataBefore : $dataAfter;
+	}
+
+	private function comparisonData($data) {
+		$years = array_keys($data);
+		$year = last($years);
+		$countLines = count($data[$year]);
+
+		for ($i=0; $i < count($years); $i++) { 
+			for ($index=0; $index < $countLines; $index++) {
+				// data 1
+				$currentYear = $years[$i]; 
+				$currentData = $data[$currentYear][$index];
+				$month1 = $currentData['months'];
+				// data 2
+				if($i === 0) {
+					// add data for the first item
+					$currentData['data_'.$currentYear-1] = ['month' => $month1];
+					$quarterFromCurrentData = DateReport::calculateQuarterTotals($month1);
+					$currentData['comparison_with_'.$currentYear-1] = [
+						'meta_number' =>[
+									'month' => $month1,
+									'quarter' => $quarterFromCurrentData,
+									'year' => [$currentYear-1 => array_sum(array_values($month1))],
+						],
+						'meta_percent' => [
+									'month' => array_fill_keys(array_keys($month1), 0),
+									'quarter' => array_fill_keys(array_keys($quarterFromCurrentData), 0),
+									'year' => [$currentYear-1 => 0]
+						]	
+						];
+					$data[$currentYear][$index] = $currentData;
+				}
+				if(isset($years[$i+1])) {
+					// add data for the second item
+					$nextYear = $years[$i+1];
+					$nextData = $data[$nextYear][$index];	
+					$month2 = $nextData['months'];
+					//subtract data 1 - data 2
+					$diff = ArrayReport::subtractArrays($month1, $month2);
+					$nextData['data_'.$currentYear] = ['month' => $month1];
+					$nextData['data_'.$nextYear] = ['month' => $month2];
 					
-					$existingData[$year][$k1][$k2]['children_metrics'] = reset($childrenMetrics);
+					$quarterBefore = DateReport::calculateQuarterTotals($month1);
+					$quarterFromNextData = DateReport::calculateQuarterTotals($diff);
+
+					$yearBefore = array_sum(array_values($month1));
+					$yearAfter = array_sum(array_values($diff));
+
+					$nextData['comparison_with_'.$currentYear] = [
+						'meta_number' => [
+							'month' => $diff,
+							'quarter' => $quarterFromNextData,
+							'year' => [$currentYear => array_sum(array_values($diff))],
+						],
+						'meta_percent' => [
+							'month' => self::calculatePercentForQuarter($month1, $diff),
+							'quarter' => self::calculatePercentForQuarter($quarterBefore, $quarterFromNextData),
+							'year' => [$currentYear =>  self::calculatePercentForYear($yearBefore, $yearAfter)],
+						]
+					];
+					$data[$nextYear][$index] = $nextData;
 				}
 			}
 		}
-		dd($existingData);
+		return $data;
+	}
+
+	public function changeDataSource($dataSource, $params)
+	{
+		// dd($dataSource);
+		$years =  is_array($params['year']) ? $params['year'] : [$params['year']];
+		$data = [];
 		
+		foreach ($dataSource as $key => $values) $data[$key] = $values['tableDataSource']['scopes'] ?? [];
+		$dataOfMonthOfYear = [];
+		$childrenMetrics = [];
+		foreach ($data as $year => $values){
+			foreach ($values as $scopeId => $items){
+				foreach ($items as $ghgTmplId => $items) {
+					$dataOfMonthOfYear[$scopeId][$ghgTmplId][$year] = $items;
+					$childrenMetrics[$scopeId][$ghgTmplId][$year] = array_map(function($item) {
+						if(isset($item['children_metrics'])){
+							return $item['children_metrics'][0];
+						}
+					}, $items);
+				}
+			}
+		}
+		// dd($childrenMetrics);
+
+		foreach ($childrenMetrics as $scopeId => &$values) {
+			foreach ($values as $ghgTmplId => &$items){
+				foreach ($items as $year => $item) {
+					foreach ($item as $index => $array){
+						if(is_null($array)){
+							// override data for years without metrics
+							$newValues = $this->getValidValueByIndex($items, $index);
+							$newValues['total_months'] = 0;
+							$newValues['months'] = isset($newValues['months']) ?  array_fill_keys(array_keys($newValues['months']), '') : [];
+							$items[$year][$index] = $newValues;
+						}
+					}
+				}
+				$comparisonData = $this->comparisonData($items);
+				$items = $comparisonData;
+			}
+		}
+
+
+
+		dump($childrenMetrics);
+
 
 
 		return $dataSource;

@@ -183,4 +183,26 @@ class DateReport
         }
     }
 
+    public static function calculateQuarterTotals($array) {
+        $quarters = [
+            'quarter_1' => ['01', '02', '03'],
+            'quarter_2' => ['04', '05', '06'],
+            'quarter_3' => ['07', '08', '09'],
+            'quarter_4' => ['10', '11', '12'],
+        ];
+    
+        $result = [];
+    
+        foreach ($quarters as $quarter => $months) {
+            $quarterTotal = 0;
+            foreach ($months as $month) {
+                if (isset($array[$month])) {
+                    $quarterTotal += (float)$array[$month];
+                }
+            }
+            $result[$quarter] = $quarterTotal;
+        }
+        return $result;
+    }
+
 }
