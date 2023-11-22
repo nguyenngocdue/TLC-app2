@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Renderer\Notification;
 
 use Carbon\Carbon;
 use Illuminate\View\Component;
@@ -25,15 +25,15 @@ class NotificationItemRender extends Component
     public function render()
     {
         $dataSource = $this->dataSource;
-        $content = $dataSource['data']['content'] ?? '';
+        $message = $dataSource['data']['message'] ?? '';
         $senderId = $dataSource['sender_id'] ?? '';
         $isRead = $dataSource['read_at'] ?? null;
         $timeAgo = Carbon::createFromTimestamp(strtotime($dataSource['updated_at']))->diffForHumans();
         $id = $dataSource['id'] ?? null;
         $objectType = $dataSource['object_type'] ?? null;
         $objectId = $dataSource['object_id'] ?? null;
-        return view('components.renderer.notification-item-render',[
-            "content" => $content,
+        return view('components.renderer.notification.notification-item-render', [
+            "message" => $message,
             "senderId"  => $senderId,
             "isRead" => $isRead,
             "timeAgo" => $timeAgo,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Renderer;
+namespace App\View\Components\Renderer\Notification;
 
 use Illuminate\View\Component;
 
@@ -24,7 +24,7 @@ class AllNotifications extends Component
     public function render()
     {
         $notifications = $this->dataSource;
-        return view('components.renderer.all-notifications', [
+        return view('components.renderer.notification.all-notifications', [
             'notifications' => $notifications->groupBy('group_name'),
             'isShowAll' => !$this->showAll,
         ]);

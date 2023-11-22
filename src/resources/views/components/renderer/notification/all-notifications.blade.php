@@ -21,7 +21,7 @@
     </div>
     <div class="w-full text-sm font-normal text-gray-900 bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-white">
         @forelse($noti as $key => $value)
-            <x-renderer.notification-item-render :dataSource="$value" />
+            <x-renderer.notification.notification-item-render :dataSource="$value" />
         @empty
             <span class="block w-full px-4 py-2 border rounded border-gray-200 text-red-300">
                 Empty Notifications

@@ -20,12 +20,8 @@ class SampleNotification extends Notification
      * @return void
      */
     public function __construct(
-        private $data,
-        public $group_name,
-        public $sender_id,
-        public $object_type,
-        public $object_id)
-    {
+        public $data,
+    ) {
     }
 
     /**
@@ -36,7 +32,7 @@ class SampleNotification extends Notification
      */
     public function via($notifiable)
     {
-        return [DatabaseChannel::class,'broadcast'];
+        return [DatabaseChannel::class, 'broadcast'];
     }
 
     /**

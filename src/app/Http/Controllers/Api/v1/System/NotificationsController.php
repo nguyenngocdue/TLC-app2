@@ -21,11 +21,11 @@ class NotificationsController extends Controller
     {
         [$notifications, $unreadNotifications] = $this->getDataSource();
         $str = '<div id="allNotifications" class="p-2">
-        <x-renderer.all-notifications :dataSource=\'$notifications\' /> 
-                                </div>
-                                <div id="unreadNotifications" class="p-2 hidden">
-                                <x-renderer.all-notifications :dataSource=\'$unreadNotifications\'/> 
-                                </div>';
+            <x-renderer.notification.all-notifications :dataSource=\'$notifications\' /> 
+        </div>
+        <div id="unreadNotifications" class="p-2 hidden">
+            <x-renderer.notification.all-notifications :dataSource=\'$unreadNotifications\'/> 
+        </div>';
         $html = Blade::render($str, ['notifications' => $notifications, 'unreadNotifications' => $unreadNotifications]);
         return ResponseObject::responseSuccess(
             $html,
