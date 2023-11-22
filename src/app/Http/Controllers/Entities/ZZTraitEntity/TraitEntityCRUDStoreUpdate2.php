@@ -21,7 +21,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitEntityEditableComment;
 	use TraitEntityEditableSignature;
 	use TraitValidation;
-	use TraitSendNotificationAndMail;
+	// use TraitSendNotificationAndMail;
 	// use TraitEventInspChklst;
 	use TraitEntityUpdateUserSettings;
 	use TraitUpdatedProdSequenceEvent;
@@ -107,6 +107,12 @@ trait TraitEntityCRUDStoreUpdate2
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 
+	private function attachMonitors(&$array, $item)
+	{
+		$values = $item->getMonitors1()->pluck('id')->toArray();
+		$array['getMonitors1()'] = $values;
+	}
+
 	public function update(Request $request, $id)
 	{
 		Timer::getTimeElapseFromLastAccess();
@@ -126,6 +132,7 @@ trait TraitEntityCRUDStoreUpdate2
 			Oracy::attach("getMonitors1()", [$previousValue], true);
 			$previousValue = $previousValue->getAttributes();
 			// $previousValue = $this->getPreviousValue($currentValue, $theRow);
+			// dump($previousValue);
 		}
 
 		try {
@@ -253,11 +260,8 @@ trait TraitEntityCRUDStoreUpdate2
 		// if ($this->debugForStoreUpdate)
 		// dd(__FUNCTION__ . " done");
 		$this->handleToastrMessage(__FUNCTION__, $toastrResult);
-		//Fire the event "Updated New Document"
 		$this->removeAttachmentForFields($currentValue, $props['attachment'], $isFakeRequest, $allTable01Names);
-		// $this->eventUpdatedNotificationAndMail($previousValue, $currentValue, $newStatus, $toastrResult);
-		// dump($previousValue, $currentValue);
-		// dd();
+		$this->attachMonitors($currentValue, $theRow);
 		(new LoggerForTimelineService())->insertForUpdate($theRow, $previousValue, CurrentUser::id(), $this->modelPath);
 		event(new UpdatedDocumentEvent($previousValue, $currentValue, $this->type, $this->modelPath, CurrentUser::id()));
 		$this->emitPostUpdateEvent($theRow->id);
