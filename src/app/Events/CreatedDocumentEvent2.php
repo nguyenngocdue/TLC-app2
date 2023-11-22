@@ -10,9 +10,11 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class CreatedDocumentEvent2
 {
+    public $modelPath;
     use Dispatchable, InteractsWithSockets, SerializesModels;
     /**
      * Create a new event instance.
@@ -20,11 +22,13 @@ class CreatedDocumentEvent2
      * @return void
      */
     public function __construct(
-        public $modelPath,
         public $type,
         public $id,
     ) {
         // Log::info("CreatedDocumentEvent2");
+        // Log::info($modelPath);
+        // Log::info($type);
+        $this->modelPath = Str::modelPathFrom(Str::plural($type));
     }
 
     /**

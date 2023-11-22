@@ -103,7 +103,7 @@ trait TraitEntityCRUDStoreUpdate2
 		//Fire the event "Created New Document"
 		// $this->eventCreatedNotificationAndMail($theRow->getAttributes(), $theRow->id, $newStatus, $toastrResult);
 		(new LoggerForTimelineService())->insertForCreate($theRow, CurrentUser::id(), $this->modelPath);
-		event(new CreatedDocumentEvent2($this->modelPath, $this->type, $theRow->id));
+		event(new CreatedDocumentEvent2($this->type, $theRow->id));
 		return redirect(route(Str::plural($this->type) . ".edit", $theRow->id));
 	}
 

@@ -156,7 +156,7 @@ trait TraitStoreEmpty
 
 				// $this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
 				(new LoggerForTimelineService())->insertForCreate($createdItem, CurrentUser::id(), $this->modelPath);
-				event(new CreatedDocumentEvent2($this->modelPath, $this->type, $createdItem->id));
+				event(new CreatedDocumentEvent2($this->type, $createdItem->id));
 				$tableName = Str::plural($this->type);
 				$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
 				$theRows[] = $createdItem;
