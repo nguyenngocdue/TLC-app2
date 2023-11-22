@@ -52,9 +52,11 @@ class LibApps extends AbstractLib
                     'package_rendered' => isset($lib['package']) ? Str::appTitle($lib['package']) : "unknown package",
                     'sub_package_rendered' => isset($lib['sub_package']) ? Str::appTitle($lib['sub_package']) : "unknown sub_package",
                     'title' =>  $reportType . ": " . ($lib['title'] ?? "Untitled"),
-                    'href' => route($route['name']),
                     'icon' => '<i class="fa-duotone fa-file-chart-column"></i>',
                 ];
+                if (CurrentUser::isAdmin() || static::checkEntityHasPermission('read', $route['singular'], $permissions)) {
+                    $item['href'] = Route::has($route['name']) ? route($route['name']) : "#RouteNotFound1:$route";
+                }
                 $result[$name] = $item;
             }
             static::$singleton_permission = $result;
