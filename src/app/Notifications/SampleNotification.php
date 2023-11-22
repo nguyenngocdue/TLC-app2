@@ -53,6 +53,6 @@ class SampleNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [$this->data];
+        return $this->data;
     }
 }
