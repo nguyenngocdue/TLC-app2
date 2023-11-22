@@ -24,45 +24,8 @@ class AllNotifications extends Component
     public function render()
     {
         $notifications = $this->dataSource;
-        $assigneeNotifications = [];
-        $monitorNotifications = [];
-        $createdNotifications = [];
-        foreach ($notifications as $key => $value) {
-            switch ($value['data']['type']) {
-                case 'assignee':
-                    $assigneeNotifications[] = $value;
-                    break;
-                case 'assignee_status_change':
-                    $assigneeNotifications[] = $value;
-                    break;
-                case 'monitors':
-                    $monitorNotifications[] = $value;
-                    break;
-                case 'monitor_status_change':
-                    $monitorNotifications[] = $value;
-                    break;
-                case 'created':
-                    $createdNotifications[] = $value;
-                    break;
-                default:
-                    break;
-            }
-        }
-        $totalAssigneeNotifications = sizeof($assigneeNotifications);
-        $totalCreatedNotifications = sizeof($createdNotifications);
-        $totalMonitorNotifications = sizeof($monitorNotifications);
-        if (!$this->showAll) {
-            $assigneeNotifications = array_slice($assigneeNotifications, 0, 5, true);
-            $createdNotifications = array_slice($createdNotifications, 0, 5, true);
-            $monitorNotifications = array_slice($monitorNotifications, 0, 5, true);
-        }
         return view('components.renderer.all-notifications', [
-            'totalAssigneeNotifications' => $totalAssigneeNotifications,
-            'assigneeNotifications' => $assigneeNotifications,
-            'totalCreatedNotifications' => $totalCreatedNotifications,
-            'createdNotifications' => $createdNotifications,
-            'totalMonitorNotifications' => $totalMonitorNotifications,
-            'monitorNotifications' => $monitorNotifications,
+            'notifications' => $notifications->groupBy('group_name'),
             'isShowAll' => !$this->showAll,
         ]);
     }

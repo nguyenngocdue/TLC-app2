@@ -18,7 +18,7 @@ class NotificationsController extends Controller
     }
     private function getDataSource()
     {
-        return CurrentUser::get()->notifications->toArray();
+        return CurrentUser::get()->notifications;
     }
 
     public function index()
@@ -29,8 +29,8 @@ class NotificationsController extends Controller
     }
     public function markAsRead($type, $id, $idNotification)
     {
-        $typePlural = Str::plural($type);
-        $routeName = "{$typePlural}.edit";
+        $typeEntity = (new ($type))->getTable();
+        $routeName = "{$typeEntity}.edit";
         $routeExits =  (Route::has($routeName));
         $href =  $routeExits ? route($routeName, $id) : "#";
         CurrentUser::get()
