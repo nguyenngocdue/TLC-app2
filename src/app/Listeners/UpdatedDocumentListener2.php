@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class UpdatedDocumentListener2 implements ShouldQueue
+class UpdatedDocumentListener2 //implements ShouldQueue
 {
     use CheckDefinitionsNew;
     /**
@@ -27,11 +27,14 @@ class UpdatedDocumentListener2 implements ShouldQueue
         // Log::info("UpdatedDocumentListener constructor");
     }
 
-    private function getValues(array $obj, array $bic)
+    private function getValues(array $obj, array $bic, $type)
     {
         $status = $obj['status'];
         $bic_assignee = $bic[$status]['ball-in-court-assignee'] ?: 'owner_id';
         $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1()";
+
+        if (!isset($obj[$bic_assignee])) dd($bic_assignee . " is not found in $type (UpdatedDocumentListener2).");
+        if (!isset($obj[$bic_monitors])) dd($bic_monitors . " is not found in $type (UpdatedDocumentListener2).");
 
         $bic_id = 1 * $obj[$bic_assignee];
         $monitor_ids = $obj[$bic_monitors];
@@ -104,8 +107,8 @@ class UpdatedDocumentListener2 implements ShouldQueue
         $id = $currentValue['id'];
         $bic = BallInCourts::getAllOf($type);
 
-        $previousValue = $this->getValues($previousValue, $bic);
-        $currentValue = $this->getValues($currentValue, $bic);
+        $previousValue = $this->getValues($previousValue, $bic, $type);
+        $currentValue = $this->getValues($currentValue, $bic, $type);
         $diff = $this->getDiff($previousValue, $currentValue);
 
         // Log::info(json_encode($previousValue));
