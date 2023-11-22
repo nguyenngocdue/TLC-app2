@@ -12,8 +12,12 @@ class Oracy
         // if (!Arr::isTraversable($collection)) $collection = [$collection];
         foreach ($collection as &$item) {
             if ($item) {
-                $values = $toArray ? $item->$fn()->pluck('id')->toArray() : $item->$fn()->pluck('id');
-                $item->{$fnNameWithParenthesis} = $values;
+                if (method_exists($item, $fn)) {
+                    $values = $toArray ? $item->$fn()->pluck('id')->toArray() : $item->$fn()->pluck('id');
+                    $item->{$fnNameWithParenthesis} = $values;
+                } else {
+                    dump($fn . " is not found, oracy attachment is skipped.");
+                }
             }
         }
     }

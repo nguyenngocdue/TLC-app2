@@ -120,10 +120,13 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->updateUserSettings($request);
 		$this->reArrangeComments($request);
 
-		$previousValue = $this->modelPath::find($id);
-		Oracy::attach("getMonitors1()", [$previousValue], true);
-		$previousValue = $previousValue->getAttributes();
-		// $previousValue = $this->getPreviousValue($currentValue, $theRow);
+		//This is to compare status, assignee, and monitors for sending MailChangeStatus
+		if (!$isFakeRequest) {
+			$previousValue = $this->modelPath::find($id);
+			Oracy::attach("getMonitors1()", [$previousValue], true);
+			$previousValue = $previousValue->getAttributes();
+			// $previousValue = $this->getPreviousValue($currentValue, $theRow);
+		}
 
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
