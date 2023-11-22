@@ -35,8 +35,8 @@ class NotificationsController extends Controller
     }
     private function getDataSource()
     {
-        $notifications = auth()->user()->notifications->toArray();
-        $unreadNotifications = auth()->user()->unreadNotifications->toArray();
+        $notifications = auth()->user()->notifications;
+        $unreadNotifications = auth()->user()->unreadNotifications;
         return [$notifications, $unreadNotifications];
     }
 }

@@ -18,6 +18,7 @@ use App\Utils\System\Memory;
 use App\Utils\System\Timer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use App\Channels\DatabaseChannel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -51,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->instance(IlluminateDatabaseChannel::class, new DatabaseChannel);
         // $this->app->when(MigrationRelationShipCreator::class)
         //     ->needs('$customStubPath')
         //     ->give(function ($app) {

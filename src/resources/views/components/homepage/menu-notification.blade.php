@@ -12,8 +12,8 @@
 </button>
 <script type="text/javascript">
     window.Echo.channel('notifications')
-       .listen('.BroadcastNotificationEvent', (data) => {
-        $.ajax({
+       .notification((data) => {
+        $.ajax({    
             method: "GET",
             url: "/system/notifications",
             dataType: "json",

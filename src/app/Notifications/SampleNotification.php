@@ -2,8 +2,11 @@
 
 namespace App\Notifications;
 
+use App\Channels\DatabaseChannel;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -16,7 +19,12 @@ class SampleNotification extends Notification
      *
      * @return void
      */
-    public function __construct(private $data)
+    public function __construct(
+        private $data,
+        public $group_name,
+        public $sender_id,
+        public $object_type,
+        public $object_id)
     {
     }
 
@@ -28,7 +36,7 @@ class SampleNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return [DatabaseChannel::class,'broadcast'];
     }
 
     /**
@@ -54,5 +62,17 @@ class SampleNotification extends Notification
     public function toArray($notifiable)
     {
         return $this->data;
+    }
+
+    public function broadcastOn()
+    {
+        return new Channel('notifications');
+    }
+
+    public function toBroadcast(object $notifiable): BroadcastMessage
+    {
+        return new BroadcastMessage([
+            "abc" => "abc",
+        ]);
     }
 }
