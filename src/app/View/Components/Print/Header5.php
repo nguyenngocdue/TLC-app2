@@ -15,8 +15,8 @@ class Header5 extends Component
      * @return void
      */
     public function __construct(
-        private $tableOfContents = false,
         private $dataSource,
+        private $tableOfContents = false,
         private $type = '',
         private $page = null,
     ) {
@@ -49,7 +49,8 @@ class Header5 extends Component
             'page' => $this->page,
         ]);
     }
-    private function contentHeaderChecklist(){
+    private function contentHeaderChecklist()
+    {
         switch ($this->type) {
             case 'hse_insp_chklst_shts':
                 return $this->contentHeaderHseChecklist();
@@ -63,9 +64,9 @@ class Header5 extends Component
                 # code...
                 break;
         }
-
     }
-    private function contentHeaderHseChecklist(){
+    private function contentHeaderHseChecklist()
+    {
         $dataSource = $this->dataSource;
         $location = isset($dataSource->workplace_id) ? Workplace::findFromCache($dataSource->workplace_id)->name : '-';
         $inspector = User::findFromCache($dataSource->owner_id)->name ?? '-';
@@ -86,24 +87,25 @@ class Header5 extends Component
                         </div>
                     </div>
                     <div class='flex flex-1 justify-center'></div>";
-                    // <div class='flex flex-1 justify-center'>
-                    //     <div class='flex flex-col pr-2  font-medium text-base'>
-                    //         <span>Start Time:</span>
-                    //         <span>Finish Time:</span>
-                    //     </div>
-                    //     <div class='flex flex-col font-light text-base'>
-                    //         <span>$startTime</span>
-                    //         <span>$finishTime</span>
-                    //     </div>
-                    // </div>";
+        // <div class='flex flex-1 justify-center'>
+        //     <div class='flex flex-col pr-2  font-medium text-base'>
+        //         <span>Start Time:</span>
+        //         <span>Finish Time:</span>
+        //     </div>
+        //     <div class='flex flex-col font-light text-base'>
+        //         <span>$startTime</span>
+        //         <span>$finishTime</span>
+        //     </div>
+        // </div>";
     }
-    private function contentHeaderQaqcChecklist(){
+    private function contentHeaderQaqcChecklist()
+    {
         $dataSource = $this->dataSource;
         $projectName = $dataSource->getProject->name ?? '';
         $subProjectName = $dataSource->getSubProject->name ?? '';
         $prodOrderName = $dataSource->getProdOrder->name ?? '';
         $nameCompany = config('company.name') ?? '';
-        if($this->tableOfContents){
+        if ($this->tableOfContents) {
             return "<div class='flex flex-1 justify-center'>
                         <div class='flex flex-col pr-2  font-medium text-base'>
                             <span>Organization:</span>
