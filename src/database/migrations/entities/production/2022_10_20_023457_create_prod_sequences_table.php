@@ -29,7 +29,7 @@ return new class extends Migration
 
             $table->integer('priority')->nullable();
             $table->double('total_hours')->nullable();
-            $table->double('worker_number')->nullable();
+            $table->double('worker_number', 8, 2)->nullable();
             $table->double('total_man_hours')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
