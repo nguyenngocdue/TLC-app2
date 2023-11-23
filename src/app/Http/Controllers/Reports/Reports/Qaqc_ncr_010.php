@@ -17,7 +17,9 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
 
     public function getDataSource($params)
     {
-        $primaryData = (new Qaqc_ncr_dataSource())->getDataSource($params);
+        $primaryData = new Qaqc_ncr_dataSource();
+        $_primaryData = $primaryData->getDataSource($params);
+        $primaryData = $primaryData->changeDataSource($_primaryData, $params);
         return $primaryData;
     }
 
