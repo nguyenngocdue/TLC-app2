@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports\Reports;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitGenerateValuesFromParamsReport;
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
@@ -28,7 +29,8 @@ class Qaqc_ncr_dataSource extends Controller
                     term_disposition.name AS disposition_name,
                     term_severity.name AS severity_name,
                     term_report_type.name AS report_type_name,
-                    UPPER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '_', -1), '\\\', 1)) AS parent_type,
+                    LOWER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '\\\', -1), '\\\', 1)) AS parent_type,
+                    tb1.parent_type AS _parent_type,
                     CONCAT('TLC-',sp.name,'-',UPPER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '_', -1), '\\\', 1)),'-',
                         LPAD(tb1.doc_id, 4, '0')) AS doc_type 
                     FROM (SELECT
@@ -92,6 +94,16 @@ class Qaqc_ncr_dataSource extends Controller
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
         return $collection;
+    }
+
+    public function changeDataSource($dataSource, $params){
+        $manageApps = LibApps::getAll();
+        foreach ($dataSource as &$values){
+            $parentType = $values->parent_type;
+            $nickName = $manageApps[$parentType]['nickname'] ?? $values->parent_type;
+            $values->parent_type = strtoupper($nickName);
+        }
+        return $dataSource;
     }
 
 }
