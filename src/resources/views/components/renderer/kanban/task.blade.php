@@ -27,32 +27,22 @@
             @endif
         </div>
     </div>
-    @switch($task->task_priority)
-        @case(366)
-            <i class="fa-duotone fa-chevrons-down text-green-600" title="Very Low"></i>
-        @break
-        @case(367)
-            <i class="fa-duotone fa-chevron-down text-green-600" title="Low"></i>
-        @break
-        @case(368)
-            <span class="text-blue-500" title="Medium">—</span>
-        @break
-        @case(369)
-            <i class="fa-duotone fa-chevron-up text-red-600" title="High"></i>
-        @break
-        @case(370)
-            <i class="fa-duotone fa-chevrons-up text-red-600" title="Very High"></i>
-        @break
-    @endswitch
-    
-    @if($task->target_hours)
-    Target hour: {{$task->target_hours}}
-    @endif
-    <hr class=""/>
-    <div class="flex justify-between pt-1">
+    <x-renderer.kanban.priority-icon priority="{{$task->task_priority}}" />    
+        @if($task->target_hours) Target hour: {{$task->target_hours}} @endif
         <div id="taskElapseTxt_{{$task->id}}"></div>
-        <button class="fa-duotone fa-ellipsis {{App\Utils\ClassList::BUTTON_KANBAN_ELLIPSIS}}" @click="toggleModal('{{$modalId}}', {id: {{$task->id}}})" @keydown.escape="closeModal('{{$modalId}}')" ></button>
+        <hr class=""/>
+    <div class="flex justify-between py-1">
+        <div class="flex">
+            @foreach($task->attachment_kanban_task as $attachment)
+            {{-- @dump($attachment) --}}
+            <img class="mr-1 rounded border" height="45" width="45" src="{{pathMinio().$attachment->url_thumbnail}}" />
+            @endforeach
+        </div>
+        <div class="my-auto">
+            <button class="fa-duotone fa-ellipsis {{App\Utils\ClassList::BUTTON_KANBAN_ELLIPSIS}}" @click="toggleModal('{{$modalId}}', {id: {{$task->id}}})" @keydown.escape="closeModal('{{$modalId}}')" ></button>
+        </div>
     </div>
+    <hr class=""/>
 </div>
 
 <script>

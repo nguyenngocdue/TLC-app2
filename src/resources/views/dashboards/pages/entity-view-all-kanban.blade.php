@@ -5,8 +5,8 @@
 
 @section('content')
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.17.0/Sortable.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.17.0/Sortable.min.css"> --}}
+<script src="{{ asset('js/sortable@1.15.min.js') }}"></script>
 <script src="{{ asset('js/kanban.js') }}"></script>
 
 <script>const route_cluster = "{{route('App\\Models\\Kanban_task_cluster'::getTableName() . '.kanban');}}";</script>
@@ -62,8 +62,8 @@ const reRenderItem = (table, id, guiType='') => {
     })
 }
 
-const app_env = '{{env('APP_DOMAIN')}}';
-window.Echo.channel('wss-kanban-channel-' + app_env).listen('WssKanbanChannel', (e) => {
+const app_env1 = '{{env('APP_DOMAIN')}}';
+window.Echo.channel('wss-kanban-channel-' + app_env1).listen('WssKanbanChannel', (e) => {
     wsClientId1 = e.data.wsClientId
     if(wsClientId == wsClientId1) return //<<Ignore current tab.
     switch(e.data.action){
