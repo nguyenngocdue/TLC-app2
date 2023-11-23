@@ -15,9 +15,9 @@ class ParentType2 extends Component
      */
     public function __construct(
         private $name,
+        private $type,  //<< Type for morphedTo
         private $selected = "",
         private $multiple = false,
-        private $type,  //<< Type for morphedTo
         private $readOnly = false,
         private $allowClear = false,
     ) {
