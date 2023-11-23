@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{{ asset('css/tlc2-20230822.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/fullcalendar.bundle.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/plugin.bundle.css') }}"> 
+
+    <link rel="stylesheet" href="{{ asset('css/justifiedGallery@3.8.1.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/lightgallery.css') }}">
         
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
@@ -60,7 +63,6 @@
     <script src="{{ asset('js/components/SearchModal.js') }}"></script>
     <script src="{{ asset('js/components/KeyArrowTable.js') }}"></script>
     <script src="{{ asset('js/applayout.js') }}"></script>
-    {{-- <script src="{{ asset('js/toastr.min.js') }}"></script> --}}
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
     <script src="{{ asset('js/signature_pad@4.0.0.umd.min.js') }}"></script>
     <script src="{{ asset('js/qrcode@1.0.0.min.js') }}"></script>
@@ -74,13 +76,11 @@
     <script src="{{ asset('js/fullcalendar/timegrid@6.1.8.min.js') }}"></script>
     <script src="{{ asset('js/fullcalendar/list@6.1.8.min.js') }}"></script>
     <script src="{{ asset('js/fullcalendar/multimonth@6.1.8.min.js') }}"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('css/lightgallery.css') }}">
+    
+    <script src="{{ asset('js/tinymce@6.7.3.min.js') }}" referrerpolicy="origin"></script>
+    
+    <script src="{{ asset('js/justifiedGallery@3.8.1.min.js') }}"></script>
     <script src="{{ asset('js/lightgallery.js') }}"></script>
-
-    <script src="https://cdn.tiny.cloud/1/fclv950nwjacvpdeyszgia9sfzh514e25u6olez0h2z46d4c/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/index.global.min.js"></script>
