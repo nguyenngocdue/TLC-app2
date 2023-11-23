@@ -5,7 +5,7 @@ namespace App\View\Components\Renderer;
 use App\Utils\Constant;
 use Illuminate\View\Component;
 
-class ImageGalleryCheckSheet extends Component
+class ImageGalleryKanbanTask extends Component
 {
     /**
      * Create a new component instance.
@@ -13,8 +13,8 @@ class ImageGalleryCheckSheet extends Component
      * @return void
      */
     public function __construct(
-        private $checkPointIds,
         private $dataSource,
+        private $item,
         private $action = 'edit',
     ) {
         //
@@ -29,10 +29,12 @@ class ImageGalleryCheckSheet extends Component
     {
         if ($this->action == 'create') return '';
         $results = collect();
-        foreach ($this->dataSource as $line) {
-            $attachments = $line->getMorphManyByIds($this->checkPointIds, 'insp_photos');
-            $results = $results->merge($attachments);
+        $propsAttachment = array_filter($this->dataSource, fn ($item) => $item['control'] == 'attachment');
+        $results = collect();
+        foreach ($propsAttachment as $prop) {
+            $results  = $results->merge($this->item->{$prop['column_name']});
         }
+
         $results = $results->whereIn('extension', Constant::EXTENSIONS_OF_FILE_GALLERY);
         return view('components.renderer.image-gallery', ['dataSource' => $results, 'pathMinio' => pathMinio()]);
     }
