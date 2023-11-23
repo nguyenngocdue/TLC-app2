@@ -207,7 +207,7 @@ class Report
                     if (!isset($mergedArray[$subKey])) {
                         $mergedArray[$subKey] = 0;
                     }
-                    $mergedArray[$subKey] += $value;
+                    $mergedArray[$subKey] +=  $value;
                 }
             }
             $result[$key] = $mergedArray;

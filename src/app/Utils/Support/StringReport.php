@@ -76,4 +76,8 @@ class StringReport
 		$resultString = preg_replace("/[^a-zA-Z\s]/", '', $inputString);
 		return $resultString;
 	}
+
+    public static function fixDecimal($value){
+        return str_replace(',','', number_format($value, 2));
+    }
 }
