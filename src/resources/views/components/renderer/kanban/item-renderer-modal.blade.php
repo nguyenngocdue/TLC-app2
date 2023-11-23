@@ -41,8 +41,8 @@
                     type="{{$table}}"
                     value="{!! $value !!}"
                     
-                    {{-- :prop="$prop"
-                    :valueArray="$value" --}}
+                    :prop="$prop"
+                    :valueArray="$value"
 
                     control="{{$prop['control']}}"
                     columnType="{{$prop['column_type']}}"
@@ -59,3 +59,4 @@
         @endforeach
     </div>
 </form>
+<x-renderer.image-gallery-kanban-task :dataSource="$props" :item="$item" />

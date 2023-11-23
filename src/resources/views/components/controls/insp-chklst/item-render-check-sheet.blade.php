@@ -87,4 +87,4 @@
         <input type="hidden" name="status" id='status' value="{{$status}}">        
         
 </div>
-<x-renderer.image-gallery-check-sheet :checkPointIds="$checkPointIds" :dataSource="$linesTmp" action='edit' />
+<x-renderer.image-gallery-check-sheet :checkPointIds="$checkPointIds" :dataSource="$linesTmp"/>

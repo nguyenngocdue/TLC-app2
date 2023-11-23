@@ -12,8 +12,10 @@ class ImageGallery extends Component
      *
      * @return void
      */
-    public function __construct(private $dataSource,private $action)
-    {
+    public function __construct(
+        private $dataSource,
+        private $action = 'edit',
+    ) {
         //
     }
 
@@ -24,14 +26,14 @@ class ImageGallery extends Component
      */
     public function render()
     {
-        if($this->action == 'create') return '';
-        $propsAttachment = array_filter($this->dataSource,fn($item) => $item['control'] == 'attachment');
-        $attachments = array_column($propsAttachment,'value');
+        if ($this->action == 'create') return '';
+        $propsAttachment = array_filter($this->dataSource, fn ($item) => $item['control'] == 'attachment');
+        $attachments = array_column($propsAttachment, 'value');
         $results = collect();
         foreach ($attachments as  $collection) {
             $results = $results->merge($collection);
         }
-        $results = $results->whereIn('extension',Constant::EXTENSIONS_OF_FILE_GALLERY);
-        return view('components.renderer.image-gallery',['dataSource' => $results,'pathMinio' => pathMinio()]);
+        $results = $results->whereIn('extension', Constant::EXTENSIONS_OF_FILE_GALLERY);
+        return view('components.renderer.image-gallery', ['dataSource' => $results, 'pathMinio' => pathMinio()]);
     }
 }
