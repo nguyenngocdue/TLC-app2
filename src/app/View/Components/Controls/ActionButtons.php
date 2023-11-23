@@ -17,6 +17,7 @@ class ActionButtons extends Component
         private $action,
         private $actionButtons,
         private $propsIntermediate,
+        private $type,
         private $isFloatingOnRightSide = false,
     ) {
         //
@@ -29,13 +30,16 @@ class ActionButtons extends Component
      */
     public function render()
     {
-        if (CurrentUser::isExternalInspector()) return "";
+        if ($this->type == 'qaqc_insp_chklst_shts') {
+            if (CurrentUser::get()->isExternalInspector()) return "";
+        }
         return view('components.controls.action-buttons', [
             'buttonSave' => $this->buttonSave,
             'action' => $this->action,
             'actionButtons' => $this->actionButtons,
             'propsIntermediate' => $this->propsIntermediate,
             'isFloatingOnRightSide' => $this->isFloatingOnRightSide,
+            'showSaveAndReturn' => ($this->type != 'users'),
         ]);
     }
 }

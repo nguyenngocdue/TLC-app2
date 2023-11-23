@@ -48,7 +48,7 @@ class SignatureGroup2a extends Component
         $signatureList = $this->item->{$this->category};
         $nominatedList = $this->item->{$this->signOffOracy}();
         $cuid = CurrentUser::id();
-        $isExternalInspector = CurrentUser::isExternalInspector();
+        $isExternalInspector = CurrentUser::get()->isExternalInspector();
 
         $signatures = $this->mergeUserAndSignature($nominatedList, $signatureList);
         $params = [

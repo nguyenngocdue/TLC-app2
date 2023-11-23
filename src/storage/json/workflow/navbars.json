@@ -20,6 +20,13 @@
         "href": "\/components",
         "icon_fa": "fa-brands fa-elementor"
     },
+    "php_info": {
+        "name": "php_info",
+        "group": "internal",
+        "title": "PHP INFO",
+        "href": "\/php_info",
+        "icon_fa": "fa-brands fa-elementor"
+    },
     "database_summary": {
         "name": "database_summary",
         "group": "internal",

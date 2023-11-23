@@ -45,9 +45,17 @@ abstract class MatrixForReportParent extends Component
             $value = $statusObj['icon'];
             $cellClass = 'bg-' . $statusObj['bg_color'] . " text-" . $statusObj['text_color'];
 
-            if (($endDate = $cell->{$this->closedDateColumn}) && $this->dateToCompare) {
-                if ($endDate < $this->dateToCompare) {
-                    $cellClass .= ' bg-opacity-20';
+            if ($this->dateToCompare) {
+                if (($endDate = $cell->{$this->closedDateColumn})) {
+                    if (in_array($cell->status, $this->finishedArray)) {
+                        if ($endDate < $this->dateToCompare) {
+                            $cellClass .= ' bg-opacity-20 ';
+                        }
+                    } else {
+                        return "";
+                    }
+                } else {
+                    return "";
                 }
             }
 

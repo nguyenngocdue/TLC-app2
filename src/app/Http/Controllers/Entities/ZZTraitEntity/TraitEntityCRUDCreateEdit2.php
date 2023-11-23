@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Events\OpenedDocumentEvent;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\DefaultValues;
 use App\View\Components\Controls\DisallowedDirectCreationChecker;
 use App\View\Components\Formula\All_DocId;
@@ -86,6 +88,7 @@ trait TraitEntityCRUDCreateEdit2
 		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');
 		$hasDocID = All_DocId::getAllEntityHasDocId($this->type);
 		$docId = $hasDocID ? Str::markDocId($this->modelPath::find($id)) : null;
+		event(new OpenedDocumentEvent($this->type, $id, CurrentUser::id()));
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
 			'item' => $original,

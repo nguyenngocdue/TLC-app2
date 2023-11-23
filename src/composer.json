@@ -43,6 +43,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "league/flysystem-aws-s3-v3": "3.0.22",
+        "lkaemmerling/laravel-horizon-prometheus-exporter": "^1.7",
         "meilisearch/meilisearch-php": "^1.4",
         "mll-lab/graphql-php-scalars": "^5.4",
         "mll-lab/laravel-graphql-playground": "^2.6",

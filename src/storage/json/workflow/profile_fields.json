@@ -117,6 +117,16 @@
         "profile_hidden": "true",
         "me_hidden": "true"
     },
+    "_getProdRoutingsOfExternalInspector()": {
+        "name": "_getProdRoutingsOfExternalInspector()",
+        "profile_hidden": "true",
+        "me_hidden": "true"
+    },
+    "_getQaqcInspTmplsOfExternalInspector()": {
+        "name": "_getQaqcInspTmplsOfExternalInspector()",
+        "profile_hidden": "true",
+        "me_hidden": "true"
+    },
     "_getRoleSet": {
         "name": "_getRoleSet",
         "profile_readonly": "true",
@@ -127,6 +137,16 @@
         "name": "_getSiteTeams()",
         "profile_readonly": "true",
         "me_readonly": "true"
+    },
+    "_getSubProjectsOfExternalInspector()": {
+        "name": "_getSubProjectsOfExternalInspector()",
+        "profile_hidden": "true",
+        "me_hidden": "true"
+    },
+    "_getSubProjectsOfProjectClient()": {
+        "name": "_getSubProjectsOfProjectClient()",
+        "profile_hidden": "true",
+        "me_hidden": "true"
     },
     "_getTshtTeams()": {
         "name": "_getTshtTeams()",

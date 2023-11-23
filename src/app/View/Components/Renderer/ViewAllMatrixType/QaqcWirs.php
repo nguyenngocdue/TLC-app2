@@ -132,36 +132,36 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     {
         return [
             ['dataIndex' => 'quantity',  'width' => 50, "fixed" => "left", 'align' => 'right'],
-            ['dataIndex' => 'progress', 'width' => 50, "fixed" => "left", 'align' => 'right'],
+            // ['dataIndex' => 'progress', 'width' => 50, "fixed" => "left", 'align' => 'right'],
             ['dataIndex' => 'production_name',  'width' => 300, "fixed1" => "left",],
             // ['dataIndex' => 'compliance_name',  'width' => 300, "fixed1" => "left",],
         ];
     }
 
-    function getProgress($line)
-    {
-        $result = 0;
-        foreach ($line as $cell) {
-            foreach ($cell as $wir) {
-                $result += in_array($wir->status, ['closed', 'not_applicable']);
-            }
-        }
-        return $result;
-    }
+    // function getProgress($line)
+    // {
+    //     $result = 0;
+    //     foreach ($line as $cell) {
+    //         foreach ($cell as $wir) {
+    //             $result += in_array($wir->status, ['closed', 'not_applicable']);
+    //         }
+    //     }
+    //     return $result;
+    // }
 
     function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     {
-        $prodOrderId = $y->id;
-        $line = $dataSource[$prodOrderId] ?? [];
-        $wirCount = count($xAxis);
-        $progress = $this->getProgress($line);
+        // $prodOrderId = $y->id;
+        // $line = $dataSource[$prodOrderId] ?? [];
+        // $wirCount = count($xAxis);
+        // $progress = $this->getProgress($line);
         // dump($progress . " / " . $wirCount);
-        $progress = ($wirCount) ? round(100 * $progress / $wirCount, 2) : 0;
+        // $progress = ($wirCount) ? round(100 * $progress / $wirCount, 2) : 0;
         return [
             'production_name' =>  $y->production_name,
             'compliance_name' =>  $y->compliance_name,
             'quantity' => $y->quantity,
-            'progress' => $progress . "%",
+            // 'progress' => $progress . "%",
         ];
     }
 }
