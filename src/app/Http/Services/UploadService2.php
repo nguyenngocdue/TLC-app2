@@ -64,7 +64,7 @@ class UploadService2
         return Attachment::where('object_type', $this->model)
             ->where('object_id', $id)->where('category', $fieldId)->get()->count() ?? 0;
     }
-    public function store($request)
+    public function store($request, $object_type = null, $object_id = null)
     {
         $thumbnailW = 150;
         $thumbnailH = 150;
@@ -113,7 +113,7 @@ class UploadService2
                             Storage::disk('s3')->put($thumbnailPath, $resource->__toString(), 'public');
                         }
                         // dd($fields[$fieldName);
-                        array_push($attachmentRows, [
+                        $item = [
                             'url_thumbnail' => isset($thumbnailPath) ? $thumbnailPath : "",
                             'url_media' => $imagePath,
                             'url_folder' => $path,
@@ -122,7 +122,10 @@ class UploadService2
                             'category' => $fields[$fieldName],
                             'owner_id' =>  (int)Auth::user()->id,
                             'mime_type' => $mimeType,
-                        ]);
+                        ];
+                        if ($object_type) $item['object_type'] = $object_type;
+                        if ($object_id) $item['object_id'] = $object_id;
+                        array_push($attachmentRows, $item);
                     }
                 }
             }

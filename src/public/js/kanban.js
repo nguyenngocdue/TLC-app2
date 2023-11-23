@@ -281,15 +281,40 @@ const kanbanReRender = (table, prefix, id, guiType, renderer) => {
     myDiv.replaceWith(renderer)
 }
 
+// const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
+//     const id = $("#" + txtTypeId).val()
+//     // const formData = $("#frmKanbanItem").serialize()
+//     // console.log("Updating up #", id, url, formData, formDataArray)
+//     const item = getItem() //<< This can't go inside $.ajax
+//     $.ajax({
+//         method: "POST",
+//         url,
+//         data: { wsClientId, action: "updateItemRenderProps", id, ...item, groupWidth },
+//         success: function (response) {
+//             const { renderer } = response.hits
+//             const { table, guiType } = response.meta
+//             kanbanReRender(table, prefix, id, guiType, renderer,)
+//         },
+//         error: onKanbanAjaxError,
+//     })
+// }
+
 const kanbanUpdateItem = (txtTypeId, url, prefix, groupWidth) => {
     const id = $("#" + txtTypeId).val()
-    // const formData = $("#frmKanbanItem").serialize()
-    // console.log("Updating up #", id, url, formData, formDataArray)
-    const item = getItem() //<< This can't go inside $.ajax
+    const htmlForm = document.getElementById('frmKanbanItem')
+    var formData = new FormData(htmlForm);
+    formData.append('wsClientId', wsClientId)
+    formData.append('action', 'updateItemRenderProps')
+    formData.append('id', id)
+    formData.append('groupWidth', groupWidth)
+    console.log(formData)
+
     $.ajax({
         method: "POST",
         url,
-        data: { wsClientId, action: "updateItemRenderProps", id, ...item, groupWidth },
+        data: formData,
+        processData: false, // Prevent jQuery from processing the data
+        contentType: false, // Prevent jQuery from setting contentType
         success: function (response) {
             const { renderer } = response.hits
             const { table, guiType } = response.meta
