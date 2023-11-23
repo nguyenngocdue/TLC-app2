@@ -8,7 +8,9 @@
 
 @section($modalId.'-body')
     <input id="txtTaskId" type="hidden" x-bind:value="modalParams['{{$modalId}}']['id']">
-    <div id="divTaskBody" class="my-4"></div>
+    <div id="divTaskBody" class="my-4">
+        <x-renderer.loading/>
+    </div>
 @endsection
 
 @section($modalId.'-footer')
