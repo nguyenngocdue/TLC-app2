@@ -51,9 +51,9 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();
         $currentYear = date('Y');
         $workplaceIds = isset($params['workplace_id']) ? Report::removeNullValuesFromArray($params['workplace_id']) : $dbWorkplaceIds;
-        $workplaceIds = empty($inputArray) ? $dbWorkplaceIds : $workplaceIds;
 
         $strWorkplaceIds = '(' . implode(',', $workplaceIds) . ')';
+
         $year = isset($params['year']) ? $params['year'] : $currentYear;
         // String SQL query
         $sql = "WITH temp_work_areas AS (
@@ -282,7 +282,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 "width" => 60,
             ],
             [
-                "title" => "HSE Training & Induction (Pax) {$notes['hrt_line_count']}",
+                "title" => "HSE Induction - Visitor & Constructor (Hour) {$notes['hrt_line_count']}",
                 "dataIndex" => "hrt_line_count",
                 "align" => "right",
                 "width" => 60,
@@ -354,8 +354,10 @@ class Hse_incident_report_010 extends Report_ParentReportController
 
             foreach ([$year] as $y) {
                 $workPlacesHoursOfYear[$y][] = $wp->getTotalWorkingHoursOfYear($y);
+                // dd($wp->name, $wp->getTotalWorkingHoursOfYear($y));
             }
         }
+        // dump($workPlacesHoursOfYear);
 
         $workHoursOfYear = Report::sumAndMergeNestedKeys($workPlacesHoursOfYear);
         $data = [];
