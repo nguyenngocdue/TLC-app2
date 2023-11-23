@@ -36,6 +36,7 @@ class WelcomeFortuneController extends Controller
             ],
         ));
         dump($r);
-        return "";
+
+        return view("welcome-fortune", []);
     }
 }

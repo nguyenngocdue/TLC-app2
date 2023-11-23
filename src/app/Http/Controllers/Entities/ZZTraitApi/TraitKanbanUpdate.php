@@ -50,6 +50,20 @@ trait TraitKanbanUpdate
         }
     }
 
+    function handleAttachments(Request $request, $attachmentProps, $id)
+    {
+        $uploadService2 = new UploadService2($this->modelPath);
+        $uploadService2->store($request, $this->modelPath, $id);
+        $input = $request->input();
+        foreach ($attachmentProps as $attachmentProp) {
+            $ids = trim($input[substr($attachmentProp, 1)]['toBeDeleted']);
+            if ($ids) {
+                $toBeDeletedIds = explode(",", $ids);
+                $uploadService2->destroy($toBeDeletedIds);
+            }
+        }
+    }
+
     function updateItemRenderProps(Request $request)
     {
         $input = $request->input();
@@ -60,9 +74,8 @@ trait TraitKanbanUpdate
         $table = $this->modelPath::getTableName();
         $item->update($input);
         $this->handleCheckboxAndDropdownMulti($request, $item, $props['oracy_prop']);
-
-        // $uploadService2 = new UploadService2($this->modelPath);
-        // $uploadService2->store($request);
+        $this->handleAttachments($request, $props['attachment'], $id);
+        // Log::info($request->input());
 
         $orderedItem = $this->getOrderedDataSource($id, $item);
 

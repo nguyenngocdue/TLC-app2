@@ -9,7 +9,7 @@
     filtersOfDropdown4s = @json($filters4);
 </script>
 
-<form id="frmKanbanItem" action="">
+<form id="frmKanbanItem" method="post" enctype="multipart/form-data">
 {{-- @php Log::info($item); @endphp --}}
     <div class="grid grid-cols-12 gap-2">
         @foreach($props as $prop)
