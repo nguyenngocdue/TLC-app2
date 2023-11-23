@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\Reports\Qaqc_ncr_dataSource;
+use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\Report;
 
 class Qaqc_ncr_010 extends Report_ParentDocument2Controller
@@ -90,7 +91,8 @@ class Qaqc_ncr_010 extends Report_ParentDocument2Controller
     public function getDataSource($params)
     {
         $primaryData = (new Qaqc_ncr_dataSource())->getDataSource($params);
-        // dd($primaryData);
+        $manageApps = LibApps::getAll()['manageApps'];
+        // dd($manageApps);
         return $primaryData;
     }
 

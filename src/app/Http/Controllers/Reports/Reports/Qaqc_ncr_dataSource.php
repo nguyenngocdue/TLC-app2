@@ -57,6 +57,7 @@ class Qaqc_ncr_dataSource extends Controller
                         DATE_FORMAT(SUBSTR(ncr.closed_at, 1, 10), '%d/%m/%Y') AS closed_at
                         FROM qaqc_ncrs ncr
                     WHERE 1 = 1
+                        AND ncr.deleted_by IS NULL
                         AND SUBSTR(ncr.created_at, 1, 10) >= '{$valOfParams["picker_date"]["start"]}'
                         AND SUBSTR(ncr.created_at, 1, 10) <= '{$valOfParams["picker_date"]["end"]}'";
         if (Report::checkValueOfField($valOfParams, 'project_id')) $sql .= "\n AND ncr.project_id = {$valOfParams['project_id']}";
