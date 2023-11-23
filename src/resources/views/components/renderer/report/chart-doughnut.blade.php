@@ -84,12 +84,13 @@
 				,borderWidth: 1
 				,borderRadius: 6
 				,font: {
-					size: 16
+					size: 16,
+					textAlign: 'center'
 				},
 				formatter: function(value, context) {
 					var values = chartData.numbers;
 					var total = values.reduce(function(a, b) {return a + b;}, 0);
-                    return ((value*100/total).toFixed(2)) +"%";
+                    return value + '\n(' + ((value*100/total).toFixed(2)) +"%)";
                 }
 			}
 		}
