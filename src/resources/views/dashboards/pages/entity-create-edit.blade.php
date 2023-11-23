@@ -53,7 +53,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
                 <x-renderer.item-render-props width='md:w-3/4 xl:w-3/4' id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
                 @if(!$hasReadOnly)
                     <div class="fixed right-0">
-                        <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
+                        <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" type={{$type}} />
                     </div>
                 @endif
             </div>
@@ -70,7 +70,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
                 </div>
                 <x-controls.insp-chklst.item-render-check-sheet allowed="{{$allowed}}" id={{$id}} :item="$item" :type="$type" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} />
                 <div class="fixed right-0">
-                    <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
+                    <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" type={{$type}} />
                 </div>
             </div>
             @break
@@ -87,7 +87,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
         @endforeach
         @if(!$hasReadOnly)
         <div class="bg-white rounded-lg mt-2">
-            <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" />
+            <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" type={{$type}} />
         </div>
         @endif
         <script>
