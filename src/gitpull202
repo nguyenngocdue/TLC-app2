@@ -7,5 +7,8 @@ docker exec -it laravel202_php php artisan event:clear
 docker exec -it laravel202_php php artisan route:clear
 docker exec -it laravel202_php php artisan route:cache
 
+# This it for the workers to load the latest code in Listerner.php files
+docker exec -it laravel202_php php artisan horizon:terminate --force
+docker exec -it laravel202_php php artisan horizon
+
 echo "Don't forget to run php artisan migrate to have the latest version of DB"
-echo "If any change in Listeners, please run \"supervisorctl restart all\" to reset code in horizon"
