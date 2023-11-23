@@ -13,6 +13,8 @@
                 <p class="text-sm {{$isRead ? "text-blue-400": "text-blue-600"}}">{{$timeAgo}}</p>
             </div>
         </div>
-        <div class="mx-3 my-auto h-3 w-3 {{$isRead ?: "rounded-full bg-blue-500"}}"></div>
+        <div class="mx-3 my-auto ">
+            <div class="h-3 w-3 {{$isRead ?: "rounded-full bg-blue-500"}}"></div>
+        </div>
     </div>
 </a>

@@ -367,4 +367,19 @@ class User extends Authenticatable implements LdapAuthenticatable
     //     }
     //     return $result;
     // }
+
+    function isExternalInspector()
+    {
+        return in_array($this->discipline, [138]); //138: External Inspector
+    }
+
+    public function isProjectClient()
+    {
+        return in_array($this->discipline, [128]); //128: Project Client
+    }
+
+    public function isApartmentOwner()
+    {
+        return in_array($this->discipline, []); //: 
+    }
 }

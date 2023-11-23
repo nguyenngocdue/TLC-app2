@@ -2,19 +2,15 @@
 
 namespace App\Listeners;
 
-use App\Events\CreatedDocumentEvent2;
 use App\Events\OpenedDocumentEvent;
-use App\Http\Controllers\Workflow\LibApps;
-use App\Mail\MailCreateNew;
 use App\Models\User;
 use App\Notifications\SampleNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class OpenedDocumentListener //implements ShouldQueue
+class OpenedDocumentListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -32,18 +28,28 @@ class OpenedDocumentListener //implements ShouldQueue
         $modelPath = $event->modelPath;
         $id = $event->id;
         $type = $event->type;
+        $cuid = $event->cuid;
+        $sender = User::find($cuid);
+        $senderName = $sender->name;
         $item = $modelPath::find($id);
-        // $this->sendMail($item, $type, $id);
+        $itemName = $item->name;
 
-        User::find(1)->notify(new SampleNotification(
-            [
-                "message" => "<b>Fortune 123</b> has view checklist of Structure of STW1-11",
-                "group_name" =>     'Inspection Check Sheet Observer',
-                "sender_id" =>     1,
-                "object_type" => Qaqc_insp_chklst_sht::class,
-                "object_id" =>     20009,
-                "scroll_to" => 'qaqc_insp_group_id_33_cfc-or-gypsum-boards',
-            ],
-        ));
+        switch ($type) {
+            case 'qaqc_insp_chklst_sht':
+                if ($sender->isExternalInspector()) {
+                    $book = $item->getChklst;
+                    $prodOrderName = $book->getProdOrder->name;
+                    $subProjectName = $book->getSubProject->name;
+                    User::find(1)->notify(new SampleNotification([
+                        "message" => "<b>$senderName</b> opened $itemName of $prodOrderName ($subProjectName).",
+                        "group_name" => 'ICS Observer',
+                        "sender_id" => $cuid,
+                        "object_type" => $modelPath,
+                        "object_id" => $id,
+                        "scroll_to" => '', //'qaqc_insp_group_id_33_cfc-or-gypsum-boards',
+                    ]));
+                }
+                break;
+        }
     }
 }

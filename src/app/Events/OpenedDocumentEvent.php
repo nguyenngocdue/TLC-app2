@@ -24,6 +24,7 @@ class OpenedDocumentEvent
     public function __construct(
         public $type,
         public $id,
+        public $cuid,
     ) {
         // Log::info("CreatedDocumentEvent2");
         // Log::info($modelPath);

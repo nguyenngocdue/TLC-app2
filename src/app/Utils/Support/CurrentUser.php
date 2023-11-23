@@ -137,29 +137,14 @@ class CurrentUser
         return $bookmarkSettings;
     }
 
-    public static function isExternalInspector()
-    {
-        return in_array(CurrentUser::get()->discipline, [138]); //138: External Inspector
-    }
-
-    public static function isProjectClient()
-    {
-        return in_array(CurrentUser::get()->discipline, [128]); //128: Project Client
-    }
-
-    public static function isApartmentOwner()
-    {
-        return in_array(CurrentUser::get()->discipline, []); //: 
-    }
-
     public static function getViewSuffix()
     {
         switch (true) {
-            case static::isProjectClient():
+            case static::get()->isProjectClient():
                 return Constant::DASHBOARD_PROJECT_CLIENT;
-            case static::isExternalInspector():
+            case static::get()->isExternalInspector():
                 return Constant::DASHBOARD_EXTERNAL_INSPECTOR;
-            case static::isApartmentOwner():
+            case static::get()->isApartmentOwner():
                 return Constant::DASHBOARD_APARTMENT_OWNER;
             default:
                 return "";
