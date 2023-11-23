@@ -132,12 +132,12 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true",
-        "assigned": "true",
-        "partially_closed": "true",
-        "rejected": "true",
-        "closed": "true",
-        "not_applicable": "true"
+        "new": "",
+        "assigned": "",
+        "partially_closed": "",
+        "rejected": "",
+        "closed": "",
+        "not_applicable": ""
     },
     "_getLines": {
         "name": "_getLines",
