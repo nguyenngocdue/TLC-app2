@@ -6,9 +6,12 @@ use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitGenerateValuesFromParamsReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
+use App\Models\Ghg_cat;
+use App\Models\Term;
 use App\Utils\Support\ArrayReport;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\Report;
+use Exception;
 
 class Ghg_sheet_070 extends Report_ParentDocument2Controller
 {
@@ -95,60 +98,107 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 			for ($index=0; $index < $countLines; $index++) {
 				// data 1
 				$currentYear = $years[$i]; 
-				$currentData = $data[$currentYear][$index];
-				$month1 = $currentData['months'];
-				// data 2
-				if($i === 0) {
-					// add data for the first item
-					$currentData['data_'.$currentYear-1] = ['month' => $month1];
-					$quarterFromCurrentData = DateReport::calculateQuarterTotals($month1);
-					$currentData['comparison_with_'.$currentYear-1] = [
-						'meta_number' =>[
-									'month' => $month1,
-									'quarter' => $quarterFromCurrentData,
-									'year' => [$currentYear-1 => array_sum(array_values($month1))],
-						],
-						'meta_percent' => [
-									'month' => array_fill_keys(array_keys($month1), 0),
-									'quarter' => array_fill_keys(array_keys($quarterFromCurrentData), 0),
-									'year' => [$currentYear-1 => 0]
-						]	
-						];
-					$data[$currentYear][$index] = $currentData;
+				$childrenMetrics = $data[$currentYear][$index];
+				
+				// set comparison's values for metric2
+				try {
+					foreach ($childrenMetrics as $keyOfChild => $item) {
+						if(!is_array($item)) continue;
+						$currentData = $item;
+						$month1 = $currentData['months'];
+	
+						// data 2
+						if($i === 0) {
+							// add data for the first item
+							$currentData['data_'.$currentYear-1] = ['month' => $month1];
+							$quarterFromCurrentData = DateReport::calculateQuarterTotals($month1);
+							$currentData['comparison_with_'.$currentYear-1] = [
+								'meta_number' =>[
+											'month' => $month1,
+											'quarter' => $quarterFromCurrentData,
+											'year' => [$currentYear-1 => array_sum(array_values($month1))],
+								],
+								'meta_percent' => [
+											'month' => array_fill_keys(array_keys($month1), 0),
+											'quarter' => array_fill_keys(array_keys($quarterFromCurrentData), 0),
+											'year' => [$currentYear-1 => 0]
+								]	
+								];
+							$data[$currentYear][$index][$keyOfChild] = $currentData;
+						}
+						if(isset($years[$i+1])) {
+							// add data for the second item
+							$nextYear = $years[$i+1];
+							$nextData = $data[$nextYear][$index];	
+							$month2 = $nextData['months'];
+							//subtract data 1 - data 2
+							$diff = ArrayReport::subtractArrays($month1, $month2);
+							$nextData['data_'.$currentYear] = ['month' => $month1];
+							$nextData['data_'.$nextYear] = ['month' => $month2];
+							
+							$quarterBefore = DateReport::calculateQuarterTotals($month1);
+							$quarterFromNextData = DateReport::calculateQuarterTotals($diff);
+		
+							$yearBefore = array_sum(array_values($month1));
+							$yearAfter = array_sum(array_values($diff));
+		
+							$nextData['comparison_with_'.$currentYear] = [
+								'meta_number' => [
+									'month' => $diff,
+									'quarter' => $quarterFromNextData,
+									'year' => [$currentYear => array_sum(array_values($diff))],
+								],
+								'meta_percent' => [
+									'month' => self::calculatePercentForQuarter($month1, $diff),
+									'quarter' => self::calculatePercentForQuarter($quarterBefore, $quarterFromNextData),
+									'year' => [$currentYear =>  self::calculatePercentForYear($yearBefore, $yearAfter)],
+								]
+							];
+							$data[$nextYear][$index][$keyOfChild] = $nextData;
+						}
+					}
+				} catch(Exception $e) {
+					// dd($e->getMessage(), $item);
 				}
-				if(isset($years[$i+1])) {
-					// add data for the second item
-					$nextYear = $years[$i+1];
-					$nextData = $data[$nextYear][$index];	
-					$month2 = $nextData['months'];
-					//subtract data 1 - data 2
-					$diff = ArrayReport::subtractArrays($month1, $month2);
-					$nextData['data_'.$currentYear] = ['month' => $month1];
-					$nextData['data_'.$nextYear] = ['month' => $month2];
-					
-					$quarterBefore = DateReport::calculateQuarterTotals($month1);
-					$quarterFromNextData = DateReport::calculateQuarterTotals($diff);
 
-					$yearBefore = array_sum(array_values($month1));
-					$yearAfter = array_sum(array_values($diff));
-
-					$nextData['comparison_with_'.$currentYear] = [
-						'meta_number' => [
-							'month' => $diff,
-							'quarter' => $quarterFromNextData,
-							'year' => [$currentYear => array_sum(array_values($diff))],
-						],
-						'meta_percent' => [
-							'month' => self::calculatePercentForQuarter($month1, $diff),
-							'quarter' => self::calculatePercentForQuarter($quarterBefore, $quarterFromNextData),
-							'year' => [$currentYear =>  self::calculatePercentForYear($yearBefore, $yearAfter)],
-						]
-					];
-					$data[$nextYear][$index] = $nextData;
-				}
+				
 			}
 		}
+		// dd($data);
 		return $data;
+	}
+
+	private function makeDataToBuildTable($dataSource) {
+		$result = [];
+		foreach ($dataSource as $scopeId => $values) {
+			$scopeName = Term::find($scopeId)->toArray()['name'];
+			foreach ($values as $ghgCatId => $childrenMetrics){
+				$ghgCatName = Ghg_cat::find($ghgCatId)->toArray()['name'];
+				$childMetrics = last(array_values($childrenMetrics));
+				$arr1 = [];
+				foreach($childMetrics as $k => $metrics){
+					$firstMetrics = reset($metrics);
+					$arr = [];
+					if($firstMetrics){
+						$ghgTmplId = isset($firstMetrics['ghg_tmpls_id']) ? $firstMetrics['ghg_tmpls_id'] : null;
+						$ghgTmplName = isset($firstMetrics['ghg_tmpls_name']) ? $firstMetrics['ghg_tmpls_name'] : null;
+						$arr = [
+							"scope_id" => $scopeId,
+							"scope_name" => $scopeName,
+							"ghgcate_id" => $ghgCatId,
+							'ghgcate_name' => $ghgCatName,
+							'ghg_tmpl_id' => $ghgTmplId,
+							'ghg_tmpl_name' => $ghgTmplName,
+							'children_metrics' => $metrics
+						];
+					}
+					$arr1[$k] = $arr;
+				}
+				$result[$scopeId][$ghgCatId] = $arr1;
+			}
+		}
+		// dd($result['335']);
+		return $result;
 	}
 
 	public function changeDataSource($dataSource, $params)
@@ -156,8 +206,8 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		// dd($dataSource);
 		$years =  is_array($params['year']) ? $params['year'] : [$params['year']];
 		$data = [];
-		
 		foreach ($dataSource as $key => $values) $data[$key] = $values['tableDataSource']['scopes'] ?? [];
+
 		$dataOfMonthOfYear = [];
 		$childrenMetrics = [];
 		foreach ($data as $year => $values){
@@ -166,13 +216,12 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 					$dataOfMonthOfYear[$scopeId][$ghgTmplId][$year] = $items;
 					$childrenMetrics[$scopeId][$ghgTmplId][$year] = array_map(function($item) {
 						if(isset($item['children_metrics'])){
-							return $item['children_metrics'][0];
+							return $item['children_metrics'];
 						}
 					}, $items);
 				}
 			}
 		}
-		// dd($childrenMetrics);
 
 		foreach ($childrenMetrics as $scopeId => &$values) {
 			foreach ($values as $ghgTmplId => &$items){
@@ -188,17 +237,21 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 					}
 				}
 				$comparisonData = $this->comparisonData($items);
+				// dd($comparisonData);
 				$items = $comparisonData;
 			}
 		}
 
+		// make data to build table the same ghg-sheet-050
+		$scopeData = $this->makeDataToBuildTable($childrenMetrics);
+		// dd($scopeData);
 
+		$groupByScope = ['scopes' => $scopeData];
+		$result['tableDataSource'] = ['scopes' => $scopeData];
+		$result['tableSetting'] = $this->createInfoToRenderTable($groupByScope);
 
-		dump($childrenMetrics);
-
-
-
-		return $dataSource;
+		// dump($result);
+		return collect($result);
 	}
 
 
@@ -212,17 +265,21 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 	public function createInfoToRenderTable($dataSource)
 	{
 		if(!isset($dataSource['scopes'])) return [];
+		$allScopes = $dataSource['scopes'];
+		dump($allScopes);
 		$info = [];
 		$totalLine = 2;
-		foreach ($dataSource['scopes'] as $k => $items) {
+		foreach ($allScopes as $k => $items) {
 			$num = 0;
 			$emptyChildrenMetrics = 0;
 			foreach ($items as $values){
 				$item = last($values);
+				if(empty($item)) continue;
 				$ghgcate_id = $item['ghgcate_id'];
 				$countLv2 = Report::countChildrenItemsByKey($values);
 				$info[$k][$ghgcate_id]['scope_rowspan_lv2'] = $countLv2;
 				foreach ($values  as $index => $val){
+					if(empty($val)) continue;
 					$item = $val['children_metrics'] ?? [];
 					$ghg_tmpl_id = $val['ghg_tmpl_id'];
 					$info[$k][$ghgcate_id][$ghg_tmpl_id]['scope_rowspan_lv3'] = (count($item) ? count($item) : 1);

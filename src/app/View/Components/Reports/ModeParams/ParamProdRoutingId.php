@@ -16,8 +16,12 @@ class ParamProdRoutingId extends ParentParamReports
         $targetIds = ParameterReport::getTargetIds($configData);
         $prodRoutings = ParameterReport::getDBParameter($targetIds, 'Prod_routing');
         $result = [];
+
         
         foreach ($prodRoutings as $routing){
+            // dd($routing->getScreensShowMeOn()->toArray(), $this);
+            if(empty($routing->getScreensShowMeOn()->toArray())) continue;
+            
             $subProjectIds = $routing->getSubProjects()->pluck('id')->toArray();
             $chklstTmplIds = $routing->getChklstTmpls()->pluck('id')->toArray();
             $array = (object)[];
