@@ -188,7 +188,7 @@ abstract class Report_ParentController extends Controller
             $dataSource = $this->transformDataSource($dataSource, $params);
             $dataSource = $this->changeValueData($dataSource, $params);
             $dataSource = $this->paginateDataSource($dataSource, $pageLimit);
-            $tableColumns = $this->getTableColumns($dataSource, $params);
+            $tableColumns = $this->getTableColumns($params, $dataSource);
             $tableDataHeader = $this->tableDataHeader($params, $dataSource);
             echo $this->getJS();
         }
@@ -223,6 +223,7 @@ abstract class Report_ParentController extends Controller
             'tableTrueWidth' => $this->tableTrueWidth,
             'optionPrint' => $this->optionPrint,
             'childrenMode' => $params['children_mode'] ?? 'not_children',
+            'type' => $this->getType(),
         ] + $dataRenderDocReport);
     }
     protected function modifyDataToExportCSV($dataSource)

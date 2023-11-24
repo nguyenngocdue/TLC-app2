@@ -140,7 +140,7 @@ abstract class Report_Parent2Controller extends Controller
         return [[]];
     }
 
-    protected function getTableColumns($dataSource, $params)
+    protected function getTableColumns($params, $dataSource)
     {
         return [];
     }
@@ -230,7 +230,7 @@ abstract class Report_Parent2Controller extends Controller
         if ($this->viewName) $viewName = $this->viewName;
 
         $dataSource = $this->getDataSource($params);
-        $tableColumns = $this->getTableColumns($dataSource, $params);
+        $tableColumns = $this->getTableColumns($params, $dataSource);
         $dataSource = Report::formatNumbersInDataSource($dataSource, $tableColumns);
         $dataSource = $this->changeDataSource($dataSource, $params);
         $dataSource  = $this->addTooltip($dataSource);

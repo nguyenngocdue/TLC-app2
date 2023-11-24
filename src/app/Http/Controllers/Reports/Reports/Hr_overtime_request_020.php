@@ -93,7 +93,7 @@ if (isset($params['user_id'])) $sql .= "\n AND otline.user_id = '{{user_id}}'";
         return $sql;
     }
 
-    public function getTableColumns($dataSource, $params)
+    public function getTableColumns($params, $dataSource)
     {
         // dump($dataSource);
         $totalDataCol = [

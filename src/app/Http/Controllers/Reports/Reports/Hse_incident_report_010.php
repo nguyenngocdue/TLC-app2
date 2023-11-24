@@ -190,7 +190,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
         return $sql;
     }
 
-    protected function getTableColumns($dataSource, $params)
+    protected function getTableColumns($params, $dataSource)
     {
 
         $stringIcon = "class='text-base fa-duotone fa-circle-question hover:bg-blue-400 rounded'></i>";
