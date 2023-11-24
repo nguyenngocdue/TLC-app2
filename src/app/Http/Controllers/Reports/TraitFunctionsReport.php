@@ -17,7 +17,7 @@ trait TraitFunctionsReport
 
     protected function makeColumns($dataSource, $params)
     {
-        $columns = $this->getTableColumns($dataSource, $params);
+        $columns = $this->getTableColumns($params, $dataSource);
         $columnKeys = array_column($columns, 'dataIndex');
         $columnNames =  array_map(function ($item) {
 

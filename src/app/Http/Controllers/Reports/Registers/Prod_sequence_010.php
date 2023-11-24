@@ -33,7 +33,7 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
         $sql = "";
         return $sql;
     }
-    public function getTableColumns($dataSource, $params)
+    public function getTableColumns($params, $dataSource)
     {
         return [[]];
     }

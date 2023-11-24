@@ -93,7 +93,7 @@ class Hr_overtime_request_010 extends Report_ParentReportController
 
 
     // Table
-    public function getTableColumns($dataSource, $params)
+    public function getTableColumns($params, $dataSource)
     {
         // dump($dataSource);
         return [
