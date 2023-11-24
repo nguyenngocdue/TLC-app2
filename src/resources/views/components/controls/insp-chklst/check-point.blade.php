@@ -4,7 +4,7 @@
         <p title="Vietnamese"><i>{{$line->description}}</i></p>
     </div>
     <input type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[id][{{$rowIndex}}]" value="{{$line->id}}">
-
+{{$readOnly?"RO":"NRO"}}
     <div class="p-4">
         <div class="flex justify-center mb-2">
             @switch($line->control_type_id)
@@ -13,7 +13,7 @@
             @break
             @case (4) {{-- 4 => "radio" --}}
             <div class="w-full">
-                <x-controls.insp_chklst.check-point-option readOnly="{{$readOnly}}" :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" type="{{$type}}" />
+                <x-controls.insp_chklst.check-point-option readOnly1="{{$readOnly}}" :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" type="{{$type}}" />
                 <x-controls.insp_chklst.check-point-create-ncr-on-hold readOnly="{{$readOnly}}" :sheet="$sheet" :line="$line" :checkPointIds="$checkPointIds" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
             </div>
             @break
