@@ -18,20 +18,20 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     use TraitForwardModeReport;
 
     protected $mode = '030';
-    protected $projectId = 8;
-    protected $subProjectId = 107;
-    protected $prodRoutingId = 62;
     protected $tableTrueWidth = true;
     protected $maxH = 30;
     protected $typeView = 'report-pivot';
     protected $type = 'prod_sequence';
     protected $pageLimit = 10;
+    // protected $projectId = 8;
+    // protected $subProjectId = 107;
+    // protected $prodRoutingId = 62;
 
     // DataSource
     public function getSqlStr($params)
     {
         // dump($params);
-        $valOfParams = $this->generateValuesFromParamsReport($params);
+        // $valOfParams = $this->generateValuesFromParamsReport($params);
         // dd($valOfParams);
         $sql = "SELECT 
                     sp.project_id AS project_id
@@ -94,9 +94,10 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                 JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
                 JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
 
-                WHERE 1 = 1
-                    AND sp.project_id = '{{project_id}}'
-                    AND sp.id = {{sub_project_id}}";
+                WHERE 1 = 1";
+    if (isset($params['project_id'])) $sql .= "\n AND sp.project_id IN ({{project_id}})";
+    if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id IN ({{sub_project_id}})";
+
     if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
     if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
     if (isset($params['status'])) $sql .= "\n  AND pose.status IN ({{status}})";
@@ -120,10 +121,10 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     protected function getDefaultValueParams($params, $request)
     {
         $params['picker_date'] = date('d/m/Y');
-        $params['project_id'] = $this->projectId;
-        $params['sub_project_id'] = $this->subProjectId;
-        $params['prod_routing_id'] = $this->prodRoutingId;
         $params['page_limit'] = $this->pageLimit;
+        // $params['project_id'] = $this->projectId;
+        // $params['sub_project_id'] = $this->subProjectId;
+        // $params['prod_routing_id'] = $this->prodRoutingId;
         return $params;
     }
 

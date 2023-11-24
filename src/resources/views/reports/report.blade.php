@@ -3,6 +3,7 @@
 @section('title', $titleReport)
 @section('tooltip', Str::ucfirst($typeReport)." ".$mode)
 @section('content')
+
 <div class="px-4">
     @include('components.reports.shared-parameter')
     @if(!empty($legendColors))

@@ -22,6 +22,7 @@ class Parameter3Report extends Component
         private $hasListenTo = false,
         private $optionPrint = '',
         private $childrenMode = '',
+        private $type = '',
     ) {
         //
     }
@@ -39,7 +40,8 @@ class Parameter3Report extends Component
             'modeOption' => $this->modeOption,
             'hasListenTo' => $this->hasListenTo,
             'optionPrint' => $this->optionPrint,
-            'childrenMode' =>$this->childrenMode
+            'childrenMode' =>$this->childrenMode,
+            'type' =>$this->type,
         ]);
     }
 }
