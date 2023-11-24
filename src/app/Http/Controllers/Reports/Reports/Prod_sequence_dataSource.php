@@ -7,8 +7,6 @@ use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitGenerateValuesFromParamsReport;
 use App\Utils\Support\DateReport;
-use App\Utils\Support\PivotReport;
-use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
 class Prod_sequence_dataSource extends Controller
@@ -72,18 +70,22 @@ class Prod_sequence_dataSource extends Controller
                     pru.production_output AS production_output,
                     pru.remark AS remark
                     FROM 
-                        sub_projects sp, 
-                        prod_orders po, 
-                        prod_routings pr, 
-                        prod_sequences ps, 
-                        prod_routing_links prl,
-                        prod_routing_details prde,
-                        prod_disciplines pd,
-                        prod_runs pru
+                        sub_projects sp
+                        JOIN prod_orders po ON po.sub_project_id = sp.id
+                        JOIN prod_routings pr ON po.prod_routing_id = pr.id
+                        JOIN prod_sequences ps ON ps.prod_order_id = po.id
+                        JOIN prod_routing_links prl ON prl.id = ps.prod_routing_link_id
+                        JOIN prod_routing_details prde ON prde.prod_routing_link_id = prl.id 
+                                                        AND prde.prod_routing_id = pr.id
+                                                        AND prde.prod_routing_link_id = ps.prod_routing_link_id
+                        JOIN prod_disciplines pd ON pd.id = prl.prod_discipline_id
+                        JOIN prod_runs pru ON pru.prod_sequence_id = ps.id
                     WHERE 1 = 1";
         if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
-        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id =  $sub";
+        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
+
+        
         if ($po = $valOfParams['prod_order_id']) $sql .= "\n AND ps.prod_order_id IN($po)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prde.prod_routing_link_id IN ($prl)";
         if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id = $pd";
@@ -91,16 +93,6 @@ class Prod_sequence_dataSource extends Controller
         if($status = $valOfParams['status']) $sql .= "\n AND ps.status IN( $status )";
 
         $sql .= "\n 
-                    #AND ps.id = 347
-                    AND po.sub_project_id = sp.id
-                    AND po.prod_routing_id = pr.id
-                    AND ps.prod_order_id = po.id
-                    AND prl.id = ps.prod_routing_link_id
-                    AND prde.prod_routing_link_id = ps.prod_routing_link_id
-                    AND prde.prod_routing_id = pr.id
-                    AND prde.prod_routing_link_id = prl.id
-                    AND pd.id = prl.prod_discipline_id
-                    AND pru.prod_sequence_id = ps.id
                     AND  SUBSTR(pru.date, 1, 10) >= '{$valOfParams["picker_date"]["start"]}'
                     AND  SUBSTR(pru.date, 1, 10) <= '{$valOfParams["picker_date"]["end"]}'
                     ) AS tb1

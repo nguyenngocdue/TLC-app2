@@ -19,6 +19,7 @@ class ParamProjectId extends ParentParamReports
         $dataSource = [];
         usort($list, fn ($a, $b) => $a['name'] <=> $b['name']);
         foreach ($list as $team) $dataSource[] = ['id' => $team['id'], 'name' => $team['name'], 'description' => $team['description']];
+        // dd($dataSource);
         return $dataSource;
     }
 }

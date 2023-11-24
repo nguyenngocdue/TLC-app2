@@ -28,6 +28,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'editable' => true,
                 'align' => 'center',
                 'width' => 50,
+                
             ],
             [
                 'dataIndex' => 'is_render_row_fields',
