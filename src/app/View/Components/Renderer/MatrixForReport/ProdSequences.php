@@ -10,8 +10,8 @@ class ProdSequences extends MatrixForReportParent
 {
     protected $dataIndexX = "prod_routing_link_id";
     protected $dataIndexY = "prod_order_id";
-    protected $rotate45Width = 200;
-    protected $rotate45Height = 150;
+    protected $rotate45Width = 300;
+    protected $rotate45Height = 250;
     protected $closedDateColumn = 'end_date';
 
     private $showInReportToc = 365; // term_id of report_toc
@@ -20,6 +20,7 @@ class ProdSequences extends MatrixForReportParent
         private $prodRoutingId = 49,
         private $subProjectId = 107,
         private $dateToCompare = null,
+        private $mode = null,
     ) {
         parent::__construct("prod_sequences", $dateToCompare);
         // echo ($prodRoutingId . " - " . $subProjectId);
@@ -33,12 +34,18 @@ class ProdSequences extends MatrixForReportParent
         $allRoutingLinks = $result->getProdRoutingLinks;
 
         $result = [];
-        foreach ($allRoutingLinks as $routingLink) {
-            $showMeOnIds = $routingLink->getScreensShowMeOn()->pluck('id')->toArray();
-            if (in_array($this->showInReportToc, $showMeOnIds))
-                $result[] = $routingLink;
+        switch ($this->mode) {
+            case 2:
+                return $allRoutingLinks;
+            case 1:
+            default:
+                foreach ($allRoutingLinks as $routingLink) {
+                    $showMeOnIds = $routingLink->getScreensShowMeOn()->pluck('id')->toArray();
+                    if (in_array($this->showInReportToc, $showMeOnIds))
+                        $result[] = $routingLink;
+                }
+                return collect($result);
         }
-
         return collect($result);
     }
 
