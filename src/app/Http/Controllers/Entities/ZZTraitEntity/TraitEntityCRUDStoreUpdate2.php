@@ -23,6 +23,7 @@ trait TraitEntityCRUDStoreUpdate2
 	use TraitValidation;
 	// use TraitSendNotificationAndMail;
 	// use TraitEventInspChklst;
+	use TraitEntityDiff;
 	use TraitEntityUpdateUserSettings;
 	use TraitUpdatedProdSequenceEvent;
 	use TraitHelperRedirect;
@@ -130,9 +131,10 @@ trait TraitEntityCRUDStoreUpdate2
 
 		//This is to compare status, assignee, and monitors for sending MailChangeStatus
 		if (!$isFakeRequest) {
-			$previousValue = $this->modelPath::find($id);
-			Oracy::attach("getMonitors1()", [$previousValue], true);
-			$previousValue = $previousValue->getAttributes();
+			$previousItem = $this->modelPath::find($id);
+			// if ($this->type == 'qaqc_insp_chklst_sht') $diff = $this->getDiff($previousItem, $request);
+			Oracy::attach("getMonitors1()", [$previousItem], true);
+			$previousValue = $previousItem->getAttributes();
 			// $previousValue = $this->getPreviousValue($currentValue, $theRow);
 			// dump($previousValue);
 		}
