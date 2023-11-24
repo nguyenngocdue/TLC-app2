@@ -18,14 +18,14 @@ return [
     ],
     "document-prod_sequence_040" => [ //Project Benchmark Report
         "white_list" => [
-            'prod_routing_id' =>[49],
+            'prod_routing_id' =>[49], //$49 STW Modular
             'prod_discipline_id' => [],
         ],
         "black_list" => [], //49: STW Module
     ],
     "document-prod_sequence_050" => [ //PPR Daily Progress
         "white_list" => [
-            'prod_routing_id' =>[62],
+            'prod_routing_id' =>[62], //PPR Monthly TimeSheet
             'prod_discipline_id' => [],
         ],
         "black_list" => [],

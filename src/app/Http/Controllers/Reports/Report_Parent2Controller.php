@@ -42,7 +42,7 @@ abstract class Report_Parent2Controller extends Controller
     protected $modeType = '';
     protected $rotate45Width = false;
     protected $viewName = '';
-    protected $type = '';
+    protected $type = ''; // can be removed
     protected $optionPrint = 'landscape';
     protected $overTableTrueWidth = false;
 
@@ -203,7 +203,6 @@ abstract class Report_Parent2Controller extends Controller
     {
         
         $input = $request->input();
-        // dd($input);
         // Check Validations
         if ($input) {
             $validation = $this->checkValidationAdvancedFilter($request);
@@ -262,6 +261,7 @@ abstract class Report_Parent2Controller extends Controller
         $optionPrint = $params['optionPrintLayout'] ?? $this->optionPrint;
         $tableTrueWidth = $this->overTableTrueWidth && $optionPrint === 'landscape' ? 0 : $this->tableTrueWidth;
         // dump($dataSource);
+        
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,
@@ -288,6 +288,7 @@ abstract class Report_Parent2Controller extends Controller
             'optionPrint' => $optionPrint,
             'layout' => $this->layout($optionPrint),
             'childrenMode' => $params['children_mode'] ?? 'not_children',
+            'type' => $this->getType(),
         ] + $dataRenderDocReport);
     }
 

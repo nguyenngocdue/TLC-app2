@@ -34,7 +34,7 @@ $route = $routeName ? route($routeName) : "";
             <div id="name_{{$name}}" class="col-span-3 {{$name}} {{$firstHidden}}">
                 @switch($renderer)
                 @case("drop_down")
-                <x-reports.dropdown7 :infoParam="$value" hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" />
+                <x-reports.dropdown7 :infoParam="$value" hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" type={{$type}}/>
                     @if ($errors->any())
                             @foreach ($errors->getMessages() as $field => $message)
                                 @if($field === $name && $field !== 'end_date' && $field !== 'end_date')

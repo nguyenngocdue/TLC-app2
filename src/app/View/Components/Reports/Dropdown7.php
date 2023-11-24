@@ -18,6 +18,7 @@ class Dropdown7 extends Component
         private $multiple = false,
         private $hasListenTo = false,
         private $infoParam = [],
+        private $type ="",
     ) {
     }
 
@@ -44,7 +45,7 @@ class Dropdown7 extends Component
         // dump($selected);
         $str = "<span class='px-1' title='$info'>$title $strStar</span>
         
-        <x-reports.mode-params.$viewName name='$this->name' selected='$selected' allowClear='$this->allowClear' multiple='$this->multiple' hasListenTo='$this->hasListenTo' />";
+        <x-reports.mode-params.$viewName name='$this->name' selected='$selected' allowClear='$this->allowClear' multiple='$this->multiple' hasListenTo='$this->hasListenTo' type='$this->type' />";
         echo  Blade::render($str);
     }   
 }
