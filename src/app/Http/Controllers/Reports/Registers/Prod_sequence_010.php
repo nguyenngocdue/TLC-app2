@@ -26,6 +26,7 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
     protected $mode = '010';
     protected $maxH = 45;
     protected $viewName="register-prod-sequence-010";
+    protected $sequence_mode = 1;
 
     public function getSqlStr($params)
     {
@@ -64,8 +65,7 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
             ],
             [
                 'title' => 'Mode',
-                'dataIndex' => 'mode_sequence',
-                'allowClear' => true,
+                'dataIndex' => 'sequence_mode',
             ],
         ];
     }
@@ -90,6 +90,7 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
         $params['sub_project_id'] = $this->sub_project_id;
         $params['prod_routing_id'] = $this->prod_routing_id;
         $params['picker_date'] = null;
+        $params['sequence_mode'] = $this->sequence_mode;
         return $params;
     }
 }

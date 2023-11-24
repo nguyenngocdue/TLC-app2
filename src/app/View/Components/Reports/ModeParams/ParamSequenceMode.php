@@ -4,7 +4,7 @@ namespace App\View\Components\Reports\ModeParams;
 
 use App\View\Components\Reports\ParentTypeParamReport;
 
-class ParamModeSequence extends ParentTypeParamReport
+class ParamSequenceMode extends ParentTypeParamReport
 {
     protected function getDataSource()
     {              

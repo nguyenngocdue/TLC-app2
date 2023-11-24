@@ -15,9 +15,6 @@ class Prod_sequence_010 extends Report_Parent2Controller
     protected $typeView = 'report-pivot';
     protected $tableTrueWidth = true;
     protected $maxH = 50;
-    // protected $projectId = 8;
-    // protected $subProjectId = 107;
-    #protected $prodRoutingId = 62;
 
     public function getDataSource($params)
     {
@@ -28,7 +25,7 @@ class Prod_sequence_010 extends Report_Parent2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $params['picker_date'] =DateReport::defaultPickerDate();
+        $params['picker_date'] =DateReport::defaultPickerDate('-3 months');
         // $params['project_id'] = $this->projectId;
         // $params['sub_project_id'] = $this->subProjectId;
         #$params['prod_routing_id'] = $this->prodRoutingId;

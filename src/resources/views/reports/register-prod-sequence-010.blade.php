@@ -8,6 +8,7 @@
     $projectId = $params['project_id'];
     $subProjectId = $params['sub_project_id'];
     $prodRoutingId = $params['prod_routing_id'];
+    $sequenceModeId = $params['sequence_mode'];
     $dateToCompare = isset($params['picker_date']) ? App\Utils\Support\DateReport::basicFormatDateString(str_replace('/', '-', $params['picker_date']), 'Y-m-d'): null;
     
 @endphp
@@ -24,6 +25,10 @@
         $tc = "<x-reports.utility-report routeName='$routeName'/>"; 
         $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
     @endphp
-        <x-renderer.matrix-for-report.prod_sequences subProjectId="{{$subProjectId}}" prodRoutingId="{{$prodRoutingId}}" dateToCompare="{{$dateToCompare}}"/>
+        <x-renderer.matrix-for-report.prod_sequences 
+                    subProjectId="{{$subProjectId}}" 
+                    prodRoutingId="{{$prodRoutingId}}"
+                    sequenceModeId="{{$sequenceModeId}}"
+                    dateToCompare="{{$dateToCompare}}"/>
 </div>
 @endsection
