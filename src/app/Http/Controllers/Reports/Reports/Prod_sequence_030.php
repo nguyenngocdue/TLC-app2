@@ -23,10 +23,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     protected $typeView = 'report-pivot';
     protected $type = 'prod_sequence';
     protected $pageLimit = 10;
-    // protected $projectId = 8;
-    // protected $subProjectId = 107;
-    // protected $prodRoutingId = 62;
-
+    
     // DataSource
     public function getSqlStr($params)
     {
