@@ -4,7 +4,7 @@
         <p title="Vietnamese"><i>{{$line->description}}</i></p>
     </div>
     <input type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[id][{{$rowIndex}}]" value="{{$line->id}}">
-{{$readOnly?"RO":"NRO"}}
+
     <div class="p-4">
         <div class="flex justify-center mb-2">
             @switch($line->control_type_id)
