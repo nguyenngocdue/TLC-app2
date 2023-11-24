@@ -4,7 +4,7 @@ $route = $routeName ? route($routeName) : "";
 @endphp
 <form action="{{$route}}" id="{{$entity}}" method="GET">
     <div class="grid grid-row-1 w-full">
-        <div class="grid grid-cols-12 gap-4 items-baseline">
+        <div class="grid grid-cols-10 gap-4 items-baseline">
             <input type="hidden" name='_entity' value="{{ $entity }}">
             <input type="hidden" name='action' value="updateReport{{Str::ucfirst($typeReport)}}">
             <input type="hidden" name='type_report' value="{{$typeReport}}">
@@ -31,7 +31,7 @@ $route = $routeName ? route($routeName) : "";
             $singleDatePicker = $value['singleDatePicker'] ?? false;
             $firstHidden = isset($value['firstHidden']) ? 'hidden' : ''?? '';
             @endphp
-            <div id="name_{{$name}}" class="col-span-3 {{$name}} {{$firstHidden}}">
+            <div id="name_{{$name}}" class="col-span-2 {{$name}} {{$firstHidden}}">
                 @switch($renderer)
                 @case("drop_down")
                 <x-reports.dropdown7 :infoParam="$value" hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" type={{$type}}/>

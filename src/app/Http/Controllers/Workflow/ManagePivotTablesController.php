@@ -15,12 +15,14 @@ class ManagePivotTablesController extends AbstractManageLibController
                 "dataIndex" => "action",
                 "align" => "center",
                 'width' => 50,
+                'fixed' => 'left',
             ],
             [
                 'dataIndex' => "name",
                 "renderer"  => 'read-only-text4',
                 'editable' => true,
                 'width' => 50,
+                'fixed' => 'left',
             ],
             [
                 'dataIndex' => 'is_raw',
@@ -28,7 +30,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'editable' => true,
                 'align' => 'center',
                 'width' => 50,
-                
+                'fixed' => 'left',
             ],
             [
                 'dataIndex' => 'is_render_row_fields',
@@ -37,6 +39,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'editable' => true,
                 'align' => 'center',
                 'width' => 50,
+                'fixed' => 'left',
             ],
             [
                 'dataIndex' => 'filters',

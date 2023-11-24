@@ -62,6 +62,11 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
                 'allowClear' => true,
                 'hasListenTo' => true,
             ],
+            [
+                'title' => 'Mode',
+                'dataIndex' => 'mode_sequence',
+                'allowClear' => true,
+            ],
         ];
     }
 
