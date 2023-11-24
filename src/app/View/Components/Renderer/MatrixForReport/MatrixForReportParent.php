@@ -218,11 +218,17 @@ abstract class MatrixForReportParent extends Component
         $totalRows = count($yAxis);
 
         foreach ($result as $xId => &$line) {
-            $percent = number_format(100 * $line / 32) . '%';
-            $line = (object)[
-                'value' => $line . '<hr class="text-black"/>' . ($totalRows - $count[$xId]) . '<br/>(' . $percent . ")",
-                'cell_class' => "text-center",
-            ];
+            $tu = $line;
+            $mau = $totalRows - $count[$xId];
+            if ($mau > 0) {
+                $percent = number_format(100 * $line / $mau) . '%';
+                $line = (object)[
+                    'value' =>  $tu . '<hr class="text-black"/>' . $mau . '<br/>(' . $percent . ")",
+                    'cell_class' => "text-center",
+                ];
+            } else {
+                $line = "NA";
+            }
         }
 
         $result['name'] = (object)[
