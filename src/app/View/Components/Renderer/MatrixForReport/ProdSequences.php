@@ -20,7 +20,7 @@ class ProdSequences extends MatrixForReportParent
         private $prodRoutingId = 49,
         private $subProjectId = 107,
         private $dateToCompare = null,
-        private $mode = null,
+        private $modeId = null,
     ) {
         parent::__construct("prod_sequences", $dateToCompare);
         // echo ($prodRoutingId . " - " . $subProjectId);
@@ -34,7 +34,7 @@ class ProdSequences extends MatrixForReportParent
         $allRoutingLinks = $result->getProdRoutingLinks;
 
         $result = [];
-        switch ($this->mode) {
+        switch ($this->modeId) {
             case 2:
                 return $allRoutingLinks;
             case 1:
