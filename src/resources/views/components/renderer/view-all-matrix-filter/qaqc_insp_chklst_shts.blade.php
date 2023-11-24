@@ -5,7 +5,7 @@
     <input type="hidden" name="_entity" value="{{$type}}"/>
     <div class="bg-white rounded w-full my-2 p-2">
         <div class="w-full my-1 grid grid-cols-12 gap-2">
-            <div class="col-span-3">
+            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
                 Project
                 <x-renderer.view-all-matrix-filter.ProjectFilter 
                     tableName="projects" 
@@ -15,7 +15,7 @@
                     selected="{{$viewportParams['project_id']}}"
                     />
             </div>
-            <div class="col-span-3">
+            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
                 Sub-Project
                 <x-renderer.view-all-matrix-filter.SubProjectFilter 
                     tableName="sub_projects" 
@@ -25,7 +25,7 @@
                     selected="{{$viewportParams['sub_project_id']}}"
                 />
             </div>
-            <div class="col-span-3">
+            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
                 Production Routing
                 <x-renderer.view-all-matrix-filter.ProdRoutingFilter 
                     tableName="prod_routings" 
@@ -35,7 +35,7 @@
                     selected="{{$viewportParams['prod_routing_id']}}"
                     />
             </div>
-            <div class="col-span-3">
+            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
                 CheckList Type
                 <x-renderer.view-all-matrix-filter.ChecklistTypeFilter 
                     tableName="qaqc_insp_tmpls" 
@@ -45,7 +45,7 @@
                     selected="{{$viewportParams['qaqc_insp_tmpl_id']}}"
                     />
             </div>
-            {{-- <div class="col-span-3">
+            {{-- <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
                 Production Discipline
                 <x-renderer.view-all-matrix-filter.ProdDisciplineFilter 
                     tableName="prod_disciplines" 
