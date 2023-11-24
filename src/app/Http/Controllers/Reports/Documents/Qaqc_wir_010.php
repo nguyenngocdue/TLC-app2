@@ -67,10 +67,10 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $valOfParams = $this->generateValuesFromParamsReport($params);
         $sql = " SELECT *
                             ,IF(total_prod_order_have_wir*100/(total_prod_order_on_sub_project*count_wir_description),
-                                FORMAT(total_prod_order_have_wir*100/(total_prod_order_on_sub_project*count_wir_description),2)
+                                FORMAT(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),2)
                                 ,NULL) AS latest_acceptance_percent
                             ,IF(total_prod_order_have_wir2*100/(total_prod_order_on_sub_project*count_wir_description),
-                            FORMAT((total_prod_order_have_wir2*100)/(prod_order_in_wir*count_wir_description), 2)
+                            FORMAT(total_prod_order_have_wir2*100/(prod_order_in_wir*count_wir_description), 2)
                                 ,NULL) AS previous_acceptance_percent,
                                 count_wir_description,
                                 total_prod_order_have_wir2,
