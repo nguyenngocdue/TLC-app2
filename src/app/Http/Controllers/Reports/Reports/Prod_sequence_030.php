@@ -141,11 +141,13 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
             [
                 'title' => 'Project',
                 'dataIndex' => 'project_id',
+                'allowClear' => true,
             ],
             [
                 'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_id',
                 'hasListenTo' => true,
+                'allowClear' => true,
             ],
             [
                 'title' => 'Production Routing',
