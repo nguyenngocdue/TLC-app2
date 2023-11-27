@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
+use App\Models\Prod_routing;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
@@ -62,21 +63,25 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         } else {
             [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         }
-        // FORMAT(total_prod_order_have_wir2*100/(total_prod_order_on_sub_project*count_wir_description), 2)
-
         $valOfParams = $this->generateValuesFromParamsReport($params);
         $sql = " SELECT *
-                            ,IF(total_prod_order_have_wir*100/(total_prod_order_on_sub_project*count_wir_description),
-                                FORMAT(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),2)
+                            ,IF(count_prod_order_have_wir.total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),
+                                -- Calculate after period
+                                FORMAT(count_prod_order_have_wir.total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),2)
+                            
                                 ,NULL) AS latest_acceptance_percent
-                            ,IF(total_prod_order_have_wir2*100/(total_prod_order_on_sub_project*count_wir_description),
-                            FORMAT(total_prod_order_have_wir2*100/(prod_order_in_wir*count_wir_description), 2)
+                                
+                            ,IF(total_prod_order_have_wir2*100/(prod_order_in_wir*count_wir_description),
+                                -- Calculate before period
+                                FORMAT(total_prod_order_have_wir2*100/(prod_order_in_wir*count_wir_description), 2)
+
                                 ,NULL) AS previous_acceptance_percent,
                                 count_wir_description,
                                 total_prod_order_have_wir2,
                                 total_prod_order_have_wir,
                                 total_prod_order_on_sub_project,
-                                prod_order_in_wir
+                                prod_order_in_wir,
+                                count_prod_order_have_wir.total_prod_order_have_wir
                             FROM (SELECT
                                 sp.project_id AS project_id,
                                 sp.status AS sub_project_status,
@@ -87,9 +92,14 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                 pr.prod_routing_name AS prod_routing_name,
                                 tb_count_order.prod_order_qty AS total_prod_order_on_sub_project,
                                 tb_count_order.prod_order_in_wir AS prod_order_in_wir,
-                                COUNT(CASE WHEN wir.status IS NOT NULL THEN wir.status ELSE NULL END) AS total_prod_order_have_wir,
-                                COUNT(CASE WHEN SUBSTR(wir.closed_at, 1, 10) <= '$previousDate' AND wir.status IN ('closed', 'N\A')  THEN wir.status ELSE NULL END) AS total_prod_order_have_wir2
-                                                        
+                                -- total_prod_order_have_wir2
+                                COUNT(CASE WHEN SUBSTR(wir.closed_at, 1, 10) <= '$previousDate' 
+                                                AND (
+                                                    (wir.status IN ('closed', 'not_applicable') OR wir.closed_at IS NULL)
+                                                    AND wir.status NOT IN ('rejected', 'assigned', 'new')
+                                                )
+                                                THEN wir.status ELSE NULL END) AS total_prod_order_have_wir2                                                        
+
                                                 FROM sub_projects sp
                                                     JOIN prod_orders po ON po.sub_project_id = sp.id
                                                     LEFT JOIN (
@@ -113,9 +123,17 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                     LEFT JOIN projects pj ON sp.project_id = pj.id
                                                     LEFT JOIN qaqc_wirs wir ON wir.prod_order_id = po.id 
                                                                             AND wir.prod_routing_id = pr.prod_routing_id
-                                                                            AND wir.sub_project_id = sp.id
-                                                                            AND wir.status IN ('closed', 'N\A')
-                                                                            AND SUBSTR(wir.closed_at, 1, 10) <= '$latestDate'
+                                                                            AND wir.sub_project_id = sp.id";
+
+        if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND wir.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
+        if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND wir.sub_project_id IN ({$valOfParams['sub_project_id']})";
+                                                                            
+        $sql .= "\n AND SUBSTR(wir.closed_at, 1, 10) <= '$latestDate' OR wir.closed_at IS NULL
+                                                                          	AND (
+                                                                               (wir.status IN ('closed', 'not_applicable'))
+                                                                               AND wir.status NOT IN ('rejected', 'assigned', 'new')
+                                                                            )
+
                                                                             LEFT JOIN (
                                                     	SELECT DISTINCT pr.id AS prod_routing_id, SUM(po.quantity) AS prod_order_qty, COUNT(po.id) AS prod_order_in_wir
                                                               FROM prod_orders po, sub_projects sp, prod_routings pr
@@ -134,11 +152,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND sp.id IN ({$valOfParams['sub_project_id']})";
         if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND pr.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
 
-            $sql .= "   #AND sp.project_id = 8
-                                                        #AND sp.id = 107
-                                                        #AND po.id = 1325
-                                                        #AND pr.id = 49
-                                                        AND pr.prod_routing_name != '-- available'
+                                            $sql .= "\n AND pr.prod_routing_name != '-- available'
                                                     GROUP BY #project_id, 
                                                             sub_project_id, 
                                                             prod_routing_id
@@ -153,6 +167,21 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                         AND mtm.term_type = 'App\\\Models\\\Prod_routing' 
                                                     GROUP BY prod_routing_id
                                                 ) AS tb2 ON tb2.prod_routing_id = tb1.prod_routing_id
+
+                                                LEFT JOIN (SELECT
+                                                wir.prod_routing_id AS wir_prod_routing_id ,
+                                               COUNT(CASE WHEN
+                                                 (SUBSTR(wir.closed_at, 1, 10) <= '$latestDate' OR wir.closed_at IS NULL)
+                                                 AND wir.status IN ('closed', 'not_applicable')
+                                                 AND wir.status NOT IN ('rejected', 'assigned', 'new')
+                                               THEN wir.status ELSE NULL END) AS total_prod_order_have_wir
+                                             FROM qaqc_wirs wir
+                                             WHERE 1 = 1";
+        if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND wir.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
+        if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND wir.sub_project_id IN ({$valOfParams['sub_project_id']})";
+                                                 $sql .= "\n GROUP BY wir_prod_routing_id 
+                                                ) AS count_prod_order_have_wir 
+                                                 ON tb1.prod_routing_id = count_prod_order_have_wir.wir_prod_routing_id
                                                 ORDER BY sub_project_name, prod_routing_name";
         return $sql;
     }
@@ -232,7 +261,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                 'dataIndex' => 'sub_project_status',
                 'align' => 'center',
             ],
-          /*   [
+            [
                 'dataIndex' => 'count_wir_description'
             ],
             [
@@ -246,7 +275,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             ],
             [
                 'dataIndex' => 'prod_order_in_wir'
-            ] */
+            ]
         ];
     }
 
@@ -341,5 +370,15 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $params['latest_month'] = substr($latestDate, 1, 7);
 
         return $params;
+    }
+
+    public function changeDataSource($dataSource, $params){
+        $result = [];
+        foreach ($dataSource as $key => $item){
+            $idRouting = $item->prod_routing_id;
+            $idShowMeOn = Prod_routing::find($idRouting)->getScreensShowMeOn()->pluck('id')->toArray()[0];
+            if ($idShowMeOn == 346) $result[] = $item; // QAQC WIR
+        }
+        return collect($result);
     }
 }
