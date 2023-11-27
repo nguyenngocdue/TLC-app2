@@ -11,9 +11,11 @@ class ParamOnlyMonth extends ParentParamReports
     protected function getDataSource()
     {
         $isNumber = $this->getParams()['showNumber'];
-        $months = range(1, 12);
+        $showNow = $this->getParams()['showNow'];
+        $m = $showNow ? (int)date("m") : 12;
+        $months = range(1, $m);
         $dataSource = array_map(function ($month) use ($isNumber) {
-            // $formattedMonth = str_pad($month, 2, '0', STR_PAD_LEFT);
+            
             $formattedMonth = $isNumber ? str_pad($month, 2,"0", STR_PAD_LEFT): DateReport::getMonthAbbreviation2((int)$month);
             if($month <= 3){
                 return (object)['id' => $month, 'name' => $formattedMonth, 'quarter_time' => 1];

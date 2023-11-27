@@ -24,6 +24,7 @@ abstract class ParentParamReports extends Component
         private $allowClear = false,
         private $hasListenTo = false,
         private $showNumber = false,
+        private $showNow = false,
         private $type = '',
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
@@ -36,6 +37,7 @@ abstract class ParentParamReports extends Component
     public function getParams(){
         return [
             'showNumber' => $this->showNumber,
+            'showNow' => $this->showNow,
         ];
     }
 

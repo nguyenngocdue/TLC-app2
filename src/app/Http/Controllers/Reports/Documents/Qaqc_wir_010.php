@@ -59,7 +59,11 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     public function getSqlStr($params)
     {
-        // dump($params);
+        // reduce items of prod_routing from "Show on screen"
+        $idsRoutings = $this->filterProdRoutingByTypeID(346); // QAQC WIR
+        $strIdsRoutings = implode(',', $idsRoutings);
+
+
         if ($params['children_mode'] === 'filter_by_week') {
             [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
         } else {
@@ -112,7 +116,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                             WHERE mtm.doc_type = 'App\\\Models\\\Prod_routing'
                                                             AND mtm.term_id = 346
                                                         ) AS mtm2 ON mtm1.term_id = mtm2.doc_id
-                                                        LEFT JOIN prod_routings _pr ON _pr.id = mtm1.term_id
+                                                        LEFT JOIN prod_routings _pr ON _pr.id = mtm1.term_id AND _pr.id IN ( $strIdsRoutings )
                                         ) pr ON pr.prod_routing_id = po.prod_routing_id
                                         LEFT JOIN projects pj ON sp.project_id = pj.id
                                         LEFT JOIN qaqc_wirs wir ON wir.prod_order_id = po.id 
@@ -133,6 +137,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                     	SELECT DISTINCT pr.id AS prod_routing_id, SUM(po.quantity) AS prod_order_qty, COUNT(po.id) AS prod_order_in_wir
                                                               FROM prod_orders po, sub_projects sp, prod_routings pr
                                                                 WHERE 1 = 1
+                                                                    AND pr.id IN ( $strIdsRoutings)
                                                                     AND po.sub_project_id = sp.id
                                                                     AND pr.id = po.prod_routing_id
                                                                     AND pr.name != '-- available'";
@@ -207,6 +212,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                 'dataIndex' => 'only_month',
                 'showNumber' => true,
                 "firstHidden" => true,
+                "showNow" => true,
             ],
             [
                 "title" => "Week",
@@ -290,6 +296,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     public function getBasicInfoData($params)
     {
+        $params['month'] = $params['year'].'-'. str_pad($params['only_month'], 2, '0', STR_PAD_LEFT);
         [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         return [
             'from_date' => $previousDate,
@@ -385,8 +392,6 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
     
 
     public function changeDataSource($dataSource, $params){
-        $dataSource = $this->filterProdRoutingShowOnScreen($dataSource, 346); // 346: QAQC WIR
-
         // set status for each routing by "latest_acceptance_percent"
         foreach ($dataSource as $values){
             $value = (int)$values->latest_acceptance_percent;

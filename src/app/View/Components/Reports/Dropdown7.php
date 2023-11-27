@@ -20,6 +20,7 @@ class Dropdown7 extends Component
         private $infoParam = [],
         private $type ="",
         private $showNumber=false,
+        private $showNow=false,
     ) {
     }
 
@@ -32,21 +33,20 @@ class Dropdown7 extends Component
         $viewName = Report::getViewName($this->name);
         $selected = is_array($selected) ? json_encode($selected) : $selected;
 
-        $strMultiple = $this->multiple ? 'true' : 'false';
-        $strHasListenTo = $this->hasListenTo ? 'true' : 'false';
         $infoParam = $this->infoParam;
         $strStar = isset($infoParam['validation']) && $infoParam['validation'] ? "<span class='text-red-400'>*</span>": "";
         $info = "";
         if(!App::isProduction()) {
             $info = "dataIndex: $this->name";
             $info .="\nviewName: $viewName";
-            $info .="\nmultiple: $strMultiple";
-            $info .="\nhasListenTo: $strHasListenTo";
+            $info .="\nmultiple: ".($this->multiple ? 'true' : 'false');
+            $info .="\nhasListenTo: ".($this->hasListenTo ? 'true' : 'false');
+            $info .="\nshowNow: ". ($this->showNow ? "true" : 'false');
         }
         // dump($selected);
         $str = "<span class='px-1' title='$info'>$title $strStar</span>
         
-        <x-reports.mode-params.$viewName showNumber='$this->showNumber' name='$this->name' selected='$selected' allowClear='$this->allowClear' multiple='$this->multiple' hasListenTo='$this->hasListenTo' type='$this->type' />";
+        <x-reports.mode-params.$viewName showNow='$this->showNow' showNumber='$this->showNumber' name='$this->name' selected='$selected' allowClear='$this->allowClear' multiple='$this->multiple' hasListenTo='$this->hasListenTo' type='$this->type' />";
         echo  Blade::render($str);
     }   
 }
