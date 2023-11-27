@@ -87,7 +87,11 @@ class DateReport
                         // dd($value);
                     }
                 }elseif($field === 'only_month') {
-                    $months = array_map(fn($item) => STR_PAD($item, 2,"0", STR_PAD_LEFT), $params[$field]);
+                    if(is_array( $params[$field])){
+                        $months = array_map(fn($item) => STR_PAD($item, 2,"0", STR_PAD_LEFT), $params[$field]);
+                    } else{
+                        $months =STR_PAD($params[$field], 2,"0", STR_PAD_LEFT);
+                    }
                     $value = StringReport::arrayToJsonWithSingleQuotes2($months, true);
                 }elseif($field === 'year') {
                     $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field], true);

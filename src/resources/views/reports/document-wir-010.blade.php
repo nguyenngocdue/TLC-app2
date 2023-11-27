@@ -25,7 +25,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                         name="children_mode" 
                         routeName="{{$routeName}}"
                         :allowClear="false"
-                        :dataSource="['filter_by_year' => 'Filter by Week','filter_by_month' => 'Filter by Month']" 
+                        :dataSource="['filter_by_week' => 'Filter by Week','filter_by_month' => 'Filter by Month']" 
                         typeReport='{{$typeReport}}'
                         entity='{{$entity}}'
                         modeOption='{{$mode}}'
@@ -83,6 +83,11 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     document.addEventListener('DOMContentLoaded', function() {
         if (childrenMode == 'filter_by_month') {
             const month = document.getElementById('name_month');
+            const _month = document.getElementById('name_only_month');
+            const year = document.getElementById('name_year');
+            
+            year.classList.remove('hidden');
+            _month.classList.remove('hidden');
             month.classList.remove('hidden');
         } else {
             const year = document.getElementById('name_year');

@@ -30,11 +30,12 @@ $route = $routeName ? route($routeName) : "";
             $hasListenTo = $value['hasListenTo'] ?? false;
             $singleDatePicker = $value['singleDatePicker'] ?? false;
             $firstHidden = isset($value['firstHidden']) ? 'hidden' : ''?? '';
+            $showNumber = isset($value['showNumber']) ? true : ''?? '';
             @endphp
             <div id="name_{{$name}}" class="col-span-2 {{$name}} {{$firstHidden}}">
                 @switch($renderer)
                 @case("drop_down")
-                <x-reports.dropdown7 :infoParam="$value" hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" type={{$type}}/>
+                <x-reports.dropdown7 showNumber={{$showNumber}} :infoParam="$value" hasListenTo={{$hasListenTo}} title="{{$title}}" name="{{$name}}" allowClear={{$allowClear}} multiple={{$multiple}} :itemsSelected="$itemsSelected" type={{$type}}/>
                     @if ($errors->any())
                             @foreach ($errors->getMessages() as $field => $message)
                                 @if($field === $name && $field !== 'end_date' && $field !== 'end_date')

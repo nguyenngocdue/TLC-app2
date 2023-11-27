@@ -23,6 +23,7 @@ abstract class ParentParamReports extends Component
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
         private $hasListenTo = false,
+        private $showNumber = false,
         private $type = '',
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
@@ -30,6 +31,12 @@ abstract class ParentParamReports extends Component
     public function getType()
     {
         return $this->type;
+    }
+
+    public function getParams(){
+        return [
+            'showNumber' => $this->showNumber,
+        ];
     }
 
     public function hasListenTo() {
