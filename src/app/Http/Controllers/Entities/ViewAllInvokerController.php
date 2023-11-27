@@ -54,7 +54,7 @@ class ViewAllInvokerController extends Controller
         $callback = Excel::export($columns, $rows);
         return response()->stream($callback, 200, $headers);
     }
-    public function exportCSV2(Request $request)
+    public function exportCsvViewAllMatrix(Request $request)
     {
         try {
             $modelPath = $this->getModelPath();

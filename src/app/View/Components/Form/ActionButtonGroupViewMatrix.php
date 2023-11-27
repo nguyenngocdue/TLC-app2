@@ -35,7 +35,7 @@ class ActionButtonGroupViewMatrix extends Component
             'groupBy' => $this->groupBy,
             'groupByLength' => $this->groupByLength,
         ];
-        $routeExportCSV = route($this->type . '_mep.exportCSV2', $paramsRoute);
+        $routeExportCSV = route($this->type . '_mep.exportCsvViewAllMatrix', $paramsRoute);
         return view('components.form.action-button-group-view-matrix', [
             'type' => $this->type,
             'routeExportCSV' => $routeExportCSV,
