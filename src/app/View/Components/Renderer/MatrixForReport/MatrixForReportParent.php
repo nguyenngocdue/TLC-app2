@@ -95,19 +95,18 @@ abstract class MatrixForReportParent extends Component
     function getLeftColumns($xAxis, $yAxis, $dataSource)
     {
         return [
-            ['dataIndex' => 'name',],
+            ['dataIndex' => 'name', 'fixed' => 'left',],
         ];
     }
 
     function getColumns($xAxis)
     {
-        $result = [
-            ['dataIndex' => 'progress',],
-        ];
+        $result = [];
         foreach ($xAxis as $x) {
             $column = [
                 'dataIndex' => $x->id,
                 'title' => $x->name,
+                // 'columnDivStyle' => ['z-index' => 2],
             ];
             $result[] = $column;
         }
@@ -260,7 +259,7 @@ abstract class MatrixForReportParent extends Component
         return [];
     }
 
-    function render()
+    function getMatrixForReportParams()
     {
         $xAxis = $this->getXAxis();
         $yAxis = $this->getYAxis();
@@ -281,6 +280,12 @@ abstract class MatrixForReportParent extends Component
         // dump($dataSource);
 
         $xAxis2ndHeading = $this->getXAxis2ndHeader($xAxis);
+        return [$columns, $dataSource, $xAxis2ndHeading];
+    }
+
+    function render()
+    {
+        [$columns, $dataSource, $xAxis2ndHeading] = $this->getMatrixForReportParams();
 
         return view('components.renderer.matrix-for-report.matrix-for-report-parent', [
             'columns' => $columns,

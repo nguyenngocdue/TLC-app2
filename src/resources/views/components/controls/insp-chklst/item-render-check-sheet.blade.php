@@ -2,6 +2,7 @@
     $typeLine = str_replace('_shts','',$type);
     $idName = $typeLine.'_id';
     $value = $item->$idName;
+    $readOnly = !$allowed || $isExternalInspector;
 @endphp
 
 <div class="p-4 w-full md:w-3/4 xl:w-1/2 dark:bg-gray-800 rounded-lg">
@@ -45,7 +46,7 @@
                     table01Name="table01" 
                     :rowIndex="$rowIndex" 
                     type="{{$typeLine}}"
-                    readOnly="{{!$allowed || $isExternalInspector}}"
+                    readOnly="{{$readOnly}}"
                 />
                 @endforeach
             </x-renderer.card>
@@ -59,7 +60,7 @@
                     $selectedMonitors1 = "[". join(",",$selectedMonitors1)."]";
                     @endphp
                 <x-controls.has-data-source.dropdown2 
-                    readOnly={{(!$allowed || $isExternalInspector)?1:0}} 
+                    readOnly={{$readOnly}} 
                     type={{$type}} name='getMonitors1()' 
                     :selected="$selectedMonitors1" 
                     multiple={{true}}  

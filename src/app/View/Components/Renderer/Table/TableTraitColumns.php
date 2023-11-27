@@ -47,6 +47,8 @@ trait TableTraitColumns
         $renderer = $column['renderer'] ?? "_no_renderer_";
         // $rendererUnit = $column['rendererUnit'] ?? "_no_unit_";
         $dataIndex = $column['dataIndex'];
+        $columnDivClass = $column['columnDivClass'] ?? '';
+        $columnDivStyle = $column['columnDivStyle'] ?? [];
         $columnName = $column['column_name'] ?? $dataIndex;
         $columnType = $column['column_type'] ?? "";
         $width = $column['width'] ?? "";
@@ -78,10 +80,11 @@ trait TableTraitColumns
 
         $divStyleStr = $this->getStyleStr([
             'width' => $rotate45Width . "px",
+            ...$columnDivStyle,
         ]);
 
-        $classTh = ($this->rotate45Width) ? "rotated-title-th" : "";
-        $classDiv = ($this->rotate45Width) ? "rotated-title-div text-right" : "";
+        $classTh45 = ($this->rotate45Width) ? "rotated-title-th" : "";
+        $classDiv45 = ($this->rotate45Width) ? "rotated-title-div text-right" : "";
         $borderRight = $isLastColumn ? "" : "border1 border-r";
         $borderRight = ($this->rotate45Width) ? "" : $borderRight;
         $tinyText = $this->noCss ? "text-xs" : "";
@@ -89,10 +92,10 @@ trait TableTraitColumns
         $hiddenStr = $hidden ? "hidden" : "";
         $th = "";
         $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr $thStyleStr ";
-        $th .= "class='$fixedLeft $fixedRight bg-gray-100 px-4 py-3 border-b border-gray-300 $borderRight $classTh $hiddenStr' ";
+        $th .= "class='$fixedLeft $fixedRight bg-gray-100 px-4 py-3 border-b border-gray-300 $borderRight $classTh45 $hiddenStr' ";
         $th .= "title='$tooltip' ";
         $th .= ">";
-        $th .= "<div class='$classDiv $tinyText text-gray-700 dark:text-gray-300' $divStyleStr>";
+        $th .= "<div class='$classDiv45 $tinyText $columnDivClass text-gray-700 dark:text-gray-300' $divStyleStr>";
         $th .= "<span>" . $title . "</span>";
         $th .= "</div>";
         $th .= "</th>";

@@ -14,7 +14,7 @@ trait TableTraitCommon
     {
         $result = [];
         foreach ($params as $key => $value) {
-            $result[] = "$key: $value";
+            $result[] = "$key:$value";
         }
         return "style='" . join(";", $result) . "'";
     }

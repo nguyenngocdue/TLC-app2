@@ -15,18 +15,22 @@ class DashboardExternalInspectorController extends DashboardController
         $cu = CurrentUser::get();
         $subProjects = $cu->getSubProjectsOfExternalInspector();
         // dump($subProjects);
+        $defaultSubProject = (sizeof($subProjects) == 1) ? $subProjects->first()->id : null;
+        // dump($defaultSubProject);
 
         $qaqcInspTmpls = $cu->getQaqcInspTmplsOfExternalInspector();
         // dump($qaqcInspTmpls);
+        $defaultQaqcInspTmpl = (sizeof($qaqcInspTmpls) == 1) ? $qaqcInspTmpls->first()->id : null;
 
         $prodRoutings = $cu->getProdRoutingsOfExternalInspector();
         // dump($prodRoutings);
+        $defaultProdRouting = (sizeof($prodRoutings) == 1) ? $prodRoutings->first()->id : null;
 
         $params = [
             'viewportParams' => [
-                'sub_project_id' => $sub_project_id,
-                'qaqc_insp_tmpl_id' => $qaqc_insp_tmpl_id,
-                'prod_routing_id' => $prod_routing_id,
+                'sub_project_id' => $sub_project_id ?: $defaultSubProject,
+                'qaqc_insp_tmpl_id' => $qaqc_insp_tmpl_id ?: $defaultQaqcInspTmpl,
+                'prod_routing_id' => $prod_routing_id ?: $defaultProdRouting,
             ],
             'dataSource' => [
                 'sub_projects' => $subProjects,
