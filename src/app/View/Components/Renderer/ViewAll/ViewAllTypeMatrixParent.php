@@ -323,7 +323,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return  [
             ['dataIndex' => 'name_for_group_by', 'hidden' => true],
-            ['dataIndex' => 'name', 'width' => 300, 'fixed' => $this->nameColumnFixed,],
+            ['dataIndex' => 'name', 'fixed' => $this->nameColumnFixed,],
             ...$this->getMetaColumns(),
             ...$extraColumns,
             ...$this->getRightMetaColumns(),
