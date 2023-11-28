@@ -45,6 +45,7 @@ class MyView extends Component
         $result = [];
         $docs = $openingDocs
             ->where('owner_id', $uid)
+            ->whereNotIn('status', ['not_applicable'])
             ->orderBy('updated_at', 'desc')
             ->limit($this->maxRecords);
         // dump($docs->toSql());
@@ -60,7 +61,7 @@ class MyView extends Component
     private function assigned_to_me($appKey, $app, $openingDocs, $uid, $statuses)
     {
         $docs = $openingDocs
-            ->where('status', '!=', 'new')
+            ->whereNotIn('status', ['new', 'not_applicable'])
             ->orderBy('updated_at', 'desc')
             ->limit($this->maxRecords)
             ->get();
