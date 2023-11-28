@@ -6,7 +6,6 @@ use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
-use App\Utils\Support\Report;
 
 
 class Prod_sequence_030 extends Report_ParentReport2Controller
@@ -46,30 +45,29 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     ,erprl.name AS erp_routing_link_name
                     ,pose.erp_prod_order_name AS erp_prod_order_name
 
-
                     ,IF(prd.target_man_power,prd.target_man_power, NULL) AS target_man_power
-                    ,FORMAT(ROUND((pru.worker_number), 2),2) AS actual_man_power
-                    ,FORMAT(round((pru.worker_number - prd.target_man_power),2)*-1,2) AS vari_man_power
-                    ,IF(100 - round((pru.worker_number / prd.target_man_power)*100,2),
-                        100 - round((pru.worker_number / prd.target_man_power)*100,2),NULL
+                    
+                    ,AVG(ROUND((pru.worker_number), 2)) AS actual_man_power
+                    
+                    ,FORMAT(round((AVG(pru.worker_number) - prd.target_man_power),2)*-1,2) AS vari_man_power
+                    ,IF(100 - round((AVG(pru.worker_number) / prd.target_man_power)*100,2),
+                        100 - round((AVG(pru.worker_number) / prd.target_man_power)*100,2),NULL
                         ) AS percent_vari_man_power
-
-
+                        
                     ,IF(prd.target_hours, prd.target_hours, NULL) AS target_hours
+                    
                     ,FORMAT(ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2),2) AS actual_total_hours
                     ,ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) - prd.target_hours),2)*-1 AS vari_hours
                     ,IF(100 - ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) / prd.target_hours)*100,2),
                         100 - ROUND((ROUND(SUM((TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60)),2) / prd.target_hours)*100,2),NULl
                         ) AS percent_vari_hours
-
-
-                    ,IF(prd.target_man_hours, prd.target_man_hours, NULL) AS target_man_hours
-                    ,FORMAT(ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2),2) AS actual_man_hours
-                    ,ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) - prd.target_man_hours),2)*-1 AS vari_man_hours
-                    ,IF(100 - ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2),
-                        100 - ROUND((ROUND(pru.worker_number * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2) , NULL
+                        
+                   ,IF(prd.target_man_hours, prd.target_man_hours, NULL) AS target_man_hours
+                    ,FORMAT(ROUND(AVG(pru.worker_number) * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2),2) AS actual_man_hours
+                    ,ROUND((ROUND(AVG(pru.worker_number) * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) - prd.target_man_hours),2)*-1 AS vari_man_hours 
+                    ,IF(100 - ROUND((ROUND(AVG(pru.worker_number) * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2), 
+                        100 - ROUND((ROUND(AVG(pru.worker_number) * SUM(ROUND(TIME_TO_SEC(TIMEDIFF(pru.end, pru.start)) / 60 / 60, 2)),2) / prd.target_man_hours)*100,2) , NULL 
                         )AS percent_vari_man_hours
-
                     
                     ,FORMAT(pose.total_man_hours,2) AS total_man_hours
                     ,pd.id AS prod_discipline_id
@@ -106,11 +104,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     AND pose.deleted_by IS NULL";
 
     if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id = {{prod_routing_link_id}}";
-    $sql .= "\n GROUP BY project_id, sub_project_name, prod_order_id, prod_order_name, sub_project_id,prod_routing_link_id,pru.worker_number
-                ,target_hours
-                ,target_man_hours
-                ,target_man_power
-                ,total_man_hours
+    $sql .= "\n GROUP BY prod_order_id, prod_order_name, prod_routing_link_id
                 ORDER BY sub_project_name, prod_routing_name, order_no, prod_order_name";
         return $sql;
     }
@@ -119,7 +113,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     {
         $params['picker_date'] = date('d/m/Y');
         $params['page_limit'] = $this->pageLimit;
-        // $params['project_id'] = $this->projectId;
+        $params['project_id'] = 107;
         // $params['sub_project_id'] = $this->subProjectId;
         // $params['prod_routing_id'] = $this->prodRoutingId;
         return $params;

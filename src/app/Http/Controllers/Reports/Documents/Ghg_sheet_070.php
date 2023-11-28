@@ -12,6 +12,7 @@ use App\Utils\Support\ArrayReport;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\Report;
 use Exception;
+use Symfony\Component\Yaml\Dumper;
 
 class Ghg_sheet_070 extends Report_ParentDocument2Controller
 {
@@ -197,7 +198,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				$result[$scopeId][$ghgCatId] = $arr1;
 			}
 		}
-		// dd($result['335']);
+		// dd($result);
 		return $result;
 	}
 
@@ -225,7 +226,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
 	{
-		$years =  is_array($params['year']) ? $params['year'] : [$params['year']];
+		// $years =  is_array($params['year']) ? $params['year'] : [$params['year']];
 		$data = [];
 		foreach ($dataSource as $key => $values) $data[$key] = $values['tableDataSource']['scopes'] ?? [];
 
@@ -265,7 +266,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 		// make data to build table the same ghg-sheet-050
 		$scopeData = $this->makeDataToBuildTable($childrenMetrics);
-		// dd($scopeData);
+		dump($childrenMetrics[335][1]);
 
 		$groupByScope = ['scopes' => $scopeData];
 		$result['tableDataSource'] = ['scopes' => $scopeData];
