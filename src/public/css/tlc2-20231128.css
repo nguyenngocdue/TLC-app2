@@ -27,6 +27,14 @@ th.rotated-title-left-th {
     position: relative;
 }
 
+.rotated-title-left-div-200 {
+    position: absolute;
+    bottom:45%;
+    left:-25px;
+    z-index:1;
+    transform: rotate(-45deg);
+}
+
 .rotated-title-left-div-300 {
     position: absolute;
     bottom:42%;

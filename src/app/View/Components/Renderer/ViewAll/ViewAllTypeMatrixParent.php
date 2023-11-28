@@ -25,6 +25,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $dataIndexX = null;
     protected $dataIndexY = null;
     protected $rotate45Width = false;
+    protected $rotate45Height = false;
     protected $groupBy = 'name_for_group_by';
     protected $groupByLength = 2;
     protected $allowCreation = true;
@@ -429,6 +430,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'footer' => $footer,
                 'perPage' => $perPage,
                 'rotate45Width' => $this->rotate45Width,
+                'rotate45Height' => $this->rotate45Height,
                 'groupBy' => $this->groupBy,
                 'groupByLength' => $this->groupByLength,
                 'tableTrueWidth' => $this->tableTrueWidth,

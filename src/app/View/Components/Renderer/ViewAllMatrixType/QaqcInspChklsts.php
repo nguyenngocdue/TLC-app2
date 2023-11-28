@@ -22,7 +22,8 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
     protected $dataIndexX = "qaqc_insp_tmpl_id";
     protected $yAxis = Prod_order::class;
     protected $dataIndexY = "prod_order_id";
-    protected $rotate45Width = 400;
+    protected $rotate45Width = 200;
+    protected $rotate45Height = 150;
     protected $tableTrueWidth = true;
     protected $headerTop = 20;
     protected $groupBy = null;
