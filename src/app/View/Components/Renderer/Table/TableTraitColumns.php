@@ -83,8 +83,8 @@ trait TableTraitColumns
             ...$columnDivStyle,
         ]);
 
-        $classTh45 = ($this->rotate45Width) ? "rotated-title-th" : "";
-        $classDiv45 = ($this->rotate45Width) ? "rotated-title-div text-right" : "";
+        $classTh45 = ($this->rotate45Width) ? "rotated-title-left-th" : "";
+        $classDiv45 = ($this->rotate45Width) ? "rotated-title-left-div-{$this->rotate45Width} text-left" : "";
         $borderRight = $isLastColumn ? "" : "border1 border-r";
         $borderRight = ($this->rotate45Width) ? "" : $borderRight;
         $tinyText = $this->noCss ? "text-xs" : "";

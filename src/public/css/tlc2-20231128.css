@@ -1,4 +1,4 @@
-th.rotated-title-th {
+th.rotated-title-right-th {
     vertical-align: bottom;
     text-align: left !important;
     line-height: 1;
@@ -7,7 +7,7 @@ th.rotated-title-th {
     position: relative;
 }
 
-.rotated-title-div {
+.rotated-title-right-div {
     position: absolute;
     bottom: 0;
     right: 75%;
@@ -16,6 +16,31 @@ th.rotated-title-th {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
     pointer-events: auto;
+}
+
+th.rotated-title-left-th {
+    vertical-align: bottom;
+    text-align: left !important;
+    line-height: 1;
+    padding: 0;
+    border-right: none !important;
+    position: relative;
+}
+
+.rotated-title-left-div-300 {
+    position: absolute;
+    bottom:42%;
+    left:-40px;
+    z-index:1;
+    transform: rotate(-45deg);
+}
+
+.rotated-title-left-div-400 {
+    position: absolute;
+    bottom:47%;
+    left:-53px;
+    z-index:1;
+    transform: rotate(-45deg);
 }
 
 grammarly-desktop-integration {
