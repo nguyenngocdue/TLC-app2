@@ -328,14 +328,14 @@ class Report
         if (!$dataSource instanceof Collection) $dataSource = collect($dataSource);
         $data = $dataSource->map(function ($values) use ($decimalFields) {
             if(!is_array((array)$values)) {
-                if (is_numeric($values)) return (float)str_replace(',', '',number_format($values, 2));
+                if (is_numeric($values)) return str_replace(',', '',number_format($values, 2));
             }else{
                 foreach ($values as $key => $value) {
                     if(str_contains($key, '_id')) continue;
                     $decimal = isset($decimalFields[$key]) ? $decimalFields[$key] : 2;
                     if (is_numeric($value)) {
-                        if(is_object($values)) $values -> $key = (float)str_replace(',', '',number_format($value, $decimal));
-                        if (is_array($values))  $values[$key] = (float)str_replace(',', '',number_format($value, $decimal));
+                        if(is_object($values)) $values -> $key = str_replace(',', '',number_format($value, $decimal));
+                        if (is_array($values))  $values[$key] = str_replace(',', '',number_format($value, $decimal));
                     }
                 }
             }
