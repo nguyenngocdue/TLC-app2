@@ -70,16 +70,17 @@ trait TraitGenerateValuesFromParamsReport
 		}
 		$strSumValue = str_replace(',', ' + ', trim($strSqlMonth, ','));
 		$year = $params['year'];
-		// dd($strSqlMonth, $strSumValue);
-
+		if(!is_array($year)) {
+			$start_date = $year.'-01-01';
+			$end_date = $year.'-12-31';
+			if(isset($params['half_year']) && $params['year']) {
+				$key = $params['half_year'];
+				$strDate = DateReport::getHalfYearPeriods($params['year'])[$key];
+				[$start_date, $end_date] = explode('/',$strDate);
+			}
+			return [$start_date, $end_date, $year, $strSqlMonth, $strSumValue];
+		};
+		return [];
 		// Set half year
-		$start_date = $year.'-01-01';
-		$end_date = $year.'-12-31';
-		if(isset($params['half_year']) && $params['year']) {
-			$key = $params['half_year'];
-			$strDate = DateReport::getHalfYearPeriods($params['year'])[$key];
-			[$start_date, $end_date] = explode('/',$strDate);
-		}
-		return [$start_date, $end_date, $year, $strSqlMonth, $strSumValue];
 	}
 }

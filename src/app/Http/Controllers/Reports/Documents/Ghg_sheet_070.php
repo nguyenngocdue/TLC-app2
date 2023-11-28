@@ -201,9 +201,30 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		return $result;
 	}
 
+	private function getTime($params){
+		$months = [];
+		$result['years'] = $params['year'];
+		if(Report::checkValueOfField($params, 'half_year')){
+			$months = $params['half_year']  === 'start_half_year' ? range(1, 6): range(7,12);
+			$columnType = 'months';
+		}elseif(Report::checkValueOfField($params, 'quarter_time')){
+			$months =  array_map(fn($item) => 'QTR'.$item, $params['quarter_time']);
+			$columnType = 'quarters';
+
+		} elseif(Report::checkValueOfField($params, 'only_month')) {
+			$months = $params['only_month'];
+			$columnType = 'months';
+		} else {
+			$months = $params['year'];
+			$columnType = 'years';
+		}
+		$result['months'] = $months;
+		$result['columnType'] = $columnType;
+		return $result;
+	}
+
 	public function changeDataSource($dataSource, $params)
 	{
-		// dd($dataSource);
 		$years =  is_array($params['year']) ? $params['year'] : [$params['year']];
 		$data = [];
 		foreach ($dataSource as $key => $values) $data[$key] = $values['tableDataSource']['scopes'] ?? [];
@@ -250,7 +271,11 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		$result['tableDataSource'] = ['scopes' => $scopeData];
 		$result['tableSetting'] = $this->createInfoToRenderTable($groupByScope);
 
-		// dump($result);
+
+		// Adding period to table data to render
+		$timeArray = $this->getTime($params); 
+		$result['timeInfo'] = $timeArray;
+		// dd($result);
 		return collect($result);
 	}
 
@@ -266,7 +291,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 	{
 		if(!isset($dataSource['scopes'])) return [];
 		$allScopes = $dataSource['scopes'];
-		dump($allScopes);
 		$info = [];
 		$totalLine = 2;
 		foreach ($allScopes as $k => $items) {

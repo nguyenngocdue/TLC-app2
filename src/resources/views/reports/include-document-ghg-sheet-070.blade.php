@@ -21,12 +21,14 @@
 	$class1 = "bg-white border-gray-600 border-l border-b";
 	$class2 =" bg-gray-100 px-4 py-3 border-gray-600 ";
 	$complexSettingTable = $tableDataSource['tableSetting'];
-	$tableDataSource = $tableDataSource['tableDataSource'];
+	$tableData = $tableDataSource['tableDataSource'];
     $totalSpan = $complexSettingTable['total_line'];
     $rowSpanScope1 = $complexSettingTable[335]['scope_rowspan_lv1']+1;
     $rowSpanScope2 = $complexSettingTable[336]['scope_rowspan_lv1'];
     $rowSpanScope3 = $complexSettingTable[337]['scope_rowspan_lv1'];
-	//$months = array_keys($tableDataSource['totalEmissionMetricTypeEachMonth']);
+	$months = $tableDataSource['timeInfo']['months']?? [];
+	$years = $tableDataSource['timeInfo']['years'];
+	$columnType = $tableDataSource['timeInfo']['columnType'];
 @endphp
 
 
@@ -42,18 +44,63 @@
 			<th class="w-20 {{$class2}} border-l  border-b">Metric 0</th>
 			<th class="w-20 {{$class2}} border-l  border-b">Metric 1</th>
 			<th class="w-20 {{$class2}} border-l  border-b">Metric 2</th>
-			<th class="w-20 {{$class2}} border-l  border-b">Total </br>(tCO2e)</th>
-			{{-- @dd($months) --}}
-			{{-- @foreach($months as $key => $value)
-				@if(is_numeric($key))
-					@php
-						$strMonth = App\Utils\Support\DateReport::getMonthAbbreviation2((int)$value);
-					@endphp
-					<th class="p-2 font-bold bg-gray-100 border-l  border-b border-gray-600">{{$strMonth}}<br/>{{$params['year']}}</th>
-				@endif
-			@endforeach --}}
+			@switch($columnType)
+				@case("years")
+					<th id="" colspan="{{count($years)}}" class=" border-l bg-gray-100 py-2 border-gray-600 border-b">
+							<div class="text-gray-700 dark:border-gray-600 ">
+								<span>Year </br><p class="font-normal">(tCO2e)</p></span>
+							</div>
+						</th>
+					@break
+				@case("months" || "quarters")
+						@foreach($months as $month)
+						<th id="" colspan="{{count($years)}}" class=" border-l bg-gray-100 py-2 border-gray-600 border-b">
+							<div class="text-gray-700 dark:border-gray-600 ">
+									@php
+										$value = App\Utils\Support\DateReport::getMonthAbbreviation($month);
+									@endphp
+								<span>
+										{{$value}}</br><p class='font-normal'>(tCO2e)</p>
+								</span>
+							</div>
+						</th>
+						@endforeach
+                	@break
+				@default
+				@break    
+			@endswitch		
 		</tr>
 		</thead>
+
+		<thead class="sticky z-10 top-10">
+			<tr class="bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 border">
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				@switch($columnType)
+					@case("years")
+						@foreach($years as $year)
+							<th class=" bg-gray-100 px-4 py-3 border-gray-600 border-l border-t text-base tracking-wide">{{$year}}</th>
+						@endforeach
+						@break
+					@case("months" || "quarters")
+							@foreach($months as $month)
+								@foreach($years as $year)
+									<th class=" bg-gray-100 px-4 py-3 border-gray-600 border-l border-t text-base tracking-wide">{{$year}}</th>
+								@endforeach
+							@endforeach								
+						@break
+				@default
+				@break    
+			@endswitch
+			</tr>
+		</thead>
+
+
 		<tbody>
 			<tr>
 				<td class="w-20 text-center border-r border-gray-600" rowspan="{{$totalSpan}}"><span style="font-weight:700;font-style:normal">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</span></td>
@@ -81,7 +128,7 @@
 												$ghgTmplName =  \App\Models\Ghg_tmpl::find($k3)->toArray()['name'];
 												$ghgTmplName =  \App\Utils\Support\StringReport::removeNumbersAndChars($ghgTmplName);
 												$indexChildrenMetric = $val3['index_children_metric'];
-												$childrenMetric = $tableDataSource['scopes'][$k1][$k2][$indexChildrenMetric]['children_metrics'] ?? [];
+												$childrenMetric = $tableData['scopes'][$k1][$k2][$indexChildrenMetric]['children_metrics'] ?? [];
 												//dd($childrenMetric);
 											@endphp
 											<td class="p-2 {{$class1}}" title="#{{$k3}}" rowspan="{{$rowSpanLv3}}">
@@ -110,14 +157,12 @@
 											<td class="p-2 {{$class1}}">
 												{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : '' !!} 
 											</td>
-											<td class="p-2 font-bold text-right {{$class1}}">
-												{!! (float)$childrenMetric[0]['total_months'] <= 0 ? "<i class='fa-light fa-minus'></i>" : $childrenMetric[0]['total_months'] !!}
-											</td>
-												@foreach($months as $month => $valMonth)
-													<td class="p-2 text-right {{$class1}}">
-														{!! (float)$valMonth <= 0 ? "<i class='fa-light fa-minus'></i>" : $valMonth !!}
-													</td>
-												@endforeach
+											{{-- Months --}}
+											@foreach($months as $month => $valMonth)
+												<td class="p-2 text-right {{$class1}}">
+													{!! (float)$valMonth <= 0 ? "<i class='fa-light fa-minus'></i>" : $valMonth !!}
+												</td>
+											@endforeach
 											{{-- add empty cell --}}
 											@elseif(!isset($childrenMetric[0]['ghg_metric_type_id']))
 													<td class="text-left {{$class1}}"><i class="fa-light fa-minus"></i></td>
@@ -159,9 +204,7 @@
 														<td class="p-2 {{$class1}}">
 															{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 														</td>
-														<td class="p-2 font-bold text-right {{$class1}}">
-																{!! (float)$childrenMetric[$i]['total_months'] <= 0 ? "<i class='fa-light fa-minus'></i>" : $childrenMetric[$i]['total_months'] !!}
-														</td>
+														{{-- Months --}}
 														@php
 															$months = $childrenMetric[$i]['months'] ?? [];
 														@endphp
@@ -180,9 +223,10 @@
 						@endif
 				@endforeach
 		<tr>
+		{{-- @dump($months) --}}
 			{{-- @php
-				$totalEmissionMetricType = $tableDataSource['totalEmissionMetricType'];
-				$totalEmissionMetricTypeEachMonth = $tableDataSource['totalEmissionMetricTypeEachMonth'];
+				$totalEmissionMetricType = $tableData['totalEmissionMetricType'];
+				$totalEmissionMetricTypeEachMonth = $tableData['totalEmissionMetricTypeEachMonth'];
 			@endphp
 			<td class="p-2 text-right font-bold border-r border-gray-600"  colspan="6">Total Emissions</td>
 			<td class="p-2 text-right font-bold text-red-600 "  colspan="1">{{$totalEmissionMetricType}}</td>
