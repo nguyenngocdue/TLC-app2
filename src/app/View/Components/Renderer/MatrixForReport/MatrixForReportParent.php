@@ -49,13 +49,18 @@ abstract class MatrixForReportParent extends Component
                 if (($endDate = $cell->{$this->closedDateColumn})) {
                     if (in_array($cell->status, $this->finishedArray)) {
                         if ($endDate < $this->dateToCompare) {
-                            $cellClass .= ' bg-opacity-20 ';
+                            $cellClass .= ' bg-opacity-10 ';
                         }
                     } else {
                         return "";
                     }
                 } else {
-                    return "";
+                    if (in_array($cell->status, $this->naArray)) {
+                        //Keep N/A and canceled
+                        $cellClass .= ' bg-opacity-10 ';
+                    } else {
+                        return "";
+                    }
                 }
             }
 
