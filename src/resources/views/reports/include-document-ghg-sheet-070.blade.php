@@ -30,6 +30,7 @@
 	$columnType = $tableDataSource['timeInfo']['columnType'];
 	$dataSet = $tableDataSource['dataSet'];
 	//dd($dataSet[335]);
+	//dd($months);
 @endphp
 {{-- @dump($tableDataSource) --}}
 
@@ -76,13 +77,13 @@
 
 		<thead class="sticky z-10 top-10">
 			<tr class="bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 border">
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
+				<th class="border-gray-600 border-b"></th>
+				<th class="border-gray-600 border-b"></th>
+				<th class="border-gray-600 border-b"></th>
+				<th class="border-gray-600 border-b"></th>
+				<th class="border-gray-600 border-b"></th>
+				<th class="border-gray-600 border-b"></th>
+				<th class="border-gray-600 border-b"></th>
 				@switch($columnType)
 					@case("years")
 						@foreach($years as $year)
@@ -92,7 +93,7 @@
 					@case("months" || "quarters")
 							@foreach($months as $month)
 								@foreach($years as $year)
-									<th class=" bg-gray-100 px-4 py-3 border-gray-600 border-l border-t text-base tracking-wide">{{$year}}</th>
+									<th class=" bg-gray-100 px-4 py-3 border-gray-600 border-l border-t border-b text-base tracking-wide">{{$year}}</th>
 								@endforeach
 							@endforeach								
 						@break
@@ -158,17 +159,43 @@
 												{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : '' !!} 
 											</td>
 											{{-- Months --}}
+												@switch($columnType)
+													@case('years')
+															@foreach($years as $key => $year)
+																@php
+																	$comparison = $childrenMetric[0]['comparison_with'] ?? [];
+																	$arr = $dataSet[$k1][$k2][$year] ?? [];
+																	$valueForColType = $arr[$k2][$k3][0]['data_render'][$year][$columnType]  ?? '';
+																@endphp
+																			<td class="p-2 text-right {{$class1}} border-t">
+																				{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
+																			</td>
+															@endforeach
+														@break
+													@case ('months' || 'quarters')
+															@php
+																$dataIndex = $dataSet[$k1][$k2];
+															@endphp
+															@foreach($months as $month)
+																@php
+																	$month = str_pad($month, 2, '0', STR_PAD_LEFT);
+																@endphp
+																	@foreach($years as $year)
+																		@php
+																			$valueForColType = $dataIndex[$year][$k2][$k3][0]['data_render'][$year][$columnType][$month];
+																			//dd($valueForColType);
+																		@endphp
+																			<td class="p-2 text-right {{$class1}}">
+																				{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
+																			</td>
+																	@endforeach
+															@endforeach
 
-											@foreach($years as $key => $year)
-												@php
-													$comparison = $childrenMetric[0]['comparison_with'] ?? [];
-													$arr = $dataSet[$k1][$k2][$year] ?? [];
-													$valueForColType = $arr[$k2][$k3][0]['data_render'][$year][$columnType]  ?? '';
-												@endphp
-												<td class="p-2 text-right {{$class1}}">
-													{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
-												</td>
-											@endforeach
+														@break
+
+													@default
+														@break	
+												@endswitch
 
 											
 											{{-- add empty cell --}}
@@ -213,15 +240,42 @@
 															{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 														</td>
 														{{-- Months --}}
-														@foreach($years as $key => $year)
-															@php
-																$arr = $dataSet[$k1][$k2][$year] ?? [];
-																$valueForColType = $arr[$k2][$k3][$i]['data_render'][$year][$columnType]  ?? '';
-															@endphp
-															<td class="p-2 text-right {{$class1}}">
-																{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
-															</td>
-														@endforeach
+														{{-- @dd($dataSet) --}}
+														@switch($columnType)
+															@case('years')
+																	@foreach($years as $key => $year)
+																		@php
+																			$arr = $dataSet[$k1][$k2][$year] ?? [];
+																			$valueForColType = $arr[$k2][$k3][$i]['data_render'][$year][$columnType]  ?? '';
+																		@endphp
+																		<td class="p-2 text-right {{$class1}}">
+																			{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
+																		</td>
+																	@endforeach
+																@break
+															@case('months' || 'quarters')
+																	@php
+																		$dataIndex = $dataSet[$k1][$k2];
+																	@endphp
+																	@foreach($months as $month)
+																		@php
+																			$month = str_pad($month, 2, '0', STR_PAD_LEFT);
+																		@endphp
+																			@foreach($years as $year)
+																				@php
+																					$valueForColType = $dataIndex[$year][$k2][$k3][$i]['data_render'][$year][$columnType][$month] ?? '0';
+																					//dd($dataIndex[$year][$k2][$k3][$i]['data_render'][$year][$columnType][$month]);
+																				@endphp
+																					<td class="p-2 text-right {{$class1}}">
+																						{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
+																					</td>
+																			@endforeach
+																	@endforeach
+																@break
+															@default
+																@break
+																
+														@endswitch
 													</tr>				
 												@endif
 											@endfor
