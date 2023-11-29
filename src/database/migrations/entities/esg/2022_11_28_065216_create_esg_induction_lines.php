@@ -25,8 +25,11 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('esg_induction_id')->nullable();
             $table->date('the_date')->nullable();
-            $table->float('trainee_type')->nullable();
+            $table->unsignedBigInteger('trainee_type')->nullable();
+            $table->unsignedInteger('trainee_count')->nullable();
+            $table->float('hours')->nullable();
             $table->float('total_hours')->nullable();
+            $table->text('remark')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();
