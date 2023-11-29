@@ -29,7 +29,7 @@
 	$years = $tableDataSource['timeInfo']['years'];
 	$columnType = $tableDataSource['timeInfo']['columnType'];
 	$dataSet = $tableDataSource['dataSet'];
-	//dd($dataSet);
+	//dd($dataSet[335]);
 @endphp
 {{-- @dump($tableDataSource) --}}
 
@@ -162,9 +162,8 @@
 											@foreach($years as $key => $year)
 												@php
 													$comparison = $childrenMetric[0]['comparison_with'] ?? [];
-													$arr = $dataSet[$k1][$k2][$year];
-													$valueForColType = $arr[$k3-1][0]['data_render'][$year][$columnType]  ?? '1000';
-													dd($dataSet, $tableData);
+													$arr = $dataSet[$k1][$k2][$year] ?? [];
+													$valueForColType = $arr[$k2][$k3][0]['data_render'][$year][$columnType]  ?? '';
 												@endphp
 												<td class="p-2 text-right {{$class1}}">
 													{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
@@ -214,21 +213,15 @@
 															{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 														</td>
 														{{-- Months --}}
-{{-- 														@foreach($years as $key => $year)
+														@foreach($years as $key => $year)
 															@php
-																$comparison = $childrenMetric[0]['comparison_with'] ?? [];
-																$arr = $dataSet[$k1][$k2][$year];
+																$arr = $dataSet[$k1][$k2][$year] ?? [];
+																$valueForColType = $arr[$k2][$k3][$i]['data_render'][$year][$columnType]  ?? '';
 															@endphp
-															@foreach($arr as $item)
-																@php
-																	//dd($item);
-																	$valueForColType = $item[$i]['data_render'][$year][$columnType] ?? '';
-																@endphp
-																<td class="p-2 text-right {{$class1}}">
-																	{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
-																</td>
-															@endforeach
-														@endforeach --}}
+															<td class="p-2 text-right {{$class1}}">
+																{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
+															</td>
+														@endforeach
 													</tr>				
 												@endif
 											@endfor

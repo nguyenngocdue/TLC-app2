@@ -70,9 +70,18 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		];
 	}
 	private function getValidValueByIndex($data, $index){
+		// dump($data);
 		foreach($data as $key => $items){
 			if(Report::checkValueOfField($items, $index)) {
-				return $items[$index];
+				$a = $items[$index];
+				if(!$a) continue;
+				$arr = array_map(function($item) {
+					$item['months'] = array_fill_keys(array_keys($item['months']), 0); // reset value of months
+					$item['total_months'] = 0;// reset value of total_months
+					return $item;
+				} , $a);
+				// dump($arr);
+				return $arr;
 			}
 		}
 		return [];
@@ -123,6 +132,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				$dbBeforeMetric = $data[$beforeYear][$index] ?? [];
 
 				// set comparison's values for metric2
+				// dump($afterYear,$dataMetricAfter);
 				foreach ($dataMetricAfter as $keyOfChild => $afterData) {
 					if(!is_array($afterData) || empty($afterData)) continue;
 
@@ -180,27 +190,30 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 								];
 							$data[$afterYear][$index][$keyOfChild]['comparison_with'/* .$beforeYear */] = $array;
 							$data[$afterYear][$index][$keyOfChild]['data_render'] = $dataRender;
-							// dd($afterData);
+
+							// if($afterYear === 2021) {
+							// 	dd($dataMetricAfter, $afterData);
+							// }
 						} else {
+							dd($_dbIndexBeforeMetric);
 							$data[$afterYear][$index][$keyOfChild]['data_render'] = [];
 							$data[$afterYear][$index][$keyOfChild]['comparison_with'/* .$beforeYear */] = [];
 						}
 					}
 				}
 			}
-		// dd($data);
+		// dump($data);
 		return $data;
 	}
 
 	private function makeDataToBuildTable($dataSource) {
-		// dump($dataSource);
+		// dd($dataSource);
 		$result = [];
 		foreach ($dataSource as $scopeId => $values) {
 			$scopeName = Term::find($scopeId)->toArray()['name'];
 			foreach ($values as $ghgCatId => $childrenMetrics){
 				$ghgCatName = Ghg_cat::find($ghgCatId)->toArray()['name'];
 				$childMetrics = last(array_values($childrenMetrics));
-				// dd($childMetrics);
 				$arr1 = [];
 				foreach($childMetrics as $k => $metrics){
 					$firstMetrics = reset($metrics);
@@ -218,7 +231,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 							'children_metrics' => $metrics
 						];
 					}
-					$arr1[$k] = $arr;
+					$arr1[] = $arr;
 				}
 				$result[$scopeId][$ghgCatId] = $arr1;
 			}
@@ -268,16 +281,19 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				}
 			}
 		}
+		$dataSet = [];
+		// dd($childrenMetrics);
 
 		foreach ($childrenMetrics as $scopeId => &$values) {
 			foreach ($values as $ghgTmplId => &$items){
 				foreach ($items as $year => $item) {
+					// dd($item);
 					foreach ($item as $index => $array){
 						if(is_null($array)){
 							// override data for years without metrics
 							$newValues = $this->getValidValueByIndex($items, $index);
-							$newValues['total_months'] = 0;
-							$newValues['months'] = isset($newValues['months']) ?  array_fill_keys(array_keys($newValues['months']), '') : [];
+							// $newValues['total_months'] = 0;
+							// $newValues['months'] = isset($newValues['months']) ?  array_fill_keys(array_keys($newValues['months']), '') : [];
 							$items[$year][$index] = $newValues;
 							continue;
 						}
@@ -285,13 +301,22 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				}
 				// dd($items);
 				$comparisonData = $this->comparisonData($items);
-				// dd($comparisonData);
 				$items = $comparisonData;
-				// $items = [$year =>[$ghgTmplId => $comparisonData[$year][$index]]];
+				$allYear = array_keys($items);
+				foreach ($allYear as $y) {
+					$arr = $items[$y];
+					$newArr = [];
+					foreach ($arr as $key => $val) {
+						$firstItem = reset($val);
+						$commonID = $firstItem['ghg_tmpls_id'] ?? null;
+						$newArr[$commonID] = $val;
+					}
+					$dataSet[$scopeId][$ghgTmplId][$y] = [$ghgTmplId => $newArr];
+				}
 			}
 		}
 
-		dd($childrenMetrics);
+		// dump($dataSet, $childrenMetrics);
 		// make data to build table the same ghg-sheet-050
 		$scopeData = $this->makeDataToBuildTable($childrenMetrics);
 
@@ -304,7 +329,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		$timeArray = $this->createDateTime($params); 
 		$result['timeInfo'] = $timeArray;
 
-		$result['dataSet'] = $childrenMetrics;
+		$result['dataSet'] = $dataSet;
 		// dd($result);
 		return collect($result);
 	}
