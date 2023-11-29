@@ -11,6 +11,7 @@ class ParamSequenceMode extends ParentTypeParamReport
         return [
             ['id' => 1, 'name' => 'Major Sequences'],
             ['id' => 2, 'name' => 'All Sequences'],
+            ['id' => 3, 'name' => 'PPR-MEPF Sequences'],
         ];
     }
 }
