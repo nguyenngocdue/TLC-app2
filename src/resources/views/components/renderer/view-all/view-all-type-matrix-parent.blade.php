@@ -18,6 +18,7 @@
             bottomRightControl="{!! $perPage !!}"
             
             rotate45Width="{{$rotate45Width}}"
+            rotate45Height="{{$rotate45Height}}"
             tableTrueWidth="{{$tableTrueWidth}}"
             headerTop="{{$headerTop}}"
             />

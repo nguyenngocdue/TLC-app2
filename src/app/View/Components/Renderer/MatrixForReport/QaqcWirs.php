@@ -53,9 +53,9 @@ class QaqcWirs extends MatrixForReportParent
     {
         $result = parent::getLeftColumns($xAxis, $yAxis, $dataSource);
         $columns = [
+            ['dataIndex' => 'quantity', "title" => "QTY", 'fixed' => 'left',],
             ['dataIndex' => 'production_name', 'fixed' => 'left',],
-            ['dataIndex' => 'quantity', 'fixed' => 'left',],
-            ['dataIndex' => 'progress', /*'width' => 500 /*'fixed' => 'left',*/],
+            ['dataIndex' => 'progress', 'fixed' => 'left',],
         ];
 
         return [...$result, ...$columns];

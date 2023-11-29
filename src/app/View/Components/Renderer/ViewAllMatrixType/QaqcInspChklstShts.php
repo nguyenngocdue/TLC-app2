@@ -23,7 +23,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected $dataIndexX = "qaqc_insp_tmpl_sht_id";
     protected $yAxis = Qaqc_insp_chklst::class;
     protected $dataIndexY = "qaqc_insp_chklst_id";
-    protected $rotate45Width = 300;
+    protected $rotate45Width = 200;
+    protected $rotate45Height = 150;
     protected $tableTrueWidth = true;
     protected $headerTop = 20;
     protected $groupBy = null;
@@ -131,7 +132,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         return [
-            ['dataIndex' => 'compliance_name',  'width' => 300, /*'fixed' => 'left',*/],
+            ['dataIndex' => 'compliance_name', /* 'width' => 300, /*'fixed' => 'left',*/],
             ['dataIndex' => 'progress', "title" => 'Progress (%)', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/],
         ];
     }
@@ -140,8 +141,12 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     {
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
+        $compliance_name = $y->getProdOrder->compliance_name ?: "";
         $result = [
-            'compliance_name' => $y->getProdOrder->compliance_name ?: "",
+            'compliance_name' => (object)[
+                'value' => $compliance_name,
+                'cell_class' => 'whitespace-nowrap'
+            ],
             'progress' => $y->progress ?: 0,
         ];
 

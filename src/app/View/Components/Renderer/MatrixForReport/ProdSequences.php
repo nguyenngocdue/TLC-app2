@@ -76,8 +76,8 @@ class ProdSequences extends MatrixForReportParent
         $result = parent::getLeftColumns($xAxis, $yAxis, $dataSource);
         $columns = [
             ['dataIndex' => 'production_name', 'fixed' => 'left',],
-            ['dataIndex' => 'quantity', 'fixed' => 'left',],
-            ['dataIndex' => 'progress', /*'fixed' => 'left',*/],
+            ['dataIndex' => 'quantity', "title" => "QTY", 'fixed' => 'left', 'width' => 100],
+            ['dataIndex' => 'progress', 'fixed' => 'left',],
         ];
 
         return [...$result, ...$columns];

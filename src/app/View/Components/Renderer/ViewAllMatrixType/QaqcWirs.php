@@ -131,9 +131,9 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         return [
+            ['dataIndex' => 'production_name', "fixed" => "left",],
             ['dataIndex' => 'quantity',  'width' => 50, "fixed" => "left", 'align' => 'right'],
             // ['dataIndex' => 'progress', 'width' => 50, "fixed" => "left", 'align' => 'right'],
-            ['dataIndex' => 'production_name',  'width' => 300, "fixed1" => "left",],
             // ['dataIndex' => 'compliance_name',  'width' => 300, "fixed1" => "left",],
         ];
     }
@@ -158,7 +158,10 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         // dump($progress . " / " . $wirCount);
         // $progress = ($wirCount) ? round(100 * $progress / $wirCount, 2) : 0;
         return [
-            'production_name' =>  $y->production_name,
+            'production_name' =>  (object)[
+                'value' => $y->production_name,
+                'cell_class' => "whitespace-nowrap"
+            ],
             'compliance_name' =>  $y->compliance_name,
             'quantity' => $y->quantity,
             // 'progress' => $progress . "%",
