@@ -11,7 +11,8 @@
         "qaqc_insp_chklst_shts",
         "qaqc_insp_chklsts",
         "hse_insp_chklst_shts",
-        "esg_master_sheets"
+        "esg_master_sheets",
+        "esg_inductions"
     ],
     "apps_have_view_all_kanban": [
         "kanban_task_pages"

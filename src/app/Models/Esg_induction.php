@@ -16,7 +16,7 @@ class Esg_induction extends ModelExtended
         "total_hours",
         "status",
     ];
-    public static $statusless = true;
+    // public static $statusless = true;
     public static $nameless = true;
     public function getNameAttribute($value)
     {
