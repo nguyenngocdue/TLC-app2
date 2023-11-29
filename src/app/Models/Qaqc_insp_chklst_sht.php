@@ -12,7 +12,6 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         'progress', 'status', 'order_no',
         "assignee_1", "assignee_2",
     ];
-    protected $table = "qaqc_insp_chklst_shts";
 
     public static $eloquentParams = [
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],

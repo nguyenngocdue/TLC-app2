@@ -7,9 +7,8 @@ use App\BigThink\ModelExtended;
 class Hse_walkthrough extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "slug","assignee_1","workplace_id","walkthrough_datetime", "owner_id"
+        "id", "name", "description", "slug", "assignee_1", "workplace_id", "walkthrough_datetime", "owner_id"
     ];
-    protected $table = "hse_walkthroughs";
 
     public static $eloquentParams = [
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],

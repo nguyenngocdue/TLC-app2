@@ -9,8 +9,7 @@ class Eco_effectiveness_line extends ModelExtended
     protected $fillable = [
         "id", "description", "remark", "eco_sheet_id", "change_effectiveness_id", "order_no", "owner_id"
     ];
-    protected $table = "eco_effectiveness_lines";
-    protected static $statusless = true;
+    public static $statusless = true;
     public static $nameless = true;
 
     public static $eloquentParams = [

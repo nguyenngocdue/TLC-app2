@@ -15,7 +15,6 @@ class Esg_sheet_line extends ModelExtended
         // "factor", "total",
         "remark", "status",
     ];
-    // protected $table = "ghg_sheet_lines";
     public static $nameless = true;
 
     public static $eloquentParams = [

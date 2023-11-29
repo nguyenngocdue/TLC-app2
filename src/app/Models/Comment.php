@@ -10,10 +10,9 @@ class Comment extends ModelExtended
     use HasProperties;
 
     protected $fillable = ['id', 'content', 'position_rendered', 'owner_id', 'category', 'commentable_type', 'commentable_id'];
-    protected $table = "comments";
 
     public static $nameless = true;
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],

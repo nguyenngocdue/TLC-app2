@@ -14,7 +14,6 @@ class Hr_timesheet_line extends ModelExtended
         'order_no', 'id', 'remark', 'status', 'lod_id', 'prod_routing_id', 'user_id'
     ];
     public static $nameless = true;
-    protected $table = "hr_timesheet_lines";
 
     public static $eloquentParams = [
         "getUser" => ['belongsTo', User::class, 'user_id'],

@@ -11,8 +11,7 @@ class Prod_routing_link extends ModelExtended
         'prod_discipline_id', 'standard_uom_id', "workplace_id",
     ];
 
-    protected $table = 'prod_routing_links';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getStandardUom" => ['belongsTo', Term::class, 'standard_uom_id'],

@@ -7,8 +7,7 @@ use App\BigThink\ModelExtended;
 class Hse_insp_group extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "owner_id"];
-    protected $table = "hse_insp_groups";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getTemplateLines" => ["hasMany", Hse_insp_tmpl_line::class, "hse_insp_group_id"],

@@ -14,8 +14,7 @@ class Workplace extends ModelExtended
         "travel_place_id", "weekend_days",
     ];
 
-    protected $table = 'workplaces';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],

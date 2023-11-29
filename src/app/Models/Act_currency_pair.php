@@ -7,7 +7,6 @@ use App\BigThink\ModelExtended;
 class Act_currency_pair extends ModelExtended
 {
     protected $fillable = ["name", "description", "status", "base_currency_id", "counter_currency_id", "owner_id"];
-    protected $table = "act_currency_pairs";
     protected $with = ['getBaseCurrency', 'getCountCurrency'];
 
     public static $eloquentParams = [

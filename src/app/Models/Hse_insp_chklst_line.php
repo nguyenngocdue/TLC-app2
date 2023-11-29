@@ -11,8 +11,7 @@ class Hse_insp_chklst_line extends ModelExtended
         "hse_insp_chklst_sht_id", "hse_insp_group_id",
         "hse_insp_control_value_id", "hse_insp_control_group_id", "owner_id"
     ];
-    protected $table = "hse_insp_chklst_lines";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getGroup" => ["belongsTo", Hse_insp_group::class, "hse_insp_group_id"],

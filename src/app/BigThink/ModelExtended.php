@@ -33,7 +33,7 @@ abstract class ModelExtended extends Model
 
     public static $eloquentParams = [];
     public static $oracyParams = [];
-    protected static $statusless = false;
+    public static $statusless = false;
     public static $nameless = false;
 
     public static function isStatusless()

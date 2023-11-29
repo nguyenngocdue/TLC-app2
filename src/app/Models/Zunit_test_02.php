@@ -18,8 +18,7 @@ class Zunit_test_02 extends ModelExtended
         'order_no',
         'owner_id',
     ];
-    protected $table = "zunit_test_02s";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "radioYesNo" => ['belongsTo', Qaqc_insp_control_value::class, 'radio_yes_no'],

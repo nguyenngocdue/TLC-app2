@@ -8,8 +8,7 @@ class Logger extends ModelExtended
 {
     protected $fillable = ["loggable_type", "loggable_id", "type", "key", "old_value", "old_text", "new_value", "new_text", "user_id", "owner_id"];
 
-    protected $table = 'loggers';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getUser" => ['belongsTo', User::class, 'user_id'],

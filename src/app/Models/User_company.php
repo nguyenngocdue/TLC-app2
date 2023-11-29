@@ -7,7 +7,6 @@ use App\BigThink\ModelExtended;
 class User_company extends ModelExtended
 {
     protected $fillable = ["name", "description", "slug", "owner_id"];
-    protected $table = 'user_companies';
 
     public static $eloquentParams = [
         "getUsers" => ['hasMany', User::class, 'company'],

@@ -10,8 +10,7 @@ class Eco_labor_impact extends ModelExtended
         "id", "name", "description", "eco_sheet_id", "department_id", "head_count", "man_day",
         "labor_cost", "total_cost", "owner_id", "order_no"
     ];
-    protected $table = "eco_labor_impacts";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getEcoSheet" => ['belongsTo', Eco_sheet::class, 'eco_sheet_id'],

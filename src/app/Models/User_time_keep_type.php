@@ -8,8 +8,7 @@ class User_time_keep_type extends ModelExtended
 {
     protected $fillable = ["name", "description", "slug", 'owner_id'];
 
-    protected $table = 'user_time_keep_types';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getUsers" => ['hasMany', User::class, 'time_keeping_type', 'id'],

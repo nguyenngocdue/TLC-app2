@@ -11,7 +11,6 @@ class Qaqc_wir_line extends ModelExtended
         "prod_order_id", "qc_order",
         "qc_total", "qc_accepted", "qc_remaining", "qc_rejected", "qaqc_wir_id",
     ];
-    protected $table = "qaqc_wir_lines";
     public static $nameless = true;
     public static $eloquentParams = [
         "getProdOrder" => ['belongsTo', Prod_order::class, 'prod_order_id'],

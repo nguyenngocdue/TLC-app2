@@ -19,7 +19,6 @@ class Prod_sequence extends ModelExtended
         "total_calendar_days", "no_of_sundays", "no_of_ph_days", "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
     ];
 
-    protected $table = 'prod_sequences';
     public static $nameless = true;
 
     public static $eloquentParams = [

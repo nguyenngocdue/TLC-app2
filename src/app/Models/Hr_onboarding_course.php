@@ -10,7 +10,6 @@ class Hr_onboarding_course extends ModelExtended
         "id", "name", "description", "facilitator_id", "onboarding_location_id",
         "owner_id", 'onboarding_datetime', 'slug',
     ];
-    protected $table = "hr_onboarding_courses";
 
     public static $eloquentParams = [
         'getFacilitator' => ['belongsTo', User::class, 'facilitator_id'],

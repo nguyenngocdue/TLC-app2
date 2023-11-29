@@ -13,7 +13,6 @@ class Esg_tmpl_line extends ModelExtended
         "unit", "remark",
         "status", "esg_code", "esg_state",
     ];
-    // protected $table = "ghg_tmpl_lines";
 
     public static $eloquentParams = [
         "getEsgTmpl" => ['belongsTo', Esg_tmpl::class, 'esg_tmpl_id'],

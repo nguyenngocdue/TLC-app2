@@ -12,8 +12,7 @@ class Hse_extra_metric extends ModelExtended
         'metric_month', "total_work_hours", "total_meeting_toolbox", "workplace_id",
         "status",
     ];
-    protected $table = "hse_extra_metrics";
-    // protected static $statusless = true;
+    // public static $statusless = true;
     public static $nameless = true;
 
     public static $eloquentParams = [

@@ -8,7 +8,7 @@ class Pj_sub_task extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'description', 'status', 'owner_id'];
 
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $oracyParams = [
         "getParentTasks()" => ["getCheckedByField", Pj_task::class],

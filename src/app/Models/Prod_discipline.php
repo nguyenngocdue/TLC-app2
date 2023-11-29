@@ -11,8 +11,7 @@ class Prod_discipline extends ModelExtended
         "css_class"
     ];
 
-    protected $table = 'prod_disciplines';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],

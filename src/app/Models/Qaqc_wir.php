@@ -13,8 +13,6 @@ class Qaqc_wir extends ModelExtended
         "assignee_1", "wir_description_id", "owner_id", "closed_at",
         "ncr_status_unique_value", "ncr_all_closed",
     ];
-    protected $table = "qaqc_wirs";
-    // public static $hasDueDate = true;
     public static $nameless = true;
     public function getNameAttribute($value)
     {

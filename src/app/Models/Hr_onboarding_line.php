@@ -11,8 +11,7 @@ class Hr_onboarding_line extends ModelExtended
         "owner_id", 'onboarding_hours', "order_no", "onboarding_course_id", "status",
         "employeeid", "position_rendered", "remark"
     ];
-    protected $table = "hr_onboarding_lines";
-    // protected static $statusless = true;
+    // public static $statusless = true;
 
     public static $eloquentParams = [
         "getSignatures" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],

@@ -11,8 +11,6 @@ class Project extends ModelExtended
 
     protected $fillable = ["id", "name", "description", "slug", "status", "owner_id"];
 
-    protected $table = 'projects';
-
     public static $eloquentParams = [
         "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
 

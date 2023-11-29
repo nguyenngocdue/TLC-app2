@@ -21,7 +21,6 @@ class Zunit_test_07 extends ModelExtended
         "order_no",
         'closed_at',
     ];
-    protected $table = "zunit_test_07s";
 
     public static $eloquentParams = [
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],

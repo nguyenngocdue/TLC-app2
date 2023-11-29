@@ -7,8 +7,7 @@ use App\BigThink\ModelExtended;
 class Work_area extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'description', 'slug', 'workplace_id'];
-    protected $table = "work_areas";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],

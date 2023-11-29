@@ -11,8 +11,7 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
         "id", "name", "description", "slug", "owner_id", 'order_no',
         "qaqc_insp_tmpl_id", "prod_discipline_id",
     ];
-    protected $table = "qaqc_insp_tmpl_shts";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, 'qaqc_insp_tmpl_id'],

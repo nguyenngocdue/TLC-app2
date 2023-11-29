@@ -12,7 +12,6 @@ class Ghg_tmpl_line extends ModelExtended
         "unit", "factor", "remark",
         "status",
     ];
-    protected $table = "ghg_tmpl_lines";
 
     public static $eloquentParams = [
         "getGhgTmpl" => ['belongsTo', Ghg_tmpl::class, 'ghg_tmpl_id'],

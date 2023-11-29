@@ -7,7 +7,6 @@ use App\BigThink\ModelExtended;
 class Ghg_metric_type_1 extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "ghg_metric_type_id", "owner_id", "order_no"];
-    protected $table = "ghg_metric_type_1s";
     public static $statusless = true;
 
     public static $eloquentParams = [

@@ -13,7 +13,7 @@ class Site_daily_assignment_line extends ModelExtended
     ];
 
     public static $nameless = true;
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getParent" => ["belongsTo", Site_daily_assignment::class, 'site_daily_assignment_id'],

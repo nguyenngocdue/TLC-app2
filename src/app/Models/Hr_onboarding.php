@@ -10,7 +10,6 @@ class Hr_onboarding extends ModelExtended
         "id", "name", "description", "facilitator_id", "onboarding_location_id", 'onboarding_course_id',
         "owner_id", 'onboarding_datetime', 'slug',
     ];
-    protected $table = "hr_onboardings";
     public static $nameless = true;
 
     public static $eloquentParams = [

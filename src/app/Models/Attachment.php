@@ -21,9 +21,8 @@ class Attachment extends ModelExtended
         'object_id',
         'object_type',
     ];
-    protected $table = 'attachments';
     public static $nameless = true;
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],

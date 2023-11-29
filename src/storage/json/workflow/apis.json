@@ -74,6 +74,14 @@
     "erp_routing_links": {
         "name": "erp_routing_links"
     },
+    "esg_induction_lines": {
+        "name": "esg_induction_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "esg_inductions": {
+        "name": "esg_inductions",
+        "storeEmpty_and_updateShort": "true"
+    },
     "esg_master_sheets": {
         "name": "esg_master_sheets",
         "storeEmpty_and_updateShort": "true"

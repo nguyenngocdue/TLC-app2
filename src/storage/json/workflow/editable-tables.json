@@ -47,6 +47,12 @@
         "editable-table": "eco_material_impact_removes",
         "button_add_a_new_line": "true"
     },
+    "esg_inductions_01": {
+        "name": "esg_inductions_01",
+        "entity-type": "esg_inductions",
+        "editable-table": "esg_induction_lines",
+        "button_add_a_new_line": "true"
+    },
     "esg_master_sheets_01": {
         "name": "esg_master_sheets_01",
         "entity-type": "esg_master_sheets",

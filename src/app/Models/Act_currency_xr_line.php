@@ -7,7 +7,6 @@ use App\BigThink\ModelExtended;
 class Act_currency_xr_line extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "status", "month", "currency_xr_id", "currency_pair_id", "value", "order_no", "owner_id"];
-    protected $table = "act_currency_xr_lines";
 
     public static $eloquentParams = [
         'getCurrencyPair' => ['belongsTo', Act_currency_pair::class, 'currency_pair_id'],

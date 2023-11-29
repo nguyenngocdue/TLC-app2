@@ -11,7 +11,6 @@ class Hr_overtime_request extends ModelExtended
         'workplace_id', 'assignee_1', 'owner_id',
         'status', 'user_team_ot_id', "total_hours",
     ];
-    protected $table = "hr_overtime_requests";
     public static $nameless = true;
     public function getNameAttribute($value)
     {

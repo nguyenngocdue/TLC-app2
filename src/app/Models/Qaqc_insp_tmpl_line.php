@@ -11,8 +11,7 @@ class Qaqc_insp_tmpl_line extends ModelExtended
         "qaqc_insp_group_id", "qaqc_insp_control_group_id", "owner_id", "qaqc_insp_tmpl_sht_id",
         "order_no"
     ];
-    protected $table = "qaqc_insp_tmpl_lines";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getGroup" => ["belongsTo", Qaqc_insp_group::class, "qaqc_insp_group_id"],

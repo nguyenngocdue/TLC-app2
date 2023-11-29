@@ -14,8 +14,6 @@ class Prod_order extends ModelExtended
         "total_calendar_days", "no_of_sundays", "no_of_ph_days", "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
     ];
 
-    protected $table = 'prod_orders';
-
     public static $eloquentParams = [
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
         "getProdRouting" => ['belongsTo', Prod_routing::class, 'prod_routing_id'],
