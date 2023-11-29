@@ -163,6 +163,7 @@ trait TraitEntityCRUDStoreUpdate2
 		try {
 			//Get newStatus before it get removed by handleFields
 			$theRow = $this->modelPath::find($id);
+			$statusless = $this->modelPath::$statusless;
 			$objectType = Str::modelPathFrom($theRow->getTable());
 			$objectId = $theRow->id;
 			$oldStatus = $theRow['status'];
@@ -219,7 +220,9 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		try {
 			$currentValue = $this->handleFields($request, __FUNCTION__);
-			$currentValue['status'] = $newStatus;
+			if (!$statusless) {
+				$currentValue['status'] = $newStatus;
+			}
 			//Fire the event "Send Mail give Monitors No and Comment"
 			// $this->fireEventInspChklst($request, $id);
 		} catch (\Exception $e) {
@@ -245,7 +248,6 @@ trait TraitEntityCRUDStoreUpdate2
 					$currentValue = array_merge($currentValue, $toBeOverrideAggregatedFields);
 					// Log::info($currentValue);
 				}
-				// $theRow->updateWithOptimisticLocking($currentValue);
 				$theRow->fill($currentValue);
 				$theRow->save();
 			}

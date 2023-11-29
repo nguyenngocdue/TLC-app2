@@ -177,13 +177,13 @@ trait TraitEntityFieldHandler2
     {
         if (!empty($toastrResult)) {
             foreach ($toastrResult as $table01Name => $toastrMessage) {
-                Toastr::error($toastrMessage, "$table01Name $action failed");
+                toastr()->error($toastrMessage, "$table01Name $action failed");
             }
         } else {
             $app = LibApps::getFor($this->type);
             $title = $app['title'];
             $action = $action . "d";
-            Toastr::success("This document is $action successfully.", Str::ucfirst($action) . " $title");
+            toastr()->success("This document is $action successfully.", Str::ucfirst($action) . " $title");
         }
     }
 
