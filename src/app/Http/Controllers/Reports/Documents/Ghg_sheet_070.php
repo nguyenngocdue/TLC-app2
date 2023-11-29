@@ -292,8 +292,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 						if(is_null($array)){
 							// override data for years without metrics
 							$newValues = $this->getValidValueByIndex($items, $index);
-							// $newValues['total_months'] = 0;
-							// $newValues['months'] = isset($newValues['months']) ?  array_fill_keys(array_keys($newValues['months']), '') : [];
 							$items[$year][$index] = $newValues;
 							continue;
 						}
