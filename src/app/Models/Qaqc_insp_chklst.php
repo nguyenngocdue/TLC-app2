@@ -13,7 +13,6 @@ class Qaqc_insp_chklst extends ModelExtended
         "prod_order_id", "prod_routing_id",
         'status',
     ];
-    protected $table = "qaqc_insp_chklsts";
 
     public static $eloquentParams = [
         "getProdOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],

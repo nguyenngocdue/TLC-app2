@@ -11,7 +11,6 @@ class Act_travel_place_pair extends ModelExtended
         "from_place_id", "to_place_id", "value",
         "status", "owner_id"
     ];
-    protected $table = "act_travel_place_pairs";
     protected $with = ["getFromPlace", "getToPlace"];
     public static $statusless = true;
     // public static $nameless = true;

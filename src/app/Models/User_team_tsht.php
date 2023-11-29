@@ -8,8 +8,6 @@ class User_team_tsht extends ModelExtended
 {
     protected $fillable = ["name", "description", "slug", "status", "owner_id", "def_assignee"];
 
-    protected $table = 'user_team_tshts';
-
     public static $eloquentParams = [
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
     ];

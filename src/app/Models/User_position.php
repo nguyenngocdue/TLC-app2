@@ -14,7 +14,7 @@ class User_position extends ModelExtended
         "assignee_1",
     ];
 
-    // protected static $statusless = true;
+    // public static $statusless = true;
     public static $nameless = true;
 
     public function getNameAttribute($value)

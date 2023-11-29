@@ -12,7 +12,6 @@ class Hse_insp_chklst_sht extends ModelExtended
         "start_date",
         // "start_time", "finish_time"
     ];
-    protected $table = "hse_insp_chklst_shts";
 
     public static $eloquentParams = [
         "getTmplSheet" => ["belongsTo", Hse_insp_tmpl_sht::class, 'hse_insp_tmpl_sht_id'],

@@ -62,9 +62,7 @@ class Zunit_test_09 extends ModelExtended
         "order_no",
         'owner_id',
     ];
-    protected $table = "zunit_test_09s";
-    // public static $hasDueDate = true;
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "department1" => ['belongsTo', Department::class, 'department_1'],

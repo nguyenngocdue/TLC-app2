@@ -7,7 +7,6 @@ use App\BigThink\ModelExtended;
 class Sub_project extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "status", "project_id", "owner_id", 'lod_id'];
-    protected $table = 'sub_projects';
 
     public static $eloquentParams = [
         "getProject" => ['belongsTo', Project::class, "project_id"],

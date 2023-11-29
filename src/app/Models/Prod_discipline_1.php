@@ -8,8 +8,7 @@ class Prod_discipline_1 extends ModelExtended
 {
     public $fillable = ["id", "name", "description", "slug", "def_assignee", "prod_discipline_id", "owner_id"];
 
-    protected $table = 'prod_discipline_1s';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],

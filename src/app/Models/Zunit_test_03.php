@@ -15,8 +15,7 @@ class Zunit_test_03 extends ModelExtended
         "datetime1", "datetime2", "datetime3", "datetime4", "datetime5", "datetime6", "datetime7"
     ];
 
-    protected $table = 'zunit_test_03s';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [];
 

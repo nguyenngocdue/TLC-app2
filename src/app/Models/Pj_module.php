@@ -11,8 +11,7 @@ class Pj_module extends ModelExtended
         "pj_name_id", "pj_character_id", "pj_unit_id", "pj_shipment_id", "owner_id"
     ];
 
-    protected $table = 'pj_modules';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         'getPjBuilding' => ['belongsTo', Term::class, 'pj_building_id'],

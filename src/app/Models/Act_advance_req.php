@@ -11,7 +11,6 @@ class Act_advance_req extends ModelExtended
         "radio_advance_type", "advance_amount", "currency_id",
         "advance_amount_word", "assignee_1", "owner_id"
     ];
-    protected $table = "act_advance_reqs";
     protected $with = ["getCurrency"];
     public static $nameless = true;
     public function getNameAttribute($value)

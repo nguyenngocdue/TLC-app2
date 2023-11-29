@@ -14,7 +14,6 @@ class Hr_overtime_request_line extends ModelExtended
         "year_remaining_hours", "year_allowed_hours",
         "position_id",
     ];
-    protected $table = "hr_overtime_request_lines";
     public static $nameless = true;
 
     public static $eloquentParams = [

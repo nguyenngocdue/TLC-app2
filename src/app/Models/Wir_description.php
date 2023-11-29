@@ -11,8 +11,7 @@ class Wir_description extends ModelExtended
         "prod_discipline_id", "def_assignee", "owner_id",
         "wir_weight",
     ];
-    protected $table = "wir_descriptions";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],

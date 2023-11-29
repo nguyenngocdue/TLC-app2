@@ -7,8 +7,7 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_control_value extends ModelExtended
 {
     protected $fillable = ["id", "control_group", "name", "description", 'qaqc_insp_control_group_id', 'owner_id'];
-    protected $table = "qaqc_insp_control_values";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],

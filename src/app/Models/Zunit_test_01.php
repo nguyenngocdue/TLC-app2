@@ -27,8 +27,7 @@ class Zunit_test_01 extends ModelExtended
         'owner_id',
     ];
 
-    protected $table = 'zunit_test_01s';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     protected $casts = [
         "text4" => "array"

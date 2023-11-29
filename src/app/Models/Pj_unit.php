@@ -8,8 +8,7 @@ class Pj_unit extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "pj_sell_type_id", "owner_id"];
 
-    protected $table = 'pj_units';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         'getPjSellType' => ['belongsTo', Term::class, 'pj_sell_type_id'],

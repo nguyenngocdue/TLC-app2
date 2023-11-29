@@ -11,7 +11,6 @@ class Ghg_tmpl extends ModelExtended
         "owner_id",
         "ghg_cat_id",
     ];
-    protected $table = "ghg_tmpls";
     public static $statusless = true;
 
     public static $eloquentParams = [

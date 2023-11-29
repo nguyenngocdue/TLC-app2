@@ -8,8 +8,7 @@ class Pj_shipment extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "project_id", "sub_project_id", "external_doc_link", "owner_id"];
 
-    protected $table = 'pj_shipments';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getProject" => ['belongsTo', Project::class, "project_id"],

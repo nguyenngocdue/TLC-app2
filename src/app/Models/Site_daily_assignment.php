@@ -9,7 +9,7 @@ class Site_daily_assignment extends ModelExtended
     protected $fillable = ["id", "site_team_id", "site_date", "owner_id", "status"];
 
     public static $nameless = true;
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getUserTeamSite" => ["belongsTo", User_team_site::class, 'site_team_id'],

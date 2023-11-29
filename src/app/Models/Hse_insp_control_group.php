@@ -7,8 +7,7 @@ use App\BigThink\ModelExtended;
 class Hse_insp_control_group extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "owner_id"];
-    protected $table = "hse_insp_control_groups";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getControlValues" => ["hasMany", Hse_insp_control_value::class, "hse_insp_control_group_id"],

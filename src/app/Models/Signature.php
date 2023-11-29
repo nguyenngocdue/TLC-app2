@@ -11,10 +11,9 @@ class Signature extends ModelExtended
         'category', 'signable_type', 'signable_id',
         'signature_comment', 'signature_decision',
     ];
-    protected $table = "signatures";
 
     public static $nameless = true;
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],

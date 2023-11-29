@@ -10,8 +10,7 @@ class Eco_material_impact_remove extends ModelExtended
         "id", "name", "description", "eco_sheet_id", "unit_price", "quantity",
         "unit_id", "amount", "order_no", "owner_id"
     ];
-    protected $table = "eco_material_impact_removes";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getEcoSheet" => ['belongsTo', Eco_sheet::class, 'eco_sheet_id'],

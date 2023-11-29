@@ -18,7 +18,6 @@ class Hse_incident_report extends ModelExtended
         'injured_staff_discipline',  'need_to_transfer_position',
         'lost_value', 'lost_unit_id',
     ];
-    protected $table = "hse_incident_reports";
     // public static $nameless = true;
 
     public static $eloquentParams = [

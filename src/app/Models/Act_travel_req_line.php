@@ -12,7 +12,6 @@ class Act_travel_req_line extends ModelExtended
         "datetime_inbound_2", "total_day", "total_amount", "remark", "owner_id",
         "travel_place_pair_id", "claimable_amount",
     ];
-    protected $table = "act_travel_req_lines";
 
     public static $eloquentParams = [
         'getFrom' => ['belongsTo', Act_travel_place::class, 'from_id'],

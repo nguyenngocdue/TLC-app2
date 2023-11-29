@@ -12,7 +12,6 @@ class Act_travel_expense_claim_line extends ModelExtended
         "rate_exchange", "total_estimated_amount", "order_no", "owner_id",
         "counter_currency_id", "rate_exchange_month_id",
     ];
-    protected $table = "act_travel_expense_claim_lines";
 
     public static $eloquentParams = [
         'getCurrency' => ['belongsTo', Act_currency::class, 'currency_id'],

@@ -12,7 +12,6 @@ class Ghg_sheet_line extends ModelExtended
         "unit", "factor", "ghg_sheet_id", "value", "total",
         "remark", "status",
     ];
-    protected $table = "ghg_sheet_lines";
     public static $nameless = true;
 
     public static $eloquentParams = [

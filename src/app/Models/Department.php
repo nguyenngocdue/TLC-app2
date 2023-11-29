@@ -12,8 +12,7 @@ class Department extends ModelExtended
         "slug", "order_no", "parent_id",
     ];
 
-    protected $table = 'departments';
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getHOD" => ['belongsTo', User::class, 'head_of_department'],

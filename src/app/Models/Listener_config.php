@@ -13,7 +13,7 @@ class Listener_config extends ModelExtended
         'prod_discipline_id', 'prod_order_id',
 
     ];
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         'getProject' => ['belongsTo', Project::class, 'project_id'],

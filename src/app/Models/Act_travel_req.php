@@ -12,7 +12,6 @@ class Act_travel_req extends ModelExtended
         "staff_workplace_id", "remark", "assignee_1", "owner_id",
         "total_travel_day", "total_travel_amount",
     ];
-    protected $table = "act_travel_reqs";
     public static $nameless = true;
     public function getNameAttribute($value)
     {

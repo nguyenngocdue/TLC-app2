@@ -8,7 +8,7 @@ class User_org_chart extends ModelExtended
 {
     protected $fillable = ["name", "description", "def_assignee", "owner_id"];
 
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getUsers" => ['hasMany', User::class, 'org_chart', 'id'],

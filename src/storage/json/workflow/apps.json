@@ -339,6 +339,35 @@
         "icon": "<i class=\"fa-solid fa-conveyor-belt-boxes\"><\/i>",
         "hidden_navbar": "true"
     },
+    "esg_induction": {
+        "name": "esg_induction",
+        "package_tab": "application",
+        "package": "compliance",
+        "sub_package": "compliance_data",
+        "title": "HSE Inductions",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
+    },
+    "esg_induction_line": {
+        "name": "esg_induction_line",
+        "package_tab": "application",
+        "package": "compliance",
+        "sub_package": "compliance_data",
+        "title": "HSE Induction Lines",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden_navbar": "true"
+    },
     "esg_master_sheet": {
         "name": "esg_master_sheet",
         "package_tab": "application",

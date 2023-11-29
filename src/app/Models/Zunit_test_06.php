@@ -7,8 +7,7 @@ use App\BigThink\ModelExtended;
 class Zunit_test_06 extends ModelExtended
 {
     protected $fillable = ['id', 'name', 'parent_id', 'order_no', 'owner_id'];
-    protected $table = "zunit_test_06s";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "attachment_1" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],

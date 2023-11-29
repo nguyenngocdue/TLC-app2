@@ -14,7 +14,6 @@ class Act_travel_expense_claim extends ModelExtended
         "counter_currency_id", "total_amount_ee", "total_amount_re", "remark", "assignee_1", "owner_id",
         "reimbursement_in_words"
     ];
-    protected $table = "act_travel_expense_claims";
 
     public static $eloquentParams = [
         'getUser' => ['belongsTo', User::class, 'user_id'],

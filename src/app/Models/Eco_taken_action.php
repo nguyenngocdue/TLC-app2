@@ -9,8 +9,7 @@ class Eco_taken_action extends ModelExtended
     protected $fillable = [
         "id", "name", "description", "eco_sheet_id", "department_id", "owner_id", "order_no"
     ];
-    protected $table = "eco_taken_actions";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getEcoSheet" => ['belongsTo', Eco_sheet::class, 'eco_sheet_id'],

@@ -71,7 +71,7 @@ class User extends Authenticatable implements LdapAuthenticatable
     protected $hidden = ["password", "remember_token"];
 
     protected $touches = [];
-    protected static $statusless = true;
+    public static $statusless = true;
     public static $nameless = true;
     public function getNameAttribute($value)
     {

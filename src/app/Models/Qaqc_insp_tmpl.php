@@ -7,8 +7,7 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_tmpl extends ModelExtended
 {
     protected $fillable = ["id", "name", "description", "slug", "owner_id"];
-    protected $table = "qaqc_insp_tmpls";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getSheets" => ["hasMany", Qaqc_insp_tmpl_sht::class, "qaqc_insp_tmpl_id"],

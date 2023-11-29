@@ -11,7 +11,6 @@ class Ghg_sheet extends ModelExtended
         "id", "name", "description", "status",
         "ghg_month", "owner_id", "ghg_tmpl_id", "total",
     ];
-    protected $table = "ghg_sheets";
 
     public static $nameless = true;
     public function getNameAttribute($value)

@@ -11,7 +11,7 @@ class Prod_ppr_item extends ModelExtended
 
     ];
 
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         // "getProdSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],

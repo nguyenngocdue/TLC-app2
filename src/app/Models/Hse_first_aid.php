@@ -11,7 +11,6 @@ class Hse_first_aid extends ModelExtended
         "owner_id", "injury_datetime", "slug", "nature_of_injury", "treatment_provided",
         "employeeid", 'work_area_id',
     ];
-    protected $table = "hse_first_aids";
 
     public static $eloquentParams = [
         'getInjuredPerson' => ['belongsTo', User::class, 'injured_person_id'],

@@ -7,8 +7,7 @@ use App\BigThink\ModelExtended;
 class Erp_routing_link extends ModelExtended
 {
     protected $fillable = ["name", "description", "slug", "prod_discipline_id", "owner_id"];
-    protected $table = "erp_routing_links";
-    protected static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],

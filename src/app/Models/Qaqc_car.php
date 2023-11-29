@@ -10,7 +10,6 @@ class Qaqc_car extends ModelExtended
         'id', "qaqc_ncr_id", "responsible_person", "remark", "cause_analysis",
         "corrective_action", "order_no", "owner_id", "status",
     ];
-    protected $table = "qaqc_cars";
     public static $nameless = true;
 
     public static $eloquentParams = [

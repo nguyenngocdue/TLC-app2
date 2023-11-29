@@ -10,9 +10,6 @@ class Qaqc_mir extends ModelExtended
         "id", "name", "doc_id", "description", "slug", "project_id", "sub_project_id", "status",
         "prod_discipline_id", "priority_id", "due_date", "assignee_1", "assignee_2", "owner_id", "closed_at"
     ];
-    protected $table = "qaqc_mirs";
-    // public static $hasDueDate = true;
-
     public static $eloquentParams = [
         "getProject" => ['belongsTo', Project::class, "project_id"],
         "getSubProject" => ['belongsTo', Sub_project::class, "sub_project_id"],

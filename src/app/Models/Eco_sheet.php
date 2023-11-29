@@ -12,7 +12,6 @@ class Eco_sheet extends ModelExtended
         "total_add_cost", "total_remove_cost", "total_material_cost", "due_date", "closed_at", "status",
         "order_no", "owner_id"
     ];
-    protected $table = "eco_sheets";
 
     public static $eloquentParams = [
         'getProject' => ['belongsTo', Project::class, 'project_id'],

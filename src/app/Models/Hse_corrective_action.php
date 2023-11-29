@@ -14,7 +14,6 @@ class Hse_corrective_action extends ModelExtended
         'due_date', 'closed_at', 'opened_at'
     ];
 
-    protected $table = "hse_corrective_actions";
     // public static $nameless = true; //Untidy
 
     public static $eloquentParams = [
