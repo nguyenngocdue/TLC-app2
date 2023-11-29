@@ -29,20 +29,29 @@ class ProdSequences extends MatrixForReportParent
     function getXAxis()
     {
         $result = Prod_routing::query()
-            ->with('getProdRoutingLinks')
+            ->with(['getProdRoutingDetails' => function ($q) {
+                $q->with('getProdRoutingLink');
+            }])
             ->find($this->prodRoutingId);
-        $allRoutingLinks = $result->getProdRoutingLinks;
+        $allRoutingLinkDetails = $result->getProdRoutingDetails;
+        $allRoutingLinkDetails = $allRoutingLinkDetails->sortBy("order_no");
+        $allRoutingLinks = $allRoutingLinkDetails->map(fn ($item) => $item->getProdRoutingLink);
+        // dump($allRoutingLinks);
 
+        $toHide = config('prod_discipline.to_hide');
         $result = [];
         switch ($this->sequenceModeId) {
-            case 2:
-                return $allRoutingLinks;
-            case 1:
+            case 2: // All sequences
+                return $allRoutingLinks->filter(fn ($i) => !in_array($i->prod_discipline_id, $toHide));
+            case 3: // PPR-MEPF
+                return $allRoutingLinks->filter(fn ($i) => in_array($i->prod_discipline_id, $toHide));
+            case 1: // Major sequences
             default:
                 foreach ($allRoutingLinks as $routingLink) {
                     $showMeOnIds = $routingLink->getScreensShowMeOn()->pluck('id')->toArray();
-                    if (in_array($this->showInReportToc, $showMeOnIds))
+                    if (in_array($this->showInReportToc, $showMeOnIds)) {
                         $result[] = $routingLink;
+                    }
                 }
                 return collect($result);
         }
