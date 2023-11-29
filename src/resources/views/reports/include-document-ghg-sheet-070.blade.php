@@ -15,7 +15,6 @@
 }
 
 </style>
-{{-- @dd($tableDataSource) --}}
 
 @php
 	$class1 = "bg-white border-gray-600 border-l border-b";
@@ -29,7 +28,10 @@
 	$months = $tableDataSource['timeInfo']['months']?? [];
 	$years = $tableDataSource['timeInfo']['years'];
 	$columnType = $tableDataSource['timeInfo']['columnType'];
+	$dataSet = $tableDataSource['dataSet'];
+	//dd($dataSet);
 @endphp
+{{-- @dump($tableDataSource) --}}
 
 
 
@@ -120,6 +122,7 @@
 										$ghgcateName = \App\Models\Ghg_cat::find($k2)->toArray()['name'];
 									@endphp
 									{{-- <tr> --}}
+									{{-- Emission source category --}}
 										<td class="p-2 {{$class1}}"  title="#{{$k2}}" rowspan="{{$rowSpanLv2 ? $rowSpanLv2: 1}}">{{$ghgcateName}}</td>
 									@foreach($val2 as $k3 => $val3)
 										@if( is_numeric($k3) && isset($val3['scope_rowspan_lv3']))
@@ -135,9 +138,6 @@
 												{!! $k3 !== '0' ? "<a href='" . route('ghg_tmpls.edit', $k3 ?? 0) . "'>" . $ghgTmplName . "</a>" : '' !!} 
 											</td>
 											@if(isset($childrenMetric[0]['ghg_tmpls_name']))
-											@php
-												$months = $childrenMetric[0]['months'] ?? [];
-											@endphp
 											{{-- Metric 0: first line --}}
 											<td class="p-2 {{$class1}}">
 												@php 
@@ -158,11 +158,20 @@
 												{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : '' !!} 
 											</td>
 											{{-- Months --}}
-											@foreach($months as $month => $valMonth)
+
+											@foreach($years as $key => $year)
+												@php
+													$comparison = $childrenMetric[0]['comparison_with'] ?? [];
+													$arr = $dataSet[$k1][$k2][$year];
+													$valueForColType = $arr[$k3-1][0]['data_render'][$year][$columnType]  ?? '1000';
+													dd($dataSet, $tableData);
+												@endphp
 												<td class="p-2 text-right {{$class1}}">
-													{!! (float)$valMonth <= 0 ? "<i class='fa-light fa-minus'></i>" : $valMonth !!}
+													{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
 												</td>
 											@endforeach
+
+											
 											{{-- add empty cell --}}
 											@elseif(!isset($childrenMetric[0]['ghg_metric_type_id']))
 													<td class="text-left {{$class1}}"><i class="fa-light fa-minus"></i></td>
@@ -173,9 +182,9 @@
 															@php
 																$numOfMonths = count($months);
 															@endphp
-															@for($i = 0; $i <= $numOfMonths; $i++)
+															{{-- @for($i = 0; $i <= $numOfMonths; $i++)
 																<td class="text-center {{$class1}}"><i class="fa-light fa-minus"></i></td>
-															@endfor
+															@endfor --}}
 													@endif
 												@endif
 											@endif
@@ -205,14 +214,21 @@
 															{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 														</td>
 														{{-- Months --}}
-														@php
-															$months = $childrenMetric[$i]['months'] ?? [];
-														@endphp
-														@foreach($months as $month => $valMonth)
-															<td class="p-2 text-right {{$class1}}">
-																{!! (float)$valMonth <= 0 ? "<i class='fa-light fa-minus'></i>" : $valMonth !!}
-															</td>
-														@endforeach
+{{-- 														@foreach($years as $key => $year)
+															@php
+																$comparison = $childrenMetric[0]['comparison_with'] ?? [];
+																$arr = $dataSet[$k1][$k2][$year];
+															@endphp
+															@foreach($arr as $item)
+																@php
+																	//dd($item);
+																	$valueForColType = $item[$i]['data_render'][$year][$columnType] ?? '';
+																@endphp
+																<td class="p-2 text-right {{$class1}}">
+																	{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
+																</td>
+															@endforeach
+														@endforeach --}}
 													</tr>				
 												@endif
 											@endfor

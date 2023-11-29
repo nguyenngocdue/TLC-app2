@@ -375,4 +375,14 @@ class Report
         }
         return $num;
     }
+    // ghg_sheet_050
+    public static function countChildrenItemsByKey2($data , $key="children_metrics"){
+        $num = 0;
+        foreach ($data as $value){
+            if(isset($value[$key])) {
+                $num = $num + count($value[$key]); 
+            }
+        }
+        return $num;
+    }
 }
