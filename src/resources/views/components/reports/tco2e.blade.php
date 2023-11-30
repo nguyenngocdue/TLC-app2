@@ -1,7 +1,8 @@
 <td class='w-[{{$widthCell}}px] h-[60px] text-right border-t border-l p-2 border-gray-600 relative '>
     <div class="align-middle">
         <div class=' items-baseline flex justify-end'>
-        {{-- @dump($tco2e) --}}
+        {{-- @dd($tco2e) --}}
+        {{-- @dump($difference) --}}
         @if(!is_null($tco2e))
             <span class="{{$fontBold ?? ''}} items-center flex text-base">{{$tco2e > 0 ? (number_format($tco2e, 2)): ''}}
                 @if($difference < 0)
@@ -14,11 +15,14 @@
                 @endif
             </span>
         </div>
+        @php
+            $strNumber = App\Utils\Support\NumberReport::formatNumber(number_format(abs((float)($difference)),2));
+        @endphp
         <div class=" flex justify-end">
             @if($difference < 0)
-                <span class='text-green-600  {{$fontBold ?? ''}}'>{{abs($difference)}}%</span>
+                <span class='text-green-600  {{$fontBold ?? ''}}'>{{$strNumber}}%</span>
             @elseif($difference > 0)
-                <span class='text-red-600  {{$fontBold ?? ''}}'>{{abs($difference)}}%</span>
+                <span class='text-red-600  {{$fontBold ?? ''}}'>{{$strNumber}}%</span>
             @elseif((int)$difference === 0 && !is_null($difference))
                 <span class='text-yellow-600  {{$fontBold ?? ''}}'>0%</span>
                 <br/>

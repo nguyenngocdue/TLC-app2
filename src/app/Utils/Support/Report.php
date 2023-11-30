@@ -385,4 +385,28 @@ class Report
         }
         return $num;
     }
+
+    // for document-ghg_sheet_070
+    public static function checkItem($itemsToCheck, $standardItem){
+        $standardItemProperties = [
+            'ghg_tmpls_id',
+            'ghg_metric_type_id',
+            'ghg_metric_type_1_id',
+            'ghg_metric_type_2_id'
+        ];
+        foreach ($itemsToCheck as $items){
+            $matching = true;
+            foreach ($standardItemProperties as $property) {
+                if ($standardItem[$property] !== $items[$property]) {
+                    $matching = false;
+                    break;
+                }
+            }
+            if ($matching) {
+                return $items;
+            }
+        }
+        return null;
+    }
+    
 }

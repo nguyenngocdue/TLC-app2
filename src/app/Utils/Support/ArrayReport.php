@@ -14,15 +14,17 @@ class ArrayReport
         }
         return $sums;
     }
-    public static function subtractArrays($array1, $array2) {
+    public static function calculatePercentBetween2Months($array1, $array2) {
         $result = [];
         foreach ($array2 as $key => $value2) {
             if (array_key_exists($key, $array1)) {
-                $result[$key] = (float)$value2 - (float)$array1[$key];
+                $number = NumberReport::calculatePercentNumber($array1[$key], $value2);
+                $result[$key] = NumberReport::formatNumber($number);
             } else {
-                $result[$key] = (float)$value2;
+                $result[$key] =  null;
             }
         }
+        // dump($result);
         return $result;
     }
     

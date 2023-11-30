@@ -29,10 +29,9 @@
 	$years = $tableDataSource['timeInfo']['years'];
 	$columnType = $tableDataSource['timeInfo']['columnType'];
 	$dataSet = $tableDataSource['dataSet'];
-	//dd($dataSet[335]);
 	//dd($months);
 @endphp
-{{-- @dump($tableDataSource) --}}
+{{-- @dd($columnType) --}}
 
 
 
@@ -163,13 +162,19 @@
 													@case('years')
 															@foreach($years as $key => $year)
 																@php
-																	$comparison = $childrenMetric[0]['comparison_with'] ?? [];
+																	//dd($childrenMetric);
 																	$arr = $dataSet[$k1][$k2][$year] ?? [];
-																	$valueForColType = $arr[$k2][$k3][0]['data_render'][$year][$columnType]  ?? '';
+																	$itemsToCheck = $arr[$k2][$k3];
+																	$standardItem = $childrenMetric[0];
+
+																	//indexItem
+																	$dataIndex =  App\Utils\Support\Report::checkItem($itemsToCheck, $standardItem);
+																	$valueForColType = empty($dataIndex) ? '' : $dataIndex['data_render'][$year][$columnType];
+																	$numberComparison = empty($dataIndex) ? null :  $dataIndex['comparison_with']["meta_percent"][$columnType];
+																	$numberComparison = (float)$numberComparison === (float)0 ? null : $numberComparison;
+																	//dd($dataIndex);
 																@endphp
-																			<td class="p-2 text-right {{$class1}} border-t">
-																				{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
-																			</td>
+																	@include('components.reports.tco2e', ['widthCell'=> '', 'class1' => '', 'tco2e' => $valueForColType, 'difference' => $numberComparison])
 															@endforeach
 														@break
 													@case ('months' || 'quarters')
@@ -182,12 +187,17 @@
 																@endphp
 																	@foreach($years as $year)
 																		@php
-																			$valueForColType = $dataIndex[$year][$k2][$k3][0]['data_render'][$year][$columnType][$month];
-																			//dd($valueForColType);
+																			$arr = $dataSet[$k1][$k2][$year] ?? [];
+																			$itemsToCheck = $arr[$k2][$k3];
+																			$standardItem = $childrenMetric[0];
+
+																			//indexItem
+																			$dataIndex =  App\Utils\Support\Report::checkItem($itemsToCheck, $standardItem) ?? [];
+																			$valueForColType = empty($dataIndex) ? '' : $dataIndex['data_render'][$year][$columnType][$month];
+																			$numberComparison = empty($dataIndex) ? null :  ($dataIndex['comparison_with']["meta_percent"][$columnType][$month] ?? null);
+																			$numberComparison = (float)$numberComparison === (float)0 ? null : $numberComparison;
 																		@endphp
-																			<td class="p-2 text-right {{$class1}}">
-																				{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
-																			</td>
+																			@include('components.reports.tco2e', ['widthCell'=> '', 'class1' => '', 'tco2e' => $valueForColType, 'difference' => $numberComparison])
 																	@endforeach
 															@endforeach
 
@@ -208,9 +218,9 @@
 															@php
 																$numOfMonths = count($months);
 															@endphp
-															{{-- @for($i = 0; $i <= $numOfMonths; $i++)
+															@for($i = 0; $i <= $numOfMonths; $i++)
 																<td class="text-center {{$class1}}"><i class="fa-light fa-minus"></i></td>
-															@endfor --}}
+															@endfor
 													@endif
 												@endif
 											@endif
@@ -246,11 +256,19 @@
 																	@foreach($years as $key => $year)
 																		@php
 																			$arr = $dataSet[$k1][$k2][$year] ?? [];
-																			$valueForColType = $arr[$k2][$k3][$i]['data_render'][$year][$columnType]  ?? '';
+																			$valueForColType = $arr[$k2][$k3][$i]['data_render'][$year][$columnType]  ?? 0;
+
+																			$arr = $dataSet[$k1][$k2][$year];
+																			$itemsToCheck = $arr[$k2][$k3];
+																			$standardItem = $childrenMetric[$i];
+																			
+																			//indexItem
+																			$dataIndex =  App\Utils\Support\Report::checkItem($itemsToCheck, $standardItem);
+																			$valueForColType = empty($dataIndex) ? '' : $dataIndex['data_render'][$year][$columnType];
+																			$numberComparison = empty($dataIndex) ? null :  $dataIndex['comparison_with']["meta_percent"][$columnType];
+																			$numberComparison = (float)$numberComparison === (float)0 ? null : $numberComparison;
 																		@endphp
-																		<td class="p-2 text-right {{$class1}}">
-																			{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
-																		</td>
+																			@include('components.reports.tco2e', ['widthCell'=> '', 'class1' => '', 'tco2e' => $valueForColType, 'difference' => $numberComparison])
 																	@endforeach
 																@break
 															@case('months' || 'quarters')
@@ -263,12 +281,19 @@
 																		@endphp
 																			@foreach($years as $year)
 																				@php
-																					$valueForColType = $dataIndex[$year][$k2][$k3][$i]['data_render'][$year][$columnType][$month] ?? '0';
-																					//dd($dataIndex[$year][$k2][$k3][$i]['data_render'][$year][$columnType][$month]);
+																					$arr = $dataSet[$k1][$k2][$year] ?? [];
+																					$valueForColType = $arr[$k2][$k3][$i]['data_render'][$year][$columnType]  ?? 0;
+
+																					$arr = $dataSet[$k1][$k2][$year];
+																					$itemsToCheck = $arr[$k2][$k3];
+																					$standardItem = $childrenMetric[$i];
+																					//indexItem
+																					$dataIndex =  App\Utils\Support\Report::checkItem($itemsToCheck, $standardItem);
+																					$valueForColType = empty($dataIndex) ? '' : $dataIndex['data_render'][$year][$columnType][$month];
+																					$numberComparison = empty($dataIndex) ? null :  ($dataIndex['comparison_with']["meta_percent"][$columnType][$month] ?? null);
+																					$numberComparison = (float)$numberComparison === (float)0 ? null : $numberComparison;
 																				@endphp
-																					<td class="p-2 text-right {{$class1}}">
-																						{!! (float)$valueForColType <= 0 ? "<i class='fa-light fa-minus'></i>" : $valueForColType !!}
-																					</td>
+																					@include('components.reports.tco2e', ['widthCell'=> '', 'class1' => '', 'tco2e' => $valueForColType, 'difference' => $numberComparison])
 																			@endforeach
 																	@endforeach
 																@break

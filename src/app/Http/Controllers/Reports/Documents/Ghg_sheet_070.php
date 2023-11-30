@@ -10,9 +10,8 @@ use App\Models\Ghg_cat;
 use App\Models\Term;
 use App\Utils\Support\ArrayReport;
 use App\Utils\Support\DateReport;
+use App\Utils\Support\NumberReport;
 use App\Utils\Support\Report;
-use Exception;
-use Symfony\Component\Yaml\Dumper;
 
 class Ghg_sheet_070 extends Report_ParentDocument2Controller
 {
@@ -37,7 +36,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 			$dataSource = $instance->changeDataSource($dataSource,$params);
 			$valueOfYears[$year] = $dataSource;
 		}
-		// dd($valueOfYears[2023]['tableDataSource']);
 		return $valueOfYears;
 	}
 	public function getParamColumns($dataSource,$modeType)
@@ -77,12 +75,10 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				$a = $items[$index];
 				if(!$a) continue;
 				$arr = array_map(function($item) {
-					// dd($item);
 					$item['months'] = array_fill_keys(array_keys($item['months']), 0); // reset value of months
 					$item['total_months'] = 0;// reset value of total_months
 					return $item;
 				} , $a);
-				// dump($arr);
 				return $arr;
 			}
 		}
@@ -97,9 +93,12 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		return $result;
 	}
 
-	private function calculatePercentForYear($dataBefore, $dataAfter) {
-		return $dataBefore ? ($dataAfter - $dataBefore)/$dataBefore : $dataAfter;
+	private function calculatePercentForYears($beforeMonthSum, $afterMonthSum) {
+		$number = NumberReport::calculatePercentNumber($beforeMonthSum, $afterMonthSum);
+		$number = NumberReport::formatNumber($number);
+		return $number;
 	}
+	
 	
 	private function calculateQuarterData($data){
 		$months = array_keys($data);
@@ -130,6 +129,25 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		return [];
 	}
 
+	private function changeToEmptyData($data){
+		$data['months'] = array_fill_keys(array_keys($data['months']), 0);
+		$data['total_months'] = 0;
+		return $data;
+	}
+
+	private function calculatePercentDifference($data) {
+        $result = [];
+        $previous = null;
+        foreach ($data as $key => $current) {
+            $previousValue = $previous ?? 0;
+			$number = $current && $previousValue > 0 ? round(($current - $previousValue)*100/$previousValue, 2) : 0;
+            $percent = $number > 0  ? 100 - $number : -1*($number !== 0 ? 100 - abs($number) : null);
+            $result[$key] = NumberReport::formatNumber(number_format($percent,2));
+            $previous = $current;
+        }
+        return $result;
+    }
+
 	private function comparisonData($data) {
 		// dd($data);
 		$years = array_keys($data);
@@ -148,52 +166,59 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 				// set comparison's values for metric2
 				// dump($afterYear,$dataMetricAfter);
-				foreach ($dataMetricAfter as $keyOfChild => $afterData) {
-					if(!is_array($afterData) || empty($afterData)) continue;
+				foreach ($dataMetricAfter as $keyOfChild => $dbAfterMonth) {
+					if(!is_array($dbAfterMonth) || empty($dbAfterMonth)) continue;
 
 					// get Id to check
 					$dataToCheck = [
-						"ghg_tmpls_id" => $afterData['ghg_tmpls_id'],
-						"ghg_metric_type_id" => $afterData['ghg_metric_type_id'],
-						"ghg_metric_type_1_id" => $afterData['ghg_metric_type_1_id'],
-						"ghg_metric_type_2_id" => $afterData['ghg_metric_type_2_id'],
+						"ghg_tmpls_id" => $dbAfterMonth['ghg_tmpls_id'],
+						"ghg_metric_type_id" => $dbAfterMonth['ghg_metric_type_id'],
+						"ghg_metric_type_1_id" => $dbAfterMonth['ghg_metric_type_1_id'],
+						"ghg_metric_type_2_id" => $dbAfterMonth['ghg_metric_type_2_id'],
 					];
 					$_dbIndexBeforeMetric = $this->filterDataInNextYear($dataToCheck, $dbBeforeMetric);
-					$dbIndexBeforeMetric = $_dbIndexBeforeMetric ? $_dbIndexBeforeMetric : $afterData;
+					$dbIndexBeforeMetric = $_dbIndexBeforeMetric ? $_dbIndexBeforeMetric : $dbAfterMonth;
 						if(!empty($dbIndexBeforeMetric)){
-							$dbAfterMonth = $_dbIndexBeforeMetric ? $afterData['months'] : array_fill_keys(array_keys($afterData['months']), 0);
-							$dbBeforeMonth = $_dbIndexBeforeMetric ? $dbIndexBeforeMetric['months'] : array_fill_keys(array_keys($dbAfterMonth), 0);
 
-							$dbAfterMonthSum = array_sum($dbAfterMonth);
-							$dbBeforeMonthSum = array_sum($dbBeforeMonth);
+							$dbBeforeMonth = empty($_dbIndexBeforeMetric) ?  $this->changeToEmptyData($dbIndexBeforeMetric) : $_dbIndexBeforeMetric; // set value is 0 data when dbIndexBeforeMetric is empty
 
-							$numbersSubtract = ArrayReport::subtractArrays($dbBeforeMonth, $dbAfterMonth);
+							$monthsAfter = $dbAfterMonth['months'];
+							$monthsBefore = $dbBeforeMonth['months'];
+							$afterMonthSum = array_sum($monthsAfter);
+							$beforeMonthSum = array_sum($monthsBefore);
+							
+							$dbAfterQuarter = $this->calculateQuarterData($monthsAfter);
+							$dbBeforeQuarter = $this->calculateQuarterData($monthsBefore);
+							$countYear = count($years);
+
+							
+							// $show value that is calculated for percent on each item
+							$percentValForQuarters = ArrayReport::calculatePercentBetween2Months($dbBeforeQuarter, $dbAfterQuarter);
+							$percentValForMonths = ArrayReport::calculatePercentBetween2Months($monthsBefore, $monthsAfter);
+							$percentValForYears = self::calculatePercentForYears($beforeMonthSum, $afterMonthSum);
+
+							if($countYear === 1) {
+								$percentQuarterWhenOneYear = self::calculatePercentDifference($dbAfterQuarter);
+								$percentMonthWhenOneYear = self::calculatePercentDifference($monthsAfter);
+							} 
+
 							$array = [
-								'meta_subtract_number' =>[
-									'months' => $numbersSubtract,
-									'years' => $dbAfterMonthSum - $dbBeforeMonthSum,
-									'quarters' => $dbAfterMonthSum - $dbBeforeMonthSum
-									],
 								'meta_percent' => [
-									'months' => '',
-									'years' => $dbBeforeMonthSum ? ($dbAfterMonthSum - $dbBeforeMonthSum)/$dbBeforeMonthSum: null,
-									'quarters' => $dbBeforeMonthSum ? ($dbAfterMonthSum - $dbBeforeMonthSum)/$dbBeforeMonthSum: null,
+									'months' => $countYear === 1 ? $percentMonthWhenOneYear : $percentValForMonths,
+									'years' => $percentValForYears,
+									'quarters' => $countYear === 1 ? $percentQuarterWhenOneYear : $percentValForQuarters
 									],
 								];
-							$monthData = $afterData['months'];
-							$quarterData = $this->calculateQuarterData($monthData);
-
+							// show original value
 							$dataRender = [
 								$afterYear => [
-									'months' => $afterData['months'],
-									'years' => $afterData['total_months'],
-									'quarters' => $quarterData,
+									'months' => $dbAfterMonth['months'],
+									'years' => $dbAfterMonth['total_months'],
+									'quarters' => $dbAfterQuarter,
 									]
 								];
 							$data[$afterYear][$index][$keyOfChild]['comparison_with'/* .$beforeYear */] = $array;
 							$data[$afterYear][$index][$keyOfChild]['data_render'] = $dataRender;
-
-							// dd($dataRender);
 						} else {
 							// dd($_dbIndexBeforeMetric);
 							$data[$afterYear][$index][$keyOfChild]['data_render'] = [];
@@ -202,12 +227,11 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 					}
 				}
 			}
-		// dump($data);
+		// dd($data);
 		return $data;
 	}
 
 	private function makeDataToBuildTable($dataSource) {
-		// dd($dataSource);
 		$result = [];
 		foreach ($dataSource as $scopeId => $values) {
 			$scopeName = Term::find($scopeId)->toArray()['name'];
@@ -236,7 +260,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				$result[$scopeId][$ghgCatId] = $arr1;
 			}
 		}
-		// dd($result);
 		return $result;
 	}
 
@@ -244,17 +267,17 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		// dd($params);
 		$months = [];
 		$result['years'] = is_array($params['year']) ? $params['year'] : [$params['year']];
-		if(Report::checkValueOfField($params, 'half_year')){
-			$months = $params['half_year']  === 'start_half_year' ? range(1, 6): range(7,12);
+		if(Report::checkValueOfField($params, 'only_month')) {
+			$months = $params['only_month'];
 			$columnType = 'months';
 		}elseif(Report::checkValueOfField($params, 'quarter_time')){
 			$months =  array_map(fn($item) => 'QTR'.$item, $params['quarter_time']);
 			$columnType = 'quarters';
 
-		} elseif(Report::checkValueOfField($params, 'only_month')) {
-			$months = $params['only_month'];
+		}elseif(Report::checkValueOfField($params, 'half_year')){
+			$months = $params['half_year']  === 'start_half_year' ? range(1, 6): range(7,12);
 			$columnType = 'months';
-		} else {
+		}else {
 			$months = $params['year'];
 			$columnType = 'years';
 		}
@@ -341,7 +364,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		$params['year'] = $this->year;
 		return $params;
 	}
-
 
 	public function createInfoToRenderTable($dataSource)
 	{
