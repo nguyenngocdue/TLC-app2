@@ -44,6 +44,11 @@
         "column_name": "owner_id",
         "new": "true"
     },
+    "_attachment_esg_induction": {
+        "name": "_attachment_esg_induction",
+        "column_name": "attachment_esg_induction",
+        "new": "true"
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",

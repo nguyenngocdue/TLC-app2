@@ -210,4 +210,24 @@ class DateReport
         return $result;
     }
 
+    public static function monthsToQuarters($months) {
+        $quarters = [
+            'QTR1' => [1, 2, 3],
+            'QTR2' => [4, 5, 6],
+            'QTR3' => [7, 8, 9],
+            'QTR4' => [10, 11, 12],
+        ];
+
+        $result = [];
+        foreach ($months as $month) {
+            foreach ($quarters as $quarter => $quarterMonths) {
+                if (in_array($month, $quarterMonths)) {
+                    $result[$quarter][] = $month;
+                    break;
+                }
+            }
+        }
+        return $result;
+    }
+
 }

@@ -37,6 +37,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 			$dataSource = $instance->changeDataSource($dataSource,$params);
 			$valueOfYears[$year] = $dataSource;
 		}
+		// dd($valueOfYears[2023]['tableDataSource']);
 		return $valueOfYears;
 	}
 	public function getParamColumns($dataSource,$modeType)
@@ -76,6 +77,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				$a = $items[$index];
 				if(!$a) continue;
 				$arr = array_map(function($item) {
+					// dd($item);
 					$item['months'] = array_fill_keys(array_keys($item['months']), 0); // reset value of months
 					$item['total_months'] = 0;// reset value of total_months
 					return $item;
@@ -97,6 +99,19 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 	private function calculatePercentForYear($dataBefore, $dataAfter) {
 		return $dataBefore ? ($dataAfter - $dataBefore)/$dataBefore : $dataAfter;
+	}
+	
+	private function calculateQuarterData($data){
+		$months = array_keys($data);
+		$quarters = DateReport::monthsToQuarters($months);
+
+		$result = [];
+		foreach($quarters as $k => $values){
+			$valuesOfInterest = array_intersect_key($data, array_flip($values));
+			$total = array_sum($valuesOfInterest);
+			$result[$k] = $total;
+		}
+		return $result;
 	}
 
 	private function filterDataInNextYear($dataToCheck, $dataToFilter){
@@ -160,42 +175,27 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 									'quarters' => $dbAfterMonthSum - $dbBeforeMonthSum
 									],
 								'meta_percent' => [
-									'months' => self::calculatePercentForQuarter($dbBeforeMonth, $dbAfterMonth),
+									'months' => '',
 									'years' => $dbBeforeMonthSum ? ($dbAfterMonthSum - $dbBeforeMonthSum)/$dbBeforeMonthSum: null,
 									'quarters' => $dbBeforeMonthSum ? ($dbAfterMonthSum - $dbBeforeMonthSum)/$dbBeforeMonthSum: null,
 									],
-								'meta_normal_number' => [
-										'months' => [
-											$afterYear => $dbAfterMonth,
-											// $beforeYear => $dbBeforeMonth,
-										],
-										'years' => [
-											$afterYear => $dbAfterMonthSum,
-											// $beforeYear => $dbBeforeMonthSum,
-										],
-										'quarters' => [
-											$afterYear => $dbAfterMonthSum,
-											// $beforeYear => $dbBeforeMonthSum,
-										]
-
-									]		
 								];
-								// dd($afterData);
+							$monthData = $afterData['months'];
+							$quarterData = $this->calculateQuarterData($monthData);
+
 							$dataRender = [
 								$afterYear => [
-									'months' => $dbAfterMonth,
+									'months' => $afterData['months'],
 									'years' => $afterData['total_months'],
-									'quarters' => $dbAfterMonthSum
+									'quarters' => $quarterData,
 									]
 								];
 							$data[$afterYear][$index][$keyOfChild]['comparison_with'/* .$beforeYear */] = $array;
 							$data[$afterYear][$index][$keyOfChild]['data_render'] = $dataRender;
 
-							// if($afterYear === 2021) {
-							// 	dd($dataMetricAfter, $afterData);
-							// }
+							// dd($dataRender);
 						} else {
-							dd($_dbIndexBeforeMetric);
+							// dd($_dbIndexBeforeMetric);
 							$data[$afterYear][$index][$keyOfChild]['data_render'] = [];
 							$data[$afterYear][$index][$keyOfChild]['comparison_with'/* .$beforeYear */] = [];
 						}
@@ -241,6 +241,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 	}
 
 	private function createDateTime($params){
+		// dd($params);
 		$months = [];
 		$result['years'] = is_array($params['year']) ? $params['year'] : [$params['year']];
 		if(Report::checkValueOfField($params, 'half_year')){
@@ -265,6 +266,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 	public function changeDataSource($dataSource, $params)
 	{
 		$data = [];
+		// dd($dataSource);
 		foreach ($dataSource as $key => $values) $data[$key] = $values['tableDataSource']['scopes'] ?? [];
 
 		$dataOfMonthOfYear = [];
@@ -275,7 +277,8 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 					$dataOfMonthOfYear[$scopeId][$ghgTmplId][$year] = $items;
 					$childrenMetrics[$scopeId][$ghgTmplId][$year] = array_map(function($item) {
 						if(isset($item['children_metrics'])){
-							return $item['children_metrics'];
+							$arr = $item['children_metrics'];
+							return $arr;
 						}
 					}, $items);
 				}

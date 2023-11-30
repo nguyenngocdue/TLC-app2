@@ -7,10 +7,8 @@ use App\BigThink\ModelExtended;
 class Esg_induction_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "owner_id",
-        "name", "description", "esg_induction_id", "the_date",
-        "trainee_type", "trainee_count", "hours", "total_hours", "remark",
-        "status", "order_no",
+        "id", "owner_id", "name", "description", "esg_induction_id", "the_date",
+        "trainee_type", "trainee_count", "hours", "total_hours", "remark", "status", "order_no",
     ];
     public static $statusless = true;
     public static $nameless = true;
@@ -38,6 +36,8 @@ class Esg_induction_line extends ModelExtended
             ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'esg_induction_id', 'value_as_parent_id' => true, 'invisible' => true,],
+            ['dataIndex' => 'the_date',],
+            ['dataIndex' => 'description',],
             ['dataIndex' => 'trainee_type',],
             ['dataIndex' => 'trainee_count', 'footer' => 'agg_sum'],
 

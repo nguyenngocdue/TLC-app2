@@ -7,14 +7,8 @@ use App\BigThink\ModelExtended;
 class Esg_induction extends ModelExtended
 {
     protected $fillable = [
-        "id", "owner_id",
-        "name",
-        "description",
-        "the_month",
-        "workplace_id",
-        "total_trainees",
-        "total_hours",
-        "status",
+        "id", "owner_id", "name", "description", "the_month", "workplace_id",
+        "total_trainees", "total_hours", "status",
     ];
     // public static $statusless = true;
     public static $nameless = true;
@@ -28,6 +22,7 @@ class Esg_induction extends ModelExtended
     public static $eloquentParams = [
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
         'getLines' => ['hasMany', Esg_induction_line::class, 'esg_induction_id'],
+        "attachment_esg_induction" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public function getWorkplace()
@@ -40,5 +35,12 @@ class Esg_induction extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function attachment_esg_induction()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 }
