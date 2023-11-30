@@ -1,13 +1,13 @@
 {
     "new": {
         "name": "new",
-        "location": "",
+        "location": "0.00 0.00",
         "new": "",
         "active": "true"
     },
     "active": {
         "name": "active",
-        "location": "",
+        "location": "240.00 0.00",
         "new": "true",
         "active": ""
     }
