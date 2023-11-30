@@ -14,4 +14,15 @@ class NumberReport
         $number = $number > 0  ? 100 - $number : -1*($number !== 0 ? 100 - abs($number) : null);
         return $number;
     }
+
+    public static function sumByMonth($data) {
+        $result = [];
+        foreach ($data as $item) {
+            foreach ($item as $month => $value) {
+                if (!isset($result[$month])) $result[$month] = 0;
+                $result[$month] += $value;
+            }
+        }
+        return $result;
+    }
 }

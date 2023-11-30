@@ -15,8 +15,8 @@
 }
 
 </style>
-
 @php
+	$widthCell = 88;
 	$class1 = "bg-white border-gray-600 border-l border-b";
 	$class2 =" bg-gray-100 px-4 py-3 border-gray-600 ";
 	$complexSettingTable = $tableDataSource['tableSetting'];
@@ -32,10 +32,6 @@
 	//dd($months);
 @endphp
 {{-- @dd($columnType) --}}
-
-
-
-
 <div class="rounded-lg border-gray-950 border-2 overflow-hidden">
     <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
 		<thead>
@@ -311,16 +307,38 @@
 						@endif
 				@endforeach
 		<tr>
-		{{-- @dump($months) --}}
-			{{-- @php
-				$totalEmissionMetricType = $tableData['totalEmissionMetricType'];
-				$totalEmissionMetricTypeEachMonth = $tableData['totalEmissionMetricTypeEachMonth'];
-			@endphp
-			<td class="p-2 text-right font-bold border-r border-gray-600"  colspan="6">Total Emissions</td>
-			<td class="p-2 text-right font-bold text-red-600 "  colspan="1">{{$totalEmissionMetricType}}</td>
-			@foreach($totalEmissionMetricTypeEachMonth as $key => $value)
-				<td class="p-2 text-right font-bold text-red-600 border-l border-gray-600">{{$value}}</td>
-			@endforeach --}}
+		@php
+			$infoSummaryAllColumn = $tableDataSource['infoSummaryAllColumn'][$columnType];
+			$dataRender = $infoSummaryAllColumn['data_render'];
+			$comparison = $infoSummaryAllColumn['comparison_with'];
+		@endphp
+			<td class="bg-white border-l border-gray-600 " colspan="5"></td>
+            <td class=" text-left text-base tracking-wide font-bold">Total Emissions</td>
+			@switch($columnType)
+				@case('years')
+					@foreach($years as $year) 
+						@php
+							$tco2e  = (float)$dataRender[$year] === (float)0 ? null: $dataRender[$year];
+							$difference= (float)$comparison[$year] === (float)0 ? null: $comparison[$year];
+						@endphp
+						@include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference])
+					@endforeach
+					@break
+				@case('months' || 'quarter')
+					@foreach($months as $month)
+						@foreach($years as $year)
+							@php
+								$tco2e  = (float)$dataRender[$month][$year] === (float)0 ? null: $dataRender[$month][$year];
+								$difference= (float)$comparison[$month][$year] === (float)0 ? null: $comparison[$month][$year];
+								//dd($comparison);
+							@endphp
+							@include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference])
+						@endforeach
+					@endforeach
+					@break
+				@default
+					@break
+			@endswitch
 		</tr>
 		</tbody>
 	</table>

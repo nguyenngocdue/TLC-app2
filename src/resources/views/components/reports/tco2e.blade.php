@@ -1,6 +1,9 @@
 <td class='w-[{{$widthCell}}px] h-[60px] text-right border-t border-l p-2 border-gray-600 relative '>
     <div class="align-middle">
         <div class=' items-baseline flex justify-end'>
+{{--         @if(is_array($tco2e))
+        @dd($tco2e)
+        @endif --}}
         {{-- @dd($tco2e) --}}
         {{-- @dump($difference) --}}
         @if(!is_null($tco2e))

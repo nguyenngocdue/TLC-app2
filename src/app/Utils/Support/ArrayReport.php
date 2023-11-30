@@ -27,6 +27,27 @@ class ArrayReport
         // dump($result);
         return $result;
     }
+    public static function separateByYear($data) {
+        $result = [];
+    
+        foreach ($data as $item) {
+            foreach ($item as $year => $values) {
+                if (!isset($result[$year])) $result[$year] = [];
+                $result[$year][] = $values;
+            }
+        }
+        return $result;
+    }
+    public static function rearrangeArray($data) {
+        $result = [];
+        foreach ($data as $year => $quarters) {
+            foreach ($quarters as $quarter => $value) {
+                if (!isset($result[$quarter]))$result[$quarter] = [];
+                $result[$quarter][$year] = $value;
+            }
+        }
+        return $result;
+    }
     
 
 }

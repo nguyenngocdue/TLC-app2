@@ -153,6 +153,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		$years = array_keys($data);
 		$year = last($years);
 		$countLines = count($data[$year]);
+		$dataForColumn = [];
 
 		// dd(count($years) - 1, $years);
 		for ($i = count($years) - 1; $i > -1; $i--) { 
@@ -219,6 +220,10 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 								];
 							$data[$afterYear][$index][$keyOfChild]['comparison_with'/* .$beforeYear */] = $array;
 							$data[$afterYear][$index][$keyOfChild]['data_render'] = $dataRender;
+
+							// Save data to summary columns
+							$dataForColumn[$afterYear][] = $dataRender[$afterYear];
+
 						} else {
 							// dd($_dbIndexBeforeMetric);
 							$data[$afterYear][$index][$keyOfChild]['data_render'] = [];
@@ -227,8 +232,8 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 					}
 				}
 			}
-		// dd($data);
-		return $data;
+		// dd($data, $dataForColumn);
+		return [$data, $dataForColumn];
 	}
 
 	private function makeDataToBuildTable($dataSource) {
@@ -260,6 +265,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				$result[$scopeId][$ghgCatId] = $arr1;
 			}
 		}
+		// dd($result);
 		return $result;
 	}
 
@@ -286,10 +292,49 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		return $result;
 	}
 
+
+	private function sumValuesColumn($data, $params){
+		$dataSeparateYears = ArrayReport::separateByYear($data);
+		$dataSeparateYears = array_map(fn($item) => array_merge(...$item), $dataSeparateYears);
+		$columnType = $this->createDateTime($params)['columnType'];
+		$countYear = count($params['year']);
+		
+		$result = [];
+		switch ($columnType) {
+			case 'years':
+				$re = [];
+				foreach ($dataSeparateYears as $year => $values){
+					$dataByColumnType = array_sum(array_column($values, $columnType));
+					$re[$year] = $dataByColumnType;
+				}
+				ksort($re);
+				$result[$columnType]['data_render'] = $re;
+				$result[$columnType]['comparison_with'] = self::calculatePercentDifference($re);
+				break;
+			case 'months' || 'quarters':
+				$re = [];
+				$comparison = [];
+				foreach ($dataSeparateYears as $year => $values){
+					$dataByColumnType = array_column($values, $columnType);
+					$summary = NumberReport::sumByMonth($dataByColumnType);
+					$percent = self::calculatePercentDifference($summary);
+					// dd($summary, $percent);
+					$re[$year] = $summary;
+					$comparison[$year] = $percent;
+				}
+				$result[$columnType]['data_render'] = ArrayReport::rearrangeArray($re);
+				// dd($comparison);
+				$result[$columnType]['comparison_with'] = ArrayReport::rearrangeArray($comparison);
+				break;
+			default:
+				break;
+		}
+		return $result;
+	}
+
 	public function changeDataSource($dataSource, $params)
 	{
 		$data = [];
-		// dd($dataSource);
 		foreach ($dataSource as $key => $values) $data[$key] = $values['tableDataSource']['scopes'] ?? [];
 
 		$dataOfMonthOfYear = [];
@@ -308,6 +353,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 			}
 		}
 		$dataSet = [];
+		$dataForColumn = [];
 		// dd($childrenMetrics);
 
 		foreach ($childrenMetrics as $scopeId => &$values) {
@@ -324,7 +370,8 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 					}
 				}
 				// dd($items);
-				$comparisonData = $this->comparisonData($items);
+				[$comparisonData, $_dataForColumn] = $this->comparisonData($items);
+				$dataForColumn[] = $_dataForColumn;
 				$items = $comparisonData;
 				$allYear = array_keys($items);
 				foreach ($allYear as $y) {
@@ -339,7 +386,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				}
 			}
 		}
-
 		// dump($dataSet, $childrenMetrics);
 		// make data to build table the same ghg-sheet-050
 		$scopeData = $this->makeDataToBuildTable($childrenMetrics);
@@ -354,7 +400,9 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		$result['timeInfo'] = $timeArray;
 
 		$result['dataSet'] = $dataSet;
-		// dd($result);
+
+		$infoSummaryAllColumn = self::sumValuesColumn($dataForColumn, $params);
+		$result['infoSummaryAllColumn'] = $infoSummaryAllColumn;
 		return collect($result);
 	}
 
