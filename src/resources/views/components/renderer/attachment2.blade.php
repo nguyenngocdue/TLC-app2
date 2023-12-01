@@ -9,6 +9,16 @@
         $border = $hasOrphan ? "red" : "gray";
         $title = $hasOrphan ? "Orphan image found. Will attach after this document is saved.":"";
         $extension = $attachment['extension'] ?? "";
+       
+        $isProd = str_starts_with($attachment['url_folder'], 'app2_prod') || str_starts_with($attachment['url_folder'], 'avatars');
+        $isTesting = str_starts_with($attachment['url_folder'], 'app2_beta');
+        $isDev = !($isProd || $isTesting);
+
+        $sameEnv = false;
+        if(app()->isProduction() && $isProd) $sameEnv = true; 
+        if(app()->isTesting() && $isTesting) $sameEnv = true; 
+        if(app()->isLocal() && $isDev) $sameEnv = true;        
+
         @endphp
         @if($hasOrphan)
         <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
@@ -45,7 +55,7 @@
                     <span class="text-sm">{{$attachment['filename']}}</span>
                 </a>
                 @if(!$readOnly)
-                    @if($destroyable)
+                    @if($destroyable && $sameEnv)
                     <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
                         <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
                     </button>

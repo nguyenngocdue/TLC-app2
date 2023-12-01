@@ -3,6 +3,8 @@
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\App;
 
+//isLocal --> laravel has this function by default
+
 App::macro('isTesting', function () {
     return env('APP_ENV') == "testing";
 });
