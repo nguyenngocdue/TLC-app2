@@ -33,8 +33,8 @@ class MenuProfile extends Component
                 break;
             case "testing":
                 $app = 'beta2.tlcmodular.com';
-                $redis = '192.168.100.100:25902';
-                $phpMyAdmin = "192.168.100.100:28102";
+                $redis = '192.168.100.80:25902';
+                $phpMyAdmin = "192.168.100.80:28102";
                 break;
             case "local":
             default:
