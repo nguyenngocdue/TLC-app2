@@ -29,7 +29,7 @@
 	$years = $tableDataSource['timeInfo']['years'];
 	$columnType = $tableDataSource['timeInfo']['columnType'];
 	$dataSet = $tableDataSource['dataSet'];
-	//dd($months);
+	#dump($tableData['scopes'][337]);
 @endphp
 {{-- @dd($columnType) --}}
 <div class="rounded-lg border-gray-950 border-2 overflow-hidden">
@@ -98,7 +98,6 @@
 			</tr>
 		</thead>
 
-
 		<tbody>
 			<tr>
 				<td class="w-20 text-center border-r border-gray-600" rowspan="{{$totalSpan}}"><span style="font-weight:700;font-style:normal">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</span></td>
@@ -128,7 +127,7 @@
 												$ghgTmplName =  \App\Utils\Support\StringReport::removeNumbersAndChars($ghgTmplName);
 												$indexChildrenMetric = $val3['index_children_metric'];
 												$childrenMetric = $tableData['scopes'][$k1][$k2][$indexChildrenMetric]['children_metrics'] ?? [];
-												//dd($childrenMetric);
+												//dump($childrenMetric);
 											@endphp
 											<td class="p-2 {{$class1}}" title="#{{$k3}}" rowspan="{{$rowSpanLv3}}">
 												{!! $k3 !== '0' ? "<a href='" . route('ghg_tmpls.edit', $k3 ?? 0) . "'>" . $ghgTmplName . "</a>" : '' !!} 
@@ -183,8 +182,8 @@
 																@endphp
 																	@foreach($years as $year)
 																		@php
-																			$arr = $dataSet[$k1][$k2][$year] ?? [];
-																			$itemsToCheck = $arr[$k2][$k3];
+																			$arr = $dataSet[$k1][$k2][$year];
+																			$itemsToCheck = $arr[$k2][$k3] ?? [];
 																			$standardItem = $childrenMetric[0];
 
 																			//indexItem
@@ -281,7 +280,7 @@
 																					$valueForColType = $arr[$k2][$k3][$i]['data_render'][$year][$columnType]  ?? 0;
 
 																					$arr = $dataSet[$k1][$k2][$year];
-																					$itemsToCheck = $arr[$k2][$k3];
+																					$itemsToCheck = $arr[$k2][$k3] ?? [];
 																					$standardItem = $childrenMetric[$i];
 																					//indexItem
 																					$dataIndex =  App\Utils\Support\Report::checkItem($itemsToCheck, $standardItem);
@@ -297,7 +296,7 @@
 																@break
 																
 														@endswitch
-													</tr>				
+													</tr>
 												@endif
 											@endfor
 										@endif
@@ -306,6 +305,8 @@
 							@endforeach
 						@endif
 				@endforeach
+			</tr>
+		
 		<tr>
 		@php
 			$infoSummaryAllColumn = $tableDataSource['infoSummaryAllColumn'][$columnType];
@@ -330,7 +331,6 @@
 							@php
 								$tco2e  = (float)$dataRender[$month][$year] === (float)0 ? null: $dataRender[$month][$year];
 								$difference= (float)$comparison[$month][$year] === (float)0 ? null: $comparison[$month][$year];
-								//dd($comparison);
 							@endphp
 							@include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference])
 						@endforeach

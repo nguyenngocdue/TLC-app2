@@ -166,11 +166,11 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				$dbBeforeMetric = $data[$beforeYear][$index] ?? [];
 
 				// set comparison's values for metric2
-				// dump($afterYear,$dataMetricAfter);
 				foreach ($dataMetricAfter as $keyOfChild => $dbAfterMonth) {
 					if(!is_array($dbAfterMonth) || empty($dbAfterMonth)) continue;
 
 					// get Id to check
+					if(!isset($dbAfterMonth['ghg_tmpls_id'])) continue;
 					$dataToCheck = [
 						"ghg_tmpls_id" => $dbAfterMonth['ghg_tmpls_id'],
 						"ghg_metric_type_id" => $dbAfterMonth['ghg_metric_type_id'],
@@ -275,6 +275,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		$result['years'] = is_array($params['year']) ? $params['year'] : [$params['year']];
 		if(Report::checkValueOfField($params, 'only_month')) {
 			$months = $params['only_month'];
+			$months = ArrayReport::addZeroBeforeNumber($months);
 			$columnType = 'months';
 		}elseif(Report::checkValueOfField($params, 'quarter_time')){
 			$months =  array_map(fn($item) => 'QTR'.$item, $params['quarter_time']);
@@ -297,7 +298,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		$dataSeparateYears = ArrayReport::separateByYear($data);
 		$dataSeparateYears = array_map(fn($item) => array_merge(...$item), $dataSeparateYears);
 		$columnType = $this->createDateTime($params)['columnType'];
-		$countYear = count($params['year']);
+		// $countYear = count($params['year'] ?? []);
 		
 		$result = [];
 		switch ($columnType) {
@@ -316,6 +317,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				$comparison = [];
 				foreach ($dataSeparateYears as $year => $values){
 					$dataByColumnType = array_column($values, $columnType);
+					dd($dataSeparateYears);
 					$summary = NumberReport::sumByMonth($dataByColumnType);
 					$percent = self::calculatePercentDifference($summary);
 					// dd($summary, $percent);
@@ -347,6 +349,8 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 						if(isset($item['children_metrics'])){
 							$arr = $item['children_metrics'];
 							return $arr;
+						}else {
+							return [];//[$item];
 						}
 					}, $items);
 				}
@@ -354,7 +358,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		}
 		$dataSet = [];
 		$dataForColumn = [];
-		// dd($childrenMetrics);
 
 		foreach ($childrenMetrics as $scopeId => &$values) {
 			foreach ($values as $ghgTmplId => &$items){
@@ -386,7 +389,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				}
 			}
 		}
-		// dump($dataSet, $childrenMetrics);
 		// make data to build table the same ghg-sheet-050
 		$scopeData = $this->makeDataToBuildTable($childrenMetrics);
 
@@ -423,33 +425,47 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 			$num = 0;
 			$emptyChildrenMetrics = 0;
 			foreach ($items as $values){
-				$item = array_filter($values, fn($ele) => !empty($ele))[0] ?? [];
-				if(empty($item)) continue;
+				$item = array_filter($values, function($item) {
+					if(!empty($item)) return true;
+				}) ?? [];
+				$item = reset($item);
 
-				$ghgcate_id = $item['ghgcate_id'];
-				$countLv2 = Report::countChildrenItemsByKey2($values);
-				// dd($countLv2);
-				$info[$k][$ghgcate_id]['scope_rowspan_lv2'] = $countLv2;
-				
-				foreach ($values  as $index => $val){
-					if(empty($val)) continue;
-					$item = $val['children_metrics'] ?? [];
-					$ghg_tmpl_id = $val['ghg_tmpl_id'];
-					$info[$k][$ghgcate_id][$ghg_tmpl_id]['scope_rowspan_lv3'] = (count($item) ? count($item) : 1);
-					$info[$k][$ghgcate_id][$ghg_tmpl_id]['index_children_metric'] = $index;
-
-					if(isset($val['children_metrics'])) {
-						$count = count($val['children_metrics']);
-						$num += $count;
-					} else{
-						$emptyChildrenMetrics += 1;
+				if(!empty($item)) {
+					$ghgcate_id = $item['ghgcate_id'];
+					if(is_null($ghgcate_id)) continue;
+					$countLv2 = Report::countChildrenItemsByKey2($values);
+					// dump($countLv2, $values);
+					$info[$k][$ghgcate_id]['scope_rowspan_lv2'] = $countLv2;
+					
+					foreach ($values  as $index => $val){
+						if(!empty($val)) {
+							$item = $val['children_metrics'] ?? [];
+							$ghg_tmpl_id = $val['ghg_tmpl_id'];
+							if(is_null($ghg_tmpl_id)) continue;
+							// dump(count($item));
+							$info[$k][$ghgcate_id][$ghg_tmpl_id]['scope_rowspan_lv3'] = (count($item) ? count($item) : 0);
+							$info[$k][$ghgcate_id][$ghg_tmpl_id]['index_children_metric'] = $index;
+		
+							if(isset($val['children_metrics'])) {
+								$count = count($val['children_metrics']);
+								$num += $count;
+							} else{
+								$emptyChildrenMetrics += 1;
+							}
+						};
 					}
 				}
 			}
-			$info[$k]['scope_rowspan_lv1'] = $num +$emptyChildrenMetrics;
-			$totalLine += $num + $emptyChildrenMetrics;
+			$info[$k]['scope_rowspan_lv1'] = array_sum(array_column($info[$k], "scope_rowspan_lv2"));
+			// $info[$k]['scope_rowspan_lv1'] = $num +$emptyChildrenMetrics;
+			// $totalLine += $num + $emptyChildrenMetrics;
 		}
-		$info['total_line'] = $totalLine;
+		$totalLine = [];
+		foreach($info as $values) {
+			if(is_numeric($values)) continue;
+			$totalLine[] = $values['scope_rowspan_lv1'];
+		};
+		$info['total_line'] = array_sum($totalLine)+10;
 		// dump($info);
 		return $info;
 	}
