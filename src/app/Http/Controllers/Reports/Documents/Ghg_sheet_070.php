@@ -12,6 +12,7 @@ use App\Utils\Support\ArrayReport;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\NumberReport;
 use App\Utils\Support\Report;
+use Hamcrest\Core\IsInstanceOf;
 
 class Ghg_sheet_070 extends Report_ParentDocument2Controller
 {
@@ -283,6 +284,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 		}elseif(Report::checkValueOfField($params, 'half_year')){
 			$months = $params['half_year']  === 'start_half_year' ? range(1, 6): range(7,12);
+			$months = ArrayReport::addZeroBeforeNumber($months);
 			$columnType = 'months';
 		}else {
 			$months = $params['year'];
@@ -293,13 +295,35 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		return $result;
 	}
 
+	private function calculateTotalEmissionsByVerticalColumns($data, $columnType) {
+		$result = [];
+		foreach($data as $values){
+			$array = [];
+			foreach ($values as $y => $value){
+				$array[$y] = array_merge(Report::getLastArrayValuesByKey($value, $columnType));
+			}
+			$result[] = $array;
+		}
+		$result = ArrayReport::mergeCommonKeys($result);
+		$dataMerge = [];
+		foreach($result as $key => $values) $dataMerge[$key] = array_merge(...$values);
+		$result2 = [];
+		foreach($dataMerge as $year => $values){
+				$summary = NumberReport::sumByMonth($values);
+				$result2[$year] = $summary;
+		}
+		$result2 = ArrayReport::rearrangeArray($result2);
+		return $result2;
+	}
+	
 
-	private function sumValuesColumn($data, $params){
+	private function sumValuesColumnForTotalEmission($data, $params){
 		$dataSeparateYears = ArrayReport::separateByYear($data);
 		$dataSeparateYears = array_map(fn($item) => array_merge(...$item), $dataSeparateYears);
 		$columnType = $this->createDateTime($params)['columnType'];
-		// $countYear = count($params['year'] ?? []);
-		
+		$countYear = is_array($params['year']) ? count($params['year']) : 1;
+
+		$year = is_array($params['year']) ? last($params['year']) : $params['year'];
 		$result = [];
 		switch ($columnType) {
 			case 'years':
@@ -313,20 +337,22 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				$result[$columnType]['comparison_with'] = self::calculatePercentDifference($re);
 				break;
 			case 'months' || 'quarters':
-				$re = [];
+				$calculationDb = $this->calculateTotalEmissionsByVerticalColumns($data, $columnType);
 				$comparison = [];
-				foreach ($dataSeparateYears as $year => $values){
-					$dataByColumnType = array_column($values, $columnType);
-					dd($dataSeparateYears);
-					$summary = NumberReport::sumByMonth($dataByColumnType);
-					$percent = self::calculatePercentDifference($summary);
-					// dd($summary, $percent);
-					$re[$year] = $summary;
-					$comparison[$year] = $percent;
+				// calculate percent for each column
+				if($countYear === 1){
+					$indexData = array_map(fn($item)=> last(array_values($item)), $calculationDb);
+					$re = $this->calculatePercentDifference($indexData);
+					$comparison = array_map(fn($item)=> [$year => $item], $re);
+				} else {
+					foreach ($calculationDb as $m => $values){
+						ksort($values);
+						$re = $this->calculatePercentDifference($values);
+						$comparison[$m] = $re;
+					}
 				}
-				$result[$columnType]['data_render'] = ArrayReport::rearrangeArray($re);
-				// dd($comparison);
-				$result[$columnType]['comparison_with'] = ArrayReport::rearrangeArray($comparison);
+				$result[$columnType]['data_render'] = $calculationDb;
+				$result[$columnType]['comparison_with'] = $comparison;
 				break;
 			default:
 				break;
@@ -403,7 +429,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 		$result['dataSet'] = $dataSet;
 
-		$infoSummaryAllColumn = self::sumValuesColumn($dataForColumn, $params);
+		$infoSummaryAllColumn = self::sumValuesColumnForTotalEmission($dataForColumn, $params);
 		$result['infoSummaryAllColumn'] = $infoSummaryAllColumn;
 		return collect($result);
 	}

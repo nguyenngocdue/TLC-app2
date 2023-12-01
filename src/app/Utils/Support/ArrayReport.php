@@ -52,4 +52,20 @@ class ArrayReport
     public static function addZeroBeforeNumber($values){
         return array_map(fn($item) => str_pad($item, 2, '0', STR_PAD_LEFT), $values);
     }
+
+    public static function mergeCommonKeys($data)
+    {
+        $result = [];
+        foreach ($data as $item) {
+            foreach ($item as $commonKey => $commonKeyData) {
+                if (!isset($result[$commonKey])) {
+                    $result[$commonKey] = [];
+                }
+                foreach ($commonKeyData as $index => $value) {
+                    $result[$commonKey][$index][] = $value;
+                }
+            }
+        }
+        return $result;
+    }
 }
