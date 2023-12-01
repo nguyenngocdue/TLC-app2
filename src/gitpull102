@@ -1,4 +1,10 @@
-git pull && sudo chown 82:82 * -R && sudo chmod 777 storage/framework/* -R
+git pull 
+sudo chown 82:82 * -R                  #UBUNTU
+sudo chmod 777 storage/framework/* -R  #UBUNTU
+
+#chown 82:82 * -R                       #ALPINE
+#chmod 777 storage/framework/* -R       #ALPINE
+
 docker exec -it laravel102_php php artisan cache:clear
 docker exec -it laravel102_php php artisan view:clear
 docker exec -it laravel102_php php artisan config:clear
