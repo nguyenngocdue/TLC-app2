@@ -271,7 +271,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 	}
 
 	private function createDateTime($params){
-		// dd($params);
 		$months = [];
 		$result['years'] = is_array($params['year']) ? $params['year'] : [$params['year']];
 		if(Report::checkValueOfField($params, 'only_month')) {
@@ -286,7 +285,12 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 			$months = $params['half_year']  === 'start_half_year' ? range(1, 6): range(7,12);
 			$months = ArrayReport::addZeroBeforeNumber($months);
 			$columnType = 'months';
-		}else {
+		} elseif (ArrayReport::areSpecificKeysAllNull($params, ['half_year', 'quarter_time', 'only_month'])) {
+			$months = ArrayReport::addZeroBeforeNumber(range(1,12));
+			$months = ArrayReport::addZeroBeforeNumber($months);
+			$columnType = 'months';
+		}
+		else {
 			$months = $params['year'];
 			$columnType = 'years';
 		}
@@ -376,7 +380,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 							$arr = $item['children_metrics'];
 							return $arr;
 						}else {
-							return [];//[$item];
+							return [$item];//[$item];
 						}
 					}, $items);
 				}
@@ -443,8 +447,10 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 	public function createInfoToRenderTable($dataSource)
 	{
+		
 		if(!isset($dataSource['scopes'])) return [];
 		$allScopes = $dataSource['scopes'];
+		// dd($allScopes);
 		$info = [];
 		$totalLine = 2;
 		foreach ($allScopes as $k => $items) {
@@ -467,8 +473,11 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 						if(!empty($val)) {
 							$item = $val['children_metrics'] ?? [];
 							$ghg_tmpl_id = $val['ghg_tmpl_id'];
-							if(is_null($ghg_tmpl_id)) continue;
-							// dump(count($item));
+							if(!$ghg_tmpl_id){
+								$ghg_tmpl_id = last($item)['ghg_tmpl_id'];
+							}
+
+							// if(is_null($ghg_tmpl_id)) continue;
 							$info[$k][$ghgcate_id][$ghg_tmpl_id]['scope_rowspan_lv3'] = (count($item) ? count($item) : 0);
 							$info[$k][$ghgcate_id][$ghg_tmpl_id]['index_children_metric'] = $index;
 		

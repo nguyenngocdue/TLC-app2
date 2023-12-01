@@ -68,4 +68,12 @@ class ArrayReport
         }
         return $result;
     }
+
+    public static function areSpecificKeysAllNull($array, $keys)
+    {
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $array) && $array[$key] !== null) return false;
+        }
+        return true;
+    }
 }

@@ -17,7 +17,7 @@
 </style>
 @php
 	$widthCell = 88;
-	$class1 = "bg-white border-gray-600 border-l border-b";
+	$class1 = "bg-white border-gray-600 border-l border-b border-t";
 	$class2 =" bg-gray-100 px-4 py-3 border-gray-600 ";
 	$complexSettingTable = $tableDataSource['tableSetting'];
 	$tableData = $tableDataSource['tableDataSource'];
@@ -213,7 +213,7 @@
 															@php
 																$numOfMonths = count($months);
 															@endphp
-															@for($i = 0; $i <= $numOfMonths; $i++)
+															@for($i = 1; $i <= $numOfMonths; $i++)
 																<td class="text-center {{$class1}}"><i class="fa-light fa-minus"></i></td>
 															@endfor
 													@endif
@@ -245,7 +245,6 @@
 															{!! (float)$idMetricType2 > 0 ? "<a href='" . route('ghg_metric_types.edit', $idMetricType2 ?? 0) . "'>" . $nameMetricType2 . "</a>" : "<i class='fa-light fa-minus'></i>" !!} 
 														</td>
 														{{-- Months --}}
-														{{-- @dd($dataSet) --}}
 														@switch($columnType)
 															@case('years')
 																	@foreach($years as $key => $year)
@@ -313,8 +312,7 @@
 			$dataRender = $infoSummaryAllColumn['data_render'];
 			$comparison = $infoSummaryAllColumn['comparison_with'];
 		@endphp
-			<td class="bg-white border-l border-gray-600 " colspan="5"></td>
-            <td class=" text-left text-base tracking-wide font-bold">Total Emissions</td>
+			<td class="bg-white border-l border-gray-600 text-center text-base tracking-wide font-bold" " colspan="5">Total Emissions</td>
 			@switch($columnType)
 				@case('years')
 					@foreach($years as $year) 
@@ -332,7 +330,7 @@
 								$tco2e  = (float)$dataRender[$month][$year] === (float)0 ? null: $dataRender[$month][$year];
 								$difference= (float)$comparison[$month][$year] === (float)0 ? null: $comparison[$month][$year];
 							@endphp
-							@include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference])
+							@include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference, 'fontBold'=> 'font-bold'])
 						@endforeach
 					@endforeach
 					@break
