@@ -10,6 +10,7 @@ docker exec -it laravel202_php php artisan event:clear
 docker exec -it laravel202_php php artisan route:clear
 docker exec -it laravel202_php php artisan route:cache
 
-supervisorctl restart all
+supervisorctl restart horizon_beta2
+supervisorctl restart queue_worker_beta2
 
 echo "Don't forget to run php artisan migrate to have the latest version of DB"
