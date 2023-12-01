@@ -29,7 +29,7 @@
 	$years = $tableDataSource['timeInfo']['years'];
 	$columnType = $tableDataSource['timeInfo']['columnType'];
 	$dataSet = $tableDataSource['dataSet'];
-	#dump($tableData['scopes'][337]);
+	//dd($tableData['scopes'][335]);
 @endphp
 {{-- @dd($columnType) --}}
 <div class="rounded-lg border-gray-950 border-2 overflow-hidden">
@@ -45,7 +45,7 @@
 			@switch($columnType)
 				@case("years")
 					<th id="" colspan="{{count($years)}}" class=" border-l bg-gray-100 py-2 border-gray-600 border-b">
-							<div class="text-gray-700 dark:border-gray-600 ">
+							<div class="font-bold dark:border-gray-600 ">
 								<span>Year </br><p class="font-normal">(tCO2e)</p></span>
 							</div>
 						</th>
@@ -53,7 +53,7 @@
 				@case("months" || "quarters")
 						@foreach($months as $month)
 						<th id="" colspan="{{count($years)}}" class=" border-l bg-gray-100 py-2 border-gray-600 border-b">
-							<div class="text-gray-700 dark:border-gray-600 ">
+							<div class="font-bold dark:border-gray-600 ">
 									@php
 										$value = App\Utils\Support\DateReport::getMonthAbbreviation($month);
 									@endphp
@@ -282,7 +282,7 @@
 																					$itemsToCheck = $arr[$k2][$k3] ?? [];
 																					$standardItem = $childrenMetric[$i];
 																					//indexItem
-																					$dataIndex =  App\Utils\Support\Report::checkItem($itemsToCheck, $standardItem);
+																					$dataIndex =  App\Utils\Support\Report::checkItem($itemsToCheck, $standardItem) ?? [];
 																					$valueForColType = empty($dataIndex) ? '' : $dataIndex['data_render'][$year][$columnType][$month];
 																					$numberComparison = empty($dataIndex) ? null :  ($dataIndex['comparison_with']["meta_percent"][$columnType][$month] ?? null);
 																					$numberComparison = (float)$numberComparison === (float)0 ? null : $numberComparison;
@@ -312,7 +312,7 @@
 			$dataRender = $infoSummaryAllColumn['data_render'];
 			$comparison = $infoSummaryAllColumn['comparison_with'];
 		@endphp
-			<td class="bg-white border-l border-gray-600 text-center text-base tracking-wide font-bold" " colspan="5">Total Emissions</td>
+			<td class="bg-white border-l border-gray-600 text-center text-base tracking-wide font-bold" colspan="6">Total Emissions</td>
 			@switch($columnType)
 				@case('years')
 					@foreach($years as $year) 
@@ -327,8 +327,12 @@
 					@foreach($months as $month)
 						@foreach($years as $year)
 							@php
-								$tco2e  = (float)$dataRender[$month][$year] === (float)0 ? null: $dataRender[$month][$year];
-								$difference= (float)$comparison[$month][$year] === (float)0 ? null: $comparison[$month][$year];
+							$tco2e = null;
+							$difference = null;
+								if(isset($dataRender[$month][$year])) {
+									$tco2e  = (float)$dataRender[$month][$year] === (float)0 ? null: $dataRender[$month][$year];
+									$difference= (float)$comparison[$month][$year] === (float)0 ? null: $comparison[$month][$year];
+								}
 							@endphp
 							@include('components.reports.tco2e', ['widthCell'=> $widthCell, 'class1' => $class1, 'tco2e' => $tco2e, 'difference' => $difference, 'fontBold'=> 'font-bold'])
 						@endforeach

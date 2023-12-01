@@ -408,5 +408,22 @@ class Report
         }
         return null;
     }
+
+    // for document-ghg_sheet_070
+    public static function includeDataByKeys($data1, $data2, $keys){
+        foreach($data2  as $k2 => &$item1s){
+            foreach($data1 as $k1 => $item2s){
+                foreach ($keys as $keyToCheck){
+                    if($item1s[$keyToCheck] !== $item2s[$keyToCheck]){
+                        $item1s['months'] = array_fill_keys(array_keys($item1s['months']), 0);
+                        $item1s['total_months'] = 0;
+                    }
+                    
+                }
+            }
+        }
+        $arrayMerged = array_merge($data1, $data2);
+        return $arrayMerged;
+    }
     
 }

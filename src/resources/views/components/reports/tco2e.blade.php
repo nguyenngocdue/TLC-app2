@@ -2,7 +2,8 @@
     <div class="align-middle">
         <div class=' items-baseline flex justify-end'>
         @if(!is_null($tco2e))
-            <span class="{{$fontBold ?? ''}} items-center flex text-base">{{$tco2e > 0 ? (number_format($tco2e, 2)): ''}}
+            <span class="{{$fontBold ?? ''}} items-center flex text-base">
+                {!! $tco2e > 0 ? number_format($tco2e, 2) : '<i class="fa-light fa-minus"></i>' !!}
                 @if($difference < 0)
                     <i class="  text-green-600 text-xs fa-solid fa-triangle rotate-180 pr-1"></i>
                 @elseif($difference > 0)

@@ -10,8 +10,10 @@ class NumberReport
     }
 
     public static function calculatePercentNumber($value1, $value2){
-        $number = $value2 && $value1 > 0 ? round((((float)$value2 - (float)$value1)*100 / (float)$value1), 2) : 0;
-        $number = $number > 0  ? 100 - $number : -1*($number !== 0 ? 100 - abs($number) : null);
+        $value2 = (float)$value2;
+        $value1 = (float)$value1;
+        $number = (float)($value2 - $value1) !== (float)0 && $value2 && $value1 > 0 ? round((($value2 - $value1)*100 / $value1), 2) : 0;
+        $number = $number > 0  ? $number : -1*($number !== 0 ? abs($number) : null);
         return $number;
     }
 

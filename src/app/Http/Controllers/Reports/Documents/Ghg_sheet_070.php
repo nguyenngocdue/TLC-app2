@@ -141,8 +141,12 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
         $previous = null;
         foreach ($data as $key => $current) {
             $previousValue = $previous ?? 0;
-			$number = $current && $previousValue > 0 ? round(($current - $previousValue)*100/$previousValue, 2) : 0;
-            $percent = $number > 0  ? 100 - $number : -1*($number !== 0 ? 100 - abs($number) : null);
+			$previous = (float)$previous;
+			$current = (float)$current;
+
+			$number = (float)($current - $previousValue) !== (float)0 && $current && $previousValue > 0 ? round(($current - $previousValue)*100/$previousValue, 2) : 0;
+			
+			$percent = $number > 0  ? $number : -1*($number !== 0 ? abs($number) : null);
             $result[$key] = NumberReport::formatNumber(number_format($percent,2));
             $previous = $current;
         }
@@ -203,7 +207,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 								$percentQuarterWhenOneYear = self::calculatePercentDifference($dbAfterQuarter);
 								$percentMonthWhenOneYear = self::calculatePercentDifference($monthsAfter);
 							} 
-
+							// show percent value
 							$array = [
 								'meta_percent' => [
 									'months' => $countYear === 1 ? $percentMonthWhenOneYear : $percentValForMonths,
@@ -363,9 +367,29 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		}
 		return $result;
 	}
+	private static function includeValuesToEnoughData($data){
+		$keyToCheck = ['ghg_tmpls_id', 'ghg_metric_type_id', 'ghg_metric_type_1_id', 'ghg_metric_type_2_id'];
+		$years = array_keys($data);
+		foreach ($data as $year => &$items){
+			foreach ($items as $ghgTmplId => &$values){
+				foreach($values as $k => &$item){
+					for ($i=0; $i < count($years); $i++) { 
+						$dataIndex1 = $data[$years[$i]][$ghgTmplId][$k]['children_metrics'] ?? [];
+						$dataIndex2 = isset($years[$i+1]) ? ($data[$years[$i+1]][$ghgTmplId][$k]['children_metrics'] ?? []) : [];
+						$dataInclude = Report::includeDataByKeys($dataIndex1, $dataIndex2, $keyToCheck);
+						$item['children_metrics'] = $dataInclude;
+					} 
+				}
+			}
+		}
+		// dump($data);
+		return $data;
+	}
 
 	public function changeDataSource($dataSource, $params)
 	{
+		// dd($dataSource);
+		$years = is_array($params['year']) ? $params['year'] : [$params['year']];
 		$data = [];
 		foreach ($dataSource as $key => $values) $data[$key] = $values['tableDataSource']['scopes'] ?? [];
 
@@ -375,6 +399,15 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 			foreach ($values as $scopeId => $items){
 				foreach ($items as $ghgTmplId => $items) {
 					$dataOfMonthOfYear[$scopeId][$ghgTmplId][$year] = $items;
+
+					$datFromManyYears = [];
+					foreach ($years as $_year){
+						$dataIndex = $data[$_year][$scopeId][$ghgTmplId];
+						$datFromManyYears[$_year][$ghgTmplId] = $dataIndex;
+					}
+					$dataInclude = self::includeValuesToEnoughData($datFromManyYears);
+					// dd($datFromManyYears);
+
 					$childrenMetrics[$scopeId][$ghgTmplId][$year] = array_map(function($item) {
 						if(isset($item['children_metrics'])){
 							$arr = $item['children_metrics'];
@@ -382,7 +415,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 						}else {
 							return [$item];//[$item];
 						}
-					}, $items);
+					}, $items); //$items
 				}
 			}
 		}
