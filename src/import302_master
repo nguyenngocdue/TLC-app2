@@ -1,0 +1,10 @@
+# How to use this script:
+# Extract the database file to laravel.sql in src folder, it is ignored from git
+# execute this script
+
+echo DROP laravel DATABASE
+echo DROP DATABASE IF EXISTS laravel | docker exec -i mysql302_master /usr/bin/mysql -u tlc_app_2 --password=DLTedTfrVzYbrYv9
+echo CREATE new larvel DATABASE
+echo CREATE DATABASE laravel | docker exec -i mysql302_master /usr/bin/mysql -u tlc_app_2 --password=DLTedTfrVzYbrYv9
+echo Importing data - approximately 80 seconds...
+time cat laravel.sql | docker exec -i mysql302_master /usr/bin/mysql -u tlc_app_2 --password=DLTedTfrVzYbrYv9 laravel

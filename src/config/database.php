@@ -43,6 +43,14 @@ return [
         ],
 
         "mysql" => [
+            // 'write' => [
+            //     'host' => 'mysql302_master',
+            // ],
+            // 'read' => [
+            //     'host' => 'mysql302_slave',
+            // ],
+            // 'sticky' => true,
+
             "driver"      => "mysql",
             "url"         => env("DATABASE_URL"),
             "host"        => env("DB_HOST", "127.0.0.1"),
@@ -190,35 +198,4 @@ return [
             "database" => env("REDIS_CACHE_DB", "1"),
         ],
     ],
-    // "redis_horizon" => [
-    //     "client" => env("REDIS_HORIZON_CLIENT", "phpredis"),
-
-    //     "options" => [
-    //         "cluster" => env("REDIS_HORIZON_CLUSTER", "redis"),
-    //         // "prefix" => env(
-    //         //     "REDIS_PREFIX",
-    //         //     Str::slug(env("APP_NAME", "laravel"), "_") . "_database_",
-    //         // ),
-    //         "prefix" => env(
-    //             "REDIS_HORIZON_PREFIX",
-    //             "",
-    //         ),
-    //     ],
-
-    //     "default" => [
-    //         "url" => env("REDIS_HORIZON_URL"),
-    //         "host" => env("REDIS_HORIZON_HOST", "127.0.0.1"),
-    //         "password" => env("REDIS_HORIZON_PASSWORD"),
-    //         "port" => env("REDIS_HORIZON_PORT", "6379"),
-    //         "database" => env("REDIS_HORIZON_DB", "0"),
-    //     ],
-
-    //     "cache" => [
-    //         "url" => env("REDIS_HORIZON_URL"),
-    //         "host" => env("REDIS_HORIZON_HOST", "127.0.0.1"),
-    //         "password" => env("REDIS_HORIZON_PASSWORD"),
-    //         "port" => env("REDIS_HORIZON_PORT", "6379"),
-    //         "database" => env("REDIS_HORIZON_CACHE_DB", "0"),
-    //     ],
-    // ],
 ];
