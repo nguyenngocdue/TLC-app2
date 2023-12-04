@@ -25,7 +25,7 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
     protected  $prod_routing_id = 49;
     protected $mode = '010';
     protected $maxH = 45;
-    protected $viewName="register-prod-sequence-010";
+    protected $viewName = "register-prod-sequence-010";
     protected $sequence_mode = 1;
 
     public function getSqlStr($params)
@@ -42,13 +42,6 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
     {
         return [
             [
-                'title' => 'Date',
-                'dataIndex' => 'picker_date',
-                'renderer' => 'picker_date',
-                'singleDatePicker' => true,
-                'validation' => 'required|date_format:d/m/Y',
-            ],
-            [
                 'title' => 'Project',
                 'dataIndex' => 'project_id',
             ],
@@ -64,13 +57,25 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
                 'hasListenTo' => true,
             ],
             [
+                'title' => 'Production Discipline',
+                'dataIndex' => 'prod_discipline_id',
+                'allowClear' => true,
+                // 'hasListenTo' => true,
+            ],
+            [
                 'title' => 'Mode',
                 'dataIndex' => 'sequence_mode',
+            ],
+            [
+                'title' => 'Date to compare',
+                'dataIndex' => 'picker_date',
+                'renderer' => 'picker_date',
+                'singleDatePicker' => true,
+                'validation' => 'required|date_format:d/m/Y',
             ],
         ];
     }
 
-    
     protected function getColorLegends()
     {
         $plural = 'qaqc_insp_chklst_shts';

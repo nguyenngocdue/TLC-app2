@@ -21,6 +21,7 @@ class ProdSequences extends MatrixForReportParent
         private $subProjectId = 107,
         private $dateToCompare = null,
         private $sequenceModeId = null,
+        private $prodDisciplineId = null,
     ) {
         parent::__construct("prod_sequences", $dateToCompare);
         // echo ($prodRoutingId . " - " . $subProjectId);
@@ -34,9 +35,13 @@ class ProdSequences extends MatrixForReportParent
             }])
             ->find($this->prodRoutingId);
         $allRoutingLinkDetails = $result->getProdRoutingDetails;
+        // dump($allRoutingLinkDetails[0]);
         $allRoutingLinkDetails = $allRoutingLinkDetails->sortBy("order_no");
         $allRoutingLinks = $allRoutingLinkDetails->map(fn ($item) => $item->getProdRoutingLink);
-        // dump($allRoutingLinks);
+        // dump($allRoutingLinks[0]);
+        if ($this->prodDisciplineId) {
+            $allRoutingLinks = $allRoutingLinks->filter(fn ($item) => ($item->prod_discipline_id == $this->prodDisciplineId));
+        }
 
         $toHide = config('prod_discipline.to_hide');
         $result = [];
