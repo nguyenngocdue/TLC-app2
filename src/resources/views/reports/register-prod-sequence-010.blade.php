@@ -8,7 +8,7 @@
     $projectId = $params['project_id'];
     $subProjectId = $params['sub_project_id'];
     $prodRoutingId = $params['prod_routing_id'];
-    $prodDisciplineId = $params['prod_discipline_id'];
+    $prodDisciplineId = $params['prod_discipline_id'] ?? null;
     $sequenceModeId = $params['sequence_mode'];
     $dateToCompare = isset($params['picker_date']) ? App\Utils\Support\DateReport::basicFormatDateString(str_replace('/', '-', $params['picker_date']), 'Y-m-d'): null;
     
