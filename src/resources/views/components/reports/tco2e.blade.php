@@ -30,7 +30,9 @@
             @endif
         </div>
         @else
-            
+            <span class="{{$fontBold ?? ''}} items-center flex text-base">
+                    <i class="fa-light fa-minus"></i>
+            </span>
         @endif
     </div>
 </td>

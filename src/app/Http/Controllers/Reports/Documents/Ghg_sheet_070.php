@@ -472,8 +472,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		// make data to build table the same ghg-sheet-050
 		$scopeData = $this->makeDataToBuildTable($childrenMetrics);
 		// $scopeData = $childrenMetrics;
-		// dd($scopeData);
-
 		$groupByScope = ['scopes' => $scopeData];
 		$result['tableDataSource'] = ['scopes' => $scopeData];
 		$result['tableSetting'] = $this->createInfoToRenderTable($groupByScope);
@@ -487,7 +485,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 		$infoSummaryAllColumn = self::sumValuesColumnForTotalEmission($dataForColumn, $params);
 		$result['infoSummaryAllColumn'] = $infoSummaryAllColumn;
-		// dd($result);
 		return collect($result);
 	}
 
@@ -545,7 +542,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 					}
 				}
 			}
-			$info[$k]['scope_rowspan_lv1'] = array_sum(array_column($info[$k], "scope_rowspan_lv2"));
+			$info[$k]['scope_rowspan_lv1'] = array_sum(array_column(($info[$k] ?? []), "scope_rowspan_lv2"));
 			// $info[$k]['scope_rowspan_lv1'] = $num +$emptyChildrenMetrics;
 			// $totalLine += $num + $emptyChildrenMetrics;
 		}

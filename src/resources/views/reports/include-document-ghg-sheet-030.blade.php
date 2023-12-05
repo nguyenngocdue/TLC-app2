@@ -1,5 +1,5 @@
 <x-renderer.heading level=2 class='text-center'>Reports for Each Sheet</x-renderer.heading>
-<div class="rounded-lg border-gray-950 border-2 overflow-hidden">
+<div class="rounded-lg border-gray-950 border-2 overflow-hidden overflow-x-auto max-w-[1800px]  scrollbar-thumb-gray-100">
 	<table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
 		<thead class='border-b'>
 			<tr>
@@ -9,7 +9,7 @@
 				@switch($columnName)
 					@case("years")
 						<th id="" colspan="{{count($years)}}" class=" border-l bg-gray-100 py-2 border-gray-600 border-b">
-								<div class="text-gray-700 dark:border-gray-600 ">
+								<div class=" dark:border-gray-600 ">
 									<span>Year </br><p class="font-normal">(tCO2e)</p></span>
 								</div>
 							</th>
@@ -17,7 +17,7 @@
 					@case("months" || "quarter")
 							@foreach($timeValues as $value)
 							<th id="" colspan="{{count($years)}}" class=" border-l bg-gray-100 py-2 border-gray-600 border-b">
-								<div class="text-gray-700 dark:border-gray-600 ">
+								<div class=" dark:border-gray-600 ">
 										@php
 											$value = $topNameCol ? $value:  App\Utils\Support\DateReport::getMonthAbbreviation($value);
 										@endphp
@@ -167,12 +167,12 @@
 			</tr>
 			@endforeach
 			@endforeach
-			<tr>
+			<tr class="border-gray-600 border-b">
 				{{-- End Row --}}
 					@php
 					$totalEmissions = array_values($tableDataSource['total_emission']);
 					@endphp
-					<td class="bg-white border-l border-gray-600 " colspan="2"></td>
+					<td class="bg-white border-l border-gray-600" colspan="2"></td>
 					<td class=" text-left text-base tracking-wide font-bold">Total Emissions</td>
 					@if(count($years) > 1)
 						@foreach(array_values($totalEmissions) as $values)
