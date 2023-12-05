@@ -240,14 +240,15 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		// dd($data, $dataForColumn);
 		return [$data, $dataForColumn];
 	}
-
-	private function makeDataToBuildTable($dataSource) {
+/* 	private function makeDataToBuildTable($dataSource) {
+		// dump($dataSource);
 		$result = [];
 		foreach ($dataSource as $scopeId => $values) {
 			$scopeName = Term::find($scopeId)->toArray()['name'];
 			foreach ($values as $ghgCatId => $childrenMetrics){
 				$ghgCatName = Ghg_cat::find($ghgCatId)->toArray()['name'];
 				$childMetrics = last(array_values($childrenMetrics));
+				// dd($childMetrics);
 				$arr1 = [];
 				foreach($childMetrics as $k => $metrics){
 					$firstMetrics = reset($metrics);
@@ -268,6 +269,44 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 					$arr1[] = $arr;
 				}
 				$result[$scopeId][$ghgCatId] = $arr1;
+			}
+		}
+		// dd($result);
+		return $result;
+	}
+ */
+	private function makeDataToBuildTable($dataSource) {
+		$result = [];
+		foreach ($dataSource as $scopeId => $values) {
+			$scopeName = Term::find($scopeId)->toArray()['name'];
+			foreach ($values as $ghgCatId => $childrenMetrics){
+				$ghgCatName = Ghg_cat::find($ghgCatId)->toArray()['name'];
+
+				$dataIndex  = [];
+				$dataFirstYear = reset($childrenMetrics);
+				foreach ($dataFirstYear as $k => $items){
+					foreach ($items as $keyChild => $child){
+						$arr = [];
+						// dd($items);
+						if($child){
+							$ghgTmplId = isset($child['ghg_tmpls_id']) ? $child['ghg_tmpls_id'] : null;
+							$ghgTmplName = isset($child['ghg_tmpls_name']) ? $child['ghg_tmpls_name'] : null;
+							$arr = [
+								"scope_id" => $scopeId,
+								"scope_name" => $scopeName,
+								"ghgcate_id" => $ghgCatId,
+								'ghgcate_name' => $ghgCatName,
+								'ghg_tmpl_id' => $ghgTmplId,
+								'ghg_tmpl_name' => $ghgTmplName,
+								'children_metrics' => $items
+							];
+						}
+						$dataFirstYear[$k] = $arr;
+						break;
+					}
+				}
+				$result[$scopeId][$ghgCatId] = $dataFirstYear;
+				// dd($dataFirstYear, $dataSource);
 			}
 		}
 		// dd($result);
@@ -373,16 +412,19 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		foreach ($data as $year => &$items){
 			foreach ($items as $ghgTmplId => &$values){
 				foreach($values as $k => &$item){
+					// dd($item);
 					for ($i=0; $i < count($years); $i++) { 
-						$dataIndex1 = $data[$years[$i]][$ghgTmplId][$k]['children_metrics'] ?? [];
+						// $dataIndex1 = $data[$years[$i]][$ghgTmplId][$k]['children_metrics'] ?? [];
+						$dataIndex1 = $item['children_metrics'] ?? [];
 						$dataIndex2 = isset($years[$i+1]) ? ($data[$years[$i+1]][$ghgTmplId][$k]['children_metrics'] ?? []) : [];
 						$dataInclude = Report::includeDataByKeys($dataIndex1, $dataIndex2, $keyToCheck);
+
 						$item['children_metrics'] = $dataInclude;
 					} 
 				}
 			}
 		}
-		// dump($data);
+		// dd($data);
 		return $data;
 	}
 
@@ -399,39 +441,45 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 			foreach ($values as $scopeId => $items){
 				foreach ($items as $ghgTmplId => $items) {
 					$dataOfMonthOfYear[$scopeId][$ghgTmplId][$year] = $items;
-
+					
 					$datFromManyYears = [];
 					foreach ($years as $_year){
 						$dataIndex = $data[$_year][$scopeId][$ghgTmplId];
 						$datFromManyYears[$_year][$ghgTmplId] = $dataIndex;
 					}
 					$dataInclude = self::includeValuesToEnoughData($datFromManyYears);
-					// dd($datFromManyYears);
+					// dump($dataInclude);
+					// dd($dataInclude);
 
-					$childrenMetrics[$scopeId][$ghgTmplId][$year] = array_map(function($item) {
+/* 					$childrenMetrics[$scopeId][$ghgTmplId][$year] = array_map(function($item) {
 						if(isset($item['children_metrics'])){
 							$arr = $item['children_metrics'];
 							return $arr;
 						}else {
 							return [$item];//[$item];
 						}
-					}, $items); //$items
+					}, $items); //$items */
+
+					$childrenMetrics[$scopeId][$ghgTmplId][$year] = array_map(function($item) use ($ghgTmplId) {
+						return array_column($item[$ghgTmplId], 'children_metrics');
+					}, $dataInclude)[$year]; //$items
+					// dd($childrenMetrics[$scopeId][$ghgTmplId][$year]);
 				}
 			}
 		}
 		$dataSet = [];
 		$dataForColumn = [];
+		// dd($childrenMetrics);
 
 		foreach ($childrenMetrics as $scopeId => &$values) {
 			foreach ($values as $ghgTmplId => &$items){
 				foreach ($items as $year => $item) {
-					// dd($item);
 					foreach ($item as $index => $array){
 						if(is_null($array)){
 							// override data for years without metrics
 							$newValues = $this->getValidValueByIndex($items, $index);
 							$items[$year][$index] = $newValues;
-							continue;
+							// continue;
 						}
 					}
 				}
@@ -452,8 +500,12 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				}
 			}
 		}
+		// dd($childrenMetrics);
+
 		// make data to build table the same ghg-sheet-050
 		$scopeData = $this->makeDataToBuildTable($childrenMetrics);
+		// $scopeData = $childrenMetrics;
+		// dd($scopeData);
 
 		$groupByScope = ['scopes' => $scopeData];
 		$result['tableDataSource'] = ['scopes' => $scopeData];
@@ -468,6 +520,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 		$infoSummaryAllColumn = self::sumValuesColumnForTotalEmission($dataForColumn, $params);
 		$result['infoSummaryAllColumn'] = $infoSummaryAllColumn;
+		// dd($result);
 		return collect($result);
 	}
 
@@ -496,6 +549,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				$item = reset($item);
 
 				if(!empty($item)) {
+					// dd($item);
 					$ghgcate_id = $item['ghgcate_id'];
 					if(is_null($ghgcate_id)) continue;
 					$countLv2 = Report::countChildrenItemsByKey2($values);

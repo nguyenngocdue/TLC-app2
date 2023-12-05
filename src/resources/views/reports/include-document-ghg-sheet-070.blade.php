@@ -29,7 +29,7 @@
 	$years = $tableDataSource['timeInfo']['years'];
 	$columnType = $tableDataSource['timeInfo']['columnType'];
 	$dataSet = $tableDataSource['dataSet'];
-	//dd($tableData['scopes'][335]);
+	//dd($dataSet);
 @endphp
 {{-- @dd($columnType) --}}
 <div class="rounded-lg border-gray-950 border-2 overflow-hidden">
