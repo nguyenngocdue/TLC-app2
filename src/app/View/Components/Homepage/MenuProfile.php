@@ -28,8 +28,8 @@ class MenuProfile extends Component
         switch (env('APP_ENV')) {
             case "production":
                 $app = 'app2.tlcmodular.com';
-                $redis = '192.168.100.100:15902';
-                $phpMyAdmin = "192.168.100.100:18102";
+                $redis = '192.168.100.80:15902';
+                $phpMyAdmin = "192.168.100.80:18102";
                 break;
             case "testing":
                 $app = 'beta2.tlcmodular.com';
