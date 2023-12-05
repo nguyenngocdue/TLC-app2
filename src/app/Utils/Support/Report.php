@@ -314,9 +314,14 @@ class Report
     }
 
     public static function assignValues($params) {
-        $timeValues = isset($params['only_month']) ? $params['only_month']: (isset($params['quarter_time']) ? $params['quarter_time'] : $params['year']);
+        $months = [];
+        if (isset($params['half_year'])){
+            $months = $params['half_year']  === 'start_half_year' ? range(1, 6): range(7,12);
+            $months = ArrayReport::addZeroBeforeNumber($months);
+        }
+        $timeValues = isset($params['only_month']) ? $params['only_month']: (isset($params['quarter_time']) ? $params['quarter_time'] : (isset($params['half_year']) ? $months:  $params['year']));
         $topNameCol = isset($params['only_month']) ? '' : (isset($params['quarter_time']) ?  'QTR' : 'Year');
-        $columnName = isset($params['only_month']) ? 'months' : (isset($params['quarter_time']) ?  'quarters' : 'years');
+        $columnName = isset($params['only_month']) ? 'months' : (isset($params['quarter_time']) ?  'quarters' : (isset($params['half_year']) ? 'months' : 'years'));
         
         return compact('timeValues', 'topNameCol', 'columnName');
     }

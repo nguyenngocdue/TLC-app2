@@ -240,41 +240,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		// dd($data, $dataForColumn);
 		return [$data, $dataForColumn];
 	}
-/* 	private function makeDataToBuildTable($dataSource) {
-		// dump($dataSource);
-		$result = [];
-		foreach ($dataSource as $scopeId => $values) {
-			$scopeName = Term::find($scopeId)->toArray()['name'];
-			foreach ($values as $ghgCatId => $childrenMetrics){
-				$ghgCatName = Ghg_cat::find($ghgCatId)->toArray()['name'];
-				$childMetrics = last(array_values($childrenMetrics));
-				// dd($childMetrics);
-				$arr1 = [];
-				foreach($childMetrics as $k => $metrics){
-					$firstMetrics = reset($metrics);
-					$arr = [];
-					if($firstMetrics){
-						$ghgTmplId = isset($firstMetrics['ghg_tmpls_id']) ? $firstMetrics['ghg_tmpls_id'] : null;
-						$ghgTmplName = isset($firstMetrics['ghg_tmpls_name']) ? $firstMetrics['ghg_tmpls_name'] : null;
-						$arr = [
-							"scope_id" => $scopeId,
-							"scope_name" => $scopeName,
-							"ghgcate_id" => $ghgCatId,
-							'ghgcate_name' => $ghgCatName,
-							'ghg_tmpl_id' => $ghgTmplId,
-							'ghg_tmpl_name' => $ghgTmplName,
-							'children_metrics' => $metrics
-						];
-					}
-					$arr1[] = $arr;
-				}
-				$result[$scopeId][$ghgCatId] = $arr1;
-			}
-		}
-		// dd($result);
-		return $result;
-	}
- */
+	
 	private function makeDataToBuildTable($dataSource) {
 		$result = [];
 		foreach ($dataSource as $scopeId => $values) {
@@ -331,7 +297,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		} elseif (ArrayReport::areSpecificKeysAllNull($params, ['half_year', 'quarter_time', 'only_month'])) {
 			$months = ArrayReport::addZeroBeforeNumber(range(1,12));
 			$months = ArrayReport::addZeroBeforeNumber($months);
-			$columnType = 'months';
+			$columnType = 'years';
 		}
 		else {
 			$months = $params['year'];
@@ -339,6 +305,7 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		}
 		$result['months'] = $months;
 		$result['columnType'] = $columnType;
+		// dump($result, $params);
 		return $result;
 	}
 

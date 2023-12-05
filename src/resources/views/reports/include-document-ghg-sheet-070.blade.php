@@ -15,6 +15,7 @@
 }
 
 </style>
+
 @php
 	$widthCell = 88;
 	$class1 = "bg-white border-gray-600 border-l border-b border-t";
@@ -31,7 +32,8 @@
 	$dataSet = $tableDataSource['dataSet'];
 	//dd($dataSet);
 @endphp
-{{-- @dd($columnType) --}}
+{{-- @dump($columnType) --}}
+<x-renderer.heading level=2 class='text-center'>Detailed Metric Report</x-renderer.heading>
 <div class="rounded-lg border-gray-950 border-2 overflow-hidden">
     <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
 		<thead>
@@ -283,7 +285,7 @@
 																					$standardItem = $childrenMetric[$i];
 																					//indexItem
 																					$dataIndex =  App\Utils\Support\Report::checkItem($itemsToCheck, $standardItem) ?? [];
-																					$valueForColType = empty($dataIndex) ? '' : $dataIndex['data_render'][$year][$columnType][$month];
+																					$valueForColType = empty($dataIndex) ? '' : ($dataIndex['data_render'][$year][$columnType][$month] ?? '');
 																					$numberComparison = empty($dataIndex) ? null :  ($dataIndex['comparison_with']["meta_percent"][$columnType][$month] ?? null);
 																					$numberComparison = (float)$numberComparison === (float)0 ? null : $numberComparison;
 																				@endphp

@@ -7,6 +7,7 @@ use App\Http\Controllers\Reports\Reports\Ghg_sheet_dataSource;
 use App\Http\Controllers\Reports\TraitConversionFieldNameGhgReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
+use App\Utils\Support\ArrayReport;
 use App\Utils\Support\DocumentReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Str;
@@ -30,6 +31,12 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 				'title' => 'Year',
 				'dataIndex' => 'year',
 				'multiple' => true,
+			],
+			[
+				'title' => 'Half Year',
+				'dataIndex' => 'half_year',
+				'hasListenTo' => true,
+				'allowClear' => true,
 			],
 			[
 				'title' => 'Quarter',
@@ -67,23 +74,32 @@ class Ghg_sheet_030 extends Report_ParentDocument2Controller
 
 	public function changeDataSource($dataSource, $params)
 	{
-		$groupByScope = [];
-		if (isset($params['only_month'])) {
-			$fieldsTime = array_map(
+		$groupData = [];
+		if (isset($params['only_month']) || isset($params['half_year'])) {
+
+			$monthsOfHalfYear = $params['half_year']  === 'start_half_year' ? range(1, 6): range(7,12);
+			$monthsOfHalfYear = ArrayReport::addZeroBeforeNumber($monthsOfHalfYear);
+			$fieldsTime = isset($params['only_month']) ? array_map(
 				fn ($item) => $item = strlen($item) < 2 ? '0' . $item : $item,
 				$params['only_month']
-			);
-			$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'months');
+			) : $monthsOfHalfYear;
+			$groupData = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'months');
+
 		} elseif (isset($params['quarter_time'])) {
 			$fieldsTime = array_map(fn ($item) => Str::singular('quarters') . $item, $params['quarter_time']);
-			$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'quarters');
+			$groupData = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'quarters');
 		} else {
 			$fieldsTime = array_map(fn ($item) =>  $item, $params['year']);
-			$groupByScope = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'years');
-			// dd($groupByScope);
+			$groupData = $this->makeDataByTypeTime($fieldsTime, $dataSource, 'years');
 		}
-		// dd(collect($groupByScope));
-		return collect($groupByScope);
+
+		// document-ghg_sheet_070
+		$insDataGhgSheet070 = new  Ghg_sheet_070();
+		$dataGhgSheet070 = $insDataGhgSheet070->getDataSource($params);
+		$dataSource070 = $insDataGhgSheet070->changeDataSource($dataGhgSheet070, $params);
+		$groupData['ghg_sheet_070'] = $dataSource070;
+		// dump($groupData);
+		return collect($groupData);
 	}
 
 
