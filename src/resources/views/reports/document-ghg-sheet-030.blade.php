@@ -15,7 +15,6 @@
     $topNameCol =  $modelLink['topNameCol'];
     $columnName = $modelLink['columnName'];
     $years = $params['year'];
-    #$layout = 'md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl';
     $layout = 'max-w-[1920px] ';
 @endphp
 
@@ -31,14 +30,14 @@
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
         {{-- Ggh_sheet-030 --}}
-        <div style='' class="min-w-[990px] min-h-[990px] items-center bg-white box-border p-8">
+        <div style='' class="max-w-[2000px] min-h-[990px] items-center bg-white box-border p-8">
             <div class="pt-5">
                 @include('reports.include-document-ghg-sheet-030')
             </div>
         </div>
         <x-renderer.page-break />
         {{-- Ggh_sheet-070 --}}
-        <div style='' class="min-w-[990px] min-h-[990px] items-center bg-white box-border p-8">
+        <div style='' class="max-w-[2000px] min-h-[990px] items-center bg-white box-border p-8">
             <div class="pt-5">
                 @include('reports.include-document-ghg-sheet-070', ['tableDataSource' => $dataGhgSheet070])
             </div>

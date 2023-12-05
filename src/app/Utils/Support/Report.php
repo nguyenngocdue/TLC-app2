@@ -320,7 +320,7 @@ class Report
             $months = ArrayReport::addZeroBeforeNumber($months);
         }
         $timeValues = isset($params['only_month']) ? $params['only_month']: (isset($params['quarter_time']) ? $params['quarter_time'] : (isset($params['half_year']) ? $months:  $params['year']));
-        $topNameCol = isset($params['only_month']) ? '' : (isset($params['quarter_time']) ?  'QTR' : 'Year');
+        $topNameCol = isset($params['only_month']) ? '' : (isset($params['quarter_time']) ?  'QTR' :  (isset($params['half_year']) ? '': 'Year'));
         $columnName = isset($params['only_month']) ? 'months' : (isset($params['quarter_time']) ?  'quarters' : (isset($params['half_year']) ? 'months' : 'years'));
         
         return compact('timeValues', 'topNameCol', 'columnName');

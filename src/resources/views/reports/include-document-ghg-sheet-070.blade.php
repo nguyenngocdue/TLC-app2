@@ -38,12 +38,13 @@
     <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
 		<thead>
 		<tr class="rounded-t-lg bg-gray-100 border">
-			<th class="w-20 {{$class2}} border-b" colspan="2">Category</th>
-			<th class="w-[300px] p-2 {{$class2}} border-l border-b">Emission source category</th>
-			<th class="w-20 {{$class2}} border-l  border-b">Source</th>
-			<th class="w-20 {{$class2}} border-l  border-b">Metric 0</th>
-			<th class="w-20 {{$class2}} border-l  border-b">Metric 1</th>
-			<th class="w-20 {{$class2}} border-l  border-b">Metric 2</th>
+			<th class="tracking-wide w-20 {{$class2}} border-b" colspan="2">Category</th>
+			<th class="tracking-wide w-[300px] p-2 {{$class2}} border-l border-b">Emission source category</th>
+			<th class="tracking-wide w-20 {{$class2}} border-l  border-b">Source</th>
+			<th class="tracking-wide w-20 {{$class2}} border-l  border-b">Metric 0</th>
+			<th class="tracking-wide w-20 {{$class2}} border-l  border-b">Metric 1</th>
+			<th class="tracking-wide w-20 {{$class2}} border-l  border-b">Metric 2</th>
+
 			@switch($columnType)
 				@case("years")
 					<th id="" colspan="{{count($years)}}" class=" border-l bg-gray-100 py-2 border-gray-600 border-b">
