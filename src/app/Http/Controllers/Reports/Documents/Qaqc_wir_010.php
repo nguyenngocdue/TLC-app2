@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitFilterProdRoutingShowsOnScreen;
+use App\Models\Sub_project;
+use App\Utils\Support\ArrayReport;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
+use App\Utils\Support\ParameterReport;
 use App\Utils\Support\Report;
 use Exception;
 use Illuminate\Support\Arr;
@@ -70,6 +73,14 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         }
         $valOfParams = $this->generateValuesFromParamsReport($params);
+
+        if((isset($params['sub_project_id']) && !is_numeric($x = $params['sub_project_id']) && is_null(last($x)))  || !isset($x)
+        ){
+            $strIdsSubProjects = ParameterReport::getStringIds('sub_project_id');
+            $valOfParams['sub_project_id'] = $strIdsSubProjects;
+        }
+
+
         $sql = " SELECT *
                             ,IF(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),
                                 -- Calculate after period
@@ -119,7 +130,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                         LEFT JOIN prod_routings _pr ON _pr.id = mtm1.term_id AND _pr.id IN ( $strIdsRoutings )
                                         ) pr ON pr.prod_routing_id = po.prod_routing_id
                                         LEFT JOIN projects pj ON sp.project_id = pj.id
-                                        LEFT JOIN qaqc_wirs wir ON wir.prod_order_id = po.id 
+                                        LEFT JOIN qaqc_wirs wir ON wir.prod_order_id = po.id AND wir.deleted_by IS NULL
                                                                 AND wir.deleted_by IS NULL
                                                                 AND wir.prod_routing_id = pr.prod_routing_id
                                                                 AND wir.sub_project_id = sp.id";
@@ -134,18 +145,19 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                                             )
 
                                                                             LEFT JOIN (
-                                                    	SELECT DISTINCT pr.id AS prod_routing_id, SUM(po.quantity) AS prod_order_qty, COUNT(po.id) AS prod_order_in_wir
+                                                    	SELECT DISTINCT  sp.project_id AS project_id, pr.id AS prod_routing_id, SUM(po.quantity) AS prod_order_qty, COUNT(po.id) AS prod_order_in_wir
                                                               FROM prod_orders po, sub_projects sp, prod_routings pr
                                                                 WHERE 1 = 1
                                                                     AND pr.id IN ( $strIdsRoutings)
                                                                     AND po.sub_project_id = sp.id
                                                                     AND pr.id = po.prod_routing_id
-                                                                    AND pr.name != '-- available'";
+                                                                    AND pr.name != '-- available'
+                                                                    ";
         if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND pr.id IN ({$valOfParams['prod_routing_id']})";
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND sp.id IN ({$valOfParams['sub_project_id']})";
         if (Report::checkValueOfField($valOfParams, 'project_id')) $sql .= "\n AND sp.project_id IN ({$valOfParams['project_id']})";
 
-        $sql .= "\n GROUP BY prod_routing_id ) tb_count_order ON tb_count_order.prod_routing_id = pr.prod_routing_id
+        $sql .= "\n GROUP BY prod_routing_id, project_id) tb_count_order ON tb_count_order.prod_routing_id = pr.prod_routing_id AND tb_count_order.project_id = sp.project_id
                                                     WHERE 1 = 1";
 
         if (Report::checkValueOfField($valOfParams, 'project_id')) $sql .= "\n AND sp.project_id IN ({$valOfParams['project_id']})";
@@ -169,7 +181,9 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                 ) AS tb2 ON tb2.prod_routing_id = tb1.prod_routing_id
 
                                                 LEFT JOIN (SELECT
-                                                wir.prod_routing_id AS wir_prod_routing_id ,
+                                                wir.project_id  AS project_id,
+												wir.sub_project_id  AS sub_project_id,
+        										wir.prod_routing_id AS wir_prod_routing_id ,
                                                COUNT(CASE WHEN
                                                  (SUBSTR(wir.closed_at, 1, 10) <= '$latestDate' OR wir.closed_at IS NULL)
                                                  AND wir.status IN ('closed', 'not_applicable')
@@ -187,9 +201,9 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                     AND wir.deleted_by IS NULL";
         if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND wir.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND wir.sub_project_id IN ({$valOfParams['sub_project_id']})";
-                                                 $sql .= "\n GROUP BY wir_prod_routing_id 
+                                                 $sql .= "\n GROUP BY wir_prod_routing_id,project_id, sub_project_id
                                                 ) AS count_prod_order_have_wir 
-                                                 ON tb1.prod_routing_id = count_prod_order_have_wir.wir_prod_routing_id
+                                                ON tb1.prod_routing_id = count_prod_order_have_wir.wir_prod_routing_id AND tb1.sub_project_id = count_prod_order_have_wir.sub_project_id
                                                 ORDER BY sub_project_name, prod_routing_name";
         return $sql;
     }

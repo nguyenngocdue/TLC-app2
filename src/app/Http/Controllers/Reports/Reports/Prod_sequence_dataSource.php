@@ -73,13 +73,13 @@ class Prod_sequence_dataSource extends Controller
                         sub_projects sp
                         JOIN prod_orders po ON po.sub_project_id = sp.id
                         JOIN prod_routings pr ON po.prod_routing_id = pr.id
-                        JOIN prod_sequences ps ON ps.prod_order_id = po.id
+                        JOIN prod_sequences ps ON ps.prod_order_id = po.id AND ps.deleted_by IS NULL
                         JOIN prod_routing_links prl ON prl.id = ps.prod_routing_link_id
                         JOIN prod_routing_details prde ON prde.prod_routing_link_id = prl.id 
                                                         AND prde.prod_routing_id = pr.id
                                                         AND prde.prod_routing_link_id = ps.prod_routing_link_id
                         JOIN prod_disciplines pd ON pd.id = prl.prod_discipline_id
-                        JOIN prod_runs pru ON pru.prod_sequence_id = ps.id
+                        JOIN prod_runs pru ON pru.prod_sequence_id = ps.id AND pru.deleted_by IS NULL
                     WHERE 1 = 1";
         if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
