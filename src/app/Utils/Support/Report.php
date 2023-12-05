@@ -422,21 +422,33 @@ class Report
             }, $data1);
             $output = $data1;
         } else {
-            dd($data1, $data2);
-            foreach($data2  as $k2 => &$item1s){
-                foreach($data1 as $k1 => $item2s){
-                    foreach ($keys as $keyToCheck){
-                        if($item1s[$keyToCheck] !== $item2s[$keyToCheck]){
-                            $item1s['months'] = array_fill_keys(array_keys($item1s['months']), 0);
-                            $item1s['total_months'] = 0;
-                        }
-                        
+            $arrayFilter = [];
+            foreach($data2  as $k2 => $item2s){
+                $isAdd = [];
+                foreach($data1 as $k1 => $item1s){
+                    if(
+                        $item1s["ghg_tmpls_id"] === $item2s["ghg_tmpls_id"]
+                        && $item1s["ghg_metric_type_id"] === $item2s["ghg_metric_type_id"]
+                        && $item1s["ghg_metric_type_1_id"] === $item2s["ghg_metric_type_1_id"]
+                        && $item1s["ghg_metric_type_2_id"] === $item2s["ghg_metric_type_2_id"]
+                    ){
+                       $isAdd[] = false;
+                    } else {
+                        $isAdd[] = true;
                     }
                 }
+                $isAdd = ArrayReport::checkAllTrue($isAdd);
+                if($isAdd){
+                    $itemIndex = $item2s;
+                    $itemIndex['months'] = array_fill_keys(array_keys($itemIndex['months']), 0);
+                    $itemIndex['total_months'] = 0;
+                    $arrayFilter[] = $itemIndex;
+                }
             }
-            $output = array_merge($data1, $data2);
+            $output = array_merge($data1, $arrayFilter);
+
         }
-        // dd($output);
+        // dd($output, $data1, $data2);
         return $output;
     }
     

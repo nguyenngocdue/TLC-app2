@@ -76,4 +76,10 @@ class ArrayReport
         }
         return true;
     }
+
+    public static function checkAllTrue($array) {
+        $uniqueValues = array_unique($array);
+        return count($uniqueValues) === 1 && reset($uniqueValues) === true;
+    }
+    
 }
