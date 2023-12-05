@@ -13,6 +13,7 @@ use App\Models\Prod_routing_link;
 use App\Models\Project;
 use App\Models\Sub_project;
 use App\Utils\Support\ModificationDataReport;
+use App\Utils\Support\ParameterReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
@@ -38,6 +39,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
 
     public function getSqlStr($params)
     {
+        $strProdDisciplineIds = ParameterReport::getStringIds('prod_discipline_id');
         $sql = "SELECT
                         targetTb.project_name,
                         targetTb.sub_project_name,
@@ -94,7 +96,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                         JOIN prod_orders po ON po.sub_project_id = sp.id";
         // if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
         $sql .= "\n LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
-                        LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
+                        LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id AND pr.id IN ($strProdDisciplineIds)
                         JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
                         LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id 
                                                         AND prd.prod_routing_id = pr.id
@@ -325,9 +327,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
 
         $prodDiscipline = isset($params['prod_discipline_id']) ?
             Prod_discipline::find($params['prod_discipline_id'])->name:
-            implode(', ', Prod_discipline::all()
-                ->pluck('name')
-                ->toArray());
+            ParameterReport::getStringIds('prod_discipline_id', 'name');
 
         $prodRoutingLink = isset($params['prod_routing_link_id']) ?
             implode(',', Prod_routing_link::whereIn('id', $params['prod_routing_link_id'])

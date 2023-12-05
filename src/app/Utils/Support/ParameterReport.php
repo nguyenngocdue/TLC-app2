@@ -48,4 +48,18 @@ class ParameterReport
         $list = $isArray ? $list->get()->toArray() : $list->get();
         return $list ?? [];
     }
+
+    public static function getDataForParameterReport($nameConfig){ // example: prod_discipline_id
+        $configData = ParameterReport::getConfigByName($nameConfig);
+        $targetIds = ParameterReport::getTargetIds($configData);
+        $dbName =  ucfirst(str_replace('_id', '', $nameConfig));
+        $list = ParameterReport::getDBParameter($targetIds, $dbName, true);
+        return $list;
+    }
+
+    public static function getStringIds($nameConfig, $columnName = 'id'){
+        $items = self::getDataForParameterReport($nameConfig);
+        $ids = array_column($items, $columnName);
+        return  implode(',', $ids);
+    }
 }
