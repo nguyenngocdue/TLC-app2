@@ -13,7 +13,7 @@ class Exam_question extends ModelExtended
     // public static $statusless = true;
 
     public static $eloquentParams = [
-        "getExamContest" => ["belongsTo", Exam::class, "exam_contest_id"],
+        "getExamContest" => ["belongsTo", Exam_contest::class, "exam_contest_id"],
         "getQuestionType" => ['belongsTo', Term::class, 'question_type_id'],
     ];
 
