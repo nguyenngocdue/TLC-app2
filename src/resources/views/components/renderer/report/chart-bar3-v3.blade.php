@@ -28,7 +28,7 @@
 	var scales = {};
 	var lessThen100 =  {!! json_encode($dimensions['lessThen100'] ?? false)  !!}
 	var meta = {!! json_encode($meta) !!}
-	var colors = generateColors(meta.count);
+	var colors = generateColors(meta.labels.length);
 
 	datasets = {!! json_encode($meta['datasets']) !!};
 	scales = {

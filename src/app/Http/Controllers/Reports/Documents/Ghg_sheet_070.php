@@ -160,7 +160,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		$countLines = count($data[$year]);
 		$dataForColumn = [];
 
-		// dd(count($years) - 1, $years);
 		for ($i = count($years) - 1; $i > -1; $i--) { 
 			for ($index=0; $index < $countLines; $index++) {
 				// data 1
@@ -197,7 +196,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 							$dbBeforeQuarter = $this->calculateQuarterData($monthsBefore);
 							$countYear = count($years);
 
-							
 							// $show value that is calculated for percent on each item
 							$percentValForQuarters = ArrayReport::calculatePercentBetween2Months($dbBeforeQuarter, $dbAfterQuarter);
 							$percentValForMonths = ArrayReport::calculatePercentBetween2Months($monthsBefore, $monthsAfter);
@@ -228,7 +226,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 							// Save data to summary columns
 							$dataForColumn[$afterYear][] = $dataRender[$afterYear];
-
 						} else {
 							// dd($_dbIndexBeforeMetric);
 							$data[$afterYear][$index][$keyOfChild]['data_render'] = [];
@@ -272,7 +269,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 					}
 				}
 				$result[$scopeId][$ghgCatId] = $dataFirstYear;
-				// dd($dataFirstYear, $dataSource);
 			}
 		}
 		// dd($result);
@@ -305,7 +301,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 		}
 		$result['months'] = $months;
 		$result['columnType'] = $columnType;
-		// dump($result, $params);
 		return $result;
 	}
 
@@ -415,29 +410,15 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 						$datFromManyYears[$_year][$ghgTmplId] = $dataIndex;
 					}
 					$dataInclude = self::includeValuesToEnoughData($datFromManyYears);
-					// dump($dataInclude);
-					// dd($dataInclude);
-
-/* 					$childrenMetrics[$scopeId][$ghgTmplId][$year] = array_map(function($item) {
-						if(isset($item['children_metrics'])){
-							$arr = $item['children_metrics'];
-							return $arr;
-						}else {
-							return [$item];//[$item];
-						}
-					}, $items); //$items */
-
 					$childrenMetrics[$scopeId][$ghgTmplId][$year] = array_map(function($item) use ($ghgTmplId) {
 						return array_column($item[$ghgTmplId], 'children_metrics');
 					}, $dataInclude)[$year]; //$items
-					// dd($childrenMetrics[$scopeId][$ghgTmplId][$year]);
 				}
 			}
 		}
 		$dataSet = [];
 		$dataForColumn = [];
 		// dd($childrenMetrics);
-
 		foreach ($childrenMetrics as $scopeId => &$values) {
 			foreach ($values as $ghgTmplId => &$items){
 				foreach ($items as $year => $item) {
@@ -450,7 +431,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 						}
 					}
 				}
-				// dd($items);
 				[$comparisonData, $_dataForColumn] = $this->comparisonData($items);
 				$dataForColumn[] = $_dataForColumn;
 				$items = $comparisonData;
@@ -467,15 +447,11 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				}
 			}
 		}
-		// dd($childrenMetrics);
-
 		// make data to build table the same ghg-sheet-050
 		$scopeData = $this->makeDataToBuildTable($childrenMetrics);
-		// $scopeData = $childrenMetrics;
 		$groupByScope = ['scopes' => $scopeData];
 		$result['tableDataSource'] = ['scopes' => $scopeData];
 		$result['tableSetting'] = $this->createInfoToRenderTable($groupByScope);
-
 
 		// Adding period to table data to render
 		$timeArray = $this->createDateTime($params); 
@@ -497,7 +473,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 
 	public function createInfoToRenderTable($dataSource)
 	{
-		
 		if(!isset($dataSource['scopes'])) return [];
 		$allScopes = $dataSource['scopes'];
 		// dd($allScopes);
@@ -543,8 +518,6 @@ class Ghg_sheet_070 extends Report_ParentDocument2Controller
 				}
 			}
 			$info[$k]['scope_rowspan_lv1'] = array_sum(array_column(($info[$k] ?? []), "scope_rowspan_lv2"));
-			// $info[$k]['scope_rowspan_lv1'] = $num +$emptyChildrenMetrics;
-			// $totalLine += $num + $emptyChildrenMetrics;
 		}
 		$totalLine = [];
 		foreach($info as $values) {
