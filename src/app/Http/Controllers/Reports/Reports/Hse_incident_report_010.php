@@ -45,6 +45,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
         $STATUS_WALKTHROUGH = 'closed';
         $STATUS_HR_TRAINING = 'closed';
         $STATUS_EXTRA_METRIC = 'active';
+        $STATUS_ESG_INDUCTION = 'active';
 
         $HSE_INSP_CHKLST = 1;
         $HSE_INDUCTION = 2;
@@ -125,15 +126,16 @@ class Hse_incident_report_010 extends Report_ParentReportController
                                     GROUP BY hse_month
                 ),
                 t6 AS (
-                                    SELECT
-                                        SUBSTR(hrt.onboarding_datetime, 1, 7) AS hse_month,
-                                        NULLIF(COUNT( CASE WHEN hrtl.onboarding_course_id = $HSE_INDUCTION AND hrt.status = '$STATUS_HR_TRAINING' THEN hrt.id END),0) AS hrt_line_count 
-                                    FROM hr_onboardings hrt, hr_onboarding_lines hrtl
-                                    WHERE 1 = 1
-                                        AND hrt.onboarding_location_id IN $strWorkplaceIds
-                                        AND SUBSTR(hrt.onboarding_datetime, 1, 4) = $year
-                                        AND hrtl.hr_onboarding_id = hrt.id
-                                    GROUP BY hse_month
+
+                        SELECT
+                            SUBSTR(esginduc.the_month, 1, 7) AS hse_month,
+                            SUM(esginduc.total_hours) AS esginduc_total_hours 
+                            FROM esg_inductions esginduc
+                            WHERE 1 = 1
+                            AND esginduc.status = '$STATUS_ESG_INDUCTION'
+                            AND esginduc.workplace_id IN $strWorkplaceIds
+                            AND SUBSTR(esginduc.the_month, 1, 4) = $year
+                            GROUP BY hse_month
                 ),
                 t7 AS (
                     SELECT
@@ -203,7 +205,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
             'trir' => "<br/><i title='Total Recordable Incident Rate:\nTotal recordable incident (LTI,RWC,MTC,OI) rate is the total number of injuries and illnesses times 200,000 divided by number of hours worked by all employees.'" . $stringIcon,
             'hseir_incident_count_vote' => "<br/><i title='Oil Spill:\nWater Soluble Chemicals with high toxicity, such as water soluble or water dispersant corrosion inhibitors, biocides, reactive substances such as oxygen scavengers, methanol, concentrated acids and bases, sodium hypochlorite which are lost into the environment. By this we mean lost to sea, air or ground. A spill of oil in a workshop which is correctly contained / cleaned up and disposed correctly is NOT a spill to the environment.'" . $stringIcon,
             'total_meeting_toolbox' => "<br/><i title='HSE Meeting :\nToolbox meeting,committee meeting,pre-start meeting,other meeting related to HSE.'" . $stringIcon,
-            'hrt_line_count' => "<br/><i title='HSE Training:\nHSE induction,HSE on jobs training,Third party training.'" . $stringIcon,
+            'esginduc_total_hours' => "<br/><i title='HSE Training:\nHSE induction,HSE on jobs training,Third party training.'" . $stringIcon,
             'third_party_inspection_audit' => "<br/><i title='Third party inspections:\nGovernment, ISO,Smecta,other inspections of third party or client related to HSE.'" . $stringIcon,
             'hseca_line_count' => "<br/><i title='Safety Observations Frequency Rating:\nIf we are to eliminate injuries, damage or near miss incidents, we need to focus on at-risk acts and unsafe conditions, which have not yet caused loss or harm but have the potential to. Thus we need a systematic approach to observing, correcting and recording such at-risk behaviour or unsafe situations.\nThis is generally called safety observation (or hazard observation). The expected result is that by increasing safety observation, there would be a reduction in injuries, damage or near misses – the undesired events Number of safety observations x 200,000 / Total man-hours Safety Observation Report identifying at-risk behaviour, or an unsafe condition to prevent loss or harm e.g. ACT / ROC /STOP card or similar.'" . $stringIcon,
             'hse_issues' => "<br/><i title='HSE Issues: \nare the unsafe practices which are counted from the HSE Inspections and HSE Walkthrough.'" . $stringIcon,
@@ -284,8 +286,8 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 "width" => 60,
             ],
             [
-                "title" => "HSE Induction - Visitor & Constructor (Hour) {$notes['hrt_line_count']}",
-                "dataIndex" => "hrt_line_count",
+                "title" => "HSE Induction - Visitor & Constructor (Hour) {$notes['esginduc_total_hours']}",
+                "dataIndex" => "esginduc_total_hours",
                 "align" => "right",
                 "width" => 60,
             ],
