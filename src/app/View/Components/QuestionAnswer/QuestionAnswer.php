@@ -7,8 +7,7 @@ use Illuminate\View\Component;
 class QuestionAnswer extends Component
 {
     function __construct(
-        private $dataSource = [],
-        private $index = 0,
+        private $item = [],
     ) {
     }
 
@@ -17,8 +16,7 @@ class QuestionAnswer extends Component
         return view(
             'components.question-answer.question-answer',
             [
-                'dataSource' => $this->dataSource,
-                'index' => $this->index,
+                'item' => $this->item,
             ]
         );
     }

@@ -10,7 +10,11 @@
     </div>
     <div class="col-span-10 border rounded p-2">
         <div class="" >
-            <x-question-answer.question-answer :dataSource="$dataSource"/>
+            @if($isOnePage)
+                @foreach($dataSource as $item)
+                    <x-question-answer.question-answer :item="$item"/>
+                @endforeach
+            @endif
         </div>
     </div>
 </div>

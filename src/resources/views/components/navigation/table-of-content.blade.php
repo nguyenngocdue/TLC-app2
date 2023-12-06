@@ -4,7 +4,9 @@
         @foreach($dataSource as $item)
         @php $counter ++; $counterStr = $counter.".";@endphp
         <li> {{$parentCounter.$counterStr}}
-            <a href="{{ $item['href'] }}">{{ $item['title'] }}</a>
+            {{-- <a href="{{ $item['href'] }}"> --}}
+                {{ $item['title'] }}
+            {{-- </a> --}}
             @if(!empty($item['children']))
             <x-navigation.table-of-content :dataSource="$item['children']" :parentCounter="$parentCounter.$counterStr" />
             @endif
