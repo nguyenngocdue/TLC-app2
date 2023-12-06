@@ -256,7 +256,7 @@
         "name": "_dynamic_answer",
         "column_name": "dynamic_answer",
         "column_type": "bigint unsigned",
-        "label": "Dynamic Anser",
+        "label": "Dynamic Answer",
         "control": "dropdown",
         "align": "",
         "col_span": "",
