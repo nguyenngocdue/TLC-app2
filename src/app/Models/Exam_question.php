@@ -45,6 +45,7 @@ class Exam_question extends ModelExtended
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'exam_contest_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ['dataIndex' => 'name',],
+            ['dataIndex' => 'description',],
             ['dataIndex' => 'question_type_id',],
             ['dataIndex' => 'static_answer',],
             ['dataIndex' => 'dynamic_answer',],

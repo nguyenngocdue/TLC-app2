@@ -5,7 +5,7 @@
         @php $counter ++; $counterStr = $counter.".";@endphp
         <li> {{$parentCounter.$counterStr}}
             {{-- <a href="{{ $item['href'] }}"> --}}
-                {{ $item['title'] }}
+                {{ $item['name'] }}
             {{-- </a> --}}
             @if(!empty($item['children']))
             <x-navigation.table-of-content :dataSource="$item['children']" :parentCounter="$parentCounter.$counterStr" />
