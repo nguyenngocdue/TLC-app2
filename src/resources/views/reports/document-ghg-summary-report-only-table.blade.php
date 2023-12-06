@@ -101,7 +101,7 @@
                 @php
                 $totalEmissions = $tableDataSource['total_emission'];
                 @endphp
-                <td class="bg-white border-t {{$class1}}" colspan="2"></td>
+                <td class="bg-white border-t border-gray-600" colspan="2"></td>
                 <td class="{{$class1}} text-left border-t font-bold">Total Emissions</td>
                 @foreach($totalEmissions as $value)
                 <td class=" text-right border-t border-gray-600">

@@ -1,5 +1,5 @@
 <div class="flex justify-center">
-	<div class="block" title="{{$titleTooltip}}">
+	<div class="block" title="{{$titleTooltip}} (Component Name: chart-bar3-v3)">
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
 </div>
@@ -102,7 +102,7 @@
 		}
 	};
 	datasets.forEach(function(dataset, index) {
-		dataset.backgroundColor = colors[index];
+		dataset.backgroundColor = {!! json_encode($dimensions['color_column'] ?? colors[index])!!};
 	});
 
 	//console.log(datasets.data)
