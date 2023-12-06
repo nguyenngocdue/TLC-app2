@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileSocialController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\UpdateUserSettingsApi;
+use App\Http\Controllers\Utils\DepartmentMatrixController;
 use App\Http\Controllers\Utils\MyCompanyController;
 use App\Http\Controllers\Utils\OrphanManyToManyController;
 use App\Http\Controllers\Utils\ThumbnailController;
@@ -36,6 +37,8 @@ Route::group([
     Route::get('impersonate/user/{id}', [AdminSetRoleSetController::class, 'impersonate'])->name('setrolesets.impersonate');
     Route::get('impersonate/stop', [AdminSetRoleSetController::class, 'stopImpersonate'])->name('setrolesets.stopImpersonate');
     Route::get('my-company', [MyCompanyController::class, 'index'])->name("my-company.index");
+    Route::get('department-matrix', [DepartmentMatrixController::class, 'index'])->name("department-matrix.index");
+
     Route::get('reset', fn () => (new UpdateUserSettings())(new Request(['action' => 'resetAllSettings']), '/'));
     Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');
     Route::get('notifications/{type}/{id}/{idNotification}', [NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');

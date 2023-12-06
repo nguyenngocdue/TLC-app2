@@ -48,6 +48,13 @@
         "href": "\/my-company",
         "icon_fa": "fa-duotone fa-folder-tree"
     },
+    "department-matrix": {
+        "name": "department-matrix",
+        "group": "internal",
+        "title": "Department Matrix",
+        "href": "\/department-matrix",
+        "icon_fa": "fa-duotone fa-folder-tree"
+    },
     "serializeParser": {
         "name": "serializeParser",
         "group": "external",

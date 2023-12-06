@@ -460,6 +460,36 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "exam_contest": {
+        "name": "exam_contest",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "exam",
+        "title": "Exam Contests",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-graduation-cap\"><\/i>"
+    },
+    "exam_question": {
+        "name": "exam_question",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "exam",
+        "title": "Exam Questions",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "field": {
         "name": "field",
         "package_tab": "application",

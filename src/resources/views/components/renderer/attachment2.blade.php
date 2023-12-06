@@ -10,8 +10,9 @@
         $title = $hasOrphan ? "Orphan image found. Will attach after this document is saved.":"";
         $extension = $attachment['extension'] ?? "";
        
-        $isProd = str_starts_with($attachment['url_folder'], 'app2_prod') || str_starts_with($attachment['url_folder'], 'avatars');
-        $isTesting = str_starts_with($attachment['url_folder'], 'app2_beta');
+        $folder = $attachment['url_folder'] ?? '';
+        $isProd = str_starts_with($folder, 'app2_prod') || str_starts_with($folder, 'avatars');
+        $isTesting = str_starts_with($folder, 'app2_beta');
         $isDev = !($isProd || $isTesting);
 
         $sameEnv = false;
