@@ -302,7 +302,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         {{-- END --}}
         <x-renderer.page-break />
         {{-- PAGE 8: Data Detail Report on Metric 2 --}}
-        <div id="pagedata_detail_report_on_metric2"  style='page-break-after:always!important'  class="min-w-[1500px] min-h-[790px] flex flex-col items-center bg-white box-border relative px-8 m-auto">
+        <div id="pagedata_detail_report_on_metric2"  style='page-break-after:always!important'  class="max-w-[1500px] min-h-[790px] flex flex-col items-center bg-white box-border relative px-8 m-auto">
             <div class="z-5">
                 <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">7/8</div>
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
@@ -325,7 +325,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 
 
         {{-- PAGE 9: Data Detail Report  --}}
-        <div id="pagedata_detail_report_on_metric2"  style='page-break-after:always!important'  class=" max-w-[1700px] min-h-[790px] flex flex-col items-center box-border relative px-8 m-auto bg-white">
+        <div id="pagedata_detail_report_on_metric2"  style='page-break-after:always!important'  class="max-w-[1700px] min-h-[790px] flex flex-col items-center box-border relative px-8 m-auto bg-white">
             <div class="z-5">
                 <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">8/8</div>
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
