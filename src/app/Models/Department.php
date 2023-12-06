@@ -8,7 +8,7 @@ class Department extends ModelExtended
 {
     protected $fillable = [
         "id", "owner_id", "name", "description",
-        "head_of_department", "hide_in_org_chart",
+        "head_of_department", "hide_in_org_chart", "hide_in_survey",
         "slug", "order_no", "parent_id",
     ];
 

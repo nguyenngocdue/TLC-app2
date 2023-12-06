@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('head_of_department')->nullable();
             $table->boolean('hide_in_org_chart')->nullable();
+            $table->boolean('hide_in_survey')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('slug')->unique();
             $table->orderable();
