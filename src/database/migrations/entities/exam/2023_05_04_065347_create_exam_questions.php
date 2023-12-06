@@ -25,6 +25,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('exam_contest_id')->nullable();
             $table->unsignedBigInteger('question_type_id')->nullable();
+
+            $table->orderable();
             $table->appendCommonFields();
         });
     }
