@@ -46,18 +46,21 @@ class DepartmentMatrixController extends Controller
         // dump($departments);
 
         $columns = $departments->map(fn ($i, $index) => ['dataIndex' => $index, 'title' => $i . " (#$index)"]);
-        $columns->prepend(['dataIndex' => 'name',]);
+        $columns->prepend(['dataIndex' => 'name']);
         // dump($columns);
 
         $dataSource = [];
         foreach ($departments as $index => $department) {
             $item = [
-                'name' => $department . " (#$index)",
+                'name' => (object)[
+                    'value' => $department . " (#$index)",
+                    'cell_class' => "whitespace-nowrap",
+                ],
                 $index => (object)[
                     'value' => '',
                     'cell_class' => 'bg-black'
                 ],
-                'width' => 120,
+                // 'width' => 120,
             ];
 
             $dataSource[$index] = $item;
