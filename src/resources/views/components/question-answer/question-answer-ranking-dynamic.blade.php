@@ -1,1 +1,1 @@
-textare
+@dump($dynamicAnswer)

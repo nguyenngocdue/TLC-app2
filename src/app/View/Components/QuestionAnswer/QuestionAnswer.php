@@ -2,6 +2,7 @@
 
 namespace App\View\Components\QuestionAnswer;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
@@ -10,6 +11,30 @@ class QuestionAnswer extends Component
     function __construct(
         private $item = [],
     ) {
+    }
+
+    function getDynamicContent($id)
+    {
+        $DEPARTMENT_USERS = 386;
+        $DEPARTMENT_USERS_EXCLUDE_ME = 387;
+        $cu = CurrentUser::get();
+        $department = $cu->getUserDepartment;
+
+        switch ($id) {
+            case $DEPARTMENT_USERS:
+                $members = $department
+                    ->getMembers()
+                    ->whereNot('resigned', 1)
+                    ->get();
+                return $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
+            case $DEPARTMENT_USERS_EXCLUDE_ME:
+                $members = $department
+                    ->getMembers()
+                    ->whereNot('resigned', 1)
+                    ->whereNot('id', $cu->id)
+                    ->get();
+                return $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
+        }
     }
 
     function render()
@@ -27,12 +52,13 @@ class QuestionAnswer extends Component
 
         $item = $this->item;
         $questionType = $item['question_type_id'] ?? null;
-        $staticAnswer = $item['static_answer'] ?? "FFF";
-        $dynamicAnswer = $item['dynamic_answer'] ?? "GGG";
+
+        $staticAnswer = explode("|", $item['static_answer'] ?? '');
+        $dynamicAnswer = $this->getDynamicContent($item['dynamic_answer'] ?? '');
         $control = $controlIds[$questionType];
 
-        Log::info($staticAnswer);
-        Log::info($dynamicAnswer);
+        // Log::info($staticAnswer);
+        // Log::info($dynamicAnswer);
 
         return view(
             'components.question-answer.question-answer',

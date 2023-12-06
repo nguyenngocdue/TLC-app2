@@ -11,9 +11,12 @@
     <div class="col-span-10 border rounded p-2">
         <div class="" >
             @if($isOnePage)
-                @foreach($dataSource as $item)
-                    <x-question-answer.question-answer :item="$item"/>
-                @endforeach
+                <form>
+                    @foreach($dataSource as $item)
+                        <x-question-answer.question-answer :item="$item"/>
+                    @endforeach
+                    <x-renderer.button htmlType="submit">Submit</x-render.button>
+                </form>
             @endif
         </div>
     </div>
