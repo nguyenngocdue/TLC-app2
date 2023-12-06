@@ -99,7 +99,7 @@ var chartConfig = {
                     label: function(context) {
                             var label = '{!! $dimensions['tooltipLabel'] ?? 'data' !!}'; 
                             var value =  context.raw;
-                            return label + ': ' + value;
+                            return label + ': ' + value.toFixed(2);
                     }
                 },
             },    
@@ -164,10 +164,11 @@ var chartConfig = {
                 anchor: 'end',
                 align: '{!! $dimensions['dataLabelAlign'] ?? 'top' !!}',
                 color: 'white',
+                rotation: {!! json_encode($dimensions['rotation_datalabel'] ?? 0) !!},
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 borderColor: 'white',
-                borderWidth: 1,
-                borderRadius: 6,
+                borderWidth: 0.5,
+                borderRadius: 2.5,
                 offset: '{!! $dimensions['dataLabelOffset'] ?? '0' !!}',
                 formatter: function(value, context) {
             		return (value.toFixed(2))
@@ -239,6 +240,7 @@ var chartConfig = {
             display:  {!! json_encode($dimensions['show_datalabel'] ?? true)  !!},
             borderWidth: 0,
             borderRadius: 0,
+            rotation: 0,
             backgroundColor: null,
             color: 'black',
             align: 'end',
