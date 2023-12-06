@@ -25,18 +25,39 @@ class WelcomeFortuneController extends Controller
     public function index(Request $request)
     {
         if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
-        $r = User::find(1)->notify(new SampleNotification(
-            [
-                "message" => "<b>Fortune 123</b> has view checklist of Structure of STW1-11",
-                "group_name" =>     'Inspection Check Sheet Observer',
-                "sender_id" =>     1,
-                "object_type" => Qaqc_insp_chklst_sht::class,
-                "object_id" =>     20009,
-                "scroll_to" => 'qaqc_insp_group_id_33_cfc-or-gypsum-boards',
-            ],
-        ));
-        dump($r);
 
-        return view("welcome-fortune", []);
+        $dataSource = [
+            [
+                'title' => "Welcome",
+                'href' => 'http://localhost',
+                'answerType' => 'checkbox',
+                'children' => [
+                    [
+                        'title' => "Welcome",
+                        'href' => 'http://localhost',
+                        'children' => [
+                            [
+                                'title' => "Welcome",
+                                'href' => 'http://localhost',
+                                'children' => [],
+                            ],
+                            [
+                                'title' => "Goodbye",
+                                'href' => 'http://localhost',
+                            ],
+                        ],
+                    ],
+                    [
+                        'title' => "Goodbye",
+                        'href' => 'http://localhost',
+                    ],
+                ],
+            ],
+            [
+                'title' => "Goodbye",
+                'href' => 'http://localhost',
+            ],
+        ];
+        return view("welcome-fortune", ['dataSource' => $dataSource,]);
     }
 }
