@@ -68,6 +68,9 @@ class DepartmentMatrixController extends Controller
         ];
 
         foreach ($data as $source => $targetArray) {
+            if (!isset($dataSource[$source])) {
+                $dataSource[$source]['name'] =  "(#$source)";
+            }
             foreach ($targetArray as $target) {
                 $dataSource[$source][$target] = $checked;
                 $dataSource[$target][$source] = $checked;
