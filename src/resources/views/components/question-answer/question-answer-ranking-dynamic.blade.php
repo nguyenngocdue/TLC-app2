@@ -3,7 +3,7 @@
     <tr>
         <th class='border bg-gray-300'>Rank</th>
         @for($i = 1; $i <= sizeof($dynamicAnswer); $i++)
-            <th class='border bg-gray-300'>{{$i}}</th>
+            <th class='border bg-gray-300 px-2'>{{$i}}</th>
         @endfor
     </tr>
     @php $index=0; @endphp
@@ -15,7 +15,7 @@
                     $i_1 = $i-1;
                     $chkId = "chk_{$questionId}_{$index}_{$i_1}";
                 @endphp
-                <td class="border px-5 py-1">
+                <td class="border px-5 py-1 text-center">
                     {{-- {{$chkId}} --}}
                     <input 
                         name="question_{{$questionId}}[]" 
@@ -33,7 +33,7 @@
     <tr>
         <th class='border bg-gray-300'>Rank</th>
         @for($i = 1; $i <= sizeof($dynamicAnswer); $i++)
-            <th class='border bg-gray-300'>{{$i}}</th>
+            <th class='border bg-gray-300 px-2'>{{$i}}</th>
         @endfor
     </tr>
 </table>
