@@ -26,6 +26,7 @@ class QuestionAnswer extends Component
                 $members = $department
                     ->getMembers()
                     ->whereNot('resigned', 1)
+                    ->whereNot('show_on_beta', 1)
                     ->orderBy('name0')
                     ->get();
                 return $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
@@ -33,6 +34,7 @@ class QuestionAnswer extends Component
                 $members = $department
                     ->getMembers()
                     ->whereNot('resigned', 1)
+                    ->whereNot('show_on_beta', 1)
                     ->whereNot('id', $cu->id)
                     ->orderBy('name0')
                     ->get();
@@ -51,6 +53,8 @@ class QuestionAnswer extends Component
             382 => 'checkbox-dynamic',
             383 => 'ranking-static',
             388 => 'ranking-dynamic',
+            389 => 'checkbox-stanamic',
+            390 => 'radio-stanamic',
         ];
 
         $item = $this->item;
