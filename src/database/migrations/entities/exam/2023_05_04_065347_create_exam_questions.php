@@ -24,10 +24,12 @@ return new class extends Migration
             $table->string("name")->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('exam_tmpl_id')->nullable();
+            $table->unsignedBigInteger('exam_tmpl_group_id')->nullable();
             $table->unsignedBigInteger('question_type_id')->nullable();
             $table->text('static_answer')->nullable();
             $table->unsignedBigInteger('dynamic_answer')->nullable();
 
+            $table->hasStatus();
             $table->orderable();
             $table->appendCommonFields();
         });

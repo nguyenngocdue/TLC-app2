@@ -10,7 +10,7 @@ class Exam_tmpl_group extends ModelExtended
         "id", "name", "description", "owner_id", "status",
     ];
 
-    // public static $statusless = true;
+    public static $statusless = true;
 
     public static $eloquentParams = [
         "getExamTmpl" => ["belongsTo", Exam_tmpl::class, "exam_tmpl_id"],
