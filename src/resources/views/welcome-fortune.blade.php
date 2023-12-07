@@ -8,14 +8,21 @@
 
 <div class="grid grid-cols-12 gap-2 p-4 w-full">
     <div class="col-span-2 border rounded p-2">
-        <x-navigation.table-of-contents :dataSource="$tableOfContents"/>
+        <div class="sticky top-20 px-2 py-2">
+            <x-navigation.table-of-contents :dataSource="$tableOfContents"/>
+        </div>
     </div>
     <div class="col-span-10 border rounded p-2">
         <div class="" >
             @if($isOnePage)
             <form>
-                @foreach($tableOfContents as $group)
-                    <x-renderer.heading id="exam_group_{{$group->id}}" level=4 >{{$group->name}}</x-renderer.heading>
+                @foreach($tableOfContents as $index => $group)
+                <div id="div-holder-for-sticky-to-push">
+                    <x-renderer.heading 
+                            class="sticky top-16 px-2 py-2 rounded bg-blue-500" 
+                            id="exam_group_{{$group->id}}" 
+                            level=4 
+                            >{{$group->name}}</x-renderer.heading>
                     <div class="flex">
                         <div class="px-1"></div>
                         <div class="bg-blue-500 px-1 rounded"></div>
@@ -30,6 +37,7 @@
                             @endforeach
                         </div>
                     </div>
+                </div>
                 @endforeach
                 <div class="p-2">
                     <x-renderer.button type='primary' htmlType="submit">Submit</x-render.button>
@@ -39,5 +47,21 @@
         </div>
     </div>
 </div>
+
+{{-- <script>
+    const stickyDiv = document.querySelector('.sticky24');
+  
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 100) {
+        console.log(">100")
+        stickyDiv.classList.add('fixed');
+        stickyDiv.classList.add('top-24');
+      } else {
+        console.log("<=100")
+        stickyDiv.classList.remove('fixed');
+        stickyDiv.classList.remove('top-24');
+      }
+    });
+  </script> --}}
 
 @endsection 

@@ -4,7 +4,7 @@
     <ol class="pl-5">
         @foreach($dataSource as $item)
         @php $counter ++; $counterStr = $counter.".";@endphp
-        <li> {{$parentCounter.$counterStr}}
+        <li class="hover:bg-blue-500 p-1 rounded"> {{$parentCounter.$counterStr}}
             <a href="#exam_group_{{ $item['id'] }}">
                 {{ $item['name'] }}
             </a>

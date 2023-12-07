@@ -18,6 +18,7 @@ class Heading extends Component
         private $xalign = 'left',
         private $class = '',
         private $labelExtra = '',
+        private $scrollMarginTop = 90,
     ) {
         //
     }
@@ -46,7 +47,7 @@ class Heading extends Component
             $theClass = " $font leading-tight text-{$textSize}  my-2 text-{$this->xalign} dark:text-gray-300 $this->class";
             $slot = $data['slot'];
             $slot = htmlspecialchars_decode($slot);
-            return "<$h  class='$theClass' id='$id' title='$this->title' style='scroll-margin-top: 90px;'> $slot <p class='text-sm font-light italic' >$labelExtra</p></$h>";
+            return "<$h  class='$theClass' id='$id' title='$this->title' style='scroll-margin-top: {$this->scrollMarginTop}px;'> $slot <p class='text-sm font-light italic' >$labelExtra</p></$h>";
         };
         // return view('components.renderer.heading');
     }
