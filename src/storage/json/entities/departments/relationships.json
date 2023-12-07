@@ -51,7 +51,7 @@
         "name": "_getTechnicalSkillsOfDepartment()",
         "relationship": "getCheckedByField",
         "control_name": "getTechnicalSkillsOfDepartment()",
-        "renderer_view_all": "column",
+        "renderer_view_all": "agg_count",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
