@@ -1,8 +1,8 @@
 {
-    "_getExamContest": {
-        "name": "_getExamContest",
+    "_getExamTmpl": {
+        "name": "_getExamTmpl",
         "relationship": "belongsTo",
-        "control_name": "exam_contest_id",
+        "control_name": "exam_tmpl_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

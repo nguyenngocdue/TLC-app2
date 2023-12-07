@@ -19,7 +19,7 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('exam_contests', function (BlueprintExtended $table) {
+        $schema->create('exam_tmpls', function (BlueprintExtended $table) {
             $table->id();
             $table->string("name")->nullable();
             $table->text('description')->nullable();
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exam_contests');
+        Schema::dropIfExists('exam_tmpls');
     }
 };

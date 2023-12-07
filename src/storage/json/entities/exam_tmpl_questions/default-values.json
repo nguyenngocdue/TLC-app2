@@ -38,9 +38,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_exam_contest_id": {
-        "name": "_exam_contest_id",
-        "column_name": "exam_contest_id",
+    "_exam_tmpl_id": {
+        "name": "_exam_tmpl_id",
+        "column_name": "exam_tmpl_id",
         "label": "",
         "validation": "",
         "validation_regex": "",

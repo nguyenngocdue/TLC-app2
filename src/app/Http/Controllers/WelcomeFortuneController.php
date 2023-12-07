@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\WorkingShiftService;
-use App\Models\Exam_contest;
-use App\Models\Exam_question;
+use App\Models\Exam_tmpl_question;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 
@@ -23,8 +22,8 @@ class WelcomeFortuneController extends Controller
     {
         if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
 
-        $dataSource = Exam_question::query()
-            ->where("exam_contest_id", 1)
+        $dataSource = Exam_tmpl_question::query()
+            ->where("exam_tmpl_id", 1)
             ->get();
 
         // dump($dataSource);

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\BigThink\ModelExtended;
 
-class Exam_contest extends ModelExtended
+class Exam_tmpl extends ModelExtended
 {
     public $fillable = [
         "id", "name", "description", "owner_id", "status",
@@ -13,7 +13,7 @@ class Exam_contest extends ModelExtended
     // public static $statusless = true;
 
     public static $eloquentParams = [
-        "getQuestions" => ["hasMany", Exam_question::class, "exam_contest_id"],
+        "getQuestions" => ["hasMany", Exam_tmpl_question::class, "exam_tmpl_id"],
     ];
 
     public static $oracyParams = [];
