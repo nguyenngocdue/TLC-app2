@@ -1,5 +1,5 @@
 @props(['chartType'])
-<div class="flex justify-center">
+<div class="flex justify-center" title="{{$tooltipComponent}}">
 	<div class="block">
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
@@ -90,7 +90,8 @@
 				formatter: function(value, context) {
 					var values = chartData.numbers;
 					var total = values.reduce(function(a, b) {return a + b;}, 0);
-                    return value + '\n(' + ((value*100/total).toFixed(2)) +"%)";
+					var text = value + '\n(' + ((value*100/total).toFixed(2)) +"%)";
+                    return ' '.repeat(text.length/2) + text;
                 }
 			}
 		}
