@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('exam_tmpl_id')->nullable();
             $table->unsignedBigInteger('question_type_id')->nullable();
-            $table->string('static_answer')->nullable();
+            $table->text('static_answer')->nullable();
             $table->unsignedBigInteger('dynamic_answer')->nullable();
 
             $table->orderable();
