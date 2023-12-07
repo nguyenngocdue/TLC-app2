@@ -1,4 +1,4 @@
-<x-renderer.card title="{{$item['name']}}">
+<x-renderer.card title="{{$item['name'] ?? 'Untitled'}}">
     {{$item['description']}} 
     <hr/>
     @php

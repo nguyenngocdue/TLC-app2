@@ -26,6 +26,7 @@ class WelcomeFortuneController extends Controller
         $dataSource = Exam_tmpl_question::query()
             ->where("exam_tmpl_id", $id)
             ->with('getExamTmplGroup')
+            ->orderBy('order_no')
             ->get();
         // dump($dataSource);
 
