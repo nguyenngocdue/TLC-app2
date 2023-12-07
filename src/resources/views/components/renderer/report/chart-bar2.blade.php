@@ -4,13 +4,19 @@
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
 </div>
+@php
+    //dump($meta);
+@endphp
 
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-stacked100@1.0.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@1.2.0"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-stacked100@1.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
 @endonce
 
 <script>
@@ -23,7 +29,7 @@ var chartData = {
 
 var numColors = chartData.labels.length;
 var generatedColors = generateColors(numColors);
-//console.log(generatedColors);
+console.log(Chart);
 
 
 Chart.register(ChartDataLabels);
@@ -89,21 +95,6 @@ var chartConfig = {
             }
         },
         plugins: {
-            interaction: {
-                crosshair: {
-                    line: {
-                        color: '#F00',  // Crosshair line color
-                        width: 2,       // Crosshair line width
-                        dashPattern: [], // Crosshair line dash pattern
-                    },
-                    sync: {
-                        enabled: true,  // Enable crosshair synchronization across charts
-                    },
-                    zoom: {
-                        enabled: true  // Disable zoom on crosshair
-                    }
-                }
-            },
             tooltip: {
                 enabled: true,
                 callbacks: {
@@ -166,7 +157,7 @@ var chartConfig = {
 
             },
             datalabels: {
-                display: {!! $dimensions['displayTitleOnTopCol'] ? 'function(context) {
+                display: {!! ($dimensions['displayTitleOnTopCol'] ?? null) ? 'function(context) {
                             return context.dataset.data[context.dataIndex] !== 0 
                                     && context.dataset.data[context.dataIndex] !== "" 
                                     && context.dataset.data[context.dataIndex] !== null;
@@ -182,15 +173,18 @@ var chartConfig = {
                 formatter: function(value, context) {
             		return (value.toFixed(2))
 				}
-            }
-        }
-    },
-      scales: {
-        x: {
-            barPercentage: 0.2, // Kích thước của các cột chỉ chiếm 70% chiều rộng của không gian giữa chúng
-        },
-        y: {
-            beginAtZero: true
+            },
+            zoom: {
+					zoom: {
+					wheel: {
+						enabled: {!! json_encode($dimensions['zoomWheelEnabled'] ?? false) !!},
+					},
+					pinch: {
+						enabled: {!! json_encode($dimensions['zoomPinchEnabled'] ?? false) !!},
+					},
+					mode: '{!! json_encode($dimensions['zoomMode'] ?? 'xy') !!}',
+					}
+			},
         }
     }
 };

@@ -37,7 +37,7 @@ class ChartBar2 extends Component
 
         $count = $meta['count'];
         if ($count == 0) return "<x-renderer.emptiness />";
-        $tooltipComponent = CurrentUser::isAdmin() ? "(Component name: Chart-" : "";
+        $tooltipComponent = CurrentUser::isAdmin() ? "(Component name: Chart-bar2" : "";
         return view(
             'components.renderer.report.chart-bar2',
             [

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Reports\Documents;
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\Reports\Qaqc_ncr_dataSource;
 use App\Http\Controllers\Workflow\LibApps;
+use App\Models\Qaqc_ncr;
+use App\Utils\Support\ArrayReport;
 use App\Utils\Support\Report;
 
 class Qaqc_ncr_010 extends Report_ParentDocument2Controller
@@ -97,7 +99,7 @@ class Qaqc_ncr_010 extends Report_ParentDocument2Controller
     }
 
     public function changeDataSource($dataSource, $params)
-    {
+    {        
         $dataSource = Report::convertToType($dataSource);
         $groupByStatuses = Report::groupArrayByKey($dataSource, 'ncr_status');
         $numberOfStatuses = Report::countValuesInArray($groupByStatuses);
@@ -118,6 +120,19 @@ class Qaqc_ncr_010 extends Report_ParentDocument2Controller
         $groupByParentType= Report::groupArrayByKey($dataSource, 'parent_type');
         $numberOfParentType= Report::countValuesInArray($groupByParentType);
 
+        $groupByDiscipline= Report::groupArrayByKey($dataSource, 'prod_discipline_name');
+        ksort($groupByDiscipline);
+        $numberOfDiscipline= Report::countValuesInArray($groupByDiscipline);
+        
+        $groupByInterSubconName= Report::groupArrayByKey($dataSource, 'inter_subcon_name');
+        $numberOfInterSubconName= Report::countValuesInArray($groupByInterSubconName);
+
+        $groupByRoutCause= Report::groupArrayByKey($dataSource, 'root_cause_name');
+        $numberOfRoutCause= Report::countValuesInArray($groupByRoutCause);
+
+        $groupByDisposition= Report::groupArrayByKey($dataSource, 'disposition_name');
+        $numberOfDisposition= Report::countValuesInArray($groupByDisposition);
+
         $data = [
             'tableDataSource' => collect($dataSource),
             'widgets' =>[
@@ -126,7 +141,11 @@ class Qaqc_ncr_010 extends Report_ParentDocument2Controller
                     'ncr_severity' => $numberOfSeverity, 
                     'ncr_user_team' => $numberOfUserTeam, 
                     'ncr_parent_type' => $numberOfParentType, 
-                    'ncr_report_type' => $numberOfReportType]
+                    'ncr_report_type' => $numberOfReportType,
+                    'ncr_discipline' => $numberOfDiscipline,
+                    'ncr_inter_subcon' => $numberOfInterSubconName,
+                    'ncr_root_cause' => $numberOfRoutCause,
+                    'ncr_disposition' => $numberOfDisposition]
         ];
         // dd($data);
         return $data;
