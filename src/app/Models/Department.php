@@ -20,6 +20,10 @@ class Department extends ModelExtended
         "getMembers2" => ['hasMany', User::class, 'department'],
     ];
 
+    public static $oracyParams = [
+        "getTechnicalSkillsOfDepartment()" => ["getCheckedByField", Term::class],
+    ];
+
     public function getHOD()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -36,6 +40,12 @@ class Department extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getTechnicalSkills()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
     public function getManyLineParams()
