@@ -13,22 +13,27 @@
     <div class="col-span-10 border rounded p-2">
         <div class="" >
             @if($isOnePage)
-                <form>
-                    @foreach($dataSource as $item)
-                        @php
-                            if($groupName != $item->getExamTmplGroup->name){
-                                $groupName = $item->getExamTmplGroup->name;
-                                @endphp
-                                <x-renderer.heading level=4 >{{$groupName}}</x-renderer.heading>
-                                <div id="group_{{$item->getExamTmplGroup->id}}">{{$item->getExamTmplGroup->description}}</div>
-                                
-                                @php
-                            }
-                        @endphp
-                        <x-question-answer.question-answer :item="$item"/>
-                    @endforeach
-                    <x-renderer.button htmlType="submit">Submit</x-render.button>
-                </form>
+            <form>
+                @foreach($tableOfContents as $group)
+                {{-- @dump($group) --}}
+                    <x-renderer.heading level=4 >{{$group->name}}</x-renderer.heading>
+                    <div class="flex">
+                        <div class="px-1"></div>
+                        <div class="bg-blue-500 px-1 rounded"></div>
+                        <div class="px-1"></div>                        
+                        <div>
+                            <div id="group_{{$group->id}}">{{$group->description}}</div>
+                            @foreach($dataSource as $item)
+                                @php if($item->exam_tmpl_group_id != $group->id) continue; @endphp
+                                <x-question-answer.question-answer :item="$item"/>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+                <div class="p-2">
+                    <x-renderer.button type='primary' htmlType="submit">Submit</x-render.button>
+                </div>
+            </form>
             @endif
         </div>
     </div>
