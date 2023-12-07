@@ -52,7 +52,7 @@ class Exam_tmpl_question extends ModelExtended
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'exam_tmpl_id', 'value_as_parent_id' => true, 'invisible' => true,],
 
-            ['dataIndex' => 'exam_tmpl_group',],
+            ['dataIndex' => 'exam_tmpl_group_id',],
             ['dataIndex' => 'name',],
             ['dataIndex' => 'description',],
             ['dataIndex' => 'question_type_id',],

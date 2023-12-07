@@ -77,6 +77,12 @@
         "editable-table": "exam_tmpl_questions",
         "button_add_a_new_line": "true"
     },
+    "exam_tmpls_02": {
+        "name": "exam_tmpls_02",
+        "entity-type": "exam_tmpls",
+        "editable-table": "exam_tmpl_groups",
+        "button_add_a_new_line": "true"
+    },
     "ghg_metric_type_1s_01": {
         "name": "ghg_metric_type_1s_01",
         "entity-type": "ghg_metric_type_1s",

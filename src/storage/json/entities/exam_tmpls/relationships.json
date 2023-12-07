@@ -31,6 +31,22 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_getGroups": {
+        "name": "_getGroups",
+        "relationship": "hasMany",
+        "control_name": "getGroups",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_getQuestions": {
         "name": "_getQuestions",
         "relationship": "hasMany",

@@ -104,12 +104,16 @@
     "esg_tmpls": {
         "name": "esg_tmpls"
     },
-    "exam_tmpls": {
-        "name": "exam_tmpls"
+    "exam_tmpl_groups": {
+        "name": "exam_tmpl_groups",
+        "storeEmpty_and_updateShort": "true"
     },
     "exam_tmpl_questions": {
         "name": "exam_tmpl_questions",
         "storeEmpty_and_updateShort": "true"
+    },
+    "exam_tmpls": {
+        "name": "exam_tmpls"
     },
     "fields": {
         "name": "fields"
