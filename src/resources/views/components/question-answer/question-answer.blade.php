@@ -1,4 +1,4 @@
-<x-renderer.card title=" {{$item['name']}} ">
+<x-renderer.card title="{{$item['name']}}">
     {{$item['description']}} 
     <hr/>
     @php
@@ -6,10 +6,12 @@
         :questionId="$questionId" 
         :staticAnswer="$staticAnswer" 
         :dynamicAnswer="$dynamicAnswer" 
+        :renderAsRows="$renderAsRows"
         />', [
             'questionId' => $item['id'],
             'staticAnswer' => $staticAnswer,
             'dynamicAnswer' => $dynamicAnswer,
+            'renderAsRows' => $renderAsRows,
         ]);
     @endphp
  

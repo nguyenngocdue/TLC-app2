@@ -15,17 +15,18 @@
             @if($isOnePage)
             <form>
                 @foreach($tableOfContents as $group)
-                {{-- @dump($group) --}}
                     <x-renderer.heading level=4 >{{$group->name}}</x-renderer.heading>
                     <div class="flex">
                         <div class="px-1"></div>
                         <div class="bg-blue-500 px-1 rounded"></div>
                         <div class="px-1"></div>                        
-                        <div>
+                        <div class="w-full">
                             <div id="group_{{$group->id}}">{{$group->description}}</div>
                             @foreach($dataSource as $item)
                                 @php if($item->exam_tmpl_group_id != $group->id) continue; @endphp
-                                <x-question-answer.question-answer :item="$item"/>
+                                <div class="my-2">
+                                    <x-question-answer.question-answer :item="$item"/>
+                                </div>
                             @endforeach
                         </div>
                     </div>

@@ -59,9 +59,10 @@ class QuestionAnswer extends Component
         $staticAnswer = explode("|", $item['static_answer'] ?? '');
         $dynamicAnswer = $this->getDynamicContent($item['dynamic_answer'] ?? '');
         $control = $controlIds[$questionType];
-
+        $renderAsRow = $item['render_as_rows'];
         // Log::info($staticAnswer);
         // Log::info($dynamicAnswer);
+        // Log::info($renderAsRow);
 
         return view(
             'components.question-answer.question-answer',
@@ -70,6 +71,7 @@ class QuestionAnswer extends Component
                 'control' => $control,
                 'staticAnswer' => $staticAnswer,
                 'dynamicAnswer' => $dynamicAnswer,
+                'renderAsRows' => $renderAsRow,
             ]
         );
     }

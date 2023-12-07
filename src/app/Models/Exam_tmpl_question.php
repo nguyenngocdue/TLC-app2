@@ -8,7 +8,7 @@ class Exam_tmpl_question extends ModelExtended
 {
     public $fillable = [
         "id", "name", "description", "owner_id", "order_no",
-        "exam_tmpl_id", "exam_tmpl_group_id",
+        "exam_tmpl_id", "exam_tmpl_group_id", "render_as_rows",
         'question_type_id', "static_answer", "dynamic_answer",
         /*"status",*/
     ];
@@ -56,6 +56,7 @@ class Exam_tmpl_question extends ModelExtended
             ['dataIndex' => 'name',],
             ['dataIndex' => 'description',],
             ['dataIndex' => 'question_type_id',],
+            ['dataIndex' => 'render_as_rows',],
             ['dataIndex' => 'static_answer',],
             ['dataIndex' => 'dynamic_answer',],
         ];
