@@ -201,16 +201,19 @@ var chartConfig = {
     var datasets = chartConfig.data.datasets;
     var numCategories = datasets[0].data.length;
     var sumValues = new Array(numCategories).fill(0);
-
+    var countItem = 0;
     // Iterate over each dataset and sum up the values for each category
     datasets.forEach(function (dataset) {
         dataset.data.forEach(function (value, index) {
             var  value = isNaN(parseFloat(value)) ? 0 : parseFloat(value);
+            if (value > 0) {
+                countItem += 1;
+            }; 
             sumValues[index] += value;
         });
     });
     // Calculate the average for each category
-    var average = sumValues.reduce((a, b) => a + b) / sumValues.length;
+    var average = sumValues.reduce((a, b) => a + b) / countItem;
 
     var averageValues = sumValues.map(function (value) {
         return average;

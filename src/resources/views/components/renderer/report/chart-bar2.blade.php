@@ -1,5 +1,5 @@
 @props(['chartType'])
-<div class="flex justify-center">
+<div class="flex justify-center" title="{{$tooltipComponent}}">
 	<div class="block">
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>

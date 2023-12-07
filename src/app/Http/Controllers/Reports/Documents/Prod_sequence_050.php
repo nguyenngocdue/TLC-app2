@@ -348,15 +348,15 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         foreach ($groupItems as $key => $values){
 
             // show minus icon when value is null or 0
-            $values = array_map(function($item) use ($fields){
-                foreach ($fields as $field){
-                    if (is_null($item[$field]) || !$item[$field]){
-                        // $item[$field] = (object)['value' =>'<i class="fa-light fa-minus"></i>'];
-                        $item[$field] = (object)['value' =>'0.00'];
-                    }
-                }
-                return $item;
-            }, $values);
+            // $values = array_map(function($item) use ($fields){
+            //     foreach ($fields as $field){
+            //         if (is_null($item[$field]) || !$item[$field]){
+            //             // $item[$field] = (object)['value' =>'<i class="fa-light fa-minus"></i>'];
+            //             $item[$field] = (object)['value' =>'0.00'];
+            //         }
+            //     }
+            //     return $item;
+            // }, $values);
             $data['render_pages'][$key] = [
                     'tableDataSource' => collect($values),
                     'dataWidgets' => $dataWidgets[$key],
