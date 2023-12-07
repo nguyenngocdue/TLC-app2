@@ -22,8 +22,9 @@ class WelcomeFortuneController extends Controller
     {
         if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
 
+        $id = $request->id ?? 1;
         $dataSource = Exam_tmpl_question::query()
-            ->where("exam_tmpl_id", 1)
+            ->where("exam_tmpl_id", $id)
             ->get();
 
         // dump($dataSource);
