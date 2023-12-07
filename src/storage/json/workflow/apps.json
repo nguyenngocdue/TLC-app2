@@ -474,6 +474,22 @@
         "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-graduation-cap\"><\/i>"
     },
+    "exam_tmpl_group": {
+        "name": "exam_tmpl_group",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "exam",
+        "title": "Exam Template Groups",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "exam_tmpl_question": {
         "name": "exam_tmpl_question",
         "package_tab": "application",
