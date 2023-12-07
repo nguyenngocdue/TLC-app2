@@ -30,6 +30,7 @@ class WelcomeFortuneController extends Controller
         // dump($dataSource);
 
         $tableOfContents = $dataSource->map(fn ($i) => $i->getExamTmplGroup)->unique();
+        // dump($tableOfContents);
 
         return view("welcome-fortune", [
             'dataSource' => $dataSource,

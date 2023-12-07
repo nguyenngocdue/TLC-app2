@@ -26,6 +26,7 @@ class QuestionAnswer extends Component
                 $members = $department
                     ->getMembers()
                     ->whereNot('resigned', 1)
+                    ->orderBy('name0')
                     ->get();
                 return $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
             case $DEPARTMENT_USERS_EXCLUDE_ME:
@@ -33,6 +34,7 @@ class QuestionAnswer extends Component
                     ->getMembers()
                     ->whereNot('resigned', 1)
                     ->whereNot('id', $cu->id)
+                    ->orderBy('name0')
                     ->get();
                 return $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
         }

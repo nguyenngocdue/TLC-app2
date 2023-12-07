@@ -20,7 +20,8 @@
                                 $groupName = $item->getExamTmplGroup->name;
                                 @endphp
                                 <x-renderer.heading level=4 >{{$groupName}}</x-renderer.heading>
-                                {{$item->getExamTmplGroup->description}}
+                                <div id="group_{{$item->getExamTmplGroup->id}}">{{$item->getExamTmplGroup->description}}</div>
+                                
                                 @php
                             }
                         @endphp

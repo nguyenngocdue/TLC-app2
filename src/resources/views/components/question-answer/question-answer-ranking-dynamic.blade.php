@@ -1,1 +1,39 @@
-@dump($dynamicAnswer)
+{{-- @dump($questionId, $staticAnswer, $dynamicAnswer) --}}
+<table class="border rounded m-4"> 
+    <tr>
+        <th class='border bg-gray-300'>Rank</th>
+        @for($i = 1; $i <= sizeof($dynamicAnswer); $i++)
+            <th class='border bg-gray-300'>{{$i}}</th>
+        @endfor
+    </tr>
+    @php $index=0; @endphp
+    @foreach($dynamicAnswer as $id=>$name)
+        <tr class="hover:bg-blue-100">
+            <td class="border px-5 py-1">{{$name}}</td>
+            @for($i = 1; $i <= sizeof($dynamicAnswer); $i++)
+                @php
+                    $i_1 = $i-1;
+                    $chkId = "chk_{$questionId}_{$index}_{$i_1}";
+                @endphp
+                <td class="border px-5 py-1">
+                    {{-- {{$chkId}} --}}
+                    <input 
+                        name="question_{{$questionId}}[]" 
+                        id="{{$chkId}}" 
+                        value="{{$name}}:{{$i}}"  
+                        type="checkbox"
+                        class="disabled:bg-gray-500 disabled:cursor-not-allowed"
+                        onclick="onRankClick('{{$chkId}}', {{$questionId}}, {{sizeof($dynamicAnswer)}})"
+                        />
+                </td>
+            @endfor
+        </tr>
+        @php $index++; @endphp
+    @endforeach
+    <tr>
+        <th class='border bg-gray-300'>Rank</th>
+        @for($i = 1; $i <= sizeof($dynamicAnswer); $i++)
+            <th class='border bg-gray-300'>{{$i}}</th>
+        @endfor
+    </tr>
+</table>
