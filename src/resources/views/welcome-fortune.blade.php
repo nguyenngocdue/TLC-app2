@@ -19,7 +19,7 @@
                             if($groupName != $item->getExamTmplGroup->name){
                                 $groupName = $item->getExamTmplGroup->name;
                                 @endphp
-                                <x-renderer.heading level=3 >{{$groupName}}</x-renderer.heading>
+                                <x-renderer.heading level=4 >{{$groupName}}</x-renderer.heading>
                                 {{$item->getExamTmplGroup->description}}
                                 @php
                             }
