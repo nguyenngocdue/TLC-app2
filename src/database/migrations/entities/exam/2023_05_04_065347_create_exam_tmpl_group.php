@@ -19,11 +19,13 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('exam_tmpls', function (BlueprintExtended $table) {
+        $schema->create('exam_tmpl_groups', function (BlueprintExtended $table) {
             $table->id();
             $table->string("name")->nullable();
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('exam_tmpl_id')->nullable();
 
+            $table->orderable();
             $table->appendCommonFields();
         });
     }
@@ -35,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exam_tmpls');
+        Schema::dropIfExists('exam_tmpl_groups');
     }
 };

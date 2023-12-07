@@ -19,15 +19,17 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('exam_questions', function (BlueprintExtended $table) {
+        $schema->create('exam_tmpl_questions', function (BlueprintExtended $table) {
             $table->id();
             $table->string("name")->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('exam_contest_id')->nullable();
+            $table->unsignedBigInteger('exam_tmpl_id')->nullable();
+            $table->unsignedBigInteger('exam_tmpl_group_id')->nullable();
             $table->unsignedBigInteger('question_type_id')->nullable();
-            $table->string('static_answer')->nullable();
+            $table->text('static_answer')->nullable();
             $table->unsignedBigInteger('dynamic_answer')->nullable();
 
+            $table->hasStatus();
             $table->orderable();
             $table->appendCommonFields();
         });
@@ -40,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exam_questions');
+        Schema::dropIfExists('exam_tmpl_questions');
     }
 };

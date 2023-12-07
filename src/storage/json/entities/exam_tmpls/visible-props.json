@@ -19,6 +19,11 @@
         "column_name": "owner_id",
         "new": "true"
     },
+    "_getGroups": {
+        "name": "_getGroups",
+        "column_name": "getGroups",
+        "new": "true"
+    },
     "_getQuestions": {
         "name": "_getQuestions",
         "column_name": "getQuestions",
