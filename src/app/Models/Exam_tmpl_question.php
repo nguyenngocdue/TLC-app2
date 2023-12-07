@@ -22,7 +22,7 @@ class Exam_tmpl_question extends ModelExtended
 
     public static $oracyParams = [];
 
-    public function getExamContest()
+    public function getExamTmpl()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
