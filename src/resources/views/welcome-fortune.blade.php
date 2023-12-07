@@ -8,7 +8,7 @@
 
 <div class="grid grid-cols-12 gap-2 p-4 w-full">
     <div class="col-span-2 border rounded p-2">
-        <x-navigation.table-of-content :dataSource="$tableOfContents"/>
+        <x-navigation.table-of-contents :dataSource="$tableOfContents"/>
     </div>
     <div class="col-span-10 border rounded p-2">
         <div class="" >

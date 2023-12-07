@@ -1,4 +1,4 @@
-@if(count($dataSource) > 0)
+@if(is_iterable($dataSource) && count($dataSource) > 0)
     @php $counter =0; @endphp
     <ol class="pl-5">
         @foreach($dataSource as $item)
@@ -8,7 +8,7 @@
                 {{ $item['name'] }}
             {{-- </a> --}}
             @if(!empty($item['children']))
-            <x-navigation.table-of-content :dataSource="$item['children']" :parentCounter="$parentCounter.$counterStr" />
+            <x-navigation.table-of-contents :dataSource="$item['children']" :parentCounter="$parentCounter.$counterStr" />
             @endif
         </li>
         @endforeach
