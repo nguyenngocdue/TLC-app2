@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Report;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
@@ -33,6 +34,7 @@ class ChartDoughnut extends Component
         $meta =  $this->meta;
         $count = $meta['count'];
         if ($count == 0) return "<x-renderer.emptiness />";
+        $tooltipComponent = CurrentUser::isAdmin() ? "(Component name: chart-doughtnut)" : "";
         return view(
             'components.renderer.report.chart-doughnut',
             [
@@ -41,6 +43,7 @@ class ChartDoughnut extends Component
                 'metric' => $this->metric,
                 'showValue' => $this->showValue,
                 'dimensions' => $this->dimensions,
+                'tooltipComponent' => $tooltipComponent,
             ]
         );
     }
