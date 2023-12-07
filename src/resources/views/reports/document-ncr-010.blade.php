@@ -49,6 +49,36 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
                         <div class="flex flex-col justify-between">
+                            <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>All Issues by Discipline</x-renderer.heading>
+                            <x-renderer.report.pivot-chart2 key="ncr_discipline" :data="$widgets['ncr_discipline']" ></x-renderer.report.pivot-chart2>
+                            <x-renderer.heading level=6 xalign='center' class='text-gray-600 font-semibold '>Count the number of issues based on <strong>Discipline</strong></x-renderer.heading>
+                        </div>
+                        <div class="flex flex-col justify-between">
+                            <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>All Issues by Internal/External</x-renderer.heading>
+                            <x-renderer.report.pivot-chart2 key="ncr_inter_subcon" :data="$widgets['ncr_inter_subcon']" ></x-renderer.report.pivot-chart2>
+                            <x-renderer.heading level=6 xalign='center' class='text-gray-600 font-semibold '>Count the number of issues based on <strong>Discipline</strong></x-renderer.heading>
+                        </div>
+                        <div class="flex flex-col justify-between">
+                            <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>All Issues by Root Cause</x-renderer.heading>
+                            <x-renderer.report.pivot-chart2 key="ncr_root_cause" :data="$widgets['ncr_root_cause']" ></x-renderer.report.pivot-chart2>
+                            <x-renderer.heading level=6 xalign='center' class='text-gray-600 font-semibold '>Count the number of issues based on <strong>Root Cause</strong></x-renderer.heading>
+                        </div>
+                        <div class="flex flex-col justify-between">
+                            <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>All Issues by Root Cause</x-renderer.heading>
+                            <x-renderer.report.pivot-chart2 key="ncr_disposition" :data="$widgets['ncr_disposition']" ></x-renderer.report.pivot-chart2>
+                            <x-renderer.heading level=6 xalign='center' class='text-gray-600 font-semibold '>Count the number of issues based on <strong>Disposition</strong></x-renderer.heading>
+                        </div>
+                </div>
+            </div>
+            <x-renderer.page-break />
+            
+            <div style='' class="{{$layout}} items-center bg-white box-border p-8">
+                <div class="pt-5">
+                    <x-print.header6 />
+                    <x-renderer.heading level=2 class='text-center pt-4'>Non Conformance Reports</x-renderer.heading>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
+                        <div class="flex flex-col justify-between">
                             <x-renderer.heading level=5 xalign='center' class='text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4'>All Issues by Status</x-renderer.heading>
                             <x-renderer.report.pivot-chart2 key="ncr_status" :data="$widgets['ncr_status']" ></x-renderer.report.pivot-chart2>
                              <x-renderer.heading level=6 xalign='center' class='text-gray-600 font-semibold '>Count the number of issues based on <strong>statuses of the NCR</strong></x-renderer.heading>
