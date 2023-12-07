@@ -17,6 +17,7 @@ class QuestionAnswer extends Component
     {
         $DEPARTMENT_USERS = 386;
         $DEPARTMENT_USERS_EXCLUDE_ME = 387;
+
         $cu = CurrentUser::get();
         $department = $cu->getUserDepartment;
 
