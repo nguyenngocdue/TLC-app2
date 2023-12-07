@@ -15,7 +15,7 @@
             @if($isOnePage)
             <form>
                 @foreach($tableOfContents as $group)
-                    <x-renderer.heading level=4 >{{$group->name}}</x-renderer.heading>
+                    <x-renderer.heading id="exam_group_{{$group->id}}" level=4 >{{$group->name}}</x-renderer.heading>
                     <div class="flex">
                         <div class="px-1"></div>
                         <div class="bg-blue-500 px-1 rounded"></div>
