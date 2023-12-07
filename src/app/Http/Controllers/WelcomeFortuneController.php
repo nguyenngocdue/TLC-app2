@@ -25,12 +25,15 @@ class WelcomeFortuneController extends Controller
         $id = $request->id ?? 1;
         $dataSource = Exam_tmpl_question::query()
             ->where("exam_tmpl_id", $id)
+            ->with('getExamTmplGroup')
             ->get();
-
         // dump($dataSource);
+
+        $tableOfContents = $dataSource->map(fn ($i) => $i->getExamTmplGroup)->unique();
 
         return view("welcome-fortune", [
             'dataSource' => $dataSource,
+            'tableOfContents' => $tableOfContents,
             'isOnePage' => true,
         ]);
     }

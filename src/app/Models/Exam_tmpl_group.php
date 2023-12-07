@@ -34,7 +34,7 @@ class Exam_tmpl_group extends ModelExtended
 
             // ['dataIndex' => 'exam_tmpl_group_id',],
             ['dataIndex' => 'name',],
-            // ['dataIndex' => 'description',],
+            ['dataIndex' => 'description',],
             // ['dataIndex' => 'question_type_id',],
             // ['dataIndex' => 'static_answer',],
             // ['dataIndex' => 'dynamic_answer',],
