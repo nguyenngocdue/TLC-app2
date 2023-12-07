@@ -42,7 +42,7 @@ class Department extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getTechnicalSkills()
+    public function getTechnicalSkillsOfDepartment()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

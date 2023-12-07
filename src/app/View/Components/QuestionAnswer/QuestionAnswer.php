@@ -15,14 +15,15 @@ class QuestionAnswer extends Component
 
     function getDynamicContent($id)
     {
-        $DEPARTMENT_USERS = 386;
-        $DEPARTMENT_USERS_EXCLUDE_ME = 387;
+        $MY_DEPT_USERS = 386;
+        $MY_DEPT_USERS_EXCLUDE_ME = 387;
+        $MY_DEPT_TECH_SKILLS = 391;
 
         $cu = CurrentUser::get();
         $department = $cu->getUserDepartment;
 
         switch ($id) {
-            case $DEPARTMENT_USERS:
+            case $MY_DEPT_USERS:
                 $members = $department
                     ->getMembers()
                     ->whereNot('resigned', 1)
@@ -30,7 +31,7 @@ class QuestionAnswer extends Component
                     ->orderBy('name0')
                     ->get();
                 return $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
-            case $DEPARTMENT_USERS_EXCLUDE_ME:
+            case $MY_DEPT_USERS_EXCLUDE_ME:
                 $members = $department
                     ->getMembers()
                     ->whereNot('resigned', 1)
@@ -39,6 +40,13 @@ class QuestionAnswer extends Component
                     ->orderBy('name0')
                     ->get();
                 return $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
+            case $MY_DEPT_TECH_SKILLS:
+                $skills = $department->getTechnicalSkillsOfDepartment();
+                $skills = $skills->pluck('name', 'id')->toArray();
+                return $skills;
+            default:
+                if ($id) dump("Unknown how to get dynamic answer from [$id]");
+                return collect([]);
         }
     }
 
