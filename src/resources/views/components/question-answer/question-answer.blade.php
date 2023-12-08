@@ -1,42 +1,49 @@
-<x-renderer.card title="{{$item['name'] ?? 'Untitled'}}">
-    {{$item['description']}} 
-    <hr/>
-    
-    @php
-        switch($control){
-            case 'radio-dynanamic':
-                $control = 'radio-stanamic';
-                $loop = $dynamicAnswerCols;
-            break;
-            case 'checkbox-dynanamic':
-                $control = 'checkbox-stanamic';
-                $loop = $dynamicAnswerCols;
-            break;
-            default:
-                $loop = [''];
-            break;
-        }
-        
-        foreach($loop as $subQuestion){
-            echo $subQuestion;
-            echo Blade::render('<x-question-answer.question-answer-'.$control.'
-            :questionId="$questionId" 
-            :staticAnswer="$staticAnswer" 
-            :dynamicAnswerRows="$dynamicAnswerRows" 
+<div class="sticky top-[114px] bg-blue-400 rounded mb-2">
+    <x-renderer.heading level=5 class="z-10 p-2">
+        {{$item['name'] ?? 'Untitled'}}
+    </x-renderer.heading>
+    <div class="p-1 mx-4"> {{$item['description']}}  </div>
+</div>
+<div class="flex">
+    <div class="px-1"></div>
+    <div class="bg-blue-400 px-1 rounded"></div>
+    <div class="px-1"></div>                        
+    <div class="w-full">
+        @php
+            switch($control){
+                case 'radio-dynanamic':
+                    $control = 'radio-stanamic';
+                    $loop = $dynamicAnswerCols;
+                break;
+                case 'checkbox-dynanamic':
+                    $control = 'checkbox-stanamic';
+                    $loop = $dynamicAnswerCols;
+                break;
+                default:
+                    $loop = [''];
+                break;
+            }
             
-            :renderAsRows="$renderAsRows"
-            />', [
-                'questionId' => $item['id'],
-                'staticAnswer' => $staticAnswer,
-                'dynamicAnswerRows' => $dynamicAnswerRows,
-                // 'dynamicAnswerCols' => $dynamicAnswerCols,
-                'renderAsRows' => $renderAsRows,
-            ]);
-        }
-    @endphp
+            foreach($loop as $subQuestion){
+                echo $subQuestion;
+                echo Blade::render('<x-question-answer.question-answer-'.$control.'
+                :questionId="$questionId" 
+                :staticAnswer="$staticAnswer" 
+                :dynamicAnswerRows="$dynamicAnswerRows" 
+                
+                :renderAsRows="$renderAsRows"
+                />', [
+                    'questionId' => $item['id'],
+                    'staticAnswer' => $staticAnswer,
+                    'dynamicAnswerRows' => $dynamicAnswerRows,
+                    // 'dynamicAnswerCols' => $dynamicAnswerCols,
+                    'renderAsRows' => $renderAsRows,
+                ]);
+            }
+        @endphp
+    </div>
+</div>
  
-</x-renderer.card>
-            
 @once
 <script>
     const onRankClick = (chkId, questionId, count) => {

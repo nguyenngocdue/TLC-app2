@@ -19,7 +19,7 @@
                 @foreach($tableOfContents as $index => $group)
                 <div id="div-holder-for-sticky-to-push">
                     <x-renderer.heading 
-                            class="sticky top-16 px-2 py-2 rounded bg-blue-500" 
+                            class="sticky top-[68px] px-2 py-2 rounded bg-blue-500 z-[15]" 
                             id="exam_group_{{$group->id}}" 
                             level=4 
                             >{{$group->name}}</x-renderer.heading>
