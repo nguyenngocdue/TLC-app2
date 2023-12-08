@@ -13,7 +13,7 @@
                 $loop = $dynamicAnswerCols;
             break;
             default:
-                $loop = ["nothing"];
+                $loop = [''];
             break;
         }
         
