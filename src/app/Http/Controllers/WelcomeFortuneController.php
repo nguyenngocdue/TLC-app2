@@ -20,8 +20,6 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        if (!CurrentUser::isAdmin()) return abort("Nothing here", 404);
-
         $id = $request->id ?? 1;
         $dataSource = Exam_tmpl_question::query()
             ->where("exam_tmpl_id", $id)
