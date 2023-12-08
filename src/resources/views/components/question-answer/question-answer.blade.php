@@ -30,7 +30,7 @@
                 foreach($subQuestions as $subQuestion){
                     // echo $subQuestion;
                     if($showSubQuestion){ 
-                        echo $subQuestion['name'] ?? '';
+                        echo "<b>". $subQuestion['name']."</b>" ?? '';
                         // dump($subQuestion);
                     }
                     echo Blade::render('<x-question-answer.question-answer-'.$control.'
@@ -45,7 +45,6 @@
                         'staticAnswer' => $staticAnswer,
                         'dynamicAnswerRows' => $dynamicAnswerRows,
                         'dynamicAnswerRowGroups' => $dynamicAnswerRowGroups,
-                        // 'dynamicAnswerCols' => $dynamicAnswerCols,
                         'renderAsRows' => $renderAsRows,
                     ]);
                 }
