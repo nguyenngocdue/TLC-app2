@@ -1,7 +1,7 @@
 {{-- @dump($questionId, $staticAnswer, $dynamicAnswerRows) --}}
 <table class="border rounded m-4"> 
     <tr>
-        <th class='border bg-gray-300'>Rank</th>
+        <th class='border bg-gray-300'></th>
         @for($i = 1; $i <= sizeof($dynamicAnswerRows); $i++)
             <th class='border bg-gray-300 px-2'>{{$i}}</th>
         @endfor
@@ -31,9 +31,11 @@
         @php $index++; @endphp
     @endforeach
     <tr>
-        <th class='border bg-gray-300'>Rank</th>
+        <th class='border bg-gray-300'></th>
         @for($i = 1; $i <= sizeof($dynamicAnswerRows); $i++)
             <th class='border bg-gray-300 px-2'>{{$i}}</th>
         @endfor
     </tr>
 </table>
+
+<i>1 is the highest, {{sizeof($dynamicAnswerRows)}} is the lowest.</i>

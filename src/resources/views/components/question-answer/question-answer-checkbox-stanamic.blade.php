@@ -1,7 +1,7 @@
 {{-- @dump($questionId, $staticAnswer, $dynamicAnswerRows) --}}
 <table class="border rounded m-4"> 
     <tr>
-        <th class='border bg-gray-300'>Rank</th>
+        <th class='border bg-gray-300'></th>
         @foreach($staticAnswer as $value)
             <th class='border bg-gray-300 px-2'>{{$value}}</th>
         @endforeach
@@ -30,7 +30,7 @@
         @php $index++; @endphp
     @endforeach
     <tr>
-        <th class='border bg-gray-300'>Rank</th>
+        <th class='border bg-gray-300'></th>
         @foreach($staticAnswer as $value)
             <th class='border bg-gray-300 px-2'>{{$value}}</th>
         @endforeach

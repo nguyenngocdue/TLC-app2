@@ -2,6 +2,7 @@
 
 namespace App\View\Components\QuestionAnswer;
 
+use App\Models\Department;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
@@ -18,6 +19,7 @@ class QuestionAnswer extends Component
         $MY_DEPT_USERS = 386;
         $MY_DEPT_USERS_EXCLUDE_ME = 387;
         $MY_DEPT_TECH_SKILLS = 391;
+        $MY_RELATED_DEPTS = 394;
 
         $cu = CurrentUser::get();
         $department = $cu->getUserDepartment;
@@ -50,6 +52,19 @@ class QuestionAnswer extends Component
                 $skills = $skills->pluck('name', 'id')->toArray();
                 // dump($skills);
                 return $skills;
+            case $MY_RELATED_DEPTS:
+                $relatedMatrix = config("departments.related");
+                $result = [];
+                foreach ($relatedMatrix as $indexX => $list) {
+                    foreach ($list as $indexY) {
+                        $result[$indexX][$indexY] = 1;
+                        $result[$indexY][$indexX] = 1;
+                    }
+                }
+                $result = array_keys($result[$department->id]);
+                // dump($result);
+                $result = Department::whereIn('id', $result)->get()->pluck('name', 'id')->toArray();
+                return $result;
             default:
                 if ($id) dump("Unknown how to get dynamic answer from [$id]");
                 return collect([]);
