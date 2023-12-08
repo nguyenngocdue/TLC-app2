@@ -21,7 +21,6 @@ class Department extends ModelExtended
     ];
 
     public static $oracyParams = [
-        "getTechnicalSkillsOfDepartment()" => ["getCheckedByField", Term::class],
         "getSkillsOfDepartment()" => ["getCheckedByField", Department_skill::class],
     ];
 
@@ -41,12 +40,6 @@ class Department extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    public function getTechnicalSkillsOfDepartment()
-    {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
     public function getSkillsOfDepartment()

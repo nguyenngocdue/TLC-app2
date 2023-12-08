@@ -47,22 +47,6 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getTechnicalSkillsOfDepartment()": {
-        "name": "_getTechnicalSkillsOfDepartment()",
-        "relationship": "getCheckedByField",
-        "control_name": "getTechnicalSkillsOfDepartment()",
-        "renderer_view_all": "agg_count",
-        "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "checkbox",
-        "filter_columns": "field_id",
-        "filter_values": "211",
-        "radio_checkbox_colspan": "2",
-        "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
-    },
     "_getSkillsOfDepartment()": {
         "name": "_getSkillsOfDepartment()",
         "relationship": "getCheckedByField",

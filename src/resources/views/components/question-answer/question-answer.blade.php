@@ -10,6 +10,7 @@
     <div class="px-1"></div>                        
     <div class="w-full">
         @php
+            $showSubQuestion=true;
             switch($control){
                 case 'radio-dynanamic':
                     $control = 'radio-stanamic';
@@ -20,25 +21,34 @@
                     $loop = $dynamicAnswerCols;
                 break;
                 default:
-                    $loop = [''];
+                    $loop = [['name' => '']];
+                    $showSubQuestion=false;
                 break;
             }
             
-            foreach($loop as $subQuestion){
-                echo $subQuestion;
-                echo Blade::render('<x-question-answer.question-answer-'.$control.'
-                :questionId="$questionId" 
-                :staticAnswer="$staticAnswer" 
-                :dynamicAnswerRows="$dynamicAnswerRows" 
-                
-                :renderAsRows="$renderAsRows"
-                />', [
-                    'questionId' => $item['id'],
-                    'staticAnswer' => $staticAnswer,
-                    'dynamicAnswerRows' => $dynamicAnswerRows,
-                    // 'dynamicAnswerCols' => $dynamicAnswerCols,
-                    'renderAsRows' => $renderAsRows,
-                ]);
+            foreach($loop as $subQuestions){
+                foreach($subQuestions as $subQuestion){
+                    // echo $subQuestion;
+                    if($showSubQuestion){ 
+                        echo $subQuestion['name'] ?? '';
+                        // dump($subQuestion);
+                    }
+                    echo Blade::render('<x-question-answer.question-answer-'.$control.'
+                    :questionId="$questionId" 
+                    :staticAnswer="$staticAnswer" 
+                    :dynamicAnswerRows="$dynamicAnswerRows" 
+                    :dynamicAnswerRowGroups="$dynamicAnswerRowGroups" 
+                    
+                    :renderAsRows="$renderAsRows"
+                    />', [
+                        'questionId' => $item['id'],
+                        'staticAnswer' => $staticAnswer,
+                        'dynamicAnswerRows' => $dynamicAnswerRows,
+                        'dynamicAnswerRowGroups' => $dynamicAnswerRowGroups,
+                        // 'dynamicAnswerCols' => $dynamicAnswerCols,
+                        'renderAsRows' => $renderAsRows,
+                    ]);
+                }
             }
         @endphp
     </div>

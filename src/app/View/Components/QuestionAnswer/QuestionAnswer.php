@@ -3,6 +3,7 @@
 namespace App\View\Components\QuestionAnswer;
 
 use App\Models\Department;
+use App\Models\Department_skill_group;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
@@ -12,6 +13,16 @@ class QuestionAnswer extends Component
     function __construct(
         private $item = [],
     ) {
+    }
+
+    function getMemberOfTeam($department)
+    {
+        $members = $department
+            ->getMembers()
+            ->whereNot('resigned', 1)
+            ->whereNot('show_on_beta', 1)
+            ->orderBy('name0');
+        return $members;
     }
 
     function getDynamicContent($id)
@@ -26,31 +37,29 @@ class QuestionAnswer extends Component
 
         switch ($id) {
             case $MY_DEPT_USERS:
-                $members = $department
-                    ->getMembers()
-                    ->whereNot('resigned', 1)
-                    ->whereNot('show_on_beta', 1)
-                    ->orderBy('name0')
+                $members = $this->getMemberOfTeam($department)
                     ->get();
-                $members0 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
-                // $members1 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => $u->gender]);
+                // $members0 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
+                // return $members0;
+                $members1 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => $u->gender ? "Female" : "Male"]);
                 // dump($members1);
-                return $members0;
+                return $members1;
             case $MY_DEPT_USERS_EXCLUDE_ME:
-                $members = $department
-                    ->getMembers()
-                    ->whereNot('resigned', 1)
-                    ->whereNot('show_on_beta', 1)
+                $members = $this->getMemberOfTeam($department)
                     ->whereNot('id', $cu->id)
-                    ->orderBy('name0')
                     ->get();
-                $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
-                // dump($members);
+                // $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
+                // return $members;
+                $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => $u->gender ? "Female" : "Male"]);
                 return $members;
             case $MY_DEPT_TECH_SKILLS:
-                $skills = $department->getTechnicalSkillsOfDepartment();
-                $skills = $skills->pluck('name', 'id')->toArray();
-                // dump($skills);
+                $skills = $department->getSkillsOfDepartment();
+                $allGroupIds = $skills->pluck('department_skill_group_id');
+                $allGroups = Department_skill_group::whereIn('id', $allGroupIds)->get()->pluck('name', 'id');
+                // dump($allGroups);
+                $skills = $skills->map(fn ($i) => ['id' => $i->id, 'name' => $i->name, 'group' => $allGroups[$i->department_skill_group_id]]);
+                // $skills = $skills->pluck('name', 'id')->toArray();
+                // dd($skills);
                 return $skills;
             case $MY_RELATED_DEPTS:
                 $relatedMatrix = config("departments.related");
@@ -63,12 +72,23 @@ class QuestionAnswer extends Component
                 }
                 $result = array_keys($result[$department->id]);
                 // dump($result);
-                $result = Department::whereIn('id', $result)->get()->pluck('name', 'id')->toArray();
+                $result = Department::whereIn('id', $result)
+                    ->orderBy('name')
+                    ->get()
+                    ->map(fn ($i) => ['id' => $i->id, 'name' => $i->name, 'group' => 'no_group']);
+                // ->pluck('name', 'id')
+                // ->toArray();
                 return $result;
             default:
                 if ($id) dump("Unknown how to get dynamic answer from [$id]");
                 return collect([]);
         }
+    }
+
+    function makeUpDynamicData($dynamicCollection)
+    {
+        $result = $dynamicCollection->groupBy('group');
+        return $result;
     }
 
     function render()
@@ -92,14 +112,17 @@ class QuestionAnswer extends Component
         $questionType = $item['question_type_id'] ?? null;
 
         $staticAnswer = explode("|", $item['static_answer'] ?? '');
-        $dynamicAnswerRows = $this->getDynamicContent($item['dynamic_answer_rows'] ?? '');
-        $dynamicAnswerCols = $this->getDynamicContent($item['dynamic_answer_cols'] ?? '');
+        $dynamicAnswerRows = $this->makeUpDynamicData($this->getDynamicContent($item['dynamic_answer_rows'] ?? ''));
+        $dynamicAnswerRowGroups = $dynamicAnswerRows->keys();
+        // dump($dynamicAnswerRowGroups);
+        $dynamicAnswerCols = $this->makeUpDynamicData($this->getDynamicContent($item['dynamic_answer_cols'] ?? ''));
         $control = $controlIds[$questionType];
         $renderAsRow = $item['render_as_rows'];
         // Log::info($staticAnswer);
         // Log::info($dynamicAnswer);
         // Log::info($renderAsRow);
-
+        // dump($dynamicAnswerRows);
+        // dd();
         return view(
             'components.question-answer.question-answer',
             [
@@ -107,6 +130,7 @@ class QuestionAnswer extends Component
                 'control' => $control,
                 'staticAnswer' => $staticAnswer,
                 'dynamicAnswerRows' => $dynamicAnswerRows,
+                'dynamicAnswerRowGroups' => $dynamicAnswerRowGroups,
                 'dynamicAnswerCols' => $dynamicAnswerCols,
                 'renderAsRows' => $renderAsRow,
             ]

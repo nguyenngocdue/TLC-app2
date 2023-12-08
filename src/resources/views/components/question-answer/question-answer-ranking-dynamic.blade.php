@@ -7,28 +7,34 @@
         @endfor
     </tr>
     @php $index=0; @endphp
-    @foreach($dynamicAnswerRows as $id=>$name)
-        <tr class="hover:bg-blue-100">
-            <td class="border px-5 py-1">{{$name}}</td>
-            @for($i = 1; $i <= sizeof($dynamicAnswerRows); $i++)
-                @php
-                    $i_1 = $i-1;
-                    $chkId = "chk_{$questionId}_{$index}_{$i_1}";
-                @endphp
-                <td class="border px-5 py-1 text-center">
-                    {{-- {{$chkId}} --}}
-                    <input 
-                        name="question_{{$questionId}}[]" 
-                        id="{{$chkId}}" 
-                        value="{{$name}}:{{$i}}"  
-                        type="checkbox"
-                        class="disabled:bg-gray-500 disabled:cursor-not-allowed"
-                        onclick="onRankClick('{{$chkId}}', {{$questionId}}, {{sizeof($dynamicAnswerRows)}})"
-                        />
-                </td>
-            @endfor
-        </tr>
-        @php $index++; @endphp
+    @foreach($dynamicAnswerRows as $id=>$objects)
+        @foreach($objects as $object) 
+            @php 
+                $label = $object['name'];
+                $id = $object['id'];
+            @endphp
+            <tr class="hover:bg-blue-100">
+                <td class="border px-5 py-1">{{$label}}</td>
+                @for($i = 1; $i <= sizeof($dynamicAnswerRows); $i++)
+                    @php
+                        $i_1 = $i-1;
+                        $chkId = "chk_{$questionId}_{$index}_{$i_1}";
+                    @endphp
+                    <td class="border px-5 py-1 text-center">
+                        {{-- {{$chkId}} --}}
+                        <input 
+                            name="question_{{$questionId}}[]" 
+                            id="{{$chkId}}" 
+                            value="{{$label}}:{{$i}}"  
+                            type="checkbox"
+                            class="disabled:bg-gray-500 disabled:cursor-not-allowed"
+                            onclick="onRankClick('{{$chkId}}', {{$questionId}}, {{sizeof($dynamicAnswerRows)}})"
+                            />
+                    </td>
+                @endfor
+            </tr>
+            @php $index++; @endphp
+        @endforeach
     @endforeach
     <tr>
         <th class='border bg-gray-300 min-w-[100px]'></th>
