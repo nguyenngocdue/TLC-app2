@@ -30,7 +30,10 @@ class QuestionAnswer extends Component
                     ->whereNot('show_on_beta', 1)
                     ->orderBy('name0')
                     ->get();
-                return $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
+                $members0 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
+                // $members1 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => $u->gender]);
+                // dump($members1);
+                return $members0;
             case $MY_DEPT_USERS_EXCLUDE_ME:
                 $members = $department
                     ->getMembers()
@@ -39,10 +42,13 @@ class QuestionAnswer extends Component
                     ->whereNot('id', $cu->id)
                     ->orderBy('name0')
                     ->get();
-                return $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
+                $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
+                // dump($members);
+                return $members;
             case $MY_DEPT_TECH_SKILLS:
                 $skills = $department->getTechnicalSkillsOfDepartment();
                 $skills = $skills->pluck('name', 'id')->toArray();
+                // dump($skills);
                 return $skills;
             default:
                 if ($id) dump("Unknown how to get dynamic answer from [$id]");
@@ -69,7 +75,7 @@ class QuestionAnswer extends Component
         $questionType = $item['question_type_id'] ?? null;
 
         $staticAnswer = explode("|", $item['static_answer'] ?? '');
-        $dynamicAnswer = $this->getDynamicContent($item['dynamic_answer'] ?? '');
+        $dynamicAnswer = $this->getDynamicContent($item['dynamic_answer_rows'] ?? '');
         $control = $controlIds[$questionType];
         $renderAsRow = $item['render_as_rows'];
         // Log::info($staticAnswer);

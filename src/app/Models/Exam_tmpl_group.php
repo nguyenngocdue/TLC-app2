@@ -37,7 +37,7 @@ class Exam_tmpl_group extends ModelExtended
             ['dataIndex' => 'description',],
             // ['dataIndex' => 'question_type_id',],
             // ['dataIndex' => 'static_answer',],
-            // ['dataIndex' => 'dynamic_answer',],
+            // ['dataIndex' => 'dynamic_answer_rows',],
         ];
     }
 }

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger('question_type_id')->nullable();
             $table->boolean('render_as_rows')->nullable();
             $table->text('static_answer')->nullable();
-            $table->unsignedBigInteger('dynamic_answer')->nullable();
+            $table->unsignedBigInteger('dynamic_answer_rows')->nullable();
 
             $table->hasStatus();
             $table->orderable();

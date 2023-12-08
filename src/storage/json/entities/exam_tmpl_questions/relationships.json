@@ -47,10 +47,10 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getDynamicAnswer": {
-        "name": "_getDynamicAnswer",
+    "_getDynamicAnswerRows": {
+        "name": "_getDynamicAnswerRows",
         "relationship": "belongsTo",
-        "control_name": "dynamic_answer",
+        "control_name": "dynamic_answer_rows",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

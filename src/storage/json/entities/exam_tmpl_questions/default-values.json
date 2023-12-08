@@ -168,9 +168,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_dynamic_answer": {
-        "name": "_dynamic_answer",
-        "column_name": "dynamic_answer",
+    "_dynamic_answer_rows": {
+        "name": "_dynamic_answer_rows",
+        "column_name": "dynamic_answer_rows",
         "label": "",
         "validation": "",
         "validation_regex": "",
