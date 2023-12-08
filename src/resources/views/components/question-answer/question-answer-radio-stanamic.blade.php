@@ -8,7 +8,9 @@
     </tr>
     @php $index=0; @endphp
     @foreach($dynamicAnswerRowGroups as $groupName)
+        @if($groupName != 'no_group')
         <tr><th class="bg-gray-200 text-left px-2" colspan="{{sizeof($staticAnswer) + 1}}">{{$groupName}}</th></tr>
+        @endif
         @foreach($dynamicAnswerRows[$groupName] as $id=>$object)
             @php 
                 $label = $object['name'];

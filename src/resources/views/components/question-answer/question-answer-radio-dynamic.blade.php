@@ -1,7 +1,9 @@
 {{-- @dump($dynamicAnswerRows) --}}
 {{-- @dump($staticAnswer) --}}
 @foreach($dynamicAnswerRowGroups as $groupName)
+    @if($groupName != 'no_group')    
     <b>{{$groupName}}</b>
+    @endif
     <div class="grid {{$renderAsRows ?: 'grid-cols-10'}}">
         @foreach($dynamicAnswerRows[$groupName] as $id => $object)
             @php

@@ -41,7 +41,7 @@ class QuestionAnswer extends Component
                     ->get();
                 // $members0 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
                 // return $members0;
-                $members1 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => $u->gender ? "Female" : "Male"]);
+                $members1 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group']);
                 // dump($members1);
                 return $members1;
             case $MY_DEPT_USERS_EXCLUDE_ME:
@@ -50,7 +50,7 @@ class QuestionAnswer extends Component
                     ->get();
                 // $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
                 // return $members;
-                $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => $u->gender ? "Female" : "Male"]);
+                $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group']);
                 return $members;
             case $MY_DEPT_TECH_SKILLS:
                 $skills = $department->getSkillsOfDepartment();
