@@ -63,6 +63,22 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": "true"
     },
+    "_getDynamicAnswerCols": {
+        "name": "_getDynamicAnswerCols",
+        "relationship": "belongsTo",
+        "control_name": "dynamic_answer_cols",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_values": "210",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",

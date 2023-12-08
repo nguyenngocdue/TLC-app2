@@ -69,13 +69,16 @@ class QuestionAnswer extends Component
             388 => 'ranking-dynamic',
             389 => 'checkbox-stanamic',
             390 => 'radio-stanamic',
+            392 => 'radio-dynanamic',
+            393 => 'checkbox-dynanamic',
         ];
 
         $item = $this->item;
         $questionType = $item['question_type_id'] ?? null;
 
         $staticAnswer = explode("|", $item['static_answer'] ?? '');
-        $dynamicAnswer = $this->getDynamicContent($item['dynamic_answer_rows'] ?? '');
+        $dynamicAnswerRows = $this->getDynamicContent($item['dynamic_answer_rows'] ?? '');
+        $dynamicAnswerCols = $this->getDynamicContent($item['dynamic_answer_cols'] ?? '');
         $control = $controlIds[$questionType];
         $renderAsRow = $item['render_as_rows'];
         // Log::info($staticAnswer);
@@ -88,7 +91,8 @@ class QuestionAnswer extends Component
                 'item' => $item,
                 'control' => $control,
                 'staticAnswer' => $staticAnswer,
-                'dynamicAnswer' => $dynamicAnswer,
+                'dynamicAnswerRows' => $dynamicAnswerRows,
+                'dynamicAnswerCols' => $dynamicAnswerCols,
                 'renderAsRows' => $renderAsRow,
             ]
         );

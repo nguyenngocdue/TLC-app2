@@ -321,12 +321,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
-        "column_type": "int unsigned",
-        "label": "",
-        "control": "",
+    "_dynamic_answer_cols": {
+        "name": "_dynamic_answer_cols",
+        "column_name": "dynamic_answer_cols",
+        "column_type": "bigint unsigned",
+        "label": "Dynamic Answer Cols",
+        "control": "dropdown",
         "align": "",
         "col_span": "",
         "width": "",
@@ -344,10 +344,10 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "column_type": "varchar(255)",
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "column_type": "int unsigned",
         "label": "",
         "control": "",
         "align": "",

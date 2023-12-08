@@ -1,16 +1,16 @@
-{{-- @dump($questionId, $staticAnswer, $dynamicAnswer) --}}
+{{-- @dump($questionId, $staticAnswer, $dynamicAnswerRows) --}}
 <table class="border rounded m-4"> 
     <tr>
         <th class='border bg-gray-300'>Rank</th>
-        @for($i = 1; $i <= sizeof($dynamicAnswer); $i++)
+        @for($i = 1; $i <= sizeof($dynamicAnswerRows); $i++)
             <th class='border bg-gray-300 px-2'>{{$i}}</th>
         @endfor
     </tr>
     @php $index=0; @endphp
-    @foreach($dynamicAnswer as $id=>$name)
+    @foreach($dynamicAnswerRows as $id=>$name)
         <tr class="hover:bg-blue-100">
             <td class="border px-5 py-1">{{$name}}</td>
-            @for($i = 1; $i <= sizeof($dynamicAnswer); $i++)
+            @for($i = 1; $i <= sizeof($dynamicAnswerRows); $i++)
                 @php
                     $i_1 = $i-1;
                     $chkId = "chk_{$questionId}_{$index}_{$i_1}";
@@ -23,7 +23,7 @@
                         value="{{$name}}:{{$i}}"  
                         type="checkbox"
                         class="disabled:bg-gray-500 disabled:cursor-not-allowed"
-                        onclick="onRankClick('{{$chkId}}', {{$questionId}}, {{sizeof($dynamicAnswer)}})"
+                        onclick="onRankClick('{{$chkId}}', {{$questionId}}, {{sizeof($dynamicAnswerRows)}})"
                         />
                 </td>
             @endfor
@@ -32,7 +32,7 @@
     @endforeach
     <tr>
         <th class='border bg-gray-300'>Rank</th>
-        @for($i = 1; $i <= sizeof($dynamicAnswer); $i++)
+        @for($i = 1; $i <= sizeof($dynamicAnswerRows); $i++)
             <th class='border bg-gray-300 px-2'>{{$i}}</th>
         @endfor
     </tr>

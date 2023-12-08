@@ -1,4 +1,4 @@
-{{-- @dump($questionId, $staticAnswer, $dynamicAnswer) --}}
+{{-- @dump($questionId, $staticAnswer, $dynamicAnswerRows) --}}
 <table class="border rounded m-4"> 
     <tr>
         <th class='border bg-gray-300'>Rank</th>
@@ -7,7 +7,7 @@
         @endforeach
     </tr>
     @php $index=0; @endphp
-    @foreach($dynamicAnswer as $id=>$name)
+    @foreach($dynamicAnswerRows as $id=>$name)
         <tr class="hover:bg-blue-100">
             <td class="border px-5 py-1">{{$name}}</td>
             @for($i = 1; $i <= sizeof($staticAnswer); $i++)
