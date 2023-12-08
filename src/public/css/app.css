@@ -815,10 +815,6 @@ video {
   margin-left: -1.5rem;
   margin-right: -1.5rem;
 }
-.-my-2 {
-  margin-top: -0.5rem;
-  margin-bottom: -0.5rem;
-}
 .mx-0 {
   margin-left: 0px;
   margin-right: 0px;
@@ -1581,6 +1577,9 @@ video {
 }
 .min-w-\[200px\] {
   min-width: 200px;
+}
+.min-w-\[20px\] {
+  min-width: 20px;
 }
 .min-w-\[330px\] {
   min-width: 330px;
