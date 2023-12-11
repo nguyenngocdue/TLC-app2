@@ -51,11 +51,12 @@ class QuestionAnswer extends Component
                 $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group']);
                 return $members;
             case $MY_DEPT_SUB_USERS:
-                $r = User_discipline::query()->where('def_assignee', /*772*/ $cu->id)->get()->pluck('id')->toArray();
+                $r = User_discipline::query()->where('def_assignee', /*39 /*772*/ $cu->id)->get()->pluck('id')->toArray();
                 $members = User::query()
                     ->whereIn('discipline', $r)
                     ->whereNot('resigned', 1)
                     ->whereNot('show_on_beta', 1)
+                    ->whereNot('time_keeping_type', 1) //1:TSW
                     ->orderBy('name0')
                     ->with('getUserDiscipline')
                     ->get();
