@@ -9,14 +9,16 @@
     </tr>
     @php $index=0; @endphp
     @foreach($dynamicAnswerRowGroups as $groupName)
-        <tr><th class="bg-gray-200 text-left px-2" colspan="{{$countAllDynamicAnswer + 1}}">{{$groupName}}</th></tr>
+        @if($groupName != 'no_group')  
+            <tr><th class="bg-gray-200 text-left px-2" colspan="{{$countAllDynamicAnswer + 1}}">{{$groupName}}</th></tr>
+        @endif
         @foreach($dynamicAnswerRows[$groupName] as $id=>$object)
             @php 
                 $label = $object['name'];
                 $id = $object['id'];
             @endphp
             <tr class="hover:bg-blue-100">
-                <td class="border px-5 py-1">{{$label}}</td>
+                    <td class="border px-5 py-1">{{$label}}</td>
                 @for($i = 1; $i <= $countAllDynamicAnswer; $i++)
                     @php
                         $i_1 = $i-1;
