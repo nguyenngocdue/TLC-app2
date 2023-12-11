@@ -15,7 +15,9 @@
     <div class="col-span-10 border rounded p-2">
         <div class="" >
             @if($isOnePage)
-            <form>
+            <form action="{{$route}}" method="POST">
+                @csrf
+                @method('POST')
                 @foreach($tableOfContents as $index => $group)
                 <div id="div-holder-for-sticky-to-push">
                     <x-renderer.heading 

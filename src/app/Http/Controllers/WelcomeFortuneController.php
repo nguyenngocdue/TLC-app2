@@ -36,11 +36,13 @@ class WelcomeFortuneController extends Controller
 
         $tableOfContents = $dataSource->map(fn ($i) => $i->getExamTmplGroup)->unique();
         // dump($tableOfContents);
+        $route = route('exam-question.update', 1);
 
         return view("welcome-fortune", [
             'dataSource' => $dataSource,
             'tableOfContents' => $tableOfContents,
             'isOnePage' => true,
+            'route' => $route,
         ]);
     }
 }
