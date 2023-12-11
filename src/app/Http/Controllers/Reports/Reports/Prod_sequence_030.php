@@ -6,7 +6,7 @@ use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
-
+use App\Utils\Support\Report;
 
 class Prod_sequence_030 extends Report_ParentReport2Controller
 {
@@ -41,10 +41,12 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     ,pr.name AS prod_routing_name    
                     ,po.status AS prod_order_status
                     ,pose.status AS prod_sequence_status
+                    ,pose.id AS prod_sequence_id
                     #,pose.total_hours AS total_hours
                     ,erprl.name AS erp_routing_link_name
                     ,pose.erp_prod_order_name AS erp_prod_order_name
-
+                    ,MAX(us.full_name) AS prod_run_owner_name
+                    ,MAX(pru.id) AS prod_run_id
                     ,IF(prd.target_man_power,prd.target_man_power, NULL) AS target_man_power
                     
                     ,AVG(ROUND((pru.worker_number), 2)) AS actual_man_power
@@ -88,6 +90,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
 
                 JOIN prod_disciplines pd ON prl.prod_discipline_id = pd.id
                 JOIN prod_runs pru ON pru.prod_sequence_id = pose.id
+                LEFT JOIN users us ON us.id = pru.owner_id
 
                 WHERE 1 = 1";
     if (isset($params['project_id'])) $sql .= "\n AND sp.project_id IN ({{project_id}})";
@@ -267,6 +270,12 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     "width" => 200,
                 ],
                 [
+                    "title" => "Production Sequence Document",
+                    "dataIndex" => "prod_sequence_id",
+                    "align" => "right",
+                    "width" => 200,
+                ],
+                [
                     "title" => "Man-power  <br/>(AVG)",
                     "dataIndex" => "target_man_power",
                     "align" => "right",
@@ -345,6 +354,33 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     "width" => 80,
                     'footer' => 'agg_sum',
                 ],
+                [
+                    'title' => 'Creator',
+                    'dataIndex' => 'prod_run_owner_name',
+                    "width" => 150,
+                ],
             ];
+    }
+
+    public function changeDataSource($dataSource, $params)
+    {
+        $items = Report::convertToType($dataSource);
+        foreach ($items as &$item) {
+            if(Report::checkValueOfField($item, 'prod_run_owner_name')){
+                $item['prod_run_owner_name'] = (object)[
+                    'value' => $item['prod_run_owner_name'],
+                    'cell_href' => route('prod_runs.edit', $item['prod_run_id']),
+                    'cell_class' => 'text-blue-600'
+                ];
+            }
+            if(Report::checkValueOfField($item, 'prod_sequence_id')){
+                $item['prod_sequence_id'] = (object)[
+                    'value' => '#'. $item['prod_sequence_id'],
+                    'cell_href' => route('prod_sequences.edit', $item['prod_sequence_id']),
+                    'cell_class' => 'text-blue-600'
+                ];
+            }
+        }
+        return collect($items);
     }
 }
