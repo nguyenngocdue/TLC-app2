@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string("name")->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('exam_tmpl_id')->nullable();
+            $table->unsignedBigInteger('hide_when')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();
