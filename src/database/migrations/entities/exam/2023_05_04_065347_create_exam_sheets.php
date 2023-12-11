@@ -26,6 +26,8 @@ return new class extends Migration
             $table->unsignedBigInteger('exam_tmpl_id')->nullable();
 
             $table->appendCommonFields();
+
+            $table->unique(['exam_tmpl_id', 'owner_id']);
         });
     }
 

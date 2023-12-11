@@ -500,6 +500,37 @@
         "hidden_navbar": "true",
         "do_not_send_notification_mails": "true"
     },
+    "exam_sheet": {
+        "name": "exam_sheet",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "exam",
+        "title": "Exam Sheets",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-graduation-cap\"><\/i>"
+    },
+    "exam_sheet_line": {
+        "name": "exam_sheet_line",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "exam",
+        "title": "Exam Sheet Lines",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "props-renderer",
+        "show_renderer": "props-renderer",
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
+    },
     "exam_tmpl": {
         "name": "exam_tmpl",
         "package_tab": "application",

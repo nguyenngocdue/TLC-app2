@@ -19,7 +19,7 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('exam_sheet_responses', function (BlueprintExtended $table) {
+        $schema->create('exam_sheet_lines', function (BlueprintExtended $table) {
             $table->id();
             $table->string("name")->nullable();
             $table->text('description')->nullable();
@@ -31,8 +31,9 @@ return new class extends Migration
             $table->unsignedBigInteger('sub_question_1')->nullable();
             $table->unsignedBigInteger('sub_question_2')->nullable();
             $table->unsignedBigInteger('response_ids')->nullable();
-            $table->unsignedBigInteger('response_values')->nullable();
+            $table->text('response_values')->nullable();
 
+            $table->orderable();
             $table->appendCommonFields();
         });
     }
@@ -44,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exam_sheet_responses');
+        Schema::dropIfExists('exam_sheet_lines');
     }
 };
