@@ -42,16 +42,16 @@ class QuestionAnswer extends Component
             case $MY_DEPT_USERS:
                 $members = $this->getMemberOfTeam($department)
                     ->get();
-                $members1 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group']);
+                $members1 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group', 'avatar' => $u->getAvatarThumbnailUrl(),]);
                 return $members1;
             case $MY_DEPT_USERS_EXCLUDE_ME:
                 $members = $this->getMemberOfTeam($department)
                     ->whereNot('id', $cu->id)
                     ->get();
-                $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group']);
+                $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group', 'avatar' => $u->getAvatarThumbnailUrl(),]);
                 return $members;
             case $MY_DEPT_SUB_USERS:
-                $r = User_discipline::query()->where('def_assignee', /*39 /*772*/ $cu->id)->get()->pluck('id')->toArray();
+                $r = User_discipline::query()->where('def_assignee', /*772*/ $cu->id)->get()->pluck('id')->toArray();
                 $members = User::query()
                     ->whereIn('discipline', $r)
                     ->whereNot('resigned', 1)
@@ -61,7 +61,7 @@ class QuestionAnswer extends Component
                     ->with('getUserDiscipline')
                     ->get();
                 // dd($members);
-                $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => $u->getUserDiscipline->name]);
+                $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => $u->getUserDiscipline->name, 'avatar' => $u->getAvatarThumbnailUrl(),]);
                 // dd($members);
                 return $members;
             case $MY_DEPT_TECH_SKILLS:

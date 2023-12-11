@@ -30,7 +30,12 @@
                 foreach($subQuestions as $subQuestion){
                     // echo $subQuestion;
                     if($showSubQuestion){ 
+                        $avatar = $subQuestion['avatar'] ?? null;
+                        echo "<div class='flex items-center'>";
+                            // echo $avatar;
+                        if($avatar) echo '<img class="rounded-full w-8 h-8 m-2" src="'.$avatar.'" /> ';
                         echo "<b>". $subQuestion['name']."</b>" ?? '';
+                        echo "</div>";
                         // dump($subQuestion);
                     }
                     echo Blade::render('<x-question-answer.question-answer-'.$control.'
