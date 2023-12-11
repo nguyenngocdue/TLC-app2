@@ -23,6 +23,7 @@ class QuestionAnswer extends Component
             ->getMembers()
             ->whereNot('resigned', 1)
             ->whereNot('show_on_beta', 1)
+            ->whereNot('time_keeping_type', 1) //1:TSW
             ->orderBy('name0');
         return $members;
     }
