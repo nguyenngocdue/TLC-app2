@@ -509,7 +509,7 @@
         "nickname": null,
         "doc_id_format_column": null,
         "status": null,
-        "edit_renderer": "props-renderer",
+        "edit_renderer": "exam-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-graduation-cap\"><\/i>"

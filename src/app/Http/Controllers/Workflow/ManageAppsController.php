@@ -80,6 +80,7 @@ class ManageAppsController extends AbstractManageLibController
                 "cbbDataSource" => [
                     'props-renderer',
                     'checklist-sheet-renderer',
+                    'exam-renderer',
                 ],
             ],
             [

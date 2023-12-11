@@ -75,6 +75,10 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
             </div>
             @break
 
+            @case ('exam-renderer')
+                <x-controls.exam-sheet.item-renderer-exam-sheet id={{$id}} :item="$item"/>
+            @break
+
             @default
             <x-feedback.alert type="error" message="Unknown how to render [{{$app['edit_renderer']}}] in entity-create-edit." />
             @break
