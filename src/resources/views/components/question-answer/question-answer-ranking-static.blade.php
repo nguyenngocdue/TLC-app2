@@ -20,7 +20,7 @@
                     <input 
                         name="question_{{$questionId}}" 
                         id="{{$chkId}}" 
-                        value="{{$name}}:{{$i}}"  
+                        value="{{$i}}:::{{$name}}"  
                         type="checkbox"
                         class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                         onclick="onRankClick('{{$chkId}}', {{$questionId}}, {{sizeof($staticAnswer)}})"

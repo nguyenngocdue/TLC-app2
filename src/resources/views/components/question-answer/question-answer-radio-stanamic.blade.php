@@ -32,7 +32,7 @@
                         <input 
                             name="question_{{$questionId}}_{{$id}}" 
                             id="{{$chkId}}" 
-                            value="{{$i}}"  
+                            value="{{$i}}:::{{$i}}"  
                             type="radio"
                             class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                             />

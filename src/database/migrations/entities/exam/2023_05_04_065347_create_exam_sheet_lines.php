@@ -30,11 +30,13 @@ return new class extends Migration
 
             $table->unsignedBigInteger('sub_question_1')->nullable();
             $table->unsignedBigInteger('sub_question_2')->nullable();
-            $table->unsignedBigInteger('response_ids')->nullable();
+            $table->text('response_ids')->nullable();
             $table->text('response_values')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();
+
+            $table->unique(['exam_tmpl_id', 'exam_sheet_id', 'exam_question_id'], md5('exam_tmpl_id+exam_sheet_id+exam_question_id'));
         });
     }
 

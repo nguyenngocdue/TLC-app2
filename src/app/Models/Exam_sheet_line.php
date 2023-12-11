@@ -8,7 +8,9 @@ class Exam_sheet_line extends ModelExtended
 {
     public $fillable = [
         "id", "name", "description", "owner_id", "status",
-        "order_no", "exam_sheet_id",
+        "order_no",
+        "exam_tmpl_id",
+        "exam_sheet_id",
         "exam_question_id",
         "sub_question_1",
         "sub_question_2",
