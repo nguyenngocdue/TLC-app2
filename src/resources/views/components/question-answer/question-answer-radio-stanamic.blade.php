@@ -30,9 +30,9 @@
                     <td class="border px-5 py-1 text-center">
                         {{-- {{$chkId}} --}}
                         <input 
-                            name="question_{{$questionId}}_{{$id}}[]" 
+                            name="question_{{$questionId}}_{{$id}}" 
                             id="{{$chkId}}" 
-                            value="{{$label}}:{{$i}}"  
+                            value="{{$i}}"  
                             type="radio"
                             class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                             />

@@ -77,6 +77,12 @@
         "editable-table": "esg_tmpl_lines",
         "button_add_a_new_line": "true"
     },
+    "exam_sheets_01": {
+        "name": "exam_sheets_01",
+        "entity-type": "exam_sheets",
+        "editable-table": "exam_sheet_lines",
+        "button_add_a_new_line": "true"
+    },
     "exam_tmpls_01": {
         "name": "exam_tmpls_01",
         "entity-type": "exam_tmpls",

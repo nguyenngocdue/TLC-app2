@@ -31,9 +31,9 @@
                     <td class="border px-5 py-1 text-center">
                         {{-- {{$chkId}} --}}
                         <input 
-                            name="question_{{$questionId}}[]" 
+                            name="question_{{$questionId}}" 
                             id="{{$chkId}}" 
-                            value="{{$label}}:{{$i}}"  
+                            value="{{$i}}"  
                             type="checkbox"
                             class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                             onclick="onRankClick('{{$chkId}}', {{$questionId}}, {{$countAllDynamicAnswer}})"

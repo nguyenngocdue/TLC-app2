@@ -111,6 +111,13 @@
     "esg_tmpls": {
         "name": "esg_tmpls"
     },
+    "exam_sheet_lines": {
+        "name": "exam_sheet_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "exam_sheets": {
+        "name": "exam_sheets"
+    },
     "exam_tmpl_groups": {
         "name": "exam_tmpl_groups",
         "storeEmpty_and_updateShort": "true"
