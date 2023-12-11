@@ -31,7 +31,7 @@
                     // echo $subQuestion;
                     if($showSubQuestion){ 
                         $avatar = $subQuestion['avatar'] ?? null;
-                        echo "<div class='flex items-center'>";
+                        echo "<div class='flex items-center' title='".$subQuestion['id']."'>";
                             // echo $avatar;
                         if($avatar) echo '<img class="rounded-full w-8 h-8 m-2" src="'.$avatar.'" /> ';
                         echo "<b>". $subQuestion['name']."</b>" ?? '';
@@ -45,12 +45,14 @@
                     :dynamicAnswerRowGroups="$dynamicAnswerRowGroups" 
                     
                     :renderAsRows="$renderAsRows"
+                    :subQuestionId="$subQuestionId"
                     />', [
                         'questionId' => $item['id'],
                         'staticAnswer' => $staticAnswer,
                         'dynamicAnswerRows' => $dynamicAnswerRows,
                         'dynamicAnswerRowGroups' => $dynamicAnswerRowGroups,
                         'renderAsRows' => $renderAsRows,
+                        'subQuestionId' => $subQuestion['id'] ?? null,
                     ]);
                 }
             }

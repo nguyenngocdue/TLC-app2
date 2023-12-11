@@ -18,7 +18,7 @@
                 <td class="border px-5 py-1 text-center">
                     {{-- {{$chkId}} --}}
                     <input 
-                        name="question_{{$questionId}}[]" 
+                        name="question_{{$questionId}}" 
                         id="{{$chkId}}" 
                         value="{{$name}}:{{$i}}"  
                         type="checkbox"

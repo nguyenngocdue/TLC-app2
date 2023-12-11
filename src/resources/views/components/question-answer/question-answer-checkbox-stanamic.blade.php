@@ -32,7 +32,7 @@
                             <input 
                                 name="question_{{$questionId}}[]" 
                                 id="{{$chkId}}" 
-                                value="{{$label}}:{{$i}}"  
+                                value="{{$i}}"  
                                 type="checkbox"
                                 class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                                 />
