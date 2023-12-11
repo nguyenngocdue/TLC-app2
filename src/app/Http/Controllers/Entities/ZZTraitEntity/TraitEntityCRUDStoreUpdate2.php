@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\BigThink\Oracy;
 use App\Events\CreatedDocumentEvent2;
 use App\Events\UpdatedDocumentEvent;
+use App\Http\Controllers\ExamQuestion\ExamQuestionController;
 use App\Http\Services\LoggerForTimelineService;
 use App\Utils\Support\CurrentUser;
 use App\Utils\System\Timer;
@@ -118,6 +119,12 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
+		if ($this->type == 'exam_sheet') {
+			$controller = new ExamQuestionController($request);
+			$response = $controller->update($request);
+			return $response;
+		}
+
 		Timer::getTimeElapseFromLastAccess();
 		$isFakeRequest = $request['tableNames'] == 'fakeRequest';
 		// if (!$isFakeRequest) dump($request);

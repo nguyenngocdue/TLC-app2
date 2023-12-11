@@ -1,3 +1,8 @@
+@extends('layouts.app')
+@section('topTitle', 'Welcome')
+@section('title', '')
+
+@section('content')
 
 @php $groupName = ''; @endphp
 
@@ -10,6 +15,9 @@
     <div class="col-span-10 border rounded p-2">
         <div class="" >
             @if($isOnePage)
+            <form action="{{$route}}" method="POST">
+                @csrf
+                @method('PUT')
                 @foreach($tableOfContents as $index => $group)
                 <div id="div-holder-for-sticky-to-push">
                     <x-renderer.heading 
@@ -36,7 +44,10 @@
                 <div class="p-2">
                     <x-renderer.button type='primary' htmlType="submit">Submit</x-render.button>
                 </div>
+            </form>
             @endif
         </div>
     </div>
 </div>
+
+@endsection 

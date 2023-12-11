@@ -4,13 +4,14 @@ namespace App\View\Components\Controls\ExamSheet;
 
 use App\Models\Exam_tmpl_question;
 use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class ItemRendererExamSheet extends Component
+class ExamSheetPage extends Component
 {
     function __construct(
         private $id,
-        private $item,
+        private $type,
     ) {
     }
 
@@ -32,13 +33,13 @@ class ItemRendererExamSheet extends Component
 
         $tableOfContents = $dataSource->map(fn ($i) => $i->getExamTmplGroup)->unique();
         // dump($tableOfContents);
-        // $route = route('exam-question.update', $this->id);
+        $route = route(Str::plural($this->type) . '.update', $this->id);
 
-        return view('components.controls.exam-sheet.item-renderer-exam-sheet', [
+        return view('components.controls.exam-sheet.exam-sheet-page', [
             'dataSource' => $dataSource,
             'tableOfContents' => $tableOfContents,
             'isOnePage' => true,
-            // 'route' => $route,
+            'route' => $route,
         ]);
     }
 }

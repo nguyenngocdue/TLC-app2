@@ -9,5 +9,6 @@ class ExamQuestionController
     function update(Request $request)
     {
         dd($request->input());
+        return;
     }
 }

@@ -11,6 +11,7 @@ use App\Utils\Support\Json\DefaultValues;
 use App\View\Components\Controls\DisallowedDirectCreationChecker;
 use App\View\Components\Formula\All_DocId;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -74,6 +75,14 @@ trait TraitEntityCRUDCreateEdit2
 
 	public function edit(Request $request, $id, $viewRender = null, $readOnly = false)
 	{
+		if ($this->type == 'exam_sheet') {
+			return Blade::render('<x-controls.exam-sheet.exam-sheet-page 
+				id="{{$id}}" type="{{$type}}"
+			/>', [
+				'id' => $id,
+				'type' => $this->type,
+			]);
+		}
 		//check permission using gate
 		$original = $this->checkPermissionUsingGate($id, 'edit');
 		$status = $request->query('status');
