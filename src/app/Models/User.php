@@ -382,4 +382,10 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         return in_array($this->discipline, []); //: 
     }
+
+    public function isAManager()
+    {
+        $d = User_discipline::query()->where('def_assignee', $this->id)->get();
+        return sizeof($d) > 0;
+    }
 }

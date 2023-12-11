@@ -28,6 +28,11 @@ class WelcomeFortuneController extends Controller
             ->get();
         // dump($dataSource);
 
+        $isAManager =  CurrentUser::get()->isAManager();
+        $HIDE_WHEN_I_AM_NOT_A_MANAGER = 400;
+
+        $dataSource = $dataSource->filter(fn ($i) => !$isAManager || $i->getExamTmplGroup->hide_when != $HIDE_WHEN_I_AM_NOT_A_MANAGER);
+
         $tableOfContents = $dataSource->map(fn ($i) => $i->getExamTmplGroup)->unique();
         // dump($tableOfContents);
 
