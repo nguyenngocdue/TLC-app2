@@ -1,6 +1,6 @@
-<div class="sticky top-[114px] bg-blue-400 rounded mb-2">
+<div class="sticky top-[114px] bg-blue-400 rounded mb-2" >
     <x-renderer.heading level=5 class="z-10 p-2">
-        {{$item['name'] ?? 'Untitled'}}
+        <p title="#{{$item['id']}}">{{$item['name'] ?? 'Untitled'}}</p>
     </x-renderer.heading>
     <div class="p-1 mx-4"> {{$item['description']}}  </div>
 </div>
