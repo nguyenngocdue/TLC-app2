@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Report;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
@@ -36,11 +37,11 @@ class ChartBar2 extends Component
 
         $count = $meta['count'];
         if ($count == 0) return "<x-renderer.emptiness />";
-
-
+        $tooltipComponent = CurrentUser::isAdmin() ? "(Component name: Chart-bar2)" : "";
         return view(
             'components.renderer.report.chart-bar2',
             [
+                'tooltipComponent' => $tooltipComponent,
                 'key' => $this->key,
                 'meta' => $meta,
                 'metric' => $metric,

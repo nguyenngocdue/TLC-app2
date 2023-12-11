@@ -158,7 +158,8 @@
         "system_configuration",
         "system_permission",
         "dashboard",
-        "task_management"
+        "task_management",
+        "exam"
     ],
     "assignees": [
         "assignee_1",

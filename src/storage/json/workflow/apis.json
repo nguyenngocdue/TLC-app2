@@ -44,6 +44,13 @@
     "control_types": {
         "name": "control_types"
     },
+    "department_skill_groups": {
+        "name": "department_skill_groups"
+    },
+    "department_skills": {
+        "name": "department_skills",
+        "storeEmpty_and_updateShort": "true"
+    },
     "departments": {
         "name": "departments"
     },
@@ -103,6 +110,17 @@
     },
     "esg_tmpls": {
         "name": "esg_tmpls"
+    },
+    "exam_tmpl_groups": {
+        "name": "exam_tmpl_groups",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "exam_tmpl_questions": {
+        "name": "exam_tmpl_questions",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "exam_tmpls": {
+        "name": "exam_tmpls"
     },
     "fields": {
         "name": "fields"

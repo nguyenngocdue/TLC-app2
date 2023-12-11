@@ -165,7 +165,11 @@ class RelationshipRenderer2 extends Component
         $defaultColumns = [
             ["dataIndex" => 'id', "renderer" => "id", "type" => $tableName, "align" => "center"],
         ];
-        if (!$instance::$nameless) $defaultColumns[] = ["dataIndex" => 'name',];
+        // if (!$instance::$nameless) $defaultColumns[] = ["dataIndex" => 'name',];
+        if (!$instance::$nameless) {
+            $defaultColumns[] = ["dataIndex" => 'name',];
+            $defaultColumns[] = ["dataIndex" => 'description',];
+        }
         $columns = ($fn === '')
             ? $defaultColumns
             : $instance->$fn($this->item);

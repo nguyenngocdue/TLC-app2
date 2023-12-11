@@ -336,22 +336,33 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     {
         $items = Report::getItemsFromDataSource($dataSource);
         $groupItems = Report::groupArrayByKey($items,'prod_routing_link_id');
-
+        
         $prodRoutingLinks = $this->getProdRoutingLinks($params);
         $tableOfContents = [];
         foreach(array_keys($groupItems) as $key) $tableOfContents[$key] = $prodRoutingLinks[$key];
-
+        
         $dataWidgets = $this->makeDataWidget($groupItems, $params);
         // dd($dataWidgets);
         $data= [];
+        $fields = ['man_power_on_day', 'min_on_day', 'total_uom_on_day', 'min_on_set_on_day'];
         foreach ($groupItems as $key => $values){
+
+            // show minus icon when value is null or 0
+            $values = array_map(function($item) use ($fields){
+                foreach ($fields as $field){
+                    if (is_null($item[$field]) || !$item[$field]){
+                        $item[$field] = (object)['value' =>'<i class="fa-light fa-minus"></i>'];
+                        // $item[$field] = (object)['value' =>'0.00'];
+                    }
+                }
+                return $item;
+            }, $values);
             $data['render_pages'][$key] = [
                     'tableDataSource' => collect($values),
                     'dataWidgets' => $dataWidgets[$key],
                ];
         }
         $data['table_of_contents'] = $tableOfContents;
-        // dump($data);
         return $data;
     }
 }

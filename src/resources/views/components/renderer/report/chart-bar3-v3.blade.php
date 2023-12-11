@@ -1,5 +1,5 @@
 <div class="flex justify-center">
-	<div class="block" title="{{$titleTooltip}}">
+	<div class="block" title="{{$titleTooltip}} (Component Name: chart-bar3-v3)">
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
 </div>
@@ -28,7 +28,7 @@
 	var scales = {};
 	var lessThen100 =  {!! json_encode($dimensions['lessThen100'] ?? false)  !!}
 	var meta = {!! json_encode($meta) !!}
-	var colors = generateColors(meta.count);
+	var colors = generateColors(meta.labels.length);
 
 	datasets = {!! json_encode($meta['datasets']) !!};
 	scales = {
@@ -102,7 +102,7 @@
 		}
 	};
 	datasets.forEach(function(dataset, index) {
-		dataset.backgroundColor = colors[index];
+		dataset.backgroundColor = {!! json_encode($dimensions['color_column'] ?? colors[index])!!};
 	});
 
 	//console.log(datasets.data)

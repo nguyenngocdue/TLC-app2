@@ -29,6 +29,7 @@ class Qaqc_ncr_dataSource extends Controller
                     term_disposition.name AS disposition_name,
                     term_severity.name AS severity_name,
                     term_report_type.name AS report_type_name,
+                    term_inter_subcon.name AS inter_subcon_name,
                     LOWER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '\\\', -1), '\\\', 1)) AS parent_type,
                     tb1.parent_type AS _parent_type,
                     CONCAT('TLC-',sp.name,'-',UPPER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '_', -1), '\\\', 1)),'-',
@@ -52,6 +53,7 @@ class Qaqc_ncr_dataSource extends Controller
                         ncr.defect_disposition_id AS disposition_id,
                         ncr.defect_severity AS severity,
                         ncr.defect_report_type AS report_type,
+                        ncr.inter_subcon_id AS inter_subcon_id,
                         ncr.qty_man_power AS qty_man_power,
                         ncr.hour_per_man AS hour_per_man,
                         ncr.total_hour AS total_hour,
@@ -83,6 +85,7 @@ class Qaqc_ncr_dataSource extends Controller
                     LEFT JOIN terms term_disposition ON term_disposition.id = tb1.disposition_id
                     LEFT JOIN terms term_severity ON term_severity.id = tb1.severity
                     LEFT JOIN terms term_report_type ON term_report_type.id = tb1.report_type
+                    LEFT JOIN terms term_inter_subcon ON term_inter_subcon.id = tb1.inter_subcon_id
                 ";
         return $sql;
     }

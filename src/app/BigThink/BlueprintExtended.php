@@ -17,6 +17,11 @@ class BlueprintExtended extends Blueprint
         $this->unsignedInteger('order_no')->nullable();
     }
 
+    function hasStatus()
+    {
+        $this->string('status')->nullable();
+    }
+
     function closable()
     {
         $this->timestamp('closed_at')->nullable();
@@ -25,8 +30,6 @@ class BlueprintExtended extends Blueprint
     function appendCommonFields()
     {
         $this->unsignedBigInteger('owner_id');
-        $this->string('status')->nullable();
-
         $this->timestamp('created_at')->useCurrent();
         $this->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         // $this->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

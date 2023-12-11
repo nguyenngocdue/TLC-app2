@@ -4,6 +4,8 @@
 <label class='peer-checked:bg-gray-300 peer-checked:text-gray-700'></label>
 <label class='peer-checked:bg-orange-300 peer-checked:text-orange-700'></label>
 
+<!-- sticky-->
+<div class="fixed top-24"/>
 <!-- Image-->
 <span class="w-10 h-10" ></span>
 <span class="w-11 h-11" ></span>

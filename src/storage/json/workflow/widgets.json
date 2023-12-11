@@ -7,7 +7,7 @@
         "params": "{\"label_meta_data_1\":\"pru_date\",\"meta_data_1\":\"man_power_on_day\",\"prefix_unit_text\":\"Man Power (AVG)\"\r\n}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"scaleMaxX\": 1000,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 1,\r\n\"displayTitleY\": 1,\r\n\"titleY\": \"Man Power (AVG)\",\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Man Power (AVG)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"scaleMaxX\": 1000,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 1,\r\n\"displayTitleY\": 1,\r\n\"titleY\": \"Man Power (AVG)\",\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 7,\r\n\"titleHeading\":\"Man Power (AVG)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"hddien_average_line\":0,\r\n\"rotation_datalabel\":-90\r\n}"
     },
     "02_process_analysis_prod_routing_link_total_uom": {
         "name": "02_process_analysis_prod_routing_link_total_uom",
@@ -17,7 +17,7 @@
         "params": "{\"label_meta_data_1\": \"pru_date\",\"meta_data_1\":\"total_uom_on_day\",\"index_unit\":\"uom_name\",\"suffix_unit_text\":\"\/Day (AVG)\"}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"scaleMaxX\": 1000,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Efficiency\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"scaleMaxX\": 1000,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 7,\r\n\"titleHeading\":\"Efficiency\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"rotation_datalabel\":-90\r\n}"
     },
     "03_process_analysis_prod_routing_link_min": {
         "name": "03_process_analysis_prod_routing_link_min",
@@ -27,7 +27,7 @@
         "params": "{\"label_meta_data_1\":\"pru_date\",\"meta_data_1\":\"min_on_day\",\"prefix_unit_text\":\"min\",\"suffix_unit_text\":\"\/Day (AVG)\"}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"scaleMaxX\": 1000,\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Time Efficiency\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"scaleMaxX\": 1000,\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 7,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Time Efficiency\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"rotation_datalabel\":-90\r\n}"
     },
     "04_process_analysis_prod_routing_link_min_on_set": {
         "name": "04_process_analysis_prod_routing_link_min_on_set",
@@ -37,7 +37,7 @@
         "params": "{\"label_meta_data_1\":\"pru_date\",\"meta_data_1\":\"min_on_set_on_day\",\"index_unit\":\"uom_name\",\"prefix_unit_text\":\"min\/\",\"suffix_unit_text\":\" (AVG)\"}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"displayTitleY\": 1,\r\n\"titleY\": \"min\/Day (AVG)\",\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"scaleMaxX\": 1000,\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"titleHeading\":\"Productivity\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\"\r\n}"
+        "dimensions": "{\r\n\"width\": 600,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"displayTitleY\": 1,\r\n\"titleY\": \"min\/Day (AVG)\",\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"scaleMaxX\": 1000,\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 7,\r\n\"titleHeading\":\"Productivity\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"rotation_datalabel\":-90\r\n}"
     },
     "benchmark_avg_man_power": {
         "name": "benchmark_avg_man_power",
@@ -117,7 +117,7 @@
         "params": "{}",
         "param_meta": "meta_bar{\r\n\"chart_type\" :\"bar\",\r\n\"field_data_label\":\"ghgtmpl_name\",\r\n\"meta_x_axis\":\"ghgtmpl_name\",\r\n\"meta_y_axis\":\"year\",\r\n\"legend_label_meta_x_axis\":\"ghgtmpl_name\",\r\n\"label_under_col\":\"ghgtmpl_name\",\r\n\"y_axis_id\":\"y\",\r\n\"type\":\"bar\",\r\n\"pointBackgroundColor\":\"#4131c9\",\r\n\"fill\":false,\r\n\"backgroundColor\": \"#4131c9\"\r\n};",
         "line_series": "{}",
-        "dimensions": "{\r\n\"width\": 820,\r\n\"height\":600,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"displayTitleY\":0,\r\n\"indexAxis\":\"y\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : -50,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"Based on the data for the entire year\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Value\",\r\n\"stepSizeX\": 1000,\r\n\"stepSizeY\": 100,\r\n\"scaleMaxX\":1000\r\n}"
+        "dimensions": "{\r\n\"width\": 820,\r\n\"height\":600,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"displayTitleY\":0,\r\n\"indexAxis\":\"y\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : -50,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"Based on the data for the entire year\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Value\",\r\n\"stepSizeX\": 1000,\r\n\"stepSizeY\": 100,\r\n\"scaleMaxX\":1000,\r\n\"color_column\":\"#4dc9f6\"\r\n}"
     },
     "ghgrp_basin_production_and_emissions_by_months": {
         "name": "ghgrp_basin_production_and_emissions_by_months",
@@ -127,24 +127,54 @@
         "params": "{}",
         "param_meta": "meta_bar2{\r\n\"chart_type\" :\"line\",\r\n\"field_data_label\":\"ghgtmpl_name\",\r\n\"meta_x_axis\":\"ghgtmpl_name\",\r\n\"meta_y_axis\":\"year\",\r\n\"legend_label_meta_x_axis\":\"ghgtmpl_name\",\r\n\"label_under_col\":\"ghgtmpl_name\",\r\n\"y_axis_id\":\"y\",\r\n\"pointBackgroundColor\":\"#4131c9\",\r\n\"fill\":false,\r\n\"backgroundColor\": \"#4131c9\",\r\n\"fill\": false, \r\n\"tension\": 0.5,\r\n\"borderWidth\": 0,\r\n\"line_color\":\"#6a329f\",\r\n\"borderWidth\":2\r\n};meta_bar{\r\n\"chart_type\" :\"bar\",\r\n\"field_data_label\":\"ghgtmpl_name\",\r\n\"meta_x_axis\":\"ghgtmpl_name\",\r\n\"meta_y_axis\":\"year\",\r\n\"legend_label_meta_x_axis\":\"ghgtmpl_name\",\r\n\"label_under_col\":\"ghgtmpl_name\",\r\n\"y_axis_id\":\"y\",\r\n\"pointBackgroundColor\":\"#4131c9\",\r\n\"fill\":false,\r\n\"backgroundColor\": \"#990000\",\r\n\"fill\": false, \r\n\"tension\": 0,\r\n\"borderWidth\": 0,\r\n\"line_color\":\"#10ee50\"\r\n}",
         "line_series": "{}",
-        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":600,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"displayTitleY\": 0,\r\n\"indexAxis\":\"y\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : -50,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"Count of Source Form\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Value\",\r\n\"displayTicksY\": false,\r\n\"displayTicksY1\":false,\r\n\"stepSizeX\": 1000,\r\n\"stepSizeY\": 20,\r\n\"stepSizeY1\":20,\r\n\"scaleMaxX\":10\r\n}"
+        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":600,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"displayTitleY\": 0,\r\n\"indexAxis\":\"y\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : -50,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"Count of Source Form\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Value\",\r\n\"displayTicksY\": false,\r\n\"displayTicksY1\":false,\r\n\"stepSizeX\": 1000,\r\n\"stepSizeY\": 20,\r\n\"stepSizeY1\":20,\r\n\"scaleMaxX\":10,\r\n\"color_column\":\"#f67019\"\r\n}"
+    },
+    "ncr_discipline": {
+        "name": "ncr_discipline",
+        "report_name": "document-qaqc_ncr_010",
+        "hidden": null,
+        "chart_type": "bar",
+        "params": "{}",
+        "param_meta": null,
+        "line_series": null,
+        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"All Issues by Discipline\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
+    },
+    "ncr_disposition": {
+        "name": "ncr_disposition",
+        "report_name": "document-qaqc_ncr_010",
+        "hidden": null,
+        "chart_type": "bar",
+        "params": "{}",
+        "param_meta": null,
+        "line_series": null,
+        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"All Issues by Disposition\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
+    },
+    "ncr_inter_subcon": {
+        "name": "ncr_inter_subcon",
+        "report_name": "document-qaqc_ncr_010",
+        "hidden": null,
+        "chart_type": "bar",
+        "params": "{}",
+        "param_meta": null,
+        "line_series": null,
+        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"All Issues by External Internal\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
     },
     "ncr_parent_type": {
         "name": "ncr_parent_type",
         "report_name": "document-ghg_sheet_030",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "bar",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "params": "{}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"Count of Source Form\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
+        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"All Issues by Discipline\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
     },
     "ncr_priority": {
         "name": "ncr_priority",
         "report_name": "document-qaqc_ncr_010",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "doughnut",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "params": "{}",
         "param_meta": null,
         "line_series": null,
         "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 300,\r\n\"height\": 300,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Priority of Open Issues\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
@@ -152,19 +182,29 @@
     "ncr_report_type": {
         "name": "ncr_report_type",
         "report_name": "document-qaqc_ncr_010",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "doughnut",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "params": "{}",
         "param_meta": null,
         "line_series": null,
         "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"abc\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 300,\r\n\"height\": 300,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Count of Report Type\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\": \"bottom\"\r\n}"
     },
+    "ncr_root_cause": {
+        "name": "ncr_root_cause",
+        "report_name": "document-qaqc_wir_010",
+        "hidden": null,
+        "chart_type": "bar",
+        "params": "{}",
+        "param_meta": null,
+        "line_series": null,
+        "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"All Issues by Root Cause\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
+    },
     "ncr_severity": {
         "name": "ncr_severity",
         "report_name": "document-qaqc_ncr_010",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "doughnut",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "params": "{}",
         "param_meta": null,
         "line_series": null,
         "dimensions": "{\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"indexAxis\":\"x\",\r\n\"width\": 300,\r\n\"height\": 250,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"titleChart\": \"Severity of Open Issues\",\r\n\"displayTitleChart\":0,\r\n\"displayDatalabel\":1\r\n}"
@@ -174,7 +214,7 @@
         "report_name": "document-qaqc_ncr_010",
         "hidden": null,
         "chart_type": "bar",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "params": "{}",
         "param_meta": null,
         "line_series": null,
         "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"titleX\" : \"status\",\r\n\"titleY\" : \"Issues (qty)\",\r\n\"displayTitleX\": 0,\r\n\"indexAxis\":\"x\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"titleChart\": \"All Issues by Status\",\r\n\"displayTitleChart\":0,\r\n\"tooltipLabel\": \"Count\"\r\n}"
@@ -182,9 +222,9 @@
     "ncr_user_team": {
         "name": "ncr_user_team",
         "report_name": "document-ghg_sheet_030",
-        "hidden": null,
+        "hidden": "true",
         "chart_type": "bar",
-        "params": "{\"table_a\":\"users\", \"table_b\":\"workplaces\", \"key_a\":\"workplace\", \"key_b\":\"id\", \"global_filter\":\"a.resigned != true\" }",
+        "params": "{}",
         "param_meta": null,
         "line_series": null,
         "dimensions": "{\r\n\"width\": 500,\r\n\"height\":250,\r\n\"scaleMaxX\": 100,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"titleX\" : \"User Team\",\r\n\"displayTitleX\": 0,\r\n\"titleY\" : \"Issues (qty)\",\r\n\"titleChart\": \"Count of Responsible Teams\",\r\n\"displayTitleChart\":0,\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Count\",\r\n\"positionTitleChart\": \"bottom\"\r\n}"

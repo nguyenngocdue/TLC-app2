@@ -1,4 +1,4 @@
-<div class="flex justify-center bg-only-print">
+<div class="flex justify-center bg-only-print w-full">
     <div class="md:px-4">
             @php
                 $ghgrp_1 = $tableDataSource['dataWidgets']['ghgrp_basin_production_and_emissions_all_year'] ?? [];

@@ -27,10 +27,11 @@ var chartConfig  = {
             labels: ['Gaseous Fuel', 'Refrigerants', 'Own Passenger Vehicles', 'Delivery  Controlled Vehicles', 'Electricity', 'Water Supply  Treatment', 'Materials', 'Waste Disposal', 'Bussiness Travel Land  Sea', 'Hotel Stay', 'Business Travel  Air', 'Freighting goods Land  Sea', 'Freight Goods  Air', 'Employee Commuting', 'Manage Asset  Electricity', 'Manage Asset  Vehicle', 'Work From Home'],
             datasets: [
                          {
+                            z: 1,
                             label: 'Tên Đường Line',
                             type: 'line', // Loại biểu đồ là 'line'
                             yAxisID: 'y', // Sử dụng trục y bên phải cho đường
-                            data: [  9.84, 0.0, 10.21, 14.88, 503.68, 653.14, 7151.66, 17.75, 2.53, 11.33, 29.71, 1.49, 32.93, 3.54, 0.0, 10.93, 0.0], // Dữ liệu của đường
+                            data: [  50, 0.0, 10.21, 14.88, 503.68, 653.14, 300, 17.75, 2.53, 11.33, 29.71, 1.49, 32.93, 3.54, 0.0, 10.93, 0.0], // Dữ liệu của đường
                             borderColor: '##110f2e', // Màu sắc của đường
                             fill: false, // Không fill màu dưới đường,
                             pointBackgroundColor: '#fff',
@@ -45,6 +46,7 @@ var chartConfig  = {
                                                 "#4dc9f6", "#4dc9f6", "#4dc9f6", "#4dc9f6", "#4dc9f6"]
                         },
                         {
+                            z: 1,
                             count: 17,
                             max: 7151.66,
                             tension: 0.5,
@@ -52,7 +54,7 @@ var chartConfig  = {
                             borderColor: "#6a329f",
                             pointStyle: "circle",
                             yAxisID: 'y', // Sử dụng trục y bên trái
-                            data: [  3.541, 0.691, 7.528, 15.351, 244.07, 470.356, 762.877, 0.641, 2.521, 92.789, 45.033, 1.364, 5.075, 82.584, 0.0, 6.339, 0.0],
+                            data: [  50, 0.691, 7.528, 15.351, 244.07, 470.356, 762.877, 0.641, 2.521, 92.789, 45.033, 1.364, 5.075, 82.584, 0.0, 6.339, 0.0],
                             backgroundColor: [ "#4dc9f6", "#f67019", "#f53794", "#537bc4", "#acc236", "#166a8f", 
                                                 "#00a950", "#58595b", "#8549ba", "#4dc9f6", "#4dc9f6", "#4dc9f6", 
                                                 "#4dc9f6", "#4dc9f6", "#4dc9f6", "#4dc9f6", "#4dc9f6"]
@@ -83,7 +85,7 @@ var chartConfig  = {
                 },
             }
         },
-		indexAxis: 'y',
+		indexAxis: 'x',
 		plugins: {
 			title:{
                 display: {!! $dimensions['displayTitleChart'] ?? 0 !!},
@@ -118,10 +120,41 @@ var chartConfig  = {
 		}
 		}
 	};
+
+    var datasets = chartConfig.data.datasets;
+    var numCategories = datasets[0].data.length;
+    var sumValues = new Array(numCategories).fill(0);
+
+        // Iterate over each dataset and sum up the values for each category
+    datasets.forEach(function (dataset) {
+        dataset.data.forEach(function (value, index) {
+            sumValues[index] += value;
+        });
+    });
+    // Calculate the average for each category
+    var averageValues = sumValues.map(function (sum) {
+        return sum / datasets.length;
+    });
+
+        // Add the average line dataset
+    chartConfig.data.datasets.unshift({
+        label: 'Average',
+        type: 'line',
+        yAxisID: 'y',
+        data: averageValues,
+        borderColor: '#ff0000', // Set the color of the average line
+        fill: false,
+        pointRadius: 0, // Set the point radius to 0 to hide points on the average line
+        borderWidth: 2,
+    });
+
+    console.log(chartConfig.data.datasets)
+
+
+
 var chartElement = document.getElementById('myChart');
 // Create a new Chart.js chart with the specified element and configuration
 var chart = new Chart(chartElement, chartConfig);
-console.log(chart.data.datasets)
 
 </script>
 

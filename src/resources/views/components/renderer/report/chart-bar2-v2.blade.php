@@ -1,6 +1,6 @@
 
 <div class="flex justify-center">
-	<div class="block" title="{{$titleTooltip}}">
+	<div class="block" title="{{$titleTooltip}} (Component Name: chart-bar2v2)">
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
 </div>
@@ -99,7 +99,7 @@ var chartConfig = {
                     label: function(context) {
                             var label = '{!! $dimensions['tooltipLabel'] ?? 'data' !!}'; 
                             var value =  context.raw;
-                            return label + ': ' + value;
+                            return label + ': ' + value.toFixed(2);
                     }
                 },
             },    
@@ -113,6 +113,7 @@ var chartConfig = {
                 position: '{!! $dimensions['positionTitleChart'] ?? 'bottom' !!}'
             },
             legend: {
+                order: 1,
                 position: 'bottom',
                 display: {!! $dimensions['displayLegend'] ?? 0 !!},
                 onClick: (evt, legendItem, legend) => {
@@ -163,10 +164,11 @@ var chartConfig = {
                 anchor: 'end',
                 align: '{!! $dimensions['dataLabelAlign'] ?? 'top' !!}',
                 color: 'white',
+                rotation: {!! json_encode($dimensions['rotation_datalabel'] ?? 0) !!},
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 borderColor: 'white',
-                borderWidth: 1,
-                borderRadius: 6,
+                borderWidth: 0.5,
+                borderRadius: 2.5,
                 offset: '{!! $dimensions['dataLabelOffset'] ?? '0' !!}',
                 formatter: function(value, context) {
             		return (value.toFixed(2))
@@ -194,9 +196,73 @@ var chartConfig = {
         }
     }
 };
+
+
+    var datasets = chartConfig.data.datasets;
+    var numCategories = datasets[0].data.length;
+    var sumValues = new Array(numCategories).fill(0);
+    var countItem = 0;
+    // Iterate over each dataset and sum up the values for each category
+    datasets.forEach(function (dataset) {
+        dataset.data.forEach(function (value, index) {
+            var  value = isNaN(parseFloat(value)) ? 0 : parseFloat(value);
+            if (value > 0) {
+                countItem += 1;
+            }; 
+            sumValues[index] += value;
+        });
+    });
+    // Calculate the average for each category
+    var average = sumValues.reduce((a, b) => a + b) / countItem;
+
+    var averageValues = sumValues.map(function (value) {
+        return average;
+    });
+        // Add the average line dataset
+    chartConfig.data.datasets.unshift({
+        label: 'Average',
+        type: 'line',
+        yAxisID: 'y',
+        backgroundColor: [],
+        data: averageValues,
+        borderColor: {!! json_encode($dimensions['color_average_line'] ?? '#FF0000')  !!},
+        pointBackgroundColor: '#3498db', // Set the color of the points
+        pointBorderColor: '#000080', // Set the color of the point borders
+        fill: false,
+        pointRadius: 1, // Set the point radius to 0 to hide points on the average line
+        borderWidth: 2,
+        // Adjust text and font
+        text: 'Average Line',
+        font: {
+            size: 16,
+            weight: 'bold',
+            family: 'Arial', // Choose the desired font family
+        },
+        hidden: {!! json_encode($dimensions['hddien_average_line'] ?? false ? true : false)  !!},
+        datalabels: {
+            display:  {!! json_encode($dimensions['show_datalabel'] ?? true)  !!},
+            borderWidth: 0,
+            borderRadius: 0,
+            rotation: 0,
+            backgroundColor: null,
+            color: 'black',
+            align: 'end',
+            anchor: 'end',
+            offset: -4 ,
+            font: {
+                weight: 'bold',
+            },
+            formatter: function (value, context) {
+                // Display data label only for the first column
+                if (context.dataIndex === sumValues.length - 1) {
+                    return '(' + value.toFixed(2) + ')';
+                } else {
+                    return null; // Hide data label for other columns
+                }
+            }
+        }
+    });
+
 var chartElement = document.getElementById(key).getContext('2d');
 var chartRendered = new Chart(chartElement, chartConfig);
-//chartRendered.data.datasets[0].barThickness = {!! $dimensions['widthBar'] ?? null !!};
-//chartRendered.update();
-//console.log(chartRendered)
 </script>

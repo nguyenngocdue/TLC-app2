@@ -4,6 +4,6 @@
 
 @section('content')
 
-<x-renderer.table :columns="$columns" :dataSource="$dataSource" tableTrueWidth=1/>
+<x-renderer.table :columns="$columns" :dataSource="$dataSource" tableTrueWidth=1 maxH=0/>
 
 @endsection 
