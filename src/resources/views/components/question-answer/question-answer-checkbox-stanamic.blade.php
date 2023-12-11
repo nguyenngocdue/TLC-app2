@@ -15,9 +15,13 @@
                 @php 
                     $label = $object['name'];
                     $id = $object['id'];
+                    $avatar = $object['avatar'] ?? null;
                 @endphp
                 <tr class="hover:bg-blue-100">
-                    <td class="border px-5 py-1">{{$label}}</td>
+                    <td class="border px-5 py-1 flex items-center">
+                        @if($avatar) <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" /> @endif
+                        {{$label}}
+                    </td>
                     @for($i = 1; $i <= sizeof($staticAnswer); $i++)
                         @php
                             $i_1 = $i-1;
@@ -28,7 +32,7 @@
                             <input 
                                 name="question_{{$questionId}}[]" 
                                 id="{{$chkId}}" 
-                                value="{{$label}}:{{$i}}"  
+                                value="{{$i}}"  
                                 type="checkbox"
                                 class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                                 />

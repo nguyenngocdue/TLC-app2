@@ -1,6 +1,6 @@
-<div class="sticky top-[114px] bg-blue-400 rounded mb-2">
+<div class="sticky top-[114px] bg-blue-400 rounded mb-2" >
     <x-renderer.heading level=5 class="z-10 p-2">
-        {{$item['name'] ?? 'Untitled'}}
+        <p title="#{{$item['id']}}">{{$item['name'] ?? 'Untitled'}}</p>
     </x-renderer.heading>
     <div class="p-1 mx-4"> {{$item['description']}}  </div>
 </div>
@@ -30,7 +30,12 @@
                 foreach($subQuestions as $subQuestion){
                     // echo $subQuestion;
                     if($showSubQuestion){ 
+                        $avatar = $subQuestion['avatar'] ?? null;
+                        echo "<div class='flex items-center' title='".$subQuestion['id']."'>";
+                            // echo $avatar;
+                        if($avatar) echo '<img class="rounded-full w-8 h-8 m-2" src="'.$avatar.'" /> ';
                         echo "<b>". $subQuestion['name']."</b>" ?? '';
+                        echo "</div>";
                         // dump($subQuestion);
                     }
                     echo Blade::render('<x-question-answer.question-answer-'.$control.'
@@ -40,12 +45,14 @@
                     :dynamicAnswerRowGroups="$dynamicAnswerRowGroups" 
                     
                     :renderAsRows="$renderAsRows"
+                    :subQuestionId="$subQuestionId"
                     />', [
                         'questionId' => $item['id'],
                         'staticAnswer' => $staticAnswer,
                         'dynamicAnswerRows' => $dynamicAnswerRows,
                         'dynamicAnswerRowGroups' => $dynamicAnswerRowGroups,
                         'renderAsRows' => $renderAsRows,
+                        'subQuestionId' => $subQuestion['id'] ?? null,
                     ]);
                 }
             }

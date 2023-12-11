@@ -1,26 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\View\Components\Controls\ExamSheet;
 
-use App\Http\Services\WorkingShiftService;
 use App\Models\Exam_tmpl_question;
 use App\Utils\Support\CurrentUser;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\View\Component;
 
-class WelcomeFortuneController extends Controller
+class ExamSheetPage extends Component
 {
     function __construct(
-        private WorkingShiftService $wss
+        private $id,
+        private $type,
     ) {
     }
-    public function getType()
-    {
-        return "dashboard";
-    }
 
-    public function index(Request $request)
+    function render()
     {
-        $id = $request->id ?? 1;
+        $id = $this->id ?? 1;
         $dataSource = Exam_tmpl_question::query()
             ->where("exam_tmpl_id", $id)
             ->with('getExamTmplGroup')
@@ -36,9 +33,9 @@ class WelcomeFortuneController extends Controller
 
         $tableOfContents = $dataSource->map(fn ($i) => $i->getExamTmplGroup)->unique();
         // dump($tableOfContents);
-        $route = route('exam-question.update');
+        $route = route(Str::plural($this->type) . '.update', $this->id);
 
-        return view("welcome-fortune", [
+        return view('components.controls.exam-sheet.exam-sheet-page', [
             'dataSource' => $dataSource,
             'tableOfContents' => $tableOfContents,
             'isOnePage' => true,

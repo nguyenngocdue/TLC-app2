@@ -17,7 +17,7 @@
             @if($isOnePage)
             <form action="{{$route}}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 @foreach($tableOfContents as $index => $group)
                 <div id="div-holder-for-sticky-to-push">
                     <x-renderer.heading 
@@ -49,21 +49,5 @@
         </div>
     </div>
 </div>
-
-{{-- <script>
-    const stickyDiv = document.querySelector('.sticky24');
-  
-    window.addEventListener('scroll', function() {
-      if (window.pageYOffset > 100) {
-        console.log(">100")
-        stickyDiv.classList.add('fixed');
-        stickyDiv.classList.add('top-24');
-      } else {
-        console.log("<=100")
-        stickyDiv.classList.remove('fixed');
-        stickyDiv.classList.remove('top-24');
-      }
-    });
-  </script> --}}
 
 @endsection 
