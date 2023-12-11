@@ -4,6 +4,8 @@ namespace App\View\Components\QuestionAnswer;
 
 use App\Models\Department;
 use App\Models\Department_skill_group;
+use App\Models\User;
+use App\Models\User_discipline;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
@@ -29,6 +31,7 @@ class QuestionAnswer extends Component
     {
         $MY_DEPT_USERS = 386;
         $MY_DEPT_USERS_EXCLUDE_ME = 387;
+        $MY_DEPT_SUB_USERS = 395;
         $MY_DEPT_TECH_SKILLS = 391;
         $MY_RELATED_DEPTS = 394;
 
@@ -39,18 +42,26 @@ class QuestionAnswer extends Component
             case $MY_DEPT_USERS:
                 $members = $this->getMemberOfTeam($department)
                     ->get();
-                // $members0 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
-                // return $members0;
                 $members1 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group']);
-                // dump($members1);
                 return $members1;
             case $MY_DEPT_USERS_EXCLUDE_ME:
                 $members = $this->getMemberOfTeam($department)
                     ->whereNot('id', $cu->id)
                     ->get();
-                // $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name,])->pluck('name', 'id')->toArray();
-                // return $members;
                 $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group']);
+                return $members;
+            case $MY_DEPT_SUB_USERS:
+                $r = User_discipline::query()->where('def_assignee', /*772*/ $cu->id)->get()->pluck('id')->toArray();
+                $members = User::query()
+                    ->whereIn('discipline', $r)
+                    ->whereNot('resigned', 1)
+                    ->whereNot('show_on_beta', 1)
+                    ->orderBy('name0')
+                    ->with('getUserDiscipline')
+                    ->get();
+                // dd($members);
+                $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => $u->getUserDiscipline->name]);
+                // dd($members);
                 return $members;
             case $MY_DEPT_TECH_SKILLS:
                 $skills = $department->getSkillsOfDepartment();
