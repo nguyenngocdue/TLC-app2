@@ -9,7 +9,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getParent": {
         "name": "_getParent",
@@ -21,7 +22,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_doc_id": {
         "name": "_doc_id",
@@ -33,7 +35,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_name": {
         "name": "_name",
@@ -45,7 +48,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_description": {
         "name": "_description",
@@ -57,7 +61,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_slug": {
         "name": "_slug",
@@ -69,7 +74,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_parent_type": {
         "name": "_parent_type",
@@ -81,7 +87,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_parent_id": {
         "name": "_parent_id",
@@ -93,7 +100,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_project_id": {
         "name": "_project_id",
@@ -105,7 +113,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
@@ -117,7 +126,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_prod_routing_id": {
         "name": "_prod_routing_id",
@@ -129,7 +139,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_prod_order_id": {
         "name": "_prod_order_id",
@@ -141,7 +152,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
@@ -153,7 +165,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_prod_discipline_1_id": {
         "name": "_prod_discipline_1_id",
@@ -165,7 +178,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_prod_discipline_2_id": {
         "name": "_prod_discipline_2_id",
@@ -177,7 +191,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_user_team_id": {
         "name": "_user_team_id",
@@ -189,7 +204,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_inter_subcon_id": {
         "name": "_inter_subcon_id",
@@ -201,7 +217,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_priority_id": {
         "name": "_priority_id",
@@ -213,7 +230,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_due_date": {
         "name": "_due_date",
@@ -225,7 +243,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_closed_at": {
         "name": "_closed_at",
@@ -237,7 +256,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_defect_root_cause_id": {
         "name": "_defect_root_cause_id",
@@ -249,7 +269,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_defect_disposition_id": {
         "name": "_defect_disposition_id",
@@ -261,7 +282,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_defect_severity": {
         "name": "_defect_severity",
@@ -273,7 +295,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_defect_report_type": {
         "name": "_defect_report_type",
@@ -285,7 +308,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getQaqcCars": {
         "name": "_getQaqcCars",
@@ -297,7 +321,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_attachment_defect_photos": {
         "name": "_attachment_defect_photos",
@@ -309,7 +334,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_attachment_defect_pdfs": {
         "name": "_attachment_defect_pdfs",
@@ -321,7 +347,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_attachment_corrective_photos": {
         "name": "_attachment_corrective_photos",
@@ -333,7 +360,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_attachment_corrective_pdfs": {
         "name": "_attachment_corrective_pdfs",
@@ -345,7 +373,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_qty_man_power": {
         "name": "_qty_man_power",
@@ -357,7 +386,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_hour_per_man": {
         "name": "_hour_per_man",
@@ -369,7 +399,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_total_hour": {
         "name": "_total_hour",
@@ -381,7 +412,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -393,7 +425,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_assignee_2": {
         "name": "_assignee_2",
@@ -402,130 +435,11 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "17",
+        "default_value": "714",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
-    },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "All_OwnerId",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_deleted_by": {
-        "name": "_deleted_by",
-        "column_name": "deleted_by",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_deleted_at": {
-        "name": "_deleted_at",
-        "column_name": "deleted_at",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_comment_asm_rejected_reason": {
-        "name": "_comment_asm_rejected_reason",
-        "column_name": "comment_asm_rejected_reason",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_comment_rejected_reason": {
-        "name": "_comment_rejected_reason",
-        "column_name": "comment_rejected_reason",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_comment_insp_rejected_reason": {
-        "name": "_comment_insp_rejected_reason",
-        "column_name": "comment_insp_rejected_reason",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_comment_inspector_decision": {
         "name": "_comment_inspector_decision",
@@ -537,6 +451,137 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "All_OwnerId",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_comment_asm_rejected_reason": {
+        "name": "_comment_asm_rejected_reason",
+        "column_name": "comment_asm_rejected_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_comment_insp_rejected_reason": {
+        "name": "_comment_insp_rejected_reason",
+        "column_name": "comment_insp_rejected_reason",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     }
 }
