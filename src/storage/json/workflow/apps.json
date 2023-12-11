@@ -351,7 +351,8 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
+        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>",
+        "do_not_send_notification_mails": "true"
     },
     "esg_induction_line": {
         "name": "esg_induction_line",
@@ -366,7 +367,8 @@
         "show_renderer": "props-renderer",
         "tutorial_link": null,
         "icon": null,
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "esg_master_sheet": {
         "name": "esg_master_sheet",
@@ -380,7 +382,8 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
+        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>",
+        "do_not_send_notification_mails": "true"
     },
     "esg_metric_type": {
         "name": "esg_metric_type",
@@ -396,7 +399,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "esg_sheet": {
         "name": "esg_sheet",
@@ -412,7 +416,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "esg_sheet_line": {
         "name": "esg_sheet_line",
@@ -428,7 +433,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "esg_tmpl": {
         "name": "esg_tmpl",
@@ -442,7 +448,8 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": null
+        "icon": null,
+        "do_not_send_notification_mails": "true"
     },
     "esg_tmpl_line": {
         "name": "esg_tmpl_line",
@@ -458,7 +465,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "field": {
         "name": "field",
@@ -1806,8 +1814,8 @@
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
-        "disallowed_direct_creation": "true",
-        "do_not_send_notification_mails": "true"
+        "do_not_send_notification_mails": "true",
+        "disallowed_direct_creation": "true"
     },
     "reportIndex": {
         "name": "reportIndex",
