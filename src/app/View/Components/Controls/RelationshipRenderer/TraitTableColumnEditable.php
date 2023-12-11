@@ -22,7 +22,7 @@ trait TraitTableColumnEditable
             }
             $prop = $sp['props']["_" . $column['dataIndex']];
             $newColumn['title'] = $column['title'] ?? $prop['label']; //. " <br/>" . $prop['control'];
-            $labelExtra = $prop['default-values']['label_extra'];
+            $labelExtra = $prop['default-values']['label_extra'] ?? "";
 
             $newColumn['width'] = $prop['width'];
             $validation = $prop['default-values']['validation'] ?? "";
