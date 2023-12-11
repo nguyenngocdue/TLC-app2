@@ -85,7 +85,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "> 0",
+        "label_extra": "(> 0)",
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": ""

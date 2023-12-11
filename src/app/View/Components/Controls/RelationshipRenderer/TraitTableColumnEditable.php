@@ -21,8 +21,9 @@ trait TraitTableColumnEditable
                 continue;
             }
             $prop = $sp['props']["_" . $column['dataIndex']];
-            // dump($prop);
             $newColumn['title'] = $column['title'] ?? $prop['label']; //. " <br/>" . $prop['control'];
+            $labelExtra = $prop['default-values']['label_extra'];
+
             $newColumn['width'] = $prop['width'];
             $validation = $prop['default-values']['validation'] ?? "";
             $isRequired = in_array("required", explode("|", $validation));
@@ -37,6 +38,7 @@ trait TraitTableColumnEditable
             $isReadOnly = ($prop['read_only'] ?? false) === 'true'; //<<CONFIG_MIGRATE
             $newColumn['properties']['readOnly'] = $isReadOnly;
 
+            $newColumn['title'] .= "</br><i class=''>" . $labelExtra . "</i>";
             $newColumn['title'] .= $isRequired ? "</br><i class='text-red-400' title='required'>*</i>" : "";
 
             $isSaveOnChange = ($prop['save_on_change'] ?? false) === 'true'; //<<CONFIG_MIGRATE

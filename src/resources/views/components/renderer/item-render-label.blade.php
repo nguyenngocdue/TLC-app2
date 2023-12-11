@@ -21,6 +21,6 @@
     {{-- @endif --}}
     <span class="flex justify-end">{!!$iconJson!!}</span>
     {{-- @if(!$hiddenLabel)  --}}
-    <i>{{$labelExtra}}</i> </label>
+    <i>{!! $labelExtra !!}</i> </label>
     {{-- @endif --}}
 @endif
