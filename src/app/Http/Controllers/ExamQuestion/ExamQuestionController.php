@@ -29,7 +29,9 @@ class ExamQuestionController
         $numbers = substr($question, strlen("question_"));
         $numbers .= "__"; // make sure it always has [1] and [2]
         $numbers = explode("_", $numbers);
-        $numbers = collect($numbers)->map(fn ($i) => $i ? $i : null)->toArray();
+        $numbers = collect($numbers)->toArray();
+        // $numbers = collect($numbers)->map(fn ($i) => $i ? $i : null)->toArray();
+        // dump($numbers);
         return $numbers;
     }
 
@@ -44,7 +46,7 @@ class ExamQuestionController
             $result[$numbers[0]][$numbers[1]] = $value;
         }
 
-        // dd($result);
+        // dump($result);
         return $result;
     }
 
@@ -69,18 +71,18 @@ class ExamQuestionController
         $input = collect($input);
 
         $questions = $input->filter(fn ($v, $k) => Str::startsWith($k, 'question_'));
-        // dump($questions);
+        // dd($questions);
         $controls = $input->filter(fn ($v, $k) => Str::startsWith($k, 'control_'));
         $controls = $this->parseControls($controls);
         $descriptions = $input->filter(fn ($v, $k) => Str::startsWith($k, 'description_'));
         $descriptions = $this->parseDescription($descriptions);
-        // dump($descriptions);
+        // dd($descriptions);
         // dd();
 
         foreach ($questions as $question => $values) {
             [$questionId, $subQuestion1, $subQuestion2] = $this->parseQuestion($question);
-            $questionTypeId = $controls[$questionId];
             // dump($questionId, $subQuestion1, $subQuestion2);
+            $questionTypeId = $controls[$questionId];
 
             $answer =    [
                 'owner_id' => CurrentUser::id(),

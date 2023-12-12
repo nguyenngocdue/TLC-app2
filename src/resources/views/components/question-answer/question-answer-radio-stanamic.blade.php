@@ -27,8 +27,14 @@
                         $i_1 = $i-1;
                         $chkId = "chk_{$questionId}_{$index}_{$i_1}";
                         $name = "question_{$questionId}_{$id}";
-                        if($subQuestion2Id) $name .= "_$subQuestion2Id";
+                        if($subQuestion2Id) {
+                            $name .= "_$subQuestion2Id";
+                            $checked = ($line[$id][$subQuestion2Id]->response_values ?? false) == $staticAnswer[$i_1];
+                        } else {
+                            $checked = ($line[$id][0]->response_values ?? false) == $staticAnswer[$i_1];
+                        }
                     @endphp
+
                     <td class="border px-5 py-1 text-center">
                         {{-- {{$chkId}} --}}
                         <input 
@@ -36,6 +42,7 @@
                             id="{{$chkId}}" 
                             value="{{$i}}:::{{$staticAnswer[$i_1]}}"  
                             type="radio"
+                            @checked($checked)
                             class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                             />
                     </td>

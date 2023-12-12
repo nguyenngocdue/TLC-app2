@@ -1,4 +1,8 @@
 {{-- @dump($questionId, $staticAnswer, $dynamicAnswerRows) --}}
+@php
+    // $value = ($line) ? $line[0][0]->response_ids : "";
+    dump($line);
+@endphp
 @php $countAllDynamicAnswer = $dynamicAnswerRows->map(fn($i)=>count($i))->sum(); @endphp
 <table class="border rounded m-4"> 
     <tr>
@@ -38,7 +42,7 @@
                             value="{{$i}}:::{{$i}}"  
                             type="checkbox"
                             class="disabled:bg-gray-500 disabled:cursor-not-allowed"
-                            onclick="onRankClick('{{$chkId}}', {{$questionId}}, {{$countAllDynamicAnswer}})"
+                            onclick="reRenderRankTable({{$questionId}}, {{$countAllDynamicAnswer}})"
                             />
                     </td>
                 @endfor
@@ -55,3 +59,7 @@
 </table>
 
 <i>1 is the highest, {{$countAllDynamicAnswer}} is the lowest.</i>
+
+<script>
+    reRenderRankTable({{$questionId}}, {{$countAllDynamicAnswer}})
+</script>

@@ -1,6 +1,6 @@
 @php
     $questionId = $item['id'];
-    dump($line);
+    // dump($line);
 @endphp
 <div class="sticky top-[114px] bg-blue-400 rounded mb-2" >
     <x-renderer.heading level=5 class="z-10 p-2">
@@ -56,6 +56,14 @@
                             echo "<input type='$inputType' name='$name' value='{$subQuestion1['name']}' />";
                         }
                     }
+
+                    foreach($staticAnswer as $index => $subQuestion1){
+                        if($control == 'ranking-static'){
+                            $name ="description_{$questionId}_{$subQuestion1}_1";
+                            if($debug) echo $name;
+                            echo "<input type='$inputType' name='$name' value='{$subQuestion1}' />";
+                        }
+                    }
                     
                     if($debug) echo "<br/>";
                     echo "<input type='$inputType' name='control_{$questionId}' value='{$controlId}' />";
@@ -68,6 +76,7 @@
                     
                     :renderAsRows="$renderAsRows"
                     :subQuestion2Id="$subQuestion2Id"
+                    :line="$line"
                     />', [
                         'questionId' => $questionId,
                         'staticAnswer' => $staticAnswer,
@@ -75,6 +84,7 @@
                         'dynamicAnswerRowGroups' => $dynamicAnswerRowGroups,
                         'renderAsRows' => $renderAsRows,
                         'subQuestion2Id' => $subQuestion['id'] ?? null,
+                        'line' => $line,
                     ]);
                 }
             }
@@ -84,7 +94,7 @@
  
 @once
 <script>
-    const onRankClick = (chkId, questionId, count) => {
+    const reRenderRankTable = (questionId, count) => {
         let array = [];
         const checked = []
         for (let i = 0; i < count; i++) {

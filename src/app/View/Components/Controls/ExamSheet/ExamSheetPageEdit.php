@@ -17,6 +17,16 @@ class ExamSheetPageEdit extends Component
         // dump($id, $type);
     }
 
+    function groupByQuestionId($lines)
+    {
+        $grouped = [];
+        foreach ($lines as $line) {
+            $grouped[$line->exam_question_id][$line->sub_question_1_id ?? 0][$line->sub_question_2_id ?? 0] = $line;
+        }
+        // dd($grouped);
+        return $grouped;
+    }
+
     function render()
     {
         $id = $this->id;
@@ -45,6 +55,8 @@ class ExamSheetPageEdit extends Component
         // dump($tableOfContents);
         $route = route(Str::plural($this->type) . '.update', $this->id);
 
+        $sheetLines = $this->groupByQuestionId($sheet->getSheetLines);
+
         return view('components.controls.exam-sheet.exam-sheet-page-edit', [
             'dataSource' => $dataSource,
             'tableOfContents' => $tableOfContents,
@@ -52,7 +64,7 @@ class ExamSheetPageEdit extends Component
             'route' => $route,
             'exam_sheet_id' => $id,
             'exam_tmpl_id' => $exam_tmpl_id,
-            'sheetLines' => $sheet->getSheetLines->keyBy('exam_question_id'),
+            'sheetLines' => $sheetLines,
         ]);
     }
 }

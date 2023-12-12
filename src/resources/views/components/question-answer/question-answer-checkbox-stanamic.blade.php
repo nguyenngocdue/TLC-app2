@@ -28,7 +28,14 @@
                             $i_1 = $i-1;
                             $chkId = "chk_{$questionId}_{$index}_{$i_1}";
                             $name = "question_{$questionId}_{$id}";
-                            if($subQuestion2Id) $name .= "_$subQuestion2Id";
+                            if($subQuestion2Id) {
+                                $name .= "_$subQuestion2Id";
+                                $values = ($line[$id][$subQuestion2Id]->response_values ?? '');
+                            } else {
+                                $values = ($line[$id][0]->response_values ?? '');
+                            }
+                            $values = $values ? explode(",", $values) : []; 
+                            $checked = in_array($staticAnswer[$i_1], $values);
                         @endphp
                         <td class="border px-5 py-1 text-center">
                             {{-- {{$chkId}} --}}
@@ -36,6 +43,7 @@
                                 name="{{$name}}[]"
                                 id="{{$chkId}}" 
                                 value="{{$i}}:::{{$staticAnswer[$i_1]}}"  
+                                @checked($checked)
                                 type="checkbox"
                                 class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                                 />
