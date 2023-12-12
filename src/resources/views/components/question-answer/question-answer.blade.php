@@ -8,6 +8,7 @@
 @endonce
 @once
 <script>
+    const countCheckedByName = (name) => document.querySelectorAll('input[name="' + name + '"]:checked').length
     const validationType = (id) => {
         const x = {
             450: 'none',
@@ -20,6 +21,7 @@
         // console.log(vType)
          switch(vType){
             case 'required': 
+                // console.log(value)
                 return !!value
             case 'none':
             default:
@@ -28,7 +30,7 @@
     }
     const refreshValidation = (questionKey, validation, value) => {
         const pass = validationPassOrFail(validation, value)
-        console.log(questionKey, validation, value, pass ? "PASS" : "FAIL")
+        // console.log(questionKey, validation, value, pass ? "PASS" : "FAIL")
         if(pass){
             $("#" + questionKey + "_pass").show()
             $("#" + questionKey + "_fail").hide()

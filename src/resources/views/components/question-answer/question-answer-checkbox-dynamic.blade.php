@@ -26,7 +26,7 @@
                     id="option_{{$questionId}}_{{$id}}" 
                     name="question_{{$questionId}}[]" 
                     @checked(in_array($id,$values))
-                    onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', event.target.value)" 
+                    onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('question_{{$questionId}}[]'))" 
                     value="{{$id}}:::{{$label}}">
                 @if($renderAsRows)
                     <label class="cursor-pointer flex items-center px-2" for="option_{{$questionId}}_{{$id}}"> 

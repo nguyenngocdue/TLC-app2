@@ -54,6 +54,7 @@
                             @checked($checked)
                             class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                             onclick="reRenderRankTable({{$questionId}}, {{$countAllDynamicAnswer}})"
+                            onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}'))" 
                             />
                     </td>
                 @endfor

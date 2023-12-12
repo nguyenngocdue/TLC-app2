@@ -20,8 +20,10 @@
                     $questionJSKey = "{$questionId}_{$name}";
                 @endphp
                 <script>questions['{{$questionJSKey}}']='{{$value}}';</script>
-                <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
-                {{$name}}
+                <div class="flex items-center">
+                    <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
+                    {{$name}}
+                </div>
             </td>
             @for($i = 1; $i <= sizeof($staticAnswer); $i++)
                 @php
@@ -41,6 +43,7 @@
                         @checked($checked)
                         class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                         onclick="reRenderRankTable({{$questionId}}, {{sizeof($staticAnswer)}})"
+                        onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('question_{{$questionId}}_{{$name}}'))" 
                         />
                 </td>
             @endfor

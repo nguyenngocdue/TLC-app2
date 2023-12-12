@@ -53,7 +53,7 @@
                                 value="{{$i}}:::{{$staticAnswer[$i_1]}}"  
                                 @checked($checked)
                                 type="checkbox"
-                                onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', event.target.value)" 
+                                onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}[]'))" 
                                 class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                                 />
                         </td>
