@@ -5,4 +5,8 @@
 @endphp
 <script>questions['{{$questionJSKey}}']='{{$value}}';</script>
 <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
-<input name="question_{{$questionId}}" class="border rounded p-1 m-1 w-full border-gray-500" value="{{$value}}"/>
+<input name="question_{{$questionId}}" 
+    class="border rounded p-1 m-1 w-full border-gray-500" 
+    value="{{$value}}"
+    onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', event.target.value)" 
+    />

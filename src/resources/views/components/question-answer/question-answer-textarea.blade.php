@@ -4,4 +4,7 @@
 @endphp
 <script>questions['{{$questionJSKey}}']='{{$value}}';</script>
 <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
-<textarea name="question_{{$questionId}}" class="border rounded p-1 m-1 w-full border-gray-500" rows="4">{!! $value !!}</textarea>
+<textarea name="question_{{$questionId}}" 
+onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', event.target.value)" 
+        class="border rounded p-1 m-1 w-full border-gray-500" 
+        rows="4">{!! $value !!}</textarea>

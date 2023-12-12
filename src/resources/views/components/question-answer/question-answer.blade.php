@@ -8,8 +8,17 @@
 @endonce
 @once
 <script>
-    const validationPassOrFail = (validationType, value) => {
-         switch(validationType){
+    const validationType = (id) => {
+        const x = {
+            450: 'none',
+            451: 'required',
+        };
+        return x[id]
+    }
+    const validationPassOrFail = (validation, value) => {
+        const vType = validationType(validation)
+        // console.log(vType)
+         switch(vType){
             case 'required': 
                 return !!value
             case 'none':
@@ -17,9 +26,9 @@
                 return true;
         }
     }
-    const refreshValidation = (questionKey, validationType, value) => {
-        const pass = validationPassOrFail(validationType, value)
-        console.log(questionKey, validationType, value, pass ? "PASS" : "FAIL")
+    const refreshValidation = (questionKey, validation, value) => {
+        const pass = validationPassOrFail(validation, value)
+        console.log(questionKey, validation, value, pass ? "PASS" : "FAIL")
         if(pass){
             $("#" + questionKey + "_pass").show()
             $("#" + questionKey + "_fail").hide()

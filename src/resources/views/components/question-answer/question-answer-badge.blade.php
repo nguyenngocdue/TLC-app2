@@ -3,9 +3,9 @@
     <i class=" fa-solid fa-square-check text-green-600 text-3xl mr-2"></i>
 </div>
 <div id="{{$id}}_fail" class="hidden1">
-    <i class=" fa-solid fa-square-xmark text-red-600 text-3xl mr-2"></i>
+    <i class=" fa-solid fa-square-u text-red-600 text-3xl mr-2"></i>
 </div>
 
 <script>
-    refreshValidation("{{$id}}", "{{$validationType}}", "{{$selected}}")
+    refreshValidation("{{$id}}", "{{$validation}}", "{{$selected}}")
 </script>

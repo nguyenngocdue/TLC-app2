@@ -13,24 +13,24 @@ class QuestionAnswerBadge extends Component
     ) {
     }
 
-    static function getValidationType()
-    {
-        return [
-            450 => 'none',
-            451 => 'required',
-        ];
-    }
+    // static function getValidationType()
+    // {
+    //     return [
+    //         450 => 'none',
+    //         451 => 'required',
+    //     ];
+    // }
 
     function render()
     {
-        $validationType = static::getValidationType()[$this->validation];
+        // $validationType = static::getValidationType()[$this->validation];
 
         return view(
             'components.question-answer.question-answer-badge',
             [
                 'id' => $this->id,
                 'selected' => $this->selected,
-                'validationType' => $validationType,
+                'validation' => $this->validation,
             ]
         );
     }

@@ -16,10 +16,11 @@
     @foreach($staticAnswer as $index => $label)
     <div class="{{$renderAsRows ?: 'text-center'}} col-span-1 m-1 p-2 rounded hover:bg-blue-100" onclick="">
         <input class="cursor-pointer" type="checkbox" 
-        id="option_{{$questionId}}_{{$label}}" 
-        @checked(in_array($label, $values))
-        name="question_{{$questionId}}[]" 
-        value="{{$index}}:::{{$label}}">
+            id="option_{{$questionId}}_{{$label}}" 
+            @checked(in_array($label, $values))
+            name="question_{{$questionId}}[]" 
+            onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', event.target.value)" 
+            value="{{$index}}:::{{$label}}">
         @if(!$renderAsRows) <br/> @endif
         <label class="cursor-pointer" for="option_{{$questionId}}_{{$label}}">{{$label}}</label><br>
     </div>

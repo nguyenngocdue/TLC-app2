@@ -54,6 +54,7 @@
                             value="{{$i}}:::{{$staticAnswer[$i_1]}}"  
                             type="radio"
                             @checked($checked)
+                            onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', event.target.value)" 
                             class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                             />
                     </td>

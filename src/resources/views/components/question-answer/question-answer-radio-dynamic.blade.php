@@ -24,6 +24,7 @@
                         id="option_{{$questionId}}_{{$id}}" 
                         name="question_{{$questionId}}" 
                         @checked($id == $value)
+                        onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', event.target.value)" 
                         value="{{$id}}:::{{$label}}">
                 @if($renderAsRows)
                 <label class="cursor-pointer flex items-center px-2" for="option_{{$questionId}}_{{$id}}"> 
