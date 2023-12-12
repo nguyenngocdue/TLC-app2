@@ -18,7 +18,7 @@
                 @php
                     $value = ($line[$name][0]->response_values ?? "");
                 @endphp
-                <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}"/>
+                <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
                 {{$name}}
             </td>
             @for($i = 1; $i <= sizeof($staticAnswer); $i++)

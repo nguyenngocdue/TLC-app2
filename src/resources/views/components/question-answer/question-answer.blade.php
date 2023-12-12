@@ -116,6 +116,7 @@
                     :renderAsRows="$renderAsRows"
                     :subQuestion2Id="$subQuestion2Id"
                     :line="$line"
+                    :validation="$validation"
                     :questionJSKey="$questionJSKey"
                     />', [
                         'questionId' => $questionId,

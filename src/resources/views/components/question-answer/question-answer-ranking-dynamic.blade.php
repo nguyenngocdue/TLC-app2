@@ -28,7 +28,7 @@
                         @php
                            $value = ($line[$id][0]->response_values ?? "");
                         @endphp
-                        <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}"/>
+                        <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
                         @if($avatar) <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" /> @endif
                         {{$label}}
                     </td>
