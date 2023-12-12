@@ -13,6 +13,7 @@
         const x = {
             450: 'none',
             451: 'required',
+            452: 'min_3',
         };
         return x[id]
     }
@@ -23,6 +24,8 @@
             case 'required': 
                 // console.log(value)
                 return !!value
+            case 'min_3':
+                return value >=3
             case 'none':
             default:
                 return true;
@@ -105,41 +108,6 @@
                         }
                     }
                     
-                    if(in_array($control,[
-                        'text', 'textarea',
-                        'radio-static','radio-dynamic',
-                        'checkbox-static','checkbox-dynamic',
-                    ])){
-                        $value = $line[0][0]->response_ids ?? "";
-                        $questionJSKey = $questionId;
-                        // echo "<p>Question_$questionJSKey: $value</p>";
-                        echo "<script>questions['$questionJSKey']='$value';</script>";
-                    } elseif($control == 'ranking-static'){
-                        foreach($staticAnswer as $index => $subQuestion1){
-                            $value = $line[$subQuestion1][0]->response_values ?? "";
-                            $questionJSKey = "{$questionId}_{$subQuestion1}";
-                            // echo "<p>Question_$questionJSKey: $value</p>";
-                            echo "<script>questions['$questionJSKey']='$value';</script>";
-                        }
-                    }else {
-                        foreach($dynamicAnswerRows as $subQuestionGroups){
-                            foreach($subQuestionGroups as $subQuestion1){
-                                // dump($subQuestion1);
-                                if(!$showSubQuestion2){
-                                    $value = $line[$subQuestion1['id']][0]->response_ids ?? "";
-                                    $questionJSKey = "{$questionId}_{$subQuestion1['id']}";
-                                    echo "<p>Question_$questionJSKey: $value</p>";
-                                    echo "<script>questions['$questionJSKey']='$value';</script>";
-                                } else {
-                                    $value = $line[$subQuestion1['id']][$subQuestion2['id']]->response_ids ?? "";
-                                    $questionJSKey = "{$questionId}_{$subQuestion1['id']}_{$subQuestion2['id']}";
-                                    // echo "<p>Question_$questionJSKey: $value</p>";
-                                    echo "<script>questions['$questionJSKey']='$value';</script>";
-                                }
-                            }
-                        }
-                    }
-                    
                     if($debug) echo "<br/>";
                     echo "<input type='$inputType' name='control_{$questionId}' value='{$controlId}' />";
 
@@ -153,7 +121,7 @@
                     :subQuestion2Id="$subQuestion2Id"
                     :line="$line"
                     :validation="$validation"
-                    :questionJSKey="$questionJSKey"
+                    
                     />', [
                         'questionId' => $questionId,
                         'staticAnswer' => $staticAnswer,
@@ -163,7 +131,7 @@
                         'subQuestion2Id' => $subQuestion2['id'] ?? null,
                         'line' => $line,
                         'validation' => $validation,
-                        'questionJSKey' => $questionJSKey,
+                        // 'questionJSKey' => $questionJSKey,
                     ]);
                 }
             }
