@@ -20,7 +20,14 @@
                 @endphp
                 <tr class="hover:bg-blue-100">
                     <td class="border px-5 py-1 flex items-center">
-                        <x-question-answer.question-answer-badge id="{{$questionJSKey}}"/>
+                        @php
+                            if($subQuestion2Id) {
+                                $value = ($line[$id][$subQuestion2Id]->response_values ?? '');
+                            } else {
+                                $value = ($line[$id][0]->response_values ?? '');
+                            }
+                        @endphp
+                        <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}"/>
                         @if($avatar) <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" /> @endif
                         {{$label}}
                     </td>
@@ -31,11 +38,8 @@
                             $name = "question_{$questionId}_{$id}";
                             if($subQuestion2Id) {
                                 $name .= "_$subQuestion2Id";
-                                $values = ($line[$id][$subQuestion2Id]->response_values ?? '');
-                            } else {
-                                $values = ($line[$id][0]->response_values ?? '');
                             }
-                            $values = $values ? explode("|||", $values) : []; 
+                            $values = $value ? explode("|||", $value) : []; 
                             $checked = in_array($staticAnswer[$i_1], $values);
                         @endphp
                         <td class="border px-5 py-1 text-center">

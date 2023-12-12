@@ -15,7 +15,10 @@
     @foreach($staticAnswer as $id=>$name)
         <tr class="hover:bg-blue-100">
             <td class="border px-5 py-1">
-                <x-question-answer.question-answer-badge id="{{$questionJSKey}}"/>
+                @php
+                    $value = ($line[$name][0]->response_values ?? "");
+                @endphp
+                <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}"/>
                 {{$name}}
             </td>
             @for($i = 1; $i <= sizeof($staticAnswer); $i++)
@@ -23,7 +26,7 @@
                     $i_1 = $i-1;
                     $chkId = "chk_{$questionId}_{$index}_{$i_1}";
                     // dump( $checked[0]->response_values);
-                    $values = explode("|||", ($line[$name][0]->response_values ?? ""));
+                    $values = explode("|||", $value);
                     $checked = in_array($i, $values);
                 @endphp
                 <td class="border px-5 py-1 text-center">

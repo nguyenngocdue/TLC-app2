@@ -9,7 +9,7 @@
     // dump($values);
 @endphp
 
-<x-question-answer.question-answer-badge id="{{$questionJSKey}}"/>
+<x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}"/>
 <div class="grid {{$renderAsRows ?: 'grid-cols-12'}}">
     @foreach($staticAnswer as $index => $label)
     <div class="{{$renderAsRows ?: 'text-center'}} col-span-1 m-1 p-2 rounded hover:bg-blue-100" onclick="">

@@ -25,7 +25,10 @@
             @endphp
             <tr class="hover:bg-blue-100">
                     <td class="border px-5 py-1 flex items-center">
-                        <x-question-answer.question-answer-badge id="{{$questionJSKey}}"/>
+                        @php
+                           $value = ($line[$id][0]->response_values ?? "");
+                        @endphp
+                        <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}"/>
                         @if($avatar) <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" /> @endif
                         {{$label}}
                     </td>
@@ -35,7 +38,7 @@
                         $chkId = "chk_{$questionId}_{$index}_{$i_1}";
                         $name = "question_{$questionId}_{$id}";
                         if($subQuestion2Id) $name .= "_$subQuestion2Id";
-                        $values = explode("|||", ($line[$id][0]->response_values ?? ""));
+                        $values = explode("|||", $value);
                         // dump($values);
                         $checked = in_array($i, $values);
                     @endphp
