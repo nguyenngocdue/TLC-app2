@@ -5,7 +5,7 @@
     // dump($value);
     $questionJSKey = $questionId;
 @endphp
-<script>questions['{{$questionJSKey}}']='{{$value}}';</script>
+{{-- <script>questions['{{$questionJSKey}}']='{{$value}}';</script> --}}
 
 <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
 @foreach($dynamicAnswerRowGroups as $groupName)

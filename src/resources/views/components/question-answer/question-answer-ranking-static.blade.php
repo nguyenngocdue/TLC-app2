@@ -19,7 +19,7 @@
                     $value = ($line[$name][0]->response_values ?? "");
                     $questionJSKey = "{$questionId}_{$name}";
                 @endphp
-                <script>questions['{{$questionJSKey}}']='{{$value}}';</script>
+                {{-- <script>questions['{{$questionJSKey}}']='{{$value}}';</script> --}}
                 <div class="flex items-center">
                     <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
                     {{$name}}

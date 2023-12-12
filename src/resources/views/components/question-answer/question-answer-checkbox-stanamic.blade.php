@@ -29,7 +29,7 @@
                                 $questionJSKey = "{$questionId}_{$id}";
                             }
                         @endphp
-                        <script>questions['{{$questionJSKey}}']='{{$value}}';</script>
+                        {{-- <script>questions['{{$questionJSKey}}']='{{$value}}';</script> --}}
                         <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
                         @if($avatar) <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" /> @endif
                         {{$label}}
@@ -56,6 +56,11 @@
                                 onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}[]'))" 
                                 class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                                 />
+
+                            <script>
+                                // This will overide refreshValidation in the badge as that one doesnt know how to count
+                                refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}[]'))
+                            </script>
                         </td>
                     @endfor
                 </tr>

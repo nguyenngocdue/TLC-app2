@@ -3,7 +3,7 @@
     // dump($value);
     $questionJSKey = $questionId;
 @endphp
-<script>questions['{{$questionJSKey}}']='{{$value}}';</script>
+{{-- <script>questions['{{$questionJSKey}}']='{{$value}}';</script> --}}
 <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
 <input name="question_{{$questionId}}" 
     class="border rounded p-1 m-1 w-full border-gray-500" 

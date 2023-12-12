@@ -44,7 +44,7 @@
                     </div>
                     @endforeach
                     <div class="p-2">
-                        <x-renderer.button type='primary' htmlType="submit">Submit</x-render.button>
+                        <x-renderer.button type='primary' onClick="validateAndSubmit()">Submit</x-render.button>
                     </div>
                 @endif
             </div>
@@ -56,5 +56,23 @@
         </div>
     </div>
 </form>
+
+<script>
+    const validateAndSubmit = () => {
+        // console.log('validateAndSubmit')
+        let hasFail = false
+        for(var key in questions){
+            if(!questions[key] ){
+                hasFail = true
+                console.log(key)
+            }
+        }
+        if(hasFail){
+            console.log("Has problem")
+        }else{
+            console.log("Submitting...")
+        }
+    }
+</script>
 
 @endsection 

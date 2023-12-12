@@ -9,7 +9,7 @@
     // dump($values);
     $questionJSKey = $questionId;
 @endphp
-<script>questions['{{$questionJSKey}}']='{{$value}}';</script>
+{{-- <script>questions['{{$questionJSKey}}']='{{$value}}';</script> --}}
 
 <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
 <div class="grid {{$renderAsRows ?: 'grid-cols-12'}}">
@@ -21,6 +21,10 @@
             name="question_{{$questionId}}[]" 
             onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('question_{{$questionId}}[]'))" 
             value="{{$index}}:::{{$label}}">
+        <script>
+            // This will overide refreshValidation in the badge as that one doesnt know how to count
+            refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('question_{{$questionId}}[]'))
+        </script>
         @if(!$renderAsRows) <br/> @endif
         <label class="cursor-pointer" for="option_{{$questionId}}_{{$label}}">{{$label}}</label><br>
     </div>

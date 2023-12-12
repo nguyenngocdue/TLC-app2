@@ -34,6 +34,7 @@
     const refreshValidation = (questionKey, validation, value) => {
         const pass = validationPassOrFail(validation, value)
         // console.log(questionKey, validation, value, pass ? "PASS" : "FAIL")
+        questions[questionKey] = pass
         if(pass){
             $("#" + questionKey + "_pass").show()
             $("#" + questionKey + "_fail").hide()

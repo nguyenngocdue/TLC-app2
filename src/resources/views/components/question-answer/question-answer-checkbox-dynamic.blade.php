@@ -7,7 +7,7 @@
     // dump($values);
     $questionJSKey = $questionId;
 @endphp
-<script>questions['{{$questionJSKey}}']='{{$value}}';</script>
+{{-- <script>questions['{{$questionJSKey}}']='{{$value}}';</script> --}}
 
 <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
 @foreach($dynamicAnswerRowGroups as $groupName)
@@ -41,6 +41,10 @@
                         </div>{{$label}}
                     </label>
                 @endif
+                <script>
+                    // This will overide refreshValidation in the badge as that one doesnt know how to count
+                    refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('question_{{$questionId}}[]'))
+                </script>
                 {{-- <br> --}}
             </div>
         @endforeach
