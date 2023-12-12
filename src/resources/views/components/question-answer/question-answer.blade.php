@@ -1,6 +1,9 @@
+@php
+    $questionId = $item['id'];
+@endphp
 <div class="sticky top-[114px] bg-blue-400 rounded mb-2" >
     <x-renderer.heading level=5 class="z-10 p-2">
-        <p title="#{{$item['id']}}">{{$item['name'] ?? 'Untitled'}}</p>
+        <p title="#{{$questionId}}">{{$item['name'] ?? 'Untitled'}}</p>
     </x-renderer.heading>
     <div class="p-1 mx-4"> {{$item['description']}}  </div>
 </div>
@@ -39,15 +42,17 @@
                         echo "<b>". $subQuestion['name']."</b>" ?? '';
                         echo "</div>";
                         // dump($subQuestion);
-                        echo "<input type='$inputType' name='description_{$item['id']}_2' value='{$subQuestion['name']}'/>";
+                        echo "<input type='$inputType' name='description_{$questionId}_2' value='{$subQuestion['name']}'/>";
                         if($debug) echo "<br/>";
                     }
 
                     foreach($dynamicAnswerRows as $subQuestionGroups){
                         foreach($subQuestionGroups as $subQuestion1){
-                            echo "<input type='$inputType' name='description_{$item['id']}_1' value='{$subQuestion1['name']}' />";
+                            echo "<input type='$inputType' name='description_{$questionId}_1' value='{$subQuestion1['name']}' />";
                         }
                     }
+                    
+                    echo "<input type='$inputType' name='control_{$questionId}' value='{$controlId}' />";
 
                     echo Blade::render('<x-question-answer.question-answer-'.$control.'
                     :questionId="$questionId" 
@@ -58,7 +63,7 @@
                     :renderAsRows="$renderAsRows"
                     :subQuestionId="$subQuestionId"
                     />', [
-                        'questionId' => $item['id'],
+                        'questionId' => $questionId,
                         'staticAnswer' => $staticAnswer,
                         'dynamicAnswerRows' => $dynamicAnswerRows,
                         'dynamicAnswerRowGroups' => $dynamicAnswerRowGroups,

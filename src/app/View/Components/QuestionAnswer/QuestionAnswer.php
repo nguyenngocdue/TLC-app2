@@ -105,9 +105,9 @@ class QuestionAnswer extends Component
         return $result;
     }
 
-    function render()
+    static function controlIds()
     {
-        $controlIds = [
+        return [
             377 => 'text',
             378 => 'textarea',
             379 => 'radio-static',
@@ -121,6 +121,11 @@ class QuestionAnswer extends Component
             392 => 'radio-dynanamic',
             393 => 'checkbox-dynanamic',
         ];
+    }
+
+    function render()
+    {
+        $controlIds = static::controlIds();
 
         $item = $this->item;
         $questionType = $item['question_type_id'] ?? null;
@@ -148,6 +153,7 @@ class QuestionAnswer extends Component
                 'dynamicAnswerCols' => $dynamicAnswerCols,
                 'renderAsRows' => $renderAsRow,
                 'debug' => $this->debug,
+                'controlId' => $questionType,
             ]
         );
     }

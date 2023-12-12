@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ExamQuestion;
 
 use App\Models\Exam_sheet_line;
 use App\Utils\Support\CurrentUser;
+use App\View\Components\QuestionAnswer\QuestionAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -34,8 +35,18 @@ class ExamQuestionController
         return $result;
     }
 
+    function parseControls($controls)
+    {
+        $result = [];
+        foreach ($controls as $k => $control) {
+            $result[substr($k, strlen('control_'))] = $control;
+        }
+        return $result;
+    }
+
     function update(Request $request, $type, $id)
     {
+        $controlIds = QuestionAnswer::controlIds();
         // dump($request);
         $input = $request->except(['_token', '_method']);
         // dd($input);
@@ -43,8 +54,8 @@ class ExamQuestionController
         $input = collect($input);
 
         $questions = $input->filter(fn ($v, $k) => Str::startsWith($k, 'question_'));
-        // dump($questions);
-
+        $controls = $input->filter(fn ($v, $k) => Str::startsWith($k, 'control_'));
+        $controls = $this->parseControls($controls);
         $descriptions = $input->filter(fn ($v, $k) => Str::startsWith($k, 'description_'));
         $descriptions = $this->parseDescription($descriptions);
         // dump($descriptions);
@@ -52,13 +63,27 @@ class ExamQuestionController
 
         foreach ($questions as $question => $values) {
             [$questionId, $subQuestion1, $subQuestion2] = $this->parseQuestion($question);
+            $questionTypeId = $controls[$questionId];
             // dump($questionId, $subQuestion1, $subQuestion2);
 
             $answer =    [
                 'owner_id' => CurrentUser::id(),
-                // 'question_type_id' => $values,
-                'response_ids' => is_array($values) ? join(",", $values) : $values,
+                'question_type_id' => $questionTypeId,
             ];
+
+            if (in_array($controlIds[$questionTypeId], ['text', 'textarea'])) {
+                $answer['response_ids'] = $values;
+                $answer['response_values'] = $values;
+            } else {
+                if (is_array($values)) {
+                    $answer['response_ids'] = join(",", $values);
+                    $answer['response_values'] = join(",", $values);
+                } else {
+                    [$ids, $values] = explode(":::", $values);
+                    $answer['response_ids'] = $ids;
+                    $answer['response_values'] = $values;
+                }
+            }
 
             if ($subQuestion1) {
                 $answer['sub_question_1_id'] = $subQuestion1;

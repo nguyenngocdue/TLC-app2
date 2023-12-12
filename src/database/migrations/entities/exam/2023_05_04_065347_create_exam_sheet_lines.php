@@ -26,7 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('exam_tmpl_id')->nullable();
             $table->unsignedBigInteger('exam_sheet_id')->nullable();
             $table->unsignedBigInteger('exam_question_id')->nullable();
-            // $table->unsignedBigInteger('question_type_id')->nullable();
+            $table->unsignedBigInteger('question_type_id')->nullable();
 
             $table->unsignedBigInteger('sub_question_1_id')->nullable();
             $table->text('sub_question_1_value')->nullable();
