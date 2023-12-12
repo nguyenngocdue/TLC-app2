@@ -11,6 +11,7 @@ class Exam_tmpl_question extends ModelExtended
         "exam_tmpl_id", "exam_tmpl_group_id", "render_as_rows",
         'question_type_id', "static_answer",
         "dynamic_answer_rows", "dynamic_answer_cols",
+        "validation",
         /*"status",*/
     ];
 
@@ -22,6 +23,7 @@ class Exam_tmpl_question extends ModelExtended
         "getQuestionType" => ['belongsTo', Term::class, 'question_type_id'],
         "getDynamicAnswerRows" => ['belongsTo', Term::class, 'dynamic_answer_rows'],
         "getDynamicAnswerCols" => ['belongsTo', Term::class, 'dynamic_answer_cols'],
+        "getValidation" => ['belongsTo', Term::class, 'validation'],
     ];
 
     public static $oracyParams = [];
@@ -51,6 +53,11 @@ class Exam_tmpl_question extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getValidation()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getManyLineParams()
     {
@@ -63,6 +70,7 @@ class Exam_tmpl_question extends ModelExtended
             ['dataIndex' => 'name',],
             ['dataIndex' => 'description',],
             ['dataIndex' => 'question_type_id',],
+            ['dataIndex' => 'validation', 'cloneable' => true,],
             ['dataIndex' => 'render_as_rows',],
             ['dataIndex' => 'static_answer',],
             ['dataIndex' => 'dynamic_answer_rows',],

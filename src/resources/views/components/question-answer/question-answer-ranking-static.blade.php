@@ -15,7 +15,7 @@
     @foreach($staticAnswer as $id=>$name)
         <tr class="hover:bg-blue-100">
             <td class="border px-5 py-1">
-                <x-question-answer.question-answer-badge/>
+                <x-question-answer.question-answer-badge id="{{$questionJSKey}}"/>
                 {{$name}}
             </td>
             @for($i = 1; $i <= sizeof($staticAnswer); $i++)

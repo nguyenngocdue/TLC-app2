@@ -7,7 +7,7 @@
     // dump($values);
 @endphp
 
-<x-question-answer.question-answer-badge/>
+<x-question-answer.question-answer-badge id="{{$questionJSKey}}"/>
 @foreach($dynamicAnswerRowGroups as $groupName)
     @if($groupName != 'no_group')    
         <b>{{$groupName}}</b>

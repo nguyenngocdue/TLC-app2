@@ -19,7 +19,7 @@
             @endphp
             <tr class="hover:bg-blue-100">
                 <td class="border px-5 py-1 flex items-center">
-                    <x-question-answer.question-answer-badge/>
+                    <x-question-answer.question-answer-badge id="{{$questionJSKey}}"/>
                     @if($avatar) <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" /> @endif
                     {{$label}}
                 </td>

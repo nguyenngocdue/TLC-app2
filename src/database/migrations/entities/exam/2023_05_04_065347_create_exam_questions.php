@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('exam_tmpl_id')->nullable();
             $table->unsignedBigInteger('exam_tmpl_group_id')->nullable();
             $table->unsignedBigInteger('question_type_id')->nullable();
+            $table->unsignedBigInteger('validation')->nullable();
             $table->boolean('render_as_rows')->nullable();
             $table->text('static_answer')->nullable();
             $table->unsignedBigInteger('dynamic_answer_rows')->nullable();
