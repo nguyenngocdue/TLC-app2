@@ -34,6 +34,13 @@ trait TraitEntityCRUDCreateEdit2
 
 	public function create(Request $request)
 	{
+		if ($this->type == 'exam_sheet') {
+			return Blade::render('<x-controls.exam-sheet.exam-sheet-page-create 
+				type="{{$type}}"
+			/>', [
+				'type' => $this->type,
+			]);
+		}
 		$superProps = $this->getSuperProps();
 		$props = $superProps['props'];
 		$defaultValues = $this->getDefaultValue($props);
@@ -76,7 +83,7 @@ trait TraitEntityCRUDCreateEdit2
 	public function edit(Request $request, $id, $viewRender = null, $readOnly = false)
 	{
 		if ($this->type == 'exam_sheet') {
-			return Blade::render('<x-controls.exam-sheet.exam-sheet-page 
+			return Blade::render('<x-controls.exam-sheet.exam-sheet-page-edit
 				id="{{$id}}" type="{{$type}}"
 			/>', [
 				'id' => $id,

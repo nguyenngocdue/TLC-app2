@@ -6,5 +6,6 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'middleware' => ['auth', 'impersonate'],
 ], function () {
+    Route::post('exam-question', [ExamQuestionController::class, 'store'])->name('exam-question.store');
     Route::post('exam-question', [ExamQuestionController::class, 'update'])->name('exam-question.update');
 });

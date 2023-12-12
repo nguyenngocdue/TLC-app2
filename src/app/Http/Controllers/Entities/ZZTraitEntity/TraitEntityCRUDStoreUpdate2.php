@@ -42,6 +42,11 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function store(Request $request)
 	{
+		if ($this->type == 'exam_sheet') {
+			$controller = new ExamQuestionController($request);
+			$response = $controller->store($request, $this->type);
+			return $response;
+		}
 		// dd(SuperProps::getFor($this->type));
 		// dd($request->input());
 		$this->reArrangeComments($request);
