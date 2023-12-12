@@ -44,6 +44,8 @@
                     </div>
                     @endforeach
                     <div class="p-2">
+                        <ul id="divSubmit" class="text-red-500">
+                        </ul>
                         <x-renderer.button type='primary' onClick="validateAndSubmit()">Submit</x-render.button>
                     </div>
                 @endif
@@ -61,14 +63,16 @@
     const validateAndSubmit = () => {
         // console.log('validateAndSubmit')
         let hasFail = false
+        let divSubmit = []
         for(var key in questions){
             if(!questions[key] ){
                 hasFail = true
-                console.log(key)
+                divSubmit.push("<a class='pl-5' href='#"+key+"'>Question #" + key+"</a>")
             }
         }
         if(hasFail){
             console.log("Has problem")
+            $("#divSubmit").html("There are questions that need to be resolved:<br/>" + divSubmit.join("<br/>"))
         }else{
             console.log("Submitting...")
         }
