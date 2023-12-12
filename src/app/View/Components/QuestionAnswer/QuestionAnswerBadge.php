@@ -30,7 +30,7 @@ class QuestionAnswerBadge extends Component
             [
                 'id' => $this->id,
                 'selected' => $this->selected,
-                'validation' => $this->validation,
+                'validationType' => $validationType,
             ]
         );
     }

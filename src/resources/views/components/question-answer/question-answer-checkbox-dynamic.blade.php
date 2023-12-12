@@ -5,7 +5,9 @@
     $value = ($line) ? $line[0][0]->response_ids : "";
     $values = $value ? explode("|||", $value) : [];
     // dump($values);
+    $questionJSKey = $questionId;
 @endphp
+<script>questions['{{$questionJSKey}}']='{{$value}}';</script>
 
 <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
 @foreach($dynamicAnswerRowGroups as $groupName)

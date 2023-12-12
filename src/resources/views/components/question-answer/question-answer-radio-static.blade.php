@@ -4,7 +4,9 @@
 
 @php
     $value = ($line) ? $line[0][0]->response_ids : "";
+    $questionJSKey = "{$questionId}";
 @endphp
+<script>questions['{{$questionJSKey}}']='{{$value}}';</script>
 
 <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
 <div class="grid {{$renderAsRows ?: 'grid-cols-12'}}">

@@ -22,10 +22,13 @@
                     @php
                         if($subQuestion2Id) {
                             $value = ($line[$id][$subQuestion2Id]->response_values ?? false) ;
+                            $questionJSKey = "{$questionId}_{$id}_{$subQuestion2Id}";
                         } else {
                             $value = ($line[$id][0]->response_values ?? false);
+                            $questionJSKey = "{$questionId}_{$id}";
                         }
                     @endphp
+                    <script>questions['{{$questionJSKey}}']='{{$value}}';</script>
                     <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
                     @if($avatar) <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" /> @endif
                     {{$label}}

@@ -6,6 +6,31 @@
 @once
     <script>const questions = {};</script>
 @endonce
+@once
+<script>
+    const validationPassOrFail = (validationType, value) => {
+         switch(validationType){
+            case 'required': 
+                return !!value
+            case 'none':
+            default:
+                return true;
+        }
+    }
+    const refreshValidation = (questionKey, validationType, value) => {
+        const pass = validationPassOrFail(validationType, value)
+        console.log(questionKey, validationType, value, pass ? "PASS" : "FAIL")
+        if(pass){
+            $("#" + questionKey + "_pass").show()
+            $("#" + questionKey + "_fail").hide()
+        } else {
+            $("#" + questionKey + "_pass").hide()
+            $("#" + questionKey + "_fail").show()
+        }
+    }
+</script>
+@endonce
+
 <div class="sticky top-[114px] bg-blue-400 rounded mb-2" >
     <x-renderer.heading level=5 class="z-10 p-2">
         <p title="#{{$questionId}}">{{$item['name'] ?? 'Untitled'}}</p>
@@ -92,7 +117,7 @@
                                 if(!$showSubQuestion2){
                                     $value = $line[$subQuestion1['id']][0]->response_ids ?? "";
                                     $questionJSKey = "{$questionId}_{$subQuestion1['id']}";
-                                    // echo "<p>Question_$questionJSKey: $value</p>";
+                                    echo "<p>Question_$questionJSKey: $value</p>";
                                     echo "<script>questions['$questionJSKey']='$value';</script>";
                                 } else {
                                     $value = $line[$subQuestion1['id']][$subQuestion2['id']]->response_ids ?? "";
