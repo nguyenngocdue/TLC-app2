@@ -26,6 +26,8 @@
                 break;
             }
             
+            $inputType = $debug ? 'text' : 'hidden';
+
             foreach($loop as $subQuestions){
                 foreach($subQuestions as $subQuestion){
                     // echo $subQuestion;
@@ -37,7 +39,16 @@
                         echo "<b>". $subQuestion['name']."</b>" ?? '';
                         echo "</div>";
                         // dump($subQuestion);
+                        echo "<input type='$inputType' name='description_{$item['id']}_2' value='{$subQuestion['name']}'/>";
+                        if($debug) echo "<br/>";
                     }
+
+                    foreach($dynamicAnswerRows as $subQuestionGroups){
+                        foreach($subQuestionGroups as $subQuestion1){
+                            echo "<input type='$inputType' name='description_{$item['id']}_1' value='{$subQuestion1['name']}' />";
+                        }
+                    }
+
                     echo Blade::render('<x-question-answer.question-answer-'.$control.'
                     :questionId="$questionId" 
                     :staticAnswer="$staticAnswer" 
