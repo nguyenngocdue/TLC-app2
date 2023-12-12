@@ -33,7 +33,7 @@
                         $chkId = "chk_{$questionId}_{$index}_{$i_1}";
                         $name = "question_{$questionId}_{$id}";
                         if($subQuestion2Id) $name .= "_$subQuestion2Id";
-                        $values = explode(",", ($line[$id][0]->response_values ?? ""));
+                        $values = explode("|||", ($line[$id][0]->response_values ?? ""));
                         // dump($values);
                         $checked = in_array($i, $values);
                     @endphp

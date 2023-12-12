@@ -34,7 +34,7 @@
                             } else {
                                 $values = ($line[$id][0]->response_values ?? '');
                             }
-                            $values = $values ? explode(",", $values) : []; 
+                            $values = $values ? explode("|||", $values) : []; 
                             $checked = in_array($staticAnswer[$i_1], $values);
                         @endphp
                         <td class="border px-5 py-1 text-center">

@@ -3,7 +3,7 @@
 
 @php
     $value = ($line) ? $line[0][0]->response_ids : "";
-    $values = $value ? explode(",", $value) : [];
+    $values = $value ? explode("|||", $value) : [];
     // dump($values);
 @endphp
 

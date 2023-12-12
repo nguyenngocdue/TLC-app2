@@ -20,7 +20,7 @@
                     $i_1 = $i-1;
                     $chkId = "chk_{$questionId}_{$index}_{$i_1}";
                     // dump( $checked[0]->response_values);
-                    $values = explode(",", ($line[$name][0]->response_values ?? ""));
+                    $values = explode("|||", ($line[$name][0]->response_values ?? ""));
                     $checked = in_array($i, $values);
                 @endphp
                 <td class="border px-5 py-1 text-center">

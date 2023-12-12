@@ -101,8 +101,8 @@ class ExamQuestionController
                         $keys[] = $key;
                         $strings[] = $value;
                     }
-                    $answer['response_ids'] = join(",", $keys);
-                    $answer['response_values'] = join(",", $strings);
+                    $answer['response_ids'] = join("|||", $keys);
+                    $answer['response_values'] = join("|||", $strings);
                 } else {
                     [$ids, $values] = explode(":::", $values);
                     $answer['response_ids'] = $ids;
