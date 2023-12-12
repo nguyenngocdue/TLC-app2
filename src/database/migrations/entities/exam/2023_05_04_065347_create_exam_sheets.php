@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('exam_tmpl_id')->nullable();
 
+            $table->hasStatus();
             $table->appendCommonFields();
 
             $table->unique(['exam_tmpl_id', 'owner_id']);
