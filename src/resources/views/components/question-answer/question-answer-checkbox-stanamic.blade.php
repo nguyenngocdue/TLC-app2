@@ -1,4 +1,5 @@
 {{-- @dump($questionId, $staticAnswer, $dynamicAnswerRows) --}}
+{{-- @dump($staticAnswer) --}}
 <table class="border rounded m-4"> 
     <tr>
         <th class='border bg-gray-300 min-w-[100px]'></th>
@@ -26,13 +27,15 @@
                         @php
                             $i_1 = $i-1;
                             $chkId = "chk_{$questionId}_{$index}_{$i_1}";
+                            $name = "question_{$questionId}_{$id}";
+                            if($subQuestion2Id) $name .= "_$subQuestion2Id";
                         @endphp
                         <td class="border px-5 py-1 text-center">
                             {{-- {{$chkId}} --}}
                             <input 
-                                name="question_{{$questionId}}[]" 
+                                name="{{$name}}[]"
                                 id="{{$chkId}}" 
-                                value="{{$i}}:::{{$i}}"  
+                                value="{{$i}}:::{{$staticAnswer[$i_1]}}"  
                                 type="checkbox"
                                 class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                                 />

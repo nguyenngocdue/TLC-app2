@@ -7,19 +7,21 @@ use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
-class ExamSheetPage extends Component
+class ExamSheetPageEdit extends Component
 {
     function __construct(
         private $id,
         private $type,
     ) {
+        // dump($id, $type);
     }
 
     function render()
     {
         $id = $this->id ?? 1;
+        $exam_tmpl_id = 1;
         $dataSource = Exam_tmpl_question::query()
-            ->where("exam_tmpl_id", $id)
+            ->where("exam_tmpl_id", $exam_tmpl_id)
             ->with('getExamTmplGroup')
             ->orderBy('order_no')
             ->get();
@@ -35,7 +37,7 @@ class ExamSheetPage extends Component
         // dump($tableOfContents);
         $route = route(Str::plural($this->type) . '.update', $this->id);
 
-        return view('components.controls.exam-sheet.exam-sheet-page', [
+        return view('components.controls.exam-sheet.exam-sheet-page-edit', [
             'dataSource' => $dataSource,
             'tableOfContents' => $tableOfContents,
             'isOnePage' => true,

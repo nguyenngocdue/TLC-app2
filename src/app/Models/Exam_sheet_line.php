@@ -9,13 +9,11 @@ class Exam_sheet_line extends ModelExtended
     public $fillable = [
         "id", "name", "description", "owner_id", "status",
         "order_no",
-        "exam_tmpl_id",
-        "exam_sheet_id",
-        "exam_question_id",
-        "sub_question_1",
-        "sub_question_2",
-        "response_ids",
-        "response_values",
+        "exam_tmpl_id", "exam_sheet_id",
+        "exam_question_id", "question_type_id",
+        "sub_question_1_id", "sub_question_1_value",
+        "sub_question_2_id", "sub_question_2_value",
+        "response_ids", "response_values",
     ];
 
     public static $statusless = true;

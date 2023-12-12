@@ -12,8 +12,15 @@ use Illuminate\View\Component;
 
 class QuestionAnswer extends Component
 {
+    private $MY_DEPT_USERS = 386;
+    private $MY_DEPT_USERS_EXCLUDE_ME = 387;
+    private $MY_DEPT_SUB_USERS = 395;
+    private $MY_DEPT_TECH_SKILLS = 391;
+    private $MY_RELATED_DEPTS = 394;
+
     function __construct(
         private $item = [],
+        private $debug = !false,
     ) {
     }
 
@@ -30,28 +37,22 @@ class QuestionAnswer extends Component
 
     function getDynamicContent($id)
     {
-        $MY_DEPT_USERS = 386;
-        $MY_DEPT_USERS_EXCLUDE_ME = 387;
-        $MY_DEPT_SUB_USERS = 395;
-        $MY_DEPT_TECH_SKILLS = 391;
-        $MY_RELATED_DEPTS = 394;
-
         $cu = CurrentUser::get();
         $department = $cu->getUserDepartment;
 
         switch ($id) {
-            case $MY_DEPT_USERS:
+            case $this->MY_DEPT_USERS:
                 $members = $this->getMemberOfTeam($department)
                     ->get();
                 $members1 = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group', 'avatar' => $u->getAvatarThumbnailUrl(),]);
                 return $members1;
-            case $MY_DEPT_USERS_EXCLUDE_ME:
+            case $this->MY_DEPT_USERS_EXCLUDE_ME:
                 $members = $this->getMemberOfTeam($department)
                     ->whereNot('id', $cu->id)
                     ->get();
                 $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => 'no_group', 'avatar' => $u->getAvatarThumbnailUrl(),]);
                 return $members;
-            case $MY_DEPT_SUB_USERS:
+            case $this->MY_DEPT_SUB_USERS:
                 $r = User_discipline::query()->where('def_assignee', /*772*/ $cu->id)->get()->pluck('id')->toArray();
                 $members = User::query()
                     ->whereIn('discipline', $r)
@@ -65,7 +66,7 @@ class QuestionAnswer extends Component
                 $members = $members->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'group' => $u->getUserDiscipline->name, 'avatar' => $u->getAvatarThumbnailUrl(),]);
                 // dd($members);
                 return $members;
-            case $MY_DEPT_TECH_SKILLS:
+            case $this->MY_DEPT_TECH_SKILLS:
                 $skills = $department->getSkillsOfDepartment();
                 $allGroupIds = $skills->pluck('department_skill_group_id');
                 $allGroups = Department_skill_group::whereIn('id', $allGroupIds)->get()->pluck('name', 'id');
@@ -74,7 +75,7 @@ class QuestionAnswer extends Component
                 // $skills = $skills->pluck('name', 'id')->toArray();
                 // dd($skills);
                 return $skills;
-            case $MY_RELATED_DEPTS:
+            case $this->MY_RELATED_DEPTS:
                 $relatedMatrix = config("departments.related");
                 $result = [];
                 foreach ($relatedMatrix as $indexX => $list) {
@@ -104,9 +105,9 @@ class QuestionAnswer extends Component
         return $result;
     }
 
-    function render()
+    static function controlIds()
     {
-        $controlIds = [
+        return [
             377 => 'text',
             378 => 'textarea',
             379 => 'radio-static',
@@ -120,6 +121,11 @@ class QuestionAnswer extends Component
             392 => 'radio-dynanamic',
             393 => 'checkbox-dynanamic',
         ];
+    }
+
+    function render()
+    {
+        $controlIds = static::controlIds();
 
         $item = $this->item;
         $questionType = $item['question_type_id'] ?? null;
@@ -146,6 +152,8 @@ class QuestionAnswer extends Component
                 'dynamicAnswerRowGroups' => $dynamicAnswerRowGroups,
                 'dynamicAnswerCols' => $dynamicAnswerCols,
                 'renderAsRows' => $renderAsRow,
+                'debug' => $this->debug,
+                'controlId' => $questionType,
             ]
         );
     }
