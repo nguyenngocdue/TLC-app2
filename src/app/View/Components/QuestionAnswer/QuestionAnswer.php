@@ -132,6 +132,7 @@ class QuestionAnswer extends Component
         $questionType = $item['question_type_id'] ?? null;
 
         $staticAnswer = explode("|", $item['static_answer'] ?? '');
+        $staticAnswer = array_map(fn ($s) => trim($s), $staticAnswer);
         $dynamicAnswerRows = $this->makeUpDynamicData($this->getDynamicContent($item['dynamic_answer_rows'] ?? ''));
         $dynamicAnswerRowGroups = $dynamicAnswerRows->keys();
         // dump($dynamicAnswerRowGroups);
