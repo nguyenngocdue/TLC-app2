@@ -31,7 +31,7 @@ class ExamQuestionController
             $result[$numbers[0]][$numbers[1]] = $value;
         }
 
-        // dump($result);
+        // dd($result);
         return $result;
     }
 
@@ -54,6 +54,7 @@ class ExamQuestionController
         $input = collect($input);
 
         $questions = $input->filter(fn ($v, $k) => Str::startsWith($k, 'question_'));
+        // dump($questions);
         $controls = $input->filter(fn ($v, $k) => Str::startsWith($k, 'control_'));
         $controls = $this->parseControls($controls);
         $descriptions = $input->filter(fn ($v, $k) => Str::startsWith($k, 'description_'));
@@ -76,8 +77,15 @@ class ExamQuestionController
                 $answer['response_values'] = $values;
             } else {
                 if (is_array($values)) {
-                    $answer['response_ids'] = join(",", $values);
-                    $answer['response_values'] = join(",", $values);
+                    $keys = [];
+                    $strings = [];
+                    foreach ($values as $value) {
+                        [$key, $value] = explode(":::", $value);
+                        $keys[] = $key;
+                        $strings[] = $value;
+                    }
+                    $answer['response_ids'] = join(",", $keys);
+                    $answer['response_values'] = join(",", $strings);
                 } else {
                     [$ids, $values] = explode(":::", $values);
                     $answer['response_ids'] = $ids;
@@ -85,20 +93,28 @@ class ExamQuestionController
                 }
             }
 
+            $uniqueArray = [
+                'exam_tmpl_id' => 1,
+                'exam_sheet_id' => 1,
+                'exam_question_id' => $questionId,
+            ];
+
             if ($subQuestion1) {
-                $answer['sub_question_1_id'] = $subQuestion1;
-                $answer['sub_question_1_value'] = $descriptions[$questionId][1];
+                $uniqueArray['sub_question_1_id'] = $subQuestion1;
+                $answer['sub_question_1_value'] = $descriptions[$questionId][$subQuestion1];
             }
             if ($subQuestion2) {
-                $answer['sub_question_2'] = $subQuestion2;
-                $answer['sub_question_2_value'] = $descriptions[$questionId][2];
+                $uniqueArray['sub_question_2_id'] = $subQuestion2;
+                $answer['sub_question_2_value'] = $descriptions[$questionId][$subQuestion2];
             }
 
             $result = Exam_sheet_line::updateOrCreate(
-                ['exam_tmpl_id' => 1, 'exam_sheet_id' => 1, 'exam_question_id' => $questionId,],
+                $uniqueArray,
                 $answer,
             );
             // dump($result);
+            // dump($uniqueArray);
+            // dump($answer);
         }
         // dd();
         $types = Str::plural($type);

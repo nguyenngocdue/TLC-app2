@@ -42,16 +42,21 @@
                         echo "<b>". $subQuestion['name']."</b>" ?? '';
                         echo "</div>";
                         // dump($subQuestion);
-                        echo "<input type='$inputType' name='description_{$questionId}_2' value='{$subQuestion['name']}'/>";
+                        $name = "description_{$questionId}_{$subQuestion['id']}_2";
+                        if($debug) echo $name;
+                        echo "<input type='$inputType' name='$name' value='{$subQuestion['name']}'/>";
                         if($debug) echo "<br/>";
                     }
 
                     foreach($dynamicAnswerRows as $subQuestionGroups){
                         foreach($subQuestionGroups as $subQuestion1){
-                            echo "<input type='$inputType' name='description_{$questionId}_1' value='{$subQuestion1['name']}' />";
+                            $name ="description_{$questionId}_{$subQuestion1['id']}_1";
+                            if($debug) echo $name;
+                            echo "<input type='$inputType' name='$name' value='{$subQuestion1['name']}' />";
                         }
                     }
                     
+                    if($debug) echo "<br/>";
                     echo "<input type='$inputType' name='control_{$questionId}' value='{$controlId}' />";
 
                     echo Blade::render('<x-question-answer.question-answer-'.$control.'
@@ -61,14 +66,14 @@
                     :dynamicAnswerRowGroups="$dynamicAnswerRowGroups" 
                     
                     :renderAsRows="$renderAsRows"
-                    :subQuestionId="$subQuestionId"
+                    :subQuestion2Id="$subQuestion2Id"
                     />', [
                         'questionId' => $questionId,
                         'staticAnswer' => $staticAnswer,
                         'dynamicAnswerRows' => $dynamicAnswerRows,
                         'dynamicAnswerRowGroups' => $dynamicAnswerRowGroups,
                         'renderAsRows' => $renderAsRows,
-                        'subQuestionId' => $subQuestion['id'] ?? null,
+                        'subQuestion2Id' => $subQuestion['id'] ?? null,
                     ]);
                 }
             }
