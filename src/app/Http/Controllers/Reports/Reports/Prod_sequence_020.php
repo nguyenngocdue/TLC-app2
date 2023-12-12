@@ -34,7 +34,8 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $params['picker_date'] =DateReport::defaultPickerDate('-3 months');
+        $params['picker_date'] =DateReport::defaultPickerDate('-2 months');
+        // $params['project_id'] = 107;
         return $params;
     }
 }

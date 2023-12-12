@@ -116,7 +116,7 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     {
         $params['picker_date'] = date('d/m/Y');
         $params['page_limit'] = $this->pageLimit;
-        $params['project_id'] = 107;
+        // $params['project_id'] = 107;
         // $params['sub_project_id'] = $this->subProjectId;
         // $params['prod_routing_id'] = $this->prodRoutingId;
         return $params;
@@ -269,12 +269,12 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     "align" => "left",
                     "width" => 200,
                 ],
-                [
-                    "title" => "Production Sequence Document",
-                    "dataIndex" => "prod_sequence_id",
-                    "align" => "right",
-                    "width" => 200,
-                ],
+                // [
+                //     "title" => "Production Sequence Document",
+                //     "dataIndex" => "prod_sequence_id",
+                //     "align" => "right",
+                //     "width" => 200,
+                // ],
                 [
                     "title" => "Man-power  <br/>(AVG)",
                     "dataIndex" => "target_man_power",
@@ -354,11 +354,11 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                     "width" => 80,
                     'footer' => 'agg_sum',
                 ],
-                [
-                    'title' => 'Creator',
-                    'dataIndex' => 'prod_run_owner_name',
-                    "width" => 150,
-                ],
+                // [
+                //     'title' => 'Creator',
+                //     'dataIndex' => 'prod_run_owner_name',
+                //     "width" => 150,
+                // ],
             ];
     }
 
