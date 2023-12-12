@@ -63,12 +63,15 @@ class Prod_sequence_dataSource extends Controller
                     pru.total_man_hours AS man_hours,
                     pru.start AS from_time,
                     pru.end AS to_time,
+                    pru.id AS pru_id,
                     ps.total_hours AS total_hours,
                     pru.worker_number AS man_power,
                     ps.total_uom AS total_uom,
                     prl.standard_uom_id AS standard_uom_id,
                     pru.production_output AS production_output,
-                    pru.remark AS remark
+                    pru.remark AS remark,
+                    us.full_name AS prod_run_owner_name
+
                     FROM 
                         sub_projects sp
                         JOIN prod_orders po ON po.sub_project_id = sp.id
@@ -80,6 +83,7 @@ class Prod_sequence_dataSource extends Controller
                                                         AND prde.prod_routing_link_id = ps.prod_routing_link_id
                         JOIN prod_disciplines pd ON pd.id = prl.prod_discipline_id
                         JOIN prod_runs pru ON pru.prod_sequence_id = ps.id AND pru.deleted_by IS NULL
+                        LEFT JOIN users us ON us.id = pru.owner_id
                     WHERE 1 = 1";
         if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";

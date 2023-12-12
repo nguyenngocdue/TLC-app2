@@ -27,10 +27,10 @@ trait TraitChangeDataPivotTable2
     private function updateValueForRawData($linesData, $libs)
     {
         $rowFields = $libs['row_fields'];
+        $columnInsert = $libs['insert_column_row_fields'];
         $tableName = $this->getTablesNamesFromLibs($libs);
         $tables = $this->getDataFromTables($tableName);
-
-        foreach ($linesData as &$lines) {
+        foreach ($linesData as $k => &$lines) {
             foreach ($rowFields  as $key => $field) {
                 if (isset($lines->$key) && isset($field->column)) {
                     [$tableName, $attr] = explode('.', $field->column, 2);
@@ -43,6 +43,20 @@ trait TraitChangeDataPivotTable2
                     ];
                 }
             }
+            // add link for values
+            $newData = $lines;
+            if(!empty($columnInsert)){
+                foreach ($columnInsert as $keyColumn => $column) {
+                    if(isset($column->href_from_field) && isset($column->route_name)){
+                        $newData[$keyColumn] =(object) [
+                            'value' =>  is_numeric($lines[$keyColumn]) ? '#'. $lines[$keyColumn] : $lines[$keyColumn],
+                            'cell_href' => route($column->route_name, $lines[$column->href_from_field]),
+                            'cell_class' => 'text-blue-800',
+                        ];
+                    }
+                }
+            }
+            $linesData[$k] = $newData;
         }
         return collect($linesData);
     }
@@ -90,7 +104,6 @@ trait TraitChangeDataPivotTable2
             $libs = LibPivotTables2::getFor($this->modeType);
             return $this->updateValueForRawData($data, $libs);
         }
-
         if ($this->modeType) {
             $bgColor = 'bg-gray-100';
             $results = [];
