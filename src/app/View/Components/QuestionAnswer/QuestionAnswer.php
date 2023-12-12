@@ -20,7 +20,7 @@ class QuestionAnswer extends Component
 
     function __construct(
         private $item = [],
-        private $debug = !false,
+        private $debug = false,
         private $line = null,
     ) {
     }

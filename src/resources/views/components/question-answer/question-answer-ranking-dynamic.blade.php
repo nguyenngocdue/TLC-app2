@@ -1,7 +1,7 @@
 {{-- @dump($questionId, $staticAnswer, $dynamicAnswerRows) --}}
 @php
     // $value = ($line) ? $line[0][0]->response_ids : "";
-    dump($line);
+    // dump($line);
 @endphp
 @php $countAllDynamicAnswer = $dynamicAnswerRows->map(fn($i)=>count($i))->sum(); @endphp
 <table class="border rounded m-4"> 
@@ -33,6 +33,9 @@
                         $chkId = "chk_{$questionId}_{$index}_{$i_1}";
                         $name = "question_{$questionId}_{$id}";
                         if($subQuestion2Id) $name .= "_$subQuestion2Id";
+                        $values = explode(",", ($line[$id][0]->response_values ?? ""));
+                        // dump($values);
+                        $checked = in_array($i, $values);
                     @endphp
                     <td class="border px-5 py-1 text-center">
                         {{-- {{$chkId}} --}}
@@ -41,6 +44,7 @@
                             id="{{$chkId}}" 
                             value="{{$i}}:::{{$i}}"  
                             type="checkbox"
+                            @checked($checked)
                             class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                             onclick="reRenderRankTable({{$questionId}}, {{$countAllDynamicAnswer}})"
                             />
