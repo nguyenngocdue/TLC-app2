@@ -50,7 +50,6 @@
                         if($debug) echo $name;
                         echo "<input type='$inputType' name='$name' value='{$subQuestion2['name']}'/>";
                         if($debug) echo "<br/>";
-                        // echo "<p>Question_1_2</p>";
                     }
 
                     foreach($dynamicAnswerRows as $subQuestionGroups){
@@ -76,13 +75,13 @@
                     ])){
                         $value = $line[0][0]->response_ids ?? "";
                         $questionKey = $questionId;
-                        // echo "<p>Question_$questionKey: $value</p>";
+                        echo "<p>Question_$questionKey: $value</p>";
                         echo "<script>questions['$questionKey']='$value';</script>";
                     } elseif($control == 'ranking-static'){
                         foreach($staticAnswer as $index => $subQuestion1){
                             $value = $line[$subQuestion1][0]->response_values ?? "";
                             $questionKey = "{$questionId}_{$subQuestion1}";
-                            // echo "<p>Question_$questionKey: $value</p>";
+                            echo "<p>Question_$questionKey: $value</p>";
                             echo "<script>questions['$questionKey']='$value';</script>";
                         }
                     }else {
@@ -92,12 +91,12 @@
                                 if(!$showSubQuestion2){
                                     $value = $line[$subQuestion1['id']][0]->response_ids ?? "";
                                     $questionKey = "{$questionId}_{$subQuestion1['id']}";
-                                    // echo "<p>Question_$questionKey: $value</p>";
+                                    echo "<p>Question_$questionKey: $value</p>";
                                     echo "<script>questions['$questionKey']='$value';</script>";
                                 } else {
                                     $value = $line[$subQuestion1['id']][$subQuestion2['id']]->response_ids ?? "";
                                     $questionKey = "{$questionId}_{$subQuestion1['id']}_{$subQuestion2['id']}";
-                                    // echo "<p>Question_$questionKey: $value</p>";
+                                    echo "<p>Question_$questionKey: $value</p>";
                                     echo "<script>questions['$questionKey']='$value';</script>";
                                 }
                             }

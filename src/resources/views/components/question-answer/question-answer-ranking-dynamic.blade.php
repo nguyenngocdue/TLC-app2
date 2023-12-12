@@ -3,6 +3,7 @@
     // $value = ($line) ? $line[0][0]->response_ids : "";
     // dump($line);
 @endphp
+
 @php $countAllDynamicAnswer = $dynamicAnswerRows->map(fn($i)=>count($i))->sum(); @endphp
 <table class="border rounded m-4"> 
     <tr>
@@ -24,6 +25,7 @@
             @endphp
             <tr class="hover:bg-blue-100">
                     <td class="border px-5 py-1 flex items-center">
+                        <x-question-answer.question-answer-badge/>
                         @if($avatar) <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" /> @endif
                         {{$label}}
                     </td>
