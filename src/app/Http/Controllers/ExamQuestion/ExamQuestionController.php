@@ -61,7 +61,9 @@ class ExamQuestionController
     {
         $controlIds = QuestionAnswer::controlIds();
         // dump($request);
-        $input = $request->except(['_token', '_method']);
+        $input = $request->input();
+        $exam_tmpl_id = $input['exam_tmpl_id'];
+        $exam_sheet_id = $input['exam_sheet_id'];
         // dd($input);
 
         $input = collect($input);
@@ -107,8 +109,8 @@ class ExamQuestionController
             }
 
             $uniqueArray = [
-                'exam_tmpl_id' => 1,
-                'exam_sheet_id' => 1,
+                'exam_tmpl_id' => $exam_tmpl_id,
+                'exam_sheet_id' => $exam_sheet_id,
                 'exam_question_id' => $questionId,
             ];
 

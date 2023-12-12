@@ -1,5 +1,6 @@
 @php
     $questionId = $item['id'];
+    dump($line);
 @endphp
 <div class="sticky top-[114px] bg-blue-400 rounded mb-2" >
     <x-renderer.heading level=5 class="z-10 p-2">

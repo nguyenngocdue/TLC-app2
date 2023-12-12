@@ -21,6 +21,7 @@ class QuestionAnswer extends Component
     function __construct(
         private $item = [],
         private $debug = !false,
+        private $line = null,
     ) {
     }
 
@@ -154,6 +155,7 @@ class QuestionAnswer extends Component
                 'renderAsRows' => $renderAsRow,
                 'debug' => $this->debug,
                 'controlId' => $questionType,
+                'line' => $this->line,
             ]
         );
     }
