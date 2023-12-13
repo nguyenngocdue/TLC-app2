@@ -5,6 +5,10 @@
 @endphp
 
 @php $countAllDynamicAnswer = $dynamicAnswerRows->map(fn($i)=>count($i))->sum(); @endphp
+
+<div class="w-full rounded bg-red-600 p-2 text-white font-bold">
+    <i>1 is the HIGHEST, {{$countAllDynamicAnswer}} is the LOWEST.</i>
+</div>
 <table class="border rounded m-4"> 
     <tr>
         <th class='border bg-gray-300 min-w-[100px]'></th>
@@ -69,8 +73,6 @@
         @endfor
     </tr>
 </table>
-
-<i>1 is the highest, {{$countAllDynamicAnswer}} is the lowest.</i>
 
 <script>
     reRenderRankTable({{$questionId}}, {{$countAllDynamicAnswer}})
