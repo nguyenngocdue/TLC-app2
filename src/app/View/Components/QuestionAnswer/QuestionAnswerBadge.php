@@ -16,6 +16,7 @@ class QuestionAnswerBadge extends Component
     static function getValidationType()
     {
         return [
+            '' => '',
             450 => '',
             451 => 'Required',
             452 => 'Min 3',

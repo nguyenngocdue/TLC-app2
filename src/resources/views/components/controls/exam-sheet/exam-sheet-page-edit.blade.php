@@ -55,6 +55,7 @@
         <div class="col-span-1 border rounded p-2">
             <div class="sticky top-20 px-2 py-2 text-center">
                 <x-renderer.button type='success' htmlType="submit" icon='fa-duotone fa-floppy-disk'>Save</x-renderer.button>
+                Please remember to save the form regularly.
             </div>
         </div>
     </div>

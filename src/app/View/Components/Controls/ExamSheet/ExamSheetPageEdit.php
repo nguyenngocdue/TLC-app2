@@ -50,7 +50,13 @@ class ExamSheetPageEdit extends Component
         // $isAManager = true;
         $HIDE_WHEN_I_AM_NOT_A_MANAGER = 400;
 
-        $dataSource = $dataSource->filter(fn ($i) => ($i->getExamTmplGroup->hide_when != $HIDE_WHEN_I_AM_NOT_A_MANAGER || $isAManager));
+        foreach ($dataSource as $line) {
+            if (!$line->exam_tmpl_group_id) {
+                dd("What is the group of question [$line->id] ?");
+            }
+        }
+
+        $dataSource = $dataSource->filter(fn ($i) => (($i->getExamTmplGroup->hide_when) != $HIDE_WHEN_I_AM_NOT_A_MANAGER || $isAManager));
 
         $tableOfContents = $dataSource->map(fn ($i) => $i->getExamTmplGroup)->unique();
         // dump($tableOfContents);
