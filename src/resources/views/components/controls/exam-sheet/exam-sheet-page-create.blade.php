@@ -37,6 +37,19 @@
                 @endforeach
             @endif
 
+            @if(sizeof($mySubmittedSheets) > 0)
+                <x-renderer.heading class="mt-10" level=4 xalign=center>The Submitted questionares:</x-renderer.heading>
+                @foreach($mySubmittedSheets as $exam)
+                @php
+                    $routeEdit = route(Str::plural($type) . '.edit', $exam->id);
+                @endphp
+                <form action="{{$routeEdit}}" method="GET" class="hover:bg-lime-200 rounded p-2">
+                    {{$exam->name}}
+                    <x-renderer.button htmlType="submit" type="success">Continue</x-renderer.button>
+                </form>
+                @endforeach
+            @endif
+
             @if(sizeof($myFinishedSheets) > 0)
                 <x-renderer.heading class="mt-10" level=4 xalign=center>The Finished questionares:</x-renderer.heading>
                 @foreach($myFinishedSheets as $exam)

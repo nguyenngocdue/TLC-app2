@@ -39,6 +39,7 @@ class ExamSheetPageCreate extends Component
             'type' => $this->type,
             'availableExams' => $allExams,
             'myInProgressSheets' => $sheets->filter(fn ($i) => $i->status == 'in_progress'),
+            'mySubmittedSheets' => $sheets->filter(fn ($i) => $i->status == 'submitted'),
             'myFinishedSheets' => $sheets->filter(fn ($i) => $i->status == 'finished'),
             'isOnePage' => true,
             'routeStore' => $routeStore,
