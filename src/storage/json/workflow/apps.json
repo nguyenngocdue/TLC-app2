@@ -512,7 +512,8 @@
         "edit_renderer": "exam-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": "<i class=\"fa-duotone fa-graduation-cap\"><\/i>"
+        "icon": "<i class=\"fa-duotone fa-graduation-cap\"><\/i>",
+        "apply_approval_tree": "true"
     },
     "exam_sheet_line": {
         "name": "exam_sheet_line",
@@ -529,7 +530,8 @@
         "icon": null,
         "hidden": "true",
         "hidden_navbar": "true",
-        "do_not_send_notification_mails": "true"
+        "do_not_send_notification_mails": "true",
+        "apply_approval_tree": "true"
     },
     "exam_tmpl": {
         "name": "exam_tmpl",
@@ -830,8 +832,8 @@
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
         "show_in_my_view": "true",
-        "disallowed_direct_creation": "true",
-        "apply_approval_tree": "true"
+        "apply_approval_tree": "true",
+        "disallowed_direct_creation": "true"
     },
     "hr_timesheet_worker": {
         "name": "hr_timesheet_worker",
@@ -847,8 +849,8 @@
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
         "show_in_my_view": "true",
-        "disallowed_direct_creation": "true",
-        "apply_approval_tree": "true"
+        "apply_approval_tree": "true",
+        "disallowed_direct_creation": "true"
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
