@@ -121,6 +121,7 @@ class QuestionAnswer extends Component
             390 => 'radio-stanamic',
             392 => 'radio-dynanamic',
             393 => 'checkbox-dynanamic',
+            396 => 'checkbox-dydynamic',
         ];
     }
 

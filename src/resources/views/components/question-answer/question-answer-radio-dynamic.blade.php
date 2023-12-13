@@ -35,7 +35,7 @@
                     <br/>
                     <label class="cursor-pointer" for="option_{{$questionId}}_{{$id}}"> 
                         <div class="flex {{$renderAsRows ?:"justify-center"}}">
-                            <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" />
+                            @if($avatar) <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" /> @endif
                         </div>{{$label}}
                     </label>
                 @endif

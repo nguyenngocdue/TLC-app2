@@ -68,6 +68,10 @@
                     $control = 'checkbox-stanamic';
                     $loop = $dynamicAnswerCols;
                 break;
+                case 'checkbox-dydynamic':
+                    $control = 'checkbox-dynamic';
+                    $loop = $dynamicAnswerCols;
+                break;
                 default:
                     $loop = [['name' => '']];
                     $showSubQuestion2=false;

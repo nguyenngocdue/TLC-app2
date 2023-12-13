@@ -8,6 +8,7 @@
     $values = $value ? explode("|||", $value) : [];
     // dump($values);
     $questionJSKey = $questionId;
+    $name = "question_{$questionId}";
 @endphp
 {{-- <script>questions['{{$questionJSKey}}']='{{$value}}';</script> --}}
 
@@ -19,11 +20,11 @@
             id="option_{{$questionId}}_{{$label}}" 
             @checked(in_array($label, $values))
             name="question_{{$questionId}}[]" 
-            onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('question_{{$questionId}}[]'))" 
+            onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}[]'))" 
             value="{{$index}}:::{{$label}}">
         <script>
             // This will overide refreshValidation in the badge as that one doesnt know how to count
-            refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('question_{{$questionId}}[]'))
+            refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}[]'))
         </script>
         @if(!$renderAsRows) <br/> @endif
         <label class="cursor-pointer" for="option_{{$questionId}}_{{$label}}">{{$label}}</label><br>

@@ -4,6 +4,18 @@
 <label class='peer-checked:bg-gray-300 peer-checked:text-gray-700'></label>
 <label class='peer-checked:bg-orange-300 peer-checked:text-orange-700'></label>
 
+<div class="grid-cols-1"/>
+<div class="grid-cols-2"/>
+<div class="grid-cols-3"/>
+<div class="grid-cols-4"/>
+<div class="grid-cols-5"/>
+<div class="grid-cols-6"/>
+<div class="grid-cols-7"/>
+<div class="grid-cols-8"/>
+<div class="grid-cols-9"/>
+<div class="grid-cols-10"/>
+<div class="grid-cols-11"/>
+<div class="grid-cols-12"/>
 <!-- sticky-->
 <div class="fixed top-24"/>
 <!-- Image-->
