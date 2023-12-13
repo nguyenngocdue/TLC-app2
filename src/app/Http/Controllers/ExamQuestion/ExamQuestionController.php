@@ -60,7 +60,7 @@ class ExamQuestionController
         return $result;
     }
 
-    function update(Request $request, $type, $id)
+    function updateInProgress(Request $request, $type, $id)
     {
         $controlIds = QuestionAnswer::controlIds();
         // dump($request);
@@ -136,11 +136,40 @@ class ExamQuestionController
         }
         // dd();
         $types = Str::plural($type);
-        if ($input['status'] === 'finished') {
+        if ($input['status'] === 'submitted') {
             $sheet = Exam_sheet::find($exam_sheet_id);
             $sheet->status = $input['status'];
             $sheet->save();
         }
         return redirect(route($types . ".edit", $id));
+    }
+
+    function updateSubmitted(Request $request, $type, $id)
+    {
+        $input = $request->input();
+        $exam_sheet_id = $input['exam_sheet_id'];
+
+        $types = Str::plural($type);
+        $sheet = Exam_sheet::find($exam_sheet_id);
+        $sheet->comment = $input['comment'];
+        $sheet->status = $input['status'];
+        $sheet->save();
+        return redirect(route($types . ".edit", $id));
+    }
+
+    function update(Request $request, $type, $id)
+    {
+        $modelPath = Str::modelPathFrom($type);
+        $item = $modelPath::find($id);
+
+        $status = $item->status;
+        switch ($status) {
+            case 'in_progress':
+                return $this->updateInProgress($request, $type, $id);
+            case 'submitted':
+                return $this->updateSubmitted($request, $type, $id);
+            default:
+                return "Unknown how to handle status [$status]";
+        }
     }
 }

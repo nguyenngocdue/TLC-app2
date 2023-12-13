@@ -23,6 +23,7 @@ return new class extends Migration
             $table->id();
             $table->string("name")->nullable();
             $table->text('description')->nullable();
+            $table->text('comment')->nullable();
             $table->unsignedBigInteger('exam_tmpl_id')->nullable();
 
             $table->hasStatus();

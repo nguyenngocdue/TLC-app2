@@ -7,6 +7,8 @@
 @php $groupName = ''; @endphp
 
 <form id="frmExam" action="{{$route}}" method="POST">
+    @csrf
+    @method('PUT')
     <input type="hidden" name="exam_tmpl_id" value="{{$exam_tmpl_id}}" />
     <input type="hidden" name="exam_sheet_id" value="{{$exam_sheet_id}}" />
     <input type="hidden" id="txtStatus" name="status" value="{{$status}}" />
@@ -19,8 +21,6 @@
         <div class="col-span-9 border rounded p-2">
             <div class="" >
                 @if($isOnePage)
-                    @csrf
-                    @method('PUT')
                     @foreach($tableOfContents as $index => $group)
                     <div id="div-holder-for-sticky-to-push">
                         <x-renderer.heading 
@@ -76,7 +76,7 @@
             $("#divSubmit").html("<div class='text-red-500'>There are questions that need to be resolved:<br/>" + divSubmit.join("<br/>") + "</div>")
         }else{
             console.log("Submitting...")
-            $("#txtStatus").val('finished')
+            $("#txtStatus").val('submitted')
             $("#divSubmit").html("<div class='text-blue-500'>Submitting, please wait...</div>")
             $("#frmExam").submit()
         }

@@ -8,7 +8,7 @@ class Exam_sheet extends ModelExtended
 {
     public $fillable = [
         "id", "name", "description", "owner_id", "status",
-        "exam_tmpl_id",
+        "exam_tmpl_id", "comment",
     ];
 
     // public static $statusless = true;

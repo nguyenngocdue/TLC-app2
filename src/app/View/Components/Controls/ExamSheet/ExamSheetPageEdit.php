@@ -58,9 +58,20 @@ class ExamSheetPageEdit extends Component
 
         $sheetLines = $this->groupByQuestionId($sheet->getSheetLines);
         $sheetStatus = $sheet->status;
-
         if ($sheetStatus == 'finished') {
-            return Blade::render('<x-feedback.result type="error" title="Access denied" message="You can\'t view a submitted exam sheet." />');
+            return view('components.controls.exam-sheet.exam-sheet-page-finished', [
+                'sheet' => $sheet,
+                'cuid' => CurrentUser::id(),
+            ]);
+        }
+
+        if ($sheetStatus == 'submitted') {
+            return view('components.controls.exam-sheet.exam-sheet-page-submitted', [
+                'route' => $route,
+                'exam_tmpl_id' => $exam_tmpl_id,
+                'exam_sheet_id' => $id,
+                'status' => $sheetStatus,
+            ]);
         }
 
         return view('components.controls.exam-sheet.exam-sheet-page-edit', [
