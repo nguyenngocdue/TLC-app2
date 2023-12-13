@@ -6,9 +6,10 @@
 
 @php $groupName = ''; @endphp
 
-<form action="{{$route}}" method="POST">
+<form id="frmExam" action="{{$route}}" method="POST">
     <input type="hidden" name="exam_tmpl_id" value="{{$exam_tmpl_id}}" />
     <input type="hidden" name="exam_sheet_id" value="{{$exam_sheet_id}}" />
+    <input type="hidden" id="txtStatus" name="status" value="{{$status}}" />
     <div class="grid grid-cols-12 gap-2 p-4 w-full">
         <div class="col-span-2 border rounded p-2">
             <div class="sticky top-20 px-2 py-2">
@@ -44,7 +45,7 @@
                     </div>
                     @endforeach
                     <div class="p-2">
-                        <ul id="divSubmit" class="text-red-500">
+                        <ul id="divSubmit" class="">
                         </ul>
                         <x-renderer.button type='primary' onClick="validateAndSubmit()">Submit</x-render.button>
                     </div>
@@ -67,14 +68,17 @@
         for(var key in questions){
             if(!questions[key] ){
                 hasFail = true
-                divSubmit.push("<a class='pl-5' href='#"+key+"'>Question #" + key+"</a>")
+                divSubmit.push("<a class='ml-5 hover:bg-yellow-400 rounded px-2 py-1' href='#"+key+"'>Question #" + key+"</a>")
             }
         }
         if(hasFail){
             console.log("Has problem")
-            $("#divSubmit").html("There are questions that need to be resolved:<br/>" + divSubmit.join("<br/>"))
+            $("#divSubmit").html("<div class='text-red-500'>There are questions that need to be resolved:<br/>" + divSubmit.join("<br/>") + "</div>")
         }else{
             console.log("Submitting...")
+            $("#txtStatus").val('finished')
+            $("#divSubmit").html("<div class='text-blue-500'>Submitting, please wait...</div>")
+            $("#frmExam").submit()
         }
     }
 </script>

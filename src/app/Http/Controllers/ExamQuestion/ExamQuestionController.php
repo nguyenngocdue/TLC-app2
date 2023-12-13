@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ExamQuestion;
 
+use App\Models\Exam_sheet;
 use App\Models\Exam_sheet_line;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\QuestionAnswer\QuestionAnswer;
@@ -135,6 +136,11 @@ class ExamQuestionController
         }
         // dd();
         $types = Str::plural($type);
+        if ($input['status'] === 'finished') {
+            $sheet = Exam_sheet::find($exam_sheet_id);
+            $sheet->status = $input['status'];
+            $sheet->save();
+        }
         return redirect(route($types . ".edit", $id));
     }
 }

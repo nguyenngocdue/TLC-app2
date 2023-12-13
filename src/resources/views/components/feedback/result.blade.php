@@ -5,12 +5,16 @@
 $type = $type ?? 'info';
 $title = $title ?? $type;
 $message = $message ?? '[Message] is missing';
+
+$class = \App\View\Components\Feedback\Alert::getClass($type);
+$icon = \App\View\Components\Feedback\Alert::getIcon($type);
+// dump($class);
 @endphp
 
 <div class="flex ">
     <div id="alert-additional-content-4" class="m-auto p-4 text-center" style="margin-top: 10%; margin-bottom: 10%;" role="alert">
-        <div class="border-yellow-300 bg-yellow-50 p-4 rounded text-yellow-700 shadow" style="min-width: 512px;">
-            <i class="fa-duotone fa-circle-info text-4xl "></i>
+        <div class="{{$class}} p-4 rounded shadow" style="min-width: 512px;">
+            <i class="{{$icon}} text-4xl "></i>
             <x-renderer.heading xalign="center" level=4>{{$title}}</x-renderer.heading>
             {!! $message !!}
         </div>

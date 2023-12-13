@@ -11,7 +11,7 @@ class Exam_sheet extends ModelExtended
         "exam_tmpl_id",
     ];
 
-    public static $statusless = true;
+    // public static $statusless = true;
     public static $nameless = true;
     public function getNameAttribute($value)
     {

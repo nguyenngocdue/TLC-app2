@@ -5,6 +5,7 @@ namespace App\View\Components\Controls\ExamSheet;
 use App\Models\Exam_sheet;
 use App\Models\Exam_tmpl_question;
 use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
@@ -56,15 +57,22 @@ class ExamSheetPageEdit extends Component
         $route = route(Str::plural($this->type) . '.update', $this->id);
 
         $sheetLines = $this->groupByQuestionId($sheet->getSheetLines);
+        $sheetStatus = $sheet->status;
+
+        if ($sheetStatus == 'finished') {
+            return Blade::render('<x-feedback.result type="error" title="Access denied" message="You can\'t view a submitted exam sheet." />');
+        }
 
         return view('components.controls.exam-sheet.exam-sheet-page-edit', [
             'dataSource' => $dataSource,
             'tableOfContents' => $tableOfContents,
             'isOnePage' => true,
             'route' => $route,
+
+            'sheetLines' => $sheetLines,
             'exam_sheet_id' => $id,
             'exam_tmpl_id' => $exam_tmpl_id,
-            'sheetLines' => $sheetLines,
+            'status' => $sheetStatus,
         ]);
     }
 }
