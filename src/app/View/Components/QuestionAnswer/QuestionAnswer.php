@@ -144,7 +144,7 @@ class QuestionAnswer extends Component
         // Log::info($dynamicAnswer);
         // Log::info($renderAsRow);
         // dump($dynamicAnswerRows);
-        dump($item);
+        // dump($item);
         // dd();
         return view(
             'components.question-answer.question-answer',
