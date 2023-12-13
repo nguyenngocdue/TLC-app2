@@ -16,7 +16,8 @@
         <div class="col-span-12 justify-center">
             <div class="flex w-full justify-center">
                 <div class="w-1/3">
-                    Your comment on the Questionare/Bạn có bình luận gì về khảo sát vừa rồi:
+                    <p>Do you have any comments about the recent survey:</p>
+                    <p>Bạn có bình luận gì về khảo sát vừa rồi:</p>
                     <textarea name="comment" class="w-full rounded p-2" rows="6"></textarea>
                     <x-renderer.button type='success' htmlType="submit" icon='fa-solid fa-paper-plane'>Send and Close</x-renderer.button>
                 </div>
