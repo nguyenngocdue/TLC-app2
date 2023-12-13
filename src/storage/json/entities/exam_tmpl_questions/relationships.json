@@ -79,6 +79,22 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_getValidation": {
+        "name": "_getValidation",
+        "relationship": "belongsTo",
+        "control_name": "validation",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_values": "215",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",

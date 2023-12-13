@@ -29,7 +29,9 @@ class ExamQuestionController
         $numbers = substr($question, strlen("question_"));
         $numbers .= "__"; // make sure it always has [1] and [2]
         $numbers = explode("_", $numbers);
-        $numbers = collect($numbers)->map(fn ($i) => $i ? $i : null)->toArray();
+        $numbers = collect($numbers)->toArray();
+        // $numbers = collect($numbers)->map(fn ($i) => $i ? $i : null)->toArray();
+        // dump($numbers);
         return $numbers;
     }
 
@@ -44,7 +46,7 @@ class ExamQuestionController
             $result[$numbers[0]][$numbers[1]] = $value;
         }
 
-        // dd($result);
+        // dump($result);
         return $result;
     }
 
@@ -61,24 +63,26 @@ class ExamQuestionController
     {
         $controlIds = QuestionAnswer::controlIds();
         // dump($request);
-        $input = $request->except(['_token', '_method']);
+        $input = $request->input();
+        $exam_tmpl_id = $input['exam_tmpl_id'];
+        $exam_sheet_id = $input['exam_sheet_id'];
         // dd($input);
 
         $input = collect($input);
 
         $questions = $input->filter(fn ($v, $k) => Str::startsWith($k, 'question_'));
-        // dump($questions);
+        // dd($questions);
         $controls = $input->filter(fn ($v, $k) => Str::startsWith($k, 'control_'));
         $controls = $this->parseControls($controls);
         $descriptions = $input->filter(fn ($v, $k) => Str::startsWith($k, 'description_'));
         $descriptions = $this->parseDescription($descriptions);
-        // dump($descriptions);
+        // dd($descriptions);
         // dd();
 
         foreach ($questions as $question => $values) {
             [$questionId, $subQuestion1, $subQuestion2] = $this->parseQuestion($question);
-            $questionTypeId = $controls[$questionId];
             // dump($questionId, $subQuestion1, $subQuestion2);
+            $questionTypeId = $controls[$questionId];
 
             $answer =    [
                 'owner_id' => CurrentUser::id(),
@@ -97,8 +101,8 @@ class ExamQuestionController
                         $keys[] = $key;
                         $strings[] = $value;
                     }
-                    $answer['response_ids'] = join(",", $keys);
-                    $answer['response_values'] = join(",", $strings);
+                    $answer['response_ids'] = join("|||", $keys);
+                    $answer['response_values'] = join("|||", $strings);
                 } else {
                     [$ids, $values] = explode(":::", $values);
                     $answer['response_ids'] = $ids;
@@ -107,8 +111,8 @@ class ExamQuestionController
             }
 
             $uniqueArray = [
-                'exam_tmpl_id' => 1,
-                'exam_sheet_id' => 1,
+                'exam_tmpl_id' => $exam_tmpl_id,
+                'exam_sheet_id' => $exam_sheet_id,
                 'exam_question_id' => $questionId,
             ];
 

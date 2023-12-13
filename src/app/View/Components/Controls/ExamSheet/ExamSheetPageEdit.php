@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls\ExamSheet;
 
+use App\Models\Exam_sheet;
 use App\Models\Exam_tmpl_question;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Str;
@@ -16,10 +17,27 @@ class ExamSheetPageEdit extends Component
         // dump($id, $type);
     }
 
+    function groupByQuestionId($lines)
+    {
+        $grouped = [];
+        foreach ($lines as $line) {
+            $grouped[$line->exam_question_id][$line->sub_question_1_id ?? 0][$line->sub_question_2_id ?? 0] = $line;
+        }
+        // dd($grouped);
+        return $grouped;
+    }
+
     function render()
     {
-        $id = $this->id ?? 1;
-        $exam_tmpl_id = 1;
+        $id = $this->id;
+        $sheet = Exam_sheet::query()
+            ->where('id', $id)
+            ->with('getSheetLines')
+            ->get();
+        $sheet = $sheet[0];
+        // dump($sheet);
+
+        $exam_tmpl_id = $sheet->exam_tmpl_id;
         $dataSource = Exam_tmpl_question::query()
             ->where("exam_tmpl_id", $exam_tmpl_id)
             ->with('getExamTmplGroup')
@@ -37,11 +55,16 @@ class ExamSheetPageEdit extends Component
         // dump($tableOfContents);
         $route = route(Str::plural($this->type) . '.update', $this->id);
 
+        $sheetLines = $this->groupByQuestionId($sheet->getSheetLines);
+
         return view('components.controls.exam-sheet.exam-sheet-page-edit', [
             'dataSource' => $dataSource,
             'tableOfContents' => $tableOfContents,
             'isOnePage' => true,
             'route' => $route,
+            'exam_sheet_id' => $id,
+            'exam_tmpl_id' => $exam_tmpl_id,
+            'sheetLines' => $sheetLines,
         ]);
     }
 }

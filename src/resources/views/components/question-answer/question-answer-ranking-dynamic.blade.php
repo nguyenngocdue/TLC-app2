@@ -1,4 +1,9 @@
 {{-- @dump($questionId, $staticAnswer, $dynamicAnswerRows) --}}
+@php
+    // $value = ($line) ? $line[0][0]->response_ids : "";
+    // dump($line);
+@endphp
+
 @php $countAllDynamicAnswer = $dynamicAnswerRows->map(fn($i)=>count($i))->sum(); @endphp
 <table class="border rounded m-4"> 
     <tr>
@@ -20,6 +25,12 @@
             @endphp
             <tr class="hover:bg-blue-100">
                     <td class="border px-5 py-1 flex items-center">
+                        @php
+                           $value = ($line[$id][0]->response_values ?? "");
+                           $questionJSKey = "{$questionId}_{$id}";
+                        @endphp
+                        {{-- <script>questions['{{$questionJSKey}}']='{{$value}}';</script> --}}
+                        <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
                         @if($avatar) <img class="rounded-full w-8 h-8 m-2" src="{{$avatar}}" /> @endif
                         {{$label}}
                     </td>
@@ -29,6 +40,9 @@
                         $chkId = "chk_{$questionId}_{$index}_{$i_1}";
                         $name = "question_{$questionId}_{$id}";
                         if($subQuestion2Id) $name .= "_$subQuestion2Id";
+                        $values = explode("|||", $value);
+                        // dump($values);
+                        $checked = in_array($i, $values);
                     @endphp
                     <td class="border px-5 py-1 text-center">
                         {{-- {{$chkId}} --}}
@@ -37,8 +51,10 @@
                             id="{{$chkId}}" 
                             value="{{$i}}:::{{$i}}"  
                             type="checkbox"
+                            @checked($checked)
                             class="disabled:bg-gray-500 disabled:cursor-not-allowed"
-                            onclick="onRankClick('{{$chkId}}', {{$questionId}}, {{$countAllDynamicAnswer}})"
+                            onclick="reRenderRankTable({{$questionId}}, {{$countAllDynamicAnswer}})"
+                            onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}'))" 
                             />
                     </td>
                 @endfor
@@ -55,3 +71,7 @@
 </table>
 
 <i>1 is the highest, {{$countAllDynamicAnswer}} is the lowest.</i>
+
+<script>
+    reRenderRankTable({{$questionId}}, {{$countAllDynamicAnswer}})
+</script>

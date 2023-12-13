@@ -28,9 +28,9 @@ return new class extends Migration
             $table->unsignedBigInteger('exam_question_id')->nullable();
             $table->unsignedBigInteger('question_type_id')->nullable();
 
-            $table->unsignedBigInteger('sub_question_1_id')->nullable();
+            $table->string('sub_question_1_id')->nullable();
             $table->text('sub_question_1_value')->nullable();
-            $table->unsignedBigInteger('sub_question_2_id')->nullable();
+            $table->string('sub_question_2_id')->nullable();
             $table->text('sub_question_2_value')->nullable();
             $table->text('response_ids')->nullable();
             $table->text('response_values')->nullable();

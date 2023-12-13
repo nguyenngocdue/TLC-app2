@@ -1,4 +1,9 @@
 {{-- @dump($questionId, $staticAnswer, $staticAnswer) --}}
+@php
+    // dump($line);
+    // $value = ($line) ? $line[0][0]->response_ids : "";
+    // dump($value);
+@endphp
 <table class="border rounded m-4"> 
     <tr>
         <th class='border bg-gray-300 min-w-[100px]'></th>
@@ -9,21 +14,36 @@
     @php $index=0; @endphp
     @foreach($staticAnswer as $id=>$name)
         <tr class="hover:bg-blue-100">
-            <td class="border px-5 py-1">{{$name}}</td>
+            <td class="border px-5 py-1">
+                @php
+                    $value = ($line[$name][0]->response_values ?? "");
+                    $questionJSKey = "{$questionId}_{$name}";
+                @endphp
+                {{-- <script>questions['{{$questionJSKey}}']='{{$value}}';</script> --}}
+                <div class="flex items-center">
+                    <x-question-answer.question-answer-badge id="{{$questionJSKey}}" selected="{{$value}}" validation="{{$validation}}"/>
+                    {{$name}}
+                </div>
+            </td>
             @for($i = 1; $i <= sizeof($staticAnswer); $i++)
                 @php
                     $i_1 = $i-1;
                     $chkId = "chk_{$questionId}_{$index}_{$i_1}";
+                    // dump( $checked[0]->response_values);
+                    $values = explode("|||", $value);
+                    $checked = in_array($i, $values);
                 @endphp
                 <td class="border px-5 py-1 text-center">
                     {{-- {{$chkId}} --}}
                     <input 
-                        name="question_{{$questionId}}" 
+                        name="question_{{$questionId}}_{{$name}}" 
                         id="{{$chkId}}" 
-                        value="{{$i}}:::{{$name}}"  
+                        value="{{$name}}:::{{$i}}"  
                         type="checkbox"
+                        @checked($checked)
                         class="disabled:bg-gray-500 disabled:cursor-not-allowed"
-                        onclick="onRankClick('{{$chkId}}', {{$questionId}}, {{sizeof($staticAnswer)}})"
+                        onclick="reRenderRankTable({{$questionId}}, {{sizeof($staticAnswer)}})"
+                        onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('question_{{$questionId}}_{{$name}}'))" 
                         />
                 </td>
             @endfor
@@ -40,5 +60,7 @@
 
 <i>1 is the highest, {{sizeof($staticAnswer)}} is the lowest.</i>
 
-
+<script>
+    reRenderRankTable({{$questionId}}, {{sizeof($staticAnswer)}})
+</script>
 
