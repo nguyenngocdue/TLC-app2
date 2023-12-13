@@ -11,7 +11,7 @@ class Exam_tmpl_question extends ModelExtended
         "exam_tmpl_id", "exam_tmpl_group_id", "render_as_rows",
         'question_type_id', "static_answer",
         "dynamic_answer_rows", "dynamic_answer_cols",
-        "validation",
+        "validation", "grid_cols",
         /*"status",*/
     ];
 
@@ -72,6 +72,7 @@ class Exam_tmpl_question extends ModelExtended
             ['dataIndex' => 'question_type_id',],
             ['dataIndex' => 'validation', 'cloneable' => true,],
             ['dataIndex' => 'render_as_rows',],
+            ['dataIndex' => 'grid_cols', 'cloneable' => true,],
             ['dataIndex' => 'static_answer',],
             ['dataIndex' => 'dynamic_answer_rows',],
             ['dataIndex' => 'dynamic_answer_cols',],

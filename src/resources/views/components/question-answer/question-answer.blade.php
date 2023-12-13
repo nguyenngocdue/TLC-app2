@@ -126,6 +126,7 @@
                     :subQuestion2Id="$subQuestion2Id"
                     :line="$line"
                     :validation="$validation"
+                    :gridCols="$gridCols"
                     
                     />', [
                         'questionId' => $questionId,
@@ -136,6 +137,7 @@
                         'subQuestion2Id' => $subQuestion2['id'] ?? null,
                         'line' => $line,
                         'validation' => $validation,
+                        'gridCols' => $item['grid_cols'] ?? 12,
                         // 'questionJSKey' => $questionJSKey,
                     ]);
                 }

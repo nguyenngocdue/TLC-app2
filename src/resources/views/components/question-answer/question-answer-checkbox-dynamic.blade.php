@@ -21,7 +21,7 @@
     @if($groupName != 'no_group')    
         <b>{{$groupName}}</b>
     @endif
-    <div class="grid {{$renderAsRows ?: 'grid-cols-12'}}">
+    <div class="grid {{$renderAsRows ?: "grid-cols-$gridCols"}}">
         @foreach($dynamicAnswerRows[$groupName] as $id => $object)
             @php 
                 $label = $object['name'];

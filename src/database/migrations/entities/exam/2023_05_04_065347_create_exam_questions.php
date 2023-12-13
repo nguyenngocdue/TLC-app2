@@ -28,6 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger('question_type_id')->nullable();
             $table->unsignedBigInteger('validation')->nullable();
             $table->boolean('render_as_rows')->nullable();
+            $table->unsignedInteger('grid_cols')->nullable();
             $table->text('static_answer')->nullable();
             $table->unsignedBigInteger('dynamic_answer_rows')->nullable();
             $table->unsignedBigInteger('dynamic_answer_cols')->nullable();
