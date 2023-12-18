@@ -21,7 +21,10 @@ class ExamSheetPageCreate extends Component
         $cuid = CurrentUser::id();
         $isAdmin = CurrentUser::isAdmin();
 
-        $sheets = Exam_sheet::query()->where('owner_id', $cuid)->get();
+        $sheets = Exam_sheet::query()
+            ->where('owner_id', $cuid)
+            ->with('getExamTmpl')
+            ->get();
 
         $status = $isAdmin ? ['testing', 'publish'] : ['publish'];
 

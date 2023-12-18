@@ -29,13 +29,13 @@
 
             @if(sizeof($myInProgressSheets) > 0)
                 <x-renderer.heading class="mt-10" level=4 xalign=center>The In Progress questionares:</x-renderer.heading>
-                @foreach($myInProgressSheets as $exam)
+                @foreach($myInProgressSheets as $sheet)
                 @php
-                    $routeEdit = route(Str::plural($type) . '.edit', $exam->id);
+                    $routeEdit = route(Str::plural($type) . '.edit', $sheet->id);
                 @endphp
                 <form action="{{$routeEdit}}" method="GET" class="hover:bg-lime-200 rounded p-2">
-                    {{$exam->name}}
-                    @if($exam->status == 'testing')
+                    {{$sheet->name}}
+                    @if($sheet->getExamTmpl->status == 'testing')
                     <x-renderer.status>testing</x-renderer.status>
                     @endif
                     <x-renderer.button htmlType="submit" type="success">Continue</x-renderer.button>
@@ -45,13 +45,13 @@
 
             @if(sizeof($mySubmittedSheets) > 0)
                 <x-renderer.heading class="mt-10" level=4 xalign=center>The Submitted questionares:</x-renderer.heading>
-                @foreach($mySubmittedSheets as $exam)
+                @foreach($mySubmittedSheets as $sheet)
                 @php
-                    $routeEdit = route(Str::plural($type) . '.edit', $exam->id);
+                    $routeEdit = route(Str::plural($type) . '.edit', $sheet->id);
                 @endphp
                 <form action="{{$routeEdit}}" method="GET" class="hover:bg-lime-200 rounded p-2">
-                    {{$exam->name}}
-                    @if($exam->status == 'testing')
+                    {{$sheet->name}}
+                    @if($sheet->getExamTmpl->status == 'testing')
                     <x-renderer.status>testing</x-renderer.status>
                     @endif
                     <x-renderer.button htmlType="submit" type="success">Continue</x-renderer.button>
@@ -61,13 +61,13 @@
 
             @if(sizeof($myFinishedSheets) > 0)
                 <x-renderer.heading class="mt-10" level=4 xalign=center>The Finished questionares:</x-renderer.heading>
-                @foreach($myFinishedSheets as $exam)
+                @foreach($myFinishedSheets as $sheet)
                 @php
-                    $routeEdit = route(Str::plural($type) . '.edit', $exam->id);
+                    $routeEdit = route(Str::plural($type) . '.edit', $sheet->id);
                 @endphp
                 <form action="{{$routeEdit}}" method="GET" class="hover:bg-lime-200 rounded p-2">
-                    {{$exam->name}}
-                    @if($exam->status == 'testing')
+                    {{$sheet->name}}
+                    @if($sheet->getExamTmpl->status == 'testing')
                     <x-renderer.status>testing</x-renderer.status>
                     @endif
                     {{-- <x-renderer.button htmlType="submit" type="primary">Open</x-renderer.button> --}}
