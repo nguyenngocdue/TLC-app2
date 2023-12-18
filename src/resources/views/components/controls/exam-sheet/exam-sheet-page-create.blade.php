@@ -15,10 +15,13 @@
                 @foreach($availableExams as $exam)
                 <form action="{{$routeStore}}" method="POST" class="hover:bg-lime-200 rounded p-2">
                     @csrf
-                    {{$exam->name}}
+                    {{$exam->name}} 
                     <input type="hidden" name="exam_tmpl_id" value="{{$exam->id}}" />
                     <input type="hidden" name="status" value="in_progress" />
                     <input type="hidden" name="owner_id" value="{{$cuid}}" />
+                    @if($exam->status == 'testing')
+                    <x-renderer.status>testing</x-renderer.status>
+                    @endif
                     <x-renderer.button htmlType="submit" type="secondary">Start</x-renderer.button>
                 </form>
                 @endforeach
@@ -32,6 +35,9 @@
                 @endphp
                 <form action="{{$routeEdit}}" method="GET" class="hover:bg-lime-200 rounded p-2">
                     {{$exam->name}}
+                    @if($exam->status == 'testing')
+                    <x-renderer.status>testing</x-renderer.status>
+                    @endif
                     <x-renderer.button htmlType="submit" type="success">Continue</x-renderer.button>
                 </form>
                 @endforeach
@@ -45,6 +51,9 @@
                 @endphp
                 <form action="{{$routeEdit}}" method="GET" class="hover:bg-lime-200 rounded p-2">
                     {{$exam->name}}
+                    @if($exam->status == 'testing')
+                    <x-renderer.status>testing</x-renderer.status>
+                    @endif
                     <x-renderer.button htmlType="submit" type="success">Continue</x-renderer.button>
                 </form>
                 @endforeach
@@ -58,6 +67,9 @@
                 @endphp
                 <form action="{{$routeEdit}}" method="GET" class="hover:bg-lime-200 rounded p-2">
                     {{$exam->name}}
+                    @if($exam->status == 'testing')
+                    <x-renderer.status>testing</x-renderer.status>
+                    @endif
                     {{-- <x-renderer.button htmlType="submit" type="primary">Open</x-renderer.button> --}}
                 </form>
                 @endforeach
