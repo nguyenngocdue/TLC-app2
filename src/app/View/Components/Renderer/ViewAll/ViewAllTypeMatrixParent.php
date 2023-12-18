@@ -413,6 +413,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         $filterRenderer = $this->getFilter();
 
         $actionButtons = Blade::render("<x-form.action-button-group-view-matrix
+            routePrefix='_mep1.exportCsvMatrix1'
             type='$this->type'
             groupBy='$this->groupBy'
             groupByLength='$this->groupByLength'

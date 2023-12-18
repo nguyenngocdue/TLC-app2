@@ -20,7 +20,7 @@ class ProdSequences extends MatrixForReportParent
         private $prodRoutingId = 49,
         private $subProjectId = 107,
         private $dateToCompare = null,
-        private $sequenceModeId = null,
+        private $sequenceModeId = 2,
         private $prodDisciplineId = null,
     ) {
         parent::__construct("prod_sequences", $dateToCompare);

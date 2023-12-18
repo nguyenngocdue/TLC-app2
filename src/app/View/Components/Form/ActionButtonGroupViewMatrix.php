@@ -18,6 +18,7 @@ class ActionButtonGroupViewMatrix extends Component
         private $modelPath = null,
         private $groupBy = false,
         private $groupByLength = 1,
+        private $routePrefix = '_route_prefix_params',
 
         protected $actionBtnList = [],
     ) {
@@ -35,7 +36,8 @@ class ActionButtonGroupViewMatrix extends Component
             'groupBy' => $this->groupBy,
             'groupByLength' => $this->groupByLength,
         ];
-        $routeExportCSV = route($this->type . '_mep.exportCsvViewAllMatrix', $paramsRoute);
+
+        $routeExportCSV = route($this->type . $this->routePrefix, $paramsRoute);
         return view('components.form.action-button-group-view-matrix', [
             'type' => $this->type,
             'routeExportCSV' => $routeExportCSV,

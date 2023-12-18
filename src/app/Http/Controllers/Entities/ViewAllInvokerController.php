@@ -67,6 +67,34 @@ class ViewAllInvokerController extends Controller
                 : Str::headline($item['dataIndex'])), $columns));
             array_unshift($columns,  'No.');
             $fileName = $this->type . '_matrix.csv';
+
+            $dataSource = $this->makeDataSourceForViewMatrix($request, $dataSource);
+
+            $headers = Excel::header($fileName);
+            $callback = Excel::export($columns, $dataSource);
+            return response()->stream($callback, 200, $headers);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
+    }
+    public function exportCsvMatrixForReport(Request $request)
+    {
+        try {
+
+            $matrix = new \App\View\Components\Renderer\MatrixForReport\ProdSequences();
+            [$columns, $dataSource] = $matrix->getMatrixForReportParams(true);
+
+            // dump($columns);
+
+            $dataSource = $this->sortDataValueByColumns($columns, $dataSource);
+            $dataSource = $this->groupByDataSource($request, $dataSource);
+
+            $columns = array_filter($columns, fn ($item) => !isset($item['hidden']));
+            $columns = array_values(array_map(fn ($item) => (isset($item['title']) ?
+                Str::headline(strip_tags($item['title']))
+                : Str::headline($item['dataIndex'])), $columns));
+            array_unshift($columns,  'No.');
+            $fileName = $this->type . '_matrix.csv';
             $dataSource = $this->makeDataSourceForViewMatrix($request, $dataSource);
             $headers = Excel::header($fileName);
             $callback = Excel::export($columns, $dataSource);

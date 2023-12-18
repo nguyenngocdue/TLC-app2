@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\MatrixForReport;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Log;
 
@@ -21,6 +22,9 @@ abstract class MatrixForReportParent extends Component
     protected $finishedArray = ['closed', 'finished', 'approved'];
     protected $naArray = ['not_applicable', 'cancelled'];
 
+    protected $groupBy = null;
+    protected $groupByLength = null;
+
     function __construct(
         private $type,
         private $dateToCompare = null,
@@ -33,7 +37,7 @@ abstract class MatrixForReportParent extends Component
     abstract function getYAxis();
     abstract function getDataSource($xAxis, $yAxis);
 
-    function cellRenderer($cell, $xAxis, $yAxis, $dataSource)
+    function cellRenderer($cell, $xAxis, $yAxis, $dataSource, $forExcel = false)
     {
         if (isset($cell->status)) {
             $id = $cell->id;
@@ -64,6 +68,8 @@ abstract class MatrixForReportParent extends Component
                 }
             }
 
+            if ($forExcel) return $cell->status;
+
             return (object)[
                 "value" => $value, //. " " . $cell->{$this->dataIndexX},
                 'cell_class' => "$cellClass text-center cursor-pointer",
@@ -86,12 +92,17 @@ abstract class MatrixForReportParent extends Component
         return $items;
     }
 
-    function renderCell($xAxis, $yAxis, $dataSource)
+    function renderCell($xAxis, $yAxis, $dataSource, $forExcel = false)
     {
         $result = [];
         foreach ($dataSource as $yId => $columns) {
+            foreach ($xAxis as $x) {
+                $result[$yId][$x->id] = ""; //Make placeholder, incase if null, export to excel will have blank cell
+            }
+        }
+        foreach ($dataSource as $yId => $columns) {
             foreach ($columns as $xId => $item) {
-                $result[$yId][$xId] = $this->cellRenderer($item, $xAxis, $yAxis, $dataSource);
+                $result[$yId][$xId] = $this->cellRenderer($item, $xAxis, $yAxis, $dataSource, $forExcel);
             }
         }
         return $result;
@@ -227,7 +238,7 @@ abstract class MatrixForReportParent extends Component
             if ($mau > 0) {
                 $percent = number_format(100 * $line / $mau) . '%';
                 $line = (object)[
-                    'value' =>  $tu . '<hr class="text-black"/>' . $mau . '<br/>(' . $percent . ")",
+                    'value' =>  $tu . '/' . $mau . ' <br/>(' . $percent . ")",
                     'cell_class' => "text-center",
                 ];
             } else {
@@ -247,6 +258,9 @@ abstract class MatrixForReportParent extends Component
         ];
 
         $size = sizeof($yAxis);
+        $result['name'] = ''; // For excel column span
+        $result['production_name'] = ''; // For excel column span
+        $result['quantity'] = ''; // For excel column span
         if ($size) {
             $totalProgress /= $size;
             $result['progress'] = (object)[
@@ -264,7 +278,7 @@ abstract class MatrixForReportParent extends Component
         return [];
     }
 
-    function getMatrixForReportParams()
+    function getMatrixForReportParams($forExcel = false)
     {
         $xAxis = $this->getXAxis();
         $yAxis = $this->getYAxis();
@@ -281,11 +295,32 @@ abstract class MatrixForReportParent extends Component
         $dataSource = $this->attachMeta($xAxis, $yAxis, $dataSource);
         $dataSource = $this->sortBy('name', $dataSource);
         $dataSource = $this->calculateProgressForColumns($xAxis, $yAxis, $dataSource, $leftColumns);
-        $dataSource = $this->renderCell($xAxis, $yAxis, $dataSource);
+        $dataSource = $this->renderCell($xAxis, $yAxis, $dataSource, $forExcel);
         // dump($dataSource);
 
         $xAxis2ndHeading = $this->getXAxis2ndHeader($xAxis);
         return [$columns, $dataSource, $xAxis2ndHeading];
+    }
+
+    function getActionButtons()
+    {
+        $actionBtnList = [
+            'exportSCV' => true,
+            'printTemplate' => false,
+            'approveMulti' => false,
+        ];
+
+        $actionButtons = Blade::render("<x-form.action-button-group-view-matrix
+            routePrefix='_mep2.exportCsvMatrix2'
+            type='$this->type'
+            groupBy='$this->groupBy'
+            groupByLength='$this->groupByLength'
+            :actionBtnList='\$actionBtnList'
+            />", [
+            'actionBtnList' => $actionBtnList,
+        ]);
+
+        return $actionButtons;
     }
 
     function render()
@@ -299,6 +334,7 @@ abstract class MatrixForReportParent extends Component
             'rotate45Width' => $this->rotate45Width,
             'rotate45Height' => $this->rotate45Height,
             'type' => $this->type,
+            'actionButtons' => $this->getActionButtons(),
         ]);
     }
 }

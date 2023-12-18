@@ -28,8 +28,11 @@ Route::group([], function () {
 
             Route::post("{$entityName}_rs", [EntityCRUDController::class, "restoreMultiple"])->name("{$entityName}.restoreMultiple");
             Route::post("{$entityName}_dp", [ViewAllInvokerController::class, "duplicateMultiple"])->name("{$entityName}_dp.duplicateMultiple");
+
             Route::get("{$entityName}_ep", [ViewAllInvokerController::class, "exportCSV"])->name("{$entityName}_ep.exportCSV");
-            Route::get("{$entityName}_mep", [ViewAllInvokerController::class, "exportCsvViewAllMatrix"])->name("{$entityName}_mep.exportCsvViewAllMatrix");
+            Route::get("{$entityName}_mep1", [ViewAllInvokerController::class, "exportCsvViewAllMatrix"])->name("{$entityName}_mep1.exportCsvMatrix1");
+            Route::get("{$entityName}_mep2", [ViewAllInvokerController::class, "exportCsvMatrixForReport"])->name("{$entityName}_mep2.exportCsvMatrix2");
+
             Route::put("{$entityName}_prt", [ViewAllInvokerController::class, "print"])->name("{$entityName}_prt.print");
             Route::get("{$entityName}_qr", [ViewAllInvokerController::class, "showQRList6"])->name("{$entityName}_qr.showQRList6");
         });
