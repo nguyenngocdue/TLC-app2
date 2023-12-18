@@ -82,14 +82,23 @@ class ViewAllInvokerController extends Controller
         try {
 
             $matrix = new \App\View\Components\Renderer\MatrixForReport\ProdSequences();
-            [$columns, $dataSource] = $matrix->getMatrixForReportParams(true);
+            [$columns, $dataSource, $xAxis2ndHeading] = $matrix->getMatrixForReportParams(true);
 
             // dump($columns);
 
             $dataSource = $this->sortDataValueByColumns($columns, $dataSource);
             $dataSource = $this->groupByDataSource($request, $dataSource);
-
             $columns = array_filter($columns, fn ($item) => !isset($item['hidden']));
+            $xAxis2ndHeadingArr = [];
+            foreach ($columns as $index => $column) {
+                if (isset($xAxis2ndHeading[$column['dataIndex']])) {
+                    $xAxis2ndHeadingArr[$index] = $xAxis2ndHeading[$column['dataIndex']]->value;
+                }
+            }
+            for ($i = 0; $i < sizeof(['no', 'name', 'prod_name', 'qty', 'progress']); $i++) {
+                array_unshift($xAxis2ndHeadingArr, "123"); //For No.
+            }
+
             $columns = array_values(array_map(fn ($item) => (isset($item['title']) ?
                 Str::headline(strip_tags($item['title']))
                 : Str::headline($item['dataIndex'])), $columns));
@@ -97,6 +106,8 @@ class ViewAllInvokerController extends Controller
             $fileName = $this->type . '_matrix.csv';
             $dataSource = $this->makeDataSourceForViewMatrix($request, $dataSource);
             $headers = Excel::header($fileName);
+
+            array_unshift($dataSource, $xAxis2ndHeadingArr);
             $callback = Excel::export($columns, $dataSource);
             return response()->stream($callback, 200, $headers);
         } catch (\Throwable $th) {
