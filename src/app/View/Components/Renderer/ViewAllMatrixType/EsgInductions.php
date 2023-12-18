@@ -3,7 +3,6 @@
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Models\Esg_induction;
-use App\Models\Hse_extra_metric;
 use App\Models\Workplace;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;

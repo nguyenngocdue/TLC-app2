@@ -116,7 +116,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "exam_sheets": {
-        "name": "exam_sheets"
+        "name": "exam_sheets",
+        "storeEmpty_and_updateShort": "true"
     },
     "exam_tmpl_groups": {
         "name": "exam_tmpl_groups",

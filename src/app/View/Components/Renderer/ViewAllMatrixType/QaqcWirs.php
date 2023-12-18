@@ -6,6 +6,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Models\Prod_order;
 use App\Models\Prod_routing;
 use App\Models\Qaqc_wir;
+use App\Models\Wir_description;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;

@@ -291,11 +291,15 @@ abstract class ViewAllTypeMatrixParent extends Component
             $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis, $forExcel);
             foreach ($metaObjects as $key => $metaObject) {
                 $newObject = $metaObject;
-                if (!is_object($metaObject)) {
-                    $newObject = (object) [
-                        "cell_class" => "bg-white",
-                        "value" => $metaObject,
-                    ];
+                if (Str::endsWith($key, "_for_group_by")) {
+                    $newObject = $metaObject;
+                } else {
+                    if (!is_object($metaObject)) {
+                        $newObject = (object) [
+                            "cell_class" => "bg-white",
+                            "value" => $metaObject,
+                        ];
+                    }
                 }
                 $line[$key] =  $newObject;
             }
@@ -391,7 +395,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             return Blade::render('<x-renderer.view-all-matrix-filter.' . $filterName . ' :type="$type" :dataSource="$dataSource" :viewportParams="$viewportParams"/>', $params);
         } else {
             //qaqc_wirs.blade.php //FULL TEXT SEARCH HERE
-            return "Filter $this->type.blade.php file not found (ViewAllTypeMatrixParent.getFilter, search qaqc_wirs.blade.php)";
+            return "Filter $this->type.blade.php file not found (ViewAllTypeMatrixParent.getFilter, Full-text search qaqc_wirs.blade.php)";
         }
     }
 
