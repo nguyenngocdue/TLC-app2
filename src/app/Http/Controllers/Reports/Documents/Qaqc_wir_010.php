@@ -62,7 +62,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     public function getSqlStr($params)
     {
-        // reduce items of prod_routing from "Show on screen"
+        // reduce items of prod_routing from "Show on screens"
         $idsRoutings = $this->filterProdRoutingByTypeID(346); // QAQC WIR
         $strIdsRoutings = implode(',', $idsRoutings);
 
@@ -74,8 +74,8 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         }
         $valOfParams = $this->generateValuesFromParamsReport($params);
 
-        if((isset($params['sub_project_id']) && !is_numeric($x = $params['sub_project_id']) && is_null(last($x)))  || !isset($x)
-        ){
+        if ((isset($params['sub_project_id']) && !is_numeric($x = $params['sub_project_id']) && is_null(last($x)))  || !isset($x)
+        ) {
             $strIdsSubProjects = ParameterReport::getStringIds('sub_project_id');
             $valOfParams['sub_project_id'] = $strIdsSubProjects;
         }
@@ -137,7 +137,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
         if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND wir.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND wir.sub_project_id IN ({$valOfParams['sub_project_id']})";
-                                                                            
+
         $sql .= "\n AND SUBSTR(wir.closed_at, 1, 10) <= '$latestDate' OR wir.closed_at IS NULL
                                                                           	AND (
                                                                                (wir.status IN ('closed', 'not_applicable'))
@@ -164,7 +164,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND sp.id IN ({$valOfParams['sub_project_id']})";
         if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND pr.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
 
-                                            $sql .= "\n AND pr.prod_routing_name != '-- available'
+        $sql .= "\n AND pr.prod_routing_name != '-- available'
                                                     GROUP BY #project_id, 
                                                             sub_project_id, 
                                                             prod_routing_id
@@ -201,7 +201,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                     AND wir.deleted_by IS NULL";
         if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND wir.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND wir.sub_project_id IN ({$valOfParams['sub_project_id']})";
-                                                 $sql .= "\n GROUP BY wir_prod_routing_id,project_id, sub_project_id
+        $sql .= "\n GROUP BY wir_prod_routing_id,project_id, sub_project_id
                                                 ) AS count_prod_order_have_wir 
                                                 ON tb1.prod_routing_id = count_prod_order_have_wir.wir_prod_routing_id AND tb1.sub_project_id = count_prod_order_have_wir.sub_project_id
                                                 ORDER BY sub_project_name, prod_routing_name";
@@ -211,7 +211,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
     protected function getParamColumns($dataSource, $modeType)
     {
         return [
-           /*  [
+            /*  [
                 'title' => 'Month',
                 'dataIndex' => 'month',
                 "firstHidden" => true,
@@ -310,7 +310,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     public function getBasicInfoData($params)
     {
-        $params['month'] = $params['year'].'-'. str_pad($params['only_month'], 2, '0', STR_PAD_LEFT);
+        $params['month'] = $params['year'] . '-' . str_pad($params['only_month'], 2, '0', STR_PAD_LEFT);
         [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         return [
             'from_date' => $previousDate,
@@ -325,7 +325,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         } elseif (Report::checkValueOfField($params, 'children_mode')) {
             $params = $this->getParamsFromUserSettings($params, $request);
         }
-            // dd($params);
+        // dd($params);
         return $params;
     }
 
@@ -333,7 +333,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
     {
         return isset($params['children_mode']) && !is_null($params['children_mode']);
     }
-    
+
 
     protected function getDefaultParamsForFilterByMonth()
     {
@@ -396,26 +396,27 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     protected function updateParamsForMonths($params)
     {
-        $params['month'] = $params['year'].'-'. str_pad($params['only_month'], 2, '0', STR_PAD_LEFT);
+        $params['month'] = $params['year'] . '-' . str_pad($params['only_month'], 2, '0', STR_PAD_LEFT);
         [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         $params['previous_month'] = substr($previousDate, 0, 7);
         $params['latest_month'] = substr($latestDate, 0, 7);
 
         return $params;
     }
-    
 
-    public function changeDataSource($dataSource, $params){
+
+    public function changeDataSource($dataSource, $params)
+    {
         // set status for each routing by "latest_acceptance_percent"
-        foreach ($dataSource as $values){
+        foreach ($dataSource as $values) {
             $value = (int)$values->latest_acceptance_percent;
-                if ($value === 100){
-                    $values->percent_status = 'Finished';
-                } elseif($value > 0 and $value < 100) {
-                    $values->percent_status = 'In Progress';
-                }else {
-                    $values->percent_status = 'Not Yet';
-                }
+            if ($value === 100) {
+                $values->percent_status = 'Finished';
+            } elseif ($value > 0 and $value < 100) {
+                $values->percent_status = 'In Progress';
+            } else {
+                $values->percent_status = 'Not Yet';
+            }
         }
         // dd($dataSource);
         return collect($dataSource);
