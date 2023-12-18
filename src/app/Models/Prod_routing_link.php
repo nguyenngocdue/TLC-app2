@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\BigThink\HasShowOnScreens;
 use App\BigThink\ModelExtended;
 
 class Prod_routing_link extends ModelExtended
 {
+    use HasShowOnScreens;
+
     protected $fillable = [
         "id", "name", "parent", "description", "slug",  'owner_id',
         'prod_discipline_id', 'standard_uom_id', "workplace_id",
@@ -24,19 +27,6 @@ class Prod_routing_link extends ModelExtended
     public static $oracyParams = [
         "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
     ];
-
-    private static $showIsShowOn = false;
-    public function isShowOn($type)
-    {
-        $tableName = $this->getTable();
-        $allow = $this->getScreensShowMeOn()->pluck('id')->toArray();
-        $config = config("production.$tableName.$type");
-        if (is_null($config) && !static::$showIsShowOn) {
-            static::$showIsShowOn = true;
-            dump($type . " is not registered for Filter of [$tableName].");
-        }
-        return in_array($config, $allow);
-    }
 
     public function getStandardUom()
     {

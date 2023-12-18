@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\BigThink\HasShowOnScreens;
 use App\BigThink\ModelExtended;
 
 class Prod_routing extends ModelExtended
 {
+    use HasShowOnScreens;
+
     protected $fillable = [
         "name", "description", "slug", "owner_id",
     ];
@@ -28,20 +31,6 @@ class Prod_routing extends ModelExtended
         "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
         "getExternalInspectorsOfProdRouting()" => ['getCheckedByField', User::class],
     ];
-
-    private static $showIsShowOn = false;
-    public function isShowOn($type)
-    {
-        $tableName = $this->getTable();
-        $allow = $this->getScreensShowMeOn()->pluck('id')->toArray();
-        $key = "production.$tableName.$type";
-        $config = config($key);
-        if (is_null($config) && !static::$showIsShowOn) {
-            static::$showIsShowOn = true;
-            dump($type . " is not registered for Filter of [$tableName].");
-        }
-        return in_array($config, $allow);
-    }
 
     public function getProdRoutingLinks()
     {

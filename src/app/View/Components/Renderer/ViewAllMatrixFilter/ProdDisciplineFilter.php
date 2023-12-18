@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Prod_discipline;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
@@ -32,9 +33,13 @@ class ProdDisciplineFilter extends Component
 
     private function getDataSource()
     {
-        return Prod_discipline::select('id', 'name', 'description')
+        $db = Prod_discipline::select('id', 'name', 'description')
             ->orderBy('name')
             ->get();
+
+        $db = $db->filter(fn ($item) => $item->isShowOn(CurrentRoute::getTypePlural()))->values();
+
+        return $db;
     }
 
     /**

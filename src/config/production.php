@@ -12,4 +12,7 @@ return [
         "place_holder" => 364,
         "report_toc" => 365,
     ],
+    "prod_disciplines" => [
+        "prod_sequences" => 347,
+    ],
 ];

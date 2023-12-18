@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\BigThink\HasShowOnScreens;
 use App\BigThink\ModelExtended;
 
 class Prod_discipline extends ModelExtended
 {
+    use HasShowOnScreens;
+
     public $fillable = [
         "id", "name", "description", "slug", "def_assignee", "owner_id",
         "css_class"
