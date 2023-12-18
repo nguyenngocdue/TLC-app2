@@ -96,7 +96,7 @@ class ViewAllInvokerController extends Controller
                 }
             }
             for ($i = 0; $i < sizeof(['no', 'name', 'prod_name', 'qty', 'progress']); $i++) {
-                array_unshift($xAxis2ndHeadingArr, "123"); //For No.
+                array_unshift($xAxis2ndHeadingArr, ""); //For Excel spanning.
             }
 
             $columns = array_values(array_map(fn ($item) => (isset($item['title']) ?
