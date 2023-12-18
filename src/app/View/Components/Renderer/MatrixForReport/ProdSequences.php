@@ -31,7 +31,9 @@ class ProdSequences extends MatrixForReportParent
     {
         $result = Prod_routing::query()
             ->with(['getProdRoutingDetails' => function ($q) {
-                $q->with('getProdRoutingLink');
+                $q->with(['getProdRoutingLink' => function ($q) {
+                    $q->with('getDiscipline');
+                }]);
             }])
             ->find($this->prodRoutingId);
         $allRoutingLinkDetails = $result->getProdRoutingDetails;
