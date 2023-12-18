@@ -18,16 +18,6 @@ class ExamSheetPageEdit extends Component
         // dump($id, $type);
     }
 
-    function groupByQuestionId($lines)
-    {
-        $grouped = [];
-        foreach ($lines as $line) {
-            $grouped[$line->exam_question_id][$line->sub_question_1_id ?? 0][$line->sub_question_2_id ?? 0] = $line;
-        }
-        // dd($grouped);
-        return $grouped;
-    }
-
     function render()
     {
         $id = $this->id;
@@ -62,7 +52,7 @@ class ExamSheetPageEdit extends Component
         // dump($tableOfContents);
         $route = route(Str::plural($this->type) . '.update', $this->id);
 
-        $sheetLines = $this->groupByQuestionId($sheet->getSheetLines);
+        $sheetLines = Exam_sheet::groupByQuestionId($sheet->getSheetLines);
         $sheetStatus = $sheet->status;
 
         if ($sheet->owner_id !== CurrentUser::id()) {

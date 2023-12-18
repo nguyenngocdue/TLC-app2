@@ -56,6 +56,7 @@
                             value="{{$i}}:::{{$i}}"  
                             type="checkbox"
                             @checked($checked)
+                            @disabled($readOnly)
                             class="disabled:bg-gray-500 disabled:cursor-not-allowed"
                             onclick="reRenderRankTable({{$questionId}}, {{$countAllDynamicAnswer}})"
                             onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}'))" 

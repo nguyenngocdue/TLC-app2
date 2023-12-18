@@ -20,10 +20,11 @@
                 $avatar = $object['avatar'] ?? null;
             @endphp
             <div class="{{$renderAsRows ? 'flex items-center px-2' : 'text-center'}} col-span-1 m-1 p-2 rounded hover:bg-blue-100" onclick="">
-                <input class="cursor-pointer" type="radio" 
+                <input class="cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed" type="radio" 
                         id="option_{{$questionId}}_{{$id}}" 
                         name="question_{{$questionId}}" 
                         @checked($id == $value)
+                        @disabled($readOnly)
                         onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', event.target.value)" 
                         value="{{$id}}:::{{$label}}">
                 @if($renderAsRows)

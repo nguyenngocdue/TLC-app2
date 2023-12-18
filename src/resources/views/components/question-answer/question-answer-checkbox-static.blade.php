@@ -16,9 +16,10 @@
 <div class="grid {{$renderAsRows ?: 'grid-cols-12'}}">
     @foreach($staticAnswer as $index => $label)
     <div class="{{$renderAsRows ?: 'text-center'}} col-span-1 m-1 p-2 rounded hover:bg-blue-100" onclick="">
-        <input class="cursor-pointer" type="checkbox" 
+        <input class="cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed" type="checkbox" 
             id="option_{{$questionId}}_{{$label}}" 
             @checked(in_array($label, $values))
+            @disabled($readOnly)
             name="question_{{$questionId}}[]" 
             onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}[]'))" 
             value="{{$index}}:::{{$label}}">

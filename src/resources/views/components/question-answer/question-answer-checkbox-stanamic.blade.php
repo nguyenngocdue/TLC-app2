@@ -52,6 +52,7 @@
                                 id="{{$chkId}}" 
                                 value="{{$i}}:::{{$staticAnswer[$i_1]}}"  
                                 @checked($checked)
+                                @disabled($readOnly)
                                 type="checkbox"
                                 onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}[]'))" 
                                 class="disabled:bg-gray-500 disabled:cursor-not-allowed"

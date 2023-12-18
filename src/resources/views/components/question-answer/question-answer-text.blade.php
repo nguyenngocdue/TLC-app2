@@ -8,5 +8,6 @@
 <input name="question_{{$questionId}}" 
     class="border rounded p-1 m-1 w-full border-gray-500" 
     value="{{$value}}"
+    @readonly($readOnly)
     onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', event.target.value)" 
     />

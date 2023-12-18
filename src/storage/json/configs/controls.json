@@ -55,6 +55,7 @@
         "picker_year",
         "radio",
         "relationship_renderer",
+        "question_answer_renderer",
         "toggle",
         "signature",
         "signature_multi",

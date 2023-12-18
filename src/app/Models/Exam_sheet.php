@@ -37,4 +37,14 @@ class Exam_sheet extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+    public static function groupByQuestionId($lines)
+    {
+        $grouped = [];
+        foreach ($lines as $line) {
+            $grouped[$line->exam_question_id][$line->sub_question_1_id ?? 0][$line->sub_question_2_id ?? 0] = $line;
+        }
+        // dd($grouped);
+        return $grouped;
+    }
 }

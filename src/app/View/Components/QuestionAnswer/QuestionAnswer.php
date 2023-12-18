@@ -19,10 +19,13 @@ class QuestionAnswer extends Component
     private $MY_RELATED_DEPTS = 394;
 
     function __construct(
-        private $item = [],
+        private $item = [], //Sheet's Question, exam_tmpl_questions
         private $debug = false,
-        private $line = null,
+        private $line = null, //Sheet's Answers, exam_sheet_lines
+        private $readOnly = false,
     ) {
+        // dump($item);
+        // dump($line);
     }
 
     function getMemberOfTeam($department)
@@ -159,6 +162,7 @@ class QuestionAnswer extends Component
                 'debug' => $this->debug,
                 'controlId' => $questionType,
                 'line' => $this->line,
+                'readOnly' => $this->readOnly,
             ]
         );
     }

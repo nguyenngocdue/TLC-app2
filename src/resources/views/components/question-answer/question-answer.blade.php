@@ -127,6 +127,7 @@
                     :line="$line"
                     :validation="$validation"
                     :gridCols="$gridCols"
+                    :readOnly="$readOnly"
                     
                     />', [
                         'questionId' => $questionId,
@@ -138,6 +139,7 @@
                         'line' => $line,
                         'validation' => $validation,
                         'gridCols' => $item['grid_cols'] ?? 12,
+                        'readOnly' => $readOnly,
                         // 'questionJSKey' => $questionJSKey,
                     ]);
                 }

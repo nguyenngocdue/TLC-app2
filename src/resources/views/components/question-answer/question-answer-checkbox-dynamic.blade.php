@@ -35,10 +35,11 @@
             @endphp
             
             <div class="{{$renderAsRows ? 'flex items-center' : 'text-center'}} col-span-1 m-1 p-2 rounded hover:bg-blue-100" onclick="">
-                    <input class="cursor-pointer" type="checkbox" 
+                    <input class="cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed" type="checkbox" 
                         id="option_{{$name}}_{{$id}}" 
                         name="{{$name}}[]" 
                         @checked(in_array($id,$values))
+                        @disabled($readOnly)
                         onchange="refreshValidation('{{$questionJSKey}}', '{{$validation}}', countCheckedByName('{{$name}}[]'))" 
                         value="{{$id}}:::{{$label}}">
                     @if($renderAsRows)
