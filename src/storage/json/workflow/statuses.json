@@ -335,6 +335,13 @@
         "color_index": "200",
         "icon": null
     },
+    "testing": {
+        "name": "testing",
+        "title": "Testing",
+        "color": "red",
+        "color_index": "800",
+        "icon": null
+    },
     "timesheet_only": {
         "name": "timesheet_only",
         "title": "Timesheet Only",

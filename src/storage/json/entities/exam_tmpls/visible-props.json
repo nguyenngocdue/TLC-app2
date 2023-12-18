@@ -2,56 +2,89 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     },
     "_getGroups": {
         "name": "_getGroups",
         "column_name": "getGroups",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     },
     "_getQuestions": {
         "name": "_getQuestions",
         "column_name": "getQuestions",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true"
+        "new": "true",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
     }
 }

@@ -23,7 +23,11 @@ class ExamSheetPageCreate extends Component
 
         $sheets = Exam_sheet::query()->where('owner_id', $cuid)->get();
 
-        $allExams = Exam_tmpl::query()->whereNotIn('id', $sheets->pluck('exam_tmpl_id'));
+        $status = $isAdmin ? ['testing', 'publish'] : ['publish'];
+
+        $allExams = Exam_tmpl::query()
+            ->whereIn('status', $status)
+            ->whereNotIn('id', $sheets->pluck('exam_tmpl_id'));
         if (!$isAdmin) $allExams = $allExams->where('id', 2);
         $allExams = $allExams->get();
         // dump($availableExams);

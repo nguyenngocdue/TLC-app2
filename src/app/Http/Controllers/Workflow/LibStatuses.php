@@ -15,8 +15,10 @@ class LibStatuses extends AbstractLibForForm
         // dd($data);
         foreach ($data as &$line) {
             // dump($line['color']);
-            $text_index = $line['color'] . "-" . $line["color_index"];
-            $bg_index = $line['color'] . "-" . (1000 - $line["color_index"]);
+            $color = $line['color'] ?? 'red';
+            $color_index = $line['color_index'] ?? 400;
+            $text_index = $color . "-" . $color_index;
+            $bg_index = $color . "-" . (1000 - $color_index);
 
             $line['bg_color'] = $text_index;
             $line['text_color'] = $bg_index;

@@ -1,0 +1,34 @@
+{
+    "new": {
+        "name": "new",
+        "location": "-120.00 -120.00",
+        "new": "",
+        "testing": "true",
+        "publish": "true",
+        "closed": "true"
+    },
+    "testing": {
+        "name": "testing",
+        "location": "-120.00 0.00",
+        "new": "",
+        "testing": "",
+        "publish": "true",
+        "closed": "true"
+    },
+    "publish": {
+        "name": "publish",
+        "location": "10.00 100.00",
+        "new": "",
+        "testing": "true",
+        "publish": "",
+        "closed": "true"
+    },
+    "closed": {
+        "name": "closed",
+        "location": "250.00 50.00",
+        "new": "",
+        "testing": "true",
+        "publish": "true",
+        "closed": ""
+    }
+}
