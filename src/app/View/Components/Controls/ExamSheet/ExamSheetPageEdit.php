@@ -3,7 +3,6 @@
 namespace App\View\Components\Controls\ExamSheet;
 
 use App\Models\Exam_sheet;
-use App\Models\Exam_tmpl_question;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
@@ -26,28 +25,10 @@ class ExamSheetPageEdit extends Component
             ->with('getSheetLines')
             ->get();
         $sheet = $sheet[0];
+        $exam_tmpl_id = $sheet->exam_tmpl_id;
         // dump($sheet);
 
-        $exam_tmpl_id = $sheet->exam_tmpl_id;
-        $dataSource = Exam_tmpl_question::query()
-            ->where("exam_tmpl_id", $exam_tmpl_id)
-            ->with('getExamTmplGroup')
-            ->orderBy('order_no')
-            ->get();
-        // dump($dataSource);
-
-        $isAManager =  CurrentUser::get()->isAManager();
-        // $isAManager = true;
-        $HIDE_WHEN_I_AM_NOT_A_MANAGER = 400;
-
-        foreach ($dataSource as $line) {
-            if (!$line->exam_tmpl_group_id) {
-                dd("What is the group of question [$line->id] ?");
-            }
-        }
-
-        $dataSource = $dataSource->filter(fn ($i) => (($i->getExamTmplGroup->hide_when) != $HIDE_WHEN_I_AM_NOT_A_MANAGER || $isAManager));
-
+        $dataSource = Exam_sheet::getQuestionsOfSheet($sheet);
         $tableOfContents = $dataSource->map(fn ($i) => $i->getExamTmplGroup)->unique();
         // dump($tableOfContents);
         $route = route(Str::plural($this->type) . '.update', $this->id);

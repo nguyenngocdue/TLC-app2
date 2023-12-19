@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\BigThink\ModelExtended;
+use App\Utils\Support\CurrentUser;
 
 class Exam_sheet extends ModelExtended
 {
@@ -51,5 +52,29 @@ class Exam_sheet extends ModelExtended
         }
         // dd($grouped);
         return $grouped;
+    }
+
+    public static function getQuestionsOfSheet($sheet)
+    {
+        $exam_tmpl_id = $sheet->exam_tmpl_id;
+        $dataSource = Exam_tmpl_question::query()
+            ->where("exam_tmpl_id", $exam_tmpl_id)
+            ->with('getExamTmplGroup')
+            ->orderBy('order_no')
+            ->get();
+        // dump($dataSource);
+
+        $isAManager =  CurrentUser::get()->isAManager();
+        // $isAManager = true;
+        $HIDE_WHEN_I_AM_NOT_A_MANAGER = 400;
+
+        foreach ($dataSource as $line) {
+            if (!$line->exam_tmpl_group_id) {
+                dd("What is the group of question [$line->id] ?");
+            }
+        }
+
+        $dataSource = $dataSource->filter(fn ($i) => (($i->getExamTmplGroup->hide_when) != $HIDE_WHEN_I_AM_NOT_A_MANAGER || $isAManager));
+        return $dataSource;
     }
 }

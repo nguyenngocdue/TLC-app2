@@ -62,22 +62,8 @@
             @break
         @case('question_answer_renderer')
             <div class='p-2  border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
-            @php
-                $owner_id = ($item->owner_id);
-                $cuid = (App\Utils\Support\CurrentUser::id());
-            @endphp
-            @if($owner_id == $cuid)
-                @php
-                    $sheetLines = App\Models\Exam_sheet::groupByQuestionId($item->getSheetLines);
-                    $questions = $item->getExamTmpl->getQuestions;
-                @endphp
-                @foreach($questions as $question)
-                    <x-question-answer.question-answer readOnly={{true}} :item="$question" :line="$sheetLines[$question->id] ?? null"/>
-                @endforeach
-            @else
-            You cannot print answer sheet of someone else.
-            @endif
-                </div>
+                <x-print.render-question-answer5 :item="$item" />
+            </div>
             @break
         @default
             <span class='p-2  border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>{{$content}}</span>
