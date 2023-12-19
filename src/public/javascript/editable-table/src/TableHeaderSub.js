@@ -1,14 +1,13 @@
-export const TableHeader = (params) => {
+export const TableHeaderSub = (params) => {
     const { columns, settings } = params
-    console.log(params)
-    const { thead_tr } = settings.cssClass
+    const { trClassList } = settings
     const ths = []
     for (let i = 0; i < columns.length; i++) {
         const { dataIndex, title } = columns[i]
         ths.push(`<th title="${dataIndex}">${title}</th>`)
     }
     return `<thead class="sticky z-10 top-0">
-        <tr class="${thead_tr}">
+        <tr class="${trClassList}">
             ${ths.join('')}
         </tr>
     </thead>`

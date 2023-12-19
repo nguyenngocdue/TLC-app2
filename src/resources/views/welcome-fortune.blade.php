@@ -11,7 +11,15 @@
     
 const columns = DataSource.UserColumns
 const dataSource = DataSource.Users
-$("#divMain").html(EditableTable({columns, dataSource}))
+
+const tables = `
+    Editable Mode
+    ${EditableTable({columns, dataSource, settings: DataSource.TableSettings.editableMode})}
+    Print Mode
+    ${EditableTable({columns, dataSource, settings: DataSource.TableSettings.printMode})}
+`
+
+$("#divMain").html(tables)
 </script>
 
 @endsection 

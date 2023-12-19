@@ -2,15 +2,23 @@
 
 /*! ../../public/javascript/editable-table/src/EditableTable */
 
-/*! ./DataSource */
+/*! ../DataSource */
 
-/*! ./TableColGroup */
+/*! ../TableColGroup */
 
-/*! ./TableFooter */
+/*! ../TableFooter */
 
-/*! ./TableHeader */
+/*! ../TableHeader */
 
-/*! ./TableRows */
+/*! ../TableHeaderSub */
+
+/*! ../TableRows */
+
+/*! ./EditableMode */
+
+/*! ./TableMode/EditableModeWrapper */
+
+/*! ./TableMode/PrintMode */
 
 /*! ./TableSettings */
 
@@ -42,6 +50,10 @@
   !*** ./public/javascript/editable-table/src/TableColGroup.js ***!
   \***************************************************************/
 
+/*!****************************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableHeaderSub.js ***!
+  \****************************************************************/
+
 /*!******************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/Users.js ***!
   \******************************************************************/
@@ -50,10 +62,22 @@
   !*** ./public/javascript/editable-table/src/DataSource/index.js ***!
   \******************************************************************/
 
+/*!*********************************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableMode/PrintMode.js ***!
+  \*********************************************************************/
+
 /*!************************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/UserColumns.js ***!
+  \************************************************************************/
+
+/*!************************************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableMode/EditableMode.js ***!
   \************************************************************************/
 
 /*!**************************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/TableSettings.js ***!
   \**************************************************************************/
+
+/*!*******************************************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableMode/EditableModeWrapper.js ***!
+  \*******************************************************************************/

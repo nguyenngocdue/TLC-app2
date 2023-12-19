@@ -1,14 +1,14 @@
-import { DataSource } from "./DataSource"
-
 export const TableFooter = (params) => {
-    const { columns } = params
-    const { trClassList } = DataSource.TableSettings
+    const { columns, settings } = params
+    const { tfoot_tr } = settings.cssClass
     const ths = []
     for (let i = 0; i < columns.length; i++) {
         const { dataIndex, title } = columns[i]
         ths.push(`<th title="${dataIndex}">${title}</th>`)
     }
-    return `<tr class="${trClassList}">
-        ${ths.join('')}
-    </tr>`
+    return `<tfoot>
+        <tr class="${tfoot_tr}">
+            ${ths.join('')}
+        </tr>
+    </tfoot>`
 }

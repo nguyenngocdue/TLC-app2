@@ -1,9 +1,7 @@
-import { DataSource } from './DataSource'
-
-export const TableRows = ({ columns, dataSource }) => {
-
+export const TableRows = (params) => {
+    const { columns, dataSource, settings } = params
     const x = dataSource.map((line, index) => {
-        const { trClassList } = DataSource.TableSettings
+        const { trClassList } = settings
         const y = columns.map((element, index) => {
             const { dataIndex } = element
             return `<td>${line[dataIndex]}</td>`
