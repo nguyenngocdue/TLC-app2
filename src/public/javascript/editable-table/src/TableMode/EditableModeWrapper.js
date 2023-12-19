@@ -23,11 +23,18 @@ export const EditableModeWrapper = (params) => {
         <span class="${cssClass3} justify-end">${bottomRightControls}</span>
     </div>`
 
-    return `
-        ${header ? `<div class="${cssClassHeader}">${header}</div>` : ''}
-        ${showPaginationTop ? `${topBar}` : ``}
-        ${editableMode}
-        ${showPaginationBottom ? `${bottomBar}` : ``}
-        ${footer ? `<div class="${cssClassFooter}">${footer}</div>` : ''}
+
+
+    return `<div class="border rounded-lg border-gray-300 dark:border-gray-600 ">
+        <div>
+            <div class="inline-block1 w-full sm:px-0 lg:px-0 ">
+                ${header ? `<div class="${cssClassHeader}">${header}</div>` : ''}
+                ${showPaginationTop ? `${topBar}` : ``}
+                ${editableMode}
+                ${showPaginationBottom ? `${bottomBar}` : ``}
+                ${footer ? `<div class="${cssClassFooter}">${footer}</div>` : ''}
+            </div>
+        </div>
+    </div>
     `
 }

@@ -10,5 +10,7 @@ export const TableRows = (params) => {
     })
 
     // console.log(x)
-    return x.join('')
+    return `<tbody class='divide-y bg-white dark:divide-gray-700 dark:bg-gray-800'>
+        ${x.join('')}
+    </tbody>`
 }
