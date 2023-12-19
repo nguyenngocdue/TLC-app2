@@ -311,6 +311,11 @@ abstract class MatrixForReportParent extends Component
         return [$columns, $dataSource, $xAxis2ndHeading];
     }
 
+    function getCsvExportParams()
+    {
+        return [];
+    }
+
     function getActionButtons()
     {
         $actionBtnList = [
@@ -318,15 +323,20 @@ abstract class MatrixForReportParent extends Component
             'printTemplate' => false,
             'approveMulti' => false,
         ];
+        $params = [
+            'groupBy' => $this->groupBy,
+            'groupByLength' => $this->groupByLength,
+            ...$this->getCsvExportParams(),
+        ];
 
         $actionButtons = Blade::render("<x-form.action-button-group-view-matrix
             routePrefix='_mep2.exportCsvMatrix2'
             type='$this->type'
-            groupBy='$this->groupBy'
-            groupByLength='$this->groupByLength'
             :actionBtnList='\$actionBtnList'
+            :params='\$params'
             />", [
             'actionBtnList' => $actionBtnList,
+            'params' => $params,
         ]);
 
         return $actionButtons;

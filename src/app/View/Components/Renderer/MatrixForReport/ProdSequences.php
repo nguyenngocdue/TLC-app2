@@ -114,4 +114,15 @@ class ProdSequences extends MatrixForReportParent
         }
         return $result;
     }
+
+    function getCsvExportParams()
+    {
+        return [
+            'prodRoutingId' => $this->prodRoutingId,
+            'subProjectId' => $this->subProjectId,
+            'dateToCompare' => $this->dateToCompare,
+            'sequenceModeId' => $this->sequenceModeId,
+            'prodDisciplineId' => $this->prodDisciplineId,
+        ];
+    }
 }
