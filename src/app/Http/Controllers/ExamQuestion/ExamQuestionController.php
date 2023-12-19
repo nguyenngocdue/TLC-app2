@@ -6,6 +6,7 @@ use App\Mail\MailExamSubmitted;
 use App\Models\Exam_sheet;
 use App\Models\Exam_sheet_line;
 use App\Models\Exam_tmpl;
+use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\QuestionAnswer\QuestionAnswer;
 use Illuminate\Http\Request;
@@ -21,7 +22,18 @@ class ExamQuestionController
             // dump($type);
             $modelPath = Str::modelPathFrom($type);
             // dump($modelPath);
-            $item = $modelPath::create($input);
+            // dd($input);
+
+            $user_id = $input['owner_id'];
+            $user = User::find($user_id);
+            $employee = [
+                'employee_id' => $user->employeeid,
+                'employee_name' => $user->name,
+                'employee_department' => $user->getUserDepartment->name,
+                'employee_position' => $user->getPosition->name,
+            ];
+
+            $item = $modelPath::create([...$input, ...$employee]);
             // dump($id);
             $plural = Str::plural($type);
             $route = route($plural . ".edit", $item->id);
