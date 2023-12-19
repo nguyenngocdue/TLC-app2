@@ -12,6 +12,7 @@ class Exam_sheet extends ModelExtended
         "employee_id",
         "employee_position",
         "employee_department",
+        "employee_manager",
         "exam_tmpl_id", "comment",
     ];
 

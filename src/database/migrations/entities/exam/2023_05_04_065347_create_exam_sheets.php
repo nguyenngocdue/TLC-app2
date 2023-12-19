@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('employee_id')->nullable();
             $table->string('employee_position')->nullable();
             $table->string('employee_department')->nullable();
+            $table->string('employee_manager')->nullable();
 
             $table->hasStatus();
             $table->appendCommonFields();

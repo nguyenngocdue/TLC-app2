@@ -31,6 +31,7 @@ class ExamQuestionController
                 'employee_name' => $user->name,
                 'employee_department' => $user->getUserDepartment->name,
                 'employee_position' => $user->getPosition->name,
+                'employee_manager' => $user->getUserDiscipline->getDefAssignee->name,
             ];
 
             $item = $modelPath::create([...$input, ...$employee]);
