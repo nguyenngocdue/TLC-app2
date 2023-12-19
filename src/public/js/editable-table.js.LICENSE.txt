@@ -1,8 +1,14 @@
-/*! ../../public/javascript/editable-table/src */
-
 /*! ../../public/javascript/editable-table/src/DataSource */
 
-/*! ./TableRow */
+/*! ../../public/javascript/editable-table/src/EditableTable */
+
+/*! ./TableColGroup */
+
+/*! ./TableFooter */
+
+/*! ./TableHeader */
+
+/*! ./TableRows */
 
 /*! ./UserColumns */
 
@@ -12,13 +18,25 @@
   !*** ./resources/js/editable-table.js ***!
   \****************************************/
 
-/*!*******************************************************!*\
-  !*** ./public/javascript/editable-table/src/index.js ***!
-  \*******************************************************/
+/*!***********************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableRows.js ***!
+  \***********************************************************/
 
-/*!**********************************************************!*\
-  !*** ./public/javascript/editable-table/src/TableRow.js ***!
-  \**********************************************************/
+/*!*************************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableFooter.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableHeader.js ***!
+  \*************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./public/javascript/editable-table/src/EditableTable.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableColGroup.js ***!
+  \***************************************************************/
 
 /*!******************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/Users.js ***!

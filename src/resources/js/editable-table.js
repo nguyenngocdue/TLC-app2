@@ -1,4 +1,4 @@
-import { EditableTable } from "../../public/javascript/editable-table/src";
+import { EditableTable } from "../../public/javascript/editable-table/src/EditableTable";
 window.EditableTable = EditableTable
 
 
