@@ -80,7 +80,9 @@ class ViewAllInvokerController extends Controller
     public function exportCsvMatrixForReport(Request $request)
     {
         try {
-            $matrix = new \App\View\Components\Renderer\MatrixForReport\ProdSequences();
+            $params = $request->input();
+            // dump($params);
+            $matrix = new \App\View\Components\Renderer\MatrixForReport\ProdSequences(...$params);
             [$columns, $dataSource, $xAxis2ndHeading] = $matrix->getMatrixForReportParams(true);
 
             // dump($columns);
