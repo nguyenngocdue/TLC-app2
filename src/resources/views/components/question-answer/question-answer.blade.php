@@ -150,7 +150,7 @@
  
 @once
 <script>
-    const reRenderRankTable = (questionId, count) => {
+    const reRenderRankTable = (questionId, count, readOnly=false) => {
         let array = [];
         const checked = []
         for (let i = 0; i < count; i++) {
@@ -181,7 +181,8 @@
         for (let i = 0; i < count; i++) {
             for (let j = 0; j < count; j++) {
                 const id = "chk_" + questionId + "_" + i + "_"+j;
-                const disabled = array[i][j]
+
+                const disabled = readOnly ? true : array[i][j]
                 $("#"+id).prop('disabled', disabled);
             }
         }

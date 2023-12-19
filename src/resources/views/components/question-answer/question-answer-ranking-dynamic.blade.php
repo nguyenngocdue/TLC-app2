@@ -76,5 +76,5 @@
 </table>
 
 <script>
-    reRenderRankTable({{$questionId}}, {{$countAllDynamicAnswer}})
+    reRenderRankTable({{$questionId}}, {{$countAllDynamicAnswer}}, {{$readOnly}})
 </script>

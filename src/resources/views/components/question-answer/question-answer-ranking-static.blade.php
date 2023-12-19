@@ -63,6 +63,6 @@
 </table>
 
 <script>
-    reRenderRankTable({{$questionId}}, {{sizeof($staticAnswer)}})
+    reRenderRankTable({{$questionId}}, {{sizeof($staticAnswer)}}, {{$readOnly}})
 </script>
 
