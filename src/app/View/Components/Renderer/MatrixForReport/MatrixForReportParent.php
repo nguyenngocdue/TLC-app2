@@ -97,7 +97,7 @@ abstract class MatrixForReportParent extends Component
         $result = [];
         foreach ($dataSource as $yId => $columns) {
             foreach ($xAxis as $x) {
-                $result[$yId][$x->id] = ""; //Make placeholder, incase if null, export to excel will have blank cell
+                $result[$yId][$x->id] = "-"; //Make placeholder, incase if null, export to excel will have cell with -
             }
         }
         foreach ($dataSource as $yId => $columns) {
