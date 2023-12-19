@@ -2,6 +2,8 @@
 
 /*! ../../public/javascript/editable-table/src/EditableTable */
 
+/*! ./DataSource */
+
 /*! ./TableColGroup */
 
 /*! ./TableFooter */
@@ -9,6 +11,8 @@
 /*! ./TableHeader */
 
 /*! ./TableRows */
+
+/*! ./TableSettings */
 
 /*! ./UserColumns */
 
@@ -49,3 +53,7 @@
 /*!************************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/UserColumns.js ***!
   \************************************************************************/
+
+/*!**************************************************************************!*\
+  !*** ./public/javascript/editable-table/src/DataSource/TableSettings.js ***!
+  \**************************************************************************/
