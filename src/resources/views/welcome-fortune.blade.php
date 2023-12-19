@@ -8,8 +8,10 @@
 
 <script src="{{ asset('js/editable-table.js') }}"></script>
 <script>
-
-$("#divMain").html(EditableTable())
+    
+const columns = DataSource.UserColumns
+const dataSource = DataSource.Users
+$("#divMain").html(EditableTable({columns, dataSource}))
 </script>
 
 @endsection 
