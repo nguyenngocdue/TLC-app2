@@ -16,15 +16,19 @@ class ExamQuestionController
 {
     function store(Request $request, $type)
     {
-        $input = $request->input();
-        // dump($type);
-        $modelPath = Str::modelPathFrom($type);
-        // dump($modelPath);
-        $item = $modelPath::create($input);
-        // dump($id);
-        $plural = Str::plural($type);
-        $route = route($plural . ".edit", $item->id);
-        return redirect($route);
+        try {
+            $input = $request->input();
+            // dump($type);
+            $modelPath = Str::modelPathFrom($type);
+            // dump($modelPath);
+            $item = $modelPath::create($input);
+            // dump($id);
+            $plural = Str::plural($type);
+            $route = route($plural . ".edit", $item->id);
+            return redirect($route);
+        } catch (\Exception $e) {
+            dump($e->getMessage());
+        }
     }
 
     function parseQuestion($question)
