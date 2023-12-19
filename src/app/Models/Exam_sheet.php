@@ -8,6 +8,10 @@ class Exam_sheet extends ModelExtended
 {
     public $fillable = [
         "id", "name", "description", "owner_id", "status",
+        "employee_name",
+        "employee_id",
+        "employee_position",
+        "employee_department",
         "exam_tmpl_id", "comment",
     ];
 

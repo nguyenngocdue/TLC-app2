@@ -25,6 +25,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('comment')->nullable();
             $table->unsignedBigInteger('exam_tmpl_id')->nullable();
+            $table->string('employee_name')->nullable();
+            $table->string('employee_id')->nullable();
+            $table->string('employee_position')->nullable();
+            $table->string('employee_department')->nullable();
 
             $table->hasStatus();
             $table->appendCommonFields();
