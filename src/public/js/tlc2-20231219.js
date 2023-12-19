@@ -124,8 +124,8 @@ const flatpickrHandleChange = (name, selectedDates) => {
     hiddenInput.value = result;
 }
 
-const newFlatPickrDateTime = (id, name) => {
-    if (name === undefined) console.error("newFlatPickrDateTime missing second argument")
+const newFlatPickrDateTime = (id) => {
+    // if (name === undefined) console.error("newFlatPickrDateTime missing second argument")
     const element = document.getElementById(id)
     return flatpickr(element, {
         enableTime: true,
@@ -136,7 +136,7 @@ const newFlatPickrDateTime = (id, name) => {
         time_24hr: true,
         parseDate: newFlatPickrDateTimeParseDate,
         onChange: (selectedDates, dateStr, instance) => {
-            flatpickrHandleChange(name, selectedDates)
+            flatpickrHandleChange(id, selectedDates)
         }
     });
 }
