@@ -320,14 +320,14 @@ const onChangeDropdown2Dot = (listener) => {
 
         switch (control) {
             case "picker_date":
-                initFlatPickrDate(column_name).setDate(theValue)
+                newFlatPickrDate(column_name).setDate(theValue)
                 break
             //Haven't tested yet:
             // case "picker_time":
-            //     initFlatPickrTime(column_name).setDate(theValue)
+            //     newFlatPickrTime(column_name).setDate(theValue)
             //     break
             // case "picker_datetime":
-            //     initFlatPickrDateTime(column_name).setDate(theValue)
+            //     newFlatPickrDateTime(column_name).setDate(theValue)
             //     break
             default:
                 getEById(column_name).val(theValue)
@@ -352,7 +352,7 @@ const onChangeDropdown2DateOffset = (listener) => {
         if (debugListener) console.log(theValue)
 
         const twelveHoursLater = new Date((new Date()).getTime() + (theValue * 24 * 60 * 60 * 1000));
-        initFlatPickrDateTime(column_name, column_name).setDate(twelveHoursLater)
+        newFlatPickrDateTime(column_name).setDate(twelveHoursLater)
         flatpickrHandleChange(column_name, [twelveHoursLater])
 
         getEById(column_name).trigger('change')

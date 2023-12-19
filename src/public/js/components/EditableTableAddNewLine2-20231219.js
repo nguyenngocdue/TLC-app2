@@ -481,13 +481,13 @@ const addANewLineFull = (params) => {
                 if (column['renderer'] === 'toggle') {
                     getEById(id)[0].checked = value
                 } else if (column['control'] === 'picker_datetime') {
-                    initFlatPickrDateTime(id, id).setDate(value);
+                    newFlatPickrDateTime(id).setDate(value);
                     getEById("hidden_" + id).val(value);
                 } else if (column['control'] === 'picker_date') {
-                    initFlatPickrDate(id).setDate(value);
+                    newFlatPickrDate(id).setDate(value);
                 }
                 else if (column['control'] === 'picker_time') {
-                    initFlatPickrTime(id).setDate(value);
+                    newFlatPickrTime(id).setDate(value);
                 } else {
                     // console.log("Applying data for", id, value)
                     getEById(id).val(value)

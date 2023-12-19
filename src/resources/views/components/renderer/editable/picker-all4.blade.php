@@ -19,13 +19,13 @@
 @switch($control)
     @case('picker_datetime')
     <input type="hidden" name="{{$name}}" id="hidden_{{$name}}" value="{{$cell??$slot}}"/>
-    <script>initFlatPickrDateTime("{{$name}}", "{{$name}}");</script>
+    <script>newFlatPickrDateTime("{{$name}}");</script>
     @break
     @case('picker_date')
-    <script>initFlatPickrDate("{{$name}}");</script>
+    <script>newFlatPickrDate("{{$name}}");</script>
     @break
     @case('picker_time')
-    <script>initFlatPickrTime("{{$name}}");</script>
+    <script>newFlatPickrTime("{{$name}}");</script>
     @break
 @endswitch
 

@@ -197,7 +197,7 @@ const onChangeDropdown4DateOffset = (listener, table01Name, rowIndex) => {
         if (debugListener) console.log(theValue)
 
         const twelveHoursLater = new Date((new Date()).getTime() + (theValue * 24 * 60 * 60 * 1000));
-        initFlatPickrDateTime(id, id).setDate(twelveHoursLater)
+        newFlatPickrDateTime(id).setDate(twelveHoursLater)
         flatpickrHandleChange(id, [twelveHoursLater])
 
         getEById(id).trigger('change')

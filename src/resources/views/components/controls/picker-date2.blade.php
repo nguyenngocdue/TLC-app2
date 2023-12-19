@@ -13,4 +13,4 @@
     />
 </div>
 
-<script>initFlatPickrDate("{{$name}}");</script>
+<script>newFlatPickrDate("{{$name}}");</script>

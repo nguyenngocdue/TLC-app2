@@ -12,15 +12,15 @@ function onChangeDropdown4AggregateFromTable(id, value) {
             // console.log(targetName, prop.control)
             switch (control) {
                 case 'picker_date':
-                    const picker0 = initFlatPickrDate(targetName)
+                    const picker0 = newFlatPickrDate(targetName)
                     if (value === '1970-01-01') picker0.clear();
                     else picker0.setDate(value);
                     break;
                 case 'picker_time':
-                    initFlatPickrTime(targetName).setDate(value);
+                    newFlatPickrTime(targetName).setDate(value);
                     break;
                 case 'picker_datetime':
-                    const picker1 = initFlatPickrDateTime(targetName, targetName)
+                    const picker1 = newFlatPickrDateTime(targetName)
                     if (value === '1970-01-01 00:00:00') picker1.clear();
                     else picker1.setDate(value);
                     break;

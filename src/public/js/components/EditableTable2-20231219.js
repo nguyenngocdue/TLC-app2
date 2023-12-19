@@ -296,15 +296,15 @@ const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
         if (renderer === 'toggle') {
             getEById(id)[0].checked = value
         } else if (control === 'picker_datetime') {
-            initFlatPickrDateTime(id, id).setDate(value);
+            newFlatPickrDateTime(id).setDate(value);
             getEById("hidden_" + id).val(value);
             getEById(id).trigger('change', { batchLength: length })
         } else if (control === 'picker_date') {
-            initFlatPickrDate(id).setDate(value);
+            newFlatPickrDate(id).setDate(value);
             getEById(id).trigger('change', { batchLength: length })
         }
         else if (control === 'picker_time') {
-            initFlatPickrTime(id).setDate(value);
+            newFlatPickrTime(id).setDate(value);
             getEById(id).trigger('change', { batchLength: length })
         } else {
             // console.log("Applying data for", id, value)

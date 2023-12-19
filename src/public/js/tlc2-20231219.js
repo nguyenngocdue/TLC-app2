@@ -114,7 +114,7 @@ const convertToServerTimezoneStr = (datetimeString) => {
 //     console.log(y)
 // }
 
-const initFlatPickrDateTimeParseDate = (dateString, format) => convertToLocalTimezone(dateString)
+const newFlatPickrDateTimeParseDate = (dateString, format) => convertToLocalTimezone(dateString)
 
 const flatpickrHandleChange = (name, selectedDates) => {
     // console.log(selectedDates)
@@ -124,8 +124,8 @@ const flatpickrHandleChange = (name, selectedDates) => {
     hiddenInput.value = result;
 }
 
-const initFlatPickrDateTime = (id, name) => {
-    if (name === undefined) console.error("initFlatPickrDateTime missing second argument")
+const newFlatPickrDateTime = (id, name) => {
+    if (name === undefined) console.error("newFlatPickrDateTime missing second argument")
     const element = document.getElementById(id)
     return flatpickr(element, {
         enableTime: true,
@@ -134,14 +134,14 @@ const initFlatPickrDateTime = (id, name) => {
         dateFormat: 'Y-m-d H:i:S',
         weekNumbers: true,
         time_24hr: true,
-        parseDate: initFlatPickrDateTimeParseDate,
+        parseDate: newFlatPickrDateTimeParseDate,
         onChange: (selectedDates, dateStr, instance) => {
             flatpickrHandleChange(name, selectedDates)
         }
     });
 }
 
-const initFlatPickrTime = (id) => {
+const newFlatPickrTime = (id) => {
     const element = document.getElementById(id)
     return flatpickr(element, {
         noCalendar: true,
@@ -154,7 +154,7 @@ const initFlatPickrTime = (id) => {
     });
 }
 
-const initFlatPickrDate = (id) => {
+const newFlatPickrDate = (id) => {
     const element = document.getElementById(id)
     return flatpickr(element, {
         // enableTime: true,

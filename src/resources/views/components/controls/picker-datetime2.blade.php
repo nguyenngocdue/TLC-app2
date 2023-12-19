@@ -13,4 +13,4 @@
     />
 </div>
 <input name="{{$name}}" id="hidden_{{$name}}" type="hidden" value="{{$value}}"/>
-<script>initFlatPickrDateTime("{{$name}}", "{{$name}}");</script>
+<script>newFlatPickrDateTime("{{$name}}");</script>
