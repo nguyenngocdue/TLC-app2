@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/antd-vue.js": "/js/antd-vue.js",
+    "/js/editable-table.js": "/js/editable-table.js",
     "/js/number-to-words.js": "/js/number-to-words.js",
     "/js/lazysizes.js": "/js/lazysizes.js",
     "/js/lightgallery.js": "/js/lightgallery.js",

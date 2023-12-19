@@ -13,22 +13,24 @@ const TerserPlugin = require('terser-webpack-plugin');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .vue()
-    .postCss('resources/css/app.css', 'public/css', [
-        require('tailwindcss'),
-        require('autoprefixer'),
-    ]).webpackConfig({
-        plugins: [
-           new TerserPlugin({
-              terserOptions: {
-                 format: {
-                    semicolons: true,
-                 },
-              },
-           }),
-        ],
-     });
+   .vue()
+   .postCss('resources/css/app.css', 'public/css', [
+      require('tailwindcss'),
+      require('autoprefixer'),
+   ]).webpackConfig({
+      plugins: [
+         new TerserPlugin({
+            terserOptions: {
+               format: {
+                  semicolons: true,
+               },
+            },
+         }),
+      ],
+   });
 mix.js('resources/js/antd-vue.js', 'public/js').vue()
+
+mix.js('resources/js/editable-table.js', 'public/js')
 mix.js('resources/js/number-to-words.js', 'public/js')
 mix.js('resources/js/lazysizes.js', 'public/js')
-mix.js('resources/js/lightgallery.js', 'public/js').postCss('resources/css/lightgallery.css','public/css')
+mix.js('resources/js/lightgallery.js', 'public/js').postCss('resources/css/lightgallery.css', 'public/css')

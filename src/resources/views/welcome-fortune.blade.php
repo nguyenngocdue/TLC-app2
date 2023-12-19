@@ -3,5 +3,13 @@
 @section('title', '')
 
 @section('content')
-Hello World
+
+<div id="divMain"></div>
+
+<script src="{{ asset('js/editable-table.js') }}"></script>
+<script>
+
+$("#divMain").html(EditableTable())
+</script>
+
 @endsection 
