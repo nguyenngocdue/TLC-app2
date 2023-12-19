@@ -28,7 +28,7 @@
                 $avatar = $object['avatar'] ?? null;
             @endphp
             <tr class="hover:bg-blue-100">
-                    <td class="border px-5 py-1 flex items-center">
+                    <td class="border px-2 py-1 flex items-center">
                         @php
                            $value = ($line[$id][0]->response_values ?? "");
                            $questionJSKey = "{$questionId}_{$id}";
@@ -48,7 +48,7 @@
                         // dump($values);
                         $checked = in_array($i, $values);
                     @endphp
-                    <td class="border px-5 py-1 text-center">
+                    <td class="border px-2 py-1 text-center">
                         {{-- {{$chkId}} --}}
                         <input 
                             name="{{$name}}" 

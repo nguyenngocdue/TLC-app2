@@ -60,7 +60,11 @@ class ExamSheetPageEdit extends Component
         }
 
         if ($sheetStatus == 'finished') {
-            return view('components.controls.exam-sheet.exam-sheet-page-finished');
+            return view('components.controls.exam-sheet.exam-sheet-page-finished', [
+                'route' => route('exam_sheets.show', $id),
+                // 'exam_sheet_id' => $id,
+                // 'exam_tmpl_id' => $exam_tmpl_id,
+            ]);
         }
 
         if ($sheetStatus == 'submitted') {

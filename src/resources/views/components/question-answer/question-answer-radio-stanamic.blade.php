@@ -18,7 +18,7 @@
                 $avatar = $object['avatar'] ?? null;
             @endphp
             <tr class="hover:bg-blue-100">
-                <td class="border px-5 py-1 flex items-center">
+                <td class="border px-2 py-1 flex items-center">
                     @php
                         if($subQuestion2Id) {
                             $value = ($line[$id][$subQuestion2Id]->response_values ?? false) ;
@@ -46,7 +46,7 @@
                         }
                     @endphp
 
-                    <td class="border px-5 py-1 text-center">
+                    <td class="border px-2 py-1 text-center">
                         {{-- {{$chkId}} --}}
                         <input 
                             name="{{$name}}"

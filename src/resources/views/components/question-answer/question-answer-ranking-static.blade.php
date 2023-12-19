@@ -17,7 +17,7 @@
     @php $index=0; @endphp
     @foreach($staticAnswer as $id=>$name)
         <tr class="hover:bg-blue-100">
-            <td class="border px-5 py-1">
+            <td class="border px-2 py-1">
                 @php
                     $value = ($line[$name][0]->response_values ?? "");
                     $questionJSKey = "{$questionId}_{$name}";
@@ -36,7 +36,7 @@
                     $values = explode("|||", $value);
                     $checked = in_array($i, $values);
                 @endphp
-                <td class="border px-5 py-1 text-center">
+                <td class="border px-2 py-1 text-center">
                     {{-- {{$chkId}} --}}
                     <input 
                         name="question_{{$questionId}}_{{$name}}" 

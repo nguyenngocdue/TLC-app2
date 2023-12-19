@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\ExamQuestion;
 
+use App\Mail\MailExamSubmitted;
 use App\Models\Exam_sheet;
 use App\Models\Exam_sheet_line;
+use App\Models\Exam_tmpl;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\QuestionAnswer\QuestionAnswer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class ExamQuestionController
@@ -140,6 +143,17 @@ class ExamQuestionController
             $sheet = Exam_sheet::find($exam_sheet_id);
             $sheet->status = $input['status'];
             $sheet->save();
+
+            $exam_name = Exam_tmpl::find($exam_tmpl_id)->name;
+            $mail = new MailExamSubmitted([
+                'name' => CurrentUser::get()->name,
+                'exam_name' => $exam_name,
+                'url' => route($types . ".show", $exam_sheet_id),
+            ]);
+            $mail->subject("An Exam has been submitted: " . $exam_name);
+            Mail::to(CurrentUser::get())
+                // ->bcc()
+                ->send($mail);
         }
         return redirect(route($types . ".edit", $id));
     }
