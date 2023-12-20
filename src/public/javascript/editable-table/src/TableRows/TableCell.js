@@ -25,9 +25,10 @@ const getRenderer = (column, cell) => {
 export const TableCell = (params, cell, row, column, index) => {
     const { tableParams } = params
     const { tableId } = tableParams
-    const { hidden } = column
+    const { hidden, width = 100 } = column
     // if (hidden) return ''
     const renderer = getRenderer(column, cell)
     const fixedClass = getFixedClass(column, index, 'td', tableId)
-    return `<td class="border p-1 ${fixedClass} ${hidden ? 'hidden' : ''}" >${renderer}</td>`
+    const styleStr = `style="width:${width}px"`
+    return `<td class="border p-1 ${fixedClass} ${hidden ? 'hidden' : ''}" ${styleStr} >${renderer}</td>`
 }

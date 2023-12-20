@@ -9,13 +9,15 @@ export const TableHeader = (params) => {
         const { dataIndex, title, hidden, width = 100 } = columns[i]
         if (hidden) continue
         const fixedClass = getFixedClass(columns[i], i, 'th', tableId)
+        const styleStr = `style="width:${width}px"`
         ths.push(`<th 
             class="border ${fixedClass}" 
             title="${dataIndex}"
+            ${styleStr}
             >${title}</th>`)
     }
     return `<thead class="sticky z-10 top-0">
-        <tr class="${thead_tr}" style=>
+        <tr class="${thead_tr}">
             ${ths.join('')}
         </tr>
     </thead>`

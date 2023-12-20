@@ -8,7 +8,7 @@ export const TableHeaderToolbar = (params) => {
     const { trClassList } = settings
     const ths = []
     for (let i = 0; i < columns.length; i++) {
-        const { dataIndex, hidden } = columns[i]
+        const { dataIndex, hidden, width = 100 } = columns[i]
         if (hidden) continue
         let content = (headerToolbar[dataIndex]) || ''
         if (typeof content === 'object') {
@@ -19,7 +19,8 @@ export const TableHeaderToolbar = (params) => {
         }
 
         const fixedClass = getFixedClass(columns[i], i, "th", tableId)
-        ths.push(`<th class="border bg-gray-100 ${fixedClass}">${content}</th>`)
+        const styleStr = `style="width:${width}px"`
+        ths.push(`<th class="border bg-gray-100 ${fixedClass}" ${styleStr}>${content}</th>`)
 
     }
     return `<thead class="sticky z-10 top-0">
