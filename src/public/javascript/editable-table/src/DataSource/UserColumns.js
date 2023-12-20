@@ -3,14 +3,14 @@ export const UserColumns = [
         dataIndex: "no",
         title: "No.",
         renderer: '_no_',
-        freezed: 'left',
+        fixed: 'left',
     },
     {
         dataIndex: "action",
         title: "Action",
         renderer: 'action',
         control: 'action',
-        freezed: 'left',
+        fixed: 'left',
     },
     {
         dataIndex: "name",
@@ -18,7 +18,7 @@ export const UserColumns = [
         renderer: 'text',
         control: 'text',
         footer: 'agg_sum',
-        freezed: 'left',
+        fixed: 'left',
     },
     {
         dataIndex: "description",
@@ -75,6 +75,6 @@ export const UserColumns = [
         dataIndex: "no_renderer",
         title: "No Renderer",
         footer: 'agg_sum',
-        freezed: 'right',
+        fixed: 'right',
     },
 ]

@@ -1,9 +1,15 @@
 import { DataSource } from "./DataSource"
 
 const tableParams = {
-    id: "tableId",
+    id: "table_",
     maxH: 1000,
     tableWidth: 100,
+
+    tableName: 'prod_runs',
+    tableFnName: 'getProdRuns',
+
+    entityParentType: 'App\\Models\\Prod_sequence',
+    entityParentId: 100041,
 
     header: "This is a table header description",
 
@@ -29,40 +35,29 @@ export const EditableTableDemo = () => {
     params = { columns, dataSource, headerToolbar }
 
     settings = DataSource.TableSettings.editableMode
-    const tableParams1 = { ...tableParams }
-    const table01 = EditableTable({ ...params, settings, tableParams: tableParams1 })
+    const tableParams1a = { ...tableParams, id: tableParams.id + "1a", }
+    const table01a = EditableTable({ ...params, settings, tableParams: tableParams1a })
 
-    const tableParams2 = { ...tableParams, header: '', footer: '' }
-    const table02 = EditableTable({ ...params, settings, tableParams: tableParams2 })
+    const tableParams1b = { ...tableParams, id: tableParams.id + "1b", header: '', footer: '' }
+    const table01b = EditableTable({ ...params, settings, tableParams: tableParams1b })
 
-    const editableMode = `
-        Editable Mode
-        ${table01}
-        Editable Mode
-        ${table02}
-        `
+    const editableMode = `Editable Mode #${tableParams1a.id}${table01a}Editable Mode #${tableParams1b.id}${table01b}`
 
     settings = DataSource.TableSettings.printableMode
-    const printableMode = `
-    <div class="bg-gray-100 p-4 mb-2">    
-        Printable Mode
-        ${EditableTable({ ...params, settings, tableParams })}
-    </div>
-    <div class="bg-gray-100 p-4 mb-2">
-        Printable Mode
-        ${EditableTable({ ...params, settings, tableParams })}
-    </div>
-    `
+    const tableParams2a = { ...tableParams, id: tableParams.id + "2a", }
+    const table02a = EditableTable({ ...params, settings, tableParams: tableParams2a })
+
+    const tableParams2b = { ...tableParams, id: tableParams.id + "2b", header: '', footer: '' }
+    const table02b = EditableTable({ ...params, settings, tableParams: tableParams2b })
+
+    const printableMode = `<div class="bg-gray-100 p-4 mb-2">Printable Mode #${tableParams2a.id}${table02a}</div>
+    <div class="bg-gray-100 p-4 mb-2">Printable Mode #${tableParams2b.id}${table02b}</div>`
 
     const tables = `
     <div class="bg-white p-4">
         <div class="grid grid-cols-12 gap-4 m-4">
-            <div class="xl:col-span-6 md:col-span-12">
-                ${editableMode}
-            </div>
-            <div class="xl:col-span-6 md:col-span-12">
-                ${printableMode}
-            </div>
+            <div class="xl:col-span-6 md:col-span-12">${editableMode}</div>
+            <div class="xl:col-span-6 md:col-span-12">${printableMode}</div>
         </div>
     </div>
     `

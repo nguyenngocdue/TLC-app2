@@ -1,4 +1,5 @@
 import { ETAction } from "./Controls/ETAction"
+import { getFixedClass } from "./FrozenColumn"
 
 export const TableHeaderToolbar = (params) => {
     const { columns, settings, headerToolbar } = params
@@ -16,7 +17,8 @@ export const TableHeaderToolbar = (params) => {
             }
         }
 
-        ths.push(`<th class="border bg-gray-100">${content}</th>`)
+        const fixedClass = getFixedClass(columns[i], i, "th")
+        ths.push(`<th class="border bg-gray-100 ${fixedClass}">${content}</th>`)
 
     }
     return `<thead class="sticky z-10 top-0">

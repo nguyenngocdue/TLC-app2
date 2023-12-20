@@ -2,6 +2,7 @@ import { ETNo } from "../Controls/ETNo"
 import { ETText } from "../Controls/ETText"
 import { ETAction } from "../Controls/ETAction"
 import { ETToggle } from "../Controls/ETToggle"
+import { getFixedClass } from "../FrozenColumn"
 
 const getRenderer = (column, cell) => {
     const { renderer } = column
@@ -21,9 +22,10 @@ const getRenderer = (column, cell) => {
     }
 }
 
-export const TableCell = (params, cell, row, column) => {
+export const TableCell = (params, cell, row, column, index) => {
     const { hidden } = column
     // if (hidden) return ''
     const renderer = getRenderer(column, cell)
-    return `<td class="border overflow-hidden1 ${hidden ? 'hidden' : ''}" >${renderer}</td>`
+    const fixedClass = getFixedClass(column, index, 'td')
+    return `<td class="border ${fixedClass} ${hidden ? 'hidden' : ''}" >${renderer}</td>`
 }
