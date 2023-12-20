@@ -5,7 +5,7 @@ export const TableHeader = (params) => {
     for (let i = 0; i < columns.length; i++) {
         const { dataIndex, title, hidden } = columns[i]
         if (hidden) continue
-        ths.push(`<th title="${dataIndex}">${title}</th>`)
+        ths.push(`<th class="border" title="${dataIndex}">${title}</th>`)
     }
     return `<thead class="sticky z-10 top-0">
         <tr class="${thead_tr}">

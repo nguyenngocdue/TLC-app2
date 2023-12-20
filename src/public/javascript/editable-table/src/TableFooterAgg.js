@@ -5,7 +5,7 @@ export const TableFooterAgg = (params) => {
     for (let i = 0; i < columns.length; i++) {
         const { dataIndex, title, hidden } = columns[i]
         if (hidden) continue
-        ths.push(`<th title="${dataIndex}">${title}</th>`)
+        ths.push(`<th class="border" title="${dataIndex}">${title}</th>`)
     }
     return `<tfoot>
         <tr class="${tfoot_tr}">
