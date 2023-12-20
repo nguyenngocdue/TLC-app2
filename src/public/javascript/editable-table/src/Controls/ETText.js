@@ -1,3 +1,3 @@
 export const ETText = (cell) => {
-    return cell
+    return `<span class="truncate">${cell}</span>`
 }

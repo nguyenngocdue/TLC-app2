@@ -10,6 +10,7 @@ export const Users = [
         dob: '1988-06-26',
         tob: '12:34:56',
         languages: ['en', 'vi', 'cn'],
+        description: 'This is a very long text, as long as the table column can show on one line.',
     },
     {
         no: 2,
@@ -22,6 +23,7 @@ export const Users = [
         dob: '1992-01-31',
         tob: '12:34:56',
         languages: ['en', 'vi', 'th'],
+        description: 'This is a very long text, as long as the table column can show on one line.',
     },
     {
         no: 3,
@@ -34,6 +36,7 @@ export const Users = [
         dob: '1997-03-15',
         tob: '12:34:56',
         languages: ['en', 'vi', 'kh'],
+        description: 'This is a very long text, as long as the table column can show on one line.',
     },
     {
         no: 4,
@@ -46,5 +49,6 @@ export const Users = [
         dob: '1996-05-20',
         tob: '12:34:56',
         languages: ['en', 'vi', 'jp'],
+        description: 'This is a very long text, as long as the table column can show on one line.',
     },
 ]

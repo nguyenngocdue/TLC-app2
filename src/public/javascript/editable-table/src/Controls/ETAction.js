@@ -19,5 +19,7 @@ export const ETAction = (cell) => {
         const btnClass = btnClass0[cell[i]]
         result.push(`<button class="text-white text-xs border rounded p-1 ml-0.5 ${btnClass}">${icon}</button>`)
     }
-    return result.join("")
+    return `<span class="whitespace-nowrap">
+        ${result.join("")}
+    </span>`
 }

@@ -25,5 +25,5 @@ export const TableCell = (params, cell, row, column) => {
     const { hidden } = column
     // if (hidden) return ''
     const renderer = getRenderer(column, cell)
-    return `<td class="border ${hidden ? 'hidden' : ''}">${renderer}</td>`
+    return `<td class="border overflow-hidden1 ${hidden ? 'hidden' : ''}" >${renderer}</td>`
 }
