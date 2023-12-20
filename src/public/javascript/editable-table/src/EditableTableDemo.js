@@ -33,7 +33,7 @@ export const EditableTableDemo = () => {
         ${EditableTable({ columns, dataSource, settings, tableParams })}
     `
 
-    settings = DataSource.TableSettings.printMode
+    settings = DataSource.TableSettings.printableMode
     const printableMode = `
         Printable Mode
         ${EditableTable({ columns, dataSource, settings, tableParams })}

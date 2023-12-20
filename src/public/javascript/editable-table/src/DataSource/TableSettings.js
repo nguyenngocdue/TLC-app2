@@ -13,8 +13,8 @@ export const TableSettings = {
             tfoot_tr: trCssClass,
         },
     },
-    printMode: {
-        modeName: 'print-mode',
+    printableMode: {
+        modeName: 'printable-mode',
         cssClass: {
             table_css: `w-full min-w-full max-w-full`,
             thead: `none`,

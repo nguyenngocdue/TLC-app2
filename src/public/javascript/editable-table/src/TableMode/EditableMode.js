@@ -2,7 +2,7 @@ import { DataSource } from '../DataSource'
 import { TableColGroup } from '../TableColGroup'
 import { TableFooter } from '../TableFooter'
 import { TableHeader } from '../TableHeader'
-import { TableHeaderSub } from '../TableHeaderSub'
+import { TableHeaderToolbar } from '../TableHeaderToolbar'
 import { TableRows } from '../TableRows'
 
 export const EditableMode = (params) => {
@@ -12,7 +12,7 @@ export const EditableMode = (params) => {
     const { table_css, } = settings.cssClass
 
     const tableHeader = TableHeader({ columns, settings })
-    const tableHeaderSub = TableHeaderSub({ columns, settings })
+    const tableHeaderSub = TableHeaderToolbar({ columns, settings })
     const tableRows = TableRows({ columns, settings, dataSource })
     const tableFooter = TableFooter({ columns, settings })
     const tableColGroup = TableColGroup({ columns, settings })

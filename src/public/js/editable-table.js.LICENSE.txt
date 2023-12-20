@@ -2,13 +2,15 @@
 
 /*! ../DataSource */
 
+/*! ../TableBody */
+
 /*! ../TableColGroup */
 
 /*! ../TableFooter */
 
 /*! ../TableHeader */
 
-/*! ../TableHeaderSub */
+/*! ../TableHeaderToolbar */
 
 /*! ../TableRows */
 
@@ -20,7 +22,9 @@
 
 /*! ./TableMode/EditableModeWrapper */
 
-/*! ./TableMode/PrintMode */
+/*! ./TableMode/PrintableMode */
+
+/*! ./TableRows */
 
 /*! ./TableSettings */
 
@@ -39,6 +43,10 @@
 /*!***************************************************!*\
   !*** ./public/javascript/editable-table/index.js ***!
   \***************************************************/
+
+/*!***********************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableBody.js ***!
+  \***********************************************************/
 
 /*!***********************************************************!*\
   !*** ./public/javascript/editable-table/src/TableCell.js ***!
@@ -64,10 +72,6 @@
   !*** ./public/javascript/editable-table/src/TableColGroup.js ***!
   \***************************************************************/
 
-/*!****************************************************************!*\
-  !*** ./public/javascript/editable-table/src/TableHeaderSub.js ***!
-  \****************************************************************/
-
 /*!******************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/Users.js ***!
   \******************************************************************/
@@ -80,9 +84,9 @@
   !*** ./public/javascript/editable-table/src/EditableTableDemo.js ***!
   \*******************************************************************/
 
-/*!*********************************************************************!*\
-  !*** ./public/javascript/editable-table/src/TableMode/PrintMode.js ***!
-  \*********************************************************************/
+/*!********************************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableHeaderToolbar.js ***!
+  \********************************************************************/
 
 /*!************************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/UserColumns.js ***!
@@ -91,6 +95,10 @@
 /*!************************************************************************!*\
   !*** ./public/javascript/editable-table/src/TableMode/EditableMode.js ***!
   \************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableMode/PrintableMode.js ***!
+  \*************************************************************************/
 
 /*!**************************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/TableSettings.js ***!

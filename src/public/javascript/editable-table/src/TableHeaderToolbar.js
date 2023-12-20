@@ -1,4 +1,4 @@
-export const TableHeaderSub = (params) => {
+export const TableHeaderToolbar = (params) => {
     const { columns, settings } = params
     const { trClassList } = settings
     const ths = []
