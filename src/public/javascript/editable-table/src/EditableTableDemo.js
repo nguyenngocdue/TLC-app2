@@ -1,7 +1,7 @@
 import { DataSource } from "./DataSource"
 
 const tableParams = {
-    id: "table_",
+    tableId: "table_",
     maxH: 1000,
     tableWidth: 100,
 
@@ -35,23 +35,23 @@ export const EditableTableDemo = () => {
     params = { columns, dataSource, headerToolbar }
 
     settings = DataSource.TableSettings.editableMode
-    const tableParams1a = { ...tableParams, id: tableParams.id + "1a", }
+    const tableParams1a = { ...tableParams, tableId: tableParams.tableId + "1a", }
     const table01a = EditableTable({ ...params, settings, tableParams: tableParams1a })
 
-    const tableParams1b = { ...tableParams, id: tableParams.id + "1b", header: '', footer: '' }
+    const tableParams1b = { ...tableParams, tableId: tableParams.tableId + "1b", header: '', footer: '' }
     const table01b = EditableTable({ ...params, settings, tableParams: tableParams1b })
 
-    const editableMode = `Editable Mode #${tableParams1a.id}${table01a}Editable Mode #${tableParams1b.id}${table01b}`
+    const editableMode = `Editable Mode #${tableParams1a.tableId}${table01a}Editable Mode #${tableParams1b.tableId}${table01b}`
 
     settings = DataSource.TableSettings.printableMode
-    const tableParams2a = { ...tableParams, id: tableParams.id + "2a", }
+    const tableParams2a = { ...tableParams, tableId: tableParams.tableId + "2a", }
     const table02a = EditableTable({ ...params, settings, tableParams: tableParams2a })
 
-    const tableParams2b = { ...tableParams, id: tableParams.id + "2b", header: '', footer: '' }
+    const tableParams2b = { ...tableParams, tableId: tableParams.tableId + "2b", header: '', footer: '' }
     const table02b = EditableTable({ ...params, settings, tableParams: tableParams2b })
 
-    const printableMode = `<div class="bg-gray-100 p-4 mb-2">Printable Mode #${tableParams2a.id}${table02a}</div>
-    <div class="bg-gray-100 p-4 mb-2">Printable Mode #${tableParams2b.id}${table02b}</div>`
+    const printableMode = `<div class="bg-gray-100 p-4 mb-2">Printable Mode #${tableParams2a.tableId}${table02a}</div>
+    <div class="bg-gray-100 p-4 mb-2">Printable Mode #${tableParams2b.tableId}${table02b}</div>`
 
     const tables = `
     <div class="bg-white p-4">

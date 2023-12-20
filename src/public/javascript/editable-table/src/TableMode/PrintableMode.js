@@ -9,7 +9,7 @@ export const PrintableMode = (params) => {
     const columns1 = columns.filter((item) => item.renderer !== 'action')
     params = { ...params, columns: columns1 }
 
-    const { id, tableWidth } = params.tableParams
+    const { tableId, tableWidth } = params.tableParams
     const { table_css, } = settings.cssClass
 
     let tableHeader = TableHeader(params)
@@ -21,7 +21,7 @@ export const PrintableMode = (params) => {
         class="table-wrp block overflow-x-auto"
         style="table-layout: auto; ${tableWidth}"
         >
-        <table id="${id}" class="${table_css}">
+        <table id="${tableId}" class="${table_css}">
             ${tableColGroup}
             ${tableHeader}
             ${tableBody}

@@ -17,7 +17,7 @@ export const TableSettings = {
     printableMode: {
         modeName: 'printable-mode',
         cssClass: {
-            table_css: `w-full min-w-full max-w-full`,
+            table_css: `w-full min-w-full max-w-full border-separate border-spacing-0`,
             thead: `none`,
             thead_tr: `text-center 456`,
             thead_tr_th: `text-center bg-gray-50 border border-gray-400 py-2`,

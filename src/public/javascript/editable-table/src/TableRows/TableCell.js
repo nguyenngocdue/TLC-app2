@@ -23,9 +23,11 @@ const getRenderer = (column, cell) => {
 }
 
 export const TableCell = (params, cell, row, column, index) => {
+    const { tableParams } = params
+    const { tableId } = tableParams
     const { hidden } = column
     // if (hidden) return ''
     const renderer = getRenderer(column, cell)
-    const fixedClass = getFixedClass(column, index, 'td')
+    const fixedClass = getFixedClass(column, index, 'td', tableId)
     return `<td class="border ${fixedClass} ${hidden ? 'hidden' : ''}" >${renderer}</td>`
 }
