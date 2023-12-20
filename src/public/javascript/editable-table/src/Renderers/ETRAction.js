@@ -17,7 +17,7 @@ export const ETRAction = (cell, column) => {
     for (let i = 0; i < cell.length; i++) {
         const icon = `<i class="${icons[cell[i]]} w-4"></i>`
         const btnClass = btnClass0[cell[i]]
-        result.push(`<button class="text-white text-xs border rounded p-1 ml-0.5 ${btnClass}">${icon}</button>`)
+        result.push(`<button tabindex="-1" class="text-white text-xs border rounded p-1 ml-0.5 ${btnClass}">${icon}</button>`)
     }
     return `<span class="whitespace-nowrap">
         ${result.join("")}

@@ -57,8 +57,8 @@ export const EditableTableDemo = () => {
     const tables = `
     <div class="bg-white p-4">
         <div class="grid grid-cols-12 gap-4 m-4">
-            <div class="xl:col-span-6 md:col-span-12">${editableMode}</div>
-            <div class="xl:col-span-6 md:col-span-12">${printableMode}</div>
+            <div class="2xl:col-span-6 md:col-span-12">${editableMode}</div>
+            <div class="2xl:col-span-6 md:col-span-12">${printableMode}</div>
         </div>
     </div>
     `

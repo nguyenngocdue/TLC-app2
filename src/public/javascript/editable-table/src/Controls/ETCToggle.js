@@ -1,3 +1,3 @@
 export const ETCToggle = (cell, column) => {
-    return cell
+    return `<input type="text" value="${cell}" >`
 }

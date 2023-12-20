@@ -56,8 +56,8 @@ export const UserColumns = [
     {
         dataIndex: "dob",
         title: "Date Of Birth",
-        renderer: 'text',
-        control: 'text',
+        renderer: 'picker',
+        control: 'picker',
     },
     {
         dataIndex: "tob",

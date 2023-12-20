@@ -1,10 +1,16 @@
+import { getFixedClass } from "../FrozenColumn"
+
 import { ETRNo } from "../Renderers/ETRNo"
 import { ETRText } from "../Renderers/ETRText"
 import { ETRAction } from "../Renderers/ETRAction"
 import { ETRToggle } from "../Renderers/ETRToggle"
 import { ETRDropdown } from "../Renderers/ETRDropdown"
+import { ETRPicker } from "../Renderers/ETRPicker"
 
-import { getFixedClass } from "../FrozenColumn"
+import { ETCText } from "../Controls/ETCText"
+import { ETCToggle } from "../Controls/ETCToggle"
+import { ETCPicker } from "../Controls/ETCPicker"
+import { ETCDropdown } from "../Controls/ETCDropdown"
 
 const getRenderer = (column, cell) => {
     const { renderer } = column
@@ -14,11 +20,13 @@ const getRenderer = (column, cell) => {
         case 'action':
             return ETRAction(cell, column)
         case 'text':
-            return ETRText(cell, column)
+            return ETRText(cell, column) + ETCText(cell, column)
         case 'toggle':
-            return ETRToggle(cell, column)
+            return ETRToggle(cell, column) + ETCToggle(cell, column)
         case 'dropdown':
-            return ETRDropdown(cell, column)
+            return ETRDropdown(cell, column) + ETCDropdown(cell, column)
+        case 'picker':
+            return ETRPicker(cell, column) + ETCPicker(cell, column)
         case undefined:
             return cell
         default:

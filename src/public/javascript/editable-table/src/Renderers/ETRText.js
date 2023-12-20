@@ -1,4 +1,6 @@
 
 export const ETRText = (cell, column) => {
-    return `<span class="truncate">${cell}</span>`
+    const content = cell
+    const value = `<input tabindex="-1" type="text" value="${cell}" >`
+    return `<span class="truncate">${content}</span>${value}`
 }

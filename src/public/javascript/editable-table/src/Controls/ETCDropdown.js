@@ -1,6 +1,3 @@
-export const ETDropdown = (cell, column) => {
-    console.log(cell, column,)
-    const content = column.dataSource[cell] || '??'
-    const value = `<input type="text" value="${cell}" >`
-    return `${content} ${value}`
+export const ETCDropdown = (cell, column) => {
+    return `<input type="text" value="${cell}" >`
 }
