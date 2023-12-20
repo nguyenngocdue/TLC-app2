@@ -1,6 +1,4 @@
-/*! ../../public/javascript/editable-table/src/DataSource */
-
-/*! ../../public/javascript/editable-table/src/EditableTable */
+/*! ../../public/javascript/editable-table */
 
 /*! ../DataSource */
 
@@ -14,7 +12,11 @@
 
 /*! ../TableRows */
 
+/*! ./DataSource */
+
 /*! ./EditableMode */
+
+/*! ./TableCell */
 
 /*! ./TableMode/EditableModeWrapper */
 
@@ -26,9 +28,21 @@
 
 /*! ./Users */
 
+/*! ./src/EditableTable */
+
+/*! ./src/EditableTableDemo */
+
 /*!****************************************!*\
   !*** ./resources/js/editable-table.js ***!
   \****************************************/
+
+/*!***************************************************!*\
+  !*** ./public/javascript/editable-table/index.js ***!
+  \***************************************************/
+
+/*!***********************************************************!*\
+  !*** ./public/javascript/editable-table/src/TableCell.js ***!
+  \***********************************************************/
 
 /*!***********************************************************!*\
   !*** ./public/javascript/editable-table/src/TableRows.js ***!
@@ -61,6 +75,10 @@
 /*!******************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/index.js ***!
   \******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./public/javascript/editable-table/src/EditableTableDemo.js ***!
+  \*******************************************************************/
 
 /*!*********************************************************************!*\
   !*** ./public/javascript/editable-table/src/TableMode/PrintMode.js ***!

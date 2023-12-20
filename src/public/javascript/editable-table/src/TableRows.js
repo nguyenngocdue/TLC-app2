@@ -1,10 +1,13 @@
+import { TableCell } from "./TableCell";
+
 export const TableRows = (params) => {
     const { columns, dataSource, settings } = params
-    const x = dataSource.map((line, index) => {
+    const x = dataSource.map((line) => {
         const { trClassList } = settings
-        const y = columns.map((element, index) => {
+        const y = columns.map((element) => {
             const { dataIndex } = element
-            return `<td>${line[dataIndex]}</td>`
+            const cell = TableCell(params, line[dataIndex], line)
+            return `<td>${cell}</td>`
         });
         return `<tr class="${trClassList}">${y.join('')}</tr>`
     })

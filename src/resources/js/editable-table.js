@@ -1,5 +1,3 @@
-import { EditableTable } from "../../public/javascript/editable-table/src/EditableTable";
+import { EditableTable, EditableTableDemo } from "../../public/javascript/editable-table";
 window.EditableTable = EditableTable
-
-import { DataSource } from "../../public/javascript/editable-table/src/DataSource";
-window.DataSource = DataSource
+window.EditableTableDemo = EditableTableDemo

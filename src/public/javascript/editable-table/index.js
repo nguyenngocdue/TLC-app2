@@ -1,1 +1,2 @@
-console.log("MAIN OF EDITABLE TABLE")
+export * from './src/EditableTable'
+export * from './src/EditableTableDemo'
