@@ -1,4 +1,4 @@
-const trCssClass = `bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300`
+const trCssClass = `bg-gray-100 text-center h-10`
 export const TableSettings = {
     editableMode: {
         modeName: 'editable-mode',
@@ -9,7 +9,7 @@ export const TableSettings = {
             thead_tr_th: `?`,
 
             tbody_tr: `hover:bg-gray-100`,
-            tr_td: `?`,
+            // tr_td: `?`,
 
             tfoot_tr: trCssClass,
         },
@@ -23,9 +23,9 @@ export const TableSettings = {
             thead_tr_th: `text-center bg-gray-50 border border-gray-400 py-2`,
 
             tbody_tr: `hover:bg-gray-100`,
-            tr_td: `border border-gray-400 h-10`,
+            // tr_td: `border border-gray-400 h-10`,
 
-            tfoot_tr: trCssClass,
+            tfoot_tr: `text-center 456`,
         },
     }
 }

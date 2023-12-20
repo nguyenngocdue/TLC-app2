@@ -24,6 +24,12 @@ export const UserColumns = [
         control: 'toggle',
     },
     {
+        dataIndex: "is_resigned",
+        title: "Is Resigned",
+        renderer: 'toggle',
+        control: 'toggle',
+    },
+    {
         dataIndex: "hidden",
         title: "Hidden Column",
         renderer: 'text',
@@ -31,7 +37,7 @@ export const UserColumns = [
         hidden: true,
     },
     {
-        dataIndex: "no_control",
-        title: "No Control",
+        dataIndex: "no_renderer",
+        title: "No Renderer",
     },
 ]
