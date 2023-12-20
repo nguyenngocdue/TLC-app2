@@ -10,6 +10,7 @@ const aggCalculate = (column, dataSource, tableFnName) => {
     }
 
     const inputs = Object.keys(result).map(value => `<input 
+        tabindex="-1"
         class="w-full border-none text-right text-sm bg-gray-100"
         readonly
         type="${value === footer ? 'text' : 'hidden'}" 

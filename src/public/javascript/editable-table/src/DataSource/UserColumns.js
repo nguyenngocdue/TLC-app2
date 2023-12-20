@@ -9,7 +9,6 @@ export const UserColumns = [
         dataIndex: "action",
         title: "Action",
         renderer: 'action',
-        control: 'action',
         fixed: 'left',
     },
     {

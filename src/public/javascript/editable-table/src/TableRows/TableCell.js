@@ -7,11 +7,6 @@ import { ETRToggle } from "../Renderers/ETRToggle"
 import { ETRDropdown } from "../Renderers/ETRDropdown"
 import { ETRPicker } from "../Renderers/ETRPicker"
 
-import { ETCText } from "../Controls/ETCText"
-import { ETCToggle } from "../Controls/ETCToggle"
-import { ETCPicker } from "../Controls/ETCPicker"
-import { ETCDropdown } from "../Controls/ETCDropdown"
-
 const getRenderer = (column, cell) => {
     const { renderer } = column
     switch (renderer) {
@@ -20,13 +15,13 @@ const getRenderer = (column, cell) => {
         case 'action':
             return ETRAction(cell, column)
         case 'text':
-            return ETRText(cell, column) + ETCText(cell, column)
+            return ETRText(cell, column)
         case 'toggle':
-            return ETRToggle(cell, column) + ETCToggle(cell, column)
+            return ETRToggle(cell, column)
         case 'dropdown':
-            return ETRDropdown(cell, column) + ETCDropdown(cell, column)
+            return ETRDropdown(cell, column)
         case 'picker':
-            return ETRPicker(cell, column) + ETCPicker(cell, column)
+            return ETRPicker(cell, column)
         case undefined:
             return cell
         default:
@@ -37,10 +32,12 @@ const getRenderer = (column, cell) => {
 export const TableCell = (params, cell, row, column, index) => {
     const { tableParams } = params
     const { tableId } = tableParams
-    const { hidden, width = 100 } = column
-    // if (hidden) return ''
-    const renderer = getRenderer(column, cell)
+    const { hidden, width = 100, control } = column
+    const rendererStr = getRenderer(column, cell)
     const fixedClass = getFixedClass(column, index, 'td', tableId)
     const styleStr = `style="width:${width}px"`
-    return `<td class="border p-1 ${fixedClass} ${hidden ? 'hidden' : ''}" ${styleStr} >${renderer}</td>`
+
+    const editable = (control) ? `editable-cell-${tableId}` : ""
+    const tabIndex = control ? `tabindex="0"` : ''
+    return `<td ${tabIndex} class="border p-1  ${editable} ${fixedClass} ${hidden ? 'hidden' : ''}" ${styleStr} >${rendererStr}</td>`
 }
