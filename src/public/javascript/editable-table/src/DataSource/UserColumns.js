@@ -32,6 +32,30 @@ export const UserColumns = [
         footer: 'A Text',
     },
     {
+        dataIndex: "dob",
+        title: "Date Of Birth",
+        renderer: 'text',
+        control: 'text',
+    },
+    {
+        dataIndex: "tob",
+        title: "Time Of Birth",
+        renderer: 'text',
+        control: 'text',
+    },
+    {
+        dataIndex: "country_id",
+        title: "Country",
+        renderer: 'toggle',
+        control: 'toggle',
+    },
+    {
+        dataIndex: "languages",
+        title: "Languages",
+        renderer: 'toggle',
+        control: 'toggle',
+    },
+    {
         dataIndex: "hidden",
         title: "Hidden Column",
         renderer: 'text',

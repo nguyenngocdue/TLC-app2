@@ -6,11 +6,10 @@ export const Users = [
         no_renderer: 123,
         is_female: 0,
         is_resigned: 0,
-        // row_description: [
-        //     {
-        //         name: "This is a row description",
-        //     },
-        // ]
+        country_id: 84,
+        dob: '1988-06-26',
+        tob: '12:34:56',
+        languages: ['en', 'vi', 'cn'],
     },
     {
         no: 2,
@@ -19,6 +18,10 @@ export const Users = [
         no_renderer: 123,
         is_female: 0,
         is_resigned: 0,
+        country_id: 84,
+        dob: '1992-01-31',
+        tob: '12:34:56',
+        languages: ['en', 'vi', 'th'],
     },
     {
         no: 3,
@@ -27,6 +30,10 @@ export const Users = [
         no_renderer: 123,
         is_female: 1,
         is_resigned: 0,
+        country_id: 84,
+        dob: '1997-03-15',
+        tob: '12:34:56',
+        languages: ['en', 'vi', 'kh'],
     },
     {
         no: 4,
@@ -35,5 +42,9 @@ export const Users = [
         no_renderer: 123,
         is_female: 1,
         is_resigned: 0,
+        country_id: 84,
+        dob: '1996-05-20',
+        tob: '12:34:56',
+        languages: ['en', 'vi', 'jp'],
     },
 ]

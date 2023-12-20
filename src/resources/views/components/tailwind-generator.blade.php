@@ -6,6 +6,9 @@
 
 <div class="table-auto"></div>
 
+<div class="xl:col-span-6"></div>
+<div class="2xl:col-span-6"></div>
+
 <div class="grid-cols-1"></div>
 <div class="grid-cols-2"></div>
 <div class="grid-cols-3"></div>
