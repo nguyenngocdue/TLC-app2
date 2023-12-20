@@ -29,5 +29,5 @@ export const TableCell = (params, cell, row, column, index) => {
     // if (hidden) return ''
     const renderer = getRenderer(column, cell)
     const fixedClass = getFixedClass(column, index, 'td', tableId)
-    return `<td class="border ${fixedClass} ${hidden ? 'hidden' : ''}" >${renderer}</td>`
+    return `<td class="border p-1 ${fixedClass} ${hidden ? 'hidden' : ''}" >${renderer}</td>`
 }

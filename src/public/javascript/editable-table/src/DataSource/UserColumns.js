@@ -17,7 +17,7 @@ export const UserColumns = [
         title: "Name",
         renderer: 'text',
         control: 'text',
-        footer: 'agg_sum',
+        // footer: 'agg_sum',
         fixed: 'left',
     },
     {
@@ -25,6 +25,7 @@ export const UserColumns = [
         title: "Description",
         renderer: 'text',
         control: 'text',
+        width: 100,
     },
     {
         dataIndex: "is_female",

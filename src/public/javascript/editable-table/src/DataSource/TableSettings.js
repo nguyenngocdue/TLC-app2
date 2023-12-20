@@ -3,7 +3,7 @@ export const TableSettings = {
     editableMode: {
         modeName: 'editable-mode',
         cssClass: {
-            table_css: `whitespace-no-wrap w-full text-sm border-separate border-spacing-0`,
+            table_css: `w-full border-separate border-spacing-0 whitespace-no-wrap `,
             thead: `sticky z-10 top-0`,
             thead_tr: trCssClass,
             thead_tr_th: `?`,
@@ -17,7 +17,7 @@ export const TableSettings = {
     printableMode: {
         modeName: 'printable-mode',
         cssClass: {
-            table_css: `w-full min-w-full max-w-full border-separate border-spacing-0`,
+            table_css: `w-full border-separate border-spacing-0 min-w-full max-w-full `,
             thead: `none`,
             thead_tr: `text-center 456`,
             thead_tr_th: `text-center bg-gray-50 border border-gray-400 py-2`,
