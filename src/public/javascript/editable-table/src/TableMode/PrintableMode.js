@@ -5,17 +5,20 @@ import { TableHeader } from '../TableHeader'
 
 export const PrintableMode = (params) => {
     // console.log(params)
-    const { columns, dataSource, settings } = params
-    const { id, maxH, showPaginationTop, tableWidth } = params.tableParams
+    const { settings, columns } = params
+    const columns1 = columns.filter((item) => item.renderer !== 'action')
+    params = { ...params, columns: columns1 }
+
+    const { id, tableWidth } = params.tableParams
     const { table_css, } = settings.cssClass
 
-    let tableHeader = TableHeader({ columns, settings })
-    let tableBody = TableBody({ columns, settings, dataSource })
-    let tableFooterAgg = TableFooterAgg({ columns, settings })
-    let tableColGroup = TableColGroup({ columns, settings })
+    let tableHeader = TableHeader(params)
+    let tableBody = TableBody(params)
+    let tableFooterAgg = TableFooterAgg(params)
+    let tableColGroup = TableColGroup(params)
 
     let table = `<div 
-        class="table-wrp block overflow-x-auto ${maxH} ${showPaginationTop ? "border-t" : "rounded-t-lg"}"
+        class="table-wrp block overflow-x-auto"
         style="table-layout: auto; ${tableWidth}"
         >
         <table id="${id}" class="${table_css}">

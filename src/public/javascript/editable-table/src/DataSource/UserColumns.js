@@ -3,7 +3,6 @@ export const UserColumns = [
         dataIndex: "no",
         title: "No.",
         renderer: '_no_',
-        // control: '_no_',
     },
     {
         dataIndex: "action",
@@ -16,18 +15,21 @@ export const UserColumns = [
         title: "Name",
         renderer: 'text',
         control: 'text',
+        footer: 'agg_sum',
     },
     {
         dataIndex: "is_female",
         title: "Is Female",
         renderer: 'toggle',
         control: 'toggle',
+        footer: 'agg_count',
     },
     {
         dataIndex: "is_resigned",
         title: "Is Resigned",
         renderer: 'toggle',
         control: 'toggle',
+        footer: 'A Text',
     },
     {
         dataIndex: "hidden",
@@ -39,5 +41,6 @@ export const UserColumns = [
     {
         dataIndex: "no_renderer",
         title: "No Renderer",
+        footer: 'agg_sum',
     },
 ]
