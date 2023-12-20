@@ -2,6 +2,7 @@ import { DataSource } from "./DataSource"
 
 const tableParams = {
     tableId: "table_",
+    minH: 500,
     maxH: 1000,
     tableWidth: 100,
 

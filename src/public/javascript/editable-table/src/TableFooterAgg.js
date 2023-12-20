@@ -4,8 +4,6 @@ const aggCalculate = (column, dataSource, tableFnName) => {
     const { footer, dataIndex } = column
     const array = dataSource.map(item => item[dataIndex])
 
-    // if(Array.isArray())
-
     const result = {
         agg_sum: array.reduce((accumulator, currentValue) => accumulator + (typeof currentValue === 'number' ? currentValue : 0), 0),
         agg_count: array.filter(i => i).length,

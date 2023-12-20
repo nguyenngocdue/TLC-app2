@@ -6,7 +6,7 @@ export const getFixedClass = (column, index, tag, tableId) => {
 }
 const getColumnWidth = (tableId, columnIndex) => {
     const table = document.getElementById(tableId);
-    console.log(tableId, table)
+    // console.log(tableId, table)
     const rows = table.getElementsByTagName('tr');
     let maxWidth = 0;
     // if (columnIndex === 0) {
@@ -19,7 +19,7 @@ const getColumnWidth = (tableId, columnIndex) => {
         const cell = rows[i].getElementsByTagName('td')[columnIndex];
         if (cell) {
             const cellWidth = cell.getBoundingClientRect().width;
-            console.log(i, cellWidth)
+            // console.log(i, cellWidth)
             maxWidth = Math.max(maxWidth, cellWidth);
         }
     }
@@ -46,7 +46,6 @@ export const applyFixedColumnWidth = (tableId, columns) => {
 
     tableObjectColumns.forEach((column, index) => {
         const left = column['fixedLeft'];
-        console.log(`.table-td-fixed-left-${index}-${tableId}`)
         $(`.table-td-fixed-left-${index}-${tableId}`).css('left', left);
         $(`.table-th-fixed-left-${index}-${tableId}`).css('left', left);
         // console.log("Setting left for ",index,"value",left)

@@ -1,18 +1,20 @@
 import { applyFixedColumnWidth } from './FrozenColumn'
 
 const applyFixedColumns = (params) => {
-    console.log(params)
     const { tableId, } = params.tableParams
     const { columns } = params
-    // console.log("Loaded " + id)
-    // console.log(id, columns)
     applyFixedColumnWidth(tableId, columns)
+}
+
+const exposeParamsToWindow = (params) => {
+    const { tableId } = params.tableParams
+    if (!window.editableTables) window.editableTables = {}
+    window.editableTables[tableId] = params
 }
 
 export const postRender = (params) => {
     $(document).ready(() => {
-        setTimeout(() => {
-            applyFixedColumns(params)
-        }, 1000);
+        applyFixedColumns(params)
+        exposeParamsToWindow(params)
     })
 }

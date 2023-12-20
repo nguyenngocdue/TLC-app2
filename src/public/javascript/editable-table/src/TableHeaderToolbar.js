@@ -1,4 +1,4 @@
-import { ETAction } from "./Controls/ETAction"
+import { ETRAction } from "./Renderers/ETRAction"
 import { getFixedClass } from "./FrozenColumn"
 
 export const TableHeaderToolbar = (params) => {
@@ -14,7 +14,7 @@ export const TableHeaderToolbar = (params) => {
         if (typeof content === 'object') {
             const { renderer, action } = content
             if (renderer === 'action') {
-                content = ETAction(action)
+                content = ETRAction(action)
             }
         }
 

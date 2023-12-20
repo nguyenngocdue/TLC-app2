@@ -21,12 +21,24 @@ export const UserColumns = [
         fixed: 'left',
     },
     {
-        dataIndex: "description",
-        title: "Description",
-        renderer: 'text',
-        control: 'text',
-        width: 100,
+        dataIndex: "country_id",
+        title: "Country",
+        renderer: 'dropdown',
+        control: 'dropdown',
+        dataSource:
+        {
+            84: `Vietnam`,
+            1: `US`,
+            61: `AU`
+        },
     },
+    // {
+    //     dataIndex: "description",
+    //     title: "Description",
+    //     renderer: 'text',
+    //     control: 'text',
+    //     width: 100,
+    // },
     {
         dataIndex: "is_female",
         title: "Is Female",
@@ -53,17 +65,13 @@ export const UserColumns = [
         renderer: 'text',
         control: 'text',
     },
-    {
-        dataIndex: "country_id",
-        title: "Country",
-        renderer: 'toggle',
-        control: 'toggle',
-    },
+
     {
         dataIndex: "languages",
         title: "Languages",
         renderer: 'toggle',
         control: 'toggle',
+        fixed: 'right',
     },
     {
         dataIndex: "hidden",

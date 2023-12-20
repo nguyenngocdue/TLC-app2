@@ -12,7 +12,7 @@ const btnClass0 = {
     trash: `bg-red-600`,
 }
 
-export const ETAction = (cell) => {
+export const ETRAction = (cell, column) => {
     const result = []
     for (let i = 0; i < cell.length; i++) {
         const icon = `<i class="${icons[cell[i]]} w-4"></i>`

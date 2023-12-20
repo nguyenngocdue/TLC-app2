@@ -28,6 +28,7 @@ export const EditableMode = (params) => {
             ${tableRows}
             ${tableFooterAgg}
         </table>
+        <button type="button" class="border rounded bg-purple-500 p-2 m-1" onclick="console.log(params)">Click Me</button>
     </div>`
 
     return table

@@ -1,20 +1,24 @@
-import { ETNo } from "../Controls/ETNo"
-import { ETText } from "../Controls/ETText"
-import { ETAction } from "../Controls/ETAction"
-import { ETToggle } from "../Controls/ETToggle"
+import { ETRNo } from "../Renderers/ETRNo"
+import { ETRText } from "../Renderers/ETRText"
+import { ETRAction } from "../Renderers/ETRAction"
+import { ETRToggle } from "../Renderers/ETRToggle"
+import { ETRDropdown } from "../Renderers/ETRDropdown"
+
 import { getFixedClass } from "../FrozenColumn"
 
 const getRenderer = (column, cell) => {
     const { renderer } = column
     switch (renderer) {
         case '_no_':
-            return ETNo(cell)
+            return ETRNo(cell, column)
         case 'action':
-            return ETAction(cell)
+            return ETRAction(cell, column)
         case 'text':
-            return ETText(cell)
+            return ETRText(cell, column)
         case 'toggle':
-            return ETToggle(cell)
+            return ETRToggle(cell, column)
+        case 'dropdown':
+            return ETRDropdown(cell, column)
         case undefined:
             return cell
         default:
