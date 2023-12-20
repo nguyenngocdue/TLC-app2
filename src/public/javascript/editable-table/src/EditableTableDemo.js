@@ -7,12 +7,12 @@ const tableParams = {
 
     header: "This is a table header description",
 
-    showPaginationTop: !false,
+    showPaginationTop: true,
     topLeftControls: "topLeftControls",
     topCenterControls: "topCenterControls",
     topRightControls: "topRightControls",
 
-    showPaginationBottom: !false,
+    showPaginationBottom: true,
     bottomLeftControls: "bottomLeftControls",
     bottomCenterControls: "bottomCenterControls",
     bottomRightControls: "bottomRightControls",
@@ -25,33 +25,48 @@ export const EditableTableDemo = () => {
     const columns = DataSource.UserColumns
     const dataSource = DataSource.Users
     const headerToolbar = DataSource.UserHeaderToolbar
-    params = { columns, dataSource, tableParams, headerToolbar }
+
+    params = { columns, dataSource, headerToolbar }
 
     settings = DataSource.TableSettings.editableMode
+    const tableParams1 = { ...tableParams }
+    const table01 = EditableTable({ ...params, settings, tableParams: tableParams1 })
+
+    const tableParams2 = { ...tableParams, header: '', footer: '' }
+    const table02 = EditableTable({ ...params, settings, tableParams: tableParams2 })
+
     const editableMode = `
         Editable Mode
-        ${EditableTable({ ...params, settings })}
+        ${table01}
         Editable Mode
-        ${EditableTable({ ...params, settings })}
+        ${table02}
         `
 
     settings = DataSource.TableSettings.printableMode
     const printableMode = `
+    <div class="bg-gray-100 p-4 mb-2">    
         Printable Mode
-        ${EditableTable({ ...params, settings })}
+        ${EditableTable({ ...params, settings, tableParams })}
+    </div>
+    <div class="bg-gray-100 p-4 mb-2">
         Printable Mode
-        ${EditableTable({ ...params, settings })}
+        ${EditableTable({ ...params, settings, tableParams })}
+    </div>
     `
 
     const tables = `
+    <div class="bg-white p-4">
         <div class="grid grid-cols-12 gap-4 m-4">
             <div class="col-span-6">
             ${editableMode}
             </div>
             <div class="col-span-6">
-            ${printableMode}
+                
+                    ${printableMode}
+                </div>
             </div>
         </div>
+    </div>
     `
 
     $("#divMain").html(tables)

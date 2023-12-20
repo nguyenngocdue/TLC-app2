@@ -6,18 +6,19 @@ import { TableRows } from '../TableRows/TableRows'
 
 export const EditableMode = (params) => {
     // console.log(params)
-    const { columns, dataSource, settings, headerToolbar } = params
-    const { id, maxH, showPaginationTop, tableWidth } = params.tableParams
-    const { table_css, } = settings.cssClass
+    const { headerToolbar } = params
 
-    const tableHeader = TableHeader({ columns, settings })
-    const tableHeaderToolbar = headerToolbar ? TableHeaderToolbar({ columns, settings, headerToolbar }) : ``
-    const tableRows = TableRows({ columns, settings, dataSource })
-    const tableFooterAgg = TableFooterAgg({ columns, settings })
-    const tableColGroup = TableColGroup({ columns, settings })
+    const tableHeader = TableHeader(params)
+    const tableHeaderToolbar = headerToolbar ? TableHeaderToolbar(params) : ``
+    const tableRows = TableRows(params)
+    const tableFooterAgg = TableFooterAgg(params)
+    const tableColGroup = TableColGroup(params)
+
+    const { id, maxH, tableWidth } = params.tableParams
+    const { table_css, } = params.settings.cssClass
 
     const table = `<div 
-        class="table-wrp block overflow-x-auto ${maxH} ${showPaginationTop ? "border-t" : "rounded-t-lg"}"
+        class="table-wrp block overflow-x-auto ${maxH}}"
         style="table-layout: auto; ${tableWidth}"
         >
         <table id="${id}" class="${table_css}">

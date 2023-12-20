@@ -8,6 +8,7 @@ export const TableSettings = {
             thead_tr: trCssClass,
             thead_tr_th: `?`,
 
+            tbody_tr: `hover:bg-gray-100`,
             tr_td: `?`,
 
             tfoot_tr: trCssClass,
@@ -21,6 +22,7 @@ export const TableSettings = {
             thead_tr: `text-center 456`,
             thead_tr_th: `text-center bg-gray-50 border border-gray-400 py-2`,
 
+            tbody_tr: `hover:bg-gray-100`,
             tr_td: `border border-gray-400 h-10`,
 
             tfoot_tr: trCssClass,
