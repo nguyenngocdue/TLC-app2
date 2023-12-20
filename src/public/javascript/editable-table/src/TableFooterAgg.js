@@ -3,7 +3,8 @@ export const TableFooterAgg = (params) => {
     const { tfoot_tr } = settings.cssClass
     const ths = []
     for (let i = 0; i < columns.length; i++) {
-        const { dataIndex, title } = columns[i]
+        const { dataIndex, title, hidden } = columns[i]
+        if (hidden) continue
         ths.push(`<th title="${dataIndex}">${title}</th>`)
     }
     return `<tfoot>

@@ -18,6 +18,12 @@ export const UserColumns = [
         control: 'text',
     },
     {
+        dataIndex: "is_female",
+        title: "Is Female",
+        renderer: 'toggle',
+        control: 'toggle',
+    },
+    {
         dataIndex: "hidden",
         title: "Hidden Column",
         renderer: 'text',

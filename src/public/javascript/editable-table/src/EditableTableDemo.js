@@ -21,24 +21,26 @@ const tableParams = {
 }
 
 export const EditableTableDemo = () => {
-    let settings
+    let settings, params
     const columns = DataSource.UserColumns
     const dataSource = DataSource.Users
+    const headerToolbar = DataSource.UserHeaderToolbar
+    params = { columns, dataSource, tableParams, headerToolbar }
 
     settings = DataSource.TableSettings.editableMode
     const editableMode = `
         Editable Mode
-        ${EditableTable({ columns, dataSource, settings, tableParams })}
+        ${EditableTable({ ...params, settings })}
         Editable Mode
-        ${EditableTable({ columns, dataSource, settings, tableParams })}
-    `
+        ${EditableTable({ ...params, settings })}
+        `
 
     settings = DataSource.TableSettings.printableMode
     const printableMode = `
         Printable Mode
-        ${EditableTable({ columns, dataSource, settings, tableParams })}
+        ${EditableTable({ ...params, settings })}
         Printable Mode
-        ${EditableTable({ columns, dataSource, settings, tableParams })}
+        ${EditableTable({ ...params, settings })}
     `
 
     const tables = `

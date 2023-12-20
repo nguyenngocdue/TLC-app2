@@ -9,7 +9,6 @@ export const TableRows = (params) => {
             const cell = TableCell(params, line[dataIndex], line, column)
             return cell
         });
-        console.log(y)
         return `<tr class="${trClassList}">${y.join('')}</tr>`
     })
 

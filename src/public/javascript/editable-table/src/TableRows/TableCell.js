@@ -1,6 +1,7 @@
 import { ETNo } from "../Controls/ETNo"
 import { ETText } from "../Controls/ETText"
 import { ETAction } from "../Controls/ETAction"
+import { ETToggle } from "../Controls/ETToggle"
 
 const getRenderer = (column, cell) => {
     const { renderer } = column
@@ -11,6 +12,8 @@ const getRenderer = (column, cell) => {
             return ETAction(cell)
         case 'text':
             return ETText(cell)
+        case 'toggle':
+            return ETToggle(cell)
         case undefined:
             return cell
         default:
@@ -19,6 +22,8 @@ const getRenderer = (column, cell) => {
 }
 
 export const TableCell = (params, cell, row, column) => {
+    const { hidden } = column
+    // if (hidden) return ''
     const renderer = getRenderer(column, cell)
-    return `<td class="border">${renderer}</td>`
+    return `<td class="border ${hidden ? 'hidden' : ''}">${renderer}</td>`
 }

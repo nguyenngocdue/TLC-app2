@@ -1,10 +1,10 @@
 export const TableHeader = (params) => {
     const { columns, settings } = params
-    console.log(params)
     const { thead_tr } = settings.cssClass
     const ths = []
     for (let i = 0; i < columns.length; i++) {
-        const { dataIndex, title } = columns[i]
+        const { dataIndex, title, hidden } = columns[i]
+        if (hidden) continue
         ths.push(`<th title="${dataIndex}">${title}</th>`)
     }
     return `<thead class="sticky z-10 top-0">

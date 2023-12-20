@@ -6,12 +6,12 @@ import { TableRows } from '../TableRows/TableRows'
 
 export const EditableMode = (params) => {
     // console.log(params)
-    const { columns, dataSource, settings } = params
+    const { columns, dataSource, settings, headerToolbar } = params
     const { id, maxH, showPaginationTop, tableWidth } = params.tableParams
     const { table_css, } = settings.cssClass
 
     const tableHeader = TableHeader({ columns, settings })
-    const tableHeaderToolbar = TableHeaderToolbar({ columns, settings })
+    const tableHeaderToolbar = headerToolbar ? TableHeaderToolbar({ columns, settings, headerToolbar }) : ``
     const tableRows = TableRows({ columns, settings, dataSource })
     const tableFooterAgg = TableFooterAgg({ columns, settings })
     const tableColGroup = TableColGroup({ columns, settings })
