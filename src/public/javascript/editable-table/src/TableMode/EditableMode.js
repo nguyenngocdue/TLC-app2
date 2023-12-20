@@ -1,9 +1,8 @@
-import { DataSource } from '../DataSource'
 import { TableColGroup } from '../TableColGroup'
-import { TableFooter } from '../TableFooter'
+import { TableFooterAgg } from '../TableFooterAgg'
 import { TableHeader } from '../TableHeader'
 import { TableHeaderToolbar } from '../TableHeaderToolbar'
-import { TableRows } from '../TableRows'
+import { TableRows } from '../TableRows/TableRows'
 
 export const EditableMode = (params) => {
     // console.log(params)
@@ -12,9 +11,9 @@ export const EditableMode = (params) => {
     const { table_css, } = settings.cssClass
 
     const tableHeader = TableHeader({ columns, settings })
-    const tableHeaderSub = TableHeaderToolbar({ columns, settings })
+    const tableHeaderToolbar = TableHeaderToolbar({ columns, settings })
     const tableRows = TableRows({ columns, settings, dataSource })
-    const tableFooter = TableFooter({ columns, settings })
+    const tableFooterAgg = TableFooterAgg({ columns, settings })
     const tableColGroup = TableColGroup({ columns, settings })
 
     const table = `<div 
@@ -24,9 +23,9 @@ export const EditableMode = (params) => {
         <table id="${id}" class="${table_css}">
             ${tableColGroup}
             ${tableHeader}
-            ${tableHeaderSub}
+            ${tableHeaderToolbar}
             ${tableRows}
-            ${tableFooter}
+            ${tableFooterAgg}
         </table>
     </div>`
 

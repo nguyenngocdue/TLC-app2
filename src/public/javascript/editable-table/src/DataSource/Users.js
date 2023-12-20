@@ -1,18 +1,26 @@
 export const Users = [
     {
         no: 1,
-        name: "Fortune",
+        action: ['move', 'toggle', 'duplicate', 'delete'],
+        name: "Fortune Truong",
+        no_control: 123,
     },
     {
         no: 2,
-        name: "Thuc",
+        action: ['move', 'toggle', 'duplicate', 'delete'],
+        name: "Thuc Vo",
+        no_control: 123,
     },
     {
         no: 3,
-        name: "Canh",
+        action: ['move', 'toggle', 'duplicate', 'delete'],
+        name: "Canh Ngo",
+        no_control: 123,
     },
     {
         no: 4,
-        name: "Due",
+        action: ['move', 'toggle', 'duplicate', 'delete'],
+        name: "Due Nguyen",
+        no_control: 123,
     },
 ]

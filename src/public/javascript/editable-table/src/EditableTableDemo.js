@@ -5,7 +5,7 @@ const tableParams = {
     maxH: 1000,
     tableWidth: 100,
 
-    header: "This is a header",
+    header: "This is a table header description",
 
     showPaginationTop: !false,
     topLeftControls: "topLeftControls",
@@ -17,7 +17,7 @@ const tableParams = {
     bottomCenterControls: "bottomCenterControls",
     bottomRightControls: "bottomRightControls",
 
-    footer: "This is a footer",
+    footer: "This is a table footer description",
 }
 
 export const EditableTableDemo = () => {

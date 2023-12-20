@@ -1,6 +1,6 @@
 import { TableBody } from '../TableBody'
 import { TableColGroup } from '../TableColGroup'
-import { TableFooter } from '../TableFooter'
+import { TableFooterAgg } from '../TableFooterAgg'
 import { TableHeader } from '../TableHeader'
 
 export const PrintableMode = (params) => {
@@ -11,7 +11,7 @@ export const PrintableMode = (params) => {
 
     let tableHeader = TableHeader({ columns, settings })
     let tableBody = TableBody({ columns, settings, dataSource })
-    let tableFooter = TableFooter({ columns, settings })
+    let tableFooterAgg = TableFooterAgg({ columns, settings })
     let tableColGroup = TableColGroup({ columns, settings })
 
     let table = `<div 
@@ -22,7 +22,7 @@ export const PrintableMode = (params) => {
             ${tableColGroup}
             ${tableHeader}
             ${tableBody}
-            ${tableFooter}
+            ${tableFooterAgg}
         </table>
     </div>`
 

@@ -1,10 +1,31 @@
 export const UserColumns = [
     {
         dataIndex: "no",
-        title: "No."
+        title: "No.",
+        renderer: '_no_',
+        // control: '_no_',
+    },
+    {
+        dataIndex: "action",
+        title: "Action",
+        renderer: 'action',
+        control: 'action',
     },
     {
         dataIndex: "name",
-        title: "Name"
+        title: "Name",
+        renderer: 'text',
+        control: 'text',
+    },
+    {
+        dataIndex: "hidden",
+        title: "Hidden Column",
+        renderer: 'text',
+        control: 'text',
+        hidden: true,
+    },
+    {
+        dataIndex: "no_control",
+        title: "No Control",
     },
 ]

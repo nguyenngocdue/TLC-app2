@@ -1,4 +1,4 @@
-import { TableRows } from "./TableRows"
+import { TableRows } from "./TableRows/TableRows"
 
 export const TableBody = (params) => {
     const tableRows = TableRows(params)

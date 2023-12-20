@@ -1,4 +1,4 @@
-export const TableFooter = (params) => {
+export const TableFooterAgg = (params) => {
     const { columns, settings } = params
     const { tfoot_tr } = settings.cssClass
     const ths = []
