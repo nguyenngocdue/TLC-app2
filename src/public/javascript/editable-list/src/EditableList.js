@@ -1,6 +1,6 @@
-import { looseInclude } from "./functions"
+import { getEById, looseInclude } from "./functions"
 
-const addEventListenerForLi = (liId, id, params, onClickFn) => $(`#${liId}`).click((e) => onClickFn(e))
+const addEventListenerForLi = (liId, id, params, onClickFn) => getEById(liId).click((e) => onClickFn(e))
 
 const editableListRender = (params, keyword = null) => {
     const {
