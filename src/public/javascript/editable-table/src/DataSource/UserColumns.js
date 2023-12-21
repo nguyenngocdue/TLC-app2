@@ -24,12 +24,11 @@ export const UserColumns = [
         title: "Country",
         renderer: 'dropdown',
         control: 'dropdown',
-        dataSource:
-        {
-            84: `Vietnam`,
-            1: `US`,
-            61: `AU`
-        },
+        dataSource: [
+            { id: 84, name: 'Vietnam', },
+            { id: 1, name: 'America', },
+            { id: 61, name: 'Australia', },
+        ],
     },
     // {
     //     dataIndex: "description",

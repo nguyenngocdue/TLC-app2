@@ -10,7 +10,7 @@ export const getControl = (column, cell) => {
         case 'toggle':
         // return ETCToggle(cell, column)
         case 'dropdown':
-        // return ETCDropdown(cell, column)
+            return ETCDropdown(cell, column)
         case 'picker':
         // return ETCPicker(cell, column)
         case 'text':

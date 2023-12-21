@@ -15,8 +15,8 @@ const exposeParamsToWindow = (params, tableId) => {
 const myAddEventListener = (params, tableId) => {
     const editableCells = document.querySelectorAll(`.editable-cell-${tableId}:not(.hidden)`);
     // console.log(editableCells)
-    const { columnIndexes } = params
-    // console.log(columnIndexes)
+    const { columnsIndexed } = params
+    // console.log(columnsIndexed)
 
     editableCells.forEach(cell => {
         cell.addEventListener('keydown', function (event) {
@@ -36,9 +36,10 @@ const myAddEventListener = (params, tableId) => {
         const tdElement = this
         const currentValue = tdElement.textContent;
         const dataIndex = tdElement.getAttribute('dataIndex')
-        const column = columnIndexes[dataIndex]
+        const column = columnsIndexed[dataIndex]
         // console.log(column)
         // console.log(`makeEditableField currentValue: ${currentValue} ${dataIndex}`)
+
         const control = getControl(column, currentValue)
         tdElement.innerHTML = control
 

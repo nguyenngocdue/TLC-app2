@@ -18,10 +18,20 @@ const keyBy = (array, keyName) => {
     return result
 }
 
+const keyByForDataSource = (array, keyName) => {
+    array.forEach(column => {
+        if (column.dataSource) column.dataSourceIndexed = keyBy(column.dataSource, keyName)
+    })
+    return array
+}
+
 export const EditableTable = (params) => {
     // console.log(params)
-    const columnIndexes = keyBy(params.columns, 'dataIndex')
-    params = { ...params, columnIndexes }
+
+    const columns = keyByForDataSource(params.columns, 'id')
+    const columnsIndexed = keyBy(columns, 'dataIndex')
+
+    params = { ...params, columnsIndexed }
     const table = tableRenderer(params)
     postRender(params);
     return table
