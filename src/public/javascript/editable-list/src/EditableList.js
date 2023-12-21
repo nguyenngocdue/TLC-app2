@@ -60,7 +60,7 @@ export const EditableList = (params) => {
     </div>
     `
     const ulDivId = `ul_div_${id}`
-    const animation = `absolute transition-opacity duration-300 ease-in-out opacity-0`
+    const animation = `absolute invisible transition-opacity duration-500 ease-in-out opacity-0`
     const div = `<div id="${id}"
         class="border shadow-md rounded p-0 bg-gray-50 ${animation}" 
         style="width:${width}px;z-index:1001;"

@@ -6,6 +6,8 @@
 
 /*! ./EditableSelect */
 
+/*! ./EventHandler/functions */
+
 /*! ./functions */
 
 /*! ./src/EditableSelect */
@@ -35,3 +37,7 @@
 /*!*********************************************************************!*\
   !*** ./public/javascript/editable-select/src/EditableSelectDemo.js ***!
   \*********************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./public/javascript/editable-select/src/EventHandler/functions.js ***!
+  \*************************************************************************/

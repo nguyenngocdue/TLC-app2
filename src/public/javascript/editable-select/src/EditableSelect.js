@@ -1,4 +1,5 @@
 import { EditableList } from "../../editable-list/src/EditableList"
+import { DropdownOnClickAndBlur } from "./EventHandler/functions"
 
 export const EditableSelect = (params) => {
 
@@ -38,37 +39,7 @@ export const EditableSelect = (params) => {
     `
 
     $(document).ready(() => {
-        $(`#${dropdownId}`).click(() => {
-            // console.log(`Clicked on ${dropdownId}`)
-
-            const myFloatingList = $(`#${floatingListId}`)
-
-            const isActive = myFloatingList.hasClass("active")
-            if (!isActive) {
-                myFloatingList.removeClass('opacity-0');
-                myFloatingList.addClass('opacity-100');
-                myFloatingList.addClass('active')
-
-                let count = 2
-                const handler = (event) => {
-                    const myDiv = document.getElementById(floatingListId);
-                    // console.log(count)
-                    if (!myDiv.contains(event.target)) {
-                        count--
-                        // console.log(count)
-                        if (count == 0) {
-                            // console.log('Clicked outside the div');
-                            // myFloatingList.addClass('hidden')
-                            myFloatingList.addClass('opacity-0');
-                            myFloatingList.removeClass('opacity-100');
-                            myFloatingList.removeClass('active')
-                            document.removeEventListener('click', handler)
-                        }
-                    }
-                }
-                document.addEventListener('click', handler)
-            }
-        })
+        $(`#${dropdownId}`).click(() => DropdownOnClickAndBlur({ floatingListId }))
 
     })
 
