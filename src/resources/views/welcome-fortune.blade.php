@@ -14,9 +14,9 @@
 <br/>
 <br/>
 
-{{-- <div id="divList"></div>
+<div id="divList"></div>
 <script src="{{ asset('js/editable-list.js') }}"></script>
-<script>EditableListDemo('divList')</script> --}}
+<script>EditableListDemo('divList')</script>
 
 {{-- 
 <div id="divMain"></div>

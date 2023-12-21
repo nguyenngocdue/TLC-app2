@@ -48,7 +48,7 @@ const addEventListenerForInput = (inputId, id, params) => {
 }
 
 export const EditableList = (params) => {
-    const { name, id, width = 200, allowFilter = false, } = params
+    const { name, id, width = 200, allowFilter = false, float = false } = params
     const inputId = `input_of_${id}`
     const ul = editableListRender(params)
 
@@ -60,7 +60,7 @@ export const EditableList = (params) => {
     </div>
     `
     const ulDivId = `ul_div_${id}`
-    const animation = `absolute invisible transition-opacity duration-500 ease-in-out opacity-0`
+    const animation = float ? `absolute invisible transition-opacity duration-500 ease-in-out opacity-0` : ''
     const div = `<div id="${id}"
         class="border shadow-md rounded p-0 bg-gray-50 ${animation}" 
         style="width:${width}px;z-index:1001;"

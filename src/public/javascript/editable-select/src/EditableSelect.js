@@ -1,5 +1,5 @@
 import { EditableList } from "../../editable-list/src/EditableList"
-import { DropdownOnClickAndBlur } from "./EventHandler/functions"
+import { DropdownOnClickAndBlur, getEById } from "./EventHandler/functions"
 
 export const EditableSelect = (params) => {
 
@@ -11,7 +11,7 @@ export const EditableSelect = (params) => {
         allowClear,
     } = params
 
-    console.log(params)
+    // console.log(params)
 
     const floatingListId = `floatingList_${id}`
     const listParams = {
@@ -24,7 +24,7 @@ export const EditableSelect = (params) => {
     }
 
     const floatingList = EditableList(listParams)
-    const clearStr = `<button type="button" class="hover:bg-red-500 px-2 rounded-full flex items-center"><i class="fa-solid fa-delete-left"></i></button>`
+    const clearStr = `<button tabindex="-1" type="button" class="hover:bg-red-500 px-2 rounded-full flex items-center"><i class="fa-solid fa-delete-left"></i></button>`
     const arrowDown = `<div class="px-2 flex items-center"><i class="fa-solid fa-chevron-down"></i></div>`
     const dropdownId = `dropdown_${id}`
 
@@ -39,8 +39,7 @@ export const EditableSelect = (params) => {
     `
 
     $(document).ready(() => {
-        $(`#${dropdownId}`).click(() => DropdownOnClickAndBlur({ floatingListId }))
-
+        getEById(dropdownId).click(() => DropdownOnClickAndBlur({ floatingListId }))
     })
 
     return dropdown

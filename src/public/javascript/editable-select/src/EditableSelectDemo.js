@@ -11,8 +11,8 @@ const Select1 = () => {
         allowFilter: false,
         multiple: false,
         itemTemplate: (obj) => obj,
-        selected: 1,
-        dataSource: helloList,
+        selected: 'a1',
+        dataSource: helloList(),
         width: 210,
     }
     const select = EditableSelect(params)
@@ -28,8 +28,8 @@ const Select2 = () => {
         allowFilter: false,
         multiple: false,
         itemTemplate: (obj) => obj,
-        selected: 1,
-        dataSource: helloList,
+        selected: 'a1',
+        dataSource: helloList(),
         width: 210,
     }
     const select = EditableSelect(params)
@@ -45,8 +45,8 @@ const Select3 = () => {
         allowFilter: true,
         multiple: false,
         itemTemplate: (obj) => obj,
-        selected: 1,
-        dataSource: helloList,
+        selected: 'a1',
+        dataSource: helloList(),
         width: 210,
     }
     const select = EditableSelect(params)
@@ -62,8 +62,8 @@ const MSelect1 = () => {
         allowFilter: false,
         multiple: true,
         itemTemplate: (obj) => obj,
-        selected: 1,
-        dataSource: helloList,
+        selected: ['a1', 'a2', 'a3'],
+        dataSource: helloList(),
         width: 210,
     }
     const select = EditableSelect(params)
@@ -79,8 +79,8 @@ const MSelect2 = () => {
         allowFilter: false,
         multiple: true,
         itemTemplate: (obj) => obj,
-        selected: 1,
-        dataSource: helloList,
+        selected: ['a1', 'a2', 'a3'],
+        dataSource: helloList(),
         width: 210,
     }
     const select = EditableSelect(params)
@@ -96,8 +96,8 @@ const MSelect3 = () => {
         allowFilter: true,
         multiple: true,
         itemTemplate: (obj) => obj,
-        selected: 1,
-        dataSource: helloList,
+        selected: ['a1', 'a2', 'a3'],
+        dataSource: helloList(),
         width: 210,
     }
     const select = EditableSelect(params)
@@ -136,7 +136,7 @@ export const EditableSelectDemo = (divId) => {
 
 
     let select = `Select: ${rendererSelect}`
-    // select += `MultiSelect: ${rendererMultiSelect}`
+    select += `MultiSelect: ${rendererMultiSelect}`
 
     $("#" + divId).html(select)
 }

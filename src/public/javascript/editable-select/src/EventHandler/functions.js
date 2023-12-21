@@ -1,8 +1,11 @@
+export const getEById = (id) => $("[id='" + id + "']")
+
 export const DropdownOnClickAndBlur = (params) => {
     // console.log(`Clicked on ${dropdownId}`)
     const { floatingListId, } = params
 
-    const myFloatingList = $(`#${floatingListId}`)
+    const myFloatingList = getEById(floatingListId)
+    // const myFloatingList = $(`#${floatingListId}`)
 
     const isActive = myFloatingList.hasClass("active")
     if (!isActive) {
