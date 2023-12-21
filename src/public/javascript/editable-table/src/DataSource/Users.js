@@ -38,7 +38,7 @@ export const Users = [
         country_id: 84,
         dob: '1997-03-15',
         tob: '12:34:56',
-        languages: ['en', 'vi', 'kh'],
+        languages: ['en', 'vi', 'kr'],
         description: 'This is a very long text, as long as the table column can show on one line.',
     },
     {

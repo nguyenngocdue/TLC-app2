@@ -1,4 +1,4 @@
-import { focusToControl, getControl, getCurrentValue, setCurrentValue } from './Controls/Controls'
+import { focusToControl, getControl, getCurrentValue, getInputElement, postRenderControl, setCurrentValue } from './Controls/Controls'
 import { getRenderer } from './Renderers/Renderers'
 
 export const myAddEventListener = (params, tableId) => {
@@ -34,12 +34,15 @@ export const myAddEventListener = (params, tableId) => {
         // console.log(currentValue)
         tdElement.innerHTML = getControl(column, currentValue)
 
-        const inputElement = focusToControl(column, tdElement)
+        const inputElement = getInputElement(column, tdElement)
+        postRenderControl(inputElement, column)
+        focusToControl(inputElement, column, tdElement)
 
         inputElement.addEventListener('blur', function () {
             // console.log(this, this.value)
             const newValue = this.value;
             const renderer = getRenderer(column, newValue)
+            console.log("BLUR", renderer)
             tdElement.innerHTML = renderer;
 
             setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)

@@ -34,23 +34,61 @@ export const getControl = (column, cell) => {
     }
 }
 
-export const focusToControl = (column, tdElement) => {
+export const getInputElement = (column, tdElement) => {
     const { renderer } = column
-    let inputElement
     switch (renderer) {
         case 'toggle':
         case 'picker':
         case 'text':
-            inputElement = tdElement.querySelector('input');
+            return tdElement.querySelector('input');
+        case 'dropdown':
+            return tdElement.querySelector('select');
+        case undefined:
+            return cell
+        default:
+            return `Unknown renderer [${renderer}]`
+    }
+}
+
+export const focusToControl = (inputElement, column, tdElement) => {
+    const { renderer } = column
+    switch (renderer) {
+        case 'toggle':
+        case 'picker':
+        case 'text':
             inputElement.focus();
             return inputElement
         case 'dropdown':
-            inputElement = tdElement.querySelector('select');
             // const event = new Event('mousedown', { bubbles: true, cancelable: true });
             // inputElement.dispatchEvent(event);
             // console.log("focus dropdown")
             inputElement.focus();
             return inputElement
+        case undefined:
+            return cell
+        default:
+            return `Unknown renderer [${renderer}]`
+    }
+}
+
+export const postRenderControl = (inputElement, column) => {
+    const { renderer } = column
+    switch (renderer) {
+        case 'toggle':
+        case 'picker':
+        case 'text':
+            return
+        case 'dropdown':
+            $(inputElement).select2({})
+            $(inputElement).on('select2:close', function (e) {
+                // This function will be called when the Select2 dropdown is closed
+                console.log('Select2 dropdown closed');
+                // Add your logic here for actions after the Select2 dropdown closes
+            });
+            $(inputElement).blur(() => {
+                console.log(111)
+            })
+            return
         case undefined:
             return cell
         default:

@@ -16,11 +16,20 @@ const exposeParamsToWindow = (params, tableId) => {
     window.editableTableValues[tableId] = keyBy(params.dataSource, 'id')
 }
 
+const listenOnResizeWindow = (params, tableId) => {
+    window.addEventListener('resize', () => {
+        // const width = window.innerWidth;
+        // const height = window.innerHeight;
+        applyFixedColumns(params, tableId)
+    })
+}
+
 export const postRender = (params) => {
     $(document).ready(() => {
         const { tableId } = params.tableParams
         applyFixedColumns(params, tableId)
         exposeParamsToWindow(params, tableId)
         myAddEventListener(params, tableId)
+        // listenOnResizeWindow(params, tableId)
     })
 }

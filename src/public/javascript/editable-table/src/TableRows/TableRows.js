@@ -10,7 +10,7 @@ export const TableRows = (params) => {
             const cell = TableCell(params, line[dataIndex], line, column, index)
             return cell
         });
-        return `<tr class="${tbody_tr}">${y.join('')}</tr>`
+        return `<tr class="${tbody_tr}" style="height: 52px;">${y.join('')}</tr>`
     })
 
     // console.log(x)

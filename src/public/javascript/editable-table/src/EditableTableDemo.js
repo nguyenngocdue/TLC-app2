@@ -27,7 +27,7 @@ const tableParams = {
     footer: "This is a table footer description",
 }
 
-export const EditableTableDemo = () => {
+export const EditableTableDemo = (divId) => {
     let settings, params
     const columns = DataSource.UserColumns
     const dataSource = DataSource.Users
@@ -55,6 +55,7 @@ export const EditableTableDemo = () => {
     <div class="bg-gray-100 p-4 mb-2">Printable Mode #${tableParams2b.tableId}${table02b}</div>`
 
     const tables = `
+    <button type="button" class="border rounded bg-purple-500 p-2 m-1" onclick="console.log(editableTables, editableTableValues)">Console LOG</button>
     <div class="bg-white p-4">
         <div class="grid grid-cols-12 gap-4 m-4">
             <div class="2xl:col-span-6 md:col-span-12">${editableMode}</div>
@@ -63,5 +64,5 @@ export const EditableTableDemo = () => {
     </div>
     `
 
-    $("#divMain").html(tables)
+    $("#" + divId).html(tables)
 }

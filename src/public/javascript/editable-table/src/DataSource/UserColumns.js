@@ -30,13 +30,29 @@ export const UserColumns = [
             { id: 61, name: 'Australia', },
         ],
     },
-    // {
-    //     dataIndex: "description",
-    //     title: "Description",
-    //     renderer: 'text',
-    //     control: 'text',
-    //     width: 100,
-    // },
+    {
+        dataIndex: "languages",
+        title: "Languages",
+        renderer: 'toggle',
+        control: 'toggle',
+        // fixed: 'right',
+        dataSource: [
+            { id: 'en', name: 'English', },
+            { id: 'vi', name: 'Vietnamese', },
+            { id: 'cn', name: 'Chinese', },
+            { id: 'th', name: 'Thai', },
+            { id: 'kr', name: 'Korean', },
+            { id: 'jp', name: 'Japanese', },
+        ],
+    },
+    {
+        dataIndex: "description",
+        title: "Description",
+        renderer: 'text',
+        control: 'text',
+        width: 100,
+        hidden: true,
+    },
     {
         dataIndex: "is_female",
         title: "Is Female",
@@ -64,13 +80,7 @@ export const UserColumns = [
         control: 'text',
     },
 
-    {
-        dataIndex: "languages",
-        title: "Languages",
-        renderer: 'toggle',
-        control: 'toggle',
-        fixed: 'right',
-    },
+
     {
         dataIndex: "hidden",
         title: "Hidden Column",
