@@ -1,4 +1,4 @@
-import { getControl } from './Controls/Controls'
+import { focusToControl, getControl, getCurrentValue } from './Controls/Controls'
 import { getRenderer } from './Renderers/Renderers'
 import { applyFixedColumnWidth } from './FrozenColumn'
 
@@ -34,20 +34,19 @@ const myAddEventListener = (params, tableId) => {
     function makeEditableField() {
 
         const tdElement = this
-        const currentValue = tdElement.textContent;
         const dataIndex = tdElement.getAttribute('dataIndex')
         const column = columnsIndexed[dataIndex]
         // console.log(column)
         // console.log(`makeEditableField currentValue: ${currentValue} ${dataIndex}`)
 
+        // const currentValue = tdElement.textContent;
+        const currentValue = getCurrentValue(column, tdElement);
         const control = getControl(column, currentValue)
         tdElement.innerHTML = control
 
-        const inputElement = tdElement.querySelector('input');
-        inputElement.focus();
+        const inputElement = focusToControl(column, tdElement)
 
         inputElement.addEventListener('blur', function () {
-            // console.log(`leaving ${dataIndex}`)
             const newValue = this.value;
             const renderer = getRenderer(column, newValue)
             tdElement.innerHTML = renderer;

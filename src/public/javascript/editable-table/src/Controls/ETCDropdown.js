@@ -4,12 +4,12 @@ export const ETCDropdown = (cell, column) => {
     // console.log(column, dataSourceIndexed)
     const options = Object.keys(dataSourceIndexed).map((id) => {
         const option = dataSourceIndexed[id]['name']
-        // console.log(option)
+        console.log(option, id, cell)
         return `<option value="${id}">${option}</option>`
     })
-    console.log(options)
+    // console.log(options)
     return `<select>
         ${options.join('')}
     </select>`
-    return `<input type="text" class="w-full" value="${cell}" >`
+    // return `<input type="text" class="w-full" value="${cell}" >`
 }

@@ -1,6 +1,5 @@
 export const ETRDropdown = (cell, column) => {
-    const content = column.dataSource[cell] || '??'
+    // console.log(column.dataSource)
+    const content = column.dataSourceIndexed[cell]?.['name'] || `_[${cell}]_`
     return `${content}`
-    // const value = `<input tabindex="-1" type="text" value="${cell}" >`
-    // return `${content} ${value}`
 }
