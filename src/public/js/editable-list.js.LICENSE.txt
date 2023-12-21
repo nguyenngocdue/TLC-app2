@@ -2,6 +2,8 @@
 
 /*! ./EditableList */
 
+/*! ./functions */
+
 /*! ./src/EditableList */
 
 /*! ./src/EditableListDemo */
@@ -13,6 +15,10 @@
 /*!**************************************************!*\
   !*** ./public/javascript/editable-list/index.js ***!
   \**************************************************/
+
+/*!**********************************************************!*\
+  !*** ./public/javascript/editable-list/src/functions.js ***!
+  \**********************************************************/
 
 /*!*************************************************************!*\
   !*** ./public/javascript/editable-list/src/EditableList.js ***!

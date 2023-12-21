@@ -13,16 +13,16 @@ const params = {
         8: { name: "hello 8" },
         9: { name: "hello 9" },
         10: { name: "hello 10" },
-        11: { name: "hello 11" },
-        12: { name: "hello 12" },
-        13: { name: "hello 13" },
-        14: { name: "hello 14" },
-        15: { name: "hello 15" },
-        16: { name: "hello 16" },
-        17: { name: "hello 17" },
-        18: { name: "hello 18" },
-        19: { name: "hello 19" },
-        20: { name: "hello 20" },
+        a11: { name: "hello 11" },
+        a12: { name: "hello 12" },
+        a13: { name: "hello 13" },
+        a14: { name: "hello 14" },
+        a15: { name: "hello 15" },
+        a16: { name: "hello 16" },
+        a17: { name: "hello 17" },
+        a18: { name: "hello 18" },
+        a19: { name: "hello 19" },
+        a20: { name: "hello 20" },
     },
     width: 200,
 }
@@ -30,19 +30,19 @@ const params = {
 export const EditableListDemo = (divId) => {
     const select = `<div class="p-5 flex ">
         <div>
-        ${EditableList({ ...params, name: "lst001a", id: "lst001a", })}
+        ${EditableList({ ...params, name: "lst001a", id: "lst001a", selected: 3, })}
         </div>
         ___
         <div>
-        ${EditableList({ ...params, name: "lst001b", id: "lst001b", allowFilter: true, })}
+        ${EditableList({ ...params, name: "lst001b", id: "lst001b", selected: 5, allowFilter: true, })}
         </div>
         ___
         <div>
-        ${EditableList({ ...params, name: "lst002a", id: "lst002a", })}
+        ${EditableList({ ...params, name: "lst002a", id: "lst002a", selected: [1, 4], })}
         </div>
         ___
         <div>
-        ${EditableList({ ...params, name: "lst002b", id: "lst002b", allowFilter: true, })}
+        ${EditableList({ ...params, name: "lst002b", id: "lst002b", selected: [2, 3], allowFilter: true, })}
         </div>
     </div>`
     $("#" + divId).html(select)

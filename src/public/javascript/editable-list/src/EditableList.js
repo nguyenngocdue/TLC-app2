@@ -1,27 +1,46 @@
+import { looseInclude } from "./functions"
+
+const addEventListenerForLi = (liId, id, params, onClickFn) => $(`#${liId}`).click((e) => onClickFn(e))
+
 const editableListRender = (params, keyword = null) => {
     const {
-        maxHeight = 400, dataSource,
-        itemRenderer = (item) => `<span class="p-2 block w-full">${item.name}</span>`,
-        compareFn = (item, keyword) => item.name.includes(keyword)
+        id,
+        maxHeight = 400, dataSource, selected,
+        // itemRenderer = (item, dataIndex) => console.log(item),
+        itemRenderer = (item, dataIndex) => `<span id="${dataIndex}" class="p-2 block w-full">${item.name}</span>`,
+        compareFn = (item, keyword) => item.name.includes(keyword),
+        selectedClass = `bg-blue-800 text-white`,
+        onClick = (e) => {
+            console.log(`Selected ${e.target.id}`)
+        },
     } = params
+
 
     const lis = Object.keys(dataSource).map((dataIndex) => {
         const item = dataSource[dataIndex]
         if (keyword) {
             if (!compareFn(item, keyword)) return
+            //do not combine if clauses
         }
-        const rendered = itemRenderer(item)
-        return `<li class="hover:bg-gray-300 cursor-pointer block">${rendered}</li>`
+        const rendered = itemRenderer(item, dataIndex)
+        const selectedArr = Array.isArray(selected) ? selected : [selected]
+        const selectedStr = looseInclude(selectedArr, dataIndex) ? selectedClass : ''
+        // console.log(item, dataIndex, selectedStr, selectedArr)
+        const liId = `li_of_${id}_${dataIndex}`
+        $(document).ready(() => addEventListenerForLi(liId, id, params, onClick))
+
+        return `<li id="${liId}" class="hover:bg-gray-300 cursor-pointer block ${selectedStr}">${rendered}</li>`
     })
 
     const ul = `<ul class="border overflow-y-auto w-full" style="max-height:${maxHeight}px;">
         ${lis.join("<hr/>")}
     </ul>`
 
+
     return ul
 }
 
-const addEventListener = (inputId, id, params) => {
+const addEventListenerForInput = (inputId, id, params) => {
     $(`#${inputId}`).on('keyup', (e) => {
         const ul = editableListRender(params, e.target.value)
         // console.log(e.target.value, ul)
@@ -30,7 +49,7 @@ const addEventListener = (inputId, id, params) => {
 }
 
 export const EditableList = (params) => {
-    const { name, id, width = 200, allowFilter = false, } = params
+    const { name, id, width = 200, allowFilter = false } = params
     const inputId = `input_of_${id}`
     const ul = editableListRender(params)
 
@@ -48,7 +67,7 @@ export const EditableList = (params) => {
         <div id="${id}">${ul}</div>
     </div>
     `
-    $(document).ready(() => addEventListener(inputId, id, params))
+    $(document).ready(() => addEventListenerForInput(inputId, id, params))
 
     return `${div}`
 }
