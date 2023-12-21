@@ -4,6 +4,13 @@
 
 @section('content')
 
+<div id="divList"></div>
+<script src="{{ asset('js/editable-list.js') }}"></script>
+<script>EditableListDemo('divList')</script>
+<br/>
+<br/>
+<br/>
+
 <input />
 <div id="divSelect"></div>
 <input />
