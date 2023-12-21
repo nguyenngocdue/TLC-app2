@@ -1,11 +1,12 @@
 export const ETCDropdown = (cell, column) => {
 
-    const { dataSourceIndexed } = column
-    // console.log(column, dataSourceIndexed)
-    const options = Object.keys(dataSourceIndexed).map((id) => {
-        const option = dataSourceIndexed[id]['name']
-        console.log(option, id, cell)
-        return `<option value="${id}">${option}</option>`
+    const { dataSource } = column
+    // console.log(column, dataSource)
+    const options = Object.keys(dataSource).map((id) => {
+        const option = dataSource[id]['name']
+        // console.log(option, id, cell)
+        const selected = (id == cell) ? "selected" : ""
+        return `<option value="${id}" ${selected}>${option}</option>`
     })
     // console.log(options)
     return `<select class="w-full">

@@ -1,6 +1,7 @@
 export const Users = [
     {
         no: 1,
+        id: "tchvan",
         action: ['move', 'toggle', 'clone', 'trash'],
         name: "Fortune Truong",
         no_renderer: 123,
@@ -14,6 +15,7 @@ export const Users = [
     },
     {
         no: 2,
+        id: "vvthuc",
         action: ['move', 'toggle', 'clone', 'trash'],
         name: "Thuc Vo",
         no_renderer: 123,
@@ -27,6 +29,7 @@ export const Users = [
     },
     {
         no: 3,
+        id: "ndcanh",
         action: ['move', 'toggle', 'clone', 'trash'],
         name: "Canh Ngo",
         no_renderer: 123,
@@ -40,6 +43,7 @@ export const Users = [
     },
     {
         no: 4,
+        id: "nndue",
         action: ['move', 'toggle', 'clone', 'trash'],
         name: "Due Nguyen",
         no_renderer: 123,

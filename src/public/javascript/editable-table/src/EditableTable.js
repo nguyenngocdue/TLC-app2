@@ -12,7 +12,7 @@ const tableRenderer = (params) => {
     }
 }
 
-const keyBy = (array, keyName) => {
+export const keyBy = (array, keyName) => {
     const result = {}
     for (let i = 0; i < array.length; i++) result[array[i][keyName]] = array[i]
     return result
@@ -20,7 +20,10 @@ const keyBy = (array, keyName) => {
 
 const keyByForDataSource = (array, keyName) => {
     array.forEach(column => {
-        if (column.dataSource) column.dataSourceIndexed = keyBy(column.dataSource, keyName)
+        if (column.dataSource && Array.isArray(column.dataSource)) {
+            const dsIndexed = keyBy(column.dataSource, keyName)
+            column.dataSource = dsIndexed
+        }
     })
     return array
 }

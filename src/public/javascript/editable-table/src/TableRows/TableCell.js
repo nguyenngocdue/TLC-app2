@@ -6,6 +6,7 @@ export const TableCell = (params, cell, row, column, index) => {
     const { tableId } = tableParams
     const { tbody_tr_td } = settings.cssClass
     const { hidden, width = 100, dataIndex, control } = column
+    const { id } = row
     const rendererStr = getRenderer(column, cell)
     const fixedClass = getFixedClass(column, index, 'td', tableId)
     const styleStr = `style="width:${width}px"`
@@ -15,6 +16,7 @@ export const TableCell = (params, cell, row, column, index) => {
     const hiddenStr = hidden ? 'hidden' : ''
     const classNames = `${tbody_tr_td} ${editable} ${fixedClass} ${hiddenStr}`.replace(/\s+/g, ' ').trim()
     return `<td ${tabIndex} ${styleStr}
-            dataIndex="${dataIndex}"
+            data-index="${dataIndex}"
+            datasource-index="${id}"
             class="${classNames}">${rendererStr}</td>`
 }

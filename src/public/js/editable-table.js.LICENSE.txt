@@ -16,6 +16,8 @@
 
 /*! ../TableRows/TableRows */
 
+/*! ./AttachEditableControls */
+
 /*! ./Controls/Controls */
 
 /*! ./DataSource */
@@ -41,6 +43,8 @@
 /*! ./ETRToggle */
 
 /*! ./EditableMode */
+
+/*! ./EditableTable */
 
 /*! ./FrozenColumn */
 
@@ -177,6 +181,10 @@
 /*!***********************************************************************!*\
   !*** ./public/javascript/editable-table/src/Renderers/ETRDropdown.js ***!
   \***********************************************************************/
+
+/*!************************************************************************!*\
+  !*** ./public/javascript/editable-table/src/AttachEditableControls.js ***!
+  \************************************************************************/
 
 /*!************************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/UserColumns.js ***!
