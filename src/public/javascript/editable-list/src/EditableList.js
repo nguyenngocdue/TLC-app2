@@ -36,7 +36,6 @@ const editableListRender = (params, keyword = null) => {
         ${lis.join("<hr/>")}
     </ul>`
 
-
     return ul
 }
 
@@ -46,10 +45,6 @@ const addEventListenerForInput = (inputId, id, params) => {
         // console.log(e.target.value, ul)
         $(`#${id}`).html(ul)
     })
-}
-
-const addEventListenerForClickAway = () => {
-
 }
 
 export const EditableList = (params) => {
@@ -65,8 +60,9 @@ export const EditableList = (params) => {
     </div>
     `
     const ulDivId = `ul_div_${id}`
+    const animation = `absolute transition-opacity duration-300 ease-in-out opacity-0`
     const div = `<div id="${id}"
-        class="border shadow-md rounded p-0 hidden bg-gray-50" 
+        class="border shadow-md rounded p-0 bg-gray-50 ${animation}" 
         style="width:${width}px;z-index:1001;"
         >
         ${filterInput}
@@ -74,7 +70,6 @@ export const EditableList = (params) => {
     </div >
     `
     $(document).ready(() => addEventListenerForInput(inputId, ulDivId, params))
-    // $(document).ready(() => addEventListenerForClickAway(id, ulDivId, params))
 
     return `${div} `
 }

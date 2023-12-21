@@ -6,6 +6,8 @@
 
 {{-- editable select --}}
 <div class="border-l-1 focus-visible:border-none" ></div> 
+<div class="opacity-0 duration-500 " ></div> 
+<div class="transition-opacity opacity-100 duration-300 ease-in-out" ></div> 
 <div class="table-auto -m-1"></div>
 <div class="hover:border-transparent focus:border-transparent focus:outline-none"></div>
 
