@@ -7,7 +7,7 @@ const editableListRender = (params, keyword = null) => {
         id,
         maxHeight = 400, dataSource, selected,
         // itemRenderer = (item, dataIndex) => console.log(item),
-        itemRenderer = (item, dataIndex) => `<span id="${dataIndex}" class="p-2 block w-full">${item.name}</span>`,
+        itemRenderer = (item, dataIndex) => `<span id="${dataIndex}" class="px-2 py-1 block w-full">${item.name}</span>`,
         compareFn = (item, keyword) => item.name.includes(keyword),
         selectedClass = `bg-blue-800 text-white`,
         onClick = (e) => {
@@ -49,7 +49,7 @@ const addEventListenerForInput = (inputId, id, params) => {
 }
 
 export const EditableList = (params) => {
-    const { name, id, width = 200, allowFilter = false } = params
+    const { name, id, width = 200, allowFilter = false, float, } = params
     const inputId = `input_of_${id}`
     const ul = editableListRender(params)
 
@@ -61,13 +61,17 @@ export const EditableList = (params) => {
     </div>
     `
 
-    const div = `
-    <div class="border shadow-md rounded p-0" style="width:${width}px;">
-    ${filterInput}
+    const classFloat = float ? "absolute bg-gray-50" : ""
+
+    const div = `<div 
+        class="border shadow-md rounded p-0 ${classFloat}" 
+        style="width:${width}px;z-index:1001;"
+        >
+        ${filterInput}
         <div id="${id}">${ul}</div>
-    </div>
+    </div >
     `
     $(document).ready(() => addEventListenerForInput(inputId, id, params))
 
-    return `${div}`
+    return `${div} `
 }

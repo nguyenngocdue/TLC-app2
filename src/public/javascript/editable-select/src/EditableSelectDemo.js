@@ -1,3 +1,4 @@
+import { helloList } from "../../editable-list/src/functions"
 import { EditableSelect } from "./EditableSelect"
 
 const Select1 = () => {
@@ -7,11 +8,12 @@ const Select1 = () => {
         placeholder: "Select country",
         readOnly: false,
         allowClear: false,
-        allowFilter: true,
+        allowFilter: false,
         multiple: false,
         itemTemplate: (obj) => obj,
         selected: 1,
-        dataSource: {},
+        dataSource: helloList,
+        width: 210,
     }
     const select = EditableSelect(params)
     return select
@@ -22,12 +24,13 @@ const Select2 = () => {
         name: 'Select2',
         placeholder: "Select country",
         readOnly: false,
-        allowClear: false,
-        allowFilter: true,
+        allowClear: true,
+        allowFilter: false,
         multiple: false,
         itemTemplate: (obj) => obj,
         selected: 1,
-        dataSource: {},
+        dataSource: helloList,
+        width: 210,
     }
     const select = EditableSelect(params)
     return select
@@ -43,7 +46,8 @@ const Select3 = () => {
         multiple: false,
         itemTemplate: (obj) => obj,
         selected: 1,
-        dataSource: {},
+        dataSource: helloList,
+        width: 210,
     }
     const select = EditableSelect(params)
     return select
@@ -55,11 +59,12 @@ const MSelect1 = () => {
         placeholder: "Select country",
         readOnly: false,
         allowClear: false,
-        allowFilter: true,
-        multiple: false,
+        allowFilter: false,
+        multiple: true,
         itemTemplate: (obj) => obj,
         selected: 1,
-        dataSource: {},
+        dataSource: helloList,
+        width: 210,
     }
     const select = EditableSelect(params)
     return select
@@ -70,12 +75,13 @@ const MSelect2 = () => {
         name: 'MultiSelect2[]',
         placeholder: "Select country",
         readOnly: false,
-        allowClear: false,
-        allowFilter: true,
-        multiple: false,
+        allowClear: true,
+        allowFilter: false,
+        multiple: true,
         itemTemplate: (obj) => obj,
         selected: 1,
-        dataSource: {},
+        dataSource: helloList,
+        width: 210,
     }
     const select = EditableSelect(params)
     return select
@@ -88,10 +94,11 @@ const MSelect3 = () => {
         readOnly: false,
         allowClear: false,
         allowFilter: true,
-        multiple: false,
+        multiple: true,
         itemTemplate: (obj) => obj,
         selected: 1,
-        dataSource: {},
+        dataSource: helloList,
+        width: 210,
     }
     const select = EditableSelect(params)
     return select
@@ -128,6 +135,8 @@ export const EditableSelectDemo = (divId) => {
     `
 
 
-    const select = `Select: ${rendererSelect} MultiSelect: ${rendererMultiSelect}`
+    let select = `Select: ${rendererSelect}`
+    // select += `MultiSelect: ${rendererMultiSelect}`
+
     $("#" + divId).html(select)
 }
