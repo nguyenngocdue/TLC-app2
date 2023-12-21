@@ -1,17 +1,20 @@
 import { EditableList } from "../../editable-list/src/EditableList"
-import { DropdownOnClickAndBlur, getEById } from "./EventHandler/functions"
+import { DropdownOnBlur, DropdownOnClickAndBlur, getEById } from "./EventHandler/functions"
 
 export const EditableSelect = (params) => {
 
     const {
-        id, width = 200,
+        id, name, width = 200,
         placeholder = "Select",
         dataSource = {},
+        selected,
         allowFilter,
         allowClear,
     } = params
 
     // console.log(params)
+    const dropdownId = `dropdown_${id}`
+    const dropdownInputId = `dropdown_input_${id}`
 
     const floatingListId = `floatingList_${id}`
     const listParams = {
@@ -21,14 +24,19 @@ export const EditableSelect = (params) => {
         allowFilter,
         allowClear,
         float: true,
+        onClick: (e) => {
+            getEById(dropdownInputId).val(e.target.id)
+            console.log(`Selected 1111 ${e.target.id}`)
+            DropdownOnBlur({ floatingListId })
+        }
     }
 
     const floatingList = EditableList(listParams)
     const clearStr = `<button tabindex="-1" type="button" class="hover:bg-red-500 px-2 rounded-full flex items-center"><i class="fa-solid fa-delete-left"></i></button>`
     const arrowDown = `<div class="px-2 flex items-center"><i class="fa-solid fa-chevron-down"></i></div>`
-    const dropdownId = `dropdown_${id}`
 
     const dropdown = `<div id="${dropdownId}" class="border rounded inline-block" tabindex="0" style="width:${width}px;">
+        <input type="text" name="${name}" id="${dropdownInputId}" value="${selected}"/>
         <div class="flex">
             <span class="m-1 w-full">${placeholder}</span>
             ${allowClear ? clearStr : ''}

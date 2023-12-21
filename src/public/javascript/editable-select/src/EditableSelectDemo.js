@@ -1,6 +1,8 @@
 import { helloList } from "../../editable-list/src/functions"
 import { EditableSelect } from "./EditableSelect"
 
+const width = 280
+
 const Select1 = () => {
     const params = {
         id: 'Select1_a',
@@ -13,7 +15,7 @@ const Select1 = () => {
         itemTemplate: (obj) => obj,
         selected: 'a1',
         dataSource: helloList(),
-        width: 210,
+        width,
     }
     const select = EditableSelect(params)
     return select
@@ -30,7 +32,7 @@ const Select2 = () => {
         itemTemplate: (obj) => obj,
         selected: 'a1',
         dataSource: helloList(),
-        width: 210,
+        width,
     }
     const select = EditableSelect(params)
     return select
@@ -47,7 +49,7 @@ const Select3 = () => {
         itemTemplate: (obj) => obj,
         selected: 'a1',
         dataSource: helloList(),
-        width: 210,
+        width,
     }
     const select = EditableSelect(params)
     return select
@@ -64,7 +66,7 @@ const MSelect1 = () => {
         itemTemplate: (obj) => obj,
         selected: ['a1', 'a2', 'a3'],
         dataSource: helloList(),
-        width: 210,
+        width,
     }
     const select = EditableSelect(params)
     return select
@@ -81,7 +83,7 @@ const MSelect2 = () => {
         itemTemplate: (obj) => obj,
         selected: ['a1', 'a2', 'a3'],
         dataSource: helloList(),
-        width: 210,
+        width,
     }
     const select = EditableSelect(params)
     return select
@@ -98,7 +100,7 @@ const MSelect3 = () => {
         itemTemplate: (obj) => obj,
         selected: ['a1', 'a2', 'a3'],
         dataSource: helloList(),
-        width: 210,
+        width,
     }
     const select = EditableSelect(params)
     return select
