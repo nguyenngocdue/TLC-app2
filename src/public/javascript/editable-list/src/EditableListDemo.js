@@ -1,6 +1,7 @@
 import { EditableList } from "./EditableList"
 
 const params = {
+
     dataSource: {
         1: { name: "hello 1" },
         2: { name: "hello 2" },
@@ -29,10 +30,19 @@ const params = {
 export const EditableListDemo = (divId) => {
     const select = `<div class="p-5 flex ">
         <div>
-        ${EditableList(params)}
+        ${EditableList({ ...params, name: "lst001a", id: "lst001a", })}
         </div>
+        ___
         <div>
-        ${EditableList({ ...params, allowFilter: true, })}
+        ${EditableList({ ...params, name: "lst001b", id: "lst001b", allowFilter: true, })}
+        </div>
+        ___
+        <div>
+        ${EditableList({ ...params, name: "lst002a", id: "lst002a", })}
+        </div>
+        ___
+        <div>
+        ${EditableList({ ...params, name: "lst002b", id: "lst002b", allowFilter: true, })}
         </div>
     </div>`
     $("#" + divId).html(select)
