@@ -12,8 +12,16 @@ const tableRenderer = (params) => {
     }
 }
 
+const keyBy = (array, keyName) => {
+    const result = {}
+    for (let i = 0; i < array.length; i++) result[array[i][keyName]] = array[i]
+    return result
+}
+
 export const EditableTable = (params) => {
     // console.log(params)
+    const columnIndexes = keyBy(params.columns, 'dataIndex')
+    params = { ...params, columnIndexes }
     const table = tableRenderer(params)
     postRender(params);
     return table

@@ -1,4 +1,5 @@
 
 export const ETCText = (cell, column) => {
-    return `<input type="text" value="${cell}">`
+    const className = `w-full p-0`
+    return `<input type="text" class="${className}" value="${cell}">`
 }

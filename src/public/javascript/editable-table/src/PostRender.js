@@ -1,3 +1,5 @@
+import { getControl } from './Controls/Controls'
+import { getRenderer } from './Renderers/Renderers'
 import { applyFixedColumnWidth } from './FrozenColumn'
 
 const applyFixedColumns = (params, tableId) => {
@@ -13,29 +15,41 @@ const exposeParamsToWindow = (params, tableId) => {
 const myAddEventListener = (params, tableId) => {
     const editableCells = document.querySelectorAll(`.editable-cell-${tableId}:not(.hidden)`);
     // console.log(editableCells)
+    const { columnIndexes } = params
+    // console.log(columnIndexes)
+
     editableCells.forEach(cell => {
         cell.addEventListener('keydown', function (event) {
             if (event.key === 'Tab' && !event.shiftKey) {
-                makeEditable.call(this);
+                // makeEditableField.call(this);
             } else if (event.key === 'Tab' && event.shiftKey) {
                 rewindFocus.call(this);
             }
         });
-        cell.addEventListener('focus', makeEditable);
-        // cell.addEventListener('click', makeEditable);
+        cell.addEventListener('focus', makeEditableField);
+        // cell.addEventListener('mouseover', makeEditableField);
+        // cell.addEventListener('click', makeEditableField);
     });
 
-    function makeEditable() {
-        const currentValue = this.textContent;
-        console.log('makeEditable currentValue', currentValue)
-        this.innerHTML = `<input type="text" value="${currentValue}" />`;
+    function makeEditableField() {
 
-        const inputElement = this.querySelector('input');
+        const tdElement = this
+        const currentValue = tdElement.textContent;
+        const dataIndex = tdElement.getAttribute('dataIndex')
+        const column = columnIndexes[dataIndex]
+        // console.log(column)
+        // console.log(`makeEditableField currentValue: ${currentValue} ${dataIndex}`)
+        const control = getControl(column, currentValue)
+        tdElement.innerHTML = control
+
+        const inputElement = tdElement.querySelector('input');
         inputElement.focus();
 
         inputElement.addEventListener('blur', function () {
+            // console.log(`leaving ${dataIndex}`)
             const newValue = this.value;
-            this.parentNode.innerHTML = newValue;
+            const renderer = getRenderer(column, newValue)
+            tdElement.innerHTML = renderer;
         });
     }
 
