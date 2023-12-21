@@ -39,7 +39,7 @@ export const TableCell = (params, cell, row, column, index) => {
     const styleStr = `style="width:${width}px"`
 
     const editable = (control) ? `editable-cell-${tableId}` : ""
-    const tabIndex = control ? `tabindex="0"` : ''
+    const tabIndex = (control) ? `tabindex="0"` : ''
     const hiddenStr = hidden ? 'hidden' : ''
     const classNames = `${tbody_tr_td} ${editable} ${fixedClass} ${hiddenStr}`.replace(/\s+/g, ' ').trim()
     return `<td ${tabIndex} class="${classNames}" ${styleStr} >${rendererStr}</td>`

@@ -11,12 +11,11 @@ const exposeParamsToWindow = (params, tableId) => {
 }
 
 const myAddEventListener = (params, tableId) => {
-    const editableCells = document.querySelectorAll(`.editable-cell-${tableId}`);
+    const editableCells = document.querySelectorAll(`.editable-cell-${tableId}:not(.hidden)`);
     // console.log(editableCells)
     editableCells.forEach(cell => {
         cell.addEventListener('keydown', function (event) {
             if (event.key === 'Tab' && !event.shiftKey) {
-                console.log('ggggg')
                 makeEditable.call(this);
             } else if (event.key === 'Tab' && event.shiftKey) {
                 rewindFocus.call(this);
@@ -28,7 +27,7 @@ const myAddEventListener = (params, tableId) => {
 
     function makeEditable() {
         const currentValue = this.textContent;
-        console.log('makeEditable', currentValue)
+        console.log('makeEditable currentValue', currentValue)
         this.innerHTML = `<input type="text" value="${currentValue}" />`;
 
         const inputElement = this.querySelector('input');
@@ -41,13 +40,10 @@ const myAddEventListener = (params, tableId) => {
     }
 
     function rewindFocus() {
-        console.log('rewindFocus', editableCells)
         let index = Array.from(editableCells).indexOf(this);
-        if (index > 0) {
-            editableCells[index - 1].focus();
-        } else {
-            editableCells[editableCells.length - 1].focus();
-        }
+        const previousIndex = (index - 1 + editableCells.length) % editableCells.length
+        const target = editableCells[previousIndex]
+        target.focus()
     }
 }
 
