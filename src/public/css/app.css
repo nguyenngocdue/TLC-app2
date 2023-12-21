@@ -1642,9 +1642,6 @@ video {
 .table-auto {
   table-layout: auto;
 }
-.border-collapse {
-  border-collapse: collapse;
-}
 .border-separate {
   border-collapse: separate;
 }
@@ -8830,12 +8827,12 @@ video {
     grid-column: span 5 / span 5;
   }
 
-  .\32xl\:col-span-7 {
-    grid-column: span 7 / span 7;
-  }
-
   .\32xl\:col-span-6 {
     grid-column: span 6 / span 6;
+  }
+
+  .\32xl\:col-span-7 {
+    grid-column: span 7 / span 7;
   }
 
   .\32xl\:mx-20 {

@@ -15,13 +15,12 @@ export const EditableMode = (params) => {
     const tableColGroup = TableColGroup(params)
 
     const { tableId, maxH, tableWidth } = params.tableParams
-    const { table_css, } = params.settings.cssClass
 
     const table = `<div 
         class="table-wrp block overflow-x-auto ${maxH}}"
         style="table-layout: auto; ${tableWidth}"
         >
-        <table id="${tableId}" class="${table_css}">
+        <table id="${tableId}" class="w-full border-separate border-spacing-0 whitespace-no-wrap">
             ${tableColGroup}
             ${tableHeader}
             ${tableHeaderToolbar}

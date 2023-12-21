@@ -5,12 +5,11 @@ import { TableHeader } from '../TableHeader'
 
 export const PrintableMode = (params) => {
     // console.log(params)
-    const { settings, columns } = params
+    const { columns } = params
     const columns1 = columns.filter((item) => item.renderer !== 'action')
     params = { ...params, columns: columns1 }
 
     const { tableId, tableWidth } = params.tableParams
-    const { table_css, } = settings.cssClass
 
     let tableHeader = TableHeader(params)
     let tableBody = TableBody(params)
@@ -21,7 +20,7 @@ export const PrintableMode = (params) => {
         class="table-wrp block overflow-x-auto"
         style="table-layout: auto; ${tableWidth}"
         >
-        <table id="${tableId}" class="${table_css}">
+        <table id="${tableId}" class="w-full border-separate border-spacing-0 min-w-full max-w-full">
             ${tableColGroup}
             ${tableHeader}
             ${tableBody}

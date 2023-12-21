@@ -30,8 +30,9 @@ const getRenderer = (column, cell) => {
 }
 
 export const TableCell = (params, cell, row, column, index) => {
-    const { tableParams } = params
+    const { tableParams, settings } = params
     const { tableId } = tableParams
+    const { tbody_tr_td } = settings.cssClass
     const { hidden, width = 100, control } = column
     const rendererStr = getRenderer(column, cell)
     const fixedClass = getFixedClass(column, index, 'td', tableId)
@@ -39,5 +40,7 @@ export const TableCell = (params, cell, row, column, index) => {
 
     const editable = (control) ? `editable-cell-${tableId}` : ""
     const tabIndex = control ? `tabindex="0"` : ''
-    return `<td ${tabIndex} class="border p-1  ${editable} ${fixedClass} ${hidden ? 'hidden' : ''}" ${styleStr} >${rendererStr}</td>`
+    const hiddenStr = hidden ? 'hidden' : ''
+    const classNames = `${tbody_tr_td} ${editable} ${fixedClass} ${hiddenStr}`.replace(/\s+/g, ' ').trim()
+    return `<td ${tabIndex} class="${classNames}" ${styleStr} >${rendererStr}</td>`
 }
