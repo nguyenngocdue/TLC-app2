@@ -5,8 +5,9 @@
 <label class='peer-checked:bg-orange-300 peer-checked:text-orange-700'></label>
 
 {{-- editable select --}}
-<div class="border-l-1" ></div> 
+<div class="border-l-1 focus-visible:border-none" ></div> 
 <div class="table-auto -m-1"></div>
+<div class="hover:border-transparent focus:border-transparent focus:outline-none"></div>
 
 <div class="xl:col-span-6 -m-0.5"></div>
 <div class="2xl:col-span-6"></div>
