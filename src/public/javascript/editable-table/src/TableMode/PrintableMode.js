@@ -6,8 +6,10 @@ import { TableHeader } from '../TableHeader'
 export const PrintableMode = (params) => {
     // console.log(params)
     const { columns } = params
-    const columns1 = columns.filter((item) => item.renderer !== 'action')
-    params = { ...params, columns: columns1 }
+    const columns0 = Object.keys(columns).filter((dataIndex) => columns[dataIndex].renderer !== 'action')
+    let columnsAction1 = {}
+    columns0.forEach(key => columnsAction1[key] = columns[key])
+    params = { ...params, columns: columnsAction1 }
 
     const { tableId, tableWidth } = params.tableParams
 

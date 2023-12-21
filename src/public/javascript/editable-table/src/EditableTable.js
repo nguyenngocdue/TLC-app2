@@ -28,10 +28,10 @@ const keyByForDataSource = (array, keyName) => {
 export const EditableTable = (params) => {
     // console.log(params)
 
-    const columns = keyByForDataSource(params.columns, 'id')
-    const columnsIndexed = keyBy(columns, 'dataIndex')
+    const columns0 = keyByForDataSource(params.columns, 'id')
+    const columns = keyBy(columns0, 'dataIndex')
 
-    params = { ...params, columnsIndexed }
+    params = { ...params, columns }
     const table = tableRenderer(params)
     postRender(params);
     return table

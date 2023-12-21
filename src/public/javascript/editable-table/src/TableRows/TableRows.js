@@ -4,8 +4,9 @@ export const TableRows = (params) => {
     const { columns, dataSource, settings } = params
     const x = dataSource.map((line) => {
         const { tbody_tr } = settings.cssClass
-        const y = columns.map((column, index) => {
-            const { dataIndex } = column
+        const y = Object.keys(columns).map((dataIndex, index) => {
+            const column = columns[dataIndex]
+            // const { dataIndex } = columns[dataIndex]
             const cell = TableCell(params, line[dataIndex], line, column, index)
             return cell
         });

@@ -30,7 +30,8 @@ const getColumnWidth = (tableId, columnIndex) => {
 export const applyFixedColumnWidth = (tableId, columns) => {
     const tableObjectColumns = []
     let accumulated = 0
-    columns.forEach((column, index) => {
+    Object.keys(columns).forEach((dataIndex, index) => {
+        const column = columns[dataIndex]
         column['fixedLeft'] = accumulated
         accumulated += getColumnWidth(tableId, index)
         tableObjectColumns.push(column)

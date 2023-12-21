@@ -15,7 +15,7 @@ export const getCurrentValue = (column, tdElement) => {
         case 'text':
             return tdElement.textContent;
         case 'dropdown':
-            return tdElement.textContent;
+            return tdElement.value;
         case undefined:
             return cell
         default:
@@ -53,7 +53,10 @@ export const focusToControl = (column, tdElement) => {
             return inputElement
         case 'dropdown':
             inputElement = tdElement.querySelector('select');
-            inputElement.focus();
+            const event = new Event('mousedown', { bubbles: true, cancelable: true });
+            inputElement.dispatchEvent(event);
+            console.log("focus dropdown")
+            // inputElement.focus();
             return inputElement
         case undefined:
             return cell

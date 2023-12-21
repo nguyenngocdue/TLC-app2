@@ -25,14 +25,16 @@ export const TableFooterAgg = (params) => {
     const { tfoot_tr } = settings.cssClass
     const { tableFnName, tableId } = tableParams
     const ths = []
-    for (let i = 0; i < columns.length; i++) {
-        const { hidden, width = 100 } = columns[i]
-        if (hidden) continue
-        const content = aggCalculate(columns[i], dataSource, tableFnName)
-        const fixedClass = getFixedClass(columns[i], i, 'th', tableId)
+    // for (let i = 0; i < columns.length; i++) {
+    Object.keys(columns).map((dataIndex, i) => {
+        const column = columns[dataIndex]
+        const { hidden, width = 100 } = column
+        if (hidden) return
+        const content = aggCalculate(column, dataSource, tableFnName)
+        const fixedClass = getFixedClass(column, i, 'th', tableId)
         const styleStr = `style="width:${width}px"`
         ths.push(`<th class="border ${fixedClass}" ${styleStr}>${content}</th>`)
-    }
+    })
     return `<tfoot>
         <tr class="${tfoot_tr}">
             ${ths.join('')}

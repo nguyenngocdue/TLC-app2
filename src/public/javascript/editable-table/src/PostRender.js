@@ -10,13 +10,16 @@ const applyFixedColumns = (params, tableId) => {
 const exposeParamsToWindow = (params, tableId) => {
     if (!window.editableTables) window.editableTables = {}
     window.editableTables[tableId] = params
+
+    if (!window.editableTableValues) window.editableTableValues = {}
+    window.editableTableValues[tableId] = params.dataSourceIndexes
 }
 
 const myAddEventListener = (params, tableId) => {
     const editableCells = document.querySelectorAll(`.editable-cell-${tableId}:not(.hidden)`);
     // console.log(editableCells)
-    const { columnsIndexed } = params
-    // console.log(columnsIndexed)
+    const { columns } = params
+    // console.log(columns)
 
     editableCells.forEach(cell => {
         cell.addEventListener('keydown', function (event) {
@@ -34,19 +37,20 @@ const myAddEventListener = (params, tableId) => {
     function makeEditableField() {
 
         const tdElement = this
-        const dataIndex = tdElement.getAttribute('dataIndex')
-        const column = columnsIndexed[dataIndex]
+        const dataIndex = tdElement.getAttribute("dataIndex")
+        const column = columns[dataIndex]
         // console.log(column)
         // console.log(`makeEditableField currentValue: ${currentValue} ${dataIndex}`)
 
         // const currentValue = tdElement.textContent;
         const currentValue = getCurrentValue(column, tdElement);
-        const control = getControl(column, currentValue)
-        tdElement.innerHTML = control
+        console.log(currentValue)
+        tdElement.innerHTML = getControl(column, currentValue)
 
         const inputElement = focusToControl(column, tdElement)
 
         inputElement.addEventListener('blur', function () {
+            console.log(this, this.value)
             const newValue = this.value;
             const renderer = getRenderer(column, newValue)
             tdElement.innerHTML = renderer;

@@ -8,7 +8,7 @@ export const ETCDropdown = (cell, column) => {
         return `<option value="${id}">${option}</option>`
     })
     // console.log(options)
-    return `<select>
+    return `<select class="w-full">
         ${options.join('')}
     </select>`
     // return `<input type="text" class="w-full" value="${cell}" >`
