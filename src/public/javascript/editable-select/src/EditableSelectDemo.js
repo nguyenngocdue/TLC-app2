@@ -3,7 +3,7 @@ import { EditableSelect } from "./EditableSelect"
 
 const Select1 = () => {
     const params = {
-        id: 'Select1[a]',
+        id: 'Select1_a',
         name: 'Select1',
         placeholder: "Select country",
         readOnly: false,
@@ -54,7 +54,7 @@ const Select3 = () => {
 }
 const MSelect1 = () => {
     const params = {
-        id: 'MultiSelect1[a]',
+        id: 'MultiSelect1_a',
         name: 'MultiSelect1[]',
         placeholder: "Select country",
         readOnly: false,

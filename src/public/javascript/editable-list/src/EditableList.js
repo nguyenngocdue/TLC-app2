@@ -48,8 +48,12 @@ const addEventListenerForInput = (inputId, id, params) => {
     })
 }
 
+const addEventListenerForClickAway = () => {
+
+}
+
 export const EditableList = (params) => {
-    const { name, id, width = 200, allowFilter = false, float, } = params
+    const { name, id, width = 200, allowFilter = false, } = params
     const inputId = `input_of_${id}`
     const ul = editableListRender(params)
 
@@ -60,18 +64,17 @@ export const EditableList = (params) => {
         </div>
     </div>
     `
-
-    const classFloat = float ? "absolute bg-gray-50" : ""
-
-    const div = `<div 
-        class="border shadow-md rounded p-0 ${classFloat}" 
+    const ulDivId = `ul_div_${id}`
+    const div = `<div id="${id}"
+        class="border shadow-md rounded p-0 hidden bg-gray-50" 
         style="width:${width}px;z-index:1001;"
         >
         ${filterInput}
-        <div id="${id}">${ul}</div>
+        <div id="${ulDivId}">${ul}</div>
     </div >
     `
-    $(document).ready(() => addEventListenerForInput(inputId, id, params))
+    $(document).ready(() => addEventListenerForInput(inputId, ulDivId, params))
+    // $(document).ready(() => addEventListenerForClickAway(id, ulDivId, params))
 
     return `${div} `
 }
