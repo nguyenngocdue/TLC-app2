@@ -5002,9 +5002,6 @@ video {
 .opacity-5 {
   opacity: 0.05;
 }
-.opacity-50 {
-  opacity: 0.5;
-}
 .bg-blend-luminosity {
   background-blend-mode: luminosity;
 }
@@ -5090,9 +5087,6 @@ video {
 }
 .duration-\[3000ms\] {
   transition-duration: 3000ms;
-}
-.duration-1000 {
-  transition-duration: 1000ms;
 }
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
@@ -7874,12 +7868,6 @@ video {
 }
 .hover\:no-underline:hover {
   text-decoration-line: none;
-}
-.hover\:opacity-100:hover {
-  opacity: 1;
-}
-.hover\:opacity-0:hover {
-  opacity: 0;
 }
 .hover\:shadow-lg:hover {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);

@@ -8,8 +8,7 @@ export const EditableSelect = (params) => {
         placeholder = "Select",
         dataSource = {},
         selected,
-        allowFilter,
-        allowClear,
+        allowFilter, allowClear, multiple,
     } = params
 
     // console.log(params)
@@ -21,8 +20,7 @@ export const EditableSelect = (params) => {
         id: floatingListId,
         width,
         dataSource,
-        allowFilter,
-        allowClear,
+        allowFilter, allowClear,
         float: true,
         onClick: (e) => {
             getEById(dropdownInputId).val(e.target.id)
@@ -35,8 +33,12 @@ export const EditableSelect = (params) => {
     const clearStr = `<button tabindex="-1" type="button" class="hover:bg-red-500 px-2 rounded-full flex items-center"><i class="fa-solid fa-delete-left"></i></button>`
     const arrowDown = `<div class="px-2 flex items-center"><i class="fa-solid fa-chevron-down"></i></div>`
 
+    const valueFieldSingle = `<input type="hidden" name="${name}" id="${dropdownInputId}" value="${selected}"/>`
+    const valueFieldMultiple = `Filed For Multi Values`
+    const valueField = multiple ? valueFieldMultiple : valueFieldSingle
+
     const dropdown = `<div id="${dropdownId}" class="border rounded inline-block" tabindex="0" style="width:${width}px;">
-        <input type="text" name="${name}" id="${dropdownInputId}" value="${selected}"/>
+        ${valueField}
         <div class="flex">
             <span class="m-1 w-full">${placeholder}</span>
             ${allowClear ? clearStr : ''}

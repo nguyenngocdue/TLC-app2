@@ -1,33 +1,30 @@
 export const getEById = (id) => $("[id='" + id + "']")
 
-const clickAwayHandler = (event, floatingListId, count) => {
-    const myDiv = document.getElementById(floatingListId);
-    // console.log(myDiv)
-    // console.log(count)
-    if (!myDiv.contains(event.target)) {
-        count--
-        // console.log(count)
-        if (count == 0) {
-            // console.log('Clicked outside the div');
-            document.removeEventListener('click', clickAwayHandler)
-            myFloatingList
-                .addClass('invisible')
-                .addClass('opacity-0')
-                .removeClass('opacity-100')
-                .removeClass('active')
-        }
-    }
-}
-
 export const DropdownOnBlur = (params) => {
     const { floatingListId, } = params
+    document.removeEventListener('click', clickAwayHandlerArray[floatingListId])
     const myFloatingList = getEById(floatingListId)
-    document.removeEventListener('click', clickAwayHandler)
     myFloatingList
         .addClass('invisible')
         .addClass('opacity-0')
         .removeClass('opacity-100')
         .removeClass('active')
+}
+
+const dropdownOnClickAndBlurCountArray = {}
+const clickAwayHandlerArray = {}
+const clickAwayHandler = (event, floatingListId) => {
+    const myDiv = document.getElementById(floatingListId);
+    // console.log(myDiv)
+    // console.log(count)
+    if (!myDiv.contains(event.target)) {
+        dropdownOnClickAndBlurCountArray[floatingListId]--
+        // console.log(dropdownOnClickAndBlurCountArray[floatingListId])
+        if (dropdownOnClickAndBlurCountArray[floatingListId] === 0) {
+            // console.log('Clicked outside the div', clickAwayHandlerArray[floatingListId]);
+            DropdownOnBlur({ floatingListId })
+        }
+    }
 }
 
 export const DropdownOnClickAndBlur = (params) => {
@@ -44,25 +41,10 @@ export const DropdownOnClickAndBlur = (params) => {
             .removeClass('opacity-0')
             .addClass('opacity-100')
             .addClass('active')
+        dropdownOnClickAndBlurCountArray[floatingListId] = 2
 
-        let count = 2
-        // const clickAwayHandler = (event) => {
-        //     const myDiv = document.getElementById(floatingListId);
-        //     // console.log(count)
-        //     if (!myDiv.contains(event.target)) {
-        //         count--
-        //         // console.log(count)
-        //         if (count == 0) {
-        //             // console.log('Clicked outside the div');
-        //             document.removeEventListener('click', clickAwayHandler)
-        //             myFloatingList
-        //                 .addClass('invisible')
-        //                 .addClass('opacity-0')
-        //                 .removeClass('opacity-100')
-        //                 .removeClass('active')
-        //         }
-        //     }
-        // }
-        document.addEventListener('click', (e) => clickAwayHandler(e, floatingListId, count))
+        //This will "instantiate" a new instance of a function
+        clickAwayHandlerArray[floatingListId] = (e) => clickAwayHandler(e, floatingListId)
+        document.addEventListener('click', clickAwayHandlerArray[floatingListId])
     }
 }

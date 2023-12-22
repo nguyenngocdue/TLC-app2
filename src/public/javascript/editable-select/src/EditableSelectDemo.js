@@ -54,6 +54,23 @@ const Select3 = () => {
     const select = EditableSelect(params)
     return select
 }
+const Select4 = () => {
+    const params = {
+        id: 'Select4[a]',
+        name: 'Select4',
+        placeholder: "Select country",
+        readOnly: true,
+        allowClear: false,
+        allowFilter: false,
+        multiple: false,
+        itemTemplate: (obj) => obj,
+        selected: 'a1',
+        dataSource: helloList(),
+        width,
+    }
+    const select = EditableSelect(params)
+    return select
+}
 const MSelect1 = () => {
     const params = {
         id: 'MultiSelect1_a',
@@ -105,6 +122,23 @@ const MSelect3 = () => {
     const select = EditableSelect(params)
     return select
 }
+const MSelect4 = () => {
+    const params = {
+        id: 'MultiSelect4[a]',
+        name: 'MultiSelect4[]',
+        placeholder: "Select country",
+        readOnly: true,
+        allowClear: false,
+        allowFilter: false,
+        multiple: true,
+        itemTemplate: (obj) => obj,
+        selected: ['a1', 'a2', 'a3'],
+        dataSource: helloList(),
+        width,
+    }
+    const select = EditableSelect(params)
+    return select
+}
 
 export const EditableSelectDemo = (divId) => {
 
@@ -119,12 +153,15 @@ export const EditableSelectDemo = (divId) => {
         <div class="col-span-3">
             ${Select3()}
         </div>
+        <div class="col-span-3">
+            ${Select4()}
+        </div>
     </div>
     `
 
     const rendererMultiSelect = `
     <div class="grid grid-cols-12 gap-2">
-        <div class="col-span-3">
+        <div class="col-span-3">            
             ${MSelect1()}
         </div>
         <div class="col-span-3">
@@ -132,6 +169,9 @@ export const EditableSelectDemo = (divId) => {
         </div>
         <div class="col-span-3">
             ${MSelect3()}
+        </div>
+        <div class="col-span-3">
+            ${MSelect4()}
         </div>
     </div>
     `
