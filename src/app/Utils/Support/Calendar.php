@@ -43,7 +43,7 @@ class Calendar
                 "color" => "blue"
             ],
             "5" => [
-                "name" => "NW",
+                "name" => "NZ",
                 "color" => "pink"
             ],
         ];

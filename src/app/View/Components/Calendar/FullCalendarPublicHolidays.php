@@ -6,7 +6,7 @@ use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
 use Illuminate\View\Component;
 
-class FullCalendarHoliday extends Component
+class FullCalendarPublicHolidays extends Component
 {
     /**
      * Create a new component instance.
@@ -26,9 +26,9 @@ class FullCalendarHoliday extends Component
     public function render()
     {
         $token = CurrentUser::getTokenForApi();
-        $apiUrl = route('public-holiday-data.index');
+        $apiUrl = route('public-holidays-data.index');
         $currentYear = Carbon::now()->year;
-        return view('components.calendar.full-calendar-holiday',[
+        return view('components.calendar.full-calendar-public-holidays',[
             'apiUrl' => $apiUrl,
             'token' => $token,
             'currentYear' => $currentYear

@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\AdminSetRoleSetController;
 // use App\Http\Controllers\Api\v1\Social\PostController;
 use App\Http\Controllers\Api\v1\System\NotificationsController as SystemNotificationsController;
 use App\Http\Controllers\BookmarkController;
-use App\Http\Controllers\PublicHolidayController;
+use App\Http\Controllers\PublicHolidaysController;
 use App\Http\Controllers\MyOrgChartController;
 use App\Http\Controllers\Notifications\NotificationsController;
 use App\Http\Controllers\ProfileController;
@@ -28,7 +28,7 @@ Route::group([
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
     Route::get('my-org-chart', [MyOrgChartController::class, 'index'])->name('myOrgChart.index');
-    Route::get('public-holiday', [PublicHolidayController::class, 'index'])->name('public-holiday.index');
+    Route::get('public-holidays', [PublicHolidaysController::class, 'index'])->name('public-holidays.index');
     Route::get('profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');
     Route::get('profile_social/{id}', [ProfileSocialController::class, 'profileSocial'])->name('profileSocial.index');
     Route::put('updateUserSettings', UpdateUserSettings::class)->name('updateUserSettings');

@@ -8,7 +8,7 @@ use App\Models\Public_holiday;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class PublicHolidayControllerApi extends Controller
+class PublicHolidaysControllerApi extends Controller
 {
     public function index(Request $request)
     {

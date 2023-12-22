@@ -35,7 +35,7 @@ docker-compose:
 .PHONY: docker-compose
 
 docker-compose-down:
-	cd .docker_303/ && docker-compose -f docker-compose302.yml down && cd ../
+	cd .docker_302/ && docker-compose -f docker-compose302.yml down && cd ../
 .PHONY: docker-compose-down
 
 docker-403:
