@@ -10,7 +10,7 @@ import { getEById } from "../functions"
 const debug = false
 
 export const getCurrentValue = (tableId, dataIndex, dataSourceIndex) => {
-    return editableTableValues[tableId][dataSourceIndex][dataIndex]
+    return editableTableValues[tableId]?.[dataSourceIndex]?.[dataIndex]
 }
 
 export const setCurrentValue = (tableId, dataIndex, dataSourceIndex, newValue) => {
@@ -29,10 +29,12 @@ export const getControl = (controlParams) => {
             return ETCText(controlParams)
         case 'dropdown':
             return ETCDropdown(controlParams)
+        case 'dropdown_multi':
+            return ETCDropdown(controlParams)
         case undefined:
             return cell
         default:
-            return `Unknown renderer [${renderer}]`
+            return `Unknown control [${renderer}]`
     }
 }
 
@@ -44,6 +46,7 @@ export const getInputElement = (column, tdElement) => {
         case 'text':
             return tdElement.querySelector('input');
         case 'dropdown':
+        case 'dropdown_multi':
             return tdElement.querySelector('select');
         case undefined:
             return cell
@@ -61,9 +64,7 @@ export const focusToControl = (inputElement, column) => {
             inputElement.focus();
             return
         case 'dropdown':
-            // const event = new Event('mousedown', { bubbles: true, cancelable: true });
-            // inputElement.dispatchEvent(event);
-            // console.log("focus dropdown")
+        case 'dropdown_multi':
             $(inputElement).select2('open');
             return
         case undefined:
@@ -102,17 +103,18 @@ export const attachControlEventHandler = (attachParams) => {
                 if (debug) console.log(`onBlur of ${controlId} New value = ${newValue}`)
                 setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
 
-                newRenderer = getRenderer(column, newValue)
+                newRenderer = getRenderer(column, dataSourceIndex, tableId)
                 tdElement.innerHTML = newRenderer;
             });
             return
         case 'dropdown':
+        case 'dropdown_multi':
             $(inputElement).on('change', () => {
                 const newValue = $(`#${controlId}`).val()
                 if (debug) console.log(`onChange of ${controlId} (inputElement) New value = ${newValue}`)
                 setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
 
-                newRenderer = getRenderer(column, newValue)
+                newRenderer = getRenderer(column, dataSourceIndex, tableId)
                 tdElement.innerHTML = newRenderer;
                 destroySelect2(inputElement)
             })
@@ -120,7 +122,9 @@ export const attachControlEventHandler = (attachParams) => {
             spanElement.addEventListener('blur', function (event) {
                 if (event.relatedTarget === null || event.relatedTarget.tagName.toLowerCase() !== 'body') {
                     const newValue = $(`#${controlId}`).val()
-                    newRenderer = getRenderer(column, newValue)
+                    setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
+
+                    newRenderer = getRenderer(column, dataSourceIndex, tableId)
                     tdElement.innerHTML = newRenderer;
                     destroySelect2(inputElement)
                 }
@@ -146,6 +150,7 @@ export const postRenderControl = (inputElement, column) => {
         case 'text':
             return
         case 'dropdown':
+        case 'dropdown_multi':
             $(inputElement).select2({})
             return
         case undefined:

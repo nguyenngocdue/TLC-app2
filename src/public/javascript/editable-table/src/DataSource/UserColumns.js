@@ -33,8 +33,8 @@ export const UserColumns = [
     {
         dataIndex: "languages",
         title: "Languages",
-        renderer: 'toggle',
-        control: 'toggle',
+        renderer: 'dropdown_multi',
+        control: 'dropdown_multi',
         // fixed: 'right',
         dataSource: [
             { id: 'en', name: 'English', },

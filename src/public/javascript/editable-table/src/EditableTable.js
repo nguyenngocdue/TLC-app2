@@ -1,7 +1,7 @@
 import { EditableModeWrapper } from './TableMode/EditableModeWrapper'
 import { PrintableMode } from './TableMode/PrintableMode'
 
-import { postRender } from './PostRender'
+import { postRender, preRender } from './PostRender'
 
 const tableRenderer = (params) => {
     const { modeName } = params.settings
@@ -35,7 +35,8 @@ export const EditableTable = (params) => {
     const columns = keyBy(columns0, 'dataIndex')
 
     params = { ...params, columns }
+    preRender(params)
     const table = tableRenderer(params)
-    postRender(params);
+    postRender(params)
     return table
 }

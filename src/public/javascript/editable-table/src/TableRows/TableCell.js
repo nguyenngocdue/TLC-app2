@@ -1,13 +1,15 @@
+import { getCurrentValue } from "../Controls/Controls"
 import { getFixedClass } from "../FrozenColumn"
 import { getRenderer } from "../Renderers/Renderers"
 
-export const TableCell = (params, cell, row, column, index) => {
+export const TableCell = (params, row, column, index) => {
     const { tableParams, settings } = params
     const { tableId } = tableParams
     const { tbody_tr_td } = settings.cssClass
     const { hidden, width = 100, dataIndex, control } = column
     const { id } = row
-    const rendererStr = getRenderer(column, cell)
+
+    const rendererStr = getRenderer(column, id, tableId)
     const fixedClass = getFixedClass(column, index, 'td', tableId)
     const styleStr = `style="width:${width}px"`
 

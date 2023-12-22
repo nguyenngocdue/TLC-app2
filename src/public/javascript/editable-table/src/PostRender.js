@@ -24,11 +24,15 @@ const listenOnResizeWindow = (params, tableId) => {
     })
 }
 
+export const preRender = (params) => {
+    const { tableId } = params.tableParams
+    exposeParamsToWindow(params, tableId)
+}
+
 export const postRender = (params) => {
     $(document).ready(() => {
         const { tableId } = params.tableParams
         applyFixedColumns(params, tableId)
-        exposeParamsToWindow(params, tableId)
         myAddEventListener(params, tableId)
         // listenOnResizeWindow(params, tableId)
     })

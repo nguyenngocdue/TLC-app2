@@ -1,5 +1,7 @@
 /*! ../../public/javascript/editable-table */
 
+/*! ../Controls/Controls */
+
 /*! ../FrozenColumn */
 
 /*! ../Renderers/Renderers */
