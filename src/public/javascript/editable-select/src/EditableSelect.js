@@ -22,10 +22,13 @@ export const EditableSelect = (params) => {
         dataSource,
         allowFilter, allowClear,
         float: true,
+        dropdownInputId,
+        // selected,
         onClick: (e) => {
             getEById(dropdownInputId).val(e.target.id)
-            console.log(`Selected 1111 ${e.target.id}`)
             DropdownOnBlur({ floatingListId })
+
+            console.log(`Selected 1111 ${e.target.id}`)
         }
     }
 
@@ -33,7 +36,7 @@ export const EditableSelect = (params) => {
     const clearStr = `<button tabindex="-1" type="button" class="hover:bg-red-500 px-2 rounded-full flex items-center"><i class="fa-solid fa-delete-left"></i></button>`
     const arrowDown = `<div class="px-2 flex items-center"><i class="fa-solid fa-chevron-down"></i></div>`
 
-    const valueFieldSingle = `<input type="hidden" name="${name}" id="${dropdownInputId}" value="${selected}"/>`
+    const valueFieldSingle = `<input type="hidden1" name="${name}" id="${dropdownInputId}" value="${selected}"/>`
     const valueFieldMultiple = `Filed For Multi Values`
     const valueField = multiple ? valueFieldMultiple : valueFieldSingle
 

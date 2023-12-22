@@ -5,11 +5,12 @@ const addEventListenerForLi = (liId, id, params, onClickFn) => getEById(liId).cl
 const editableListRender = (params, keyword = null) => {
     const {
         id,
-        maxHeight = 400, dataSource, selected,
+        maxHeight = 400, dataSource, //selected,
         // itemRenderer = (item, dataIndex) => console.log(item),
         itemRenderer = (item, dataIndex) => `<span id="${dataIndex}" class="px-2 py-1 block w-full">${item.name}</span>`,
         compareFn = (item, keyword) => item.name.includes(keyword),
         selectedClass = `bg-blue-800 text-white`,
+        dropdownInputId,
         onClick = (e) => {
             console.log(`Selected ${e.target.id}`)
         },
@@ -22,6 +23,8 @@ const editableListRender = (params, keyword = null) => {
             if (!compareFn(item, keyword)) return
             //do not combine if clauses
         }
+        const selected = getEById(dropdownInputId).val()
+        console.log(dropdownInputId, selected, getEById(dropdownInputId))
         const rendered = itemRenderer(item, dataIndex)
         const selectedArr = Array.isArray(selected) ? selected : [selected]
         const selectedStr = looseInclude(selectedArr, dataIndex) ? selectedClass : ''
@@ -48,7 +51,12 @@ const addEventListenerForInput = (inputId, id, params) => {
 }
 
 export const EditableList = (params) => {
-    const { name, id, width = 200, allowFilter = false, float = false } = params
+    const {
+        name, id,
+        width = 200,
+        allowFilter = false,
+        float = false,
+    } = params
     const inputId = `input_of_${id}`
     const ul = editableListRender(params)
 
