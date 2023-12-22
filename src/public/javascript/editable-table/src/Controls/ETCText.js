@@ -1,4 +1,5 @@
-export const ETCText = (cell, column) => {
+export const ETCText = (controlParams) => {
+    const { currentValue, column, controlId } = controlParams
     const className = `w-full p-0`
-    return `<input type="text" class="${className}" value="${cell}">`
+    return `<input id="${controlId}" type="text" class="${className}" value="${currentValue}">`
 }

@@ -1,0 +1,1 @@
+export const getEById = (id) => $("[id='" + id + "']")

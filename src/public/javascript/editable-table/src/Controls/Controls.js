@@ -5,30 +5,30 @@ import { ETCDropdown } from "./ETCDropdown"
 import { ETCPicker } from "./ETCPicker"
 
 import { getRenderer } from "../Renderers/Renderers"
+import { getEById } from "../functions"
+
+const debug = false
 
 export const getCurrentValue = (tableId, dataIndex, dataSourceIndex) => {
-    const dataSource = editableTableValues[tableId]
-    // console.log(dataSource, tdElement, dataSourceIndex)
-    return dataSource[dataSourceIndex][dataIndex]
+    return editableTableValues[tableId][dataSourceIndex][dataIndex]
 }
 
 export const setCurrentValue = (tableId, dataIndex, dataSourceIndex, newValue) => {
-    const dataSource = editableTableValues[tableId]
-    // console.log(dataSource, tdElement, dataSourceIndex)
-    return dataSource[dataSourceIndex][dataIndex] = newValue
+    editableTableValues[tableId][dataSourceIndex][dataIndex] = newValue
 }
 
-export const getControl = (column, cell) => {
+export const getControl = (controlParams) => {
+    const { column, cell } = controlParams
     const { renderer } = column
     switch (renderer) {
         case 'toggle':
-        // return ETCToggle(cell, column)
+        // return ETCToggle(controlParams)
         case 'picker':
-        // return ETCPicker(cell, column)
+        // return ETCPicker(controlParams)
         case 'text':
-            return ETCText(cell, column)
+            return ETCText(controlParams)
         case 'dropdown':
-            return ETCDropdown(cell, column)
+            return ETCDropdown(controlParams)
         case undefined:
             return cell
         default:
@@ -59,13 +59,13 @@ export const focusToControl = (inputElement, column) => {
         case 'picker':
         case 'text':
             inputElement.focus();
-            return inputElement
+            return
         case 'dropdown':
             // const event = new Event('mousedown', { bubbles: true, cancelable: true });
             // inputElement.dispatchEvent(event);
             // console.log("focus dropdown")
-            inputElement.focus();
-            return inputElement
+            $(inputElement).select2('open');
+            return
         case undefined:
             return cell
         default:
@@ -73,31 +73,61 @@ export const focusToControl = (inputElement, column) => {
     }
 }
 
-export const attachOnBlurHandler = (inputElement, column, tableId) => {
+const destroySelect2 = (inputElement) => {
+    var select2Instance = $(inputElement).data('select2');
+
+    // Check if the Select2 instance exists before attempting to destroy it
+    if (select2Instance !== undefined && select2Instance !== null) {
+        // Call the destroy method on the instance
+        select2Instance.destroy();
+        // console.log("Destroyed.")
+    }
+}
+
+export const attachControlEventHandler = (attachParams) => {
+    const debug = true
+    const { inputElement, column, tableId, controlId } = attachParams
     const { renderer, dataIndex } = column
     const tdElement = inputElement.parentNode
     const dataSourceIndex = tdElement.getAttribute("datasource-index")
-    const newValue = editableTableValues[tableId][dataSourceIndex][dataIndex]
-    // console.log(value)
+    let newValue = `[?]`
+    let newRenderer = "NEW RENDERER"
 
     switch (renderer) {
         case 'toggle':
         case 'picker':
         case 'text':
             inputElement.addEventListener('blur', function () {
-                // const newValue = tdElement.innerHTML;
-                // console.log(tdElement, newValue)
-                const renderer = getRenderer(column, newValue)
-                console.log("onBlur of", renderer)
-                tdElement.innerHTML = renderer;
+                newValue = $(`#${controlId}`).val()
+                if (debug) console.log(`onBlur of ${controlId} New value = ${newValue}`)
+                setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
 
-                // setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
+                newRenderer = getRenderer(column, newValue)
+                tdElement.innerHTML = newRenderer;
             });
             return
         case 'dropdown':
+            $(inputElement).on('change', () => {
+                const newValue = $(`#${controlId}`).val()
+                if (debug) console.log(`onChange of ${controlId} (inputElement) New value = ${newValue}`)
+                setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
+
+                newRenderer = getRenderer(column, newValue)
+                tdElement.innerHTML = newRenderer;
+                destroySelect2(inputElement)
+            })
             const spanElement = tdElement.querySelector(`span[tabindex="0"]`)
             spanElement.addEventListener('blur', function (event) {
-                console.log('onBlur of', renderer);
+                if (event.relatedTarget === null || event.relatedTarget.tagName.toLowerCase() !== 'body') {
+                    const newValue = $(`#${controlId}`).val()
+                    newRenderer = getRenderer(column, newValue)
+                    tdElement.innerHTML = newRenderer;
+                    destroySelect2(inputElement)
+                }
+                // newValue = $(`#${controlId}`).val()
+                // if (debug) console.log(`onBlur of ${controlId} New value = ${newValue}`)
+                // newRenderer = getRenderer(column, newValue)
+                // tdElement.innerHTML = newRenderer;
             });
             return
         case undefined:

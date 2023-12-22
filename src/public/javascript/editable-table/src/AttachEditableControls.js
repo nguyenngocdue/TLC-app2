@@ -1,4 +1,4 @@
-import { attachOnBlurHandler, focusToControl, getControl, } from './Controls/Controls'
+import { attachControlEventHandler, focusToControl, getControl, } from './Controls/Controls'
 import { getCurrentValue, getInputElement, postRenderControl, } from './Controls/Controls'
 
 export const myAddEventListener = (params, tableId) => {
@@ -26,18 +26,19 @@ export const myAddEventListener = (params, tableId) => {
         const dataIndex = tdElement.getAttribute("data-index")
         const dataSourceIndex = tdElement.getAttribute("datasource-index")
         const column = columns[dataIndex]
+        const controlId = `${tableId}_${dataIndex}_${dataSourceIndex}`
         // console.log(column)
         // console.log(`makeEditableField currentValue: ${currentValue} ${dataIndex}`)
 
         // const currentValue = tdElement.textContent;
         const currentValue = getCurrentValue(tableId, dataIndex, dataSourceIndex);
-        // console.log(currentValue)
-        tdElement.innerHTML = getControl(column, currentValue)
+        // console.log(controlId, currentValue)
+        tdElement.innerHTML = getControl({ column, currentValue, dataSourceIndex, tableId, controlId })
 
         const inputElement = getInputElement(column, tdElement)
         postRenderControl(inputElement, column)
         focusToControl(inputElement, column)
-        attachOnBlurHandler(inputElement, column, tableId)
+        attachControlEventHandler({ inputElement, column, tableId, controlId })
     }
 
     function rewindFocus() {
