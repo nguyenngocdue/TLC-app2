@@ -6,5 +6,7 @@ export const ETRDropdown = (cell, column) => {
         multiple = false,
         itemRenderer = itemRenderer1,
     } = column
-    return itemRenderer(cell, column)
+    const cells = multiple ? cell : [cell]
+
+    return cells.map(cell => itemRenderer(cell, column))
 }
