@@ -7,7 +7,7 @@ export const UserHeaderToolbar = {
         renderer: 'action',
         action: ['toggle', 'clone'],
     },
-    is_resigned: {
+    is_handsome: {
         renderer: 'action',
         action: ['toggle'],
     },

@@ -56,14 +56,14 @@ export const UserColumns = [
     {
         dataIndex: "is_female",
         title: "Is Female",
-        renderer: 'toggle',
+        // renderer: 'toggle',
         control: 'toggle',
         footer: 'agg_count',
     },
     {
-        dataIndex: "is_resigned",
-        title: "Is Resigned",
-        renderer: 'toggle',
+        dataIndex: "is_handsome",
+        title: "Is Handsome",
+        // renderer: 'toggle',
         control: 'toggle',
         footer: 'A Text',
     },

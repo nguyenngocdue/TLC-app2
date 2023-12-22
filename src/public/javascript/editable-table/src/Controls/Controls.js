@@ -21,12 +21,12 @@ export const setCurrentValue = (tableId, dataIndex, dataSourceIndex, newValue) =
 }
 
 export const getControl = (controlParams) => {
-    const { column, cell } = controlParams
-    const { renderer } = column
+    const { column, currentValue } = controlParams
+    const { control } = column
 
-    switch (renderer) {
+    switch (control) {
         case 'toggle':
-        // return ETCToggle(controlParams)
+            return ETCToggle(controlParams)
         case 'picker':
         // return ETCPicker(controlParams)
         case 'text':
@@ -36,9 +36,9 @@ export const getControl = (controlParams) => {
         case 'dropdown_multi':
             return ETCDropdownMulti(controlParams)
         case undefined:
-            return cell
+            return currentValue
         default:
-            return `Unknown control [${renderer}]`
+            return `Unknown control [${control}]`
     }
 }
 

@@ -30,7 +30,7 @@ export const getRenderer = (column, dataSourceIndex, tableId) => {
         case 'picker':
             return ETRPicker(cell, column)
         case undefined:
-            return cell
+            return undefined
         default:
             return `Unknown renderer [${renderer}]`
     }
