@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
-use App\Models\Public_holiday;
-use App\Models\User_time_keep_type;
-use App\Models\Workplace;
-use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 
-class PublicHolidayController extends Controller
+class PublicHolidaysController extends Controller
 {
     use TraitViewAllFunctions;
     public function getType()
@@ -19,9 +15,9 @@ class PublicHolidayController extends Controller
     public function index(Request $request)
     {
         return view(
-            'utils.public-holiday',
+            'utils.public-holidays',
             [
-                'topTitle' => 'Public Holiday Company'
+                'topTitle' => 'Public Holidays'
             ]
         );
     }

@@ -5,6 +5,6 @@
 @section('content')
 
 <div class="bg-white p-10 border">
-    <x-calendar.full-calendar-holiday />
+    <x-calendar.full-calendar-public-holidays />
 </div>
 @endsection
