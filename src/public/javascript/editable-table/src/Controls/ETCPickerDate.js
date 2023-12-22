@@ -1,4 +1,6 @@
 
 export const ETCPickerDate = (cell, column) => {
-    return `<input type="text" class="w-full" value="${cell}" >`
+    // console.log(cell)
+    const { currentValue } = cell
+    return `<input component="ETCPickerDate" type="text" class="w-full" value="${currentValue}" >`
 }

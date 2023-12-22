@@ -28,7 +28,22 @@ export const attachControlEventHandler = (attachParams) => {
     // console.log(`attachControlEventHandler for ${controlId}`)
     switch (control) {
         // case 'toggle': // This control hooked directly to table without renderer
-        case 'picker':
+        case 'picker_date':
+            const inputs = tdElement.querySelectorAll('input')
+            const inputElement0 = inputs[0]
+            const inputElement1 = inputs[1]
+            inputElement1.addEventListener('blur', (e) => {
+                // console.log(e)
+                newValue = inputElement0.value
+                if (debug) console.log(`onBlur of ${controlId} New value = ${newValue}`)
+                setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
+
+                // newRenderer = getRenderer(column, dataSourceIndex, tableId)
+                // console.log(newRenderer, newValue)
+                // tdElement.innerHTML = newRenderer;
+            })
+            return
+        case 'picker_time':
             console.log("attachControlEventHandler not yet implemented")
             return
         case 'text':
@@ -92,6 +107,6 @@ export const attachControlEventHandler = (attachParams) => {
         case undefined:
             return cell
         default:
-            return `Unknown renderer [${renderer}]`
+            return `Unknown renderer [${control}]`
     }
 }

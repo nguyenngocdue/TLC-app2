@@ -1,4 +1,4 @@
 
 export const ETCPickerTime = (cell, column) => {
-    return `<input type="text" class="w-full" value="${cell}" >`
+    return `<input component="ETCPickerTime" type="text" class="w-full" value="${cell}" >`
 }

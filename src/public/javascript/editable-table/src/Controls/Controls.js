@@ -48,14 +48,14 @@ export const getInputElement = (column, tdElement) => {
         case 'toggle':
         case 'text':
             return tdElement.querySelector('input');
+        case 'picker_date':
+        case 'picker_time':
+            return tdElement.querySelector('input');
         case 'dropdown':
         case 'dropdown_multi':
             return tdElement.querySelector('select');
         case undefined:
             return cell
-        case 'picker_date':
-        case 'picker_time':
-            return 'Not yet implemented'
         case 'picker':
         default:
             return `Unknown control [${control}]`
@@ -90,10 +90,19 @@ export const postRenderControl = (inputElement, column) => {
     const { control, dataIndex } = column
     const tdElement = inputElement.parentNode
     switch (control) {
-        case 'toggle':
-        case 'picker':
         case 'picker_date':
         case 'picker_time':
+            return flatpickr(inputElement, {
+                // enableTime: true,
+                altInput: true,
+                altFormat: "d/m/Y",
+                dateFormat: 'Y-m-d',
+                weekNumbers: true,
+                time_24hr: true,
+            });
+            return
+        case 'toggle':
+        case 'picker':
         case 'text':
             return
         case 'dropdown':
