@@ -4,6 +4,7 @@ import { ETRText } from "./ETRText"
 import { ETRAction } from "./ETRAction"
 import { ETRToggle } from "./ETRToggle"
 import { ETRDropdown } from "./ETRDropdown"
+import { ETRDropdownMulti } from "./ETRDropdownMulti"
 import { ETRPicker } from "./ETRPicker"
 import { getCurrentValue } from "../Controls/Controls"
 
@@ -11,6 +12,7 @@ export const getRenderer = (column, dataSourceIndex, tableId) => {
     const { renderer, dataIndex } = column
     // const dataSourceIndex = row.id
     const cell = getCurrentValue(tableId, dataIndex, dataSourceIndex)
+    // console.log(tableId, dataIndex, dataSourceIndex)
     switch (renderer) {
         case '_no_':
             return ETRNo(cell, column)
@@ -21,9 +23,10 @@ export const getRenderer = (column, dataSourceIndex, tableId) => {
         case 'toggle':
             return ETRToggle(cell, column)
         case 'dropdown':
-            return ETRDropdown(cell, { ...column })
+            return ETRDropdown(cell, column)
         case 'dropdown_multi':
-            return ETRDropdown(cell, { ...column, multiple: true })
+            // console.log(cell)
+            return ETRDropdownMulti(cell, column)
         case 'picker':
             return ETRPicker(cell, column)
         case undefined:

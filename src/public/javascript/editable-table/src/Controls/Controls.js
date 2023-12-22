@@ -2,6 +2,7 @@
 import { ETCText } from "./ETCText"
 import { ETCToggle } from "./ETCToggle"
 import { ETCDropdown } from "./ETCDropdown"
+import { ETCDropdownMulti } from "./ETCDropdownMulti"
 import { ETCPicker } from "./ETCPicker"
 
 import { getRenderer } from "../Renderers/Renderers"
@@ -15,11 +16,14 @@ export const getCurrentValue = (tableId, dataIndex, dataSourceIndex) => {
 
 export const setCurrentValue = (tableId, dataIndex, dataSourceIndex, newValue) => {
     editableTableValues[tableId][dataSourceIndex][dataIndex] = newValue
+    // console.log("SETTING", tableId, dataIndex, dataSourceIndex, newValue)
+    // console.log("GETTING", editableTableValues[tableId][dataSourceIndex][dataIndex])
 }
 
 export const getControl = (controlParams) => {
     const { column, cell } = controlParams
     const { renderer } = column
+
     switch (renderer) {
         case 'toggle':
         // return ETCToggle(controlParams)
@@ -30,7 +34,7 @@ export const getControl = (controlParams) => {
         case 'dropdown':
             return ETCDropdown(controlParams)
         case 'dropdown_multi':
-            return ETCDropdown(controlParams)
+            return ETCDropdownMulti(controlParams)
         case undefined:
             return cell
         default:
@@ -93,6 +97,7 @@ export const attachControlEventHandler = (attachParams) => {
     const dataSourceIndex = tdElement.getAttribute("datasource-index")
     let newValue = `[?]`
     let newRenderer = "NEW RENDERER"
+    let spanElement = "SPAN ELEMENT"
 
     switch (renderer) {
         case 'toggle':
@@ -108,7 +113,6 @@ export const attachControlEventHandler = (attachParams) => {
             });
             return
         case 'dropdown':
-        case 'dropdown_multi':
             $(inputElement).on('change', () => {
                 const newValue = $(`#${controlId}`).val()
                 if (debug) console.log(`onChange of ${controlId} (inputElement) New value = ${newValue}`)
@@ -118,21 +122,43 @@ export const attachControlEventHandler = (attachParams) => {
                 tdElement.innerHTML = newRenderer;
                 destroySelect2(inputElement)
             })
-            const spanElement = tdElement.querySelector(`span[tabindex="0"]`)
+            spanElement = tdElement.querySelector(`span[tabindex="0"]`)
             spanElement.addEventListener('blur', function (event) {
                 if (event.relatedTarget === null || event.relatedTarget.tagName.toLowerCase() !== 'body') {
-                    const newValue = $(`#${controlId}`).val()
-                    setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
+                    // const newValue = $(`#${controlId}`).val()
+                    // setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
 
                     newRenderer = getRenderer(column, dataSourceIndex, tableId)
                     tdElement.innerHTML = newRenderer;
                     destroySelect2(inputElement)
                 }
-                // newValue = $(`#${controlId}`).val()
-                // if (debug) console.log(`onBlur of ${controlId} New value = ${newValue}`)
-                // newRenderer = getRenderer(column, newValue)
-                // tdElement.innerHTML = newRenderer;
-            });
+            })
+            return
+        case 'dropdown_multi':
+            $(inputElement).on('change', () => {
+                const newValue = $(inputElement).val()
+
+                // if (debug) 
+                console.log(`onChange of ${controlId} (inputElement) New value = ${newValue}`)
+                setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
+
+                newRenderer = getRenderer(column, dataSourceIndex, tableId)
+                tdElement.innerHTML = newRenderer;
+                destroySelect2(inputElement)
+            })
+            spanElement = tdElement.querySelector(`span input[tabindex="0"]`)
+            if (spanElement) {
+                spanElement.addEventListener('blur', function (event) {
+                    if (event.relatedTarget === null || event.relatedTarget.tagName.toLowerCase() !== 'body') {
+                        // const newValue = $(`#${controlId}`).val()
+                        // setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
+
+                        newRenderer = getRenderer(column, dataSourceIndex, tableId)
+                        tdElement.innerHTML = newRenderer;
+                        // destroySelect2(inputElement)
+                    }
+                })
+            }
             return
         case undefined:
             return cell
