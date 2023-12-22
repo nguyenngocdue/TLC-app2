@@ -70,16 +70,15 @@ export const UserColumns = [
     {
         dataIndex: "dob",
         title: "Date Of Birth",
-        renderer: 'picker',
-        control: 'picker',
+        renderer: 'picker_date',
+        control: 'picker_date',
     },
     {
         dataIndex: "tob",
         title: "Time Of Birth",
-        renderer: 'text',
-        control: 'text',
+        renderer: 'picker_time',
+        control: 'picker_time',
     },
-
 
     {
         dataIndex: "hidden",

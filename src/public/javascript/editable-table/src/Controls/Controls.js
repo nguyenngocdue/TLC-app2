@@ -4,6 +4,8 @@ import { ETCToggle } from "./ETCToggle"
 import { ETCDropdown } from "./ETCDropdown"
 import { ETCDropdownMulti } from "./ETCDropdownMulti"
 import { ETCPicker } from "./ETCPicker"
+import { ETCPickerDate } from "./ETCPickerDate"
+import { ETCPickerTime } from "./ETCPickerTime"
 
 export const getCurrentValue = (tableId, dataIndex, dataSourceIndex) => {
     return editableTableValues[tableId]?.[dataSourceIndex]?.[dataIndex]
@@ -20,16 +22,19 @@ export const getControl = (controlParams) => {
     const { control } = column
 
     switch (control) {
-        case 'toggle':
-            return ETCToggle(controlParams)
         case 'picker':
-        // return ETCPicker(controlParams)
         case 'text':
             return ETCText(controlParams)
         case 'dropdown':
             return ETCDropdown(controlParams)
         case 'dropdown_multi':
             return ETCDropdownMulti(controlParams)
+        case 'toggle':
+            return ETCToggle(controlParams)
+        case 'picker_date':
+            return ETCPickerDate(controlParams)
+        case 'picker_time':
+            return ETCPickerTime(controlParams)
         case undefined:
             return currentValue
         default:
@@ -48,6 +53,9 @@ export const getInputElement = (column, tdElement) => {
             return tdElement.querySelector('select');
         case undefined:
             return cell
+        case 'picker_date':
+        case 'picker_time':
+            return 'Not yet implemented'
         case 'picker':
         default:
             return `Unknown control [${control}]`
@@ -57,8 +65,10 @@ export const getInputElement = (column, tdElement) => {
 export const focusToControl = (inputElement, column) => {
     const { control } = column
     switch (control) {
-        case 'toggle':
         case 'picker':
+            console.log(inputElement, control)
+            return
+        case 'toggle':
         case 'text':
             inputElement.focus();
             return
@@ -66,6 +76,9 @@ export const focusToControl = (inputElement, column) => {
         case 'dropdown_multi':
             $(inputElement).select2('open');
             return
+        case 'picker_date':
+        case 'picker_time':
+            return 'not yet implemented'
         case undefined:
             return cell
         default:
@@ -79,6 +92,8 @@ export const postRenderControl = (inputElement, column) => {
     switch (control) {
         case 'toggle':
         case 'picker':
+        case 'picker_date':
+        case 'picker_time':
         case 'text':
             return
         case 'dropdown':

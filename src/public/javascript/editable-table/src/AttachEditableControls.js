@@ -21,8 +21,9 @@ export const AddEventListenerForDirectControls = (params, tableId) => {
                 Object.keys(dataSource).map((dataSourceIndex) => {
                     const controlId = `${tableId}_${dataIndex}_${dataSourceIndex}`
                     getEById(controlId).change((e) => {
-                        console.log("Onchange toggle", controlId, e.target.checked)
-                        setCurrentValue(tableId, dataIndex, dataSourceIndex)
+                        const newValue = e.target.checked ? 1 : 0
+                        console.log("Onchange toggle", controlId, newValue)
+                        setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
                     })
                 })
                 return

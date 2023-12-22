@@ -1,3 +1,4 @@
+import { getCurrentValue } from "../Controls/Controls"
 
 import { ETRNo } from "./ETRNo"
 import { ETRText } from "./ETRText"
@@ -6,7 +7,8 @@ import { ETRToggle } from "./ETRToggle"
 import { ETRDropdown } from "./ETRDropdown"
 import { ETRDropdownMulti } from "./ETRDropdownMulti"
 import { ETRPicker } from "./ETRPicker"
-import { getCurrentValue } from "../Controls/Controls"
+import { ETRPickerDate } from "./ETRPickerDate"
+import { ETRPickerTime } from "./ETRPickerTime"
 
 export const getRenderer = (column, dataSourceIndex, tableId) => {
     const { renderer, dataIndex } = column
@@ -29,6 +31,10 @@ export const getRenderer = (column, dataSourceIndex, tableId) => {
             return ETRDropdownMulti(cell, column)
         case 'picker':
             return ETRPicker(cell, column)
+        case 'picker_date':
+            return ETRPickerDate(cell, column)
+        case 'picker_time':
+            return ETRPickerTime(cell, column)
         case undefined:
             return undefined
         default:
