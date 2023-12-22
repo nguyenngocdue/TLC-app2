@@ -22,6 +22,10 @@
 
 /*! ./AttachEditableControls */
 
+/*! ./Controls */
+
+/*! ./Controls/ControlEventHandlers */
+
 /*! ./Controls/Controls */
 
 /*! ./DataSource */
@@ -223,6 +227,10 @@
 /*!******************************************************************************!*\
   !*** ./public/javascript/editable-table/src/DataSource/UserHeaderToolbar.js ***!
   \******************************************************************************/
+
+/*!*******************************************************************************!*\
+  !*** ./public/javascript/editable-table/src/Controls/ControlEventHandlers.js ***!
+  \*******************************************************************************/
 
 /*!*******************************************************************************!*\
   !*** ./public/javascript/editable-table/src/TableMode/EditableModeWrapper.js ***!

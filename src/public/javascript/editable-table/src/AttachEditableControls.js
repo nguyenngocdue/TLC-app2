@@ -1,5 +1,6 @@
-import { attachControlEventHandler, focusToControl, getControl, } from './Controls/Controls'
+import { focusToControl, getControl, } from './Controls/Controls'
 import { getCurrentValue, getInputElement, postRenderControl, } from './Controls/Controls'
+import { attachControlEventHandler } from './Controls/ControlEventHandlers'
 
 export const myAddEventListener = (params, tableId) => {
     const editableCells = document.querySelectorAll(`.editable-cell-${tableId}:not(.hidden)`);
