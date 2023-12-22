@@ -4,6 +4,8 @@ import { ETCToggle } from "./ETCToggle"
 import { ETCDropdown } from "./ETCDropdown"
 import { ETCPicker } from "./ETCPicker"
 
+import { getRenderer } from "../Renderers/Renderers"
+
 export const getCurrentValue = (tableId, dataIndex, dataSourceIndex) => {
     const dataSource = editableTableValues[tableId]
     // console.log(dataSource, tdElement, dataSourceIndex)
@@ -50,7 +52,7 @@ export const getInputElement = (column, tdElement) => {
     }
 }
 
-export const focusToControl = (inputElement, column, tdElement) => {
+export const focusToControl = (inputElement, column) => {
     const { renderer } = column
     switch (renderer) {
         case 'toggle':
@@ -71,8 +73,43 @@ export const focusToControl = (inputElement, column, tdElement) => {
     }
 }
 
+export const attachOnBlurHandler = (inputElement, column, tableId) => {
+    const { renderer, dataIndex } = column
+    const tdElement = inputElement.parentNode
+    const dataSourceIndex = tdElement.getAttribute("datasource-index")
+    const newValue = editableTableValues[tableId][dataSourceIndex][dataIndex]
+    // console.log(value)
+
+    switch (renderer) {
+        case 'toggle':
+        case 'picker':
+        case 'text':
+            inputElement.addEventListener('blur', function () {
+                // const newValue = tdElement.innerHTML;
+                // console.log(tdElement, newValue)
+                const renderer = getRenderer(column, newValue)
+                console.log("onBlur of", renderer)
+                tdElement.innerHTML = renderer;
+
+                // setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
+            });
+            return
+        case 'dropdown':
+            const spanElement = tdElement.querySelector(`span[tabindex="0"]`)
+            spanElement.addEventListener('blur', function (event) {
+                console.log('onBlur of', renderer);
+            });
+            return
+        case undefined:
+            return cell
+        default:
+            return `Unknown renderer [${renderer}]`
+    }
+}
+
 export const postRenderControl = (inputElement, column) => {
-    const { renderer } = column
+    const { renderer, dataIndex } = column
+    const tdElement = inputElement.parentNode
     switch (renderer) {
         case 'toggle':
         case 'picker':
@@ -80,14 +117,6 @@ export const postRenderControl = (inputElement, column) => {
             return
         case 'dropdown':
             $(inputElement).select2({})
-            $(inputElement).on('select2:close', function (e) {
-                // This function will be called when the Select2 dropdown is closed
-                console.log('Select2 dropdown closed');
-                // Add your logic here for actions after the Select2 dropdown closes
-            });
-            $(inputElement).blur(() => {
-                console.log(111)
-            })
             return
         case undefined:
             return cell

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<input />
+{{-- <input />
 <div id="divSelect"></div>
 <input />
 <script src="{{ asset('js/editable-select.js') }}"></script>
@@ -16,11 +16,11 @@
 
 <div id="divList"></div>
 <script src="{{ asset('js/editable-list.js') }}"></script>
-<script>EditableListDemo('divList')</script>
+<script>EditableListDemo('divList')</script> --}}
 
-{{-- 
+
 <div id="divMain"></div>
 <script src="{{ asset('js/editable-table.js') }}"></script>
-<script>EditableTableDemo('divMain')</script> --}}
+<script>EditableTableDemo('divMain')</script>
 
 @endsection 

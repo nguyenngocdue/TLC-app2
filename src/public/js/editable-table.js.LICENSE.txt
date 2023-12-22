@@ -52,8 +52,6 @@
 
 /*! ./Renderers/ETRAction */
 
-/*! ./Renderers/Renderers */
-
 /*! ./TableCell */
 
 /*! ./TableMode/EditableModeWrapper */

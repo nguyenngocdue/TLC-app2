@@ -1,5 +1,5 @@
-import { focusToControl, getControl, getCurrentValue, getInputElement, postRenderControl, setCurrentValue } from './Controls/Controls'
-import { getRenderer } from './Renderers/Renderers'
+import { attachOnBlurHandler, focusToControl, getControl, } from './Controls/Controls'
+import { getCurrentValue, getInputElement, postRenderControl, } from './Controls/Controls'
 
 export const myAddEventListener = (params, tableId) => {
     const editableCells = document.querySelectorAll(`.editable-cell-${tableId}:not(.hidden)`);
@@ -36,17 +36,8 @@ export const myAddEventListener = (params, tableId) => {
 
         const inputElement = getInputElement(column, tdElement)
         postRenderControl(inputElement, column)
-        focusToControl(inputElement, column, tdElement)
-
-        inputElement.addEventListener('blur', function () {
-            // console.log(this, this.value)
-            const newValue = this.value;
-            const renderer = getRenderer(column, newValue)
-            console.log("BLUR", renderer)
-            tdElement.innerHTML = renderer;
-
-            setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
-        });
+        focusToControl(inputElement, column)
+        attachOnBlurHandler(inputElement, column, tableId)
     }
 
     function rewindFocus() {
