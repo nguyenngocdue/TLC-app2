@@ -19,8 +19,8 @@ export const TableCell = (params, row, column, index) => {
     const fixedClass = getFixedClass(column, index, 'td', tableId)
     const styleStr = `style="width:${width}px"`
 
-    const editable = (renderer && control) ? `editable-cell-${tableId}` : ""
-    const tabIndex = (control) ? `tabindex="0"` : ''
+    const editable = (control) ? `editable-cell-${tableId}` : ""
+    const tabIndex = (control && renderer) ? `tabindex="0"` : ''
     const hiddenStr = hidden ? 'hidden' : ''
     const classNames = `${tbody_tr_td} ${editable} ${fixedClass} ${hiddenStr}`.replace(/\s+/g, ' ').trim()
     return `<td ${tabIndex} ${styleStr}

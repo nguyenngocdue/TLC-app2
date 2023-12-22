@@ -1,6 +1,7 @@
 import { applyFixedColumnWidth } from './FrozenColumn'
 import { keyBy } from './EditableTable'
-import { myAddEventListener } from './AttachEditableControls'
+import { AddEventListenerForEditableControls } from './AttachDirectControls'
+import { AddEventListenerForDirectControls } from './AttachEditableControls'
 
 const applyFixedColumns = (params, tableId) => {
     const { columns } = params
@@ -33,7 +34,8 @@ export const postRender = (params) => {
     $(document).ready(() => {
         const { tableId } = params.tableParams
         applyFixedColumns(params, tableId)
-        myAddEventListener(params, tableId)
+        AddEventListenerForEditableControls(params, tableId)
+        AddEventListenerForDirectControls(params, tableId)
         // listenOnResizeWindow(params, tableId)
     })
 }

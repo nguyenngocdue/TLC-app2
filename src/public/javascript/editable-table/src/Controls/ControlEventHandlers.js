@@ -2,6 +2,8 @@ import { getRenderer } from "../Renderers/Renderers"
 import { setCurrentValue } from "./Controls"
 import { getEById } from "../functions"
 
+const debug = false
+
 const destroySelect2 = (inputElement) => {
     var select2Instance = $(inputElement).data('select2');
 
@@ -16,16 +18,19 @@ const destroySelect2 = (inputElement) => {
 export const attachControlEventHandler = (attachParams) => {
     const debug = true
     const { inputElement, column, tableId, controlId } = attachParams
-    const { renderer, dataIndex } = column
+    const { control, dataIndex } = column
     const tdElement = inputElement.parentNode
     const dataSourceIndex = tdElement.getAttribute("datasource-index")
     let newValue = `[?]`
     let newRenderer = "NEW RENDERER"
     let spanElement = "SPAN ELEMENT"
 
-    switch (renderer) {
-        case 'toggle':
+    // console.log(`attachControlEventHandler for ${controlId}`)
+    switch (control) {
+        // case 'toggle': // This control hooked directly to table without renderer
         case 'picker':
+            console.log("attachControlEventHandler not yet implemented")
+            return
         case 'text':
             inputElement.addEventListener('blur', function () {
                 newValue = $(`#${controlId}`).val()

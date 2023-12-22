@@ -1,51 +1,33 @@
-import { focusToControl, getControl, } from './Controls/Controls'
+import { focusToControl, getControl, setCurrentValue, } from './Controls/Controls'
 import { getCurrentValue, getInputElement, postRenderControl, } from './Controls/Controls'
 import { attachControlEventHandler } from './Controls/ControlEventHandlers'
+import { getEById } from './functions'
 
-export const myAddEventListener = (params, tableId) => {
-    const editableCells = document.querySelectorAll(`.editable-cell-${tableId}:not(.hidden)`);
-    // console.log(editableCells)
+export const AddEventListenerForDirectControls = (params, tableId) => {
     const { columns } = params
-    // console.log(columns)
+    const dataSource = editableTableValues[tableId]
+    // console.log(params, tableId, dataSource)
 
-    editableCells.forEach(cell => {
-        cell.addEventListener('keydown', function (event) {
-            if (event.key === 'Tab' && !event.shiftKey) {
-                // makeEditableField.call(this);
-            } else if (event.key === 'Tab' && event.shiftKey) {
-                rewindFocus.call(this);
-            }
-        });
-        cell.addEventListener('focus', makeEditableField);
-        // cell.addEventListener('mouseover', makeEditableField);
-        // cell.addEventListener('click', makeEditableField);
-    });
+    const controls = Object.keys(columns).filter(dataIndex => (columns[dataIndex].control && !columns[dataIndex].renderer))
+    // console.log(controls)
 
-    function makeEditableField() {
-
-        const tdElement = this
-        const dataIndex = tdElement.getAttribute("data-index")
-        const dataSourceIndex = tdElement.getAttribute("datasource-index")
+    controls.map(dataIndex => {
         const column = columns[dataIndex]
-        const controlId = `${tableId}_${dataIndex}_${dataSourceIndex}`
+        const { control } = column
         // console.log(column)
-        // console.log(`makeEditableField currentValue: ${currentValue} ${dataIndex}`)
 
-        // const currentValue = tdElement.textContent;
-        const currentValue = getCurrentValue(tableId, dataIndex, dataSourceIndex);
-        // console.log(controlId, currentValue)
-        tdElement.innerHTML = getControl({ column, currentValue, dataSourceIndex, tableId, controlId })
-
-        const inputElement = getInputElement(column, tdElement)
-        postRenderControl(inputElement, column)
-        focusToControl(inputElement, column)
-        attachControlEventHandler({ inputElement, column, tableId, controlId })
-    }
-
-    function rewindFocus() {
-        let index = Array.from(editableCells).indexOf(this);
-        const previousIndex = (index - 1 + editableCells.length) % editableCells.length
-        const target = editableCells[previousIndex]
-        target.focus()
-    }
+        switch (control) {
+            case 'toggle':
+                Object.keys(dataSource).map((dataSourceIndex) => {
+                    const controlId = `${tableId}_${dataIndex}_${dataSourceIndex}`
+                    getEById(controlId).change((e) => {
+                        console.log("Onchange toggle", controlId, e.target.checked)
+                        setCurrentValue(tableId, dataIndex, dataSourceIndex)
+                    })
+                })
+                return
+            default:
+                return
+        }
+    })
 }

@@ -5,11 +5,6 @@ import { ETCDropdown } from "./ETCDropdown"
 import { ETCDropdownMulti } from "./ETCDropdownMulti"
 import { ETCPicker } from "./ETCPicker"
 
-import { getRenderer } from "../Renderers/Renderers"
-import { getEById } from "../functions"
-
-const debug = false
-
 export const getCurrentValue = (tableId, dataIndex, dataSourceIndex) => {
     return editableTableValues[tableId]?.[dataSourceIndex]?.[dataIndex]
 }
@@ -43,10 +38,9 @@ export const getControl = (controlParams) => {
 }
 
 export const getInputElement = (column, tdElement) => {
-    const { renderer } = column
-    switch (renderer) {
+    const { control } = column
+    switch (control) {
         case 'toggle':
-        case 'picker':
         case 'text':
             return tdElement.querySelector('input');
         case 'dropdown':
@@ -54,14 +48,15 @@ export const getInputElement = (column, tdElement) => {
             return tdElement.querySelector('select');
         case undefined:
             return cell
+        case 'picker':
         default:
-            return `Unknown renderer [${renderer}]`
+            return `Unknown control [${control}]`
     }
 }
 
 export const focusToControl = (inputElement, column) => {
-    const { renderer } = column
-    switch (renderer) {
+    const { control } = column
+    switch (control) {
         case 'toggle':
         case 'picker':
         case 'text':
@@ -74,14 +69,14 @@ export const focusToControl = (inputElement, column) => {
         case undefined:
             return cell
         default:
-            return `Unknown renderer [${renderer}]`
+            return `Unknown control [${control}]`
     }
 }
 
 export const postRenderControl = (inputElement, column) => {
-    const { renderer, dataIndex } = column
+    const { control, dataIndex } = column
     const tdElement = inputElement.parentNode
-    switch (renderer) {
+    switch (control) {
         case 'toggle':
         case 'picker':
         case 'text':
@@ -93,6 +88,6 @@ export const postRenderControl = (inputElement, column) => {
         case undefined:
             return cell
         default:
-            return `Unknown renderer [${renderer}]`
+            return `Unknown control [${control}]`
     }
 }
