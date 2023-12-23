@@ -6,7 +6,7 @@ export const TableCell = (params, row, column, index) => {
     const { tableParams, settings } = params
     const { tableId } = tableParams
     const { tbody_tr_td } = settings.cssClass
-    const { hidden, width = 100, dataIndex, control, renderer } = column
+    const { hidden, width = 100, dataIndex, control, renderer, align } = column
     const { id: dataSourceIndex } = row
 
     let rendererStr = getRenderer(column, dataSourceIndex, tableId)
@@ -26,8 +26,11 @@ export const TableCell = (params, row, column, index) => {
     const editable = (control) ? `editable-cell-${tableId}` : ""
     const tabIndex = (control && renderer) ? `tabindex="0"` : ''
     const hiddenStr = hidden ? 'hidden' : ''
-    const classNames = `${tbody_tr_td} ${editable} ${fixedClass} ${hiddenStr}`.replace(/\s+/g, ' ').trim()
-    return `<td ${tabIndex} ${styleStr}
+    const alignStr = align ? (`text-${align}`) : ""
+    const classNames = `${tbody_tr_td} ${editable} ${fixedClass} ${hiddenStr} ${alignStr}`.replace(/\s+/g, ' ').trim()
+    return `<td 
+            ${tabIndex} 
+            ${styleStr}
             data-index="${dataIndex}"
             datasource-index="${dataSourceIndex}"
             class="${classNames}">${rendererStr}</td>`

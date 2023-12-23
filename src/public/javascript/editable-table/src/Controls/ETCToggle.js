@@ -8,7 +8,5 @@ const getRender = (currentValue, controlId) => {
 export const ETCToggle = (params) => {
     // console.log(params)
     const { currentValue, controlId } = params
-    return `<div class="text-center w-full">
-       ${getRender(currentValue, controlId)}
-    </div>`
+    return `${getRender(currentValue, controlId)}`
 }

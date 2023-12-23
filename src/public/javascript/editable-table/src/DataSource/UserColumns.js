@@ -59,6 +59,7 @@ export const UserColumns = [
         // renderer: 'toggle',
         control: 'toggle',
         footer: 'agg_count',
+        align: 'center',
     },
     {
         dataIndex: "is_handsome",
@@ -66,6 +67,7 @@ export const UserColumns = [
         // renderer: 'toggle',
         control: 'toggle',
         footer: 'A Text',
+        align: 'center',
     },
     {
         dataIndex: "dob",
@@ -84,6 +86,7 @@ export const UserColumns = [
         title: "Created At",
         renderer: 'picker_datetime',
         control: 'picker_datetime',
+        align: 'center',
     },
 
     {
@@ -98,5 +101,6 @@ export const UserColumns = [
         title: "No Renderer",
         footer: 'agg_sum',
         fixed: 'right',
+        align: "right",
     },
 ]
