@@ -77,6 +77,9 @@ export const focusToControl = (inputElement, column) => {
             $(inputElement).select2('open');
             return
         case 'picker_date':
+            const flatpickrInstance = $(inputElement)[0]._flatpickr
+            flatpickrInstance.open()
+            return
         case 'picker_time':
             return 'not yet implemented'
         case undefined:
@@ -99,6 +102,7 @@ export const postRenderControl = (inputElement, column) => {
                 dateFormat: 'Y-m-d',
                 weekNumbers: true,
                 time_24hr: true,
+                // onClose: () => console.log("CLOSED")
             });
             return
         case 'toggle':

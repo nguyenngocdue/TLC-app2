@@ -7,18 +7,23 @@ export const TableHeader = (params) => {
     const ths = []
     // for (let i = 0; i < columns.length; i++) {
     Object.keys(columns).map((dataIndex, i) => {
-        const { title, hidden, width = 100 } = columns[dataIndex]
+        const column = columns[dataIndex]
+        const { title, hidden, width = 100, renderer, control } = column
         if (hidden) return
-        const fixedClass = getFixedClass(columns[dataIndex], i, 'th', tableId)
+        const fixedClass = getFixedClass(column, i, 'th', tableId)
         const styleStr = `style="width:${width}px"`
+        const tooltip = []
+        tooltip.push(`dataIndex: ${dataIndex}`)
+        if (renderer) tooltip.push(`renderer: ${renderer}`)
+        if (control) tooltip.push(`control: ${control}`)
         ths.push(`<th 
             class="border ${fixedClass}" 
-            title="${dataIndex}"
+            title="${tooltip.join("\n")}"
             ${styleStr}
             >${title}</th>`)
     })
     return `<thead class="sticky z-10 top-0">
-        <tr class="${thead_tr}">
+        <tr class="${thead_tr}" title="">
             ${ths.join('')}
         </tr>
     </thead>`

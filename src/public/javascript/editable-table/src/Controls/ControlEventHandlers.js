@@ -29,18 +29,14 @@ export const attachControlEventHandler = (attachParams) => {
     switch (control) {
         // case 'toggle': // This control hooked directly to table without renderer
         case 'picker_date':
-            const inputs = tdElement.querySelectorAll('input')
-            const inputElement0 = inputs[0]
-            const inputElement1 = inputs[1]
-            inputElement1.addEventListener('blur', (e) => {
-                // console.log(e)
-                newValue = inputElement0.value
-                if (debug) console.log(`onBlur of ${controlId} New value = ${newValue}`)
+            const flatpickrInstance = $(inputElement)[0]._flatpickr
+            flatpickrInstance.set('onClose', (selectedDates, dateStr, instance) => {
+                // console.log("ON CLOSED", selectedDates, dateStr)
+                newValue = dateStr
                 setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
 
-                // newRenderer = getRenderer(column, dataSourceIndex, tableId)
-                // console.log(newRenderer, newValue)
-                // tdElement.innerHTML = newRenderer;
+                newRenderer = getRenderer(column, dataSourceIndex, tableId)
+                tdElement.innerHTML = newRenderer;
             })
             return
         case 'picker_time':
