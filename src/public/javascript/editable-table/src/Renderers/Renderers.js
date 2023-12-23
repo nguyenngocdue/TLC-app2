@@ -9,6 +9,7 @@ import { ETRDropdownMulti } from "./ETRDropdownMulti"
 import { ETRPicker } from "./ETRPicker"
 import { ETRPickerDate } from "./ETRPickerDate"
 import { ETRPickerTime } from "./ETRPickerTime"
+import { ETRPickerDateTime } from "./ETRPickerDateTime"
 
 export const getRenderer = (column, dataSourceIndex, tableId) => {
     const { renderer, dataIndex } = column
@@ -35,6 +36,8 @@ export const getRenderer = (column, dataSourceIndex, tableId) => {
             return ETRPickerDate(cell, column)
         case 'picker_time':
             return ETRPickerTime(cell, column)
+        case 'picker_datetime':
+            return ETRPickerDateTime(cell, column)
         case undefined:
             return undefined
         default:

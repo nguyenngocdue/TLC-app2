@@ -30,6 +30,7 @@ export const attachControlEventHandler = (attachParams) => {
         // case 'toggle': // This control hooked directly to table without renderer
         case 'picker_date':
         case 'picker_time':
+        case 'picker_datetime':
             const flatpickrInstance = $(inputElement)[0]._flatpickr
             flatpickrInstance.set('onClose', (selectedDates, dateStr, instance) => {
                 newValue = dateStr

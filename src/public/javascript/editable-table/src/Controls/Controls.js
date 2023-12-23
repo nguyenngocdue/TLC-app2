@@ -6,6 +6,7 @@ import { ETCDropdownMulti } from "./ETCDropdownMulti"
 import { ETCPicker } from "./ETCPicker"
 import { ETCPickerDate } from "./ETCPickerDate"
 import { ETCPickerTime } from "./ETCPickerTime"
+import { ETCPickerDateTime } from "./ETCPickerDateTime"
 
 export const getCurrentValue = (tableId, dataIndex, dataSourceIndex) => {
     return editableTableValues[tableId]?.[dataSourceIndex]?.[dataIndex]
@@ -30,10 +31,14 @@ export const getControl = (controlParams) => {
             return ETCDropdownMulti(controlParams)
         case 'toggle':
             return ETCToggle(controlParams)
+
         case 'picker_date':
             return ETCPickerDate(controlParams)
         case 'picker_time':
             return ETCPickerTime(controlParams)
+        case 'picker_datetime':
+            return ETCPickerDateTime(controlParams)
+
         case undefined:
             return currentValue
         default:
@@ -49,6 +54,7 @@ export const getInputElement = (column, tdElement) => {
             return tdElement.querySelector('input');
         case 'picker_date':
         case 'picker_time':
+        case 'picker_datetime':
             return tdElement.querySelector('input');
         case 'dropdown':
         case 'dropdown_multi':
@@ -77,6 +83,7 @@ export const focusToControl = (inputElement, column) => {
             return
         case 'picker_date':
         case 'picker_time':
+        case 'picker_datetime':
             const flatpickrInstance = $(inputElement)[0]._flatpickr
             flatpickrInstance.open()
             return
@@ -112,7 +119,17 @@ export const postRenderControl = (inputElement, column) => {
                 weekNumbers: true,
                 time_24hr: true
             });
-
+            return
+        case 'picker_datetime':
+            flatpickr(inputElement, {
+                // noCalendar: true,
+                enableTime: true,
+                altInput: true,
+                altFormat: "d/m/Y H:i",
+                dateFormat: 'Y-m-d H:i:S',
+                weekNumbers: true,
+                time_24hr: true
+            });
             return
         case 'toggle':
         case 'picker':

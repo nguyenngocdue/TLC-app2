@@ -79,6 +79,12 @@ export const UserColumns = [
         renderer: 'picker_time',
         control: 'picker_time',
     },
+    {
+        dataIndex: "created_at",
+        title: "Created At",
+        renderer: 'picker_datetime',
+        control: 'picker_datetime',
+    },
 
     {
         dataIndex: "hidden",
