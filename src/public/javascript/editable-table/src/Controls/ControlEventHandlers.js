@@ -32,8 +32,8 @@ export const attachControlEventHandler = (attachParams) => {
         case 'picker_time':
             const flatpickrInstance = $(inputElement)[0]._flatpickr
             flatpickrInstance.set('onClose', (selectedDates, dateStr, instance) => {
-                // console.log("ON CLOSED", selectedDates, dateStr)
                 newValue = dateStr
+                if (debug) console.log(`onBlur of ${controlId} New value = ${newValue}`)
                 setCurrentValue(tableId, dataIndex, dataSourceIndex, newValue)
 
                 newRenderer = getRenderer(column, dataSourceIndex, tableId)

@@ -10,11 +10,15 @@ export const TableCell = (params, row, column, index) => {
     const { id: dataSourceIndex } = row
 
     let rendererStr = getRenderer(column, dataSourceIndex, tableId)
-    if (rendererStr === undefined && control) {
-        const currentValue = getCurrentValue(tableId, dataIndex, dataSourceIndex)
-        const controlId = `${tableId}_${dataIndex}_${dataSourceIndex}`
-        rendererStr = getControl({ column, controlId, currentValue, dataSourceIndex })
-        // console.log(currentValue, controlId, rendererStr)
+    if (rendererStr === undefined) {
+        if (control) {
+            const currentValue = getCurrentValue(tableId, dataIndex, dataSourceIndex)
+            const controlId = `${tableId}_${dataIndex}_${dataSourceIndex}`
+            rendererStr = getControl({ column, controlId, currentValue, dataSourceIndex })
+            // console.log(currentValue, controlId, rendererStr)
+        } else {
+            rendererStr = row[dataIndex]
+        }
     }
     const fixedClass = getFixedClass(column, index, 'td', tableId)
     const styleStr = `style="width:${width}px"`

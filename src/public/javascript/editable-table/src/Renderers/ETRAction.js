@@ -19,7 +19,7 @@ export const ETRAction = (cell, column) => {
         const btnClass = btnClass0[cell[i]]
         result.push(`<button tabindex="-1" class="text-white text-xs border rounded p-1 ml-0.5 ${btnClass}">${icon}</button>`)
     }
-    return `<span class="whitespace-nowrap">
+    return `<span class="whitespace-nowrap flex justify-center">
         ${result.join("")}
     </span>`
 }

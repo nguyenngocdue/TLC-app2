@@ -20,7 +20,6 @@ export const setCurrentValue = (tableId, dataIndex, dataSourceIndex, newValue) =
 export const getControl = (controlParams) => {
     const { column, currentValue } = controlParams
     const { control } = column
-
     switch (control) {
         case 'picker':
         case 'text':
