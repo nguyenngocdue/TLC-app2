@@ -1,6 +1,4 @@
 export const ETRPickerTime = (cell, column) => {
-    const content = moment(cell).format("DD/MM/YYYY")
+    const content = moment('2000-01-01 ' + cell).format("HH:mm")
     return `${content}`
-    // const value = `<input tabindex="-1" type="text" value="${cell}" >`
-    // return `${content} ${value}`
 }

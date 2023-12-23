@@ -29,6 +29,7 @@ export const attachControlEventHandler = (attachParams) => {
     switch (control) {
         // case 'toggle': // This control hooked directly to table without renderer
         case 'picker_date':
+        case 'picker_time':
             const flatpickrInstance = $(inputElement)[0]._flatpickr
             flatpickrInstance.set('onClose', (selectedDates, dateStr, instance) => {
                 // console.log("ON CLOSED", selectedDates, dateStr)
@@ -38,9 +39,6 @@ export const attachControlEventHandler = (attachParams) => {
                 newRenderer = getRenderer(column, dataSourceIndex, tableId)
                 tdElement.innerHTML = newRenderer;
             })
-            return
-        case 'picker_time':
-            console.log("attachControlEventHandler not yet implemented")
             return
         case 'text':
             inputElement.addEventListener('blur', function () {

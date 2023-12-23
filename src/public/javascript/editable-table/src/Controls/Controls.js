@@ -77,11 +77,10 @@ export const focusToControl = (inputElement, column) => {
             $(inputElement).select2('open');
             return
         case 'picker_date':
+        case 'picker_time':
             const flatpickrInstance = $(inputElement)[0]._flatpickr
             flatpickrInstance.open()
             return
-        case 'picker_time':
-            return 'not yet implemented'
         case undefined:
             return cell
         default:
@@ -94,16 +93,27 @@ export const postRenderControl = (inputElement, column) => {
     const tdElement = inputElement.parentNode
     switch (control) {
         case 'picker_date':
-        case 'picker_time':
-            return flatpickr(inputElement, {
+            flatpickr(inputElement, {
+                // noCalendar: true,
                 // enableTime: true,
                 altInput: true,
                 altFormat: "d/m/Y",
                 dateFormat: 'Y-m-d',
                 weekNumbers: true,
                 time_24hr: true,
-                // onClose: () => console.log("CLOSED")
             });
+            return
+        case 'picker_time':
+            flatpickr(inputElement, {
+                noCalendar: true,
+                enableTime: true,
+                altInput: true,
+                altFormat: "H:i",
+                dateFormat: 'H:i:S',
+                weekNumbers: true,
+                time_24hr: true
+            });
+
             return
         case 'toggle':
         case 'picker':
