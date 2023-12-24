@@ -7,6 +7,31 @@ module.exports = {
         './resources/**/*.vue',
         'node_modules/preline/dist/*.js',
     ],
+    safelist: [
+        //  variants: ['lg', 'hover', 'focus', 'lg:hover'],
+        {
+            pattern: /(border|text|bg)-(slate|zinc|neutral|stone|amber|yellow|lime|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|green|orange|red|gray)-(50|100|200|300|400|500|600|700|800|900|950)/,
+            variants: ['hover', 'dark', 'focus', 'active'],
+        },
+        {
+            pattern: /(grid-cols|col-span)-(1|2|3|4|5|6|7|8|9|10|11|12)/,
+            variants: ['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'],
+        },
+        {
+            pattern: /(opacity|bg-opacity)-(0|5|10|20|25|30|40|50|60|70|80|90)/,
+            variants: ['disabled'],
+        },
+        {
+            pattern: /top-(0|1|2|3|4|5|6|7|8|9|10|11|12|14|16|20|24|28|32|36|40)/
+        },
+        {
+            pattern: /(w|h|m|p|mx|my|px|py|mt|mb|ml|mr|pt|pb|pl|pr)-(0|px|0.5|1|1.5|2|2.5|3|3.5|4|5|6|7|8|9|10|11|12|14|16|20|24|28|32|36|40|44|48|52|56|60|64|72|80|96)/,
+        },
+        {
+            pattern: /z-(10|20|30|40|50)/
+        },
+
+    ],
     theme: {
         extend: {
             screens: {
@@ -75,7 +100,7 @@ module.exports = {
                 'Segoe UI Symbol',
                 'Noto Color Emoji',
             ],
-            roboto:[
+            roboto: [
                 'Roboto', 'sans-serif'
             ],
         },
@@ -109,7 +134,7 @@ module.exports = {
     },
     plugins: [
         require('preline/plugin'),
-        require("tailwind-scrollbar-hide"), 
+        require("tailwind-scrollbar-hide"),
         require("tailwind-scrollbar"),
     ],
 }
