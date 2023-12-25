@@ -30,6 +30,18 @@ class QaqcWirs extends MatrixForReportParent
         return $result;
     }
 
+    function getXAxis2ndHeader($xAxis)
+    {
+        $result = [];
+        foreach ($xAxis as $x) {
+            $result[$x->id] = (object)[
+                'value' => $x->getProdDiscipline->description,
+                'cell_class' => $x->getProdDiscipline->css_class,
+            ];
+        }
+        return $result;
+    }
+
     function getYAxis()
     {
         $result = Prod_order::query()

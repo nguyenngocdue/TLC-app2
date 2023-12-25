@@ -275,16 +275,7 @@ abstract class MatrixForReportParent extends Component
 
     function getXAxis2ndHeader($xAxis)
     {
-        // dump($xAxis[0]->getDiscipline);
-        $result = [];
-        foreach ($xAxis as $x) {
-
-            $result[$x->id] = (object)[
-                'value' => $x->getDiscipline->description,
-                'cell_class' => $x->getDiscipline->css_class,
-            ];
-        }
-        return $result;
+        return [];
     }
 
     function getMatrixForReportParams($forExcel = false)

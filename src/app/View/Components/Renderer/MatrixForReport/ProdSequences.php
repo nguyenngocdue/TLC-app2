@@ -65,6 +65,18 @@ class ProdSequences extends MatrixForReportParent
         return collect($result);
     }
 
+    function getXAxis2ndHeader($xAxis)
+    {
+        $result = [];
+        foreach ($xAxis as $x) {
+            $result[$x->id] = (object)[
+                'value' => $x->getDiscipline->description,
+                'cell_class' => $x->getDiscipline->css_class,
+            ];
+        }
+        return $result;
+    }
+
     function getYAxis()
     {
         $result = Prod_order::query()
