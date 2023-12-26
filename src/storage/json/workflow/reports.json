@@ -131,6 +131,15 @@
         "package_tab": "report",
         "package": "project_management",
         "breadcrumb-group": null,
+        "top_title": "QC Acceptance Report V1",
+        "title": "QC Acceptance Report V1",
+        "hidden": "true"
+    },
+    "document-qaqc_wir_020": {
+        "name": "document-qaqc_wir_020",
+        "package_tab": "report",
+        "package": "project_management",
+        "breadcrumb-group": null,
         "top_title": "QC Acceptance Report",
         "title": "QC Acceptance Report"
     },

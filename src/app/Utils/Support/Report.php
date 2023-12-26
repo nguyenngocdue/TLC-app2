@@ -69,6 +69,15 @@ class Report
         return $groupedArray;
     }
 
+    public static function groupArrayByKeyV3($dataSource, $key)
+    {
+        $groupedArray = [];
+        foreach ($dataSource as $k => $element) {
+            $groupedArray[$k] = self::groupArrayByKey($element, $key);
+        }
+        return $groupedArray;
+    }
+
     public static function countValuesInArray($dataSource){
         $result = [];
         foreach ($dataSource as $key => $data) $result[$key] = count($data);

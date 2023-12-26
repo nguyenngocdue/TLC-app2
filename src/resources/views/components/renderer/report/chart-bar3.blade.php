@@ -1,6 +1,6 @@
 @props(['chartType'])
 <div class="flex justify-center">
-	<div class="block">
+	<div class="block" title="{{$titleTooltip}} (Component Name: ChartBar3.php)">
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
 </div>

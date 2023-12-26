@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Report;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
@@ -35,6 +36,7 @@ class ChartBar3 extends Component
         $meta = $this->meta;
         $count = $meta['count'];
         if ($count == 0) return "<x-renderer.emptiness />";
+        $titleTooltip = CurrentUser::isAdmin() ? $this->key : null;
         return view(
             'components.renderer.report.chart-bar3',
             [
@@ -44,6 +46,7 @@ class ChartBar3 extends Component
                 'showValue' => $this->showValue,
                 'titleChart' => $this->titleChart,
                 'dimensions' => $this->dimensions,
+                'titleTooltip' => $titleTooltip,
             ]
         );
     }

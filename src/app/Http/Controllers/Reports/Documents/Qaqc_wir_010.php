@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitFilterProdRoutingShowsOnScreen;
-use App\Models\Sub_project;
-use App\Utils\Support\ArrayReport;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
@@ -46,6 +44,15 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         return [$previousDate, $latestDate];
     }
 
+    public function getDate($params){
+        if ($params['children_mode'] === 'filter_by_week') {
+            [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
+        } else {
+            [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
+        }
+        return [$previousDate, $latestDate];
+    }
+
     private function generateStartAndDayOfWeek($params)
     {
         try {
@@ -66,12 +73,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $idsRoutings = $this->filterProdRoutingByTypeID(346); // QAQC WIR
         $strIdsRoutings = implode(',', $idsRoutings);
 
-
-        if ($params['children_mode'] === 'filter_by_week') {
-            [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
-        } else {
-            [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
-        }
+        [$previousDate, $latestDate] = $this->getDate($params);
         $valOfParams = $this->generateValuesFromParamsReport($params);
 
         if ((isset($params['sub_project_id']) && !is_numeric($x = $params['sub_project_id']) && is_null(last($x)))  || !isset($x)
@@ -269,21 +271,21 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                 'dataIndex' => 'total_prod_order_on_sub_project',
                 'align' => 'right',
                 'width' => 180,
-                'footer' => 'agg_sum',
+                // 'footer' => 'agg_sum',
             ],
             [
                 'title' =>  Arr::get($params, 'previous_month', '') . '<br/>QC Acceptance (%)',
                 'dataIndex' => 'previous_acceptance_percent',
                 'align' => 'right',
                 'width' => 180,
-                'footer' => 'agg_sum',
+                // 'footer' => 'agg_sum',
             ],
             [
                 'title' => Arr::get($params, 'latest_month', '') . '<br/>QC Acceptance (%)',
                 'dataIndex' => 'latest_acceptance_percent',
                 'align' => 'right',
                 'width' => 180,
-                'footer' => 'agg_sum',
+                // 'footer' => 'agg_sum',
             ],
             [
                 'title' => 'Status',
