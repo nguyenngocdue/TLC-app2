@@ -18,7 +18,7 @@
                 <div class="w-1/3">
                     <p>Do you have any comments about the recent survey:</p>
                     <p>Bạn có bình luận gì về khảo sát vừa rồi:</p>
-                    <textarea name="comment" class="w-full rounded p-2" rows="6"></textarea>
+                    <textarea name="comment" class="w-full rounded p-2" rows="6">{{$comment}}</textarea>
                     <x-renderer.button type='success' htmlType="submit" icon='fa-solid fa-paper-plane'>Send and Close</x-renderer.button>
                 </div>
             </div>
