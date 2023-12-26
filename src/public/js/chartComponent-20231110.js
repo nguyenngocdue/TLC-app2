@@ -2,7 +2,7 @@
 function generateColors(numColors) {
     const colors = [];
     const goldenRatio = 0.618033988749895;
-    let hue = Math.random();
+    let hue = 10;
 
     for (let i = 0; i < numColors; i++) {
         hue += goldenRatio;
@@ -10,7 +10,6 @@ function generateColors(numColors) {
         const color = hsvToRgb(hue, 0.5, 0.95);
         colors.push(rgbToHex(color));
     }
-
     return colors;
 }
 
