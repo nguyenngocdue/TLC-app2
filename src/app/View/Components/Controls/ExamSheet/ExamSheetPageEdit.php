@@ -54,6 +54,7 @@ class ExamSheetPageEdit extends Component
                 'exam_tmpl_id' => $exam_tmpl_id,
                 'exam_sheet_id' => $id,
                 'status' => $sheetStatus,
+                'comment' => $sheet->comment,
             ]);
         }
 
