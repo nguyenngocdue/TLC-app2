@@ -333,7 +333,7 @@
         "title": "Submitted",
         "color": "cyan",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-arrow-right-to-bracket\"><\/i>"
     },
     "testing": {
         "name": "testing",
