@@ -4,9 +4,7 @@
     // $value = ($line) ? $line[0][0]->response_ids : "";
     // dump($value);
 @endphp
-<div class="w-full rounded bg-red-600 p-2 text-white font-bold">
-    <i>1 is the HIGHEST, {{sizeof($staticAnswer)}} is the LOWEST.</i>
-</div>
+
 <table class="border rounded m-4"> 
     <tr>
         <th class='border bg-gray-300 min-w-[100px]'></th>

@@ -50,7 +50,7 @@
     <x-renderer.heading level=5 class="z-10 p-2">
         <p title="#{{$questionId}}">{{$item['name'] ?? 'Untitled'}}</p>
     </x-renderer.heading>
-    <div class="p-1 mx-4"> {{$item['description']}}  </div>
+    {{-- <div class="p-1 mx-4"> {{$item['description']}}  </div> --}}
 </div>
 <div class="flex">
     <div class="px-1"></div>
@@ -114,6 +114,11 @@
                     }
                     
                     if($debug) echo "<br/>";
+                    
+     if($item['description']) echo '<div class="w-full rounded bg-red-600 p-2 text-white font-bold">
+    <i>'.$item['description'].'</i>
+</div>';
+
                     echo "<input type='$inputType' name='control_{$questionId}' value='{$controlId}' />";
 
                     echo Blade::render('<x-question-answer.question-answer-'.$control.'
