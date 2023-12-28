@@ -29,7 +29,7 @@ class LegendPublicHolidays extends Component
     public function render()
     {
         $workplaces = Workplace::all()->pluck('id','name')->toArray();
-        $workplaces['>1'] = [1,2,3];
+        $workplaces['Workplaces'] = [1,2,3];
         $match = [];
         foreach($workplaces as $key => $value){
             $match[] = [
