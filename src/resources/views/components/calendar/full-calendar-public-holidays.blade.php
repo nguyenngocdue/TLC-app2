@@ -14,9 +14,9 @@
         $.ajax({
             type: 'get',
             url: `${url}`,
-            data: {
-                "year": currentYear,
-            },
+            // data: {
+            //     "year": currentYear,
+            // },
             headers: {
                 'Authorization': 'Bearer ' + token,
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -39,7 +39,7 @@
                         height: 850,
                         contentHeight: 830,
                         aspectRatio: 2,
-                        initialDate: response.meta,
+                        // initialDate: response.meta,
                         initialView: initialView,
                         // multiMonthMaxColumns: 1,
                         locale: 'en',
@@ -55,25 +55,22 @@
                                 html: eventTitle
                             };
                         },
-                        eventClassNames: function(info){
-                        },
                         dayCellDidMount: function(info){
                             if (info.view.type === 'multiMonthYear') {
-                                var date = info.el.dataset.date
+                                var date = info.el?.dataset?.date
                                 if(eventsMap[date]){
                                     info.el.style.backgroundColor = eventsMap[date].color; 
-                                    info.el.style.display = 'background'; 
                                 }
                             }
                         },
-                        datesSet: function(info){
-                            var typeView = info.view.type;
-                            var currentViewYear = info.view.currentStart.getFullYear();
-                            if(currentViewYear !== currentYear){
-                                currentYear = currentViewYear;
-                                callApiGetEvents(url,currentYear,typeView);
-                            }
-                        },
+                        // datesSet: function(info){
+                        //     var typeView = info.view.type;
+                        //     var currentViewYear = info.view.currentStart.getFullYear();
+                        //     if(currentViewYear !== currentYear){
+                        //         currentYear = currentViewYear;
+                        //         callApiGetEvents(url,currentYear,typeView);
+                        //     }
+                        // },
                         moreLinkContent:function(info){
                             return '...';
                         },

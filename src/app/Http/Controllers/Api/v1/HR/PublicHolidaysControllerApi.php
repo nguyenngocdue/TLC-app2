@@ -12,8 +12,8 @@ class PublicHolidaysControllerApi extends Controller
 {
     public function index(Request $request)
     {
-        $currentYear = $request->year;
-        $publicHoliday = Public_holiday::where('year',$currentYear)->get()->toArray();
+        // $currentYear = $request->year;
+        $publicHoliday = Public_holiday::all()->toArray();
         $results = [];
         foreach($publicHoliday as $item){
             $key = $item['ph_date'] . "-". $item['name'];
@@ -24,7 +24,7 @@ class PublicHolidaysControllerApi extends Controller
             else $results[$key]['workplace_id'][] = $item['workplace_id'];
         }
         $results = array_values($results);
-        return ['hits' => new HolidayCollection(collect($results)), 'meta' => $this->checkYearCurrent($currentYear)];
+        return ['hits' => new HolidayCollection(collect($results)), 'meta' => null];
     }
     private function checkYearCurrent($year){
         $currentYear = Carbon::now()->year;
@@ -32,4 +32,5 @@ class PublicHolidaysControllerApi extends Controller
         else if ($currentYear > $year) return $year."-12-30";
         else return $year."-01-01";
     }
+    
 }

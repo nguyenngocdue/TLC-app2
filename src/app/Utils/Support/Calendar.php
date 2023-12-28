@@ -9,6 +9,8 @@ use App\Models\Project;
 use App\Models\Public_holiday;
 use App\Models\User;
 use App\Models\Work_mode;
+use App\Models\Workplace;
+use App\Utils\Constant;
 use Illuminate\Support\Facades\Blade;
 
 use function PHPUnit\Framework\matches;
@@ -23,9 +25,16 @@ class Calendar
             3 => '#22d3ee',
         };
     }
+    public static function getBackGroundColorByWorkplaceId($workplaceIds,$tailwind = false){
+        if(!is_array($workplaceIds)) $workplaceIds = [$workplaceIds];
+        $backGroupColor = $tailwind ? "slate" : "#94a3b8";
+        $match = Calendar::mapColor($tailwind ? Constant::COLOR_PUBLIC_HOLIDAY : Constant::COLOR_PUBLIC_HOLIDAY2);
+        if(count($workplaceIds) > 1) return $backGroupColor;
+        return $match[$workplaceIds[0]]['color'] ?? $backGroupColor;
+    }
     public static function mapColor(array $colors){
         $match = [];
-        $workplaces = ["TF1", "TF2", "TF3", "HO","NZ"];
+        $workplaces = Workplace::all()->pluck('name')->toArray();
         for($i = 0; $i < count($workplaces); $i++){
             $match[$i + 1] = [
                 "name" => $workplaces[$i],
@@ -36,7 +45,7 @@ class Calendar
     }
     public static function renderTitlePublicHoliday($item){
         $renderWorkplace = "";
-        $match = self::mapColor(["teal","cyan","yellow","blue","pink"]);
+        $match = self::mapColor(Constant::COLOR_PUBLIC_HOLIDAY);
         foreach($item['workplace_id'] as $id){
             $value = $match[$id] ?? "";
             if(!$value) continue;

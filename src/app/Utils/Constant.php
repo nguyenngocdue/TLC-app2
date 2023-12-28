@@ -35,4 +35,8 @@ class Constant
     const DASHBOARD_APARTMENT_OWNER = "-apartment-owner";
 
     const EXTENSIONS_OF_FILE_GALLERY = ['mp4', 'MP4', 'mov', 'MOV', 'png', 'jpeg', 'gif', 'jpg', 'svg', 'webp', 'pdf'];
+
+
+    const COLOR_PUBLIC_HOLIDAY = ["teal","cyan","yellow","blue","pink","violet","green"];
+    const COLOR_PUBLIC_HOLIDAY2 = ["#5eead4","#67e8f9","#fde047","#93c5fd","#f9a8d4","#c4b5fd","#86efac"];
 }

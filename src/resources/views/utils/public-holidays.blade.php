@@ -4,7 +4,9 @@
 
 @section('content')
 
-<div class="bg-white p-10 border">
+<div class="bg-white p-5 border">
+    <x-calendar.legend-public-holidays/>
+    <div class="py-2"></div>
     <x-calendar.full-calendar-public-holidays />
 </div>
 @endsection
