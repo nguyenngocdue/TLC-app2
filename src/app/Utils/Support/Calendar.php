@@ -23,42 +23,34 @@ class Calendar
             3 => '#22d3ee',
         };
     }
+    public static function mapColor(array $colors){
+        $match = [];
+        $workplaces = ["TF1", "TF2", "TF3", "HO","NZ"];
+        for($i = 0; $i < count($workplaces); $i++){
+            $match[$i + 1] = [
+                "name" => $workplaces[$i],
+                "color" => $colors[$i]
+            ];
+        }
+        return $match;
+    }
     public static function renderTitlePublicHoliday($item){
         $renderWorkplace = "";
-        $match = [
-            "1" => [
-                "name" => "TF1",
-                "color" => "teal"
-            ],
-            "2" => [
-                "name" => "TF2",
-                "color" => "cyan"
-            ],
-            "3" => [
-                "name" => "TF3",
-                "color" => "yellow"
-            ],
-            "4" => [
-                "name" => "HO",
-                "color" => "blue"
-            ],
-            "5" => [
-                "name" => "NZ",
-                "color" => "pink"
-            ],
-        ];
+        $match = self::mapColor(["teal","cyan","yellow","blue","pink"]);
         foreach($item['workplace_id'] as $id){
             $value = $match[$id] ?? "";
             if(!$value) continue;
-            $renderWorkplace .= "<span class='items-center text-white rounded-lg p-1 bg-".$value["color"]."-500 text-xs inline-flex justify-center'>".$value["name"]."</span>";
+            $renderWorkplace .= "<span class='items-center text-black rounded-lg p-1 bg-".$value["color"]."-500 text-xs inline-flex justify-center'>".$value["name"]."</span>";
         }
         $name = $item['name'] ?? "";
-        return "<div class='fl1ex justify-between'>
-                    <div class='text-center text-white'>
-                        <span class='text-sm'>$name</span>
-                    </div>
-                    <div class='flex gap-1 py-1 justify-center'>
-                    $renderWorkplace
+        return "<div class='items-center'>
+                    <div>
+                        <div class='text-center text-black items-center justify-center align-middle'>
+                            <span class='text-sm'>$name</span>
+                        </div>
+                        <div class='flex gap-1 py-1 justify-center'>
+                        $renderWorkplace
+                        </div>
                     </div>
                 </div>";
     }

@@ -37,6 +37,7 @@
                         aspectRatio: 2,
                         initialDate: response.meta,
                         initialView: initialView,
+                        // multiMonthMaxColumns: 1,
                         locale: 'en',
                         dayMaxEvents: true,
                         weekNumbers: true,
@@ -46,12 +47,22 @@
                         eventContent: function(info) {
                             var timeText = info.timeText;
                             var eventTitle = info.event.title;
-                            var eventTitleHTML = '<div class="event-title w-full">'
-                                + eventTitle + 
-                                '</div>';
+                            // if(info.view.type == 'multiMonthYear'){
+
+                            // }
                             return {
-                                html: eventTitleHTML
+                                html: eventTitle
                             };
+                        },
+                        eventDidMount: function (info) {
+                            console.log(info)
+      if (info.view.type === 'multiMonthYear') {
+        info.el.style.backgroundColor = 'red'; 
+        info.el.style.display = 'background'; 
+        info.el.style.borderRadius = '8px'; 
+      }
+    },
+                        eventClassNames: function(info){
                         },
                         datesSet: function(info){
                             var typeView = info.view.type;
@@ -60,7 +71,20 @@
                                 currentYear = currentViewYear;
                                 callApiGetEvents(url,currentYear,typeView);
                             }
-                        }
+                        },
+                        moreLinkContent:function(info){
+                            return '...';
+                        },
+                            // eventRender: function (info) {
+                            //     console.log(date)
+                            // // if (date.getDate() === today.getDate()) {
+                            // //     cell.css("background-color", "red");
+                            // // }
+
+                            // // if(date > today && date <= end) {
+                            // //     cell.css("background-color", "yellow");
+                            // // }
+                            // }    
                         
                     })
                     calendar.render();
