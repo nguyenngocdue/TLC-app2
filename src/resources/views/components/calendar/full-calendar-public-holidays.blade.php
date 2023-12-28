@@ -26,7 +26,14 @@
                     events = response.hits.data
                     eventsMap = {};
                     for( event of events){
-                        eventsMap[event.start] = event;
+                        if(eventsMap[event.start]){
+                            var oldVal = eventsMap[event.start].workplace_ids;
+                            var newVal = event.workplace_ids;
+                            if(newVal.length > oldVal.length){
+                                eventsMap[event.start] = event;
+                            }
+                        }else 
+                            eventsMap[event.start] = event;
                     }
                     var Calendar = FullCalendar.Calendar;
                     calendar = new Calendar(calendarEl, {
