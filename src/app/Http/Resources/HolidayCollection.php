@@ -29,7 +29,7 @@ class HolidayCollection extends ResourceCollection
                     // 'end' => $item['ph_date'],
                     'workplace_ids' => $item['workplace_id'],
                     // 'display' => 'block',
-                    'overlap' => true,
+                    // 'overlap' => false,
                     'color' => Calendar::getBackGroundColorByWorkplaceId($item['workplace_id']),
                 ];
             }),

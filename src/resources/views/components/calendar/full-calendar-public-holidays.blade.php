@@ -43,8 +43,8 @@
                             right: 'multiMonthYear,dayGridMonth'
                         },
                         timeZone: 'local',
-                        height: 850,
-                        contentHeight: 830,
+                        height: 1100,
+                        contentHeight: 1050,
                         aspectRatio: 2,
                         // initialDate: response.meta,
                         initialView: initialView,
