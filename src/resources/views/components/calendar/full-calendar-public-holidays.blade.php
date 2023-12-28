@@ -24,6 +24,10 @@
             success: function(response) {
                 if (response) {
                     events = response.hits.data
+                    eventsMap = {};
+                    for( event of events){
+                        eventsMap[event.start] = event;
+                    }
                     var Calendar = FullCalendar.Calendar;
                     calendar = new Calendar(calendarEl, {
                         headerToolbar: {
@@ -47,22 +51,20 @@
                         eventContent: function(info) {
                             var timeText = info.timeText;
                             var eventTitle = info.event.title;
-                            // if(info.view.type == 'multiMonthYear'){
-
-                            // }
                             return {
                                 html: eventTitle
                             };
                         },
-                        eventDidMount: function (info) {
-                            console.log(info)
-      if (info.view.type === 'multiMonthYear') {
-        info.el.style.backgroundColor = 'red'; 
-        info.el.style.display = 'background'; 
-        info.el.style.borderRadius = '8px'; 
-      }
-    },
                         eventClassNames: function(info){
+                        },
+                        dayCellDidMount: function(info){
+                            if (info.view.type === 'multiMonthYear') {
+                                var date = info.el.dataset.date
+                                if(eventsMap[date]){
+                                    info.el.style.backgroundColor = eventsMap[date].color; 
+                                    info.el.style.display = 'background'; 
+                                }
+                            }
                         },
                         datesSet: function(info){
                             var typeView = info.view.type;
@@ -75,17 +77,6 @@
                         moreLinkContent:function(info){
                             return '...';
                         },
-                            // eventRender: function (info) {
-                            //     console.log(date)
-                            // // if (date.getDate() === today.getDate()) {
-                            // //     cell.css("background-color", "red");
-                            // // }
-
-                            // // if(date > today && date <= end) {
-                            // //     cell.css("background-color", "yellow");
-                            // // }
-                            // }    
-                        
                     })
                     calendar.render();
                 }
