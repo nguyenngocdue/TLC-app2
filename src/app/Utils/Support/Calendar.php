@@ -57,7 +57,7 @@ class Calendar
                         <div class='text-center text-black items-center justify-center align-middle'>
                             <span class='text-sm'>$name</span>
                         </div>
-                        <div class='flex gap-1 py-1 justify-center'>
+                        <div class='flex gap-1 py-1 justify-center flex-wrap'>
                         $renderWorkplace
                         </div>
                     </div>
