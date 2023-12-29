@@ -62,7 +62,7 @@ trait TableTraitApplyRender
         $rendererParam = isset($column['rendererParam']) ? $this->getRendererParams($column) : "";
         $formatterName = isset($column['formatterName']) ? "formatterName='{$column['formatterName']}'" : "";
         $onChange = isset($column['onChange']) ? "onChange='{$column['onChange']}'" : "";
-        $rowReadOnly = $dataLineObj->readOnly ? 'readOnly=\'true\'' : '';
+        $rowReadOnly = (isset($dataLineObj->readOnly) && $dataLineObj->readOnly) ? 'readOnly=\'true\'' : '';
 
         $attributes = "$name $attributeRender $propertyRender $typeRender $cbbDataSourceRender ";
         $attributes .= "$dataLineRender $columnRender $cellRender $rendererParam $formatterName $onChange ";
