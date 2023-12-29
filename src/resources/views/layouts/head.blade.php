@@ -40,7 +40,7 @@
     <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
 
-    <script src="{{ asset('js/tlc2-20231219.js') }}"></script>
+    <script src="{{ asset('js/tlc2-20231229.js') }}"></script>
     <script src="{{ asset('js/parseNumber-20230822.js') }}"></script>
     
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
@@ -55,7 +55,7 @@
     <script src="{{ asset('js/components/Dropdown4-20231219.js') }}"></script>
 
     <script src="{{ asset('js/components/EditableTable2-20231219.js') }}"></script>
-    <script src="{{ asset('js/components/EditableTableAddNewLine2-20231219.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTableAddNewLine2-20231229.js') }}"></script>
     <script src="{{ asset('js/components/Footer4-20231219.js') }}"></script>
     
     <script src="{{ asset('js/components/ViewAllMatrix-20230823.js') }}"></script>
