@@ -129,6 +129,7 @@ trait TraitTableEditableDataSourceWithOld
         // dump($dataSource);
         foreach ($dataSource as $rowIndex => &$row) {
             $id = $row->order_no;
+            $readOnly = $row->readOnly ?? false;
             // dump($index);
             $type = $this->tableDebug ? "text" : "hidden";
             $output = "
@@ -137,7 +138,7 @@ trait TraitTableEditableDataSourceWithOld
             <div class='whitespace-nowrap flex justify-center '>";
             if ($isOrderable) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='moveUpEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})'><i class='fa fa-arrow-up'></i></x-renderer.button>
                  <x-renderer.button size='xs' value='$table01Name' onClick='moveDownEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})'><i class='fa fa-arrow-down'></i></x-renderer.button>";
-            $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='duplicateLineEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
+            if (!$readOnly) $output .= "<x-renderer.button size='xs' value='$table01Name' onClick='duplicateLineEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})' type='secondary' ><i class='fa fa-copy'></i></x-renderer.button>
                 <x-renderer.button size='xs' value='$table01Name' onClick='trashEditableTable({control:this, fingerPrint: $id, nameIndex: $rowIndex})' type='danger' ><i class='fa fa-trash'></i></x-renderer.button>
             </div>
             ";

@@ -214,7 +214,7 @@ class RelationshipRenderer2 extends Component
             foreach ($dataSource as $item) {
                 if ($item instanceof \App\Models\Prod_run) {
                     $dateToCheck = Carbon::parse($item->date);
-                    $sevenDaysAgo = Carbon::now()->subDays(7);
+                    $sevenDaysAgo = Carbon::now()->subDays(8);
                     if (!$dateToCheck->greaterThanOrEqualTo($sevenDaysAgo)) {
                         $item->readOnly = true;
                     }

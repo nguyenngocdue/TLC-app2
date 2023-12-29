@@ -290,8 +290,13 @@ const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
     // const value = getCellValueByName(tableId, '[' + dataIndex + ']', 0)
     if (debugEditable) console.log(tableId, dataIndex, '=', value)
     const length = getAllRows(tableId).length
+
     for (let i = 0; i < length; i++) {
         const id = makeIdFrom(tableId, dataIndex, i)
+        if ($(`#${tableId} tr`).eq(i).attr('readonly') /* === 'readonly */) {
+            console.log("Skipped cloning of line ", i)
+            continue
+        }
 
         if (renderer === 'toggle') {
             getEById(id)[0].checked = value

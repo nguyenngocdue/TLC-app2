@@ -191,7 +191,7 @@ trait TableTraitRows
         foreach ($dataSource as $dataLineIndex => $dataLine) {
             $dataLineObj = is_object($dataLine) ? $dataLine : (object)$dataLine;
             $tds = $this->makeTd($columns, $dataLineObj, $start, $lineNo++ + 1, $dataLineIndex, sizeof($dataSource), $tableDebug);
-
+            $readOnlyStr = ($dataLineObj->readOnly ?? false) ? "readonly" : "";
             if ($this->groupBy) {
                 $groupBy = $this->groupBy;
                 $index = isset($dataLineObj->{$groupBy}[0]) ? strtoupper(substr($dataLineObj->{$groupBy}, 0, $this->groupByLength)) : "(EMPTY)";
@@ -199,7 +199,7 @@ trait TableTraitRows
                     $lastIndex = $index;
                     //<<This fixedLeft still doesn't work
                     $fixedLeft = "table-th-fixed-left table-th-fixed-left-0";
-                    $tr = "<tr class='bg-gray-100 dark:bg-gray-800'>";
+                    $tr = "<tr $readOnlyStr class='bg-gray-100 dark:bg-gray-800' >";
                     $tr .= "<td class='$fixedLeft bg-white1 p-2 border-b text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td>";
                     $tr .= "</tr>";
                     $trs[] = $tr;
@@ -207,7 +207,7 @@ trait TableTraitRows
             }
             $bgClass = ($dataLineObj->row_color ?? false) ? "bg-" . $dataLineObj->row_color . "-400" : "";
             $extraTrClass = $dataLineObj->extraTrClass ?? "";
-            $tr = "<tr class='dark:hover:bg-gray-900 hover:bg-gray-100 $bgClass text-gray-700 dark:text-gray-300 $extraTrClass'>";
+            $tr = "<tr $readOnlyStr class='dark:hover:bg-gray-900 hover:bg-gray-100 $bgClass text-gray-700 dark:text-gray-300 $extraTrClass'>";
             $tr .=  join("", $tds);
             $tr .= "</tr>";
             $trs[] = $tr;

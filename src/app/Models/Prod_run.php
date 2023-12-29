@@ -78,9 +78,9 @@ class Prod_run extends ModelExtended
         $result = [
             ['dataIndex' => 'id', 'invisible' => true,],
             ['dataIndex' => 'prod_sequence_id', 'value_as_parent_id' => true, 'invisible' => true,],
-            ['dataIndex' => 'date', 'cloneable' => true, 'footer' => 'agg_none'],
-            ['dataIndex' => 'start', 'cloneable' => true,],
-            ['dataIndex' => 'end', 'cloneable' => true,],
+            ['dataIndex' => 'date', /*'cloneable' => true,*/ 'footer' => 'agg_none'],
+            ['dataIndex' => 'start', /*'cloneable' => true,*/],
+            ['dataIndex' => 'end', /*'cloneable' => true,*/],
             ['dataIndex' => 'total_hours', 'footer' => 'agg_sum', 'no_print' => true,],
         ];
         if ($isNZ) {
