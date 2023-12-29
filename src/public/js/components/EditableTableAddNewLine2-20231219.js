@@ -148,7 +148,7 @@ const addANewLine = (params) => {
                     // }
 
                     // console.log("Add line to table from ajax respond", valuesOfOrigin)
-                    addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList, batchLength, })
+                    addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList, batchLength, tableName })
                 }
                 getEById(btnAddANewLineId).show()
                 getEById(btnAddFromAListId).show()
@@ -164,7 +164,7 @@ const addANewLine = (params) => {
 }
 
 const addANewLineFull = (params) => {
-    const { tableId, isDuplicatedOrAddFromList, batchLength = 1 } = params
+    const { tableId, tableName, isDuplicatedOrAddFromList, batchLength = 1 } = params
     let { valuesOfOrigin } = params //<< Incase of duplicate, this is the value of the original line
     // console.log("valuesOfOrigin: ", valuesOfOrigin)
     const insertedId = valuesOfOrigin['id']
@@ -447,6 +447,8 @@ const addANewLineFull = (params) => {
                 break
             default:
                 const value = valuesOfOrigin[column['dataIndex']]
+                const picker4config = (tableName == 'prod_runs') ? { minDate: moment().subtract(7, 'days').format("YYYY-MM-DD") } : {}
+                // console.log(picker4config)
                 // console.log("DDDDDD5", column, value)
                 if (column['value_as_parent_type']) {
                     getEById(id).val($('#entityParentType').val())
@@ -481,13 +483,13 @@ const addANewLineFull = (params) => {
                 if (column['renderer'] === 'toggle') {
                     getEById(id)[0].checked = value
                 } else if (column['control'] === 'picker_datetime') {
-                    newFlatPickrDateTime(id).setDate(value);
+                    newFlatPickrDateTime(id, picker4config).setDate(value);
                     getEById("hidden_" + id).val(value);
                 } else if (column['control'] === 'picker_date') {
-                    newFlatPickrDate(id).setDate(value);
+                    newFlatPickrDate(id, picker4config).setDate(value);
                 }
                 else if (column['control'] === 'picker_time') {
-                    newFlatPickrTime(id).setDate(value);
+                    newFlatPickrTime(id, picker4config).setDate(value);
                 } else {
                     // console.log("Applying data for", id, value)
                     getEById(id).val(value)

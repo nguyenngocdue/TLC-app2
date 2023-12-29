@@ -3,6 +3,9 @@
 namespace App\View\Components\Renderer\Editable;
 
 use App\Utils\ClassList;
+use App\Utils\Constant;
+use App\Utils\Support\CurrentRoute;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -44,6 +47,14 @@ class PickerAll4 extends Component
      */
     public function render()
     {
+        // dump(CurrentRoute::getName());
+        // dump($this->table01Name);
+        $minDate = null;
+        if ('prod_sequences.edit' === CurrentRoute::getName()) {
+            $minDate = Carbon::now()->subDays(7)->format(Constant::FORMAT_DATE_MYSQL);
+        }
+        // dump($minDate);
+
         if ($this->cell === 'DO_NOT_RENDER') return "";
         // $this->cell = DateTimeConcern::convertForLoading($this->control, $this->cell);
         return view('components.renderer.editable.picker-all4', [
@@ -59,6 +70,7 @@ class PickerAll4 extends Component
             'control' => $this->control,
             'classList' => ClassList::TEXT,
             'style' => $this->style,
+            'minDate' => $minDate,
         ]);
     }
 }

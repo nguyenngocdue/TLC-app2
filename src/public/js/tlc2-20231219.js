@@ -124,7 +124,7 @@ const flatpickrHandleChange = (name, selectedDates) => {
     hiddenInput.value = result;
 }
 
-const newFlatPickrDateTime = (id) => {
+const newFlatPickrDateTime = (id, config) => {
     // if (name === undefined) console.error("newFlatPickrDateTime missing second argument")
     const element = document.getElementById(id)
     return flatpickr(element, {
@@ -134,6 +134,7 @@ const newFlatPickrDateTime = (id) => {
         dateFormat: 'Y-m-d H:i:S',
         weekNumbers: true,
         time_24hr: true,
+        ...config,
         parseDate: newFlatPickrDateTimeParseDate,
         onChange: (selectedDates, dateStr, instance) => {
             flatpickrHandleChange(id, selectedDates)
@@ -141,7 +142,7 @@ const newFlatPickrDateTime = (id) => {
     });
 }
 
-const newFlatPickrTime = (id) => {
+const newFlatPickrTime = (id, config) => {
     const element = document.getElementById(id)
     return flatpickr(element, {
         noCalendar: true,
@@ -150,11 +151,12 @@ const newFlatPickrTime = (id) => {
         altFormat: "H:i",
         dateFormat: 'H:i:S',
         weekNumbers: true,
-        time_24hr: true
+        time_24hr: true,
+        ...config,
     });
 }
 
-const newFlatPickrDate = (id) => {
+const newFlatPickrDate = (id, config) => {
     const element = document.getElementById(id)
     return flatpickr(element, {
         // enableTime: true,
@@ -162,6 +164,7 @@ const newFlatPickrDate = (id) => {
         altFormat: "d/m/Y",
         dateFormat: 'Y-m-d',
         weekNumbers: true,
-        time_24hr: true
+        time_24hr: true,
+        ...config,
     });
 }

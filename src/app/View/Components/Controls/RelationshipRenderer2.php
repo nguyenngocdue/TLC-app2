@@ -14,7 +14,7 @@ use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererSameAsVi
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyIcons;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyLines;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererCalendarGrid;
-
+use Carbon\Carbon;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -205,8 +205,23 @@ class RelationshipRenderer2 extends Component
         [$tableFooter, $columns,] = $this->loadColumnsFromRendererEditParam($props, $instance, $lineModelPath, $tableName);
 
         $row = $modelPath::find($id);
+        // dump($row);
         $isOrderable = $row ? $this->isTableOrderable($row, $colName, $columns) : false;
         $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
+
+        //If rendering in Sequence screen
+        if ($this->type === 'prod_sequences') {
+            foreach ($dataSource as $item) {
+                if ($item instanceof \App\Models\Prod_run) {
+                    $dateToCheck = Carbon::parse($item->date);
+                    $sevenDaysAgo = Carbon::now()->subDays(7);
+                    if (!$dateToCheck->greaterThanOrEqualTo($sevenDaysAgo)) {
+                        $item->readOnly = true;
+                    }
+                }
+            }
+        }
+
         switch ($renderer_edit) {
             case "same_as_view_all":
                 return $this->renderSameAsViewAll($props, $dataSource);
