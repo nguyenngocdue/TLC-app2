@@ -5,6 +5,7 @@ namespace App\View\Components\Controls\RelationshipRenderer;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\CurrentUser;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
 
 trait TraitTableRendererManyLines
@@ -46,6 +47,20 @@ trait TraitTableRendererManyLines
         //remakeOrderNoColumn MUST before attach Action Column
         $dataSourceWithOld = $this->remakeOrderNoColumn($dataSourceWithOld);
         $dataSourceWithOld = $this->attachActionColumn($this->table01Name, $dataSourceWithOld, $isOrderable, $this->readOnly);
+
+        //If rendering in Sequence screen
+        if ($this->type === 'prod_sequences') {
+            foreach ($dataSourceWithOld as &$item) {
+                if ($item instanceof \App\Models\Prod_run) {
+                    $dateToCheck = Carbon::parse($item->date);
+                    $sevenDaysAgo = Carbon::now()->subDays(8);
+                    if (!$dateToCheck->greaterThanOrEqualTo($sevenDaysAgo)) {
+                        $item->readOnly = true;
+                    }
+                }
+            }
+        }
+
         // dump($dataSourceWithOld);
         // dump($dataSource);
         // $tableName = $lineModelPath::getTableName();
