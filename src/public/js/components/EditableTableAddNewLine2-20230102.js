@@ -489,7 +489,7 @@ const addANewLineFull = (params) => {
                     newFlatPickrDate(id, picker4config).setDate(value);
                 }
                 else if (column['control'] === 'picker_time') {
-                    newFlatPickrTime(id, picker4config).setDate(value);
+                    newFlatPickrTime(id/*, picker4config*/).setDate(value);
                 } else {
                     // console.log("Applying data for", id, value)
                     getEById(id).val(value)
