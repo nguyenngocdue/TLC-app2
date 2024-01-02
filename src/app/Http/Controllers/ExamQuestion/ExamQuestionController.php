@@ -64,7 +64,8 @@ class ExamQuestionController
             $numbers = substr($key, strlen("description_"));
             $numbers .= "__"; // make sure it always has [1] and [2]
             $numbers = explode("_", $numbers);
-            $result[$numbers[0]][$numbers[1]] = $value;
+            // dump($numbers);
+            $result[$numbers[0]][$numbers[2]][$numbers[1]] = $value;
         }
 
         // dump($result);
@@ -97,6 +98,7 @@ class ExamQuestionController
         $controls = $this->parseControls($controls);
         $descriptions = $input->filter(fn ($v, $k) => Str::startsWith($k, 'description_'));
         $descriptions = $this->parseDescription($descriptions);
+        // dump($descriptions);
         // dd($descriptions);
         // dd();
 
@@ -139,11 +141,11 @@ class ExamQuestionController
 
             if ($subQuestion1) {
                 $uniqueArray['sub_question_1_id'] = $subQuestion1;
-                $answer['sub_question_1_value'] = $descriptions[$questionId][$subQuestion1];
+                $answer['sub_question_1_value'] = $descriptions[$questionId][1][$subQuestion1];
             }
             if ($subQuestion2) {
                 $uniqueArray['sub_question_2_id'] = $subQuestion2;
-                $answer['sub_question_2_value'] = $descriptions[$questionId][$subQuestion2];
+                $answer['sub_question_2_value'] = $descriptions[$questionId][2][$subQuestion2];
             }
 
             $result = Exam_sheet_line::updateOrCreate(

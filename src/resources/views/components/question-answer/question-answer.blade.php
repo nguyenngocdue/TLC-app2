@@ -2,6 +2,7 @@
     $questionId = $item['id'];
     $validation = $item['validation'];
     // dump($validation);
+    // $debug=true;
 @endphp
 @once
     <script>const questions = {};</script>
@@ -84,6 +85,7 @@
                 foreach($subQuestions as $subQuestion2){
                     // echo $subQuestion2;
                     if($showSubQuestion2){ 
+                        if($debug) echo "subQuestion2: ".$subQuestion2['id']."<br/>";
                         $avatar = $subQuestion2['avatar'] ?? null;
                         echo "<div class='flex items-center' title='".$subQuestion2['id']."'>";
                             // echo $avatar;
@@ -100,6 +102,7 @@
                     foreach($dynamicAnswerRows as $subQuestionGroups){
                         foreach($subQuestionGroups as $subQuestion1){
                             $name ="description_{$questionId}_{$subQuestion1['id']}_1";
+                            if($debug) echo "<br/>subQuestion1: ".$subQuestion1['id']. " - ";
                             if($debug) echo $name;
                             echo "<input type='$inputType' name='$name' value='{$subQuestion1['name']}' />";
                         }
