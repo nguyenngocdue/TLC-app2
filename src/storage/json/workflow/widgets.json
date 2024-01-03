@@ -47,7 +47,7 @@
         "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_worker_number\"}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
+        "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Man Power (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"showDatalabel\": 0\r\n}"
     },
     "benchmark_avg_min": {
         "name": "benchmark_avg_min",
@@ -57,7 +57,7 @@
         "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_min\"\r\n}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"min (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
+        "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"min (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"showDatalabel\": 0\r\n}"
     },
     "benchmark_avg_min_uom": {
         "name": "benchmark_avg_min_uom",
@@ -67,7 +67,7 @@
         "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_min_uom\"\r\n}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"min\/Uom (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
+        "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"min\/Uom (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"showDatalabel\": 0\r\n}"
     },
     "benchmark_avg_total_uom": {
         "name": "benchmark_avg_total_uom",
@@ -77,7 +77,7 @@
         "params": "{\r\n\"label_meta_data_1\": \"sub_project_name\",\r\n\"meta_data_1\":\"avg_total_uom\"\r\n}",
         "param_meta": null,
         "line_series": null,
-        "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Total UoM (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10\r\n}"
+        "dimensions": "{\r\n\"width\": 400,\r\n\"height\":400,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"Total UoM (AVG)\",\r\n\"displayTitleChart\":1,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"Value:\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"\",\r\n\"dataName2\": \"\",\r\n\"dataLabelOffset\" : 10,\r\n\"showDatalabel\": 0\r\n}"
     },
     "carbon_footprint_1": {
         "name": "carbon_footprint_1",

@@ -240,7 +240,7 @@ var chartConfig = {
         },
         hidden: {!! json_encode($dimensions['hddien_average_line'] ?? false ? true : false)  !!},
         datalabels: {
-            display:  {!! json_encode($dimensions['show_datalabel'] ?? true)  !!},
+            display:  {!! json_encode($dimensions['showDatalabel'] ?? true)  !!},
             borderWidth: 0,
             borderRadius: 0,
             rotation: 0,

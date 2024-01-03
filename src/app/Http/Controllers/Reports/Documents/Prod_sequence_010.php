@@ -39,7 +39,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
 
     public function getSqlStr($params)
     {
-        $strProdDisciplineIds = ParameterReport::getStringIds('prod_discipline_id');
+        $strProdRoutings = ParameterReport::getStringIds('prod_routing_id');
         $sql = "SELECT
                         targetTb.project_name,
                         targetTb.sub_project_name,
@@ -96,7 +96,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
                         JOIN prod_orders po ON po.sub_project_id = sp.id";
         // if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
         $sql .= "\n LEFT JOIN prod_sequences pose ON pose.prod_order_id = po.id
-                        LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id AND pr.id IN ($strProdDisciplineIds)
+                        LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id AND pr.id IN ($strProdRoutings)
                         JOIN prod_routing_links prl ON prl.id = pose.prod_routing_link_id
                         LEFT JOIN prod_routing_details prd ON prl.id = prd.prod_routing_link_id 
                                                         AND prd.prod_routing_id = pr.id
@@ -358,6 +358,7 @@ class Prod_sequence_010 extends Report_ParentDocument2Controller
 
     public function changeDataSource($dataSource, $params)
     {
+        // dd($dataSource);
         foreach ($dataSource as $key => $values) {
             $values = (array)$values;
             $paramUrl = "?project_id={$values['project_id']}";

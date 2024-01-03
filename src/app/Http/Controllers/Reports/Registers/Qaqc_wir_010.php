@@ -40,13 +40,6 @@ class Qaqc_wir_010 extends Report_ParentRegister2Controller
     {
         return [
             [
-                'title' => 'Date',
-                'dataIndex' => 'picker_date',
-                'renderer' => 'picker_date',
-                'singleDatePicker' => true,
-                'validation' => 'required|date_format:d/m/Y',
-            ],
-            [
                 'title' => 'Project',
                 'dataIndex' => 'project_id',
             ],
@@ -60,6 +53,13 @@ class Qaqc_wir_010 extends Report_ParentRegister2Controller
                 'dataIndex' => 'prod_routing_id',
                 'allowClear' => true,
                 'hasListenTo' => true,
+            ],
+            [
+                'title' => 'Date to Compare',
+                'dataIndex' => 'picker_date',
+                'renderer' => 'picker_date',
+                'singleDatePicker' => true,
+                'validation' => 'required|date_format:d/m/Y',
             ],
         ];
     }
