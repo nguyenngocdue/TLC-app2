@@ -89,6 +89,12 @@
         "field_name": "comment_rejected_reason",
         "allowed_to_delete": ""
     },
+    "_comment_resolved": {
+        "name": "_comment_resolved",
+        "field_id": "216",
+        "field_name": "comment_resolved",
+        "allowed_to_delete": ""
+    },
     "_insp_comments": {
         "name": "_insp_comments",
         "field_id": "13",

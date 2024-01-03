@@ -441,6 +441,19 @@
         "inspection_rejected": "true",
         "closed": "true"
     },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
+        "new": "",
+        "pending_review": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "true",
+        "inspection_rejected": "",
+        "closed": ""
+    },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
@@ -571,16 +584,16 @@
         "inspection_rejected": "",
         "closed": ""
     },
-    "_comment_inspector_decision": {
-        "name": "_comment_inspector_decision",
-        "column_name": "comment_inspector_decision",
+    "_comment_resolved": {
+        "name": "_comment_resolved",
+        "column_name": "comment_resolved",
         "new": "",
         "pending_review": "",
         "assigned": "",
         "assign_rejected": "",
         "resolved": "",
         "rejected": "",
-        "inspected": "true",
+        "inspected": "",
         "inspection_rejected": "",
         "closed": ""
     }

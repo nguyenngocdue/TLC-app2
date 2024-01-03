@@ -441,6 +441,19 @@
         "inspection_rejected": "",
         "closed": ""
     },
+    "_comment_inspector_decision": {
+        "name": "_comment_inspector_decision",
+        "column_name": "comment_inspector_decision",
+        "new": "true",
+        "pending_review": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
@@ -571,16 +584,16 @@
         "inspection_rejected": "true",
         "closed": "true"
     },
-    "_comment_inspector_decision": {
-        "name": "_comment_inspector_decision",
-        "column_name": "comment_inspector_decision",
+    "_comment_resolved": {
+        "name": "_comment_resolved",
+        "column_name": "comment_resolved",
         "new": "true",
         "pending_review": "true",
-        "assigned": "true",
+        "assigned": "",
         "assign_rejected": "true",
         "resolved": "true",
         "rejected": "true",
-        "inspected": "",
+        "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
     }
