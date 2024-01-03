@@ -229,8 +229,8 @@ var chartConfig = {
         pointBackgroundColor: '#3498db', // Set the color of the points
         pointBorderColor: '#000080', // Set the color of the point borders
         fill: false,
-        pointRadius: 1, // Set the point radius to 0 to hide points on the average line
-        borderWidth: 2,
+        pointRadius: 0, // Set the point radius to 0 to hide points on the average line
+        borderWidth: 1,
         // Adjust text and font
         text: 'Average Line',
         font: {
