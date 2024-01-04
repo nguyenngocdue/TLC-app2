@@ -393,9 +393,9 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $year = $params['year'];
         [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
 
-        $previousM = intval($currentWeek) === 1 ? 12 : $currentWeek - 1; 
+        $previousM = intval($currentWeek) === 1 ? 12 : str_pad($currentWeek - 1, 2, '0', STR_PAD_LEFT); 
         $year = $previousM === 12 ? $year - 1 : $year;
-        
+
         $params['previous_month'] = 'W' . ($previousM) . '/' . $year . '(' . $previousDate . ')';
         $params['latest_month'] = 'W' . $currentWeek . '(' . $latestDate . ')';
 
