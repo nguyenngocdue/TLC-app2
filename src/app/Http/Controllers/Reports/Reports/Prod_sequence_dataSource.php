@@ -70,8 +70,9 @@ class Prod_sequence_dataSource extends Controller
                     prl.standard_uom_id AS standard_uom_id,
                     pru.production_output AS production_output,
                     pru.remark AS remark,
-                    us.full_name AS prod_run_owner_name
-
+                    us.full_name AS prod_run_owner_name,
+                    REPLACE(GROUP_CONCAT(cm.content, '<br/>'), ',', '') AS content_comment,
+                    cm.owner_id AS comment_owner_id
                     FROM 
                         sub_projects sp
                         JOIN prod_orders po ON po.sub_project_id = sp.id
@@ -84,6 +85,7 @@ class Prod_sequence_dataSource extends Controller
                         JOIN prod_disciplines pd ON pd.id = prl.prod_discipline_id
                         JOIN prod_runs pru ON pru.prod_sequence_id = ps.id AND pru.deleted_by IS NULL
                         LEFT JOIN users us ON us.id = pru.owner_id
+                        LEFT JOIN comments cm ON cm.commentable_type = 'App\\\Models\\\Prod_sequence' AND cm.commentable_id = ps.id
                     WHERE 1 = 1";
         if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
@@ -99,6 +101,7 @@ class Prod_sequence_dataSource extends Controller
         $sql .= "\n 
                     AND  SUBSTR(pru.date, 1, 10) >= '{$valOfParams["picker_date"]["start"]}'
                     AND  SUBSTR(pru.date, 1, 10) <= '{$valOfParams["picker_date"]["end"]}'
+                    GROUP BY comment_owner_id, pr.id, po.id, prde.prod_routing_link_id, pru.date, pru.end, pru.start, pru.worker_number, pru.total_man_hours, pru.id
                     ) AS tb1
                     LEFT JOIN terms terms ON tb1.standard_uom_id = terms.id
                     ORDER BY sub_project_name, prod_routing_name, prod_discipline_name, order_no, prod_order_name

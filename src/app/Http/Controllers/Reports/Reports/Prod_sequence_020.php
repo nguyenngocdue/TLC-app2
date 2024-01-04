@@ -28,7 +28,6 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
     public function getDataSource($params)
     {
         $primaryData = (new Prod_sequence_dataSource())->getDataSource($params);
-        // dd($primaryData);
         return collect($primaryData);
     }
 

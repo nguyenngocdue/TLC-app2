@@ -50,7 +50,7 @@ trait TraitChangeDataPivotTable2
                     if(isset($column->href_from_field) && isset($column->route_name)){
                         $newData[$keyColumn] =(object) [
                             'value' =>  is_numeric($lines[$keyColumn]) ? '#'. $lines[$keyColumn] : $lines[$keyColumn],
-                            'cell_href' => route($column->route_name, $lines[$column->href_from_field]),
+                            'cell_href' =>  $column->route_name ||$column->href_from_field ? route($column->route_name, $lines[$column->href_from_field]) : "",
                             'cell_class' => 'text-blue-800',
                         ];
                     }
