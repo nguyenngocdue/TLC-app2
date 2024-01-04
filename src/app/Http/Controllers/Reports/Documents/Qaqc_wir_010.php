@@ -29,18 +29,20 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
     private function generateCurrentAndPreviousDate($month)
     {
         [$y, $m] = explode('-', $month);
-        if ($m === '01') {
+        if ($m === '01' || $m === '1') {
             $y = $y - 1;
-            $m = 12;
+            $m = 13;
         };
         $previousMonth = str_pad($m - 1, '2', '0', STR_PAD_LEFT);
         $previousDate = $y . "-" . $previousMonth . "-25";
-
+        
         $latestDate = $month . '-' . "25";
-        if ($latestDate > date("Y-m-d")) {
-            $latestDate = date("Y-m-d");
-            $previousDate = date("Y-m", strtotime($latestDate . " -1 month")) . "-25";
-        }
+        /// Please check here
+        // if ($latestDate > date("Y-m-d")) {
+            //     $latestDate = date("Y-m-d");
+            //     $previousDate = date("Y-m", strtotime($latestDate . " -1 month")) . "-25";
+            // }
+        // dd($month, $previousDate, $latestDate);
         return [$previousDate, $latestDate];
     }
 
@@ -83,7 +85,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             $strIdsSubProjects = ParameterReport::getStringIds('sub_project_id');
             $valOfParams['sub_project_id'] = $strIdsSubProjects;
         }
-
+        // dd($params);
 
         $sql = " SELECT *
                             ,IF(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),
@@ -329,7 +331,6 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             $params = $this->getDefaultParamsForFilterByMonth();
         } elseif (Report::checkValueOfField($params, 'children_mode')) {
             $params = $this->getParamsFromUserSettings($params, $request);
-            // dd($params);
         }
         // dd($params);
         return $params;
@@ -358,7 +359,6 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             $params['previous_month'] = 'W' . $previousWeek . '-' . substr(date('Y'), -2) . ' (' . $start_date . ')';
             $params['latest_month'] = 'W' . $currentWeek . '-' . substr(date('Y'), -2) . ' (' . $end_date . ')';
         } else {
-
             [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
             $params['previous_month'] = substr($previousDate, 0, 7);
             $params['latest_month'] = substr($latestDate, 0, 7);
@@ -371,7 +371,6 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $settings = CurrentUser::getSettings();
         $indexMode = $params['children_mode'];
         $typeReport = CurrentPathInfo::getTypeReport2($request);
-        
         // get param when user has already submitted
         if (isset($settings[$this->getTable()][$typeReport][$this->mode][$indexMode])) {
             $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
@@ -403,12 +402,11 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     protected function updateParamsForMonths($params)
     {
-        // dd($params);
         $params['month'] = $params['year'] . '-' . str_pad($params['only_month'], 2, '0', STR_PAD_LEFT);
         [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         $params['previous_month'] = substr($previousDate, 0, 7);
         $params['latest_month'] = substr($latestDate, 0, 7);
-
+        
         return $params;
     }
 
