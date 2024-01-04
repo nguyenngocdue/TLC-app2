@@ -57,7 +57,6 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     private function generateStartAndDayOfWeek($params)
     {
-        // dd($params);
         try {
             $year = $params['year'];
             $weeksData = DateReport::getWeeksInYear($year);
@@ -349,11 +348,10 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $params['children_mode'] = 'filter_by_month';
         $params['month'] = date("Y-m");
         $params['only_month'] = (string)intval(date("m"));
-
         if ($params['children_mode'] === 'filter_by_week') {
             $currentWeek = str_pad(date('W'), 2, '0', STR_PAD_LEFT);
             $previousWeek = str_pad(date('W') - 1, 2, '0', STR_PAD_LEFT);
-
+            
             $params['weeks_of_year'] = $currentWeek;
             [$start_date, $end_date] = $this->generateStartAndDayOfWeek($params);
             $params['previous_month'] = 'W' . $previousWeek . '-' . substr(date('Y'), -2) . ' (' . $start_date . ')';
@@ -394,7 +392,11 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $currentWeek = str_pad($params['weeks_of_year'], 2, '0', STR_PAD_LEFT);
         $year = $params['year'];
         [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
-        $params['previous_month'] = 'W' . ($currentWeek - 1) . '/' . $year . '(' . $previousDate . ')';
+
+        $previousM = intval($currentWeek) === 1 ? 12 : $currentWeek - 1; 
+        $year = $previousM === 12 ? $year - 1 : $year;
+        
+        $params['previous_month'] = 'W' . ($previousM) . '/' . $year . '(' . $previousDate . ')';
         $params['latest_month'] = 'W' . $currentWeek . '(' . $latestDate . ')';
 
         return $params;

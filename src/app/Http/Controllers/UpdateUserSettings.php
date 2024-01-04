@@ -260,7 +260,6 @@ class UpdateUserSettings extends Controller
     private function updateParamsReportForFirstSubmit($inputValue, $settings)
     {
         $modeName = $inputValue['mode_option'];
-        // dd($inputValue);
         // Check case: select mode alternatively 
         $index = array_search($modeName, array_values($inputValue));
         if (empty(array_slice($inputValue, $index + 1, count($inputValue) - $index))) return $settings;
@@ -273,6 +272,7 @@ class UpdateUserSettings extends Controller
 
         if (isset($inputValue['children_mode']) && $inputValue['children_mode'] !== 'not_children') {
             $modeSelect = $inputValue['children_mode'];
+            $settings[$entity][$typeReport][$modeName]['children_mode'] = $inputValue['children_mode'];
             $settings[$entity][$typeReport][$modeName][$modeSelect] = $parameter;
         } else {
             $settings[$entity][$typeReport][$modeName] = $parameter;

@@ -128,18 +128,22 @@ class DateReport
     
         $endOfYear = new DateTime();
         $endOfYear->setISODate($year, 53); // Set the date to the last day of the specified year
-        while ($date <= $endOfYear) {
+        while ($date <= $endOfYear  && $date->format('Y') <= $year) {
             $weekNumber = $date->format('W');
             $startOfWeek = clone $date; // Clone the DateTime object to avoid modifying the original object
             $endOfWeek = clone $date->modify('+6 days'); // Modify the cloned object to get the end of the week
             
-            $weeks[(int)$weekNumber] = [
-                'start_date' => $startOfWeek->format('Y-m-d'),
-                'end_date' => $endOfWeek->format('Y-m-d')
-            ];
-            // Move to the next week
-            $date->modify('+1 days');
+            if ($date->format('Y') <= $year){
+                $weeks[(int)$weekNumber] = [
+                    'start_date' => $startOfWeek->format('Y-m-d'),
+                    'end_date' => $endOfWeek->format('Y-m-d')
+                ];            
+                // Move to the next week
+                $date->modify('+1 days');
+                // dd($weeks);
+            }
         }
+        // dd($weeks);
         return $weeks;
     }
 
