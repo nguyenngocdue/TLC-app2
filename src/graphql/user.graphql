@@ -47,7 +47,7 @@ type User {
     updated_at: DateTime
     productionRunLines: [Prod_run_line!]! @belongsToMany
     qaqcInspChecklists: [Qaqc_insp_checklist!]! @hasMany
-    avatar: Attachment @morphOne
+    getAvatar: Attachment @morphOne
 }
 input CreateUserInput {
     email: String! @rules(apply: ["email", "unique:users,email"])
