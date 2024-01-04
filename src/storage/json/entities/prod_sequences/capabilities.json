@@ -54,6 +54,17 @@
         "cancelled": "true",
         "not_applicable": "true"
     },
+    "apartment_owner": {
+        "name": "apartment_owner",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
@@ -67,6 +78,17 @@
     },
     "bd_member": {
         "name": "bd_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "client": {
+        "name": "client",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -256,23 +278,23 @@
         "name": "hse_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
+        "new": "true",
+        "in_progress": "true",
         "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "not_applicable": ""
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
     },
     "hse_member": {
         "name": "hse_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "in_progress": "",
+        "new": "true",
+        "in_progress": "true",
         "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "not_applicable": ""
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
     },
     "it_manager": {
         "name": "it_manager",
@@ -562,6 +584,17 @@
     },
     "qs_member_nz": {
         "name": "qs_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "shipping_agent": {
+        "name": "shipping_agent",
         "name_rendered": "",
         "toggle": "",
         "new": "",
