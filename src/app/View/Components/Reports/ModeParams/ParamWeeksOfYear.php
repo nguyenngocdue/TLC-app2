@@ -12,7 +12,7 @@ class ParamWeeksOfYear extends ParentParamReports
     protected $referData = 'year';
     protected function getDataSource()
     {        
-        $years = [2021,2022,2023];
+        $years = [2021,2022,2023, 2024];
         $weeks = [];
         foreach ($years as $year) {
             $weeksData = DateReport::getWeeksInYear($year);

@@ -13,14 +13,16 @@ class ParamOnlyMonth extends ParentParamReports
         $isNumber = $this->getParams()['showNumber'];
         $showNow = $this->getParams()['showNow'];
         $m = $showNow ? (int)date("m") : 12;
-        $months = range(1, $m);
+        // $months = range(1, $m);
+        $months = range(1, 12);
+        // dd($months);
         $dataSource = array_map(function ($month) use ($isNumber) {
             
             $formattedMonth = $isNumber ? str_pad($month, 2,"0", STR_PAD_LEFT): DateReport::getMonthAbbreviation2((int)$month);
             if($month <= 3){
                 return (object)['id' => $month, 'name' => $formattedMonth, 'quarter_time' => 1];
             }
-            elseif ($month<=6 && $month > 3) {
+            elseif ($month <= 6 && $month > 3) {
                 return (object)['id' => $month, 'name' => $formattedMonth, 'quarter_time' => 2];
             }
             elseif ($month<=9 && $month > 6) {

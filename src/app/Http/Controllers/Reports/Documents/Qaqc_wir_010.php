@@ -55,15 +55,17 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     private function generateStartAndDayOfWeek($params)
     {
+        // dd($params);
         try {
             $year = $params['year'];
             $weeksData = DateReport::getWeeksInYear($year);
-            $indexDates = $weeksData[$params['weeks_of_year']];
+            $indexDates = isset($weeksData[$params['weeks_of_year']]) ? $weeksData[$params['weeks_of_year']]: $weeksData[intval($params['weeks_of_year'])];
             $previousDate = $indexDates['start_date'];
             $latestDate = $indexDates['end_date'];
             return [$previousDate, $latestDate];
         } catch (Exception $e) {
-            dd($e->getMessage(), $params);
+            // dd($e->getMessage(), $params);
+            return;
         }
     }
 
@@ -228,7 +230,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                 'dataIndex' => 'only_month',
                 'showNumber' => true,
                 "firstHidden" => true,
-                "showNow" => true,
+                "showNow" => false,
             ],
             [
                 "title" => "Week",
@@ -312,6 +314,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     public function getBasicInfoData($params)
     {
+        // dd($params);
         $params['month'] = $params['year'] . '-' . str_pad($params['only_month'], 2, '0', STR_PAD_LEFT);
         [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         return [
@@ -326,6 +329,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             $params = $this->getDefaultParamsForFilterByMonth();
         } elseif (Report::checkValueOfField($params, 'children_mode')) {
             $params = $this->getParamsFromUserSettings($params, $request);
+            // dd($params);
         }
         // dd($params);
         return $params;
@@ -341,9 +345,9 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
     {
         $params['sub_project_id'] = $this->subProjectId;
         $params['year'] = date('Y');
-        $params['children_mode'] = 'filter_by_week';
+        $params['children_mode'] = 'filter_by_month';
         $params['month'] = date("Y-m");
-        $params['only_month'] = date("m");
+        $params['only_month'] = (string)intval(date("m"));
 
         if ($params['children_mode'] === 'filter_by_week') {
             $currentWeek = str_pad(date('W'), 2, '0', STR_PAD_LEFT);
@@ -367,7 +371,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $settings = CurrentUser::getSettings();
         $indexMode = $params['children_mode'];
         $typeReport = CurrentPathInfo::getTypeReport2($request);
-
+        
         // get param when user has already submitted
         if (isset($settings[$this->getTable()][$typeReport][$this->mode][$indexMode])) {
             $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
@@ -378,10 +382,11 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         // update prams into user setting
         if ($params['children_mode'] === 'filter_by_week') {
             $params = $this->updateParamsForFilterByWeek($params);
-        } else {
+        }
+        if($params['children_mode'] === 'filter_by_month') {
             $params = $this->updateParamsForMonths($params);
         }
-        // dump($params);
+        // dd($params);
         return $params;
     }
 
@@ -398,6 +403,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     protected function updateParamsForMonths($params)
     {
+        // dd($params);
         $params['month'] = $params['year'] . '-' . str_pad($params['only_month'], 2, '0', STR_PAD_LEFT);
         [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         $params['previous_month'] = substr($previousDate, 0, 7);
