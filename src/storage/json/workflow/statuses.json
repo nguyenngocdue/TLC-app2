@@ -34,6 +34,13 @@
         "color_index": "200",
         "icon": "<i class=\"fa-solid fa-screwdriver-wrench\"><\/i>"
     },
+    "audited": {
+        "name": "audited",
+        "title": "Audited",
+        "color": "green",
+        "color_index": "200",
+        "icon": "<i class=\"fa-duotone fa-check\"><\/i>"
+    },
     "cancelled": {
         "name": "cancelled",
         "title": "Cancelled",
@@ -216,6 +223,13 @@
         "color_index": "200",
         "icon": "<i class=\"fa-duotone fa-signature\"><\/i>"
     },
+    "pending_audit": {
+        "name": "pending_audit",
+        "title": "Pending Audit",
+        "color": "orange",
+        "color_index": "200",
+        "icon": "<i class=\"fa-duotone fa-signature\"><\/i>"
+    },
     "pending_confirmation": {
         "name": "pending_confirmation",
         "title": "Pending Confirmation",
@@ -282,16 +296,16 @@
     "review_rejected": {
         "name": "review_rejected",
         "title": "Review Rejected",
-        "color": "cyan",
+        "color": "red",
         "color_index": "200",
         "icon": null
     },
     "reviewed": {
         "name": "reviewed",
         "title": "Reviewed",
-        "color": "amber",
+        "color": "cyan",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-circle-check\"><\/i>"
     },
     "revised": {
         "name": "revised",

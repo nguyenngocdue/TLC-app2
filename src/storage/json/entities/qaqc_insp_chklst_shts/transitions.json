@@ -4,76 +4,59 @@
         "location": "-30.00 -20.00",
         "in_progress": "",
         "not_applicable": "true",
-        "inspected": "true",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "reviewed": "true",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
     },
     "not_applicable": {
         "name": "not_applicable",
         "location": "0 -100",
         "in_progress": "true",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
+    },
+    "reviewed": {
+        "name": "reviewed",
+        "location": "",
+        "in_progress": "true",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "true",
+        "pending_audit": "",
+        "audited": ""
     },
     "inspected": {
         "name": "inspected",
         "location": "110.00 -20.00",
-        "in_progress": "true",
-        "not_applicable": "",
-        "inspected": "",
-        "passed": "true",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
-    },
-    "passed": {
-        "name": "passed",
-        "location": "270.00 0.00",
         "in_progress": "",
         "not_applicable": "",
-        "inspected": "true",
-        "passed": "",
-        "pending_approval": "true",
-        "rejected": "",
-        "approved": ""
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "true",
+        "audited": ""
     },
-    "pending_approval": {
-        "name": "pending_approval",
-        "location": "450 0",
+    "pending_audit": {
+        "name": "pending_audit",
+        "location": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "true",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "true",
-        "approved": "true"
+        "pending_audit": "",
+        "audited": "true"
     },
-    "rejected": {
-        "name": "rejected",
-        "location": "300 -100",
+    "audited": {
+        "name": "audited",
+        "location": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "true",
-        "rejected": "",
-        "approved": ""
-    },
-    "approved": {
-        "name": "approved",
-        "location": "600 0",
-        "in_progress": "",
-        "not_applicable": "",
-        "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     }
 }

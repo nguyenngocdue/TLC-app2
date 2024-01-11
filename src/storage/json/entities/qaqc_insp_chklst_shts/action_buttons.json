@@ -11,32 +11,26 @@
         "tooltip": "",
         "change_status_multiple": ""
     },
+    "reviewed": {
+        "name": "reviewed",
+        "label": "Request to Review",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
     "inspected": {
         "name": "inspected",
-        "label": "Change to Inspected",
+        "label": "Ready for Third Party Sign-off",
         "tooltip": "",
         "change_status_multiple": ""
     },
-    "passed": {
-        "name": "passed",
-        "label": "Change to Passed",
+    "pending_audit": {
+        "name": "pending_audit",
+        "label": "Request To Sign Off",
         "tooltip": "",
         "change_status_multiple": ""
     },
-    "pending_approval": {
-        "name": "pending_approval",
-        "label": "Ready for Third Party Sign Off",
-        "tooltip": "",
-        "change_status_multiple": ""
-    },
-    "rejected": {
-        "name": "rejected",
-        "label": "Reject Sign Off",
-        "tooltip": "",
-        "change_status_multiple": ""
-    },
-    "approved": {
-        "name": "approved",
+    "audited": {
+        "name": "audited",
         "label": "Approve",
         "tooltip": "",
         "change_status_multiple": ""

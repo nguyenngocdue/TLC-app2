@@ -1,57 +1,47 @@
 {
     "new": {
         "name": "new",
-        "new": "",
         "in_progress": "true",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "read-only": {
         "name": "read-only",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": "true"
+        "pending_audit": "",
+        "audited": ""
     },
     "hide-save-btn": {
         "name": "hide-save-btn",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": "true"
+        "pending_audit": "",
+        "audited": "true"
     },
     "closed": {
         "name": "closed",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "true",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": "true"
+        "pending_audit": "",
+        "audited": "true"
     },
     "post-closed": {
         "name": "post-closed",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     }
 }

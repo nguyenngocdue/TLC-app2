@@ -2,217 +2,211 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_qaqc_insp_tmpl_sht_id": {
         "name": "_qaqc_insp_tmpl_sht_id",
         "column_name": "qaqc_insp_tmpl_sht_id",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_progress": {
         "name": "_progress",
         "column_name": "progress",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "true",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "reviewed",
+        "audited": ""
     },
-    "_getShtSigs": {
-        "name": "_getShtSigs",
-        "column_name": "getShtSigs",
-        "new": "",
+    "_signature_qaqc_chklst_3rd_party": {
+        "name": "_signature_qaqc_chklst_3rd_party",
+        "column_name": "signature_qaqc_chklst_3rd_party",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
-        "new": "",
         "in_progress": "",
         "not_applicable": "",
-        "passed": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     }
 }

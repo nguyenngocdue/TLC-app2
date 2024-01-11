@@ -252,7 +252,7 @@
         "field_id": "12",
         "field_name": "insp_photos",
         "max_file_size": "50",
-        "max_file_count": "10",
+        "max_file_count": "100",
         "allowed_file_types": "all_supported"
     }
 }

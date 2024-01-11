@@ -5,11 +5,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "acct_manager_nz": {
         "name": "acct_manager_nz",
@@ -17,11 +16,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "acct_member": {
         "name": "acct_member",
@@ -29,11 +27,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "acct_member_nz": {
         "name": "acct_member_nz",
@@ -41,11 +38,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "admin": {
         "name": "admin",
@@ -53,11 +49,21 @@
         "toggle": "",
         "in_progress": "true",
         "not_applicable": "true",
+        "reviewed": "true",
         "inspected": "true",
-        "passed": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": "true"
+        "pending_audit": "true",
+        "audited": "true"
+    },
+    "apartment_owner": {
+        "name": "apartment_owner",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
     },
     "bd_manager": {
         "name": "bd_manager",
@@ -65,11 +71,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "bd_member": {
         "name": "bd_member",
@@ -77,11 +82,21 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
+    },
+    "client": {
+        "name": "client",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
     },
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
@@ -89,11 +104,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "cpl_member": {
         "name": "cpl_member",
@@ -101,11 +115,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "dc_ho": {
         "name": "dc_ho",
@@ -113,11 +126,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "dc_manager": {
         "name": "dc_manager",
@@ -125,11 +137,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "dc_ws": {
         "name": "dc_ws",
@@ -137,11 +148,10 @@
         "toggle": "",
         "in_progress": "true",
         "not_applicable": "true",
+        "reviewed": "true",
         "inspected": "true",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "des_manager": {
         "name": "des_manager",
@@ -149,11 +159,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "des_member": {
         "name": "des_member",
@@ -161,11 +170,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "dir": {
         "name": "dir",
@@ -173,11 +181,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "dir_nz": {
         "name": "dir_nz",
@@ -185,11 +192,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "external_inspector": {
         "name": "external_inspector",
@@ -197,11 +203,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "true",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "fac_admin": {
         "name": "fac_admin",
@@ -209,11 +214,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "fin_member_nz": {
         "name": "fin_member_nz",
@@ -221,11 +225,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "guest": {
         "name": "guest",
@@ -233,11 +236,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "hr_manager": {
         "name": "hr_manager",
@@ -245,11 +247,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "hr_member": {
         "name": "hr_member",
@@ -257,11 +258,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "hr_member_nz": {
         "name": "hr_member_nz",
@@ -269,11 +269,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "hse_manager": {
         "name": "hse_manager",
@@ -281,11 +280,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "hse_member": {
         "name": "hse_member",
@@ -293,11 +291,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "it_manager": {
         "name": "it_manager",
@@ -305,11 +302,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "it_member": {
         "name": "it_member",
@@ -317,11 +313,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "mgr_asst_nz": {
         "name": "mgr_asst_nz",
@@ -329,11 +324,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "newcomer": {
         "name": "newcomer",
@@ -341,11 +335,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "pln_admin": {
         "name": "pln_admin",
@@ -353,11 +346,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "ppc_admin": {
         "name": "ppc_admin",
@@ -365,11 +357,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "ppc_manager": {
         "name": "ppc_manager",
@@ -377,11 +368,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "ppc_member": {
         "name": "ppc_member",
@@ -389,11 +379,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "proc_manager": {
         "name": "proc_manager",
@@ -401,11 +390,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "proc_member": {
         "name": "proc_member",
@@ -413,11 +401,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "proc_member_nz": {
         "name": "proc_member_nz",
@@ -425,11 +412,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "prod_manager": {
         "name": "prod_manager",
@@ -437,11 +423,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "prod_manager_nz": {
         "name": "prod_manager_nz",
@@ -449,11 +434,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "prod_member": {
         "name": "prod_member",
@@ -461,11 +445,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
@@ -473,11 +456,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "proj_admin": {
         "name": "proj_admin",
@@ -485,11 +467,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "proj_manager": {
         "name": "proj_manager",
@@ -497,11 +478,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
@@ -509,11 +489,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "proj_member": {
         "name": "proj_member",
@@ -521,11 +500,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
@@ -533,11 +511,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "proj_supervisor_nz": {
         "name": "proj_supervisor_nz",
@@ -545,11 +522,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "qaqc_manager": {
         "name": "qaqc_manager",
@@ -557,23 +533,21 @@
         "toggle": "",
         "in_progress": "true",
         "not_applicable": "true",
+        "reviewed": "true",
         "inspected": "true",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "qaqc_member": {
         "name": "qaqc_member",
         "name_rendered": "",
         "toggle": "",
         "in_progress": "true",
-        "not_applicable": "true",
+        "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "qaqc_member_nz": {
         "name": "qaqc_member_nz",
@@ -581,11 +555,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "qs_manager": {
         "name": "qs_manager",
@@ -593,11 +566,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "qs_member": {
         "name": "qs_member",
@@ -605,11 +577,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "qs_member_nz": {
         "name": "qs_member_nz",
@@ -617,11 +588,21 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
+    },
+    "shipping_agent": {
+        "name": "shipping_agent",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
     },
     "supreme_manage": {
         "name": "supreme_manage",
@@ -629,11 +610,10 @@
         "toggle": "",
         "in_progress": "true",
         "not_applicable": "true",
+        "reviewed": "true",
         "inspected": "true",
-        "passed": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "approved": ""
+        "pending_audit": "true",
+        "audited": "true"
     },
     "whs_manager": {
         "name": "whs_manager",
@@ -641,11 +621,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "whs_member": {
         "name": "whs_member",
@@ -653,11 +632,10 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     },
     "worker": {
         "name": "worker",
@@ -665,10 +643,9 @@
         "toggle": "",
         "in_progress": "",
         "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
+        "pending_audit": "",
+        "audited": ""
     }
 }
