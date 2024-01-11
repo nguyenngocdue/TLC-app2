@@ -78,7 +78,8 @@ class ManageAppsController extends AbstractManageLibController
                 'renderer' => 'dropdown',
                 'editable' => true,
                 "cbbDataSource" => [
-                    'props-renderer',
+                    '',
+                    // 'props-renderer',
                     'checklist-sheet-renderer',
                     'exam-renderer',
                 ],
@@ -88,7 +89,8 @@ class ManageAppsController extends AbstractManageLibController
                 'renderer' => 'dropdown',
                 'editable' => true,
                 "cbbDataSource" => [
-                    'props-renderer',
+                    '',
+                    // 'props-renderer',
                     'project-renderer',
                     'checklist-renderer',
                     'checklist-sheet-renderer',

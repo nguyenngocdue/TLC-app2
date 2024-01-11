@@ -41,7 +41,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
         @method($action === "create" ? 'POST' : 'PUT')
         @switch($app['edit_renderer'])
         
-            @case ('props-renderer')
+            @case ('')
             <div class="px-2 flex justify-center">
                 <div class="fixed left-0">
                     <div class="text-center">

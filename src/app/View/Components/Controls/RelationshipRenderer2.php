@@ -218,6 +218,8 @@ class RelationshipRenderer2 extends Component
                 // case "calendar_grid":
             case "many_lines":
                 return $this->renderManyLines($tableName, $dataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $this->numberOfEmptyLines);
+            case "many_checkpoints":
+                return "CCC";
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }
