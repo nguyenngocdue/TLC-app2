@@ -14,11 +14,11 @@
                 </div>
                     <span class="text-base font-semibold flex justify-center truncate">{{$dataSource['name']}}</span>
             </div>
-            <div class="w-auto flex justify-center mt-6">
+            <div class="w-auto justify-center mt-6">
                 @foreach($props as $key => $value)
                     @switch($value['control'])
                     @case('hyperlink')
-                        <x-print.hyper-link5 label="{{$value['column_name']}}" href="{{$dataSource[$value['column_name']]}}" />
+                        <x-print.hyper-link5 label="{{$value['label']}}" href="{{$dataSource[$value['column_name']]}}" />
                         @break
                     @default
                     @endswitch

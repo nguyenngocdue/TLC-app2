@@ -39,6 +39,9 @@ return new class extends Migration
             $table->float('weight')->nullable();
             $table->unsignedInteger('manufactured_year')->nullable();
 
+            $table->text('insp_chklst_link')->nullable();
+            $table->text('shipping_doc_link')->nullable();
+
             $table->appendCommonFields();
         });
     }
