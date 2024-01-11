@@ -1,9 +1,8 @@
 [
     "in_progress",
     "not_applicable",
+    "reviewed",
     "inspected",
-    "passed",
-    "pending_approval",
-    "rejected",
-    "approved"
+    "pending_audit",
+    "audited"
 ]
