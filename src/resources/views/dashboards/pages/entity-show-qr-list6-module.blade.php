@@ -21,7 +21,7 @@
         {{-- {{$item['name']}}
         {{$item['href']}} --}}
         <div class="flex">
-            <div class="grid grid-cols-12">
+            <div class="grid grid-cols-12 mr-4">
                 <div class="col-span-6 text-right mr-4">CLIENT</div><div class="col-span-6">Client Name Is a very long text</div>
                 <div class="col-span-6 text-right mr-4">PROJECT</div><div class="col-span-6">Project Name</div>
                 <div class="col-span-6 text-right mr-4">MANUFACTURED YEAR</div><div class="col-span-6">2024</div>

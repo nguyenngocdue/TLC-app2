@@ -13,9 +13,7 @@ class Project extends ModelExtended
 
     public static $eloquentParams = [
         "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
-
         "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
-
         "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
     ];
 

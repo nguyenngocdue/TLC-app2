@@ -10,7 +10,7 @@ trait TraitEntityShowQRList6
 {
 	public function showQRList6()
 	{
-		[, $dataSource] = $this->normalizeDataSourceAndColumnsFollowAdvanceFilter();
+		[, $dataSource] = $this->normalizeDataSourceAndColumnsByAdvanceFilter();
 		$plural = Str::plural($this->type);
 		$routeName = "{$plural}.show";
 		$routeExits =  (Route::has($routeName));

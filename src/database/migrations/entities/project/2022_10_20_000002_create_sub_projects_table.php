@@ -26,20 +26,9 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->unsignedBigInteger('project_id')->nullable();
             $table->unsignedBigInteger('lod_id')->nullable();
+            $table->unsignedBigInteger('client_id')->nullable();
             $table->appendCommonFields();
         });
-        // Schema::create('sub_projects', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->text('description')->nullable();
-        //     $table->string('slug')->unique();
-        //     $table->unsignedBigInteger('project_id')->nullable();
-        //     $table->string('status')->nullable();
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**

@@ -43,7 +43,7 @@ class ViewAllInvokerController extends Controller
     }
     public function exportCSV()
     {
-        [$columns, $dataSource] = $this->normalizeDataSourceAndColumnsFollowAdvanceFilter();
+        [$columns, $dataSource] = $this->normalizeDataSourceAndColumnsByAdvanceFilter();
         $rows = [];
         foreach ($dataSource as $no => $dataLine) {
             $rows[] = $this->makeRowData($columns, $dataLine, $no + 1);

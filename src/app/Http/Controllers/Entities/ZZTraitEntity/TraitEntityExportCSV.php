@@ -140,7 +140,7 @@ trait TraitEntityExportCSV
         array_unshift($columns, $columnNo);
         return $columns;
     }
-    private function normalizeDataSourceAndColumnsFollowAdvanceFilter()
+    private function normalizeDataSourceAndColumnsByAdvanceFilter()
     {
         [,, $advanceFilters] = $this->getUserSettingsViewAll();
         $type = Str::plural($this->type);

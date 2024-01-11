@@ -6,12 +6,16 @@ use App\BigThink\ModelExtended;
 
 class Sub_project extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "slug", "status", "project_id", "owner_id", 'lod_id'];
+    protected $fillable = [
+        "id", "name", "description", "slug", "status", "project_id",
+        "owner_id", 'lod_id', "client_id"
+    ];
 
     public static $eloquentParams = [
         "getProject" => ['belongsTo', Project::class, "project_id"],
         "getProdOrders" => ['hasMany', Prod_order::class],
         "getLod" => ['belongsTo', Term::class, "lod_id"],
+        "getClient" => ["belongsTo", User_company::class, "client_id"],
     ];
 
     public static $oracyParams = [
@@ -64,6 +68,12 @@ class Sub_project extends ModelExtended
     }
 
     public function getLod()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getClient()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

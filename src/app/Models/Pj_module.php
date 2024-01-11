@@ -8,7 +8,8 @@ class Pj_module extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "slug", "pj_building_id", "pj_level_id", "pj_module_type_id",
-        "pj_name_id", "pj_character_id", "pj_unit_id", "pj_shipment_id", "owner_id"
+        "pj_name_id", "pj_character_id", "pj_unit_id", "pj_shipment_id", "owner_id",
+        "sub_project_id", "length",  "width", "height", "weight", "manufactured_year",
     ];
 
     public static $statusless = true;
@@ -25,6 +26,7 @@ class Pj_module extends ModelExtended
         'getPjPods' => ['hasMany', Pj_pod::class, 'pj_module_id'],
 
         "getProdOrders" => ['morphMany', Prod_order::class, 'meta', 'meta_type', 'meta_id'],
+        "getSubProject" => ['belongsTo', Sub_project::class, "sub_project_id"],
     ];
 
     public function getPjBuilding()
@@ -34,6 +36,12 @@ class Pj_module extends ModelExtended
     }
 
     public function getPjPods()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getSubProject()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
