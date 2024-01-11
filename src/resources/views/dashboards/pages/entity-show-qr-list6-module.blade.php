@@ -41,30 +41,35 @@
         $weight = $item->weight;
         $manufactured_year = $item->manufactured_year;
     @endphp
-        <div component="card" class="border border-gray-800 rounded-3xl bg-white p-10 m-5 col-span-12 lg:col-span-6">
-            <div class="flex justify-between mb-4">
-                <span class=""><img width="200px" src="{{$com_logo}}" /></span>
-                <span class="text-xl font-bold text-center px-10">{{$com_name}}</span>
-            </div>
-            {{-- {{$item['name']}}
-            {{$item['href']}} --}}
-            <div class="flex">
-                <div class="grid grid-cols-12 mr-4 w-full">
-                    <div class="col-span-6 text-right mr-4">CLIENT</div><div class="col-span-6">{!! $clientName !!}</div>
-                    <div class="col-span-6 text-right mr-4">PROJECT</div><div class="col-span-6">{!! $projectName !!}</div>
-                    <div class="col-span-6 text-right mr-4">MANUFACTURED YEAR</div><div class="col-span-6">{!!$manufactured_year?? $red!!}</div>
-                    <div class="col-span-6 text-right mr-4">SERIAL NUMBER</div><div class="col-span-6">{{$item["name"]}}</div>
-                    <div class="col-span-6 text-right mr-4">SIZE</div><div class="col-span-6">{!! $length ?? $red !!}M x {!!$width?? $red!!}M x {!!$height?? $red!!}M</div>
-                    <div class="col-span-6 text-right mr-4">WEIGTH</div><div class="col-span-6">{!!$weight?? $red!!} TONS</div>
+        <div component="card" class="col-span-12 lg:col-span-6 flex justify-center">
+            <div class=" border border-dotted ">
+                <div class="mt-1 border border-gray-800 rounded-3xl mx-5 text-center" style="width: 600px;">&lt;--- scale to 10 cm ---&gt;</div>
+                <div component="fixedWidth" class="border border-gray-800 rounded-3xl bg-white p-10 mx-5 my-1" style="width: 600px;">
+                    <div class="flex justify-between mb-4">
+                        <span class=""><img width="200px" src="{{$com_logo}}" /></span>
+                        <span class="text-xl font-bold text-center px-10">{{$com_name}}</span>
+                    </div>
+                    {{-- {{$item['name']}}
+                    {{$item['href']}} --}}
+                    <div class="flex">
+                        <div class="grid grid-cols-12 mr-4 w-full">
+                            <div class="col-span-6 text-right mr-4 font-semibold">CLIENT</div><div class="col-span-6">{!! $clientName !!}</div>
+                            <div class="col-span-6 text-right mr-4 font-semibold">PROJECT</div><div class="col-span-6">{!! $projectName !!}</div>
+                            <div class="col-span-6 text-right mr-4 font-semibold">MANUFACTURED YEAR</div><div class="col-span-6">{!!$manufactured_year?? $red!!}</div>
+                            <div class="col-span-6 text-right mr-4 font-semibold">SERIAL NUMBER</div><div class="col-span-6">{{$item["name"]}}</div>
+                            <div class="col-span-6 text-right mr-4 font-semibold">SIZE</div><div class="col-span-6">{!! $length ?? $red !!}M x {!!$width?? $red!!}M x {!!$height?? $red!!}M</div>
+                            <div class="col-span-6 text-right mr-4 font-semibold">WEIGTH</div><div class="col-span-6">{!!$weight?? $red!!} TONS</div>
+                        </div>
+                        <span id="{{$route}}" class=""></span>
+                    </div>
+                    <div class="text-center mt-4">{{$com_website}}</div>
                 </div>
-                <span id="{{$route}}" class=""></span>
+                <script>
+                new QRCode(document.getElementById("{{$route}}"),"{{$route}}",)
+                </script>
             </div>
-            <div class="text-center mt-4">{{$com_website}}</div>
         </div>
-        <script>
-            new QRCode(document.getElementById("{{$route}}"),"{{$route}}",)
-            </script>
-        {{-- {!! (($index + 1) % 4 ===0) ? "<div class='pagebreak'></div>" : "" !!} --}}
+        {!! (($index + 1) % 4 ===0 && $index < sizeof($dataSource)-1 ) ? "<div class='pagebreak col-span-12'>----Please Print in lanscape mode Scale 80% with no margin to have 4 items in a page------</div>" : "" !!}
 @endforeach
 </div>
 
