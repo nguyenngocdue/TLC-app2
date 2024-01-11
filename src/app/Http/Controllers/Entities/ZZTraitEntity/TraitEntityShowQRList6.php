@@ -15,19 +15,20 @@ trait TraitEntityShowQRList6
 		$routeName = "{$plural}.show";
 		$routeExits =  (Route::has($routeName));
 		// dump($dataSource);
-		$dataSource = array_map(function ($item) use ($routeExits, $routeName) {
-			return [
-				'href' => $routeExits ? route($routeName, $item['slug']) : "#",
-				'name' => $item['name'] ?? $item['filename'] ?? '',
-			];
-		}, $dataSource->toArray());
 		if ($this->type == 'pj_module') {
 			return view('dashboards.pages.entity-show-qr-list6-module', [
 				'dataSource' => $dataSource,
 				'type' => $this->type,
 				'topTitle' => CurrentRoute::getTitleOf($this->type),
+				'routeName' => $routeName,
 			]);
 		} else {
+			$dataSource = array_map(function ($item) use ($routeExits, $routeName) {
+				return [
+					'href' => $routeExits ? route($routeName, $item['slug']) : "#",
+					'name' => $item['name'] ?? $item['filename'] ?? '',
+				];
+			}, $dataSource->toArray());
 			$dataSource = array_chunk($dataSource, 6);
 			return view('dashboards.pages.entity-show-qr-list6', [
 				'dataSource' => $dataSource,
