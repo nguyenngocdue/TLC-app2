@@ -42,7 +42,7 @@
         $manufactured_year = $item->manufactured_year;
     @endphp
         <div component="card" class="col-span-12 lg:col-span-6 flex justify-center">
-            <div class=" border border-dotted ">
+            <div class="  mt-10">
                 <div class="mt-1 border border-gray-800 rounded-3xl mx-5 text-center" style="width: 600px;">&lt;--- scale to 10 cm ---&gt;</div>
                 <div component="fixedWidth" class="border border-gray-800 rounded-3xl bg-white p-10 mx-5 my-1" style="width: 600px;">
                     <div class="flex justify-between mb-4">
@@ -52,7 +52,7 @@
                     {{-- {{$item['name']}}
                     {{$item['href']}} --}}
                     <div class="flex">
-                        <div class="grid grid-cols-12 mr-4 w-full">
+                        <div class="grid grid-cols-12 mr-4 w-full text-sm">
                             <div class="col-span-6 text-right mr-4 font-semibold">CLIENT</div><div class="col-span-6">{!! $clientName !!}</div>
                             <div class="col-span-6 text-right mr-4 font-semibold">PROJECT</div><div class="col-span-6">{!! $projectName !!}</div>
                             <div class="col-span-6 text-right mr-4 font-semibold">MANUFACTURED YEAR</div><div class="col-span-6">{!!$manufactured_year?? $red!!}</div>
