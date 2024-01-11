@@ -609,7 +609,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "ghg_metric_type": {
         "name": "ghg_metric_type",
@@ -625,7 +626,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "ghg_metric_type_1": {
         "name": "ghg_metric_type_1",
@@ -641,7 +643,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "ghg_metric_type_2": {
         "name": "ghg_metric_type_2",
@@ -657,7 +660,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "ghg_sheet": {
         "name": "ghg_sheet",
@@ -672,6 +676,7 @@
         "show_renderer": "props-renderer",
         "tutorial_link": null,
         "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>",
+        "do_not_send_notification_mails": "true",
         "disallowed_direct_creation": "true"
     },
     "ghg_sheet_line": {
@@ -703,7 +708,8 @@
         "edit_renderer": "props-renderer",
         "show_renderer": "props-renderer",
         "tutorial_link": null,
-        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>"
+        "icon": "<i class=\"fa-regular fa-earth-asia\"><\/i>",
+        "do_not_send_notification_mails": "true"
     },
     "ghg_tmpl_line": {
         "name": "ghg_tmpl_line",
@@ -719,7 +725,8 @@
         "tutorial_link": null,
         "icon": null,
         "hidden": "true",
-        "hidden_navbar": "true"
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "hr_onboarding": {
         "name": "hr_onboarding",
