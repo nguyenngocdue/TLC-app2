@@ -16,7 +16,7 @@
                         new QRCode(document.getElementById("{{$keyGroup.$keyItem}}"),"{{$item['href']}}",)
                     </script>
                     <span class="text-base font-semibold flex justify-center truncate">{{$item['name']}}</span>
-                    <span class="text-sm font-normal flex justify-center py-2">{{$item['href']}}</span>
+                    <span class="text-sm font-normal flex justify-center px-4 py-2">{{$item['href']}}</span>
                 </div>
                 @endforeach
             </div>

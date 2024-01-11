@@ -1,4 +1,6 @@
 
+<div class="border px-4 py-2">
+
 @foreach($signatures as $index => $user)
 @php
     $as = $user->attached_signature;
@@ -40,7 +42,8 @@
                     />
                 </div>
             @else
-                @if($value =='' && $signatureId)
+            @if($value =='' && $signatureId)
+            
                 <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
                 @else
                     @if($isExternalInspector)
@@ -59,9 +62,12 @@
             @endif
         </div>
         <x-renderer.avatar-user size="xlarge" uid="{{$user->id}}" flipped=1 content=""/>
+        </div>
+        @endforeach
+        <div class="text-right">
+            <x-renderer.button type="secondary" >Send Request to All (to be implemented)</x-renderer.button>
+        </div>
     </div>
-@endforeach
-
 @once
 <script>
 const requestSignOff = (tableName, signableId, category, person2request) => {

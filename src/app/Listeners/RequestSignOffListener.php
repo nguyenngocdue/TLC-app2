@@ -101,5 +101,7 @@ class RequestSignOffListener implements ShouldQueue
             'type' => 'success',
             'message' => "Email to <b>{$receiver->email}</b> sent successfully.",
         ]));
+
+        // return "OK";
     }
 }

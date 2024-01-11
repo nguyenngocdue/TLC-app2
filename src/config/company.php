@@ -13,4 +13,9 @@ return [
         'company_email' => 'info@tlcmodular.com',
         'company_website' => 'https://www.tlcmodular.com',
     ],
+    "qr_code_plate" => [
+        'company_logo' => '/logo/tlc.png',
+        'company_name' => 'TLC MODULAR CONSTRUCTION LIMITED LIABILITY COMPANY',
+        'company_website' => 'https://www.tlcmodular.com',
+    ],
 ];
