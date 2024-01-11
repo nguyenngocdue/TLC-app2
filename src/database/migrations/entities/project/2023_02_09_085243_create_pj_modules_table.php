@@ -33,10 +33,10 @@ return new class extends Migration
             $table->unsignedBigInteger('pj_shipment_id')->nullable();
 
             $table->unsignedBigInteger('sub_project_id')->nullable();
-            $table->unsignedInteger('length')->nullable();
-            $table->unsignedInteger('width')->nullable();
-            $table->unsignedInteger('height')->nullable();
-            $table->unsignedInteger('weight')->nullable();
+            $table->float('length')->nullable();
+            $table->float('width')->nullable();
+            $table->float('height')->nullable();
+            $table->float('weight')->nullable();
             $table->unsignedInteger('manufactured_year')->nullable();
 
             $table->appendCommonFields();

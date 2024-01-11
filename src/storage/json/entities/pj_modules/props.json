@@ -275,11 +275,10 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-  
     "_sub_project_id": {
         "name": "_sub_project_id",
         "column_name": "sub_project_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Sub Project",
         "control": "dropdown",
         "align": "",
@@ -302,7 +301,7 @@
     "_length": {
         "name": "_length",
         "column_name": "length",
-        "column_type": "int",
+        "column_type": "float",
         "label": "Length",
         "control": "number",
         "align": "",
@@ -325,7 +324,7 @@
     "_width": {
         "name": "_width",
         "column_name": "width",
-        "column_type": "int",
+        "column_type": "float",
         "label": "Width",
         "control": "number",
         "align": "",
@@ -348,7 +347,7 @@
     "_height": {
         "name": "_height",
         "column_name": "height",
-        "column_type": "int",
+        "column_type": "float",
         "label": "Height",
         "control": "number",
         "align": "",
@@ -371,7 +370,7 @@
     "_weight": {
         "name": "_weight",
         "column_name": "weight",
-        "column_type": "int",
+        "column_type": "float",
         "label": "Weight",
         "control": "number",
         "align": "",
@@ -394,7 +393,7 @@
     "_manufactured_year": {
         "name": "_manufactured_year",
         "column_name": "manufactured_year",
-        "column_type": "int",
+        "column_type": "int unsigned",
         "label": "Manufactured Year",
         "control": "number",
         "align": "",
