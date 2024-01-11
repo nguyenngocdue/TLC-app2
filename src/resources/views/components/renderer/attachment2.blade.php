@@ -24,46 +24,52 @@
         @if($hasOrphan)
         <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
         @endif
-        <div name='{{$name}}' title="{{$title}}" class="border-{{$border}}-300 relative h-full flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
-            {{-- This is the image --}}
-            @if(in_array($extension,["png","gif","jpg","jpeg","webp"]))
-            <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
-            @elseif(in_array($extension,["csv","pdf","zip"]))
-            <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
-            @elseif(in_array($extension,["mov","mp4","MP4","webm"]))
-            <video class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
-            @elseif($extension === 'svg')
-            <img class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}" />
-            @else
-            @endif
-            {{-- This is to show the toBeDeleted trash icon --}}
-            <span id="trashIcon-{{$attachment['id']}}" class="hidden">
-                <i class="text-7xl text-pink-500 fa-sharp fa-solid fa-circle-xmark cursor-pointer absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
-            </span>
-            {{-- This is to show the thin layer which has the filename and trash button --}}
-            <div class="invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]">
-                @php
-                    $onClick = "openGallery(".$attachment['id'].")";
-                    if(!in_array($extension,\App\Utils\Constant::EXTENSIONS_OF_FILE_GALLERY)) {
-                        $onClick = '';
-                        $url = $path.$attachment['url_media'];
-                        $href = "href='$url'";
-                    };
-                @endphp
-                <a title="{{$attachment['filename']}}" onclick={!!$onClick!!} 
-                {!! $onClick ? "" : $href !!}  
-                target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
-                    <span class="text-sm">{{$attachment['filename']}}</span>
-                </a>
-                @if(!$readOnly)
-                    @if($destroyable && $sameEnv)
-                    <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
-                        <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
-                    </button>
-                    @endif
+        <div class="border-{{$border}}-300 h-full">
+            <div name='{{$name}}' title="{{$title}}" class=" relative  flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
+                {{-- This is the image --}}
+                @if(in_array($extension,["png","gif","jpg","jpeg","webp"]))
+                    <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
+                @elseif(in_array($extension,["csv","pdf","zip"]))
+                    <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
+                @elseif(in_array($extension,["mov","mp4","MP4","webm"]))
+                    <video class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
+                @elseif($extension === 'svg')
+                    <img class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}" />
+                @else
                 @endif
+                {{-- This is to show the toBeDeleted trash icon --}}
+                <span id="trashIcon-{{$attachment['id']}}" class="hidden">
+                    <i class="text-7xl text-pink-500 fa-sharp fa-solid fa-circle-xmark cursor-pointer absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+                </span>
+                {{-- This is to show the thin layer which has the filename and trash button --}}
+                <div class="invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]">
+                    @php
+                        $onClick = "openGallery(".$attachment['id'].")";
+                        if(!in_array($extension,\App\Utils\Constant::EXTENSIONS_OF_FILE_GALLERY)) {
+                            $onClick = '';
+                            $url = $path.$attachment['url_media'];
+                            $href = "href='$url'";
+                        };
+                    @endphp
+                    <a title="{{$attachment['filename']}}" onclick={!!$onClick!!} 
+                    {!! $onClick ? "" : $href !!}  
+                    target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
+                        <span class="text-sm">{{$attachment['filename']}}</span>
+                    </a>
+                    @if(!$readOnly)
+                        @if($destroyable && $sameEnv)
+                        <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
+                            <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
+                        </button>
+                        @endif
+                    @endif
+                </div>
             </div>
-            <span>{{date('d/m/Y',strtotime($attachment['created_at'] ?? ''))}}</span>
+            <span class="flex items-center gap-1 mt-1 justify-center">
+                <img class="w-6 h-6 rounded-full" src="https://minio.tlcmodular.com/tlc-app/avatars/admin%20avatar-150x150.png" />
+                Admin
+            </span>
+            <span class="flex justify-center">{{date('d/m/Y',strtotime($attachment['created_at'] ?? ''))}}</span>
         </div>
         @endforeach
     </div>
