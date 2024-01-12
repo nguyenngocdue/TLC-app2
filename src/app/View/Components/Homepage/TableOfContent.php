@@ -64,7 +64,7 @@ class TableOfContent extends Component
             # code...
         }
         switch ($typeEditRenderer) {
-            case 'props-renderer':
+            case '': //props-renderer
                 return $this->renderTableOfContentProps($results);
                 break;
             case 'checklist-sheet-renderer':

@@ -51,7 +51,7 @@ class Breadcrumb extends Component
     private function getTitleAndIconForPrintButton($show_renderer)
     {
         switch ($show_renderer) {
-            case "props-renderer":
+            case "": //props-renderer
                 $title = 'Print Mode';
                 $icon = "fa-duotone fa-print";
                 break;
