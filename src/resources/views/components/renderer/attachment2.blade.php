@@ -54,20 +54,27 @@
                     <a title="{{$attachment['filename']}}" onclick={!!$onClick!!} 
                     {!! $onClick ? "" : $href !!}  
                     target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
-                        <span class="text-sm">{{$attachment['filename']}}</span>
-                    </a>
-                    @if(!$readOnly)
-                        @if($destroyable && $sameEnv)
-                        <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
-                            <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
-                        </button>
-                        @endif
-                    @endif
-                </div>
+                    <span class="text-sm">{{$attachment['filename']}}</span>
+                </a>
+                @if(!$readOnly)
+                @if($destroyable && $sameEnv)
+                <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
+                    <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
+                </button>
+                @endif
+                @endif
             </div>
-            <span class="flex items-center gap-1 mt-1 justify-center">
-                <img class="w-6 h-6 rounded-full" src="https://minio.tlcmodular.com/tlc-app/avatars/admin%20avatar-150x150.png" />
-                Admin
+        </div>
+                @php
+                    $uid = $attachment['owner_id'];
+                    $user = App\Models\User::findFromCache($uid);
+                    $src = $user->getAvatarThumbnailUrl();
+                    $firstName = $user->first_name;
+                    $displayName = $user->name;
+                @endphp
+            <span class="flex items-center gap-1 mt-1 justify-center" title="{{$displayName}} (#{{$uid}})">
+                <img class="w-6 h-6 rounded-full" src="{{$src}}" />
+                {{$firstName}} 
             </span>
             <span class="flex justify-center">{{date('d/m/Y',strtotime($attachment['created_at'] ?? ''))}}</span>
         </div>
