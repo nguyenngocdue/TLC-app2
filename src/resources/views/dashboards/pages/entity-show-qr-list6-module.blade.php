@@ -34,7 +34,8 @@
             } 
         }
 
-        $route = route($routeName, $item->slug);
+        // $route = route($routeName, $item->slug);
+        $route = "https://app.tlcmodular.com/modular/".$item->slug;
         $length = $item->length;
         $width = $item->width;
         $height = $item->height;
@@ -53,12 +54,12 @@
                     {{$item['href']}} --}}
                     <div class="flex">
                         <div class="grid grid-cols-12 mr-4 w-full text-sm">
-                            <div class="col-span-6 text-right mr-4 font-semibold">CLIENT</div><div class="col-span-6">{!! $clientName !!}</div>
-                            <div class="col-span-6 text-right mr-4 font-semibold">PROJECT</div><div class="col-span-6">{!! $projectName !!}</div>
-                            <div class="col-span-6 text-right mr-4 font-semibold">MANUFACTURED YEAR</div><div class="col-span-6">{!!$manufactured_year?? $red!!}</div>
-                            <div class="col-span-6 text-right mr-4 font-semibold">SERIAL NUMBER</div><div class="col-span-6">{{$item["name"]}}</div>
-                            <div class="col-span-6 text-right mr-4 font-semibold">SIZE</div><div class="col-span-6">{!! $length ?? $red !!}M x {!!$width?? $red!!}M x {!!$height?? $red!!}M</div>
-                            <div class="col-span-6 text-right mr-4 font-semibold">WEIGTH</div><div class="col-span-6">{!!$weight?? $red!!} TONS</div>
+                            <div class="col-span-5 text-right mr-4 font-semibold">CLIENT</div><div class="col-span-7">{!! $clientName !!}</div>
+                            <div class="col-span-5 text-right mr-4 font-semibold">PROJECT</div><div class="col-span-7">{!! $projectName !!}</div>
+                            <div class="col-span-5 text-right mr-4 font-semibold">MFG YEAR</div><div class="col-span-7">{!!$manufactured_year?? $red!!}</div>
+                            <div class="col-span-5 text-right mr-4 font-semibold">SERIAL NUMBER</div><div class="col-span-7">{{$item["name"]}}</div>
+                            <div class="col-span-5 text-right mr-4 font-semibold">SIZE</div><div class="col-span-7">{!! $length ?? $red !!}M x {!!$width?? $red!!}M x {!!$height?? $red!!}M</div>
+                            <div class="col-span-5 text-right mr-4 font-semibold">WEIGTH</div><div class="col-span-7">{!!$weight?? $red!!} TONS</div>
                         </div>
                         <span id="{{$route}}" class=""></span>
                     </div>

@@ -85,7 +85,7 @@ class ItemRenderCheckSheet extends Component
                 'groupColumn' => $groupColumn,
                 'groupNames' => $groupNames,
                 'hasSignatureMulti' => $this->hasSignatureMulti(),
-                'showSignOff' => in_array($status, ['pending_audit', 'audited', 'rejected']),
+                'showSignOff' => in_array($status, ['inspected', 'pending_audit', 'audited', 'rejected']),
                 'isExternalInspector' => CurrentUser::get()->isExternalInspector(),
                 "allowed" => !!$this->allowed,
             ]
