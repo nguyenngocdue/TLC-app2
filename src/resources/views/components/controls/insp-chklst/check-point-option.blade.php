@@ -8,7 +8,7 @@ function initClick(lineId, checkedId){
     }
 }
 
-function registerListen(lineId, id){
+function registerCheckpointListener(lineId, id){
     const reRender = ()=>{
         // console.log("Clicked radio_" + lineId + "_" + id, id)
         $("#divSubOptionNCR_" + lineId).hide()
@@ -61,27 +61,27 @@ function registerListen(lineId, id){
     $cursor = $readOnly ? "cursor-not-allowed" : "cursor-pointer";
 @endphp
 <div class="grid w-full grid-cols-{{$gridCols}} space-x-2 rounded-xl bg-gray-200 p-2">
-    @foreach($options as $id => $option)
+    @foreach($options as $optionId => $option)
         <div>
             <input type="radio" 
                 name="{{$table01Name}}[{{$keyIdModelControlValue}}][{{$rowIndex}}]" 
-                id="radio_{{$line->id}}_{{$id}}" 
+                id="radio_{{$line->id}}_{{$optionId}}" 
                 class="peer hidden" 
-                @checked($line->{$keyIdModelControlValue}==$id)  
+                @checked($line->{$keyIdModelControlValue}==$optionId)  
                 @disabled($readOnly)
-                value="{{$id}}"
+                value="{{$optionId}}"
             />
             @if(in_array($option, ['No','Fail']))
             <input id="radio_{{$line->id}}_hidden" name="{{$table01Name}}[control_fail_current_session_ids][{{$rowIndex}}]" type="hidden">
             @endif
-            <label for="radio_{{$line->id}}_{{$id}}" 
-                class="{{$class[$id] ?? $class[1]}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
-                title="#{{$id}}"
-                onclick="updateIdsOfFail({{$line->id}}, 'radio_{{$line->id}}_hidden',{{$id}},{{$rowIndex}},'{{$type}}')"
+            <label for="radio_{{$line->id}}_{{$optionId}}" 
+                class="{{$class[$optionId] ?? $class[1]}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
+                title="#{{$optionId}}"
+                onclick="updateIdsOfFail({{$line->id}}, 'radio_{{$line->id}}_hidden',{{$optionId}},{{$rowIndex}},'{{$type}}')"
                 >{{$option}}</label>
         </div>
         <script>
-            registerListen({{$line->id}}, {{$id}})
+            registerCheckpointListener({{$line->id}}, {{$optionId}})
         </script>
     @endforeach
 </div>

@@ -1753,7 +1753,7 @@
         "nickname": "icss",
         "doc_id_format_column": null,
         "status": null,
-        "edit_renderer": "checklist-sheet-renderer",
+        "edit_renderer": null,
         "show_renderer": "checklist-sheet-renderer",
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-list-check\"><\/i>",

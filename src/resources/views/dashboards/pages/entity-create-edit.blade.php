@@ -61,6 +61,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
 
             @case ('checklist-sheet-renderer')
             <div class="px-2 flex justify-center">
+                {{-- table of content --}}
                 <div class="fixed left-0">
                     <div class="text-center">
                         <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" data-drawer-body-scrolling="true" data-drawer-backdrop="false">

@@ -42,12 +42,12 @@
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
-        "in_progress": "",
-        "not_applicable": "",
-        "reviewed": "",
-        "inspected": "",
-        "pending_audit": "",
-        "audited": ""
+        "in_progress": "true",
+        "not_applicable": "true",
+        "reviewed": "true",
+        "inspected": "true",
+        "pending_audit": "true",
+        "audited": "true"
     },
     "_qaqc_insp_tmpl_sht_id": {
         "name": "_qaqc_insp_tmpl_sht_id",

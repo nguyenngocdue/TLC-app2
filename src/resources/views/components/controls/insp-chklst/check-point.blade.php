@@ -14,7 +14,7 @@
             @case (4) {{-- 4 => "radio" --}}
             <div class="w-full">
                 <x-controls.insp_chklst.check-point-option readOnly1="{{$readOnly}}" :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" type="{{$type}}" />
-                <x-controls.insp_chklst.check-point-create-ncr-on-hold readOnly="{{$readOnly}}" :sheet="$sheet" :line="$line" :checkPointIds="$checkPointIds" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
+                <x-controls.insp_chklst.check-point-create-ncr-on-hold readOnly="{{$readOnly}}" :line="$line" :checkPointIds="$checkPointIds" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
             </div>
             @break
             @case (7) {{-- 7 => "signature" --}}
@@ -35,7 +35,7 @@
                 readOnly="{{$readOnly}}"
                 />
             <br />
-            <x-controls.comment.comment-group2a :commentIds="$checkPointIds" category="insp_comments" commentableType="{{$type}}_line" commentableId="{{$line->id}}" />
+            <x-controls.comment.comment-group2a :commentIds="$checkPointIds" category="insp_comments" commentableType="{{$type}}" commentableId="{{$line->id}}" />
         </div>
     </div>
 </x-renderer.card>

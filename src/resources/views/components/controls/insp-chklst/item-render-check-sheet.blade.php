@@ -31,7 +31,7 @@
         $groupedLines = $lines->groupBy($groupColumn,true);
         @endphp
         @foreach($groupedLines as $groupId => $lines)
-            @php
+           @php
                 $groupName = $groupNames[$groupId] ?? "Untitled Group";
             @endphp
             <x-renderer.heading level=5 id="{{$groupColumn}}_{{$groupId}}_{{Str::slug($groupName)}}">

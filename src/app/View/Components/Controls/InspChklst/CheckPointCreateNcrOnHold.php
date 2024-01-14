@@ -19,7 +19,6 @@ class CheckPointCreateNcrOnHold extends Component
         private $rowIndex,
         private $debug,
         private $checkPointIds = [],
-        private $sheet = null,
         private $readOnly = false,
     ) {
         //
@@ -62,7 +61,7 @@ class CheckPointCreateNcrOnHold extends Component
             'parent_type' => Str::modelPathFrom($this->line->getTable()),
             'parent_id' => $this->line->id,
             'description' => "During " . $this->line->description . ", ",
-            'prod_discipline_id' => $this->sheet->prod_discipline_id,
+            'prod_discipline_id' => $this->line->prod_discipline_id,
         ];
         if ($this->line->getProject) $params['project_id'] = $this->line->getProject->id;
         if ($this->line->getSubProject) $params['sub_project_id'] = $this->line->getSubProject->id;

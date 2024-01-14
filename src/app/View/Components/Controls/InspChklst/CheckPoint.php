@@ -47,7 +47,6 @@ class CheckPoint extends Component
             'checkPointIds' => $this->checkPointIds,
             'debug' => $this->debug,
             'type' => $this->type,
-            'sheet' => $this->sheet,
             'props' => $props,
             'readOnly' => $this->readOnly,
         ]);

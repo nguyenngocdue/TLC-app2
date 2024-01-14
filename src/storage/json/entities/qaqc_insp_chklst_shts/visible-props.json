@@ -142,12 +142,12 @@
     "_signature_qaqc_chklst_3rd_party": {
         "name": "_signature_qaqc_chklst_3rd_party",
         "column_name": "signature_qaqc_chklst_3rd_party",
-        "in_progress": "",
-        "not_applicable": "",
-        "reviewed": "",
-        "inspected": "",
-        "pending_audit": "",
-        "audited": ""
+        "in_progress": "true",
+        "not_applicable": "true",
+        "reviewed": "true",
+        "inspected": "true",
+        "pending_audit": "true",
+        "audited": "true"
     },
     "_status": {
         "name": "_status",

@@ -64,6 +64,7 @@
         "status",
         "text",
         "textarea",
+        "title",
         "thumbnail",
         "lock_version"
     ],
@@ -92,6 +93,7 @@
         "",
         "many_icons",
         "many_lines",
+        "many_checkpoints",
         "calendar_grid",
         "same_as_view_all"
     ],
