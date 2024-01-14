@@ -123,6 +123,11 @@
     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
     @break
 
+    @case('signature_group2b')
+    <x-controls.signature.signature-group2b :item="$item" signableId={{$id}} type="{{$type}}" category="{{$columnName}}" readOnly={{$readOnly}} />
+    <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+    @break
+
     @case('relationship_renderer')
         @if($action === "create")
             <div title="[{{$prop['label']}}] table will appear after this document is created">
@@ -143,7 +148,7 @@
     @break
 
     @default
-    <x-feedback.alert type="warning" title="Control" message="Unknown how to render [{{$control}}/{{$columnName}}]" />
+    <x-feedback.alert type="warning" title="Control" message="Unknown how to render control [{{$control}}/{{$columnName}}]" />
     @break
 
 @endswitch

@@ -5,7 +5,7 @@ namespace App\View\Components\Controls\Signature;
 use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
-class SignatureGroup2a extends Component
+class SignatureGroup2b extends Component
 {
     /**
      * Create a new component instance.
@@ -15,20 +15,20 @@ class SignatureGroup2a extends Component
     public function __construct(
         private $category,
         private $signableId,
-        private $item,
         private $type,
+        private $item,
         private $readOnly = false,
         private $debug = !true,
         private $title = "Sign Off",
-        private $signOffOracy = "getMonitors1",
+        // private $signOffOracy = "getMonitors1",
 
     ) {
-        dump($item);
+        // dump($item);
         // dump($category);
-        // dump($signableType, $signableId);
+        // dump($signableId, $type);
     }
 
-    private function mergeUserAndSignature($nominatedformaList, $signatureList)
+    private function mergeUserAndSignature($nominatedList, $signatureList)
     {
         // dump($nominatedList);
         // dump($signatureList);
@@ -46,9 +46,12 @@ class SignatureGroup2a extends Component
     {
         if (!isset($this->item->{$this->category})) return "<i class='text-xs font-light' title='Category: $this->category'>Please create this document before signing off.</i>";
         $signatureList = $this->item->{$this->category};
-        $nominatedList = $this->item->{$this->signOffOracy}();
+        // $nominatedList = $this->item->{$this->signOffOracy}();
+        $nominatedList = [];
         $cuid = CurrentUser::id();
         $isExternalInspector = CurrentUser::get()->isExternalInspector();
+
+        echo "Signature group 2 b";
 
         $signatures = $this->mergeUserAndSignature($nominatedList, $signatureList);
         $params = [
@@ -65,6 +68,6 @@ class SignatureGroup2a extends Component
             'signableId' => $this->signableId,
             'readOnly' => $this->readOnly,
         ];
-        return view('components.controls.signature.signature-group2a', $params);
+        return view('components.controls.signature.signature-group2b', $params);
     }
 }

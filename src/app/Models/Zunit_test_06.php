@@ -19,6 +19,9 @@ class Zunit_test_06 extends ModelExtended
 
         "signature_eco_peers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
         "signature_eco_managers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
+
+        "signature_1" => ['morphMany', Signature2b_group::class, 'signable', 'signable_type', 'signable_id'],
+        "signature_2" => ['morphMany', Signature2b_group::class, 'signable', 'signable_type', 'signable_id'],
     ];
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
@@ -39,6 +42,20 @@ class Zunit_test_06 extends ModelExtended
     }
 
     public function signature_eco_managers()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function signature_1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function signature_2()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
