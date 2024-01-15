@@ -71,7 +71,7 @@ class Prod_sequence_dataSource extends Controller
                     pru.production_output AS production_output,
                     pru.remark AS remark,
                     us.full_name AS prod_run_owner_name,
-                    REPLACE(GROUP_CONCAT(cm.content, '<br/>'), ',', '') AS content_comment,
+                    GROUP_CONCAT(cm.content) AS content_comment,
                     cm.owner_id AS comment_owner_id
                     FROM 
                         sub_projects sp

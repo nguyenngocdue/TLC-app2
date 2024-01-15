@@ -31,6 +31,14 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
         return collect($primaryData);
     }
 
+    public function changeDataSource($dataSource, $params)
+    {
+        foreach ($dataSource as &$values) {
+            $values->content_comment = str_replace(",", "<br/>", $values->content_comment);
+        }
+        return $dataSource;
+    }
+
     protected function getDefaultValueParams($params, $request)
     {
         $params['picker_date'] =DateReport::defaultPickerDate('-2 months');
