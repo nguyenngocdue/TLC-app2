@@ -129,6 +129,36 @@
         "pending_audit": "true",
         "audited": "true"
     },
+    "_divider1": {
+        "name": "_divider1",
+        "column_name": "divider1",
+        "in_progress": "true",
+        "not_applicable": "true",
+        "reviewed": "true",
+        "inspected": "true",
+        "pending_audit": "true",
+        "audited": "true"
+    },
+    "_h1a": {
+        "name": "_h1a",
+        "column_name": "h1a",
+        "in_progress": "true",
+        "not_applicable": "true",
+        "reviewed": "true",
+        "inspected": "true",
+        "pending_audit": "true",
+        "audited": "true"
+    },
+    "_signature_qaqc_chklst_3rd_party_list()": {
+        "name": "_signature_qaqc_chklst_3rd_party_list()",
+        "column_name": "signature_qaqc_chklst_3rd_party_list()",
+        "in_progress": "true",
+        "not_applicable": "true",
+        "reviewed": "true",
+        "inspected": "true",
+        "pending_audit": "true",
+        "audited": "true"
+    },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",

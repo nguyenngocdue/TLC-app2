@@ -47,16 +47,32 @@ class SignatureGroup2a extends Component
     public function render()
     {
         if (!isset($this->item->{$this->category})) return "<i class='text-xs font-light' title='Category: $this->category'>Please create this document before signing off.</i>";
-        $signatureList = $this->item->{$this->category};
         $nominatedList = $this->item->{$this->signOffOracy}();
+        // dump($nominatedList);
+        $signatureList = $this->item->{$this->category}()->with('getUser')->get();
+        // dump($signatureList);
         $cuid = CurrentUser::id();
         $isExternalInspector = CurrentUser::get()->isExternalInspector();
 
         $signatures = $this->mergeUserAndSignature($nominatedList, $signatureList);
-        // return "SKIPPED";
+        $all = ($nominatedList->pluck('email', 'id'));
+        // dump($all);
+        $signed = ($signatureList->pluck('getUser.email', 'user_id'));
+        // dump($signed);
+        $needToRequest = $all->filter(fn ($email) => !$signed->contains($email));
+        // dump($needToRequest);
+        $alreadySigned = $all->filter(fn ($email) => $signed->contains($email));
+        // dump($alreadySigned);
+        $needToRecall = $signed->filter(fn ($email) => !$all->contains($email));
+        // dump($needToRecall);
+
         $params = [
             'category' => $this->category,
             'signatures' => $signatures,
+            'nominatedList' => $nominatedList,
+            'needToRequest' => $needToRequest,
+            'alreadySigned' => $alreadySigned,
+            'needToRecall' => $needToRecall,
 
             'debug' => $this->debug,
             'input_or_hidden' => $this->debug ? "text" : "hidden",

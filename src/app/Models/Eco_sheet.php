@@ -38,6 +38,9 @@ class Eco_sheet extends ModelExtended
         "getMonitors3()" => ["getCheckedByField", User::class],
         "getSubProjectsOfEco()" => ["getCheckedByField", Sub_project::class],
         "getTypesOfChangeOfEco()" => ["getCheckedByField", Term::class],
+
+        "signature_eco_peers_list()" => ["getCheckedByField", Term::class],
+        "signature_eco_managers_list()" => ["getCheckedByField", Term::class],
     ];
     public function signature_eco_peers()
     {
@@ -131,6 +134,16 @@ class Eco_sheet extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
     public function getMonitors3()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function signature_eco_peers_list()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function signature_eco_managers_list()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

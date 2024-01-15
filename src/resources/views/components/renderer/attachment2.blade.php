@@ -66,11 +66,11 @@
             </div>
         </div>
                 @php
-                    $uid = $attachment['owner_id'];
+                    $uid = $attachment['owner_id'] ?? 1;
                     $user = App\Models\User::findFromCache($uid);
                     $src = $user->getAvatarThumbnailUrl();
                     $firstName = $user->first_name;
-                    $displayName = $user->name;
+                    $displayName = $user->name ;
                 @endphp
             <span class="flex items-center gap-1 mt-1 justify-center" title="{{$displayName}} (#{{$uid}})">
                 <img class="w-6 h-6 rounded-full" src="{{$src}}" />

@@ -18,6 +18,7 @@ class Signature extends ModelExtended
     public static $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],
         "signable" => ['morphTo', Comment::class, 'commentable_type', 'commentable_id'],
+        "getUser" => ["belongsTo", User::class, "user_id"],
     ];
 
     public function getCategory()
@@ -30,5 +31,10 @@ class Signature extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
+    }
+    public function getUser()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }
