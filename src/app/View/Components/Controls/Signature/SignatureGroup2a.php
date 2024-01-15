@@ -20,15 +20,17 @@ class SignatureGroup2a extends Component
         private $readOnly = false,
         private $debug = !true,
         private $title = "Sign Off",
-        private $signOffOracy = "getMonitors1",
+        private $signOffOracy = null,
 
     ) {
-        dump($item);
+        if (is_null($signOffOracy)) $this->signOffOracy = $category . "_list";
+        // dump($this->signOffOracy);
         // dump($category);
+        // dump($item);
         // dump($signableType, $signableId);
     }
 
-    private function mergeUserAndSignature($nominatedformaList, $signatureList)
+    private function mergeUserAndSignature($nominatedList, $signatureList)
     {
         // dump($nominatedList);
         // dump($signatureList);
@@ -51,6 +53,7 @@ class SignatureGroup2a extends Component
         $isExternalInspector = CurrentUser::get()->isExternalInspector();
 
         $signatures = $this->mergeUserAndSignature($nominatedList, $signatureList);
+        // return "SKIPPED";
         $params = [
             'category' => $this->category,
             'signatures' => $signatures,
