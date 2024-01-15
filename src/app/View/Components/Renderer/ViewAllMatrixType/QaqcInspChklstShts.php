@@ -80,7 +80,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             ->getSheets()
             ->orderBy('order_no')
             ->get();
-        // dump($data[0]);
+        // dump($data[0]);      
         foreach ($data as $line) {
             $result[] = [
                 'dataIndex' => $line->id,
@@ -90,8 +90,6 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 'width' => 40,
                 'prod_discipline_id' => $line->prod_discipline_id,
                 'default_monitors' => ($line->getMonitors1())->pluck('name'),
-                // "colspan" => 1 + sizeof($extraColumns),
-
             ];
         }
         // usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
@@ -134,6 +132,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         return [
             ['dataIndex' => 'compliance_name', /* 'width' => 300, /*'fixed' => 'left',*/],
             ['dataIndex' => 'progress', "title" => 'Progress (%)', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/],
+            ['dataIndex' => 'print', "title" => 'Print', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/],
         ];
     }
 
@@ -142,12 +141,14 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
         $compliance_name = $y->getProdOrder->compliance_name ?: "";
+        $print_link = route("qaqc_insp_chklsts.show", $y->id);
         $result = [
             'compliance_name' => (object)[
                 'value' => $compliance_name,
                 'cell_class' => 'whitespace-nowrap'
             ],
             'progress' => $y->progress ?: 0,
+            'print' => "<a href='$print_link'><i class='fa-duotone fa-print text-blue-600'/></a>",
         ];
 
         return $result;
