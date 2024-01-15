@@ -10,7 +10,6 @@
         "col_span": "6",
         "width": "170",
         "hidden_edit": "true",
-        "hidden_filter": "true",
         "hidden_template_print": "true",
         "frozen_right": "true"
     },
@@ -25,9 +24,9 @@
         "col_span": "6",
         "width": "170",
         "hidden_edit": "true",
-        "hidden_filter": "true",
         "hidden_template_print": "true",
         "hidden_view_all": "true",
+        "hidden_filter": "true",
         "hidden_print": "true",
         "frozen_left": "true"
     },
@@ -42,9 +41,9 @@
         "col_span": "6",
         "width": "100",
         "hidden_edit": "true",
-        "hidden_filter": "true",
         "hidden_template_print": "true",
         "hidden_view_all": "true",
+        "hidden_filter": "true",
         "hidden_print": "true",
         "frozen_left": "true"
     },
@@ -73,9 +72,9 @@
         "col_span": "12",
         "width": "20",
         "hidden_edit": "true",
-        "hidden_filter": "true",
         "hidden_template_print": "true",
         "hidden_view_all": "true",
+        "hidden_filter": "true",
         "hidden_print": "true"
     },
     "_status": {
@@ -103,10 +102,10 @@
         "col_span": "6",
         "width": "170",
         "hidden_edit": "true",
-        "hidden_filter": "true",
         "hidden_template_print": "true",
         "frozen_right": "true",
         "hidden_view_all": "true",
+        "hidden_filter": "true",
         "hidden_print": "true"
     }
 }

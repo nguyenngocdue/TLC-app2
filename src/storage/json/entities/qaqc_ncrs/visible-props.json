@@ -38,6 +38,19 @@
         "inspection_rejected": "true",
         "closed": "true"
     },
+    "_h1a": {
+        "name": "_h1a",
+        "column_name": "h1a",
+        "new": "true",
+        "pending_review": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",
@@ -207,6 +220,19 @@
         "inspection_rejected": "true",
         "closed": "true"
     },
+    "_h2a": {
+        "name": "_h2a",
+        "column_name": "h2a",
+        "new": "true",
+        "pending_review": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
     "_inter_subcon_id": {
         "name": "_inter_subcon_id",
         "column_name": "inter_subcon_id",
@@ -301,6 +327,19 @@
     "_defect_report_type": {
         "name": "_defect_report_type",
         "column_name": "defect_report_type",
+        "new": "true",
+        "pending_review": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_h3a": {
+        "name": "_h3a",
+        "column_name": "h3a",
         "new": "true",
         "pending_review": "true",
         "assigned": "true",
@@ -431,6 +470,19 @@
     "_assignee_2": {
         "name": "_assignee_2",
         "column_name": "assignee_2",
+        "new": "true",
+        "pending_review": "true",
+        "assigned": "true",
+        "assign_rejected": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_h4a": {
+        "name": "_h4a",
+        "column_name": "h4a",
         "new": "true",
         "pending_review": "true",
         "assigned": "true",
