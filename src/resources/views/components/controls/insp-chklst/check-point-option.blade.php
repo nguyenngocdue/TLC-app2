@@ -45,15 +45,11 @@ function registerCheckpointListener(lineId, id){
         }
         document.getElementById(name).value = objIds[name]
     }
-    // function showOrHiddenGroupAttachmentAndComment(valueId,rowIndex,type){
-    //     if(type !== 'hse_insp_chklst') return;
-    //     if([2,6].includes(valueId)){
-    //         $(`#group_attachment_comment_${rowIndex}`).hide();
-    //     }else{
-    //         $(`#group_attachment_comment_${rowIndex}`).show();
-    //     }
-
-    // }
+    const updateInspectorId = (id) => {
+        // console.log(id, name ,valueId,rowIndex,type)
+        const inspector_id = "radio_inspector_id_" + id
+        document.getElementById(inspector_id).value = {{$cuid}}
+    }
 </script>
 @endonce
 @php
@@ -77,11 +73,18 @@ function registerCheckpointListener(lineId, id){
             <label for="radio_{{$line->id}}_{{$optionId}}" 
                 class="{{$class[$optionId] ?? $class[1]}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
                 title="#{{$optionId}}"
-                onclick="updateIdsOfFail({{$line->id}}, 'radio_{{$line->id}}_hidden',{{$optionId}},{{$rowIndex}},'{{$type}}')"
+                onclick="
+                updateIdsOfFail({{$line->id}}, 'radio_{{$line->id}}_hidden',{{$optionId}},{{$rowIndex}},'{{$type}}'); 
+                updateInspectorId({{$line->id}});
+                "
                 >{{$option}}</label>
         </div>
         <script>
             registerCheckpointListener({{$line->id}}, {{$optionId}})
         </script>
     @endforeach
+    <input type="hidden" 
+        name="{{$table01Name}}[inspector_id][{{$rowIndex}}]"
+        id="radio_inspector_id_{{$line->id}}"
+        value="{{$line->inspector_id}}"/>
 </div>

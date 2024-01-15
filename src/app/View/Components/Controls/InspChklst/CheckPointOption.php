@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Controls\InspChklst;
 
-use App\Models\Qaqc_insp_control_value;
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class CheckPointOption extends Component
@@ -72,6 +72,7 @@ class CheckPointOption extends Component
                 'keyIdModelControlValue' => $keyIdModelControlValue ?? '',
                 'type' => $this->type,
                 'readOnly' => $this->readOnly,
+                'cuid' => CurrentUser::id(),
             ]
         );
     }

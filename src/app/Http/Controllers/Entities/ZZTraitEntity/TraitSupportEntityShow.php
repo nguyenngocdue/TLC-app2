@@ -124,20 +124,22 @@ trait TraitSupportEntityShow
                     default:
                         break;
                 }
-                $str .= '<td class="border" style="width:50px">' . $valueRender . '</td>';
+                $str .= '<td class="border text-center" style="width:30px">' . $valueRender . '</td>';
             } else {
-                $str .=  '<td class="border" style="width:50px">' . $circleIcon . $value . '</td>';
+                $str .=  '<td class="border text-center" style="width:30px">' . $circleIcon . $value . '</td>';
             }
         };
         $runUpdated = $this->createStrHtmlDateTime($item);
-        // $runDesc =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . $item->description . ":" . "</td>" : "";
-        // $lineId =  env('APP_ENV')  === 'local' ? '<td class="border" style="width:10px">' . 'line_id:' .  $item->id . '</td>' : "";
-        $longStr = /*$runDesc . $lineId .*/  $str . $runUpdated;
+        $longStr =  $str . $runUpdated;
         return $longStr;
     }
     private function createStrHtmlDateTime($item)
     {
-        $runUpdated = '<td class="border pl-2" style="width:50px" >' . DateTimeConcern::convertForLoading('picker_datetime', $item->updated_at) . "</td>";
+        $user = User::find($item->inspector_id);
+        $name = $user ? $user->name : "";
+        $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
+        $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
+        $runUpdated = '<td class="border pl-2" style="width:80px;" ><span class="flex gap-1">' . $avatarStr . ' ' . $name . " " . DateTimeConcern::convertForLoading('picker_date', substr($item->updated_at, 0, 10)) . "</span></td>";
         return $runUpdated;
     }
     private function createStrHtmlAttachment($item)
