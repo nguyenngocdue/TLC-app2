@@ -56,51 +56,54 @@ class RequestSignOffListener implements ShouldQueue
     private function getUsers($data)
     {
         $requester = User::find($data['requesterId']);
-        $receiver = User::find($data['uids'][0]);
+        $receivers = array_map(fn ($uid) => User::find($uid), $data['uids']);
         $category_id = FieldSeeder::getIdFromFieldName($data['category']);
-        return [$requester, $receiver, $category_id];
+        return [$requester, $receivers, $category_id];
     }
 
     public function handle(RequestSignOffEvent $event)
     {
         $data = $event->data;
         $signableId = $data['signableId'];
-        [$requester, $receiver, $category_id] = $this->getUsers($data);
+        [$requester, $receivers, $category_id] = $this->getUsers($data);
 
-        try {
-            $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
-            $params += $this->getMeta($data);
-            $mail = new MailRequestSignOff($params);
-            $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
-            $mail->subject($subject);
-            Mail::to($receiver->email)
-                ->cc($requester->email)
-                ->bcc(env('MAIL_ARCHIVE_BCC'))
-                ->send($mail);
-        } catch (\Exception $e) {
-            $msg = "Mail to <b>{$receiver->email}</b> failed.<br/>";
-            $msg .= $e->getMessage();
-            $msg .= $e->getFile() . " (Line: " . $e->getLine() . ")";
+        foreach ($receivers as $receiver) {
+            // Log::info($receiver);
+            try {
+                $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
+                $params += $this->getMeta($data);
+                $mail = new MailRequestSignOff($params);
+                $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
+                $mail->subject($subject);
+                Mail::to($receiver->email)
+                    ->cc($requester->email)
+                    ->bcc(env('MAIL_ARCHIVE_BCC'))
+                    ->send($mail);
+            } catch (\Exception $e) {
+                $msg = "Mail to <b>{$receiver->email}</b> failed.<br/>";
+                $msg .= $e->getMessage();
+                $msg .= $e->getFile() . " (Line: " . $e->getLine() . ")";
+                broadcast(new WssToastrMessageChannel([
+                    'wsClientId' => $data['wsClientId'],
+                    'type' => 'error',
+                    'message' => $msg,
+                ]));
+                return $msg;
+            }
+
+            Signature::create([
+                'user_id' => $receiver->id,
+                'owner_id' => $requester->id,
+                'signable_type' => Str::modelPathFrom($data['tableName']),
+                'signable_id' => $data['signableId'],
+                'category' => $category_id,
+            ]);
             broadcast(new WssToastrMessageChannel([
                 'wsClientId' => $data['wsClientId'],
-                'type' => 'error',
-                'message' => $msg,
+                'type' => 'success',
+                'message' => "Email to <b>{$receiver->email}</b> sent successfully.",
             ]));
-            return $msg;
         }
-
-        Signature::create([
-            'user_id' => $receiver->id,
-            'owner_id' => $requester->id,
-            'signable_type' => Str::modelPathFrom($data['tableName']),
-            'signable_id' => $data['signableId'],
-            'category' => $category_id,
-        ]);
-        broadcast(new WssToastrMessageChannel([
-            'wsClientId' => $data['wsClientId'],
-            'type' => 'success',
-            'message' => "Email to <b>{$receiver->email}</b> sent successfully.",
-        ]));
 
         // return "OK";
     }

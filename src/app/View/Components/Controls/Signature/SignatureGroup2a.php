@@ -63,7 +63,7 @@ class SignatureGroup2a extends Component
         // dump($needToRequest);
         $alreadySigned = $all->filter(fn ($email) => $signed->contains($email));
         // dump($alreadySigned);
-        $needToRecall = $signed->filter(fn ($email) => !$all->contains($email));
+        $needToRecall = $signed->filter(fn ($email) => (!$all->contains($email)) && $email);
         // dump($needToRecall);
 
         $params = [
