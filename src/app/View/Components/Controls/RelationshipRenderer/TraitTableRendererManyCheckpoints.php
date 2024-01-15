@@ -25,6 +25,8 @@ trait TraitTableRendererManyCheckpoints
             'groupedCheckpoints' => $result,
             'lineType' => $tableName,
             'checkPointIds' => $checkPointIds,
+            'table01Name' => $this->table01Name,
+            'readOnly' => $this->readOnly,
         ]);
     }
 }
