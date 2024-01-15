@@ -8,8 +8,8 @@
 <input type="hidden" name="tableNames[{{$table01Name}}]" value="{{$lineType}}"/>
 @foreach($groupedCheckpoints as $groupId => $group)
     <br/>
-    <x-renderer.divider />
-    <x-renderer.heading level=5 title="#{{$groupId}}">{{strtoupper($group['name'])}}</x-renderer.heading>
+    <x-renderer.divider title="#{{$groupId}}" content="{{$group['name']}}"/>
+    {{-- <x-renderer.heading level=5 title="#{{$groupId}}">{{($group['name'])}}</x-renderer.heading> --}}
     @php
         $checkpoints = $group['items'];
         // dump($checkpoints);
@@ -28,3 +28,4 @@
     </div>
 @endforeach
 
+<x-renderer.image-gallery-check-sheet :checkPointIds="$checkPointIds" :dataSource="$oriCheckPoints"/>

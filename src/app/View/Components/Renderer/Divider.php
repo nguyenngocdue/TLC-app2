@@ -13,8 +13,9 @@ class Divider extends Component
      */
     public function __construct(
         // private $x = '16px'
-    )
-    {
+        private $title = null,
+        private $content = null,
+    ) {
     }
 
     /**
@@ -24,11 +25,11 @@ class Divider extends Component
      */
     public function render()
     {
-        return function (array $data,) {
-            return "<div class='no-print w-full h-6 bg-gray-100 relative'>
-                        <div class=' w-full h-full top-0 absolute bg-gray-100 dark:bg-gray-700 translate-x-[-16px] '></div>
-                        <div class=' w-full h-full top-0 absolute bg-gray-100 dark:bg-gray-700 translate-x-[16px] '></div>
-                    </div>";
-        };
+        return "<div class='bg-gray-100 -mx-4 pt-6 pb-2 text-lg font-medium' style='width:105%;' title='{$this->title}'>{$this->content}</div>";
+        // return "<div class='no-print w-full h-6 bg-gray-100 relative'>
+        //     <div class=' w-full h-full top-0 absolute bg-gray-100 dark:bg-gray-700 translate-x-[-16px] '></div>
+        //     HELLO
+        //     <div class=' w-full h-full top-0 absolute bg-gray-100 dark:bg-gray-700 translate-x-[16px] '></div>
+        // </div>";
     }
 }

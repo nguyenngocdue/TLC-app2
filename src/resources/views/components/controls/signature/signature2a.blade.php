@@ -68,7 +68,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
 <script>
 const registerSignature = (id, name, count, readOnly, svgContent) => {
     const canvasId = "canvas_"+id
-    console.log(name, id, canvasId)
+    // console.log(name, id, canvasId)
     const signaturePad = new SignaturePad(getEById(canvasId)[0])
     if(svgContent){
         var svgDataUrl = 'data:image/svg+xml;base64,' + btoa(svgContent);

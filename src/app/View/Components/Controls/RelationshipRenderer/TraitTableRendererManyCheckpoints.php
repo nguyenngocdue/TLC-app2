@@ -27,6 +27,7 @@ trait TraitTableRendererManyCheckpoints
             'checkPointIds' => $checkPointIds,
             'table01Name' => $this->table01Name,
             'readOnly' => $this->readOnly,
+            'oriCheckPoints' => $dataSource,
         ]);
     }
 }

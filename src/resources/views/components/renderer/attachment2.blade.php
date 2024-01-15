@@ -53,7 +53,7 @@
                     @endphp
                     <a title="{{$attachment['filename']}}" onclick={!!$onClick!!} 
                     {!! $onClick ? "" : $href !!}  
-                    target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
+                    target='_blank' class="cursor-pointer hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
                     <span class="text-sm">{{$attachment['filename']}}</span>
                 </a>
                 @if(!$readOnly)
