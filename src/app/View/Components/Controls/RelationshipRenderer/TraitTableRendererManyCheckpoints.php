@@ -28,6 +28,8 @@ trait TraitTableRendererManyCheckpoints
             'table01Name' => $this->table01Name,
             'readOnly' => $this->readOnly,
             'oriCheckPoints' => $dataSource,
+            'type' => $this->type,
+            'item' => $this->item,
         ]);
     }
 }

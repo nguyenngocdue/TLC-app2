@@ -34,6 +34,27 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
     <x-renderer.test-status-and-accessible :item="$item" type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :dryRunToken="$dryRunToken" :statuses="$statuses" />
     <x-controls.status-visibility-checker :propsOfMainPage="$propsOfMainPage" :allProps="$allProps" />
     <x-elapse />
+
+    @if($type === 'qaqc_insp_chklst_shts')  
+    <div class="flex justify-center "> 
+        <div class="md:w-3/4 xl:w-3/4"> 
+            <x-renderer.heading level="4" xalign="center" title="#{{$item->id}}">
+                {{strtoupper( $item->name)}}
+            </x-renderer.heading>
+        
+            <div class="flex justify-between border bg-white rounded p-5">
+                <div class="grid grid-cols-12">
+                    <div class="col-span-4">Project:</div><div class="col-span-8"> {{$item->getChklst->getSubProject->name}}</div>
+                    <div class="col-span-4">Module:</div><div class="col-span-8"> {{$item->getChklst->getProdOrder->production_name}}</div>
+                </div>
+                <div class="mx-4">
+                    <img class="w-40" src="{{asset('logo/tlc.png')}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+    
     <form class="w-full mb-8 mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
@@ -43,6 +64,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
         
             @case ('')
             <div class="px-2 flex justify-center">
+                {{-- Table of content --}}
                 <div class="fixed left-0">
                     <div class="text-center">
                         <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" data-drawer-body-scrolling="true" data-drawer-backdrop="false">

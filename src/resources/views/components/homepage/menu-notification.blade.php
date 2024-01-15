@@ -21,7 +21,7 @@
                 var unreadNotifications = response['meta']['unread'];
                 var count = unreadNotifications.length;
                 console.log(count);
-                document.getElementById("countUread").innerHTML = count;
+                document.getElementById("countUread")?.innerHTML = count;
             },
             error: (error) => {
                 console.log(error);

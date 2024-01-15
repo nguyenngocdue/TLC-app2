@@ -1,4 +1,4 @@
-<div class="p-4 w-full {{$width}} {{$hiddenComponent}} grid grid-cols-12 px-4 bg-white dark:bg-gray-800 rounded-lg">
+<div class="w-full {{$width}} {{$hiddenComponent}} grid grid-cols-12 px-4 bg-white dark:bg-gray-800 rounded-lg">
     @foreach($dataSource as $prop)
     @php $prop ? extract($prop) : null; @endphp
         @if($prop)
@@ -32,7 +32,7 @@
                                         labelExtra="{{$labelExtra}}"
                                 />
                             </div>
-                            <div class="{{$classColStart}} {{$classColSpanControl}} py-2 text-left">
+                            <div class="{{$classColStart}} {{$classColSpanControl}} pb-2 text-left">
                                 <x-renderer.item-render-control
                                     :item="$item"
                                     :prop="$prop"

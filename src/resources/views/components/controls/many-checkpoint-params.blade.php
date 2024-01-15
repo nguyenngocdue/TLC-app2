@@ -6,16 +6,13 @@
 {{-- @dump($checkpoints) --}}
 
 <input type="hidden" name="tableNames[{{$table01Name}}]" value="{{$lineType}}"/>
-@foreach($groupedCheckpoints as $groupId => $group)
-    <br/>
-    <x-renderer.divider title="#{{$groupId}}" content="{{$group['name']}}"/>
-    {{-- <x-renderer.heading level=5 title="#{{$groupId}}">{{($group['name'])}}</x-renderer.heading> --}}
-    @php
-        $checkpoints = $group['items'];
-        // dump($checkpoints);
-    @endphp
+@foreach($groupedCheckpoints as $groupId => $group)    
+    <x-renderer.divider>
+        <x-renderer.heading title="#{{$groupId}}" level=5>{{$group['name']}}</x-renderer.heading>
+    </x-renderer.divider>
+
     <div class="">
-        @foreach($checkpoints as $rowIndex => $checkpoint)
+        @foreach($group['items'] as $rowIndex => $checkpoint)
         <x-controls.insp-chklst.check-point 
             :line="$checkpoint" 
             :checkPointIds="$checkPointIds" 
