@@ -61,7 +61,12 @@
                 @else
                 @if($value =='' && $signatureId)            
                     <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
-                    <x-renderer.button type="warning">Recall this request</x-renderer.button>
+                    <x-renderer.button 
+                        type="warning"
+                        onClick="recallSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$signatureUserId}}])"
+                        >
+                        Recall this request
+                    </x-renderer.button>
                     @else
                         @if($isExternalInspector)
                             Request not yet sent
@@ -99,6 +104,7 @@
                     <x-renderer.button 
                         type="warning"
                         title='{!! "Recall:\n".$title_already_signed !!}'
+                        {{-- onClick="recallSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$signatureUserId}}])" --}}
                     >Recall {{count($alreadySigned)}} Request(s).</x-renderer.button>
                     @endif
                 @else 
@@ -106,7 +112,9 @@
                 <x-renderer.button 
                     type="warning"
                     title='{!! "Recall:\n".$title_already_signed !!}'
-                >Recall All Requests.</x-renderer.button>
+                    onClick=""
+                    >
+                Recall All Requests.</x-renderer.button>
                 @endif
                 @else
                 Please select some people in the List above.
@@ -114,6 +122,7 @@
         </div>
     </div>
 </div>
+
 @once
 <script>
 const requestSignOff = (tableName, signableId, category, requestedArray) => {
@@ -146,19 +155,45 @@ const requestSignOff = (tableName, signableId, category, requestedArray) => {
         }
     })
 }
+
+const recallSignOff = (tableName, signableId, category, requestedArray) => {
+    console.log(tableName, signableId, requestedArray)
+    requestedArray.forEach(person2request =>$("#btnRequest_" + person2request).prop('disabled', true))
+    $("#btnRequest_NeedToRequest").prop('disabled', true)
+
+    const data = {
+        tableName, 
+        signableId, 
+        uids: requestedArray,
+        category,
+        wsClientId,
+    }
+// console.log(data)
+    $.ajax({
+        method:'POST',
+        url: '/api/v1/qaqc/recall_to_sign_off',
+        data,
+        success: (response) => {
+            // toastr.success(response.message)
+            requestedArray.forEach(person2request => $("#btnRequest_" + person2request).replaceWith("Request Sent just now."))
+
+        },
+        error: (response)=>{
+            // console.log(response)
+            toastr.error(response.responseJSON.message, "Send emails failed.")
+            requestedArray.forEach(person2request =>$("#btnRequest_" + person2request).prop('disabled', false))            
+            $("#btnRequest_NeedToRequest").prop('disabled', false)
+        }
+    })
+}
 </script>
 @endonce
 
 <script>
-    function show(){
-        if(wsClientId) {
-            $(".signature-group2a").toggle()
-            $(".signature-group2a-loading").toggle()
-        } else {
-            setTimeout(() => {
-                show()
-            }, 100);
-        }
-    }
-    show()
-    </script>
+function show(){
+    if(wsClientId) {
+        $(".signature-group2a").toggle()
+        $(".signature-group2a-loading").toggle()
+    } else setTimeout(() => show(), 100);        
+}show()
+</script>
