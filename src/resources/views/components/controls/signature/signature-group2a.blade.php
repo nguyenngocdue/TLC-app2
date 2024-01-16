@@ -1,9 +1,10 @@
 
 <div class="border px-4 py-2">
+{{-- @dump($inNominatedList) --}}
 {{-- @dump($needToRecall) --}}
     <div component="signature-group2a-loading" class="signature-group2a-loading">Loading wsClient...</div>
     <div component="signature-group2a" class="hidden signature-group2a">
-        @if(count($needToRecall)>0)
+        @if(!$inNominatedList && count($needToRecall)>0)
         <div class="bg-red-600 text-white  rounded p-2">
                 @php
                     
@@ -72,15 +73,17 @@
                         />
                     </div>
                 @else
-                @if($value =='' && $signatureId)            
-                    <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
-                    <x-renderer.button 
-                        id="btnRecall_{{$signatureUserId}}"
-                        type="warning"
-                        onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$signatureUserId}}], [{{$signatureId}}])"
-                        >
-                        Recall this request
-                    </x-renderer.button>
+                    @if($value =='' && $signatureId)            
+                        <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
+                        @if(!$inNominatedList)
+                            <x-renderer.button 
+                                id="btnRecall_{{$signatureUserId}}"
+                                type="warning"
+                                onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$signatureUserId}}], [{{$signatureId}}])"
+                                >
+                                Recall this request
+                            </x-renderer.button>
+                        @endif
                     @else
                         @if($isExternalInspector)
                             Request not yet sent
@@ -114,7 +117,7 @@
                         onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$needToRequest->map(fn($i, $id)=>$id)->join(',')}}])"
                         title='{!! "Email to:\n".$title_email_to !!}'
                     >Send Request to {{count($needToRequest)}} Participant(s).</x-renderer.button>
-                    @if(count($alreadyRequested) > 0)
+                    @if(!$inNominatedList && count($alreadyRequested) > 0)
                     <x-renderer.button 
                         id="btnRecall_NeedToRecall" 
                         type="warning"
@@ -126,15 +129,17 @@
                 {{-- <x-renderer.button type="secondary" disabled>
                     All participants are Requested.
                 </x-renderer.button> --}}
-                <x-renderer.button 
-                    id="btnRecallAllRequest"
-                    type="warning"
-                    title='{!! "Recall:\n".$title_already_signed !!}'
-                    onClick="this.disabled=true; recallSignOff('{{$tableName}}', {{$signableId}}, [{{$alreadyRequested->map(fn($i, $id) => $id)->join(',')}}], [{{$alreadyRequestedSignatures->join(',')}}])"
-                    >
-                Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
+                    @if(!$inNominatedList)
+                        <x-renderer.button 
+                            id="btnRecallAllRequest"
+                            type="warning"
+                            title='{!! "Recall:\n".$title_already_signed !!}'
+                            onClick="this.disabled=true; recallSignOff('{{$tableName}}', {{$signableId}}, [{{$alreadyRequested->map(fn($i, $id) => $id)->join(',')}}], [{{$alreadyRequestedSignatures->join(',')}}])"
+                            >
+                        Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
+                    @endif
                 @endif
-                @else
+            @else
                 Please select some people in the List above.
             @endif
         </div>

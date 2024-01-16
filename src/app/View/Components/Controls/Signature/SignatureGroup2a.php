@@ -80,6 +80,7 @@ class SignatureGroup2a extends Component
             'needToRecall' => $needToRecall,
             'alreadyRequestedSignatures' => $alreadyRequestedSignatures,
             'needToRecallSignatures' => $needToRecallSignatures,
+            'inNominatedList' => $nominatedList->contains('id', $cuid),
 
             'debug' => $this->debug,
             'input_or_hidden' => $this->debug ? "text" : "hidden",
