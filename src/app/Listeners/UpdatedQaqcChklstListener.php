@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 class UpdatedQaqcChklstListener //implements ShouldQueue //<<No need to queue
 {
     // use Queueable;
-    private $nominatedListFn;
+    private $nominatedListFn = "signature_qaqc_chklst_3rd_party" . "_list";
     /**
      * Create the event listener.
      *
@@ -27,7 +27,6 @@ class UpdatedQaqcChklstListener //implements ShouldQueue //<<No need to queue
     ) {
         //
         // Log::info('UpdatedQaqcChklstListener constructor');
-        $this->nominatedListFn = "signature_qaqc_chklst_3rd_party" . "_list";
     }
 
     public function handle(UpdatedQaqcChklstEvent $event)

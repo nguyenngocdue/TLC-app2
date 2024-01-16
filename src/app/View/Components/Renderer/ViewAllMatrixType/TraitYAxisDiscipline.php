@@ -29,13 +29,13 @@ trait TraitYAxisDiscipline
                 $cell_title = "";
                 $cell_class = $discipline->css_class . " align-top";
 
-                if (isset($line['default_monitors'])) {
-                    $count = $line['default_monitors']->count();
-                    if ($count) {
-                        $value .= "<br/>(" . $count . '<i class="fa-duotone fa-user"></i>' . ")";
-                    }
-                    $cell_title = "Default 3rd Party to Sign Off:\n" . $line['default_monitors']->join("\n");
-                }
+                // if (isset($line['default_monitors'])) {
+                //     $count = $line['default_monitors']->count();
+                //     if ($count) {
+                //         $value .= "<br/>(" . $count . '<i class="fa-duotone fa-user"></i>' . ")";
+                //     }
+                //     $cell_title = "Default 3rd Party to Sign Off:\n" . $line['default_monitors']->join("\n");
+                // }
                 $result[$line['dataIndex']] = (object)[
                     'value' => $value,
                     'cell_title' => $cell_title,

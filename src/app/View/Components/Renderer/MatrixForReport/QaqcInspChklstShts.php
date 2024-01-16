@@ -19,6 +19,7 @@ class QaqcInspChklstShts extends MatrixForReportParent
         private $subProjectId = 107,
         private $qaqcInspTmplId = 1007,
         private $showOnlyInvolved = false,
+        private $nominatedListFn = "signature_qaqc_chklst_3rd_party" . "_list",
     ) {
         parent::__construct("qaqc_insp_chklst_shts");
 
@@ -30,6 +31,7 @@ class QaqcInspChklstShts extends MatrixForReportParent
         $list = array_map(fn ($i) => $i->qaqc_insp_tmpl_sht_id, $this->dataSource);
         $result = Qaqc_insp_tmpl_sht::query()
             ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmplId);
+        //If client: show all, if inspectors: show involved chk sht
         if ($this->showOnlyInvolved) $result = $result->whereIn('id', $list);
         $result = $result->with(['getProdDiscipline'])
             ->orderBy('order_no')
@@ -72,7 +74,7 @@ class QaqcInspChklstShts extends MatrixForReportParent
         $result = [];
         $cuid = CurrentUser::id();
         foreach ($db as $sheet) {
-            $uids = $sheet->getMonitors1()->pluck('id')->toArray();
+            $uids = $sheet->{$this->nominatedListFn}()->pluck('id')->toArray();
             if (in_array($cuid, $uids)) {
                 $result[] = $sheet;
             }
