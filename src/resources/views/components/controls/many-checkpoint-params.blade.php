@@ -7,8 +7,11 @@
 
 <input type="hidden" name="tableNames[{{$table01Name}}]" value="{{$lineType}}"/>
 @foreach($groupedCheckpoints as $groupId => $group)    
+    @php
+        $slug = Str::slug($group['name']);
+    @endphp
     <x-renderer.divider>
-        <x-renderer.heading title="#{{$groupId}}" level=5>{{$group['name']}}</x-renderer.heading>
+        <x-renderer.heading id="{{$slug}}" title="#{{$groupId}}" level=5>{{$group['name']}}</x-renderer.heading>
     </x-renderer.divider>
 
     <div class="">
