@@ -68,6 +68,8 @@ class SignatureGroup2a extends Component
         // dump($needToRecall);
         $alreadyRequestedSignatures = $alreadyRequested->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);
         // dump($alreadyRequestedSignatures);
+        $needToRecallSignatures = $needToRecall->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);
+        // dump($needToRecallSignatures);
 
         $params = [
             'category' => $this->category,
@@ -77,6 +79,7 @@ class SignatureGroup2a extends Component
             'alreadyRequested' => $alreadyRequested,
             'needToRecall' => $needToRecall,
             'alreadyRequestedSignatures' => $alreadyRequestedSignatures,
+            'needToRecallSignatures' => $needToRecallSignatures,
 
             'debug' => $this->debug,
             'input_or_hidden' => $this->debug ? "text" : "hidden",
