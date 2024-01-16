@@ -8,7 +8,7 @@ use App\Models\Qaqc_insp_chklst_sht;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
 
-class UpdatedQaqcChklstSheetListener implements ShouldQueue
+class UpdatedQaqcChklstSheetListener //implements ShouldQueue //No need to queue.
 {
     const YES = 1, NO = 2, NA_1 = 3, ON_HOLD_1 = 4, PASS = 5, FAIL = 6, NA_2 = 7, ON_HOLD_2 = 8;
     const TEXT = 1, TEXTAREA = 2, CHECKBOX = 3, RADIO = 4, DATETIME = 5, DROPDOWN = 6, SIGNATURE = 7;
@@ -53,6 +53,7 @@ class UpdatedQaqcChklstSheetListener implements ShouldQueue
 
         $this->updateProgress($sheet);
 
+        // Log::info("Elaborate updated event to qaqc_insp_chklst...");
         event(new UpdatedQaqcChklstEvent($sheet));
     }
 }

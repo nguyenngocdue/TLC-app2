@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class UpdateSubProjectService
 {
-    function update($subProjectId)
+    function update($subProjectId, $nominatedListFn)
     {
         $allLists = Qaqc_insp_chklst::query()
             ->where("sub_project_id", $subProjectId)
@@ -21,7 +21,7 @@ class UpdateSubProjectService
             $allSheets = $list->getSheets;
             // Oracy::attach("getMonitors1()", $allSheets);
             foreach ($allSheets as $sheet) {
-                $result[] = $sheet->getMonitors1()->pluck('id')->toArray();
+                $result[] = $sheet->{$nominatedListFn}()->pluck('id')->toArray();
             }
         }
 

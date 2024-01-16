@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class UpdateQaqcInspTmplService
 {
-    function update($qaqcInspTmplId)
+    function update($qaqcInspTmplId, $nominatedListFn)
     {
         $allLists = Qaqc_insp_chklst::query()
             ->where("qaqc_insp_tmpl_id", $qaqcInspTmplId)
@@ -21,7 +21,7 @@ class UpdateQaqcInspTmplService
             $allSheets = $list->getSheets;
             // Oracy::attach("getMonitors1()", $allSheets);
             foreach ($allSheets as $sheet) {
-                $result[] = $sheet->getMonitors1()->pluck('id')->toArray();
+                $result[] = $sheet->{$nominatedListFn}()->pluck('id')->toArray();
             }
         }
 

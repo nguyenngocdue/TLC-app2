@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Events\UpdatedEsgSheetEvent;
 use App\Events\UpdatedProdSequenceEvent;
-use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 use Illuminate\Support\Facades\Log;
 

@@ -49,8 +49,11 @@ class EventServiceProvider extends ServiceProvider
         UpdatedDocumentEvent::class => [UpdatedDocumentListener2::class,],
 
         //Update specific entities
+        //This is to update progress of each checksheet
         UpdatedQaqcChklstSheetEvent::class => [UpdatedQaqcChklstSheetListener::class],
+        //This is to update dropdown for 3rd party dashboard options
         UpdatedQaqcChklstEvent::class => [UpdatedQaqcChklstListener::class],
+
         UpdatedProdSequenceEvent::class => [UpdatedProdSequenceListener::class],
         UpdatedEsgSheetEvent::class => [UpdatedEsgSheetListener::class],
 

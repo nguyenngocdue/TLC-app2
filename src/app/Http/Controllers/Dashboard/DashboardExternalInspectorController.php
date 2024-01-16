@@ -40,6 +40,8 @@ class DashboardExternalInspectorController extends DashboardController
             'showOnlyInvolved' => true,
         ];
 
-        return view('dashboards.dashboard-external-inspector', $params);
+        // echo "External Inspector";
+        // dump($params);
+        return view('dashboards.dashboard-external-inspector-and-client', $params);
     }
 }

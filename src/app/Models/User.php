@@ -131,11 +131,11 @@ class User extends Authenticatable implements LdapAuthenticatable
         "getTshtTeams()" => ["getCheckedByField", User_team_tsht::class],
         "getSiteTeams()" => ["getCheckedByField", User_team_site::class],
 
+        "getSubProjectsOfProjectClient()" => ['getCheckedByField', Sub_project::class],
         "getSubProjectsOfExternalInspector()" => ['getCheckedByField', Sub_project::class],
         "getQaqcInspTmplsOfExternalInspector()" => ['getCheckedByField', Qaqc_insp_tmpl::class],
         "getProdRoutingsOfExternalInspector()" => ['getCheckedByField', Prod_routing::class],
 
-        "getSubProjectsOfProjectClient()" => ['getCheckedByField', Sub_project::class],
     ];
 
     public function getOtTeams()
@@ -156,7 +156,13 @@ class User extends Authenticatable implements LdapAuthenticatable
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    function getSubProjectsOfExternalInspector()
+    function getSubProjectsOfProjectClient() /////////////
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    function getSubProjectsOfExternalInspector() ///////
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
@@ -169,12 +175,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     }
 
     function getProdRoutingsOfExternalInspector()
-    {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
-
-    function getSubProjectsOfProjectClient()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
