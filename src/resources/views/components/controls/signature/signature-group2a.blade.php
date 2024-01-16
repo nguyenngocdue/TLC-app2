@@ -110,13 +110,16 @@
                     >Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
                     @endif
                 @else 
-                <x-renderer.button type="secondary" disabled>All participants are Requested.</x-renderer.button>
+                {{-- <x-renderer.button type="secondary" disabled>
+                    All participants are Requested.
+                </x-renderer.button> --}}
                 <x-renderer.button 
+                    id="btnRecallAllRequest"
                     type="warning"
                     title='{!! "Recall:\n".$title_already_signed !!}'
-                    onClick=""
+                    onClick="this.disabled=true; recallSignOff('{{$tableName}}', {{$signableId}}, [{{$alreadyRequested->map(fn($i, $id) => $id)->join(',')}}], [{{$alreadyRequestedSignatures->join(',')}}])"
                     >
-                Recall All Requests.</x-renderer.button>
+                Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
                 @endif
                 @else
                 Please select some people in the List above.
