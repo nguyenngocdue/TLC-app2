@@ -33,15 +33,15 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
     @if($showDecisionBox)
     @php
     $class = [
-            1 => 'peer-checked:bg-green-300 peer-checked:text-green-700',
-            2 => 'peer-checked:bg-pink-300 peer-checked:text-pink-700',
+            'approve' => 'peer-checked:bg-green-300 peer-checked:text-green-700',
+            'reject' => 'peer-checked:bg-pink-300 peer-checked:text-pink-700',
     ];
     $cursor = $readOnly ? "cursor-not-allowed" : "cursor-pointer";
     $selected = $decisionValue;
     @endphp
     <div class="flex gap-2">
         <div class="grid w-full grid-cols-2 space-x-2 rounded-xl bg-gray-200 p-2">
-            @foreach([1=>'Approve', 2=>'Reject'] as $decisionId => $option)
+            @foreach(['approve'=>'Approve', 'reject'=>'Reject'] as $decisionId => $option)
                 <div>
                     <input type="radio" 
                         name="{{$decisionName}}" 

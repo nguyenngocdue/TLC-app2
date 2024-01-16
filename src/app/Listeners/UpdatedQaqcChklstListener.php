@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Log;
 class UpdatedQaqcChklstListener //implements ShouldQueue //<<No need to queue
 {
     // use Queueable;
-    private $nominatedListFn = "signature_qaqc_chklst_3rd_party" . "_list";
     /**
      * Create the event listener.
      *
@@ -33,6 +32,7 @@ class UpdatedQaqcChklstListener //implements ShouldQueue //<<No need to queue
     {
         // $ids = $this->getIdChklst($event->subProjectId);
         $bookId = $event->sheet->qaqc_insp_chklst_id;
+        $nominatedListFn = $event->nominatedListFn;
         $book = Qaqc_insp_chklst::find($bookId);
         // Log::info($book);
 
@@ -58,8 +58,8 @@ class UpdatedQaqcChklstListener //implements ShouldQueue //<<No need to queue
         $book->save();
 
         // Log::info('UpdatedQaqcChklstListener 3 Sub-Services calling...');
-        $this->subProjectService->update($book->sub_project_id, $this->nominatedListFn);
-        $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id, $this->nominatedListFn);
-        $this->prodRoutingService->update($book->getProdOrder->prod_routing_id, $this->nominatedListFn);
+        $this->subProjectService->update($book->sub_project_id, $nominatedListFn);
+        $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id, $nominatedListFn);
+        $this->prodRoutingService->update($book->getProdOrder->prod_routing_id, $nominatedListFn);
     }
 }

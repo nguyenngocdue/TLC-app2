@@ -19,7 +19,7 @@ trait TraitUpdatedProdSequenceEvent
                 event(new UpdatedEsgSheetEvent($id));
                 break;
             case 'qaqc_insp_chklst_sht':
-                event(new UpdatedQaqcChklstSheetEvent($id));
+                event(new UpdatedQaqcChklstSheetEvent($id, "signature_qaqc_chklst_3rd_party"/* . "_list"*/));
                 break;
             default:
                 // Log::info("Updated " . $this->type);

@@ -28,6 +28,7 @@ class SignatureGroup2a extends Component
         // dump($category);
         // dump($item);
         // dump($signableType, $signableId);
+        // dump($readOnly);
     }
 
     private function mergeUserAndSignature($nominatedList, $signatureList)

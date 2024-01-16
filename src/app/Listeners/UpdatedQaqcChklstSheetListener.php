@@ -6,17 +6,13 @@ use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Models\Qaqc_insp_chklst_sht;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
 class UpdatedQaqcChklstSheetListener //implements ShouldQueue //No need to queue.
 {
     const YES = 1, NO = 2, NA_1 = 3, ON_HOLD_1 = 4, PASS = 5, FAIL = 6, NA_2 = 7, ON_HOLD_2 = 8;
     const TEXT = 1, TEXTAREA = 2, CHECKBOX = 3, RADIO = 4, DATETIME = 5, DROPDOWN = 6, SIGNATURE = 7;
-
-    public function __construct()
-    {
-        //
-    }
 
     private function updateProgress($sheet)
     {
@@ -45,15 +41,38 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //No need to queue
         $sheet->save();
     }
 
+    private function updateStatusAccordingToSignOff($sheet, $nominatedListFn)
+    {
+        $signatures = $sheet->{$nominatedListFn}()->get();
+        // Log::info($signatures->pluck('id'));
+        if (sizeof($signatures) == 0) {
+            // Log::info("No signatures, ...");
+            return;
+        }
+
+        $signature_decisions = $signatures->pluck('signature_decision');
+
+        $allApproved = Arr::allElementsAre($signature_decisions, 'approve');
+        if ($allApproved) {
+            // Log::info("Auto change status of sheet " . $sheet->id . " to audited");
+            $sheet->update(['status' => 'audited']);
+        } else {
+            // Log::info("Do nothing for sheet #" . $sheet->id);
+            // Log::info($signature_decisions);
+        }
+    }
+
     public function handle(UpdatedQaqcChklstSheetEvent $event)
     {
         // if (CurrentRoute::getTypeSingular() !== 'qaqc_insp_chklst_sht') return false;
         $sheetId = $event->sheet;
+        $nominatedListFn = $event->nominatedListFn;
         $sheet = Qaqc_insp_chklst_sht::find($sheetId);
 
         $this->updateProgress($sheet);
+        $this->updateStatusAccordingToSignOff($sheet, $nominatedListFn);
 
         // Log::info("Elaborate updated event to qaqc_insp_chklst...");
-        event(new UpdatedQaqcChklstEvent($sheet));
+        event(new UpdatedQaqcChklstEvent($sheet, $nominatedListFn . "_list"));
     }
 }
