@@ -55,24 +55,28 @@ class SignatureGroup2a extends Component
         $isExternalInspector = CurrentUser::get()->isExternalInspector();
 
         $signatures = $this->mergeUserAndSignature($nominatedList, $signatureList);
+        // dump($signatures);
         $all = ($nominatedList->pluck('email', 'id'));
         // dump($all);
         $signed = ($signatureList->pluck('getUser.email', 'user_id'));
         // dump($signed);
         $needToRequest = $all->filter(fn ($email) => !$signed->contains($email));
         // dump($needToRequest);
-        $alreadySigned = $all->filter(fn ($email) => $signed->contains($email));
-        // dump($alreadySigned);
+        $alreadyRequested = $all->filter(fn ($email) => $signed->contains($email));
+        // dump($alreadyRequested);
         $needToRecall = $signed->filter(fn ($email) => (!$all->contains($email)) && $email);
         // dump($needToRecall);
+        $alreadyRequestedSignatures = $alreadyRequested->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);
+        // dump($alreadyRequestedSignatures);
 
         $params = [
             'category' => $this->category,
             'signatures' => $signatures,
             'nominatedList' => $nominatedList,
             'needToRequest' => $needToRequest,
-            'alreadySigned' => $alreadySigned,
+            'alreadyRequested' => $alreadyRequested,
             'needToRecall' => $needToRecall,
+            'alreadyRequestedSignatures' => $alreadyRequestedSignatures,
 
             'debug' => $this->debug,
             'input_or_hidden' => $this->debug ? "text" : "hidden",

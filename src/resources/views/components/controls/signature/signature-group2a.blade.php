@@ -62,8 +62,9 @@
                 @if($value =='' && $signatureId)            
                     <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
                     <x-renderer.button 
+                        id="btnRecall_{{$signatureUserId}}"
                         type="warning"
-                        onClick="recallSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$signatureUserId}}])"
+                        onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$signatureUserId}}], [{{$signatureId}}])"
                         >
                         Recall this request
                     </x-renderer.button>
@@ -89,7 +90,7 @@
         
         @php
             $title_email_to = $needToRequest->join(", ");
-            $title_already_signed = $alreadySigned->join(", ");
+            $title_already_signed = $alreadyRequested->join(", ");
         @endphp
         <div class="text-right">
             @if(count($nominatedList) > 0)            
@@ -100,12 +101,13 @@
                         onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$needToRequest->map(fn($i, $id)=>$id)->join(',')}}])"
                         title='{!! "Email to:\n".$title_email_to !!}'
                     >Send Request to {{count($needToRequest)}} Participant(s).</x-renderer.button>
-                    @if(count($alreadySigned) > 0)
+                    @if(count($alreadyRequested) > 0)
                     <x-renderer.button 
+                        id="btnRecall_NeedToRecall" 
                         type="warning"
                         title='{!! "Recall:\n".$title_already_signed !!}'
-                        {{-- onClick="recallSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$signatureUserId}}])" --}}
-                    >Recall {{count($alreadySigned)}} Request(s).</x-renderer.button>
+                        onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$alreadyRequested->map(fn($i, $id) => $id)->join(',')}}], [{{$alreadyRequestedSignatures->join(',')}}])"
+                    >Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
                     @endif
                 @else 
                 <x-renderer.button type="secondary" disabled>All participants are Requested.</x-renderer.button>
@@ -156,16 +158,15 @@ const requestSignOff = (tableName, signableId, category, requestedArray) => {
     })
 }
 
-const recallSignOff = (tableName, signableId, category, requestedArray) => {
-    console.log(tableName, signableId, requestedArray)
-    requestedArray.forEach(person2request =>$("#btnRequest_" + person2request).prop('disabled', true))
-    $("#btnRequest_NeedToRequest").prop('disabled', true)
+const recallSignOff = (tableName, signableId, requestedArray, signatureIds) => {
+    // console.log( requestedArray, signatureIds)
+    requestedArray.forEach(person2request =>$("#btnRecall_" + person2request).prop('disabled', true))
+    $("#btnRecall_NeedToRecall").prop('disabled', true)
 
     const data = {
         tableName, 
         signableId, 
-        uids: requestedArray,
-        category,
+        signatureIds,
         wsClientId,
     }
 // console.log(data)
@@ -175,14 +176,14 @@ const recallSignOff = (tableName, signableId, category, requestedArray) => {
         data,
         success: (response) => {
             // toastr.success(response.message)
-            requestedArray.forEach(person2request => $("#btnRequest_" + person2request).replaceWith("Request Sent just now."))
+            requestedArray.forEach(person2request => $("#btnRecall_" + person2request).replaceWith("Recall Sent just now."))
 
         },
         error: (response)=>{
             // console.log(response)
             toastr.error(response.responseJSON.message, "Send emails failed.")
-            requestedArray.forEach(person2request =>$("#btnRequest_" + person2request).prop('disabled', false))            
-            $("#btnRequest_NeedToRequest").prop('disabled', false)
+            requestedArray.forEach(person2request =>$("#btnRecall_" + person2request).prop('disabled', false))            
+            $("#btnRecall_NeedToRecall").prop('disabled', false)
         }
     })
 }
