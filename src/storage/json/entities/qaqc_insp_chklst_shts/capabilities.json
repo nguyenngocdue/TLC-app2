@@ -98,6 +98,28 @@
         "pending_audit": "",
         "audited": ""
     },
+    "consultant": {
+        "name": "consultant",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "contractor": {
+        "name": "contractor",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
         "name_rendered": "",
@@ -205,7 +227,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "pending_audit": "",
+        "pending_audit": "true",
         "audited": ""
     },
     "fac_admin": {
@@ -601,7 +623,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "pending_audit": "",
+        "pending_audit": "true",
         "audited": ""
     },
     "supreme_manage": {
@@ -614,6 +636,17 @@
         "inspected": "true",
         "pending_audit": "true",
         "audited": "true"
+    },
+    "vendor": {
+        "name": "vendor",
+        "name_rendered": "",
+        "toggle": "",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
     },
     "whs_manager": {
         "name": "whs_manager",
