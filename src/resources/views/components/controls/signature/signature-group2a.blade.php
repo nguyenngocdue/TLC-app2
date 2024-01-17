@@ -108,8 +108,8 @@
             $title_email_to = $needToRequest->join(", ");
             $title_already_signed = $alreadyRequested->join(", ");
         @endphp
-        <div class="text-right">
             @if(count($nominatedList) > 0)            
+            <div class="text-right">
                 @if(count($needToRequest) > 0)
                     <x-renderer.button 
                         id="btnRequest_NeedToRequest" 
@@ -139,10 +139,12 @@
                         Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
                     @endif
                 @endif
+            </div>
             @else
-                Please select some people in the List above.
+            <div class="text-center text-gray-400">
+                There is no nominated people.
+            </div>
             @endif
-        </div>
     </div>
 </div>
 
