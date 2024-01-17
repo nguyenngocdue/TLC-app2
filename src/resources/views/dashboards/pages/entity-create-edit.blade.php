@@ -40,9 +40,14 @@ $formWidth = "md:w-1/2 xl:w-1/2";
     <x-controls.status-visibility-checker :propsOfMainPage="$propsOfMainPage" :allProps="$allProps" />
     <x-elapse />
 
-    @if($type === 'qaqc_insp_chklst_shts')  
-    <x-renderer.entity-create-edit-qaqc_insp_chklst_shts  formWidth="{{$formWidth}}" :item="$item"/>
-    @endif
+    @switch($type) 
+        @case ('qaqc_insp_chklst_shts')  
+            <x-renderer.chklst_header.qaqc_insp_chklst_shts  formWidth="{{$formWidth}}" :item="$item"/>
+        @break
+        @case ('hse_insp_chklst_shts')  
+            <x-renderer.chklst_header.hse_insp_chklst_shts  formWidth="{{$formWidth}}" :item="$item"/>
+        @break
+    @endswitch
     
     <form class="w-full mb-8 mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf
