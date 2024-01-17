@@ -125,7 +125,7 @@ trait TraitSupportEntityShow
     private function createInspectorAndDatetime($item)
     {
         $user = User::find($item->inspector_id);
-        $name = $user ? $user->first_name : "";
+        $name = $user ? $user->name : "";
         $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
         $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
         $runUpdated = '<span class="flex gap-1">' . $avatarStr . ' ' . $name . " " . DateTimeConcern::convertForLoading('picker_date', substr($item->updated_at, 0, 10)) . "</span>";
