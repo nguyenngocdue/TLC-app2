@@ -34,7 +34,7 @@ trait TraitSupportEntityShow
             foreach ($entityShtSigs as &$value) {
                 $value['response_type'] = $this->createDataSourceTableRun($value);
                 $value['name_description'] = $this->createDataSourceDescription($value);
-                $value['group_description'] = 'Third Party  Sign Off';
+                $value['group_description'] = 'Third Party Sign-Off';
             }
         } else {
             $entityShtSigs = collect();
@@ -91,33 +91,41 @@ trait TraitSupportEntityShow
         }
         return $str;
     }
+
+    function removeOnHold(&$array)
+    {
+        if (in_array($this->type, ['qaqc_insp_chklst_sht', 'qaqc_insp_chklst'])) array_pop($array);
+    }
+
     private function createStrHtmlGroupRadio($item, $controlGroup)
     {
         $arrayControl = explode('|', $controlGroup);
-        if (($this->type) == 'qaqc_insp_chklst_sht') array_pop($arrayControl);
+        // dump(array_keys($arrayControl));
+        $this->removeOnHold($arrayControl);
+
         $controlValue = $item->getControlValue->name ?? '';
-        $circleIcon = "<i class='fa-thin fa-circle px-2'></i>";
+        $circleIcon = "<i class='fa-thin fa-circle pr-1'></i>";
         $str = "";
         foreach ($arrayControl as $value) {
             if ($controlValue === $value) {
                 switch ($value) {
                     case in_array($value, ['Yes', 'Pass']):
-                        $checkedIcon = "<i class='fa-solid fa-circle-check px-2 text-green-700'></i>";
+                        $checkedIcon = "<i class='fa-solid fa-circle-check pr-1 text-green-700'></i>";
                         $value = "<span class=' text-green-700'>" . $value . "</span>";
                         $valueRender = "<div class='bg-green-300'>" . $checkedIcon . $value . "</div>";
                         break;
                     case in_array($value, ['No', 'Fail']):
-                        $checkedIcon = "<i class='fa-solid fa-circle-check px-2 text-pink-700'></i>";
+                        $checkedIcon = "<i class='fa-solid fa-circle-check pr-1 text-pink-700'></i>";
                         $value = "<span class=' text-pink-700'>" . $value . "</span>";
                         $valueRender = "<div class='bg-pink-300'>" . $checkedIcon . $value . "</div>";
                         break;
                     case 'NA':
-                        $checkedIcon = "<i class='fa-solid fa-circle-check px-2 text-gray-700'></i>";
+                        $checkedIcon = "<i class='fa-solid fa-circle-check pr-1 text-gray-700'></i>";
                         $value = "<span class=' text-gray-700'>" . $value . "</span>";
                         $valueRender = "<div class='bg-gray-300'>" . $checkedIcon . $value . "</div>";
                         break;
                     case 'On Hold':
-                        $checkedIcon = "<i class='fa-solid fa-circle-check px-2 text-orange-700'></i>";
+                        $checkedIcon = "<i class='fa-solid fa-circle-check pr-1 text-orange-700'></i>";
                         $value = "<span class=' text-orange-700'>" . $value . "</span>";
                         $valueRender = "<div class='bg-orange-300'>" . $checkedIcon . $value . "</div>";
                         break;
@@ -146,7 +154,7 @@ trait TraitSupportEntityShow
     {
         if (isset($item->insp_photos) && !$item->insp_photos->isEmpty()) {
             $td = '<td class="b1order" colspan=5 style="width:190px">'  . $this->formatAttachmentRender($item->insp_photos) . '</td>';
-            return "<tr  class=' bg-white bord1er-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+            return "<tr  class='bg-white bord1er-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
         }
         return '';
     }
@@ -155,7 +163,7 @@ trait TraitSupportEntityShow
     {
         if (isset($item->insp_comments) && !$item->insp_comments->isEmpty()) {
             $td = "<td class='bor1der p-0' colspan = 5 style='width:190px'>" . $this->formatCommentRender($item->insp_comments) . "</td>";
-            return "<tr class=' bg-white bor1der-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+            return "<tr class='bg-white bor1der-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
         }
         return '';
     }
@@ -163,7 +171,7 @@ trait TraitSupportEntityShow
     {
         if (isset($item->getCorrectiveActions) && !$item->getCorrectiveActions->isEmpty()) {
             $td = "<td class='border p-1' colspan = 5 style='width:190px'>" . $this->formatCorrectiveAction($item->getCorrectiveActions) . "</td>";
-            return "<tr class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+            return "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
         }
         return '';
     }
