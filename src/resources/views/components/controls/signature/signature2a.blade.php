@@ -21,11 +21,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
     @if($showCommentBox)
         Comment:
         @if($readOnly)
-            @if($commentValue)
-                {!! $commentValue !!}
-            @else
-                <div class="text-gray-500">(no comment)</div>
-            @endif
+            <div class="text-gray-500">{!! $commentValue ?: "(no commnet)" !!}</div>
         @else
         <textarea class="border border-gray-200 rounded w-full" rows="3" name="{{$commentName}}" id="{{$commentName}}" placeholder="Comment here...">{!! $commentValue !!}</textarea>
         @endif

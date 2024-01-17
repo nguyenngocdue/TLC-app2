@@ -1,9 +1,9 @@
-@php
-// $readOnly = false;
-// $table01Name = 'table01'
-@endphp
-
 {{-- @dump($checkpoints) --}}
+<hr/>
+<div class="bg-white rounded border my-4">
+    <x-controls.many-checkpoint-progressbar table01Name="{{$table01Name}}" :dataSource="$oriCheckPoints"/>
+</div>
+<hr/>
 
 <input type="hidden" name="tableNames[{{$table01Name}}]" value="{{$lineType}}"/>
 @php $index = 0; @endphp

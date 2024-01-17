@@ -22,34 +22,35 @@ function registerCheckpointListener(lineId, id){
             case 8: $("#divSubOptionOnHold_" + lineId).show(); break;
             // default: console.log("Unknown option "+id)
         }
+        updateProgressBar('{{$table01Name}}');
     }
     $("#radio_" + lineId + "_" + id).click(reRender)
 }
-    var objIds = {}; 
-    function updateIdsOfFail(id, name ,valueId,rowIndex,type) {
-        //showOrHiddenGroupAttachmentAndComment(valueId,rowIndex,type)
-        if (!Object.keys(objIds).includes(name)) {
-            objIds[name] = []
+var objIds = {}; 
+function updateIdsOfFail(id, name ,valueId,rowIndex,type) {
+    //showOrHiddenGroupAttachmentAndComment(valueId,rowIndex,type)
+    if (!Object.keys(objIds).includes(name)) {
+        objIds[name] = []
+        if([2,6].includes(valueId)){
+            objIds[name].push(id)
+        }
+    } else {
+        if (objIds[name].includes(id)) {
+            const index = objIds[name].indexOf(id);
+            objIds[name].splice(index, 1)
+        } else {
             if([2,6].includes(valueId)){
                 objIds[name].push(id)
             }
-        } else {
-            if (objIds[name].includes(id)) {
-                const index = objIds[name].indexOf(id);
-                objIds[name].splice(index, 1)
-            } else {
-                if([2,6].includes(valueId)){
-                    objIds[name].push(id)
-                }
-            }
         }
-        document.getElementById(name).value = objIds[name]
     }
-    const updateInspectorId = (id) => {
-        // console.log(id, name ,valueId,rowIndex,type)
-        const inspector_id = "radio_inspector_id_" + id
-        document.getElementById(inspector_id).value = {{$cuid}}
-    }
+    document.getElementById(name).value = objIds[name]        
+}
+const updateInspectorId = (id) => {
+    // console.log(id, name ,valueId,rowIndex,type)
+    const inspector_id = "radio_inspector_id_" + id
+    document.getElementById(inspector_id).value = {{$cuid}}
+}
 </script>
 @endonce
 @php
@@ -75,7 +76,7 @@ function registerCheckpointListener(lineId, id){
                 title="#{{$optionId}}"
                 onclick="
                 updateIdsOfFail({{$line->id}}, 'radio_{{$line->id}}_hidden',{{$optionId}},{{$rowIndex}},'{{$type}}'); 
-                updateInspectorId({{$line->id}});
+                updateInspectorId({{$line->id}});                
                 "
                 >{{$option}}</label>
         </div>
