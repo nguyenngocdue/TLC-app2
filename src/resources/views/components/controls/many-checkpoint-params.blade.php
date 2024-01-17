@@ -1,4 +1,5 @@
 {{-- @dump($checkpoints) --}}
+{{-- @dump($readOnly) --}}
 <hr/>
 <div class="bg-white rounded border my-4">
     <x-controls.many-checkpoint-progressbar table01Name="{{$table01Name}}" :dataSource="$oriCheckPoints"/>
