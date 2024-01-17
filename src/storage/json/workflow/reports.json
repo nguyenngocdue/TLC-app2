@@ -263,6 +263,22 @@
         "top_title": "HSE KPI Report",
         "title": "HSE Key Performance Indicator"
     },
+    "report-kanban_task_010": {
+        "name": "report-kanban_task_010",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "breadcrumb-group": null,
+        "top_title": "Task Report Details",
+        "title": "Task Report Details"
+    },
+    "report-kanban_task_020": {
+        "name": "report-kanban_task_020",
+        "package_tab": "report",
+        "package": "hr_&_admin",
+        "breadcrumb-group": null,
+        "top_title": "Task Report",
+        "title": "Task Report"
+    },
     "report-prod_sequence_010": {
         "name": "report-prod_sequence_010",
         "package_tab": "report",

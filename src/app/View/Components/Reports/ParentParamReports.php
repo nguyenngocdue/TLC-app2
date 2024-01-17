@@ -16,7 +16,7 @@ abstract class ParentParamReports extends Component
     protected $referData = '';
     protected $referData1 = '';
     public function __construct(
-        private $name,
+        private $name ="",
         private $selected = "",
         private $multiple = false,
         private $readOnly = false,

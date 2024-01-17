@@ -9,7 +9,7 @@ use App\View\Components\Reports\ParentParamReports;
 class ParamUserId extends ParentParamReports
 {
     use TraitUserCompanyTree;
-    protected function getDataSource()
+    public function getDataSource()
     {
         $treeData = $this->getDataByCompanyTree();
         $dataSource = [];
