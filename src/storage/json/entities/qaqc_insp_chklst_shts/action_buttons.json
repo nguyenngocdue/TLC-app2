@@ -1,7 +1,7 @@
 {
     "in_progress": {
         "name": "in_progress",
-        "label": "Change to In Progress",
+        "label": "Return to In Progress",
         "tooltip": "",
         "change_status_multiple": ""
     },

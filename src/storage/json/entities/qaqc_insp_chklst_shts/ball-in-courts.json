@@ -2,31 +2,31 @@
     "in_progress": {
         "name": "in_progress",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": ""
     },
     "not_applicable": {
         "name": "not_applicable",
-        "ball-in-court-assignee": "",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": ""
     },
     "reviewed": {
         "name": "reviewed",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": ""
     },
     "inspected": {
         "name": "inspected",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": ""
     },
     "pending_audit": {
         "name": "pending_audit",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "assignee_2",
         "ball-in-court-monitors": "getMonitors1()"
     },
     "audited": {
         "name": "audited",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "assignee_2",
         "ball-in-court-monitors": "getMonitors1()"
     }
 }
