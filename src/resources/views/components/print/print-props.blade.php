@@ -10,7 +10,7 @@
         filtersOfDropdown4s = @json($filters4);
         </script>
     <div class="flex justify-center">
-        <div class="{{$layout}} items-center bor1der bg-white box-border p-8">
+        <div class="items-center bor1der bg-white box-border p-8" style="{{$layout}}">
             <x-print.letter-head5 showId={{$showId}} type={{$type}} :dataSource="$dataSource" />
             <x-renderer.heading level=3 xalign='center'>{{$topTitle}}</x-renderer.heading>
             @foreach($propsTree as $propTree)
