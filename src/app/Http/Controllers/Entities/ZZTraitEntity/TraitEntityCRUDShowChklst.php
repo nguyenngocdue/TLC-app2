@@ -18,7 +18,7 @@ trait TraitEntityCRUDShowChklst
             $tableDataSource[] = $this->transformDataSource($value->getLines->sortBy('order_no'), $value->getShtSigs);
         }
         $valueOptionPrint = $this->getValueOptionPrint();
-        return view('components.print.check-list5', [
+        return view('components.print.print-check-list5', [
             'tableColumns' => $this->getTableColumns(),
             'tableDataSource' => $tableDataSource,
             'headerDataSource' => $entityShts,

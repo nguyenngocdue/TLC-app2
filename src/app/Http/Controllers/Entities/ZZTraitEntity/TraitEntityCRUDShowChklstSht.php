@@ -18,7 +18,7 @@ trait TraitEntityCRUDShowChklstSht
         $entityShtSigs = $entity->getShtSigs;
         $tableDataSource = $this->transformDataSource($entityLines, $entityShtSigs);
         $valueOptionPrint = $this->getValueOptionPrint();
-        return view('components.print.check-sheet5', [
+        return view('components.print.print-check-sheet5', [
             'tableColumns' => $this->getTableColumns(),
             'tableDataSource' => $tableDataSource,
             'headerDataSource' => $entity,
