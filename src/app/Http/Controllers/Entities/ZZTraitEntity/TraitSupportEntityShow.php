@@ -47,48 +47,30 @@ trait TraitSupportEntityShow
         $str = '';
         if (!is_null($controlGroup)) {
             $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($item, $controlGroup) . "</tr>";
-            $str .=  $this->createStrHtmlCorrectiveAction($item);
-            $str .= $this->createStrHtmlAttachment($item);
-            $str .=  $this->createStrHtmlComment($item);
+            $str .= $this->createStrHtmlCorrectiveAction($item);
+            $str = "<table class='w-1/2 text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str  . "</tbody>" . "</table>";
         } else {
             $controlRender = $item->getControlType->name ?? 'signature';
             switch ($controlRender) {
                 case 'signature':
                     $valueSignature = $item->value;
-                    // dd($item->insp_comments);
-                    $inspectorId = isset($item->getControlType->name) ? $item->inspector_id : $item->owner_id;
-                    $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $item->updated_at);
-                    $renderInspector = $inspectorId ? "<div class='text-right mr-5'>
-                    <x-renderer.avatar-user uid='$inspectorId'></x-renderer.avatar-user>
-                    @if($inspectorId)
-                        <p>$updatedAt</p>
-                    @endif
-                    </div>" : "";
-                    // $inspectorName = null;
-                    // if ($inspectorId) {
-                    //     $inspectorName = User::findFromCache($inspectorId)->full_name;
-                    // }
-
                     $valueSignature = htmlspecialchars($valueSignature);
-
                     $str = Blade::render(
                         "<div class='flex pb-2 justify-between items-center'>
-                            <x-controls.signature.signature2a name='signature' value='$valueSignature' readOnly=1 />
-                            $renderInspector
+                            <x-controls.signature.signature2a name='signature' value='$valueSignature' readOnly=1 />                            
                         </div>",
                     );
 
-                    $str .= $this->createStrHtmlAttachment($item);
-                    $str .=  $this->createStrHtmlComment($item);
                     break;
                 case 'text':
-                    $str = "<p class='font-medium'>{$item->value}</p>";
+                    $str = "<p class='font-medium p-2 border'>{$item->value}</p>";
                     break;
                 default:
                     # code...
                     break;
             }
         }
+
         return $str;
     }
 
@@ -137,24 +119,23 @@ trait TraitSupportEntityShow
                 $str .=  '<td class="border text-center" style="width:30px">' . $circleIcon . $value . '</td>';
             }
         };
-        $runUpdated = $this->createStrHtmlDateTime($item);
-        $longStr =  $str . $runUpdated;
+        $longStr =  $str; // $runUpdated;
         return $longStr;
     }
-    private function createStrHtmlDateTime($item)
+    private function createInspectorAndDatetime($item)
     {
         $user = User::find($item->inspector_id);
-        $name = $user ? $user->name : "";
+        $name = $user ? $user->first_name : "";
         $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
         $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
-        $runUpdated = '<td class="border pl-2" style="width:80px;" ><span class="flex gap-1">' . $avatarStr . ' ' . $name . " " . DateTimeConcern::convertForLoading('picker_date', substr($item->updated_at, 0, 10)) . "</span></td>";
+        $runUpdated = '<span class="flex gap-1">' . $avatarStr . ' ' . $name . " " . DateTimeConcern::convertForLoading('picker_date', substr($item->updated_at, 0, 10)) . "</span>";
         return $runUpdated;
     }
     private function createStrHtmlAttachment($item)
     {
         if (isset($item->insp_photos) && !$item->insp_photos->isEmpty()) {
-            $td = '<td class="b1order" colspan=5 style="width:190px">'  . $this->formatAttachmentRender($item->insp_photos) . '</td>';
-            return "<tr  class='bg-white bord1er-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+            $span = '<span class="" colspan=5 style="width:190px">'  . $this->formatAttachmentRender($item->insp_photos) . '</span>';
+            return "<div class='bg-white border rounded dark:bg-gray-800 dark:border-gray-700 p-2 my-1'>" . $span . "</div>";
         }
         return '';
     }
@@ -162,8 +143,8 @@ trait TraitSupportEntityShow
     private function createStrHtmlComment($item)
     {
         if (isset($item->insp_comments) && !$item->insp_comments->isEmpty()) {
-            $td = "<td class='bor1der p-0' colspan = 5 style='width:190px'>" . $this->formatCommentRender($item->insp_comments) . "</td>";
-            return "<tr class='bg-white bor1der-b dark:bg-gray-800 dark:border-gray-700'>" . $td . "</tr>";
+            $span = "<span class='bor1der p-0' colspan = 5 style='width:190px'>" . $this->formatCommentRender($item->insp_comments) . "</span>";
+            return "<div class='bg-white bor1der-b dark:bg-gray-800 dark:border-gray-700'>" . $span . "</div>";
         }
         return '';
     }
@@ -197,25 +178,6 @@ trait TraitSupportEntityShow
         $value = $items->toArray();
         $strCenter = Blade::render('<x-print.comment5 :value="$value" />', ['value' => $value]);
         return $strCenter;
-        // dd($strCenter);
-        // foreach ($items as  $comment) {
-        //     $ownerComment = $comment->getOwner ?? '';
-        //     $updatedAt = DateTimeConcern::convertForLoading('picker_datetime', $comment->updated_at);
-        //     $ownerRender = Blade::render("<x-renderer.avatar-user verticalLayout='true' uid='$ownerComment->id'></x-renderer.avatar-user>");
-        //     <x-print.comment5 :relationships="$relationships" :value="$value" />
-        //     $strCenter .= "<div class='mt-2 border-b'>
-        //                         $ownerRender
-        //                         <p class='text-xs font-normal text-center mt-1'>$updatedAt</p>
-        //                     </div>
-        //                     <div class='col-span-3 border-b'>
-        //                         <p class='px-1'>{$comment->content}</p>
-        //                     </div>
-        //                     ";
-        // }
-        // $strHead = "<div class='flex flex-col w-full' >
-        //             <div class='grid grid-cols-4 lg:gap-3 md:gap-2 sm:gap-1 '>";
-        // $strTail = "</div></div>";
-        // return $strHead . $strCenter . $strTail;
     }
 
     private function formatAttachmentRender($items)
@@ -234,31 +196,21 @@ trait TraitSupportEntityShow
             ]);
         }
         return $strCenter;
-        // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
-        // $strCenter = "";
-        // foreach ($items as  $attachment) {
-        //     $urlThumbnail = $path . $attachment->url_thumbnail;
-        //     $urlMedia = $path . $attachment->url_media;
-        //     $fileName = $attachment->filename;
-        //     $strCenter .= "
-        //                     <div class='border-gray-300 relative h-full flex mx-1 flex-col items-center p-1 border rounded-lg  group/item overflow-hidden bg-inherit'>
-        //                         <img class='' src='$urlThumbnail' alt='$fileName' />
-        //                         <div class='invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]'>
-        //                                 <a title='$fileName' href='$urlMedia' target='_blank' class='hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full'>
-        //                                     <span class='text-sm'><i class='fa-sharp fa-solid fa-eye text-2xl '></i></span>
-        //                                 </a>
-        //                         </div>
-        //                     </div>";
-        // };
-        // $strHead = "<div class='flex flex-col container mx-auto w-full' >
-        //             <div class='grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 '>";
-        // $strTail = "</div></div>";
-        // return $strHead . $strCenter . $strTail;
     }
     private function createDataSourceTableRun($value)
     {
-        $html = "<table class = 'w-full text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $this->transFormLine($value) . "</tbody>" . "</table>";
-        return $html;
+        $mainTable = $this->transFormLine($value);
+        $inspector = $this->createInspectorAndDatetime($value);
+        $attachments = $this->createStrHtmlAttachment($value);
+        $comments = $this->createStrHtmlComment($value);
+        return "<div class='flex items-center gap-2' style='width:600px;'> "
+            . $mainTable
+            . $inspector
+            . "</div>"
+            . "<div>"
+            . $attachments
+            . $comments
+            . "</div>";
     }
     private function createDataSourceDescription($value)
     {
