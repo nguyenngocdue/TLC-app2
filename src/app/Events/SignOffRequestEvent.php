@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class RecallSignOffEvent
+class SignOffRequestEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -24,7 +24,7 @@ class RecallSignOffEvent
         public $data,
     ) {
         //
-        // Log::info($data);        
+        // Log::info($data);
     }
 
     /**

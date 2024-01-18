@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\RecallSignOffEvent;
+use App\Events\SignOffRequestEvent;
 use App\Events\WssToastrMessageChannel;
-use App\Mail\MailSignOffRecall;
+use App\Mail\MailSignOffRequest;
 use App\Models\Signature;
 use App\Models\User;
 use Database\Seeders\FieldSeeder;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class RecallSignOffListener implements ShouldQueue
+class SignOffRequestListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -53,23 +53,26 @@ class RecallSignOffListener implements ShouldQueue
         return $result;
     }
 
-    public function handle(RecallSignOffEvent $event)
+    private function getUsers($data)
+    {
+        $requester = User::find($data['requesterId']);
+        $receivers = array_map(fn ($uid) => User::find($uid), $data['uids']);
+        $category_id = FieldSeeder::getIdFromFieldName($data['category']);
+        return [$requester, $receivers, $category_id];
+    }
+
+    public function handle(SignOffRequestEvent $event)
     {
         $data = $event->data;
         $signableId = $data['signableId'];
-        $requester = User::find($data['requesterId']);
-        $signatureIds = $data['signatureIds'];
-        $signatures = Signature::whereIn('id', $signatureIds)->get();
-        // $receivers = array_map(fn ($sig) => User::find($sig->user_id), $signatures);
-        // [$requester,] = $this->getUsers($data);
+        [$requester, $receivers, $category_id] = $this->getUsers($data);
 
-        foreach ($signatures as $sig) {
+        foreach ($receivers as $receiver) {
             // Log::info($receiver);
-            $receiver = User::find($sig->user_id);
             try {
                 $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
                 $params += $this->getMeta($data);
-                $mail = new MailSignOffRecall($params);
+                $mail = new MailSignOffRequest($params);
                 $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
                 $mail->subject($subject);
                 Mail::to($receiver->email)
@@ -88,13 +91,17 @@ class RecallSignOffListener implements ShouldQueue
                 return $msg;
             }
 
-            // Log::info("Deleting " . $sig->id);
-            $sig->forceDelete(); //Hard delete
-
+            Signature::create([
+                'user_id' => $receiver->id,
+                'owner_id' => $requester->id,
+                'signable_type' => Str::modelPathFrom($data['tableName']),
+                'signable_id' => $data['signableId'],
+                'category' => $category_id,
+            ]);
             broadcast(new WssToastrMessageChannel([
                 'wsClientId' => $data['wsClientId'],
                 'type' => 'success',
-                'message' => "Recall email sent to <b>{$receiver->email}</b> sent successfully.",
+                'message' => "Email to <b>{$receiver->email}</b> sent successfully.",
             ]));
         }
 
