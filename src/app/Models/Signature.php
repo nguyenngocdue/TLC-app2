@@ -16,7 +16,7 @@ class Signature extends ModelExtended
     public function getNameAttribute($value)
     {
         $color = $this->signature_decision == 'approve' ? "green" : "pink";
-        $decision = "<div title='#{$this->id}' class='bg-$color-300 p-2 rounded text-center my-1'>" . strtoupper($this->signature_decision) . "</div>";
+        $decision = "<div title='#{$this->id}' class='bg-$color-300 text-$color-700 w-1/2 p-2 font-bold rounded text-center my-1'>" . strtoupper($this->signature_decision) . "</div>";
         $avatarUser = "<b>Inspector Comment: </b><br/>";
         return $decision . $avatarUser . $this->signature_comment;
     }
