@@ -15,6 +15,7 @@
                 layout="{{$layout}}" 
                 page='{{$key+1}}'
                 type="qaqc_insp_chklst_shts"
+                nominatedListFn="{{$nominatedListFn}}"
                 :headerDataSource="$headerDataSource[$key]" 
 
                 :tableColumns="$tableColumns"

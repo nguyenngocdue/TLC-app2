@@ -29,7 +29,8 @@ trait TraitEntityCRUDShowChklstSht
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'classListOptionPrint' => ClassList::DROPDOWN,
             'valueOptionPrint' => $valueOptionPrint,
-            'layout' => $this->getLayoutPrint($valueOptionPrint, 'check-sheet')
+            'layout' => $this->getLayoutPrint($valueOptionPrint, 'check-sheet'),
+            'nominatedListFn' => $this->nominatedListFn,
         ]);
     }
 }
