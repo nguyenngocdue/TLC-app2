@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\RequestSignOffEvent;
 use App\Events\WssToastrMessageChannel;
-use App\Mail\MailRequestSignOff;
+use App\Mail\MailSignOffRequest;
 use App\Models\Signature;
 use App\Models\User;
 use Database\Seeders\FieldSeeder;
@@ -72,7 +72,7 @@ class RequestSignOffListener implements ShouldQueue
             try {
                 $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
                 $params += $this->getMeta($data);
-                $mail = new MailRequestSignOff($params);
+                $mail = new MailSignOffRequest($params);
                 $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
                 $mail->subject($subject);
                 Mail::to($receiver->email)
