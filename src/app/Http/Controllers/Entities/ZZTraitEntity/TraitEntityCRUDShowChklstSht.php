@@ -11,14 +11,16 @@ trait TraitEntityCRUDShowChklstSht
     use TraitSupportEntityShow;
     use TraitGetOptionPrint;
 
+    private $nominatedListFn = "signature_qaqc_chklst_3rd_party";
+
     public function showChklstSht($id, $trashed)
     {
         $entity = $trashed ? ($this->modelPath)::withTrashed()->findOrFail($id) : ($this->modelPath)::findOrFail($id);
         $entityLines = $entity->getLines->sortBy('order_no');
-        $entityShtSigs = $entity->getShtSigs;
+        $entityShtSigs = $entity->{$this->nominatedListFn};
         $tableDataSource = $this->transformDataSource($entityLines, $entityShtSigs);
         $valueOptionPrint = $this->getValueOptionPrint();
-        return view('components.print.check-sheet5', [
+        return view('components.print.print-check-sheet5', [
             'tableColumns' => $this->getTableColumns(),
             'tableDataSource' => $tableDataSource,
             'headerDataSource' => $entity,

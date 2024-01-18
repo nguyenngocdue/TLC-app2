@@ -13,6 +13,14 @@ class Signature extends ModelExtended
     ];
 
     public static $nameless = true;
+    public function getNameAttribute($value)
+    {
+        $color = $this->signature_decision == 'approve' ? "green" : "pink";
+        $decision = "<div title='#{$this->id}' class='bg-$color-300 text-$color-700 w-1/2 p-2 font-bold rounded text-center my-1'>" . strtoupper($this->signature_decision) . "</div>";
+        $avatarUser = "<b>Inspector Comment: </b><br/>";
+        return $decision . $avatarUser . $this->signature_comment;
+    }
+
     public static $statusless = true;
 
     public static $eloquentParams = [

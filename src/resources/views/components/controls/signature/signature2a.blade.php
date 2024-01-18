@@ -4,7 +4,7 @@ $w=338; $h=138; /* ORI 220 x 90*/
 $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
 @endphp 
 <div class=" w-[340px]">
-    <div title="{{$title}}">Sign here:</div>
+    <div title="{{$title}}">Signature here:</div>
     <div id="div1{{$name}}" class="relative border rounded h-[140px]">
         @if(!$readOnly)
             <button type="button" id="btnReset1_{{$count}}" class="no-print w-10 h-10 top-1 right-2 absolute">

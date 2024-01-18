@@ -22,7 +22,7 @@ trait TraitViewAllPrint
             'dataSource' => $dataSource,
             'classListOptionPrint' => ClassList::DROPDOWN,
             'valueOptionPrint' => $valueOptionPrint,
-            'layout' => $this->getLayoutPrint($valueOptionPrint),
+            'layout' => $this->getLayoutPrint($valueOptionPrint, 'props'),
             'modelPath' => $this->typeModel,
             'trashed' => false,
             'topTitle' => CurrentRoute::getTitleOf($this->type),

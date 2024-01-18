@@ -43,7 +43,9 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //No need to queue
 
     private function updateStatusAccordingToSignOff($sheet, $nominatedListFn)
     {
+        $nominatedList = $sheet->{$nominatedListFn . "_list"}();
         $signatures = $sheet->{$nominatedListFn}()->get();
+        // Log::info($signatures);
         // Log::info($signatures->pluck('id'));
         if (sizeof($signatures) == 0) {
             // Log::info("No signatures, ...");
@@ -52,8 +54,9 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //No need to queue
 
         $signature_decisions = $signatures->pluck('signature_decision');
 
+        $allSigned = sizeof($nominatedList) == sizeof($signatures);
         $allApproved = Arr::allElementsAre($signature_decisions, 'approve');
-        if ($allApproved) {
+        if ($allApproved && $allSigned) {
             // Log::info("Auto change status of sheet " . $sheet->id . " to audited");
             $sheet->update(['status' => 'audited']);
         } else {
