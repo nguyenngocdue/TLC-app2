@@ -2,20 +2,16 @@
 
 namespace App\Listeners;
 
-use App\Events\SignOffRecallEvent;
 use App\Events\SignOffSubmittedEvent;
 use App\Events\WssToastrMessageChannel;
 use App\Listeners\TraitSignOffListener;
-use App\Mail\MailSignOffRecall;
 use App\Mail\MailSignOffSubmitted;
-use App\Models\Signature;
 use App\Models\User;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 
 class SignOffSubmittedListener implements ShouldQueue
 {
@@ -32,17 +28,20 @@ class SignOffSubmittedListener implements ShouldQueue
 
     public function handle(SignOffSubmittedEvent $event)
     {
-        // Log::info($mailContent);
         $mailContent = $event->mailContent;
+        // Log::info($mailContent);
         $signableId = $event->signableId;
         $tableName = $event->tableName;
         try {
             $inspector = User::find($mailContent['user_id']);
             $monitors = User::whereIn('id', $mailContent['monitors1'])->get();
-            $param = ['monitorNames' => $monitors->map(fn ($u) => $u->name)->join(", "), "inspectorName" => $inspector->name];
+            $param = [
+                'monitorNames' => $monitors->map(fn ($u) => $u->first_name)->join(", "),
+                "inspectorName" => $inspector->name,
+                "signature_decision" => $mailContent['signature_decision'],
+                "signature_comment" => $mailContent['signature_comment'],
+            ];
             $param += $this->getMeta($tableName, $signableId);
-            // $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
-            // $params += $this->getMeta($data);
             $mail = new MailSignOffSubmitted($param);
             $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
             $mail->subject($subject);

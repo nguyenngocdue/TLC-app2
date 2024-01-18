@@ -7,10 +7,12 @@ Hi **{{$monitorNames}}**,
 + Discipline: **{{$disciplineName}}**  
 + Checksheet: **{{$checksheetName}}**  
 
-*You don't need to sign off on the above request anymore.*
-{{-- <x-mail::button :url="$url">
-Sign off now
-</x-mail::button> --}}
+<x-mail::button :url="$url">
+Open the Check Sheet
+</x-mail::button>
+
++ Inspector Decision: <x-mail::status>{{$signature_decision}}</x-mail::status>
++ Inspector Comment: **{{$signature_comment ?? "(none)"}}**  
 
 Thanks,<br>
 {{ config('app.name') }}
