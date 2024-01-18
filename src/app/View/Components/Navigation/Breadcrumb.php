@@ -154,10 +154,13 @@ class Breadcrumb extends Component
         if ($type === 'esg_sheets') {
             $type = 'esg_master_sheets';
         }
+        // dump(CurrentRoute::getName());
+        if (in_array(CurrentRoute::getName(), ['me.index', 'profile.index'])) return;
         $this->links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
     }
     private function showButtonAddNew($type)
     {
+        if (in_array(CurrentRoute::getName(), ['me.index', 'profile.index'])) return;
         $disallowedDirectCreationChecker = DisallowedDirectCreationChecker::check($type);
         if (!$disallowedDirectCreationChecker) {
             $this->links[] = ['href' => route($type . '.create'), 'title' => 'Add New', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];

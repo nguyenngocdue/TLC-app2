@@ -84,7 +84,7 @@
                     $firstName = $user->first_name;
                     $displayName = $user->name ;
                 @endphp
-            <span class="flex items-center gap-1 mt-1 justify-center" title="{{$displayName}} (#{{$uid}})">
+            <span class="flex items-center gap-1 mt-1 justify-center" title="Uploaded by {{$displayName}} (#{{$uid}})">
                 <img class="w-6 h-6 rounded-full" src="{{$src}}" />
                 {{$firstName}} 
             </span>
