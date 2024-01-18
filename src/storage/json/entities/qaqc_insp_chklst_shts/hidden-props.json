@@ -45,7 +45,7 @@
         "in_progress": "true",
         "not_applicable": "true",
         "reviewed": "true",
-        "inspected": "true",
+        "inspected": "",
         "pending_audit": "true",
         "audited": "true"
     },

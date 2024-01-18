@@ -95,7 +95,7 @@
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
         "column_type": "oracy_prop",
-        "label": "Designated Approvers",
+        "label": "Monitors",
         "control": "dropdown_multi",
         "align": "",
         "col_span": "",

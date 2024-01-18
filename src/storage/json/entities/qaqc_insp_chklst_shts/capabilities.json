@@ -172,7 +172,7 @@
         "not_applicable": "true",
         "reviewed": "true",
         "inspected": "true",
-        "pending_audit": "",
+        "pending_audit": "true",
         "audited": ""
     },
     "des_manager": {

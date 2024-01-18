@@ -17,7 +17,7 @@
     "inspected": {
         "name": "inspected",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "getMonitors1()"
     },
     "pending_audit": {
         "name": "pending_audit",
