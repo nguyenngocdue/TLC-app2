@@ -44,12 +44,24 @@
                 {{-- This is to show the thin layer which has the filename and trash button --}}
                 <div class="invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]">
                     @php
-                        $onClick = "openGallery(".$attachment['id'].")";
-                        if(!in_array($extension,\App\Utils\Constant::EXTENSIONS_OF_FILE_GALLERY)) {
-                            $onClick = '';
-                            $url = $path.$attachment['url_media'];
-                            $href = "href='$url'";
-                        };
+                        switch($openType){
+                            case 'gallery':
+                                $onClick = "openGallery(".$attachment['id'].")";
+                                if(!in_array($extension,\App\Utils\Constant::EXTENSIONS_OF_FILE_GALLERY)) {
+                                    $onClick = '';
+                                    $url = $path.$attachment['url_media'];
+                                    $href = "href='$url'";
+                                };
+                                break;
+                            case '_blank':
+                                    $onClick = '';
+                                    $url = $path.$attachment['url_media'];
+                                    $href = "href='$url'";
+                                break;
+                            default:
+                                dump("OpenType [$openType]");
+                                break;
+                        }
                     @endphp
                     <a title="{{$attachment['filename']}}" onclick={!!$onClick!!} 
                     {!! $onClick ? "" : $href !!}  

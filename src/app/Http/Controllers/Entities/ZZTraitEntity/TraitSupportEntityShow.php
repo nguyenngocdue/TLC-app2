@@ -193,7 +193,7 @@ trait TraitSupportEntityShow
                 'value' => $items->toArray()
             ]);
         } else {
-            $strCenter = Blade::render('<x-renderer.attachment2 name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />', [
+            $strCenter = Blade::render('<x-renderer.attachment2 openType="_blank" name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />', [
                 'value' => $items->toArray()
             ]);
         }
