@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 
 class SignOffRecallListener implements ShouldQueue
 {
+    use TraitSignOffListener;
     /**
      * Create the event listener.
      *
@@ -24,33 +25,6 @@ class SignOffRecallListener implements ShouldQueue
     public function __construct()
     {
         //
-    }
-
-    private function getMeta($data)
-    {
-        // Log::info($data);
-        $tableName = $data['tableName'];
-        $signableId = $data['signableId'];
-
-        $modelPath = Str::modelPathFrom($tableName);
-        $sheet = $modelPath::find($signableId);
-        $chklst = $sheet->getChklst;
-        // Log::info($chklst);
-        $prodOrder = $chklst->getProdOrder;
-        $subProject = $chklst->getSubProject;
-        $project = $subProject->getProject;
-        // Log::info($prodOrder);
-
-        $result = [
-            "projectName" => $project->name,
-            "subProjectName" => $subProject->name,
-            "moduleName" => $prodOrder->production_name . " (" . $prodOrder->name . ")",
-            "disciplineName" => $sheet->getProdDiscipline->name,
-            "checksheetName" => $sheet->name,
-            'url' => route($tableName . ".edit", $signableId),
-        ];
-        // Log::info($result);
-        return $result;
     }
 
     public function handle(SignOffRecallEvent $event)
@@ -68,7 +42,7 @@ class SignOffRecallListener implements ShouldQueue
             $receiver = User::find($sig->user_id);
             try {
                 $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
-                $params += $this->getMeta($data);
+                $params += $this->getMeta($data['tableName'], $data['signableId']);
                 $mail = new MailSignOffRecall($params);
                 $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
                 $mail->subject($subject);

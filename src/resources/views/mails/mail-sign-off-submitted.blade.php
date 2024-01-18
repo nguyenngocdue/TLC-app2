@@ -1,6 +1,6 @@
 <x-mail::message>
-Hi **M1, M2, M3**,  
-**Inspector 1 ** has made a sign-off decision:
+Hi **{{$monitorNames}}**,  
+**{{$inspectorName}}** has made a sign-off decision:
 
 + Project: **{{$projectName}}/{{$subProjectName}}**  
 + Module: **{{$moduleName}}** 

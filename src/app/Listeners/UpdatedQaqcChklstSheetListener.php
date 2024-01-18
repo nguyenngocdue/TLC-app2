@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\SignOffSubmittedEvent;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Events\WssToastrMessageChannel;
@@ -69,41 +70,6 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //No need to queue
         }
     }
 
-    private function sendNotificationMail($mailContent, $signableId)
-    {
-        // Log::info($mailContent);
-        try {
-            $inspector = User::find($mailContent['user_id']);
-            $monitors = User::whereIn('id', $mailContent['monitors1'])->get();
-            // $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
-            // $params += $this->getMeta($data);
-            $mail = new MailSignOffSubmitted([
-                'projectName' => 'projectName',
-                'subProjectName' => 'subProjectName',
-                'moduleName' => 'moduleName',
-                'disciplineName' => 'disciplineName',
-                'checksheetName' => 'checksheetName',
-            ]);
-            $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
-            $mail->subject($subject);
-            Mail::to($monitors)
-                ->cc($inspector)
-                ->bcc(env('MAIL_ARCHIVE_BCC'))
-                ->send($mail);
-        } catch (\Exception $e) {
-            Log::error($e->getMessage() . $e->getFile() . $e->getLine());
-            // $msg = "Mail to <b>{$receiver->email}</b> failed.<br/>";
-            // $msg .= $e->getMessage();
-            // $msg .= $e->getFile() . " (Line: " . $e->getLine() . ")";
-            // broadcast(new WssToastrMessageChannel([
-            //     'wsClientId' => $data['wsClientId'],
-            //     'type' => 'error',
-            //     'message' => $msg,
-            // ]));
-            // return $msg;
-        }
-    }
-
     public function handle(UpdatedQaqcChklstSheetEvent $event)
     {
         // if (CurrentRoute::getTypeSingular() !== 'qaqc_insp_chklst_sht') return false;
@@ -114,8 +80,8 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //No need to queue
 
         $this->updateProgress($sheet);
         $this->updateStatusAccordingToSignOff($sheet, $nominatedListFn);
-        if ($mailContent) $this->sendNotificationMail($mailContent, $sheetId);
 
+        if ($mailContent) event(new SignOffSubmittedEvent($mailContent, $sheetId, 'qaqc_insp_chklst_shts'));
 
         // Log::info("Elaborate updated event to qaqc_insp_chklst...");
         event(new UpdatedQaqcChklstEvent($sheet, $nominatedListFn . "_list"));

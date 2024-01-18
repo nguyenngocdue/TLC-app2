@@ -6,6 +6,7 @@ use App\Events\CreatedDocumentEvent2;
 use App\Events\OpenedDocumentEvent;
 use App\Events\SignOffRecallEvent;
 use App\Events\SignOffRequestEvent;
+use App\Events\SignOffSubmittedEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdatedEsgSheetEvent;
 use App\Events\UpdatedProdSequenceEvent;
@@ -17,6 +18,7 @@ use App\Listeners\CreatedDocumentListener2;
 use App\Listeners\OpenedDocumentListener;
 use App\Listeners\SignOffRecallListener;
 use App\Listeners\SignOffRequestListener;
+use App\Listeners\SignOffSubmittedListener;
 use App\Listeners\UpdatedDocumentListener2;
 use App\Listeners\UpdatedEsgSheetListener;
 use App\Listeners\UpdatedProdSequenceListener;
@@ -59,6 +61,7 @@ class EventServiceProvider extends ServiceProvider
         //Specific actions
         SignOffRequestEvent::class => [SignOffRequestListener::class],
         SignOffRecallEvent::class => [SignOffRecallListener::class],
+        SignOffSubmittedEvent::class => [SignOffSubmittedListener::class],
     ];
 
     /**
