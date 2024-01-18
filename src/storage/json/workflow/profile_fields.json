@@ -119,11 +119,13 @@
     },
     "_getProdRoutingsOfExternalInspector()": {
         "name": "_getProdRoutingsOfExternalInspector()",
+        "profile_readonly": "true",
         "profile_hidden": "true",
         "me_hidden": "true"
     },
     "_getQaqcInspTmplsOfExternalInspector()": {
         "name": "_getQaqcInspTmplsOfExternalInspector()",
+        "profile_readonly": "true",
         "profile_hidden": "true",
         "me_hidden": "true"
     },
@@ -140,11 +142,13 @@
     },
     "_getSubProjectsOfExternalInspector()": {
         "name": "_getSubProjectsOfExternalInspector()",
+        "profile_readonly": "true",
         "profile_hidden": "true",
         "me_hidden": "true"
     },
     "_getSubProjectsOfProjectClient()": {
         "name": "_getSubProjectsOfProjectClient()",
+        "profile_readonly": "true",
         "profile_hidden": "true",
         "me_hidden": "true"
     },
