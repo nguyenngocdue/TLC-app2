@@ -1,16 +1,18 @@
 <div class="border px-4 py-2">
-{{-- @dump($inNominatedList) --}}
+{{-- @dump($isInNominatedList) --}}
 {{-- @dump($needToRecall) --}}
     <div component="signature-group2a-loading" class="signature-group2a-loading">Loading wsClient...</div>
     <div component="signature-group2a" class="hidden signature-group2a">
+        @if(!$isExternalInspector)
         <x-controls.signature.signature-group2a-need-to-recall 
-            inNominatedList="{{$inNominatedList}}"
+            isInNominatedList="{{$isInNominatedList}}"
             tableName="{{$tableName}}"
             signableId="{{$signableId}}"
 
             :needToRecall="$needToRecall"
             :needToRecallSignatures="$needToRecallSignatures"
             />
+        @endif
 
         @foreach($signatures as $index => $user)
         @php
@@ -62,7 +64,7 @@
                         signableId="{{$signableId}}"
                         category="{{$category}}"
                         sentDate="{{$sentDate}}"
-                        inNominatedList="{{$inNominatedList}}"
+                        isInNominatedList="{{$isInNominatedList}}"
                     />
                 @endif
             </div>
@@ -70,17 +72,18 @@
         </div>
         @endforeach
         
-        <x-controls.signature.signature-group2a-request-recall-many
-            :needToRequest="$needToRequest"
-            :alreadyRequested="$alreadyRequested"
-            :nominatedList="$nominatedList"
-            :alreadyRequestedSignatures="$alreadyRequestedSignatures"
-            tableName="{{$tableName}}"
-            signableId="{{$signableId}}"
-            category="{{$category}}"
-            inNominatedList="{{$inNominatedList}}"
-            
-        />
+        @if(!$isExternalInspector)
+            <x-controls.signature.signature-group2a-request-recall-many
+                :needToRequest="$needToRequest"
+                :alreadyRequested="$alreadyRequested"
+                :nominatedList="$nominatedList"
+                :alreadyRequestedSignatures="$alreadyRequestedSignatures"
+                tableName="{{$tableName}}"
+                signableId="{{$signableId}}"
+                category="{{$category}}"
+                isInNominatedList="{{$isInNominatedList}}"
+            />
+        @endif
     </div>
 </div>
 

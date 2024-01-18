@@ -1,4 +1,7 @@
-@if(!$inNominatedList && count($needToRecall)>0)
+{{-- {{$isInNominatedList}} --}}
+{{-- {{count($needToRecall)}} --}}
+{{-- If not in the norminated list (probably an DC admin) --}}
+@if(!$isInNominatedList && count($needToRecall)>0)
 <div class="bg-red-600 text-white  rounded p-2">
     @php $title_need_to_recall = $needToRecall->join(", "); @endphp
     <div class="font-bold flex items-center gap-2" title="You have sent request but you have removed them from norminated list.">

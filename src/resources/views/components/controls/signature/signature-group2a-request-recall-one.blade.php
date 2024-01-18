@@ -1,6 +1,6 @@
 @if($value =='' && $signatureId)            
     <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
-    @if(!$inNominatedList)
+    @if(!$isInNominatedList)
         <x-renderer.button 
             id="btnRecall_{{$signatureUserId}}"
             type="warning"
