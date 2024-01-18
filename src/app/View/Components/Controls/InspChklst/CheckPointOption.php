@@ -46,9 +46,13 @@ class CheckPointOption extends Component
                 static::$singletonOptions = $modelPath::where($keyIdModelControlGroup, static::$singletonControlGroup->id)->get();
             }
             $options = static::$singletonOptions->pluck('name', 'id',);
+            $isExtinsp = CurrentUser::get()->isExternalInspector();
+            if ($isExtinsp) unset($options[4]); //Remove On Hold
         } else {
             return "CONTROL GROUP ID IS NULL";
         }
+
+
 
         $class = [
             1 => 'peer-checked:bg-green-300 peer-checked:text-green-700',
