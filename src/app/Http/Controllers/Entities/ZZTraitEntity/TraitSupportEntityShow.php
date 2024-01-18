@@ -57,7 +57,7 @@ trait TraitSupportEntityShow
                     $valueSignature = htmlspecialchars($valueSignature);
                     $str = Blade::render(
                         "<div class='flex pb-2 justify-between items-center'>
-                            <x-controls.signature.signature2a name='signature' value='$valueSignature' readOnly=1 />                            
+                            <x-controls.signature.signature2a name='signature{$item->id}' value='$valueSignature' readOnly=1 />                            
                         </div>",
                     );
 
@@ -124,7 +124,9 @@ trait TraitSupportEntityShow
     }
     private function createInspectorAndDatetime($item)
     {
-        $user = User::find($item->inspector_id);
+        $uid = $item->inspector_id ?? $item->user_id;
+        // dump($uid);
+        $user = User::find($uid);
         $name = $user ? $user->name : "";
         $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
         $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
