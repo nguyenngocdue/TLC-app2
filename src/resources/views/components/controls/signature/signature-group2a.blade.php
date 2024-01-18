@@ -1,36 +1,16 @@
-
 <div class="border px-4 py-2">
 {{-- @dump($inNominatedList) --}}
 {{-- @dump($needToRecall) --}}
     <div component="signature-group2a-loading" class="signature-group2a-loading">Loading wsClient...</div>
     <div component="signature-group2a" class="hidden signature-group2a">
-        @if(!$inNominatedList && count($needToRecall)>0)
-        <div class="bg-red-600 text-white  rounded p-2">
-                @php
-                    
-                    $title_need_to_recall = $needToRecall->join(", ");                
-                @endphp
-                <div class="font-bold flex items-center gap-2" title="You have sent request but you have removed them from norminated list.">
-                    Need to recall: 
-                    <x-renderer.button 
-                    type="warning"
-                    title='{!! "Recall:\n".$title_need_to_recall !!}'
-                    onClick="this.disabled=true;recallSignOff('{{$tableName}}', {{$signableId}}, [{{$needToRecall->map(fn($i, $uid)=>$uid)->join(',')}}], [{{$needToRecallSignatures->join(',')}}])"
-                    >Recall {{count($needToRecall)}} Request(s).</x-renderer.button>
-                </div>
-                <div class="flex">
-                    @foreach($needToRecall as $uid => $a)
-                    @php
-                        $u = App\Models\User::find($uid);                    
-                    @endphp
-                    <div class="flex items-center gap-2 p-1"> 
-                        <img class="w-10 h-10 rounded-full" src="{{$u->getAvatarThumbnailUrl()}}" />
-                        {{$u->name}}
-                    </div>
-                    @endforeach
-                </div>
-        </div>
-        @endif
+        <x-controls.signature.signature-group2a-need-to-recall 
+            inNominatedList="{{$inNominatedList}}"
+            tableName="{{$tableName}}"
+            signableId="{{$signableId}}"
+
+            :needToRecall="$needToRecall"
+            :needToRecallSignatures="$needToRecallSignatures"
+            />
 
         @foreach($signatures as $index => $user)
         @php
@@ -61,7 +41,6 @@
                         debug="{{$debug ? 1 : 0}}"
                         readOnly="{{($readOnly || $otherSignature) ? 1 : 0}}"
                         title="#{{$signatureId}}"
-                        {{-- signatureUserId="{{$signatureUserId}}" --}}
                         
                         showCommentBox=1                    
                         commentName="signatures[{{$category}}_{{$index}}][signature_comment]"
@@ -73,78 +52,35 @@
                         />
                     </div>
                 @else
-                    @if($value =='' && $signatureId)            
-                        <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
-                        @if(!$inNominatedList)
-                            <x-renderer.button 
-                                id="btnRecall_{{$signatureUserId}}"
-                                type="warning"
-                                onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$signatureUserId}}], [{{$signatureId}}])"
-                                >
-                                Recall this request
-                            </x-renderer.button>
-                        @endif
-                    @else
-                        @if($isExternalInspector)
-                            Request not yet sent
-                        @else
-                            <x-renderer.button 
-                                id="btnRequest_{{$signatureUserId}}" 
-                                type="secondary" 
-                                class="my-2" 
-                                disabled="{{$readOnly}}"
-                                onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$signatureUserId}}])">
-                                Request to Sign Off
-                            </x-renderer.button>
-                        @endif
-                    @endif
+                    <x-controls.signature.signature-group2a-request-recall-one
+                        value="{{$value}}"
+                        signatureId="{{$signatureId}}"
+                        isExternalInspector="{{$isExternalInspector}}"
+                        signatureUserId="{{$signatureUserId}}"
+                        readOnly="{{$readOnly}}"
+                        tableName="{{$tableName}}"
+                        signableId="{{$signableId}}"
+                        category="{{$category}}"
+                        sentDate="{{$sentDate}}"
+                        inNominatedList="{{$inNominatedList}}"
+                    />
                 @endif
             </div>
             <x-renderer.avatar-user size="xlarge" uid="{{$user->id}}" flipped=1 content=""/>
         </div>
         @endforeach
         
-        @php
-            $title_email_to = $needToRequest->join(", ");
-            $title_already_signed = $alreadyRequested->join(", ");
-        @endphp
-            @if(count($nominatedList) > 0)            
-            <div class="text-right">
-                @if(count($needToRequest) > 0)
-                    <x-renderer.button 
-                        id="btnRequest_NeedToRequest" 
-                        type="secondary" 
-                        onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$needToRequest->map(fn($i, $id)=>$id)->join(',')}}])"
-                        title='{!! "Email to:\n".$title_email_to !!}'
-                    >Send Request to {{count($needToRequest)}} Participant(s).</x-renderer.button>
-                    @if(!$inNominatedList && count($alreadyRequested) > 0)
-                    <x-renderer.button 
-                        id="btnRecall_NeedToRecall" 
-                        type="warning"
-                        title='{!! "Recall:\n".$title_already_signed !!}'
-                        onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$alreadyRequested->map(fn($i, $id) => $id)->join(',')}}], [{{$alreadyRequestedSignatures->join(',')}}])"
-                    >Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
-                    @endif
-                @else 
-                {{-- <x-renderer.button type="secondary" disabled>
-                    All participants are Requested.
-                </x-renderer.button> --}}
-                    @if(!$inNominatedList)
-                        <x-renderer.button 
-                            id="btnRecallAllRequest"
-                            type="warning"
-                            title='{!! "Recall:\n".$title_already_signed !!}'
-                            onClick="this.disabled=true; recallSignOff('{{$tableName}}', {{$signableId}}, [{{$alreadyRequested->map(fn($i, $id) => $id)->join(',')}}], [{{$alreadyRequestedSignatures->join(',')}}])"
-                            >
-                        Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
-                    @endif
-                @endif
-            </div>
-            @else
-            <div class="text-center text-gray-400">
-                There is no nominated people.
-            </div>
-            @endif
+        <x-controls.signature.signature-group2a-request-recall-many
+            :needToRequest="$needToRequest"
+            :alreadyRequested="$alreadyRequested"
+            :nominatedList="$nominatedList"
+            :alreadyRequestedSignatures="$alreadyRequestedSignatures"
+            tableName="{{$tableName}}"
+            signableId="{{$signableId}}"
+            category="{{$category}}"
+            inNominatedList="{{$inNominatedList}}"
+            
+        />
     </div>
 </div>
 
