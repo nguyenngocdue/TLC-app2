@@ -69,12 +69,18 @@ class SignatureGroup2a extends Component
         // dump($signed);
         $needToRequest = $all->filter(fn ($email) => !$signed->contains($email));
         // dump($needToRequest);
-        $alreadyRequested = $all->filter(fn ($email) => $signed->contains($email));
+
+        $notYetSigned = $signatureList->filter(fn ($signature) => is_null($signature->value))->pluck('getUser.email', 'user_id');
+        // dump($notYetSigned);
+        $notYetSignedSignatures = $notYetSigned->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);
+        // dump($notYetSignedSignatures);
+        // $alreadyRequested = $all->filter(fn ($email) => $signed->contains($email));
         // dump($alreadyRequested);
+        // $alreadyRequestedSignatures = $alreadyRequested->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);
+        // dump($alreadyRequestedSignatures);
+
         $needToRecall = $signed->filter(fn ($email) => (!$all->contains($email)) && $email);
         // dump($needToRecall);
-        $alreadyRequestedSignatures = $alreadyRequested->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);
-        // dump($alreadyRequestedSignatures);
         $needToRecallSignatures = $needToRecall->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);
         // dump($needToRecallSignatures);
 
@@ -86,10 +92,15 @@ class SignatureGroup2a extends Component
             'signatures' => $signatures,
             'nominatedList' => $nominatedList,
             'needToRequest' => $needToRequest,
-            'alreadyRequested' => $alreadyRequested,
+
+            'notYetSigned' => $notYetSigned,
+            'notYetSignedSignatures' => $notYetSignedSignatures,
+            // 'alreadyRequested' => $alreadyRequested,
+            // 'alreadyRequestedSignatures' => $alreadyRequestedSignatures,
+
             'needToRecall' => $needToRecall,
-            'alreadyRequestedSignatures' => $alreadyRequestedSignatures,
             'needToRecallSignatures' => $needToRecallSignatures,
+
             'isInNominatedList' => $nominatedList->contains('id', $cuid),
 
             'debug' => $this->debug,

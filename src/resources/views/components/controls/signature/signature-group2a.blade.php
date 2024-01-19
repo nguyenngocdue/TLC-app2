@@ -77,9 +77,11 @@
         @if(!$isExternalInspector && !$readOnly)
             <x-controls.signature.signature-group2a-request-recall-many
                 :needToRequest="$needToRequest"
-                :alreadyRequested="$alreadyRequested"
                 :nominatedList="$nominatedList"
-                :alreadyRequestedSignatures="$alreadyRequestedSignatures"
+                
+                :notYetSigned="$notYetSigned"
+                :notYetSignedSignatures="$notYetSignedSignatures"
+
                 tableName="{{$tableName}}"
                 signableId="{{$signableId}}"
                 category="{{$category}}"
