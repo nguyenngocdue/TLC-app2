@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Events\CreatedDocumentEvent2;
 use App\Events\OpenedDocumentEvent;
 use App\Events\SignOffRecallEvent;
+use App\Events\SignOffRemindEvent;
 use App\Events\SignOffRequestEvent;
 use App\Events\SignOffSubmittedEvent;
 use App\Events\UpdatedDocumentEvent;
@@ -16,6 +17,7 @@ use App\Events\UserSignedInEvent;
 //------------
 use App\Listeners\CreatedDocumentListener2;
 use App\Listeners\OpenedDocumentListener;
+use App\Listeners\SignOffRemindListener;
 use App\Listeners\SignOffRecallListener;
 use App\Listeners\SignOffRequestListener;
 use App\Listeners\SignOffSubmittedListener;
@@ -62,6 +64,9 @@ class EventServiceProvider extends ServiceProvider
         SignOffRequestEvent::class => [SignOffRequestListener::class],
         SignOffRecallEvent::class => [SignOffRecallListener::class],
         SignOffSubmittedEvent::class => [SignOffSubmittedListener::class],
+
+        //Schedule
+        SignOffRemindEvent::class => [SignOffRemindListener::class],
     ];
 
     /**

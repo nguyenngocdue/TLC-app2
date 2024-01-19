@@ -17,7 +17,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')->hourly()->appendOutputTo("storage/logs/schedule.log");
+        $schedule
+            ->call(fn () => event(new \App\Events\SignOffRemindEvent()))
+            ->everyMinute()
+            ->appendOutputTo("storage/logs/schedule.log")
+            ->description("SignOffRemindEvent emitted from Schedule.");
     }
 
     /**
