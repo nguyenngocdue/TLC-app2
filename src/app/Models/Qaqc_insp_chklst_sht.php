@@ -37,6 +37,16 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getAssignee1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getAssignee2()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function signature_qaqc_chklst_3rd_party()
     {
         $p = static::$eloquentParams[__FUNCTION__];

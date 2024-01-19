@@ -133,7 +133,7 @@
         "control_name": "signature_qaqc_chklst_3rd_party_list()",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
+        "renderer_view_all_unit": "person",
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown_multi",
