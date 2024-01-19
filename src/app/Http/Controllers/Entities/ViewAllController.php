@@ -7,6 +7,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllTable;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\Utils\System\Timer;
 use Illuminate\Http\Request;
@@ -60,6 +61,11 @@ class ViewAllController extends Controller
 
     public function index(Request $request, $trashed = false)
     {
+        if (CurrentUser::get()->isExternalInspector()) {
+            //return "<x-feedback.result type='warning' title='Permission Denied' message='You are not permitted to view this check sheet.<br/>If you believe this is a mistake, please contact our admin.' />";
+            //show User does not have the right permissions #789
+            return abort(403);
+        }
         if ($viewType = $request->input('view_type')) {
             (new UpdateUserSettings())($request);
             switch ($viewType) {

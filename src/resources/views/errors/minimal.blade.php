@@ -36,7 +36,7 @@
                                 break;
                         }
                         $isAdmin = App\Utils\Support\CurrentUser::isAdmin();
-                        $message = $isAdmin ? $exception->getMessage() : 'User does not have the right permissions.';
+                        $message = $isAdmin ? $exception->getMessage() : 'User does not have the right permissions (#789).';
                     }
                     @endphp
                     <antd-results :code="@yield('code')" :message="'{{$message ?? $exception->getMessage()}}'" :url="'{{$url}}'"/>

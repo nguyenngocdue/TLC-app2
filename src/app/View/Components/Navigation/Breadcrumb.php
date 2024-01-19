@@ -151,11 +151,11 @@ class Breadcrumb extends Component
     }
     private function showButtonViewAll($type)
     {
-        if ($type === 'esg_sheets') {
-            $type = 'esg_master_sheets';
-        }
-        // dump(CurrentRoute::getName());
-        if (in_array(CurrentRoute::getName(), ['me.index', 'profile.index'])) return;
+        if ($type === 'esg_sheets') $type = 'esg_master_sheets';
+        $currentRouteName = CurrentRoute::getName();
+        // dump($currentRouteName);
+        if ($type === 'qaqc_insp_chklst_shts') return;
+        if (in_array($currentRouteName, ['me.index', 'profile.index'])) return;
         $this->links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
     }
     private function showButtonAddNew($type)

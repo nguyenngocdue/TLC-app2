@@ -11,27 +11,15 @@
                 onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$needToRequest->map(fn($i, $id)=>$id)->join(',')}}])"
                 title='{!! "Email to:\n".$title_email_to !!}'
             >Send Request to {{count($needToRequest)}} Participant(s).</x-renderer.button>
-            @if(!$isInNominatedList && count($alreadyRequested) > 0)
-            <x-renderer.button 
-                id="btnRecall_NeedToRecall" 
-                type="warning"
-                title='{!! "Recall:\n".$title_already_signed !!}'
-                onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$alreadyRequested->map(fn($i, $id) => $id)->join(',')}}], [{{$alreadyRequestedSignatures->join(',')}}])"
-            >Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
-            @endif
-        @else 
-        {{-- <x-renderer.button type="secondary" disabled>
-            All participants are Requested.
-        </x-renderer.button> --}}
-            @if(!$isInNominatedList)
-                <x-renderer.button 
-                    id="btnRecallAllRequest"
-                    type="warning"
-                    title='{!! "Recall:\n".$title_already_signed !!}'
-                    onClick="this.disabled=true; recallSignOff('{{$tableName}}', {{$signableId}}, [{{$alreadyRequested->map(fn($i, $id) => $id)->join(',')}}], [{{$alreadyRequestedSignatures->join(',')}}])"
-                    >
-                Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
-            @endif
+        @endif
+        
+        @if(!$isInNominatedList && count($alreadyRequested) > 0)
+        <x-renderer.button 
+            id="btnRecall_NeedToRecall" 
+            type="warning"
+            title='{!! "Recall:\n".$title_already_signed !!}'
+            onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$alreadyRequested->map(fn($i, $id) => $id)->join(',')}}], [{{$alreadyRequestedSignatures->join(',')}}])"
+        >Recall {{count($alreadyRequested)}} Request(s).</x-renderer.button>
         @endif
     </div>
 @else

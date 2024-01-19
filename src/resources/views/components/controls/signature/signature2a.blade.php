@@ -46,21 +46,27 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
                         @checked($selected==$decisionId)  
                         @disabled($readOnly)
                         value="{{$decisionId}}"
+                        onclick="$('#actionButton').prop('disabled', false).addClass('bg-purple-700')"
                     />
                     <label for="{{$decisionName}}_{{$decisionId}}" 
                         class="{{$class[$decisionId]}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
                         title="#{{$decisionId}}"
-                        >{{$option}}</label>
+                        {{-- onclick="console.log(222)" --}}
+                        >
+                        {{$option}}
+                    </label>
                 </div>
             @endforeach
         </div>
         {{-- {{$readOnly?'disabled':'no-disabled'}} --}}
         <input 
             type="submit" 
+            id="actionButton"
             name="actionButton" 
             value="SUBMIT" 
-            @disabled($readOnly)
-            class="rounded-xl font-bold bg-purple-700 text-white p-4 cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-200"
+            {{-- @disabled($readOnly) --}}
+            disabled
+            class="rounded-xl font-bold bg-purple-200 text-white p-4 cursor-pointer disabled:cursor-not-allowed 1disabled:bg-purple-200"
         />
         {{-- <x-renderer.button name="actionButton" value="btnSubmitASignature" htmlType="submit" type="primary" class="rounded-xl" disabled="{{$readOnly}}" >SUBMIT</x-renderer.button> --}}
     </div>
