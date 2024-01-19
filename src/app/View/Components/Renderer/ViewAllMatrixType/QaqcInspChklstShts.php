@@ -89,7 +89,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 'align' => 'center',
                 'width' => 40,
                 'prod_discipline_id' => $line->prod_discipline_id,
-                'default_monitors' => ($line->getMonitors1())->pluck('name'),
+                // 'default_monitors' => ($line->getMonitors1())->pluck('name'),
             ];
         }
         // usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
