@@ -78,6 +78,9 @@ class SignatureGroup2a extends Component
         $needToRecallSignatures = $needToRecall->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);
         // dump($needToRecallSignatures);
 
+        $allowed = \App\Utils\Support\Json\SuperWorkflows::isAllowed($this->item->status, $this->type);
+        // echo $allowed ? "ALLOWED" : "403";
+
         $params = [
             'category' => $this->category,
             'signatures' => $signatures,
@@ -97,8 +100,11 @@ class SignatureGroup2a extends Component
 
             'tableName' => $this->type,
             'signableId' => $this->signableId,
-            'readOnly' => $this->readOnly,
+            'readOnly' => $this->readOnly || !$allowed,
         ];
+
+
+
         return view('components.controls.signature.signature-group2a', $params);
     }
 }

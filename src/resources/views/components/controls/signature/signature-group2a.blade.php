@@ -3,7 +3,7 @@
 {{-- @dump($needToRecall) --}}
     <div component="signature-group2a-loading" class="signature-group2a-loading">Loading wsClient...</div>
     <div component="signature-group2a" class="hidden signature-group2a">
-        @if(!$isExternalInspector)
+        @if(!$isExternalInspector && !$readOnly)
         <x-controls.signature.signature-group2a-need-to-recall 
             isInNominatedList="{{$isInNominatedList}}"
             tableName="{{$tableName}}"
@@ -54,25 +54,27 @@
                         />
                     </div>
                 @else
-                    <x-controls.signature.signature-group2a-request-recall-one
-                        value="{{$value}}"
-                        signatureId="{{$signatureId}}"
-                        isExternalInspector="{{$isExternalInspector}}"
-                        signatureUserId="{{$signatureUserId}}"
-                        readOnly="{{$readOnly}}"
-                        tableName="{{$tableName}}"
-                        signableId="{{$signableId}}"
-                        category="{{$category}}"
-                        sentDate="{{$sentDate}}"
-                        isInNominatedList="{{$isInNominatedList}}"
-                    />
+                    @if(!$readOnly)
+                        <x-controls.signature.signature-group2a-request-recall-one
+                            value="{{$value}}"
+                            signatureId="{{$signatureId}}"
+                            isExternalInspector="{{$isExternalInspector}}"
+                            signatureUserId="{{$signatureUserId}}"
+                            readOnly="{{$readOnly}}"
+                            tableName="{{$tableName}}"
+                            signableId="{{$signableId}}"
+                            category="{{$category}}"
+                            sentDate="{{$sentDate}}"
+                            isInNominatedList="{{$isInNominatedList}}"
+                        />
+                    @endif
                 @endif
             </div>
             <x-renderer.avatar-user size="xlarge" uid="{{$user->id}}" flipped=1 content=""/>
         </div>
         @endforeach
         
-        @if(!$isExternalInspector)
+        @if(!$isExternalInspector && !$readOnly)
             <x-controls.signature.signature-group2a-request-recall-many
                 :needToRequest="$needToRequest"
                 :alreadyRequested="$alreadyRequested"
