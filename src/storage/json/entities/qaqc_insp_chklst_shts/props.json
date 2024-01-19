@@ -49,7 +49,7 @@
         "name": "_assignee_1",
         "column_name": "assignee_1",
         "column_type": "bigint unsigned",
-        "label": "Internal Inspector",
+        "label": "Internal Reviewer",
         "control": "dropdown",
         "align": "",
         "col_span": "",

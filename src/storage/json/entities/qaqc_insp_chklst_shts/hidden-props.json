@@ -42,12 +42,12 @@
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
-        "in_progress": "true",
-        "not_applicable": "true",
-        "reviewed": "true",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
         "inspected": "",
-        "pending_audit": "true",
-        "audited": "true"
+        "pending_audit": "",
+        "audited": ""
     },
     "_description": {
         "name": "_description",
