@@ -25,7 +25,7 @@ class Signature extends ModelExtended
 
     public static $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],
-        "signable" => ['morphTo', Comment::class, 'commentable_type', 'commentable_id'],
+        "signable" => ['morphTo', Signature::class, 'signable_type', 'signable_id'],
         "getUser" => ["belongsTo", User::class, "user_id"],
     ];
 
