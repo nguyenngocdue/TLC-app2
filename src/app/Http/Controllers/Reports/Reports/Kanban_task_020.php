@@ -61,7 +61,7 @@ class Kanban_task_020 extends Report_ParentReport2Controller
             LEFT JOIN workplaces wp ON wp.id = us.workplace
             WHERE 1 = 1";
            if (Report::checkValueOfField($valOfParams, 'workplace_id')) $sql .= "\n AND wp.id = {$valOfParams['workplace_id']}";
-           if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND  AND kt.id  = {$valOfParams['kanban_task_name_id']}";
+           if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND  kt.id  = {$valOfParams['kanban_task_name_id']}";
            if (Report::checkValueOfField($valOfParams, 'user_id')) $sql .= "\n AND us.id= {$valOfParams['user_id']}";
            if ($start) $sql .= "\n AND DATE_FORMAT(ktt.start_at, '%Y-%m-%d') >= '$start'";
            if ($end) $sql .= "\n AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '$end' #OR ktt.end_at IS NULL

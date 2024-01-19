@@ -61,7 +61,7 @@ class Kanban_task_010 extends Report_ParentReport2Controller
             LEFT JOIN workplaces wp ON wp.id = us.workplace
             WHERE 1 = 1";
             if (Report::checkValueOfField($valOfParams, 'workplace_id')) $sql .= "\n AND wp.id = {$valOfParams['workplace_id']}";
-            if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND  AND kt.id  = {$valOfParams['kanban_task_name_id']}";
+            if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND kt.id  = {$valOfParams['kanban_task_name_id']}";
             if (Report::checkValueOfField($valOfParams, 'user_id')) $sql .= "\n AND us.id= {$valOfParams['user_id']}";
             if ($start) $sql .= "\n AND DATE_FORMAT(ktt.start_at, '%Y-%m-%d') >= '$start'";
             if ($end) $sql .= "\n AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '$end' #OR ktt.end_at IS NULL
@@ -80,7 +80,7 @@ class Kanban_task_010 extends Report_ParentReport2Controller
             [
                 'title' => 'Employee ID',
                 'dataIndex' => 'employee_id',
-                'width' => 70
+                'width' => 120
             ],
             [
                 'title' => 'Workplace',
@@ -90,27 +90,27 @@ class Kanban_task_010 extends Report_ParentReport2Controller
             [
                 'title' => 'Team',
                 'dataIndex' => 'department_name',
-                'width' => 80
-            ],
-            [
-                'title' => 'Task Group',
-                'dataIndex' => 'kanban_task_group_name',
                 'width' => 200
-            ],
-            [
-                'title' => 'Cluster',
-                'dataIndex' => 'kanban_cluster_name',
-                'width' => 150
             ],
             [
                 'title' => 'Page',
                 'dataIndex' => 'kanban_task_pages_name',
-                'width' => 100
+                'width' => 150
             ],
             [
-                'title' => 'Task Name',
-                'dataIndex' => 'kanban_task_name',
+            'title' => 'Cluster',
+            'dataIndex' => 'kanban_cluster_name',
+                'width' => 150
+            ],
+            [
+            'title' => 'Task Name',
+            'dataIndex' => 'kanban_task_name',
                 'width' => 400
+            ],
+            [
+                'title' => 'Task Group',
+                'dataIndex' => 'kanban_task_group_name',
+                'width' => 250
             ],
             [
                 'title' => 'Start',
@@ -123,26 +123,12 @@ class Kanban_task_010 extends Report_ParentReport2Controller
                 'width' => 140
             ],
             [
-                'title' => 'Excluded <br/>(min)',
-                'dataIndex' => 'excluded_seconds',
-                'width' => 140,
-                'align'=> 'right',
-                'footer' => 'agg_sum',
-            ],
-            [
-                'title' => 'Elapsed <br/>(min)',
+                'title' => 'Elapsed<br/>(min)',
                 'dataIndex' => 'elapsed_seconds',
                 'width' => 140,
                 'align'=> 'right',
                 'footer' => 'agg_sum',
-            ],
-            [
-                'title' => 'Working Time <br/>(min)',
-                'dataIndex' => 'working_minutes',
-                'width' => 140,
-                'align'=> 'right',
-                'footer' => 'agg_sum',
-            ],
+            ]
         ];
     }
 
