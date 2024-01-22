@@ -43,6 +43,7 @@
                         debug="{{$debug ? 1 : 0}}"
                         readOnly="{{($readOnly || $otherSignature) ? 1 : 0}}"
                         title="#{{$signatureId}}"
+                        signatureId="{{$signatureId}}"
                         
                         showCommentBox=1                    
                         commentName="signatures[{{$category}}_{{$index}}][signature_comment]"

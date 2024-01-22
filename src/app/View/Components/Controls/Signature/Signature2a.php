@@ -27,6 +27,7 @@ class Signature2a extends Component
         private $showDecisionBox = false,
         private $decisionName = '',
         private $decisionValue = '',
+        private $signatureId = null,
         // private $signatureUserId = null,
     ) {
         static::$count++;
@@ -59,6 +60,7 @@ class Signature2a extends Component
                 'debug' => $this->debug,
                 'input_or_hidden' => $this->debug ? "text" : "hidden",
                 'title' => $this->title,
+                'signatureId' => $this->signatureId,
 
                 'value' => $this->value,
                 'value_decoded' => $value_decoded,

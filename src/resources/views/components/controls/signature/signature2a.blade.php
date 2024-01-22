@@ -1,7 +1,8 @@
 {{-- https://github.com/szimek/signature_pad --}}
 @php 
 $w=338; $h=138; /* ORI 220 x 90*/ 
-$canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
+$canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
+// dump($signatureId);
 @endphp 
 <div class=" w-[340px]">
     <div title="{{$title}}">Signature here:</div>
@@ -46,7 +47,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
                         @checked($selected==$decisionId)  
                         @disabled($readOnly)
                         value="{{$decisionId}}"
-                        onclick="$('#actionButton').prop('disabled', false).addClass('bg-purple-700')"
+                        onclick="$('#actionButton_{{$signatureId}}').prop('disabled', false).addClass('bg-purple-700')"
                     />
                     <label for="{{$decisionName}}_{{$decisionId}}" 
                         class="{{$class[$decisionId]}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
@@ -61,7 +62,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
         {{-- {{$readOnly?'disabled':'no-disabled'}} --}}
         <input 
             type="submit" 
-            id="actionButton"
+            id="actionButton_{{$signatureId}}"
             name="actionButton" 
             value="SUBMIT" 
             {{-- @disabled($readOnly) --}}
