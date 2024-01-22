@@ -137,13 +137,14 @@ trait TraitSupportEntityShow
             return $renderInspector;
         } else {
             $uid = $item->inspector_id; //?? $item->user_id;
-            // dump($uid);
-            $user = User::find($uid);
-            $name = $user ? $user->name : "";
-            $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
-            $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
-            $inspector = $avatarStr . ' ' . $name . " ";
-            return '<span class="flex gap-1">' . $inspector . $dateTime . "</span>";
+            if ($uid) {
+                $user = User::find($uid);
+                $name = $user ? $user->name : "";
+                $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
+                $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
+                $inspector = $avatarStr . ' ' . $name . " ";
+                return '<span class="flex gap-1">' . $inspector . $dateTime . "</span>";
+            }
         }
     }
     private function createStrHtmlAttachment($item)
