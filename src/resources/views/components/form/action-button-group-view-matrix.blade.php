@@ -13,3 +13,8 @@
 @if(isset($actionBtnList['approveMulti']) && $actionBtnList['approveMulti'])
     <div id="divApproveMulti"></div>
 @endif
+
+
+@if(isset($actionBtnList['sendManyRequest']) && $actionBtnList['sendManyRequest'])
+    <div id="divSendManyRequest"></div>
+@endif

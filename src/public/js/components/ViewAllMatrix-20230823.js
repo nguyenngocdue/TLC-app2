@@ -51,6 +51,62 @@ function intersectionArraysOfArrays(arrays) {
     return result;
 }
 
+const sendManyRequestCache = {}
+const sendManyRequest = (uid, sheetId) => {
+    // console.log(uid, sheetId)
+    const key = `${uid}_${sheetId}`
+    const divCheckId = `divCheck_${uid}_${sheetId}`
+    if(sendManyRequestCache[key] === undefined ) {
+        sendManyRequestCache[key] = true
+        $(`#${divCheckId}`).show()
+    }
+    else {
+        delete sendManyRequestCache[key]
+        $(`#${divCheckId}`).hide()
+    }
+    // console.log(sendManyRequestCache)
+    const total = Object.keys(sendManyRequestCache).length
+    let button = ''
+    if(total > 0){
+        const text = total ? `Send ${total} Sign-Off Request${total>1?'s':''}` : ``
+        button = document.createElement('button')
+        button.classList.add(`rounded`, `bg-blue-600`, `text-white`, `p-2`, `font-semibold`)
+        button.innerHTML=text
+        button.type='button'
+        button.addEventListener('click', ()=>{
+
+            const splitted = Object.keys(sendManyRequestCache).map(key=>key.split("_"))
+            // console.log("Sending ", sendManyRequestCache, splitted  )
+            const result = {}
+            splitted.forEach(line=>{
+                if(result[line[1]] === undefined)  result[line[1]] = []
+                result[line[1]].push(line[0] * 1)
+            })
+            // console.log(result)
+
+            Object.keys(result).forEach(signableId=>{
+                const data = { 
+                    tableName: `qaqc_insp_chklst_shts`,
+                    signableId,
+                    uids: result[signableId],
+                    category: 'signature_qaqc_chklst_3rd_party',
+                    wsClientId,
+                }
+                // console.log(data)
+                $.ajax({
+                    method:'POST',
+                    url: `/api/v1/qaqc/request_to_sign_off`,
+                    data,
+                }).then(res=>{
+                    window.location.reload()
+                })
+            })
+        })
+    }
+    $("#divSendManyRequest").html(button)
+}
+
+
 const determineNextStatusesCache = {}
 const determineNextStatuses = (id, status, value, route) => {
     const div = $("#divApproveMulti")

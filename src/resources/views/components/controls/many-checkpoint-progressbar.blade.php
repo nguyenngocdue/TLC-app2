@@ -47,7 +47,7 @@ $progressData = [
 @once
 <script>
 function updateProgressBar(table01Name){
-    console.log("updateProgressBar", table01Name)    
+    // console.log("updateProgressBar", table01Name)    
     // $("input[name='table01[hse_insp_control_value_id][4135]']:checked").val();
     const all = checkpoint_names[table01Name].length
     const values = {}
@@ -60,7 +60,7 @@ function updateProgressBar(table01Name){
     const percent = {}
     Object.keys(values).map((key) => percent[key]= Math.round( 100 * values[key] / all))
 
-    console.log(values, percent)
+    // console.log(values, percent)
     if(percent[1]){
         $("#progress_yes").html(`<span class='w-full'>Yes<br/>${values[1]}/${all}</span>`).css({width: percent[1] +'%'}).show()
     }else {

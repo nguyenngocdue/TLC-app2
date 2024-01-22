@@ -29,6 +29,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $groupBy = 'name_for_group_by';
     protected $groupByLength = 2;
     protected $allowCreation = true;
+    protected $allowCreationPlaceholder = '';
     protected $tableTrueWidth = false;
     protected $headerTop = null;
     protected $mode = 'status_only';
@@ -269,6 +270,14 @@ abstract class ViewAllTypeMatrixParent extends Component
                             $line[$xId . "_" . $column] = "";
                         }
                     }
+                }
+            } else {
+                foreach ($xAxis as $x) {
+                    if (isset($x['isExtra']) && $x['isExtra']) continue;
+                    $xId = $x['dataIndex'];
+                    $line[$xId] = (object)[
+                        'value' =>  $this->allowCreationPlaceholder,
+                    ];
                 }
             }
             foreach ($xAxis as $x) {
