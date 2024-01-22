@@ -116,6 +116,10 @@ class Prod_sequence_dataSource extends Controller
         $sql = $this->getSql($params);
         if (is_null($sql) || !$sql) return collect();
         $sqlData = DB::select(DB::raw($sql));
+        // sort by order_no
+        uasort($sqlData, function($a, $b) {
+          return $a->order_no - $b->order_no;
+      });
         $collection = collect($sqlData);
         return $collection;
     }
