@@ -9,6 +9,7 @@ use App\Models\User;
 class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
 {
     protected $allowCreation = false;
+    protected $showLegend = false;
 
     public function getMatrixDataSource($xAxis)
     {
@@ -32,7 +33,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
             $avatarSrc = $nominatedUser->getAvatarThumbnailUrl();
             $avatar = "<img class='w-6 h-6 rounded-full' src='$avatarSrc' />";
 
-            $text = 'new';
+            $text = '';
             $color = 'orange';
             if (isset($signaturesIndexed[$nominatedUser->id])) {
                 // $text = "requested";
@@ -53,12 +54,12 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
                     break;
                 case "requested":
                     $color = "blue";
-                    $tooltip = "Request sent to $name";
+                    $tooltip = "Request sent to $name on " . substr($signature->created_at, 0, 10);
                     break;
             }
 
-            $bg = "bg-$color-300 text-$color-700 font-semibold uppercase";
-            $item = "<div class='$bg flex w-32 items-center border1 rounded-full gap-1 p-1 mb-0.5 cursor-help' title='$tooltip'>" . $avatar . $text . "</div>";
+            $bg = "bg-$color-300 text-$color-700 capitalize";
+            $item = "<div class='$bg flex w-32 items-center border1 rounded-full gap-1 p-1 mb-0.5' title='$tooltip'>" . $avatar . $text . "</div>";
             $result->push($item);
         }
         return $result->join("");
@@ -68,12 +69,22 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
     protected function makeStatus($document, $forExcel, $route = null)
     {
         // dd($document);
+        if (is_null($route)) {
+            $route = route($this->type . ".edit", $document->id);
+        }
+
         $signatures = $document->signature_qaqc_chklst_3rd_party ?: collect();
         $nominatedUserIds = $document->{"signature_qaqc_chklst_3rd_party_list()"} ?: collect();
         if (count($nominatedUserIds) == 0) return (object)[];
         $nominatedUsers = $nominatedUserIds->map(fn ($uid) => User::findFromCache($uid));
+        $renderer = $this->renderer($nominatedUsers, $signatures);
+
+        // [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
+
         return (object)[
-            'value' => $this->renderer($nominatedUsers, $signatures),
+            'value' => $renderer,
+            'cell_href' => $route,
+            'cell_class' => "cursor-pointer ",
         ];
     }
 }

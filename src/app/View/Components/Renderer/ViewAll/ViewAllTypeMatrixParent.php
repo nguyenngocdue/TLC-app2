@@ -143,7 +143,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             ];
         }
     }
-    private function getBackgroundColorAndTextColor($document)
+    protected function getBackgroundColorAndTextColor($document)
     {
         $status = $this->statuses[$document->status] ?? null;
         return ['bg-' . $status['bg_color'], 'text-' . $status['text_color']];
@@ -448,6 +448,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'headerTop' => $this->headerTop,
                 'tableTopCenterControl' => $this->tableTopCenterControl,
                 'route' => $this->getRouteAfterSubmit(),
+                'showLegend' => $this->showLegend,
             ],
         );
     }

@@ -23,4 +23,7 @@
             headerTop="{{$headerTop}}"
             />
 </form>
-<x-renderer.legend type="{{$type}}" title="Legend of Status" />
+
+@if($showLegend)
+    <x-renderer.legend type="{{$type}}" title="Legend of Status" />
+@endif
