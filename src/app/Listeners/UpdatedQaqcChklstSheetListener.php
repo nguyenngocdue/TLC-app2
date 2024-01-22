@@ -48,25 +48,29 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //No need to queue
 
     private function updateStatusAccordingToSignOff($sheet, $nominatedListFn)
     {
-        $nominatedList = $sheet->{$nominatedListFn . "_list"}();
-        $signatures = $sheet->{$nominatedListFn}()->get();
-        // Log::info($signatures);
-        // Log::info($signatures->pluck('id'));
-        if (sizeof($signatures) == 0) {
-            // Log::info("No signatures, ...");
-            return;
-        }
+        if ($sheet->status === 'pending_audit') {
+            $nominatedList = $sheet->{$nominatedListFn . "_list"}();
+            $signatures = $sheet->{$nominatedListFn}()->get();
+            // Log::info($signatures);
+            // Log::info($signatures->pluck('id'));
+            if (sizeof($signatures) == 0) {
+                // Log::info("No signatures, ...");
+                return;
+            }
 
-        $signature_decisions = $signatures->pluck('signature_decision');
+            $signature_decisions = $signatures->pluck('signature_decision');
 
-        $allSigned = sizeof($nominatedList) == sizeof($signatures);
-        $allApproved = Arr::allElementsAre($signature_decisions, 'approve');
-        if ($allApproved && $allSigned) {
-            // Log::info("Auto change status of sheet " . $sheet->id . " to audited");
-            $sheet->update(['status' => 'audited']);
-        } else {
-            // Log::info("Do nothing for sheet #" . $sheet->id);
-            // Log::info($signature_decisions);
+            $allSigned = sizeof($nominatedList) == sizeof($signatures);
+            $allApproved = Arr::allElementsAre($signature_decisions, 'approved');
+            // Log::info("All Signed: " . $allSigned);
+            // Log::info("All Approved: " . $allApproved);
+            if ($allApproved && $allSigned) {
+                // Log::info("Auto change status of sheet " . $sheet->id . " to audited");
+                $sheet->update(['status' => 'audited']);
+            } else {
+                // Log::info("Do nothing for sheet #" . $sheet->id);
+                // Log::info($signature_decisions);
+            }
         }
     }
 
