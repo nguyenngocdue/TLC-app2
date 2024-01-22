@@ -55,20 +55,19 @@
                         />
                     </div>
                 @else
-                    @if(!$readOnly)
-                        <x-controls.signature.signature-group2a-request-recall-one
-                            value="{{$value}}"
-                            signatureId="{{$signatureId}}"
-                            isExternalInspector="{{$isExternalInspector}}"
-                            signatureUserId="{{$signatureUserId}}"
-                            readOnly="{{$readOnly}}"
-                            tableName="{{$tableName}}"
-                            signableId="{{$signableId}}"
-                            category="{{$category}}"
-                            sentDate="{{$sentDate}}"
-                            isInNominatedList="{{$isInNominatedList}}"
-                        />
-                    @endif
+                    <x-controls.signature.signature-group2a-request-recall-one
+                        value="{{$value}}"
+                        signatureId="{{$signatureId}}"
+                        isExternalInspector="{{$isExternalInspector}}"
+                        signatureUserId="{{$signatureUserId}}"
+                        readOnly="{{$readOnly}}"
+                        tableName="{{$tableName}}"
+                        signableId="{{$signableId}}"
+                        category="{{$category}}"
+                        sentDate="{{$sentDate}}"
+                        isInNominatedList="{{$isInNominatedList}}"
+                        readOnly="{{$readOnly}}"
+                    />
                 @endif
             </div>
             <x-renderer.avatar-user size="xlarge" uid="{{$user->id}}" flipped=1 content=""/>
