@@ -18,6 +18,7 @@ trait TraitSupportEntityShow
             ],
             [
                 "dataIndex" => "response_type",
+                'title' => "Response",
                 "align" => "center",
                 'width' => 600,
             ],
@@ -26,13 +27,13 @@ trait TraitSupportEntityShow
     private function transformDataSource($dataSource, $entityShtSigs)
     {
         foreach ($dataSource as &$value) {
-            $value['response_type'] = $this->createDataSourceTableRun($value);
+            $value['response_type'] = $this->createDataSource($value, false);
             $value['name_description'] = $this->createDataSourceDescription($value);
             $value['group_description'] = $value->getGroup->name ?? '';
         }
         if ($entityShtSigs) {
             foreach ($entityShtSigs as &$value) {
-                $value['response_type'] = $this->createDataSourceTableRun($value);
+                $value['response_type'] = $this->createDataSource($value, true);
                 $value['name_description'] = $this->createDataSourceDescription($value);
                 $value['group_description'] = 'Third Party Sign-Off';
             }
@@ -44,13 +45,13 @@ trait TraitSupportEntityShow
     private function transFormLine($item)
     {
         $controlGroup = $item->getControlGroup->name ?? null;
+        $controlRender = $item->getControlType->name ?? 'signature';
         $str = '';
         if (!is_null($controlGroup)) {
             $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($item, $controlGroup) . "</tr>";
             $str .= $this->createStrHtmlCorrectiveAction($item);
-            $str = "<table class='w-1/2 text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str  . "</tbody>" . "</table>";
+            $str = "<table class='text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str  . "</tbody>" . "</table>";
         } else {
-            $controlRender = $item->getControlType->name ?? 'signature';
             switch ($controlRender) {
                 case 'signature':
                     $valueSignature = $item->value;
@@ -71,7 +72,7 @@ trait TraitSupportEntityShow
             }
         }
 
-        return $str;
+        return [$str, $controlRender == 'signature'];
     }
 
     function removeOnHold(&$array)
@@ -122,16 +123,28 @@ trait TraitSupportEntityShow
         $longStr =  $str; // $runUpdated;
         return $longStr;
     }
-    private function createInspectorAndDatetime($item)
+    private function createInspectorAndDatetime($item, $isSignature, $isSignatureLine)
     {
-        $uid = $item->inspector_id ?? $item->user_id;
-        // dump($uid);
-        $user = User::find($uid);
-        $name = $user ? $user->name : "";
-        $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
-        $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
-        $runUpdated = '<span class="flex gap-1">' . $avatarStr . ' ' . $name . " " . DateTimeConcern::convertForLoading('picker_date', substr($item->updated_at, 0, 10)) . "</span>";
-        return $runUpdated;
+        $inspector = "";
+        $dateTime = DateTimeConcern::convertForLoading('picker_date', substr($item->updated_at, 0, 10));
+        if ($isSignatureLine || $isSignature) {
+            $inspId = null;
+            if ($isSignatureLine) $inspId = $item->inspector_id;
+            if ($isSignature) $inspId = $item->user_id;
+            // $inspId = $item->user_id || $item->inspector_id;
+            if (is_null($inspId)) return "";
+            $renderInspector = Blade::render("<div class='flex justify-end ml-20'><x-renderer.avatar-user uid='$inspId' content='$dateTime' /></div>");
+            return $renderInspector;
+        } else {
+            $uid = $item->inspector_id; //?? $item->user_id;
+            // dump($uid);
+            $user = User::find($uid);
+            $name = $user ? $user->name : "";
+            $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
+            $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
+            $inspector = $avatarStr . ' ' . $name . " ";
+            return '<span class="flex gap-1">' . $inspector . $dateTime . "</span>";
+        }
     }
     private function createStrHtmlAttachment($item)
     {
@@ -199,13 +212,21 @@ trait TraitSupportEntityShow
         }
         return $strCenter;
     }
-    private function createDataSourceTableRun($value)
+    private function createDataSourceDescription($value)
     {
-        $mainTable = $this->transFormLine($value);
-        $inspector = $this->createInspectorAndDatetime($value);
+        return "<div>
+                    <p>{$value->name}</p>
+                    <i class='text-sm'>{$value->description}</i>
+                </div>";
+    }
+    private function createDataSource($value, $isSignature)
+    {
+        // dump($isSignature);
+        [$mainTable, $isSignatureLine] = $this->transFormLine($value);
+        $inspector = $this->createInspectorAndDatetime($value, $isSignature, $isSignatureLine);
         $attachments = $this->createStrHtmlAttachment($value);
         $comments = $this->createStrHtmlComment($value);
-        return "<div class='flex items-center gap-2' style='width:600px;'> "
+        return "<div class='grid grid-cols-2 gap-2' > "
             . $mainTable
             . $inspector
             . "</div>"
@@ -213,12 +234,5 @@ trait TraitSupportEntityShow
             . $attachments
             . $comments
             . "</div>";
-    }
-    private function createDataSourceDescription($value)
-    {
-        return "<div>
-                    <p>{$value->name}</p>
-                    <i class='text-sm'>{$value->description}</i>
-                </div>";
     }
 }
