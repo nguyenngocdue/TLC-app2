@@ -11,6 +11,8 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
     protected $allowCreation = false;
     protected $allowCreationPlaceholder = "<span class='w-12 block'></span>";
     protected $showLegend = false;
+    protected $headerTop = 40;
+
     protected $actionBtnList = [
         'exportSCV' => false,
         'printTemplate' => false,
