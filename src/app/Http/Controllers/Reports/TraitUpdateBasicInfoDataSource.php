@@ -68,6 +68,12 @@ trait TraitUpdateBasicInfoDataSource
             'ghg_metric_type_name',
             'ghg_metric_type_1_name',
             'ghg_metric_type_2_name',
+
+            // 'kanban_task_bucket_id',
+            // 'kanban_task_bucket_name',
+            // 'kanban_task_cluster_id',
+            // 'kanban_task_cluster_name',
+
         ] + $fieldInputs;
         $attrib = [];
         foreach ($dataSource as $key => &$values) {
