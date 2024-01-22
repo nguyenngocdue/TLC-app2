@@ -19,26 +19,26 @@ $progressData = [
     [
         'id' => 'yes',
         'color' => 'green',
-        'percent' => '1%',
-        'label' => 'Yes',
+        'percent' => '-1%',
+        // 'label' => 'Yes',
     ],
     [
         'id' => 'no',
         'color' => 'pink',
-        'percent' => '1%',
-        'label' => 'No',
+        'percent' => '-1%',
+        // 'label' => 'No',
     ],
     [
         'id' => 'na',
         'color' => 'gray',
-        'percent' => '1%',
-        'label' => 'N/A',
+        'percent' => '-1%',
+        // 'label' => 'N/A',
     ],
     [
         'id' => 'on_hold',
         'color' => 'orange',
-        'percent' => '1%',
-        'label' => 'On Hold',
+        'percent' => '-1%',
+        // 'label' => 'On Hold',
     ],
 ];
 @endphp
