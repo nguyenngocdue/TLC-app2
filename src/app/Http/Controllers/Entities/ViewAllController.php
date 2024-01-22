@@ -25,6 +25,7 @@ class ViewAllController extends Controller
     use TraitViewAllCalendarController;
     use TraitViewAllMatrixController;
     use TraitViewAllMatrixPrintController;
+    use TraitViewAllMatrixSignatureController;
     use TraitViewAllMatrixApproveMultiController;
     use TraitViewAllKanbanController;
 
@@ -88,6 +89,8 @@ class ViewAllController extends Controller
                 return $this->indexViewAllMatrixPrint($request);
             case "matrix_approve_multi":
                 return $this->indexViewAllMatrixApproveMulti($request);
+            case "matrix_signature":
+                return $this->indexViewAllMatrixSignature($request);
             case "kanban":
                 return $this->indexViewAllKanban($request);
             case 'table':

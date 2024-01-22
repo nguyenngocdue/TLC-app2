@@ -15,6 +15,9 @@
         "esg_inductions",
         "exam_sheets"
     ],
+    "apps_have_view_all_matrix_signature": [
+        "qaqc_insp_chklst_shts"
+    ],
     "apps_have_view_all_kanban": [
         "kanban_task_pages"
     ],
