@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
             ->call(fn () => event(new \App\Events\SignOffRemindEvent()))
             ->everyMinute()
             ->appendOutputTo("storage/logs/schedule.log")
-            ->description("SignOffRemindEvent emitted from Schedule.");
+            ->description("EVERY_MINUTE: SignOffRemindEvent emitted from Schedule.");
     }
 
     /**
