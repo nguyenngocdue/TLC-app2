@@ -154,7 +154,8 @@ class Breadcrumb extends Component
         if ($type === 'esg_sheets') $type = 'esg_master_sheets';
         $currentRouteName = CurrentRoute::getName();
         // dump($currentRouteName);
-        if ($type === 'qaqc_insp_chklst_shts') return;
+        $isExternalInspection = CurrentUser::get()->isExternalInspector();
+        if ($type === 'qaqc_insp_chklst_shts' && $isExternalInspection) return;
         if (in_array($currentRouteName, ['me.index', 'profile.index'])) return;
         $this->links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
     }
