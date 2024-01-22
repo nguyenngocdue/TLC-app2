@@ -11,7 +11,7 @@
             
             <x-renderer.button 
                 style="width: {{$line['percent']}}"
-                class="{{$classList}} {{$line['classList'] ?? ''}} bg-{{$line['color']}}-500" 
+                class="{{$classList}} {{$line['classList'] ?? ''}} bg-{{$line['color']}}-300 text-{{$line['color']}}-700"
                 id="progress_{{($line['id'] ?? '')}}" 
                 size="none"
                 title="{{$line['title'] ?? ''}}"
