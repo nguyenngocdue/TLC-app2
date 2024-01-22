@@ -6,11 +6,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
     "_name": {
@@ -20,95 +16,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
-        "audited": ""
-    },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "in_progress": "",
-        "not_applicable": "",
-        "reviewed": "",
-        "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "pending_audit": "",
-        "rejected": "",
-        "approved": "",
-        "audited": ""
-    },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
-        "in_progress": "",
-        "not_applicable": "",
-        "reviewed": "",
-        "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "pending_audit": "",
-        "rejected": "",
-        "approved": "",
-        "audited": ""
-    },
-    "_qaqc_insp_chklst_id": {
-        "name": "_qaqc_insp_chklst_id",
-        "column_name": "qaqc_insp_chklst_id",
-        "in_progress": "",
-        "not_applicable": "",
-        "reviewed": "",
-        "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "pending_audit": "",
-        "rejected": "",
-        "approved": "",
-        "audited": ""
-    },
-    "_qaqc_insp_tmpl_sht_id": {
-        "name": "_qaqc_insp_tmpl_sht_id",
-        "column_name": "qaqc_insp_tmpl_sht_id",
-        "in_progress": "",
-        "not_applicable": "",
-        "reviewed": "",
-        "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "pending_audit": "",
-        "rejected": "",
-        "approved": "",
-        "audited": ""
-    },
-    "_prod_discipline_id": {
-        "name": "_prod_discipline_id",
-        "column_name": "prod_discipline_id",
-        "in_progress": "",
-        "not_applicable": "",
-        "reviewed": "",
-        "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "pending_audit": "",
-        "rejected": "",
-        "approved": "",
-        "audited": ""
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "in_progress": "",
-        "not_applicable": "",
-        "reviewed": "",
-        "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
     "_progress": {
@@ -118,25 +26,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
-        "audited": ""
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
-        "in_progress": "",
-        "not_applicable": "",
-        "reviewed": "",
-        "inspected": "",
-        "passed": "",
-        "pending_approval": "",
-        "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
     "_assignee_1": {
@@ -146,11 +36,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
     "_assignee_2": {
@@ -160,11 +46,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
     "_getMonitors1()": {
@@ -174,25 +56,97 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
-    "_comment_rejected_reason": {
-        "name": "_comment_rejected_reason",
-        "column_name": "comment_rejected_reason",
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
         "in_progress": "",
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
+        "audited": ""
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_qaqc_insp_chklst_id": {
+        "name": "_qaqc_insp_chklst_id",
+        "column_name": "qaqc_insp_chklst_id",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_qaqc_insp_tmpl_sht_id": {
+        "name": "_qaqc_insp_tmpl_sht_id",
+        "column_name": "qaqc_insp_tmpl_sht_id",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_divider1": {
+        "name": "_divider1",
+        "column_name": "divider1",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_h1a": {
+        "name": "_h1a",
+        "column_name": "h1a",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_signature_qaqc_chklst_3rd_party_list()": {
+        "name": "_signature_qaqc_chklst_3rd_party_list()",
+        "column_name": "signature_qaqc_chklst_3rd_party_list()",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "true",
+        "pending_audit": "",
         "audited": ""
     },
     "_signature_qaqc_chklst_3rd_party": {
@@ -202,11 +156,27 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
+        "audited": ""
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "in_progress": "",
+        "not_applicable": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
         "audited": ""
     },
     "_status": {
@@ -216,11 +186,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
     "_created_at": {
@@ -230,11 +196,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
     "_updated_at": {
@@ -244,11 +206,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
     "_deleted_by": {
@@ -258,11 +216,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
     "_deleted_at": {
@@ -272,11 +226,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     },
     "_order_no": {
@@ -286,11 +236,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "passed": "",
-        "pending_approval": "",
         "pending_audit": "",
-        "rejected": "",
-        "approved": "",
         "audited": ""
     }
 }
