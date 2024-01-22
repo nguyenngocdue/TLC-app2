@@ -13,20 +13,22 @@ trait TraitGetOptionPrint
     }
     public function getLayoutPrint($valueOptionPrint, $view = 'props')
     {
-        $value = match ($view) {
-            'props' => ['w-[1400px] min-h-[1000px]', 'w-[1000px] min-h-[1355px]'],
-            'check-list' => ['w-[1414px] min-h-[1000px]', 'w-[1000px] min-h-[1405px]'],
-            'check-sheet' => ['w-[1415px] min-h-[1080px]', 'w-[1000px] min-h-[1360px]'],
-        };
-        switch ($valueOptionPrint) {
-            case 'landscape':
-                $layout = $value[0];
-                break;
-            case 'portrait':
-            default:
-                $layout = $value[1];
-                break;
-        }
-        return $layout;
+        $styles = [
+            "props" => [
+                "landscape" => 'width:1400px; min-height:1000px;', //'w-[1400px] min-h-[1000px]',
+                "portrait" => 'width:1000px; min-height:1355px;', //'w-[1000px] min-h-[1355px]',
+            ],
+            "check-list" => [
+                "landscape" => 'width:1414px; min-height:1000px;', //'w-[1414px] min-h-[1000px]',
+                "portrait" => 'width:1000px; min-height:1405px;', //'w-[1000px] min-h-[1405px]',
+            ],
+            "check-sheet" => [
+                "landscape" => 'width:1415px; min-height:1080px;', //'w-[1415px] min-h-[1080px]',
+                "portrait" => 'width:1000px; min-height:1360px;', //'w-[1000px] min-h-[1360px]',
+            ],
+        ];
+        $valueOptionPrint = $valueOptionPrint ?: 'portrait';
+        // dd("Layout [$view] [$valueOptionPrint]");
+        return $styles[$view][$valueOptionPrint];
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Qaqc_insp_chklst_sht;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Models\Qaqc_insp_chklst_line;
 use App\Models\Qaqc_insp_tmpl_sht;
+use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Formula\All_SlugifyByName;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -16,7 +17,7 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
     // use CloneRunTrait;
     use TraitEntityFormula;
 
-    protected $type;
+    protected $type = 'qaqc_insp_chklst_shts';
     /**
      * The name and signature of the console command.
      *
@@ -47,6 +48,11 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
         $inspChklst = Qaqc_insp_chklst::findOrFail($inspChklstId);
         $inspTmplSht = Qaqc_insp_tmpl_sht::findOrFail($inspTmplShtId);
 
+        $superProps = SuperProps::getFor($this->type);
+        $default_assignee_1 = $superProps['props']['_assignee_1']['default-values']['default_value'];
+        $default_assignee_2 = $superProps['props']['_assignee_2']['default-values']['default_value'];
+        $default_getMonitors1 = $superProps['props']['_getMonitors1()']['default-values']['default_value'];
+
         // $prodOrderId = $this->input->getOption('prodOrderId');
         // $inspTmplId = $this->input->getOption('inspTmplId');
         // $prodOrder = Prod_order::findOrFail($prodOrderId);
@@ -75,9 +81,20 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
                 'progress' => 0,
                 'prod_discipline_id' => $inspTmplSht->prod_discipline_id,
                 'order_no' => $inspTmplSht->order_no,
+
+                'assignee_1' => $default_assignee_1,
+                'assignee_2' => $default_assignee_2,
             ]);
-            $thirdPartyList = $inspTmplSht->getMonitors1();
-            $newSheet->syncCheck("getMonitors1", "App\Models\User", $thirdPartyList->pluck('id')->toArray());
+
+            $defaultMonitors = explode(",", $default_getMonitors1);
+            $defaultMonitors = array_map(fn ($i) => $i * 1, $defaultMonitors);
+            // Log::info($defaultMonitors);
+            $newSheet->syncCheck("getMonitors1", "App\Models\User", $defaultMonitors);
+
+            $thirdPartyList = $inspTmplSht->getDefExtInsp()->pluck('id')->toArray();
+            // Log::info($thirdPartyList);
+            $newSheet->syncCheck("signature_qaqc_chklst_3rd_party_list", "App\Models\User", $thirdPartyList);
+
             $lines = $inspTmplSht->getLines;
             foreach ($lines as $qaqcInspTmplLine) {
                 Qaqc_insp_chklst_line::create([

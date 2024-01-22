@@ -13,7 +13,7 @@
     }
 </style>
 
-<div class="container-sm hidden">
+<div class="container-sm hidden" component="image-gallery">
     <div class="row justify-content-center">
         <div class="col col-md-10">
             <div class="gallery-container" id="animated-thumbnails-gallery">

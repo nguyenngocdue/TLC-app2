@@ -15,6 +15,9 @@
         "esg_inductions",
         "exam_sheets"
     ],
+    "apps_have_view_all_matrix_signature": [
+        "qaqc_insp_chklst_shts"
+    ],
     "apps_have_view_all_kanban": [
         "kanban_task_pages"
     ],
@@ -59,10 +62,11 @@
         "question_answer_renderer",
         "toggle",
         "signature",
-        "signature_multi",
+        "signature_multi",        
         "status",
         "text",
         "textarea",
+        "title",
         "thumbnail",
         "lock_version"
     ],
@@ -91,6 +95,7 @@
         "",
         "many_icons",
         "many_lines",
+        "many_checkpoints",
         "calendar_grid",
         "same_as_view_all"
     ],

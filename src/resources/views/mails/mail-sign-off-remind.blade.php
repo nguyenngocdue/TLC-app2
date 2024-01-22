@@ -1,6 +1,8 @@
 <x-mail::message>
 Hi **{{$receiverName}}**,  
-**{{$requesterName}}** sent you a sign off request:  
+This is an automated reminder sent every 48 hours if you haven't made any decisions regarding a sign-off request.  
+
+**{{$requesterName}}** sent you a sign-off request:  
 
 + Project: **{{$projectName}}/{{$subProjectName}}**  
 + Module: **{{$moduleName}}** 

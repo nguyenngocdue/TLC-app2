@@ -66,6 +66,7 @@
 <h6 class="font-medium leading-tight text-base">Tailwind Elements</h6>
 <!-- FOR BUTTON -->
 <button class="cursor-not-allowed"></button>
+<button class="cursor-help capitalize"></button>
 
 {{-- for table headerTop --}}
 <span class="max-h-[10rem] "></span>

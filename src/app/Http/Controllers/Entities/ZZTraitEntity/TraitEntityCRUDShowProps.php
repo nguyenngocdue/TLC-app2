@@ -21,7 +21,7 @@ trait TraitEntityCRUDShowProps
 			'id' => $id,
 			'classListOptionPrint' => ClassList::DROPDOWN,
 			'valueOptionPrint' => $valueOptionPrint,
-			'layout' => $this->getLayoutPrint($valueOptionPrint),
+			'layout' => $this->getLayoutPrint($valueOptionPrint, 'props'),
 			'modelPath' => $this->modelPath,
 			'trashed' => $trashed,
 			'topTitle' => CurrentRoute::getTitleOf($this->type),

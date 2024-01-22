@@ -126,6 +126,9 @@
                         case "error":
                             toastr.error(e.data.message, e.data.code)
                             break
+                        case "warning":
+                            toastr.warning(e.data.message, e.data.code)
+                            break
                         default:
                         case "info":
                             toastr.info(e.data.message, e.data.code)

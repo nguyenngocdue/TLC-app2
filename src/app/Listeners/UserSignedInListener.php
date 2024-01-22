@@ -9,7 +9,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UserSignedInListener implements ShouldQueue
+class UserSignedInListener //implements ShouldQueue
 {
     /**
      * Create the event listener.

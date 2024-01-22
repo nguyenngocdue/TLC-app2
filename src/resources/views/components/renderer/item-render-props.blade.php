@@ -32,7 +32,7 @@
                                         labelExtra="{{$labelExtra}}"
                                 />
                             </div>
-                            <div class="{{$classColStart}} {{$classColSpanControl}} py-2 text-left">
+                            <div class="{{$classColStart}} {{$classColSpanControl}} pb-2 text-left">
                                 <x-renderer.item-render-control
                                     :item="$item"
                                     :prop="$prop"

@@ -34,13 +34,13 @@ class UpdatedDocumentListener2 implements ShouldQueue
         $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1()";
 
         if (!isset($obj[$bic_assignee]) || is_null($obj[$bic_assignee])) {
-            $msg = $bic_assignee . " is not found in $type (UpdatedDocumentListener2).";
+            $msg = $bic_assignee . " is not found in $type (UpdatedDocumentListener2). Halted.";
             Log::error($msg);
             dump($obj);
             dd($msg); //If in QUEUE, this will never show on screen.
         }
         if (!isset($obj[$bic_monitors]) || is_null($obj[$bic_monitors])) {
-            $msg = $bic_monitors . " is not found in $type (UpdatedDocumentListener2).";
+            $msg = $bic_monitors . " is not found in $type (UpdatedDocumentListener2). Halted.";
             Log::error($msg);
             dump($obj);
             dd($msg); //If in QUEUE, this will never show on screen.

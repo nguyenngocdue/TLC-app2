@@ -60,6 +60,14 @@ class ViewAllTypeSelector extends Component
                 'active' =>  $this->viewType == 'matrix-print-view',
             ];
         };
+        if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixSignature())) {
+            $tabs['signature'] = [
+                'href' => "?view_type=matrix_signature&action=updateViewAllMode&_entity=$tableName",
+                'title' => "Signatures",
+                'icon' => 'fa-duotone fa-signature',
+                'active' =>  $this->viewType == 'matrix-signature-view',
+            ];
+        };
         if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixApproveMulti())) {
             $tabs['approval'] = [
                 'href' => "?view_type=matrix_approve_multi&action=updateViewAllMode&_entity=$tableName",

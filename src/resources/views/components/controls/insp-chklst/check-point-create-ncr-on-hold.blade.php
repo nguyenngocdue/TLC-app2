@@ -1,6 +1,6 @@
 <div component="check-point-create-ncr-on-hold">
     @if($relatedEntities && count($relatedEntities))
-        <div id="divRelatedNCRs">
+        <div>
             Related {{$syntax}}(s):
             @foreach($relatedEntities as $item)
             <li>
@@ -17,9 +17,13 @@
             @endforeach
         </div>
     @endif
+    
+    @if(!$isExternalInspector)
     <div id="divSubOptionNCR_{{$line->id}}" @class(['hidden' => !in_array($line->hse_insp_control_value_id,[2,6])])>
         <x-renderer.button disabled="{{$readOnly}}" target="_blank" type='success' href="{!! $href !!}" class="m-1">{{$nameButton}}</x-renderer.button>
     </div>
+    @endif
+
     <div id="divSubOptionOnHold_{{$line->id}}" class="hidden">
         On Hold comment:<textarea class="border rounded w-full border-gray-300 {{$readOnly?"bg-gray-100":""}}" @readonly($readOnly) name="{{$table01Name}}[value_on_hold][{{$rowIndex}}]">{{$line->value_on_hold}}</textarea>
     </div>

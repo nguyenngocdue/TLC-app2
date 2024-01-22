@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class RequestSignOffEvent
+class SignOffSubmittedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -21,10 +21,12 @@ class RequestSignOffEvent
      * @return void
      */
     public function __construct(
-        public $data,
+        public $mailContent,
+        public $signableId,
+        public $tableName,
     ) {
         //
-        // Log::info($data);
+        // Log::info($data);        
     }
 
     /**

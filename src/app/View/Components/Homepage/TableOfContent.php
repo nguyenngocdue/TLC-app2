@@ -63,15 +63,16 @@ class TableOfContent extends Component
             }
             # code...
         }
+
+        if (in_array($this->type, ["qaqc_insp_chklst_shts", "hse_insp_chklst_shts"])) {
+            $lines = $this->item->getLines;
+            [$groupColumn, $groupNames] = $this->getGroups($lines);
+            $groupLines = $lines->groupBy($groupColumn);
+            return $this->renderTableOfContentCheckList($groupLines, $groupColumn, $groupNames);
+        }
         switch ($typeEditRenderer) {
             case '': //props-renderer
                 return $this->renderTableOfContentProps($results);
-                break;
-            case 'checklist-sheet-renderer':
-                $lines = $this->item->getLines;
-                [$groupColumn, $groupNames] = $this->getGroups($lines);
-                $groupLines = $lines->groupBy($groupColumn);
-                return $this->renderTableOfContentCheckList($groupLines, $groupColumn, $groupNames);
                 break;
             case 'report-renderer':
                 return $this->renderTableOfContentReport($results);
@@ -126,10 +127,9 @@ class TableOfContent extends Component
         $html = '';
         foreach ($groupLines as $key => $value) {
             $value = $groupNames[$key] ?? "Untitled Group";
-            $href = '#' . $groupColumn . '_' . $key . '_' . Str::slug($value);
-            $html .= "<div class='pr-1 py-1 text-sm'>
-            <a href='$href' class='text-blue-500'>$value</a>
-            </div>";
+            $href = '#' . Str::slug($value);
+            // $href = '#' . $groupColumn . '_' . $key . '_' . Str::slug($value);
+            $html .= "<div class='pr-1 py-1 text-sm'><a href='$href' class='text-blue-500'>$value</a></div>";
         }
         return "<div class='overflow-y-auto'>
                     <div class='block ml-2'>

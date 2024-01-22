@@ -30,10 +30,10 @@ class ProjectOverview extends Component
     private function getColumns()
     {
         $progressTitle = [
-            "<div class='p-2 m-1 rounded bg-red-500'></div>Overdue",
-            "<div class='p-2 m-1 rounded bg-yellow-500'></div>In 7 days",
-            "<div class='p-2 m-1 rounded bg-green-500'></div>More than 7 days",
-            "<div class='p-2 m-1 rounded bg-orange-500'></div>Unknown Due Date",
+            "<div class='p-2 m-1 rounded bg-red-300'></div>Overdue",
+            "<div class='p-2 m-1 rounded bg-yellow-300'></div>In 7 days",
+            "<div class='p-2 m-1 rounded bg-green-300'></div>More than 7 days",
+            "<div class='p-2 m-1 rounded bg-orange-300'></div>Unknown Due Date",
         ];
         return [
             ['dataIndex' => "doc_type", 'align' => 'center'],

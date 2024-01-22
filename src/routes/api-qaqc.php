@@ -37,6 +37,7 @@ Route::group([
     // Route::post("remind_sign_off", [RemindSignOffController::class, 'remind']);
     // Route::post("clone_chklst_from_tmpl", [CloneTemplateForQaqcChecklistController::class, 'clone']);
     Route::post("request_to_sign_off", [RequestSignOffController::class, 'requestSignOff']);
+    Route::post("recall_to_sign_off", [RequestSignOffController::class, 'recallSignOff']);
 });
 
 

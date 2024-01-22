@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class UpdateProdRoutingService
 {
-    function update($prod_routing_id)
+    function update($prod_routing_id, $nominatedListFn)
     {
         $allLists = Qaqc_insp_chklst::query()
             ->where("prod_routing_id", $prod_routing_id)
@@ -20,7 +20,7 @@ class UpdateProdRoutingService
         foreach ($allLists as $list) {
             $allSheets = $list->getSheets;
             foreach ($allSheets as $sheet) {
-                $result[] = $sheet->getMonitors1()->pluck('id')->toArray();
+                $result[] = $sheet->{$nominatedListFn}()->pluck('id')->toArray();
             }
         }
 

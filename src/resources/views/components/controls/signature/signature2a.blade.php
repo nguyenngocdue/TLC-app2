@@ -1,10 +1,11 @@
 {{-- https://github.com/szimek/signature_pad --}}
 @php 
 $w=338; $h=138; /* ORI 220 x 90*/ 
-$canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
+$canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
+// dump($signatureId);
 @endphp 
 <div class=" w-[340px]">
-    <div title="{{$title}}">Sign here:</div>
+    <div title="{{$title}}">Signature here:</div>
     <div id="div1{{$name}}" class="relative border rounded h-[140px]">
         @if(!$readOnly)
             <button type="button" id="btnReset1_{{$count}}" class="no-print w-10 h-10 top-1 right-2 absolute">
@@ -21,11 +22,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
     @if($showCommentBox)
         Comment:
         @if($readOnly)
-            @if($commentValue)
-                {!! $commentValue !!}
-            @else
-                <div class="text-gray-500">(no comment)</div>
-            @endif
+            <div class="text-gray-500">{!! $commentValue ?: "(no comment)" !!}</div>
         @else
         <textarea class="border border-gray-200 rounded w-full" rows="3" name="{{$commentName}}" id="{{$commentName}}" placeholder="Comment here...">{!! $commentValue !!}</textarea>
         @endif
@@ -33,15 +30,15 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
     @if($showDecisionBox)
     @php
     $class = [
-            1 => 'peer-checked:bg-green-300 peer-checked:text-green-700',
-            2 => 'peer-checked:bg-pink-300 peer-checked:text-pink-700',
+            'approved' => 'peer-checked:bg-green-300 peer-checked:text-green-700',
+            'rejected' => 'peer-checked:bg-pink-300 peer-checked:text-pink-700',
     ];
     $cursor = $readOnly ? "cursor-not-allowed" : "cursor-pointer";
     $selected = $decisionValue;
     @endphp
     <div class="flex gap-2">
         <div class="grid w-full grid-cols-2 space-x-2 rounded-xl bg-gray-200 p-2">
-            @foreach([1=>'Approve', 2=>'Reject'] as $decisionId => $option)
+            @foreach(['approved'=>'Approve', 'rejected'=>'Reject'] as $decisionId => $option)
                 <div>
                     <input type="radio" 
                         name="{{$decisionName}}" 
@@ -50,16 +47,29 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
                         @checked($selected==$decisionId)  
                         @disabled($readOnly)
                         value="{{$decisionId}}"
+                        onclick="$('#actionButton_{{$signatureId}}').prop('disabled', false).addClass('bg-purple-700')"
                     />
                     <label for="{{$decisionName}}_{{$decisionId}}" 
                         class="{{$class[$decisionId]}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
                         title="#{{$decisionId}}"
-                        >{{$option}}</label>
+                        {{-- onclick="console.log(222)" --}}
+                        >
+                        {{$option}}
+                    </label>
                 </div>
             @endforeach
         </div>
         {{-- {{$readOnly?'disabled':'no-disabled'}} --}}
-        <x-renderer.button htmlType="submit" type="primary" class="rounded-xl" disabled="{{$readOnly}}" >SUBMIT</x-renderer.button>
+        <input 
+            type="submit" 
+            id="actionButton_{{$signatureId}}"
+            name="actionButton" 
+            value="SUBMIT" 
+            {{-- @disabled($readOnly) --}}
+            disabled
+            class="rounded-xl font-bold bg-purple-200 text-white p-4 cursor-pointer disabled:cursor-not-allowed 1disabled:bg-purple-200"
+        />
+        {{-- <x-renderer.button name="actionButton" value="btnSubmitASignature" htmlType="submit" type="primary" class="rounded-xl" disabled="{{$readOnly}}" >SUBMIT</x-renderer.button> --}}
     </div>
     @endif
 </div>
@@ -68,7 +78,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white'
 <script>
 const registerSignature = (id, name, count, readOnly, svgContent) => {
     const canvasId = "canvas_"+id
-    console.log(name, id, canvasId)
+    // console.log(name, id, canvasId)
     const signaturePad = new SignaturePad(getEById(canvasId)[0])
     if(svgContent){
         var svgDataUrl = 'data:image/svg+xml;base64,' + btoa(svgContent);

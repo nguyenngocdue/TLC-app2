@@ -18,7 +18,7 @@
                     <x-print.attachment-simple :dataSource="$value"/>
                 </div>
                 @else
-                    <x-renderer.attachment2 name='attachment' :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />
+                    <x-renderer.attachment2 openType='_blank' name='attachment' :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />
                 @endif
             </div>
             @break

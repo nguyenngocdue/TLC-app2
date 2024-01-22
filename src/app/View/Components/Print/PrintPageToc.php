@@ -4,7 +4,7 @@ namespace App\View\Components\Print;
 
 use Illuminate\View\Component;
 
-class TableOfContents extends Component
+class PrintPageToc extends Component
 {
     /**
      * Create a new component instance.
@@ -30,7 +30,7 @@ class TableOfContents extends Component
             $value['response_type'] = $this->createDataSource($value);
             $tableDataSource[] = $value->toArray();
         }
-        return view('components.print.table-of-contents', [
+        return view('components.print.print-page-toc', [
             'tableColumns' => $this->getTableColumns(),
             'tableDataSource' => $tableDataSource,
             'headerDataSource' => $this->headerDataSource,

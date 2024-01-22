@@ -10,6 +10,11 @@ $tmp = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,
 [$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = $tmp;
 $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
 $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
+
+$formWidth = "md:w-3/4 xl:w-3/4";
+if(in_array($type,["qaqc_insp_chklst_shts","hse_insp_chklst_shts"])){
+$formWidth = "md:w-1/2 xl:w-1/2";
+}
 @endphp
 
 @section('topTitle', $topTitle)
@@ -34,6 +39,16 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
     <x-renderer.test-status-and-accessible :item="$item" type={{$type}} renderId={{$id}} status={{$status}} action={{$action}} :dryRunToken="$dryRunToken" :statuses="$statuses" />
     <x-controls.status-visibility-checker :propsOfMainPage="$propsOfMainPage" :allProps="$allProps" />
     <x-elapse />
+
+    @switch($type) 
+        @case ('qaqc_insp_chklst_shts')  
+            <x-renderer.chklst_header.qaqc_insp_chklst_shts  formWidth="{{$formWidth}}" :item="$item"/>
+        @break
+        @case ('hse_insp_chklst_shts')  
+            <x-renderer.chklst_header.hse_insp_chklst_shts  formWidth="{{$formWidth}}" :item="$item"/>
+        @break
+    @endswitch
+    
     <form class="w-full mb-8 mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
@@ -43,6 +58,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
         
             @case ('')
             <div class="px-2 flex justify-center">
+                {{-- Table of content --}}
                 <div class="fixed left-0">
                     <div class="text-center">
                         <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" data-drawer-body-scrolling="true" data-drawer-backdrop="false">
@@ -50,7 +66,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
                         </button>
                     </div>
                 </div>
-                <x-renderer.item-render-props width='md:w-3/4 xl:w-3/4' id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
+                <x-renderer.item-render-props width='{{$formWidth}}' id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
                 @if(!$hasReadOnly)
                     <div class="fixed right-0">
                         <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" type={{$type}} />
@@ -59,8 +75,8 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
             </div>
             @break
 
-            @case ('checklist-sheet-renderer')
-            <div class="px-2 flex justify-center">
+            {{-- @case ('checklist-sheet-renderer')
+            <div class="px-2 flex justify-center">                
                 <div class="fixed left-0">
                     <div class="text-center">
                         <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" data-drawer-body-scrolling="true" data-drawer-backdrop="false">
@@ -73,7 +89,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
                     <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" type={{$type}} />
                 </div>
             </div>
-            @break
+            @break --}}
 
             {{-- @case ('exam-renderer')
                 <x-controls.exam-sheet.item-renderer-exam-sheet id={{$id}} :item="$item"/>
@@ -110,7 +126,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
 </div>
 @endif
 <x-homepage.left-drawer title="Table of Content">
-{{-- @dd($item) --}}
+{{-- @dump($item) --}}
     <x-homepage.table-of-content :item="$item" type="{{$type}}" />
 </x-homepage.left-drawer>
 <x-renderer.image-gallery :dataSource="$propsOfMainPage" action={{$action}} />

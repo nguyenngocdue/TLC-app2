@@ -29,9 +29,20 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
+        "signature_qaqc_chklst_3rd_party_list()"  => ["getCheckedByField", User::class],
     ];
 
     public function getLines()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getAssignee1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getAssignee2()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -78,6 +89,11 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         return $relation;
     }
     public function getMonitors1()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function signature_qaqc_chklst_3rd_party_list()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

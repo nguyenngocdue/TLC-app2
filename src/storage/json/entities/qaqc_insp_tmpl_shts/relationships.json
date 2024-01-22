@@ -63,10 +63,10 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
+    "_getDefExtInsp()": {
+        "name": "_getDefExtInsp()",
         "relationship": "getCheckedByField",
-        "control_name": "getMonitors1()",
+        "control_name": "getDefExtInsp()",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "person",

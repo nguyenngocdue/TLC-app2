@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Controls\InspChklst;
 
-use App\Models\Qaqc_insp_control_value;
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class CheckPointOption extends Component
@@ -46,9 +46,13 @@ class CheckPointOption extends Component
                 static::$singletonOptions = $modelPath::where($keyIdModelControlGroup, static::$singletonControlGroup->id)->get();
             }
             $options = static::$singletonOptions->pluck('name', 'id',);
+            $isExtinsp = CurrentUser::get()->isExternalInspector();
+            if ($isExtinsp) unset($options[4]); //Remove On Hold
         } else {
             return "CONTROL GROUP ID IS NULL";
         }
+
+
 
         $class = [
             1 => 'peer-checked:bg-green-300 peer-checked:text-green-700',
@@ -72,6 +76,7 @@ class CheckPointOption extends Component
                 'keyIdModelControlValue' => $keyIdModelControlValue ?? '',
                 'type' => $this->type,
                 'readOnly' => $this->readOnly,
+                'cuid' => CurrentUser::id(),
             ]
         );
     }

@@ -59,6 +59,12 @@
         "new": "true",
         "active": "true"
     },
+    "_divider1": {
+        "name": "_divider1",
+        "column_name": "divider1",
+        "new": "true",
+        "active": "true"
+    },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",

@@ -29,6 +29,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $groupBy = 'name_for_group_by';
     protected $groupByLength = 2;
     protected $allowCreation = true;
+    protected $allowCreationPlaceholder = '';
     protected $tableTrueWidth = false;
     protected $headerTop = null;
     protected $mode = 'status_only';
@@ -143,7 +144,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             ];
         }
     }
-    private function getBackgroundColorAndTextColor($document)
+    protected function getBackgroundColorAndTextColor($document)
     {
         $status = $this->statuses[$document->status] ?? null;
         return ['bg-' . $status['bg_color'], 'text-' . $status['text_color']];
@@ -269,6 +270,14 @@ abstract class ViewAllTypeMatrixParent extends Component
                             $line[$xId . "_" . $column] = "";
                         }
                     }
+                }
+            } else {
+                foreach ($xAxis as $x) {
+                    if (isset($x['isExtra']) && $x['isExtra']) continue;
+                    $xId = $x['dataIndex'];
+                    $line[$xId] = (object)[
+                        'value' =>  $this->allowCreationPlaceholder,
+                    ];
                 }
             }
             foreach ($xAxis as $x) {
@@ -448,6 +457,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'headerTop' => $this->headerTop,
                 'tableTopCenterControl' => $this->tableTopCenterControl,
                 'route' => $this->getRouteAfterSubmit(),
+                'showLegend' => $this->showLegend,
             ],
         );
     }

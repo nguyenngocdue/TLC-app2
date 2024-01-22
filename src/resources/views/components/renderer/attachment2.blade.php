@@ -44,16 +44,28 @@
                 {{-- This is to show the thin layer which has the filename and trash button --}}
                 <div class="invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]">
                     @php
-                        $onClick = "openGallery(".$attachment['id'].")";
-                        if(!in_array($extension,\App\Utils\Constant::EXTENSIONS_OF_FILE_GALLERY)) {
-                            $onClick = '';
-                            $url = $path.$attachment['url_media'];
-                            $href = "href='$url'";
-                        };
+                        switch($openType){
+                            case 'gallery':
+                                $onClick = "openGallery(".$attachment['id'].")";
+                                if(!in_array($extension,\App\Utils\Constant::EXTENSIONS_OF_FILE_GALLERY)) {
+                                    $onClick = '';
+                                    $url = $path.$attachment['url_media'];
+                                    $href = "href='$url'";
+                                };
+                                break;
+                            case '_blank':
+                                    $onClick = '';
+                                    $url = $path.$attachment['url_media'];
+                                    $href = "href='$url'";
+                                break;
+                            default:
+                                dump("OpenType [$openType]");
+                                break;
+                        }
                     @endphp
                     <a title="{{$attachment['filename']}}" onclick={!!$onClick!!} 
                     {!! $onClick ? "" : $href !!}  
-                    target='_blank' class="hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
+                    target='_blank' class="cursor-pointer hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full">
                     <span class="text-sm">{{$attachment['filename']}}</span>
                 </a>
                 @if(!$readOnly)
@@ -66,13 +78,13 @@
             </div>
         </div>
                 @php
-                    $uid = $attachment['owner_id'];
+                    $uid = $attachment['owner_id'] ?? 1;
                     $user = App\Models\User::findFromCache($uid);
                     $src = $user->getAvatarThumbnailUrl();
                     $firstName = $user->first_name;
-                    $displayName = $user->name;
+                    $displayName = $user->name ;
                 @endphp
-            <span class="flex items-center gap-1 mt-1 justify-center" title="{{$displayName}} (#{{$uid}})">
+            <span class="flex items-center gap-1 mt-1 justify-center" title="Uploaded by {{$displayName}} (#{{$uid}})">
                 <img class="w-6 h-6 rounded-full" src="{{$src}}" />
                 {{$firstName}} 
             </span>
