@@ -19,9 +19,14 @@ class Kernel extends ConsoleKernel
     {
         $schedule
             ->call(fn () => event(new \App\Events\SignOffRemindEvent()))
-            ->everyMinute()
+            ->weekly()
+            ->mondays()
+            ->wednesdays()
+            ->fridays()
+            ->at('10:00')
+            ->timezone('America/New_York')
             ->appendOutputTo("storage/logs/schedule.log")
-            ->description("EVERY_MINUTE: SignOffRemindEvent emitted from Schedule.");
+            ->description("EVERY MON/WED/FRI at 10AM US Time: SignOffRemindEvent emitted from Schedule.");
     }
 
     /**
