@@ -13,10 +13,10 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
     protected $showLegend = false;
     protected $headerTop = 40;
 
-    protected $tableTopCenterControl =  "<div class='p-2 m-1 rounded bg-orange-300'></div>Not yet Requested"
-        . "<div class='p-2 m-1 rounded bg-blue-300'></div>Requested"
-        . "<div class='p-2 m-1 rounded bg-green-300'></div>Approved"
-        . "<div class='p-2 m-1 rounded bg-pink-300'></div>Rejected";
+    protected $tableTopCenterControl =  "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-orange-300'></div>Not yet Requested</div>"
+        . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-blue-300'></div>Requested</div>"
+        . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-green-300'></div>Approved</div>"
+        . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-pink-300'></div>Rejected</div>";
 
     protected $actionBtnList = [
         'exportSCV' => false,

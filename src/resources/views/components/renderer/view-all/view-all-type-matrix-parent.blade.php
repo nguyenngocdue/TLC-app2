@@ -13,7 +13,7 @@
             showNo=1
 
             topLeftControl="{!!$actionButtons!!}"
-            topCenterControl="<div class='flex items-center justify-center font-bold'>{!! $tableTopCenterControl !!}</div>"
+            topCenterControl="<div class='flex items-center justify-center font-bold gap-3'>{!! $tableTopCenterControl !!}</div>"
             topRightControl="{!! $perPage !!}"
             bottomRightControl="{!! $perPage !!}"
             
