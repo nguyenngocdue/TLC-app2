@@ -39,4 +39,6 @@ class Constant
 
     const COLOR_PUBLIC_HOLIDAY = ["teal","cyan","yellow","blue","pink","violet","green"];
     const COLOR_PUBLIC_HOLIDAY2 = ["#5eead4","#67e8f9","#fde047","#93c5fd","#f9a8d4","#c4b5fd","#86efac"];
+
+    const ARRAY_CHECK_SHEET_NO_RENDER_GALLERY = ['qaqc_insp_chklst_shts','hse_insp_chklst_shts'];
 }

@@ -126,10 +126,13 @@ $formWidth = "md:w-1/2 xl:w-1/2";
 </div>
 @endif
 <x-homepage.left-drawer title="Table of Content">
-{{-- @dump($item) --}}
     <x-homepage.table-of-content :item="$item" type="{{$type}}" />
 </x-homepage.left-drawer>
-<x-renderer.image-gallery :dataSource="$propsOfMainPage" action={{$action}} />
+
+{{-- @dd($type) --}}
+@if (!in_array($type,App\Utils\Constant::ARRAY_CHECK_SHEET_NO_RENDER_GALLERY))
+    <x-renderer.image-gallery :dataSource="$propsOfMainPage" action={{$action}} />
+@endif
 <script type="text/javascript">
         userCurrent = @json($user);
         window.Echo.channel('edit.'+'{{$type}}' +'-'+ '{{$id}}')
