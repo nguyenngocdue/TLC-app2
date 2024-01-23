@@ -16,6 +16,7 @@ class ImageGalleryKanbanTask extends Component
         private $dataSource,
         private $item,
         private $action = 'edit',
+        private $mode = 'kanban'
     ) {
         //
     }
@@ -36,6 +37,6 @@ class ImageGalleryKanbanTask extends Component
         }
 
         $results = $results->whereIn('extension', Constant::EXTENSIONS_OF_FILE_GALLERY);
-        return view('components.renderer.image-gallery', ['dataSource' => $results, 'pathMinio' => pathMinio()]);
+        return view('components.renderer.image-gallery', ['mode' => $this->mode,'dataSource' => $results, 'pathMinio' => pathMinio()]);
     }
 }
