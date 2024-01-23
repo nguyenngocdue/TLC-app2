@@ -9,7 +9,7 @@ class ParamKanbanTaskPage extends ParentParamReports
 {
     protected function getDataSource()
     {
-        $sql = "SELECT ktp.id AS id, ktp.name AS name 
+        $sql = "SELECT ktp.id AS id, CONCAT(ktp.name, ' (#', ktp.id, ')')  AS name 
                     FROM kanban_task_pages ktp 
                     WHERE ktp.deleted_by IS NULL";
         $result = DB::select($sql);

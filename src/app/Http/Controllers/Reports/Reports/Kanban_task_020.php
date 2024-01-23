@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports\Reports;
 
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
+use App\Models\Kanban_task_transition;
 use App\Utils\Support\Report;
 use App\View\Components\Reports\ModeParams\ParamUserId;
 
@@ -10,8 +11,8 @@ class Kanban_task_020 extends Report_ParentReport2Controller
 {
     protected $typeView = 'report-pivot';
     protected $tableTrueWidth = true;
-    protected $pageLimit = 20;
-    protected $maxH = 80;
+    protected $pageLimit = 10;
+    protected $maxH = 50;
     protected $mode='020';
 
 
@@ -21,77 +22,76 @@ class Kanban_task_020 extends Report_ParentReport2Controller
         return $ids;
     }
 
+    private function getActiveIdTasks(){
+        $ids = array_values(Kanban_task_transition::Where('deleted_by', null)->pluck('kanban_task_id')->unique()->toArray());
+        return $ids;
+    }
+
     public function getSqlStr($params)
     {
         $userIds = $this->getUserOnOwner();
         $strUserIds = implode(",", $userIds);
         $valOfParams = $this->generateValuesFromParamsReport($params);
         ['start' => $start, 'end' => $end] = $valOfParams['picker_date'];
-        // dd($params);
 
-            $sql =" SELECT indexTb.*, indexGroupTb.*
-                        FROM (
-                            SELECT
-                               
-                                kanban_task_bucket_id,
-                                kanban_task_bucket_name,
-                                kanban_task_cluster_name,
-                                kanban_task_cluster_id,
-                                #GROUP_CONCAT(DISTINCT kanban_task_cluster_id) AS concat_kanban_task_cluster_id,
-                                COUNT(DISTINCT kanban_task_cluster_name) AS count_cluster,
-                                kanban_task_page_id,
-                                kanban_task_pages_name,
-                                kanban_task_id,
-                                kanban_task_name,
-                                user_id,
-                                full_name,
-                                employee_id,
-                                workplace_id,
-                                workplace_name,
-                                department_id,
-                                department_name,
-                                ROUND(SUM(CASE WHEN detailTB.time_counting_type = 1 THEN detailTB.elapsed_seconds ELSE 0 END)/60/60,2) AS total_elapsed_second,
-                                ROUND(SUM(CASE WHEN detailTB.time_counting_type <> 1 OR detailTB.time_counting_type IS NULL THEN detailTB.elapsed_seconds ELSE 0 END)/60/60,2) AS total_downtime_second
-                                FROM (SELECT
-                                        
-                                        ktp.id AS kanban_task_page_id,
-                                        ktp.name AS kanban_task_pages_name,
-                        
-                                        ktc.id AS kanban_task_cluster_id,
-                                        ktc.name AS kanban_task_cluster_name,
+        $activeIdTasks = $this->getActiveIdTasks();
+        $strActiveIdTasks = implode(",",$activeIdTasks);
+        $strActiveIdTasks = isset($params["kanban_task_name_id"]) && $params["kanban_task_name_id"] ? implode(",",$params["kanban_task_name_id"]): $strActiveIdTasks;
+        $valOfParams['kanban_task_name_id'] = $strActiveIdTasks;
 
-                                        ktb.id AS kanban_task_bucket_id,
-                                        ktb.name AS kanban_task_bucket_name,
-                        
-                                        kt.id AS kanban_task_id,
-                                        kt.name AS kanban_task_name,
-                        
-                                        us.full_name AS full_name,
-                                        us.id AS user_id,
-                                        us.employeeid AS employee_id,
-                                        us.workplace AS workplace_id,
-                                        wp.name AS workplace_name,
-                                        dp.name AS department_name,
-                                        dp.id AS department_id,            
-                                        ktg.id AS kanban_task_group_id,
-                                        ktg.name AS kanban_task_group_name,            
-                                        ktg.time_counting_type AS time_counting_type,
-                                        ktt.elapsed_seconds AS elapsed_seconds,
-                                        ktt.end_at AS end_at
-                                        FROM kanban_tasks kt
-                                        LEFT JOIN users us ON kt.assignee_1 = us.id
-                                        LEFT JOIN departments dp ON dp.id = us.department
-                                        LEFT JOIN workplaces wp ON wp.id = us.workplace
-                                        
-                                        LEFT JOIN kanban_task_transitions ktt ON ktt.kanban_task_id = kt.id
-                                        LEFT JOIn kanban_task_groups ktg ON ktg.id = ktt.kanban_group_id  AND ktt.kanban_task_id = kt.id
-                                        LEFT JOIN kanban_task_clusters ktc ON ktc.id = ktg.kanban_cluster_id AND ktg.kanban_cluster_id = ktc.id
-                                        LEFT JOIN kanban_task_pages ktp ON ktp.id = ktc.kanban_page_id
-                                        LEFT JOIN kanban_task_buckets ktb ON ktb.id = ktp.kanban_bucket_id
-                                        WHERE 1 = 1
-                                            AND kt.kanban_group_id = ktg.id";
 
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND kt.id  = {$valOfParams['kanban_task_name_id']}";
+            $sql =" SELECT elapseTimeTb.*, minmaxTb.*
+                        FROM (SELECT
+                            kanban_task_id, kanban_task_name,
+                            kanban_task_page_id, kanban_task_page_name,
+                            kanban_task_cluster_id, kanban_task_cluster_name,
+                            kanban_task_bucket_id, kanban_task_bucket_name,
+                            user_id, full_name, employee_id, workplace_id, workplace_name, department_id, department_name,
+                            ROUND(SUM(CASE WHEN detailTb.time_counting_type = 1 THEN detailTb.elapsed_seconds ELSE 0 END),2) AS total_elapsed_second,
+                            ROUND(SUM(CASE WHEN detailTb.time_counting_type <> 1  OR detailTb.time_counting_type IS NULL THEN detailTb.elapsed_seconds ELSE 0 END),2) AS total_elapsed_downtime_second
+                        FROM (SELECT
+                            ktp.id AS kanban_task_page_id,
+                            ktp.name AS kanban_task_page_name,
+                    
+                            ktc.id AS kanban_task_cluster_id,
+                            ktc.name AS kanban_task_cluster_name,
+                    
+                            ktb.id AS kanban_task_bucket_id,
+                            ktb.name AS kanban_task_bucket_name,
+                    
+                            kt.id AS kanban_task_id,
+                            kt.name AS kanban_task_name,
+                    
+                            us.full_name AS full_name,
+                            us.id AS user_id,
+                            us.employeeid AS employee_id,
+                            us.workplace AS workplace_id,
+                            wp.name AS workplace_name,
+                            dp.name AS department_name,
+                            dp.id AS department_id,            
+                            ktg.id AS kanban_task_group_id,
+                            ktg.name AS kanban_task_group_name,            
+                            ktg.time_counting_type AS time_counting_type,
+                            ktt.elapsed_seconds AS elapsed_seconds,
+                            ktt.end_at AS end_at
+                            FROM kanban_tasks kt
+                            LEFT JOIN users us ON kt.assignee_1 = us.id
+                            LEFT JOIN departments dp ON dp.id = us.department
+                            LEFT JOIN workplaces wp ON wp.id = us.workplace
+                    
+                            LEFT JOIN kanban_task_transitions ktt ON ktt.kanban_task_id = kt.id
+                            LEFT JOIn kanban_task_groups ktg ON ktg.id = ktt.kanban_group_id  AND ktt.kanban_task_id = kt.id
+                            LEFT JOIN kanban_task_clusters ktc ON ktc.id = ktg.kanban_cluster_id AND ktg.kanban_cluster_id = ktc.id
+                            LEFT JOIN kanban_task_pages ktp ON ktp.id = ktc.kanban_page_id
+                            LEFT JOIN kanban_task_buckets ktb ON ktb.id = ktp.kanban_bucket_id
+                            WHERE 1 = 1
+                            #AND us.id= 444
+                            #AND ktc.id  = 15
+                            #AND kt.id  = 144
+                            AND DATE_FORMAT(ktt.start_at, '%Y-%m-%d') >= '2023-01-21'
+                            AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '2024-01-23'";
+
+                            if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND kt.id  IN ({$valOfParams['kanban_task_name_id']})";
                             if (Report::checkValueOfField($valOfParams, 'kanban_task_cluster')) $sql .= "\n AND ktc.id  = {$valOfParams['kanban_task_cluster']}";
                             if (Report::checkValueOfField($valOfParams, 'kanban_task_group')) $sql .= "\n AND ktg.id  = {$valOfParams['kanban_task_group']}";
                             if (Report::checkValueOfField($valOfParams, 'kanban_task_page')) $sql .= "\n AND ktp.id  = {$valOfParams['kanban_task_page']}";
@@ -102,23 +102,84 @@ class Kanban_task_020 extends Report_ParentReport2Controller
                             if (Report::checkValueOfField($valOfParams, 'user_id')) $sql .= "\n AND us.id= {$valOfParams['user_id']}";
                                         
                             if ($start) $sql .= "\n AND DATE_FORMAT(ktt.start_at, '%Y-%m-%d') >= '$start'";
-                            if ($end) $sql .= "\n AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '$end'";
+                            if ($end) $sql .= "\n AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '$end' OR kt.id  IN ({$valOfParams['kanban_task_name_id']}) AND ktt.end_at IS NULL";
 
-                            $sql .= "\n ) AS detailTB
-                                GROUP BY kanban_task_page_id, detailTB.kanban_task_id ,kanban_task_cluster_id
-                        ) AS indexTb
-                                JOIN (SELECT
-                            ktt2.kanban_task_id AS kanban_task_id, 
-                            ktt2.kanban_group_id AS kanban_group_id,
-                            ktg2.name AS current_kanban_group_name,
-                            ktg2.id AS current_kanban_group_id,
-                            MAX(IF(ktt2.end_at IS NULL,  ktt2.start_at, NULL)) AS start_at,
-                            MIN(ktt2.start_at) AS begin_at,
-                            MAX(ktt2.end_at) AS end_at
-                        FROM kanban_task_transitions ktt2
-                        JOIN kanban_task_groups ktg2 ON ktt2.kanban_group_id = ktg2.id
-                        WHERE ktt2.end_at IS NULL
-                        GROUP BY kanban_task_id, kanban_group_id ) AS indexGroupTb ON  indexGroupTb.kanban_task_id = indexTb.kanban_task_id";
+                            $sql .= "\n ) AS detailTb
+                            WHERE 1 = 1";
+
+                            if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND detailTb.kanban_task_id  IN ({$valOfParams['kanban_task_name_id']})";
+                            if (Report::checkValueOfField($valOfParams, 'kanban_task_cluster')) $sql .= "\n AND detailTb.kanban_task_cluster_id  = {$valOfParams['kanban_task_cluster']}";
+                            if (Report::checkValueOfField($valOfParams, 'kanban_task_group')) $sql .= "\n AND detailTb.kanban_task_group_id  = {$valOfParams['kanban_task_group']}";
+                            if (Report::checkValueOfField($valOfParams, 'kanban_task_page')) $sql .= "\n AND detailTb.kanban_task_page_id  = {$valOfParams['kanban_task_page']}";
+                            if (Report::checkValueOfField($valOfParams, 'kanban_task_bucket')) $sql .= "\n AND detailTb.kanban_task_bucket_id  = {$valOfParams['kanban_task_bucket']}";
+                            
+                            if (Report::checkValueOfField($valOfParams, 'workplace_id')) $sql .= "\n AND detailTb.workplace_id = {$valOfParams['workplace_id']}";
+                            if (Report::checkValueOfField($valOfParams, 'department_id')) $sql .= "\n AND detailTb.department_id  = {$valOfParams['department_id']}";
+                            if (Report::checkValueOfField($valOfParams, 'user_id')) $sql .= "\n AND detailTb.user_id = {$valOfParams['user_id']}";
+
+                            
+                            $sql .="\n GROUP BY detailTb.kanban_task_id, detailTb.kanban_task_page_id, detailTb.kanban_task_cluster_id
+                            ) AS elapseTimeTb
+                    
+                    JOIN 
+                    (
+                        WITH MinStartTimes AS (
+                        SELECT 
+                            kanban_task_id, 
+                            MIN(start_at) AS MinStart
+                        FROM 
+                            kanban_task_transitions
+                        GROUP BY 
+                            kanban_task_id
+                        ),
+                        MaxStartTimes AS (
+                            SELECT 
+                                kanban_task_id, 
+                                MAX(start_at) AS MaxStart
+                            FROM 
+                                kanban_task_transitions
+                            GROUP BY 
+                                kanban_task_id
+                        ),
+                        MinDetails AS (
+                            SELECT 
+                                ktt.kanban_task_id, 
+                                ktt.kanban_group_id, 
+                                ktt.start_at
+                            FROM 
+                                kanban_task_transitions ktt
+                            INNER JOIN 
+                                MinStartTimes ON ktt.kanban_task_id = MinStartTimes.kanban_task_id AND ktt.start_at = MinStartTimes.MinStart
+                        ),
+                        MaxDetails AS (
+                            SELECT 
+                                ktt.kanban_task_id, 
+                                ktt.kanban_group_id, 
+                                ktt.start_at
+                            FROM 
+                                kanban_task_transitions ktt
+                            INNER JOIN 
+                                MaxStartTimes ON ktt.kanban_task_id = MaxStartTimes.kanban_task_id AND ktt.start_at = MaxStartTimes.MaxStart
+                        )
+                        SELECT 
+                            MinDetails.kanban_task_id, 
+                            MinDetails.kanban_group_id AS min_kanban_group_id,
+                            ktg_min.name AS min_kanban_group_name,
+                            MaxDetails.kanban_group_id AS max_kanban_group_id,
+                            ktg_max.name AS max_kanban_group_name,
+                            MinDetails.start_at AS min_start_at,
+                            MaxDetails.start_at AS temp_end_at
+                        FROM 
+                            MinDetails
+                        JOIN 
+                            MaxDetails ON MinDetails.kanban_task_id = MaxDetails.kanban_task_id
+                        JOIN 
+                            kanban_task_groups ktg_min ON MinDetails.kanban_group_id = ktg_min.id
+                        JOIN 
+                            kanban_task_groups ktg_max ON MaxDetails.kanban_group_id = ktg_max.id
+                    )  AS minmaxTb ON minmaxTb.kanban_task_id = elapseTimeTb.kanban_task_id
+                    ORDER BY min_start_at DESC
+                    ";
         return $sql;
     }
 
@@ -127,39 +188,44 @@ class Kanban_task_020 extends Report_ParentReport2Controller
         return [
            
             [
-                'title' => 'Task Page',
-                'dataIndex' => 'kanban_task_pages_name',
-                'width' => 200
-            ],
-            [
                 'title' => 'Task Bucket',
                 'dataIndex' => 'kanban_task_bucket_name',
-                'width' => 200
+                'width' => 140
+            ],
+            [
+                'title' => 'Task Page',
+                'dataIndex' => 'kanban_task_page_name',
+                'width' => 140
             ],
             [
                 'title' => 'Cluster',
                 'dataIndex' => 'kanban_task_cluster_name',
-                'width' => 200
+                'width' => 150
             ],
             [
                 'title' => 'Task',
                 'dataIndex' => 'kanban_task_name',
-                'width' => 200
+                'width' => 250
             ],
             [
-                'title' => 'Start',
-                'dataIndex' => 'begin_at',
-                'width' => 180
+                'title' => 'Start At',
+                'dataIndex' => 'min_start_at',
+                'width' => 140
             ],
             [
-                'title' => 'End',
-                'dataIndex' => 'end_at',
-                'width' => 180
+                'title' => 'End At <br/> (Temporary Value)',
+                'dataIndex' => 'temp_end_at',
+                'width' => 150
             ],
             [
-                'title' => 'Current Status',
-                'dataIndex' => 'current_kanban_group_name',
-                'width' => 200
+                'title' => 'Status At Start Time',
+                'dataIndex' => 'min_kanban_group_name',
+                'width' => 150
+            ],
+            [
+                'title' => 'Status At End Time <br/> (Temporary Value)',
+                'dataIndex' => 'max_kanban_group_name',
+                'width' => 150
             ],
             [
                 'title' => 'Full Name',
@@ -174,24 +240,26 @@ class Kanban_task_020 extends Report_ParentReport2Controller
             [
                 'title' => 'Workplace',
                 'dataIndex' => 'workplace_name',
-                'width' => 200
+                'width' => 150
             ],
             [
                 'title' => 'Department',
                 'dataIndex' => 'department_name',
-                'width' => 200
+                'width' => 180
             ],
             [
-                'title' => 'Total Elapsed <br/> (hours)',
+                'title' => 'Total Elapsed Time',
                 'dataIndex' => 'total_elapsed_second',
-                'width' => 200,
-                'align' => 'right'
+                'width' => 180,
+                'align' => 'right',
+                'footer' => 'agg_sum',
             ],
             [
-                'title' => 'Total Downtime <br/> (hours)',
-                'dataIndex' => 'total_downtime_second',
-                'width' => 200,
-                'align' => 'right'
+                'title' => 'Total Downtime',
+                'dataIndex' => 'total_elapsed_downtime_second',
+                'width' => 180,
+                'align' => 'right',
+                'footer' => 'agg_sum',
             ]
         ];
     }
@@ -206,11 +274,6 @@ class Kanban_task_020 extends Report_ParentReport2Controller
                 'validation' => 'date_format:d/m/Y',
             ],
             [
-                "title" => "User",
-                "dataIndex" => "user_id",
-                "allowClear" => true,
-            ],
-            [
                 "title" => "Department",
                 "dataIndex" => "department_id",
                 "allowClear" => true,
@@ -221,28 +284,36 @@ class Kanban_task_020 extends Report_ParentReport2Controller
                 "allowClear" => true,
             ],
             [
-                "title" => "Task Cluster",
-                "dataIndex" => "kanban_task_cluster",
+                "title" => "User",
+                "dataIndex" => "user_id",
                 "allowClear" => true,
+                "hasListenTo" => true,
             ],
             [
-                "title" => "Task Bucket",
+                "title" => "Bucket",
                 "dataIndex" => "kanban_task_bucket",
                 "allowClear" => true,
             ],
             [
-                "title" => "Task Group",
-                "dataIndex" => "kanban_task_group",
+                "title" => "Page",
+                "dataIndex" => "kanban_task_page",
                 "allowClear" => true,
             ],
             [
-                "title" => "Task Page",
-                "dataIndex" => "kanban_task_page",
+                "title" => "Cluster",
+                "dataIndex" => "kanban_task_cluster",
                 "allowClear" => true,
             ],
             [
                 "title" => "Task",
                 "dataIndex" => "kanban_task_name_id",
+                "allowClear" => true,
+                "multiple" => true,
+                
+            ],
+            [
+                "title" => "Task Group",
+                "dataIndex" => "kanban_task_group",
                 "allowClear" => true,
             ],
             

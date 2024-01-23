@@ -13,7 +13,7 @@ class ParamKanbanTaskNameId extends ParentParamReports
         $sql = "SELECT 
                         kbt.id AS id
                         ,kbt.description
-                        ,kbt.name AS name";
+                        ,CONCAT(kbt.name, ' (#', kbt.id, ')') AS name";
         $sql .= "\n FROM  kanban_tasks kbt";
         $sql .= "\n WHERE 1 = 1 AND kbt.deleted_at IS NULL";
         $sql .=  "\n ORDER BY kbt.name";

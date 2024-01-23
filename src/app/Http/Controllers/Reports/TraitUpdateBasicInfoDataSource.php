@@ -71,6 +71,10 @@ trait TraitUpdateBasicInfoDataSource
 
             'kanban_task_bucket_name',
             'kanban_task_cluster_name',
+            'kanban_task_pages_name',
+            'kanban_task_name',
+            'kanban_task_group_name'
+
 
         ] + $fieldInputs;
         $attrib = [];
