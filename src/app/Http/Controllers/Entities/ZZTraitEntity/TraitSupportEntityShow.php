@@ -48,9 +48,12 @@ trait TraitSupportEntityShow
         $controlRender = $item->getControlType->name ?? 'signature';
         $str = '';
         if (!is_null($controlGroup)) {
+            $str = "<table class='text-sm text-left text-gray-500 dark:text-gray-400'>";
+            $str .= "<tbody>";
             $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($item, $controlGroup) . "</tr>";
             $str .= $this->createStrHtmlCorrectiveAction($item);
-            $str = "<table class='text-sm text-left text-gray-500 dark:text-gray-400'>" . "<tbody>" . $str  . "</tbody>" . "</table>";
+            $str .= "</tbody>";
+            $str .= "</table>";
         } else {
             switch ($controlRender) {
                 case 'signature':
@@ -137,14 +140,18 @@ trait TraitSupportEntityShow
             $renderInspector = Blade::render("<div class='flex justify-end ml-20'><x-renderer.avatar-user uid='$inspId' content='$dateTime' /></div>");
             return $renderInspector;
         } else {
-            $uid = $item->inspector_id; //?? $item->user_id;
-            if ($uid) {
-                $user = User::find($uid);
-                $name = $user ? $user->name : "";
-                $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
-                $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
-                $inspector = $avatarStr . ' ' . $name . " ";
-                return '<span class="flex gap-1">' . $inspector . $dateTime . "</span>";
+            $value = $item->qaqc_insp_control_value_id ?: $item->hse_insp_control_value_id;
+            // dump($value);
+            if ($value > 0) { //If it is YES|NO|NA|ONHOLD
+                $uid = $item->inspector_id; //?? $item->user_id;
+                if ($uid) {
+                    $user = User::find($uid);
+                    $name = $user ? $user->name : "";
+                    $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
+                    $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
+                    $inspector = $avatarStr . ' ' . $name . " ";
+                    return '<span class="flex gap-1">' . $inspector . $dateTime . "</span>";
+                }
             }
         }
     }
