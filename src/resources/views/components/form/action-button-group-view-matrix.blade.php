@@ -13,3 +13,10 @@
 @if(isset($actionBtnList['approveMulti']) && $actionBtnList['approveMulti'])
     <div id="divApproveMulti"></div>
 @endif
+
+
+@if(isset($actionBtnList['sendManyRequest']) && $actionBtnList['sendManyRequest'])
+    <div id="divSendManyRequest">
+        <button disabled component="placeholder" class="bg-blue-300 rounded p-2 text-white font-semibold">Send Sign-off Request</button>
+    </div>
+@endif

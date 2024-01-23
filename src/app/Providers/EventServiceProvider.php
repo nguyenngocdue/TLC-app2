@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Events\CreatedDocumentEvent2;
 use App\Events\OpenedDocumentEvent;
-use App\Events\RequestSignOffEvent;
-
+use App\Events\SignOffRecallEvent;
+use App\Events\SignOffRemindEvent;
+use App\Events\SignOffRequestEvent;
+use App\Events\SignOffSubmittedEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdatedEsgSheetEvent;
 use App\Events\UpdatedProdSequenceEvent;
@@ -15,7 +17,10 @@ use App\Events\UserSignedInEvent;
 //------------
 use App\Listeners\CreatedDocumentListener2;
 use App\Listeners\OpenedDocumentListener;
-use App\Listeners\RequestSignOffListener;
+use App\Listeners\SignOffRemindListener;
+use App\Listeners\SignOffRecallListener;
+use App\Listeners\SignOffRequestListener;
+use App\Listeners\SignOffSubmittedListener;
 use App\Listeners\UpdatedDocumentListener2;
 use App\Listeners\UpdatedEsgSheetListener;
 use App\Listeners\UpdatedProdSequenceListener;
@@ -47,13 +52,21 @@ class EventServiceProvider extends ServiceProvider
         UpdatedDocumentEvent::class => [UpdatedDocumentListener2::class,],
 
         //Update specific entities
+        //This is to update progress of each checksheet
         UpdatedQaqcChklstSheetEvent::class => [UpdatedQaqcChklstSheetListener::class],
+        //This is to update dropdown for 3rd party dashboard options
         UpdatedQaqcChklstEvent::class => [UpdatedQaqcChklstListener::class],
+
         UpdatedProdSequenceEvent::class => [UpdatedProdSequenceListener::class],
         UpdatedEsgSheetEvent::class => [UpdatedEsgSheetListener::class],
 
         //Specific actions
-        RequestSignOffEvent::class => [RequestSignOffListener::class],
+        SignOffRequestEvent::class => [SignOffRequestListener::class],
+        SignOffRecallEvent::class => [SignOffRecallListener::class],
+        SignOffSubmittedEvent::class => [SignOffSubmittedListener::class],
+
+        //Schedule
+        SignOffRemindEvent::class => [SignOffRemindListener::class],
     ];
 
     /**

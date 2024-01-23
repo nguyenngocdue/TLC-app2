@@ -282,7 +282,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->attachMonitors($currentValue, $theRow);
 		(new LoggerForTimelineService())->insertForUpdate($theRow, $previousValue, CurrentUser::id(), $this->modelPath);
 		event(new UpdatedDocumentEvent($previousValue, $currentValue, $this->type, $this->modelPath, CurrentUser::id()));
-		$this->emitPostUpdateEvent($theRow->id);
+		$this->emitPostUpdateEvent($theRow->id, $request);
 		Log::info($this->type . " update2 elapsed ms: " . Timer::getTimeElapseFromLastAccess());
 		return $this->redirectCustomForUpdate2($request, $theRow);
 	}

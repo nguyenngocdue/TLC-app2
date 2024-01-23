@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class OpenedDocumentListener implements ShouldQueue
+class OpenedDocumentListener //implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -24,7 +24,7 @@ class OpenedDocumentListener implements ShouldQueue
 
     public function handle(OpenedDocumentEvent $event)
     {
-        Log::info(json_encode($event));
+        // Log::info(json_encode($event));
         $modelPath = $event->modelPath;
         $id = $event->id;
         $type = $event->type;
@@ -34,22 +34,22 @@ class OpenedDocumentListener implements ShouldQueue
         $item = $modelPath::find($id);
         $itemName = $item->name;
 
-        switch ($type) {
-            case 'qaqc_insp_chklst_sht':
-                if ($sender->isExternalInspector()) {
-                    $book = $item->getChklst;
-                    $prodOrderName = $book->getProdOrder->name;
-                    $subProjectName = $book->getSubProject->name;
-                    User::find(1)->notify(new SampleNotification([
-                        "message" => "<b>$senderName</b> opened $itemName of $prodOrderName ($subProjectName).",
-                        "group_name" => 'ICS Observer',
-                        "sender_id" => $cuid,
-                        "object_type" => $modelPath,
-                        "object_id" => $id,
-                        "scroll_to" => '', //'qaqc_insp_group_id_33_cfc-or-gypsum-boards',
-                    ]));
-                }
-                break;
-        }
+        // switch ($type) {
+        //     case 'qaqc_insp_chklst_sht':
+        //         if ($sender->isExternalInspector()) {
+        //             $book = $item->getChklst;
+        //             $prodOrderName = $book->getProdOrder->name;
+        //             $subProjectName = $book->getSubProject->name;
+        //             User::find(1)->notify(new SampleNotification([
+        //                 "message" => "<b>$senderName</b> opened $itemName of $prodOrderName ($subProjectName).",
+        //                 "group_name" => 'ICS Observer',
+        //                 "sender_id" => $cuid,
+        //                 "object_type" => $modelPath,
+        //                 "object_id" => $id,
+        //                 "scroll_to" => '', //'qaqc_insp_group_id_33_cfc-or-gypsum-boards',
+        //             ]));
+        //         }
+        //         break;
+        // }
     }
 }

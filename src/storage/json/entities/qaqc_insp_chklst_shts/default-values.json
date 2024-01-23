@@ -12,6 +12,32 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "26",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "24",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",
@@ -20,6 +46,19 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "24,714",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
@@ -129,48 +168,35 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
+    "_divider1": {
+        "name": "_divider1",
+        "column_name": "divider1",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "24",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_assignee_2": {
-        "name": "_assignee_2",
-        "column_name": "assignee_2",
+    "_h1a": {
+        "name": "_h1a",
+        "column_name": "h1a",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "26",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "24,714",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_comment_rejected_reason": {
-        "name": "_comment_rejected_reason",
-        "column_name": "comment_rejected_reason",
+    "_signature_qaqc_chklst_3rd_party_list()": {
+        "name": "_signature_qaqc_chklst_3rd_party_list()",
+        "column_name": "signature_qaqc_chklst_3rd_party_list()",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -184,6 +210,19 @@
     "_signature_qaqc_chklst_3rd_party": {
         "name": "_signature_qaqc_chklst_3rd_party",
         "column_name": "signature_qaqc_chklst_3rd_party",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
         "label": "",
         "validation": "",
         "validation_regex": "",

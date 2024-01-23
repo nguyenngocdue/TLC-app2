@@ -13,7 +13,7 @@
             showNo=1
 
             topLeftControl="{!!$actionButtons!!}"
-            topCenterControl="<div class='flex items-center text-lg'>{!! $tableTopCenterControl !!}</div>"
+            topCenterControl="<div class='flex items-center justify-center font-bold gap-3'>{!! $tableTopCenterControl !!}</div>"
             topRightControl="{!! $perPage !!}"
             bottomRightControl="{!! $perPage !!}"
             
@@ -23,4 +23,7 @@
             headerTop="{{$headerTop}}"
             />
 </form>
-<x-renderer.legend type="{{$type}}" title="Legend of Status" />
+
+@if($showLegend)
+    <x-renderer.legend type="{{$type}}" title="Legend of Status" />
+@endif

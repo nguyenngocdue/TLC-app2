@@ -84,9 +84,6 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
                 'description' => $line->description,
                 'align' => 'center',
                 'width' => 40,
-                // 'prod_discipline_id' => $line->prod_discipline_id,
-                // "colspan" => 1 + sizeof($extraColumns),
-
             ];
         }
         // usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);

@@ -116,7 +116,7 @@ class SuperProps
         $allProps = Props::getAllOf($type);
         $result = [];
         foreach ($allProps as $propName => $prop) {
-            $control =  $prop['control'];
+            $control =  $prop['control'] ?? '';
             if (in_array($control, ['comment', 'attachment'])) {
                 $result[$propName] = Properties::getFor($control, $propName);
             }
@@ -163,7 +163,7 @@ class SuperProps
         static::overrideStandardConfig($allProps);
         // dump($type, $allProps);
         foreach ($allProps as &$prop) {
-            $prop['width'] = $prop['width'] ? $prop['width'] : 100;
+            $prop['width'] = $prop['width'] ?? 100;
             $prop['col_span'] = $prop['col_span'] ? $prop['col_span'] : 12;
             if (in_array(substr($prop['name'], 1), JsonControls::getIgnoreDuplicatable())) {
                 $prop['duplicatable'] = '';
@@ -282,14 +282,20 @@ class SuperProps
     {
         $result = [];
         $index = 1;
-        foreach ($props as $key => $prop) if ($prop['control'] === 'comment') $result["comment" . $index++] = $key;
+        foreach ($props as $key => $prop) {
+            $control = $prop['control'] ?? '';
+            if ($control === 'comment') $result["comment" . $index++] = $key;
+        }
         return $result;
     }
 
     private static function getAttachmentsFromProps($props)
     {
         $result = [];
-        foreach ($props as $key => $prop) if ($prop['control'] == 'attachment') $result[] = $key;
+        foreach ($props as $key => $prop) {
+            $control = $prop['control'] ?? '';
+            if ($control == 'attachment') $result[] = $key;
+        }
         return $result;
     }
 
@@ -297,7 +303,10 @@ class SuperProps
     {
         $result = [];
         $controls = JsonControls::getDateTimeControls();
-        foreach ($props as $key => $prop) if (in_array($prop['control'], $controls)) $result[substr($key, 1)] = $prop['control'];
+        foreach ($props as $key => $prop) {
+            $control = $prop['control'] ?? '';
+            if (in_array($control, $controls)) $result[substr($key, 1)] = $control;
+        }
         return $result;
     }
 
@@ -305,7 +314,10 @@ class SuperProps
     {
         $result = [];
         $controls = ['number']; //JsonControls::getDateTimeControls();
-        foreach ($props as $key => $prop) if (in_array($prop['control'], $controls)) $result[substr($key, 1)] = $prop['control'];
+        foreach ($props as $key => $prop) {
+            $control = $prop['control'] ?? '';
+            if (in_array($control, $controls)) $result[substr($key, 1)] = $control;
+        }
         return $result;
     }
 

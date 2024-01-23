@@ -127,6 +127,22 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_signature_qaqc_chklst_3rd_party_list()": {
+        "name": "_signature_qaqc_chklst_3rd_party_list()",
+        "relationship": "getCheckedByField",
+        "control_name": "signature_qaqc_chklst_3rd_party_list()",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "person",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_getLines": {
         "name": "_getLines",
         "relationship": "hasMany",
@@ -134,7 +150,7 @@
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
-        "renderer_edit": "many_lines",
+        "renderer_edit": "many_checkpoints",
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
         "filter_columns": "",

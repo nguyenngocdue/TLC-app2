@@ -127,6 +127,10 @@ class JsonControls
     {
         return self::getAll()['apps_have_view_all_matrix_print'];
     }
+    public static function getAppsHaveViewAllMatrixSignature()
+    {
+        return self::getAll()['apps_have_view_all_matrix_signature'];
+    }
     public static function getAppsHaveViewAllMatrixApproveMulti()
     {
         return self::getAll()['apps_have_view_all_matrix_approve_multi'];

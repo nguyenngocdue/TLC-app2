@@ -18,7 +18,9 @@ class Attachment2 extends Component
         private $showUploadFile = true,
         private $label = '',
         private $properties = [],
+        private $openType = 'gallery',
     ) {
+        // dump($openType);
         if (is_array($value)) {
             $this->attachments = $value;
         } else {
@@ -74,6 +76,7 @@ class Attachment2 extends Component
             'messageTitle' => $title,
             'hiddenOrText' => $this->debugAttachment ? "text" : "hidden",
             'btnClass' => ClassList::BUTTON,
+            'openType' => $this->openType,
         ]);
     }
 }

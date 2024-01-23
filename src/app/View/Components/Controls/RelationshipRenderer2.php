@@ -14,6 +14,7 @@ use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererSameAsVi
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyIcons;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyLines;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererCalendarGrid;
+use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyCheckpoints;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -27,6 +28,7 @@ class RelationshipRenderer2 extends Component
     use TraitTableRendererSameAsViewAll;
     use TraitTableRendererManyIcons;
     use TraitTableRendererManyLines;
+    use TraitTableRendererManyCheckpoints;
     use TraitTableRendererCalendarGrid;
 
     private static $table00Count = 1;
@@ -196,7 +198,9 @@ class RelationshipRenderer2 extends Component
         // dump($this->tablesInEditableMode[$this->type]);
 
         $editable = isset($this->tablesInEditableMode[$this->type]) && in_array($tableName, array_keys($this->tablesInEditableMode[$this->type]));
-        $showAll = ($renderer_edit === "many_icons" ||
+        $showAll = (
+            $renderer_edit === "many_icons" ||
+            $renderer_edit === "many_checkpoints" ||
             ($renderer_edit === "many_lines" && $editable) ||
             $this->noCss
         );
@@ -206,20 +210,20 @@ class RelationshipRenderer2 extends Component
         $row = $modelPath::find($id);
         // dump($row);
         $isOrderable = $row ? $this->isTableOrderable($row, $colName, $columns) : false;
-        $dataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
+        $paginatedDataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
 
         switch ($renderer_edit) {
             case "same_as_view_all":
-                return $this->renderSameAsViewAll($props, $dataSource);
+                return $this->renderSameAsViewAll($props, $paginatedDataSource);
             case "calendar_grid":
                 return $this->renderCalendarGrid($id, $modelPath, $row, $type);
             case "many_icons":
-                return $this->renderManyIcons($colName, $type, $dataSource, $tableName);
+                return $this->renderManyIcons($colName, $type, $paginatedDataSource, $tableName);
                 // case "calendar_grid":
             case "many_lines":
-                return $this->renderManyLines($tableName, $dataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $this->numberOfEmptyLines);
+                return $this->renderManyLines($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $this->numberOfEmptyLines);
             case "many_checkpoints":
-                return "CCC";
+                return $this->renderManyCheckpoints($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }

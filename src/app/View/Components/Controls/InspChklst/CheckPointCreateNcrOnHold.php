@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls\InspChklst;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
@@ -19,7 +20,6 @@ class CheckPointCreateNcrOnHold extends Component
         private $rowIndex,
         private $debug,
         private $checkPointIds = [],
-        private $sheet = null,
         private $readOnly = false,
     ) {
         //
@@ -32,6 +32,8 @@ class CheckPointCreateNcrOnHold extends Component
      */
     public function render()
     {
+        $isExternalInspector = CurrentUser::get()->isExternalInspector();
+
         $type = $this->line->getTable();
         switch ($type) {
             case 'qaqc_insp_chklst_lines':
@@ -53,6 +55,7 @@ class CheckPointCreateNcrOnHold extends Component
             'nameShow' => $nameShow,
             'syntax' => $syntax,
             'readOnly' => $this->readOnly,
+            'isExternalInspector' => $isExternalInspector,
         ]);
     }
     private function getHrefCreateNCR()
@@ -62,7 +65,7 @@ class CheckPointCreateNcrOnHold extends Component
             'parent_type' => Str::modelPathFrom($this->line->getTable()),
             'parent_id' => $this->line->id,
             'description' => "During " . $this->line->description . ", ",
-            'prod_discipline_id' => $this->sheet->prod_discipline_id,
+            'prod_discipline_id' => $this->line->getSheet->prod_discipline_id,
         ];
         if ($this->line->getProject) $params['project_id'] = $this->line->getProject->id;
         if ($this->line->getSubProject) $params['sub_project_id'] = $this->line->getSubProject->id;

@@ -151,13 +151,17 @@ class Breadcrumb extends Component
     }
     private function showButtonViewAll($type)
     {
-        if ($type === 'esg_sheets') {
-            $type = 'esg_master_sheets';
-        }
+        if ($type === 'esg_sheets') $type = 'esg_master_sheets';
+        $currentRouteName = CurrentRoute::getName();
+        // dump($currentRouteName);
+        $isExternalInspection = CurrentUser::get()->isExternalInspector();
+        if ($type === 'qaqc_insp_chklst_shts' && $isExternalInspection) return;
+        if (in_array($currentRouteName, ['me.index', 'profile.index'])) return;
         $this->links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
     }
     private function showButtonAddNew($type)
     {
+        if (in_array(CurrentRoute::getName(), ['me.index', 'profile.index'])) return;
         $disallowedDirectCreationChecker = DisallowedDirectCreationChecker::check($type);
         if (!$disallowedDirectCreationChecker) {
             $this->links[] = ['href' => route($type . '.create'), 'title' => 'Add New', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
@@ -221,7 +225,7 @@ class Breadcrumb extends Component
         if ($isAdmin) $this->showButtonViewTrash($type);
         if ($isAdmin) $this->showButtonWorkflow($singular);
 
-        $buttonClassList = 'px-2 py-1 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-1 my-2';
+        $buttonClassList = 'h-14 px-2 py-1 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-1 my-2';
         return view('components.navigation.breadcrumb', [
             'links' => $this->links,
             'type' => $type,

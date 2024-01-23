@@ -38,6 +38,8 @@ class DashboardProjectClientController extends DashboardController
             ],
         ];
 
-        return view('dashboards.dashboard-external-inspector', $params);
+        // echo "Project Client";
+        // dump($params);
+        return view('dashboards.dashboard-external-inspector-and-client', $params);
     }
 }

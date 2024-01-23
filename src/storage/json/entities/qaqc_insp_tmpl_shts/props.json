@@ -137,11 +137,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getDefExtInsp()": {
+        "name": "_getDefExtInsp()",
+        "column_name": "getDefExtInsp()",
         "column_type": "oracy_prop",
-        "label": "Default Third Party for Sign Off",
+        "label": "Default Ext Inspectors",
         "control": "dropdown_multi",
         "align": "",
         "col_span": "",

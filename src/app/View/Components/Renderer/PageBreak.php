@@ -24,12 +24,8 @@ class PageBreak extends Component
 
     public function render()
     {
-        $str = "<div class='h-16 bg-red no-print'></div>";
-        // $str = "<div style='page-break-after:always!important' class=' flex justify-center align-middle w-full h-6 relative'>";
-        // $str .= "<div class=' w-full h-full top-0 z-0 absolute bg-gray-100 translate-x-[-80px] no-print'></div>";
-        // $str .= "<div class=' w-full h-full top-0 z-0 absolute bg-gray-100 translate-x-[80px] no-print'></div>";
-        // $str .= "<span class='no-print absolute text-black-300 font-thin text-lg '>— ✄ — ✄ — ✄ —</span>";
-        // $str .= "</div>";
+        $str = "<div class='h-0 page-break-after block '></div>";
+        $str .= "<div class='h-10 page-break-after block no-print'></div>";
         return $str;
     }
 }

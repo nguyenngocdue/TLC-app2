@@ -49,6 +49,7 @@ class ViewAllTypeMatrix extends Component
             case "site_daily_assignments":
                 return Blade::render("<x-renderer.view-all-matrix-type.SiteDailyAssignments/>");
             case "qaqc_insp_chklst_shts":
+                if ($this->view == 'signature') return Blade::render("<x-renderer.view-all-matrix-type.QaqcInspChklstShtsSignature/>");
                 return Blade::render("<x-renderer.view-all-matrix-type.QaqcInspChklstShts/>");
             case "qaqc_insp_chklsts":
                 return Blade::render("<x-renderer.view-all-matrix-type.QaqcInspChklsts/>");

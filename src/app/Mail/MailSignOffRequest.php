@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class MailRequestSignOff extends Mailable
+class MailSignOffRequest extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,6 +28,6 @@ class MailRequestSignOff extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.mail-request-sign-off', $this->data);
+        return $this->markdown('mails.mail-sign-off-request', $this->data);
     }
 }

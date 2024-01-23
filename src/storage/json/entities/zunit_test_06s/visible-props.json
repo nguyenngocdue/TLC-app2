@@ -9,16 +9,6 @@
         "column_name": "name",
         "new": "true"
     },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "new": "true"
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "new": "true"
-    },
     "_attachment_1": {
         "name": "_attachment_1",
         "column_name": "attachment_1",
@@ -49,14 +39,64 @@
         "column_name": "parent_id",
         "new": "true"
     },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
         "new": "true"
     },
-    "_getDiscipline1": {
-        "name": "_getDiscipline1",
-        "column_name": "getDiscipline1",
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "true"
+    },
+    "_signature_eco_peers": {
+        "name": "_signature_eco_peers",
+        "column_name": "signature_eco_peers",
+        "new": "true"
+    },
+    "_getMonitors2()": {
+        "name": "_getMonitors2()",
+        "column_name": "getMonitors2()",
+        "new": "true"
+    },
+    "_signature_eco_managers": {
+        "name": "_signature_eco_managers",
+        "column_name": "signature_eco_managers",
+        "new": "true"
+    },
+    "_signature_1": {
+        "name": "_signature_1",
+        "column_name": "signature_1",
+        "new": "true"
+    },
+    "_signature_2": {
+        "name": "_signature_2",
+        "column_name": "signature_2",
         "new": "true"
     }
 }
