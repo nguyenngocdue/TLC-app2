@@ -15,7 +15,7 @@ class ImageGallery extends Component
     public function __construct(
         private $dataSource,
         private $action = 'edit',
-        private $mode,
+        private $mode = 'default',
     ) {
         //
     }
