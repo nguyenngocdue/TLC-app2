@@ -62,12 +62,12 @@ class PrintCheckSheetPage extends Component
                 'percent' => (100 * $na / $all) . '%',
                 'label' => "N/A<br/>$na/$all",
             ],
-            [
-                'id' => 'on_hold',
-                'color' => 'orange',
-                'percent' => (100 * $on_hold / $all) . '%',
-                'label' => "On Hold<br/>$on_hold/$all",
-            ],
+            // [
+            //     'id' => 'on_hold',
+            //     'color' => 'orange',
+            //     'percent' => (100 * $on_hold / $all) . '%',
+            //     'label' => "On Hold<br/>$on_hold/$all",
+            // ],
         ];
 
         return $progressData;
