@@ -128,6 +128,7 @@ trait TraitSupportEntityShow
         $inspector = "";
         $dateTime = DateTimeConcern::convertForLoading('picker_date', substr($item->updated_at, 0, 10));
         if ($isSignatureLine || $isSignature) {
+            if ($item->value == '') return "";
             $inspId = null;
             if ($isSignatureLine) $inspId = $item->inspector_id;
             if ($isSignature) $inspId = $item->user_id;
