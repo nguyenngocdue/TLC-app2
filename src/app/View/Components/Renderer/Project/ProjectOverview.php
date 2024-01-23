@@ -112,7 +112,7 @@ class ProjectOverview extends Component
                 $items = $items->where($id_column, $this->id);
             }
         }
-        $items = $items->whereNotIn('status', $closedArray);
+        $items = $items->whereNotIn('status', $closedArray)->whereNotIn('status', ['not_applicable']);
         // dump($items->toSql());
         $items = $items->get();
         $size = count($items);
