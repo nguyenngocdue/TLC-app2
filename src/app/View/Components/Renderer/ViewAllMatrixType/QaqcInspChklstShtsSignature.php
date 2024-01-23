@@ -80,7 +80,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
             $item .= "<div id='divFace_{$nominatedUser->id}_{$sheetId}' onclick='$onClick' class='$bg flex w-12 items-center border1 rounded-full gap-1 p-1 mb-0.5 cursor-pointer' title='$tooltip'>";
             $item .= $avatar;
             // $item .= $text;
-            $item .= "<i id='divCheck_{$nominatedUser->id}_{$sheetId}' class='hidden fa-duotone fa-check absolute text-green-400 w-10 h-10 text-3xl rounded-full bg-opacity-20 bg-green-500'></i>";
+            $item .= "<i id='divCheck_{$nominatedUser->id}_{$sheetId}' style='left:-35px' class='hidden fa-duotone fa-check text-green-400 w-10 h-10 text-3xl 1rounded-full 1bg-opacity-20 1bg-green-500'></i>";
             $item .= "</div>";
             $result->push($item);
         }
