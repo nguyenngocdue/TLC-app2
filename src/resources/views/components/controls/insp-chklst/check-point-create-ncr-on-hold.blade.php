@@ -28,6 +28,3 @@
         On Hold comment:<textarea class="border rounded w-full border-gray-300 {{$readOnly?"bg-gray-100":""}}" @readonly($readOnly) name="{{$table01Name}}[value_on_hold][{{$rowIndex}}]">{{$line->value_on_hold}}</textarea>
     </div>
 </div>
-<script>
-    initClick({{$line->id}}, {{$line->qaqc_insp_control_value_id}})
-</script>
