@@ -77,13 +77,14 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
 
             $bg = "bg-$color-300 text-$color-700 capitalize";
             $item = "";
-            $item .= "<div id='divFace_{$nominatedUser->id}_{$sheetId}' onclick='$onClick' class='$bg flex w-12 items-center border1 rounded-full gap-1 p-1 mb-0.5' title='$tooltip'>";
+            $item .= "<div id='divFace_{$nominatedUser->id}_{$sheetId}' onclick='$onClick' class='$bg flex w-12 items-center border1 rounded-full gap-1 p-1 mb-0.5 cursor-pointer' title='$tooltip'>";
             $item .= $avatar;
             // $item .= $text;
             $item .= "<i id='divCheck_{$nominatedUser->id}_{$sheetId}' class='hidden fa-duotone fa-check absolute text-green-400 w-10 h-10 text-3xl rounded-full bg-opacity-20 bg-green-500'></i>";
             $item .= "</div>";
             $result->push($item);
         }
+
         return $result->join("");
         // return count($nominatedUsers) . " " . count($signatures);
     }
@@ -101,12 +102,13 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
         $nominatedUsers = $nominatedUserIds->map(fn ($uid) => User::findFromCache($uid));
         $renderer = $this->renderer($nominatedUsers, $signatures, $document->id);
 
+        $openSheet = "<div class='mt-2'><a href='$route' class='bg-blue-600 text-white rounded p-2'>Open</a></div>";
         // [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
 
         return (object)[
-            'value' => $renderer,
+            'value' => $renderer . $openSheet,
             // 'cell_href' => $route,
-            'cell_class' => "cursor-pointer w-10",
+            'cell_class' => "cursor-pointer1 w-10",
         ];
     }
 }
