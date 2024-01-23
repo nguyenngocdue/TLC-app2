@@ -67,10 +67,11 @@ const sendManyRequest = (uid, sheetId) => {
     // console.log(sendManyRequestCache)
     const total = Object.keys(sendManyRequestCache).length
     let button = ''
-    if(total > 0){
-        const text = total ? `Send ${total} Sign-Off Request${total>1?'s':''}` : ``
+    
+        const text = total ? `Send ${total} Sign-Off Request${total>1?'s':''}` : `Send Sign-off Request`
         button = document.createElement('button')
-        button.classList.add(`rounded`, `bg-blue-600`, `text-white`, `p-2`, `font-semibold`)
+        button.classList.add(`rounded`, `text-white`, `p-2`, `font-semibold`)
+        button.classList.add(total?`bg-blue-600`:`bg-blue-300`, total?`cursor-pointer`:`cursor-not-allowed`)
         button.innerHTML=text
         button.type='button'
         button.addEventListener('click', ()=>{
@@ -102,7 +103,7 @@ const sendManyRequest = (uid, sheetId) => {
                 })
             })
         })
-    }
+   
     $("#divSendManyRequest").html(button)
 }
 
