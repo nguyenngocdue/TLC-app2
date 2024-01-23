@@ -18,7 +18,7 @@
                 keydownEscape="closeModal('{{$modalId}}')" 
                 click="toggleModal('{{$modalId}}', {{($line['modalKey']??'unknown_modal_key')}})"
             >
-            <span class='w-full'>{{$line['label'] ?? ''}}</span>
+            <span class='w-full'>{!! $line['label'] ?? '' !!}</span>
         </x-renderer.button>
         @endforeach
     </div>

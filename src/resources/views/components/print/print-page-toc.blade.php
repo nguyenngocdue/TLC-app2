@@ -6,4 +6,3 @@
     <x-renderer.heading level=5>{{strtoupper($nameRenderOfPageInfo)}}</x-renderer.heading>
 </div>
 <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource" showNo="{{true}}" />
-<x-renderer.page-break />
