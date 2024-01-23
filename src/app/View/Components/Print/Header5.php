@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Print;
 
+use App\Http\Controllers\Workflow\LibApps;
 use App\Models\User;
 use App\Models\Workplace;
 use Illuminate\View\Component;
@@ -22,22 +23,6 @@ class Header5 extends Component
         //
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
-        $dataSource = $this->dataSource;
-        $contentHeader = $this->contentHeaderChecklist();
-        return view('components.print.header5', [
-            'qrId' => $dataSource->id,
-            'type' => $this->type,
-            'dataSource' => config("company.letter_head"),
-            'contentHeader' => $contentHeader,
-        ]);
-    }
     private function contentHeaderChecklist()
     {
         switch ($this->type) {
@@ -84,7 +69,7 @@ class Header5 extends Component
         $dataSource = $this->dataSource;
         $projectName = $dataSource->getProject->name ?? '';
         $subProjectName = $dataSource->getSubProject->name ?? '';
-        $prodOrderName = $dataSource->getProdOrder->name ?? '';
+        $prodOrderName = $dataSource->getProdOrder->production_name ?? '';
         $nameCompany = config('company.name') ?? '';
         switch ($this->type) {
             case "qaqc_insp_chklst":
@@ -93,11 +78,31 @@ class Header5 extends Component
                     "Organization Name:" => $nameCompany,
                     "Project Name:" => $projectName,
                     "Sub-Project Name:" => $subProjectName,
-                    "Prod Order Name:" => $prodOrderName,
+                    "Production Name:" => $prodOrderName,
                 ];
                 return $this->makeDiv($data);
             default:
                 return "Unknown how to render [$this->type]";
         }
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
+    public function render()
+    {
+        $dataSource = $this->dataSource;
+        $contentHeader = $this->contentHeaderChecklist();
+        $app = LibApps::getFor($this->type);
+        // dump($app);
+        return view('components.print.header5', [
+            'qrId' => $dataSource->id,
+            'type' => $this->type,
+            'title' => $app['title'],
+            'dataSource' => config("company.letter_head"),
+            'contentHeader' => $contentHeader,
+        ]);
     }
 }
