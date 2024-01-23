@@ -15,6 +15,7 @@ class ImageGallery extends Component
     public function __construct(
         private $dataSource,
         private $action = 'edit',
+        private $mode,
     ) {
         //
     }
@@ -34,6 +35,6 @@ class ImageGallery extends Component
             $results = $results->merge($collection);
         }
         $results = $results->whereIn('extension', Constant::EXTENSIONS_OF_FILE_GALLERY);
-        return view('components.renderer.image-gallery', ['dataSource' => $results, 'pathMinio' => pathMinio()]);
+        return view('components.renderer.image-gallery', ['mode' => $this->mode,'dataSource' => $results, 'pathMinio' => pathMinio()]);
     }
 }

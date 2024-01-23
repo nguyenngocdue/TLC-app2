@@ -16,6 +16,7 @@ class ImageGalleryCheckSheet extends Component
         private $checkPointIds,
         private $dataSource,
         private $action = 'edit',
+        private $mode = 'check_point'
     ) {
         //
     }
@@ -34,6 +35,6 @@ class ImageGalleryCheckSheet extends Component
             $results = $results->merge($attachments);
         }
         $results = $results->whereIn('extension', Constant::EXTENSIONS_OF_FILE_GALLERY);
-        return view('components.renderer.image-gallery', ['dataSource' => $results, 'pathMinio' => pathMinio()]);
+        return view('components.renderer.image-gallery', ['mode' => $this->mode,'dataSource' => $results, 'pathMinio' => pathMinio()]);
     }
 }

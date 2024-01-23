@@ -16,7 +16,7 @@
 <div class="container-sm hidden" component="image-gallery">
     <div class="row justify-content-center">
         <div class="col col-md-10">
-            <div class="gallery-container" id="animated-thumbnails-gallery">
+            <div class="gallery-container" id="animated-thumbnails-gallery-{{$mode}}">
                 @foreach($dataSource as $attachment)
                 @php
                     $extension = $attachment['extension'];
@@ -66,32 +66,36 @@
     </div>
 </div>
 <script>
-    $("#animated-thumbnails-gallery")
-      .justifiedGallery({
-        captions: false,
-        lastRow: "hide",
-        rowHeight: 180,
-        margins: 5
-      })
-      .on("jg.complete", function () {
-        window.lightGallery(document.getElementById("animated-thumbnails-gallery"), {
-          autoplayFirstVideo: false,
-          pager: false,
-          galleryId: "nature",
-          plugins: [
-            lgZoom,
-            lgThumbnail,
-            lgRotate,
-            lgFullscreen,
-            lgAutoplay,
-            lgVideo,
-          ],
-          mobileSettings: {
-            controls: false,
-            showCloseIcon: false,
-            download: false,
-            rotate: false
-          }
+    var mode = @json($mode);
+    renderGallery(mode);
+    function renderGallery(mode){
+      $(`#animated-thumbnails-gallery-${mode}`)
+        .justifiedGallery({
+          captions: false,
+          lastRow: "hide",
+          rowHeight: 180,
+          margins: 5
+        })
+        .on("jg.complete", function () {
+          window.lightGallery(document.getElementById(`animated-thumbnails-gallery-${mode}`), {
+            autoplayFirstVideo: false,
+            pager: false,
+            galleryId: "nature",
+            plugins: [
+              lgZoom,
+              lgThumbnail,
+              lgRotate,
+              lgFullscreen,
+              lgAutoplay,
+              lgVideo,
+            ],
+            mobileSettings: {
+              controls: false,
+              showCloseIcon: false,
+              download: false,
+              rotate: false
+            }
+          });
         });
-      });
+    }
 </script>
