@@ -99,7 +99,9 @@ const sendManyRequest = (uid, sheetId) => {
                     url: `/api/v1/qaqc/request_to_sign_off`,
                     data,
                 }).then(res=>{
-                    window.location.reload()
+                    setTimeout(()=>{
+                        window.location.reload()
+                    }, 1000) /* Wait for the toastr to show */
                 })
             })
         })
