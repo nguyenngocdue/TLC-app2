@@ -5,7 +5,7 @@
                     :rotate45Height="$rotate45Height"
                     showPaginationTop="true"
                     
-                    topLeftControl="{!!$actionButtons!!}"
+                    topLeftControl="{!! $actionButtons !!}"
                     topCenterControl=""
                     topRightControl=""
 
