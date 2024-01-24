@@ -16,7 +16,6 @@ class Header5 extends Component
      */
     public function __construct(
         private $dataSource,
-        private $tableOfContents = false,
         private $type = '',
         private $page = null,
     ) {

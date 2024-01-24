@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Print;
 
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class PrintPageToc extends Component
@@ -17,25 +18,6 @@ class PrintPageToc extends Component
         private $type = ''
     ) {
         //
-    }
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
-        foreach ($this->dataSource as &$value) {
-            $value['response_type'] = $this->createDataSource($value);
-            $tableDataSource[] = $value->toArray();
-        }
-        return view('components.print.print-page-toc', [
-            'tableColumns' => $this->getTableColumns(),
-            'tableDataSource' => $tableDataSource,
-            'headerDataSource' => $this->headerDataSource,
-            'type' => $this->type,
-        ]);
     }
     public function getTableColumns()
     {
@@ -62,6 +44,25 @@ class PrintPageToc extends Component
     }
     private function createDataSource($item)
     {
-        return "<a href='#{$item->slug}' class='text-blue-500'>{$item->name}</a>";
+        $slug = Str::slug($item->name);
+        return "<a href='#{$slug}' class='text-blue-500'>{$item->name}</a>";
+    }
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
+    public function render()
+    {
+        foreach ($this->dataSource as &$value) {
+            $value['response_type'] = $this->createDataSource($value);
+            $tableDataSource[] = $value->toArray();
+        }
+        return view('components.print.print-page-toc', [
+            'tableColumns' => $this->getTableColumns(),
+            'tableDataSource' => $tableDataSource,
+            'headerDataSource' => $this->headerDataSource,
+            'type' => $this->type,
+        ]);
     }
 }
