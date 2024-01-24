@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class ParamWorkplaceId extends ParentParamReports
 {
-    protected $referData = 'user_id';
+    // protected $referData = 'user_id';
     public function getDataSource()
     {
         $hasListenTo = $this->hasListenTo();

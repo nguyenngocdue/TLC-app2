@@ -9,7 +9,7 @@ class ParamKanbanTaskCluster extends ParentParamReports
 {
     protected function getDataSource()
     {
-        $sql = "SELECT ktc.id AS id, ktc.name AS name 
+        $sql = "SELECT ktc.id AS id, CONCAT(ktc.name, ' (#', ktc.id, ')') AS name 
                     FROM kanban_task_clusters ktc 
                     WHERE ktc.deleted_by IS NULL";
         $result = DB::select($sql);

@@ -9,7 +9,7 @@ class ParamKanbanTaskBucket extends ParentParamReports
 {
     protected function getDataSource()
     {
-        $sql = "SELECT ktb.id AS id, ktb.name AS name 
+        $sql = "SELECT ktb.id AS id, CONCAT(ktb.name, ' (#', ktb.id, ')') AS name 
                     FROM kanban_task_buckets ktb 
                     WHERE ktb.deleted_by IS NULL";
         $result = DB::select($sql);

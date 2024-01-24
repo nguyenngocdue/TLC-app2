@@ -28,6 +28,14 @@ trait TraitGenerateValuesFromParamsReport
             'year',
             'metric_type1',
             'metric_type2',
+			'kanban_task_bucket_id',
+			'kanban_task_cluster_id',
+			'kanban_task_page_id',
+			'kanban_task_cluster_id',
+			'kanban_task_bucket_id',
+			'kanban_task_id',
+			'kanban_task_group_id',
+
         ], $params);
         return $valOfParams;
     }
