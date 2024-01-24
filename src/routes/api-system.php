@@ -4,6 +4,7 @@ use App\BigThink\Options;
 use App\Http\Controllers\Api\v1\System\NotificationsController;
 use App\Http\Controllers\Api\v1\System\VersionController;
 use Illuminate\Support\Facades\Route;
+use Firebase\JWT\JWT;
 
 Route::group([
     'prefix' => 'v1',
@@ -21,5 +22,6 @@ Route::group([
     ], function () {
         Route::get('notifications', [NotificationsController::class, 'notifications']);
         Route::get('notificationsRender', [NotificationsController::class, 'notificationsRender']);
+        Route::get('getDiginetToken', fn () => ['token' => JWT::encode([], env('JWT_SECRET'), 'HS256')]);
     });
 });
