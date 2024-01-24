@@ -16,7 +16,6 @@ class Header5 extends Component
      */
     public function __construct(
         private $dataSource,
-        private $tableOfContents = false,
         private $type = '',
         private $page = null,
     ) {
@@ -44,9 +43,9 @@ class Header5 extends Component
     {
         $result = [];
         foreach ($dataSource as $key => $value) {
-            $result[] = "<span class='bor1der col-span-3 text-right mr-4 font-medium'>$key</span><span class='col-span-3'>$value</span>";
+            $result[] = "<span class='col-span-2 text-right mr-2 font-medium'>$key</span><span class='col-span-4'>$value</span>";
         }
-        return "<div class='border rounded px-10 py-2 grid grid-cols-12 text-base w-full'>" . join("", $result) . "</div>";
+        return "<div class='border rounded px-2 py-2 grid grid-cols-12 text-base w-full'>" . join("", $result) . "</div>";
     }
     private function contentHeaderHseChecklist()
     {
@@ -67,7 +66,7 @@ class Header5 extends Component
     private function contentHeaderQaqcChecklist()
     {
         $dataSource = $this->dataSource;
-        $projectName = $dataSource->getProject->name ?? '';
+        $projectName = $dataSource->getProject->description ?? '';
         $subProjectName = $dataSource->getSubProject->name ?? '';
         $prodOrderName = $dataSource->getProdOrder->production_name ?? '';
         $nameCompany = config('company.name') ?? '';
@@ -75,10 +74,10 @@ class Header5 extends Component
             case "qaqc_insp_chklst":
             case "qaqc_insp_chklst_shts":
                 $data = [
-                    "Organization Name:" => $nameCompany,
-                    "Project Name:" => $projectName,
-                    "Sub-Project Name:" => $subProjectName,
-                    "Production Name:" => $prodOrderName,
+                    "Organization:" => $nameCompany,
+                    "Project:" => $projectName,
+                    "Sub-Project:" => $subProjectName,
+                    "Module:" => $prodOrderName,
                 ];
                 return $this->makeDiv($data);
             default:

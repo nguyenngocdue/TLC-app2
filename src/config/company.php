@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "name" => "TLC Modular",
+    "name" => "TLC Modular Construction LLC",
     "short_name" => "TLC",
     "domain" => "tlcmodular.com",
     "letter_head" => [

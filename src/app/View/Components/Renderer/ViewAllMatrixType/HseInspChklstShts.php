@@ -24,7 +24,7 @@ class HseInspChklstShts extends ViewAllTypeMatrixParent
     protected $dataIndexX = "start_date";
     protected $yAxis = Workplace::class;
     protected $dataIndexY = "workplace_id";
-    protected $rotate45Width = 250;
+    protected $rotate45Width = 400;
     // protected $tableTrueWidth = true;
     // protected $headerTop = 20;
     protected $groupBy = null;

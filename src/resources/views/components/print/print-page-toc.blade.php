@@ -1,4 +1,4 @@
-<x-print.header5 :dataSource="$headerDataSource" tableOfContents='true' type='{{$type}}'/>
+<x-print.header5 :dataSource="$headerDataSource" type='{{$type}}'/>
 <div class="flex flex-1 justify-center border-b">
     @php
     $nameRenderOfPageInfo = $headerDataSource->getQaqcInspTmpl->name ?? '';

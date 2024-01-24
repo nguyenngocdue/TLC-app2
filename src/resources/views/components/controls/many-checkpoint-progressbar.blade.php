@@ -62,17 +62,17 @@ function updateProgressBar(table01Name){
 
     // console.log(values, percent)
     if(percent[1]){
-        $("#progress_yes").html(`<span class='w-full'>Yes<br/>${values[1]}/${all}</span>`).css({width: percent[1] +'%'}).show()
+        $("#progress_yes").html(`<span class='w-full'>Pass<br/>${values[1]}/${all}</span>`).css({width: percent[1] +'%'}).show()
     }else {
         $("#progress_yes").html("").hide()
     }
     if(percent[2]){
-        $("#progress_no").html(`<span class='w-full'>No<br/>${values[2]}/${all}</span>`).css({width: percent[2] +'%'}).show()
+        $("#progress_no").html(`<span class='w-full'>Fail<br/>${values[2]}/${all}</span>`).css({width: percent[2] +'%'}).show()
     }else {
         $("#progress_no").html("").hide()
     }
     if(percent[3]){
-        $("#progress_na").html(`<span class='w-full'>N/A<br/>${values[3]}/${all}</span>`).css({width: percent[3] +'%'}).show()
+        $("#progress_na").html(`<span class='w-full'>NA<br/>${values[3]}/${all}</span>`).css({width: percent[3] +'%'}).show()
     }else {
         $("#progress_na").html("").hide()
     }

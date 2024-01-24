@@ -50,7 +50,9 @@ trait TraitSupportEntityShow
         if (!is_null($controlGroup)) {
             $str = "<table class='text-sm text-left text-gray-500 dark:text-gray-400'>";
             $str .= "<tbody>";
-            $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>" . $this->createStrHtmlGroupRadio($item, $controlGroup) . "</tr>";
+            $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>";
+            $str .= $this->createStrHtmlGroupRadio($item, $controlGroup);
+            $str .= "</tr>";
             $str .= $this->createStrHtmlCorrectiveAction($item);
             $str .= "</tbody>";
             $str .= "</table>";
@@ -85,7 +87,8 @@ trait TraitSupportEntityShow
 
     private function createStrHtmlGroupRadio($item, $controlGroup)
     {
-        $arrayControl = explode('|', $controlGroup);
+        $arrayControl = ["Pass", "Fail", 'NA', 'On Hold'];
+        // $arrayControl = explode('|', $controlGroup);
         // dump(array_keys($arrayControl));
         $this->removeOnHold($arrayControl);
 
