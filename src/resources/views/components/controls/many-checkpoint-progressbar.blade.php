@@ -72,7 +72,7 @@ function updateProgressBar(table01Name){
         $("#progress_no").html("").hide()
     }
     if(percent[3]){
-        $("#progress_na").html(`<span class='w-full'>N/A<br/>${values[3]}/${all}</span>`).css({width: percent[3] +'%'}).show()
+        $("#progress_na").html(`<span class='w-full'>NA<br/>${values[3]}/${all}</span>`).css({width: percent[3] +'%'}).show()
     }else {
         $("#progress_na").html("").hide()
     }
