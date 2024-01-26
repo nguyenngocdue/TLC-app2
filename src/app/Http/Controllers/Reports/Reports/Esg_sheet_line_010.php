@@ -41,7 +41,10 @@ class Esg_sheet_line_010 extends Report_ParentReport2Controller
         JOIN esg_master_sheets esgms ON esgms.id = esgs.esg_master_sheet_id AND esgms.esg_tmpl_id = esgt.id
         JOIn terms te ON te.id = esgm.unit
         JOIN terms te1 ON te1.id = esgm.esg_state
-        WHERE 1 = 1";
+        WHERE 1 = 1
+        AND esgl.deleted_by IS NULL
+        AND esgs.deleted_by IS NULL
+        AND esgm.deleted_by IS NULL";
 
         if (Report::checkParam($params, 'month')) $sql .= "\n AND SUBSTR(esgms.esg_month,1,7) = {{month}}";
 
