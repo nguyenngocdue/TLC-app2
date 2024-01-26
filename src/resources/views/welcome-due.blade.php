@@ -6,7 +6,7 @@
 
 @php
     $userId = 35;
-    $entity = "hr_overtime_request";
+    $entity = "dashboard";
 @endphp
 
 <div class="flex justify-center bg-only-print">

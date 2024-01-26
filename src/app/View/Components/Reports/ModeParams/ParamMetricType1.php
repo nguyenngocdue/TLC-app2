@@ -21,7 +21,6 @@ class ParamMetricType1 extends ParentParamReports
                             $this->referData => $item['ghg_metric_type_id']];
         } 
         // dd($dataSource);
-
         return $dataSource;
     }
 }

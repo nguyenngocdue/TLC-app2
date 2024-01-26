@@ -10,10 +10,9 @@ use Illuminate\Support\Facades\Blade;
 trait TraitUpdateBasicInfoDataSource
 {
 
-    private static function updateFieldsStatusAndValues($values, $fields, $attrib)
+    private static function updateFieldsStatusAndValues($values, $fields, $attrib, $fieldsHref)
     {
         $values =  (array)$values;
-        // dd($fields, $values, $attrib);
         $fields = array_intersect($fields, array_keys((array)$values));
         foreach ($fields as $field) {
             if (isset($values[$field])) {
@@ -30,7 +29,8 @@ trait TraitUpdateBasicInfoDataSource
                 $f = str_replace('name', 'desc', $field);
                 $cellTitle = isset($values[$f]) && !is_null($values[$f]) ? $values[$f] : 'Id: ' . $values[str_replace('name', 'id', $field)];
                 $cellHref = '';
-                if ($attrib && isset($attrib[$field])) {
+                $cellClass = '';
+                if ($attrib && in_array($field, $fieldsHref)) {
                     $info = $attrib[$field];
                     $id = $values[str_replace('name', 'id', $field)];
                     $cellHref =  isset($info['route_name']) ? route($info['route_name'], $id) : $cellHref;
@@ -40,7 +40,7 @@ trait TraitUpdateBasicInfoDataSource
                     'value' => $values[$field],
                     'cell_title' => $cellTitle,
                     'cell_href' => $cellHref,
-                    'cell_class' => $cellClass ?? null,
+                    'cell_class' => $cellClass,
                 ];
             }
         }
@@ -49,7 +49,8 @@ trait TraitUpdateBasicInfoDataSource
 
     protected function addTooltip($dataSource, $fieldInputs = [])
     {
-        $dataSet = $this->getDisplayValueColumns();
+        $dataHref = $this->getDisplayValueColumns();
+        $fieldsHref = array_values(...array_map(fn($item) => array_keys($item),$dataHref));
         $fields = [
             'user_name',
             'project_name',
@@ -73,29 +74,29 @@ trait TraitUpdateBasicInfoDataSource
             'kanban_task_cluster_name',
             'kanban_task_pages_name',
             'kanban_task_name',
-            'kanban_task_group_name'
+            'kanban_task_group_name',
 
+            'esg_sheet_name',
+            'esg_tmpl_name',
+            'esg_metric_type_name',
 
         ] + $fieldInputs;
         $attrib = [];
         foreach ($dataSource as $key => &$values) {
             // if($key === 'tableDataSource') {
-            if (isset($dataSet[$key])) $attrib = $dataSet[$key];
+            if (isset($dataHref[$key])) $attrib = $dataHref[$key];
             // dd($attrib);
             if (($values instanceof Collection)) {
                 foreach ($values as $k => &$item) {
-                    $item = self::updateFieldsStatusAndValues($item, $fields, $attrib);
+                    $item = self::updateFieldsStatusAndValues($item, $fields, $attrib, $fieldsHref);
                     $values[$k] = $item;
                 }
             } else {
-                $values = self::updateFieldsStatusAndValues($values, $fields, $attrib);
+                $values = self::updateFieldsStatusAndValues($values, $fields, $attrib, $fieldsHref);
             }
             $dataSource[$key] = $values;
-
-            // };
-
         }
-        // dd($dataSet, $dataSource);
+        // dd($dataHref, $dataSource);
         return $dataSource;
     }
 }
