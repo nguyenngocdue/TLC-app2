@@ -124,6 +124,7 @@ class Esg_sheet_line_010 extends Report_ParentReport2Controller
                 "dataIndex" => "esg_sheet_line_value",
                 "align" => "right",
                 "width" => 10,
+                "footer" => "agg_sum"
             ],
         ];
     }
