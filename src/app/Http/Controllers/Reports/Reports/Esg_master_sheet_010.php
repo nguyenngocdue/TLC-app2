@@ -18,6 +18,7 @@ class Esg_master_sheet_010 extends Report_ParentReport2Controller
         SUBSTR(esgms.esg_month,1,7) AS esg_month,
         esgs.id AS esg_sheet_id,
         esgs.name AS esg_sheet_name,
+        esgs.id AS sheet_id,
         
         esgt.id AS esg_tmpl_id, 
         esgt.name AS esg_tmpl_name,
@@ -90,6 +91,12 @@ class Esg_master_sheet_010 extends Report_ParentReport2Controller
     {
         return [
             [
+                "title" => "Sheet ID",
+                "dataIndex" => "sheet_id",
+                "align" => "left",
+                "width" => 100,
+            ],
+            [
                 "title" => "Month",
                 "dataIndex" => "esg_month",
                 "align" => "center",
@@ -144,9 +151,6 @@ class Esg_master_sheet_010 extends Report_ParentReport2Controller
     {
         return [
             [
-                'esg_sheet_name' => [
-                    'route_name' => 'esg_sheets.edit'
-                ],
                 'esg_tmpl_name' => [
                     'route_name' => 'esg_tmpls.edit'
                 ],
@@ -155,5 +159,19 @@ class Esg_master_sheet_010 extends Report_ParentReport2Controller
                 ],
             ]
         ];
+    }
+    public function changeDataSource($dataSource, $params)
+    {
+        $items = Report::getItemsFromDataSource($dataSource);
+        foreach(array_values($items) as &$values){
+            if($values->sheet_id) {
+                $values->sheet_id = (object)[
+                    "value" => '#000.'.str_pad($values->esg_sheet_id, 3, '0', STR_PAD_LEFT),
+                    "cell_class" => "text-blue-500",
+                    "cell_href" => route("esg_sheets.edit",$values->esg_sheet_id)
+                ];
+            }
+        }
+        return collect($items);
     }
 }
