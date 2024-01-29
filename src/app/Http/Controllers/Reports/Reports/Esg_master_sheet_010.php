@@ -14,7 +14,6 @@ class Esg_master_sheet_010 extends Report_ParentReport2Controller
 
     public function getSqlStr($params)
     {
-        [$month, $projectId] = $this->selectMonth($params);
         $sql = "SELECT
         SUBSTR(esgms.esg_month,1,7) AS esg_month,
         esgs.id AS esg_sheet_id,
