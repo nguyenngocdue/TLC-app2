@@ -32,6 +32,8 @@ class Esg_master_sheet_010 extends Report_ParentReport2Controller
         te.name AS unit_name,
         te1.name AS esg_state_name,
 
+        esgs.esg_date AS esg_date,
+
         wp.id AS workplace_id,
         wp.name AS workplace_name
         
@@ -76,13 +78,6 @@ class Esg_master_sheet_010 extends Report_ParentReport2Controller
                 // 'multiple' => true,
             ],
             [
-                'title' => 'Sheet',
-                'dataIndex' => 'ESG_sheet_id',
-                // 'multiple' => true,
-                'hasListenTo' => true,
-
-            ],
-            [
                 'title' => 'Metric Type',
                 'dataIndex' => 'ESG_metric_type_id',
                 'multiple' => true,
@@ -101,16 +96,16 @@ class Esg_master_sheet_010 extends Report_ParentReport2Controller
                 "width" => 200,
             ],
             [
+                "title" => "Date",
+                "dataIndex" => "esg_date",
+                "align" => "center",
+                "width" => 200,
+            ],
+            [
                 "title" => "Workplace",
                 "dataIndex" => "workplace_name",
                 "align" => "left",
                 "width" => 200,
-            ],
-            [
-                "title" => "Sheet",
-                "dataIndex" => "esg_sheet_name",
-                "align" => "left",
-                "width" => 250,
             ],
             [
                 "title" => "Template",
