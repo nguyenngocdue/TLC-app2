@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Reports\Reports;
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Utils\Support\Report;
 
-class Esg_sheet_line_010 extends Report_ParentReport2Controller
+class Esg_master_sheet_010 extends Report_ParentReport2Controller
 {
     protected $mode = '010';
     protected $maxH = 50;

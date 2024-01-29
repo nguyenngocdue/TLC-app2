@@ -191,13 +191,13 @@
         "top_title": null,
         "title": "ECO Sign Off"
     },
-    "report-esg_sheet_line_010": {
-        "name": "report-esg_sheet_line_010",
+    "report-esg_master_sheet_010": {
+        "name": "report-esg_master_sheet_010",
         "package_tab": "report",
         "package": "compliance",
         "breadcrumb-group": null,
-        "top_title": null,
-        "title": "ESG Report Detail"
+        "top_title": "Waste and Ultilities Report Detail",
+        "title": "Waste and Ultilities Report Detail"
     },
     "report-ghg_sheet_010": {
         "name": "report-ghg_sheet_010",
