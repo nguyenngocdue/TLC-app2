@@ -16,7 +16,7 @@ class Esg_sheet_line_010 extends Report_ParentReport2Controller
     {
         [$month, $projectId] = $this->selectMonth($params);
         $sql = "SELECT
-        esgms.esg_month AS esg_month,
+        SUBSTR(esgms.esg_month,1,7) AS esg_month,
         esgs.id AS esg_sheet_id,
         esgs.name AS esg_sheet_name,
         
@@ -31,16 +31,20 @@ class Esg_sheet_line_010 extends Report_ParentReport2Controller
         
         esgm.unit AS unit,
         te.name AS unit_name,
-        te1.name AS esg_state_name
+        te1.name AS esg_state_name,
+
+        wp.id AS workplace_id,
+        wp.name AS workplace_name
         
         FROM esg_sheet_lines esgl
-        JOIN esg_tmpls esgt ON esgt.id = esgl.esg_tmpl_id
-        JOIN esg_sheets esgs ON esgs.id = esgl.esg_sheet_id AND esgt.id = esgs.esg_tmpl_id
-        JOIN esg_metric_types esgm ON esgm.id = esgl.esg_metric_type_id AND esgm.esg_tmpl_id = esgt.id
-        JOIN esg_tmpl_lines esgtl ON esgtl.esg_metric_type_id = esgm.id AND esgtl.esg_tmpl_id = esgt.id
-        JOIN esg_master_sheets esgms ON esgms.id = esgs.esg_master_sheet_id AND esgms.esg_tmpl_id = esgt.id
-        JOIn terms te ON te.id = esgm.unit
-        JOIN terms te1 ON te1.id = esgm.esg_state
+        LEFT JOIN esg_tmpls esgt ON esgt.id = esgl.esg_tmpl_id
+        LEFT JOIN esg_sheets esgs ON esgs.id = esgl.esg_sheet_id AND esgt.id = esgs.esg_tmpl_id
+        LEFT JOIN esg_metric_types esgm ON esgm.id = esgl.esg_metric_type_id AND esgm.esg_tmpl_id = esgt.id
+        LEFT JOIN esg_tmpl_lines esgtl ON esgtl.esg_metric_type_id = esgm.id AND esgtl.esg_tmpl_id = esgt.id
+        LEFT JOIN esg_master_sheets esgms ON esgms.id = esgs.esg_master_sheet_id AND esgms.esg_tmpl_id = esgt.id
+        LEFT JOIn terms te ON te.id = esgm.unit
+        LEFT JOIN terms te1 ON te1.id = esgm.esg_state
+        LEFT JOIN workplaces wp ON wp.id = esgms.workplace_id
         WHERE 1 = 1
         AND esgl.deleted_by IS NULL
         AND esgs.deleted_by IS NULL
@@ -51,6 +55,7 @@ class Esg_sheet_line_010 extends Report_ParentReport2Controller
         if (Report::checkParam($params, 'ESG_sheet_id')) $sql .= "\n AND esgs.id IN ({{ESG_sheet_id}})";
         if (Report::checkParam($params, 'ESG_tmpl_id')) $sql .= "\n AND esgt.id IN ({{ESG_tmpl_id}})";
         if (Report::checkParam($params, 'ESG_metric_type_id')) $sql .= "\n AND esgm.id IN ({{ESG_metric_type_id}})";
+        if (Report::checkParam($params, 'workplace_id')) $sql .= "\n AND wp.id IN ({{workplace_id}})";
         return $sql;
     }
 
@@ -62,14 +67,21 @@ class Esg_sheet_line_010 extends Report_ParentReport2Controller
                 'dataIndex' => 'month',
             ],
             [
-                'title' => 'Sheet',
-                'dataIndex' => 'ESG_sheet_id',
+                'title' => 'Workplace',
+                'dataIndex' => 'workplace_id',
                 'multiple' => true,
             ],
             [
                 'title' => 'Template',
                 'dataIndex' => 'ESG_tmpl_id',
-                'multiple' => true,
+                // 'multiple' => true,
+            ],
+            [
+                'title' => 'Sheet',
+                'dataIndex' => 'ESG_sheet_id',
+                // 'multiple' => true,
+                'hasListenTo' => true,
+
             ],
             [
                 'title' => 'Metric Type',
@@ -87,19 +99,25 @@ class Esg_sheet_line_010 extends Report_ParentReport2Controller
                 "title" => "Month",
                 "dataIndex" => "esg_month",
                 "align" => "center",
-                "width" => 50,
+                "width" => 200,
+            ],
+            [
+                "title" => "Workplace",
+                "dataIndex" => "workplace_name",
+                "align" => "left",
+                "width" => 200,
             ],
             [
                 "title" => "Sheet",
                 "dataIndex" => "esg_sheet_name",
                 "align" => "left",
-                "width" => 100,
+                "width" => 250,
             ],
             [
                 "title" => "Template",
                 "dataIndex" => "esg_tmpl_name",
                 "align" => "left",
-                "width" => 100,
+                "width" => 250,
             ],
             [
                 "title" => "Metric Type Name",
