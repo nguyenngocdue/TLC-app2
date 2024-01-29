@@ -50,7 +50,7 @@ trait TraitUpdateBasicInfoDataSource
     protected function addTooltip($dataSource, $fieldInputs = [])
     {
         $dataHref = $this->getDisplayValueColumns();
-        $fieldsHref = array_values(...array_map(fn($item) => array_keys($item),$dataHref));
+        $fieldsHref = $dataHref ? array_values(...array_map(fn($item) => array_keys($item),$dataHref)) : [];
         $fields = [
             'user_name',
             'project_name',
