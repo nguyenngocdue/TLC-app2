@@ -199,6 +199,10 @@ abstract class Report_Parent2Controller extends Controller
         return [];
     }
 
+    public function getDataGrafana($params){
+		return [];
+	}
+
     public function index(Request $request)
     {
         
@@ -261,6 +265,8 @@ abstract class Report_Parent2Controller extends Controller
         $optionPrint = $params['optionPrintLayout'] ?? $this->optionPrint;
         $tableTrueWidth = $this->overTableTrueWidth && $optionPrint === 'landscape' ? 0 : $this->tableTrueWidth;
         // dump($dataSource);
+
+        $dataGrafana = $this->getDataGrafana($params);
         
         return view('reports.' . $viewName, [
             'entity' => $entity,
@@ -289,6 +295,7 @@ abstract class Report_Parent2Controller extends Controller
             'layout' => $this->layout($optionPrint),
             'childrenMode' => $params['children_mode'] ?? 'not_children',
             'type' => $this->getType(),
+            'dataGrafana' => $dataGrafana,
         ] + $dataRenderDocReport);
     }
 

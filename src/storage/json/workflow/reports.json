@@ -126,6 +126,15 @@
         "top_title": "NCR\/DR Report in Chart",
         "title": "NCR\/DR Report in Chart"
     },
+    "document-qaqc_ncr_020": {
+        "name": "document-qaqc_ncr_020",
+        "package_tab": "report",
+        "package": "project_management",
+        "breadcrumb-group": null,
+        "top_title": "NCR\/DR Report in Chart of Grafana",
+        "title": "NCR\/DR Report in Chart of Grafana",
+        "hidden": "true"
+    },
     "document-qaqc_wir_010": {
         "name": "document-qaqc_wir_010",
         "package_tab": "report",

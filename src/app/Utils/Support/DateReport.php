@@ -234,4 +234,14 @@ class DateReport
         return $result;
     }
 
+    public static function convertDatesToTimestamps($dates) {
+        return array_map(function($date) {
+            $dateTime = DateTime::createFromFormat('d/m/Y', $date);
+            if ($dateTime === false) {
+                throw new Exception("Invalid date format: $date");
+            }
+            return $dateTime->getTimestamp()*1000;
+        }, $dates);
+    }
+
 }

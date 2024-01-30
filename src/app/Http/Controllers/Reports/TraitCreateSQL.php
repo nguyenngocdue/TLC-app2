@@ -48,7 +48,7 @@ trait TraitCreateSQL
         }
         $sqlStr = $this->getSqlStr($params);
         $sqlStr = $this->preg_match_all($sqlStr, $params);
-        // dump($sqlStr);
+        // dd($sqlStr);
         return $sqlStr;
     }
 }

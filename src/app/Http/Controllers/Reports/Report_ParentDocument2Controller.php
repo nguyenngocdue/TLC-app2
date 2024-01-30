@@ -242,6 +242,6 @@ abstract class Report_ParentDocument2Controller extends Report_Parent2Controller
         $params['prod_routing_link_id']:Prod_discipline::find($params['prod_discipline_id'])->getProdRoutingLink()->pluck('id')->toArray();
         $prodRoutingLinks = Prod_routing_link::whereIn('id', $prodRoutingLinkIds)->get()->pluck('name', 'id')->toArray();
         return $prodRoutingLinks;
-    }   
-
+    }
+	
 }

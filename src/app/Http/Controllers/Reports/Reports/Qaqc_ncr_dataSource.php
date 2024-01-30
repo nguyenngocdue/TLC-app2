@@ -72,6 +72,7 @@ class Qaqc_ncr_dataSource extends Controller
         if (Report::checkValueOfField($valOfParams, 'user_team_ncr'))  $sql .= "\n AND ncr.user_team_id IN ({$valOfParams['user_team_ncr']})";
         if (Report::checkValueOfField($valOfParams, 'report_type'))  $sql .= "\n AND ncr.defect_report_type IN ({$valOfParams['report_type']})";
         if (Report::checkValueOfField($valOfParams, 'status'))  $sql .= "\n AND ncr.status IN ({$valOfParams['status']})";
+        if (Report::checkValueOfField($valOfParams, 'root_cause'))  $sql .= "\n AND ncr.defect_root_cause_id IN ({$valOfParams['root_cause']})";
 
         $sql .= "\n ) AS tb1
                     LEFT JOIN projects pj ON pj.id = tb1.project_id
@@ -81,8 +82,8 @@ class Qaqc_ncr_dataSource extends Controller
                     LEFT JOIN prod_disciplines pdisc ON pdisc.id = tb1.prod_discipline_id
                     LEFT JOIN user_team_ncrs ustncr ON ustncr.id = tb1.user_team_id
                     LEFT JOIN priorities prio ON prio.id = tb1.priority_id
-                    LEFT JOIN terms term_root_cause ON term_root_cause.id = tb1.root_cause
-                    LEFT JOIN terms term_disposition ON term_disposition.id = tb1.disposition_id
+                    LEFT JOIN terms term_root_cause ON term_root_cause.id = tb1.root_cause";
+                    $sql .= "\n LEFT JOIN terms term_disposition ON term_disposition.id = tb1.disposition_id
                     LEFT JOIN terms term_severity ON term_severity.id = tb1.severity
                     LEFT JOIN terms term_report_type ON term_report_type.id = tb1.report_type
                     LEFT JOIN terms term_inter_subcon ON term_inter_subcon.id = tb1.inter_subcon_id

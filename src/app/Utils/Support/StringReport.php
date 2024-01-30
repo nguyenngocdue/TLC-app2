@@ -16,6 +16,16 @@ class StringReport
         return $result;
     }
 
+    public static function createStrParamUrl($keyParam, $params){
+        $str = '';
+        if (isset($params[$keyParam])){
+            foreach ($params[$keyParam] as $value){
+                $str .= 'var-'.$keyParam."=".$value ."&";
+            }
+        }
+        return trim($str, '&');
+    }
+
     public static function arrayToJsonWithSingleQuotes($item, $sign1='[', $sign2=']')
     {
         if(!is_array($item)) return is_numeric($item) ?  $item : "'$item'";
@@ -79,5 +89,12 @@ class StringReport
 
     public static function fixDecimal($value){
         return str_replace(',','', number_format($value, 2));
+    }
+
+    public static function createUrlParam($objects, $key = null, $value = null){
+        if (is_array($objects) && !empty($objects)){
+            return http_build_query($objects, '', '&', PHP_QUERY_RFC3986);
+        }
+        return $key. '='.$value;
     }
 }
