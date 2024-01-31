@@ -67,7 +67,7 @@ class Attachment2 extends Component
         $docFiles = [];
         $remainingFiles = [];
         foreach($this->attachments as $item){
-            if(in_array($item['extension'],['pdf','csv','zip'])){
+            if(in_array($item['extension'],['pdf','csv','zip','doc'])){
                 $docFiles[] = $item;
             }else $remainingFiles[] = $item;
         }

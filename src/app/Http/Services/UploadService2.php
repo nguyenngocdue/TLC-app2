@@ -37,21 +37,22 @@ class UploadService2
     }
     private function getAllowedFileTypes($type)
     {
+        $prefix = "mimes:";
         switch ($type) {
             case 'only_images':
-                $result = "mimes:png,jpeg,gif,jpg,svg,webp";
+                $result = $prefix.Constant::ONLY_IMAGES;
                 break;
             case 'only_videos':
-                $result = "mimes:mp4,mov";
+                $result = $prefix.Constant::ONLY_VIDEOS;
                 break;
             case 'only_media':
-                $result = "mimes:mp4,png,jpeg,gif,jpg,svg,webp";
+                $result = $prefix.Constant::ONLY_IMAGES.",".Constant::ONLY_VIDEOS;
                 break;
             case 'only_non_media':
-                $result = "mimes:csv,pdf,zip";
+                $result = $prefix.Constant::ONLY_NONE_MEDIA;
                 break;
             case 'all_supported':
-                $result = "";
+                $result = $prefix.Constant::ONLY_IMAGES.",".Constant::ONLY_VIDEOS.",".Constant::ONLY_NONE_MEDIA; 
                 break;
             default:
                 break;
@@ -68,7 +69,7 @@ class UploadService2
     {
         $thumbnailW = 150;
         $thumbnailH = 150;
-        $allowedExts = ['jpeg', 'png', 'jpg', 'gif', 'webp'];
+        $allowedExts = Constant::ARRAY_ONLY_IMAGES;
         // $attachmentP = Properties::getAllOf('attachment');
         $path = env('MEDIA_ROOT_FOLDER', 'media') . "/" . date(Constant::FORMAT_YEAR_MONTH) . "/";
         try {

@@ -5,20 +5,7 @@
     <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
         @foreach($attachments as $attachment)
         @php
-        $hasOrphan = isset($attachment['hasOrphan']) && $attachment['hasOrphan'] ;
-        $border = $hasOrphan ? "red" : "gray";
-        $title = $hasOrphan ? "Orphan image found. Will attach after this document is saved.":"";
-        $extension = $attachment['extension'] ?? "";
-        $folder = $attachment['url_folder'] ?? '';
-        $isProd = str_starts_with($folder, 'app2_prod') || str_starts_with($folder, 'avatars');
-        $isTesting = str_starts_with($folder, 'app2_beta');
-        $isDev = !($isProd || $isTesting);
-
-        $sameEnv = false;
-        if(app()->isProduction() && $isProd) $sameEnv = true; 
-        if(app()->isTesting() && $isTesting) $sameEnv = true; 
-        if(app()->isLocal() && $isDev) $sameEnv = true;        
-
+        [$hasOrphan,$sameEnv,$extension,$border,$title] = App\Utils\Support\HandleFieldsAttachment::handle($attachment)
         @endphp
         @if($hasOrphan)
             <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
@@ -82,11 +69,8 @@
                 </div>
             </div>
                 @php
-                    $uid = $attachment['owner_id'] ?? 1;
-                    $user = App\Models\User::findFromCache($uid);
-                    $src = $user->getAvatarThumbnailUrl();
-                    $firstName = $user->first_name;
-                    $displayName = $user->name ;
+                $uid = $attachment['owner_id'] ?? 1;
+                [$src,$firstName,$displayName] = App\Utils\Support\GetInfoUserById::get($uid);
                 @endphp
             <span class="flex items-center gap-1 mt-1 justify-center" title="Uploaded by {{$displayName}} (#{{$uid}})">
                 <img class="w-6 h-6 rounded-full" src="{{$src}}" />
@@ -99,20 +83,9 @@
     <div class="mx-3">
         @foreach($docs as $doc)
             @php
-                $uid = $doc['owner_id'] ?? 1;
-                $user = App\Models\User::findFromCache($uid);
-                $src = $user->getAvatarThumbnailUrl();
-                $firstName = $user->first_name;
-                $displayName = $user->name ;
-                $hasOrphan = isset($doc['hasOrphan']) && $doc['hasOrphan'] ;
-                $folder = $doc['url_folder'] ?? '';
-                $isProd = str_starts_with($folder, 'app2_prod') || str_starts_with($folder, 'avatars');
-                $isTesting = str_starts_with($folder, 'app2_beta');
-                $isDev = !($isProd || $isTesting);
-                $sameEnv = false;
-                if(app()->isProduction() && $isProd) $sameEnv = true; 
-                if(app()->isTesting() && $isTesting) $sameEnv = true; 
-                if(app()->isLocal() && $isDev) $sameEnv = true;        
+            [$hasOrphan,$sameEnv] = App\Utils\Support\HandleFieldsAttachment::handle($doc);
+            $uid = $doc['owner_id'] ?? 1;
+            [$src,$firstName,$displayName] = App\Utils\Support\GetInfoUserById::get($uid);
             @endphp
             @if($hasOrphan)
             <input name="{{$name}}[toBeAttached][]" value="{{$doc['id']}}" type="{{$hiddenOrText}}" />
@@ -137,7 +110,7 @@
                     @endif
                     
                 </div>
-                <div class="flex items-center gap-1">
+                <div class="flex items-center gap-1" title="Uploaded by {{$displayName}} (#{{$uid}})">
                     <img class="w-6 h-6 rounded-full" src="{{$src}}" />
                     {{$displayName}} 
                     <p class="text-sm">{{date('d/m/Y',strtotime($doc['created_at'] ?? ''))}}</p>
