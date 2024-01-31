@@ -40,10 +40,11 @@ class Constant
     const COLOR_PUBLIC_HOLIDAY = ["teal","cyan","yellow","blue","pink","violet","green"];
     const COLOR_PUBLIC_HOLIDAY2 = ["#5eead4","#67e8f9","#fde047","#93c5fd","#f9a8d4","#c4b5fd","#86efac"];
 
-    
+
     const ARRAY_ONLY_IMAGES = ["jpeg", "png", "jpg", "gif","webp"];
     const ONLY_IMAGES = "png,jpeg,gif,jpg,svg,webp";
     const ONLY_VIDEOS = "mp4,mov";
     const ONLY_NONE_MEDIA = "csv,pdf,zip,docx";
+    const ARRAY_ONLY_NONE_MEDIA = ["csv","pdf","zip","docx"];
 
 }

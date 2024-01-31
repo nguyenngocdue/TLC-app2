@@ -10,7 +10,7 @@
             <div class='flex p-2 border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left items-center'>
                 @php
                     $isRenderSimple = $content->every(function($item){
-                        return in_array($item->extension,['pdf','csv','zip']);
+                        return in_array($item->extension,App\Utils\Constant::ARRAY_ONLY_NONE_MEDIA);
                     });
                 @endphp
                 @if($isRenderSimple)
