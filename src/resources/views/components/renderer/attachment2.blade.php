@@ -9,7 +9,6 @@
         $border = $hasOrphan ? "red" : "gray";
         $title = $hasOrphan ? "Orphan image found. Will attach after this document is saved.":"";
         $extension = $attachment['extension'] ?? "";
-       
         $folder = $attachment['url_folder'] ?? '';
         $isProd = str_starts_with($folder, 'app2_prod') || str_starts_with($folder, 'avatars');
         $isTesting = str_starts_with($folder, 'app2_beta');
@@ -68,10 +67,11 @@
                         onclick="{!!$onClick!!}" 
                         {!! $onClick ? "" : "href='$href'" !!}  
                         target='_blank' 
-                        class="cursor-pointer hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full"
+                        class="cursor-pointer hover:underline  text-white hover:text-blue-300 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full"
                     >
                         <span class="text-sm">{{$attachment['filename']}}</span>
                     </a>
+                    
                     @if(!$readOnly)
                         @if($destroyable && $sameEnv)
                         <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
@@ -95,6 +95,54 @@
             <span class="flex justify-center">{{date('d/m/Y',strtotime($attachment['created_at'] ?? ''))}}</span>
         </div>
         @endforeach
+    </div>
+    <div class="mx-3">
+        @foreach($docs as $doc)
+            @php
+                $uid = $doc['owner_id'] ?? 1;
+                $user = App\Models\User::findFromCache($uid);
+                $src = $user->getAvatarThumbnailUrl();
+                $firstName = $user->first_name;
+                $displayName = $user->name ;
+                $folder = $doc['url_folder'] ?? '';
+                $isProd = str_starts_with($folder, 'app2_prod') || str_starts_with($folder, 'avatars');
+                $isTesting = str_starts_with($folder, 'app2_beta');
+                $isDev = !($isProd || $isTesting);
+                $sameEnv = false;
+                if(app()->isProduction() && $isProd) $sameEnv = true; 
+                if(app()->isTesting() && $isTesting) $sameEnv = true; 
+                if(app()->isLocal() && $isDev) $sameEnv = true;        
+            @endphp
+            <div class="items-center gap-2 mt-2">
+                <div class="flex gap-2 group relative items-center">
+                    <a href="{{$path.$doc['url_media']}}" target="_blank" class="text-blue-500 w-full text-base text-left">
+                        <p><i class="fa-light fa-file mr-1"></i>{{$doc['filename']}}</p>
+                        
+                    </a>
+                    <span id="trashIcon-{{$doc['id']}}" class="hidden">
+                        <i class="text-xl text-pink-500 fa-sharp fa-solid fa-circle-xmark cursor-pointer absolute right-7 top-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+                    </span>
+                    @if(!$readOnly)
+                        @if($destroyable && $sameEnv)
+                            <button type="button" 
+                            onclick="updateToBeDeletedTextBox({{$doc['id']}}, '{{$name}}-toBeDeleted')" 
+                            class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full invisible absolute top-0 right-0 group-hover:visible bottom-[10%]">
+                                <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
+                            </button>
+                        @endif
+                    @endif
+                    
+                </div>
+                <div class="flex items-center gap-1">
+                    <img class="w-6 h-6 rounded-full" src="{{$src}}" />
+                    {{$displayName}} 
+                    <p class="text-sm">{{date('d/m/Y',strtotime($doc['created_at'] ?? ''))}}</p>
+                </div>
+                
+            </div>
+            
+        @endforeach
+        
     </div>
     @endif
 </div>

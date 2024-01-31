@@ -64,13 +64,21 @@ class Attachment2 extends Component
             default:
                 break;
         }
+        $docFiles = [];
+        $remainingFiles = [];
+        foreach($this->attachments as $item){
+            if(in_array($item['extension'],['pdf','csv','zip'])){
+                $docFiles[] = $item;
+            }else $remainingFiles[] = $item;
+        }
         return view('components.renderer.attachment2', [
             'name' => $this->name,
             'destroyable' => $this->destroyable,
             'readOnly' => $this->readOnly,
             'showUploadFile' => $this->showUploadFile,
             'path' => env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/',
-            'attachments' => $this->attachments,
+            'docs' => $docFiles,
+            'attachments' => $remainingFiles,
             'acceptAttachment' => $acceptAttachment,
             'message' => $message,
             'messageTitle' => $title,
@@ -80,3 +88,4 @@ class Attachment2 extends Component
         ]);
     }
 }
+
