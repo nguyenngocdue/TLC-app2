@@ -37,7 +37,7 @@ trait TraitTableRendererManyCheckpoints
 
     private function renderManyCheckpoints($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter)
     {
-        $dataSource = $paginatedDataSource;
+        $dataSource = $paginatedDataSource->sortBy('order_no');
         $checkPointIds = $dataSource->pluck('id');
 
         $result = $this->getGroupedCheckpoints($dataSource);

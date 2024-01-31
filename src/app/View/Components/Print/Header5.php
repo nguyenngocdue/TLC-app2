@@ -77,7 +77,7 @@ class Header5 extends Component
                     "Organization:" => $nameCompany,
                     "Project:" => $projectName,
                     "Sub-Project:" => $subProjectName,
-                    "Module:" => $prodOrderName,
+                    "Production Name:" => $prodOrderName,
                 ];
                 return $this->makeDiv($data);
             default:
