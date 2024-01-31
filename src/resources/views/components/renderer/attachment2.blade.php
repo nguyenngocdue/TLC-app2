@@ -1,5 +1,5 @@
 <div class="flex flex-col container mx-aut1o w-full">
-    @if(sizeof($attachments) ==0)
+    @if(sizeof($attachments) ==0 && sizeof($docs) == 0)
     <x-renderer.emptiness p="2" class="border" message="There is no attachment to be found." />
     @else
     <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
@@ -21,7 +21,7 @@
 
         @endphp
         @if($hasOrphan)
-        <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
+            <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
         @endif
         <div class="border-{{$border}}-300 h-full">
             <div name='{{$name}}' title="{{$title}}" class=" relative  flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
@@ -104,6 +104,7 @@
                 $src = $user->getAvatarThumbnailUrl();
                 $firstName = $user->first_name;
                 $displayName = $user->name ;
+                $hasOrphan = isset($doc['hasOrphan']) && $doc['hasOrphan'] ;
                 $folder = $doc['url_folder'] ?? '';
                 $isProd = str_starts_with($folder, 'app2_prod') || str_starts_with($folder, 'avatars');
                 $isTesting = str_starts_with($folder, 'app2_beta');
@@ -113,6 +114,9 @@
                 if(app()->isTesting() && $isTesting) $sameEnv = true; 
                 if(app()->isLocal() && $isDev) $sameEnv = true;        
             @endphp
+            @if($hasOrphan)
+            <input name="{{$name}}[toBeAttached][]" value="{{$doc['id']}}" type="{{$hiddenOrText}}" />
+            @endif
             <div class="items-center gap-2 mt-2">
                 <div class="flex gap-2 group relative items-center">
                     <a href="{{$path.$doc['url_media']}}" target="_blank" class="text-blue-500 w-full text-base text-left">
@@ -140,7 +144,6 @@
                 </div>
                 
             </div>
-            
         @endforeach
         
     </div>
