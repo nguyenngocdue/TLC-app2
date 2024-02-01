@@ -26,7 +26,7 @@ $tr = "
 
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div style='' class="max-w-[1800px] min-h-[990px] items-center bg-white box-border p-8">
+        <div style='' class="w-[1400px] {{-- max-w-[1800px] --}} min-h-[990px] items-center bg-white box-border p-8">
             <div class="pt-5">
                 @include('reports.include-table-esg-master-sheet-010')
             </div>

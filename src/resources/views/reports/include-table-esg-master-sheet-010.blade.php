@@ -13,7 +13,7 @@
             border-style: solid;
             border-width: 1px;
             color: #444;
-            font-family: Arial, sans-serif;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             font-size: 14px;
             overflow: hidden;
             padding: 10px 5px;
@@ -97,7 +97,7 @@
 
     {{-- @dd($tableDataSource); --}}
 
-    <table class="tg">
+    <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
         <thead>
             <tr>
                 <th class="tg-7bttt">Template</th>
@@ -146,7 +146,7 @@
                 @endphp
                 @if($k)
                 <td class="tg-0pky">{!!$firstNum!!}</td>
-                @else <td class="tg-0pky bg-lime-500">{!!$firstNum!!}</td>
+                @else <td class="tg-0pky bg-lime-400">{!!$firstNum!!}</td>
                 @endif
                 @endforeach
             </tr>
@@ -161,7 +161,7 @@
                 @endphp
                 @if($k)
                 <td class="tg-0pky">{!!$secondNum!!}</td>
-                @else <td class="tg-0pky bg-lime-500">{!!$secondNum!!}</td>
+                @else <td class="tg-0pky bg-lime-400">{!!$secondNum!!}</td>
                 @endif
                 @endforeach
             </tr>
