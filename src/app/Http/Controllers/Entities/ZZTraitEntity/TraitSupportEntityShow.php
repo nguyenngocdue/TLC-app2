@@ -209,19 +209,20 @@ trait TraitSupportEntityShow
 
     private function formatAttachmentRender($items)
     {
-        $strCenter = '';
-        $isRenderSimple = $items->every(function ($item) {
-            return in_array($item->extension, ['pdf', 'csv', 'zip']);
-        });
-        if ($isRenderSimple) {
-            $strCenter = Blade::render('<x-print.attachment-simple :dataSource="$value"/>', [
-                'value' => $items->toArray()
-            ]);
-        } else {
-            $strCenter = Blade::render('<x-renderer.attachment2 openType="_blank" name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />', [
-                'value' => $items->toArray()
-            ]);
-        }
+        // $strCenter = '';
+        // $isRenderSimple = $items->every(function ($item) {
+        //     return in_array($item->extension, ['pdf', 'csv', 'zip']);
+        // });
+        // if ($isRenderSimple) {
+        //     $strCenter = Blade::render('<x-print.attachment-simple :dataSource="$value"/>', [
+        //         'value' => $items->toArray()
+        //     ]);
+        // } else {
+            
+        // }
+        $strCenter = Blade::render('<x-renderer.attachment2 openType="_blank" name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />', [
+            'value' => $items->toArray()
+        ]);
         return $strCenter;
     }
     private function createDataSourceDescription($value)

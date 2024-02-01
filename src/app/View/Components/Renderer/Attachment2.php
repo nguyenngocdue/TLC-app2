@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use App\Utils\ClassList;
+use App\Utils\Constant;
 use Illuminate\View\Component;
 
 class Attachment2 extends Component
@@ -40,21 +41,25 @@ class Attachment2 extends Component
         $properties['allowed_file_types'] = $properties['allowed_file_types'] ?? 'only_images';
         // dd($properties);
         $message =  "<i class='fa-sharp fa-regular fa-upload'></i> Browse (Max " . $properties['max_file_count'] . " files, each " . $properties['max_file_size']  . "MB)";
+        $onlyImages = ".png,.jpeg,.gif,.jpg,.svg,.webp";
+        $onlyVideos = "video/mp4";
+        $onlyMedia = "video/* image/*";
+        $onlyNoneMedia = ".csv,.pdf,.zip,.docx";
         switch ($properties['allowed_file_types']) {
             case 'only_images':
-                $acceptAttachment = ".png,.jpeg,.gif,.jpg,.svg,.webp";
+                $acceptAttachment = $onlyImages;
                 $title = "Only Images (JPG, JPEG, PNG, GIF, WEBP, SVG)";
                 break;
             case 'only_videos':
-                $acceptAttachment = "video/mp4";
+                $acceptAttachment = $onlyVideos;
                 $title = "Only Videos (MP4)";
                 break;
             case 'only_media':
-                $acceptAttachment = "video/* image/*";
+                $acceptAttachment = $onlyMedia;
                 $title = "Only Images (JPG, JPEG, PNG, GIF, WEBP, SVG) and Videos (MP4)";
                 break;
             case 'only_non_media':
-                $acceptAttachment = ".csv,.pdf,.zip";
+                $acceptAttachment = $onlyNoneMedia;
                 $title = "Only Non-Media (CSV, PDF, ZIP)";
                 break;
             case 'all_supported':
@@ -64,13 +69,21 @@ class Attachment2 extends Component
             default:
                 break;
         }
+        $docFiles = [];
+        $remainingFiles = [];
+        foreach($this->attachments as $item){
+            if(in_array($item['extension'],Constant::ARRAY_ONLY_NONE_MEDIA)){
+                $docFiles[] = $item;
+            }else $remainingFiles[] = $item;
+        }
         return view('components.renderer.attachment2', [
             'name' => $this->name,
             'destroyable' => $this->destroyable,
             'readOnly' => $this->readOnly,
             'showUploadFile' => $this->showUploadFile,
             'path' => env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/',
-            'attachments' => $this->attachments,
+            'docs' => $docFiles,
+            'attachments' => $remainingFiles,
             'acceptAttachment' => $acceptAttachment,
             'message' => $message,
             'messageTitle' => $title,
@@ -80,3 +93,4 @@ class Attachment2 extends Component
         ]);
     }
 }
+

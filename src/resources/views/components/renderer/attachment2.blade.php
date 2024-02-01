@@ -1,31 +1,17 @@
 <div class="flex flex-col container mx-aut1o w-full">
-    @if(sizeof($attachments) ==0)
+    @if(sizeof($attachments) ==0 && sizeof($docs) == 0)
     <x-renderer.emptiness p="2" class="border" message="There is no attachment to be found." />
     @else
-    <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
+    <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 p-1 hidden1">
         @foreach($attachments as $attachment)
         @php
-        $hasOrphan = isset($attachment['hasOrphan']) && $attachment['hasOrphan'] ;
-        $border = $hasOrphan ? "red" : "gray";
-        $title = $hasOrphan ? "Orphan image found. Will attach after this document is saved.":"";
-        $extension = $attachment['extension'] ?? "";
-       
-        $folder = $attachment['url_folder'] ?? '';
-        $isProd = str_starts_with($folder, 'app2_prod') || str_starts_with($folder, 'avatars');
-        $isTesting = str_starts_with($folder, 'app2_beta');
-        $isDev = !($isProd || $isTesting);
-
-        $sameEnv = false;
-        if(app()->isProduction() && $isProd) $sameEnv = true; 
-        if(app()->isTesting() && $isTesting) $sameEnv = true; 
-        if(app()->isLocal() && $isDev) $sameEnv = true;        
-
+        [$hasOrphan,$sameEnv,$extension,$border,$title] = App\Utils\Support\HandleFieldsAttachment::handle($attachment)
         @endphp
         @if($hasOrphan)
-        <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
+            <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
         @endif
         <div class="border-{{$border}}-300 h-full">
-            <div name='{{$name}}' title="{{$title}}" class=" relative  flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
+            <div name='{{$name}}' title="{{$title}}" class="relative flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
                 {{-- This is the image --}}
                 @if(in_array($extension,["png","gif","jpg","jpeg","webp"]))
                     <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
@@ -68,10 +54,11 @@
                         onclick="{!!$onClick!!}" 
                         {!! $onClick ? "" : "href='$href'" !!}  
                         target='_blank' 
-                        class="cursor-pointer hover:underline text-white hover:text-blue-500 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full"
+                        class="cursor-pointer hover:underline  text-white hover:text-blue-300 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full"
                     >
                         <span class="text-sm">{{$attachment['filename']}}</span>
                     </a>
+                    
                     @if(!$readOnly)
                         @if($destroyable && $sameEnv)
                         <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
@@ -82,11 +69,8 @@
                 </div>
             </div>
                 @php
-                    $uid = $attachment['owner_id'] ?? 1;
-                    $user = App\Models\User::findFromCache($uid);
-                    $src = $user->getAvatarThumbnailUrl();
-                    $firstName = $user->first_name;
-                    $displayName = $user->name ;
+                $uid = $attachment['owner_id'] ?? 1;
+                [$src,$firstName,$displayName] = App\Utils\Support\GetInfoUserById::get($uid);
                 @endphp
             <span class="flex items-center gap-1 mt-1 justify-center" title="Uploaded by {{$displayName}} (#{{$uid}})">
                 <img class="w-6 h-6 rounded-full" src="{{$src}}" />
@@ -96,6 +80,46 @@
         </div>
         @endforeach
     </div>
+    <div class="mx-3 text-left">
+        @foreach($docs as $doc)
+            @php
+            [$hasOrphan,$sameEnv] = App\Utils\Support\HandleFieldsAttachment::handle($doc);
+            $uid = $doc['owner_id'] ?? 1;
+            [$src,$firstName,$displayName] = App\Utils\Support\GetInfoUserById::get($uid);
+            @endphp
+            @if($hasOrphan)
+            <input name="{{$name}}[toBeAttached][]" value="{{$doc['id']}}" type="{{$hiddenOrText}}" />
+            @endif
+            <div class="items-center gap-2 p-1">
+                <div class="flex gap-2 group relative items-center">
+                    <a href="{{$path.$doc['url_media']}}" target="_blank" class="text-blue-500 w-full text-base text-left">
+                        <p><i class="fa-light fa-file mr-1"></i>{{$doc['filename']}}</p>
+                        
+                    </a>
+                    <span id="trashIcon-{{$doc['id']}}" class="hidden">
+                        <i class="text-xl text-pink-500 fa-sharp fa-solid fa-circle-xmark cursor-pointer absolute right-7 top-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+                    </span>
+                    @if(!$readOnly)
+                        @if($destroyable && $sameEnv)
+                            <button type="button" 
+                            onclick="updateToBeDeletedTextBox({{$doc['id']}}, '{{$name}}-toBeDeleted')" 
+                            class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full invisible absolute top-0 right-0 group-hover:visible bottom-[10%]">
+                                <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
+                            </button>
+                        @endif
+                    @endif
+                    
+                </div>
+                <div class="flex items-center gap-1" title="Uploaded by {{$displayName}} (#{{$uid}})">
+                    <img class="w-6 h-6 rounded-full" src="{{$src}}" />
+                    <span>{{$displayName}}</span>
+                    <p class="text-sm">{{date('d/m/Y',strtotime($doc['created_at'] ?? ''))}}</p>
+                </div>
+                
+            </div>
+        @endforeach
+    </div>
+    <div class="p-1"></div>
     @endif
 </div>
 @if(!$readOnly)
