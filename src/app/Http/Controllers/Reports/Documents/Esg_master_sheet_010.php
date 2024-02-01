@@ -182,7 +182,6 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
                 $monthlyTotals['total_all_months'] += $item['total_all_months'];
                 for ($month = 1; $month <= 12; $month++) {
                     $monthKey = sprintf('%02d', $month); // Formats the month to a two-digit number
-
                     if (isset($item[$monthKey])) {
                         if (!isset($monthlyTotals[$monthKey])) {
                             $monthlyTotals[$monthKey] =  0;
