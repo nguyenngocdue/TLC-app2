@@ -53,7 +53,6 @@ class Esg_master_sheet_010 extends Report_ParentReport2Controller
         AND esgm.deleted_by IS NULL";
 
         if (Report::checkParam($params, 'month')) $sql .= "\n AND SUBSTR(esgms.esg_month,1,7) = {{month}}";
-
         if (Report::checkParam($params, 'ESG_sheet_id')) $sql .= "\n AND esgs.id IN ({{ESG_sheet_id}})";
         if (Report::checkParam($params, 'ESG_tmpl_id')) $sql .= "\n AND esgt.id IN ({{ESG_tmpl_id}})";
         if (Report::checkParam($params, 'ESG_metric_type_id')) $sql .= "\n AND esgm.id IN ({{ESG_metric_type_id}})";
@@ -163,12 +162,12 @@ class Esg_master_sheet_010 extends Report_ParentReport2Controller
     public function changeDataSource($dataSource, $params)
     {
         $items = Report::getItemsFromDataSource($dataSource);
-        foreach(array_values($items) as &$values){
-            if($values->sheet_id) {
+        foreach (array_values($items) as &$values) {
+            if ($values->sheet_id) {
                 $values->sheet_id = (object)[
-                    "value" => '#000.'.str_pad($values->esg_sheet_id, 3, '0', STR_PAD_LEFT),
+                    "value" => '#000.' . str_pad($values->esg_sheet_id, 3, '0', STR_PAD_LEFT),
                     "cell_class" => "text-blue-500",
-                    "cell_href" => route("esg_sheets.edit",$values->esg_sheet_id)
+                    "cell_href" => route("esg_sheets.edit", $values->esg_sheet_id)
                 ];
             }
         }

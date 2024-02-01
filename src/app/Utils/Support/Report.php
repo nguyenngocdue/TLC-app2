@@ -78,7 +78,8 @@ class Report
         return $groupedArray;
     }
 
-    public static function countValuesInArray($dataSource){
+    public static function countValuesInArray($dataSource)
+    {
         $result = [];
         foreach ($dataSource as $key => $data) $result[$key] = count($data);
         return $result;
@@ -137,7 +138,8 @@ class Report
         return $convertedData;
     }
 
-    public static function getItemsFromDataSource($dataSource){
+    public static function getItemsFromDataSource($dataSource)
+    {
         return $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
     }
 
@@ -151,7 +153,7 @@ class Report
     public static function isNullParams($params)
     {
         foreach (array_values($params) as $value) {
-            if(is_array($value) && is_null($value[0]) || is_null($value)) return true;
+            if (is_array($value) && is_null($value[0]) || is_null($value)) return true;
         }
         return false;
     }
@@ -284,35 +286,36 @@ class Report
         return $beforeDate . ' - ' . $nowDate;
     }
 
-    public static function transformDataItemByKey($data, $key, $dataType = 'array') {
+    public static function transformDataItemByKey($data, $key, $dataType = 'array')
+    {
         $transformData = [];
-		foreach ($data as $value){
-			if (is_object($value)){
-				$transformData[$value->{$key}] = $dataType === 'array' ? (array)$value : (object)$value;	
-			} else {
-				$transformData[$value[$key]] = $dataType === 'array' ? (array)$value : (object)$value;
-			}
-		}
+        foreach ($data as $value) {
+            if (is_object($value)) {
+                $transformData[$value->{$key}] = $dataType === 'array' ? (array)$value : (object)$value;
+            } else {
+                $transformData[$value[$key]] = $dataType === 'array' ? (array)$value : (object)$value;
+            }
+        }
 
         return $transformData;
-
     }
 
- 	public static function getLastArrayValuesByKey($data,$field)
+    public static function getLastArrayValuesByKey($data, $field)
     {
-		$outputArrays = [];
+        $outputArrays = [];
         foreach ($data as $key => $value) {
-            if ($key === $field){
-				$outputArrays[] = $value;
+            if ($key === $field) {
+                $outputArrays[] = $value;
             } elseif (is_array($value)) {
-				$nestedOutputArrays = self::getLastArrayValuesByKey($value, $field);
+                $nestedOutputArrays = self::getLastArrayValuesByKey($value, $field);
                 $outputArrays = array_merge($outputArrays, $nestedOutputArrays);
             }
         }
         return $outputArrays;
     }
 
-    public static function filterItemByKeyAndValue($dataArray, $indexKey, $targetScopeId) {
+    public static function filterItemByKeyAndValue($dataArray, $indexKey, $targetScopeId)
+    {
         $resultArray = [];
         foreach ($dataArray as $item) {
             if ($item[$indexKey] === $targetScopeId) {
@@ -322,34 +325,36 @@ class Report
         return $resultArray;
     }
 
-    public static function assignValues($params) {
+    public static function assignValues($params)
+    {
         $months = [];
-        if (isset($params['half_year'])){
-            $months = $params['half_year']  === 'start_half_year' ? range(1, 6): range(7,12);
+        if (isset($params['half_year'])) {
+            $months = $params['half_year']  === 'start_half_year' ? range(1, 6) : range(7, 12);
             $months = ArrayReport::addZeroBeforeNumber($months);
         }
-        $timeValues = isset($params['only_month']) ? $params['only_month']: (isset($params['quarter_time']) ? $params['quarter_time'] : (isset($params['half_year']) ? $months:  $params['year']));
-        $topNameCol = isset($params['only_month']) ? '' : (isset($params['quarter_time']) ?  'QTR' :  (isset($params['half_year']) ? '': 'Year'));
+        $timeValues = isset($params['only_month']) ? $params['only_month'] : (isset($params['quarter_time']) ? $params['quarter_time'] : (isset($params['half_year']) ? $months :  $params['year']));
+        $topNameCol = isset($params['only_month']) ? '' : (isset($params['quarter_time']) ?  'QTR' : (isset($params['half_year']) ? '' : 'Year'));
         $columnName = isset($params['only_month']) ? 'months' : (isset($params['quarter_time']) ?  'quarters' : (isset($params['half_year']) ? 'months' : 'years'));
-        
+
         return compact('timeValues', 'topNameCol', 'columnName');
     }
 
-    public static function formatNumbersInDataSource($dataSource,$tableColumns) {
+    public static function formatNumbersInDataSource($dataSource, $tableColumns)
+    {
 
         $decimalFields = array_column($tableColumns, 'decimal', 'dataIndex');
 
         if (!$dataSource instanceof Collection) $dataSource = collect($dataSource);
         $data = $dataSource->map(function ($values) use ($decimalFields) {
-            if(!is_array((array)$values)) {
-                if (is_numeric($values)) return str_replace(',', '',number_format($values, 2));
-            }else{
+            if (!is_array((array)$values)) {
+                if (is_numeric($values)) return str_replace(',', '', number_format($values, 2));
+            } else {
                 foreach ($values as $key => $value) {
-                    if(str_contains($key, '_id')) continue;
+                    if (str_contains($key, '_id')) continue;
                     $decimal = isset($decimalFields[$key]) ? $decimalFields[$key] : 2;
                     if (is_numeric($value)) {
-                        if(is_object($values)) $values -> $key = str_replace(',', '',number_format($value, $decimal));
-                        if (is_array($values))  $values[$key] = str_replace(',', '',number_format($value, $decimal));
+                        if (is_object($values)) $values->$key = str_replace(',', '', number_format($value, $decimal));
+                        if (is_array($values))  $values[$key] = str_replace(',', '', number_format($value, $decimal));
                     }
                 }
             }
@@ -357,58 +362,64 @@ class Report
         });
         return $data;
     }
-    public static function checkValueOfField($array, $fieldName){
+    public static function checkValueOfField($array, $fieldName)
+    {
         return isset($array[$fieldName]) && $array[$fieldName] !== "";
     }
 
-    public static function checkParam($array, $fieldName){
+    public static function checkParam($array, $fieldName)
+    {
         return isset($array[$fieldName]) && $array[$fieldName];
     }
 
-    public static function getValuesByField($dataSource, $fieldName) {
-		$valuesOfFiled = [];
-		foreach ($dataSource as $item) {
+    public static function getValuesByField($dataSource, $fieldName)
+    {
+        $valuesOfFiled = [];
+        foreach ($dataSource as $item) {
             $item = (array)$item;
-			if (is_array($item) && isset($item[$fieldName])) {
-				$valuesOfFiled[] = $item[$fieldName];
-			} elseif (is_array($item)) {
-				$valuesOfFiled = array_merge($valuesOfFiled, self::getValuesByField($item, $fieldName));
-			}
-		}
-		return $valuesOfFiled;
-	}
+            if (is_array($item) && isset($item[$fieldName])) {
+                $valuesOfFiled[] = $item[$fieldName];
+            } elseif (is_array($item)) {
+                $valuesOfFiled = array_merge($valuesOfFiled, self::getValuesByField($item, $fieldName));
+            }
+        }
+        return $valuesOfFiled;
+    }
 
-    public static function countChildrenItemsByKey($data , $key="children_metrics"){
+    public static function countChildrenItemsByKey($data, $key = "children_metrics")
+    {
         $num = 0;
-        foreach ($data as $value){
-            if(isset($value[$key])) {
-                $num = $num + count($value[$key]); 
-            } else{
+        foreach ($data as $value) {
+            if (isset($value[$key])) {
+                $num = $num + count($value[$key]);
+            } else {
                 $num += 1;
             }
         }
         return $num;
     }
     // ghg_sheet_050
-    public static function countChildrenItemsByKey2($data , $key="children_metrics"){
+    public static function countChildrenItemsByKey2($data, $key = "children_metrics")
+    {
         $num = 0;
-        foreach ($data as $value){
-            if(isset($value[$key])) {
-                $num = $num + count($value[$key]); 
+        foreach ($data as $value) {
+            if (isset($value[$key])) {
+                $num = $num + count($value[$key]);
             }
         }
         return $num;
     }
 
     // for document-ghg_sheet_070
-    public static function checkItem($itemsToCheck, $standardItem){
+    public static function checkItem($itemsToCheck, $standardItem)
+    {
         $standardItemProperties = [
             'ghg_tmpls_id',
             'ghg_metric_type_id',
             'ghg_metric_type_1_id',
             'ghg_metric_type_2_id'
         ];
-        foreach ($itemsToCheck as $items){
+        foreach ($itemsToCheck as $items) {
             $matching = true;
             foreach ($standardItemProperties as $property) {
                 if ($standardItem[$property] !== $items[$property]) {
@@ -424,35 +435,35 @@ class Report
     }
 
     // for document-ghg_sheet_070
-    public static function includeDataByKeys($data1, $data2, $keys){
+    public static function includeDataByKeys($data1, $data2, $keys)
+    {
         $output = [];
-        if(empty($data1) && !empty($data2)){
+        if (empty($data1) && !empty($data2)) {
             $data1 = $data2;
-            $data1 = array_map(function($item) {
+            $data1 = array_map(function ($item) {
                 $item['months'] = array_fill_keys(array_keys($item['months']), 0);
                 $item['total_months'] = 0;
                 return $item;
-
             }, $data1);
             $output = $data1;
         } else {
             $arrayFilter = [];
-            foreach($data2  as $k2 => $item2s){
+            foreach ($data2  as $k2 => $item2s) {
                 $isAdd = [];
-                foreach($data1 as $k1 => $item1s){
-                    if(
+                foreach ($data1 as $k1 => $item1s) {
+                    if (
                         $item1s["ghg_tmpls_id"] === $item2s["ghg_tmpls_id"]
                         && $item1s["ghg_metric_type_id"] === $item2s["ghg_metric_type_id"]
                         && $item1s["ghg_metric_type_1_id"] === $item2s["ghg_metric_type_1_id"]
                         && $item1s["ghg_metric_type_2_id"] === $item2s["ghg_metric_type_2_id"]
-                    ){
-                       $isAdd[] = false;
+                    ) {
+                        $isAdd[] = false;
                     } else {
                         $isAdd[] = true;
                     }
                 }
                 $isAdd = ArrayReport::checkAllTrue($isAdd);
-                if($isAdd){
+                if ($isAdd) {
                     $itemIndex = $item2s;
                     $itemIndex['months'] = array_fill_keys(array_keys($itemIndex['months']), 0);
                     $itemIndex['total_months'] = 0;
@@ -460,10 +471,29 @@ class Report
                 }
             }
             $output = array_merge($data1, $arrayFilter);
-
         }
         // dd($output, $data1, $data2);
         return $output;
     }
-    
+
+    public static function exportArrayToJsonFile($array, $filename)
+    {
+        $json = json_encode($array);
+        if ($json === false) {
+            echo "JSON encoding failed with error: " . json_last_error_msg() . "\n";
+            return false;
+        }
+        if (!is_writable($filename) && !file_exists($filename)) {
+            echo "The file $filename is not writable or does not exist.\n";
+            return false;
+        }
+        $result = file_put_contents($filename, $json);
+        dd($json);
+        if ($result === false) {
+            echo "Failed to write to the file $filename.\n";
+            return false;
+        }
+        echo "Written $result bytes to $filename.\n";
+        return true;
+    }
 }

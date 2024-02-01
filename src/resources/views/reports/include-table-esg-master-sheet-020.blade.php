@@ -21,16 +21,16 @@
         }
 
         .tg th {
-            background-color: #409cff;
+            background-color: #F3F4F6;
             border-color: #9ABAD9;
             border-style: solid;
             border-width: 1px;
-            color: #fff;
+            color: #4E5765;
             font-family: Arial, sans-serif;
             font-size: 16px;
             font-weight: normal;
             overflow: hidden;
-            padding: 10px 5px;
+            padding: 10px 10px;
             word-break: normal;
         }
 
@@ -63,14 +63,14 @@
         .tg .tg-fymr {
             border-color: inherit;
             font-weight: bold;
-            text-align: left;
+            text-align: right;
             vertical-align: top
         }
 
         .tg .tg-0pky {
             border-color: inherit;
-            text-align: left;
-            vertical-align: top
+            text-align: right;
+            vertical-align: middle padding: 8px 8px 8px 8px
         }
 
         .tg .tg-g7sd {
@@ -81,11 +81,12 @@
         }
 
     </style>
-@php
-	$workplaces = ["NZ-O","SG-O","VN-HO","VN-TF1","VN-TF2","VN-TF3"]
-@endphp
+    @php
+    $workplaces = App\Models\Workplace::all()->pluck('name', 'id')->toArray();
+    $abbMonths = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
+    @endphp
 
-
+    {{-- @dd($tableDataSource); --}}
 
     <table class="tg">
         <thead>
@@ -95,82 +96,69 @@
                 <th class="tg-7btt">Unit</th>
                 <th class="tg-7btt">State</th>
                 <th class="tg-7btt">Workplace</th>
-                <th class="tg-7btt">Total 12 months</th>
-                <th class="tg-7btt">Jan</th>
-                <th class="tg-7btt">Feb</th>
-                <th class="tg-7btt">Mar</th>
-                <th class="tg-7btt">Apr</th>
-                <th class="tg-7btt">May</th>
-                <th class="tg-7btt">June</th>
-                <th class="tg-7btt">July</th>
-                <th class="tg-7btt">Aug</th>
-                <th class="tg-7btt">Sept</th>
-                <th class="tg-7btt">Oct</th>
-                <th class="tg-7btt">Nov</th>
-                <th class="tg-7btt">Dec</th>
+                <th class="tg-7btt">Total</th>
+                @foreach($abbMonths as $abb)
+                <th class="tg-7btt">{{$abb}}</th>
+
+                @endforeach
             </tr>
         </thead>
         <tbody>
+            @foreach($tableDataSource as $k0 => $_dataSet)
+            @php
+            $dataSet = $_dataSet['array_metric_type'];
+            @endphp
+            @foreach($dataSet as $k1 => $items)
             <tr>
-                <td class="tg-uzvj" rowspan="7">1.3 Hazardous Waste</td>
-                <td class="tg-uzvj" rowspan="6">01. Waste blasting material containing hazardous substances</td>
-                <td class="tg-lboi" rowspan="6">kg</td>
-                <td class="tg-lboi" rowspan="6">Solid</td>
-				@foreach($workplaces as $fkwp => $firstWorkplace)
-					<td class="tg-fymr">{{$firstWorkplace}}</td>
-					<td class="tg-0pky">780</td>
-					<td class="tg-0pky">10</td>
-					<td class="tg-0pky">20</td>
-					<td class="tg-0pky">30</td>
-					<td class="tg-0pky">40</td>
-					<td class="tg-0pky">50</td>
-					<td class="tg-0pky">60</td>
-					<td class="tg-0pky">70</td>
-					<td class="tg-0pky">80</td>
-					<td class="tg-0pky">90</td>
-					<td class="tg-0pky">100</td>
-					<td class="tg-0pky">110</td>
-					<td class="tg-0pky">120</td>
-					@break
-				@endforeach
-            </tr>
-			@foreach($workplaces as $kwp => $workplace)
-				@if(!$kwp) @continue  @endif
-			<tr>
-				<td class="tg-fymr">{{$workplace}}</td>
-				<td class="tg-0pky">1280</td>
-				<td class="tg-0pky">0</td>
-				<td class="tg-0pky">10</td>
-				<td class="tg-0pky">40</td>
-				<td class="tg-0pky">56.66</td>
-				<td class="tg-0pky">76.666</td>
-				<td class="tg-0pky">96.66</td>
-				<td class="tg-0pky">116.666</td>
-				<td class="tg-0pky">136.66</td>
-				<td class="tg-0pky">156.66</td>
-				<td class="tg-0pky">176.66</td>
-				<td class="tg-0pky">196.66</td>
-				<td class="tg-0pky">216.66</td>
-			</tr>
-			@endforeach
-            <tr>
-                <td class="tg-fymr" colspan="3">colspan</td>
-                <td class="tg-0pky">Total per Mon</td>
-                <td class="tg-fymr">8209.5</td>
-                <td class="tg-fymr">65.5</td>
-                <td class="tg-fymr">59</td>
-                <td class="tg-fymr">204</td>
-                <td class="tg-fymr">335.67</td>
-                <td class="tg-fymr">470.67</td>
-                <td class="tg-fymr">605.67</td>
-                <td class="tg-fymr">740.67</td>
-                <td class="tg-fymr">875.67</td>
-                <td class="tg-fymr">1010.7</td>
-                <td class="tg-fymr">1145.7</td>
-                <td class="tg-fymr">1280.7</td>
-                <td class="tg-fymr">1415.7</td>
+                @php
+                $rowSpanMeType = $items["rowspan_metric_type"];
+                $rowSpan = $k1 ? $items["rowspan_children"] : $_dataSet['rowspan'];
+                @endphp
+
+                @if(!$k1)
+                <td class="tg-uzvj" rowspan="{{$rowSpan}}">{{$items['esg_tmpl_name']}}</td>
+                @endif
+                <td class="tg-uzvj" rowspan="{{$rowSpanMeType}}">{{$items['esg_metric_type_name']}}</td>
+                <td class="tg-lboi" rowspan="{{$rowSpanMeType}}">{{$items['unit']}}</td>
+                <td class="tg-lboi" rowspan="{{$rowSpanMeType}}">{{$items['state']}}</td>
+                @php
+                $fCalculatedNums = array_slice($items['calculated_numbers'], 0,1,true);
+                $firstWorkplaceName = $workplaces[array_keys($fCalculatedNums)[0]];
+                $calculatedNums = array_slice($items['calculated_numbers'],1,null,true);
+                $totalPerMonths = $items['total_per_month'];
+                @endphp
+                {{-- Render first-line numberic for months --}}
+                <td class="tg-fymr">{{$firstWorkplaceName}}</td>
+                @foreach(reset($fCalculatedNums) as $k => $firstNum)
+                @if($k)
+                <td class="tg-0pky">{{$firstNum}}</td>
+                @else <td class="tg-0pky bg-lime-500">{{$firstNum}}</td>
+                @endif
+                @endforeach
             </tr>
 
+            {{-- Render numberic for months --}}
+            @foreach($calculatedNums as $kwp => $numbers)
+            <tr>
+                <td class="tg-fymr">{{$workplaces[$kwp]}}</td>
+                @foreach($numbers as $k => $secondNum)
+                @if($k)
+                <td class="tg-0pky">{{$secondNum}}</td>
+                @else <td class="tg-0pky bg-lime-500">{{$secondNum}}</td>
+                @endif
+                @endforeach
+            </tr>
+            @endforeach
+            {{-- Total per Months --}}
+            <tr>
+                <td class="tg-7btt" colspan="1">Total</td>
+                @foreach($totalPerMonths as $totalNum)
+                <td class="tg-fymr bg-lime-200">{{$totalNum}}</td>
+                @endforeach
+            </tr>
+
+            @endforeach
+            @endforeach
 
             <tr>
                 <td class="tg-7btt" colspan="5">TOTAL</td>
@@ -189,7 +177,7 @@
                 <td class="tg-fymr">5662.7</td>
             </tr>
 
-			
+
         </tbody>
     </table>
 

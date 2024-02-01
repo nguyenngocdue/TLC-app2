@@ -12,14 +12,16 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
 
 {{-- "Show utility"  --}}
 @php
-    $tl = "<div></div>";
-    $tc = "<x-reports.utility-report routeName='$routeName'/>"; 
-    $tr = "<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />"; 
+$tl = "<div></div>";
+$tc = "
+<x-reports.utility-report routeName='$routeName' />";
+$tr = "
+<x-reports.per-page-report typeReport='$typeReport' entity='$entity' routeName='$routeName' page-limit='$pageLimit' formName='updatePerPage' />";
 @endphp
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout')
+    {{-- @include('components.reports.show-layout') --}}
 </div>
 
 <div class="flex justify-center bg-only-print">
@@ -32,18 +34,4 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
         <x-renderer.page-break />
     </div>
 </div>
-
-
-
-<div class="flex justify-center bg-only-print">
-    <div class="md:px-4">
-        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
-            <x-print.header6 />
-            <x-renderer.heading level=2 class='text-center'>{{$titleReport}}</x-renderer.heading>
-        </div>
-    </div>
-</div>
-
-
-
 @endsection
