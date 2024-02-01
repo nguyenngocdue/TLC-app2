@@ -2,7 +2,7 @@
     @if(sizeof($attachments) ==0 && sizeof($docs) == 0)
     <x-renderer.emptiness p="2" class="border" message="There is no attachment to be found." />
     @else
-    <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 mb-1 p-1 hidden1">
+    <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 p-1 hidden1">
         @foreach($attachments as $attachment)
         @php
         [$hasOrphan,$sameEnv,$extension,$border,$title] = App\Utils\Support\HandleFieldsAttachment::handle($attachment)
@@ -11,7 +11,7 @@
             <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
         @endif
         <div class="border-{{$border}}-300 h-full">
-            <div name='{{$name}}' title="{{$title}}" class=" relative  flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
+            <div name='{{$name}}' title="{{$title}}" class="relative flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
                 {{-- This is the image --}}
                 @if(in_array($extension,["png","gif","jpg","jpeg","webp"]))
                     <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
@@ -80,7 +80,7 @@
         </div>
         @endforeach
     </div>
-    <div class="mx-3">
+    <div class="mx-3 text-left">
         @foreach($docs as $doc)
             @php
             [$hasOrphan,$sameEnv] = App\Utils\Support\HandleFieldsAttachment::handle($doc);
@@ -90,7 +90,7 @@
             @if($hasOrphan)
             <input name="{{$name}}[toBeAttached][]" value="{{$doc['id']}}" type="{{$hiddenOrText}}" />
             @endif
-            <div class="items-center gap-2 mt-2">
+            <div class="items-center gap-2 p-1">
                 <div class="flex gap-2 group relative items-center">
                     <a href="{{$path.$doc['url_media']}}" target="_blank" class="text-blue-500 w-full text-base text-left">
                         <p><i class="fa-light fa-file mr-1"></i>{{$doc['filename']}}</p>
@@ -118,8 +118,8 @@
                 
             </div>
         @endforeach
-        
     </div>
+    <div class="p-1"></div>
     @endif
 </div>
 @if(!$readOnly)

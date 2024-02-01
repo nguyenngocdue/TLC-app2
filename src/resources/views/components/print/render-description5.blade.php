@@ -7,8 +7,8 @@
 @if(sizeof($value) > 0)
     @switch($control)
         @case('attachment')
-            <div class='flex p-2 border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left items-center'>
-                @php
+            <div class='flex p-0 border text-left border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left items-center'>
+                {{-- @php
                     $isRenderSimple = $content->every(function($item){
                         return in_array($item->extension,App\Utils\Constant::ARRAY_ONLY_NONE_MEDIA);
                     });
@@ -17,9 +17,9 @@
                 <div>
                     <x-print.attachment-simple :dataSource="$value"/>
                 </div>
-                @else
+                @else --}}
                     <x-renderer.attachment2 openType='_blank' name='attachment' :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />
-                @endif
+                {{-- @endif --}}
             </div>
             @break
         @case('checkbox')
