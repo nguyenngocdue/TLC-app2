@@ -37,7 +37,8 @@
         .tg .tg-lboi {
             border-color: inherit;
             text-align: left;
-            vertical-align: middle
+            vertical-align: middle;
+            padding: 8px 8px 8px 8px
         }
 
         .tg .tg-9wq8 {
@@ -49,8 +50,15 @@
         .tg .tg-7btt {
             border-color: inherit;
             font-weight: bold;
+            text-align: right;
+            vertical-align: center
+        }
+
+        .tg .tg-7bttt {
+            border-color: inherit;
+            font-weight: bold;
             text-align: center;
-            vertical-align: top
+            vertical-align: center
         }
 
         .tg .tg-uzvj {
@@ -64,13 +72,14 @@
             border-color: inherit;
             font-weight: bold;
             text-align: right;
-            vertical-align: top
+            vertical-align: center
         }
 
         .tg .tg-0pky {
             border-color: inherit;
             text-align: right;
-            vertical-align: middle padding: 8px 8px 8px 8px
+            vertical-align: middle;
+            padding: 8px 8px 8px 8px
         }
 
         .tg .tg-g7sd {
@@ -83,7 +92,7 @@
     </style>
     @php
     $workplaces = App\Models\Workplace::all()->pluck('name', 'id')->toArray();
-    $abbMonths = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
+    $months = isset($params['only_month']) ? $params['only_month'] : App\Utils\Support\DateReport::getMonthsFromHaftYear($params);
     @endphp
 
     {{-- @dd($tableDataSource); --}}
@@ -91,15 +100,17 @@
     <table class="tg">
         <thead>
             <tr>
-                <th class="tg-7btt">Template</th>
-                <th class="tg-7btt">Metric Type Name</th>
-                <th class="tg-7btt">Unit</th>
-                <th class="tg-7btt">State</th>
-                <th class="tg-7btt">Workplace</th>
-                <th class="tg-7btt">Total</th>
-                @foreach($abbMonths as $abb)
-                <th class="tg-7btt">{{$abb}}</th>
-
+                <th class="tg-7bttt">Template</th>
+                <th class="tg-7bttt">Metric Type Name</th>
+                <th class="tg-7bttt">Unit</th>
+                <th class="tg-7bttt">State</th>
+                <th class="tg-7bttt">Workplace</th>
+                <th class="tg-7bttt">Total</th>
+                @foreach($months as $mon)
+                @php
+                $strMonth = App\Utils\Support\DateReport::getMonthAbbreviation2((int)$mon);
+                @endphp
+                <th class="tg-7btt">{{$strMonth}}</th>
                 @endforeach
             </tr>
         </thead>
@@ -130,9 +141,12 @@
                 {{-- Render first-line numberic for months --}}
                 <td class="tg-fymr">{{$firstWorkplaceName}}</td>
                 @foreach(reset($fCalculatedNums) as $k => $firstNum)
+                @php
+                $firstNum = (float)$firstNum ? $firstNum : '<i class="fa-light fa-minus"></i>';
+                @endphp
                 @if($k)
-                <td class="tg-0pky">{{$firstNum}}</td>
-                @else <td class="tg-0pky bg-lime-500">{{$firstNum}}</td>
+                <td class="tg-0pky">{!!$firstNum!!}</td>
+                @else <td class="tg-0pky bg-lime-500">{!!$firstNum!!}</td>
                 @endif
                 @endforeach
             </tr>
@@ -142,25 +156,31 @@
             <tr>
                 <td class="tg-fymr">{{$workplaces[$kwp]}}</td>
                 @foreach($numbers as $k => $secondNum)
+                @php
+                $secondNum = (float)$secondNum ? $secondNum : '<i class="fa-light fa-minus"></i>';
+                @endphp
                 @if($k)
-                <td class="tg-0pky">{{$secondNum}}</td>
-                @else <td class="tg-0pky bg-lime-500">{{$secondNum}}</td>
+                <td class="tg-0pky">{!!$secondNum!!}</td>
+                @else <td class="tg-0pky bg-lime-500">{!!$secondNum!!}</td>
                 @endif
                 @endforeach
             </tr>
             @endforeach
             {{-- Total per Months --}}
             <tr>
-                <td class="tg-7btt" colspan="1">Total</td>
+                <td class="tg-7btt bg-gray-100" colspan="1">Total</td>
                 @foreach($totalPerMonths as $totalNum)
-                <td class="tg-fymr bg-lime-200">{{$totalNum}}</td>
+                @php
+                $totalNum = (float)$totalNum ? $totalNum : '<i class="fa-light fa-minus"></i>';
+                @endphp
+                <td class="tg-fymr bg-lime-200">{!!$totalNum!!}</td>
                 @endforeach
             </tr>
 
             @endforeach
             @endforeach
 
-            <tr>
+            {{-- <tr>
                 <td class="tg-7btt" colspan="5">TOTAL</td>
                 <td class="tg-fymr">32838</td>
                 <td class="tg-fymr">262</td>
@@ -175,7 +195,7 @@
                 <td class="tg-fymr">4582.7</td>
                 <td class="tg-fymr">5122.7</td>
                 <td class="tg-fymr">5662.7</td>
-            </tr>
+            </tr> --}}
 
 
         </tbody>

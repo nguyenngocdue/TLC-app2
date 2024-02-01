@@ -37,7 +37,8 @@ class DateReport
         return DateTime::createFromFormat('Y/m/d', $strDateEdit)->format($typeFormat);
     }
 
-    public static function basicFormatDateString($strDate, $typeFormat = 'Y-m-d'){
+    public static function basicFormatDateString($strDate, $typeFormat = 'Y-m-d')
+    {
         $dateTime = new DateTime($strDate);
         return $dateTime->format($typeFormat);
     }
@@ -45,7 +46,7 @@ class DateReport
     public static function getMonthAbbreviation($month)
     {
         $month = str_pad($month, 2, '0', STR_PAD_LEFT);
-        if(!is_numeric($month)) return $month;
+        if (!is_numeric($month)) return $month;
         return date('M', strtotime("2023-$month-01"));
     }
 
@@ -53,25 +54,27 @@ class DateReport
     {
         $currentYear = date('Y');
         $currentMonth = date('m');
-        return $separate ? 
+        return $separate ?
             array('year' => $currentYear, 'month' => $currentMonth) :
             $currentYear . '-' . $currentMonth;
     }
 
-    public static function separateStrPickerDate($strPickerDate){
+    public static function separateStrPickerDate($strPickerDate)
+    {
         try {
-            if(!is_string($strPickerDate)) return ['start' =>null, 'end' => null];
+            if (!is_string($strPickerDate)) return ['start' => null, 'end' => null];
             $dates = explode("-", $strPickerDate);
-            return  ['start' => self::formatDateString(trim($dates[0])), 'end' =>self::formatDateString(trim($dates[1]))];
-        } catch (Exception $e){
+            return  ['start' => self::formatDateString(trim($dates[0])), 'end' => self::formatDateString(trim($dates[1]))];
+        } catch (Exception $e) {
             dd($e, $strPickerDate);
         }
     }
-    private static function isValidDateFormat($dateString) {
+    private static function isValidDateFormat($dateString)
+    {
         $date = DateTime::createFromFormat('Y-m-d', $dateString);
         return ($date !== false /* && !array_sum($date::getLastErrors()) */);
     }
-    
+
 
     public static function createValueForParams($fields, $params)
     {
@@ -81,34 +84,32 @@ class DateReport
             $value = '';
             if (isset($params[$field])) {
                 if ($field === 'picker_date') {
-                    if(self::isValidDateFormat($params[$field])) {
+                    if (self::isValidDateFormat($params[$field])) {
                         $value = $params[$field];
                     } else {
                         $value = self::separateStrPickerDate($params[$field]);
                         // dd($value);
                     }
-                }elseif($field === 'only_month') {
-                    if(is_array( $params[$field])){
-                        $months = array_map(fn($item) => STR_PAD($item, 2,"0", STR_PAD_LEFT), $params[$field]);
-                    } else{
-                        $months =STR_PAD($params[$field], 2,"0", STR_PAD_LEFT);
+                } elseif ($field === 'only_month') {
+                    if (is_array($params[$field])) {
+                        $months = array_map(fn ($item) => STR_PAD($item, 2, "0", STR_PAD_LEFT), $params[$field]);
+                    } else {
+                        $months = STR_PAD($params[$field], 2, "0", STR_PAD_LEFT);
                     }
                     $value = StringReport::arrayToJsonWithSingleQuotes2($months, true);
-                }elseif($field === 'year') {
+                } elseif ($field === 'year') {
                     $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field], true);
-                } 
-                elseif ($field === 'status') {
+                } elseif ($field === 'status') {
                     $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field]);
                 } elseif (is_array($params[$field])) {
                     $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field]);
-                }
-                else {
+                } else {
                     $value = StringReport::arrayToJsonWithSingleQuotes2($params[$field]);
                 }
             }
             $valParams[$field] = $value;
         }
-        $valParams = array_merge($params, $valParams);        
+        $valParams = array_merge($params, $valParams);
         return $valParams;
     }
 
@@ -121,23 +122,24 @@ class DateReport
         return date($targetDate->format('d/m/Y')) . '-' . date($currentDate->format('d/m/Y'));
     }
 
-    public static function getWeeksInYear($year) {
+    public static function getWeeksInYear($year)
+    {
         $weeks = [];
         $date = new DateTime();
         $date->setISODate($year, 1); // Set the date to the first day of the specified year
-    
+
         $endOfYear = new DateTime();
         $endOfYear->setISODate($year, 53); // Set the date to the last day of the specified year
         while ($date <= $endOfYear  && $date->format('Y') <= $year) {
             $weekNumber = $date->format('W');
             $startOfWeek = clone $date; // Clone the DateTime object to avoid modifying the original object
             $endOfWeek = clone $date->modify('+6 days'); // Modify the cloned object to get the end of the week
-            
-            if ($date->format('Y') <= $year){
+
+            if ($date->format('Y') <= $year) {
                 $weeks[(int)$weekNumber] = [
                     'start_date' => $startOfWeek->format('Y-m-d'),
                     'end_date' => $endOfWeek->format('Y-m-d')
-                ];            
+                ];
                 // Move to the next week
                 $date->modify('+1 days');
                 // dd($weeks);
@@ -147,40 +149,43 @@ class DateReport
         return $weeks;
     }
 
-    public static function getHalfYearPeriods($year) {
+    public static function getHalfYearPeriods($year)
+    {
         $firstHalfStart = strtotime($year . '-01-01');
         $firstHalfEnd = strtotime($year . '-06-30');
         $secondHalfStart = strtotime($year . '-07-01');
         $secondHalfEnd = strtotime($year . '-12-31');
-        
+
         // Format the dates as strings in 'Y-m-d' format
         $firstHalfStartFormatted = date('Y-m-d', $firstHalfStart);
         $firstHalfEndFormatted = date('Y-m-d', $firstHalfEnd);
         $secondHalfStartFormatted = date('Y-m-d', $secondHalfStart);
         $secondHalfEndFormatted = date('Y-m-d', $secondHalfEnd);
-        
+
         return [
             'start_half_year' => $firstHalfStartFormatted . '/' . $firstHalfEndFormatted,
-            'end_half_year' => $secondHalfStartFormatted . '/' .$secondHalfEndFormatted
+            'end_half_year' => $secondHalfStartFormatted . '/' . $secondHalfEndFormatted
         ];
     }
-    
-    public static function getMonthsByQuarter($quarter){
+
+    public static function getMonthsByQuarter($quarter)
+    {
         switch ($quarter) {
             case 1:
-                return ['01','02','03'];
+                return ['01', '02', '03'];
             case 2:
-                return ['04','05','06'];
+                return ['04', '05', '06'];
             case 3:
-                return ['07','08','09'];
+                return ['07', '08', '09'];
             case 4:
-                return ['10','11','12'];
+                return ['10', '11', '12'];
             default:
                 return "invalid";
         }
     }
 
-    public static function getMonthAbbreviation2($monthNumber) {
+    public static function getMonthAbbreviation2($monthNumber)
+    {
         $months = [
             "Jan", "Feb", "Mar", "Apr", "May", "Jun",
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -192,16 +197,17 @@ class DateReport
         }
     }
 
-    public static function calculateQuarterTotals($array) {
+    public static function calculateQuarterTotals($array)
+    {
         $quarters = [
             'quarter_1' => ['01', '02', '03'],
             'quarter_2' => ['04', '05', '06'],
             'quarter_3' => ['07', '08', '09'],
             'quarter_4' => ['10', '11', '12'],
         ];
-    
+
         $result = [];
-    
+
         foreach ($quarters as $quarter => $months) {
             $quarterTotal = 0;
             foreach ($months as $month) {
@@ -214,7 +220,8 @@ class DateReport
         return $result;
     }
 
-    public static function monthsToQuarters($months) {
+    public static function monthsToQuarters($months)
+    {
         $quarters = [
             'QTR1' => [1, 2, 3],
             'QTR2' => [4, 5, 6],
@@ -234,14 +241,31 @@ class DateReport
         return $result;
     }
 
-    public static function convertDatesToTimestamps($dates) {
-        return array_map(function($date) {
+    public static function convertDatesToTimestamps($dates)
+    {
+        return array_map(function ($date) {
             $dateTime = DateTime::createFromFormat('d/m/Y', $date);
             if ($dateTime === false) {
                 throw new Exception("Invalid date format: $date");
             }
-            return $dateTime->getTimestamp()*1000;
+            return $dateTime->getTimestamp() * 1000;
         }, $dates);
     }
 
+    public static function getMonthsFromHaftYear($params)
+    {
+        $onlyMonths = range(1, 12);
+        if (Report::checkValueOfField($params, 'half_year')) {
+            $haftYearStr = $params['half_year'];
+            switch ($haftYearStr) {
+                case 'start_half_year':
+                    $onlyMonths = range(1, 6);
+                    break;
+                case 'end_half_year':
+                    $onlyMonths = range(6, 12);
+                    break;
+            }
+        }
+        return $onlyMonths;
+    }
 }
