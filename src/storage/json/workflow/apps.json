@@ -199,6 +199,20 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "conqa_archive": {
+        "name": "conqa_archive",
+        "package_tab": "application",
+        "package": "compliance",
+        "sub_package": "quality_control",
+        "title": "CONQA Archive",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-box-archive\"><\/i>"
+    },
     "control_type": {
         "name": "control_type",
         "package_tab": "application",

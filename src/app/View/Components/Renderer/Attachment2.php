@@ -71,10 +71,10 @@ class Attachment2 extends Component
         }
         $docFiles = [];
         $remainingFiles = [];
-        foreach($this->attachments as $item){
-            if(in_array($item['extension'],Constant::ARRAY_ONLY_NONE_MEDIA)){
+        foreach ($this->attachments as $item) {
+            if (in_array(($item['extension'] ?? []), Constant::ARRAY_ONLY_NONE_MEDIA)) {
                 $docFiles[] = $item;
-            }else $remainingFiles[] = $item;
+            } else $remainingFiles[] = $item;
         }
         return view('components.renderer.attachment2', [
             'name' => $this->name,
@@ -93,4 +93,3 @@ class Attachment2 extends Component
         ]);
     }
 }
-
