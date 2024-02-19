@@ -114,3 +114,30 @@ Str::macro('removeDuplicateSpaces', function ($str) {    // Use regular expressi
 
     return $result;
 });
+
+Str::macro('getExtFromMime', function ($mime) {
+    switch ($mime) {
+        case "video/quicktime":
+            return "mov";
+        case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            return "docx";
+        case "application/x-zip-compressed":
+            return "zip";
+        case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+            return "xlsx";
+        case "image/webp":
+            return "webp";
+        case "image/avif":
+            return "avid";
+        case "image/png":
+            return "png";
+        case "video/mp4":
+            return "mp4";
+        case "image/svg+xml":
+            return "svg";
+        case "application/pdf":
+            return "pdf";
+        case "image/jpeg":
+            return "jpg";
+    }
+});

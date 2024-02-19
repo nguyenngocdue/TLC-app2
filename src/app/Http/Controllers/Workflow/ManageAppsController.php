@@ -82,6 +82,7 @@ class ManageAppsController extends AbstractManageLibController
                     // 'props-renderer',
                     // 'checklist-sheet-renderer',
                     'exam-renderer',
+                    'conqa-renderer',
                 ],
             ],
             [
