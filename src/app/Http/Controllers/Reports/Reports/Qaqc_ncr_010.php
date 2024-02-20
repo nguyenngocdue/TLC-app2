@@ -20,6 +20,7 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
         $primaryData = new Qaqc_ncr_dataSource();
         $_primaryData = $primaryData->getDataSource($params);
         $primaryData = $primaryData->changeDataSource($_primaryData, $params);
+        // dump($primaryData);
         return $primaryData;
     }
 
@@ -225,15 +226,14 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
             ],
         ];
     }
-   
+
     protected function getDefaultValueParams($params, $request)
     {
-        $params['picker_date'] =DateReport::defaultPickerDate();
+        $params['picker_date'] = DateReport::defaultPickerDate();
         #$params['project_id'] = $this->projectId;
         #$params['sub_project_id'] = $this->subProjectId;
         #$params['prod_routing_id'] = $this->prodRoutingId;
         // dd($params);
         return $params;
     }
-
 }
