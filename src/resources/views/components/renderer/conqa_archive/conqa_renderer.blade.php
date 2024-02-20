@@ -38,8 +38,7 @@
                             Unknown type {{$checkpoint->type}}
                             @break
                     @endswitch
-                    <br/>
-                    
+
                     {{-- Attachments: {{count($checkpointAttachmentIds)}}
                     @foreach($checkpointAttachmentIds as $id)
                         <li>{{$id}}</li>
@@ -160,13 +159,13 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
+            </div>    
 
             <x-renderer.conqa_archive.conqa_signoffs
-                :checkpoint="$checkpoint"
-                :attachments="$attachments"
-                :users="$users"
-                :minioPath="$minioPath"
+            :checkpoint="$checkpoint"
+            :attachments="$attachments"
+            :users="$users"
+            :minioPath="$minioPath"
             />
 
         @endforeach
