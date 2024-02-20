@@ -24,17 +24,45 @@ class ConqaArchiveRendererController extends Controller
 
         $json = json_decode($content);
 
+        $mediaContentTypes = [
+            "image/webp",
+            "image/avif",
+            "image/png",
+            "image/svg+xml",
+            "image/jpeg",
+            "video/mp4",
+            "video/quicktime",
+        ];
+        $documentContentTypes = [
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "application/x-zip-compressed",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "application/pdf",
+        ];
+
+        $checkpoints = $json->checkpoints;
+        $signoffs = array_filter(($json->signoffs ?? []), fn ($s) => !(isset($s->deleted) && $json->signoffs == true));
+
+        foreach ($signoffs as $signoff) {
+            $cpid = $signoff->signoffPointId;
+            if (!isset($checkpoints->{$cpid}->signoffs)) $checkpoints->{$cpid}->signoffs = [];
+            $checkpoints->{$cpid}->signoffs[] = $signoff;
+        }
+
         $renderer = view("components.renderer.conqa_archive.conqa_renderer", [
             "json" => $json,
             "sections" => $json->sections,
-            "checkpoints" => $json->checkpoints,
+            "checkpoints" => $checkpoints,
             "data" => $json->data,
             "attachments" => $json->attachments,
-            "signoffs" => $json->signoffs,
+            "mediaContentTypes" => $mediaContentTypes,
+            "documentContentTypes" => $documentContentTypes,
+
+            "signoffs" => $signoffs,
             "users" => $json->users,
-            "minioPath" => env('AWS_ENDPOINT') . '/conqa-backup/BTH/file',
+            "minioPath" => env('AWS_ENDPOINT') . '/conqa-backup/BTH',
         ]);
-        // Log::info($renderer);
+
         return ResponseObject::responseSuccess(htmlspecialchars($renderer . ""));
     }
 }
