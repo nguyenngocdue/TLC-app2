@@ -1,0 +1,42 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    }
+}

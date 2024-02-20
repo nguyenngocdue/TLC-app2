@@ -199,6 +199,22 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "conqa_archive": {
+        "name": "conqa_archive",
+        "package_tab": "application",
+        "package": "compliance",
+        "sub_package": "quality_control",
+        "title": "CONQA Archive",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": "conqa-renderer",
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-box-archive\"><\/i>",
+        "do_not_send_notification_mails": "true",
+        "disallowed_direct_creation": "true"
+    },
     "control_type": {
         "name": "control_type",
         "package_tab": "application",
@@ -838,9 +854,9 @@
         "show_renderer": null,
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
+        "disallowed_direct_creation": "true",
         "show_in_my_view": "true",
-        "apply_approval_tree": "true",
-        "disallowed_direct_creation": "true"
+        "apply_approval_tree": "true"
     },
     "hr_timesheet_worker": {
         "name": "hr_timesheet_worker",
@@ -855,9 +871,9 @@
         "show_renderer": null,
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
+        "disallowed_direct_creation": "true",
         "show_in_my_view": "true",
-        "apply_approval_tree": "true",
-        "disallowed_direct_creation": "true"
+        "apply_approval_tree": "true"
     },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
@@ -872,8 +888,8 @@
         "show_renderer": null,
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-badge-check\"><\/i>",
-        "show_in_my_view": "true",
-        "disallowed_direct_creation": "true"
+        "disallowed_direct_creation": "true",
+        "show_in_my_view": "true"
     },
     "hse_extra_metric": {
         "name": "hse_extra_metric",
@@ -1710,8 +1726,8 @@
         "show_renderer": null,
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-square-check\"><\/i>",
-        "show_in_my_view": "true",
-        "do_not_send_notification_mails": "true"
+        "do_not_send_notification_mails": "true",
+        "show_in_my_view": "true"
     },
     "qaqc_insp_chklst": {
         "name": "qaqc_insp_chklst",
@@ -1898,8 +1914,8 @@
         "show_renderer": null,
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-sensor-triangle-exclamation\"><\/i>",
-        "show_in_my_view": "true",
-        "disallowed_direct_creation": "true"
+        "disallowed_direct_creation": "true",
+        "show_in_my_view": "true"
     },
     "qaqc_wir": {
         "name": "qaqc_wir",
@@ -1914,8 +1930,8 @@
         "show_renderer": null,
         "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-clipboard-list-check\"><\/i>",
-        "show_in_my_view": "true",
-        "disallowed_direct_creation": "true"
+        "disallowed_direct_creation": "true",
+        "show_in_my_view": "true"
     },
     "qaqc_wir_line": {
         "name": "qaqc_wir_line",

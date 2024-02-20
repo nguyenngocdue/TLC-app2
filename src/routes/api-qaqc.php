@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\v1\FileController;
 use App\Http\Controllers\Api\v1\qaqc\CommentApiController;
+use App\Http\Controllers\Api\v1\qaqc\ConqaArchiveRendererController;
 use App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_lineController;
 use App\Http\Controllers\Api\v1\qaqc\Qaqc_insp_chklst_sht_sigController;
 use App\Http\Controllers\Api\v1\qaqc\RequestSignOffController;
@@ -38,6 +39,8 @@ Route::group([
     // Route::post("clone_chklst_from_tmpl", [CloneTemplateForQaqcChecklistController::class, 'clone']);
     Route::post("request_to_sign_off", [RequestSignOffController::class, 'requestSignOff']);
     Route::post("recall_to_sign_off", [RequestSignOffController::class, 'recallSignOff']);
+
+    Route::get("render_checklist", [ConqaArchiveRendererController::class, 'render'])->name("render_checklist");
 });
 
 
