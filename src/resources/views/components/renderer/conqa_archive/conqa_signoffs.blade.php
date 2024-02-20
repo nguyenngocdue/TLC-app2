@@ -44,7 +44,7 @@
                                     </div>
                                 @else
                                     <div class="p-2">
-                                        <b>{{$uploadedBy}} ({{$uploadedAt}})</b>   
+                                        <b>{{$uploadedBy}} ({{$uploadedAt}}):</b> 
                                         {{$attachment->text}}
                                     </div>
                                 @endif

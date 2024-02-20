@@ -40,16 +40,17 @@
                     @endswitch
                     <br/>
                     
-                    Attachments: {{count($checkpointAttachmentIds)}}
+                    {{-- Attachments: {{count($checkpointAttachmentIds)}}
                     @foreach($checkpointAttachmentIds as $id)
                         <li>{{$id}}</li>
-                    @endforeach
-                    <br/>
+                    @endforeach --}}
+
+                    
                     Documents:
                     <div class="">
                         @foreach($checkpointAttachmentIds as $checkpointAttachmentId)
                             @php $attachment = $attachments->{$checkpointAttachmentId} @endphp 
-                            @if($attachment->type=='file')
+                            @if($attachment->type=='file' && !isset($attachment->deleted))
                                 @if(isset($attachment->id))
                                     @if(isset($attachment->contentType))
                                         @if(in_array($attachment->contentType, $documentContentTypes))
@@ -76,7 +77,7 @@
                     <div class="grid grid-cols-5 gap-2 ">
                         @foreach($checkpointAttachmentIds as $checkpointAttachmentId)
                             @php $attachment = $attachments->{$checkpointAttachmentId} @endphp                       
-                            @if($attachment->type=='file')
+                            @if($attachment->type=='file' && !isset($attachment->deleted))
                                 @if(isset($attachment->id))
                                     @if(isset($attachment->contentType))
                                         @if(in_array($attachment->contentType, $mediaContentTypes))
@@ -109,7 +110,13 @@
                                     Unable to load attachment without id
                                 @endif
                             @endif
-                            @if($attachment->type=='signature')
+                        @endforeach
+                    </div>
+                    Signatures:
+                    <div class="grid grid-cols-3 gap-2">
+                        @foreach($checkpointAttachmentIds as $checkpointAttachmentId)
+                            @php $attachment = $attachments->{$checkpointAttachmentId} @endphp    
+                            @if($attachment->type=='signature' && !isset($attachment->deleted))
                                 @if(isset($attachment->id))
                                     @if(isset($attachment->contentType))
                                         @php 
@@ -140,13 +147,13 @@
                     <div class="">
                         @foreach($checkpointAttachmentIds as $checkpointAttachmentId)
                             @php $attachment = $attachments->{$checkpointAttachmentId} @endphp
-                            @if($attachment->type=='comment')
+                            @if($attachment->type=='comment' && !isset($attachment->deleted))
                                 @php
                                     $uploadedBy = $users->{$attachment->createdBy}->name;
                                     $uploadedAt = \Carbon\Carbon::parse( $attachment->createdAt)->format("d/m/Y");
                                 @endphp
-                                <p>
-                                    <b>{{$uploadedBy}}</b> (on {{$uploadedAt}}) said:
+                                <p class="ml-4">
+                                    <b>{{$uploadedBy}} ({{$uploadedAt}})</b>:
                                     {{$attachment->text}}
                                 </p>
                             @endif
