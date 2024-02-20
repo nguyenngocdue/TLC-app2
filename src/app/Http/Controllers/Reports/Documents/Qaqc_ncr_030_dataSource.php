@@ -23,7 +23,7 @@ class Qaqc_ncr_030_dataSource extends Controller
                                 DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
                                 DATE_FORMAT(ncr.due_date, '%Y') AS year,
                                 DATE_FORMAT(ncr.due_date, '%m') AS month,
-                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 3) AS str_month,
+                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,
                                 SUM(CASE
                                     WHEN ncr.status = 'closed' THEN 1
                                     ELSE 0
@@ -42,7 +42,7 @@ class Qaqc_ncr_030_dataSource extends Controller
                         DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
                         DATE_FORMAT(ncr.due_date, '%Y') AS year,
                         DATE_FORMAT(ncr.due_date, '%m') AS month,
-                        SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 3) AS str_month,
+                        SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,
                         SUM(
                             CASE
                                 WHEN ncr.defect_report_type = 240 THEN 1 ELSE 0 END 
@@ -60,7 +60,7 @@ class Qaqc_ncr_030_dataSource extends Controller
                         DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
                         DATE_FORMAT(ncr.due_date, '%Y') AS year,
                         DATE_FORMAT(ncr.due_date, '%m') AS month,
-                        SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 3) AS str_month,                    
+                        SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,                    
                         SUM(
                                 CASE
                                     WHEN ncr.user_team_id = 10 THEN 1 ELSE 0 END 
@@ -83,7 +83,7 @@ class Qaqc_ncr_030_dataSource extends Controller
                                 DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
                                 DATE_FORMAT(ncr.due_date, '%Y') AS year,
                                 DATE_FORMAT(ncr.due_date, '%m') AS month,
-                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 3) AS str_month,
+                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,
                                 ROUND(SUM(CASE
                                     WHEN ncr.status = 'closed' THEN 1
                                     ELSE 0
@@ -102,7 +102,7 @@ class Qaqc_ncr_030_dataSource extends Controller
                             DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
                             DATE_FORMAT(ncr.due_date, '%Y') AS year,
                             DATE_FORMAT(ncr.due_date, '%m') AS month,
-                            SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 3) AS str_month,
+                            SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,
                             SUM(
                                     CASE
                                         WHEN ncr.status = 'closed' THEN 1 ELSE 0 END 
@@ -138,7 +138,7 @@ class Qaqc_ncr_030_dataSource extends Controller
                                 DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
                                 DATE_FORMAT(ncr.due_date, '%Y') AS year,
                                 DATE_FORMAT(ncr.due_date, '%m') AS month,
-                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 3) AS str_month,
+                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,
                                 SUM(
                                     CASE
                                         WHEN 

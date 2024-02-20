@@ -58,7 +58,7 @@ abstract class Report_Parent2Controller extends Controller
         $sqlData = DB::select(DB::raw($sql));
         $collection = collect($sqlData);
         return $collection;
-    }    
+    }
     protected function getDefaultValueParams($params, $request)
     {
         $x = 'picker_date';
@@ -199,13 +199,19 @@ abstract class Report_Parent2Controller extends Controller
         return [];
     }
 
-    public function getDataGrafana($params){
-		return [];
-	}
+    public function getDataGrafana($params)
+    {
+        return [];
+    }
+
+    public function changeParams($params)
+    {
+        return [];
+    }
 
     public function index(Request $request)
     {
-        
+
         $input = $request->input();
         // Check Validations
         if ($input) {
@@ -267,7 +273,8 @@ abstract class Report_Parent2Controller extends Controller
         // dump($dataSource);
 
         $dataGrafana = $this->getDataGrafana($params);
-        
+        $paramsEdited = $this->changeParams($params);
+
         return view('reports.' . $viewName, [
             'entity' => $entity,
             'maxH' => $this->maxH,
@@ -296,6 +303,7 @@ abstract class Report_Parent2Controller extends Controller
             'childrenMode' => $params['children_mode'] ?? 'not_children',
             'type' => $this->getType(),
             'dataGrafana' => $dataGrafana,
+            'paramsEdited' => $paramsEdited,
         ] + $dataRenderDocReport);
     }
 
@@ -311,7 +319,7 @@ abstract class Report_Parent2Controller extends Controller
 
         $entity = CurrentPathInfo::getEntityReport($request, '_ep');
         $params = $this->getParams($request, '_ep');
-        
+
         $linesData = $this->getDataSource($params);
         $modeType = $this->modeType;
         // Pivot data before render 

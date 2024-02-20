@@ -93,7 +93,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
             "OPEN_CLOSED_ISSUES" => [
                 [
                     'title' => 'Month',
-                    'dataIndex' => 'month',
+                    'dataIndex' => 'str_month',
                     'align' => 'center'
                 ],
                 [
@@ -111,7 +111,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
             "NCR_DR" => [
                 [
                     'title' => 'Month',
-                    'dataIndex' => 'month',
+                    'dataIndex' => 'str_month',
                     'align' => 'center'
                 ],
                 [
@@ -129,7 +129,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
             "RESPONSIBLE_TEAM" => [
                 [
                     'title' => 'Month',
-                    'dataIndex' => 'month',
+                    'dataIndex' => 'str_month',
                     'align' => 'center'
                 ],
                 [
@@ -152,7 +152,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
             "AVERAGE_CLOSED_ISSUES" => [
                 [
                     'title' => 'Month',
-                    'dataIndex' => 'month',
+                    'dataIndex' => 'str_month',
                     'align' => 'center'
                 ],
                 [
@@ -179,7 +179,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
             "ISSUES_STATUS" => [
                 [
                     'title' => 'Month',
-                    'dataIndex' => 'month',
+                    'dataIndex' => 'str_month',
                     'align' => 'center'
                 ],
                 [
@@ -206,7 +206,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
             "ISSUES_SOURCE" => [
                 [
                     'title' => 'Month',
-                    'dataIndex' => 'month',
+                    'dataIndex' => 'str_month',
                     'align' => 'center'
                 ],
                 [
@@ -241,5 +241,16 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
         $primaryData = $_primaryData->getDataSource($params);
         // dd($primaryData);
         return $primaryData;
+    }
+
+    public function changeParams($params)
+    {
+        $params['condition_months'] = 'var-month=All';
+        if (Report::checkValueOfField($params, 'only_month')) {
+            $onlyMonthStr = implode(',', $params['only_month']);
+            $onlyMonthStr = 'var-month=' . str_replace(',', '&var-month=', $onlyMonthStr);
+            $params['condition_months'] = $onlyMonthStr;
+        }
+        return $params;
     }
 }
