@@ -178,10 +178,9 @@ class Qaqc_ncr_030_dataSource extends Controller
         if (Report::checkValueOfField($params, 'prod_order_id')) $conditionsStr .= "\n AND ncr.prod_order_id IN ({$params['prod_order_id']})";
         if (Report::checkValueOfField($params, 'prod_discipline_id'))  $conditionsStr .= "\n AND ncr.prod_discipline_id IN ({$params['prod_discipline_id']})";
         if (Report::checkValueOfField($params, 'user_team_ncr'))  $conditionsStr .= "\n AND ncr.user_team_id IN ({$params['user_team_ncr']})";
+        if (Report::checkValueOfField($params, 'root_cause'))  $conditionsStr .= "\n AND ncr.defect_root_cause_id IN ({$params['root_cause']})";
         if (Report::checkValueOfField($params, 'report_type'))  $conditionsStr .= "\n AND ncr.defect_report_type IN ({$params['report_type']})";
         if (Report::checkValueOfField($params, 'status'))  $conditionsStr .= "\n AND ncr.status IN ({$params['status']})";
-        if (Report::checkValueOfField($params, 'root_cause'))  $conditionsStr .= "\n AND ncr.defect_root_cause_id IN ({$params['root_cause']})";
-        if (Report::checkValueOfField($params, 'root_cause'))  $conditionsStr .= "\n AND ncr.defect_root_cause_id IN ({$params['root_cause']})";
 
         // dd($conditionsStr);
         $allSqlStr = $this->getAllSqlStr();

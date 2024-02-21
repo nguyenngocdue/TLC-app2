@@ -18,7 +18,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
 
 <div class="px-4">
     @include('components.reports.shared-parameter')
-    @include('components.reports.show-layout', ['optionPrint' => $optionPrint])
+    @include('components.reports.show-layout2', ['optionPrint' => $optionPrint])
 </div>
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
