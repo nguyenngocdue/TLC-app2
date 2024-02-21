@@ -57,10 +57,10 @@ class Qaqc_ncr_030_dataSource extends Controller
                         GROUP BY date_time, year, month, str_month";
 
         $RESPONSIBLE_TEAM = "SELECT
-                                DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
-                                DATE_FORMAT(ncr.due_date, '%Y') AS year,
-                                DATE_FORMAT(ncr.due_date, '%m') AS month,
-                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 3) AS str_month,
+                                DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
+                                DATE_FORMAT(ncr.created_at, '%Y') AS year,
+                                DATE_FORMAT(ncr.created_at, '%m') AS month,
+                                SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
                                 ncrt.name AS defect_report_type,
                                 COUNT(ncrt.name) AS count_ncr_dr
                                 FROM qaqc_ncrs ncr
