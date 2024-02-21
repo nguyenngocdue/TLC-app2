@@ -16,6 +16,7 @@
     var $valueEditor = $('#editor_' + name);
     var value = "";
     var editorContentInput = document.getElementById('editor_content_' + name);
+    console.log(diff);
     diff.forEach(function(part){
       var highlightedText = applyHighlights(part);
       value += highlightedText;
@@ -66,6 +67,7 @@
       })
       .then(editor => {
         editor.isReadOnly = !isModeDraft; // Ensure read-only mode is set after editor initialization
+        console.log(editor.getData());
       })
       .catch( error => {
         console.error( 'There was a problem initializing the editor.', error );
