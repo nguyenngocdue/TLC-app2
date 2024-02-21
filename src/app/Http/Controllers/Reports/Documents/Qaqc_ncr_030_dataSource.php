@@ -20,10 +20,10 @@ class Qaqc_ncr_030_dataSource extends Controller
     protected function getAllSqlStr()
     {
         $OPEN_CLOSED_ISSUES = "SELECT
-                                DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
-                                DATE_FORMAT(ncr.due_date, '%Y') AS year,
-                                DATE_FORMAT(ncr.due_date, '%m') AS month,
-                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,
+                                DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
+                                DATE_FORMAT(ncr.created_at, '%Y') AS year,
+                                DATE_FORMAT(ncr.created_at, '%m') AS month,
+                                SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
                                 SUM(CASE
                                     WHEN ncr.status = 'closed' THEN 1
                                     ELSE 0
@@ -39,10 +39,10 @@ class Qaqc_ncr_030_dataSource extends Controller
                             ORDER BY date_time";
 
         $NCR_DR = "SELECT
-                        DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
-                        DATE_FORMAT(ncr.due_date, '%Y') AS year,
-                        DATE_FORMAT(ncr.due_date, '%m') AS month,
-                        SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,
+                        DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
+                        DATE_FORMAT(ncr.created_at, '%Y') AS year,
+                        DATE_FORMAT(ncr.created_at, '%m') AS month,
+                        SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
                         SUM(
                             CASE
                                 WHEN ncr.defect_report_type = 240 THEN 1 ELSE 0 END 
@@ -57,52 +57,39 @@ class Qaqc_ncr_030_dataSource extends Controller
                         GROUP BY date_time, year, month, str_month";
 
         $RESPONSIBLE_TEAM = "SELECT
-                        DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
-                        DATE_FORMAT(ncr.due_date, '%Y') AS year,
-                        DATE_FORMAT(ncr.due_date, '%m') AS month,
-                        SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,                    
-                        SUM(
-                                CASE
-                                    WHEN ncr.user_team_id = 10 THEN 1 ELSE 0 END 
-                            ) AS count_structure,
-                        SUM(
-                                CASE
-                                    WHEN ncr.user_team_id = 7 THEN 1 ELSE 0 END 
-                            ) AS count_ppr,
-                        SUM(
-                                CASE
-                                    WHEN ncr.user_team_id != 7 AND ncr.user_team_id != 10  THEN 1 ELSE 0 END 
-                            ) AS count_fit_out
-                        FROM qaqc_ncrs ncr
-                        LEFT JOIN user_team_ncrs ncrt ON ncrt.id = ncr.user_team_id
-                        WHERE 1 = 1 
-                            AND ncr.deleted_by IS NULL
-                        GROUP BY date_time, year, month, str_month";
-
-        $AVERAGE_CLOSED_ISSUES = "SELECT
                                 DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
                                 DATE_FORMAT(ncr.due_date, '%Y') AS year,
                                 DATE_FORMAT(ncr.due_date, '%m') AS month,
-                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,
-                                ROUND(SUM(CASE
-                                    WHEN ncr.status = 'closed' THEN 1
-                                    ELSE 0
-                                END)/COUNT(ncr.id),2) AS avg_closed,
-                                SUM(CASE
-                                    WHEN ncr.status != 'closed' THEN 1
-                                    ELSE 0
-                                END) AS count_new
-                            FROM qaqc_ncrs ncr
-                            WHERE 1 = 1
-                            AND ncr.deleted_by IS NULL
-                            GROUP BY date_time, year ,month, str_month
-                            ORDER BY date_time";
+                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 3) AS str_month,
+                                ncrt.name AS defect_report_type,
+                                COUNT(ncrt.name) AS count_ncr_dr
+                                FROM qaqc_ncrs ncr
+                                LEFT JOIN user_team_ncrs ncrt ON ncrt.id = ncr.user_team_id
+                                WHERE ncr.deleted_by IS NULL
+                                GROUP BY date_time, year, month, str_month, ncrt.name";
+
+        $AVERAGE_CLOSED_ISSUES = "SELECT
+                                    DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
+                                    DATE_FORMAT(ncr.created_at, '%Y') AS year,
+                                    DATE_FORMAT(ncr.created_at, '%m') AS month,
+                                    SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
+                                    ROUND(SUM(CASE 
+                                        WHEN ncr.status = 'closed'
+                                            THEN
+                                                TIME_TO_SEC(TIMEDIFF(ncr.closed_at, ncr.created_at))/60/60/24 ELSE 0 END)/(
+                                                COUNT(CASE WHEN ncr.status = 'closed' THEN ncr.id ELSE 0 END)),2) AS avg_day_closed,
+                                    COUNT(ncr.id) AS count_ncr_open
+                                    FROM qaqc_ncrs ncr
+                                    WHERE 1 = 1
+                                    AND ncr.deleted_by IS NULL
+                                    GROUP BY date_time, year ,month, str_month
+                                    ORDER BY date_time";
 
         $ISSUES_STATUS = "SELECT
-                            DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
-                            DATE_FORMAT(ncr.due_date, '%Y') AS year,
-                            DATE_FORMAT(ncr.due_date, '%m') AS month,
-                            SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,
+                            DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
+                            DATE_FORMAT(ncr.created_at, '%Y') AS year,
+                            DATE_FORMAT(ncr.created_at, '%m') AS month,
+                            SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
                             SUM(
                                     CASE
                                         WHEN ncr.status = 'closed' THEN 1 ELSE 0 END 
@@ -135,10 +122,10 @@ class Qaqc_ncr_030_dataSource extends Controller
                             SUM(count_isp) AS sum_count_isp,
                             SUM(count_wir + count_mir + count_isp) AS grand_total
                             FROM (SELECT
-                                DATE_FORMAT(ncr.due_date,'%Y-%m') AS date_time,
-                                DATE_FORMAT(ncr.due_date, '%Y') AS year,
-                                DATE_FORMAT(ncr.due_date, '%m') AS month,
-                                SUBSTR(DATE_FORMAT(ncr.due_date, '%M'), 1, 20) AS str_month,
+                                DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
+                                DATE_FORMAT(ncr.created_at, '%Y') AS year,
+                                DATE_FORMAT(ncr.created_at, '%m') AS month,
+                                SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
                                 SUM(
                                     CASE
                                         WHEN 
@@ -163,6 +150,7 @@ class Qaqc_ncr_030_dataSource extends Controller
                                 ) AS derived_table
                                 GROUP BY date_time, year, month, str_month
                                 ORDER BY date_time";
+
         return [
             "OPEN_CLOSED_ISSUES" => $OPEN_CLOSED_ISSUES,
             "NCR_DR" => $NCR_DR,
@@ -173,6 +161,7 @@ class Qaqc_ncr_030_dataSource extends Controller
         ];
     }
 
+
     private function makeSqlStr($params)
     {
         $conditionsStr  = "";
@@ -180,9 +169,9 @@ class Qaqc_ncr_030_dataSource extends Controller
         if (Report::checkValueOfField($params, 'only_month')) {
             $onlyMonth = $params['only_month'];
             $onlyMonthStr = implode(',', $onlyMonth);
-            $conditionsStr .= "\n AND DATE_FORMAT(ncr.due_date, '%m') IN ({$onlyMonthStr})";
+            $conditionsStr .= "\n AND DATE_FORMAT(ncr.created_at, '%m') IN ({$onlyMonthStr})";
         }
-        if (Report::checkValueOfField($params, 'year')) $conditionsStr .= "\n AND DATE_FORMAT(ncr.due_date, '%Y') = {$params['year']}";
+        if (Report::checkValueOfField($params, 'year')) $conditionsStr .= "\n AND DATE_FORMAT(ncr.created_at, '%Y') = {$params['year']}";
         if (Report::checkValueOfField($params, 'project_id')) $conditionsStr .= "\n AND ncr.project_id = {$params['project_id']}";
         if (Report::checkValueOfField($params, 'sub_project_id')) $conditionsStr .= "\n AND ncr.sub_project_id = {$params['sub_project_id']}";
         if (Report::checkValueOfField($params, 'prod_routing_id')) $conditionsStr .= "\n AND ncr.prod_routing_id = {$params['prod_routing_id']}";

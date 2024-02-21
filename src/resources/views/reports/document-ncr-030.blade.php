@@ -37,7 +37,7 @@ $heigh = 300;
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white box-border p-8">
             <x-print.header6 />
             {{-- BASIC INFORMATION --}}
-            <x-renderer.heading level=2 class='text-center'>NCR/DR Report Monthly Report</x-renderer.heading>
+            <x-renderer.heading level=2 class='text-center'>NCR/DR Monthly Report</x-renderer.heading>
 
             {{-- TABLES --}}
             <div class='grid grid-row-1 gap-4'>
@@ -83,21 +83,30 @@ $heigh = 300;
                         </div>
                     </div>
 
+                    <div class='col-span-6'>
+                        <x-renderer.heading level=4 class='text-center'>Monthly Issues' Statuses</x-renderer.heading>
+                        <div class="flex flex-col text-center">
+                            <iframe class="self-center" src="https://grafana.tlcmodular.com/d-solo/df468657-8c3d-4401-8c24-09d3c5007e0f/ncr?orgId=1&var-year={{$year}}&{{$conMonths}}&from=1708395847141&to=1708417447141&theme=light&&panelId=5" width="{{$width}}" height="{{$heigh}}" frameborder="1">
+                            </iframe>
+                            <div class='pt-4'>
+                                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_STATUS']" :dataSource="$tableDataSource['ISSUES_STATUS']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-span-6'>
+                        <x-renderer.heading level=4 class='text-center'>Monthly Issues Source</x-renderer.heading>
+                        <div class="flex flex-col text-center">
+                            <iframe class="self-center" src="https://grafana.tlcmodular.com/d-solo/df468657-8c3d-4401-8c24-09d3c5007e0f/ncr?orgId=1&var-year={{$year}}&{{$conMonths}}&from=1708395847141&to=1708417447141&theme=light&&panelId=6" width="{{$width}}" height="{{$heigh}}" frameborder="1">
+                            </iframe>
+                            <div class='pt-4'>
+                                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_SOURCE']" :dataSource="$tableDataSource['ISSUES_SOURCE']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
-            </div>
-
-
-            <div class="">
-            </div>
-
-
-            <div class="">
-                <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300 pt-4" id="" title="" style="scroll-margin-top: 90px;">Detail Report</h4>
-            </div>
-
-            <div class="">
-                <h4 class=" font-medium leading-tight text-2xl text-black my-2 text-left dark:text-gray-300 pt-4" id="" title="" style="scroll-margin-top: 90px;">Detail Report</h4>
-                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_SOURCE']" :dataSource="$tableDataSource['ISSUES_SOURCE']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
             </div>
 
         </div>

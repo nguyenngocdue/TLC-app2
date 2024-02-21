@@ -89,6 +89,10 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
 
     public function getTableColumns($params, $dataSource)
     {
+        if (isset($dataSource['RESPONSIBLE_TEAM'])) {
+            $colResponsible = $this->getColumnFieldsForResponsibleTeam($dataSource['RESPONSIBLE_TEAM']);
+        }
+
         return [
             "OPEN_CLOSED_ISSUES" => [
                 [
@@ -126,29 +130,11 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 ]
 
             ],
-            "RESPONSIBLE_TEAM" => [
-                [
-                    'title' => 'Month',
-                    'dataIndex' => 'str_month',
-                    'align' => 'center'
-                ],
-                [
-                    'title' => 'Fit Out',
-                    'dataIndex' => 'count_fit_out',
-                    'align' => 'right'
-                ],
-                [
-                    'title' => 'PPR',
-                    'dataIndex' => 'count_ppr',
-                    'align' => 'right'
-                ],
-                [
-                    'title' => 'Structure',
-                    'dataIndex' => 'count_structure',
-                    'align' => 'right'
-                ]
-
-            ],
+            "RESPONSIBLE_TEAM" => array_merge([[
+                'title' => 'Month',
+                'dataIndex' => 'str_month',
+                'align' => 'center'
+            ]], $colResponsible),
             "AVERAGE_CLOSED_ISSUES" => [
                 [
                     'title' => 'Month',
@@ -157,22 +143,12 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 ],
                 [
                     'title' => 'Closed Days (AVG)',
-                    'dataIndex' => 'avg_closed',
+                    'dataIndex' => 'avg_day_closed',
                     'align' => 'right'
                 ],
                 [
                     'title' => 'New',
-                    'dataIndex' => 'count_new',
-                    'align' => 'right'
-                ],
-                [
-                    'title' => 'Rejected',
-                    'dataIndex' => 'count_rejected',
-                    'align' => 'right'
-                ],
-                [
-                    'title' => 'Resolved',
-                    'dataIndex' => 'count_resolved',
+                    'dataIndex' => 'count_ncr_open',
                     'align' => 'right'
                 ]
             ],
@@ -234,12 +210,50 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
         ];
     }
 
+    private function getColumnFieldsForResponsibleTeam($data)
+    {
+        $fieldColumns = [];
+        $cols = [];
+        foreach ($data as &$values) {
+            $_values = (array)$values;
+            if (Report::checkValueOfField($_values, 'defect_report_type')) {
+                if (!in_array($_values['defect_report_type'], $fieldColumns)) {
+                    $fieldColumns[] = $_values['defect_report_type'];
+                    $cols[] = [
+                        'title' => $_values['defect_report_type'],
+                        'dataIndex' => $_values['defect_report_type'],
+                        'align' => 'right',
+                    ];
+                }
+            }
+        }
+        return $cols;
+    }
+
+    private function getDataResponsibleTeam($data)
+    {
+        foreach ($data as &$values) {
+            $_values = (array)$values;
+            if (Report::checkValueOfField($_values, 'defect_report_type')) {
+                $values->{$_values['defect_report_type']} = $_values['count_ncr_dr'];
+            }
+        }
+        $groupByField = Report::groupArrayByKey($data, "date_time");
+        $data = array_map(fn ($item) => array_merge(...$item), $groupByField);
+        return $data;
+    }
 
     public function getDataSource($params)
     {
         $_primaryData = new Qaqc_ncr_030_dataSource();
         $primaryData = $_primaryData->getDataSource($params);
         // dd($primaryData);
+        foreach ($primaryData as $key => $values) {
+            if ($key === 'RESPONSIBLE_TEAM') {
+                $dataResponsibleTeam = $this->getDataResponsibleTeam($values);
+                $primaryData[$key] = $dataResponsibleTeam;
+            }
+        }
         return $primaryData;
     }
 
@@ -251,6 +265,12 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
             $onlyMonthStr = 'var-month=' . str_replace(',', '&var-month=', $onlyMonthStr);
             $params['condition_months'] = $onlyMonthStr;
         }
+        return $params;
+    }
+
+    protected function getDefaultValueParams($params, $request)
+    {
+        $params['year'] = 2023;
         return $params;
     }
 }
