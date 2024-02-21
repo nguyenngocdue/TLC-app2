@@ -134,7 +134,10 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
         $result = [
-            'compliance_name' => $y->compliance_name,
+            'compliance_name' => (object)[
+                'value' => $y->compliance_name,
+                'cell_div_class' => 'whitespace-nowrap',
+            ],
             // 'progress' => $y->progress,
         ];
 
