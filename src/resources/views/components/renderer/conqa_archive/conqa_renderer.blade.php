@@ -152,8 +152,9 @@
                                     $uploadedAt = \Carbon\Carbon::parse( $attachment->createdAt)->format("d/m/Y");
                                 @endphp
                                 <p class="ml-4">
-                                    <b>{{$uploadedBy}} ({{$uploadedAt}})</b>:
-                                    {{$attachment->text}}
+                                    <x-renderer.card title="{{$uploadedBy}} ({{$uploadedAt}})">
+                                        {{$attachment->text}}
+                                    </x-renderer.card>
                                 </p>
                             @endif
                         @endforeach

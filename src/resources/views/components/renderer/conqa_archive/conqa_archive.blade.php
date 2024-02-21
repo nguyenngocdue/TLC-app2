@@ -2,11 +2,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
 <div class="grid grid-cols-12 gap-2">
-    <div class="col-span-4 border">
+    <div class="col-span-4 border no-print">
         BTH
         <div id="json_tree_1" class="overflow-x-hidden" ></div>
     </div>
-    <div class="col-span-8 border">
+    <div class="col-span-12 lg:col-span-8 border">
         <div id="checklist_1" class="overflow-x-hidden" ></div>
     </div>
 </div>

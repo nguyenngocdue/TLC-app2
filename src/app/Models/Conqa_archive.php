@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Conqa_archive extends ModelExtended
 {
     protected $fillable = [
-        "name", "owner_id",
+        "name", "uuid", "owner_id",
     ];
 
     public static $statusless = true;

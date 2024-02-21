@@ -21,7 +21,9 @@ return new class extends Migration
 
         $schema->create('conqa_archives', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
+            $table->string('uuid')->nullable();
 
             $table->hasStatus();
             // $table->orderable();
