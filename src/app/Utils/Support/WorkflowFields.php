@@ -170,7 +170,20 @@ class WorkflowFields
         $result['classColSpanLabel'] = "col-span-" . ($prop['new_line'] === 'true' ? "12" : (24 / $col_span));
         $result['classColStart'] = ""; //"col-start-" . (24 / $col_span + 1);
         $result['classColSpanControl'] = "col-span-" . ($prop['new_line'] === 'true' ? "12" : (12 - 24 / $col_span));
-        $result['value'] = $values->{$columnName} ?? '';
+        switch ($control) {
+            case 'textarea_diff':
+                $result['value'] = $values->{$columnName} ?? '';
+                $result['value2'] = $values->{$columnName.'_draft'} ?? '';
+                break;
+            case 'textarea_diff_draft':
+                $result['value'] = $values->{$columnName} ?? '';
+                $result['value2'] = $values->{str_replace('_draft',"",$columnName)} ?? '';
+                break;
+            
+            default:
+                $result['value'] = $values->{$columnName} ?? '';
+                break;
+        }
         $result['title'] = $columnName . " / " . $control;
         $defaultValue = $defaultValues[$key] ?? [];
         $result['default_value'] = $defaultValue['default_value'] ?? "";

@@ -66,6 +66,8 @@
         "status",
         "text",
         "textarea",
+        "textarea_diff",
+        "textarea_diff_draft",
         "title",
         "thumbnail",
         "lock_version"

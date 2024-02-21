@@ -32,6 +32,15 @@
     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
     @break
 
+    @case('textarea_diff')
+    <x-controls.textarea-diff2 name={{$columnName}} :value="$value" :value2="$value2" colType={{$columnType}} placeholder="{{$placeholder}}" />
+    <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+    @break
+    @case('textarea_diff_draft')
+    <x-controls.textarea-diff2 mode="draft" name={{$columnName}} :value="$value" :value2="$value2" colType={{$columnType}} placeholder="{{$placeholder}}" />
+    <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+    @break
+
     @case('toggle')
     <x-controls.toggle2 name={{$columnName}} value={{$value}} readOnly={{$readOnly}} />
     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />

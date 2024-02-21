@@ -33,11 +33,13 @@
                                 />
                             </div>
                             <div class="{{$classColStart}} {{$classColSpanControl}} pb-2 text-left">
+                                @php $value2 = $value2 ?? "" @endphp
                                 <x-renderer.item-render-control
                                     :item="$item"
                                     :prop="$prop"
                                     :valueArray="$value"
                                     :value="$value"
+                                    :value2="$value2"
                                     
                                     control="{{$control}}"
                                     columnName="{{$columnName}}"

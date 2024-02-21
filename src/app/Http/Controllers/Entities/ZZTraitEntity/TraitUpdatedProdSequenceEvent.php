@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Events\UpdatedEsgSheetEvent;
 use App\Events\UpdatedProdSequenceEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
+use App\Events\UpdatedUserPositionEvent;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Log;
@@ -19,6 +20,9 @@ trait TraitUpdatedProdSequenceEvent
                 break;
             case 'esg_sheet':
                 event(new UpdatedEsgSheetEvent($id));
+                break;
+            case 'user_position':
+                event(new UpdatedUserPositionEvent($id));
                 break;
             case 'qaqc_insp_chklst_sht':
                 $actionButton = $request->input('actionButton');

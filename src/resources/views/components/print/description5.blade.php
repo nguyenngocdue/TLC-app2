@@ -23,6 +23,10 @@
                 @endif
                 @if ($control == 'toggle')
                 <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>{{$content == "1" ? "Yes" : "No"}}</span>
+                @elseif ($control == 'textarea_diff' || $control == 'textarea_diff_draft')
+                    <div class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>
+                        <x-controls.text-editor name="{{$columnName}}" :value="$content" />
+                    </div>
                 @else
                 <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>{!!$content!!}</span>
                 @endif

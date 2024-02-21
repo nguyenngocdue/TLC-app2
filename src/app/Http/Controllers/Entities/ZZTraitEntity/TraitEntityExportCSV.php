@@ -21,6 +21,8 @@ trait TraitEntityExportCSV
                 case "number":
                 case "text":
                 case "textarea":
+                case "textarea_diff":
+                case "textarea_diff_draft":
                 case "status":
                 case "hyperlink":
                     $result[] = $dataLine->{$column['column_name']};
