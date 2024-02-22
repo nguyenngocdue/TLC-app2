@@ -25,6 +25,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/justifiedGallery@3.8.1.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/lightgallery.css') }}">
+    <!-- <link href="{{ asset('css/jquery.highlight-within-textarea.css')}}" rel="stylesheet"> -->
         
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
@@ -81,6 +82,16 @@
     
     <script src="{{ asset('js/justifiedGallery@3.8.1.min.js') }}"></script>
     <script src="{{ asset('js/lightgallery.js') }}"></script>
+    <script src="{{ asset('js/jsdiff.js') }}"></script>
+    <!-- <script src="{{ asset('js/jquery.highlight-within-textarea.js')}}"></script> -->
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script> -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/10.0.1/decoupled-document/ckeditor.js"></script>
+    <!-- <link href="
+https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-highlight@41.1.0/theme/highlight.min.css
+" rel="stylesheet">
+<script src="
+https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-highlight@41.1.0/src/augmentation.min.js
+"></script> -->
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/index.global.min.js"></script>

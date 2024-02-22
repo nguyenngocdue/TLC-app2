@@ -33,9 +33,9 @@ return new class extends Migration
             $table->text("report_to")->nullable();
             $table->string("job_desc")->nullable();
             $table->string("job_requirement")->nullable();
-            // $table->text("report_to_1")->nullable();
-            // $table->string("job_desc_1")->nullable();
-            // $table->string("job_requirement_1")->nullable();
+            $table->text("report_department")->nullable();
+            $table->string("job_desc_draft")->nullable();
+            $table->string("job_requirement_draft")->nullable();
 
             $table->unsignedBigInteger("assignee_1")->nullable();
 

@@ -135,6 +135,8 @@
                         @case('text')
                         @case('number')
                         @case('textarea')
+                        @case('textarea_diff')
+                        @case('textarea_diff_draft')
                             <x-advanced-filter.text3  name={{$columnName}} value={{$valueControl}}/>
                         @break
                         @case('toggle')

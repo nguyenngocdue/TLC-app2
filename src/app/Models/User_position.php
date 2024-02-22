@@ -10,7 +10,7 @@ class User_position extends ModelExtended
         "name", "description", "slug", "owner_id", "status",
         "position_prefix", "position_1", "position_2", "position_3",
         "report_to", "job_desc", "job_requirement",
-        "report_to_1", "job_desc_1", "job_requirement_1",
+        "report_department", "job_desc_draft", "job_requirement_draft",
         "assignee_1",
     ];
 

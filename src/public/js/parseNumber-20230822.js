@@ -20,8 +20,34 @@ function listenerSubmitForm(idForm) {
             'input[component="editable/picker_time"]',
             'input[component="editable/picker_date"]',
         ];
+        // console.log(window.editors);
         //Add leading ZERO to date or time when user only enter one digit
         $element2.forEach((element) => dataPickerFormatByElements(element));
+        //Handle logic textarea differences
+        $editorInputs = document.querySelectorAll('div[id^="editor_"]');
+        
+        $editorInputs.forEach(function(input) {
+            var id = input.id;
+            var name = id.substring("editor_".length);
+            var htmlContent = input.innerHTML;
+            var tempElement = document.createElement('div');
+            tempElement.innerHTML = htmlContent;
+            
+            // Remove <mark> elements while retaining their text content
+            var marks = tempElement.querySelectorAll('mark');
+            marks.forEach(function(mark) {
+                var textNode = document.createTextNode(mark.textContent);
+                mark.parentNode.replaceChild(textNode, mark);
+            });
+            // Get the updated HTML content without <mark> elements
+            var updatedHtmlContent = tempElement.innerHTML;
+
+            $editorInputContent = document.querySelector('input[id^="editor_content_'+name+'"]');
+            if ($editorInputContent) {
+                if(!(updatedHtmlContent == '<p><br data-cke-filler="true"></p>'))
+                    $editorInputContent.value = updatedHtmlContent;
+            }
+        });
     });
 }
 const numberRemoveCommaByElements = (nameElement) => {
@@ -43,7 +69,6 @@ const dataPickerFormatByElements = (nameElement) => {
             replacement = (match, p1, p2) => {
                 return p1.padStart(2, '0') + ':' + p2.padStart(2, '0');
             };
-            break;
             break;
         case 'input[component="controls/picker_month"]':
         case 'input[component="editable/picker_month"]':

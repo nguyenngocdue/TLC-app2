@@ -13,6 +13,7 @@ use App\Events\UpdatedEsgSheetEvent;
 use App\Events\UpdatedProdSequenceEvent;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
+use App\Events\UpdatedUserPositionEvent;
 use App\Events\UserSignedInEvent;
 //------------
 use App\Listeners\CreatedDocumentListener2;
@@ -26,6 +27,7 @@ use App\Listeners\UpdatedEsgSheetListener;
 use App\Listeners\UpdatedProdSequenceListener;
 use App\Listeners\UpdatedQaqcChklstListener;
 use App\Listeners\UpdatedQaqcChklstSheetListener;
+use App\Listeners\UpdatedUserPositionListener;
 use App\Listeners\UserSignedInListener;
 //------------
 use Illuminate\Auth\Events\Registered;
@@ -67,6 +69,9 @@ class EventServiceProvider extends ServiceProvider
 
         //Schedule
         SignOffRemindEvent::class => [SignOffRemindListener::class],
+
+        //Handle update job description
+        UpdatedUserPositionEvent::class => [UpdatedUserPositionListener::class],
     ];
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminSetRoleSetController;
 // use App\Http\Controllers\Api\v1\Social\PostController;
 use App\Http\Controllers\Api\v1\System\NotificationsController as SystemNotificationsController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\ConvertDataUserPositionController;
 use App\Http\Controllers\PublicHolidaysController;
 use App\Http\Controllers\MyOrgChartController;
 use App\Http\Controllers\Notifications\NotificationsController;
@@ -27,6 +28,7 @@ Route::group([
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
+    Route::get('convert-data', [ConvertDataUserPositionController::class, 'index'])->name('convert-data.index');
     Route::get('my-org-chart', [MyOrgChartController::class, 'index'])->name('myOrgChart.index');
     Route::get('public-holidays', [PublicHolidaysController::class, 'index'])->name('public-holidays.index');
     Route::get('profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');

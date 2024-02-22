@@ -59,6 +59,8 @@ trait TraitEntityAdvancedFilter
                         break;
                     case 'text':
                     case 'textarea':
+                    case 'textarea_diff':
+                    case 'textarea_diff_draft':
                     case 'number':
                         $result['text'][$key] = $value;
                         break;

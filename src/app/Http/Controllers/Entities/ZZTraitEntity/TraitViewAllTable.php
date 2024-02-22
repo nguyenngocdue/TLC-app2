@@ -81,6 +81,8 @@ trait TraitViewAllTable
                 break;
             case "text":
             case "textarea":
+            case "textarea_diff":
+            case "textarea_diff_draft":
                 $output['renderer'] = "text";
                 break;
             case "status":
