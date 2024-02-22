@@ -6,12 +6,14 @@ use App\Http\Controllers\Reports\Documents\Qaqc_ncr_030_dataSource as DocumentsQ
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\Documents\Qaqc_ncr_030_dataSource;
 use App\Http\Controllers\Reports\TraitCreateChartFromGrafana;
+use App\Http\Controllers\Reports\TraitParamURLGrafana;
 use App\Utils\Support\Report;
 
 class Qaqc_ncr_030 extends Report_ParentDocument2Controller
 {
 
     use TraitCreateChartFromGrafana;
+    use TraitParamURLGrafana;
     protected $mode = '030';
     protected $projectId = 5;
     protected $viewName = 'document-ncr-030';
@@ -33,18 +35,20 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 "title" => "Project",
                 "dataIndex" => "project_id",
                 "allowClear" => true,
+                "multiple" => true,
             ],
             [
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_id",
                 "hasListenTo" => true,
-                // "multiple" => true,
+                "multiple" => true,
                 "allowClear" => true,
             ],
             [
                 "title" => "Production Routing",
                 "dataIndex" => "prod_routing_id",
                 "hasListenTo" => true,
+                "multiple" => true,
                 "allowClear" => true,
             ],
             [
@@ -52,6 +56,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 "dataIndex" => "prod_order_id",
                 "multiple" => true,
                 "hasListenTo" => true,
+                "multiple" => true,
                 "allowClear" => true,
             ],
             [
@@ -60,30 +65,30 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 "multiple" => true,
                 "allowClear" => true,
             ],
-            [
-                "title" => "Responsible Team",
-                "dataIndex" => "user_team_ncr",
-                "multiple" => true,
-                "allowClear" => true,
-            ],
-            [
-                "title" => "Root Cause",
-                "dataIndex" => "root_cause",
-                "multiple" => true,
-                "allowClear" => true,
-            ],
-            [
-                "title" => "Report Type",
-                "dataIndex" => "report_type",
-                "multiple" => true,
-                "allowClear" => true,
-            ],
-            [
-                "title" => "Status",
-                "dataIndex" => "status",
-                "multiple" => true,
-                "allowClear" => true,
-            ],
+            // [
+            //     "title" => "Responsible Team",
+            //     "dataIndex" => "user_team_ncr",
+            //     "multiple" => true,
+            //     "allowClear" => true,
+            // ],
+            // [
+            //     "title" => "Root Cause",
+            //     "dataIndex" => "root_cause",
+            //     "multiple" => true,
+            //     "allowClear" => true,
+            // ],
+            // [
+            //     "title" => "Report Type",
+            //     "dataIndex" => "report_type",
+            //     "multiple" => true,
+            //     "allowClear" => true,
+            // ],
+            // [
+            //     "title" => "Status",
+            //     "dataIndex" => "status",
+            //     "multiple" => true,
+            //     "allowClear" => true,
+            // ],
         ];
     }
 
@@ -186,7 +191,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                     'align' => 'center'
                 ],
                 [
-                    'title' => 'ISP',
+                    'title' => 'ICS',
                     'dataIndex' => 'sum_count_isp',
                     'align' => 'right'
                 ],
@@ -247,7 +252,6 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
     {
         $_primaryData = new Qaqc_ncr_030_dataSource();
         $primaryData = $_primaryData->getDataSource($params);
-        // dd($primaryData);
         foreach ($primaryData as $key => $values) {
             if ($key === 'RESPONSIBLE_TEAM') {
                 $dataResponsibleTeam = $this->getDataResponsibleTeam($values);
@@ -257,15 +261,9 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
         return $primaryData;
     }
 
-    public function changeParams($params)
+    public function getParamsGrafana($params)
     {
-        $params['condition_months'] = 'var-month=All';
-        if (Report::checkValueOfField($params, 'only_month')) {
-            $onlyMonthStr = implode(',', $params['only_month']);
-            $onlyMonthStr = 'var-month=' . str_replace(',', '&var-month=', $onlyMonthStr);
-            $params['condition_months'] = $onlyMonthStr;
-        }
-        return $params;
+        return $this->createParamsGrafana($params);
     }
 
     protected function getDefaultValueParams($params, $request)

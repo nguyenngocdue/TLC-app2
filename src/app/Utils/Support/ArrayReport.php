@@ -14,7 +14,8 @@ class ArrayReport
         }
         return $sums;
     }
-    public static function calculatePercentBetween2Months($array1, $array2) {
+    public static function calculatePercentBetween2Months($array1, $array2)
+    {
         $result = [];
         foreach ($array2 as $key => $value2) {
             if (array_key_exists($key, $array1)) {
@@ -27,9 +28,10 @@ class ArrayReport
         // dump($result);
         return $result;
     }
-    public static function separateByYear($data) {
+    public static function separateByYear($data)
+    {
         $result = [];
-    
+
         foreach ($data as $item) {
             foreach ($item as $year => $values) {
                 if (!isset($result[$year])) $result[$year] = [];
@@ -38,19 +40,21 @@ class ArrayReport
         }
         return $result;
     }
-    public static function rearrangeArray($data) {
+    public static function rearrangeArray($data)
+    {
         $result = [];
         foreach ($data as $year => $quarters) {
             foreach ($quarters as $quarter => $value) {
-                if (!isset($result[$quarter]))$result[$quarter] = [];
+                if (!isset($result[$quarter])) $result[$quarter] = [];
                 $result[$quarter][$year] = $value;
             }
         }
         return $result;
     }
-    
-    public static function addZeroBeforeNumber($values){
-        return array_map(fn($item) => str_pad($item, 2, '0', STR_PAD_LEFT), $values);
+
+    public static function addZeroBeforeNumber($values)
+    {
+        return array_map(fn ($item) => str_pad($item, 2, '0', STR_PAD_LEFT), $values);
     }
 
     public static function mergeCommonKeys($data)
@@ -77,9 +81,9 @@ class ArrayReport
         return true;
     }
 
-    public static function checkAllTrue($array) {
+    public static function checkAllTrue($array)
+    {
         $uniqueValues = array_unique($array);
         return count($uniqueValues) === 1 && reset($uniqueValues) === true;
     }
-    
 }

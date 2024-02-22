@@ -16,85 +16,79 @@ class StringReport
         return $result;
     }
 
-    public static function createStrParamUrl($keyParam, $params){
-        $str = '';
-        if (isset($params[$keyParam])){
-            foreach ($params[$keyParam] as $value){
-                $str .= 'var-'.$keyParam."=".$value ."&";
-            }
-        }
-        return trim($str, '&');
-    }
-
-    public static function arrayToJsonWithSingleQuotes($item, $sign1='[', $sign2=']')
+    public static function arrayToJsonWithSingleQuotes($item, $sign1 = '[', $sign2 = ']')
     {
-        if(!is_array($item)) return is_numeric($item) ?  $item : "'$item'";
+        if (!is_array($item)) return is_numeric($item) ?  $item : "'$item'";
         return $sign1 . implode(', ', array_map(function ($item) {
-            if (is_object($item)){
+            if (is_object($item)) {
                 $val = ucfirst($item->value);
-                if(is_numeric($val)) return "$val";
+                if (is_numeric($val)) return "$val";
                 return "'$val'";
             } else {
                 $item = ucfirst($item);
-                if(is_numeric($item)) return "$item";
-                return "'$item'"; 
+                if (is_numeric($item)) return "$item";
+                return "'$item'";
             }
         }, $item)) . $sign2;
     }
 
-    public static function arrayToJsonWithSingleQuotes2($item, $apostrophe=false)
+    public static function arrayToJsonWithSingleQuotes2($item, $apostrophe = false)
     {
-        if(!is_array($item)) return is_numeric($item) ?  $item : "'$item'";
-        return  implode(', ', array_map(function ($item) use($apostrophe){
-            if (is_object($item)){
+        if (!is_array($item)) return is_numeric($item) ?  $item : "'$item'";
+        return  implode(', ', array_map(function ($item) use ($apostrophe) {
+            if (is_object($item)) {
                 $val =  $item->value;
-                if(is_numeric($val)) return "$val";
+                if (is_numeric($val)) return "$val";
                 return "'$val'";
             } else {
-                if(is_numeric($item)) {
-                    if($apostrophe){
+                if (is_numeric($item)) {
+                    if ($apostrophe) {
                         return "'$item'";
-                    } else{
+                    } else {
                         return "$item";
                     }
-                } ;
-                return "'$item'"; 
+                };
+                return "'$item'";
             }
         }, $item));
     }
 
     public static function separateStringsByDot($data)
-	{
-		array_walk($data, function (&$value, $key) {
-			if (str_contains($value, '.')) {
-				$items = explode('.', $value);
-				$array = [];
-				foreach ($items as $k => $val) {
-					$array['param_' . $k] = $val;
-				}
-				$value = $array;
-			}
-		});
-		return $data;
-	}
-
-    public static function stringsPad($array){
-        return array_map(fn($item) => str_pad($item, 2, '0', STR_PAD_LEFT), $array);
+    {
+        array_walk($data, function (&$value, $key) {
+            if (str_contains($value, '.')) {
+                $items = explode('.', $value);
+                $array = [];
+                foreach ($items as $k => $val) {
+                    $array['param_' . $k] = $val;
+                }
+                $value = $array;
+            }
+        });
+        return $data;
     }
 
-    public static function removeNumbersAndChars($inputString) {
-		$resultString = preg_replace("/[^a-zA-Z\s]/", '', $inputString);
-		return $resultString;
-	}
-
-    public static function fixDecimal($value){
-        return str_replace(',','', number_format($value, 2));
+    public static function stringsPad($array)
+    {
+        return array_map(fn ($item) => str_pad($item, 2, '0', STR_PAD_LEFT), $array);
     }
 
-    public static function createUrlParam($objects, $key = null, $value = null){
-        if (is_array($objects) && !empty($objects)){
+    public static function removeNumbersAndChars($inputString)
+    {
+        $resultString = preg_replace("/[^a-zA-Z\s]/", '', $inputString);
+        return $resultString;
+    }
+
+    public static function fixDecimal($value)
+    {
+        return str_replace(',', '', number_format($value, 2));
+    }
+
+    public static function createUrlParam($objects, $key = null, $value = null)
+    {
+        if (is_array($objects) && !empty($objects)) {
             return http_build_query($objects, '', '&', PHP_QUERY_RFC3986);
         }
-        return $key. '='.$value;
+        return $key . '=' . $value;
     }
 }

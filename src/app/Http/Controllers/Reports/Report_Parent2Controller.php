@@ -204,7 +204,7 @@ abstract class Report_Parent2Controller extends Controller
         return [];
     }
 
-    public function changeParams($params)
+    public function getParamsGrafana($params)
     {
         return [];
     }
@@ -273,7 +273,7 @@ abstract class Report_Parent2Controller extends Controller
         // dump($dataSource);
 
         $dataGrafana = $this->getDataGrafana($params);
-        $paramsEdited = $this->changeParams($params);
+        $paramsGrafana = $this->getParamsGrafana($params);
 
         return view('reports.' . $viewName, [
             'entity' => $entity,
@@ -303,7 +303,7 @@ abstract class Report_Parent2Controller extends Controller
             'childrenMode' => $params['children_mode'] ?? 'not_children',
             'type' => $this->getType(),
             'dataGrafana' => $dataGrafana,
-            'paramsEdited' => $paramsEdited,
+            'paramsGrafana' => $paramsGrafana,
         ] + $dataRenderDocReport);
     }
 

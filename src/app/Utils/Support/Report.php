@@ -479,21 +479,13 @@ class Report
     public static function exportArrayToJsonFile($array, $filename)
     {
         $json = json_encode($array);
-        // if ($json === false) {
-        //     echo "JSON encoding failed with error: " . json_last_error_msg() . "\n";
-        //     return false;
-        // }
-        // if (!is_writable($filename) && !file_exists($filename)) {
-        //     echo "The file $filename is not writable or does not exist.\n";
-        //     return false;
-        // }
-        // $result = file_put_contents($filename, $json);
-        dd($json);
-        // if ($result === false) {
-        //     echo "Failed to write to the file $filename.\n";
-        //     return false;
-        // }
-        // echo "Written $result bytes to $filename.\n";
         return true;
+    }
+
+    public static function addZeroToValue($array)
+    {
+        return array_map(function ($month) {
+            return sprintf("%02d", $month);
+        }, $array);
     }
 }
