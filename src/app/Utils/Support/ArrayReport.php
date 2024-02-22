@@ -86,4 +86,20 @@ class ArrayReport
         $uniqueValues = array_unique($array);
         return count($uniqueValues) === 1 && reset($uniqueValues) === true;
     }
+
+    public static function sliceArrayByKeyRange($data, $startKey, $endKey, $includeKey = true)
+    {
+        $result = [];
+        $startCollecting = false;
+        foreach ($data as $key => $value) {
+            if ($key === $startKey) {
+                $startCollecting = true;
+                if (!$includeKey) continue;
+            }
+            if ($key === $endKey) break;
+            if ($startCollecting) $result[$key] = $value;
+        }
+
+        return $result;
+    }
 }

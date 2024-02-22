@@ -23,7 +23,7 @@ $tr = "
     $heigh = 300;
     $year = $paramsGrafana['year'];
     $centerURL = $paramsGrafana['prams_url_str'];
-    $subUrl = "https://grafana.tlcmodular.com/d-solo/df468657-8c3d-4401-8c24-09d3c5007e0f/ncr?orgId=1&".$centerURL;
+    $subUrl = "https://grafana.tlcmodular.com/d-solo/ea031cad-a2b2-455b-adf8-ed50d990bfae/ncr?orgId=1&".$centerURL;
     //dump($subUrl);
 @endphp
 
@@ -81,16 +81,18 @@ $tr = "
                             </div>
                         </div>
                     </div>
-                    <div class='col-span-6'>
-                        <x-renderer.heading level=4 class='text-center'>Monthly Responsible Team's Issues</x-renderer.heading>
+
+                     <div class='col-span-6'>
+                        <x-renderer.heading level=4 class='text-center'>Monthly Issues' Statuses</x-renderer.heading>
                         <div class="flex flex-col text-center">
-                            <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=3" width="{{$width}}" height="{{$heigh}}" frameborder="1">
+                            <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=5" width="{{$width}}" height="{{$heigh}}" frameborder="1">
                             </iframe>
                             <div class='pt-4'>
-                                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['RESPONSIBLE_TEAM']" :dataSource="$tableDataSource['RESPONSIBLE_TEAM']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
+                                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_STATUS']" :dataSource="$tableDataSource['ISSUES_STATUS']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
                             </div>
                         </div>
                     </div>
+
                     <div class='col-span-6'>
                         <x-renderer.heading level=4 class='text-center'>Average Closed Days by Monthly Issues</x-renderer.heading>
                         <div class="flex flex-col text-center">
@@ -116,18 +118,19 @@ $tr = "
             {{-- TABLES --}}
             <div class='grid grid-row-1 gap-4'>
                 <div class='grid grid-cols-12 gap-4 text-center'>
-                    <div class='col-span-6'>
-                        <x-renderer.heading level=4 class='text-center'>Monthly Issues' Statuses</x-renderer.heading>
+                     
+                     <div class='col-span-12'>
+                        <x-renderer.heading level=4 class='text-center'>Monthly Responsible Team's Issues</x-renderer.heading>
                         <div class="flex flex-col text-center">
-                            <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=5" width="{{$width}}" height="{{$heigh}}" frameborder="1">
+                            <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=3" width="{{$width}}" height="{{$heigh}}" frameborder="1">
                             </iframe>
                             <div class='pt-4'>
-                                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_STATUS']" :dataSource="$tableDataSource['ISSUES_STATUS']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
+                                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['RESPONSIBLE_TEAM']" :dataSource="$tableDataSource['RESPONSIBLE_TEAM']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
                             </div>
                         </div>
                     </div>
 
-                    <div class='col-span-6'>
+                    <div class='col-span-12'>
                         <x-renderer.heading level=4 class='text-center'>Monthly Issues Source</x-renderer.heading>
                         <div class="flex flex-col text-center">
                             <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=6" width="{{$width}}" height="{{$heigh}}" frameborder="1">
