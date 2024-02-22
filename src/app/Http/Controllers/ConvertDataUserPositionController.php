@@ -17,5 +17,8 @@ class ConvertDataUserPositionController extends Controller
         if(CurrentUser::isAdmin()){
             ConvertDataUserPosition::handle();
         }
+        return view(
+            'test',
+        );
     }
 }
