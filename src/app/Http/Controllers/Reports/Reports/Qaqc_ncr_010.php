@@ -114,6 +114,12 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 "width" => 180,
             ],
             [
+                "title" => "NCR ID",
+                "dataIndex" => "ncr_id",
+                "align" => "center",
+                "width" => 100,
+            ],
+            [
                 "title" => "Title",
                 "dataIndex" => "ncr_name",
                 "align" => "left",
@@ -235,5 +241,17 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
         #$params['prod_routing_id'] = $this->prodRoutingId;
         // dd($params);
         return $params;
+    }
+
+    public function getDisplayValueColumns()
+    {
+        return [
+            [
+                'ncr_id' => [
+                    'route_name' => 'qaqc_ncrs.edit',
+                    'renderer' => 'id',
+                ]
+            ]
+        ];
     }
 }

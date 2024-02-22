@@ -30,14 +30,18 @@ trait TraitUpdateBasicInfoDataSource
                 $cellTitle = isset($values[$f]) && !is_null($values[$f]) ? $values[$f] : 'Id: ' . $values[str_replace('name', 'id', $field)];
                 $cellHref = '';
                 $cellClass = '';
+                $editedValue = '';
                 if ($attrib && in_array($field, $fieldsHref)) {
+                    $typeRender = isset($attrib[$field]['renderer']) ? $attrib[$field]['renderer'] : '';
+                    $editedValue = $typeRender === 'id' ? '#000.' . $values[$field] : '';
                     $info = $attrib[$field];
                     $id = $values[str_replace('name', 'id', $field)];
                     $cellHref =  isset($info['route_name']) ? route($info['route_name'], $id) : $cellHref;
-                    $cellClass = $cellHref ? 'text-blue-800' : '';
+                    $cellClass = $cellHref ? 'text-blue-500' : '';
                 }
+
                 $values[$field] = (object)[
-                    'value' => $values[$field],
+                    'value' => $editedValue ? $editedValue : $values[$field],
                     'cell_title' => $cellTitle,
                     'cell_href' => $cellHref,
                     'cell_class' => $cellClass,
@@ -50,7 +54,7 @@ trait TraitUpdateBasicInfoDataSource
     protected function addTooltip($dataSource, $fieldInputs = [])
     {
         $dataHref = $this->getDisplayValueColumns();
-        $fieldsHref = $dataHref ? array_values(...array_map(fn($item) => array_keys($item),$dataHref)) : [];
+        $fieldsHref = $dataHref ? array_values(...array_map(fn ($item) => array_keys($item), $dataHref)) : [];
         $fields = [
             'user_name',
             'project_name',
@@ -79,6 +83,8 @@ trait TraitUpdateBasicInfoDataSource
             'esg_sheet_name',
             'esg_tmpl_name',
             'esg_metric_type_name',
+
+            'ncr_id'
 
         ] + $fieldInputs;
         $attrib = [];

@@ -86,8 +86,7 @@ class Qaqc_ncr_010 extends Report_ParentDocument2Controller
 
     public function getTableColumns($params, $dataSource)
     {
-        return [
-        ];
+        return [];
     }
 
     public function getDataSource($params)
@@ -99,53 +98,54 @@ class Qaqc_ncr_010 extends Report_ParentDocument2Controller
     }
 
     public function changeDataSource($dataSource, $params)
-    {        
+    {
         $dataSource = Report::convertToType($dataSource);
         $groupByStatuses = Report::groupArrayByKey($dataSource, 'ncr_status');
         $numberOfStatuses = Report::countValuesInArray($groupByStatuses);
 
-        $groupByPriority= Report::groupArrayByKey($dataSource, 'priority_name');
-        $numberOfPriority= Report::countValuesInArray($groupByPriority);
+        $groupByPriority = Report::groupArrayByKey($dataSource, 'priority_name');
+        $numberOfPriority = Report::countValuesInArray($groupByPriority);
 
 
-        $groupBySeverity= Report::groupArrayByKey($dataSource, 'severity_name');
-        $numberOfSeverity= Report::countValuesInArray($groupBySeverity);
+        $groupBySeverity = Report::groupArrayByKey($dataSource, 'severity_name');
+        $numberOfSeverity = Report::countValuesInArray($groupBySeverity);
 
-        $groupByReportType= Report::groupArrayByKey($dataSource, 'report_type_name');
-        $numberOfReportType= Report::countValuesInArray($groupByReportType);
+        $groupByReportType = Report::groupArrayByKey($dataSource, 'report_type_name');
+        $numberOfReportType = Report::countValuesInArray($groupByReportType);
 
-        $groupByUserTeam= Report::groupArrayByKey($dataSource, 'user_team_name');
-        $numberOfUserTeam= Report::countValuesInArray($groupByUserTeam);
+        $groupByUserTeam = Report::groupArrayByKey($dataSource, 'user_team_name');
+        $numberOfUserTeam = Report::countValuesInArray($groupByUserTeam);
 
-        $groupByParentType= Report::groupArrayByKey($dataSource, 'parent_type');
-        $numberOfParentType= Report::countValuesInArray($groupByParentType);
+        $groupByParentType = Report::groupArrayByKey($dataSource, 'parent_type');
+        $numberOfParentType = Report::countValuesInArray($groupByParentType);
 
-        $groupByDiscipline= Report::groupArrayByKey($dataSource, 'prod_discipline_name');
+        $groupByDiscipline = Report::groupArrayByKey($dataSource, 'prod_discipline_name');
         ksort($groupByDiscipline);
-        $numberOfDiscipline= Report::countValuesInArray($groupByDiscipline);
-        
-        $groupByInterSubconName= Report::groupArrayByKey($dataSource, 'inter_subcon_name');
-        $numberOfInterSubconName= Report::countValuesInArray($groupByInterSubconName);
+        $numberOfDiscipline = Report::countValuesInArray($groupByDiscipline);
 
-        $groupByRoutCause= Report::groupArrayByKey($dataSource, 'root_cause_name');
-        $numberOfRoutCause= Report::countValuesInArray($groupByRoutCause);
+        $groupByInterSubconName = Report::groupArrayByKey($dataSource, 'inter_subcon_name');
+        $numberOfInterSubconName = Report::countValuesInArray($groupByInterSubconName);
 
-        $groupByDisposition= Report::groupArrayByKey($dataSource, 'disposition_name');
-        $numberOfDisposition= Report::countValuesInArray($groupByDisposition);
+        $groupByRoutCause = Report::groupArrayByKey($dataSource, 'root_cause_name');
+        $numberOfRoutCause = Report::countValuesInArray($groupByRoutCause);
+
+        $groupByDisposition = Report::groupArrayByKey($dataSource, 'disposition_name');
+        $numberOfDisposition = Report::countValuesInArray($groupByDisposition);
 
         $data = [
             'tableDataSource' => collect($dataSource),
-            'widgets' =>[
-                    'ncr_status' => $numberOfStatuses, 
-                    'ncr_priority' => $numberOfPriority,
-                    'ncr_severity' => $numberOfSeverity, 
-                    'ncr_user_team' => $numberOfUserTeam, 
-                    'ncr_parent_type' => $numberOfParentType, 
-                    'ncr_report_type' => $numberOfReportType,
-                    'ncr_discipline' => $numberOfDiscipline,
-                    'ncr_inter_subcon' => $numberOfInterSubconName,
-                    'ncr_root_cause' => $numberOfRoutCause,
-                    'ncr_disposition' => $numberOfDisposition]
+            'widgets' => [
+                'ncr_status' => $numberOfStatuses,
+                'ncr_priority' => $numberOfPriority,
+                'ncr_severity' => $numberOfSeverity,
+                'ncr_user_team' => $numberOfUserTeam,
+                'ncr_parent_type' => $numberOfParentType,
+                'ncr_report_type' => $numberOfReportType,
+                'ncr_discipline' => $numberOfDiscipline,
+                'ncr_inter_subcon' => $numberOfInterSubconName,
+                'ncr_root_cause' => $numberOfRoutCause,
+                'ncr_disposition' => $numberOfDisposition
+            ]
         ];
         // dd($data);
         return $data;
