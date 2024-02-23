@@ -11,17 +11,17 @@
         "name": "_name",
         "column_name": "name",
         "new": "true",
-        "draft": "true",
-        "pending_verification": "true",
-        "active": "true"
+        "draft": "",
+        "pending_verification": "",
+        "active": ""
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
         "new": "true",
-        "draft": "true",
-        "pending_verification": "true",
-        "active": "true"
+        "draft": "",
+        "pending_verification": "",
+        "active": ""
     },
     "_position_prefix": {
         "name": "_position_prefix",
@@ -71,9 +71,9 @@
         "pending_verification": "",
         "active": ""
     },
-    "_report_to_1": {
-        "name": "_report_to_1",
-        "column_name": "report_to_1",
+    "_report_department": {
+        "name": "_report_department",
+        "column_name": "report_department",
         "new": "",
         "draft": "",
         "pending_verification": "",
@@ -87,9 +87,9 @@
         "pending_verification": "",
         "active": ""
     },
-    "_job_desc_1": {
-        "name": "_job_desc_1",
-        "column_name": "job_desc_1",
+    "_job_desc_draft": {
+        "name": "_job_desc_draft",
+        "column_name": "job_desc_draft",
         "new": "",
         "draft": "",
         "pending_verification": "",
@@ -103,9 +103,9 @@
         "pending_verification": "",
         "active": ""
     },
-    "_job_requirement_1": {
-        "name": "_job_requirement_1",
-        "column_name": "job_requirement_1",
+    "_job_requirement_draft": {
+        "name": "_job_requirement_draft",
+        "column_name": "job_requirement_draft",
         "new": "",
         "draft": "",
         "pending_verification": "",

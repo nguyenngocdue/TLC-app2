@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Reports\TraitCreateSQL;
+use App\Http\Controllers\Reports\TraitEditParamsReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
@@ -11,6 +12,7 @@ class Qaqc_ncr_030_dataSource extends Controller
 
 {
     use TraitCreateSQL;
+    use TraitEditParamsReport;
     public function getSqlStr($params)
     {
         $sql = "";
@@ -54,19 +56,22 @@ class Qaqc_ncr_030_dataSource extends Controller
                         LEFT JOIN terms term ON term.id = ncr.defect_report_type
                         WHERE 1 = 1 
                             AND ncr.deleted_by IS NULL
-                        GROUP BY date_time, year, month, str_month";
+                        GROUP BY date_time, year, month, str_month
+                        ORDER BY date_time, month";
 
         $RESPONSIBLE_TEAM = "SELECT
                                 DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
                                 DATE_FORMAT(ncr.created_at, '%Y') AS year,
                                 DATE_FORMAT(ncr.created_at, '%m') AS month,
                                 SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
-                                ncrt.name AS defect_report_type,
+                                ncrt.name AS user_team_name,
                                 COUNT(ncrt.name) AS count_ncr_dr
                                 FROM qaqc_ncrs ncr
                                 LEFT JOIN user_team_ncrs ncrt ON ncrt.id = ncr.user_team_id
-                                WHERE ncr.deleted_by IS NULL
-                                GROUP BY date_time, year, month, str_month, ncrt.name";
+                                WHERE 1 = 1
+                                AND  ncr.deleted_by IS NULL
+                                GROUP BY date_time, year, month, str_month, ncrt.name
+                                ORDER BY date_time, month";
 
         $AVERAGE_CLOSED_ISSUES = "SELECT
                                     DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
@@ -83,7 +88,7 @@ class Qaqc_ncr_030_dataSource extends Controller
                                     WHERE 1 = 1
                                     AND ncr.deleted_by IS NULL
                                     GROUP BY date_time, year ,month, str_month
-                                    ORDER BY date_time";
+                                    ORDER BY date_time, month";
 
         $ISSUES_STATUS = "SELECT
                             DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
@@ -171,16 +176,18 @@ class Qaqc_ncr_030_dataSource extends Controller
             $onlyMonthStr = implode(',', $onlyMonth);
             $conditionsStr .= "\n AND DATE_FORMAT(ncr.created_at, '%m') IN ({$onlyMonthStr})";
         }
+        $editedParams = $this->changeValueParams($params);
+
         if (Report::checkValueOfField($params, 'year')) $conditionsStr .= "\n AND DATE_FORMAT(ncr.created_at, '%Y') = {$params['year']}";
-        if (Report::checkValueOfField($params, 'project_id')) $conditionsStr .= "\n AND ncr.project_id = {$params['project_id']}";
-        if (Report::checkValueOfField($params, 'sub_project_id')) $conditionsStr .= "\n AND ncr.sub_project_id = {$params['sub_project_id']}";
-        if (Report::checkValueOfField($params, 'prod_routing_id')) $conditionsStr .= "\n AND ncr.prod_routing_id = {$params['prod_routing_id']}";
-        if (Report::checkValueOfField($params, 'prod_order_id')) $conditionsStr .= "\n AND ncr.prod_order_id IN ({$params['prod_order_id']})";
-        if (Report::checkValueOfField($params, 'prod_discipline_id'))  $conditionsStr .= "\n AND ncr.prod_discipline_id IN ({$params['prod_discipline_id']})";
-        if (Report::checkValueOfField($params, 'user_team_ncr'))  $conditionsStr .= "\n AND ncr.user_team_id IN ({$params['user_team_ncr']})";
-        if (Report::checkValueOfField($params, 'root_cause'))  $conditionsStr .= "\n AND ncr.defect_root_cause_id IN ({$params['root_cause']})";
-        if (Report::checkValueOfField($params, 'report_type'))  $conditionsStr .= "\n AND ncr.defect_report_type IN ({$params['report_type']})";
-        if (Report::checkValueOfField($params, 'status'))  $conditionsStr .= "\n AND ncr.status IN ({$params['status']})";
+        if (Report::checkValueOfField($params, 'project_id')) $conditionsStr .= "\n AND ncr.project_id IN ({$editedParams['project_id']})";
+        if (Report::checkValueOfField($params, 'sub_project_id')) $conditionsStr .= "\n AND ncr.sub_project_id IN ({$editedParams['sub_project_id']})";
+        if (Report::checkValueOfField($params, 'prod_routing_id')) $conditionsStr .= "\n AND ncr.prod_routing_id IN ({$editedParams['prod_routing_id']})";
+        if (Report::checkValueOfField($params, 'prod_order_id')) $conditionsStr .= "\n AND ncr.prod_order_id IN ({$editedParams['prod_order_id']})";
+        if (Report::checkValueOfField($params, 'prod_discipline_id'))  $conditionsStr .= "\n AND ncr.prod_discipline_id IN ({$editedParams['prod_discipline_id']})";
+        if (Report::checkValueOfField($params, 'user_team_ncr'))  $conditionsStr .= "\n AND ncr.user_team_id IN ({$editedParams['user_team_ncr']})";
+        if (Report::checkValueOfField($params, 'root_cause'))  $conditionsStr .= "\n AND ncr.defect_root_cause_id IN ({$editedParams['root_cause']})";
+        if (Report::checkValueOfField($params, 'report_type'))  $conditionsStr .= "\n AND ncr.defect_report_type IN ({$editedParams['report_type']})";
+        if (Report::checkValueOfField($params, 'status'))  $conditionsStr .= "\n AND ncr.status IN ({$editedParams['status']})";
 
         // dd($conditionsStr);
         $allSqlStr = $this->getAllSqlStr();

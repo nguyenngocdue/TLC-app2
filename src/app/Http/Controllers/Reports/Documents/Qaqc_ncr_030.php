@@ -6,12 +6,16 @@ use App\Http\Controllers\Reports\Documents\Qaqc_ncr_030_dataSource as DocumentsQ
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\Documents\Qaqc_ncr_030_dataSource;
 use App\Http\Controllers\Reports\TraitCreateChartFromGrafana;
+use App\Http\Controllers\Reports\TraitParamURLGrafana;
+use App\Utils\Support\ArrayReport;
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\DB;
 
 class Qaqc_ncr_030 extends Report_ParentDocument2Controller
 {
 
     use TraitCreateChartFromGrafana;
+    use TraitParamURLGrafana;
     protected $mode = '030';
     protected $projectId = 5;
     protected $viewName = 'document-ncr-030';
@@ -33,18 +37,20 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 "title" => "Project",
                 "dataIndex" => "project_id",
                 "allowClear" => true,
+                "multiple" => true,
             ],
             [
                 "title" => "Sub Project",
                 "dataIndex" => "sub_project_id",
                 "hasListenTo" => true,
-                // "multiple" => true,
+                "multiple" => true,
                 "allowClear" => true,
             ],
             [
                 "title" => "Production Routing",
                 "dataIndex" => "prod_routing_id",
                 "hasListenTo" => true,
+                "multiple" => true,
                 "allowClear" => true,
             ],
             [
@@ -52,6 +58,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 "dataIndex" => "prod_order_id",
                 "multiple" => true,
                 "hasListenTo" => true,
+                "multiple" => true,
                 "allowClear" => true,
             ],
             [
@@ -60,30 +67,30 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 "multiple" => true,
                 "allowClear" => true,
             ],
-            [
-                "title" => "Responsible Team",
-                "dataIndex" => "user_team_ncr",
-                "multiple" => true,
-                "allowClear" => true,
-            ],
-            [
-                "title" => "Root Cause",
-                "dataIndex" => "root_cause",
-                "multiple" => true,
-                "allowClear" => true,
-            ],
-            [
-                "title" => "Report Type",
-                "dataIndex" => "report_type",
-                "multiple" => true,
-                "allowClear" => true,
-            ],
-            [
-                "title" => "Status",
-                "dataIndex" => "status",
-                "multiple" => true,
-                "allowClear" => true,
-            ],
+            // [
+            //     "title" => "Responsible Team",
+            //     "dataIndex" => "user_team_ncr",
+            //     "multiple" => true,
+            //     "allowClear" => true,
+            // ],
+            // [
+            //     "title" => "Root Cause",
+            //     "dataIndex" => "root_cause",
+            //     "multiple" => true,
+            //     "allowClear" => true,
+            // ],
+            // [
+            //     "title" => "Report Type",
+            //     "dataIndex" => "report_type",
+            //     "multiple" => true,
+            //     "allowClear" => true,
+            // ],
+            // [
+            //     "title" => "Status",
+            //     "dataIndex" => "status",
+            //     "multiple" => true,
+            //     "allowClear" => true,
+            // ],
         ];
     }
 
@@ -120,14 +127,14 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 ],
                 [
                     'title' => 'NCR',
-                    'dataIndex' => 'count_defect',
+                    'dataIndex' => 'count_ncr',
                     'align' => 'right'
                 ],
                 [
                     'title' => 'DR',
-                    'dataIndex' => 'count_ncr',
+                    'dataIndex' => 'count_defect',
                     'align' => 'right'
-                ]
+                ],
 
             ],
             "RESPONSIBLE_TEAM" => array_merge([[
@@ -186,7 +193,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                     'align' => 'center'
                 ],
                 [
-                    'title' => 'ISP',
+                    'title' => 'ICS',
                     'dataIndex' => 'sum_count_isp',
                     'align' => 'right'
                 ],
@@ -210,44 +217,65 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
         ];
     }
 
+
+    private function getNamesUserTeamsNCR()
+    {
+        $sqlStr = "SELECT
+                    DISTINCT ncrt.name AS name
+                    FROM qaqc_ncrs ncr
+                    LEFT JOIN user_team_ncrs ncrt ON ncrt.id = ncr.user_team_id
+                    WHERE 1 = 1
+                    AND  ncr.deleted_by IS NULL";
+        $sqlData = DB::select(DB::raw($sqlStr));
+        return collect($sqlData);
+    }
+
     private function getColumnFieldsForResponsibleTeam($data)
     {
-        $fieldColumns = [];
-        $cols = [];
-        foreach ($data as &$values) {
-            $_values = (array)$values;
-            if (Report::checkValueOfField($_values, 'defect_report_type')) {
-                if (!in_array($_values['defect_report_type'], $fieldColumns)) {
-                    $fieldColumns[] = $_values['defect_report_type'];
-                    $cols[] = [
-                        'title' => $_values['defect_report_type'],
-                        'dataIndex' => $_values['defect_report_type'],
-                        'align' => 'right',
-                    ];
-                }
-            }
-        }
+        $firstData = reset($data);
+        if (empty($firstData)) return [[]];
+        $allNamesUserTeams = $this->getNamesUserTeamsNCR()->pluck('name')->toArray();
+        $cols = array_filter($allNamesUserTeams, function ($value) use ($firstData) {
+            return array_key_exists($value, $firstData);
+        });
+        sort($cols);
+        $cols = array_map(function ($item) {
+            return  [
+                'title' => $item,
+                'dataIndex' => $item,
+                'align' => 'right'
+            ];
+        }, $cols);
         return $cols;
     }
 
     private function getDataResponsibleTeam($data)
     {
-        foreach ($data as &$values) {
-            $_values = (array)$values;
-            if (Report::checkValueOfField($_values, 'defect_report_type')) {
-                $values->{$_values['defect_report_type']} = $_values['count_ncr_dr'];
+        $fields = [];
+        foreach ($data as &$record) {
+            if (Report::checkValueOfField((array)$record, 'user_team_name')) {
+                $field = $record->user_team_name;
+                if (!in_array($field, $fields)) $fields[] = $field;
+                $record->{$field} = $record->count_ncr_dr;
             }
         }
-        $groupByField = Report::groupArrayByKey($data, "date_time");
-        $data = array_map(fn ($item) => array_merge(...$item), $groupByField);
-        return $data;
+
+        $groupedByDateTime = Report::groupArrayByKey($data, "date_time");
+        $mergedData = array_map(fn ($item) => array_merge(...$item), $groupedByDateTime);
+
+        // Ensure all records have all defect report types initialized to 0 if not set
+        foreach ($mergedData as &$values) {
+            foreach ($fields as $type) {
+                if (!isset($values[$type])) $values[$type] = 0;
+            }
+        }
+        return $mergedData;
     }
 
     public function getDataSource($params)
     {
         $_primaryData = new Qaqc_ncr_030_dataSource();
         $primaryData = $_primaryData->getDataSource($params);
-        // dd($primaryData);
         foreach ($primaryData as $key => $values) {
             if ($key === 'RESPONSIBLE_TEAM') {
                 $dataResponsibleTeam = $this->getDataResponsibleTeam($values);
@@ -257,15 +285,9 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
         return $primaryData;
     }
 
-    public function changeParams($params)
+    public function getParamsGrafana($params)
     {
-        $params['condition_months'] = 'var-month=All';
-        if (Report::checkValueOfField($params, 'only_month')) {
-            $onlyMonthStr = implode(',', $params['only_month']);
-            $onlyMonthStr = 'var-month=' . str_replace(',', '&var-month=', $onlyMonthStr);
-            $params['condition_months'] = $onlyMonthStr;
-        }
-        return $params;
+        return $this->createParamsGrafana($params);
     }
 
     protected function getDefaultValueParams($params, $request)
