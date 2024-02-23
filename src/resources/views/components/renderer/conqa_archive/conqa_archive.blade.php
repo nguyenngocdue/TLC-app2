@@ -42,7 +42,7 @@
                     if(jsonTree[i]['id'] == foldrUuid){
                         const node = jsonTree[i]
                         if(node.type == 'checklist'){
-                            $("#checklist_1").html("Loading...")
+                            $("#checklist_1").html("<div class='w-full m-4 p-4 text-blue-600'>Loading Checklist...</div>")
                             loadChecklistRenderer(foldrUuid)
                         }else {
                             $("#checklist_1").html("")

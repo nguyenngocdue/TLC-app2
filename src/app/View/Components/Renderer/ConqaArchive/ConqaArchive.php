@@ -59,7 +59,8 @@ class ConqaArchive extends Component
 
     function render()
     {
-        $path = storage_path("app/conqa_archive/database/{$this->projName}/");
+        // $path = storage_path("app/conqa_archive/database/{$this->projName}/");
+        $path = env('AWS_ENDPOINT') . '/conqa-backup/database/' . $this->projName . "/";
         $tree = $this->loadTree($path, $this->folderUuid, "#");
         return view(
             "components.renderer.conqa_archive.conqa_archive",

@@ -11,8 +11,10 @@ class ConqaArchiveRendererController extends Controller
 {
     function getFileContent($projName, $folderUuid)
     {
-        $path = storage_path("app/conqa_archive/database/{$projName}/cl/");
+        // $path = storage_path("app/conqa_archive/database/{$projName}/cl/");
+        $path = env('AWS_ENDPOINT') . '/conqa-backup/database/' . $projName . "/cl/";
         $content = file_get_contents($path . $folderUuid . ".json");
+
         return $content;
     }
 
@@ -44,6 +46,7 @@ class ConqaArchiveRendererController extends Controller
         $checkpoints = $json->checkpoints;
         $signoffs = array_filter(($json->signoffs ?? []), fn ($s) => !(isset($s->deleted) && $json->signoffs == true));
 
+        //Attach signoffs into checkpoints
         foreach ($signoffs as $signoff) {
             $cpid = $signoff->signoffPointId;
             if (!isset($checkpoints->{$cpid}->signoffs)) $checkpoints->{$cpid}->signoffs = [];
