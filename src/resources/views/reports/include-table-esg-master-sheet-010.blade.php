@@ -41,6 +41,13 @@
             padding: 8px 8px 8px 8px
         }
 
+        .tg .tg-lboi-overrite {
+            border-color: inherit;
+            text-align: center;
+            vertical-align: middle;
+            padding: 8px 8px 8px 8px
+        }
+        
         .tg .tg-9wq8 {
             border-color: inherit;
             text-align: center;
@@ -116,39 +123,42 @@
         </thead>
         <tbody>
             @foreach($tableDataSource as $k0 => $_dataSet)
-            @php
-            $dataSet = $_dataSet['array_metric_type'];
-            @endphp
-            @foreach($dataSet as $k1 => $items)
-            <tr>
                 @php
-                $rowSpanMeType = $items["rowspan_metric_type"];
-                $rowSpan = $k1 ? $items["rowspan_children"] : $_dataSet['rowspan'];
+                    $dataSet = $_dataSet['array_metric_type'];
                 @endphp
+                @foreach($dataSet as $k1 => $items)
+                <tr>
+                    @php
+                        $rowSpanMeType = $items["rowspan_metric_type"];
+                        $rowSpan = $k1 ? $items["rowspan_children"] : $_dataSet['rowspan'];
+                    @endphp
 
-                @if(!$k1)
-                <td class="tg-uzvj" rowspan="{{$rowSpan}}">{{$items['esg_tmpl_name']}}</td>
-                @endif
-                <td class="tg-uzvj" rowspan="{{$rowSpanMeType}}">{{$items['esg_metric_type_name']}}</td>
-                <td class="tg-lboi" rowspan="{{$rowSpanMeType}}">{{$items['unit']}}</td>
-                <td class="tg-lboi" rowspan="{{$rowSpanMeType}}">{{$items['state']}}</td>
-                @php
-                $fCalculatedNums = array_slice($items['calculated_numbers'], 0,1,true);
-                $firstWorkplaceName = $workplaces[array_keys($fCalculatedNums)[0]];
-                $calculatedNums = array_slice($items['calculated_numbers'],1,null,true);
-                $totalPerMonths = $items['total_per_month'];
-                @endphp
-                {{-- Render first-line numberic for months --}}
-                <td class="tg-fymr">{{$firstWorkplaceName}}</td>
-                @foreach(reset($fCalculatedNums) as $k => $firstNum)
-                @php
-                $firstNum = (float)$firstNum ? $firstNum : '<i class="fa-light fa-minus"></i>';
-                @endphp
-                @if($k)
-                <td class="tg-0pky">{!!$firstNum!!}</td>
-                @else <td class="tg-0pky bg-lime-400">{!!$firstNum!!}</td>
-                @endif
-                @endforeach
+                    @if(!$k1)
+                        <td class="tg-uzvj" rowspan="{{$rowSpan}}">{{$items['esg_tmpl_name']}}</td>
+                    @endif
+                        <td class="tg-uzvj" rowspan="{{$rowSpanMeType}}">{{$items['esg_metric_type_name']}}</td>
+                        <td class="tg-lboi-overrite" rowspan="{{$rowSpanMeType}}">{{$items['unit']}}</td>
+                        <td class="tg-lboi-overrite" rowspan="{{$rowSpanMeType}}">{{$items['state']}}</td>
+
+                        
+                    @php
+                        $fCalculatedNums = array_slice($items['calculated_numbers'], 0,1,true);
+                        $firstWorkplaceName = $workplaces[array_keys($fCalculatedNums)[0]];
+                        $calculatedNums = array_slice($items['calculated_numbers'],1,null,true);
+                        $totalPerMonths = $items['total_per_month'];
+                    @endphp
+                    {{-- Render first-line numberic for months --}}
+                    <td class="tg-fymr">{{$firstWorkplaceName}}</td>
+                    @foreach(reset($fCalculatedNums) as $k => $firstNum)
+                        @php
+                        $firstNum = (float)$firstNum ? $firstNum : '<i class="fa-light fa-minus"></i>';
+                        @endphp
+                            @if($k)
+                                <td class="tg-0pky">{!!$firstNum!!}</td>
+                            @else <td class="tg-0pky bg-lime-400">{!!$firstNum!!}</td>
+                            @endif
+                    @endforeach
+
             </tr>
 
             {{-- Render numberic for months --}}
@@ -156,13 +166,13 @@
             <tr>
                 <td class="tg-fymr">{{$workplaces[$kwp]}}</td>
                 @foreach($numbers as $k => $secondNum)
-                @php
-                $secondNum = (float)$secondNum ? $secondNum : '<i class="fa-light fa-minus"></i>';
-                @endphp
-                @if($k)
-                <td class="tg-0pky">{!!$secondNum!!}</td>
-                @else <td class="tg-0pky bg-lime-400">{!!$secondNum!!}</td>
-                @endif
+                    @php
+                        $secondNum = (float)$secondNum ? $secondNum : '<i class="fa-light fa-minus"></i>';
+                    @endphp
+                        @if($k)
+                            <td class="tg-0pky">{!!$secondNum!!}</td>
+                        @else <td class="tg-0pky bg-lime-400">{!!$secondNum!!}</td>
+                        @endif
                 @endforeach
             </tr>
             @endforeach
@@ -170,34 +180,15 @@
             <tr>
                 <td class="tg-7btt bg-gray-100" colspan="1">Total</td>
                 @foreach($totalPerMonths as $totalNum)
-                @php
-                $totalNum = (float)$totalNum ? $totalNum : '<i class="fa-light fa-minus"></i>';
-                @endphp
-                <td class="tg-fymr bg-lime-200">{!!$totalNum!!}</td>
+                    @php
+                        $totalNum = (float)$totalNum ? $totalNum : '<i class="fa-light fa-minus"></i>';
+                        $otherLine = str_contains($items['esg_metric_type_name'] ,'Others') ? 'bg-lime-500': false;
+                    @endphp
+                    <td class="tg-fymr bg-lime-200 {{$otherLine}}">{!!$totalNum!!}</td>
                 @endforeach
             </tr>
-
             @endforeach
-            @endforeach
-
-            {{-- <tr>
-                <td class="tg-7btt" colspan="5">TOTAL</td>
-                <td class="tg-fymr">32838</td>
-                <td class="tg-fymr">262</td>
-                <td class="tg-fymr">236</td>
-                <td class="tg-fymr">816</td>
-                <td class="tg-fymr">1342.7</td>
-                <td class="tg-fymr">1882.7</td>
-                <td class="tg-fymr">2422.7</td>
-                <td class="tg-fymr">2962.7</td>
-                <td class="tg-fymr">3502.7</td>
-                <td class="tg-fymr">4042.7</td>
-                <td class="tg-fymr">4582.7</td>
-                <td class="tg-fymr">5122.7</td>
-                <td class="tg-fymr">5662.7</td>
-            </tr> --}}
-
-
+        @endforeach
         </tbody>
     </table>
 

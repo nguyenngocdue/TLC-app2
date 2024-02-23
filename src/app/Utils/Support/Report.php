@@ -476,10 +476,10 @@ class Report
         return $output;
     }
 
-    public static function exportArrayToJsonFile($array, $filename)
+    public static function exportArrayToJsonFile($array)
     {
         $json = json_encode($array);
-        return true;
+        return $json;
     }
 
     public static function addZeroToValue($array)
