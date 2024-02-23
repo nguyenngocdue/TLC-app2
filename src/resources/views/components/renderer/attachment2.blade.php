@@ -2,7 +2,7 @@
     @if(sizeof($attachments) ==0 && sizeof($docs) == 0)
     <x-renderer.emptiness p="2" class="border" message="There is no attachment to be found." />
     @else
-    <div class="grid grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1 p-1 hidden1">
+    <div class="grid {{$gridCols}} lg:gap-3 md:gap-2 sm:gap-1 p-1 break-inside-avoid">
         @foreach($attachments as $attachment)
         @php
         [$hasOrphan,$sameEnv,$extension,$border,$title] = App\Utils\Support\HandleFieldsAttachment::handle($attachment)
@@ -14,7 +14,13 @@
             <div name='{{$name}}' title="{{$title}}" class="relative flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
                 {{-- This is the image --}}
                 @if(in_array($extension,["png","gif","jpg","jpeg","webp"]))
-                    <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
+                    @if($openType == '_blank')
+                    <a target="_blank" href="{{$path.$attachment['url_media']}}">
+                    @endif
+                        <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
+                    @if($openType == '_blank')
+                    </a>
+                    @endif
                 @elseif(in_array($extension,["csv","pdf","zip"]))
                     <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
                 @elseif(in_array($extension,["mov","mp4","MP4","webm"]))
@@ -27,8 +33,39 @@
                 <span id="trashIcon-{{$attachment['id']}}" class="hidden">
                     <i class="text-7xl text-pink-500 fa-sharp fa-solid fa-circle-xmark cursor-pointer absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
                 </span>
+                @if($openType == 'gallery')
+                    @php
+                        if(!in_array($extension,\App\Utils\Constant::EXTENSIONS_OF_FILE_GALLERY)) {
+                            $onClick = '';
+                            $url = $path.$attachment['url_media'];
+                            $href = "$url";
+                        } else {
+                            $onClick = "openGallery(".$attachment['id'].")";
+                        }
+                    @endphp
+
+                    <div class="invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]">
+                        <a title="{{$attachment['filename']}}" 
+                            onclick="{!!$onClick!!}" 
+                            {!! $onClick ? "" : "href='$href'" !!}  
+                            target='_blank' 
+                            class="cursor-pointer hover:underline  text-white hover:text-blue-300 px-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-center w-full"
+                            >
+                            <span class="text-sm">{{$attachment['filename']}}</span>
+                        </a>
+
+                        @if(!$readOnly)
+                            @if($destroyable && $sameEnv)
+                                <button type="button" onclick="updateToBeDeletedTextBox({{$attachment['id']}}, '{{$name}}-toBeDeleted')" class="w-10 h-10 m-auto hover:bg-slate-300 rounded-full absolute bottom-[10%] text-[25px]">
+                                    <i class=" text-red-700 fas fa-trash cursor-pointer"></i>
+                                </button>
+                            @endif
+                        @endif
+                    </div>
+                @endif
+
                 {{-- This is to show the thin layer which has the filename and trash button --}}
-                <div class="invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]">
+                {{-- <div class="invisible flex justify-center hover:bg-[#00000080] group-hover/item:visible before:absolute before:-inset-1  before:bg-[#00000080]">
                     @php
                         $href = '';
                         switch($openType){
@@ -66,7 +103,7 @@
                         </button>
                         @endif
                     @endif
-                </div>
+                </div> --}}
             </div>
                 @php
                 $uid = $attachment['owner_id'] ?? 1;
