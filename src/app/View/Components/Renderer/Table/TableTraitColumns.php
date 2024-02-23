@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Renderer\Table;
 
-use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Str;
 
 trait TableTraitColumns
@@ -90,9 +89,10 @@ trait TableTraitColumns
         $tinyText = $this->noCss ? "text-xs" : "";
         $colspanStr = ($colspan > 1) ? "colspan=$colspan" : "";
         $hiddenStr = $hidden ? "hidden" : "";
+        $borderColor = $this->borderColor;
         $th = "";
         $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr $thStyleStr ";
-        $th .= "class='$fixedLeft $fixedRight bg-gray-100 px-4 py-3 border-b border-gray-300 $borderRight $classTh45 $hiddenStr' ";
+        $th .= "class='$fixedLeft $fixedRight bg-gray-100 px-4 py-3 border-b $borderColor $borderRight $classTh45 $hiddenStr' ";
         $th .= "title='$tooltip' ";
         $th .= ">";
         $th .= "<div class='$classDiv45 $tinyText $columnDivClass text-gray-700 dark:text-gray-300' $divStyleStr>";
@@ -161,6 +161,7 @@ trait TableTraitColumns
         // dump($dataHeader);
         $th = [];
         $columns = array_values($columns);
+        $borderColor = $this->borderColor;
         foreach ($columns as $index => $column) {
             if ($this->isInvisible($column)) continue;
             $fixedLeft = $this->getFixedLeftOrRight($column, $index, "left", "th");
@@ -172,12 +173,12 @@ trait TableTraitColumns
                 if (is_object($dataHeader[$dataIndex])) {
                     $cell_class = $dataHeader[$dataIndex]->cell_class ?? "";
                     $cell_title = $dataHeader[$dataIndex]->cell_title ?? "";
-                    $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b bg-gray-100 $cell_class' title='$cell_title'>" . $dataHeader[$dataIndex]->value . "</th>";
+                    $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b $borderColor bg-gray-100 $cell_class' title='$cell_title'>" . $dataHeader[$dataIndex]->value . "</th>";
                 } else {
-                    $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b bg-gray-100'>" . $dataHeader[$dataIndex] . "</th>";
+                    $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b $borderColor bg-gray-100'>" . $dataHeader[$dataIndex] . "</th>";
                 }
             } else {
-                $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b bg-gray-100' dataIndex='" . $dataIndex . "'></th>";
+                $th[] = "<th $styleStr class='$fixedLeft $fixedRight py-1 $borderR border-b $borderColor bg-gray-100' dataIndex='" . $dataIndex . "'></th>";
             }
         }
         $result = join($th);
