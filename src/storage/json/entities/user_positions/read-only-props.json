@@ -2,7 +2,7 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "",
+        "new": "true",
         "draft": "true",
         "pending_verification": "true",
         "active": "true"
@@ -10,7 +10,7 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "",
+        "new": "true",
         "draft": "true",
         "pending_verification": "true",
         "active": "true"
@@ -18,7 +18,7 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "",
+        "new": "true",
         "draft": "true",
         "pending_verification": "true",
         "active": "true"
@@ -26,7 +26,7 @@
     "_position_prefix": {
         "name": "_position_prefix",
         "column_name": "position_prefix",
-        "new": "",
+        "new": "true",
         "draft": "true",
         "pending_verification": "true",
         "active": "true"
@@ -34,7 +34,7 @@
     "_position_1": {
         "name": "_position_1",
         "column_name": "position_1",
-        "new": "",
+        "new": "true",
         "draft": "true",
         "pending_verification": "true",
         "active": "true"
@@ -42,7 +42,7 @@
     "_position_2": {
         "name": "_position_2",
         "column_name": "position_2",
-        "new": "",
+        "new": "true",
         "draft": "true",
         "pending_verification": "true",
         "active": "true"
@@ -50,7 +50,7 @@
     "_position_3": {
         "name": "_position_3",
         "column_name": "position_3",
-        "new": "",
+        "new": "true",
         "draft": "true",
         "pending_verification": "true",
         "active": "true"
@@ -58,7 +58,7 @@
     "_getUsers": {
         "name": "_getUsers",
         "column_name": "getUsers",
-        "new": "",
+        "new": "true",
         "draft": "true",
         "pending_verification": "true",
         "active": "true"
@@ -66,18 +66,18 @@
     "_report_to": {
         "name": "_report_to",
         "column_name": "report_to",
-        "new": "",
-        "draft": "",
+        "new": "true",
+        "draft": "true",
         "pending_verification": "true",
         "active": "true"
     },
-    "_report_to_1": {
-        "name": "_report_to_1",
-        "column_name": "report_to_1",
+    "_report_department": {
+        "name": "_report_department",
+        "column_name": "report_department",
         "new": "",
         "draft": "",
-        "pending_verification": "true",
-        "active": "true"
+        "pending_verification": "",
+        "active": ""
     },
     "_job_desc": {
         "name": "_job_desc",
@@ -87,13 +87,13 @@
         "pending_verification": "true",
         "active": "true"
     },
-    "_job_desc_1": {
-        "name": "_job_desc_1",
-        "column_name": "job_desc_1",
+    "_job_desc_draft": {
+        "name": "_job_desc_draft",
+        "column_name": "job_desc_draft",
         "new": "",
         "draft": "",
-        "pending_verification": "true",
-        "active": "true"
+        "pending_verification": "",
+        "active": ""
     },
     "_job_requirement": {
         "name": "_job_requirement",
@@ -103,13 +103,13 @@
         "pending_verification": "true",
         "active": "true"
     },
-    "_job_requirement_1": {
-        "name": "_job_requirement_1",
-        "column_name": "job_requirement_1",
+    "_job_requirement_draft": {
+        "name": "_job_requirement_draft",
+        "column_name": "job_requirement_draft",
         "new": "",
         "draft": "",
-        "pending_verification": "true",
-        "active": "true"
+        "pending_verification": "",
+        "active": ""
     },
     "_owner_id": {
         "name": "_owner_id",
