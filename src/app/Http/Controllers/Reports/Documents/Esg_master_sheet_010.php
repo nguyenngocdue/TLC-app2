@@ -151,7 +151,7 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
         $results = [];
         foreach ($data as $key => $value) {
             $value = reset($value);
-            $x1 = [$value['total_all_months']];
+            $x1 = [number_format($value['total_all_months'], 2)];
             $x12 = [];
             foreach (range(1, 12) as $num) {
                 if (isset($value[str_pad($num, 2, '0', STR_PAD_LEFT)])) {
