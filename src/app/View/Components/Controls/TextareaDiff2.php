@@ -30,8 +30,8 @@ class TextareaDiff2 extends Component
      */
     public function render()
     {   
-        $value = $this->prettyValueTextarea($this->value);
-        $value2 = $this->prettyValueTextarea($this->value2);
+        $value = $this->value;
+        $value2 = $this->value2;
         $isModeDraft = $this->modeDraft();
         return view('components.controls.textarea-diff2', [
             'name' => $this->name,
@@ -45,10 +45,5 @@ class TextareaDiff2 extends Component
     private function modeDraft(){
         return $this->mode == 'draft';
     }
-    private function prettyValueTextarea($value){
-        $arrContent = gettype($value) === "array" ? $value : json_decode($value, true);
-        $tmp = $this->colType === 'json' ? json_encode($arrContent, JSON_PRETTY_PRINT) : $value;
-        $value = $tmp === 'null' ? "" : $tmp;
-        return $value;
-    }
+    
 }

@@ -124,6 +124,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 	public function update(Request $request, $id)
 	{
+		// dd($request);
 		if ($this->type == 'exam_sheet') {
 			$controller = new ExamQuestionController($request);
 			$response = $controller->update($request, $this->type, $id);

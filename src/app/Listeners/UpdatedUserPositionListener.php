@@ -8,7 +8,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
 
-class UpdatedUserPositionListener implements ShouldQueue
+class UpdatedUserPositionListener
 {
     public function __construct()
     {
