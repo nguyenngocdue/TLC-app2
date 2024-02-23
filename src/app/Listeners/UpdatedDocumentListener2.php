@@ -26,12 +26,32 @@ class UpdatedDocumentListener2 implements ShouldQueue
     {
         // Log::info("UpdatedDocumentListener constructor");
     }
-
+    private function getIdsByBICUsers(array $obj, array $bic,$modelPath,$id)
+    {
+        $status = $obj['status'];
+        $bic_users = $bic[$status]['ball-in-court-users'] ?? false;
+        $isAlsoSendToUsersDiscipline = $bic[$status]['also-send-to-users-discipline'] ?? false;
+        if($bic_users){
+            $model = $modelPath::find($id);
+            $bic_users = str_replace("()","",$bic_users);
+            $ids = $model->{$bic_users}()->pluck('id')->toArray();
+            if($isAlsoSendToUsersDiscipline){
+                $alsoSendToUsersDisciplineIds = [];
+                foreach ($ids as $id){
+                    $alsoSendToUsersDisciplineIds[] = User::findFromCache($id)->getUserDiscipline->getDefAssignee->id ?? "";
+                }
+                $ids = array_unique(array_merge($ids,$alsoSendToUsersDisciplineIds));
+            }
+            return $ids;
+        }
+        return [];
+    }
     private function getValues(array $obj, array $bic, $type)
     {
         $status = $obj['status'];
         $bic_assignee = $bic[$status]['ball-in-court-assignee'] ?: 'owner_id';
         $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1()";
+        
 
         if (!isset($obj[$bic_assignee]) || is_null($obj[$bic_assignee])) {
             $msg = $bic_assignee . " is not found in $type (UpdatedDocumentListener2). Halted.";
@@ -73,7 +93,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
         ];
     }
 
-    private function sendMail($previousValue, $currentValue, $diff, $type, $id)
+    private function sendMail($previousValue, $currentValue, $diff, $type, $id , $ids)
     {
         $app = LibApps::getFor($type);
         if ($app['do_not_send_notification_mails'] ?? false) {
@@ -100,7 +120,8 @@ class UpdatedDocumentListener2 implements ShouldQueue
         ]);
         $mail->subject($subject);
 
-        $cc = array_unique([$previousValue['bic_assignee_uid'], ...$previousValue['bic_monitors_uids'], ...$currentValue['bic_monitors_uids']]);
+        $cc = array_unique([$previousValue['bic_assignee_uid'], ...$previousValue['bic_monitors_uids'],
+         ...$currentValue['bic_monitors_uids'],...$ids]);
         $cc = array_map(fn ($i) => User::findFromCache($i), $cc);
 
         Mail::to($receiver)
@@ -114,20 +135,19 @@ class UpdatedDocumentListener2 implements ShouldQueue
         $previousValue = $event->previousValue;
         $currentValue = $event->currentValue;
         $type = $event->type;
+        $modelPath = $event->modelPath;
         $id = $currentValue['id'];
         $bic = BallInCourts::getAllOf($type);
 
         // Log::info($previousValue);
         // Log::info($currentValue);
-
         $previousValue = $this->getValues($previousValue, $bic, $type);
         $currentValue = $this->getValues($currentValue, $bic, $type);
         $diff = $this->getDiff($previousValue, $currentValue);
-
         // Log::info(json_encode($previousValue));
         // Log::info(json_encode($currentValue));
         // Log::info(json_encode($diff));
 
-        $this->sendMail($previousValue, $currentValue, $diff, $type, $id);
+        $this->sendMail($previousValue, $currentValue, $diff, $type, $id,$this->getIdsByBICUsers($currentValue,$bic,$modelPath,$id));
     }
 }

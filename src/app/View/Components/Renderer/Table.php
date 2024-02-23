@@ -17,6 +17,7 @@ class Table extends Component
   use TableTraitColumns;
   use TableTraitRows;
   use TableTraitFooter;
+  // public static $borderColor = 'border-gray-600';
 
   public function __construct(
     private Request $request,
@@ -53,6 +54,7 @@ class Table extends Component
     private $editable = false,
     private $numberOfEmptyLines = 0,
     private $lineIgnoreNo = 0,
+    private $borderColor = 'border-gray-300',
   ) {
   }
 
@@ -128,6 +130,7 @@ class Table extends Component
       'bottomRightControl' => $this->bottomRightControl,
       'numberOfEmptyLines' => $this->numberOfEmptyLines,
       'lineIgnoreNo' => $this->lineIgnoreNo,
+      'borderColor' => $this->borderColor,
     ]);
   }
 }

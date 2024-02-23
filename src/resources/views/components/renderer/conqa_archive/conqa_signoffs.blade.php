@@ -53,7 +53,7 @@
                     <div class="p-2">
                         <p><b>{{$signoff->approverDetails->name}}</b></p>
                         <p><b>{{$signoff->approverDetails->company ?? ""}}</b></p>
-                        <p><i>{{$signoff->approverDetails->email}}</i></p>
+                        <p><i>{{$signoff->approverDetails->email ?? ""}}</i></p>
                     </div>
                     @endif
                 @endif

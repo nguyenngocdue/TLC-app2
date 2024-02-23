@@ -91,6 +91,10 @@ class JsonControls
     {
         return self::getAll()['monitors'];
     }
+    public static function getUsers()
+    {
+        return self::getAll()['users'];
+    }
     public static function getParamUnits()
     {
         return self::getAll()['param_units'];

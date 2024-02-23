@@ -73,7 +73,7 @@
                     </div>
 
                     Images:
-                    <div class="grid grid-cols-5 gap-2 ">
+                    <div class="grid grid-cols-3 gap-2 ">
                         @foreach($checkpointAttachmentIds as $checkpointAttachmentId)
                             @php $attachment = $attachments->{$checkpointAttachmentId} @endphp                       
                             @if($attachment->type=='file' && !isset($attachment->deleted))

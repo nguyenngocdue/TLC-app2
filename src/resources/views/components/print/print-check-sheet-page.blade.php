@@ -5,5 +5,5 @@
         <x-renderer.heading level=5>{{strtoupper($headerDataSource->name).' '. (isset($page) ? '('. $page .')' : '')}}</x-renderer.heading>
     </div>
     <x-renderer.progress-bar :dataSource="$progressData" height="40px" />
-    <x-renderer.table maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
+    <x-renderer.table borderColor="border-gray-600" maxH="{{false}}" :columns="$tableColumns" :dataSource="$tableDataSource" groupKeepOrder="{{true}}" groupBy="group_description" groupByLength=100 showNo="{{true}}" />
 </div> 

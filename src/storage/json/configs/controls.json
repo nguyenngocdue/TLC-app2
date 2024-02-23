@@ -192,6 +192,9 @@
         "getMonitors8()",
         "getMonitors9()"
     ],
+    "users" : [
+        "getUsers()"
+    ],
     "param_units": [
         "",
         "hour",

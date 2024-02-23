@@ -9,7 +9,7 @@
         @case("image/jpeg")
         @case("image/webp")
         @case("image/avif")
-            <x-renderer.image spanClass="w-36 h-36" src="{{$src}}"/>
+            <x-renderer.image spanClass="w-72 h-72" src="{{$src}}" href="{{$src}}"/>
             @break
 
         @case("image/svg+xml")
@@ -18,7 +18,7 @@
 
         @case("video/mp4")
         @case("video/quicktime")
-            <video controls class="w-36 h-36" src="{{$src}}" ></video>
+            <video controls class="w-72 h-72" src="{{$src}}" ></video>
             @break
     
         @default

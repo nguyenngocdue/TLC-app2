@@ -39,16 +39,26 @@ function listenerSubmitForm(idForm) {
                 var textNode = document.createTextNode(mark.textContent);
                 mark.parentNode.replaceChild(textNode, mark);
             });
+            var ps = tempElement.querySelectorAll('p');
+            ps.forEach(function(p) {
+                    var content = p.textContent + "\n";
+                    var textNode = document.createTextNode(content);
+                    p.parentNode.replaceChild(textNode, p);
+            });
             // Get the updated HTML content without <mark> elements
             var updatedHtmlContent = tempElement.innerHTML;
 
             $editorInputContent = document.querySelector('input[id^="editor_content_'+name+'"]');
             if ($editorInputContent) {
-                if(!(updatedHtmlContent == '<p><br data-cke-filler="true"></p>'))
+                // if(!(updatedHtmlContent == '<p><br data-cke-filler="true"></p>'))
                     $editorInputContent.value = updatedHtmlContent;
             }
         });
     });
+}
+const removeParagraphTagsWithoutBreaks = (text) => {
+    const regex = /<p>(?:(?!<br\s+(?:data-cke-filler\s*=\s*"true")?\s*\/?>)[\s\S])*<\/p>/g;
+    return text.replace(regex, '');
 }
 const numberRemoveCommaByElements = (nameElement) => {
 

@@ -28,7 +28,7 @@ Route::group([
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('me', [ProfileController::class, 'profile'])->name('me.index');
-    Route::get('convert-data', [ConvertDataUserPositionController::class, 'index'])->name('convert-data.index');
+    // Route::get('convert-data', [ConvertDataUserPositionController::class, 'index'])->name('convert-data.index');
     Route::get('my-org-chart', [MyOrgChartController::class, 'index'])->name('myOrgChart.index');
     Route::get('public-holidays', [PublicHolidaysController::class, 'index'])->name('public-holidays.index');
     Route::get('profile/{id}', [ProfileController::class, 'profile'])->name('profile.index');

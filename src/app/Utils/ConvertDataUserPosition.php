@@ -27,7 +27,7 @@ class ConvertDataUserPosition
         $processedLines = array_map(function($line){
             $trimmedLine = trim($line);
             if(empty($trimmedLine)) return "<p><br data-cke-filler='true'></p>";
-            else return "<p>{$trimmedLine}</p>";
+            else return "<p> {$trimmedLine} </p>";
         },$lines);
         return join("",$processedLines);
     }
