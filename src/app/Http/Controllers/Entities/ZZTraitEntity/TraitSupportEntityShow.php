@@ -123,9 +123,9 @@ trait TraitSupportEntityShow
                     default:
                         break;
                 }
-                $str .= '<td class="border text-center border-gray-600" style="width:30px">' . $valueRender . '</td>';
+                $str .= '<td class="border text-center" style="width:30px">' . $valueRender . '</td>';
             } else {
-                $str .=  '<td class="border text-center border-gray-600" style="width:30px">' . $circleIcon . $value . '</td>';
+                $str .=  '<td class="border text-center" style="width:30px">' . $circleIcon . $value . '</td>';
             }
         };
         $longStr =  $str; // $runUpdated;
