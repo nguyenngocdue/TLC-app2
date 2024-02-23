@@ -13,13 +13,14 @@ class ManageBallInCourts extends Manage_Parent
     protected $viewName = "dashboards.pages.manage-ball-in-court";
     protected $routeKey = "_bic";
     protected $jsonGetSet = BallInCourts::class;
-    protected $storingWhiteList = ['name', 'ball-in-court-assignee', 'ball-in-court-monitors'];
+    protected $storingWhiteList = ['name', 'ball-in-court-assignee', 'ball-in-court-monitors','ball-in-court-users','also-send-to-users-discipline'];
 
     protected function getColumns()
     {
         $allStatuses = LibStatuses::getFor($this->type);
         $allAssignees = JsonControls::getAssignees();
         $allMonitors = JsonControls::getMonitors();
+        $allUsers = JsonControls::getUsers();
         $firstColumns = [
             [
                 "dataIndex" => 'name',
@@ -61,6 +62,24 @@ class ManageBallInCourts extends Manage_Parent
             'properties' => ['strFn' => 'same'],
             'width' => 10,
         ],);
+        //Add notion users
+        $notionUsersColumns = [
+            [
+                "dataIndex" => 'ball-in-court-users',
+                'renderer' => 'dropdown',
+                'editable' => true,
+                "cbbDataSource" => ['',  ...$allUsers],
+                'properties' => ['strFn' => 'same'],
+                'width' => 10,
+            ],
+            [
+                "dataIndex" => 'also-send-to-users-discipline',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+        ];
+        $columns = array_merge($columns, $notionUsersColumns);
         return $columns;
     }
 
@@ -72,7 +91,6 @@ class ManageBallInCourts extends Manage_Parent
         $workflow0 = Transitions::getAllOf($this->type);
         // dump($workflow0);
         $bic = BallInCourts::getAllOf($this->type);
-        // dump($bic);
         foreach ($allStatuses as $status1) {
             $name = $status1['name'];
             if (isset($dataInJson[$name])) {

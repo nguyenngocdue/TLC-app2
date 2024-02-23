@@ -138,6 +138,7 @@ abstract class Manage_Parent
 
         //Make up the columns
         $columns = $this->getColumns();
+        
         $this->makeUpWidthForColumns($columns);
         //Remove all things in blacklist
         $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['action', ...$this->storingBlackList,]));
@@ -145,7 +146,7 @@ abstract class Manage_Parent
         if (sizeof($this->storingWhiteList) > 0) {
             $columns = array_filter($columns, fn ($column) => in_array($column['dataIndex'], $this->storingWhiteList));
         }
-
+        // dd($this->storingWhiteList);
         $result = $jsonGetSet::convertHttpObjectToJson($table01, $columns);
         $this->handleMoveTo($result, $jsonGetSet);
         if ($request->input('button')) {
