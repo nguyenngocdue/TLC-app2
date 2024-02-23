@@ -80,7 +80,7 @@ $formWidth = "md:w-1/2 xl:w-1/2";
             @break --}}
 
             @case ('conqa-renderer')
-                <x-renderer.conqa_archive.conqa_archive />
+                <x-renderer.conqa_archive.conqa_archive :item="$item"/>
             @break
 
             @default

@@ -6,23 +6,28 @@ use Illuminate\View\Component;
 
 class ConqaArchive extends Component
 {
+    private $folderName;
+    private $projName;
+    private $folderUuid;
+
     public function __construct(
-        private $projName = "BTH",
+        private $item,
+        // private $projName = "BTH",
+        // private $folderUuid = "92d6cac3-84de-4c52-b37c-2825c773cba5",
     ) {
-    }
-    private function getRootFileName()
-    {
-        switch ($this->projName) {
-            case "BTH":
-                return "92d6cac3-84de-4c52-b37c-2825c773cba5";
-        }
+        // dump($item);
+        $this->projName = $item->name;
+        $this->folderUuid = $item->uuid;
     }
 
-    private function loadTree(string $path, string $fileName, string $parent): array
+    private function loadTree(string $path, string $folderUuid, string $parent): array
     {
-        $json = json_decode(file_get_contents($path . $fileName . ".json"));
+        $json = json_decode(file_get_contents($path . $folderUuid . ".json"));
         // dump($json);
-        $children = $json->tree->{$fileName}->children;
+        if ($parent == '#') {
+            $this->folderName = $json->tree->{$folderUuid}->name;
+        }
+        $children = $json->tree->{$folderUuid}->children;
         // dump($children);
         $tree = [];
         foreach ($children as $child) {
@@ -55,15 +60,14 @@ class ConqaArchive extends Component
     function render()
     {
         $path = storage_path("app/conqa_archive/database/{$this->projName}/");
-        $fileName  = $this->getRootFileName();
-        $tree = $this->loadTree($path, $fileName, "#");
-        // dump($tree);
+        $tree = $this->loadTree($path, $this->folderUuid, "#");
         return view(
             "components.renderer.conqa_archive.conqa_archive",
             [
                 "tree" =>  $tree,
                 "route" => route("render_checklist"),
                 "projName" => $this->projName,
+                "folderName" => $this->folderName,
             ]
         );
     }

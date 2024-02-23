@@ -3,7 +3,7 @@
 
 <div class="grid grid-cols-12 gap-2">
     <div class="col-span-4 border no-print">
-        BTH
+        {{$folderName}}
         <div id="json_tree_1" class="overflow-x-hidden" ></div>
     </div>
     <div class="col-span-12 lg:col-span-8 border">
@@ -13,12 +13,12 @@
 
 <script>
     const jsonTree = @json($tree);
-    function loadChecklistRenderer(id) {
+    function loadChecklistRenderer(folderUuid) {
         const url = "{{$route}}";
         $.ajax({
             url,
             data: {
-                id,
+                folderUuid,
                 projName: "{{$projName}}",
             },
         }).then(res=>{
@@ -37,13 +37,13 @@
         $('#json_tree_1').on("changed.jstree", function (e, data) {
             // console.log(data.selected);
             if(Array.isArray(data.selected)){
-                const id = data.selected[0]
+                const foldrUuid = data.selected[0]
                 for(let i =0; i<jsonTree.length;i++){
-                    if(jsonTree[i]['id'] == id){
+                    if(jsonTree[i]['id'] == foldrUuid){
                         const node = jsonTree[i]
                         if(node.type == 'checklist'){
                             $("#checklist_1").html("Loading...")
-                            loadChecklistRenderer(id)
+                            loadChecklistRenderer(foldrUuid)
                         }else {
                             $("#checklist_1").html("")
                         }
