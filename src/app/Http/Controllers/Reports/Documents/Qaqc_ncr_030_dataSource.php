@@ -56,19 +56,22 @@ class Qaqc_ncr_030_dataSource extends Controller
                         LEFT JOIN terms term ON term.id = ncr.defect_report_type
                         WHERE 1 = 1 
                             AND ncr.deleted_by IS NULL
-                        GROUP BY date_time, year, month, str_month";
+                        GROUP BY date_time, year, month, str_month
+                        ORDER BY date_time, month";
 
         $RESPONSIBLE_TEAM = "SELECT
                                 DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
                                 DATE_FORMAT(ncr.created_at, '%Y') AS year,
                                 DATE_FORMAT(ncr.created_at, '%m') AS month,
                                 SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
-                                ncrt.name AS defect_report_type,
+                                ncrt.name AS user_team_name,
                                 COUNT(ncrt.name) AS count_ncr_dr
                                 FROM qaqc_ncrs ncr
                                 LEFT JOIN user_team_ncrs ncrt ON ncrt.id = ncr.user_team_id
-                                WHERE ncr.deleted_by IS NULL
-                                GROUP BY date_time, year, month, str_month, ncrt.name";
+                                WHERE 1 = 1
+                                AND  ncr.deleted_by IS NULL
+                                GROUP BY date_time, year, month, str_month, ncrt.name
+                                ORDER BY date_time, month";
 
         $AVERAGE_CLOSED_ISSUES = "SELECT
                                     DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
@@ -85,7 +88,7 @@ class Qaqc_ncr_030_dataSource extends Controller
                                     WHERE 1 = 1
                                     AND ncr.deleted_by IS NULL
                                     GROUP BY date_time, year ,month, str_month
-                                    ORDER BY date_time";
+                                    ORDER BY date_time, month";
 
         $ISSUES_STATUS = "SELECT
                             DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,

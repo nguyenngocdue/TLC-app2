@@ -17,7 +17,7 @@ class Qaqc_ncr_dataSource extends Controller
     {
         $valOfParams = $this->generateValuesFromParamsReport($params);
         // dd($valOfParams, $params);
-            $sql = "SELECT tb1.*
+        $sql = "SELECT tb1.*
                     ,pj.name AS project_name
                     ,sp.name AS sub_project_name
                     ,pr.name AS prod_routing_name
@@ -32,7 +32,7 @@ class Qaqc_ncr_dataSource extends Controller
                     term_inter_subcon.name AS inter_subcon_name,
                     LOWER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '\\\', -1), '\\\', 1)) AS parent_type,
                     tb1.parent_type AS _parent_type,
-                    CONCAT('TLC-',sp.name,'-',UPPER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '_', -1), '\\\', 1)),'-',
+                    CONCAT('TLC-',sp.name,'-',IF(term_report_type.name = 'NCR' OR term_report_type.name = 'Defect','NCR',term_report_type.name),'-',
                         LPAD(tb1.doc_id, 4, '0')) AS doc_type 
                     FROM (SELECT
                     DATE_FORMAT(SUBSTR(ncr.created_at, 1, 10), '%d/%m/%Y') AS create_date,
@@ -83,7 +83,7 @@ class Qaqc_ncr_dataSource extends Controller
                     LEFT JOIN user_team_ncrs ustncr ON ustncr.id = tb1.user_team_id
                     LEFT JOIN priorities prio ON prio.id = tb1.priority_id
                     LEFT JOIN terms term_root_cause ON term_root_cause.id = tb1.root_cause";
-                    $sql .= "\n LEFT JOIN terms term_disposition ON term_disposition.id = tb1.disposition_id
+        $sql .= "\n LEFT JOIN terms term_disposition ON term_disposition.id = tb1.disposition_id
                     LEFT JOIN terms term_severity ON term_severity.id = tb1.severity
                     LEFT JOIN terms term_report_type ON term_report_type.id = tb1.report_type
                     LEFT JOIN terms term_inter_subcon ON term_inter_subcon.id = tb1.inter_subcon_id
@@ -100,14 +100,14 @@ class Qaqc_ncr_dataSource extends Controller
         return $collection;
     }
 
-    public function changeDataSource($dataSource, $params){
+    public function changeDataSource($dataSource, $params)
+    {
         $manageApps = LibApps::getAll();
-        foreach ($dataSource as &$values){
+        foreach ($dataSource as &$values) {
             $parentType = $values->parent_type;
             $nickName = $manageApps[$parentType]['nickname'] ?? $values->parent_type;
             $values->parent_type = strtoupper($nickName);
         }
         return $dataSource;
     }
-
 }
