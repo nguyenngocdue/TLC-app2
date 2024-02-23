@@ -258,7 +258,7 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
                     "calculated_numbers" => $totalValueOfWorkplaceIds,
                     "total_per_month" => $summaryValueOfWorkplaceIds
                 ];
-                $childrenMeType = array_merge([$firstMetric], [$array_others], $childrenMeType);
+                $childrenMeType = array_merge([reset($arrayMeType)], [$array_others], $childrenMeType);
                 $items['array_metric_type'] = $childrenMeType;
             }
         }
