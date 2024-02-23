@@ -16,13 +16,10 @@
     var $valueEditor = $('#editor_' + name);
     var value = [];
     var editorContentInput = document.getElementById('editor_content_' + name);
-    console.log(diff);
     diff.forEach(function(part){
       var highlightedText = applyHighlights(part);
       value.push(highlightedText);
     });
-    // console.log(value);
-    console.log(handleFormatValue(value));
     $valueEditor.html(handleFormatValue(value));
     function applyHighlights(part) {
       var content = part.value;
@@ -42,7 +39,6 @@
     }
     function convertData(str) {
       var div = document.createElement('div');
-      console.log(str);
       div.innerHTML = str;
       div.childNodes.forEach(function(node){
         var content = node.textContent;
