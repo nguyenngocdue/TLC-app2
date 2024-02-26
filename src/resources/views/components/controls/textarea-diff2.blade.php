@@ -14,76 +14,90 @@
     var placeholder = @json($placeholder);
     var diff = window.jsdiff.diffWords(one, other);
     var $valueEditor = $('#editor_' + name);
-    var value = [];
+    // var value = [];
+    var value = '';
     var editorContentInput = document.getElementById('editor_content_' + name);
     diff.forEach(function(part){
       var highlightedText = applyHighlights(part);
-      value.push(highlightedText);
+      // value.push(highlightedText);
+      value += highlightedText;
     });
-    $valueEditor.html(handleFormatValue(value));
+    $valueEditor.html(process(value));
     function applyHighlights(part) {
-      var content = part.value;
       if(isModeDraft){
         if(part.added)
-          return '<mark class="marker-green">' + content + '</mark>';
+          return '<mark class="marker-green">' + part.value + '</mark>';
         else if (typeof part.added === "undefined" && part.removed)
-          return "";
-        else return content;
+          return '';
+        else return part.value;
       }else{
         if(part.removed)
-          return '<mark class="marker-pink">' + content + '</mark>';
+          return '<mark class="marker-pink">' + part.value + '</mark>';
         else if (typeof part.removed === "undefined" && part.added)
-          return "";
-        else return content;
+          return '';
+        else return part.value;
       }
     }
-    function convertData(str) {
-      var div = document.createElement('div');
-      div.innerHTML = str;
-      div.childNodes.forEach(function(node){
-        var content = node.textContent;
-        if(node.nodeName === "MARK"){
-          node.innerHTML = handleFormatValue(content,true);
-        }else{
-          var newNode = document.createElement('div');
-          newNode.innerHTML = handleFormatValue(content);
-          node.parentNode.replaceChild(newNode, node);
-        }
-      })
-      return div.innerHTML;
-    }
-    function handleFormatValue(arrStr){
-      var results = [];
-      var index = 0;
-      arrStr.forEach(function(str){
-        results.push(process(str));
-      })
-      for(var i = 0; i < results.length;i++){
-        if(results[i].includes("<p><mark")){
-          if(i != 0){
-            var tmp = results[i-1];
-            var tmp2 =  results[i+1];
-            tmp = tmp.slice(0,-4) + results[i].slice(3).slice(0,-4);
-            tmp2 = tmp2.slice(3);
-            results[i-1] = tmp;
-            results[i+1] = tmp2;
-            results.splice(i,1);
-          }else{
-            results[i] = results[i].slice(3).slice(0,-4);
-          }
-        }
+    function handleFormatValue(lines,index,result){
+      if(lines[index-1]?.includes("<mark")){
+        return result + handleFormatValueByStr(lines[index],true);
+      }else{
+        const splitArray = lines[index]?.split("\r\n");
+        splitArray?.forEach((line ,index) => {
+              if (line === "")
+              result += '<p><br data-cke-filler="true"></p>';
+              else 
+              result += `<p>${line}</p>`;
+        });
+        return result;
       }
-      return results.join("");
+    }
+    function handleFormatValueByStr(str,isNoneAddTagP = false){
+      const lines = str.split("\r\n");
+      const processLined = lines.map((line) => {
+        if(line === "")
+          return '<p><br data-cke-filler="true"></p>';
+        else
+          if(isNoneAddTagP) return `${line}`;
+          return `<p>${line}</p>`;
+      })
+      return processLined.join("");
+    }
+    function regexExecGetContent(str){
+      let regex = /(<mark\b[^>]*>)([\s\S]*?)<\/mark>/g;
+      let matches = [];
+      // Find all matches
+      let match;
+      while ((match = regex.exec(str)) !== null) {
+          matches.push({
+              tag: match[1], 
+              content: match[2]     // Content inside the <mark> tag
+          });
+      }
+      var result = "";
+      matches.forEach((match) => {
+          result += match.tag + handleFormatValueByStr(match.content) + "</mark>";
+      });
+      return result;
+    }
+    function handleFormatValueHasMark(str){
+      if(!str.includes("\r\n")) return str;
+      return regexExecGetContent(str);
     }
     function process(str){
-      const lines = str.split("\n");
-      const processedLines = lines.map((line ,index) => {
-            if (line === "")
-              return index == 0 ? "" : "<p><br data-cke-filler='true'></p>";
-            else 
-              return `<p>${line}</p>`;
+      let regex = /(<mark\b[^>]*>[\s\S]*?<\/mark>)/g;
+      let lines = str.split(regex);
+      let result = "";
+      const processedLines = lines.forEach((line ,index) => {
+        if(line == " ") result += line;
+        else if (line == "") result+="";
+        else if(line.includes("</mark>"))
+          result += handleFormatValueHasMark(line);
+        else
+          result = handleFormatValue(lines,index,result);
       });
-      return processedLines.join("");
+      console.log(result);
+      return result;
     }
     function highlightToFontColors( editor ) {
       const valueMapping = {

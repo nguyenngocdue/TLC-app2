@@ -32,11 +32,11 @@ $tr = "
     $layout = '';
     switch ($optionPrint) {
         case 'landscape':
-            $layout = 'w-[1400px] min-h-[1000px]';
+            $layout = 'w-[1100px] h-min-[1000px]';
             break;
         case 'portrait':
         default:
-            $layout = 'w-[1000px] min-h-[880px]';
+            $layout = 'w-[1400px] h-min-[1000px]';
             break;
     }
 @endphp
@@ -82,24 +82,13 @@ $tr = "
                         </div>
                     </div>
 
-                     <div class='col-span-6'>
+                     <div class='col-span-12'>
                         <x-renderer.heading level=4 class='text-center'>Monthly Issues' Statuses</x-renderer.heading>
                         <div class="flex flex-col text-center">
                             <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=5" width="{{$width}}" height="{{$heigh}}" frameborder="1">
                             </iframe>
                             <div class='pt-4'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_STATUS']" :dataSource="$tableDataSource['ISSUES_STATUS']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class='col-span-6'>
-                        <x-renderer.heading level=4 class='text-center'>Average Closed Days by Monthly Issues</x-renderer.heading>
-                        <div class="flex flex-col text-center">
-                            <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=4" width="{{$width}}" height="{{$heigh}}" frameborder="1">
-                            </iframe>
-                            <div class='pt-4'>
-                                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['AVERAGE_CLOSED_ISSUES']" :dataSource="$tableDataSource['AVERAGE_CLOSED_ISSUES']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
                             </div>
                         </div>
                     </div>
@@ -112,10 +101,8 @@ $tr = "
         
         <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white  p-8">
             <x-print.header6 />
-            {{-- BASIC INFORMATION --}}
             <x-renderer.heading level=2 class='text-center'>NCR/DR Monthly Report</x-renderer.heading>
 
-            {{-- TABLES --}}
             <div class='grid grid-row-1 gap-4'>
                 <div class='grid grid-cols-12 gap-4 text-center'>
                      
@@ -130,13 +117,24 @@ $tr = "
                         </div>
                     </div>
 
-                    <div class='col-span-12'>
+                    <div class='col-span-6'>
                         <x-renderer.heading level=4 class='text-center'>Monthly Issues Source</x-renderer.heading>
                         <div class="flex flex-col text-center">
                             <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=6" width="{{$width}}" height="{{$heigh}}" frameborder="1">
                             </iframe>
                             <div class='pt-4'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_SOURCE']" :dataSource="$tableDataSource['ISSUES_SOURCE']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-span-6'>
+                        <x-renderer.heading level=4 class='text-center'>Average Closed Days by Monthly Issues</x-renderer.heading>
+                        <div class="flex flex-col text-center">
+                            <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=4" width="{{$width}}" height="{{$heigh}}" frameborder="1">
+                            </iframe>
+                            <div class='pt-4'>
+                                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['AVERAGE_CLOSED_ISSUES']" :dataSource="$tableDataSource['AVERAGE_CLOSED_ISSUES']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
                             </div>
                         </div>
                     </div>

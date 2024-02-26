@@ -115,7 +115,8 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 [
                     'title' => 'Total',
                     'dataIndex' => 'total',
-                    'align' => 'center'
+                    'align' => 'center',
+                    'width' => '50',
                 ],
                 [
                     'title' => 'Closed Issues',
