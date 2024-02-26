@@ -2215,7 +2215,8 @@
         "edit_renderer": null,
         "show_renderer": null,
         "tutorial_link": null,
-        "icon": null
+        "icon": null,
+        "apply_approval_tree": "true"
     },
     "user_position1": {
         "name": "user_position1",

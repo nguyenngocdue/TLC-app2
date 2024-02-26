@@ -123,7 +123,6 @@ class Breadcrumb extends Component
         $isReportScreen = $this->action == 'index' && !str_contains($controller, '.index');
 
         if ($isReportScreen) $this->links[] = $printNow;
-
         switch ($this->action) {
             case 'show':
                 // $this->links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
@@ -204,27 +203,40 @@ class Breadcrumb extends Component
     {
         $this->links[] = ['href' => route($singular . '_prp.index'), 'title' => 'Workflows', 'icon' => '<i class="fa-duotone fa-sitemap"></i>'];
     }
+    private function showButtonPrintAll($type){
+        if($type === 'user_positions')
+            switch ($this->action) {
+                case 'index':
+                    $this->links[] = ['href' => route($type . '_prt.showAll'), 'title' => 'Print All', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                    break;
+                case 'showAll':
+                    $this->links[] = ['href' => null,'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                    break;
+                default:
+                    break;
+            }
+    }
     public function render()
     {
         $singular = CurrentRoute::getTypeSingular();
         $type = CurrentRoute::getTypePlural();
         $isAdmin = CurrentUser::isAdmin();
-
         if (in_array($singular, $this->blackList)) return "";
         if (str_starts_with($singular, "manage")) return "";
         if (in_array($singular, ['permission', 'role', 'role_set']))  return $this->getBreadcrumbOfPermission($singular, $type);
-
+        
         if ($isAdmin) $this->showButtonViewFirst($singular, $type);
         if ($isAdmin) $this->showButtonProperties($singular);
         $this->showButtonPrintOrEditOrQRApp($singular, $type);
         $this->showButtonViewAll($type);
+        if ($isAdmin) $this->showButtonPrintAll($type);
         $this->showButtonAddNew($type);
         $this->showButtonAddNewByCloning($type);
         $this->showButtonViewReport($type);
         $this->showButtonTutorialLink($type);
         if ($isAdmin) $this->showButtonViewTrash($type);
         if ($isAdmin) $this->showButtonWorkflow($singular);
-
+        
         $buttonClassList = 'h-14 px-2 py-1 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-1 my-2';
         return view('components.navigation.breadcrumb', [
             'links' => $this->links,
