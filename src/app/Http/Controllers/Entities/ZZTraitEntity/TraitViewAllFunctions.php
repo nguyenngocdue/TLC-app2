@@ -115,7 +115,8 @@ trait TraitViewAllFunctions
         return $result;
     }
     private function handleWhereIn(&$model,$ids){
-        if($this->type == "user_position"){
+        $currentUserRoleSet = CurrentUser::getRoleSet();
+        if($this->type == "user_position" && $currentUserRoleSet != "hr_manager"){
             $positions = $this->getPositionsEntityUserPositionOfCurrentUser();
             $model->whereIn('name', array_unique($positions));
         }else{
