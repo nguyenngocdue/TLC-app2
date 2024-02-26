@@ -20,6 +20,7 @@ class Attachment2 extends Component
         private $label = '',
         private $properties = [],
         private $openType = 'gallery',
+        private $gridCols = 'grid-cols-5',
     ) {
         // dump($openType);
         if (is_array($value)) {
@@ -90,6 +91,7 @@ class Attachment2 extends Component
             'hiddenOrText' => $this->debugAttachment ? "text" : "hidden",
             'btnClass' => ClassList::BUTTON,
             'openType' => $this->openType,
+            'gridCols' => $this->gridCols,
         ]);
     }
 }

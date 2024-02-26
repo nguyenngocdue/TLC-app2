@@ -27,13 +27,21 @@ class Qaqc_ncr_030_dataSource extends Controller
                                 DATE_FORMAT(ncr.created_at, '%m') AS month,
                                 SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
                                 SUM(CASE
-                                    WHEN ncr.status = 'closed' THEN 1
+                                    WHEN ncr.status = 'closed' AND ncr.closed_at IS NOT NULL THEN 1
                                     ELSE 0
                                 END) AS count_closed,
                                 SUM(CASE
                                     WHEN ncr.status != 'closed' THEN 1
                                     ELSE 0
-                                END) AS count_new
+                                END) AS count_new,
+                                
+                                SUM(CASE
+                                    WHEN ncr.status = 'closed' AND ncr.closed_at IS NOT NULL THEN 1
+                                    ELSE 0
+                                END) + SUM(CASE
+                                    WHEN ncr.status != 'closed' THEN 1
+                                    ELSE 0
+                                END) AS total
                             FROM qaqc_ncrs ncr
                             WHERE 1 = 1
                             AND ncr.deleted_by IS NULL
@@ -51,27 +59,19 @@ class Qaqc_ncr_030_dataSource extends Controller
                         ) AS count_defect,
                         SUM(
                             CASE WHEN ncr.defect_report_type = 241 THEN 1 ELSE 0 END
-                        ) AS count_ncr
+                        ) AS count_ncr,
+                        SUM(
+                            CASE
+                                WHEN ncr.defect_report_type = 240 THEN 1 ELSE 0 END 
+                        ) + SUM(
+                            CASE WHEN ncr.defect_report_type = 241 THEN 1 ELSE 0 END
+                        ) AS total
                         FROM qaqc_ncrs ncr
                         LEFT JOIN terms term ON term.id = ncr.defect_report_type
                         WHERE 1 = 1 
                             AND ncr.deleted_by IS NULL
                         GROUP BY date_time, year, month, str_month
                         ORDER BY date_time, month";
-
-        $RESPONSIBLE_TEAM = "SELECT
-                                DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
-                                DATE_FORMAT(ncr.created_at, '%Y') AS year,
-                                DATE_FORMAT(ncr.created_at, '%m') AS month,
-                                SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
-                                ncrt.name AS user_team_name,
-                                COUNT(ncrt.name) AS count_ncr_dr
-                                FROM qaqc_ncrs ncr
-                                LEFT JOIN user_team_ncrs ncrt ON ncrt.id = ncr.user_team_id
-                                WHERE 1 = 1
-                                AND  ncr.deleted_by IS NULL
-                                GROUP BY date_time, year, month, str_month, ncrt.name
-                                ORDER BY date_time, month";
 
         $AVERAGE_CLOSED_ISSUES = "SELECT
                                     DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
@@ -83,7 +83,12 @@ class Qaqc_ncr_030_dataSource extends Controller
                                             THEN
                                                 TIME_TO_SEC(TIMEDIFF(ncr.closed_at, ncr.created_at))/60/60/24 ELSE 0 END)/(
                                                 COUNT(CASE WHEN ncr.status = 'closed' THEN ncr.id ELSE 0 END)),2) AS avg_day_closed,
-                                    COUNT(ncr.id) AS count_ncr_open
+                                    COUNT(ncr.id) AS count_ncr_open,
+                                    ROUND(SUM(CASE 
+                                        WHEN ncr.status = 'closed'
+                                            THEN
+                                                TIME_TO_SEC(TIMEDIFF(ncr.closed_at, ncr.created_at))/60/60/24 ELSE 0 END)/(
+                                                COUNT(CASE WHEN ncr.status = 'closed' THEN ncr.id ELSE 0 END)) + COUNT(ncr.id),2) AS total
                                     FROM qaqc_ncrs ncr
                                     WHERE 1 = 1
                                     AND ncr.deleted_by IS NULL
@@ -110,13 +115,40 @@ class Qaqc_ncr_030_dataSource extends Controller
                             SUM(
                                 CASE
                                     WHEN ncr.status = 'resolved' THEN 1 ELSE 0 END 
-                            ) AS count_resolved
-
+                            ) AS count_resolved,
+                            
+                            SUM(
+                                    CASE
+                                        WHEN ncr.status = 'closed' THEN 1 ELSE 0 END 
+                                ) + SUM(
+                                CASE
+                                    WHEN ncr.status = 'new' THEN 1 ELSE 0 END 
+                            ) + SUM(
+                                CASE
+                                    WHEN ncr.status = 'rejected' THEN 1 ELSE 0 END 
+                            ) + SUM(
+                                CASE
+                                    WHEN ncr.status = 'resolved' THEN 1 ELSE 0 END 
+                            ) AS total
                             FROM qaqc_ncrs ncr
                             WHERE 1 = 1 
                                 AND ncr.deleted_by IS NULL
                             GROUP BY date_time, year ,month, str_month
                             ORDER BY date_time";
+
+        $RESPONSIBLE_TEAM = "SELECT
+                                DATE_FORMAT(ncr.created_at,'%Y-%m') AS date_time,
+                                DATE_FORMAT(ncr.created_at, '%Y') AS year,
+                                DATE_FORMAT(ncr.created_at, '%m') AS month,
+                                SUBSTR(DATE_FORMAT(ncr.created_at, '%M'), 1, 20) AS str_month,
+                                ncrt.name AS user_team_name,
+                                COUNT(ncrt.name) AS count_ncr_dr
+                                FROM qaqc_ncrs ncr
+                                LEFT JOIN user_team_ncrs ncrt ON ncrt.id = ncr.user_team_id
+                                WHERE 1 = 1
+                                AND  ncr.deleted_by IS NULL
+                                GROUP BY date_time, year, month, str_month, ncrt.name
+                                ORDER BY date_time, month";
 
         $ISSUES_SOURCE = "SELECT date_time,
                             year,

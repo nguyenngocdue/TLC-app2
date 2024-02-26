@@ -24,6 +24,7 @@ trait TraitSupportEntityShow
             ],
         ];
     }
+
     private function transformDataSource($dataSource, $entityShtSigs)
     {
         foreach ($dataSource as &$value) {
@@ -42,6 +43,7 @@ trait TraitSupportEntityShow
         }
         return array_merge($dataSource->toArray(), $entityShtSigs->toArray());
     }
+
     private function transFormLine($item)
     {
         $controlGroup = $item->getControlGroup->name ?? null;
@@ -50,7 +52,7 @@ trait TraitSupportEntityShow
         if (!is_null($controlGroup)) {
             $str = "<table class='text-sm text-left text-gray-500 dark:text-gray-400'>";
             $str .= "<tbody>";
-            $str .= "<tr title='Chklst Line ID: {$item->id}' class=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>";
+            $str .= "<tr title='Chklst Line ID: {$item->id}' class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>";
             $str .= $this->createStrHtmlGroupRadio($item, $controlGroup);
             $str .= "</tr>";
             $str .= $this->createStrHtmlCorrectiveAction($item);
@@ -129,6 +131,7 @@ trait TraitSupportEntityShow
         $longStr =  $str; // $runUpdated;
         return $longStr;
     }
+
     private function createInspectorAndDatetime($item, $isSignature, $isSignatureLine)
     {
         $inspector = "";
@@ -158,6 +161,7 @@ trait TraitSupportEntityShow
             }
         }
     }
+
     private function createStrHtmlAttachment($item)
     {
         if (isset($item->insp_photos) && !$item->insp_photos->isEmpty()) {
@@ -175,6 +179,7 @@ trait TraitSupportEntityShow
         }
         return '';
     }
+
     private function createStrHtmlCorrectiveAction($item)
     {
         if (isset($item->getCorrectiveActions) && !$item->getCorrectiveActions->isEmpty()) {
@@ -183,6 +188,7 @@ trait TraitSupportEntityShow
         }
         return '';
     }
+
     private function formatCorrectiveAction($items)
     {
         $strCenter = "";
@@ -200,6 +206,7 @@ trait TraitSupportEntityShow
         }
         return $strCenter;
     }
+
     private function formatCommentRender($items)
     {
         $value = $items->toArray();
@@ -209,22 +216,12 @@ trait TraitSupportEntityShow
 
     private function formatAttachmentRender($items)
     {
-        // $strCenter = '';
-        // $isRenderSimple = $items->every(function ($item) {
-        //     return in_array($item->extension, ['pdf', 'csv', 'zip']);
-        // });
-        // if ($isRenderSimple) {
-        //     $strCenter = Blade::render('<x-print.attachment-simple :dataSource="$value"/>', [
-        //         'value' => $items->toArray()
-        //     ]);
-        // } else {
-            
-        // }
-        $strCenter = Blade::render('<x-renderer.attachment2 openType="_blank" name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />', [
+        $strCenter = Blade::render('<x-renderer.attachment2 gridCols="grid-cols-3" openType="_blank" name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />', [
             'value' => $items->toArray()
         ]);
         return $strCenter;
     }
+
     private function createDataSourceDescription($value)
     {
         return "<div>
@@ -232,6 +229,7 @@ trait TraitSupportEntityShow
                     <i class='text-sm'>{$value->description}</i>
                 </div>";
     }
+
     private function createDataSource($value, $isSignature)
     {
         // dump($isSignature);

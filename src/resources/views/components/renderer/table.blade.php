@@ -19,7 +19,7 @@ var tableObjectIndexedColumns = {};
         @endif
     </table>
 @else
-    <div class="border rounded-lg border-gray-300 dark:border-gray-600 ">
+    <div class="border rounded-lg {{$borderColor}} dark:border-gray-600 ">
         <div>
             <div class="inline-block1 w-full sm:px-0 lg:px-0 ">
                 @if ($header)
@@ -47,8 +47,8 @@ var tableObjectIndexedColumns = {};
                     $classH= "h-$headerTop";
                     $classTop= "top-$headerTop";
                 } @endphp
-                <div class="table-wrp block {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t":"rounded-t-lg"}}">
-                    <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm border-separate border-spacing-0' style="table-layout: auto; {{$tableWidth}}">
+                <div class="table-wrp block {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t $borderColor":"rounded-t-lg"}}">
+                    <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm border-separate border-spacing-0 {{$borderColor}}' style="table-layout: auto; {{$tableWidth}}">
                         <colgroup>
                             {!! $colgroup !!}
                         </colgroup>

@@ -6,6 +6,7 @@ use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
+use App\Utils\Support\ArrayReport;
 use App\Utils\Support\Report;
 
 class Esg_master_sheet_010 extends Report_ParentDocument2Controller
@@ -28,6 +29,11 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
                     tb2.esg_tmpl_id,
                     tb2.esg_tmpl_name,
                     tb2.esg_metric_type_id,
+                    SUBSTR(REGEXP_SUBSTR(tb2.esg_metric_type_name, '[0-9]+(\\.[0-9]+)+'),1,5) AS mark_parent,
+                    REGEXP_SUBSTR(tb2.esg_metric_type_name, '[0-9]+(\\.[0-9]+)+') AS mark_heading,
+                    CONCAT(IF(CHAR_LENGTH(REGEXP_SUBSTR(tb2.esg_metric_type_name, '[0-9]+(\\.[0-9]+)+')) > 5 , 'children', 'parent'),'_', 
+                    SUBSTR(REGEXP_SUBSTR(tb2.esg_metric_type_name, '[0-9]+(\\.[0-9]+)+'),1,3)
+                          ) AS mark_item,
                     tb2.esg_metric_type_name,
                     tb2.unit_name,
                     tb2.esg_state_name,
@@ -145,11 +151,11 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
         $results = [];
         foreach ($data as $key => $value) {
             $value = reset($value);
-            $x1 = [$value['total_all_months']];
+            $x1 = [number_format($value['total_all_months'], 2)];
             $x12 = [];
             foreach (range(1, 12) as $num) {
                 if (isset($value[str_pad($num, 2, '0', STR_PAD_LEFT)])) {
-                    $x12[] = $value[str_pad($num, 2, '0', STR_PAD_LEFT)];
+                    $x12[] = number_format($value[str_pad($num, 2, '0', STR_PAD_LEFT)], 2);
                 };
             }
             $results[$key] = array_merge($x1, $x12);
@@ -195,6 +201,70 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
         return $monthlyTotals;
     }
 
+    private function getChildrenMeTypes($data)
+    {
+        return array_filter($data, fn ($item) => str_contains($item['mark_item'], 'children'));
+    }
+
+    private function getWorkplaceIdsInData($data)
+    {
+        return array_unique(array_merge(...array_map(function ($item) {
+            return array_keys($item['calculated_numbers']);
+        }, $data)));
+    }
+
+    private function calculateValuesFroWorkplaceIds($workplaceIds, $childrenMeType)
+    {
+        $results = [];
+        foreach ($childrenMeType as $items) {
+            $calculatedNumbers = $items['calculated_numbers'];
+            foreach ($workplaceIds as $id) {
+                $wpDB = $calculatedNumbers[$id];
+                if (!isset($results[$id])) {
+                    $results[$id] = $wpDB;
+                } else {
+                    $wpDB = ArrayReport::sumValuesOfArray($results[$id], $wpDB);
+                    $results[$id] = $wpDB;
+                }
+            }
+        }
+        return $results;
+    }
+
+    private function makeDataHaveTotalOthers($dataSource)
+    {
+        foreach ($dataSource as &$items) {
+            $arrayMeType = $items['array_metric_type'];
+            $childrenMeType = $this->getChildrenMeTypes($arrayMeType);
+            $lineNumber = 0;
+            if ($childrenMeType) {
+                $workplaceIdsInData = $this->getWorkplaceIdsInData($childrenMeType);
+                $totalValueOfWorkplaceIds = $this->calculateValuesFroWorkplaceIds($workplaceIdsInData, $childrenMeType);
+                // add rows
+                $lineNumber = count($workplaceIdsInData);
+                $items['rowspan'] = $items['rowspan'] + $lineNumber + 1;
+
+                $summaryValueOfWorkplaceIds = ArrayReport::summaryAllValuesOfArray($totalValueOfWorkplaceIds);
+                $firstMetric = reset($childrenMeType);
+                // add info for others
+                $array_others = [
+                    "esg_tmpl_name" => $firstMetric['esg_tmpl_name'],
+                    "rowspan_metric_type" => $lineNumber + 1,
+                    "rowspan_children" => $lineNumber + 1,
+                    "esg_metric_type_id" => $firstMetric['esg_metric_type_id'],
+                    "esg_metric_type_name" => $firstMetric['mark_parent'] . ".Others",
+                    "unit" => $firstMetric['unit'],
+                    "state" => $firstMetric['state'],
+                    "calculated_numbers" => $totalValueOfWorkplaceIds,
+                    "total_per_month" => $summaryValueOfWorkplaceIds
+                ];
+                $childrenMeType = array_merge([reset($arrayMeType)], [$array_others], $childrenMeType);
+                $items['array_metric_type'] = $childrenMeType;
+            }
+        }
+        return $dataSource;
+    }
+
 
     public function changeDataSource($dataSource, $params)
     {
@@ -232,6 +302,9 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
                 $calculatedNumbers = $this->groupDataWorkplaces($grWorkplaceIds);
                 $totalPerMonth = array_values($this->calculateMonthlyTotals($grWorkplaceIds));
                 $results[$tmplId]["array_metric_type"][] = [
+                    "mark_parent" => $firstItem['mark_parent'],
+                    "mark_heading" => $firstItem['mark_heading'],
+                    "mark_item" => $firstItem['mark_item'],
                     "esg_tmpl_name" => $esgTmplName,
                     "rowspan_metric_type" => $rowspanMetricType,
                     "rowspan_children" => $rowspanChildren,
@@ -246,6 +319,9 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
             $results[$tmplId]["rowspan"] = $numOfLines;
         }
         $newDataSource = array_values($results);
+
+        // stage 2:
+        $newDataSource = $this->makeDataHaveTotalOthers($newDataSource);
         // dd($newDataSource);
         return $newDataSource;
     }

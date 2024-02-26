@@ -103,17 +103,28 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
         return [
             "OPEN_CLOSED_ISSUES" => [
                 [
+                    'title' => 'Year',
+                    'dataIndex' => 'year',
+                    'align' => 'center'
+                ],
+                [
                     'title' => 'Month',
                     'dataIndex' => 'str_month',
                     'align' => 'center'
                 ],
                 [
-                    'title' => 'Open Issues',
+                    'title' => 'Total',
+                    'dataIndex' => 'total',
+                    'align' => 'center',
+                    'width' => '50',
+                ],
+                [
+                    'title' => 'Closed Issues',
                     'dataIndex' => 'count_closed',
                     'align' => 'right'
                 ],
                 [
-                    'title' => 'Closed Issues',
+                    'title' => 'Open Issues',
                     'dataIndex' => 'count_new',
                     'align' => 'right'
                 ]
@@ -121,8 +132,18 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
             ],
             "NCR_DR" => [
                 [
+                    'title' => 'Year',
+                    'dataIndex' => 'year',
+                    'align' => 'center'
+                ],
+                [
                     'title' => 'Month',
                     'dataIndex' => 'str_month',
+                    'align' => 'center'
+                ],
+                [
+                    'title' => 'Total',
+                    'dataIndex' => 'total',
                     'align' => 'center'
                 ],
                 [
@@ -137,15 +158,37 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 ],
 
             ],
-            "RESPONSIBLE_TEAM" => array_merge([[
-                'title' => 'Month',
-                'dataIndex' => 'str_month',
-                'align' => 'center'
-            ]], $colResponsible),
-            "AVERAGE_CLOSED_ISSUES" => [
+            "RESPONSIBLE_TEAM" => array_merge([
+                [
+                    'title' => 'Year',
+                    'dataIndex' => 'year',
+                    'align' => 'center'
+                ],
                 [
                     'title' => 'Month',
                     'dataIndex' => 'str_month',
+                    'align' => 'center'
+                ],
+                [
+                    'title' => 'Total',
+                    'dataIndex' => 'total',
+                    'align' => 'center'
+                ],
+            ], $colResponsible),
+            "AVERAGE_CLOSED_ISSUES" => [
+                [
+                    'title' => 'Year',
+                    'dataIndex' => 'year',
+                    'align' => 'center'
+                ],
+                [
+                    'title' => 'Month',
+                    'dataIndex' => 'str_month',
+                    'align' => 'center'
+                ],
+                [
+                    'title' => 'Total',
+                    'dataIndex' => 'total',
                     'align' => 'center'
                 ],
                 [
@@ -154,15 +197,25 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                     'align' => 'right'
                 ],
                 [
-                    'title' => 'New',
+                    'title' => 'Open Issues',
                     'dataIndex' => 'count_ncr_open',
                     'align' => 'right'
                 ]
             ],
             "ISSUES_STATUS" => [
                 [
+                    'title' => 'Year',
+                    'dataIndex' => 'year',
+                    'align' => 'center'
+                ],
+                [
                     'title' => 'Month',
                     'dataIndex' => 'str_month',
+                    'align' => 'center'
+                ],
+                [
+                    'title' => 'Total',
+                    'dataIndex' => 'total',
                     'align' => 'center'
                 ],
                 [
@@ -187,6 +240,11 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 ]
             ],
             "ISSUES_SOURCE" => [
+                [
+                    'title' => 'Year',
+                    'dataIndex' => 'year',
+                    'align' => 'center'
+                ],
                 [
                     'title' => 'Month',
                     'dataIndex' => 'str_month',
@@ -265,9 +323,12 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
 
         // Ensure all records have all defect report types initialized to 0 if not set
         foreach ($mergedData as &$values) {
+            $total = 0;
             foreach ($fields as $type) {
                 if (!isset($values[$type])) $values[$type] = 0;
+                else $total += $values[$type];
             }
+            $values['total'] = $total;
         }
         return $mergedData;
     }

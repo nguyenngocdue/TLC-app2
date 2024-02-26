@@ -55,6 +55,7 @@ trait TableTraitRows
         $columnCount = sizeof($columns);
         // Log::info($columns);
         $columns = array_values($columns);
+        $borderColor = $this->borderColor;
         foreach ($columns as $index => $column) {
             // dump($column);
             $fixedLeft = $this->getFixedLeftOrRight($column, $index, "left", "td");
@@ -144,10 +145,10 @@ trait TableTraitRows
             [$cellClassList, $cellTitle, $cellHref, $cellOnClick] = $this->parseCellObject($rawData);
             $breakWords = $this->noCss ? "break-all123" : "";
             $tinyText = $this->noCss ? "text-xs" : "";
-            $borderGray = $this->noCss ? "border-gray-200" : "";
+            $borderGray = $this->noCss ? "border-gray-400" : "";
             $bgWhite = ($renderer == 'no.') ? "bg-white" : "";
             $nowrap = ($column['nowrap'] ?? false) ? "whitespace-nowrap" : "";
-            $td = "<td class='$fixedLeft $fixedRight $bgWhite dark:border-gray-600 border-b $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align $nowrap'";
+            $td = "<td class='$fixedLeft $fixedRight $bgWhite dark:border-gray-600 border-b $borderColor $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align $nowrap'";
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";
             $td .= ">";
@@ -168,6 +169,7 @@ trait TableTraitRows
     {
         $trs = [];
         $colspan = sizeof($columns);
+        $borderColor = $this->borderColor;
 
         $items = $this->smartGetItems($dataSource);
 
@@ -200,7 +202,7 @@ trait TableTraitRows
                     //<<This fixedLeft still doesn't work
                     $fixedLeft = "table-th-fixed-left table-th-fixed-left-0";
                     $tr = "<tr $readOnlyStr class='bg-gray-100 dark:bg-gray-800' >";
-                    $tr .= "<td class='$fixedLeft bg-white1 p-2 border-b text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td>";
+                    $tr .= "<td class='$fixedLeft bg-white1 p-2 border-b $borderColor text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td>";
                     $tr .= "</tr>";
                     $trs[] = $tr;
                 }

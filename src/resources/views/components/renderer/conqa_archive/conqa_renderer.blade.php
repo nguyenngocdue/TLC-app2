@@ -39,6 +39,48 @@
                             @break
                     @endswitch
 
+                    @php
+                        $fields = $checkpoint->fields;                                
+                    @endphp
+                    @foreach($fields as $field)
+                        @php
+                            $fieldId = $field->fieldId;
+                            // dump($field);
+                            if(!isset($checkpointData->fields->{$fieldId})) continue;
+                            $checkpointDataOfThisField = $checkpointData->fields->{$fieldId};
+                            // dump($checkpointDataOfThisField);
+
+                        @endphp
+
+                        @switch($field->fieldType)
+                            @case("text")
+                            @case("option")
+                                @php 
+                                $value = $checkpointDataOfThisField->value;
+                                @endphp
+                                @break
+                            @case("boolean")
+                                @php 
+                                $value = $value? "TRUE" : "FALSE";
+                                @endphp
+                                @break
+                            @default
+                                Unknown how to render fieldType {{$field->fieldType}}
+                                @break
+                        @endswitch
+
+                        
+                        @php
+                            $len = ceil(strlen($checkpointDataOfThisField->value)/80);
+                            $len = $len ?: 1;
+                        @endphp
+                        <div class="w-full bg-gray-100 p-2 flex items-center">
+                            <div class="w-1/4 text-right mr-2">{{$field->name}}</div>
+                            <div class="w-3/4">
+                                <textarea class="w-full readonly p-1" rows="{{$len}}" readonly >{{$value}}</textarea>
+                            </div>
+                        </div>
+                    @endforeach
                     {{-- Attachments: {{count($checkpointAttachmentIds)}}
                     @foreach($checkpointAttachmentIds as $id)
                         <li>{{$id}}</li>

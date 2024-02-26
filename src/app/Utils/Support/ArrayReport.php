@@ -102,4 +102,20 @@ class ArrayReport
 
         return $result;
     }
+
+    public static function sumValuesOfArray($array1, $array2)
+    {
+        return array_map(function ($a, $b) {
+            $a = floatval(str_replace(',', '', $a));
+            $b = floatval(str_replace(',', '', $b));
+            return number_format($a + $b, 2);
+        }, $array1, $array2);
+    }
+
+    public static function summaryAllValuesOfArray($data)
+    {
+        return array_reduce($data, function ($carry, $item) {
+            return $carry ? self::sumValuesOfArray($carry, $item) : $item;
+        }, []);
+    }
 }
