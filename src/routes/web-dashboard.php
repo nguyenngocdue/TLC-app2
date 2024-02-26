@@ -35,6 +35,7 @@ Route::group([], function () {
 
             Route::put("{$entityName}_prt", [ViewAllInvokerController::class, "print"])->name("{$entityName}_prt.print");
             Route::get("{$entityName}_qr", [ViewAllInvokerController::class, "showQRList6"])->name("{$entityName}_qr.showQRList6");
+            Route::get("{$entityName}_prt", [ViewAllInvokerController::class, "showAll"])->name("{$entityName}_prt.showAll");
         });
     }
 });
