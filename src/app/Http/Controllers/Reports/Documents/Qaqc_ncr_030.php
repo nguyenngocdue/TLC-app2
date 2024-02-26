@@ -19,6 +19,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
     protected $mode = '030';
     protected $projectId = 5;
     protected $viewName = 'document-ncr-030';
+    protected $optionPrint = "landscape";
 
     protected function getParamColumns($dataSource, $params)
     {
