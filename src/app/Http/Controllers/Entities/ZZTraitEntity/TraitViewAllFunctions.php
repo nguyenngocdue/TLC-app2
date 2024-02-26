@@ -87,13 +87,13 @@ trait TraitViewAllFunctions
         if (!CurrentUser::isAdmin()) {
             $isUseTree = $this->isUseTree($this->type);
             if ($isUseTree) {
-                $ids = $this->getListOwnerIds(auth()->user());
+                $ids = $this->getListOwnerIds(CurrentUser::get());
                 $result = $instance
                     ->query(function ($q) use ($ids, $advanceFilters, $propsFilters, $eagerLoadParams, $trash) {
                         if ($trash) {
                             $q->onlyTrashed();
                         }
-                        $q->whereIn('owner_id', $ids);
+                        $this->handleWhereIn($q,$ids);
                         $this->queryAdvancedFilter($q, $advanceFilters, $propsFilters);
                         return $q
                             ->with($eagerLoadParams)
@@ -113,5 +113,13 @@ trait TraitViewAllFunctions
                     ->orderBy('updated_at', 'desc');
             });
         return $result;
+    }
+    private function handleWhereIn(&$model,$ids){
+        if($this->type == "user_position"){
+            $positions = $this->getPositionsEntityUserPositionOfCurrentUser();
+            $model->whereIn('name', array_unique($positions));
+        }else{
+            $model->whereIn('owner_id', $ids);
+        }
     }
 }

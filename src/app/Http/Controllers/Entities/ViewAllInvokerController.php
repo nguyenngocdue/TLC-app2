@@ -165,4 +165,5 @@ class ViewAllInvokerController extends Controller
         $props =  SuperProps::getFor($this->type)['props'];
         return array_map(fn ($item) => $item['duplicatable'], $props);
     }
+    
 }

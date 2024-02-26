@@ -3,6 +3,8 @@
 namespace App\Providers\Support;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Models\User;
+use App\Models\User_discipline;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Support\Facades\Log;
@@ -10,10 +12,10 @@ use Illuminate\Support\Str;
 
 trait TraitSupportPermissionGate
 {
-    private function useTree($model)
+    private function useTree()
     {
-        $type = Str::singular($model->getTable());
-        return LibApps::getFor($type)['apply_approval_tree'] ?? false;
+        if($this->type == 'user_position') return false;
+        return LibApps::getFor($this->type)['apply_approval_tree'] ?? false;
     }
     private function getCompanyTree($user, $flatten = true)
     {
@@ -46,7 +48,7 @@ trait TraitSupportPermissionGate
     private function checkPermissionUsingGate($id, $action = 'edit', $restore = false)
     {
         $model = $restore ? $this->modelPath::withTrashed()->findOrFail($id) : $this->modelPath::findOrFail($id);
-        $isTree = $this->useTree($model);
+        $isTree = $this->useTree();
         $permissions = $this->permissionMiddleware[$action];
         $permissions = is_array($permissions) ? $permissions : explode('|', $permissions);
         if (CurrentUser::isAdmin()) {
@@ -94,7 +96,6 @@ trait TraitSupportPermissionGate
     {
         $result1 = false;
         $result2 = false;
-
         if ($this->checkPermission($permissions[0])) {
             $result1 = CurrentUser::id() == $model->owner_id;
         }
@@ -103,5 +104,20 @@ trait TraitSupportPermissionGate
         }
 
         return [$result1, $result2];
+    }
+    private function getPositionsEntityUserPositionOfCurrentUser(){
+        $currentUser = CurrentUser::get();
+            $users = $currentUser->getPosition->getUsers;
+            $positions = [];
+            foreach($users as $user){
+                $positions[] = $user->getPosition->name;
+            }
+            $disciplineIds = User_discipline::where("def_assignee",$currentUser->id)->pluck('id')->toArray();
+            $users = User::whereIn("discipline",$disciplineIds)->get();
+            foreach($users as $user){
+                $positions[] = $user->getPosition->name;
+            }
+            $positions = array_unique($positions);
+            return $positions;
     }
 }
