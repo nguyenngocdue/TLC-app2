@@ -34,7 +34,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
         if($bic_users){
             $model = $modelPath::find($id);
             $bic_users = str_replace("()","",$bic_users);
-            $ids = $model->{$bic_users}()->pluck('id')->toArray();
+            $ids = $model->{$bic_users}()->where('resigned',0)->where('show_on_beta',0)->pluck('id')->toArray();
             if($isAlsoSendToUsersDiscipline){
                 $alsoSendToUsersDisciplineIds = [];
                 foreach ($ids as $id){
