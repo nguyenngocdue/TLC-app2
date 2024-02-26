@@ -53,7 +53,7 @@ $tr = "
 {{-- RENDER TABLES --}}
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4">
-        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white p-8">
+        <div style='' class="  {{$layout}} items-center bg-white p-8">
             <x-print.header6 />
             {{-- BASIC INFORMATION --}}
             <x-renderer.heading level=2 class='text-center'>NCR/DR Monthly Report</x-renderer.heading>
@@ -85,7 +85,7 @@ $tr = "
                      <div class='col-span-12'>
                         <x-renderer.heading level=4 class='text-center'>Monthly Issues' Statuses</x-renderer.heading>
                         <div class="flex flex-col text-center">
-                            <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=5" width="{{$width}}" height="{{$heigh}}" frameborder="1">
+                            <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=5" width="990px" height="{{$heigh}}" frameborder="1">
                             </iframe>
                             <div class='pt-4'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_STATUS']" :dataSource="$tableDataSource['ISSUES_STATUS']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
@@ -98,26 +98,14 @@ $tr = "
 
 
         <x-renderer.page-break />
-        
-        <div style='page-break-after:always!important' class="{{$layout}} items-center bg-white  p-8">
-            <x-print.header6 />
-            <x-renderer.heading level=2 class='text-center'>NCR/DR Monthly Report</x-renderer.heading>
 
+        <div style='{{-- page-break-after:always!important --}}' class="{{$layout}} items-center bg-white  p-8">
+            {{-- <x-print.header6 /> --}}
+            {{-- <x-renderer.heading level=2 class='text-center'>NCR/DR Monthly Report</x-renderer.heading> --}}
             <div class='grid grid-row-1 gap-4'>
                 <div class='grid grid-cols-12 gap-4 text-center'>
-                     
-                     <div class='col-span-12'>
-                        <x-renderer.heading level=4 class='text-center'>Monthly Responsible Team's Issues</x-renderer.heading>
-                        <div class="flex flex-col text-center">
-                            <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=3" width="{{$width}}" height="{{$heigh}}" frameborder="1">
-                            </iframe>
-                            <div class='pt-4'>
-                                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['RESPONSIBLE_TEAM']" :dataSource="$tableDataSource['RESPONSIBLE_TEAM']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class='col-span-6'>
+                    
+                     <div class='col-span-6'>
                         <x-renderer.heading level=4 class='text-center'>Monthly Issues Source</x-renderer.heading>
                         <div class="flex flex-col text-center">
                             <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=6" width="{{$width}}" height="{{$heigh}}" frameborder="1">
@@ -139,9 +127,23 @@ $tr = "
                         </div>
                     </div>
 
+                     <div class='col-span-12'>
+                        <x-renderer.heading level=4 class='text-center'>Monthly Responsible Team's Issues</x-renderer.heading>
+                        <div class="flex flex-col text-center">
+                            <iframe class="self-center" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=3" width="990px" height="{{$heigh}}" frameborder="1">
+                            </iframe>
+                            <div class='pt-4'>
+                                <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['RESPONSIBLE_TEAM']" :dataSource="$tableDataSource['RESPONSIBLE_TEAM']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
+                            </div>
+                        </div>
+                    </div>
+
+                   
+
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 @endsection
