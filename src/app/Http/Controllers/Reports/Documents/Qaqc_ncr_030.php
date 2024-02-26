@@ -247,7 +247,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                     'align' => 'center'
                 ],
                 [
-                    'title' => 'Grand Total',
+                    'title' => 'Total',
                     'dataIndex' => 'grand_total',
                     'align' => 'right'
                 ],
