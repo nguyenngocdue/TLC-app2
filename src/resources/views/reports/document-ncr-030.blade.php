@@ -55,8 +55,34 @@ $tr = "
     <div class="md:px-4">
         <div style='' class="  {{$layout}} items-center bg-white p-8">
             <x-print.header6 />
+            <x-renderer.heading level=2 class='text-center'>NCR/DR Monthly Report in {{$params['year']}}</x-renderer.heading>
             {{-- BASIC INFORMATION --}}
-            <x-renderer.heading level=2 class='text-center'>NCR/DR Monthly Report</x-renderer.heading>
+            <div class="col-span-12 grid border border-gray-600">
+                <div class="grid grid-rows-1">
+                    <div class="grid grid-cols-12 text-right ">
+                        <label class="{{$class1}} col-start-1   col-span-3">Sub-Project</label>
+                        <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfoData['sub_project_name']}}</span>
+                    </div>
+                </div>
+                <div class="grid grid-rows-1">
+                        @if($basicInfoData['prod_discipline_name'])
+                            <div class="grid grid-cols-12 text-right">
+                                <label class="{{$class1}} col-start-1  col-span-3">Production Routing</label>
+                                <span class="{{$class2}}  col-start-4  col-span-4">{{$basicInfoData['prod_routing_name']}}</span>
+                                <label class="{{$class1}} col-start-8  col-span-3 items-center">Production Discipline</label>
+                                <span class="{{$class2}}  col-start-11 col-span-2">{{$basicInfoData['prod_discipline_name']}}</span>
+                            </div>
+                        @else
+                        <div class="grid grid-cols-12 text-right ">
+                            <label class="{{$class1}} col-start-1   col-span-3">Production Routing</label>
+                            <span class="{{$class2}}  col-start-4   col-span-9">{{$basicInfoData['prod_routing_name']}}</span>
+                        </div>
+
+                        @endif
+                </div>
+            </div>
+
+
 
             {{-- TABLES --}}
             <div class='grid grid-row-1 gap-4'>

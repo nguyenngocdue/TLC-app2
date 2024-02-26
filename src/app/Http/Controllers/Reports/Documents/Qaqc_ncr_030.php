@@ -7,6 +7,10 @@ use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\Documents\Qaqc_ncr_030_dataSource;
 use App\Http\Controllers\Reports\TraitCreateChartFromGrafana;
 use App\Http\Controllers\Reports\TraitParamURLGrafana;
+use App\Models\Prod_discipline;
+use App\Models\Prod_routing;
+use App\Models\Project;
+use App\Models\Sub_project;
 use App\Utils\Support\ArrayReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
@@ -352,5 +356,30 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
     {
         $params['year'] = 2023;
         return $params;
+    }
+
+    private function getNamesOfModels($params, $keyNames)
+    {
+        $basicInfoData = [];
+        foreach ($keyNames as $value) {
+            $modelPath = "App\Models\\" . ucwords($value);
+            $nameId = $value . '_id';
+            $projectNames = isset($params[$nameId]) ?
+                implode(', ', $modelPath::find($params[$nameId])
+                    ->pluck('name')
+                    ->toArray()) :
+                implode(', ', $modelPath::all()
+                    ->pluck('name')
+                    ->toArray());
+
+            $basicInfoData[$value . "_name"] = $projectNames;
+        }
+        return $basicInfoData;
+    }
+
+    public function getBasicInfoData($params)
+    {
+        $keyNames = ['project', 'sub_project', 'prod_routing', 'prod_discipline'];
+        return $this->getNamesOfModels($params, $keyNames);
     }
 }
