@@ -188,11 +188,6 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                     'align' => 'center'
                 ],
                 [
-                    'title' => 'Total',
-                    'dataIndex' => 'total',
-                    'align' => 'center'
-                ],
-                [
                     'title' => 'Closed Days (AVG)',
                     'dataIndex' => 'avg_day_closed',
                     'align' => 'right'
@@ -252,6 +247,11 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                     'align' => 'center'
                 ],
                 [
+                    'title' => 'Grand Total',
+                    'dataIndex' => 'grand_total',
+                    'align' => 'right'
+                ],
+                [
                     'title' => 'ICS',
                     'dataIndex' => 'sum_count_isp',
                     'align' => 'right'
@@ -266,11 +266,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                     'dataIndex' => 'sum_count_wir',
                     'align' => 'right'
                 ],
-                [
-                    'title' => 'Grand Total',
-                    'dataIndex' => 'grand_total',
-                    'align' => 'right'
-                ]
+
             ]
 
         ];

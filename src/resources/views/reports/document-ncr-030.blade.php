@@ -66,7 +66,7 @@ $tr = "
                         <div class="flex flex-col text-center">
                             <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=1" width="{{$width}}" height="{{$heigh}}" frameborder="1">
                             </iframe>
-                            <div class='pt-4'>
+                            <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['OPEN_CLOSED_ISSUES']" :dataSource="$tableDataSource['OPEN_CLOSED_ISSUES']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
                             </div>
                         </div>
@@ -76,7 +76,7 @@ $tr = "
                         <div class="flex flex-col text-center">
                             <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=2" width="{{$width}}" height="{{$heigh}}" frameborder="1">
                             </iframe>
-                            <div class='pt-4'>
+                            <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['NCR_DR']" :dataSource="$tableDataSource['NCR_DR']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
                             </div>
                         </div>
@@ -87,7 +87,7 @@ $tr = "
                         <div class="flex flex-col text-center">
                             <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=5" width="990px" height="{{$heigh}}" frameborder="1">
                             </iframe>
-                            <div class='pt-4'>
+                            <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_STATUS']" :dataSource="$tableDataSource['ISSUES_STATUS']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
                             </div>
                         </div>
@@ -110,7 +110,7 @@ $tr = "
                         <div class="flex flex-col text-center">
                             <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=6" width="{{$width}}" height="{{$heigh}}" frameborder="1">
                             </iframe>
-                            <div class='pt-4'>
+                            <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_SOURCE']" :dataSource="$tableDataSource['ISSUES_SOURCE']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
                             </div>
                         </div>
@@ -121,7 +121,7 @@ $tr = "
                         <div class="flex flex-col text-center">
                             <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=4" width="{{$width}}" height="{{$heigh}}" frameborder="1">
                             </iframe>
-                            <div class='pt-4'>
+                            <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['AVERAGE_CLOSED_ISSUES']" :dataSource="$tableDataSource['AVERAGE_CLOSED_ISSUES']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
                             </div>
                         </div>
@@ -132,7 +132,7 @@ $tr = "
                         <div class="flex flex-col text-center">
                             <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=3" width="990px" height="{{$heigh}}" frameborder="1">
                             </iframe>
-                            <div class='pt-4'>
+                            <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['RESPONSIBLE_TEAM']" :dataSource="$tableDataSource['RESPONSIBLE_TEAM']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
                             </div>
                         </div>

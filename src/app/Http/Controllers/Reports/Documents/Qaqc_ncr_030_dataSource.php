@@ -83,12 +83,7 @@ class Qaqc_ncr_030_dataSource extends Controller
                                             THEN
                                                 TIME_TO_SEC(TIMEDIFF(ncr.closed_at, ncr.created_at))/60/60/24 ELSE 0 END)/(
                                                 COUNT(CASE WHEN ncr.status = 'closed' THEN ncr.id ELSE 0 END)),2) AS avg_day_closed,
-                                    COUNT(ncr.id) AS count_ncr_open,
-                                    ROUND(SUM(CASE 
-                                        WHEN ncr.status = 'closed'
-                                            THEN
-                                                TIME_TO_SEC(TIMEDIFF(ncr.closed_at, ncr.created_at))/60/60/24 ELSE 0 END)/(
-                                                COUNT(CASE WHEN ncr.status = 'closed' THEN ncr.id ELSE 0 END)) + COUNT(ncr.id),2) AS total
+                                    COUNT(ncr.id) AS count_ncr_open
                                     FROM qaqc_ncrs ncr
                                     WHERE 1 = 1
                                     AND ncr.deleted_by IS NULL
