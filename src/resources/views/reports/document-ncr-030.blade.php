@@ -242,7 +242,7 @@ $tr = "
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
 
-<script>
+{{-- <script>
     document.addEventListener("keydown", function(event) {
         if (event.ctrlKey && event.key === 'p') {
             event.preventDefault(); 
@@ -253,7 +253,7 @@ $tr = "
         }, 2000);
         }
     });
-</script>
+</script> --}}
 
 <style>
     @media print {
