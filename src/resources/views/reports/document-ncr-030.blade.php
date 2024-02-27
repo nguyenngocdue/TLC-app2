@@ -32,7 +32,7 @@ $tr = "
     $layout = '';
     switch ($optionPrint) {
         case 'landscape':
-            $layout = 'w-[1400px] min-h-[794px]';
+            $layout = 'w-[1200px] min-h-[794px]';
             break;
         case 'portrait':
         default:
