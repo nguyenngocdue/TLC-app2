@@ -12,7 +12,7 @@
     var other = @json($value2);
     var isModeDraft = @json($isModeDraft);
     var placeholder = @json($placeholder);
-    var diff = window.jsdiff.diffWords(one, other);
+    var diff = window.jsdiff.diffLines(one, other);
     var $valueEditor = $('#editor_' + name);
     // var value = [];
     var value = '';
@@ -38,22 +38,18 @@
         else return part.value;
       }
     }
-    function handleFormatValue(lines,index,result){
-      if(lines[index-1]?.includes("<mark")){
-        return result + handleFormatValueByStr(lines[index],true);
-      }else{
-        const splitArray = lines[index]?.split("\r\n");
-        splitArray?.forEach((line ,index) => {
-              if (line === "")
-              result += '<p><br data-cke-filler="true"></p>';
-              else 
-              result += `<p>${line}</p>`;
-        });
-        return result;
-      }
+    function handleFormatValue(str){
+      const lines = str.split("\r\n");
+      const processLined = lines.map((line) => {
+        if(line === "")
+          return '<p><br data-cke-filler="true"></p>';
+        else
+          return `${line}`;
+      })
+      return processLined.join("");
     }
     function handleFormatValueByStr(str,isNoneAddTagP = false){
-      const lines = str.split("\r\n");
+      const lines = str.trim().split("\r\n");
       const processLined = lines.map((line) => {
         if(line === "")
           return '<p><br data-cke-filler="true"></p>';
@@ -76,7 +72,7 @@
       }
       var result = "";
       matches.forEach((match) => {
-          result += match.tag + handleFormatValueByStr(match.content) + "</mark>";
+          result += match.tag + handleFormatValue(match.content) + "</mark>";
       });
       return result;
     }
@@ -87,17 +83,14 @@
     function process(str){
       let regex = /(<mark\b[^>]*>[\s\S]*?<\/mark>)/g;
       let lines = str.split(regex);
-      let result = "";
-      const processedLines = lines.forEach((line ,index) => {
-        if(line == " ") result += line;
-        else if (line == "") result+="";
+      const processedLines = lines.map((line) => {
+        if(line == " " || line == "") return line;
         else if(line.includes("</mark>"))
-          result += handleFormatValueHasMark(line);
+          return handleFormatValueHasMark(line);
         else
-          result = handleFormatValue(lines,index,result);
+          return handleFormatValueByStr(line);
       });
-      console.log(result);
-      return result;
+      return processedLines.join("");
     }
     function highlightToFontColors( editor ) {
       const valueMapping = {
