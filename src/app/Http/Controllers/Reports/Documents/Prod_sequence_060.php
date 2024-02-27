@@ -44,7 +44,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
 
     public function getSqlStr($params)
     {
-            $sql = "SELECT 
+        $sql = "SELECT 
                         #sp.project_id,
                         #po.id AS pro_order_id,
                         #pj.name AS project_name,
@@ -83,7 +83,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         return $sql;
     }
 
-  
+
     protected function getDefaultValueParams($params, $request)
     {
         $params['picker_date'] = DateReport::defaultPickerDate('-1 months');
@@ -167,7 +167,6 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
                 "width" => 150,
             ]
         ];
-           
     }
 
     public function getBasicInfoData($params)
@@ -188,27 +187,27 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         return $basicInfoData;
     }
 
-    private function makeDataWidget($dataSource, $params){
+    private function makeDataWidget($dataSource, $params)
+    {
         $dataOfManageWidget = $this->makeParamsInManageWidgets($params);
         $isLineSeresStandard = $dataWidgets['line_series']['standard'] ?? null;
         $dataWidgets = [];
         //two column on chart
-        foreach ($dataSource as $key => $items){
+        foreach ($dataSource as $key => $items) {
             $array = [];
-            foreach ($dataOfManageWidget as $keyInManage => $paramsWidget){
+            foreach ($dataOfManageWidget as $keyInManage => $paramsWidget) {
                 $isLineSeresStandard = $paramsWidget['line_series']['standard'] ?? null;
-                if(!$isLineSeresStandard){
+                if (!$isLineSeresStandard) {
                     $result = $this->createDataWidgets2Columns($key, $items, $paramsWidget);
                     $array[$keyInManage] = $result;
                 }
             }
-            $dataWidgets[$key] = $array; 
-            
+            $dataWidgets[$key] = $array;
         }
         // line series chart
-        array_walk($dataWidgets, function($values, $key) use(&$dataWidgets,$dataSource, $dataOfManageWidget) {
-            foreach($values as $keyWidget => &$item){
-                if(isset($dataOfManageWidget[$keyWidget]['line_series'])){
+        array_walk($dataWidgets, function ($values, $key) use (&$dataWidgets, $dataSource, $dataOfManageWidget) {
+            foreach ($values as $keyWidget => &$item) {
+                if (isset($dataOfManageWidget[$keyWidget]['line_series'])) {
                     $lineSeries = $dataOfManageWidget[$keyWidget]['line_series'];
                     foreach ($lineSeries as $line) {
                         $line = (array)$line;
@@ -219,7 +218,7 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
 
                         //set default value (setting in ManageWidget)
                         $line['label'] = $line['data_label'] ?? "undefined";
-                        $line['backgroundColor'] = $line['backgroundColor'] ?? "#000000" ;
+                        $line['backgroundColor'] = $line['backgroundColor'] ?? "#000000";
                         $line['borderColor'] = $line["line_color"] ?? "#660000";
                         $line['fill'] = $line['fill'] ?? false;
                         $line['type'] = $line['type'] ?? "line";
@@ -240,14 +239,15 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         return $dataWidgets;
     }
 
-    private function createWidgetManyColumns($dataSource, $params){
+    private function createWidgetManyColumns($dataSource, $params)
+    {
         $dataOfManageWidget = $this->makeParamsInManageWidgets($params);
         $isLineSeresStandard = $dataWidgets['line_series']['standard'] ?? null;
         $dataWidgets = [];
 
-        foreach ($dataOfManageWidget as $keyInManage => $paramsWidget){
+        foreach ($dataOfManageWidget as $keyInManage => $paramsWidget) {
             $isLineSeresStandard = $paramsWidget['line_series']['standard'] ?? null;
-            if($isLineSeresStandard){
+            if ($isLineSeresStandard) {
                 $dataForManyColumns = $this->createDataWidgetForManyColumns($dataSource, $paramsWidget);
                 $dataWidgets[$keyInManage] = $dataForManyColumns;
             }
@@ -260,11 +260,11 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
     public function changeDataSource($dataSource, $params)
     {
         $items = Report::getItemsFromDataSource($dataSource);
-        $groupItems = Report::groupArrayByKey($items,'workplace_name');
+        $groupItems = Report::groupArrayByKey($items, 'workplace_name');
 
         $dataWidgets = $this->makeDataWidget($groupItems, $params);
-        $data= [];
-        foreach ($groupItems as $key => $values){
+        $data = [];
+        foreach ($groupItems as $key => $values) {
             $data['render_pages'][$key] = [
                 // 'tableDataSource' => collect($values),
                 'dataWidgets' => $dataWidgets[$key],
@@ -276,4 +276,22 @@ class Prod_sequence_060 extends Report_ParentDocument2Controller
         return $data;
     }
 
+    public function getNamesOfModels($params, $keyNames)
+    {
+        $basicInfoData = [];
+        foreach ($keyNames as $value) {
+            $modelPath = "App\Models\\" . ucwords($value);
+            $nameId = $value . '_id';
+            $projectNames = isset($params[$nameId]) ?
+                implode(', ', $modelPath::find($params[$nameId])
+                    ->pluck('name')
+                    ->toArray()) :
+                implode(', ', $modelPath::all()
+                    ->pluck('name')
+                    ->toArray());
+
+            $basicInfoData[$value . "_name"] = $projectNames;
+        }
+        return $basicInfoData;
+    }
 }
