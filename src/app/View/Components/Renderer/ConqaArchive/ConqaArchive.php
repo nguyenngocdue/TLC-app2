@@ -12,6 +12,7 @@ class ConqaArchive extends Component
 
     public function __construct(
         private $item,
+        private $loadFromStorage = false,
         // private $projName = "BTH",
         // private $folderUuid = "92d6cac3-84de-4c52-b37c-2825c773cba5",
     ) {
@@ -20,7 +21,7 @@ class ConqaArchive extends Component
         $this->folderUuid = $item->uuid;
     }
 
-    private function loadTree(string $path, string $folderUuid, string $parent): array
+    public function loadTree(string $path, string $folderUuid, string $parent): array
     {
         $json = json_decode(file_get_contents($path . $folderUuid . ".json"));
         // dump($json);
@@ -59,8 +60,11 @@ class ConqaArchive extends Component
 
     function render()
     {
-        // $path = storage_path("app/conqa_archive/database/{$this->projName}/");
-        $path = env('AWS_ENDPOINT') . '/conqa-backup/database/' . $this->projName . "/";
+        if ($this->loadFromStorage) {
+            $path = storage_path("app/conqa_archive/database/{$this->projName}/");
+        } else {
+            $path = env('AWS_ENDPOINT') . '/conqa-backup/database/' . $this->projName . "/";
+        }
         $tree = $this->loadTree($path, $this->folderUuid, "#");
         return view(
             "components.renderer.conqa_archive.conqa_archive",
