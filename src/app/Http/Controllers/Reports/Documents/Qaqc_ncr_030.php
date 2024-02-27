@@ -7,6 +7,7 @@ use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\Documents\Qaqc_ncr_030_dataSource;
 use App\Http\Controllers\Reports\TraitCreateChartFromGrafana;
 use App\Http\Controllers\Reports\TraitParamURLGrafana;
+use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
 use App\Models\Project;
@@ -20,6 +21,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
 
     use TraitCreateChartFromGrafana;
     use TraitParamURLGrafana;
+    use TraitUpdateBasicInfoDataSource;
     protected $mode = '030';
     protected $projectId = 5;
     protected $viewName = 'document-ncr-030';
@@ -55,7 +57,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 "title" => "Production Routing",
                 "dataIndex" => "prod_routing_id",
                 "hasListenTo" => true,
-                "multiple" => true,
+                // "multiple" => true,
                 "allowClear" => true,
             ],
             [
@@ -358,28 +360,11 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
         return $params;
     }
 
-    private function getNamesOfModels($params, $keyNames)
-    {
-        $basicInfoData = [];
-        foreach ($keyNames as $value) {
-            $modelPath = "App\Models\\" . ucwords($value);
-            $nameId = $value . '_id';
-            $projectNames = isset($params[$nameId]) ?
-                implode(', ', $modelPath::find($params[$nameId])
-                    ->pluck('name')
-                    ->toArray()) :
-                implode(', ', $modelPath::all()
-                    ->pluck('name')
-                    ->toArray());
-
-            $basicInfoData[$value . "_name"] = $projectNames;
-        }
-        return $basicInfoData;
-    }
 
     public function getBasicInfoData($params)
     {
-        $keyNames = ['project', 'sub_project', 'prod_routing', 'prod_discipline'];
-        return $this->getNamesOfModels($params, $keyNames);
+        $keyNames = ['project', 'sub_project', 'prod_routing', 'prod_order', 'prod_discipline'];
+        $data = $this->getNamesOfModels($params, $keyNames);
+        return $data;
     }
 }

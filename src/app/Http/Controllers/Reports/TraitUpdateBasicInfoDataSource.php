@@ -105,4 +105,19 @@ trait TraitUpdateBasicInfoDataSource
         // dd($dataHref, $dataSource);
         return $dataSource;
     }
+
+    public function getNamesOfModels($params, $keyNames)
+    {
+        $basicInfoData = [];
+        foreach ($keyNames as $value) {
+            $modelPath = "App\Models\\" . ucwords($value);
+            $nameId = $value . '_id';
+            $names = isset($params[$nameId]) ?
+                implode(', ', $modelPath::find((array)$params[$nameId])
+                    ->pluck('name')
+                    ->toArray()) : "";
+            $basicInfoData[$value . "_name"] = $names;
+        }
+        return $basicInfoData;
+    }
 }
