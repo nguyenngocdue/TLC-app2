@@ -9,10 +9,18 @@ use Illuminate\Support\Facades\Log;
 
 class ConqaArchiveRendererController extends Controller
 {
-    function getFileContent($projName, $folderUuid)
+    public function __construct(
+        private $loadFromStorage = false
+    ) {
+    }
+
+    public function getFileContent($projName, $folderUuid)
     {
-        // $path = storage_path("app/conqa_archive/database/{$projName}/cl/");
-        $path = env('AWS_ENDPOINT') . '/conqa-backup/database/' . $projName . "/cl/";
+        if ($this->loadFromStorage) {
+            $path = storage_path("app/conqa_archive/database/{$projName}/cl/");
+        } else {
+            $path = env('AWS_ENDPOINT') . '/conqa-backup/database/' . $projName . "/cl/";
+        }
         $content = file_get_contents($path . $folderUuid . ".json");
 
         return $content;

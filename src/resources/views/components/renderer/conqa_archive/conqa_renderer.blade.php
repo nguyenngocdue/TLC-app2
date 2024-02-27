@@ -34,6 +34,8 @@
                                 </div>
                             </div>
                             @break
+                        @case("no-value") 
+                            @break
                         @default
                             Unknown type {{$checkpoint->type}}
                             @break
