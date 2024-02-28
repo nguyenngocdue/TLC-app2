@@ -51,6 +51,6 @@ class MigrationsServiceProvider extends ServiceProvider
         // $this->loadMigrationsFrom($path . "storedProcedures");
         // $this->loadMigrationsFrom($path . "storedFunctions");
 
-
+        $this->loadMigrationsFrom($path . "diginets");
     }
 }

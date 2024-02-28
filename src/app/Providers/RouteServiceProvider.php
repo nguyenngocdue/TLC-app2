@@ -68,7 +68,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path("routes/web-report.php"))
                 ->group(base_path("routes/web-pivot-report.php"))
                 ->group(base_path("routes/web-exam-question.php"))
-                ->group(base_path("routes/web-diginet.php"));
+                ->group(base_path("routes/web-diginet.php"))
+                ->group(base_path("routes/api-diginet.php"));
 
             // if ($this->app->request->is('api/*')) {
             //     Route::prefix("api")

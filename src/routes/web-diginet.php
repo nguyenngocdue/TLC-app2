@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\DiginetHR\TransferDataDiginetToApp;
+use App\Http\Controllers\DiginetHR\EmployeeHourController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::group([
-    'middleware' => ['auth', 'impersonate',]
-], function () {
-    Route::get('transfer-data-diginet', [TransferDataDiginetToApp::class, 'index']);
-});
+Route::group(
+    [
+        'prefix' => 'diginet/transfer-data-diginet',
+        'middleware' => ['auth:sanctum', 'throttle:600,1'],
+    ],
+    function () {
+        Route::get('employee_hours', [EmployeeHourController::class, 'index'])->name('employee_hours.index');
+    }
+);
