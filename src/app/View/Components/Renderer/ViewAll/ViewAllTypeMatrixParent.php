@@ -252,14 +252,22 @@ abstract class ViewAllTypeMatrixParent extends Component
                     $xId = $x['dataIndex'];
                     $xClass = $x['column_class'] ?? "";
                     $api_params = $this->getCreateNewParams($x, $y);
-                    // dump($api_params);
+
+                    if (isset($api_params['name'])) {
+                        //prod_order name CB01' => CB01`
+                        $api_params['name'] = str_replace("'", "`", $api_params['name']);
+                    }
+
                     $api_params = (json_encode($api_params));
+                    // dump($api_params);
                     $api_callback = $this->apiCallback;
                     // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
                     $api = "callApi" . ucfirst($this->apiToCallWhenCreateNew);
+                    $cell_href = "javascript:$api(\"$api_url\",[$api_params], $api_meta, $api_callback)";
+                    // dump($cell_href);
                     $line[$xId] = (object)[
                         'value' => '<i class="fa-duotone fa-circle-plus"></i>',
-                        'cell_href' => 'javascript:' . $api . '("' . $api_url . '",[' . $api_params . '], ' . $api_meta . ', ' . $api_callback . ')',
+                        'cell_href' => $cell_href,
                         'cell_class' => "text-center text-blue-800 $xClass",
                         'cell_title' => "Create a new document",
                         'cell_onclick' => "$(this).hide()",
