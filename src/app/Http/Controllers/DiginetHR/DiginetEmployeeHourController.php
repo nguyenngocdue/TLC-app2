@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class EmployeeHourController extends Controller
+class DiginetEmployeeHourController extends Controller
 {
 
     function getType()
@@ -18,16 +18,12 @@ class EmployeeHourController extends Controller
         return "dashboard";
     }
 
-    public function store(Request $request)
-    {
-        dd(123);
-    }
-
     public function index(Request $request)
     {
         $token = CurrentUser::getTokenForApi();
         $X_AccessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W10.9C4Wv1O56qRbC-fOvFbqZWDjhdvKz6D4kc-e9nZ04Co';
-        return view("diginet.transfer-data-diginet-to-app", [
+
+        return view("diginet.transfer-data-diginet", [
             'token' => $token,
             'xAccessToken' => $X_AccessToken
 

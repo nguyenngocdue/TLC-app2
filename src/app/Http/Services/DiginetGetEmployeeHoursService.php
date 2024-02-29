@@ -3,6 +3,9 @@
 namespace App\Http\Services;
 
 use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Brian2694\Toastr\Facades\Toastr;
 
 class DiginetGetEmployeeHoursService
 {
@@ -23,5 +26,38 @@ class DiginetGetEmployeeHoursService
             $array['owner_id'] = CurrentUser::id();
         }
         return $array;
+    }
+
+    function createAndUpdateData($data, $params, $endpointName)
+    {
+        $modelName = 'Diginet_' . $endpointName;
+        $modelPath = 'App\Models\\' . $modelName;
+        $tableName = 'diginet_' . Str::plural($endpointName);
+
+        $year = substr($params['FromDate'], 0, 4);
+        $month = substr($params['FromDate'], 5, 2);
+        $modelIns = new $modelPath;
+        $fieldsToMap = array_slice($m = $modelIns->getFillable(), 1, count($m) - 2);
+        if ($data) {
+            $year = substr($params['FromDate'], 0, 4);
+            $month = substr($params['FromDate'], 5, 2);
+
+            DB::statement("ALTER TABLE $tableName AUTO_INCREMENT = 1;");
+            DB::table($tableName)
+                ->whereRaw('YEAR(date) = ? AND MONTH(date) = ?', [$year, $month])
+                ->delete();
+
+            foreach ($data as &$item) $item = $this->changeFields($item, $fieldsToMap);
+            $recordCount = 0;
+            foreach ($data as $row) {
+                $modelPath::create($row);
+                $recordCount++;
+            }
+            dump("Successfully added {$recordCount} rows to the database");
+            dump($data);
+            Toastr::success("Successfully added {$recordCount} rows to the database.");
+        } else {
+            dd("No data found to import into the database.");
+        }
     }
 }
