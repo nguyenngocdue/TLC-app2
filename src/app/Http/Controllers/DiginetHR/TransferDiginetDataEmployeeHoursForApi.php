@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers\DiginetHR;
 
-use App\Http\Services\DiginetGetEmployeeHoursService;
-use App\Utils\Support\APIDiginet;
-use Illuminate\Http\Request;
-
-
-class TransferDiginetDataEmployeeHoursForApi
+class TransferDiginetDataEmployeeHoursForApi extends ParentTransferDiginetDataForApi
 {
-    public function store(Request $request)
+
+    public function __construct()
     {
-        $endpointName = "employee-hours";
-        $params = $request->input();
-        $insService = new DiginetGetEmployeeHoursService();
-        $insService->createAndUpdateData($params, $endpointName);
+        $endpointNameDiginet = "employee-hours";
+        $conFieldName = "date";
+        $modelName = "Diginet_employee_hours";
+        $indexData = null;
+
+        parent::__construct($endpointNameDiginet, $conFieldName, $modelName, $indexData);
     }
 }

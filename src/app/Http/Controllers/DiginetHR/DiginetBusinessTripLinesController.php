@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 
-class DiginetEmployeeHoursController extends Controller
+class DiginetBusinessTripLinesController extends Controller
 {
-
     function getType()
     {
         return "dashboard";
@@ -17,9 +16,9 @@ class DiginetEmployeeHoursController extends Controller
     public function index(Request $request)
     {
         $token = CurrentUser::getTokenForApi();
-        $endpointNameDiginet = "employee-hours";
+        $endpointNameDiginet = "business-trip";
 
-        return view("diginet.diginet-transfer-data-employee-hours", [
+        return view("diginet.diginet-transfer-data-business-trip-lines", [
             'token' => $token,
             'endpointNameDiginet' => $endpointNameDiginet
         ]);

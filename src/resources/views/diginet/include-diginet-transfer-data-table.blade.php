@@ -26,14 +26,21 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function getFirstAndLastDayOfMonth(year, month) {
-    const firstDay = new Date(year, month - 1, 2);
-    const lastDay = new Date(year, month, 1);
+function getFirstAndLastDayOfMonth(year, _month) {
+    // Calculate the year and month for the last day
+    const yearFisrt = _month === 1 ? year - 1 : year;
+    const monthFirst = _month === 1 ? 12 : String(_month - 1).padStart(2, '0');
 
-    const formatDay = (date) => date.toISOString().split('T')[0];
-    return {
-        firstDay: formatDay(firstDay),
-        lastDay: formatDay(lastDay)
+    // Format the current month to two digits
+    const month = String(_month).padStart(2, '0');
+
+    // Define first and last days
+    const firstDay = `${yearFisrt}-${monthFirst}-26`;
+    const lastDay = `${year}-${month}-25`;
+
+     return {
+        firstDay: firstDay,
+        lastDay: lastDay
     };
 }
 
@@ -42,9 +49,10 @@ $(document).ready(function() {
         const year = $(this).data('year');
         const month = $(this).data('month');
         const { firstDay, lastDay } = getFirstAndLastDayOfMonth(year, month);
+//        console.log(firstDay, lastDay);
 
         $.ajax({
-            url: `/v1/transfer-data-diginet/employee-hours`,
+            url: `/v1/transfer-data-diginet/`+ '{{$endpointNameDiginet}}',
             method: 'POST',
             contentType: 'application/json',
             headers: {
@@ -56,7 +64,7 @@ $(document).ready(function() {
                 "FromDate": firstDay,
                 "ToDate": lastDay,
                 "CompanyCode": "TLCM",
-                "WorkplaceCode": "HO"
+                "WorkplaceCode": "HO,TF1,TF2,TF3,NZ,WS"
             }),
             success: function(data) {
                 console.log(data);
