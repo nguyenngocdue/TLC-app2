@@ -14,7 +14,7 @@
                 <td class="px-4 py-4 border border-gray-200 dark:border-gray-700 text-gray-700 font-bold text-lg">{{ $year }}</td>
                 @for ($month = 1; $month <= 12; $month++)
                     <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
-                        <button class="btn-month inline-flex items-center justify-center px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
+                        <button class=" btn-month inline-flex items-center justify-center px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
                             <i class="fa-solid fa-pen-nib"></i>
                         </button>
                     </td>
@@ -24,20 +24,18 @@
     </tbody>
 </table>
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 function getFirstAndLastDayOfMonth(year, _month) {
     // Calculate the year and month for the last day
     const yearFisrt = _month === 1 ? year - 1 : year;
     const monthFirst = _month === 1 ? 12 : String(_month - 1).padStart(2, '0');
-
     // Format the current month to two digits
     const month = String(_month).padStart(2, '0');
-
     // Define first and last days
     const firstDay = `${yearFisrt}-${monthFirst}-26`;
     const lastDay = `${year}-${month}-25`;
-
      return {
         firstDay: firstDay,
         lastDay: lastDay
@@ -49,7 +47,9 @@ $(document).ready(function() {
         const year = $(this).data('year');
         const month = $(this).data('month');
         const { firstDay, lastDay } = getFirstAndLastDayOfMonth(year, month);
-//        console.log(firstDay, lastDay);
+        //console.log(firstDay, lastDay);
+        toastr.info('Processing your request...', {timeOut: 0, extendedTimeOut: 0, closeButton: true, progressBar: true});
+
 
         $.ajax({
             url: `/v1/transfer-data-diginet/`+ '{{$endpointNameDiginet}}',
@@ -67,11 +67,10 @@ $(document).ready(function() {
                 "WorkplaceCode": "HO,TF1,TF2,TF3,NZ,WS"
             }),
             success: function(data) {
-                console.log(data);
-                // Xử lý dữ liệu trả về từ server tại đây
+                toastr.success('Data has been successfully updated!');
             },
             error: function(error) {
-                console.error('Error:', error);
+                toastr.error('An error occurred, please try again.');
             }
         });
     });

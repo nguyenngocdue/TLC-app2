@@ -61,7 +61,7 @@ class DiginetService
                 $recordCount++;
             }
             echo ("<br/>{$recordCount} rows have been successfully added to the database.");
-            Toastr::success("{$recordCount} rows have been successfully added to the database..");
+            // Toastr::success("{$recordCount} rows have been successfully added to the database..");
         } else {
             echo ("No data found to import into the database from $FromDate to $toDate.");
         }
