@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DiginetHR\DiginetEmployeeHourController;
+use App\Http\Controllers\DiginetHR\DiginetEmployeeHoursController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -10,6 +10,6 @@ Route::group(
         'middleware' => ['auth:sanctum', 'throttle:600,1'],
     ],
     function () {
-        Route::get('employee_hours', [DiginetEmployeeHourController::class, 'index'])->name('employee_hours.index');
+        Route::get('employee_hours', [DiginetEmployeeHoursController::class, 'index'])->name('employee_hours.index');
     }
 );
