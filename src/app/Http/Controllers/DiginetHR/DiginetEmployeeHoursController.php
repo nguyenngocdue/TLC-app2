@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class DiginetEmployeeHourController extends Controller
+class DiginetEmployeeHoursController extends Controller
 {
 
     function getType()
