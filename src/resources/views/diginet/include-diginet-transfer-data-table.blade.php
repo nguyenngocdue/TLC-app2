@@ -48,8 +48,12 @@ $(document).ready(function() {
         const month = $(this).data('month');
         const { firstDay, lastDay } = getFirstAndLastDayOfMonth(year, month);
         //console.log(firstDay, lastDay);
-        toastr.info('Processing your request...', {timeOut: 0, extendedTimeOut: 0, closeButton: true, progressBar: true});
-
+        let processingToast = toastr.info('Processing your request...', {
+                    timeOut: 0, // Prevents the toastr from auto-hiding
+                    extendedTimeOut: 0, // Prevents the toastr from auto-hiding when hovered
+                    closeButton: true, // Allows the user to close the notification if desired
+                    progressBar: true // Displays a progress bar (though it won't advance automatically)
+                });
 
         $.ajax({
             url: `/v1/transfer-data-diginet/`+ '{{$endpointNameDiginet}}',
@@ -67,9 +71,11 @@ $(document).ready(function() {
                 "WorkplaceCode": "HO,TF1,TF2,TF3,NZ,WS"
             }),
             success: function(data) {
+                toastr.clear(processingToast); // Clears the processing notification
                 toastr.success('Data has been successfully updated!');
             },
             error: function(error) {
+                toastr.clear(processingToast); // Clears the processing notification
                 toastr.error('An error occurred, please try again.');
             }
         });
