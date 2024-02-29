@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Utils\Support\APIDiginet;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -28,16 +29,23 @@ class DiginetGetEmployeeHoursService
         return $array;
     }
 
-    function createAndUpdateData($data, $params, $endpointName)
+    function createAndUpdateData($params, $endpointName, $index = 0)
     {
-        $modelName = 'Diginet_' . $endpointName;
+        $modifiedName = str_replace('-', '_', $endpointName);
+        $modelName = 'Diginet_' . $modifiedName;
         $modelPath = 'App\Models\\' . $modelName;
-        $tableName = 'diginet_' . Str::plural($endpointName);
+        $tableName = 'diginet_' . Str::plural($modifiedName);
 
         $year = substr($params['FromDate'], 0, 4);
         $month = substr($params['FromDate'], 5, 2);
         $modelIns = new $modelPath;
         $fieldsToMap = array_slice($m = $modelIns->getFillable(), 1, count($m) - 2);
+
+        // get Diginet's datasource from api
+        $data = APIDiginet::getDatasourceFromAPI($endpointName, $params)['data'];
+        $data = $index ? $data[$index] : $data;
+
+
         if ($data) {
             $year = substr($params['FromDate'], 0, 4);
             $month = substr($params['FromDate'], 5, 2);
