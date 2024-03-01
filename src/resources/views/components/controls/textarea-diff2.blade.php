@@ -5,59 +5,60 @@
     class="{{$classList}}"
     style="border: 1px solid #d1d5db !important; border-radius: 0.375rem !important;"
     ></div>
+@if($mode != 'draft')
+  <input type="hidden" id={{$name}} name="{{$name}}" value="{{$value}}">
+@else
 <input type="hidden" id="editor_content_{{$name}}" name="{{$name}}">
+@endif
 <script>
     var name = @json($name);
     var one = @json($value);
     var other = @json($value2);
     var isModeDraft = @json($isModeDraft);
     var placeholder = @json($placeholder);
-    var diff = window.jsdiff.diffLines(one, other);
+    var diff = window.jsdiff.diffWords(one, other);
     var $valueEditor = $('#editor_' + name);
-    // var value = [];
-    var value = '';
+    var str = '';
     var editorContentInput = document.getElementById('editor_content_' + name);
+    console.log(diff);
     diff.forEach(function(part){
       var highlightedText = applyHighlights(part);
-      // value.push(highlightedText);
-      value += highlightedText;
+      str += highlightedText;
     });
-    $valueEditor.html(process(value));
+    $valueEditor.html(handleString(str));
     function applyHighlights(part) {
       if(isModeDraft){
         if(part.added)
-          return '<mark class="marker-green">' + part.value + '</mark>';
+          return '<mark class="marker-green">' + (part.value) + '</mark>';
         else if (typeof part.added === "undefined" && part.removed)
           return '';
-        else return part.value;
+        else return (part.value);
       }else{
         if(part.removed)
           return '<mark class="marker-pink">' + part.value + '</mark>';
         else if (typeof part.removed === "undefined" && part.added)
           return '';
-        else return part.value;
+        else return (part.value);
       }
     }
-    function handleFormatValue(str){
-      const lines = str.split("\r\n");
-      const processLined = lines.map((line) => {
-        if(line === "")
-          return '<p><br data-cke-filler="true"></p>';
+    function process(str){
+      let regex = /(<mark\b[^>]*>[\s\S]*?<\/mark>)/g;
+      let lines = str.split(regex);
+      let result = "";
+      const processedLines = lines.forEach((line ,index) => {
+        if(line.includes('flag="true"'))
+          // result += handleFormatValueHasMark(line);
+          // result += regexExecGetContent(line);
+          // result += 'h';
+          result += '';
+        else if(line.includes('<mark'))
+          // result = result.slice(0,-4) + line ;
+          result += 'h';
         else
-          return `${line}`;
-      })
-      return processLined.join("");
-    }
-    function handleFormatValueByStr(str,isNoneAddTagP = false){
-      const lines = str.trim().split("\r\n");
-      const processLined = lines.map((line) => {
-        if(line === "")
-          return '<p><br data-cke-filler="true"></p>';
-        else
-          if(isNoneAddTagP) return `${line}`;
-          return `<p>${line}</p>`;
-      })
-      return processLined.join("");
+          result += handleFormatValue2(line);
+      });
+      // console.log(result);
+      return result;
     }
     function regexExecGetContent(str){
       let regex = /(<mark\b[^>]*>)([\s\S]*?)<\/mark>/g;
@@ -70,27 +71,57 @@
               content: match[2]     // Content inside the <mark> tag
           });
       }
+      if(matches.length == 0) return handleString(str);
       var result = "";
       matches.forEach((match) => {
-          result += match.tag + handleFormatValue(match.content) + "</mark>";
+          result += match.tag + handleString(match.content) + "</mark>"
       });
       return result;
     }
-    function handleFormatValueHasMark(str){
-      if(!str.includes("\r\n")) return str;
-      return regexExecGetContent(str);
+    function handleFormatValue(arrStr){
+      if(arrStr.length == 1){
+        return regexExecGetContent(arrStr[0]);
+      }else{
+        let str = '';
+        arrStr.forEach((a) => {
+          if(a.startsWith("<mark")){
+            str += regexExecGetContent(a);
+          }else {
+            var lines = a.split("\r\n");
+            if(lines[lines.length - 1] == "") lines.pop();
+            const processLined = lines.map((line) => {
+              if(line === "")
+                str += '<p><br data-cke-filler="true"></p>';
+              else {
+                str += `<p>${line}</p>`;
+              }
+            })
+          }  
+        });
+        return str;
+      }
     }
-    function process(str){
-      let regex = /(<mark\b[^>]*>[\s\S]*?<\/mark>)/g;
-      let lines = str.split(regex);
-      const processedLines = lines.map((line) => {
-        if(line == " " || line == "") return line;
-        else if(line.includes("</mark>"))
-          return handleFormatValueHasMark(line);
-        else
-          return handleFormatValueByStr(line);
-      });
-      return processedLines.join("");
+    function handleString(str){
+      if(str.endsWith("\n")){ 
+        // str = str.slice(0,-2);
+      }
+      const lines = str.split("\r\n");
+      const processLined = lines.map((line) => {
+        if(line === "")
+        return '<p><br data-cke-filler="true"></p>';
+        else {
+          if(countUniqueSubstring(line,'<mark') == countUniqueSubstring(line,'</mark>')){
+            return `<p>${line}</p>`;
+          }
+          // console.log(line);
+          return `${line}`;
+        }
+      })  
+      return processLined.join("");
+    }
+    function countUniqueSubstring(string, substring) {
+    const lines = string.split(substring)
+    return lines.length;
     }
     function highlightToFontColors( editor ) {
       const valueMapping = {
