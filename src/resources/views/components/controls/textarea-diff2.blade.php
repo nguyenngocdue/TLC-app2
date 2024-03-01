@@ -1,4 +1,9 @@
 <div id="toolbar-container_{{$name}}"></div>
+@if($mode != 'draft')
+    <span class="no-print flex text-pink-600 justify-center items-center italic">Original</span>
+@else
+  <span class="no-print flex text-green-600 justify-center items-center italic">Editorial</span>
+@endif
 <div id="editor_{{$name}}" 
     name="{{$name}}" 
     component="controls/textarea-diff2"
