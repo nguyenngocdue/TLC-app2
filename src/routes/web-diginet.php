@@ -14,7 +14,7 @@ Route::group(
         'middleware' => ['auth:sanctum', 'throttle:600,1'],
     ],
     function () {
-        Route::get('/', [DiginetDataController::class, 'index']);
+        Route::get('/', [DiginetDataController::class, 'index'])->name('diginet.index');
         Route::get('employee-hours', [DiginetEmployeeHoursController::class, 'index'])->name('employee-hours.index');
         Route::get('employee-leave-lines', [DiginetEmployeeLeaveLinesController::class, 'index'])->name('employee-leave-lines.index');
         Route::get('employee-overtime-lines', [DiginetEmployeeOvertimeLinesController::class, 'index'])->name('employee-overtime-lines.index');
