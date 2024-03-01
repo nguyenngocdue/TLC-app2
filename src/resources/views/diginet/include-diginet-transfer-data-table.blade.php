@@ -7,11 +7,14 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <table class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
+    <thead class="text-xs text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
         <tr>
             <th class="px-4 py-3 border border-gray-200 dark:border-gray-700 text-lg">Year</th>
             @for ($month = 1; $month <= 12; $month++)
-                <th class="px-4 py-3 border border-gray-200 dark:border-gray-700 text-lg">T{{ $month }}</th>
+                @php
+                    $abbMonth = App\Utils\Support\DateReport::getMonthAbbreviation($month);
+                @endphp
+                <th class="px-4 py-3 border border-gray-200 dark:border-gray-700 text-lg">{{$abbMonth}}</th>
             @endfor
         </tr>
     </thead>
