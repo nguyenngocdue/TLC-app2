@@ -16,16 +16,16 @@
     var other = @json($value2);
     var isModeDraft = @json($isModeDraft);
     var placeholder = @json($placeholder);
-    var diff = window.jsdiff.diffLines(one, other);
+    var diff = window.jsdiff.diffWords(one, other);
     var $valueEditor = $('#editor_' + name);
-    var arrStr = [];
+    var str = '';
     var editorContentInput = document.getElementById('editor_content_' + name);
+    console.log(diff);
     diff.forEach(function(part){
       var highlightedText = applyHighlights(part);
-      if(highlightedText != "")
-        arrStr.push(highlightedText);
+      str += highlightedText;
     });
-    $valueEditor.html(handleFormatValue(arrStr));
+    $valueEditor.html(handleString(str));
     function applyHighlights(part) {
       if(isModeDraft){
         if(part.added)
@@ -88,7 +88,7 @@
             str += regexExecGetContent(a);
           }else {
             var lines = a.split("\r\n");
-            lines.pop();
+            if(lines[lines.length - 1] == "") lines.pop();
             const processLined = lines.map((line) => {
               if(line === "")
                 str += '<p><br data-cke-filler="true"></p>';
@@ -103,17 +103,21 @@
     }
     function handleString(str){
       if(str.endsWith("\n")){ 
-        str = str.slice(0,-2);
+        // str = str.slice(0,-2);
       }
       const lines = str.split("\r\n");
-        const processLined = lines.map((line) => {
-          if(line === "")
-            return '<p><br data-cke-filler="true"></p>';
-          else {
+      const processLined = lines.map((line) => {
+        if(line === "")
+        return '<p><br data-cke-filler="true"></p>';
+        else {
+          if(countUniqueSubstring(line,'<mark') == countUniqueSubstring(line,'</mark>')){
             return `<p>${line}</p>`;
           }
-        })
-        return processLined.join("");
+          // console.log(line);
+          return `${line}`;
+        }
+      })  
+      return processLined.join("");
     }
     function countUniqueSubstring(string, substring) {
     const lines = string.split(substring)
