@@ -35,7 +35,6 @@ class DiginetService
 
         $modelIns = new $modelPath;
         $fieldsToMap = array_slice($m = $modelIns->getFillable(), 1, count($m) - 3);
-
         $tableName = $modelIns->getTable();
 
         // get Diginet's datasource from api
@@ -43,6 +42,8 @@ class DiginetService
         $data = $index ? $data[$index] : $data;
         $FromDate = substr($params['FromDate'], 0, 10);
         $toDate = substr($params['ToDate'], 0, 10);
+
+        $response = ['status' => 'error', 'message' => 'No data found to import into the database.', 'recordsDeleted' => 0, 'recordsAdded' => 0];
 
         if ($data) {
 
@@ -52,7 +53,9 @@ class DiginetService
                 ->whereDate($conFieldName, '<=', $toDate)
                 ->delete();
 
-            echo ("{$del} rows were deleted from {$tableName} from $FromDate to $toDate");
+            $response['recordsDeleted'] = $del;
+            $response['message'] = "{$del} rows were deleted from {$tableName} from $FromDate to $toDate";
+
 
             foreach ($data as &$item) $item = $this->changeFields($item, $fieldsToMap, $conFieldName);
             $recordCount = 0;
@@ -60,10 +63,11 @@ class DiginetService
                 $modelPath::create($row);
                 $recordCount++;
             }
-            echo ("<br/>{$recordCount} rows have been successfully added to the database.");
-            // Toastr::success("{$recordCount} rows have been successfully added to the database..");
-        } else {
-            echo ("No data found to import into the database from $FromDate to $toDate.");
+
+            $response['status'] = 'success';
+            $response['message'] = "{$recordCount} rows have been successfully added to the database.";
+            $response['recordsAdded'] = $recordCount;
         }
+        return $response;
     }
 }

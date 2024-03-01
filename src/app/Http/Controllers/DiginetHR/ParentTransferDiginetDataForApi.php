@@ -21,6 +21,7 @@ abstract class ParentTransferDiginetDataForApi  extends Controller
     {
         $params = $request->input();
         $insService = new DiginetService();
-        $insService->createAndUpdateData($this->modelName, $params, $this->endpointNameDiginet, $this->conFieldName, $this->indexData);
+        $result = $insService->createAndUpdateData($this->modelName, $params, $this->endpointNameDiginet, $this->conFieldName, $this->indexData);
+        return response()->json($result);
     }
 }

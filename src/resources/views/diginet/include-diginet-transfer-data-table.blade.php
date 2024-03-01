@@ -1,6 +1,6 @@
 @php
+    $beginMonth = 11;
     $beginYear = 2023;
-    $beginMonth = 4;
     $currentMonth = (int)date('m');
     $currentYear = (int)date('Y');
 @endphp
@@ -67,7 +67,8 @@ $(document).ready(function() {
                     timeOut: 0, // Prevents the toastr from auto-hiding
                     extendedTimeOut: 0, // Prevents the toastr from auto-hiding when hovered
                     closeButton: true, // Allows the user to close the notification if desired
-                    progressBar: true // Displays a progress bar (though it won't advance automatically)
+                    progressBar: true, // Displays a progress bar (though it won't advance automatically)
+                    tapToDismiss: false
                 });
 
         $.ajax({
@@ -85,14 +86,14 @@ $(document).ready(function() {
                 "CompanyCode": "TLCM",
                 "WorkplaceCode": "HO,TF1,TF2,TF3,NZ,WS"
             }),
-            success: function(data) {
-                toastr.clear(processingToast); // Clears the processing notification
-                toastr.success('Data has been successfully updated!');
+            success: function(response) {
+                toastr.clear(processingToast);
+                if(response.status === 'success') {
+                    toastr.success(response.message);
+                } else {
+                    toastr.error(response.message);
+                }
             },
-            error: function(error) {
-                toastr.clear(processingToast); // Clears the processing notification
-                toastr.error('An error occurred, please try again.');
-            }
         });
     });
 });
