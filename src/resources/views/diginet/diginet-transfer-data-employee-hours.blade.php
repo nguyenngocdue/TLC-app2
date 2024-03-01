@@ -1,10 +1,8 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 @section('topTitle', 'Retrieve Diginet Data')
-@section('title', 'Employee Hours')
+@section('title', 'Employee Hours') --}}
 
-@section('content')
-<div class='p-10'>
-    @include('diginet.include-diginet-transfer-data-table')
-</div>
-@endsection
+{{-- @section('content') --}}
+@include('diginet.include-diginet-transfer-data-table')
+{{-- @endsection --}}
 
