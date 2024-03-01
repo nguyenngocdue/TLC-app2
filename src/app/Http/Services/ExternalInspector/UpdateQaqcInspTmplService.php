@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class UpdateQaqcInspTmplService
 {
-    function update($qaqcInspTmplId, $nominatedListFn)
+    function update($qaqcInspTmplId, $newSignOffList, $nominatedListFn)
     {
         $allLists = Qaqc_insp_chklst::query()
             ->where("qaqc_insp_tmpl_id", $qaqcInspTmplId)
@@ -26,6 +26,7 @@ class UpdateQaqcInspTmplService
         }
 
         $result = array_values(array_unique(Arr::flatten($result)));
+        if (is_array($newSignOffList)) $result = array_unique([...$result, ...$newSignOffList]);
 
         $item = Qaqc_insp_tmpl::find($qaqcInspTmplId);
         $item->syncCheck("getExternalInspectorsOfQaqcInspTmpl", \App\Models\User::class, $result);

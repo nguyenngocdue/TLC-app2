@@ -14,7 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class UpdatedQaqcChklstSheetListener //implements ShouldQueue //No need to queue.
+class UpdatedQaqcChklstSheetListener //implements ShouldQueue //MUST NOT QUEUE
 {
     const YES = 1, NO = 2, NA_1 = 3, ON_HOLD_1 = 4, PASS = 5, FAIL = 6, NA_2 = 7, ON_HOLD_2 = 8;
     const TEXT = 1, TEXTAREA = 2, CHECKBOX = 3, RADIO = 4, DATETIME = 5, DROPDOWN = 6, SIGNATURE = 7;
@@ -79,15 +79,17 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //No need to queue
         // if (CurrentRoute::getTypeSingular() !== 'qaqc_insp_chklst_sht') return false;
         $sheetId = $event->sheet;
         $mailContent = $event->mailContent;
+        $newSignOffList = $event->newSignOffList;
         $nominatedListFn = $event->nominatedListFn;
         $sheet = Qaqc_insp_chklst_sht::find($sheetId);
 
         $this->updateProgress($sheet);
         $this->updateStatusAccordingToSignOff($sheet, $nominatedListFn);
 
+        //Send mail
         if ($mailContent) event(new SignOffSubmittedEvent($mailContent, $sheetId, 'qaqc_insp_chklst_shts'));
 
-        // Log::info("Elaborate updated event to qaqc_insp_chklst...");
-        event(new UpdatedQaqcChklstEvent($sheet, $nominatedListFn . "_list"));
+        // Log::info("Elaborate updated event to Checklist...");
+        event(new UpdatedQaqcChklstEvent($sheet, $newSignOffList, $nominatedListFn . "_list"));
     }
 }
