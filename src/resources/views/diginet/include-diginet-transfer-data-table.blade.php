@@ -4,43 +4,44 @@
     $currentMonth = (int)date('m');
     $currentYear = (int)date('Y');
 @endphp
-
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<table class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
-    <thead class="text-xs text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
-        <tr>
-            <th class="px-4 py-3 border border-gray-200 dark:border-gray-700 text-lg">Year</th>
-            @for ($month = 1; $month <= 12; $month++)
-                @php
-                    $abbMonth = App\Utils\Support\DateReport::getMonthAbbreviation($month);
-                @endphp
-                <th class="px-4 py-3 border border-gray-200 dark:border-gray-700 text-lg">{{$abbMonth}}</th>
-            @endfor
-        </tr>
-    </thead>
-    <tbody>
-        @for ($year = $beginYear; $year <= $currentYear; $year++)
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                <td class="px-4 py-4 border border-gray-200 dark:border-gray-700 text-gray-700 font-bold text-lg">{{ $year }}</td>
+<div class='pt-4'>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <table class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+        <thead class="text-xs text-gray-700  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
+            <tr>
+                <th class="px-4 py-3 border border-gray-200 dark:border-gray-700 text-lg">Year</th>
                 @for ($month = 1; $month <= 12; $month++)
-                    @if($year === $currentYear && $month > $currentMonth || $year === $beginYear && $month < $beginMonth)
-                        <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
-                            <button class="opacity-5 cursor-not-allowed  inline-flex items-center justify-center px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
-                                <i class="fa-solid fa-pen-nib"></i>
-                            </button>
-                        </td>
-                    @else
-                        <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
-                            <button class="btn-month inline-flex items-center justify-center px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
-                                <i class="fa-solid fa-pen-nib"></i>
-                            </button>
-                        </td>
-                    @endif
+                    @php
+                        $abbMonth = App\Utils\Support\DateReport::getMonthAbbreviation($month);
+                    @endphp
+                    <th class="px-4 py-3 border border-gray-200 dark:border-gray-700 text-lg">{{$abbMonth}}</th>
                 @endfor
             </tr>
-        @endfor
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @for ($year = $beginYear; $year <= $currentYear; $year++)
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                    <td class="px-4 py-4 border border-gray-200 dark:border-gray-700 text-gray-700 font-bold text-lg">{{ $year }}</td>
+                    @for ($month = 1; $month <= 12; $month++)
+                        @if($year === $currentYear && $month > $currentMonth || $year === $beginYear && $month < $beginMonth)
+                            <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
+                                <button class="opacity-5 cursor-not-allowed  inline-flex items-center justify-center px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
+                                    <i class="fa-solid fa-pen-nib"></i>
+                                </button>
+                            </td>
+                        @else
+                            <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
+                                <button class="btn-month inline-flex items-center justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
+                                    <i class="fa-solid fa-pen-nib"></i>
+                                </button>
+                            </td>
+                        @endif
+                    @endfor
+                </tr>
+            @endfor
+        </tbody>
+    </table>
+</div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
