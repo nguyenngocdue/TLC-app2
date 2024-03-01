@@ -17,8 +17,11 @@ class UpdatedQaqcChklstEvent
      *
      * @return void
      */
-    public function __construct(public $sheet, public $nominatedListFn)
-    {
+    public function __construct(
+        public $sheet,
+        public $newSignOffList,
+        public $nominatedListFn,
+    ) {
         //
         // Log::info('UpdatedQaqcChklstEvent');
     }
