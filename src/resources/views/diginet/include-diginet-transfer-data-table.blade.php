@@ -1,3 +1,10 @@
+@php
+    $beginYear = 2023;
+    $beginMonth = 4;
+    $currentMonth = (int)date('m');
+    $currentYear = (int)date('Y');
+@endphp
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <table class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
@@ -9,15 +16,23 @@
         </tr>
     </thead>
     <tbody>
-        @for ($year = 2023; $year <= 2027; $year++)
+        @for ($year = $beginYear; $year <= $currentYear; $year++)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                 <td class="px-4 py-4 border border-gray-200 dark:border-gray-700 text-gray-700 font-bold text-lg">{{ $year }}</td>
                 @for ($month = 1; $month <= 12; $month++)
-                    <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
-                        <button class=" btn-month inline-flex items-center justify-center px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
-                            <i class="fa-solid fa-pen-nib"></i>
-                        </button>
-                    </td>
+                    @if($year === $currentYear && $month > $currentMonth || $year === $beginYear && $month < $beginMonth)
+                        <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
+                            <button class="opacity-5 cursor-not-allowed  inline-flex items-center justify-center px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </button>
+                        </td>
+                    @else
+                        <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
+                            <button class="btn-month inline-flex items-center justify-center px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </button>
+                        </td>
+                    @endif
                 @endfor
             </tr>
         @endfor
