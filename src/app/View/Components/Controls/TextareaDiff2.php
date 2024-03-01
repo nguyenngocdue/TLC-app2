@@ -35,6 +35,7 @@ class TextareaDiff2 extends Component
         $isModeDraft = $this->modeDraft();
         return view('components.controls.textarea-diff2', [
             'name' => $this->name,
+            'mode' => $this->mode,
             'value' => $isModeDraft ? $value2 : $value,
             'value2' => $isModeDraft ?$value : $value2,
             'isModeDraft' => $isModeDraft,
