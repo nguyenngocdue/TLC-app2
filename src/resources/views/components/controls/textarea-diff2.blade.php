@@ -20,7 +20,6 @@
     var $valueEditor = $('#editor_' + name);
     var str = '';
     var editorContentInput = document.getElementById('editor_content_' + name);
-    console.log(diff);
     diff.forEach(function(part){
       var highlightedText = applyHighlights(part);
       str += highlightedText;
