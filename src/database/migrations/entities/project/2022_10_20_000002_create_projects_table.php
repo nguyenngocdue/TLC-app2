@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('slug')->unique();
+            $table->string('qr_app_source')->nullable();
             $table->appendCommonFields();
         });
         // Schema::create('projects', function (Blueprint $table) {
