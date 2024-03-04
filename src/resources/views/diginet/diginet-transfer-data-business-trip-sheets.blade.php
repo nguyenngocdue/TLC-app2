@@ -2,7 +2,7 @@
 @section('topTitle', 'Retrieve Diginet Data')
 @section('title', 'Business Trip Lines')
 
-@section('content')
+@section('content') --}}
     @include('diginet.include-diginet-transfer-data-table')
 @endsection
 
