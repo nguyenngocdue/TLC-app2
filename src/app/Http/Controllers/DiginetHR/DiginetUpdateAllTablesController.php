@@ -19,7 +19,7 @@ class DiginetUpdateAllTablesController extends Controller
         $params = $request->input();
         $token = CurrentUser::getTokenForApi();
         $endpointNameDiginet = "all-tables";
-        dump($params);
+        // dump($params);
         if ($params) {
             $params = key($params);
             $params = json_decode($params, true);
