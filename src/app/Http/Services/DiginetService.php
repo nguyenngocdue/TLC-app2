@@ -18,6 +18,7 @@ class DiginetService
     }
     function changeFields($item, $fieldsToMap, $conFieldName = 'date')
     {
+        if (empty($item)) return [];
         $fieldsDiginet =  array_combine($fieldsToMap, array_keys($item));
         $array = [];
         foreach ($fieldsDiginet as $key => $field) {
@@ -39,7 +40,7 @@ class DiginetService
 
         // get Diginet's datasource from api
         $data = APIDiginet::getDatasourceFromAPI($endpointName, $params)['data'];
-        $data = $index ? $data[$index] : $data;
+        $data = $data[$index];
         $FromDate = substr($params['FromDate'], 0, 10);
         $toDate = substr($params['ToDate'], 0, 10);
 
@@ -63,8 +64,8 @@ class DiginetService
                 $modelPath::create($row);
                 $recordCount++;
             }
-
             $response['status'] = 'success';
+            $response['on_table'] = $tableName;
             $response['message'] = "{$recordCount} rows have been successfully added to the database.";
             $response['recordsAdded'] = $recordCount;
         }

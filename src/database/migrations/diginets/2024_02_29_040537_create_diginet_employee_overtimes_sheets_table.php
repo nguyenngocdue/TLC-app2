@@ -19,7 +19,7 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('diginet_employee_overtimes', function (BlueprintExtended $table) {
+        $schema->create('diginet_employee_overtime_sheets', function (BlueprintExtended $table) {
 
             $table->id();
             $table->string('tb_document_id')->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->decimal('ot_hours', 20, 2)->nullable();
             $table->unsignedBigInteger('ot_projects')->nullable();
             $table->string('ot_reason')->nullable();
-            $table->unsignedBigInteger('approver_id')->nullable();
+            $table->string('approver_id')->nullable();
             $table->string('approver_name')->nullable();
 
 
@@ -48,6 +48,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('diginet_employee_overtimes');
+        Schema::dropIfExists('diginet_employee_overtime_sheets');
     }
 };

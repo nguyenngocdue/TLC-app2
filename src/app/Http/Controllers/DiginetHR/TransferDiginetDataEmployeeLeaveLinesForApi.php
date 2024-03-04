@@ -5,8 +5,11 @@ namespace App\Http\Controllers\DiginetHR;
 
 class TransferDiginetDataEmployeeLeaveLinesForApi extends ParentTransferDiginetDataForApi
 {
+
+
     public function __construct()
     {
+
         $endpointNameDiginet = "employee-leave";
         $conFieldName = "la_date";
         $modelName = "Diginet_employee_leave_line";
