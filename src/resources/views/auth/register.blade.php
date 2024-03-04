@@ -55,7 +55,7 @@
                             <option>None of above</option>
                         </select> 
                         @error('company')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="font-bold text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
@@ -64,16 +64,16 @@
                         <label for="password" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Password</label>
                         <input type="password" name="password" id="password" placeholder="••••••••" class="@error('password') is-invalid @enderror block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm" required autocomplete="new-password">
                         @error('password')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="font-bold text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
                     <div>
-                        <label for="password-confirm" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                        <label for="password-confirm" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
                         <input type="password" name="password_confirmation" id="password-confirm" placeholder="••••••••" class="@error('password-confirm') is-invalid @enderror block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm" required autocomplete="new-password">
                         @error('password-confirm')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="font-bold text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror

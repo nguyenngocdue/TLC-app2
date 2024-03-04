@@ -35,7 +35,6 @@ class ResetPasswordController extends Controller
                 ]
             ]
         );
-
         $request->validate($this->rules(), $this->validationErrorMessages());
 
         // Here we will attempt to reset the user's password. If it is successful we

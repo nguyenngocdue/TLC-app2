@@ -92,6 +92,7 @@ services:
     volumes:
       - ../src:/var/www/app
       - ../.docker_configs/certs:/etc/nginx/certs
+    privileged: true
     ports:
       - "39002:9000"
     networks:
@@ -107,3 +108,24 @@ services:
       - "37702:7700" # Change ports if needed
     networks:
       - laravel302
+  # puppeteer:
+  #   image: minidocks/puppeteer
+  #   volumes:
+  #     - ../src:/var/www/app
+  #   links:
+  #     - chromium
+  #   environment:
+  #     PUPPETEER_EXECUTABLE_PATH: /bin/chromium
+  #     PUPPETEER_ARG_REMOTE_DEBUGGING_ADDRESS: chromium
+  #     PUPPETEER_ARG_REMOTE_DEBUGGING_PORT: 0
+  #     ALIAS_CHROMIUM: ssh chromium chromium
+  #   working_dir: /var/www/app
+
+  # chromium:
+  #   image: minidocks/chromium
+  #   volumes:
+  #     - ../src:/var/www/app
+  #   cap_add:
+  #     - SYS_ADMIN
+  #   working_dir: /var/www/app
+  #   command: sshd

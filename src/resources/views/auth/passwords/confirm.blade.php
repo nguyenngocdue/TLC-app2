@@ -23,7 +23,7 @@
                                         required autocomplete="current-password">
 
                                     @error('password')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="font-bold text-red-600" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror

@@ -4,7 +4,11 @@
 @section('title', "Show" )
 
 @section('content')
-
+<style>
+    html {
+        -webkit-print-color-adjust: exact;
+    }
+</style>
 <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/>
 <x-print.print-props
     id="{{$id}}"
