@@ -28,7 +28,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
 <div class="{{$bgGray}} {{$class}} min-h-[36px] flex items-center text-sm rounded px-1 w-full justify-end" title="{{$tooltip}}" component="avatar-item-flipped">
     <span>
         <p class="font-semibold text-right {{$textGray}}">{{$title}}</p>
-        <p class="text-right text-xs text-gray-600 dark:text-gray-300 ">{{$description}}</p>
+        <p class="text-right text-xs text-gray-600 dark:text-gray-300 ">{!! $description !!}</p>
         <i>{{$content}}</i>
     </span>
     <div class="{{$sizeStr}} ml-2">
@@ -46,7 +46,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
     </div>
     <span>
         <p class="font-semibold text-left {{$textGray}}">{{$title}}</p>
-        <p class="text-left text-xs text-gray-600 dark:text-gray-300 ">{{$description}}</p>
+        <p class="text-left text-xs text-gray-600 dark:text-gray-300 ">{!! $description !!}</p>
         <i>{{$content}}</i>
     </span>
 </div>
