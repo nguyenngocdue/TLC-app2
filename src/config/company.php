@@ -1,5 +1,5 @@
 <?php
-$logo = asset('/logo/tlc.png');
+$logo = 'https://app2.tlcmodular.com/logo/tlc.png';
 return [
     "name" => "TLC Modular Construction LLC",
     "short_name" => "TLC",
