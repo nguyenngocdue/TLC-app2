@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}">
 
+    
+
     {{-- TLC2 will always be the last of CSS List --}}
     <link rel="stylesheet" href="{{ asset('css/select2-canh.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2-due.css') }}">
