@@ -39,7 +39,7 @@ trait TraitEntityCRUDShowQRApp
 	}
 	public function getDataRenderLinkDocs($config, $model){
 		switch ($config) {
-			case 'app':
+			case 529: // QR_APP_SOURCE => mode render app
 				$unitId = $model->pj_unit_id;
 				$prodOrder = Prod_order::where('meta_type','App\\Models\\Pj_unit')->where('meta_id',$unitId)->first();
 				$inspChecklists = $prodOrder->getQaqcInspChklsts->whereIn('qaqc_insp_tmpl_id',[1007,3]) ?? [];
