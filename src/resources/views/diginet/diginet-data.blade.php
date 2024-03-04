@@ -6,23 +6,25 @@
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        @foreach ($dataRender as $items)
-            <div class="transform hover:scale-105 transition duration-500 ease-in-out">
-                <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl">
-                    <div class="px-6 py-4">
-                        <div class="font-bold text-xl text-center">{{$items['card_name']}}</div>
-                        {{-- <p class="text-gray-700 mt-2 text-base text-center">{{$items['card_description']}}</p> --}}
-                    </div>
-                    <div class="px-6 pt-4 pb-2 text-center">
-                        <span class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
-                                        onclick="openPopup(this)" 
-                                        data-url="{{route($items['card_save_button_route'])}}"
-                                        data-name="{{$items['card_name'] }}"
-                                        >
-                        <i class="fa-solid fa-pen-nib"></i> Update</span>
+        @foreach ($dataRender as $key => $items)
+            @if(!str_contains($key,'-lines'))
+                <div class="transform hover:scale-105 transition duration-500 ease-in-out">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl">
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl text-center">{{$items['card_name']}}</div>
+                            {{-- <p class="text-gray-700 mt-2 text-base text-center">{{$items['card_description']}}</p> --}}
+                        </div>
+                        <div class="px-6 pt-4 pb-2 text-center">
+                            <span class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
+                                            onclick="openPopup(this)" 
+                                            data-url="{{route($items['card_save_button_route'])}}"
+                                            data-name="{{$items['card_name'] }}"
+                                            >
+                            <i class="fa-solid fa-pen-nib"></i> Update</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         @endforeach
     </div>
 </div>

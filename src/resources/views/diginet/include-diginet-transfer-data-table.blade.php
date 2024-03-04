@@ -43,7 +43,6 @@
     </table>
 </div>
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 function getFirstAndLastDayOfMonth(year, _month) {
@@ -66,7 +65,7 @@ $(document).ready(function() {
         const year = $(this).data('year');
         const month = $(this).data('month');
         const { firstDay, lastDay } = getFirstAndLastDayOfMonth(year, month);
-        //console.log(firstDay, lastDay);
+        console.log(firstDay, lastDay);
         let processingToast = toastr.info('Processing your request...', {
                     timeOut: 0, // Prevents the toastr from auto-hiding
                     extendedTimeOut: 0, // Prevents the toastr from auto-hiding when hovered
@@ -91,13 +90,21 @@ $(document).ready(function() {
                 "WorkplaceCode": "HO,TF1,TF2,TF3,NZ,WS"
             }),
             success: function(response) {
-                toastr.clear(processingToast);
-                if(response.status === 'success') {
-                    toastr.success(response.message);
-                } else {
-                    toastr.error(response.message);
-                }
+                response.map((item) => {
+                    if(item.status === 'success') {
+                        toastr.clear(processingToast);
+                        toastr.success(item.message);
+                    } else {
+                        toastr.clear(processingToast);
+                        toastr.error(item.message);
+                    }
+
+                })
             },
+            error: function(xhr, status, error) {
+                toastr.clear(processingToast);
+                toastr.error('An error occurred: ' + error);
+            }
         });
     });
 });

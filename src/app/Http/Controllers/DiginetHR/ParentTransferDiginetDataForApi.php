@@ -17,15 +17,9 @@ abstract class ParentTransferDiginetDataForApi  extends Controller
     ) {
     }
 
-    protected function initializeData($endpointNameDiginet, $conFieldName, $modelName, $indexData)
-    {
-        return [$endpointNameDiginet, $conFieldName, $modelName, $indexData];
-    }
-
     public function store(Request $request)
     {
         $params = $request->input();
-        dump($params);
         $insService = new DiginetService();
         $result = $insService->createAndUpdateData($this->modelName, $params, $this->endpointNameDiginet, $this->conFieldName, $this->indexData);
         return response()->json($result);
