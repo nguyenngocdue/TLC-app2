@@ -15,6 +15,7 @@ class Project extends ModelExtended
         "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
         "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
+        "getQrAppSource" => ['belongsTo', Term::class, 'qr_app_source'],
     ];
 
     public static $oracyParams = [
@@ -49,6 +50,12 @@ class Project extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+   
+    public function getQrAppSource()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public static function getSubProjectTree()
