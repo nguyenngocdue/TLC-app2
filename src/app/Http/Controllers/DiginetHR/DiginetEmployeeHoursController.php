@@ -6,22 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 
-class DiginetEmployeeHoursController extends Controller
+class DiginetEmployeeHoursController extends ParentDiginetDataController
 {
-
-    function getType()
-    {
-        return "dashboard";
-    }
-
     public function index(Request $request)
     {
-        $token = CurrentUser::getTokenForApi();
-        $endpointNameDiginet = "employee-hours";
-
-        return view("diginet.diginet-transfer-data-employee-hours", [
-            'token' => $token,
-            'endpointNameDiginet' => $endpointNameDiginet
-        ]);
+        $this->endpointNameDiginet = "employee-hours";
+        $this->title = 'Employee Hours';
+        return parent::index($request);
     }
 }

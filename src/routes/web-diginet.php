@@ -7,6 +7,7 @@ use App\Http\Controllers\DiginetHR\DiginetEmployeeLeaveLinesController;
 use App\Http\Controllers\DiginetHR\DiginetEmployeeLeaveSheetsController;
 use App\Http\Controllers\DiginetHR\DiginetEmployeeOvertimeLinesController;
 use App\Http\Controllers\DiginetHR\DiginetEmployeeOvertimeSheetController;
+use App\Http\Controllers\DiginetHR\DiginetUpdateAllTablesController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,5 +25,6 @@ Route::group(
         Route::get('employee-overtime-lines', [DiginetEmployeeOvertimeLinesController::class, 'index'])->name('employee-overtime-lines.index');
         Route::get('business-trip-sheets', [DiginetBusinessTripLinesController::class, 'index'])->name('business-trip-sheets.index');
         Route::get('business-trip-lines', [DiginetBusinessTripLinesController::class, 'index'])->name('business-trip-lines.index');
+        Route::get('all-tables', [DiginetUpdateAllTablesController::class, 'index'])->name('all-tables.index');
     }
 );

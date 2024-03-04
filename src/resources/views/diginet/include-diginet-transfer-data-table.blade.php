@@ -25,13 +25,13 @@
                     @for ($month = 1; $month <= 12; $month++)
                         @if($year === $currentYear && $month > $currentMonth || $year === $beginYear && $month < $beginMonth)
                             <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
-                                <button class="opacity-5 cursor-not-allowed  inline-flex items-center justify-center px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
+                                <button class="opacity-5 cursor-not-allowed  inline-flex items-center justify-center px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none">
                                     <i class="fa-solid fa-pen-nib"></i>
                                 </button>
                             </td>
                         @else
                             <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
-                                <button class="btn-month inline-flex items-center justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
+                                <button  class="btn-month inline-flex items-center justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
                                     <i class="fa-solid fa-pen-nib"></i>
                                 </button>
                             </td>
@@ -65,7 +65,13 @@ $(document).ready(function() {
         const year = $(this).data('year');
         const month = $(this).data('month');
         const { firstDay, lastDay } = getFirstAndLastDayOfMonth(year, month);
-        console.log(firstDay, lastDay);
+        const urlAPI = '{{$endpointNameDiginet}}' === 'all-tables' ?
+                        `` :
+                        `/v1/transfer-data-diginet/`+ '{{$endpointNameDiginet}}';
+        const method = '{{$endpointNameDiginet}}' === 'all-tables' ? 'GET' : 'POST';
+
+        console.log(firstDay, lastDay, urlAPI);
+        
         let processingToast = toastr.info('Processing your request...', {
                     timeOut: 0, // Prevents the toastr from auto-hiding
                     extendedTimeOut: 0, // Prevents the toastr from auto-hiding when hovered
@@ -75,8 +81,8 @@ $(document).ready(function() {
                 });
 
         $.ajax({
-            url: `/v1/transfer-data-diginet/`+ '{{$endpointNameDiginet}}',
-            method: 'POST',
+            url: urlAPI,
+            method: method,
             contentType: 'application/json',
             headers: {
                 'Authorization': 'Bearer ' + '{{$token}}',
@@ -90,16 +96,8 @@ $(document).ready(function() {
                 "WorkplaceCode": "HO,TF1,TF2,TF3,NZ,WS"
             }),
             success: function(response) {
-                response.map((item) => {
-                    if(item.status === 'success') {
-                        toastr.clear(processingToast);
-                        toastr.success(item.message);
-                    } else {
-                        toastr.clear(processingToast);
-                        toastr.error(item.message);
-                    }
-
-                })
+                console.log(response);
+                
             },
             error: function(xhr, status, error) {
                 toastr.clear(processingToast);
