@@ -97,7 +97,16 @@ $(document).ready(function() {
             }),
             success: function(response) {
                 console.log(response);
-                
+                response.map((item) => {
+                    if(item.status === 'success') {
+                        toastr.clear(processingToast);
+                        toastr.success(item.message);
+                    } else {
+                        toastr.clear(processingToast);
+                        toastr.error(item.message);
+                    }
+
+                })
             },
             error: function(xhr, status, error) {
                 toastr.clear(processingToast);
