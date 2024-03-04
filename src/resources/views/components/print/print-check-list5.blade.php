@@ -4,9 +4,9 @@
 @section('content')
 <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/>
 <div class="flex justify-center bg-only-print">
-    <div class="md:px-4">
-        <div style='{{$layout}}' class="items-center bg-white box-border p-8 ">
-                <x-print.print-page-toc :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
+    <div class="md:px-4 flex-grow flex-shrink-0 w-full overflow-x-auto">
+        <div style='{{$layout}}' class="items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
+            <x-print.print-page-toc :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
         </div>
         <x-renderer.page-break />
         @php $count = count($tableDataSource) ?? 0; @endphp
