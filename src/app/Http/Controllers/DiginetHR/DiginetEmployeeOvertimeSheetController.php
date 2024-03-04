@@ -6,21 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 
-class DiginetEmployeeOvertimeSheetController extends Controller
+class DiginetEmployeeOvertimeSheetController extends ParentDiginetDataController
 {
-    function getType()
-    {
-        return "dashboard";
-    }
-
     public function index(Request $request)
     {
-        $token = CurrentUser::getTokenForApi();
-        $endpointNameDiginet = "employee-overtime";
-
-        return view("diginet.diginet-transfer-data-employee-overtime-sheets", [
-            'token' => $token,
-            'endpointNameDiginet' => $endpointNameDiginet
-        ]);
+        $this->endpointNameDiginet = "employee-overtime";
+        $this->title = 'Employee Overtime Sheets';
+        return parent::index($request);
     }
 }

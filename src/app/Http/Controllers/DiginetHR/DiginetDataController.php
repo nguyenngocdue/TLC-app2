@@ -15,11 +15,21 @@ class DiginetDataController extends Controller
     public function getDataRender()
     {
         return [
+            "all-tables" => [
+                "name" => "all-tables",
+                "field_index_name" => "",
+                "endpoint_name_diginet" => "all-tables",
+                "card_name" => "Update the Entire Database",
+                "card_description" => "This is a short description of the item.",
+                "card_save_button_route" => "all-tables.index",
+                "model_name" => "",
+                "data_index" => "",
+            ],
             "employee-hours" => [
                 "name" => "employee-hours",
                 "field_index_name" => "date",
                 "endpoint_name_diginet" => "employee-hours",
-                "card_name" => "Employee leave Sheet",
+                "card_name" => "Employee Hours",
                 "card_description" => "This is a short description of the item.",
                 "card_save_button_route" => "employee-hours.index",
                 "model_name" => "Diginet_employee_hour",
@@ -29,7 +39,7 @@ class DiginetDataController extends Controller
                 "name" => "employee-leave-sheets",
                 "field_index_name" => "",
                 "endpoint_name_diginet" => "employee-leave",
-                "card_name" => "Employee leave Sheet",
+                "card_name" => "Employee Leave",
                 "card_description" => "This is a short description of the item.",
                 "card_save_button_route" => "employee-leave-sheets.index",
                 "model_name" => "Diginet_employee_leave_sheet",
@@ -49,7 +59,7 @@ class DiginetDataController extends Controller
                 "name" => "employee-overtime-sheets",
                 "field_index_name" => "ot_date",
                 "endpoint_name_diginet" => "employee-overtime",
-                "card_name" => "Employee Overtime Sheet",
+                "card_name" => "Employee Overtime",
                 "card_description" => "This is a short description of the item.",
                 "card_save_button_route" => "employee-overtime-sheets.index",
                 "model_name" => "Diginet_employee_overtime_sheet",
@@ -69,7 +79,7 @@ class DiginetDataController extends Controller
                 "name" => "business-trip-sheets",
                 "field_index_name" => "",
                 "endpoint_name_diginet" => "business-trip",
-                "card_name" => "Business Trip Sheet",
+                "card_name" => "Business Trip",
                 "card_description" => "This is a short description of the item.",
                 "card_save_button_route" => "business-trip-sheets.index",
                 "model_name" => "Diginet_business_trip_sheet",
@@ -92,7 +102,7 @@ class DiginetDataController extends Controller
     {
         $middleRoute = "/diginet/transfer-data-diginet";
         $dataRender = $this->getDataRender();
-        return view('diginet.diginet-data', [
+        return view('diginet.diginet-data-many-cards', [
             "middleRoute" => $middleRoute,
             "dataRender" => $dataRender,
         ]);

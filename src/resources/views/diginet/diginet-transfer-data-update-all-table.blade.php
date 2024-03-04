@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('topTitle', 'Retrieve Diginet Data')
-@section('title', 'Business Trip Lines')
+@section('topTitle', 'Update Diginet Data')
+@section('title', 'Update the Entire Database')
 
 @section('content')
     @include('diginet.include-diginet-transfer-data-table')
