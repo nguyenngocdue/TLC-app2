@@ -95,7 +95,7 @@
         "not_applicable": "",
         "reviewed": "",
         "inspected": "",
-        "pending_audit": "",
+        "pending_audit": "true",
         "audited": ""
     },
     "consultant": {

@@ -73,13 +73,19 @@ class QaqcInspChklstShts extends MatrixForReportParent
             ->get();
         $result = [];
         $cuid = CurrentUser::id();
-        foreach ($db as $sheet) {
-            $uids = $sheet->{$this->nominatedListFn}()->pluck('id')->toArray();
-            if (in_array($cuid, $uids)) {
+        if ($this->showOnlyInvolved) {
+            foreach ($db as $sheet) {
+                $uids = $sheet->{$this->nominatedListFn}()->pluck('id')->toArray();
+                if (in_array($cuid, $uids)) {
+                    $result[] = $sheet;
+                }
+            }
+        } else {
+            foreach ($db as $sheet) {
                 $result[] = $sheet;
             }
         }
-        // dump($result);
+        // dd($result);
         return $result;
     }
 

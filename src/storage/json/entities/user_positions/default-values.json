@@ -166,7 +166,7 @@
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
-        "textarea_rows": "30"
+        "textarea_rows": ""
     },
     "_job_requirement_draft": {
         "name": "_job_requirement_draft",
@@ -214,7 +214,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "90",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",

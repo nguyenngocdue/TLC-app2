@@ -44,7 +44,13 @@ trait TraitUpdatedProdSequenceEvent
                         }
                     }
                 }
-                event(new UpdatedQaqcChklstSheetEvent($id, $mailContent, "signature_qaqc_chklst_3rd_party"/* . "_list"*/));
+
+                //In case a new inspector is added
+                //It has to be sent directly here
+                //As otherwise the event will not add the current sheet into their dashboard
+                $newSignOffList = $request['signature_qaqc_chklst_3rd_party_list()'];
+
+                event(new UpdatedQaqcChklstSheetEvent($id, $mailContent, $newSignOffList, "signature_qaqc_chklst_3rd_party"/* . "_list"*/));
                 break;
             default:
                 // Log::info("Updated " . $this->type);

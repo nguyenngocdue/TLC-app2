@@ -46,7 +46,7 @@ function listenerSubmitForm(idForm) {
                     p.parentNode.replaceChild(textNode, p);
             });
             // Get the updated HTML content without <mark> elements
-            var updatedHtmlContent = tempElement.innerHTML;
+            var updatedHtmlContent = tempElement.textContent;
 
             $editorInputContent = document.querySelector('input[id^="editor_content_'+name+'"]');
             if ($editorInputContent) {

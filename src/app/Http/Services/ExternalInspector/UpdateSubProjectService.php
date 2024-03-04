@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class UpdateSubProjectService
 {
-    function update($subProjectId, $nominatedListFn)
+    function update($subProjectId, $newSignOffList, $nominatedListFn)
     {
         $allLists = Qaqc_insp_chklst::query()
             ->where("sub_project_id", $subProjectId)
@@ -26,6 +26,7 @@ class UpdateSubProjectService
         }
 
         $result = array_values(array_unique(Arr::flatten($result)));
+        if (is_array($newSignOffList)) $result = array_unique([...$result, ...$newSignOffList]);
 
         $item = Sub_project::find($subProjectId);
         $item->syncCheck("getExternalInspectorsOfSubProject", \App\Models\User::class, $result);

@@ -1,4 +1,9 @@
 <div id="toolbar-container_{{$name}}"></div>
+@if($mode != 'draft')
+    <span class="no-print flex text-pink-600 justify-center items-center">Original</span>
+@else
+    <span class="no-print flex text-green-600 justify-center items-center">Editable</span>
+@endif
 <div id="editor_{{$name}}" 
     name="{{$name}}" 
     component="controls/textarea-diff2"
@@ -20,7 +25,6 @@
     var $valueEditor = $('#editor_' + name);
     var str = '';
     var editorContentInput = document.getElementById('editor_content_' + name);
-    console.log(diff);
     diff.forEach(function(part){
       var highlightedText = applyHighlights(part);
       str += highlightedText;
