@@ -34,8 +34,9 @@
             } 
         }
 
-        $route = route($routeName, $item->slug);
-        // $route = "https://app.tlcmodular.com/modular/".$item->slug;
+        //Using nginx redirect
+        // $route = route($routeName, $item->slug);
+        $route = "https://app.tlcmodular.com/modular/".$item->slug;
         $length = $item->length;
         $width = $item->width;
         $height = $item->height;
