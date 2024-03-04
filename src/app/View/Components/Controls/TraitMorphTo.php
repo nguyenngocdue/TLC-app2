@@ -4,6 +4,7 @@ namespace App\View\Components\Controls;
 
 use App\Utils\Support\Entities;
 use App\Utils\Support\Json\Relationships;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TraitMorphTo
@@ -31,14 +32,18 @@ trait TraitMorphTo
         $result = [];
         foreach ($allEntities as $entity) {
             $modelPath = Str::modelPathFrom($entity);
-            foreach ($modelPath::$eloquentParams as $key => $params) {
-                if ($params[0] === 'morphMany' && $params[1] == $myModelPath) {
-                    $result[$entity] = [
-                        'id' => $modelPath,
-                        'name' => Str::appTitle($entity),
-                        'fn' => $key,
-                    ];
+            if (class_exists($modelPath)) {
+                foreach ($modelPath::$eloquentParams as $key => $params) {
+                    if ($params[0] === 'morphMany' && $params[1] == $myModelPath) {
+                        $result[$entity] = [
+                            'id' => $modelPath,
+                            'name' => Str::appTitle($entity),
+                            'fn' => $key,
+                        ];
+                    }
                 }
+            } else {
+                dump("Class $modelPath not found!");
             }
         }
         $result = array_values($result);

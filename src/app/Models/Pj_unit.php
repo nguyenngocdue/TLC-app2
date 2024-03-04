@@ -14,6 +14,7 @@ class Pj_unit extends ModelExtended
         'getPjSellType' => ['belongsTo', Term::class, 'pj_sell_type_id'],
 
         "getPjModules" => ['hasMany', Pj_module::class, "pj_unit_id"],
+        "getProdOrders" => ['morphMany', Prod_order::class, 'meta', 'meta_type', 'meta_id'],
     ];
 
     public function getPjSellType()
@@ -25,5 +26,11 @@ class Pj_unit extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getProdOrders()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 }
