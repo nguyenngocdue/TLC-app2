@@ -22,8 +22,7 @@ RUN curl -sSLf \
     https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
     chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions ldap 
-RUN docker-php-ext-install pdo pdo_mysql \
-    && apk --no-cache add nodejs npm
+RUN docker-php-ext-install pdo pdo_mysql
 
 RUN docker-php-ext-install gd && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
@@ -33,6 +32,20 @@ RUN docker-php-ext-install pcntl
 
 RUN apk add build-base autoconf
 RUN pecl install apcu 
+
+RUN apk add nodejs npm
+# RUN apk add -- no-cache gconf
+# Create a symbolic link to make node and npm commands available in /usr/local/bin
+RUN ln -s /usr/bin/node /usr/local/bin/node
+RUN ln -s /usr/bin/npm /usr/local/bin/npm
+RUN apk add --no-cache \
+        chromium \
+        chromium-chromedriver
+RUN apk update && apk add --no-cache libgcc libstdc++ nss wget git 
+RUN npm install --location=global --unsafe-perm puppeteer@^17
+RUN chmod -R o+rx /usr/local/lib/node_modules/puppeteer/.local-chromium
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true 
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 COPY ./configs/php.ini /usr/local/etc/php/
 
