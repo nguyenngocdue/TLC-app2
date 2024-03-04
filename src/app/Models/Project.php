@@ -9,7 +9,7 @@ class Project extends ModelExtended
 {
     use HasCachedAvatar;
 
-    protected $fillable = ["id", "name", "description", "slug", "status", "owner_id"];
+    protected $fillable = ["id", "name", "description", "slug", "status", "owner_id", "qr_app_source"];
 
     public static $eloquentParams = [
         "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
@@ -51,7 +51,7 @@ class Project extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-   
+
     public function getQrAppSource()
     {
         $p = static::$eloquentParams[__FUNCTION__];
