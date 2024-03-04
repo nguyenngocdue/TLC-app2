@@ -12,16 +12,11 @@
                     <img src="https://wp.tlcmodular.com/wp-content/uploads/2020/12/GHT.jpg" alt="image" 
                     class="w-full h-full object-cover">
                 </div>
-                    <span class="text-base font-semibold flex justify-center truncate">{{$dataSource['name']}}</span>
+                    <span class="text-base font-semibold flex justify-center truncate">{{$moduleName}}</span>
             </div>
             <div class="w-auto justify-center mt-6">
-                @foreach($props as $key => $value)
-                    @switch($value['control'])
-                    @case('hyperlink')
-                        <x-print.hyper-link5 label="{{$value['label']}}" href="{{$dataSource[$value['column_name']]}}" />
-                        @break
-                    @default
-                    @endswitch
+                @foreach($dataSource as $key => $value)
+                    <x-print.hyper-link5 label="Inspection Checklists" href="{{$value}}" />
                 @endforeach
             </div>
         </div>

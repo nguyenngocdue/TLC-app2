@@ -135,7 +135,8 @@ trait TraitSupportEntityShow
     private function createInspectorAndDatetime($item, $isSignature, $isSignatureLine)
     {
         $inspector = "";
-        $dateTime = DateTimeConcern::convertForLoading('picker_date', substr($item->updated_at, 0, 10));
+        $date = DateTimeConcern::convertForLoading('picker_date', substr($item->updated_at, 0, 10));
+        $dateTime = DateTimeConcern::convertForLoading('picker_datetime', $item->updated_at);
         if ($isSignatureLine || $isSignature) {
             if ($item->value == '') return "";
             $inspId = null;
@@ -143,7 +144,7 @@ trait TraitSupportEntityShow
             if ($isSignature) $inspId = $item->user_id;
             // $inspId = $item->user_id || $item->inspector_id;
             if (is_null($inspId)) return "";
-            $renderInspector = Blade::render("<div class='flex justify-end ml-20'><x-renderer.avatar-user uid='$inspId' content='$dateTime' /></div>");
+            $renderInspector = Blade::render("<div class='flex justify-end ml-20'><x-renderer.avatar-user uid='$inspId' content='$dateTime' showCompany=1 /></div>");
             return $renderInspector;
         } else {
             $value = $item->qaqc_insp_control_value_id ?: $item->hse_insp_control_value_id;
@@ -156,7 +157,7 @@ trait TraitSupportEntityShow
                     $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
                     $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
                     $inspector = $avatarStr . ' ' . $name . " ";
-                    return '<span class="flex gap-1">' . $inspector . $dateTime . "</span>";
+                    return '<span class="flex gap-1">' . $inspector . $date . "</span>";
                 }
             }
         }

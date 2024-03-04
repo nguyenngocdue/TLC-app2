@@ -34,8 +34,8 @@
             } 
         }
 
-        // $route = route($routeName, $item->slug);
-        $route = "https://app.tlcmodular.com/modular/".$item->slug;
+        $route = route($routeName, $item->slug);
+        // $route = "https://app.tlcmodular.com/modular/".$item->slug;
         $length = $item->length;
         $width = $item->width;
         $height = $item->height;

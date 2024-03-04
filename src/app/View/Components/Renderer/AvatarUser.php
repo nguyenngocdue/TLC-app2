@@ -19,6 +19,7 @@ class AvatarUser extends Component
         private $icon = false,
         private $title = null,
         private $description = null,
+        private $showCompany = false,
     ) {
         //
     }
@@ -27,9 +28,11 @@ class AvatarUser extends Component
     {
         $avatar = null;
         $user = null;
+        $companyName = null;
         if (isset($slot->{'id'})) {
             $user = User::findFromCache($slot->{'id'});
             $avatar = $user->getAvatarThumbnailUrl();
+            $companyName = $user->getUserCompany->name;
         }
         if (is_null($user)) return null;
 
@@ -38,7 +41,7 @@ class AvatarUser extends Component
         $gray = $slot->{'resigned'} ?? '';
         $href = $slot->{'href'} ?? '';
 
-        return [$user, $avatar, $title, $description, $href, $gray];
+        return [$user, $avatar, $title, $description, $href, $companyName, $gray];
     }
 
     private function renderOneUserByAttribute()
@@ -47,9 +50,10 @@ class AvatarUser extends Component
         $avatar = $user->getAvatarThumbnailUrl();
         $title = $user->full_name;
         $description = $user->getPosition->name ?? '';
+        $companyName = $user->getUserCompany->name;
         $gray = $user->resigned;
         $href = "";
-        return [$user, $avatar, $title, $description, $href, $gray];
+        return [$user, $avatar, $title, $description, $href, $companyName, $gray];
     }
 
     function renderOneUserSlot($slot, $index, $shortForm = false)
@@ -60,10 +64,11 @@ class AvatarUser extends Component
         } else {
             $array = $this->renderOneUserByAttribute();
         }
-        [$user, $avatar, $title, $description, $href, $gray]  = $array;
+        [$user, $avatar, $title, $description, $href, $companyName, $gray]  = $array;
 
         if (!is_null($this->title)) $title = $this->title;
         if (!is_null($this->description)) $description = $this->description;
+        if ($this->showCompany) $description = $description . "<br/><b>" . $companyName . "</b>";
 
         $verticalLayout = $this->verticalLayout;
         $tooltip = ($user) ? ($user->resigned ? "This person resigned on " . $user->last_date : "") . " (#$user->id)" : "";
