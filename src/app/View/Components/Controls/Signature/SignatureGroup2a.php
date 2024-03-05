@@ -56,6 +56,7 @@ class SignatureGroup2a extends Component
                 return "<x-feedback.result type='warning' title='Permission Denied' message='You are not permitted to view this check sheet.<br/>If you believe this is a mistake, please contact our admin.' />";
             }
         }
+        $isProjectClient = CurrentUser::get()->isProjectClient();
 
         $nominatedList = $this->item->{$this->signOffOracy}();
         // dump($nominatedList);
@@ -108,6 +109,7 @@ class SignatureGroup2a extends Component
 
             'cuid' => $cuid,
             'isExternalInspector' => $isExternalInspector,
+            'isProjectClient' => $isProjectClient,
 
             'tableName' => $this->type,
             'signableId' => $this->signableId,
