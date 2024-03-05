@@ -16,6 +16,11 @@
 <div class="xl:col-span-6 -m-0.5"></div>
 <div class="2xl:col-span-6"></div>
 
+{{-- for print A4 --}}
+<div class="lg:w-[1000px] h-[1414px]"></div>
+<div class="lg:w-[1414px] h-[1000px]"></div>
+<div class="lg:mx-auto"></div>
+
 <!-- sticky-->
 <div class="fixed top-24"></div>
 

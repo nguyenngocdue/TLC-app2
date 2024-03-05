@@ -207,9 +207,9 @@ class Breadcrumb extends Component
         if($type === 'user_positions')
             switch ($this->action) {
                 case 'index':
-                    $this->links[] = ['href' => route($type . '_prt.showAll'), 'title' => 'Print All', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                    $this->links[] = ['href' => route($type . '_prt.printAll'), 'title' => 'Print All', 'icon' => '<i class="fa-duotone fa-print"></i>'];
                     break;
-                case 'showAll':
+                case 'printAll':
                     $this->links[] = ['href' => null,'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
                     break;
                 default:

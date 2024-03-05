@@ -7,9 +7,8 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Spatie\Browsershot\Browsershot;
-use Spatie\LaravelPdf\Facades\Pdf;
-
+use Spatie\LaravelPdf\Enums\Unit;
+use \ZipArchive;
 use function Spatie\LaravelPdf\Support\pdf;
 trait TraitViewAllPrint
 {
@@ -34,7 +33,7 @@ trait TraitViewAllPrint
         ];
         return view('dashboards.pages.entity-show-template-print', $params);
     }
-    public function showAll(Request $request){
+    public function printAll(Request $request){
         if(CurrentUser::isAdmin()){
             $valueOptionPrint = $this->getValueOptionPrint();
             $layout = $this->getLayoutPrint($valueOptionPrint, 'props');
@@ -44,29 +43,43 @@ trait TraitViewAllPrint
             $modelPath = $this->typeModel;
             $topTitle =CurrentRoute::getTitleOf($this->type);
             $dataSource = $this->typeModel::all()->where('status','active');
-            foreach ($dataSource as $item) {
-                $id = $item->id;
-                $params =  [
-                    'type' => $type,
-                    'typePlural' => $typePlural,
-                    'item' => $item,
-                    'id' => $id,
-                    'classListOptionPrint' => $class,
-                    'valueOptionPrint' => $valueOptionPrint,
-                    'layout' => $layout,
-                    'modelPath' => $modelPath,
-                    'trashed' => false,
-                    'topTitle' => $topTitle,
-                    'numberOfEmptyLines' => 5,
-                ];
-                $name = $type.'_'.$id.'.pdf';
-                //$html = view('dashboards.pages.entity-show-props',$params)->render(); 
-                // dd($html); return pdf()->html($html)->download($name);
-                return pdf()->view('dashboards.pages.entity-show-props',$params)->download($name);
+            $zip = new ZipArchive;
+            $zipFileName = $typePlural.'.zip';
+            $fileTmp = [];
+            if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === TRUE) {
+                foreach ($dataSource as $item) {
+                    $params =  [
+                        'type' => $type,
+                        'typePlural' => $typePlural,
+                        'item' => $item,
+                        'id' => $item->id,
+                        'classListOptionPrint' => $class,
+                        'valueOptionPrint' => $valueOptionPrint,
+                        'layout' => $layout,
+                        'modelPath' => $modelPath,
+                        'trashed' => false,
+                        'topTitle' => $topTitle,
+                        'numberOfEmptyLines' => 5,
+                    ];
+                    $name = $item->name.'.pdf';
+                    pdf()->view('dashboards.pages.entity-show-props',$params)
+                        ->format('a4')
+                        ->margins(0, 75 , 0, 75, Unit::Pixel)
+                        ->save($name);
+                    $file = public_path($name);
+                    $fileTmp[] = $file;
+                    $zip->addFile($file, basename($file));
+                }
+                $zip->close();
+                // Delete the file after adding it to the zip
+                foreach ($fileTmp as $value) {
+                    if(file_exists($value))
+                        unlink($value);
+                }
+                return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
+            } else {
+                return "Failed to create the zip file.";
             }
-            // Pdf::view('dashboards.pages.entity-show-props',$params)->save('example2.pdf');
-            // Browsershot::url('https://google.com')->save('example4.pdf');
         }
-        
     }
 }
