@@ -7,9 +7,9 @@ use App\BigThink\ModelExtended;
 class Pj_module extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "slug", "pj_building_id", "pj_level_id", "pj_module_type_id",
+        "id", "name", "description", "slug",  "pj_building_id", "pj_level_id", "pj_module_type_id",
         "pj_name_id", "pj_character_id", "pj_unit_id", "pj_shipment_id", "owner_id",
-        "sub_project_id", "length",  "width", "height", "weight", "manufactured_year",
+        "sub_project_id", "length",  "width", "height", "weight", "manufactured_year", "plot_number",
         "insp_chklst_link", "shipping_doc_link",
     ];
 
