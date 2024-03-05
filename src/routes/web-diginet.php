@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\DiginetHR\DiginetBusinessTripLinesController;
-use App\Http\Controllers\DiginetHR\DiginetDataController;
-use App\Http\Controllers\DiginetHR\DiginetEmployeeHoursController;
-use App\Http\Controllers\DiginetHR\DiginetEmployeeLeaveLinesController;
-use App\Http\Controllers\DiginetHR\DiginetEmployeeLeaveSheetsController;
-use App\Http\Controllers\DiginetHR\DiginetEmployeeOvertimeLinesController;
-use App\Http\Controllers\DiginetHR\DiginetEmployeeOvertimeSheetController;
-use App\Http\Controllers\DiginetHR\DiginetUpdateAllTablesController;
+use App\Http\Controllers\DiginetHR\PageController\DiginetBusinessTripLinesController;
+use App\Http\Controllers\DiginetHR\PageController\DiginetDataController;
+use App\Http\Controllers\DiginetHR\PageController\DiginetEmployeeHoursController;
+use App\Http\Controllers\DiginetHR\PageController\DiginetEmployeeLeaveLinesController;
+use App\Http\Controllers\DiginetHR\PageController\DiginetEmployeeLeaveSheetsController;
+use App\Http\Controllers\DiginetHR\PageController\DiginetEmployeeOvertimeLinesController;
+use App\Http\Controllers\DiginetHR\PageController\DiginetEmployeeOvertimeSheetController;
+use App\Http\Controllers\DiginetHR\PageController\DiginetUpdateAllTablesController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,5 +26,7 @@ Route::group(
         Route::get('business-trip-sheets', [DiginetBusinessTripLinesController::class, 'index'])->name('business-trip-sheets.index');
         Route::get('business-trip-lines', [DiginetBusinessTripLinesController::class, 'index'])->name('business-trip-lines.index');
         Route::get('all-tables', [DiginetUpdateAllTablesController::class, 'index'])->name('all-tables.index');
+
+        Route::get('employee-hours', [DiginetEmployeeHoursController::class, 'index'])->name('employee-hours.index');
     }
 );
