@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Utils\ClassList;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\LaravelPdf\Enums\Unit;
@@ -43,7 +44,10 @@ trait TraitViewAllPrint
             $modelPath = $this->typeModel;
             $topTitle =CurrentRoute::getTitleOf($this->type);
             $dataSource = $this->typeModel::all()->where('status','active');
-            if(!sizeof($dataSource) > 0) return;
+            if(!sizeof($dataSource) > 0) {
+                Toastr::warning("The print file is empty, please check the status of the files","Export File Zip");
+                return;
+            }
             $zip = new ZipArchive;
             $zipFileName = $typePlural.'.zip';
             $fileTmp = [];
@@ -79,7 +83,8 @@ trait TraitViewAllPrint
                 }
                 return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
             } else {
-                return "Failed to create the zip file.";
+                Toastr::warning("Failed to create the zip file.","Export File Zip");
+                return;
             }
         }
     }
