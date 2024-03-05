@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Spatie\LaravelPdf\Enums\Unit;
 use \ZipArchive;
 use function Spatie\LaravelPdf\Support\pdf;
+
 trait TraitViewAllPrint
 {
     public function print(Request $request)
@@ -33,19 +34,20 @@ trait TraitViewAllPrint
         ];
         return view('dashboards.pages.entity-show-template-print', $params);
     }
-    public function printAll(Request $request){
-        if(CurrentUser::isAdmin() || CurrentUser::isHrManager()){
+    public function printAll(Request $request)
+    {
+        if (CurrentUser::isAdmin() || CurrentUser::isHrManager()) {
             $valueOptionPrint = $this->getValueOptionPrint();
             $layout = $this->getLayoutPrint($valueOptionPrint, 'props');
             $class = ClassList::DROPDOWN;
             $type = $this->type;
-            $typePlural =Str::plural($this->type);
+            $typePlural = Str::plural($this->type);
             $modelPath = $this->typeModel;
-            $topTitle =CurrentRoute::getTitleOf($this->type);
-            $dataSource = $this->typeModel::all()->where('status','active');
-            if(!sizeof($dataSource) > 0) return;
+            $topTitle = CurrentRoute::getTitleOf($this->type);
+            $dataSource = $this->typeModel::all()->where('status', 'active');
+            if (!sizeof($dataSource) > 0) return;
             $zip = new ZipArchive;
-            $zipFileName = $typePlural.'.zip';
+            $zipFileName = $typePlural . '.zip';
             $fileTmp = [];
             if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === TRUE) {
                 foreach ($dataSource as $item) {
@@ -62,10 +64,10 @@ trait TraitViewAllPrint
                         'topTitle' => $topTitle,
                         'numberOfEmptyLines' => 5,
                     ];
-                    $name = $item->name.'.pdf';
-                    pdf()->view('dashboards.pages.entity-show-props',$params)
+                    $name = $item->name . '.pdf';
+                    pdf()->view('dashboards.pages.entity-show-props', $params)
                         ->format('a4')
-                        ->margins(0, 75 , 0, 75, Unit::Pixel)
+                        ->margins(0, 50, 0, 50, Unit::Pixel)
                         ->save($name);
                     $file = public_path($name);
                     $fileTmp[] = $file;
@@ -74,7 +76,7 @@ trait TraitViewAllPrint
                 $zip->close();
                 // Delete the file after adding it to the zip
                 foreach ($fileTmp as $value) {
-                    if(file_exists($value))
+                    if (file_exists($value))
                         unlink($value);
                 }
                 return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
