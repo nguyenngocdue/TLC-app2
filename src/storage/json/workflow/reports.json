@@ -192,6 +192,14 @@
         "top_title": "Diginet Business Trip",
         "title": "Diginet Business Trip"
     },
+    "report-diginet_business_trip_sheet_010": {
+        "name": "report-diginet_business_trip_sheet_010",
+        "package_tab": "report",
+        "package": null,
+        "breadcrumb-group": null,
+        "top_title": "Diginet Business Trip Sheet",
+        "title": "Diginet Business Trip Sheet"
+    },
     "report-diginet_employee_hour_010": {
         "name": "report-diginet_employee_hour_010",
         "package_tab": "report",
@@ -208,6 +216,14 @@
         "top_title": "Diginet Employee Leave Line",
         "title": "Diginet Employee Leave Line"
     },
+    "report-diginet_employee_leave_sheet_010": {
+        "name": "report-diginet_employee_leave_sheet_010",
+        "package_tab": "report",
+        "package": null,
+        "breadcrumb-group": null,
+        "top_title": "Diginet Employee Leave Sheet",
+        "title": "Diginet Employee Leave Sheet"
+    },
     "report-diginet_employee_overtime_line_010": {
         "name": "report-diginet_employee_overtime_line_010",
         "package_tab": "report",
@@ -215,6 +231,14 @@
         "breadcrumb-group": null,
         "top_title": "Diginet Employee Overtime Line",
         "title": "Diginet Employee Overtime Line"
+    },
+    "report-diginet_employee_overtime_sheet_010": {
+        "name": "report-diginet_employee_overtime_sheet_010",
+        "package_tab": "report",
+        "package": null,
+        "breadcrumb-group": null,
+        "top_title": "Diginet Employee Overtime Sheet",
+        "title": "Diginet Employee Overtime Sheet"
     },
     "report-eco_sheet_110": {
         "name": "report-eco_sheet_110",

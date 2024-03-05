@@ -54,6 +54,7 @@
                              @if($arrayRoutesEx)
                                 @php
                                     $routeExFromNames = App\Utils\Support\Diginet::getRouteFromNames($arrayRoutesEx);
+                                    
                                 @endphp
                                 <div class="text-center">
                                     <span class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
@@ -84,7 +85,7 @@
             </button>
         </div>
         
-        <div class="body p-4">
+        <div class="body p-4 ">
             <!-- Body content goes here -->
         </div>
 
@@ -143,9 +144,10 @@ function openPopupShowFiles(arrayRoutesEx, element){
 
     popupBody.html(''); // delete old content
     popupBody.append('<div class="font-semibold text-xl pb-4"><strong></strong> ' + carName + '</div>');
+
     Object.entries(arrayRoutesEx).forEach(([key, value]) => {
         popupBody.append(`
-        <a href="${value}" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+        <a href="${value}" target="__blank" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
             ${key} 
             <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
