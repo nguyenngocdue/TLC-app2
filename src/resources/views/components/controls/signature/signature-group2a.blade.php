@@ -59,6 +59,7 @@
                         value="{{$value}}"
                         signatureId="{{$signatureId}}"
                         isExternalInspector="{{$isExternalInspector}}"
+                        isProjectClient="{{$isProjectClient}}"
                         signatureUserId="{{$signatureUserId}}"
                         readOnly="{{$readOnly}}"
                         tableName="{{$tableName}}"
@@ -74,7 +75,7 @@
         </div>
         @endforeach
         
-        @if(!$isExternalInspector && !$readOnly)
+        @if(!$isExternalInspector && !$isProjectClient && !$readOnly)
             <x-controls.signature.signature-group2a-request-recall-many
                 :needToRequest="$needToRequest"
                 :nominatedList="$nominatedList"
