@@ -62,9 +62,7 @@ class ViewAllController extends Controller
 
     public function index(Request $request, $trashed = false)
     {
-        if (CurrentUser::get()->isExternalInspector()) {
-            //return "<x-feedback.result type='warning' title='Permission Denied' message='You are not permitted to view this check sheet.<br/>If you believe this is a mistake, please contact our admin.' />";
-            //show User does not have the right permissions #789
+        if (CurrentUser::get()->isExternalInspector() || CurrentUser::get()->isProjectClient()) {
             return abort(403);
         }
         if ($viewType = $request->input('view_type')) {

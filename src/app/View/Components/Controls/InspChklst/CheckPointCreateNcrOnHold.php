@@ -32,8 +32,6 @@ class CheckPointCreateNcrOnHold extends Component
      */
     public function render()
     {
-        $isExternalInspector = CurrentUser::get()->isExternalInspector();
-
         $type = $this->line->getTable();
         switch ($type) {
             case 'qaqc_insp_chklst_lines':
@@ -45,6 +43,9 @@ class CheckPointCreateNcrOnHold extends Component
             default:
                 break;
         }
+
+        $isExternalInspector = CurrentUser::get()->isExternalInspector();
+        $isProjectClient = CurrentUser::get()->isProjectClient();
         return view('components.controls.insp-chklst.check-point-create-ncr-on-hold', [
             'line' => $this->line,
             'href' => $href,
@@ -56,6 +57,7 @@ class CheckPointCreateNcrOnHold extends Component
             'syntax' => $syntax,
             'readOnly' => $this->readOnly,
             'isExternalInspector' => $isExternalInspector,
+            'isProjectClient' => $isProjectClient,
         ]);
     }
     private function getHrefCreateNCR()
