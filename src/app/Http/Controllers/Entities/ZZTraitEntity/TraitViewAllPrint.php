@@ -43,6 +43,7 @@ trait TraitViewAllPrint
             $modelPath = $this->typeModel;
             $topTitle =CurrentRoute::getTitleOf($this->type);
             $dataSource = $this->typeModel::all()->where('status','active');
+            if(!sizeof($dataSource) > 0) return;
             $zip = new ZipArchive;
             $zipFileName = $typePlural.'.zip';
             $fileTmp = [];
