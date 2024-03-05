@@ -13,10 +13,10 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
     protected $showLegend = false;
     protected $headerTop = 40;
 
-    protected $tableTopCenterControl =  "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-orange-300'></div>Not yet Requested</div>"
-        . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-blue-300'></div>Requested</div>"
-        . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-green-300'></div>Approved</div>"
-        . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-pink-300'></div>Rejected</div>";
+    protected $tableTopCenterControl =  "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-yellow-500'></div>Not yet Requested</div>"
+        . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-blue-500'></div>Requested</div>"
+        . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-lime-500'></div>Approved</div>"
+        . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-red-500'></div>Rejected</div>";
 
     protected $actionBtnList = [
         'exportSCV' => false,
@@ -47,7 +47,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
             $avatar = "<img class='w-10 h-10 rounded-full' src='$avatarSrc' />";
 
             $text = '';
-            $color = 'orange';
+            $color = 'yellow';
             if (isset($signaturesIndexed[$nominatedUser->id])) {
                 // $text = "requested";
                 $signature = $signaturesIndexed[$nominatedUser->id];
@@ -59,11 +59,11 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
             $onClick = "";
             switch ($text) {
                 case "approved":
-                    $color = "green";
+                    $color = "lime";
                     $tooltip = $name . " approved with comment: " . $signature->signature_comment;
                     break;
                 case "rejected":
-                    $color = "pink";
+                    $color = "red";
                     $tooltip = $name . " rejected with comment: " . $signature->signature_comment;
                     break;
                 case "requested":
@@ -75,7 +75,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
                     break;
             }
 
-            $bg = "bg-$color-300 text-$color-700 capitalize";
+            $bg = "bg-$color-500 text-$color-700 capitalize";
             $item = "";
             $item .= "<div id='divFace_{$nominatedUser->id}_{$sheetId}' onclick='$onClick' class='$bg flex w-12 items-center border1 rounded-full gap-1 p-1 mb-0.5 cursor-pointer' title='$tooltip'>";
             $item .= $avatar;
