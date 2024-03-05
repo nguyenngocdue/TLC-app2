@@ -59,7 +59,7 @@
         "name": "diginet-data",
         "group": "internal",
         "title": "Diginet Data",
-        "href": "\/diginet\/transfer-data-diginet",
+        "href": "\/diginet\/transfer-diginet-data",
         "icon_fa": "fa-solid fa-snowflake"
     },
     "serializeParser": {
