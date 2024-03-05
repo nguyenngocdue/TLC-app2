@@ -14,11 +14,11 @@ class SocialiteAuthController extends Controller
 
     public function redirectToGoogle()
     {
-        return Socialite::with('google')->stateless()->redirect()->getTargetUrl();
+        return Socialite::with('google_api')->stateless()->redirect()->getTargetUrl();
     }
     public function handleGoogleCallback()
     {
-        $user = Socialite::with('google')->stateless()->user();
+        $user = Socialite::with('google_api')->stateless()->user();
         $newUser = $this->_registerAndLoginUser($user);
         $token = $newUser->createToken('tlc_token')->plainTextToken;
         return response()->json([

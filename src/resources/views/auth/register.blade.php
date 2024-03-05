@@ -17,7 +17,7 @@
                         <label for="first_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Your First Name</label>
                         <input type="text" name="first_name" id="first_name" class="@error('first_name') is-invalid @enderror block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
                         @error('first_name')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="font-bold text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
@@ -27,7 +27,7 @@
                             Last Name</label>
                         <input type="text" name="last_name" id="last_name" class="@error('last_name') is-invalid @enderror block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
                         @error('last_name')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="font-bold text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
@@ -37,7 +37,7 @@
                             email</label>
                         <input type="email" name="email" id="email" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm" placeholder="name@company.com" value="{{ old('email') }}" required autocomplete="email" autofocus>
                         @error('email')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="font-bold text-red-600" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror

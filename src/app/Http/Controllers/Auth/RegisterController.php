@@ -75,6 +75,6 @@ class RegisterController extends Controller
             'settings' => [],
             'owner_id' => 1,
             'password' => Hash::make($data['password']),
-        ]);
+        ])->syncRoleSets('newcomer');
     }
 }
