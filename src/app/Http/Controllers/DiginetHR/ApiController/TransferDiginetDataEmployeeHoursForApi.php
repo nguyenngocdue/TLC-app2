@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\DiginetHR;
+namespace App\Http\Controllers\DiginetHR\ApiController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

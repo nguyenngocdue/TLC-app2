@@ -37,6 +37,7 @@ return new class extends Migration
             $table->float('width')->nullable();
             $table->float('height')->nullable();
             $table->float('weight')->nullable();
+            $table->string('plot_number')->nullable();
             $table->unsignedInteger('manufactured_year')->nullable();
 
             $table->text('insp_chklst_link')->nullable();

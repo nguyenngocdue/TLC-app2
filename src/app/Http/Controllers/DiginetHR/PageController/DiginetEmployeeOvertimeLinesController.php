@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\DiginetHR;
+namespace App\Http\Controllers\DiginetHR\PageController;
 
-use App\Http\Controllers\Controller;
-use App\Utils\Support\CurrentUser;
+use App\Http\Controllers\DiginetHR\ParentDiginetDataController;
 use Illuminate\Http\Request;
 
 class DiginetEmployeeOvertimeLinesController extends ParentDiginetDataController

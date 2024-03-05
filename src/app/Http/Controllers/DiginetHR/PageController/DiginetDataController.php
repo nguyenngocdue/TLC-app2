@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\DiginetHR;
+namespace App\Http\Controllers\DiginetHR\PageController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,9 +21,10 @@ class DiginetDataController extends Controller
                 "endpoint_name_diginet" => "all-tables",
                 "card_name" => "Update the Entire Database",
                 "card_description" => "This is a short description of the item.",
-                "card_save_button_route" => "all-tables.index",
+                "card_save_btn_route" => "all-tables.index",
+                "card_save_btn2_route" => "",
                 "model_name" => "",
-                "data_index" => "",
+                "data_index" => "0",
             ],
             "employee-hours" => [
                 "name" => "employee-hours",
@@ -31,7 +32,8 @@ class DiginetDataController extends Controller
                 "endpoint_name_diginet" => "employee-hours",
                 "card_name" => "Employee Hours",
                 "card_description" => "This is a short description of the item.",
-                "card_save_button_route" => "employee-hours.index",
+                "card_save_btn_route" => "employee-hours.index",
+                "card_save_btn2_route" => "employee-hours.index",
                 "model_name" => "Diginet_employee_hour",
                 "data_index" => 0,
             ],
@@ -41,7 +43,8 @@ class DiginetDataController extends Controller
                 "endpoint_name_diginet" => "employee-leave",
                 "card_name" => "Employee Leave",
                 "card_description" => "This is a short description of the item.",
-                "card_save_button_route" => "employee-leave-sheets.index",
+                "card_save_btn_route" => "employee-leave-sheets.index",
+                "card_save_btn2_route" => "",
                 "model_name" => "Diginet_employee_leave_sheet",
                 "data_index" => 0
             ],
@@ -51,7 +54,8 @@ class DiginetDataController extends Controller
                 "endpoint_name_diginet" => "employee-leave",
                 "card_name" => "Employee Leave Lines",
                 "card_description" => "This is a short description of the item.",
-                "card_save_button_route" => "employee-leave-lines.index",
+                "card_save_btn_route" => "employee-leave-lines.index",
+                "card_save_btn2_route" => "",
                 "model_name" => "Diginet_employee_leave_line",
                 "data_index" => 1
             ],
@@ -61,7 +65,8 @@ class DiginetDataController extends Controller
                 "endpoint_name_diginet" => "employee-overtime",
                 "card_name" => "Employee Overtime",
                 "card_description" => "This is a short description of the item.",
-                "card_save_button_route" => "employee-overtime-sheets.index",
+                "card_save_btn_route" => "employee-overtime-sheets.index",
+                "card_save_btn2_route" => "",
                 "model_name" => "Diginet_employee_overtime_sheet",
                 "data_index" => 0
             ],
@@ -71,7 +76,8 @@ class DiginetDataController extends Controller
                 "endpoint_name_diginet" => "employee-overtime",
                 "card_name" => "Employee Overtime Lines",
                 "card_description" => "This is a short description of the item.",
-                "card_save_button_route" => "employee-overtime-lines.index",
+                "card_save_btn_route" => "employee-overtime-lines.index",
+                "card_save_btn2_route" => "",
                 "model_name" => "Diginet_employee_overtime_line",
                 "data_index" => 1
             ],
@@ -81,7 +87,8 @@ class DiginetDataController extends Controller
                 "endpoint_name_diginet" => "business-trip",
                 "card_name" => "Business Trip",
                 "card_description" => "This is a short description of the item.",
-                "card_save_button_route" => "business-trip-sheets.index",
+                "card_save_btn_route" => "business-trip-sheets.index",
+                "card_save_btn2_route" => "",
                 "model_name" => "Diginet_business_trip_sheet",
                 "data_index" => 0
             ],
@@ -91,7 +98,8 @@ class DiginetDataController extends Controller
                 "endpoint_name_diginet" => "business-trip",
                 "card_name" => "Business Trip Line",
                 "card_description" => "This is a short description of the item.",
-                "card_save_button_route" => "business-trip-lines.index",
+                "card_save_btn_route" => "business-trip-lines.index",
+                "card_save_btn2_route" => "",
                 "model_name" => "Diginet_business_trip_line",
                 "data_index" => 1
             ],

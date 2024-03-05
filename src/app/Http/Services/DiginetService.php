@@ -21,7 +21,12 @@ class DiginetService
     function changeFields($item, $fieldsToMap, $conFieldName = 'date')
     {
         if (empty($item)) return [];
+        // dd($fieldsToMap, $item);
+
         $fieldsDiginet =  array_combine($fieldsToMap, array_keys($item));
+
+
+
         $array = [];
         foreach ($fieldsDiginet as $key => $field) {
             $val = $item[$field];
@@ -32,7 +37,7 @@ class DiginetService
         return $array;
     }
 
-    function createAndUpdateData($modelName, $params, $endpointName, $conFieldName = 'date', $index)
+    function createAndUpdateData($modelName, $params, $endpointName, $conFieldName = 'date', $index = 0)
     {
         $modelPath = 'App\Models\\' . $modelName;
 
@@ -41,15 +46,14 @@ class DiginetService
         $tableName = $modelIns->getTable();
         // get Diginet's datasource from api
         $data = APIDiginet::getDatasourceFromAPI($endpointName, $params)['data'];
-
         $data = count($data) <= 2 ? $data[$index] : $data;
-        $FromDate = substr($params['FromDate'], 0, 10);
-        $toDate = substr($params['ToDate'], 0, 10);
 
         $response = ['status' => 'error', 'message' => "No data found to import into [{$tableName}] table.", 'recordsDeleted' => 0, 'recordsAdded' => 0];
+        if (empty($data)) return $response;
 
         if ($data) {
-
+            $FromDate = substr($params['FromDate'], 0, 10);
+            $toDate = substr($params['ToDate'], 0, 10);
             DB::statement("ALTER TABLE $tableName AUTO_INCREMENT = 1;");
             $del = DB::table($tableName)
                 ->whereDate($conFieldName, '>=', $FromDate)
