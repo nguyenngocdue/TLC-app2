@@ -2,7 +2,7 @@
     @foreach($links as $value)
         @if (isset($value['href']))
         <div class="{{$classList}}">
-            <a class="text-lg text-blue-500 hover:text-gray-400" href="{{$value['href']}}">
+            <a class="text-lg text-blue-500 hover:text-gray-400" target="{{isset($value['target'])?$value['target']:''}}" href="{{$value['href']}}">
                 {!!$value['icon']!!}
                 <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
             </a>
