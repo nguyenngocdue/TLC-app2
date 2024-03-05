@@ -71,7 +71,7 @@ trait TraitViewAllPrint
                             $browsershot->scale(0.8);
                         })
                         ->format('a4')
-                        ->margins(0, 75, 175, 75, Unit::Pixel)
+                        ->margins(0, 75, 0, 75, Unit::Millimeter)
                         ->save($name);
                     $file = public_path($name);
                     $fileTmp[] = $file;

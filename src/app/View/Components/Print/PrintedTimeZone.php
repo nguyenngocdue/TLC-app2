@@ -31,14 +31,15 @@ class PrintedTimeZone extends Component
         $timeZoneCurrentUser = $currentUser->time_zone ?? 7;
         $timezone = $this->formatTimeZone($timeZoneCurrentUser);
         $timeNow = new DateTime('now', new DateTimeZone($timezone));
-        $timeNow = $timeNow->format('d-m-Y H:i');
-        return view('components.print.printed-time-zone',[
+        $timeNow = $timeNow->format('d/m/Y H:i');
+        return view('components.print.printed-time-zone', [
             'name' => $nameCurrentUser,
             'timezone' => $timezone,
             'timeNow' => $timeNow,
         ]);
     }
-    private function formatTimeZone($timezone){
+    private function formatTimeZone($timezone)
+    {
         return preg_replace('/(\d+)/', '+0$1:00', $timezone);
     }
 }
