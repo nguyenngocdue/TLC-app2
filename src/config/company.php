@@ -16,6 +16,6 @@ return [
     "qr_code_plate" => [
         'company_logo' => $logo,
         'company_name' => 'TLC MODULAR CONSTRUCTION LIMITED LIABILITY COMPANY',
-        'company_website' => 'https://www.tlcmodular.com',
+        'company_website' => 'www.tlcmodular.com',
     ],
 ];

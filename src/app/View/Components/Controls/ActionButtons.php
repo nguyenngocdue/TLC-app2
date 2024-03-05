@@ -32,6 +32,7 @@ class ActionButtons extends Component
     {
         if ($this->type == 'qaqc_insp_chklst_shts') {
             if (CurrentUser::get()->isExternalInspector()) return "";
+            if (CurrentUser::get()->isProjectClient()) return "";
         }
         return view('components.controls.action-buttons', [
             'buttonSave' => $this->buttonSave,

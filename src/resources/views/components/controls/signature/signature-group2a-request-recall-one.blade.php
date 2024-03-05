@@ -1,18 +1,21 @@
 @if($value =='' && $signatureId)            
     <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
-    @if(!$readOnly)
-        @if(!$isInNominatedList)
-            <x-renderer.button 
-                id="btnRecall_{{$signatureUserId}}"
-                type="warning"
-                onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$signatureUserId}}], [{{$signatureId}}])"
-                >
-                Recall this request
-            </x-renderer.button>
+    {{-- @dump($readOnly, $isInNominatedList) --}}
+    @if(!$isExternalInspector && !$isProjectClient)
+        @if(!$readOnly)
+            @if(!$isInNominatedList)
+                <x-renderer.button 
+                    id="btnRecall_{{$signatureUserId}}"
+                    type="warning"
+                    onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$signatureUserId}}], [{{$signatureId}}])"
+                    >
+                    Recall this request
+                </x-renderer.button>
+            @endif
         @endif
     @endif
 @else
-    @if($isExternalInspector)
+    @if($isExternalInspector || $isProjectClient)
         Request not yet sent
     @else
         <x-renderer.button 

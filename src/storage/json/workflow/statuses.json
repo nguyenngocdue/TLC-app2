@@ -165,7 +165,7 @@
         "title": "Not Applicable",
         "color": "gray",
         "color_index": "200",
-        "icon": "<i class=\"fa-duotone fa-forward\"><\/i>"
+        "icon": "<i class=\"fa-duotone fa-ban\"><\/i>"
     },
     "obsolete": {
         "name": "obsolete",
@@ -200,7 +200,7 @@
         "title": "Passed",
         "color": "cyan",
         "color_index": "200",
-        "icon": "<i class=\"fa-solid fa-circle-check\"><\/i>"
+        "icon": "<i class=\"fa-duotone fa-ban\"><\/i>"
     },
     "pending": {
         "name": "pending",

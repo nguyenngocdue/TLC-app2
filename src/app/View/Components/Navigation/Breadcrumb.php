@@ -127,6 +127,9 @@ class Breadcrumb extends Component
             case 'show':
                 // $this->links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
                 $this->links[] =  $printNow;
+                if (in_array($type, ['qaqc_insp_chklsts'])) {
+                    if (CurrentUser::get()->isProjectClient()) break;
+                }
                 $this->links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
             case 'print':
@@ -153,8 +156,10 @@ class Breadcrumb extends Component
         if ($type === 'esg_sheets') $type = 'esg_master_sheets';
         $currentRouteName = CurrentRoute::getName();
         // dump($currentRouteName);
-        $isExternalInspection = CurrentUser::get()->isExternalInspector();
-        if ($type === 'qaqc_insp_chklst_shts' && $isExternalInspection) return;
+        if (in_array($type, ['qaqc_insp_chklsts', 'qaqc_insp_chklst_shts'])) {
+            if (CurrentUser::get()->isExternalInspector()) return;
+            if (CurrentUser::get()->isProjectClient()) return;
+        }
         if (in_array($currentRouteName, ['me.index', 'profile.index'])) return;
         $this->links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
     }
@@ -203,40 +208,42 @@ class Breadcrumb extends Component
     {
         $this->links[] = ['href' => route($singular . '_prp.index'), 'title' => 'Workflows', 'icon' => '<i class="fa-duotone fa-sitemap"></i>'];
     }
-    private function showButtonPrintAll($type){
-        if($type === 'user_positions')
-            switch ($this->action) {
-                case 'index':
-                    $this->links[] = ['href' => route($type . '_prt.printAll'), 'title' => 'Print All', 'icon' => '<i class="fa-duotone fa-print"></i>'];
-                    break;
-                case 'printAll':
-                    $this->links[] = ['href' => null,'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
-                    break;
-                default:
-                    break;
-            }
+    private function showButtonPrintAll($type)
+    {
+        if ($type !== 'user_positions') return;
+        switch ($this->action) {
+            case 'index':
+                $this->links[] = ['href' => route($type . '_prt.printAll'), 'title' => 'Print All', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                break;
+            case 'printAll':
+                $this->links[] = ['href' => null, 'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                break;
+            default:
+                break;
+        }
     }
     public function render()
     {
         $singular = CurrentRoute::getTypeSingular();
         $type = CurrentRoute::getTypePlural();
         $isAdmin = CurrentUser::isAdmin();
+        $isHrManager = CurrentUser::isHrManager();
         if (in_array($singular, $this->blackList)) return "";
         if (str_starts_with($singular, "manage")) return "";
         if (in_array($singular, ['permission', 'role', 'role_set']))  return $this->getBreadcrumbOfPermission($singular, $type);
-        
+
         if ($isAdmin) $this->showButtonViewFirst($singular, $type);
         if ($isAdmin) $this->showButtonProperties($singular);
         $this->showButtonPrintOrEditOrQRApp($singular, $type);
         $this->showButtonViewAll($type);
-        if ($isAdmin) $this->showButtonPrintAll($type);
+        if ($isAdmin || $isHrManager) $this->showButtonPrintAll($type);
         $this->showButtonAddNew($type);
         $this->showButtonAddNewByCloning($type);
         $this->showButtonViewReport($type);
         $this->showButtonTutorialLink($type);
         if ($isAdmin) $this->showButtonViewTrash($type);
         if ($isAdmin) $this->showButtonWorkflow($singular);
-        
+
         $buttonClassList = 'h-14 px-2 py-1 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-1 my-2';
         return view('components.navigation.breadcrumb', [
             'links' => $this->links,
