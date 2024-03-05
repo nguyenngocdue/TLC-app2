@@ -65,7 +65,8 @@ class CurrentUser
     {
         return self::isRoleSet('admin') || self::isRoleSet('super-admin');
     }
-    public static function isHrManager(){
+    public static function isHrManager()
+    {
         return self::isRoleSet('hr_manager');
     }
 
@@ -149,6 +150,8 @@ class CurrentUser
                 return Constant::DASHBOARD_EXTERNAL_INSPECTOR;
             case static::get()->isApartmentOwner():
                 return Constant::DASHBOARD_APARTMENT_OWNER;
+            case static::get()->isNewcomer():
+                return Constant::DASHBOARD_NEWCOMER;
             default:
                 return "";
         }

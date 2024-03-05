@@ -38,6 +38,8 @@ class DashboardController extends Controller
                 return (new DashboardExternalInspectorController())->index($request);
             case "-project-client":
                 return (new DashboardProjectClientController())->index($request);
+            case "-newcomer":
+                return (new DashboardNewcomerController())->index($request);
             case "":
                 return view('dashboards.dashboard', []);
             default:
