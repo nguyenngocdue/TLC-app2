@@ -52,7 +52,7 @@
                             @foreach($companies as $value)
                             <option value="{{$value->id}}">{{$value->name}}</option>
                             @endforeach
-                            <option>None of above</option>
+                            {{-- <option>None of above</option> --}}
                         </select> 
                         @error('company')
                         <span class="font-bold text-red-600" role="alert">
