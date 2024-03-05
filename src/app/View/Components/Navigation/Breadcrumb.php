@@ -204,23 +204,24 @@ class Breadcrumb extends Component
         $this->links[] = ['href' => route($singular . '_prp.index'), 'title' => 'Workflows', 'icon' => '<i class="fa-duotone fa-sitemap"></i>'];
     }
     private function showButtonPrintAll($type){
-        if($type === 'user_positions')
-            switch ($this->action) {
-                case 'index':
-                    $this->links[] = ['href' => route($type . '_prt.printAll'), 'title' => 'Print All', 'icon' => '<i class="fa-duotone fa-print"></i>'];
-                    break;
-                case 'printAll':
-                    $this->links[] = ['href' => null,'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
-                    break;
-                default:
-                    break;
-            }
+        if($type !== 'user_positions') return;
+        switch ($this->action) {
+            case 'index':
+                $this->links[] = ['href' => route($type . '_prt.printAll'), 'title' => 'Print All', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                break;
+            case 'printAll':
+                $this->links[] = ['href' => null,'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
+                break;
+            default:
+                break;
+        }
     }
     public function render()
     {
         $singular = CurrentRoute::getTypeSingular();
         $type = CurrentRoute::getTypePlural();
         $isAdmin = CurrentUser::isAdmin();
+        $isHrManager = CurrentUser::isHrManager();
         if (in_array($singular, $this->blackList)) return "";
         if (str_starts_with($singular, "manage")) return "";
         if (in_array($singular, ['permission', 'role', 'role_set']))  return $this->getBreadcrumbOfPermission($singular, $type);
@@ -229,7 +230,7 @@ class Breadcrumb extends Component
         if ($isAdmin) $this->showButtonProperties($singular);
         $this->showButtonPrintOrEditOrQRApp($singular, $type);
         $this->showButtonViewAll($type);
-        if ($isAdmin) $this->showButtonPrintAll($type);
+        if ($isAdmin || $isHrManager) $this->showButtonPrintAll($type);
         $this->showButtonAddNew($type);
         $this->showButtonAddNewByCloning($type);
         $this->showButtonViewReport($type);

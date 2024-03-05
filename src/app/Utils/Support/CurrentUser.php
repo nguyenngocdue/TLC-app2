@@ -65,6 +65,9 @@ class CurrentUser
     {
         return self::isRoleSet('admin') || self::isRoleSet('super-admin');
     }
+    public static function isHrManager(){
+        return self::isRoleSet('hr_manager');
+    }
 
     public static function isRoleSet($roleSet)
     {
