@@ -7,6 +7,7 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Spatie\Browsershot\Browsershot;
 use Spatie\LaravelPdf\Enums\Unit;
 use \ZipArchive;
 use function Spatie\LaravelPdf\Support\pdf;
@@ -66,6 +67,9 @@ trait TraitViewAllPrint
                     ];
                     $name = $item->name . '.pdf';
                     pdf()->view('dashboards.pages.entity-show-props', $params)
+                        ->withBrowsershot(function (Browsershot $browsershot) {
+                            $browsershot->scale(0.8);
+                        })
                         ->format('a4')
                         ->margins(50, 75, 50, 75, Unit::Pixel)
                         ->save($name);
