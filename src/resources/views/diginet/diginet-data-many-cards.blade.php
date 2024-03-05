@@ -41,7 +41,6 @@
                                     <span class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
                                                     onclick='openPopupShowFiles({!! json_encode($routeViewFromNames) !!}, this)'
                                                     data-name="{{$items['card_name']}}"
-                                                    children-name="{{$items['children_control']}}"
                                                     top-title="Review Datasource"
                                                     >
                                     <i class="fa-solid fa-eye"></i> Review</span>
@@ -60,7 +59,6 @@
                                     <span class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
                                                     onclick='openPopupShowFiles({!! json_encode($routeExFromNames) !!}, this)'
                                                     data-name="{{$items['card_name']}}"
-                                                    children-name="{{$items['children_control']}}"
                                                     top-title="Export Datasource"
                                                     >
                                     <i class="fa-duotone fa-file-csv"></i> ExportCSV</span>
