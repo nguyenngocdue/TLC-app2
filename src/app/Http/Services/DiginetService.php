@@ -2,9 +2,10 @@
 
 namespace App\Http\Services;
 
-use App\Http\Controllers\DiginetHR\DiginetDataController;
+use App\Http\Controllers\DiginetHR\PageController\DiginetDataController;
 use App\Utils\Support\APIDiginet;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\StringCustomize;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Brian2694\Toastr\Facades\Toastr;
@@ -18,15 +19,11 @@ class DiginetService
         $formattedDateTime = date("Y-m-d H:i:s", $timestamp);
         return $formattedDateTime;
     }
+
     function changeFields($item, $fieldsToMap, $conFieldName = 'date')
     {
         if (empty($item)) return [];
-        // dd($fieldsToMap, $item);
-
         $fieldsDiginet =  array_combine($fieldsToMap, array_keys($item));
-
-
-
         $array = [];
         foreach ($fieldsDiginet as $key => $field) {
             $val = $item[$field];
@@ -37,18 +34,19 @@ class DiginetService
         return $array;
     }
 
-    function createAndUpdateData($modelName, $params, $endpointName, $conFieldName = 'date', $index = 0)
+    function createAndUpdateData($modelName, $params, $endpointName, $conFieldName = 'date', $index)
     {
         $modelPath = 'App\Models\\' . $modelName;
 
         $modelIns = new $modelPath;
         $fieldsToMap = array_slice($m = $modelIns->getFillable(), 1, count($m) - 3);
         $tableName = $modelIns->getTable();
-        // get Diginet's datasource from api
+
         $data = APIDiginet::getDatasourceFromAPI($endpointName, $params)['data'];
-        $data = count($data) <= 2 ? $data[$index] : $data;
 
         $response = ['status' => 'error', 'message' => "No data found to import into [{$tableName}] table.", 'recordsDeleted' => 0, 'recordsAdded' => 0];
+        if (empty($data)) return $response;
+        $data = count($data) <= 2 ? $data[$index] : $data;
         if (empty($data)) return $response;
 
         if ($data) {
@@ -62,7 +60,6 @@ class DiginetService
 
             $response['recordsDeleted'] = $del;
             $response['message'] = "{$del} rows were deleted from {$tableName} from $FromDate to $toDate";
-
 
             foreach ($data as &$item) $item = $this->changeFields($item, $fieldsToMap, $conFieldName);
             $recordCount = 0;
