@@ -67,7 +67,7 @@ trait TraitViewAllPrint
                     $name = $item->name . '.pdf';
                     pdf()->view('dashboards.pages.entity-show-props', $params)
                         ->format('a4')
-                        ->margins(0, 75, 0, 75, Unit::Pixel)
+                        ->margins(50, 75, 50, 75, Unit::Pixel)
                         ->save($name);
                     $file = public_path($name);
                     $fileTmp[] = $file;
