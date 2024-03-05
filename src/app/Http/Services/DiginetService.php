@@ -5,11 +5,7 @@ namespace App\Http\Services;
 use App\Http\Controllers\DiginetHR\PageController\DiginetDataController;
 use App\Utils\Support\APIDiginet;
 use App\Utils\Support\CurrentUser;
-use App\Utils\Support\StringCustomize;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Brian2694\Toastr\Facades\Toastr;
-use Exception;
 
 class DiginetService
 {
@@ -23,6 +19,7 @@ class DiginetService
     function changeFields($item, $fieldsToMap, $conFieldName = 'date')
     {
         if (empty($item)) return [];
+        // dd($item, $fieldsToMap);
         $fieldsDiginet =  array_combine($fieldsToMap, array_keys($item));
         $array = [];
         foreach ($fieldsDiginet as $key => $field) {
