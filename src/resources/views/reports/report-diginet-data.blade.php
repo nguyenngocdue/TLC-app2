@@ -1,7 +1,7 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 @section('topTitle', $topTitle)
 @section('title', $titleReport)
-@section('content')
+@section('content') --}}
 
 <div class="px-4">
     {{-- @include('components.reports.shared-parameter') --}}
@@ -33,4 +33,4 @@
                     topRightControl="{!!$tr!!}" 
                     />
 </div>
-@endsection
+{{-- @endsection --}}

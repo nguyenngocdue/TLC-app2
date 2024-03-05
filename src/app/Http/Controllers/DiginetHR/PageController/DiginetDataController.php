@@ -22,10 +22,11 @@ class DiginetDataController extends Controller
                 "card_name" => "Update the Entire Database",
                 "card_description" => "This is a short description of the item.",
                 "card_btn1_route" => "all-tables.index",
-                "card_btn2_route" => "",
-                "card_btn3_route" => "",
+                "card_btn2_route" => null,
+                "card_btn3_route" => null,
                 "model_name" => "",
                 "data_index" => 0,
+                "children_control" => "",
             ],
             "employee-hours" => [
                 "name" => "employee-hours",
@@ -34,10 +35,15 @@ class DiginetDataController extends Controller
                 "card_name" => "Employee Hours",
                 "card_description" => "This is a short description of the item.",
                 "card_btn1_route" => "employee-hours.index",
-                "card_btn2_route" => "report-diginet_employee_hour_010",
-                "card_btn3_route" => "report-diginet_employee_hour_010_ep.exportCSV",
+                "card_btn2_route" => [
+                    "employee-hours" => "report-diginet_employee_hour_010",
+                ],
+                "card_btn3_route" => [
+                    "employee-hours" => "report-diginet_employee_hour_010_ep.exportCSV"
+                ],
                 "model_name" => "Diginet_employee_hour",
                 "data_index" => 0,
+                "children_control" => "",
             ],
             "employee-leave-sheets" => [
                 "name" => "employee-leave-sheets",
@@ -46,10 +52,17 @@ class DiginetDataController extends Controller
                 "card_name" => "Employee Leave",
                 "card_description" => "This is a short description of the item.",
                 "card_btn1_route" => "employee-leave-sheets.index",
-                "card_btn2_route" => "report-diginet_employee_leave_line_010",
-                "card_btn3_route" => "report-diginet_employee_leave_sheet_010_ep.exportCSV",
+                "card_btn2_route" => [
+                    "employee-leave-sheets" => "report-diginet_employee_leave_sheet_010",
+                    "employee-leave-lines" => "report-diginet_employee_leave_line_010",
+                ],
+                "card_btn3_route" => [
+                    "employee-leave-sheets" => "report-diginet_employee_leave_sheet_010_ep.exportCSV",
+                    "employee-leave-lines" => "report-diginet_employee_leave_line_010_ep.exportCSV"
+                ],
                 "model_name" => "Diginet_employee_leave_sheet",
-                "data_index" => 0
+                "data_index" => 0,
+                "children_control" => "employee-leave-lines",
             ],
             "employee-leave-lines" => [
 
@@ -59,10 +72,11 @@ class DiginetDataController extends Controller
                 "card_name" => "Employee Leave Lines",
                 "card_description" => "This is a short description of the item.",
                 "card_btn1_route" => "employee-leave-lines.index",
-                "card_btn2_route" => "",
-                "card_btn3_route" => "report-diginet_employee_leave_line_010_ep.exportCSV",
+                "card_btn2_route" => null,
+                "card_btn3_route" => null,
                 "model_name" => "Diginet_employee_leave_line",
-                "data_index" => 1
+                "data_index" => 1,
+                "children_control" => "",
             ],
             "employee-overtime-sheets" => [
                 "name" => "employee-overtime-sheets",
@@ -71,10 +85,17 @@ class DiginetDataController extends Controller
                 "card_name" => "Employee Overtime",
                 "card_description" => "This is a short description of the item.",
                 "card_btn1_route" => "employee-overtime-sheets.index",
-                "card_btn2_route" => "report-diginet_employee_overtime_line_010",
-                "card_btn3_route" => "report-diginet_employee_overtime_line_010_ep.exportCSV",
+                "card_btn2_route" => [
+                    "employee-overtime-sheets" => "report-diginet_employee_overtime_sheet_010",
+                    "employee-overtime-lines" => "report-diginet_employee_overtime_line_010",
+                ],
+                "card_btn3_route" => [
+                    "employee-overtime-sheets" => "report-diginet_employee_overtime_sheet_010_ep.exportCSV",
+                    "employee-overtime-lines" => "report-diginet_employee_overtime_line_010_ep.exportCSV"
+                ],
                 "model_name" => "Diginet_employee_overtime_sheet",
-                "data_index" => 0
+                "data_index" => 0,
+                "children_control" => "employee-overtime-lines",
             ],
             "employee-overtime-lines" => [
                 "name" => "employee-overtime-lines",
@@ -83,10 +104,11 @@ class DiginetDataController extends Controller
                 "card_name" => "Employee Overtime Lines",
                 "card_description" => "This is a short description of the item.",
                 "card_btn1_route" => "employee-overtime-lines.index",
-                "card_btn2_route" => "",
-                "card_btn3_route" => "",
+                "card_btn2_route" => null,
+                "card_btn3_route" => null,
                 "model_name" => "Diginet_employee_overtime_line",
-                "data_index" => 1
+                "data_index" => 1,
+                "children_control" => "",
             ],
             "business-trip-sheets" => [
                 "name" => "business-trip-sheets",
@@ -95,10 +117,17 @@ class DiginetDataController extends Controller
                 "card_name" => "Business Trip",
                 "card_description" => "This is a short description of the item.",
                 "card_btn1_route" => "business-trip-sheets.index",
-                "card_btn2_route" => "report-diginet_business_trip_line_010",
-                "card_btn3_route" => "report-diginet_business_trip_line_010_ep.exportCSV",
+                "card_btn2_route" => [
+                    "business-trip-sheets" => "report-diginet_business_trip_sheet_010",
+                    "business-trip-lines" => "report-diginet_business_trip_line_010"
+                ],
+                "card_btn3_route" => [
+                    "business-trip-sheets" => "report-diginet_business_trip_sheet_010_ep.exportCSV",
+                    "business-trip-lines" => "report-diginet_business_trip_line_010_ep.exportCSV"
+                ],
                 "model_name" => "Diginet_business_trip_sheet",
-                "data_index" => 0
+                "data_index" => 0,
+                "children_control" => "business-trip-lines",
             ],
             "business-trip-lines" => [
                 "name" => "business-trip-lines",
@@ -107,10 +136,11 @@ class DiginetDataController extends Controller
                 "card_name" => "Business Trip Line",
                 "card_description" => "This is a short description of the item.",
                 "card_btn1_route" => "business-trip-lines.index",
-                "card_btn2_route" => "",
-                "card_btn3_route" => "",
+                "card_btn2_route" => null,
+                "card_btn3_route" => null,
                 "model_name" => "Diginet_business_trip_line",
-                "data_index" => 1
+                "data_index" => 1,
+                "children_control" => "",
             ],
         ];
     }
@@ -119,6 +149,7 @@ class DiginetDataController extends Controller
     {
         $middleRoute = "/diginet/transfer-data-diginet";
         $dataRender = $this->getDataRender();
+
         return view('diginet.diginet-data-many-cards', [
             "middleRoute" => $middleRoute,
             "dataRender" => $dataRender,

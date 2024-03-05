@@ -2,6 +2,7 @@
 
 namespace App\Utils\Support;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class Diginet
@@ -39,5 +40,16 @@ class Diginet
         }
         // dd($result1);
         return $result1;
+    }
+
+    public static function getRouteFromNames($names)
+    {
+        $routes = [];
+        foreach ($names as $key => $value) {
+            if (Route::has($value)) {
+                $routes[$key] = route($value);
+            }
+        }
+        return $routes;
     }
 }
