@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\DiginetHR\TransferDiginetDataBusinessTripsForApi;
-use App\Http\Controllers\DiginetHR\TransferDiginetDataEmployeeHoursForApi;
-use App\Http\Controllers\DiginetHR\TransferDiginetDataEmployeeLeavesForApi;
-use App\Http\Controllers\DiginetHR\TransferDiginetDataEmployeeOvertimesForApi;
+use App\Http\Controllers\DiginetHR\ApiController\TransferDiginetDataBusinessTripsForApi;
+use App\Http\Controllers\DiginetHR\ApiController\TransferDiginetDataEmployeeHoursForApi;
+use App\Http\Controllers\DiginetHR\ApiController\TransferDiginetDataEmployeeLeavesForApi;
+use App\Http\Controllers\DiginetHR\ApiController\TransferDiginetDataEmployeeOvertimesForApi;
 use Illuminate\Support\Facades\Route;
 
 Route::group([

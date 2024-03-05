@@ -1,11 +1,11 @@
 <?php
-
+$logo = 'https://app2.tlcmodular.com/logo/tlc.png';
 return [
     "name" => "TLC Modular Construction LLC",
     "short_name" => "TLC",
     "domain" => "tlcmodular.com",
     "letter_head" => [
-        'company_logo' => '/logo/tlc.png',
+        'company_logo' => $logo,
         'company_name' => 'TLC MODULAR CONSTRUCTION LIMITED LIABILITY COMPANY',
         'company_address' => '326 Vo Van Kiet Street, Co Giang Ward, District 1, HCMC, Vietnam',
         'company_telephone' => '+84 (0) 28 7306 7779 / +84 (0) 28 7301 8588',
@@ -14,7 +14,7 @@ return [
         'company_website' => 'https://www.tlcmodular.com',
     ],
     "qr_code_plate" => [
-        'company_logo' => '/logo/tlc.png',
+        'company_logo' => $logo,
         'company_name' => 'TLC MODULAR CONSTRUCTION LIMITED LIABILITY COMPANY',
         'company_website' => 'www.tlcmodular.com',
     ],

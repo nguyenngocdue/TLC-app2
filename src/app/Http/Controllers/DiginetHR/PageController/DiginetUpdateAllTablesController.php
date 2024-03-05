@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\DiginetHR;
+namespace App\Http\Controllers\DiginetHR\PageController;
 
 use App\Http\Controllers\Controller;
 use App\Utils\Support\CurrentUser;

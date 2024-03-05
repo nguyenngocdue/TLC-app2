@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\DiginetHR;
+namespace App\Http\Controllers\DiginetHR\PageController;
 
-use App\Http\Controllers\Controller;
-use App\Utils\Support\CurrentUser;
+use App\Http\Controllers\DiginetHR\ParentDiginetDataController;
 use Illuminate\Http\Request;
 
 class DiginetBusinessTripLinesController extends ParentDiginetDataController
 {
     public function index(Request $request)
     {
-        $this->token = CurrentUser::getTokenForApi();
         $this->endpointNameDiginet = "business-trip";
         $this->title = 'Business Trip Lines';
         return parent::index($request);
