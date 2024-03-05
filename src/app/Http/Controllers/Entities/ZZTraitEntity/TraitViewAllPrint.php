@@ -34,7 +34,7 @@ trait TraitViewAllPrint
         return view('dashboards.pages.entity-show-template-print', $params);
     }
     public function printAll(Request $request){
-        if(CurrentUser::isAdmin()){
+        if(CurrentUser::isAdmin() || CurrentUser::isHrManager()){
             $valueOptionPrint = $this->getValueOptionPrint();
             $layout = $this->getLayoutPrint($valueOptionPrint, 'props');
             $class = ClassList::DROPDOWN;
