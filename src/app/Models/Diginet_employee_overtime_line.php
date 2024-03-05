@@ -11,8 +11,6 @@ class Diginet_employee_overtime_line extends ModelExtended
         "ot_date", "la_type",
         "ot_hours", "ot_projects", "ot_reason", "approver_id", "approver_name", "order_no", "owner_id",
     ];
-    protected $table = "diginet_employee_overtime_lines";
-
 
     public function getFillable()
     {

@@ -139,7 +139,7 @@ class DiginetDataController extends Controller
 
     public function index(Request $request)
     {
-        $middleRoute = "/diginet/transfer-data-diginet";
+        $middleRoute = $request->getPathInfo();
         $dataRender = $this->getDataRender();
 
         return view('diginet.diginet-data-many-cards', [
