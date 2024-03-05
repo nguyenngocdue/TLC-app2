@@ -9,7 +9,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklstSht;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklst;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProject;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProps;
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRApp;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRLandingPage;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStoreUpdate2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Workflow\LibApps;
@@ -21,7 +21,7 @@ class EntityCRUDController extends Controller
 {
 	use TraitEntityCRUDShowProps;
 	use TraitEntityCRUDShowProject;
-	use TraitEntityCRUDShowQRApp;
+	use TraitEntityCRUDShowQRLandingPage;
 	use TraitEntityCRUDShowChklst;
 	use TraitEntityCRUDShowChklstSht;
 
