@@ -1,5 +1,5 @@
-<div class="flex justify-center ">
-{{-- <div> --}}
+{{-- <div class="flex justify-center "> --}}
+<div>
     <script>
         k = @json($listenerDataSource);
         ki = makeKi(k);
@@ -10,10 +10,10 @@
         listenersOfDropdown4s = @json($listeners4);
         filtersOfDropdown4s = @json($filters4);
         </script>   
-    {{-- <div class="flex justify-center"> --}}
-        {{-- <div class="items-center bor1der bg-white box-border p-8 mx-5" style="{{$layout}}">  --}}
-    <div class="flex-grow flex-shrink-0 w-full overflow-x-auto">
-        <div class="items-center bor1der bg-white box-border p-8 mb-4 mx-auto" style="{{$layout}}">
+    <div class="flex justify-center">
+        <div class="items-center bor1der bg-white box-border p-8 mx-5" style="{{$layout}}"> 
+    {{-- <div class="flex-grow flex-shrink-0 w-full overflow-x-auto"> --}}
+        {{-- <div class="items-center bor1der bg-white box-border p-8 mb-4 mx-auto" style="{{$layout}}"> --}}
             <x-print.letter-head5 showId={{$showId}} type={{$type}} :dataSource="$dataSource" />
             <x-renderer.heading level=3 xalign='center'>{{$topTitle}}</x-renderer.heading>
             @foreach($propsTree as $propTree)
