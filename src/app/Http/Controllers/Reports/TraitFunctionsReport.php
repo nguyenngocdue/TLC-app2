@@ -23,7 +23,7 @@ trait TraitFunctionsReport
 
             if (!isset($item['title'])) return Report::makeTitle($item['dataIndex']);
             if (str_contains($item['title'], '/>')) {
-                $str = trim(substr($item['title'],0, strpos($item['title'], '<', 0)));
+                $str = trim(substr($item['title'], 0, strpos($item['title'], '<', 0)));
                 return $str;
             }
             return $item['title'];
@@ -53,9 +53,9 @@ trait TraitFunctionsReport
         $columnKeys = array_column($columns, 'dataIndex');
         $columnNames =  array_map(function ($item) {
             $thirdUnderlined = PivotReport::findPosition($item['dataIndex'], '_', 3);
-            $str = substr($item['dataIndex'], 0, $thirdUnderlined-1);
-            if(self::isCorrectDateFormat($str)) {
-                return str_replace('_', '/',$str);
+            $str = substr($item['dataIndex'], 0, $thirdUnderlined - 1);
+            if (self::isCorrectDateFormat($str)) {
+                return str_replace('_', '/', $str);
             } else {
                 if (!isset($item['title'])) return Report::makeTitle($item['dataIndex']);
                 return $item['title'];
