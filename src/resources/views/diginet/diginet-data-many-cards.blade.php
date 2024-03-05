@@ -54,6 +54,7 @@
                              @if($arrayRoutesEx)
                                 @php
                                     $routeExFromNames = App\Utils\Support\Diginet::getRouteFromNames($arrayRoutesEx);
+                                    
                                 @endphp
                                 <div class="text-center">
                                     <span class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
@@ -143,6 +144,7 @@ function openPopupShowFiles(arrayRoutesEx, element){
 
     popupBody.html(''); // delete old content
     popupBody.append('<div class="font-semibold text-xl pb-4"><strong></strong> ' + carName + '</div>');
+
     Object.entries(arrayRoutesEx).forEach(([key, value]) => {
         popupBody.append(`
         <a href="${value}" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">

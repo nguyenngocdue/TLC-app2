@@ -321,6 +321,7 @@ abstract class Report_Parent2Controller extends Controller
         $params = $this->getParams($request, '_ep');
 
         $linesData = $this->getDataSource($params);
+        if (empty($linesData->toArray())) return "No data to export";
         $modeType = $this->modeType;
         // Pivot data before render 
         if ($modeType) {
