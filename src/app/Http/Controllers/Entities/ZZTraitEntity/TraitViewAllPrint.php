@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Utils\ClassList;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\LaravelPdf\Enums\Unit;
@@ -44,12 +43,9 @@ trait TraitViewAllPrint
             $type = $this->type;
             $typePlural = Str::plural($this->type);
             $modelPath = $this->typeModel;
-            $topTitle =CurrentRoute::getTitleOf($this->type);
-            $dataSource = $this->typeModel::all()->where('status','active');
-            if(!sizeof($dataSource) > 0) {
-                Toastr::warning("The print file is empty, please check the status of the files","Export File Zip");
-                return;
-            }
+            $topTitle = CurrentRoute::getTitleOf($this->type);
+            $dataSource = $this->typeModel::all()->where('status', 'active');
+            if (!sizeof($dataSource) > 0) return;
             $zip = new ZipArchive;
             $zipFileName = $typePlural . '.zip';
             $fileTmp = [];
@@ -71,7 +67,7 @@ trait TraitViewAllPrint
                     $name = $item->name . '.pdf';
                     pdf()->view('dashboards.pages.entity-show-props', $params)
                         ->format('a4')
-                        ->margins(0, 50, 0, 50, Unit::Pixel)
+                        ->margins(0, 75, 0, 75, Unit::Pixel)
                         ->save($name);
                     $file = public_path($name);
                     $fileTmp[] = $file;
@@ -85,8 +81,7 @@ trait TraitViewAllPrint
                 }
                 return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
             } else {
-                Toastr::warning("Failed to create the zip file.","Export File Zip");
-                return;
+                return "Failed to create the zip file.";
             }
         }
     }
