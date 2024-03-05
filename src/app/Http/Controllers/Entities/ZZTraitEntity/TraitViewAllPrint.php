@@ -33,7 +33,7 @@ trait TraitViewAllPrint
         ];
         return view('dashboards.pages.entity-show-template-print', $params);
     }
-    public function showAll(Request $request){
+    public function printAll(Request $request){
         if(CurrentUser::isAdmin()){
             $valueOptionPrint = $this->getValueOptionPrint();
             $layout = $this->getLayoutPrint($valueOptionPrint, 'props');
@@ -48,12 +48,11 @@ trait TraitViewAllPrint
             $fileTmp = [];
             if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === TRUE) {
                 foreach ($dataSource as $item) {
-                    $id = $item->id;
                     $params =  [
                         'type' => $type,
                         'typePlural' => $typePlural,
                         'item' => $item,
-                        'id' => $id,
+                        'id' => $item->id,
                         'classListOptionPrint' => $class,
                         'valueOptionPrint' => $valueOptionPrint,
                         'layout' => $layout,
@@ -70,10 +69,8 @@ trait TraitViewAllPrint
                     $file = public_path($name);
                     $fileTmp[] = $file;
                     $zip->addFile($file, basename($file));
-
                 }
                 $zip->close();
-
                 // Delete the file after adding it to the zip
                 foreach ($fileTmp as $value) {
                     if(file_exists($value))
