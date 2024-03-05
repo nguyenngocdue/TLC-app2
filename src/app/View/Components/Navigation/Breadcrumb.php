@@ -127,6 +127,9 @@ class Breadcrumb extends Component
             case 'show':
                 // $this->links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
                 $this->links[] =  $printNow;
+                if (in_array($type, ['qaqc_insp_chklsts'])) {
+                    if (CurrentUser::get()->isProjectClient()) break;
+                }
                 $this->links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
             case 'print':
@@ -153,7 +156,7 @@ class Breadcrumb extends Component
         if ($type === 'esg_sheets') $type = 'esg_master_sheets';
         $currentRouteName = CurrentRoute::getName();
         // dump($currentRouteName);
-        if ($type === 'qaqc_insp_chklst_shts') {
+        if (in_array($type, ['qaqc_insp_chklsts', 'qaqc_insp_chklst_shts'])) {
             if (CurrentUser::get()->isExternalInspector()) return;
             if (CurrentUser::get()->isProjectClient()) return;
         }

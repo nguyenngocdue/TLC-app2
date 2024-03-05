@@ -62,6 +62,29 @@ class QaqcInspChklstShts extends MatrixForReportParent
         return $result;
     }
 
+    function getLeftColumns($xAxis, $yAxis, $dataSource)
+    {
+        $result = parent::getLeftColumns($xAxis, $yAxis, $dataSource);
+
+        $columns = [];
+        if (CurrentUser::get()->isProjectClient()) $columns[] = ['dataIndex' => 'print', 'fixed' => 'left',];
+
+        return [...$result, ...$columns];
+    }
+
+    function attachMeta($xAxis, $yAxis, $dataSource)
+    {
+        $result = parent::attachMeta($xAxis, $yAxis, $dataSource);
+        foreach ($yAxis as $y) {
+            $result[$y->id]['print'] = (object)[
+                'value' => "<i class='fa-duotone fa-print'></i>",
+                'cell_href' => route("qaqc_insp_chklsts.show", $y->id),
+                'cell_class' => "whitespace-nowrap text-center text-blue-500",
+            ];
+        }
+        return $result;
+    }
+
     function _getDataSource($xAxis, $yAxis)
     {
         $db = Qaqc_insp_chklst_sht::query()
