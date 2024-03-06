@@ -12,36 +12,37 @@ trait TraitEntityCRUDShowQRLandingPage
 	public function showQRApp($slug, $trashed)
 	{
 		$modelCurrent = new ($this->modelPath);
-		$model = $trashed ? $modelCurrent::withTrashed()->where('slug', $slug)->first() : $modelCurrent::where('slug', $slug)->first();
-		if (!$model) {
+		$item = $trashed ? $modelCurrent::withTrashed()->where('slug', $slug)->first() : $modelCurrent::where('slug', $slug)->first();
+		if (!$item) {
 			throw new NotFoundHttpException();
 		}
 		$props = SuperProps::getFor($this->type)['props'];
-		$config  = $this->getConfigRenderSource($model);
-		$dataRender = $this->getDataRenderLinkDocs($config, $model);
+		$config  = $this->getConfigRenderSource($item);
+		$dataRender = $this->getDataRenderLinkDocs($config, $item);
 		$linkDocs = [];
 		foreach ($dataRender as $value) {
 			$href = route($value->getTable() . '.show', $value->id) ?? "";
 			if ($href)
 				$linkDocs[] = $href;
 		}
+		// dump($item);
 		return view('dashboards.pages.entity-show-landing-page', [
 			'props' => $props,
-			'moduleName' => $model->name,
+			'moduleName' => $item->name,
 			'dataSource' => $linkDocs,
 			'type' => $this->type,
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
 		]);
 	}
-	public function getConfigRenderSource($model)
+	public function getConfigRenderSource($item)
 	{
-		return $model->getSubProject?->getProject?->qr_app_source;
+		return $item->getSubProject?->getProject?->qr_app_source;
 	}
-	public function getDataRenderLinkDocs($config, $model)
+	public function getDataRenderLinkDocs($config, $item)
 	{
 		switch ($config) {
 			case 529: // QR_APP_SOURCE => mode render app
-				$unitId = $model->pj_unit_id;
+				$unitId = $item->pj_unit_id;
 				$prodOrder = Prod_order::where('meta_type', 'App\\Models\\Pj_unit')->where('meta_id', $unitId)->first();
 				$inspChecklists = $prodOrder->getQaqcInspChklsts->whereIn('qaqc_insp_tmpl_id', [1007, 3]) ?? [];
 				return $inspChecklists;
