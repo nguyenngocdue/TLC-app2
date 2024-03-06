@@ -178,10 +178,13 @@ function openPopupShowFiles(arrayRoutes, element){
     });
 
 
-    if (typeCick === 'delete') {
-        $(document).off('click', '.post-link').on('click', '.post-link', function(e) {
-                const isConfirmed = window.confirm("Are you sure you want to delete?");
-                if (isConfirmed) {
+    if (typeCick === 'delete' && !window.postLinkEventAdded) {
+        console.log(window.postLinkEventAdded );
+        $(document).on('click.postLink', '.post-link', function(e) {
+            window.postLinkEventAdded = true; 
+            const isConfirmed = window.confirm("Are you sure you want to delete?");
+            if (isConfirmed) {
+                    console.log(isConfirmed);
                     e.preventDefault();
                     const url = $(this).data('url'); 
                     const entity = $(this).data('entity');
@@ -223,8 +226,9 @@ function openPopupShowFiles(arrayRoutes, element){
                         }
                     });
                 }
-            });
+        });
     }
+
 }
 </script>
 @endsection
