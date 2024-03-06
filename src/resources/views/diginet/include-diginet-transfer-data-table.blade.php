@@ -66,18 +66,16 @@ $(document).ready(function() {
         const month = $(this).data('month');
         const { firstDay, lastDay } = getFirstAndLastDayOfMonth(year, month);
         const urlAPI = '{{$endpointNameDiginet}}' === 'all-tables' ?
-                        `` :
+                        `/v1/transfer-data-diginet/update-all-tables` :
                         `/v1/transfer-data-diginet/`+ '{{$endpointNameDiginet}}';
-        const method = '{{$endpointNameDiginet}}' === 'all-tables' ? 'GET' : 'POST';
+        const method = '{{$endpointNameDiginet}}' === 'all-tables' ? 'POST' : 'POST';
 
-        console.log(firstDay, lastDay, urlAPI);
-        
         let processingToast = toastr.info('Processing your request...', {
                     timeOut: 0, // Prevents the toastr from auto-hiding
                     extendedTimeOut: 0, // Prevents the toastr from auto-hiding when hovered
                     closeButton: true, // Allows the user to close the notification if desired
                     progressBar: true, // Displays a progress bar (though it won't advance automatically)
-                    tapToDismiss: false
+                    tapToDismiss: true, // Allows the user to dismiss the notification
                 });
 
         $.ajax({
@@ -96,20 +94,27 @@ $(document).ready(function() {
                 "WorkplaceCode": "HO,TF1,TF2,TF3,NZ,WS"
             }),
             success: function(response) {
-                console.log(response);
-                response.map((item) => {
-                    if(item.status === 'success') {
-                        toastr.clear(processingToast);
-                        toastr.success(item.message);
-                    } else {
-                        toastr.clear(processingToast);
-                        toastr.error(item.message);
-                    }
+                if(Array.isArray(response)) {
+                    response.map((item) => {
+                        responseOnItems = item.result.original;
+                        if(Array.isArray(responseOnItems)){
+                            responseOnItems.map((item) =>{
+                                toastr.clear(processingToast);
+                                if(item.status === 'success') {
+                                    toastr.success(item.message);
+                                } else {
+                                    toastr.error(item.message);
+                                }
+                            })
 
-                })
+                        }
+
+                    })
+                }
             },
             error: function(xhr, status, error) {
                 toastr.clear(processingToast);
+                console.log(xhr, status, error)
                 toastr.error('An error occurred: ' + error);
             }
         });

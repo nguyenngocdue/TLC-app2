@@ -122,7 +122,7 @@ function openPopup(element) {
     document.getElementById('top-title').innerHTML = element.getAttribute('top-title');
     document.getElementById('popup-container').classList.remove('hidden');
     
-    var url = element.getAttribute('data-url'); // get URL from data-url attribute
+    var _url = element.getAttribute('data-url'); // get URL from data-url attribute
     var carName = element.getAttribute('data-name');
     var popupBody = $('#popup-container .body');
 
@@ -130,14 +130,14 @@ function openPopup(element) {
     popupBody.append('<div class="font-semibold text-xl pb-4"><strong></strong> ' + carName + '</div>');
 
     $.ajax({
-        url: url,
+        url: _url,
         type: 'GET',
         success: function(response) {
             var content = $('<div>').html(response);
             popupBody.append(content);
         },
         error: function(xhr, status, error) {
-            console.error("An error occurred: " + status + " " + error);
+            console.error('Error sending GET request', xhr, status, error);
         }
     });
 }
@@ -190,7 +190,7 @@ function openPopupShowFiles(arrayRoutes, element){
                         extendedTimeOut: 0,
                         closeButton: true,
                         progressBar: true,
-                        tapToDismiss: false
+                        tapToDismiss: true
                     });
 
                     $.ajax({
@@ -202,8 +202,13 @@ function openPopupShowFiles(arrayRoutes, element){
                         contentType: 'application/json',
                         data: JSON.stringify({ "entity": entity }),
                         success: function(response, message) {
-                            toastr.clear(processingToast);
-                            toastr.success(response);
+                            if (message === "success"){
+                                toastr.clear(processingToast);
+                                toastr.success(response);
+                            }else{
+                                toastr.clear(processingToast);
+                                toastr.error(response);
+                            }
                         },
                         error: function(xhr, status, error) {
                             console.error('Error sending POST request', xhr, status, error);
