@@ -12,10 +12,10 @@ class ConqaArchiveController extends Controller
         return "dashboard";
     }
 
-    public function index($name, $uuid)
+    public function index($type, $name, $uuid)
     {
         return view("conqa.conqa", [
-            'item' => (object) ['name' => $name, 'uuid' => $uuid]
+            'item' => (object) ['type' => $type, 'name' => $name, 'uuid' => $uuid]
         ]);
     }
 }

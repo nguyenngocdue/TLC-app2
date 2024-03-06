@@ -47,10 +47,10 @@
                         if(node.type == 'checklist'){
                             $("#checklist_1").html("<div class='w-full m-4 p-4 text-blue-600'>Loading Checklist...</div>")
                             loadChecklistRenderer(folderUuid)
-                            $("#folderUuid").html("")
+                            $("#folderUuid").html("checklist/{{$projName}}/" + node.id )
                         }else {
                             $("#checklist_1").html("")
-                            $("#folderUuid").html("{{$projName}}/" + folderUuid)
+                            $("#folderUuid").html("folder/{{$projName}}/" + folderUuid)
                         }
                     }
                 }

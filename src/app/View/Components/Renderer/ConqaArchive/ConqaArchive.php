@@ -2,11 +2,14 @@
 
 namespace App\View\Components\Renderer\ConqaArchive;
 
+use App\Http\Controllers\Api\v1\qaqc\ConqaArchiveRendererController;
 use Illuminate\View\Component;
+use Illuminate\Http\Request;
 
 class ConqaArchive extends Component
 {
     private $folderName;
+    private $type;
     private $projName;
     private $folderUuid;
 
@@ -16,6 +19,7 @@ class ConqaArchive extends Component
     ) {
         $this->projName = $item->name;
         $this->folderUuid = $item->uuid;
+        $this->type = $item->type ?? "folder";
     }
 
     public function loadTree(string $path, string $folderUuid, string $parent): array
@@ -56,7 +60,7 @@ class ConqaArchive extends Component
         return $tree;
     }
 
-    function render()
+    function renderFolder()
     {
         if ($this->loadFromStorage) {
             $path = storage_path("app/conqa_archive/database/{$this->projName}/");
@@ -73,5 +77,22 @@ class ConqaArchive extends Component
                 "folderName" => $this->folderName,
             ]
         );
+    }
+
+    function renderChecklist()
+    {
+        $request = new Request();
+        $request->merge([
+            'folderUuid' => $this->folderUuid,
+            'projName' => $this->projName,
+        ]);
+        $x = (new ConqaArchiveRendererController())->render($request);
+        return $x;
+    }
+
+    function render()
+    {
+        if ($this->type == "folder") return $this->renderFolder();
+        if ($this->type == 'checklist') return $this->renderChecklist();
     }
 }
