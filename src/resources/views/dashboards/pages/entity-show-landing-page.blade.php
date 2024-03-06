@@ -19,7 +19,7 @@
                     @foreach($dataSource as $index => $group)
                     <x-renderer.card title="{{$index}}">
                         @foreach($group as $value)
-                            <x-print.hyper-link5 label="Inspection Checklists" href="{{$value}}" />
+                            <x-print.hyper-link5 label="{{$value['name']}}" href="{{$value['href']}}" />
                         @endforeach
                     </x-renderer.card>
                     @endforeach

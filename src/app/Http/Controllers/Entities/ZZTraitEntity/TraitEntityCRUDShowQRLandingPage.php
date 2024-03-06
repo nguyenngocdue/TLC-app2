@@ -17,7 +17,6 @@ trait TraitEntityCRUDShowQRLandingPage
 			throw new NotFoundHttpException();
 		}
 		$props = SuperProps::getFor($this->type)['props'];
-		
 		return view('dashboards.pages.entity-show-landing-page', [
 			'props' => $props,
 			'moduleName' => $item->name,
@@ -32,8 +31,12 @@ trait TraitEntityCRUDShowQRLandingPage
 		$linkDocs = [];
 		foreach ($dataRender as $value) {
 			$href = route($value->getTable() . '.show', $value->id) ?? "";
+			$name = $value->getQaqcInspTmpl->name ?? "";
 			if ($href)
-				$linkDocs[] = $href;
+				$linkDocs[] = [
+					'href' => $href,
+                    'name' => $name,
+				];
 		}
 		return $linkDocs;
 	}
@@ -55,7 +58,7 @@ trait TraitEntityCRUDShowQRLandingPage
 		switch ($config) {
 			case 529: // QR_APP_SOURCE => mode render app
 				$unitId = $item->pj_unit_id;
-				$prodOrder = Prod_order::where('meta_type', 'App\\Models\\Pj_unit')->where('meta_id', $unitId)->first();
+				$prodOrder = Prod_order::where('meta_type', $this->modelPath)->where('meta_id', $unitId)->first();
 				$inspChecklists = $prodOrder->getQaqcInspChklsts ?? [];
 				return $inspChecklists;
 			default:
