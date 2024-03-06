@@ -12,8 +12,11 @@ class TimeLine2 extends Component
      *
      * @return void
      */
-    public function __construct(private $id, private $modelPath, private $props)
-    {
+    public function __construct(
+        private $id,
+        private $modelPath,
+        private $props,
+    ) {
         //
     }
 

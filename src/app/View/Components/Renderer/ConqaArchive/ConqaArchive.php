@@ -13,17 +13,15 @@ class ConqaArchive extends Component
     public function __construct(
         private $item,
         private $loadFromStorage = false,
-        // private $projName = "BTH",
-        // private $folderUuid = "92d6cac3-84de-4c52-b37c-2825c773cba5",
     ) {
-        // dump($item);
         $this->projName = $item->name;
         $this->folderUuid = $item->uuid;
     }
 
     public function loadTree(string $path, string $folderUuid, string $parent): array
     {
-        $json = json_decode(file_get_contents($path . $folderUuid . ".json"));
+        $jsonFileName = $path . $folderUuid . ".json";
+        $json = json_decode(file_get_contents($jsonFileName));
         // dump($json);
         if ($parent == '#') {
             $this->folderName = $json->tree->{$folderUuid}->name;

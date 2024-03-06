@@ -118,7 +118,8 @@ class Breadcrumb extends Component
     {
         $printNow = ['href' => null, 'type' => 'modePrint', 'title' => 'Print Now', 'icon' => '<i class="fa-duotone fa-print"></i>'];
         $id = CurrentRoute::getEntityId($singular);
-
+        $app = LibApps::getFor($type);
+        $modelPath = Str::modelPathFrom($singular);
         $controller = CurrentRoute::getControllerAs();
         $isReportScreen = $this->action == 'index' && !str_contains($controller, '.index');
 
@@ -130,6 +131,9 @@ class Breadcrumb extends Component
                 if (in_array($type, ['qaqc_insp_chklsts'])) {
                     if (CurrentUser::get()->isProjectClient()) break;
                 }
+                if($app['show_renderer'] == "qr-app-renderer") {
+                    $id = $modelPath::where('slug', $id)->first()->id ?? $id;
+                }
                 $this->links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
             case 'print':
@@ -137,14 +141,15 @@ class Breadcrumb extends Component
                 break;
             case 'showQRApp':
                 $slug = CurrentRoute::getEntitySlug($singular);
-                $modelPath = Str::modelPathFrom($singular);
                 $id = $modelPath::where('slug', $slug)->first()['id'];
                 // $this->links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
                 $this->links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
                 break;
             case 'edit':
-                $app = LibApps::getFor($type);
                 [$title, $icon] = $this->getTitleAndIconForPrintButton($app['show_renderer']);
+                if($app['show_renderer'] == "qr-app-renderer") {
+                    $id = $modelPath::findOrFail($id)->slug ?? $id;
+                }
                 $this->links[] = ['href' => route($type . '.show', $id), 'title' => $title, 'icon' => "<i class='$icon'></i>"];
                 break;
             default:
