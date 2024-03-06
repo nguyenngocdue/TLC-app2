@@ -154,7 +154,6 @@ function handleEscapeKeyForPopup(event) {
 }
 
 function openPopupShowFiles(arrayRoutes, element){
-        console.log(arrayRoutes);
     document.addEventListener('keydown', handleEscapeKeyForPopup);
     document.getElementById('top-title').innerHTML = element.getAttribute('top-title');
     document.getElementById('popup-container').classList.remove('hidden');
@@ -179,12 +178,12 @@ function openPopupShowFiles(arrayRoutes, element){
 
 
     if (typeCick === 'delete') {
-        $(document).on('click', '.post-link', function(e) {
-                e.preventDefault();
-                const url = $(this).data('url'); 
-                const entity = $(this).data('entity');
+        $(document).off('click', '.post-link').on('click', '.post-link', function(e) {
                 const isConfirmed = window.confirm("Are you sure you want to delete?");
                 if (isConfirmed) {
+                    e.preventDefault();
+                    const url = $(this).data('url'); 
+                    const entity = $(this).data('entity');
                     let processingToast = toastr.info('Processing your request...', {
                         timeOut: 0, 
                         extendedTimeOut: 0,
@@ -192,7 +191,6 @@ function openPopupShowFiles(arrayRoutes, element){
                         progressBar: true,
                         tapToDismiss: true
                     });
-
                     $.ajax({
                         url: url,
                         method: "POST",

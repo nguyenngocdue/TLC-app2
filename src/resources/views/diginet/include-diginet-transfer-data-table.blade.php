@@ -96,17 +96,25 @@ $(document).ready(function() {
             success: function(response) {
                 if(Array.isArray(response)) {
                     response.map((item) => {
-                        responseOnItems = item.result.original;
-                        if(Array.isArray(responseOnItems)){
-                            responseOnItems.map((item) =>{
-                                toastr.clear(processingToast);
-                                if(item.status === 'success') {
-                                    toastr.success(item.message);
-                                } else {
-                                    toastr.error(item.message);
-                                }
-                            })
-
+                        if (item.result && item.result.original !== undefined) {
+                            responseOnItems = item.result.original;
+                            if(Array.isArray(responseOnItems)){
+                                responseOnItems.map((item) =>{
+                                    toastr.clear(processingToast);
+                                    if(item.status === 'success') {
+                                        toastr.success(item.message);
+                                    } else {
+                                        toastr.error(item.message);
+                                    }
+                                })
+                            }
+                        }else {
+                            toastr.clear(processingToast);
+                            if(item.status === 'success') {
+                                toastr.success(item.message);
+                            } else {
+                                toastr.error(item.message);
+                            }
                         }
 
                     })
