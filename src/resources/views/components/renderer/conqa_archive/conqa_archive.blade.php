@@ -3,8 +3,11 @@
 
 <div class="grid grid-cols-12 gap-2">
     <div class="col-span-4 border no-print">
-        {{$folderName}}
-        <div id="json_tree_1" class="overflow-x-hidden" ></div>
+        <div>
+            {{$folderName}}
+            <div id="json_tree_1" class="overflow-x-hidden" ></div>
+        </div>
+        <div class="border bg-gray-200 text-center p-4 mt-4"><span id="folderUuid"></span></div>
     </div>
     <div class="col-span-12 lg:col-span-8 border">
         <div id="checklist_1" class="overflow-x-hidden" ></div>
@@ -37,15 +40,17 @@
         $('#json_tree_1').on("changed.jstree", function (e, data) {
             // console.log(data.selected);
             if(Array.isArray(data.selected)){
-                const foldrUuid = data.selected[0]
+                const folderUuid = data.selected[0]
                 for(let i =0; i<jsonTree.length;i++){
-                    if(jsonTree[i]['id'] == foldrUuid){
+                    if(jsonTree[i]['id'] == folderUuid){
                         const node = jsonTree[i]
                         if(node.type == 'checklist'){
                             $("#checklist_1").html("<div class='w-full m-4 p-4 text-blue-600'>Loading Checklist...</div>")
-                            loadChecklistRenderer(foldrUuid)
+                            loadChecklistRenderer(folderUuid)
+                            $("#folderUuid").html("")
                         }else {
                             $("#checklist_1").html("")
+                            $("#folderUuid").html("{{$projName}}/" + folderUuid)
                         }
                     }
                 }
