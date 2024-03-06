@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class WelcomeFortuneController extends Controller
 {
     function __construct(
-        private $exportMode = 'attachment',
+        // private $exportMode = 'attachment',
         private $newLine = "\n",
-        // private $exportMode = 'checkpoint',
+        private $exportMode = 'checkpoint',
     ) {
     }
     public function getType()
@@ -172,24 +172,16 @@ class WelcomeFortuneController extends Controller
         }
     }
 
-    public function index(Request $request)
+    private function loadFolder($name, $uuid)
     {
         $item = (object)[
-            'name' => 'STW',
-            'uuid' => '1e125419-46e3-4814-b403-8e80ea745980', // substructure: corner block
-            // 'uuid' => '92f3bbe6-4d6a-4fe5-8e19-ffa38cb7539c', // Townhouse
-            // 'uuid' => '02ac71d7-b02b-4462-8fb7-e234d04bd1bb', // Offsite
-            // 'uuid' => 'cc0f0c88-17b5-44c1-aa6c-bd9b421177a9', // STW
+            'name' => $name,
+            'uuid' => $uuid,
         ];
         $conqaArchive = new ConqaArchive($item, true);
         $conqaArchiveRenderer = new ConqaArchiveRendererController(true);
 
         $lines = $this->loadTree($item, $conqaArchive);
-
-        ob_start();
-        echo "<pre>";
-        echo "id,parentId,type,text,checkpointType,checkpointValue,createdBy,createdAt,attachmentCount";
-        echo $this->newLine;
 
         foreach ($lines as $line) {
             if ($this->exportMode == 'checkpoint') {
@@ -205,8 +197,78 @@ class WelcomeFortuneController extends Controller
                     echo $this->newLine;
                 }
 
-                $this->loadCheckpoint($item, $conqaArchiveRenderer, $line, $line);
+                // $this->loadCheckpoint($item, $conqaArchiveRenderer, $line, $line);
             }
+        }
+    }
+
+    public function index(Request $request)
+    {
+        $allProjects = [
+            // [
+            //     'name' => 'STW',
+            //     'uuid' => '92f3bbe6-4d6a-4fe5-8e19-ffa38cb7539c', // Townhouse
+            // ],
+            [
+                'name' => 'GHT',
+                'uuid' => '48e8af9f-717f-4e32-9696-cc77df35eba9', // Module
+            ],
+            [
+                'name' => 'NGH',
+                'uuid' => 'ec43b961-60d8-4029-8c75-29d384250359', // Module
+            ],
+            [
+                'name' => 'BTH',
+                'uuid' => '3108bc46-4e90-4ffc-a192-6f2407ba76dd', // Module
+            ],
+            [
+                'name' => 'HLC_OFFSITE_N17',
+                'uuid' => '', // Module
+            ],
+            [
+                'name' => 'HLC_OFFSITE_N18',
+                'uuid' => '', // Module
+            ],
+            [
+                'name' => 'HLC_SHIPPING',
+                'uuid' => '', // Module
+            ],
+        ];
+        $allProjects = [
+            [
+                'name' => 'GHT',
+                'uuid' => 'b3d5f8bd-ffd5-498b-beac-07e925e29e43', // Shipping
+            ],
+            [
+                'name' => 'NGH',
+                'uuid' => '8e8850ad-cc2d-4a67-8160-c2beef4a19d0', // Shipping
+            ],
+            [
+                'name' => 'BTH',
+                'uuid' => '4d382d05-579e-4a0b-8f5a-a6ccfceaf070', // Shipping
+            ],
+            [
+                'name' => 'HLC_OFFSITE_N17',
+                'uuid' => '', // Shipping
+            ],
+            [
+                'name' => 'HLC_OFFSITE_N18',
+                'uuid' => '', // Shipping
+            ],
+            [
+                'name' => 'HLC_SHIPPING',
+                'uuid' => '', // Shipping
+            ],
+        ];
+
+        ob_start();
+        echo "<pre>";
+        echo "id,parentId,type,text,checkpointType,checkpointValue,createdBy,createdAt,attachmentCount";
+        echo $this->newLine;
+
+        foreach ($allProjects as $project) {
+            [$name, $uuid] = [$project['name'], $project['uuid']];
+            $this->loadFolder($name, $uuid);
         }
 
         echo "</pre>";
