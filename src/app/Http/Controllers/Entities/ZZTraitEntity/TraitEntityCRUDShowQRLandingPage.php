@@ -17,22 +17,34 @@ trait TraitEntityCRUDShowQRLandingPage
 			throw new NotFoundHttpException();
 		}
 		$props = SuperProps::getFor($this->type)['props'];
-		$config  = $this->getConfigRenderSource($item);
-		$dataRender = $this->getDataRenderLinkDocs($config, $item);
+		
+		return view('dashboards.pages.entity-show-landing-page', [
+			'props' => $props,
+			'moduleName' => $item->name,
+			'dataSource' => $this->getDataSourceGroups($item),
+			'type' => $this->type,
+			'topTitle' => CurrentRoute::getTitleOf($this->type),
+		]);
+	}
+	private function getDataSourceQARecords($model){
+		$config  = $this->getConfigRenderSource($model);
+		$dataRender = $this->getDataRenderLinkDocs($config, $model);
 		$linkDocs = [];
 		foreach ($dataRender as $value) {
 			$href = route($value->getTable() . '.show', $value->id) ?? "";
 			if ($href)
 				$linkDocs[] = $href;
 		}
-		// dump($item);
-		return view('dashboards.pages.entity-show-landing-page', [
-			'props' => $props,
-			'moduleName' => $item->name,
-			'dataSource' => $linkDocs,
-			'type' => $this->type,
-			'topTitle' => CurrentRoute::getTitleOf($this->type),
-		]);
+		return $linkDocs;
+	}
+	private function getDataSourceGroups($model){
+		return [
+			'Home Owner Manual' => [],
+			'QA Records' => $this->getDataSourceQARecords($model),
+			'Project Plans' => [],
+			'Ticketing' => [],
+			'Customer Survey' => [],
+		];
 	}
 	public function getConfigRenderSource($item)
 	{
@@ -44,7 +56,7 @@ trait TraitEntityCRUDShowQRLandingPage
 			case 529: // QR_APP_SOURCE => mode render app
 				$unitId = $item->pj_unit_id;
 				$prodOrder = Prod_order::where('meta_type', 'App\\Models\\Pj_unit')->where('meta_id', $unitId)->first();
-				$inspChecklists = $prodOrder->getQaqcInspChklsts->whereIn('qaqc_insp_tmpl_id', [1007, 3]) ?? [];
+				$inspChecklists = $prodOrder->getQaqcInspChklsts ?? [];
 				return $inspChecklists;
 			default:
 				return [];
