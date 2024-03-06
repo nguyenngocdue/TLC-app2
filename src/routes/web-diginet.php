@@ -29,18 +29,11 @@ Route::group(
         Route::get('business-trip-sheets', [DiginetBusinessTripLinesController::class, 'index'])->name('business-trip-sheets.index');
         Route::get('business-trip-lines', [DiginetBusinessTripLinesController::class, 'index'])->name('business-trip-lines.index');
         Route::get('all-tables', [DiginetUpdateAllTablesController::class, 'index'])->name('all-tables.index');
+
+        Route::post('delete', [DiginetEmployeeHoursController::class, 'delete'])->name('delete-database.delete');
     }
 );
 
-// Route::group(
-//     [
-//         'prefix' => 'diginet/show-diginet-data',
-//         'middleware' => ['auth:sanctum', 'throttle:600,1'],
-//     ],
-//     function () {
-//         Route::get('employee-leave-lines', [DiginetShowDataEmployeeLeaveLinesController::class, 'index'])->name('show-employee-leave-lines.index');
-//     }
-// );
 
 
 Route::group([
