@@ -34,6 +34,7 @@ class ActionButtons extends Component
             if (CurrentUser::get()->isExternalInspector()) return "";
             if (CurrentUser::get()->isProjectClient()) return "";
         }
+        if (in_array($this->type, ['conqa_archives'])) return;
         return view('components.controls.action-buttons', [
             'buttonSave' => $this->buttonSave,
             'action' => $this->action,

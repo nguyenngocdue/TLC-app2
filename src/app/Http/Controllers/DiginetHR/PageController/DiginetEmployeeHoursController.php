@@ -4,6 +4,8 @@ namespace App\Http\Controllers\DiginetHR\PageController;
 
 use App\Http\Controllers\DiginetHR\ParentDiginetDataController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class DiginetEmployeeHoursController extends ParentDiginetDataController
 {

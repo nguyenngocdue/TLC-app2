@@ -65,7 +65,7 @@ class Breadcrumb extends Component
                 $icon = "fa-duotone fa-check-to-slot";
                 break;
             case "qr-app-renderer":
-                $title = 'Application Mode';
+                $title = 'Landing Page Mode';
                 $icon = "fa-duotone fa-browser";
                 break;
             default:

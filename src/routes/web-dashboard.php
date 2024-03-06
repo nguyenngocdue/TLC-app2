@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 Route::group([], function () {
     $entities = Entities::getAll();
-    $apps_have_qr = JsonControls::getAppsHaveQrApp();
+    $apps_have_qr = JsonControls::getAppsHaveQrLandingPage();
     foreach ($entities as $entity) {
         $entityName = Str::getEntityName($entity);
         $entitySingular = Str::singular($entityName);

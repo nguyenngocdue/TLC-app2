@@ -40,6 +40,9 @@ class DiginetDataController extends Controller
                 "card_btn3_route" => [
                     "employee-hours" => "report-diginet_employee_hour_010_ep.exportCSV"
                 ],
+                "card_btn4_route" => [
+                    "employee-hours" => "delete-database.delete",
+                ],
                 "model_name" => "Diginet_employee_hour",
                 "data_index" => 0,
             ],
@@ -57,6 +60,10 @@ class DiginetDataController extends Controller
                 "card_btn3_route" => [
                     "employee-leave-sheets" => "report-diginet_employee_leave_sheet_010_ep.exportCSV",
                     "employee-leave-lines" => "report-diginet_employee_leave_line_010_ep.exportCSV"
+                ],
+                "card_btn4_route" => [
+                    "employee-leave-sheets" => "delete-database.delete",
+                    "employee-leave-lines" => "delete-database.delete"
                 ],
                 "model_name" => "Diginet_employee_leave_sheet",
                 "data_index" => 0,
@@ -89,6 +96,10 @@ class DiginetDataController extends Controller
                     "employee-overtime-sheets" => "report-diginet_employee_overtime_sheet_010_ep.exportCSV",
                     "employee-overtime-lines" => "report-diginet_employee_overtime_line_010_ep.exportCSV"
                 ],
+                "card_btn4_route" => [
+                    "employee-overtime-sheets" => "delete-database.delete",
+                    "employee-overtime-lines" => "delete-database.delete"
+                ],
                 "model_name" => "Diginet_employee_overtime_sheet",
                 "data_index" => 1,
             ],
@@ -118,6 +129,10 @@ class DiginetDataController extends Controller
                 "card_btn3_route" => [
                     "business-trip-sheets" => "report-diginet_business_trip_sheet_010_ep.exportCSV",
                     "business-trip-lines" => "report-diginet_business_trip_line_010_ep.exportCSV"
+                ],
+                "card_btn4_route" => [
+                    "business-trip-sheets" => "delete-database.delete",
+                    "business-trip-lines" => "delete-database.delete"
                 ],
                 "model_name" => "Diginet_business_trip_sheet",
                 "data_index" => 0,

@@ -48,6 +48,8 @@ class Diginet
         foreach ($names as $key => $value) {
             if (Route::has($value)) {
                 $routes[$key] = route($value);
+            } else {
+                dump("Not found route");
             }
         }
         return $routes;
