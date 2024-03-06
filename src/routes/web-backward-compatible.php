@@ -7,4 +7,4 @@ Route::get('/modular/{slug}',  fn ($slug) => redirect('dashboard/pj_modules/' . 
 Route::get('/unit/{slug}', fn ($slug) => redirect('dashboard/pj_units/' . $slug));
 Route::get('/shipment/{slug}', fn ($slug) => redirect('dashboard/pj_shipments/' . $slug));
 
-Route::get('/conqa_archive/{name}/{uuid}', [ConqaArchiveController::class, 'index'])->name("conqa-archive");
+Route::get('/conqa_archive/{type}/{name}/{uuid}', [ConqaArchiveController::class, 'index'])->name("conqa-archive");

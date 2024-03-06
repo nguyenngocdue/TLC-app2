@@ -44,13 +44,18 @@
                 for(let i =0; i<jsonTree.length;i++){
                     if(jsonTree[i]['id'] == folderUuid){
                         const node = jsonTree[i]
+                        const a = document.createElement('a');
                         if(node.type == 'checklist'){
                             $("#checklist_1").html("<div class='w-full m-4 p-4 text-blue-600'>Loading Checklist...</div>")
                             loadChecklistRenderer(folderUuid)
-                            $("#folderUuid").html("")
+                            a.href = "/conqa_archive/checklist/{{$projName}}/" + node.id;
+                            a.textContent = "checklist/{{$projName}}/" + node.id;
+                            $("#folderUuid").html(a)
                         }else {
                             $("#checklist_1").html("")
-                            $("#folderUuid").html("{{$projName}}/" + folderUuid)
+                            a.href = "/conqa_archive/folder/{{$projName}}/" + folderUuid;
+                            a.textContent = "folder/{{$projName}}/" + folderUuid;
+                            $("#folderUuid").html(a)
                         }
                     }
                 }

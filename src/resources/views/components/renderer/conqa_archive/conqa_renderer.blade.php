@@ -3,7 +3,7 @@
 {{-- @dump($checkpoints) --}}
 {{-- @dump($signoffs) --}}
 @foreach($sections as $section)
-    <div class="bg-white my-10 mx-20 p-10 border">
+    <div class="bg-white my-10 mx-auto p-10 border" style="max-width: 1000px;">
         <x-renderer.heading level=3 xalign='center'>{{$section->name}}</x-renderer.heading>
         <br/>
         

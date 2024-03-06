@@ -75,6 +75,11 @@ class ConqaArchiveRendererController extends Controller
             "minioPath" => env('AWS_ENDPOINT') . '/conqa-backup/' . $projName,
         ]);
 
-        return ResponseObject::responseSuccess(htmlspecialchars($renderer . ""));
+        return $renderer;
+    }
+
+    function renderToJson(Request $request)
+    {
+        return ResponseObject::responseSuccess(htmlspecialchars($this->render($request) . ""));
     }
 }
