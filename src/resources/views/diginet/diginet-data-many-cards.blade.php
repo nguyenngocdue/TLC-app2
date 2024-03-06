@@ -201,18 +201,25 @@ function openPopupShowFiles(arrayRoutes, element){
                         contentType: 'application/json',
                         data: JSON.stringify({ "entity": entity }),
                         success: function(response, message) {
-                            if (message === "success"){
-                                toastr.clear(processingToast);
-                                toastr.success(response);
-                            }else{
-                                toastr.clear(processingToast);
-                                toastr.error(response);
+                            if (response.results && response.results !== "undefined") {
+                                const allResults = response.results;
+                                allResults.map(function(item) {
+                                    toastr.clear(processingToast);
+                                    toastr.success(item.message);
+                                })
+                            } else {
+                                if (message === "success"){
+                                    toastr.clear(processingToast);
+                                    toastr.success(response);
+                                }else{
+                                    toastr.clear(processingToast);
+                                    toastr.error(response);
+                                }
                             }
                         },
                         error: function(xhr, status, error) {
                             console.error('Error sending POST request', xhr, status, error);
                             toastr.clear(processingToast);
-                            toastr.error(response);
                         }
                     });
                 }
