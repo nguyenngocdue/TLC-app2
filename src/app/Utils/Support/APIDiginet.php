@@ -22,6 +22,7 @@ class APIDiginet
             'Authorization' => 'Bearer ' . $token,
             'X-Access-Token' => $X_AccessToken,
         ])->post($url, $data);
+        // dump($data, $response->json());
         if ($response->successful()) return $response->json();
         return response()->json(['error' => 'Unable to fetch employee hours']);
     }

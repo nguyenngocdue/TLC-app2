@@ -27,6 +27,7 @@
                                                     onclick="openPopup(this)" 
                                                     data-url="{{route($items['card_btn1_route'])}}"
                                                     data-name="{{$items['card_name'] }}"
+                                                    top-title="Update Datasource"
                                                     >
                                     <i class="fa-solid fa-pen-nib"></i> Update</span>
                                 </div>

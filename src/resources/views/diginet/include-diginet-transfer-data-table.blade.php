@@ -31,7 +31,10 @@
                             </td>
                         @else
                             <td class="px-4 py-4 text-center border border-gray-200 dark:border-gray-700">
-                                <button  class="btn-month inline-flex items-center justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-blue-700 focus:outline-none" data-year="{{ $year }}" data-month="{{ $month }}">
+                                <button  class="btn-month inline-flex items-center justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-blue-700 focus:outline-none" 
+                                                data-year="{{ $year }}" 
+                                                data-month="{{ $month }}
+                                            ">
                                     <i class="fa-solid fa-pen-nib"></i>
                                 </button>
                             </td>
@@ -62,8 +65,8 @@ function getFirstAndLastDayOfMonth(year, _month) {
 
 $(document).ready(function() {
     $('.btn-month').click(function() {
-        const year = $(this).data('year');
-        const month = $(this).data('month');
+        const year = parseInt($(this).data('year'));
+        const month = parseInt($(this).data('month'));
         const { firstDay, lastDay } = getFirstAndLastDayOfMonth(year, month);
         const urlAPI = '{{$endpointNameDiginet}}' === 'all-tables' ?
                         `/v1/transfer-data-diginet/update-all-tables` :
