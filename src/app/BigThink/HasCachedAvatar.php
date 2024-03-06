@@ -45,6 +45,7 @@ trait HasCachedAvatar
         if (!isset(static::$avatarSingleton00[$this::class][$id])) {
             $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
             $thumbnail = $this->getUserAvatarFromDB($this::class, $id);
+            // dump($thumbnail);
             static::$avatarSingleton00[$this::class][$id] = $thumbnail ?  $path .  $thumbnail : $defaultImage;
         }
         return static::$avatarSingleton00[$this::class][$id];

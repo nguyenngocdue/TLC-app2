@@ -115,9 +115,9 @@ class JsonControls
     {
         return self::getAll()['apps_have_due_date_column'];
     }
-    public static function getAppsHaveQrApp()
+    public static function getAppsHaveQrLandingPage()
     {
-        return self::getAll()['apps_have_qr_app'];
+        return self::getAll()['apps_have_qr_landing_page'];
     }
     public static function getAppsHaveViewAllCalendar()
     {
