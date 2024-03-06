@@ -105,13 +105,15 @@ $formWidth = "md:w-1/2 xl:w-1/2";
 </div>
 <x-renderer.editable.modal-broadcast-notification />
 @if($action == 'edit')
-<div class="px-4">
-    <div class="w-full p-2 bg-white rounded-lg  dark:bg-gray-800">
-        <x-renderer.card title="Timeline">
-            <x-controls.time-line2 id={{$id}} modelPath={{$modelPath}} :props="$props" />
-        </x-renderer.card>
-    </div>
-</div>
+    @if(!in_array($type, ['conqa_archives']))
+        <div class="px-4">
+            <div class="w-full p-2 bg-white rounded-lg  dark:bg-gray-800">
+                <x-renderer.card title="Timeline">
+                    <x-controls.time-line2 id={{$id}} modelPath={{$modelPath}} :props="$props" />
+                </x-renderer.card>
+            </div>
+        </div>
+    @endif
 @endif
 <x-homepage.left-drawer title="Table of Content">
     <x-homepage.table-of-content :item="$item" type="{{$type}}" />
