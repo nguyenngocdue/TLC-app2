@@ -6,6 +6,7 @@ use App\Http\Controllers\DiginetHR\PageController\DiginetDataController;
 use App\Utils\Support\APIDiginet;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class DiginetService
 {
@@ -68,6 +69,7 @@ class DiginetService
             $response['table_on'] = $tableName;
             $response['message'] = "{$recordCount} rows have been successfully added to [{$tableName}] table.";
             $response['recordsAdded'] = $recordCount;
+            Log::info($response);
         }
         return $response;
     }

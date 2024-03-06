@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Services\DiginetService;
 use Illuminate\Support\Facades\DB;
-use Response;
+use Illuminate\Support\Facades\Log;
 
 class TransferALLDiginetDataForApi extends Controller
 {
@@ -49,6 +49,7 @@ class TransferALLDiginetDataForApi extends Controller
                     'deleted' => $deleted,
                     'message' => $deleted ?  "Data in [$tableName] table wasn't deleted" : "Data in [$tableName] table was deleted successfully"
                 ];
+                Log::info([$tableName, $deleted]);
             }
         }
         return response()->json([
