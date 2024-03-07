@@ -13,19 +13,20 @@
 @endif
  --}}
 <div class="container mx-auto px-4 py-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6 ">
         @foreach ($dataRender as $key => $items)
             @php
                 $routeBtn1 = Route::has($r = $items['card_btn1_route'])? route($r) : "";
+                $classAdd = $key === "all-tables" ? "col-span-2 w-[50%] justify-self-center" : "";
             @endphp
 
             @if(!str_contains($key,'-lines'))
-                <div class="transform hover:scale-105 transition duration-500 ease-in-out">
+                <div class="transform hover:scale-105 transition duration-500 ease-in-out {{$classAdd}}">
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl flex flex-col items-center">
-                        <div class="px-6 py-4">
+                        <div class="px-4 py-2">
                             <div class="font-bold text-xl text-center">{{$items['card_name']}}</div>
                         </div>
-                        <div class="flex px-6 pt-4 pb-2">
+                        <div class="flex px-4 pt-2 pb-2">
                             {{-- UPDATE --}}
                             @if($routeBtn1)
                                 <div class="text-center">
@@ -123,118 +124,118 @@
 
 
 <script>
-function openPopup(element) {
-    document.addEventListener('keydown', handleEscapeKeyForPopup);
-    document.getElementById('top-title').innerHTML = element.getAttribute('top-title');
-    document.getElementById('popup-container').classList.remove('hidden');
-    
-    var _url = element.getAttribute('data-url'); // get URL from data-url attribute
-    var carName = element.getAttribute('data-name');
-    var popupBody = $('#popup-container .body');
+    function openPopup(element) {
+        document.addEventListener('keydown', handleEscapeKeyForPopup);
+        document.getElementById('top-title').innerHTML = element.getAttribute('top-title');
+        document.getElementById('popup-container').classList.remove('hidden');
+        
+        var _url = element.getAttribute('data-url'); // get URL from data-url attribute
+        var carName = element.getAttribute('data-name');
+        var popupBody = $('#popup-container .body');
 
-    popupBody.html(''); // delete old content
-    popupBody.append('<div class="font-semibold text-xl pb-4"><strong></strong> ' + carName + '</div>');
+        popupBody.html(''); // delete old content
+        popupBody.append('<div class="font-semibold text-xl pb-4"><strong></strong> ' + carName + '</div>');
 
-    $.ajax({
-        url: _url,
-        type: 'GET',
-        success: function(response) {
-            var content = $('<div>').html(response);
-            popupBody.append(content);
-        },
-        error: function(xhr, status, error) {
-            console.error('Error sending GET request', xhr, status, error);
-        }
-    });
-}
-
-function closePopup() {
-    document.getElementById('popup-container').classList.add('hidden');
-    document.getElementById('popup-container').classList.add('hidden');
-}
-
-function handleEscapeKeyForPopup(event) {
-    if (event.key === "Escape" || event.keyCode === 27) {
-        closePopup();
-    }
-}
-
-function openPopupShowFiles(arrayRoutes, element){
-    document.addEventListener('keydown', handleEscapeKeyForPopup);
-    document.getElementById('top-title').innerHTML = element.getAttribute('top-title');
-    document.getElementById('popup-container').classList.remove('hidden');
-    
-    var typeCick = element.getAttribute('type-click'); // get URL from data-url attribute
-    var url = element.getAttribute('data-url'); // get URL from data-url attribute
-    var carName = element.getAttribute('data-name');
-    var popupBody = $('#popup-container .body');
-
-    popupBody.html(''); // delete old content
-    popupBody.append('<div class="font-semibold text-xl pb-4"><strong></strong> ' + carName + '</div>');
-
-    Object.entries(arrayRoutes).forEach(([key, value]) => {
-        popupBody.append(`
-        <a href="${typeCick === 'delete' ? '' : value}" data-url="${value}" data-entity="${key}" target="__blank" class=" mx-2 post-link inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-            ${key}
-            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/></svg>
-        </a>`   
-        );
-    });
-
-
-    if (typeCick === 'delete' && !window.postLinkEventAdded) {
-        $(document).on('click.postLink', '.post-link', function(e) {
-            window.postLinkEventAdded = true; 
-            const isConfirmed = window.confirm("Are you sure you want to delete?");
-            if (isConfirmed) {
-                    e.preventDefault();
-                    const url = $(this).data('url'); 
-                    const entity = $(this).data('entity');
-                    let processingToast = toastr.info('Processing your request...', {
-                        timeOut: 0, 
-                        extendedTimeOut: 0,
-                        closeButton: true,
-                        progressBar: true,
-                        tapToDismiss: true
-                    });
-                    $.ajax({
-                        url: url,
-                        method: "POST",
-                        headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        contentType: 'application/json',
-                        data: JSON.stringify({ "entity": entity }),
-                        success: function(response, message) {
-                            if (response.results && response.results !== "undefined") {
-                                const allResults = response.results;
-                                allResults.map(function(item) {
-                                    //toastr.clear(processingToast);
-                                    toastr.success(item.message);
-                                })
-                            } else {
-                                if (message === "success"){
-                                    //toastr.clear(processingToast);
-                                    toastr.success(response);
-                                }else{
-                                    //toastr.clear(processingToast);
-                                    toastr.error(response);
-                                }
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Error sending POST request', xhr, status, error);
-                            //toastr.clear(processingToast);
-                        }
-                    });
-                }else {
-                    return false;
-                }
+        $.ajax({
+            url: _url,
+            type: 'GET',
+            success: function(response) {
+                var content = $('<div>').html(response);
+                popupBody.append(content);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error sending GET request', xhr, status, error);
+            }
         });
     }
 
-}
+    function closePopup() {
+        document.getElementById('popup-container').classList.add('hidden');
+        document.getElementById('popup-container').classList.add('hidden');
+    }
+
+    function handleEscapeKeyForPopup(event) {
+        if (event.key === "Escape" || event.keyCode === 27) {
+            closePopup();
+        }
+    }
+
+    function openPopupShowFiles(arrayRoutes, element){
+        document.addEventListener('keydown', handleEscapeKeyForPopup);
+        document.getElementById('top-title').innerHTML = element.getAttribute('top-title');
+        document.getElementById('popup-container').classList.remove('hidden');
+        
+        var typeCick = element.getAttribute('type-click'); // get URL from data-url attribute
+        var url = element.getAttribute('data-url'); // get URL from data-url attribute
+        var carName = element.getAttribute('data-name');
+        var popupBody = $('#popup-container .body');
+
+        popupBody.html(''); // delete old content
+        popupBody.append('<div class="font-semibold text-xl pb-4"><strong></strong> ' + carName + '</div>');
+
+        Object.entries(arrayRoutes).forEach(([key, value]) => {
+            popupBody.append(`
+            <a href="${typeCick === 'delete' ? '' : value}" data-url="${value}" data-entity="${key}" target="__blank" class=" mx-2 post-link inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                ${key}
+                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/></svg>
+            </a>`   
+            );
+        });
+
+
+        if (typeCick === 'delete' && !window.postLinkEventAdded) {
+            $(document).on('click.postLink', '.post-link', function(e) {
+                window.postLinkEventAdded = true; 
+                const isConfirmed = window.confirm("Are you sure you want to delete?");
+                if (isConfirmed) {
+                        e.preventDefault();
+                        const url = $(this).data('url'); 
+                        const entity = $(this).data('entity');
+                        let processingToast = toastr.info('Processing your request...', {
+                            timeOut: 0, 
+                            extendedTimeOut: 0,
+                            closeButton: true,
+                            progressBar: true,
+                            tapToDismiss: true
+                        });
+                        $.ajax({
+                            url: url,
+                            method: "POST",
+                            headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            contentType: 'application/json',
+                            data: JSON.stringify({ "entity": entity }),
+                            success: function(response, message) {
+                                if (response.results && response.results !== "undefined") {
+                                    const allResults = response.results;
+                                    allResults.map(function(item) {
+                                        //toastr.clear(processingToast);
+                                        toastr.success(item.message);
+                                    })
+                                } else {
+                                    if (message === "success"){
+                                        //toastr.clear(processingToast);
+                                        toastr.success(response);
+                                    }else{
+                                        //toastr.clear(processingToast);
+                                        toastr.error(response);
+                                    }
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Error sending POST request', xhr, status, error);
+                                //toastr.clear(processingToast);
+                            }
+                        });
+                    }else {
+                        return false;
+                    }
+            });
+        }
+
+    }
 </script>
 @endsection
 
