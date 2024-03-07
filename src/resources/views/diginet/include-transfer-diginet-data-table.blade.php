@@ -5,7 +5,6 @@
     $currentYear = (int)date('Y');
 @endphp
 
-  <button id="myButton">Click me</button>
 
 <div class='pt-4'>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -50,42 +49,23 @@
 </div>
 
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    document.getElementById('myButton').addEventListener('click', function() {
-        //axios.post('https://127.0.0.1:38002/diginet/transfer-diginet-data/handle-click-event')
-        axios.post('https://127.0.0.1:38002/v1/transfer-data-diginet/update-all-tables')
-            .then(response => {
-                // Update the message display area with the response message
-                toastr.success(response.data.message);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    });
-</script>
+function getFirstAndLastDayOfMonth(year, _month) {
+    // Calculate the year and month for the last day
+    const yearFisrt = _month === 1 ? year - 1 : year;
+    const monthFirst = _month === 1 ? 12 : String(_month - 1).padStart(2, '0');
+    // Format the current month to two digits
+    const month = String(_month).padStart(2, '0');
+    // Define first and last days
+    const firstDay = `${yearFisrt}-${monthFirst}-26`;
+    const lastDay = `${year}-${month}-25`;
+     return {
+        firstDay: firstDay,
+        lastDay: lastDay
+    };
+}
 
-
-<script>
-    function getFirstAndLastDayOfMonth(year, _month) {
-        // Calculate the year and month for the last day
-        const yearFisrt = _month === 1 ? year - 1 : year;
-        const monthFirst = _month === 1 ? 12 : String(_month - 1).padStart(2, '0');
-        // Format the current month to two digits
-        const month = String(_month).padStart(2, '0');
-        // Define first and last days
-        const firstDay = `${yearFisrt}-${monthFirst}-26`;
-        const lastDay = `${year}-${month}-25`;
-        return {
-            firstDay: firstDay,
-            lastDay: lastDay
-        };
-    }
-</script>
-
-<script>
 $(document).ready(function() {
     $('.btn-month').click(function() {
         const year = parseInt($(this).data('year'));
@@ -94,7 +74,6 @@ $(document).ready(function() {
         const urlAPI = '{{$endpointNameDiginet}}' === 'all-tables' ?
                         `/v1/transfer-data-diginet/update-all-tables` :
                         `/v1/transfer-data-diginet/`+ '{{$endpointNameDiginet}}';
-
         const method = '{{$endpointNameDiginet}}' === 'all-tables' ? 'POST' : 'POST';
 
         let processingToast = toastr.info('Processing your request...', {
@@ -105,54 +84,61 @@ $(document).ready(function() {
                     tapToDismiss: true, // Allows the user to dismiss the notification
                 });
 
-        axios({
-            method: method,
+        $.ajax({
             url: urlAPI,
+            method: method,
+            contentType: 'application/json',
             headers: {
                 'Authorization': 'Bearer ' + '{{$token}}',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                
             },
-            data: {
+            data: JSON.stringify({
                 "FromDate": firstDay,
                 "ToDate": lastDay,
                 "CompanyCode": "TLCM",
                 "WorkplaceCode": "HO,TF1,TF2,TF3,NZ,WS"
+            }),
+            success: function(response) {
+                if(Array.isArray(response)) {
+                    response.map((item) => {
+                        if (item.result && item.result.original !== undefined) {
+                            responseOnItems = item.result.original;
+                            if(Array.isArray(responseOnItems)){
+                                responseOnItems.map((item) =>{
+                                    //toastr.clear(processingToast);
+                                    if(item.status === 'success') {
+                                        toastr.success(item.message);
+                                    } else {
+                                        toastr.error(item.message);
+                                    }
+                                })
+                            }
+                        }else {
+                            toastr.clear(processingToast);
+                            if(item.status === 'success') {
+                                toastr.success(item.message);
+                            } else {
+                                toastr.error(item.message);
+                            }
+                        }
+
+                    })
+                }
             },
-        })
-        .then(response => {
-            if (Array.isArray(response.data)) {
-                response.data.map((item) => {
-                    if (item.result && item.result.original !== undefined) {
-                        responseOnItems = item.result.original;
-                        if (Array.isArray(responseOnItems)) {
-                            responseOnItems.map((item) => {
-                                toastr.clear(processingToast);
-                                if (item.status === 'success') {
-                                    toastr.success(item.message);
-                                } else {
-                                    toastr.error(item.message);
-                                }
-                            })
-                        }
-                    } else {
-                        toastr.clear(processingToast);
-                        if (item.status === 'success') {
-                            toastr.success(item.message);
-                        } else {
-                            toastr.error(item.message);
-                        }
-                    }
-                })
+            error: function(xhr, status, error) {
+                //toastr.clear(processingToast);
+                console.log(xhr, status, error)
+                toastr.error('An error occurred');
             }
-        })
-        .catch(error => {
-            console.error(error);
-            toastr.error('An error occurred');
-        })
-        .finally(() => {
-            // Hide processing toast
-            toastr.clear(processingToast);
         });
     });
 });
 </script>
+
+
+<script>
+        console.log("AAAA");
+        toastr.error('An error occurred: ABC Again ');
+</script>
+
