@@ -211,15 +211,14 @@
                                 if (response.results && response.results !== "undefined") {
                                     const allResults = response.results;
                                     allResults.map(function(item) {
-                                        //toastr.clear(processingToast);
+                                        toastr.clear(processingToast);
                                         toastr.success(item.message);
                                     })
                                 } else {
                                     if (message === "success"){
-                                        //toastr.clear(processingToast);
+                                        toastr.clear(processingToast);
                                         toastr.success(response);
                                     }else{
-                                        //toastr.clear(processingToast);
                                         toastr.warning(response);
                                     }
                                 }
