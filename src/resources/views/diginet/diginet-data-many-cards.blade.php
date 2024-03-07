@@ -84,7 +84,7 @@
                                     $arrayRoutesDel = App\Utils\Support\Diginet::getRouteFromNames($arrayRoutesDel);
                                 @endphp
                                 <div class="text-center">
-                                    <span class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
+                                    <span class="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
                                                     onclick='openPopupShowFiles({!! json_encode($arrayRoutesDel) !!}, this)'
                                                     type-click="delete"
                                                     data-name="{{$items['card_name']}}"
