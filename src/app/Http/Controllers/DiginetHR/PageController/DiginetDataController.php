@@ -15,7 +15,20 @@ class DiginetDataController extends Controller
     public function getDataRender()
     {
         return [
-
+            "all-tables" => [
+                "name" => "all-tables",
+                "field_index_name" => null,
+                "endpoint_name_diginet" => "all-tables",
+                "card_name" => "Update the Entire Database",
+                "card_description" => "This is a short description of the item.",
+                "card_btn1_route" => "all-tables.index",
+                "card_btn2_route" => null,
+                "card_btn3_route" => null,
+                "card_btn4_route" => [
+                    "all-tables" => "delete-all-tables.delete",
+                ],
+                "model_name" => "",
+            ],
             "employee-hours" => [
                 "name" => "employee-hours",
                 "field_index_name" => "date",
@@ -54,20 +67,6 @@ class DiginetDataController extends Controller
                     "employee-leave-lines" => "delete-database.delete"
                 ],
                 "model_name" => "Diginet_employee_leave_sheet",
-            ],
-            "all-tables" => [
-                "name" => "all-tables",
-                "field_index_name" => null,
-                "endpoint_name_diginet" => "all-tables",
-                "card_name" => "Update the Entire Database",
-                "card_description" => "This is a short description of the item.",
-                "card_btn1_route" => "all-tables.index",
-                "card_btn2_route" => null,
-                "card_btn3_route" => null,
-                "card_btn4_route" => [
-                    "all-tables" => "delete-all-tables.delete",
-                ],
-                "model_name" => "",
             ],
             "employee-leave-lines" => [
 
