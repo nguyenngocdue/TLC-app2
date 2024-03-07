@@ -64,7 +64,14 @@ Route::group([
         }
         if ($cmd) {
             $output = shell_exec($cmd);
-            echo "<pre>$output</pre>";
+            if ($output) {
+                Log::info($output);
+                echo "<pre>$output</pre>";
+            } else {
+                Log::error(error_get_last());
+            }
+        } else {
+            echo "Project $project not found";
         }
     });
 });
