@@ -16,4 +16,5 @@ Route::group([
     Route::post('employee-overtime', [TransferDiginetDataEmployeeOvertimesForApi::class, 'store']);
     Route::post('business-trip', [TransferDiginetDataBusinessTripsForApi::class, 'store']);
     Route::post('update-all-tables', [TransferALLDiginetDataForApi::class, 'update'])->name('update-all-tables.update');
+    Route::post('delete-all-tables', [TransferALLDiginetDataForApi::class, 'delete'])->name('delete-all-tables.delete');
 });

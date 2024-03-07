@@ -24,6 +24,9 @@ class DiginetDataController extends Controller
                 "card_btn1_route" => "all-tables.index",
                 "card_btn2_route" => null,
                 "card_btn3_route" => null,
+                "card_btn4_route" => [
+                    "all-tables" => "delete-all-tables.delete",
+                ],
                 "model_name" => "",
                 "data_index" => 0,
             ],

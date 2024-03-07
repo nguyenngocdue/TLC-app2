@@ -169,7 +169,7 @@ function openPopupShowFiles(arrayRoutes, element){
 
     Object.entries(arrayRoutes).forEach(([key, value]) => {
         popupBody.append(`
-        <a href="${typeCick === 'delete' ? '#' : value}" data-url="${value}" data-entity="${key}" target="__blank" class=" mx-2 post-link inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+        <a href="${typeCick === 'delete' ? '' : value}" data-url="${value}" data-entity="${key}" target="__blank" class=" mx-2 post-link inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
             ${key}
             <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/></svg>
@@ -178,10 +178,11 @@ function openPopupShowFiles(arrayRoutes, element){
     });
 
 
-    if (typeCick === 'delete') {
-        $(document).off('click', '.post-link').on('click', '.post-link', function(e) {
-                const isConfirmed = window.confirm("Are you sure you want to delete?");
-                if (isConfirmed) {
+    if (typeCick === 'delete' && !window.postLinkEventAdded) {
+        $(document).on('click.postLink', '.post-link', function(e) {
+            window.postLinkEventAdded = true; 
+            const isConfirmed = window.confirm("Are you sure you want to delete?");
+            if (isConfirmed) {
                     e.preventDefault();
                     const url = $(this).data('url'); 
                     const entity = $(this).data('entity');
@@ -201,23 +202,34 @@ function openPopupShowFiles(arrayRoutes, element){
                         contentType: 'application/json',
                         data: JSON.stringify({ "entity": entity }),
                         success: function(response, message) {
-                            if (message === "success"){
-                                toastr.clear(processingToast);
-                                toastr.success(response);
-                            }else{
-                                toastr.clear(processingToast);
-                                toastr.error(response);
+                            if (response.results && response.results !== "undefined") {
+                                const allResults = response.results;
+                                allResults.map(function(item) {
+                                    toastr.clear(processingToast);
+                                    toastr.success(item.message);
+                                })
+                            } else {
+                                if (message === "success"){
+                                    toastr.clear(processingToast);
+                                    toastr.success(response);
+                                }else{
+                                    toastr.clear(processingToast);
+                                    toastr.error(response);
+                                }
                             }
                         },
                         error: function(xhr, status, error) {
                             console.error('Error sending POST request', xhr, status, error);
                             toastr.clear(processingToast);
-                            toastr.error(response);
                         }
                     });
+                }else {
+                    return false;
                 }
-            });
+        });
     }
+
 }
 </script>
 @endsection
+
