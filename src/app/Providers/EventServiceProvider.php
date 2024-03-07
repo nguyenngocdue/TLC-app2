@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\ButtonClickEvent;
 use App\Events\CreatedDocumentEvent2;
 use App\Events\OpenedDocumentEvent;
+use App\Events\RedirectAfterOperationEvent;
 use App\Events\SignOffRecallEvent;
 use App\Events\SignOffRemindEvent;
 use App\Events\SignOffRequestEvent;
@@ -15,9 +17,12 @@ use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Events\UpdatedUserPositionEvent;
 use App\Events\UserSignedInEvent;
+use App\Listeners\ButtonClickListener;
 //------------
 use App\Listeners\CreatedDocumentListener2;
 use App\Listeners\OpenedDocumentListener;
+use App\Listeners\OperationProcessedListener;
+use App\Listeners\RedirectAfterOperationListener;
 use App\Listeners\SignOffRemindListener;
 use App\Listeners\SignOffRecallListener;
 use App\Listeners\SignOffRequestListener;
@@ -72,6 +77,9 @@ class EventServiceProvider extends ServiceProvider
 
         //Handle update job description
         UpdatedUserPositionEvent::class => [UpdatedUserPositionListener::class],
+
+        //Diginet
+        ButtonClickEvent::class => [ButtonClickListener::class],
     ];
 
     /**

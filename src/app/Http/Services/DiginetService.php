@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Events\ButtonClickEvent;
 use App\Http\Controllers\DiginetHR\PageController\DiginetDataController;
 use App\Utils\Support\APIDiginet;
 use App\Utils\Support\CurrentUser;

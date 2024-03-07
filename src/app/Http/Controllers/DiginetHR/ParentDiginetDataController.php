@@ -22,7 +22,7 @@ abstract class ParentDiginetDataController extends Controller
     public function index(Request $request)
     {
         $token = CurrentUser::getTokenForApi();
-        return view("diginet.diginet-transfer-data", [
+        return view("diginet.transfer-diginet-data", [
             'token' => $token,
             'endpointNameDiginet' => $this->endpointNameDiginet,
             'topTitle' => $this->topTitle,

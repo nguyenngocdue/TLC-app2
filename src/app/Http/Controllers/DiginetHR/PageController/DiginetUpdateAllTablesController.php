@@ -18,7 +18,7 @@ class DiginetUpdateAllTablesController extends Controller
     {
         $token = CurrentUser::getTokenForApi();
         $endpointNameDiginet = "all-tables";
-        return view("diginet.diginet-transfer-data-update-all-table", [
+        return view("diginet.transfer-diginet-data-update-all-table", [
             'token' => $token,
             'endpointNameDiginet' => $endpointNameDiginet
         ]);

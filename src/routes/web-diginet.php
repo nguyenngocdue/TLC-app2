@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ButtonClickController;
 use App\Http\Controllers\DiginetHR\PageController\DiginetBusinessTripLinesController;
 use App\Http\Controllers\DiginetHR\PageController\DiginetDataController;
 use App\Http\Controllers\DiginetHR\PageController\DiginetEmployeeHoursController;
@@ -31,6 +32,8 @@ Route::group(
         Route::get('all-tables', [DiginetUpdateAllTablesController::class, 'index'])->name('all-tables.index');
 
         Route::post('delete', [DiginetEmployeeHoursController::class, 'delete'])->name('delete-database.delete');
+
+        Route::post('/handle-click-event', [ButtonClickController::class, 'handleClickEvent'])->name('handle-click');
     }
 );
 

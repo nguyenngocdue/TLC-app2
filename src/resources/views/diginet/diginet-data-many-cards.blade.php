@@ -5,6 +5,12 @@
 
 @section('content')
 
+@if(Session::has('toastr_message'))
+@dump(132)
+    <script>
+        toastr.success('{{ Session::get('toastr_message') }}');
+    </script>
+@endif
 
 <div class="container mx-auto px-4 py-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
@@ -105,7 +111,6 @@
                 </svg>
             </button>
         </div>
-        
         <div class="body p-4 ">
             <!-- Body content goes here -->
         </div>
@@ -205,22 +210,22 @@ function openPopupShowFiles(arrayRoutes, element){
                             if (response.results && response.results !== "undefined") {
                                 const allResults = response.results;
                                 allResults.map(function(item) {
-                                    toastr.clear(processingToast);
+                                    //toastr.clear(processingToast);
                                     toastr.success(item.message);
                                 })
                             } else {
                                 if (message === "success"){
-                                    toastr.clear(processingToast);
+                                    //toastr.clear(processingToast);
                                     toastr.success(response);
                                 }else{
-                                    toastr.clear(processingToast);
+                                    //toastr.clear(processingToast);
                                     toastr.error(response);
                                 }
                             }
                         },
                         error: function(xhr, status, error) {
                             console.error('Error sending POST request', xhr, status, error);
-                            toastr.clear(processingToast);
+                            //toastr.clear(processingToast);
                         }
                     });
                 }else {
