@@ -106,7 +106,7 @@
     <div class="bg-white p-5 rounded-lg shadow-xl w-[95%] m-auto items-center mt-[5%] border-2 border-gray-200 relative">
         <div class="header shadow-lg p-3 flex justify-between items-center">
             <div id="top-title" class="text-2xl font-semibold text-purple-600">Update Database</div>
-            <button onclick="closePopup()" class="text-gray-600 hover:text-gray-900 transition ease-in-out duration-150">
+            <button onclick="closePopup()" class="text-gray-600 hover:text-gray-900 transition ease-in-out duration-150 hover:bg-slate-300">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -220,13 +220,14 @@
                                         toastr.success(response);
                                     }else{
                                         //toastr.clear(processingToast);
-                                        toastr.error(response);
+                                        toastr.warning(response);
                                     }
                                 }
                             },
                             error: function(xhr, status, error) {
                                 console.error('Error sending POST request', xhr, status, error);
-                                //toastr.clear(processingToast);
+                                toastr.clear(processingToast);
+                                toastr.error('An error occurred: ' + xhr.responseJSON.message);
                             }
                         });
                     }else {

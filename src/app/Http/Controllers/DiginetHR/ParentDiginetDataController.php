@@ -34,7 +34,6 @@ abstract class ParentDiginetDataController extends Controller
         $entity = $request->input()['entity'];
         $table = 'diginet_' . str_replace('-', '_', Str::plural($entity));
         $data = DB::table($table)->delete();
-        if (!$data) return "Data in [$table] table cleaned successfully.";
-        return "Failed to clean data in [$table] table.";
+        return "$data rows in [$table] table deleted successfully.";
     }
 }

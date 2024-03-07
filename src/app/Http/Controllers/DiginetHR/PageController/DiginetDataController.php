@@ -33,11 +33,10 @@ class DiginetDataController extends Controller
                     "employee-hours" => "delete-database.delete",
                 ],
                 "model_name" => "Diginet_employee_hour",
-                "data_index" => 0,
             ],
             "employee-leave-sheets" => [
                 "name" => "employee-leave-sheets",
-                "field_index_name" => "",
+                "field_index_name" => "la_date",
                 "endpoint_name_diginet" => "employee-leave",
                 "card_name" => "Employee Leave",
                 "card_description" => "This is a short description of the item.",
@@ -55,11 +54,10 @@ class DiginetDataController extends Controller
                     "employee-leave-lines" => "delete-database.delete"
                 ],
                 "model_name" => "Diginet_employee_leave_sheet",
-                "data_index" => 0,
             ],
             "all-tables" => [
                 "name" => "all-tables",
-                "field_index_name" => "",
+                "field_index_name" => null,
                 "endpoint_name_diginet" => "all-tables",
                 "card_name" => "Update the Entire Database",
                 "card_description" => "This is a short description of the item.",
@@ -70,7 +68,6 @@ class DiginetDataController extends Controller
                     "all-tables" => "delete-all-tables.delete",
                 ],
                 "model_name" => "",
-                "data_index" => 0,
             ],
             "employee-leave-lines" => [
 
@@ -83,7 +80,6 @@ class DiginetDataController extends Controller
                 "card_btn2_route" => null,
                 "card_btn3_route" => null,
                 "model_name" => "Diginet_employee_leave_line",
-                "data_index" => 1,
             ],
             "employee-overtime-sheets" => [
                 "name" => "employee-overtime-sheets",
@@ -105,7 +101,6 @@ class DiginetDataController extends Controller
                     "employee-overtime-lines" => "delete-database.delete"
                 ],
                 "model_name" => "Diginet_employee_overtime_sheet",
-                "data_index" => 1,
             ],
             "employee-overtime-lines" => [
                 "name" => "employee-overtime-lines",
@@ -117,11 +112,10 @@ class DiginetDataController extends Controller
                 "card_btn2_route" => null,
                 "card_btn3_route" => null,
                 "model_name" => "Diginet_employee_overtime_line",
-                "data_index" => 0,
             ],
             "business-trip-sheets" => [
                 "name" => "business-trip-sheets",
-                "field_index_name" => "",
+                "field_index_name" => "tb_date",
                 "endpoint_name_diginet" => "business-trip",
                 "card_name" => "Business Trip",
                 "card_description" => "This is a short description of the item.",
@@ -139,7 +133,6 @@ class DiginetDataController extends Controller
                     "business-trip-lines" => "delete-database.delete"
                 ],
                 "model_name" => "Diginet_business_trip_sheet",
-                "data_index" => 0,
             ],
             "business-trip-lines" => [
                 "name" => "business-trip-lines",
@@ -151,7 +144,6 @@ class DiginetDataController extends Controller
                 "card_btn2_route" => null,
                 "card_btn3_route" => null,
                 "model_name" => "Diginet_business_trip_line",
-                "data_index" => 1,
             ],
         ];
     }

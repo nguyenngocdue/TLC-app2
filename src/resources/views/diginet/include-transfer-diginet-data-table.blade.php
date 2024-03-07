@@ -110,7 +110,7 @@ $(document).ready(function() {
                                     if(item.status === 'success') {
                                         toastr.success(item.message);
                                     } else {
-                                        toastr.error(item.message);
+                                        toastr.warning(item.message);
                                     }
                                 })
                             }
@@ -119,7 +119,7 @@ $(document).ready(function() {
                             if(item.status === 'success') {
                                 toastr.success(item.message);
                             } else {
-                                toastr.error(item.message);
+                                toastr.warning(item.message);
                             }
                         }
 
@@ -127,9 +127,9 @@ $(document).ready(function() {
                 }
             },
             error: function(xhr, status, error) {
-                //toastr.clear(processingToast);
                 console.log(xhr, status, error)
-                toastr.error('An error occurred');
+                toastr.clear(processingToast);
+                toastr.error('An error occurred: ' + xhr.responseJSON.message);
             }
         });
     });
