@@ -135,10 +135,3 @@ $(document).ready(function() {
     });
 });
 </script>
-
-
-<script>
-        console.log("AAAA");
-        toastr.error('An error occurred: ABC Again ');
-</script>
-

@@ -2,33 +2,30 @@
 
 namespace App\Providers;
 
-use App\Events\ButtonClickEvent;
 use App\Events\CreatedDocumentEvent2;
 use App\Events\OpenedDocumentEvent;
-use App\Events\RedirectAfterOperationEvent;
 use App\Events\SignOffRecallEvent;
 use App\Events\SignOffRemindEvent;
 use App\Events\SignOffRequestEvent;
 use App\Events\SignOffSubmittedEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdatedEsgSheetEvent;
+use App\Events\UpdateDiginetDataEvent;
 use App\Events\UpdatedProdSequenceEvent;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Events\UpdatedUserPositionEvent;
 use App\Events\UserSignedInEvent;
-use App\Listeners\ButtonClickListener;
 //------------
 use App\Listeners\CreatedDocumentListener2;
 use App\Listeners\OpenedDocumentListener;
-use App\Listeners\OperationProcessedListener;
-use App\Listeners\RedirectAfterOperationListener;
 use App\Listeners\SignOffRemindListener;
 use App\Listeners\SignOffRecallListener;
 use App\Listeners\SignOffRequestListener;
 use App\Listeners\SignOffSubmittedListener;
 use App\Listeners\UpdatedDocumentListener2;
 use App\Listeners\UpdatedEsgSheetListener;
+use App\Listeners\UpdateDiginetDataListener;
 use App\Listeners\UpdatedProdSequenceListener;
 use App\Listeners\UpdatedQaqcChklstListener;
 use App\Listeners\UpdatedQaqcChklstSheetListener;
@@ -79,7 +76,7 @@ class EventServiceProvider extends ServiceProvider
         UpdatedUserPositionEvent::class => [UpdatedUserPositionListener::class],
 
         //Diginet
-        ButtonClickEvent::class => [ButtonClickListener::class],
+        UpdateDiginetDataEvent::class => [UpdateDiginetDataListener::class],
     ];
 
     /**

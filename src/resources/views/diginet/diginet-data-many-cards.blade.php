@@ -24,7 +24,7 @@
                 <div class="transform hover:scale-105 transition duration-500 ease-in-out {{$classAdd}}">
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl flex flex-col items-center">
                         <div class="px-4 py-2">
-                            <div class="font-bold text-xl text-center">{{$items['card_name']}}</div>
+                            <div class="font-bold text-xl text-center text-gray-700">{{$items['card_name']}}</div>
                         </div>
                         <div class="flex px-4 pt-2 pb-2">
                             {{-- UPDATE --}}
@@ -134,7 +134,7 @@
         var popupBody = $('#popup-container .body');
 
         popupBody.html(''); // delete old content
-        popupBody.append('<div class="font-semibold text-xl pb-4"><strong></strong> ' + carName + '</div>');
+        popupBody.append('<div class="font-semibold text-2xl pb-4 text-gray-700"><strong></strong> ' + carName + '</div>');
 
         $.ajax({
             url: _url,
@@ -175,7 +175,7 @@
 
         Object.entries(arrayRoutes).forEach(([key, value]) => {
             popupBody.append(`
-            <a href="${typeCick === 'delete' ? '' : value}" data-url="${value}" data-entity="${key}" target="__blank" class=" mx-2 post-link inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+            <a href="${typeCick === 'delete' ? '' : value}" data-url="${value}" data-entity="${key}" target="__blank" class=" mx-2 post-link inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-green-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                 ${key}
                 <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/></svg>
