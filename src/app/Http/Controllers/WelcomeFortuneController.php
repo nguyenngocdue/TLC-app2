@@ -209,55 +209,42 @@ class WelcomeFortuneController extends Controller
             //     'name' => 'STW',
             //     'uuid' => '92f3bbe6-4d6a-4fe5-8e19-ffa38cb7539c', // Townhouse
             // ],
-            [
-                'name' => 'GHT',
-                'uuid' => '48e8af9f-717f-4e32-9696-cc77df35eba9', // Module
-            ],
-            [
-                'name' => 'NGH',
-                'uuid' => 'ec43b961-60d8-4029-8c75-29d384250359', // Module
-            ],
-            [
-                'name' => 'BTH',
-                'uuid' => '3108bc46-4e90-4ffc-a192-6f2407ba76dd', // Module
-            ],
-            [
-                'name' => 'HLC_OFFSITE_N17',
-                'uuid' => '', // Module
-            ],
-            [
-                'name' => 'HLC_OFFSITE_N18',
-                'uuid' => '', // Module
-            ],
-            [
-                'name' => 'HLC_SHIPPING',
-                'uuid' => '', // Module
-            ],
-        ];
-        $allProjects = [
-            [
-                'name' => 'GHT',
-                'uuid' => 'b3d5f8bd-ffd5-498b-beac-07e925e29e43', // Shipping
-            ],
-            [
-                'name' => 'NGH',
-                'uuid' => '8e8850ad-cc2d-4a67-8160-c2beef4a19d0', // Shipping
-            ],
-            [
-                'name' => 'BTH',
-                'uuid' => '4d382d05-579e-4a0b-8f5a-a6ccfceaf070', // Shipping
-            ],
-            [
-                'name' => 'HLC_OFFSITE_N17',
-                'uuid' => '', // Shipping
-            ],
-            [
-                'name' => 'HLC_OFFSITE_N18',
-                'uuid' => '', // Shipping
-            ],
+            // [
+            //     'name' => 'GHT',
+            //     'uuid' => '48e8af9f-717f-4e32-9696-cc77df35eba9', // Module
+            // ],
+            // [
+            //     'name' => 'NGH',
+            //     'uuid' => 'ec43b961-60d8-4029-8c75-29d384250359', // Module
+            // ],
+            // [
+            //     'name' => 'BTH',
+            //     'uuid' => '3108bc46-4e90-4ffc-a192-6f2407ba76dd', // Module
+            // ],
+            // [
+            //     'name' => 'HLC_OFFSITE_N17',
+            //     'uuid' => '54ba204c-584a-47a2-b9a1-5089c33b7781', // Module
+            // ],
+            // [
+            //     'name' => 'HLC_OFFSITE_N18',
+            //     'uuid' => '243064a6-c5ea-4521-8a34-876410cc2abe', // Module
+            // ],
+            // //SHIPPING START FROM HERE
+            // [
+            //     'name' => 'GHT',
+            //     'uuid' => 'b3d5f8bd-ffd5-498b-beac-07e925e29e43', // Shipping
+            // ],
+            // [
+            //     'name' => 'NGH',
+            //     'uuid' => '8e8850ad-cc2d-4a67-8160-c2beef4a19d0', // Shipping
+            // ],
+            // [
+            //     'name' => 'BTH',
+            //     'uuid' => '4d382d05-579e-4a0b-8f5a-a6ccfceaf070', // Shipping
+            // ],
             [
                 'name' => 'HLC_SHIPPING',
-                'uuid' => '', // Shipping
+                'uuid' => '08f579d5-16c3-4a1f-860a-2b9f97d3a228', // Shipping
             ],
         ];
 
