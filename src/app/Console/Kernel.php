@@ -38,7 +38,7 @@ class Kernel extends ConsoleKernel
             })
             ->cron('0 22 * * *') // 0 minute, 22:00, every day of month, every month, Day of week
             ->timezone("Asia/Bangkok")
-            ->appendOutputTo("storage/logs/transfer_diginet_data.log")
+            ->appendOutputTo("storage/logs/schedule_transfer_diginet_data.log")
             ->description("Daily at 10PM Bangkok Time: TransferDiginetEvent emitted from schedule.");
     }
 
