@@ -50,4 +50,10 @@ trait HasCachedAvatar
         }
         return static::$avatarSingleton00[$this::class][$id];
     }
+
+    function getAvatarUrl($defaultImage = "/images/avatar.jpg")
+    {
+        $thumbnail = $this->getAvatarThumbnailUrl($defaultImage);
+        return str_replace("-150x150", "", $thumbnail);
+    }
 }

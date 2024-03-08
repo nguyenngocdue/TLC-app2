@@ -18,10 +18,13 @@ trait TraitEntityCRUDShowQRLandingPage
 			throw new NotFoundHttpException();
 		}
 		$props = SuperProps::getFor($this->type)['props'];
+
+		$thumbnailUrl = $item->getSubProject?->getProject->getAvatarUrl() ?? "/images/generic-module1.webp";
 		return view('dashboards.pages.entity-show-landing-page', [
 			'props' => $props,
 			'moduleName' => $item->name,
 			'dataSource' => $this->getDataSourceGroups($item),
+			'thumbnailUrl' => $thumbnailUrl,
 			'type' => $this->type,
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
 		]);
