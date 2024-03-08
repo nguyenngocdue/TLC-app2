@@ -12,7 +12,10 @@
                     <img class="w-full h-full object-cover" src="{{$thumbnailUrl}}" alt="image" 
                     >
                 </div>
-                    <span class="mt-2 text-base font-semibold flex justify-center truncate">{{$moduleName}}</span>
+                <div class="p-4 text-base flex justify-center bg-gray-200 truncate">
+                    Module serial number: 
+                    <span class="ml-1 font-semibold">{{$moduleName}}</span>
+                </div>
             </div>
             <div class="w-auto justify-center mt-6 mx-auto px-4">
                 <div class="lg:grid lg:grid-cols-2 gap-5">
