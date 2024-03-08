@@ -49,7 +49,7 @@
                                 @endphp
                                 <div class="text-center">
                                     <span class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
-                                                    onclick='openPopupShowFiles({!! json_encode($routeViewFromNames) !!}, this)'
+                                                    onclick='openPopupShowEntities({!! json_encode($routeViewFromNames) !!}, this)'
                                                     data-name="{{$items['card_name']}}"
                                                     top-title="Review Datasource"
                                                     type-click="review"
@@ -67,7 +67,7 @@
                                 @endphp
                                 <div class="text-center">
                                     <span class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
-                                                    onclick='openPopupShowFiles({!! json_encode($routeExFromNames) !!}, this)'
+                                                    onclick='openPopupShowEntities({!! json_encode($routeExFromNames) !!}, this)'
                                                     data-name="{{$items['card_name']}}"
                                                     top-title="Export Datasource"
                                                     type-click="export_excel"
@@ -85,7 +85,7 @@
                                 @endphp
                                 <div class="text-center">
                                     <span class="inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer" 
-                                                    onclick='openPopupShowFiles({!! json_encode($arrayRoutesDel) !!}, this)'
+                                                    onclick='deleteDatabase({!! json_encode($arrayRoutesDel) !!}, this)'
                                                     type-click="delete"
                                                     data-name="{{$items['card_name']}}"
                                                     top-title="Delete Datasource">
@@ -149,93 +149,6 @@
         });
     }
 
-    function closePopup() {
-        document.getElementById('popup-container').classList.add('hidden');
-        document.getElementById('popup-container').classList.add('hidden');
-    }
-
-    function handleEscapeKeyForPopup(event) {
-        if (event.key === "Escape" || event.keyCode === 27) {
-            closePopup();
-        }
-    }
-
-    function openPopupShowFiles(arrayRoutes, element){
-        document.addEventListener('keydown', handleEscapeKeyForPopup);
-        document.getElementById('top-title').innerHTML = element.getAttribute('top-title');
-        document.getElementById('popup-container').classList.remove('hidden');
-        
-        var typeCick = element.getAttribute('type-click'); // get URL from data-url attribute
-        var url = element.getAttribute('data-url'); // get URL from data-url attribute
-        var carName = element.getAttribute('data-name');
-        var popupBody = $('#popup-container .body');
-
-        popupBody.html(''); // delete old content
-        popupBody.append('<div class="font-semibold text-xl pb-4"><strong></strong> ' + carName + '</div>');
-
-        Object.entries(arrayRoutes).forEach(([key, value]) => {
-            popupBody.append(`
-            <a href="${typeCick === 'delete' ? '' : value}" data-url="${value}" data-entity="${key}" target="__blank" class=" mx-2 post-link inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-green-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                ${key}
-                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/></svg>
-            </a>`   
-            );
-        });
-
-
-        if (typeCick === 'delete' && !window.postLinkEventAdded) {
-            $(document).on('click.postLink', '.post-link', function(e) {
-                window.postLinkEventAdded = true; 
-                const isConfirmed = window.confirm("Are you sure you want to delete?");
-                if (isConfirmed) {
-                        e.preventDefault();
-                        const url = $(this).data('url'); 
-                        const entity = $(this).data('entity');
-                        let processingToast = toastr.info('Processing your request...', {
-                            timeOut: 0, 
-                            extendedTimeOut: 0,
-                            closeButton: true,
-                            progressBar: true,
-                            tapToDismiss: true
-                        });
-                        $.ajax({
-                            url: url,
-                            method: "POST",
-                            headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            contentType: 'application/json',
-                            data: JSON.stringify({ "entity": entity }),
-                            success: function(response, message) {
-                                if (response.results && response.results !== "undefined") {
-                                    const allResults = response.results;
-                                    allResults.map(function(item) {
-                                        toastr.clear(processingToast);
-                                        toastr.success(item.message);
-                                    })
-                                } else {
-                                    if (message === "success"){
-                                        toastr.clear(processingToast);
-                                        toastr.success(response);
-                                    }else{
-                                        toastr.warning(response);
-                                    }
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                console.error('Error sending POST request', xhr, status, error);
-                                toastr.clear(processingToast);
-                                toastr.error('An error occurred: ' + xhr.responseJSON.message);
-                            }
-                        });
-                    }else {
-                        return false;
-                    }
-            });
-        }
-
-    }
 </script>
 @endsection
 

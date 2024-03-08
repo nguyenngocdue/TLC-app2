@@ -51,21 +51,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function getFirstAndLastDayOfMonth(year, _month) {
-    // Calculate the year and month for the last day
-    const yearFisrt = _month === 1 ? year - 1 : year;
-    const monthFirst = _month === 1 ? 12 : String(_month - 1).padStart(2, '0');
-    // Format the current month to two digits
-    const month = String(_month).padStart(2, '0');
-    // Define first and last days
-    const firstDay = `${yearFisrt}-${monthFirst}-26`;
-    const lastDay = `${year}-${month}-25`;
-     return {
-        firstDay: firstDay,
-        lastDay: lastDay
-    };
-}
-
 $(document).ready(function() {
     $('.btn-month').click(function() {
         const year = parseInt($(this).data('year'));
