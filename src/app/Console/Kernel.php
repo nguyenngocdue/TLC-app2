@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
             // ->at('10:00')
             ->cron('0 10 * * 1,3,5') // 0 minute, 10 hour, any day of the month, any month, Monday/Wednesday/Friday
             ->timezone('America/New_York')
-            ->appendOutputTo("storage/logs/schedule.log")
+            ->appendOutputTo("storage/logs/schedule_remind_signoff.log")
             ->description("EVERY MON/WED/FRI at 10AM US Time: SignOffRemindEvent emitted from Schedule.");
 
 
