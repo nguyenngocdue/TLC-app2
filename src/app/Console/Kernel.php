@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
                 event(new \App\Events\TransferDiginetDataEvent());
             })
 
-            // ->cron('18 10 * * *') // 0 minute, 10:00AM, every day of month, every month, every day of the week
+            #->cron('0 22 * * *') // 0 minute, 22:00, every day of month, every month, Day of week
             ->timezone("Asia/Bangkok")
             ->appendOutputTo("storage/logs/transfer_diginet_data.log")
             ->description("Daily at 10PM Bangkok Time: TransferDiginetEvent emitted from schedule.")
