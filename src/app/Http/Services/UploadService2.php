@@ -8,7 +8,6 @@ use App\Models\Field;
 use App\Utils\Constant;
 use App\Utils\Support\AttachmentName;
 use App\Utils\Support\Json\Properties;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -88,7 +87,6 @@ class UploadService2
                 $maxFileCount = ($property['max_file_count'] == "" ? 10 : $property['max_file_count']);
                 $fileUploadCount = $this->countFileUploadByCondition($fieldName, $request->input('id'));
                 $fileUploadRemainingCount = $maxFileCount - $fileUploadCount;
-                Log::info("fileUploadRemainingCount " .  $maxFileCount . " - " . $fileUploadCount);
                 $allowedFileTypes = $property['allowed_file_types'];
                 $allowedFileTypes = $this->getAllowedFileTypes($allowedFileTypes);
                 $request->validate([
@@ -99,7 +97,7 @@ class UploadService2
                 $files = $files['toBeUploaded'];
                 foreach ($files as $file) {
                     if (!$file->getClientOriginalExtension()) {
-                        Toastr::warning('File without extension cannot be uploaded!', 'Upload File Warning');
+                        toastr()->warning('File without extension cannot be uploaded!', 'Upload File Warning');
                     } else {
                         $fileName = AttachmentName::slugifyImageName($file, $attachmentRows);
                         $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
