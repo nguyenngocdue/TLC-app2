@@ -54,6 +54,7 @@ class PrintPageToc extends Component
      */
     public function render()
     {
+        $tableDataSource = [];
         foreach ($this->dataSource as &$value) {
             $value['response_type'] = $this->createDataSource($value);
             $tableDataSource[] = $value->toArray();
