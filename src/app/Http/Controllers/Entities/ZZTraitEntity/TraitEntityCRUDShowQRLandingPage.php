@@ -59,7 +59,7 @@ trait TraitEntityCRUDShowQRLandingPage
 				$shipping_doc_link = $item->shipping_doc_link;
 
 				$qa_records[] = ['name' => "MODULE Inspection Checklist", 'href' => $insp_chklst_link,];
-				$qa_records[] = ['name' => "SHIPPING Inspection Checklist", 'href' => $shipping_doc_link,];
+				$qa_records[] = ['name' => "SHIPPING DELIVERY Checklist", 'href' => $shipping_doc_link,];
 				break;
 			default:
 				$qa_records = [];
