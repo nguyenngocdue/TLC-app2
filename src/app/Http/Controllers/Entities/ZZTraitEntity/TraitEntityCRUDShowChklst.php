@@ -17,6 +17,8 @@ trait TraitEntityCRUDShowChklst
     {
         $entity = $trashed ? ($this->modelPath)::withTrashed()->findOrFail($id) : ($this->modelPath)::findOrFail($id);;
         $entityShts = $entity->getSheets;
+
+        $tableDataSource = [];
         foreach ($entityShts as $sheet) {
             $tableDataSource[] = $this->transformDataSource($sheet->getLines->sortBy('order_no'), $sheet->{$this->nominatedListFn});
         }

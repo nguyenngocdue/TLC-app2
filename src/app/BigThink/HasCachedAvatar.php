@@ -20,11 +20,12 @@ trait HasCachedAvatar
 
     function getUserAvatarFromDB($objectType, $id)
     {
+        $table = $this->table;
         $result = [];
         if (!isset(static::$avatarSingleton01[$objectType])) {
             $objectTypeEsc = str_replace('\\', '\\\\', $objectType);
             $sql = "SELECT u.id AS u_id, att.id AS att_id, att.url_thumbnail
-            FROM users u
+            FROM $table u
                 LEFT JOIN attachments att ON (
                     u.id=att.object_id
                     AND att.object_type='$objectTypeEsc'
@@ -49,5 +50,11 @@ trait HasCachedAvatar
             static::$avatarSingleton00[$this::class][$id] = $thumbnail ?  $path .  $thumbnail : $defaultImage;
         }
         return static::$avatarSingleton00[$this::class][$id];
+    }
+
+    function getAvatarUrl($defaultImage = "/images/avatar.jpg")
+    {
+        $thumbnail = $this->getAvatarThumbnailUrl($defaultImage);
+        return str_replace("-150x150", "", $thumbnail);
     }
 }
