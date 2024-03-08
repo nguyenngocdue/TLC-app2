@@ -8,6 +8,7 @@ use App\Events\SignOffRecallEvent;
 use App\Events\SignOffRemindEvent;
 use App\Events\SignOffRequestEvent;
 use App\Events\SignOffSubmittedEvent;
+use App\Events\TransferDiginetDataEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdatedEsgSheetEvent;
 use App\Events\UpdateDiginetDataEvent;
@@ -23,6 +24,7 @@ use App\Listeners\SignOffRemindListener;
 use App\Listeners\SignOffRecallListener;
 use App\Listeners\SignOffRequestListener;
 use App\Listeners\SignOffSubmittedListener;
+use App\Listeners\TransferDiginetDataListener;
 use App\Listeners\UpdatedDocumentListener2;
 use App\Listeners\UpdatedEsgSheetListener;
 use App\Listeners\UpdateDiginetDataListener;
@@ -76,7 +78,7 @@ class EventServiceProvider extends ServiceProvider
         UpdatedUserPositionEvent::class => [UpdatedUserPositionListener::class],
 
         //Diginet
-        UpdateDiginetDataEvent::class => [UpdateDiginetDataListener::class],
+        TransferDiginetDataEvent::class => [TransferDiginetDataListener::class],
     ];
 
     /**

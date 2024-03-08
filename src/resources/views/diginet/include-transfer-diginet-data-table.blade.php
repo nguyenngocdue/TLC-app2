@@ -59,19 +59,18 @@ $(document).ready(function() {
         const urlAPI = '{{$endpointNameDiginet}}' === 'all-tables' ?
                         `/v1/transfer-data-diginet/update-all-tables` :
                         `/v1/transfer-data-diginet/`+ '{{$endpointNameDiginet}}';
-        const method = '{{$endpointNameDiginet}}' === 'all-tables' ? 'POST' : 'POST';
 
         let processingToast = toastr.info('Processing your request...', {
-                    timeOut: 0, // Prevents the toastr from auto-hiding
-                    extendedTimeOut: 0, // Prevents the toastr from auto-hiding when hovered
-                    closeButton: true, // Allows the user to close the notification if desired
-                    progressBar: true, // Displays a progress bar (though it won't advance automatically)
-                    tapToDismiss: true, // Allows the user to dismiss the notification
+                    timeOut: 0,
+                    extendedTimeOut: 0,
+                    closeButton: true,
+                    progressBar: true,
+                    tapToDismiss: true,
                 });
 
         $.ajax({
             url: urlAPI,
-            method: method,
+            method: "POST",
             contentType: 'application/json',
             headers: {
                 'Authorization': 'Bearer ' + '{{$token}}',

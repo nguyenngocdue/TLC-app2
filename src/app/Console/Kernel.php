@@ -6,6 +6,7 @@ namespace App\Console;
 // use App\Console\Commands\CreateTableRelationshipCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -28,9 +29,22 @@ class Kernel extends ConsoleKernel
             ->timezone('America/New_York')
             ->appendOutputTo("storage/logs/schedule.log")
             ->description("EVERY MON/WED/FRI at 10AM US Time: SignOffRemindEvent emitted from Schedule.");
+
+
+        // transfer database from Diginet Data 
+        $schedule
+            ->call(function () {
+                event(new \App\Events\TransferDiginetDataEvent());
+            })
+
+            // ->cron('18 10 * * *') // 0 minute, 10:00AM, every day of month, every month, every day of the week
+            ->timezone("Asia/Bangkok")
+            ->appendOutputTo("storage/logs/transfer_diginet_data.log")
+            ->description("Daily at 10PM Bangkok Time: TransferDiginetEvent emitted from schedule.")
+            ->everyMinute();
     }
 
-    /**
+    /**`
      * Register the commands for the application.
      *
      * @return void

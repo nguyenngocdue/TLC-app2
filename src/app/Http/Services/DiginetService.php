@@ -26,9 +26,9 @@ class DiginetService
         $array = [];
         foreach ($fieldsDiginet as $key => $field) {
             $val = $item[$field];
-            if ($key == $conFieldName) $val = $this->changeTypeDate($val);
+            if ($key === $conFieldName) $val = $this->changeTypeDate($val);
             $array[$key] = $val;
-            $array['owner_id'] = CurrentUser::id();
+            $array['owner_id'] = 1;
         }
         return $array;
     }
@@ -74,6 +74,7 @@ class DiginetService
                 $recordCount++;
             }
             $response['status'] = 'success';
+            $response['period'] = $FromDate . ' - ' . $toDate;
             $response['table_on'] = $tableName;
             $response['message'] = "{$recordCount} rows have been successfully added to <strong>[{$tableName}]</strong> table.";
             $response['recordsAdded'] = $recordCount;
