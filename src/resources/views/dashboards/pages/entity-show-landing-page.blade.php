@@ -15,16 +15,15 @@
                     <span class="mt-2 text-base font-semibold flex justify-center truncate">{{$moduleName}}</span>
             </div>
             <div class="w-auto justify-center mt-6 mx-auto px-4">
-                <div class="md:grid md:grid-cols-2 gap-5">
+                <div class="lg:grid lg:grid-cols-2 gap-5">
                     @foreach($dataSource as $index => $group)
                     <x-renderer.card title="{{$index}}">
                         @foreach($group as $value)
-                            <x-print.hyper-link5 label="{{$value['name']}}" href="{{$value['href']}}" />
+                            <x-print.hyper-link5 label="{{$value['name']}}" href="{{$value['href'] ?? ''}}" />
                         @endforeach
                     </x-renderer.card>
                     @endforeach
                 </div>
-                
             </div>
         </div>
         
