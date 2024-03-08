@@ -40,19 +40,19 @@ class UploadService2
         $prefix = "mimes:";
         switch ($type) {
             case 'only_images':
-                $result = $prefix.Constant::ONLY_IMAGES;
+                $result = $prefix . Constant::ONLY_IMAGES;
                 break;
             case 'only_videos':
-                $result = $prefix.Constant::ONLY_VIDEOS;
+                $result = $prefix . Constant::ONLY_VIDEOS;
                 break;
             case 'only_media':
-                $result = $prefix.Constant::ONLY_IMAGES.",".Constant::ONLY_VIDEOS;
+                $result = $prefix . Constant::ONLY_IMAGES . "," . Constant::ONLY_VIDEOS;
                 break;
             case 'only_non_media':
-                $result = $prefix.Constant::ONLY_NONE_MEDIA;
+                $result = $prefix . Constant::ONLY_NONE_MEDIA;
                 break;
             case 'all_supported':
-                $result = $prefix.Constant::ONLY_IMAGES.",".Constant::ONLY_VIDEOS.",".Constant::ONLY_NONE_MEDIA; 
+                $result = $prefix . Constant::ONLY_IMAGES . "," . Constant::ONLY_VIDEOS . "," . Constant::ONLY_NONE_MEDIA;
                 break;
             default:
                 break;
@@ -63,7 +63,11 @@ class UploadService2
     {
         $fieldId = Field::where('name', $fieldName)->first()->id;
         return Attachment::where('object_type', $this->model)
-            ->where('object_id', $id)->where('category', $fieldId)->get()->count() ?? 0;
+            ->where('object_id', $id)
+            ->where('category', $fieldId)
+            ->where('deleted_at', null)
+            ->get()
+            ->count() ?? 0;
     }
     public function store($request, $object_type = null, $object_id = null)
     {
@@ -141,7 +145,7 @@ class UploadService2
             // dd($result);
             return $result;
         } catch (ValidationException $ve) {
-            Toastr::warning($ve->getMessage() . "<br/>(You maybe upload more than the max allowed files.)", 'Upload File Problem');
+            toastr()->warning($ve->getMessage() . "<br/>(You maybe upload more than the max allowed files.)", 'Upload File Problem');
         } catch (\Exception $e) {
             dd($e);
             // Toastr::warning($e, 'Upload File Warning');
