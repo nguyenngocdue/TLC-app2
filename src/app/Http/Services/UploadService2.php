@@ -88,6 +88,7 @@ class UploadService2
                 $maxFileCount = ($property['max_file_count'] == "" ? 10 : $property['max_file_count']);
                 $fileUploadCount = $this->countFileUploadByCondition($fieldName, $request->input('id'));
                 $fileUploadRemainingCount = $maxFileCount - $fileUploadCount;
+                Log::info("fileUploadRemainingCount " .  $maxFileCount . " - " . $fileUploadCount);
                 $allowedFileTypes = $property['allowed_file_types'];
                 $allowedFileTypes = $this->getAllowedFileTypes($allowedFileTypes);
                 $request->validate([
