@@ -55,23 +55,4 @@ Route::group([
     Route::post('orphan/many_to_many', [OrphanManyToManyController::class, 'destroy'])->name('orphan.destroy');
 
     Route::get('php_info', fn () => phpinfo());
-    Route::get('remote-gitpull/{project}', function ($project) {
-        $cmd = null;
-        switch ($project) {
-            case "digital.tlcmodular.com":
-                $cmd = "ssh root@192.168.100.100 'cd /home/gohugo/digital-hub && git pull'";
-                break;
-        }
-        if ($cmd) {
-            $output = shell_exec($cmd);
-            if ($output) {
-                Log::info($output);
-                echo "<pre>$output</pre>";
-            } else {
-                Log::error(error_get_last());
-            }
-        } else {
-            echo "Project $project not found";
-        }
-    });
 });
