@@ -78,7 +78,7 @@ class DiginetService
             $response['table_on'] = $tableName;
             $response['message'] = "{$recordCount} rows have been successfully added to <strong>[{$tableName}]</strong> table.";
             $response['recordsAdded'] = $recordCount;
-            Log::info($response);
+            // Log::info($response);
         }
         return $response;
     }
