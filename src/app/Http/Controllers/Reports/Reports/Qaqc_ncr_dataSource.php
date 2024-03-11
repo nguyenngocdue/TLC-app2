@@ -95,7 +95,7 @@ class Qaqc_ncr_dataSource extends Controller
     {
         $sql = $this->getSql($params);
         if (is_null($sql) || !$sql) return collect();
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         $collection = collect($sqlData);
         return $collection;
     }

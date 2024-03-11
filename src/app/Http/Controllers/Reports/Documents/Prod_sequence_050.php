@@ -149,7 +149,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                         ";
 
         $sql = $this->preg_match_all($sql, $params);
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         return ($sqlData);
     }
 

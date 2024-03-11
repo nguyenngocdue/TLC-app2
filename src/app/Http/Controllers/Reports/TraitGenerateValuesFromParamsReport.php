@@ -36,6 +36,8 @@ trait TraitGenerateValuesFromParamsReport
 			'kanban_task_bucket_id',
 			'kanban_task_id',
 			'kanban_task_group_id',
+			'sheet_id',
+			'qaqc_insp_tmpl_id'
 
 		], $params);
 		return $valOfParams;

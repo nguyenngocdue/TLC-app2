@@ -55,7 +55,8 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 <div class="flex flex-col justify-center bg-only-print">
     <div class="md:px-4">
         {{-- PAGE 1 --}}
-        <div id="pageco2_emission_report"  class="{{$layout}} flex m-auto items-center bg-white box-border mt-20">
+        {{-- <div class="w-full h-7 ">2323</div> --}}
+        <div id="pageco2_emission_report"  class="{{$layout}} flex m-auto items-center bg-white box-border mt-28">
                 <img src="{{ asset('images/report/Green and white Sustainability modern presentation-1.png') }}" class="w-full h-full object-cover"/>
         </div>
         <x-renderer.page-break />

@@ -52,7 +52,7 @@ class Site_daily_assignment_dataSource2 extends Controller
                         AND sda.id = sdal.site_daily_assignment_id
                         AND sda.deleted_by IS NULL
                         AND sdal.deleted_by IS NULL";
-        if($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
+        if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND sdal.sub_project_id IN ($sub)";
         if ($us = $valOfParams['user_id']) $sql .= "\n AND sdal.user_id IN ($us)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND mtm_sdal.prod_routing_link_id IN ($prl)
@@ -68,7 +68,7 @@ class Site_daily_assignment_dataSource2 extends Controller
     {
         $sql = $this->getSql($params);
         if (is_null($sql) || !$sql) return collect();
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         $collection = collect($sqlData);
         return $collection;
     }

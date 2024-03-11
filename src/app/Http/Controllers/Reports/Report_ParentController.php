@@ -66,14 +66,14 @@ abstract class Report_ParentController extends Controller
         if (empty($arraySqlStr)) {
             $sql = $this->getSql($params);
             if (is_null($sql) || !$sql) return collect();
-            $sqlData = DB::select(DB::raw($sql));
+            $sqlData = DB::select($sql);
             return collect($sqlData);
         }
         $data = [];
         foreach ($arraySqlStr as $k => $sql) {
             if (is_null($sql) || !$sql) return collect();
             // $sql = $this->getSql($params);
-            $sqlData = DB::select(DB::raw($sql));
+            $sqlData = DB::select($sql);
             $data[$k] = collect($sqlData);
         }
         $dataSource = $this->overKeyAndValueDataSource($params, $data);

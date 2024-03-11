@@ -97,7 +97,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         AND pse.deleted_by IS NULL
                         AND sp.project_id = {{project_id}}
                         AND sp.id = {{sub_project_id}}";
-                        #AND pse.status IN ('in_progress', 'finished')";
+        #AND pse.status IN ('in_progress', 'finished')";
         if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
         if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
         if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pse.prod_routing_link_id = {{prod_routing_link_id}}";
@@ -119,7 +119,8 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
         return $sql;
     }
 
-    private function getAllProdOrders($params){
+    private function getAllProdOrders($params)
+    {
         $sql = "SELECT
                     sp.project_id,
                     pj.name AS project_name,
@@ -149,7 +150,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 #LEFT JOIN prod_routing_details prd  ON {{prod_routing_id}} = prd.prod_routing_id
                 
                 WHERE 1 = 1";
-            $sql .= "\n 
+        $sql .= "\n 
                         AND pse.id IS NULL
                         AND pse.deleted_by IS NULL
                         AND sp.project_id = {{project_id}}
@@ -158,7 +159,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         ";
 
         $sql = $this->preg_match_all($sql, $params);
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         return ($sqlData);
     }
 
@@ -181,13 +182,13 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
 
             // information for headings
             $typeCharts = ['man_power', 'total_uom', 'min_on_day', 'min_on_set'];
-            $titleCharts = ['Man Power (AVG)', $unit.'/Day (AVG)', 'min/Day (AVG)', 'min/'.$unit .' (AVG)'];
+            $titleCharts = ['Man Power (AVG)', $unit . '/Day (AVG)', 'min/Day (AVG)', 'min/' . $unit . ' (AVG)'];
             $titleHeadingCharts = ['Man Power (AVG)', 'Efficiency', 'Time Efficiency', 'Productivity'];
 
-            foreach($typeCharts as $key => $typeChart){
+            foreach ($typeCharts as $key => $typeChart) {
                 // information for meta data
-                $labelName = array_map(fn($item) => $item['prod_order_name'], $items);
-                $dataNumber = array_map(fn($item) => $item[$typeChart], $items);
+                $labelName = array_map(fn ($item) => $item['prod_order_name'], $items);
+                $dataNumber = array_map(fn ($item) => $item[$typeChart], $items);
                 $labels = StringReport::arrayToJsonWithSingleQuotes($labelName);
                 $numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($dataNumber));
                 $max = max(array_values($dataNumber));
@@ -198,7 +199,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     'max' => $max,
                     'count' => $count
                 ];
-    
+
                 // information for metric data
                 $metric = [];
                 array_walk($dataNumber, function ($value, $key) use (&$metric) {
@@ -207,7 +208,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                         'metric_name' => $value
                     ];
                 });
-    
+
                 // relate to dimensions AxisX and AxisY
                 $dimensions = [
                     'scaleMaxY' => null,
@@ -227,29 +228,29 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     'barPercentage' => 0.5,
                     'widthBar' => 100,
                     'dataLabelOffset' => 10,
-                    'lessThen100' =>false,
-                    'legendX'=>true,
+                    'lessThen100' => false,
+                    'legendX' => true,
                     'zoomWheelEnabled' => 0,
                     'zoomMode' => 'xx',
                     'stepSizeY' => 0,
                     'stepSizeX' => null,
                     //'legendY' => 1,
                     // 'lessThen100'=>false,
-                    'legendX'=>1,
-                    'lessThen100'=>false,
+                    'legendX' => 1,
+                    'lessThen100' => false,
                 ];
-    
+
                 // Set data for widget
                 $widgetData =  [
-                    "title_a" => $typeChart.'_'.$prodRoutingLinkId,
-                    "title_b" => $typeChart.$prodRoutingLinkId,
+                    "title_a" => $typeChart . '_' . $prodRoutingLinkId,
+                    "title_b" => $typeChart . $prodRoutingLinkId,
                     'meta' => $meta,
                     'metric' => $metric,
-                    'chart_type' =>'bar',
+                    'chart_type' => 'bar',
                     'dimensions' => $dimensions,
-                    
+
                 ];
-                $dataOutput['widget_'. $key] = $widgetData;
+                $dataOutput['widget_' . $key] = $widgetData;
                 // dd($data);  
                 $dataOutput['tableDataSource'] =  $data;
                 $result[$prodRoutingLinkId] = $dataOutput;
@@ -257,9 +258,6 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
         }
         // dd($result);
         return collect($result);
-
-
-
     }
 
     protected function getParamColumns($dataSource, $modeType)
@@ -278,7 +276,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                 'title' => 'Production Routing',
                 'dataIndex' => 'prod_routing_id',
                 'hasListenTo' => true,
-        ],
+            ],
             [
                 'title' => 'Production Discipline',
                 'dataIndex' => 'prod_discipline_id',
@@ -302,84 +300,83 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
 
         $optionLayout = $params['optionPrintLayout'] ?? $this->optionPrint;
         $tableColumns = [];
-        if(isset($dataSource['render_pages'])){
+        if (isset($dataSource['render_pages'])) {
             $data = $dataSource['render_pages']->toArray();
-            foreach ($data as $key => $values){
-                    $item = $values instanceof Collection ? $values['tableDataSource']->toArray() : $values['tableDataSource']->first();
-                    $unit = isset($item['uom_name']) && (!is_null($item['uom_name'])) ? $item['uom_name'] : '<small class="text-orange-300">Unknown Unit</small>';
-                    $tableColumns[$key] =  [
-                        [
-                            "title" => "Project",
-                            "dataIndex" => "project_name",
-                            "align" => "left",
-                            "width" => 80,
-                        ],
-                        [
-                            "title" => "Sub Project",
-                            "dataIndex" => "sub_project_name",
-                            "align" => "left",
-                            "width" =>  $optionLayout === 'portrait' ? 110: 80,
-                        ],
-                        [
-                            "title" => "Production Routing",
-                            "dataIndex" => "prod_routing_name",
-                            "align" => "left",
-                            "width" => $optionLayout === 'portrait' ? 250: 220,
-                        ],
-                        [
-                            "title" => "Production Discipline",
-                            "dataIndex" => "prod_discipline_name",
-                            "align" => "left",
-                            "width" => $optionLayout === 'portrait' ? 200: 175,
-                            "hasListenTo" => true,
-                        ],
-                        [
-                            "title" => "Production Routing Link",
-                            "dataIndex" => "prod_routing_link_name",
-                            "align" => "left",
-                            "width" => $optionLayout === 'portrait' ? 300: 230,
-                        ],
-                        [
-                            "title" => "Production Order",
-                            "dataIndex" => "prod_order_name",
-                            "align" => "left",
-                            "width" =>  $optionLayout === 'portrait' ? 150: 138,
-                        ],
-                        [
-                            "title" => "Man Power <br/>(AVG)",
-                            "dataIndex" => "man_power",
-                            "align" => "right",
-                            "width" => 90,
-                            "footer" => "agg_avg",
-                        ],
-                        [
-                            "title" => $unit . "/Day <br/>(AVG)",
-                            "dataIndex" => "total_uom",
-                            "align" => "right",
-                            "width" => 90,
-                            "footer" => "agg_sum",
-                        ],
-                        [
-                            "title" => "min/Day <br/>(AVG)",
-                            "dataIndex" => "min_on_day",
-                            "align" => "right",
-                            "width" => 90,
-                            "footer" => "agg_sum",
-                        ],
-                        [
-                            "title" => "min/$unit <br/>(AVG)",
-                            "dataIndex" => "min_on_set",
-                            "align" => "right",
-                            "width" =>  90,
-                            "footer" => "agg_sum",
-                        ]
-                    ];
-                }
+            foreach ($data as $key => $values) {
+                $item = $values instanceof Collection ? $values['tableDataSource']->toArray() : $values['tableDataSource']->first();
+                $unit = isset($item['uom_name']) && (!is_null($item['uom_name'])) ? $item['uom_name'] : '<small class="text-orange-300">Unknown Unit</small>';
+                $tableColumns[$key] =  [
+                    [
+                        "title" => "Project",
+                        "dataIndex" => "project_name",
+                        "align" => "left",
+                        "width" => 80,
+                    ],
+                    [
+                        "title" => "Sub Project",
+                        "dataIndex" => "sub_project_name",
+                        "align" => "left",
+                        "width" =>  $optionLayout === 'portrait' ? 110 : 80,
+                    ],
+                    [
+                        "title" => "Production Routing",
+                        "dataIndex" => "prod_routing_name",
+                        "align" => "left",
+                        "width" => $optionLayout === 'portrait' ? 250 : 220,
+                    ],
+                    [
+                        "title" => "Production Discipline",
+                        "dataIndex" => "prod_discipline_name",
+                        "align" => "left",
+                        "width" => $optionLayout === 'portrait' ? 200 : 175,
+                        "hasListenTo" => true,
+                    ],
+                    [
+                        "title" => "Production Routing Link",
+                        "dataIndex" => "prod_routing_link_name",
+                        "align" => "left",
+                        "width" => $optionLayout === 'portrait' ? 300 : 230,
+                    ],
+                    [
+                        "title" => "Production Order",
+                        "dataIndex" => "prod_order_name",
+                        "align" => "left",
+                        "width" =>  $optionLayout === 'portrait' ? 150 : 138,
+                    ],
+                    [
+                        "title" => "Man Power <br/>(AVG)",
+                        "dataIndex" => "man_power",
+                        "align" => "right",
+                        "width" => 90,
+                        "footer" => "agg_avg",
+                    ],
+                    [
+                        "title" => $unit . "/Day <br/>(AVG)",
+                        "dataIndex" => "total_uom",
+                        "align" => "right",
+                        "width" => 90,
+                        "footer" => "agg_sum",
+                    ],
+                    [
+                        "title" => "min/Day <br/>(AVG)",
+                        "dataIndex" => "min_on_day",
+                        "align" => "right",
+                        "width" => 90,
+                        "footer" => "agg_sum",
+                    ],
+                    [
+                        "title" => "min/$unit <br/>(AVG)",
+                        "dataIndex" => "min_on_set",
+                        "align" => "right",
+                        "width" =>  90,
+                        "footer" => "agg_sum",
+                    ]
+                ];
+            }
         };
 
         // dd($tableColumns);
         return $tableColumns;
-           
     }
 
     public function getBasicInfoData($params)
@@ -396,9 +393,10 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
         return $basicInfoData;
     }
 
-    private function generateArraySqlFromSqlStr($prodRoutingLinkIds, $params) {
+    private function generateArraySqlFromSqlStr($prodRoutingLinkIds, $params)
+    {
         $arraySqlStr = [];
-        foreach ($prodRoutingLinkIds as $prodRoutingLinkId){
+        foreach ($prodRoutingLinkIds as $prodRoutingLinkId) {
             $params['prod_routing_link'] = $prodRoutingLinkId;
             $arraySqlStr[$prodRoutingLinkId] = $this->getSqlStr($params);
         }
@@ -408,7 +406,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     public function getDataSource($params)
     {
         $prodRoutingLinkIds = array_keys($this->getProdRoutingLinks($params));
-        $arraySqlStr = $this->generateArraySqlFromSqlStr($prodRoutingLinkIds, $params);  
+        $arraySqlStr = $this->generateArraySqlFromSqlStr($prodRoutingLinkIds, $params);
         $data = [];
         $allProdOrdersHaveNotSeq = $this->getAllProdOrders($params);
 
@@ -416,10 +414,10 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
             if (is_null($sql) || !$sql) return collect();
             $params['prod_routing_link_id'] = $k; // k is an id of prod_routing_link_id 
             $sql = $this->getSql($params);
-            $sqlData = DB::select(DB::raw($sql));
+            $sqlData = DB::select($sql);
 
-            if(empty($sqlData)) continue;
-            if(!empty($sqlData)) {
+            if (empty($sqlData)) continue;
+            if (!empty($sqlData)) {
                 $firstSqlData = $sqlData[0];
                 $temps = [];
                 foreach ($allProdOrdersHaveNotSeq as $values) {
@@ -433,14 +431,13 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
                     $arr = array_merge((array)$values, $arr);
                     $temps[] =  (object)$arr;
                 }
-    
-                $data[$k] = collect([...$sqlData, ...$temps]);  
-            }
 
+                $data[$k] = collect([...$sqlData, ...$temps]);
+            }
         }
         // sort by order_no
-        uasort($data, function($a, $b) {
-            [$a , $b] = [$a->toArray(), $b->toArray()];
+        uasort($data, function ($a, $b) {
+            [$a, $b] = [$a->toArray(), $b->toArray()];
             return reset($a)->order_no - reset($b)->order_no;
         });
         // dd($data);
@@ -463,7 +460,7 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
 
         $prodRoutingLinks = $this->getProdRoutingLinks($params);
         $tableOfContents = [];
-        foreach(array_keys($dataSource->toArray()) as $key) $tableOfContents[$key] = $prodRoutingLinks[$key];
+        foreach (array_keys($dataSource->toArray()) as $key) $tableOfContents[$key] = $prodRoutingLinks[$key];
         $output['render_pages'] = $dataSource;
         $output['table_of_contents'] = $tableOfContents;
         return $output;

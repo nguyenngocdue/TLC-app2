@@ -29,7 +29,7 @@
         "package": "compliance",
         "breadcrumb-group": null,
         "top_title": "CO2 Report",
-        "title": "Annual CO2 Emission Report"
+        "title": "CO2 Emission Report"
     },
     "document-ghg_sheet_030": {
         "name": "document-ghg_sheet_030",
@@ -432,6 +432,14 @@
         "top_title": null,
         "title": "Labor Cost Timesheet Line",
         "hidden": "true"
+    },
+    "report-qaqc_insp_chklst_sht_010": {
+        "name": "report-qaqc_insp_chklst_sht_010",
+        "package_tab": "report",
+        "package": "project_management",
+        "breadcrumb-group": null,
+        "top_title": "Qaqc Inspection Checklist Sheet Lines",
+        "title": "Qaqc Inspection Checklist Sheet Lines"
     },
     "report-qaqc_ncr_010": {
         "name": "report-qaqc_ncr_010",
