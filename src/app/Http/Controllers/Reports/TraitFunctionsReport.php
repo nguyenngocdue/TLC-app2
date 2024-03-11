@@ -11,7 +11,7 @@ trait TraitFunctionsReport
 {
     function getDataSourceFromSqlStr($sql)
     {
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         return $sqlData;
     }
 

@@ -84,7 +84,15 @@ trait TraitUpdateBasicInfoDataSource
             'esg_tmpl_name',
             'esg_metric_type_name',
 
-            'ncr_id'
+            'ncr_id',
+
+            'sheet_name',
+            'sheet_status',
+            'sheet_id',
+            'qaqc_insp_tmpl_name',
+            'qaqc_insp_tmpl_id',
+            'status_chklst_sht'
+
 
         ] + $fieldInputs;
         $attrib = [];

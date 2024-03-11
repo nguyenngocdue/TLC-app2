@@ -20,7 +20,6 @@ trait TraitForwardModeReport
         }
         if (isset($input['mode_option'])) {
             Log::info("010");
-            $mode = $input['mode_option'];
             $routeName = explode('/', $request->getPathInfo())[2];
             if (isset($input['form_type']) && $input['form_type'] === 'updateParams') {
                 (new UpdateUserSettings())($request);
@@ -29,7 +28,7 @@ trait TraitForwardModeReport
             // return redirect(route($routeName . '_' . $mode));
             return redirect(route($routeName));
         }
-        
+
         $typeReport = Str::ucfirst(CurrentPathInfo::getTypeReport2($request));
         $entityReport = CurrentPathInfo::getEntityReport($request);
         $params = [
@@ -41,6 +40,5 @@ trait TraitForwardModeReport
         $request->replace($params);
         (new UpdateUserSettings())($request);
         return redirect($request->getPathInfo());
-
     }
 }

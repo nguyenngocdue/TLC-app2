@@ -23,7 +23,7 @@ class Prod_sequence_dataSource extends Controller
         $valOfParams = $this->generateValuesFromParamsReport($params);
 
         // dd($valOfParams);
-        if(isset($valOfParams['picker_date']) && is_string($valOfParams['picker_date'])){
+        if (isset($valOfParams['picker_date']) && is_string($valOfParams['picker_date'])) {
             $strDate = DateReport::defaultPickerDate();
             $pickerDate = DateReport::separateStrPickerDate($strDate);
             $valOfParams['picker_date'] = $pickerDate;
@@ -91,12 +91,12 @@ class Prod_sequence_dataSource extends Controller
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
 
-        
+
         if ($po = $valOfParams['prod_order_id']) $sql .= "\n AND ps.prod_order_id IN($po)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prde.prod_routing_link_id IN ($prl)";
         if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id = $pd";
         if ($erp = $valOfParams['erp_routing_link_id']) $sql .= "\n AND prde.erp_routing_link_id IN ($erp)";
-        if($status = $valOfParams['status']) $sql .= "\n AND ps.status IN( $status )";
+        if ($status = $valOfParams['status']) $sql .= "\n AND ps.status IN( $status )";
 
         $sql .= "\n 
                     AND  SUBSTR(pru.date, 1, 10) >= '{$valOfParams["picker_date"]["start"]}'
@@ -115,11 +115,11 @@ class Prod_sequence_dataSource extends Controller
     {
         $sql = $this->getSql($params);
         if (is_null($sql) || !$sql) return collect();
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         // sort by order_no
-        uasort($sqlData, function($a, $b) {
-          return $a->order_no - $b->order_no;
-      });
+        uasort($sqlData, function ($a, $b) {
+            return $a->order_no - $b->order_no;
+        });
         $collection = collect($sqlData);
         return $collection;
     }

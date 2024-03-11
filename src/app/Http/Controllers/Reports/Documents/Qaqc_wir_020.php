@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Reports\Documents;
+
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
@@ -66,7 +67,8 @@ class Qaqc_wir_020 extends Qaqc_wir_010
         return $sql;
     }
 
-    private function getWeightOfWirDescriptionByRouting(){
+    private function getWeightOfWirDescriptionByRouting()
+    {
         $sql = "SELECT 
                 mtm.term_id AS mtm_prod_routing_id,
                 mtm.doc_id AS mtm_doc_id,
@@ -79,12 +81,12 @@ class Qaqc_wir_020 extends Qaqc_wir_010
                 #AND mtm.term_id = 49
                 #ORDER BY wirdes_name
                 ";
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         return collect($sqlData);
-
     }
 
-    private function getNaWIRs($params){
+    private function getNaWIRs($params)
+    {
         $dateIndex = $params['date_index'];
         $sql = " SELECT 
                         qaqc_wir_prod_routing_id,
@@ -108,12 +110,13 @@ class Qaqc_wir_020 extends Qaqc_wir_010
                     OR qaqcwir.closed_at IS NULL
                     AND qaqcwir.status = 'not_applicable') AS tb1
                     WHERE tb1.qaqc_wir_status = 'not_applicable'";
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         return collect($sqlData);
     }
 
 
-    private function generateDataSourceByDate($params){
+    private function generateDataSourceByDate($params)
+    {
         [$previousDate, $latestDate] = $this->getDate($params);
         $params['date_index'] = $previousDate;
 
@@ -136,49 +139,50 @@ class Qaqc_wir_020 extends Qaqc_wir_010
             'wir_na' => $dataNaWIRsLastDate
         ];
         return $output;
-
     }
-    
+
     public function getDataSource($params)
     {
         $dataSource = $this->generateDataSourceByDate($params);
         return  $dataSource;
     }
 
-    private function getDataWIRsDesToCalculate($groupWeightByProdRouting, $groupNaByProdOrder, $groupByProdOrderDone){
+    private function getDataWIRsDesToCalculate($groupWeightByProdRouting, $groupNaByProdOrder, $groupByProdOrderDone)
+    {
         $result = [];
         foreach ($groupByProdOrderDone as $idSub => $values) {
-                foreach ($values as $idPr => $prodOrders){
-                    if(!isset($groupNaByProdOrder[$idPr])) {
-                        $dataIndexWIRsDes = $groupWeightByProdRouting[$idPr];
-                        $prodOrderIds = array_keys($prodOrders);
-                        $prodOrderIdByWIRs = []; foreach($prodOrderIds as $id) $prodOrderIdByWIRs[$id] = $dataIndexWIRsDes;
-                        $result[$idSub][$idPr] = $prodOrderIdByWIRs;
-                    } else {
-                        $allWIRsDes = $groupWeightByProdRouting[$idPr];
-                        foreach (array_keys($prodOrders) as $id){
-                            if(!isset($groupNaByProdOrder[$idPr][$id])) {
-                                $result[$idSub][$idPr][$id] = $allWIRsDes;
-                            } else{
-                                $naWIRsId = array_column($groupNaByProdOrder[$idPr][$id], 'qaqc_wir_description_id');
-                                $newWIRsDes = array_filter($allWIRsDes, function($value) use($naWIRsId) {
-                                    return !in_array( $value["mtm_doc_id"], $naWIRsId,);
-                                });
-                                $result[$idSub][$idPr][$id] = $newWIRsDes;
-                            }
+            foreach ($values as $idPr => $prodOrders) {
+                if (!isset($groupNaByProdOrder[$idPr])) {
+                    $dataIndexWIRsDes = $groupWeightByProdRouting[$idPr];
+                    $prodOrderIds = array_keys($prodOrders);
+                    $prodOrderIdByWIRs = [];
+                    foreach ($prodOrderIds as $id) $prodOrderIdByWIRs[$id] = $dataIndexWIRsDes;
+                    $result[$idSub][$idPr] = $prodOrderIdByWIRs;
+                } else {
+                    $allWIRsDes = $groupWeightByProdRouting[$idPr];
+                    foreach (array_keys($prodOrders) as $id) {
+                        if (!isset($groupNaByProdOrder[$idPr][$id])) {
+                            $result[$idSub][$idPr][$id] = $allWIRsDes;
+                        } else {
+                            $naWIRsId = array_column($groupNaByProdOrder[$idPr][$id], 'qaqc_wir_description_id');
+                            $newWIRsDes = array_filter($allWIRsDes, function ($value) use ($naWIRsId) {
+                                return !in_array($value["mtm_doc_id"], $naWIRsId,);
+                            });
+                            $result[$idSub][$idPr][$id] = $newWIRsDes;
                         }
                     }
-        
                 }
+            }
         }
         return $result;
     }
 
-    private function sumWeightOfWIRs($dataWIRsDesToCalculate){
+    private function sumWeightOfWIRs($dataWIRsDesToCalculate)
+    {
         $result = [];
-        foreach ($dataWIRsDesToCalculate as $idSub =>$values){
-            foreach ($values as $key => $prodOrders){
-                foreach ($prodOrders as $id => $prodOrder){
+        foreach ($dataWIRsDesToCalculate as $idSub => $values) {
+            foreach ($values as $key => $prodOrders) {
+                foreach ($prodOrders as $id => $prodOrder) {
                     // dd($prodOrder);
                     $sum = array_sum(array_column($prodOrder, 'mtm_wir_weight'));
                     $result[$idSub][$key][$id]['total_weight'] = $sum;
@@ -189,22 +193,23 @@ class Qaqc_wir_020 extends Qaqc_wir_010
         return $result;
     }
 
-    private function calculatePercentOfProdOrders($prodOrderWIRsDone, $dataTotalWeightProdOrder){
+    private function calculatePercentOfProdOrders($prodOrderWIRsDone, $dataTotalWeightProdOrder)
+    {
         $result = [];
-        foreach($prodOrderWIRsDone as $idSub => $values){
-            foreach ($values as $idPr => $prodOrders){
-                foreach ($prodOrders as $idPo => $prodOrder){
+        foreach ($prodOrderWIRsDone as $idSub => $values) {
+            foreach ($values as $idPr => $prodOrders) {
+                foreach ($prodOrders as $idPo => $prodOrder) {
                     $percent = 0;
                     $infoWeight = $dataTotalWeightProdOrder[$idSub][$idPr][$idPo];
-                    if (!$infoWeight['total_weight']){
+                    if (!$infoWeight['total_weight']) {
                         $countDone = count($prodOrder);
-                        $percent = round($countDone *100/ $infoWeight['count_all_wir_desc'],2);
+                        $percent = round($countDone * 100 / $infoWeight['count_all_wir_desc'], 2);
                         $result[$idSub][$idPr][$idPo] = $percent;
-                    } else{
+                    } else {
                         foreach ($prodOrder as $value) {
-                            $percent += ($value['wir_weight']*100)/$infoWeight['total_weight'];
+                            $percent += ($value['wir_weight'] * 100) / $infoWeight['total_weight'];
                         }
-                        $result[$idSub][$idPr][$idPo] = round($percent,2);
+                        $result[$idSub][$idPr][$idPo] = round($percent, 2);
                     }
                 }
             }
@@ -213,28 +218,30 @@ class Qaqc_wir_020 extends Qaqc_wir_010
         return $result;
     }
 
-    private function avgPercentEachRouting($data){
+    private function avgPercentEachRouting($data)
+    {
         $result = [];
         foreach ($data as $idSub => $items) {
-            foreach ($items as $key => $values){
+            foreach ($items as $key => $values) {
                 $result[$idSub][$key] =  [
-                    "sub_project_id" =>$idSub,
+                    "sub_project_id" => $idSub,
                     "prod_routing_id" => $key,
-                    "avg_progress" => round(array_sum($values)/count($values),2)
+                    "avg_progress" => round(array_sum($values) / count($values), 2)
                 ];
-            } 
+            }
         }
         return $result;
     }
 
-    private function indexPercentByWeight($dataSourceQaqcWir010, $dataByDate){
-        foreach ($dataSourceQaqcWir010 as &$values){
+    private function indexPercentByWeight($dataSourceQaqcWir010, $dataByDate)
+    {
+        foreach ($dataSourceQaqcWir010 as &$values) {
             $subProjectId = $values->sub_project_id;
             $prodRoutingId = $values->prod_routing_id;
-            if(isset($dataByDate['previous_date'][$subProjectId][$prodRoutingId]['avg_progress'])){
-                $values->previous_acceptance_percent = number_format($dataByDate['previous_date'][$subProjectId][$prodRoutingId]['avg_progress'],2);
+            if (isset($dataByDate['previous_date'][$subProjectId][$prodRoutingId]['avg_progress'])) {
+                $values->previous_acceptance_percent = number_format($dataByDate['previous_date'][$subProjectId][$prodRoutingId]['avg_progress'], 2);
             }
-            if(isset($dataByDate['latest_date'][$subProjectId][$prodRoutingId]['avg_progress'])) {
+            if (isset($dataByDate['latest_date'][$subProjectId][$prodRoutingId]['avg_progress'])) {
                 $values->latest_acceptance_percent = number_format($dataByDate['latest_date'][$subProjectId][$prodRoutingId]['avg_progress'], 2);
             }
         }
@@ -247,39 +254,39 @@ class Qaqc_wir_020 extends Qaqc_wir_010
     public function changeDataSource($dataSource, $params)
     {
         $dataByDate = [];
-        foreach ($dataSource as $key => $data){
+        foreach ($dataSource as $key => $data) {
             $WIRsDone = $data['wir_done'];
             $WIRsNa = $data['wir_na'];
-            
+
             $dataWIRsDone =  Report::getItemsFromDataSource($WIRsDone);
             $groupBySubProject = Report::groupArrayByKey($dataWIRsDone, 'sub_project_id');
-            
-            $groupByProdRouting = array_map(fn($item) => Report::groupArrayByKey($item, 'prod_routing_id'), $groupBySubProject);
-            $groupByProdOrderDone = array_map(fn($item) => Report::groupArrayByKeyV3($item, 'prod_order_id'), $groupByProdRouting);
-            
+
+            $groupByProdRouting = array_map(fn ($item) => Report::groupArrayByKey($item, 'prod_routing_id'), $groupBySubProject);
+            $groupByProdOrderDone = array_map(fn ($item) => Report::groupArrayByKeyV3($item, 'prod_order_id'), $groupByProdRouting);
+
             // get Weight of All Wir_description
             $weightWIRs = $this->getWeightOfWirDescriptionByRouting();
             $weightWIRs =  Report::getItemsFromDataSource($weightWIRs);
             $groupWeightByProdRouting = Report::groupArrayByKey($weightWIRs, 'mtm_prod_routing_id');
-            
-    
+
+
             // get NA of WIRs
             $dataWIRsNa =  Report::getItemsFromDataSource($WIRsNa);
             $groupNaWIRsByProdRouting = Report::groupArrayByKey($dataWIRsNa, 'qaqc_wir_prod_routing_id');
-            $groupNaByProdOrder = array_map(fn($item) => Report::groupArrayByKey($item, 'qaqc_wir_prod_order_id'), $groupNaWIRsByProdRouting);
-            
+            $groupNaByProdOrder = array_map(fn ($item) => Report::groupArrayByKey($item, 'qaqc_wir_prod_order_id'), $groupNaWIRsByProdRouting);
+
             //calculate Percentage of each Prod_Order
-            $dataWIRsDesToCalculate = $this-> getDataWIRsDesToCalculate($groupWeightByProdRouting, $groupNaByProdOrder, $groupByProdOrderDone);
-            $dataTotalWeightProdOrder = $this-> sumWeightOfWIRs($dataWIRsDesToCalculate);
+            $dataWIRsDesToCalculate = $this->getDataWIRsDesToCalculate($groupWeightByProdRouting, $groupNaByProdOrder, $groupByProdOrderDone);
+            $dataTotalWeightProdOrder = $this->sumWeightOfWIRs($dataWIRsDesToCalculate);
 
-            $dataPercentProdOrders = $this-> calculatePercentOfProdOrders($groupByProdOrderDone, $dataTotalWeightProdOrder);
+            $dataPercentProdOrders = $this->calculatePercentOfProdOrders($groupByProdOrderDone, $dataTotalWeightProdOrder);
 
-            $avgPercentEachRouting = $this-> avgPercentEachRouting($dataPercentProdOrders);
+            $avgPercentEachRouting = $this->avgPercentEachRouting($dataPercentProdOrders);
             $dataByDate[$key] = $avgPercentEachRouting;
         }
 
         $dataQaqcWir010 = new Qaqc_wir_010();
-        $dataSourceQaqcWir010  = $dataQaqcWir010 ->getDataSource($params);
+        $dataSourceQaqcWir010  = $dataQaqcWir010->getDataSource($params);
         $dataSourceQaqcWir010 = $dataQaqcWir010->changeDataSource($dataSourceQaqcWir010, $params);
 
         $indexData = $this->indexPercentByWeight($dataSourceQaqcWir010, $dataByDate);

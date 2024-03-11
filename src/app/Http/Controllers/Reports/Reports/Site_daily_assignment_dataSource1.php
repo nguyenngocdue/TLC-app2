@@ -43,11 +43,10 @@ class Site_daily_assignment_dataSource1 extends Controller
                     WHERE 1 = 1
                     AND sda.deleted_by IS NULL
                     AND sdal.deleted_by IS NULL
-                    #AND sdal.site_daily_assignment_id = 13"
-                    ;
-        if(isset($params['user_team_site_id'])) $sql .= "\n AND sda.site_team_id IN ({{user_team_site_id}})";
-        if($startDate) $sql .= "\n AND sda.site_date >= '$startDate'";
-        if($endDate) $sql .= "\n AND sda.site_date <= '$endDate'";
+                    #AND sdal.site_daily_assignment_id = 13";
+        if (isset($params['user_team_site_id'])) $sql .= "\n AND sda.site_team_id IN ({{user_team_site_id}})";
+        if ($startDate) $sql .= "\n AND sda.site_date >= '$startDate'";
+        if ($endDate) $sql .= "\n AND sda.site_date <= '$endDate'";
         // dump($sql);
         return $sql;
     }
@@ -56,9 +55,8 @@ class Site_daily_assignment_dataSource1 extends Controller
     {
         $sql = $this->getSql($params);
         if (is_null($sql) || !$sql) return collect();
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         $collection = collect($sqlData);
         return $collection;
     }
-
 }

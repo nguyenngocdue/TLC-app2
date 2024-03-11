@@ -7,14 +7,15 @@ use App\Utils\Support\Tree\BuildTree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-abstract class Wh_parent extends Controller {
+abstract class Wh_parent extends Controller
+{
 
     protected $tableName = '';
     abstract protected function getSqlStr($userIds, $month);
     private function getDataSource($userIds, $month)
     {
         $sql = $this->getSqlStr($userIds, $month);
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         $collection = collect($sqlData);
         return $collection;
     }
@@ -27,7 +28,7 @@ abstract class Wh_parent extends Controller {
         $dataQuery = $this->getDataSource($userIds, $month);
 
         $tableToMark =  DB::table($this->tableName);
-        $tableToMark->where('month', $month.'-01')->delete();
+        $tableToMark->where('month', $month . '-01')->delete();
         foreach ($dataQuery as $result) {
             $tableToMark->insert((array)$result);
         }
@@ -43,5 +44,4 @@ abstract class Wh_parent extends Controller {
             // 'nodeTreeArray' => json_encode(array_values($taskTree))
         ]);
     }
-    
 }

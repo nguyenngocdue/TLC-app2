@@ -126,7 +126,8 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
         return $params;
     }
 
-    public function getProdRoutingLinks($params){
+    public function getProdRoutingLinks($params)
+    {
         $valOfParams = $this->generateValuesFromParamsReport($params);
         $sql = "SELECT 
                         prl.id AS prod_routing_link_id,
@@ -143,11 +144,11 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                                 prod_routing_links prl, 
                                 prod_routings pr, prod_disciplines pdisc
                         WHERE 1 = 1";
-                        if (isset($valOfParams['sub_project_id'])) $sql .= "\n AND sp.id = {$valOfParams['sub_project_id']}";
-                        if (isset($valOfParams['project_id'])) $sql .= "\n AND sp.project_id = {$valOfParams['project_id']}";
-                        if (isset($valOfParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {$valOfParams['prod_routing_id']}";
-                        if (Report::checkValueOfField($valOfParams, 'prod_discipline_id'))  $sql .= "\n AND prl.prod_discipline_id IN ({$valOfParams['prod_discipline_id']})";
-                        $sql .="\n 
+        if (isset($valOfParams['sub_project_id'])) $sql .= "\n AND sp.id = {$valOfParams['sub_project_id']}";
+        if (isset($valOfParams['project_id'])) $sql .= "\n AND sp.project_id = {$valOfParams['project_id']}";
+        if (isset($valOfParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {$valOfParams['prod_routing_id']}";
+        if (Report::checkValueOfField($valOfParams, 'prod_discipline_id'))  $sql .= "\n AND prl.prod_discipline_id IN ({$valOfParams['prod_discipline_id']})";
+        $sql .= "\n 
                                     AND pr.id = prd.prod_routing_id
                                     AND prl.id = prd.prod_routing_link_id
                                     AND po.prod_routing_id = pr.id
@@ -156,8 +157,8 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                                     GROUP BY prod_routing_link_id
                                     ORDER BY order_no
                                     ";
-                                    // dd($sql);
-        $sqlData = DB::select(DB::raw($sql));
+        // dd($sql);
+        $sqlData = DB::select($sql);
         $collection = collect($sqlData);
         return $collection;
     }
@@ -167,16 +168,16 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
         // dump($dataSource);
         $items = array_values($dataSource->toArray());
 
-        $groupItems = Report::groupArrayByKey($items,'prod_discipline_id');
+        $groupItems = Report::groupArrayByKey($items, 'prod_discipline_id');
         $collectionItems =  array_merge(...$groupItems);
-        uasort($collectionItems, function($a, $b){
+        uasort($collectionItems, function ($a, $b) {
             return $a['order_no'] - $b['order_no'];
         });
         // dd($collectionItems);
 
-        $collectionItems = [implode('_',array_keys($groupItems)) => $collectionItems];
+        $collectionItems = [implode('_', array_keys($groupItems)) => $collectionItems];
 
-        foreach($collectionItems as $key => $values){
+        foreach ($collectionItems as $key => $values) {
             $infoRoutingLinks = array_column($values, 'finished_progress', 'prod_routing_link_name');
             // dd($infoRoutingLinks);
             // information for meta data
@@ -190,7 +191,7 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 'max' => $max,
                 'count' => $count
             ];
-            
+
             // information for metric data
             $metric = [];
             array_walk($infoRoutingLinks, function ($value, $key) use (&$metric) {
@@ -207,21 +208,21 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 'titleX' => "% Complete",
                 'indexAxis' => 'y',
                 'width' => 1250,
-                'height' => $max*30,
+                'height' => $max * 30,
                 'dataLabelAlign' => 'end',
                 'dataLabelOffset' => 10,
                 'displayTitleOnTopCol' => 1,
-                'tooltipLabel'=> '% Complete', 
+                'tooltipLabel' => '% Complete',
                 'dataLabelOffset' => 2,
-                'lessThen100'=> true,
-                'legendX'=>true,
+                'lessThen100' => true,
+                'legendX' => true,
                 'stepSizeY' => null,
                 'stepSizeX' => 10,
             ];
-    
+
             // Set data for widget
             $widgetData =  [
-                "title_a" => "Production Routing Link".$key,
+                "title_a" => "Production Routing Link" . $key,
                 "title_b" => "by progress",
                 'meta' => $meta,
                 'metric' => $metric,
@@ -229,9 +230,9 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
                 'titleChart' => '',
                 'dimensions' => $dimensions,
             ];
-            $data['widget_'. $key] = $widgetData;
+            $data['widget_' . $key] = $widgetData;
             // dd($data);
-            
+
         };
 
         // add widget to dataSource
@@ -347,12 +348,12 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
         $prodPouting = Prod_routing::find($params['prod_routing_id'] ?? $this->prodRoutingId)->name;
 
         $prodDiscipline = isset($params['prod_discipline_id']) ?
-        implode(', ', Prod_discipline::find($params['prod_discipline_id'])
-            ->pluck('name')
-            ->toArray()) :
-        implode(', ', Prod_discipline::all()
-            ->pluck('name')
-            ->toArray());
+            implode(', ', Prod_discipline::find($params['prod_discipline_id'])
+                ->pluck('name')
+                ->toArray()) :
+            implode(', ', Prod_discipline::all()
+                ->pluck('name')
+                ->toArray());
 
         $prodRoutingLink = isset($params['prod_routing_link_id']) ?
             implode(',', Prod_routing_link::find($params['prod_routing_link_id'])
@@ -374,30 +375,30 @@ class Prod_sequence_030 extends Report_ParentDocument2Controller
     public function changeDataSource($dataSource, $params)
     {
         // dump($dataSource);
-        if(empty($dataSource->toArray())) return [];
+        if (empty($dataSource->toArray())) return [];
         $data = $dataSource instanceof Collection ? $dataSource->toArray() : $dataSource;
         $prodRoutingLinkFinished = array_column($data, 'prod_routing_link_name', 'prod_routing_link_id');
 
-        
+
         $prodRoutingLinks = $this->getProdRoutingLinks($params);
         $firstItem = reset($data);
-        foreach ($prodRoutingLinks as $key => $values){
-            if(!isset($prodRoutingLinkFinished[$values->prod_routing_link_id])){
+        foreach ($prodRoutingLinks as $key => $values) {
+            if (!isset($prodRoutingLinkFinished[$values->prod_routing_link_id])) {
                 // dd($values);
                 $values = (array)$values;
                 $firstItem = (array)$firstItem;
                 $firstItem['finished_progress'] = null;
-                $mergedData = array_replace_recursive($firstItem,$values);
+                $mergedData = array_replace_recursive($firstItem, $values);
                 $data[] = (object)$mergedData;
             }
         }
         $data = collect($data);
         $dataSource = self::updateDataForPivotChart($data, $params);
-        
+
 
         $arrayNA = [];
-        foreach($data as $item){
-            if ($item->count_original_po === $item->count_po_finished && $item->prod_sequence_status === 'not_applicable'){
+        foreach ($data as $item) {
+            if ($item->count_original_po === $item->count_po_finished && $item->prod_sequence_status === 'not_applicable') {
                 $arrayNA[] =  $item;
             }
         }

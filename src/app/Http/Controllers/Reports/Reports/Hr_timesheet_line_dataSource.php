@@ -14,7 +14,7 @@ class Hr_timesheet_line_dataSource extends Controller
 {
     use TraitDynamicColumnsTableReport;
     use TraitCreateSQL;
-    
+
     protected $maxH = 50;
     protected $mode = '100';
     #protected $rotate45Width = 300;
@@ -50,9 +50,9 @@ class Hr_timesheet_line_dataSource extends Controller
                     WHERE 1 = 1
                             AND us.id = tsl.user_id";
 
-        if (isset($params['user_id']) && is_array($params['user_id']) ) {
+        if (isset($params['user_id']) && is_array($params['user_id'])) {
             $ids = implode(',', $params['user_id']);
-            if($ids) $sql .= "\n AND tsl.user_id IN ($ids)";
+            if ($ids) $sql .= "\n AND tsl.user_id IN ($ids)";
         } else {
             if (isset($params['user_id']) &&  $params['user_id']) {
                 $id = $params['user_id'];
@@ -84,9 +84,8 @@ class Hr_timesheet_line_dataSource extends Controller
     {
         $sql = $this->getSql($params);
         if (is_null($sql) || !$sql) return collect();
-        $sqlData = DB::select(DB::raw($sql));
+        $sqlData = DB::select($sql);
         $collection = collect($sqlData);
         return $collection;
     }
-
 }
