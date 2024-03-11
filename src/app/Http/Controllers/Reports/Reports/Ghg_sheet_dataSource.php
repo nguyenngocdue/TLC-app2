@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\DB;
 class Ghg_sheet_dataSource extends Controller
 
 {
-    use TraitDynamicColumnsTableReport;
-    use TraitCreateSQL;
+	use TraitDynamicColumnsTableReport;
+	use TraitCreateSQL;
 	use TraitConversionFieldNameGhgReport;
 	use TraitGenerateValuesFromParamsReport;
-    protected $year = '2023';
+	protected $year = '2023';
 
-	
+
 	public function getSqlStr($params)
 	{
 		[$start_date, $end_date, $year, $strSqlMonth, $strSumValue] = $this->createValuesForDateParam($params);
@@ -64,24 +64,23 @@ class Ghg_sheet_dataSource extends Controller
 							WHERE 1 = 1
 							AND ghgsh.deleted_by IS NULL
 							AND SUBSTR(ghgsh.ghg_month, 1, 4) = '$year'";
-				if(isset($params['half_year']) && $start_date) $sql .=" \n AND SUBSTR(ghgsh.ghg_month, 1, 10) >= '$start_date'";
-				if(isset($params['half_year']) && $end_date) $sql .=" \n AND SUBSTR(ghgsh.ghg_month, 1, 10) <= '$end_date'";
+		if (isset($params['half_year']) && $start_date) $sql .= " \n AND SUBSTR(ghgsh.ghg_month, 1, 10) >= '$start_date'";
+		if (isset($params['half_year']) && $end_date) $sql .= " \n AND SUBSTR(ghgsh.ghg_month, 1, 10) <= '$end_date'";
 
-				$sql .="\n GROUP BY ghgsh_tmpl_id
+		$sql .= "\n GROUP BY ghgsh_tmpl_id
 						) ghgsh_totals ON infghgsh.ghg_tmpl_id = ghgsh_totals.ghgsh_tmpl_id
 						ORDER BY ghgcate_id, ghg_tmpl_id
 					";
-					// dump($sql);
+		// dump($sql);
 		return $sql;
 	}
-    public function getDataSource($params)
-    {
-        $sql = $this->getSql($params);
-        if (is_null($sql) || !$sql) return collect();
-        $sqlData = DB::select(DB::raw($sql));
-        $collection = collect($sqlData);
+	public function getDataSource($params)
+	{
+		$sql = $this->getSql($params);
+		if (is_null($sql) || !$sql) return collect();
+		$sqlData = DB::select($sql);
+		$collection = collect($sqlData);
 		$collection = $this->convertNames($collection);
-        return $collection;
-    }
-
+		return $collection;
+	}
 }

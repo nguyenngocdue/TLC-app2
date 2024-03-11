@@ -41,7 +41,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
         $layout = '';
         switch ($optionPrint) {
             case 'landscape':
-            $layout = 'w-[1123px] min-h-[794px]';
+            $layout = 'w-[1400px] min-h-[794px]';
             break;
             case 'portrait':
                 $layout = 'w-[1000px] min-h-[1450px]';
@@ -52,18 +52,17 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
 @endphp
 
 {{-- @dd($entity) --}}
-<br />
 <div class="flex flex-col justify-center bg-only-print">
     <div class="md:px-4">
         {{-- PAGE 1 --}}
-        <div id="pageco2_emission_report"  style='page-break-after:always!important'  class="{{$layout}} flex m-auto items-center bg-gray-100 box-border relative">
+        <div id="pageco2_emission_report"  class="{{$layout}} flex m-auto items-center bg-white box-border mt-20">
                 <img src="{{ asset('images/report/Green and white Sustainability modern presentation-1.png') }}" class="w-full h-full object-cover"/>
         </div>
-        {{-- END --}}
         <x-renderer.page-break />
+        {{-- END --}}
 
         {{-- PAGE 2 --}}
-        <div id="pagemethodology"  style='page-break-after:always!important' class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
+        <div id="pagemethodology" class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
                 <div class="z-10">
                     <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
                     <x-renderer.heading level=2 xalign='left' class='absolute top-6 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Methodology</x-renderer.heading>
@@ -74,18 +73,18 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                 <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
                 <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">1/8</div>
         </div>
-        {{-- END --}}
         <x-renderer.page-break />
+        {{-- END --}}
 
         {{-- PAGE 3 --}}
         
-        <div id="pagecompany_carbon_footprint"  style='page-break-after:always!important'  class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
+        <div id="pagecompany_carbon_footprint" class="{{$layout}} flex m-auto items-center bg-white box-border relative overflow-hidden"> 
                 <div class="z-10">
                     <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="" class="border-none absolute right-0 top-0"/>
                     <x-renderer.heading level=2 xalign='left' class='absolute top-6 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Company's Carbon Footprint in {{$text}}</x-renderer.heading>
                 </div>
             <div class='flex justify-center'>
-                <div class="z-10 absolute left-[228px] top-[221px]">
+                <div class="z-10 absolute left-[320px] top-[305px]">
                             <div class="flex  m-auto">
                                 <div class="relative ">
                                     <div class='w-[297px] h-[252px] border-2  p-3 flex justify-between flex-col '>
@@ -99,7 +98,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                     </div>
                                 </div>
 
-                                <div class="relative ml-[73px]">
+                                <div class="relative ml-[167px]">
                                     <div class='w-[297px] h-[252px] border-2   flex justify-between flex-col '>
                                     </div>
                                     <div class="absolute top-0 right-0 left-0 bottom-0">
@@ -121,11 +120,11 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
             <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
             <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">2/8</div>
         </div>
-        {{-- END --}}
         <x-renderer.page-break />
+        {{-- END --}}
 
         {{-- PAGE 4: Emission source category chart  --}}
-        <div id="pageemission_category_chart"  style='page-break-after:always!important'  class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
+        <div id="pageemission_category_chart"  class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
             <div class="z-10">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
                 <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
@@ -186,11 +185,11 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
             </div>
             <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">3/8</div>
         </div>
-        {{-- END --}}
         <x-renderer.page-break />
+        {{-- END --}}
 
         {{-- PAGE 5: Emission source category chart --}}
-        <div id="pageemission_source_category_chart"  style='page-break-after:always!important'  class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
+        <div id="pageemission_source_category_chart" class="{{$layout}} flex m-auto items-center bg-white box-border p-8 relative"> 
             <div class="z-10">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
                 <x-renderer.heading level=2 xalign='left' class='absolute top-6 left-0 text-[#1a401e] text-4xl font-roboto  pl-16 text-bold font-semibold'>Emission Source Category Chart</x-renderer.heading>
@@ -230,12 +229,12 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
             <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
             <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">4/8</div>
         </div>
-        {{-- END --}}
         <x-renderer.page-break />
+        {{-- END --}}
 
         
         {{-- PAGE 6 :Data Summary Report --}}
-        <div  id="pagedata_summary_report"  style='page-break-after:always!important'  class=" max-w-[1500px] min-h-[790px] m-auto flex items-center bg-white box-border pb-8 px-8 relative">
+        <div  id="pagedata_summary_report" class=" max-w-[1500px] min-h-[790px] m-auto flex items-center bg-white box-border pb-8 px-8 relative">
             <div class="z-10">
                 <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">5/8</div>
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
@@ -250,11 +249,11 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                     {{-- <img src="{{ asset('images/report/Green and white Sustainability modern presentation-3.jpeg') }}" class="w-full h-full object-cover"/> --}}
                 </div>
         </div>
-        {{-- END --}}
         <x-renderer.page-break />
+        {{-- END --}}
 
          {{-- PAGE 7: GHGRP Basin Production & Emissions --}}
-        <div  id="pageghgrp_basin_production_emissions"  style='page-break-after:always!important'  class="w-[1500px] min-h-[790px] m-auto flex items-center bg-white box-border px-8 pb-8 relative">
+        <div  id="pageghgrp_basin_production_emissions" class="w-[1500px] min-h-[790px] m-auto flex items-center bg-white box-border px-8 pb-8 relative">
             <div class="z-10">
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
                 <x-print.header6 :itemsShow='["website"]' class="border-none absolute bottom-0 left-0 right-0 justify-center mb-4"/>
@@ -299,10 +298,11 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
             </div>
             <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">6/8</div>
         </div>
-        {{-- END --}}
         <x-renderer.page-break />
+        {{-- END --}}
+
         {{-- PAGE 8: Data Detail Report on Metric 2 --}}
-        <div id="pagedata_detail_report_on_metric2"  style='page-break-after:always!important'  class="max-w-[1500px] min-h-[790px] flex flex-col items-center bg-white box-border relative px-8 m-auto">
+        <div id="pagedata_detail_report_on_metric2" class="max-w-[1500px] min-h-[790px] flex flex-col items-center bg-white box-border relative px-8 m-auto">
             <div class="z-5">
                 <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">7/8</div>
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
@@ -320,12 +320,12 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                 <x-print.header6 :itemsShow='["website"]' class="border-none justify-center mb-4"/>
             </div>
         </div>
-            {{-- END --}}
         <x-renderer.page-break />
+        {{-- END --}}
 
 
         {{-- PAGE 9: Data Detail Report  --}}
-        <div id="pagedata_detail_report_on_metric2"  style='page-break-after:always!important'  class="max-w-[1700px] min-h-[790px] flex flex-col items-center box-border relative px-8 m-auto bg-white">
+        <div id="pagedata_detail_report_on_metric2"  class="max-w-[1700px] min-h-[790px] flex flex-col items-center box-border relative px-8 m-auto bg-white">
             <div class="z-5">
                 <div class="absolute bottom-0 right-0 p-4 text-center text-sm font-semibold text-gray-600">8/8</div>
                 <x-print.header6 :itemsShow='["logo"]' dimensionImg="h-20 w-56" classImg="absolute top-0 right-0" class="border-none"/>
@@ -344,7 +344,6 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                 <x-print.header6 :itemsShow='["website"]' class="border-none justify-center mb-4"/>
         </div>
         {{-- END --}}
-        <x-renderer.page-break />
     </div>
 </div>
 @endsection

@@ -75,7 +75,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 						AND us.first_date IS NOT NULL
 						AND SUBSTR(us.first_date, 1, 4) <= $year) AS all_year_tb";
 
-		$sqlData = DB::select(DB::raw($sql));
+		$sqlData = DB::select($sql);
 		$collection = collect($sqlData);
 		return $collection;
 	}

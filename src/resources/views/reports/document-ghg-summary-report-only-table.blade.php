@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <tr>
-                <td class="w-20 text-center border-t border-r bg-white border-gray-600" rowspan="20">
+                <td class="w-20 text-center border-t border-r bg-white border-gray-500" rowspan="20">
                     <div class="p-2 font-bold">GHG Protocol Standards: Corporate Scope - 1 and 2, Value Chain - Scope 3</div>
                 </td>
             </tr>
@@ -64,7 +64,7 @@
 
                 {{-- Month --}}
                 @foreach($firstItem['months'] as $key => $value)
-                <td class='w-{{$widthCell}} border-l border-gray-600 text-right border-t text-blue-800'>
+                <td class='w-{{$widthCell}} border-l border-gray-500 text-right border-t text-blue-800'>
                     <div class='p-2'>
                         {!! (float)$value <= 0 ? "<i class='fa-light fa-minus'></i>" :"<a href='" . route('ghg_sheets.edit', $firstItem['month_ghg_sheet_id'][$key] ?? 0) . "'>" . $value . "</a>"  !!} 
                     </div>
@@ -86,7 +86,7 @@
                 </td>
                 {{-- Month --}}
                 @foreach($values3['months'] as $k3 => $value)
-                <td class='w-{{$widthCell}} border-l border-gray-600 text-right border-t text-blue-800'>
+                <td class='w-{{$widthCell}} border-l border-gray-500 text-right border-t text-blue-800'>
                     <div class='p-2'>
                         {!! (float)$value <= 0 ? "<i class='fa-light fa-minus'></i>" : "<a href='" . route('ghg_sheets.edit', $values3['month_ghg_sheet_id'][$k3] ?? 0) . "'>$value</a>" !!} </div>
                 </td>
@@ -101,10 +101,10 @@
                 @php
                 $totalEmissions = $tableDataSource['total_emission'];
                 @endphp
-                <td class="bg-white border-t border-gray-600" colspan="2"></td>
+                <td class="bg-white border-t  border-gray-500" colspan="2"></td>
                 <td class="{{$class1}} text-left border-t font-bold">Total Emissions</td>
                 @foreach($totalEmissions as $value)
-                <td class=" text-right border-t border-gray-600">
+                <td class=" text-right border-t border-gray-500">
                     <div class='p-2 font-bold text-red-600'>
                         {!! (float)$value <= 0 ? "<i class='fa-light fa-minus'></i>": $value !!}
                     </div>

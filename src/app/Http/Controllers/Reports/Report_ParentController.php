@@ -50,11 +50,13 @@ abstract class Report_ParentController extends Controller
         return $dataSource;
     }
 
-    protected function createArraySqlFromSqlStr($params){
+    protected function createArraySqlFromSqlStr($params)
+    {
         return [];
     }
 
-    protected function getBasicInfoData($params){
+    protected function getBasicInfoData($params)
+    {
         return [];
     }
 
@@ -77,7 +79,7 @@ abstract class Report_ParentController extends Controller
         $dataSource = $this->overKeyAndValueDataSource($params, $data);
         return $dataSource;
     }
-    
+
     protected function getTable()
     {
         $tableName = CurrentRoute::getCurrentController();
