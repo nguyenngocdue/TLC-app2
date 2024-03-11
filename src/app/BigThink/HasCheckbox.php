@@ -2,6 +2,8 @@
 
 namespace App\BigThink;
 
+use App\Models\Sub_project;
+use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Database\Eloquent\Collection;
@@ -279,9 +281,16 @@ trait HasCheckbox
         $toBeAddedList = array_values(array_diff($toBeSynced, $currentIds));
         $toBeDeletedList = array_values(array_diff($currentIds, $toBeSynced));
         if ($fieldId == 155) {
-            Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject ids: [" . join(", ", $ids) . "]");
-            Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject toBeAdded: [" . join(", ", $toBeAddedList) . "]");
+            Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject Route:       " . CurrentRoute::getName());
+            Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject User:        " . CurrentUser::get()->name);
+            Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject SubProject:  " . Sub_project::find($this->id)->name);
+            Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject before:      [" . join(", ", $currentIds) . "]");
+            $sortedIds = $ids;
+            sort($sortedIds);
+            Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject ids:         [" . join(", ", $sortedIds) . "]");
+            Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject toBeAdded:   [" . join(", ", $toBeAddedList) . "]");
             Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject toBeDeleted: [" . join(", ", $toBeDeletedList) . "]");
+            Log::channel("emergency")->info("-");
         }
 
         //This section is to handle sync for ids have Assoc.
