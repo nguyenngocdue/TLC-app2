@@ -95,13 +95,13 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                         AND SUBSTR(pru.date, 1, 10) <= '$endDate'
                         AND SUBSTR(pru.date, 1, 10) >= '$startDate'
                         ";
-                // if(isset($params['picker_date'])) $sql .= "\n AND pru.date >= $params['picker_date']['start']";
-                if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
-                if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
-                if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pse.prod_routing_link_id IN ({{prod_routing_link_id}})";
-                 
+        // if(isset($params['picker_date'])) $sql .= "\n AND pru.date >= $params['picker_date']['start']";
+        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
+        if (isset($params['prod_discipline_id']))  $sql .= "\n AND prl.prod_discipline_id = {{prod_discipline_id}}";
+        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND pse.prod_routing_link_id IN ({{prod_routing_link_id}})";
 
-                       $sql .="\n GROUP BY
+
+        $sql .= "\n GROUP BY
                             project_id, sub_project_id, prod_routing_id, prod_routing_link_id, pru.date
                             #, prod_sequences_id
                         ORDER BY  order_no";
@@ -109,7 +109,8 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         return $sql;
     }
 
-    private function getAllProdOrders($params){
+    private function getAllProdOrders($params)
+    {
         $sql = "SELECT
                     sp.project_id,
                     pj.name AS project_name,
@@ -139,7 +140,7 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
                 #LEFT JOIN prod_routing_details prd  ON {{prod_routing_id}} = prd.prod_routing_id
                 
                 WHERE 1 = 1";
-            $sql .= "\n 
+        $sql .= "\n 
                         AND pse.id IS NULL
                         AND pse.deleted_by IS NULL
                         AND sp.project_id = {{project_id}}
@@ -205,84 +206,83 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
 
         $optionLayout = $params['optionPrintLayout'] ?? $this->optionPrint;
         $tableColumns = [];
-        if(isset($dataSource['render_pages'])){
+        if (isset($dataSource['render_pages'])) {
             $data = $dataSource['render_pages'];
-            foreach ($data as $key => $values){
-                    $item = $values instanceof Collection ? $values['tableDataSource']->toArray() : $values['tableDataSource']->first();
-                    $unit = isset($item['uom_name']) && (!is_null($item['uom_name'])) ? $item['uom_name'] : '<small class="text-orange-300">Unknown Unit</small>';
-                    $tableColumns[$key] =  [
-                        [
-                            "title" => "Date",
-                            "dataIndex" => "pru_date",
-                            "align" => "center",
-                            "width" => 120,
-                        ],
-                        [
-                            "title" => "Project",
-                            "dataIndex" => "project_name",
-                            "align" => "left",
-                            "width" => 80,
-                        ],
-                        [
-                            "title" => "Sub Project",
-                            "dataIndex" => "sub_project_name",
-                            "align" => "left",
-                            "width" =>  $optionLayout === 'portrait' ? 110: 120,
-                        ],
-                        [
-                            "title" => "Production Routing",
-                            "dataIndex" => "prod_routing_name",
-                            "align" => "left",
-                            "width" => $optionLayout === 'portrait' ? 250: 280,
-                        ],
-                        // [
-                        //     "title" => "Production Discipline",
-                        //     "dataIndex" => "prod_discipline_name",
-                        //     "align" => "left",
-                        //     "width" => $optionLayout === 'portrait' ? 200: 193,
-                        //     "hasListenTo" => true,
-                        // ],
-                        [
-                            "title" => "Production Routing Link",
-                            "dataIndex" => "prod_routing_link_name",
-                            "align" => "left",
-                            "width" => $optionLayout === 'portrait' ? 300: 263,
-                        ],
-                        [
-                            "title" => "Man Power <br/>(AVG)",
-                            "dataIndex" => "man_power_on_day",
-                            "align" => "right",
-                            "width" => 110,
-                            "footer" => "agg_avg",
-                        ],
-                        [
-                            "title" => $unit . "/Day <br/>(AVG)",
-                            "dataIndex" => "total_uom_on_day",
-                            "align" => "right",
-                            "width" => 110,
-                            "footer" => "agg_avg",
-                        ],
-                        [
-                            "title" => "min/Day <br/>(AVG)",
-                            "dataIndex" => "min_on_day",
-                            "align" => "right",
-                            "width" => 110,
-                            "footer" => "agg_avg",
-                        ],
-                        [
-                            "title" => "min/$unit <br/>(AVG)",
-                            "dataIndex" => "min_on_set_on_day",
-                            "align" => "right",
-                            "width" =>  90,
-                            "footer" => "agg_avg",
-                        ]
-                    ];
-                }
+            foreach ($data as $key => $values) {
+                $item = $values instanceof Collection ? $values['tableDataSource']->toArray() : $values['tableDataSource']->first();
+                $unit = isset($item['uom_name']) && (!is_null($item['uom_name'])) ? $item['uom_name'] : '<small class="text-orange-300">Unknown Unit</small>';
+                $tableColumns[$key] =  [
+                    [
+                        "title" => "Date",
+                        "dataIndex" => "pru_date",
+                        "align" => "center",
+                        "width" => 120,
+                    ],
+                    [
+                        "title" => "Project",
+                        "dataIndex" => "project_name",
+                        "align" => "left",
+                        "width" => 80,
+                    ],
+                    [
+                        "title" => "Sub Project",
+                        "dataIndex" => "sub_project_name",
+                        "align" => "left",
+                        "width" =>  $optionLayout === 'portrait' ? 110 : 120,
+                    ],
+                    [
+                        "title" => "Production Routing",
+                        "dataIndex" => "prod_routing_name",
+                        "align" => "left",
+                        "width" => $optionLayout === 'portrait' ? 250 : 280,
+                    ],
+                    // [
+                    //     "title" => "Production Discipline",
+                    //     "dataIndex" => "prod_discipline_name",
+                    //     "align" => "left",
+                    //     "width" => $optionLayout === 'portrait' ? 200: 193,
+                    //     "hasListenTo" => true,
+                    // ],
+                    [
+                        "title" => "Production Routing Link",
+                        "dataIndex" => "prod_routing_link_name",
+                        "align" => "left",
+                        "width" => $optionLayout === 'portrait' ? 300 : 263,
+                    ],
+                    [
+                        "title" => "Man Power <br/>(AVG)",
+                        "dataIndex" => "man_power_on_day",
+                        "align" => "right",
+                        "width" => 110,
+                        "footer" => "agg_avg",
+                    ],
+                    [
+                        "title" => $unit . "/Day <br/>(AVG)",
+                        "dataIndex" => "total_uom_on_day",
+                        "align" => "right",
+                        "width" => 110,
+                        "footer" => "agg_avg",
+                    ],
+                    [
+                        "title" => "min/Day <br/>(AVG)",
+                        "dataIndex" => "min_on_day",
+                        "align" => "right",
+                        "width" => 110,
+                        "footer" => "agg_avg",
+                    ],
+                    [
+                        "title" => "min/$unit <br/>(AVG)",
+                        "dataIndex" => "min_on_set_on_day",
+                        "align" => "right",
+                        "width" =>  90,
+                        "footer" => "agg_avg",
+                    ]
+                ];
+            }
         };
 
         // dd($tableColumns);
         return $tableColumns;
-           
     }
 
     public function getBasicInfoData($params)
@@ -303,9 +303,10 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
         return $basicInfoData;
     }
 
-    private function generateArraySqlFromSqlStr($prodRoutingLinkIds, $params) {
+    private function generateArraySqlFromSqlStr($prodRoutingLinkIds, $params)
+    {
         $arraySqlStr = [];
-        foreach ($prodRoutingLinkIds as $prodRoutingLinkId){
+        foreach ($prodRoutingLinkIds as $prodRoutingLinkId) {
             $params['prod_routing_link'] = $prodRoutingLinkId;
             $arraySqlStr[$prodRoutingLinkId] = $this->getSqlStr($params);
         }
@@ -313,18 +314,19 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     }
 
 
-    private function makeDataWidget($dataSource, $params){
+    private function makeDataWidget($dataSource, $params)
+    {
         // dd($params);
         $dataOfManageWidget = $this->makeParamsInManageWidgets($params);
         // dd($dataOfManageWidget);
         $dataWidgets = [];
-        foreach ($dataSource as $key => $items){
+        foreach ($dataSource as $key => $items) {
             $array = [];
-            foreach ($dataOfManageWidget as $keyInManage => $paramsWidget){
+            foreach ($dataOfManageWidget as $keyInManage => $paramsWidget) {
                 $result = $this->createDataSourceWidgets($key, $items, $paramsWidget);
                 $array[$keyInManage] = $result;
             }
-            $dataWidgets[$key] = $array; 
+            $dataWidgets[$key] = $array;
         }
         // dd($dataWidgets);
         return $dataWidgets;
@@ -335,32 +337,32 @@ class Prod_sequence_050 extends Report_ParentDocument2Controller
     public function changeDataSource($dataSource, $params)
     {
         $items = Report::getItemsFromDataSource($dataSource);
-        $groupItems = Report::groupArrayByKey($items,'prod_routing_link_id');
-        
+        $groupItems = Report::groupArrayByKey($items, 'prod_routing_link_id');
+
         $prodRoutingLinks = $this->getProdRoutingLinks($params);
         $tableOfContents = [];
-        foreach(array_keys($groupItems) as $key) $tableOfContents[$key] = $prodRoutingLinks[$key];
-        
+        foreach (array_keys($groupItems) as $key) $tableOfContents[$key] = $prodRoutingLinks[$key];
+
         $dataWidgets = $this->makeDataWidget($groupItems, $params);
         // dd($dataWidgets);
-        $data= [];
+        $data = [];
         $fields = ['man_power_on_day', 'min_on_day', 'total_uom_on_day', 'min_on_set_on_day'];
-        foreach ($groupItems as $key => $values){
+        foreach ($groupItems as $key => $values) {
 
             // show minus icon when value is null or 0
-            $values = array_map(function($item) use ($fields){
-                foreach ($fields as $field){
-                    if (is_null($item[$field]) || !$item[$field]){
-                        $item[$field] = (object)['value' =>'<i class="fa-light fa-minus"></i>'];
+            $values = array_map(function ($item) use ($fields) {
+                foreach ($fields as $field) {
+                    if (is_null($item[$field]) || !$item[$field]) {
+                        $item[$field] = (object)['value' => '<i class="fa-light fa-minus"></i>'];
                         // $item[$field] = (object)['value' =>'0.00'];
                     }
                 }
                 return $item;
             }, $values);
             $data['render_pages'][$key] = [
-                    'tableDataSource' => collect($values),
-                    'dataWidgets' => $dataWidgets[$key],
-               ];
+                'tableDataSource' => collect($values),
+                'dataWidgets' => $dataWidgets[$key],
+            ];
         }
         $data['table_of_contents'] = $tableOfContents;
         return $data;
