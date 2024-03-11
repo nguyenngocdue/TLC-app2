@@ -109,6 +109,11 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentReport2Controller
                 "align" => "center",
             ],
             [
+                "title" => "Checklist Progress (%)",
+                "dataIndex" => "checklist_progress",
+                "align" => "right",
+            ],
+            [
                 "title" => "Production Order",
                 "dataIndex" => "prod_order_name",
                 "align" => "left",
@@ -129,16 +134,13 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentReport2Controller
                 "title" => "Sheet Status",
                 "dataIndex" => "status_chklst_sht",
                 "align" => "center",
+
             ],
             [
                 "title" => "Sheet Discipline",
                 "dataIndex" => "prod_discipline_name",
                 "align" => "left",
-            ],
-            [
-                "title" => "Checklist Progress",
-                "dataIndex" => "checklist_progress",
-                "align" => "right",
+                "width" => "150"
             ],
 
         ];
