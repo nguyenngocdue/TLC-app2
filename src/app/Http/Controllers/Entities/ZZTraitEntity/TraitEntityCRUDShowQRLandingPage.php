@@ -83,11 +83,14 @@ trait TraitEntityCRUDShowQRLandingPage
 		$unitId = $item->pj_unit_id;
 		$id = $item->id;
 		// $prodOrder = Prod_order::where('meta_type', $this->modelPath)->where('meta_id', $unitId)->first();
-		$prodOrderOfUnit = Pj_unit::findOrFail($unitId)->getProdOrders->first() ?? [];
-		$prodOrderOrModule = Pj_module::findOrFail($id)->getProdOrders->first() ?? [];
+		$prodOrderOfUnit = Pj_unit::find($unitId)?->getProdOrders->first() ?? [];
+		$prodOrderOrModule = Pj_module::find($id)?->getProdOrders->first() ?? [];
 
-		$inspChecklists = $prodOrderOfUnit->getQaqcInspChklsts ?? [];
-		$inspChecklists = $inspChecklists->merge($prodOrderOrModule->getQaqcInspChklsts ?? []);
-		return $inspChecklists;
+		$inspChecklists = $prodOrderOfUnit->getQaqcInspChklsts ?? null;
+		if ($inspChecklists) {
+			return $inspChecklists->merge($prodOrderOrModule->getQaqcInspChklsts ?? []);
+		} else {
+			return $prodOrderOrModule->getQaqcInspChklsts;
+		}
 	}
 }
