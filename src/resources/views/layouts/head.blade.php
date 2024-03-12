@@ -44,7 +44,9 @@
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
 
     <script src="{{ asset('js/tlc2-20231229.js') }}"></script>
-    <script src="{{ asset('js/parseNumber-20240301.js') }}"></script>
+    <script src="{{ asset('js/parseNumber-20240312.js') }}"></script>
+    <script src="{{ asset('js/textarea-diff-20240312.js') }}"></script>
+    <script src="{{ asset('js/listenSubmitForm-20240312.js') }}"></script>
     
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
