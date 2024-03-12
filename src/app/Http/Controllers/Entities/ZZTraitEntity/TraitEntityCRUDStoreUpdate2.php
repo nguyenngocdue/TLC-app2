@@ -190,7 +190,10 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->attachOrphan($props['attachment'], $request, $objectType, $objectId);
 			$this->processComments($request);
 			$this->processSignatures($request);
-			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
+			if (!$isFakeRequest) {
+				//This will stop Project update keep deleting the sub project routings
+				$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
+			}
 
 			// dump($oldStatus);
 			// dump($newStatus);
