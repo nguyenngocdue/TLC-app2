@@ -12,7 +12,6 @@ trait TraitCreateSQL
     public function preg_match_all($sqlStr, $params)
     {
         $params = $this->generateValuesFromParamsReport($params);
-        // dd($params);
         preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
             if (isset($params[$value])) {
@@ -32,9 +31,7 @@ trait TraitCreateSQL
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             }
         }
-        // dd($params);
         if (Report::checkParam($params, 'picker_date')) {
-            // dd($params);
             $dates = DateReport::separateStrPickerDate($params['picker_date']);
             $sqlStr = str_replace('{{end_date}}', $dates['end'], $sqlStr);
             $sqlStr = str_replace('{{start_date}}', $dates['start'], $sqlStr);

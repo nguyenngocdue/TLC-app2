@@ -37,7 +37,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentReport2Controller
                     LEFT JOIN prod_routings pr ON pr.id = qaqcicl.prod_routing_id
                     LEFT JOIN prod_orders po ON po.id = qaqcicl.prod_order_id
                     LEFT JOIN qaqc_insp_chklst_shts qaqcicls ON qaqcicls.qaqc_insp_chklst_id = qaqcicl.id
-                    LEFT JOIN qaqc_insp_tmpls qaqcitmp ON qaqcitmp.id = pr.id
+                    LEFT JOIN qaqc_insp_tmpls qaqcitmp ON qaqcicl.qaqc_insp_tmpl_id = qaqcitmp.id
                     LEFT JOIN prod_disciplines pdl ON pdl.id = qaqcicls.prod_discipline_id
                     WHERE 1 = 1
         ";
@@ -45,7 +45,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentReport2Controller
         if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND qaqcicl.sub_project_id = $sub";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id = $pr";
-        if ($st = $valOfParams['qaqc_insp_tmpl_id']) $sql .= "\n AND qaqcitmp.id IN ($st)";
+        if ($st = $valOfParams['qaqc_insp_tmpl_id']) $sql .= "\n AND qaqcicl.qaqc_insp_tmpl_id IN ($st)";
 
         // dd($sql);
         return $sql;
@@ -102,6 +102,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentReport2Controller
                 "title" => "Checklist Type",
                 "dataIndex" => "qaqc_insp_tmpl_name",
                 "align" => "left",
+                "width" => "150"
             ],
             [
                 "title" => "Checklist Id",

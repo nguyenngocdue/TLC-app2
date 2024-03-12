@@ -19,7 +19,8 @@ class ParamQaqcInspTmplId extends ParentParamReports
                 WHERE 1 = 1 
                 AND mtm.doc_type = 'App\\\Models\\\qaqc_insp_tmpl' ) AS tb1
                 LEFT JOIN prod_routings pr ON pr.id = tb1.term_id
-                LEFT JOIN qaqc_insp_tmpls qaqcitmpl ON qaqcitmpl.id = tb1.doc_id ";
+                LEFT JOIN qaqc_insp_tmpls qaqcitmpl ON qaqcitmpl.id = tb1.doc_id 
+                ORDER BY name";
         $result = DB::select($sql);
         return $result;
     }
