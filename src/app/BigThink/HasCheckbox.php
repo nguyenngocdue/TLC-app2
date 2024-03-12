@@ -284,7 +284,7 @@ trait HasCheckbox
             Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject");
             Log::channel("emergency")->info("Route:       " . CurrentRoute::getName());
             Log::channel("emergency")->info("User:        " . CurrentUser::get()->name);
-            Log::channel("emergency")->info("SubProject:  " . Sub_project::find($this->id)->name);
+            Log::channel("emergency")->info("SubProject:  " . Sub_project::find($this->id)?->name);
             Log::channel("emergency")->info("before:      [" . join(", ", $currentIds) . "]");
             $sortedIds = $ids;
             sort($sortedIds);
