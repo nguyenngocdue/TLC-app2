@@ -287,7 +287,7 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                     LEFT JOIN user_team_ncrs ncrt ON ncrt.id = ncr.user_team_id
                     WHERE 1 = 1
                     AND  ncr.deleted_by IS NULL";
-        $sqlData = DB::select(DB::raw($sqlStr));
+        $sqlData = DB::select($sqlStr);
         return collect($sqlData);
     }
 

@@ -2,26 +2,27 @@
 
 namespace App\View\Components\Reports\ModeParams;
 
+use App\Models\Qaqc_insp_tmpl;
 use App\View\Components\Reports\ParentParamReports;
-use Illuminate\Support\Facades\DB;
+
 
 class ParamQaqcInspTmplId extends ParentParamReports
 {
     protected $referData = 'prod_routing_id';
     protected function getDataSource()
     {
-        $sql = "SELECT 
-                    DISTINCT tb1.term_id AS prod_routing_id,
-                    qaqcitmpl.name AS name,
-                    tb1.doc_id AS id
-                FROM (SELECT *  
-                FROM many_to_many mtm 
-                WHERE 1 = 1 
-                AND mtm.doc_type = 'App\\\Models\\\qaqc_insp_tmpl' ) AS tb1
-                LEFT JOIN prod_routings pr ON pr.id = tb1.term_id
-                LEFT JOIN qaqc_insp_tmpls qaqcitmpl ON qaqcitmpl.id = tb1.doc_id 
-                ORDER BY name";
-        $result = DB::select($sql);
+        $ids = Qaqc_insp_tmpl::all()->pluck('id')->toArray();
+        $result = [];
+        foreach ($ids as $id) {
+            $ins = Qaqc_insp_tmpl::find($id);
+            $prodRoutingIds = $ins->getProdRoutingsOfInspTmpl()->pluck('id')->toArray();
+            $name = $ins->toArray()['name'];
+            $result[] = [
+                'id' => $id,
+                'name' => $name,
+                'prod_routing_id' => $prodRoutingIds
+            ];
+        }
         return $result;
     }
 }

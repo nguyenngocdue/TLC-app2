@@ -231,7 +231,7 @@ class Qaqc_ncr_030_dataSource extends Controller
         $dataSource = [];
         foreach ($sqls as $key => $sqlStr) {
             if (is_null($sqlStr) || !$sqlStr) return collect();
-            $sqlData = DB::select(DB::raw($sqlStr));
+            $sqlData = DB::select($sqlStr);
             $dataSource[$key] = $sqlData;
         }
         return collect($dataSource);

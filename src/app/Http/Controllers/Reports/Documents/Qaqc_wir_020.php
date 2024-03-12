@@ -121,12 +121,12 @@ class Qaqc_wir_020 extends Qaqc_wir_010
         $params['date_index'] = $previousDate;
 
         $dataPreviousDate = $this->getSql($params);
-        $dataPreviousDate = collect(DB::select(DB::raw($dataPreviousDate)));
+        $dataPreviousDate = collect(DB::select($dataPreviousDate));
         $dataNaWIRsPreviousDate = $this->getNaWIRs($params);
 
         $params['date_index'] = $latestDate;
         $dataLastDate = $this->getSql($params);
-        $dataLastDate = collect(DB::select(DB::raw($dataLastDate)));
+        $dataLastDate = collect(DB::select($dataLastDate));
         $dataNaWIRsLastDate = $this->getNaWIRs($params);
 
         $output = [];

@@ -16,7 +16,7 @@ abstract class ParentParamReports extends Component
     protected $referData = '';
     protected $referData1 = '';
     public function __construct(
-        private $name ="",
+        private $name = "",
         private $selected = "",
         private $multiple = false,
         private $readOnly = false,
@@ -34,27 +34,28 @@ abstract class ParentParamReports extends Component
         return $this->type;
     }
 
-    public function getParams(){
+    public function getParams()
+    {
         return [
             'showNumber' => $this->showNumber,
             'showNow' => $this->showNow,
         ];
     }
 
-    public function hasListenTo() {
+    public function hasListenTo()
+    {
         return $this->hasListenTo;
     }
 
     public function render()
     {
         $hasListenTo = $this->hasListenTo;
-        if($hasListenTo) {
-            // dump($this->selected);
+        if ($hasListenTo) {
             $params = $this->getListenToParamsReport();
             return view('components.controls.has-data-source.' . $this->control, $params);
         } else {
             $params = $this->getParamsReport();
-            return view('components.controls.has-data-source.'.$this->control, $params);
+            return view('components.controls.has-data-source.' . $this->control, $params);
         }
     }
 }

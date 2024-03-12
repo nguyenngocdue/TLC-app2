@@ -113,6 +113,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentReport2Controller
                 "title" => "Checklist Progress (%)",
                 "dataIndex" => "checklist_progress",
                 "align" => "right",
+                "width" => "100"
             ],
             [
                 "title" => "Production Order",

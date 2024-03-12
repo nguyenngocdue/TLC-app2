@@ -1,6 +1,7 @@
 <?php
 
 namespace App\View\Components\Reports;
+
 use App\Utils\ClassList;
 
 trait TraitParentIdHasListenToParamsReport
@@ -33,7 +34,7 @@ trait TraitParentIdHasListenToParamsReport
     }
     public function getListenToParamsReport()
     {
-        
+
         $tableName = $this->name;
         $params = [
             'name' => $this->multiple ?  $this->name . '[]' : $this->name,
@@ -45,9 +46,8 @@ trait TraitParentIdHasListenToParamsReport
             'readOnly' => $this->readOnly,
             'classList' => ClassList::DROPDOWN,
             'multiple' => $this->multiple ? true : false,
-            'allowClear' => $this->allowClear ? $this->allowClear :0,
+            'allowClear' => $this->allowClear ? $this->allowClear : 0,
         ];
-        // dump($params);
         $this->renderJS2($tableName, $this->referData, $this->name);
         return $params;
     }
