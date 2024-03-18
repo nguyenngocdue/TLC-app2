@@ -11,9 +11,28 @@
                 <div class="h-80">
                     <img class="w-full h-full object-cover" src="{{$thumbnailUrl}}" alt="image" >
                 </div>
-                <div class="p-4 text-base flex justify-center bg-gray-200 truncate">
-                    Module serial number: 
-                    <span class="ml-1 font-semibold">{{$moduleName}}</span>
+                <div class="p-4 text-base mx-auto bg-gray-200 truncate flex justify-center">
+                    <div class="w-1/2 grid grid-cols-12">
+                        @php
+                            $unitName = $item->getPjUnit?->name;
+                        @endphp
+
+                        @if($unitName)
+                        <div class="col-span-6 text-right">
+                            Apartment / House Number:
+                        </div>
+                        <div class="col-span-6">
+                            <span class="ml-1 font-semibold">{{$unitName}}</span>
+                        </div>
+                        @else
+                        <div class="col-span-6 text-right">
+                            Module Number: 
+                        </div>
+                        <div class="col-span-6">
+                            <span class="ml-1 font-semibold">{{$item->name}}</span>
+                        </div>
+                        @endif
+                    </div>
                 </div>
             </div>
             <div class="w-auto justify-center mt-6 mx-auto px-4">

@@ -22,7 +22,7 @@ trait TraitEntityCRUDShowQRLandingPage
 		$thumbnailUrl = $item->getSubProject?->getProject->getAvatarUrl() ?? "/images/generic-module1.webp";
 		return view('dashboards.pages.entity-show-landing-page', [
 			'props' => $props,
-			'moduleName' => $item->name,
+			'item' => $item,
 			'dataSource' => $this->getDataSourceGroups($item),
 			'thumbnailUrl' => $thumbnailUrl,
 			'type' => $this->type,
