@@ -158,5 +158,37 @@
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
+    },
+    "_attachment_subproject_homeowner_manual": {
+        "name": "_attachment_subproject_homeowner_manual",
+        "relationship": "morphMany",
+        "control_name": "attachment_subproject_homeowner_manual",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "attachment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_attachment_subproject_project_plans": {
+        "name": "_attachment_subproject_project_plans",
+        "relationship": "morphMany",
+        "control_name": "attachment_subproject_project_plans",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "attachment",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }

@@ -183,11 +183,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_attachment_subproject_project_plans": {
-        "name": "_attachment_subproject_project_plans",
-        "column_name": "attachment_subproject_project_plans",
+    "_attachment_subproject_homeowner_manual": {
+        "name": "_attachment_subproject_homeowner_manual",
+        "column_name": "attachment_subproject_homeowner_manual",
         "column_type": "eloquent_prop",
-        "label": "Project Plans",
+        "label": "HomeOwner Manual",
         "control": "attachment",
         "align": "",
         "col_span": "",
@@ -206,11 +206,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_attachment_subproject_homeowner_manual": {
-        "name": "_attachment_subproject_homeowner_manual",
-        "column_name": "attachment_subproject_homeowner_manual",
+    "_attachment_subproject_project_plans": {
+        "name": "_attachment_subproject_project_plans",
+        "column_name": "attachment_subproject_project_plans",
         "column_type": "eloquent_prop",
-        "label": "HomeOwner Manual",
+        "label": "Project Plans",
         "control": "attachment",
         "align": "",
         "col_span": "",
