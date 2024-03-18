@@ -11,9 +11,9 @@ $tmp = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,
 $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
 $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
 
-$formWidth = "md:w-3/4 xl:w-3/4";
+$formWidth = "md:w-3/4";
 if(in_array($type,["qaqc_insp_chklst_shts","hse_insp_chklst_shts"])){
-$formWidth = "md:w-1/2 xl:w-1/2";
+$formWidth = "md:w-1/2";
 }
 @endphp
 
@@ -32,7 +32,7 @@ $formWidth = "md:w-1/2 xl:w-1/2";
     listenersOfDropdown4s = @json($listeners4);
     filtersOfDropdown4s = @json($filters4);
 </script>
-<div class="px-4 mt-2 readonly">
+<div class="px-4 pt-2 bg-body">
     <x-elapse />
     <x-controls.workflow403-checker allowed="{{$allowed}}" status="{{$status}}"/>
     <x-controls.header-alert-validation :strProps="$allProps" />
@@ -49,7 +49,7 @@ $formWidth = "md:w-1/2 xl:w-1/2";
         @break
     @endswitch
     
-    <form class="w-full mb-8 mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
+    <form class="w-full mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
         @csrf
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
         <input name="redirect_back_to_last_page" value="{{$redirect}}" type='hidden' />  {{-- This line is required for profile and me --}}
@@ -94,8 +94,10 @@ $formWidth = "md:w-1/2 xl:w-1/2";
         <x-renderer.editable.modal-intermediate key={{$key}} action={{$action}} type={{$type}} status={{$status}} id={{$id}} modelPath={{$modelPath}} :actionButtons="$actionButtons" :props="$props" :item="$item" :dataSource="$propsOfIntermediatePage" />
         @endforeach
         @if(!$hasReadOnly)
-        <div class="bg-white rounded-lg mt-2">
-            <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" type={{$type}} />
+        <div class="px-2 flex justify-center">
+            <div class="bg-white rounded-lg mt-2 w-full md:w-3/4">
+                <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" type={{$type}} />
+            </div>
         </div>
         @endif
         <script>
@@ -106,8 +108,8 @@ $formWidth = "md:w-1/2 xl:w-1/2";
 <x-renderer.editable.modal-broadcast-notification />
 @if($action == 'edit')
     @if(!in_array($type, ['conqa_archives']))
-        <div class="px-4">
-            <div class="w-full p-2 bg-white rounded-lg  dark:bg-gray-800">
+        <div class="px-4 flex justify-center bg-body">
+            <div class="w-full md:w-3/4 p-2 rounded-lg  dark:bg-gray-800">
                 <x-renderer.card title="Timeline">
                     <x-controls.time-line2 id={{$id}} modelPath={{$modelPath}} :props="$props" />
                 </x-renderer.card>

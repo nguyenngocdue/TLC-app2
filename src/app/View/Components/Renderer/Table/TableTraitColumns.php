@@ -55,14 +55,18 @@ trait TableTraitColumns
         $title = $column['title'] ?? Str::headline($column['dataIndex']);
         $subTitle = $column['subTitle'] ?? null;
         if ($subTitle) $title .= "<hr/><i>" . $subTitle . "</i>";
-        $tooltip = "Column details:\n";
-        $tooltip .= "+ Index: $index\n";
-        $tooltip .= "+ DataIndex: $dataIndex\n";
-        $tooltip .= "+ ColumnName: $columnName\n";
-        $tooltip .= "+ Renderer: $renderer\n";
-        $tooltip .= "+ Width: $width\n";
-        $tooltip .= "+ Colspan: $colspan\n";
-        $tooltip .= "+ Took: {$elapse}ms";
+        if (isset($column['tooltip'])) {
+            $tooltip = $column['tooltip'];
+        } else {
+            $tooltip = "Column details:\n";
+            $tooltip .= "+ Index: $index\n";
+            $tooltip .= "+ DataIndex: $dataIndex\n";
+            $tooltip .= "+ ColumnName: $columnName\n";
+            $tooltip .= "+ Renderer: $renderer\n";
+            $tooltip .= "+ Width: $width\n";
+            $tooltip .= "+ Colspan: $colspan\n";
+            $tooltip .= "+ Took: {$elapse}ms";
+        }
 
         $iconJson = $columnType === 'json' ? '<br/><i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
         if ($columnType === 'json') $title .= $iconJson;

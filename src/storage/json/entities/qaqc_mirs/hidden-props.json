@@ -5,6 +5,7 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -15,6 +16,7 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -25,6 +27,7 @@
         "new": "true",
         "assigned": "",
         "rejected": "true",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -35,6 +38,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -45,6 +49,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -55,6 +60,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -65,6 +71,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -75,6 +82,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -85,6 +93,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -95,6 +104,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -105,6 +115,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -115,6 +126,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -125,6 +137,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -135,6 +148,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -145,6 +159,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -155,6 +170,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -165,6 +181,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -175,6 +192,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -185,6 +203,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -195,6 +214,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -205,6 +225,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -215,6 +236,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -225,6 +247,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -235,6 +258,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -245,6 +269,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -255,6 +280,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -265,6 +291,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -275,6 +302,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -285,6 +313,7 @@
         "new": "true",
         "assigned": "",
         "rejected": "true",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -295,6 +324,7 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "inspected": "",
         "inspection_rejected": "true",
         "closed": "true"
@@ -305,6 +335,7 @@
         "new": "true",
         "assigned": "",
         "rejected": "true",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "",
         "closed": "true"
@@ -315,16 +346,7 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -335,9 +357,21 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "assigned": "true",
+        "rejected": "true",
+        "pending_ncr": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
     },
     "_created_at": {
         "name": "_created_at",
@@ -345,6 +379,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -355,6 +390,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -365,6 +401,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -375,6 +412,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""

@@ -39,9 +39,10 @@ class Card extends Component
             $titleClass = $this->titleClass;
             $titleId = $this->titleId ? "id=" . $this->titleId : "";
             $result = "<fieldset id='$this->idHtml' component='renderer/card' 
-                class='$class break-normal min-w-0 dark:bg-gray-800 dark:border-gray-600 rounded shadow-xs' style='scroll-margin-top: 80px;'> ";
+                class='$class break-normal min-w-0 rounded shadow-xs mt-1' 
+                style='scroll-margin-top: 80px;'> ";
             if ($title) {
-                $result .= "<legend title='$this->tooltip'>";
+                $result .= "<legend title='$this->tooltip' class='border-l border-t border-r bg-white rounded-t' style='margin-left: -17px;'>";
                 $result .=  "<h4 $titleId class='px-2 font-medium text-gray-600 dark:text-gray-300 $titleClass'>";
                 $result .= $this->icon ? "<i class='$this->icon text-blue-800 pr-2 rounded'></i>" : "";
                 $result .= $title;

@@ -244,6 +244,13 @@
         "color_index": "200",
         "icon": null
     },
+    "pending_ncr": {
+        "name": "pending_ncr",
+        "title": "Pending NCR",
+        "color": "red",
+        "color_index": "800",
+        "icon": null
+    },
     "pending_received": {
         "name": "pending_received",
         "title": "Pending Received",

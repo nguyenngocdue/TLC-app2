@@ -14,7 +14,7 @@
 <script>const route_task = "{{route('App\\Models\\Kanban_task'::getTableName() . '.kanban')}}";</script>
 <script>const route_page = "{{route('App\\Models\\Kanban_task_page'::getTableName() . '.kanban')}}";</script>
 
-<div class="px-4 mt-2" component="entity-view-all-kanban.blade">
+<div class="px-4 mt-2 bg-body" component="entity-view-all-kanban.blade">
     <x-elapse title="Bootrap: " duration="{{$frameworkTook}}"/>   
     <x-elapse title="ViewAllController: "/> 
     

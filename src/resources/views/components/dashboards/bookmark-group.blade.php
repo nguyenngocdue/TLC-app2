@@ -33,7 +33,7 @@
     function renderButtonShowMore(allAppsBookmark,buttonShowMore){
         if(allAppsBookmark.length > 10){
             buttonShowMore.html(`
-            <button type="button" id='toggle_more' class="flex justify-end mb-auto ml-auto px-2 border rounded-md text-blue-600 hover:bg-gray-200" @click="toggleMore()">
+            <button type="button" id='toggle_more' class="flex justify-end mb-auto ml-1 px-2 py-1 border rounded-md text-blue-600 hover:bg-gray-200" @click="toggleMore()">
                 <i class="fa-solid fa-chevron-down"></i>
             </button>`)
         }

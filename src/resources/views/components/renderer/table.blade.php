@@ -47,7 +47,7 @@ var tableObjectIndexedColumns = {};
                     $classH= "h-$headerTop";
                     $classTop= "top-$headerTop";
                 } @endphp
-                <div class="table-wrp block {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t $borderColor":"rounded-t-lg"}}">
+                <div class="table-wrp block bg-gray-100 {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t $borderColor":"rounded-t-lg"}}">
                     <table id="{{$tableName}}" class='whitespace-no-wrap w-full text-sm border-separate border-spacing-0 {{$borderColor}}' style="table-layout: auto; {{$tableWidth}}">
                         <colgroup>
                             {!! $colgroup !!}

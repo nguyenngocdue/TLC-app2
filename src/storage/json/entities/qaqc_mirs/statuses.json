@@ -2,6 +2,7 @@
     "new",
     "assigned",
     "rejected",
+    "pending_ncr",
     "inspected",
     "inspection_rejected",
     "closed"

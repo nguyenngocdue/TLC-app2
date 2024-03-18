@@ -53,7 +53,7 @@
             <i class="fa-duotone fa-spinner fa-spin text-green-500"></i>
             <span class="text-lg ml-2 text-green-500">Updating to the newer version</span>
         </div>
-        <div id="content-app"  class="bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+        <div id="content-app" :class="{ 'overflow-hidden': isSideMenuOpen }">
             <div class="flex flex-col flex-1 w-full">
                 <x-homepage.navbar2 />
                     @auth <x-renderer.page-header /> @endauth
@@ -61,7 +61,7 @@
                     <div id="print-pdf-document"  class="w-full min-h-sc1reen h-full MUST-NOT-HAVE-X-PADDING-MARGIN-FOR-PRINT-PAGE">
                         @yield('content')
                     </div>
-                    <div class="mt-8 no-print"></div>
+                    {{-- <div class="mt-8 no-print"></div> --}}
             </div> 
         </div>
         {{-- Button Go to Top and Bottom --}}

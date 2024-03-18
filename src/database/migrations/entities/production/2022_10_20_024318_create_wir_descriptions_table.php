@@ -23,6 +23,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('short_desc')->nullable();
             $table->string('slug')->unique();
             $table->unsignedBigInteger('prod_discipline_id')->nullable();
             $table->unsignedInteger('wir_weight');

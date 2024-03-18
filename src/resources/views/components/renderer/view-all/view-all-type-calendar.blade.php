@@ -1,11 +1,11 @@
-<div class="grid grid-cols-12">
-    <div class="col-span-3 overflow-y-auto overflow-x-hidden h-screen px-2">
+<div class="grid grid-cols-12 gap-2">
+    <div class="col-span-3 overflow-y-auto overflow-x-hidden h-screen px-2 bg-white rounded">
         <x-calendar.sidebar-calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}"/>
     </div>
     <div class="w-full px-1 bg-gray-100 rounded-lg shadow col-span-9">
         <div class="grid lg:grid-cols-12 gap-2 mx-2">
             <div class="md:col-span-3 flex">
-                    <x-renderer.card class="w-full border bg-white p-2" title="Selected view">
+                    <x-renderer.card title="Selected view">
                         <div class="flex">
                             <x-renderer.avatar-user uid='{{$userCurrentCalendar->id}}'></x-renderer.avatar-user>
                             <x-renderer.button 
@@ -27,7 +27,7 @@
                     </x-renderer.card>
             </div>
             <div class="md:col-span-3 lg:col-span-2">
-                <x-renderer.card class="w-full border bg-white p-[15px] items-center" title="Selected Year">
+                <x-renderer.card title="Selected Year">
                         <div class="text-center flex justify-around items-center">
                             <button type="button" onclick="decrease(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
                                 <i class="w-5 h-full fa-regular fa-arrow-left"></i>
@@ -46,7 +46,7 @@
             @php
                 $listIdPendingApproval = json_encode($listIdPendingApproval);
             @endphp
-                <x-renderer.card class="w-full border bg-white p-4 flex justify-center" title="Options">
+                <x-renderer.card title="Options">
                     <x-renderer.button 
                         class="w-40" 
                         icon="fa-duotone fa-thumbs-up"
