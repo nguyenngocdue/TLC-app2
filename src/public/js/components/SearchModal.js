@@ -84,7 +84,7 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
             const nameButton = capitalize(button) + 's';
             const isActiveCss = indexButtonTabs == 1 ? 'active' : 'dark:hover:text-gray-300';
             htmlButtons += 
-            `<button type="button" class="hs-tab-active:border-blue-500 hs-tab-active:text-blue-600 dark:hs-tab-active:text-blue-600 py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 ${isActiveCss}" id="vertical-tab-with-border-item-${indexButtonTabs}" data-hs-tab="#vertical-tab-with-border-${indexButtonTabs}" aria-controls="vertical-tab-with-border-${indexButtonTabs}" role="tab">
+            `<button type="button" onmouseover="changeTab(event,${indexButtonTabs})" class="hs-tab-active:border-blue-500 hs-tab-active:text-blue-600 dark:hs-tab-active:text-blue-600 py-1 pr-4 inline-flex items-center gap-2 border-r-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-blue-600 ${isActiveCss}" id="vertical-tab-with-border-item-${indexButtonTabs}" data-hs-tab="#vertical-tab-with-border-${indexButtonTabs}" aria-controls="vertical-tab-with-border-${indexButtonTabs}" role="tab">
              ${nameButton}
             </button>`
             indexButtonTabs++;
@@ -119,8 +119,8 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
                             </div>
                         </li>`;
             })
-            htmlProperty += `<p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
-                                <ul class="space-y-1">
+            htmlProperty += `<p id='${subPackage}-recent' onmouseover="visible('${subPackage}-recent')" class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${subPackage}</p>
+                                <ul id='ul-${subPackage}-recent' class="space-y-1 hidden">
                                     ${html}
                                 </ul>`;
         }
@@ -145,7 +145,8 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
                     let htmlTopDrawer = ``
                     const sub_package = value
                     let total = 0
-                    apps[property][value].forEach((app) => {
+                    apps[property][value].forEach((app,index) => {
+                        console.log(index);
                         total += app.click_count ? app.click_count : 0
                         const status = capitalize(app.status ?? '')
                         const isBookmark = app.bookmark
@@ -189,8 +190,8 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
                         ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${total}</span>`
                         : ''
                     html += `<li class='px-2'>
-                                    <p class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${sub_package} ${totalHtml}</p>
-                                        <ul class="space-y-1">
+                                    <p id='${sub_package}' onmouseover="visible('${sub_package}')" class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${sub_package} ${totalHtml}</p>
+                                        <ul id='ul-${sub_package}' class="space-y-1 hidden">
                                            ${htmlTopDrawer}
                                         </ul>
                             </li>`
@@ -345,7 +346,30 @@ function filterAllAppCheckAdmin(arr) {
         return true
     })
 }
-
+function changeTab(evt, index) {
+    const elements = document.querySelectorAll('div[id^="vertical-tab-with-border-"]');
+    const elementButtons = document.querySelectorAll('button[id^="vertical-tab-with-border-item-"]');
+    elements.forEach((element) => {
+        if(!element.classList.contains('hidden')) {
+            element.classList.add('hidden');
+        }
+    });
+    elementButtons.forEach((elementButton) => {
+        if(elementButton.classList.contains('active')) {
+            elementButton.classList.remove('active');
+        }
+    });
+    evt.target.classList.add("active")
+    document.getElementById(`vertical-tab-with-border-${index}`).classList.remove("hidden")
+  }
+function visible(id){
+    var ul = document.getElementById(`ul-${id}`);
+    if(ul.classList.contains('hidden')){
+        ul.classList.remove('hidden');
+    }else{
+        ul.classList.add('hidden');
+    }
+}
 function bookmarkSearchModal(entity, url) {
     $.ajax({
         type: 'put',
