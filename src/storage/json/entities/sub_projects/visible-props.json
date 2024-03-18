@@ -71,18 +71,6 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_client_id": {
-        "name": "_client_id",
-        "column_name": "client_id",
-        "concept": "true",
-        "design": "true",
-        "manufacturing": "true",
-        "construction_site": "true",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "timesheet_only": "true"
-    },
     "_getProdOrders": {
         "name": "_getProdOrders",
         "column_name": "getProdOrders",
@@ -179,9 +167,9 @@
         "cancelled": "",
         "timesheet_only": ""
     },
-    "_getExternalInspectorsOfSubProject()": {
-        "name": "_getExternalInspectorsOfSubProject()",
-        "column_name": "getExternalInspectorsOfSubProject()",
+    "_Members of this Sub Project": {
+        "name": "_Members of this Sub Project",
+        "column_name": "Members of this Sub Project",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
@@ -203,9 +191,57 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
+    "_Client of this SubProject": {
+        "name": "_Client of this SubProject",
+        "column_name": "Client of this SubProject",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_client_id": {
+        "name": "_client_id",
+        "column_name": "client_id",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
     "_getProjectClientsOfSubProject()": {
         "name": "_getProjectClientsOfSubProject()",
         "column_name": "getProjectClientsOfSubProject()",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_Inspectors of this SubProject": {
+        "name": "_Inspectors of this SubProject",
+        "column_name": "Inspectors of this SubProject",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_getExternalInspectorsOfSubProject()": {
+        "name": "_getExternalInspectorsOfSubProject()",
+        "column_name": "getExternalInspectorsOfSubProject()",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
