@@ -67,7 +67,8 @@ class QaqcWirs extends ViewAllTypeMatrixParent
             if ($this->prodDiscipline && ($line->prod_discipline_id != $this->prodDiscipline)) continue;
             $result[] = [
                 'dataIndex' => $line->id,
-                'title' => $line->name,
+                'title' => $line->short_desc ?: $line->name,
+                'tooltip' => $line->name,
                 'align' => 'center',
                 'prod_discipline_id' => $line->prod_discipline_id,
                 'def_assignee' => $line->def_assignee,
