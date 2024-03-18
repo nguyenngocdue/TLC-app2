@@ -16,6 +16,9 @@ class Sub_project extends ModelExtended
         "getProdOrders" => ['hasMany', Prod_order::class],
         "getLod" => ['belongsTo', Term::class, "lod_id"],
         "getClient" => ["belongsTo", User_company::class, "client_id"],
+
+        "attachment_subproject_homeowner_manual" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "attachment_subproject_project_plans" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public static $oracyParams = [
@@ -26,6 +29,20 @@ class Sub_project extends ModelExtended
         "getExternalInspectorsOfSubProject()" => ['getCheckedByField', User::class],
         // "getApartmentOwnersOfSubProject()" => ['getCheckedByField', User::class],
     ];
+
+    public function attachment_subproject_homeowner_manual()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function attachment_subproject_project_plans()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
 
     public function getProjectMembers()
     {

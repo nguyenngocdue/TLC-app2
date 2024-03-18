@@ -95,6 +95,30 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
+    "_attachment_subproject_project_plans": {
+        "name": "_attachment_subproject_project_plans",
+        "column_name": "attachment_subproject_project_plans",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_attachment_subproject_homeowner_manual": {
+        "name": "_attachment_subproject_homeowner_manual",
+        "column_name": "attachment_subproject_homeowner_manual",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
     "_getProdRoutingsOfSubProject()": {
         "name": "_getProdRoutingsOfSubProject()",
         "column_name": "getProdRoutingsOfSubProject()",
