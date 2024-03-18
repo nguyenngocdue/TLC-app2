@@ -35,7 +35,7 @@ trait TraitEntityCRUDShowQRLandingPage
 		$linkDocs = [];
 		foreach ($dataRender as $value) {
 			$href = route($value->getTable() . '.show', $value->id) ?? "";
-			$name = $value->getQaqcInspTmpl->name ?? "";
+			$name = $value->getQaqcInspTmpl->short_name ?? "";
 			if ($href)
 				$linkDocs[] = [
 					'href' => $href,
@@ -59,7 +59,7 @@ trait TraitEntityCRUDShowQRLandingPage
 				$shipping_doc_link = $item->shipping_doc_link;
 
 				$qa_records[] = ['name' => "MODULE Inspection Checklist", 'href' => $insp_chklst_link,];
-				$qa_records[] = ['name' => "SHIPPING DELIVERY Checklist", 'href' => $shipping_doc_link,];
+				$qa_records[] = ['name' => "SHIPPING / DELIVERY Checklist", 'href' => $shipping_doc_link,];
 				break;
 			default:
 				$qa_records = [];
@@ -67,7 +67,7 @@ trait TraitEntityCRUDShowQRLandingPage
 		}
 
 		return [
-			'Home Owner Manual' => [['name' => "To Be Added"]],
+			'HomeOwner Manual' => [['name' => "To Be Added"]],
 			"QA Records $qa_source" =>  $qa_records,
 			'Project Plans' => [['name' => "To Be Added"],],
 			'Ticketing' => [['name' => "To Be Added"],],

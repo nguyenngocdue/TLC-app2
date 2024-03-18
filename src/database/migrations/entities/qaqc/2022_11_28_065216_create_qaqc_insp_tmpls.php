@@ -23,7 +23,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
+            $table->string('short_name')->nullable();
+            // $table->string('slug')->unique();
+
             // $table->unsignedBigInteger('prod_routing_id');
             $table->appendCommonFields();
         });
