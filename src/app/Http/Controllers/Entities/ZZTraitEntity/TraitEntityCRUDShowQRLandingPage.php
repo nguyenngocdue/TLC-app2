@@ -31,7 +31,7 @@ trait TraitEntityCRUDShowQRLandingPage
 	}
 	private function getDataSourceQARecords($model)
 	{
-		$dataRender = $this->getDataRenderLinkDocs($model);
+		$dataRender = $this->getDataRenderLinkDocsOfQARecord($model);
 		$linkDocs = [];
 		foreach ($dataRender as $value) {
 			$href = route($value->getTable() . '.show', $value->id) ?? "";
@@ -44,17 +44,39 @@ trait TraitEntityCRUDShowQRLandingPage
 		}
 		return $linkDocs;
 	}
+	private function getDataSourceHOManual($model){
+		$attachments = $this->getDataRenderLinkDownloads($model);
+		return $this->getLinkDownloadsByAttachments($attachments);
+	}
+	private function getDataSourceProjectPlans($model){
+		$attachments = $this->getDataRenderLinkDownloads($model,"attachment_subproject_project_plans");
+        return $this->getLinkDownloadsByAttachments($attachments);
+	}
+	private function getLinkDownloadsByAttachments($attachments){
+		$linkDownloads = [];
+		$pathMinio = app()->pathMinio();
+		foreach ($attachments as $attachment) {
+			$linkDownloads[] = [
+				'href' => $pathMinio . $attachment->url_media,
+				'name' => $attachment->filename,
+			];
+		}
+		return $linkDownloads;
+	}
 	private function getDataSourceGroups($item)
 	{
 		$qr_app_source_id = $this->getConfigRenderSource($item);
 		$qa_source = $qr_app_source_id == 529 ? '(ICS)' : (530 ? '(ConQA Archive)' : "Unknown");
-
+		$qa_records = [];
+		$ho_manuals = [];
+		$project_plans = [];
 		switch ($qr_app_source_id) {
-			case 529:
+			case 529: //App
 				$qa_records = $this->getDataSourceQARecords($item);
+				$ho_manuals = $this->getDataSourceHOManual($item);
+				$project_plans = $this->getDataSourceProjectPlans($item);
 				break;
-			case 530:
-				$qa_records = [];
+			case 530: // ConQA Archive
 				$insp_chklst_link = $item->insp_chklst_link;
 				$shipping_doc_link = $item->shipping_doc_link;
 
@@ -62,14 +84,13 @@ trait TraitEntityCRUDShowQRLandingPage
 				$qa_records[] = ['name' => "SHIPPING / DELIVERY Checklist", 'href' => $shipping_doc_link,];
 				break;
 			default:
-				$qa_records = [];
 				break;
 		}
 
 		return [
-			'HomeOwner Manual' => [['name' => "To Be Added"]],
-			"QA Records $qa_source" =>  $qa_records,
-			'Project Plans' => [['name' => "To Be Added"],],
+			'HomeOwner Manual' => empty($ho_manuals) ? [['name' => "To Be Added"],] : $ho_manuals,
+			"QA Records $qa_source" =>  empty($qa_records) ? [['name' => "To Be Added"],] : $qa_records,
+			'Project Plans' => empty($project_plans) ? [['name' => "To Be Added"],] : $project_plans,
 			'Ticketing' => [['name' => "To Be Added"],],
 			'Customer Survey' => [['name' => "To Be Added"],],
 		];
@@ -78,7 +99,7 @@ trait TraitEntityCRUDShowQRLandingPage
 	{
 		return $item->getSubProject?->getProject?->qr_app_source;
 	}
-	public function getDataRenderLinkDocs($item)
+	private function getDataRenderLinkDocsOfQARecord($item)
 	{
 		$unitId = $item->pj_unit_id;
 		$id = $item->id;
@@ -92,5 +113,10 @@ trait TraitEntityCRUDShowQRLandingPage
 		} else {
 			return $prodOrderOrModule->getQaqcInspChklsts;
 		}
+	}
+	private function getDataRenderLinkDownloads($item, $func = 'attachment_subproject_homeowner_manual'){
+		$subProject = $item->getSubProject;
+		$attachments = $subProject->{'attachment_subproject_homeowner_manual'} ?? [];
+		return $attachments;
 	}
 }
