@@ -34,6 +34,17 @@ module.exports = {
     ],
     theme: {
         extend: {
+            // Adding custom text shadow utilities
+            textShadow: {
+              // Define your custom text shadow styles here
+              default: '2px 2px 4px rgba(0, 0, 0, 1)',
+              // Add more styles as needed
+              md: '4px 4px 5px rgba(0, 0, 0, 1)',
+              lg: '6px 6px 7px rgba(0, 0, 0, 1)',
+              xl: '8px 8px 9px rgba(0, 0, 0, 1)', 
+            }
+          },
+        extend: {
             screens: {
                 // 'sm': '640px',
                 // 'md': '768px',
@@ -136,5 +147,6 @@ module.exports = {
         require('preline/plugin'),
         require("tailwind-scrollbar-hide"),
         require("tailwind-scrollbar"),
+        require('tailwindcss-textshadow'),
     ],
 }

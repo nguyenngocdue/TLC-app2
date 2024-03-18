@@ -4,10 +4,12 @@
     <section class="bg-gray-50 dark:bg-gray-900">
         <div id="background-image" class="w-auto h-screen bg-cover bg-center transition-all duration-500">
             <div class="mx-auto flex items-center lg:justify-between lg:mr-20 justify-center px-6 py-8 md:h-screen lg:py-0">
-                <div id="text-banner" class="mx-auto text-4xl text-white hidden lg:block lg:text-7xl">
-                </div>
+                <h1 id="text-banner" class="mx-auto mt-64 text-4xl text-white hidden lg:block lg:text-7xl text-shadow-xl">
+                </h1>
                 <div
-                class="w-full rounded-lg bg-white shadow dark:border dark:border-gray-600 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
+                class="w-full rounded-lg bg-white dark:border dark:border-gray-600 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0"
+                style="box-shadow: 1px 1px 10px #000;"
+                >
                 <a href="#" class="mt-5 flex items-center justify-center text-2xl font-semibold text-gray-900 dark:text-white">
                     <img class="w-32 items-center" src="{{ asset('logo/tlc.png') }}" alt="logo">
                 </a>
