@@ -11,5 +11,28 @@
 <body>
     @yield('content')
 </body>
-appauth.blade.php
+<script>
+    const backgroundImageUrls = @json(app()->backgroundImage());
+    const textBanners = @json(app()->textBanner());
+    const intervalTime = 30000; // 30 seconds
+    const intervalTimeChangeText = 10000; // 10 seconds
+    let currentIndex = 0;
+    let currentIndexText = 0;
+    const backgroundElement = document.getElementById('background-image');
+    const textElement = document.getElementById('text-banner');
+    function changeBackground() {
+        const nextBackgroundImageUrl = backgroundImageUrls[currentIndex];
+        backgroundElement.style.backgroundImage = `url(${nextBackgroundImageUrl})`;
+        currentIndex = (currentIndex + 1) % backgroundImageUrls.length;
+    }
+    function changeTextBanner() {
+        const nextTextBanner = textBanners[currentIndexText];
+        textElement.textContent = nextTextBanner;
+        currentIndexText = (currentIndexText + 1) % textBanners.length;
+    }
+    changeBackground();
+    changeTextBanner();
+    setInterval(changeBackground, intervalTime);
+    setInterval(changeTextBanner, intervalTimeChangeText);
+</script>
 </html>

@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+    <div id="background-image" class="w-auto h-screen bg-cover transition-transform duration-500">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -25,5 +26,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
