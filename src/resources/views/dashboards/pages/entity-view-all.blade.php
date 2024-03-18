@@ -4,7 +4,7 @@
 @section('title', "View All")
 
 @section('content')
-<div class="px-4 mt-2">
+<div class="px-4 pt-2 bg-body">
     <x-elapse title="Bootrap: " duration="{{$frameworkTook}}"/>   
     <x-elapse title="ViewAllController: "/> 
     <x-renderer.advanced-filter trashed="{{$trashed}}" currentFilter="{{$currentFilter}}" type="{{$type}}" typeModel="{{$typeModel}}" :valueAdvanceFilters="$valueAdvanceFilters"/>

@@ -4,21 +4,21 @@
 @if(!$isFloatingOnRightSide)
 <div class="flex justify-end rounded-lg dark:bg-gray-800 px-5">
 @endif
-    <div id="divActionButtons" class="{{$isFloatingOnRightSide ? 'my-0' : 'my-5'}}">
+    <div id="divActionButtons" class="bg-white mr-1 p-1 pr-2 rounded {{$isFloatingOnRightSide ? 'my-0' : 'my-3'}}">
         @if($buttonSave)
             @php $btnText = $action=='edit' ? 'Save' : 'Create New' @endphp
             @if($action !== 'create')
                 @if($showSaveAndReturn)
-                    @if($isFloatingOnRightSide)<div class="text-right mr-3">@endif
+                    @if($isFloatingOnRightSide)<div class="text-right">@endif
                         <x-renderer.button htmlType="submit" icon="fa-solid fa-floppy-disk"
-                        class="{{$class}} border-gray-300"  onClick="appendSaveAndCloseInput()"
+                        class="{{$class}} border-gray-300 m-0.5"  onClick="appendSaveAndCloseInput()"
                         >Save and Return</x-renderer.button>
                     @if($isFloatingOnRightSide)</div>@endif
                 @endif
             @endif
-            @if($isFloatingOnRightSide)<div class="text-right mr-3">@endif
+            @if($isFloatingOnRightSide)<div class="text-right">@endif
                 <x-renderer.button htmlType="submit" icon="fa-solid fa-floppy-disk"
-                class="{{$class}} border-gray-300"
+                class="{{$class}} border-gray-300 m-0.5"
                 >{{$btnText}}</x-renderer.button>
                 {{-- this.form.submit(); --}}
             @if($isFloatingOnRightSide)</div>@endif
@@ -40,7 +40,7 @@
                     $classList = "border-opacity-20 border-2 px-2.5 py-2 inline-block font-medium text-sm leading-tight rounded focus:outline-transparent ";
                 @endphp
                 @if($isClosingOwnDoc)
-                        @if($isFloatingOnRightSide)<div class="text-right mr-3">@endif
+                        @if($isFloatingOnRightSide)<div class="text-right">@endif
                         <button type="button" 
                             title="You can't close your own document." 
                             class="{{$class}} {{$classList}} {{$bgColor}} {{$textColor}} {{$borderColor}} disabled:opacity-40"
@@ -50,11 +50,11 @@
                         </button>
                         @if($isFloatingOnRightSide)</div>@endif
                 @else
-                    @if($isFloatingOnRightSide)<div class="text-right mr-3">@endif
+                    @if($isFloatingOnRightSide)<div class="text-right">@endif
                     <button {{$hasIntermediateScreen ? "@click=toggleIntermediate('$key')" : "@click=changeStatus('$key');" }}
                             type='{{$hasIntermediateScreen ? "button" : "submit"}}'
                             title="{{ $hasIntermediateScreen ? 'Open an intermediate screen' : $actionButtons[$key]['tooltip']}}"
-                            class="{{$class}} {{$classList}} {{$bgColor}} {{$textColor}} {{$borderColor}} hover:shadow-xl focus:shadow-xl active:shadow-xl"
+                            class="{{$class}} {{$classList}} {{$bgColor}} {{$textColor}} {{$borderColor}} m-0.5 hover:shadow-xl focus:shadow-xl active:shadow-xl"
                             {{-- onClick="$('button').prop('disabled',true);"  --}}
                             >
                             {!! $buttonInnerHtml !!}
