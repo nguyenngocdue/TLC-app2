@@ -92,6 +92,8 @@ class Attachment2 extends Component
             'btnClass' => ClassList::BUTTON,
             'openType' => $this->openType,
             'gridCols' => $this->gridCols,
+            'hideUploader' => $properties['hide_uploader'],
+            'hideUploadDate' => $properties['hide_upload_date'],
         ]);
     }
 }

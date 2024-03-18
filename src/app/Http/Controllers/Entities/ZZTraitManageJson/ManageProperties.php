@@ -23,6 +23,19 @@ class ManageProperties extends Manage_Parent
                 'title' => 'Max File Size (in MB)',
                 'properties' => ['placeholder' => 10],
             ],
+
+            [
+                'dataIndex' => 'hide_uploader',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+            [
+                'dataIndex' => 'hide_upload_date',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
             [
                 'dataIndex' => 'max_file_count',
                 'renderer' => 'number4',

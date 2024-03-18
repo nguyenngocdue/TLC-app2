@@ -234,6 +234,8 @@ class Qaqc_ncr extends ModelExtended
             ['dataIndex' => 'sub_project_id', 'invisible' => true, 'value_as_sub_project_id' => true],
             ['dataIndex' => 'name',],
             ['dataIndex' => 'status', "footer" => "agg_none"],
+            ['dataIndex' => 'assignee_1', 'title' => "Responsible Person"],
+
         ];
     }
 }

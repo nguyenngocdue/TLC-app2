@@ -109,11 +109,15 @@
                 $uid = $attachment['owner_id'] ?? 1;
                 [$src,$firstName,$displayName] = App\Utils\Support\GetInfoUserById::get($uid);
                 @endphp
+            @if(!$hideUploader)
             <span class="flex items-center gap-1 mt-1 justify-center" title="Uploaded by {{$displayName}} (#{{$uid}})">
                 <img class="w-6 h-6 rounded-full" src="{{$src}}" />
                 {{$firstName}} 
             </span>
+            @endif
+            @if(!$hideUploadDate)
             <span class="flex justify-center">{{date('d/m/Y',strtotime($attachment['created_at'] ?? ''))}}</span>
+            @endif
         </div>
         @endforeach
     </div>

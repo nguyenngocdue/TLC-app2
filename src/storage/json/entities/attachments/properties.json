@@ -4,6 +4,8 @@
         "field_id": "1",
         "field_name": "attachment_1",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "only_images"
     },
@@ -12,6 +14,8 @@
         "field_id": "2",
         "field_name": "attachment_2",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "only_videos"
     },
@@ -20,6 +24,8 @@
         "field_id": "3",
         "field_name": "attachment_3",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "only_media"
     },
@@ -28,6 +34,8 @@
         "field_id": "4",
         "field_name": "attachment_4",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "only_non_media"
     },
@@ -36,6 +44,8 @@
         "field_id": "5",
         "field_name": "attachment_5",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -44,6 +54,8 @@
         "field_id": "146",
         "field_name": "attachment_corrective_pdfs",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "only_non_media"
     },
@@ -52,6 +64,8 @@
         "field_id": "145",
         "field_name": "attachment_corrective_photos",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "50",
         "allowed_file_types": "only_images"
     },
@@ -60,6 +74,8 @@
         "field_id": "144",
         "field_name": "attachment_defect_pdfs",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "only_non_media"
     },
@@ -68,6 +84,8 @@
         "field_id": "143",
         "field_name": "attachment_defect_photos",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "50",
         "allowed_file_types": "only_images"
     },
@@ -76,6 +94,8 @@
         "field_id": "160",
         "field_name": "attachment_eco_sht",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -84,6 +104,8 @@
         "field_id": "208",
         "field_name": "attachment_esg_induction",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -92,6 +114,8 @@
         "field_id": "199",
         "field_name": "attachment_esg_sheet",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -100,6 +124,8 @@
         "field_id": "150",
         "field_name": "attachment_hse_hr_decision",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "only_non_media"
     },
@@ -108,6 +134,8 @@
         "field_id": "148",
         "field_name": "attachment_hse_incident_doc",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -116,6 +144,8 @@
         "field_id": "149",
         "field_name": "attachment_hse_witness",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -124,6 +154,8 @@
         "field_id": "126",
         "field_name": "attachment_mir_conformity_certificate",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -132,6 +164,8 @@
         "field_id": "121",
         "field_name": "attachment_mir_delivery_docket",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -140,6 +174,8 @@
         "field_id": "128",
         "field_name": "attachment_mir_general_certificate",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -148,6 +184,8 @@
         "field_id": "122",
         "field_name": "attachment_mir_invoice",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -156,6 +194,8 @@
         "field_id": "132",
         "field_name": "attachment_mir_material_inspection_photo",
         "max_file_size": "30",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "30",
         "allowed_file_types": "only_images"
     },
@@ -164,6 +204,8 @@
         "field_id": "125",
         "field_name": "attachment_mir_material_test_certificate",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -172,6 +214,8 @@
         "field_id": "124",
         "field_name": "attachment_mir_material_test_report",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -180,6 +224,8 @@
         "field_id": "129",
         "field_name": "attachment_mir_non_conformity_report",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -188,6 +234,8 @@
         "field_id": "123",
         "field_name": "attachment_mir_packing_list",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -196,6 +244,8 @@
         "field_id": "133",
         "field_name": "attachment_mir_pdf_attached",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "only_non_media"
     },
@@ -204,6 +254,8 @@
         "field_id": "120",
         "field_name": "attachment_mir_po",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -212,6 +264,8 @@
         "field_id": "127",
         "field_name": "attachment_mir_quality_certificate",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -220,6 +274,8 @@
         "field_id": "130",
         "field_name": "attachment_mir_safety_data_sheet",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -228,6 +284,8 @@
         "field_id": "131",
         "field_name": "attachment_mir_technical_data_sheet",
         "max_file_size": "20",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -236,6 +294,8 @@
         "field_id": "167",
         "field_name": "attachment_training_course",
         "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
     },
@@ -244,6 +304,8 @@
         "field_id": "11",
         "field_name": "featured_image",
         "max_file_size": "10",
+        "hide_uploader": "true",
+        "hide_upload_date": "true",
         "max_file_count": "1",
         "allowed_file_types": "only_images"
     },
@@ -252,6 +314,8 @@
         "field_id": "12",
         "field_name": "insp_photos",
         "max_file_size": "50",
+        "hide_uploader": "",
+        "hide_upload_date": "",
         "max_file_count": "100",
         "allowed_file_types": "all_supported"
     }

@@ -946,7 +946,7 @@
         "name": "_assignee_1",
         "column_name": "assignee_1",
         "column_type": "bigint unsigned",
-        "label": "Assignee To",
+        "label": "Assigned To",
         "control": "dropdown",
         "align": "",
         "col_span": "6",
