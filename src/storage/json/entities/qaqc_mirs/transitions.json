@@ -1,54 +1,77 @@
 {
     "new": {
         "name": "new",
+        "location": "-210.00 30.00",
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
     },
     "assigned": {
         "name": "assigned",
+        "location": "-40.00 30.00",
         "new": "",
         "assigned": "",
         "rejected": "true",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "",
         "closed": ""
     },
     "rejected": {
         "name": "rejected",
+        "location": "-210.00 -50.00",
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "pending_ncr": {
+        "name": "pending_ncr",
+        "location": "-40.00 -50.00",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
     },
     "inspected": {
         "name": "inspected",
+        "location": "120.00 30.00",
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "true",
         "closed": "true"
     },
     "inspection_rejected": {
         "name": "inspection_rejected",
+        "location": "-30.00 110.00",
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "true",
         "inspection_rejected": "",
         "closed": ""
     },
     "closed": {
         "name": "closed",
+        "location": "400.00 20.00",
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""

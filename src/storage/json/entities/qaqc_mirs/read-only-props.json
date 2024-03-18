@@ -5,6 +5,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -15,8 +16,20 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_getNcrs": {
+        "name": "_getNcrs",
+        "column_name": "getNcrs",
+        "new": "true",
+        "assigned": "",
+        "rejected": "true",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": "true"
     },
     "_project_id": {
@@ -25,6 +38,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -35,6 +49,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -45,6 +60,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -55,6 +71,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -65,6 +82,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -75,6 +93,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -85,6 +104,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -95,18 +115,9 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
-        "closed": "true"
-    },
-    "_closed_at": {
-        "name": "_closed_at",
-        "column_name": "closed_at",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
         "closed": "true"
     },
     "_attachment_mir_po": {
@@ -115,6 +126,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -125,6 +137,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -135,6 +148,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -145,6 +159,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -155,6 +170,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -165,6 +181,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -175,6 +192,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -185,6 +203,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -195,6 +214,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -205,6 +225,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -215,6 +236,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -225,6 +247,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -235,6 +258,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": "true"
@@ -245,18 +269,9 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
-        "closed": "true"
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "new": "",
-        "assigned": "true",
-        "rejected": "",
-        "inspected": "true",
-        "inspection_rejected": "true",
         "closed": "true"
     },
     "_assignee_1": {
@@ -265,16 +280,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
-    },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "new": "",
-        "assigned": "true",
-        "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -285,48 +291,20 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "true",
         "inspection_rejected": "",
         "closed": "true"
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
-        "closed": "true"
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "new": "",
-        "assigned": "",
-        "rejected": "",
-        "inspected": "",
-        "inspection_rejected": "",
-        "closed": ""
-    },
-    "_getNcrs": {
-        "name": "_getNcrs",
-        "column_name": "getNcrs",
-        "new": "true",
-        "assigned": "",
-        "rejected": "true",
-        "inspected": "",
-        "inspection_rejected": "",
         "closed": "true"
     },
     "_comment_asm_rejected_reason": {
@@ -335,6 +313,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -345,6 +324,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -355,6 +335,84 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "pending_ncr": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "",
+        "assigned": "true",
+        "rejected": "",
+        "pending_ncr": "true",
+        "inspected": "true",
+        "inspection_rejected": "true",
+        "closed": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""

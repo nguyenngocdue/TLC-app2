@@ -6,6 +6,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -17,6 +18,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -28,6 +30,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -39,6 +42,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -50,9 +54,22 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
+    },
+    "apartment_owner": {
+        "name": "apartment_owner",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "bd_manager": {
         "name": "bd_manager",
@@ -61,6 +78,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -72,6 +90,43 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "client": {
+        "name": "client",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "consultant": {
+        "name": "consultant",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "contractor": {
+        "name": "contractor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -83,6 +138,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -94,6 +150,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -105,6 +162,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -116,6 +174,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -127,6 +186,7 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": "true"
@@ -138,6 +198,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -149,6 +210,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -160,6 +222,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -171,6 +234,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -182,6 +246,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -193,6 +258,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -204,6 +270,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -215,6 +282,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -226,6 +294,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -237,6 +306,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -248,6 +318,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -259,6 +330,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -270,6 +342,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -281,6 +354,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -292,6 +366,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -303,6 +378,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -314,6 +390,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -325,6 +402,43 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "ppc_admin": {
+        "name": "ppc_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "ppc_manager": {
+        "name": "ppc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "ppc_member": {
+        "name": "ppc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -336,6 +450,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -347,6 +462,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -358,6 +474,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -369,6 +486,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -380,6 +498,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -391,6 +510,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -402,6 +522,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -413,6 +534,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -424,6 +546,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -435,6 +558,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -446,6 +570,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -457,6 +582,19 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "proj_supervisor_nz": {
+        "name": "proj_supervisor_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -468,6 +606,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
         "closed": ""
@@ -479,6 +618,7 @@
         "new": "",
         "assigned": "true",
         "rejected": "",
+        "pending_ncr": "true",
         "inspected": "",
         "inspection_rejected": "true",
         "closed": ""
@@ -490,6 +630,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -501,6 +642,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -512,6 +654,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -523,6 +666,19 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "shipping_agent": {
+        "name": "shipping_agent",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -534,8 +690,21 @@
         "new": "true",
         "assigned": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "inspected": "true",
         "inspection_rejected": "true",
+        "closed": ""
+    },
+    "vendor": {
+        "name": "vendor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "whs_manager": {
@@ -545,6 +714,7 @@
         "new": "true",
         "assigned": "",
         "rejected": "true",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -556,6 +726,7 @@
         "new": "true",
         "assigned": "",
         "rejected": "true",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -567,6 +738,7 @@
         "new": "",
         "assigned": "",
         "rejected": "",
+        "pending_ncr": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
