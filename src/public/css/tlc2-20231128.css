@@ -1,6 +1,9 @@
 .bg-body {
     --tw-bg-opacity: 1;
-    background-color: rgb(30 64 175 / var(--tw-bg-opacity)); /* bg-blue-800 */
+    /* bg-blue-800 */
+    /* background-color: rgb(30 64 175 / var(--tw-bg-opacity));  */
+    /* bg-blue-900 */
+    background-color: rgb(30 58 138 / var(--tw-bg-opacity));
 }
 
 th.rotated-title-right-th {
