@@ -190,8 +190,8 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
                         ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${total}</span>`
                         : ''
                     html += `<li class='px-2'>
-                                    <p id='${sub_package}' onmouseover="visible('${sub_package}')" class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${sub_package} ${totalHtml}</p>
-                                        <ul id='ul-${sub_package}' class="space-y-1 hidden">
+                                    <p id='${package}-${sub_package}' onmouseover="visible('${package}-${sub_package}')" class="p-2 text-sm font-medium text-gray-900 dark:text-gray-300">${sub_package} ${totalHtml}</p>
+                                        <ul id='ul-${package}-${sub_package}' class="space-y-1 hidden">
                                            ${htmlTopDrawer}
                                         </ul>
                             </li>`
