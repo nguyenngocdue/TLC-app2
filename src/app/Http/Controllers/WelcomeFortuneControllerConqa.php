@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\v1\qaqc\ConqaArchiveRendererController;
 use App\View\Components\Renderer\ConqaArchive\ConqaArchive;
 use Illuminate\Http\Request;
 
-class WelcomeFortuneController extends Controller
+class WelcomeFortuneControllerConqa extends Controller
 {
     function __construct(
         // private $exportMode = 'attachment',

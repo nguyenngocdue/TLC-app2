@@ -13,7 +13,7 @@
     @endif
 
     <div class="py-2" />
-    <x-renderer.project.project-overview table="{{$table}}" id="{{$projectId}}" />
+    <x-renderer.project.project-overview-by-due-date table="{{$table}}" id="{{$projectId}}" />
 
     <div class="py-2" />
     <x-dashboards.my-view-groups table="{{$table}}" projectId="{{$projectId}}" />
