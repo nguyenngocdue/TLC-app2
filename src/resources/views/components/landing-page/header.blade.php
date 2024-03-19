@@ -68,19 +68,30 @@ class="fixed z-50 flex w-full items-center bg-white dark:bg-black bg-gradient-to
               </nav>
             </div>
             <div class="hidden justify-end pr-16 sm:flex lg:pr-0">
-              <a
-                href="/login"
-                class="px-7 py-3 text-base font-medium text-slate-600 hover:text-blue-800 dark:text-white"
-              >
-                Login
-              </a>
-              <a
-                href="/register"
-                class="rounded-md bg-blue-600 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
-              >
-                Sign Up
-              </a>
+            @auth
+                <a
+                    href="/dashboard"
+                    class="px-7 py-3 text-base font-medium text-slate-600 hover:text-blue-800 dark:text-white"
+                >
+                    Dashboard
+                </a>
+            @endauth
+            @guest
+                <a
+                    href="/login"
+                    class="px-7 py-3 text-base font-medium text-slate-600 hover:text-blue-800 dark:text-white"
+                >
+                    Login
+                </a>
+                <a
+                    href="/register"
+                    class="rounded-md bg-blue-600 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
+                >
+                    Sign Up
+                </a>
+                @endguest
             </div>
+            
           </div>
         </div>
       </div>

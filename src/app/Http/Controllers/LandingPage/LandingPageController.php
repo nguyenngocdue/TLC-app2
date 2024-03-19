@@ -4,6 +4,8 @@ namespace App\Http\Controllers\LandingPage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class LandingPageController extends Controller
 {
@@ -29,6 +31,7 @@ class LandingPageController extends Controller
             "video" => $this->dataVideo(),
             "carousel" => $this->dataCarousel(),
             "testimonial" => $this->dataTestimonial(),
+            "team" => $this->dataTeam(),
         ];
     }
     private function dataVideo(){
@@ -40,6 +43,43 @@ class LandingPageController extends Controller
     
     private function dataCarousel(){
         return app()->backgroundImage();
+    }
+    private function dataTeam(){
+        $images = $this->getUrlImages();
+        $arrayText = [
+            'Production Manager',
+            'HSE Manager',
+            'QAQC Manager',
+            'Construction Inspector',
+            'Vendor',
+            'Contractor',
+            'Production Admin',
+            'HR Manager',
+            'Design Manager',
+            'Finance Manager',
+            'Administrator Manager',
+            'Compliance Manager'
+        ];
+        $results = [];
+        foreach ($images as $key => $value) {
+            $results[] = [
+                "src" => $value,
+                "name" => $arrayText[$key],
+            ];
+        }
+        return $results;
+    }
+
+    private function getUrlImages(){
+        $directory = public_path('/images/landing-page');
+        $path = asset('/images/landing-page');
+        if (File::isDirectory($directory)) {
+            $files = File::files($directory);
+            return array_map( function ($file) use($path) {
+                return $path . '/'. $file->getFilename();
+            },$files);
+        } 
+        return [];
     }
     private function dataTestimonial(){
         return[

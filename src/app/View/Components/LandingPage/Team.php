@@ -11,7 +11,9 @@ class Team extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        private $dataSource = null,
+    )
     {
         //
     }
@@ -23,6 +25,6 @@ class Team extends Component
      */
     public function render()
     {
-        return view('components.landing-page.team');
+        return view('components.landing-page.team',['dataSource' => $this->dataSource]);
     }
 }
