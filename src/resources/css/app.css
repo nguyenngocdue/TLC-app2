@@ -10,3 +10,6 @@
     padding-left: 50px;
     padding-right: 50px;
 }
+.container {
+    @apply mx-auto px-4;
+}

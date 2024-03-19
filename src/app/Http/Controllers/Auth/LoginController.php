@@ -127,7 +127,7 @@ class LoginController extends Controller
             return redirect('/');
         } catch (\Throwable $th) {
             dump("Logout Exception: " . $th->getMessage());
-            return redirect('/');
+            return redirect('/dashboard');
         }
 
         // return $request->wantsJson()

@@ -3,6 +3,7 @@
 use App\Events\Test;
 use App\Events\WssDemoChannel;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
+use App\Http\Controllers\LandingPage\LandingPageController;
 use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeCanhController;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+Route::get('/',[LandingPageController::class,'index'])->name('landing-page.index');
 
 Route::group(['middleware' =>  ['auth', 'impersonate'],], function () {
     Route::resource('welcome-canh', WelcomeCanhController::class)->only('index');
