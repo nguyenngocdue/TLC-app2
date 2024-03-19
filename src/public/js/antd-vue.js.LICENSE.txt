@@ -2,8 +2,6 @@
 
 /*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */
 
-/*! #__NO_SIDE_EFFECTS__ */
-
 /*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Results.vue?vue&type=script&lang=js */
 
 /*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Tree.vue?vue&type=script&lang=js */
@@ -6343,39 +6341,3 @@
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Results.vue?vue&type=template&id=8ef50b4a ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************/
-
-/**
-* @vue/compiler-core v3.4.21
-* (c) 2018-present Yuxi (Evan) You and Vue contributors
-* @license MIT
-**/
-
-/**
-* @vue/compiler-dom v3.4.21
-* (c) 2018-present Yuxi (Evan) You and Vue contributors
-* @license MIT
-**/
-
-/**
-* @vue/reactivity v3.4.21
-* (c) 2018-present Yuxi (Evan) You and Vue contributors
-* @license MIT
-**/
-
-/**
-* @vue/runtime-core v3.4.21
-* (c) 2018-present Yuxi (Evan) You and Vue contributors
-* @license MIT
-**/
-
-/**
-* @vue/runtime-dom v3.4.21
-* (c) 2018-present Yuxi (Evan) You and Vue contributors
-* @license MIT
-**/
-
-/**
-* @vue/shared v3.4.21
-* (c) 2018-present Yuxi (Evan) You and Vue contributors
-* @license MIT
-**/
