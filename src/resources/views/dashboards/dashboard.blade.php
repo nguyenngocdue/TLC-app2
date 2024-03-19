@@ -16,7 +16,7 @@
         <x-elapse title="Bookmark group: " />
 
         <div class="py-2" />
-        <x-renderer.project.project-overview table="projects" />
+        <x-renderer.project.project-overview-by-due-date />
         <x-elapse title="Project Overview: " />
 
         <div class="py-2" />

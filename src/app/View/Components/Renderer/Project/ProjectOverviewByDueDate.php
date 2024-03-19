@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
-class ProjectOverview extends Component
+class ProjectOverviewByDueDate extends Component
 {
     /**
      * Create a new component instance.
@@ -19,7 +19,7 @@ class ProjectOverview extends Component
      * @return void
      */
     public function __construct(
-        private $table,
+        private $table = null,
         private $title = "Outstanding Tasks (by Due Date)",
         private $id = null,
         private $modalId = "modal-over-due-documents",
@@ -102,14 +102,13 @@ class ProjectOverview extends Component
 
     function makeDataSource($appKey, $modelPath, $closedArray)
     {
-        $id_column = ($this->table == 'projects') ? "project_id" : "sub_project_id";
         $items = $modelPath::query();
-        if (is_null($this->id)) {
-            // $items = $items->where($id_column, $this->id);
-        } else {
-            //<< ECO doesn't have sub_project_id column, only getSubProjectsOfEco()
-            if (!in_array($modelPath, ['App\Models\Eco_sheet'])) {
-                $items = $items->where($id_column, $this->id);
+        if (!is_null($this->id)) {
+            if ($this->table == 'projects' && method_exists($modelPath, "getProject")) {
+                $items = $items->where("project_id", $this->id);
+            }
+            if ($this->table == 'sub_projects' && method_exists($modelPath, "getSubProject")) {
+                $items = $items->where("sub_project_id", $this->id);
             }
         }
         $items = $items->whereNotIn('status', $closedArray)->whereNotIn('status', ['not_applicable']);
@@ -135,6 +134,8 @@ class ProjectOverview extends Component
                 // Log::info($modelPath . " doesn't have due date");
                 continue;
             }
+            if ($this->table == 'projects' && !method_exists($modelPath, 'getProject')) continue;
+            if ($this->table == 'sub_projects' && !method_exists($modelPath, 'getSubProject')) continue;
 
             $closedArray = SuperDefinitions::getClosedOf($appKey);
             [$dataSource, $size] = $this->makeDataSource($appKey, $modelPath, $closedArray);
@@ -178,12 +179,15 @@ class ProjectOverview extends Component
      */
     public function render()
     {
-        $modelPath = Str::modelPathFrom($this->table);
+        $modelPath = $this->table ? Str::modelPathFrom($this->table) : null;
         // dump($modelPath);
-        if (is_null($this->id)) {
-            $project = $modelPath::all();
-        } else {
-            $project = $modelPath::find($this->id);
+        $project = null;
+        if ($modelPath) {
+            if (is_null($this->id)) {
+                $project = $modelPath::all();
+            } else {
+                $project = $modelPath::find($this->id);
+            }
         }
         // dump($project->count());
         $dataSource = $this->getDataSource();
@@ -192,7 +196,7 @@ class ProjectOverview extends Component
         $modalParams = $this->makeModalParams($dataSource);
         // dump($modalParams);
 
-        return view('components.renderer.project.project-overview', [
+        return view('components.renderer.project.project-overview-by-due-date', [
             'project' => $project,
             'columns' => $this->getColumns(),
             'dataSource' => $dataSource,
