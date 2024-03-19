@@ -14,7 +14,7 @@ class LandingPageController extends Controller
         return "landing-page";
     }
 
-    
+
 
     /**
      * Show the application dashboard.
@@ -23,10 +23,11 @@ class LandingPageController extends Controller
      */
     public function index(Request $request)
     {
-        
-        return view('landing-page.landing-page',$this->getDataSource());
+
+        return view('landing-page.landing-page', $this->getDataSource());
     }
-    private function getDataSource(){
+    private function getDataSource()
+    {
         return [
             "video" => $this->dataVideo(),
             "carousel" => $this->dataCarousel(),
@@ -34,31 +35,34 @@ class LandingPageController extends Controller
             "team" => $this->dataTeam(),
         ];
     }
-    private function dataVideo(){
+    private function dataVideo()
+    {
         return [
             "title" => "Click on the video for an overview",
             "iframe" => '<iframe width="1154" height="649" src="https://www.youtube.com/embed/xyYl0XRhUSg" title="Northcote Elevation Apartments, Auckland NZ. Modular Installtion by TLC Modular" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ];
     }
-    
-    private function dataCarousel(){
+
+    private function dataCarousel()
+    {
         return app()->backgroundImage();
     }
-    private function dataTeam(){
+    private function dataTeam()
+    {
         $images = $this->getUrlImages();
         $arrayText = [
-            'Production Manager',
             'HSE Manager',
+            'Production Manager',
             'QAQC Manager',
             'Construction Inspector',
-            'Vendor',
-            'Contractor',
             'Production Admin',
             'HR Manager',
             'Design Manager',
             'Finance Manager',
             'Administrator Manager',
-            'Compliance Manager'
+            'Compliance Manager',
+            'Vendor',
+            'Contractor',
         ];
         $results = [];
         foreach ($images as $key => $value) {
@@ -70,19 +74,21 @@ class LandingPageController extends Controller
         return $results;
     }
 
-    private function getUrlImages(){
+    private function getUrlImages()
+    {
         $directory = public_path('/images/landing-page');
         $path = asset('/images/landing-page');
         if (File::isDirectory($directory)) {
             $files = File::files($directory);
-            return array_map( function ($file) use($path) {
-                return $path . '/'. $file->getFilename();
-            },$files);
-        } 
+            return array_map(function ($file) use ($path) {
+                return $path . '/' . $file->getFilename();
+            }, $files);
+        }
         return [];
     }
-    private function dataTestimonial(){
-        return[
+    private function dataTestimonial()
+    {
+        return [
             [
                 "title" => "Transforming Our Projects from Day One",
                 "content" => "From the moment we integrated [Your Software Name] into our operations, we saw a dramatic shift in how we manage projects. The real-time insights and comprehensive modules have made us more efficient and proactive. A game-changer for the industry!",
@@ -119,6 +125,6 @@ class LandingPageController extends Controller
                 "owner" => "Emily Wang, CEO, Urban Innovations",
                 "rating" => 5,
             ],
-        ] ;
+        ];
     }
 }

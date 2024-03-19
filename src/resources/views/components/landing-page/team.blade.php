@@ -2,15 +2,15 @@
     <div class="flex items-center justify-center">
         <h2 class="text-4xl md:text-6xl font-bold">WHO USES {{env('APP_NAME')}}</h2>
     </div>
-    <div class="m-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+    <div class="m-10 xl:w-3/5 w-3/4 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         @foreach($dataSource as $item)
-            <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+            <figure class="relative mx-auto max-w-sm w-44 transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
                 <a href="#">
-                    <img class="rounded-lg" src="{{$item['src']}}" alt="image description">
+                    <img class="rounded-2xl" src="{{$item['src']}}" alt="image description">
                 </a>
                 <figcaption class="absolute px-4 w-full text-lg text-white bottom-6">
-                    <div class="flex justify-center items-center">
-                        <p class="text-2xl text-yellow-600 font-bold">{{$item['name']}}</p>
+                    <div class="flex justify-center items-center text-center">
+                        <p class="text-2xl text-white font-bold text-shadow-xl">{{$item['name']}}</p>
                     </div>
                 </figcaption>
             </figure>
