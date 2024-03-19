@@ -45,6 +45,14 @@ function alpineData() {
         closeProfileMenu() {
             this.isProfileMenuOpen = false
         },
+         ///////////////////////////////////
+         isThemeMenuOpen: false,
+         toggleThemeMenu() {
+             this.isThemeMenuOpen = !this.isThemeMenuOpen
+         },
+         closeThemeMenu() {
+             this.isThemeMenuOpen = false
+         },
         ///////////////////////////////////
         isProjectMenuOpen: false,
         toggleProjectMenu() {

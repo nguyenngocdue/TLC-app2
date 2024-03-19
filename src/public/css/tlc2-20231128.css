@@ -1,13 +1,3 @@
-.bg-body {
-    --tw-bg-opacity: 1;
-    /* bg-blue-800 */
-    /* background-color: rgb(30 64 175 / var(--tw-bg-opacity));  */
-    /* bg-blue-900 */
-    /* background-color: rgb(30 58 138 / var(--tw-bg-opacity)); */
-    /* bg-gray-100 */
-    background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-
 th.rotated-title-right-th {
     vertical-align: bottom;
     text-align: left !important;

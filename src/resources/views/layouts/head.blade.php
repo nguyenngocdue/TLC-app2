@@ -27,7 +27,6 @@
 
     <link rel="stylesheet" href="{{ asset('css/justifiedGallery@3.8.1.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/lightgallery.css') }}">
-    <!-- <link href="{{ asset('css/jquery.highlight-within-textarea.css')}}" rel="stylesheet"> -->
         
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
@@ -35,7 +34,6 @@
     <script src="{{ asset('js/lazysizes.js') }}"></script>
     <script src="{{ asset('js/flatpickr@4.6.13.min.js') }}"></script>
     
-    {{-- <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js')}}"></script>
     <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js')}}"></script>
     <script src="{{ asset('AdminLTE/plugins/inputmask/min/jquery.inputmask.bundle.min.js')}}"></script>
@@ -89,21 +87,5 @@
     <script src="{{ asset('js/justifiedGallery@3.8.1.min.js') }}"></script>
     <script src="{{ asset('js/lightgallery.js') }}"></script>
     <script src="{{ asset('js/jsdiff.js') }}"></script>
-    <!-- <script src="{{ asset('js/jquery.highlight-within-textarea.js')}}"></script> -->
-    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script> -->
     <script src="https://cdn.ckeditor.com/ckeditor5/10.0.1/decoupled-document/ckeditor.js"></script>
-    <!-- <link href="
-https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-highlight@41.1.0/theme/highlight.min.css
-" rel="stylesheet">
-<script src="
-https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-highlight@41.1.0/src/augmentation.min.js
-"></script> -->
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.8/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/multimonth@6.1.8/index.global.min.js"></script> --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 </head>

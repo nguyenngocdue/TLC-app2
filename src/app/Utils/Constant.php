@@ -26,7 +26,7 @@ class Constant
     const FORMAT_YEAR_MONTH = "Y/m"; //<< Please do not change this format, for create Media Folder
     const FORMAT_YEAR_MONTH0 = "Y-m"; //<< Please do not change this format, for SQL Comparison
 
-    const VIEW_GLOBAL = 'view_global';
+    const GLOBAL = 'global';
     const VIEW_ALL = 'view_all';
     const VIEW_EDIT = 'view_edit';
     const VIEW_ORG_CHART = 'view_org_chart';
