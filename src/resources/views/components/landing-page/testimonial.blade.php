@@ -8,7 +8,7 @@
             @foreach($dataSource as $item)
                 <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
                     <div class="flex justify-center items-center h-full">
-                        <div class="text-white text-center">
+                        <div class="text-white text-center mx-80">
                             <x-landing-page.rating rating="{{$item['rating']}}"/>
                             <h4 class="py-2 text-xl font-bold">{{$item["title"]}}</h4>
                             <p class="text-base">{{$item["content"]}}</p>

@@ -5,7 +5,7 @@
     <div class="mx-10 grid grid-cols-1 md:grid-cols-3 gap-3">
         <div >
             <div class="w-full flex justify-center items-center py-5 lg:py-10">
-                <img src="https://images.squarespace-cdn.com/content/v1/5e83b42ef0669f63b02eb98f/1603853813611-9T5ERN3ZHGZLM4RHE0EQ/Inspect+online_ZYTE.jpg" alt=""
+                <img src="https://images.squarespace-cdn.com/content/v1/5e83b42ef0669f63b02eb98f/1603853813611-9T5ERN3ZHGZLM4RHE0EQ/Inspect+online_{{env('APP_NAME')}}.jpg" alt=""
                         class="w-80 h-2/4 object-cover"
                 >
             </div>
@@ -14,16 +14,16 @@
                     <h4 class="text-center text-2xl font-bold mb-9 text-yellow-600">
                     Simple to implement.
                     </h4>
-                    <p class="text-left text-base text-white whitespace-pre-wrap">Only you need ZYTE. There’s nothing for your guest to download!
+                    <p class="text-left text-base text-white whitespace-pre-wrap">Only you need {{env('APP_NAME')}}. There’s nothing for your guest to download!
 
-Your client will instantly connect to ZYTE on their phone’s web browser through the link you send them.
+Your client will instantly connect to {{env('APP_NAME')}} on their phone’s web browser through the link you send them.
                     </p>
                 </div>
             </div>
         </div>
         <div >
             <div class="w-full flex justify-center items-center py-5 lg:py-10">
-                <img src="https://images.squarespace-cdn.com/content/v1/5e83b42ef0669f63b02eb98f/1619672558737-OVWYJFDBV7BUNC3H3PXW/Improve+Customers+Satisfaction-ZYTE" alt=""
+                <img src="https://images.squarespace-cdn.com/content/v1/5e83b42ef0669f63b02eb98f/1619672558737-OVWYJFDBV7BUNC3H3PXW/Improve+Customers+Satisfaction-{{env('APP_NAME')}}" alt=""
                         class="w-80 h-2/4 object-cover"
                 >
             </div>
@@ -62,7 +62,7 @@ All communication and collateral collection is permission based and secure. No o
     </div>
     <div class="flex justify-between py-10 lg:py-20 mx-20 lg:mx-28">
         <div>
-            <h3 class="whitespace-pre-wrap text-white text-3xl">ZYTE is used by many different industries to connect people instantly - no matter where they are.</h3>
+            <h3 class="whitespace-pre-wrap text-white text-3xl">{{env('APP_NAME')}} is used by many different industries to connect people instantly - no matter where they are.</h3>
         </div>
         <div >
             <x-landing-page.button>User Cases</x-landing-page.button>

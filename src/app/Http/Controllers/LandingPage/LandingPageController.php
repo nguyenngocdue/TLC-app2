@@ -53,7 +53,7 @@ class LandingPageController extends Controller
                 "title" => "Quality and Compliance Made Easy",
                 "content" => "The QA/QC module has revolutionized our approach to quality control. With easy-to-use checklists and automated reports, we're not just meeting our quality standards; we're setting new ones.",
                 "owner" => "Sarah Lee, Quality Assurance Specialist, GreenBuild Developers",
-                "rating" => 3,
+                "rating" => 4,
             ],
             [
                 "title" => "Every Detail at Your Fingertips",
