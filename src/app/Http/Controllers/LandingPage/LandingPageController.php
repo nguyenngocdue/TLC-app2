@@ -34,7 +34,7 @@ class LandingPageController extends Controller
     private function dataVideo(){
         return [
             "title" => "Click on the video for an overview",
-            "iframe" => '<iframe width="1505" height="696" src="https://www.youtube.com/embed/JXFSbRi5zMY" title="TINH VỆ (精卫) - JAPANDEE REMIX" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            "iframe" => '<iframe width="1154" height="649" src="https://www.youtube.com/embed/xyYl0XRhUSg" title="Northcote Elevation Apartments, Auckland NZ. Modular Installtion by TLC Modular" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ];
     }
     
