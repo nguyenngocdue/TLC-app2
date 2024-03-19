@@ -6,6 +6,8 @@ use App\BigThink\ModelExtended;
 
 class Zunit_test_09 extends ModelExtended
 {
+    public static $hasDueDate = true;
+
     protected $fillable = [
         'id',
         'name',

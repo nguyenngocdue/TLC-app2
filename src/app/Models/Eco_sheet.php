@@ -6,6 +6,8 @@ use App\BigThink\ModelExtended;
 
 class Eco_sheet extends ModelExtended
 {
+    public static $hasDueDate = true;
+
     protected $fillable = [
         "id", "name", "description", "slug", "revision_no", "priority_id", "project_id",
         "assignee_1", "assignee_2", "assignee_3", "total_labor_cost", "currency_1", "currency_2",

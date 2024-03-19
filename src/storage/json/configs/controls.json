@@ -224,14 +224,7 @@
         "qaqc_mir",
         "qaqc_ncr",
         "qaqc_wir"
-    ],
-    "apps_have_due_date_column": [
-        "qaqc_mir",
-        "qaqc_ncr",
-        "qaqc_wir",
-        "zunit_test_09",
-        "eco_sheet"
-    ],
+    ],    
     "apps_have_view_all_calendar": [
         "hr_timesheet_officers"
     ],

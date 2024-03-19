@@ -6,7 +6,8 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_wir extends ModelExtended
 {
-    // protected static $lock = true;
+    public static $hasDueDate = true;
+
     protected $fillable = [
         "id", "name", "doc_id", "description", "slug", "project_id", "sub_project_id", "prod_routing_id", "status",
         "prod_discipline_id", "pj_level_id", "pj_module_type_id", "prod_order_id", "priority_id", "due_date",

@@ -35,6 +35,7 @@ abstract class ModelExtended extends Model
     public static $oracyParams = [];
     public static $statusless = false;
     public static $nameless = false;
+    public static $hasDueDate = false;
 
     public static function isStatusless()
     {

@@ -20,7 +20,7 @@ class ProjectOverview extends Component
      */
     public function __construct(
         private $table,
-        private $title = "Outstanding Tasks",
+        private $title = "Outstanding Tasks (by Due Date)",
         private $id = null,
         private $modalId = "modal-over-due-documents",
     ) {
@@ -123,14 +123,19 @@ class ProjectOverview extends Component
 
     private function getDataSource()
     {
-        $apps = LibApps::getAll();
+        $apps = LibApps::getAllByPermission();
+        // dump($apps);
         $apps = array_filter($apps, fn ($app) => $app['show_in_my_view'] ?? false);
 
         $result = [];
         foreach ($apps as $appKey => $app) {
             // dump($app);
             $modelPath = Str::modelPathFrom($appKey);
-            if (!in_array($appKey, JsonControls::getAppsHaveDueDateColumn())) continue;
+            if (!$modelPath::$hasDueDate) {
+                // Log::info($modelPath . " doesn't have due date");
+                continue;
+            }
+
             $closedArray = SuperDefinitions::getClosedOf($appKey);
             [$dataSource, $size] = $this->makeDataSource($appKey, $modelPath, $closedArray);
             $item =   [
