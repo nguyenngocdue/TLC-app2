@@ -2,22 +2,22 @@
 
 @section('content')
 <section class="bg-gray-50 dark:bg-gray-900">
-<div id="background-image" class="w-auto h-screen bg-cover transition-transform duration-500">
+<div id="background-image" class="w-auto h-screen bg-cover bg-center transition-all duration-500">
     <div class="mx-auto flex items-center lg:justify-between lg:mr-20 justify-center px-6 py-8 md:h-screen lg:py-0">
-        <div id="text-banner" class="mx-auto text-4xl text-white hidden lg:block lg:text-7xl">
-        </div>
+        <h1 id="text-banner" class="mx-auto mt-64 px-40 text-4xl text-white hidden lg:block lg:text-7xl text-shadow-xl">
+        </h1>
         <div class="w-full rounded-lg bg-white shadow dark:border dark:border-gray-600 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
             <a href="#" class="mt-5 flex items-center justify-center text-2xl font-semibold text-gray-900 dark:text-white">
                 <img class="w-32" src="{{ asset('logo/tlc.png') }}" alt="logo">
             </a>
             <div class="space-y-2 p-4 sm:p-6 md:space-y-4">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
-                    Sign up to your account
+                    Sign up
                 </h1>
                 <form class="space-y-2 md:space-y-4" method="POST" action="{{ route('register') }}">
                     @csrf
                     <div>
-                        <label for="first_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Your First Name</label>
+                        <label for="first_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">First Name</label>
                         <input type="text" name="first_name" id="first_name" class="@error('first_name') is-invalid @enderror block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
                         @error('first_name')
                         <span class="font-bold text-red-600" role="alert">
@@ -26,8 +26,7 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="last_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Your
-                            Last Name</label>
+                        <label for="last_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
                         <input type="text" name="last_name" id="last_name" class="@error('last_name') is-invalid @enderror block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
                         @error('last_name')
                         <span class="font-bold text-red-600" role="alert">
@@ -36,8 +35,7 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Your
-                            email</label>
+                        <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Email</label>
                         <input type="email" name="email" id="email" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm" placeholder="name@company.com" value="{{ old('email') }}" required autocomplete="email" autofocus>
                         @error('email')
                         <span class="font-bold text-red-600" role="alert">
@@ -49,7 +47,8 @@
                         <label for="company" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Your
                             company</label>
                             @php
-                                $companies = \App\Models\User_company::all();
+                                $companies = \App\Models\User_company::where('id', '>', 0)->orderBy('name', 'asc')->get();
+                                $companies = [(object)['id'=>0, 'name'=> 'NOT IN THIS LIST'], ...$companies];
                             @endphp
                         <select id="company" name="company" type="company" autocomplete="company-name" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm" value="{{ old('email') }}" required>
                             @foreach($companies as $value)
@@ -98,7 +97,7 @@
                     </a> -->
                     <div class="border-t"></div>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-300">
-                        You have an account yet? <a href="{{ route('login') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</a>
+                        Already have an account? <a href="{{ route('login') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</a>
                     </p>
                 </form>
             </div>
