@@ -14,8 +14,8 @@
 <script>
     const backgroundImageUrls = @json(app()->backgroundImage());
     const textBanners = @json(app()->textBanner());
-    const intervalTime = 30000; // 30 seconds
-    const intervalTimeChangeText = 10000; // 10 seconds
+    const intervalTime = 3 * 1000; // 30 seconds
+    const intervalTimeChangeText = 10 * 1000; // 10 seconds
     let currentIndex = 0;
     let currentIndexText = 0;
     const backgroundElement = document.getElementById('background-image');

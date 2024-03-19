@@ -24,6 +24,14 @@ class UpdateUserSettings extends Controller
         $settings[$type][Constant::VIEW_ALL]['per_page'] = $perPage;
         return $settings;
     }
+    private function updateGlobal($request, $settings)
+    {
+        $themeBg = $request->input('theme-bg');
+        $themeText = $request->input('theme-text');
+        $settings[Constant::GLOBAL]['theme-bg'] = $themeBg;
+        $settings[Constant::GLOBAL]['theme-text'] = $themeText;
+        return $settings;
+    }
     private function updateShowOptionsOrgChart($request, $settings)
     {
         $showOptions = $request->input('show_options');
@@ -339,6 +347,9 @@ class UpdateUserSettings extends Controller
         $user = User::find(Auth::id());
         $settings = $user->settings;
         switch ($action) {
+            case 'updateGlobal':
+                $settings = $this->updateGlobal($request, $settings);
+                break;
             case 'updateShowOptionsOrgChart':
                 $settings = $this->updateShowOptionsOrgChart($request, $settings);
                 break;

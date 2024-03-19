@@ -1,4 +1,4 @@
-<div class="no-print text-center dark:text-white p-3 pt-20 text-xs bg-body text-white" 
+<div class="no-print text-center p-3 pt-20 text-xs bg-body text-body" 
      title="Developed with love and care by Fortune Truong">
     <x-elapse />
     <x-elapse total=1/>

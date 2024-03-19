@@ -11,7 +11,7 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
         @auth
         <div class="flex flex-1 lg:mr-32 ml-5">
             <div class="mr-5">
-                <x-homepage.top-drawer></x-homepage.top-drawer>
+                <x-homepage.top-drawer/>
             </div>
             <b class="text-xl font-semibold">
                 <a href="{{$routeSrc}}" class="hover:underline">
@@ -33,17 +33,20 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
             </li> -->
             @if(env('APP_ENV') === 'local')
             <li class="relative">
-                <x-homepage.setting-gear></x-homepage.setting-gear>
+                <x-homepage.setting-gear/>
             </li>
             <li class="relative">
-                <x-homepage.menu-notification></x-homepage.menu-notification>
+                <x-homepage.menu-notification/>
             </li>
             @endif
             <li class="flex" title="Projects">
-                <x-homepage.menu-project-mf-and-cs></x-homepage.menu-project-mf-and-cs>
+                <x-homepage.menu-project-mf-and-cs/>
             </li>
             <li class="relative">
-                <x-homepage.menu-profile></x-homepage.menu-profile>
+                <x-homepage.menu-theme/>
+            </li>
+            <li class="relative">
+                <x-homepage.menu-profile/>
             </li>
         </ul>
         @endauth

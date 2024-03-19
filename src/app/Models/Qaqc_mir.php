@@ -6,6 +6,8 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_mir extends ModelExtended
 {
+    public static $hasDueDate = true;
+
     protected $fillable = [
         "id", "name", "doc_id", "description", "slug", "project_id", "sub_project_id", "status",
         "prod_discipline_id", "priority_id", "due_date", "assignee_1", "assignee_2", "owner_id", "closed_at"

@@ -47,6 +47,7 @@
 <html :class="{ 'dark': isDark }" x-data="alpineData()" lang="en">
 
 @include("layouts/head")
+@include("layouts/theme-css")
 
 <body class="min-h-screen bg-gray-100 dark:bg-gray-900">
         <div id="loading-animation" class="w-full h-screen justify-center items-center flex text-5xl" style="display: none">

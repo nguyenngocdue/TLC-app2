@@ -6,6 +6,8 @@ use App\BigThink\ModelExtended;
 
 class Hse_corrective_action extends ModelExtended
 {
+    public static $hasDueDate = true;
+
     protected $fillable = [
         'id', 'name', 'description', 'slug',
         'correctable_type', 'correctable_id', 'priority_id', 'work_area_id',

@@ -20,10 +20,12 @@ App::macro('present', function () {
 App::macro('backgroundImage', function () {
     $images = [];
     $pathMinio = app()->pathMinio();
-    foreach (Project::all() as $project) {
+    $projects = Project::all();
+    foreach ($projects as $project) {
         $attachment = $project->getAvatar;
-        if(isset($attachment['url_media'])) $images[] = $pathMinio . $attachment['url_media'];
-       
+        if (isset($attachment['url_media'])) {
+            $images[] = $pathMinio . $attachment['url_media'];
+        }
     }
     return $images;
 });

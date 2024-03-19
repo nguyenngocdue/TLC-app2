@@ -4,16 +4,18 @@
     <section class="bg-gray-50 dark:bg-gray-900">
         <div id="background-image" class="w-auto h-screen bg-cover bg-center transition-all duration-500">
             <div class="mx-auto flex items-center lg:justify-between lg:mr-20 justify-center px-6 py-8 md:h-screen lg:py-0">
-                <div id="text-banner" class="mx-auto text-4xl text-white hidden lg:block lg:text-7xl">
-                </div>
+                <h1 id="text-banner" class="mx-auto mt-64 px-40 text-4xl text-white hidden lg:block lg:text-7xl text-shadow-xl">
+                </h1>
                 <div
-                class="w-full rounded-lg bg-white shadow dark:border dark:border-gray-600 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
+                class="w-full rounded-lg bg-white dark:border dark:border-gray-600 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0"
+                style="box-shadow: 1px 1px 10px #000;"
+                >
                 <a href="#" class="mt-5 flex items-center justify-center text-2xl font-semibold text-gray-900 dark:text-white">
                     <img class="w-32 items-center" src="{{ asset('logo/tlc.png') }}" alt="logo">
                 </a>
                     <div class="space-y-2 p-4 sm:p-6 md:space-y-4">
                         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
-                            Sign in to your account
+                            Sign in 
                         </h1>
                         <form class="space-y-2 md:space-y-4" method="POST" action="{{ route('login') }}">
                             @csrf
@@ -82,10 +84,15 @@
                                     Login with Google (for non TLC users only)
                                     <div></div>
                             </a> -->
-                            <div class="border-t"></div>
-                            <p class="text-sm font-light text-gray-500 dark:text-gray-300">
-                                Don’t have an account yet? <a href="{{ route('register') }}"
-                                    class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up (for non TLC users only)</a>
+                            <div class="border-t border-black"></div>
+                            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
+                                Don’t have an account yet? 
+                            </h1>
+                            <p class="border-2 rounded-lg border-blue-400 py-2 text-sm font-light text-gray-500 dark:text-gray-300 text-center">
+                                <a href="{{ route('register') }}"
+                                    class="font-medium text-primary-600 hover:underline dark:text-primary-500">
+                                    Sign up (For non-TLC staff only)
+                                </a>
                             </p>
                         </form>
                         
