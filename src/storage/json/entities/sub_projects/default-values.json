@@ -191,7 +191,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is aggregated from QAQC Inspection Check Sheet",
+        "control_extra": "This data is consolidated from QAQC Inspection Check Sheet",
         "textarea_rows": ""
     },
     "_getProjectMembers()": {

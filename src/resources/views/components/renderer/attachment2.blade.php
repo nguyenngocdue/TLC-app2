@@ -1,4 +1,4 @@
-<div class="flex flex-col container mx-aut1o w-full">
+<div class="flex flex-col container1 mx-aut1o w-full">
     @if(sizeof($attachments) ==0 && sizeof($docs) == 0)
     <x-renderer.emptiness p="2" class="border" message="There is no attachment to be found." />
     @else
@@ -121,8 +121,8 @@
         </div>
         @endforeach
     </div>
-    <div class="mx-3 text-left">
-        @foreach($docs as $doc)
+    @foreach($docs as $doc)
+    <div class="border rounded text-left px-2 my-0.5 hover:bg-blue-200">
             @php
             [$hasOrphan,$sameEnv] = App\Utils\Support\HandleFieldsAttachment::handle($doc);
             $uid = $doc['owner_id'] ?? 1;
@@ -158,9 +158,9 @@
                 </div>
                 
             </div>
-        @endforeach
-    </div>
-    <div class="p-1"></div>
+        </div>
+    @endforeach
+    {{-- <div class="p-1"></div> --}}
     @endif
 </div>
 @if(!$readOnly)

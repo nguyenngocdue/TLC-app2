@@ -11,6 +11,18 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
+    "_General": {
+        "name": "_General",
+        "column_name": "General",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",
@@ -95,9 +107,21 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_attachment_subproject_project_plans": {
-        "name": "_attachment_subproject_project_plans",
-        "column_name": "attachment_subproject_project_plans",
+    "_getProdRoutingsOfSubProject()": {
+        "name": "_getProdRoutingsOfSubProject()",
+        "column_name": "getProdRoutingsOfSubProject()",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_Attachments": {
+        "name": "_Attachments",
+        "column_name": "Attachments",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
@@ -119,9 +143,9 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_getProdRoutingsOfSubProject()": {
-        "name": "_getProdRoutingsOfSubProject()",
-        "column_name": "getProdRoutingsOfSubProject()",
+    "_attachment_subproject_project_plans": {
+        "name": "_attachment_subproject_project_plans",
+        "column_name": "attachment_subproject_project_plans",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
@@ -190,6 +214,18 @@
         "on_hold": "",
         "cancelled": "",
         "timesheet_only": ""
+    },
+    "_divider1": {
+        "name": "_divider1",
+        "column_name": "divider1",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
     },
     "_Members of this Sub Project": {
         "name": "_Members of this Sub Project",
