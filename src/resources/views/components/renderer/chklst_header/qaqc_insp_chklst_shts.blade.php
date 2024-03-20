@@ -5,12 +5,12 @@
 @endphp
 <div class="flex justify-center "> 
     <div class="{{$formWidth}}"> 
-        <x-renderer.heading level="4" xalign="center" title="#{{$item->id}}">
-            {{strtoupper( $item->name)}}
-        </x-renderer.heading>
-    
-        <div class=" border bg-white rounded p-5">
-            <div class="flex justify-between">
+        <div class="border bg-white rounded p-5">
+            <x-renderer.heading level="4" xalign="center" title="#{{$item->id}}">
+                {{strtoupper( $item->name)}}
+            </x-renderer.heading>
+            <hr/>
+            <div class="flex justify-between pt-2">
                 <div class="grid grid-cols-12">
                     <div class="col-span-6 mr-2 text-right">Project:</div><div class="col-span-6"> {{$project->description." / ".$subProject->name}}</div>
                     <div class="col-span-6 mr-2 text-right">Production Name:</div><div class="col-span-6"> {{$prodOrder->production_name}}</div>

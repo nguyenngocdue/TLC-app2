@@ -196,7 +196,7 @@
         "max_file_size": "30",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "30",
+        "max_file_count": "50",
         "allowed_file_types": "only_images"
     },
     "_attachment_mir_material_test_certificate": {
@@ -298,6 +298,26 @@
         "hide_upload_date": "",
         "max_file_count": "10",
         "allowed_file_types": "all_supported"
+    },
+    "_attachment_subproject_homeowner_manual": {
+        "name": "_attachment_subproject_homeowner_manual",
+        "field_id": "225",
+        "field_name": "attachment_subproject_homeowner_manual",
+        "max_file_size": "100",
+        "hide_uploader": "",
+        "hide_upload_date": "",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media"
+    },
+    "_attachment_subproject_project_plans": {
+        "name": "_attachment_subproject_project_plans",
+        "field_id": "224",
+        "field_name": "attachment_subproject_project_plans",
+        "max_file_size": "100",
+        "hide_uploader": "",
+        "hide_upload_date": "",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media"
     },
     "_featured_image": {
         "name": "_featured_image",

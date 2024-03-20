@@ -31,7 +31,9 @@ class CheckPointSignature extends Component
     public function render()
     {
         $uid = $this->line->inspector_id;
-        $timestamp = DateTimeConcern::convertForLoading("picker_datetime", $this->line->created_at);
+        // $timestamp = DateTimeConcern::convertForLoading("picker_datetime", $this->line->created_at);
+        //Use updated_at to make sure both edit mode and print mode have same timestamp
+        $timestamp = DateTimeConcern::convertForLoading("picker_datetime", $this->line->updated_at);
         $cuid = CurrentUser::id();
 
         return view('components.controls.insp-chklst.check-point-signature', [

@@ -117,7 +117,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is aggregated from Sequence-based Timesheets"
+        "control_extra": "This data is consolidated from Sequence-based Timesheets"
     },
     "_finished_at": {
         "name": "_finished_at",
@@ -129,7 +129,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is aggregated from Sequence-based Timesheets"
+        "control_extra": "This data is consolidated from Sequence-based Timesheets"
     },
     "_total_hours": {
         "name": "_total_hours",
@@ -141,7 +141,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is aggregated from Sequence-based Timesheets"
+        "control_extra": "This data is consolidated from Sequence-based Timesheets"
     },
     "_total_man_hours": {
         "name": "_total_man_hours",
@@ -153,7 +153,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is aggregated from Sequence-based Timesheets"
+        "control_extra": "This data is consolidated from Sequence-based Timesheets"
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
