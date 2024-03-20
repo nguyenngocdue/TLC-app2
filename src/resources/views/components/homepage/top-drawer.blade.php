@@ -1,4 +1,4 @@
-<!-- <button class="focus:shadow-outline-purple rounded-md focus:outline-none text-xl" @click="toggleTopDrawer" @keydown.escape="closeTopDrawer">
+<button class="focus:shadow-outline-purple rounded-md focus:outline-none text-xl" @click="toggleTopDrawer" @keydown.escape="closeTopDrawer">
     <i class="fa-solid fa-bars"></i>
 </button>
 <template x-if="isTopDrawerOpen">
@@ -26,11 +26,11 @@
         url = (@json($route));
         renderTopDrawer(buttonTabs,allAppsRecent,filterAllAppCheckAdmin(allAppsTopDrawer),url);
     </script>
-</template> -->
+</template>
 
 
 
-<button 
+<!-- <button 
 data-dropdown-toggle="topDrawerDocument" 
 class="focus:shadow-outline-purple rounded-md focus:outline-none text-xl">
 <i class="fa-solid fa-bars"></i>
@@ -47,5 +47,5 @@ class="focus:shadow-outline-purple rounded-md focus:outline-none text-xl">
     buttonTabs =  @json($buttonTabs);
     url = (@json($route));
     renderTopDrawer(buttonTabs,allAppsRecent,filterAllAppCheckAdmin(allAppsTopDrawer),url);
-</script>
+</script> -->
     
