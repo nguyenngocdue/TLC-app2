@@ -1,4 +1,4 @@
-<div class="mt-10">
+<div class="my-5">
     <div class="mt-1 border border-gray-800 rounded-3xl mx-5 text-center" style1="width: 600px;">&lt;--- scale to 8 cm ---&gt;</div>
     <div component="fixedWidth" class="border border-gray-800 rounded-3xl bg-white p-1 mx-5 my-1" style1="width: 600px;">
         <div class="">
